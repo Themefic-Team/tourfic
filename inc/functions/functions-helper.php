@@ -657,8 +657,11 @@ if ( ! function_exists( 'tf_array_flatten' ) ) {
  * @author Dev Kabir <dev.kabir01@gmail.com>
  */
 if ( ! function_exists( 'tf_get_deposit_amount' ) ) {
-	function tf_get_deposit_amount( $room, $price, &$deposit_amount, &$has_deposit ) {
+	function tf_get_deposit_amount( $room, $price, &$deposit_amount, &$has_deposit, $discount = 0 ) {
 		$deposit_amount = null;
+		if($discount > 0) {
+			$price = $discount;
+		}
 		$has_deposit    = ! empty( $room['allow_deposit'] ) && $room['allow_deposit'] == true;
 		if ( $has_deposit == true ) {
 			if ( $room['deposit_type'] == 'percent' ) {

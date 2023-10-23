@@ -13,9 +13,9 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 		public function __construct( $key, $params = array() ) {
 
 			$this->metabox_id        = $key;
-			$this->metabox_title     = $params['title'];
+			$this->metabox_title     = ! empty( $params['title'] ) ? apply_filters( $key . '_title', $params['title'] ) : '';
 			$this->metabox_post_type = $params['post_type'];
-			$this->metabox_sections  = $params['sections'];
+			$this->metabox_sections  = ! empty( $params['sections'] ) ? apply_filters( $key . '_sections', $params['sections'] ) : array();
 
 			// Pro plugin section merge
             /*static $post_types = array();

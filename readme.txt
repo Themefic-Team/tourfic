@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
 Requires at least: 5.4
 Tested up to: 6.3
-Stable tag: 2.10.1
+Stable tag: 2.10.2
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -442,6 +442,19 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.10.2 -  23 October 2023 =
+
+- Added: iCal integration for Tourfic hotels with booking.com(Pro).
+- Added: Discount feature for hotel rooms.
+- Added: The ability to set minimum and maximum stay duration for hotels.
+- Fixed: Partial payment popup label and description for tours.
+- Added: Global and custom settings option for Tour Itinerary Builder.
+- Added: The option to hide contact information for vendors’ front end and itinerary.
+- Added: Automatic location suggestions on all Search Pages
+- Fixed: Selected related tour issues.
+- Revamped: Totel, tour, and apartment booking details.
+- Revamped: The hotel room availability repeater to a calendar(Pro).
 
 = 2.10.1 -  26 September 2023 =
 

@@ -7,6 +7,22 @@ defined( 'ABSPATH' ) || exit;
  */
 if(!class_exists('Tour_Price')){
     class Tour_Price {
+        public $group;
+        public $wc_group;
+        public $sale_group;
+        public $wc_sale_group;
+        public $adult;
+        public $wc_adult;
+        public $sale_adult;
+        public $wc_sale_adult;
+        public $child;
+        public $wc_child;
+        public $sale_child;
+        public $wc_sale_child;
+        public $infant;
+        public $wc_infant;
+        public $sale_infant;
+        public $wc_sale_infant;
 
         public $meta;
         function __construct($meta) {

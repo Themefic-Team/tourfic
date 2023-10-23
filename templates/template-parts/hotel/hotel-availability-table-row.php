@@ -1,14 +1,15 @@
-<?php 
+<?php
 $total_dis_dates = [];
-if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $room['repeat_by_date'] ) ) {
-    $disabled_dates = $room['repeat_by_date'];
-    //iterate all the available disabled dates
-    if ( ! empty( $disabled_dates ) ) {
-        foreach ( $disabled_dates as $date ) {
-            $dateArr           = explode( ', ', !empty($date['disabled_date']) ? $date['disabled_date'] : '' );
-            $total_dis_dates = array_merge($total_dis_dates, $dateArr);
-        }
-    }
+if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $room['avail_date'] ) ) {
+	$avail_dates = json_decode( $room['avail_date'], true );
+	//iterate all the available disabled dates
+	if ( ! empty( $avail_dates ) ) {
+		foreach ( $avail_dates as $date ) {
+			if($date['status'] === 'unavailable'){
+                $total_dis_dates[] = $date['check_in'];
+            }
+		}
+	}
 }
 $tf_room_disable_date = array_intersect($avail_durationdate, $total_dis_dates);
 $room_book_by = ! empty( $room['booking-by'] ) ? $room['booking-by'] : 1;
@@ -145,8 +146,17 @@ if(empty($tf_room_disable_date)){
     </td>
     <td class="reserve tf-t-c">
         <div class="tf-price-column">
-            <span class="tf-price"><?php echo wc_price( $price ); ?></span>
-            <?php 
+        <?php
+            if(!empty($d_price) && $hotel_discount_type != "none"){
+                ?>
+                <span class="tf-price"><del><?php echo wc_price( $price ); ?></del> <?php echo wc_price( $d_price ); ?></span>
+                <?php
+                $d_price = "";
+            }else if($hotel_discount_type == "none" || empty($d_price)){
+                ?>
+                <span class="tf-price"><?php echo wc_price( $price ); ?></span>
+                <?php
+            } 
             if ( $pricing_by == '1' ) { ?>
                 <div class="price-per-night">
                     <?php 
@@ -188,7 +198,7 @@ if(empty($tf_room_disable_date)){
             </div>
             <div class="room-submit-wrap">
             <div class="roomselectissue"></div>
-            <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount) ) { ?>
+            <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount) && ($room["deposit_type"] != "none")) { ?>
                 
                 <div class="room-deposit-wrap">
                     <input type="checkbox" id="tf-make-deposit<?php echo $room_id ?>" name="make_deposit" value="<?php echo $room_id ?>">
@@ -386,7 +396,18 @@ if(empty($tf_room_disable_date)){
     </td>
     <td class="pricing">
         <div class="tf-price-column">
-            <span class="tf-price"><?php echo wc_price( $price ); ?></span>
+            <?php 
+            if(!empty($d_price)){
+                ?>
+                <span class="tf-price"><del><?php echo wc_price( $price ); ?></del> <?php echo wc_price( $d_price ); ?></span>
+                <?php
+                $d_price = "";
+            }else if($hotel_discount_type == "none" || empty($d_price)) {
+                ?>
+                <span class="tf-price"><?php echo wc_price( $price ); ?></span>
+                <?php
+            }
+            ?>
             <?php 
             if ( $pricing_by == '1' ) { ?>
                 <div class="price-per-night">

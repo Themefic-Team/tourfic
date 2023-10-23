@@ -32,7 +32,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 
 		function tf_tour_backend_booking_button() {
 			?>
-            <a href="<?php echo admin_url( 'edit.php?post_type=tf_tours&page=tf-tour-backend-booking' ); ?>" class="button button-primary tf-export-btn"><?php _e( 'Add New Booking', 'tourfic' ); ?></a>
+            <a href="<?php echo admin_url( 'edit.php?post_type=tf_tours&page=tf-tour-backend-booking' ); ?>" class="button button-primary tf-booking-btn"><?php _e( 'Add New Booking', 'tourfic' ); ?></a>
 			<?php
 		}
 
@@ -726,7 +726,8 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 					// Tour Order retrieve from Tourfic Order Table
 					$tf_orders_select    = array(
 						'select' => "post_id,order_details",
-						'query'  => "post_type = 'tour' AND ostatus = 'completed' ORDER BY order_id DESC"
+						'post_type' => 'tour',
+						'query'  => " AND ostatus = 'completed' ORDER BY order_id DESC"
 					);
 					$tf_tour_book_orders = tourfic_order_table_data( $tf_orders_select );
 
@@ -791,7 +792,8 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 					// Daily Tour Booking Capacity && Tour Order retrive from Tourfic Order Table
 					$tf_orders_select    = array(
 						'select' => "post_id,order_details",
-						'query'  => "post_type = 'tour' AND ostatus = 'completed' ORDER BY order_id DESC"
+						'post_type' => 'tour',
+						'query'  => " AND ostatus = 'completed' ORDER BY order_id DESC"
 					);
 					$tf_tour_book_orders = tourfic_order_table_data( $tf_orders_select );
 
@@ -980,7 +982,8 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 						// Daily Tour Booking Capacity && tour order retrive form tourfic order table
 						$tf_orders_select    = array(
 							'select' => "post_id,order_details",
-							'query'  => "post_type = 'tour' AND ostatus = 'completed' ORDER BY order_id DESC"
+							'post_type' => 'tour',
+							'query'  => " AND ostatus = 'completed' ORDER BY order_id DESC"
 						);
 						$tf_tour_book_orders = tourfic_order_table_data( $tf_orders_select );
 

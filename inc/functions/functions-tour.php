@@ -557,11 +557,12 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 						enableTime: false,
 						mode: "range",
 						altInput: true,
-						altFormat: '<?php echo $tour_date_format_for_users; ?>',
 						dateFormat: "Y/m/d",
+						altFormat: '<?php echo $tour_date_format_for_users; ?>',
 						minDate: "today",
 						onReady: function(selectedDates, dateStr, instance) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
 						},
 						onChange: function(selectedDates, dateStr, instance) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -758,6 +759,7 @@ if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
                         minDate: "today",
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                         },
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -942,6 +944,15 @@ function tf_single_tour_booking_form( $post_id ) {
 
 		$tf_tour_selected_template = $tf_tour_selected_check ? $tf_tour_selected_check : 'default';
 	}
+	if ( ! function_exists( 'partial_payment_tag_replacement' ) ) {
+		function partial_payment_tag_replacement( $text, $arr ) {
+			if(!empty($arr)) {
+				$tag = array_keys($arr);
+				$value = array_values($arr);
+			}
+			return str_replace($tag, $value, $text);
+		}
+	}
 	if ( ! function_exists( 'tf_booking_popup' ) ) {
 		function tf_booking_popup( $post_id ) {
 			?>
@@ -1025,9 +1036,12 @@ function tf_single_tour_booking_form( $post_id ) {
 
                         <!-- Popup Tour Extra -->
 						<?php
+						// $popup_extra_default_text = "Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural";
+						$tour_popup_extra_text = function_exists('is_tf_pro') && is_tf_pro() && !empty(tfopt( 'tour_popup_extras_text' )) ? tfopt( 'tour_popup_extras_text' ) : '';
+						$traveler_details_text = function_exists('is_tf_pro') && is_tf_pro() && !empty(tfopt( 'tour_traveler_details_text' )) ? tfopt( 'tour_traveler_details_text' ) : '';
 						if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_extras ) { ?>
-                            <div class="tf-booking-content show tf-booking-content-1">
-                                <p><?php echo __( "Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural", "tourfic" ); ?></p>
+                            <div class="tf-booking-content show tf-booking-content-1"> 
+								<p><?php echo __( $tour_popup_extra_text, "tourfic" ); ?></p>
                                 <div class="tf-booking-content-extra">
 									<?php
 									if ( ( ! empty( $tour_extras[0]['title'] ) && ! empty( $tour_extras[0]['price'] ) ) || ! empty( $tour_extras[1]['title'] ) && ! empty( $tour_extras[1]['price'] ) ) {
@@ -1065,7 +1079,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
                             <!-- Popup Traveler Info -->
                             <div class="tf-booking-content tf-booking-content-2 <?php echo empty( $tour_extras ) ? esc_attr( 'show' ) : ''; ?>">
-                                <p><?php echo __( "All of your information will be confidential and the reason of this is for your privacy purpose", "tourfic" ); ?></p>
+                                <p><?php echo __( $traveler_details_text, "tourfic" ); ?></p>
                                 <div class="tf-booking-content-traveller">
                                     <div class="tf-traveller-info-box"></div>
                                 </div>
@@ -1076,7 +1090,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
                             <!-- Popup Booking Confirmation -->
                             <div class="tf-booking-content tf-booking-content-3 <?php echo empty( $tour_extras ) && empty( $traveller_info_coll ) ? esc_attr( 'show' ) : ''; ?>">
-                                <p><?php echo __( "All of your information will be confidential and the reason of this is for your privacy purpose", "tourfic" ); ?></p>
+                                <p><?php echo __( $traveler_details_text, "tourfic" ); ?></p>
                                 <div class="tf-booking-content-traveller">
                                     <div class="tf-single-tour-traveller">
                                         <h4><?php echo __( "Billing details", "tourfic" ); ?></h4>
@@ -1204,14 +1218,24 @@ function tf_single_tour_booking_form( $post_id ) {
                     <!-- Popup Footer Control & Partial Payment -->
                     <div class="tf-booking-pagination">
 					    <?php if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] ) && 3!=$tf_booking_by ) {
-						    $tf_deposit_amount =  $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount']. '%';
+						    $tf_deposit_amount =  array (
+								"{amount}" => $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount']. '%'
+							);
+							$tf_partial_payment_label = !empty(tfopt("deposit-title")) ? tfopt("deposit-title") : 'Pertial payment of {amount} on total';
+							$tf_partial_payment_description = !empty(tfopt("deposit-subtitle")) ? tfopt("deposit-subtitle") : 'You can Partial Payment amount for booking the tour. After booking the tour, you can pay the rest amount after the tour is completed.';
 						    ?>
                             <div class="tf-diposit-switcher">
                                 <label class="switch">
                                     <input type="checkbox" name="deposit" class="diposit-status-switcher">
                                     <span class="switcher round"></span>
                                 </label>
-                                <h4><?php echo sprintf( __( 'Partial payment of %1$s on total', 'tourfic' ), $tf_deposit_amount ); ?></h4>
+								<div class="tooltip-box">
+									<h4><?php echo __( partial_payment_tag_replacement($tf_partial_payment_label, $tf_deposit_amount), 'tourfic' ) ?></h4>
+									<div class="tf-info-btn">
+										<i class="fa fa-circle-exclamation tooltip-title-box" style="padding-left: 5px; padding-top: 5px" title=""></i>
+										<div class="tf-tooltip"><?php echo __($tf_partial_payment_description) ?></div>
+									</div>
+								</div>
                             </div>
 					    <?php } ?>
 					    <?php if ( empty($tour_extras) && 3!=$tf_booking_by && empty($traveller_info_coll) ){ ?>
@@ -1678,18 +1702,18 @@ function tf_single_tour_booking_form( $post_id ) {
 
 						if ($tour_type && $tour_type == 'fixed') { ?>
 
-                        mode: "range",
-                        defaultDate: ["<?php echo $departure_date; ?>", "<?php echo $return_date; ?>"],
-                        enable: [
-                            {
-                                from: "<?php echo $departure_date; ?>",
-                                to: "<?php echo $return_date; ?>"
-                            }
-                        ],
-                        onReady: function (selectedDates, dateStr, instance) {
-                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                        },
+                    mode: "range",
+                    defaultDate: ["<?php echo $departure_date; ?>", "<?php echo $return_date; ?>"],
+                    enable: [
+                        {
+                            from: "<?php echo $departure_date; ?>",
+                            to: "<?php echo $return_date; ?>"
+                        }
+                    ],
+                    onReady: function (selectedDates, dateStr, instance) {
+						instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                        instance.element.value = instance.altInput.value
+                    },
 
 						<?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
 
@@ -2937,7 +2961,8 @@ function tf_tour_booking_popup_callback() {
 
 			$tf_orders_select    = array(
 				'select' => "post_id,order_details",
-				'query'  => "post_type = 'tour' AND ostatus = 'completed' ORDER BY order_id DESC"
+				'post_type' => 'tour',
+				'query'  => " AND ostatus = 'completed' ORDER BY order_id DESC"
 			);
 			$tf_tour_book_orders = tourfic_order_table_data( $tf_orders_select );
 
@@ -3002,7 +3027,8 @@ function tf_tour_booking_popup_callback() {
 			// Daily Tour Booking Capacity && Tour Order retrive from Tourfic Order Table
 			$tf_orders_select    = array(
 				'select' => "post_id,order_details",
-				'query'  => "post_type = 'tour' AND ostatus = 'completed' ORDER BY order_id DESC"
+				'post_type' => 'tour',
+				'query'  => " AND ostatus = 'completed' ORDER BY order_id DESC"
 			);
 			$tf_tour_book_orders = tourfic_order_table_data( $tf_orders_select );
 
@@ -3172,7 +3198,8 @@ function tf_tour_booking_popup_callback() {
 				// Daily Tour Booking Capacity && tour order retrive form tourfic order table
 				$tf_orders_select    = array(
 					'select' => "post_id,order_details",
-					'query'  => "post_type = 'tour' AND ostatus = 'completed' ORDER BY order_id DESC"
+					'post_type' => 'tour',
+					'query'  => " AND ostatus = 'completed' ORDER BY order_id DESC"
 				);
 				$tf_tour_book_orders = tourfic_order_table_data( $tf_orders_select );
 
@@ -3498,10 +3525,26 @@ function tf_tour_booking_popup_callback() {
 
 			$response['traveller_info'] .= '</div>
             </div>';
+			$tour_date_format_for_users = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+			if ( ! function_exists( 'tf_date_format_user' ) ) {
+				function tf_date_format_user($date, $format) {
+					if(!empty($date) && !empty($format)) {
+					if(str_contains( $date, "-") == true) {
+						list($first_date, $last_date) = explode(" - ", $date);
+						$first_date = date($format, strtotime($first_date));
+						$last_date = date($format, strtotime($last_date));
+						return "{$first_date} - {$last_date}";
+					} else {
+						return date($format, strtotime($date));
+					}
+					}else {
+						return;
+					}
+			}
+			}
 		}
-
-		$response['traveller_summery'] .= '<h6>On ' . $tour_date . '</h6>
-        <table class="table">
+		$response['traveller_summery'] .= '<h6>On ' . tf_date_format_user($tour_date, $tour_date_format_for_users) . '</h6>
+        <table class="table" style="width: 100%">
             <thead>
                 <tr>
                     <th align="left">' . sprintf( __( 'Traveller', 'tourfic' ) ) . '</th>

@@ -1071,6 +1071,8 @@ div#tf-contact-info {
             padding: 0 24px;
             .tf-diposit-switcher{
                 padding-bottom: 16px;
+                display: flex;
+                align-items: center;
                 h4{
                     margin: 0;
                     display: inline-block;
@@ -1080,6 +1082,62 @@ div#tf-contact-info {
                     font-style: normal !important;
                     font-weight: 500 !important;
                     line-height: 24px !important;
+                }
+                .tooltip-box {
+                    top: 11px;
+                    display: flex;
+                    padding-left: 10px;
+                    .tf-info-btn{
+                        width: 40px;
+                        text-align: center;
+                        position: relative;
+                        i{
+                            padding: 0px !important;
+                        }
+                        .tf-tooltip {
+                            padding: 10px 10px;
+                            color: #FFFFFF;
+                            background-color: #333333;
+                            font-weight: normal;
+                            font-size: 13px;
+                            border-radius: 4px;
+                            position: absolute;
+                            z-index: 99999999;
+                            box-sizing: border-box;
+                            border: 1px solid #333333;
+                            box-shadow: 0 1px 8px transparent;
+                            visibility: visible;
+                            transition: .3s all ease;
+                            opacity: 0;
+                            text-align: center;
+                            line-height: 17px;
+                            width: 220px;
+                            position: absolute;
+                            left: 50%;
+                            margin-left: -110px;
+                            bottom: 30px;
+                        }
+                        .tooltip-title-box {
+                            margin-top: 3px;
+                        }
+                    }
+                }
+                .tooltip-box{ 
+                    .tooltip-title-box:hover + .tf-tooltip{
+                        visibility: visible;
+                        opacity: 1;
+                    }
+                }   
+                .tooltip-box .tf-tooltip::before {
+                    content: "";
+                    height: 12px;
+                    width: 12px;
+                    background-color: #333333;
+                    position: absolute;
+                    top: 95%;
+                    left: 50%;
+                    margin-left: -6px;
+                    transform: rotate(45deg);
                 }
                 .switch {
                     position: relative;

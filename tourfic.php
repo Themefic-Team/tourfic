@@ -7,11 +7,11 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.10.1
+ * Version:         2.10.2
  * Tested up to:    6.3
- * WC tested up to: 8.1.1
+ * WC tested up to: 8.2.1
  * Requires PHP:    7.2
- * Elementor tested up to: 3.16.4
+ * Elementor tested up to: 3.16.6
  */
 
 // don't load directly
@@ -59,7 +59,7 @@ if ( ! class_exists( 'Appsero\Client' ) ) {
  * @since 1.0
  */
 if ( ! defined( 'TOURFIC' ) ) {
-	define( 'TOURFIC', '2.10.1' );
+	define( 'TOURFIC', '2.10.2' );
 }
 
 /**
@@ -96,6 +96,7 @@ if ( ! function_exists( 'tf_enqueue_main_admin_scripts' ) ) {
 		wp_enqueue_style( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css', '', TOURFIC );
 		wp_enqueue_style( 'tf-admin', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin.min.css', '', TOURFIC );
 		wp_enqueue_script( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js', array( 'jquery' ), TOURFIC, true );
+		wp_enqueue_script( 'tf-fullcalender', TF_ASSETS_ADMIN_URL . 'js/lib/fullcalender.min.js', array( 'jquery' ), TOURFIC, true );
 		wp_enqueue_script( 'tf-admin', TF_ASSETS_ADMIN_URL . 'js/tourfic-admin-scripts.min.js', array( 'jquery', 'wp-data', 'wp-editor', 'wp-edit-post' ), TOURFIC, true );
 		wp_localize_script( 'tf-admin', 'tf_admin_params',
 			array(

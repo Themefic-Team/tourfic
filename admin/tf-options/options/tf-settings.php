@@ -32,12 +32,12 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'tf-date-format-for-users',
 					'type'     => 'select',
 					'label'    => __( 'Select Date Format', 'tourfic' ),
-					'subtitle' => __( 'Select a format, that will show when a user selct date', 'tourfic' ),
+					'subtitle' => __( 'Select a format, that will show when a user select date', 'tourfic' ),
 					'options'  => array(
 						'Y/m/d'  => __( 'YYYY/MM/DD', 'tourfic' ),
 						'Y-m-d' => __( 'YYYY-MM-DD', 'tourfic' ),
 						'd-m-Y'  => __( 'DD-MM-YYYY', 'tourfic' ),
-						'm/d/Y'  => __( 'DD/MM/YYYY', 'tourfic' ),
+						'd/m/Y'  => __( 'DD/MM/YYYY', 'tourfic' ),
 						'Y.m.d'  => __( 'YYYY.MM.DD', 'tourfic' ),
 						'd.m.Y'  => __( 'DD.MM.YYYY', 'tourfic' ),
 					),
@@ -726,14 +726,14 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'    => 'signle_tour_heading',
 					'type'  => 'heading',
-					'label' => __( 'Settings for Partial Payment Popup', 'tourfic' ),
+					'label' => __( 'Settings for Partial Payment', 'tourfic' ),
 				),
 				array(
 					'id'      => '',
 					'type'    => 'text',
-					'label'   => __( 'Title', 'tourfic' ),
+					'label'   => __( 'Label', 'tourfic' ),
 					'is_pro'  => true,
-					'default' => __( 'Do you want to Partial Payment amount for booking the tour?', 'tourfic' ),
+					'default' => __( 'Pertial payment of {amount} on total', 'tourfic' ),
 				),
 				array(
 					'id'      => '',
@@ -743,25 +743,10 @@ TF_Settings::option( 'tf_settings', array(
 					'default' => __( 'You can Partial Payment amount for booking the tour. After booking the tour, you can pay the rest amount after the tour is completed.', 'tourfic' ),
 				),
 				array(
-					'id'      => '',
-					'type'    => 'text',
-					'label'   => __( 'Text before the Price Amount', 'tourfic' ),
-					'is_pro'  => true,
-					'default' => __( 'Amount of Partial Payment on total price', 'tourfic' ),
-				),
-				array(
-					'id'      => '',
-					'type'    => 'text',
-					'label'   => __( 'Text for Button (Full Payment)', 'tourfic' ),
-					'is_pro'  => true,
-					'default' => __( 'Pay full amount', 'tourfic' ),
-				),
-				array(
-					'id'      => '',
-					'type'    => 'text',
-					'label'   => __( 'Text for Button (Partial Payment)', 'tourfic' ),
-					'is_pro'  => true,
-					'default' => __( 'Make a Partial Payment', 'tourfic' ),
+					'id'      => 'notice_shortcode',
+					'type'    => 'notice',
+					'content' => __( 'Use shortcode <code>{amount}</code> to show percentage amount in Label', 'tourfic' ),
+					'is_pro' => true
 				),
 			),
 		),
@@ -877,6 +862,36 @@ TF_Settings::option( 'tf_settings', array(
 									'is_pro'   => true,
 									'label'    => __( 'Enable Itinerary Downloader', 'tourfic' ),
 									'subtitle' => __( 'Enabling this will allow customers to download the itinerary plan in PDF format.', 'tourfic' ),
+									"default" => true,
+								),
+								array(
+									'id'      => 'tour_pdf_downloader_section',
+									'type'    => 'heading',
+									'content' => __( 'Tour Downloader Section', 'tourfic' ),
+								),
+								array(
+									'id'    => '',
+									'type'  => 'text',
+									'label' => __( 'Tour Downloader Title Text', 'tourfic' ),
+									'default' => "Want to read it later?",
+									'placeholder' => "Want to read it later?",
+									'is_pro'   => true,
+								),
+								array(
+									'id'    => '',
+									'type'  => 'text',
+									'label' => __( 'Tour Downloader Sort Text', 'tourfic' ),
+									'default' => "Download this tour's PDF brochure and start your planning offline.",
+									'placeholder' => "Download this tour's PDF brochure and start your planning offline.",
+									'is_pro'   => true,
+								),
+								array(
+									'id'    => '',
+									'type'  => 'text',
+									'label' => __( 'Tour Downloader Button Text', 'tourfic' ),
+									'default' => "Download Now",
+									'placeholder' => "Download Now",
+									'is_pro'   => true,
 								),
 								array(
 									'id'      => 'tour_settings',
@@ -1063,156 +1078,6 @@ TF_Settings::option( 'tf_settings', array(
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
 				array(
-					'id'    => 'booking_tour_heading',
-					'type'  => 'heading',
-					'label' => __( 'Settings for Without Payment Popup', 'tourfic' ),
-				),
-				array(
-					'id'        => 'disable_traveller_info',
-					'type'      => 'switch',
-					'label'     => __( 'Enable Traveler Info', 'tourfic' ),
-					'subtitle'  => __( 'Enable this option, if you want to add traveler info.', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'is_pro'    => true
-				),
-				array(
-					'id'    => 'custom_fields_heading',
-					'type'  => 'heading',
-					'label' => __( 'Settings for Traveler Info Fields', 'tourfic' ),
-					'dependency' => array(
-						array( 'disable_traveller_info', '==', 'true' ),
-					),
-				),
-				array(
-					'id'           => 'without-payment-field',
-					'class'        => 'disable-sortable',
-					'type'         => 'repeater',
-					'button_title' => __( 'Add New', 'tourfic' ),
-					'label'        => __( 'Fields for Traveler Info', 'tourfic' ),
-					'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
-					'is_pro'       => true,
-					'dependency' => array(
-						array( 'disable_traveller_info', '==', 'true' ),
-					),
-					'fields'       => array(
-						array(
-							'id'    => 'reg-field-label',
-							'type'  => 'text',
-							'label' => __( 'Label', 'tourfic' ),
-						),
-						array(
-							'id'       => 'reg-field-name',
-							'type'     => 'text',
-							'label'    => __( 'Name', 'tourfic' ),
-							'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
-							'validate' => 'no_space_no_special',
-						),
-						array(
-							'id'      => 'reg-fields-type',
-							'type'    => 'select',
-							'label'   => __( 'Field Type', 'tourfic' ),
-							'options' => array(
-								'text'     => __( 'Text', 'tourfic' ),
-								'email'    => __( 'Email', 'tourfic' ),
-								'date'     => __( 'Date', 'tourfic' ),
-								'radio'    => __( 'Radio', 'tourfic' ),
-								'checkbox' => __( 'Checkbox', 'tourfic' ),
-								'select'   => __( 'Select', 'tourfic' ),
-							),
-						),
-						array(
-							'id'           => 'reg-options',
-							'type'         => 'repeater',
-							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'        => __( 'Option Label', 'tourfic' ),
-							'dependency'   => array(
-								array( 'reg-fields-type', '==', 'radio' ),
-							),
-							'fields'       => array(
-								array(
-									'label' => __( 'Field Label', 'tourfic' ),
-									'id'    => 'option-label',
-									'type'  => 'text',
-								),
-								array(
-									'label' => __( 'Field Value', 'tourfic' ),
-									'id'    => 'option-value',
-									'type'  => 'text',
-								),
-							),
-						),
-						array(
-							'id'           => 'reg-options',
-							'type'         => 'repeater',
-							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'        => __( 'Option Label', 'tourfic' ),
-							'dependency'   => array(
-								array( 'reg-fields-type', '==', 'select' ),
-							),
-							'fields'       => array(
-								array(
-									'label' => __( 'Field Label', 'tourfic' ),
-									'id'    => 'option-label',
-									'type'  => 'text',
-								),
-								array(
-									'label' => __( 'Field Value', 'tourfic' ),
-									'id'    => 'option-value',
-									'type'  => 'text',
-								),
-							),
-						),
-						array(
-							'id'           => 'reg-options',
-							'type'         => 'repeater',
-							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'        => __( 'Option Label', 'tourfic' ),
-							'dependency'   => array(
-								array( 'reg-fields-type', '==', 'checkbox' ),
-							),
-							'fields'       => array(
-								array(
-									'label' => __( 'Field Label', 'tourfic' ),
-									'id'    => 'option-label',
-									'type'  => 'text',
-								),
-								array(
-									'label' => __( 'Field Value', 'tourfic' ),
-									'id'    => 'option-value',
-									'type'  => 'text',
-								),
-							),
-						),
-						array(
-							'id'    => 'reg-field-required',
-							'type'  => 'switch',
-							'label' => __( 'Required Field ?', 'tourfic' ),
-						),
-
-					),
-					'default'      => array(
-						array(
-							'reg-field-label'    => __( 'Full Name', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_full_name', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Date of birth', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_dob', 'tourfic' ),
-							'reg-fields-type'    => 'date',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'NID', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_nid', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						)
-					),
-				),
-				array(
 					'id'       => 'confirmation_fields_heading',
 					'type'     => 'heading',
 					'label'    => __( 'Settings for Booking Confirmation Fields', 'tourfic' ),
@@ -1388,6 +1253,182 @@ TF_Settings::option( 'tf_settings', array(
 					'label'       => __( 'Booking Confirmation Message', 'tourfic' ),
 					'default' 	  => 'Booked Successfully',
 					'is_pro'       => true,
+				),
+			),
+		),
+		// Booking Settings
+		'tour_booking_settings'  => array(
+			'title'  => __( 'Booking', 'tourfic' ),
+			'parent' => 'tour',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array( // start
+					'id'    => 'booking_tour_heading',
+					'type'  => 'heading',
+					'label' => __( 'Settings for Booking', 'tourfic' ),
+				),
+				array(
+					'id'        => 'disable_traveller_info',
+					'type'      => 'switch',
+					'label'     => __( 'Enable Traveler Info', 'tourfic' ),
+					'subtitle'  => __( 'Enable this option, if you want to add traveler info.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'is_pro'    => true
+				),
+				array(
+					'id'    => 'custom_fields_heading',
+					'type'  => 'heading',
+					'label' => __( 'Settings for Traveler Info Fields', 'tourfic' ),
+					'dependency' => array(
+						array( 'disable_traveller_info', '==', 'true' ),
+					),
+				),
+				array(
+					'id'           => 'without-payment-field',
+					'class'        => 'disable-sortable',
+					'type'         => 'repeater',
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'label'        => __( 'Fields for Traveler Info', 'tourfic' ),
+					'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
+					'is_pro'       => true,
+					'dependency' => array(
+						array( 'disable_traveller_info', '==', 'true' ),
+					),
+					'fields'       => array(
+						array(
+							'id'    => 'reg-field-label',
+							'type'  => 'text',
+							'label' => __( 'Label', 'tourfic' ),
+						),
+						array(
+							'id'       => 'reg-field-name',
+							'type'     => 'text',
+							'label'    => __( 'Name', 'tourfic' ),
+							'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
+							'validate' => 'no_space_no_special',
+						),
+						array(
+							'id'      => 'reg-fields-type',
+							'type'    => 'select',
+							'label'   => __( 'Field Type', 'tourfic' ),
+							'options' => array(
+								'text'     => __( 'Text', 'tourfic' ),
+								'email'    => __( 'Email', 'tourfic' ),
+								'date'     => __( 'Date', 'tourfic' ),
+								'radio'    => __( 'Radio', 'tourfic' ),
+								'checkbox' => __( 'Checkbox', 'tourfic' ),
+								'select'   => __( 'Select', 'tourfic' ),
+							),
+						),
+						array(
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
+								array( 'reg-fields-type', '==', 'radio' ),
+							),
+							'fields'       => array(
+								array(
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
+								),
+								array(
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
+								),
+							),
+						),
+						array(
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
+								array( 'reg-fields-type', '==', 'select' ),
+							),
+							'fields'       => array(
+								array(
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
+								),
+								array(
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
+								),
+							),
+						),
+						array(
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
+								array( 'reg-fields-type', '==', 'checkbox' ),
+							),
+							'fields'       => array(
+								array(
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
+								),
+								array(
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
+								),
+							),
+						),
+						array(
+							'id'    => 'reg-field-required',
+							'type'  => 'switch',
+							'label' => __( 'Required Field ?', 'tourfic' ),
+						),
+
+					),
+					'default'      => array(
+						array(
+							'reg-field-label'    => __( 'Full Name', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_full_name', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Date of birth', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_dob', 'tourfic' ),
+							'reg-fields-type'    => 'date',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'NID', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_nid', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						)
+					),
+				),
+				array(
+					'id'          => 'tour_popup_extras_text',
+					'type'        => 'text',
+					'label'       => __( 'Enter Tour Extra', 'tourfic' ),
+					'subtitle'    => __( 'Tours Extras Description Text', 'tourfic' ),
+					'default' 	  => "Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural",
+					'placeholder' => "Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural",
+					'is_pro'      => true
+				),
+				array(
+					'id'          => 'tour_traveler_details_text',
+					'type'        => 'text',
+					'label'       => __( 'Enter Traveler Details Text', 'tourfic' ),
+					'subtitle'    => __( 'Enter traveler details text filed text', 'tourfic' ),
+					'default' 	  => "All of your information will be confidential and the reason of this is for your privacy purpose",
+					'placeholder' => "All of your information will be confidential and the reason of this is for your privacy purpose",
+					'is_pro'    => true
 				),
 			),
 		),

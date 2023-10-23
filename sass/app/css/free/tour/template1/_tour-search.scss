@@ -235,7 +235,9 @@ i {
         .tf-pricing {
         font-size: $font-size-xs;
         font-weight: $font-weight-normal;
-
+        del{
+            font-size: 20px;
+        }
         span {
             font-size: 20px;
             color: $color-theme;

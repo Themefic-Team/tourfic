@@ -102,7 +102,8 @@ function tf_tours_booking_function() {
 			// Tour Order retrive from Tourfic Order Table
 			$tf_orders_select = array(
 				'select' => "post_id,order_details",
-				'query' => "post_type = 'tour' AND ostatus = 'completed' ORDER BY order_id DESC"
+				'post_type' => 'tour',
+				'query' => " AND ostatus = 'completed' ORDER BY order_id DESC"
 			);
 			$tf_tour_book_orders = tourfic_order_table_data($tf_orders_select);
 
@@ -167,7 +168,8 @@ function tf_tours_booking_function() {
 			// Daily Tour Booking Capacity && Tour Order retrive from Tourfic Order Table
 			$tf_orders_select = array(
 				'select' => "post_id,order_details",
-				'query' => "post_type = 'tour' AND ostatus = 'completed' ORDER BY order_id DESC"
+				'post_type' => 'tour',
+				'query' => " AND ostatus = 'completed' ORDER BY order_id DESC"
 			);
 			$tf_tour_book_orders = tourfic_order_table_data($tf_orders_select);
 
@@ -364,7 +366,8 @@ function tf_tours_booking_function() {
 				// Daily Tour Booking Capacity && tour order retrive form tourfic order table
 				$tf_orders_select = array(
 					'select' => "post_id,order_details",
-					'query' => "post_type = 'tour' AND ostatus = 'completed' ORDER BY order_id DESC"
+					'post_type' => 'tour',
+					'query' => " AND ostatus = 'completed' ORDER BY order_id DESC"
 				);
 				$tf_tour_book_orders = tourfic_order_table_data($tf_orders_select);
 
@@ -581,6 +584,7 @@ function tf_tours_booking_function() {
 				'tf_postcode'   => sanitize_text_field($tf_confirmation_details['tf_postcode']),
 				'tf_country'    => sanitize_text_field($tf_confirmation_details['tf_country']),
 				'tf_phone'      => sanitize_text_field($tf_confirmation_details['tf_phone']),
+				'tf_email'      => sanitize_email($tf_confirmation_details['tf_email']),
 			);
 		}else{
 			$billing_details = [];
@@ -611,6 +615,7 @@ function tf_tours_booking_function() {
 						$shipping_details[$key] = sanitize_text_field($details);
 					}else if("tf_email"==$key){
 						$billing_details['billing_email'] = sanitize_email($details);
+						$shipping_details[$key] = sanitize_email($details);
 					}else if("tf_phone"==$key){
 						$billing_details['billing_phone'] = sanitize_text_field($details);
 						$shipping_details[$key] = sanitize_text_field($details);
@@ -655,6 +660,14 @@ function tf_tours_booking_function() {
 			$without_payment_price     = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
 		}
 
+		if ( is_user_logged_in() ) {
+			$current_user = wp_get_current_user();
+			// get user id
+			$tf_offline_user_id = $current_user->ID;
+		} else {
+			$tf_offline_user_id = 1;
+		}
+
 		$order_details = [
 			'order_by'    => '',
 			'tour_date'   => $tour_date,
@@ -678,6 +691,7 @@ function tf_tours_booking_function() {
 			'shipping_details' => $shipping_details,
 			'order_details'    => $order_details,
 			'payment_method'   => 'offline',
+			'customer_id'	   => $tf_offline_user_id,
 			'status'           => 'completed',
 			'order_date'       => date( 'Y-m-d H:i:s' ),
 		);

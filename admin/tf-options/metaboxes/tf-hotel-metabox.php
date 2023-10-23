@@ -179,27 +179,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'type'        => 'text',
 							'subtitle'    => __( 'e.g. Superior Queen Room with Two Queen Beds', 'tourfic' ),
 							'label'       => __( 'Room Title', 'tourfic' ),
-							'field_width' => 50,
-						),
-						array(
-							'id'          => 'num-room',
-							'type'        => 'number',
-							'label'       => __( 'Room Availability', 'tourfic' ),
-							'subtitle'    => __( 'Number of rooms available for booking', 'tourfic' ),
-							'field_width' => 50,
-							'attributes'  => array(
-								'min' => '0',
-							),
-						),
-						array(
-							'id'        => '',
-							'type'      => 'switch',
-							'is_pro'    => true,
-							'label'     => __( 'Room Inventory Management', 'tourfic' ),
-							'subtitle'  => __( 'Reduce total number of available rooms once a rooms is booked by a customer', 'tourfic' ),
-							'label_on'  => __( 'Yes', 'tourfic' ),
-							'label_off' => __( 'No', 'tourfic' ),
-							'default'   => false,
+							'field_width' => 100,
 						),
 
 						array(
@@ -291,6 +271,30 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'label' => __( 'Room Description', 'tourfic' ),
 						),
 						array(
+							'id'      => 'minimum_maximum_stay_requirements',
+							'type'    => 'heading',
+							'content' => __( 'Stay Requirements', 'tourfic' ),
+							'class'   => 'tf-field-class',
+						),
+						array(
+							'id'          => 'minimum_stay_requirement',
+							'type'        => 'number',
+							'label'       => __( 'Minimum Stay Requirement', 'tourfic' ),
+							'subtitle'    => __( 'Minimum number of nights required to book this room', 'tourfic' ),
+							'attributes'  => array(
+								'min' => '1',
+							),
+							'default'     => '1',
+							'field_width' => 50,
+						),
+						array(
+							'id'          => 'maximum_stay_requirement',
+							'type'        => 'number',
+							'label'       => __( 'Maximum Stay Requirement', 'tourfic' ),
+							'subtitle'    => __( 'Maximum number of nights allowed to book this room', 'tourfic' ),
+							'field_width' => 50,
+						),
+						array(
 							'id'      => 'Pricing',
 							'type'    => 'heading',
 							'content' => __( 'Pricing', 'tourfic' ),
@@ -304,7 +308,10 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 								'1' => __( 'Per room', 'tourfic' ),
 								'2' => __( 'Per person (Pro)', 'tourfic' ),
 							),
-							'default' => '1'
+							'default' => '1',
+							'attributes'  => array(
+								'class' => 'tf_room_pricing_by',
+							),
 						),
 						array(
 							'id'         => 'price',
@@ -329,6 +336,30 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'is_pro'      => true,
 							'dependency'  => array( 'pricing-by', '==', '2' ),
 							'field_width' => 50,
+						),
+						array(
+							'id'       => 'discount_hotel_type',
+							'type'     => 'select',
+							'label'    => __( 'Discount Type', 'tourfic' ),
+							'subtitle' => __( 'Select Discount Type ( Percentage / Fixed )', 'tourfic' ),
+							'options'  => array(
+								'none'    => __( 'None', 'tourfic' ),
+								'percent' => __( 'Percent', 'tourfic' ),
+								'fixed'   => __( 'Fixed', 'tourfic' ),
+							),
+							'default'  => 'none',
+						),
+						array(
+							'id'         => 'discount_hotel_price',
+							'type'       => 'number',
+							'label'      => __( 'Discount Price', 'tourfic' ),
+							'subtitle'   => __( 'Insert amount only', 'tourfic' ),
+							'attributes' => array(
+								'min' => '0',
+							),
+							'dependency' => array(
+								array( 'discount_hotel_type', '!=', 'none' ),
+							),
 						),
 						array(
 							'id'        => 'price_multi_day',
@@ -405,95 +436,65 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'default' => false,
 						),
 						array(
+							'id'      => 'ical',
+							'type'    => 'heading',
+							'content' => __( 'iCal Sync', 'tourfic' ),
+						),
+						array(
+							'id'          => '',
+							'type'        => 'ical',
+							'label'       => __( 'iCal URL', 'tourfic' ),
+							'placeholder' => __( 'https://website.com', 'tourfic' ),
+							'button_text' => __( 'Import', 'tourfic' ),
+							'button_class'   => 'room-ical-import',
+							'attributes'  => array(
+								'class' => 'ical_url_input',
+							),
+							'is_pro'      => true
+						),
+						array(
 							'id'      => 'Availability',
 							'type'    => 'heading',
 							'content' => __( 'Availability', 'tourfic' ),
 							'class'   => 'tf-field-class',
 						),
 						array(
+							'id'          => 'num-room',
+							'type'        => 'number',
+							'label'       => __( 'Room Availability', 'tourfic' ),
+							'subtitle'    => __( 'Number of rooms available for booking', 'tourfic' ),
+							'field_width' => 100,
+							'attributes'  => array(
+								'min' => '0',
+							),
+						),
+						array(
+							'id'        => '',
+							'type'      => 'switch',
+							'is_pro'    => true,
+							'label'     => __( 'Room Inventory Management', 'tourfic' ),
+							'subtitle'  => __( 'Reduce total number of available rooms once a rooms is booked by a customer', 'tourfic' ),
+							'label_on'  => __( 'Yes', 'tourfic' ),
+							'label_off' => __( 'No', 'tourfic' ),
+							'default'   => false,
+						),
+						array(
 							'id'      => '',
 							'type'    => 'switch',
 							'label'   => __( 'Enable Availability by Date', 'tourfic' ),
 							'is_pro'  => true,
-							'default' => true
-						),
-						array(
-							'id'     => '',
-							'class'  => 'repeater-by-date',
-							'type'   => 'repeater',
-							'title'  => __( 'By Date', 'tourfic' ),
-							'is_pro' => true,
-							'fields' => array(
-								array(
-									'id'          => '',
-									'type'        => 'date',
-									'label'       => __( 'Date Range', 'tourfic' ),
-									'subtitle'    => __( 'Select availablity date range', 'tourfic' ),
-									'placeholder' => __( '', 'tourfic' ),
-									'class'       => 'tf-field-class',
-									'format'      => 'Y/m/d',
-									'range'       => true,
-									'label_from'  => 'Start Date',
-									'label_to'    => 'End Date',
-									'multiple'    => true,
-									'is_pro'      => true,
-								),
-								array(
-									'id'       => '',
-									'type'     => 'number',
-									'label'    => __( 'Number of Rooms', 'tourfic' ),
-									'subtitle' => __( 'Number of available rooms for booking on this date range', 'tourfic' ),
-									'is_pro'   => true,
-								),
-
-								//Disable specific dates within this date range
-								array(
-									'id'         => '',
-									'type'       => 'date',
-									'label'      => __( 'Disable Specific Dates', 'tourfic' ),
-									'is_pro'     => true,
-									'format'     => 'Y/m/d',
-									'label_from' => __( 'Start Date','tourfic'),
-									'label_to'   => __('End Date','tourfic'),
-									'multiple'   => true,
-									'attributes' => array(
-										'autocomplete' => 'off',
-									),
-								),
-
-								array(
-									'id'       => '',
-									'type'     => 'text',
-									'label'    => __( 'Pricing', 'tourfic' ),
-									'subtitle' => __( 'The price of room per one night', 'tourfic' ),
-									'is_pro'   => true,
-								),
-
-								array(
-									'id'         => '',
-									'type'       => 'text',
-									'label'      => __( 'Adult Pricing', 'tourfic' ),
-									'subtitle'   => __( 'The price of room per one night', 'tourfic' ),
-									'is_pro'     => true,
-									'dependency' => array(
-										array( 'pricing-by', '==', '2' ),
-									),
-								),
-
-								array(
-									'id'         => '',
-									'type'       => 'text',
-									'title'      => __( 'Children Pricing', 'tourfic' ),
-									'subtitle'   => __( 'The price of room per one night', 'tourfic' ),
-									'is_pro'     => true,
-									'dependency' => array(
-										array( 'pricing-by', '==', '2' ),
-									),
-								),
-
+							'default' => true,
+							'attributes'  => array(
+								'class' => 'tf_room_availability_by_date',
 							),
 						),
-
+						array(
+							'id'        => '',
+							'type'      => 'hotelAvailabilityCal',
+							'label'     => __( 'Availability Calendar', 'tourfic' ),
+							'is_pro'  => true,
+							'dependency' => array( 'avil_by_date', '!=', 'false' ),
+						),
 					),
 				)
 			),

@@ -89,6 +89,20 @@ while ( have_posts() ) : the_post();
 	$fax           = ! empty( $meta['fax'] ) ? $meta['fax'] : '';
 	$website       = ! empty( $meta['website'] ) ? $meta['website'] : '';
 	$itinerary_map = ! empty( tfopt('itinerary_map') ) && function_exists('is_tf_pro') && is_tf_pro() ? tfopt('itinerary_map') : 0;
+	$vendor_contact_info = !empty(tfopt("multi-vendor-setings")["vendor-contact-info"]) ? tfopt("multi-vendor-setings")["vendor-contact-info"] : 0;
+	$author = !empty(get_userdata( get_post()->post_author )) ? get_userdata( get_post()->post_author) : array();
+
+	if ((is_plugin_active("tourfic-vendor/tourfic-vendor.php"))) {
+
+		if($vendor_contact_info == 1) {
+			if ( in_array( 'tf_vendor', $author->roles ) ) {
+				$email = !empty(tfopt("multi-vendor-setings")["email"]) ? tfopt("multi-vendor-setings")["email"] : "";
+				$phone = !empty(tfopt("multi-vendor-setings")["phone"]) ? tfopt("multi-vendor-setings")["phone"] : "";
+				$fax = !empty(tfopt("multi-vendor-setings")["fax"]) ? tfopt("multi-vendor-setings")["fax"] : "";
+				$website = !empty(tfopt("multi-vendor-setings")["website"]) ? tfopt("multi-vendor-setings")["website"] : "";
+			}
+		}
+	}
 
 	/**
 	 * Get features

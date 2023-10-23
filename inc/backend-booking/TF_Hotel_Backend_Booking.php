@@ -33,7 +33,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 
 		function tf_hotel_backend_booking_button() {
 			?>
-            <a href="<?php echo admin_url( 'edit.php?post_type=tf_hotel&page=tf-hotel-backend-booking' ); ?>" class="button button-primary tf-export-btn"><?php _e( 'Add New Booking', 'tourfic' ); ?></a>
+            <a href="<?php echo admin_url( 'edit.php?post_type=tf_hotel&page=tf-hotel-backend-booking' ); ?>" class="button button-primary tf-booking-btn"><?php _e( 'Add New Booking', 'tourfic' ); ?></a>
 			<?php
 		}
 
@@ -368,15 +368,15 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 						 */
 						$avil_by_date = ! empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : false;      // Room Available by date enabled or  not ?
 						if ( $avil_by_date ) {
-							$repeat_by_date = ! empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
+							$avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
 						}
 
 						if ( $avil_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 
 							foreach ( $period as $date ) {
-								$available_rooms = array_values( array_filter( $repeat_by_date, function ( $date_availability ) use ( $date ) {
-									$date_availability_from = strtotime( $date_availability['availability']['from'] . ' 00:00' );
-									$date_availability_to   = strtotime( $date_availability['availability']['to'] . ' 23:59' );
+								$available_rooms = array_values( array_filter( $avail_date, function ( $date_availability ) use ( $date ) {
+									$date_availability_from = strtotime( $date_availability['check_in'] . ' 00:00' );
+									$date_availability_to   = strtotime( $date_availability['check_out'] . ' 23:59' );
 
 									return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
 								} ) );
@@ -448,7 +448,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 
 							$avil_by_date = ! empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : false;
 							if ( $avil_by_date ) {
-								$repeat_by_date = ! empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
+								$avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
 							}
 							$order_ids          = ! empty( $room['order_id'] ) ? $room['order_id'] : '';
 							$num_room_available = ! empty( $room['num-room'] ) ? $room['num-room'] : '1';
@@ -461,8 +461,8 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 								if ( $avil_by_date ) {
 									$order_date_ranges   = array();
 									$backend_date_ranges = array();
-									foreach ( $repeat_by_date as $single_date_range ) {
-										array_push( $backend_date_ranges, array( strtotime( $single_date_range["availability"]["from"] ), strtotime( $single_date_range["availability"]["to"] ) ) );
+									foreach ( $avail_date as $single_date_range ) {
+										array_push( $backend_date_ranges, array( strtotime( $single_date_range["check_in"] ), strtotime( $single_date_range["check_out"] ) ) );
 									}
 								}
 
@@ -472,7 +472,8 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 									# Get Only the completed orders
 									$tf_orders_select     = array(
 										'select' => "post_id,order_details",
-										'query'  => "post_type = 'hotel' AND ostatus = 'completed' AND order_id = " . $order_id
+										'post_type' => 'hotel',
+										'query'  => " AND ostatus = 'completed' AND order_id = " . $order_id
 									);
 									$tf_hotel_book_orders = tourfic_order_table_data( $tf_orders_select );
 
@@ -697,7 +698,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 			$airport_service = $meta['airport_service'] ?? null;
 			$avail_by_date   = ! empty( $room_data['avil_by_date'] ) ? $room_data['avil_by_date'] : '';
 			if ( $avail_by_date ) {
-				$repeat_by_date = ! empty( $room_data['repeat_by_date'] ) ? $room_data['repeat_by_date'] : [];
+				$avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
 			}
 			$pricing_by      = $room_data['pricing-by'];
 			$price_multi_day = ! empty( $room_data['price_multi_day'] ) ? $room_data['price_multi_day'] : false;
@@ -724,9 +725,9 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 				$total_price = 0;
 				foreach ( $period as $date ) {
 
-					$available_rooms = array_values( array_filter( $repeat_by_date, function ( $date_availability ) use ( $date ) {
-						$date_availability_from = strtotime( $date_availability['availability']['from'] . ' 00:00' );
-						$date_availability_to   = strtotime( $date_availability['availability']['to'] . ' 23:59' );
+					$available_rooms = array_values( array_filter( $avail_date, function ( $date_availability ) use ( $date ) {
+						$date_availability_from = strtotime( $date_availability['check_in'] . ' 00:00' );
+						$date_availability_to   = strtotime( $date_availability['check_out'] . ' 23:59' );
 
 						return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
 					} ) );

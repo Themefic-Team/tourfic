@@ -507,49 +507,54 @@
 								<?php
 								while ( $tours->have_posts() ) {
 									$tours->the_post();
+                                    if(!empty($selected_ids)){
+                                    foreach($selected_ids as $selected_id) {
+                                        if($selected_id != $post_id) {
+                                            $selected_design_post_id = $selected_id;
+                                            $destinations           = get_the_terms( $selected_design_post_id, 'tour_destination' );
+                                            $first_destination_name = $destinations[0]->name;
+                                            $related_comments       = get_comments( array( 'post_id' => $selected_design_post_id ) );
+                                            $meta                   = get_post_meta( $selected_design_post_id, 'tf_tours_opt', true );
+                                            $pricing_rule           = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
+                                            $disable_adult          = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
+                                            $disable_child          = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
+                                            $tour_price             = new Tour_Price( $meta );
+									        ?>
+                                            <div class="tf-slider-item tf-post-box-lists">
+                                                <div class="tf-post-single-box">
+                                                    <div class="tf-image-data">
+                                                        <img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) ) ? get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) : TF_ASSETS_APP_URL . '/images/feature-default.jpg'; ?>"
+                                                            alt="">
+                                                        <div class="tf-meta-data-price">
+                                                            <?php _e( "From", "tourfic" ); ?>
+                                                            <span>
+                                                <?php if ( $pricing_rule == 'group' ) {
+                                                    echo $tour_price->wc_sale_group ?? $tour_price->wc_group;
+                                                } else if ( $pricing_rule == 'person' ) {
+                                                    if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
+                                                        echo $tour_price->wc_sale_adult ?? $tour_price->wc_adult;
+                                                    } else if ( ! $disable_child && ! empty( $tour_price->child ) ) {
+                                                        echo $tour_price->wc_sale_child ?? $tour_price->wc_child;
 
-									$post_id                = get_the_ID();
-									$destinations           = get_the_terms( $post_id, 'tour_destination' );
-									$first_destination_name = $destinations[0]->name;
-									$related_comments       = get_comments( array( 'post_id' => $post_id ) );
-									$meta                   = get_post_meta( $post_id, 'tf_tours_opt', true );
-									$pricing_rule           = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
-									$disable_adult          = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
-									$disable_child          = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
-									$tour_price             = new Tour_Price( $meta );
-									?>
-                                    <div class="tf-slider-item tf-post-box-lists">
-                                        <div class="tf-post-single-box">
-                                            <div class="tf-image-data">
-                                                <img src="<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? get_the_post_thumbnail_url( $post_id, 'full' ) : TF_ASSETS_APP_URL . '/images/feature-default.jpg'; ?>"
-                                                     alt="">
-                                                <div class="tf-meta-data-price">
-													<?php _e( "From", "tourfic" ); ?>
-                                                    <span>
-                                        <?php if ( $pricing_rule == 'group' ) {
-	                                        echo $tour_price->wc_sale_group ?? $tour_price->wc_group;
-                                        } else if ( $pricing_rule == 'person' ) {
-	                                        if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
-		                                        echo $tour_price->wc_sale_adult ?? $tour_price->wc_adult;
-	                                        } else if ( ! $disable_child && ! empty( $tour_price->child ) ) {
-		                                        echo $tour_price->wc_sale_child ?? $tour_price->wc_child;
-
-	                                        }
-                                        }
-                                        ?>
-                                        </span>
+                                                    }
+                                                }
+                                                ?>
+                                                </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tf-meta-info tf-mt-30">
+                                                        <div class="tf-meta-location">
+                                                            <i class="fa-solid fa-location-dot"></i> <?php echo $first_destination_name; ?>
+                                                        </div>
+                                                        <div class="tf-meta-title">
+                                                            <h2><a href="<?php echo get_permalink($selected_design_post_id) ?>"><?php echo  get_the_title($selected_design_post_id) ?></a></h2>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="tf-meta-info tf-mt-30">
-                                                <div class="tf-meta-location">
-                                                    <i class="fa-solid fa-location-dot"></i> <?php echo $first_destination_name; ?>
-                                                </div>
-                                                <div class="tf-meta-title">
-                                                    <h2><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h2>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+								        <?php } ?>
+								    <?php } } ?>
+                                    <?php break; ?>
 								<?php } ?>
                             </div>
                         </div>

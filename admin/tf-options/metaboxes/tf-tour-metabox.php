@@ -1056,10 +1056,24 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'content' => __( 'Itinerary Downloader Settings', 'tourfic' ),
 				),
 				array(
-					'id'       => '',
+					'id'      => 'itenary_download_glbal_settings',
+					'label'   => __( 'Itenary Downolad Settings', 'tourfic' ),
+					'type'    => 'select',
+					'options' => [
+						'global' => __( 'Global Setting', 'tourfic' ),
+						'custom'  => __( 'Custom Setting', 'tourfic' ),
+					],
+					'default' => 'custom',
+					'is_pro'   => true,
+				),
+				array(
+					'id'       => 'itinerary-downloader',
 					'type'     => 'switch',
 					'label'    => __( 'Enable Itinerary Downloader', 'tourfic' ),
 					'subtitle' => __( 'Enabling this will allow customers to download the itinerary plan in PDF format.', 'tourfic' ),
+					'dependency'  => array(
+						array( 'itenary_download_glbal_settings', '==', 'custom' ),
+					),
 					'is_pro'   => true,
 				),
 				array(
