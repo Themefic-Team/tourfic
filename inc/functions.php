@@ -1949,7 +1949,7 @@ if ( ! function_exists( 'tf_terms_dropdown' ) ) {
 		$select = '';
 		//output the select field
 		if ( ! empty( $terms ) && is_array( $terms ) ) {
-			$select .= '<select data-term="' . $attribute . '" name="' . $term . '" class="' . $class . '" ' . $multiple . '>';
+			$select .= '<select id="shortcode-select2" data-term="' . $attribute . '" name="' . $term . '" class="tf-select2 ' . $class . '" ' . $multiple . '>';
 			$select .= '<option value="\'all\'">' . __( 'All', 'tourfic' ) . '</option>';
 			foreach ( $terms as $term ) {
 				$select .= '<option value="' . $term->term_id . '">' . $term->name . '</option>';

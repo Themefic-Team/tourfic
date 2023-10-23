@@ -431,6 +431,14 @@
             tfSelect2Int($this);
         });
 
+        $('select.tf-shortcode-select2').each(function() {
+            var $this = $(this)
+            $this.on('click', function() {
+                console.log("clicking...")
+            })
+            tfSelect2Int($this)
+        })
+
         /*
         * Room Full Calendar
         * @since 2.10.2
@@ -1855,7 +1863,6 @@ var frame, gframe;
             });
         });
     });
-
 
 })(jQuery);
 

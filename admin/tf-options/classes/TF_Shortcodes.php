@@ -1109,7 +1109,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                             <h3><?php echo __( 'Categories', 'tourfic' ) ?></h3>
 											<?php
 											//Dynamic Taxonomy dropdown list
-											tf_terms_dropdown( 'category', 'cats', 'tf-setting-field tf-select-field tf-select-two', true );
+											tf_terms_dropdown( 'category', 'cats', 'tf-setting-field tf-select-field', true );
 											?>
                                         </div>
                                     </div>
