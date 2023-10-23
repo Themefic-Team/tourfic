@@ -7,11 +7,11 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.10.1
+ * Version:         2.10.2
  * Tested up to:    6.3
- * WC tested up to: 8.1.1
+ * WC tested up to: 8.2.1
  * Requires PHP:    7.2
- * Elementor tested up to: 3.16.4
+ * Elementor tested up to: 3.16.6
  */
 
 // don't load directly
@@ -59,7 +59,7 @@ if ( ! class_exists( 'Appsero\Client' ) ) {
  * @since 1.0
  */
 if ( ! defined( 'TOURFIC' ) ) {
-	define( 'TOURFIC', '2.10.1' );
+	define( 'TOURFIC', '2.10.2' );
 }
 
 /**
