@@ -317,8 +317,8 @@ if ( ! function_exists( 'tf_get_hotel_availability' ) ) {
 			$room_avail_data = array_values( $room_avail_data );
 			$room_avail_data = array_map( function ( $item ) {
 				$item['start'] = date( 'Y-m-d', strtotime( $item['check_in'] ) );
-//				$item['title'] = $item['price_by'] == '1' ? __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
-				$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) . '<br>' . __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
+				$item['title'] = $item['price_by'] == '1' ? __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
+//				$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) . '<br>' . __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
 
 				if ( $item['status'] == 'unavailable' ) {
 					$item['display'] = 'background';
@@ -336,6 +336,62 @@ if ( ! function_exists( 'tf_get_hotel_availability' ) ) {
 	}
 
 	add_action( 'wp_ajax_tf_get_hotel_availability', 'tf_get_hotel_availability' );
+}
+
+/*
+ * Update hotel room avail_date price based on pricing type
+ * @auther Foysal
+ */
+if ( ! function_exists( 'tf_update_room_avail_date_price' ) ) {
+	function tf_update_room_avail_date_price( $post_id, $post ) {
+		if ( $post->post_type == 'tf_hotel' ) {
+			$meta  = get_post_meta( $post_id, 'tf_hotels_opt', true );
+			$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+			if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
+				$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+					return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+				}, $rooms );
+				$rooms                = unserialize( $tf_hotel_rooms_value );
+			}
+
+			foreach ( $rooms as $roomIndex => $room ) {
+				$pricing_by   = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
+				$price        = ! empty( $room['price'] ) ? $room['price'] : '';
+				$adult_price  = ! empty( $room['adult_price'] ) ? $room['adult_price'] : '';
+				$child_price  = ! empty( $room['child_price'] ) ? $room['child_price'] : '';
+				$avil_by_date = ! empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : '';
+
+				if ( $avil_by_date === '1' && ! empty( $room['avail_date'] ) ) {
+					$hotel_avail_data = json_decode( $room['avail_date'], true );
+
+					if ( isset( $hotel_avail_data ) && ! empty( $hotel_avail_data ) ) {
+
+						$hotel_avail_data = array_map( function ( $item ) use ( $pricing_by, $price, $adult_price, $child_price ) {
+
+							if ( $pricing_by == '1' ) {
+								if ( empty( $item['price'] ) ) {
+									$item['price'] = $price;
+								}
+							} else {
+								if ( empty( $item['adult_price'] ) || empty( $item['child_price'] ) ) {
+									$item['adult_price'] = $adult_price;
+									$item['child_price'] = $child_price;
+								}
+							}
+							$item['price_by'] = $pricing_by;
+
+							return $item;
+						}, $hotel_avail_data );
+					}
+
+					$meta['room'][ $roomIndex ]['avail_date'] = json_encode( $hotel_avail_data );
+				}
+			}
+			update_post_meta( $post_id, 'tf_hotels_opt', $meta );
+		}
+	}
+
+	add_action( 'save_post', 'tf_update_room_avail_date_price', 9999, 2 );
 }
 
 /*
@@ -462,4 +518,51 @@ if ( ! function_exists( 'tf_get_apartment_availability' ) ) {
 	add_action( 'wp_ajax_tf_get_apartment_availability', 'tf_get_apartment_availability' );
 }
 
+/*
+ * Update apt_availability price based on pricing type
+ * @auther Foysal
+ */
+if ( ! function_exists( 'tf_update_apt_availability_price' ) ) {
+	function tf_update_apt_availability_price( $post_id, $post ) {
+		if ( $post->post_type == 'tf_apartment' ) {
+			$apt_availability    = get_post_meta( $post_id, 'tf_apartment_opt', true );
+			$pricing_type        = ! empty( $apt_availability['pricing_type'] ) ? $apt_availability['pricing_type'] : '';
+			$price               = ! empty( $apt_availability['price_per_night'] ) ? $apt_availability['price_per_night'] : '';
+			$adult_price         = ! empty( $apt_availability['adult_price'] ) ? $apt_availability['adult_price'] : '';
+			$child_price         = ! empty( $apt_availability['child_price'] ) ? $apt_availability['child_price'] : '';
+			$infant_price        = ! empty( $apt_availability['infant_price'] ) ? $apt_availability['infant_price'] : '';
+			$enable_availability = ! empty( $apt_availability['enable_availability'] ) ? $apt_availability['enable_availability'] : '';
+
+			if ( $enable_availability === '1' && ! empty( $apt_availability['apt_availability'] ) ) {
+				$apt_availability_data = json_decode( $apt_availability['apt_availability'], true );
+
+				if ( isset( $apt_availability_data ) && ! empty( $apt_availability_data ) ) {
+
+					$apt_availability_data = array_map( function ( $item ) use ( $pricing_type, $price, $adult_price, $child_price, $infant_price ) {
+
+						if ( $pricing_type == 'per_night' ) {
+							if ( empty( $item['price'] ) ) {
+								$item['price'] = $price;
+							}
+						} else {
+							if ( empty( $item['adult_price'] ) || empty( $item['child_price'] ) || empty( $item['infant_price'] ) ) {
+								$item['adult_price']  = $adult_price;
+								$item['child_price']  = $child_price;
+								$item['infant_price'] = $infant_price;
+							}
+						}
+						$item['pricing_type'] = $pricing_type;
+
+						return $item;
+					}, $apt_availability_data );
+				}
+
+				$apt_availability['apt_availability'] = json_encode( $apt_availability_data );
+				update_post_meta( $post_id, 'tf_apartment_opt', $apt_availability );
+			}
+		}
+	}
+
+	add_action( 'save_post', 'tf_update_apt_availability_price', 99, 2 );
+}
 
