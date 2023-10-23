@@ -1538,10 +1538,6 @@ function tf_apartments_grid_slider( $atts, $content = null ) {
 		'posts_per_page' => $count,
 	);
 
-	echo "<pre>";
-		print_r($atts);
-		echo "</pre>";
-
 	if ( ! empty( $locations ) ) {
 		if($locations === 'all') {
 			$locations = get_terms( 'apartment_location', array(
