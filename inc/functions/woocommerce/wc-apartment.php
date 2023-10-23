@@ -22,19 +22,20 @@ function tf_apartment_booking_callback() {
 	$infant            = isset( $_POST['infant'] ) ? intval( sanitize_text_field( $_POST['infant'] ) ) : '0';
 	$check_in_out_date = isset( $_POST['check-in-out-date'] ) ? sanitize_text_field( $_POST['check-in-out-date'] ) : '';
 
-	$product_id      = get_post_meta( $post_id, 'product_id', true );
-	$post_author     = get_post_field( 'post_author', $post_id );
-	$meta            = get_post_meta( $post_id, 'tf_apartment_opt', true );
-	$max_adults      = ! empty( $meta['max_adults'] ) ? $meta['max_adults'] : '';
-	$max_children    = ! empty( $meta['max_children'] ) ? $meta['max_children'] : '';
-	$max_infants     = ! empty( $meta['max_infants'] ) ? $meta['max_infants'] : '';
-	$pricing_type    = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
-	$price_per_night = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
-	$adult_price     = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
-	$child_price     = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
-	$infant_price    = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
-	$discount_type   = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
-	$discount        = ! empty( $meta['discount'] ) ? $meta['discount'] : 0;
+	$product_id          = get_post_meta( $post_id, 'product_id', true );
+	$post_author         = get_post_field( 'post_author', $post_id );
+	$meta                = get_post_meta( $post_id, 'tf_apartment_opt', true );
+	$max_adults          = ! empty( $meta['max_adults'] ) ? $meta['max_adults'] : '';
+	$max_children        = ! empty( $meta['max_children'] ) ? $meta['max_children'] : '';
+	$max_infants         = ! empty( $meta['max_infants'] ) ? $meta['max_infants'] : '';
+	$pricing_type        = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
+	$price_per_night     = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
+	$adult_price         = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
+	$child_price         = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
+	$infant_price        = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
+	$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
+	$discount_type       = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
+	$discount            = ! empty( $meta['discount'] ) ? $meta['discount'] : 0;
 
 	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 		$additional_fees = ! empty( $meta['additional_fees'] ) ? $meta['additional_fees'] : array();
@@ -101,10 +102,29 @@ function tf_apartment_booking_callback() {
 		// Calculate price
 		$total_price = 0;
 		if ( $days > 0 ) {
-			if ( $pricing_type == 'per_night' ) {
-				$total_price = $price_per_night * $days;
+			if ( $enable_availability === '1' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+				$apt_availability = ! empty( $meta['apt_availability'] ) ? json_decode( $meta['apt_availability'], true ) : [];
+
+				if ( ! empty( $apt_availability ) && is_array( $apt_availability ) ) {
+					foreach ( $apt_availability as $key => $single_avail ) {
+						$_date_str = strtotime( $key );
+
+						if ( $_date_str >= $check_in_stt && $_date_str <= $check_out_stt ) {
+							if ( $pricing_type === 'per_night' ) {
+								$total_price += $single_avail['price'];
+							} else {
+								$total_price += ( ( $single_avail['adult_price'] * $adults ) + ( $single_avail['child_price'] * $children ) + ( $single_avail['infant_price'] * $infant ) );
+							}
+						}
+					}
+				}
+
 			} else {
-				$total_price = ( ( $adult_price * $adults ) + ( $child_price * $children ) + ( $infant_price * $infant ) ) * $days;
+				if ( $pricing_type == 'per_night' ) {
+					$total_price = $price_per_night * $days;
+				} else {
+					$total_price = ( ( $adult_price * $adults ) + ( $child_price * $children ) + ( $infant_price * $infant ) ) * $days;
+				}
 			}
 
 			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {

@@ -452,9 +452,6 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 
 		$meta                = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
 		$min_stay            = ! empty( $meta['min_stay'] ) ? $meta['min_stay'] : 1;
-		$max_adults          = ! empty( $meta['max_adults'] ) ? $meta['max_adults'] : '';
-		$max_children        = ! empty( $meta['max_children'] ) ? $meta['max_children'] : '';
-		$max_infants         = ! empty( $meta['max_infants'] ) ? $meta['max_infants'] : '';
 		$pricing_type        = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
 		$price_per_night     = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
 		$adult_price         = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
@@ -483,7 +480,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? $_GET['check-in-out-date'] : '';
 
 		$apt_disable_dates = [];
-		if ( $enable_availability === '1' && ! empty( $apt_availability ) ) {
+		if ( $enable_availability === '1' && ! empty( $apt_availability ) && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 			$apt_availability_arr = json_decode( $apt_availability, true );
 			//iterate all the available disabled dates
 			if ( ! empty( $apt_availability_arr ) && is_array( $apt_availability_arr ) ) {
@@ -494,6 +491,8 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 				}
 			}
 		}
+
+		$apartment_min_price = get_apartment_min_max_price( get_the_ID() );
 		?>
 
         <!-- Start Booking widget -->
@@ -501,7 +500,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
             <h4><?php ! empty( $meta['booking_form_title'] ) ? _e( $meta['booking_form_title'] ) : _e( 'Book your Apartment', 'tourfic' ); ?></h4>
             <div class="tf-apartment-form-header">
                 <h3 class="tf-apartment-price-per-night">
-                    <span class="tf-apartment-base-price"><?php echo $pricing_type === 'per_night' ? wc_price( $price_per_night ) : wc_price( $adult_price ); ?></span>
+                    <span class="tf-apartment-base-price"><?php echo wc_price( $apartment_min_price['min'] ); ?></span>
                     <span><?php echo $pricing_type === 'per_night' ? __( '/per night', 'tourfic' ) : __( '/per person', 'tourfic' ); ?></span>
                 </h3>
 				<?php if ( $comments && ! $disable_review_sec == '1' ): ?>
@@ -871,10 +870,6 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 		$address         = ! empty( $meta['address'] ) ? $meta['address'] : '';
 		$featured        = ! empty( $meta['apartment_as_featured'] ) ? $meta['apartment_as_featured'] : '';
 		$pricing_type    = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
-		$price_per_night = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
-		$adult_price     = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
-		$child_price     = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
-		$infant_price    = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
 
 		// Single link
 		$url = get_the_permalink();
@@ -884,6 +879,8 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 			'infant'            => $infant,
 			'check-in-out-date' => $check_in_out,
 		), $url );
+
+		$apartment_min_price = get_apartment_min_max_price( get_the_ID() );
 		?>
         <div class="single-tour-wrap <?php echo $featured ? esc_attr( 'tf-featured' ) : '' ?>">
             <div class="single-tour-inner">
@@ -967,23 +964,12 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
                                                 </div>
                                                 <!-- Show minimum price @author - Hena -->
                                                 <div class="tf-room-price-area">
-													<?php
-													if ( $pricing_type === 'per_night' && ! empty( $price_per_night ) ):
-														?>
-                                                        <div class="tf-room-price">
-                                                            <h6 class="tf-apartment-price-per-night">
-                                                                <span class="tf-apartment-base-price"><?php echo wc_price( $price_per_night ) ?></span>
-                                                                <span><?php _e( '/per night', 'tourfic' ) ?></span>
-                                                            </h6>
-                                                        </div>
-													<?php elseif ( $pricing_type == 'per_person' && ! empty( $adult_price ) ): ?>
-                                                        <div class="tf-room-price">
-                                                            <h6 class="tf-apartment-price-per-night">
-                                                                <span class="tf-apartment-base-price"><?php echo wc_price( $adult_price ) ?></span>
-                                                                <span><?php _e( '/per person', 'tourfic' ) ?></span>
-                                                            </h6>
-                                                        </div>
-													<?php endif; ?>
+                                                    <div class="tf-room-price">
+                                                        <h6 class="tf-apartment-price-per-night">
+                                                            <span class="tf-apartment-base-price"><?php echo wc_price( $apartment_min_price['min'] ) ?></span>
+                                                            <span><?php echo $pricing_type === 'per_night' ? __( '/per night', 'tourfic' ) : __( '/per person', 'tourfic' ) ?></span>
+                                                        </h6>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1404,14 +1390,19 @@ if ( ! function_exists( 'get_apartment_locations' ) ) {
  * @author Foysal
  */
 if ( ! function_exists( 'get_apartment_min_max_price' ) ) {
-	function get_apartment_min_max_price() {
+	function get_apartment_min_max_price( $post_id = null ) {
 		$min_max_price = array();
 
-		$apartment_query = new WP_Query( array(
+		$apartment_args = array(
 			'post_type'      => 'tf_apartment',
 			'posts_per_page' => - 1,
 			'post_status'    => 'publish',
-		) );
+		);
+
+		if ( isset( $post_id ) && ! empty( $post_id ) ) {
+			$apartment_args['post__in'] = array( $post_id );
+		}
+		$apartment_query = new WP_Query( $apartment_args );
 
 		if ( $apartment_query->have_posts() ) {
 			while ( $apartment_query->have_posts() ) {
@@ -1420,7 +1411,7 @@ if ( ! function_exists( 'get_apartment_min_max_price' ) ) {
 				$pricing_type        = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
 				$adult_price         = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
 				$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
-				if ( $enable_availability === '1' ) {
+				if ( $enable_availability === '1' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 					$apt_availability = ! empty( $meta['apt_availability'] ) ? json_decode( $meta['apt_availability'], true ) : [];
 
 					if ( ! empty( $apt_availability ) && is_array( $apt_availability ) ) {
