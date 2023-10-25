@@ -606,10 +606,16 @@ if ( ! function_exists( 'tf_flatpickr_locale' ) ) {
 			}
 
 			echo 'locale: "' . $flatpickr_locale . '",';
+		} else if(get_locale() == "en_GB") {
+			echo <<<EOD
+			locale: {
+				firstDayOfWeek: 1,
+			},
+			EOD;
 		}
-
 	}
 }
+
 
 /**
  * Flatten a multi-dimensional array into a single level.
