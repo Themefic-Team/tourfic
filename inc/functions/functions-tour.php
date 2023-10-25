@@ -1712,7 +1712,7 @@ function tf_single_tour_booking_form( $post_id ) {
                     ],
                     onReady: function (selectedDates, dateStr, instance) {
 						instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                        instance.element.value = instance.altInput.value
+                        instance.element.value = instance.element.value.replace(/[a-z]+/g, '-');
                     },
 
 						<?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
