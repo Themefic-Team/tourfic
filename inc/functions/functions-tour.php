@@ -1711,8 +1711,8 @@ function tf_single_tour_booking_form( $post_id ) {
                         }
                     ],
                     onReady: function (selectedDates, dateStr, instance) {
+                        instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 						instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                        instance.element.value = instance.altInput.value
                     },
 
 						<?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
@@ -3529,7 +3529,7 @@ function tf_tour_booking_popup_callback() {
 			if ( ! function_exists( 'tf_date_format_user' ) ) {
 				function tf_date_format_user($date, $format) {
 					if(!empty($date) && !empty($format)) {
-					if(str_contains( $date, "-") == true) {
+					if(str_contains( $date, " - ") == true) {
 						list($first_date, $last_date) = explode(" - ", $date);
 						$first_date = date($format, strtotime($first_date));
 						$last_date = date($format, strtotime($last_date));
