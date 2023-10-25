@@ -165,7 +165,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                             <h3><?php echo __( 'Choose Destination', 'tourfic' ) ?></h3>
 											<?php
 											//Dynamic Taxonomy dropdown list
-											tf_terms_dropdown( 'tour_destination', 'tf_tour_destination_shortcode', 'ids', 'tf-setting-field tf-select-field', true );
+											tf_terms_dropdown( 'tour_destination', 'ids', 'tf_tour_destination_shortcode', 'tf-setting-field tf-select-field', true );
 											?>
                                         </div>
                                     </div>
