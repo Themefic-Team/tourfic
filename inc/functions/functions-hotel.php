@@ -351,7 +351,6 @@ function tf_hotel_airport_service_callback() {
 			$day_difference = round( ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1 );
 		}
 
-
 		$meta  = get_post_meta( $post_id, 'tf_hotels_opt', true );
 		$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
 		if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {

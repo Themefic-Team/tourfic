@@ -12,7 +12,7 @@ if ( ! class_exists( 'TF_ical' ) ) {
 		public function render() {
 			global $post;
 			$post_type = get_post_type( $post->ID );
-			$room_index = $pricing_by = '';
+			$room_index = $pricing_type = '';
 			if ( $post_type === 'tf_hotel' ) {
 
 				$meta  = get_post_meta( $post->ID, 'tf_hotels_opt', true );
@@ -25,10 +25,10 @@ if ( ! class_exists( 'TF_ical' ) ) {
 				}
 
 				$room_index = str_replace( array( '[', ']', 'room' ), '', $this->parent_field );
-				$pricing_by = ! empty( $rooms[ $room_index ]['pricing-by'] ) ? $rooms[ $room_index ]['pricing-by'] : '1';
+				$pricing_type = ! empty( $rooms[ $room_index ]['pricing-by'] ) ? $rooms[ $room_index ]['pricing-by'] : '1';
 			} elseif ( $post_type === 'tf_apartment' ) {
 				$meta  = get_post_meta( $post->ID, 'tf_apartment_opt', true );
-				$pricing_by = '1';
+				$pricing_type = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
 			}
 
 			$placeholder = ( ! empty( $this->field['placeholder'] ) ) ? 'placeholder="' . $this->field['placeholder'] . '"' : '';
@@ -37,7 +37,7 @@ if ( ! class_exists( 'TF_ical' ) ) {
 			if ( isset( $this->field['button_text'] ) && ! empty( $this->field['button_text'] ) ) {
 				$button_class = 'button button-primary button-large';
 				$button_class .= isset( $this->field['button_class'] ) ? ' ' . $this->field['button_class'] : '';
-				echo '<a href="#" class="' . $button_class . '" style="margin-top: 16px;" data-room-index="' . $room_index . '" data-pricing-by="' . $pricing_by . '">' . $this->field['button_text'] . '</a>';
+				echo '<a href="#" class="' . $button_class . '" style="margin-top: 16px;" data-room-index="' . $room_index . '" data-pricing-type="' . $pricing_type . '">' . $this->field['button_text'] . '</a>';
 			}
 		}
 
