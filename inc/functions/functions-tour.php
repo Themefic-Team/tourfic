@@ -1774,7 +1774,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                            $(".tours-check-in-out").not(this).val(instance.altInput.value); // Todo: change the Input Value
+                            // $(".tours-check-in-out").not(this).val(instance.altInput.value); // Todo: change the Input Value
                             if (custom_avail == true) {
 
                                 let times = allowed_times.filter((v) => {
