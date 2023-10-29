@@ -735,7 +735,7 @@ TF_Settings::option( 'tf_settings', array(
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
 				array( // start
-					'id'    => 'booking_tour_heading',
+					'id'    => 'booking_hotel_heading',
 					'type'  => 'heading',
 					'label' => __( 'Settings for Booking', 'tourfic' ),
 				),
@@ -758,11 +758,11 @@ TF_Settings::option( 'tf_settings', array(
 					),
 				),
 				array(
-					'id'           => 'without-payment-field',
+					'id'           => '',
 					'class'        => 'disable-sortable',
 					'type'         => 'repeater',
 					'button_title' => __( 'Add New', 'tourfic' ),
-					'label'        => __( 'Fields for Traveler Info', 'tourfic' ),
+					'label'        => __( 'Fields for Guest Info', 'tourfic' ),
 					'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
 					'is_pro'       => true,
 					'dependency'   => array(
@@ -886,21 +886,11 @@ TF_Settings::option( 'tf_settings', array(
 					),
 				),
 				array(
-					'id'          => 'tour_popup_extras_text',
+					'id'          => 'hotel_guest_details_text',
 					'type'        => 'text',
-					'label'       => __( 'Enter Tour Extra', 'tourfic' ),
-					'subtitle'    => __( 'Tours Extras Description Text', 'tourfic' ),
-					'default'     => "Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural",
-					'placeholder' => "Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural",
-					'is_pro'      => true
-				),
-				array(
-					'id'          => 'tour_traveler_details_text',
-					'type'        => 'text',
-					'label'       => __( 'Enter Traveler Details Text', 'tourfic' ),
-					'subtitle'    => __( 'Enter traveler details text filed text', 'tourfic' ),
+					'label'       => __( 'Enter Guest Details Text', 'tourfic' ),
 					'default'     => "All of your information will be confidential and the reason of this is for your privacy purpose",
-					'placeholder' => "All of your information will be confidential and the reason of this is for your privacy purpose",
+					'placeholder' => "Ex: All of your information will be confidential and the reason of this is for your privacy purpose",
 					'is_pro'      => true
 				),
 			),
