@@ -618,7 +618,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							),
 							'default' => array(
 								'background' => '#003162',
-								'font' => '#fffff'
+								'font' => '#fff'
 							),
 						),
 					),

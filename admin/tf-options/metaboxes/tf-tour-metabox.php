@@ -1283,7 +1283,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 							),
 							'default' => array(
 								'background' => '#003162',
-								'font' => '#fffff'
+								'font' => '#fff'
 							),
 						),
 					),
