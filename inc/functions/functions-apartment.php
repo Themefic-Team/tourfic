@@ -797,6 +797,12 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 		$address         = ! empty( $meta['address'] ) ? $meta['address'] : '';
 		$featured        = ! empty( $meta['apartment_as_featured'] ) ? $meta['apartment_as_featured'] : '';
 		$price_per_night = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
+		$apartment_multiple_tags = !empty($meta['tf-apartment-tags']) ? $meta['tf-apartment-tags'] : [];
+		// echo '<pre>';
+		// print_r($apartment_multiple_tags);
+		// echo '</pre>';
+		// die();
+		
 
 		// Single link
 		$url = get_the_permalink();
@@ -815,6 +821,21 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
                     </div>
 				<?php endif; ?>
                 <div class="tourfic-single-left">
+                	<div class="apartment-tags-container">
+					<?php 
+					if(sizeof($apartment_multiple_tags) > 0) {
+						foreach($apartment_multiple_tags as $tag) {
+							$tag_title = $tag["apartment-tag-title"];
+							$tag_background_color = !empty($tag["apartment-tag-color-settings"]["background"]) ? $tag["apartment-tag-color-settings"]["background"] : "#003162";
+							$tag_font_color = !empty($tag["apartment-tag-color-settings"]["font"]) ? $tag["apartment-tag-color-settings"]["font"] : "#fff";
+
+							echo <<<EOD
+								<span class="apartment-single-tag" style="color: $tag_font_color; background-color: $tag_background_color">$tag_title</span>
+							EOD;
+						}
+					}
+					?>
+					</div>
                     <a href="<?php echo $url; ?>">
 						<?php
 						if ( has_post_thumbnail() ) {

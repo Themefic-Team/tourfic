@@ -1720,6 +1720,7 @@ Ajax Loader Booking Availability
   flex-basis: main-size;
   width: 210px;
   min-height: 210px;
+  position: relative;
 }
 .tourfic-single-left img {
   height: 100%;
@@ -1727,6 +1728,23 @@ Ajax Loader Booking Availability
   -o-object-fit: cover;
   object-fit: cover;
   border-radius: 4px;
+}
+.tourfic-single-left .apartment-tags-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  width: 100%;
+  font-size: 12px;
+  margin-top: 5px !important;
+}
+.tourfic-single-left .apartment-tags-container .apartment-single-tag {
+  padding: 6px 12px;
+  display: block;
+  border-radius: 50px;
+  margin: 5px 4px;
+  font-weight: 500;
 }
 
 .tourfic-single-right {
@@ -2153,6 +2171,9 @@ a.page-numbers {
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .search-result-inner {
     grid-template-columns: 65% 35%;
+  }
+  .apartment-tags-container {
+    width: 530px;
   }
 }
 @media only screen and (min-width: 660px) and (max-width: 767px) {
