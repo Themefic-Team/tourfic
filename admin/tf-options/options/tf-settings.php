@@ -13,7 +13,7 @@ TF_Settings::option( 'tf_settings', array(
 	'icon'     => $menu_icon,
 	'position' => 25,
 	'sections' => array(
-		'general'               => array(
+		'general'                => array(
 			'title'  => __( 'General', 'tourfic' ),
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
@@ -34,14 +34,14 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => __( 'Select Date Format', 'tourfic' ),
 					'subtitle' => __( 'Select a format, that will show when a user select date', 'tourfic' ),
 					'options'  => array(
-						'Y/m/d'  => __( 'YYYY/MM/DD', 'tourfic' ),
+						'Y/m/d' => __( 'YYYY/MM/DD', 'tourfic' ),
 						'Y-m-d' => __( 'YYYY-MM-DD', 'tourfic' ),
-						'd-m-Y'  => __( 'DD-MM-YYYY', 'tourfic' ),
-						'd/m/Y'  => __( 'DD/MM/YYYY', 'tourfic' ),
-						'Y.m.d'  => __( 'YYYY.MM.DD', 'tourfic' ),
-						'd.m.Y'  => __( 'DD.MM.YYYY', 'tourfic' ),
+						'd-m-Y' => __( 'DD-MM-YYYY', 'tourfic' ),
+						'd/m/Y' => __( 'DD/MM/YYYY', 'tourfic' ),
+						'Y.m.d' => __( 'YYYY.MM.DD', 'tourfic' ),
+						'd.m.Y' => __( 'DD.MM.YYYY', 'tourfic' ),
 					),
-					'default'    => 'Y/m/d',
+					'default'  => 'Y/m/d',
 				),
 				array(
 					'id'       => 'template_heading',
@@ -186,16 +186,16 @@ TF_Settings::option( 'tf_settings', array(
 									'dependency' => array( 'hotel-archive', '==', 'design-1' ),
 								),
 								array(
-									'id'       => 'hotel_archive_price_minimum_settings',
-									'type'     => 'select',
-									'label'    => __( 'Select Minimum Price to Show?', 'tourfic' ),
-									'options'  => array(
+									'id'      => 'hotel_archive_price_minimum_settings',
+									'type'    => 'select',
+									'label'   => __( 'Select Minimum Price to Show?', 'tourfic' ),
+									'options' => array(
 										'all'   => __( 'All', 'tourfic' ),
-										'adult'   => __( 'Adult', 'tourfic' ),
-										'child'   => __( 'Child', 'tourfic' ),
+										'adult' => __( 'Adult', 'tourfic' ),
+										'child' => __( 'Child', 'tourfic' ),
 									),
-									'default'    => 'All',
-								), 
+									'default' => 'All',
+								),
 								array(
 									'id'      => 'hotel_archive_notice',
 									'type'    => 'notice',
@@ -359,15 +359,15 @@ TF_Settings::option( 'tf_settings', array(
 									'dependency' => array( 'tour-archive', '==', 'design-1' ),
 								),
 								array(
-									'id'       => 'tour_archive_price_minimum_settings',
-									'type'     => 'select',
-									'label'    => __( 'Select Minimum Price to Show?', 'tourfic' ),
-									'options'  => array(
+									'id'      => 'tour_archive_price_minimum_settings',
+									'type'    => 'select',
+									'label'   => __( 'Select Minimum Price to Show?', 'tourfic' ),
+									'options' => array(
 										'all'   => __( 'All', 'tourfic' ),
-										'adult'   => __( 'Adult', 'tourfic' ),
-										'child'   => __( 'Child', 'tourfic' ),
+										'adult' => __( 'Adult', 'tourfic' ),
+										'child' => __( 'Child', 'tourfic' ),
 									),
-									'default'    => 'All',
+									'default' => 'All',
 								),
 								array(
 									'id'      => 'tour_archive_notice',
@@ -394,7 +394,7 @@ TF_Settings::option( 'tf_settings', array(
 									'multiple' => true,
 									'inline'   => true,
 									'options'  => array(
-										'default'  => array(
+										'default' => array(
 											'title' => 'Default',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-apartment.jpg",
 										),
@@ -414,7 +414,7 @@ TF_Settings::option( 'tf_settings', array(
 									'multiple' => true,
 									'inline'   => true,
 									'options'  => array(
-										'default'  => array(
+										'default' => array(
 											'title' => 'Default',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/apartment-archive-default.jpg",
 										),
@@ -432,12 +432,12 @@ TF_Settings::option( 'tf_settings', array(
 				)
 			),
 		),
-		'hotel_option'          => array(
+		'hotel_option'           => array(
 			'title'  => __( 'Hotel Options', 'tourfic' ),
 			'icon'   => 'fas fa-hotel',
 			'fields' => array(),
 		),
-		'single_page'           => array(
+		'single_page'            => array(
 			'title'  => __( 'Single Page', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
@@ -482,7 +482,7 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
-		'room_config'           => array(
+		'room_config'            => array(
 			'title'  => __( 'Room Config', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
@@ -512,8 +512,7 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
-		// Hotel service Popup
-		'payment_popup'         => array(
+		'payment_popup'          => array(
 			'title'  => __( 'Popup Settings', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
@@ -546,74 +545,374 @@ TF_Settings::option( 'tf_settings', array(
 				)
 			),
 		),
-
-		//Apartment Options
-		'apartment_option'      => array(
-			'title'  => __( 'Apartment Options', 'tourfic' ),
-			'icon'   => 'fa-solid fa-house-chimney',
-			'fields' => array(),
-		),
-		'apartment_single_page' => array(
-			'title'  => __( 'Single Page', 'tourfic' ),
-			'parent' => 'apartment_option',
+		'hotel_without_booking'  => array(
+			'title'  => __( 'Without Payment', 'tourfic' ),
+			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
 				array(
-					'id'    => 'label_off_heading',
-					'type'  => 'heading',
-					'label' => __( 'Single Apartment Settings', 'tourfic' ),
+					'id'       => 'confirmation_fields_heading',
+					'type'     => 'heading',
+					'label'    => __( 'Settings for Booking Confirmation Fields', 'tourfic' ),
+					'subtitle' => __( 'Booking Confirmation Fields works for without payment.', 'tourfic' ),
 				),
-
 				array(
-					'id'           => 'amenities_cats',
+					'id'           => '',
+					'class'        => 'disable-sortable',
 					'type'         => 'repeater',
-					'label'        => __( 'Amenities Categories', 'tourfic' ),
 					'button_title' => __( 'Add New', 'tourfic' ),
+					'label'        => __( 'Fields for Booking Confirmation', 'tourfic' ),
+					'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
+					'is_pro'       => true,
 					'fields'       => array(
 						array(
-							'id'    => 'amenities_cat_name',
+							'id'    => 'reg-field-label',
 							'type'  => 'text',
-							'label' => __( 'Category Name', 'tourfic' ),
+							'label' => __( 'Label', 'tourfic' ),
+						),
+						array(
+							'id'       => 'reg-field-name',
+							'type'     => 'text',
+							'label'    => __( 'Name', 'tourfic' ),
+							'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
+							'validate' => 'no_space_no_special',
+							'class'    => 'tf_hidden_fields'
+						),
+						array(
+							'id'      => 'reg-fields-type',
+							'type'    => 'select',
+							'label'   => __( 'Field Type', 'tourfic' ),
+							'options' => array(
+								'text'     => __( 'Text', 'tourfic' ),
+								'email'    => __( 'Email', 'tourfic' ),
+								'date'     => __( 'Date', 'tourfic' ),
+								'radio'    => __( 'Radio', 'tourfic' ),
+								'checkbox' => __( 'Checkbox', 'tourfic' ),
+								'select'   => __( 'Select', 'tourfic' ),
+							),
+							'class'   => 'tf_hidden_fields'
+						),
+						array(
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
+								array( 'reg-fields-type', '==', 'radio' ),
+							),
+							'fields'       => array(
+								array(
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
+								),
+								array(
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
+								),
+							),
+						),
+						array(
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
+								array( 'reg-fields-type', '==', 'select' ),
+							),
+							'fields'       => array(
+								array(
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
+								),
+								array(
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
+								),
+							),
+						),
+						array(
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
+								array( 'reg-fields-type', '==', 'checkbox' ),
+							),
+							'fields'       => array(
+								array(
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
+								),
+								array(
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
+								),
+							),
+						),
+						array(
+							'id'    => 'reg-field-required',
+							'type'  => 'switch',
+							'label' => __( 'Required Field ?', 'tourfic' ),
+							'class' => 'tf_hidden_fields'
+						),
+
+					),
+					'default'      => array(
+						array(
+							'reg-field-label'    => __( 'First Name', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_first_name', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Last Name', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_last_name', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Email', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_email', 'tourfic' ),
+							'reg-fields-type'    => 'email',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Phone', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_phone', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Country', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_country', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Street Address', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_street_address', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Town/City', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_town_city', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'State/Country', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_state_country', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Postcode/ZIP', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_postcode', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
 						),
 					),
 				),
-
 				array(
-					'id'        => 'disable-apartment-review',
-					'type'      => 'switch',
-					'label'     => __( 'Disable Review Section', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => false
+					'id'      => '',
+					'type'    => 'editor',
+					'label'   => __( 'Booking Confirmation Message', 'tourfic' ),
+					'default' => 'Booked Successfully',
+					'is_pro'  => true,
 				),
-
-				array(
-					'id'        => 'disable-apartment-share',
-					'type'      => 'switch',
-					'label'     => __( 'Disable Share Option', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => false
+			),
+		),
+		'hotel_booking_settings' => array(
+			'title'  => __( 'Booking', 'tourfic' ),
+			'parent' => 'hotel_option',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array( // start
+					'id'    => 'booking_tour_heading',
+					'type'  => 'heading',
+					'label' => __( 'Settings for Booking', 'tourfic' ),
 				),
-
 				array(
-					'id'        => 'disable-related-apartment',
+					'id'        => 'disable_guest_info',
 					'type'      => 'switch',
-					'label'     => __( 'Disable Related Section', 'tourfic' ),
+					'label'     => __( 'Enable Guest Info', 'tourfic' ),
+					'subtitle'  => __( 'Enable this option, if you want to add guest info.', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => false
+					'is_pro'    => true,
+					'default'   => true,
+				),
+				array(
+					'id'         => 'hotel_custom_fields_heading',
+					'type'       => 'heading',
+					'label'      => __( 'Settings for Guest Info Fields', 'tourfic' ),
+					'dependency' => array(
+						array( 'disable_guest_info', '==', 'true' ),
+					),
+				),
+				array(
+					'id'           => 'without-payment-field',
+					'class'        => 'disable-sortable',
+					'type'         => 'repeater',
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'label'        => __( 'Fields for Traveler Info', 'tourfic' ),
+					'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
+					'is_pro'       => true,
+					'dependency'   => array(
+						array( 'disable_traveller_info', '==', 'true' ),
+					),
+					'fields'       => array(
+						array(
+							'id'    => 'reg-field-label',
+							'type'  => 'text',
+							'label' => __( 'Label', 'tourfic' ),
+						),
+						array(
+							'id'       => 'reg-field-name',
+							'type'     => 'text',
+							'label'    => __( 'Name', 'tourfic' ),
+							'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
+							'validate' => 'no_space_no_special',
+						),
+						array(
+							'id'      => 'reg-fields-type',
+							'type'    => 'select',
+							'label'   => __( 'Field Type', 'tourfic' ),
+							'options' => array(
+								'text'     => __( 'Text', 'tourfic' ),
+								'email'    => __( 'Email', 'tourfic' ),
+								'date'     => __( 'Date', 'tourfic' ),
+								'radio'    => __( 'Radio', 'tourfic' ),
+								'checkbox' => __( 'Checkbox', 'tourfic' ),
+								'select'   => __( 'Select', 'tourfic' ),
+							),
+						),
+						array(
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
+								array( 'reg-fields-type', '==', 'radio' ),
+							),
+							'fields'       => array(
+								array(
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
+								),
+								array(
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
+								),
+							),
+						),
+						array(
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
+								array( 'reg-fields-type', '==', 'select' ),
+							),
+							'fields'       => array(
+								array(
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
+								),
+								array(
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
+								),
+							),
+						),
+						array(
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
+								array( 'reg-fields-type', '==', 'checkbox' ),
+							),
+							'fields'       => array(
+								array(
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
+								),
+								array(
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
+								),
+							),
+						),
+						array(
+							'id'    => 'reg-field-required',
+							'type'  => 'switch',
+							'label' => __( 'Required Field ?', 'tourfic' ),
+						),
+
+					),
+					'default'      => array(
+						array(
+							'reg-field-label'    => __( 'Full Name', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_full_name', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Date of birth', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_dob', 'tourfic' ),
+							'reg-fields-type'    => 'date',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'NID', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_nid', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						)
+					),
+				),
+				array(
+					'id'          => 'tour_popup_extras_text',
+					'type'        => 'text',
+					'label'       => __( 'Enter Tour Extra', 'tourfic' ),
+					'subtitle'    => __( 'Tours Extras Description Text', 'tourfic' ),
+					'default'     => "Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural",
+					'placeholder' => "Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural",
+					'is_pro'      => true
+				),
+				array(
+					'id'          => 'tour_traveler_details_text',
+					'type'        => 'text',
+					'label'       => __( 'Enter Traveler Details Text', 'tourfic' ),
+					'subtitle'    => __( 'Enter traveler details text filed text', 'tourfic' ),
+					'default'     => "All of your information will be confidential and the reason of this is for your privacy purpose",
+					'placeholder' => "All of your information will be confidential and the reason of this is for your privacy purpose",
+					'is_pro'      => true
 				),
 			),
 		),
 
 		// Tour Options
-		'tour'                  => array(
+		'tour'                   => array(
 			'title'  => __( 'Tour Options', 'tourfic' ),
 			'icon'   => 'fas fa-umbrella-beach',
 			'fields' => array(),
 		),
-		'single_tour'           => array(
+		'single_tour'            => array(
 			'title'  => __( 'Single Page', 'tourfic' ),
 			'parent' => 'tour',
 			'icon'   => 'fa fa-cog',
@@ -718,7 +1017,7 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		// Partial Payment Popup
-		'tour_payment_popup'    => array(
+		'tour_payment_popup'     => array(
 			'title'  => __( 'Partial Payment', 'tourfic' ),
 			'parent' => 'tour',
 			'icon'   => 'fa fa-cog',
@@ -746,12 +1045,12 @@ TF_Settings::option( 'tf_settings', array(
 					'id'      => 'notice_shortcode',
 					'type'    => 'notice',
 					'content' => __( 'Use shortcode <code>{amount}</code> to show percentage amount in Label', 'tourfic' ),
-					'is_pro' => true
+					'is_pro'  => true
 				),
 			),
 		),
 		// Itinerary Settings
-		'tour_itinerary'        => array(
+		'tour_itinerary'         => array(
 			'title'  => __( 'Itinerary Settings', 'tourfic' ),
 			'parent' => 'tour',
 			'icon'   => 'fa fa-cog',
@@ -862,7 +1161,7 @@ TF_Settings::option( 'tf_settings', array(
 									'is_pro'   => true,
 									'label'    => __( 'Enable Itinerary Downloader', 'tourfic' ),
 									'subtitle' => __( 'Enabling this will allow customers to download the itinerary plan in PDF format.', 'tourfic' ),
-									"default" => true,
+									"default"  => true,
 								),
 								array(
 									'id'      => 'tour_pdf_downloader_section',
@@ -870,28 +1169,28 @@ TF_Settings::option( 'tf_settings', array(
 									'content' => __( 'Tour Downloader Section', 'tourfic' ),
 								),
 								array(
-									'id'    => '',
-									'type'  => 'text',
-									'label' => __( 'Tour Downloader Title Text', 'tourfic' ),
-									'default' => "Want to read it later?",
+									'id'          => '',
+									'type'        => 'text',
+									'label'       => __( 'Tour Downloader Title Text', 'tourfic' ),
+									'default'     => "Want to read it later?",
 									'placeholder' => "Want to read it later?",
-									'is_pro'   => true,
+									'is_pro'      => true,
 								),
 								array(
-									'id'    => '',
-									'type'  => 'text',
-									'label' => __( 'Tour Downloader Sort Text', 'tourfic' ),
-									'default' => "Download this tour's PDF brochure and start your planning offline.",
+									'id'          => '',
+									'type'        => 'text',
+									'label'       => __( 'Tour Downloader Sort Text', 'tourfic' ),
+									'default'     => "Download this tour's PDF brochure and start your planning offline.",
 									'placeholder' => "Download this tour's PDF brochure and start your planning offline.",
-									'is_pro'   => true,
+									'is_pro'      => true,
 								),
 								array(
-									'id'    => '',
-									'type'  => 'text',
-									'label' => __( 'Tour Downloader Button Text', 'tourfic' ),
-									'default' => "Download Now",
+									'id'          => '',
+									'type'        => 'text',
+									'label'       => __( 'Tour Downloader Button Text', 'tourfic' ),
+									'default'     => "Download Now",
 									'placeholder' => "Download Now",
-									'is_pro'   => true,
+									'is_pro'      => true,
 								),
 								array(
 									'id'      => 'tour_settings',
@@ -1072,7 +1371,7 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		// Without Payment Popup
-		'without_payment_book'  => array(
+		'without_payment_book'   => array(
 			'title'  => __( 'Without Payment', 'tourfic' ),
 			'parent' => 'tour',
 			'icon'   => 'fa fa-cog',
@@ -1248,11 +1547,11 @@ TF_Settings::option( 'tf_settings', array(
 					),
 				),
 				array(
-					'id'          => '',
-					'type'        => 'editor',
-					'label'       => __( 'Booking Confirmation Message', 'tourfic' ),
-					'default' 	  => 'Booked Successfully',
-					'is_pro'       => true,
+					'id'      => '',
+					'type'    => 'editor',
+					'label'   => __( 'Booking Confirmation Message', 'tourfic' ),
+					'default' => 'Booked Successfully',
+					'is_pro'  => true,
 				),
 			),
 		),
@@ -1277,9 +1576,9 @@ TF_Settings::option( 'tf_settings', array(
 					'is_pro'    => true
 				),
 				array(
-					'id'    => 'custom_fields_heading',
-					'type'  => 'heading',
-					'label' => __( 'Settings for Traveler Info Fields', 'tourfic' ),
+					'id'         => 'custom_fields_heading',
+					'type'       => 'heading',
+					'label'      => __( 'Settings for Traveler Info Fields', 'tourfic' ),
 					'dependency' => array(
 						array( 'disable_traveller_info', '==', 'true' ),
 					),
@@ -1292,7 +1591,7 @@ TF_Settings::option( 'tf_settings', array(
 					'label'        => __( 'Fields for Traveler Info', 'tourfic' ),
 					'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
 					'is_pro'       => true,
-					'dependency' => array(
+					'dependency'   => array(
 						array( 'disable_traveller_info', '==', 'true' ),
 					),
 					'fields'       => array(
@@ -1417,7 +1716,7 @@ TF_Settings::option( 'tf_settings', array(
 					'type'        => 'text',
 					'label'       => __( 'Enter Tour Extra', 'tourfic' ),
 					'subtitle'    => __( 'Tours Extras Description Text', 'tourfic' ),
-					'default' 	  => "Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural",
+					'default'     => "Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural",
 					'placeholder' => "Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural",
 					'is_pro'      => true
 				),
@@ -1426,14 +1725,75 @@ TF_Settings::option( 'tf_settings', array(
 					'type'        => 'text',
 					'label'       => __( 'Enter Traveler Details Text', 'tourfic' ),
 					'subtitle'    => __( 'Enter traveler details text filed text', 'tourfic' ),
-					'default' 	  => "All of your information will be confidential and the reason of this is for your privacy purpose",
+					'default'     => "All of your information will be confidential and the reason of this is for your privacy purpose",
 					'placeholder' => "All of your information will be confidential and the reason of this is for your privacy purpose",
-					'is_pro'    => true
+					'is_pro'      => true
 				),
 			),
 		),
+
+		//Apartment Options
+		'apartment_option'       => array(
+			'title'  => __( 'Apartment Options', 'tourfic' ),
+			'icon'   => 'fa-solid fa-house-chimney',
+			'fields' => array(),
+		),
+		'apartment_single_page'  => array(
+			'title'  => __( 'Single Page', 'tourfic' ),
+			'parent' => 'apartment_option',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'    => 'label_off_heading',
+					'type'  => 'heading',
+					'label' => __( 'Single Apartment Settings', 'tourfic' ),
+				),
+
+				array(
+					'id'           => 'amenities_cats',
+					'type'         => 'repeater',
+					'label'        => __( 'Amenities Categories', 'tourfic' ),
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'fields'       => array(
+						array(
+							'id'    => 'amenities_cat_name',
+							'type'  => 'text',
+							'label' => __( 'Category Name', 'tourfic' ),
+						),
+					),
+				),
+
+				array(
+					'id'        => 'disable-apartment-review',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Review Section', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
+
+				array(
+					'id'        => 'disable-apartment-share',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Share Option', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
+
+				array(
+					'id'        => 'disable-related-apartment',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Related Section', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
+			),
+		),
+
 		//Frontend Dashboard
-		'frontend_dashboard'    => array(
+		'frontend_dashboard'     => array(
 			'title'  => __( 'Frontend Dashboard', 'tourfic' ),
 			'icon'   => 'fa-solid fa-gauge-high',
 			'fields' => array(
@@ -1473,7 +1833,7 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		//user options
-		'user_options'          => array(
+		'user_options'           => array(
 			'title'  => __( 'User Options', 'tourfic' ),
 			'icon'   => 'fas fa-user',
 			'fields' => array(
@@ -1617,7 +1977,7 @@ TF_Settings::option( 'tf_settings', array(
 			)
 		),
 		// Multi Vendor
-		'vendor'                => array(
+		'vendor'                 => array(
 			'title'  => __( 'Multi Vendor', 'tourfic' ),
 			'icon'   => 'fa fa-handshake',
 			'fields' => array(
@@ -1829,7 +2189,7 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		// Search Options
-		'search'                => array(
+		'search'                 => array(
 			'title'  => __( 'Search', 'tourfic' ),
 			'icon'   => 'fas fa-search',
 			'fields' => array(
@@ -1901,12 +2261,12 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		// Design Options
-		'design-panel'          => array(
+		'design-panel'           => array(
 			'title'  => __( 'Design Panel', 'tourfic' ),
 			'icon'   => 'fas fa-palette',
 			'fields' => array(),
 		),
-		'global_design'         => array(
+		'global_design'          => array(
 			'title'  => __( 'Global', 'tourfic' ),
 			'parent' => 'design-panel',
 			'icon'   => 'fas fa-cogs',
@@ -2479,7 +2839,7 @@ TF_Settings::option( 'tf_settings', array(
 
 			),
 		),
-		'hotel_design'          => array(
+		'hotel_design'           => array(
 			'title'  => __( 'Hotel', 'tourfic' ),
 			'parent' => 'design-panel',
 			'icon'   => 'fas fa-hotel',
@@ -2564,7 +2924,7 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
-		'tour_design'           => array(
+		'tour_design'            => array(
 			'title'  => __( 'Tour', 'tourfic' ),
 			'parent' => 'design-panel',
 			'icon'   => 'fas fa-umbrella-beach',
@@ -2656,7 +3016,7 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
-		'apartment_design'      => array(
+		'apartment_design'       => array(
 			'title'  => __( 'Apartment', 'tourfic' ),
 			'parent' => 'design-panel',
 			'icon'   => 'fa-solid fa-house-chimney',
@@ -2706,7 +3066,7 @@ TF_Settings::option( 'tf_settings', array(
 		),
 
 		// Miscellaneous Options
-		'miscellaneous'         => array(
+		'miscellaneous'          => array(
 			'title'  => __( 'Miscellaneous', 'tourfic' ),
 			'icon'   => 'fas fa-globe',
 			'fields' => array(),
@@ -2716,7 +3076,7 @@ TF_Settings::option( 'tf_settings', array(
 		 *
 		 * Sub Menu
 		 */
-		'login_register'        => array(
+		'login_register'         => array(
 			'title'  => __( 'Login & Register', 'tourfic' ),
 			'parent' => 'miscellaneous',
 			'icon'   => 'fas fa-user',
@@ -3014,7 +3374,7 @@ TF_Settings::option( 'tf_settings', array(
 		 *
 		 * Sub Menu
 		 */
-		'map_settings'          => array(
+		'map_settings'           => array(
 			'title'  => __( 'Map Settings', 'tourfic' ),
 			'parent' => 'miscellaneous',
 			'icon'   => 'fas fa-umbrella-beach',
@@ -3051,7 +3411,7 @@ TF_Settings::option( 'tf_settings', array(
 		 *
 		 * Sub Menu
 		 */
-		'wishlist'              => array(
+		'wishlist'               => array(
 			'title'  => __( 'Wishlist', 'tourfic' ),
 			'parent' => 'miscellaneous',
 			'icon'   => 'fas fa-heart',

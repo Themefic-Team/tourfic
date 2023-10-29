@@ -84,7 +84,7 @@
             });
         });
 
-        $(document).on("click", ".tf_air_service", function (e) {
+        /*$(document).on("click", ".tf_air_service", function (e) {
             e.preventDefault();
             var $this = $(this);
             var roomnumber = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
@@ -108,7 +108,7 @@
                     }
                 });
             }
-        });
+        });*/
 
 
         /*

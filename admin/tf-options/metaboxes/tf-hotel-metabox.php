@@ -377,12 +377,13 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'class'   => 'tf-field-class',
 						),
 						array(
-							'id'      => 'booking-by',
+							'id'      => '',
 							'type'    => 'select',
 							'label'   => __( 'Booking Type', 'tourfic' ),
 							'options' => array(
 								'1' => __( 'Internal', 'tourfic' ),
 								'2' => __( 'External', 'tourfic' ),
+								'3' => __( 'Without Payment', 'tourfic' ),
 							),
 							'default' => '2',
 							'is_pro'  => true,
