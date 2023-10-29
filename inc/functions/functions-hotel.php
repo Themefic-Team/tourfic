@@ -1859,6 +1859,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 
 	// Featured
 	$featured = ! empty( $meta['featured'] ) ? $meta['featured'] : '';
+	$hotel_multiple_tags = !empty($meta['tf-hotel-tags']) ? $meta['tf-hotel-tags'] : array();
 	/**
 	 * All values from URL
 	 */
@@ -1979,11 +1980,6 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 							}
 						}
 					}
-					// echo "<pre>";
-					// // print_r(floatval( preg_replace( '/[^\d.]/', '', number_format( $b_room_price - ( ( $b_room_price / 100 ) * $hotel_discount_amount ), 2 ) ) ));
-					// print_r($room_price);
-					// echo "</pre>";
-					// die(); // added by - Sunvi
 				}
 			} else if ( $pricing_by == 2 ) {
 				if ( empty( $check_in_out ) ) {
@@ -2117,14 +2113,29 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 					}
 					?>
                 </a>
-                <div class="tf-features-box tf-flex">
+                <div class="tf-features-box">
 					<?php if ( $featured ): ?>
                         <div class="tf-feature">
 							<?php
 							echo ! empty( $meta['featured_text'] ) ? $meta['featured_text'] : esc_html( "HOT DEAL" );
 							?>
                         </div>
-					<?php endif; ?>
+						<?php endif;
+					if(sizeof($hotel_multiple_tags) > 0) {
+
+						foreach($hotel_multiple_tags as $tag) {
+							$hotel_tag_name = !empty($tag['hotel-tag-title']) ? $tag['hotel-tag-title'] : '';
+							$tag_background_color = !empty($tag["hotel-tag-color-settings"]["background"]) ? $tag["hotel-tag-color-settings"]["background"] : "#003162";
+							$tag_font_color = !empty($tag["hotel-tag-color-settings"]["font"]) ? $tag["hotel-tag-color-settings"]["font"] : "#fff";
+
+							echo <<<EOD
+								<div class="tf-feature">
+									<span class="tf-hotel-tag" style="color: $tag_font_color; background-color: $tag_background_color">$hotel_tag_name</span>
+								</div>
+							EOD;
+						}
+					}
+					?>
                 </div>
             </div>
             <div class="tf-item-details">

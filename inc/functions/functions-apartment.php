@@ -798,10 +798,6 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 		$featured        = ! empty( $meta['apartment_as_featured'] ) ? $meta['apartment_as_featured'] : '';
 		$price_per_night = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
 		$apartment_multiple_tags = !empty($meta['tf-apartment-tags']) ? $meta['tf-apartment-tags'] : [];
-		// echo '<pre>';
-		// print_r($apartment_multiple_tags);
-		// echo '</pre>';
-		// die();
 		
 
 		// Single link
