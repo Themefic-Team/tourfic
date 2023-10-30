@@ -104,8 +104,11 @@
                         </div>
                     </div>
                     <div class="tf-hero-gallery-videos">
+                        <?php
+                        $tours_video = ! empty( $meta['tour_video'] ) ? $meta['tour_video'] : '';
+                        if ( !empty($tours_video) ) { ?>
                         <div class="tf-hero-video tf-popup-buttons">
-                            <a href="#">
+                            <a class="tf-tour-video" id="featured-video" href="<?php echo esc_url($tours_video); ?>" data-fancybox="tour-video">
                                 <svg width="23" height="18" viewBox="0 0 23 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g id="content">
                                 <path id="Vector 3570" d="M10.5 5L12.5 5" stroke="#FDF9F4" stroke-width="1.5" stroke-linecap="round"/>
@@ -115,6 +118,10 @@
                                 </svg>
                             </a>
                         </div>
+                        <?php } ?>
+                        <?php 
+                        if ( ! empty( $gallery_ids ) ) {
+                        ?>
                         <div class="tf-hero-hotel tf-popup-buttons">
                             <a href="#">
                                 <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -127,6 +134,7 @@
                                 </svg>
                             </a>
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -921,166 +929,38 @@
             <?php } ?>
 
 
-            <!-- Hotel PopUp Starts -->
+            <!-- Tour Gallery PopUp Starts -->
             <div class="tf-popup-wrapper tf-hotel-popup">
                 <div class="tf-popup-inner">
-                    <div class="tf-popup-head">
-                        <ul>
-                            <li data-filter>All images</li>
-                            <li data-filter="rooms">Rooms</li>
-                            <li data-filter="common-areas">Common areas</li>
-                            <li data-filter="pool">Pool</li>
-                            <li data-filter="dining">Dining</li>
-                        </ul>
-                    </div>
-                    <div class="tf-popup-body tf-scroll-bar">
-                        <img data-tags="common-areas" src="./assets/image/gallery-image-1.png" alt=""
-                            class="tf-popup-image">
-                        <img data-tags="rooms,dining" src="./assets/image/gallery-image-2.png" alt=""
-                            class="tf-popup-image">
-                        <img data-tags="common-areas" src="./assets/image/gallery-image-3.png" alt=""
-                            class="tf-popup-image">
-                        <img data-tags="rooms" src="./assets/image/gallery-image-4.png" alt=""
-                            class="tf-popup-image">
-                        <img data-tags="dining" src="./assets/image/gallery-image-5.png" alt=""
-                            class="tf-popup-image">
-                        <img data-tags="dining,rooms,common-areas" src="./assets/image/gallery-image-6.png" alt=""
-                            class="tf-popup-image">
-                        <img data-tags="pool" src="./assets/image/gallery-image-7-pool.jpg" alt=""
-                            class="tf-popup-image">
-                        <img data-tags="pool,rooms" src="./assets/image/gallery-image-8-pool.jpg" alt=""
-                            class="tf-popup-image">
-                    </div>
+                    <div class="tf-popup-body">
+                        <?php 
+                            if ( ! empty( $gallery_ids ) ) {
+                            foreach ( $gallery_ids as $key => $gallery_item_id ) {
+                            $image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+                        ?>
+                        <img src="<?php echo esc_url($image_url); ?>" alt="" class="tf-popup-image">
+                        <?php } } ?>
+                    </div>                
                     <div class="tf-popup-close">
                         <i class="fa-solid fa-xmark"></i>
                     </div>
                 </div>
             </div>
-            <!-- Hotel PopUp end -->
-
-
-            <!-- Video PopUp Starts -->
-            <div class="tf-popup-wrapper tf-video-popup">
-                <div class="tf-popup-inner">
-                    <div class="tf-popup-head">
-                        <ul>
-                            <li data-filter>All images</li>
-                            <li data-filter="rooms">Rooms</li>
-                            <li data-filter="common-areas">Common areas</li>
-                            <li data-filter="pool">Pool</li>
-                            <li data-filter="dining">Dining</li>
-                        </ul>
-                    </div>
-                    <div class="tf-popup-body tf-scroll-bar">
-
-                        <div data-tags="common-areas" class="tf-popup-video-item">
-                            <a class="tf-tour-video" id="featured-video" data-fancybox="tour-video"
-                                href="https://www.youtube.com/embed/BCuH9jTMK58">
-                                <img src="./assets/image/video1.jpg" alt="">
-                                <i class="fa-regular fa-circle-play"></i>
-                            </a>
-                        </div>
-
-                        <div data-tags="rooms" class="tf-popup-video-item">
-                            <a class="tf-tour-video" id="featured-video" data-fancybox="tour-video"
-                                href="https://www.youtube.com/embed/BCuH9jTMK58">
-                                <img src="./assets/image/video3.jpg" alt="">
-                                <i class="fa-regular fa-circle-play"></i>
-                            </a>
-                        </div>
-
-                        <div data-tags="dining" class="tf-popup-video-item">
-                            <a class="tf-tour-video" id="featured-video" data-fancybox="tour-video"
-                                href="https://www.youtube.com/embed/BCuH9jTMK58">
-                                <img src="./assets/image/video2.jpg" alt="">
-                                <i class="fa-regular fa-circle-play"></i>
-                            </a>
-                        </div>
-
-                        <div data-tags="pool" class="tf-popup-video-item">
-                            <a class="tf-tour-video" id="featured-video" data-fancybox="tour-video"
-                                href="https://www.youtube.com/embed/BCuH9jTMK58">
-                                <img src="./assets/image/video3.jpg" alt="">
-                                <i class="fa-regular fa-circle-play"></i>
-                            </a>
-                        </div>
-
-                    </div>
-                    <div class="tf-popup-close">
-                        <i class="fa-solid fa-xmark"></i>
-                    </div>
-                </div>
-            </div>
-            <!-- Video PopUp end -->
+            <!-- Tour Gallery PopUp end -->
 
 
             <!-- Room PopUp Starts -->
             <div class="tf-popup-wrapper tf-room-popup">
                 <div class="tf-popup-inner">
-                    <div class="tf-popup-head">
-                        <ul>
-                            <li data-filter>All images</li>
-                            <li data-filter="rooms">Rooms</li>
-                            <li data-filter="common-areas">Common areas</li>
-                            <li data-filter="pool">Pool</li>
-                            <li data-filter="dining">Dining</li>
-                        </ul>
-                    </div>
                     <div class="tf-popup-body">
-                        <div class="tf-popup-left tf-scroll-bar">
-                            <img data-tags="common-areas" src="./assets/image/gallery-image-1.png" alt=""
-                                class="tf-popup-image">
-                            <img data-tags="rooms,dining" src="./assets/image/gallery-image-2.png" alt=""
-                                class="tf-popup-image">
-                            <img data-tags="common-areas" src="./assets/image/gallery-image-3.png" alt=""
-                                class="tf-popup-image">
-                            <img data-tags="rooms" src="./assets/image/gallery-image-4.png" alt=""
-                                class="tf-popup-image">
-                            <img data-tags="dining" src="./assets/image/gallery-image-5.png" alt=""
-                                class="tf-popup-image">
-                            <img data-tags="dining,rooms,common-areas" src="./assets/image/gallery-image-6.png"
-                                alt="" class="tf-popup-image">
-                            <img data-tags="pool" src="./assets/image/gallery-image-7-pool.jpg" alt=""
-                                class="tf-popup-image">
-                            <img data-tags="pool,rooms" src="./assets/image/gallery-image-8-pool.jpg" alt=""
-                                class="tf-popup-image">
-                        </div>
-                        <div class="tf-popup-right">
-                            <h4 class="tf-popup-info-title">Room details</h4>
-                            <ul>
-                                <li><i class="fas fa-ruler-combined"></i> 25 m2sft</li>
-                                <li><i class="fas fa-bed"></i> 2 Number of Beds</li>
-                                <li><i class="fab fa-creative-commons-zero"></i> Breakfast Included </li>
-                                <li><i class="fas fa-road"></i> Carpeted </li>
-                                <li><i class="fas fa-road"></i> Carpeted </li>
-                                <li><i class="fas fa-tshirt"></i> Clothes rack </li>
-                                <li><i class="fas fa-bed"></i> Double Bed </li>
-                                <li><a href="#">View room details</a></li>
-                            </ul>
-                            <a class="tf-all-benefits" href="#">All benefits</a>
-                            <h4 class="tf-popup-info-title"><i class="fa-solid fa-bed"></i> Bedroom</h4>
-                            <ul>
-                                <li>Linens</li>
-                                <li>Wardrobe or closet</li>
-                                <li>Air conditioning (climate-controlled)</li>
-                                <li>Blackout drapes/curtains </li>
-                                <li>Carpeted </li>
-                                <li>Down comforter</li>
-                                <li>Free cots/infant beds</li>
-                            </ul>
-                            <h4 class="tf-popup-info-title"><i class="fa-solid fa-cookie-bite"></i> Food and drink
-                            </h4>
-                            <ul>
-                                <li>Linens</li>
-                                <li>Wardrobe or closet</li>
-                                <li>Air conditioning (climate-controlled)</li>
-                                <li>Blackout drapes/curtains </li>
-                                <li>Carpeted </li>
-                                <li>Down comforter</li>
-                                <li>Free cots/infant beds</li>
-                            </ul>
-                        </div>
-                    </div>
+                        <?php 
+                            if ( ! empty( $gallery_ids ) ) {
+                            foreach ( $gallery_ids as $key => $gallery_item_id ) {
+                            $image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+                        ?>
+                        <img src="<?php echo esc_url($image_url); ?>" alt="" class="tf-popup-image">
+                        <?php } } ?>
+                    </div>                
                     <div class="tf-popup-close">
                         <i class="fa-solid fa-xmark"></i>
                     </div>
