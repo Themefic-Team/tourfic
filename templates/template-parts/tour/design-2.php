@@ -66,60 +66,108 @@
                     <!--Overview Start -->
                     <div class="tf-overview-wrapper">
                         <div class="tf-overview-description">
-                            <p>With the Cruise Ship tour of 2-Days Glencoe, Glenfinnan Viaduct & St Andrews Tour,
-                                lorem ipsum dolor sit amet consectetuer adipiscing elit sed diam nonummy nibh
-                                euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad
-                                minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
-                                aliquip... <a href="#">See more</a></p>
-                        </div>
-                        <!--features block Start -->
-                        <div class="tf-features-block-wrapper">
-                            <div class="tf-feature-block">
-                                <i class="fa-regular fa-clock"></i>
-                                <div class="tf-feature-block-details">
-                                    <h5>Duration</h5>
-                                    <p>2 days s </p>
-                                </div>
-                            </div>
-                            <div class="tf-feature-block">
-                                <i class="fa-regular fa-clock"></i>
-                                <div class="tf-feature-block-details">
-                                    <h5>Duration</h5>
-                                    <p>2 days s </p>
-                                </div>
-                            </div>
-                            <div class="tf-feature-block">
-                                <i class="fa-regular fa-clock"></i>
-                                <div class="tf-feature-block-details">
-                                    <h5>Duration</h5>
-                                    <p>2 days s </p>
-                                </div>
-                            </div>
-                            <div class="tf-feature-block">
-                                <i class="fa-regular fa-clock"></i>
-                                <div class="tf-feature-block-details">
-                                    <h5>Duration</h5>
-                                    <p>2 days s </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!--features block End -->
-                        <div class="tf-highlights-wrapper">
-                            <div class="tf-highlights-icon">
-                                <img src="./assets/image/highlights.svg" alt="Highlights Icon">
-                            </div>
-                            <div class="ft-highlights-details">
-                                <h2 class="tf-section-title">Highlights</h2>
-                                <ul>
-                                    <li>Includes accommodation, an expert guide, meals, transport and more</li>
-                                    <li>Sullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</li>
-                                    <li>Meugiat nulla facilisis at vero eros et accumsan et iusto odio.</li>
-                                    <li>Meugiat nulla facilisis at vero eros et accumsan et iusto odio.</li>
-                                </ul>
-                            </div>
+                            <?php the_content(); ?>
                         </div>
                     </div>
                     <!--Overview End -->
+
+                    <?php if ( $tour_duration || $info_tour_type || $group_size || $language ) { ?>
+                    <!--Information Section Start -->
+                    <div class="tf-overview-wrapper">
+                        <div class="tf-features-block-wrapper">
+                            <?php if ( $tour_duration ) { ?>
+                            <div class="tf-feature-block">
+                                <i class="ri-history-line"></i>
+                                <div class="tf-feature-block-details">
+                                    <h5><?php echo __( 'Duration', 'tourfic' ); ?></h5>
+                                    <p><?php echo esc_html( $tour_duration ); ?>
+                                    <?php
+                                    if ( $tour_duration > 1 ) {
+                                        $dur_string         = 's';
+                                        $duration_time_html = $duration_time . $dur_string;
+                                    } else {
+                                        $duration_time_html = $duration_time;
+                                    }
+                                    echo " " . esc_html( $duration_time_html );
+                                    ?>
+                                    <?php if ( $night ) { ?>
+                                        <span>
+                                            <?php echo esc_html( $night_count ); ?>
+                                            <?php
+                                            if ( ! empty( $night_count ) ) {
+                                                if ( $night_count > 1 ) {
+                                                    echo esc_html__( 'Nights', 'tourfic' );
+                                                } else {
+                                                    echo esc_html__( 'Night', 'tourfic' );
+                                                }
+                                            }
+                                            ?>
+                                        </span>
+                                    <?php } ?>
+                                </p>
+                                </div>
+                            </div>
+                            <?php } ?>
+                            <?php if ( $group_size ) { ?>
+                            <div class="tf-feature-block">
+                                <i class="ri-team-line"></i>
+                                <div class="tf-feature-block-details">
+                                    <h5><?php echo __( 'Max people', 'tourfic' ); ?></h5>
+                                    <p><?php echo esc_html( $group_size ) ?></p>
+                                </div>
+                            </div>
+                            <?php } ?>
+                            <?php if ( $info_tour_type ) {
+                            if ( gettype( $info_tour_type ) === 'string' ) {
+                                $info_tour_type = ucfirst( esc_html( $info_tour_type ) );
+                            } else if ( gettype( $info_tour_type ) === 'array' ) {
+                                $tour_types =[];
+                                $types = ! empty( get_the_terms( $post_id, 'tour_type' ) ) ? get_the_terms( $post_id, 'tour_type' ) : '';
+                                if ( ! empty( $types ) ) {
+                                    foreach ( $types as $type ) {
+                                        $tour_types[] = $type->name;
+                                    }
+                                }
+                                $info_tour_type = implode( ', ', $tour_types );
+                            }
+                            ?>
+                            <div class="tf-feature-block">
+                                <i class="ri-menu-search-line"></i>
+                                <div class="tf-feature-block-details">
+                                    <h5><?php echo __( 'Tour Type', 'tourfic' ); ?></h5>
+                                    <p><?php echo esc_html( $info_tour_type ) ?></p>
+                                </div>
+                            </div>
+                            <?php } ?>
+                            <?php if ( $language ) { ?>
+                            <div class="tf-feature-block">
+                                <i class="ri-global-line"></i>
+                                <div class="tf-feature-block-details">
+                                    <h5><?php echo __( 'Language', 'tourfic' ); ?></h5>
+                                    <p><?php echo esc_html( $language ) ?></p>
+                                </div>
+                            </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <!--Information Section End -->
+                    <?php } ?>
+
+                    <!--Highlights Start -->
+                    <div class="tf-overview-wrapper">
+                        <div class="tf-highlights-wrapper">
+                            <div class="tf-highlights-icon">
+                                <img src="<?php echo TF_ASSETS_APP_URL.'/images/tour-highlights-2.png' ?>" alt="Highlights Icon">
+                            </div>
+                            <div class="ft-highlights-details">
+                                <h2 class="tf-section-title">
+                                <?php echo !empty($meta['highlights-section-title']) ? esc_html($meta['highlights-section-title']) : __("Highlights","tourfic"); ?>
+                                </h2>
+                                <p><?php echo $highlights; ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Highlights End -->
 
                     <?php if($inc || $exc){ ?>
                     <!-- Include Exclude srart -->
