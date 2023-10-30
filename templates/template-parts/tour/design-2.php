@@ -455,44 +455,8 @@
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets">
                     <div class="tf-search-date-wrapper tf-single-widgets">
-                        <h2 class="tf-section-title">Available date</h2>
-                        <form action="">
-                            <label for="tf-search-date" class="tf-booking-date-wrap">
-                                <img src="./assets/image/date.svg" alt="">
-                                <input type="text" id="tf-search-date" placeholder="Los angeles">
-                            </label>
-                            <span class="tf-search-date-info">Available date</span>
-                            <div class="tf_acrselection-wrap">
-                                <div class="tf_acrselection-inner">
-                                    <div class="tf_acrselection">
-                                        <div class="acr-label">Adults $400 <span>Age 30-80 years</span></div>
-                                        <div class="acr-select">
-                                            <div class="acr-dec">-</div>
-                                            <input type="number" name="adults" id="adults" min="1" value="1">
-                                            <div class="acr-inc">+</div>
-                                        </div>
-                                    </div>
-                                    <div class="tf_acrselection">
-                                        <div class="acr-label">Children $250 <span>Age 10-20 years</span></div>
-                                        <div class="acr-select">
-                                            <div class="acr-dec">-</div>
-                                            <input type="number" name="children" id="children" min="0" value="0">
-                                            <div class="acr-inc">+</div>
-                                        </div>
-                                    </div>
-                                    <div class="tf_acrselection">
-                                        <div class="acr-label">Infant $120 <span>Age under 10</span></div>
-
-                                        <div class="acr-select">
-                                            <div class="acr-dec">-</div>
-                                            <input type="number" name="infant" id="infant" min="1" value="1">
-                                            <div class="acr-inc">+</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-
+                        <h2 class="tf-section-title"><?php _e("Available Date", "tourfic"); ?></h2>
+                        <?php echo tf_single_tour_booking_form( $post->ID ); ?>
                     </div>
                     <div class="tf-reviews tf-single-widgets">
                     <?php
