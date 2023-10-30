@@ -121,33 +121,43 @@
                     </div>
                     <!--Overview End -->
 
+                    <?php if($inc || $exc){ ?>
                     <!-- Include Exclude srart -->
                     <div class="tf-include-exclude-wrapper">
                         <h2 class="tf-section-title">Include/Exclude</h2>
                         <div class="tf-include-exclude-innter">
+                            <?php if ( $inc ) { ?>
                             <div class="tf-include">
                                 <ul>
-                                    <li><img src="./assets/image/include.svg" alt="">Specialized bilingual guide
+                                    <?php
+                                    foreach ( $inc as $key => $val ) {
+                                    ?>
+                                    <li>
+                                        <i class="<?php echo !empty($inc_icon) ? esc_attr( $inc_icon ) : 'fa-regular fa-circle-check'; ?>"></i>
+                                        <?php echo $val['inc']; ?>
                                     </li>
-                                    <li><img src="./assets/image/include.svg" alt="">Entrance fees (Cable and car
-                                        and Moon Valley)</li>
-                                    <li><img src="./assets/image/include.svg" alt="">Departure Taxes</li>
-                                    <li><img src="./assets/image/include.svg" alt="">Airport Transfers</li>
+                                    <?php } ?>
                                 </ul>
                             </div>
+                            <?php } ?>
+                            <?php if ( $exc ) { ?>
                             <div class="tf-exclude">
                                 <ul>
-                                    <li><img src="./assets/image/exclude.svg" alt="">Specialized bilingual guide
+                                    <?php
+                                    foreach ( $exc as $key => $val ) {
+                                    ?>
+                                    <li>
+                                        <i class="<?php echo !empty($exc_icon) ? esc_attr( $exc_icon ) : 'fa-regular fa-circle-check'; ?>"></i>
+                                        <?php echo $val['exc']; ?>
                                     </li>
-                                    <li><img src="./assets/image/exclude.svg" alt="">Entrance fees (Cable and car
-                                        and Moon Valley)</li>
-                                    <li><img src="./assets/image/exclude.svg" alt="">Departure Taxes</li>
-                                    <li><img src="./assets/image/exclude.svg" alt="">Airport Transfers</li>
+                                    <?php } ?>
                                 </ul>
                             </div>
+                            <?php } ?>
                         </div>
                     </div>
                     <!-- Include Exclude End -->
+                    <?php } ?>
 
 
                     <div class="tf-itinerary-wrapper">
@@ -442,152 +452,85 @@
 
                     </div>
                     <div class="tf-reviews tf-single-widgets">
-                        <h2 class="tf-section-title">Overall reviews</h2>
-                        <div class="tf-review-data-inner">
-                            <div class="tf-review-data">
-                                <div class="tf-review-data-average">
-                                    <p><span>8.6</span>/10</p>
-                                </div>
-                                <div class="tf-review-all-info">
-                                    <p>Excellent <span>Total 110 reviews</span></p>
-                                </div>
+                    <?php
+                    global $current_user;
+                    // Check if user is logged in
+                    $is_user_logged_in = $current_user->exists();
+                    $post_id           = $post->ID;
+                    // Get settings value
+                    $tf_ratings_for = tfopt( 'r-for' ) ?? [ 'li', 'lo' ];
+                    $tf_settings_base = ! empty ( tfopt( 'r-base' ) ) ? tfopt( 'r-base' ) : 5;
+                    if ( $comments ) {
+                        $tf_overall_rate        = [];
+                        tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rating );
+                        tf_get_review_fields( $fields );
+                    ?>
+                    <h2 class="tf-section-title"><?php _e("Overall reviews", "tourfic"); ?></h2>
+                    <div class="tf-review-data-inner">
+                        <div class="tf-review-data">
+                            <div class="tf-review-data-average">
+                                <h2><span>
+                                    <?php _e( sprintf( '%.1f', $total_rating ) ); ?>
+                                </span>/<?php echo $tf_settings_base; ?></h2>
                             </div>
-                            <div class="tf-review-data-features">
-                                <div class="tf-percent-progress">
-                                    <div class="tf-progress-item">
-                                        <div class="tf-review-feature-label">
-                                            <p class="feature-label">Staff</p>
-                                            <p class="feature-rating"> 9.5</p>
-                                        </div>
-                                        <div class="tf-progress-bar">
-                                            <span class="percent-progress" style="width: 95.00%"></span>
-                                        </div>
-                                    </div>
-                                    <div class="tf-progress-item">
-                                        <div class="tf-review-feature-label">
-                                            <p class="feature-label">Facilities</p>
-                                            <p class="feature-rating"> 7.5</p>
-                                        </div>
-                                        <div class="tf-progress-bar">
-                                            <span class="percent-progress" style="width: 75.00%"></span>
-                                        </div>
-                                    </div>
-                                    <div class="tf-progress-item">
-                                        <div class="tf-review-feature-label">
-                                            <p class="feature-label">Cleanliness</p>
-                                            <p class="feature-rating"> 9.5</p>
-                                        </div>
-                                        <div class="tf-progress-bar">
-                                            <span class="percent-progress" style="width: 95.00%"></span>
-                                        </div>
-                                    </div>
-                                    <div class="tf-progress-item">
-                                        <div class="tf-review-feature-label">
-                                            <p class="feature-label">Comfort</p>
-                                            <p class="feature-rating"> 6.5</p>
-                                        </div>
-                                        <div class="tf-progress-bar">
-                                            <span class="percent-progress" style="width: 65.00%"></span>
-                                        </div>
-                                    </div>
-                                    <div class="tf-progress-item">
-                                        <div class="tf-review-feature-label">
-                                            <p class="feature-label">Value for money</p>
-                                            <p class="feature-rating"> 8.5</p>
-                                        </div>
-                                        <div class="tf-progress-bar">
-                                            <span class="percent-progress" style="width: 85.00%"></span>
-                                        </div>
-                                    </div>
-
-                                </div>
+                            <div class="tf-review-all-info">
+                                <p><?php _e("Excellent", "tourfic"); ?> <span><?php _e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></span></p>
                             </div>
                         </div>
-                        <a class="tf-all-reviews" href="#">See all reviews</a>
-
-                        <button class="tf-review-open">Leave your review</button>
-
-                        <div class="tf-review-form-wrapper" style="display: none;">
-                            <h3>Leave your review</h3>
-                            <p>Your email address will not be published. Required fields are marked.</p>
-                            <form action="#">
-                                <div class="tf-rating-item">
-                                    <span class="tf-rating-title">Staff</span>
-                                    <span class="tf-rating-stars">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                    </span>
+                        <div class="tf-review-data-features">
+                            <div class="tf-percent-progress">
+                            <?php 
+                            if ( $tf_overall_rate ) {
+                            foreach ( $tf_overall_rate as $key => $value ) {
+                            if ( empty( $value ) || ! in_array( $key, $fields ) ) {
+                                continue;
+                            }
+                            $value = tf_average_ratings( $value );
+                            ?>
+                                <div class="tf-progress-item">                                    
+                                    <div class="tf-review-feature-label">
+                                        <p class="feature-label"><?php esc_html_e( $key, "tourfic" ); ?></p>
+                                        <p class="feature-rating"> <?php echo $value; ?></p>
+                                    </div>
+                                    <div class="tf-progress-bar">
+                                        <span class="percent-progress" style="width: <?php echo tf_average_rating_percent( $value, tfopt( 'r-base' ) ); ?>%"></span>
+                                    </div>
                                 </div>
-                                <div class="tf-rating-item">
-                                    <span class="tf-rating-title">Facilities</span>
-                                    <span class="tf-rating-stars">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                    </span>
-                                </div>
-                                <div class="tf-rating-item">
-                                    <span class="tf-rating-title">Cleanliness</span>
-                                    <span class="tf-rating-stars">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                    </span>
-                                </div>
-                                <div class="tf-rating-item">
-                                    <span class="tf-rating-title">Comfort</span>
-                                    <span class="tf-rating-stars">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                    </span>
-                                </div>
-                                <div class="tf-rating-item">
-                                    <span class="tf-rating-title">Service</span>
-                                    <span class="tf-rating-stars">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                    </span>
-                                </div>
-                                <div class="tf-rating-item">
-                                    <span class="tf-rating-title">Value for money</span>
-                                    <span class="tf-rating-stars">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                    </span>
-                                </div>
-                                <div class="tf-rating-field">
-                                    <span>Description</span>
-                                    <textarea name="" id="" cols="30" rows="10"></textarea>
-                                </div>
-                                <div class="tf-rating-field">
-                                    <span>Email</span>
-                                    <input type="email">
-                                </div>
-                                <div class="tf-rating-field">
-                                    <span>Name</span>
-                                    <input type="text">
-                                </div>
-                                <div class="tf-rating-field">
-                                    <button type="submit">Submit</button>
-                                </div>
-                            </form>
+                                <?php } } ?>
+                                    
+                            </div>
                         </div>
+                    </div>
+                    <a class="tf-all-reviews" href="#"><?php _e("See all reviews", "tourfic"); ?></a>
+                    <?php } ?>
+                    <button class="tf-review-open button">
+                        <?php _e("Leave your review", "tourfic"); ?>
+                    </button>
+                    <?php
+                    // Review moderation notice
+                    echo tf_pending_review_notice( $post_id );
+                    ?>
+                    <?php
+                    if ( ! empty( $tf_ratings_for ) ) {
+                        if ( $is_user_logged_in ) {
+                        if ( in_array( 'li', $tf_ratings_for ) && ! tf_user_has_comments() ) {
+                        ?>
+                    <div class="tf-review-form-wrapper" action="">
+                        <h3><?php _e("Leave your review", "tourfic"); ?></h3>
+                        <p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
+                        <?php tf_review_form(); ?>
+                    </div>
+                    <?php
+                        }
+                    } else {
+                    if ( in_array( 'lo', $tf_ratings_for ) ) {
+                    ?>
+                    <div class="tf-review-form-wrapper" action="">
+                        <h3><?php _e("Leave your review", "tourfic"); ?></h3>
+                        <p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
+                        <?php tf_review_form(); ?>
+                    </div>
+                    <?php } } } ?>
                         <script>
                             $(".tf-template-3 .tf-review-open").click(function () {
                                 $(".tf-template-3 .tf-review-form-wrapper").slideToggle();
@@ -732,70 +675,45 @@
             <!--Content facilities end -->
 
 
+            <?php
+            if ( $comments ) { ?>
             <!-- Hotel reviews Srart -->
-            <div class="tf-reviews-wrapper tf-section" id="tf-hotel-reviews">
-                <h2 class="tf-section-title">Guest reviews</h2>
-                <p>Total 6 reviews</p>
+            <div class="tf-reviews-wrapper tf-section" id="tf-hotel-reviews">         
+                <h2 class="tf-section-title"><?php _e("Guest reviews", "tourfic"); ?></h2> 
+                <p><?php _e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></p>
                 <div class="tf-reviews-slider">
-                    <div class="tf-reviews-item">
-                        <div class="tf-reviews-avater">
-                            <img src="./assets/image/review-avater.png" alt="">
-                        </div>
-                        <div class="tf-reviews-text">
-                            <h3>8.5 Excellent</h3>
-                            <span class="tf-reviews-meta">Jon doe, July 2023</span>
-                            <p>When I reached hotel I go to reception counter I told to one of receptionist lady
-                                that I have a reservation please complete my formalities. She told me wait just.</p>
-                        </div>
-                    </div>
-                    <div class="tf-reviews-item">
-                        <div class="tf-reviews-avater">
-                            <img src="./assets/image/review-avater.png" alt="">
-                        </div>
-                        <div class="tf-reviews-text">
-                            <h3>8.5 Excellent</h3>
-                            <span class="tf-reviews-meta">Jon doe, July 2023</span>
-                            <p>When I reached hotel I go to reception counter I told to one of receptionist lady
-                                that I have a reservation please complete my formalities. She told me wait just.</p>
-                        </div>
-                    </div>
-                    <div class="tf-reviews-item">
-                        <div class="tf-reviews-avater">
-                            <img src="./assets/image/review-avater.png" alt="">
-                        </div>
-                        <div class="tf-reviews-text">
-                            <h3>8.5 Excellent</h3>
-                            <span class="tf-reviews-meta">Jon doe, July 2023</span>
-                            <p>When I reached hotel I go to reception counter I told to one of receptionist lady
-                                that I have a reservation please complete my formalities. She told me wait just.</p>
-                        </div>
-                    </div>
-                    <div class="tf-reviews-item">
-                        <div class="tf-reviews-avater">
-                            <img src="./assets/image/review-avater.png" alt="">
-                        </div>
-                        <div class="tf-reviews-text">
-                            <h3>8.5 Excellent</h3>
-                            <span class="tf-reviews-meta">Jon doe, July 2023</span>
-                            <p>When I reached hotel I go to reception counter I told to one of receptionist lady
-                                that I have a reservation please complete my formalities. She told me wait just.</p>
-                        </div>
-                    </div>
-                    <div class="tf-reviews-item">
-                        <div class="tf-reviews-avater">
-                            <img src="./assets/image/review-avater.png" alt="">
-                        </div>
-                        <div class="tf-reviews-text">
-                            <h3>8.5 Excellent</h3>
-                            <span class="tf-reviews-meta">Jon doe, July 2023</span>
-                            <p>When I reached hotel I go to reception counter I told to one of receptionist lady
-                                that I have a reservation please complete my formalities. She told me wait just.</p>
-                        </div>
-                    </div>
-                </div>
+                    <?php
+                    foreach ( $comments as $comment ) {
+                    // Get rating details
+                    $tf_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
+                    if ( $tf_overall_rate == false ) {
+                        $tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+                        $tf_overall_rate = tf_average_ratings( $tf_comment_meta );
+                    }
+                    $base_rate = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+                    $c_rating  = tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
 
+                    // Comment details
+                    $c_avatar      = get_avatar( $comment, '56' );
+                    $c_author_name = $comment->comment_author;
+                    $c_date        = $comment->comment_date;
+                    $c_content     = $comment->comment_content;
+                    ?>
+                    <div class="tf-reviews-item">
+                        <div class="tf-reviews-avater">
+                            <?php echo $c_avatar; ?>
+                        </div>
+                        <div class="tf-reviews-text">
+                            <h3><?php echo $c_rating; ?></h3>
+                            <span class="tf-reviews-meta"><?php echo $c_author_name; ?>, <?php echo $c_date; ?></span>
+                            <p><?php echo $c_content; ?></p>
+                        </div>
+                    </div>
+                    <?php } ?>
+                </div>
             </div>
             <!--Content reviews end -->
+            <?php } ?>
 
 
             <?php if ( $faqs ): ?>
@@ -846,64 +764,19 @@
             <?php endif; ?>
             
 
-
+            <?php
+            if($terms_and_conditions){ ?>
             <!-- Hotel Policies Starts -->
             <div class="tf-policies-wrapper tf-section" id="tf-hotel-policies">
-                <h2 class="tf-section-title">Questions? We have answers.</h2>
+                <h2 class="tf-section-title">
+                <?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : __("Tour Terms & Conditions","tourfic"); ?>
+                </h2>
                 <div class="tf-policies">
-                    <div class="tf-policy-item">
-                        <div class="tf-policy-title">Check in</div>
-                        <div class="tf-policy-desc">
-                            <p>Check-in from 2:00 PM - anytime <br>Guest are required to show a valid ID card
-                                <br>Early check-in is available for a fee</p>
-                        </div>
-                    </div>
-                    <div class="tf-policy-item">
-                        <div class="tf-policy-title">Check-out</div>
-                        <div class="tf-policy-desc">
-                            <p>Check-out before 12:00 PM</p>
-                            <p>Late check-out can be arranged for an extra charge</p>
-                        </div>
-                    </div>
-                    <div class="tf-policy-item">
-                        <div class="tf-policy-title">Children & extra beds</div>
-                        <div class="tf-policy-desc">
-                            <p>Rollaway beds are available for $200/night</p>
-                        </div>
-                    </div>
-                    <div class="tf-policy-item">
-                        <div class="tf-policy-title">Pool, spa, & gym (if applicable)</div>
-                        <div class="tf-policy-desc">
-                            <p>Reservations are required for spa treatments and can be made by contacting the
-                                property before arrival at the number on the booking confirmation</p>
-                        </div>
-                    </div>
-                    <div class="tf-policy-item">
-                        <div class="tf-policy-title">Pets</div>
-                        <div class="tf-policy-desc">
-                            <p>No pets or service animals allowed</p>
-                        </div>
-                    </div>
-                    <div class="tf-policy-item">
-                        <div class="tf-policy-title">Age restriction</div>
-                        <div class="tf-policy-desc">
-                            <p>There's no age requirement for check-in</p>
-                        </div>
-                    </div>
-                    <div class="tf-policy-item">
-                        <div class="tf-policy-title">Payment types</div>
-                        <div class="tf-policy-desc">
-                            <img class="tf-payment-card" src="./assets/image/payment1.svg" alt="">
-                            <img class="tf-payment-card" src="./assets/image/payment2.svg" alt="">
-                            <img class="tf-payment-card" src="./assets/image/payment3.svg" alt="">
-                            <img class="tf-payment-card" src="./assets/image/payment4.svg" alt="">
-                            <img class="tf-payment-card" src="./assets/image/payment5.svg" alt="">
-                        </div>
-                    </div>
+                    <?php echo wpautop( $terms_and_conditions ); ?>
                 </div>
             </div>
             <!-- Hotel Policies end -->
-
+            <?php } ?>
 
 
             <!-- Hotel PopUp Starts -->
