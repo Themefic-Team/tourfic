@@ -274,7 +274,7 @@
                     <?php if($inc || $exc){ ?>
                     <!-- Include Exclude srart -->
                     <div class="tf-include-exclude-wrapper">
-                        <h2 class="tf-section-title">Include/Exclude</h2>
+                        <h2 class="tf-section-title"><? _e("Include/Exclude", "tourfic"); ?></h2>
                         <div class="tf-include-exclude-innter">
                             <?php if ( $inc ) { ?>
                             <div class="tf-include">
@@ -308,185 +308,78 @@
                     </div>
                     <!-- Include Exclude End -->
                     <?php } ?>
-
-
+                    <?php
+                    if ( function_exists('is_tf_pro') && is_tf_pro() ) {
+                        do_action( 'after_itinerary_builder', $itineraries, $itinerary_map );
+                    } else {
+                    ?>
+                    <?php if ( $itineraries ) { ?>
                     <div class="tf-itinerary-wrapper">
                         <div class="section-title">
-                            <h2 class="tf-title tf-section-title">Travel Itinerary</h2>
-                            <button>Download plan <img src="./assets/image/download.svg" alt=""></button>
+                            <h2 class="tf-title tf-section-title"><?php _e("Travel Itinerary", "tourfic"); ?></h2>
                         </div>
                         <div class="tf-itinerary-wrapper">
-                            <div class="tf-single-itinerary">
-                                <div class="tf-itinerary-title">
-                                    <h4>
-                                        <span class="tf-itinerary-time">Day 01</span>
-                                        <span class="tf-itinerary-title-text">Meet & Greet</span>
-                                    </h4>
-                                    <i class="fa-solid fa-chevron-down"></i>
-                                </div>
-                                <div class="tf-itinerary-content-wrap" style="display: none;">
-                                    <div class="tf-itinerary-content">
-                                        <div class="tf-itinerary-content-details">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi
-                                                eius
-                                                ducimus delectus ex, voluptatum illo culpa accusantium doloribus
-                                                quam
-                                                consequatur ut voluptatibus maxime quidem. Beatae, sequi?</p>
-                                            <ul>
-                                                <li>
-                                                    <i class="fa-solid fa-water-ladder"></i>
-                                                    <span>Swimming pool </span>
-                                                </li>
-                                                <li>
-                                                    <i class="fa-solid fa-person-praying"></i>
-                                                    <span>Prayer zone</span>
-                                                </li>
-                                                <li>
-                                                    <i class="fa-solid fa-water-ladder"></i>
-                                                    <span>Swimming pool</span>
-                                                </li>
-                                                <li>
-                                                    <i class="fa-solid fa-person-praying"></i>
-                                                    <span>Prayer zone</span>
-                                                </li>
-                                                <li>
-                                                    <i class="fa-solid fa-water-ladder"></i>
-                                                    <span>Swimming pool</span>
-                                                </li>
-                                                <li>
-                                                    <i class="fa-solid fa-person-praying"></i>
-                                                    <span>Prayer zone</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="tf-itinerary-content-images">
-                                            <img src="./assets/image/gallery-image-1.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tf-single-itinerary">
-                                <div class="tf-itinerary-title">
-                                    <h4>
-                                        <span class="tf-itinerary-time">Day 01</span>
-                                        <span class="tf-itinerary-title-text">Meet & Greet</span>
-                                    </h4>
-                                    <i class="fa-solid fa-chevron-down"></i>
-                                </div>
-                                <div class="tf-itinerary-content-wrap" style="display: none;">
-                                    <div class="tf-itinerary-content">
-                                        <div class="tf-itinerary-content-details">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi
-                                                eius
-                                                ducimus delectus ex, voluptatum illo culpa accusantium doloribus
-                                                quam
-                                                consequatur ut voluptatibus maxime quidem. Beatae, sequi?</p>
-                                            <ul>
-                                                <li>
-                                                    <i class="fa-solid fa-water-ladder"></i>
-                                                    <span>Swimming pool </span>
-                                                </li>
-                                                <li>
-                                                    <i class="fa-solid fa-person-praying"></i>
-                                                    <span>Prayer zone</span>
-                                                </li>
-                                                <li>
-                                                    <i class="fa-solid fa-water-ladder"></i>
-                                                    <span>Swimming pool</span>
-                                                </li>
-                                                <li>
-                                                    <i class="fa-solid fa-person-praying"></i>
-                                                    <span>Prayer zone</span>
-                                                </li>
-                                                <li>
-                                                    <i class="fa-solid fa-water-ladder"></i>
-                                                    <span>Swimming pool</span>
-                                                </li>
-                                                <li>
-                                                    <i class="fa-solid fa-person-praying"></i>
-                                                    <span>Prayer zone</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="tf-itinerary-content-images">
-                                            <img src="./assets/image/gallery-image-1.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tf-single-itinerary">
-                                <div class="tf-itinerary-title">
-                                    <h4>
-                                        <span class="tf-itinerary-time">Day 01</span>
-                                        <span class="tf-itinerary-title-text">Meet & Greet</span>
-                                    </h4>
-                                    <i class="fa-solid fa-chevron-down"></i>
-                                </div>
-                                <div class="tf-itinerary-content-wrap" style="display: none;">
-                                    <div class="tf-itinerary-content">
-                                        <div class="tf-itinerary-content-details">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi
-                                                eius
-                                                ducimus delectus ex, voluptatum illo culpa accusantium doloribus
-                                                quam
-                                                consequatur ut voluptatibus maxime quidem. Beatae, sequi?</p>
-                                            <ul>
-                                                <li>
-                                                    <i class="fa-solid fa-water-ladder"></i>
-                                                    <span>Swimming pool </span>
-                                                </li>
-                                                <li>
-                                                    <i class="fa-solid fa-person-praying"></i>
-                                                    <span>Prayer zone</span>
-                                                </li>
-                                                <li>
-                                                    <i class="fa-solid fa-water-ladder"></i>
-                                                    <span>Swimming pool</span>
-                                                </li>
-                                                <li>
-                                                    <i class="fa-solid fa-person-praying"></i>
-                                                    <span>Prayer zone</span>
-                                                </li>
-                                                <li>
-                                                    <i class="fa-solid fa-water-ladder"></i>
-                                                    <span>Swimming pool</span>
-                                                </li>
-                                                <li>
-                                                    <i class="fa-solid fa-person-praying"></i>
-                                                    <span>Prayer zone</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="tf-itinerary-content-images">
-                                            <img src="./assets/image/gallery-image-1.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <script>
-                                (function ($) {
-                                    "use strict";
-                                    $(document).ready(function () {
-                                        $('.tf-itinerary-title').click(function () {
-                                            $(this).closest('.tf-single-itinerary').addClass('active')
-                                            $(this).siblings().slideDown()
-                                            $(this).closest('.tf-single-itinerary').siblings().removeClass('active').find('.tf-itinerary-content-wrap')
-                                                .slideUp()
-                                        });
-                                    });
-                                }(jQuery));
-                            </script>
 
+                        <?php
+                        foreach ( $itineraries as $itinerary ) {
+                        ?>
+                            <div class="tf-single-itinerary">
+                                <div class="tf-itinerary-title">
+                                    <h4>
+                                        <span class="tf-itinerary-time">
+                                            <?php echo esc_html( $itinerary['time'] ) ?>
+                                        </span>
+                                        <span class="tf-itinerary-title-text">
+                                            <?php echo esc_html( $itinerary['title'] ); ?>
+                                        </span>
+                                    </h4>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </div>
+                                <div class="tf-itinerary-content-wrap" style="display: none;">
+                                    <div class="tf-itinerary-content">
+                                        <div class="tf-itinerary-content-details">
+                                        <?php _e( $itinerary['desc'] ); ?>
+                                        </div>
+                                        <?php if ( $itinerary['image'] ) { ?>
+                                        <div class="tf-itinerary-content-images">
+                                            <img src="<?php echo esc_url( $itinerary['image'] ); ?>" alt="<?php _e("Itinerary Image","tourfic"); ?>" />
+                                        </div>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+                            
                         </div>
+                        <?php if ( $location && $itinerary_map != 1 ): ?>
                         <!-- Map start -->
                         <div class="tf-itinerary-map">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.2528001631!2d-74.14448723354508!3d40.69763123329699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1697563394680!5m2!1sen!2sbd"
-                                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <?php if ( $tf_openstreet_map=="default" && !empty($location_latitude) && !empty($location_longitude) && empty($tf_google_map_key) ) {  ?>
+                            <div id="tour-location" style="height: 450px;"></div>
+                            <script>
+                            const map = L.map('tour-location').setView([<?php echo $location_latitude; ?>, <?php echo $location_longitude; ?>], <?php echo $location_zoom; ?>);
+
+                            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                maxZoom: 20,
+                                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                            }).addTo(map);
+
+                            const marker = L.marker([<?php echo $location_latitude; ?>, <?php echo $location_longitude; ?>], {alt: '<?php echo $location; ?>'}).addTo(map)
+                                .bindPopup('<?php echo $location; ?>');
+                            </script>
+                        <?php } ?>
+                        <?php if ( $tf_openstreet_map=="default" && (empty($location_latitude) || empty($location_longitude)) && empty($tf_google_map_key) ) {  ?>
+                            <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $location ) ); ?>&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        <?php } ?>
+                        <?php if( $tf_openstreet_map!="default" && !empty($tf_google_map_key) ){ ?>
+                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $location ) ); ?>&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        <?php } ?>
                         </div>
                         <!-- Map End -->
+                        <?php endif; ?>
                     </div>
+                    <?php } ?>
+                    <?php } ?>
 
 
                     <div class="tf-tour-wrapper">
@@ -691,181 +584,6 @@
             </div>
             <!-- Hotel details End -->
 
-            <!-- Hotel facilities Srart -->
-            <div class="tf-facilities-wrapper" id="tf-hotel-facilities">
-                <h2 class="tf-section-title">Property facilities</h2>
-                <div class="tf-facilities">
-                    <div class="tf-facility-item">
-                        <h4><i class="fa-solid fa-headset"></i> Services</h4>
-                        <ul>
-                            <li>Car rental</li>
-                            <li>Elevator</li>
-                            <li>24 hours security</li>
-                            <li>Ironing service(Chargable)</li>
-                        </ul>
-                    </div>
-                    <div class="tf-facility-item">
-                        <h4><i class="fa-solid fa-chess"></i>Sports and Leisure</h4>
-                        <ul>
-                            <li>Table tennis</li>
-                            <li>Coffee shop</li>
-                            <li>BBQ facilities</li>
-                            <li>Garden & terrace</li>
-                            <li>Gym</li>
-                        </ul>
-                    </div>
-                    <div class="tf-facility-item">
-                        <h4><i class="fa-brands fa-gripfire"></i>Safety & security</h4>
-                        <ul>
-                            <li>Fire extinguishers</li>
-                            <li>CCTV in common areas</li>
-                            <li>Smoke alarms</li>
-                            <li>Key access</li>
-                            <li>Doctor/nurse on call</li>
-                        </ul>
-                    </div>
-                    <div class="tf-facility-item">
-                        <h4><i class="fa-solid fa-network-wired"></i>Internet access</h4>
-                        <ul>
-                            <li>Car rental</li>
-                            <li>Elevator</li>
-                            <li>24 hours security</li>
-                            <li>Ironing service(Chargable)</li>
-                        </ul>
-                    </div>
-
-                    <div class="tf-facility-item">
-                        <h4><i class="fa-solid fa-chess"></i>Sports and Leisure</h4>
-                        <ul>
-                            <li>Table tennis</li>
-                            <li>Coffee shop</li>
-                            <li>BBQ facilities</li>
-                            <li>Garden & terrace</li>
-                            <li>Gym</li>
-                        </ul>
-                    </div>
-                    <div class="tf-facility-item">
-                        <h4><i class="fa-brands fa-gripfire"></i>Safety & security</h4>
-                        <ul>
-                            <li>Fire extinguishers</li>
-                            <li>CCTV in common areas</li>
-                            <li>Smoke alarms</li>
-                            <li>Key access</li>
-                            <li>Doctor/nurse on call</li>
-                        </ul>
-                    </div>
-                    <div class="tf-facility-item">
-                        <h4><i class="fa-solid fa-network-wired"></i>Internet access</h4>
-                        <ul>
-                            <li>Car rental</li>
-                            <li>Elevator</li>
-                            <li>24 hours security</li>
-                            <li>Ironing service(Chargable)</li>
-                        </ul>
-                    </div>
-                </div>
-                <h2 class="tf-section-title">Room facilities</h2>
-                <div class="tf-facilities">
-                    <div class="tf-facility-item">
-                        <h4><i class="fa-solid fa-person-snowboarding"></i>Services</h4>
-                        <ul>
-                            <li>Car rental</li>
-                            <li>Elevator</li>
-                            <li>24 hours security</li>
-                            <li>Ironing service(Chargable)</li>
-                        </ul>
-                    </div>
-                    <div class="tf-facility-item">
-                        <h4><i class="fa-solid fa-person-snowboarding"></i>Services</h4>
-                        <ul>
-                            <li>Car rental</li>
-                            <li>Elevator</li>
-                            <li>24 hours security</li>
-                            <li>Ironing service(Chargable)</li>
-                        </ul>
-                    </div>
-                    <div class="tf-facility-item">
-                        <h4><i class="fa-solid fa-person-snowboarding"></i>Services</h4>
-                        <ul>
-                            <li>Car rental</li>
-                            <li>Elevator</li>
-                            <li>24 hours security</li>
-                            <li>Ironing service(Chargable)</li>
-                        </ul>
-                    </div>
-                    <div class="tf-facility-item">
-                        <h4><i class="fa-solid fa-person-snowboarding"></i>Services</h4>
-                        <ul>
-                            <li>Car rental</li>
-                            <li>Elevator</li>
-                            <li>24 hours security</li>
-                            <li>Ironing service(Chargable)</li>
-                        </ul>
-                    </div>
-                    <div class="tf-facility-item">
-                        <h4><i class="fa-solid fa-person-snowboarding"></i>Services</h4>
-                        <ul>
-                            <li>Car rental</li>
-                            <li>Elevator</li>
-                            <li>24 hours security</li>
-                            <li>Ironing service(Chargable)</li>
-                        </ul>
-                    </div>
-                    <div class="tf-facility-item">
-                        <h4><i class="fa-solid fa-person-snowboarding"></i>Services</h4>
-                        <ul>
-                            <li>Car rental</li>
-                            <li>Elevator</li>
-                            <li>24 hours security</li>
-                            <li>Ironing service(Chargable)</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!--Content facilities end -->
-
-
-            <?php
-            if ( $comments ) { ?>
-            <!-- Hotel reviews Srart -->
-            <div class="tf-reviews-wrapper tf-section" id="tf-hotel-reviews">         
-                <h2 class="tf-section-title"><?php _e("Guest reviews", "tourfic"); ?></h2> 
-                <p><?php _e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></p>
-                <div class="tf-reviews-slider">
-                    <?php
-                    foreach ( $comments as $comment ) {
-                    // Get rating details
-                    $tf_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
-                    if ( $tf_overall_rate == false ) {
-                        $tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
-                        $tf_overall_rate = tf_average_ratings( $tf_comment_meta );
-                    }
-                    $base_rate = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
-                    $c_rating  = tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
-
-                    // Comment details
-                    $c_avatar      = get_avatar( $comment, '56' );
-                    $c_author_name = $comment->comment_author;
-                    $c_date        = $comment->comment_date;
-                    $c_content     = $comment->comment_content;
-                    ?>
-                    <div class="tf-reviews-item">
-                        <div class="tf-reviews-avater">
-                            <?php echo $c_avatar; ?>
-                        </div>
-                        <div class="tf-reviews-text">
-                            <h3><?php echo $c_rating; ?></h3>
-                            <span class="tf-reviews-meta"><?php echo $c_author_name; ?>, <?php echo $c_date; ?></span>
-                            <p><?php echo $c_content; ?></p>
-                        </div>
-                    </div>
-                    <?php } ?>
-                </div>
-            </div>
-            <!--Content reviews end -->
-            <?php } ?>
-
-
             <?php if ( $faqs ): ?>
             <!-- Hotel Questions Srart -->
             <div class="tf-questions-wrapper tf-section" id="tf-hotel-faq">
@@ -912,6 +630,47 @@
 
             <!-- Hotel Questions end -->
             <?php endif; ?>
+
+
+            <?php
+            if ( $comments ) { ?>
+            <!-- Hotel reviews Srart -->
+            <div class="tf-reviews-wrapper tf-section" id="tf-hotel-reviews">         
+                <h2 class="tf-section-title"><?php _e("Guest reviews", "tourfic"); ?></h2> 
+                <p><?php _e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></p>
+                <div class="tf-reviews-slider">
+                    <?php
+                    foreach ( $comments as $comment ) {
+                    // Get rating details
+                    $tf_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
+                    if ( $tf_overall_rate == false ) {
+                        $tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+                        $tf_overall_rate = tf_average_ratings( $tf_comment_meta );
+                    }
+                    $base_rate = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+                    $c_rating  = tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
+
+                    // Comment details
+                    $c_avatar      = get_avatar( $comment, '56' );
+                    $c_author_name = $comment->comment_author;
+                    $c_date        = $comment->comment_date;
+                    $c_content     = $comment->comment_content;
+                    ?>
+                    <div class="tf-reviews-item">
+                        <div class="tf-reviews-avater">
+                            <?php echo $c_avatar; ?>
+                        </div>
+                        <div class="tf-reviews-text">
+                            <h3><?php echo $c_rating; ?></h3>
+                            <span class="tf-reviews-meta"><?php echo $c_author_name; ?>, <?php echo $c_date; ?></span>
+                            <p><?php echo $c_content; ?></p>
+                        </div>
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
+            <!--Content reviews end -->
+            <?php } ?>
             
 
             <?php
@@ -928,7 +687,6 @@
             <!-- Hotel Policies end -->
             <?php } ?>
 
-
             <!-- Tour Gallery PopUp Starts -->
             <div class="tf-popup-wrapper tf-hotel-popup">
                 <div class="tf-popup-inner">
@@ -938,7 +696,7 @@
                             foreach ( $gallery_ids as $key => $gallery_item_id ) {
                             $image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
                         ?>
-                        <img src="<?php echo esc_url($image_url); ?>" alt="" class="tf-popup-image">
+                            <img src="<?php echo esc_url($image_url); ?>" alt="" class="tf-popup-image">
                         <?php } } ?>
                     </div>                
                     <div class="tf-popup-close">
@@ -947,27 +705,6 @@
                 </div>
             </div>
             <!-- Tour Gallery PopUp end -->
-
-
-            <!-- Room PopUp Starts -->
-            <div class="tf-popup-wrapper tf-room-popup">
-                <div class="tf-popup-inner">
-                    <div class="tf-popup-body">
-                        <?php 
-                            if ( ! empty( $gallery_ids ) ) {
-                            foreach ( $gallery_ids as $key => $gallery_item_id ) {
-                            $image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
-                        ?>
-                        <img src="<?php echo esc_url($image_url); ?>" alt="" class="tf-popup-image">
-                        <?php } } ?>
-                    </div>                
-                    <div class="tf-popup-close">
-                        <i class="fa-solid fa-xmark"></i>
-                    </div>
-                </div>
-            </div>
-            <!-- Room PopUp end -->
-
 
         </div>
     </div>
