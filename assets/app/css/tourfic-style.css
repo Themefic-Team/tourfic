@@ -10837,8 +10837,8 @@ html {
 }
 .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-gallery .tf-room-gallery:nth-child(n+2) {
   position: absolute;
-  height: 70px;
-  width: 70px;
+  height: 70px !important;
+  width: 70px !important;
   left: unset !important;
   top: unset !important;
   bottom: 16px;
@@ -12411,6 +12411,9 @@ html {
   .tf-template-3 .tf-content-wrapper .tf-details .tf-archive-search-form {
     width: calc(100% - 360px);
   }
+  .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left {
+    width: 65%;
+  }
 }
 @media only screen and (max-width: 1300px) {
   .tf-template-3 {
@@ -12657,6 +12660,39 @@ html {
   }
   .tf-template-3 .tf-details-right .tf-reviews .tf-review-data-inner .tf-review-data-features .tf-percent-progress .tf-progress-item .tf-progress-bar .percent-progress {
     height: 6px;
+  }
+  .tf-template-3 .tf-content-wrapper .tf-details .tf-archive-search-form {
+    width: 100%;
+  }
+  .tf-template-3 .tf-content-wrapper .tf-details .tf-details-right.tf-archive-right {
+    margin-top: 0;
+  }
+  .tf-template-3 .tf-booking-form-wrapper .tf_archive_search_result {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  .tf-template-3 .tf-content-wrapper .tf-details .tf-archive-search-form .tf-booking-form-submit {
+    width: 25%;
+  }
+  .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-gallery {
+    width: 100%;
+    max-width: unset;
+    height: 150px;
+    display: unset;
+    overflow: hidden;
+  }
+  .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-gallery .tf-available-labels {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
   }
 }
 @media only screen and (max-width: 992px) {
