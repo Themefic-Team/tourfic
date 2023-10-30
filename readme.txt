@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
 Requires at least: 5.4
 Tested up to: 6.3
-Stable tag: 2.10.2
+Stable tag: 2.10.3
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -49,6 +49,7 @@ This All-in-One Travel Booking WordPress plugin consists of almost all the basic
 * Show Hotel Location on Map with Popup (Pro)
 * Add Video on Hotel Gallery (Pro)
 * Airport Pickup Service (Pro)
+* iCal integration with booking.com(Pro)
 
 = 🎉  WordPress Travel Booking & Management System =
 * Add Unlimited Tours
@@ -442,6 +443,11 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.10.3 -  30 October 2023 =
+
+- Fixed: Fixed Booking Date issue
+- Compatibility: Checked with Elementor 3.17.1
 
 = 2.10.2 -  23 October 2023 =
 
