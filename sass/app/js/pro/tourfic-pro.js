@@ -48,41 +48,6 @@
         /**
          * Airport Service Price
          */
-        $(document).on("change", "#airport-service", function (e) {
-
-            $("#tour_room_details_loader").show();
-            var service_type = $(this).val();
-            var roomid = $('#hotel_roomid').val();
-            var hotelid = $("#hotel-post-id").val();
-            var hoteladult = $("#adults").val();
-            var hotelchildren = $("#children").val();
-            var deposit = $("#hotel_room_depo").val();
-            var room = $("#hotel_room_number").val();
-            var check_in_date = $("input[name=check_in_date]").val();
-            var check_out_date = $("input[name=check_out_date]").val();
-            var data = {
-                action: 'tf_hotel_airport_service_price',
-                service_type: service_type,
-                roomid: roomid,
-                id: hotelid,
-                hoteladult: hoteladult,
-                hotelchildren: hotelchildren,
-                room: room,
-                check_in_date: check_in_date,
-                check_out_date: check_out_date,
-                deposit: deposit
-            };
-            $.ajax({
-                type: 'post',
-                url: tf_params.ajax_url,
-                data: data,
-                success: function (response) {
-
-                    $("#tour_room_details_loader").hide();
-                    $(".tf-airport-pickup-response").html(response);
-                },
-            });
-        });
 
         /*$(document).on("click", ".tf_air_service", function (e) {
             e.preventDefault();

@@ -158,7 +158,6 @@
                 airport_service: airport_service
             };
 
-
             $.ajax({
                 type: 'post',
                 url: tf_params.ajax_url,
@@ -398,19 +397,18 @@
             var tf_room_booking_nonce = $("input[name=tf_room_booking_nonce]").val();
             var post_id = $('input[name=post_id]').val();
             var roomnumber = $this.closest('.reserve').find('select[name=hotel_room_selected]').val();
-            var room_id = $this.closest('.room-submit-wrap').find('input[name=room_id]').val();
-            var unique_id = $this.closest('.room-submit-wrap').find('input[name=unique_id]').val();
-            var hotel_deposit = $this.closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked');
+            var room_id = $this.closest('.tf-room').find('input[name=room_id]').val();
+            var unique_id = $this.closest('.tf-room').find('input[name=unique_id]').val();
+            var hotel_deposit = $this.closest('.tf-room').find('input[name=make_deposit]').is(':checked');
             if (roomnumber == 0) {
-                $this.closest('.room-submit-wrap').find('.roomselectissue').html('<span style="color:red">' + tf_pro_params.select_room + '</span>');
+                $this.closest('.tf-room').find('.roomselectissue').html('<span style="color:red">' + tf_pro_params.select_room + '</span>');
             } else {
-                $this.closest('.room-submit-wrap').find('.roomselectissue').html('');
+                $this.closest('.tf-room').find('.roomselectissue').html('');
                 $("#hotel_room_number").val(roomnumber);
                 $("#hotel_roomid").val(room_id);
                 $("#hotel_room_uniqueid").val(unique_id);
                 $("#hotel_room_depo").val(hotel_deposit);
             }
-
 
             /*if ($(this).closest('.room-submit-wrap').find('input[name=room_id]').val()) {
                 var room_id = $(this).closest('.room-submit-wrap').find('input[name=room_id]').val();
@@ -428,14 +426,14 @@
             var children_ages = $('input[name=children_ages]').val();
             var check_in_date = $('input[name=check_in_date]').val();
             var check_out_date = $('input[name=check_out_date]').val();
-            if ($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()) {
+            if ($this.closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()) {
                 var room = $this.closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
-                var deposit = $this.closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked');
+                var deposit = $this.closest('.tf-room').find('input[name=make_deposit]').is(':checked');
             } else {
                 var room = $("#hotel_room_number").val();
                 var deposit = $("#hotel_room_depo").val();
             }
-            // var airport_service = $('.fancybox-slide #airport-service').val();
+            var airport_service = $('[name="tf_airport_service"]').val();
 
             var data = {
                 action: 'tf_hotel_booking_popup',
@@ -451,7 +449,7 @@
                 check_out_date: check_out_date,
                 room: room,
                 deposit: deposit,
-                // airport_service: airport_service
+                airport_service: airport_service
             };
 
             $.ajax({
@@ -481,7 +479,17 @@
                         return false;
                     } else {
                         $('#tour_room_details_loader').hide();
-                        $('.tf-withoutpayment-booking').addClass('show');
+                        if ($('.tf-traveller-info-box').length > 0) {
+                            if ($(".tf-traveller-info-box").html().trim() == "") {
+                                $('.tf-traveller-info-box').html(response.guest_info);
+                            } else {
+                                $('.tf-traveller-info-box').html(response.guest_info);
+                            }
+                        }
+                        if ($('.tf-booking-traveller-info').length > 0) {
+                            $('.tf-booking-traveller-info').html(response.hotel_booking_summery);
+                        }
+                        $this.closest('form.tf-room').find('.tf-withoutpayment-booking').addClass('show');
                     }
                 },
                 error: function (data) {
@@ -492,6 +500,13 @@
         }
         $(document).on('click', '.tf-hotel-booking-popup-btn', function (e) {
             e.preventDefault();
+            var $this = $(this);
+
+            hotelPopupBooking($this);
+        });
+
+
+        $(document).on("change", "[name='tf_airport_service']", function (e) {
             var $this = $(this);
 
             hotelPopupBooking($this);

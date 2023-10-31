@@ -740,7 +740,7 @@ TF_Settings::option( 'tf_settings', array(
 					'label' => __( 'Settings for Booking', 'tourfic' ),
 				),
 				array(
-					'id'        => 'disable_guest_info',
+					'id'        => 'enable_guest_info',
 					'type'      => 'switch',
 					'label'     => __( 'Enable Guest Info', 'tourfic' ),
 					'subtitle'  => __( 'Enable this option, if you want to add guest info.', 'tourfic' ),
@@ -754,7 +754,7 @@ TF_Settings::option( 'tf_settings', array(
 					'type'       => 'heading',
 					'label'      => __( 'Settings for Guest Info Fields', 'tourfic' ),
 					'dependency' => array(
-						array( 'disable_guest_info', '==', 'true' ),
+						array( 'enable_guest_info', '==', 'true' ),
 					),
 				),
 				array(
@@ -766,7 +766,7 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
 					'is_pro'       => true,
 					'dependency'   => array(
-						array( 'disable_traveller_info', '==', 'true' ),
+						array( 'enable_guest_info', '==', 'true' ),
 					),
 					'fields'       => array(
 						array(

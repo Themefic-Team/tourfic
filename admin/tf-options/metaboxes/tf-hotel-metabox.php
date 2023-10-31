@@ -377,6 +377,16 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'class'   => 'tf-field-class',
 						),
 						array(
+							'id'        => '',
+							'type'      => 'switch',
+							'label'     => __( 'Enable Guest Info', 'tourfic' ),
+							'subtitle'  => __( 'Enable this option, if you want to add guest info.', 'tourfic' ),
+							'label_on'  => __( 'Yes', 'tourfic' ),
+							'label_off' => __( 'No', 'tourfic' ),
+							'is_pro'  => true,
+							'default'   => true,
+						),
+						array(
 							'id'      => '',
 							'type'    => 'select',
 							'label'   => __( 'Booking Type', 'tourfic' ),
