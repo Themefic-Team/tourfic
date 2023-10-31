@@ -2481,7 +2481,7 @@ if ( ! function_exists( 'tourfic_vendor_order_table_data' ) ) {
  */
 function tf_template_3_migrate_data() {
 
-	// if ( get_option( 'tf_template_3_migrate_data' ) < 1 ) {
+	if ( empty( get_option( 'tf_template_3_migrate_data' ) ) ) {
 
 		$options = get_option( 'tf_settings' );
 		if( !empty($options["tf-template"]) ){
@@ -2548,12 +2548,12 @@ function tf_template_3_migrate_data() {
 				),
 				array(
 					"tour-section" => "Itinerary",
-					"tour-section-slug" => "Itinerary",
+					"tour-section-slug" => "itinerary",
 					"tour-section-status" => "1"
 				),
 				array(
-					"tour-section" => "Include & Exclude",
-					"tour-section-slug" => "include-exclude",
+					"tour-section" => "Calendar",
+					"tour-section-slug" => "calendar",
 					"tour-section-status" => "1"
 				)
 			);
@@ -2577,13 +2577,12 @@ function tf_template_3_migrate_data() {
 			);
 		}
 
-		tf_var_dump($options["tf-template1"]);
+		update_option( 'tf_settings', $options );
+		wp_cache_flush();
+		flush_rewrite_rules( true );
+		update_option( 'tf_template_3_migrate_data', 1 );
 
-		// wp_cache_flush();
-		// flush_rewrite_rules( true );
-		// update_option( 'tf_template_3_migrate_data', 1 );
-
-	// }
+	}
 
 }
 
