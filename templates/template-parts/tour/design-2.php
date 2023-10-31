@@ -151,307 +151,24 @@
             <!-- Hotel details Srart -->
             <div class="tf-details" id="tf-tour-overview">
                 <div class="tf-details-left">
-                    <!-- menu section Start -->
-                    <div class="tf-details-menu">
-                        <ul>
-                            <li><a class="tf-hashlink" href="#tf-tour-overview">Overview</a></li>
-                            <li><a href="#tf-tour-itinerary">Tour Plan</a></li>
-                            <li><a href="#tf-tour-calendar">Calendar</a></li>
-                            <li><a href="#tf-tour-faq">FAQ's</a></li>
-                            <li><a href="#tf-tour-policies">Policies</a></li>
-                            <li><a href="#tf-tour-reviews">Reviews</a></li>
-                        </ul>
-                    </div>
-                    <!-- menu section End -->
 
-
-                    <!--Overview Start -->
-                    <div class="tf-overview-wrapper">
-                        <div class="tf-overview-description">
-                            <?php the_content(); ?>
-                        </div>
-                    </div>
-                    <!--Overview End -->
-
-                    <?php if ( $tour_duration || $info_tour_type || $group_size || $language ) { ?>
-                    <!--Information Section Start -->
-                    <div class="tf-overview-wrapper">
-                        <div class="tf-features-block-wrapper">
-                            <?php if ( $tour_duration ) { ?>
-                            <div class="tf-feature-block">
-                                <i class="ri-history-line"></i>
-                                <div class="tf-feature-block-details">
-                                    <h5><?php echo __( 'Duration', 'tourfic' ); ?></h5>
-                                    <p><?php echo esc_html( $tour_duration ); ?>
-                                    <?php
-                                    if ( $tour_duration > 1 ) {
-                                        $dur_string         = 's';
-                                        $duration_time_html = $duration_time . $dur_string;
-                                    } else {
-                                        $duration_time_html = $duration_time;
-                                    }
-                                    echo " " . esc_html( $duration_time_html );
-                                    ?>
-                                    <?php if ( $night ) { ?>
-                                        <span>
-                                            <?php echo esc_html( $night_count ); ?>
-                                            <?php
-                                            if ( ! empty( $night_count ) ) {
-                                                if ( $night_count > 1 ) {
-                                                    echo esc_html__( 'Nights', 'tourfic' );
-                                                } else {
-                                                    echo esc_html__( 'Night', 'tourfic' );
-                                                }
-                                            }
-                                            ?>
-                                        </span>
-                                    <?php } ?>
-                                </p>
-                                </div>
-                            </div>
-                            <?php } ?>
-                            <?php if ( $group_size ) { ?>
-                            <div class="tf-feature-block">
-                                <i class="ri-team-line"></i>
-                                <div class="tf-feature-block-details">
-                                    <h5><?php echo __( 'Max people', 'tourfic' ); ?></h5>
-                                    <p><?php echo esc_html( $group_size ) ?></p>
-                                </div>
-                            </div>
-                            <?php } ?>
-                            <?php if ( $info_tour_type ) {
-                            if ( gettype( $info_tour_type ) === 'string' ) {
-                                $info_tour_type = ucfirst( esc_html( $info_tour_type ) );
-                            } else if ( gettype( $info_tour_type ) === 'array' ) {
-                                $tour_types =[];
-                                $types = ! empty( get_the_terms( $post_id, 'tour_type' ) ) ? get_the_terms( $post_id, 'tour_type' ) : '';
-                                if ( ! empty( $types ) ) {
-                                    foreach ( $types as $type ) {
-                                        $tour_types[] = $type->name;
-                                    }
-                                }
-                                $info_tour_type = implode( ', ', $tour_types );
+                    <?php 
+                    if( !empty(tf_data_types(tfopt( 'tf-template' ))['single-tour-layout-part-1']) ){
+                        foreach(tf_data_types(tfopt( 'tf-template' ))['single-tour-layout-part-1'] as $section){
+                            if( !empty($section['tour-section-status']) && $section['tour-section-status']=="1" && !empty($section['tour-section-slug']) ){
+                                include TF_TEMPLATE_PART_PATH . 'tour/design-2/'.$section['tour-section-slug'].'.php';
                             }
-                            ?>
-                            <div class="tf-feature-block">
-                                <i class="ri-menu-search-line"></i>
-                                <div class="tf-feature-block-details">
-                                    <h5><?php echo __( 'Tour Type', 'tourfic' ); ?></h5>
-                                    <p><?php echo esc_html( $info_tour_type ) ?></p>
-                                </div>
-                            </div>
-                            <?php } ?>
-                            <?php if ( $language ) { ?>
-                            <div class="tf-feature-block">
-                                <i class="ri-global-line"></i>
-                                <div class="tf-feature-block-details">
-                                    <h5><?php echo __( 'Language', 'tourfic' ); ?></h5>
-                                    <p><?php echo esc_html( $language ) ?></p>
-                                </div>
-                            </div>
-                            <?php } ?>
-                        </div>
-                    </div>
-                    <!--Information Section End -->
-                    <?php } ?>
-
-                    <!--Highlights Start -->
-                    <div class="tf-overview-wrapper">
-                        <div class="tf-highlights-wrapper">
-                            <div class="tf-highlights-icon">
-                                <img src="<?php echo TF_ASSETS_APP_URL.'/images/tour-highlights-2.png' ?>" alt="Highlights Icon">
-                            </div>
-                            <div class="ft-highlights-details">
-                                <h2 class="tf-section-title">
-                                <?php echo !empty($meta['highlights-section-title']) ? esc_html($meta['highlights-section-title']) : __("Highlights","tourfic"); ?>
-                                </h2>
-                                <p><?php echo $highlights; ?></p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Highlights End -->
-
-                    <?php if($inc || $exc){ ?>
-                    <!-- Include Exclude srart -->
-                    <div class="tf-include-exclude-wrapper">
-                        <h2 class="tf-section-title"><? _e("Include/Exclude", "tourfic"); ?></h2>
-                        <div class="tf-include-exclude-innter">
-                            <?php if ( $inc ) { ?>
-                            <div class="tf-include">
-                                <ul>
-                                    <?php
-                                    foreach ( $inc as $key => $val ) {
-                                    ?>
-                                    <li>
-                                        <i class="<?php echo !empty($inc_icon) ? esc_attr( $inc_icon ) : 'fa-regular fa-circle-check'; ?>"></i>
-                                        <?php echo $val['inc']; ?>
-                                    </li>
-                                    <?php } ?>
-                                </ul>
-                            </div>
-                            <?php } ?>
-                            <?php if ( $exc ) { ?>
-                            <div class="tf-exclude">
-                                <ul>
-                                    <?php
-                                    foreach ( $exc as $key => $val ) {
-                                    ?>
-                                    <li>
-                                        <i class="<?php echo !empty($exc_icon) ? esc_attr( $exc_icon ) : 'fa-regular fa-circle-check'; ?>"></i>
-                                        <?php echo $val['exc']; ?>
-                                    </li>
-                                    <?php } ?>
-                                </ul>
-                            </div>
-                            <?php } ?>
-                        </div>
-                    </div>
-                    <!-- Include Exclude End -->
-                    <?php } ?>
-                    <?php
-                    if ( function_exists('is_tf_pro') && is_tf_pro() ) {
-                        do_action( 'after_itinerary_builder', $itineraries, $itinerary_map );
-                    } else {
+                        }
+                    }else{
+                        include TF_TEMPLATE_PART_PATH . 'tour/design-2/description.php';
+                        include TF_TEMPLATE_PART_PATH . 'tour/design-2/information.php';
+                        include TF_TEMPLATE_PART_PATH . 'tour/design-2/highlights.php';
+                        include TF_TEMPLATE_PART_PATH . 'tour/design-2/include-exclude.php';
+                        include TF_TEMPLATE_PART_PATH . 'tour/design-2/itinerary.php';
+                        include TF_TEMPLATE_PART_PATH . 'tour/design-2/calendar.php';
+                    }
                     ?>
-                    <?php if ( $itineraries ) { ?>
-                    <div class="tf-itinerary-wrapper" id="tf-tour-itinerary">
-                        <div class="section-title">
-                            <h2 class="tf-title tf-section-title"><?php _e("Travel Itinerary", "tourfic"); ?></h2>
-                        </div>
-                        <div class="tf-itinerary-wrapper">
-
-                        <?php
-                        foreach ( $itineraries as $itinerary ) {
-                        ?>
-                            <div class="tf-single-itinerary">
-                                <div class="tf-itinerary-title">
-                                    <h4>
-                                        <span class="tf-itinerary-time">
-                                            <?php echo esc_html( $itinerary['time'] ) ?>
-                                        </span>
-                                        <span class="tf-itinerary-title-text">
-                                            <?php echo esc_html( $itinerary['title'] ); ?>
-                                        </span>
-                                    </h4>
-                                    <i class="fa-solid fa-chevron-down"></i>
-                                </div>
-                                <div class="tf-itinerary-content-wrap" style="display: none;">
-                                    <div class="tf-itinerary-content">
-                                        <div class="tf-itinerary-content-details">
-                                        <?php _e( $itinerary['desc'] ); ?>
-                                        </div>
-                                        <?php if ( $itinerary['image'] ) { ?>
-                                        <div class="tf-itinerary-content-images">
-                                            <img src="<?php echo esc_url( $itinerary['image'] ); ?>" alt="<?php _e("Itinerary Image","tourfic"); ?>" />
-                                        </div>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php } ?>
-                            
-                        </div>
-                        <?php if ( $location && $itinerary_map != 1 ): ?>
-                        <!-- Map start -->
-                        <div class="tf-itinerary-map">
-                        <?php if ( $tf_openstreet_map=="default" && !empty($location_latitude) && !empty($location_longitude) && empty($tf_google_map_key) ) {  ?>
-                            <div id="tour-location" style="height: 450px;"></div>
-                            <script>
-                            const map = L.map('tour-location').setView([<?php echo $location_latitude; ?>, <?php echo $location_longitude; ?>], <?php echo $location_zoom; ?>);
-
-                            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                maxZoom: 20,
-                                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                            }).addTo(map);
-
-                            const marker = L.marker([<?php echo $location_latitude; ?>, <?php echo $location_longitude; ?>], {alt: '<?php echo $location; ?>'}).addTo(map)
-                                .bindPopup('<?php echo $location; ?>');
-                            </script>
-                        <?php } ?>
-                        <?php if ( $tf_openstreet_map=="default" && (empty($location_latitude) || empty($location_longitude)) && empty($tf_google_map_key) ) {  ?>
-                            <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $location ) ); ?>&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                        <?php } ?>
-                        <?php if( $tf_openstreet_map!="default" && !empty($tf_google_map_key) ){ ?>
-                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $location ) ); ?>&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                        <?php } ?>
-                        </div>
-                        <!-- Map End -->
-                        <?php endif; ?>
-                    </div>
-                    <?php } ?>
-                    <?php } ?>
-
-
-                    <div class="tf-tour-wrapper" id="tf-tour-calendar">
-                        <h2 class="tf-section-title">Calendar & prices</h2>
-                        <div id="tf-tour3-caleandar"></div>
-                    </div>
-
-                    <script type="text/javascript" src="./assets/js/caleandar.min.js"></script>
-                    <script>
-                        var events = [{
-                                'Date': new Date(2023, 9, 7),
-                                'Title': '$200',
-                                'Link': 'https://github.com/joynal05'
-                            },
-                            {
-                                'Date': new Date(2023, 9, 8),
-                                'Title': '$300',
-                                'Link': 'https://github.com/joynal05'
-                            },
-                            {
-                                'Date': new Date(2023, 9, 9),
-                                'Title': '$250',
-                                'Link': 'https://github.com/joynal05'
-                            }, {
-                                'Date': new Date(2023, 9, 10),
-                                'Title': '$200',
-                                'Link': 'https://github.com/joynal05'
-                            },
-                            {
-                                'Date': new Date(2023, 9, 11),
-                                'Title': '$300',
-                                'Link': 'https://github.com/joynal05'
-                            },
-                            {
-                                'Date': new Date(2023, 9, 12),
-                                'Title': '$250',
-                                'Link': 'https://github.com/joynal05'
-                            }, {
-                                'Date': new Date(2023, 9, 17),
-                                'Title': '$200',
-                                'Link': 'https://github.com/joynal05'
-                            },
-                            {
-                                'Date': new Date(2023, 9, 18),
-                                'Title': '$300',
-                                'Link': 'https://github.com/joynal05'
-                            },
-                            {
-                                'Date': new Date(2023, 9, 19),
-                                'Title': '$250',
-                                'Link': 'https://github.com/joynal05'
-                            },
-                        ];
-                        var settings = {};
-                        var element = document.getElementById('tf-tour3-caleandar');
-                        caleandar(element, events, settings);
-
-
-
-                        (function ($) {
-                            "use strict";
-                            $(document).ready(function () {
-                                $("#tf-tour3-caleandar li.cld-day.currMonth").click(function () {
-                                    var link = $(this).find("a").attr("href");
-                                    if (link) {
-                                        window.open(link, "_blank");
-                                    }
-                                });
-                            });
-
-                        }(jQuery));
-                    </script>
+                    
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets">
                     <div class="tf-search-date-wrapper tf-single-widgets">
@@ -547,109 +264,19 @@
                 </div>
             </div>
             <!-- Hotel details End -->
-
-            <?php if ( $faqs ): ?>
-            <!-- Hotel Questions Srart -->
-            <div class="tf-questions-wrapper tf-section" id="tf-tour-faq">
-                <h2 class="tf-section-title">
-                <?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : __( "Faq’s", 'tourfic' ); ?>
-                </h2>            
-                <div class="tf-questions">
-                    
-                    <?php 
-                    $faqs_itemsPerColumn = ceil(count($faqs) / 2);
-                    ?>
-                    <div class="tf-questions-col">
-                        <?php 
-                        for ($i = 0; $i < $faqs_itemsPerColumn; $i++) { ?>
-                        <div class="tf-question <?php echo $i==0 ? esc_attr( 'tf-active' ) : ''; ?>">
-                            <div class="tf-faq-head">
-                                <h3><?php echo esc_html( $faqs[$i]['title'] ); ?>
-                                <i class="fa-solid fa-chevron-down"></i></h3>
-                            </div>
-                            <div class="tf-question-desc" style="<?php echo $i==0 ? esc_attr( 'display: block;' ) : ''; ?>">
-                            <?php echo wp_kses_post( $faqs[$i]['desc'] ); ?>
-                            </div>
-                        </div>
-                        <?php } ?>
-                        
-                    </div>
-                    <div class="tf-questions-col">
-                        <?php 
-                        for ($i = $faqs_itemsPerColumn; $i < count($faqs); $i++) { ?>
-                        <div class="tf-question">
-                            <div class="tf-faq-head">
-                                <h3><?php echo esc_html( $faqs[$i]['title'] ); ?>
-                                <i class="fa-solid fa-chevron-down"></i></h3>
-                            </div>
-                            <div class="tf-question-desc">
-                            <?php echo wp_kses_post( $faqs[$i]['desc'] ); ?>
-                            </div>
-                        </div>
-                        <?php } ?>
-                        
-                    </div>
-                </div>
-            </div>
-
-            <!-- Hotel Questions end -->
-            <?php endif; ?>
-
-
-            <?php
-            if ( $comments ) { ?>
-            <!-- Hotel reviews Srart -->
-            <div class="tf-reviews-wrapper tf-section" id="tf-tour-reviews">         
-                <h2 class="tf-section-title"><?php _e("Guest reviews", "tourfic"); ?></h2> 
-                <p><?php _e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></p>
-                <div class="tf-reviews-slider">
-                    <?php
-                    foreach ( $comments as $comment ) {
-                    // Get rating details
-                    $tf_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
-                    if ( $tf_overall_rate == false ) {
-                        $tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
-                        $tf_overall_rate = tf_average_ratings( $tf_comment_meta );
+            <?php 
+            if( !empty(tf_data_types(tfopt( 'tf-template' ))['single-tour-layout-part-2']) ){
+                foreach(tf_data_types(tfopt( 'tf-template' ))['single-tour-layout-part-2'] as $section){
+                    if( !empty($section['tour-section-status']) && $section['tour-section-status']=="1" && !empty($section['tour-section-slug']) ){
+                        include TF_TEMPLATE_PART_PATH . 'tour/design-2/'.$section['tour-section-slug'].'.php';
                     }
-                    $base_rate = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
-                    $c_rating  = tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
-
-                    // Comment details
-                    $c_avatar      = get_avatar( $comment, '56' );
-                    $c_author_name = $comment->comment_author;
-                    $c_date        = $comment->comment_date;
-                    $c_content     = $comment->comment_content;
-                    ?>
-                    <div class="tf-reviews-item">
-                        <div class="tf-reviews-avater">
-                            <?php echo $c_avatar; ?>
-                        </div>
-                        <div class="tf-reviews-text">
-                            <h3><?php echo $c_rating; ?></h3>
-                            <span class="tf-reviews-meta"><?php echo $c_author_name; ?>, <?php echo $c_date; ?></span>
-                            <p><?php echo $c_content; ?></p>
-                        </div>
-                    </div>
-                    <?php } ?>
-                </div>
-            </div>
-            <!--Content reviews end -->
-            <?php } ?>
-            
-
-            <?php
-            if($terms_and_conditions){ ?>
-            <!-- Hotel Policies Starts -->
-            <div class="tf-policies-wrapper tf-section" id="tf-tour-policies">
-                <h2 class="tf-section-title">
-                <?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : __("Tour Terms & Conditions","tourfic"); ?>
-                </h2>
-                <div class="tf-policies">
-                    <?php echo wpautop( $terms_and_conditions ); ?>
-                </div>
-            </div>
-            <!-- Hotel Policies end -->
-            <?php } ?>
+                }
+            }else{
+                include TF_TEMPLATE_PART_PATH . 'tour/design-2/faq.php';
+                include TF_TEMPLATE_PART_PATH . 'tour/design-2/review.php';
+                include TF_TEMPLATE_PART_PATH . 'tour/design-2/trams-condition.php';
+            }
+            ?>
 
             <!-- Tour Gallery PopUp Starts -->
             <div class="tf-popup-wrapper tf-hotel-popup">
