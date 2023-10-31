@@ -102,8 +102,6 @@ function tf_tours_booking_function() {
 
 					$interval = $start_date->diff($end_date);
 
-					$new_end_day = $start_date->modify("+ $diff day");
-
 					return $interval->days;
 				}	
 			}
