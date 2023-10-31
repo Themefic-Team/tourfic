@@ -445,6 +445,125 @@ TF_Settings::option( 'tf_settings', array(
 									)
 								),
 								array(
+									'id'         => 'single-tour-layout-part-1',
+									'class'      => 'disable-sortable',
+									'type'       => 'repeater',
+									'drag_only'  => true,
+									'label'      => __( 'Single Tour Template Sections Part 1', 'tourfic' ),
+									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'dependency' => array( 'single-tour', '==', 'design-2' ),
+									'fields'     => array(
+										array(
+											'id'         => 'tour-section',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Name', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'         => 'tour-section-slug',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Slug', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'       => 'tour-section-status',
+											'type'     => 'switch',
+											'label'    => __( 'Section Status', 'tourfic' ),
+											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
+										),
+									),
+									'default'    => array(
+										array(
+											'tour-section'        => __( 'Description', 'tourfic' ),
+											'tour-section-slug'   => __( 'description', 'tourfic' ),
+											'tour-section-status' => true,
+										),
+										array(
+											'tour-section'        => __( 'Information', 'tourfic' ),
+											'tour-section-slug'   => __( 'information', 'tourfic' ),
+											'tour-section-status' => true,
+										),
+										array(
+											'tour-section'        => __( 'Highlights', 'tourfic' ),
+											'tour-section-slug'   => __( 'highlights', 'tourfic' ),
+											'tour-section-status' => true,
+										),
+										array(
+											'tour-section'        => __( 'Include & Exclude', 'tourfic' ),
+											'tour-section-slug'   => __( 'include-exclude', 'tourfic' ),
+											'tour-section-status' => true,
+										),
+										array(
+											'tour-section'        => __( 'Itinerary', 'tourfic' ),
+											'tour-section-slug'   => __( 'itinerary', 'tourfic' ),
+											'tour-section-status' => true,
+										),
+										array(
+											'tour-section'        => __( 'Calendar', 'tourfic' ),
+											'tour-section-slug'   => __( 'calendar', 'tourfic' ),
+											'tour-section-status' => true,
+										)
+									)
+								),
+								array(
+									'id'         => 'single-tour-layout-part-2',
+									'class'      => 'disable-sortable',
+									'type'       => 'repeater',
+									'drag_only'  => true,
+									'label'      => __( 'Single Tour Template Sections Part 2', 'tourfic' ),
+									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'dependency' => array( 'single-tour', '==', 'design-2' ),
+									'fields'     => array(
+										array(
+											'id'         => 'tour-section',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Name', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'         => 'tour-section-slug',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Slug', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'       => 'tour-section-status',
+											'type'     => 'switch',
+											'label'    => __( 'Section Status', 'tourfic' ),
+											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
+										),
+									),
+									'default'    => array(
+										array(
+											'tour-section'        => __( 'FAQ', 'tourfic' ),
+											'tour-section-slug'   => __( 'faq', 'tourfic' ),
+											'tour-section-status' => true,
+										),
+										array(
+											'tour-section'        => __( 'Review', 'tourfic' ),
+											'tour-section-slug'   => __( 'review', 'tourfic' ),
+											'tour-section-status' => true,
+										),
+										array(
+											'tour-section'        => __( 'Terms & Conditions', 'tourfic' ),
+											'tour-section-slug'   => __( 'trams-condition', 'tourfic' ),
+											'tour-section-status' => true,
+										),
+									)
+								),
+								array(
 									'id'      => 'tour-title',
 									'type'    => 'heading',
 									'content' => __( 'Tour Archive & Search Result Page', 'tourfic' ),

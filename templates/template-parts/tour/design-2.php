@@ -149,17 +149,17 @@
         <div class="tf-container">
 
             <!-- Hotel details Srart -->
-            <div class="tf-details" id="tf-hotel-overview">
+            <div class="tf-details" id="tf-tour-overview">
                 <div class="tf-details-left">
                     <!-- menu section Start -->
                     <div class="tf-details-menu">
                         <ul>
-                            <li><a class="tf-hashlink" href="#tf-hotel-overview">Overview</a></li>
-                            <li><a href="#tf-hotel-rooms">Rooms</a></li>
-                            <li><a href="#tf-hotel-facilities">Facilities</a></li>
-                            <li><a href="#tf-hotel-reviews">Reviews</a></li>
-                            <li><a href="#tf-hotel-faq">FAQ's</a></li>
-                            <li><a href="#tf-hotel-policies">Policies</a></li>
+                            <li><a class="tf-hashlink" href="#tf-tour-overview">Overview</a></li>
+                            <li><a href="#tf-tour-itinerary">Tour Plan</a></li>
+                            <li><a href="#tf-tour-calendar">Calendar</a></li>
+                            <li><a href="#tf-tour-faq">FAQ's</a></li>
+                            <li><a href="#tf-tour-policies">Policies</a></li>
+                            <li><a href="#tf-tour-reviews">Reviews</a></li>
                         </ul>
                     </div>
                     <!-- menu section End -->
@@ -314,7 +314,7 @@
                     } else {
                     ?>
                     <?php if ( $itineraries ) { ?>
-                    <div class="tf-itinerary-wrapper">
+                    <div class="tf-itinerary-wrapper" id="tf-tour-itinerary">
                         <div class="section-title">
                             <h2 class="tf-title tf-section-title"><?php _e("Travel Itinerary", "tourfic"); ?></h2>
                         </div>
@@ -382,7 +382,7 @@
                     <?php } ?>
 
 
-                    <div class="tf-tour-wrapper">
+                    <div class="tf-tour-wrapper" id="tf-tour-calendar">
                         <h2 class="tf-section-title">Calendar & prices</h2>
                         <div id="tf-tour3-caleandar"></div>
                     </div>
@@ -550,7 +550,7 @@
 
             <?php if ( $faqs ): ?>
             <!-- Hotel Questions Srart -->
-            <div class="tf-questions-wrapper tf-section" id="tf-hotel-faq">
+            <div class="tf-questions-wrapper tf-section" id="tf-tour-faq">
                 <h2 class="tf-section-title">
                 <?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : __( "Faq’s", 'tourfic' ); ?>
                 </h2>            
@@ -599,7 +599,7 @@
             <?php
             if ( $comments ) { ?>
             <!-- Hotel reviews Srart -->
-            <div class="tf-reviews-wrapper tf-section" id="tf-hotel-reviews">         
+            <div class="tf-reviews-wrapper tf-section" id="tf-tour-reviews">         
                 <h2 class="tf-section-title"><?php _e("Guest reviews", "tourfic"); ?></h2> 
                 <p><?php _e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></p>
                 <div class="tf-reviews-slider">
@@ -640,7 +640,7 @@
             <?php
             if($terms_and_conditions){ ?>
             <!-- Hotel Policies Starts -->
-            <div class="tf-policies-wrapper tf-section" id="tf-hotel-policies">
+            <div class="tf-policies-wrapper tf-section" id="tf-tour-policies">
                 <h2 class="tf-section-title">
                 <?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : __("Tour Terms & Conditions","tourfic"); ?>
                 </h2>
