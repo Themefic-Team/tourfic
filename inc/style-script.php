@@ -118,7 +118,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			#tf-ask-question input,
 			#tf-ask-question textarea,
 			.tf-withoutpayment-booking{
-				font-family: '.$tf_global_font_family.' !important;
+				font-family: "'.$tf_global_font_family.'", sans-serif !important;
 			}';
 		}
 		if( !empty($tf_template1_p_global_reg) ){
@@ -154,7 +154,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-container-inner h6,
 			.tf-main-wrapper h6,
 			.tf-container h6{
-				font-family: '.$tf_global_heading_font_family.' !important;
+				font-family: "'.$tf_global_heading_font_family.'", sans-serif !important;
 			}';
 		}
 

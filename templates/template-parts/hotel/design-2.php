@@ -154,12 +154,24 @@
             <!-- menu section Start -->
             <div class="tf-details-menu">
                 <ul>
-                    <li><a class="tf-hashlink" href="#tf-hotel-overview">Overview</a></li>
-                    <li><a href="#tf-hotel-rooms">Rooms</a></li>
-                    <li><a href="#tf-hotel-facilities">Facilities</a></li>
-                    <li><a href="#tf-hotel-reviews">Reviews</a></li>
-                    <li><a href="#tf-hotel-faq">FAQ's</a></li>
-                    <li><a href="#tf-hotel-policies">Policies</a></li>
+                    <li><a class="tf-hashlink" href="#tf-hotel-overview">
+                        <?php _e("Overview", "tourfic"); ?>
+                    </a></li>
+                    <li><a href="#tf-hotel-rooms">
+                        <?php _e("Rooms", "tourfic"); ?>
+                    </a></li>
+                    <li><a href="#tf-hotel-facilities">
+                        <?php _e("Facilities", "tourfic"); ?>
+                    </a></li>
+                    <li><a href="#tf-hotel-reviews">
+                        <?php _e("Reviews", "tourfic"); ?>
+                    </a></li>
+                    <li><a href="#tf-hotel-faq">
+                        <?php _e("FAQ's", "tourfic"); ?>
+                    </a></li>
+                    <li><a href="#tf-hotel-policies">
+                        <?php _e("Policies", "tourfic"); ?>
+                    </a></li>
                 </ul>
             </div>
             <!-- menu section End -->

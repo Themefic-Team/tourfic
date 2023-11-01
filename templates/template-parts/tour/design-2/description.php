@@ -1,12 +1,24 @@
 <!-- menu section Start -->
 <div class="tf-details-menu">
     <ul>
-        <li><a class="tf-hashlink" href="#tf-tour-overview">Overview</a></li>
-        <li><a href="#tf-tour-itinerary">Tour Plan</a></li>
-        <li><a href="#tf-tour-calendar">Calendar</a></li>
-        <li><a href="#tf-tour-faq">FAQ's</a></li>
-        <li><a href="#tf-tour-policies">Policies</a></li>
-        <li><a href="#tf-tour-reviews">Reviews</a></li>
+        <li><a class="tf-hashlink" href="#tf-tour-overview">
+            <?php _e("Overview", "tourfic"); ?>
+        </a></li>
+        <li><a href="#tf-tour-itinerary">
+            <?php _e("Tour Plan", "tourfic"); ?>
+        </a></li>
+        <li><a href="#tf-tour-calendar">
+            <?php _e("Calendar", "tourfic"); ?>
+        </a></li>
+        <li><a href="#tf-tour-faq">
+            <?php _e("FAQ's", "tourfic"); ?>
+        </a></li>
+        <li><a href="#tf-tour-policies">
+            <?php _e("Policies", "tourfic"); ?>
+        </a></li>
+        <li><a href="#tf-tour-reviews">
+            <?php _e("Reviews", "tourfic"); ?>
+        </a></li>
     </ul>
 </div>
 <!-- menu section End -->
