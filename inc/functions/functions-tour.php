@@ -799,6 +799,40 @@ function tf_single_tour_booking_form( $post_id ) {
 	// Date format for Users Oputput
 	$tour_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
 
+	// Repeated Fixed Tour
+	
+
+	if(!function_exists('fixed_tour_start_date_changer')) {
+		function fixed_tour_start_date_changer($date, $months) {
+			if( (count($months) > 0) && !empty($date)) {
+				preg_match('/(\d{4})\/(\d{2})\/(\d{2})/', $date, $matches);
+
+				foreach($months as $month) {
+
+					if($month < date('m')) {
+						$year = $matches[1] + 1;
+
+					} else $year = $matches[1];
+
+
+					$day_selected = date('d', strtotime($date));
+					$last_day_of_month = date('t', strtotime(date('Y').'-'.$month.'-01'));
+					$matches[2] = $month;
+					$changed_date = sprintf("%s/%s/%s", $year, $matches[2], $matches[3]);
+
+					if(($day_selected == "31") && ($last_day_of_month != "31")) {
+						$new_months[] = date('Y/m/d', strtotime($changed_date . ' -1 day'));
+					} else {
+						$new_months[] = $changed_date;
+					}
+				}
+				$new_months[] = $matches[0];
+				return $new_months;
+
+			} else return array();
+		}
+	}
+
 	// Same Day Booking
 	$disable_same_day = ! empty( $meta['disable_same_day'] ) ? $meta['disable_same_day'] : '';
 	if ( $tour_type == 'fixed' ) {
@@ -811,12 +845,34 @@ function tf_single_tour_booking_form( $post_id ) {
 			$return_date         = ! empty( $tf_tour_fixed_date['date']['to'] ) ? $tf_tour_fixed_date['date']['to'] : '';
 			$min_people          = ! empty( $tf_tour_fixed_date['min_seat'] ) ? $tf_tour_fixed_date['min_seat'] : '';
 			$max_people          = ! empty( $tf_tour_fixed_date['max_seat'] ) ? $tf_tour_fixed_date['max_seat'] : '';
+			$repeated_fixed_tour_switch = ! empty( $meta['fixed_availability']["tf-repeat-months-switch"] ) ? $meta['fixed_availability']["tf-repeat-months-switch"] : 0;
+			$tour_repeat_months = !empty($meta['fixed_availability']['tf-repeat-months-checkbox']) ? $meta['fixed_availability']['tf-repeat-months-checkbox'] : array();
 		} else {
 			$departure_date = ! empty( $meta['fixed_availability']['date']['from'] ) ? $meta['fixed_availability']['date']['from'] : '';
 			$return_date    = ! empty( $meta['fixed_availability']['date']['to'] ) ? $meta['fixed_availability']['date']['to'] : '';
 			$min_people     = ! empty( $meta['fixed_availability']['min_seat'] ) ? $meta['fixed_availability']['min_seat'] : '';
 			$max_people     = ! empty( $meta['fixed_availability']['max_seat'] ) ? $meta['fixed_availability']['max_seat'] : '';
+			$repeated_fixed_tour_switch = ! empty( $meta['fixed_availability']["tf-repeat-months-switch"] ) ? $meta['fixed_availability']["tf-repeat-months-switch"] : 0;
+			$tour_repeat_months = $repeated_fixed_tour_switch && !empty($meta['fixed_availability']['tf-repeat-months-checkbox']) ? $meta['fixed_availability']['tf-repeat-months-checkbox'] : array();
 		}
+
+		if(!function_exists("selected_day_diff")) {
+			function selected_day_diff ($start_date, $end_date) {
+				if(!empty($start_date) && !empty($end_date)) {
+					$start_date = new DateTime($start_date);
+					$end_date = new DateTime($end_date);
+
+					$interval = $start_date->diff($end_date);
+
+					return $interval->days;
+				}	
+			}
+		}
+
+		// echo '<pre>';
+		// print_r($dayDiff);
+		// echo '</pre>';
+		// die();
 
 	} elseif ( $tour_type == 'continuous' ) {
 
@@ -1467,30 +1523,36 @@ function tf_single_tour_booking_form( $post_id ) {
                             } else timeSelectDiv.hide();
                         }
 
-                        $(".tours-check-in-out").flatpickr({
+                        $(".tours-check-in-out").flatpickr({ //Fixed 1
                             enableTime: false,
                             dateFormat: "Y/m/d",
-							altInput: true,
+							altInput: true, 
                 			altFormat: '<?php echo $tour_date_format_for_users; ?>',
 					        <?php
 					        // Flatpickt locale for translation
 					        tf_flatpickr_locale();
 
-					        if ($tour_type && $tour_type == 'fixed') { ?>
+					        if ($tour_type && $tour_type == 'fixed') { 
+								$enable_repeat_dates = fixed_tour_start_date_changer($departure_date,$tour_repeat_months);
 
-                            mode: "range",
-                            defaultDate: ["<?php echo $departure_date; ?>", "<?php echo $return_date; ?>"],
-                            enable: [
-                                {
-                                    from: "<?php echo $departure_date; ?>",
-                                    to: "<?php echo $return_date; ?>"
-                                }
-                            ],
+								if(($repeated_fixed_tour_switch == 1) && ($enable_repeat_dates > 0)) { ?>
+							enable: [
+								<?php 
+								foreach($enable_repeat_dates as $enable_date) {
+								?>
+								'<?php echo $enable_date; ?>',
+
+								<?php } ?>
+							],
+                            
+							<?php } else {?>
+							enable: ["<?php echo $departure_date; ?>"],
+							<?php } ?>
                             onReady: function (selectedDates, dateStr, instance) {
+								// console.log(instance);
                                 instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 								instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                             },
-
 					        <?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
 
                             minDate: "today",
@@ -1546,6 +1608,21 @@ function tf_single_tour_booking_form( $post_id ) {
 					        ?>
 
                             onChange: function (selectedDates, dateStr, instance) {
+
+								console.log('<?php echo $check_in_out ?>')
+
+								const tour_type = '<?php echo $tour_type; ?>';
+								const dayDiff = parseInt('<?php echo selected_day_diff($departure_date, $return_date) ?>');
+
+								if ( tour_type && tour_type == "fixed" ) {
+									const endDate = new Date(selectedDates[0]);
+									endDate.setDate(endDate.getDate() + dayDiff);
+									selectedDates.push(endDate)
+									instance.set([selectedDates[0] - selectedDates[1]])
+									instance.element.value = instance.element.value.replace(', ', ' - ');
+									instance.altInput.value = instance.altInput.value.replace(', ', ' - ');
+								};
+
 								instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
 								$(".tours-check-in-out").val(instance.altInput.value);
                                 $('.tours-check-in-out[type="hidden"]').val(dateStr.replace(/[a-z]+/g, '-') );
@@ -1691,7 +1768,7 @@ function tf_single_tour_booking_form( $post_id ) {
                         } else timeSelectDiv.hide();
                     }
 
-                    $("#check-in-out-date").flatpickr({
+                    $("#check-in-out-date").flatpickr({ // Fixed 2
                         enableTime: false,
                         dateFormat: "Y/m/d",
                         altInput: true,

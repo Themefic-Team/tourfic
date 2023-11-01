@@ -94,6 +94,33 @@ function tf_tours_booking_function() {
 			$tf_tour_booking_limit = ! empty( $meta['fixed_availability']['max_capacity'] ) ? $meta['fixed_availability']['max_capacity'] : 0; 
 		}
 
+		if(!function_exists("selected_day_diff")) {
+			function selected_day_diff ($start_date, $end_date) {
+				if(!empty($start_date) && !empty($end_date)) {
+					$start_date = new DateTime($start_date);
+					$end_date = new DateTime($end_date);
+
+					$interval = $start_date->diff($end_date);
+
+					return $interval->days;
+				}	
+			}
+		}
+		if(!function_exists("end_date_calculation")) {
+			function end_date_calculation ($start_date, $difference) {
+				if(!empty($start_date) && !empty($difference)) {
+					$start_date = new DateTime($start_date);
+
+					$new_end_day = $start_date->modify("+ $difference day");
+
+					return $new_end_day->format('Y/m/d');
+				}	
+			}
+		}
+
+		$day_diff = selected_day_diff($start_date, $end_date );
+		$start_date = $_POST['check-in-out-date'];
+		$end_date = end_date_calculation($start_date, $day_diff);
 
 		// Fixed tour maximum capacity limit
 	
