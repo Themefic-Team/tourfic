@@ -9,9 +9,9 @@
         list-style: none;
     }
     .tf-container {
-        max-width: 1520px;
         margin: 0 auto;
-        padding: 0 15px;
+        padding: 0 200px;
+        max-width: inherit;
     }
     h1,
     h2,
@@ -37,7 +37,6 @@
     }
     select {
         appearance: none;
-        background-image: url(../image/select-arrow.png);
         background-position: center right;
         padding-right: 22px;
         padding-top: 4px;

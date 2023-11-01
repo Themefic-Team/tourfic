@@ -26,17 +26,17 @@
         
             <!-- Hotel details Srart -->
             <div class="tf-archive-details tf-details" id="tf-hotel-overview">                    
-                <!-- Booking form Start -->
-                <div class="tf-archive-search-form tf-booking-form-wrapper">
-                    <form action="<?php echo tf_booking_search_action(); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
-                        <?php tf_archive_sidebar_search_form('tf_tours'); ?>
-                    </form>
-                </div>
-                <!-- Booking form end -->                    
-
-
+                      
                 <div class="tf-details-left tf-result-previews">
                     
+                    <!-- Booking form Start -->
+                    <div class="tf-archive-search-form tf-booking-form-wrapper">
+                        <form action="<?php echo tf_booking_search_action(); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
+                            <?php tf_archive_sidebar_search_form('tf_tours'); ?>
+                        </form>
+                    </div>
+                    <!-- Booking form end -->
+
                     <!--Available rooms start -->
                     <div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
                         <div class="tf-archive-available-rooms-head tf-available-rooms-head">

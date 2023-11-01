@@ -3,10 +3,9 @@
         display: flex;
         justify-content: space-between;
         flex-direction: row;
-        flex-wrap: wrap;
         gap: 40px;
         .tf-archive-search-form{            
-            width: calc(100% - 520px);
+            width: 100%;
         }
         .tf-details-left {
             width: calc(100% - 520px);
@@ -127,7 +126,6 @@
                                 padding-left: 30px;
                                 &:after{
                                     content: "";
-                                    background: url(../image/./highlights-icon.svg);
                                     height: 16px;
                                     width: 16px;
                                     position: ABSOLUTE;
@@ -143,7 +141,6 @@
         .tf-details-right {
             width: 480px;
             &.tf-archive-right{
-                margin-top: -163px;
                 background-color: #FCF4E8;
                 padding: 32px;                
                 width: 416px;

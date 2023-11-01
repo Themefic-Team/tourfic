@@ -90,16 +90,14 @@
                 ul {
                     margin: 0;
                     padding: 0;
-                    display: flex;
-                    flex-direction: row;
-                    flex-wrap: wrap;
+                    display: grid;
                     margin-bottom: 32px;
-                    gap: 12px 0;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 12px 5px;
                     &:last-child {
                         margin-bottom: 0;
                     }
                     li {
-                        width: 50%;
                         i {
                             margin-right: 4px;
                             ;
@@ -216,6 +214,7 @@
                 padding: 12px 32px;
                 display: inline-block;
                 text-decoration: none;
+                text-align: center;
             }
         }
     }
@@ -325,17 +324,7 @@
                             }
                         }
                     }
-                    .tf-mobile {
-                        .tf-available-room-off {
-                            span {}
-                        }
-                        .tf-available-room-price {
-                            .tf-price-from {}
-                            .tf-price {
-                                span {}
-                            }
-                        }
-                    }
+                    
                 }
                 .tf-available-room-content-right {
                     width: 196px;
@@ -355,9 +344,10 @@
                         font-weight: 700;
                         line-height: 24px;
                         background: #B58E53;
-                        min-width: 166px;
-                        padding: 12px 20px;
+                        padding: 12px 40px;
                         text-decoration: none;
+                        display: inline-block;
+                        text-align: center;
                     }
                 }
             }
