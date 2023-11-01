@@ -11012,6 +11012,9 @@ html {
   .tf-template-3 .tf-room-popup .tf-popup-inner .tf-popup-body .tf-popup-left {
     width: calc(100% - 332px);
   }
+  .tf-template-3.tf-hotel-single .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content {
+    width: calc(100% - 230px);
+  }
 }
 @media only screen and (max-width: 1366px) {
   .tf-template-3 {

@@ -1,4 +1,4 @@
-<div class="tf-template-3">
+<div class="tf-template-3 tf-hotel-single">
 <!--Hero section start -->
 <div class="tf-hero-section-wrap" style="<?php echo !empty(get_the_post_thumbnail_url()) ? 'background-image: url('.esc_url(get_the_post_thumbnail_url()).');' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
     <div class="tf-container">
