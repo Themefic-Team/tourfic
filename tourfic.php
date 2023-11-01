@@ -297,6 +297,13 @@ function tf_active_template_settings_callback() {
 //Register activation hook
 register_activation_hook( __FILE__, 'tf_active_template_settings_callback' );
 
+/**
+ * Compatibility with custom order tables for the WooCommerce plugin
+ *
+ * @since 2.10.4
+ * @access public
+ * @return void
+ */
 add_action( 'before_woocommerce_init', function() {
 	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
 		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
