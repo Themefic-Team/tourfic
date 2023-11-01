@@ -884,17 +884,25 @@ function tf_single_tour_booking_form( $post_id ) {
 
 		}
 
-	}
+	}	
+	
+	if( !function_exists( "nearest_default_day" ) ) {
+		function nearest_default_day ($dates) {
+			if(count($dates) > 0 ) {
+				$today = time();
+				$nearestDate = null;
+				$smallestDifference = null;
 
-	if( !function_exists( "selected_day_diff" ) ) {
-		function selected_day_diff ($start_date, $end_date) {
-			if(!empty($start_date) && !empty($end_date)) {
-				$start_date = new DateTime($start_date);
-				$end_date = new DateTime($end_date);
+				foreach($dates as $date) {
+					$dateTimestamp = strtotime($date);
+					$difference = abs($today - $dateTimestamp); 
 
-				$interval = $start_date->diff($end_date);
-
-				return $interval->days;
+					if ($smallestDifference === null || $difference < $smallestDifference) {
+						$smallestDifference = $difference;
+						$nearestDate = $date;
+					}
+				}
+				return $nearestDate;
 			}	
 		}
 	}
@@ -1340,10 +1348,6 @@ function tf_single_tour_booking_form( $post_id ) {
 		}
 	}
 
-	if($tour_type == "fixed" && (!empty($departure_date) && !empty($return_date))) {
-		$tf_dayDiff = selected_day_diff($departure_date, $return_date);
-	}
-
 	if ( $tf_tour_selected_template == "design-1" ) :
 		?>
         <form class="tf_tours_booking">
@@ -1537,6 +1541,8 @@ function tf_single_tour_booking_form( $post_id ) {
 								}
 
 								if(($repeated_fixed_tour_switch == 1) && ($enable_repeat_dates > 0)) { ?>
+							// setDetfaultDate: true,
+							defaultDate: "<?php echo nearest_default_day($enable_repeat_dates) ?>",
 							enable: [
 								<?php 
 								foreach($enable_repeat_dates as $enable_date) {

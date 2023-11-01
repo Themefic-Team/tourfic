@@ -4,8 +4,31 @@
 <div class="tf-trip-info tf-box tf-mb-30 tf-template-section">
 <div class="tf-trip-info-inner tf-flex tf-flex-space-bttn tf-flex-align-center tf-flex-gap-8">
     <!-- Single Tour short details -->
+
+    <?php 
+    if(!empty($tf_start_date) && ($tf_tour_repeat_months > 0) && ($tour_type == 'fixed')) {
+        $repeated_dates = tf_fixed_tour_start_date_changer($tf_start_date, $tf_tour_repeat_months);
+    }
+    ?>
+
     <div class="tf-short-info">
         <ul class="tf-list">
+            <?php 
+            if(!empty($tour_type) && ($tour_type == "fixed")){
+            ?>
+            <li class="tf-flex tf-flex-gap-8">
+                <i class="fa fa-plane"></i> <?php echo __("Tour Starting Dates: ", "tourifc") ?>
+                <?php
+                if($repeated_dates > 0) {
+                    foreach($repeated_dates as $date) {
+                ?>
+                <?php echo esc_html( tf_tour_date_format_changer($date, $tf_tour_date_format_for_users) ) . ', '; ?>
+                <?php
+                    }
+                 }
+                ?>
+            </li>
+            <?php } ?>
             <?php 
             if(!empty($tour_duration)){
             ?>

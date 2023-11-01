@@ -47,6 +47,60 @@ while ( have_posts() ) : the_post();
 	// Address
 	$location = isset( $meta['text_location'] ) ? $meta['text_location'] : '';
 
+	// tour type meta
+	$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';
+	// Repeated Fixed Tour meta
+	if(!empty($tour_type) && ($tour_type == 'fixed')) {
+		$tf_start_date = ! empty( $meta['fixed_availability']['date']['from'] ) ? $meta['fixed_availability']['date']['from'] : '';
+		$tf_repeated_fixed_tour_switch = ! empty( $meta['fixed_availability']["tf-repeat-months-switch"] ) ? $meta['fixed_availability']["tf-repeat-months-switch"] : 0;
+		$tf_tour_repeat_months = ($tf_repeated_fixed_tour_switch == 1) && !empty($meta['fixed_availability']['tf-repeat-months-checkbox']) ? $meta['fixed_availability']['tf-repeat-months-checkbox'] : array();
+	}
+
+	// date format for users
+	$tf_tour_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+
+
+	if(!function_exists('tf_fixed_tour_start_date_changer')) {
+		function tf_fixed_tour_start_date_changer($date, $months) {
+			if( (count($months) > 0) && !empty($date)) {
+				preg_match('/(\d{4})\/(\d{2})\/(\d{2})/', $date, $matches);
+
+				foreach($months as $month) {
+
+					if($month < date('m')) {
+						$year = $matches[1] + 1;
+
+					} else $year = $matches[1];
+
+					$day_selected = date('d', strtotime($date));
+					$last_day_of_month = date('t', strtotime(date('Y').'-'.$month.'-01'));
+					$matches[2] = $month;
+					$changed_date = sprintf("%s/%s/%s", $year, $matches[2], $matches[3]);
+
+					if(($day_selected == "31") && ($last_day_of_month != "31")) {
+						$new_months[] = date('Y/m/d', strtotime($changed_date . ' -1 day'));
+					} else {
+						$new_months[] = $changed_date;
+					}
+				}
+				$new_months[] = $matches[0];
+				return $new_months;
+
+			} else return array();
+		}
+	}
+	if(!function_exists('tf_tour_date_format_changer')) {
+		function tf_tour_date_format_changer($date, $format) {
+			if(!empty($date) && !empty($format)) {
+				$date = new DateTime($date);
+				$formattedDate = $date->format($format);
+
+				return $formattedDate;
+
+			} else return;
+		}
+	}
+
 	//Social Share
 	$share_text = get_the_title();
 	$share_link = get_permalink( $post_id );
