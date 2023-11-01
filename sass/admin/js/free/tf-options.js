@@ -764,6 +764,15 @@
 
             let repeatColorField = add_value.find('.tf-field-color');
             if (repeatColorField.length > 0) {
+                repeatColorField.find('input.tf-color').each(function () {
+                    var color_field =  $(this).clone(); 
+                    if($(this).closest('li').length > 0){
+                        $(this).closest('li').append(color_field);
+                    }else{
+                        $(this).closest('.tf-fieldset').append(color_field);
+                    }
+                    $(this).closest('.wp-picker-container').remove();
+                 });
                 tfColorInt(repeatColorField);
             }
 
@@ -926,6 +935,15 @@
 
             let repeatColorField = clone_value.find('.tf-field-color');
             if (repeatColorField.length > 0) {
+                repeatColorField.find('input.tf-color').each(function () {
+                    var color_field =  $(this).clone(); 
+                    if($(this).closest('li').length > 0){
+                        $(this).closest('li').append(color_field);
+                    }else{
+                        $(this).closest('.tf-fieldset').append(color_field);
+                    }
+                    $(this).closest('.wp-picker-container').remove();
+                 });
                 tfColorInt(repeatColorField);
             }
 
