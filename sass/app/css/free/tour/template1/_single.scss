@@ -464,6 +464,60 @@
     }
 
 }
+
+.repeat-fixed-dates {
+    max-width: 100%;
+    min-height: 100px;
+    background-color: #fff;
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: $tf-brds-default;
+    box-shadow: 0px 0px 24px 5px #E0E8EE;
+
+    .repeated-title-section {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+
+        i {
+            color: $color-theme;
+        }
+    }
+
+    .repeat-dates {
+        display: grid;
+        grid-template-columns: repeat(6, 15%);
+        padding-left: 0;
+        justify-content: space-around;
+        @media #{$tfmax991}{
+            grid-template-columns: repeat(4, 25%);
+        }
+        @media #{$tfmax767}{
+            grid-template-columns: repeat(auto-fit, 30%);
+        }
+        @media #{$max375} {
+            grid-template-columns: repeat(auto-fit, 45%);
+        } 
+        
+        // @media #{$max1199} {
+        //     grid-template-columns: repeat(auto-fit, 45%);
+        // }
+    }
+    .repeat-dates {
+        .repeat-date-list {
+            list-style: none;
+            display: inline-block;
+            background-color: #fff;
+            padding: 8px 12px;
+            margin: 10px 5px;
+            text-align: center;
+            border-radius: $tf-brds-default;
+            font-size: 16px;
+            box-shadow: 0px 0px 15px 2px #E0E8EE;
+        }
+    }
+
+}
 .tf-trip-feature-blocks{
     .tf-feature-block {
         background: #fff;
@@ -485,6 +539,23 @@
             font-size: $font-size-xs;
             color: $color-primary;
             margin-top: $tf-space-8;
+        }
+        .repeat-dates {
+            display: block;
+            padding-left: 0;
+            margin-bottom: 0;
+            margin-top: 5px;
+
+            .repeat-date-list {
+                list-style: none;
+                background-color: #fff;
+                padding: 0px 8px;
+                margin: 10px 5px;
+                text-align: center;
+                border-radius: $tf-brds-default;
+                font-size: 15px;
+                box-shadow: 0px 0px 8px 2px #E0E8EE;
+            }
         }
     }
 }

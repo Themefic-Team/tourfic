@@ -65,6 +65,8 @@ while ( have_posts() ) : the_post();
 			if( (count($months) > 0) && !empty($date)) {
 				preg_match('/(\d{4})\/(\d{2})\/(\d{2})/', $date, $matches);
 
+				$new_months[] = $matches[0];
+				
 				foreach($months as $month) {
 
 					if($month < date('m')) {
@@ -83,7 +85,6 @@ while ( have_posts() ) : the_post();
 						$new_months[] = $changed_date;
 					}
 				}
-				$new_months[] = $matches[0];
 				return $new_months;
 
 			} else return array();

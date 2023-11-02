@@ -886,20 +886,23 @@ function tf_single_tour_booking_form( $post_id ) {
 
 	}	
 	
-	if( !function_exists( "nearest_default_day" ) ) {
-		function nearest_default_day ($dates) {
+	if( !function_exists( "tf_nearest_default_day" ) ) {
+		function tf_nearest_default_day ($dates) {
 			if(count($dates) > 0 ) {
+				
 				$today = time();
 				$nearestDate = null;
 				$smallestDifference = null;
 
 				foreach($dates as $date) {
-					$dateTimestamp = strtotime($date);
-					$difference = abs($today - $dateTimestamp); 
+					$dateTime = strtotime($date);
+					$difference = abs($today - $dateTime); 
 
-					if ($smallestDifference === null || $difference < $smallestDifference) {
-						$smallestDifference = $difference;
-						$nearestDate = $date;
+					if($dateTime > $today) {
+						if ($smallestDifference === null || $difference < $smallestDifference) {
+							$smallestDifference = $difference;
+							$nearestDate = $date;
+						}
 					}
 				}
 				return $nearestDate;
@@ -1542,7 +1545,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
 								if(($repeated_fixed_tour_switch == 1) && ($enable_repeat_dates > 0)) { ?>
 							// setDetfaultDate: true,
-							defaultDate: "<?php echo nearest_default_day($enable_repeat_dates) ?>",
+							defaultDate: "<?php echo tf_nearest_default_day($enable_repeat_dates) ?>",
 							enable: [
 								<?php 
 								foreach($enable_repeat_dates as $enable_date) {
@@ -1771,6 +1774,7 @@ function tf_single_tour_booking_form( $post_id ) {
 							$enable_repeat_dates = fixed_tour_start_date_changer( $departure_date, $tour_repeat_months );
 
 								if(($repeated_fixed_tour_switch == 1) && ($enable_repeat_dates > 0)) { ?>
+							defaultDate: "<?php echo tf_nearest_default_day($enable_repeat_dates) ?>",
 							enable: [
 								<?php 
 								foreach($enable_repeat_dates as $enable_date) {

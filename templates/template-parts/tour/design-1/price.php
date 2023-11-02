@@ -14,22 +14,6 @@
     <div class="tf-short-info">
         <ul class="tf-list">
             <?php 
-            if(!empty($tour_type) && ($tour_type == "fixed")){
-            ?>
-            <li class="tf-flex tf-flex-gap-8">
-                <i class="fa fa-plane"></i> <?php echo __("Tour Starting Dates: ", "tourifc") ?>
-                <?php
-                if($repeated_dates > 0) {
-                    foreach($repeated_dates as $date) {
-                ?>
-                <?php echo esc_html( tf_tour_date_format_changer($date, $tf_tour_date_format_for_users) ) . ', '; ?>
-                <?php
-                    }
-                 }
-                ?>
-            </li>
-            <?php } ?>
-            <?php 
             if(!empty($tour_duration)){
             ?>
             <li class="tf-flex tf-flex-gap-8">
