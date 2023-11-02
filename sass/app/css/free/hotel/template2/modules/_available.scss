@@ -380,3 +380,77 @@
         }
     }
 }
+
+// Related Tour Section
+.tf-related-tours{
+    background-color: #FCF4E8;
+    padding: 32px 0px;
+
+    .tf-slider-item{
+        height: auto;
+        box-shadow: none;
+        border: 0px solid;
+        background-color: transparent;
+        .tf-meta-info{
+            a.see-details{
+                display: block;
+                padding: 8px 16px;
+                border: 0.5px solid #B58E53;
+                color: #B58E53;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 150%; /* 24px */
+                text-decoration: none;
+                text-align: center;
+            }
+            .tf-meta-location{
+                color: #99948D;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 130%;
+                margin: 16px 0px 24px 0px;
+            }
+            .tf-meta-title{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-top: 16px;
+                h2{
+                    a{
+                        text-decoration: none;
+                        color: #595349;
+                        font-size: 32px;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 120%;
+                    }
+                }
+                .tf-meta-data-price{
+                    span{
+                        color: #595349;
+                        font-size: 24px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 130%;
+                    }
+                }
+            }
+        }
+    }
+    .slick-prev.pull-left.slick-arrow,
+    .slick-next.pull-right.slick-arrow{
+        position: absolute;
+        right: 50px;
+        top: -55px;
+        left: auto;
+        &::before{
+            font-family: "Font Awesome 6 Free";
+            display: none;
+        }
+    }
+    .slick-prev.pull-left.slick-arrow{
+        right: 120px;
+    }
+}

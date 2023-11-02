@@ -9868,6 +9868,72 @@ html {
   background: #FAEEDC;
   color: #595349;
 }
+.tf-template-3 .tf-related-tours {
+  background-color: #FCF4E8;
+  padding: 32px 0px;
+}
+.tf-template-3 .tf-related-tours .tf-slider-item {
+  height: auto;
+  box-shadow: none;
+  border: 0px solid;
+  background-color: transparent;
+}
+.tf-template-3 .tf-related-tours .tf-slider-item .tf-meta-info a.see-details {
+  display: block;
+  padding: 8px 16px;
+  border: 0.5px solid #B58E53;
+  color: #B58E53;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 24px */
+  text-decoration: none;
+  text-align: center;
+}
+.tf-template-3 .tf-related-tours .tf-slider-item .tf-meta-info .tf-meta-location {
+  color: #99948D;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+  margin: 16px 0px 24px 0px;
+}
+.tf-template-3 .tf-related-tours .tf-slider-item .tf-meta-info .tf-meta-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+.tf-template-3 .tf-related-tours .tf-slider-item .tf-meta-info .tf-meta-title h2 a {
+  text-decoration: none;
+  color: #595349;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+}
+.tf-template-3 .tf-related-tours .tf-slider-item .tf-meta-info .tf-meta-title .tf-meta-data-price span {
+  color: #595349;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+}
+.tf-template-3 .tf-related-tours .slick-prev.pull-left.slick-arrow,
+.tf-template-3 .tf-related-tours .slick-next.pull-right.slick-arrow {
+  position: absolute;
+  right: 50px;
+  top: -55px;
+  left: auto;
+}
+.tf-template-3 .tf-related-tours .slick-prev.pull-left.slick-arrow::before,
+.tf-template-3 .tf-related-tours .slick-next.pull-right.slick-arrow::before {
+  font-family: "Font Awesome 6 Free";
+  display: none;
+}
+.tf-template-3 .tf-related-tours .slick-prev.pull-left.slick-arrow {
+  right: 120px;
+}
 .tf-template-3 .tf-booking-form-wrapper {
   background: #FAEEDC;
 }
