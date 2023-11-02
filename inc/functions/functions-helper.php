@@ -572,6 +572,8 @@ if ( ! function_exists( 'tf_flatpickr_locale' ) ) {
 
 		$flatpickr_locale = ! empty( get_locale() ) ? get_locale() : 'en_US';
 		$allowed_locale   = array( 'ar', 'bn_BD', 'de_DE', 'es_ES', 'fr_FR', 'hi_IN', 'it_IT', 'nl_NL', 'ru_RU', 'zh_CN' );
+		$tf_first_day_of_week = !empty(tfopt("tf-week-day-flatpickr")) ? tfopt("tf-week-day-flatpickr") : 0;
+
 
 		if ( in_array( $flatpickr_locale, $allowed_locale ) ) {
 
@@ -604,12 +606,17 @@ if ( ! function_exists( 'tf_flatpickr_locale' ) ) {
 					$flatpickr_locale = 'zh';
 					break;
 			}
-
-			echo 'locale: "' . $flatpickr_locale . '",';
 		}
 
+		echo <<<EOD
+			locale: {
+				...'$flatpickr_locale',
+				firstDayOfWeek: $tf_first_day_of_week,
+			},
+		EOD;
 	}
 }
+
 
 /**
  * Flatten a multi-dimensional array into a single level.

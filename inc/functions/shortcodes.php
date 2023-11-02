@@ -304,8 +304,8 @@ function tf_recent_tour_shortcode( $atts, $content = null ) {
 	$args = array(
 		'post_type'      => 'tf_tours',
 		'post_status'    => 'publish',
-		'orderby'        => 'date',
-		'order'          => 'DESC',
+		'orderby'        => !empty($atts['orderby']) ? $atts['orderby'] : 'date',
+		'order'          => !empty($atts['order']) ? $atts['order'] : 'DESC',
 		'posts_per_page' => $count,
 	);
 
