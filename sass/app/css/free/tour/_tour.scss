@@ -273,6 +273,7 @@ div#tf-contact-info {
     color: #003162;
     border: 1px solid #F5F8FF;
     padding: 50px 20px;
+    min-height: 100px;
     h4 {
         color: #003162;
     }
@@ -288,12 +289,29 @@ div#tf-contact-info {
     * {
         margin: 0;
     }
+
 }
 .tf-single-square-block.first {
     background-color: #007bff24;
 }
 .tf-single-square-block.second {
     background: #28a74524;
+
+    .repeat-dates {
+        font-size: 16px;
+        margin-top: 10px;
+        margin: 0;
+
+        .repeat-date {
+            margin: 5px;
+            
+        }
+    }
+}
+.repeat-design-default {
+    .repeat-dates {
+        margin: 0;
+    }
 }
 .tf-single-square-block.third {
     background: #ffc10724;
