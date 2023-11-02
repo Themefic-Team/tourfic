@@ -7,11 +7,11 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.10.3
+ * Version:         2.10.4
  * Tested up to:    6.3
  * WC tested up to: 8.2.1
  * Requires PHP:    7.2
- * Elementor tested up to: 3.17.1
+ * Elementor tested up to: 3.17.2
  */
 
 // don't load directly
@@ -59,7 +59,7 @@ if ( ! class_exists( 'Appsero\Client' ) ) {
  * @since 1.0
  */
 if ( ! defined( 'TOURFIC' ) ) {
-	define( 'TOURFIC', '2.10.3' );
+	define( 'TOURFIC', '2.10.4' );
 }
 
 /**
@@ -296,3 +296,16 @@ function tf_active_template_settings_callback() {
 
 //Register activation hook
 register_activation_hook( __FILE__, 'tf_active_template_settings_callback' );
+
+/**
+ * Compatibility with custom order tables for the WooCommerce plugin
+ *
+ * @since 2.10.4
+ * @access public
+ * @return void
+ */
+add_action( 'before_woocommerce_init', function() {
+	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+	}
+} );
