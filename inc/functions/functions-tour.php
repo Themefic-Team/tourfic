@@ -1595,6 +1595,9 @@ function tf_single_tour_booking_form( $post_id ) {
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
 								<?php _e( 'Adults', 'tourfic' ); ?>
+								<div class="acr-adult-price">
+									$132
+								</div>
                             </div>
                             <div class="acr-select">
                                 <div class="acr-dec">-</div>
@@ -1610,6 +1613,9 @@ function tf_single_tour_booking_form( $post_id ) {
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
 								<?php _e( 'Children', 'tourfic' ); ?>
+								<div class="acr-child-price">
+									$132
+								</div>
                             </div>
                             <div class="acr-select">
                                 <div class="acr-dec">-</div>
@@ -1624,6 +1630,9 @@ function tf_single_tour_booking_form( $post_id ) {
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
 								<?php _e( 'Infant', 'tourfic' ); ?>
+								<div class="acr-infant-price">
+									$132
+								</div>
                             </div>
                             <div class="acr-select">
                                 <div class="acr-dec">-</div>

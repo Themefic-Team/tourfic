@@ -59,23 +59,15 @@
     flex-wrap: wrap;
     gap: 10px;
     padding-right: 8px;
-
-    &::-webkit-scrollbar {
-        width: 8px;
-      }
-      
-      /* Track */
-      &::-webkit-scrollbar-track {
-        background: #D6D4D2; 
-
-      }
-       
-      /* Handle */
-      &::-webkit-scrollbar-thumb {
-        background: #595349; 
-        border-radius: 50px;
-        overflow: hidden;
-      }
+    scrollbar-width: thin;
+    scrollbar-color: #aaa #eee;
+    scrollbar {
+        width: 5px; 
+    }
+    scrollbar-thumb {
+        background-color: #aaa;
+        border-radius: 4px;
+    }
       
 }
 

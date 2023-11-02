@@ -2607,8 +2607,8 @@
         });
 
         $('.tf-template-3 .tf-details-menu a').on('click', function() {
-        $(this).addClass('tf-hashlink');
-        $(this).closest('li').siblings().find('a').removeClass('tf-hashlink');
+            $(this).addClass('tf-hashlink');
+            $(this).closest('li').siblings().find('a').removeClass('tf-hashlink');
         });
 
 
@@ -2663,7 +2663,6 @@
                     $("#tour_room_details_loader").hide();
                     
                 }
-
             });
         });
     });

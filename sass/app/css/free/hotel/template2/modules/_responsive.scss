@@ -375,6 +375,27 @@
             min-width: auto;
             display: block;
         }
+        .tf-hero-section-wrap .tf-container .tf-archive-hero-content .tf-head-title{
+            display: flow-root;
+        }
+        .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-fields{
+            display: flow-root;
+            >div{
+                width: auto !important;
+                border-right: 0px solid;
+            }
+            .tf-booking-form-location .tf-booking-location-wrap{
+                max-width: none !important;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            .tf-booking-form-checkin, .tf-booking-form-checkout{
+                float: left;
+                border-right: 1px solid #D6D4D2;
+                width: 32% !important;
+                padding: 0px 10px;
+            }
+        }
     }
     .tf-template-3.tf-hotel-single {
         .tf-available-rooms-wrapper .tf-available-room .tf-available-room-gallery .tf-room-gallery {
