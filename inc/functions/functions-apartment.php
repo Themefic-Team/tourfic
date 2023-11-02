@@ -612,6 +612,10 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
         <script>
             (function ($) {
                 $(document).ready(function () {
+
+					// First Day of Week
+					<?php tf_flatpickr_locale("root"); ?>
+
                     let minStay = <?php echo $min_stay ?>;
 
                     const bookingCalculation = (selectedDates) => {

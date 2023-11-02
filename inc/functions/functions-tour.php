@@ -1454,6 +1454,9 @@ function tf_single_tour_booking_form( $post_id ) {
                             populateTimeSelect(allowed_times)
                         }
 
+						// First Day of Week
+						<?php tf_flatpickr_locale("root"); ?>
+
                         function populateTimeSelect(times) {
                             let timeSelect = $('select[name="check-in-time"]');
                             let timeSelectDiv = $(".check-in-time-div");
@@ -1677,6 +1680,9 @@ function tf_single_tour_booking_form( $post_id ) {
                     if (custom_avail == false && allowed_times.length > 0) {
                         populateTimeSelect(allowed_times)
                     }
+
+					// First Day of Week
+					<?php tf_flatpickr_locale("root"); ?>
 
                     function populateTimeSelect(times) {
                         let timeSelect = $('select[name="check-in-time"]');
