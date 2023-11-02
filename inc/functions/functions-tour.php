@@ -796,6 +796,8 @@ function tf_single_tour_booking_form( $post_id ) {
 	// Continuous custom availability
 	$custom_avail = ! empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : '';
 	
+	# Get Pricing
+	$tour_price = new Tour_Price( $meta );
 	// Date format for Users Oputput
 	$tour_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
 
@@ -901,7 +903,9 @@ function tf_single_tour_booking_form( $post_id ) {
 		}
 
 	}
-
+	if ( $tour_type == 'continuous' && $custom_avail == true ) {
+		$pricing_rule = ! empty( $meta['custom_pricing_by'] ) ? $meta['custom_pricing_by'] : 'person';
+	}
 	if ( ! empty( $meta['allowed_time'] ) && gettype( $meta['allowed_time'] ) == "string" ) {
 
 		$tf_tour_unserial_custom_time = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
@@ -1596,7 +1600,9 @@ function tf_single_tour_booking_form( $post_id ) {
                             <div class="acr-label tf-flex">
 								<?php _e( 'Adults', 'tourfic' ); ?>
 								<div class="acr-adult-price">
-									$132
+									<?php if( $pricing_rule == 'person' && !empty($tour_price->wc_sale_adult) && !empty($tour_price->wc_adult) ){
+										echo $tour_price->wc_sale_adult ?? $tour_price->wc_adult;
+									} ?>
 								</div>
                             </div>
                             <div class="acr-select">
@@ -1614,7 +1620,9 @@ function tf_single_tour_booking_form( $post_id ) {
                             <div class="acr-label tf-flex">
 								<?php _e( 'Children', 'tourfic' ); ?>
 								<div class="acr-child-price">
-									$132
+									<?php if( $pricing_rule == 'person' && !empty($tour_price->wc_sale_child) && !empty($tour_price->wc_child) ){
+										echo $tour_price->wc_sale_child ?? $tour_price->wc_child;
+									} ?>
 								</div>
                             </div>
                             <div class="acr-select">
@@ -1631,7 +1639,9 @@ function tf_single_tour_booking_form( $post_id ) {
                             <div class="acr-label tf-flex">
 								<?php _e( 'Infant', 'tourfic' ); ?>
 								<div class="acr-infant-price">
-									$132
+									<?php if( $pricing_rule == 'person' && !empty($tour_price->wc_sale_infant) && !empty($tour_price->wc_infant) ){
+										echo $tour_price->wc_sale_infant ?? $tour_price->wc_infant;
+									} ?>
 								</div>
                             </div>
                             <div class="acr-select">
