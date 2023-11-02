@@ -76,13 +76,11 @@
                     }
                 }
                 .tf-features-block-wrapper {
-                    display: flex;
+                    display: grid;
                     gap: 24px;
-                    flex-direction: row;
-                    flex-wrap: wrap;
+                    grid-template-columns: 1fr 1fr 1fr 1fr;
                     margin-bottom: 32px;
                     .tf-feature-block {
-                        width: calc(25% - 66px);
                         padding: 24px;
                         display: flex;
                         gap: 16px;
@@ -108,6 +106,7 @@
                     background: #FCF4E8;
                     margin-bottom: 16px;
                     .tf-highlights-icon { 
+                        width: 230px;
                         img { 
                             width: 230px;
                             height: 230px;
@@ -115,6 +114,7 @@
                         }
                     }
                     .ft-highlights-details { 
+                        width: 80%;
                         ul { 
                             margin: 0;
                             padding: 0;

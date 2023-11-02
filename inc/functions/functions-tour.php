@@ -1574,19 +1574,19 @@ function tf_single_tour_booking_form( $post_id ) {
         </form>
 	<?php } elseif ( $tf_tour_selected_template == "design-2" ) { ?>
 		<form class="tf_tours_booking">
-            <div class="tf-field-group tf-mt-8">
+            <div class="tf-field-group tf-mt-8 tf-field-calander">
                 <i class="fa-sharp fa-solid fa-calendar-days"></i>
                 <input type='text' name='check-in-out-date' id='check-in-out-date' class='tf-field tours-check-in-out' onkeypress="return false;" placeholder='<?php _e( "Select Date", "tourfic" ); ?>' value='' required/>
             </div>
 			<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' ) { ?>
-                <div class="tf-field-group check-in-time-div tf-mt-8" id="" style="display: none;">
+                <div class="tf-field-group check-in-time-div tf-mt-8 tf-field-calander" id="" style="display: none;">
                     <i class="fa-regular fa-clock"></i>
                     <select class="tf-field" name="check-in-time" id="" style="min-width: 100px;"></select>
                 </div>
 			<?php } ?>
 
             <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
-            <div class="tf-booking-person tf-mt-30">
+            <div class="tf-booking-person">
                 <div class="tf-form-title">
                     <p><?php _e( "Person Info", "tourfic" ); ?></p>
                 </div>
@@ -1594,7 +1594,6 @@ function tf_single_tour_booking_form( $post_id ) {
                     <div class="tf-field-group tf-mt-16 tf_acrselection">
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
-                                <i class="fa-regular fa-user"></i>
 								<?php _e( 'Adults', 'tourfic' ); ?>
                             </div>
                             <div class="acr-select">
@@ -1610,7 +1609,6 @@ function tf_single_tour_booking_form( $post_id ) {
                     <div class="tf-field-group tf-mt-16 tf_acrselection">
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
-                                <i class="fa-solid fa-child"></i>
 								<?php _e( 'Children', 'tourfic' ); ?>
                             </div>
                             <div class="acr-select">
@@ -1625,7 +1623,6 @@ function tf_single_tour_booking_form( $post_id ) {
                     <div class="tf-field-group tf-mt-16 tf_acrselection">
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
-                                <i class="fa-solid fa-baby"></i>
 								<?php _e( 'Infant', 'tourfic' ); ?>
                             </div>
                             <div class="acr-select">
@@ -1638,7 +1635,7 @@ function tf_single_tour_booking_form( $post_id ) {
 				<?php } ?>
             </div>
 
-            <div class="tf-tours-booking-btn tf-booking-bttns tf-mt-30">
+            <div class="tf-tours-booking-btn tf-booking-bttns">
                 <div class="tf-btn">
                     <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php _e( 'Book Now', 'tourfic' ); ?></a>
                 </div>

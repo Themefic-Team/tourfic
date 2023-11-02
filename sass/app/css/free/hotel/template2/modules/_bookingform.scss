@@ -136,38 +136,7 @@
                     }
 				}
 			}
-			.tf-booking-form-checkin { 
-				.tf-booking-form-title { 
-				}
-				.tf-booking-date-wrap { 
-					.tf-booking-date { 
-					}
-					.tf-booking-month { 
-						span { 
-						}
-						img { 
-						}
-					}
-				}
-				.flatpickr-input { 
-				}
-			}
-			.tf-booking-form-checkout { 
-				.tf-booking-form-title { 
-				}
-				.tf-booking-date-wrap { 
-					.tf-booking-date { 
-					}
-					.tf-booking-month { 
-						span { 
-						}
-						img { 
-						}
-					}
-				}
-				.flatpickr-input { 
-				}
-			}
+			
 			.tf-booking-form-guest-and-room { 
                 padding-left: 40px !important;
                 min-width: 200px;
@@ -317,5 +286,50 @@
         font-family: "Cormorant Garamond", serif;
         font-weight: 700;
         line-height: 1;
+    }
+}
+
+.tf_tours_booking{
+    .tf-form-title{
+        p{
+            color: #595349;
+            font-family: Cormorant Garamond;
+            font-size: 32px !important;
+            font-style: normal !important;
+            font-weight: 700 !important;
+            line-height: 120% !important;
+        }
+    }
+    .tf-field-group {
+        margin: 0px !important;
+        .tf-field{
+            background-color: transparent !important;
+            padding: 12px 0px !important;
+            align-items: center;
+            justify-content: space-between;
+            .acr-label{
+                i{
+                    position: static;
+                }
+            }
+            .acr-select{
+                input{
+                    padding-left: 0px !important;
+                }
+            }
+        }
+    }
+    .tf-field-calander .tf-field{
+        padding: 15px 40px !important;
+        width: 100% !important;
+        background-color: #F3F7FA !important;
+    }
+    .tf-tours-booking-btn.tf-booking-bttns{
+        a{
+            border: 1px solid #B58E53 !important;
+            background: #B58E53 !important;
+            padding: 12px 32px !important;
+            justify-content: center;
+        }
     }
 }
