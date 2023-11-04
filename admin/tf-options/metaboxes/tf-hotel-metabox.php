@@ -590,88 +590,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'default'   => true,
 						),
 						array(
-							'id'      => 'Booking-Type',
-							'type'    => 'heading',
-							'content' => __( 'Booking', 'tourfic' ),
-							'class'   => 'tf-field-class',
-						),
-						array(
-							'id'      => 'booking-by',
-							'type'    => 'select',
-							'label'   => __( 'Booking Type', 'tourfic' ),
-							'options' => array(
-								'1' => __( 'Internal', 'tourfic' ),
-								'2' => __( 'External', 'tourfic' ),
-							),
-							'default' => '2',
-							'is_pro'  => true,
-						),
-						array(
-							'id'          => '',
-							'type'        => 'text',
-							'label'       => __( 'External URL', 'tourfic' ),
-							'placeholder' => __( 'https://website.com', 'tourfic' ),
-							'is_pro'  => true
-						),
-						array(
-							'id'        => '',
-							'type'      => 'switch',
-							'label'     => __( 'Allow Attribute', 'tourfic' ),
-							'subtitle'  => __( 'If attribute allow, You can able to add custom Attribute', 'tourfic' ),
-							'label_on'  => __( 'Yes', 'tourfic' ),
-							'label_off' => __( 'No', 'tourfic' ),
-							'is_pro'  => true
-						),
-						array(
-							'id'          => '',
-							'type'        => 'textarea',
-							'label'       => __( 'Query Attribute', 'tourfic' ),
-							'placeholder' => __( 'adult={adult}&child={child}&room={room}', 'tourfic' ),
-							'is_pro'  => true
-						),
-						array(
-							'id'      => 'booking-notice',
-							'type'    => 'notice',
-							'class'   => 'info',
-							'title'   => __( 'Query Attribute List', 'tourfic' ),
-							'content' => __( 'You can use the following placeholders in the Query Attribute body:', 'tourfic' ) . '<br><br><strong>{adult} </strong> : To Display Adult Number from Search.<br>
-							<strong>{child} </strong> : To Display Child Number from Search.<br>
-							<strong>{checkin} </strong> : To display the Checkin date from Search.<br>
-							<strong>{checkout} </strong> : To display the Checkout date from Search.<br>
-							<strong>{room} </strong> : To display the room number from Search.<br>',
-							'is_pro'  => true
-						),
-						array(
-							'id'      => 'Deposit',
-							'type'    => 'heading',
-							'content' => __( 'Deposit', 'tourfic' ),
-							'class'   => 'tf-field-class',
-						),
-						array(
-							'id'      => '',
-							'type'    => 'switch',
-							'label'   => __( 'Enable Deposit', 'tourfic' ),
-							'is_pro'  => true,
-							'default' => false,
-						),
-						array(
-							'id'      => 'ical',
-							'type'    => 'heading',
-							'content' => __( 'iCal Sync', 'tourfic' ),
-						),
-						array(
-							'id'          => '',
-							'type'        => 'ical',
-							'label'       => __( 'iCal URL', 'tourfic' ),
-							'placeholder' => __( 'https://website.com', 'tourfic' ),
-							'button_text' => __( 'Import', 'tourfic' ),
-							'button_class'   => 'room-ical-import',
-							'attributes'  => array(
-								'class' => 'ical_url_input',
-							),
-							'is_pro'      => true
-						),
-						array(
 							'id'      => 'Availability',
 							'type'    => 'heading',
 							'content' => __( 'Availability', 'tourfic' ),
@@ -714,6 +632,91 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'is_pro'  => true,
 							'dependency' => array( 'avil_by_date', '!=', 'false' ),
 						),
+						array(
+							'id'      => 'Booking-Type',
+							'type'    => 'heading',
+							'content' => __( 'Booking', 'tourfic' ),
+							'class'   => 'tf-field-class',
+						),
+						array(
+							'id'      => 'booking-by',
+							'type'    => 'select',
+							'label'   => __( 'Booking Type', 'tourfic' ),
+							'options' => array(
+								'1' => __( 'Internal + Woocommerce Booking', 'tourfic' ),
+								'2' => __( 'External + Others Website Booking (Pro)', 'tourfic' ),
+							),
+							'default' => '1',
+						),
+						array(
+							'id'          => '',
+							'type'        => 'text',
+							'label'       => __( 'External URL', 'tourfic' ),
+							'placeholder' => __( 'https://website.com', 'tourfic' ),
+							'is_pro'  => true,
+							'dependency'  => array( 'booking-by', '==', '2' ),
+						),
+						array(
+							'id'        => '',
+							'type'      => 'switch',
+							'label'     => __( 'Allow Attribute', 'tourfic' ),
+							'subtitle'  => __( 'If attribute allow, You can able to add custom Attribute', 'tourfic' ),
+							'label_on'  => __( 'Yes', 'tourfic' ),
+							'label_off' => __( 'No', 'tourfic' ),
+							'is_pro'  => true,
+							'dependency'  => array( 'booking-by', '==', '2' ),
+						),
+						array(
+							'id'          => '',
+							'type'        => 'textarea',
+							'label'       => __( 'Query Attribute', 'tourfic' ),
+							'placeholder' => __( 'adult={adult}&child={child}&room={room}', 'tourfic' ),
+							'is_pro'  => true,
+							'dependency'  => array( 'booking-by', '==', '2' ),
+						),
+						array(
+							'id'      => 'booking-notice',
+							'type'    => 'notice',
+							'class'   => 'info',
+							'title'   => __( 'Query Attribute List', 'tourfic' ),
+							'content' => __( 'You can use the following placeholders in the Query Attribute body:', 'tourfic' ) . '<br><br><strong>{adult} </strong> : To Display Adult Number from Search.<br>
+							<strong>{child} </strong> : To Display Child Number from Search.<br>
+							<strong>{checkin} </strong> : To display the Checkin date from Search.<br>
+							<strong>{checkout} </strong> : To display the Checkout date from Search.<br>
+							<strong>{room} </strong> : To display the room number from Search.<br>',
+							'is_pro'  => true,
+							'dependency'  => array( 'booking-by', '==', '2' ),
+						),
+						array(
+							'id'      => 'Deposit',
+							'type'    => 'heading',
+							'content' => __( 'Deposit', 'tourfic' ),
+							'class'   => 'tf-field-class',
+						),
+						array(
+							'id'      => '',
+							'type'    => 'switch',
+							'label'   => __( 'Enable Deposit', 'tourfic' ),
+							'is_pro'  => true,
+							'default' => false,
+						),
+						array(
+							'id'      => 'ical',
+							'type'    => 'heading',
+							'content' => __( 'iCal Sync', 'tourfic' ),
+						),
+						array(
+							'id'          => '',
+							'type'        => 'ical',
+							'label'       => __( 'iCal URL', 'tourfic' ),
+							'placeholder' => __( 'https://website.com', 'tourfic' ),
+							'button_text' => __( 'Import', 'tourfic' ),
+							'button_class'   => 'room-ical-import',
+							'attributes'  => array(
+								'class' => 'ical_url_input',
+							),
+							'is_pro'      => true
+						)
 					),
 				)
 			),

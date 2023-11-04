@@ -820,22 +820,23 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'is_pro'  => true,
 				),
 				array(
-					'id'      => '',
+					'id'      => 'booking-by',
 					'type'    => 'select',
 					'label'   => __( 'Booking Type', 'tourfic' ),
 					'options' => array(
-						'1' => __( 'Internal', 'tourfic' ),
-						'2' => __( 'External + Without Payment', 'tourfic' ),
+						'1' => __( 'Internal + Woocommerce Booking', 'tourfic' ),
+						'2' => __( 'External + Others Website Booking (Pro)', 'tourfic' ),
+						'' => __( 'Without Payment Booking (Pro)', 'tourfic' ),
 					),
-					'default' => '2',
-					'is_pro'  => true,
+					'default' => '1',
 				),
 				array(
 					'id'          => '',
 					'type'        => 'text',
 					'label'       => __( 'External URL', 'tourfic' ),
 					'placeholder' => __( 'https://website.com', 'tourfic' ),
-					'is_pro'  => true
+					'is_pro'  => true,
+					'dependency'  => array( 'booking-by', '==', '2' ),
 				),
 				array(
 					'id'        => '',
@@ -844,14 +845,16 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'subtitle'  => __( 'If attribute allow, You can able to add custom Attribute', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-					'is_pro'  => true
+					'is_pro'  => true,
+					'dependency'  => array( 'booking-by', '==', '2' ),
 				),
 				array(
 					'id'          => '',
 					'type'        => 'textarea',
 					'label'       => __( 'Query Attribute', 'tourfic' ),
 					'placeholder' => __( 'adult={adult}&child={child}&infant={infant}', 'tourfic' ),
-					'is_pro'  => true
+					'is_pro'  => true,
+					'dependency'  => array( 'booking-by', '==', '2' ),
 				),
 				array(
 					'id'      => 'booking-notice',
@@ -862,7 +865,8 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					<strong>{child} </strong> : To Display Child Number from Search.<br>
 					<strong>{booking_date} </strong> : To display the Booking date from Search.<br>
 					<strong>{infant} </strong> : To display the infant number from Search.<br>',
-					'is_pro'  => true
+					'is_pro'  => true,
+					'dependency'  => array( 'booking-by', '==', '2' ),
 				),
 			),
 		),
