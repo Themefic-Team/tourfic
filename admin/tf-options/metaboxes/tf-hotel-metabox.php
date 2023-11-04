@@ -606,7 +606,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							),
 						),
 						array(
-							'id'        => '',
+							'id'        => 'reduce_num_room',
 							'type'      => 'switch',
 							'is_pro'    => true,
 							'label'     => __( 'Room Inventory Management', 'tourfic' ),

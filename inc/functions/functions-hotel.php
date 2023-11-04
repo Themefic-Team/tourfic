@@ -914,7 +914,7 @@ function tf_room_availability_callback() {
 					$avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
 				}
 
-				if ( ! empty( $order_ids ) && function_exists( 'is_tf_pro' ) && is_tf_pro() && $reduce_num_room == true ) {
+				if ( ! empty( $order_ids ) && $reduce_num_room == true ) {
 
 					# Get backend available date range as an array
 					if ( $avil_by_date ) {
