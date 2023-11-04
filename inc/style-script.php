@@ -378,8 +378,9 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-single-page .tf-review-reply .tf-review-details p,
 			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li,
 			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li i,
+			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-ratings,
 			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-ratings i{
-				color: '.$tf_review_color.';
+				color: '.$tf_review_color.' !important;
 			}
 		'; }
 		
@@ -422,10 +423,10 @@ if( !function_exists( 'tf_hotel_css' ) ){
 			.tf-share .share-toggle i:hover, .tf-single-page .tf-section.tf-single-head .tf-share > a i:hover {color: '.$tf_share_color_hov.' !important;}
 		'; }
 		if( $tf_gradient_one_reg && $tf_gradient_two_reg  ) { $output .= '
-			.show-on-map .btn-styled, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i {background: linear-gradient(to bottom, '.$tf_gradient_one_reg.' 0, '.$tf_gradient_two_reg.' 100%);}
+			.show-on-map .btn-styled, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i {background: linear-gradient(to bottom, '.$tf_gradient_one_reg.' 0, '.$tf_gradient_two_reg.' 100%) !important;}
 		'; }
 		if( $tf_gradient_one_hov && $tf_gradient_two_hov  ) { $output .= '
-			.show-on-map .btn-styled:hover, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i:hover {background: linear-gradient(to bottom, '.$tf_gradient_one_hov.' 0, '.$tf_gradient_two_hov.' 100%);}
+			.show-on-map .btn-styled:hover, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i:hover {background: linear-gradient(to bottom, '.$tf_gradient_one_hov.' 0, '.$tf_gradient_two_hov.' 100%) !important;}
 		'; }
 		if( $tf_map_text_color  ) { $output .= '
 			.show-on-map .btn-styled, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i {color: '.$tf_map_text_color.';}
@@ -433,7 +434,7 @@ if( !function_exists( 'tf_hotel_css' ) ){
 		if( $tf_hotel_features  ) { $output .= '
 			.tf_features i, 
 			.tf-archive-desc i, 
-			.tf-single-page .tf-hotel-single-features ul li,
+			.tf-single-page .tf-hotel-single-features ul li i,
 			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-details .tf-archive-features i,
 			.tf-hotel-design-1 .tf-rooms .tf-features-infos ul li {color: '.$tf_hotel_features.'!important;}
 		'; }
@@ -454,7 +455,14 @@ if( !function_exists( 'tf_hotel_css' ) ){
 			}
 		'; }
 		if( $tf_hotel_table_border_color  ) { $output .= '
-			.availability-table td, .availability-table td.reserve, .tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table tr td, .tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table {border-color: '.$tf_hotel_table_border_color.';}
+			.availability-table td, .availability-table th, .availability-table td.reserve, .tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table tr td {border-color: '.$tf_hotel_table_border_color.';}
+		'; }
+
+		if( $tf_hotel_table_border_color  ) { $output .= '
+			.tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table {border: 1px solid '.$tf_hotel_table_border_color.'; border-collapse: inherit;}
+			.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table thead tr th{
+				border: 0px solid;
+			}
 		'; }
 		
 		wp_add_inline_style( 'tf-app-style', $output );

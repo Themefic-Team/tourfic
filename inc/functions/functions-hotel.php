@@ -800,14 +800,14 @@ function tf_room_availability_callback() {
 
 	if( $tf_hotel_selected_template_check == "design-1" ){
 	?>
-	<table class="tf-availability-table">
+	<table class="tf-availability-table" cellpadding="0" cellspacing="0">
 	<thead>
 		<tr>
 			<th class="description" colspan="3"><?php _e( 'Room Details', 'tourfic' ); ?></th>
 		</tr>
 	</thead>
 	<?php }else{ ?>
-    <table class="availability-table">
+    <table class="availability-table" cellpadding="0" cellspacing="0">
     <thead>
     <tr>
         <th class="description"><?php _e( 'Room Details', 'tourfic' ); ?></th>

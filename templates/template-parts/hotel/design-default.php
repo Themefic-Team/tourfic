@@ -403,7 +403,7 @@
                                 <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
                             </div>
                         </div>
-                        <table class="availability-table">
+                        <table class="availability-table" cellpadding="0" cellspacing="0">
                             <thead>
                             <tr>
                                 <th class="description"><?php _e( 'Room Details', 'tourfic' ); ?></th>

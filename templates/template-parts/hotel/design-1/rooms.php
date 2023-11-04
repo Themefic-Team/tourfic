@@ -23,7 +23,7 @@ foreach ( $rooms as $key => $room ) {
         </div>
 
         <!-- Room Table -->
-        <table class="tf-availability-table">
+        <table class="tf-availability-table" cellpadding="0" cellspacing="0">
             <thead>
                 <tr>
                     <th class="description" colspan="3"><?php _e( 'Room Details', 'tourfic' ); ?></th>
