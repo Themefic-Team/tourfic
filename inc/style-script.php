@@ -296,7 +296,10 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-global .tf-review-wrapper .tf-review-form .tf-review-form-container .tf-review-submit input[type="submit"]{
 				border: 1px solid '.$tf_template1_global_reg.';
 				border-color: '.$tf_template1_global_reg.' !important;
-			}';
+			}
+			.tf-aq-outer span.close-aq {background: '.$tf_template1_global_reg.' !important;}
+			.tf-aq-field .btn-styled {background: '.$tf_template1_global_reg.' !important;}';
+			
 		}
 
 		// Common CSS
