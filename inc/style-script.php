@@ -85,7 +85,6 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-global .tf-item-featured .tf-features-box .tf-featur,
 			.tf-template-global .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::after,
 			.tf-template-global .tf-itinerary-wrapper.tf-mb-50 .tf-itinerary-downloader-option,
-			.tf-template-global .tf-review-wrapper .tf-review-data .tf-review-data-features .percent-progress,
 			.tf-template-global .tf-rooms-sections .tf-rooms .tf-availability-table thead,
 			.tf-template-global .tf-hotel-location-map .tf-hotel-location-preview a i,
 			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature,
@@ -320,7 +319,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 		'; }
 		if( $tf_faq_color OR $tf_faq_icon_color OR $tf_faq_border_color ) { $output .= '
 			.tf-faq-title h4,
-			.tf-single-page .tf-faq-wrapper .tf-faq-single-inner h3 {
+			.tf-single-page .tf-faq-wrapper .tf-faq-single-inner h3,
+			.tf-template-global .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps h4 {
 				color: '.$tf_faq_color.';
 			}
 			#tf-faq-item,
@@ -328,8 +328,15 @@ if( !function_exists( 'tf_custom_css' ) ){
 				border-color: '.$tf_faq_border_color.';
 			}
 			#tf-faq-item .arrow,
-			.tf-single-page .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-plus {
+			.tf-single-page .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-plus,
+			.tf-single-page .tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-minus {
 				color: '.$tf_faq_icon_color.';
+			}
+		'; }
+
+		if( $tf_faq_border_color ) { $output .= '
+			.tf-hotel-design-1 .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner{
+				border: 1px solid '.$tf_faq_border_color.';
 			}
 		'; }
 
@@ -337,11 +344,12 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-single-review .tf-single-details {
 				background: '.$tf_review_bg_color.';
 			}
-			.tf-single-review .tf-review-details .tf-name, .tf-single-review .tf-review-details .tf-date, .tf-single-review .tf-review-details .tf-rating-stars, .tf-single-review .tf-review-details .tf-description {
+			.tf-single-review .tf-review-details .tf-name, .tf-single-review .tf-review-details .tf-date, .tf-single-review .tf-review-details .tf-rating-stars, .tf-single-review .tf-review-details .tf-rating-stars i, .tf-single-review .tf-review-details .tf-description p {
 				color: '.$tf_review_color.';
 			}
 			.tf-review-container .tf-review-progress-bar .tf-single .tf-p-bar,
-			.tf-single-page .tf-review-wrapper .tf-review-data .tf-review-data-features .tf-progress-bar {
+			.tf-single-page .tf-review-wrapper .tf-review-data .tf-review-data-features .tf-progress-bar,
+			.tf-template-global .tf-review-wrapper .tf-review-data .tf-review-data-features .percent-progress {
 				background: '.$tf_param_single_bg_color.';
 			}
 			.tf-review-container .tf-review-progress-bar,
@@ -369,7 +377,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-single-page .tf-review-reply .tf-review-details h3,
 			.tf-single-page .tf-review-reply .tf-review-details p,
 			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li,
-			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li i{
+			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li i,
+			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-ratings i{
 				color: '.$tf_review_color.';
 			}
 		'; }
@@ -407,10 +416,10 @@ if( !function_exists( 'tf_hotel_css' ) ){
 			.tf-title-left span.post-type {background: '.$tf_hotel_type_bg_color.';}
 		'; }
 		if( $tf_share_color_reg  ) { $output .= '
-			.tf-share .share-toggle i, .tf-single-page .tf-section.tf-single-head .tf-share a i {color: '.$tf_share_color_reg.';}
+			.tf-share .share-toggle i, .tf-single-page .tf-section.tf-single-head .tf-share > a i {color: '.$tf_share_color_reg.' !important;}
 		'; }
 		if( $tf_share_color_hov  ) { $output .= '
-			.tf-share .share-toggle i:hover, .tf-single-page .tf-section.tf-single-head .tf-share a i:hover {color: '.$tf_share_color_hov.';}
+			.tf-share .share-toggle i:hover, .tf-single-page .tf-section.tf-single-head .tf-share > a i:hover {color: '.$tf_share_color_hov.' !important;}
 		'; }
 		if( $tf_gradient_one_reg && $tf_gradient_two_reg  ) { $output .= '
 			.show-on-map .btn-styled, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i {background: linear-gradient(to bottom, '.$tf_gradient_one_reg.' 0, '.$tf_gradient_two_reg.' 100%);}
