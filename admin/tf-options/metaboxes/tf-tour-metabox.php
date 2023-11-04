@@ -199,7 +199,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'    => 'highlights-section-title',
 					'type'  => 'text',
 					'label' => __( 'Section Title', 'tourfic' ),
-					'default' => "Highlights"
+					'default' => __("Highlights", 'tourfic'),
 				),
 				array(
 					'id'       => 'additional_information',
@@ -232,7 +232,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'    => 'contact-info-section-title',
 					'type'  => 'text',
 					'label' => __( 'Section Title', 'tourfic' ),
-					'default' => "Contact Information"
+					'default' => __("Contact Information", 'tourfic'),
 				),
 				array(
 					'id'          => 'email',
@@ -927,7 +927,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'    => 'itinerary-section-title',
 					'type'  => 'text',
 					'label' => __( 'Section Title', 'tourfic' ),
-					'default' => "Travel Itinerary"
+					'default' => __("Travel Itinerary", 'tourfic'),
 				),
 				array(
 					'id'           => 'itinerary',
@@ -1262,7 +1262,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'    => 'tc-section-title',
 					'type'  => 'text',
 					'label' => __( 'Section Title', 'tourfic' ),
-					'default' => "Tour Terms & Conditions"
+					'default' => __( "Tour Terms & Conditions", 'tourfic' ),
 				),
 				array(
 					'id'    => 'terms_conditions',
@@ -1325,7 +1325,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'    => 'booking-section-title',
 					'type'  => 'text',
 					'label' => __( 'Booking Section Title', 'tourfic' ),
-					'default' => "Book This Tour"
+					'default' => __("Book This Tour", 'tourfic')
 				),
 				array(
 					'id'      => 'tour-description-section',
@@ -1337,7 +1337,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'    => 'description-section-title',
 					'type'  => 'text',
 					'label' => __( 'Description Section Title', 'tourfic' ),
-					'default' => "Description"
+					'default' => __("Description", 'tourfic')
 				),
 				array(
 					'id'      => 'popular-map',
@@ -1349,7 +1349,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'    => 'map-section-title',
 					'type'  => 'text',
 					'label' => __( 'Map Section Title', 'tourfic' ),
-					'default' => "Maps"
+					'default' => __("Maps", 'tourfic'),
 				),
 				array(
 					'id'      => 'review-sections',
@@ -1361,7 +1361,8 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'    => 'review-section-title',
 					'type'  => 'text',
 					'label' => __( 'Reviews Section Title', 'tourfic' ),
-					'default' => "Average Guest Reviews"
+     				'default' => __( 'Average Guest Reviews', 'tourfic' ),
+
 				),
 				array(
 					'id'      => 'enquiry-section',
@@ -1381,21 +1382,21 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'    => 't-enquiry-option-title',
 					'type'  => 'text',
 					'label' => __( 'Tour Enquiry Title Text', 'tourfic' ),
-					'default' => "Have a question in mind",
+					'default' => __("Have a question in mind", 'tourfic'),
 					'dependency' => array( 't-enquiry-section', '==', '1' ),
 				),
 				array(
 					'id'    => 't-enquiry-option-content',
 					'type'  => 'text',
 					'label' => __( 'Tour Enquiry Short Text', 'tourfic' ),
-					'default' => "Looking for more info? Send a question to the property to find out more.",
+					'default' => __("Looking for more info? Send a question to the property to find out more.", 'tourfic'),
 					'dependency' => array( 't-enquiry-section', '==', '1' ),
 				),
 				array(
 					'id'    => 't-enquiry-option-btn',
 					'type'  => 'text',
 					'label' => __( 'Tour Enquiry Button Text', 'tourfic' ),
-					'default' => "Ask a Question",
+					'default' => __("Ask a Question", 'tourfic'),
 					'dependency' => array( 't-enquiry-section', '==', '1' ),
 				),
 			),

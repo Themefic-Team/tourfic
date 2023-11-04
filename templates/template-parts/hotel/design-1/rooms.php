@@ -11,7 +11,7 @@ foreach ( $rooms as $key => $room ) {
 ?>
 
 <div class="tf-rooms-sections tf-mb-50 tf-template-section">
-    <h2 class="section-heading tf-section-title"><?php echo !empty($meta['room-section-title']) ? esc_html($meta['room-section-title']) : __( 'Available Rooms', 'tourfic' ); ?></h2>
+    <h2 class="section-heading tf-section-title"><?php echo !empty($meta['room-section-title']) ? esc_html($meta['room-section-title']) : ''; ?></h2>
     <?php do_action( 'tf_hotel_features_filter', $rm_features, 10 ) ?>
 
     <div class="tf-rooms" id="rooms">

@@ -646,7 +646,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'    => 'review-section-title',
 					'type'  => 'text',
 					'label' => __( 'Reviews Section Title', 'tourfic' ),
-					'default' => "Guest Reviews"
+					'default' => __( "Guest Reviews", 'tourfic' )
 				),
 				//Related Apartment
 				array(

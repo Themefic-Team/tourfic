@@ -1,7 +1,7 @@
 <?php if ( $faqs ): ?>
 <!-- tourfic FAQ -->
 <div class="tf-faq-wrapper tf-mb-50 tf-template-section">
-    <h2 class="tf-title tf-section-title" ><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : __("Frequently Asked Questions","tourfic"); ?></h2>
+    <h2 class="tf-title tf-section-title" ><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : ''; ?></h2>
     <div class="tf-faq-inner">
         <?php 
         $faq_key = 1;    

@@ -134,7 +134,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'id'    => 'room-section-title',
 					'type'  => 'text',
 					'label' => __( 'Section Title', 'tourfic' ),
-					'default' => "Available Rooms"
+					'default' => __( "Available Rooms", 'tourfic' ),
 				),
 				array(
 					'id'           => 'room',
@@ -508,7 +508,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'id'    => 'faq-section-title',
 					'type'  => 'text',
 					'label' => __( 'Section Title', 'tourfic' ),
-					'default' => "Faq’s"
+					'default' => "FAQ’s"
 				),
 				array(
 					'id'           => 'faq',
@@ -542,7 +542,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'id'    => 'tc-section-title',
 					'type'  => 'text',
 					'label' => __( 'Section Title', 'tourfic' ),
-					'default' => "Hotel Terms & Conditions"
+					'default' => __( '"Hotel Terms & Conditions"', 'tourfic' ),
 				),
 				array(
 					'id'    => 'tc',
@@ -596,7 +596,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'id'    => 'popular-section-title',
 					'type'  => 'text',
 					'label' => __( 'Popular Features Section Title', 'tourfic' ),
-					'default' => "Popular Features"
+					'default' => __( 'Popular Features', 'tourfic' ),
 				),
 				array(
 					'id'      => 'review-sections',
@@ -608,7 +608,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'id'    => 'review-section-title',
 					'type'  => 'text',
 					'label' => __( 'Reviews Section Title', 'tourfic' ),
-					'default' => "Average Guest Reviews"
+					'default' => __( 'Average Guest Reviews', 'tourfic' ),
 				),
 				array(
 					'id'      => 'enquiry-section',
@@ -628,21 +628,21 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'id'    => 'h-enquiry-option-title',
 					'type'  => 'text',
 					'label' => __( 'Hotel Enquiry Title Text', 'tourfic' ),
-					'default' => "Have a question in mind",
+					'default' => __( 'Have a question in mind', 'tourfic' ),
 					'dependency' => array( 'h-enquiry-section', '==', '1' ),
 				),
 				array(
 					'id'    => 'h-enquiry-option-content',
 					'type'  => 'text',
 					'label' => __( 'Hotel Enquiry Short Text', 'tourfic' ),
-					'default' => "Looking for more info? Send a question to the property to find out more.",
+					'default' => __("Looking for more info? Send a question to the property to find out more.", 'tourfic'),
 					'dependency' => array( 'h-enquiry-section', '==', '1' ),
 				),
 				array(
 					'id'    => 'h-enquiry-option-btn',
 					'type'  => 'text',
 					'label' => __( 'Hotel Enquiry Button Text', 'tourfic' ),
-					'default' => "Ask a Question",
+					'default' => __("Ask a Question", 'tourfic'),
 					'dependency' => array( 'h-enquiry-section', '==', '1' ),
 				),
 			),

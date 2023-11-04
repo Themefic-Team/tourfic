@@ -1,6 +1,6 @@
 <?php if ( $faqs ): ?>
 <div class="tf-hotel-faqs-section tf-mb-50 tf-template-section">
-    <h2 class="tf-title tf-section-title" ><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : __( "Faq’s", 'tourfic' ); ?></h2>
+    <h2 class="tf-title tf-section-title" ><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : ''; ?></h2>
     <div class="tf-section-flex tf-flex">
         <?php 
         $tf_enquiry_section_status = !empty($meta['h-enquiry-section']) ? $meta['h-enquiry-section'] : "";
@@ -9,9 +9,9 @@
         <div class="tf-hotel-enquiry">
             <div class="tf-ask-enquiry">
                 <i class="fa fa-question-circle-o" aria-hidden="true"></i>
-                <h3><?php echo !empty($meta['h-enquiry-option-title']) ? esc_html($meta['h-enquiry-option-title']) : __( "Have a question in mind", 'tourfic' ); ?></h3>
-                <p><?php echo !empty($meta['h-enquiry-option-content']) ? esc_html($meta['h-enquiry-option-content']) : __( "Looking for more info? Send a question to the property to find out more.", 'tourfic' ); ?></p>
-                <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-btn-normal btn-primary"><span><?php echo !empty($meta['h-enquiry-option-btn']) ? esc_html($meta['h-enquiry-option-btn']) : __( 'Ask a Question', 'tourfic' ); ?></span></a></div>
+                <h3><?php echo !empty($meta['h-enquiry-option-title']) ? esc_html($meta['h-enquiry-option-title']) : ''; ?></h3>
+                <p><?php echo !empty($meta['h-enquiry-option-content']) ? esc_html($meta['h-enquiry-option-content']) : '' ?></p>
+                <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-btn-normal btn-primary"><span><?php echo !empty($meta['h-enquiry-option-btn']) ? esc_html($meta['h-enquiry-option-btn']) : ''; ?></span></a></div>
             </div>
         </div>
         <?php } ?>

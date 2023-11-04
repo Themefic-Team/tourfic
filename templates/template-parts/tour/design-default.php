@@ -79,7 +79,7 @@
                             </div>
                             <div class="tf-contact-info-wrapper" id="tf-contact-info" style="display:none">
                                 <div class="tf-contact-info">
-                                    <h3><?php echo !empty($meta['contact-info-section-title']) ? esc_html($meta['contact-info-section-title']) : __("Contact Information","tourfic"); ?></h3>
+                                    <h3><?php echo !empty($meta['contact-info-section-title']) ? esc_html($meta['contact-info-section-title']) : ''; ?></h3>
                                     <?php 
                                     if(!empty($email)){ ?>
                                         <div class="tf-email">
@@ -304,7 +304,7 @@
             <div class="tf-highlight-content">
                 <div class="tf-highlight-item">
                     <div class="tf-highlight-text">
-                        <h2 class="section-heading"><?php echo !empty($meta['highlights-section-title']) ? esc_html($meta['highlights-section-title']) : __("Highlights","tourfic"); ?></h2>
+                        <h2 class="section-heading"><?php echo !empty($meta['highlights-section-title']) ? esc_html($meta['highlights-section-title']) : ''; ?></h2>
                         <p><?php echo $highlights; ?></p>
                     </div>
                     <?php if ( ! empty( $meta['hightlights_thumbnail'] ) ): ?>
@@ -393,7 +393,7 @@
             <div class="tf-travel-itinerary-wrapper gray-wrap sp-50">
                 <div class="tf-container">
                     <div class="tf-travel-itinerary-content">
-                        <h2 class="section-heading"><?php echo !empty($meta['itinerary-section-title']) ? esc_html($meta['itinerary-section-title']) : __("Travel Itinerary","tourfic"); ?></h2>
+                        <h2 class="section-heading"><?php echo !empty($meta['itinerary-section-title']) ? esc_html($meta['itinerary-section-title']) : ''; ?></h2>
                         <div class="tf-travel-itinerary-items-wrapper">
                             <?php 
                             foreach ( $itineraries as $itinerary ) {
@@ -493,7 +493,7 @@
         <div class="tf-faq-wrapper tour-faq sp-50">
             <div class="tf-container">
                 <div class="tf-faq-sec-title">
-                    <h2 class="section-heading"><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : __("Frequently Asked Questions","tourfic"); ?></h2>
+                    <h2 class="section-heading"><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : ''; ?></h2>
                     <p><?php _e( "Let’s clarify your confusions. Here are some of the Frequently Asked Questions which most of our client asks.", 'tourfic' ); ?></p>
                 </div>
 
@@ -503,10 +503,10 @@
                     if(!empty($tf_enquiry_section_status)){
                     ?>
                     <div class="tf-ask-question">
-                        <h3><?php echo !empty($meta['t-enquiry-option-title']) ? esc_html($meta['t-enquiry-option-title']) : __("Have a question in mind","tourfic"); ?></h3>
-                        <p><?php echo !empty($meta['t-enquiry-option-content']) ? esc_html($meta['t-enquiry-option-content']) : __("Looking for more info? Send a question to the property to find out more.","tourfic"); ?></p>
+                        <h3><?php echo !empty($meta['t-enquiry-option-title']) ? esc_html($meta['t-enquiry-option-title']) : ''; ?></h3>
+                        <p><?php echo !empty($meta['t-enquiry-option-content']) ? esc_html($meta['t-enquiry-option-content']) : ''; ?></p>
                         <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="btn-styled"><span>
-                            <?php echo !empty($meta['t-enquiry-option-btn']) ? esc_html($meta['t-enquiry-option-btn']) : __("Ask a Question","tourfic"); ?>
+                            <?php echo !empty($meta['t-enquiry-option-btn']) ? esc_html($meta['t-enquiry-option-btn']) : ''; ?>
                         </span></a></div>
                     </div>
                     <?php } ?>
@@ -534,7 +534,7 @@
         <div class="toc-section gray-wrap sp-50">
             <div class="tf-container">
                 <div class="tf-toc-wrap">
-                    <h2 class="section-heading"><?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : __("Tour Terms & Conditions","tourfic"); ?></h2>
+                    <h2 class="section-heading"><?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : ''; ?></h2>
                     <div class="tf-toc-inner">
                         <?php echo wpautop( $terms_and_conditions ); ?>
                     </div>
@@ -549,7 +549,7 @@
         <div id="tf-review" class="review-section sp-50">
             <div class="tf-container">
                 <div class="reviews">
-                    <h2 class="section-heading"><?php echo !empty($meta['review-section-title']) ? esc_html($meta['review-section-title']) : __("Average Guest Reviews","tourfic"); ?></h2>
+                    <h2 class="section-heading"><?php echo !empty($meta['review-section-title']) ? esc_html($meta['review-section-title']) : ''; ?></h2>
                     <?php comments_template(); ?>
                 </div>
             </div>
