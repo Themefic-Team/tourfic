@@ -461,7 +461,10 @@ if( !function_exists( 'tf_hotel_css' ) ){
 		if( $tf_hotel_table_border_color  ) { $output .= '
 			.tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table {border: 1px solid '.$tf_hotel_table_border_color.'; border-collapse: inherit;}
 			.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table thead tr th{
-				border: 0px solid;
+				border-color: '.$tf_hotel_table_border_color.';
+			}
+			.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td{
+				border-color: '.$tf_hotel_table_border_color.';
 			}
 		'; }
 		

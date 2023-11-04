@@ -1959,7 +1959,7 @@ TF_Settings::option( 'tf_settings', array(
 				),
 				array(
 					'id'          => 'global-body-fonts-family',
-					'type'        => 'select',
+					'type'        => 'select2',
 					'label'       => __( 'Global Body Fonts Family', 'tourfic' ),
 					'subtitle'    => __( 'Global Body Fonts Family of Tourfic', 'tourfic' ),
 					'options'     => function_exists( 'tourfic_google_fonts_list' ) ? tourfic_google_fonts_list() : '',
@@ -1968,7 +1968,7 @@ TF_Settings::option( 'tf_settings', array(
 				),
 				array(
 					'id'          => 'global-heading-fonts-family',
-					'type'        => 'select',
+					'type'        => 'select2',
 					'label'       => __( 'Global Heading Fonts Family', 'tourfic' ),
 					'subtitle'    => __( 'Global Heading Fonts Family of Tourfic', 'tourfic' ),
 					'options'     => function_exists( 'tourfic_google_fonts_list' ) ? tourfic_google_fonts_list() : '',
@@ -3544,38 +3544,16 @@ TF_Settings::option( 'tf_settings', array(
 									'type'  => 'heading',
 									'label' => __( 'Vendor Email', 'tourfic' ),
 								),
-								// //vendor email from name
-								// array(
-								// 	'id'      => 'vendor_from_name',
-								// 	'type'    => 'text',
-								// 	'label'   => __( 'Vendor Email From Name', 'tourfic' ),
-								// 	'default' => get_bloginfo( 'name' ),
-								// ),
-								// //vendor email from email
-								// array(
-								// 	'id'      => 'vendor_from_email',
-								// 	'type'    => 'text',
-								// 	'label'   => __( 'Vendor Email From Email', 'tourfic' ),
-								// 	'default' => get_bloginfo( 'admin_email' ),
-								// ),
-								//vendor email template
+								
 								array(
 									'id'          => 'vendor_booking_email_template',
 									'type'        => 'editor',
 									'label'       => __( 'Vendor Notification Template', 'tourfic' ),
 									'default'     => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ),
-									'description' => __( 'This template will be sent to vendor', 'tourfic' )
+									'description' => __( 'This template will be sent to vendor', 'tourfic' ),
+									'is_pro'    => true
 								),
-								// array(
-								// 	'id'      => 'email_content_type',
-								// 	'type'    => 'select',
-								// 	'label'   => __( 'Email Content Type', 'tourfic' ),
-								// 	'options' => array(
-								// 		'text/html'  => __( 'HTML', 'tourfic' ),
-								// 		'plain/text' => __( 'Plain Text', 'tourfic' ),
-								// 	),
-								// 	'default' => 'text/html',
-								// ),
+								
 							),
 
 						),
