@@ -6881,10 +6881,10 @@ div#tf-contact-info {
   box-shadow: 0px 13px 30px 0px #e0e8ee;
 }
 .tf-head-info .share-tour-content .tf-dropdown-share-content h4 {
-  font-size: 15px;
+  font-size: 14px !important;
   color: #0E3DD8;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   display: block;
 }
 .tf-head-info .share-tour-content .tf-dropdown-share-content ul {
@@ -6900,7 +6900,7 @@ div#tf-contact-info {
   padding: 10px 6px;
 }
 .tf-head-info .share-tour-content .tf-dropdown-share-content ul li a i {
-  font-size: 16px;
+  font-size: 25px;
 }
 .tf-head-info .share-tour-content .tf-dropdown-share-content ul li a:hover {
   background: transparent !important;
