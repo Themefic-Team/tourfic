@@ -276,7 +276,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						<?php } ?>
                     </div>
                     <div class="tf_desc"></div>
-                    <?php tf_hotel_without_booking_popup( $form_post_id, $room_id ); ?>
+                    <?php tf_hotel_without_booking_popup( $form_post_id, $room_id, $form_adult, $form_child ); ?>
                 </form>
             </td>
         </tr>
@@ -532,7 +532,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						<?php } ?>
                     </div>
                     <div class="tf_desc"></div>
-                    <?php tf_hotel_without_booking_popup( $form_post_id, $room_id ); ?>
+                    <?php tf_hotel_without_booking_popup( $form_post_id, $room_id, $form_adult, $form_child ); ?>
                 </form>
             </td>
         </tr>

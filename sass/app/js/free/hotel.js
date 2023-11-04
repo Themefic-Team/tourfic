@@ -433,7 +433,7 @@
                 var room = $("#hotel_room_number").val();
                 var deposit = $("#hotel_room_depo").val();
             }
-            var airport_service = $('[name="tf_airport_service"]').val();
+            var airport_service = $('[name="tf_airport_service"]:checked').val();
 
             var data = {
                 action: 'tf_hotel_booking_popup',
