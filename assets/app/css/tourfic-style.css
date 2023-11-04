@@ -1819,6 +1819,7 @@ a.page-numbers {
   background: #003162;
   color: #fff;
   padding: 5px 15px;
+  text-decoration: none;
 }
 
 .archive_ajax_result.loading {
@@ -1860,9 +1861,8 @@ a.page-numbers {
 
 .availability-btn-area.tour-search {
   font-size: 14px;
-  max-width: 120px;
   line-height: 1;
-  margin-left: auto;
+  text-align: right;
 }
 
 .tf-room-price {
@@ -1902,6 +1902,7 @@ a.page-numbers {
   display: inline-flex;
   margin-left: 10px;
   font-size: 20px;
+  text-decoration: none;
 }
 
 .tf-archive-rating {
@@ -1930,15 +1931,14 @@ a.page-numbers {
 }
 
 .archive_ajax_result.tours-grid {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 -5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 .archive_ajax_result.tours-grid .single-tour-wrap {
-  width: 50%;
+  width: 100%;
   padding: 0 5px;
   margin-bottom: 10px;
-  flex: 0 0 50%;
 }
 .archive_ajax_result.tours-grid .single-tour-inner {
   margin: 0;
@@ -1963,7 +1963,6 @@ a.page-numbers {
   max-width: 100%;
 }
 .archive_ajax_result.tours-grid .availability-btn-area .tf_button {
-  width: 100%;
   margin-top: 15px;
 }
 .archive_ajax_result.tours-grid .roomPrice.roomPrice_flex.sr_discount {
@@ -1974,6 +1973,13 @@ a.page-numbers {
 .archive_ajax_result .tf-tour-price {
   display: flex;
   justify-content: end;
+}
+
+.archive_ajax_result.tours-grid .tf-tour-price {
+  justify-content: start;
+}
+.archive_ajax_result.tours-grid .availability-btn-area.tour-search {
+  text-align: left;
 }
 
 /* Search result sidebar  */

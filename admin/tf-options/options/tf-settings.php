@@ -182,8 +182,7 @@ TF_Settings::option( 'tf_settings', array(
 										'list' => __( 'List', 'tourfic' ),
 										'grid' => __( 'Grid', 'tourfic' ),
 									),
-									'default'    => 'List',
-									'dependency' => array( 'hotel-archive', '==', 'design-1' ),
+									'default'    => 'List'
 								),
 								array(
 									'id'       => 'hotel_archive_price_minimum_settings',
@@ -355,8 +354,7 @@ TF_Settings::option( 'tf_settings', array(
 										'list' => __( 'List', 'tourfic' ),
 										'grid' => __( 'Grid', 'tourfic' ),
 									),
-									'default'    => 'List',
-									'dependency' => array( 'tour-archive', '==', 'design-1' ),
+									'default'    => 'List'
 								),
 								array(
 									'id'       => 'tour_archive_price_minimum_settings',
