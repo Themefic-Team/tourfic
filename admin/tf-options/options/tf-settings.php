@@ -195,7 +195,7 @@ TF_Settings::option( 'tf_settings', array(
 										'child'   => __( 'Child', 'tourfic' ),
 									),
 									'default'    => 'All',
-								), 
+								),
 								array(
 									'id'      => 'hotel_archive_notice',
 									'type'    => 'notice',
@@ -3180,8 +3180,8 @@ TF_Settings::option( 'tf_settings', array(
 					'type'     => 'repeater',
 					'label'    => __( 'Review Fields for Hotels', 'tourfic' ),
 					'subtitle' => __( 'Add Custom Review Fields', 'tourfic' ),
-					'is_pro'   => true,
 					'max'      => '6',
+					'drag_only'   => true,
 					'fields'   => array(
 						array(
 							'id'    => 'r-field-type',
@@ -3216,8 +3216,8 @@ TF_Settings::option( 'tf_settings', array(
 					'type'     => 'repeater',
 					'label'    => __( 'Review Fields for Tours', 'tourfic' ),
 					'subtitle' => __( 'Add Custom Review Fields', 'tourfic' ),
-					'is_pro'   => true,
 					'max'      => '6',
+					'drag_only'   => true,
 					'fields'   => array(
 
 						array(
@@ -3248,8 +3248,8 @@ TF_Settings::option( 'tf_settings', array(
 					'type'     => 'repeater',
 					'label'    => __( 'Review Fields for Apartments', 'tourfic' ),
 					'subtitle' => __( 'Maximum 10 fields allowed', 'tourfic' ),
-					'is_pro'   => true,
 					'max'      => '6',
+					'drag_only'   => true,
 					'fields'   => array(
 						array(
 							'id'    => 'r-field-type',
@@ -3314,7 +3314,6 @@ TF_Settings::option( 'tf_settings', array(
 					'type'      => 'switch',
 					'label'     => __( 'Minify CSS', 'tourfic' ),
 					'subtitle'  => __( 'Enable/disable Tourfic CSS minification', 'tourfic' ),
-					'is_pro'    => true,
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
 					'width'     => 100,
@@ -3326,7 +3325,6 @@ TF_Settings::option( 'tf_settings', array(
 					'type'      => 'switch',
 					'label'     => __( 'Minify JS', 'tourfic' ),
 					'subtitle'  => __( 'Enable/disable Tourfic JS minification', 'tourfic' ),
-					'is_pro'    => true,
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
 					'width'     => 100,
@@ -3344,7 +3342,6 @@ TF_Settings::option( 'tf_settings', array(
 					'type'      => 'switch',
 					'label'     => __( 'Flatpickr CDN', 'tourfic' ),
 					'subtitle'  => __( 'Enable/disable cloudflare CDN for Flatpickr CSS & JS', 'tourfic' ),
-					'is_pro'    => true,
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
 					'width'     => 100
@@ -3355,7 +3352,6 @@ TF_Settings::option( 'tf_settings', array(
 					'type'      => 'switch',
 					'label'     => __( 'Fancybox CDN', 'tourfic' ),
 					'subtitle'  => __( 'Enable/disable cloudflare CDN for Fancybox CSS & JS', 'tourfic' ),
-					'is_pro'    => true,
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
 					'width'     => 100
@@ -3366,7 +3362,6 @@ TF_Settings::option( 'tf_settings', array(
 					'type'      => 'switch',
 					'label'     => __( 'Slick CDN', 'tourfic' ),
 					'subtitle'  => __( 'Enable/disable cloudflare CDN for Slick CSS & JS', 'tourfic' ),
-					'is_pro'    => true,
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
 					'width'     => 100
@@ -3377,7 +3372,6 @@ TF_Settings::option( 'tf_settings', array(
 					'type'      => 'switch',
 					'label'     => __( 'Font Awesome CDN', 'tourfic' ),
 					'subtitle'  => __( 'Enable/disable cloudflare CDN for Font Awesome CSS', 'tourfic' ),
-					'is_pro'    => true,
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
 					'width'     => 100
