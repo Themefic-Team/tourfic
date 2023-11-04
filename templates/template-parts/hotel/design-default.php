@@ -553,10 +553,9 @@
                                                     if ( $tour_room_details_gall ) {
                                                         $tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
                                                     }
-                                                    if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_room_details_gall ){
+                                                    if ( $tour_room_details_gall ){
                                                         ?>
-                                                        <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] . $key : '' ?>"
-                                                                data-hotel="<?php echo $post_id; ?>" style="text-decoration: underline;">
+                                                        <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] . $key : '' ?>" data-hotel="<?php echo $post_id; ?>" style="text-decoration: underline;">
                                                                 <?php echo esc_html( $room['title'] ); ?>
                                                             </a></h3>
 

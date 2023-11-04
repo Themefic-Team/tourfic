@@ -200,7 +200,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'type'     => 'gallery',
 							'label'    => __( 'Room Gallery', 'tourfic' ),
 							'subtitle' => __( 'Upload images specific to this room', 'tourfic' ),
-							'is_pro'   => true,
 						),
 						array(
 							'id'          => 'bed',
