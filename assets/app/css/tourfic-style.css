@@ -3772,6 +3772,20 @@ span.tf-price .amount {
   margin-right: 15px;
 }
 
+.tf-hotel-details-qc-gallelry .tf-details-qc-slider .tf-details-qcs img {
+  width: 100%;
+}
+.tf-hotel-details-qc-gallelry .tf-details-qc-slider-nav {
+  margin-top: 0px;
+}
+.tf-hotel-details-qc-gallelry .tf-details-qc-slider-nav .tf-details-qcs.is-active img {
+  border: 5px solid #1F2937;
+}
+.tf-hotel-details-qc-gallelry .tf-details-qc-slider-nav .tf-details-qcs img {
+  min-height: 50px;
+  max-height: 50px;
+}
+
 /********************** RESPONSIVE **********************/
 @media only screen and (min-width: 951px) {
   .popupmap-for-mobile {
@@ -8921,11 +8935,18 @@ div#tf-contact-info {
 .tf-hotel-design-1-popup {
   padding: 0px !important;
 }
+.tf-hotel-design-1-popup .tf-details-qc-slider .tf-details-qcs img {
+  width: 100%;
+}
 .tf-hotel-design-1-popup .tf-details-qc-slider-nav {
   margin-top: 0px;
 }
 .tf-hotel-design-1-popup .tf-details-qc-slider-nav .tf-details-qcs.is-active img {
   border: 5px solid #1F2937;
+}
+.tf-hotel-design-1-popup .tf-details-qc-slider-nav .tf-details-qcs img {
+  min-height: 50px;
+  max-height: 50px;
 }
 .tf-hotel-design-1-popup .fancybox-button.fancybox-close-small {
   right: 20px;

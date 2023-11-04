@@ -381,10 +381,21 @@
 }
 .tf-hotel-design-1-popup{
     padding: 0px !important;
+    .tf-details-qc-slider{
+        .tf-details-qcs{
+            img{
+                width: 100%;
+            }
+        }
+    }
     .tf-details-qc-slider-nav {
         margin-top: 0px;
         .tf-details-qcs.is-active img {
             border: 5px solid #1F2937;
+        }
+        .tf-details-qcs img {
+            min-height: 50px;
+            max-height: 50px;
         }
     }
     .fancybox-button.fancybox-close-small{
