@@ -581,6 +581,15 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				),
 
 				array(
+					'id'        => 'h-wishlist',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Wishlist Option', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
+
+				array(
 					'id'      => 'notice',
 					'type'    => 'notice',
 					'notice'  => 'info',

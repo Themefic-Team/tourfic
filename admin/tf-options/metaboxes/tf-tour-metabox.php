@@ -1300,6 +1300,14 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'default'   => false
 				),
 				array(
+					'id'        => 't-wishlist',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Wishlist Option', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
+				array(
 					'id'        => 't-related',
 					'type'      => 'switch',
 					'label'     => __( 'Disable Related Tour Section', 'tourfic' ),
