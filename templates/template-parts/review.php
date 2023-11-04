@@ -185,7 +185,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 			<!-- Replay form  -->
 			<div class="tf-review-form tf-mt-40">
 				<div class="tf-section-head">
-					<h2 class="tf-title tf-section-title"><?php _e("Leave a Reply", "tourfic"); ?></h2>
+					<h2 class="tf-title tf-section-title"><?php _e("Leave a Review", "tourfic"); ?></h2>
 					<p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
 				</div>
 				<?php tf_review_form(); ?>
@@ -198,7 +198,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 			<!-- Replay form  -->
 			<div class="tf-review-form tf-mt-40">
 				<div class="tf-section-head">
-					<h2 class="tf-title tf-section-title"><?php _e("Leave a Reply", "tourfic"); ?></h2>
+					<h2 class="tf-title tf-section-title"><?php _e("Leave a Review", "tourfic"); ?></h2>
 					<p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
 				</div>
 				<?php tf_review_form(); ?>
@@ -218,7 +218,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 			<!-- Replay form  -->
 			<div class="tf-review-form tf-mt-40">
 				<div class="tf-section-head">
-					<h2 class="tf-title tf-section-title"><?php _e("Leave a Reply", "tourfic"); ?></h2>
+					<h2 class="tf-title tf-section-title"><?php _e("Leave a Review", "tourfic"); ?></h2>
 					<p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
 				</div>
 				<?php tf_review_form(); ?>
@@ -233,7 +233,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 			<!-- Replay form  -->
 			<div class="tf-review-form tf-mt-40">
 				<div class="tf-section-head">
-					<h2 class="tf-title tf-section-title"><?php _e("Leave a Reply", "tourfic"); ?></h2>
+					<h2 class="tf-title tf-section-title"><?php _e("Leave a Review", "tourfic"); ?></h2>
 					<p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
 				</div>
 				<?php tf_review_form(); ?>

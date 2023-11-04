@@ -6996,10 +6996,12 @@ div#tf-contact-info {
 }
 .tf-hero-gallery .tf-gallery-featured > img {
   min-height: 474px;
+  max-height: 474px;
 }
 @media only screen and (min-width: 767.99px) and (max-width: 991px) {
   .tf-hero-gallery .tf-gallery-featured > img {
     min-height: auto;
+    max-height: auto;
   }
 }
 .tf-hero-gallery .tf-gallery-featured .featured-column {
@@ -7059,10 +7061,12 @@ div#tf-contact-info {
 }
 .tf-hero-gallery .tf-without-gallery-featured > img {
   min-height: 596px;
+  max-height: 596px;
 }
 @media only screen and (min-width: 767.99px) and (max-width: 991px) {
   .tf-hero-gallery .tf-without-gallery-featured > img {
     min-height: auto;
+    max-height: auto;
   }
 }
 .tf-hero-gallery .tf-gallery {
@@ -7078,6 +7082,9 @@ div#tf-contact-info {
 }
 .tf-hero-gallery .tf-gallery a img {
   height: 100%;
+  min-height: 112px;
+  max-height: 112px;
+  object-fit: cover;
 }
 .tf-hero-gallery .tf-gallery a.tf-gallery-more {
   position: relative;

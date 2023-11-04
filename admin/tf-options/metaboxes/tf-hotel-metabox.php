@@ -117,12 +117,232 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 			'icon'   => 'fa-solid fa-van-shuttle',
 			'fields' => array(
 				array(
-					'id'      => 'hotel-service',
+					'id'      => '',
 					'type'    => 'switch',
 					'label'   => __( 'Airport Pickup Service', 'tourfic' ),
 					'default' => true,
 					'is_pro'  => true,
-				)
+				),
+				array(
+					'id'         => '',
+					'type'       => 'checkbox',
+					'label'      => __( 'Service Type', 'tourfic' ),
+					'inline'     => true,
+					'options'    => array(
+						'pickup'  => __( 'Pickup (Pro)', 'tourfic' ),
+						'dropoff' => __( 'Drop-off (Pro)', 'tourfic' ),
+						'both'    => __( 'Pickup & Drop-off (Pro)', 'tourfic' ),
+					)
+				),
+				/**
+				 *
+				 * Service Type Pick up
+				 */
+				array(
+					'id'         => '',
+					'type'       => 'tab',
+					'title'      => __( 'Pickup Service', 'tourfic' ),
+					'is_pro'  => true,
+					'tabs'       => array(
+						array(
+							'id'     => 'tab-1',
+							'title'  => __( 'Pickup', 'tourfic' ),
+							'icon'   => 'fa fa-heart',
+							'fields' => array(
+								array(
+									'id'      => 'airport_pickup_price_type',
+									'type'    => 'select',
+									'label'   => __( 'Pickup Pricing Type', 'tourfic' ),
+									'options' => array(
+										'per_person' => __( 'Per Person', 'tourfic' ),
+										'fixed'      => __( 'Fixed Price', 'tourfic' ),
+										'free'       => __( 'Free / Complimentary', 'tourfic' ),
+									),
+									'default' => 'per_person',
+								),
+								array(
+									'id'          => 'airport_service_fee_adult',
+									'type'        => 'number',
+									'dependency'  => array(
+										array( 'airport_pickup_price_type', '==', 'per_person' ),
+									),
+									'label'       => __( 'Adult Pricing', 'tourfic' ),
+									'subtitle'    => __( 'Insert number only (No currency sign needed)', 'tourfic' ),
+									'attributes'  => array(
+										'min' => '0',
+									),
+									'field_width' => 50,
+								),
+								array(
+									'id'          => 'airport_service_fee_children',
+									'type'        => 'number',
+									'dependency'  => array(
+										array( 'airport_pickup_price_type', '==', 'per_person' ),
+									),
+									'label'       => __( 'Children Pricing', 'tourfic' ),
+									'subtitle'    => __( 'Insert number only (No currency sign needed)', 'tourfic' ),
+									'attributes'  => array(
+										'min' => '0',
+									),
+									'field_width' => 50,
+								),
+
+								array(
+									'id'         => 'airport_service_fee_fixed',
+									'type'       => 'number',
+									'dependency' => array(
+										array( 'airport_pickup_price_type', '==', 'fixed' ),
+									),
+									'label'      => __( 'Fixed Pricing', 'tourfic' ),
+									'subtitle'   => __( 'Insert number only (No currency sign needed)', 'tourfic' ),
+									'attributes' => array(
+										'min' => '0',
+									),
+								),
+							)
+						)
+					)
+				),
+
+				/**
+				 *
+				 * Service Type Drop Off
+				 */
+				array(
+					'id'         => '',
+					'type'       => 'tab',
+					'title'      => __( 'Drop-off Service', 'tourfic' ),
+					'is_pro'  => true,
+					'tabs'       => array(
+						array(
+							'id'     => 'tab-1',
+							'title'  => __( 'Drop-off', 'tourfic' ),
+							'icon'   => 'fa fa-heart',
+							'fields' => array(
+								array(
+									'id'      => 'airport_pickup_price_type',
+									'type'    => 'select',
+									'label'   => __( 'Drop-off Pricing Type', 'tourfic' ),
+									'options' => array(
+										'per_person' => __( 'Per Person', 'tourfic' ),
+										'fixed'      => __( 'Fixed Price', 'tourfic' ),
+										'free'       => __( 'Free / Complimentary', 'tourfic' ),
+									),
+									'default' => 'per_person',
+								),
+								array(
+									'id'          => 'airport_service_fee_adult',
+									'type'        => 'number',
+									'dependency'  => array(
+										array( 'airport_pickup_price_type', '==', 'per_person' ),
+									),
+									'label'       => __( 'Adult Pricing', 'tourfic' ),
+									'subtitle'    => __( 'Insert number only (No currency sign needed)', 'tourfic' ),
+									'attributes'  => array(
+										'min' => '0',
+									),
+									'field_width' => 50,
+								),
+								array(
+									'id'          => 'airport_service_fee_children',
+									'type'        => 'number',
+									'dependency'  => array(
+										array( 'airport_pickup_price_type', '==', 'per_person' ),
+									),
+									'label'       => __( 'Children Pricing', 'tourfic' ),
+									'subtitle'    => __( 'Insert number only (No currency sign needed)', 'tourfic' ),
+									'attributes'  => array(
+										'min' => '0',
+									),
+									'field_width' => 50,
+								),
+
+								array(
+									'id'         => 'airport_service_fee_fixed',
+									'type'       => 'number',
+									'dependency' => array(
+										array( 'airport_pickup_price_type', '==', 'fixed' ),
+									),
+									'label'      => __( 'Fixed Pricing', 'tourfic' ),
+									'subtitle'   => __( 'Insert number only (No currency sign needed)', 'tourfic' ),
+									'attributes' => array(
+										'min' => '0',
+									),
+								),
+							)
+						)
+					)
+				),
+
+				/**
+				 *
+				 * Service Type pickup Pickoff (both)
+				 */
+				array(
+					'id'         => '',
+					'type'       => 'tab',
+					'title'      => __( 'Pickup & Drop-off Service', 'tourfic' ),
+					'is_pro'  => true,
+					'tabs'       => array(
+						array(
+							'id'     => 'tab-1',
+							'title'  => __( 'Pickup & Drop-off', 'tourfic' ),
+							'icon'   => 'fa fa-heart',
+							'fields' => array(
+								array(
+									'id'      => 'airport_pickup_price_type',
+									'type'    => 'select',
+									'label'   => __( 'Pickup & Drop-off Pricing Type', 'tourfic' ),
+									'options' => array(
+										'per_person' => __( 'Per Person', 'tourfic' ),
+										'fixed'      => __( 'Fixed Price', 'tourfic' ),
+										'free'       => __( 'Free / Complimentary', 'tourfic' ),
+									),
+									'default' => 'per_person',
+								),
+								array(
+									'id'          => 'airport_service_fee_adult',
+									'type'        => 'number',
+									'dependency'  => array(
+										array( 'airport_pickup_price_type', '==', 'per_person' ),
+									),
+									'label'       => __( 'Adult Pricing', 'tourfic' ),
+									'subtitle'    => __( 'Insert number only (No currency sign needed)', 'tourfic' ),
+									'attributes'  => array(
+										'min' => '0',
+									),
+									'field_width' => 50,
+								),
+								array(
+									'id'          => 'airport_service_fee_children',
+									'type'        => 'number',
+									'dependency'  => array(
+										array( 'airport_pickup_price_type', '==', 'per_person' ),
+									),
+									'label'       => __( 'Children Pricing', 'tourfic' ),
+									'subtitle'    => __( 'Insert number only (No currency sign needed)', 'tourfic' ),
+									'attributes'  => array(
+										'min' => '0',
+									),
+									'field_width' => 50,
+								),
+
+								array(
+									'id'         => 'airport_service_fee_fixed',
+									'type'       => 'number',
+									'dependency' => array(
+										array( 'airport_pickup_price_type', '==', 'fixed' ),
+									),
+									'label'      => __( 'Fixed Pricing', 'tourfic' ),
+									'subtitle'   => __( 'Insert number only (No currency sign needed)', 'tourfic' ),
+									'attributes' => array(
+										'min' => '0',
+									),
+								),
+							)
+						)
+					)
+				),
 			),
 		),
 		// Room Details

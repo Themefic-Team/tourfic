@@ -1979,16 +1979,11 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 							}
 						}
 					}
-					// echo "<pre>";
-					// // print_r(floatval( preg_replace( '/[^\d.]/', '', number_format( $b_room_price - ( ( $b_room_price / 100 ) * $hotel_discount_amount ), 2 ) ) ));
-					// print_r($room_price);
-					// echo "</pre>";
-					// die(); // added by - Sunvi
 				}
 			} else if ( $pricing_by == 2 ) {
 				if ( empty( $check_in_out ) ) {
-					$adult_price = $b_room['adult_price'];
-					$child_price = $b_room['child_price'];
+					$adult_price = !empty($b_room['adult_price']) ? $b_room['adult_price'] : '';
+					$child_price = !empty($b_room['child_price']) ? $b_room['child_price'] : '';
 					// discount calculation - start
 					if ( $hotel_discount_type == "percent" ) {
 						$dicount_adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
