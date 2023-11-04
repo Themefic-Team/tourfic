@@ -269,7 +269,10 @@
         position: relative;
         margin-bottom: 10px;
         >img{
-            max-height: 474px; 
+            min-height: 474px; 
+            @media #{$tfmax991}{
+                min-height: auto;
+            }
         }
         .featured-column {
             background: #fff;
@@ -320,6 +323,14 @@
                 &:hover{
                     color: #fff;
                 }
+            }
+        }
+    }
+    .tf-without-gallery-featured{
+        >img{
+            min-height: 596px; 
+            @media #{$tfmax991}{
+                min-height: auto;
             }
         }
     }

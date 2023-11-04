@@ -117,7 +117,7 @@
                         <div class="tf-column tf-tour-details-left">
                             <!-- Hotel Gallery Section -->
                             <div class="tf-hero-gallery tf-mrbottom-30">
-                            <div class="tf-gallery-featured">
+                            <div class="tf-gallery-featured <?php echo empty($gallery_ids) ? esc_attr('tf-without-gallery-featured') : ''; ?>">
                                 <img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : TF_ASSETS_APP_URL.'/images/feature-default.jpg'; ?>" alt="<?php _e( 'Hotel Image', 'tourfic' ); ?>">
                                 <div class="featured-meta-gallery-videos">
                                     <div class="featured-column tf-gallery-box">

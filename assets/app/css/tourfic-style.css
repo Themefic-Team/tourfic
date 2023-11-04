@@ -6981,7 +6981,12 @@ div#tf-contact-info {
   margin-bottom: 10px;
 }
 .tf-hero-gallery .tf-gallery-featured > img {
-  max-height: 474px;
+  min-height: 474px;
+}
+@media only screen and (min-width: 767.99px) and (max-width: 991px) {
+  .tf-hero-gallery .tf-gallery-featured > img {
+    min-height: auto;
+  }
 }
 .tf-hero-gallery .tf-gallery-featured .featured-column {
   background: #fff;
@@ -7037,6 +7042,14 @@ div#tf-contact-info {
 }
 .tf-hero-gallery .tf-gallery-featured .tf-single-review-box .tf-single-rating:hover {
   color: #fff;
+}
+.tf-hero-gallery .tf-without-gallery-featured > img {
+  min-height: 596px;
+}
+@media only screen and (min-width: 767.99px) and (max-width: 991px) {
+  .tf-hero-gallery .tf-without-gallery-featured > img {
+    min-height: auto;
+  }
 }
 .tf-hero-gallery .tf-gallery {
   display: flex;
