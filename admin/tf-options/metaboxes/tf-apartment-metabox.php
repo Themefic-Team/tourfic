@@ -587,6 +587,58 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				),
 			),
 		),
+
+		//enquiry section
+		'a_enquiry'  => array(
+			'title'  => __( 'Apartment Enquiry', 'tourfic' ),
+			'icon'   => 'fa-solid fa-clipboard-question',
+			'fields' => array(
+				array(
+					'id'      => 'enquiry',
+					'type'    => 'heading',
+					'content' => __( 'Enquiry', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'        => 'enquiry-section',
+					'type'      => 'switch',
+					'label'     => __( 'Apartment Enquiry Section', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => true
+				),
+				array(
+					'id'       => 'apartment-enquiry-icon',
+					'type'     => 'icon',
+					'label'    => __( 'Apartment Enquiry icon', 'tourfic' ),
+					'subtitle' => __( 'Choose icon', 'tourfic' ),
+					'default'  => 'fa fa-question-circle-o',
+					'dependency' => array( 'h-enquiry-section', '==', '1' ),
+				),
+				array(
+					'id'    => 'enquiry-title',
+					'type'  => 'text',
+					'label' => __( 'Apartment Enquiry Title Text', 'tourfic' ),
+					'default' => __('Have a question in mind', 'tourfic'),
+					'dependency' => array( 'enquiry-section', '==', '1' ),
+				),
+				array(
+					'id'    => 'enquiry-content',
+					'type'  => 'text',
+					'label' => __( 'Apartment Enquiry Short Text', 'tourfic' ),
+					'default' => __('Looking for more info? Send a question to the property to find out more.', 'tourfic'),
+					'dependency' => array( 'enquiry-section', '==', '1' ),
+				),
+				array(
+					'id'    => 'enquiry-btn',
+					'type'  => 'text',
+					'label' => __( 'Apartment Enquiry Button Text', 'tourfic' ),
+					'default' => __('Contact Host', 'tourfic'),
+					'dependency' => array( 'enquiry-section', '==', '1' ),
+				),
+			),
+		),
+		
 		// Settings
 		'settings'        => array(
 			'title'  => __( 'Settings', 'tourfic' ),
@@ -659,42 +711,6 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'    => 'text',
 					'label'   => __( 'Related Apartment Title', 'tourfic' ),
 					'default' => __( 'You may also like', 'tourfic' ),
-				),
-				//enquiry
-				array(
-					'id'      => 'enquiry',
-					'type'    => 'heading',
-					'content' => __( 'Enquiry', 'tourfic' ),
-					'class'   => 'tf-field-class',
-				),
-				array(
-					'id'        => 'enquiry-section',
-					'type'      => 'switch',
-					'label'     => __( 'Apartment Enquiry Section', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => true
-				),
-				array(
-					'id'    => 'enquiry-title',
-					'type'  => 'text',
-					'label' => __( 'Apartment Enquiry Title Text', 'tourfic' ),
-					'default' => __('Have a question in mind', 'tourfic'),
-					'dependency' => array( 'enquiry-section', '==', '1' ),
-				),
-				array(
-					'id'    => 'enquiry-content',
-					'type'  => 'text',
-					'label' => __( 'Apartment Enquiry Short Text', 'tourfic' ),
-					'default' => __('Looking for more info? Send a question to the property to find out more.', 'tourfic'),
-					'dependency' => array( 'enquiry-section', '==', '1' ),
-				),
-				array(
-					'id'    => 'enquiry-btn',
-					'type'  => 'text',
-					'label' => __( 'Apartment Enquiry Button Text', 'tourfic' ),
-					'default' => __('Contact Host', 'tourfic'),
-					'dependency' => array( 'enquiry-section', '==', '1' ),
 				),
 			),
 		),

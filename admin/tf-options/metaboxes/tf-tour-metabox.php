@@ -1251,7 +1251,56 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				),
 			),
 		),
-
+		// Tour Enquiry
+		't_enquiry'  => array(
+			'title'  => __( 'Tour Enquiry', 'tourfic' ),
+			'icon'   => 'fa fa-question-circle-o',
+			'fields' => array(
+				array(
+					'id'      => 'enquiry-section',
+					'type'    => 'heading',
+					'content' => __( 'Enquiry', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'        => 't-enquiry-section',
+					'type'      => 'switch',
+					'label'     => __( 'Tour Enquiry Option', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => true
+				),
+				array(
+					'id'       => 't-enquiry-option-icon',
+					'type'     => 'icon',
+					'label'    => __( 'Tour Enquiry icon', 'tourfic' ),
+					'subtitle' => __( 'Choose icon', 'tourfic' ),
+					'default'  => 'fa fa-question-circle-o',
+					'dependency' => array( 't-enquiry-section', '==', '1' ),
+				),
+				array(
+					'id'    => 't-enquiry-option-title',
+					'type'  => 'text',
+					'label' => __( 'Tour Enquiry Title Text', 'tourfic' ),
+					'default' => __("Have a question in mind", 'tourfic'),
+					'dependency' => array( 't-enquiry-section', '==', '1' ),
+				),
+				array(
+					'id'    => 't-enquiry-option-content',
+					'type'  => 'text',
+					'label' => __( 'Tour Enquiry Short Text', 'tourfic' ),
+					'default' => __("Looking for more info? Send a question to the property to find out more.", 'tourfic'),
+					'dependency' => array( 't-enquiry-section', '==', '1' ),
+				),
+				array(
+					'id'    => 't-enquiry-option-btn',
+					'type'  => 'text',
+					'label' => __( 'Tour Enquiry Button Text', 'tourfic' ),
+					'default' => __("Ask a Question", 'tourfic'),
+					'dependency' => array( 't-enquiry-section', '==', '1' ),
+				),
+			),
+		),
 
 		// // Terms & Conditions
 		'terms_and_conditions' => array(
@@ -1363,41 +1412,6 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'label' => __( 'Reviews Section Title', 'tourfic' ),
      				'default' => __( 'Average Guest Reviews', 'tourfic' ),
 
-				),
-				array(
-					'id'      => 'enquiry-section',
-					'type'    => 'heading',
-					'content' => __( 'Enquiry', 'tourfic' ),
-					'class'   => 'tf-field-class',
-				),
-				array(
-					'id'        => 't-enquiry-section',
-					'type'      => 'switch',
-					'label'     => __( 'Tour Enquiry Option', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => true
-				),
-				array(
-					'id'    => 't-enquiry-option-title',
-					'type'  => 'text',
-					'label' => __( 'Tour Enquiry Title Text', 'tourfic' ),
-					'default' => __("Have a question in mind", 'tourfic'),
-					'dependency' => array( 't-enquiry-section', '==', '1' ),
-				),
-				array(
-					'id'    => 't-enquiry-option-content',
-					'type'  => 'text',
-					'label' => __( 'Tour Enquiry Short Text', 'tourfic' ),
-					'default' => __("Looking for more info? Send a question to the property to find out more.", 'tourfic'),
-					'dependency' => array( 't-enquiry-section', '==', '1' ),
-				),
-				array(
-					'id'    => 't-enquiry-option-btn',
-					'type'  => 'text',
-					'label' => __( 'Tour Enquiry Button Text', 'tourfic' ),
-					'default' => __("Ask a Question", 'tourfic'),
-					'dependency' => array( 't-enquiry-section', '==', '1' ),
 				),
 			),
 		),
