@@ -312,7 +312,7 @@ while ( have_posts() ) : the_post();
                             </div>
 						<?php endif; ?>
 
-                        <h3 class="section-heading"><?php echo ! empty( $meta['description_title'] ) ? esc_html( $meta['description_title'] ) : __( 'About this place', 'tourfic' ); ?></h3>
+                        <h3 class="section-heading"><?php echo ! empty( $meta['description_title'] ) ? esc_html( $meta['description_title'] ) : ''; ?></h3>
                         <div class="apt-description">
 							<?php the_content(); ?>
                         </div>
@@ -373,7 +373,7 @@ while ( have_posts() ) : the_post();
 							?>
                             <!-- Start Key Features Section -->
                             <div class="tf-apartment-amenities-section">
-                                <h2 class="section-heading"><?php ! empty( $meta['amenities_title'] ) ? esc_html_e( $meta['amenities_title'] ) : _e( 'What this place offers', 'tourfic' ); ?></h2>
+                                <h2 class="section-heading"><?php ! empty( $meta['amenities_title'] ) ? esc_html_e( $meta['amenities_title'] ) : ''; ?></h2>
                                 <div class="tf-apartment-amenities">
 									<?php if ( ! empty( $fav_amenities ) ):
 										foreach ( array_slice( $fav_amenities, 0, 10 ) as $amenity ) :
@@ -422,7 +422,7 @@ while ( have_posts() ) : the_post();
                                                     <a data-dismiss="modal" class="tf-modal-close">&#10005;</a>
                                                 </div>
                                                 <div class="tf-modal-body">
-                                                    <h2 class="section-heading"><?php ! empty( $meta['amenities_title'] ) ? esc_html_e( $meta['amenities_title'] ) : _e( 'What this place offers', 'tourfic' ); ?></h2>
+                                                    <h2 class="section-heading"><?php ! empty( $meta['amenities_title'] ) ? esc_html_e( $meta['amenities_title'] ) : ''; ?></h2>
 													<?php
 													$categories     = [];
 													$amenities_cats = ! empty( tf_data_types( tfopt( 'amenities_cats' ) ) ) ? tf_data_types( tfopt( 'amenities_cats' ) ) : '';
@@ -517,7 +517,7 @@ while ( have_posts() ) : the_post();
                         <div class="tf-map-content-wrapper <?php echo empty( $map['address'] ) || empty( $meta['surroundings_places'] ) ? 'tf-map-content-full' : ''; ?> <?php echo !function_exists( 'is_tf_pro' ) ? 'tf-map-content-full' : '' ?>">
 							<?php if ( ! empty( $map['address'] ) ): ?>
                                 <div class="tf-apartment-map">
-                                    <h2 class="section-heading"><?php ! empty( $meta['location_title'] ) ? esc_html_e( $meta['location_title'] ) : _e( 'Your staying location', 'tourfic' ); ?></h2>
+                                    <h2 class="section-heading"><?php ! empty( $meta['location_title'] ) ? esc_html_e( $meta['location_title'] ) : ''; ?></h2>
 
 	                                <?php if ( $tf_openstreet_map=="default" && !empty($map["latitude"]) && !empty($map["longitude"]) ) {  ?>
                                         <div id="apartment-location" style="height: 500px;"></div>
@@ -590,7 +590,7 @@ while ( have_posts() ) : the_post();
 			?>
             <div class="tf-house-rules">
                 <div class="tf-container">
-                    <h3 class="section-heading"><?php ! empty( $meta['house_rules_title'] ) ? esc_html_e( $meta['house_rules_title'] ) : _e( 'House Rules', 'tourfic' ); ?></h3>
+                    <h3 class="section-heading"><?php ! empty( $meta['house_rules_title'] ) ? esc_html_e( $meta['house_rules_title'] ) : ''; ?></h3>
                     <div class="tf-house-rules-wrapper <?php echo empty( $included_house_rules ) || empty( $not_included_house_rules ) ? 'tf-house-rules-full' : ''; ?>">
 						<?php if ( ! empty( $included_house_rules ) ): ?>
                             <ul class="tf-included-house-rules">
@@ -654,12 +654,15 @@ while ( have_posts() ) : the_post();
                 <div class="tf-container">
                     <div class="apartment-qa-wrapper">
                         <div class="question-left">
-                            <h3><?php echo ! empty( $meta['enquiry-title'] ) ? esc_html( $meta['enquiry-title'] ) : __( 'Have a question in mind', 'tourfic' ); ?></h3>
-                            <p><?php echo ! empty( $meta['enquiry-content'] ) ? esc_html( $meta['enquiry-content'] ) : __( 'Looking for more info? Send a question to the property to find out more.', 'tourfic' ); ?></p>
+                            <div class="default-enquiry-title-section">
+                                <i class="<?php echo !empty($meta['apartment-enquiry-icon']) ? esc_html($meta['apartment-enquiry-icon']) : 'fa fa-question-circle-o'; ?>" aria-hidden="true"></i>
+                                <h3><?php echo ! empty( $meta['enquiry-title'] ) ? esc_html( $meta['enquiry-title'] ) : ''; ?></h3>
+                            </div>
+                            <p><?php echo ! empty( $meta['enquiry-content'] ) ? esc_html( $meta['enquiry-content'] ) : ''; ?></p>
                         </div>
                         <div class="tf-btn">
                             <a href="#" id="tf-ask-question-trigger" class="btn-styled">
-                                <span><?php echo ! empty( $meta['enquiry-btn'] ) ? esc_html( $meta['enquiry-btn'] ) : __( 'Contact Host', 'tourfic' ); ?></span>
+                                <span><?php echo ! empty( $meta['enquiry-btn'] ) ? esc_html( $meta['enquiry-btn'] ) : ''; ?></span>
                             </a>
                         </div>
                     </div>
@@ -684,7 +687,7 @@ while ( have_posts() ) : the_post();
             <div id="tf-review" class="review-section tf-apartment-review">
                 <div class="tf-container">
                     <div class="reviews">
-                        <h2 class="section-heading"><?php echo ! empty( $meta['review-section-title'] ) ? esc_html( $meta['review-section-title'] ) : __( 'Guest Reviews', 'tourfic' ); ?></h2>
+                        <h2 class="section-heading"><?php echo ! empty( $meta['review-section-title'] ) ? esc_html( $meta['review-section-title'] ) : ''; ?></h2>
 						<?php comments_template(); ?>
                     </div>
                 </div>
@@ -712,7 +715,7 @@ while ( have_posts() ) : the_post();
 		if ( $disable_related_sec !== '1' && $related_apartment->have_posts() ) : ?>
             <div class="tf-related-apartment">
                 <div class="tf-container">
-                    <h2 class="section-heading"><?php echo ! empty( $meta['related_apartment_title'] ) ? esc_html( $meta['related_apartment_title'] ) : __( 'You may also like', 'tourfic' ); ?></h2>
+                    <h2 class="section-heading"><?php echo ! empty( $meta['related_apartment_title'] ) ? esc_html( $meta['related_apartment_title'] ) : ''; ?></h2>
                     <div class="tf-related-apartment-slider">
 						<?php while ( $related_apartment->have_posts() ) : $related_apartment->the_post(); ?>
                             <div class="tf-apartment-item">

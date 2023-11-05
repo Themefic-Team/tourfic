@@ -314,7 +314,7 @@
                                 <!-- Tourfic Booking form -->
                                 <div class="tf-booking-form">
                                     <div class="tf-booking-form-inner tf-mt-24">
-                                        <h3><?php echo ! empty( $meta['booking-section-title'] ) ? esc_html( $meta['booking-section-title'] ) : __( "Book This Tour", "tourfic" ); ?></h3>
+                                        <h3><?php echo ! empty( $meta['booking-section-title'] ) ? esc_html( $meta['booking-section-title'] ) : ''; ?></h3>
 										<?php echo tf_single_tour_booking_form( $post->ID ); ?>
 
                                     </div>
@@ -325,7 +325,7 @@
 								?>
                                 <div class="tf-tour-booking-advantages tf-box tf-mt-30">
                                     <div class="tf-head-title">
-                                        <h3><?php echo ! empty( $meta['contact-info-section-title'] ) ? esc_html( $meta['contact-info-section-title'] ) : __( "Contact Information", "tourfic" ); ?></h3>
+                                        <h3><?php echo ! empty( $meta['contact-info-section-title'] ) ? esc_html( $meta['contact-info-section-title'] ) : ''; ?></h3>
                                     </div>
                                     <div class="tf-booking-advantage-items">
                                         <ul class="tf-list">
@@ -356,11 +356,11 @@
                                 <!-- Enquiry box -->
                                 <div class="tf-tour-booking-advantages tf-box tf-mt-30">
                                     <div class="tf-ask-enquiry">
-                                        <i class="fa fa-question-circle-o" aria-hidden="true"></i>
-                                        <h3><?php echo ! empty( $meta['t-enquiry-option-title'] ) ? esc_html( $meta['t-enquiry-option-title'] ) : __( "Have a question in mind", "tourfic" ); ?></h3>
-                                        <p><?php echo ! empty( $meta['t-enquiry-option-content'] ) ? esc_html( $meta['t-enquiry-option-content'] ) : __( "Looking for more info? Send a question to the property to find out more.", "tourfic" ); ?></p>
+                                        <i class="<?php echo ! empty( $meta['t-enquiry-option-icon'] ) ? esc_html( $meta['t-enquiry-option-icon'] ) : 'fa fa-question-circle-o'; ?>" aria-hidden="true"></i>
+                                        <h3><?php echo ! empty( $meta['t-enquiry-option-title'] ) ? esc_html( $meta['t-enquiry-option-title'] ) : ''; ?></h3>
+                                        <p><?php echo ! empty( $meta['t-enquiry-option-content'] ) ? esc_html( $meta['t-enquiry-option-content'] ) : ''; ?></p>
                                         <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-btn-normal btn-primary"><span>
-                                        <?php echo ! empty( $meta['t-enquiry-option-btn'] ) ? esc_html( $meta['t-enquiry-option-btn'] ) : __( "Ask a Question", "tourfic" ); ?>
+                                        <?php echo ! empty( $meta['t-enquiry-option-btn'] ) ? esc_html( $meta['t-enquiry-option-btn'] ) : ''; ?>
                                         </span></a></div>
                                     </div>
                                 </div>
@@ -469,7 +469,7 @@
                                             <!-- Tourfic Booking form -->
                                             <div class="tf-booking-form">
                                                 <div class="tf-booking-form-inner tf-mt-24">
-                                                    <h3><?php echo ! empty( $meta['booking-section-title'] ) ? esc_html( $meta['booking-section-title'] ) : __( "Book This Tour", "tourfic" ); ?></h3>
+                                                    <h3><?php echo ! empty( $meta['booking-section-title'] ) ? esc_html( $meta['booking-section-title'] ) : ''; ?></h3>
 													<?php echo tf_single_tour_booking_form( $post->ID ); ?>
 
                                                 </div>
@@ -519,7 +519,7 @@
                     <div class="tf-template-container">
                         <div class="tf-container-inner">
                             <div class="section-title">
-                                <h2 class="tf-title"><?php ! empty( tfopt( 'rt-title' ) ) ? esc_html_e( tfopt( 'rt-title' ), "tourfic" ) : _e( "Related Tour", "tourfic" ); ?></h2>
+                                <h2 class="tf-title"><?php ! empty( tfopt( 'rt-title' ) ) ? esc_html_e( tfopt( 'rt-title' ), "tourfic" ) : ''; ?></h2>
 								<?php
 								if ( ! empty( tfopt( 'rt-description' ) ) ) { ?>
                                     <p><?php esc_html_e( tfopt( 'rt-description' ), "tourfic" ) ?></p>

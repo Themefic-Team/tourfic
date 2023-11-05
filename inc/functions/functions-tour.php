@@ -1221,8 +1221,8 @@ function tf_single_tour_booking_form( $post_id ) {
 						    $tf_deposit_amount =  array (
 								"{amount}" => $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount']. '%'
 							);
-							$tf_partial_payment_label = !empty(tfopt("deposit-title")) ? tfopt("deposit-title") : 'Pertial payment of {amount} on total';
-							$tf_partial_payment_description = !empty(tfopt("deposit-subtitle")) ? tfopt("deposit-subtitle") : 'You can Partial Payment amount for booking the tour. After booking the tour, you can pay the rest amount after the tour is completed.';
+							$tf_partial_payment_label = !empty(tfopt("deposit-title")) ? tfopt("deposit-title") : '';
+							$tf_partial_payment_description = !empty(tfopt("deposit-subtitle")) ? tfopt("deposit-subtitle") : '';
 						    ?>
                             <div class="tf-diposit-switcher">
                                 <label class="switch">

@@ -365,7 +365,7 @@
             <!-- Start features -->
             <?php if ( $features ) { ?>
                 <div class="tf_features">
-                    <h3 class="section-heading"><?php echo !empty($meta['popular-section-title']) ? esc_html($meta['popular-section-title']) : __("Popular Features","tourfic"); ?></h3>
+                    <h3 class="section-heading"><?php echo !empty($meta['popular-section-title']) ? esc_html($meta['popular-section-title']) : ''; ?></h3>
                     <div class="tf-feature-list">
                         <?php foreach ( $features as $feature ) {
                             $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
@@ -407,7 +407,7 @@
         <!-- Start Room Section -->
         <div class="tf-room-section sp-50">
             <div class="tf-container">
-                <h2 class="section-heading"><?php echo !empty($meta['room-section-title']) ? esc_html($meta['room-section-title']) : __( 'Available Rooms', 'tourfic' ); ?></h2>
+                <h2 class="section-heading"><?php echo !empty($meta['room-section-title']) ? esc_html($meta['room-section-title']) : ''; ?></h2>
                 <!-- Hooked in feature filter action -->
                 <?php do_action( 'tf_hotel_features_filter', $rm_features, 10 ) ?>
                 <div class="tf-room-type" id="rooms">
@@ -736,7 +736,7 @@
         <div class="tf-faq-wrapper hotel-faq sp-50">
             <div class="tf-container">
                 <div class="tf-faq-sec-title">
-                    <h2 class="section-heading"><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : __( "Faq’s", 'tourfic' ); ?></h2>
+                    <h2 class="section-heading"><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : ''; ?></h2>
                 </div>
 
                 <div class="tf-faq-content-wrapper">
@@ -745,9 +745,12 @@
                     if(!empty($tf_enquiry_section_status)){
                     ?>
                     <div class="tf-ask-question">
-                        <h3><?php echo !empty($meta['h-enquiry-option-title']) ? esc_html($meta['h-enquiry-option-title']) : __( "Have a question in mind", 'tourfic' ); ?></h3>
-                        <p><?php echo !empty($meta['h-enquiry-option-content']) ? esc_html($meta['h-enquiry-option-content']) : __( "Looking for more info? Send a question to the property to find out more.", 'tourfic' ); ?></p>
-                        <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="btn-styled"><span><?php echo !empty($meta['h-enquiry-option-btn']) ? esc_html($meta['h-enquiry-option-btn']) : __( 'Ask a Question', 'tourfic' ); ?></span></a></div>
+                        <div class="default-enquiry-title-section">
+                            <i class="<?php echo !empty($meta['h-enquiry-option-icon']) ? esc_html($meta['h-enquiry-option-icon']) : 'fa fa-question-circle-o'; ?>" aria-hidden="true"></i>
+                            <h3><?php echo !empty($meta['h-enquiry-option-title']) ? esc_html($meta['h-enquiry-option-title']) : ''; ?></h3>
+                        </div> 
+                        <p><?php echo !empty($meta['h-enquiry-option-content']) ? esc_html($meta['h-enquiry-option-content']) : ''; ?></p>
+                        <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="btn-styled"><span><?php echo !empty($meta['h-enquiry-option-btn']) ? esc_html($meta['h-enquiry-option-btn']) : ''; ?></span></a></div>
                     </div>
                     <?php } ?>
                     <div class="tf-faq-items-wrapper">
@@ -774,7 +777,7 @@
         <div id="tf-review" class="review-section sp-50">
             <div class="tf-container">
                 <div class="reviews">
-                    <h2 class="section-heading"><?php echo !empty($meta['review-section-title']) ? esc_html($meta['review-section-title']) : __("Average Guest Reviews","tourfic"); ?></h2>
+                    <h2 class="section-heading"><?php echo !empty($meta['review-section-title']) ? esc_html($meta['review-section-title']) : ''; ?></h2>
                     <?php comments_template(); ?>
                 </div>
             </div>
@@ -791,7 +794,7 @@
         <div class="toc-section sp-50">
             <div class="tf-container">
                 <div class="tf-toc-wrap">
-                    <h2 class="section-heading"><?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : __("Hotel Terms & Conditions","tourfic"); ?></h2>
+                    <h2 class="section-heading"><?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : ''; ?></h2>
                     <div class="tf-toc-inner">
                         <?php echo wpautop( $tc ); ?>
                     </div>
