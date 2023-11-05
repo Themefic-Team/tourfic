@@ -8,7 +8,7 @@
         ?>
         <div class="tf-hotel-enquiry">
             <div class="tf-ask-enquiry">
-                <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+                <i class="<?php echo !empty($meta['h-enquiry-option-icon']) ? esc_html($meta['h-enquiry-option-icon']) : 'fa fa-question-circle-o'; ?>" aria-hidden="true"></i>
                 <h3><?php echo !empty($meta['h-enquiry-option-title']) ? esc_html($meta['h-enquiry-option-title']) : ''; ?></h3>
                 <p><?php echo !empty($meta['h-enquiry-option-content']) ? esc_html($meta['h-enquiry-option-content']) : '' ?></p>
                 <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-btn-normal btn-primary"><span><?php echo !empty($meta['h-enquiry-option-btn']) ? esc_html($meta['h-enquiry-option-btn']) : ''; ?></span></a></div>

@@ -334,7 +334,7 @@
                                 <!-- Enquiry box -->
                                 <div class="tf-tour-booking-advantages tf-box tf-mt-30">
                                     <div class="tf-ask-enquiry">
-                                        <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+                                        <i class="<?php echo ! empty( $meta['t-enquiry-option-icon'] ) ? esc_html( $meta['t-enquiry-option-icon'] ) : 'fa fa-question-circle-o'; ?>" aria-hidden="true"></i>
                                         <h3><?php echo ! empty( $meta['t-enquiry-option-title'] ) ? esc_html( $meta['t-enquiry-option-title'] ) : ''; ?></h3>
                                         <p><?php echo ! empty( $meta['t-enquiry-option-content'] ) ? esc_html( $meta['t-enquiry-option-content'] ) : ''; ?></p>
                                         <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-btn-normal btn-primary"><span>

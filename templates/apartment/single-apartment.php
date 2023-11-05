@@ -654,7 +654,10 @@ while ( have_posts() ) : the_post();
                 <div class="tf-container">
                     <div class="apartment-qa-wrapper">
                         <div class="question-left">
-                            <h3><?php echo ! empty( $meta['enquiry-title'] ) ? esc_html( $meta['enquiry-title'] ) : ''; ?></h3>
+                            <div class="default-enquiry-title-section">
+                                <i class="<?php echo !empty($meta['apartment-enquiry-icon']) ? esc_html($meta['apartment-enquiry-icon']) : 'fa fa-question-circle-o'; ?>" aria-hidden="true"></i>
+                                <h3><?php echo ! empty( $meta['enquiry-title'] ) ? esc_html( $meta['enquiry-title'] ) : ''; ?></h3>
+                            </div>
                             <p><?php echo ! empty( $meta['enquiry-content'] ) ? esc_html( $meta['enquiry-content'] ) : ''; ?></p>
                         </div>
                         <div class="tf-btn">

@@ -503,7 +503,10 @@
                     if(!empty($tf_enquiry_section_status)){
                     ?>
                     <div class="tf-ask-question">
-                        <h3><?php echo !empty($meta['t-enquiry-option-title']) ? esc_html($meta['t-enquiry-option-title']) : ''; ?></h3>
+                        <div class="default-enquiry-title-section">
+                            <i class="<?php echo !empty($meta['apartment-enquiry-icon']) ? esc_html($meta['apartment-enquiry-icon']) : 'fa fa-question-circle-o'; ?>" aria-hidden="true"></i>
+                            <h3><?php echo !empty($meta['t-enquiry-option-title']) ? esc_html($meta['t-enquiry-option-title']) : ''; ?></h3>
+                        </div>
                         <p><?php echo !empty($meta['t-enquiry-option-content']) ? esc_html($meta['t-enquiry-option-content']) : ''; ?></p>
                         <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="btn-styled"><span>
                             <?php echo !empty($meta['t-enquiry-option-btn']) ? esc_html($meta['t-enquiry-option-btn']) : ''; ?>

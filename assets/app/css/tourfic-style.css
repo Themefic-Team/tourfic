@@ -1230,16 +1230,21 @@ h3.tf-sidebar-widget_title {
   flex: 2;
   text-align: center;
 }
-.tf-ask-question h3 {
+.tf-ask-question .default-enquiry-title-section {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+.tf-ask-question .default-enquiry-title-section h3 {
   font-size: 22px;
   color: #3A3A44;
+  margin-bottom: 10px;
 }
-.tf-ask-question h3:before {
-  font-family: "Font Awesome 5 Free";
+.tf-ask-question .default-enquiry-title-section i {
   font-weight: 900;
-  content: "\f059";
-  padding-right: 7px;
-  color: #003162 !important;
+  padding-right: 10px;
+  font-size: 22px;
+  color: #003162;
 }
 
 .tf-faq-items-wrapper {
@@ -6384,10 +6389,14 @@ div#tf-contact-info {
   height: 120px;
 }
 
-.apartment-question .question-left:before {
-  font-family: "Font Awesome 5 Free";
+.apartment-question .question-left .default-enquiry-title-section {
+  justify-content: flex-start;
+}
+.apartment-question .question-left .default-enquiry-title-section i {
+  align-self: flex-start;
+}
+.apartment-question .question-left .default-enquiry-title-section i:before {
   font-weight: 900;
-  content: "\f674";
   padding-right: 7px;
   color: #003162;
   position: absolute;

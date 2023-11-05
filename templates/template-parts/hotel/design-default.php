@@ -732,7 +732,10 @@
                     if(!empty($tf_enquiry_section_status)){
                     ?>
                     <div class="tf-ask-question">
-                        <h3><?php echo !empty($meta['h-enquiry-option-title']) ? esc_html($meta['h-enquiry-option-title']) : ''; ?></h3>
+                        <div class="default-enquiry-title-section">
+                            <i class="<?php echo !empty($meta['h-enquiry-option-icon']) ? esc_html($meta['h-enquiry-option-icon']) : 'fa fa-question-circle-o'; ?>" aria-hidden="true"></i>
+                            <h3><?php echo !empty($meta['h-enquiry-option-title']) ? esc_html($meta['h-enquiry-option-title']) : ''; ?></h3>
+                        </div> 
                         <p><?php echo !empty($meta['h-enquiry-option-content']) ? esc_html($meta['h-enquiry-option-content']) : ''; ?></p>
                         <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="btn-styled"><span><?php echo !empty($meta['h-enquiry-option-btn']) ? esc_html($meta['h-enquiry-option-btn']) : ''; ?></span></a></div>
                     </div>

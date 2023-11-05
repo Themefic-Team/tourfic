@@ -536,7 +536,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 		// Enquiry Section
 		'h_enquiry'    => array(
 			'title'  => __( 'Enquiry', 'tourfic' ),
-			'icon'   => 'fa-solid fa-clipboard-question',
+			'icon'   => 'fa fa-question-circle-o',
 			'fields' => array(
 				array(
 					'id'      => 'enquiry-section',

@@ -305,7 +305,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 		// Common CSS
 		if( $tf_primary_color_reg  ) { $output .= '
 			.tf_button, .tf-btn-flip:before, .tf-btn-flip, .btn-styled, .tf-review-form-container .tf-review-submit input[type="submit"], .tf-bttn-normal.bttn-primary, .tf-bttn-normal.bttn-secondary, .tf-template-global .tf-archive-head .active, .tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature, {color: '.$tf_primary_color_reg.' !important;}
-			.tf-ask-question h3:before {color: '.$tf_primary_color_reg.';}
+			.tf-ask-question div i:before {color: '.$tf_primary_color_reg.' !important;}
 		'; }
 		if( $tf_primary_color_hov  ) { $output .= '
 			.tf_button:hover, .btn-styled:hover, .tf-btn-flip:after, .tf-review-form-container .tf-review-submit input[type="submit"]:hover, .tf-bttn-normal.bttn-primary:hover, .tf-bttn-normal.bttn-secondary:hover {color: '.$tf_primary_color_hov.' !important;}
