@@ -1855,6 +1855,11 @@ TF_Settings::option( 'tf_settings', array(
 				),
 
 				array(
+					'id'       => 'hotel_search_heading',
+					'type'     => 'heading',
+					'label'    => __( 'Hotel Search', 'tourfic' ),
+				),
+				array(
 					'id'        => 'date_hotel_search',
 					'type'      => 'switch',
 					'label'     => __( 'Date Required in Hotel Search', 'tourfic' ),
@@ -1864,7 +1869,19 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => false,
 				),
-
+				array(
+					'id'        => 'disable_hotel_child_search',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Child in Hotel Search', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the child is not showing on the Search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'       => 'tour_search_heading',
+					'type'     => 'heading',
+					'label'    => __( 'Tour Search', 'tourfic' ),
+				),
 				array(
 					'id'        => 'date_tour_search',
 					'type'      => 'switch',
@@ -1875,6 +1892,27 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'No', 'tourfic' ),
 				),
 				array(
+					'id'        => 'disable_child_search',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Child in Tour Search', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the child is not showing on the Search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'        => 'disable_infant_search',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Infant in Tour Search', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the Infant is not showing on the Search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'       => 'apartment_search_heading',
+					'type'     => 'heading',
+					'label'    => __( 'Apartment Search', 'tourfic' ),
+				),
+				array(
 					'id'        => 'date_apartment_search',
 					'type'      => 'switch',
 					'label'     => __( 'Date Required in Apartment Search', 'tourfic' ),
@@ -1883,17 +1921,17 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'No', 'tourfic' ),
 				),
 				array(
-					'id'        => 'disable_child_search',
+					'id'        => 'disable_apartment_child_search',
 					'type'      => 'switch',
-					'label'     => __( 'Disabled Child in Tour Search', 'tourfic' ),
+					'label'     => __( 'Disable Child in Apartment Search', 'tourfic' ),
 					'subtitle'  => __( 'If you enable this option, then the child is not showing on the Search form.', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 				),
 				array(
-					'id'        => 'disable_infant_search',
+					'id'        => 'disable_apartment_infant_search',
 					'type'      => 'switch',
-					'label'     => __( 'Disabled Infant in Tour Search', 'tourfic' ),
+					'label'     => __( 'Disable Infant in Apartment Search', 'tourfic' ),
 					'subtitle'  => __( 'If you enable this option, then the Infant is not showing on the Search form.', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
