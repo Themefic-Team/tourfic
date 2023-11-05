@@ -194,30 +194,34 @@ function tf_hotel_tour_docs() {
 add_action( 'add_meta_boxes', 'tf_hotel_tour_docs' );
 
 function tf_hotel_docs_callback() {
-	$tfhoteldocumentation = sanitize_url( 'https://themefic.com/docs/tourfic/' );
+	$tfhoteldocumentation = sanitize_url( 'https://themefic.com/docs/tourfic/how-it-works/add-new-hotel/' );
 	?>
-    <div class="tf_docs_preview" style="padding: 10px; text-align: center;">
-        <a href="<?php echo $tfhoteldocumentation; ?>" target="_blank" class="button button-primary button-large"><?php echo __( 'Go to Documentation', 'tourfic' ); ?></a>
+    <div class="tf_docs_preview">
+        <a href="<?php echo $tfhoteldocumentation; ?>" target="_blank">
+			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/documentation.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
+		</a>
     </div>
 	<?php
 }
 
 function tf_apartment_docs_callback() {
-	$tf_apartment_documentation = sanitize_url( 'https://themefic.com/docs/tourfic/' );
+	$tf_apartment_documentation = sanitize_url( 'https://themefic.com/docs/tourfic/add-new-apartment/locations-types-and-featured-image/' );
 	?>
-    <div class="tf_docs_preview" style="padding: 10px; text-align: center;">
-        <a href="<?php echo $tf_apartment_documentation; ?>" target="_blank"
-           class="button button-primary button-large"><?php echo __( 'Go to Documentation', 'tourfic' ); ?></a>
+    <div class="tf_docs_preview">
+        <a href="<?php echo $tf_apartment_documentation; ?>" target="_blank">
+			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/documentation.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
+		</a>
     </div>
 	<?php
 }
 
 function tf_tour_docs_callback() {
-	$tf_tour_documentation = sanitize_url( 'https://themefic.com/docs/tourfic/' );
+	$tf_tour_documentation = sanitize_url( 'https://themefic.com/docs/tourfic/tours/tourfic-hotel-general-settings/' );
 	?>
-    <div class="tf_docs_preview" style="padding: 10px; text-align: center;">
-        <a href="<?php echo $tf_tour_documentation; ?>" target="_blank"
-           class="button button-primary button-large"><?php echo __( 'Go to Documentation', 'tourfic' ); ?></a>
+    <div class="tf_docs_preview">
+        <a href="<?php echo $tf_tour_documentation; ?>" target="_blank">
+			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/documentation.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
+		</a>
     </div>
 	<?php
 }

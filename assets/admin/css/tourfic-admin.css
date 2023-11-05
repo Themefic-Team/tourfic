@@ -2370,6 +2370,41 @@ Steps
   padding-right: 10px;
 }
 
+#tfhotel_docs,
+#tftour_docs,
+#tfapartment_docs {
+  border: 0px solid;
+  box-shadow: none;
+  background-color: transparent;
+}
+#tfhotel_docs .postbox-header,
+#tftour_docs .postbox-header,
+#tfapartment_docs .postbox-header {
+  display: none;
+}
+#tfhotel_docs .inside,
+#tftour_docs .inside,
+#tfapartment_docs .inside {
+  margin: 0px;
+  padding: 0px;
+}
+#tfhotel_docs .inside .tf_docs_preview a,
+#tftour_docs .inside .tf_docs_preview a,
+#tfapartment_docs .inside .tf_docs_preview a {
+  text-decoration: none;
+}
+#tfhotel_docs .inside .tf_docs_preview a img,
+#tftour_docs .inside .tf_docs_preview a img,
+#tfapartment_docs .inside .tf_docs_preview a img {
+  width: 100%;
+}
+#tfhotel_docs .inside .tf_docs_preview a:focus,
+#tftour_docs .inside .tf_docs_preview a:focus,
+#tfapartment_docs .inside .tf_docs_preview a:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .tf-field {
   padding: 12px 0;
 }
