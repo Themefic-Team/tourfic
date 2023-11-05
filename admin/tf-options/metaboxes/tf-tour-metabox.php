@@ -799,7 +799,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'        => 'disable_same_day',
 					'type'      => 'switch',
 					'label'     => __( 'Are You Want Disable Same Day Booking?', 'tourfic' ),
-					'subtitle'  => __( 'If you enable this option, then the tour can not booking same day.', 'tourfic' ),
+					'subtitle'  => __( 'By enabling this option, the tour can not  be booking in same day.', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 				),
