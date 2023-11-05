@@ -354,7 +354,8 @@ TF_Settings::option( 'tf_settings', array(
 										'list' => __( 'List', 'tourfic' ),
 										'grid' => __( 'Grid', 'tourfic' ),
 									),
-									'default'    => 'List'
+									'default'    => 'List',
+									'dependency' => array( 'tour-archive', '==', 'design-1' ),
 								),
 								array(
 									'id'       => 'tour_archive_price_minimum_settings',
@@ -1853,6 +1854,11 @@ TF_Settings::option( 'tf_settings', array(
 				),
 
 				array(
+					'id'       => 'hotel_search_heading',
+					'type'     => 'heading',
+					'label'    => __( 'Hotel Search', 'tourfic' ),
+				),
+				array(
 					'id'        => 'date_hotel_search',
 					'type'      => 'switch',
 					'label'     => __( 'Date Required in Hotel Search', 'tourfic' ),
@@ -1862,7 +1868,19 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => false,
 				),
-
+				array(
+					'id'        => 'disable_hotel_child_search',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Child in Hotel Search', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the child is not showing on the Search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'       => 'tour_search_heading',
+					'type'     => 'heading',
+					'label'    => __( 'Tour Search', 'tourfic' ),
+				),
 				array(
 					'id'        => 'date_tour_search',
 					'type'      => 'switch',
@@ -1873,6 +1891,27 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'No', 'tourfic' ),
 				),
 				array(
+					'id'        => 'disable_child_search',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Child in Tour Search', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the child is not showing on the Search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'        => 'disable_infant_search',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Infant in Tour Search', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the Infant is not showing on the Search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'       => 'apartment_search_heading',
+					'type'     => 'heading',
+					'label'    => __( 'Apartment Search', 'tourfic' ),
+				),
+				array(
 					'id'        => 'date_apartment_search',
 					'type'      => 'switch',
 					'label'     => __( 'Date Required in Apartment Search', 'tourfic' ),
@@ -1881,17 +1920,17 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'No', 'tourfic' ),
 				),
 				array(
-					'id'        => 'disable_child_search',
+					'id'        => 'disable_apartment_child_search',
 					'type'      => 'switch',
-					'label'     => __( 'Disabled Child in Tour Search', 'tourfic' ),
+					'label'     => __( 'Disabled Child in Apartment Search', 'tourfic' ),
 					'subtitle'  => __( 'Enabling this option will result in the child not being displayed on the Search form.', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 				),
 				array(
-					'id'        => 'disable_infant_search',
+					'id'        => 'disable_apartment_infant_search',
 					'type'      => 'switch',
-					'label'     => __( 'Disabled Infant in Tour Search', 'tourfic' ),
+					'label'     => __( 'Disabled Infant in Apartment Search', 'tourfic' ),
 					'subtitle'  => __( 'Enabling this option will result in the absence of the Infant from the Search form', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
@@ -3178,8 +3217,8 @@ TF_Settings::option( 'tf_settings', array(
 					'type'     => 'repeater',
 					'label'    => __( 'Review Fields for Hotels', 'tourfic' ),
 					'subtitle' => __( 'Add Custom Review Fields', 'tourfic' ),
-					'is_pro'   => true,
 					'max'      => '6',
+					'drag_only'   => true,
 					'fields'   => array(
 						array(
 							'id'    => 'r-field-type',
@@ -3214,8 +3253,8 @@ TF_Settings::option( 'tf_settings', array(
 					'type'     => 'repeater',
 					'label'    => __( 'Review Fields for Tours', 'tourfic' ),
 					'subtitle' => __( 'Add Custom Review Fields', 'tourfic' ),
-					'is_pro'   => true,
 					'max'      => '6',
+					'drag_only'   => true,
 					'fields'   => array(
 
 						array(
@@ -3246,8 +3285,8 @@ TF_Settings::option( 'tf_settings', array(
 					'type'     => 'repeater',
 					'label'    => __( 'Review Fields for Apartments', 'tourfic' ),
 					'subtitle' => __( 'Maximum 10 fields allowed', 'tourfic' ),
-					'is_pro'   => true,
 					'max'      => '6',
+					'drag_only'   => true,
 					'fields'   => array(
 						array(
 							'id'    => 'r-field-type',
@@ -3312,7 +3351,6 @@ TF_Settings::option( 'tf_settings', array(
 					'type'      => 'switch',
 					'label'     => __( 'Minify CSS', 'tourfic' ),
 					'subtitle'  => __( 'Enable/disable Tourfic CSS minification', 'tourfic' ),
-					'is_pro'    => true,
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
 					'width'     => 100,
@@ -3324,7 +3362,6 @@ TF_Settings::option( 'tf_settings', array(
 					'type'      => 'switch',
 					'label'     => __( 'Minify JS', 'tourfic' ),
 					'subtitle'  => __( 'Enable/disable Tourfic JS minification', 'tourfic' ),
-					'is_pro'    => true,
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
 					'width'     => 100,
@@ -3342,7 +3379,6 @@ TF_Settings::option( 'tf_settings', array(
 					'type'      => 'switch',
 					'label'     => __( 'Flatpickr CDN', 'tourfic' ),
 					'subtitle'  => __( 'Enable/disable cloudflare CDN for Flatpickr CSS & JS', 'tourfic' ),
-					'is_pro'    => true,
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
 					'width'     => 100
@@ -3353,7 +3389,6 @@ TF_Settings::option( 'tf_settings', array(
 					'type'      => 'switch',
 					'label'     => __( 'Fancybox CDN', 'tourfic' ),
 					'subtitle'  => __( 'Enable/disable cloudflare CDN for Fancybox CSS & JS', 'tourfic' ),
-					'is_pro'    => true,
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
 					'width'     => 100
@@ -3364,7 +3399,6 @@ TF_Settings::option( 'tf_settings', array(
 					'type'      => 'switch',
 					'label'     => __( 'Slick CDN', 'tourfic' ),
 					'subtitle'  => __( 'Enable/disable cloudflare CDN for Slick CSS & JS', 'tourfic' ),
-					'is_pro'    => true,
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
 					'width'     => 100
@@ -3375,7 +3409,6 @@ TF_Settings::option( 'tf_settings', array(
 					'type'      => 'switch',
 					'label'     => __( 'Font Awesome CDN', 'tourfic' ),
 					'subtitle'  => __( 'Enable/disable cloudflare CDN for Font Awesome CSS', 'tourfic' ),
-					'is_pro'    => true,
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
 					'width'     => 100
@@ -3542,7 +3575,7 @@ TF_Settings::option( 'tf_settings', array(
 									'type'  => 'heading',
 									'label' => __( 'Vendor Email', 'tourfic' ),
 								),
-								
+
 								array(
 									'id'          => 'vendor_booking_email_template',
 									'type'        => 'editor',
@@ -3551,7 +3584,7 @@ TF_Settings::option( 'tf_settings', array(
 									'description' => __( 'This template will be sent to vendor', 'tourfic' ),
 									'is_pro'    => true
 								),
-								
+
 							),
 
 						),

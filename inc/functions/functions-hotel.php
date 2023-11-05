@@ -1182,6 +1182,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 		// date format for users output
 		$hotel_date_format_for_users = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
+		$disable_hotel_child_search  = ! empty( tfopt( 'disable_hotel_child_search' ) ) ? tfopt( 'disable_hotel_child_search' ) : '';
 		?>
         <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
             <div class="tf_homepage-booking">
@@ -1206,8 +1207,10 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                             <i class="fas fa-user"></i>
                         </span>
                         <div class="adults-text"><?php echo ( ! empty( $adults ) ? $adults : '1' ) . ' ' . __( 'Adults', 'tourfic' ); ?></div>
-                        <div class="person-sep"></div>
-                        <div class="child-text"><?php echo ( ! empty( $child ) ? $child : '0' ) . ' ' . __( 'Children', 'tourfic' ); ?></div>
+                        <?php if(empty($disable_hotel_child_search)) : ?>
+                            <div class="person-sep"></div>
+                            <div class="child-text"><?php echo ( ! empty( $child ) ? $child : '0' ) . ' ' . __( 'Children', 'tourfic' ); ?></div>
+                        <?php endif; ?>
                         <div class="person-sep"></div>
                         <div class="room-text"><?php echo ( ! empty( $room ) ? $room : '1' ) . ' ' . __( 'Room', 'tourfic' ); ?></div>
                     </div>
@@ -1222,14 +1225,16 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
-                            <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
-                                <div class="acr-select">
-                                    <div class="acr-dec">-</div>
-                                    <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
-                                    <div class="acr-inc">+</div>
+	                        <?php if(empty($disable_hotel_child_search)) : ?>
+                                <div class="tf_acrselection">
+                                    <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
+                                    <div class="acr-select">
+                                        <div class="acr-dec">-</div>
+                                        <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
+                                        <div class="acr-inc">+</div>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
                             <div class="tf_acrselection">
                                 <div class="acr-label"><?php _e( 'Rooms', 'tourfic' ); ?></div>
                                 <div class="acr-select">
@@ -1324,6 +1329,7 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
 
 		// date format setting
 		$hotel_date_format_for_users = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+		$disable_hotel_child_search  = ! empty( tfopt( 'disable_hotel_child_search' ) ) ? tfopt( 'disable_hotel_child_search' ) : '';
 		?>
         <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
             <div class="tf_homepage-booking">
@@ -1367,8 +1373,10 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                             <i class="fas fa-user"></i>
                         </span>
                         <div class="adults-text"><?php echo ( ! empty( $adults ) ? $adults : '1' ) . ' ' . __( 'Adults', 'tourfic' ); ?></div>
-                        <div class="person-sep"></div>
-                        <div class="child-text"><?php echo ( ! empty( $child ) ? $child : '0' ) . ' ' . __( 'Children', 'tourfic' ); ?></div>
+	                    <?php if(empty($disable_hotel_child_search)) : ?>
+                            <div class="person-sep"></div>
+                            <div class="child-text"><?php echo ( ! empty( $child ) ? $child : '0' ) . ' ' . __( 'Children', 'tourfic' ); ?></div>
+                        <?php endif; ?>
                         <div class="person-sep"></div>
                         <div class="room-text"><?php echo ( ! empty( $room ) ? $room : '1' ) . ' ' . __( 'Room', 'tourfic' ); ?></div>
                     </div>
@@ -1383,14 +1391,16 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
-                            <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
-                                <div class="acr-select">
-                                    <div class="acr-dec child-dec">-</div>
-                                    <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>" readonly>
-                                    <div class="acr-inc child-inc">+</div>
+	                        <?php if(empty($disable_hotel_child_search)) : ?>
+                                <div class="tf_acrselection">
+                                    <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
+                                    <div class="acr-select">
+                                        <div class="acr-dec child-dec">-</div>
+                                        <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>" readonly>
+                                        <div class="acr-inc child-inc">+</div>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
                             <div class="tf_acrselection">
                                 <div class="acr-label"><?php _e( 'Rooms', 'tourfic' ); ?></div>
                                 <div class="acr-select">
@@ -1402,10 +1412,9 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                         </div>
                         <!-- Children age input field based on children number -->
 						<?php
-
 						$children_age        = tfopt( 'children_age_limit' );
 						$children_age_status = tfopt( 'enable_child_age_limit' );
-						if ( ! empty( $children_age_status ) && $children_age_status == "1" ) {
+						if ( ! empty( $children_age_status ) && $children_age_status == "1" && empty($disable_hotel_child_search)) {
 							?>
                             <div class="tf-children-age-fields">
                                 <div class="tf-children-age" id="tf-age-field-0" style="display:none">
