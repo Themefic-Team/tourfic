@@ -6909,7 +6909,7 @@ div#tf-contact-info {
   font-size: 15px;
   color: #0E3DD8;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   display: block;
 }
 .tf-head-info .share-tour-content .tf-dropdown-share-content ul {
@@ -6922,18 +6922,20 @@ div#tf-contact-info {
 }
 .tf-head-info .share-tour-content .tf-dropdown-share-content ul li a {
   display: inline-block;
-  padding: 10px 6px;
+  padding: 10px 9px;
 }
 .tf-head-info .share-tour-content .tf-dropdown-share-content ul li a i {
-  font-size: 16px;
+  font-size: 22px;
 }
 .tf-head-info .share-tour-content .tf-dropdown-share-content ul li a:hover {
   background: transparent !important;
 }
 .tf-head-info .share-tour-content .tf-dropdown-share-content ul li button {
-  padding: 10px 6px;
+  padding: 10px 8px !important;
   background-color: transparent !important;
   border: 0px solid;
+  font-size: 22px !important;
+  cursor: pointer;
 }
 .tf-head-info .share-tour-content .tf-dropdown-share-content ul li button span {
   color: #0E3DD8;
@@ -6985,6 +6987,9 @@ div#tf-contact-info {
 .tf-ask-enquiry p {
   margin-top: 5px;
   margin-bottom: 25px;
+}
+.tf-ask-enquiry .tf-btn a:hover {
+  background-color: #003C7A !important;
 }
 
 .tf-hero-gallery {
@@ -8829,9 +8834,18 @@ div#tf-contact-info {
   margin: 0px 0px 30px 0px;
   background: #FFFFFF;
   box-shadow: 0px 0px 24px 5px #E0E8EE;
+  transition: 0.3s all ease;
+}
+.tf-hotel-design-1 .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner:hover {
+  background: #F6F7FB;
+  box-shadow: 0px 13px 30px 0px #E0E8EE;
 }
 .tf-hotel-design-1 .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner h3 {
   font-size: 20px;
+}
+.tf-hotel-design-1 .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single.active .tf-faq-single-inner {
+  background: #F6F7FB;
+  box-shadow: 0px 13px 30px 0px #E0E8EE;
 }
 .tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box {
   background: transparent;

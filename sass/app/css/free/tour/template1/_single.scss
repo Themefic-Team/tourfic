@@ -163,7 +163,7 @@
                 font-size: 15px;
                 color: $color-theme;
                 font-weight: 600;
-                margin-bottom: 20px;
+                margin-bottom: 10px;
                 display: block;
             }
             ul{
@@ -174,18 +174,20 @@
                     display: inline-block;
                     a{
                         display: inline-block;
-                        padding: 10px 6px;
+                        padding: 10px 9px;
                         i{
-                            font-size: 16px;
+                            font-size: 22px;
                         }
                         &:hover{
                             background: transparent !important;
                         }
                     }
                     button{
-                        padding: 10px 6px;
+                        padding: 10px 8px !important;
                         background-color: transparent !important;
                         border: 0px solid;
+                        font-size: 22px !important;
+                        cursor: pointer;
                         span{
                             color: $color-theme;
                         }
@@ -252,6 +254,11 @@
     p{
         margin-top: 5px;
         margin-bottom: 25px;
+    }
+    .tf-btn{
+        a:hover{
+            background-color: #003C7A !important;
+        }
     }
 }
 
