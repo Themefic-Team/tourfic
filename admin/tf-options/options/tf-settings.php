@@ -600,7 +600,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'apartment-option-notice',
 					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="#" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/apartment-options/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'           => 'amenities_cats',
