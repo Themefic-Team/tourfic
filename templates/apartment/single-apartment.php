@@ -647,24 +647,51 @@ while ( have_posts() ) : the_post();
 
 		<?php
 		$enquiry_section = ! empty( $meta['enquiry-section'] ) ? $meta['enquiry-section'] : '';
+        $enquiry_section_icon = !empty($meta['apartment-enquiry-icon']) ? esc_html($meta['apartment-enquiry-icon']) : '';
+        $enquiry_section_title =  !empty( $meta['enquiry-title'] ) ? esc_html( $meta['enquiry-title'] ) : '';
+        $enquiry_section_des = ! empty( $meta['enquiry-content'] ) ? esc_html( $meta['enquiry-content'] ) : '';
+        $enquiry_section_button = ! empty( $meta['enquiry-btn'] ) ? esc_html( $meta['enquiry-btn'] ) : '';
 
-		if ( $enquiry_section === '1' ):
+		if ( $enquiry_section === '1' && ( !empty($tf_enquiry_section_icon) || !empty($tf_enquiry_section_title) || !empty($enquery_button_text))):
 			?>
             <div class="tf-ask-question apartment-question">
                 <div class="tf-container">
                     <div class="apartment-qa-wrapper">
                         <div class="question-left">
                             <div class="default-enquiry-title-section">
-                                <i class="<?php echo !empty($meta['apartment-enquiry-icon']) ? esc_html($meta['apartment-enquiry-icon']) : 'fa fa-question-circle-o'; ?>" aria-hidden="true"></i>
-                                <h3><?php echo ! empty( $meta['enquiry-title'] ) ? esc_html( $meta['enquiry-title'] ) : ''; ?></h3>
+                                <?php 
+                                if(!empty($enquiry_section_icon)) {
+                                    ?>
+                                    <i class="<?php echo $enquiry_section_icon; ?>" aria-hidden="true"></i>
+                                    <?php
+                                }
+                                if(!empty($enquiry_section_title)) {
+                                    ?>
+                                    <h3><?php echo $enquiry_section_title?></h3>
+                                    <?php
+                                }
+                                ?>
                             </div>
-                            <p><?php echo ! empty( $meta['enquiry-content'] ) ? esc_html( $meta['enquiry-content'] ) : ''; ?></p>
+                            <?php 
+                            if(!empty($enquiry_section_des)) {
+                                ?>
+                                <p><?php echo $enquiry_section_des; ?></p>
+                                <?php
+                            }
+                            
+                            ?>
                         </div>
-                        <div class="tf-btn">
+                        <?php 
+                        if(!empty($enquiry_section_button)) {
+                            ?>
+                            <div class="tf-btn">
                             <a href="#" id="tf-ask-question-trigger" class="btn-styled">
-                                <span><?php echo ! empty( $meta['enquiry-btn'] ) ? esc_html( $meta['enquiry-btn'] ) : ''; ?></span>
+                                <span><?php echo  $enquiry_section_button?></span>
                             </a>
-                        </div>
+                            </div>
+                            <?php
+                        }                        
+                        ?>
                     </div>
                 </div>
             </div>

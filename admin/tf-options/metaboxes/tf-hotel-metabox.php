@@ -671,7 +671,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 						array(
 							'id'        => 'reduce_num_room',
 							'type'      => 'switch',
-							'is_pro'    => true,
 							'label'     => __( 'Room Inventory Management', 'tourfic' ),
 							'subtitle'  => __( 'Decrease the inventory count for each room booked to reflect current availability accurately.', 'tourfic' ),
 							'label_on'  => __( 'Yes', 'tourfic' ),

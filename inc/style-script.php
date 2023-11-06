@@ -348,8 +348,14 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-single-review .tf-single-details {
 				background: '.$tf_review_bg_color.';
 			}
-			.tf-single-review .tf-review-details .tf-name, .tf-single-review .tf-review-details .tf-date, .tf-single-review .tf-review-details .tf-rating-stars, .tf-single-review .tf-review-details .tf-rating-stars i, .tf-single-review .tf-review-details .tf-description p {
-				color: '.$tf_review_color.';
+			.tf-single-review .tf-review-details .tf-name, .tf-single-review .tf-review-details .tf-date, .tf-single-review .tf-review-details .tf-rating-stars, .tf-single-review .tf-review-details .tf-rating-stars i, .tf-single-review .tf-review-details .tf-description p,
+			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details,
+			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-author-name h3,
+			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-message p,
+			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li,
+			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-ratings i,
+			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li i{
+				color: '.$tf_review_color.' !important;
 			}
 			.tf-review-container .tf-review-progress-bar .tf-single .tf-p-bar,
 			.tf-single-page .tf-review-wrapper .tf-review-data .tf-review-data-features .tf-progress-bar,
@@ -357,7 +363,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 				background: '.$tf_param_single_bg_color.';
 			}
 			.tf-review-container .tf-review-progress-bar,
-			.tf-single-page .tf-review-wrapper .tf-review-data {
+			.tf-single-page .tf-review-wrapper .tf-review-data,
+			.tf-template-global .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features {
 				background: '.$tf_param_bg_color.';
 				border-color: '.$tf_param_bg_color.';
 			}
@@ -377,6 +384,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 				background: '.$tf_review_bg_color.';
 				padding: 20px;
 				border-radius: 5px;
+				margin: 10px 0px;
 			}
 			.tf-single-page .tf-review-reply .tf-review-details h3,
 			.tf-single-page .tf-review-reply .tf-review-details p,
