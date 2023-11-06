@@ -652,6 +652,9 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => __( 'Related Tour Title', 'tourfic' ),
 					'subtitle' => __( 'This Title will show on single tour, Related tour Section as Section Title.', 'tourfic' ),
 					'default'  => __( 'You might also like', 'tourfic' ),
+					'dependency'  => array(
+						array( 't-related', '==', 'false' ),
+					),
 				),
 				array(
 					'id'       => 'rt-description',
@@ -659,6 +662,9 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => __( 'Related Tour Description', 'tourfic' ),
 					'subtitle' => __( 'This Description will show on single tour, Related tour Section as Section Description.', 'tourfic' ),
 					'default'  => __( 'Travel is my life. Since 1999, I have been traveling around the world nonstop. If you also love travel, you are in the right place!', 'tourfic' ),
+					'dependency'  => array(
+						array( 't-related', '==', 'false' ),
+					),
 				),
 				array(
 					'id'      => 'rt-display',
@@ -671,6 +677,9 @@ TF_Settings::option( 'tf_settings', array(
 					),
 					'default' => 'auto',
 					'inline'  => true,
+					'dependency'  => array(
+						array( 't-related', '==', 'false' ),
+					),
 				),
 				array(
 					'id'         => 'tf-ralated-tours',
@@ -681,6 +690,9 @@ TF_Settings::option( 'tf_settings', array(
 					'query_args' => array(
 						'post_type'      => 'tf_tours',
 						'posts_per_page' => - 1,
+					),
+					'dependency'  => array(
+						array( 't-related', '==', 'false' ),
 					),
 				),
 				array(
