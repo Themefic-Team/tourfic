@@ -407,16 +407,10 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'subtitle' => __( 'In this section, you are provided with the tools to create and manage your hotel room offerings. ', 'tourfic' ),
 				),
 				array(
-					'id'      => 'hotel-room-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/how-it-works/room-details/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				array(
 					'id'      => 'notice',
 					'type'    => 'notice',
 					'notice'  => 'info',
-					'content' => __( 'This section includes Hotel Room Management settings. Check documentation.(insert link)', 'tourfic' ),
+					'content' => __( 'This section includes Hotel Room Management settings.', 'tourfic' ). ' <a href="https://themefic.com/docs/tourfic/how-it-works/room-management/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'    => 'room-section-title',
@@ -542,7 +536,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'id'          => 'features',
 							'type'        => 'select2',
 							'label'       => __( 'Select Features', 'tourfic' ),
-							'subtitle'    => __( 'For instance, select amenities like a Coffee Machine, Microwave Oven, Bathtub, and more as applicable. You need to create these features from the “Features” tab [insert link to features tab] first.', 'tourfic' ),
+							'subtitle'    => __( 'For instance, select amenities like a Coffee Machine, Microwave Oven, Bathtub, and more as applicable. You need to create these features from the ', 'tourfic' ). '<a href="'.admin_url('edit-tags.php?taxonomy=hotel_feature&post_type=tf_hotel').'" target="_blank"><strong>' . __( 'features', 'tourfic' ) . '</strong></a>'.__( ' tab first.', 'tourfic' ),
 							'placeholder' => __( 'Select', 'tourfic' ),
 							'multiple'    => true,
 							'options'     => 'terms',
