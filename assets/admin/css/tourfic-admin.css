@@ -365,6 +365,12 @@ Fontawesome
   opacity: 1;
 }
 
+.tf-small-btn {
+  margin-left: 10px;
+  font-size: 12px;
+  padding: 7px 15px;
+}
+
 .tf-post-states {
   display: inline-block;
   font-size: 11px;
