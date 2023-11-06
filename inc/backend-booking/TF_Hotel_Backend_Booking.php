@@ -455,7 +455,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 							$reduce_num_room    = ! empty( $room['reduce_num_room'] ) ? $room['reduce_num_room'] : false;
 							$number_orders      = '0';
 
-							if ( ! empty( $order_ids ) && function_exists( 'is_tf_pro' ) && is_tf_pro() && $reduce_num_room == true ) {
+							if ( ! empty( $order_ids ) && $reduce_num_room == true ) {
 
 								//Get backend available date range as an array
 								if ( $avil_by_date ) {

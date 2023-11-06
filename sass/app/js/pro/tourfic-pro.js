@@ -2,38 +2,6 @@
     $(document).ready(function () {
 
         /**
-         * Hotel Details Popup
-         *
-         */
-        $(document).on('click', '.tf-room-detail-qv', function (e) {
-            e.preventDefault();
-            $("#tour_room_details_loader").show();
-            var post_id = $(this).attr("data-hotel");
-            var uniqid_id = $(this).attr("data-uniqid");
-            var data = {
-                action: 'tf_tour_details_qv',
-                post_id: post_id,
-                uniqid_id: uniqid_id
-            };
-
-            $.ajax({
-                type: 'post',
-                url: tf_params.ajax_url,
-                data: data,
-                success: function (response) {
-                    $("#tour_room_details_qv").html(response);
-
-                    $("#tour_room_details_loader").hide();
-                    $.fancybox.open({
-                        src: '#tour_room_details_qv',
-                        type: 'inline',
-                    });
-                }
-
-            });
-        });
-
-        /**
          * Deposit amount toggle
          */
         $(document).on("click", "input[name='make_deposit']", function () {

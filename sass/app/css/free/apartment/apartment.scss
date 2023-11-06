@@ -941,16 +941,22 @@
 
 .apartment-question {
     .question-left {
-        &:before {
-            font-family: "Font Awesome 5 Free";
-            font-weight: 900;
-            content: "\f674";
-            padding-right: 7px;
-            color: #003162;
-            position: absolute;
-            font-size: 30px;
-        }
+        .default-enquiry-title-section {
+            justify-content: flex-start;
 
+            i {
+                align-self: flex-start;
+
+                &:before {
+                    font-weight: 900;
+                    padding-right: 7px;
+                    color: #003162;
+                    position: absolute;
+                    font-size: 30px;
+                }
+            }
+        }
+       
         h3 {
             padding-left: 45px;
         }

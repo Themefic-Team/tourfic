@@ -19,7 +19,7 @@ function tf_apt_amenities_cats() {
 }
 
 TF_Metabox::metabox( 'tf_apartment_opt', array(
-	'title'     => __( 'Apertment Options', 'tourfic' ),
+	'title'     => __( 'Apartment Settings', 'tourfic' ),
 	'post_type' => 'tf_apartment',
 	'sections'  => array(
 		// General
@@ -28,9 +28,22 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
 				array(
+					'id'    => 'apartment-general-heading',
+					'type'  => 'heading',
+					'label' => 'General Settings ',
+					'subtitle' => __( 'These are some common settings specific to this Apartment.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'apartment-general-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/general-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
 					'id'    => 'apartment_gallery',
 					'type'  => 'gallery',
 					'label' => __( 'Apartment Gallery', 'tourfic' ),
+					'subtitle'    => __( 'Add multiple images to craft a captivating gallery for your apartments, giving potential customers a visual tour.', 'tourfic' ),
 				),
 				array(
 					'id'        => 'apartment_as_featured',
@@ -38,6 +51,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label'     => __( 'Featured Apartment', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
+					'subtitle'    => __( 'Enable this option to feature this apartment at the top of search results.', 'tourfic' ),
 				),
 				array(
 					'id'          => 'featured_text',
@@ -51,8 +65,8 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'       => 'tf_single_apartment_layout_opt',
 					'type'     => 'select',
-					'label'    => __( 'Apartment Page Layout', 'tourfic' ),
-					'subtitle' => __( 'Select your Layout logic', 'tourfic' ),
+					'label'    => __( 'Single Apartment Template Settings', 'tourfic' ),
+					'subtitle' => __( 'You can keep the Global Template settings or choose a different layout for this apartment.', 'tourfic' ),
 					'options'  => [
 						'global' => __( 'Global Settings', 'tourfic' ),
 						'single' => __( 'Single Settings', 'tourfic' ),
@@ -84,17 +98,29 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 			'icon'   => 'fa-solid fa-location-dot',
 			'fields' => array(
 				array(
+					'id'    => 'apartment-location-heading',
+					'type'  => 'heading',
+					'label' => 'Location Settings',
+					'subtitle' => __( 'The location of an apartment is a crucial element for every apartment. Set your apartment locations in this section.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'apartment-location-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/location-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
 					'id'       => 'location_title',
 					'type'     => 'text',
-					'label'    => __( 'Section Title', 'tourfic' ),
-					'subtitle' => __( 'Enter location section title', 'tourfic' ),
+					'label'    => __( 'Title of this Section', 'tourfic' ),
+					'subtitle' => __( 'This text will appear as the heading of the Location section on the frontend.', 'tourfic' ),
 					'default'  => __( 'Where you’ll be', 'tourfic' ),
 				),
 				array(
 					'id'          => 'address',
 					'type'        => 'textarea',
 					'label'       => __( 'Apartment Address', 'tourfic' ),
-					'subtitle'    => __( 'The address you want to show below the apartment title', 'tourfic' ),
+					'subtitle'    => __( 'This text will appear directly beneath the Apartment Title.', 'tourfic' ),
 					'placeholder' => __( 'e.g. 123 ABC Road, Toronto, Ontario 20100', 'tourfic' ),
 					'attributes'  => array(
 						'required' => 'required',
@@ -105,7 +131,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'class'    => 'gmaps',
 					'type'     => 'map',
 					'label'    => __( 'Dynamic Location Search', 'tourfic' ),
-					'subtitle' => __( 'Write your desired address and select the address from the suggestions. This address will be used to hyperlink the apartment address on the frontend.', 'tourfic' ),
+					'subtitle' => __( 'Enter the specific address you wish to use for the apartment and select the correct option from the suggested addresses. This will be used to hyperlink address and display the address on the front-end map. Note that the address provided in the previous section is solely for display purposes!', 'tourfic' ),
 					'height'   => '250px',
 					'settings' => array(
 						'scrollWheelZoom' => true,
@@ -120,28 +146,26 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'       => 'surroundings_sec_title',
 					'type'     => 'text',
-					'label'    => __( 'Section Title', 'tourfic' ),
-					'subtitle' => __( 'Enter surroundings section title', 'tourfic' ),
+					'label'    => __( 'Title of the Section', 'tourfic' ),
 					'is_pro'   => true,
 				),
 				array(
 					'id'       => 'surroundings_subtitle',
 					'type'     => 'text',
-					'label'    => __( 'Section Subtitle', 'tourfic' ),
-					'subtitle' => __( 'Enter surroundings section subtitle', 'tourfic' ),
+					'label'    => __( 'Section Description', 'tourfic' ),
 					'is_pro'   => true,
 				),
 				array(
 					'id'     => 'surroundings_places',
 					'type'   => 'repeater',
-					'label'  => __( 'Surroundings Places', 'tourfic' ),
-					'button_title' => __( 'Add New Criteria', 'tourfic' ),
+					'label'    => __( 'Add Surrounding Places', 'tourfic' ),
+					'button_title' => __( 'Add New Criteria & Place', 'tourfic' ),
 					'is_pro' => true,
 					'fields' => array(
 						array(
 							'id'          => 'place_criteria_label',
 							'type'        => 'text',
-							'label'       => __( 'Place Criteria Label', 'tourfic' ),
+							'label'    => __( 'Place Criteria Heading', 'tourfic' ),
 							'placeholder' => __( 'Enter place criteria label', 'tourfic' ),
 						),
 						array(
@@ -175,9 +199,21 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 		),
 		// Booking
 		'booking'         => array(
-			'title'  => __( 'Booking', 'tourfic' ),
+			'title'  => __( 'Booking Settings', 'tourfic' ),
 			'icon'   => 'fa-solid fa-calendar-check',
 			'fields' => array(
+				array(
+					'id'    => 'apartment-booking-heading',
+					'type'  => 'heading',
+					'label' => 'Booking Settings',
+					'subtitle' => __( 'This section offer the options to customize the booking process for this apartment.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'apartment-booking-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/booking-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+				),
 				array(
 					'id'    => 'booking_form_title',
 					'type'  => 'text',
@@ -188,7 +224,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'          => 'price_per_night',
 					'type'        => 'number',
 					'label'       => __( 'Price Per Night', 'tourfic' ),
-					'subtitle'    => __( 'Enter price per night', 'tourfic' ),
+					'subtitle'    => __( 'The total booking cost is calculated by multiplying the nightly rate by the number of nights stayed, from check-in to check-out.', 'tourfic' ),
 					'field_width' => 50,
 					'attributes'  => array( 'min' => 0 )
 				),
@@ -196,7 +232,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'          => 'min_stay',
 					'type'        => 'number',
 					'label'       => __( 'Minimum Night Stay', 'tourfic' ),
-					'subtitle'    => __( 'Enter minimum night stay', 'tourfic' ),
+					'subtitle'    => __( 'Specify the minimum number of nights required to book this room.', 'tourfic' ),
 					'field_width' => 50,
 					'attributes'  => array( 'min' => 0 )
 				),
@@ -204,7 +240,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'          => 'max_adults',
 					'type'        => 'number',
 					'label'       => __( 'Maximum Adults', 'tourfic' ),
-					'subtitle'    => __( 'Enter maximum adults', 'tourfic' ),
+					'subtitle'    => __( 'Max number of adults allowed in the apartment.', 'tourfic' ),
 					'field_width' => 33.33,
 					'attributes'  => array( 'min' => 1 )
 				),
@@ -212,7 +248,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'          => 'max_children',
 					'type'        => 'number',
 					'label'       => __( 'Maximum Children', 'tourfic' ),
-					'subtitle'    => __( 'Enter maximum children', 'tourfic' ),
+					'subtitle'    => __( 'Max number of child allowed in the apartment.', 'tourfic' ),
 					'field_width' => 33.33,
 					'attributes'  => array( 'min' => 0 )
 				),
@@ -220,7 +256,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'          => 'max_infants',
 					'type'        => 'number',
 					'label'       => __( 'Maximum Infants', 'tourfic' ),
-					'subtitle'    => __( 'Enter maximum infants', 'tourfic' ),
+					'subtitle'    => __( 'Max number of infants allowed in the apartment.', 'tourfic' ),
 					'field_width' => 33.33,
 					'attributes'  => array( 'min' => 0 )
 				),
@@ -235,7 +271,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'          => 'additional_fee',
 					'type'        => 'number',
 					'label'       => __( 'Additional Fee', 'tourfic' ),
-					'subtitle'    => __( 'Enter additional fee', 'tourfic' ),
+					'label'       => __( 'Additional Fee Amount', 'tourfic' ),
 					'field_width' => 33.33,
 					'attributes'  => array( 'min' => 0 )
 				),
@@ -255,7 +291,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'          => 'discount_type',
 					'type'        => 'select',
 					'label'       => __( 'Discount Type', 'tourfic' ),
-					'subtitle'    => __( 'Select Discount Type: Percentage or Fixed', 'tourfic' ),
+					'subtitle'    => __( 'Set a discount for this room to incentivize bookings. Choose between a fixed amount off or a percentage-based reduction.', 'tourfic' ),
 					'options'     => array(
 						'none'    => __( 'None', 'tourfic' ),
 						'fixed'   => __( 'Fixed', 'tourfic' ),
@@ -292,16 +328,29 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 			'icon'   => 'fa-solid fa-bed',
 			'fields' => array(
 				array(
+					'id'    => 'apartment-room-heading',
+					'type'  => 'heading',
+					'label' => 'Create & Manage Your Apartment Rooms',
+					'subtitle' => __( 'In this section, you are provided with the tools to create and manage your apartment room offerings.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'apartment-room-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/room-management/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
 					'id'    => 'room_details_title',
 					'type'  => 'text',
-					'label' => __( 'Section Title', 'tourfic' ),
+					'label' => __( 'Title of the Section', 'tourfic' ),
+					'subtitle' => __( 'This text will appear as the heading of the Rooms section on the frontend.', 'tourfic' ),
 					'default' => __( 'Where you\'ll sleep', 'tourfic' ),
 				),
 				array(
 					'id'           => 'rooms',
 					'type'         => 'repeater',
 					'button_title' => __( 'Add New', 'tourfic' ),
-					'label'        => __( 'Rooms', 'tourfic' ),
+					'label'        => __( 'Create your apartment rooms ', 'tourfic' ),
 					'fields'       => array(
 						array(
 							'id'    => 'title',
@@ -322,19 +371,20 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 						array(
 							'id'    => 'thumbnail',
 							'type'  => 'image',
-							'label' => __( 'Room Thumbnail', 'tourfic' ),
+							'label' => __( 'Room Image Thumbnail ', 'tourfic' ),
 						),
 						array(
 							'id'     => '',
 							'type'   => 'gallery',
-							'label'  => __( 'Room Gallery', 'tourfic' ),
+							'label' => __( 'Room Gallery', 'tourfic' ),
+							'subtitle' => __( 'Upload all the images specific to this room.', 'tourfic' ),
 							'is_pro' => true,
 						),
 						array(
 							'id'          => '',
 							'type'        => 'select',
 							'label'       => __( 'Room Type', 'tourfic' ),
-							'subtitle'    => __( 'Select room type', 'tourfic' ),
+							'subtitle' => __( 'Select the type of room you are offering.', 'tourfic' ),
 							'options'     => array(
 								'bedroom'     => __( 'Bedroom', 'tourfic' ),
 								'common_room' => __( 'Common Room', 'tourfic' ),
@@ -348,7 +398,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'id'          => '',
 							'type'        => 'text',
 							'label'       => __( 'Room Footage', 'tourfic' ),
-							'subtitle'    => __( 'Room footage (in sft)', 'tourfic' ),
+							'subtitle'    => __( 'Room footage (in sft).', 'tourfic' ),
 							'field_width' => 50,
 							'is_pro'      => true,
 						),
@@ -356,7 +406,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'id'          => '',
 							'type'        => 'number',
 							'label'       => __( 'Number of Beds', 'tourfic' ),
-							'subtitle'    => __( 'Number of beds available in the room', 'tourfic' ),
+							'subtitle'    => __( 'Number of beds available in the room.', 'tourfic' ),
 							'attributes'  => array(
 								'min' => '0',
 							),
@@ -367,7 +417,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'id'          => '',
 							'type'        => 'number',
 							'label'       => __( 'Number of Adults', 'tourfic' ),
-							'subtitle'    => __( 'Max number of persons allowed in the room', 'tourfic' ),
+							'subtitle'    => __( 'Max number of adults allowed in the room.', 'tourfic' ),
 							'attributes'  => array(
 								'min' => '0',
 							),
@@ -378,7 +428,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'id'          => '',
 							'type'        => 'number',
 							'label'       => __( 'Number of Children', 'tourfic' ),
-							'subtitle'    => __( 'Max number of children allowed in the room', 'tourfic' ),
+							'subtitle'    => __( 'Max number of children allowed in the room.', 'tourfic' ),
 							'attributes'  => array(
 								'min' => '0',
 							),
@@ -389,7 +439,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'id'          => '',
 							'type'        => 'number',
 							'label'       => __( 'Number of Infants', 'tourfic' ),
-							'subtitle'    => __( 'Max number of infants allowed in the room', 'tourfic' ),
+							'subtitle'    => __( 'Max number of infants allowed in the room.', 'tourfic' ),
 							'attributes'  => array(
 								'min' => '0',
 							),
@@ -403,9 +453,21 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 
 		// Information
 		'information'     => array(
-			'title'  => __( 'Information\'s', 'tourfic' ),
+			'title'  => __( 'Information', 'tourfic' ),
 			'icon'   => 'fa-solid fa-circle-info',
 			'fields' => array(
+				array(
+					'id'    => 'apartment-info-heading',
+					'type'  => 'heading',
+					'label' => 'Information Section ',
+					'subtitle' => __( 'Ensure to furnish customers with all the essential information they need to fully understand your apartment offer.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'apartment-info-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/information-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+				),
 				//highlights
 				array(
 					'id'    => 'highlights_heading',
@@ -415,14 +477,15 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'highlights_title',
 					'type'  => 'text',
-					'label' => __( 'Highlights Title', 'tourfic' ),
+					'label' => __( 'Title of the Section', 'tourfic' ),
+					'subtitle' => __( 'This text will appear as the heading of the Highlights section on the frontend.', 'tourfic' ),
 					'default' => __( 'Discover Our Top Features', 'tourfic' ),
 				),
 				array(
 					'id'           => 'highlights',
 					'type'         => 'repeater',
 					'button_title' => __( 'Add New', 'tourfic' ),
-					'label'        => __( 'Highlights', 'tourfic' ),
+					'label'        => __( 'Add Highlights', 'tourfic' ),
 					'fields'       => array(
 						array(
 							'id'    => 'title',
@@ -450,20 +513,22 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'amenities_title',
 					'type'  => 'text',
-					'label' => __( 'Amenities Title', 'tourfic' ),
+					'label' => __( 'Title of the Section', 'tourfic' ),
+					'subtitle' => __( 'This text will appear as the heading of the Amenities section on the frontend.', 'tourfic' ),
 					'default' => __( 'What this place offers', 'tourfic' ),
 				),
 				array(
 					'id'           => 'amenities',
 					'type'         => 'repeater',
 					'button_title' => __( 'Add New', 'tourfic' ),
-					'label'        => __( 'Amenities', 'tourfic' ),
+					'label'        => __( 'Add Amenities', 'tourfic' ),
 					'fields'       => array(
 						array(
 							'id'          => 'feature',
 							'type'        => 'select2',
 							'label'       => __( 'Feature', 'tourfic' ),
 							'placeholder' => __( 'Select feature', 'tourfic' ),
+							'description' => __( 'Add new features from <a target="_blank" href="'.admin_url('edit-tags.php?taxonomy=apartment_feature&post_type=tf_apartment').'">Apartment Features</a>.', 'tourfic' ),
 							'options'     => 'terms',
 							'query_args'  => array(
 								'taxonomy'   => 'apartment_feature',
@@ -477,7 +542,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'label'       => __( 'Category', 'tourfic' ),
 							'placeholder' => __( 'Select category', 'tourfic' ),
 							'options'     => tf_apt_amenities_cats(),
-							'description' => __( 'Add new category from <a target="_blank" href="'.admin_url('admin.php?page=tf_settings#tab=apartment_single_page').'">Amenities Categories</a>', 'tourfic' ),
+							'description' => __( 'Add new category from <a target="_blank" href="'.admin_url('admin.php?page=tf_settings#tab=apartment_single_page').'">Amenities Categories</a>.', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
@@ -499,14 +564,15 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'house_rules_title',
 					'type'  => 'text',
-					'label' => __( 'House Rules Title', 'tourfic' ),
+					'label' => __( 'Title of the Section', 'tourfic' ),
+					'subtitle' => __( 'This text will appear as the heading of the House Rules section on the frontend.', 'tourfic' ),
 					'default' => __( 'House Rules', 'tourfic' ),
 				),
 				array(
 					'id'           => 'house_rules',
 					'type'         => 'repeater',
 					'button_title' => __( 'Add New', 'tourfic' ),
-					'label'        => __( 'House Rules', 'tourfic' ),
+					'label'        => __( 'Add House Rules', 'tourfic' ),
 					'fields'       => array(
 						array(
 							'id'    => 'title',
@@ -532,9 +598,21 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 		),
 		// faq and terms and conditions
 		'faq'             => array(
-			'title'  => __( 'FAQ & Terms', 'tourfic' ),
+			'title'  => __( 'FAQ and Terms', 'tourfic' ),
 			'icon'   => 'fa-solid fa-clipboard-question',
 			'fields' => array(
+				array(
+					'id'    => 'apartment-faq-heading',
+					'type'  => 'heading',
+					'label' => 'FAQ Section',
+					'subtitle' => __( 'This section is designed to help users find answers to common questions.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'apartment-faq-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/faq-terms/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+				),
 				array(
 					'id'    => 'faq_heading',
 					'type'  => 'heading',
@@ -543,7 +621,8 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'faq_title',
 					'type'  => 'text',
-					'label' => __( 'Section Title', 'tourfic' ),
+					'label'    => __( 'Title of the Section', 'tourfic' ),
+					'subtitle' => __( 'This text will appear as the heading of the FAQ section on the frontend.', 'tourfic' ),
 					'default' => __( 'Frequently Asked Questions', 'tourfic' ),
 				),
 				array(
@@ -554,18 +633,19 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'           => 'faq',
 					'type'         => 'repeater',
-					'button_title' => __( 'Add New', 'tourfic' ),
-					'label'        => __( 'Frequently Asked Questions', 'tourfic' ),
+					'button_title' => __( 'Add New FAQ', 'tourfic' ),
+					'label'        => __( 'Add Your Questions', 'tourfic' ),
+					'subtitle'        => __( 'Click the button below to add Frequently Asked Questions (FAQs) for your apartment. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each FAQ using the icons on the right side.', 'tourfic' ),
 					'fields'       => array(
 						array(
 							'id'    => 'title',
 							'type'  => 'text',
-							'label' => __( 'Title', 'tourfic' ),
+							'label' => __( 'Single FAQ Title', 'tourfic' ),
 						),
 						array(
 							'id'    => 'description',
 							'type'  => 'editor',
-							'label' => __( 'Description', 'tourfic' ),
+							'label' => __( 'Single FAQ Description ', 'tourfic' ),
 						),
 					),
 				),
@@ -573,25 +653,92 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'    => 'terms_heading',
 					'type'  => 'heading',
 					'label' => __( 'Terms & Conditions', 'tourfic' ),
+					'subtitle' => __( 'Include your set of regulations and guidelines that guests must agree to in order to use the service provided in your apartment.', 'tourfic' ),
 				),
 				array(
 					'id'    => 'terms_title',
 					'type'  => 'text',
-					'label' => __( 'Section Title', 'tourfic' ),
+					'label' => __( 'Title of the Section', 'tourfic' ),
+					'subtitle' => __( 'This text will appear as the heading of the T&C section on the frontend.', 'tourfic' ),
 					'default' => __( 'Terms & Conditions', 'tourfic' ),
 				),
 				array(
 					'id'    => 'terms_and_conditions',
 					'type'  => 'editor',
 					'label' => __( 'Apartment Terms & Conditions', 'tourfic' ),
+					'subtitle' => __( "Enter your apartment's terms and conditions in the text editor provided below.", 'tourfic' ),
 				),
 			),
 		),
+
+		//enquiry section
+		'a_enquiry'  => array(
+			'title'  => __( 'Apartment Enquiry', 'tourfic' ),
+			'icon'   => 'fa-solid fa-clipboard-question',
+			'fields' => array(
+				array(
+					'id'      => 'enquiry',
+					'type'    => 'heading',
+					'content' => __( 'Apartment Enquiry Form', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'        => 'enquiry-section',
+					'type'      => 'switch',
+					'label'     => __( 'Enable Apartment Enquiry Form Option', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => true
+				),
+				array(
+					'id'       => 'apartment-enquiry-icon',
+					'type'     => 'icon',
+					'label'    => __( 'Apartment Enquiry icon', 'tourfic' ),
+					'subtitle' => __( 'Choose icon', 'tourfic' ),
+					'default'  => 'fa fa-question-circle-o',
+					'dependency' => array( 'h-enquiry-section', '==', '1' ),
+				),
+				array(
+					'id'    => 'enquiry-title',
+					'type'  => 'text',
+					'label' => __( 'Enquiry Title ', 'tourfic' ),
+					'default' => __('Have a question in mind', 'tourfic'),
+					'dependency' => array( 'enquiry-section', '==', '1' ),
+				),
+				array(
+					'id'    => 'enquiry-content',
+					'type'  => 'text',
+					'label' => __( 'Enquiry Description ', 'tourfic' ),
+					'default' => __('Looking for more info? Send a question to the property to find out more.', 'tourfic'),
+					'dependency' => array( 'enquiry-section', '==', '1' ),
+				),
+				array(
+					'id'    => 'enquiry-btn',
+					'type'  => 'text',
+					'label' => __( 'Enquiry Button Text ', 'tourfic' ),
+					'default' => __('Contact Host', 'tourfic'),
+					'dependency' => array( 'enquiry-section', '==', '1' ),
+				),
+			),
+		),
+		
 		// Settings
 		'settings'        => array(
 			'title'  => __( 'Settings', 'tourfic' ),
 			'icon'   => 'fa-solid fa-viruses',
 			'fields' => array(
+				array(
+					'id'    => 'apartment--heading',
+					'type'  => 'heading',
+					'label' => 'Other Settings',
+					'subtitle' => __( 'These are some additional settings specific to this Apartment. Note that some of these settings may override the global settings.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'apartment--docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/apartments-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+				),
 				//disable options
 				array(
 					'id'      => 'disable_options',
@@ -627,21 +774,15 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'description',
 					'type'  => 'heading',
-					'label' => __( 'Description', 'tourfic' ),
+					'label' => __( 'Titles / Heading of Different Sections', 'tourfic' ),
 				),
 				array(
 					'id'      => 'description_title',
 					'type'    => 'text',
-					'label'   => __( 'Description Title', 'tourfic' ),
+					'label'   => __( 'Description Section Title', 'tourfic' ),
 					'default' => __( 'About this place', 'tourfic' ),
 				),
 				//review
-				array(
-					'id'      => 'review-sections',
-					'type'    => 'heading',
-					'content' => __( 'Review', 'tourfic' ),
-					'class'   => 'tf-field-class',
-				),
 				array(
 					'id'    => 'review-section-title',
 					'type'  => 'text',
@@ -650,51 +791,10 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				),
 				//Related Apartment
 				array(
-					'id'    => 'related',
-					'type'  => 'heading',
-					'label' => __( 'Related Apartment', 'tourfic' ),
-				),
-				array(
 					'id'      => 'related_apartment_title',
 					'type'    => 'text',
-					'label'   => __( 'Related Apartment Title', 'tourfic' ),
+					'label'   => __( 'Related Apartment Section Title', 'tourfic' ),
 					'default' => __( 'You may also like', 'tourfic' ),
-				),
-				//enquiry
-				array(
-					'id'      => 'enquiry',
-					'type'    => 'heading',
-					'content' => __( 'Enquiry', 'tourfic' ),
-					'class'   => 'tf-field-class',
-				),
-				array(
-					'id'        => 'enquiry-section',
-					'type'      => 'switch',
-					'label'     => __( 'Apartment Enquiry Section', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => true
-				),
-				array(
-					'id'    => 'enquiry-title',
-					'type'  => 'text',
-					'label' => __( 'Apartment Enquiry Title Text', 'tourfic' ),
-					'default' => __('Have a question in mind', 'tourfic'),
-					'dependency' => array( 'enquiry-section', '==', '1' ),
-				),
-				array(
-					'id'    => 'enquiry-content',
-					'type'  => 'text',
-					'label' => __( 'Apartment Enquiry Short Text', 'tourfic' ),
-					'default' => __('Looking for more info? Send a question to the property to find out more.', 'tourfic'),
-					'dependency' => array( 'enquiry-section', '==', '1' ),
-				),
-				array(
-					'id'    => 'enquiry-btn',
-					'type'  => 'text',
-					'label' => __( 'Apartment Enquiry Button Text', 'tourfic' ),
-					'default' => __('Contact Host', 'tourfic'),
-					'dependency' => array( 'enquiry-section', '==', '1' ),
 				),
 			),
 		),

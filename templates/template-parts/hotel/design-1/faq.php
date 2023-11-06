@@ -1,17 +1,39 @@
 <?php if ( $faqs ): ?>
 <div class="tf-hotel-faqs-section tf-mb-50 tf-template-section">
-    <h2 class="tf-title tf-section-title" ><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : __( "Faq’s", 'tourfic' ); ?></h2>
+    <h2 class="tf-title tf-section-title" ><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : ''; ?></h2>
     <div class="tf-section-flex tf-flex">
         <?php 
         $tf_enquiry_section_status = !empty($meta['h-enquiry-section']) ? $meta['h-enquiry-section'] : "";
-        if(!empty($tf_enquiry_section_status)){
+        $tf_enquiry_section_icon = !empty($meta['h-enquiry-option-icon']) ? esc_html($meta['h-enquiry-option-icon']) : '';
+        $tf_enquiry_section_title = !empty($meta['h-enquiry-option-title']) ? esc_html($meta['h-enquiry-option-title']) : '';
+        $tf_enquiry_section_cont = !empty($meta['h-enquiry-option-content']) ? esc_html($meta['h-enquiry-option-content']) : '';
+        $tf_enquiry_section_button = !empty($meta['h-enquiry-option-btn']) ? esc_html($meta['h-enquiry-option-btn']) : '';
+        if(!empty($tf_enquiry_section_status) && ( !empty($tf_enquiry_section_icon) || !empty($tf_enquiry_section_title) || !empty($enquery_button_text))){
         ?>
         <div class="tf-hotel-enquiry">
             <div class="tf-ask-enquiry">
-                <i class="fa fa-question-circle-o" aria-hidden="true"></i>
-                <h3><?php echo !empty($meta['h-enquiry-option-title']) ? esc_html($meta['h-enquiry-option-title']) : __( "Have a question in mind", 'tourfic' ); ?></h3>
-                <p><?php echo !empty($meta['h-enquiry-option-content']) ? esc_html($meta['h-enquiry-option-content']) : __( "Looking for more info? Send a question to the property to find out more.", 'tourfic' ); ?></p>
-                <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-btn-normal btn-primary"><span><?php echo !empty($meta['h-enquiry-option-btn']) ? esc_html($meta['h-enquiry-option-btn']) : __( 'Ask a Question', 'tourfic' ); ?></span></a></div>
+                <?php 
+                if (!empty($tf_enquiry_section_icon)) {
+                    ?>
+                    <i class="<?php echo $tf_enquiry_section_icon; ?>" aria-hidden="true"></i>
+                    <?php
+                }
+                if(!empty($tf_enquiry_section_title)) {
+                    ?>
+                    <h3><?php echo  $tf_enquiry_section_title; ?></h3>
+                    <?php
+                }
+                if(!empty($tf_enquiry_section_cont)) {
+                    ?>
+                     <p><?php echo $tf_enquiry_section_cont;  ?></p>
+                    <?php
+                }
+                if( !empty( $tf_enquiry_section_button )) {
+                    ?>
+                    <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-btn-normal btn-primary"><span><?php echo $tf_enquiry_section_button; ?></span></a></div>
+                    <?php
+                }
+                ?>
             </div>
         </div>
         <?php } ?>

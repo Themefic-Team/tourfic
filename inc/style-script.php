@@ -33,8 +33,9 @@ if( !function_exists( 'tf_custom_css' ) ){
 		$tf_review_bg_color = !empty(tf_data_types(tfopt( 'tourfic-review-style' ))['review_bg_color']) ? tf_data_types(tfopt( 'tourfic-review-style' ))['review_bg_color'] : '';
 
 		// Global Font Family
-		$tf_global_font_family = tfopt('global-body-fonts-family') ? tfopt('global-body-fonts-family') : 'Default';
-		$tf_global_heading_font_family = tfopt('global-heading-fonts-family') ? tfopt('global-heading-fonts-family') : 'Default';
+		$tf_global_font_family = tfopt('global-body-fonts-family') ? str_replace('_', ' ', tfopt('global-body-fonts-family')) : 'Default';
+		$tf_global_heading_font_family = tfopt('global-heading-fonts-family') ? str_replace('_', ' ', tfopt('global-heading-fonts-family')) : 'Default';
+
 
 		// Global Typography P
 		$tf_global_font_p = tfopt('global-p') ? tfopt('global-p') : 14;
@@ -85,7 +86,6 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-global .tf-item-featured .tf-features-box .tf-featur,
 			.tf-template-global .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::after,
 			.tf-template-global .tf-itinerary-wrapper.tf-mb-50 .tf-itinerary-downloader-option,
-			.tf-template-global .tf-review-wrapper .tf-review-data .tf-review-data-features .percent-progress,
 			.tf-template-global .tf-rooms-sections .tf-rooms .tf-availability-table thead,
 			.tf-template-global .tf-hotel-location-map .tf-hotel-location-preview a i,
 			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature,
@@ -296,13 +296,16 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-global .tf-review-wrapper .tf-review-form .tf-review-form-container .tf-review-submit input[type="submit"]{
 				border: 1px solid '.$tf_template1_global_reg.';
 				border-color: '.$tf_template1_global_reg.' !important;
-			}';
+			}
+			.tf-aq-outer span.close-aq {background: '.$tf_template1_global_reg.' !important;}
+			.tf-aq-field .btn-styled {background: '.$tf_template1_global_reg.' !important;}';
+			
 		}
 
 		// Common CSS
 		if( $tf_primary_color_reg  ) { $output .= '
 			.tf_button, .tf-btn-flip:before, .tf-btn-flip, .btn-styled, .tf-review-form-container .tf-review-submit input[type="submit"], .tf-bttn-normal.bttn-primary, .tf-bttn-normal.bttn-secondary, .tf-template-global .tf-archive-head .active, .tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature, {color: '.$tf_primary_color_reg.' !important;}
-			.tf-ask-question h3:before {color: '.$tf_primary_color_reg.';}
+			.tf-ask-question div i:before {color: '.$tf_primary_color_reg.' !important;}
 		'; }
 		if( $tf_primary_color_hov  ) { $output .= '
 			.tf_button:hover, .btn-styled:hover, .tf-btn-flip:after, .tf-review-form-container .tf-review-submit input[type="submit"]:hover, .tf-bttn-normal.bttn-primary:hover, .tf-bttn-normal.bttn-secondary:hover {color: '.$tf_primary_color_hov.' !important;}
@@ -320,7 +323,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 		'; }
 		if( $tf_faq_color OR $tf_faq_icon_color OR $tf_faq_border_color ) { $output .= '
 			.tf-faq-title h4,
-			.tf-single-page .tf-faq-wrapper .tf-faq-single-inner h3 {
+			.tf-single-page .tf-faq-wrapper .tf-faq-single-inner h3,
+			.tf-template-global .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps h4 {
 				color: '.$tf_faq_color.';
 			}
 			#tf-faq-item,
@@ -328,8 +332,15 @@ if( !function_exists( 'tf_custom_css' ) ){
 				border-color: '.$tf_faq_border_color.';
 			}
 			#tf-faq-item .arrow,
-			.tf-single-page .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-plus {
+			.tf-single-page .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-plus,
+			.tf-single-page .tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-minus {
 				color: '.$tf_faq_icon_color.';
+			}
+		'; }
+
+		if( $tf_faq_border_color ) { $output .= '
+			.tf-hotel-design-1 .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner{
+				border: 1px solid '.$tf_faq_border_color.';
 			}
 		'; }
 
@@ -337,15 +348,23 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-single-review .tf-single-details {
 				background: '.$tf_review_bg_color.';
 			}
-			.tf-single-review .tf-review-details .tf-name, .tf-single-review .tf-review-details .tf-date, .tf-single-review .tf-review-details .tf-rating-stars, .tf-single-review .tf-review-details .tf-description {
-				color: '.$tf_review_color.';
+			.tf-single-review .tf-review-details .tf-name, .tf-single-review .tf-review-details .tf-date, .tf-single-review .tf-review-details .tf-rating-stars, .tf-single-review .tf-review-details .tf-rating-stars i, .tf-single-review .tf-review-details .tf-description p,
+			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details,
+			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-author-name h3,
+			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-message p,
+			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li,
+			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-ratings i,
+			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li i{
+				color: '.$tf_review_color.' !important;
 			}
 			.tf-review-container .tf-review-progress-bar .tf-single .tf-p-bar,
-			.tf-single-page .tf-review-wrapper .tf-review-data .tf-review-data-features .tf-progress-bar {
+			.tf-single-page .tf-review-wrapper .tf-review-data .tf-review-data-features .tf-progress-bar,
+			.tf-template-global .tf-review-wrapper .tf-review-data .tf-review-data-features .percent-progress {
 				background: '.$tf_param_single_bg_color.';
 			}
 			.tf-review-container .tf-review-progress-bar,
-			.tf-single-page .tf-review-wrapper .tf-review-data {
+			.tf-single-page .tf-review-wrapper .tf-review-data,
+			.tf-template-global .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features {
 				background: '.$tf_param_bg_color.';
 				border-color: '.$tf_param_bg_color.';
 			}
@@ -365,12 +384,15 @@ if( !function_exists( 'tf_custom_css' ) ){
 				background: '.$tf_review_bg_color.';
 				padding: 20px;
 				border-radius: 5px;
+				margin: 10px 0px;
 			}
 			.tf-single-page .tf-review-reply .tf-review-details h3,
 			.tf-single-page .tf-review-reply .tf-review-details p,
 			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li,
-			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li i{
-				color: '.$tf_review_color.';
+			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li i,
+			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-ratings,
+			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-ratings i{
+				color: '.$tf_review_color.' !important;
 			}
 		'; }
 		
@@ -407,16 +429,16 @@ if( !function_exists( 'tf_hotel_css' ) ){
 			.tf-title-left span.post-type {background: '.$tf_hotel_type_bg_color.';}
 		'; }
 		if( $tf_share_color_reg  ) { $output .= '
-			.tf-share .share-toggle i, .tf-single-page .tf-section.tf-single-head .tf-share a i {color: '.$tf_share_color_reg.';}
+			.tf-share .share-toggle i, .tf-single-page .tf-section.tf-single-head .tf-share > a i {color: '.$tf_share_color_reg.' !important;}
 		'; }
 		if( $tf_share_color_hov  ) { $output .= '
-			.tf-share .share-toggle i:hover, .tf-single-page .tf-section.tf-single-head .tf-share a i:hover {color: '.$tf_share_color_hov.';}
+			.tf-share .share-toggle i:hover, .tf-single-page .tf-section.tf-single-head .tf-share > a i:hover {color: '.$tf_share_color_hov.' !important;}
 		'; }
 		if( $tf_gradient_one_reg && $tf_gradient_two_reg  ) { $output .= '
-			.show-on-map .btn-styled, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i {background: linear-gradient(to bottom, '.$tf_gradient_one_reg.' 0, '.$tf_gradient_two_reg.' 100%);}
+			.show-on-map .btn-styled, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i {background: linear-gradient(to bottom, '.$tf_gradient_one_reg.' 0, '.$tf_gradient_two_reg.' 100%) !important;}
 		'; }
 		if( $tf_gradient_one_hov && $tf_gradient_two_hov  ) { $output .= '
-			.show-on-map .btn-styled:hover, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i:hover {background: linear-gradient(to bottom, '.$tf_gradient_one_hov.' 0, '.$tf_gradient_two_hov.' 100%);}
+			.show-on-map .btn-styled:hover, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i:hover {background: linear-gradient(to bottom, '.$tf_gradient_one_hov.' 0, '.$tf_gradient_two_hov.' 100%) !important;}
 		'; }
 		if( $tf_map_text_color  ) { $output .= '
 			.show-on-map .btn-styled, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i {color: '.$tf_map_text_color.';}
@@ -424,7 +446,7 @@ if( !function_exists( 'tf_hotel_css' ) ){
 		if( $tf_hotel_features  ) { $output .= '
 			.tf_features i, 
 			.tf-archive-desc i, 
-			.tf-single-page .tf-hotel-single-features ul li,
+			.tf-single-page .tf-hotel-single-features ul li i,
 			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-details .tf-archive-features i,
 			.tf-hotel-design-1 .tf-rooms .tf-features-infos ul li {color: '.$tf_hotel_features.'!important;}
 		'; }
@@ -445,7 +467,17 @@ if( !function_exists( 'tf_hotel_css' ) ){
 			}
 		'; }
 		if( $tf_hotel_table_border_color  ) { $output .= '
-			.availability-table td, .availability-table td.reserve, .tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table tr td, .tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table {border-color: '.$tf_hotel_table_border_color.';}
+			.availability-table td, .availability-table th, .availability-table td.reserve, .tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table tr td {border-color: '.$tf_hotel_table_border_color.';}
+		'; }
+
+		if( $tf_hotel_table_border_color  ) { $output .= '
+			.tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table {border: 1px solid '.$tf_hotel_table_border_color.'; border-collapse: inherit;}
+			.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table thead tr th{
+				border-color: '.$tf_hotel_table_border_color.';
+			}
+			.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td{
+				border-color: '.$tf_hotel_table_border_color.';
+			}
 		'; }
 		
 		wp_add_inline_style( 'tf-app-style', $output );

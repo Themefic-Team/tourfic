@@ -563,6 +563,14 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 		}
 	}
 
+	// Gird or List View
+	if(!empty($_GET['type']) && $_GET['type'] == "tf_hotel"){
+		$tf_defult_views = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel_archive_view'] ) ? tf_data_types(tfopt( 'tf-template' ))['hotel_archive_view'] : 'list';
+	}elseif(!empty($_GET['type']) && $_GET['type'] == "tf_tours"){
+		$tf_defult_views = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour_archive_view'] ) ? tf_data_types(tfopt( 'tf-template' ))['tour_archive_view'] : 'list';
+	}else{
+
+	}
 
 	$paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 	$checkInOutDate = ! empty( $_GET['check-in-out-date'] ) ? explode( ' - ', $_GET['check-in-out-date'] ) : '';
@@ -674,7 +682,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
                     <span><?php echo ')'; ?> </span>
                 </div>
                 <div class="tf-search-layout tf-flex tf-flex-gap-12">
-                    <div class="tf-icon tf-serach-layout-list tf-grid-list-layout active" data-id="list-view">
+                    <div class="tf-icon tf-serach-layout-list tf-grid-list-layout <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" data-id="list-view">
                         <div class="defult-view">
                             <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="12" height="2" fill="#0E3DD8"/>
@@ -696,7 +704,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
                             </svg>
                         </div>
                     </div>
-                    <div class="tf-icon tf-serach-layout-grid tf-grid-list-layout" data-id="grid-view">
+                    <div class="tf-icon tf-serach-layout-grid tf-grid-list-layout <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" data-id="grid-view">
                         <div class="defult-view">
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="10" width="2" height="2" fill="#0E3DD8"/>
@@ -733,7 +741,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
                 </div>
             </div>
             <div class="tf-search-results-list tf-mt-30">
-                <div class="archive_ajax_result tf-item-cards tf-flex tf-layout-list">
+                <div class="archive_ajax_result tf-item-cards tf-flex <?php echo $tf_defult_views=="list" ? esc_attr('tf-layout-list') : esc_attr('tf-layout-grid'); ?>">
 					<?php
 					if ( $loop->have_posts() ) {
 						$not_found = [];
@@ -871,11 +879,11 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 					<?php echo esc_html__( 'Total Results ', 'tourfic' ) . '(<span>' . $total_posts . '</span>)'; ?>
                 </div>
                 <div class="tf-list-grid">
-                    <a href="#list-view" data-id="list-view" class="change-view" title="<?php _e( 'List View', 'tourfic' ); ?>"><i class="fas fa-list"></i></a>
-                    <a href="#grid-view" data-id="grid-view" class="change-view" title="<?php _e( 'Grid View', 'tourfic' ); ?>"><i class="fas fa-border-all"></i></a>
+                    <a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php _e( 'List View', 'tourfic' ); ?>"><i class="fas fa-list"></i></a>
+                    <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php _e( 'Grid View', 'tourfic' ); ?>"><i class="fas fa-border-all"></i></a>
                 </div>
             </div>
-            <div class="archive_ajax_result">
+            <div class="archive_ajax_result <?php echo $tf_defult_views=="grid" ? esc_attr('tours-grid') : '' ?>">
 				<?php
 				if ( $loop->have_posts() ) {
 					$not_found = [];
