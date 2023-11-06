@@ -126,7 +126,7 @@ function tf_licence_activation_admin_notice() {
 		<div class="tf-critical-update-notice notice notice-error" style="background: #FFECEC; padding: 20px 12px;">
 			<p>
 				<?php echo sprintf( 
-				__( '<b style="color:#d63638;">NOTICE: </b> Recently, You have installed Tourfic Pro Plugin. May be you have forgot to activate the Licence, Would you please <a href="%s"><b>Activate the Licence</b></a>. ', 'tourfic' ),admin_url().'admin.php?page=tf_license_info'
+				__( '<b style="color:#d63638;">NOTICE: </b> Please <a href="%s"><b>Activate</b></a> your Tourfic Pro license. You can get your license key from our Client Portal -> Support -> License Keys.', 'tourfic' ),admin_url().'admin.php?page=tf_license_info'
 				); ?>
 			</p>
 		</div>
