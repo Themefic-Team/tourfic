@@ -376,7 +376,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 						array(
 							'id'     => '',
 							'type'   => 'gallery',
-							'label' => __( 'Room Image Thumbnail', 'tourfic' ),
+							'label' => __( 'Room Gallery', 'tourfic' ),
 							'subtitle' => __( 'Upload all the images specific to this room.', 'tourfic' ),
 							'is_pro' => true,
 						),
@@ -472,13 +472,13 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'highlights_heading',
 					'type'  => 'heading',
-					'label' => __( 'Title of the Section', 'tourfic' ),
-					'subtitle' => __( 'This text will appear as the heading of the Highlights section on the frontend.', 'tourfic' ),
+					'label' => __( 'Highlights', 'tourfic' ),
 				),
 				array(
 					'id'    => 'highlights_title',
 					'type'  => 'text',
-					'label' => __( 'Highlights Title', 'tourfic' ),
+					'label' => __( 'Title of the Section', 'tourfic' ),
+					'subtitle' => __( 'This text will appear as the heading of the Highlights section on the frontend.', 'tourfic' ),
 					'default' => __( 'Discover Our Top Features', 'tourfic' ),
 				),
 				array(
