@@ -510,17 +510,45 @@
                 <div class="tf-faq-content-wrapper">
                     <?php 
                     $tf_enquiry_section_status = !empty($meta['t-enquiry-section']) ? $meta['t-enquiry-section'] : "";
-                    if(!empty($tf_enquiry_section_status)){
+                    $tf_enquiry_section_icon = !empty($meta['t-enquiry-option-icon']) ? esc_html($meta['t-enquiry-option-icon']) : '';
+                    $tf_enquiry_section_title = !empty($meta['t-enquiry-option-title']) ? esc_html($meta['t-enquiry-option-title']) : '';
+                    $tf_enquiry_section_des = !empty($meta['t-enquiry-option-content']) ? esc_html($meta['t-enquiry-option-content']) : '';
+                    $enquery_button_text = !empty($meta['t-enquiry-option-btn']) ? esc_html($meta['t-enquiry-option-btn']) : '';
+
+                    if(!empty($tf_enquiry_section_status) && ( !empty($tf_enquiry_section_icon) || !empty($tf_enquiry_section_title) || !empty($enquery_button_text))){
                     ?>
+                    
                     <div class="tf-ask-question">
                         <div class="default-enquiry-title-section">
-                            <i class="<?php echo !empty($meta['apartment-enquiry-icon']) ? esc_html($meta['apartment-enquiry-icon']) : 'fa fa-question-circle-o'; ?>" aria-hidden="true"></i>
-                            <h3><?php echo !empty($meta['t-enquiry-option-title']) ? esc_html($meta['t-enquiry-option-title']) : ''; ?></h3>
+                            <?php
+                            if(!empty($tf_enquiry_section_icon)) {
+                                ?>
+                                <i class="<?php echo $tf_enquiry_section_icon ?>" aria-hidden="true"></i>
+                                <?php
+                            }
+                            if(!empty($tf_enquiry_section_title)) {
+                                ?>
+                                <h3><?php echo $tf_enquiry_section_title ?></h3>
+                                <?php
+                            }
+                            ?>
                         </div>
-                        <p><?php echo !empty($meta['t-enquiry-option-content']) ? esc_html($meta['t-enquiry-option-content']) : ''; ?></p>
-                        <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="btn-styled"><span>
-                            <?php echo !empty($meta['t-enquiry-option-btn']) ? esc_html($meta['t-enquiry-option-btn']) : ''; ?>
-                        </span></a></div>
+                        <?php
+                        if(!empty($tf_enquiry_section_des)) {
+                            ?>
+                                <p><?php echo $tf_enquiry_section_des; ?></p>
+                            <?php
+                            }
+                            ?>
+                        <?php 
+                        if(!empty($enquery_button_text)) {
+                            ?>
+                            <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="btn-styled">
+                                <span><?php echo $enquery_button_text; ?>
+                            </span></a></div>
+                            <?php
+                        }
+                        ?>
                     </div>
                     <?php } ?>
                     <div class="tf-faq-items-wrapper">

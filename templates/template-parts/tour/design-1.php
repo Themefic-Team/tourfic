@@ -351,17 +351,41 @@
 							<?php } ?>
 							<?php
 							$tf_enquiry_section_status = ! empty( $meta['t-enquiry-section'] ) ? $meta['t-enquiry-section'] : "";
+                            $tf_enquiry_section_icon = ! empty( $meta['t-enquiry-option-icon'] ) ? esc_html( $meta['t-enquiry-option-icon'] ) : '';
+                            $tf_enquiry_section_title = ! empty( $meta['t-enquiry-option-title'] ) ? esc_html( $meta['t-enquiry-option-title'] ) : '';
+                            $tf_enquiry_section_des = ! empty( $meta['t-enquiry-option-content'] ) ? esc_html( $meta['t-enquiry-option-content'] ) : '';
+                            $tf_enquiry_section_button = ! empty( $meta['t-enquiry-option-btn'] ) ? esc_html( $meta['t-enquiry-option-btn'] ) : '';
+
 							if ( ! empty( $tf_enquiry_section_status ) ) {
 								?>
                                 <!-- Enquiry box -->
                                 <div class="tf-tour-booking-advantages tf-box tf-mt-30">
                                     <div class="tf-ask-enquiry">
-                                        <i class="<?php echo ! empty( $meta['t-enquiry-option-icon'] ) ? esc_html( $meta['t-enquiry-option-icon'] ) : 'fa fa-question-circle-o'; ?>" aria-hidden="true"></i>
-                                        <h3><?php echo ! empty( $meta['t-enquiry-option-title'] ) ? esc_html( $meta['t-enquiry-option-title'] ) : ''; ?></h3>
-                                        <p><?php echo ! empty( $meta['t-enquiry-option-content'] ) ? esc_html( $meta['t-enquiry-option-content'] ) : ''; ?></p>
-                                        <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-btn-normal btn-primary"><span>
-                                        <?php echo ! empty( $meta['t-enquiry-option-btn'] ) ? esc_html( $meta['t-enquiry-option-btn'] ) : ''; ?>
+                                        <?php 
+                                        if(!empty($tf_enquiry_section_icon)) {
+                                            ?>
+                                            <i class="<?php echo $tf_enquiry_section_icon; ?>" aria-hidden="true"></i>
+                                            <?php
+                                        }
+                                        if(!empty($tf_enquiry_section_title)) {
+                                            ?>
+                                            <h3><?php echo  $tf_enquiry_section_title; ?></h3>
+                                            <?php
+                                        }
+                                        if(!empty($tf_enquiry_section_des)) {
+                                            ?>
+                                            <p><?php echo $tf_enquiry_section_des; ?></p>
+                                            <?php
+                                        }
+                                        if(!empty($tf_enquiry_section_button)) {
+                                            ?>
+                                            <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-btn-normal btn-primary"><span>
+                                        <?php echo $tf_enquiry_section_button; ?>
                                         </span></a></div>
+                                        <?php 
+                                        }
+                                        ?>
+                                        
                                     </div>
                                 </div>
 							<?php } ?>
