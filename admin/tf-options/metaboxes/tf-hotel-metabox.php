@@ -892,7 +892,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'type'         => 'repeater',
 					'label'        => __( 'Multiple Tags', 'tourfic' ),
 					'button_title' => __( 'Add / Insert New Tag', 'tourfic' ),
-					'limit' => 5,
 					'fields'       => array(
 
 						array(
