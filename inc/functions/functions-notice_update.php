@@ -117,3 +117,38 @@ function tf_plugin_action_links( $links ) {
 	}
 }
 add_filter( 'plugin_action_links_' . 'tourfic/tourfic.php', 'tf_plugin_action_links' );
+
+/**
+ * Licence Activation Admin Notice
+ */
+function tf_licence_activation_admin_notice() {
+    if(is_admin()) { ?>
+		<div class="tf-critical-update-notice notice notice-error" style="background: #FFECEC; padding: 20px 12px;">
+			<p>
+				<?php echo sprintf( 
+				__( '<b style="color:#d63638;">NOTICE: </b> Please <a href="%s"><b>Activate</b></a> your Tourfic Pro license. You can get your license key from our Client Portal -> Support -> License Keys.', 'tourfic' ),admin_url().'admin.php?page=tf_license_info'
+				); ?>
+			</p>
+		</div>
+	<?php
+    }
+}
+if ( is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) && function_exists( 'is_tf_pro' ) && !is_tf_pro() ) {
+	add_action( 'admin_notices', 'tf_licence_activation_admin_notice' );
+}
+
+/**
+ * Active Licence on plugin action links.
+ *
+ */
+function tf_pro_plugin_licence_action_links( $links ) {
+
+	$active_licence_link = array(
+		'<a href="'.admin_url().'admin.php?page=tf_license_info" style="color:#cc0000;font-weight: bold;text-shadow: 0px 1px 1px hsl(0deg 0% 0% / 28%);">' . esc_html__( 'Activate the Licence', 'tourfic' ) . '</a>',
+	);
+
+	return array_merge( $links, $active_licence_link );
+}
+if ( is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) && function_exists( 'is_tf_pro' ) && !is_tf_pro() ) {
+	add_filter( 'plugin_action_links_' . 'tourfic-pro/tourfic-pro.php', 'tf_pro_plugin_licence_action_links' );
+}

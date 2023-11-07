@@ -17,6 +17,28 @@
                         <div class="tf-head-social tf-flex tf-flex-gap-8 tf-flex-align-center">
 							<?php
 							// Wishlist
+                            if($disable_wishlist_tour==0){
+                                
+                                if ( is_user_logged_in() ) {
+                                if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) { ?>
+                                    <div class="tf-icon tf-wishlist-box">
+                                        <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>"
+                                            data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
+                                            echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
+                                        } ?>></i>
+                                    </div>
+                                <?php }
+								} else {
+								if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) { ?>
+                                    <div class="tf-icon tf-wishlist-box">
+                                        <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>"
+                                            data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>"
+                                            data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
+                                            echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
+                                        } ?>></i>
+                                    </div>
+                                <?php } } ?>
+                            <?php }else{
 							if ( tfopt( 'wl-bt-for' ) && in_array( '2', tfopt( 'wl-bt-for' ) ) ) {
 								if ( is_user_logged_in() ) {
 									if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
@@ -40,7 +62,7 @@
                                         </div>
 									<?php }
 								}
-							} ?>
+							}} ?>
 
                             <!-- Share Section -->
 							<?php if ( ! $disable_share_opt == '1' ) { ?>
@@ -292,7 +314,7 @@
                                 <!-- Tourfic Booking form -->
                                 <div class="tf-booking-form">
                                     <div class="tf-booking-form-inner tf-mt-24">
-                                        <h3><?php echo ! empty( $meta['booking-section-title'] ) ? esc_html( $meta['booking-section-title'] ) : __( "Book This Tour", "tourfic" ); ?></h3>
+                                        <h3><?php echo ! empty( $meta['booking-section-title'] ) ? esc_html( $meta['booking-section-title'] ) : ''; ?></h3>
 										<?php echo tf_single_tour_booking_form( $post->ID ); ?>
 
                                     </div>
@@ -303,7 +325,7 @@
 								?>
                                 <div class="tf-tour-booking-advantages tf-box tf-mt-30">
                                     <div class="tf-head-title">
-                                        <h3><?php echo ! empty( $meta['contact-info-section-title'] ) ? esc_html( $meta['contact-info-section-title'] ) : __( "Contact Information", "tourfic" ); ?></h3>
+                                        <h3><?php echo ! empty( $meta['contact-info-section-title'] ) ? esc_html( $meta['contact-info-section-title'] ) : ''; ?></h3>
                                     </div>
                                     <div class="tf-booking-advantage-items">
                                         <ul class="tf-list">
@@ -329,17 +351,41 @@
 							<?php } ?>
 							<?php
 							$tf_enquiry_section_status = ! empty( $meta['t-enquiry-section'] ) ? $meta['t-enquiry-section'] : "";
+                            $tf_enquiry_section_icon = ! empty( $meta['t-enquiry-option-icon'] ) ? esc_html( $meta['t-enquiry-option-icon'] ) : '';
+                            $tf_enquiry_section_title = ! empty( $meta['t-enquiry-option-title'] ) ? esc_html( $meta['t-enquiry-option-title'] ) : '';
+                            $tf_enquiry_section_des = ! empty( $meta['t-enquiry-option-content'] ) ? esc_html( $meta['t-enquiry-option-content'] ) : '';
+                            $tf_enquiry_section_button = ! empty( $meta['t-enquiry-option-btn'] ) ? esc_html( $meta['t-enquiry-option-btn'] ) : '';
+
 							if ( ! empty( $tf_enquiry_section_status ) ) {
 								?>
                                 <!-- Enquiry box -->
                                 <div class="tf-tour-booking-advantages tf-box tf-mt-30">
                                     <div class="tf-ask-enquiry">
-                                        <i class="fa fa-question-circle-o" aria-hidden="true"></i>
-                                        <h3><?php echo ! empty( $meta['t-enquiry-option-title'] ) ? esc_html( $meta['t-enquiry-option-title'] ) : __( "Have a question in mind", "tourfic" ); ?></h3>
-                                        <p><?php echo ! empty( $meta['t-enquiry-option-content'] ) ? esc_html( $meta['t-enquiry-option-content'] ) : __( "Looking for more info? Send a question to the property to find out more.", "tourfic" ); ?></p>
-                                        <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-btn-normal btn-primary"><span>
-                                        <?php echo ! empty( $meta['t-enquiry-option-btn'] ) ? esc_html( $meta['t-enquiry-option-btn'] ) : __( "Ask a Question", "tourfic" ); ?>
+                                        <?php 
+                                        if(!empty($tf_enquiry_section_icon)) {
+                                            ?>
+                                            <i class="<?php echo $tf_enquiry_section_icon; ?>" aria-hidden="true"></i>
+                                            <?php
+                                        }
+                                        if(!empty($tf_enquiry_section_title)) {
+                                            ?>
+                                            <h3><?php echo  $tf_enquiry_section_title; ?></h3>
+                                            <?php
+                                        }
+                                        if(!empty($tf_enquiry_section_des)) {
+                                            ?>
+                                            <p><?php echo $tf_enquiry_section_des; ?></p>
+                                            <?php
+                                        }
+                                        if(!empty($tf_enquiry_section_button)) {
+                                            ?>
+                                            <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-btn-normal btn-primary"><span>
+                                        <?php echo $tf_enquiry_section_button; ?>
                                         </span></a></div>
+                                        <?php 
+                                        }
+                                        ?>
+                                        
                                     </div>
                                 </div>
 							<?php } ?>
@@ -447,7 +493,7 @@
                                             <!-- Tourfic Booking form -->
                                             <div class="tf-booking-form">
                                                 <div class="tf-booking-form-inner tf-mt-24">
-                                                    <h3><?php echo ! empty( $meta['booking-section-title'] ) ? esc_html( $meta['booking-section-title'] ) : __( "Book This Tour", "tourfic" ); ?></h3>
+                                                    <h3><?php echo ! empty( $meta['booking-section-title'] ) ? esc_html( $meta['booking-section-title'] ) : ''; ?></h3>
 													<?php echo tf_single_tour_booking_form( $post->ID ); ?>
 
                                                 </div>
@@ -497,7 +543,7 @@
                     <div class="tf-template-container">
                         <div class="tf-container-inner">
                             <div class="section-title">
-                                <h2 class="tf-title"><?php ! empty( tfopt( 'rt-title' ) ) ? esc_html_e( tfopt( 'rt-title' ), "tourfic" ) : _e( "Related Tour", "tourfic" ); ?></h2>
+                                <h2 class="tf-title"><?php ! empty( tfopt( 'rt-title' ) ) ? esc_html_e( tfopt( 'rt-title' ), "tourfic" ) : ''; ?></h2>
 								<?php
 								if ( ! empty( tfopt( 'rt-description' ) ) ) { ?>
                                     <p><?php esc_html_e( tfopt( 'rt-description' ), "tourfic" ) ?></p>

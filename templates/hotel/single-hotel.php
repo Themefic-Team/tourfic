@@ -31,6 +31,7 @@ while ( have_posts() ) : the_post();
 
 	$disable_share_opt  = ! empty( $meta['h-share'] ) ? $meta['h-share'] : '';
 	$disable_review_sec = ! empty( $meta['h-review'] ) ? $meta['h-review'] : '';
+	$disable_wishlist_sec = ! empty( $meta['h-wishlist'] ) ? $meta['h-wishlist'] : 0;
 
 	/**
 	 * Get global settings value

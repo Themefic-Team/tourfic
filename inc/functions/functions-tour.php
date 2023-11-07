@@ -1214,8 +1214,8 @@ function tf_single_tour_booking_form( $post_id ) {
 						    $tf_deposit_amount =  array (
 								"{amount}" => $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount']. '%'
 							);
-							$tf_partial_payment_label = !empty(tfopt("deposit-title")) ? tfopt("deposit-title") : 'Pertial payment of {amount} on total';
-							$tf_partial_payment_description = !empty(tfopt("deposit-subtitle")) ? tfopt("deposit-subtitle") : 'You can Partial Payment amount for booking the tour. After booking the tour, you can pay the rest amount after the tour is completed.';
+							$tf_partial_payment_label = !empty(tfopt("deposit-title")) ? tfopt("deposit-title") : '';
+							$tf_partial_payment_description = !empty(tfopt("deposit-subtitle")) ? tfopt("deposit-subtitle") : '';
 						    ?>
                             <div class="tf-diposit-switcher">
                                 <label class="switch">
@@ -2009,8 +2009,8 @@ function tf_single_tour_booking_form( $post_id ) {
                         }
                     ],
                     onReady: function (selectedDates, dateStr, instance) {
+                        instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 						instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                        instance.element.value = instance.altInput.value
                     },
 
 						<?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
@@ -2072,7 +2072,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                            $(".tours-check-in-out").not(this).val(instance.altInput.value); // Todo: change the Input Value
+                            // $(".tours-check-in-out").not(this).val(instance.altInput.value); // Todo: change the Input Value
                             if (custom_avail == true) {
 
                                 let times = allowed_times.filter((v) => {
@@ -3994,7 +3994,7 @@ function tf_tour_booking_popup_callback() {
 			if ( ! function_exists( 'tf_date_format_user' ) ) {
 				function tf_date_format_user($date, $format) {
 					if(!empty($date) && !empty($format)) {
-					if(str_contains( $date, "-") == true) {
+					if(str_contains( $date, " - ") == true) {
 						list($first_date, $last_date) = explode(" - ", $date);
 						$first_date = date($format, strtotime($first_date));
 						$last_date = date($format, strtotime($last_date));

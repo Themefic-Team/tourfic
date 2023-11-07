@@ -24,8 +24,22 @@
                 </div>
 
                 <div class="tf-title-right">
+                <?php
+                // Wishlist
+                if($disable_wishlist_sec==0){
+                    if ( is_user_logged_in() ) {
+                        if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) { ?>
+                        <a class="tf-wishlist-button" title="<?php esc_attr_e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i class="far <?php echo $has_in_wishlist ? 'tf-text-red remove-wishlist fa-heart' : 'add-wishlist fa-heart-o' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo esc_attr( $post_type ) ?>" <?php if ( tfopt( 'wl-page' ) ) {
+                            echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
+                        } ?>></i></a>
+                        <?php } }else{ 
+                        if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {   ?>
+                        <a class="tf-wishlist-button" title="<?php esc_attr_e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i class="far <?php echo $has_in_wishlist ? 'tf-text-red remove-wishlist fa-heart' : 'add-wishlist fa-heart-o' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo esc_attr( $post_type ) ?>" <?php if ( tfopt( 'wl-page' ) ) {
+                            echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
+                        } ?>></i></a>
+                        <?php }} ?>
                     <?php
-                    // Wishlist
+                    }else{ 
                     if ( tfopt( 'wl-bt-for' ) && in_array( '1', tfopt( 'wl-bt-for' ) ) ) {
                         if ( is_user_logged_in() ) {
                             if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
@@ -48,7 +62,7 @@
                                 <?php
                             }
                         }
-                    }
+                    } }
                     ?>
 
                     <!-- Share Section -->
@@ -390,6 +404,40 @@
         </div>
     </div>
     <!-- Hero End -->
+
+    <!-- Start description -->
+    <div class="description-section sp-50">
+        <div class="tf-container">
+            <div class="desc-wrap">
+                <?php the_content(); ?>
+            </div>
+            <!-- Start features -->
+            <?php if ( $features ) { ?>
+                <div class="tf_features">
+                    <h3 class="section-heading"><?php echo !empty($meta['popular-section-title']) ? esc_html($meta['popular-section-title']) : ''; ?></h3>
+                    <div class="tf-feature-list">
+                        <?php foreach ( $features as $feature ) {
+                            $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
+                            $f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+                            if ( $f_icon_type == 'fa' ) {
+                                $feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
+                            } elseif ( $f_icon_type == 'c' ) {
+                                $feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
+                            } ?>
+
+                            <div class="single-feature-box">
+                                <?php echo $feature_icon ?? ''; ?>
+                                <span class="feature-list-title"><?php echo $feature->name; ?></span>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
+            <?php } ?>
+            <!-- End features -->
+        </div>
+    </div>
+    <!-- End description -->
+
     <div class="tf-container">
         <div class="tf-divider"></div>
     </div>
@@ -408,7 +456,7 @@
         <!-- Start Room Section -->
         <div class="tf-room-section sp-50">
             <div class="tf-container">
-                <h2 class="section-heading"><?php echo !empty($meta['room-section-title']) ? esc_html($meta['room-section-title']) : __( 'Available Rooms', 'tourfic' ); ?></h2>
+                <h2 class="section-heading"><?php echo !empty($meta['room-section-title']) ? esc_html($meta['room-section-title']) : ''; ?></h2>
                 <!-- Hooked in feature filter action -->
                 <?php do_action( 'tf_hotel_features_filter', $rm_features, 10 ) ?>
                 <div class="tf-room-type" id="rooms">
@@ -418,7 +466,7 @@
                                 <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
                             </div>
                         </div>
-                        <table class="availability-table">
+                        <table class="availability-table" cellpadding="0" cellspacing="0">
                             <thead>
                             <tr>
                                 <th class="description"><?php _e( 'Room Details', 'tourfic' ); ?></th>
@@ -554,10 +602,9 @@
                                                     if ( $tour_room_details_gall ) {
                                                         $tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
                                                     }
-                                                    if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_room_details_gall ){
+                                                    if ( $tour_room_details_gall ){
                                                         ?>
-                                                        <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] . $key : '' ?>"
-                                                                data-hotel="<?php echo $post_id; ?>" style="text-decoration: underline;">
+                                                        <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] . $key : '' ?>" data-hotel="<?php echo $post_id; ?>" style="text-decoration: underline;">
                                                                 <?php echo esc_html( $room['title'] ); ?>
                                                             </a></h3>
 
@@ -738,18 +785,48 @@
         <div class="tf-faq-wrapper hotel-faq sp-50">
             <div class="tf-container">
                 <div class="tf-faq-sec-title">
-                    <h2 class="section-heading"><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : __( "Faq’s", 'tourfic' ); ?></h2>
+                    <h2 class="section-heading"><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : ''; ?></h2>
                 </div>
 
                 <div class="tf-faq-content-wrapper">
                     <?php 
                     $tf_enquiry_section_status = !empty($meta['h-enquiry-section']) ? $meta['h-enquiry-section'] : "";
-                    if(!empty($tf_enquiry_section_status)){
+                    $tf_enquiry_section_icon = !empty($meta['h-enquiry-option-icon']) ? esc_html($meta['h-enquiry-option-icon']) : '';
+                    $tf_enquiry_section_title = !empty($meta['h-enquiry-option-title']) ? esc_html($meta['h-enquiry-option-title']) : '';
+                    $tf_enquiry_section_des = !empty($meta['h-enquiry-option-content']) ? esc_html($meta['h-enquiry-option-content']) : '';
+                    $tf_enquiry_section_button = !empty($meta['h-enquiry-option-btn']) ? esc_html($meta['h-enquiry-option-btn']) : '';
+
+                    if(!empty($tf_enquiry_section_status) && ( !empty($tf_enquiry_section_icon) || !empty($tf_enquiry_section_title) || !empty($enquery_button_text))){
                     ?>
                     <div class="tf-ask-question">
-                        <h3><?php echo !empty($meta['h-enquiry-option-title']) ? esc_html($meta['h-enquiry-option-title']) : __( "Have a question in mind", 'tourfic' ); ?></h3>
-                        <p><?php echo !empty($meta['h-enquiry-option-content']) ? esc_html($meta['h-enquiry-option-content']) : __( "Looking for more info? Send a question to the property to find out more.", 'tourfic' ); ?></p>
-                        <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="btn-styled"><span><?php echo !empty($meta['h-enquiry-option-btn']) ? esc_html($meta['h-enquiry-option-btn']) : __( 'Ask a Question', 'tourfic' ); ?></span></a></div>
+                        <div class="default-enquiry-title-section">
+                            <?php 
+                            if(!empty($tf_enquiry_section_icon)) {
+                                ?>
+                                <i class="<?php echo  $tf_enquiry_section_icon; ?>" aria-hidden="true"></i>
+                                <?php
+                            }
+                            if(!empty($tf_enquiry_section_title)) {
+                                ?>
+                                <h3><?php echo  $tf_enquiry_section_title; ?></h3>
+                                <?php
+                            }
+                            ?>
+                            
+                        </div> 
+                        <?php 
+                        if(!empty($tf_enquiry_section_des)) {
+                            ?>
+                            <p><?php echo $tf_enquiry_section_des; ?></p>
+                            <?php
+                        }
+                        if(!empty($tf_enquiry_section_button)) {
+                            ?>
+                            <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="btn-styled"><span><?php echo $tf_enquiry_section_button; ?></span></a></div>
+                            <?php
+                        }
+                        ?>
+                        
                     </div>
                     <?php } ?>
                     <div class="tf-faq-items-wrapper">
@@ -776,7 +853,7 @@
         <div id="tf-review" class="review-section sp-50">
             <div class="tf-container">
                 <div class="reviews">
-                    <h2 class="section-heading"><?php echo !empty($meta['review-section-title']) ? esc_html($meta['review-section-title']) : __("Average Guest Reviews","tourfic"); ?></h2>
+                    <h2 class="section-heading"><?php echo !empty($meta['review-section-title']) ? esc_html($meta['review-section-title']) : ''; ?></h2>
                     <?php comments_template(); ?>
                 </div>
             </div>
@@ -793,7 +870,7 @@
         <div class="toc-section sp-50">
             <div class="tf-container">
                 <div class="tf-toc-wrap">
-                    <h2 class="section-heading"><?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : __("Hotel Terms & Conditions","tourfic"); ?></h2>
+                    <h2 class="section-heading"><?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : ''; ?></h2>
                     <div class="tf-toc-inner">
                         <?php echo wpautop( $tc ); ?>
                     </div>

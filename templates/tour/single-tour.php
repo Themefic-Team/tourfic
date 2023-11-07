@@ -18,6 +18,7 @@ while ( have_posts() ) : the_post();
 	 */
 	$disable_review_sec   = ! empty( $meta['t-review'] ) ? $meta['t-review'] : '';
 	$disable_related_tour = ! empty( $meta['t-related'] ) ? $meta['t-related'] : '';
+	$disable_wishlist_tour = ! empty( $meta['t-wishlist'] ) ? $meta['t-wishlist'] : 0;
 
 	/**
 	 * Get global settings value

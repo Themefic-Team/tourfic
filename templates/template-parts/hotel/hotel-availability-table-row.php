@@ -30,7 +30,7 @@ if(empty($tf_room_disable_date)){
             if(!empty($room_preview_img)){ ?>
             <div class="tf-room-preview-img">
             <?php 
-            if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_room_details_gall ){
+            if ( $tour_room_details_gall ){
             ?>
             <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>" style="text-decoration: underline;">
                 <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php _e("Room Image","tourfic"); ?>">
@@ -45,7 +45,7 @@ if(empty($tf_room_disable_date)){
                 <div class="tf-room-type">
                     <div class="tf-room-title">
                         <?php 
-                        if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_room_details_gall ){
+                        if ( $tour_room_details_gall ){
                         ?>
                         <h3>
                         <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>" style="text-decoration: none;"><?php echo esc_html( $room['title'] ); ?></a>
@@ -97,7 +97,7 @@ if(empty($tf_room_disable_date)){
                 </ul>
 
                 <?php
-                if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_room_details_gall ){
+                if ( $tour_room_details_gall ){
                     ?>
                         <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>" style="text-decoration: underline;">
                         <?php _e("Room Photos & Details","tourfic"); ?>
@@ -604,7 +604,7 @@ if(empty($tf_room_disable_date)){
             if ($tour_room_details_gall) {
                 $tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
             }
-            if (function_exists('is_tf_pro') && is_tf_pro() && $tour_room_details_gall){ 
+            if ($tour_room_details_gall){ 
             ?>	
             <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>" style="text-decoration: underline;">
                 <?php echo esc_html( $room['title'] ); ?>

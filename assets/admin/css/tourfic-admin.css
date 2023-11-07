@@ -365,6 +365,12 @@ Fontawesome
   opacity: 1;
 }
 
+.tf-small-btn {
+  margin-left: 10px;
+  font-size: 12px;
+  padding: 7px 15px;
+}
+
 .tf-post-states {
   display: inline-block;
   font-size: 11px;
@@ -2370,6 +2376,41 @@ Steps
   padding-right: 10px;
 }
 
+#tfhotel_docs,
+#tftour_docs,
+#tfapartment_docs {
+  border: 0px solid;
+  box-shadow: none;
+  background-color: transparent;
+}
+#tfhotel_docs .postbox-header,
+#tftour_docs .postbox-header,
+#tfapartment_docs .postbox-header {
+  display: none;
+}
+#tfhotel_docs .inside,
+#tftour_docs .inside,
+#tfapartment_docs .inside {
+  margin: 0px;
+  padding: 0px;
+}
+#tfhotel_docs .inside .tf_docs_preview a,
+#tftour_docs .inside .tf_docs_preview a,
+#tfapartment_docs .inside .tf_docs_preview a {
+  text-decoration: none;
+}
+#tfhotel_docs .inside .tf_docs_preview a img,
+#tftour_docs .inside .tf_docs_preview a img,
+#tfapartment_docs .inside .tf_docs_preview a img {
+  width: 100%;
+}
+#tfhotel_docs .inside .tf_docs_preview a:focus,
+#tftour_docs .inside .tf_docs_preview a:focus,
+#tfapartment_docs .inside .tf_docs_preview a:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .tf-field {
   padding: 12px 0;
 }
@@ -3807,7 +3848,7 @@ Steps
 }
 .tf_booking_details_wrap .tf_booking_wrap_header h1 {
   color: #1D2327;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 32px;
   font-style: normal;
   font-weight: 700;
@@ -3821,7 +3862,7 @@ Steps
   background: #FFF;
   margin: 0 !important;
   color: #003C79;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -3834,7 +3875,7 @@ Steps
   background: #003C79;
   margin: 0;
   box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -3907,7 +3948,7 @@ Steps
   border: 0px solid;
   background: transparent;
   color: #1d2327;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -3925,7 +3966,7 @@ Steps
   background: #FFF;
   box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
   color: #003C79;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -3942,7 +3983,7 @@ Steps
 .tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-order-filter-reset a {
   text-decoration: none;
   color: #1D2327;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -3974,7 +4015,7 @@ Steps
   width: 100%;
   border: 0px solid;
   color: #87888B;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -4015,7 +4056,7 @@ Steps
 }
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table thead tr th, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table thead tr td {
   color: #87888B;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -4037,7 +4078,7 @@ Steps
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr th, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr td {
   padding: 16px 24px;
   color: #1D2327;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -4052,7 +4093,7 @@ Steps
 }
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr th span, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr td span {
   color: #87888B;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -4071,7 +4112,7 @@ Steps
   background: #ECFDF3;
   color: #027A48;
   text-align: center;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
@@ -4102,7 +4143,7 @@ Steps
   display: flex;
   padding: 10px;
   color: #1D2327;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
@@ -4160,7 +4201,7 @@ Steps
 .select2-dropdown.tf-booking-checkinout-filter-modal .select2-results ul li {
   display: block;
   color: #1D2327;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -4191,7 +4232,7 @@ Steps
 }
 .tf-booking-details-preview .tf-details-preview-header .tf-back a {
   color: #003C79;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -4205,7 +4246,7 @@ Steps
 }
 .tf-booking-details-preview .tf-details-preview-header .tf-title h2 {
   color: #1D2327;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 32px;
   font-style: normal;
   font-weight: 700;
@@ -4218,7 +4259,7 @@ Steps
 .tf-booking-details-preview .tf-details-preview-header .tf-booking-id-author ul li {
   display: inline-block;
   color: #1D2327;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -4272,7 +4313,7 @@ Steps
 }
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box h4 {
   color: #003C79;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -4301,7 +4342,7 @@ Steps
 }
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box h3 {
   color: #87888B;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -4320,7 +4361,7 @@ Steps
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box .tf-single-box table tr td {
   padding: 8px;
   color: #1D2327;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -4329,7 +4370,7 @@ Steps
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box .tf-single-box table tr th {
   padding: 8px 8px 8px 0px;
   color: #1D2327;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
@@ -4375,7 +4416,7 @@ Steps
   background: rgba(240, 240, 241, 0.05);
   border: 1px solid #F0F0F1;
   color: #F0F0F1;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -4419,7 +4460,7 @@ Steps
 }
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection h3 {
   color: #1D2327;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -4432,7 +4473,7 @@ Steps
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection .tf-order-status-filter label {
   background: #003C79;
   color: #F0F0F1;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -4464,7 +4505,7 @@ Steps
   background-color: #fff;
   background: #FFF;
   cursor: pointer;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -4491,7 +4532,7 @@ Steps
   box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
   text-decoration: none;
   color: #003C79;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -4536,7 +4577,7 @@ Steps
 }
 .visitor-details-edit-form .visitor-details-edit-popup .tf-visitor-details-edit-header h2 {
   color: #003C79;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -4671,7 +4712,7 @@ Steps
 }
 .tf-voucher-quick-view-box .voucher-quick-view .tf-voucher-details-preview-header h2 {
   color: #003C79;
-  font-family: Segoe UI;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
