@@ -553,6 +553,9 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
             (function ($) {
                 $(document).ready(function () {
 
+					// flatpickr first day of Week
+					<?php tf_flatpickr_locale('root'); ?>
+
 					$("#tf_tour_aval_check #check-in-out-date").flatpickr({
 						enableTime: false,
 						mode: "range",
@@ -560,6 +563,10 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 						dateFormat: "Y/m/d",
 						altFormat: '<?php echo $tour_date_format_for_users; ?>',
 						minDate: "today",
+						
+						// flatpickr locale
+						<?php tf_flatpickr_locale(); ?>
+
 						onReady: function(selectedDates, dateStr, instance) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
@@ -750,6 +757,9 @@ if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
             (function ($) {
                 $(document).ready(function () {
 
+					// FlatPickr First Day Week 
+					<?php tf_flatpickr_locale('root'); ?>
+
                     $("#tf_tour_aval_check #check-in-out-date").flatpickr({
                         enableTime: false,
 						altInput: true,
@@ -757,6 +767,10 @@ if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
                         mode: "range",
                         dateFormat: "Y/m/d",
                         minDate: "today",
+
+						// FlatPickr Locale
+						<?php tf_flatpickr_locale(); ?>
+
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');

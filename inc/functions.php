@@ -719,6 +719,9 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
         (function ($) {
             $(document).ready(function () {
 
+				// flatpickr first day of week
+				<?php tf_flatpickr_locale("root"); ?>
+
                 $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
                     enableTime: false,
                     minDate: "today",
@@ -726,6 +729,10 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 					altFormat: '<?php echo $date_format_for_users; ?>',
                     mode: "range",
                     dateFormat: "Y/m/d",
+
+					// flatpickr locale
+					<?php tf_flatpickr_locale(); ?>
+
                     onReady: function (selectedDates, dateStr, instance) {
                         instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 						instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
@@ -939,6 +946,10 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
     <script>
         (function ($) {
             $(document).ready(function () {
+
+				// flatpickr first day of week
+				<?php tf_flatpickr_locale('root'); ?>
+
 				$(document).on("focus",".tf-hotel-side-booking #check-in-out-date", function(e) {
 					let calander = flatpickr( this, {
                     enableTime: false,
@@ -947,6 +958,10 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
                     dateFormat: "Y/m/d",
 					altInput: true,
 					altFormat: '<?php echo $date_format_for_users; ?>',
+
+					// flatpickr locale
+					<?php tf_flatpickr_locale(); ?>
+
                     onChange: function (selectedDates, dateStr, instance) {
                         instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 						instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
