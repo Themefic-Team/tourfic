@@ -1,8 +1,13 @@
 <div class="tf-template-3">
-
-
+<?php 
+if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
+	$tf_search_result_banner = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] : '';
+}elseif( !empty($_GET['type']) && $_GET['type']=="tf_hotel" ){
+	$tf_search_result_banner = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] : '';
+}
+?>
     <!--Hero section start -->
-    <div class="tf-hero-section-wrap" style="background: rgba(48, 40, 28, 0.30);">
+    <div class="tf-hero-section-wrap" style="<?php echo !empty($tf_search_result_banner) ? 'background-image: url('.esc_url($tf_search_result_banner).');' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
         <div class="tf-container">
             <div class="tf-hero-content tf-archive-hero-content">
                 <div class="tf-head-title">
