@@ -250,7 +250,7 @@ function tf_is_woo() {
 					var plugin_slug = current.attr("data-plugin-slug");
 					var ajax_url= '<?php echo admin_url( 'admin-ajax.php' )?>';
 
-					current.addClass('updating-message').text('Installing ...');
+					current.addClass('updating-message').text('Installing...');
 					
 					var data = {
 						action: 'tf_ajax_install_plugin',
@@ -260,14 +260,14 @@ function tf_is_woo() {
 
 					jQuery.post(ajax_url, data, function (response) {
 						current.removeClass('updating-message');
-						current.addClass('updated-message').text('Installing ...');
+						current.addClass('updated-message').text('Installing...');
 						current.attr("href", response.data.activateUrl);
 					})
 						.fail(function () {
 							current.removeClass('updating-message').text('Install Failed');
 						})
 						.always(function () {
-							current.removeClass('install-now updated-message').addClass('activate-now button-primary').text('Activating ...');
+							current.removeClass('install-now updated-message').addClass('activate-now button-primary').text('Activating...');
 							current.unbind(e);
 							current[0].click();
 						});
