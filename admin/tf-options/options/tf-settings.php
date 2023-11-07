@@ -328,6 +328,14 @@ TF_Settings::option( 'tf_settings', array(
 									'dependency' => array( 'hotel-archive', '==', 'design-2' ),
 								),
 								array(
+									'id'      => 'hotel_archive_design_2_bannar',
+									'type'    => 'image',
+									'label'    => __( 'Archive & Search Result Banner Image', 'tourfic' ),
+									'subtitle' => __( 'Upload Banner Image for this hotel archive template.', 'tourfic' ),
+									'library' => 'image',
+									'dependency' => array( 'hotel-archive', '==', 'design-2' ),
+								),
+								array(
 									'id'         => 'hotel_archive_view',
 									'type'       => 'select',
 									'label'      => __( 'Archive Layout', 'tourfic' ),
@@ -652,6 +660,14 @@ TF_Settings::option( 'tf_settings', array(
 									'dependency' => array( 'tour-archive', '==', 'design-2' ),
 								),
 								array(
+									'id'      => 'tour_archive_design_2_bannar',
+									'type'    => 'image',
+									'label'    => __( 'Archive & Search Result Banner Image', 'tourfic' ),
+									'subtitle' => __( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
+									'library' => 'image',
+									'dependency' => array( 'tour-archive', '==', 'design-2' ),
+								),
+								array(
 									'id'         => 'tour_archive_view',
 									'type'       => 'select',
 									'label'      => __( 'Archive Layout', 'tourfic' ),
@@ -660,7 +676,6 @@ TF_Settings::option( 'tf_settings', array(
 										'grid' => __( 'Grid', 'tourfic' ),
 									),
 									'default'    => 'List',
-									'dependency' => array( 'tour-archive', '==', 'design-1' ),
 								),
 								array(
 									'id'       => 'tour_archive_price_minimum_settings',

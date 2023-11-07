@@ -2419,7 +2419,6 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 			</div>
 			<?php } ?>
 			<div class="tf-available-labels">
-				<span class="tf-available-labels-populer"><?php _e("Populer", "tourfic"); ?></span>
 				<?php if ( $featured ): ?>
 				<span class="tf-available-labels-featured"><?php _e("Featured", "tourfic"); ?></span>
 				<?php endif; ?>

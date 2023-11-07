@@ -391,15 +391,15 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                     </svg>
                 </span>
             </div>
+            <?php 
+            if(!empty($hotel_discount_type) && !empty($hotel_discount_amount) && ( "percent" == $hotel_discount_type || "fixed" == $hotel_discount_type )){ ?>
             <div class="tf-available-room-off">
-                <?php 
-                if(!empty($hotel_discount_type) && !empty($hotel_discount_amount) && ( "percent" == $hotel_discount_type || "fixed" == $hotel_discount_type )){ ?>
                 <span>
                     <?php echo ("percent" == $hotel_discount_type) ? esc_html($hotel_discount_amount).'% off' : wc_price($hotel_discount_amount). 'off'; ?>
                 </span>
-
-                <?php } ?>
             </div>
+            <?php } ?>
+            
             <div class="tf-available-room-price">
             <input type="hidden" name="post_id" value="<?php echo $form_post_id; ?>">
             <input type="hidden" name="room_id" value="<?php echo $room_id; ?>">

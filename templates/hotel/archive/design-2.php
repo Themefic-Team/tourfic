@@ -1,15 +1,14 @@
 <div class="tf-template-3">
 
-
+    <?php 
+    $tf_hotel_arc_banner = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] : '';
+    ?>
     <!--Hero section start -->
-    <div class="tf-hero-section-wrap" style="background: rgba(48, 40, 28, 0.30);">
+    <div class="tf-hero-section-wrap" style="<?php echo !empty($tf_hotel_arc_banner) ? 'background-image: url('.esc_url($tf_hotel_arc_banner).');' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
         <div class="tf-container">
             <div class="tf-hero-content tf-archive-hero-content">
                 <div class="tf-head-title">
-                    <h1>Los Angeles</h1>
-                    <div class="tf-title-meta">
-                        <p>(2 room, 18 aug,2023 - 20 aug,2023)</p>
-                    </div>
+                    <h1><?php _e("Hotels", "tourfic"); ?></h1>
                 </div>
             </div>
         </div>
@@ -42,10 +41,10 @@
                     <div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
                         <div class="tf-archive-available-rooms-head tf-available-rooms-head">
                             <h2 class="tf-total-results"><?php _e("Total", "tourfic"); ?> <span><?php echo $post_count; ?></span> <?php _e("hotels available", "tourfic"); ?></h2>
-                            <div class="tf-filter">
-                                <span><?php _e("Best match", "tourfic"); ?></span>
+                            <!-- <div class="tf-filter">
+                                <span><?php //_e("Best match", "tourfic"); ?></span>
                                 <i class="fa-solid fa-chevron-down"></i>
-                            </div>
+                            </div> -->
                         </div>
                         
                         <!-- Loader Image -->

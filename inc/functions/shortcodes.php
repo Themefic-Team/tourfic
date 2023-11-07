@@ -881,10 +881,10 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 				<?php if($post_type == "tf_tours"){ ?>
 				<h2 class="tf-total-results"><?php _e("Total", "tourfic"); ?> <span><?php echo $total_posts; ?></span> <?php _e("tours available", "tourfic"); ?></h2>
 				<?php } ?>
-				<div class="tf-filter">
-					<span><?php _e("Best match", "tourfic"); ?></span>
+				<!-- <div class="tf-filter">
+					<span><?php //_e("Best match", "tourfic"); ?></span>
 					<i class="fa-solid fa-chevron-down"></i>
-				</div>
+				</div> -->
 			</div>
 			
 			<!-- Loader Image -->

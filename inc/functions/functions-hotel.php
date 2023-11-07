@@ -2384,7 +2384,6 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 			</div>
 			<?php } ?>
 			<div class="tf-available-labels">
-				<span class="tf-available-labels-populer"><?php _e("Populer", "tourfic"); ?></span>
 				<?php if ( $featured ): ?>
 				<span class="tf-available-labels-featured"><?php _e("Featured", "tourfic"); ?></span>
 				<?php endif; ?>
