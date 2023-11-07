@@ -1,56 +1,8 @@
-<!-- Starting Dates when Repeated dates more then 2 -->
-
-<?php if(!empty($tour_type) && ($tour_type == "fixed") && ($tf_repeated_fixed_tour_switch == 1) && !empty($tf_tour_repeat_months)) { 
-    if(!empty($tf_start_date) && !empty($tf_tour_repeat_months)) { 
-        $repeated_dates = tf_fixed_tour_start_date_changer($tf_start_date, $tf_tour_repeat_months);
-    }
-
-    if ( count($repeated_dates) > 2) { ?>
-        <div class="repeat-fixed-dates">
-            <div class="repeated-title-section">
-                <i class="fas fa-plane-departure"></i>
-                <h5><?php echo __( 'Starting Dates', 'tourfic' ); ?></h5>
-            </div>
-            <ul class="repeat-dates">
-                <?php foreach($repeated_dates as $date) { ?>
-                    <li class="repeat-date-list">
-                        <span class="repeat-date"><?php echo tf_tour_date_format_changer($date, $tf_tour_date_format_for_users); ?></span>
-                    </li>
-                <?php }; ?>
-            </ul>
-        </div>
-    <?php }; ?>        
-<?php }; ?>
 
 <!-- Trip Features -->
 <?php if ( $tour_duration || $info_tour_type || $group_size || $language ) { ?>
     <div class="tf-trip-feature-blocks tf-mb-40 tf-template-section">
         <div class="tf-features-block-inner tf-column-4 tf-flex tf-flex-space-bttn tf-flex-gap-16">
-            <?php if(!empty($tour_type) && ($tour_type == "fixed") && ($tf_repeated_fixed_tour_switch == 1) && !empty($tf_tour_repeat_months)) { 
-                    if(!empty($tf_start_date) && !empty($tf_tour_repeat_months)) { 
-                        $repeated_dates = tf_fixed_tour_start_date_changer($tf_start_date, $tf_tour_repeat_months);
-                    }
-                    if ( count($repeated_dates) <= 2) { ?>
-                        <div class="tf-column tf-flex tf-flex-gap-8">
-                            <div class="tf-feature-block tf-flex tf-flex-gap-8 tf-first">
-                                <div class="tf-feature-block-icon">
-                                    <i class="fas fa-plane-departure"></i>
-                                </div>
-                                <div class="tf-feature-block-details">
-                                    <h5><?php echo __( 'Start Dates', 'tourfic' ); ?></h5>
-                                    <ul class="repeat-dates">
-                                        <?php foreach($repeated_dates as $date) { ?>
-                                            <li class="repeat-date-list">
-                                                <span class="repeat-date"><?php echo tf_tour_date_format_changer($date, $tf_tour_date_format_for_users); ?></span>
-                                            </li>
-                                        <?php }; ?>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                <?php } ?>
-            <?php } ?>
-
 			<?php if ( $tour_duration ) { ?>
                 <div class="tf-column tf-flex tf-flex-gap-8">
                     <div class="tf-feature-block tf-flex tf-flex-gap-8 tf-first">

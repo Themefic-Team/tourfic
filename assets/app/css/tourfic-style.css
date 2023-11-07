@@ -8336,11 +8336,6 @@ div#tf-contact-info {
   flex-basis: 41%;
   position: relative;
 }
-.tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-}
 .tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-discount {
   background: #fff;
   padding: 6px 12px;
@@ -8362,13 +8357,13 @@ div#tf-contact-info {
   margin-right: 5px;
 }
 .tf-search-results-list .tf-item-card .tf-item-featured .tf-tag-items {
-  width: 50%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 45px;
+  top: 20px;
   left: 20px;
-  align-items: flex-start;
+  align-items: baseline;
   text-transform: capitalize;
 }
 .tf-search-results-list .tf-item-card .tf-item-featured .tf-tag-items .tf-multiple-tag-item {

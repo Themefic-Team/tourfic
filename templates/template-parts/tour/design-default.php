@@ -227,52 +227,10 @@
                 <?php the_content(); ?>
             </div>
 
-            <!-- Starting Dates when Repeated dates more then 2 -->
-
-                <?php if(!empty($tour_type) && ($tour_type == "fixed") && ($tf_repeated_fixed_tour_switch == 1) && !empty($tf_tour_repeat_months)) { 
-                    if(!empty($tf_start_date) && !empty($tf_tour_repeat_months)) { 
-                        $repeated_dates = tf_fixed_tour_start_date_changer($tf_start_date, $tf_tour_repeat_months);
-                    }
-
-                    if ( count($repeated_dates) > 2) { ?>
-                        <div class="repeat-fixed-dates repeat-design-default">
-                            <div class="repeated-title-section">
-                                <i class="fas fa-plane-departure"></i>
-                                <h5><?php echo __( 'Starting Dates', 'tourfic' ); ?></h5>
-                            </div>
-                            <ul class="repeat-dates">
-                                <?php foreach($repeated_dates as $date) { ?>
-                                    <li class="repeat-date-list">
-                                        <span class="repeat-date"><?php echo tf_tour_date_format_changer($date, $tf_tour_date_format_for_users); ?></span>
-                                    </li>
-                                <?php }; ?>
-                            </ul>
-                        </div>
-                    <?php }; ?>        
-                <?php }; ?>
-
             <!-- Square block section Start -->
             <?php if ( $tour_duration || $info_tour_type || $group_size || $language ) { ?>
                 <div class="tf-square-block sp-20">
                     <div class="tf-square-block-content">
-                        <?php if(!empty($tour_type) && ($tour_type == "fixed") && ($tf_repeated_fixed_tour_switch == 1) && !empty($tf_tour_repeat_months)) { 
-                    if(!empty($tf_start_date) && !empty($tf_tour_repeat_months)) { 
-                        $repeated_dates = tf_fixed_tour_start_date_changer($tf_start_date, $tf_tour_repeat_months);
-                    }
-                    if ( count($repeated_dates) <= 2) { ?>
-                        <div class="tf-single-square-block fifth">
-                            <i class="fas fa-plane-departure"></i>
-                            <h4><?php echo __( 'Starting Dates', 'tourfic' ); ?></h4>
-                            <div class="repeat-dates">
-                                <?php foreach($repeated_dates as $date) { ?>
-                                    <p class="repeat-date-list">
-                                        <span class="repeat-date"><?php echo tf_tour_date_format_changer($date, $tf_tour_date_format_for_users); ?></span>
-                                    </p>
-                                <?php }; ?>
-                            </div>
-                        </div>
-                <?php } ?>
-            <?php } ?>
                         <?php if ( $tour_duration ) { ?>
                             <div class="tf-single-square-block first">
                                 <i class="fas fa-clock"></i>
