@@ -586,6 +586,34 @@
     }
 }
 
+.tf-features-block-inner {
+    flex-wrap: nowrap !important;
+
+    @media #{$tfmax991}{
+        flex-wrap: wrap !important;
+    }
+    @media #{$tfmax360}{
+        flex-wrap: wrap !important;
+    }
+    @media #{$tfmax767}{
+        flex-wrap: wrap !important;
+    }
+    .tf-column {
+        width: 100% !important;
+        flex-basis: auto;
+
+        @media #{$tfmax991}{
+            flex-basis: calc(50% - 16px) !important;
+        }
+        @media #{$tfmax767}{
+            flex-basis: calc(50% - 16px) !important;
+        }
+        @media #{$tfmax360}{
+            flex-basis: calc(100% - 16px) !important;
+        }
+    }
+}
+
 //highlights
 .tf-highlights-wrapper {
     background: #fff;

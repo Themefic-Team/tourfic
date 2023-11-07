@@ -7357,6 +7357,44 @@ div#tf-contact-info {
   box-shadow: 0px 0px 8px 2px #E0E8EE;
 }
 
+.tf-features-block-inner {
+  flex-wrap: nowrap !important;
+}
+@media only screen and (min-width: 767.99px) and (max-width: 991px) {
+  .tf-features-block-inner {
+    flex-wrap: wrap !important;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width:360px) {
+  .tf-features-block-inner {
+    flex-wrap: wrap !important;
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-features-block-inner {
+    flex-wrap: wrap !important;
+  }
+}
+.tf-features-block-inner .tf-column {
+  width: 100% !important;
+  flex-basis: auto;
+}
+@media only screen and (min-width: 767.99px) and (max-width: 991px) {
+  .tf-features-block-inner .tf-column {
+    flex-basis: calc(50% - 16px) !important;
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-features-block-inner .tf-column {
+    flex-basis: calc(50% - 16px) !important;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width:360px) {
+  .tf-features-block-inner .tf-column {
+    flex-basis: calc(100% - 16px) !important;
+  }
+}
+
 .tf-highlights-wrapper {
   background: #fff;
   border-radius: 5px;
