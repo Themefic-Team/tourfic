@@ -11,8 +11,9 @@ $taxonomy = $term->taxonomy;
 $taxonomy_name = $term->name;
 $taxonomy_slug = $term->slug;
 $max = '8';
-?>
-<?php 
+
+$tf_location_meta      = get_term_meta( $term->term_id, 'tf_hotel_location', true );
+$tf_location_image = ! empty( $tf_location_meta['image'] ) ? $tf_location_meta['image'] : '';
 
 $tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
 
@@ -34,7 +35,7 @@ if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
 
 <div class="tf-template-3">
     <!--Hero section start -->
-    <div class="tf-hero-section-wrap" style="background: rgba(48, 40, 28, 0.30);">
+    <div class="tf-hero-section-wrap" style="<?php echo !empty($tf_location_image) ? 'background-image: url('.esc_url($tf_location_image).');' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
         <div class="tf-container">
             <div class="tf-hero-content tf-archive-hero-content">
                 <div class="tf-head-title">
