@@ -4195,6 +4195,7 @@ div#tf-contact-info {
   color: #003162;
   border: 1px solid #F5F8FF;
   padding: 50px 20px;
+  min-height: 100px;
 }
 .tf-single-square-block h4 {
   color: #003162;
@@ -4218,6 +4219,21 @@ div#tf-contact-info {
 
 .tf-single-square-block.second {
   background: rgba(40, 167, 69, 0.1411764706);
+}
+
+.tf-single-square-block.fifth {
+  background: #e0e7ff;
+}
+.tf-single-square-block.fifth .repeat-dates {
+  font-size: 16px;
+  margin-top: 5px;
+}
+.tf-single-square-block.fifth .repeat-dates .repeat-date {
+  margin: 5px;
+}
+
+.repeat-design-default .repeat-dates {
+  margin: 0;
 }
 
 .tf-single-square-block.third {
@@ -7249,6 +7265,56 @@ div#tf-contact-info {
   font-size: 30px;
 }
 
+.repeat-fixed-dates {
+  max-width: 100%;
+  min-height: 100px;
+  background-color: #fff;
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 24px 5px #E0E8EE;
+}
+.repeat-fixed-dates .repeated-title-section {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.repeat-fixed-dates .repeated-title-section i {
+  color: #0E3DD8;
+}
+.repeat-fixed-dates .repeat-dates {
+  display: grid;
+  grid-template-columns: repeat(6, 15%);
+  padding-left: 0;
+  justify-content: space-around;
+}
+@media only screen and (min-width: 767.99px) and (max-width: 991px) {
+  .repeat-fixed-dates .repeat-dates {
+    grid-template-columns: repeat(4, 25%);
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .repeat-fixed-dates .repeat-dates {
+    grid-template-columns: repeat(auto-fit, 30%);
+  }
+}
+@media only screen and (max-width: 375px) {
+  .repeat-fixed-dates .repeat-dates {
+    grid-template-columns: repeat(auto-fit, 45%);
+  }
+}
+.repeat-fixed-dates .repeat-dates .repeat-date-list {
+  list-style: none;
+  display: inline-block;
+  background-color: #fff;
+  padding: 8px 12px;
+  margin-top: 15px;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 16px;
+  box-shadow: 0px 0px 15px 2px #E0E8EE;
+}
+
 .tf-trip-feature-blocks .tf-feature-block {
   background: #fff;
   box-shadow: 0px 0px 24px 5px #E0E8EE;
@@ -7272,6 +7338,23 @@ div#tf-contact-info {
   font-size: 12px;
   color: #686E7A;
   margin-top: 8px;
+}
+.tf-trip-feature-blocks .tf-feature-block .repeat-dates {
+  display: block;
+  padding-left: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-top: 5px;
+}
+.tf-trip-feature-blocks .tf-feature-block .repeat-dates .repeat-date-list {
+  list-style: none;
+  background-color: #fff;
+  padding: 0px 8px;
+  margin: 10px 5px;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 15px;
+  box-shadow: 0px 0px 8px 2px #E0E8EE;
 }
 
 .tf-highlights-wrapper {

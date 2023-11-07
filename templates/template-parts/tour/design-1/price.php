@@ -4,6 +4,13 @@
 <div class="tf-trip-info tf-box tf-mb-30 tf-template-section">
 <div class="tf-trip-info-inner tf-flex tf-flex-space-bttn tf-flex-align-center tf-flex-gap-8">
     <!-- Single Tour short details -->
+
+    <?php 
+    if(!empty($tf_start_date) && ($tf_tour_repeat_months > 0) && ($tour_type == 'fixed')) {
+        $repeated_dates = tf_fixed_tour_start_date_changer($tf_start_date, $tf_tour_repeat_months);
+    }
+    ?>
+
     <div class="tf-short-info">
         <ul class="tf-list">
             <?php 
