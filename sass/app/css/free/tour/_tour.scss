@@ -867,12 +867,13 @@ div#tf-contact-info {
                                     border: 1px solid #666D74;
                                     cursor: pointer;
                                     &::after{
-                                        left: 5px;
-                                        top: 2px;
+                                        left: 4px;
+                                        top: 1px;
                                         width: 3px;
                                         height: 7px;
                                         border: solid #003C7A;
                                         border-width: 0 3px 3px 0;
+                                        box-sizing: unset;
                                         -webkit-transform: rotate(45deg);
                                         -ms-transform: rotate(45deg);
                                         transform: rotate(45deg);

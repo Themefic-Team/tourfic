@@ -4854,12 +4854,13 @@ div#tf-contact-info {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-extra label .tf-extra-check-box .checkmark::after,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-extra label .tf-extra-check-box .checkmark::after,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-extra label .tf-extra-check-box .checkmark::after {
-  left: 5px;
-  top: 2px;
+  left: 4px;
+  top: 1px;
   width: 3px;
   height: 7px;
   border: solid #003C7A;
   border-width: 0 3px 3px 0;
+  box-sizing: unset;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
