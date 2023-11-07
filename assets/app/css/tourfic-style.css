@@ -1725,6 +1725,7 @@ Ajax Loader Booking Availability
   flex-basis: main-size;
   width: 210px;
   min-height: 210px;
+  position: relative;
 }
 .tourfic-single-left img {
   height: 100%;
@@ -1732,6 +1733,25 @@ Ajax Loader Booking Availability
   -o-object-fit: cover;
   object-fit: cover;
   border-radius: 4px;
+}
+.tourfic-single-left .default-tags-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  width: 100%;
+  font-size: 12px;
+  margin-top: 5px !important;
+}
+.tourfic-single-left .default-tags-container .default-single-tag {
+  padding: 6px 12px;
+  display: block;
+  border-radius: 50px;
+  margin: 5px 4px;
+  font-weight: 500;
+  line-height: 1;
+  text-transform: capitalize;
 }
 
 .tourfic-single-right {
@@ -2164,6 +2184,9 @@ a.page-numbers {
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .search-result-inner {
     grid-template-columns: 65% 35%;
+  }
+  .apartment-tags-container {
+    width: 530px;
   }
 }
 @media only screen and (min-width: 660px) and (max-width: 767px) {
@@ -8253,6 +8276,25 @@ div#tf-contact-info {
   font-weight: 500;
   color: #fff;
   line-height: 1;
+  margin-right: 5px;
+}
+.tf-search-results-list .tf-item-card .tf-item-featured .tf-tag-items {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 45px;
+  left: 20px;
+  align-items: flex-start;
+  text-transform: capitalize;
+}
+.tf-search-results-list .tf-item-card .tf-item-featured .tf-tag-items .tf-multiple-tag-item {
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  margin-top: 5px;
 }
 @media only screen and (max-width: 991.98px) {
   .tf-search-results-list .tf-item-card .tf-item-featured {

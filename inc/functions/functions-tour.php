@@ -1834,6 +1834,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 	$location = ! empty( $meta['text_location'] ) ? $meta['text_location'] : '';
 	// Featured
 	$featured = ! empty( $meta['tour_as_featured'] ) ? $meta['tour_as_featured'] : '';
+	$tours_multiple_tags =  !empty($meta['tf-tour-tags']) ? $meta['tf-tour-tags'] : array();
 
 	// Adults
 	if ( empty( $adults ) ) {
@@ -2022,6 +2023,23 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
     ?>
     <div class="tf-item-card tf-flex">
         <div class="tf-item-featured">
+			<div class="tf-tag-items">
+				<?php
+					if(sizeof($tours_multiple_tags) > 0) {
+						foreach($tours_multiple_tags as $tag) {
+							$tour_tag_name = !empty($tag['tour-tag-title']) ? __($tag['tour-tag-title'], "tourfic") : '';
+							$tag_background_color = !empty($tag["tour-tag-color-settings"]["background"]) ? $tag["tour-tag-color-settings"]["background"] : "#003162";
+							$tag_font_color = !empty($tag["tour-tag-color-settings"]["font"]) ? $tag["tour-tag-color-settings"]["font"] : "#fff";
+
+							echo <<<EOD
+								<div class="tf-multiple-tag-item" style="color: $tag_font_color; background-color: $tag_background_color ">
+									<span class="tf-multiple-tag">$tour_tag_name</span>
+								</div>
+							EOD;
+						}
+					}
+				?>
+			</div>
             <a href="<?php echo esc_url($url); ?>">
             <?php
                 if (has_post_thumbnail()) {
@@ -2096,6 +2114,21 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
                     </div>
 				<?php endif; ?>
                 <div class="tourfic-single-left">
+				<div class="default-tags-container">
+						<?php 
+						if(sizeof($tours_multiple_tags) > 0) {
+							foreach($tours_multiple_tags as $tag) {
+								$hotel_tag_name = !empty($tag['tour-tag-title']) ? __($tag['tour-tag-title'], "tourfic") : '';
+								$tag_background_color = !empty($tag["tour-tag-color-settings"]["background"]) ? $tag["tour-tag-color-settings"]["background"] : "#003162";
+								$tag_font_color = !empty($tag["tour-tag-color-settings"]["font"]) ? $tag["tour-tag-color-settings"]["font"] : "#fff";
+
+								echo <<<EOD
+									<span class="default-single-tag" style="color: $tag_font_color; background-color: $tag_background_color">$hotel_tag_name</span>
+								EOD;
+							}
+						}
+						?>
+					</div>
                     <a href="<?php echo esc_url( $url ); ?>">
 						<?php
 						if ( has_post_thumbnail() ) {

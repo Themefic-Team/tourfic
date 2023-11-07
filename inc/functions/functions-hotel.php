@@ -1868,6 +1868,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 
 	// Featured
 	$featured = ! empty( $meta['featured'] ) ? $meta['featured'] : '';
+	$hotel_multiple_tags = !empty($meta['tf-hotel-tags']) ? $meta['tf-hotel-tags'] : array();
 	/**
 	 * All values from URL
 	 */
@@ -2112,6 +2113,23 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 		?>
         <div class="tf-item-card tf-flex tf-item-hotel">
             <div class="tf-item-featured">
+				<div class="tf-tag-items">
+					<?php
+						if(sizeof($hotel_multiple_tags) > 0) {
+							foreach($hotel_multiple_tags as $tag) {
+								$hotel_tag_name = !empty($tag['hotel-tag-title']) ? __($tag['hotel-tag-title'], "tourfic") : '';
+								$tag_background_color = !empty($tag["hotel-tag-color-settings"]["background"]) ? $tag["hotel-tag-color-settings"]["background"] : "#003162";
+								$tag_font_color = !empty($tag["hotel-tag-color-settings"]["font"]) ? $tag["hotel-tag-color-settings"]["font"] : "#fff";
+
+								echo <<<EOD
+									<div class="tf-multiple-tag-item" style="color: $tag_font_color; background-color: $tag_background_color ">
+										<span class="tf-multiple-tag">$hotel_tag_name</span>
+									</div>
+								EOD;
+							}
+						}
+					?>
+				</div>
                 <a href="<?php echo esc_url( $url ); ?>">
 					<?php
 					if ( has_post_thumbnail() ) {
@@ -2207,6 +2225,21 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                     </div>
 				<?php endif; ?>
                 <div class="tourfic-single-left">
+					<div class="default-tags-container">
+						<?php 
+						if(sizeof($hotel_multiple_tags) > 0) {
+							foreach($hotel_multiple_tags as $tag) {
+								$hotel_tag_name = !empty($tag['hotel-tag-title']) ? __($tag['hotel-tag-title'], "tourfic") : '';
+								$tag_background_color = !empty($tag["hotel-tag-color-settings"]["background"]) ? $tag["hotel-tag-color-settings"]["background"] : "#003162";
+								$tag_font_color = !empty($tag["hotel-tag-color-settings"]["font"]) ? $tag["hotel-tag-color-settings"]["font"] : "#fff";
+
+								echo <<<EOD
+									<span class="default-single-tag" style="color: $tag_font_color; background-color: $tag_background_color">$hotel_tag_name</span>
+								EOD;
+							}
+						}
+						?>
+					</div>
                     <a href="<?php echo esc_url( $url ); ?>">
 						<?php
 						if ( has_post_thumbnail() ) {

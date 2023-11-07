@@ -1455,7 +1455,46 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 			),
 		),
 
-		// // Terms & Conditions
+		// Multiple tags for tours
+		'tours_multiple_tags' => array(
+			'title'  => __( 'Multiple Tags', 'tourfic' ),
+			'icon'   => 'fa fa-list',
+			'fields' => array(
+				array(
+					'id'           => 'tf-tour-tags',
+					'type'         => 'repeater',
+					'label'        => __( 'Multiple Tags', 'tourfic' ),
+					'button_title' => __( 'Add / Insert New Tag', 'tourfic' ),
+					'fields'       => array(
+
+						array(
+							'id'    => 'tour-tag-title',
+							'type'  => 'text',
+							'label' => __( 'Tag', 'tourfic' ),
+						),
+
+						array(
+							'id'       => 'tour-tag-color-settings',
+							'type'     => 'color',
+							'label'    => __( 'Tag Colors', 'tourfic' ),
+							'subtitle' => __( 'Colors of Tag Background and Font', 'tourfic' ),
+							'multiple' => true,
+							'inline'   => true,
+							'colors'   => array(
+								'background' => __( 'Background', 'tourfic' ),
+								'font'   => __( 'Font', 'tourfic' ),
+							),
+							'default' => array(
+								'background' => '#003162',
+								'font' => '#fff'
+							),
+						),
+					),
+				),
+			),
+		),
+
+		// Terms & Conditions
 		'terms_and_conditions' => array(
 			'title'  => __( 'Terms & Conditions', 'tourfic' ),
 			'icon'   => 'fa-regular fa-square-check',
