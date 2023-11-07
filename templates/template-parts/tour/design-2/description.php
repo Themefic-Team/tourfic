@@ -7,9 +7,6 @@
         <li><a href="#tf-tour-itinerary">
             <?php _e("Tour Plan", "tourfic"); ?>
         </a></li>
-        <li><a href="#tf-tour-calendar">
-            <?php _e("Calendar", "tourfic"); ?>
-        </a></li>
         <li><a href="#tf-tour-faq">
             <?php _e("FAQ's", "tourfic"); ?>
         </a></li>

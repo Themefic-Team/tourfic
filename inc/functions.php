@@ -2555,11 +2555,6 @@ function tf_template_3_migrate_data() {
 					"tour-section" => "Itinerary",
 					"tour-section-slug" => "itinerary",
 					"tour-section-status" => "1"
-				),
-				array(
-					"tour-section" => "Calendar",
-					"tour-section-slug" => "calendar",
-					"tour-section-status" => "1"
 				)
 			);
 

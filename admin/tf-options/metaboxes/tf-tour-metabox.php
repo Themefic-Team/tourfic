@@ -933,6 +933,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'      => 'booking-by',
 					'type'    => 'select',
 					'label'   => __( 'Booking Type', 'tourfic' ),
+					'subtitle'  => __( 'Choose the type of booking you would like to implement for this tour.', 'tourfic' ),
 					'options' => array(
 						'1' => __( 'Default Booking (WooCommerce)', 'tourfic' ),
 						'2' => __( 'External Booking (Pro)', 'tourfic' ),
@@ -1067,14 +1068,14 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'    => 'itinerary-section-title',
 					'type'  => 'text',
-					'label' => __( 'Section Title', 'tourfic' ),
+					'label' => __( 'Title of the section', 'tourfic' ),
+					'subtitle' => __( 'This text will appear as the heading of the Tour Itinerary section on the frontend.', 'tourfic' ),
 					'default' => __("Travel Itinerary", 'tourfic'),
 				),
 				array(
 					'id'           => 'itinerary',
 					'type'         => 'repeater',
 					'label' => __( 'Title of the section', 'tourfic' ),
-					'subtitle' => __( 'This text will appear as the heading of the Tour Itinerary section on the frontend.', 'tourfic' ),
 					'button_title' => __( 'Add New Itinerary', 'tourfic' ),
 					'fields'       => array(
 						array(
@@ -1392,6 +1393,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'           => 'faqs',
 					'type'         => 'repeater',
 					'label'        => __( 'FAQs', 'tourfic' ),
+					'subtitle'    => __( 'Click the button below to add Frequently Asked Questions (FAQs) for your tour. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each FAQ using the icons on the right side.', 'tourfic' ),
 					'button_title' => __( 'Add New Faq', 'tourfic' ),
 					'fields'       => array(
 						array(

@@ -1663,27 +1663,44 @@ function tf_single_tour_booking_form( $post_id ) {
 
             <!-- bottom bar -->
             <div class="tf-bottom-booking-bar">
-                <div class="tf-bottom-booking-fields">
-                    <div class="tf_selectperson-wrap tf-bottom-booking-field">
-                        <div class="tf-bottom-booking-field-icon">
-                            <i class="ri-user-line"></i>
+                
+				<div class="tf-booking-form-fields">
+					
+					<div class="tf-booking-form-checkinout">
+						<span class="tf-booking-form-title"><?php _e("Select Date", "tourfic"); ?></span>
+						<div class="tf-booking-date-wrap">
+							<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
+							<span class="tf-booking-month">
+								<span><?php _e("Month", "tourfic"); ?></span>
+								<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+							</span>
+						</div>
+						<input type="text" class="tf-field tours-check-in-out" placeholder="<?php _e( "Select Date", "tourfic" ); ?>" value="" required/>
+
+					</div>
+					<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' ) { ?>
+                        <div class="tf-bottom-booking-field check-in-time-div" id="" style="display: none;">
+                            <select class="tf-field" name="check-in-time" id=""></select>
                         </div>
-                        <div class="tf_input-inner">
-			                <?php if ( $custom_avail == true || ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-                                <div class="adults-text"><?php echo ( ! empty( $adults ) ? $adults : '0' ) . ' ' . __( "Adults", "tourfic" ); ?></div>
-			                <?php } ?>
-			                <?php if ( $custom_avail == true || ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-                                <div class="person-sep"></div>
-                                <div class="child-text"><?php echo ( ! empty( $child ) ? $child : '0' ) . ' ' . __( "Children", "tourfic" ); ?></div>
-			                <?php } ?>
-			                <?php if ( $custom_avail == true || ( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-                                <div class="person-sep"></div>
-                                <div class="infant-text"><?php echo ( ! empty( $infant ) ? $infant : '0' ) . ' ' . __( "Infant", "tourfic" ); ?></div>
-			                <?php } ?>
-                        </div>
-                        <div class="tf_acrselection-wrap" style="display: none;">
-                            <div class="tf_acrselection-inner">
-				                <?php if ( $custom_avail == true || ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+	                <?php } ?>
+					<div class="tf-booking-form-guest-and-room">
+						
+						<div class="tf-booking-form-guest-and-room-inner">
+							<span class="tf-booking-form-title"><?php _e("Guests", "tourfic"); ?></span>
+							<div class="tf-booking-guest-and-room-wrap">
+								<span class="tf-guest tf-booking-date">
+									<?php _e("01", "tourfic"); ?>
+								</span> 
+								<span class="tf-booking-month">
+									<span><?php _e("Guest", "tourfic"); ?></span>
+									<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+								</span>
+							</div>
+						</div>
+						
+						<div class="tf_acrselection-wrap">
+							<div class="tf_acrselection-inner">
+								<?php if ( $custom_avail == true || ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
                                     <div class="tf_acrselection">
                                         <div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
                                         <div class="acr-select">
@@ -1713,26 +1730,10 @@ function tf_single_tour_booking_form( $post_id ) {
                                         </div>
                                     </div>
 				                <?php } ?>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tf-bottom-booking-field">
-                        <div class="tf-bottom-booking-field-icon">
-                            <i class="ri-calendar-todo-line"></i>
-                        </div>
-                        <input type="text" class="tf-field tours-check-in-out" placeholder="<?php _e( "Select Date", "tourfic" ); ?>" value="" required/>
-                    </div>
-
-	                <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' ) { ?>
-                        <div class="tf-bottom-booking-field check-in-time-div" id="" style="display: none;">
-                            <div class="tf-bottom-booking-field-icon">
-                                <i class="ri-time-line"></i>
-                            </div>
-                            <select class="tf-field" name="check-in-time" id=""></select>
-                        </div>
-	                <?php } ?>
-                </div>
+							</div>
+						</div>
+					</div>
+				</div>
 
                 <div class="tf-tours-booking-btn tf-booking-bttns">
                     <div class="tf-btn">

@@ -102,7 +102,7 @@
                 .tf-highlights-wrapper { 
                     display: flex;
                     gap: 24px;
-                    padding: 16px 0;
+                    padding: 34px 0;
                     background: #FCF4E8;
                     margin-bottom: 16px;
                     .tf-highlights-icon { 
@@ -115,6 +115,7 @@
                     }
                     .ft-highlights-details { 
                         width: 80%;
+                        padding-right: 34px;
                         ul { 
                             margin: 0;
                             padding: 0;

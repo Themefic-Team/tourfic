@@ -165,7 +165,6 @@
                         include TF_TEMPLATE_PART_PATH . 'tour/design-2/highlights.php';
                         include TF_TEMPLATE_PART_PATH . 'tour/design-2/include-exclude.php';
                         include TF_TEMPLATE_PART_PATH . 'tour/design-2/itinerary.php';
-                        include TF_TEMPLATE_PART_PATH . 'tour/design-2/calendar.php';
                     }
                     ?>
                     
@@ -255,11 +254,7 @@
                         <?php tf_review_form(); ?>
                     </div>
                     <?php } } } ?>
-                        <script>
-                            $(".tf-template-3 .tf-review-open").click(function () {
-                                $(".tf-template-3 .tf-review-form-wrapper").slideToggle();
-                            });
-                        </script>
+                        
                     </div>
                 </div>
             </div>
