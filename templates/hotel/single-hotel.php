@@ -28,6 +28,8 @@ while ( have_posts() ) : the_post();
 	 * Get hotel meta values
 	 */
 	$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
+    echo "<pre>";
+    print_r($meta);
 
 	$disable_share_opt  = ! empty( $meta['h-share'] ) ? $meta['h-share'] : '';
 	$disable_review_sec = ! empty( $meta['h-review'] ) ? $meta['h-review'] : '';
