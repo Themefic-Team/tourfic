@@ -330,6 +330,9 @@
             padding-right: 10px;
             width: auto;
         }
+        .tf-bottom-booking-bar .tf-bottom-booking-field{
+            width: auto !important;
+        }
         
     }
     .tf-template-3.tf-hotel-single {
@@ -395,6 +398,15 @@
                 width: 32% !important;
                 padding: 0px 10px;
             }
+        }
+        .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-checkinout,
+        .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room,
+        .tf-bottom-booking-bar .tf-booking-form-fields .tf-bottom-booking-field.check-in-time-div select{
+            padding: 0px 10px;
+        }
+        .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room .tf_acrselection-wrap.tf-show{
+            right: 0;
+            left: auto;
         }
     }
     .tf-template-3.tf-hotel-single {

@@ -11640,6 +11640,9 @@ html {
     padding-right: 10px;
     width: auto;
   }
+  .tf-template-3 .tf-bottom-booking-bar .tf-bottom-booking-field {
+    width: auto !important;
+  }
   .tf-template-3.tf-hotel-single .tf-popup-left {
     width: 100%;
   }
@@ -11695,6 +11698,15 @@ html {
     border-right: 1px solid #D6D4D2;
     width: 32% !important;
     padding: 0px 10px;
+  }
+  .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-checkinout,
+  .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room,
+  .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-bottom-booking-field.check-in-time-div select {
+    padding: 0px 10px;
+  }
+  .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room .tf_acrselection-wrap.tf-show {
+    right: 0;
+    left: auto;
   }
   .tf-template-3.tf-hotel-single .tf-available-rooms-wrapper .tf-available-room .tf-available-room-gallery .tf-room-gallery:nth-child(n+1) {
     position: inherit !important;
