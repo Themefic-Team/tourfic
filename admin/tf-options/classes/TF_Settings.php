@@ -222,7 +222,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			?>
 			<div class="tf-setting-dashboard">
 				<!-- dashboard-header-include -->
-				<?php echo tf_dashboard_header(); ?>
+				<?php tf_dashboard_header(); ?>
 
 				<div class="tf-setting-preview">
 				<!-- dashboard-banner-section -->

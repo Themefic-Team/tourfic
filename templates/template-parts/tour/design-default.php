@@ -17,29 +17,39 @@
                     <div class="tf-wishlist">
                         <?php
                         // Wishlist
+                        if($disable_wishlist_tour==0){
+                            if ( is_user_logged_in() ) {
+                            if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) { ?>
+                                <span class="single-tour-wish-bt"><i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>"  data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
+                                    echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
+                                } ?>></i></span>
+                            <?php }
+                            } else {
+                            if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) { ?>
+                            <span class="single-tour-wish-bt"><i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
+                                echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
+                            } ?>></i></span>
+                            <?php } } ?>
+                        <?php }else{
                         if ( tfopt( 'wl-bt-for' ) && in_array( '2', tfopt( 'wl-bt-for' ) ) ) {
                             if ( is_user_logged_in() ) {
                                 if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
                                     ?>
-                                    <span class="single-tour-wish-bt"><i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>"
-                                                                            data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>"
-                                                                            data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
-                                            echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
-                                        } ?>></i></span>
+                                    <span class="single-tour-wish-bt"><i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>"  data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
+                                        echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
+                                    } ?>></i></span>
                                     <?php
                                 }
                             } else {
                                 if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {
                                     ?>
-                                    <span class="single-tour-wish-bt"><i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>"
-                                                                            data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>"
-                                                                            data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
-                                            echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
-                                        } ?>></i></span>
+                                    <span class="single-tour-wish-bt"><i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
+                                        echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
+                                    } ?>></i></span>
                                     <?php
                                 }
                             }
-                        }
+                        } }
                         ?>
                     </div>
                 </div>
@@ -79,7 +89,7 @@
                             </div>
                             <div class="tf-contact-info-wrapper" id="tf-contact-info" style="display:none">
                                 <div class="tf-contact-info">
-                                    <h3><?php echo !empty($meta['contact-info-section-title']) ? esc_html($meta['contact-info-section-title']) : __("Contact Information","tourfic"); ?></h3>
+                                    <h3><?php echo !empty($meta['contact-info-section-title']) ? esc_html($meta['contact-info-section-title']) : ''; ?></h3>
                                     <?php 
                                     if(!empty($email)){ ?>
                                         <div class="tf-email">
@@ -304,7 +314,7 @@
             <div class="tf-highlight-content">
                 <div class="tf-highlight-item">
                     <div class="tf-highlight-text">
-                        <h2 class="section-heading"><?php echo !empty($meta['highlights-section-title']) ? esc_html($meta['highlights-section-title']) : __("Highlights","tourfic"); ?></h2>
+                        <h2 class="section-heading"><?php echo !empty($meta['highlights-section-title']) ? esc_html($meta['highlights-section-title']) : ''; ?></h2>
                         <p><?php echo $highlights; ?></p>
                     </div>
                     <?php if ( ! empty( $meta['hightlights_thumbnail'] ) ): ?>
@@ -393,7 +403,7 @@
             <div class="tf-travel-itinerary-wrapper gray-wrap sp-50">
                 <div class="tf-container">
                     <div class="tf-travel-itinerary-content">
-                        <h2 class="section-heading"><?php echo !empty($meta['itinerary-section-title']) ? esc_html($meta['itinerary-section-title']) : __("Travel Itinerary","tourfic"); ?></h2>
+                        <h2 class="section-heading"><?php echo !empty($meta['itinerary-section-title']) ? esc_html($meta['itinerary-section-title']) : ''; ?></h2>
                         <div class="tf-travel-itinerary-items-wrapper">
                             <?php 
                             foreach ( $itineraries as $itinerary ) {
@@ -493,21 +503,52 @@
         <div class="tf-faq-wrapper tour-faq sp-50">
             <div class="tf-container">
                 <div class="tf-faq-sec-title">
-                    <h2 class="section-heading"><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : __("Frequently Asked Questions","tourfic"); ?></h2>
+                    <h2 class="section-heading"><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : ''; ?></h2>
                     <p><?php _e( "Let’s clarify your confusions. Here are some of the Frequently Asked Questions which most of our client asks.", 'tourfic' ); ?></p>
                 </div>
 
                 <div class="tf-faq-content-wrapper">
                     <?php 
                     $tf_enquiry_section_status = !empty($meta['t-enquiry-section']) ? $meta['t-enquiry-section'] : "";
-                    if(!empty($tf_enquiry_section_status)){
+                    $tf_enquiry_section_icon = !empty($meta['t-enquiry-option-icon']) ? esc_html($meta['t-enquiry-option-icon']) : '';
+                    $tf_enquiry_section_title = !empty($meta['t-enquiry-option-title']) ? esc_html($meta['t-enquiry-option-title']) : '';
+                    $tf_enquiry_section_des = !empty($meta['t-enquiry-option-content']) ? esc_html($meta['t-enquiry-option-content']) : '';
+                    $enquery_button_text = !empty($meta['t-enquiry-option-btn']) ? esc_html($meta['t-enquiry-option-btn']) : '';
+
+                    if(!empty($tf_enquiry_section_status) && ( !empty($tf_enquiry_section_icon) || !empty($tf_enquiry_section_title) || !empty($enquery_button_text))){
                     ?>
+                    
                     <div class="tf-ask-question">
-                        <h3><?php echo !empty($meta['t-enquiry-option-title']) ? esc_html($meta['t-enquiry-option-title']) : __("Have a question in mind","tourfic"); ?></h3>
-                        <p><?php echo !empty($meta['t-enquiry-option-content']) ? esc_html($meta['t-enquiry-option-content']) : __("Looking for more info? Send a question to the property to find out more.","tourfic"); ?></p>
-                        <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="btn-styled"><span>
-                            <?php echo !empty($meta['t-enquiry-option-btn']) ? esc_html($meta['t-enquiry-option-btn']) : __("Ask a Question","tourfic"); ?>
-                        </span></a></div>
+                        <div class="default-enquiry-title-section">
+                            <?php
+                            if(!empty($tf_enquiry_section_icon)) {
+                                ?>
+                                <i class="<?php echo $tf_enquiry_section_icon ?>" aria-hidden="true"></i>
+                                <?php
+                            }
+                            if(!empty($tf_enquiry_section_title)) {
+                                ?>
+                                <h3><?php echo $tf_enquiry_section_title ?></h3>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                        <?php
+                        if(!empty($tf_enquiry_section_des)) {
+                            ?>
+                                <p><?php echo $tf_enquiry_section_des; ?></p>
+                            <?php
+                            }
+                            ?>
+                        <?php 
+                        if(!empty($enquery_button_text)) {
+                            ?>
+                            <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="btn-styled">
+                                <span><?php echo $enquery_button_text; ?>
+                            </span></a></div>
+                            <?php
+                        }
+                        ?>
                     </div>
                     <?php } ?>
                     <div class="tf-faq-items-wrapper">
@@ -534,7 +575,7 @@
         <div class="toc-section gray-wrap sp-50">
             <div class="tf-container">
                 <div class="tf-toc-wrap">
-                    <h2 class="section-heading"><?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : __("Tour Terms & Conditions","tourfic"); ?></h2>
+                    <h2 class="section-heading"><?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : ''; ?></h2>
                     <div class="tf-toc-inner">
                         <?php echo wpautop( $terms_and_conditions ); ?>
                     </div>
@@ -549,7 +590,7 @@
         <div id="tf-review" class="review-section sp-50">
             <div class="tf-container">
                 <div class="reviews">
-                    <h2 class="section-heading"><?php echo !empty($meta['review-section-title']) ? esc_html($meta['review-section-title']) : __("Average Guest Reviews","tourfic"); ?></h2>
+                    <h2 class="section-heading"><?php echo !empty($meta['review-section-title']) ? esc_html($meta['review-section-title']) : ''; ?></h2>
                     <?php comments_template(); ?>
                 </div>
             </div>

@@ -381,13 +381,16 @@ ul.tf-room-checkbox label{
     color: #fff;
 }
 
-.availability-table td {
+.availability-table td,
+.availability-table th {
     border-left: 1px solid #c8e2fc;
     border-bottom: 1px solid #c8e2fc;
     border-top: none;
     border-right: none;
 }
-
+.availability-table th{
+    border-top: 1px solid #c8e2fc;
+}
 .availability-table td.reserve {
     border-right: 1px solid #c8e2fc;
 }
@@ -514,6 +517,25 @@ span.tf-price .amount {
 
 .room-feature-list li {
     margin-right: 15px;
+}
+.tf-hotel-details-qc-gallelry{
+    .tf-details-qc-slider{
+        .tf-details-qcs{
+            img{
+                width: 100%;
+            }
+        }
+    }
+    .tf-details-qc-slider-nav {
+        margin-top: 0px;
+        .tf-details-qcs.is-active img {
+            border: 5px solid #1F2937;
+        }
+        .tf-details-qcs img {
+            min-height: 50px;
+            max-height: 50px;
+        }
+    }
 }
 
 .tf-room{

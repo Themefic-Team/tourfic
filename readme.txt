@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
 Requires at least: 5.4
 Tested up to: 6.3
-Stable tag: 2.10.3
+Stable tag: 2.10.5
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -12,7 +12,7 @@ Ultimate Tour, Travel & hotel booking WordPress plugin. Build your own travel ag
 
 == Description ==
 
-= The easiest and best WordPress Hotel & Tour Booking Plugin - Tourfic | Build Your own travel agency website like Agoda, Booking.com, Airbnb, Hotels.com =
+= The easiest and best WordPress Hotel, Tour, & Apartment Booking Plugin - Tourfic | Build Your own travel agency website like Agoda, Booking.com, Airbnb, Hotels.com =
 
 👉 Official Demo Link: [Tourfic Live Preview](https://themefic.com/tourfic)
 👉 Buy Pro Version: [Tourfic Pro](https://themefic.com/tourfic/pricing)
@@ -20,11 +20,11 @@ Ultimate Tour, Travel & hotel booking WordPress plugin. Build your own travel ag
 👉 Installation Guide: [Tourfic Documentation](https://themefic.com/docs/tourfic/)
 👉 Join Our FB Community: [Tourfic Facebook Group](https://www.facebook.com/groups/tourfic)
 
-Tourfic is the Ultimate Hotel Booking and Travel Booking WordPress plugin that can help you to develop a hotel booking website and travel booking website effortlessly. With its dependency with WooCommerce, user-friendly interface and advanced pricing logics, you can easily manage all your online Booking system along with order system and any payment method of WooCommerce. 
+Tourfic is the Ultimate Hotel Booking and Travel Booking, Apartment Booking WordPress plugin that can help you to develop a hotel booking website, travel booking,and Apartment Booking website effortlessly. With its dependency with WooCommerce, user-friendly interface and advanced pricing logics, you can easily manage all your online Booking system along with order system and any payment method of WooCommerce. 
 
-In addition, you can allow customers to register account and book their hotel or tour packages online. To be precise, you can easily develop a website similar to Booking.com, Agoda, Hotels.com, Airbnb etc in no time with the help of Tourfic. 
+In addition, you can allow customers to register account and book their hotel, apartment, and tour packages online. To be precise, you can easily develop a website similar to Booking.com, Agoda, Hotels.com, Airbnb etc in no time with the help of Tourfic. 
 
-This All-in-One Travel Booking WordPress plugin consists of almost all the basic to advanced options which you may need for your next WordPress based Hotel or Travel website:
+This All-in-One Travel Booking WordPress plugin consists of almost all the basic to advanced options which you may need for your next WordPress based Hotel, Apartment, and Travel website:
 
 = 🎉  WordPress Hotel Booking & Management System =
 * Add Unlimited Hotels
@@ -99,24 +99,23 @@ This All-in-One Travel Booking WordPress plugin consists of almost all the basic
 * Apartment Specific Room Person Management( Pro )
 * Apartment Specific Room gallery( Pro ) 
 * Apartment Specific Room Type( Pro ) 
-* Apartment Specific Room Type( Pro )
 * Property Surroundings( Pro )
 
 = 🎉 Backend/Admin booking( Pro ) =
-* Backend/Admin booking for Hotel 
+* Backend/Admin booking for Hotel
 * Backend/Admin booking for Tour
 
 = 🎉 External Booking( Pro ) =
 * External Booking for Tour
 * External Booking for Hotel
 
-= 🎉  Multi-Vendor Functions (Pro) =
-* Vendors can add unlimited hotels, tours, and apartments with all the fields (Pro)
-* Vendors have dedicated order details pages (Pro)
-* Dedicated login and registration system for vendors (Pro)
-* Enable/disable specific vendors (Pro)
-* Email verification for vendors (Pro)
-* Frontend Dashboard for Vendors (Coming soon on Pro)
+= 🎉  Multi-Vendor Functions(Pro) =
+* Vendors can add unlimited hotels, tours, and apartments with all the fields(Pro)
+* Vendors have dedicated order details pages(Pro)
+* Dedicated login and registration system for vendors(Pro)
+* Enable/disable specific vendors(Pro)
+* Email verification for vendors(Pro)
+* Frontend Dashboard for Vendors(Pro)
 
 = 🎉  Search Function =
 * Separate or combined search box for hotels and tours
@@ -128,14 +127,14 @@ This All-in-One Travel Booking WordPress plugin consists of almost all the basic
 * TravelPayouts Affiliate Program (Pro)
 
 = 🎉  Wishlist =
-* Wishlist for hotels and tours
+* Wishlist for hotels, tours, apartment
 * Wishlist page
 * Wishlist for logged in and log out users (Pro)
 
 = 🎉  Customer Review System =
-* Review System for hotels and tours
+* Review System for hotels, tours, and apartments
 * Enable/disable Review Section
-* Change Existing or Create New Review fields / parameters
+* Change Existing or Create New Review fields
 * Review for logged in and log out users
 * Delete old review fields
 
@@ -150,13 +149,14 @@ This All-in-One Travel Booking WordPress plugin consists of almost all the basic
 * Customer Review slider
 * Tours
 * Hotels
+* Apartments
 * Search Form (Horizontal)
 * Search Result
 * Wishlist
 * Login Form (Pro)
 * Registration Form (Pro)
 
-= 🎉  Booking data on Dashboard for Hotel/Tour =
+= 🎉  Booking data on Dashboard for Hotel/Tour/Apartment =
 * Default Analytics Tool Provided by WooCommerce
 * Tourfic Custom Booking Module: Order ID, Order Details, Order Date, Order Status (Pro)
 * Tourfic Custom Booking Module: Customer Information (Pro)
@@ -165,8 +165,8 @@ This All-in-One Travel Booking WordPress plugin consists of almost all the basic
 = 🎉  Miscellaneous =
 * Complete Style Panel
 * Easy to use Option Panel
-* Disable Hotel or Tour Features Completely
-* Change Permalinks of Hotel & Tour
+* Disable Hotel, Tour, Apartment Features Completely
+* Change Permalinks of Hotel, Tour, Apartment
 * Speed Optimization (Minification of Tourfic CSS, JS & Use of CDN service for 3rd Party asset files) (Pro)
 
 <strong>Demo Link </strong>
@@ -186,11 +186,12 @@ We believe the free version is good enough for most business. However, we have a
 
 ### How to create a Travel & Tour Booking Website with WooCommerce & Tourfic:
 
-[youtube https://www.youtube.com/watch?v=99jUEJQIxkg]
+[youtube https://www.youtube.com/watch?v=99jUEJQIxkg]What is Tourfic?
 
 **With Tourfic, You can:**
 - Quickly and easily build a professional website for your tour operator or travel agency.
 - Develop a hotel reservation system for your hotel website.
+- Develop a apartment booking system for your website.
 - Create your own professional tour operator and travel agency website within 59 minutes. The site would be similar to Booking.com, Agoda, Hotels.com, Airbnb etc.
 - Build your own online tour business and make money online by selling your tours worldwide with any payment of WooCommerce.
 
@@ -386,7 +387,7 @@ The icon and banner used on this plugin are taken from <a href="https://www.flat
 
 = What is Tourfic? =
 
-Tourfic is the ultimate WordPress travel plugin for hotel booking, tour operator and travel agency websites.
+Tourfic is the ultimate WordPress travel plugin for hotel booking, apartment booking, tour operator and travel agency websites.
 
 = How to install Tourfic? =
 
@@ -444,10 +445,26 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 == Changelog ==
 
+= 2.10.5 - 06 November 2023 =
+
+- Improvement: Settings Panel Label Updated
+- Fixed: Discount issue 
+- Fixed: Booking details font family issue for Mac
+- Improvement: Hotel room inventory moved to free
+- Improvement: Review filed moved to free
+- Improvement: Optimization moved to free
+
+= 2.10.4 -  02 November 2023 =
+
+- Fixed: High-Performance Order Storage issue for Woocommerce
+- Compatibility: Compitible with WooCommerce 8.2.1
+- Compatibility: Compitible with Elementor 3.17.2
+- Updated: readme.txt
+
 = 2.10.3 -  30 October 2023 =
 
 - Fixed: Fixed Booking Date issue
-- Compatibility: Checked with Elementor 3.17.1
+- Compatibility: Compitible with Elementor 3.17.1
 
 = 2.10.2 -  23 October 2023 =
 

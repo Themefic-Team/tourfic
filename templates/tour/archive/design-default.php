@@ -4,7 +4,9 @@
 		do_action( 'tf_before_container' );
 	?>
 	<div class="tf-container">
-
+		<?php 
+		$tf_defult_views = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour_archive_view'] ) ? tf_data_types(tfopt( 'tf-template' ))['tour_archive_view'] : 'list';
+		?>
 		<div class="search-result-inner">
 			<!-- Start Content -->
 			<div class="tf-search-left">				
@@ -18,11 +20,11 @@
 						<span><?php echo ')'; ?> </span>
 					</div>
 		            <div class="tf-list-grid">
-		                <a href="#list-view" data-id="list-view" class="change-view" title="<?php _e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
-		                <a href="#grid-view" data-id="grid-view" class="change-view" title="<?php _e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
+		                <a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php _e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
+		                <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php _e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
 		            </div>
 		        </div>
-				<div class="archive_ajax_result">
+				<div class="archive_ajax_result <?php echo $tf_defult_views=="grid" ? esc_attr('tours-grid') : '' ?>">
 					<?php
 					if ( $loop->have_posts() ) {          
 						while ( $loop->have_posts() ) {

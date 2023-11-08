@@ -277,6 +277,8 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 		// date format for apartments
 		$date_format_change_apartments = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
+		$disable_apartment_child_search  = ! empty( tfopt( 'disable_apartment_child_search' ) ) ? tfopt( 'disable_apartment_child_search' ) : '';
+		$disable_apartment_infant_search  = ! empty( tfopt( 'disable_apartment_infant_search' ) ) ? tfopt( 'disable_apartment_infant_search' ) : '';
 		?>
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
             <div class="tf_homepage-booking">
@@ -298,10 +300,14 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                 <div class="tf_selectperson-wrap">
                     <div class="tf_input-inner">
                         <div class="adults-text"><?php _e( '1 Adults', 'tourfic' ); ?></div>
-                        <div class="person-sep"></div>
-                        <div class="child-text"><?php _e( '0 Children', 'tourfic' ); ?></div>
-                        <div class="person-sep"></div>
-                        <div class="infant-text"><?php _e( '0 Infant', 'tourfic' ); ?></div>
+                        <?php if ( empty($disable_apartment_child_search) ): ?>
+                            <div class="person-sep"></div>
+                            <div class="child-text"><?php _e( '0 Children', 'tourfic' ); ?></div>
+                        <?php endif; ?>
+	                    <?php if ( empty($disable_apartment_infant_search) ): ?>
+                            <div class="person-sep"></div>
+                            <div class="infant-text"><?php _e( '0 Infant', 'tourfic' ); ?></div>
+                        <?php endif; ?>
                     </div>
                     <div class="tf_acrselection-wrap">
                         <div class="tf_acrselection-inner">
@@ -313,22 +319,26 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
-                            <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
-                                <div class="acr-select">
-                                    <div class="acr-dec">-</div>
-                                    <input type="number" name="children" id="children" min="0" value="0"/>
-                                    <div class="acr-inc">+</div>
+	                        <?php if ( empty($disable_apartment_child_search) ): ?>
+                                <div class="tf_acrselection">
+                                    <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
+                                    <div class="acr-select">
+                                        <div class="acr-dec">-</div>
+                                        <input type="number" name="children" id="children" min="0" value="0"/>
+                                        <div class="acr-inc">+</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
-                                <div class="acr-select">
-                                    <div class="acr-dec">-</div>
-                                    <input type="number" name="infant" id="infant" min="0" value="0"/>
-                                    <div class="acr-inc">+</div>
+                            <?php endif; ?>
+	                        <?php if ( empty($disable_apartment_infant_search) ): ?>
+                                <div class="tf_acrselection">
+                                    <div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
+                                    <div class="acr-select">
+                                        <div class="acr-dec">-</div>
+                                        <input type="number" name="infant" id="infant" min="0" value="0"/>
+                                        <div class="acr-inc">+</div>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

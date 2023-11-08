@@ -399,14 +399,14 @@ function tf_hotel_airport_service_callback() {
 					$child_price = ! empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $rooms[ $room_id ]['child_price'];
 
 					if ( $hotel_discount_type == "percent" ) {
-						$room_price  = floatval( preg_replace( '/[^\d.]/', '', number_format( $room_price - ( ( $room_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
-						$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
-						$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $child_price - ( ( $child_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+						$room_price  = !empty($room_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( $room_price - ( ( $room_price / 100 ) * $hotel_discount_amount ), 2 ) ) ) : 0;
+						$adult_price = !empty($adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * $hotel_discount_amount ), 2 ) ) ) : 0;
+						$child_price = !empty($child_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( $child_price - ( ( $child_price / 100 ) * $hotel_discount_amount ), 2 ) ) ) : 0;
 					}
 					if ( $hotel_discount_type == "fixed" ) {
-						$room_price  = floatval( preg_replace( '/[^\d.]/', '', number_format( $room_price - $hotel_discount_amount ), 2 ) );
-						$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - $hotel_discount_amount ), 2 ) );
-						$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $child_price - $hotel_discount_amount ), 2 ) );
+						$room_price  = !empty($room_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( $room_price - $hotel_discount_amount ), 2 ) ) : 0;
+						$adult_price = !empty($adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - $hotel_discount_amount ), 2 ) ) : 0;
+						$child_price = !empty($child_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( $child_price - $hotel_discount_amount ), 2 ) ) : 0;
 					}
 					$total_price += $pricing_by == '1' ? $room_price : ( ( $adult_price * $adult ) + ( $child_price * $child ) );
 				};
@@ -431,12 +431,12 @@ function tf_hotel_airport_service_callback() {
 				$child_price = ! empty( $rooms[ $room_id ]['child_price'] ) ? $rooms[ $room_id ]['child_price'] : 0;
 
 				if ( $hotel_discount_type == "percent" ) {
-					$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
-					$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $child_price - ( ( $child_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+					$adult_price = !empty($adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * $hotel_discount_amount ), 2 ) ) ) : 0;
+					$child_price = !empty($child_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( $child_price - ( ( $child_price / 100 ) * $hotel_discount_amount ), 2 ) ) ) : 0;
 				}
 				if ( $hotel_discount_type == "fixed" ) {
-					$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - $hotel_discount_amount ), 2 ) );
-					$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $child_price - $hotel_discount_amount ), 2 ) );
+					$adult_price = !empty($adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - $hotel_discount_amount ), 2 ) ) : 0;
+					$child_price = !empty($child_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( $child_price - $hotel_discount_amount ), 2 ) ) : 0;
 				}
 
 				$adult_price = $adult_price * $adult;
@@ -798,14 +798,14 @@ function tf_room_availability_callback() {
 
 	if( $tf_hotel_selected_template_check == "design-1" ){
 	?>
-	<table class="tf-availability-table">
+	<table class="tf-availability-table" cellpadding="0" cellspacing="0">
 	<thead>
 		<tr>
 			<th class="description" colspan="3"><?php _e( 'Room Details', 'tourfic' ); ?></th>
 		</tr>
 	</thead>
 	<?php }else{ ?>
-    <table class="availability-table">
+    <table class="availability-table" cellpadding="0" cellspacing="0">
     <thead>
     <tr>
         <th class="description"><?php _e( 'Room Details', 'tourfic' ); ?></th>
@@ -912,7 +912,7 @@ function tf_room_availability_callback() {
 					$avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
 				}
 
-				if ( ! empty( $order_ids ) && function_exists( 'is_tf_pro' ) && is_tf_pro() && $reduce_num_room == true ) {
+				if ( ! empty( $order_ids ) && $reduce_num_room == true ) {
 
 					# Get backend available date range as an array
 					if ( $avil_by_date ) {
@@ -1180,6 +1180,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 		// date format for users output
 		$hotel_date_format_for_users = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
+		$disable_hotel_child_search  = ! empty( tfopt( 'disable_hotel_child_search' ) ) ? tfopt( 'disable_hotel_child_search' ) : '';
 		?>
         <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
             <div class="tf_homepage-booking">
@@ -1204,8 +1205,10 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                             <i class="fas fa-user"></i>
                         </span>
                         <div class="adults-text"><?php echo ( ! empty( $adults ) ? $adults : '1' ) . ' ' . __( 'Adults', 'tourfic' ); ?></div>
-                        <div class="person-sep"></div>
-                        <div class="child-text"><?php echo ( ! empty( $child ) ? $child : '0' ) . ' ' . __( 'Children', 'tourfic' ); ?></div>
+                        <?php if(empty($disable_hotel_child_search)) : ?>
+                            <div class="person-sep"></div>
+                            <div class="child-text"><?php echo ( ! empty( $child ) ? $child : '0' ) . ' ' . __( 'Children', 'tourfic' ); ?></div>
+                        <?php endif; ?>
                         <div class="person-sep"></div>
                         <div class="room-text"><?php echo ( ! empty( $room ) ? $room : '1' ) . ' ' . __( 'Room', 'tourfic' ); ?></div>
                     </div>
@@ -1220,14 +1223,16 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
-                            <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
-                                <div class="acr-select">
-                                    <div class="acr-dec">-</div>
-                                    <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
-                                    <div class="acr-inc">+</div>
+	                        <?php if(empty($disable_hotel_child_search)) : ?>
+                                <div class="tf_acrselection">
+                                    <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
+                                    <div class="acr-select">
+                                        <div class="acr-dec">-</div>
+                                        <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
+                                        <div class="acr-inc">+</div>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
                             <div class="tf_acrselection">
                                 <div class="acr-label"><?php _e( 'Rooms', 'tourfic' ); ?></div>
                                 <div class="acr-select">
@@ -1322,6 +1327,7 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
 
 		// date format setting
 		$hotel_date_format_for_users = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+		$disable_hotel_child_search  = ! empty( tfopt( 'disable_hotel_child_search' ) ) ? tfopt( 'disable_hotel_child_search' ) : '';
 		?>
         <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
             <div class="tf_homepage-booking">
@@ -1365,8 +1371,10 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                             <i class="fas fa-user"></i>
                         </span>
                         <div class="adults-text"><?php echo ( ! empty( $adults ) ? $adults : '1' ) . ' ' . __( 'Adults', 'tourfic' ); ?></div>
-                        <div class="person-sep"></div>
-                        <div class="child-text"><?php echo ( ! empty( $child ) ? $child : '0' ) . ' ' . __( 'Children', 'tourfic' ); ?></div>
+	                    <?php if(empty($disable_hotel_child_search)) : ?>
+                            <div class="person-sep"></div>
+                            <div class="child-text"><?php echo ( ! empty( $child ) ? $child : '0' ) . ' ' . __( 'Children', 'tourfic' ); ?></div>
+                        <?php endif; ?>
                         <div class="person-sep"></div>
                         <div class="room-text"><?php echo ( ! empty( $room ) ? $room : '1' ) . ' ' . __( 'Room', 'tourfic' ); ?></div>
                     </div>
@@ -1381,14 +1389,16 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
-                            <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
-                                <div class="acr-select">
-                                    <div class="acr-dec child-dec">-</div>
-                                    <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>" readonly>
-                                    <div class="acr-inc child-inc">+</div>
+	                        <?php if(empty($disable_hotel_child_search)) : ?>
+                                <div class="tf_acrselection">
+                                    <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
+                                    <div class="acr-select">
+                                        <div class="acr-dec child-dec">-</div>
+                                        <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>" readonly>
+                                        <div class="acr-inc child-inc">+</div>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
                             <div class="tf_acrselection">
                                 <div class="acr-label"><?php _e( 'Rooms', 'tourfic' ); ?></div>
                                 <div class="acr-select">
@@ -1400,10 +1410,9 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                         </div>
                         <!-- Children age input field based on children number -->
 						<?php
-
 						$children_age        = tfopt( 'children_age_limit' );
 						$children_age_status = tfopt( 'enable_child_age_limit' );
-						if ( ! empty( $children_age_status ) && $children_age_status == "1" ) {
+						if ( ! empty( $children_age_status ) && $children_age_status == "1" && empty($disable_hotel_child_search)) {
 							?>
                             <div class="tf-children-age-fields">
                                 <div class="tf-children-age" id="tf-age-field-0" style="display:none">
@@ -1977,16 +1986,11 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 							}
 						}
 					}
-					// echo "<pre>";
-					// // print_r(floatval( preg_replace( '/[^\d.]/', '', number_format( $b_room_price - ( ( $b_room_price / 100 ) * $hotel_discount_amount ), 2 ) ) ));
-					// print_r($room_price);
-					// echo "</pre>";
-					// die(); // added by - Sunvi
 				}
 			} else if ( $pricing_by == 2 ) {
 				if ( empty( $check_in_out ) ) {
-					$adult_price = $b_room['adult_price'];
-					$child_price = $b_room['child_price'];
+					$adult_price = !empty($b_room['adult_price']) ? $b_room['adult_price'] : '';
+					$child_price = !empty($b_room['child_price']) ? $b_room['child_price'] : '';
 					// discount calculation - start
 					if ( $hotel_discount_type == "percent" ) {
 						$dicount_adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
@@ -3498,12 +3502,12 @@ if ( ! function_exists( 'tf_hotel_booking_popup_callback' ) ) {
 
 				tf_get_deposit_amount( $rooms[ $room_id ], $price_total, $deposit_amount, $has_deposit );
 				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) {
-					if ( ! empty( $airport_service ) ) {
-						$tf_due_amount = ( $price_total + $airport_service_arr['price'] ) - $deposit_amount;
-					} else {
-						$tf_due_amount = $price_total - $deposit_amount;
-					}
-
+//					if ( ! empty( $airport_service ) ) {
+//						$tf_due_amount = ( $price_total + $airport_service_arr['price'] ) - $deposit_amount;
+//					} else {
+//						$tf_due_amount = $price_total - $deposit_amount;
+//					}
+					$tf_due_amount = $price_total - $deposit_amount;
 				}
 			}
 
@@ -3513,7 +3517,7 @@ if ( ! function_exists( 'tf_hotel_booking_popup_callback' ) ) {
 			$response['hotel_booking_summery'] = '';
 			for ( $guest_in = 1; $guest_in <= $total_people; $guest_in ++ ) {
 				$response['guest_info'] .= '<div class="tf-single-tour-traveller tf-single-travel">
-                <h4>' . sprintf( __( 'Traveler ', 'tourfic' ) ) . $guest_in . '</h4>
+                <h4>' . sprintf( __( 'Guest ', 'tourfic' ) ) . $guest_in . '</h4>
                 <div class="traveller-info">';
 				if ( empty( $hotel_guest_info_fields ) ) {
 					$response['guest_info'] .= '<div class="traveller-single-info">
@@ -3896,7 +3900,7 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
 
                 <!-- Popup Footer Control & Partial Payment -->
                 <div class="tf-booking-pagination">
-					<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] ) && 3 != $tf_booking_by ) {
+					<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] ) && 3 != $room_book_by ) {
 						$tf_deposit_amount              = array(
 							"{amount}" => $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount'] . '%'
 						);
@@ -3917,20 +3921,20 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
                             </div>
                         </div>
 					<?php } ?>
-					<?php if ( empty( $airport_service_type ) && 3 != $tf_booking_by && empty( $enable_guest_info ) ) { ?>
+					<?php if ( empty( $airport_service_type ) && 3 != $room_book_by && empty( $enable_guest_info ) ) { ?>
                         <div class="tf-control-pagination show">
                             <button type="submit"><?php echo __( "Continue", "tourfic" ); ?></button>
                         </div>
 						<?php
 					}
-					if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( $airport_service_type ) ) { ?>
+					if ( function_exists( 'is_tf_pro' ) && is_tf_pro() &&  $airport_service_type ) { ?>
                         <div class="tf-control-pagination show tf-pagination-content-1">
 							<?php
-							if ( 3 != $tf_booking_by && empty( $enable_guest_info ) ) { ?>
+							if ( 3 != $room_book_by && empty( $enable_guest_info ) ) { ?>
                                 <button type="submit"><?php echo __( "Continue", "tourfic" ); ?></button>
 							<?php } else { ?>
                                 <a href="#" class="tf-next-control tf-tabs-control"
-                                   data-step="<?php echo 3 == $tf_booking_by && empty( $enable_guest_info ) ? esc_attr( "3" ) : esc_attr( "2" ); ?>"><?php echo __( "Continue", "tourfic" ); ?></a>
+                                   data-step="<?php echo 3 == $room_book_by && empty( $enable_guest_info ) ? esc_attr( "3" ) : esc_attr( "2" ); ?>"><?php echo __( "Continue", "tourfic" ); ?></a>
 							<?php } ?>
                         </div>
 					<?php }
@@ -3942,7 +3946,7 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $airport_service_type ) { ?>
                                 <a href="#" class="tf-back-control tf-step-back" data-step="1"><i class="fa fa-angle-left"></i><?php echo __( "Back", "tourfic" ); ?></a>
 							<?php }
-							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && 3 == $tf_booking_by ) {
+							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && 3 == $room_book_by ) {
 								?>
                                 <a href="#" class="tf-next-control tf-tabs-control tf-traveller-error" data-step="3"><?php echo __( "Continue", "tourfic" ); ?></a>
 							<?php } else { ?>
@@ -3950,7 +3954,7 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
 							<?php } ?>
                         </div>
 					<?php }
-					if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && 3 == $tf_booking_by ) {
+					if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && 3 == $room_book_by ) {
 						?>
 
                         <!-- Popup Booking Confirmation -->

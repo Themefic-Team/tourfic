@@ -1038,16 +1038,22 @@ h3.tf-sidebar-widget_title {
     border-radius: 4px;
     flex: 2;
     text-align: center;
-    h3 {
-        &:before {
-            font-family: "Font Awesome 5 Free";
-            font-weight: 900;
-            content: "\f059";
-            padding-right: 7px;
-            color: #003162 !important;
+    .default-enquiry-title-section {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+
+        h3 {
+            font-size: 22px;
+            color: #3A3A44;
+            margin-bottom: 10px;
         }
-        font-size: 22px;
-        color: #3A3A44;
+        i {
+            font-weight: 900;
+            padding-right: 10px;
+            font-size: 22px;
+            color: #003162;
+        }
     }
 }
 .tf-faq-items-wrapper {

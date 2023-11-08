@@ -30,7 +30,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 					if ( ! empty( $room_preview_img ) ) { ?>
                         <div class="tf-room-preview-img">
 							<?php
-							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_room_details_gall ) {
+							if ( $tour_room_details_gall ) {
 								?>
                                 <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] . $room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>"
                                    style="text-decoration: underline;">
@@ -47,7 +47,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                         <div class="tf-room-type">
                             <div class="tf-room-title">
 								<?php
-								if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_room_details_gall ) {
+								if ( $tour_room_details_gall ) {
 									?>
                                     <h3>
                                         <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] . $room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>"
@@ -103,7 +103,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                         </ul>
 
 						<?php
-						if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_room_details_gall ) {
+						if ( $tour_room_details_gall ) {
 							?>
                             <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] . $room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>"
                                style="text-decoration: underline;">
@@ -233,6 +233,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 							?>
                             <a class="tf_air_service tf-btn-normal btn-secondary tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' ); ?></a>
 
+
                             <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-hotel-service-design-1" data-id="<?php echo $room_id ?>">
                                 <div class="tf-hotel-services">
                                     <div class="tf-hotel-services-text">
@@ -276,7 +277,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						<?php } ?>
                     </div>
                     <div class="tf_desc"></div>
-                    <?php tf_hotel_without_booking_popup( $form_post_id, $room_id, $form_adult, $form_child ); ?>
+					<?php tf_hotel_without_booking_popup( $form_post_id, $room_id, $form_adult, $form_child ); ?>
                 </form>
             </td>
         </tr>
@@ -294,7 +295,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						if ( $tour_room_details_gall ) {
 							$tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
 						}
-						if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_room_details_gall ) {
+						if ( $tour_room_details_gall ) {
 							?>
                             <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] . $room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>"
                                    style="text-decoration: underline;">
@@ -357,6 +358,8 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 								}
 
 
+
+								$room_term = get_term( $feature ); ?>
 								$room_term = get_term( $feature ); ?>
                                 <li class="tf-tooltip">
 									<?php echo $room_feature_icon; ?>

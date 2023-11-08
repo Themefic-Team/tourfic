@@ -500,10 +500,13 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 		$tf_tour_arc_selected_template  = ! empty( tf_data_types( tfopt( 'tf-template' ) )['tour-archive'] ) ? tf_data_types( tfopt( 'tf-template' ) )['tour-archive'] : 'default';
 		$tf_hotel_arc_selected_template = ! empty( tf_data_types( tfopt( 'tf-template' ) )['hotel-archive'] ) ? tf_data_types( tfopt( 'tf-template' ) )['hotel-archive'] : 'default';
 	}
+	$disable_child_search = ! empty( tfopt( 'disable_child_search' ) ) ? tfopt( 'disable_child_search' ) : '';
+	$disable_infant_search = ! empty( tfopt( 'disable_infant_search' ) ) ? tfopt( 'disable_infant_search' ) : '';
+	$disable_hotel_child_search = ! empty( tfopt( 'disable_hotel_child_search' ) ) ? tfopt( 'disable_hotel_child_search' ) : '';
+	$disable_apartment_child_search = ! empty( tfopt( 'disable_apartment_child_search' ) ) ? tfopt( 'disable_apartment_child_search' ) : '';
+	$disable_apartment_infant_search = ! empty( tfopt( 'disable_apartment_infant_search' ) ) ? tfopt( 'disable_apartment_infant_search' ) : '';
 
 	if ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-1" ) || ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-1" ) ) {
-
-		$disable_child_search = ! empty( tfopt( 'disable_child_search' ) ) ? tfopt( 'disable_child_search' ) : '';
 		?>
         <div class="tf-box-wrapper tf-box tf-mrbottom-30">
             <form class="widget tf-hotel-side-booking" method="get" autocomplete="off"
@@ -606,28 +609,27 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                     </div>
                 </label>
             </div>
-			<?php if ( $post_type == 'tf_tours' ) {
-				if ( empty( $disable_child_search ) ) {
-					?>
-                    <div class="tf_form-row">
-                        <label class="tf_label-row">
-                            <div class="tf_form-inner">
-                                <i class="fas fa-child"></i>
-                                <select name="children" id="children" class="">
-                                    <option value="0">0 <?php _e( 'Children', 'tourfic' ); ?></option>
-                                    <option <?php echo 1 == $children ? 'selected' : null ?> value="1">1 <?php _e( 'Children', 'tourfic' ); ?></option>
-									<?php foreach ( range( 2, 8 ) as $value ) {
-										$selected = $value == $children ? 'selected' : null;
-										echo '<option ' . $selected . ' value="' . $value . '">' . $value . ' ' . __( "Children", "tourfic" ) . '</option>';
-									} ?>
+			<?php if ( $post_type == 'tf_tours' && empty( $disable_child_search ) ) :?>
+                <div class="tf_form-row">
+                    <label class="tf_label-row">
+                        <div class="tf_form-inner">
+                            <i class="fas fa-child"></i>
+                            <select name="children" id="children" class="">
+                                <option value="0">0 <?php _e( 'Children', 'tourfic' ); ?></option>
+                                <option <?php echo 1 == $children ? 'selected' : null ?> value="1">1 <?php _e( 'Children', 'tourfic' ); ?></option>
+                                <?php foreach ( range( 2, 8 ) as $value ) {
+                                    $selected = $value == $children ? 'selected' : null;
+                                    echo '<option ' . $selected . ' value="' . $value . '">' . $value . ' ' . __( "Children", "tourfic" ) . '</option>';
+                                } ?>
 
-                                </select>
-                            </div>
-                        </label>
-                    </div>
-				<?php }
-			} ?>
-			<?php if ( $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ) { ?>
+                            </select>
+                        </div>
+                    </label>
+                </div>
+            <?php endif; ?>
+			<?php if ( ($post_type == 'tf_hotel' && empty($disable_hotel_child_search)) ||
+                       ($post_type == 'tf_apartment' && empty($disable_apartment_child_search))
+            ) { ?>
                 <div class="tf_form-row">
                     <label class="tf_label-row">
                         <div class="tf_form-inner">
@@ -645,7 +647,9 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                     </label>
                 </div>
 			<?php } ?>
-			<?php if ( $post_type == 'tf_apartment' ): ?>
+			<?php if ( ($post_type == 'tf_tours' && empty($disable_infant_search)) ||
+                       ($post_type == 'tf_apartment' && empty($disable_apartment_infant_search))
+            ): ?>
                 <div class="tf_form-row">
                     <label class="tf_label-row">
                         <div class="tf_form-inner">

@@ -974,3 +974,30 @@
     margin-bottom: 9px;
     padding-right: 10px;
 }  
+
+#tfhotel_docs,
+#tftour_docs,
+#tfapartment_docs{
+    border: 0px solid;
+    box-shadow: none;
+    background-color: transparent;
+    .postbox-header{
+        display: none;
+    }
+    .inside{
+        margin: 0px;
+        padding: 0px;
+        .tf_docs_preview{
+            a{
+                text-decoration: none;
+                img{
+                    width: 100%;
+                }
+                &:focus{
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+        }
+    }
+}
