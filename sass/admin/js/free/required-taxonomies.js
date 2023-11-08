@@ -1,5 +1,6 @@
 jQuery(function ($) {
-	
+
+    //required taxonomies
 	// Create an instance of Notyf
 	const notyf = new Notyf({
 		ripple: true,
@@ -10,7 +11,7 @@ jQuery(function ($) {
 			y: 'bottom',
 		},
 	});
-	
+
     function tf_event_handler(e) {
         tf_admin_params.error = false;
         $.each(tf_admin_params.taxonomies, function (taxonomy, config) {
@@ -35,6 +36,7 @@ jQuery(function ($) {
             return true;
         }
     }
+
     $('#publish, #save-post').on('click.require-post-category', tf_event_handler);
     $('#post').on('submit.require-post-category', tf_event_handler);
     if ($('#publish')[0] != null && $._data($('#publish')[0], "events") != null) {

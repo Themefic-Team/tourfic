@@ -31,8 +31,5 @@
     "style-loader": "^3.3.1",
     "webpack": "^5.87.0",
     "webpack-cli": "^5.0.1"
-  },
-  "dependencies": {
-    "node-sass": "^8.0.0"
   }
 }

@@ -3,9 +3,26 @@
 defined( 'ABSPATH' ) || exit;
 /**
  * Price calculation for single tour
+ * @since 1.0.0
  */
 if(!class_exists('Tour_Price')){
     class Tour_Price {
+        public $group;
+        public $wc_group;
+        public $sale_group;
+        public $wc_sale_group;
+        public $adult;
+        public $wc_adult;
+        public $sale_adult;
+        public $wc_sale_adult;
+        public $child;
+        public $wc_child;
+        public $sale_child;
+        public $wc_sale_child;
+        public $infant;
+        public $wc_infant;
+        public $sale_infant;
+        public $wc_sale_infant;
 
         public $meta;
         function __construct($meta) {
@@ -126,14 +143,14 @@ if(!class_exists('Tour_Price')){
                     }
 
                     # Get minimum price of adult, child, infant
-                    $min_adult_price  = min($adult_price_array);
-                    $min_child_price  = min($child_price_array);
-                    $min_infant_price = min($infant_price_array);
+                    $min_adult_price  = !empty($adult_price_array) ? min($adult_price_array) : '';
+                    $min_child_price  = !empty($child_price_array) ? min($child_price_array) : '';
+                    $min_infant_price = !empty($infant_price_array) ? min($infant_price_array) : '';
 
                     # Get maximum price of adult, child, infant
-                    $max_adult_price  = max($adult_price_array);
-                    $max_child_price  = max($child_price_array);
-                    $max_infant_price = max($infant_price_array);
+                    $max_adult_price  = !empty($adult_price_array) ? max($adult_price_array) : '';
+                    $max_child_price  = !empty($child_price_array) ? max($child_price_array) : '';
+                    $max_infant_price = !empty($infant_price_array) ? max($infant_price_array): '';
 
                     # Discount price calculation
                     if($discount_type == 'percent') {

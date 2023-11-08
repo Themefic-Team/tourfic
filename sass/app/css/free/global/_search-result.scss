@@ -164,6 +164,7 @@ a.page-numbers {
     background: #003162;
     color: #fff;
     padding: 5px 15px;
+    text-decoration: none;
 }
 
 .archive_ajax_result.loading {
@@ -198,7 +199,7 @@ a.page-numbers {
     }
 
     margin: 0;
-
+    padding: 0;
     i {
         color: #549501;
         font-size: 15px;
@@ -208,9 +209,8 @@ a.page-numbers {
 
 .availability-btn-area.tour-search {
     font-size: 14px;
-    max-width: 120px;
     line-height: 1;
-    margin-left: auto;
+    text-align: right;
 }
 
 .tf-room-price {
@@ -253,6 +253,7 @@ a.page-numbers {
         display: inline-flex;
         margin-left: 10px;
         font-size: 20px;
+        text-decoration: none;
     }
 }
 
@@ -284,17 +285,17 @@ a.page-numbers {
 }
 
 .archive_ajax_result.tours-grid {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -5px;
-
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
     .single-tour-wrap {
-        width: 50%;
+        width: 100%;
         padding: 0 5px;
         margin-bottom: 10px;
-        flex: 0 0 50%;
     }
-
+    .tf_posts_navigation {
+        
+    }
     .single-tour-inner {
         margin: 0;
         height: 100%;
@@ -324,7 +325,6 @@ a.page-numbers {
 
     .availability-btn-area {
         .tf_button {
-            width: 100%;
             margin-top: 15px;
         }
     }
@@ -342,6 +342,14 @@ a.page-numbers {
     }
 }
 
+.archive_ajax_result.tours-grid{
+    .tf-tour-price {
+        justify-content: start;
+    }
+    .availability-btn-area.tour-search{
+        text-align: left;
+    }
+}
 
 /* Search result sidebar  */
 .tf_widget {
@@ -349,6 +357,56 @@ a.page-numbers {
     background: #fff;
     border-radius: 10px;
     margin-bottom: 20px;
+    padding: 0px !important;
+    .tf-hotel-result-price-range,
+    .tf-tour-result-price-range,
+    .tf-apartment-result-price-range{
+        margin-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    h4{
+        font-size: 20px;
+        font-weight: 500;
+    }
+    .al-range-slider__track {
+        background: #EEE;
+        height: 10px;
+        box-shadow: none !important;
+        margin: 30px 0px 10px 0px;
+    }
+    .al-range-slider_dark {
+        padding: 0px !important;
+        .al-range-slider__bar {
+            background: #003162 !important;
+            box-shadow: none !important;
+        }
+    }
+    .al-range-slider__knob {
+        background: #003162 !important;
+        height: 15px;
+        width: 15px;
+        box-shadow: none !important;
+        border: 3px solid #003162 !important;
+        &:first-child {
+            span {
+                left: 10px !important;
+            }
+        }
+    }
+    .al-range-slider__tooltip {
+        background: #003162 !important;
+        border-radius: 5px;
+        box-shadow: none;
+        padding: 3px 10px;
+        color: #fff !important;
+        font-size: 13px !important;
+        margin-bottom: 0px !important;
+    }
+    .al-range-slider__input.js-al-range-slider__input {
+        display: none !important;
+    }
+    
     .tf-widget-title {
         display: flex;
         align-items: center;
@@ -381,15 +439,18 @@ a.page-numbers {
     .filter-item.active {
         background-color: #F5F8FF;
     }
+    ul{
+        margin: 0;
+        padding: 0;
+        li.filter-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 10px;
+            border-radius: 4px;
+            margin: 5px;
 
-    li.filter-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 6px 10px;
-        border-radius: 4px;
-        margin: 5px;
-
+        }
     }
 
 
@@ -398,7 +459,12 @@ a.page-numbers {
         display: block;
         font-weight: 600;
     }
-
+    a.see-less.btn-link {
+        text-align: center;
+        display: block;
+        font-weight: 600;
+        display: none
+    }
     a.see-more span {
         margin-left: 3px;
         vertical-align: middle;
@@ -418,6 +484,7 @@ a.page-numbers {
         width: 100%;
         display: inline-block;
         padding-left: 25px;
+        font-weight: 400 !important;
     }
     .checkmark {
         position: absolute;
@@ -431,7 +498,7 @@ a.page-numbers {
     }
 
     input[type=checkbox] {
-        display: none;
+        display: none !important;
     }
 
     label:hover input~.checkmark {

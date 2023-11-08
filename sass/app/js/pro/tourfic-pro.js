@@ -1,41 +1,9 @@
 (function ($) {
     $(document).ready(function () {
-        
-        /**
-         * Hotel Details Popup
-         *
-         */
-        $(document).on('click', '.tf-room-detail-qv', function (e) {
-            e.preventDefault();
-            $("#tour_room_details_loader").show();
-            var post_id = $(this).attr("data-hotel");
-            var uniqid_id = $(this).attr("data-uniqid");
-            var data = {
-                action: 'tf_tour_details_qv',
-                post_id: post_id,
-                uniqid_id: uniqid_id
-            };
-
-            $.ajax({
-                type: 'post',
-                url: tf_params.ajax_url,
-                data: data,
-                success: function (response) {
-                    $("#tour_room_details_qv").html(response);
-
-                    $("#tour_room_details_loader").hide();
-                    $.fancybox.open({
-                        src: '#tour_room_details_qv',
-                        type: 'inline',
-                    });
-                }
-
-            });
-        });
 
         /**
          * Deposit amount toggle
-        */
+         */
         $(document).on("click", "input[name='make_deposit']", function () {
             let id = $(this).val();
             if ($(this).is(':checked')) {
@@ -505,7 +473,6 @@
 
 
         //Tour Expand/Close
-
         $('#itinerary-switcher').click(function () {
             if ($(this).is(':checked')) {
                 $(".tf-ininerary-content").show();
@@ -579,5 +546,385 @@
             });
         }
 
+        /**
+         * Ajax login
+         */
+        $(document).on('click', '#tf-login .tf-submit', function (e) {
+            e.preventDefault();
+
+            let btn = $(this);
+            let form = $(this).closest('#tf-login');
+            let formData = new FormData(form[0]);
+            formData.append('action', 'tf_login');
+            let requiredFields = ['tf_log_user', 'tf_log_pass'];
+
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (response) {
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    const obj = JSON.parse(response);
+                    if (!obj.success) {
+                        if (obj.message) {
+                            Swal.fire(
+                                'Error!',
+                                obj.message,
+                                'error'
+                            )
+                            form.find('input').removeClass('error-input');
+                            form.find('textarea').removeClass('error-input');
+                            form.find('input').closest('.tf-reg-field').find('small.text-danger').remove();
+                            form.find('textarea').closest('.tf-reg-field').find('small.text-danger').remove();
+                        } else {
+                            for (const requiredField of requiredFields) {
+                                const errorField = obj['fieldErrors'][requiredField + '_error'];
+
+                                form.find('[name=' + requiredField + ']').removeClass('error-input');
+                                form.find('[name=' + requiredField + ']').closest('.tf-reg-field').find('small.text-danger').remove();
+                                if (errorField) {
+                                    form.find('[name=' + requiredField + ']').addClass('error-input');
+                                    form.find('[name=' + requiredField + ']').closest('.tf-reg-field').append('<small class="text-danger">' + errorField + '</small>');
+                                }
+                            }
+                        }
+                    } else {
+                        Swal.fire(
+                            'Success!',
+                            obj.message,
+                            'success'
+                        )
+                        form[0].reset();
+                        form.find('input').removeClass('error-input');
+                        form.find('textarea').removeClass('error-input');
+                        form.find('input').closest('.tf-reg-field').find('small.text-danger').remove();
+                        form.find('textarea').closest('.tf-reg-field').find('small.text-danger').remove();
+                    }
+                    if (obj.redirect_url) {
+                        window.location.href = obj.redirect_url;
+                    }
+                    btn.removeClass('tf-btn-loading');
+                },
+            });
+
+        });
+
+        /**
+         * Open login popup
+         *
+         * add class "tf-login-popup" in button/link
+         */
+        $(document).on('click', '.tf-login-popup', function (e) {
+            e.preventDefault();
+
+            $.fancybox.open({
+                src: '#tf-login-popup',
+                type: 'inline',
+            });
+
+        });
+
+        /**
+         * Ajax registration
+         */
+        $(document).on('click', '#tf-register .tf-submit', function (e) {
+            e.preventDefault();
+
+            let btn = $(this);
+            let form = $(this).closest('#tf-register');
+            let formData = new FormData(form[0]);
+            formData.append('action', 'tf_registration');
+            let requiredFields = ['tf_user', 'tf_email', 'tf_pass', 'tf_pass_confirm'];
+            let extra_register_fields = form.find('[name=extra_register_fields]').val();
+            let vendor_reg = form.find('[name=vendor_reg]').val();
+
+            if (extra_register_fields) {
+                let extra_register_fields_obj = JSON.parse(extra_register_fields);
+                for (const extra_register_field of extra_register_fields_obj) {
+                    requiredFields.push(extra_register_field);
+                }
+            }
+            if (vendor_reg == 1) {
+                requiredFields.push('tf_role');
+            }
+
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (response) {
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    const obj = JSON.parse(response);
+                    if (!obj.success) {
+                        if (obj.message) {
+                            Swal.fire(
+                                'Error!',
+                                obj.message,
+                                'error'
+                            )
+                            form.find('input').removeClass('error-input');
+                            form.find('textarea').removeClass('error-input');
+                            form.find('input').closest('.tf-reg-field').find('small.text-danger').remove();
+                            form.find('textarea').closest('.tf-reg-field').find('small.text-danger').remove();
+                        } else {
+
+                            for (const requiredField of requiredFields) {
+                                const errorField = obj['fieldErrors'][requiredField + '_error'];
+
+                                form.find('[name=' + requiredField + ']').removeClass('error-input');
+                                form.find('[name=' + requiredField + ']').closest('.tf-reg-field').find('small.text-danger').remove();
+                                if (errorField) {
+                                    form.find('[name=' + requiredField + ']').addClass('error-input');
+                                    form.find('[name=' + requiredField + ']').closest('.tf-reg-field').append('<small class="text-danger">' + errorField + '</small>');
+                                }
+                            }
+                        }
+                    } else {
+                        Swal.fire(
+                            'Success!',
+                            obj.message,
+                            'success'
+                        )
+                        form[0].reset();
+                        form.find('input').removeClass('error-input');
+                        form.find('textarea').removeClass('error-input');
+                        form.find('input').closest('.tf-reg-field').find('small.text-danger').remove();
+                        form.find('textarea').closest('.tf-reg-field').find('small.text-danger').remove();
+                    }
+                    if (obj.redirect_url) {
+                        window.location.href = obj.redirect_url;
+                    }
+                    btn.removeClass('tf-btn-loading');
+                },
+            });
+
+        });
+
+        /**
+         * Resend email verification url
+         */
+        $(document).on('click', '.resend-email-verification', function (e) {
+            e.preventDefault();
+
+            var user_id = $(this).attr("data-id");
+            console.log(user_id);
+
+            var data = {
+                action: 'tf_resend_verification',
+                user_id: user_id,
+            };
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: data,
+                success: function (response) {
+                    $(".tf-verification-msg").html(tf_pro_params.email_sent_success);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+
+        /**
+         * Open registration popup
+         *
+         * add class "tf-reg-popup" in button/link
+         */
+        $(document).on('click', '.tf-reg-popup', function (e) {
+            e.preventDefault();
+
+            $.fancybox.open({
+                src: '#tf-reg-popup',
+                type: 'inline',
+            });
+
+        });
+
+        // QR Code Scan Open
+        $(document).on('click', '.tf_qr_open', function (e) {
+            e.preventDefault();
+            TFQRSCANER();
+        });
+
+        // QR Code Scan Another
+        $(document).on('click', '.tf_scan_another', function (e) {
+            e.preventDefault();
+            $(".tf-final-submission-feedback").hide();
+            $(".tf-final-error-feedback").hide();
+        });
+
+
+        // QR Code Scan Back
+        $(document).on('click', '.tf_scan_back', function (e) {
+            e.preventDefault();
+            location.reload();
+        });
+
+        // QR Code Scan Verify
+        $(document).on('click', '.tf_qr_verify', function (e) {
+            e.preventDefault();
+            var qr_code = $(".tf_qr_code_number").val();
+            $(".tf-scanner-preloader").show();
+            var data = {
+                action: 'tf_qr_code_verification',
+                tf_qr_code: qr_code,
+            };
+
+            jQuery.ajax({
+                url: tf_params.ajax_url,
+                type: 'post',
+                data: data,
+                success: function (data) {
+                    var response = JSON.parse(data);
+                    if (response.qr_code_response_checked == "true") {
+                        $(".tf-scanner-quick-review").html("");
+                        $(".tf-final-submission-form").hide();
+                        $(".tf-scanner-preloader").hide();
+                        $(".tf-final-submission-feedback").show();
+                    } else {
+                        $(".tf-scanner-quick-review").html("");
+                        $(".tf-final-submission-form").hide();
+                        $(".tf-scanner-preloader").hide();
+                        $(".tf-final-error-feedback").show();
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+
+        /*
+        * Apartment room quick view
+        * */
+        $(document).on('click', '.tf-apt-room-qv', function (e) {
+            e.preventDefault();
+            $("#tour_room_details_loader").show();
+            let post_id = $(this).data("post-id");
+            let id = $(this).data("id");
+            let data = {
+                action: 'tf_apt_room_details_qv',
+                post_id: post_id,
+                id: id
+            };
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: data,
+                success: function (response) {
+                    $("#tf_apt_room_details_qv").html(response);
+
+                    $("#tour_room_details_loader").hide();
+                    $.fancybox.open({
+                        src: '#tf_apt_room_details_qv',
+                        type: 'inline',
+                    });
+                }
+
+            });
+        });
     });
 })(jQuery);
+
+// QR Code Scan Function
+const TFQRSCANER = () => {
+    var scanner = new Instascan.Scanner({video: document.getElementById('tf-video-preview'), scanPeriod: 5, mirror: false});
+    scanner.addListener('scan', function (content) {
+        if (tf_pro_params.tour_qr == 2) {
+            jQuery(".tf-scanner-preloader").show();
+            jQuery(".tf_qr_code_number").val(content);
+            var data = {
+                action: 'tf_qr_code_quick_info',
+                tf_qr_code: content,
+            };
+            jQuery.ajax({
+                url: tf_params.ajax_url,
+                type: 'post',
+                data: data,
+                success: function (data) {
+                    var response = JSON.parse(data);
+                    if (response.qr_code_result) {
+                        jQuery(".tf-scanner-quick-review").html(response.qr_code_result);
+                        jQuery(".tf-scanner-preloader").hide();
+                        jQuery(".tf-final-submission-form").show();
+                        jQuery(".tf-qr-option").hide();
+                    } else {
+                        jQuery(".tf-scanner-quick-review").html("");
+                        jQuery(".tf-scanner-preloader").hide();
+                        jQuery(".tf-final-error-feedback").show();
+                        jQuery(".tf-qr-option").hide();
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+
+
+        }
+        if (tf_pro_params.tour_qr == 1) {
+            jQuery(".tf-qr-option").hide();
+            jQuery(".tf-scanner-preloader").show();
+            var data = {
+                action: 'tf_qr_code_verification',
+                tf_qr_code: content,
+            };
+            jQuery.ajax({
+                url: tf_params.ajax_url,
+                type: 'post',
+                data: data,
+                success: function (data) {
+                    var response = JSON.parse(data);
+                    if (response.qr_code_response == "true") {
+                        jQuery(".tf-final-submission-form").hide();
+                        jQuery(".tf-scanner-preloader").hide();
+                        jQuery(".tf-final-submission-feedback").show();
+                    }
+                    if (response.qr_code_response == "false") {
+                        jQuery(".tf-final-submission-form").hide();
+                        jQuery(".tf-scanner-preloader").hide();
+                        jQuery(".tf-final-error-feedback").show();
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+        //window.location.href=content;
+    });
+    Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+            jQuery(".tf-qr-code-preview").show();
+            jQuery(".tf-final-submission-form").hide();
+            jQuery(".tf-final-submission-feedback").hide();
+            jQuery(".tf-final-error-feedback").hide();
+            if (cameras.length == 4) {
+                scanner.start(cameras[2]);
+            } else if (cameras.length == 2) {
+                scanner.start(cameras[1]);
+            } else {
+                scanner.start(cameras[0]);
+            }
+
+        } else {
+            console.error('No cameras found.');
+            alert('No cameras found.');
+        }
+    }).catch(function (e) {
+        console.error(e);
+        alert(e);
+
+    });
+}

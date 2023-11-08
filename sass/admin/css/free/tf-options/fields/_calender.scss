@@ -1,0 +1,69 @@
+.fc-view-harness {
+    height: 395px !important;
+}
+
+.fc-direction-ltr .fc-daygrid-event.fc-event-end,
+.fc-direction-rtl .fc-daygrid-event.fc-event-start {
+    font-size: 10px;
+}
+
+.fc .fc-bg-event .fc-event-title {
+    font-size: 10px;
+}
+.fc .fc-daygrid-event {
+    cursor: pointer;
+}
+.tf-room-cal-wrap {
+    table {
+        margin-bottom: 0 !important;
+    }
+}
+
+.tf-room-cal-field a.button-primary{
+    background-color: #003c79;
+    border-color: #003c79;
+}
+.tf-field-ical a.button-primary{
+    background-color: #003c79;
+    border-color: #003c79;
+}
+
+.tf-content-loading {
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -8px;
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        border: 2px solid #000;
+        border-left-color: transparent;
+        border-radius: 50%;
+        vertical-align: middle;
+        visibility: visible;
+        opacity: 1;
+        z-index: 9;
+        transition: opacity .2s ease, visibility .2s ease;
+        -webkit-animation: wd-rotate 450ms infinite linear;
+        animation: wd-rotate 450ms infinite linear;
+    }
+
+}
+
+@-webkit-keyframes wd-rotate {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes wd-rotate {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}

@@ -103,17 +103,24 @@
                 let $this = $(this),
                     dateField = $this.find('input.flatpickr'),
                     format = dateField.data('format'),
-                    multiple = dateField.data('multiple');
+                    multiple = dateField.data('multiple'),
+                    minDate = dateField.data('min-date');
 
                 if (dateField.length === 2) {
                     let startDate = $this.find('.tf-date-from input.flatpickr').flatpickr({
                         dateFormat: format,
+                        minDate: minDate,
+                        altInput: true,
+                        altFormat: tf_options.tf_admin_date_format,
                         onChange: function (selectedDates, dateStr, instance) {
                             endDate.set('minDate', dateStr);
                         }
                     });
                     let endDate = $this.find('.tf-date-to input.flatpickr').flatpickr({
                         dateFormat: format,
+                        minDate: minDate,
+                        altInput: true,
+                        altFormat: tf_options.tf_admin_date_format,
                         onChange: function (selectedDates, dateStr, instance) {
                             startDate.set('maxDate', dateStr);
                         }
@@ -121,6 +128,9 @@
                 } else {
                     dateField.flatpickr({
                         dateFormat: format,
+                        minDate: minDate,
+                        altInput: true,
+                        altFormat: tf_options.tf_admin_date_format,
                         mode: multiple ? 'multiple' : 'single',
                     });
                 }
@@ -368,12 +378,12 @@
             let $this = $(this),
                 submitBtn = $this.find('.tf-submit-btn'),
                 data = new FormData(this);
-                var fontsfile = $('.itinerary-fonts-file').prop("files");
-                if(typeof fontsfile !== "undefined"){
-                    for(var i=0; i<fontsfile.length; i++) {
+            var fontsfile = $('.itinerary-fonts-file').prop("files");
+            if (typeof fontsfile !== "undefined") {
+                for (var i = 0; i < fontsfile.length; i++) {
                     data.append('file[]', fontsfile[i]);
-                    }
                 }
+            }
             data.append('action', 'tf_options_save');
 
             $.ajax({
@@ -421,6 +431,247 @@
             tfSelect2Int($this);
         });
 
+        /*
+        * Room Full Calendar
+        * @since 2.10.2
+        * @auther: Foysal
+        */
+        var roomCal = function (container) {
+            var self = this;
+            this.container = container;
+            this.calendar = null
+            this.roomCalData = null;
+            this.fullCalendar;
+            this.timeOut;
+            this.fullCalendarOptions = {
+                initialView: 'dayGridMonth',
+                firstDay: 1,
+                headerToolbar: {
+                    start: 'today',
+                    center: 'title',
+                    end: 'prev,next'
+                },
+                displayEventTime: true,
+                selectable: true,
+                select: function ({start, end, startStr, endStr, allDay, jsEvent, view, resource}) {
+                    if (moment(start).isBefore(moment(), 'day') || moment(end).isBefore(moment(), 'day')) {
+                        self.fullCalendar.unselect();
+                        setCheckInOut("", "", self.roomCalData);
+                    } else {
+                        var zone = moment(start).format("Z");
+                        zone = zone.split(":");
+                        zone = "" + parseInt(zone[0]) + ":00";
+                        var check_in = moment(start).utcOffset(zone).format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        var check_out = moment(end).utcOffset(zone).subtract(1, 'day').format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        setCheckInOut(check_in, check_out, self.roomCalData);
+                    }
+                },
+                events: function ({start, end, startStr, endStr, timeZone}, successCallback, failureCallback) {
+                    $.ajax({
+                        url: tf_options.ajax_url,
+                        dataType: "json",
+                        type: "POST",
+                        data: {
+                            action: "tf_get_hotel_availability",
+                            new_post: $(self.container).find('[name="new_post"]').val(),
+                            hotel_id: $(self.container).find('[name="hotel_id"]').val(),
+                            room_index: $(self.container).find('[name="room_index"]').val(),
+                            avail_date: $(self.container).find('.avail_date').val(),
+                        },
+                        beforeSend: function () {
+                            $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
+                            $(self.calendar).addClass('tf-content-loading');
+                        },
+                        success: function (doc) {
+                            if (typeof doc == "object") {
+                                successCallback(doc);
+                            }
+
+                            $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
+                            $(self.calendar).removeClass('tf-content-loading');
+                        },
+                        error: function (e) {
+                            console.log(e);
+                        }
+                    });
+                },
+                eventContent: function (arg) {
+                    const title = arg.event.title;
+                    const eventTitleElement = document.createElement('div');
+                    eventTitleElement.classList.add('fc-event-title');
+                    eventTitleElement.innerHTML = title;
+                    return {domNodes: [eventTitleElement]};
+                },
+                eventClick: function ({event, el, jsEvent, view}) {
+                    let startTime = moment(event.start, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
+                        .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
+                    let endTime;
+                    if (event.end) {
+                        endTime = moment(event.end, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
+                            .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
+                    } else {
+                        endTime = startTime;
+                    }
+                    setCheckInOut(startTime, endTime, self.roomCalData);
+                    let priceBy = $(self.container).closest('.tf-single-repeater-room').find('.tf_room_pricing_by').val();
+                    //if (priceBy === '1') {
+                    if (typeof event.extendedProps.price != 'undefined') {
+                        $("[name='tf_room_price']", self.roomCalData).val(event.extendedProps.price);
+                    }
+                    //} else {
+                    if (typeof event.extendedProps.adult_price != 'undefined') {
+                        $("[name='tf_room_adult_price']", self.roomCalData).val(event.extendedProps.adult_price);
+                    }
+                    if (typeof event.extendedProps.child_price != 'undefined') {
+                        $("[name='tf_room_child_price']", self.roomCalData).val(event.extendedProps.child_price);
+                    }
+                    //}
+                    if (event.extendedProps.status) {
+                        $("[name='tf_room_status'] option[value=" + event.extendedProps.status + "]", self.roomCalData).prop("selected", true);
+                    }
+                },
+            };
+            this.init = function () {
+                self.container = jQuery(container);
+                self.calendar = container.querySelector('.tf-room-cal');
+                self.roomCalData = $('.tf-room-cal-field', self.container);
+                setCheckInOut('', '', self.roomCalData);
+                self.initCalendar();
+            }
+            this.initCalendar = function () {
+                if (typeof FullCalendar != 'undefined') {
+                    self.fullCalendar = new FullCalendar.Calendar(self.calendar, self.fullCalendarOptions);
+                    self.fullCalendar.render();
+                }
+            }
+        };
+
+        function setCheckInOut(check_in, check_out, roomCalData) {
+            $('.tf_room_check_in', roomCalData).val(check_in);
+            $('.tf_room_check_out', roomCalData).val(check_out);
+        }
+
+        function resetForm(roomCalData) {
+            $('.tf_room_check_in', roomCalData).val('');
+            $('.tf_room_check_out', roomCalData).val('');
+            $('[name="tf_room_price"]', roomCalData).val('');
+            $('[name="tf_room_adult_price"]', roomCalData).val('');
+            $('[name="tf_room_child_price"]', roomCalData).val('');
+        }
+
+        const tfHotelCalendar = () => {
+            $('.tf-room-cal-wrap').each(function (index, el) {
+                var $this = $(this);
+                var room = new roomCal(el);
+                room.init();
+
+                let checkIn = $(el).find('[name="tf_room_check_in"]').flatpickr({
+                    dateFormat: 'Y-m-d',
+                    minDate: 'today',
+                    altInput: true,
+                    altFormat: tf_options.tf_admin_date_format,
+                    onChange: function (selectedDates, dateStr, instance) {
+                        checkOut.set('minDate', dateStr);
+                    }
+                });
+
+                let checkOut = $(el).find('[name="tf_room_check_out"]').flatpickr({
+                    dateFormat: 'Y-m-d',
+                    minDate: 'today',
+                    altInput: true,
+                    altFormat: tf_options.tf_admin_date_format,
+                    onChange: function (selectedDates, dateStr, instance) {
+                        checkIn.set('maxDate', dateStr);
+                    }
+                });
+            });
+        }
+        tfHotelCalendar();
+
+        $(document).on('click', '.tf_room_cal_update', function (e) {
+            e.preventDefault();
+
+            let btn = $(this);
+            let container = btn.closest('.tf-room-cal-wrap');
+            let containerEl = btn.closest('.tf-room-cal-wrap')[0];
+            let cal = container.find('.tf-room-cal');
+            let data = $('input, select', container.find('.tf-room-cal-field')).serializeArray();
+            let priceBy = container.closest('.tf-single-repeater-room').find('.tf_room_pricing_by').val();
+            let avail_date = container.find('.avail_date');
+            data.push({name: 'action', value: 'tf_add_hotel_availability'});
+            data.push({name: 'price_by', value: priceBy});
+            data.push({name: 'avail_date', value: avail_date.val()});
+
+            $.ajax({
+                url: tf_options.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
+                    cal.addClass('tf-content-loading');
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    if (typeof response == 'object') {
+                        if (response.data.status === true) {
+                            avail_date.val(response.data.avail_date)
+                            notyf.success(response.data.message);
+                            resetForm(container);
+
+                            var room = new roomCal(containerEl);
+                            room.init();
+                            if (room.fullCalendar) {
+                                room.fullCalendar.refetchEvents();
+                            }
+                        } else {
+                            notyf.error(response.data.message);
+                        }
+
+                        container.css({'pointer-events': 'auto', 'opacity': '1'})
+                        cal.removeClass('tf-content-loading');
+                        btn.removeClass('tf-btn-loading');
+                    }
+                },
+                error: function (e) {
+                    console.log(e);
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+                complete: function () {
+                    container.css({'pointer-events': 'auto', 'opacity': '1'});
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+            });
+        });
+
+        /*$(document).on('change', '.tf_room_pricing_by', function (e) {
+            let room = $(this).closest('.tf-single-repeater-room');
+            let pricing_by = $(this).val();
+
+            if (pricing_by === '1') {
+                room.find('.tf-price-by-room').show();
+                room.find('.tf-price-by-person').hide();
+            } else if (pricing_by === '2') {
+                room.find('.tf-price-by-person').show();
+                room.find('.tf-price-by-room').hide();
+            }
+        });*/
+
+        // Switcher Value Changed
+        $(document).on("change", ".tf-switch", function (e) {
+            var $this = $(this);
+            if (this.checked) {
+                var value = $this.val(1);
+            } else {
+                var value = $this.val('');
+            }
+
+            if ($this.hasClass('tf_room_availability_by_date')) {
+                tfHotelCalendar();
+            }
+        });
 
         /*
         * Options WP editor
@@ -445,6 +696,26 @@
             TF_wp_editor($id);
         });
 
+        /*
+        * Booking Confirmation Field Fixed
+        * @since 2.9.28
+        * @author: Jahid
+        */
+        TF_Booking_Confirmation();
+
+        function TF_Booking_Confirmation() {
+            if ($('.tf-repeater-wrap .tf-single-repeater-book-confirm-field').length > 0) {
+                $('.tf-repeater-wrap .tf-single-repeater-book-confirm-field').each(function () {
+                    let $this = $(this);
+                    let repeaterCount = $this.find('input[name="tf_repeater_count"]').val();
+                    if (0 == repeaterCount || 1 == repeaterCount || 2 == repeaterCount) {
+                        $this.find('.tf_hidden_fields').hide();
+                        $this.find('.tf-repeater-icon-clone').hide();
+                        $this.find('.tf-repeater-icon-delete').hide();
+                    }
+                });
+            }
+        }
 
         /*
         * Add New Repeater Item
@@ -477,6 +748,12 @@
             }
             let repeatDateField = add_value.find('.tf-field-date');
             if (repeatDateField.length > 0) {
+                repeatDateField.find('input').each(function () {
+
+                    if ($(this).attr('name') == '' || typeof $(this).attr('name') === "undefined") {
+                        $(this).remove()
+                    }
+                });
                 tfDateInt(repeatDateField);
             }
 
@@ -544,14 +821,14 @@
                 }
             });
 
-             // Replace Old editor
-             add_value.find('.wp-editor-wrap').each(function () {
+            // Replace Old editor
+            add_value.find('.wp-editor-wrap').each(function () {
                 var textarea = $(this).find('.tf_wp_editor').show();
                 // Get content of a specific editor:
-                var tf_editor_ex_data = $('#'+textarea.attr('id')+'').val();
-                if(tf_editor_ex_data && typeof tf_editor_ex_data !== "undefined"){
+                var tf_editor_ex_data = $('#' + textarea.attr('id') + '').val();
+                if (tf_editor_ex_data && typeof tf_editor_ex_data !== "undefined") {
                     var textarea_content = tinymce.get(textarea.attr('id')).getContent();
-                }else{
+                } else {
                     var textarea_content = '';
                 }
                 textarea.val(textarea_content);
@@ -566,9 +843,9 @@
 
             // replace new editor
             add_value.find('textarea.parent_wp_editor').each(function () {
-                var count =  Math.random().toString(36).substring(3,9) + 1 ;
+                var count = Math.random().toString(36).substring(3, 9) + 1;
                 // this.id = this.id.replace('' + current_field + '__00', '' + current_field + '__' + count + '');
-                $(this).attr('id', current_field+count);
+                $(this).attr('id', current_field + count);
                 $(this).attr('data-count-id', count);
                 var parent_repeater_id = $(this).attr('id');
                 TF_wp_editor(parent_repeater_id);
@@ -581,9 +858,14 @@
                 var $this = $(this);
                 tfSelect2Int($this);
             });
-            
+
             // repeater dependency repeater
             TF_dependency();
+
+            // Booking Confirmation repeater Hidden field
+            TF_Booking_Confirmation();
+
+            tfHotelCalendar();
         });
 
         // Repeater Delete Value
@@ -613,7 +895,6 @@
             var repeater_count = clone_value.find('input[name="tf_repeater_count"]').val();
             var count = $this_parent.find('.tf-single-repeater-' + current_field + '').length;
 
-
             $this_parent.find('.tf-field-notice-inner').remove();
             // Chacked maximum repeater
             if (max != '' && count >= max) {
@@ -630,6 +911,11 @@
             let repeatDateField = clone_value.find('.tf-field-date');
 
             if (repeatDateField.length > 0) {
+                repeatDateField.find('input').each(function () {
+                    if ($(this).attr('name') == '' || typeof $(this).attr('name') === "undefined") {
+                        $(this).remove();
+                    }
+                });
                 tfDateInt(repeatDateField);
             }
 
@@ -642,12 +928,13 @@
             if (repeatColorField.length > 0) {
                 tfColorInt(repeatColorField);
             }
+
             if (parent_field == '') {
                 // Replace input id and name
                 clone_value.find(':input').each(function () {
-                    if($(this).closest('.tf-single-repeater-clone').length == 0){
-                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
-                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                    if ($(this).closest('.tf-single-repeater-clone').length == 0) {
+                        this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                        this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
                     }
                 });
                 var update_paren = clone_value.find('.tf-repeater input[name="tf_parent_field"]').val();
@@ -657,13 +944,13 @@
                 clone_value.find('.tf-repeater input[name="tf_parent_field"]').val(update_paren);
 
             } else {
-                    // Replace input id and name
-                    clone_value.find(':input').each(function () {
-                        if($(this).closest('.tf-single-repeater-clone').length == 0){
+                // Replace input id and name
+                clone_value.find(':input').each(function () {
+                    if ($(this).closest('.tf-single-repeater-clone').length == 0) {
                         this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
                         this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
-                        }
-                    });
+                    }
+                });
             }
             clone_value.find('label').each(function () {
                 var for_value = $(this).attr("for");
@@ -704,12 +991,12 @@
             clone_value.find('.wp-editor-wrap').each(function () {
                 var textarea = $(this).find('.tf_wp_editor').show();
                 // Get content of a specific editor:
-                var tf_editor_ex_data = $('#'+textarea.attr('id')+'').val();
+                var tf_editor_ex_data = $('#' + textarea.attr('id') + '').val();
                 var textarea_id = textarea.attr('id');
-                if(textarea_id != '' && typeof textarea_id !== "undefined"){
+                if (textarea_id != '' && typeof textarea_id !== "undefined") {
                     // var textarea_content = tinymce.get(textarea.attr('id')).getContent();
                     var textarea_content = tinymce.editors[textarea_id].getContent();
-                }else{
+                } else {
                     var textarea_content = '';
                 }
                 textarea.val(textarea_content);
@@ -736,8 +1023,8 @@
 
             // Clone Wp Editor
             clone_value.find('textarea.parent_wp_editor, textarea.wp_editor').each(function () {
-                var count =  Math.random().toString(36).substring(3,9) + 1 ;
-                $(this).attr('id', current_field+count);
+                var count = Math.random().toString(36).substring(3, 9) + 1;
+                $(this).attr('id', current_field + count);
                 $(this).attr('data-count-id', count);
                 var parent_repeater_id = $(this).attr('id');
                 TF_wp_editor(parent_repeater_id);
@@ -752,18 +1039,22 @@
 
             // Dependency value
             TF_dependency();
+
+            tfHotelCalendar();
         });
 
         // Repeater show hide
         $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () {
             var tf_repater_fieldname = $(this).closest('.tf-single-repeater').find('input[name=tf_current_field]').val();
-            $(this).closest('.tf-single-repeater-'+tf_repater_fieldname+'').find('.tf-repeater-content-wrap').slideToggle();
-            $(this).closest('.tf-single-repeater-'+tf_repater_fieldname+'').children('.tf-repeater-content-wrap').toggleClass('hide');
-            if ($(this).closest('.tf-single-repeater-'+tf_repater_fieldname+'').children('.tf-repeater-content-wrap').hasClass('hide')== true) {
-                $(this).closest('.tf-single-repeater-'+tf_repater_fieldname+' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-down"></i>');
+            $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').find('.tf-repeater-content-wrap').slideToggle();
+            $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').children('.tf-repeater-content-wrap').toggleClass('hide');
+            if ($(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').children('.tf-repeater-content-wrap').hasClass('hide') == true) {
+                $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + ' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-down"></i>');
             } else {
-                $(this).closest('.tf-single-repeater-'+tf_repater_fieldname+' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-up"></i>');
+                $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + ' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-up"></i>');
             }
+
+            tfHotelCalendar();
         });
 
         // Repeater Drag and  show
@@ -829,7 +1120,7 @@ var frame, gframe;
         var fieldname = $(this).attr("tf-field-name");
         var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
 
-        $this.parent().parent().find('input').val(''); 
+        $this.parent().parent().find('input').val('');
         $this.parent().html('');
 
     });
@@ -852,7 +1143,7 @@ var frame, gframe;
         // Single Image Upload
 
         $('body').on('click', '.tf-media-upload', function (e) {
-            var $this = $(this); 
+            var $this = $(this);
             var fieldname = $(this).attr("tf-field-name");
             var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
 
@@ -922,22 +1213,9 @@ var frame, gframe;
         });
 
 
-
         // Texonomy submit event
         $('#addtag > .submit #submit').click(function () {
             $(".tf-fieldset-media-preview").html("");
-        });
-
-        // Switcher Value Changed
-        $(document).on("change", ".tf-switch", function (e) {
-            var $this = $(this);
-            if (this.checked) {
-                var $this = $(this);
-                var value = $this.val(1);
-            } else {
-                var $this = $(this);
-                var value = $this.val('');
-            }
         });
 
         if (tf_options.gmaps != "googlemap") {
@@ -1053,8 +1331,8 @@ var frame, gframe;
                 $latitude.on('change', input_update_latlng);
                 $longitude.on('change', input_update_latlng);
 
-                setInterval(function() {   
-                    mapInit.invalidateSize(); 
+                setInterval(function () {
+                    mapInit.invalidateSize();
                 }, 100);
             });
         }
@@ -1062,7 +1340,7 @@ var frame, gframe;
         $('.tf-mobile-tabs').click(function (e) {
             e.preventDefault();
             $(".tf-admin-tab").toggleClass('active');
-        }); 
+        });
 
 
         $('.tf-faq-title').click(function () {
@@ -1336,7 +1614,7 @@ var frame, gframe;
 
 (function ($) {
     $(document).ready(function () {
-        if(tf_options.tf_chart_enable==1){    
+        if (tf_options.tf_chart_enable == 1) {
             var ctx = document.getElementById('tf_months'); // node
             var ctx = document.getElementById('tf_months').getContext('2d'); // 2d context
             var ctx = $('#tf_months'); // jQuery instance
@@ -1345,30 +1623,30 @@ var frame, gframe;
             var chart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ["January","February","March","April","May","June","July","August","September","October","November","December"],
+                    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
                     // Information about the dataset
-                datasets: [{
-                        label : "Completed Booking",
+                    datasets: [{
+                        label: "Completed Booking",
                         borderColor: '#003C79',
                         tension: 0.1,
-                        data: tf_options.tf_complete_order,       
+                        data: tf_options.tf_complete_order,
                         fill: false
                     },
-                    {
-                        label : "Cancelled Booking",
-                        borderColor: 'red',
-                        tension: 0.1,
-                        data: tf_options.tf_cancel_orders, 
-                        fill: false
-                    }
-                ]
+                        {
+                            label: "Cancelled Booking",
+                            borderColor: 'red',
+                            tension: 0.1,
+                            data: tf_options.tf_cancel_orders,
+                            fill: false
+                        }
+                    ]
                 },
 
                 // Configuration options
                 options: {
-                layout: {
-                padding: 10,
-                },
+                    layout: {
+                        padding: 10,
+                    },
                     legend: {
                         display: true
                     },
@@ -1383,15 +1661,17 @@ var frame, gframe;
 
         $(document).on('change', '#tf-month-report', function () {
             var monthTarget = $(this).val();
-            if(monthTarget!=0){
+            if (monthTarget != 0) {
                 $("#tf-report-loader").addClass('show');
                 $('.tf-order-report').find('iframe').remove();
+                var yearTarget = $("#tf-year-report").val();
                 jQuery.ajax({
                     type: 'post',
                     url: tf_options.ajax_url,
                     data: {
                         action: 'tf_month_reports',
                         month: monthTarget,
+                        year: yearTarget,
                     },
                     success: function (data) {
                         var response = JSON.parse(data);
@@ -1405,28 +1685,28 @@ var frame, gframe;
                             data: {
                                 labels: response.months_day_number,
                                 // Information about the dataset
-                            datasets: [{
-                                    label : "Completed Booking",
+                                datasets: [{
+                                    label: "Completed Booking",
                                     borderColor: '#003C79',
                                     tension: 0.1,
-                                    data: response.tf_complete_orders,       
+                                    data: response.tf_complete_orders,
                                     fill: false
                                 },
-                                {
-                                    label : "Cancelled Booking",
-                                    borderColor: 'red',
-                                    tension: 0.1,
-                                    data: response.tf_cancel_orders, 
-                                    fill: false
-                                }
-                            ]
+                                    {
+                                        label: "Cancelled Booking",
+                                        borderColor: 'red',
+                                        tension: 0.1,
+                                        data: response.tf_cancel_orders,
+                                        fill: false
+                                    }
+                                ]
                             },
 
                             // Configuration options
                             options: {
-                            layout: {
-                            padding: 10,
-                            },
+                                layout: {
+                                    padding: 10,
+                                },
                                 legend: {
                                     display: true
                                 },
@@ -1442,6 +1722,72 @@ var frame, gframe;
                 })
             }
         });
+
+
+        $(document).on('change', '#tf-year-report', function () {
+            var yearTarget = $(this).val();
+            var monthTarget = $("#tf-month-report").val();
+            if (yearTarget != 0 && monthTarget != 0) {
+                $("#tf-report-loader").addClass('show');
+                $('.tf-order-report').find('iframe').remove();
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_options.ajax_url,
+                    data: {
+                        action: 'tf_month_reports',
+                        month: monthTarget,
+                        year: yearTarget,
+                    },
+                    success: function (data) {
+                        var response = JSON.parse(data);
+                        var ctx = document.getElementById('tf_months'); // node
+                        var ctx = document.getElementById('tf_months').getContext('2d'); // 2d context
+                        var ctx = $('#tf_months'); // jQuery instance
+                        var ctx = 'tf_months'; // element id
+
+                        var chart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: response.months_day_number,
+                                // Information about the dataset
+                                datasets: [{
+                                    label: "Completed Booking",
+                                    borderColor: '#003C79',
+                                    tension: 0.1,
+                                    data: response.tf_complete_orders,
+                                    fill: false
+                                },
+                                    {
+                                        label: "Cancelled Booking",
+                                        borderColor: 'red',
+                                        tension: 0.1,
+                                        data: response.tf_cancel_orders,
+                                        fill: false
+                                    }
+                                ]
+                            },
+
+                            // Configuration options
+                            options: {
+                                layout: {
+                                    padding: 10,
+                                },
+                                legend: {
+                                    display: true
+                                },
+                                title: {
+                                    display: true,
+                                    text: response.tf_search_month
+                                }
+                            }
+
+                        });
+                        $("#tf-report-loader").removeClass('show');
+                    }
+                })
+            }
+        });
+
     });
 })(jQuery);
 
@@ -1450,18 +1796,18 @@ var frame, gframe;
  * @author Abu Hena
  * @since 2.9.3
  */
-(function ($){
+(function ($) {
     //get each of the field value
     $(document).on('click', '.tf-generate-tour .tf-btn', function (event) {
         event.preventDefault();
         var arr = [];
-    
+
         $(this).parents('.tf-shortcode-generator-single').find(".tf-sg-field-wrap").each(function () {
             var $this = $(this);
             var data = $this.find('.tf-setting-field').val();
             var option_name = $this.find('.tf-setting-field').attr('data-term');
             var post_count = $this.find('.post-count').attr('data-count');
-    
+
             if (option_name != undefined && option_name != '') {
                 data = option_name + '=' + (data.length ? data : '""');
             }
@@ -1469,11 +1815,11 @@ var frame, gframe;
                 data = post_count + '=' + (data.length ? data : '""');
             }
             arr.push(data);
-        });        
-        
+        });
+
         var allData = arr.filter(Boolean);
         var shortcode = "[" + allData.join(' ') + "]";
-    
+
         $(this).parents('.tf-shortcode-generator-single').find('.tf-shortcode-value').val(shortcode);
         $(this).parents('.tf-shortcode-generator-single').find('.tf-copy-item').slideDown();
     });
@@ -1485,7 +1831,7 @@ var frame, gframe;
     $(document).on('click', '.tf-shortcode-btn', function (event) {
         var $this = $(this);
         $this.parents('.tf-shortcode-generator-single').find('.tf-sg-form-wrapper').fadeIn();
-  
+
         $this.parents('.tf-shortcode-generator-single').mouseup(function (e) {
             var container = $(this).find(".tf-shortcode-generator-form");
             var container_parent = container.parent(".tf-sg-form-wrapper");
@@ -1493,11 +1839,11 @@ var frame, gframe;
                 container_parent.fadeOut();
             }
         });
-  
+
     });
 
     //Copy the shortcode value
-    $(document).on('click','.tf-copy-btn',function(){
+    $(document).on('click', '.tf-copy-btn', function () {
         var fieldIdValue = $(this).parent('.tf-shortcode-field').find('#tf-shortcode');
         if (fieldIdValue) {
             fieldIdValue.select();
@@ -1505,13 +1851,12 @@ var frame, gframe;
         }
         //show the copied message
         $(this).parents('.tf-copy-item').append('<div><span class="tf-copied-msg">Copied<span></div>');
-        $("span.tf-copied-msg").animate({ opacity: 0 }, 1000, function(){
-            $(this).slideUp('slow',function(){
+        $("span.tf-copied-msg").animate({opacity: 0}, 1000, function () {
+            $(this).slideUp('slow', function () {
                 $(this).remove();
             });
         });
     });
-
 
 
 })(jQuery);
