@@ -318,12 +318,16 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf_button:hover, .btn-styled:hover, .tf-review-form-container .tf-review-submit input[type="submit"]:hover {border-color: '.$tf_primary_bg_color_hov.';}
 		'; }
 		if( $tf_sidebar_gradient_one_reg && $tf_sidebar_gradient_two_reg  ) { $output .= '
-			.tf_booking-widget, .tf-tour-details-right .tf-tour-booking-box, .tf-template-global .tf-box-wrapper.tf-box {background: linear-gradient(to bottom, '.$tf_sidebar_gradient_one_reg.' 0, '.$tf_sidebar_gradient_two_reg.' 100%);}
+			.tf_booking-widget, .tf-tour-details-right .tf-tour-booking-box, 
+			.tf-template-global .tf-box-wrapper.tf-box,
+			.tf-template-3 .tf-booking-form-wrapper,
+			.tf-template-3 .tf-search-date-wrapper.tf-single-widgets {background: linear-gradient(to bottom, '.$tf_sidebar_gradient_one_reg.' 0, '.$tf_sidebar_gradient_two_reg.' 100%);}
 		'; }
 		if( $tf_faq_color OR $tf_faq_icon_color OR $tf_faq_border_color ) { $output .= '
 			.tf-faq-title h4,
 			.tf-single-page .tf-faq-wrapper .tf-faq-single-inner h3,
-			.tf-template-global .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps h4 {
+			.tf-template-global .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps h4,
+			.tf-template-3 .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question .tf-faq-head h3 {
 				color: '.$tf_faq_color.';
 			}
 			#tf-faq-item,
@@ -332,7 +336,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 			}
 			#tf-faq-item .arrow,
 			.tf-single-page .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-plus,
-			.tf-single-page .tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-minus {
+			.tf-single-page .tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-minus,
+			.tf-template-3 .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question i {
 				color: '.$tf_faq_icon_color.';
 			}
 		'; }
@@ -344,16 +349,24 @@ if( !function_exists( 'tf_custom_css' ) ){
 		'; }
 
 		if( $tf_review_bg_color OR $tf_review_color OR $tf_param_single_bg_color OR $tf_param_bg_color OR $tf_rating_bg_color OR $tf_rating_color) { $output .= '
-			.tf-single-review .tf-single-details {
+			.tf-single-review .tf-single-details,
+			.tf-template-3 .tf-reviews-wrapper .tf-reviews-slider .tf-reviews-item {
 				background: '.$tf_review_bg_color.';
 			}
-			.tf-single-review .tf-review-details .tf-name, .tf-single-review .tf-review-details .tf-date, .tf-single-review .tf-review-details .tf-rating-stars, .tf-single-review .tf-review-details .tf-rating-stars i, .tf-single-review .tf-review-details .tf-description p,
+			.tf-single-review .tf-review-details .tf-name, 
+			.tf-single-review .tf-review-details .tf-date, 
+			.tf-single-review .tf-review-details .tf-rating-stars, 
+			.tf-single-review .tf-review-details .tf-rating-stars i, 
+			.tf-single-review .tf-review-details .tf-description p,
 			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details,
 			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-author-name h3,
 			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-message p,
 			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li,
 			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-ratings i,
-			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li i{
+			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li i,
+			.tf-template-3 .tf-reviews-wrapper .tf-reviews-slider .tf-reviews-item .tf-reviews-text h3,
+			.tf-template-3 .tf-reviews-wrapper .tf-reviews-slider .tf-reviews-item .tf-reviews-text p,
+			.tf-template-3 .tf-reviews-wrapper .tf-reviews-slider .tf-reviews-item .tf-reviews-text span{
 				color: '.$tf_review_color.' !important;
 			}
 			.tf-review-container .tf-review-progress-bar .tf-single .tf-p-bar,
