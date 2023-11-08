@@ -371,12 +371,14 @@ if( !function_exists( 'tf_custom_css' ) ){
 			}
 			.tf-review-container .tf-review-progress-bar .tf-single .tf-p-bar,
 			.tf-single-page .tf-review-wrapper .tf-review-data .tf-review-data-features .tf-progress-bar,
-			.tf-template-global .tf-review-wrapper .tf-review-data .tf-review-data-features .percent-progress {
+			.tf-template-global .tf-review-wrapper .tf-review-data .tf-review-data-features .percent-progress,
+			.tf-template-3 .tf-single-widgets .tf-review-data-features span.percent-progress {
 				background: '.$tf_param_single_bg_color.';
 			}
 			.tf-review-container .tf-review-progress-bar,
 			.tf-single-page .tf-review-wrapper .tf-review-data,
-			.tf-template-global .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features {
+			.tf-template-global .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features,
+			.tf-template-3 .tf-single-widgets .tf-review-data-features{
 				background: '.$tf_param_bg_color.';
 				border-color: '.$tf_param_bg_color.';
 			}
@@ -386,7 +388,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-single-page .tf-review-wrapper .tf-review-data .tf-review-all-info li i {
 				color: '.$tf_param_txt_color.';
 			}
-			.tf-review-container .tf-total-review .tf-total-average div, .tf-archive-rating, .tf-single-page .tf-review-wrapper .tf-review-data .tf-review-data-average p {
+			.tf-review-container .tf-total-review .tf-total-average div, .tf-archive-rating, .tf-single-page .tf-review-wrapper .tf-review-data .tf-review-data-average p,
+			.tf-template-3 .tf-review-data .tf-review-data-average {
 				background: '.$tf_rating_bg_color.'!important;
 				color: '.$tf_rating_color.'!important;
 			}
@@ -441,10 +444,12 @@ if( !function_exists( 'tf_hotel_css' ) ){
 			.tf-title-left span.post-type {background: '.$tf_hotel_type_bg_color.';}
 		'; }
 		if( $tf_share_color_reg  ) { $output .= '
-			.tf-share .share-toggle i, .tf-single-page .tf-section.tf-single-head .tf-share > a i {color: '.$tf_share_color_reg.' !important;}
+			.tf-share .share-toggle i, .tf-single-page .tf-section.tf-single-head .tf-share > a i,
+			.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share a.share-toggle i {color: '.$tf_share_color_reg.' !important;}
 		'; }
 		if( $tf_share_color_hov  ) { $output .= '
-			.tf-share .share-toggle i:hover, .tf-single-page .tf-section.tf-single-head .tf-share > a i:hover {color: '.$tf_share_color_hov.' !important;}
+			.tf-share .share-toggle i:hover, .tf-single-page .tf-section.tf-single-head .tf-share > a i:hover,
+			.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share a.share-toggle:hover i {color: '.$tf_share_color_hov.' !important;}
 		'; }
 		if( $tf_gradient_one_reg && $tf_gradient_two_reg  ) { $output .= '
 			.show-on-map .btn-styled, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i {background: linear-gradient(to bottom, '.$tf_gradient_one_reg.' 0, '.$tf_gradient_two_reg.' 100%) !important;}
@@ -460,7 +465,8 @@ if( !function_exists( 'tf_hotel_css' ) ){
 			.tf-archive-desc i, 
 			.tf-single-page .tf-hotel-single-features ul li i,
 			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-details .tf-archive-features i,
-			.tf-hotel-design-1 .tf-rooms .tf-features-infos ul li {color: '.$tf_hotel_features.'!important;}
+			.tf-hotel-design-1 .tf-rooms .tf-features-infos ul li,
+			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-popular-facilities > ul li i {color: '.$tf_hotel_features.'!important;}
 		'; }
 		if( $tf_hotel_table_color OR $tf_hotel_table_bg_color ) { $output .= '
 			.availability-table thead{
@@ -489,6 +495,12 @@ if( !function_exists( 'tf_hotel_css' ) ){
 			}
 			.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td{
 				border-color: '.$tf_hotel_table_border_color.';
+			}
+		'; }
+		if( $tf_hotel_table_border_color  ) { $output .= '
+			
+			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room{
+				border: 1px solid '.$tf_hotel_table_border_color.';
 			}
 		'; }
 		
