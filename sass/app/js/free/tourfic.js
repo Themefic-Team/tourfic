@@ -2713,8 +2713,12 @@
 
 
         $('.tf-template-3 .acr-inc , .tf-template-3 .acr-dec').on('click', function() {
-        
-            var guest = Number($('input#adults').val()) + Number($('input#children').val()) ;
+            
+            if ($('input#infant').length){
+            var guest = Number($('input#adults').val()) + Number($('input#children').val()) + Number($('input#infant').val()) ;
+            }else{
+                var guest = Number($('input#adults').val()) + Number($('input#children').val());
+            }
             if (guest.toString().length < 2) {
                 guest = '0' + guest;
             }
