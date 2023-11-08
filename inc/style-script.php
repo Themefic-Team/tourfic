@@ -626,7 +626,10 @@ if( !function_exists( 'tf_tour_css' ) ){
 		'; }
 
 		if( $tf_inc_gradient_one_reg OR $tf_inc_gradient_two_reg OR $tf_inc_heading_color OR $tf_inc_text_color) { $output .= '
-			.tf-include-section, .tf-exclude-section, .tf-single-page .tf-inex-wrapper .tf-inex {
+			.tf-include-section, 
+			.tf-exclude-section, 
+			.tf-single-page .tf-inex-wrapper .tf-inex,
+			.tf-template-3 .tf-include-exclude-wrapper .tf-include-exclude-innter > div{
 				background-image: linear-gradient(to right, '.$tf_inc_gradient_one_reg.', '.$tf_inc_gradient_two_reg.');
 				color: '.$tf_inc_text_color.';
 			}
@@ -637,26 +640,33 @@ if( !function_exists( 'tf_tour_css' ) ){
 		'; }
 		if( $tf_itin_time_day_txt OR $tf_itin_time_day_bg OR $tf_itin_heading_color OR $tf_itin_text_color OR $tf_itin_bg_color OR $tf_itin_icon_color) { $output .= '
 			.tf-travel-time span,
-			.tf-single-page .tf-itinerary-wrapper .tf-single-itinerary-item .itinerary-day {
+			.tf-single-page .tf-itinerary-wrapper .tf-single-itinerary-item .itinerary-day,
+			.tf-template-3 .tf-itinerary-wrapper span.tf-itinerary-time {
 				color: '.$tf_itin_time_day_txt.' !important;
 			}
-			.tf-travel-time {
+			.tf-travel-time,
+			.tf-template-3 .tf-itinerary-wrapper span.tf-itinerary-time {
 				background: '.$tf_itin_time_day_bg.';
 			}
 			.tf-accordion-head h4, 
 			.tf-accordion-head h4:hover,
 			.tf-single-page .tf-itinerary-wrapper .tf-single-itinerary-item h3,
-			.tf-tour-design-1 .tf-itinerary-wrapper .tf-itinerary-box .tf-single-itinerary-item h4 {
+			.tf-tour-design-1 .tf-itinerary-wrapper .tf-itinerary-box .tf-single-itinerary-item h4,
+			.tf-template-3 .tf-itinerary-wrapper .tf-itinerary-title h4 {
 				color: '.$tf_itin_heading_color.';
 			}
 			.tf-travel-desc,
 			.tf-single-page .tf-itinerary-content-details p {
 				color: '.$tf_itin_text_color.';
 			}
-			#tf-accordion-wrapper .tf-accordion-content, #tf-accordion-wrapper .tf-accordion-head, .tf-tour-design-1 .tf-itinerary-wrapper .tf-itinerary-box {
+			#tf-accordion-wrapper .tf-accordion-content, 
+			#tf-accordion-wrapper .tf-accordion-head, 
+			.tf-tour-design-1 .tf-itinerary-wrapper .tf-itinerary-box,
+			.tf-template-3 .tf-itinerary-wrapper .tf-single-itinerary {
 				background: '.$tf_itin_bg_color.';
 			}
-			#tf-accordion-wrapper .arrow-animate, #tf-accordion-wrapper .arrow {
+			#tf-accordion-wrapper .arrow-animate, #tf-accordion-wrapper .arrow,
+			.tf-template-3 .tf-itinerary-wrapper .tf-itinerary-title i {
 				color: '.$tf_itin_icon_color.';
 			}
 			.tf-tour-design-1 .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::before,
