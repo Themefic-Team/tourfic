@@ -121,16 +121,16 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'style'   => 'success',
 					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-location-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
-				array(
-					'id'          => 'text_location',
-					'type'        => 'textarea',
-					'label'       => __( 'Tour Location', 'tourfic' ),
-					'subtitle'    => __( 'Manually enter your tour location. This is only for display purpose!', 'tourfic' ),
-					'placeholder' => __( 'e.g. 123 ABC Road, Toronto, Ontario 20100', 'tourfic' ),
-					'attributes'  => array(
-						'required' => 'required',
-					),
-				),
+				// array(
+				// 	'id'          => 'text_location',
+				// 	'type'        => 'textarea',
+				// 	'label'       => __( 'Tour Location', 'tourfic' ),
+				// 	'subtitle'    => __( 'Manually enter your tour location. This is only for display purpose!', 'tourfic' ),
+				// 	'placeholder' => __( 'e.g. 123 ABC Road, Toronto, Ontario 20100', 'tourfic' ),
+				// 	'attributes'  => array(
+				// 		'required' => 'required',
+				// 	),
+				// ),
 				array(
 					'id'       => 'location',
 					'class'    => 'gmaps',
