@@ -700,7 +700,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'content' => __( 'Booking Settings', 'tourfic' ),
 							'class'   => 'tf-field-class',
 						),
-						array(
+						/*array(
 							'id'        => '',
 							'type'      => 'switch',
 							'label'     => __( 'Enable Guest Info', 'tourfic' ),
@@ -709,7 +709,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'label_off' => __( 'No', 'tourfic' ),
 							'is_pro'  => true,
 							'default'   => true,
-						),
+						),*/
 						array(
 							'id'      => 'booking-by',
 							'type'    => 'select',
@@ -717,7 +717,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'options' => array(
 								'1' => __( 'Default Booking (WooCommerce)', 'tourfic' ),
 								'2' => __( 'External Booking (Pro)', 'tourfic' ),
-								'3' => __( 'Without Payment (Pro)', 'tourfic' ),
+								//'' => __( 'Without Payment (Pro)', 'tourfic' ),
 							),
 							'default' => '1',
 						),

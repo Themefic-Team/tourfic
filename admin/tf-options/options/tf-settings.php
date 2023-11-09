@@ -578,7 +578,7 @@ TF_Settings::option( 'tf_settings', array(
 				)
 			),
 		),
-		'hotel_without_booking'  => array(
+		/*'hotel_without_booking'  => array(
 			'title'  => __( 'Without Payment', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
@@ -927,7 +927,7 @@ TF_Settings::option( 'tf_settings', array(
 					'is_pro'      => true
 				),
 			),
-		),
+		),*/
 
 		//Apartment Options
 		'apartment_option'      => array(

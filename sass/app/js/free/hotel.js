@@ -506,11 +506,11 @@
         });
 
 
-        $(document).on("change", "[name='tf_airport_service']", function (e) {
+        /*$(document).on("change", "[name='tf_airport_service']", function (e) {
             var $this = $(this);
 
             hotelPopupBooking($this);
-        });
+        });*/
     });
 
 })(jQuery, window);

@@ -231,7 +231,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						$tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
 						if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tour_hotel_service_avail ) && ! empty( $tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
 							?>
-                            <a class="tf_air_service tf-btn-normal btn-secondary tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' ); ?></a>
+                            <a class="tf_air_service tf-btn-normal btn-secondary" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' ); ?></a>
 
 
                             <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-hotel-service-design-1" data-id="<?php echo $room_id ?>">
@@ -277,7 +277,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						<?php } ?>
                     </div>
                     <div class="tf_desc"></div>
-					<?php tf_hotel_without_booking_popup( $form_post_id, $room_id, $form_adult, $form_child ); ?>
+					<?php //tf_hotel_without_booking_popup( $form_post_id, $room_id, $form_adult, $form_child ); ?>
                 </form>
             </td>
         </tr>
@@ -491,7 +491,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 
 						if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tour_hotel_service_avail ) && ! empty( $tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
 							?>
-                            <a class="tf_air_service tf-sml-btn btn-styled tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' ); ?></a>
+                            <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' ); ?></a>
 
                             <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap" data-id="<?php echo $room_id ?>">
                                 <div class="tf-hotel-services">
@@ -535,7 +535,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						<?php } ?>
                     </div>
                     <div class="tf_desc"></div>
-                    <?php tf_hotel_without_booking_popup( $form_post_id, $room_id, $form_adult, $form_child ); ?>
+                    <?php //tf_hotel_without_booking_popup( $form_post_id, $room_id, $form_adult, $form_child ); ?>
                 </form>
             </td>
         </tr>
