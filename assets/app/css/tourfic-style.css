@@ -9245,19 +9245,20 @@ html {
 }
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-share .share-tour-content .tf-dropdown-share-content ul li a {
   display: inline-block;
-  padding: 10px 6px;
+  padding: 10px 9px;
 }
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-share .share-tour-content .tf-dropdown-share-content ul li a i {
-  font-size: 16px;
+  font-size: 22px;
   color: rgb(181, 142, 83);
 }
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-share .share-tour-content .tf-dropdown-share-content ul li a:hover {
   background-color: transparent;
 }
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-share .share-tour-content .tf-dropdown-share-content ul li button {
-  padding: 10px 6px;
+  padding: 10px 7px !important;
   background-color: transparent !important;
   border: 0px solid;
+  font-size: 22px !important;
 }
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-share .share-tour-content .tf-dropdown-share-content ul li button i, .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-share .share-tour-content .tf-dropdown-share-content ul li button span {
   color: rgb(181, 142, 83);

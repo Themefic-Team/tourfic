@@ -52,9 +52,9 @@
                                     display: inline-flex;
                                     a{
                                         display: inline-block;
-                                        padding: 10px 6px;
+                                        padding: 10px 9px;
                                         i{
-                                            font-size: 16px;
+                                            font-size: 22px;;
                                             color: rgba(181, 142, 83, 1);
                                         }
                                         &:hover{
@@ -62,9 +62,10 @@
                                         }
                                     }
                                     button{
-                                        padding: 10px 6px;
+                                        padding: 10px 7px !important;
                                         background-color: transparent !important;
                                         border: 0px solid;
+                                        font-size: 22px !important;
                                         i, span{
                                             color: rgba(181, 142, 83, 1);
                                         }
