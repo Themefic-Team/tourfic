@@ -10924,6 +10924,9 @@ html {
   line-height: 52px !important;
   word-wrap: break-word;
 }
+.tf-template-3 .tf-review-data-average h2 {
+  margin-bottom: 0px;
+}
 .tf-template-3 .tf-review-data-average span {
   color: #595349;
 }
