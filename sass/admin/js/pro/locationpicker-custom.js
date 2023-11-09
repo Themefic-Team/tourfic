@@ -21,6 +21,10 @@
                 },
                 enableAutocomplete: true,
                 addressFormat: 'route',
+                enableReverseGeocode: true,
+                onmarkerdragend: function (currentLocation, radius, isMarkerDropped) {
+                    console.log($(this).locationpicker('map').location.formattedAddress)
+                },
             });
         } else {
             $('.gmaps .tf--map-osm-wrap').locationpicker({
@@ -38,8 +42,13 @@
                     locationNameInput: $('.gmaps .tf_gmap_address')
                 },
                 enableAutocomplete: true,
+                enableReverseGeocode: true,
 
             });
         }
     }
+
+    $('.gmaps .tf_gmap_address').on("change", function (e) {
+        $(this).val(e.target.value)
+    })
 }(jQuery));
