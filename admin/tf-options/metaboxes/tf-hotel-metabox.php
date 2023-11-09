@@ -94,16 +94,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/how-it-works/hotel-location/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
-					'id'          => 'address',
-					'type'        => 'textarea',
-					'label'       => __( 'Hotel Address', 'tourfic' ),
-					'subtitle'    => __( 'This text will appear directly beneath the Hotel Title.', 'tourfic' ),
-					'placeholder' => __( 'e.g. 123 ABC Road, Toronto, Ontario 20100', 'tourfic' ),
-					'attributes'  => array(
-						'required' => 'required',
-					),
-				),
-				array(
 					'id'       => 'map',
 					'class'    => 'gmaps',
 					'type'     => 'map',
