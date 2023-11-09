@@ -10,8 +10,9 @@
                             <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
                                 <?php if ( !empty($location) ) { ?>
                                     <i class="fa-solid fa-location-dot"></i>
+                                    <?php
 									echo '<a href="#tf-tour-map">' . $location . '.</a>';
-								<?php }; ?>
+								 }; ?>
                             </div>
                         </div>
                         <div class="tf-head-social tf-flex tf-flex-gap-8 tf-flex-align-center">
