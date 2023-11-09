@@ -264,14 +264,12 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'          => 'additional_fee_label',
 					'type'        => 'text',
 					'label'       => __( 'Additional Fee Label', 'tourfic' ),
-					'subtitle'    => __( 'Enter additional fee', 'tourfic' ),
 					'field_width' => 33.33,
 				),
 				array(
 					'id'          => 'additional_fee',
 					'type'        => 'number',
 					'label'       => __( 'Additional Fee', 'tourfic' ),
-					'label'       => __( 'Additional Fee Amount', 'tourfic' ),
 					'field_width' => 33.33,
 					'attributes'  => array( 'min' => 0 )
 				),
@@ -279,7 +277,6 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'          => 'fee_type',
 					'type'        => 'select',
 					'label'       => __( 'Fee Type', 'tourfic' ),
-					'subtitle'    => __( 'Select fee type', 'tourfic' ),
 					'options'     => array(
 						'per_stay'   => __( 'Per Stay', 'tourfic' ),
 						'per_night'  => __( 'Per Night', 'tourfic' ),

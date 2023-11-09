@@ -2071,17 +2071,23 @@ TF_Settings::option( 'tf_settings', array(
 			'icon'   => 'fas fa-cogs',
 			'fields' => array(
 				array(
-					'id'      => 'global_design_notice',
-					'type'    => 'notice',
-					'style'   => 'info',
-					'content' => __( "To ensure maximum compatiblity with your theme, all Heading (h1-h6), Paragraph & Link's Color-Font Styles are not controlled by Tourfic. Those need to be edited using your Theme's option Panel.", "tourfic" ),
-				),
-				array(
 					'id'      => 'colorGlobal',
 					'type'    => 'heading',
 					'label' => __( 'Global Options', 'tourfic' ),
 					'subtitle' => __( 'The options presented here are universal across all our post types, including Hotels, Tours, and Apartments. Any settings adjusted here will apply to all of these categories.', 'tourfic' ),
 					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'      => 'design-settings-official-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/design-panel/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'      => 'global_design_notice',
+					'type'    => 'notice',
+					'style'   => 'info',
+					'content' => __( "To ensure maximum compatiblity with your theme, all Heading (h1-h6), Paragraph & Link's Color-Font Styles are not controlled by Tourfic. Those need to be edited using your Theme's option Panel.", "tourfic" ),
 				),
 				array(
 					'id'       => 'tourfic-design1-global-color',
