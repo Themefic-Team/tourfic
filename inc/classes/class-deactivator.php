@@ -40,11 +40,19 @@ if ( ! class_exists( 'TF_Deactivator' ) ) {
 		 * @since 1.0.0
 		 */
 		private function delete_pages() {
-			$pages = array( 'tf-search', 'tf-wishlist' );
-			foreach ( $pages as $key => $page ) {
-				$page = get_page_by_path( $page );
-				if ( $page ) {
-					wp_delete_post( $page->ID, true );
+			$pages = array(
+				'search',
+				'wishlist',
+				'login',
+				'register',
+				'email_verification',
+				'dashboard',
+				'qr_code_scanner',
+			);
+			foreach ( $pages as $page ) {
+				if ( is_page( get_option( 'tf_' . $page . '_page_id' ) ) ) {
+					wp_delete_post( get_option( 'tf_' . $page . '_page_id' ), true );
+					delete_option( 'tf_' . $page . '_page_id' );
 				}
 			}
 		}

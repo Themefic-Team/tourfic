@@ -1,0 +1,954 @@
+@-webkit-keyframes wd-rotate {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes wd-rotate {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+.tf-room {
+    .hotel-services-wrap {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+    .room-deposit-wrap {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        input {
+            width: 14px;
+            height: 14px;
+            outline: none;
+            border: 1px solid #333;
+        }
+        label {
+            white-space: nowrap;
+            margin-left: 6px;
+            font-size: 12px;
+        }
+    }
+}
+.tf-hotel-services-wrap {
+    background-color: unset !important;
+    .tf-hotel-services {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 32px;
+        gap: 16px;
+        width: 640px;
+        background: #FFFFFF;
+        box-shadow: 0px 8px 16px rgba(90, 91, 106, 0.2);
+        border-radius: 16px;
+    }
+    button.fancybox-button.fancybox-close-small {
+        padding: 8px;
+        width: 40px;
+        height: 40px;
+        right: 28px;
+        top: 28px;
+        background: #F5F8FF;
+        border-radius: 20px;
+    }
+    .tf-hotel-services-text {
+        h3 {
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 28px;
+            letter-spacing: 1px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 24px;
+            color: #5A5B6A;
+            margin-bottom: 0px;
+        }
+    }
+    >div {
+        >div.tf-hotel-service {
+            >label {
+                font-weight: 600;
+            }
+            >select {
+                padding: 8px 12px;
+                width: 100%;
+                height: 40px;
+                border: 1px solid #B4B4BB;
+                border-radius: 4px;
+                background-image: none !important;
+                -webkit-appearance: auto !important;
+                -moz-appearance: auto !important;
+            }
+        }
+    }
+    .tf_button_group {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 24px;
+        width: 576px;
+        height: 40px;
+        .tf_button {
+            width: fit-content;
+            height: 40px;
+            border-radius: 4px;
+            padding: 8px 12px;
+        }
+    }
+}
+.tf_air_service {
+    display: inline-block;
+    margin-top: 10px;
+    text-align: center;
+}
+.roomselectissue {
+    text-align: center;
+}
+#tour-deposit {
+    background-color: unset;
+    .tf-tours-booking-deposit {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 32px;
+        gap: 16px;
+        isolation: isolate;
+        position: relative;
+        width: 640px;
+        height: 324px;
+        background: #FFFFFF;
+        box-shadow: 0px 8px 16px rgba(90, 91, 106, 0.2);
+        border-radius: 4px;
+        cursor: auto;
+    }
+    button.fancybox-button.fancybox-close-small {
+        padding: 8px;
+        width: 40px;
+        height: 40px;
+        right: 28px;
+        top: 28px;
+        background: #F5F8FF;
+        border-radius: 20px;
+    }
+    .tf-tours-booking-deposit-text {
+        h3 {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    }
+    >div {
+        >div.tf-tours-booking-deposit-amount {
+            >span {
+                &:nth-child(1) {
+                    font-weight: bold;
+                }
+                &:nth-child(2) {
+                    float: right;
+                }
+            }
+        }
+    }
+    .tf_button_group {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 24px;
+        width: 576px;
+        height: 40px;
+        .tf_button {
+            height: 45px;
+            border-radius: 4px;
+            padding: unset;
+        }
+    }
+}
+.tour-itinerary-sleep {
+    background-color: unset;
+    background: transparent !important;
+    .tf-tours-booking-deposit {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 32px;
+        gap: 16px;
+        isolation: isolate;
+        position: relative;
+        width: 640px;
+        height: 324px;
+        background: #FFFFFF;
+        box-shadow: 0px 8px 16px rgba(90, 91, 106, 0.2);
+        border-radius: 4px;
+        cursor: auto;
+        height: auto !important;
+    }
+    button.fancybox-button.fancybox-close-small {
+        padding: 8px;
+        width: 40px;
+        height: 40px;
+        right: 28px;
+        top: 28px;
+        background: #F5F8FF;
+        border-radius: 20px;
+    }
+}
+#tour-extra {
+    padding: 35px 30px 20px 30px;
+    cursor: auto;
+    border-radius: 4px;
+}
+.tour-extra-container {
+    min-width: 300px;
+    .tour-extra-single {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid #f2f2f2;
+        padding: 15px;
+        margin-bottom: 10px;
+        gap: 20px;
+    }
+    .tour-extra-left {
+        h4 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        p {
+            font-size: 14px;
+            padding: 0;
+            margin: 0;
+        }
+    }
+    .tour-extra-right {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        span {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+        input {
+            width: 18px;
+            height: 18px;
+            outline: none;
+            border: 1px solid #333;
+        }
+    }
+}
+
+.fancybox-slide {
+    #tour_room_details_qv {
+        border-radius: 4px;
+        padding: 30px;
+        cursor: auto;
+        @media #{$tfmax767}{
+            height: 400px;
+        }
+    }
+}
+.tf-hotel-room-title {
+    line-height: 1.5;
+    font-size: 24px;
+    display: block;
+    padding-bottom: 15px;
+}
+.tf-details-qc-slider-single {
+    .tf-details-qcs {
+        img {
+            width: 100%;
+            height: 410px;
+        }
+    }
+    .slick-prev {
+        &:before {
+            color: #000 !important;
+        }
+    }
+    .slick-next {
+        &:before {
+            color: #000 !important;
+        }
+    }
+}
+.tf-details-qc-slider-nav {
+    margin-top: 10px;
+    .tf-details-qcs {
+        img {
+            height: 60px;
+            width: 70px;
+            @media #{$tfmax767}{
+                width: 100%;
+                height: 90px;
+            }
+        }
+    }
+    .tf-details-qcs.is-active {
+        img {
+            border: 2px solid #003162;
+        }
+    }
+    .slick-track {
+        margin: 0;
+    }
+}
+#tour_room_details_loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, .8);
+    display: none;
+    z-index: 99999999;
+}
+#tour-room-details-loader-img {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tf-hotel-location-preview {
+    position: relative;
+    margin-bottom: 15px;
+    a.map-pre{
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+        span {
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            border-radius: 0;
+        }
+    }
+}
+#tf-hotel-google-maps {
+    background-color: unset;
+    width: 98%;
+    button.fancybox-button.fancybox-close-small {
+        padding: 8px;
+        width: 40px;
+        height: 40px;
+        right: 28px;
+        top: 28px;
+        background: #F5F8FF;
+        border-radius: 20px;
+    }
+}
+.tf-hotel-google-maps-container {
+    padding: 5px;
+    gap: 16px;
+    isolation: isolate;
+    position: relative;
+    width: 100%;
+    background: #FFFFFF;
+    box-shadow: 0px 8px 16px rgba(90, 91, 106, 0.2);
+    border-radius: 5px;
+}
+.fancybox-stage {
+    .room-features {
+        margin-bottom: 15px;
+    }
+    .tf-hotel-details-info {
+        h3 {
+            margin-bottom: 15px;
+        }
+        i {
+            color: #333 !important;
+        }
+        .room-detail-icon {
+            margin: 8px 0 0 0 !important;
+        }
+    }
+}
+.tf-btn-loading {
+    padding-right: 40px;
+    position: relative;
+    &:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        margin-top: -7px;
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border: 2px solid #fff;
+        border-left-color: transparent;
+        border-radius: 50%;
+        vertical-align: middle;
+        visibility: visible;
+        opacity: 1;
+        transition: opacity .2s ease, visibility .2s ease;
+        -webkit-animation: wd-rotate 450ms infinite linear;
+        animation: wd-rotate 450ms infinite linear;
+    }
+}
+#tf-travelpayouts-hotel-modal {
+    iframe#tf-travelpayouts-hotel-search {
+        height: calc(100vh - 200px);
+    }
+}
+#tf-travelpayouts-flight-modal {
+    iframe#tf-travelpayouts-flight-search {
+        height: calc(100vh - 200px);
+    }
+}
+#tf-affiliate-booking-modal {
+    iframe#tf-booking-dot-com-search {
+        height: calc(100vh - 200px);
+    }
+}
+.tf-modal-btn {
+    cursor: pointer;
+}
+.tf-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    outline: 0;
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.7);
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    .tf-modal-dialog {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        min-height: calc(100% - 4rem);
+        max-width: 100%;
+        margin: 2rem auto;
+        position: relative;
+        pointer-events: none;
+    }
+    .tf-modal-content {
+        position: relative;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        width: 80%;
+        pointer-events: auto;
+        background-color: #fff;
+        outline: 0;
+        margin: 0 auto;
+        border-radius: 10px;
+        padding: 30px;
+    }
+    .tf-modal-close {
+        color: #003162;
+        cursor: pointer;
+        font-size: 22px;
+        position: absolute;
+        top: 0;
+        right: 10px;
+        &:hover {
+            -webkit-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+    }
+}
+.tf-modal.tf-modal-show {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+.tf-modal-open {
+    overflow: hidden;
+    .tf-modal {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    &:after {
+        content: "";
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        background: rgba(0, 0, 0, 0.4);
+    }
+}
+.tf-styled-checkbox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        &:checked {
+            + {
+                .tf-styled-checkbox-slider {
+                    background-color: #404660;
+                    box-shadow: 2px 2px 10px 0px #40466080;
+                    &:before {
+                        background: white;
+                        transform: translateX(20px);
+                    }
+                }
+            }
+        }
+    }
+    .tf-styled-checkbox-label {
+        margin-left: 45px;
+    }
+    .tf-styled-checkbox-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 2px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 1px solid #404660;
+        -webkit-transition: 0.3s;
+        transition: 0.3s;
+        width: 38px;
+        height: 18px;
+        border-radius: 30px;
+        &:before {
+            &:hover {
+                background-color: white;
+            }
+            position: absolute;
+            content: "";
+            height: 12px;
+            width: 12px;
+            left: 2px;
+            bottom: 2px;
+            background-color: #404660;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+    }
+}
+.trip-class-wrapper {
+    width: 100% !important;
+}
+#tf_travelpayouts_flight_form {
+    .tf_label-row {
+        position: relative;
+    }
+}
+.tf_travelpayouts_location_list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 999;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    background-color: #fff;
+    min-width: 320px;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: 1px 1px 3px #ccc;
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        li {
+            padding: 6px 20px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            &:hover {
+                background: #fafafa;
+            }
+        }
+    }
+}
+.tf_booking-widget.default-form {
+    .tf-flight-destination-row {
+        .tf_form-inner {
+            grid-template-columns: 14% 94%;
+        }
+    }
+}
+.tf-ininerary-content {
+    .tf-travel-desc {
+        margin-bottom: 20px;
+        img {
+            float: left;
+            margin-bottom: 0px !important;
+            width: 100%;
+        }
+    }
+    .trav-cont {
+        p {
+            margin: 0px;
+            font-size: 16px;
+        }
+    }
+}
+.ininerary-other-info {
+    ul {
+        margin: 0;
+        padding: 0;
+        li {
+            display: inline-block;
+            color: #222322;
+            font-size: 16px;
+            margin-right: 10px;
+            a {
+                color: #222322;
+                font-size: 16px;
+                text-decoration: none;
+            }
+            i {
+                margin-right: 5px;
+            }
+        }
+    }
+}
+.ininerary-gallery-single {
+    >img {
+        width: 150px;
+        height: 150px !important;
+    }
+}
+.ininerary-other-gallery {
+    .slick-track {
+        margin: 0 !important;
+    }
+    .slick-prev {
+        &::before {
+            color: #000 !important;
+        }
+    }
+    .slick-next {
+        &::before {
+            color: #000 !important;
+        }
+        right: 0px;
+    }
+}
+.tf-accordion-switcher {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    >span {
+        color: #002C66;
+        margin-left: 10px;
+    }
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 48px;
+        height: 20px;
+        input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+    }
+    .switcher {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+        &:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 2px;
+            bottom: 1px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+    }
+    input {
+        &:checked {
+            + {
+                .switcher {
+                    background-color: #002C66;
+                    &:before {
+                        -webkit-transform: translateX(26px);
+                        -ms-transform: translateX(26px);
+                        transform: translateX(26px);
+                    }
+                }
+            }
+        }
+        &:focus {
+            + {
+                .switcher {
+                    box-shadow: 0 0 1px #002C66;
+                }
+            }
+        }
+    }
+    .switcher.round {
+        border-radius: 20px;
+        &:before {
+            border-radius: 50%;
+        }
+    }
+}
+.tf-itinerary-downloader {
+    background: #D8E6FF;
+    padding: 25px 30px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    margin-top: 25px;
+    border: 1px solid #EDEDF0;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    @media #{$max640}{
+        display: flow-root !important;
+    }
+    .tf-itinerary-downloader-left{
+        width: 80%;
+        display: flex;
+        align-items: center;
+        @media #{$max640}{
+            display: block !important;
+        }
+    }
+}
+.tf-itinerary-downloader-icon {
+    img {
+        width: 100px;
+    }
+}
+.tf-itinerary-downloader-title {
+    margin-right: 15px;
+    span {
+        display: block;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    p{
+        margin-bottom: 5px;
+    }
+}
+@media (min-width: 576px) {
+    .tf-modal {
+        .tf-modal-dialog {
+            min-height: calc(100% - 4rem);
+        }
+    }
+}
+@media print {
+    .tf-pdf-titles {
+        padding-top: 25px;
+    }
+    .tf-pdf-image {
+        tr {
+            td {
+                img {
+                    border-top-left-radius: 4em;
+                }
+            }
+        }
+        img {
+            border-radius: 5px !important;
+        }
+    }
+    .tour-pdf-fact-title {
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+    .tour-pdf-fact-title-padding {
+        padding-left: 0px;
+    }
+    .tf-pdf-tour-fact-details {
+        background: #EBF2FF;
+        padding: 16px;
+    }
+    .tf-tour-pdf-single-fact-details {
+        padding-bottom: 15px;
+    }
+    .tf-pdf-itinerary-title {
+        padding-bottom: 0px;
+    }
+    .tf-pdf-itinerary-description {
+        margin: 0;
+        padding-top: 0px;
+        img {
+            float: left !important;
+        }
+        span {
+            float: left;
+            width: 10% !important;
+        }
+    }
+    .tf-tour-pdf-description {
+        padding-bottom: 10px;
+    }
+    .tf-pdf-customer-info {
+        padding-top: 150px;
+        padding-bottom: 30px;
+    }
+    .tf-pdf-spacing {
+        margin-left: 60px;
+        margin-right: 60px;
+    }
+    .tf-pdf-image.tf-pdf-spacing {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .tf-pdf-tour-description {
+        padding-top: 20px;
+    }
+    .tf-customer-info-card {
+        background: #EBF2FF;
+        border-radius: 10px;
+        padding: 30px 20px;
+        width: 200px !important;
+        margin: 0 auto !important;
+    }
+    .tf-pdf-customer-image {
+        padding-bottom: 15px !important;
+    }
+    .tf-customer-online-contact {
+        img {
+            padding: 0px 5px !important;
+        }
+    }
+    .tf-qr-padding-10{
+        padding-right: 25px;
+    }
+    .tf-quick-contact-info{
+        vertical-align: top;
+    }
+    .tf-location-infos{
+        background: #F2F2F2;
+        border-radius: 16%;
+        padding: 16px;
+    }
+    .tf-qr-code-bar{
+        padding-left: 30px;
+    }
+    .tf-ticket-section{
+        padding: 30px;
+        .tf-ticket-area{
+            padding: 30px;
+            border: 1px dashed #002043;
+            background-repeat: repeat;
+            background-size: cover;
+            background-position: center;
+            .tf-ticket-padding{
+                padding: 15px 0px;
+            }
+        }
+    }
+    
+}
+@media only screen and (max-width: 991px) {
+    .tf-hotel-quick-view {
+        display: block !important;
+    }
+    .tf-hotel-details-info {
+        margin-top: 30px;
+        padding-left: 0 !important;
+        width: 100% !important;
+        max-width: 550px;
+    }
+    .tf-hotel-details-qc-gallelry {
+        width: 99% !important;
+        max-width: 550px;
+    }
+    .tf-details-qc-slider-single {
+        .tf-details-qcs {
+            img {
+                height: 350px;
+                object-fit: contain;
+                @media #{$tfmax767}{
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 767px) {
+    #tour-deposit {
+        .tf-tours-booking-deposit {
+            padding: 25px;
+            width: 100%;
+            height: auto;
+        }
+        .tf_button_group {
+            width: 100%;
+            height: auto;
+        }
+    }
+    .tf-modal {
+        .tf-modal-content {
+            width: 95%;
+            padding: 30px 10px;
+        }
+    }
+    .tour-itinerary-sleep {
+        .tf-tours-booking-deposit {
+            width: auto !important;
+        }
+    }
+}
+@media only screen and (max-width: 500px) {
+    .tf-details-qc-slider-single {
+        .tf-details-qcs {
+            img {
+                height: 250px;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 420px) {
+    .tf-details-qc-slider-single {
+        .tf-details-qcs {
+            img {
+                height: 200px;
+            }
+        }
+    }
+}

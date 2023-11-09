@@ -6,3 +6,6 @@ tourfic
 .idea
 .gitignore
 README.md
+*.LICENSE.txt
+*.map
+yarn*

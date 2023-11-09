@@ -1,0 +1,229 @@
+.tf-post-states {
+  display: inline-block;
+  font-size: 11px;
+  padding: 1px 8px;
+  border-radius: 10px;
+  background: #333;
+  color: #fff;
+}
+.tf-depend-hidden.tf-depend-on {
+  display: none;
+}
+.tf-depend-hidden {
+  display: block;
+}
+.csf-section {
+  .csf-field.tf-csf-disable {
+    opacity: 1;
+    user-select: none;
+    border-top: 1px solid #eee;
+    .clear {
+      &:before {
+        content: "";
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        background-color: #eee;
+        opacity: 0.25;
+        z-index: 10;
+      }
+    }
+  }
+  .csf-field.tf-csf-pro {
+    cursor: pointer;
+  }
+}
+.tf-csf-disable.tf-csf-pro {
+  z-index: 9999999999;
+}
+.tf-csf-badge {
+  .tf-upcoming {
+    display: inline-block;
+    color: #fff;
+    padding: 3px 10px 3px 10px;
+    border-radius: 3px;
+    text-align: center;
+    margin: 5px 0 0 0;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 13px;
+    background: #006600;
+    margin-right: 5px;
+  }
+  .tf-pro {
+    display: inline-block;
+    color: #fff;
+    padding: 3px 10px 3px 10px;
+    border-radius: 3px;
+    text-align: center;
+    margin: 5px 0 0 0;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 13px;
+    background: #b30000;
+  }
+}
+.room-repeater {
+  .unique-id {
+    display: none;
+  }
+  .tf-order_id {
+    display: none;
+  }
+}
+.tf-section-name-hidden {
+  display: none;
+}
+
+button.tf-order-remove {
+  background: #f44336 !important;
+  border: 1px solid #f44336 !important;
+  color: #fff !important;
+  padding: 2px 18px !important;
+  font-family: 'lato';
+  margin-top: 6px !important;
+}
+.document-button {
+  display: block;
+  background: #ddd;
+  color: #050505;
+  border-radius: 3px;
+  line-height: 1;
+  padding: 10px 15px;
+  margin: 0;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+  text-decoration: none;
+  &:hover {
+    background: #135e96;
+    color: #fff;
+  }
+}
+.tf-major-update-warning {
+  margin-bottom: 15px;
+  max-width: 1000px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  + {
+    p {
+      display: none;
+    }
+  }
+}
+.tf-major-update-warning__separator {
+  margin: 15px -12px;
+}
+.tf-major-update-warning__icon {
+  margin-right: 9px;
+  margin-left: 2px;
+  svg {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+  }
+}
+.tf-major-update-warning__title {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.notice-success {
+  .tf-major-update-warning__separator {
+    border: 1px solid #46b450;
+  }
+  .tf-major-update-warning__icon {
+    fill: #79ba49;
+  }
+}
+.notice-warning {
+  .tf-major-update-warning__separator {
+    border: 1px solid #ffb900;
+  }
+  .tf-major-update-warning__icon {
+    fill: #f56e28;
+  }
+}
+#adminmenu {
+  .toplevel_page_tourfic {
+    .dashicons-before {
+      &:before {
+        color: #8bc34a;
+      }
+    }
+  }
+  .menu-icon-tf_hotel {
+    .dashicons-before {
+      &:before {
+        color: #03a9f4;
+      }
+    }
+  }
+  .menu-icon-tf_tours {
+    .dashicons-before {
+      &:before {
+        color: #ffc107;
+      }
+    }
+  }
+  .menu-icon-tf_apartment {
+    .dashicons-before {
+      &:before {
+        color: #f02348;
+      }
+    }
+  }
+}
+.tf-notice.tf-notice-danger {
+  color: red;
+  font-size: 1rem;
+}
+.tf-license-activate {
+  p.submit {
+    margin: 0px !important;
+    input {
+      background-color: #003C79 !important;
+      border-color: #003C79 !important;
+      color: #fff;
+      padding: 4px 25px;
+      font-size: 1rem;
+    }
+  }
+}
+.el-license-active-btn {
+  p.submit {
+    margin: 0px !important;
+    input {
+      background-color: #003C79 !important;
+      border-color: #003C79 !important;
+      color: #fff;
+      padding: 4px 25px;
+      font-size: 1rem;
+    }
+  }
+}
+input.select2-search__field {
+  width: 100% !important;
+  min-width: 150px !important;
+}
+.wp-block {
+  input.select2-search__field {
+    min-width: unset;
+  }
+}
+.widget-content {
+  .select2-selection__rendered {
+    display: none;
+  }
+}
+.tf-widget-field {
+  .select2-container {
+    &:last-child {
+      display: none;
+    }
+  }
+}

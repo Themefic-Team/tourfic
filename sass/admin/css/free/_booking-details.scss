@@ -1,0 +1,1043 @@
+.tf_booking_details_wrap{
+    .tf_booking_wrap_header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @media #{$max767}{
+            display: flow-root;
+        }
+        h1{
+            color: #1D2327;
+            font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+            font-size: 32px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            padding: 0;
+        }
+        .tf_header_wrap_button{
+            a.tf-export-btn{
+                padding: 10px 32px;
+                border-radius: 8px;
+                border: 1px solid #003C79;
+                background: #FFF;
+                margin: 0 !important;
+                color: #003C79;
+                font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 24px; /* 150% */
+            }
+            a.tf-booking-btn{
+                padding: 10px 32px;
+                border-radius: 8px;
+                border: 1px solid #003C79;
+                background: #003C79;
+                margin: 0;
+                box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
+                font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 24px; /* 150% */
+                color: #F0F0F1;
+                margin-left: 15px;
+            }
+        }
+    }
+
+    .tf-booking-header-filter{
+        display: flex;
+        justify-content: space-between;
+        margin: 32px 0px;
+        @media #{$max1199}{
+            display: flow-root;
+        }
+        .tf-bulk-action-form{
+            display: inline-flex;
+            @media #{$max991}{
+                display: flex;
+            }
+            .tf-filter-options{
+                @media #{$max991}{
+                    margin-top: 0px !important;
+                }
+            }
+        }
+        .tf-left-search-filter{
+            display: flex;
+            @media #{$max991}{
+                display: flow-root;
+            }
+            .tf-filter-options{
+                margin-right: 16px;
+                @media #{$max991}{
+                    margin: 15px 0 0 0;
+                    width: 100% !important;
+                }
+                span.select2{
+                    height: 48px;
+                    border-radius: 6px;
+                    background: #FFF;
+                    box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
+                    min-width: 160px !important;
+                    @media #{$max991}{
+                        min-width: auto !important;
+                        width: 100% !important;
+                    }
+                }
+                span.selection{
+                    button.select2-selection__clear{
+                        margin-right: 0px;
+                        padding-top: 0px;
+                    }
+                    span.select2-selection__placeholder{
+                        color: #1d2327;
+                    }
+                    span.select2-selection{
+                        height: 48px;
+                        border: 0px solid;
+                        background: transparent;
+                        color: #1d2327;
+                        font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 24px;
+                        display: flex;
+                        align-items: center;
+                        span.select2-selection__arrow{
+                            height: 48px;
+                        }
+                    }
+                }
+            }
+            
+            .tf-order-status-filter-btn{
+                padding: 10px 32px;
+                border-radius: 8px;
+                border: 1px solid #003C79;
+                background: #FFF;
+                box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
+                color: #003C79;
+                font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 24px;
+                cursor: pointer;
+                margin-right: 16px;
+                height: 48px;
+                @media #{$max991}{
+                    margin: 0px;
+                }
+            }
+            .tf-order-filter-reset{
+                a{
+                    text-decoration: none;
+                    color: #1D2327;
+                    font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 20px;
+                    display: flex;
+                    padding: 10px 20px;
+                }
+            }
+        }
+        .tf-right-search-filter{
+            border-radius: 8px;
+            border: 1px solid #87888B;
+            background: #FFF;
+            box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            @media #{$max1199}{
+                display: inline-flex;
+                margin-top: 16px;
+            }
+            @media #{$max991}{
+                display: flex;
+            }
+            input{
+                width: 100%;
+                border: 0px solid;
+                color: #87888B;
+                font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 24px; /* 150% */
+                background: transparent;
+                -moz-appearance: textfield;
+                &:focus{
+                    outline: none;
+                    box-shadow: none;
+                }
+                &::-webkit-outer-spin-button,
+                &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+                }
+            }
+            button{
+                cursor: pointer;
+                background-color: transparent;
+                border: 0px solid;
+            }
+        }
+    }
+    .tf-order-table-responsive{
+        width: 100%;
+        overflow: auto;
+        .wp-list-table{
+            border-radius: 12px;
+            background: #EDEDF8;
+            box-shadow: 0px 8px 25px 10px rgba(29, 35, 39, 0.10);
+            border: 0px solid;
+            width: 100%;
+            thead{
+                tr{
+                    #order_id,
+                    #action{ 
+                        width: 70px; 
+                    }
+                    #check_status{ 
+                        width: 128px; 
+                    }
+                    th, td{
+                        color: #87888B;
+                        font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 18px;
+                        padding: 13px 24px;
+                        border-bottom: 0px solid;
+                        text-align: left;
+                        input{
+                            border-radius: 4px;
+                            border: 1px solid #1d2327;
+                            background: #f0f0f1;
+                            width: 18px;
+                            height: 18px;
+                        }
+                    }
+                }
+            }
+            tbody{
+                tr{
+                    .ostatus{
+                        text-transform: capitalize;
+                    }
+                    th, td{
+                        padding: 16px 24px;
+                        color: #1D2327;
+                        font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 18px;
+                        background-color: #fff;
+                        border-bottom: 1px solid #F0F0F1;
+                        text-align: left;
+                        a{
+                            text-decoration: none;
+                            color: #1D2327;
+                        }
+                        span{
+                            color: #87888B;
+                            font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 18px; /* 112.5% */
+                        }
+                        input{
+                            border-radius: 4px;
+                            border: 1px solid #1d2327;
+                            background: #f0f0f1;
+                            width: 18px;
+                            height: 18px;
+                        }
+                        .checkinout{
+                            padding: 3px 8px;
+                            border-radius: 16px;
+                            background: #ECFDF3;
+                            color: #027A48;
+                            text-align: center;
+                            font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                            font-size: 12px;
+                            font-style: normal;
+                            font-weight: 600;
+                            line-height: 18px;
+                        }
+                        .checkinout.checkout{
+                            background: #FFFAEB;
+                            color: #B54708;
+                        }
+                        a.tf_booking_email_sending{
+                            margin-right: 15px;
+                        }
+                    }
+                }
+            }
+            tfoot{
+                tr{
+                    th{
+                        text-align: right;
+                        padding: 12px 24px 16px 24px;
+                        .tf-booking-details-pagination{
+                            margin: 0;
+                            padding: 0;
+                            display: flex;
+                            justify-content: right;
+                            li{
+                                a{
+                                    display: flex;
+                                    padding: 10px;
+                                    color: #1D2327;
+                                    font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                                    font-size: 14px;
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    line-height: 20px;
+                                    text-decoration: none;
+                                    min-width: 20px;
+                                    text-align: center;
+                                    justify-content: center;
+                                }
+                                border-right: 1px solid #F0F0F1;
+                                background: #FFF;
+                                &:last-child{
+                                    border-right: 0px solid;
+                                    border-radius: 0px 8px 8px 0px;
+                                    svg{
+                                        margin-left: 8px;
+                                    }
+                                }
+                                &:first-child{
+                                    border-radius: 8px 0px 0px 8px;
+                                    svg{
+                                        margin-right: 8px;
+                                    }
+                                }
+                            }
+                            li.active{
+                                background-color: #003C79;
+                                a{
+                                    color: #fff;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.select2-dropdown.tf-booking-filter-modal,
+.select2-dropdown.tf-booking-checkinout-filter-modal{
+    border: 0px solid;
+    border-radius: 8px;
+    background: #f0f2f4;
+    box-shadow: 0px 20px 40px 0px rgba(0,0,0,.1);
+    .select2-results{
+        ul{
+            padding-left: 4px;
+            padding-right: 4px;
+            scrollbar-width: thin;
+            scrollbar-color: #aaa #eee;
+            scrollbar {
+                width: 5px;
+                border-radius: 10px !important;
+            }
+            scrollbar-thumb {
+                background-color: #aaa;
+                border-radius: 10px !important;
+            }
+            li{
+                display: block;
+                color: #1D2327;
+                font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 24px;
+                margin-bottom: 4px;
+                padding: 8px 16px;
+                background-color: #fff;
+                background: #FFF;
+                cursor: pointer;
+                &:last-child{
+                    margin-bottom: 0px;
+                }
+            }
+        }
+    }
+}
+.select2-dropdown.tf-booking-checkinout-filter-modal{
+    .select2-results{
+        ul{
+            li{
+                &:first-child{
+                    background: #ECFDF3;
+                    color: #027A48; 
+                }
+                &:last-child{
+                    background: #FFFAEB;
+                    color: #B54708;; 
+                }
+            }
+        }
+    }
+}
+
+
+// Booking Details Single Page
+.tf-booking-details-preview{
+    margin-top: 10px;
+    margin-right: 20px;
+    .tf-details-preview-header{
+        .tf-back{
+            a{
+                color: #003C79;
+                font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 24px;
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                svg{
+                    margin-right: 8px;
+                }
+            }
+        }
+        .tf-title{
+            h2{
+                color: #1D2327;
+                font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                font-size: 32px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                margin: 0px 0px 16px 0px;
+            }
+        }
+        .tf-booking-id-author{
+            ul{
+                margin: 0px;
+                li{
+                    display: inline-block;
+                    color: #1D2327;
+                    font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 18px;
+                    padding: 0px 12px;
+                    &:first-child{
+                        padding-left: 0px;
+                    }
+                    @media #{$max767}{
+                        padding: 0px 5px;
+                    }
+                    @media #{$max640}{
+                        padding: 5px 0;
+                        display: block;
+                    }
+                    &:nth-child(2),
+                    &:nth-child(4){
+                        @media #{$max640}{
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .tf-booking-details-preview-box{
+        display: flex;
+        align-items: flex-start;
+        align-self: stretch;
+        gap: 24px;
+        @media #{$max767}{
+            display: flow-root;
+        }
+        .tf-booking-details{
+            @media #{$max767}{
+                width: auto;
+            }
+            width: calc(100% - 260px);
+            .details-box{
+                border-radius: 8px;
+                background: #FFF;
+                box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.10);
+                padding: 24px;
+                margin-top: 24px;
+                h4{
+                    color: #003C79;
+                    font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 24px; /* 150% */
+                    margin: 0px 0px 16px 0px;
+                    display: flex;
+                    justify-content: space-between;
+                    .others-button{
+                        span{
+                            cursor: pointer;
+                            display: inline-flex;
+                            align-items: center;
+                            svg{
+                                margin-right: 8px;
+                            }
+                        }
+                    }
+                }
+
+                .tf-grid-box{
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 24px;
+                    @media #{$max1200}{
+                        grid-template-columns: 1fr;
+                    }
+                    h3{
+                        color: #87888B;
+                        font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 24px; /* 150% */ 
+                        margin: 0px 0px 8px 0px;
+                    }
+                    .tf-single-box{
+                        border-radius: 8px;
+                        border: 1px solid #F0F0F1;
+                        background: #EDEDF8;
+                        padding: 8px 16px;
+                        table{
+                            border: 0px solid;
+                            tr{
+                                td{
+                                    padding: 8px;
+                                    color: #1D2327;
+                                    font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                                    font-size: 14px;
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    line-height: 18px; /* 128.571% */
+                                }
+                                th{
+                                    padding: 8px 8px 8px 0px;
+                                    color: #1D2327;
+                                    font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                                    font-size: 14px;
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    line-height: 18px; /* 128.571% */
+                                    text-align: left;
+                                    text-transform: capitalize;
+                                }
+                            }
+                        }
+
+                    }
+                    .tf-checkin-by{
+                        min-height: 220px;
+                        @media #{$max1200}{
+                            min-height: auto;
+                        }
+                    }
+                    .tf-voucher-preview{
+                        background-color: transparent;
+                        position: relative;
+                        max-height: 220px;
+                        overflow: hidden;
+                        object-position: top;
+                        transition: object-position 2s ease-in-out,border-color .3s ease-in-out;
+                        &:hover{
+                            object-position: bottom;
+                        }
+                        .tf-preview-btn{
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            border-radius: 8px;
+                            background: rgba(55, 55, 62, 0.50);
+                            height: 100%;
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            z-index: 0;
+                            a{
+                                border-radius: 8px;
+                                border: #F0F0F1;
+                                background: rgba(240, 240, 241, 0.05);
+                                border: 1px solid #F0F0F1;
+                                color: #F0F0F1;
+                                font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                                font-size: 16px;
+                                font-style: normal;
+                                font-weight: 600;
+                                line-height: 24px;
+                                text-decoration: none;
+                                padding: 12px 20px;
+                            }
+                        }
+                    }
+                }
+                .tf-visitor-grid-box{
+                    grid-template-columns: 1fr 1fr 1fr;
+                    @media #{$max1200}{
+                        grid-template-columns: 1fr;
+                    }
+                }
+                .tf-pricing-grid-box{
+                    grid-template-columns: 1fr;
+                }
+                .tf-customer-details-boxs{
+                    .tf-single-box{
+                        min-height: 415px;
+                        @media #{$max1200}{
+                            min-height: auto;
+                        }
+                    }
+                }
+            }
+        }
+        .tf-booking-actions{
+            width: 268px;
+            padding: 24px;
+            border-radius: 8px;
+            background: #FFF;
+            margin-top: 24px;
+            @media #{$max767}{
+                width: auto;
+            }
+            .tf-filter-selection{
+                margin-top: 45px;
+                h3{
+                    color: #1D2327;
+                    font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 24px; /* 150% */
+                    margin: 0px 0px 16px 0px;
+                }
+                .tf-order-status-filter{
+                    position: relative;
+                    label{
+                        background: #003C79;
+                        color: #F0F0F1;
+                        font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 24px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 16px;
+                        border-radius: 6px;
+                    }
+                    ul{
+                        position: absolute;
+                        border-radius: 8px;
+                        background: #F0F2F4;
+                        box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
+                        padding: 0;
+                        margin: 0;
+                        left: 0;
+                        z-index: 99;
+                        top: 100%;
+                        display: none;
+                        width: 100%;
+                        li{
+                            display: block;
+                            color: #1D2327;
+                            margin: 0px 8px 4px 8px;
+                            padding: 8px 16px;
+                            background-color: #fff;
+                            background: #FFF;
+                            cursor: pointer;
+                            font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 600;
+                            line-height: 24px; /* 150% */
+                            &:last-child{
+                                margin-bottom: 0px;
+                            }
+                        }
+                        li.checkin{
+                            background: #ECFDF3;
+                            color: #027A48;
+                        }
+                        li.checkout{
+                            background: #FFFAEB;
+                            color: #B54708;
+                        }
+                    }
+                }
+                &:first-child{
+                    margin-top: 0px;
+                }
+                .tf-refund-btn{
+                    a{
+                        border-radius: 8px;
+                        border: 1px solid #003C79;
+                        background: #FFF;
+                        box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
+                        text-decoration: none;
+                        color: #003C79;
+                        font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 24px;
+                        text-decoration: none;
+                        display: block;
+                        padding: 16px 32px;
+                        text-align: center;
+                    }
+                }
+            }
+            .tf-filter-selection.active{
+                label{
+                    svg{
+                        transform: rotate(180deg);
+                    }
+                }
+                ul{
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+// Traveler datails pupup
+.visitor-details-edit-form{
+    position: fixed;
+    background: rgba(0,0,0,.5);
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    display: none;
+    .visitor-details-edit-popup{
+        border-radius: 24px;
+        border: 1px solid #f0f0f1;
+        background: #fff;
+        position: fixed;
+        left: 50%;
+        top: 25%;
+        z-index: 999;
+        max-width: 700px;
+        margin-left: -350px;
+        .tf-visitor-details-edit-header{
+            padding: 16px;
+            border-bottom: 0.3px solid #CCCED1;
+            display: flex;
+            justify-content: space-between;
+            h2{
+                color: #003C79;
+                font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 24px;
+                margin: 0px;
+            }
+            .tf-booking-times{
+                span{
+                    height: 24px;
+                    width: 24px;
+                    background: #fff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    border: 0.3px solid #CCCED1;
+                    border-radius: 5px;
+                }
+            }
+        }
+        .visitor-details-popup{
+            max-height: 400px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #aaa #eee;
+            padding: 16px;
+            scrollbar {
+                width: 5px; 
+            }
+            scrollbar-thumb {
+                background-color: #aaa;
+                border-radius: 4px;
+            }
+            .tf-single-tour-traveller{
+                padding-bottom: 16px;
+                h4{
+                    color: #1D2327;
+                    font-family: inherit;
+                    font-size: 16px !important;
+                    font-style: normal !important;
+                    font-weight: 600 !important;
+                    line-height: 20px !important;
+                    margin: 0px;
+                    margin-bottom: 5px;
+                }
+                .traveller-info{
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    @media #{$max575}{
+                        grid-template-columns: repeat(1, 1fr);
+                    }
+                    gap: 10px;
+                    .traveller-single-info{
+                        width: 100%;
+                        label{
+                            color: #A4A4A4;
+                            font-family: inherit;
+                            font-size: 14px;
+                            font-style: normal;
+                            font-weight: 500;
+                            line-height: 20px; /* 142.857% */
+                        }
+                        input[type="text"],
+                        input[type="email"],
+                        input[type="date"],
+                        select{
+                            border-radius: 4px;
+                            border: 0.5px solid #666D74;
+                            background: #FCFDFF;
+                            box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+                            height: 32px;
+                            width: 100%;
+                            padding: 0px 5px;
+                        }
+                        input[type="date"]{
+                            text-transform: uppercase;
+                            font-size: 13px;
+                        }
+                        input[type="checkbox"],
+                        input[type="radio"]{
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .details-update-btn{
+        padding: 16px;
+        button{
+            border-radius: 4px;
+            background: #003C7A;
+            box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+            padding: 10px 0px;
+            color: #FCFDFF;
+            font-family: inherit;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px;
+            width: 100%;
+            text-align: center;
+            border: 0px solid;
+            cursor: pointer;
+        }
+    }
+}
+
+// QR CODE 
+.tf-voucher-quick-view-box{
+    position: fixed;
+    background: rgba(0,0,0,.5);
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    display: none;
+    .voucher-quick-view{
+        border-radius: 24px;
+        border: 1px solid #f0f0f1;
+        background: #fff;
+        position: fixed;
+        left: 50%;
+        top: 25%;
+        z-index: 999;
+        max-width: 700px;
+        margin-left: -350px;
+        .tf-voucher-details-preview-header{
+            padding: 16px;
+            border-bottom: 0.3px solid #CCCED1;
+            display: flex;
+            justify-content: space-between;
+            h2{
+                color: #003C79;
+                font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 24px;
+                margin: 0px;
+            }
+            .tf-quick-view-times{
+                span{
+                    height: 24px;
+                    width: 24px;
+                    background: #fff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    border: 0.3px solid #CCCED1;
+                    border-radius: 5px;
+                }
+            }
+        }
+    }
+}
+.tf-visitor-vouchers{
+    padding: 30px;
+    border: 1px dashed #002043;
+    background-repeat: repeat;
+    background-size: cover;
+    background-position: center;
+    margin: 16px;
+    .tf-voucher-header{
+        display: flex;
+        align-items: center;
+        margin-bottom: 40px;
+        img{
+            margin-right: 25px;
+        }
+        .title{
+            h1{
+                color:#002043;
+                font-size: 24px; 
+                font-family: Istok Web; 
+                line-height: 32px;
+                font-weight: 700;
+                margin: 0;
+            }
+            span{
+                color:#828C99;
+                font-size: 20px; 
+                font-family: Istok Web; 
+                line-height: 32px;
+                font-weight: 700;
+                margin: 0;
+            }
+        }
+    }
+    .tf-voucher-qr-code{
+        display: flex;
+        justify-content: space-between;
+        .time-info{
+            background: #F2F2F2;
+            padding: 16px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            h5{
+                margin: 0;
+                color: #828C99; 
+                font-size: 16px; 
+                line-height: 28px; 
+                font-weight: 400; 
+                font-family: Istok Web;
+                b{
+                    color: #002043;
+                }
+            }
+        }
+        img{
+            margin-left: 30px;
+        }
+    }
+    .tf-voucher-billing-info{
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 40px;
+        .tf-billing-details{
+            h5{
+                color: #828C99; 
+                font-size: 16px; 
+                line-height: 28px; 
+                font-weight: 400; 
+                font-family: Istok Web;
+                margin: 0;
+            }
+        }
+        .tf-cta-info{
+            h4{
+                color: #828C99; 
+                font-size: 16px; 
+                line-height: 28px; 
+                font-weight: 700; 
+                font-family: Istok Web;
+                margin: 0;
+            }
+            h5{
+                color: #828C99; 
+                font-size: 14px; 
+                line-height: 28px; 
+                font-weight: 400; 
+                margin: 0;
+                font-family: Istok Web;
+            }
+        }
+    }
+    .tf-voucher-footer-qoute{
+        p{
+            color: #828C99; 
+            font-size: 11px; 
+            font-family: Istok Web;
+            line-height: 20px;
+        }
+    }
+}
+
+.tf-preloader-box{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255,255,255,.8);
+    display: none;
+    z-index: 99999999;
+    .tf-loader-preview{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img{
+            display: inline-block;
+            border: none;
+            margin: 0;
+            padding: 0;
+            vertical-align: middle;
+            max-width: 100%;
+        }
+    }
+}

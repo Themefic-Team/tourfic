@@ -1,0 +1,302 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.tf-template-global {
+    font-family: inherit;
+    color: $color-primary;
+    .tf-container{
+        width: auto;
+    }
+    
+    h2{
+        font-size: $font-size-large;
+    }
+    img {
+        display: inline-block;
+        border: none;
+        margin: 0;
+        padding: 0;
+        vertical-align: middle;
+        max-width: 100%;
+    }
+}
+
+
+// Table style 
+table.tf-table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 13px 30px 0px #E0E8EE;
+    border-radius: $tf-brds-default;
+    @media #{$tfmax767}{
+        font-size: $font-size-small;
+    }
+    td {
+        text-align: left;
+        padding: 25px;
+        line-height: 1.4;
+        @media #{$tfmax767}{
+            padding: 10px;
+        }
+        @media #{$tfmax991}{
+            padding: 16px;
+        }
+    }
+    td:nth-child(2) {
+        border-left: 1px solid #ddd;
+    }
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+    tr:last-child {
+        border-bottom: 0px solid #ddd;
+    }
+}
+
+// Buttons
+.tf-btn-normal{
+    color: $color-theme !important;
+    background-color: #fff !important;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: $tf-brds-default;
+    font-weight: $font-weight-medium;
+    display: block;
+    text-align: center;
+    transition: all .6s ease;
+    font-family: inherit;
+    border: 0px !important;
+    cursor: pointer;
+    &:hover{
+        background: $color-hover-normal;
+    }
+    &.btn-primary:hover{
+        background-color: $color-hover-primary;
+        color: #fff;
+        transition: all .6s ease;
+    }
+    &.btn-secondary:hover{
+        background-color: $color-hover-secondary;
+    }
+}
+.btn-primary{
+    background-color: $color-theme !important;
+    color: #fff !important;
+}
+.btn-secondary{
+    background-color: $color-theme-light !important;
+    color: $color-black !important;
+}
+.tf-list {
+    list-style: none;
+    padding: 0;
+    li {
+        margin-top: 12px;
+        list-style: none;
+        i{
+            color: $color-theme;
+            width: 24px;
+        }
+    }
+}
+
+//Tourfic forms
+.tf-field-group.tf_form-inner,
+.tf-field-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    i{
+        position: absolute;
+        left: 18px;
+    }
+    .tf-field {
+        border: none !important;
+        padding: 15px 40px !important;
+        width: 100% !important;
+        background-color: #F3F7FA !important;
+        border-radius: 5px !important;
+        font-size: 14px !important;
+        margin: 0px !important;
+        color: $color-primary !important;
+        font-family: inherit;
+        background-image: none;
+        -moz-appearance: auto !important;
+        height: auto;
+
+        &:focus{
+            outline: none;
+            border: none;
+        }
+    }
+    input::placeholder {
+        font-weight: $font-size-normal;
+        font-size: 14px;
+        color: $color-primary;
+    }
+}
+
+.tf-page-content {
+    flex-basis: 68%;
+
+    @media #{$tfmax767}{
+        flex-basis: 100%;
+    }
+    @media #{$tfmax991}{
+        flex-basis: 58%;
+    }
+}
+.tf-sidebar {
+    flex-basis: 32%;
+    padding-left: 30px;
+    @media #{$tfmax767}{
+        flex-basis: 100%;
+        margin-top: 0px;
+        padding-left: 0px;
+    }
+    @media #{$tfmax991}{
+        flex-basis: 40%;
+        padding-left: $tf-space-12;
+    }
+}
+
+
+.tf-icon{
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+//Tourfi Base classes
+.tf-box-wrapper{
+    background-color: #fff;
+    border-radius: 5px;
+}
+.tf-box{
+    padding: $tf-space-30;
+    box-shadow: 0px 13px 30px 0px #e0e8ee;
+    
+    @media #{$tfmax767}{
+        padding: $tf-space-24;
+    }
+    @media #{$tfmax991}{
+        padding: $tf-space-24;
+    }
+}
+
+.tf-flex{
+    display: flex;
+    
+    @media #{$tfmax767}{
+        flex-wrap: wrap;
+    }
+    @media #{$tfmax991}{
+        flex-wrap: wrap;
+    }
+}
+.tf-flex-space-bttn{
+    justify-content: space-between;
+}
+.tf-flex-align-center{
+    align-items: center;
+}
+.tf-flex-align-top{
+    align-items: flex-start;
+}
+.tf-flex-gap-8{
+    gap: 8px;
+}
+.tf-flex-gap-12{
+    gap: 12px;
+}
+.tf-flex-gap-16{
+    gap: 16px;
+}
+.tf-flex-gap-24{
+    gap: 24px;
+}
+
+.tf-mt-8{
+    margin-top: 8px;
+}
+.tf-mt-16{
+    margin-top: 16px;
+}
+.tf-mt-24{
+    margin-top: 24px;
+}
+.tf-mt-30{
+    margin-top: 30px;
+}
+.tf-mb-30{
+    margin-bottom: 30px;
+}
+.tf-mt-40{
+    margin-top: 40px;
+}
+.tf-mb-40{
+    margin-bottom: 40px;
+}
+.tf-mt-50{
+    margin-top: 50px;
+}
+.tf-mb-50{
+    margin-bottom: 50px;
+}
+.tf-pad-8{
+    padding-top: 8px;
+}
+.tf-pad-16{
+    padding-top: 16px;
+}
+.tf-pad-24{
+    padding-top: 24px;
+}
+.tf-pad-30{
+    padding: 30px;
+}
+.tf-padbtm-8{
+    padding-bottom: 8px;
+}
+.tf-padbtm-12{
+    padding-bottom: 12px;
+}
+.tf-padbtm-16{
+    padding-bottom: 16px;
+}
+
+//Tourfc Columns
+.tf-column-2{
+    .tf-column{
+        flex-basis: calc((100%/2) - 16px);
+    }
+} 
+.tf-column-3{
+    display: flex;
+    flex-wrap: wrap;
+    .tf-column{
+        flex-basis: calc((100%/3) - 16px);
+        @media #{$tfmax767}{
+            flex-basis: calc((100%/1) - 0px);
+        }
+    }
+}
+.tf-column-4{
+    display: flex;
+    flex-wrap: wrap;
+    .tf-column{
+        flex-basis: calc((100%/4) - 16px);
+        @media #{$tfmax767}{
+            flex-basis: calc((100%/2) - 8px);
+        }
+        @media #{$tfmax991}{
+            flex-basis: calc((100%/2) - 8px);
+        }
+    }
+}

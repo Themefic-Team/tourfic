@@ -19,7 +19,12 @@ if ( ! class_exists( 'TF_checkbox' ) ) {
 				echo '<ul class="tf-checkbox-group ' . esc_attr( $inline ) . '">';
 				foreach ( $this->field['options'] as $key => $value ) {
 					$checked = ( is_array( $this->value ) && in_array( $key, $this->value ) ) ? ' checked' : '';
-					echo '<li><input type="checkbox" id="' . $this->field_name() . '[' . $key . ']" name="' . $this->field_name() . '[]" data-depend-id="'. esc_attr( $this->field['id'] ) .'" class="tf-group-checkbox" value="' . esc_attr( $key ) . '" ' . $checked . ' '. $this->field_attributes() .'/><label for="' . $this->field_name() . '[' . $key . ']">' . $value . '</label></li>';
+					if($key !== ''){
+						echo '<li><input type="checkbox" id="' . $this->field_name() . '[' . $key . ']" name="' . $this->field_name() . '[]" data-depend-id="'. esc_attr( $this->field['id'] ) .'" class="tf-group-checkbox" value="' . esc_attr( $key ) . '" ' . $checked . ' '. $this->field_attributes() .'/><label for="' . $this->field_name() . '[' . $key . ']">' . $value . '</label></li>';
+					} else {
+						//disabled checkbox
+						echo '<li><input type="checkbox" id="' . $this->field_name() . '[' . $key . ']" name="' . $this->field_name() . '[]" data-depend-id="'. esc_attr( $this->field['id'] ) .'" class="tf-group-checkbox" value="' . esc_attr( $key ) . '" ' . $checked . ' '. $this->field_attributes() .' disabled/><label for="' . $this->field_name() . '[' . $key . ']">' . $value . '</label></li>';
+					}
 				}
 				echo '</ul>';
 			} else {

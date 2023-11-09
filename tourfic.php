@@ -7,11 +7,11 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.9.3
- * Tested up to: 6.1.1
- * WC tested up to: 7.3.0
- * Requires PHP: 7.2
- * Elementor tested up to: 3.10.0
+ * Version:         2.10.5
+ * Tested up to:    6.3
+ * WC tested up to: 8.2.1
+ * Requires PHP:    7.2
+ * Elementor tested up to: 3.17.2
  */
 
 // don't load directly
@@ -47,9 +47,10 @@ define( 'TF_TEMPLATE_PATH', TF_PATH . 'templates/' );
 define( 'TF_TEMPLATE_PART_PATH', TF_TEMPLATE_PATH . 'template-parts/' );
 define( 'TF_OPTIONS_PATH', TF_ADMIN_PATH . 'options/' );
 define( 'TF_ASSETS_PATH', TF_PATH . 'assets/' );
+define( 'TF_EMAIL_TEMPLATES_PATH', TF_PATH . 'admin/emails/templates/' );
 
-if(!class_exists('Appsero\Client')){
-    require_once (TF_INC_PATH . 'app/src/Client.php');
+if ( ! class_exists( 'Appsero\Client' ) ) {
+	require_once( TF_INC_PATH . 'app/src/Client.php' );
 }
 
 /**
@@ -58,42 +59,7 @@ if(!class_exists('Appsero\Client')){
  * @since 1.0
  */
 if ( ! defined( 'TOURFIC' ) ) {
-	define( 'TOURFIC', '2.9.3' );
-}
-
-/**
- * Enqueue Main Admin scripts
- *
- * @since 1.0
- */
-if ( ! function_exists( 'tf_enqueue_main_admin_scripts' ) ) {
-	function tf_enqueue_main_admin_scripts() {
-
-        // Custom
-        wp_enqueue_style('tf-admin', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin.min.css','', TOURFIC );
-        wp_enqueue_script( 'tf-admin', TF_ASSETS_ADMIN_URL . 'js/tourfic-admin-scripts.min.js', array('jquery', 'wp-data', 'wp-editor', 'wp-edit-post'), TOURFIC, true );
-        wp_localize_script( 'tf-admin', 'tf_admin_params',
-            array(
-                'tf_nonce' => wp_create_nonce( 'updates' ),
-                'ajax_url' => admin_url( 'admin-ajax.php' ),
-                'deleting_old_review_fields' => __('Deleting old review fields...', 'tourfic'),
-                'deleting_room_order_ids' => __('Deleting order ids...', 'tourfic'),
-                'tour_location_required' => __('Tour Location is a required field!', 'tourfic'),
-                'hotel_location_required' => __('Hotel Location is a required field!', 'tourfic'),
-                'tour_feature_image_required' => __('Tour image is a required!', 'tourfic'),
-                'hotel_feature_image_required' => __('Hotel image is a required!', 'tourfic'),
-                'installing' => __( 'Installing...', 'tourfic' ),
-                'activating' => __( 'Activating...', 'tourfic' ),
-                'installed' => __( 'Installed', 'tourfic' ),
-                'activated' => __( 'Activated', 'tourfic' ),
-                'install_failed' => __( 'Install failed', 'tourfic' ),
-                'i18n'    => array(
-	                'no_services_selected' => __( 'Please select at least one service.', 'tourfic' ),
-                )
-            )
-        );
-    }
-    add_action( 'admin_enqueue_scripts', 'tf_enqueue_main_admin_scripts' );
+	define( 'TOURFIC', '2.10.5' );
 }
 
 /**
@@ -113,6 +79,51 @@ if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 	add_action( "wp_ajax_tf_ajax_install_plugin", "wp_ajax_install_plugin" );
 
 	return;
+}
+
+/**
+ * Enqueue Main Admin scripts
+ *
+ * @since 1.0
+ */
+if ( ! function_exists( 'tf_enqueue_main_admin_scripts' ) ) {
+	function tf_enqueue_main_admin_scripts() {
+
+		//date format
+		$date_format_change  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+
+		// Custom
+		wp_enqueue_style( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css', '', TOURFIC );
+		wp_enqueue_style( 'tf-admin', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin.min.css', '', TOURFIC );
+		wp_enqueue_script( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js', array( 'jquery' ), TOURFIC, true );
+		wp_enqueue_script( 'tf-fullcalender', TF_ASSETS_ADMIN_URL . 'js/lib/fullcalender.min.js', array( 'jquery' ), TOURFIC, true );
+		wp_enqueue_script( 'tf-admin', TF_ASSETS_ADMIN_URL . 'js/tourfic-admin-scripts.min.js', array( 'jquery', 'wp-data', 'wp-editor', 'wp-edit-post' ), TOURFIC, true );
+		wp_localize_script( 'tf-admin', 'tf_admin_params',
+			array(
+				'tf_nonce'                         => wp_create_nonce( 'updates' ),
+				'ajax_url'                         => admin_url( 'admin-ajax.php' ),
+				'deleting_old_review_fields'       => __( 'Deleting old review fields...', 'tourfic' ),
+				'deleting_room_order_ids'          => __( 'Deleting order ids...', 'tourfic' ),
+				'tour_location_required'           => __( 'Tour Location is a required field!', 'tourfic' ),
+				'hotel_location_required'          => __( 'Hotel Location is a required field!', 'tourfic' ),
+				'apartment_location_required'      => __( 'Apartment Location is a required field!', 'tourfic' ),
+				'tour_feature_image_required'      => __( 'Tour image is a required!', 'tourfic' ),
+				'hotel_feature_image_required'     => __( 'Hotel image is a required!', 'tourfic' ),
+				'apartment_feature_image_required' => __( 'Apartment image is a required!', 'tourfic' ),
+				'installing'                       => __( 'Installing...', 'tourfic' ),
+				'activating'                       => __( 'Activating...', 'tourfic' ),
+				'installed'                        => __( 'Installed', 'tourfic' ),
+				'activated'                        => __( 'Activated', 'tourfic' ),
+				'install_failed'                   => __( 'Install failed', 'tourfic' ),
+				'date_format_change_backend' 	   => $date_format_change,
+				'i18n'                             => array(
+					'no_services_selected' => __( 'Please select at least one service.', 'tourfic' ),
+				)
+			)
+		);
+	}
+
+	add_action( 'admin_enqueue_scripts', 'tf_enqueue_main_admin_scripts', 9 );
 }
 
 // Styles & Scripts
@@ -166,10 +177,6 @@ add_action( 'plugins_loaded', 'tf_load_textdomain' );
 if ( ! function_exists( 'tf_plugin_loaded_action' ) ) {
 	function tf_plugin_loaded_action() {
 
-		/**
-		 * options panel including
-		 * @since 1.0
-		 */
 		if ( file_exists( TF_ADMIN_PATH . 'tf-options/TF_Options.php' ) ) {
 			require_once TF_ADMIN_PATH . 'tf-options/TF_Options.php';
 		} else {
@@ -213,6 +220,12 @@ if ( file_exists( TF_ADMIN_PATH . 'inc/functions.php' ) ) {
 	require_once TF_ADMIN_PATH . 'inc/functions.php';
 } else {
 	tf_file_missing( TF_ADMIN_PATH . 'inc/functions.php' );
+}
+// Admin Functions
+if ( file_exists( TF_ADMIN_PATH . 'emails/class-tf-handle-emails.php' ) ) {
+	require_once TF_ADMIN_PATH . 'emails/class-tf-handle-emails.php';
+} else {
+	tf_file_missing( TF_ADMIN_PATH . 'emails/class-tf-handle-emails.php' );
 }
 
 
@@ -261,17 +274,38 @@ function tf_is_woo() {
  */
 function appsero_init_tracker_tourfic() {
 
-    if ( ! class_exists( 'Appsero\Client' ) ) {
-	  require_once __DIR__ . '/app/src/Client.php';
-    }
+	if ( ! class_exists( 'Appsero\Client' ) ) {
+		require_once __DIR__ . '/app/src/Client.php';
+	}
 
-    $client = new Appsero\Client( '19134f1b-2838-4a45-ac05-772b7dfc9850', 'tourfic', __FILE__ );
+	$client = new Appsero\Client( '19134f1b-2838-4a45-ac05-772b7dfc9850', 'tourfic', __FILE__ );
 	// Admin notice text
 	$notice = sprintf( $client->__trans( 'Want to help make <strong>%1$s</strong> even more awesome? Allow %1$s to collect non-sensitive diagnostic data and usage information. I agree to get Important Product Updates & Discount related information on my email from %1$s (I can unsubscribe anytime).' ), $client->name );
-	$client->insights()->notice($notice);
-    // Active insights
-    $client->insights()->init();
+	$client->insights()->notice( $notice );
+	// Active insights
+	$client->insights()->init();
 
 }
 
 appsero_init_tracker_tourfic();
+
+function tf_active_template_settings_callback() {
+	//all code goes here if need
+	update_option( 'tourfic_template_installed', true );
+}
+
+//Register activation hook
+register_activation_hook( __FILE__, 'tf_active_template_settings_callback' );
+
+/**
+ * Compatibility with custom order tables for the WooCommerce plugin
+ *
+ * @since 2.10.4
+ * @access public
+ * @return void
+ */
+add_action( 'before_woocommerce_init', function() {
+	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+	}
+} );

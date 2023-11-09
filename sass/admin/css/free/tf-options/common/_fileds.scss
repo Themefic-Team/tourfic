@@ -1,0 +1,63 @@
+.tf-field {
+  padding: 12px 0;
+
+  @media #{$max991} {
+    width: 100% !important;
+  }
+
+  .tf-field-label {
+    display: block;
+    font-style: normal;
+    margin-bottom: 3px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #000;
+    display: flex !important;
+    align-items: center;
+    line-height: 20px;
+
+    .tf-csf-badge {
+      margin-left: 13px;
+      .tf-pro {
+        background-color: #F44336 !important;
+        margin: 0;
+      }
+
+      .tf-upcoming {
+        background-color: #006600 !important;
+        margin: 0;
+      }
+    }
+
+  }
+
+  .tf-fieldset {
+    font-style: normal;
+    font-size: 14px;
+    margin-top: 15px;
+    a {
+      font-style: normal;
+      font-weight: 600;
+    }
+  }
+
+  .tf-field-sub-title {
+    color: #87888B;
+    font-size: 14px;
+    margin-bottom: 0px;
+    display: block;
+  }
+}
+.tf-field.tf-field-heading{
+  .tf-fieldset{
+    margin-top: 0px;
+  }
+}
+.tf-taxonomy-metabox {
+  .tf-field {
+    padding: 12px 0;
+  }
+}
+.tf-inline-list{
+  display: inline-block;
+}

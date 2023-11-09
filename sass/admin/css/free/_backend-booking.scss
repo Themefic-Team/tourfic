@@ -1,0 +1,46 @@
+.tf-backend-tour-booking h1,
+.tf-backend-hotel-booking h1{
+    font-size: 24px;
+    line-height: 28px;
+    margin: 0 0 20px 0;
+    padding: 0;
+}
+.tf-backend-booking-card-wrap {
+    background: #fff;
+    margin-right: 20px;
+    border-radius: 6px;
+    margin-bottom: 30px;
+
+    h3.tf-backend-booking-card-title {
+        margin: 0;
+        padding: 15px 24px;
+        background-color: #003c7a;
+        color: #fff;
+        border-radius: 6px 6px 0 0;
+    }
+}
+
+.tf-booking-fields-wrapper{
+    padding: 10px 24px 20px;
+
+    .tf-booking-fields{
+        @include flexbox();
+        @include flex-wrap(wrap);
+        @include justify-content(space-between);
+
+        .tf-fieldset{
+
+            .error-input{
+                border-color: #b30000;
+            }
+            .text-danger {
+                color: #b30000;
+            }
+        }
+    }
+}
+
+.tf-backend-booking-footer{
+    margin-right: 20px;
+    text-align: right;
+}

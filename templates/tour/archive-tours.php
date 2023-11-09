@@ -24,54 +24,40 @@ if( $discount_type == 'percent' ){
 	$sale_price = number_format( ( $price - $discounted_price ),1 );
 }
 
+
+$tf_expired_tour_showing = ! empty( tfopt( 't-show-expire-tour' ) ) ? tfopt( 't-show-expire-tour' ) : '';
+if(!empty($tf_expired_tour_showing )){
+	$tf_tour_posts_status = array('publish','expired');
+}else{
+	$tf_tour_posts_status = array('publish');
+}
+
+$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
+$args = array(
+    'post_type' => "tf_tours",
+    'orderby'   => 'date',
+    'order'     => 'DESC',
+    'post_status'    => $tf_tour_posts_status,
+	'paged'          => $paged,
+);
+$loop = new WP_Query( $args );
+$total_posts = $loop->found_posts;
+$tf_total_results = 0;
+
+$tf_plugin_installed = get_option('tourfic_template_installed'); 
+if (!empty($tf_plugin_installed)) {
+	$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
+}else{
+	$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'default';
+}
+
+if( $tf_tour_arc_selected_template=="design-1"){
+	include TF_TEMPLATE_PATH . 'tour/archive/design-1.php';
+}else{
+	include TF_TEMPLATE_PATH . 'tour/archive/design-default.php';
+}
+
 ?>
 
-<div class="tf-main-wrapper" data-fullwidth="true">
-	<?php
-		do_action( 'tf_before_container' );
-		$post_count = $GLOBALS['wp_query']->post_count;
-	?>
-	<div class="tf-container">
-
-		<div class="search-result-inner">
-			<!-- Start Content -->
-			<div class="tf-search-left">				
-				<div class="tf-action-top">
-					<div class="tf-total-results">
-						<span><?php echo esc_html__( 'Total Results ', 'tourfic' ) . '(' . $post_count . ')'; ?> </span>
-					</div>
-		            <div class="tf-list-grid">
-		                <a href="#list-view" data-id="list-view" class="change-view" title="<?php _e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
-		                <a href="#grid-view" data-id="grid-view" class="change-view" title="<?php _e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
-		            </div>
-		        </div>
-				<div class="archive_ajax_result">
-					<?php
-					if ( have_posts() ) {
-						while ( have_posts() ) {
-							the_post();
-							tf_tour_archive_single_item();
-						}
-					} else {
-						echo '<div class="tf-nothing-found" data-post-count="0" >' .__("No Tours Found!", "tourfic"). '</div>';
-					}
-					?>
-				</div>
-				<div class="tf_posts_navigation">
-					<?php tourfic_posts_navigation(); ?>
-				</div>
-
-			</div>
-			<!-- End Content -->
-
-			<!-- Start Sidebar -->
-			<div class="tf-search-right">
-				<?php tf_archive_sidebar_search_form('tf_tours'); ?>
-			</div>
-			<!-- End Sidebar -->
-		</div>
-	</div>
-	<?php do_action( 'tf_after_container' ); ?>
-</div>
 <?php
 get_footer('tourfic');
