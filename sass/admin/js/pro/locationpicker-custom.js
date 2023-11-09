@@ -11,7 +11,7 @@
                     longitude: tf_location_long
                 },
                 radius: 10,
-                zoom: 14,
+                zoom: 15,
                 scrollwheel: true,
                 inputBinding: {
                     latitudeInput: $('.gmaps .tf--latitude'),
@@ -19,12 +19,17 @@
                     radiusInput: $('#us3-radius'),
                     locationNameInput: $('.gmaps .tf_gmap_address')
                 },
+                onchanged: function (currentLocation, radius, isMarkerDropped) {
+                    var locationObj = $(this).locationpicker('map').location;
+
+                    if (isMarkerDropped == true) {
+                        locationObj.formattedAddress = `${locationObj.addressComponents.addressLine1}, ${locationObj.addressComponents.postalCode}, ${locationObj.addressComponents.stateOrProvince}, ${locationObj.addressComponents.country}`
+                        $('.gmaps .tf_gmap_address').val(locationObj.formattedAddress)
+                    }
+                },
                 enableAutocomplete: true,
                 addressFormat: 'route',
                 enableReverseGeocode: true,
-                onmarkerdragend: function (currentLocation, radius, isMarkerDropped) {
-                    console.log($(this).locationpicker('map').location.formattedAddress)
-                },
             });
         } else {
             $('.gmaps .tf--map-osm-wrap').locationpicker({
@@ -41,14 +46,18 @@
                     radiusInput: $('#us3-radius'),
                     locationNameInput: $('.gmaps .tf_gmap_address')
                 },
+                onchanged: function (currentLocation, radius, isMarkerDropped) {
+                    var locationObj = $(this).locationpicker('map').location;
+
+                    if (isMarkerDropped == true) {
+                        locationObj.formattedAddress = `${locationObj.addressComponents.addressLine1}, ${locationObj.addressComponents.postalCode}, ${locationObj.addressComponents.stateOrProvince}, ${locationObj.addressComponents.country}`
+                        $('.gmaps .tf_gmap_address').val(locationObj.formattedAddress)
+                    }
+                },
                 enableAutocomplete: true,
                 enableReverseGeocode: true,
 
             });
         }
     }
-
-    $('.gmaps .tf_gmap_address').on("change", function (e) {
-        $(this).val(e.target.value)
-    })
 }(jQuery));
