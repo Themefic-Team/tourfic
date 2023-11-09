@@ -9796,6 +9796,7 @@ html {
   display: inline-block;
   text-decoration: none;
   text-align: center;
+  transition: 0.3s all ease;
 }
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room-off {
   padding: 4px 12px;
@@ -9919,6 +9920,7 @@ html {
   text-decoration: none;
   display: inline-block;
   text-align: center;
+  transition: 0.3s all ease;
 }
 .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms #tf_posts_navigation_bar,
 .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf_posts_ajax_navigation,
@@ -10106,6 +10108,8 @@ html {
   font-weight: 700;
   line-height: 24px !important;
   cursor: pointer;
+  border-radius: 0px;
+  transition: 0.3s all ease;
 }
 .tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location {
   display: flex;
