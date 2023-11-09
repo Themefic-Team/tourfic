@@ -559,11 +559,6 @@ TF_Settings::option( 'tf_settings', array(
 											'tour-section'        => __( 'Itinerary', 'tourfic' ),
 											'tour-section-slug'   => __( 'itinerary', 'tourfic' ),
 											'tour-section-status' => true,
-										),
-										array(
-											'tour-section'        => __( 'Calendar', 'tourfic' ),
-											'tour-section-slug'   => __( 'calendar', 'tourfic' ),
-											'tour-section-status' => true,
 										)
 									)
 								),
