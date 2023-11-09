@@ -147,7 +147,7 @@
                 <h4>
                     <?php _e("Pricing details", "tourfic"); ?>
                 </h4>
-                <div class="tf-grid-box">
+                <div class="tf-grid-box tf-customer-pricing-box">
 
                     <div class="tf-grid-single">
                         <div class="tf-single-box">

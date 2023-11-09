@@ -3867,6 +3867,11 @@ Steps
   font-style: normal;
   font-weight: 600;
   line-height: 24px; /* 150% */
+  transition: 0.3s all ease;
+}
+.tf_booking_details_wrap .tf_booking_wrap_header .tf_header_wrap_button a.tf-export-btn:hover {
+  color: #f0f0f1;
+  background-color: #003C79;
 }
 .tf_booking_details_wrap .tf_booking_wrap_header .tf_header_wrap_button a.tf-booking-btn {
   padding: 10px 32px;
@@ -3882,6 +3887,11 @@ Steps
   line-height: 24px; /* 150% */
   color: #F0F0F1;
   margin-left: 15px;
+  transition: 0.3s all ease;
+}
+.tf_booking_details_wrap .tf_booking_wrap_header .tf_header_wrap_button a.tf-booking-btn:hover {
+  color: #f0f0f1;
+  background-color: #004E9D;
 }
 .tf_booking_details_wrap .tf-booking-header-filter {
   display: flex;
@@ -3953,11 +3963,13 @@ Steps
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
+  padding-left: 8px;
   display: flex;
   align-items: center;
 }
 .tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-filter-options span.selection span.select2-selection span.select2-selection__arrow {
   height: 48px;
+  padding-right: 16px;
 }
 .tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-order-status-filter-btn {
   padding: 10px 32px;
@@ -3974,11 +3986,16 @@ Steps
   cursor: pointer;
   margin-right: 16px;
   height: 48px;
+  transition: 0.3s all ease;
 }
 @media only screen and (max-width: 991.98px) {
   .tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-order-status-filter-btn {
     margin: 0px;
   }
+}
+.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-order-status-filter-btn:hover {
+  color: #f0f0f1;
+  background-color: #003C79;
 }
 .tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-order-filter-reset a {
   text-decoration: none;
@@ -4043,7 +4060,6 @@ Steps
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table {
   border-radius: 12px;
   background: #EDEDF8;
-  box-shadow: 0px 8px 25px 10px rgba(29, 35, 39, 0.1);
   border: 0px solid;
   width: 100%;
 }
@@ -4065,12 +4081,29 @@ Steps
   border-bottom: 0px solid;
   text-align: left;
 }
-.tf_booking_details_wrap .tf-order-table-responsive .wp-list-table thead tr th input, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table thead tr td input {
+.tf_booking_details_wrap .tf-order-table-responsive .wp-list-table thead tr th .tf-checkbox-listing, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table thead tr td .tf-checkbox-listing {
+  height: 28px;
+  width: 28px;
+  background-color: #EDEDF8;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s all ease;
+}
+.tf_booking_details_wrap .tf-order-table-responsive .wp-list-table thead tr th .tf-checkbox-listing:hover, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table thead tr td .tf-checkbox-listing:hover {
+  background-color: #F0F2F4;
+}
+.tf_booking_details_wrap .tf-order-table-responsive .wp-list-table thead tr th .tf-checkbox-listing:hover input, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table thead tr td .tf-checkbox-listing:hover input {
+  background-color: #FFFFFF;
+}
+.tf_booking_details_wrap .tf-order-table-responsive .wp-list-table thead tr th .tf-checkbox-listing input, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table thead tr td .tf-checkbox-listing input {
   border-radius: 4px;
   border: 1px solid #1d2327;
   background: #f0f0f1;
   width: 18px;
   height: 18px;
+  margin: 0px;
 }
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr .ostatus {
   text-transform: capitalize;
@@ -4099,12 +4132,30 @@ Steps
   font-weight: 400;
   line-height: 18px; /* 112.5% */
 }
-.tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr th input, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr td input {
+.tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr th .tf-checkbox-listing, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr td .tf-checkbox-listing {
+  height: 28px;
+  width: 28px;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s all ease;
+}
+.tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr th .tf-checkbox-listing:hover, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr td .tf-checkbox-listing:hover {
+  background-color: #F0F2F4;
+}
+.tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr th .tf-checkbox-listing:hover input, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr td .tf-checkbox-listing:hover input {
+  background-color: #FFFFFF;
+  box-shadow: none;
+}
+.tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr th .tf-checkbox-listing input, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr td .tf-checkbox-listing input {
   border-radius: 4px;
   border: 1px solid #1d2327;
   background: #f0f0f1;
   width: 18px;
   height: 18px;
+  margin: 0px;
 }
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr th .checkinout, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr td .checkinout {
   padding: 3px 8px;
@@ -4122,8 +4173,18 @@ Steps
   background: #FFFAEB;
   color: #B54708;
 }
-.tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr th a.tf_booking_email_sending, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr td a.tf_booking_email_sending {
-  margin-right: 15px;
+.tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr th a.tf_booking_details_view, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr td a.tf_booking_details_view {
+  border-radius: 8px;
+  background-color: #FFFFFF;
+  display: inline-flex;
+  padding: 10px;
+  transition: 0.3s all ease;
+}
+.tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr th a.tf_booking_details_view:hover, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr td a.tf_booking_details_view:hover {
+  background: #F0F2F4;
+}
+.tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr .check-column:hover input {
+  box-shadow: none;
 }
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tfoot tr th {
   text-align: right;
@@ -4186,6 +4247,7 @@ Steps
   padding-right: 4px;
   scrollbar-width: thin;
   scrollbar-color: #aaa #eee;
+  max-height: 218px;
 }
 .select2-dropdown.tf-booking-filter-modal .select2-results ul scrollbar,
 .select2-dropdown.tf-booking-checkinout-filter-modal .select2-results ul scrollbar {
@@ -4211,10 +4273,16 @@ Steps
   background-color: #fff;
   background: #FFF;
   cursor: pointer;
+  border-radius: 6px;
+  transition: 0.3s all ease;
 }
 .select2-dropdown.tf-booking-filter-modal .select2-results ul li:last-child,
 .select2-dropdown.tf-booking-checkinout-filter-modal .select2-results ul li:last-child {
   margin-bottom: 0px;
+}
+.select2-dropdown.tf-booking-filter-modal .select2-results ul li:hover,
+.select2-dropdown.tf-booking-checkinout-filter-modal .select2-results ul li:hover {
+  background-color: #F9FAFB !important;
 }
 
 .select2-dropdown.tf-booking-checkinout-filter-modal .select2-results ul li:first-child {
@@ -4443,6 +4511,9 @@ Steps
     min-height: auto;
   }
 }
+.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-customer-pricing-box .tf-grid-single .tf-single-box {
+  min-height: 128px;
+}
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions {
   width: 268px;
   padding: 24px;
@@ -4481,7 +4552,7 @@ Steps
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px;
+  padding: 8px 16px;
   border-radius: 6px;
 }
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection .tf-order-status-filter ul {
@@ -4510,9 +4581,14 @@ Steps
   font-style: normal;
   font-weight: 600;
   line-height: 24px; /* 150% */
+  border-radius: 6px;
+  transition: 0.3s all ease;
 }
-.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection .tf-order-status-filter ul li:last-child {
-  margin-bottom: 0px;
+.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection .tf-order-status-filter ul li:hover {
+  background-color: #EDEDF8;
+}
+.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection .tf-order-status-filter ul li:first-child {
+  margin-top: 8px;
 }
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection .tf-order-status-filter ul li.checkin {
   background: #ECFDF3;

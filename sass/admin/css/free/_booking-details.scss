@@ -28,6 +28,11 @@
                 font-style: normal;
                 font-weight: 600;
                 line-height: 24px; /* 150% */
+                transition: .3s all ease;
+                &:hover{
+                    color: #f0f0f1;
+                    background-color: #003C79;
+                }
             }
             a.tf-booking-btn{
                 padding: 10px 32px;
@@ -43,6 +48,11 @@
                 line-height: 24px; /* 150% */
                 color: #F0F0F1;
                 margin-left: 15px;
+                transition: .3s all ease;
+                &:hover{
+                    color: #f0f0f1;
+                    background-color: #004E9D;
+                }
             }
         }
     }
@@ -105,10 +115,12 @@
                         font-style: normal;
                         font-weight: 600;
                         line-height: 24px;
+                        padding-left: 8px;
                         display: flex;
                         align-items: center;
                         span.select2-selection__arrow{
                             height: 48px;
+                            padding-right: 16px;
                         }
                     }
                 }
@@ -129,8 +141,13 @@
                 cursor: pointer;
                 margin-right: 16px;
                 height: 48px;
+                transition: .3s all ease;
                 @media #{$max991}{
                     margin: 0px;
+                }
+                &:hover{
+                    color: #f0f0f1;
+                    background-color: #003C79;
                 }
             }
             .tf-order-filter-reset{
@@ -196,7 +213,6 @@
         .wp-list-table{
             border-radius: 12px;
             background: #EDEDF8;
-            box-shadow: 0px 8px 25px 10px rgba(29, 35, 39, 0.10);
             border: 0px solid;
             width: 100%;
             thead{
@@ -218,12 +234,29 @@
                         padding: 13px 24px;
                         border-bottom: 0px solid;
                         text-align: left;
-                        input{
-                            border-radius: 4px;
-                            border: 1px solid #1d2327;
-                            background: #f0f0f1;
-                            width: 18px;
-                            height: 18px;
+                        .tf-checkbox-listing{
+                            height: 28px;
+                            width: 28px;
+                            background-color: #EDEDF8;
+                            border-radius: 8px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            transition: .3s all ease;
+                            &:hover{
+                                background-color: #F0F2F4;
+                                input{
+                                    background-color: #FFFFFF;
+                                }
+                            }
+                            input{
+                                border-radius: 4px;
+                                border: 1px solid #1d2327;
+                                background: #f0f0f1;
+                                width: 18px;
+                                height: 18px;
+                                margin: 0px;
+                            }
                         }
                     }
                 }
@@ -256,12 +289,31 @@
                             font-weight: 400;
                             line-height: 18px; /* 112.5% */
                         }
-                        input{
-                            border-radius: 4px;
-                            border: 1px solid #1d2327;
-                            background: #f0f0f1;
-                            width: 18px;
-                            height: 18px;
+                        .tf-checkbox-listing{
+                            height: 28px;
+                            width: 28px;
+                            background-color: #FFFFFF;
+                            border-radius: 8px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            transition: .3s all ease;
+                            &:hover{
+                                background-color: #F0F2F4;
+                                input{
+                                    background-color: #FFFFFF;
+                                    box-shadow: none;
+                                }
+                            }
+                            input{
+                                border-radius: 4px;
+                                border: 1px solid #1d2327;
+                                background: #f0f0f1;
+                                width: 18px;
+                                height: 18px;
+                                margin: 0px;
+                                
+                            }
                         }
                         .checkinout{
                             padding: 3px 8px;
@@ -279,8 +331,20 @@
                             background: #FFFAEB;
                             color: #B54708;
                         }
-                        a.tf_booking_email_sending{
-                            margin-right: 15px;
+                        a.tf_booking_details_view{
+                            border-radius: 8px;
+                            background-color: #FFFFFF;
+                            display: inline-flex;
+                            padding: 10px;
+                            transition: .3s all ease;
+                            &:hover{
+                                background: #F0F2F4;
+                            }
+                        }
+                    }
+                    .check-column:hover{
+                        input{
+                            box-shadow: none;
                         }
                     }
                 }
@@ -352,6 +416,7 @@
             padding-right: 4px;
             scrollbar-width: thin;
             scrollbar-color: #aaa #eee;
+            max-height: 218px;
             scrollbar {
                 width: 5px;
                 border-radius: 10px !important;
@@ -373,8 +438,13 @@
                 background-color: #fff;
                 background: #FFF;
                 cursor: pointer;
+                border-radius: 6px;
+                transition: .3s all ease;
                 &:last-child{
                     margin-bottom: 0px;
+                }
+                &:hover{
+                    background-color: #F9FAFB !important;
                 }
             }
         }
@@ -614,6 +684,13 @@
                         }
                     }
                 }
+                .tf-customer-pricing-box{
+                    .tf-grid-single{
+                        .tf-single-box{
+                            min-height: 128px;
+                        }
+                    }
+                }
             }
         }
         .tf-booking-actions{
@@ -649,7 +726,7 @@
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
-                        padding: 16px;
+                        padding: 8px 16px;
                         border-radius: 6px;
                     }
                     ul{
@@ -677,8 +754,13 @@
                             font-style: normal;
                             font-weight: 600;
                             line-height: 24px; /* 150% */
-                            &:last-child{
-                                margin-bottom: 0px;
+                            border-radius: 6px;
+                            transition: .3s all ease;
+                            &:hover{
+                                background-color: #EDEDF8;
+                            }
+                            &:first-child{
+                                margin-top: 8px;
                             }
                         }
                         li.checkin{
