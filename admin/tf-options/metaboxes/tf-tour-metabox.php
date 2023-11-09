@@ -1388,8 +1388,8 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'           => 'faqs',
 					'type'         => 'repeater',
-					'label'        => __( 'FAQs', 'tourfic' ),
-					'subtitle' => __( 'Add Items into the FAQs Section on the Frontend', 'tourfic' ),
+					'label'        => __( 'Add Your Questions', 'tourfic' ),
+					'subtitle' 	   => __( 'Click the button below to add Frequently Asked Questions (FAQs) for your tour. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each FAQ using the icons on the right side.', 'tourfic' ),
 					'button_title' => __( 'Add New FAQ', 'tourfic' ),
 					'fields'       => array(
 						array(
