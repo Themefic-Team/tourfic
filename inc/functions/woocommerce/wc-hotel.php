@@ -104,18 +104,19 @@ function tf_hotel_booking_callback() {
 	}
 
 	foreach($room_stay_requirements as $min_max_days) {
+		$room_uid = isset( $_POST['unique_id'] ) ? sanitize_text_field( $_POST['unique_id'] ) : null;
+
 		if($day_difference < $min_max_days["min_stay"] && $min_max_days["min_stay"] > 0) {
-			if($min_max_days["uid"] == $unique_id ){
+			if($min_max_days["uid"] == $room_uid ){
 				if( $min_max_days["max_stay"] == 0) {
 					$response['errors'][] = __( "Your Stay Requirement is Minimum {$min_max_days['min_stay']} Days", 'tourfic' );
 				} else {
 					$response['errors'][] = __( "Your Stay Requirement is Minimum {$min_max_days['min_stay']} Days to Maximum {$min_max_days['max_stay']}", 'tourfic' );
-					
-					
 				}
 			}
-		}else if($day_difference > $min_max_days["max_stay"] && $min_max_days["max_stay"] > 0) {
-			if ($min_max_days["uid"] == $unique_id ){
+		} else if ($day_difference > $min_max_days["max_stay"] && $min_max_days["max_stay"] > 0) {
+
+			if ($min_max_days["uid"] == $room_uid ){
 				$response['errors'][] = __( "Your Maximum Stay Requirement is {$min_max_days['max_stay']} Days", 'tourfic' );
 			}
 		}
