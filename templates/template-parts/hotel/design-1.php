@@ -7,7 +7,8 @@
                     <div class="tf-head-info tf-flex tf-flex-space-bttn tf-flex-gap-24">
                         <div class="tf-head-title">
                             <h1><?php the_title(); ?></h1>
-                            <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
+                            <?php if( !empty($locations )) : ?>
+                                <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
                                 <?php if ( $locations ) { ?>
                                     <?php if ( $address ) {
                                         echo '<i class="fa-solid fa-location-dot"></i> ' . $address . ' –';
@@ -17,6 +18,7 @@
                                     </a>
                             <?php } ?>
                             </div>
+                        <?php endif; ?>
                         </div>
                         <div class="tf-head-social tf-flex tf-flex-gap-8 tf-flex-align-center">
                             <?php

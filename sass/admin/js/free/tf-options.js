@@ -1254,9 +1254,7 @@ var frame, gframe;
                         url: apiUrl,
                         dataType: 'json',
                         success: function (data) {
-                            var location = data.display_name;
-                            // $('#location_field_id').val(location);
-                            console.log(location)
+                            $search_input.val(data.display_name)
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             console.error('Error:', textStatus, errorThrown);
@@ -1267,6 +1265,7 @@ var frame, gframe;
                 mapInit.on('click', function (data) {
                     mapMarker.setLatLng(data.latlng);
                     update_latlng(data.latlng);
+                    updateLocationField(data.latlng.lat, data.latlng.lng)
                 });
 
                 mapInit.on('zoom', function () {
@@ -1277,7 +1276,7 @@ var frame, gframe;
                     update_latlng(mapMarker.getLatLng());
                 });
 
-                mapMarker.on('drag', function (e) {
+                mapMarker.on('dragend', function (e) {
                     let currentLng = e.target._latlng.lng
                     let currentLat = e.target._latlng.lat
 
@@ -1324,6 +1323,7 @@ var frame, gframe;
                                     label: 'No Results.'
                                 }];
                             }
+
 
                             cache[term] = data;
                             response(data);
