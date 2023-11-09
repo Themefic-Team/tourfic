@@ -100,7 +100,7 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 				} else {
 					$paged = 1;
 				}
-				$no_of_booking_per_page = 2;
+				$no_of_booking_per_page = 20;
 				$offset = ($paged-1) * $no_of_booking_per_page;
 
 				$tf_booking_details_select    = array(
