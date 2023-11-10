@@ -1229,6 +1229,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                     <input type="checkbox" name="deposit" class="diposit-status-switcher">
                                     <span class="switcher round"></span>
                                 </label>
+								<?php if(!empty($tf_partial_payment_label) || !empty($tf_partial_payment_description)){ ?>
 								<div class="tooltip-box">
 									<h4><?php echo __( partial_payment_tag_replacement($tf_partial_payment_label, $tf_deposit_amount), 'tourfic' ) ?></h4>
 									<div class="tf-info-btn">
@@ -1236,6 +1237,7 @@ function tf_single_tour_booking_form( $post_id ) {
 										<div class="tf-tooltip"><?php echo __($tf_partial_payment_description) ?></div>
 									</div>
 								</div>
+								<?php } ?>
                             </div>
 					    <?php } ?>
 					    <?php if ( empty($tour_extras) && 3!=$tf_booking_by && empty($traveller_info_coll) ){ ?>
