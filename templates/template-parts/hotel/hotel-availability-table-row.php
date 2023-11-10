@@ -12,8 +12,6 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $room['avail_date
 	}
 }
 $tf_room_disable_date = array_intersect($avail_durationdate, $total_dis_dates);
-$room_book_by = ! empty( $room['booking-by'] ) ? $room['booking-by'] : 1;
-$room_book_url = ! empty( $room['booking-url'] ) ? $room['booking-url'] : '';
 if( $tf_hotel_selected_template_check == "design-1" ){
 if(empty($tf_room_disable_date)){
 ?>

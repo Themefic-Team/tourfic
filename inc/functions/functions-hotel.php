@@ -764,6 +764,8 @@ function tf_room_availability_callback() {
 	}
 	$locations           = get_the_terms( $form_post_id, 'hotel_location' );
 	$first_location_name = ! empty( $locations ) ? $locations[0]->name : '';
+    $room_book_by        = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+    $room_book_url       = ! empty( $meta['booking-url'] ) ? $meta['booking-url'] : '';
 
 	// start table
 	ob_start();

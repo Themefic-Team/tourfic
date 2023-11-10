@@ -1,3 +1,9 @@
+<?php
+if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+	$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+	$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
+}
+?>
 <div class="tf-single-page tf-template-global tf-hotel-design-1">
     <div class="tf-tour-single">
         <div class="tf-template-container">
@@ -186,9 +192,11 @@
 
                         <!-- SIdebar Tour single -->
                         <div class="tf-column tf-tour-details-right">
-                            <div class="tf-tour-booking-box tf-box">
-                                <?php tf_hotel_sidebar_booking_form(); ?>
-                            </div>
+	                        <?php if(($tf_booking_type == 2 && $tf_hide_booking_form !== '1') || $tf_booking_type == 1) :?>
+                                <div class="tf-tour-booking-box tf-box">
+                                    <?php tf_hotel_sidebar_booking_form(); ?>
+                                </div>
+                            <?php endif; ?>
                             <div class="tf-hotel-location-map">
                                 <?php if ( !defined( 'TF_PRO' ) && ( $address ) && $tf_openstreet_map!="default" && (empty($address_latitude) || empty($address_longitude)) ) { ?>
                                     <div class="tf-hotel-location-preview show-on-map">
