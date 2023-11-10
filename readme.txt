@@ -2,8 +2,8 @@
 Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
 Requires at least: 5.4
-Tested up to: 6.3
-Stable tag: 2.10.5
+Tested up to: 6.4
+Stable tag: 2.10.6
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -444,6 +444,13 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.10.6 - 10 November 2023 =
+
+- Compatibility: Compatible with WordPress 6.4.
+- Updated: Updated label for settings panel.
+- Fixed: Map issue fixed.
+- Fixed: Hotel booking issue.
 
 = 2.10.5 - 06 November 2023 =
 
