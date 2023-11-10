@@ -453,7 +453,7 @@
                 },
                 displayEventTime: true,
                 selectable: true,
-                select: function ({start, end, startStr, endStr, allDay, jsEvent, view, resource}) {
+                select: function ({ start, end, startStr, endStr, allDay, jsEvent, view, resource }) {
                     if (moment(start).isBefore(moment(), 'day') || moment(end).isBefore(moment(), 'day')) {
                         self.fullCalendar.unselect();
                         setCheckInOut("", "", self.roomCalData);
@@ -466,7 +466,7 @@
                         setCheckInOut(check_in, check_out, self.roomCalData);
                     }
                 },
-                events: function ({start, end, startStr, endStr, timeZone}, successCallback, failureCallback) {
+                events: function ({ start, end, startStr, endStr, timeZone }, successCallback, failureCallback) {
                     $.ajax({
                         url: tf_options.ajax_url,
                         dataType: "json",
@@ -479,7 +479,7 @@
                             avail_date: $(self.container).find('.avail_date').val(),
                         },
                         beforeSend: function () {
-                            $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
+                            $(self.container).css({ 'pointer-events': 'none', 'opacity': '0.5' });
                             $(self.calendar).addClass('tf-content-loading');
                         },
                         success: function (doc) {
@@ -487,7 +487,7 @@
                                 successCallback(doc);
                             }
 
-                            $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
+                            $(self.container).css({ 'pointer-events': 'auto', 'opacity': '1' });
                             $(self.calendar).removeClass('tf-content-loading');
                         },
                         error: function (e) {
@@ -500,9 +500,9 @@
                     const eventTitleElement = document.createElement('div');
                     eventTitleElement.classList.add('fc-event-title');
                     eventTitleElement.innerHTML = title;
-                    return {domNodes: [eventTitleElement]};
+                    return { domNodes: [eventTitleElement] };
                 },
-                eventClick: function ({event, el, jsEvent, view}) {
+                eventClick: function ({ event, el, jsEvent, view }) {
                     let startTime = moment(event.start, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
                         .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
                     let endTime;
@@ -598,16 +598,16 @@
             let data = $('input, select', container.find('.tf-room-cal-field')).serializeArray();
             let priceBy = container.closest('.tf-single-repeater-room').find('.tf_room_pricing_by').val();
             let avail_date = container.find('.avail_date');
-            data.push({name: 'action', value: 'tf_add_hotel_availability'});
-            data.push({name: 'price_by', value: priceBy});
-            data.push({name: 'avail_date', value: avail_date.val()});
+            data.push({ name: 'action', value: 'tf_add_hotel_availability' });
+            data.push({ name: 'price_by', value: priceBy });
+            data.push({ name: 'avail_date', value: avail_date.val() });
 
             $.ajax({
                 url: tf_options.ajax_url,
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
-                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
+                    container.css({ 'pointer-events': 'none', 'opacity': '0.5' })
                     cal.addClass('tf-content-loading');
                     btn.addClass('tf-btn-loading');
                 },
@@ -627,19 +627,19 @@
                             notyf.error(response.data.message);
                         }
 
-                        container.css({'pointer-events': 'auto', 'opacity': '1'})
+                        container.css({ 'pointer-events': 'auto', 'opacity': '1' })
                         cal.removeClass('tf-content-loading');
                         btn.removeClass('tf-btn-loading');
                     }
                 },
                 error: function (e) {
                     console.log(e);
-                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    container.css({ 'pointer-events': 'auto', 'opacity': '1' })
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
                 },
                 complete: function () {
-                    container.css({'pointer-events': 'auto', 'opacity': '1'});
+                    container.css({ 'pointer-events': 'auto', 'opacity': '1' });
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
                 },
@@ -686,7 +686,7 @@
                     toolbar2: 'styleselect,strikethrough,hr,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
                     //   textarea_rows : 20
                 },
-                quicktags: {buttons: 'strong,em,link,block,del,ins,img,ul,ol,li,code,more,close'},
+                quicktags: { buttons: 'strong,em,link,block,del,ins,img,ul,ol,li,code,more,close' },
                 mediaButtons: false,
             });
         }
@@ -1235,7 +1235,7 @@ var frame, gframe;
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(mapInit);
 
-                var mapMarker = L.marker(map_data.center, {draggable: true}).addTo(mapInit);
+                var mapMarker = L.marker(map_data.center, { draggable: true }).addTo(mapInit);
 
                 var update_latlng = function (data) {
                     $latitude.val(data.lat);
@@ -1243,9 +1243,29 @@ var frame, gframe;
                     $zoom.val(mapInit.getZoom());
                 };
 
+                $latitude.on('change', function () {
+                    console.log('change')
+                })
+
+                function updateLocationField(latitude, longitude) {
+                    var apiUrl = 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + latitude + '&lon=' + longitude;
+
+                    $.ajax({
+                        url: apiUrl,
+                        dataType: 'json',
+                        success: function (data) {
+                            $search_input.val(data.display_name)
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error:', textStatus, errorThrown);
+                        }
+                    });
+                }
+
                 mapInit.on('click', function (data) {
                     mapMarker.setLatLng(data.latlng);
                     update_latlng(data.latlng);
+                    updateLocationField(data.latlng.lat, data.latlng.lng)
                 });
 
                 mapInit.on('zoom', function () {
@@ -1256,9 +1276,18 @@ var frame, gframe;
                     update_latlng(mapMarker.getLatLng());
                 });
 
+                mapMarker.on('dragend', function (e) {
+                    let currentLng = e.target._latlng.lng
+                    let currentLat = e.target._latlng.lat
+
+                    updateLocationField(currentLat, currentLng)
+                })
+
                 if (!$search_input.length) {
                     $search_input = $('[data-depend-id="' + $this.find('.tf--address-field').data('address-field') + '"]');
                 }
+
+                
 
                 var cache = {};
 
@@ -1294,6 +1323,7 @@ var frame, gframe;
                                     label: 'No Results.'
                                 }];
                             }
+
 
                             cache[term] = data;
                             response(data);
@@ -1632,13 +1662,13 @@ var frame, gframe;
                         data: tf_options.tf_complete_order,
                         fill: false
                     },
-                        {
-                            label: "Cancelled Booking",
-                            borderColor: 'red',
-                            tension: 0.1,
-                            data: tf_options.tf_cancel_orders,
-                            fill: false
-                        }
+                    {
+                        label: "Cancelled Booking",
+                        borderColor: 'red',
+                        tension: 0.1,
+                        data: tf_options.tf_cancel_orders,
+                        fill: false
+                    }
                     ]
                 },
 
@@ -1692,13 +1722,13 @@ var frame, gframe;
                                     data: response.tf_complete_orders,
                                     fill: false
                                 },
-                                    {
-                                        label: "Cancelled Booking",
-                                        borderColor: 'red',
-                                        tension: 0.1,
-                                        data: response.tf_cancel_orders,
-                                        fill: false
-                                    }
+                                {
+                                    label: "Cancelled Booking",
+                                    borderColor: 'red',
+                                    tension: 0.1,
+                                    data: response.tf_cancel_orders,
+                                    fill: false
+                                }
                                 ]
                             },
 
@@ -1757,13 +1787,13 @@ var frame, gframe;
                                     data: response.tf_complete_orders,
                                     fill: false
                                 },
-                                    {
-                                        label: "Cancelled Booking",
-                                        borderColor: 'red',
-                                        tension: 0.1,
-                                        data: response.tf_cancel_orders,
-                                        fill: false
-                                    }
+                                {
+                                    label: "Cancelled Booking",
+                                    borderColor: 'red',
+                                    tension: 0.1,
+                                    data: response.tf_cancel_orders,
+                                    fill: false
+                                }
                                 ]
                             },
 
@@ -1851,7 +1881,7 @@ var frame, gframe;
         }
         //show the copied message
         $(this).parents('.tf-copy-item').append('<div><span class="tf-copied-msg">Copied<span></div>');
-        $("span.tf-copied-msg").animate({opacity: 0}, 1000, function () {
+        $("span.tf-copied-msg").animate({ opacity: 0 }, 1000, function () {
             $(this).slideUp('slow', function () {
                 $(this).remove();
             });
