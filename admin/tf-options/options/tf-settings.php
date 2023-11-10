@@ -2092,8 +2092,6 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'tourfic-design1-global-color',
 					'type'     => 'color',
-					'label'    => __( 'Global Color', 'tourfic' ),
-					'subtitle' => __( 'Global Colors of Design 2 related to Tourfic', 'tourfic' ),
 					'multiple' => true,
 					'inline'   => true,
 					'default'  => array(
@@ -2106,8 +2104,6 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'tourfic-design1-p-global-color',
 					'type'     => 'color',
-					'label'    => __( 'Global Color of P', 'tourfic' ),
-					'subtitle' => __( 'Global Colors of P, Design 2 related to Tourfic', 'tourfic' ),
 					'multiple' => true,
 					'inline'   => true,
 					'default'  => array(

@@ -1071,8 +1071,8 @@ function tf_room_availability_callback() {
 						$days = $days+1;
 					}
 
-					$price = $room['price_multi_day'] == '1' ? $price_by_date * $days : $price_by_date * $days;
-					$d_price = $room['price_multi_day'] == '1' ? $d_price_by_date * $days : $d_price_by_date * $days;
+					$price = !empty($room['price_multi_day']) && $room['price_multi_day'] == '1' ? $price_by_date * $days : $price_by_date * $days;
+					$d_price = !empty($room['price_multi_day']) && $room['price_multi_day'] == '1' ? $d_price_by_date * $days : $d_price_by_date * $days;
 
 					tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price );
 
