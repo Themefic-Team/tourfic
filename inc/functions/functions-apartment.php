@@ -835,7 +835,6 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 						
 					<?php 
 					if(sizeof($apartment_multiple_tags) > 0) {
-						$tf_multiple_tag_counter = 0;
 						foreach($apartment_multiple_tags as $tag) {
 							$tag_title = !empty($tag["apartment-tag-title"]) ? __($tag["apartment-tag-title"], 'tourfic') : '';
 							$tag_background_color = !empty($tag["apartment-tag-color-settings"]["background"]) ? $tag["apartment-tag-color-settings"]["background"] : "#003162";
@@ -844,12 +843,6 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 							echo <<<EOD
 								<span class="default-single-tag" style="color: $tag_font_color; background-color: $tag_background_color">$tag_title</span>
 							EOD;
-
-							$tf_multiple_tag_counter++;
-
-							if($tf_multiple_tag_counter >= 5) {
-								break;
-							}
 						}
 					}
 					?>

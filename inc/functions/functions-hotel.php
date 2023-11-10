@@ -2142,7 +2142,6 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 				</div>
 					<?php
 						if(sizeof($hotel_multiple_tags) > 0) {
-							$tf_multiple_tag_counter = 0;
 							foreach($hotel_multiple_tags as $tag) {
 								$hotel_tag_name = !empty($tag['hotel-tag-title']) ? __($tag['hotel-tag-title'], "tourfic") : '';
 								$tag_background_color = !empty($tag["hotel-tag-color-settings"]["background"]) ? $tag["hotel-tag-color-settings"]["background"] : "#003162";
@@ -2153,12 +2152,6 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 										<span class="tf-multiple-tag">$hotel_tag_name</span>
 									</div>
 								EOD;
-
-								$tf_multiple_tag_counter++;
-
-								if($tf_multiple_tag_counter >= 5) {
-									break;
-								}
 							}
 						}
 					?>
@@ -2252,7 +2245,6 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 					<div class="default-tags-container">
 						<?php 
 						if(sizeof($hotel_multiple_tags) > 0) {
-							$tf_multiple_tag_counter = 0;
 							foreach($hotel_multiple_tags as $tag) {
 								$hotel_tag_name = !empty($tag['hotel-tag-title']) ? __($tag['hotel-tag-title'], "tourfic") : '';
 								$tag_background_color = !empty($tag["hotel-tag-color-settings"]["background"]) ? $tag["hotel-tag-color-settings"]["background"] : "#003162";
@@ -2261,12 +2253,6 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 								echo <<<EOD
 									<span class="default-single-tag" style="color: $tag_font_color; background-color: $tag_background_color">$hotel_tag_name</span>
 								EOD;
-
-								$tf_multiple_tag_counter++;
-
-								if($tf_multiple_tag_counter >= 5) {
-									break;
-								}
 							}
 						}
 						?>

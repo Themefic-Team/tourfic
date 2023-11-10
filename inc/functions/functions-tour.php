@@ -2142,7 +2142,6 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 				</div>
 				<?php
 					if(sizeof($tours_multiple_tags) > 0) {
-						$tf_multiple_tag_counter = 0;
 						foreach($tours_multiple_tags as $tag) {
 							$tour_tag_name = !empty($tag['tour-tag-title']) ? __($tag['tour-tag-title'], "tourfic") : '';
 							$tag_background_color = !empty($tag["tour-tag-color-settings"]["background"]) ? $tag["tour-tag-color-settings"]["background"] : "#003162";
@@ -2153,12 +2152,6 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 									<span class="tf-multiple-tag">$tour_tag_name</span>
 								</div>
 							EOD;
-
-							$tf_multiple_tag_counter++;
-
-							if($tf_multiple_tag_counter >= 5) {
-								break;
-							}
 						}
 					}
 				?>
@@ -2221,7 +2214,6 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 				<div class="default-tags-container">
 						<?php 
 						if(sizeof($tours_multiple_tags) > 0) {
-							$tf_multiple_tag_counter = 0;
 							foreach($tours_multiple_tags as $tag) {
 								$hotel_tag_name = !empty($tag['tour-tag-title']) ? __($tag['tour-tag-title'], "tourfic") : '';
 								$tag_background_color = !empty($tag["tour-tag-color-settings"]["background"]) ? $tag["tour-tag-color-settings"]["background"] : "#003162";
@@ -2231,12 +2223,6 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 									echo <<<EOD
 										<span class="default-single-tag" style="color: $tag_font_color; background-color: $tag_background_color">$hotel_tag_name</span>
 									EOD;
-								}
-
-								$tf_multiple_tag_counter++;
-
-								if($tf_multiple_tag_counter >= 5) {
-									break;
 								}
 							}
 						}
