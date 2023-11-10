@@ -1844,16 +1844,11 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	$features = ! empty( get_the_terms( $post_id, 'hotel_feature' ) ) ? get_the_terms( $post_id, 'hotel_feature' ) : '';
 
 	$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
+
 	// Location
-	$address = ! empty( $meta['address'] ) ? $meta['address'] : '';
-	$map     = ! empty( $meta['map'] ) ? $meta['map'] : '';
-	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $map ) && gettype( $map ) == "string" ) {
-		$tf_hotel_map_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-		}, $map );
-		$map                = unserialize( $tf_hotel_map_value );
-		$address            = ! empty( $map["address"] ) ? $map["address"] : $address;
-	}
+	if( !empty($meta['map']) && tf_data_types($meta['map'])){
+		$address = !empty( tf_data_types($meta['map'])['address'] ) ? tf_data_types($meta['map'])['address'] : '';
+    }
 	// Rooms
 	$b_rooms = ! empty( $meta['room'] ) ? $meta['room'] : array();
 	if ( ! empty( $b_rooms ) && gettype( $b_rooms ) == "string" ) {
