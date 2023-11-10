@@ -2233,6 +2233,10 @@ Steps
   color: #838790;
   font-weight: 400;
 }
+.tf-shortcode-generator-section .tf-shortcode-generators .shortcode-section-heading {
+  padding: 5px 30px;
+  border-bottom: 3px solid #003c79;
+}
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-shortcode-btn button {
   font-size: 1rem;
   line-height: 20px;
@@ -2315,6 +2319,16 @@ Steps
 }
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form select.tf-select-field[multiple] {
   height: auto;
+}
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form span.select2-container {
+  width: 100% !important;
+}
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form span.select2-container span.select2-selection {
+  height: 42px;
+}
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .select2-search__field {
+  margin: 10px;
+  font-size: 14px;
 }
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-setting-field {
   width: 100%;

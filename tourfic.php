@@ -238,11 +238,41 @@ function tf_is_woo() {
 	if ( current_user_can( 'activate_plugins' ) ) {
 		if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) && ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) {
 			?>
-
             <div id="message" class="error">
                 <p><?php printf( __( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
-                <p><a class="install-now button" href="<?php echo esc_url( admin_url( '/plugin-install.php?s=slug:woocommerce&tab=search&type=term' ) ); ?>"><?php _e( 'Install Now', 'tourfic' ); ?></a></p>
+                <p><a id="tf_wooinstall" class="install-now button" data-plugin-slug="woocommerce"><?php _e( 'Install Now', 'tourfic' ); ?></a></p>
             </div>
+
+			<script>
+				jQuery(document).on('click', '#tf_wooinstall', function (e) {
+					e.preventDefault();
+					var current = jQuery(this);
+					var plugin_slug = current.attr("data-plugin-slug");
+					var ajax_url= '<?php echo admin_url( 'admin-ajax.php' )?>';
+
+					current.addClass('updating-message').text('Installing...');
+					
+					var data = {
+						action: 'tf_ajax_install_plugin',
+						_ajax_nonce: '<?php echo wp_create_nonce( 'updates' )?>',
+						slug: plugin_slug,
+					};
+
+					jQuery.post(ajax_url, data, function (response) {
+						current.removeClass('updating-message');
+						current.addClass('updated-message').text('Installing...');
+						current.attr("href", response.data.activateUrl);
+					})
+						.fail(function () {
+							current.removeClass('updating-message').text('Install Failed');
+						})
+						.always(function () {
+							current.removeClass('install-now updated-message').addClass('activate-now button-primary').text('Activating...');
+							current.unbind(e);
+							current[0].click();
+						});
+				});
+			</script>
 
 			<?php
 		} elseif ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) && file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) {
@@ -253,7 +283,6 @@ function tf_is_woo() {
                 <p><a href="<?php echo get_admin_url(); ?>plugins.php?_wpnonce=<?php echo wp_create_nonce( 'activate-plugin_woocommerce/woocommerce.php' ); ?>&action=activate&plugin=woocommerce/woocommerce.php"
                       class="button activate-now button-primary"><?php _e( 'Activate', 'tourfic' ); ?></a></p>
             </div>
-
 			<?php
 		} elseif ( version_compare( get_option( 'woocommerce_db_version' ), '2.5', '<' ) ) {
 			?>

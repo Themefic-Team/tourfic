@@ -66,7 +66,7 @@ div#tf-contact-info {
 //     i {
 //         padding: 10px;
 //         margin-left: 7px;
-//     }
+//    }
 // }
 .tf-tour-booking-wrap {
     border-radius: 4px;
@@ -273,6 +273,7 @@ div#tf-contact-info {
     color: #003162;
     border: 1px solid #F5F8FF;
     padding: 50px 20px;
+    min-height: 100px;
     h4 {
         color: #003162;
     }
@@ -288,12 +289,30 @@ div#tf-contact-info {
     * {
         margin: 0;
     }
+
 }
 .tf-single-square-block.first {
     background-color: #007bff24;
 }
 .tf-single-square-block.second {
     background: #28a74524;
+}
+.tf-single-square-block.fifth {
+    background: #e0e7ff;
+
+    .repeat-dates {
+        font-size: 16px;
+        margin-top: 5px;
+
+        .repeat-date {
+            margin: 5px;
+        }
+    }
+}
+.repeat-design-default {
+    .repeat-dates {
+        margin: 0;
+    }
 }
 .tf-single-square-block.third {
     background: #ffc10724;
@@ -848,12 +867,13 @@ div#tf-contact-info {
                                     border: 1px solid #666D74;
                                     cursor: pointer;
                                     &::after{
-                                        left: 5px;
-                                        top: 2px;
+                                        left: 4px;
+                                        top: 1px;
                                         width: 3px;
                                         height: 7px;
                                         border: solid #003C7A;
                                         border-width: 0 3px 3px 0;
+                                        box-sizing: unset;
                                         -webkit-transform: rotate(45deg);
                                         -ms-transform: rotate(45deg);
                                         transform: rotate(45deg);

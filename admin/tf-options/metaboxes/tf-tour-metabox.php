@@ -878,11 +878,47 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 									'subtitle'    => __( 'Indicate the maximum number of people (including adults and children) allowed per day for this tour.', 'tourfic' ),
 									'is_pro'   => true,
 								),
+								array(
+									'id'        => 'tf-repeat-months-switch',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Repeat by Months', 'tourfic' ),
+									'subtitle'  => __( 'Enable this option, if you want to repeat fixed tour by months', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default' => false,
+									'is_pro'   => true,
+								),
+								array(
+									'id' => 'tf-repeat-months-checkbox',
+									'type' => 'checkbox',
+									'label' => __('Repeat Fixed Tours', 'tourfic'),
+									'subtitle' => __('Select Months you want to Repeat the Tour', 'tourfic'),
+									'class' => 'tf-months-checkbox',
+									'options' => array(
+										'01' => __('January', 'tourfic'),
+										'02' => __('February', 'tourfic'),
+										'03' => __('March', 'tourfic'),
+										'04' => __('April', 'tourfic'),
+										'05' => __('May', 'tourfic'),
+										'06' => __('June', 'tourfic'),
+										'07' => __('July', 'tourfic'),
+										'08' => __('August', 'tourfic'),
+										'09' => __('September', 'tourfic'),
+										'10' => __('October', 'tourfic'),
+										'11' => __('November', 'tourfic'),
+										'12' => __('December', 'tourfic')
+									),
+									// 'default' => date('m'),
+									'inline' => 1,
+									"dependency" => array(
+										array("tf-repeat-months-switch", "==", 'true')
+									)
+								)
 							),
 						),
 
 					),
-				)
+				),
 
 			),
 		),
@@ -1461,7 +1497,46 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 			),
 		),
 
-		// // Terms & Conditions
+		// Multiple tags for tours
+		'tours_multiple_tags' => array(
+			'title'  => __( 'Multiple Tags', 'tourfic' ),
+			'icon'   => 'fa fa-list',
+			'fields' => array(
+				array(
+					'id'           => 'tf-tour-tags',
+					'type'         => 'repeater',
+					'label'        => __( 'Multiple Tags', 'tourfic' ),
+					'button_title' => __( 'Add / Insert New Tag', 'tourfic' ),
+					'fields'       => array(
+
+						array(
+							'id'    => 'tour-tag-title',
+							'type'  => 'text',
+							'label' => __( 'Tag', 'tourfic' ),
+						),
+
+						array(
+							'id'       => 'tour-tag-color-settings',
+							'type'     => 'color',
+							'label'    => __( 'Tag Colors', 'tourfic' ),
+							'subtitle' => __( 'Colors of Tag Background and Font', 'tourfic' ),
+							'multiple' => true,
+							'inline'   => true,
+							'colors'   => array(
+								'background' => __( 'Background', 'tourfic' ),
+								'font'   => __( 'Font', 'tourfic' ),
+							),
+							'default' => array(
+								'background' => '#003162',
+								'font' => '#fff'
+							),
+						),
+					),
+				),
+			),
+		),
+
+		// Terms & Conditions
 		'terms_and_conditions' => array(
 			'title'  => __( 'Terms & Conditions', 'tourfic' ),
 			'icon'   => 'fa-regular fa-square-check',

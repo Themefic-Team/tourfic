@@ -1293,6 +1293,8 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 		<script>
 			(function ($) {
 				$(document).ready(function () {
+					<?php tf_flatpickr_locale('root'); ?>
+
 					$(document).on("focus",".tf-hotel-side-booking #check-in-out-date", function(e) {
 						let calander = flatpickr( this, {
 						enableTime: false,
@@ -1301,15 +1303,16 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 						dateFormat: "Y/m/d",
 						altInput: true,
 						altFormat: '<?php echo $date_format_for_users; ?>',
+
+						// flatpickr locale
+						<?php tf_flatpickr_locale(); ?>
+
 						onChange: function (selectedDates, dateStr, instance) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
 						},
+						});
 					});
-
-					// open flatpickr on focus
-					calander.open();
-					})
 				});
 			})(jQuery);
 		</script>
@@ -2294,7 +2297,7 @@ function tf_month_chart_filter_callback() {
  * @since 2.9.4
  */
 if ( ! function_exists( 'tf_terms_dropdown' ) ) {
-	function tf_terms_dropdown( $term, $attribute, $class, $multiple = false ) {
+	function tf_terms_dropdown( $term, $attribute, $id, $class, $multiple = false ) {
 
 		//get the terms
 		$terms = get_terms( array(
@@ -2311,7 +2314,7 @@ if ( ! function_exists( 'tf_terms_dropdown' ) ) {
 		$select = '';
 		//output the select field
 		if ( ! empty( $terms ) && is_array( $terms ) ) {
-			$select .= '<select data-term="' . $attribute . '" name="' . $term . '" class="' . $class . '" ' . $multiple . '>';
+			$select .= '<select data-placeholder=" Select from Dropdown" id="' . $id . '" data-term="' . $attribute . '" name="' . $term . '" class="tf-shortcode-select2 ' . $class . '" ' . $multiple . '>';
 			$select .= '<option value="\'all\'">' . __( 'All', 'tourfic' ) . '</option>';
 			foreach ( $terms as $term ) {
 				$select .= '<option value="' . $term->term_id . '">' . $term->name . '</option>';

@@ -431,6 +431,19 @@
             tfSelect2Int($this);
         });
 
+        $('select.tf-shortcode-select2').each(function(e) {
+            let $this = $(this);
+            let id = $this.attr("id");
+            tfSelect2Int($this);
+
+            $(this).on("select2:select", function (e) { 
+                var select_val = $(e.currentTarget).val();
+                if(select_val && select_val.includes("'all'")) {
+                    $(this).val(["'all'"]).trigger('change.select2');
+                }
+            });
+        })
+
         /*
         * Room Full Calendar
         * @since 2.10.2
@@ -764,6 +777,15 @@
 
             let repeatColorField = add_value.find('.tf-field-color');
             if (repeatColorField.length > 0) {
+                repeatColorField.find('input.tf-color').each(function () {
+                    var color_field =  $(this).clone(); 
+                    if($(this).closest('li').length > 0){
+                        $(this).closest('li').append(color_field);
+                    }else{
+                        $(this).closest('.tf-fieldset').append(color_field);
+                    }
+                    $(this).closest('.wp-picker-container').remove();
+                 });
                 tfColorInt(repeatColorField);
             }
 
@@ -926,6 +948,15 @@
 
             let repeatColorField = clone_value.find('.tf-field-color');
             if (repeatColorField.length > 0) {
+                repeatColorField.find('input.tf-color').each(function () {
+                    var color_field =  $(this).clone(); 
+                    if($(this).closest('li').length > 0){
+                        $(this).closest('li').append(color_field);
+                    }else{
+                        $(this).closest('.tf-fieldset').append(color_field);
+                    }
+                    $(this).closest('.wp-picker-container').remove();
+                 });
                 tfColorInt(repeatColorField);
             }
 
@@ -1857,7 +1888,6 @@ var frame, gframe;
             });
         });
     });
-
 
 })(jQuery);
 

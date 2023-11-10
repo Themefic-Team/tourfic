@@ -55,6 +55,22 @@ TF_Settings::option( 'tf_settings', array(
 					'default'    => 'Y/m/d',
 				),
 				array(
+					'id'       => 'tf-week-day-flatpickr',
+					'type'     => 'select',
+					'label'    => __( 'Select First Day of Week', 'tourfic' ),
+					'subtitle' => __( 'Select a Day, that will show in the DatePickr of Frontend', 'tourfic' ),
+					'options'  => array(
+						'0' => __('Sunday', 'tourfic'),
+						'1' => __('Monday', 'tourfic'),
+						'2' => __('Tuesday', 'tourfic'),
+						'3' => __('Wednesday', 'tourfic'),
+						'4' => __('Thursday', 'tourfic'),
+						'5' => __('Friday', 'tourfic'),
+						'6' => __('Saturday', 'tourfic')
+					),
+					'default'    => '0',
+				),
+				array(
 					'id'       => 'template_heading',
 					'type'     => 'heading',
 					'label'    => __( 'Template Settings', 'tourfic' ),

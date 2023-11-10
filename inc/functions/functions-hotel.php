@@ -1267,6 +1267,9 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
             (function ($) {
                 $(document).ready(function () {
 
+					// flatpickr First Day of Week
+					<?php tf_flatpickr_locale('root'); ?>
+
                     $("#tf_hotel_aval_check #check-in-out-date").flatpickr({
                         enableTime: false,
                         mode: "range",
@@ -1274,6 +1277,10 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                         altInput: true,
                         altFormat: '<?php echo $hotel_date_format_for_users; ?>',
                         minDate: "today",
+
+						// flatpickr locale
+						<?php tf_flatpickr_locale(); ?>
+
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                         },
@@ -1506,6 +1513,9 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
             (function ($) {
                 $(document).ready(function () {
 
+					// flatpickr first day of Week
+					<?php tf_flatpickr_locale('root'); ?>
+
                     $("#tf_hotel_aval_check #check-in-out-date").flatpickr({
                         enableTime: false,
                         mode: "range",
@@ -1513,6 +1523,10 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                         minDate: "today",
                         altInput: true,
                         altFormat: '<?php echo $hotel_date_format_for_users; ?>',
+
+						// flatpickr locale
+						<?php tf_flatpickr_locale(); ?>
+
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                         },
@@ -1894,6 +1908,9 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
         (function ($) {
             $(document).ready(function () {
 
+				// First Day of Week
+				   <?php tf_flatpickr_locale("root"); ?>
+
                 const checkinoutdateange = flatpickr(".tf-hotel-booking-sidebar #check-in-out-date", {
                     enableTime: false,
                     mode: "range",
@@ -1972,6 +1989,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 
 	// Featured
 	$featured = ! empty( $meta['featured'] ) ? $meta['featured'] : '';
+	$hotel_multiple_tags = !empty($meta['tf-hotel-tags']) ? $meta['tf-hotel-tags'] : array();
 	/**
 	 * All values from URL
 	 */
@@ -2270,6 +2288,32 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 		?>
         <div class="tf-item-card tf-flex tf-item-hotel">
             <div class="tf-item-featured">
+				<div class="tf-tag-items">
+				<div class="tf-features-box">
+					<?php if ( $featured ): ?>
+						<div class="tf-feature tf-flex">
+							<?php
+							echo ! empty( $meta['featured_text'] ) ? $meta['featured_text'] : esc_html( "HOT DEAL" );
+							?>
+						</div>
+					<?php endif; ?>
+				</div>
+					<?php
+						if(sizeof($hotel_multiple_tags) > 0) {
+							foreach($hotel_multiple_tags as $tag) {
+								$hotel_tag_name = !empty($tag['hotel-tag-title']) ? __($tag['hotel-tag-title'], "tourfic") : '';
+								$tag_background_color = !empty($tag["hotel-tag-color-settings"]["background"]) ? $tag["hotel-tag-color-settings"]["background"] : "#003162";
+								$tag_font_color = !empty($tag["hotel-tag-color-settings"]["font"]) ? $tag["hotel-tag-color-settings"]["font"] : "#fff";
+
+								echo <<<EOD
+									<div class="tf-multiple-tag-item" style="color: $tag_font_color; background-color: $tag_background_color ">
+										<span class="tf-multiple-tag">$hotel_tag_name</span>
+									</div>
+								EOD;
+							}
+						}
+					?>
+				</div>
                 <a href="<?php echo esc_url( $url ); ?>">
 					<?php
 					if ( has_post_thumbnail() ) {
@@ -2279,15 +2323,6 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 					}
 					?>
                 </a>
-                <div class="tf-features-box tf-flex">
-					<?php if ( $featured ): ?>
-                        <div class="tf-feature">
-							<?php
-							echo ! empty( $meta['featured_text'] ) ? $meta['featured_text'] : esc_html( "HOT DEAL" );
-							?>
-                        </div>
-					<?php endif; ?>
-                </div>
             </div>
             <div class="tf-item-details">
 				<?php
@@ -2508,6 +2543,21 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                     </div>
 				<?php endif; ?>
                 <div class="tourfic-single-left">
+					<div class="default-tags-container">
+						<?php 
+						if(sizeof($hotel_multiple_tags) > 0) {
+							foreach($hotel_multiple_tags as $tag) {
+								$hotel_tag_name = !empty($tag['hotel-tag-title']) ? __($tag['hotel-tag-title'], "tourfic") : '';
+								$tag_background_color = !empty($tag["hotel-tag-color-settings"]["background"]) ? $tag["hotel-tag-color-settings"]["background"] : "#003162";
+								$tag_font_color = !empty($tag["hotel-tag-color-settings"]["font"]) ? $tag["hotel-tag-color-settings"]["font"] : "#fff";
+
+								echo <<<EOD
+									<span class="default-single-tag" style="color: $tag_font_color; background-color: $tag_background_color">$hotel_tag_name</span>
+								EOD;
+							}
+						}
+						?>
+					</div>
                     <a href="<?php echo esc_url( $url ); ?>">
 						<?php
 						if ( has_post_thumbnail() ) {
