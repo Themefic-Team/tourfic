@@ -1636,7 +1636,23 @@
             let thisEml = $(this);
             let thisVal = thisEml.val();
             let $this = $(this).closest('.tf_hotel-shortcode-design-2');
-            let total_people = parseInt(thisEml.parent().parent().siblings().find('.childs-style2').val()) + parseInt(thisEml.parent().parent().siblings().find('.infant-style2').val()) + parseInt(thisVal);
+            // Declare child outside the if block
+            let child = 0;
+
+            if (thisEml.parent().parent().siblings().find('.childs-style2').length > 0) {
+                child = parseInt(thisEml.parent().parent().siblings().find('.childs-style2').val());
+            } else {
+                child = parseInt(0);
+            }
+            // Declare intant outside the if block
+            let intant = 0;
+
+            if (thisEml.parent().parent().siblings().find('.infant-style2').length > 0) {
+                intant = parseInt(thisEml.parent().parent().siblings().find('.childs-style2').val());
+            } else {
+                intant = parseInt(0);
+            }
+            let total_people = child + intant + parseInt(thisVal);
             if (total_people > 1) {
                 $this.find(".tf_guest_number .guest").text(total_people);
             }
@@ -1646,7 +1662,25 @@
             let thisEml = $(this);
             let thisVal = thisEml.val();
             let $this = $(this).closest('.tf_hotel-shortcode-design-2');
-            let total_people = parseInt(thisEml.parent().parent().siblings().find('.adults-style2').val()) + parseInt(thisEml.parent().parent().siblings().find('.infant-style2').val()) + parseInt(thisVal);
+
+             // Declare adults outside the if block
+             let adults = 0;
+
+             if (thisEml.parent().parent().siblings().find('.adults-style2').length > 0) {
+                adults = parseInt(thisEml.parent().parent().siblings().find('.adults-style2').val());
+             } else {
+                adults = parseInt(0);
+             }
+             // Declare intant outside the if block
+             let intant = 0;
+ 
+             if (thisEml.parent().parent().siblings().find('.infant-style2').length > 0) {
+                 intant = parseInt(thisEml.parent().parent().siblings().find('.infant-style2').val());
+             } else {
+                 intant = parseInt(0);
+             }
+
+            let total_people = adults + intant + parseInt(thisVal);
             if (total_people > 1) {
                 $this.find(".tf_guest_number .guest").text(total_people);
             }
@@ -1656,7 +1690,26 @@
             let thisEml = $(this);
             let thisVal = thisEml.val();
             let $this = $(this).closest('.tf_hotel-shortcode-design-2');
-            let total_people = parseInt(thisEml.parent().parent().siblings().find('.adults-style2').val()) + parseInt(thisEml.parent().parent().siblings().find('.childs-style2').val()) + parseInt(thisVal);
+
+            // Declare adults outside the if block
+            let adults = 0;
+
+            if (thisEml.parent().parent().siblings().find('.adults-style2').length > 0) {
+               adults = parseInt(thisEml.parent().parent().siblings().find('.adults-style2').val());
+            } else {
+               adults = parseInt(0);
+            }
+
+            // Declare child outside the if block
+            let child = 0;
+
+            if (thisEml.parent().parent().siblings().find('.childs-style2').length > 0) {
+                child = parseInt(thisEml.parent().parent().siblings().find('.childs-style2').val());
+            } else {
+                child = parseInt(0);
+            }
+
+            let total_people = adults + child + parseInt(thisVal);
             if (total_people > 1) {
                 $this.find(".tf_guest_number .guest").text(total_people);
             }
