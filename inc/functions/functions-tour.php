@@ -1229,12 +1229,17 @@ function tf_single_tour_booking_form( $post_id ) {
                                     <input type="checkbox" name="deposit" class="diposit-status-switcher">
                                     <span class="switcher round"></span>
                                 </label>
+								
 								<div class="tooltip-box">
+									<?php if( !empty($tf_partial_payment_label) ){ ?>
 									<h4><?php echo __( partial_payment_tag_replacement($tf_partial_payment_label, $tf_deposit_amount), 'tourfic' ) ?></h4>
+									<?php }
+									if( !empty($tf_partial_payment_description) ){ ?>
 									<div class="tf-info-btn">
 										<i class="fa fa-circle-exclamation tooltip-title-box" style="padding-left: 5px; padding-top: 5px" title=""></i>
 										<div class="tf-tooltip"><?php echo __($tf_partial_payment_description) ?></div>
 									</div>
+									<?php } ?>
 								</div>
                             </div>
 					    <?php } ?>
@@ -1830,8 +1835,11 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 	$post_id = get_the_ID();
 	//Get hotel meta values
 	$meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
+
 	// Location
-	$location = ! empty( $meta['text_location'] ) ? $meta['text_location'] : '';
+	if( !empty($meta['location']) && tf_data_types($meta['location'])){
+		$location = !empty( tf_data_types($meta['location'])['address'] ) ? tf_data_types($meta['location'])['address'] : '';
+    }
 	// Featured
 	$featured = ! empty( $meta['tour_as_featured'] ) ? $meta['tour_as_featured'] : '';
 

@@ -6013,7 +6013,7 @@ div#tf-contact-info {
   min-width: 100%;
   top: 100%;
   transform: translateY(8px);
-  z-index: 200;
+  z-index: 99999;
   left: auto;
   right: 0;
 }
