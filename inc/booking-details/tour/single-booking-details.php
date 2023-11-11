@@ -312,7 +312,7 @@
                             $meta = get_post_meta( $tf_order_details->post_id, 'tf_tours_opt', true );
                             $tour_ides = !empty($tf_tour_details->unique_id) ? $tf_tour_details->unique_id : '';
                             // Address
-                            $location = isset( $meta['text_location'] ) ? $meta['text_location'] : '';
+                            $location = '';
                             if( !empty($meta['location']) && tf_data_types($meta['location'])){
                                 $location = !empty( tf_data_types($meta['location'])['address'] ) ? tf_data_types($meta['location'])['address'] : $location;
                             }

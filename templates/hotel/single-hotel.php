@@ -79,18 +79,15 @@ while ( have_posts() ) : the_post();
 	$features = ! empty( get_the_terms( $post_id, 'hotel_feature' ) ) ? get_the_terms( $post_id, 'hotel_feature' ) : '';
 
 	// Location
-	$address = ! empty( $meta['address'] ) ? $meta['address'] : '';
-	$map     = ! empty( $meta['map'] ) ? $meta['map'] : '';
-	if ( ! empty( $map ) && gettype( $map ) == "string" ) {
-		$tf_hotel_map_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-		}, $map );
-		$map                = unserialize( $tf_hotel_map_value );
-        $address = !empty($map["address"]) ? $map["address"] : $address;
-		$address_latitude = !empty($map["latitude"]) ? $map["latitude"] : '';
-        $address_longitude = !empty($map["longitude"]) ? $map["longitude"] : '';
-        $address_zoom = !empty($map["zoom"]) ? $map["zoom"] : '';
-	}
+
+	if( !empty($meta['map']) && tf_data_types($meta['map'])){
+		$address = !empty( tf_data_types($meta['map'])['address'] ) ? tf_data_types($meta['map'])['address'] : '';
+
+		$address_latitude = !empty( tf_data_types($meta['map'])['latitude'] ) ? tf_data_types($meta['map'])['latitude'] : '';
+		$address_longitude = !empty( tf_data_types($meta['map'])['longitude'] ) ? tf_data_types($meta['map'])['longitude'] : '';
+		$address_zoom = !empty( tf_data_types($meta['map'])['zoom'] ) ? tf_data_types($meta['map'])['zoom'] : '';
+
+    }
 
 	// Hotel Detail
 	$gallery = ! empty( $meta['gallery'] ) ? $meta['gallery'] : '';

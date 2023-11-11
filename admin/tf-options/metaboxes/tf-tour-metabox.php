@@ -126,16 +126,6 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-location-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
-					'id'          => 'text_location',
-					'type'        => 'textarea',
-					'label'       => __( 'Tour Location', 'tourfic' ),
-					'subtitle'    => __( 'Manually enter your tour location. This is only for display purpose!', 'tourfic' ),
-					'placeholder' => __( 'e.g. 123 ABC Road, Toronto, Ontario 20100', 'tourfic' ),
-					'attributes'  => array(
-						'required' => 'required',
-					),
-				),
-				array(
 					'id'       => 'location',
 					'class'    => 'gmaps',
 					'type'     => 'map',
@@ -144,7 +134,10 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'height'   => '250px',
 					'settings' => array(
 						'scrollWheelZoom' => true,
-					)
+					),
+					'attributes'  => array(
+						'required' => 'required',
+					),
 				),
 			),
 		),
@@ -264,7 +257,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'multiple' => true,
 					'is_pro'   => true,
 					'label'    => __( 'Select features', 'tourfic' ),
-					'subtitle'   => __( 'For instance, select amenities like a Breakfast, AC Bus, Tour Guide, and more as applicable. You need to create these features from the ', 'tourfic' ) . ' <a href="'.admin_url('edit-tags.php?taxonomy=hotel_feature&post_type=tf_hotel').'" target="_blank"><strong>' . __( '“Features”', 'tourfic' ) . '</strong></a> tab.',
+					'subtitle'   => __( 'For instance, select amenities like a Breakfast, AC Bus, Tour Guide, and more as applicable. You need to create these features from the ', 'tourfic' ) . ' <a href="'.admin_url('edit-tags.php?taxonomy=tour_features&post_type=tf_tours').'" target="_blank"><strong>' . __( '“Features”', 'tourfic' ) . '</strong></a> tab.',
 				),
 			),
 		),
@@ -1111,8 +1104,8 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'           => 'itinerary',
 					'type'         => 'repeater',
-					'label' => __( 'Title of the section', 'tourfic' ),
 					'button_title' => __( 'Add New Itinerary', 'tourfic' ),
+					'label'        => __( 'Create your Travel Itinerary', 'tourfic' ),
 					'fields'       => array(
 						array(
 							'id'          => 'time',
@@ -1428,9 +1421,9 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'           => 'faqs',
 					'type'         => 'repeater',
-					'label'        => __( 'FAQs', 'tourfic' ),
-					'subtitle'    => __( 'Click the button below to add Frequently Asked Questions (FAQs) for your tour. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each FAQ using the icons on the right side.', 'tourfic' ),
-					'button_title' => __( 'Add New Faq', 'tourfic' ),
+					'label'        => __( 'Add Your Questions', 'tourfic' ),
+					'subtitle' 	   => __( 'Click the button below to add Frequently Asked Questions (FAQs) for your tour. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each FAQ using the icons on the right side.', 'tourfic' ),
+					'button_title' => __( 'Add New FAQ', 'tourfic' ),
 					'fields'       => array(
 						array(
 							'id'    => 'title',

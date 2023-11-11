@@ -843,17 +843,17 @@ function tf_room_availability_callback() {
 
 				if($pricing_by == 1) {
 					if($hotel_discount_type == "percent") {
-						$d_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $room_price - ( ( $room_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+						$d_room_price = !empty($room_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( $room_price - ( ( $room_price / 100 ) * $hotel_discount_amount ), 2 ) ) ) : 0;
 					}else if($hotel_discount_type == "fixed") {
-						$d_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $room_price - $hotel_discount_amount ), 2 ) ) );
+						$d_room_price = !empty($room_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( $room_price - $hotel_discount_amount ), 2 ) ) ) : 0;
 					}
 				} else {
 					if($hotel_discount_type == "percent") {
-						$d_room_adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $room_adult_price - ( ( $room_adult_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
-						$d_room_child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $room_child_price - ( ( $room_child_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+						$d_room_adult_price = !empty($room_adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( $room_adult_price - ( ( $room_adult_price / 100 ) * $hotel_discount_amount ), 2 ) ) ) : 0;
+						$d_room_child_price = !empty($room_child_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( $room_child_price - ( ( $room_child_price / 100 ) * $hotel_discount_amount ), 2 ) ) ) : 0;
 					}else if($hotel_discount_type == "fixed") {
-						$room_adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $room_adult_price - $hotel_discount_amount ), 2 ) ) );
-						$room_child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $room_child_price - $hotel_discount_amount ), 2 ) ) );
+						$room_adult_price = !empty($room_adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( $room_adult_price - $hotel_discount_amount ), 2 ) ) ) : 0;
+						$room_child_price = !empty($room_child_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( $room_child_price - $hotel_discount_amount ), 2 ) ) ) : 0;
 					}
 				}
 
@@ -1056,11 +1056,11 @@ function tf_room_availability_callback() {
 					}
 
 					if(!$multi_by_date_ck){
-						$days = $days;
+						$days = $days+1;
 					}
 
-					$price = $room['price_multi_day'] == '1' ? $price_by_date * $days : $price_by_date * $days;
-					$d_price = $room['price_multi_day'] == '1' ? $d_price_by_date * $days : $d_price_by_date * $days;
+					$price = !empty($room['price_multi_day']) && $room['price_multi_day'] == '1' ? $price_by_date * $days : $price_by_date * $days;
+					$d_price = !empty($room['price_multi_day']) && $room['price_multi_day'] == '1' ? $d_price_by_date * $days : $d_price_by_date * $days;
 
 					tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price );
 
@@ -2000,16 +2000,11 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	$features = ! empty( get_the_terms( $post_id, 'hotel_feature' ) ) ? get_the_terms( $post_id, 'hotel_feature' ) : '';
 
 	$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
+
 	// Location
-	$address = ! empty( $meta['address'] ) ? $meta['address'] : '';
-	$map     = ! empty( $meta['map'] ) ? $meta['map'] : '';
-	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $map ) && gettype( $map ) == "string" ) {
-		$tf_hotel_map_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-		}, $map );
-		$map                = unserialize( $tf_hotel_map_value );
-		$address            = ! empty( $map["address"] ) ? $map["address"] : $address;
-	}
+	if( !empty($meta['map']) && tf_data_types($meta['map'])){
+		$address = !empty( tf_data_types($meta['map'])['address'] ) ? tf_data_types($meta['map'])['address'] : '';
+    }
 	// Rooms
 	$b_rooms = ! empty( $meta['room'] ) ? $meta['room'] : array();
 	if( !empty($b_rooms) && gettype($b_rooms)=="string" ){

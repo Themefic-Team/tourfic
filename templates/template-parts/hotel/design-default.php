@@ -211,12 +211,12 @@
                             </div>
                         <?php } ?>
                     </div>
-                    <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( ! empty( $map["address"] ) || (! empty( $map["latitude"] ) && ! empty( $map["longitude"] ) ) ) ) { ?>
+                    <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( ! empty( $address ) || (! empty( $address_latitude ) && ! empty( $address_longitude ) ) ) ) { ?>
                         <div class="popupmap-for-mobile">
                             <?php 
                             if( $tf_openstreet_map!="default" ){ ?>
                             <div class="tf-hotel-location-preview show-on-map">
-                                <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&output=embed" width="100%" height="150"
+                                <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address_latitude ); ?>,<?php echo esc_attr( $address_longitude ); ?>&output=embed" width="100%" height="150"
                                         style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
                                 <a data-fancybox data-src="#tf-hotel-google-maps" href="javascript:;">
@@ -267,12 +267,12 @@
                             <div style="display: none;" id="tf-hotel-google-maps">
                                 <div class="tf-hotel-google-maps-container">
                                     <?php
-                                    if ( ! empty( $map["address"] ) ) {
+                                    if ( ! empty( $address ) ) {
                                         ?>
-                                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $map["address"] ) ); ?>&z=15&output=embed" width="100%" height="550" style="border:0;"
+                                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $address ) ); ?>&z=15&output=embed" width="100%" height="550" style="border:0;"
                                                 allowfullscreen="" loading="lazy"></iframe>
                                     <?php } else { ?>
-                                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&z=15&output=embed" width="100%"
+                                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address_latitude ); ?>,<?php echo esc_attr( $address_longitude ); ?>&z=15&output=embed" width="100%"
                                                 height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                                     <?php } ?>
                                 </div>
@@ -313,11 +313,11 @@
                                                 class="fas fa-map-marker-alt"></i><?php esc_html_e( 'Show on map', 'tourfic' ); ?></span></a></div>
                         </div>
                     <?php } ?>
-                    <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( ! empty( $map["address"] ) || (! empty( $map["latitude"] ) && ! empty( $map["longitude"] ) ) ) ) { ?>
+                    <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( ! empty( $address ) || (! empty( $address_latitude ) && ! empty( $address_longitude ) ) ) ) { ?>
                         <?php 
                         if( $tf_openstreet_map!="default" ){ ?>
                         <div class="tf-hotel-location-preview show-on-map">
-                            <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&output=embed" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                            <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address_latitude ); ?>,<?php echo esc_attr( $address_longitude ); ?>&output=embed" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                             
                             <a data-fancybox data-src="#tf-hotel-google-maps" href="javascript:;">
                             <div class="tf-btn">
@@ -365,10 +365,10 @@
                         <div style="display: none;" id="tf-hotel-google-maps">
                             <div class="tf-hotel-google-maps-container">
                                 <?php
-                                if ( ! empty( $map["address"] ) ) { ?>
-                                    <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $map["address"] ) ); ?>&z=17&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                if ( ! empty( $address ) ) { ?>
+                                    <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $address ) ); ?>&z=17&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                                 <?php } else { ?>
-                                    <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&z=17&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                    <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address_latitude ); ?>,<?php echo esc_attr( $address_longitude ); ?>&z=17&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                                 <?php } ?>
                             </div>
                         </div>

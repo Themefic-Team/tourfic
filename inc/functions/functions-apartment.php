@@ -808,7 +808,14 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 		}
 
 		// Location
-		$address         = ! empty( $meta['address'] ) ? $meta['address'] : '';
+		$map     = ! empty( $meta['map'] ) ? $meta['map'] : '';
+		if ( ! empty( $map ) && gettype( $map ) == "string" ) {
+			$tf_apartment_map_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+				return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+			}, $map );
+			$map                    = unserialize( $tf_apartment_map_value );
+			$address = ! empty($map['address'] ) ? $map['address'] : '';
+		}
 		$featured        = ! empty( $meta['apartment_as_featured'] ) ? $meta['apartment_as_featured'] : '';
 		$price_per_night = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
 		$apartment_multiple_tags = !empty($meta['tf-apartment-tags']) ? $meta['tf-apartment-tags'] : [];
@@ -852,7 +859,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 						if ( has_post_thumbnail() ) {
 							the_post_thumbnail( 'full' );
 						} else {
-							echo '<img width="100%" height="100%" src="' . TF_ASSETS_URL . "img/img-not-available.svg" . '" class="attachment-full size-full wp-post-image">';
+							echo '<img width="100%" height="100%" src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
 						}
 						?>
                     </a>

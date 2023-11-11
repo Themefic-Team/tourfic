@@ -65,13 +65,13 @@ while ( have_posts() ) : the_post();
 	}
 
 	// Location
-	$address = ! empty( $meta['address'] ) ? $meta['address'] : '';
 	$map     = ! empty( $meta['map'] ) ? $meta['map'] : '';
 	if ( ! empty( $map ) && gettype( $map ) == "string" ) {
 		$tf_apartment_map_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
 			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
 		}, $map );
 		$map                    = unserialize( $tf_apartment_map_value );
+        $address = ! empty($map['address'] ) ? $map['address'] : '';
 	}
 
 	// Map Type

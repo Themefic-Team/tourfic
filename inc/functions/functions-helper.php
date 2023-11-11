@@ -181,6 +181,7 @@ if ( ! function_exists( 'tf_black_friday_20222_hotel_tour_docs' ) ) {
  * Go to Documentaion Metabox
  */
 
+
 function tf_hotel_tour_docs() {
 	global $current_user;
 	$tf_current_role = $current_user->roles[0];
@@ -188,6 +189,10 @@ function tf_hotel_tour_docs() {
 		add_meta_box( 'tfhotel_docs', __( 'Tourfic Documentation', 'tourfic' ), 'tf_hotel_docs_callback', 'tf_hotel', 'side', 'high' );
 		add_meta_box( 'tfapartment_docs', __( 'Tourfic Documantation', 'tourfic' ), 'tf_apartment_docs_callback', 'tf_apartment', 'side', 'high' );
 		add_meta_box( 'tftour_docs', __( 'Tourfic Documentation', 'tourfic' ), 'tf_tour_docs_callback', 'tf_tours', 'side', 'high' );
+
+		add_filter( 'get_user_option_meta-box-order_tf_tours', 'tour_metabox_order' );
+		add_filter( 'get_user_option_meta-box-order_tf_apartment', 'apartment_metabox_order' );
+		add_filter( 'get_user_option_meta-box-order_tf_hotel', 'hotel_metabox_order' );
 	}
 }
 
@@ -198,18 +203,19 @@ function tf_hotel_docs_callback() {
 	?>
     <div class="tf_docs_preview">
         <a href="<?php echo $tfhoteldocumentation; ?>" target="_blank">
-			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/documentation.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
+			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
 		</a>
     </div>
 	<?php
 }
 
 function tf_apartment_docs_callback() {
+	global $wp_meta_boxes;
 	$tf_apartment_documentation = sanitize_url( 'https://themefic.com/docs/tourfic/add-new-apartment/locations-types-and-featured-image/' );
 	?>
     <div class="tf_docs_preview">
         <a href="<?php echo $tf_apartment_documentation; ?>" target="_blank">
-			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/documentation.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
+			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
 		</a>
     </div>
 	<?php
@@ -220,11 +226,51 @@ function tf_tour_docs_callback() {
 	?>
     <div class="tf_docs_preview">
         <a href="<?php echo $tf_tour_documentation; ?>" target="_blank">
-			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/documentation.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
+			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
 		</a>
     </div>
 	<?php
 }
+
+// doc link Positioning Start
+
+function apartment_metabox_order( $order ) {
+	return array(
+		'side' => join( 
+			",", 
+			array (
+				'submitdiv',
+				'tfapartment_docs',
+			)
+		),
+	);
+}
+
+function tour_metabox_order( $order ) {
+	return array(
+		'side' => join( 
+			",", 
+			array(
+				'submitdiv',
+				'tftour_docs',
+			)
+		),
+	);
+}
+
+function hotel_metabox_order( $order ) {
+	return array(
+		'side' => join( 
+			",", 
+			array(
+				'submitdiv',
+				'tfhotel_docs',
+			)
+		),
+	);
+}
+
+// doc link Positioning end
 
 /**
  * Notice wrapper

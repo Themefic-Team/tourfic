@@ -45,9 +45,6 @@ while ( have_posts() ) : the_post();
 	$post_type       = substr( get_post_type(), 3, - 1 );
 	$has_in_wishlist = tf_has_item_in_wishlist( $post_id );
 
-	// Address
-	$location = isset( $meta['text_location'] ) ? $meta['text_location'] : '';
-
 	// tour type meta
 	$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';
 	// Repeated Fixed Tour meta
@@ -110,8 +107,9 @@ while ( have_posts() ) : the_post();
 	$t_share  = ! empty( tfopt( 't-share' ) ) ? tfopt( 't-share' ) : 0;
 	$disable_share_opt = ! empty( $disable_share_opt ) ? $disable_share_opt : $t_share;
 	
+	// Location
 	if( !empty($meta['location']) && tf_data_types($meta['location'])){
-		$location = !empty( tf_data_types($meta['location'])['address'] ) ? tf_data_types($meta['location'])['address'] : $location;
+		$location = !empty( tf_data_types($meta['location'])['address'] ) ? tf_data_types($meta['location'])['address'] : '';
 
 		$location_latitude = !empty( tf_data_types($meta['location'])['latitude'] ) ? tf_data_types($meta['location'])['latitude'] : '';
 		$location_longitude = !empty( tf_data_types($meta['location'])['longitude'] ) ? tf_data_types($meta['location'])['longitude'] : '';
