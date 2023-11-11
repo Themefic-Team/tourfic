@@ -404,7 +404,7 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 	?>
 
 	<?php tourfic_fullwidth_container_start( $fullwidth ); ?>
-    <div id="tf-booking-search-tabs">
+    <div id="tf-booking-search-tabs" class="<?php echo 2==$design ? esc_attr('tf-shortcode-design-2-tab') : ''; ?>">
 
 		<?php if ( $title ): ?>
             <div class="tf_widget-title"><h2><?php echo esc_html( $title ); ?></h2></div>
