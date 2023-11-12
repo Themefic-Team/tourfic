@@ -2115,12 +2115,20 @@ var frame, gframe;
             var data = $this.find('.tf-setting-field').val();
             var option_name = $this.find('.tf-setting-field').attr('data-term');
             var post_count = $this.find('.post-count').attr('data-count');
+            var section_title = $this.find('.tf-shortcode-title-field ').attr('data-title');
+            var section_subtitle = $this.find('.tf-shortcode-subtitle-field ').attr('data-subtitle');
 
             if (option_name != undefined && option_name != '') {
                 data = option_name + '=' + (data.length ? data : '""');
             }
             if (post_count != undefined && post_count != '') {
                 data = post_count + '=' + (data.length ? data : '""');
+            }
+            if (section_title != undefined && section_title != '') {
+                data = section_title + '=' + (data.length ? `"${data}"` : '""');
+            }
+            if (section_subtitle != undefined && section_subtitle != '') {
+                data = section_subtitle + '=' + (data.length ? `"${data}"` : '""');
             }
             arr.push(data);
         });
