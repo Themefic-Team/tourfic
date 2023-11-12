@@ -87,6 +87,20 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         </div>
                                     </div>
                                 </div>
+                                 <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo __( 'Title', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo __( 'Subtitle', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-generate-tour">
@@ -237,6 +251,20 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
+                                            <h3><?php echo __( 'Title', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo __( 'Subtitle', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Order', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
                                                 <option value="order='ASC'"><?php _e( 'ASC', 'tourfic' ); ?></option>
@@ -330,6 +358,20 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                                 <option value="style='grid'"><?php _e( 'Grid', 'tourfic' ); ?></option>
                                                 <option value="style='slider'"><?php _e( 'Slider', 'tourfic' ); ?></option>
                                             </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo __( 'Title', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo __( 'Subtitle', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
@@ -479,6 +521,20 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                             </select>
                                         </div>
                                     </div>
+                                </div> 
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo __( 'Title', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo __( 'Subtitle', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
@@ -576,6 +632,20 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                                 <option value="style='grid'"><?php _e( 'Grid', 'tourfic' ); ?></option>
                                                 <option value="style='slider'"><?php _e( 'Slider', 'tourfic' ); ?></option>
                                             </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo __( 'Title', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo __( 'Subtitle', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
@@ -723,6 +793,20 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                                 <option value="orderby='ID'"><?php _e( 'ID', 'tourfic' ); ?></option>
                                                 <option value="orderby='rand'"><?php _e( 'Rand', 'tourfic' ); ?></option>
                                             </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo __( 'Title', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo __( 'Subtitle', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
@@ -920,6 +1004,20 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                                 <option value="fullwidth='true'"><?php _e( 'Yes', 'tourfic' ); ?></option>
                                                 <option value="fullwidth='false'"><?php _e( 'No', 'tourfic' ); ?></option>
                                             </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo __( 'Title', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo __( 'Subtitle', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
