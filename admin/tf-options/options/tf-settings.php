@@ -3954,10 +3954,7 @@ TF_Settings::option( 'tf_settings', array(
 
 		/**
 		 * Affiliate Options
-		 *
-		 * Main menu
 		 */
-
 		'affiliate' => array(
 			'title'  => __( 'Affiliate', 'tourfic' ),
 			'icon'   => 'fa fa-handshake-o',
@@ -3969,53 +3966,9 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle' => __( 'Use these options if you want to show 3rd party data and earn commission from them. Currently, we only allow Booking.com and TravelPayout. Gradually more options would be added.', 'tourfic' ),
 				),
 				array(
-					'id'     => 'tf-tab',
-					'type'   => 'tab',
-					'label'  => 'Affiliate Integration',
-					'is_pro' => true,
-					'tabs'   => array(
-						array(
-							'id'     => 'affiliate_booking',
-							'title'  => __( 'Booking.com', 'tourfic' ),
-							'fields' => array(
-								array(
-									'id'      => 'email-official-docs',
-									'type'    => 'notice',
-									'style'   => 'success',
-									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/affiliate-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-								),
-								array(
-									'id'        => 'enable-booking-dot-com',
-									'type'      => 'switch',
-									'label'     => __( 'Enable Booking.com Integration?', 'tourfic' ),
-									'label_on'  => __( 'Yes', 'tourfic' ),
-									'label_off' => __( 'No', 'tourfic' ),
-									'default'   => true
-								),
-							),
-						),
-						array(
-							'id'     => 'travelPayouts',
-							'title'  => __( 'TravelPayouts', 'tourfic' ),
-							'icon'   => 'fa fa-gear',
-							'fields' => array(
-								array(
-									'id'      => 'email-official-docs',
-									'type'    => 'notice',
-									'style'   => 'success',
-									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/affiliate-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-								),
-								array(
-									'id'        => 'enable-travel-payouts',
-									'type'      => 'switch',
-									'label'     => __( 'Enable TravelPayouts Integration?', 'tourfic' ),
-									'label_on'  => __( 'Yes', 'tourfic' ),
-									'label_off' => __( 'No', 'tourfic' ),
-									'default'   => true
-								),
-							),
-						),
-					),
+					'id'       => 'tf-affiliate',
+					'type'     => 'callback',
+					'function' => 'tf_affiliate_callback',
 				)
 			),
 		),

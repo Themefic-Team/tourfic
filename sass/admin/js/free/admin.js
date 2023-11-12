@@ -229,6 +229,76 @@
                 });
             }
         });
+
+        /*
+        * active tourfic affiliate plugin
+        */
+        $(document).on('click', '.tf-affiliate-active', function(e) {
+            e.preventDefault();
+
+            var btn = $(this);
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: 'tf_affiliate_active',
+                    nonce: tf_admin_params.tf_nonce,
+                },
+                beforeSend: function (data) {
+                    btn.addClass('tf-btn-loading').css({'pointer-events': 'none'});
+                },
+                success: function (data) {
+                    console.log('data', data)
+                    let response = JSON.parse(data);
+                    if( response.status === 'success' ) {
+                        notyf.success(response.message);
+
+                        setTimeout(function() {
+                            location.reload();
+                        }, 500);
+                    }
+                    btn.removeClass('tf-btn-loading').css({'pointer-events': 'auto'});
+                },
+                error: function (data) {
+                    btn.removeClass('tf-btn-loading').css({'pointer-events': 'auto'});
+                },
+                complete: function (data) {
+                    btn.removeClass('tf-btn-loading').css({'pointer-events': 'auto'});
+                }
+            })
+        });
+
+        /*
+        * install tourfic affiliate plugin
+        */
+        $(document).on('click', '.tf-affiliate-install', function(e) {
+            e.preventDefault();
+
+            var btn = $(this);
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: 'tf_affiliate_install',
+                    nonce: tf_admin_params.tf_nonce,
+                },
+                beforeSend: function (data) {
+                    btn.addClass('tf-btn-loading').css({'pointer-events': 'none'});
+                },
+                success: function (data) {
+                    let response = JSON.parse(data);
+                    if( response.status === 'success' ) {
+                        location.reload();
+                    }
+                    btn.removeClass('tf-btn-loading').css({'pointer-events': 'auto'});
+                },
+                error: function (data) {
+                    btn.removeClass('tf-btn-loading').css({'pointer-events': 'auto'});
+                }
+            })
+        });
     });
 
 })(jQuery);

@@ -808,31 +808,12 @@ function tf_tours_booking_function() {
 				$tf_tours_data['tf_tours_data']['price'] = $deposit_amount;
 			}
 
-			if( 2==$tf_booking_type && !empty($tf_booking_url) ){
-				$external_search_info = array(
-					'{adult}'    => $adults,
-					'{child}'    => $children,
-					'{booking_date}' => $tour_date,
-					'{infant}'     => $infant
-				);
-				if(!empty($tf_booking_attribute)){
-					$tf_booking_query_url = str_replace(array_keys($external_search_info), array_values($external_search_info), $tf_booking_query_url);
-					if( !empty($tf_booking_query_url) ){
-						$tf_booking_url = $tf_booking_url.'/?'.$tf_booking_query_url;
-					}
-				}
+			// Add product to cart with the custom cart item data
+			WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_tours_data );
 
-				$response['product_id']  = $product_id;
-				$response['add_to_cart'] = 'true';
-				$response['redirect_to'] = $tf_booking_url;
-			}else{
-				// Add product to cart with the custom cart item data
-				WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_tours_data );
-
-				$response['product_id']  = $product_id;
-				$response['add_to_cart'] = 'true';
-				$response['redirect_to'] = wc_get_checkout_url();
-			}
+			$response['product_id']  = $product_id;
+			$response['add_to_cart'] = 'true';
+			$response['redirect_to'] = wc_get_checkout_url();
 
 		} else {
 			# Show errors

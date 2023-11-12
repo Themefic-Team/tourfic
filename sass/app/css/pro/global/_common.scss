@@ -405,20 +405,20 @@
 }
 #tf-travelpayouts-hotel-modal {
     iframe#tf-travelpayouts-hotel-search {
-        height: calc(100vh - 200px);
+        height: 100vh;
     }
 }
 #tf-travelpayouts-flight-modal {
     iframe#tf-travelpayouts-flight-search {
-        height: calc(100vh - 200px);
+        height: 100vh;
     }
 }
 #tf-affiliate-booking-modal {
     iframe#tf-booking-dot-com-search {
-        height: calc(100vh - 200px);
+        height: 100vh;
     }
 }
-.tf-modal-btn {
+/*.tf-modal-btn {
     cursor: pointer;
 }
 .tf-modal {
@@ -506,7 +506,7 @@
         z-index: 999;
         background: rgba(0, 0, 0, 0.4);
     }
-}
+}*/
 .tf-styled-checkbox {
     position: relative;
     display: flex;
