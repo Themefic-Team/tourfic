@@ -91,7 +91,7 @@
                 margin-bottom: 0px;
                 border-collapse: collapse;
                 width: 100%;
-                thead{
+                &>thead{
                     background-color: $color-theme;
                     tr{
                         th{
@@ -107,7 +107,7 @@
                         }
                     }
                 }
-                tbody{
+                &>tbody{
                     tr{
                         td{
                             border: 1px solid #ddd;

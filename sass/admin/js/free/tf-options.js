@@ -36,6 +36,8 @@
                     return e.href.indexOf(query) > -1;
                 }).parent().addClass("current");
             }
+
+            tfApartmentCalendar()
         });
 
         /*
@@ -445,7 +447,7 @@
         })
 
         /*
-        * Room Full Calendar
+        * Room Availability Calendar
         * @since 2.10.2
         * @auther: Foysal
         */
@@ -469,14 +471,14 @@
                 select: function ({ start, end, startStr, endStr, allDay, jsEvent, view, resource }) {
                     if (moment(start).isBefore(moment(), 'day') || moment(end).isBefore(moment(), 'day')) {
                         self.fullCalendar.unselect();
-                        setCheckInOut("", "", self.roomCalData);
+                        setRoomCheckInOut("", "", self.roomCalData);
                     } else {
                         var zone = moment(start).format("Z");
                         zone = zone.split(":");
                         zone = "" + parseInt(zone[0]) + ":00";
                         var check_in = moment(start).utcOffset(zone).format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
                         var check_out = moment(end).utcOffset(zone).subtract(1, 'day').format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
-                        setCheckInOut(check_in, check_out, self.roomCalData);
+                        setRoomCheckInOut(check_in, check_out, self.roomCalData);
                     }
                 },
                 events: function ({ start, end, startStr, endStr, timeZone }, successCallback, failureCallback) {
@@ -525,20 +527,20 @@
                     } else {
                         endTime = startTime;
                     }
-                    setCheckInOut(startTime, endTime, self.roomCalData);
+                    setRoomCheckInOut(startTime, endTime, self.roomCalData);
                     let priceBy = $(self.container).closest('.tf-single-repeater-room').find('.tf_room_pricing_by').val();
-                    //if (priceBy === '1') {
-                    if (typeof event.extendedProps.price != 'undefined') {
-                        $("[name='tf_room_price']", self.roomCalData).val(event.extendedProps.price);
+                    if (priceBy === '1') {
+                        if (typeof event.extendedProps.price != 'undefined') {
+                            $("[name='tf_room_price']", self.roomCalData).val(event.extendedProps.price);
+                        }
+                    } else {
+                        if (typeof event.extendedProps.adult_price != 'undefined') {
+                            $("[name='tf_room_adult_price']", self.roomCalData).val(event.extendedProps.adult_price);
+                        }
+                        if (typeof event.extendedProps.child_price != 'undefined') {
+                            $("[name='tf_room_child_price']", self.roomCalData).val(event.extendedProps.child_price);
+                        }
                     }
-                    //} else {
-                    if (typeof event.extendedProps.adult_price != 'undefined') {
-                        $("[name='tf_room_adult_price']", self.roomCalData).val(event.extendedProps.adult_price);
-                    }
-                    if (typeof event.extendedProps.child_price != 'undefined') {
-                        $("[name='tf_room_child_price']", self.roomCalData).val(event.extendedProps.child_price);
-                    }
-                    //}
                     if (event.extendedProps.status) {
                         $("[name='tf_room_status'] option[value=" + event.extendedProps.status + "]", self.roomCalData).prop("selected", true);
                     }
@@ -548,7 +550,7 @@
                 self.container = jQuery(container);
                 self.calendar = container.querySelector('.tf-room-cal');
                 self.roomCalData = $('.tf-room-cal-field', self.container);
-                setCheckInOut('', '', self.roomCalData);
+                setRoomCheckInOut('', '', self.roomCalData);
                 self.initCalendar();
             }
             this.initCalendar = function () {
@@ -559,12 +561,12 @@
             }
         };
 
-        function setCheckInOut(check_in, check_out, roomCalData) {
+        function setRoomCheckInOut(check_in, check_out, roomCalData) {
             $('.tf_room_check_in', roomCalData).val(check_in);
             $('.tf_room_check_out', roomCalData).val(check_out);
         }
 
-        function resetForm(roomCalData) {
+        function roomResetForm(roomCalData) {
             $('.tf_room_check_in', roomCalData).val('');
             $('.tf_room_check_out', roomCalData).val('');
             $('[name="tf_room_price"]', roomCalData).val('');
@@ -629,7 +631,7 @@
                         if (response.data.status === true) {
                             avail_date.val(response.data.avail_date)
                             notyf.success(response.data.message);
-                            resetForm(container);
+                            roomResetForm(container);
 
                             var room = new roomCal(containerEl);
                             room.init();
@@ -659,7 +661,7 @@
             });
         });
 
-        /*$(document).on('change', '.tf_room_pricing_by', function (e) {
+        $(document).on('change', '.tf_room_pricing_by', function (e) {
             let room = $(this).closest('.tf-single-repeater-room');
             let pricing_by = $(this).val();
 
@@ -670,7 +672,7 @@
                 room.find('.tf-price-by-person').show();
                 room.find('.tf-price-by-room').hide();
             }
-        });*/
+        });
 
         // Switcher Value Changed
         $(document).on("change", ".tf-switch", function (e) {
@@ -684,7 +686,240 @@
             if ($this.hasClass('tf_room_availability_by_date')) {
                 tfHotelCalendar();
             }
+            if ($this.hasClass('tf_apartment_availability_by_date')){
+                tfApartmentCalendar();
+            }
         });
+
+        /*
+        * Apartment Availability Calendar
+        * @since 2.10.2
+        * @auther: Foysal
+        */
+        var apartmentCal = function (container) {
+            var self = this;
+            this.container = container;
+            this.calendar = null
+            this.apartmentCalData = null;
+            this.fullCalendar;
+            this.timeOut;
+            this.fullCalendarOptions = {
+                initialView: 'dayGridMonth',
+                firstDay: 1,
+                headerToolbar: {
+                    start: 'today',
+                    center: 'title',
+                    end: 'prev,next'
+                },
+                displayEventTime: true,
+                selectable: true,
+                select: function ({start, end, startStr, endStr, allDay, jsEvent, view, resource}) {
+                    if (moment(start).isBefore(moment(), 'day') || moment(end).isBefore(moment(), 'day')) {
+                        self.fullCalendar.unselect();
+                        setAptCheckInOut("", "", self.apartmentCalData);
+                    } else {
+                        var zone = moment(start).format("Z");
+                        zone = zone.split(":");
+                        zone = "" + parseInt(zone[0]) + ":00";
+                        var check_in = moment(start).utcOffset(zone).format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        var check_out = moment(end).utcOffset(zone).subtract(1, 'day').format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        setAptCheckInOut(check_in, check_out, self.apartmentCalData);
+                    }
+                },
+                events: function ({start, end, startStr, endStr, timeZone}, successCallback, failureCallback) {
+                    $.ajax({
+                        url: tf_options.ajax_url,
+                        dataType: "json",
+                        type: "POST",
+                        data: {
+                            action: "tf_get_apartment_availability",
+                            new_post: $('[name="new_post"]').val(),
+                            apartment_id: $('[name="apartment_id"]').val(),
+                            apt_availability: $('.apt_availability').val(),
+                        },
+                        beforeSend: function () {
+                            $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
+                            $(self.calendar).addClass('tf-content-loading');
+                        },
+                        success: function (doc) {
+                            if (typeof doc == "object") {
+                                successCallback(doc);
+                            }
+
+                            $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
+                            $(self.calendar).removeClass('tf-content-loading');
+                        },
+                        error: function (e) {
+                            console.log(e);
+                        }
+                    });
+                },
+                eventContent: function (arg) {
+                    const title = arg.event.title;
+                    const eventTitleElement = document.createElement('div');
+                    eventTitleElement.classList.add('fc-event-title');
+                    eventTitleElement.innerHTML = title;
+                    return {domNodes: [eventTitleElement]};
+                },
+                eventClick: function ({event, el, jsEvent, view}) {
+                    let startTime = moment(event.start, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
+                        .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
+                    let endTime;
+                    if (event.end) {
+                        endTime = moment(event.end, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
+                            .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
+                    } else {
+                        endTime = startTime;
+                    }
+                    setAptCheckInOut(startTime, endTime, self.apartmentCalData);
+                    let pricingType = $('.tf_apt_pricing_type').val();
+                    if (pricingType === 'per_night') {
+                        if (typeof event.extendedProps.price != 'undefined') {
+                            $("[name='tf_apt_price']", self.apartmentCalData).val(event.extendedProps.price);
+                        }
+                    } else {
+                        if (typeof event.extendedProps.adult_price != 'undefined') {
+                            $("[name='tf_apt_adult_price']", self.apartmentCalData).val(event.extendedProps.adult_price);
+                        }
+                        if (typeof event.extendedProps.child_price != 'undefined') {
+                            $("[name='tf_apt_child_price']", self.apartmentCalData).val(event.extendedProps.child_price);
+                        }
+                        if (typeof event.extendedProps.infant_price != 'undefined') {
+                            $("[name='tf_apt_infant_price']", self.apartmentCalData).val(event.extendedProps.infant_price);
+                        }
+                    }
+                    if (event.extendedProps.status) {
+                        $("[name='tf_apt_status'] option[value=" + event.extendedProps.status + "]", self.apartmentCalData).prop("selected", true);
+                    }
+                },
+            };
+            this.init = function () {
+                self.container = jQuery(container);
+                self.calendar = container.querySelector('.tf-apt-cal');
+                self.apartmentCalData = $('.tf-apt-cal-field', self.container);
+                setAptCheckInOut('', '', self.apartmentCalData);
+                self.initCalendar();
+            }
+            this.initCalendar = function () {
+                if (typeof FullCalendar != 'undefined') {
+                    self.fullCalendar = new FullCalendar.Calendar(self.calendar, self.fullCalendarOptions);
+                    self.fullCalendar.render();
+                }
+            }
+        };
+
+        function setAptCheckInOut(check_in, check_out, apartmentCalData) {
+            $('.tf_apt_check_in', apartmentCalData).val(check_in);
+            $('.tf_apt_check_out', apartmentCalData).val(check_out);
+        }
+
+        function aptResetForm(apartmentCalData) {
+            $('.tf_apt_check_in', apartmentCalData).val('');
+            $('.tf_apt_check_out', apartmentCalData).val('');
+            $('[name="tf_apt_price"]', apartmentCalData).val('');
+            $('[name="tf_apt_adult_price"]', apartmentCalData).val('');
+            $('[name="tf_apt_child_price"]', apartmentCalData).val('');
+            $('[name="tf_apt_infant_price"]', apartmentCalData).val('');
+        }
+
+        const tfApartmentCalendar = () => {
+            $('.tf-apt-cal-wrap').each(function (index, el) {
+                var apt = new apartmentCal(el);
+                apt.init();
+
+                let checkIn = $(el).find('[name="tf_apt_check_in"]').flatpickr({
+                    dateFormat: 'Y-m-d',
+                    minDate: 'today',
+                    altInput: true,
+                    altFormat: tf_options.tf_admin_date_format,
+                    onChange: function (selectedDates, dateStr, instance) {
+                        checkOut.set('minDate', dateStr);
+                    }
+                });
+
+                let checkOut = $(el).find('[name="tf_apt_check_out"]').flatpickr({
+                    dateFormat: 'Y-m-d',
+                    minDate: 'today',
+                    altInput: true,
+                    altFormat: tf_options.tf_admin_date_format,
+                    onChange: function (selectedDates, dateStr, instance) {
+                        checkIn.set('maxDate', dateStr);
+                    }
+                });
+            });
+        }
+        tfApartmentCalendar();
+
+        $(document).on('click', '.tf_apt_cal_update', function (e) {
+            e.preventDefault();
+
+            let btn = $(this);
+            let container = btn.closest('.tf-apt-cal-wrap');
+            let containerEl = btn.closest('.tf-apt-cal-wrap')[0];
+            let cal = container.find('.tf-apt-cal');
+            let data = $('input, select', container.find('.tf-apt-cal-field')).serializeArray();
+            let pricingType = $('.tf_apt_pricing_type').val();
+            let aptAvailability = container.find('.apt_availability');
+            data.push({name: 'action', value: 'tf_add_apartment_availability'});
+            data.push({name: 'pricing_type', value: pricingType});
+            data.push({name: 'apt_availability', value: aptAvailability.val()});
+
+            $.ajax({
+                url: tf_options.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
+                    cal.addClass('tf-content-loading');
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    if (typeof response == 'object') {
+                        if (response.data.status === true) {
+                            aptAvailability.val(response.data.apt_availability)
+                            notyf.success(response.data.message);
+                            aptResetForm(container);
+
+                            var apt = new apartmentCal(containerEl);
+                            apt.init();
+                            if (apt.fullCalendar) {
+                                apt.fullCalendar.refetchEvents();
+                            }
+                        } else {
+                            notyf.error(response.data.message);
+                        }
+
+                        container.css({'pointer-events': 'auto', 'opacity': '1'})
+                        cal.removeClass('tf-content-loading');
+                        btn.removeClass('tf-btn-loading');
+                    }
+                },
+                error: function (e) {
+                    console.log(e);
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+                complete: function () {
+                    container.css({'pointer-events': 'auto', 'opacity': '1'});
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+            });
+        });
+
+        $(document).on('change', '.tf_apt_pricing_type', function (e) {
+            let pricingType = $(this).val();
+
+            if (pricingType === 'per_night') {
+                $('.tf-price-by-night').show();
+                $('.tf-price-by-person').hide();
+            } else if (pricingType === '2') {
+                $('.tf-price-by-person').show();
+                $('.tf-price-by-night').hide();
+            }
+        });
+
 
         /*
         * Options WP editor
@@ -719,6 +954,17 @@
         function TF_Booking_Confirmation() {
             if ($('.tf-repeater-wrap .tf-single-repeater-book-confirm-field').length > 0) {
                 $('.tf-repeater-wrap .tf-single-repeater-book-confirm-field').each(function () {
+                    let $this = $(this);
+                    let repeaterCount = $this.find('input[name="tf_repeater_count"]').val();
+                    if (0 == repeaterCount || 1 == repeaterCount || 2 == repeaterCount) {
+                        $this.find('.tf_hidden_fields').hide();
+                        $this.find('.tf-repeater-icon-clone').hide();
+                        $this.find('.tf-repeater-icon-delete').hide();
+                    }
+                });
+            }
+            if ($('.tf-repeater-wrap .tf-single-repeater-hotel-book-confirm-field').length > 0) {
+                $('.tf-repeater-wrap .tf-single-repeater-hotel-book-confirm-field').each(function () {
                     let $this = $(this);
                     let repeaterCount = $this.find('input[name="tf_repeater_count"]').val();
                     if (0 == repeaterCount || 1 == repeaterCount || 2 == repeaterCount) {
@@ -1120,6 +1366,7 @@
             $this.addClass('show');
             $this.parent().parent().find('.tf-tab-item-content[data-tab-id = ' + tab_id + ']').addClass('show');
 
+            tfApartmentCalendar();
         });
 
     });

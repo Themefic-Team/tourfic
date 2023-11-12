@@ -3734,23 +3734,25 @@ Steps
   border-radius: 5px;
 }
 
-.fc-view-harness {
+.tf-apt-cal-wrap .fc-view-harness,
+.tf-room-cal-wrap .fc-view-harness {
   height: 395px !important;
 }
-
-.fc-direction-ltr .fc-daygrid-event.fc-event-end,
-.fc-direction-rtl .fc-daygrid-event.fc-event-start {
+.tf-apt-cal-wrap .fc-direction-ltr .fc-daygrid-event.fc-event-end,
+.tf-apt-cal-wrap .fc-direction-rtl .fc-daygrid-event.fc-event-start,
+.tf-room-cal-wrap .fc-direction-ltr .fc-daygrid-event.fc-event-end,
+.tf-room-cal-wrap .fc-direction-rtl .fc-daygrid-event.fc-event-start {
   font-size: 10px;
 }
-
-.fc .fc-bg-event .fc-event-title {
+.tf-apt-cal-wrap .fc .fc-bg-event .fc-event-title,
+.tf-room-cal-wrap .fc .fc-bg-event .fc-event-title {
   font-size: 10px;
 }
-
-.fc .fc-daygrid-event {
+.tf-apt-cal-wrap .fc .fc-daygrid-event,
+.tf-room-cal-wrap .fc .fc-daygrid-event {
   cursor: pointer;
 }
-
+.tf-apt-cal-wrap table,
 .tf-room-cal-wrap table {
   margin-bottom: 0 !important;
 }

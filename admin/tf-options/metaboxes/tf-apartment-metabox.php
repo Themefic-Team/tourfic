@@ -11,7 +11,7 @@ function tf_apt_amenities_cats() {
 		}
 	}
 
-	if(empty($all_cats)){
+	if ( empty( $all_cats ) ) {
 		$all_cats[''] = __( 'Select Category', 'tourfic' );
 	}
 
@@ -211,20 +211,60 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'default' => __( 'Book your apartment', 'tourfic' ),
 				),
 				array(
+					'id'         => 'pricing_type',
+					'type'       => 'select',
+					'label'      => __( 'Pricing Type', 'tourfic' ),
+					'subtitle'   => __( 'Select pricing type', 'tourfic' ),
+					'options'    => array(
+						'per_night'  => __( 'Per Night', 'tourfic' ),
+						'per_person' => __( 'Per Person (pro)', 'tourfic' ),
+					),
+					'attributes' => array(
+						'class' => 'tf_apt_pricing_type',
+					),
+				),
+				array(
 					'id'          => 'price_per_night',
 					'type'        => 'number',
 					'label'       => __( 'Price Per Night', 'tourfic' ),
 					'subtitle'    => __( 'The total booking cost is calculated by multiplying the nightly rate by the number of nights stayed, from check-in to check-out.', 'tourfic' ),
 					'field_width' => 50,
-					'attributes'  => array( 'min' => 0 )
+					'attributes'  => array( 'min' => 0 ),
+					'dependency' => array( 'pricing_type', '==', 'per_night' ),
+				),
+				array(
+					'id'          => '',
+					'type'        => 'number',
+					'label'       => __( 'Adult Price', 'tourfic' ),
+					'subtitle'    => __( 'Enter adult price', 'tourfic' ),
+					'field_width' => 33.33,
+					'attributes'  => array( 'min' => 0 ),
+					'dependency'  => array( 'pricing_type', '==', 'per_person' ),
+				),
+				array(
+					'id'          => '',
+					'type'        => 'number',
+					'label'       => __( 'Child Price', 'tourfic' ),
+					'subtitle'    => __( 'Enter child price', 'tourfic' ),
+					'field_width' => 33.33,
+					'attributes'  => array( 'min' => 0 ),
+					'dependency'  => array( 'pricing_type', '==', 'per_person' ),
+				),
+				array(
+					'id'          => '',
+					'type'        => 'number',
+					'label'       => __( 'Infant Price', 'tourfic' ),
+					'subtitle'    => __( 'Enter infant price', 'tourfic' ),
+					'field_width' => 33.33,
+					'attributes'  => array( 'min' => 0 ),
+					'dependency'  => array( 'pricing_type', '==', 'per_person' ),
 				),
 				array(
 					'id'          => 'min_stay',
 					'type'        => 'number',
 					'label'       => __( 'Minimum Night Stay', 'tourfic' ),
 					'subtitle'    => __( 'Specify the minimum number of nights required to book this room.', 'tourfic' ),
-					'field_width' => 50,
-					'attributes'  => array( 'min' => 0 )
+					'attributes'  => array( 'min' => 1 )
 				),
 				array(
 					'id'          => 'max_adults',
@@ -259,7 +299,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'          => 'additional_fee',
 					'type'        => 'number',
-					'label'       => __( 'Additional Fee', 'tourfic' ),
+					'label'       => __( 'Additional Fee Amount', 'tourfic' ),
 					'field_width' => 33.33,
 					'attributes'  => array( 'min' => 0 )
 				),
@@ -295,6 +335,53 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'attributes'  => array( 'min' => 0 ),
 					'field_width' => 50,
 				),
+				//Booking Type
+				array(
+					'id'      => '',
+					'type'    => 'select',
+					'label'   => __( 'Booking Type', 'tourfic' ),
+					'options' => array(
+						'1' => __( 'Internal', 'tourfic' ),
+						'2' => __( 'External', 'tourfic' ),
+					),
+					'default' => '2',
+					'is_pro'  => true,
+				),
+				array(
+					'id'          => '',
+					'type'        => 'text',
+					'label'       => __( 'External URL', 'tourfic' ),
+					'placeholder' => __( 'https://website.com', 'tourfic' ),
+					'is_pro'      => true
+				),
+				array(
+					'id'        => '',
+					'type'      => 'switch',
+					'label'     => __( 'Allow Attribute', 'tourfic' ),
+					'subtitle'  => __( 'If attribute allow, You can able to add custom Attribute', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'is_pro'    => true
+				),
+				array(
+					'id'          => '',
+					'type'        => 'textarea',
+					'label'       => __( 'Query Attribute', 'tourfic' ),
+					'placeholder' => __( 'adult={adult}&child={child}&infant={infant}', 'tourfic' ),
+					'is_pro'      => true
+				),
+				array(
+					'id'      => 'booking-notice',
+					'type'    => 'notice',
+					'class'   => 'info',
+					'title'   => __( 'Query Attribute List', 'tourfic' ),
+					'content' => __( 'You can use the following placeholders in the Query Attribute body:', 'tourfic' ) . '<br><br><strong>{adult} </strong> : To Display Adult Number from Search.<br>
+					<strong>{child} </strong> : To Display Child Number from Search.<br>
+					<strong>{infant} </strong> : To display the infant number from Search.<br>
+					<strong>{checkin} </strong> : To display the Checkin date from Search.<br>
+					<strong>{checkout} </strong> : To display the Checkout date from Search.<br>',
+					'is_pro'  => true
+				),
 				/*array(
 					'id'       => 'weekly_discount',
 					'type'     => 'number',
@@ -307,6 +394,47 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label'    => __( 'Monthly Discount Per Night', 'tourfic' ),
 					'subtitle' => __( 'Monthly discounts for stays longer than 30 days (per night)', 'tourfic' ),
 				),*/
+			),
+		),
+		'availability'    => array(
+			'title'  => __( 'Availability', 'tourfic' ),
+			'icon'   => 'fa-solid fa-calendar-alt',
+			'fields' => array(
+				array(
+					'id'      => 'Availability',
+					'type'    => 'heading',
+					'content' => __( 'Availability', 'tourfic' ),
+				),
+				array(
+					'id'      => '',
+					'type'    => 'switch',
+					'label'   => __( 'Enable Availability by Date', 'tourfic' ),
+					'is_pro'  => true,
+					'default' => true
+				),
+				array(
+					'id'        => '',
+					'type'      => 'aptAvailabilityCal',
+					'label'     => __( 'Availability Calendar', 'tourfic' ),
+					'is_pro'  => true,
+				),
+				array(
+					'id'      => 'ical',
+					'type'    => 'heading',
+					'content' => __( 'iCal Sync', 'tourfic' ),
+				),
+				array(
+					'id'          => '',
+					'type'        => 'ical',
+					'label'       => __( 'iCal URL', 'tourfic' ),
+					'placeholder' => __( 'https://website.com', 'tourfic' ),
+					'button_text' => __( 'Import', 'tourfic' ),
+					'button_class'   => 'apt-ical-import',
+					'is_pro'  => true,
+					'attributes'  => array(
+						'class' => 'ical_url_input',
+					),
+				),
 			),
 		),
 		//Room Management
@@ -708,7 +836,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				),
 			),
 		),
-		
+
 		// Multiple tags for apartments
 		'apartments_multiple_tags' => array(
 			'title'  => __( 'Multiple Tags', 'tourfic' ),

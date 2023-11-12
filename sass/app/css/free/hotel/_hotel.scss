@@ -569,6 +569,12 @@ span.tf-price .amount {
     }
 }
 
+.tf-room{
+    .tf-withoutpayment-booking{
+        text-align: left;
+    }
+}
+
 /********************** RESPONSIVE **********************/
 @media only screen and (min-width: 951px) {
     .popupmap-for-mobile {
