@@ -337,22 +337,22 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				),
 				//Booking Type
 				array(
-					'id'      => '',
+					'id'      => 'apt-booking-by',
 					'type'    => 'select',
 					'label'   => __( 'Booking Type', 'tourfic' ),
 					'options' => array(
-						'1' => __( 'Internal', 'tourfic' ),
-						'2' => __( 'External', 'tourfic' ),
+						'1' => __( 'Default Booking (WooCommerce)', 'tourfic' ),
+						'2' => __( 'External Booking (Pro)', 'tourfic' ),
 					),
 					'default' => '2',
-					'is_pro'  => true,
 				),
 				array(
 					'id'          => '',
 					'type'        => 'text',
-					'label'       => __( 'External URL', 'tourfic' ),
+					'label'       => __( 'External Booking URL', 'tourfic' ),
 					'placeholder' => __( 'https://website.com', 'tourfic' ),
-					'is_pro'      => true
+					'is_pro'      => true,
+					'dependency'  => array( 'apt-booking-by', '==', '2' ),
 				),
 				array(
 					'id'        => '',
