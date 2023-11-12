@@ -1013,6 +1013,8 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 		<script>
 			(function ($) {
 				$(document).ready(function () {
+					<?php tf_flatpickr_locale('root'); ?>
+
 					$(document).on("focus",".tf-hotel-side-booking #check-in-out-date", function(e) {
 						let calander = flatpickr( this, {
 						enableTime: false,
@@ -1021,6 +1023,10 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 						dateFormat: "Y/m/d",
 						altInput: true,
 						altFormat: '<?php echo $date_format_for_users; ?>',
+
+						// flatpickr locale
+						<?php tf_flatpickr_locale(); ?>
+						
 						onChange: function (selectedDates, dateStr, instance) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
