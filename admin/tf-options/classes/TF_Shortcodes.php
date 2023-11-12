@@ -478,17 +478,6 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                                 <option value="orderby='rand'"><?php _e( 'Rand', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
-                                    </div><div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo __( 'Orderby', 'tourfic' ) ?></h3>
-                                            <select class="tf-select-field tf-setting-field">
-                                                <option value="orderby='name'"><?php _e( 'Name', 'tourfic' ); ?></option>
-                                                <option value="orderby='title'"><?php _e( 'Title', 'tourfic' ); ?></option>
-                                                <option value="orderby='date'"><?php _e( 'Date', 'tourfic' ); ?></option>
-                                                <option value="orderby='ID'"><?php _e( 'ID', 'tourfic' ); ?></option>
-                                                <option value="orderby='rand'"><?php _e( 'Rand', 'tourfic' ); ?></option>
-                                            </select>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="tf-sg-row">
