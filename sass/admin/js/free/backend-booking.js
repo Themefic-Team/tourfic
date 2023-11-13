@@ -494,6 +494,58 @@
             })
 
         });
+
+        /**
+         * Backend Booking for Apartments
+        */
+        
+        // Chekck Available Apartment by Date
+
+        $(document).on('change', '[name="tf_apartment_date[from]"], [name="tf_apartment_date[to]"]', function (e) {
+            e.preventDefault();
+
+            var fromValue = $('[name="tf_apartment_date[from]"]').val();
+            var toValue = $('[name="tf_apartment_date[to]"]').val();
+
+            console.log(fromValue)
+            console.log(toValue)
+
+
+            if (fromValue.length > 0 && toValue.length > 0) {
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_admin_params.ajax_url,
+                    data: {
+                        action: 'tf_check_available_apartment',
+                        from: fromValue,
+                        to: toValue,
+                    },
+                    beforeSend: function () {
+                        $('#tf-backend-apartment-book-btn').attr('disabled', 'disabled');
+                    },
+                    success: function (response) {
+                        var select2 = $('[name="tf_available_apartment"]');
+                        select2.empty();
+                        select2.append('<option value="">' + 'Select Apartment' + '</option>');
+                        $.each(response.data.apartments, function (key, value) {
+                            select2.append('<option value="' + key + '">' + value + '</option>');
+                        });
+                        select2.select2();
+                        //select the first option
+                        select2.val(select2.find('option:eq(1)').val()).trigger('change');
+                        $('#tf-backend-hotel-book-btn').removeAttr('disabled');
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    },
+                    complete: function (response) {
+                        $('#tf-backend-hotel-book-btn').removeAttr('disabled');
+                    }
+                });
+            }
+            
+
+        })
     });
 
 })(jQuery);

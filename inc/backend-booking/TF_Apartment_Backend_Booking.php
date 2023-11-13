@@ -17,6 +17,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 		function __construct() {
 			add_action( 'tf_before_apartment_booking_details', array( $this, 'tf_apartment_backend_booking_button' ) );
 			add_action( 'admin_menu', array( $this, 'tf_apartment_backend_booking_menu' ) );
+			add_action( 'wp_ajax_tf_check_available_apartment', array( $this, 'tf_check_available_apartment' ) );
 		}
 
 		function tf_apartment_backend_booking_button() { 
@@ -24,6 +25,21 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 			?>
             <a href="<?php echo admin_url( 'edit.php?post_type=tf_apartment&page=tf-apartment-backend-booking' ); ?>" class="button button-primary tf-booking-btn"><?php _e( 'Add New Booking', 'tourfic' ); ?></a>
 			<?php
+		}
+
+		function apartment_meta($key) {
+			$meta = get_post_meta( sanitize_key( $_POST['id'] ), 'tf_apartment_opt', true );
+
+			return $meta[$key];
+		}
+
+		function additional_fees_showing() {
+
+			$fees = $this->apartment_meta('additional_fees');
+
+			return <<<EOD
+			$fees[0];
+			EOD;
 		}
 
 		function tf_apartment_backend_booking_menu() {
@@ -175,6 +191,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 						array(
 							'id'      => 'tf_apartment_date',
 							'label'   => __( 'Date', 'tourfic' ),
+							'class'   => 'tf-field-class',
 							'type'    => 'date',
 							'format'  => 'Y/m/d',
 							'range'   => true,
@@ -184,6 +201,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 							'id'          => 'tf_available_apartments',
 							'label'       => __( 'Available Apartments', 'tourfic' ),
 							'type'        => 'select2',
+							'class'   => 'tf-field-class',
 							'options'     => 'posts',
 							'query_args'  => array(
 								'post_type'      => 'tf_apartment',
@@ -195,12 +213,15 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 						array(
 							'id'          => 'tf_apartment_additional_fees',
 							'label'       => __( 'Additional Fees', 'tourfic' ),
-							'type'        => 'select2',
-							'options'     => array(
-								'pickup'  => __( 'Pickup Service', 'tourfic' ),
-								'dropoff' => __( 'Drop-off Service', 'tourfic' ),
-								'both'    => __( 'Pickup & Drop-off Service', 'tourfic' ),
-							),
+							'class'   => 'tf-field-class',
+							'type'        => 'notice',
+							'style'   => 'success',
+							'content' => __( $this->additional_fees_showing(), 'tourfic' ),
+							// 'options'     => array(
+							// 	'pickup'  => __( 'Pickup Service', 'tourfic' ),
+							// 	'dropoff' => __( 'Drop-off Service', 'tourfic' ),
+							// 	'both'    => __( 'Pickup & Drop-off Service', 'tourfic' ),
+							// ),
 							'placeholder' => __( 'Select Service Type', 'tourfic' ),
 							'field_width' => 50,
 							'is_pro'      => true
@@ -210,7 +231,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 							'label'       => __( 'Adults', 'tourfic' ),
 							'type'        => 'number',
 							'attributes'  => array(
-								'min' => '0',
+								'min' => 1,
 							),
 							'field_width' => 50,
 						),
@@ -237,6 +258,46 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 			);
 
 			return $fields;
+		}
+
+		public function tf_check_available_apartment() {
+			$from = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
+			$to   = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
+
+			$loop = new WP_Query( array(
+				'post_type'      => 'tf_apartment',
+				'post_status'    => 'publish',
+				'posts_per_page' => - 1,
+			) );
+
+			$period = '';
+			if ( ! empty( $from ) && ! empty( $to ) ) {
+				$period = new DatePeriod(
+					new DateTime( $from ),
+					new DateInterval( 'P1D' ),
+					new DateTime( ! empty( $to ) ? $to : '23:59:59' )
+				);
+			}
+
+			if ( $loop->have_posts() ) {
+				$not_found = [];
+				while ( $loop->have_posts() ) {
+					$loop->the_post();
+					tf_filter_apartment_by_date( $period, $not_found, array( 1, 1, 1, '' ) );
+				}
+
+				$tf_total_filters = [];
+				foreach ( $not_found as $not ) {
+					if ( $not['found'] != 1 ) {
+						$tf_total_filters[ $not['post_id'] ] = get_the_title( $not['post_id'] );
+					}
+				}
+			}
+			wp_reset_postdata();
+
+			wp_send_json_success( array(
+				'apartments' => $tf_total_filters
+			) );
 		}
 		
 	}
