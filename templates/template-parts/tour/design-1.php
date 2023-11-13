@@ -1,4 +1,6 @@
 <?php
+$tf_booking_type = '1';
+$tf_booking_url = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = '';
 if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 	$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 	$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
@@ -340,7 +342,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                 endif; ?>
                                 <!-- Tourfic Booking form -->
                                 <div class="tf-booking-form">
-                                    <div class="tf-booking-form-inner <?php echo $tf_booking_type == 2 && $tf_hide_price !== '1' ? 'tf-mt-24' : '' ?>">
+                                    <div class="tf-booking-form-inner <?php echo (function_exists( 'is_tf_pro' ) && is_tf_pro() && $tf_booking_type == 2 && $tf_hide_price !== '1') || $tf_hide_price !== '1' ? 'tf-mt-24' : '' ?>">
                                         <h3><?php echo ! empty( $meta['booking-section-title'] ) ? esc_html( $meta['booking-section-title'] ) : ''; ?></h3>
 	                                    <?php
                                         if( ($tf_booking_type == 2 && $tf_hide_booking_form !== '1') || $tf_booking_type == 1 || $tf_booking_type == 3) {
