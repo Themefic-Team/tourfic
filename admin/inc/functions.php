@@ -354,37 +354,39 @@ if ( ! function_exists( 'tf_update_room_avail_date_price' ) ) {
 				$rooms                = unserialize( $tf_hotel_rooms_value );
 			}
 
-			foreach ( $rooms as $roomIndex => $room ) {
-				$pricing_by   = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
-				$price        = ! empty( $room['price'] ) ? $room['price'] : '';
-				$adult_price  = ! empty( $room['adult_price'] ) ? $room['adult_price'] : '';
-				$child_price  = ! empty( $room['child_price'] ) ? $room['child_price'] : '';
-				$avil_by_date = ! empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : '';
+			if( !empty($rooms) ){
+				foreach ( $rooms as $roomIndex => $room ) {
+					$pricing_by   = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
+					$price        = ! empty( $room['price'] ) ? $room['price'] : '';
+					$adult_price  = ! empty( $room['adult_price'] ) ? $room['adult_price'] : '';
+					$child_price  = ! empty( $room['child_price'] ) ? $room['child_price'] : '';
+					$avil_by_date = ! empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : '';
 
-				if ( $avil_by_date === '1' && ! empty( $room['avail_date'] ) ) {
-					$hotel_avail_data = json_decode( $room['avail_date'], true );
+					if ( $avil_by_date === '1' && ! empty( $room['avail_date'] ) ) {
+						$hotel_avail_data = json_decode( $room['avail_date'], true );
 
-					if ( isset( $hotel_avail_data ) && ! empty( $hotel_avail_data ) ) {
+						if ( isset( $hotel_avail_data ) && ! empty( $hotel_avail_data ) ) {
 
-						$hotel_avail_data = array_map( function ( $item ) use ( $pricing_by, $price, $adult_price, $child_price ) {
+							$hotel_avail_data = array_map( function ( $item ) use ( $pricing_by, $price, $adult_price, $child_price ) {
 
-							if ( $pricing_by == '1' ) {
-								if ( empty( $item['price'] ) ) {
-									$item['price'] = $price;
+								if ( $pricing_by == '1' ) {
+									if ( empty( $item['price'] ) ) {
+										$item['price'] = $price;
+									}
+								} else {
+									if ( empty( $item['adult_price'] ) || empty( $item['child_price'] ) ) {
+										$item['adult_price'] = $adult_price;
+										$item['child_price'] = $child_price;
+									}
 								}
-							} else {
-								if ( empty( $item['adult_price'] ) || empty( $item['child_price'] ) ) {
-									$item['adult_price'] = $adult_price;
-									$item['child_price'] = $child_price;
-								}
-							}
-							$item['price_by'] = $pricing_by;
+								$item['price_by'] = $pricing_by;
 
-							return $item;
-						}, $hotel_avail_data );
+								return $item;
+							}, $hotel_avail_data );
+						}
+
+						$meta['room'][ $roomIndex ]['avail_date'] = json_encode( $hotel_avail_data );
 					}
-
-					$meta['room'][ $roomIndex ]['avail_date'] = json_encode( $hotel_avail_data );
 				}
 			}
 			update_post_meta( $post_id, 'tf_hotels_opt', $meta );
