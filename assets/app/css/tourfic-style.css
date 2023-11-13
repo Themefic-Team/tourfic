@@ -9554,6 +9554,7 @@ html {
   font-size: 16px;
   font-weight: 400;
   line-height: 20.8px;
+  width: 100%;
 }
 .tf-template-3 ul {
   list-style: none;
@@ -9727,6 +9728,9 @@ html {
 }
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area .tf-head-title {
   text-align: left;
+}
+.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area .tf-head-title h1 {
+  color: #fff;
 }
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area .tf-head-title .tf-title-meta {
   font-size: 24px;

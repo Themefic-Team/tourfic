@@ -346,7 +346,7 @@ if ( ! function_exists( 'tf_update_room_avail_date_price' ) ) {
 	function tf_update_room_avail_date_price( $post_id, $post ) {
 		if ( $post->post_type == 'tf_hotel' ) {
 			$meta  = get_post_meta( $post_id, 'tf_hotels_opt', true );
-			$rooms = ! empty( $meta['room'] ) ? $meta['room'] : [];
+			$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
 			if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
 				$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
 					return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
@@ -354,7 +354,7 @@ if ( ! function_exists( 'tf_update_room_avail_date_price' ) ) {
 				$rooms                = unserialize( $tf_hotel_rooms_value );
 			}
 
-			if(!empty($rooms)){
+			if( !empty($rooms) ){
 				foreach ( $rooms as $roomIndex => $room ) {
 					$pricing_by   = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
 					$price        = ! empty( $room['price'] ) ? $room['price'] : '';
@@ -388,7 +388,7 @@ if ( ! function_exists( 'tf_update_room_avail_date_price' ) ) {
 						$meta['room'][ $roomIndex ]['avail_date'] = json_encode( $hotel_avail_data );
 					}
 				}
-            }
+			}
 			update_post_meta( $post_id, 'tf_hotels_opt', $meta );
 		}
 	}
