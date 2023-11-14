@@ -18,6 +18,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 			add_action( 'tf_before_apartment_booking_details', array( $this, 'tf_apartment_backend_booking_button' ) );
 			add_action( 'admin_menu', array( $this, 'tf_apartment_backend_booking_menu' ) );
 			add_action( 'wp_ajax_tf_check_available_apartment', array( $this, 'tf_check_available_apartment' ) );
+			add_action( 'wp_ajax_tf_check_apartment_aditional_fees', array( $this, 'tf_check_apartment_aditional_fees' ) );
 		}
 
 		function tf_apartment_backend_booking_button() { 
@@ -27,8 +28,8 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 			<?php
 		}
 
-		function apartment_meta($key) {
-			$meta = get_post_meta( sanitize_key( $_POST['id'] ), 'tf_apartment_opt', true );
+		function apartment_meta($id, $key) {
+			$meta  = get_post_meta( $id, 'tf_apartments_opt', true );
 
 			return $meta[$key];
 		}
@@ -261,6 +262,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 		}
 
 		public function tf_check_available_apartment() {
+			$hotel_id = isset( $_POST['hotel_id'] ) ? sanitize_text_field( $_POST['hotel_id'] ) : '';
 			$from = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
 			$to   = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
 
@@ -287,9 +289,12 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 				}
 
 				$tf_total_filters = [];
-				foreach ( $not_found as $not ) {
-					if ( $not['found'] != 1 ) {
-						$tf_total_filters[ $not['post_id'] ] = get_the_title( $not['post_id'] );
+
+				foreach ( $not_found as $filter_post ) {
+					if ( $filter_post['found'] == 1 ) {
+						$tf_total_filters[ $filter_post['post_id'] ] = get_the_title( $filter_post['post_id'] );
+					} else {
+						$tf_total_filters[] = "Not Found";
 					}
 				}
 			}
@@ -297,6 +302,29 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 
 			wp_send_json_success( array(
 				'apartments' => $tf_total_filters
+			) );
+		}
+
+		public function tf_check_apartment_aditional_fees() {
+			$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
+			$from     = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
+			$to       = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
+
+			/**
+			 * Backend data
+			 */
+			$meta  = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
+
+			$additional_fees = [];
+			if(!empty($meta["additional_fees"])) {
+				$additional_fees["found"] = wc_price(10);
+			} else {
+				$additional_fees["not found"] = ["There are no additional fees."];
+			}
+			wp_reset_postdata();
+
+			wp_send_json_success( array(
+				'additional_fees' => $additional_fees,
 			) );
 		}
 		

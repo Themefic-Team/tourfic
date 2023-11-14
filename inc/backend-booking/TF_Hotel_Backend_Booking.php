@@ -340,7 +340,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 				$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
 					return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
 				}, $rooms );
-				$rooms                = unserialize( $tf_hotel_rooms_value );
+				$rooms  = unserialize( $tf_hotel_rooms_value );
 			}
 
 			$room_array = array();
