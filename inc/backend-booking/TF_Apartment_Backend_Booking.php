@@ -35,10 +35,10 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 
 		function additional_fees_showing() {
 
-			$fees = $this->apartment_meta('additional_fees');
+			// $fees = $this->apartment_meta('additional_fees');
 
 			return <<<EOD
-			$fees[0];
+			Additional Fees will go here
 			EOD;
 		}
 
@@ -214,15 +214,15 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 							'id'          => 'tf_apartment_additional_fees',
 							'label'       => __( 'Additional Fees', 'tourfic' ),
 							'class'   => 'tf-field-class',
-							'type'        => 'notice',
+							'type'        => 'select2',
 							'style'   => 'success',
 							'content' => __( $this->additional_fees_showing(), 'tourfic' ),
-							// 'options'     => array(
-							// 	'pickup'  => __( 'Pickup Service', 'tourfic' ),
-							// 	'dropoff' => __( 'Drop-off Service', 'tourfic' ),
-							// 	'both'    => __( 'Pickup & Drop-off Service', 'tourfic' ),
-							// ),
-							'placeholder' => __( 'Select Service Type', 'tourfic' ),
+							'options'     => array(
+								'pickup'  => __( 'Pickup Service', 'tourfic' ),
+								'dropoff' => __( 'Drop-off Service', 'tourfic' ),
+								'both'    => __( 'Pickup & Drop-off Service', 'tourfic' ),
+							),
+							'placeholder' => __( 'Select Additional Fees', 'tourfic' ),
 							'field_width' => 50,
 							'is_pro'      => true
 						),
@@ -233,7 +233,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 							'attributes'  => array(
 								'min' => 1,
 							),
-							'field_width' => 50,
+							'field_width' => 33,
 						),
 						array(
 							'id'          => 'tf_apartment_children_number',
@@ -242,7 +242,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 							'attributes'  => array(
 								'min' => '0',
 							),
-							'field_width' => 50,
+							'field_width' => 33,
 						),
 						array(
 							'id'          => 'tf_apartment_infant_number',
@@ -251,7 +251,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 							'attributes'  => array(
 								'min' => '0',
 							),
-							'field_width' => 50,
+							'field_width' => 33,
 						),
 					),
 				),
