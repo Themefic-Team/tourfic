@@ -159,7 +159,7 @@ if ( ! function_exists( 'tf_black_friday_2023_hotel_tour_docs' ) ) {
 
 					// Create a date object for the expiration date
 					var expirationDate = new Date();
-					expirationDate.setTime(expirationDate.getTime() + (86400 * 5));
+					expirationDate.setTime(expirationDate.getTime() + (5 * 24 * 60 * 60 * 1000)); // 5 days in milliseconds
 
 					// Construct the cookie string
 					var cookieString = cookieName + "=" + cookieValue + ";expires=" + expirationDate.toUTCString() + ";path=/";
@@ -215,8 +215,8 @@ if ( ! function_exists( 'tf_black_friday_2023_hotel_tour_docs' ) ) {
 				var cookieValue = "1";
 
 				// Create a date object for the expiration date
-				var expirationDate = new Date();
-				expirationDate.setTime(expirationDate.getTime() + (86400 * 5));
+				var expirationDate = new Date(); 
+				expirationDate.setTime(expirationDate.getTime() + (5 * 24 * 60 * 60 * 1000)); // 5 days in milliseconds
 
 				// Construct the cookie string
 				var cookieString = cookieName + "=" + cookieValue + ";expires=" + expirationDate.toUTCString() + ";path=/";
@@ -271,7 +271,7 @@ if ( ! function_exists( 'tf_black_friday_2023_hotel_tour_docs' ) ) {
 
 				// Create a date object for the expiration date
 				var expirationDate = new Date();
-				expirationDate.setTime(expirationDate.getTime() + (86400 * 5));
+				expirationDate.setTime(expirationDate.getTime() + (5 * 24 * 60 * 60 * 1000)); // 5 days in milliseconds
 
 				// Construct the cookie string
 				var cookieString = cookieName + "=" + cookieValue + ";expires=" + expirationDate.toUTCString() + ";path=/";
