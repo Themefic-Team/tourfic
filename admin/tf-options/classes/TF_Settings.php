@@ -419,7 +419,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				if (strtotime('2023-12-01') > time() && !function_exists('is_tf_pro')) {
 					if( !isset($_COOKIE['tf_black_friday_2023_admin_settings_notice']) ){
 				?>
-				<div class="notice notice-success tf_black_friday_2023_admin_notice" style="position: relative;padding: 0px; margin: 0px; max-width: 825px;"> 
+				<div class="notice notice-success tf_black_friday_2023_admin_notice" style="position: relative;padding: 0px; margin-left: 0px; margin-top: 0px; margin-bottom: 0px;"> 
 					<a href="https://themefic.com/deals/" target="_blank" style="display: block; line-height: 0;">
 						<img style="width: 100%; height: auto;" src="<?php echo TOURFIC_PLUGIN_URL ?>assets/admin/images/BLACK_FRIDAY_BACKGROUND_GRUNGE.png" alt="">
 					</a> 
