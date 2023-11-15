@@ -171,7 +171,8 @@
             let form = btn.closest('form.tf-backend-hotel-booking');
             let formData = new FormData(form[0]);
             formData.append('action', 'tf_backend_hotel_booking');
-            let requiredFields = ['tf_hotel_booked_by', 'tf_customer_first_name', 'tf_customer_email', 'tf_customer_phone', 'tf_customer_country', 'tf_customer_address', 'tf_customer_city', 'tf_customer_state', 'tf_customer_zip', 'tf_hotel_date[from]', 'tf_hotel_date[to]', 'tf_available_hotels', 'tf_available_rooms', 'tf_hotel_rooms_number', 'tf_hotel_adults_number', 'tf_hotel_children_number'];
+            let requiredFields = [
+                'tf_hotel_booked_by', 'tf_customer_first_name', 'tf_customer_email', 'tf_customer_phone', 'tf_customer_country', 'tf_customer_address', 'tf_customer_city', 'tf_customer_state', 'tf_customer_zip', 'tf_hotel_date[from]', 'tf_hotel_date[to]', 'tf_available_hotels', 'tf_available_rooms', 'tf_hotel_rooms_number', 'tf_hotel_adults_number', 'tf_hotel_children_number'];
 
             $.ajax({
                 type: 'post',
@@ -547,6 +548,9 @@
                 });
             }
         })
+        
+        // Available Additional Fees
+
         $(document).on('change', '[name="tf_available_apartments"]', function (e) {
             e.preventDefault();
 
@@ -569,7 +573,6 @@
                     },
                     success: function (response) {
                         console.log(response)
-                        var select2 = $('[name="tf_available_apartments"]');
                         var serviceSelect = $('[name="tf_apartment_additional_fees"]');
 
                         serviceSelect.select2({multiple: true});
