@@ -38,9 +38,17 @@ function tf_documentation_page_integration() {
  */
 if(!function_exists('tf_black_friday_2023_admin_notice') && !is_plugin_active( 'tourfic-pro/tourfic-pro.php' )){
     function tf_black_friday_2023_admin_notice(){
+
+		// Set the expiration time to 3 hours from the current time
+		$expiration_time = time() + 3 * 60 * 60;  
+		$tf_display_admin_notice_time = get_option( 'tf_display_admin_notice_time' );
+		if($tf_display_admin_notice_time == ''){
+			update_option( 'tf_display_admin_notice_time', $expiration_time );
+		}
+
         $deal_link =sanitize_url('https://themefic.com/deals/');
         $get_current_screen = get_current_screen();  
-        if(!isset($_COOKIE['tf_dismiss_admin_notice']) && $get_current_screen->base == 'dashboard'){ 
+        if(!isset($_COOKIE['tf_dismiss_admin_notice']) && $get_current_screen->base == 'dashboard' && time() > $tf_display_admin_notice_time){ 
             ?>
             <style> 
                 .tf_black_friday_20222_admin_notice a:focus {
@@ -50,6 +58,7 @@ if(!function_exists('tf_black_friday_2023_admin_notice') && !is_plugin_active( '
                     padding: 7px;
                     position: relative;
                     z-index: 10;
+					max-width: 825px;
                 } 
                 .tf_black_friday_20222_admin_notice button:before {
                     color: #fff !important;
@@ -60,7 +69,7 @@ if(!function_exists('tf_black_friday_2023_admin_notice') && !is_plugin_active( '
             </style>
             <div class="notice notice-success tf_black_friday_20222_admin_notice"> 
                 <a href="<?php echo $deal_link; ?>" target="_blank" >
-					<img style="width: 100%; height: auto;" src="<?php echo TOURFIC_PLUGIN_URL ?>assets/admin/images/BLACK_FRIDAY_BACKGROUND_GRUNGE.jpg" alt="">
+					<img style="width: 100%; height: auto;" src="<?php echo TOURFIC_PLUGIN_URL ?>assets/admin/images/BLACK_FRIDAY_BACKGROUND_GRUNGE.png" alt="">
                 </a> 
                 <button type="button" class="notice-dismiss tf_black_friday_notice_dismiss"><span class="screen-reader-text"><?php echo __('Dismiss this notice.', 'ultimate-addons-cf7' ) ?></span></button>
             </div>
@@ -95,7 +104,8 @@ if(!function_exists('tf_black_friday_notice_dismiss_callback')){
     function tf_black_friday_notice_dismiss_callback() { 
         $cookie_name = "tf_dismiss_admin_notice";
         $cookie_value = "1"; 
-        setcookie($cookie_name, $cookie_value, strtotime('2023-12-01'), "/"); 
+        setcookie($cookie_name, $cookie_value, strtotime('2023-12-01'), "/");
+		update_option( 'tf_display_admin_notice_time', '1' );
         wp_die();
     }
     add_action( 'wp_ajax_tf_black_friday_notice_dismiss_callback', 'tf_black_friday_notice_dismiss_callback' );
@@ -350,6 +360,7 @@ function apartment_metabox_order( $order ) {
 			array (
 				'submitdiv',
 				'tfapartment_docs',
+				'tfapartment_black_friday_docs'
 			)
 		),
 	);
@@ -362,6 +373,7 @@ function tour_metabox_order( $order ) {
 			array(
 				'submitdiv',
 				'tftour_docs',
+				'tftour_black_friday_docs'
 			)
 		),
 	);
@@ -374,6 +386,7 @@ function hotel_metabox_order( $order ) {
 			array(
 				'submitdiv',
 				'tfhotel_docs',
+				'tfhotel_black_friday_docs'
 			)
 		),
 	);

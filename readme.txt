@@ -445,7 +445,7 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 == Changelog ==
 
-= 2.10.7 - 14 November 2023 =
+= 2.10.7 - 15 November 2023 =
 
 - Notice: Black Friday Announcements
 - Improvement: System stability Improved
