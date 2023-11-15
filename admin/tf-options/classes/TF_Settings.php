@@ -421,7 +421,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				?>
 				<div class="notice notice-success tf_black_friday_2023_admin_notice" style="position: relative;padding: 0px; margin: 0px; max-width: 825px;"> 
 					<a href="https://themefic.com/deals/" target="_blank">
-						<img style="width: 100%; height: auto;" src="http://tourfic.test/wp-content/plugins/tourfic/assets/admin/images/BLACK_FRIDAY_BACKGROUND_GRUNGE.png" alt="">
+						<img style="width: 100%; height: auto;" src="<?php echo TOURFIC_PLUGIN_URL ?>assets/admin/images/BLACK_FRIDAY_BACKGROUND_GRUNGE.png" alt="">
 					</a> 
 					<button type="button" class="notice-dismiss tf_black_friday_notice_dismiss">
 						<span class="screen-reader-text">Dismiss this notice.</span>
