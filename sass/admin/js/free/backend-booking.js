@@ -537,7 +537,6 @@
                         //select the first option
                         select2.val(select2.find('option:eq(1)').val()).trigger('change');
                         $('#tf-backend-hotel-book-btn').removeAttr('disabled');
-                        console.log(response)
                     },
                     error: function (response) {
                         console.log(response);
@@ -573,36 +572,20 @@
                         var select2 = $('[name="tf_available_apartments"]');
                         var serviceSelect = $('[name="tf_apartment_additional_fees"]');
 
-                        console.log(serviceSelect)
-
-                        // serviceSelect.select2({disabled: true});
                         serviceSelect.select2({multiple: true});
-                        
-                        // // serviceSelect.empty();
-                        // serviceSelect.append('<option value="">' + "Additional Fees" + '</option>');
-                        // $.each(response.data.additional_fees, function (key, value) {
-                        //     serviceSelect.append('<option value="' + key + '">' + value + '</option>');
-                        // });
-                        // // select2.select2();
-                        // // //auto select the first option
-                        // // select2.val(select2.find('option:eq(1)').val()).trigger('change');
 
-                        //service type select
+                        //Additional fees auto selection
                         serviceSelect.empty();
-                        // $.each(response.data.additional_fees, function (key, value) {
-                        //     if(key != "not found") {
-                        //         $.each(value, function(key, value) {
-                        //             serviceSelect.append('<option value="' + key + '">' + value.additional_fee_label + ' | ' + value.additional_fee + '</option>');
-                        //         })
-                        //     }
-                        // });
 
-                        serviceSelect.append('<option value="' + 1 + '">' + 'Room Cleaning | ' + response.data.additional_fees.found + '</option>');
-                        serviceSelect.append('<option value="' + 1 + '">' + 'Room Cleaning | ' + response.data.additional_fees.found + '</option>');
-                        serviceSelect.append('<option value="' + 1 + '">' + 'Garbage Collection | ' + response.data.additional_fees.found + '</option>');
-                        serviceSelect.append('<option value="' + 1 + '">' + '<b>Garbage Collection</b> | ' + response.data.additional_fees.found + '</option>');
+                        if( response.data.additional_fees.length > 0 ) {
+                            $.each(response.data.additional_fees, function (key, value) {
+                                serviceSelect.append('<option value="' + key + '">' + value.label + ' - ' + value.price + '</option>');
+                            });
+                        } else {
+                            serviceSelect.append('<option value="' + 1 + '">' + 'There are no additional fees' + '</option>');
+                        }
 
-                        //TODO: Need to add price in select2 option value, also try to fixed all of them
+                        serviceSelect.find('option').prop('selected', true).trigger('change');
 
                         $('#tf-backend-hotel-book-btn').removeAttr('disabled');
                     },

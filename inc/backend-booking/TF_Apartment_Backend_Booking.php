@@ -218,12 +218,9 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 							'type'        => 'select2',
 							'style'   => 'success',
 							'content' => __( $this->additional_fees_showing(), 'tourfic' ),
-							'options'     => array(
-								'pickup'  => __( 'Pickup Service', 'tourfic' ),
-								'dropoff' => __( 'Drop-off Service', 'tourfic' ),
-								'both'    => __( 'Pickup & Drop-off Service', 'tourfic' ),
-							),
-							'placeholder' => __( 'Select Additional Fees', 'tourfic' ),
+							'options'     => 'posts',
+							'attributes'  => array( 'disabled' => 'disabled' ),
+							'placeholder' => __( 'Please choose the apartment first', 'tourfic' ),
 							'field_width' => 50,
 							'is_pro'      => true
 						),
@@ -311,20 +308,30 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 			$to       = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
 
 			/**
-			 * Backend data
+			 * Additional Fees data
 			 */
 			$meta  = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
 
-			$additional_fees = [];
-			if(!empty($meta["additional_fees"])) {
-				$additional_fees["found"] = wc_price(10);
-			} else {
-				$additional_fees["not found"] = ["There are no additional fees."];
-			}
+			$additional_fees = !empty($meta["additional_fees"]) ? $meta["additional_fees"] : array();
+
+			$all_fees = [];
+			if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) :
+				if(count($additional_fees) > 0) {
+					foreach($additional_fees as $fees) {
+						$all_fees [] = array (
+							"label" => $fees["additional_fee_label"],
+							"fee" => $fees["additional_fee"],
+							"price" => wc_price($fees["additional_fee"]),
+							"type" => $fees["fee_type"]
+						); 
+					}
+				}
+			endif;
+
 			wp_reset_postdata();
 
 			wp_send_json_success( array(
-				'additional_fees' => $additional_fees,
+				'additional_fees' => $all_fees,
 			) );
 		}
 		
