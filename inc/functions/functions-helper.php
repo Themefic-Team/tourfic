@@ -50,6 +50,7 @@ if(!function_exists('tf_black_friday_2023_admin_notice') && !is_plugin_active( '
                     padding: 7px;
                     position: relative;
                     z-index: 10;
+					max-width: 825px;
                 } 
                 .tf_black_friday_20222_admin_notice button:before {
                     color: #fff !important;
@@ -60,7 +61,7 @@ if(!function_exists('tf_black_friday_2023_admin_notice') && !is_plugin_active( '
             </style>
             <div class="notice notice-success tf_black_friday_20222_admin_notice"> 
                 <a href="<?php echo $deal_link; ?>" target="_blank" >
-					<img style="width: 100%; height: auto;" src="<?php echo TOURFIC_PLUGIN_URL ?>assets/admin/images/BLACK_FRIDAY_BACKGROUND_GRUNGE.jpg" alt="">
+					<img style="width: 100%; height: auto;" src="<?php echo TOURFIC_PLUGIN_URL ?>assets/admin/images/BLACK_FRIDAY_BACKGROUND_GRUNGE.png" alt="">
                 </a> 
                 <button type="button" class="notice-dismiss tf_black_friday_notice_dismiss"><span class="screen-reader-text"><?php echo __('Dismiss this notice.', 'ultimate-addons-cf7' ) ?></span></button>
             </div>
@@ -350,6 +351,7 @@ function apartment_metabox_order( $order ) {
 			array (
 				'submitdiv',
 				'tfapartment_docs',
+				'tfapartment_black_friday_docs'
 			)
 		),
 	);
@@ -362,6 +364,7 @@ function tour_metabox_order( $order ) {
 			array(
 				'submitdiv',
 				'tftour_docs',
+				'tftour_black_friday_docs'
 			)
 		),
 	);
@@ -374,6 +377,7 @@ function hotel_metabox_order( $order ) {
 			array(
 				'submitdiv',
 				'tfhotel_docs',
+				'tfhotel_black_friday_docs'
 			)
 		),
 	);
