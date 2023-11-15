@@ -429,7 +429,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				</div>
 				<script>
 				jQuery(document).ready(function($) {
-					$(document).on('click', '.tf_black_friday_2023_admin_notice', function( event ) { 
+					$(document).on('click', '.tf_black_friday_notice_dismiss', function( event ) { 
 						jQuery('.tf_black_friday_2023_admin_notice').css('display', 'none')
 						var cookieName = "tf_black_friday_2023_admin_settings_notice";
 						var cookieValue = "1";
