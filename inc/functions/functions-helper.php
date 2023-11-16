@@ -69,7 +69,7 @@ if(!function_exists('tf_black_friday_2023_admin_notice') && !is_plugin_active( '
             </style>
             <div class="notice notice-success tf_black_friday_20222_admin_notice"> 
                 <a href="<?php echo $deal_link; ?>" target="_blank" >
-					<img style="width: 100%; height: auto;" src="<?php echo TOURFIC_PLUGIN_URL ?>assets/admin/images/BLACK_FRIDAY_BACKGROUND_GRUNGE.png" alt="">
+					<img style="width: 100%; height: auto;" src="<?php echo sanitize_url( 'https://themefic.com/wp-content/uploads/2023/11/Themefic_BlackFriday_rectangle_banner.png' ) ?>" alt="">
                 </a> 
                 <button type="button" class="notice-dismiss tf_black_friday_notice_dismiss"><span class="screen-reader-text"><?php echo __('Dismiss this notice.', 'ultimate-addons-cf7' ) ?></span></button>
             </div>
@@ -158,7 +158,7 @@ if ( ! function_exists( 'tf_black_friday_2023_hotel_tour_docs' ) ) {
         <div class="back_friday_2023_preview" style="text-align: center; overflow: hidden;">
 			<button type="button" class="notice-dismiss tf_hotel_friday_notice_dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
             <a href="<?php echo $deal_link; ?>" target="_blank">
-                <img style="width: 100%;" src="<?php echo TOURFIC_PLUGIN_URL ?>assets/admin/images/BLACK_FRIDAY_SIDEBAR-BANNER.png" alt="">
+                <img style="width: 100%;" src="<?php echo sanitize_url('https://themefic.com/wp-content/uploads/2023/11/Tourfic_BlackFriday_Square_banner.png') ?>" alt="">
             </a>
 			<script>
             jQuery(document).ready(function($) {
@@ -213,7 +213,7 @@ if ( ! function_exists( 'tf_black_friday_2023_hotel_tour_docs' ) ) {
         <div class="back_friday_2023_preview" style="text-align: center; overflow: hidden;">
 			<button type="button" class="notice-dismiss tf_tour_friday_notice_dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
             <a href="<?php echo $deal_links; ?>" target="_blank">
-				<img style="width: 100%;" src="<?php echo TOURFIC_PLUGIN_URL ?>assets/admin/images/BLACK_FRIDAY_SIDEBAR-BANNER.png" alt="">
+				<img style="width: 100%;" src="<?php echo sanitize_url('https://themefic.com/wp-content/uploads/2023/11/Tourfic_BlackFriday_Square_banner.png') ?>" alt="">
             </a>
         </div>
 
@@ -268,7 +268,7 @@ if ( ! function_exists( 'tf_black_friday_2023_hotel_tour_docs' ) ) {
         <div class="back_friday_2023_preview" style="text-align: center; overflow: hidden;">
 			<button type="button" class="notice-dismiss tf_apartment_friday_notice_dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
             <a href="<?php echo $deal_links; ?>" target="_blank">
-				<img style="width: 100%;" src="<?php echo TOURFIC_PLUGIN_URL ?>assets/admin/images/BLACK_FRIDAY_SIDEBAR-BANNER.png" alt="">
+				<img style="width: 100%;" src="<?php echo sanitize_url('https://themefic.com/wp-content/uploads/2023/11/Tourfic_BlackFriday_Square_banner.png') ?>" alt="">
             </a>
         </div>
 
