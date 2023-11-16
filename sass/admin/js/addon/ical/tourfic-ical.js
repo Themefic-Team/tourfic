@@ -11,7 +11,7 @@
                 y: 'bottom',
             },
         });
-        
+
 
         /*
         * Hotel iCal Import

@@ -140,6 +140,7 @@ function tf_hotel_booking_callback() {
 		$tf_room_data['tf_hotel_data']['check_in']           = $check_in;
 		$tf_room_data['tf_hotel_data']['check_out']          = $check_out;
 		$tf_room_data['tf_hotel_data']['room']               = $room_selected;
+		$tf_room_data['tf_hotel_data']['room_id']            = $room_id;
 		$tf_room_data['tf_hotel_data']['room_name']          = $room_name;
 		$tf_room_data['tf_hotel_data']['air_serivicetype']   = $airport_service;
 		$tf_room_data['tf_hotel_data']['air_serivice_avail'] = $meta['airport_service'] ?? null;
@@ -782,7 +783,8 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				'shipping_country' => $order->get_shipping_country(),
 				'shipping_phone' => $order->get_shipping_phone()
 			];
-			
+
+			$unique_id = $item->get_meta( '_unique_id', true ); // Unique id of rooms
 			$room_selected = $item->get_meta( 'number_room_booked', true );
 			$check_in = $item->get_meta( 'check_in', true );
 			$check_out = $item->get_meta( 'check_out', true );
@@ -797,6 +799,7 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 			
 			$iteminfo = [
 				'room' => $room_selected,
+				'room_id' => $unique_id,
 				'check_in' => $check_in,
 				'check_out' => $check_out,
 				'room_name' => $room_name,
@@ -841,7 +844,6 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 			$iteminfo_values = array_map('sanitize_text_field', $iteminfo_values);
 
 			$iteminfo = array_combine($iteminfo_keys, $iteminfo_values);
-
 			
 			global $wpdb;     
 			$table_name = $wpdb->prefix.'tf_order_data';  

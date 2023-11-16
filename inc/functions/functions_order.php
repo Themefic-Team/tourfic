@@ -498,6 +498,7 @@ if ( ! function_exists( 'tf_set_order' ) ) {
 			'post_id'          => 0,
 			'post_type'        => '',
 			'room_number'      => 0,
+			'room_id'          => 0,
 			'check_in'         => '',
 			'check_out'        => '',
 			'billing_details'  => '',
@@ -514,13 +515,14 @@ if ( ! function_exists( 'tf_set_order' ) ) {
 		$wpdb->query(
 			$wpdb->prepare(
 				"INSERT INTO $table_name
-				( order_id, post_id, post_type, room_number, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
-				VALUES ( %d, %d, %s, %d, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
+				( order_id, post_id, post_type, room_number, room_id, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
+				VALUES ( %d, %d, %s, %d, %d, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
 				array(
 					$order_data['order_id'],
 					sanitize_key( $order_data['post_id'] ),
 					$order_data['post_type'],
 					$order_data['room_number'],
+					$order_data['room_id'],
 					$order_data['check_in'],
 					$order_data['check_out'],
 					json_encode( $order_data['billing_details'] ),
@@ -554,7 +556,7 @@ if ( ! function_exists( 'tf_get_all_order_id' ) ) {
 }
 
 /*
-* Admin order data new field "checkinout & checkinout_by" added
+* Admin order data new field "checkinout, checkinout_by & room_id" added
 * @author Jahid
 */
 if ( ! function_exists( 'tf_admin_table_alter_order_data' ) ) {
@@ -571,6 +573,13 @@ if ( ! function_exists( 'tf_admin_table_alter_order_data' ) ) {
 					ADD COLUMN checkinout_by varchar(255) NULL";
 			$wpdb->query($sql);
 		}
+
+        // Check if the 'room_id' column exists before attempting to add it
+        if ( !$wpdb->get_var("SHOW COLUMNS FROM $order_table_name LIKE 'room_id'") ) {
+            $sql = "ALTER TABLE $order_table_name
+                    ADD COLUMN room_id varchar(255) NULL";
+            $wpdb->query($sql);
+        }
 	}
 }
 add_action('admin_init', 'tf_admin_table_alter_order_data');
