@@ -2071,12 +2071,6 @@ TF_Settings::option( 'tf_settings', array(
 			'icon'   => 'fas fa-cogs',
 			'fields' => array(
 				array(
-					'id'      => 'global_design_notice',
-					'type'    => 'notice',
-					'style'   => 'info',
-					'content' => __( "To ensure maximum compatiblity with your theme, all Heading (h1-h6), Paragraph & Link's Color-Font Styles are not controlled by Tourfic. Those need to be edited using your Theme's option Panel.", "tourfic" ),
-				),
-				array(
 					'id'      => 'colorGlobal',
 					'type'    => 'heading',
 					'label' => __( 'Global Options', 'tourfic' ),
@@ -2084,10 +2078,20 @@ TF_Settings::option( 'tf_settings', array(
 					'class'   => 'tf-field-class',
 				),
 				array(
+					'id'      => 'design-settings-official-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/design-panel/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'      => 'global_design_notice',
+					'type'    => 'notice',
+					'style'   => 'info',
+					'content' => __( "To ensure maximum compatiblity with your theme, all Heading (h1-h6), Paragraph & Link's Color-Font Styles are not controlled by Tourfic. Those need to be edited using your Theme's option Panel.", "tourfic" ),
+				),
+				array(
 					'id'       => 'tourfic-design1-global-color',
 					'type'     => 'color',
-					'label'    => __( 'Global Color', 'tourfic' ),
-					'subtitle' => __( 'Global Colors of Design 2 related to Tourfic', 'tourfic' ),
 					'multiple' => true,
 					'inline'   => true,
 					'default'  => array(
@@ -2100,8 +2104,6 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'tourfic-design1-p-global-color',
 					'type'     => 'color',
-					'label'    => __( 'Global Color of P', 'tourfic' ),
-					'subtitle' => __( 'Global Colors of P, Design 2 related to Tourfic', 'tourfic' ),
 					'multiple' => true,
 					'inline'   => true,
 					'default'  => array(

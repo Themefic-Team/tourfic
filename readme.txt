@@ -2,8 +2,8 @@
 Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
 Requires at least: 5.4
-Tested up to: 6.3
-Stable tag: 2.10.5
+Tested up to: 6.4
+Stable tag: 2.10.8
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -12,7 +12,7 @@ Ultimate Tour, Travel & hotel booking WordPress plugin. Build your own travel ag
 
 == Description ==
 
-= The easiest and best WordPress Hotel, Tour, & Apartment Booking Plugin - Tourfic | Build Your own travel agency website like Agoda, Booking.com, Airbnb, Hotels.com =
+= The easiest and best WordPress Hotel, Tour, and apartment Booking Plugin - Tourfic | Build Your own travel agency website like Agoda, Booking.com, Airbnb, Hotels.com =
 
 👉 Official Demo Link: [Tourfic Live Preview](https://themefic.com/tourfic)
 👉 Buy Pro Version: [Tourfic Pro](https://themefic.com/tourfic/pricing)
@@ -31,9 +31,9 @@ This All-in-One Travel Booking WordPress plugin consists of almost all the basic
 * Add Unlimited Rooms (Up to 5 on Free Version)
 * Set room price per Room
 * Hotel Photo Gallery
-* Features, FAQs and Terms & Condition Per Room
+* Features, FAQs, and Terms & Conditions per Room
 * Room availability check based on Ajax
-* Dedicated Customer Review System (See Review section for breakdown)
+* Dedicated Customer Review System (See the Review section for breakdown)
 * Social Sharing Option (Facebook, Pinterest, LinkedIn, Twitter)
 * Enquiry / Ask a Question Form
 * Wishlist for Hotels
@@ -54,13 +54,13 @@ This All-in-One Travel Booking WordPress plugin consists of almost all the basic
 = 🎉  WordPress Travel Booking & Management System =
 * Add Unlimited Tours
 * Tour Photo Gallery
-* Features, FAQs and Terms & Condition Per Tour
+* Features, FAQs, and Terms & Conditions per Tour
 * Tour Highlights Section
 * Tour Include/Exclude Section
 * Tour Itinerary
 * Set tour as featured
 * Tour Price by Persons (Adult, Children, Infant)
-* Dedicated Customer Review System (See Review section for breakdown)
+* Dedicated Customer Review System (See the Review section for breakdown)
 * Wishlist for Tours
 * Enquiry / Ask a Question Form
 * Continuous Tour (Tour availability every month within the mentioned range)
@@ -80,7 +80,7 @@ This All-in-One Travel Booking WordPress plugin consists of almost all the basic
 * Add Unlimited Apartment
 * Apartment Photo Gallery
 * Apartment Set tour as featured
-* Location and Dynamic Location Search ( OpenStreetMap, Google map(Pro) )
+* Location and Dynamic Location Search ( OpenStreetMap, Google Map(Pro) )
 * Apartment Booking Management
 * Booking per night pricing, Minimum Night Stay
 * Apartment Pricing for Adults, Children, and Infant
@@ -94,7 +94,7 @@ This All-in-One Travel Booking WordPress plugin consists of almost all the basic
 * Apartment Terms & Conditions
 * Apartment Enquiry Section
 * Apartment Related Apartment
-* Dedicated Customer Review System (See Review section for breakdown)
+* Dedicated Customer Review System (See the Review section for breakdown)
 * Wishlist for Apartment
 * Apartment Specific Room Person Management( Pro )
 * Apartment Specific Room gallery( Pro ) 
@@ -444,6 +444,23 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.10.8 - 16 November 2023 =
+
+- Updated: readme.txt
+- Updated: Black Friday Banner
+
+= 2.10.7 - 15 November 2023 =
+
+- Notice: Black Friday Announcements
+- Improvement: System stability Improved
+
+= 2.10.6 - 10 November 2023 =
+
+- Compatibility: Compatible with WordPress 6.4.
+- Updated: Updated label for settings panel.
+- Fixed: Map issue fixed.
+- Fixed: Hotel booking issue.
 
 = 2.10.5 - 06 November 2023 =
 

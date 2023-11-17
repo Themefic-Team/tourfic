@@ -34,96 +34,114 @@ function tf_documentation_page_integration() {
 }
 
 /**
- * Black Friday Deals 2022
+ * Black Friday Deals 2023
  */
+if(!function_exists('tf_black_friday_2023_admin_notice') && !is_plugin_active( 'tourfic-pro/tourfic-pro.php' )){
+    function tf_black_friday_2023_admin_notice(){
 
-
-if ( ! function_exists( 'tf_black_friday_20222_admin_notice' ) ) {
-	function tf_black_friday_20222_admin_notice() {
-		$deal_link          = sanitize_url( 'https://themefic.com/go/tourfic-bf-deal' );
-		$get_current_screen = get_current_screen();
-		if ( ! isset( $_COOKIE['tf_dismiss_admin_notice'] ) ) {
-			if ( $get_current_screen->post_type != 'tf_hotel' && $get_current_screen->post_type != 'tf_tours' ) {
-				?>
-                <style>
-                    .tf_black_friday_20222_admin_notice a:focus {
-                        box-shadow: none;
-                    }
-
-                    .tf_black_friday_20222_admin_notice {
-                        padding: 7px;
-                        position: relative;
-                        z-index: 10;
-                    }
-                </style>
-                <div class="notice notice-success tf_black_friday_20222_admin_notice">
-                    <a href="<?php echo $deal_link; ?>" target="_blank">
-                        <img style="width: auto; height: 100px;" src="<?php echo TOURFIC_PLUGIN_URL ?>/assets/img/BLACK_FRIDAY_BACKGROUND_GRUNGE.jpg" alt="">
-                    </a>
-                    <button type="button" class="notice-dismiss tf_black_friday_notice_dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
-                </div>
-                <script>
-                    jQuery(document).ready(function ($) {
-                        $(document).on('click', '.tf_black_friday_notice_dismiss', function (event) {
-                            jQuery('.tf_black_friday_20222_admin_notice').css('display', 'none')
-                            data = {
-                                action: 'tf_black_friday_notice_dismiss_callback',
-                            };
-
-                            $.ajax({
-                                url: ajaxurl,
-                                type: 'post',
-                                data: data,
-                                success: function (data) {
-                                    ;
-                                },
-                                error: function (data) {
-                                }
-                            });
-                        });
-                    });
-                </script>
-
-				<?php
-			}
+		// Set the expiration time to 3 hours from the current time
+		$expiration_time = time() + 3 * 60 * 60;  
+		$tf_display_admin_notice_time = get_option( 'tf_display_admin_notice_time' );
+		if($tf_display_admin_notice_time == ''){
+			update_option( 'tf_display_admin_notice_time', $expiration_time );
 		}
 
-	}
-
-	if ( strtotime( '2022-12-01' ) > time() ) {
-		// add_action( 'admin_notices', 'tf_black_friday_20222_admin_notice' ); 
-	}
+        $deal_link =sanitize_url('https://themefic.com/deals/');
+        $get_current_screen = get_current_screen();  
+        if(!isset($_COOKIE['tf_dismiss_admin_notice']) && $get_current_screen->base == 'dashboard' && time() > $tf_display_admin_notice_time){ 
+            ?>
+            <style> 
+                .tf_black_friday_20222_admin_notice a:focus {
+                    box-shadow: none;
+                } 
+                .tf_black_friday_20222_admin_notice {
+                    padding: 7px;
+                    position: relative;
+                    z-index: 10;
+					max-width: 825px;
+                } 
+                .tf_black_friday_20222_admin_notice button:before {
+                    color: #fff !important;
+                }
+                .tf_black_friday_20222_admin_notice button:hover::before {
+                    color: #d63638 !important;
+                }
+            </style>
+            <div class="notice notice-success tf_black_friday_20222_admin_notice"> 
+                <a href="<?php echo $deal_link; ?>" target="_blank" >
+					<img style="width: 100%; height: auto;" src="<?php echo sanitize_url( 'https://themefic.com/wp-content/uploads/2023/11/Themefic_BlackFriday_rectangle_banner.png' ) ?>" alt="">
+                </a> 
+                <button type="button" class="notice-dismiss tf_black_friday_notice_dismiss"><span class="screen-reader-text"><?php echo __('Dismiss this notice.', 'ultimate-addons-cf7' ) ?></span></button>
+            </div>
+            <script>
+                jQuery(document).ready(function($) {
+                    $(document).on('click', '.tf_black_friday_notice_dismiss', function( event ) {
+                        jQuery('.tf_black_friday_20222_admin_notice').css('display', 'none')
+                        data = {
+                            action : 'tf_black_friday_notice_dismiss_callback',
+                        };
+                        $.ajax({
+                            url: ajaxurl,
+                            type: 'post',
+                            data: data,
+                            success: function (data) { ;
+                            },
+                            error: function (data) { 
+                            }
+                        });
+                    });
+                });
+            </script>
+        
+        <?php 
+        }
+    }
+    if (strtotime('2023-12-01') > time()) {
+        add_action( 'admin_notices', 'tf_black_friday_2023_admin_notice' );  
+    }   
+}
+if(!function_exists('tf_black_friday_notice_dismiss_callback')){
+    function tf_black_friday_notice_dismiss_callback() { 
+        $cookie_name = "tf_dismiss_admin_notice";
+        $cookie_value = "1"; 
+        setcookie($cookie_name, $cookie_value, strtotime('2023-12-01'), "/");
+		update_option( 'tf_display_admin_notice_time', '1' );
+        wp_die();
+    }
+    add_action( 'wp_ajax_tf_black_friday_notice_dismiss_callback', 'tf_black_friday_notice_dismiss_callback' );
 }
 
-function tf_black_friday_notice_dismiss_callback() {
-	$cookie_name  = "tf_dismiss_admin_notice";
-	$cookie_value = "1";
-	setcookie( $cookie_name, $cookie_value, time() + ( 86400 * 3 ), "/" );
-	wp_die();
-}
+if ( ! function_exists( 'tf_black_friday_2023_hotel_tour_docs' ) ) {
+	function tf_black_friday_2023_hotel_tour_docs() {
 
-add_action( 'wp_ajax_tf_black_friday_notice_dismiss_callback', 'tf_black_friday_notice_dismiss_callback' );
-
-if ( ! function_exists( 'tf_black_friday_20222_hotel_tour_docs' ) ) {
-	function tf_black_friday_20222_hotel_tour_docs() {
-
-		add_meta_box( 'tfhotel_black_friday_docs', __( ' ', 'tourfic' ), 'tf_black_friday_2022_callback_hotel', 'tf_hotel', 'side', 'high' );
-
-		add_meta_box( 'tftour_black_friday_docs', __( ' ', 'tourfic' ), 'tf_black_friday_2022_callback_tour', 'tf_tours', 'side', 'high' );
+		if ( ! isset( $_COOKIE['tf_hotel_friday_sidbar_notice'] ) ) {
+			add_meta_box( 'tfhotel_black_friday_docs', __( ' ', 'tourfic' ), 'tf_black_friday_2023_callback_hotel', 'tf_hotel', 'side', 'high' );
+		}
+		if ( ! isset( $_COOKIE['tf_tour_friday_sidbar_notice'] ) ) {
+			add_meta_box( 'tftour_black_friday_docs', __( ' ', 'tourfic' ), 'tf_black_friday_2023_callback_tour', 'tf_tours', 'side', 'high' );
+		}
+		if ( ! isset( $_COOKIE['tf_apartment_friday_sidbar_notice'] ) ) {
+			add_meta_box( 'tfapartment_black_friday_docs', __( ' ', 'tourfic' ), 'tf_black_friday_2023_callback_apartment', 'tf_apartment', 'side', 'high' );
+		}
 	}
 
-	if ( strtotime( '2022-12-01' ) > time() ) {
-		add_action( 'add_meta_boxes', 'tf_black_friday_20222_hotel_tour_docs' );
+	if ( strtotime( '2023-12-01' ) > time() && !is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) ) {
+		add_action( 'add_meta_boxes', 'tf_black_friday_2023_hotel_tour_docs' );
 	}
-	function tf_black_friday_2022_callback_hotel() {
-		$deal_link = sanitize_url( 'https://themefic.com/go/tourfic-bf-deal' );
+	function tf_black_friday_2023_callback_hotel() {
+		$deal_link = sanitize_url( 'https://themefic.com/deals' );
 		?>
         <style>
-            .back_friday_2022_preview a:focus {
+			#tfhotel_black_friday_docs{
+				border: 0px solid;
+				box-shadow: none;
+				background: transparent;
+			}
+            .back_friday_2023_preview a:focus {
                 box-shadow: none;
             }
 
-            .back_friday_2022_preview a {
+            .back_friday_2023_preview a {
                 display: inline-block;
             }
 
@@ -137,23 +155,48 @@ if ( ! function_exists( 'tf_black_friday_20222_hotel_tour_docs' ) ) {
                 visibility: hidden;
             }
         </style>
-        <div class="back_friday_2022_preview" style="text-align: center; overflow: hidden;">
+        <div class="back_friday_2023_preview" style="text-align: center; overflow: hidden;">
+			<button type="button" class="notice-dismiss tf_hotel_friday_notice_dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
             <a href="<?php echo $deal_link; ?>" target="_blank">
-                <img style="width: 100%; transform: scale(1.3);" src="<?php echo TOURFIC_PLUGIN_URL ?>/assets/img/BLACK_FRIDAY_BACKGROUND_GRUNGE.jpg" alt="">
+                <img style="width: 100%;" src="<?php echo sanitize_url('https://themefic.com/wp-content/uploads/2023/11/Tourfic_BlackFriday_Square_banner.png') ?>" alt="">
             </a>
+			<script>
+            jQuery(document).ready(function($) {
+                $(document).on('click', '.tf_hotel_friday_notice_dismiss', function( event ) { 
+                    jQuery('.back_friday_2023_preview').css('display', 'none')
+                    var cookieName = "tf_hotel_friday_sidbar_notice";
+					var cookieValue = "1";
+
+					// Create a date object for the expiration date
+					var expirationDate = new Date();
+					expirationDate.setTime(expirationDate.getTime() + (5 * 24 * 60 * 60 * 1000)); // 5 days in milliseconds
+
+					// Construct the cookie string
+					var cookieString = cookieName + "=" + cookieValue + ";expires=" + expirationDate.toUTCString() + ";path=/";
+
+					// Set the cookie
+					document.cookie = cookieString;
+                });
+            });
+        	</script>
         </div>
 		<?php
 	}
 
-	function tf_black_friday_2022_callback_tour() {
-		$deal_links = sanitize_url( 'https://themefic.com/go/tourfic-bf-deal' );
+	function tf_black_friday_2023_callback_tour() {
+		$deal_links = sanitize_url( 'https://themefic.com/deals' );
 		?>
         <style>
-            .back_friday_2022_preview a:focus {
+			#tftour_black_friday_docs{
+				border: 0px solid;
+				box-shadow: none;
+				background: transparent;
+			}
+            .back_friday_2023_preview a:focus {
                 box-shadow: none;
             }
 
-            .back_friday_2022_preview a {
+            .back_friday_2023_preview a {
                 display: inline-block;
             }
 
@@ -167,11 +210,87 @@ if ( ! function_exists( 'tf_black_friday_20222_hotel_tour_docs' ) ) {
                 visibility: hidden;
             }
         </style>
-        <div class="back_friday_2022_preview" style="text-align: center; overflow: hidden;">
+        <div class="back_friday_2023_preview" style="text-align: center; overflow: hidden;">
+			<button type="button" class="notice-dismiss tf_tour_friday_notice_dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
             <a href="<?php echo $deal_links; ?>" target="_blank">
-                <img style="width: 100%; transform: scale(1.3);" src="<?php echo TOURFIC_PLUGIN_URL ?>/assets/img/BLACK_FRIDAY_BACKGROUND_GRUNGE.jpg" alt="">
+				<img style="width: 100%;" src="<?php echo sanitize_url('https://themefic.com/wp-content/uploads/2023/11/Tourfic_BlackFriday_Square_banner.png') ?>" alt="">
             </a>
         </div>
+
+		<script>
+		jQuery(document).ready(function($) {
+			$(document).on('click', '.tf_tour_friday_notice_dismiss', function( event ) { 
+				jQuery('.back_friday_2023_preview').css('display', 'none')
+				var cookieName = "tf_tour_friday_sidbar_notice";
+				var cookieValue = "1";
+
+				// Create a date object for the expiration date
+				var expirationDate = new Date(); 
+				expirationDate.setTime(expirationDate.getTime() + (5 * 24 * 60 * 60 * 1000)); // 5 days in milliseconds
+
+				// Construct the cookie string
+				var cookieString = cookieName + "=" + cookieValue + ";expires=" + expirationDate.toUTCString() + ";path=/";
+
+				// Set the cookie
+				document.cookie = cookieString;
+			});
+		});
+		</script>
+		<?php
+	}
+	function tf_black_friday_2023_callback_apartment() {
+		$deal_links = sanitize_url( 'https://themefic.com/deals' );
+		?>
+        <style>
+			#tfapartment_black_friday_docs{
+				border: 0px solid;
+				box-shadow: none;
+				background: transparent;
+			}
+            .back_friday_2023_preview a:focus {
+                box-shadow: none;
+            }
+
+            .back_friday_2023_preview a {
+                display: inline-block;
+            }
+
+            #tfapartment_black_friday_docs .inside {
+                padding: 0;
+                margin-top: 0;
+            }
+
+            #tfapartment_black_friday_docs .postbox-header {
+                display: none;
+                visibility: hidden;
+            }
+        </style>
+        <div class="back_friday_2023_preview" style="text-align: center; overflow: hidden;">
+			<button type="button" class="notice-dismiss tf_apartment_friday_notice_dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
+            <a href="<?php echo $deal_links; ?>" target="_blank">
+				<img style="width: 100%;" src="<?php echo sanitize_url('https://themefic.com/wp-content/uploads/2023/11/Tourfic_BlackFriday_Square_banner.png') ?>" alt="">
+            </a>
+        </div>
+
+		<script>
+		jQuery(document).ready(function($) {
+			$(document).on('click', '.tf_apartment_friday_notice_dismiss', function( event ) { 
+				jQuery('.back_friday_2023_preview').css('display', 'none')
+				var cookieName = "tf_apartment_friday_sidbar_notice";
+				var cookieValue = "1";
+
+				// Create a date object for the expiration date
+				var expirationDate = new Date();
+				expirationDate.setTime(expirationDate.getTime() + (5 * 24 * 60 * 60 * 1000)); // 5 days in milliseconds
+
+				// Construct the cookie string
+				var cookieString = cookieName + "=" + cookieValue + ";expires=" + expirationDate.toUTCString() + ";path=/";
+
+				// Set the cookie
+				document.cookie = cookieString;
+			});
+		});
+		</script>
 		<?php
 	}
 }
@@ -181,6 +300,7 @@ if ( ! function_exists( 'tf_black_friday_20222_hotel_tour_docs' ) ) {
  * Go to Documentaion Metabox
  */
 
+
 function tf_hotel_tour_docs() {
 	global $current_user;
 	$tf_current_role = $current_user->roles[0];
@@ -188,6 +308,10 @@ function tf_hotel_tour_docs() {
 		add_meta_box( 'tfhotel_docs', __( 'Tourfic Documentation', 'tourfic' ), 'tf_hotel_docs_callback', 'tf_hotel', 'side', 'high' );
 		add_meta_box( 'tfapartment_docs', __( 'Tourfic Documantation', 'tourfic' ), 'tf_apartment_docs_callback', 'tf_apartment', 'side', 'high' );
 		add_meta_box( 'tftour_docs', __( 'Tourfic Documentation', 'tourfic' ), 'tf_tour_docs_callback', 'tf_tours', 'side', 'high' );
+
+		add_filter( 'get_user_option_meta-box-order_tf_tours', 'tour_metabox_order' );
+		add_filter( 'get_user_option_meta-box-order_tf_apartment', 'apartment_metabox_order' );
+		add_filter( 'get_user_option_meta-box-order_tf_hotel', 'hotel_metabox_order' );
 	}
 }
 
@@ -198,18 +322,19 @@ function tf_hotel_docs_callback() {
 	?>
     <div class="tf_docs_preview">
         <a href="<?php echo $tfhoteldocumentation; ?>" target="_blank">
-			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/documentation.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
+			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
 		</a>
     </div>
 	<?php
 }
 
 function tf_apartment_docs_callback() {
+	global $wp_meta_boxes;
 	$tf_apartment_documentation = sanitize_url( 'https://themefic.com/docs/tourfic/add-new-apartment/locations-types-and-featured-image/' );
 	?>
     <div class="tf_docs_preview">
         <a href="<?php echo $tf_apartment_documentation; ?>" target="_blank">
-			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/documentation.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
+			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
 		</a>
     </div>
 	<?php
@@ -220,11 +345,54 @@ function tf_tour_docs_callback() {
 	?>
     <div class="tf_docs_preview">
         <a href="<?php echo $tf_tour_documentation; ?>" target="_blank">
-			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/documentation.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
+			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
 		</a>
     </div>
 	<?php
 }
+
+// doc link Positioning Start
+
+function apartment_metabox_order( $order ) {
+	return array(
+		'side' => join( 
+			",", 
+			array (
+				'submitdiv',
+				'tfapartment_docs',
+				'tfapartment_black_friday_docs'
+			)
+		),
+	);
+}
+
+function tour_metabox_order( $order ) {
+	return array(
+		'side' => join( 
+			",", 
+			array(
+				'submitdiv',
+				'tftour_docs',
+				'tftour_black_friday_docs'
+			)
+		),
+	);
+}
+
+function hotel_metabox_order( $order ) {
+	return array(
+		'side' => join( 
+			",", 
+			array(
+				'submitdiv',
+				'tfhotel_docs',
+				'tfhotel_black_friday_docs'
+			)
+		),
+	);
+}
+
+// doc link Positioning end
 
 /**
  * Notice wrapper

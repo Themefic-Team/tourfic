@@ -8,10 +8,11 @@
                         <div class="tf-head-title">
                             <h1><?php the_title(); ?></h1>
                             <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
-                                <i class="fa-solid fa-location-dot"></i>
-								<?php if ( $location ) {
+                                <?php if ( !empty($location) ) { ?>
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <?php
 									echo '<a href="#tf-tour-map">' . $location . '.</a>';
-								} ?>
+								 }; ?>
                             </div>
                         </div>
                         <div class="tf-head-social tf-flex tf-flex-gap-8 tf-flex-align-center">
