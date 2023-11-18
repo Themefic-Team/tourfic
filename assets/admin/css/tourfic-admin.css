@@ -2470,6 +2470,7 @@ Steps
 }
 
 .tf-field-ical input,
+.tf-field-ical_export input,
 .tf-field-text input {
   width: 100%;
   padding: 12px 8px 12px 12px;
@@ -2481,43 +2482,52 @@ Steps
   font-size: 14px;
 }
 .tf-field-ical input:focus,
+.tf-field-ical_export input:focus,
 .tf-field-text input:focus {
   background: #FFFFFF;
   box-shadow: 0 0 0 2px #2979ff;
   border-radius: 4px;
 }
 .tf-field-ical input::-webkit-input-placeholder,
+.tf-field-ical_export input::-webkit-input-placeholder,
 .tf-field-text input::-webkit-input-placeholder {
   color: #a6b1bf;
 }
 .tf-field-ical input::-ms-input-placeholder,
+.tf-field-ical_export input::-ms-input-placeholder,
 .tf-field-text input::-ms-input-placeholder {
   color: #a6b1bf;
 }
 .tf-field-ical input input:-ms-input-placeholder,
+.tf-field-ical_export input input:-ms-input-placeholder,
 .tf-field-text input input:-ms-input-placeholder {
   color: #a6b1bf;
 }
 .tf-field-ical input::-moz-placeholder,
+.tf-field-ical_export input::-moz-placeholder,
 .tf-field-text input::-moz-placeholder {
   opacity: 1;
   color: #a6b1bf;
 }
 .tf-field-ical input:-moz-placeholder,
+.tf-field-ical_export input:-moz-placeholder,
 .tf-field-text input:-moz-placeholder {
   opacity: 1;
   color: #a6b1bf;
 }
 .tf-field-ical input::placeholder,
+.tf-field-ical_export input::placeholder,
 .tf-field-text input::placeholder {
   color: #a6b1bf;
 }
 .tf-field-ical input:read-only,
+.tf-field-ical_export input:read-only,
 .tf-field-text input:read-only {
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
   background-color: #ebf2ff;
 }
 .tf-field-ical input:read-only:focus,
+.tf-field-ical_export input:read-only:focus,
 .tf-field-text input:read-only:focus {
   box-shadow: none;
   border: 1px solid #c4cbd4;
