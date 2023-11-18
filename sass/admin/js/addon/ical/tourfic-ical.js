@@ -35,7 +35,7 @@
                 type: 'post',
                 url: tf_ical_params.ajax_url,
                 data: {
-                    action: 'tf_import_ical',
+                    action: 'tf_hotel_ical_import',
                     ical_url: iCalUrl,
                     post_id: postId,
                     room_index: roomIndex,
