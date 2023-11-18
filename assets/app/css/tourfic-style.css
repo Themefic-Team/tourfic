@@ -8444,6 +8444,7 @@ div#tf-contact-info {
 }
 .tf-bottom-booking-bar.active {
   transform: rotateX(0deg);
+  width: 100%;
 }
 .tf-bottom-booking-bar.mobile-active .tf-bottom-booking-fields {
   display: -webkit-box;
@@ -9545,6 +9546,15 @@ div#tf-contact-info {
 
 html {
   scroll-behavior: smooth;
+}
+
+.tf_template_3_global_layouts .ast-container {
+  max-width: none !important;
+  padding: 0px !important;
+}
+.tf_template_3_global_layouts .site-primary-header-wrap {
+  padding-left: 32px !important;
+  padding-right: 32px !important;
 }
 
 .tf-template-3 {
@@ -10797,13 +10807,13 @@ html {
   display: flex;
 }
 .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-checkinout {
-  width: 105px;
+  width: 185px;
   border-right: 1px solid #D6D4D2;
-  display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   padding: 0px 38px;
+  display: flex;
 }
 .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-checkinout span.tf-booking-form-title {
   font-size: 16px;
@@ -10859,7 +10869,7 @@ html {
   position: relative;
   padding: 0px 38px;
   border-right: 1px solid #D6D4D2;
-  width: 105px;
+  width: 170px;
 }
 .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room .tf-booking-form-title {
   font-size: 16px;
@@ -10867,6 +10877,11 @@ html {
   line-height: 20.8px;
   margin-bottom: 0px;
   color: #99948D;
+}
+.tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room .tf-booking-guest-and-room-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room .tf-guest.tf-booking-date {
   color: #595349;
@@ -10877,9 +10892,14 @@ html {
   text-align: right;
   margin-right: 5px;
 }
+.tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room .tf-booking-month {
+  display: flex;
+  align-items: center;
+}
 .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room .tf-booking-month span {
   color: #595349;
   font-size: 16px;
+  margin-right: 5px;
 }
 .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room .tf_acrselection-wrap {
   position: absolute;

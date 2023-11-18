@@ -355,13 +355,13 @@
     .tf-booking-form-fields{
         display: flex;
         .tf-booking-form-checkinout{
-            width: 105px;
+            width: 185px;
             border-right: 1px solid #D6D4D2;
-            display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
             padding: 0px 38px;
+            display: flex;
             span.tf-booking-form-title {
                 font-size: 16px;
                 font-weight: 600;
@@ -419,13 +419,18 @@
             position: relative;
             padding: 0px 38px;
             border-right: 1px solid #D6D4D2;
-            width: 105px;
+            width: 170px;
             .tf-booking-form-title{
                 font-size: 16px;
                 font-weight: 600;
                 line-height: 20.8px;
                 margin-bottom: 0px;
                 color: #99948D;
+            }
+            .tf-booking-guest-and-room-wrap{
+                display: flex;
+                align-items: center;
+                gap: 6px;
             }
             .tf-guest.tf-booking-date{
                 color: #595349;
@@ -437,9 +442,12 @@
                 margin-right: 5px;
             }
             .tf-booking-month{
+                display: flex;
+                align-items: center;
                 span{
                     color: #595349;
                     font-size: 16px;
+                    margin-right: 5px;
                 }
             }
             .tf_acrselection-wrap {

@@ -460,3 +460,60 @@ function tf_dequeue_theplus_script_on_settings_page($screen) {
 
 }
 add_action('admin_enqueue_scripts', 'tf_dequeue_theplus_script_on_settings_page', 9999);
+
+/**
+ * Template 3 Compatible to others Themes
+ * 
+ * @since 2.10.8
+ */
+
+ function tf_templates_body_classess($classes) {
+
+	// Tour Archive Layout
+	$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
+	// Hotel Archive Layout
+	$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
+	// Hotel Single Global Layout
+	$tf_hotel_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
+	// Tour Single Global Layout
+	$tf_tour_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-tour'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-tour'] : 'design-1';
+
+	if(is_post_type_archive('tf_tours')){
+		if('design-2'==$tf_tour_arc_selected_template){
+			$classes[] = 'tf_template_3_global_layouts';
+		}
+	}
+	
+	if(is_post_type_archive('tf_hotel')){
+		if('design-2'==$tf_hotel_arc_selected_template){
+			$classes[] = 'tf_template_3_global_layouts';
+		}
+	}
+
+	if(is_singular('tf_hotel')){
+		$meta = get_post_meta( get_the_ID(), 'tf_hotels_opt', true );
+		$tf_hotel_layout_conditions = ! empty( $meta['tf_single_hotel_layout_opt'] ) ? $meta['tf_single_hotel_layout_opt'] : 'global';
+		if("single"==$tf_hotel_layout_conditions){
+			$tf_hotel_single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
+		}
+		$tf_hotel_selected_check = !empty($tf_hotel_single_template) ? $tf_hotel_single_template : $tf_hotel_global_template;
+		if('design-2'==$tf_hotel_selected_check){
+			$classes[] = 'tf_template_3_global_layouts';
+		}
+	}
+
+	if(is_singular('tf_tours')){
+		$meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
+		$tf_tour_layout_conditions = ! empty( $meta['tf_single_tour_layout_opt'] ) ? $meta['tf_single_tour_layout_opt'] : 'global';
+		if("single"==$tf_tour_layout_conditions){
+			$tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'design-1';
+		}
+		$tf_tour_selected_check = !empty($tf_tour_single_template) ? $tf_tour_single_template : $tf_tour_global_template;
+		if('design-2'==$tf_tour_selected_check){
+			$classes[] = 'tf_template_3_global_layouts';
+		}
+	}
+    return $classes;
+}
+
+add_filter('body_class', 'tf_templates_body_classess');
