@@ -5,7 +5,6 @@ defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 	class TF_Apartment_Backend_Booking {
 		private static $instance = null;
-		private $apartment_id = null;
 
 		public static function instance() {
 			if ( self::$instance == null ) {
@@ -24,10 +23,12 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 			add_action( 'wp_ajax_tf_backend_apartment_booking', array( $this, 'tf_backend_apartment_booking' ) );
 		}
 
-		private function get_apartment_meta_options($id, $key) {
-			if(!empty($id)) {
-				$meta  = get_post_meta( $id, 'tf_apartment_opt', true );
+		private function get_apartment_meta_options($id, $key = '') {
+			if(empty($id) || $id == null || $id == "undefined" || $id == 0) {
+				return;
 			}
+
+			$meta = get_post_meta( $id, 'tf_apartment_opt', true );
 
 			if(!empty($key)) {
 				return $meta[$key];
@@ -39,7 +40,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 		function tf_apartment_backend_booking_button() { 
 			$edit_url = admin_url( 'edit.php?post_type=tf_apartment&page=tf-apartment-backend-booking' );
 			?>
-            <a href="<?php echo admin_url( 'edit.php?post_type=tf_apartment&page=tf-apartment-backend-booking' ); ?>" class="button button-primary tf-booking-btn"><?php _e( 'Add New Booking', 'tourfic' ); ?></a>
+            <a href="<?php echo $edit_url; ?>" class="button button-primary tf-booking-btn"><?php _e( 'Add New Booking', 'tourfic' ); ?></a>
 			<?php
 		}
 
@@ -88,7 +89,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 
                 <!-- Footer -->
                 <div class="tf-backend-booking-footer">
-                    <button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn" id="tf-backend-hotel-book-btn"><?php _e( 'Book Now', 'tourfic' ); ?></button>
+                    <button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn" id="tf-backend-apartment-book-btn"><?php _e( 'Book Now', 'tourfic' ); ?></button>
                 </div>
             </form>
 			<?php
@@ -256,6 +257,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 		}
 
 		public function tf_check_available_apartment() {
+			$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
 			$from = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
 			$to   = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
 
@@ -274,27 +276,30 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 				);
 			}
 
+			$check_in_out = "$from - $to";
+
 			if ( $loop->have_posts() ) {
 				$not_found = [];
 				while ( $loop->have_posts() ) {
 					$loop->the_post();
-					tf_filter_apartment_by_date( $period, $not_found, array( 1, 0, 0, '' ) );
+					tf_filter_apartment_by_date( $period, $not_found, array( 1, 0, 0, $check_in_out ) );
 				}
 
 				$tf_total_filters = [];
 
 				foreach ( $not_found as $filter_post ) {
 					if ( $filter_post['found'] == 1 ) {
-						$tf_total_filters[ $filter_post['post_id'] ] = get_the_title( $filter_post['post_id'] );
-					} else {
 						$tf_total_filters[] = "Not Found";
+						break;
+					} else {
+						$tf_total_filters[ $filter_post['post_id'] ] = get_the_title( $filter_post['post_id'] );
 					}
 				}
 			}
 			wp_reset_postdata();
 
 			wp_send_json_success( array(
-				'apartments' => $tf_total_filters
+				'apartments' => $tf_total_filters,
 			) );
 		}
 		
@@ -313,7 +318,8 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 				$apartment_adult_price = !empty( $this->get_apartment_meta_options($id, 'adult_price')) ? $this->get_apartment_meta_options($id, 'adult_price') : 0;
 				$apartment_child_price = !empty( $this->get_apartment_meta_options($id, 'child_price')) ? $this->get_apartment_meta_options($id, 'child_price') : 0;
 				$apartment_infant_price = !empty( $this->get_apartment_meta_options($id, 'infant_price')) ? $this->get_apartment_meta_options($id, 'infant_price') : 0;
-
+				$discount_type = !empty( $this->get_apartment_meta_options($id, 'discount_type')) ? $this->get_apartment_meta_options($id, 'discount_type') : 'none';
+				$discount_amount = !empty( $this->get_apartment_meta_options($id, 'discount')) && $discount_type != 'none' ? $this->get_apartment_meta_options($id, 'discount') : 0;
 			}
 
 			$apartment_pricing = 0;
@@ -344,10 +350,29 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 				}
 			}
 
+			// Discount Calculation
+
+			if(!empty($discount_type) && !empty($discount_amount) ) { 
+				if($discount_type == "percent") {
+					$apartment_pricing = !empty( $apartment_pricing ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( $apartment_pricing - (  ( $apartment_pricing / 100 ) * $discount_amount ), 2 ) ) ) : 0;
+				}else if($discount_type == "fixed") {
+					$apartment_pricing = !empty( $apartment_pricing ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( $apartment_pricing - $discount_amount ), 2 ) ) : 0;
+				}
+			}
+
+			// additional fees Calculation
 			if($addional_fees && !empty($addional_fees) && $apartment_pricing > 0 ) {
 				foreach($addional_fees as $fees) {
 					if(!empty($fees["additional_fee"])) {
-						$apartment_pricing += $fees["additional_fee"];
+						if(!empty($fees["fee_type"]) && $fees["fee_type"] == "per_stay") {
+							$apartment_pricing += $fees["additional_fee"];
+						} 
+						if (!empty($fees["fee_type"]) && $fees["fee_type"] == "per_person") {
+							$apartment_pricing += intval((int) $fees["additional_fee"] * ((int) $adult_count + (int) $child_count + (int) $infant_count));
+						}
+						if(!empty($fees["fee_type"]) && $fees["fee_type"] == "per_night") {
+							$apartment_pricing += !empty($day_diff["days"]) ? intval( (int) $fees["additional_fee"] * $day_diff["days"] ) : $fees["additional_fee"];
+						}
 					}
 				}
 			}
@@ -355,10 +380,10 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 		}
 
 		public function apartment_day_diference_calculation($check_in, $check_out) {
-			if ( $check_in && $check_out ) {
-				$check_in_stt  = strtotime( $check_in . ' +1 day' );
-				$check_out_stt = strtotime( $check_out );
-				$days          = ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1;
+			if ( !empty($check_in) && !empty($check_out) ) {
+				$check_in_stt  = !empty($check_in) ? strtotime( $check_in . ' +1 day' ) : 0;
+				$check_out_stt = !empty($check_out) ? strtotime( $check_out ) : 0; 
+				$days = !empty($check_in_stt) && !empty($check_out_stt) ? ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1 : 0;
 
 				$tfperiod = new DatePeriod(
 					new DateTime( $check_in . ' 00:00' ),
@@ -366,29 +391,33 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 					new DateTime( $check_out . ' 23:59' )
 				);
 			}
-
-			return ["days" => $days, "period"=>$tfperiod];
+			return array(
+				"days" => !empty($days) ? $days : 0,
+				"period" => !empty($tfperiod) ? $tfperiod : 0
+			);
 		}
 
 		public function tf_check_apartment_aditional_fees() {
-			$this->apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
+			$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : 0;
 			$from = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
 			$to   = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
 
 			 // Additional Fees data
-			$additional_fees = !empty($this->get_apartment_meta_options($this->apartment_id, "additional_fees")) ? $this->get_apartment_meta_options($this->apartment_id, "additional_fees") : array();
 			
+			 if($apartment_id != 0) {
+				$additional_fees = !empty( $this->get_apartment_meta_options( $apartment_id, "additional_fees" ) ) ? $this->get_apartment_meta_options( $apartment_id, "additional_fees" ) : array();
+			 }
 
 			$all_fees = [];
-			if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) :
-				if(count($additional_fees) > 0) {
-					foreach($additional_fees as $fees) {
-						$all_fees [] = array (
+			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($additional_fees)) :
+				if ( count( $additional_fees ) > 0 ) {
+					foreach ( $additional_fees as $fees ) {
+						$all_fees[] = array(
 							"label" => $fees["additional_fee_label"],
-							"fee" => $fees["additional_fee"],
-							"price" => wc_price($fees["additional_fee"]),
-							"type" => $fees["fee_type"]
-						); 
+							"fee"   => $fees["additional_fee"],
+							"price" => wc_price( $fees["additional_fee"] ),
+							"type"  => $fees["fee_type"],
+						);
 					}
 				}
 			endif;
@@ -400,6 +429,140 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 				'additional_fees' => $all_fees,
 				) 
 			);
+		}
+
+		// Backend Booking
+
+		public function tf_backend_apartment_booking() {
+			$response = array(
+				'success' => false,
+			);
+
+			$field = [];
+			foreach ( $_POST as $key => $value ) {
+				if ( $key === 'tf_apartment_date' ) {
+					$field[ $key ]['from'] = sanitize_text_field( $value['from'] );
+					$field[ $key ]['to']   = sanitize_text_field( $value['to'] );
+				} else {
+					$field[ $key ] = $value;
+				}
+			}
+
+			$required_fields = array(
+				'tf_apartment_booked_by',
+				'tf_apartment_customer_first_name',
+				'tf_apartment_customer_email',
+				'tf_apartment_customer_phone',
+				'tf_apartment_customer_country',
+				'tf_apartment_customer_address',
+				'tf_apartment_customer_city',
+				'tf_apartment_customer_state',
+				'tf_apartment_customer_zip',
+				'tf_apartment_date',
+				'tf_available_apartments',
+				'tf_apartment_adults_number'
+			);
+
+			if ( ! isset( $field['tf_backend_booking_nonce'] ) || ! wp_verify_nonce( $field['tf_backend_booking_nonce'], 'tf_backend_booking_nonce_action' ) ) {
+				$response['message'] = __( 'Sorry, your nonce did not verify.', 'tourfic' );
+			} else {
+				foreach ( $required_fields as $required_field ) {
+					if ( $required_field === 'tf_apartment_date' ) {
+						if ( empty( $field[ $required_field ]['from'] ) ) {
+							$response['fieldErrors'][ $required_field . '[from]_error' ] = __( 'The field is required', 'tourfic' );
+						}
+						if ( empty( $field[ $required_field ]['to'] ) ) {
+							$response['fieldErrors'][ $required_field . '[to]_error' ] = __( 'The field is required', 'tourfic' );
+						}
+					} else {
+						if ( empty( $field[ $required_field ] ) ) {
+							$response['fieldErrors'][ $required_field . '_error' ] = __( 'The field is required', 'tourfic' );
+						}
+					}
+				}
+
+				$apt_id = !empty($field['tf_available_apartments']) ? intval($field['tf_available_apartments']) : 0;
+				$adult_count = !empty($field['tf_apartment_adults_number']) ? intval($field['tf_apartment_adults_number']) : 0;
+				$child_count = !empty($field['tf_apartment_children_number']) ? intval($field['tf_apartment_children_number']) : 0;
+				$infant_count = !empty($field['tf_apartment_infant_number']) ? intval($field['tf_apartment_infant_number']) : 0;
+				$check_from = !empty($field['tf_apartment_date']['from']) ? $field['tf_apartment_date']['from'] : '';
+				$check_to = !empty($field['tf_apartment_date']['to']) ? $field['tf_apartment_date']['to'] : '';
+				$apt_data = $this->get_apartment_meta_options( intval( $apt_id ) );
+
+				$additional_fees = !empty($apt_data['additional_fees']) ? $apt_data['additional_fees'] : array();
+
+
+				if ( $apt_data['max_adults'] < $adult_count ) {
+					$response['fieldErrors']['tf_apartment_adults_number_error'] = __( "You can't book more than " . $apt_data['max_adults'] . " adults", 'tourfic' );
+				}
+				if ( $apt_data['max_children'] < $child_count ) {
+					$response['fieldErrors']['tf_apartment_children_number_error'] = __( "You can't book more than " . $apt_data['max_children'] . " children", 'tourfic' );
+				}
+				if ( $apt_data['max_infants'] < $infant_count ) {
+					$response['fieldErrors']['tf_apartment_infant_number_error'] = __( "You can't book more than " . $apt_data['max_infants'] . " infants", 'tourfic' );
+				}
+
+				if ( ! $response['fieldErrors'] ) {
+					$total_price = $this->get_total_apartment_price($apt_id, $check_from, $check_to, $adult_count, $child_count, $infant_count, $additional_fees);
+					$billing_details  = array(
+						'billing_first_name' => $field['tf_apartment_customer_first_name'],
+						'billing_last_name'  => $field['tf_apartment_customer_last_name'],
+						'billing_company'    => '',
+						'billing_address_1'  => $field['tf_apartment_customer_address'],
+						'billing_address_2'  => $field['tf_apartment_customer_address_2'],
+						'billing_city'       => $field['tf_apartment_customer_city'],
+						'billing_state'      => $field['tf_apartment_customer_state'],
+						'billing_postcode'   => $field['tf_apartment_customer_zip'],
+						'billing_country'    => $field['tf_apartment_customer_country'],
+						'billing_email'      => $field['tf_apartment_customer_email'],
+						'billing_phone'      => $field['tf_apartment_customer_phone'],
+					);
+					$shipping_details = array(
+						'shipping_first_name' => $field['tf_apartment_customer_first_name'],
+						'shipping_last_name'  => $field['tf_apartment_customer_last_name'],
+						'shipping_company'    => '',
+						'shipping_address_1'  => $field['tf_apartment_customer_address'],
+						'shipping_address_2'  => $field['tf_apartment_customer_address_2'],
+						'shipping_city'       => $field['tf_apartment_customer_city'],
+						'shipping_state'      => $field['tf_apartment_customer_state'],
+						'shipping_postcode'   => $field['tf_apartment_customer_zip'],
+						'shipping_country'    => $field['tf_apartment_customer_country'],
+						'shipping_phone'      => $field['tf_apartment_customer_phone'],
+					);
+					$order_details    = [
+						'order_by'             => $field['tf_apartment_booked_by'],
+						'check_in'             => $field['tf_apartment_date']['from'],
+						'check_out'            => $field['tf_apartment_date']['to'],
+						'adult'                => $field['tf_apartment_adults_number'],
+						'child'                => $field['tf_apartment_children_number'],
+						'infant'                => $field['tf_apartment_infant_number'],
+						'children_ages'        => '',
+						'total_price'          => $total_price,
+						'due_price'            => '',
+					];
+
+					$order_data = array(
+						'post_id'          => intval( $field['tf_available_apartments'] ),
+						'post_type'        => 'apartment',
+						'check_in'         => $check_from,
+						'check_out'        => $check_to,
+						'billing_details'  => $billing_details,
+						'shipping_details' => $shipping_details,
+						'order_details'    => $order_details,
+						'payment_method'   => "Booked by " . $field['tf_apartment_booked_by'],
+						'status'           => 'processing',
+						'order_date'       => date( 'Y-m-d H:i:s' ),
+					);
+
+					tf_set_order( $order_data );
+
+					$response['success'] = true;
+					$response['message'] = __( 'Your booking has been successfully submitted.', 'tourfic' );
+				}
+			}
+
+			echo json_encode( $response );
+			die();
 		}
 	}
 }
