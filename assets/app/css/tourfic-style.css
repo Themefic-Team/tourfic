@@ -9575,8 +9575,8 @@ html {
 }
 .tf-template-3 .tf-container {
   margin: 0 auto;
-  padding: 0 200px;
-  max-width: inherit;
+  max-width: 1520px;
+  padding: 0;
 }
 .tf-template-3 h1,
 .tf-template-3 h2,
@@ -9799,6 +9799,9 @@ html {
   display: flex;
   align-items: center;
   gap: 32px;
+  color: #FDF9F3;
+}
+.tf-template-3 .tf-hero-section-wrap .tf-container .tf-archive-hero-content .tf-head-title h1 {
   color: #FDF9F3;
 }
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-archive-hero-content .tf-title-meta {
