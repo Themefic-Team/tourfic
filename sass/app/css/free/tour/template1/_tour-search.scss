@@ -368,6 +368,9 @@ i {
     .tf-archive-right{
         .tf-destination-box{
             .autocomplete-items {
+                max-height: 120px;
+                overflow: scroll;
+                overflow-x: hidden;
                 position: absolute;
                 border: 1px solid #d4d4d4;
                 border-bottom: none;
