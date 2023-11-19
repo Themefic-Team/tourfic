@@ -478,13 +478,13 @@ add_action('admin_enqueue_scripts', 'tf_dequeue_theplus_script_on_settings_page'
 	// Tour Single Global Layout
 	$tf_tour_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-tour'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-tour'] : 'design-1';
 
-	if(is_post_type_archive('tf_tours')){
+	if(is_post_type_archive('tf_tours') || is_tax('tour_destination')){
 		if('design-2'==$tf_tour_arc_selected_template){
 			$classes[] = 'tf_template_3_global_layouts';
 		}
 	}
 	
-	if(is_post_type_archive('tf_hotel')){
+	if(is_post_type_archive('tf_hotel') || is_tax('hotel_location')){
 		if('design-2'==$tf_hotel_arc_selected_template){
 			$classes[] = 'tf_template_3_global_layouts';
 		}
