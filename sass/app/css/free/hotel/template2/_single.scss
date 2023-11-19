@@ -3,14 +3,18 @@ html {
 }
 .tf_template_3_global_layouts{
   .ast-container,
-  .container{
+  .container,
+  .col-full{
     max-width: none !important;
     padding: 0px !important;
   }
   .site-primary-header-wrap,
   .header-container.container,
   #footer .footer-bottom,
-  .page-top{
+  .page-top,
+  #masthead,
+  .storefront-breadcrumb,
+  #colophon{
     padding-left: 32px !important;
     padding-right: 32px !important;
   }
