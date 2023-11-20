@@ -422,25 +422,29 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                     $places_section_title = !empty($meta["section-title"]) ? $meta["section-title"] : "What's around?";
                     $places_meta = !empty($meta["nearby-places"]) ? $meta["nearby-places"] : array();
                     ?>
-                    <div class="nearby-container"> <!-- nearby places - start -->
-                        <div class="nearby-container-inner">
-                            <h3 class="section-heading"><?php echo __($places_section_title, 'tourfic'); ?></h3>
-                            <ul>
-                                <?php foreach($places_meta as $place) {
-                                    $place_icon = '<i class="' . $place['place-icon'] . '"></i>';
-                                    ?>
-                                    <li>
-                                        <span>
-                                            <?php echo $place_icon; ?> <?php echo $place["place-title"]; ?>
-                                        </span>
-                                        <span>
-                                            <?php echo $place["place-dist"]; ?>
-                                        </span>
-                                    </li>
-                                <?php }; ?>
-                            </ul>
-                        </div>
-                    </div> <!-- nearby places - end -->
+                    <?php if(count($places_meta) > 0): ?> <!-- nearby places - start -->
+                        <div class="nearby-container"> 
+                            <div class="nearby-container-inner">
+                                <?php if(!empty($places_section_title)): ?>
+                                    <h3 class="section-heading"><?php echo __($places_section_title, 'tourfic'); ?></h3>
+                                <?php endif; ?>
+                                <ul>
+                                    <?php foreach($places_meta as $place) {
+                                        $place_icon = '<i class="' . $place['place-icon'] . '"></i>';
+                                        ?>
+                                        <li>
+                                            <span>
+                                                <?php echo $place_icon; ?> <?php echo $place["place-title"]; ?>
+                                            </span>
+                                            <span>
+                                                <?php echo $place["place-dist"]; ?>
+                                            </span>
+                                        </li>
+                                    <?php }; ?>
+                                </ul>
+                            </div>
+                        </div> 
+                    <?php endif; ?> <!-- nearby places - end -->
                 </div>
             </div>
         </div>
