@@ -985,6 +985,7 @@ div#tf-contact-info {
             }
             .tf-booking-content.show{
                 display: block;
+                overflow: hidden;
             }
             .tf-booking-summery {
                 width: calc(38% - 24px);
@@ -1109,6 +1110,7 @@ div#tf-contact-info {
                     top: 11px;
                     display: flex;
                     padding-left: 10px;
+                    overflow: hidden;
                     .tf-info-btn{
                         width: 40px;
                         text-align: center;

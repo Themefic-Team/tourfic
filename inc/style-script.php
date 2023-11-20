@@ -339,6 +339,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 		if( $tf_primary_bg_color_reg  ) { $output .= '
 			.tf_button, 
 			.tf-btn-flip:before, 
+			.tf-btn-flip:after, 
 			.btn-styled, 
 			.tf-review-form-container .tf-review-submit input[type="submit"], 
 			.tf-bttn-normal.bttn-primary, 
@@ -361,7 +362,6 @@ if( !function_exists( 'tf_custom_css' ) ){
 		if( $tf_primary_bg_color_hov  ) { $output .= '
 			.tf_button:hover, 
 			.btn-styled:hover, 
-			.tf-btn-flip:after, 
 			.tf-review-form-container 
 			.tf-review-submit input[type="submit"]:hover, 
 			.tf-bttn-normal.bttn-primary:hover, 

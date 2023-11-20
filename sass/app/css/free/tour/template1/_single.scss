@@ -822,6 +822,9 @@
     .tf-itinerary-downloader-option{
         background-color: $color-theme;
         border-radius: $tf-brds-default;
+        .itinerary-downloader-left {
+            overflow: hidden;
+        }
         h3,p{
             color: #fff;
         }

@@ -955,7 +955,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'type'         => 'repeater',
 					'label'        => __( 'Add Your Questions', 'tourfic' ),
 					'subtitle'    => __( 'Click the button below to add Frequently Asked Questions (FAQs) for your hotel. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each FAQ using the icons on the right side.', 'tourfic' ),
-					'button_title' => __( 'Add FAQ', 'tourfic' ),
+					'button_title' => __( 'Add New FAQ', 'tourfic' ),
 					'fields'       => array(
 
 						array(
