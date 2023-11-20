@@ -713,6 +713,25 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 
                                 let totalPerson = parseInt($('.tf_acrselection #adults').val()) + parseInt($('.tf_acrselection #children').val()) + parseInt($('.tf_acrselection #infant').val());
 
+								//discount
+                                var discount = <?php echo $discount; ?>;
+                                var discount_html = '<?php echo wc_price( 0 ); ?>';
+                                if (discount > 0 && total_price > 0) {
+                                    $('.apartment-discount-wrap').show();
+
+									<?php if ( $discount_type == 'percent' ): ?>
+                                    discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', (total_price * discount / 100).toFixed(2));
+                                    total_price = total_price - (total_price * discount / 100);
+									<?php else: ?>
+                                    discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', discount.toFixed(2));
+                                    total_price = total_price - discount;
+									<?php endif; ?>
+                                }
+                                $('.apartment-discount-wrap .apartment-discount').html('-' + discount_html);
+								var newTotalPrice = total_price
+								
+                                //end discount
+
                                 //additional fee
 								<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
 								<?php foreach ($additional_fees as $key => $item) : ?>
@@ -728,7 +747,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 totalAdditionalFee_<?php echo $key ?> = additional_fee_<?php echo $key ?>;
 								<?php endif; ?>
 
-                                if (totalAdditionalFee_<?php echo $key ?> > 0) {
+                                if (totalAdditionalFee_<?php echo $key ?> > 0 & newTotalPrice > 0 ) {
                                     $('.additional-fee-wrap').show();
                                     total_price = total_price + totalAdditionalFee_<?php echo $key ?>;
                                     additional_fee_html_<?php echo $key ?> = '<?php echo wc_price( 0 ); ?>'.replace('0.00', totalAdditionalFee_<?php echo $key ?>.toFixed(2));
@@ -759,26 +778,9 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 								<?php endif; ?>
                                 //end additional fee
 
-                                //discount
-                                var discount = <?php echo $discount; ?>;
-                                var discount_html = '<?php echo wc_price( 0 ); ?>';
-                                if (discount > 0) {
-                                    $('.apartment-discount-wrap').show();
-
-									<?php if ( $discount_type == 'percent' ): ?>
-                                    discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', (total_price * discount / 100).toFixed(2));
-                                    total_price = total_price - (total_price * discount / 100);
-									<?php else: ?>
-                                    discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', discount.toFixed(2));
-                                    total_price = total_price - discount;
-									<?php endif; ?>
-                                }
-                                $('.apartment-discount-wrap .apartment-discount').html('-' + discount_html);
-                                //end discount
-
                                 //total price
                                 var total_price_html = '<?php echo wc_price( 0 ); ?>';
-                                if (total_price > 0) {
+                                if (total_price > 0 && newTotalPrice > 0) {
                                     $('.total-price-wrap').show();
                                     total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', total_price.toFixed(2));
                                 }

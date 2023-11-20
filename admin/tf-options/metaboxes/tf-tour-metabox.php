@@ -1512,27 +1512,27 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 
 		// Multiple tags for tours
 		'tours_multiple_tags' => array(
-			'title'  => __( 'Multiple Tags', 'tourfic' ),
+			'title'  => __( 'Labels', 'tourfic' ),
 			'icon'   => 'fa fa-list',
 			'fields' => array(
 				array(
 					'id'           => 'tf-tour-tags',
 					'type'         => 'repeater',
-					'label'        => __( 'Multiple Tags', 'tourfic' ),
-					'button_title' => __( 'Add / Insert New Tag', 'tourfic' ),
+					'label'        => __( 'Labels', 'tourfic' ),
+					'button_title' => __( 'Add / Insert New Label', 'tourfic' ),
 					'fields'       => array(
 
 						array(
 							'id'    => 'tour-tag-title',
 							'type'  => 'text',
-							'label' => __( 'Tag', 'tourfic' ),
+							'label' => __( 'Label Title', 'tourfic' ),
 						),
 
 						array(
 							'id'       => 'tour-tag-color-settings',
 							'type'     => 'color',
-							'label'    => __( 'Tag Colors', 'tourfic' ),
-							'subtitle' => __( 'Colors of Tag Background and Font', 'tourfic' ),
+							'label'    => __( 'Label Colors', 'tourfic' ),
+							'subtitle' => __( 'Colors of Label Background and Font', 'tourfic' ),
 							'multiple' => true,
 							'inline'   => true,
 							'colors'   => array(
