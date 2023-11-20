@@ -168,7 +168,7 @@
                         <div class="tf-column tf-tour-details-right">
                             <div class="tf-tour-booking-box tf-box">
 								<?php
-								$hide_price = tfopt( 't-hide-start-price' );
+                                $hide_price = !empty( tfopt( 't-hide-start-price' ) ) ? tfopt( 't-hide-start-price' ) : '';
 								if ( isset( $hide_price ) && $hide_price !== '1' ) : ?>
                                     <!-- Tourfic Pricing Head -->
                                     <div class="tf-booking-form-data">
