@@ -93,10 +93,12 @@
             <div class="tf-hero-bottom-area">
                 <div class="tf-head-title">
                     <h1><?php echo get_the_title(); ?></h1>
+                    <?php if(!empty($address)) { ?>
                     <div class="tf-title-meta">
                         <i class="ri-map-pin-line"></i>
                         <a href="#tf-map"><?php echo esc_html( $address ); ?></a>
                     </div>
+                    <?php } ?>
                 </div>
                 <div class="tf-hero-gallery-videos">
                     <?php

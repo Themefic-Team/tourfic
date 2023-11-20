@@ -406,7 +406,7 @@ h3.section-heading {
   display: block;
   transition: 0.5s;
   position: absolute;
-  background: #0054a8;
+  background: #003162;
   content: attr(data-back);
   transform: translateY(-50%) rotateX(90deg);
   border-radius: 4px;
@@ -2272,7 +2272,7 @@ a.page-numbers {
   }
 }
 .tf_form-inner .autocomplete-items {
-  height: 120px;
+  max-height: 120px;
   overflow: scroll;
   overflow-x: hidden;
   position: absolute;
@@ -5358,6 +5358,7 @@ div#tf-contact-info {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content.show,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content.show {
   display: block;
+  overflow: hidden;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery {
@@ -5490,6 +5491,7 @@ div#tf-contact-info {
   top: 11px;
   display: flex;
   padding-left: 10px;
+  overflow: hidden;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn {
@@ -7917,6 +7919,9 @@ div#tf-contact-info {
   background-color: #0E3DD8;
   border-radius: 5px;
 }
+.tf-itinerary-wrapper.tf-mb-50 .tf-itinerary-downloader-option .itinerary-downloader-left {
+  overflow: hidden;
+}
 .tf-itinerary-wrapper.tf-mb-50 .tf-itinerary-downloader-option h3, .tf-itinerary-wrapper.tf-mb-50 .tf-itinerary-downloader-option p {
   color: #fff;
 }
@@ -8905,6 +8910,9 @@ div#tf-contact-info {
   background-color: #0E3DD8 !important;
 }
 .tf-archive-design-1 .tf-archive-right .tf-destination-box .autocomplete-items {
+  max-height: 120px;
+  overflow: scroll;
+  overflow-x: hidden;
   position: absolute;
   border: 1px solid #d4d4d4;
   border-bottom: none;
@@ -9717,6 +9725,9 @@ html {
   width: 280px;
   text-align: center;
   box-shadow: 0px 13px 30px 0px #e0e8ee;
+}
+.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-share .share-tour-content .tf-dropdown-share-content ul {
+  margin: 0px;
 }
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-share .share-tour-content .tf-dropdown-share-content ul li {
   display: inline-flex;
