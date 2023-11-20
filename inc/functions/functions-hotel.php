@@ -3370,8 +3370,13 @@ function tf_hotel_quickview_callback() {
                             </div>
 						<?php } ?>
 					<?php } else { ?>
-                        <h3><?php echo esc_html( $room['title'] ); ?></h3>
-                        <p><?php echo $room['description']; ?></p>
+                        <?php if(!empty($room['title'])) : ?>
+							<h3><?php echo esc_html( $room['title'] ); ?></h3>
+						<?php endif; ?>
+						<?php if ( !empty( $room['description'] ) ) : ?>
+							<p><?php echo $room['description']; ?></p>
+						<?php endif; ?>
+                        
                         <div class="tf-room-title description">
 							<?php if ( $num_room ) { ?>
                                 <div class="tf-tooltip tf-d-ib">

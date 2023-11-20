@@ -58,9 +58,11 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                     <h3><?php echo esc_html( $room['title'] ); ?></h3>
 								<?php } ?>
                             </div>
-                            <div class="bed-facilities">
-                                <p><?php echo substr( wp_strip_all_tags( $room['description'] ), 0, 120 ) . '...'; ?> </p>
-                            </div>
+                            <?php if(!empty($room['description'])): ?>
+                                <div class="bed-facilities">
+                                    <p><?php echo substr( wp_strip_all_tags( $room['description'] ), 0, 120 ) . '...'; ?> </p>
+                                </div>
+                            <?php endif; ?>
                         </div>
                         <ul>
 							<?php if ( $footage ) { ?>
@@ -627,7 +629,9 @@ if(empty($tf_room_disable_date)){
 						}
 						?>
                     </div>
-                    <div class="bed-facilities"><p><?php _e( $room['description'] ); ?></p></div>
+                    <?php if(!empty($room['description'])): ?>
+                        <div class="bed-facilities"><p><?php _e( $room['description'] ); ?></p></div>
+                    <?php endif; ?>
                 </div>
 
 				<?php if ( $footage ) { ?>
