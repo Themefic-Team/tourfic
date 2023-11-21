@@ -368,7 +368,6 @@ TF_Settings::option( 'tf_settings', array(
 										'grid' => __( 'Grid', 'tourfic' ),
 									),
 									'default'    => 'List',
-									'dependency' => array( 'tour-archive', '==', 'design-1' ),
 								),
 								array(
 									'id'       => 'tour_archive_price_minimum_settings',
