@@ -288,10 +288,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 				$tf_total_filters = [];
 
 				foreach ( $not_found as $filter_post ) {
-					if ( $filter_post['found'] == 1 ) {
-						$tf_total_filters[] = "Not Found";
-						break;
-					} else {
+					if ( $filter_post['found'] != 1 ) {
 						$tf_total_filters[ $filter_post['post_id'] ] = get_the_title( $filter_post['post_id'] );
 					}
 				}
@@ -502,7 +499,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 					$response['fieldErrors']['tf_apartment_infant_number_error'] = __( "You can't book more than " . $apt_data['max_infants'] . " infants", 'tourfic' );
 				}
 
-				if ( ! $response['fieldErrors'] ) {
+				if ( ! array_key_exists("fieldErrors", $response) || ! $response['fieldErrors'] ) {
 					$total_price = $this->get_total_apartment_price($apt_id, $check_from, $check_to, $adult_count, $child_count, $infant_count, $additional_fees);
 					$billing_details  = array(
 						'billing_first_name' => $field['tf_apartment_customer_first_name'],
