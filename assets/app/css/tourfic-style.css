@@ -10581,6 +10581,7 @@ html {
 }
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-guest-and-room-wrap {
   display: flex;
+  gap: 6px;
 }
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-person-count span {
   margin-right: 12px;
@@ -10891,6 +10892,8 @@ html {
   margin-bottom: 0px;
   border-right: 1px solid #D6D4D2;
   border-radius: 0px !important;
+  background-image: none;
+  text-align: center;
 }
 .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room {
   position: relative;

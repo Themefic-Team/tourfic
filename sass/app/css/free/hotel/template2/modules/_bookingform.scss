@@ -67,6 +67,7 @@
         }
         .tf-booking-guest-and-room-wrap {
             display: flex;
+            gap: 6px;
         }
         .tf-booking-person-count span {
             margin-right: 12px;
@@ -415,6 +416,8 @@
                 margin-bottom: 0px;
                 border-right: 1px solid #D6D4D2;
                 border-radius: 0px !important;
+                background-image: none;
+                text-align: center;
             }
         }
         .tf-booking-form-guest-and-room{
