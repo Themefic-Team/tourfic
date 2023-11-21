@@ -4,7 +4,7 @@
     $tf_hotel_arc_banner = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] : '';
     ?>
     <!--Hero section start -->
-    <div class="tf-hero-section-wrap" style="<?php echo !empty($tf_hotel_arc_banner) ? 'background-image: url('.esc_url($tf_hotel_arc_banner).');' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
+    <div class="tf-hero-section-wrap" style="<?php echo !empty($tf_hotel_arc_banner) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.40) 0%, rgba(48, 40, 28, 0.40) 100%), url('.esc_url($tf_hotel_arc_banner).'), lightgray 0px -268.76px / 100% 249.543% no-repeat;background-size: cover; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
         <div class="tf-container">
             <div class="tf-hero-content tf-archive-hero-content">
                 <div class="tf-head-title">
