@@ -12,7 +12,7 @@ if ( ! class_exists( 'TF_ical_export' ) ) {
 		public function render() {
 			global $post;
 			$post_type  = get_post_type( $post->ID );
-			$room_index = $pricing_type = '';
+			$room_index = $room_id = '';
 			if ( $post_type === 'tf_hotel' ) {
 
 				$meta  = get_post_meta( $post->ID, 'tf_hotels_opt', true );
@@ -23,18 +23,16 @@ if ( ! class_exists( 'TF_ical_export' ) ) {
 					}, $rooms );
 					$rooms                = unserialize( $tf_hotel_rooms_value );
 				}
-
-				$room_index   = str_replace( array( '[', ']', 'room' ), '', $this->parent_field );
-				$pricing_type = ! empty( $rooms[ $room_index ]['pricing-by'] ) ? $rooms[ $room_index ]['pricing-by'] : '1';
+				$room_index = str_replace( array( '[', ']', 'room' ), '', $this->parent_field );
+				$room_id    = ! empty( $rooms[ $room_index ]['unique_id'] ) ? $rooms[ $room_index ]['unique_id'] : '';
 			} elseif ( $post_type === 'tf_apartment' ) {
-				$meta         = get_post_meta( $post->ID, 'tf_apartment_opt', true );
-				$pricing_type = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
+				$meta = get_post_meta( $post->ID, 'tf_apartment_opt', true );
 			}
 
 			$query_args = array(
 				'feed'    => 'tf-ical',
 				'post_id' => $post->ID,
-				'room_id' => $room_index,
+				'room_id' => $room_id,
 			);
 
 			$export_url = add_query_arg( $query_args, site_url( '/' ) );
