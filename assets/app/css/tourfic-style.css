@@ -9569,7 +9569,7 @@ html {
 .tf_template_3_global_layouts .header-container.container,
 .tf_template_3_global_layouts #footer .footer-bottom,
 .tf_template_3_global_layouts .page-top,
-.tf_template_3_global_layouts #masthead,
+.tf_template_3_global_layouts #masthead.site-header .col-full,
 .tf_template_3_global_layouts .storefront-breadcrumb,
 .tf_template_3_global_layouts #colophon.site-footer .site-info {
   padding-left: 32px !important;
