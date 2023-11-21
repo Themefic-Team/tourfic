@@ -1888,5 +1888,77 @@ var frame, gframe;
         });
     });
 
+    $(document).ready(function(){
+        $('.tf-import-btn').on('click',function(event){
+            event.preventDefault();
+            
+            // Get the import URL from the button's href attribute
+            var importUrl = $(this).attr('href');
+
+            // Get the import data from the textarea
+            var importData = $('textarea[name="tf_import_option"]').val().trim();
+            if(importData == '') {
+                alert(tf_options.tf_export_import_msg.import_empty);
+                let importField = $('textarea[name="tf_import_option"]');
+                importField.focus();
+                importField.css('border', '1px solid red');
+                return;
+            } else {
+                //confirm data before send
+                if (!confirm(tf_options.tf_export_import_msg.import_confirm)) {
+                    return;
+                }
+
+                $.ajax({
+                    url: importUrl,
+                    method: 'POST',
+                    data: {
+                        action: 'tf_import',
+                        tf_import_option: importData,
+                    },
+                    beforeSend: function ( ) {
+                        $('.tf-import-btn').html('Importing...');
+                        $('.tf-import-btn').attr('disabled', 'disabled');
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            alert(tf_options.tf_export_import_msg.imported);
+                            $('.tf-import-btn').html('Imported');
+                            window.location.reload();
+                        } else {
+                            alert('Something went wrong!');
+                        }
+                    }
+                });
+            }
+        })
+    });
+
+    //export the data in txt file
+    jQuery(document).ready(function($) {
+        $('.tf-export-btn').on('click', function(event) {
+            event.preventDefault();
+    
+            // Get the textarea value
+            var textareaValue = $('textarea[name="tf_export_option"]').val();
+    
+            // Create a blob with the textarea value
+            var blob = new Blob([textareaValue], { type: 'text/plain' });
+    
+            // Create a temporary URL for the blob
+            var url = window.URL.createObjectURL(blob);
+    
+            // Create a temporary link element
+            var link          = document.createElement('a');
+                link.href     = url;
+                link.download = 'tf-settings-export.txt';
+    
+            // Programmatically click the link to initiate the file download
+            link.click();
+    
+            // Clean up the temporary URL
+            window.URL.revokeObjectURL(url);
+        });
+    });    
 
 })(jQuery);
