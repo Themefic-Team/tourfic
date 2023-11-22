@@ -4378,6 +4378,11 @@ TF_Settings::option( 'tf_settings', array(
 			'icon' => 'fas fa-hdd',
 			'fields' => array(
 				array(
+					'id'      => 'export-import-notice-one',
+					'type'    => 'notice',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/settings/import-export/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
 					'id' => 'backup',
 					'type' => 'backup',
 				),  
