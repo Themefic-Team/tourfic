@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
 Requires at least: 5.4
 Tested up to: 6.4
-Stable tag: 2.10.8
+Stable tag: 2.10.9
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -49,7 +49,7 @@ This All-in-One Travel Booking WordPress plugin consists of almost all the basic
 * Show Hotel Location on Map with Popup (Pro)
 * Add Video on Hotel Gallery (Pro)
 * Airport Pickup Service (Pro)
-* iCal integration with booking.com(Pro)
+* iCal two way sync(booking.com)(Pro)
 
 = 🎉  WordPress Travel Booking & Management System =
 * Add Unlimited Tours
@@ -100,6 +100,11 @@ This All-in-One Travel Booking WordPress plugin consists of almost all the basic
 * Apartment Specific Room gallery( Pro ) 
 * Apartment Specific Room Type( Pro ) 
 * Property Surroundings( Pro )
+
+= 🎉 Data Import Export =
+* Hotel data import export( Pro )
+* Tour data import export( Pro )
+* Settings Panel import export
 
 = 🎉 Backend/Admin booking( Pro ) =
 * Backend/Admin booking for Hotel
@@ -444,6 +449,13 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.10.9 - 22 November 2023 =
+
+- Added: Hotel and Tour Import Export
+- Added: Tourfic Settings Panel Import/Export
+- Improvement: Organized Dashboard Manu items
+- Added: iCal two way sync(booking.com)
 
 = 2.10.8 - 16 November 2023 =
 
