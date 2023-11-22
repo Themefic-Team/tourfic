@@ -453,9 +453,9 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 = 2.10.9 - 22 November 2023 =
 
 - Added: Hotel and Tour Import Export
-- Added: Tourfic Settings Panel Import/Export
-- Improvement: Organized Dashboard Manu items
-- Added: iCal two way sync(booking.com)
+- Added: Tourfic Settings Panel Import Export
+- Added: iCal two-way sync(booking.com)
+- Improvement: Reorder Dashboard Menu items
 
 = 2.10.8 - 16 November 2023 =
 
