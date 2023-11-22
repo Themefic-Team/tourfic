@@ -1113,6 +1113,9 @@ function tf_admin_order_data_migration(){
 		 payment_method varchar(255),
 		 ostatus varchar(255),
 		 order_date datetime NOT NULL,
+		 checkinout varchar(255) NULL,
+		 checkinout_by varchar(255) NULL,
+		 room_id varchar(255) NULL
 		 PRIMARY KEY  (id)
 	 ) $charset_collate;";
 	dbDelta( $sql );
