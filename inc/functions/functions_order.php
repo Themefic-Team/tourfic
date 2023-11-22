@@ -571,6 +571,13 @@ if ( ! function_exists( 'tf_admin_table_alter_order_data' ) ) {
 					ADD COLUMN checkinout_by varchar(255) NULL";
 			$wpdb->query($sql);
 		}
+
+        // Check if the 'room_id' column exists before attempting to add it
+        if ( !$wpdb->get_var("SHOW COLUMNS FROM $order_table_name LIKE 'room_id'") ) {
+            $sql = "ALTER TABLE $order_table_name 
+                    ADD COLUMN room_id varchar(255) NULL";
+            $wpdb->query($sql);
+        }
 	}
 }
 add_action('admin_init', 'tf_admin_table_alter_order_data');

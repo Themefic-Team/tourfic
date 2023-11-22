@@ -23,8 +23,8 @@ if(!class_exists('Tour_Price')){
         public $wc_infant;
         public $sale_infant;
         public $wc_sale_infant;
-
         public $meta;
+        
         function __construct($meta) {
         
             # Get tour type

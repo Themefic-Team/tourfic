@@ -7738,8 +7738,8 @@ div#tf-contact-info {
   border-left-width: 0;
   border-bottom-width: 0;
   color: #ffffff;
-  border-color: #0E3DD8;
-  background: #0E3DD8;
+  border-color: #0E3DD8 !important;
+  background: #0E3DD8 !important;
   border-radius: 2px;
   padding-top: 15px;
   padding-right: 30px;
