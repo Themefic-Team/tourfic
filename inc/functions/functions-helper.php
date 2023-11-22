@@ -890,3 +890,63 @@ if ( ! function_exists( 'tf_save_extra_user_profile_fields' ) ) {
 	add_action( 'edit_user_profile_update', 'tf_save_extra_user_profile_fields' );
 }
 
+// Admin Side Menu Order change
+
+add_action( 'admin_menu', 'tourfic_admin_menu_seperator');
+add_filter( 'menu_order', 'tourfic_admin_menu_order_change');
+add_filter( 'custom_menu_order', '__return_true');
+
+function tourfic_admin_menu_seperator () {
+
+	global $menu;
+
+    $menu[] = array( '', 'read', 'separator-tourfic', '', 'wp-menu-separator tourfic' );
+    $menu[] = array( '', 'read', 'separator-tourfic2', '', 'wp-menu-separator tourfic' );
+} 
+
+function tourfic_admin_menu_order_change ( $menu_order ) {
+	
+	if(!empty($menu_order) && $menu_order != null) {
+		$tourfic_menu_order = array();
+
+		$tourfic_separator = array_search( 'separator-tourfic', $menu_order, true );
+		$tourfic_separator2 = array_search( 'separator-tourfic2', $menu_order, true );
+		$tourfic_tours = array_search( 'edit.php?post_type=tf_tours', $menu_order, true );
+		$tourfic_hotel = array_search( 'edit.php?post_type=tf_hotel', $menu_order, true );
+		$tourfic_apt = array_search( 'edit.php?post_type=tf_apartment', $menu_order, true );
+		$tourfic_emails = array_search( 'edit.php?post_type=tf_email_templates', $menu_order, true );
+		$tourfic_vendor = array_search( 'tf-multi-vendor', $menu_order, true );
+
+		// remove previous orders
+		unset( $menu_order[$tourfic_separator] );
+		unset( $menu_order[$tourfic_separator2] );
+		unset( $menu_order[$tourfic_tours] );
+		unset( $menu_order[$tourfic_hotel] );
+		unset( $menu_order[$tourfic_apt] );
+		unset( $menu_order[$tourfic_vendor] );
+		unset( $menu_order[$tourfic_emails] );
+
+		foreach ( $menu_order as $index => $item ) {
+
+			if ( 'tf_settings' === $item ) {
+				$tourfic_menu_order[] = 'separator-tourfic';
+				$tourfic_menu_order[] = $item;
+				$tourfic_menu_order[] = 'edit.php?post_type=tf_tours';
+				$tourfic_menu_order[] = 'edit.php?post_type=tf_hotel';
+				$tourfic_menu_order[] = 'edit.php?post_type=tf_apartment';
+				$tourfic_menu_order[] = 'tf-multi-vendor';
+				$tourfic_menu_order[] = 'edit.php?post_type=tf_email_templates';
+				$tourfic_menu_order[] = 'separator-tourfic2';
+
+			} elseif ( !in_array( $item, array( 'separator-tourfic' ), true ) ) {
+				$tourfic_menu_order[] = $item;
+			}
+		}
+
+		return $tourfic_menu_order;
+
+	} else {
+
+		return;
+	}
+}

@@ -11,7 +11,7 @@ if ( file_exists( TF_ADMIN_PATH . 'tf-options/options/tf-menu-icon.php' ) ) {
 TF_Settings::option( 'tf_settings', array(
 	'title'    => __( 'Tourfic Settings ', 'tourfic' ),
 	'icon'     => $menu_icon,
-	'position' => 25,
+	'position' => 26,
 	'sections' => array(
 		'general'               => array(
 			'title'  => __( 'General', 'tourfic' ),
