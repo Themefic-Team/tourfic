@@ -455,6 +455,7 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 - Added: Hotel and tour import-export(Pro)
 - Added: Tourfic settings panel import/export
 - Added: iCal two way sync(booking.com)(Pro)
+- Added: Hotel Tour and Apartment duplicator
 - Fixed: Hotel search issue 
 - Fixed: Fixed discount type issue
 - Improvement: Organized dashboard menu items
