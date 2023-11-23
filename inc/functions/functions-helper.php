@@ -922,13 +922,15 @@ function tourfic_admin_menu_order_change ( $menu_order ) {
 		unset( $menu_order[$tourfic_tours] );
 		unset( $menu_order[$tourfic_hotel] );
 		unset( $menu_order[$tourfic_apt] );
+		unset( $menu_order[$tourfic_separator2] );
 		
 		if(!empty($tourfic_vendor)) {
 			unset( $menu_order[$tourfic_vendor] );
 		}
 
-		unset( $menu_order[$tourfic_emails] );
-		unset( $menu_order[$tourfic_separator2] );
+		if ( !empty( $tourfic_emails ) ) {
+			unset( $menu_order[$tourfic_emails] );
+		}
 
 		foreach ( $menu_order as $index => $item ) {
 
