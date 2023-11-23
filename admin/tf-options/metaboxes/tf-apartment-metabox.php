@@ -85,7 +85,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-apartment.jpg",
 						),
 					),
-					'default'   	=> function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+					'default'   	=> 'default',
 					'dependency'  => [
 						array( 'tf_single_apartment_layout_opt', '==', 'single' )
 					],
