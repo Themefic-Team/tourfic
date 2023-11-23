@@ -54,11 +54,7 @@ function tf_duplicate_post_data_function() {
     // Duplicate featured image
     $featured_image_id = get_post_thumbnail_id($postID);
     if ($featured_image_id) {
-        $featured_image = wp_get_attachment_image_src($featured_image_id, 'full');
-        $attachment_id = wp_insert_attachment(['guid' => $featured_image[0], 'post_mime_type' => $featured_image['mime-type']], $featured_image[0], $tf_duplicate_post);
-        if (!is_wp_error($attachment_id)) {
-            set_post_thumbnail($tf_duplicate_post, $attachment_id);
-        }
+        set_post_thumbnail($tf_duplicate_post, $featured_image_id);
     }
 
     // Duplicate taxonomy terms
