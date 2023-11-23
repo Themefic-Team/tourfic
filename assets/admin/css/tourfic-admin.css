@@ -540,6 +540,9 @@ button.tf-order-remove {
   font-size: 1rem;
 }
 
+.tf-license-activate {
+  display: inline-block;
+}
 .tf-license-activate p.submit {
   margin: 0px !important;
 }
@@ -551,6 +554,9 @@ button.tf-order-remove {
   font-size: 1rem;
 }
 
+.el-license-active-btn {
+  display: inline-block;
+}
 .el-license-active-btn p.submit {
   margin: 0px !important;
 }
