@@ -227,3 +227,19 @@ input.select2-search__field {
     }
   }
 }
+
+// Duplicator Loader
+.tf-duplicator-loader {
+  position: absolute;
+  background: rgba(255,255,255, .4);
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+  cursor: wait;
+}
+.tf-post-data-duplicate:focus{
+  outline: none;
+  box-shadow: none;
+}
