@@ -2431,7 +2431,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 					if(0==$datekey){
 						$tf_check_in_date = $date->format( 'Y/m/d' );
 					}
-					$searching_period[] = $date->format( 'Y/m/d' );
+					$searching_period[$date->format( 'Y/m/d' )] = $date->format( 'Y/m/d' );
 				}
 			}
 
@@ -2448,7 +2448,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 							$tf_check_in_date_price['adult_price'] = $sdate['adult_price'];
 							$tf_check_in_date_price['child_price'] = $sdate['child_price'];
 						}
-						$availability_dates[] = $sdate['check_in'];
+						$availability_dates[$sdate['check_in']] = $sdate['check_in'];
 					}
 				}
 			}
@@ -2520,7 +2520,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 					if(0==$datekey){
 						$tf_check_in_date = $date->format( 'Y/m/d' );
 					}
-					$searching_period[] = $date->format( 'Y/m/d' );
+					$searching_period[$date->format( 'Y/m/d' )] = $date->format( 'Y/m/d' );
 				}
 			}
 
@@ -2537,7 +2537,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 							$tf_check_in_date_price['adult_price'] = $sdate['adult_price'];
 							$tf_check_in_date_price['child_price'] = $sdate['child_price'];
 						}
-						$availability_dates[] = $sdate['check_in'];
+						$availability_dates[$sdate['check_in']] = $sdate['check_in'];
 					}
 				}
 			}
