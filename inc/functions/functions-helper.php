@@ -917,14 +917,18 @@ function tourfic_admin_menu_order_change ( $menu_order ) {
 		$tourfic_emails = array_search( 'edit.php?post_type=tf_email_templates', $menu_order, true );
 		$tourfic_vendor = array_search( 'tf-multi-vendor', $menu_order, true );
 
-		// remove previous orders
+		// // remove previous orders
 		unset( $menu_order[$tourfic_separator] );
-		unset( $menu_order[$tourfic_separator2] );
 		unset( $menu_order[$tourfic_tours] );
 		unset( $menu_order[$tourfic_hotel] );
 		unset( $menu_order[$tourfic_apt] );
-		unset( $menu_order[$tourfic_vendor] );
+		
+		if(!empty($tourfic_vendor)) {
+			unset( $menu_order[$tourfic_vendor] );
+		}
+
 		unset( $menu_order[$tourfic_emails] );
+		unset( $menu_order[$tourfic_separator2] );
 
 		foreach ( $menu_order as $index => $item ) {
 
