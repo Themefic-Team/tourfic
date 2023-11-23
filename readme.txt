@@ -450,12 +450,14 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 == Changelog ==
 
-= 2.10.9 - 22 November 2023 =
+= 2.10.9 - 23 November 2023 =
 
-- Added: Hotel and Tour Import Export(Pro)
-- Added: Tourfic Settings Panel Import Export
-- Added: iCal two-way sync(booking.com)(Pro)
-- Improvement: Reorder Dashboard Menu items
+- Added: Hotel and tour import-export(Pro)
+- Added: Tourfic settings panel import/export
+- Added: iCal two way sync(booking.com)(Pro)
+- Fixed: Hotel search issue 
+- Fixed: Fixed discount type issue
+- Improvement: Organized dashboard menu items
 
 = 2.10.8 - 16 November 2023 =
 
