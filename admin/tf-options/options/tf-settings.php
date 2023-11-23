@@ -11,7 +11,7 @@ if ( file_exists( TF_ADMIN_PATH . 'tf-options/options/tf-menu-icon.php' ) ) {
 TF_Settings::option( 'tf_settings', array(
 	'title'    => __( 'Tourfic Settings ', 'tourfic' ),
 	'icon'     => $menu_icon,
-	'position' => 25,
+	'position' => 26,
 	'sections' => array(
 		'general'               => array(
 			'title'  => __( 'General', 'tourfic' ),
@@ -93,7 +93,7 @@ TF_Settings::option( 'tf_settings', array(
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-hotel.jpg",
 										),
 									),
-									'default'  => function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+									'default'  => 'design-1',
 								),
 								array(
 									'id'         => 'single-hotel-layout',
@@ -184,7 +184,7 @@ TF_Settings::option( 'tf_settings', array(
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-default.jpg",
 										),
 									),
-									'default'  => function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+									'default'  => 'design-1',
 								),
 								array(
 									'id'         => 'hotel_archive_view',
@@ -241,7 +241,7 @@ TF_Settings::option( 'tf_settings', array(
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-tour.jpg",
 										),
 									),
-									'default'  => function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+									'default'  => 'design-1',
 								),
 								array(
 									'id'         => 'single-tour-layout',
@@ -357,7 +357,7 @@ TF_Settings::option( 'tf_settings', array(
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/tour-archive-default.jpg",
 										),
 									),
-									'default'  => function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+									'default'  => 'design-1',
 								),
 								array(
 									'id'         => 'tour_archive_view',
@@ -368,7 +368,6 @@ TF_Settings::option( 'tf_settings', array(
 										'grid' => __( 'Grid', 'tourfic' ),
 									),
 									'default'    => 'List',
-									'dependency' => array( 'tour-archive', '==', 'design-1' ),
 								),
 								array(
 									'id'       => 'tour_archive_price_minimum_settings',
@@ -412,7 +411,7 @@ TF_Settings::option( 'tf_settings', array(
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-apartment.jpg",
 										),
 									),
-									'default'  => function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+									'default'  => 'default',
 								),
 								array(
 									'id'      => 'apartment-title',
@@ -432,7 +431,7 @@ TF_Settings::option( 'tf_settings', array(
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/apartment-archive-default.jpg",
 										),
 									),
-									'default'  => function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+									'default'  => 'default',
 								),
 								array(
 									'id'      => 'apartment_archive_notice',
@@ -4374,16 +4373,21 @@ TF_Settings::option( 'tf_settings', array(
 		 *
 		 * Main menu
 		 */
-		// 'import_export' => array(
-		// 	'title' => __( 'Import/Export', 'tourfic' ),
-		// 	'icon' => 'fas fa-hdd',
-		// 	'fields' => array(
-		// 		array(
-		// 			'id' => 'backup',
-		// 			'type' => 'backup',
-		// 		),  
+		'import_export' => array(
+			'title' => __( 'Import/Export', 'tourfic' ),
+			'icon' => 'fas fa-hdd',
+			'fields' => array(
+				array(
+					'id'      => 'export-import-notice-one',
+					'type'    => 'notice',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/settings/import-export/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id' => 'backup',
+					'type' => 'backup',
+				),  
 
-		// 	),
-		// ),
+			),
+		),
 	),
 ) );

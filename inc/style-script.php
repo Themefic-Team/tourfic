@@ -38,7 +38,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 
 
 		// Global Typography P
-		$tf_global_font_p = tfopt('global-p') ? tfopt('global-p') : 14;
+		$tf_global_font_p = tfopt('global-p') ? tfopt('global-p') : 16;
 		$tf_global_font_weight_p = tfopt('global-p-weight') ? tfopt('global-p-weight') : 400;
 		$tf_global_font_style_p = tfopt('global-p-style') ? tfopt('global-p-style') : 'normal';
 		$tf_global_line_height_p = tfopt('global-p-line-height') ? tfopt('global-p-line-height') : 1.5;
