@@ -2324,7 +2324,7 @@ Steps
   width: 100% !important;
 }
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form span.select2-container span.select2-selection {
-  height: 42px;
+  min-height: 40px;
 }
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .select2-search__field {
   margin: 10px;

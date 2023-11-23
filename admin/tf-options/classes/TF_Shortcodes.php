@@ -1283,7 +1283,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                             <h3><?php echo __( 'Choose Locations', 'tourfic' ) ?></h3>
 											<?php
 											//Dynamic Taxonomy dropdown list
-											tf_terms_dropdown( 'apartment_location', 'locations', 'tf_listing_location_shortcode', 'tf-setting-field tf-select-field', true );
+											tf_terms_dropdown( 'hotel_location', 'locations', 'tf_listing_location_shortcode', 'tf-setting-field tf-select-field', true );
 											?>
                                         </div>
                                     </div>
@@ -1312,7 +1312,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                    <div class="tf-col-lg-6">
                                     <div class="tf-sg-field-wrap">
                                         <h3><?php echo __( 'Select Type', 'tourfic' ) ?></h3>
-                                        <select class="tf-select-field tf-setting-field" name="typeSelector">
+                                        <select class="tf-select-field tf-setting-field" name="type-selector">
                                             <option value="type=hotel"><?php _e( 'Hotel', 'tourfic' ); ?></option>
                                             <option value="type=tours"><?php _e( 'Tours', 'tourfic' ); ?></option>
                                             <option value="type=apartment"><?php _e( 'Apartments', 'tourfic' ); ?></option>

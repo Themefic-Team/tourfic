@@ -912,7 +912,7 @@
                     width: 100% !important;
 
                     span.select2-selection {
-                        height: 42px;
+                        min-height: 40px; 
                     }
                 }
 

@@ -2174,4 +2174,53 @@ var frame, gframe;
         });
     });
 
+    // external listing dynamic location
+
+    $('[name="type-selector"]').on("change", function (e) {
+        const selectedValue = $(this).val();
+        let termName = "hotel_location";
+
+        if (selectedValue == "type=apartment") {
+            termName = "apartment_location";
+        } else if (selectedValue == "type=tours") {
+            termName = "tour_destination";
+        } else {
+            termName = "hotel_location"
+        }
+
+        $.ajax({
+            url: tf_options.ajax_url,
+            type: 'POST',
+            data: {
+                action: "tf_shortcode_type_to_location",
+                typeValue: selectedValue,
+                termName: termName
+            },
+            success: function (res) {
+                var select2 = $('#tf_listing_location_shortcode');
+                select2.empty();
+                select2.append('<option value="">' + "Selecte Type First" + '</option>');
+                if (res.data.value.length > 0) {
+
+                    select2.append('<option value="all">All</option>');
+
+                    $.each(res.data.value, function (key, value) {
+                        if (value.term_id && value.name) {
+                            select2.append('<option value="' + value.term_id + '">' + value.name + '</option>');
+                        }
+                    })
+                }
+            },
+            error: function (response) {
+                console.log(response);
+            },
+        })
+    })
+    $("#tf_listing_location_shortcode").on("select2:select", function (e) {
+        var select_val = $(e.currentTarget).val();
+        if (select_val && select_val.includes("all")) {
+            $(this).val(["all"]).trigger('change.select2');
+        }
+    });
+
 })(jQuery);

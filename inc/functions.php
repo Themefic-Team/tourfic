@@ -2332,6 +2332,28 @@ if ( ! function_exists( 'tf_terms_dropdown' ) ) {
 		echo $select;
 	}
 }
+
+// external listing dynamic shortcode callback
+
+add_action( "wp_ajax_tf_shortcode_type_to_location", "tf_shortcode_type_to_location_callback" );
+
+function tf_shortcode_type_to_location_callback() {
+    $value = $_POST["typeValue"];
+    $term_name = $_POST["termName"];
+
+	$terms = get_terms( array(
+		'taxonomy'   => $term_name,
+		'hide_empty' => false,
+	) );
+
+	wp_reset_postdata();
+
+	wp_send_json_success( array(
+		'value' => $terms,
+		"termName" => $term_name
+	) );
+}
+
 /**
  * Remove icon add to order item
  * @since 2.9.6
