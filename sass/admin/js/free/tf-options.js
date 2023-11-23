@@ -453,7 +453,7 @@
                 },
                 displayEventTime: true,
                 selectable: true,
-                select: function ({ start, end, startStr, endStr, allDay, jsEvent, view, resource }) {
+                select: function ({start, end, startStr, endStr, allDay, jsEvent, view, resource}) {
                     if (moment(start).isBefore(moment(), 'day') || moment(end).isBefore(moment(), 'day')) {
                         self.fullCalendar.unselect();
                         setCheckInOut("", "", self.roomCalData);
@@ -466,7 +466,7 @@
                         setCheckInOut(check_in, check_out, self.roomCalData);
                     }
                 },
-                events: function ({ start, end, startStr, endStr, timeZone }, successCallback, failureCallback) {
+                events: function ({start, end, startStr, endStr, timeZone}, successCallback, failureCallback) {
                     $.ajax({
                         url: tf_options.ajax_url,
                         dataType: "json",
@@ -479,7 +479,7 @@
                             avail_date: $(self.container).find('.avail_date').val(),
                         },
                         beforeSend: function () {
-                            $(self.container).css({ 'pointer-events': 'none', 'opacity': '0.5' });
+                            $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
                             $(self.calendar).addClass('tf-content-loading');
                         },
                         success: function (doc) {
@@ -487,7 +487,7 @@
                                 successCallback(doc);
                             }
 
-                            $(self.container).css({ 'pointer-events': 'auto', 'opacity': '1' });
+                            $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
                             $(self.calendar).removeClass('tf-content-loading');
                         },
                         error: function (e) {
@@ -500,9 +500,9 @@
                     const eventTitleElement = document.createElement('div');
                     eventTitleElement.classList.add('fc-event-title');
                     eventTitleElement.innerHTML = title;
-                    return { domNodes: [eventTitleElement] };
+                    return {domNodes: [eventTitleElement]};
                 },
-                eventClick: function ({ event, el, jsEvent, view }) {
+                eventClick: function ({event, el, jsEvent, view}) {
                     let startTime = moment(event.start, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
                         .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
                     let endTime;
@@ -559,34 +559,31 @@
             $('[name="tf_room_child_price"]', roomCalData).val('');
         }
 
-        const tfHotelCalendar = () => {
-            $('.tf-room-cal-wrap').each(function (index, el) {
-                var $this = $(this);
-                var room = new roomCal(el);
-                room.init();
+        const tfHotelCalendar = (element) => {
+            var room = new roomCal(element);
+            room.init();
 
-                let checkIn = $(el).find('[name="tf_room_check_in"]').flatpickr({
-                    dateFormat: 'Y-m-d',
-                    minDate: 'today',
-                    altInput: true,
-                    altFormat: tf_options.tf_admin_date_format,
-                    onChange: function (selectedDates, dateStr, instance) {
-                        checkOut.set('minDate', dateStr);
-                    }
-                });
+            let checkIn = $(element).find('[name="tf_room_check_in"]').flatpickr({
+                dateFormat: 'Y-m-d',
+                minDate: 'today',
+                altInput: true,
+                altFormat: tf_options.tf_admin_date_format,
+                onChange: function (selectedDates, dateStr, instance) {
+                    checkOut.set('minDate', dateStr);
+                }
+            });
 
-                let checkOut = $(el).find('[name="tf_room_check_out"]').flatpickr({
-                    dateFormat: 'Y-m-d',
-                    minDate: 'today',
-                    altInput: true,
-                    altFormat: tf_options.tf_admin_date_format,
-                    onChange: function (selectedDates, dateStr, instance) {
-                        checkIn.set('maxDate', dateStr);
-                    }
-                });
+            let checkOut = $(element).find('[name="tf_room_check_out"]').flatpickr({
+                dateFormat: 'Y-m-d',
+                minDate: 'today',
+                altInput: true,
+                altFormat: tf_options.tf_admin_date_format,
+                onChange: function (selectedDates, dateStr, instance) {
+                    checkIn.set('maxDate', dateStr);
+                }
             });
         }
-        tfHotelCalendar();
+        // tfHotelCalendar();
 
         $(document).on('click', '.tf_room_cal_update', function (e) {
             e.preventDefault();
@@ -598,16 +595,16 @@
             let data = $('input, select', container.find('.tf-room-cal-field')).serializeArray();
             let priceBy = container.closest('.tf-single-repeater-room').find('.tf_room_pricing_by').val();
             let avail_date = container.find('.avail_date');
-            data.push({ name: 'action', value: 'tf_add_hotel_availability' });
-            data.push({ name: 'price_by', value: priceBy });
-            data.push({ name: 'avail_date', value: avail_date.val() });
+            data.push({name: 'action', value: 'tf_add_hotel_availability'});
+            data.push({name: 'price_by', value: priceBy});
+            data.push({name: 'avail_date', value: avail_date.val()});
 
             $.ajax({
                 url: tf_options.ajax_url,
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
-                    container.css({ 'pointer-events': 'none', 'opacity': '0.5' })
+                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
                     cal.addClass('tf-content-loading');
                     btn.addClass('tf-btn-loading');
                 },
@@ -627,19 +624,19 @@
                             notyf.error(response.data.message);
                         }
 
-                        container.css({ 'pointer-events': 'auto', 'opacity': '1' })
+                        container.css({'pointer-events': 'auto', 'opacity': '1'})
                         cal.removeClass('tf-content-loading');
                         btn.removeClass('tf-btn-loading');
                     }
                 },
                 error: function (e) {
                     console.log(e);
-                    container.css({ 'pointer-events': 'auto', 'opacity': '1' })
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
                 },
                 complete: function () {
-                    container.css({ 'pointer-events': 'auto', 'opacity': '1' });
+                    container.css({'pointer-events': 'auto', 'opacity': '1'});
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
                 },
@@ -668,9 +665,9 @@
                 var value = $this.val('');
             }
 
-            if ($this.hasClass('tf_room_availability_by_date')) {
-                tfHotelCalendar();
-            }
+            // if ($this.hasClass('tf_room_availability_by_date')) {
+            //     tfHotelCalendar();
+            // }
         });
 
         /*
@@ -686,7 +683,7 @@
                     toolbar2: 'styleselect,strikethrough,hr,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
                     //   textarea_rows : 20
                 },
-                quicktags: { buttons: 'strong,em,link,block,del,ins,img,ul,ol,li,code,more,close' },
+                quicktags: {buttons: 'strong,em,link,block,del,ins,img,ul,ol,li,code,more,close'},
                 mediaButtons: false,
             });
         }
@@ -865,7 +862,7 @@
             // Booking Confirmation repeater Hidden field
             TF_Booking_Confirmation();
 
-            tfHotelCalendar();
+            //tfHotelCalendar();
         });
 
         // Repeater Delete Value
@@ -1040,7 +1037,7 @@
             // Dependency value
             TF_dependency();
 
-            tfHotelCalendar();
+            //tfHotelCalendar();
         });
 
         // Repeater show hide
@@ -1054,7 +1051,9 @@
                 $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + ' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-up"></i>');
             }
 
-            tfHotelCalendar();
+            let roomCalEl = $('this').closest('.tf-single-repeater').find('.tf-room-cal-wrap')[0];
+
+            tfHotelCalendar(roomCalEl);
         });
 
         // Repeater Drag and  show
@@ -1235,7 +1234,7 @@ var frame, gframe;
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(mapInit);
 
-                var mapMarker = L.marker(map_data.center, { draggable: true }).addTo(mapInit);
+                var mapMarker = L.marker(map_data.center, {draggable: true}).addTo(mapInit);
 
                 var update_latlng = function (data) {
                     $latitude.val(data.lat);
@@ -1287,7 +1286,6 @@ var frame, gframe;
                     $search_input = $('[data-depend-id="' + $this.find('.tf--address-field').data('address-field') + '"]');
                 }
 
-                
 
                 var cache = {};
 
@@ -1662,13 +1660,13 @@ var frame, gframe;
                         data: tf_options.tf_complete_order,
                         fill: false
                     },
-                    {
-                        label: "Cancelled Booking",
-                        borderColor: 'red',
-                        tension: 0.1,
-                        data: tf_options.tf_cancel_orders,
-                        fill: false
-                    }
+                        {
+                            label: "Cancelled Booking",
+                            borderColor: 'red',
+                            tension: 0.1,
+                            data: tf_options.tf_cancel_orders,
+                            fill: false
+                        }
                     ]
                 },
 
@@ -1722,13 +1720,13 @@ var frame, gframe;
                                     data: response.tf_complete_orders,
                                     fill: false
                                 },
-                                {
-                                    label: "Cancelled Booking",
-                                    borderColor: 'red',
-                                    tension: 0.1,
-                                    data: response.tf_cancel_orders,
-                                    fill: false
-                                }
+                                    {
+                                        label: "Cancelled Booking",
+                                        borderColor: 'red',
+                                        tension: 0.1,
+                                        data: response.tf_cancel_orders,
+                                        fill: false
+                                    }
                                 ]
                             },
 
@@ -1787,13 +1785,13 @@ var frame, gframe;
                                     data: response.tf_complete_orders,
                                     fill: false
                                 },
-                                {
-                                    label: "Cancelled Booking",
-                                    borderColor: 'red',
-                                    tension: 0.1,
-                                    data: response.tf_cancel_orders,
-                                    fill: false
-                                }
+                                    {
+                                        label: "Cancelled Booking",
+                                        borderColor: 'red',
+                                        tension: 0.1,
+                                        data: response.tf_cancel_orders,
+                                        fill: false
+                                    }
                                 ]
                             },
 
@@ -1881,7 +1879,7 @@ var frame, gframe;
         }
         //show the copied message
         $(this).parents('.tf-copy-item').append('<div><span class="tf-copied-msg">Copied<span></div>');
-        $("span.tf-copied-msg").animate({ opacity: 0 }, 1000, function () {
+        $("span.tf-copied-msg").animate({opacity: 0}, 1000, function () {
             $(this).slideUp('slow', function () {
                 $(this).remove();
             });
