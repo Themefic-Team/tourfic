@@ -322,9 +322,11 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                          <?php the_content(); ?>
                     </div>
                      <!-- Start features -->
-                    <?php if ( $features ) { ?>
+                    <?php if ( $features && count( $features ) > 0 ) { ?>
                         <div class="tf_features">
-                            <h3 class="section-heading"><?php echo !empty($meta['popular-section-title']) ? esc_html($meta['popular-section-title']) : __("Popular Features","tourfic"); ?></h3>
+                            <?php if( !empty( $meta['popular-section-title'] ) ): ?>
+                                <h3 class="section-heading"><?php echo esc_html($meta['popular-section-title']); ?></h3>
+                            <?php endif; ?>
                             <div class="tf-feature-list">
                                 <?php foreach ( $features as $feature ) {
                                     $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
@@ -422,7 +424,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                     $places_section_title = !empty($meta["section-title"]) ? $meta["section-title"] : "What's around?";
                     $places_meta = !empty($meta["nearby-places"]) ? $meta["nearby-places"] : array();
                     ?>
-                    <?php if(count($places_meta) > 0): ?> <!-- nearby places - start -->
+                    <?php if( count($places_meta) > 0 ) : ?> <!-- nearby places - start -->
                         <div class="nearby-container"> 
                             <div class="nearby-container-inner">
                                 <?php if(!empty($places_section_title)): ?>
@@ -450,39 +452,6 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
         </div>
     </div>
     <!-- Hero End -->
-
-    <!-- Start description -->
-    <div class="description-section sp-50">
-        <div class="tf-container">
-            <div class="desc-wrap">
-				<?php the_content(); ?>
-            </div>
-            <!-- Start features -->
-			<?php if ( $features ) { ?>
-                <div class="tf_features">
-                    <h3 class="section-heading"><?php echo ! empty( $meta['popular-section-title'] ) ? esc_html( $meta['popular-section-title'] ) : ''; ?></h3>
-                    <div class="tf-feature-list">
-						<?php foreach ( $features as $feature ) {
-							$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
-							$f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
-							if ( $f_icon_type == 'fa' ) {
-								$feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
-							} elseif ( $f_icon_type == 'c' ) {
-								$feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
-							} ?>
-
-                            <div class="single-feature-box">
-								<?php echo $feature_icon ?? ''; ?>
-                                <span class="feature-list-title"><?php echo $feature->name; ?></span>
-                            </div>
-						<?php } ?>
-                    </div>
-                </div>
-			<?php } ?>
-            <!-- End features -->
-        </div>
-    </div>
-    <!-- End description -->
 
     <div class="tf-container">
         <div class="tf-divider"></div>
