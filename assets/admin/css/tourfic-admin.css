@@ -540,6 +540,9 @@ button.tf-order-remove {
   font-size: 1rem;
 }
 
+.tf-license-activate {
+  display: inline-block;
+}
 .tf-license-activate p.submit {
   margin: 0px !important;
 }
@@ -551,6 +554,9 @@ button.tf-order-remove {
   font-size: 1rem;
 }
 
+.el-license-active-btn {
+  display: inline-block;
+}
 .el-license-active-btn p.submit {
   margin: 0px !important;
 }
@@ -577,6 +583,22 @@ input.select2-search__field {
 
 .tf-widget-field .select2-container:last-child {
   display: none;
+}
+
+.tf-duplicator-loader {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.4);
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+  cursor: wait;
+}
+
+.tf-post-data-duplicate:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 body.admin_page_tf-setup-wizard {

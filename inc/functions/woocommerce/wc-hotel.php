@@ -123,7 +123,7 @@ function tf_hotel_booking_callback() {
 	}
 	// Hotel Room Discount Data
 	$hotel_discount_type = !empty($rooms[$room_id]["discount_hotel_type"]) ? $rooms[$room_id]["discount_hotel_type"] : "none";
-	$hotel_discount_amount = !empty($rooms[$room_id]["discount_hotel_price"]) ? $rooms[$room_id]["discount_hotel_price"] : '';
+	$hotel_discount_amount = !empty($rooms[$room_id]["discount_hotel_price"]) ? $rooms[$room_id]["discount_hotel_price"] : 0;
 
 	/**
 	 * If no errors then process
@@ -222,9 +222,9 @@ function tf_hotel_booking_callback() {
 				$total_price = $rooms[$room_id]['price'];
 
 				if($hotel_discount_type == "percent") {
-					$total_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $total_price - ( ( $total_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+					$total_price = !empty($total_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $total_price - ( ( (int) $total_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
 				}else if($hotel_discount_type == "fixed") {
-					$total_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $adult_price - $hotel_discount_amount ), 2 ) ) );
+					$total_price = !empty($total_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $total_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
 				}
 
 				$tf_room_data['tf_hotel_data']['adult']                  = $adult;
@@ -235,8 +235,8 @@ function tf_hotel_booking_callback() {
 				$child_price = $rooms[$room_id]['child_price'];
 
 				if ($hotel_discount_type == "percent") {
-					$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
-					$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $child_price - ( ( $child_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+					$adult_price = !empty($adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
+					$child_price = !empty($child_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - ( ( (int) $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
 				}
 				$adult_price = $adult_price * $adult;
 				$child_price = $child_price * $child;
