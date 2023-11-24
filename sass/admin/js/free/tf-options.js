@@ -274,6 +274,8 @@
             $this.addClass('active');
 
             $('#' + tab).addClass('active').siblings().removeClass('active');
+
+            tfIconInfiniteScroll();
         });
 
         /*
@@ -368,6 +370,50 @@
             iconLi.removeClass('active');
         })
 
+        /*
+        * Icon Infinite Scroll
+        * @author: Foysal
+        */
+        const tfIconInfiniteScroll = () => {
+            var loading = false;
+            var startIndex = 0;
+            let iconList = $('.tf-icon-tab-pane.active .tf-icon-list');
+            let iconListBottom = 0;
+
+            iconList.scroll(function () {
+                let type = $('.tf-icon-tab-pane.active').data('type');
+                let max = $('.tf-icon-tab-pane.active').data('max');
+                iconListBottom = iconList[0].scrollHeight - iconList.height();
+
+                if (iconList.scrollTop() >= iconListBottom && !loading && startIndex < max) {
+                    loading = true;
+                    startIndex += 100;
+                    $.ajax({
+                        url: tf_options.ajax_url,
+                        type: 'POST',
+                        data: {
+                            action: 'tf_load_more_icons',
+                            start_index: startIndex,
+                            type: type,
+                        },
+                        beforeSend: function () {
+                            $('.tf-icon-list').append('<div class="tf-icon-loading">Loading...</div>');
+                        },
+                        success: function (response) {
+                            loading = false;
+                            $('#tf-icon-tab-'+type+' .tf-icon-list').append(response.data);
+                            $('.tf-icon-loading').remove();
+                        },
+                        error: function (xhr, status, error) {
+                            loading = false;
+                            console.error(error);
+                            $('.tf-icon-loading').remove();
+                        }
+                    });
+                }
+            });
+        }
+        tfIconInfiniteScroll();
 
         /*
         * Options ajax save
@@ -559,11 +605,16 @@
             $('[name="tf_room_child_price"]', roomCalData).val('');
         }
 
-        const tfHotelCalendar = (element) => {
-            var room = new roomCal(element);
-            room.init();
+        const tfHotelCalendar = () => {
+            $('.tf-room-cal-wrap').each(function (index, el) {
+                var room = new roomCal(el);
+                room.init();
+            });
+        }
+        tfHotelCalendar();
 
-            let checkIn = $(element).find('[name="tf_room_check_in"]').flatpickr({
+        $('.tf-room-cal-wrap').each(function (index, el) {
+            let checkIn = $(el).find('[name="tf_room_check_in"]').flatpickr({
                 dateFormat: 'Y-m-d',
                 minDate: 'today',
                 altInput: true,
@@ -573,7 +624,7 @@
                 }
             });
 
-            let checkOut = $(element).find('[name="tf_room_check_out"]').flatpickr({
+            let checkOut = $(el).find('[name="tf_room_check_out"]').flatpickr({
                 dateFormat: 'Y-m-d',
                 minDate: 'today',
                 altInput: true,
@@ -582,8 +633,7 @@
                     checkIn.set('maxDate', dateStr);
                 }
             });
-        }
-        // tfHotelCalendar();
+        });
 
         $(document).on('click', '.tf_room_cal_update', function (e) {
             e.preventDefault();
@@ -665,9 +715,9 @@
                 var value = $this.val('');
             }
 
-            // if ($this.hasClass('tf_room_availability_by_date')) {
-            //     tfHotelCalendar();
-            // }
+            if ($this.hasClass('tf_room_availability_by_date')) {
+                tfHotelCalendar();
+            }
         });
 
         /*
@@ -862,7 +912,7 @@
             // Booking Confirmation repeater Hidden field
             TF_Booking_Confirmation();
 
-            //tfHotelCalendar();
+            tfHotelCalendar();
         });
 
         // Repeater Delete Value
@@ -1037,13 +1087,19 @@
             // Dependency value
             TF_dependency();
 
-            //tfHotelCalendar();
+            tfHotelCalendar();
         });
 
         // Repeater show hide
         $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () {
+            var startTime = performance.now();
+
             var tf_repater_fieldname = $(this).closest('.tf-single-repeater').find('input[name=tf_current_field]').val();
-            $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').find('.tf-repeater-content-wrap').slideToggle();
+            $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').find('.tf-repeater-content-wrap').slideToggle(function () {
+                var endTime = performance.now();
+                var duration = endTime - startTime;
+                console.log('SlideToggle duration:', duration, 'milliseconds');
+            });
             $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').children('.tf-repeater-content-wrap').toggleClass('hide');
             if ($(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').children('.tf-repeater-content-wrap').hasClass('hide') == true) {
                 $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + ' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-down"></i>');
@@ -1051,9 +1107,7 @@
                 $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + ' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-up"></i>');
             }
 
-            let roomCalEl = $('this').closest('.tf-single-repeater').find('.tf-room-cal-wrap')[0];
-
-            tfHotelCalendar(roomCalEl);
+            tfHotelCalendar();
         });
 
         // Repeater Drag and  show
@@ -1886,16 +1940,16 @@ var frame, gframe;
         });
     });
 
-    $(document).ready(function(){
-        $('.tf-import-btn').on('click',function(event){
+    $(document).ready(function () {
+        $('.tf-import-btn').on('click', function (event) {
             event.preventDefault();
-            
+
             // Get the import URL from the button's href attribute
             var importUrl = $(this).attr('href');
 
             // Get the import data from the textarea
             var importData = $('textarea[name="tf_import_option"]').val().trim();
-            if(importData == '') {
+            if (importData == '') {
                 alert(tf_options.tf_export_import_msg.import_empty);
                 let importField = $('textarea[name="tf_import_option"]');
                 importField.focus();
@@ -1914,7 +1968,7 @@ var frame, gframe;
                         action: 'tf_import',
                         tf_import_option: importData,
                     },
-                    beforeSend: function ( ) {
+                    beforeSend: function () {
                         $('.tf-import-btn').html('Importing...');
                         $('.tf-import-btn').attr('disabled', 'disabled');
                     },
@@ -1933,30 +1987,30 @@ var frame, gframe;
     });
 
     //export the data in txt file
-    jQuery(document).ready(function($) {
-        $('.tf-export-btn').on('click', function(event) {
+    jQuery(document).ready(function ($) {
+        $('.tf-export-btn').on('click', function (event) {
             event.preventDefault();
-    
+
             // Get the textarea value
             var textareaValue = $('textarea[name="tf_export_option"]').val();
-    
+
             // Create a blob with the textarea value
-            var blob = new Blob([textareaValue], { type: 'text/plain' });
-    
+            var blob = new Blob([textareaValue], {type: 'text/plain'});
+
             // Create a temporary URL for the blob
             var url = window.URL.createObjectURL(blob);
-    
+
             // Create a temporary link element
-            var link          = document.createElement('a');
-                link.href     = url;
-                link.download = 'tf-settings-export.txt';
-    
+            var link = document.createElement('a');
+            link.href = url;
+            link.download = 'tf-settings-export.txt';
+
             // Programmatically click the link to initiate the file download
             link.click();
-    
+
             // Clean up the temporary URL
             window.URL.revokeObjectURL(url);
         });
-    });    
+    });
 
 })(jQuery);
