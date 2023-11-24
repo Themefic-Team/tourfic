@@ -1092,14 +1092,8 @@
 
         // Repeater show hide
         $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () {
-            var startTime = performance.now();
-
             var tf_repater_fieldname = $(this).closest('.tf-single-repeater').find('input[name=tf_current_field]').val();
-            $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').find('.tf-repeater-content-wrap').slideToggle(function () {
-                var endTime = performance.now();
-                var duration = endTime - startTime;
-                console.log('SlideToggle duration:', duration, 'milliseconds');
-            });
+            $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').find('.tf-repeater-content-wrap').slideToggle();
             $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').children('.tf-repeater-content-wrap').toggleClass('hide');
             if ($(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').children('.tf-repeater-content-wrap').hasClass('hide') == true) {
                 $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + ' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-down"></i>');
