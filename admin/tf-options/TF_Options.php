@@ -63,6 +63,10 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			//Taxonomy Class
 			require_once $this->tf_options_file_path( 'classes/TF_Taxonomy_Metabox.php' );
 
+			require_once TF_ADMIN_PATH . 'tf-options/fields/icon/fontawesome-4.php';
+			require_once TF_ADMIN_PATH . 'tf-options/fields/icon/fontawesome-5.php';
+			require_once TF_ADMIN_PATH . 'tf-options/fields/icon/fontawesome-6.php';
+			require_once TF_ADMIN_PATH . 'tf-options/fields/icon/remix-icon.php';
 		}
 
 		/**
