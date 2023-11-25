@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
 Requires at least: 5.4
 Tested up to: 6.4
-Stable tag: 2.10.9
+Stable tag: 2.10.10
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -181,7 +181,7 @@ In short, Tourfic is the ultimate WordPress tour booking plugin for hotel bookin
 
 <strong>Pro Version </strong>
 
-We believe the free version is good enough for most business. However, we have a **Pro version** of this plugin which has more advanced features as mentioned above.
+We believe the free version is good enough for most businesses. However, we have a **Pro version** of this plugin which has more advanced features as mentioned above.
 
 > <strong><a href="https://themefic.com/tourfic/pricing" target="_blank">Buy Tourfic Pro</a></strong>
 
@@ -196,7 +196,7 @@ We believe the free version is good enough for most business. However, we have a
 **With Tourfic, You can:**
 - Quickly and easily build a professional website for your tour operator or travel agency.
 - Develop a hotel reservation system for your hotel website.
-- Develop a apartment booking system for your website.
+- Develop an apartment booking system for your website.
 - Create your own professional tour operator and travel agency website within 59 minutes. The site would be similar to Booking.com, Agoda, Hotels.com, Airbnb etc.
 - Build your own online tour business and make money online by selling your tours worldwide with any payment of WooCommerce.
 
@@ -449,6 +449,11 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.10.10 - 25 November 2023 =
+
+- Improved: Icon field Ajax infinite scroll
+- Fixed: Performance issue fixed
 
 = 2.10.9 - 23 November 2023 =
 
