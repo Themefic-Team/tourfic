@@ -12,6 +12,7 @@
             font-weight: 400;
             line-height: 130%;            
             font-family: 'Josefin Sans', sans-serif;
+            margin: 0px;
         }
     }
     .tf-available-rooms {
@@ -100,7 +101,8 @@
                     li {
                         i {
                             margin-right: 4px;
-                            ;
+                            font-size: 17px;
+                            width: 20px;
                         }
                         a {
                             color: #595349;
@@ -125,7 +127,7 @@
                     display: flex;
                     flex-direction: column;
                     align-items: flex-end;
-                    gap: 4px;
+                    gap: 8px;
                     margin-bottom: 24px;
                     span {
                         display: flex;
@@ -306,6 +308,7 @@
                     background: rgba(253, 249, 243, 0.80);
                     padding: 5px 4px 0 8px;
                     font-size: 16px;
+                    color: #595349;
                     i {
                         color: #FEBB03;
                     }
@@ -320,8 +323,9 @@
                         }
                         .tf-title-location {
                             display: flex;
-                            svg{
+                            i{
                                 margin-right: 8px;
+                                font-size: 20px;
                             }
                         }
                     }
@@ -350,6 +354,7 @@
                         display: inline-block;
                         text-align: center;
                         transition: .3s all ease;
+                        margin-top: auto;
                     }
                 }
             }

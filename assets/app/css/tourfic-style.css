@@ -9314,7 +9314,7 @@ div#tf-contact-info {
   display: grid;
   grid-template-columns: repeat(4, 25%);
   list-style-type: none;
-  grid-gap: 15px 6px;
+  grid-gap: 5px;
 }
 .tf-hotel-design-1 .tf-hotel-single-places ul li {
   display: inline-flex;
@@ -9687,7 +9687,7 @@ html {
   margin-bottom: 56px;
 }
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content {
-  min-height: 566px;
+  min-height: 513px;
   margin: 0;
   padding: 0;
 }
@@ -9813,7 +9813,7 @@ html {
   justify-content: flex-end;
 }
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-archive-hero-content .tf-head-title {
-  margin: 0 0 38px 0;
+  margin: 0 0 48px 0;
   display: flex;
   align-items: center;
   gap: 32px;
@@ -9821,6 +9821,7 @@ html {
 }
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-archive-hero-content .tf-head-title h1 {
   color: #FDF9F3;
+  margin: 0px;
 }
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-archive-hero-content .tf-title-meta {
   font-size: 24px;
@@ -10093,6 +10094,7 @@ html {
   font-weight: 400;
   line-height: 130%;
   font-family: "Josefin Sans", sans-serif;
+  margin: 0px;
 }
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-rooms {
   display: flex;
@@ -10181,6 +10183,8 @@ html {
 }
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left ul li i {
   margin-right: 4px;
+  font-size: 17px;
+  width: 20px;
 }
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left ul li a {
   color: #595349;
@@ -10203,7 +10207,7 @@ html {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 4px;
+  gap: 8px;
   margin-bottom: 24px;
 }
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-cancellation-refundable-text span {
@@ -10377,6 +10381,7 @@ html {
   background: rgba(253, 249, 243, 0.8);
   padding: 5px 4px 0 8px;
   font-size: 16px;
+  color: #595349;
 }
 .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-gallery .tf-available-ratings i {
   color: #FEBB03;
@@ -10390,8 +10395,9 @@ html {
 .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location {
   display: flex;
 }
-.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location svg {
+.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location i {
   margin-right: 8px;
+  font-size: 20px;
 }
 .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right {
   width: 196px;
@@ -10417,6 +10423,7 @@ html {
   display: inline-block;
   text-align: center;
   transition: 0.3s all ease;
+  margin-top: auto;
 }
 .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms #tf_posts_navigation_bar,
 .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf_posts_ajax_navigation,
@@ -10531,7 +10538,6 @@ html {
   border-right: 1px solid #D6D4D2;
   display: flex;
   flex-direction: column;
-  align-items: center;
   position: relative;
 }
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-fields > div.tf-booking-form-guest-and-room {
@@ -10541,6 +10547,11 @@ html {
   border-right: none;
   cursor: pointer;
 }
+.tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkout,
+.tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkin {
+  padding-left: 40px;
+  padding-right: 40px;
+}
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkout input,
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkin input {
   position: absolute;
@@ -10548,12 +10559,17 @@ html {
   width: 100%;
   opacity: 0;
 }
+.tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkin {
+  max-width: 146px;
+}
+.tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkout {
+  max-width: 155px;
+}
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-date {
   color: #595349;
   font-size: 24px;
   font-weight: 400;
   line-height: 31.2px;
-  min-width: 28px;
   text-align: right;
   margin-right: 5px;
 }
@@ -10569,6 +10585,10 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-transform: lowercase;
+}
+.tf-template-3 .tf-booking-form-wrapper .tf-booking-form span.tf-booking-month img {
+  margin-top: 4px;
 }
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-date-wrap {
   display: flex;
@@ -10582,6 +10602,7 @@ html {
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-guest-and-room-wrap {
   display: flex;
   gap: 6px;
+  margin-top: 4px;
 }
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-person-count span {
   margin-right: 12px;
@@ -10599,7 +10620,7 @@ html {
   background: #B58E53 !important;
   border: 0;
   outline: none;
-  color: #FDF9F3;
+  color: #FDF9F3 !important;
   font-size: 16px !important;
   font-family: Josefin Sans;
   font-weight: 700;
@@ -10612,13 +10633,14 @@ html {
   display: flex;
   align-items: flex-start !important;
   padding-right: 40px;
+  padding-left: 16px;
 }
 .tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap {
   display: flex;
   flex-direction: row;
   background: #fff;
   padding: 0 12px;
-  max-width: 150px;
+  max-width: 155px;
   align-items: center;
   position: relative;
 }
@@ -10629,6 +10651,11 @@ html {
   width: 100%;
   background: transparent;
   box-shadow: none;
+  font-size: 12px;
+  color: #595349 !important;
+}
+.tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap input::placeholder {
+  color: #595349 !important;
 }
 .tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list,
 .tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-destinationautocomplete-list {
@@ -10655,6 +10682,7 @@ html {
 }
 .tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-guest-and-room {
   padding-left: 40px !important;
+  padding-right: 40px;
   min-width: 200px;
 }
 .tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-guest-and-room .tf-booking-form-guest-and-room-inner .tf-booking-guest-and-room-wrap.tf-archive-guest-info {
@@ -10682,7 +10710,7 @@ html {
 }
 .tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-guest-and-room .tf-booking-form-guest-and-room-inner .tf-arrow-icons {
   text-align: right;
-  margin-top: -10px;
+  margin-top: -4px;
 }
 .tf-template-3 .tf_acrselection-wrap {
   display: unset;

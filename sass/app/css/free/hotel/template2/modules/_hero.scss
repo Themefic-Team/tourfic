@@ -7,7 +7,7 @@
     .tf-container {
 
         .tf-hero-content {
-            min-height: 566px;
+            min-height: 513px;
             margin: 0;
             padding: 0;
 
@@ -144,13 +144,14 @@
             display: flex;
             justify-content: flex-end;
             .tf-head-title {
-                margin: 0 0 38px 0;
+                margin: 0 0 48px 0;
                 display: flex;
                 align-items: center;
                 gap: 32px;
                 color: #FDF9F3;
                 h1{
                     color: #FDF9F3;
+                    margin: 0px;
                 }
             }
             .tf-title-meta {
