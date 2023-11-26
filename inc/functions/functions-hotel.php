@@ -1313,6 +1313,10 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 		<script>
 			(function ($) {
 				$(document).ready(function () {
+
+						// flatpickr locale first day of Week
+						<?php tf_flatpickr_locale("root"); ?>
+
 					$(".tf_check_inout_dates").click(function(){
 						$(".tf-check-in-out-date").click();
 					});
@@ -1321,6 +1325,10 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 						mode: "range",
 						dateFormat: "Y/m/d",
 						minDate: "today",
+
+						// flatpickr locale
+						<?php tf_flatpickr_locale(); ?>
+
 						onReady: function (selectedDates, dateStr, instance) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 							dateSetToFields(selectedDates, instance);
@@ -1832,6 +1840,10 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 	<script>
 		(function ($) {
 			$(document).ready(function () {
+
+				// flatpickr locale first day of Week
+				<?php tf_flatpickr_locale("root"); ?>
+				
 				$(".tf-template-3 .tf-booking-date-wrap").click(function(){
 					$(".tf-check-in-out-date").click();
 				});
@@ -1840,6 +1852,10 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 					mode: "range",
 					dateFormat: "Y/m/d",
 					minDate: "today",
+
+					// flatpickr locale
+					<?php tf_flatpickr_locale(); ?>
+
 					onReady: function (selectedDates, dateStr, instance) {
 						instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 						dateSetToFields(selectedDates, instance);
