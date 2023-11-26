@@ -150,6 +150,10 @@
             .tf_widget{
                 background-color: transparent;
                 border: 0px solid;
+                margin-bottom: 32px;
+                &:last-child{
+                    margin-bottom: 0px;
+                }
                 .tf-widget-title{
                     padding: 0px;
                     height: auto;
@@ -158,7 +162,7 @@
                     border-radius: 8px 8px 0px 0px;
                     pointer-events: none;
                     h4{
-                        margin-bottom: 12px !important;
+                        margin-bottom: 1০px !important;
                         font-size: 16px !important;
                         font-weight: 600 !important;
                         line-height: 1.5 !important;
@@ -172,7 +176,7 @@
                     padding: 0;
                     ul{
                         li{
-                            margin-left: 0px;
+                            margin: 0px;
                             padding-left: 0px;
                             font-size: 16px;
                             font-style: normal;
@@ -180,18 +184,27 @@
                             line-height: 130%;
                             color: #99948D;
                             label{
-                                padding-left: 35px;
+                                padding-left: 30px;
+                                line-height: 16px;
                                 .checkmark{
                                     border-radius: 4px;
                                     border: 1px solid #917242;
                                     background: #FDF9F3;
+                                    height: 16px;
+                                    width: 16px;
+                                    &:hover{
+                                        border-color: #B58E53;
+                                    }
                                     &::after{
-                                        top: 2px;
+                                        top: 1px;
+                                        left: 4px;
+                                        border-color: rgb(145, 114, 66);
                                     }
                                 }
                             }
                             label input:checked~.checkmark {
-                                background-color: #B58E53 !important;
+                                background-color: transparent !important;
+                                border-color: rgb(145, 114, 66);
                             }
                         }
                     }
@@ -211,12 +224,18 @@
                         }
                     }
                 }
-
+                .tf-hotel-result-price-range, 
+                .tf-tour-result-price-range, 
+                .tf-apartment-result-price-range{
+                    padding-left: 14px;
+                    padding-right: 14px;
+                    margin-top: 10px;
+                }
                 .al-range-slider__track {
                     background: #D6D4D2;
                     height: 10px;
                     box-shadow: none !important;
-                    margin: 30px 0px 10px 0px;
+                    margin: 0px 0px 10px 0px;
                 }
                 .al-range-slider_dark {
                     padding: 0px !important;
@@ -245,6 +264,7 @@
                     color: #fff !important;
                     font-size: 13px !important;
                     margin-bottom: 0px !important;
+                    bottom: -40px;
                 }
                 .al-range-slider__input.js-al-range-slider__input {
                     display: none !important;

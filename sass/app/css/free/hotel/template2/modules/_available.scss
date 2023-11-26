@@ -218,6 +218,9 @@
                 text-decoration: none;
                 text-align: center;
                 transition: .3s all ease;
+                &:hover{
+                    background-color: #917242;
+                }
             }
         }
     }
@@ -282,7 +285,7 @@
                     left: 16px;
                     gap: 8px;
                     &>span {
-                        color: #fff;
+                        color: #FDF9F3;
                         font-size: 12px;
                         font-style: normal;
                         font-weight: 500;
@@ -322,7 +325,8 @@
                             margin: 0 0 10px 0;
                         }
                         .tf-title-location {
-                            display: flex;
+                            display: inline-flex;
+                            margin-top: 6px;
                             i{
                                 margin-right: 8px;
                                 font-size: 20px;
@@ -355,6 +359,9 @@
                         text-align: center;
                         transition: .3s all ease;
                         margin-top: auto;
+                        &:hover{
+                            background-color: #917242;
+                        }
                     }
                 }
             }

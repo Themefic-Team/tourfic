@@ -104,6 +104,9 @@
                 cursor: pointer;
                 border-radius: 0px;
                 transition: .3s all ease;
+                &:hover{
+                    background-color: #917242 !important;
+                }
             }
         }
     }
