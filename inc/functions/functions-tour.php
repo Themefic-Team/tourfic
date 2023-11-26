@@ -574,6 +574,10 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 		<script>
 			(function ($) {
 				$(document).ready(function () {
+
+					// flatpickr locale first day of Week
+					<?php tf_flatpickr_locale("root"); ?>
+
 					$(".tf_tour_check_in_out_date").click(function(){
 						$(".tf-tour-check-in-out-date").click();
 					});
@@ -582,6 +586,10 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 						mode: "range",
 						dateFormat: "Y/m/d",
 						minDate: "today",
+
+						// flatpickr locale
+						<?php tf_flatpickr_locale(); ?>
+						
 						onReady: function (selectedDates, dateStr, instance) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 							dateSetToFields(selectedDates, instance);
@@ -2067,6 +2075,9 @@ function tf_single_tour_booking_form( $post_id ) {
             <script>
                 (function ($) {
                     $(document).ready(function () {
+
+						// flatpickr locale first day of Week
+						<?php tf_flatpickr_locale("root"); ?>
 						
                         const allowed_times = JSON.parse('<?php echo wp_json_encode( $allowed_times ?? [] ) ?>');
                         const custom_avail = '<?php echo $custom_avail; ?>';

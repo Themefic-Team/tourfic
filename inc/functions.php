@@ -715,6 +715,10 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 		<script>
 			(function ($) {
 				$(document).ready(function () {
+				
+					// flatpickr locale
+					<?php tf_flatpickr_locale("root"); ?>
+
 					$(".tf-template-3 .tf-booking-date-wrap").click(function(){
 						$("#check-in-out-date").click();
 					});
@@ -723,6 +727,11 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 						mode: "range",
 						dateFormat: "Y/m/d",
 						minDate: "today",
+
+						// flatpickr locale
+						<?php tf_flatpickr_locale(); ?>
+
+
 						onReady: function (selectedDates, dateStr, instance) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 							dateSetToFields(selectedDates, instance);
@@ -895,6 +904,9 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 			(function ($) {
 				$(document).ready(function () {
 
+					// flatpickr locale first day of Week
+					<?php tf_flatpickr_locale("root"); ?>
+
 					$(".tf-hotel-side-booking #check-in-out-date").flatpickr({
 						enableTime: false,
 						minDate: "today",
@@ -902,6 +914,10 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 						altFormat: '<?php echo $date_format_for_users; ?>',
 						mode: "range",
 						dateFormat: "Y/m/d",
+
+						// flatpickr locale
+						<?php tf_flatpickr_locale(); ?>
+
 						onReady: function (selectedDates, dateStr, instance) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
@@ -1152,7 +1168,11 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 		<script>
 			(function ($) {
 				$(document).ready(function () {
+					// flatpickr locale first day of Week
+					<?php tf_flatpickr_locale("root"); ?>
+
 					$(".tf-template-3 .tf-booking-date-wrap").click(function(){
+
 						$("#check-in-out-date").click();
 					});
 					$("#check-in-out-date").flatpickr({
@@ -1160,6 +1180,10 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 						mode: "range",
 						dateFormat: "Y/m/d",
 						minDate: "today",
+
+						// flatpickr locale
+						<?php tf_flatpickr_locale(); ?>
+
 						onReady: function (selectedDates, dateStr, instance) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 							dateSetToFields(selectedDates, instance);
