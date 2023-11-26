@@ -15,7 +15,7 @@
                 display: flex;
                 justify-content: flex-end;
                 align-items: center;
-                margin-top: 210px;
+                margin-top: 161px;
                 display: flex;
                 gap: 16px;
 
@@ -33,7 +33,7 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    color: #fff;
+                    color: #FDF9F3;
                     cursor: pointer;
                     font-size: 16px;
                     text-decoration: none;
@@ -87,18 +87,18 @@
                 .tf-head-title {
                     text-align: left;
                     h1{
-                        color: #fff;
+                        color: #FDF9F3;
                     }
                     .tf-title-meta {
                         font-size: 24px;
                         font-weight: 400;
                         line-height: 31px;
-                        color: #fff;
+                        color: #FDF9F3;
                         display: flex;
                         gap: 8px;
 
                         a {
-                            color: #fff;
+                            color: #FDF9F3;
                             text-decoration: none;
                             font-size: 24px;
                             font-family: Josefin Sans;
@@ -118,7 +118,7 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        background: #30281c9e;
+                        background: rgba(48, 40, 28, 0.8);
                         color: #fff;
                         background-size: cover;
                         background-position: center;
@@ -130,7 +130,7 @@
                         justify-content: center;
                         height: 100%;
                         width: 100%;
-                        color: #fff;
+                        color: #FDF9F3;
 
                         img {
                             height: 24px;
