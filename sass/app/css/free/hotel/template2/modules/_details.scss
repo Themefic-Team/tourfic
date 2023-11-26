@@ -32,13 +32,14 @@
                             font-size: 16px;
                             font-weight: 600;
                             line-height: 20.80px;
-                            color: #595349;
+                            color: #99948D;
                             border-bottom: 2px solid;
                             padding-bottom: 5px;
                             display: inline-block;
                             border-color: transparent;
                             &.tf-hashlink {
                                 border-color: #595349;
+                                color: #595349;
                             }
                         }
                     }
@@ -47,7 +48,6 @@
             .tf-overview-wrapper {
                 padding: 0 32px;
                 .tf-overview-description {
-                    padding-bottom: 32px;
                     p {
                         margin: 0;
                         padding: 0;
@@ -56,11 +56,11 @@
                 .tf-overview-popular-facilities {
                     h3 {
                         color: #595349;
-                        font-size: 16px;
-                        font-family: Josefin Sans;
-                        font-weight: 600;
-                        line-height: 20.80px;
-                        margin-bottom: 12px;
+                        font-size: 16px !important;
+                        font-family: Josefin Sans !important;
+                        font-weight: 600 !important;
+                        line-height: 20.8px !important;
+                        margin-bottom: 16px;
                     }
                     &>ul {
                         margin: 0;
@@ -72,6 +72,10 @@
                         gap: 10px 0;
                         li {
                             width: 25%;
+                            i{
+                                margin-right: 8px;
+                                font-size: 20px;
+                            }
                         }
                     }
                 }

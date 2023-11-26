@@ -179,8 +179,7 @@
                             <li><i class="fas fa-bed"></i> <?php echo $bed; ?><?php _e( ' Number of Beds', 'tourfic' ); ?></li>
                         <?php } ?>
                         <?php if ( $adult_number ) { ?>
-                            <li><i class="fas fa-male"></i><i
-                            class="fas fa-female"></i> <?php echo $adult_number; ?><?php _e( ' Adults', 'tourfic' ); ?></li>
+                            <li><i class="fas fa-male"></i> <?php echo $adult_number; ?><?php _e( ' Adults', 'tourfic' ); ?></li>
                         <?php } ?>
                         <?php if ( $child_number ) { ?>
                             <li><i class="fas fa-baby"></i><?php echo $child_number; ?><?php _e( ' Children', 'tourfic' ); ?></li>

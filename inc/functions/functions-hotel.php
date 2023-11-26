@@ -1771,7 +1771,9 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 				<div class="tf-booking-date-wrap">
 					<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
-						<span><?php _e("Month", "tourfic"); ?></span>
+						<span>
+							<?php echo date('M'); ?>
+						</span>
 						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
 					</span>
 				</div>
@@ -1784,7 +1786,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 				<div class="tf-booking-date-wrap">
 					<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
-						<span><?php _e("Month", "tourfic"); ?></span>
+						<span><?php echo date('M'); ?></span>
 						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
 					</span>
 				</div>

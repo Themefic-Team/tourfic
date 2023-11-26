@@ -626,7 +626,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 				<div class="tf-booking-date-wrap">
 					<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
-						<span><?php _e("Month", "tourfic"); ?></span>
+						<span><?php echo date('M'); ?></span>
 						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
 					</span>
 				</div>
@@ -639,7 +639,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 				<div class="tf-booking-date-wrap">
 					<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
-						<span><?php _e("Month", "tourfic"); ?></span>
+						<span><?php echo date('M'); ?></span>
 						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
 					</span>
 				</div>
@@ -1082,7 +1082,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 				<div class="tf-booking-date-wrap">
 					<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
-						<span><?php _e("Mon", "tourfic"); ?></span>
+						<span><?php echo date('M'); ?></span>
 						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
 					</span>
 				</div>
@@ -1095,7 +1095,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 				<div class="tf-booking-date-wrap">
 					<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
-						<span><?php _e("Mon", "tourfic"); ?></span>
+						<span><?php echo date('M'); ?></span>
 						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
 					</span>
 				</div>
