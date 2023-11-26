@@ -1066,7 +1066,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 				<div class="tf-booking-date-wrap">
 					<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
-						<span><?php _e("Month", "tourfic"); ?></span>
+						<span><?php _e("Mon", "tourfic"); ?></span>
 						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
 					</span>
 				</div>
@@ -1079,7 +1079,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 				<div class="tf-booking-date-wrap">
 					<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
-						<span><?php _e("Month", "tourfic"); ?></span>
+						<span><?php _e("Mon", "tourfic"); ?></span>
 						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
 					</span>
 				</div>
@@ -1091,7 +1091,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 				<div class="tf-booking-form-guest-and-room-inner">
 					<span class="tf-booking-form-title"><?php _e("Guests & rooms", "tourfic"); ?></span>
 					<div class="tf-booking-guest-and-room-wrap tf-archive-guest-info">
-						<span class="tf-guest"><?php _e("01", "tourfic"); ?></span> <?php _e("guest", "tourfic"); ?> <span class="tf-room"><?php _e("01", "tourfic"); ?></span> <?php _e("Rooms", "tourfic"); ?>
+						<span class="tf-guest"><?php _e("01", "tourfic"); ?></span> <?php _e("guest", "tourfic"); ?> <span class="tf-room"><?php _e("01", "tourfic"); ?></span> <?php _e("rooms", "tourfic"); ?>
 					</div>
 					<div class="tf-arrow-icons">
 						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
@@ -1105,7 +1105,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 							<?php _e("01", "tourfic"); ?>
 						</span>
 						<span class="tf-booking-month">
-							<span><?php _e("Guest", "tourfic"); ?></span>
+							<span><?php _e("guest", "tourfic"); ?></span>
 							<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
 						</span>
 					</div>
@@ -2703,3 +2703,13 @@ function tf_template_3_migrate_data() {
 }
 
 add_action( 'init', 'tf_template_3_migrate_data' );
+
+/* Text Limit 
+* @Author Jahid
+*/
+if( ! function_exists('tourfic_character_limit_callback') ){
+    function tourfic_character_limit_callback($str, $limit)
+    {
+        return substr($str, 0, $limit) . '...';
+    }
+}
