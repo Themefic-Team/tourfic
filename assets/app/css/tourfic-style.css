@@ -11709,6 +11709,54 @@ html {
   color: #fff;
   width: 100%;
 }
+.tf-template-3 .tf-send-inquiry {
+  background: #FCF4E8;
+  display: flex;
+  width: 100%;
+  padding: 56px 80px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+.tf-template-3 .tf-send-inquiry i {
+  font-size: 64px;
+}
+.tf-template-3 .tf-send-inquiry h3 {
+  color: #595349;
+  font-family: Cormorant Garamond;
+  font-size: 32px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: 120%;
+  margin: 0;
+  text-align: center;
+}
+.tf-template-3 .tf-send-inquiry p {
+  color: #99948D;
+  text-align: center;
+  font-family: Josefin Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+  margin: 0;
+}
+.tf-template-3 .tf-send-inquiry .tf-send-inquiry-btn {
+  background: #B58E53;
+  padding: 12px 32px;
+  color: #FDF9F3;
+  font-family: Josefin Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  display: inline-block;
+  text-align: center;
+  transition: 0.3s all ease;
+}
+.tf-template-3 .tf-send-inquiry .tf-send-inquiry-btn:hover {
+  background-color: #917242;
+}
 .tf-template-3 .tf-room-popup .tf-popup-inner {
   width: 1500px;
 }

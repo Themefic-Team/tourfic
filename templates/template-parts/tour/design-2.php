@@ -254,6 +254,41 @@
                     <?php } } } ?>
                         
                     </div>
+                     <!-- Enquery Section -->
+                    <?php 
+                    $tf_enquiry_section_status = ! empty( $meta['t-enquiry-section'] ) ? $meta['t-enquiry-section'] : "";
+                    $tf_enquiry_section_icon = ! empty( $meta['t-enquiry-option-icon'] ) ? esc_html( $meta['t-enquiry-option-icon'] ) : '';
+                    $tf_enquiry_section_title = ! empty( $meta['t-enquiry-option-title'] ) ? esc_html( $meta['t-enquiry-option-title'] ) : '';
+                    $tf_enquiry_section_des = ! empty( $meta['t-enquiry-option-content'] ) ? esc_html( $meta['t-enquiry-option-content'] ) : '';
+                    $tf_enquiry_section_button = ! empty( $meta['t-enquiry-option-btn'] ) ? esc_html( $meta['t-enquiry-option-btn'] ) : '';
+
+                    if ( ! empty( $tf_enquiry_section_status ) ) {
+                    ?>
+                    <div class="tf-send-inquiry">
+                        <?php 
+                        if (!empty($tf_enquiry_section_icon)) {
+                            ?>
+                            <i class="<?php echo $tf_enquiry_section_icon; ?>" aria-hidden="true"></i>
+                            <?php
+                        }
+                        if(!empty($tf_enquiry_section_title)) {
+                            ?>
+                            <h3><?php echo  $tf_enquiry_section_title; ?></h3>
+                            <?php
+                        }
+                        if(!empty($tf_enquiry_section_cont)) {
+                            ?>
+                            <p><?php echo $tf_enquiry_section_cont;  ?></p>
+                            <?php
+                        }
+                        if( !empty( $tf_enquiry_section_button )) {
+                            ?>
+                            <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-send-inquiry-btn"><span><?php echo $tf_enquiry_section_button; ?></span></a></div>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                    <?php } ?>
                 </div>
             </div>
             <!-- Hotel details End -->

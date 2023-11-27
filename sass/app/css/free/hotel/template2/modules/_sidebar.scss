@@ -238,6 +238,57 @@ span.tf-reting-stars {
     color: #fff;
     width: 100%;
 }
+
+// Inquery Box
+.tf-send-inquiry{
+    background: #FCF4E8;
+    display: flex;
+    width: 100%;
+    padding: 56px 80px;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    i{
+        font-size: 64px;
+    }
+    h3{
+        color: #595349;
+        font-family: Cormorant Garamond;
+        font-size: 32px !important;
+        font-style: normal !important;
+        font-weight: 700 !important;
+        line-height: 120%;
+        margin: 0;
+        text-align: center;
+    }
+    p{
+        color: #99948D;
+        text-align: center;
+        font-family: Josefin Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 130%;
+        margin: 0;
+    }
+    .tf-send-inquiry-btn{
+        background: #B58E53;
+        padding: 12px 32px;
+        color: #FDF9F3;
+        font-family: Josefin Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 150%;
+        display: inline-block;
+        text-align: center;
+        transition: .3s all ease;
+        &:hover{
+            background-color: #917242;
+        }
+    }
+}
+
 .tf-room-popup .tf-popup-inner {
     width: 1500px;
 }

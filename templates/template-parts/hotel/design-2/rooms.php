@@ -128,9 +128,6 @@
                 <?php 
 
                 $tour_room_details_gall = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
-                if ( $tour_room_details_gall ) {
-                    $tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
-                }
 
                 $room_preview_img = ! empty( $room['room_preview_img'] ) ? $room['room_preview_img'] : '';
                 if(!empty($room_preview_img)){ ?>                     
@@ -139,7 +136,10 @@
                     </div> 
                 <?php } ?>
                 <?php 
-                    if ( ! empty( $tf_room_gallery_ids ) ) {
+                    if ( ! empty( $tour_room_details_gall ) ) {
+                    if ( !empty($tour_room_details_gall) ) {
+                        $tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
+                    }
                     $gallery_limit = 1;
                     foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
                     $image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
