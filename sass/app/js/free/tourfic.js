@@ -1738,6 +1738,23 @@
             });
         });
 
+        // Design 2 Toggle share buttons
+        $('.tf-share-toggle').click(function (e) {
+            e.preventDefault();
+            $('.tf-off-canvas-share').toggleClass('show');
+        });
+
+        // Copy button
+        $('a#share_link_button').click(function (e) {
+            e.preventDefault();
+            $(this).addClass('copied');
+            setTimeout(function () {
+                $('a#share_link_button').removeClass('copied');
+            }, 3000);
+            $(this).parent().find("#share_link_input").select();
+            document.execCommand("copy");
+        });
+
     });
 
     /*

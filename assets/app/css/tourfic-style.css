@@ -9706,7 +9706,7 @@ html {
   display: flex;
   gap: 16px;
 }
-.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share a.share-toggle,
+.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share a.tf-share-toggle,
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share a.tf-wishlist {
   margin: 0;
   padding: 0;
@@ -9725,39 +9725,50 @@ html {
   font-size: 16px;
   text-decoration: none;
 }
-.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-share .share-tour-content .tf-dropdown-share-content {
-  background: #FFFFFF;
-  border-radius: 8px;
-  padding: 16px 10px;
-  width: 280px;
-  text-align: center;
-  box-shadow: 0px 13px 30px 0px #e0e8ee;
-}
-.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-share .share-tour-content .tf-dropdown-share-content ul {
-  margin: 0px;
-}
-.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-share .share-tour-content .tf-dropdown-share-content ul li {
+.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-off-canvas-share-box {
   display: inline-flex;
+  align-items: center;
 }
-.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-share .share-tour-content .tf-dropdown-share-content ul li a {
-  display: inline-block;
-  padding: 10px 9px;
+.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-off-canvas-share-box .tf-off-canvas-share {
+  display: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
 }
-.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-share .share-tour-content .tf-dropdown-share-content ul li a i {
-  font-size: 22px;
-  color: rgb(181, 142, 83);
+.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-off-canvas-share-box .tf-off-canvas-share li a {
+  margin-right: 16px;
+  text-decoration: none;
 }
-.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-share .share-tour-content .tf-dropdown-share-content ul li a:hover {
+.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-off-canvas-share-box .tf-off-canvas-share li a i {
+  font-size: 16px;
+  color: #FDF9F3;
+}
+.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-off-canvas-share-box .tf-off-canvas-share li:last-child a {
+  margin-right: 9px;
+}
+.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-off-canvas-share-box .tf-off-canvas-share li #share_link_button {
+  padding: 0px;
   background-color: transparent;
-}
-.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-share .share-tour-content .tf-dropdown-share-content ul li button {
-  padding: 10px 7px !important;
-  background-color: transparent !important;
   border: 0px solid;
-  font-size: 22px !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
 }
-.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-share .share-tour-content .tf-dropdown-share-content ul li button i, .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-share .share-tour-content .tf-dropdown-share-content ul li button span {
-  color: rgb(181, 142, 83);
+.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-off-canvas-share-box .tf-off-canvas-share li #share_link_button span {
+  display: none;
+  font-size: 13px;
+  color: #FDF9F3;
+}
+.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-off-canvas-share-box .tf-off-canvas-share li #share_link_button.copied span {
+  display: inline-block;
+}
+.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-off-canvas-share-box .tf-off-canvas-share li input {
+  padding: 0;
+  height: 0px;
+  width: 0px;
+}
+.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-off-canvas-share-box .tf-off-canvas-share.show {
+  display: inline-flex;
 }
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area {
   display: flex;
@@ -10931,6 +10942,10 @@ html {
   background: #B58E53 !important;
   padding: 12px 32px !important;
   justify-content: center;
+  transition: 0.3s all ease;
+}
+.tf-template-3 .tf_tours_booking .tf-tours-booking-btn.tf-booking-bttns a:hover {
+  background-color: #917242 !important;
 }
 .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields {
   display: flex;

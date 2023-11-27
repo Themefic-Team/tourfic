@@ -371,6 +371,10 @@
             background: #B58E53 !important;
             padding: 12px 32px !important;
             justify-content: center;
+            transition: .3s all ease;
+            &:hover{
+                background-color: #917242 !important;
+            }
         }
     }
 }
