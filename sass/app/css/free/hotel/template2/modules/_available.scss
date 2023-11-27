@@ -123,7 +123,7 @@
                 }
             }
             .tf-available-room-content-right {
-                width: 180px;
+                width: 230px;
                 display: flex;
                 flex-direction: column;
                 align-items: flex-end;
@@ -163,11 +163,24 @@
                     margin-bottom: 58px;
                     .tf-price {
                         color: #595349;
-                        font-size: 16px;
                         font-weight: 400;
                         line-height: 31.20px;
-                        span {
+                        .discount-price{
+                            color: #99948D;
+                            font-family: Josefin Sans;
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 130%; /* 20.8px */
+                            display: inline-flex;
+                            gap: 2px;
+                        }
+                        .sale-price{
                             font-size: 24px;
+                            display: inline-flex;
+                            .booking-type{
+                                font-size: 16px;
+                            }
                         }
                     }
                 }
@@ -177,6 +190,8 @@
                     display: flex;
                     width: fit-content;
                     margin-bottom: 26px;
+                    gap: 8px;
+                    align-items: center;
                     select {
                         height: 37px;
                         width: 70px;
@@ -282,6 +297,17 @@
                             height: 20px;
                             width: 20px;
                         }
+                    }
+                }
+                .tf-room-gallery:first-child{
+                    &::before{
+                        position: absolute;
+                        content: "";
+                        left: 0;
+                        top: 0;
+                        height: 100%;
+                        width: 100%;
+                        background: rgba(238, 199, 140, 0.2);
                     }
                 }
                 .tf-available-labels {
