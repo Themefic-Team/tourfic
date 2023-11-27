@@ -165,6 +165,12 @@
         .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-available-room-select select{
             margin-left: 15px;
         }
+
+        .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkin,  
+        .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkout{
+            padding-left: 40px;
+            padding-right: 40px;
+        }
     }
 }
 @media only screen and (max-width: 1024px) {
@@ -243,6 +249,14 @@
     .tf-template-3.tf-hotel-single{
         .tf-content-wrapper .tf-details .tf-details-left .tf-details-menu{
             width: auto !important;
+        }
+        .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkin,  
+        .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkout{
+            padding-left: 80px;
+            padding-right: 80px;
+        }
+        .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-fields > div.tf-booking-form-guest-and-room{
+            padding-left: 80px;
         }
     }
 }
@@ -334,6 +348,33 @@
             width: auto !important;
         }
         
+        .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-fields{
+            display: flow-root;
+            width: 100%;
+            >div{
+                width: auto !important;
+                border-right: 0px solid;
+                padding-right: 0px !important;
+            }
+            .tf-booking-form-location{
+                padding-left: 0px;
+            }
+            .tf-booking-form-location .tf-booking-location-wrap{
+                max-width: none !important;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            .tf-booking-form-checkin, .tf-booking-form-checkout{
+                float: left;
+                border-right: 1px solid #D6D4D2;
+                width: 32% !important;
+                padding: 0px 20px !important;
+                max-width: none;
+            }
+            .tf-booking-form-guest-and-room{
+                padding: 0px 20px !important;
+            }
+        }
     }
     .tf-template-3.tf-hotel-single {
         .tf-popup-left{
@@ -383,20 +424,11 @@
         }
         .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-fields{
             display: flow-root;
-            >div{
-                width: auto !important;
-                border-right: 0px solid;
-            }
-            .tf-booking-form-location .tf-booking-location-wrap{
-                max-width: none !important;
-                width: 100%;
-                margin-bottom: 15px;
-            }
             .tf-booking-form-checkin, .tf-booking-form-checkout{
-                float: left;
-                border-right: 1px solid #D6D4D2;
-                width: 32% !important;
-                padding: 0px 10px;
+                padding: 0px 10px !important;
+            }
+            .tf-booking-form-guest-and-room{
+                padding: 0px 10px !important;
             }
         }
         .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-checkinout,
