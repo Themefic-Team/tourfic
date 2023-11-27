@@ -9870,6 +9870,7 @@ html {
   left: 0;
   top: 0;
   z-index: 99;
+  width: 100% !important;
 }
 .tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-details-menu ul {
   margin: 0;
@@ -10747,22 +10748,36 @@ html {
   left: 0;
   top: 100%;
   width: 100%;
-  background: #fff;
+  background: #FCF4E8;
+  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.1);
   z-index: 999;
-  border: 1px solid #d4d4d4;
   max-height: 200px;
   overflow: auto;
   scrollbar-width: thin;
   scrollbar-color: #aaa #eee;
+  padding: 8px;
 }
 .tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list div,
 .tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-destinationautocomplete-list div {
   padding: 10px;
   cursor: pointer;
   background-color: #fff;
-  border-bottom: 1px solid #d4d4d4;
+  margin-bottom: 4px;
   color: #444;
   display: block;
+  transition: 0.3s all ease;
+}
+.tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list div:last-child,
+.tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-destinationautocomplete-list div:last-child {
+  margin-bottom: 0px;
+}
+.tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list div:hover,
+.tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-destinationautocomplete-list div:hover {
+  background: #FAEEDC;
+}
+.tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list div::before,
+.tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-destinationautocomplete-list div::before {
+  display: none;
 }
 .tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-guest-and-room {
   padding-left: 40px !important;
@@ -11829,6 +11844,12 @@ html {
   line-height: 1;
   border: none;
   background: unset;
+  color: #595349;
+  font-family: Josefin Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 24px */
 }
 .tf-template-3 .tf-filter-wrapper .tf-filter-list-item h4 {
   margin-bottom: 12px;

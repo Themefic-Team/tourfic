@@ -147,20 +147,31 @@
                         left: 0;
                         top: 100%;
                         width: 100%;
-                        background: #fff;
+                        background: #FCF4E8;
+                        box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
                         z-index: 999;
-                        border: 1px solid #d4d4d4;
                         max-height: 200px;
                         overflow: auto;
                         scrollbar-width: thin;
                         scrollbar-color: #aaa #eee;
+                        padding: 8px;
                         div{
                             padding: 10px;
                             cursor: pointer;
                             background-color: #fff;
-                            border-bottom: 1px solid #d4d4d4;
+                            margin-bottom: 4px;
                             color: #444;
                             display: block;
+                            transition: .3s all ease;
+                            &:last-child{
+                                margin-bottom: 0px;
+                            }
+                            &:hover{
+                                background: #FAEEDC;
+                            }
+                            &::before{
+                                display: none;
+                            }
                         }
                     }
 				}
