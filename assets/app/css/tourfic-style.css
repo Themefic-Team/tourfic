@@ -11114,6 +11114,7 @@ html {
   display: flex !important;
   flex-direction: row;
   gap: 10px;
+  min-height: 200px;
 }
 .tf-template-3 .tf-reviews-wrapper .tf-reviews-slider .tf-reviews-item .tf-reviews-avater {
   width: 48px;
@@ -11498,15 +11499,13 @@ html {
   display: flex;
   gap: 53px;
 }
-.tf-template-3 .tf-review-data-average {
+.tf-template-3 .tf-review-data-average h2 {
+  margin-bottom: 0px;
   font-size: 40px !important;
-  font-family: Josefin Sans;
+  font-family: Josefin Sans !important;
   font-weight: 400 !important;
   line-height: 52px !important;
   word-wrap: break-word;
-}
-.tf-template-3 .tf-review-data-average h2 {
-  margin-bottom: 0px;
 }
 .tf-template-3 .tf-review-data-average span {
   color: #595349;
@@ -11574,9 +11573,12 @@ html {
 .tf-template-3 .tf-review-form-wrapper {
   background: #FCF4E8;
   padding: 24px;
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 16px;
+}
+.tf-template-3 .tf-review-show {
+  display: flex;
 }
 .tf-template-3 .tf-review-form-wrapper h3 {
   color: #595349;
@@ -11598,10 +11600,11 @@ html {
   display: flow-root;
 }
 .tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-rating-wrapper .tf-form-single-rating label {
-  font-size: 14px;
+  font-size: 14px !important;
   font-weight: 600;
   line-height: 18.2px;
   display: block;
+  margin-right: 4px;
 }
 .tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-rating-wrapper .tf-form-single-rating .ratings-container {
   width: auto !important;
@@ -11620,14 +11623,22 @@ html {
   border: none !important;
   padding: 12px 0 !important;
   border-radius: 0px !important;
+  transition: 0.3s all ease;
+}
+.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-review-submit input#comment-submit:hover {
+  background-color: #917242 !important;
 }
 .tf-template-3 .tf-review-form-wrapper .tf-review-form-container form input, .tf-template-3 .tf-review-form-wrapper .tf-review-form-container form textarea {
   border: 1px solid #595349;
   background: transparent;
   padding: 8px;
   color: #222;
-  font-size: 12px;
+  font-size: 16px;
   border-radius: 0px;
+  font-family: Josefin Sans !important;
+}
+.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form textarea {
+  width: 100% !important;
 }
 .tf-template-3 .tf-reting-item {
   width: 50%;

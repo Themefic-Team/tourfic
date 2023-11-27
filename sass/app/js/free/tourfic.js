@@ -1833,6 +1833,10 @@
             $(".tf-template-3 .tf-booking-form-guest-and-room .tf_acrselection-wrap").addClass("tf-show");
         });
 
+        $(".tf-template-3 .tf-review-open.button").click(function(){
+            $(".tf-template-3 .tf-sitebar-widgets .tf-review-form-wrapper").toggleClass("tf-review-show");
+        });
+
         /**
          * Design 2 Archive Hotel Room Gallery & Archive Tour Gallery Popup
          *

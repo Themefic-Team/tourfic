@@ -38,12 +38,12 @@
 .tf-review-data-average {
     h2{
         margin-bottom: 0px;
+        font-size: 40px !important;
+        font-family: Josefin Sans !important;
+        font-weight: 400 !important;
+        line-height: 52px !important;
+        word-wrap: break-word;
     }
-    font-size: 40px !important;
-    font-family: Josefin Sans;
-    font-weight: 400 !important;
-    line-height: 52px !important;
-    word-wrap: break-word;
 }
 
 .tf-review-data-average span {
@@ -123,9 +123,12 @@ button.tf-review-open.button, .tf-reting-field button {
 .tf-review-form-wrapper {
     background: #FCF4E8;
     padding: 24px;
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 16px;
+}
+.tf-review-show{
+    display: flex;
 }
 
 .tf-review-form-wrapper h3 {
@@ -148,10 +151,11 @@ button.tf-review-open.button, .tf-reting-field button {
                 .tf-form-single-rating{
                     display: flow-root;
                     label{
-                        font-size: 14px;
+                        font-size: 14px !important;
                         font-weight: 600;
                         line-height: 18.2px;
                         display: block;
+                        margin-right: 4px;
                     }
                     .ratings-container{
                         width: auto !important;
@@ -171,6 +175,10 @@ button.tf-review-open.button, .tf-reting-field button {
                     border: none !important;
                     padding: 12px 0 !important;
                     border-radius: 0px !important;
+                    transition: .3s all ease;
+                    &:hover{
+                        background-color: #917242 !important;
+                    }
                 }
             }
             input,textarea{
@@ -178,8 +186,12 @@ button.tf-review-open.button, .tf-reting-field button {
                 background: transparent;
                 padding: 8px;
                 color: #222;
-                font-size: 12px;
+                font-size: 16px;
                 border-radius: 0px;
+                font-family: Josefin Sans !important;
+            }
+            textarea{
+                width: 100% !important;
             }
         }
     }
