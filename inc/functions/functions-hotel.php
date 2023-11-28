@@ -1776,7 +1776,9 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 						<span>
 							<?php echo date('M'); ?>
 						</span>
-						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+						<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+						</svg>
 					</span>
 				</div>
 				<div class="tf_booking-dates">
@@ -1789,7 +1791,9 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 					<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
 						<span><?php echo date('M'); ?></span>
-						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+						<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+						</svg>
 					</span>
 				</div>
 				<input type="text" name="check-in-out-date" class="tf-check-in-out-date" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required>
@@ -1802,7 +1806,9 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 						<span class="tf-guest tf-booking-date"><?php _e("01", "tourfic"); ?></span> 
 						<span class="tf-booking-month">
 							<span><?php _e("Guest", "tourfic"); ?></span>
-							<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+							<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+							</svg>
 						</span>
 					</div>
 				</div>

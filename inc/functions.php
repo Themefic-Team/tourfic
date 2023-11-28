@@ -627,7 +627,9 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 					<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
 						<span><?php echo date('M'); ?></span>
-						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+						<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+						</svg>
 					</span>
 				</div>
 				<div class="tf_booking-dates">
@@ -640,7 +642,9 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 					<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
 						<span><?php echo date('M'); ?></span>
-						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+						<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+						</svg>
 					</span>
 				</div>
 				<input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" value="<?php echo $date ?>" required>
@@ -654,7 +658,9 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 						<span class="tf-guest"><?php echo $adult+$children ?> </span> <?php _e("guest", "tourfic"); ?> <span class="tf-room"><?php echo $room; ?></span> <?php _e("Rooms", "tourfic"); ?>
 					</div>
 					<div class="tf-arrow-icons">
-						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+						<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+						</svg>
 					</div>
 				</div>
 				<?php } if ( $post_type == 'tf_tours' ) { ?>
@@ -666,7 +672,9 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 						</span>
 						<span class="tf-booking-month">
 							<span><?php _e("Guest", "tourfic"); ?></span>
-							<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+							<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+							</svg>
 						</span>
 					</div>
 				</div>
@@ -1065,7 +1073,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 	<?php
 	}
 	elseif ( ( is_post_type_archive( 'tf_hotel' ) && $tf_hotel_arc_selected_template == "design-2" ) || ( is_post_type_archive( 'tf_tours' ) && $tf_tour_arc_selected_template == "design-2" ) || ( $post_type == 'tf_hotel' && $tf_hotel_arc_selected_template == "design-2" ) || ( $post_type == 'tf_tours' && $tf_tour_arc_selected_template == "design-2" ) ) { ?>
-		<div class="tf-booking-form-fields">
+		<div class="tf-booking-form-fields <?php echo $post_type == 'tf_tours' ? esc_attr( 'tf-tour-archive-block' ) : ''; ?>">
 			<div class="tf-booking-form-location">
 				<span class="tf-booking-form-title"><?php _e("Location", "tourfic"); ?></span>
 				<label for="tf-search-location" class="tf-booking-location-wrap">
@@ -1077,13 +1085,17 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
                     <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? $taxonomy_slug : ''; ?>"/>
 				</label>
 			</div>
+
+			<?php if ( $post_type == 'tf_hotel' ) { ?>
 			<div class="tf-booking-form-checkin">
 				<span class="tf-booking-form-title"><?php _e("Check in", "tourfic"); ?></span>
 				<div class="tf-booking-date-wrap">
 					<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
 						<span><?php echo date('M'); ?></span>
-						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+						<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+						</svg>
 					</span>
 				</div>
 				<div class="tf_booking-dates">
@@ -1096,12 +1108,44 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 					<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
 						<span><?php echo date('M'); ?></span>
-						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+						<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+						</svg>
 					</span>
 				</div>
 				<input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required>
-
 			</div>
+			<?php } ?>
+
+			<?php if ( $post_type == 'tf_tours' ) { ?>
+			<div class="tf-booking-form-checkin">
+				<span class="tf-booking-form-title"><?php _e("Date", "tourfic"); ?></span>
+				<div class="tf-tour-searching-date-block">
+					<div class="tf-booking-date-wrap tf-tour-start-date">
+						<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
+						<span class="tf-booking-month">
+							<span><?php echo date('M'); ?></span>
+						</span>
+					</div>
+					<div class="tf-duration">
+						<span>-</span>
+					</div>
+					<div class="tf-booking-date-wrap tf-tour-end-date">
+						<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
+						<span class="tf-booking-month">
+							<span><?php echo date('M'); ?></span>
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+							<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+							</svg>
+						</span>
+					</div>
+					<input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required>
+				</div>
+				<div class="tf_booking-dates">
+					<div class="tf_label-row"></div>
+				</div>
+			</div>
+			<?php } ?>
 			<div class="tf-booking-form-guest-and-room">
 				<?php if ( $post_type !== 'tf_tours' ) { ?>
 				<div class="tf-booking-form-guest-and-room-inner">
@@ -1110,7 +1154,9 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 						<span class="tf-guest"><?php _e("01", "tourfic"); ?></span> <?php _e("guest", "tourfic"); ?> <span class="tf-room"><?php _e("01", "tourfic"); ?></span> <?php _e("rooms", "tourfic"); ?>
 					</div>
 					<div class="tf-arrow-icons">
-						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+						<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+						</svg>
 					</div>
 				</div>
 				<?php }else{ ?>
@@ -1122,7 +1168,9 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 						</span>
 						<span class="tf-booking-month">
 							<span><?php _e("guest", "tourfic"); ?></span>
-							<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+							<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+							</svg>
 						</span>
 					</div>
 				</div>
@@ -1165,6 +1213,65 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
             <button class="tf-btn-normal btn-primary tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
 		</div>
 
+		<?php if ( $post_type == 'tf_tours' ) { ?>
+		<script>
+			(function ($) {
+				$(document).ready(function () {
+					// flatpickr locale first day of Week
+					<?php tf_flatpickr_locale("root"); ?>
+
+					$(".tf-template-3 .tf-booking-date-wrap").click(function(){
+
+						$("#check-in-out-date").click();
+					});
+					$("#check-in-out-date").flatpickr({
+						enableTime: false,
+						mode: "range",
+						dateFormat: "Y/m/d",
+						minDate: "today",
+
+						// flatpickr locale
+						<?php tf_flatpickr_locale(); ?>
+
+						onReady: function (selectedDates, dateStr, instance) {
+							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+							dateSetToFields(selectedDates, instance);
+						},
+						onChange: function (selectedDates, dateStr, instance) {
+							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+							dateSetToFields(selectedDates, instance);
+						},
+						<?php
+						if(!empty($check_in_out)){ ?>
+						defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
+						<?php } ?>
+					});
+
+					function dateSetToFields(selectedDates, instance) {
+						if (selectedDates.length === 2) {
+							const monthNames = [
+								"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+								"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+							];
+							if(selectedDates[0]){
+								const startDate = selectedDates[0];
+								$(".tf-template-3 .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-date").html(startDate.getDate());
+								$(".tf-template-3 .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-month span").html(monthNames[startDate.getMonth()+1]);
+							}
+							if(selectedDates[1]){
+								const endDate = selectedDates[1];
+								$(".tf-template-3 .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-date").html(endDate.getDate());
+								$(".tf-template-3 .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-month span").html(monthNames[endDate.getMonth()+1]);
+							}
+						}
+					}
+
+				});
+			})(jQuery);
+		</script>
+		<?php } ?>
+
+		<?php if ( $post_type == 'tf_hotel' ) { ?>
 		<script>
 			(function ($) {
 				$(document).ready(function () {
@@ -1220,6 +1327,8 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 				});
 			})(jQuery);
 		</script>
+		<?php } ?>
+
 	<?php } else { ?>
         <form class="tf_archive_search_result tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
               action="<?php echo tf_booking_search_action(); ?>">

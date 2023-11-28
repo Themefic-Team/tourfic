@@ -47,12 +47,6 @@ function tf_hotel_booking_callback() {
     $deposit        = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
     $airport_service = isset($_POST['airport_service']) ? sanitize_text_field($_POST['airport_service']) : '';
 
-	# Calculate night number
-	if ( $check_in && $check_out ) {
-		$check_in_stt   = strtotime( $check_in . ' +1 day' );
-		$check_out_stt  = strtotime( $check_out );
-		$day_difference = round( ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1 );
-	}
 
 	// Check errors
 	if ( ! $check_in ) {
@@ -93,6 +87,21 @@ function tf_hotel_booking_callback() {
 	$room_name       = $rooms[ $room_id ]['title'];
 	$pricing_by      = $rooms[ $room_id ]['pricing-by'];
 	$price_multi_day = ! empty( $rooms[ $room_id ]['price_multi_day'] ) ? $rooms[ $room_id ]['price_multi_day'] : false;
+
+	# Calculate night number
+	if(!$price_multi_day){
+		if ( $check_in && $check_out ) {
+			$check_in_stt   = strtotime( $check_in );
+			$check_out_stt  = strtotime( $check_out );
+			$day_difference = round( ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1 );
+		}
+	}else{
+		if ( $check_in && $check_out ) {
+			$check_in_stt   = strtotime( $check_in . ' +1 day' );
+			$check_out_stt  = strtotime( $check_out );
+			$day_difference = round( ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1 );
+		}
+	}
 
 	$room_stay_requirements = array( );
 	foreach($rooms as $key => $room) {

@@ -166,11 +166,12 @@
                     border-radius: 8px 8px 0px 0px;
                     pointer-events: none;
                     h4{
-                        margin-bottom: 1০px !important;
+                        margin-bottom: 10px !important;
                         font-size: 16px !important;
                         font-weight: 600 !important;
                         line-height: 1.5 !important;
                         color: #595349 !important;
+                        font-family: Josefin Sans !important;
                     }
                     i{
                         display: none;
@@ -222,9 +223,10 @@
                         font-size: 16px;
                         font-style: normal;
                         font-weight: 400;
-                        line-height: 130%; /* 20.8px */
+                        line-height: 130%;
+                        margin-top: 6px;
                         span{
-                            margin-left: 10px;
+                            display: none;
                         }
                     }
                 }
@@ -261,18 +263,24 @@
                     }
                 }
                 .al-range-slider__tooltip {
-                    background: #99948D !important;
-                    border-radius: 5px;
+                    background: transparent !important;
                     box-shadow: none;
                     padding: 3px 10px;
-                    color: #fff !important;
-                    font-size: 13px !important;
                     margin-bottom: 0px !important;
                     bottom: -40px;
+                    color: #595349 !important;
+                    font-family: Josefin Sans;
+                    font-size: 16px !important;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 130%;
                 }
                 .al-range-slider__input.js-al-range-slider__input {
                     display: none !important;
                 }
+            }
+            .tf_widget.widget_tf_price_filters{
+                margin-bottom: 54px;
             }
         }
     }
