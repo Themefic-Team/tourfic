@@ -9870,7 +9870,6 @@ html {
   left: 0;
   top: 0;
   z-index: 99;
-  width: 100% !important;
 }
 .tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-details-menu ul {
   margin: 0;

@@ -424,14 +424,14 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
             <input type="hidden" id="hotel_room_uniqueid">
             <?php
             if ( $pricing_by == '1' ) {
-                if(!empty($d_price )) {
+                if(!empty($hotel_discount_amount )) {
                     ?>
                     <span class="tf-price">
                         <span class="discount-price">
                             <?php esc_html_e( 'From', 'tourfic' ); ?><del><?php echo wc_price($price); ?></del> 
                         </span>
                         <span class="sale-price">
-                            <?php echo wc_price($d_price); ?>
+                            <?php echo wc_price($hotel_discount_amount); ?>
                             <span class="booking-type">
                             <?php 
                             if($multi_by_date){
@@ -443,7 +443,7 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                         </span>
                     </span>
                     <?php
-                    $d_price = "";
+                    $hotel_discount_amount = "";
                 } else if($hotel_discount_type == "none") {
                     ?>
                     <span class="tf-price">
@@ -467,14 +467,14 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                 ?>
                 <?php
             } else {
-                if(!empty($d_price )) {
+                if(!empty($hotel_discount_amount )) {
                     ?>
                     <span class="tf-price">
                         <span class="discount-price">
                             <?php esc_html_e( 'From', 'tourfic' ); ?><del><?php echo wc_price($price); ?></del> 
                         </span>
                         <span class="sale-price">
-                            <?php echo wc_price($d_price); ?>
+                            <?php echo wc_price($hotel_discount_amount); ?>
                             <span class="booking-type">
                             <?php 
                             if($multi_by_date){
@@ -486,7 +486,7 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                         </span>
                     </span>
                     <?php
-                    $d_price = "";
+                    $hotel_discount_amount = "";
                 } else if($hotel_discount_type == "none") {
                     ?>
                     <span class="tf-price">
@@ -525,12 +525,12 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
             </div>
             <div class="tf-available-room-purchase-summery">
             <?php
-            if(!empty($d_price) && $hotel_discount_type != "none"){
+            if(!empty($hotel_discount_amount) && $hotel_discount_type != "none"){
                 ?>
-                <span class="tf-price"><del><?php echo wc_price( $price ); ?></del> <?php echo wc_price( $d_price ); ?></span>
+                <span class="tf-price"><del><?php echo wc_price( $price ); ?></del> <?php echo wc_price( $hotel_discount_amount ); ?></span>
                 <?php
-                $d_price = "";
-            }else if($hotel_discount_type == "none" || empty($d_price)){
+                $hotel_discount_amount = "";
+            }else if($hotel_discount_type == "none" || empty($hotel_discount_amount)){
                 ?>
                 <span class="tf-price"><?php echo wc_price( $price ); ?></span>
                 <?php
