@@ -33,6 +33,7 @@
 .tf-review-data {
     display: flex;
     gap: 53px;
+    margin-bottom: 24px;
 }
 
 .tf-review-data-average {
@@ -112,6 +113,7 @@ button.tf-review-open.button, .tf-reting-field button {
     width: 100%;
     border: none;
     padding: 12px 0;
+    border-radius: 0px;
 }
 
 .tf-single-widgets {
@@ -160,6 +162,10 @@ button.tf-review-open.button, .tf-reting-field button {
                     .ratings-container{
                         width: auto !important;
                         text-align: left;
+                    }
+                    span.error{
+                        position: relative;
+                        top: 4px;
                     }
                 }
             }

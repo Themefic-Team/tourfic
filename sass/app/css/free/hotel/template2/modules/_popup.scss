@@ -108,7 +108,14 @@ img.tf-popup-image {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: .3s all ease;
     cursor: pointer;
+    &:hover{
+        background: #FDF9F3;
+    }
+    &:focus{
+        background: #FAEEDC;
+    }
 }
 .tf-popup-close i {
     color: #595349;

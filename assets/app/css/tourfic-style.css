@@ -9920,6 +9920,7 @@ html {
 }
 .tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-popular-facilities > ul li {
   width: 25%;
+  display: flex;
 }
 .tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-popular-facilities > ul li i {
   margin-right: 8px;
@@ -10305,6 +10306,9 @@ html {
   line-height: 130%; /* 20.8px */
   display: inline-flex;
   gap: 2px;
+}
+.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-available-room-price .tf-price .discount-price .amount {
+  font-weight: normal !important;
 }
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-available-room-price .tf-price .sale-price {
   font-size: 24px;
@@ -11611,6 +11615,7 @@ html {
 .tf-template-3 .tf-review-data {
   display: flex;
   gap: 53px;
+  margin-bottom: 24px;
 }
 .tf-template-3 .tf-review-data-average h2 {
   margin-bottom: 0px;
@@ -11677,6 +11682,7 @@ html {
   width: 100%;
   border: none;
   padding: 12px 0;
+  border-radius: 0px;
 }
 .tf-template-3 .tf-single-widgets {
   display: flex;
@@ -11722,6 +11728,10 @@ html {
 .tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-rating-wrapper .tf-form-single-rating .ratings-container {
   width: auto !important;
   text-align: left;
+}
+.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-rating-wrapper .tf-form-single-rating span.error {
+  position: relative;
+  top: 4px;
 }
 .tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-review-submit {
   margin-top: 16px !important;
@@ -12094,7 +12104,14 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: 0.3s all ease;
   cursor: pointer;
+}
+.tf-template-3 .tf-popup-close:hover {
+  background: #FDF9F3;
+}
+.tf-template-3 .tf-popup-close:focus {
+  background: #FAEEDC;
 }
 .tf-template-3 .tf-popup-close i {
   color: #595349;

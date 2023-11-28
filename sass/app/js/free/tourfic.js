@@ -1804,16 +1804,6 @@
             $(".tf-popup-wrapper").removeClass("tf-show")
         });
 
-
-        function details_Menu_Width(){
-            var detailsMenuSourceDivWidth = $('.tf-details-left').width() - 60;
-            $('.tf-details-menu').css('width', detailsMenuSourceDivWidth);
-        }
-
-        $(window).resize(function(){
-            details_Menu_Width()
-        });
-
         $('.tf-template-3 .tf-details-menu a').on('click', function() {
             $(this).addClass('tf-hashlink');
             $(this).closest('li').siblings().find('a').removeClass('tf-hashlink');
