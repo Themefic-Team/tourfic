@@ -394,7 +394,9 @@
                                             </div>
                                             <div class="tf-meta-info">
                                                 <div class="tf-meta-title">
-                                                    <h2><a href="<?php echo get_permalink($selected_design_post_id) ?>"><?php echo  get_the_title($selected_design_post_id) ?></a></h2>
+                                                    <h2><a href="<?php echo get_permalink($selected_design_post_id) ?>">
+                                                    <?php echo tourfic_character_limit_callback(get_the_title($selected_design_post_id), 30); ?>
+                                                    </a></h2>
                                                     <div class="tf-meta-data-price">
                                                         <span>
                                                         <?php if ( $pricing_rule == 'group' ) {

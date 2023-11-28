@@ -434,10 +434,16 @@
     padding: 32px 0px;
 
     .tf-slider-item{
-        height: auto;
+        height: auto !important;
         box-shadow: none;
         border: 0px solid;
         background-color: transparent;
+        .tf-image-data{
+            img{
+                height: 240px;
+                object-fit: cover;
+            }
+        }
         .tf-meta-info{
             a.see-details{
                 display: block;
@@ -450,6 +456,12 @@
                 line-height: 150%; /* 24px */
                 text-decoration: none;
                 text-align: center;
+                transition: .3s all ease;
+                &:hover{
+                    background-color: #917242;
+                    color: #FDF9F3;
+                    border-color: #917242;
+                }
             }
             .tf-meta-location{
                 color: #99948D;

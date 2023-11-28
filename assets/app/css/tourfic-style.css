@@ -10542,10 +10542,14 @@ html {
   padding: 32px 0px;
 }
 .tf-template-3 .tf-related-tours .tf-slider-item {
-  height: auto;
+  height: auto !important;
   box-shadow: none;
   border: 0px solid;
   background-color: transparent;
+}
+.tf-template-3 .tf-related-tours .tf-slider-item .tf-image-data img {
+  height: 240px;
+  object-fit: cover;
 }
 .tf-template-3 .tf-related-tours .tf-slider-item .tf-meta-info a.see-details {
   display: block;
@@ -10558,6 +10562,12 @@ html {
   line-height: 150%; /* 24px */
   text-decoration: none;
   text-align: center;
+  transition: 0.3s all ease;
+}
+.tf-template-3 .tf-related-tours .tf-slider-item .tf-meta-info a.see-details:hover {
+  background-color: #917242;
+  color: #FDF9F3;
+  border-color: #917242;
 }
 .tf-template-3 .tf-related-tours .tf-slider-item .tf-meta-info .tf-meta-location {
   color: #99948D;
@@ -12302,6 +12312,14 @@ html {
     padding-left: 80px;
   }
 }
+@media only screen and (min-width: 768px) and (max-width: 970px) {
+  .tf-template-3 .tf-related-tours .tf-slider-item {
+    height: auto !important;
+    padding: auto !important;
+    margin: auto !important;
+    border: 0px solid !important;
+  }
+}
 @media only screen and (max-width: 767px) {
   .tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-details-menu ul {
     gap: 16px;
@@ -12415,6 +12433,9 @@ html {
   .tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-fields .tf-booking-form-guest-and-room {
     padding: 0px 20px !important;
   }
+  .tf-template-3 .tf-related-tours .tf-slider-item .tf-meta-info .tf-meta-title h2 a {
+    font-size: 20px;
+  }
   .tf-template-3.tf-hotel-single .tf-popup-left {
     width: 100%;
   }
@@ -12470,6 +12491,25 @@ html {
   .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room .tf_acrselection-wrap.tf-show {
     right: 0;
     left: auto;
+  }
+  .tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper {
+    padding: 16px;
+  }
+  .tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .tf-highlights-icon {
+    display: none;
+  }
+  .tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .ft-highlights-details {
+    width: 100%;
+  }
+  .tf-template-3 .tf-include-exclude-wrapper .tf-include-exclude-innter {
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .tf-template-3 .tf-include-exclude-wrapper .tf-include-exclude-innter > div {
+    width: 100%;
+  }
+  .tf-template-3 .tf-include-exclude-wrapper .tf-include-exclude-innter ul {
+    gap: 8px;
   }
   .tf-template-3.tf-hotel-single .tf-available-rooms-wrapper .tf-available-room .tf-available-room-gallery .tf-room-gallery:nth-child(n+1) {
     position: inherit !important;
