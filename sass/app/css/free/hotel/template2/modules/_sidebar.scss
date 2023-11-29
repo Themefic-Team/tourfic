@@ -249,7 +249,6 @@ span.tf-reting-stars {
 .tf-send-inquiry{
     background: #FCF4E8;
     display: flex;
-    width: 100%;
     padding: 56px 80px;
     flex-direction: column;
     align-items: center;
@@ -289,6 +288,7 @@ span.tf-reting-stars {
         display: inline-block;
         text-align: center;
         transition: .3s all ease;
+        text-decoration: none;
         &:hover{
             background-color: #917242;
         }
@@ -345,12 +345,18 @@ span.tf-reting-stars {
     display: flex;
     flex-direction: column;
     gap: 32px;
+    @media #{$max1024}{
+        gap: 16px;
+    }
     .tf-filter-title {
         display: flex;
         justify-content: space-between;
         .tf-section-title {
             margin: 0 !important;
             padding: 0;
+            @media #{$max1024}{
+                font-size: 20px !important;
+            }
         }
         button {
             margin: 0;
@@ -364,6 +370,9 @@ span.tf-reting-stars {
             font-style: normal;
             font-weight: 700;
             line-height: 150%; /* 24px */
+            @media #{$max1024}{
+                font-size: 12px !important;
+            }
         }
     }
     .tf-filter-list-item {

@@ -2500,7 +2500,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 		<div class="tf-available-room-content">
 			<div class="tf-available-room-content-left">
 				<div class="tf-section-title-and-location">
-					<h2 class="tf-section-title"><?php the_title(); ?></h2>
+					<h2 class="tf-section-title"><?php echo tourfic_character_limit_callback( get_the_title(), 25 ); ?></h2>
 					<?php
 					if ( ! empty( $address ) ) {
 					?>

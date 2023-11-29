@@ -6,6 +6,7 @@
     .section-title {
         display: flex;
         justify-content: space-between;
+        margin-bottom: 16px;
     }
 
     .section-title a {
@@ -33,7 +34,7 @@
         padding: 16px 32px;
         display: flex;
         flex-direction: column;
-        gap: 32px;
+        gap: 24px;
     }
 
     .tf-itinerary-title {
@@ -44,10 +45,10 @@
 
     .tf-itinerary-title h4 {
         color: #595349;
-        font-size: 20px;
-        font-family: Josefin Sans;
-        font-weight: 400;
-        line-height: 26px;
+        font-size: 20px !important;
+        font-family: Josefin Sans !important;
+        font-weight: 400 !important;
+        line-height: 26px !important;
         word-wrap: break-word;
     }
 
@@ -86,6 +87,11 @@
 
 
     .section-title h2 {
+        color: #595349;
+        font-size: 32px !important;
+        font-style: normal !important;
+        font-weight: 700 !important;
+        line-height: 120%; /* 38.4px */
         margin: 0;
     }
 
@@ -107,6 +113,11 @@
     }
     .tf-single-itinerary.active .tf-itinerary-title i {
         transform: rotate(180deg);
+    }
+
+    .tf-itinerary-map{
+        margin-top: 32px;
+        margin-bottom: 48px;
     }
 
 }

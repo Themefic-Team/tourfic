@@ -12,6 +12,14 @@
             display: flex;
             flex-direction: column;
             gap: 32px;
+
+            @media #{$max1600}{
+                width: calc(100% - 360px);
+            }
+            @media #{$max1024}{
+                width: calc(100% - 262px);
+                gap: 16px;
+            }
             .tf-details-menu {
                 background: #FCF4E8;
                 padding: 16px 30px;
@@ -51,6 +59,26 @@
                     p {
                         margin: 0;
                         padding: 0;
+                    }
+                    .tf-short-description{
+                        color: #99948D;
+                        font-family: Josefin Sans;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 130%; /* 20.8px */
+                    }
+                    span.tf-see-description{
+                        color: #595349;
+                        font-family: Josefin Sans;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 130%;
+                        cursor: pointer;
+                    }
+                    .tf-full-description{
+                        display: none;
                     }
                 }
                 .tf-overview-popular-facilities {
@@ -92,24 +120,38 @@
                         background: #FCF4E8;
                         i {
                             font-size: 24px;
+                            color: rgb(181, 142, 83);
                         }
                         .tf-feature-block-details {
                             h5 {
                                 color: #595349;
-                                font-size: 20px;
-                                font-style: normal;
-                                font-weight: 700;
+                                font-size: 20px !important;
+                                font-style: normal !important;
+                                font-weight: 700 !important;
                                 line-height: 1.3;
+                            }
+                            p{
+                                color: #99948D;
+                                font-family: Josefin Sans;
+                                font-size: 16px;
+                                font-style: normal;
+                                font-weight: 400;
+                                line-height: 130%; /* 20.8px */
                             }
                         }
                     }
                 }
+                .tf-features-block-wrapper.tf-informations-secations{
+                  margin: 0px;  
+                }
                 .tf-highlights-wrapper { 
                     display: flex;
                     gap: 24px;
-                    padding: 34px 0;
+                    padding: 32px 0;
                     background: #FCF4E8;
                     margin-bottom: 16px;
+                    border-radius: 0px;
+                    box-shadow: none;
                     .tf-highlights-icon { 
                         width: 230px;
                         img { 
@@ -120,7 +162,14 @@
                     }
                     .ft-highlights-details { 
                         width: 80%;
-                        padding-right: 34px;
+                        padding-right: 32px;
+                        h2{
+                            font-weight: 700 !important;
+                            margin-bottom: 24px;
+                        }
+                        p{
+                            color: #99948D;
+                        }
                         ul { 
                             margin: 0;
                             padding: 0;
@@ -146,6 +195,13 @@
         }
         .tf-details-right {
             width: 480px;
+            @media #{$max1600}{
+                width: 320px;
+            }
+            @media #{$max1024}{
+                width: 222px !important;
+                padding: 16px !important;
+            }
             &.tf-archive-right{
                 background-color: #FCF4E8;
                 padding: 32px;                
@@ -173,6 +229,9 @@
                         line-height: 1.5 !important;
                         color: #595349 !important;
                         font-family: Josefin Sans !important;
+                        @media #{$max1024}{
+                            font-size: 12px !important;
+                        }
                     }
                     i{
                         display: none;
@@ -189,6 +248,9 @@
                             font-weight: 400;
                             line-height: 130%;
                             color: #99948D;
+                            @media #{$max1024}{
+                                font-size: 12px !important;
+                            }
                             label{
                                 padding-left: 30px;
                                 line-height: 16px;
@@ -228,6 +290,9 @@
                         margin-top: 6px;
                         span{
                             display: none;
+                        }
+                        @media #{$max1024}{
+                            font-size: 12px !important;
                         }
                     }
                 }

@@ -1,7 +1,7 @@
 <?php if($inc || $exc){ ?>
 <!-- Include Exclude srart -->
 <div class="tf-include-exclude-wrapper">
-    <h2 class="tf-section-title"><? _e("Include/Exclude", "tourfic"); ?></h2>
+    <h2 class="tf-section-title"><?php _e("Include/Exclude", "tourfic"); ?></h2>
     <div class="tf-include-exclude-innter">
         <?php if ( $inc ) { ?>
         <div class="tf-include">

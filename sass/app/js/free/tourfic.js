@@ -1809,6 +1809,11 @@
             $(this).closest('li').siblings().find('a').removeClass('tf-hashlink');
         });
 
+        // Full Description Showing
+        $('.tf-template-3 span.tf-see-description').on('click', function() {
+            $('.tf-short-description').hide();
+            $('.tf-full-description').show(500);
+        });
 
         $('.tf-template-3 .acr-inc , .tf-template-3 .acr-dec').on('click', function() {
 

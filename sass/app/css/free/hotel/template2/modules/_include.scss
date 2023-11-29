@@ -1,4 +1,13 @@
 .tf-include-exclude-wrapper {
+    margin-bottom: 16px;
+    h2{
+        color: #595349;
+        font-size: 32px !important;
+        font-style: normal !important;
+        font-weight: 700 !important;
+        line-height: 120%; /* 38.4px */
+        margin-bottom: 24px;
+    }
     .tf-include-exclude-innter {
         display: flex;
         gap: 40px;

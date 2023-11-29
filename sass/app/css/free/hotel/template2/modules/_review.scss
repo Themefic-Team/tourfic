@@ -1,7 +1,13 @@
 .tf-reviews-wrapper { 
     padding-bottom: 55px !important;
     .tf-section-title{
-        margin: 0 0 .3em 0 !important;
+        color: #595349;
+        font-size: 32px !important;
+        font-style: normal !important;
+        font-weight: 700 !important;
+        line-height: 120%; /* 38.4px */
+        margin-bottom: 8px;
+
     }
 	.tf-reviews-slider { 
 
@@ -72,6 +78,14 @@
 	}
 }
 .tf-questions-wrapper { 
+    h2{
+        color: #595349;
+        font-size: 32px !important;
+        font-style: normal !important;
+        font-weight: 700 !important;
+        line-height: 120%; /* 38.4px */
+        margin-bottom: 24px;
+    }
 	.tf-questions { 
         display: grid;
         gap: 40px;
@@ -109,8 +123,8 @@
                     h3 { 
                         color: #595349;
                         font-size: 16px !important;
-                        font-family: "Josefin Sans", sans-serif;
-                        font-weight: 600;
+                        font-family: "Josefin Sans", sans-serif !important;
+                        font-weight: 600 !important;
                         line-height: 20.80px !important;
                         margin-bottom: 10px;
                         display: flex;
@@ -127,10 +141,21 @@
 }
 
 .tf-policies-wrapper { 
+    h2{
+        color: #595349;
+        font-size: 32px !important;
+        font-style: normal !important;
+        font-weight: 700 !important;
+        line-height: 120%; /* 38.4px */
+        margin-bottom: 24px;
+    }
 	.tf-policies { 
         display: flex;
         flex-direction: column;
         gap: 16px;
+        p{
+            color: #99948D; 
+        }
 		.tf-policy-item { 
             display: flex;
             gap: 16px;

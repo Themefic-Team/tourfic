@@ -1,7 +1,7 @@
 <?php if ( $tour_duration || $info_tour_type || $group_size || $language ) { ?>
 <!--Information Section Start -->
 <div class="tf-overview-wrapper">
-    <div class="tf-features-block-wrapper">
+    <div class="tf-features-block-wrapper tf-informations-secations">
         <?php if ( $tour_duration ) { ?>
         <div class="tf-feature-block">
             <i class="ri-history-line"></i>
@@ -59,7 +59,7 @@
         }
         ?>
         <div class="tf-feature-block">
-            <i class="ri-menu-search-line"></i>
+            <i class="ri-menu-unfold-line"></i>
             <div class="tf-feature-block-details">
                 <h5><?php echo __( 'Tour Type', 'tourfic' ); ?></h5>
                 <p><?php echo esc_html( $info_tour_type ) ?></p>

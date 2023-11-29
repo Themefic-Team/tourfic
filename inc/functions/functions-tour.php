@@ -1936,7 +1936,7 @@ function tf_single_tour_booking_form( $post_id ) {
                             </div>
                             <div class="acr-select">
                                 <div class="acr-dec">-</div>
-                                <input type="number" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>">
+                                <input type="tel" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>">
                                 <div class="acr-inc">+</div>
                             </div>
                         </div>
@@ -1956,7 +1956,7 @@ function tf_single_tour_booking_form( $post_id ) {
                             </div>
                             <div class="acr-select">
                                 <div class="acr-dec">-</div>
-                                <input type="number" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
+                                <input type="tel" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
                                 <div class="acr-inc">+</div>
                             </div>
                         </div>
@@ -1975,7 +1975,7 @@ function tf_single_tour_booking_form( $post_id ) {
                             </div>
                             <div class="acr-select">
                                 <div class="acr-dec">-</div>
-                                <input type="number" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>">
+                                <input type="tel" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>">
                                 <div class="acr-inc">+</div>
                             </div>
                         </div>
@@ -2034,7 +2034,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                         <div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
                                         <div class="acr-select">
                                             <div class="acr-dec">-</div>
-                                            <input type="number" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>">
+                                            <input type="tel" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>">
                                             <div class="acr-inc">+</div>
                                         </div>
                                     </div>
@@ -2044,7 +2044,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                         <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
                                         <div class="acr-select">
                                             <div class="acr-dec">-</div>
-                                            <input type="number" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
+                                            <input type="tel" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
                                             <div class="acr-inc">+</div>
                                         </div>
                                     </div>
@@ -2054,7 +2054,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                         <div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
                                         <div class="acr-select">
                                             <div class="acr-dec">-</div>
-                                            <input type="number" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>">
+                                            <input type="tel" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>">
                                             <div class="acr-inc">+</div>
                                         </div>
                                     </div>
@@ -2829,7 +2829,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 		<div class="tf-available-room-content">
 			<div class="tf-available-room-content-left">
 				<div class="tf-section-title-and-location">
-					<h2 class="tf-section-title"><?php the_title(); ?></h2>
+					<h2 class="tf-section-title"><?php echo tourfic_character_limit_callback( get_the_title(), 25 ); ?></h2>
 					<?php
 					if ( ! empty( $location ) ) {
 					?>
