@@ -29,6 +29,10 @@
         .tf-booking-form-checkin {
             padding-left: 40px;
             padding-right: 40px;
+            @media #{$max1200}{
+                padding-right: 28px;
+                padding-left: 28px;
+            }
             @media #{$max1024}{
                 padding-right: 24px;
                 padding-left: 24px;
@@ -137,6 +141,10 @@
                 align-items: flex-start !important;
                 padding-right: 40px;
                 padding-left: 16px;
+                @media #{$max1200}{
+                    padding-right: 28px !important;
+                    padding-left: 4px !important;
+                }
                 @media #{$max1024}{
                     padding-right: 24px;
                     padding-left: 0px;
@@ -213,6 +221,10 @@
                 padding-left: 40px !important;
                 padding-right: 40px;
                 min-width: 200px;
+                @media #{$max1200}{
+                    padding-right: 28px !important;
+                    padding-left: 28px !important;
+                }
                 @media #{$max1024}{
                     padding-right: 24px !important;
                     padding-left: 24px !important;

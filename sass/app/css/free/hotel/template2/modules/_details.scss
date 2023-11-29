@@ -16,6 +16,9 @@
             @media #{$max1600}{
                 width: calc(100% - 360px);
             }
+            @media #{$max1366}{
+                width: calc(100% - 323px);
+            }
             @media #{$max1024}{
                 width: calc(100% - 262px);
                 gap: 16px;
@@ -198,10 +201,15 @@
             @media #{$max1600}{
                 width: 320px;
             }
+            @media #{$max1366}{
+                width: 283px !important;
+                padding: 32px !important;
+            }
             @media #{$max1024}{
                 width: 222px !important;
                 padding: 16px !important;
             }
+
             &.tf-archive-right{
                 background-color: #FCF4E8;
                 padding: 32px;                

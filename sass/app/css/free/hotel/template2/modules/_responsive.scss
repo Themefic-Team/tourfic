@@ -7,32 +7,32 @@
         // .tf-content-wrapper .tf-details .tf-details-left {
         //     width: calc(100% - 360px);
         // }
-        .tf-available-rooms-wrapper .tf-available-room .tf-available-room-gallery {
-            min-width: 180px;
-            max-width: 180px;
-            position: relative;
-        }
-        .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content {
-            width: auto;
-        }
+        // .tf-available-rooms-wrapper .tf-available-room .tf-available-room-gallery {
+        //     min-width: 180px;
+        //     max-width: 180px;
+        //     position: relative;
+        // }
+        // .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content {
+        //     width: auto;
+        // }
         // .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left{
         //     width: auto;
         // }
-        .tf-available-rooms-wrapper .tf-available-room .tf-available-room-gallery .tf-room-gallery:nth-child(n+2) {
-            width: calc(50% - 5px);
-            aspect-ratio: 1/1;
-            height: fit-content;
-            object-fit: cover;
-        }
-        .tf-reviews-wrapper .tf-reviews-slider .tf-reviews-item {
-            margin-right: 20px !important;
-        }
-        .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-fields>div.tf-booking-form-guest-and-room {
-            padding-left: 20px;
-        }
-        .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-available-room-price {
-            justify-content: flex-end;
-        }
+        // .tf-available-rooms-wrapper .tf-available-room .tf-available-room-gallery .tf-room-gallery:nth-child(n+2) {
+        //     width: calc(50% - 5px);
+        //     aspect-ratio: 1/1;
+        //     height: fit-content;
+        //     object-fit: cover;
+        // }
+        // .tf-reviews-wrapper .tf-reviews-slider .tf-reviews-item {
+        //     margin-right: 20px !important;
+        // }
+        // .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-fields>div.tf-booking-form-guest-and-room {
+        //     padding-left: 20px;
+        // }
+        // .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-available-room-price {
+        //     justify-content: flex-end;
+        // }
         
     }
 
@@ -56,10 +56,10 @@
 }
 @media only screen and (max-width: 1366px) {
     .tf-template-3 {
-        .tf-container{
-            padding: 0px 32px;
-            width: auto;
-        }
+        // .tf-container{
+        //     padding: 0px 32px;
+        //     width: auto;
+        // }
         font-size: 14px;
         .tf-available-room-price.tf-mobile,
         .tf-available-room-off.tf-mobile {
@@ -75,17 +75,17 @@
             width: 150px;
             height: 60px;
         }
-        .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right{
-            width: auto;
-        }
-        .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-fields {
-            width: calc(100% - 48px);
-            padding: 16px 24px;
-        }
+        // .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right{
+        //     width: auto;
+        // }
+        // .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-fields {
+        //     width: calc(100% - 48px);
+        //     padding: 16px 24px;
+        // }
         
-        .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-submit button {
-            padding: 10px 0;
-        }
+        // .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-submit button {
+        //     padding: 10px 0;
+        // }
         // .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-fields>div {
         //     width: 32% !important;
         // }
