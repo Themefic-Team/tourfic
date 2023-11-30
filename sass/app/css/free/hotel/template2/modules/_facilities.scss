@@ -1,4 +1,16 @@
 .tf-facilities-wrapper {
+    h2{
+        color: #595349;
+        font-size: 32px !important;
+        font-style: normal !important;
+        font-weight: 700 !important;
+        line-height: 120%; /* 38.4px */
+        margin-bottom: 24px !important;
+        @media #{$max1024}{
+            font-size: 24px !important;
+            margin-bottom: 16px !important;
+        }
+    }
     .tf-facilities {
         display: flex;
         flex-direction: row;
@@ -7,6 +19,9 @@
         margin-bottom: 32px;
         .tf-facility-item {
             width: 25%;
+            @media #{$max767}{
+                width: 50%;
+            }
             h4 {
                 color: #595349;
                 font-weight: 600;

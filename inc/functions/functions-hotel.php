@@ -1843,7 +1843,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 			<input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type"/>
 			<input type="hidden" name="post_id" value="<?php echo get_the_ID(); ?>"/>
 			<input type="hidden" name="children_ages" value="<?php echo $children_ages; ?>"/>
-			<button type="submit" class="btn-primary tf-submit">Check <br>availability</button>
+			<button type="submit" class="btn-primary tf-submit"><?php _e("Check Availability", "tourfic"); ?></button>
 		</div>
 	</form>
 

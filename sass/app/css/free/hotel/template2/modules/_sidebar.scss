@@ -1,22 +1,38 @@
-.tf-whats-around ul {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+.tf-whats-around {
+    @media #{$max767}{
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+    ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        li {
+            display: flex;
+            justify-content: space-between;
+            @media #{$max1024}{
+                display: flow-root;
+            }
+            @media #{$max767}{
+                display: flex;
+            }
+            span{
+                width: 100% !important;
+                display: block;
+                &:last-child{
+                    text-align: right;
+                }
+            }
+            i {
+                margin-right: 8px;
+                width: 20px;
+            }
+        }
+    }
 }
 
-.tf-whats-around ul li {
-    display: flex;
-    justify-content: space-between;
-    @media #{$max1024}{
-        display: flow-root;
-    }
-    span{
-        width: 100% !important;
-        display: block;
-    }
-}
 
 .tf-single-widgets h2 {
     margin-bottom: 0px;
@@ -24,11 +40,6 @@
     @media #{$max1024}{
         font-size: 24px !important;
     }
-}
-
-.tf-whats-around ul li i {
-    margin-right: 8px;
-    width: 20px;
 }
 
 .tf-location iframe {

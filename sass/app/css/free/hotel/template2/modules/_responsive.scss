@@ -232,7 +232,15 @@
         }
     }
     .tf-template-3.tf-hotel-single{
-        
+        .tf-booking-form{
+            display: flow-root;
+            .tf-booking-form-fields{
+                width: 100% !important;
+            }
+            .tf-booking-form-submit{
+                width: 100% !important;
+            }
+        }
     }
 }
 
@@ -283,10 +291,7 @@
         .tf-available-rooms-wrapper {
             padding: 16px;
         }
-        h2.tf-section-title {
-            font-size: 22px;
-            line-height: 24px;
-        }
+        
         .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content {
             padding: 16px;
         }
@@ -348,17 +353,6 @@
             font-size: 20px;
         }
     }
-    .tf-template-3.tf-hotel-single {
-        .tf-popup-left{
-            width: 100%;
-        }
-        .tf-popup-right{
-            width: 100%;
-        }
-        .tf-popup-body {
-            max-height: 320px;
-        }
-    }
 
     .tf-template-3.tf-tour-single {
         .tf-content-wrapper .tf-details{
@@ -395,6 +389,42 @@
             margin-right: 16px;
             margin-left: 16px;
         }
+    }
+
+    .tf-template-3.tf-hotel-single {
+        .tf-booking-form-wrapper .tf-booking-form span.tf-booking-form-title{
+            font-size: 12px;
+        }
+        .tf-booking-form-wrapper .tf-booking-form .tf-booking-date{
+            font-size: 16px;
+        }
+        .tf-popup-left{
+            width: 100%;
+        }
+        .tf-popup-right{
+            width: 100%;
+        }
+        .tf-popup-body {
+            max-height: 320px;
+        }
+        .tf-content-wrapper .tf-details{
+            display: flow-root;
+            .tf-details-left{
+                width: 100% !important;
+            }
+            .tf-details-right{
+                width: 100% !important;
+                .tf-location.tf-single-widgets{
+                    padding-left: 16px;
+                    padding-right: 16px;
+                }
+            }
+        }
+        #tf-hotel-facilities{
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+
     }
 }
 

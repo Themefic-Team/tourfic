@@ -6,6 +6,12 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 32px;
+        @media #{$max1024}{
+            margin-bottom: 24px;
+        }
+        @media #{$max991}{
+            margin-bottom: 16px;
+        }
         &>h2{
             color: #595349;
             font-size: 24px !important;
@@ -16,6 +22,9 @@
             @media #{$max1024}{
                 font-size: 14px !important;
             }
+        }
+        .tf-filter{
+            padding: 0px;
         }
     }
     .tf-available-rooms {
@@ -259,20 +268,33 @@
             }
         }
     }
-
+    .tf-available-room.tf-desktop-room{
+        @media #{$max991}{
+            display: none;
+        }
+    }
     .tf-available-room.tf-tabs-room{
-        display: flow-root;
+        display: none;
+        @media #{$max991}{
+            display: flow-root;
+        }
         .tf-available-room-gallery{
-            min-width: auto;
-            max-width: none;
+            min-width: auto !important;
+            max-width: none !important;
             display: grid;
             grid-template-columns: 2fr 1fr;
             .tf-room-image{
                 height: 140px;
+                position: relative;
                 img{
                     height: 140px;
                     width: 100%;
                     object-fit: cover;
+                }
+                .tf-available-room-off{
+                    position: absolute;
+                    top: 12px;
+                    left: 12px;
                 }
             }
             .tf-room-gallerys{
@@ -290,18 +312,73 @@
             }
         }
         .tf-available-room-content{
-            width: 100%;
+            width: 100% !important;
             display: flow-root;
             padding: 16px;
             .tf-available-room-content-left{
-                width: 100%;
+                width: 100% !important;
+                .room-heading-price{
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 30px;
+                    margin-bottom: 16px;
+                    h2{
+                        margin: 0;
+                        font-size: 20px !important;
+                    }
+                    .tf-available-room-price{
+                        display: flex;
+                        flex-direction: column;
+                        align-items: end;
+                        .tf-price{
+                            color: #595349;
+                            font-weight: 400;
+                            line-height: 31.2px;
+                            .discount-price {
+                                color: #99948D;
+                                font-family: Josefin Sans;
+                                font-size: 16px;
+                                font-style: normal;
+                                font-weight: 400;
+                                line-height: 130%;
+                                display: flex;
+                                gap: 2px;
+                                justify-content: end;
+                            }
+                            .sale-price {
+                                font-size: 24px;
+                                display: flex;
+                                justify-content: end;
+                                .booking-type {
+                                    font-size: 16px;
+                                }
+                            }
+                        }
+                    }
+                }
             }
             .tf-available-room-content-right{
-                width: 100%;
-
+                width: 100% !important;
+                align-items: start;
                 a.availability{
                     width: 100%;
                     margin-top: 32px;
+                    font-size: 12px;
+                }
+                a.tf_air_service,
+                button{
+                    width: 100%;
+                    font-size: 12px;
+                }
+                .tf-available-room-select{
+                    margin-top: 32px;
+                    margin-bottom: 16px;
+                }
+                .room-submit-wrap{
+                    width: 100%;
+                    .tf-deposit-content{
+                        text-align: left;
+                    }
                 }
             }
         }
