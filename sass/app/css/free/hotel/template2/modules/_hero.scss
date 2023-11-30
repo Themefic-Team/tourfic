@@ -3,9 +3,10 @@
     background-position: center;
     background-repeat: no-repeat;
     margin-bottom: 56px;
-
+    @media #{$max767}{
+        margin-bottom: 16px;
+    }
     .tf-container {
-
         .tf-hero-content {
             min-height: 513px;
             margin: 0;
@@ -18,7 +19,10 @@
                 margin-top: 161px;
                 display: flex;
                 gap: 16px;
-
+                @media #{$max767}{
+                    margin-top: 64px;
+                    padding-right: 16px;
+                }
                 a.tf-share-toggle,
                 a.tf-wishlist {
                     margin: 0;
@@ -97,11 +101,21 @@
                 justify-content: space-between;
                 align-items: flex-end;
                 padding-bottom: 48px;
-
+                @media #{$max1024}{
+                    align-items: center;
+                    padding: 0px 16px 16px 16px;
+                }
                 .tf-head-title {
                     text-align: left;
                     h1{
                         color: #FDF9F3;
+                        @media #{$max1024}{
+                            font-size: 32px !important;
+                        }
+                        @media #{$max767}{
+                            font-size: 20px !important;
+                            margin-bottom: 8px;
+                        }
                     }
                     .tf-title-meta {
                         font-size: 24px;
@@ -110,7 +124,12 @@
                         color: #FDF9F3;
                         display: flex;
                         gap: 8px;
-
+                        @media #{$max1024}{
+                            font-size: 16px !important;
+                        }
+                        @media #{$max767}{
+                            font-size: 12px !important;
+                        }
                         a {
                             color: #FDF9F3;
                             text-decoration: none;
@@ -118,6 +137,12 @@
                             font-family: Josefin Sans;
                             font-weight: 400;
                             line-height: 31.20px;
+                            @media #{$max1024}{
+                                font-size: 16px !important;
+                            }
+                            @media #{$max767}{
+                                font-size: 12px !important;
+                            }
                         }
                     }
                 }
@@ -137,6 +162,10 @@
                         background-size: cover;
                         background-position: center;
                         cursor: pointer;
+                        @media #{$max1024}{
+                            width: 103px;
+                            height: 40px;
+                        }
                     }
                     a {
                         display: flex;
@@ -146,9 +175,10 @@
                         width: 100%;
                         color: #FDF9F3;
 
-                        img {
-                            height: 24px;
-                            width: 24px;
+                        svg {
+                            @media #{$max1024}{
+                                width: 16px !important;
+                            }
                         }
                     }
                 }

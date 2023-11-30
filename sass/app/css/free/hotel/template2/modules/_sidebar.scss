@@ -9,11 +9,21 @@
 .tf-whats-around ul li {
     display: flex;
     justify-content: space-between;
+    @media #{$max1024}{
+        display: flow-root;
+    }
+    span{
+        width: 100% !important;
+        display: block;
+    }
 }
 
 .tf-single-widgets h2 {
     margin-bottom: 0px;
     font-weight: 700 !important;
+    @media #{$max1024}{
+        font-size: 24px !important;
+    }
 }
 
 .tf-whats-around ul li i {
@@ -34,6 +44,9 @@
     display: flex;
     gap: 53px;
     margin-bottom: 24px;
+    @media #{$max1024}{
+        margin-bottom: 16px;
+    }
 }
 
 .tf-review-data-average {
@@ -44,6 +57,9 @@
         font-weight: 400 !important;
         line-height: 52px !important;
         word-wrap: break-word;
+        @media #{$max1024}{
+            font-size: 24px !important;
+        }
     }
 }
 
@@ -114,12 +130,18 @@ button.tf-review-open.button, .tf-reting-field button {
     border: none;
     padding: 12px 0;
     border-radius: 0px;
+    @media #{$max1024}{
+        font-size: 12px;
+    }
 }
 
 .tf-single-widgets {
     display: flex;
     gap: 24px;
     flex-direction: column;
+    @media #{$max1024}{
+        gap: 16px;
+    }
 }
 
 .tf-review-form-wrapper {
@@ -253,6 +275,12 @@ span.tf-reting-stars {
     flex-direction: column;
     align-items: center;
     gap: 24px;
+    @media #{$max1366}{
+        padding: 56px 16px;
+    }
+    @media #{$max1024}{
+        padding: 16px;
+    }
     i{
         font-size: 64px;
     }
@@ -265,6 +293,9 @@ span.tf-reting-stars {
         line-height: 120%;
         margin: 0;
         text-align: center;
+        @media #{$max1024}{
+            font-size: 20px !important;
+        }
     }
     p{
         color: #99948D;
@@ -291,6 +322,9 @@ span.tf-reting-stars {
         text-decoration: none;
         &:hover{
             background-color: #917242;
+        }
+        @media #{$max1024}{
+            font-size: 12px;
         }
     }
 }

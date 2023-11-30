@@ -340,13 +340,13 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                     <li><i class="fas fa-ruler-combined"></i> <?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></li>
                 <?php } ?>
                 <?php if ( $bed ) { ?>
-                    <li><i class="fas fa-bed"></i> <?php echo $bed; ?><?php _e( ' Number of Beds', 'tourfic' ); ?></li>
+                    <li><i class="fas fa-bed"></i> <?php echo $bed; ?><?php _e( ' Beds', 'tourfic' ); ?></li>
                 <?php } ?>
                 <?php if ( $adult_number ) { ?>
                     <li><i class="fas fa-male"></i> <?php echo $adult_number; ?><?php _e( ' Adults', 'tourfic' ); ?></li>
                 <?php } ?>
                 <?php if ( $child_number ) { ?>
-                    <li><i class="fas fa-baby"></i><?php echo $child_number; ?><?php _e( ' Children', 'tourfic' ); ?></li>
+                    <li><i class="fas fa-baby"></i><?php echo $child_number; ?><?php _e( ' Child', 'tourfic' ); ?></li>
                 <?php } ?>
                 <li><a href="#" class="tf-room-detail-popup" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>"><?php _e("View room details", "tourfic"); ?></a></li>
 
@@ -388,18 +388,18 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
         </div>
         <form class="reserve tf-available-room-content-right">
             <?php wp_nonce_field( 'check_room_booking_nonce', 'tf_room_booking_nonce' );?>
-            <div class="tf-cancellation-refundable-text">
-                <span><?php _e("Free cancellation", "tourfic"); ?>
+            <!-- <div class="tf-cancellation-refundable-text">
+                <span><?php //_e("Free cancellation", "tourfic"); ?>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                     <path d="M7.99967 15.1673C4.31777 15.1673 1.33301 12.1825 1.33301 8.50065C1.33301 4.81875 4.31777 1.83398 7.99967 1.83398C11.6815 1.83398 14.6663 4.81875 14.6663 8.50065C14.6663 12.1825 11.6815 15.1673 7.99967 15.1673ZM7.99967 13.834C10.9452 13.834 13.333 11.4462 13.333 8.50065C13.333 5.55513 10.9452 3.16732 7.99967 3.16732C5.05415 3.16732 2.66634 5.55513 2.66634 8.50065C2.66634 11.4462 5.05415 13.834 7.99967 13.834ZM7.33301 5.16732H8.66634V6.50065H7.33301V5.16732ZM7.33301 7.83398H8.66634V11.834H7.33301V7.83398Z" fill="#595349"/>
                     </svg>
                 </span>
-                <span><?php _e("Free refundable", "tourfic"); ?>
+                <span><?php //_e("Free refundable", "tourfic"); ?>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                     <path d="M7.99967 15.1673C4.31777 15.1673 1.33301 12.1825 1.33301 8.50065C1.33301 4.81875 4.31777 1.83398 7.99967 1.83398C11.6815 1.83398 14.6663 4.81875 14.6663 8.50065C14.6663 12.1825 11.6815 15.1673 7.99967 15.1673ZM7.99967 13.834C10.9452 13.834 13.333 11.4462 13.333 8.50065C13.333 5.55513 10.9452 3.16732 7.99967 3.16732C5.05415 3.16732 2.66634 5.55513 2.66634 8.50065C2.66634 11.4462 5.05415 13.834 7.99967 13.834ZM7.33301 5.16732H8.66634V6.50065H7.33301V5.16732ZM7.33301 7.83398H8.66634V11.834H7.33301V7.83398Z" fill="#595349"/>
                     </svg>
                 </span>
-            </div>
+            </div> -->
             <?php
             if(!empty($hotel_discount_type) && !empty($hotel_discount_amount) && ( "percent" == $hotel_discount_type || "fixed" == $hotel_discount_type )){ ?>
             <div class="tf-available-room-off">

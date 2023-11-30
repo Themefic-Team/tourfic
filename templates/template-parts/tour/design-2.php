@@ -366,12 +366,9 @@
                         <div class="tf-container-inner">
                             <div class="section-title">
                                 <h2 class="tf-title"><?php ! empty( tfopt( 'rt-title' ) ) ? esc_html_e( tfopt( 'rt-title' ), "tourfic" ) : _e( "You may also like", "tourfic" ); ?></h2>
-                                <?php
-                                if ( ! empty( tfopt( 'rt-description' ) ) ) { ?>
-                                    <p><?php esc_html_e( tfopt( 'rt-description' ), "tourfic" ) ?></p>
-                                <?php } ?>
+                                
                             </div>
-                            <div class="tf-design-3-slider-items-wrapper tf-upcomming-tours-list-outter tf-mt-40 tf-flex tf-flex-gap-24">
+                            <div class="tf-design-3-slider-items-wrapper tf-upcomming-tours-list-outter tf-flex tf-flex-gap-24">
                                 <?php
                                 while ( $tours->have_posts() ) {
                                     $tours->the_post();

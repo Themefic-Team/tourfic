@@ -2,11 +2,17 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-
+    @media #{$max767}{
+        padding-left: 16px;
+        padding-right: 16px;
+    }
     .section-title {
         display: flex;
         justify-content: space-between;
         margin-bottom: 16px;
+        @media #{$max767}{
+            margin-bottom: 8px;
+        }
     }
 
     .section-title a {
@@ -27,100 +33,117 @@
         align-items: center;
         justify-content: center;
         text-decoration: none;
+        @media #{$max1024}{
+            font-size: 12px !important;
+        }
     }
+    .tf-itinerary-wrapper{
+        padding: 0px;
+        .tf-single-itinerary {
+            background: #FCF4E8;
+            padding: 16px 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
 
-    .tf-single-itinerary {
-        background: #FCF4E8;
-        padding: 16px 32px;
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-    }
+        .tf-itinerary-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .tf-itinerary-title {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .tf-itinerary-title h4 {
-        color: #595349;
-        font-size: 20px !important;
-        font-family: Josefin Sans !important;
-        font-weight: 400 !important;
-        line-height: 26px !important;
-        word-wrap: break-word;
-    }
+        .tf-itinerary-title h4 {
+            color: #595349;
+            font-size: 20px !important;
+            font-family: Josefin Sans !important;
+            font-weight: 400 !important;
+            line-height: 26px !important;
+            word-wrap: break-word;
+            @media #{$max1024}{
+                font-size: 16px !important;
+            }
+        }
 
 
-    span.tf-itinerary-time {
-        padding: 8px 16px;
-        background: #FAEEDC;
-        margin-right: 16px;
-    }
+        span.tf-itinerary-time {
+            padding: 8px 16px;
+            background: #FAEEDC;
+            margin-right: 16px;
+        }
 
-    .tf-itinerary-content {
-        display: flex;
-        gap: 32px;
-    }
+        .tf-itinerary-content {
+            display: flex;
+            gap: 32px;
+            @media #{$max767}{
+                flex-wrap: wrap;
+            }
+        }
 
-    .tf-itinerary-content-details {
-        display: flex;
-        flex-direction: column;
-        width: calc(100% - 320px);
-
-        .tf-itinerary-more-offer{
-            margin-top: 16px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            .tf-itinerary-single-meta{
-                li{
-                    color: #99948D;
-                    font-family: Josefin Sans;
-                    font-size: 16px;
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: 130%; /* 20.8px */
-                    i{
-                        margin-right: 8px;
-                        width: 22px;
-                        font-size: 20px;
-                    }
-                    a{
+        .tf-itinerary-content-details {
+            display: flex;
+            flex-direction: column;
+            width: calc(100% - 320px);
+            @media #{$max1366}{
+                width: calc(100% - 292px);
+            }
+            @media #{$max1024}{
+                width: calc(100% - 204px);
+            }
+            @media #{$max767}{
+                width: 100% !important;
+            }
+            .tf-itinerary-more-offer{
+                margin-top: 16px;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+                .tf-itinerary-single-meta{
+                    li{
                         color: #99948D;
                         font-family: Josefin Sans;
                         font-size: 16px;
                         font-style: normal;
                         font-weight: 400;
                         line-height: 130%; /* 20.8px */
-                        text-decoration: none;
                         i{
                             margin-right: 8px;
                             width: 22px;
                             font-size: 20px;
                         }
+                        a{
+                            color: #99948D;
+                            font-family: Josefin Sans;
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 130%; /* 20.8px */
+                            text-decoration: none;
+                            i{
+                                margin-right: 8px;
+                                width: 22px;
+                                font-size: 20px;
+                            }
+                        }
                     }
                 }
+                
             }
-            
+        }
+
+        .tf-itinerary-content-details ul {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 12px 10px;
+        }
+
+        .tf-itinerary-content-details ul li {
+            width: calc(50% - 5px);
         }
     }
-
-    .tf-itinerary-content-details ul {
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 12px 10px;
-    }
-
-    .tf-itinerary-content-details ul li {
-        width: calc(50% - 5px);
-    }
-
-
 
     .section-title h2 {
         color: #595349;
@@ -129,11 +152,23 @@
         font-weight: 700 !important;
         line-height: 120%; /* 38.4px */
         margin: 0;
+        @media #{$max1024}{
+            font-size: 24px !important;
+        }
     }
 
     .tf-itinerary-content-images {
         height: fit-content;
         width: 320px;
+        @media #{$max1366}{
+            width: 252px;
+        }
+        @media #{$max1366}{
+            width: 179px;
+        }
+        @media #{$max767}{
+            width: 100% !important;
+        }
         .ininerary-other-gallery{
             display: grid;
             grid-template-columns: 1fr 1fr;

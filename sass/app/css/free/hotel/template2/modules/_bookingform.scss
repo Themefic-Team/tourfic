@@ -57,18 +57,14 @@
             line-height: 31.20px;
             text-align: right;
             margin-right: 5px;
-            @media #{$max1024}{
-                font-size: 20px !important;
-            }
+            
         }
         span.tf-booking-form-title {
             font-size: 16px;
             font-weight: 600;
             line-height: 20.80px;
             margin-bottom: 8px;
-            @media #{$max1024}{
-                font-size: 12px !important;
-            }
+            
         }
         span.tf-booking-month {
             color: #595349;
@@ -77,9 +73,7 @@
             flex-direction: column;
             align-items: center;
             text-transform: lowercase;
-            @media #{$max1024}{
-                font-size: 12px !important;
-            }
+            
         }
         .tf-booking-date-wrap {
             display: flex;
@@ -392,6 +386,9 @@
         font-style: normal;
         font-weight: 600;
         line-height: 140%;
+        @media #{$max1024}{
+            font-size: 14px;
+        }
         div{
             margin-left: 5px;
             span{
@@ -401,7 +398,16 @@
                 font-style: normal;
                 font-weight: 600;
                 line-height: 140%;
+                @media #{$max1024}{
+                    font-size: 14px;
+                }
             }
+        }
+    }
+    .acr-select{
+        justify-content: end;
+        @media #{$max1024}{
+            width: 100px;
         }
     }
 
@@ -432,6 +438,9 @@
             font-style: normal !important;
             font-weight: 700 !important;
             line-height: 120% !important;
+            @media #{$max1024}{
+                font-size: 24px !important;
+            }
         }
     }
     .tf-field-group {
@@ -480,6 +489,7 @@
 }
 
 .tf-bottom-booking-bar{
+    width: 100% !important;
     .tf-booking-form-fields{
         display: flex;
         .tf-booking-form-checkinout{

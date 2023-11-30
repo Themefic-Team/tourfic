@@ -7,7 +7,9 @@
         font-weight: 700 !important;
         line-height: 120%; /* 38.4px */
         margin-bottom: 8px;
-
+        @media #{$max1024}{
+            font-size: 24px !important;
+        }
     }
 	.tf-reviews-slider { 
 
@@ -19,6 +21,9 @@
             flex-direction: row;
             gap: 10px;
             min-height: 200px;
+            @media #{$max767}{
+                min-height: auto;
+            }
 			.tf-reviews-avater { 
                 width: 48px;
 				img { 
@@ -57,6 +62,10 @@
 		}
         .slick-list {
             padding: 32px 0 42px;
+            @media #{$max767}{
+                padding-top: 16px;
+                padding-bottom: 16px;
+            }
         }
         button.slide-arrow {
             position: absolute;
@@ -85,12 +94,17 @@
         font-weight: 700 !important;
         line-height: 120%; /* 38.4px */
         margin-bottom: 24px;
+        @media #{$max1024}{
+            font-size: 24px !important;
+        }
     }
 	.tf-questions { 
         display: grid;
         gap: 40px;
         grid-template-columns: 1fr 1fr;
-        
+        @media #{$max767}{
+            grid-template-columns: 1fr;
+        }
 		.tf-questions-col { 
 			.tf-question { 
                 padding: 24px;
@@ -148,6 +162,9 @@
         font-weight: 700 !important;
         line-height: 120%; /* 38.4px */
         margin-bottom: 24px;
+        @media #{$max1024}{
+            font-size: 24px !important;
+        }
     }
 	.tf-policies { 
         display: flex;

@@ -4,6 +4,9 @@
         justify-content: space-between;
         flex-direction: row;
         gap: 40px;
+        @media #{$max1024}{
+            gap: 24px;
+        }
         .tf-archive-search-form{            
             width: 100%;
         }
@@ -48,6 +51,9 @@
                             padding-bottom: 5px;
                             display: inline-block;
                             border-color: transparent;
+                            @media #{$max1024}{
+                                font-size: 12px !important;
+                            }
                             &.tf-hashlink {
                                 border-color: #595349;
                                 color: #595349;
@@ -116,11 +122,20 @@
                     gap: 24px;
                     grid-template-columns: 1fr 1fr 1fr 1fr;
                     margin-bottom: 32px;
+                    @media #{$max1200}{
+                        grid-template-columns: 1fr 1fr 1fr;
+                    }
+                    @media #{$max991}{
+                        grid-template-columns: 1fr 1fr;
+                    }
                     .tf-feature-block {
                         padding: 24px;
                         display: flex;
                         gap: 16px;
                         background: #FCF4E8;
+                        @media #{$max1024}{
+                            padding: 16px !important;
+                        }
                         i {
                             font-size: 24px;
                             color: rgb(181, 142, 83);
@@ -155,8 +170,14 @@
                     margin-bottom: 16px;
                     border-radius: 0px;
                     box-shadow: none;
+                    @media #{$max1024}{
+                        padding: 16px 0px 16px 16px;
+                    }
                     .tf-highlights-icon { 
                         width: 230px;
+                        @media #{$max1024}{
+                            display: none;
+                        }
                         img { 
                             width: 230px;
                             height: 230px;
@@ -166,9 +187,16 @@
                     .ft-highlights-details { 
                         width: 80%;
                         padding-right: 32px;
+                        @media #{$max1024}{
+                            width: 100%;
+                            padding-right: 16px;
+                        }
                         h2{
                             font-weight: 700 !important;
                             margin-bottom: 24px;
+                            @media #{$max1024}{
+                                font-size: 24px !important;
+                            }
                         }
                         p{
                             color: #99948D;
