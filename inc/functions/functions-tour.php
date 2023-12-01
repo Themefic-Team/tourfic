@@ -1940,8 +1940,16 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
                             }
                         }
                     }
-                }
-            }
+                } else {
+					if ( !empty( $meta['group_price'] ) ) {
+						$tour_price[] = $meta['group_price'];
+					}
+				}
+            } else {
+				if(!empty($meta['group_price'])){
+					$tour_price[] = $meta['group_price'];
+				}
+			}
         }else{
             if(!empty($meta['group_price'])){
                 $tour_price[] = $meta['group_price'];
@@ -1994,8 +2002,50 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
                             }
                         }
                     }
-                }
-            }
+                } else {
+					if ( $tour_archive_page_price_settings == "all" ) {
+						if ( !empty( $meta['adult_price'] ) && !$disable_adult_price ) {
+							$tour_price[] = $meta['adult_price'];
+						}
+						if ( !empty( $meta['child_price'] ) && !$disable_adult_price ) {
+							$tour_price[] = $meta['child_price'];
+						}
+					}
+
+					if ( $tour_archive_page_price_settings == "adult" ) {
+						if ( !empty( $meta['adult_price'] ) && !$disable_adult_price ) {
+							$tour_price[] = $meta['adult_price'];
+						}
+					}
+
+					if ( $tour_archive_page_price_settings == "child" ) {
+						if ( !empty( $meta['child_price'] ) && !$disable_adult_price ) {
+							$tour_price[] = $meta['child_price'];
+						}
+					}
+				}
+            } else {
+				if ( $tour_archive_page_price_settings == "all" ) {
+					if ( !empty( $meta['adult_price'] ) && !$disable_adult_price ) {
+						$tour_price[] = $meta['adult_price'];
+					}
+					if ( !empty( $meta['child_price'] ) && !$disable_adult_price ) {
+						$tour_price[] = $meta['child_price'];
+					}
+				}
+
+				if ( $tour_archive_page_price_settings == "adult" ) {
+					if ( !empty( $meta['adult_price'] ) && !$disable_adult_price ) {
+						$tour_price[] = $meta['adult_price'];
+					}
+				}
+
+				if ( $tour_archive_page_price_settings == "child" ) {
+					if ( !empty( $meta['child_price'] ) && !$disable_adult_price ) {
+						$tour_price[] = $meta['child_price'];
+					}
+				}
+			}
         } else{
             if($tour_archive_page_price_settings == "all") {
                 if(!empty($meta['adult_price']) && !$disable_adult_price){
@@ -2183,6 +2233,14 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 											}
 										}
 									}
+								} else {
+									if ( !empty( $meta['group_price'] ) ) {
+										$tour_price[] = $meta['group_price'];
+									}
+								}
+							} else {
+								if ( !empty( $meta['group_price'] ) ) {
+									$tour_price[] = $meta['group_price'];
 								}
 							}
 						}else{
@@ -2235,6 +2293,48 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 												}
 											}
 										}
+									}
+								} else {
+									if($tour_archive_page_price_settings == "all") {
+										if(!empty($meta['adult_price']) && !$disable_adult_price){
+											$tour_price[] = $meta['adult_price'];
+										}
+										if(!empty($meta['child_price']) && !$disable_adult_price){
+											$tour_price[] = $meta['child_price'];
+										}
+									}
+
+									if($tour_archive_page_price_settings == "adult") {
+										if(!empty($meta['adult_price']) && !$disable_adult_price){
+											$tour_price[] = $meta['adult_price'];
+										}
+									}
+
+									if($tour_archive_page_price_settings == "child") {
+										if(!empty($meta['child_price']) && !$disable_adult_price){
+											$tour_price[] = $meta['child_price'];
+										}
+									}
+								}
+							} else {
+								if ( $tour_archive_page_price_settings == "all" ) {
+									if ( !empty( $meta['adult_price'] ) && !$disable_adult_price ) {
+										$tour_price[] = $meta['adult_price'];
+									}
+									if ( !empty( $meta['child_price'] ) && !$disable_adult_price ) {
+										$tour_price[] = $meta['child_price'];
+									}
+								}
+
+								if ( $tour_archive_page_price_settings == "adult" ) {
+									if ( !empty( $meta['adult_price'] ) && !$disable_adult_price ) {
+										$tour_price[] = $meta['adult_price'];
+									}
+								}
+
+								if ( $tour_archive_page_price_settings == "child" ) {
+									if ( !empty( $meta['child_price'] ) && !$disable_adult_price ) {
+										$tour_price[] = $meta['child_price'];
 									}
 								}
 							}
