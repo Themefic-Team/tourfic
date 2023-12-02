@@ -104,39 +104,7 @@
         }
     }
 }
-// @media only screen and (max-width: 1240px) {
-//     .tf-template-3.tf-hotel-single {
-//         .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content {
-//             display: flow-root;
-//         }
-//         .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-right{
-//             width: auto;
-//             display: flow-root;
-//         }
-//         .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-available-room-price{
-//             margin-bottom: 0px;
-//             justify-content: start;
-//         }
-//         .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-cancellation-refundable-text{
-//             align-items: start;
-//         }
-//         .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-deposit-content {
-//             text-align: left;
-//         }
-//         .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-available-room-select{
-//             align-items: center;
-//         }
-//         .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-available-room-select select{
-//             margin-left: 15px;
-//         }
 
-//         .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkin,  
-//         .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkout{
-//             padding-left: 40px;
-//             padding-right: 40px;
-//         }
-//     }
-// }
 @media only screen and (max-width: 1024px) {
     .tf-template-3.tf-tour-single{
         .tf-content-wrapper .tf-details .tf-details-left {
@@ -267,99 +235,77 @@
         .tf-content-wrapper .tf-details .tf-details-left .tf-details-menu ul {
             gap: 16px;
         }
-        .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content{
-            display: flow-root;
-        }
-        .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left {
-            width: 100%;
-        }
-        .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right{
-            display: flow-root;
-        }
-        .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-available-room-price,
-        .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-cancellation-refundable-text {
-            justify-content: start;
-            align-items: start;
-        }
-        
-        
-        .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area .tf-hero-gallery-videos>div {
-            width: 52px;
-            height: 32px;
-        }
-        
         .tf-template-3 {
             overflow: hidden;
         }
         .tf-content-wrapper .tf-details .tf-details-left .tf-details-menu {
             padding: 16px;
         }
-        .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-popular-facilities>ul li {
-            width: 50%;
-        }
-        .tf-available-rooms-wrapper {
-            padding: 16px;
-        }
-        
         .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content {
             padding: 16px;
-        }
-        .tf-available-rooms-head>h2 {
-            color: #595349;
-            font-size: 18px;
-            line-height: 21px;
-        }
-        .tf-filter img {
-            width: 18px;
-        }
-        .tf-filter {
-            padding: 0;
-        }
-        .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper {
-            padding: 0 16px;
-        }
-        .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content {
-            width: calc(100% - 32px);
-            gap: 24px;
-        }
-        .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-cancellation-refundable-text {
-            padding-right: 10px;
-            width: auto;
         }
         .tf-bottom-booking-bar .tf-bottom-booking-field{
             width: auto !important;
         }
-        
-        .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-fields{
-            display: flow-root;
-            width: 100%;
-            >div{
-                width: auto !important;
-                border-right: 0px solid;
-                padding-right: 0px !important;
-            }
-            .tf-booking-form-location{
-                padding-left: 0px;
-            }
-            .tf-booking-form-location .tf-booking-location-wrap{
-                max-width: none !important;
-                width: 100%;
-                margin-bottom: 15px;
-            }
-            .tf-booking-form-checkin, .tf-booking-form-checkout{
-                float: left;
-                border-right: 1px solid #D6D4D2;
-                width: 32% !important;
-                padding: 0px 20px !important;
-                max-width: none;
-            }
-            .tf-booking-form-guest-and-room{
-                padding: 0px 20px !important;
-            }
-        }
-
         .tf-related-tours .tf-slider-item .tf-meta-info .tf-meta-title h2 a{
             font-size: 20px;
+        }
+
+        .tf-archive-details{
+            .tf-available-room{
+                display: flow-root;
+                .tf-available-room-gallery{
+                    height: 120px !important;
+                    max-width: none !important;
+                    .tf-room-gallery:nth-child(n+2){
+                        width: 48px !important;
+                        height: 28px !important;
+                        svg{
+                            width: 10px !important
+                        }
+                    }
+                }
+                .tf-available-room-content{
+                    width: 100% !important;
+                    display: flow-root;
+                    .tf-available-room-content-left{
+                        width: 100% !important;
+                        .tf-card-heading-info{
+                            display: flex;
+                            justify-content: space-between;
+                            margin-bottom: 24px;
+                            .tf-section-title-and-location{
+                                margin-bottom: 0px;
+                                h2{
+                                    margin-bottom: 6px;
+                                }
+                                .tf-title-location{
+                                    margin: 0px;
+                                }
+                            }
+                            .tf-mobile.tf-pricing-info{
+                                display: flex;
+                                width: 120px;
+                                flex-direction: column;
+                                align-items: end;
+                            }
+                        }
+                        ul{
+                            margin-bottom: 24px !important;
+                        }
+                    }
+                    .tf-available-room-content-right{
+                        width: 100% !important;
+                        display: flow-root;
+                        .tf-card-pricing-heading{
+                            display: none;
+                        }
+                        a{
+                            width: 100% !important;
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -436,88 +382,3 @@
 
     }
 }
-
-// @media only screen and (max-width: 640px) {
-//     .tf-template-3{
-//         .tf-available-rooms-wrapper .tf-available-room{
-//             display: flow-root;
-//         }
-//         .tf-available-rooms-wrapper .tf-available-room .tf-available-room-gallery{
-//             min-width: auto;
-//             width: 100%;
-//             max-width: none !important;
-//         }
-//         .tf-available-rooms-wrapper .tf-available-room .tf-available-room-gallery .tf-room-gallery {
-//             &:nth-child(n+1) {
-//                 position: static !important;
-//             }
-//             &:nth-child(n+2) {
-//                 position: absolute !important;
-//             }
-//         }
-//         .tf-content-wrapper .tf-details .tf-details-right .tf_widget .tf-filter ul li > span{
-//             display: none;
-//         }
-//         .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right a.view-hotel{
-//             min-width: auto;
-//             display: block;
-//         }
-//         .tf-hero-section-wrap .tf-container .tf-archive-hero-content .tf-head-title{
-//             display: flow-root;
-//         }
-//         .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-fields{
-//             display: flow-root;
-//             .tf-booking-form-checkin, .tf-booking-form-checkout{
-//                 padding: 0px 10px !important;
-//             }
-//             .tf-booking-form-guest-and-room{
-//                 padding: 0px 10px !important;
-//             }
-//         }
-//         .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-checkinout,
-//         .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room,
-//         .tf-bottom-booking-bar .tf-booking-form-fields .tf-bottom-booking-field.check-in-time-div select{
-//             padding: 0px 10px;
-//         }
-//         .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room .tf_acrselection-wrap.tf-show{
-//             right: 0;
-//             left: auto;
-//         }
-//         .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper{
-//             padding: 16px;
-//         }
-//         .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .tf-highlights-icon{
-//             display: none;
-//         }
-//         .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .ft-highlights-details{
-//             width: 100%;
-//         }
-//         .tf-include-exclude-wrapper .tf-include-exclude-innter{
-//             flex-wrap: wrap;
-//             gap: 24px;
-//         }
-//         .tf-include-exclude-wrapper .tf-include-exclude-innter > div {
-//             width: 100%;
-//         }
-//         .tf-include-exclude-wrapper .tf-include-exclude-innter ul{
-//             gap: 8px;
-//         }
-//     }
-//     .tf-template-3.tf-hotel-single {
-//         .tf-available-rooms-wrapper .tf-available-room .tf-available-room-gallery .tf-room-gallery {
-//             &:nth-child(n+1) {
-//                 position: inherit !important;
-//             }
-//             &:nth-child(n+2) {
-//                 position: inherit !important;
-//             }
-//         }
-//         .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content{
-//             width: auto;
-//         }
-//         .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.availability{
-//             display: block;
-//             min-width: auto;
-//         }
-//     }
-// }

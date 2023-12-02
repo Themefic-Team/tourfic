@@ -181,6 +181,11 @@
                         margin-left: 6px;
                     }
                 }
+                .tf-card-pricing-heading{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: end;
+                }
                 .tf-available-room-price {
                     display: flex;
                     align-items: center;
@@ -555,9 +560,11 @@
                         &:hover{
                             background-color: #917242;
                         }
+                        @media #{$max1366}{
+                            padding: 12px 32px;
+                        }
                         @media #{$max1200}{
                             font-size: 12px !important;
-                            padding: 12px 32px;
                         }
                     }
                 }

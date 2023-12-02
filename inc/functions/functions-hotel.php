@@ -2499,6 +2499,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 		</div>
 		<div class="tf-available-room-content">
 			<div class="tf-available-room-content-left">
+				<div class="tf-card-heading-info">
 				<div class="tf-section-title-and-location">
 					<h2 class="tf-section-title"><?php echo tourfic_character_limit_callback( get_the_title(), 25 ); ?></h2>
 					<?php
@@ -2532,6 +2533,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 						</span>
 					</div>
 				</div>
+				</div>
 				<?php if ( $features ) { ?>
 				<ul>
 				<?php foreach ( $features as $tfkey => $feature ) {
@@ -2558,20 +2560,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 				<?php } ?>
 			</div>
 			<div class="tf-available-room-content-right">
-				<div class="tf-cancellation-refundable-text">
-					<span>
-						<?php _e("Free cancellation", "tourfic"); ?> 
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-						<path d="M7.99967 15.1673C4.31777 15.1673 1.33301 12.1825 1.33301 8.50065C1.33301 4.81875 4.31777 1.83398 7.99967 1.83398C11.6815 1.83398 14.6663 4.81875 14.6663 8.50065C14.6663 12.1825 11.6815 15.1673 7.99967 15.1673ZM7.99967 13.834C10.9452 13.834 13.333 11.4462 13.333 8.50065C13.333 5.55513 10.9452 3.16732 7.99967 3.16732C5.05415 3.16732 2.66634 5.55513 2.66634 8.50065C2.66634 11.4462 5.05415 13.834 7.99967 13.834ZM7.33301 5.16732H8.66634V6.50065H7.33301V5.16732ZM7.33301 7.83398H8.66634V11.834H7.33301V7.83398Z" fill="#595349"></path>
-						</svg>
-					</span>
-					<span>
-						<?php _e("Free refundable", "tourfic"); ?> 
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-						<path d="M7.99967 15.1673C4.31777 15.1673 1.33301 12.1825 1.33301 8.50065C1.33301 4.81875 4.31777 1.83398 7.99967 1.83398C11.6815 1.83398 14.6663 4.81875 14.6663 8.50065C14.6663 12.1825 11.6815 15.1673 7.99967 15.1673ZM7.99967 13.834C10.9452 13.834 13.333 11.4462 13.333 8.50065C13.333 5.55513 10.9452 3.16732 7.99967 3.16732C5.05415 3.16732 2.66634 5.55513 2.66634 8.50065C2.66634 11.4462 5.05415 13.834 7.99967 13.834ZM7.33301 5.16732H8.66634V6.50065H7.33301V5.16732ZM7.33301 7.83398H8.66634V11.834H7.33301V7.83398Z" fill="#595349"></path>
-						</svg>
-					</span>
-				</div>
+				<div class="tf-card-pricing-heading">
 				<?php if ( ! empty( $discount_amount ) ){ ?>
 					<div class="tf-available-room-off">
 						<span>
@@ -2589,8 +2578,9 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 							echo " $lowest_price";
 						endif; ?>
 					</span>
-				</div>                       
-				<a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php _e("See available rooms", "tourfic"); ?></a>
+				</div>
+				</div>              
+				<a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php _e("Available rooms", "tourfic"); ?></a>
 			</div>
 		</div>
 	</div>

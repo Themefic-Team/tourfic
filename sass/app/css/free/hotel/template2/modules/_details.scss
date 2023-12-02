@@ -242,6 +242,9 @@
                 background-color: #FCF4E8;
                 padding: 32px;                
                 width: 416px;
+                @media #{$max991}{
+                    display: none;
+                }
             }
 
             .tf_widget{
@@ -383,6 +386,13 @@
             }
             .tf_widget.widget_tf_price_filters{
                 margin-bottom: 54px;
+            }
+        }
+    }
+    .tf-archive-details{
+        .tf-details-left{
+            @media #{$max991}{
+                width: 100% !important;
             }
         }
     }
