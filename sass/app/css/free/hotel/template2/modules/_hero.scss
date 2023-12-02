@@ -11,7 +11,9 @@
             min-height: 513px;
             margin: 0;
             padding: 0;
-
+            @media #{$max1024}{
+                min-height: 350px;
+            }
             .tf-wish-and-share {
                 display: flex;
                 justify-content: flex-end;
@@ -103,7 +105,7 @@
                 padding-bottom: 48px;
                 @media #{$max1024}{
                     align-items: center;
-                    padding: 0px 16px 16px 16px;
+                    padding: 0px 0 30px 0;
                 }
                 .tf-head-title {
                     text-align: left;
@@ -188,14 +190,25 @@
             display: flex;
             justify-content: flex-end;
             .tf-head-title {
-                margin: 0 0 48px 0;
+                padding: 0 0 48px 0;
                 display: flex;
                 align-items: center;
                 gap: 32px;
                 color: #FDF9F3;
+                @media #{$max1024}{
+                    align-items: center;
+                    padding: 0px 0 30px 0;
+                }
+                @media #{$max767}{
+                    align-items: center;
+                    padding: 0px 16px 16px 16px;
+                }
                 h1{
                     color: #FDF9F3;
                     margin: 0px;
+                    @media #{$max767}{
+                        font-size: 20px !important;
+                    }
                 }
             }
             .tf-title-meta {
