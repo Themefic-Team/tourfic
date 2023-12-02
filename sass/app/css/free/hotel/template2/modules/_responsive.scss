@@ -43,6 +43,15 @@
 }
 
 @media only screen and (max-width: 1280px) {
+
+    .tf-template-3{
+        .tf-available-rooms-wrapper .tf-available-rooms-head{
+            margin-bottom: 16px;
+        }
+        .tf-available-rooms-wrapper .tf-available-rooms-head > h2{
+            font-size: 16px !important;
+        }
+    }
     .tf-template-3.tf-hotel-single{
         .tf-content-wrapper .tf-details{
             gap: 24px;

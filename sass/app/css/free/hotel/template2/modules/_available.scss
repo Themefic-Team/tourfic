@@ -100,6 +100,9 @@
                 @media #{$max1366}{
                     width: calc(100% - 206px);
                 }
+                @media #{$max1024}{
+                    width: calc(100% - 177px);
+                }
                 h3 {
                     margin-bottom: 20px;
                 }
@@ -119,10 +122,16 @@
                     }
                     li {
                         display: flex;
+                        @media #{$max1024}{
+                            font-size: 14px;
+                        }
                         i {
                             margin-right: 8px;
                             font-size: 20px;
                             width: 20px;
+                            @media #{$max1024}{
+                                font-size: 14px;
+                            }
                         }
                         a {
                             color: #595349;
@@ -506,10 +515,14 @@
                             margin-top: 6px;
                             @media #{$max1024}{
                                 margin-bottom: 36px;
+                                font-size: 14px;
                             }
                             i{
                                 margin-right: 8px;
                                 font-size: 20px;
+                                @media #{$max1024}{
+                                    font-size: 14px;
+                                }
                             }
                         }
                     }
