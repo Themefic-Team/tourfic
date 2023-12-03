@@ -2501,7 +2501,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 			<div class="tf-available-room-content-left">
 				<div class="tf-card-heading-info">
 				<div class="tf-section-title-and-location">
-					<h2 class="tf-section-title"><?php echo tourfic_character_limit_callback( get_the_title(), 25 ); ?></h2>
+					<h2 class="tf-section-title"><?php echo tourfic_character_limit_callback( get_the_title(), 55 ); ?></h2>
 					<?php
 					if ( ! empty( $address ) ) {
 					?>
@@ -2509,7 +2509,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 						<div class="location-icon">
 							<i class="ri-map-pin-line"></i>
 						</div>
-						<span><?php echo tourfic_character_limit_callback( esc_html( $address ), 35 ); ?></span>
+						<span><?php echo tourfic_character_limit_callback( esc_html( $address ), 65 ); ?></span>
 					</div>
 					<?php } ?>
 				</div>
@@ -2546,7 +2546,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 				} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'c' ) {
 					$feature_icon = ! empty( $feature_meta['icon-c'] ) ? '<img src="' . $feature_meta['icon-c'] . '" style="min-width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />' : '';
 				}
-				if ( $tfkey < 8 ) {
+				if ( $tfkey < 6 ) {
 				?>
 					<li>
 					<?php

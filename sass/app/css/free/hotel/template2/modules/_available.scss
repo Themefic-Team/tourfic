@@ -156,6 +156,8 @@
             padding: 24px;
             .tf-available-room-content-left {
                 width: 395px;
+                display: flex;
+                flex-direction: column;
                 @media #{$max1366}{
                     width: calc(100% - 206px);
                 }
@@ -173,7 +175,6 @@
                     margin: 0;
                     padding: 0;
                     display: grid;
-                    margin-bottom: 32px;
                     grid-template-columns: 1fr 1fr;
                     gap: 12px 5px;
                     &:last-child {
@@ -204,6 +205,10 @@
                     font-weight: 600 !important;
                     font-family: "Josefin Sans", sans-serif !important;
                     margin-bottom: 16px;
+                    margin-top: auto;
+                    @media #{$max991}{
+                        margin-top: 16px;
+                    }
                 }
             }
             .tf-available-room-content-right {
@@ -486,7 +491,8 @@
                 min-width: 283px;
                 max-width: 283px;
                 position: relative;
-                height: auto;
+                min-height: 328px;
+                max-height: 328px;
                 @media #{$max1200}{
                     min-width: 222px;
                     max-width: 222px;
@@ -566,8 +572,12 @@
             }
             .tf-available-room-content {
                 .tf-available-room-content-left {
+                    display: flex;
+                    flex-direction: column;
+                    ul{
+                        margin-top: auto;
+                    }
                     .tf-section-title-and-location {
-                        margin-bottom: 64px;
                         .tf-section-title {
                             margin: 0 0 10px 0;
                             @media #{$max1200}{
@@ -610,7 +620,7 @@
                         font-weight: 700;
                         line-height: 24px;
                         background: #B58E53;
-                        padding: 12px 40px;
+                        padding: 12px 32px;
                         text-decoration: none;
                         display: inline-block;
                         text-align: center;

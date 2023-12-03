@@ -105,6 +105,89 @@
     }
 }
 
+@media only screen and (min-width: 1025px) and (max-width: 1165px) {
+    .tf-template-3 {
+        .tf-available-archive-hetels-wrapper {
+            .tf-archive-available-rooms .tf-available-room {
+                .tf-available-room-gallery {
+                    min-height: auto;
+                    max-height: none;
+                    height: auto;
+                }
+                .tf-available-room-content{
+                    padding: 14px;
+                    .tf-available-room-content-left{
+                        width: calc(100% - 154px);
+                        .tf-card-heading-info{
+                            margin-bottom: 32px;
+                        }
+                    }
+                    .tf-available-room-content-right{
+                        width: 130px;
+                    }
+                }
+            }
+        }
+        .tf-archive-search-form.tf-booking-form-wrapper{
+            .tf-booking-form{
+                .tf-booking-form-fields{
+                    .tf-booking-form-checkout,
+                    .tf-booking-form-checkin{
+                        padding-left: 10px !important;
+                        padding-right: 10px !important;
+                        max-width: none;
+                        width: 20%;
+                        .tf-booking-date{
+                            font-size: 20px;
+                        }
+                        .tf-duration span{
+                            margin: 0px 5px;
+                        }
+                    }
+                    .tf-booking-form-guest-and-room{
+                        padding-left: 10px !important;
+                        padding-right: 10px !important;
+                        width: 35% !important;
+                        min-width: auto;
+                        .tf-booking-date{
+                            font-size: 20px;
+                        }
+                    }
+                    .tf-booking-form-location{
+                        padding-right: 10px !important;
+                        width: 25% !important;
+                    }
+                }
+                .tf-tour-archive-block{
+                    .tf-booking-form-checkout,
+                    .tf-booking-form-checkin{
+                        padding-left: 10px !important;
+                        padding-right: 10px !important;
+                        .tf-booking-date{
+                            font-size: 20px;
+                        }
+                        .tf-duration span{
+                            margin: 0px 5px;
+                        }
+                    }
+                    .tf-booking-form-guest-and-room{
+                        padding-left: 10px !important;
+                        padding-right: 10px !important;
+                        width: 20% !important;
+                        min-width: auto;
+                        .tf-booking-date{
+                            font-size: 20px;
+                        }
+                    }
+                    .tf-booking-form-location{
+                        padding-right: 10px !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 1024px) {
     .tf-template-3.tf-tour-single{
         .tf-content-wrapper .tf-details .tf-details-left {
@@ -150,41 +233,9 @@
     }
 
     .tf-template-3 {
-        font-size: 14px;
-        // .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content{
-        //     display: flex;
-        //     width: 100%;
-        // }
-        // .tf-content-wrapper .tf-details .tf-details-right.tf-archive-right{
-        //     width: auto !important;
-        // }
         .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right a.view-hotel{
             min-width: 95px;
         }
-        // .tf-content-wrapper .tf-details {
-        //     display: flex;
-        //     flex-direction: column;
-        // }
-        // .tf-content-wrapper .tf-details>div {
-        //     width: 100% !important;
-        // }
-        // .tf-facilities-wrapper .tf-facilities .tf-facility-item {
-        //     width: 33.33%;
-        // }
-        // .tf-questions-wrapper .tf-questions {
-        //     display: flex;
-        //     flex-direction: column;
-        //     gap: 0;
-        // }
-        // .tf-questions-wrapper .tf-questions>div {
-        //     width: 100%;
-        // }
-        // .tf-head-title {
-        //     text-align: left;
-        // }
-        // .tf-head-title h1 {
-        //     font-size: 20px;
-        // }
         .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area .tf-hero-gallery-videos>div {
             width: 104px;
             height: 40px;
@@ -201,9 +252,6 @@
         .tf-hero-section-wrap .tf-container .tf-hero-content {
             min-height: 267px;
         }
-        // .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share {
-        //     margin-top: 90px;
-        // }
         .tf-details-menu.tf-sticky-menu {
             top: 90px;
         }
@@ -401,6 +449,10 @@
                         padding: 0px !important;
                         border-right: 0px solid !important;
                         margin-bottom: 12px !important;
+                        #tf-locationautocomplete-list,
+                        #tf-destinationautocomplete-list{
+                            width: 100% !important;
+                        }
                     }
                     .tf-booking-form-checkin{
                         width: 31% !important;
