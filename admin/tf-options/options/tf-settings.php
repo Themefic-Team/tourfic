@@ -3479,6 +3479,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'r-apartment',
 					'class'    => 'disable-sortable',
 					'type'     => 'repeater',
+					'button_title' => __( 'Add New', 'tourfic' ),
 					'label'    => __( 'Review Fields for Apartments', 'tourfic' ),
 					'subtitle' => __( 'Design customer review fields for apartments. Custom fields are permitted.', 'tourfic' ),
 					'max'      => '6',
