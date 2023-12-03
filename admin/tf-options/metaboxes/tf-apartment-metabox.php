@@ -295,6 +295,73 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'attributes'  => array( 'min' => 0 ),
 					'field_width' => 50,
 				),
+				//Booking Type
+				array(
+					'id'      => 'apt-booking-by',
+					'type'    => 'select',
+					'label'   => __( 'Booking Type', 'tourfic' ),
+					'options' => array(
+						'1' => __( 'Default Booking (WooCommerce)', 'tourfic' ),
+						'2' => __( 'External Booking (Pro)', 'tourfic' ),
+					),
+					'default' => '2',
+				),
+				array(
+					'id'          => '',
+					'type'        => 'text',
+					'label'       => __( 'External Booking URL', 'tourfic' ),
+					'placeholder' => __( 'https://website.com', 'tourfic' ),
+					'is_pro'      => true,
+					'dependency'  => array( 'apt-booking-by', '==', '2' ),
+				),
+				array(
+					'id'        => '',
+					'type'      => 'switch',
+					'label'     => __( 'Hide Booking Form', 'tourfic' ),
+					'subtitle' => __( 'Enable this option to hide the booking form from the single hotel page.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'is_pro'  => true,
+					'dependency' => array( 'apt-booking-by', '==', '2' ),
+				),
+				array(
+					'id'        => '',
+					'type'      => 'switch',
+					'label'     => __( 'Hide Price', 'tourfic' ),
+					'subtitle' => __( 'Enable this option to hide the price from the single hotel page.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'is_pro'  => true,
+					'dependency' => array( 'apt-booking-by', '==', '2' ),
+				),
+				array(
+					'id'        => '',
+					'type'      => 'switch',
+					'label'     => __( 'Allow Attribute', 'tourfic' ),
+					'subtitle'  => __( 'If attribute allow, You can able to add custom Attribute', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'is_pro'    => true
+				),
+				array(
+					'id'          => '',
+					'type'        => 'textarea',
+					'label'       => __( 'Query Attribute', 'tourfic' ),
+					'placeholder' => __( 'adult={adult}&child={child}&infant={infant}', 'tourfic' ),
+					'is_pro'      => true
+				),
+				array(
+					'id'      => 'booking-notice',
+					'type'    => 'notice',
+					'class'   => 'info',
+					'title'   => __( 'Query Attribute List', 'tourfic' ),
+					'content' => __( 'You can use the following placeholders in the Query Attribute body:', 'tourfic' ) . '<br><br><strong>{adult} </strong> : To Display Adult Number from Search.<br>
+					<strong>{child} </strong> : To Display Child Number from Search.<br>
+					<strong>{infant} </strong> : To display the infant number from Search.<br>
+					<strong>{checkin} </strong> : To display the Checkin date from Search.<br>
+					<strong>{checkout} </strong> : To display the Checkout date from Search.<br>',
+					'is_pro'  => true
+				),
 				/*array(
 					'id'       => 'weekly_discount',
 					'type'     => 'number',

@@ -1,4 +1,6 @@
 <?php
+$tf_booking_type = '1';
+$tf_booking_url = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = '';
 if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 	$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 	$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
