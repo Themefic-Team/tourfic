@@ -166,6 +166,10 @@
                     $('.archive_ajax_result').unblock();
                     $('#tf_ajax_searchresult_loader').hide();
                     $('.archive_ajax_result').html(data);
+                    // Filter Popup Removed
+                    if ($('.tf-details-right').length > 0) {
+                        $('.tf-details-right').removeClass('tf-filter-show');
+                    }
                     // @KK show notice in every success request
                     notyf.success(tf_params.ajax_result_success);
                 },
@@ -1807,6 +1811,11 @@
         //Room Filter Showing 
         $('.tf-template-3 .tf-available-rooms-head .tf-filter').on('click', function() {
             $('.tf-room-filter').toggleClass('tf-filter-show');
+        });
+
+        //Archive Filter Showing
+        $('.tf-template-3 .tf-archive-filter-showing').on('click', function() {
+            $('.tf-archive-right').toggleClass('tf-filter-show');
         });
 
         //Search Form Showing

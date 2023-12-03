@@ -249,6 +249,10 @@
                 width: 416px;
                 @media #{$max991}{
                     display: none;
+                    position: absolute;
+                    width: 100% !important;
+                    z-index: 99;
+                    top: 200px;
                 }
             }
 
@@ -392,6 +396,9 @@
             .tf_widget.widget_tf_price_filters{
                 margin-bottom: 54px;
             }
+        }
+        .tf-archive-right.tf-filter-show{
+            display: block;
         }
     }
     .tf-archive-details{

@@ -10233,6 +10233,10 @@ html {
 @media only screen and (max-width: 991.98px) {
   .tf-template-3 .tf-content-wrapper .tf-details .tf-details-right.tf-archive-right {
     display: none;
+    position: absolute;
+    width: 100% !important;
+    z-index: 99;
+    top: 200px;
   }
 }
 .tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget {
@@ -10378,6 +10382,9 @@ html {
 }
 .tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget.widget_tf_price_filters {
   margin-bottom: 54px;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-archive-right.tf-filter-show {
+  display: block;
 }
 @media only screen and (max-width: 991.98px) {
   .tf-template-3 .tf-content-wrapper .tf-archive-details .tf-details-left {
@@ -13426,6 +13433,9 @@ html {
   }
   .tf-template-3.tf-tour-single .tf-content-wrapper .tf-details .tf-details-right {
     width: 260px !important;
+  }
+  .tf-template-3 .tf-archive-details.tf-details {
+    position: relative;
   }
   .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right a.view-hotel {
     min-width: 95px;
