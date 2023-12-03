@@ -1182,7 +1182,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 							<div class="acr-label"><?php _e("Adults", "tourfic"); ?></div>
 							<div class="acr-select">
 								<div class="acr-dec">-</div>
-								<input type="number" name="adults" id="adults" min="1" value="1">
+								<input type="tel" name="adults" id="adults" min="1" value="1">
 								<div class="acr-inc">+</div>
 							</div>
 						</div>
@@ -1190,7 +1190,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 							<div class="acr-label"><?php _e("Children", "tourfic"); ?></div>
 							<div class="acr-select">
 								<div class="acr-dec">-</div>
-								<input type="number" name="childrens" id="children" min="0" value="0">
+								<input type="tel" name="childrens" id="children" min="0" value="0">
 								<div class="acr-inc">+</div>
 							</div>
 						</div>
@@ -1199,7 +1199,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 							<div class="acr-label"><?php _e("Rooms", "tourfic"); ?></div>
 							<div class="acr-select">
 								<div class="acr-dec">-</div>
-								<input type="number" name="room" id="room" min="1" value="1">
+								<input type="tel" name="room" id="room" min="1" value="1">
 								<div class="acr-inc">+</div>
 							</div>
 						</div>

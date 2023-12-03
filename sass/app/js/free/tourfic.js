@@ -1322,7 +1322,7 @@
         var postsCount = $('.tf-posts-count').html();
         $('.tf-total-results').find('span').html(postsCount);
 
-//Sidebar widget js
+        //Sidebar widget js
         $('.tf-widget-title').on('click', function () {
             $(this).find('i').toggleClass('collapsed');
             $(this).siblings('.tf-filter').slideToggle('medium');
@@ -1763,11 +1763,6 @@
     */
 
     $(document).ready(function () {
-
-        // $.autofilter({
-        //     animation:true,
-        //     duration:300
-        // });
 
         $('.tf-template-3 .tf-reviews-slider').slick({
             infinite: true,

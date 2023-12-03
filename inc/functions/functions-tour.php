@@ -821,210 +821,6 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 	}
 }
 
-
-/**
- * Tour Advance Search form
- *
- * Horizontal
- *
- * Called in shortcodes
- */
-if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
-    function tf_tour_advanced_search_form_horizontal( $classes, $title, $subtitle, $author ) {
-        $tour_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
-        ?>
-        <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
-			<?php
-			$disable_child_search  = ! empty( tfopt( 'disable_child_search' ) ) ? tfopt( 'disable_child_search' ) : '';
-			$disable_infant_search = ! empty( tfopt( 'disable_infant_search' ) ) ? tfopt( 'disable_infant_search' ) : '';
-			?>
-            <div class="tf_homepage-booking">
-                <div class="tf_destination-wrap">
-                    <div class="tf_input-inner">
-                        <div class="tf_form-row">
-                            <label class="tf_label-row">
-                                <span class="tf-label"><?php _e( 'Destination', 'tourfic' ); ?>:</span>
-                                <div class="tf_form-inner tf-d-g">
-                                    <i class="fas fa-search"></i>
-                                    <input type="text" name="place-name" required id="tf-tour-location-adv" class="tf-tour-preview-place" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>">
-                                    <input type="hidden" name="place" id="tf-tour-place">
-                                    <div class="tf-hotel-results tf-tour-results">
-                                        <ul id="ui-id-2">
-											<?php
-											$tf_tour_destination = get_terms( array(
-												'taxonomy'     => 'tour_destination',
-												'orderby'      => 'title',
-												'order'        => 'ASC',
-												'hide_empty'   => false,
-												'hierarchical' => 0,
-											) );
-											if ( $tf_tour_destination ) {
-												foreach ( $tf_tour_destination as $term ) {
-													if ( ! empty( $term->name ) ) {
-														?>
-                                                        <li data-name="<?php echo $term->name; ?>" data-slug="<?php echo $term->slug; ?>"><i class="fa fa-map-marker"></i><?php echo $term->name; ?></li>
-														<?php
-													}
-												}
-											}
-											?>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tf_selectperson-wrap">
-                    <div class="tf_input-inner">
-                        <span class="tf_person-icon">
-                            <i class="fas fa-user"></i>
-                        </span>
-                        <div class="adults-text"><?php _e( '1 Adults', 'tourfic' ); ?></div>
-						<?php
-						if ( empty( $disable_child_search ) ) {
-							?>
-                            <div class="person-sep"></div>
-                            <div class="child-text"><?php _e( '0 Children', 'tourfic' ); ?></div>
-						<?php }
-						if ( empty( $disable_infant_search ) ) {
-							?>
-                            <div class="person-sep"></div>
-                            <div class="infant-text"><?php _e( '0 Infant', 'tourfic' ); ?></div>
-						<?php } ?>
-                    </div>
-                    <div class="tf_acrselection-wrap">
-                        <div class="tf_acrselection-inner">
-                            <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
-                                <div class="acr-select">
-                                    <div class="acr-dec">-</div>
-                                    <input type="number" name="adults" id="adults" min="1" value="1">
-                                    <div class="acr-inc">+</div>
-                                </div>
-                            </div>
-							<?php
-							if ( empty( $disable_child_search ) ) {
-								?>
-                                <div class="tf_acrselection">
-                                    <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
-                                    <div class="acr-select">
-                                        <div class="acr-dec">-</div>
-                                        <input type="number" name="children" id="children" min="0" value="0">
-                                        <div class="acr-inc">+</div>
-                                    </div>
-                                </div>
-							<?php }
-							if ( empty( $disable_infant_search ) ) {
-								?>
-                                <div class="tf_acrselection">
-                                    <div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
-                                    <div class="acr-select">
-                                        <div class="acr-dec">-</div>
-                                        <input type="number" name="infant" id="infant" min="0" value="0">
-                                        <div class="acr-inc">+</div>
-                                    </div>
-                                </div>
-							<?php } ?>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tf_selectdate-wrap">
-                    <!-- @KK Merged two inputs into one  -->
-                    <div class="tf_input-inner">
-                        <label class="tf_label-row">
-                            <span class="tf-label"><?php _e( 'Check-in & Check-out date', 'tourfic' ); ?></span>
-                            <div class="tf_form-inner tf-d-g">
-                                <i class="far fa-calendar-alt"></i>
-                                <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                       placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo tfopt( 'date_tour_search' ) ? 'required' : ''; ?>>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-                <div class="tf_selectdate-wrap tf_more_info_selections">
-                    <div class="tf_input-inner">
-                        <label class="tf_label-row" style="width: 100%;">
-                            <span class="tf-label"><?php _e( 'More', 'tourfic' ); ?></span>
-                            <span style="text-decoration: none; display: block; cursor: pointer;"><?php _e( 'Filter', 'tourfic' ); ?>  <i class="fas fa-angle-down"></i></span>
-                        </label>
-                    </div>
-                    <div class="tf-more-info">
-                        <h3><?php _e( 'Filter Price', 'tourfic' ); ?></h3>
-                        <div class="tf-filter-price-range">
-                            <div class="tf-tour-filter-range"></div>
-                        </div>
-                        <h3 style="margin-top: 20px"><?php _e( 'Tour Types', 'tourfic' ); ?></h3>
-						<?php
-						$tf_tour_type = get_terms( array(
-							'taxonomy'     => 'tour_type',
-							'orderby'      => 'title',
-							'order'        => 'ASC',
-							'hide_empty'   => true,
-							'hierarchical' => 0,
-						) );
-						if ( $tf_tour_type ) : ?>
-                            <div class="tf-tour-types" style="overflow: hidden">
-								<?php foreach ( $tf_tour_type as $term ) : ?>
-                                    <div class="form-group form-check">
-                                        <input type="checkbox" name="types[]" class="form-check-input" value="<?php _e( $term->slug ); ?>" id="<?php _e( $term->slug ); ?>">
-                                        <label class="form-check-label" for="<?php _e( $term->slug ); ?>"><?php _e( $term->name ); ?></label>
-                                    </div>
-								<?php endforeach; ?>
-                            </div>
-						<?php endif; ?>
-                    </div>
-                </div>
-
-                <div class="tf_submit-wrap">
-                    <input type="hidden" name="type" value="tf_tours" class="tf-post-type"/>
-					<?php
-					if ( $author ) { ?>
-                        <input type="hidden" name="tf-author" value="<?php echo $author; ?>" class="tf-post-type"/>
-					<?php } ?>
-                    <button class="tf_button tf-submit tf-tours-btn btn-styled" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
-                </div>
-
-            </div>
-
-        </form>
-        <script>
-            (function ($) {
-                $(document).ready(function () {
-
-					// FlatPickr First Day Week 
-					<?php tf_flatpickr_locale('root'); ?>
-
-                    $("#tf_tour_aval_check #check-in-out-date").flatpickr({
-                        enableTime: false,
-						altInput: true,
-                		altFormat: '<?php echo $tour_date_format_for_users; ?>',
-                        mode: "range",
-                        dateFormat: "Y/m/d",
-                        minDate: "today",
-
-						// FlatPickr Locale
-						<?php tf_flatpickr_locale(); ?>
-
-                        onReady: function (selectedDates, dateStr, instance) {
-                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                        },
-                        onChange: function (selectedDates, dateStr, instance) {
-                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                        },
-                    });
-
-                });
-            })(jQuery);
-        </script>
-		<?php
-	}
-}
-
 /**
  * Single Tour Booking Bar
  *
@@ -2001,7 +1797,9 @@ function tf_single_tour_booking_form( $post_id ) {
 							<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
 							<span class="tf-booking-month">
 								<span><?php _e("Month", "tourfic"); ?></span>
-								<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+								<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+								</svg>
 							</span>
 						</div>
 						<input type="text" class="tf-field tours-check-in-out" placeholder="<?php _e( "Select Date", "tourfic" ); ?>" value="" required/>
@@ -2022,7 +1820,9 @@ function tf_single_tour_booking_form( $post_id ) {
 								</span> 
 								<span class="tf-booking-month">
 									<span><?php _e("Guest", "tourfic"); ?></span>
-									<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+									<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+									</svg>
 								</span>
 							</div>
 						</div>
