@@ -9971,6 +9971,13 @@ html {
 .tf-template-3 .tf-content-wrapper .tf-details .tf-archive-search-form {
   width: 100%;
 }
+@media only screen and (max-width: 767.98px) {
+  .tf-template-3 .tf-content-wrapper .tf-details .tf-archive-search-form {
+    margin-left: 16px;
+    margin-right: 16px;
+    width: auto;
+  }
+}
 .tf-template-3 .tf-content-wrapper .tf-details .tf-details-left {
   width: calc(100% - 520px);
   display: flex;
@@ -11217,8 +11224,33 @@ html {
 .tf-template-3 .tf-related-tours .slick-prev.pull-left.slick-arrow {
   right: 120px;
 }
+.tf-template-3 .tf-modify-search-btn {
+  background: #B58E53;
+  padding: 8px 32px;
+  color: #FDF9F3;
+  text-align: center;
+  font-family: Josefin Sans;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  cursor: pointer;
+  margin-left: 16px;
+  margin-right: 16px;
+  display: none;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-template-3 .tf-modify-search-btn {
+    display: block;
+  }
+}
 .tf-template-3 .tf-booking-form-wrapper {
   background: #FAEEDC;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-template-3 .tf-booking-form-wrapper {
+    display: none;
+  }
 }
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form {
   display: flex;
@@ -13443,6 +13475,7 @@ html {
   }
   .tf-template-3 .tf-archive-details .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-card-heading-info .tf-section-title-and-location {
     margin-bottom: 0px;
+    width: calc(100% - 124px);
   }
   .tf-template-3 .tf-archive-details .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-card-heading-info .tf-section-title-and-location h2 {
     margin-bottom: 6px;

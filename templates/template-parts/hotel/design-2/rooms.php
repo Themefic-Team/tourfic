@@ -8,6 +8,9 @@ foreach ( $rooms as $key => $room ) {
     }
 }
 ?>
+<span class="tf-modify-search-btn">
+    <?php _e("Modify search", "tourfic"); ?>
+</span>
 <!--Booking form start -->
 <div id="availability" class="tf-booking-form-wrapper">
     <?php tf_hotel_sidebar_booking_form(); ?>

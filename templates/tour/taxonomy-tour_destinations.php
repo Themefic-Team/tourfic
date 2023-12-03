@@ -54,6 +54,9 @@ if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
             <div class="tf-archive-details tf-details" id="tf-hotel-overview">                    
             
                 <div class="tf-details-left tf-result-previews">
+                    <span class="tf-modify-search-btn">
+                        <?php _e("Modify search", "tourfic"); ?>
+                    </span>
                     <!-- Booking form Start -->
                     <div class="tf-archive-search-form tf-booking-form-wrapper">
                         <form action="<?php echo tf_booking_search_action(); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">

@@ -9,6 +9,11 @@
         }
         .tf-archive-search-form{            
             width: 100%;
+            @media #{$max767}{
+                margin-left: 16px;
+                margin-right: 16px;
+                width: auto;
+            }
         }
         .tf-details-left {
             width: calc(100% - 520px);

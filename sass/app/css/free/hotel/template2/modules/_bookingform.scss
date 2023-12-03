@@ -1,5 +1,26 @@
+.tf-modify-search-btn{
+    background: #B58E53;
+    padding: 8px 32px;
+    color: #FDF9F3;
+    text-align: center;
+    font-family: Josefin Sans;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    cursor: pointer;
+    margin-left: 16px;
+    margin-right: 16px;
+    display: none;
+    @media #{$max767}{
+        display: block;
+    }
+}
 .tf-booking-form-wrapper {
     background: #FAEEDC;
+    @media #{$max767}{
+        display: none;
+    }
     .tf-booking-form {
         display: flex;
         .tf-booking-form-fields {

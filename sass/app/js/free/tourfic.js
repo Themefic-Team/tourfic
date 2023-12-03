@@ -1814,6 +1814,11 @@
             $('.tf-room-filter').toggleClass('tf-filter-show');
         });
 
+        //Search Form Showing
+        $('.tf-template-3 .tf-modify-search-btn').on('click', function() {
+            $('.tf-booking-form-wrapper').slideDown(300);
+        });
+
         // Full Description Showing
         $('.tf-template-3 span.tf-see-description').on('click', function() {
             $('.tf-short-description').hide();
