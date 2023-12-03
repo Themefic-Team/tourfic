@@ -2007,7 +2007,7 @@ function tf_single_tour_booking_form( $post_id ) {
 								if(selectedDates[0]){
 									const startDate = selectedDates[0];
 									$(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-date").html(startDate.getDate());
-									$(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[startDate.getMonth()+1]);
+									$(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
 								}
 							}
 							if (selectedDates.length === 2) {
@@ -2018,12 +2018,12 @@ function tf_single_tour_booking_form( $post_id ) {
 								if(selectedDates[0]){
 									const startDate = selectedDates[0];
 									$(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout  span.tf-booking-date").html(startDate.getDate());
-									$(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[startDate.getMonth()+1]);
+									$(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
 								}
 								if(selectedDates[1]){
 									const endDate = selectedDates[1];
 									$(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout  span.tf-booking-date").html(endDate.getDate());
-									$(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[endDate.getMonth()+1]);
+									$(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
 								}
 							}
 						}
@@ -2033,12 +2033,12 @@ function tf_single_tour_booking_form( $post_id ) {
                             $("select[name='check-in-time']").not(this).val(selectedTime);
                         });
 
-                        $(".acr-select input[type='number']").on("change", function () {
+                        $(".acr-select input[type='tel']").on("change", function () {
                             var inputName = $(this).attr("name");
                             var selectedValue = $(this).val();
 
                             // Update all inputs with the same name
-                            $(".acr-select input[type='number'][name='" + inputName + "']").val(selectedValue)
+                            $(".acr-select input[type='tel'][name='" + inputName + "']").val(selectedValue)
                         });
 
 
