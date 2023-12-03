@@ -857,6 +857,7 @@ function tf_single_tour_booking_form( $post_id ) {
 	$child_price          = ! empty( $meta['child_price'] ) ? $meta['child_price'] : false;
 	$infant_price         = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : false;
 	$tour_extras          = isset( $meta['tour-extra'] ) ? $meta['tour-extra'] : null;
+
 	if ( ! empty( $tour_extras ) && gettype( $tour_extras ) == "string" ) {
 
 		$tour_extras_unserial = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
@@ -1313,52 +1314,109 @@ function tf_single_tour_booking_form( $post_id ) {
                 <div class="tf-form-title">
                     <p><?php _e( "Person Info", "tourfic" ); ?></p>
                 </div>
-				<?php if ( $custom_avail == true || ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-                    <div class="tf-field-group tf-mt-16 tf_acrselection">
-                        <div class="tf-field tf-flex">
-                            <div class="acr-label tf-flex">
-                                <i class="fa-regular fa-user"></i>
-								<?php _e( 'Adults', 'tourfic' ); ?>
-                            </div>
-                            <div class="acr-select">
-                                <div class="acr-dec">-</div>
-                                <input type="number" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>">
-                                <div class="acr-inc">+</div>
-                            </div>
-                        </div>
-                    </div>
-				<?php } ?>
+				<?php if ( $custom_avail == true) { 
+					
+					if(( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false )) :
+					?>
+						<div class="tf-field-group tf-mt-16 tf_acrselection">
+							<div class="tf-field tf-flex">
+								<div class="acr-label tf-flex">
+									<i class="fa-regular fa-user"></i>
+									<?php _e( 'Adults', 'tourfic' ); ?>
+								</div>
+								<div class="acr-select">
+									<div class="acr-dec">-</div>
+									<input type="number" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>">
+									<div class="acr-inc">+</div>
+								</div>
+							</div>
+						</div>
+					<?php endif; ?>
 
-				<?php if ( $custom_avail == true || ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-                    <div class="tf-field-group tf-mt-16 tf_acrselection">
-                        <div class="tf-field tf-flex">
-                            <div class="acr-label tf-flex">
-                                <i class="fa-solid fa-child"></i>
-								<?php _e( 'Children', 'tourfic' ); ?>
-                            </div>
-                            <div class="acr-select">
-                                <div class="acr-dec">-</div>
-                                <input type="number" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
-                                <div class="acr-inc">+</div>
-                            </div>
-                        </div>
-                    </div>
-				<?php } ?>
-				<?php if ( $custom_avail == true || ( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-                    <div class="tf-field-group tf-mt-16 tf_acrselection">
-                        <div class="tf-field tf-flex">
-                            <div class="acr-label tf-flex">
-                                <i class="fa-solid fa-baby"></i>
-								<?php _e( 'Infant', 'tourfic' ); ?>
-                            </div>
-                            <div class="acr-select">
-                                <div class="acr-dec">-</div>
-                                <input type="number" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>">
-                                <div class="acr-inc">+</div>
-                            </div>
-                        </div>
-                    </div>
-				<?php } ?>
+					<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+						<div class="tf-field-group tf-mt-16 tf_acrselection">
+							<div class="tf-field tf-flex">
+								<div class="acr-label tf-flex">
+									<i class="fa-solid fa-child"></i>
+									<?php _e( 'Children', 'tourfic' ); ?>
+								</div>
+								<div class="acr-select">
+									<div class="acr-dec">-</div>
+									<input type="number" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
+									<div class="acr-inc">+</div>
+								</div>
+							</div>
+						</div>
+					<?php } ?>
+
+					<?php if ( !$disable_adult_price && (( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false )) ) { ?>
+						<div class="tf-field-group tf-mt-16 tf_acrselection">
+							<div class="tf-field tf-flex">
+								<div class="acr-label tf-flex">
+									<i class="fa-solid fa-baby"></i>
+									<?php _e( 'Infant', 'tourfic' ); ?>
+								</div>
+								<div class="acr-select">
+									<div class="acr-dec">-</div>
+									<input type="number" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>">
+									<div class="acr-inc">+</div>
+								</div>
+							</div>
+						</div>
+					<?php } ?>
+
+				<?php } else { ?>
+
+					<?php if(( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false )) : ?>
+						<div class="tf-field-group tf-mt-16 tf_acrselection">
+							<div class="tf-field tf-flex">
+								<div class="acr-label tf-flex">
+									<i class="fa-regular fa-user"></i>
+									<?php _e( 'Adults', 'tourfic' ); ?>
+								</div>
+								<div class="acr-select">
+									<div class="acr-dec">-</div>
+									<input type="number" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>">
+									<div class="acr-inc">+</div>
+								</div>
+							</div>
+						</div>
+					<?php endif; ?>
+
+					<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+						<div class="tf-field-group tf-mt-16 tf_acrselection">
+							<div class="tf-field tf-flex">
+								<div class="acr-label tf-flex">
+									<i class="fa-solid fa-child"></i>
+									<?php _e( 'Children', 'tourfic' ); ?>
+								</div>
+								<div class="acr-select">
+									<div class="acr-dec">-</div>
+									<input type="number" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
+									<div class="acr-inc">+</div>
+								</div>
+							</div>
+						</div>
+						
+					<?php } ?>
+
+					<?php if ( !$disable_adult_price && ( ( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false ) ) ) { ?>
+						<div class="tf-field-group tf-mt-16 tf_acrselection">
+							<div class="tf-field tf-flex">
+								<div class="acr-label tf-flex">
+									<i class="fa-solid fa-baby"></i>
+									<?php _e( 'Infant', 'tourfic' ); ?>
+								</div>
+								<div class="acr-select">
+									<div class="acr-dec">-</div>
+									<input type="number" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>">
+									<div class="acr-inc">+</div>
+								</div>
+							</div>
+						</div>
+					<?php } ?>
+
+				<?php }; ?>
             </div>
 
             <div class="tf-tours-booking-btn tf-booking-bttns tf-mt-30">
@@ -1376,50 +1434,110 @@ function tf_single_tour_booking_form( $post_id ) {
                             <i class="ri-user-line"></i>
                         </div>
                         <div class="tf_input-inner">
-			                <?php if ( $custom_avail == true || ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-                                <div class="adults-text"><?php echo ( ! empty( $adults ) ? $adults : '0' ) . ' ' . __( "Adults", "tourfic" ); ?></div>
-			                <?php } ?>
-			                <?php if ( $custom_avail == true || ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-                                <div class="person-sep"></div>
-                                <div class="child-text"><?php echo ( ! empty( $child ) ? $child : '0' ) . ' ' . __( "Children", "tourfic" ); ?></div>
-			                <?php } ?>
-			                <?php if ( $custom_avail == true || ( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-                                <div class="person-sep"></div>
-                                <div class="infant-text"><?php echo ( ! empty( $infant ) ? $infant : '0' ) . ' ' . __( "Infant", "tourfic" ); ?></div>
-			                <?php } ?>
+							<?php if($custom_avail == true ) { ?>
+								<?php if ( ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+									<div class="adults-text"><?php echo ( ! empty( $adults ) ? $adults : '0' ) . ' ' . __( "Adults", "tourfic" ); ?></div>
+								<?php } ?>
+
+								<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+									<div class="person-sep"></div>
+									<div class="child-text"><?php echo ( ! empty( $child ) ? $child : '0' ) . ' ' . __( "Children", "tourfic" ); ?></div>
+								<?php } ?>
+
+								<?php if ( !$disable_adult_price && (( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false )) ) { ?>
+									<div class="person-sep"></div>
+									<div class="infant-text"><?php echo ( ! empty( $infant ) ? $infant : '0' ) . ' ' . __( "Infant", "tourfic" ); ?></div>
+								<?php } ?>
+
+							<?php  } else { ?>
+
+								<?php if ( ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+									<div class="adults-text"><?php echo ( ! empty( $adults ) ? $adults : '0' ) . ' ' . __( "Adults", "tourfic" ); ?></div>
+								<?php } ?>
+
+								<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+									<div class="person-sep"></div>
+									<div class="child-text"><?php echo ( ! empty( $child ) ? $child : '0' ) . ' ' . __( "Children", "tourfic" ); ?></div>
+								<?php } ?>
+
+								<?php if ( !$disable_adult_price && (( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false )) ) { ?>
+									<div class="person-sep"></div>
+									<div class="infant-text"><?php echo ( ! empty( $infant ) ? $infant : '0' ) . ' ' . __( "Infant", "tourfic" ); ?></div>
+								<?php } ?>
+
+							<?php } ?>
                         </div>
                         <div class="tf_acrselection-wrap" style="display: none;">
                             <div class="tf_acrselection-inner">
-				                <?php if ( $custom_avail == true || ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-                                    <div class="tf_acrselection">
-                                        <div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
-                                        <div class="acr-select">
-                                            <div class="acr-dec">-</div>
-                                            <input type="number" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>">
-                                            <div class="acr-inc">+</div>
-                                        </div>
-                                    </div>
-				                <?php } ?>
-				                <?php if ( $custom_avail == true || ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-                                    <div class="tf_acrselection">
-                                        <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
-                                        <div class="acr-select">
-                                            <div class="acr-dec">-</div>
-                                            <input type="number" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
-                                            <div class="acr-inc">+</div>
-                                        </div>
-                                    </div>
-				                <?php } ?>
-				                <?php if ( $custom_avail == true || ( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-                                    <div class="tf_acrselection">
-                                        <div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
-                                        <div class="acr-select">
-                                            <div class="acr-dec">-</div>
-                                            <input type="number" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>">
-                                            <div class="acr-inc">+</div>
-                                        </div>
-                                    </div>
-				                <?php } ?>
+								<?php if($custom_avail == true ) { ?>
+									<?php if ( ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+										<div class="tf_acrselection">
+											<div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
+											<div class="acr-select">
+												<div class="acr-dec">-</div>
+												<input type="number" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>">
+												<div class="acr-inc">+</div>
+											</div>
+										</div>
+									<?php } ?>
+
+									<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+										<div class="tf_acrselection">
+											<div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
+											<div class="acr-select">
+												<div class="acr-dec">-</div>
+												<input type="number" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
+												<div class="acr-inc">+</div>
+											</div>
+										</div>
+									<?php } ?>
+
+									<?php if ( !$disable_adult_price && (( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false )) ) { ?>
+										<div class="tf_acrselection">
+											<div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
+											<div class="acr-select">
+												<div class="acr-dec">-</div>
+												<input type="number" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>">
+												<div class="acr-inc">+</div>
+											</div>
+										</div>
+									<?php } ?>
+
+								<?php } else { ?>
+
+									<?php if ( ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+										<div class="tf_acrselection">
+											<div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
+											<div class="acr-select">
+												<div class="acr-dec">-</div>
+												<input type="number" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>">
+												<div class="acr-inc">+</div>
+											</div>
+										</div>
+									<?php } ?>
+
+									<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+										<div class="tf_acrselection">
+											<div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
+											<div class="acr-select">
+												<div class="acr-dec">-</div>
+												<input type="number" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
+												<div class="acr-inc">+</div>
+											</div>
+										</div>
+									<?php } ?>
+
+									<?php if ( !$disable_adult_price && (( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false )) ) { ?>
+										<div class="tf_acrselection">
+											<div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
+											<div class="acr-select">
+												<div class="acr-dec">-</div>
+												<input type="number" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>">
+												<div class="acr-inc">+</div>
+											</div>
+										</div>
+									<?php } ?>
+								<?php } ?>
                             </div>
                         </div>
                     </div>
@@ -1596,49 +1714,113 @@ function tf_single_tour_booking_form( $post_id ) {
                         <span class="tf_person-icon">
                             <i class="fas fa-user"></i>
                         </span>
-						<?php if ( $custom_avail == true || ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-                            <div class="adults-text"><?php echo ( ! empty( $adults ) ? $adults : '0' ) . ' ' . __( "Adults", "tourfic" ); ?></div>
-						<?php } ?>
-						<?php if ( $custom_avail == true || ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-                            <div class="person-sep"></div>
-                            <div class="child-text"><?php echo ( ! empty( $child ) ? $child : '0' ) . ' ' . __( "Children", "tourfic" ); ?></div>
-						<?php } ?>
-						<?php if ( $custom_avail == true || ( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-                            <div class="person-sep"></div>
-                            <div class="infant-text"><?php echo ( ! empty( $infant ) ? $infant : '0' ) . ' ' . __( "Infant", "tourfic" ); ?></div>
-						<?php } ?>
+						<?php if ($custom_avail == true) { ?>
+
+							<?php if ( (( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) )) { ?>
+								<div class="adults-text"><?php echo ( ! empty( $adults ) ? $adults : '0' ) . ' ' . __( "Adults", "tourfic" ); ?></div>
+							<?php } ?>
+
+							<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+								<div class="person-sep"></div>
+								<div class="child-text"><?php echo ( ! empty( $child ) ? $child : '0' ) . ' ' . __( "Children", "tourfic" ); ?></div>
+							<?php } ?>
+
+							<?php if ( !$disable_adult_price && (( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false ) )) { ?>
+								<div class="person-sep"></div>
+								<div class="infant-text"><?php echo ( ! empty( $infant ) ? $infant : '0' ) . ' ' . __( "Infant", "tourfic" ); ?></div>
+							<?php } ?>
+
+						<?php } else { ?>
+
+							<?php if ( (( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) )) { ?>
+								<div class="adults-text"><?php echo ( ! empty( $adults ) ? $adults : '0' ) . ' ' . __( "Adults", "tourfic" ); ?></div>
+							<?php } ?>
+
+							<?php if (( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+								<div class="person-sep"></div>
+								<div class="child-text"><?php echo ( ! empty( $child ) ? $child : '0' ) . ' ' . __( "Children", "tourfic" ); ?></div>
+							<?php } ?>
+
+							<?php if ( !$disable_adult_price && (( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false )) ) { ?>
+								<div class="person-sep"></div>
+								<div class="infant-text"><?php echo ( ! empty( $infant ) ? $infant : '0' ) . ' ' . __( "Infant", "tourfic" ); ?></div>
+							<?php } ?>
+
+						<?php }; ?>
                     </div>
                     <div class="tf_acrselection-wrap" style="display: none;">
                         <div class="tf_acrselection-inner">
-							<?php if ( $custom_avail == true || ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-                                <div class="tf_acrselection">
-                                    <div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
-                                    <div class="acr-select">
-                                        <div class="acr-dec">-</div>
-                                        <input type="number" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>">
-                                        <div class="acr-inc">+</div>
-                                    </div>
-                                </div>
-							<?php } ?>
-							<?php if ( $custom_avail == true || ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-                                <div class="tf_acrselection">
-                                    <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
-                                    <div class="acr-select">
-                                        <div class="acr-dec">-</div>
-                                        <input type="number" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
-                                        <div class="acr-inc">+</div>
-                                    </div>
-                                </div>
-							<?php } ?>
-							<?php if ( $custom_avail == true || ( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-                                <div class="tf_acrselection">
-                                    <div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
-                                    <div class="acr-select">
-                                        <div class="acr-dec">-</div>
-                                        <input type="number" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>">
-                                        <div class="acr-inc">+</div>
-                                    </div>
-                                </div>
+
+							<?php if($custom_avail == true ) { ?>
+
+								<?php if ( ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+									<div class="tf_acrselection">
+										<div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
+										<div class="acr-select">
+											<div class="acr-dec">-</div>
+											<input type="number" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>">
+											<div class="acr-inc">+</div>
+										</div>
+									</div>
+								<?php } ?>
+
+								<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+									<div class="tf_acrselection">
+										<div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
+										<div class="acr-select">
+											<div class="acr-dec">-</div>
+											<input type="number" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
+											<div class="acr-inc">+</div>
+										</div>
+									</div>
+								<?php } ?>
+
+								<?php if ( !$disable_adult_price && (( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false )) ) { ?>
+									<div class="tf_acrselection">
+										<div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
+										<div class="acr-select">
+											<div class="acr-dec">-</div>
+											<input type="number" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>">
+											<div class="acr-inc">+</div>
+										</div>
+									</div>
+								<?php } ?>
+
+							<?php } else { ?>
+								
+								<?php if ( ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+									<div class="tf_acrselection">
+										<div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
+										<div class="acr-select">
+											<div class="acr-dec">-</div>
+											<input type="number" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>">
+											<div class="acr-inc">+</div>
+										</div>
+									</div>
+								<?php } ?>
+
+								<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+									<div class="tf_acrselection">
+										<div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
+										<div class="acr-select">
+											<div class="acr-dec">-</div>
+											<input type="number" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
+											<div class="acr-inc">+</div>
+										</div>
+									</div>
+								<?php } ?>
+
+								<?php if ( !$disable_adult_price && (( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false )) ) { ?>
+									<div class="tf_acrselection">
+										<div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
+										<div class="acr-select">
+											<div class="acr-dec">-</div>
+											<input type="number" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>">
+											<div class="acr-inc">+</div>
+										</div>
+									</div>
+								<?php } ?>
+
 							<?php } ?>
                         </div>
                     </div>
@@ -1791,11 +1973,8 @@ function tf_single_tour_booking_form( $post_id ) {
                                 times = times.length > 0 && times[0].times ? times[0].times : null;
                                 populateTimeSelect(times);
                             }
-
                         },
-
                     });
-
                 });
             })(jQuery);
         </script>
@@ -1940,8 +2119,16 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
                             }
                         }
                     }
-                }
-            }
+                } else {
+					if ( !empty( $meta['group_price'] ) ) {
+						$tour_price[] = $meta['group_price'];
+					}
+				}
+            } else {
+				if(!empty($meta['group_price'])){
+					$tour_price[] = $meta['group_price'];
+				}
+			}
         }else{
             if(!empty($meta['group_price'])){
                 $tour_price[] = $meta['group_price'];
@@ -1994,8 +2181,50 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
                             }
                         }
                     }
-                }
-            }
+                } else {
+					if ( $tour_archive_page_price_settings == "all" ) {
+						if ( !empty( $meta['adult_price'] ) && !$disable_adult_price ) {
+							$tour_price[] = $meta['adult_price'];
+						}
+						if ( !empty( $meta['child_price'] ) && !$disable_adult_price ) {
+							$tour_price[] = $meta['child_price'];
+						}
+					}
+
+					if ( $tour_archive_page_price_settings == "adult" ) {
+						if ( !empty( $meta['adult_price'] ) && !$disable_adult_price ) {
+							$tour_price[] = $meta['adult_price'];
+						}
+					}
+
+					if ( $tour_archive_page_price_settings == "child" ) {
+						if ( !empty( $meta['child_price'] ) && !$disable_adult_price ) {
+							$tour_price[] = $meta['child_price'];
+						}
+					}
+				}
+            } else {
+				if ( $tour_archive_page_price_settings == "all" ) {
+					if ( !empty( $meta['adult_price'] ) && !$disable_adult_price ) {
+						$tour_price[] = $meta['adult_price'];
+					}
+					if ( !empty( $meta['child_price'] ) && !$disable_adult_price ) {
+						$tour_price[] = $meta['child_price'];
+					}
+				}
+
+				if ( $tour_archive_page_price_settings == "adult" ) {
+					if ( !empty( $meta['adult_price'] ) && !$disable_adult_price ) {
+						$tour_price[] = $meta['adult_price'];
+					}
+				}
+
+				if ( $tour_archive_page_price_settings == "child" ) {
+					if ( !empty( $meta['child_price'] ) && !$disable_adult_price ) {
+						$tour_price[] = $meta['child_price'];
+					}
+				}
+			}
         } else{
             if($tour_archive_page_price_settings == "all") {
                 if(!empty($meta['adult_price']) && !$disable_adult_price){
@@ -2183,6 +2412,14 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 											}
 										}
 									}
+								} else {
+									if ( !empty( $meta['group_price'] ) ) {
+										$tour_price[] = $meta['group_price'];
+									}
+								}
+							} else {
+								if ( !empty( $meta['group_price'] ) ) {
+									$tour_price[] = $meta['group_price'];
 								}
 							}
 						}else{
@@ -2235,6 +2472,48 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 												}
 											}
 										}
+									}
+								} else {
+									if($tour_archive_page_price_settings == "all") {
+										if(!empty($meta['adult_price']) && !$disable_adult_price){
+											$tour_price[] = $meta['adult_price'];
+										}
+										if(!empty($meta['child_price']) && !$disable_adult_price){
+											$tour_price[] = $meta['child_price'];
+										}
+									}
+
+									if($tour_archive_page_price_settings == "adult") {
+										if(!empty($meta['adult_price']) && !$disable_adult_price){
+											$tour_price[] = $meta['adult_price'];
+										}
+									}
+
+									if($tour_archive_page_price_settings == "child") {
+										if(!empty($meta['child_price']) && !$disable_adult_price){
+											$tour_price[] = $meta['child_price'];
+										}
+									}
+								}
+							} else {
+								if ( $tour_archive_page_price_settings == "all" ) {
+									if ( !empty( $meta['adult_price'] ) && !$disable_adult_price ) {
+										$tour_price[] = $meta['adult_price'];
+									}
+									if ( !empty( $meta['child_price'] ) && !$disable_adult_price ) {
+										$tour_price[] = $meta['child_price'];
+									}
+								}
+
+								if ( $tour_archive_page_price_settings == "adult" ) {
+									if ( !empty( $meta['adult_price'] ) && !$disable_adult_price ) {
+										$tour_price[] = $meta['adult_price'];
+									}
+								}
+
+								if ( $tour_archive_page_price_settings == "child" ) {
+									if ( !empty( $meta['child_price'] ) && !$disable_adult_price ) {
+										$tour_price[] = $meta['child_price'];
 									}
 								}
 							}

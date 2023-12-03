@@ -539,7 +539,6 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                     </div>
                     <!-- Single Tour Body details End -->
                 </div>
-                <!--  Upcoming tours  -->
             </div>
         </div>
 

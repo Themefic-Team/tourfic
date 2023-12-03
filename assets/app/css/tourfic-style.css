@@ -4123,7 +4123,10 @@ div#tf-contact-info {
 }
 .tf-tour-booking-wrap.tf-tours-fixed .tf_acrselection-wrap {
   position: absolute;
-  top: -160px;
+  top: unset !important;
+  left: 0;
+  right: auto;
+  bottom: 100% !important;
 }
 .tf-tour-booking-wrap.tf-tours-fixed .tf_tours_booking {
   width: 100%;
@@ -8114,7 +8117,8 @@ div#tf-contact-info {
 .tf-bottom-booking-bar .tf_acrselection-wrap {
   left: 0;
   right: auto;
-  top: -210px;
+  top: unset;
+  bottom: 100%;
   width: auto;
 }
 .tf-bottom-booking-bar .tf-booking-mobile-btn {

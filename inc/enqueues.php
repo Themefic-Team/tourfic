@@ -458,5 +458,19 @@ function tf_dequeue_theplus_script_on_settings_page($screen) {
         wp_deregister_script('cn_toc_admin_script');
     }
 
+	$get_screen = get_current_screen();
+
+	if(!empty($get_screen)) {
+
+		if ($get_screen->base == "post" && ($get_screen->id == "tf_hotel" || $get_screen->id == "tf_apartment" ||  $get_screen->id == "tf_tours") ) {
+
+			if (wp_script_is('select2', 'enqueued')) {
+
+				wp_dequeue_script('select2');
+				wp_deregister_script('select2');
+			}
+		}
+	}
 }
+
 add_action('admin_enqueue_scripts', 'tf_dequeue_theplus_script_on_settings_page', 9999);
