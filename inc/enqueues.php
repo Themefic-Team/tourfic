@@ -462,7 +462,7 @@ function tf_dequeue_theplus_script_on_settings_page($screen) {
 
 	if(!empty($get_screen)) {
 
-		if ($get_screen->base == "post" && ($get_screen->id == "tf_hotel" || $get_screen->id == "tf_apartment") ) {
+		if ($get_screen->base == "post" && ($get_screen->id == "tf_hotel" || $get_screen->id == "tf_apartment" ||  $get_screen->id == "tf_tours") ) {
 
 			if (wp_script_is('select2', 'enqueued')) {
 
