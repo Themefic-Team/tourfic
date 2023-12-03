@@ -190,7 +190,10 @@ div#tf-contact-info {
     padding: 8px 0;
     .tf_acrselection-wrap {
         position: absolute;
-        top: -160px;
+        top: unset !important;
+        left: 0;
+        right: auto;
+        bottom: 100% !important;
     }
     .tf_tours_booking {
         width: 100%;

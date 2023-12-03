@@ -175,7 +175,7 @@
                                 </div>
 
                             <?php }
-                            if ( ! $disable_infant && ! empty( $tour_price->infant ) ) { ?>
+                            if ( !$disable_adult && (! $disable_infant && ! empty( $tour_price->infant )) ) { ?>
 
                                 <div class="tf-price infant-price tf-d-n">
                                     <span class="sale-price">
@@ -202,7 +202,7 @@
                                 if ( ! $disable_child && ! empty( $tour_price->child ) ) {
                                     echo '<li id="child">' . __( "Child", "tourfic" ) . '</li>';
                                 }
-                                if ( ! $disable_infant && ! empty( $tour_price->infant ) ) {
+                                if ( !$disable_adult && (! $disable_infant && ! empty( $tour_price->infant )) ) {
                                     echo '<li id="infant">' . __( "Infant", "tourfic" ) . '</li>';
                                 }
 
@@ -661,7 +661,7 @@
                             while ( $tours->have_posts() ) {
                                 $tours->the_post();
 
-                                    $selected_post_id       = $selected_id;
+                                    $selected_post_id       = get_the_ID();
                                     $destinations           = get_the_terms( $selected_post_id, 'tour_destination' );
                                     $first_destination_name = $destinations[0]->name;
                                     $related_comments       = get_comments( array( 'post_id' => $selected_post_id ) );
