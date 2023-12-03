@@ -2124,16 +2124,26 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	 * @author - Hena
 	 */
 	$room_price = [];
-	$discount_amount = [];
+	$tf_lowestAmount = 0;
+	$tf_lowestAmount_items = null;
 	if ( ! empty( $b_rooms ) ):
-		foreach ( $b_rooms as $b_room ) {
+		foreach ( $b_rooms as $rkey => $b_room ) {
 
 			//hotel room discount data
 			$hotel_discount_type = !empty($b_room["discount_hotel_type"]) ? $b_room["discount_hotel_type"] : "none";
 			$hotel_discount_amount = !empty($b_room["discount_hotel_price"]) ? $b_room["discount_hotel_price"] : 0;
 			if($hotel_discount_type!="none" && !empty($hotel_discount_amount)){
-				$discount_amount[] = $hotel_discount_amount;
+				$tf_lowestAmount_items['amount'] = $hotel_discount_amount;
+				$tf_lowestAmount_items['type'] = $hotel_discount_type;
+
+				$tf_lowestAmount = intval($hotel_discount_amount); // Convert the amount to an integer for comparison
+				if ($hotel_discount_amount < $tf_lowestAmount) {
+					$tf_lowestAmount = $hotel_discount_amount;
+					$tf_lowestAmount_items['amount'] = $hotel_discount_amount;
+					$tf_lowestAmount_items['type'] = $hotel_discount_type;
+				}
 			}
+
 
 			//room price
 			$pricing_by = ! empty( $b_room['pricing-by'] ) ? $b_room['pricing-by'] : 1;
@@ -2561,10 +2571,11 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 			</div>
 			<div class="tf-available-room-content-right">
 				<div class="tf-card-pricing-heading">
-				<?php if ( ! empty( $discount_amount ) ){ ?>
+				<?php
+				if ( ! empty( $tf_lowestAmount_items ) ){ ?>
 					<div class="tf-available-room-off">
 						<span>
-							<?php echo min( $discount_amount ); ?>% <?php _e( "Off ", "tourfic" ); ?>
+							<?php echo $tf_lowestAmount_items['type']=="percent" ? $tf_lowestAmount.'%' : wc_price($tf_lowestAmount) ?> <?php _e( "Off ", "tourfic" ); ?>
 						</span>
 					</div>
 				<?php } ?>
