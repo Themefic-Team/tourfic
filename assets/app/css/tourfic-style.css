@@ -11130,6 +11130,8 @@ html {
   background-color: #FDF9F3;
   min-height: 220px;
   max-height: 220px;
+  display: flex;
+  flex-direction: column;
 }
 @media only screen and (max-width: 1366px) {
   .tf-template-3 .tf-related-tours .tf-slider-item .tf-meta-info {
@@ -11149,6 +11151,7 @@ html {
   text-decoration: none;
   text-align: center;
   transition: 0.3s all ease;
+  margin-top: auto;
 }
 .tf-template-3 .tf-related-tours .tf-slider-item .tf-meta-info a.see-details:hover {
   background-color: #917242;

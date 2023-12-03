@@ -708,6 +708,8 @@
             background-color: #FDF9F3;
             min-height: 220px;
             max-height: 220px;
+            display: flex;
+            flex-direction: column;
             @media #{$max1366}{
                 min-height: none;
                 max-height: none;
@@ -724,6 +726,7 @@
                 text-decoration: none;
                 text-align: center;
                 transition: .3s all ease;
+                margin-top: auto;
                 &:hover{
                     background-color: #917242;
                     color: #FDF9F3;
