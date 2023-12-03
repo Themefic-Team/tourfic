@@ -385,3 +385,61 @@
         }
     }
 }
+
+@media only screen and (max-width: 660px) {
+    .tf-template-3{
+        .tf-archive-search-form.tf-booking-form-wrapper{
+            .tf_archive_search_result{
+                display: flow-root !important;
+                padding: 0px 16px 8px 16px;
+                .tf-booking-form-fields{
+                    width: 100% !important;
+                    display: flow-root !important;
+                    padding: 8px 0;
+                    .tf-booking-form-location{
+                        width: 100% !important;
+                        padding: 0px !important;
+                        border-right: 0px solid !important;
+                        margin-bottom: 12px !important;
+                    }
+                    .tf-booking-form-checkin{
+                        width: 31% !important;
+                        float: left;
+                        padding: 0px;
+                        max-width: none;
+                    }
+                    .tf-booking-form-checkout{
+                        width: 31% !important;
+                        float: left;
+                        padding: 0px;
+                        padding-left: 20px !important;
+                        max-width: none;
+                    }
+                    .tf-booking-form-guest-and-room{
+                        width: 31% !important;
+                        float: left;
+                        padding-left: 20px !important;
+                        padding-right: 0px !important;
+                        min-width: auto;
+                    }
+                }
+                .tf-booking-form-fields.tf-tour-archive-block{
+                    .tf-booking-form-checkin{
+                        width: 50% !important;
+                        float: left;
+                        padding: 0px;
+                    }
+                    .tf-booking-form-guest-and-room{
+                        width: 50% !important;
+                        float: left;
+                        padding-left: 20px !important;
+                        padding-right: 0px !important;
+                    }
+                }
+                .tf-booking-form-submit{
+                    width: 100% !important;
+                }
+            }
+        }
+    }
+}
