@@ -105,7 +105,10 @@
                 padding-bottom: 48px;
                 @media #{$max1024}{
                     align-items: center;
-                    padding: 0px 0 30px 0;
+                    padding: 0px 0 32px 0;
+                }
+                @media #{$max767}{
+                    padding: 0px 16px 16px 16px;
                 }
                 .tf-head-title {
                     text-align: left;

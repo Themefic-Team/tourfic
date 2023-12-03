@@ -63,6 +63,10 @@
             @media #{$max1024}{
                 font-size: 16px !important;
             }
+            @media #{$max767}{
+                display: flex;
+                align-items: center;
+            }
         }
 
 

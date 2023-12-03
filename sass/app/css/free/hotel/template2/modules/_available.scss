@@ -23,9 +23,68 @@
                 font-size: 14px !important;
             }
         }
+        .tf-archive-filter-showing{
+            padding: 0px;
+            cursor: pointer;
+            display: none;
+            @media #{$max991}{
+                display: block;
+            }
+        }
         .tf-filter{
             padding: 0px;
+            cursor: pointer;
         }
+    }
+    .tf-room-filter{
+        display: none !important;
+        h4{
+            font-weight: 600 !important;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            li{
+                margin: 0px;
+                padding-left: 0px;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 130%;
+                color: #99948D;
+                margin-right: 10px;
+                @media #{$max1024}{
+                    font-size: 12px !important;
+                }
+                label{
+                    padding-left: 25px;
+                    line-height: 16px;
+                    margin-left: 0px;
+                    .checkmark{
+                        border-radius: 4px;
+                        border: 1px solid #917242;
+                        background: #FDF9F3;
+                        height: 16px;
+                        width: 16px;
+                        &:hover{
+                            border-color: #B58E53;
+                        }
+                        &::after{
+                            top: 1px;
+                            left: 4px;
+                            border-color: rgb(145, 114, 66);
+                        }
+                    }
+                }
+                label input:checked~.checkmark {
+                    background-color: transparent !important;
+                    border-color: rgb(145, 114, 66);
+                }
+            }
+        }
+    }
+    .tf-room-filter.tf-filter-show{
+        display: block !important;
     }
     .tf-available-rooms {
         display: flex;

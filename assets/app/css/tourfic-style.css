@@ -9816,7 +9816,12 @@ html {
 @media only screen and (max-width: 1024px) {
   .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area {
     align-items: center;
-    padding: 0px 0 30px 0;
+    padding: 0px 0 32px 0;
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area {
+    padding: 0px 16px 16px 16px;
   }
 }
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area .tf-head-title {
@@ -10411,8 +10416,71 @@ html {
     font-size: 14px !important;
   }
 }
+.tf-template-3 .tf-available-rooms-wrapper .tf-available-rooms-head .tf-archive-filter-showing {
+  padding: 0px;
+  cursor: pointer;
+  display: none;
+}
+@media only screen and (max-width: 991.98px) {
+  .tf-template-3 .tf-available-rooms-wrapper .tf-available-rooms-head .tf-archive-filter-showing {
+    display: block;
+  }
+}
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-rooms-head .tf-filter {
   padding: 0px;
+  cursor: pointer;
+}
+.tf-template-3 .tf-available-rooms-wrapper .tf-room-filter {
+  display: none !important;
+}
+.tf-template-3 .tf-available-rooms-wrapper .tf-room-filter h4 {
+  font-weight: 600 !important;
+}
+.tf-template-3 .tf-available-rooms-wrapper .tf-room-filter ul {
+  margin: 0;
+  padding: 0;
+}
+.tf-template-3 .tf-available-rooms-wrapper .tf-room-filter ul li {
+  margin: 0px;
+  padding-left: 0px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+  color: #99948D;
+  margin-right: 10px;
+}
+@media only screen and (max-width: 1024px) {
+  .tf-template-3 .tf-available-rooms-wrapper .tf-room-filter ul li {
+    font-size: 12px !important;
+  }
+}
+.tf-template-3 .tf-available-rooms-wrapper .tf-room-filter ul li label {
+  padding-left: 25px;
+  line-height: 16px;
+  margin-left: 0px;
+}
+.tf-template-3 .tf-available-rooms-wrapper .tf-room-filter ul li label .checkmark {
+  border-radius: 4px;
+  border: 1px solid #917242;
+  background: #FDF9F3;
+  height: 16px;
+  width: 16px;
+}
+.tf-template-3 .tf-available-rooms-wrapper .tf-room-filter ul li label .checkmark:hover {
+  border-color: #B58E53;
+}
+.tf-template-3 .tf-available-rooms-wrapper .tf-room-filter ul li label .checkmark::after {
+  top: 1px;
+  left: 4px;
+  border-color: rgb(145, 114, 66);
+}
+.tf-template-3 .tf-available-rooms-wrapper .tf-room-filter ul li label input:checked ~ .checkmark {
+  background-color: transparent !important;
+  border-color: rgb(145, 114, 66);
+}
+.tf-template-3 .tf-available-rooms-wrapper .tf-room-filter.tf-filter-show {
+  display: block !important;
 }
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-rooms {
   display: flex;
@@ -12174,6 +12242,12 @@ html {
     font-size: 16px !important;
   }
 }
+@media only screen and (max-width: 767.98px) {
+  .tf-template-3 .tf-itinerary-wrapper .tf-itinerary-wrapper .tf-itinerary-title h4 {
+    display: flex;
+    align-items: center;
+  }
+}
 .tf-template-3 .tf-itinerary-wrapper .tf-itinerary-wrapper span.tf-itinerary-time {
   padding: 8px 16px;
   background: #FAEEDC;
@@ -13379,6 +13453,10 @@ html {
   .tf-template-3.tf-hotel-single #tf-hotel-facilities {
     padding-left: 16px;
     padding-right: 16px;
+  }
+  .tf-template-3.tf-hotel-single #availability.tf-booking-form-wrapper {
+    margin-left: 16px;
+    margin-right: 16px;
   }
 }
 

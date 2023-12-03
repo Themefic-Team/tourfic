@@ -1809,6 +1809,11 @@
             $(this).closest('li').siblings().find('a').removeClass('tf-hashlink');
         });
 
+        //Room Filter Showing 
+        $('.tf-template-3 .tf-available-rooms-head .tf-filter').on('click', function() {
+            $('.tf-room-filter').toggleClass('tf-filter-show');
+        });
+
         // Full Description Showing
         $('.tf-template-3 span.tf-see-description').on('click', function() {
             $('.tf-short-description').hide();

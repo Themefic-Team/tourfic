@@ -1,3 +1,13 @@
+<?php 
+//getting only selected features for rooms
+$rm_features = [];
+foreach ( $rooms as $key => $room ) {
+    //merge for each room's selected features
+    if(!empty($room['features'])){
+        $rm_features = array_unique(array_merge( $rm_features, $room['features'])) ;
+    }
+}
+?>
 <!--Booking form start -->
 <div id="availability" class="tf-booking-form-wrapper">
     <?php tf_hotel_sidebar_booking_form(); ?>
@@ -12,7 +22,7 @@
             <i class="ri-equalizer-line"></i>
         </div>
     </div>
-    
+    <?php do_action( 'tf_hotel_features_filter', $rm_features, 10 ) ?>
     <!--Available rooms start -->
     <div class="tf-available-rooms tf-rooms" id="rooms">
     <!-- Loader Image -->
