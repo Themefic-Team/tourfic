@@ -70,7 +70,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-hotel.jpg",
 						),
 					),
-					'default'   	=> function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+					'default'   	=> 'design-1',
 					'dependency'  => [
 						array( 'tf_single_hotel_layout_opt', '==', 'single' )
 					],

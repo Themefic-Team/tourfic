@@ -1001,3 +1001,14 @@
         }
     }
 }
+.tf-copy-item span.tf-copied-msg{
+  display: flex;
+  justify-content: end;
+  margin-bottom: 9px;
+  padding-right: 10px;
+}
+.tf-exp-imp-field {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+}

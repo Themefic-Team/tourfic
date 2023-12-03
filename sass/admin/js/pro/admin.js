@@ -91,11 +91,172 @@
                 //console.log(response.data.activateUrl);
             })
             .success(function(response) {
-                //console.log(response);
                 location.reload();
             });
         });
 
     });
+
+    //export tours ajax
+    $(document).on('click', '.tf-export-tours-btn', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url: tf_pro_params.ajax_url,
+            data: {
+                action: "tf_export_tours",
+                nonce: tf_pro_params.nonce,
+            },
+            beforeSend: function(){
+               $('.tf-export-tours-btn').html('Exporting...');
+            },
+            success: function(response){
+                var date = new Date();
+                var generated_date = date.getMonth() + '-' + date.getDate() + '-' + date.getFullYear();
+
+                var link               = document.createElement('a');
+                    link.href          = 'data:text/csv;charset=utf-8,' + encodeURI(response);
+                    link.download      = 'Tours_' + generated_date + '.csv';
+                    link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                //clean up
+                document.body.removeChild(link);
+                $('.tf-export-tours-btn').html('Export');
+            },
+            complete: function(){
+                $('.tf-export-tours-btn').html('Export');
+            }
+        });
+    });
+    //export hotels ajax
+    $(document).on('click', '.tf-export-hotels-btn', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url: tf_pro_params.ajax_url,
+            data: {
+                action: "tf_export_hotels",
+                nonce: tf_pro_params.nonce,
+            },
+            beforeSend: function(){
+                $('.tf-export-hotels-btn').html('Exporting...');
+            },
+            success: function(response){
+                var date           = new Date();
+                var generated_date = date.getMonth() + '-' + date.getDate() + '-' + date.getFullYear();
+
+                var link               = document.createElement('a');
+                    link.href          = 'data:text/csv;charset=utf-8,' + encodeURI(response);
+                    link.download      = 'Hotels_' + generated_date + '.csv';
+                    link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                //clean up
+                document.body.removeChild(link);
+                $('.tf-export-hotels-btn').html('Export');
+            },
+            complete: function(){
+                $('.tf-export-hotels-btn').html('Export');
+            }
+        });
+    });
+
+    /**
+     * Import Tours ajax
+     * 
+     * @author Abu Hena
+     * @since 2.9.9
+     */
+    $(document).on('click', '.tf_import_tours_btn', function(e){
+        e.preventDefault();
+        let formData                        = $('#tf-import-tours').serializeArray();
+        let tour_csv_file_url               = $('#tf-import-tours').find('input[name="tour_csv_file_url"]').val();
+        let import_csv_nonce                = $('#tf-import-tours').find('input[name="import_csv_nonce"]').val();
+        let tf_import_tours_update_existing = $('#tf-import-tours').find('input[name="tf_import_tours_update_existing"]').val();
+        $('.tf-column-mapping-form').hide();
+        
+        $.ajax({
+            type: 'post',
+            url: ajaxurl,
+            data:{
+                action: 'tf_import_tours',
+                form_data: formData,
+                tour_csv_file_url: tour_csv_file_url,
+                import_csv_nonce: import_csv_nonce,
+                tf_import_tours_update_existing: tf_import_tours_update_existing,
+            },
+            beforeSend: function(){
+                $('.tf-step-1').addClass('active');
+                $('.tf-step-2').addClass('done');
+                $('.tf-step-3').addClass('done');
+                $('.tf-importing-progressbar-container').show();
+            },
+            success: function(response){
+               
+            },
+            complete: function(){
+                $('.tf_import_tours_btn').html('Import');
+                $('.tf-step-4').addClass('done');
+                $('.tf-importing-progressbar-container').hide();
+                $('.tf-import-complete-wrap').show();
+            },
+        });
+
+    });
+
+    /**
+     * Import Hotels ajax
+     * @author Abu Hena
+     */
+    $(document).on('click', '.tf_import_hotels_btn', function(e){
+        e.preventDefault();
+        let formData                         = $('#tf-import-hotels').serializeArray();
+        let hotel_csv_file_url               = $('#tf-import-hotels').find('input[name="hotel_csv_file_url"]').val();
+        let import_csv_nonce                 = $('#tf-import-hotels').find('input[name="import_csv_nonce"]').val();
+        let tf_import_hotels_update_existing = $('#tf-import-hotels').find('input[name="tf_import_hotels_update_existing"]').val();
+        $('.tf-column-mapping-form').hide();
+        
+        $.ajax({
+            type: 'post',
+            url: ajaxurl,
+            data:{
+                action: 'tf_import_hotels',
+                form_data: formData,
+                hotel_csv_file_url: hotel_csv_file_url,
+                import_csv_nonce: import_csv_nonce,
+                tf_import_hotels_update_existing: tf_import_hotels_update_existing,
+            },
+            beforeSend: function(){
+                $('.tf-step-1').addClass('done');
+                $('.tf-step-2').addClass('done');
+                $('.tf-step-3').addClass('done');
+                $('.tf-importing-progressbar-container').show();
+            },
+            success: function(response){
+                
+            },
+            complete: function(){
+                $('.tf_import_hotels_btn').html('Import');
+                $('.tf-step-4').addClass('done');
+                $('.tf-importing-progressbar-container').hide();
+                $('.tf-import-complete-wrap').show();
+            },
+        });
+
+    });
+
+    let urlParams = new URLSearchParams(window.location.search);
+    let mapping   = urlParams.get('step');
+    if( mapping == 'tour_mapping' ){
+        $('.tf-step-1').addClass('done');
+        $('.tf-step-2').addClass('active');
+    }
+    if( mapping == 'hotel_mapping' ){
+        $('.tf-step-1').addClass('done');
+        $('.tf-step-2').addClass('active');
+    }
+
+
 
 })(jQuery);

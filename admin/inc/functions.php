@@ -165,7 +165,7 @@ add_action( 'admin_footer', 'tf_admin_footer' );
  */
 function tf_dashboard_header() {
 	?>
-    <!-- deshboard-top-section -->
+    <!-- dashboard-top-section -->
     <div class="tf-setting-top-bar">
         <div class="version">
             <img src="<?php echo TF_ASSETS_APP_URL; ?>images/tourfic-logo.webp" alt="logo">
@@ -209,7 +209,7 @@ function tf_dashboard_header() {
             </div>
         </div>
     </div>
-    <!-- deshboard-top-section -->
+    <!-- dashboard-top-section -->
 	<?php
 }
 
@@ -299,7 +299,7 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 
 /*
  * Get hotel availability calendar
- * @auther Foysal
+ * @author Foysal
  */
 if ( ! function_exists( 'tf_get_hotel_availability' ) ) {
 	function tf_get_hotel_availability() {
@@ -338,4 +338,70 @@ if ( ! function_exists( 'tf_get_hotel_availability' ) ) {
 	}
 
 	add_action( 'wp_ajax_tf_get_hotel_availability', 'tf_get_hotel_availability' );
+}
+
+/*
+ * Get all icons list
+ * @author Foysal
+ */
+function get_icon_list() {
+	$icons = array(
+		'all'           => array(
+			'label'      => __( 'All Icons', 'tourfic' ),
+			'label_icon' => 'ri-grid-fill',
+			'icons'      => array_merge( fontawesome_four_icons(), fontawesome_five_icons(), fontawesome_six_icons(), remix_icon() ),
+		),
+		'fontawesome_4' => array(
+			'label'      => __( 'Font Awesome 4', 'tourfic' ),
+			'label_icon' => 'fa-regular fa-font-awesome',
+			'icons'      => fontawesome_four_icons(),
+		),
+		'fontawesome_5' => array(
+			'label'      => __( 'Font Awesome 5', 'tourfic' ),
+			'label_icon' => 'fa-regular fa-font-awesome',
+			'icons'      => fontawesome_five_icons(),
+		),
+		'fontawesome_6' => array(
+			'label'      => __( 'Font Awesome 6', 'tourfic' ),
+			'label_icon' => 'fa-regular fa-font-awesome',
+			'icons'      => fontawesome_six_icons(),
+		),
+		'remixicon'     => array(
+			'label'      => __( 'Remix Icon', 'tourfic' ),
+			'label_icon' => 'ri-remixicon-line',
+			'icons'      => remix_icon(),
+		),
+	);
+
+	$icons = apply_filters( 'tf_icon_list', $icons );
+
+	return $icons;
+}
+
+/*
+ * Icon infinite scroll
+ * @author Foysal
+ */
+if ( ! function_exists( 'tf_load_more_icons' ) ) {
+	add_action( 'wp_ajax_tf_load_more_icons', 'tf_load_more_icons' );
+	function tf_load_more_icons() {
+		$start_index = isset( $_POST['start_index'] ) ? intval( $_POST['start_index'] ) : 0;
+		$type        = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : 'all';
+		$icon_list   = get_icon_list();
+		$icons       = array_slice( $icon_list[ $type ]['icons'], $start_index, 100 );
+
+		$icons_html = '';
+		foreach ( $icons as $key => $icon ) {
+			$icons_html .= '<li data-icon="' . esc_attr( $icon ) . '">
+                            <div class="tf-icon-inner">
+                                <i title="' . esc_attr( $icon ) . '" class="tf-main-icon ' . esc_attr( $icon ) . '"></i>
+                                <span class="check-icon">
+                                    <i class="ri-check-line"></i>
+                                </span>
+                            </div>
+                        </li>';
+		}
+
+		wp_send_json_success( $icons_html );
+	}
 }

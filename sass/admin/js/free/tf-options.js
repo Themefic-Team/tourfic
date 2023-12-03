@@ -274,6 +274,8 @@
             $this.addClass('active');
 
             $('#' + tab).addClass('active').siblings().removeClass('active');
+
+            tfIconInfiniteScroll();
         });
 
         /*
@@ -368,6 +370,50 @@
             iconLi.removeClass('active');
         })
 
+        /*
+        * Icon Infinite Scroll
+        * @author: Foysal
+        */
+        const tfIconInfiniteScroll = () => {
+            var loading = false;
+            var startIndex = 0;
+            let iconList = $('.tf-icon-tab-pane.active .tf-icon-list');
+            let iconListBottom = 0;
+
+            iconList.scroll(function () {
+                let type = $('.tf-icon-tab-pane.active').data('type');
+                let max = $('.tf-icon-tab-pane.active').data('max');
+                iconListBottom = iconList[0].scrollHeight - iconList.height();
+
+                if (iconList.scrollTop() >= iconListBottom && !loading && startIndex < max) {
+                    loading = true;
+                    startIndex += 100;
+                    $.ajax({
+                        url: tf_options.ajax_url,
+                        type: 'POST',
+                        data: {
+                            action: 'tf_load_more_icons',
+                            start_index: startIndex,
+                            type: type,
+                        },
+                        beforeSend: function () {
+                            $('.tf-icon-list').append('<div class="tf-icon-loading">Loading...</div>');
+                        },
+                        success: function (response) {
+                            loading = false;
+                            $('#tf-icon-tab-'+type+' .tf-icon-list').append(response.data);
+                            $('.tf-icon-loading').remove();
+                        },
+                        error: function (xhr, status, error) {
+                            loading = false;
+                            console.error(error);
+                            $('.tf-icon-loading').remove();
+                        }
+                    });
+                }
+            });
+        }
+        tfIconInfiniteScroll();
 
         /*
         * Options ajax save
@@ -453,7 +499,7 @@
                 },
                 displayEventTime: true,
                 selectable: true,
-                select: function ({ start, end, startStr, endStr, allDay, jsEvent, view, resource }) {
+                select: function ({start, end, startStr, endStr, allDay, jsEvent, view, resource}) {
                     if (moment(start).isBefore(moment(), 'day') || moment(end).isBefore(moment(), 'day')) {
                         self.fullCalendar.unselect();
                         setCheckInOut("", "", self.roomCalData);
@@ -466,7 +512,7 @@
                         setCheckInOut(check_in, check_out, self.roomCalData);
                     }
                 },
-                events: function ({ start, end, startStr, endStr, timeZone }, successCallback, failureCallback) {
+                events: function ({start, end, startStr, endStr, timeZone}, successCallback, failureCallback) {
                     $.ajax({
                         url: tf_options.ajax_url,
                         dataType: "json",
@@ -479,7 +525,7 @@
                             avail_date: $(self.container).find('.avail_date').val(),
                         },
                         beforeSend: function () {
-                            $(self.container).css({ 'pointer-events': 'none', 'opacity': '0.5' });
+                            $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
                             $(self.calendar).addClass('tf-content-loading');
                         },
                         success: function (doc) {
@@ -487,7 +533,7 @@
                                 successCallback(doc);
                             }
 
-                            $(self.container).css({ 'pointer-events': 'auto', 'opacity': '1' });
+                            $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
                             $(self.calendar).removeClass('tf-content-loading');
                         },
                         error: function (e) {
@@ -500,9 +546,9 @@
                     const eventTitleElement = document.createElement('div');
                     eventTitleElement.classList.add('fc-event-title');
                     eventTitleElement.innerHTML = title;
-                    return { domNodes: [eventTitleElement] };
+                    return {domNodes: [eventTitleElement]};
                 },
-                eventClick: function ({ event, el, jsEvent, view }) {
+                eventClick: function ({event, el, jsEvent, view}) {
                     let startTime = moment(event.start, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
                         .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
                     let endTime;
@@ -561,32 +607,33 @@
 
         const tfHotelCalendar = () => {
             $('.tf-room-cal-wrap').each(function (index, el) {
-                var $this = $(this);
                 var room = new roomCal(el);
                 room.init();
-
-                let checkIn = $(el).find('[name="tf_room_check_in"]').flatpickr({
-                    dateFormat: 'Y-m-d',
-                    minDate: 'today',
-                    altInput: true,
-                    altFormat: tf_options.tf_admin_date_format,
-                    onChange: function (selectedDates, dateStr, instance) {
-                        checkOut.set('minDate', dateStr);
-                    }
-                });
-
-                let checkOut = $(el).find('[name="tf_room_check_out"]').flatpickr({
-                    dateFormat: 'Y-m-d',
-                    minDate: 'today',
-                    altInput: true,
-                    altFormat: tf_options.tf_admin_date_format,
-                    onChange: function (selectedDates, dateStr, instance) {
-                        checkIn.set('maxDate', dateStr);
-                    }
-                });
             });
         }
         tfHotelCalendar();
+
+        $('.tf-room-cal-wrap').each(function (index, el) {
+            let checkIn = $(el).find('[name="tf_room_check_in"]').flatpickr({
+                dateFormat: 'Y-m-d',
+                minDate: 'today',
+                altInput: true,
+                altFormat: tf_options.tf_admin_date_format,
+                onChange: function (selectedDates, dateStr, instance) {
+                    checkOut.set('minDate', dateStr);
+                }
+            });
+
+            let checkOut = $(el).find('[name="tf_room_check_out"]').flatpickr({
+                dateFormat: 'Y-m-d',
+                minDate: 'today',
+                altInput: true,
+                altFormat: tf_options.tf_admin_date_format,
+                onChange: function (selectedDates, dateStr, instance) {
+                    checkIn.set('maxDate', dateStr);
+                }
+            });
+        });
 
         $(document).on('click', '.tf_room_cal_update', function (e) {
             e.preventDefault();
@@ -598,16 +645,16 @@
             let data = $('input, select', container.find('.tf-room-cal-field')).serializeArray();
             let priceBy = container.closest('.tf-single-repeater-room').find('.tf_room_pricing_by').val();
             let avail_date = container.find('.avail_date');
-            data.push({ name: 'action', value: 'tf_add_hotel_availability' });
-            data.push({ name: 'price_by', value: priceBy });
-            data.push({ name: 'avail_date', value: avail_date.val() });
+            data.push({name: 'action', value: 'tf_add_hotel_availability'});
+            data.push({name: 'price_by', value: priceBy});
+            data.push({name: 'avail_date', value: avail_date.val()});
 
             $.ajax({
                 url: tf_options.ajax_url,
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
-                    container.css({ 'pointer-events': 'none', 'opacity': '0.5' })
+                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
                     cal.addClass('tf-content-loading');
                     btn.addClass('tf-btn-loading');
                 },
@@ -627,19 +674,19 @@
                             notyf.error(response.data.message);
                         }
 
-                        container.css({ 'pointer-events': 'auto', 'opacity': '1' })
+                        container.css({'pointer-events': 'auto', 'opacity': '1'})
                         cal.removeClass('tf-content-loading');
                         btn.removeClass('tf-btn-loading');
                     }
                 },
                 error: function (e) {
                     console.log(e);
-                    container.css({ 'pointer-events': 'auto', 'opacity': '1' })
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
                 },
                 complete: function () {
-                    container.css({ 'pointer-events': 'auto', 'opacity': '1' });
+                    container.css({'pointer-events': 'auto', 'opacity': '1'});
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
                 },
@@ -686,7 +733,7 @@
                     toolbar2: 'styleselect,strikethrough,hr,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
                     //   textarea_rows : 20
                 },
-                quicktags: { buttons: 'strong,em,link,block,del,ins,img,ul,ol,li,code,more,close' },
+                quicktags: {buttons: 'strong,em,link,block,del,ins,img,ul,ol,li,code,more,close'},
                 mediaButtons: false,
             });
         }
@@ -1235,7 +1282,7 @@ var frame, gframe;
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(mapInit);
 
-                var mapMarker = L.marker(map_data.center, { draggable: true }).addTo(mapInit);
+                var mapMarker = L.marker(map_data.center, {draggable: true}).addTo(mapInit);
 
                 var update_latlng = function (data) {
                     $latitude.val(data.lat);
@@ -1287,7 +1334,6 @@ var frame, gframe;
                     $search_input = $('[data-depend-id="' + $this.find('.tf--address-field').data('address-field') + '"]');
                 }
 
-                
 
                 var cache = {};
 
@@ -1662,13 +1708,13 @@ var frame, gframe;
                         data: tf_options.tf_complete_order,
                         fill: false
                     },
-                    {
-                        label: "Cancelled Booking",
-                        borderColor: 'red',
-                        tension: 0.1,
-                        data: tf_options.tf_cancel_orders,
-                        fill: false
-                    }
+                        {
+                            label: "Cancelled Booking",
+                            borderColor: 'red',
+                            tension: 0.1,
+                            data: tf_options.tf_cancel_orders,
+                            fill: false
+                        }
                     ]
                 },
 
@@ -1722,13 +1768,13 @@ var frame, gframe;
                                     data: response.tf_complete_orders,
                                     fill: false
                                 },
-                                {
-                                    label: "Cancelled Booking",
-                                    borderColor: 'red',
-                                    tension: 0.1,
-                                    data: response.tf_cancel_orders,
-                                    fill: false
-                                }
+                                    {
+                                        label: "Cancelled Booking",
+                                        borderColor: 'red',
+                                        tension: 0.1,
+                                        data: response.tf_cancel_orders,
+                                        fill: false
+                                    }
                                 ]
                             },
 
@@ -1787,13 +1833,13 @@ var frame, gframe;
                                     data: response.tf_complete_orders,
                                     fill: false
                                 },
-                                {
-                                    label: "Cancelled Booking",
-                                    borderColor: 'red',
-                                    tension: 0.1,
-                                    data: response.tf_cancel_orders,
-                                    fill: false
-                                }
+                                    {
+                                        label: "Cancelled Booking",
+                                        borderColor: 'red',
+                                        tension: 0.1,
+                                        data: response.tf_cancel_orders,
+                                        fill: false
+                                    }
                                 ]
                             },
 
@@ -1881,13 +1927,84 @@ var frame, gframe;
         }
         //show the copied message
         $(this).parents('.tf-copy-item').append('<div><span class="tf-copied-msg">Copied<span></div>');
-        $("span.tf-copied-msg").animate({ opacity: 0 }, 1000, function () {
+        $("span.tf-copied-msg").animate({opacity: 0}, 1000, function () {
             $(this).slideUp('slow', function () {
                 $(this).remove();
             });
         });
     });
 
+    $(document).ready(function () {
+        $('.tf-import-btn').on('click', function (event) {
+            event.preventDefault();
+
+            // Get the import URL from the button's href attribute
+            var importUrl = $(this).attr('href');
+
+            // Get the import data from the textarea
+            var importData = $('textarea[name="tf_import_option"]').val().trim();
+            if (importData == '') {
+                alert(tf_options.tf_export_import_msg.import_empty);
+                let importField = $('textarea[name="tf_import_option"]');
+                importField.focus();
+                importField.css('border', '1px solid red');
+                return;
+            } else {
+                //confirm data before send
+                if (!confirm(tf_options.tf_export_import_msg.import_confirm)) {
+                    return;
+                }
+
+                $.ajax({
+                    url: importUrl,
+                    method: 'POST',
+                    data: {
+                        action: 'tf_import',
+                        tf_import_option: importData,
+                    },
+                    beforeSend: function () {
+                        $('.tf-import-btn').html('Importing...');
+                        $('.tf-import-btn').attr('disabled', 'disabled');
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            alert(tf_options.tf_export_import_msg.imported);
+                            $('.tf-import-btn').html('Imported');
+                            window.location.reload();
+                        } else {
+                            alert('Something went wrong!');
+                        }
+                    }
+                });
+            }
+        })
+    });
+
+    //export the data in txt file
+    jQuery(document).ready(function ($) {
+        $('.tf-export-btn').on('click', function (event) {
+            event.preventDefault();
+
+            // Get the textarea value
+            var textareaValue = $('textarea[name="tf_export_option"]').val();
+
+            // Create a blob with the textarea value
+            var blob = new Blob([textareaValue], {type: 'text/plain'});
+
+            // Create a temporary URL for the blob
+            var url = window.URL.createObjectURL(blob);
+
+            // Create a temporary link element
+            var link = document.createElement('a');
+            link.href = url;
+            link.download = 'tf-settings-export.txt';
+
+            // Programmatically click the link to initiate the file download
+            link.click();
+
+            // Clean up the temporary URL
+            window.URL.revokeObjectURL(url);
+        });
+    });
 
 })(jQuery);
-
