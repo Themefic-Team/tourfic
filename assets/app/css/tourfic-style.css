@@ -9856,7 +9856,8 @@ html {
 }
 @media only screen and (max-width: 767.98px) {
   .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area .tf-head-title .tf-title-meta {
-    font-size: 12px !important;
+    font-size: 14px !important;
+    line-height: 130%; /* 18.2px */
   }
 }
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area .tf-head-title .tf-title-meta a {
@@ -9874,7 +9875,8 @@ html {
 }
 @media only screen and (max-width: 767.98px) {
   .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area .tf-head-title .tf-title-meta a {
-    font-size: 12px !important;
+    font-size: 14px !important;
+    line-height: 130%; /* 18.2px */
   }
 }
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area .tf-hero-gallery-videos {
