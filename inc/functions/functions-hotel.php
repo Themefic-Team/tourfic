@@ -1037,7 +1037,9 @@ function tf_room_availability_callback() {
 							$has_room[] = 0;
 						}
 					}
-
+					if(!$multi_by_date_ck){
+						$days = $days+1;
+					}
 					// Check if date is provided and within date range
 					if ( ! in_array( 0, $has_room ) ) {
 						tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price);
