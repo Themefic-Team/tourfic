@@ -204,7 +204,12 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                 <?php
                                                 $tour_price = [];
                                                 $tf_pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
-                                                $tour_single_price_settings = !empty(tfopt('tf-template')["tour_archive_price_minimum_settings"]) ? tfopt('tf-template')["tour_archive_price_minimum_settings"] : 'all';
+                                                $tour_single_price_settings = !empty(tfopt('tour_archive_price_minimum_settings')) ? tfopt('tour_archive_price_minimum_settings') : 'all';
+
+                                                echo "<pre>";
+                                                print_r($tour_single_price_settings);
+                                                echo "</pre>";
+                                                die(); // added by - Sunvi
                                                 $custom_pricing_by_rule = !empty( $meta['custom_pricing_by'] ) ? $meta['custom_pricing_by'] : '';
                                                 if( $tf_pricing_rule  && $tf_pricing_rule == 'group' ){
 

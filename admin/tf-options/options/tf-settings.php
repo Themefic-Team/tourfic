@@ -197,17 +197,6 @@ TF_Settings::option( 'tf_settings', array(
 									'default'    => 'List'
 								),
 								array(
-									'id'       => 'hotel_archive_price_minimum_settings',
-									'type'     => 'select',
-									'label'    => __( 'Show Minimum Price', 'tourfic' ),
-									'options'  => array(
-										'all'   => __( 'All', 'tourfic' ),
-										'adult'   => __( 'Adult', 'tourfic' ),
-										'child'   => __( 'Child', 'tourfic' ),
-									),
-									'default'    => 'All',
-								),
-								array(
 									'id'      => 'hotel_archive_notice',
 									'type'    => 'notice',
 									'content' => __( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
@@ -370,17 +359,6 @@ TF_Settings::option( 'tf_settings', array(
 									'default'    => 'List',
 								),
 								array(
-									'id'       => 'tour_archive_price_minimum_settings',
-									'type'     => 'select',
-									'label'    => __( 'Show Minimum Price', 'tourfic' ),
-									'options'  => array(
-										'all'   => __( 'All', 'tourfic' ),
-										'adult'   => __( 'Adult', 'tourfic' ),
-										'child'   => __( 'Child', 'tourfic' ),
-									),
-									'default'    => 'All',
-								),
-								array(
 									'id'      => 'tour_archive_notice',
 									'type'    => 'notice',
 									'content' => __( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
@@ -499,6 +477,17 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => __( 'Email for Enquiry Form', 'tourfic' ),
 					'subtitle' => __( 'Enter the email address that will receive all submissions from the enquiry form.', 'tourfic' ),
 					'is_pro' => true,
+				),
+				array(
+					'id'       => 'hotel_archive_price_minimum_settings',
+					'type'     => 'select',
+					'label'    => __( 'Show Minimum Price', 'tourfic' ),
+					'options'  => array(
+						'all'   => __( 'All', 'tourfic' ),
+						'adult'   => __( 'Adult', 'tourfic' ),
+						'child'   => __( 'Child', 'tourfic' ),
+					),
+					'default'    => 'All',
 				),
 			),
 		),
@@ -768,7 +757,18 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'  => __( 'By enabling this feature, the starting price will be concealed from the tour listings.', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-				)
+				),
+				array(
+					'id'       => 'tour_archive_price_minimum_settings',
+					'type'     => 'select',
+					'label'    => __( 'Show Minimum Price', 'tourfic' ),
+					'options'  => array(
+						'all'   => __( 'All', 'tourfic' ),
+						'adult'   => __( 'Adult', 'tourfic' ),
+						'child'   => __( 'Child', 'tourfic' ),
+					),
+					'default'    => 'All',
+				),
 			),
 		),
 		// Partial Payment Popup

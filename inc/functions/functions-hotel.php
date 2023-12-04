@@ -1873,7 +1873,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	}
 
 	// Archive Page Minimum Price
-	$archive_page_price_settings = ! empty( tfopt( 'tf-template' )["hotel_archive_price_minimum_settings"] ) ? tfopt( 'tf-template' )["hotel_archive_price_minimum_settings"] : 'all';
+	$archive_page_price_settings = ! empty( tfopt( 'hotel_archive_price_minimum_settings' ) ) ? tfopt( 'hotel_archive_price_minimum_settings' ) : 'all';
 
 	// Featured
 	$featured = ! empty( $meta['featured'] ) ? $meta['featured'] : '';
