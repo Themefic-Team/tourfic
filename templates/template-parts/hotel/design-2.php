@@ -310,6 +310,8 @@
                     if ( in_array( 'li', $tf_ratings_for ) && ! tf_user_has_comments() ) {
                     ?>
                 <div class="tf-review-form-wrapper" action="">
+                    <h3><?php _e("Leave your review", "tourfic"); ?></h3>
+                    <p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
                     <?php tf_review_form(); ?>
                 </div>
                 <?php
@@ -318,6 +320,8 @@
 		        if ( in_array( 'lo', $tf_ratings_for ) ) {
 			    ?>
                 <div class="tf-review-form-wrapper" action="">
+                    <h3><?php _e("Leave your review", "tourfic"); ?></h3>
+                    <p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
                     <?php tf_review_form(); ?>
                 </div>
                 <?php } } } ?>

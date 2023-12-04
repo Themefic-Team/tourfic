@@ -1829,6 +1829,12 @@
             $('.tf-full-description').show(500);
         });
 
+        // See Less Description Showing
+        $('.tf-template-3 span.tf-see-less-description').on('click', function() {
+            $('.tf-full-description').hide();
+            $('.tf-short-description').show(500);
+        });
+
         $('.tf-template-3 .acr-inc , .tf-template-3 .acr-dec').on('click', function() {
 
             if ($('input#infant').length){

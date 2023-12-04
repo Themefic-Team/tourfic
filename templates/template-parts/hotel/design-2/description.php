@@ -12,7 +12,7 @@
         </div>
         <div class="tf-full-description">
             <?php 
-                the_content();
+                echo get_the_content().'<span class="tf-see-less-description">See Less</span>';
             ?>
         </div>
     </div>

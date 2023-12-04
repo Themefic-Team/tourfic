@@ -317,7 +317,7 @@ foreach ( $rooms as $key => $room ) {
                     }
                     ?>
                     </div>                     
-                    <a href="#availability" class="availability"><?php _e("Check Availability", "tourfic"); ?></a>
+                    <a href="#availability" class="availability"><?php _e("Continue", "tourfic"); ?></a>
                 </div>
 
             </div>
@@ -512,7 +512,7 @@ foreach ( $rooms as $key => $room ) {
                 </div>
                 <div class="tf-available-room-content-right">
                                       
-                    <a href="#availability" class="availability"><?php _e("Check Availability", "tourfic"); ?></a>
+                    <a href="#availability" class="availability"><?php _e("Continue", "tourfic"); ?></a>
                 </div>
 
             </div>

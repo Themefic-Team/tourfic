@@ -121,6 +121,14 @@
     padding-right: 83px;
 }
 
-.tf-template-3.tf-tour-single{
-    
+.tf_template_3_global_layouts{
+    #tf-ask-question{
+        .tf-aq-outer .close-aq{
+            background: #B58E53 !important;
+        }
+        button{
+            background: #B58E53 !important;
+            border-color: #B58E53 !important;
+        }
+    }
 }

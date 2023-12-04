@@ -6,6 +6,7 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 32px;
+        align-items: center;
         @media #{$max1024}{
             margin-bottom: 24px;
         }
@@ -34,6 +35,9 @@
         .tf-filter{
             padding: 0px;
             cursor: pointer;
+            i{
+                font-size: 24px;
+            }
         }
     }
     .tf-room-filter{
