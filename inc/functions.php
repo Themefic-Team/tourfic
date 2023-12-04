@@ -2822,7 +2822,11 @@ add_action( 'init', 'tf_template_3_migrate_data' );
 if( ! function_exists('tourfic_character_limit_callback') ){
     function tourfic_character_limit_callback($str, $limit)
     {
-        return substr($str, 0, $limit) . '...';
+		if(strlen($str) > $limit ){
+        	return substr($str, 0, $limit) . '...';
+		}else{
+			return $str;
+		}
     }
 }
 // External listing dynamic shortcode callback
