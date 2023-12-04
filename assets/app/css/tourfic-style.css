@@ -10715,6 +10715,7 @@ html {
   margin-bottom: 26px;
   gap: 8px;
   align-items: center;
+  margin-top: auto;
 }
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-available-room-select select {
   height: 37px;
