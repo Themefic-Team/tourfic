@@ -14,6 +14,9 @@
             @media #{$max1024}{
                 min-height: 350px;
             }
+            @media #{$max767}{
+                min-height: 210px !important;
+            }
             .tf-wish-and-share {
                 display: flex;
                 justify-content: flex-end;
