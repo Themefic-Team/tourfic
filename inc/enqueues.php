@@ -513,6 +513,17 @@ add_action('admin_enqueue_scripts', 'tf_dequeue_theplus_script_on_settings_page'
 			$classes[] = 'tf_template_3_global_layouts';
 		}
 	}
+
+	$tf_search_result_page_id  = ! empty( tfopt( 'search-result-page' ) ) ? tfopt( 'search-result-page' ) : '';
+	if(!empty($tf_search_result_page_id)){
+		$tf_search_result_page_slug = get_post_field( 'post_name', $tf_search_result_page_id );
+	}
+	if(!empty($tf_search_result_page_slug)){
+		$tf_current_page_id = get_post_field( 'post_name', get_the_ID() );
+		if($tf_search_result_page_slug==$tf_current_page_id){
+			$classes[] = 'tf_template_3_global_layouts';
+		}
+	}
     return $classes;
 }
 
