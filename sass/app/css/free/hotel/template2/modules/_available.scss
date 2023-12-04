@@ -148,6 +148,9 @@
                     }
                 }
             }
+            .tf-room-gallery.tf-no-room-gallery{
+                height: 390px;
+            }
         }
         .tf-available-room-content {
             width: calc(100% - 230px);
@@ -389,6 +392,9 @@
                     }
                 }
             }
+        }
+        .tf-available-room-gallery.tf-no-room-gallery{
+            grid-template-columns: 1fr;
         }
         .tf-available-room-content{
             width: 100% !important;

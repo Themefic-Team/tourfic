@@ -142,7 +142,7 @@ foreach ( $rooms as $key => $room ) {
                 $tour_room_details_gall = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
                 $room_preview_img = ! empty( $room['room_preview_img'] ) ? $room['room_preview_img'] : '';
                 if(!empty($room_preview_img)){ ?>                     
-                    <div class="tf-room-gallery">
+                    <div class="tf-room-gallery <?php echo empty($tour_room_details_gall) ? esc_attr('tf-no-room-gallery') : ''; ?>">
                         <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php _e("Room Image","tourfic"); ?>">
                     </div> 
                 <?php } ?>
@@ -238,7 +238,7 @@ foreach ( $rooms as $key => $room ) {
                     if(!empty($hotel_discount_type) && !empty($hotel_discount_amount) && ( "percent" == $hotel_discount_type || "fixed" == $hotel_discount_type )){ ?>
                     <div class="tf-available-room-off">
                         <span>
-                            <?php echo ("percent" == $hotel_discount_type) ? esc_html($hotel_discount_amount).'% off' : wc_price($hotel_discount_amount). 'off'; ?>
+                            <?php echo ("percent" == $hotel_discount_type) ? esc_html($hotel_discount_amount).'% off' : wc_price($hotel_discount_amount). ' off'; ?>
                         </span>
                     </div>
                     <?php } ?>
@@ -325,7 +325,7 @@ foreach ( $rooms as $key => $room ) {
 
 
         <div class="tf-available-room tf-tabs-room">
-            <div class="tf-available-room-gallery">
+            <div class="tf-available-room-gallery <?php echo empty($tour_room_details_gall) ? esc_attr('tf-no-room-gallery') : ''; ?>">
                 <?php 
                 $tour_room_details_gall = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
                 $room_preview_img = ! empty( $room['room_preview_img'] ) ? $room['room_preview_img'] : '';
@@ -335,7 +335,7 @@ foreach ( $rooms as $key => $room ) {
                         if(!empty($hotel_discount_type) && !empty($hotel_discount_amount) && ( "percent" == $hotel_discount_type || "fixed" == $hotel_discount_type )){ ?>
                         <div class="tf-available-room-off">
                             <span>
-                                <?php echo ("percent" == $hotel_discount_type) ? esc_html($hotel_discount_amount).'% off' : wc_price($hotel_discount_amount). 'off'; ?>
+                                <?php echo ("percent" == $hotel_discount_type) ? esc_html($hotel_discount_amount).'% off' : wc_price($hotel_discount_amount). ' off'; ?>
                             </span>
                         </div>
                         <?php } ?>
