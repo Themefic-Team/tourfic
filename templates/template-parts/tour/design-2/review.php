@@ -28,7 +28,7 @@ if ( $comments ) { ?>
             </div>
             <div class="tf-reviews-text">
                 <h3><?php echo $c_rating; ?></h3>
-                <span class="tf-reviews-meta"><?php echo $c_author_name; ?>, <?php echo $c_date; ?></span>
+                <span class="tf-reviews-meta"><?php echo $c_author_name; ?>, <?php echo date("F Y", strtotime($c_date)); ?></span>
                 <p><?php echo $c_content; ?></p>
             </div>
         </div>
