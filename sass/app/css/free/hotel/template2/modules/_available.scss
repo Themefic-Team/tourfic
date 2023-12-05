@@ -741,7 +741,7 @@
         font-style: normal !important;
         font-weight: 700 !important;
         line-height: 120%; /* 38.4px */
-        margin-bottom: 32px;
+        margin-bottom: 24px;
         @media #{$max1024}{
             font-size: 24px !important;
             margin-bottom: 24px;
@@ -753,6 +753,7 @@
         border: 0px solid;
         background-color: transparent;
         padding: 0px 12px;
+        margin-bottom: 0px !important;
         @media #{$max1024}{
             padding: 0px 4px;
         }
@@ -776,6 +777,10 @@
             @media #{$max1366}{
                 min-height: none;
                 max-height: none;
+            }
+            @media #{$max1366}{
+                min-height: 195px;
+                max-height: 195px;
             }
             a.see-details{
                 display: block;

@@ -41,7 +41,7 @@
     margin-bottom: 0px;
     font-weight: 700 !important;
     @media #{$max1024}{
-        font-size: 24px !important;
+        font-size: 20px !important;
     }
 }
 
@@ -71,6 +71,7 @@
         font-weight: 400 !important;
         line-height: 52px !important;
         word-wrap: break-word;
+        color: #99948D;
         @media #{$max1024}{
             font-size: 24px !important;
         }

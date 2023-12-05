@@ -417,7 +417,7 @@
         font-size: 16px;
         font-style: normal;
         font-weight: 600;
-        color: #999 !important;
+        color: #595349 !important;
         text-align: center;
         padding-left: 0px !important;
         padding-right: 0px !important;
@@ -428,7 +428,10 @@
     form {
         display: flex;
         flex-direction: column;
-        gap: 32px;
+        gap: 24px;
+        .tf-booking-person.tf-tour-booking-box{
+            margin-top: 8px;
+        }
     }
 
     h2 {
@@ -533,12 +536,20 @@
             }
         }
     }
-    .tf-field-calander .tf-field{
-        padding: 15px 40px !important;
-        width: 100% !important;
-        background-color: #FDF9F3 !important;
-        border-radius: 0px !important;
-        color: #99948D !important;
+    .tf-field-calander {
+        i{
+            margin-top: -3px;
+        }
+        .tf-field{
+            padding: 15px 40px !important;
+            width: 100% !important;
+            background-color: #FDF9F3 !important;
+            border-radius: 0px !important;
+            color: #99948D !important;
+        }
+    }
+    .tf-field-calander.check-in-time-div .tf-field{
+        padding: 18.7px 40px !important;
     }
     .tf-tours-booking-btn.tf-booking-bttns{
         a{
@@ -625,7 +636,6 @@
         .tf-booking-form-guest-and-room{
             position: relative;
             padding: 0px 38px;
-            border-right: 1px solid #D6D4D2;
             width: 170px;
             .tf-booking-form-title{
                 font-size: 16px;

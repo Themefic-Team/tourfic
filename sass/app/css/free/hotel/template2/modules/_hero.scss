@@ -28,10 +28,10 @@
                 display: flex;
                 gap: 16px;
                 @media #{$max1024}{
-                    margin-top: 32px;
+                    margin-top: 90px;
                 }
                 @media #{$max767}{
-                    margin-top: 16px;
+                    margin-top: 64px;
                     padding-right: 16px;
                 }
                 a.tf-share-toggle,

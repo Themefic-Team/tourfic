@@ -159,6 +159,7 @@
                         background: #FCF4E8;
                         @media #{$max1024}{
                             padding: 16px !important;
+                            gap: 8px;
                         }
                         i {
                             font-size: 24px;
@@ -226,23 +227,11 @@
                             color: #99948D;
                         }
                         ul { 
-                            margin: 0;
+                            margin: 0px 0px 0px 13px;;
                             padding: 0;
                             display: flex;
                             gap: 16px;
                             flex-direction: column;
-                            li { 
-                                position: relative;
-                                padding-left: 30px;
-                                &:after{
-                                    content: "";
-                                    height: 16px;
-                                    width: 16px;
-                                    position: ABSOLUTE;
-                                    left: 0;
-                                    top: 0;
-                                }
-                            }
                         }
                     }
                 }

@@ -9,9 +9,9 @@
     .section-title {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 16px;
-        @media #{$max767}{
-            margin-bottom: 8px;
+        margin-bottom: 8px;
+        @media #{$max1024}{
+            margin-bottom: 0px;
         }
     }
 
@@ -51,8 +51,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            i{
+                color: #595349 ;
+            }
         }
-
+        .tf-itinerary-title.active {
+            i{
+                transform: rotate(180deg);
+            }
+        }
         .tf-itinerary-title h4 {
             color: #595349;
             font-size: 20px !important;
@@ -60,6 +67,7 @@
             font-weight: 400 !important;
             line-height: 26px !important;
             word-wrap: break-word;
+            margin: 0px;
             @media #{$max1024}{
                 font-size: 16px !important;
             }

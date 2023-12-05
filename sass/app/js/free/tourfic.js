@@ -1786,13 +1786,15 @@
         });
 
         $(".tf-template-3 .tf-question").click(function(){
-            $(this).siblings().removeClass("tf-active");
-            $(this).siblings().find('.tf-question-desc').slideUp();
-            $(this).parents(".tf-questions-col").siblings().find('.tf-question').removeClass("tf-active");
-            $(this).parents(".tf-questions-col").siblings().find('.tf-question-desc').slideUp();
-
-            $(this).addClass("tf-active");
-            $(this).find('.tf-question-desc').slideDown();
+            var $this = $(this);
+            if (!$this.hasClass("tf-active")) {
+                $(this).siblings().removeClass("tf-active");
+                $(this).siblings().find('.tf-question-desc').slideUp();
+                $(this).parents(".tf-questions-col").siblings().find('.tf-question').removeClass("tf-active");
+                $(this).parents(".tf-questions-col").siblings().find('.tf-question-desc').slideUp();
+            }
+            $(this).toggleClass("tf-active");
+            $(this).find('.tf-question-desc').slideToggle();
         });
 
         $(".tf-template-3 .tf-hero-hotel.tf-popup-buttons").click(function(){
