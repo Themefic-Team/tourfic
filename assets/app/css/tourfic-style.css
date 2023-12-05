@@ -12405,6 +12405,11 @@ html {
   margin: 0;
   padding: 0;
 }
+@media only screen and (max-width: 767.98px) {
+  .tf-template-3 .tf-include-exclude-wrapper .tf-include-exclude-innter ul {
+    gap: 8px;
+  }
+}
 .tf-template-3 .tf-include-exclude-wrapper .tf-include-exclude-innter ul li {
   display: flex;
   gap: 16px;
@@ -13673,7 +13678,8 @@ html {
     min-height: 58px;
   }
   .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content {
-    min-height: 267px;
+    min-height: 275px;
+    max-height: 275px;
   }
   .tf-template-3 .tf-details-menu.tf-sticky-menu {
     top: 90px;
