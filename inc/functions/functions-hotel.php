@@ -1781,9 +1781,6 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 						</svg>
 					</span>
 				</div>
-				<div class="tf_booking-dates">
-					<div class="tf_label-row"></div>
-				</div>
 			</div>
 			<div class="tf-booking-form-checkout">
 				<span class="tf-booking-form-title"><?php _e("Check out", "tourfic"); ?></span>

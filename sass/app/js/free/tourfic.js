@@ -59,7 +59,11 @@
             if ($.trim(checkin) === '' && tf_params.date_hotel_search && posttype === 'tf_hotel') {
 
                 if ($('#tf-required').length === 0) {
-                    $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
+                    if($('.tf_booking-dates .tf_label-row').length === 1){
+                        $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
+                    }else{
+                        $("#check-in-out-date").click();
+                    }
                 }
                 return;
             }
@@ -67,7 +71,11 @@
             if ($.trim(checkin) === '' && tf_params.date_tour_search && posttype === 'tf_tours') {
 
                 if ($('#tf-required').length === 0) {
-                    $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
+                    if($('.tf_booking-dates .tf_label-row').length === 1){
+                        $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
+                    }else{
+                        $("#check-in-out-date").click();
+                    }
                 }
                 return;
             }
@@ -1823,6 +1831,7 @@
         //Search Form Showing
         $('.tf-template-3 .tf-modify-search-btn').on('click', function() {
             $('.tf-booking-form-wrapper').slideDown(300);
+            $('.tf-template-3 .tf-modify-search-btn').slideUp(300);
         });
 
         // Full Description Showing

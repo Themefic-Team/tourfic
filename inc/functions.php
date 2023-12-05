@@ -1098,9 +1098,6 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 						</svg>
 					</span>
 				</div>
-				<div class="tf_booking-dates">
-					<div class="tf_label-row"></div>
-				</div>
 			</div>
 			<div class="tf-booking-form-checkout">
 				<span class="tf-booking-form-title"><?php _e("Check out", "tourfic"); ?></span>
@@ -1140,9 +1137,6 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 						</span>
 					</div>
 					<input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required>
-				</div>
-				<div class="tf_booking-dates">
-					<div class="tf_label-row"></div>
 				</div>
 			</div>
 			<?php } ?>
