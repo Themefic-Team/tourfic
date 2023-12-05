@@ -71,9 +71,12 @@
                             <span class="tf-posts-count" hidden="hidden">
                                 <?php echo $tf_total_results; ?>
                             </span>
+                            <?php 
+                            if(tourfic_posts_navigation()){ ?>
                             <div class="tf-pagination-bar">
                                 <?php tourfic_posts_navigation(); ?>
                             </div>
+                            <?php } ?>
                         </div>
                         <!-- Available rooms end -->
 

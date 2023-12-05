@@ -505,6 +505,9 @@
 // Archive page
 .tf-available-archive-hetels-wrapper {
     background: #FAEEDC;
+    @media #{$max767}{
+        padding: 16px;
+    }
     .tf-archive-available-rooms-head {
         .tf-filter {
             background: #C1BFBB;
@@ -527,6 +530,10 @@
                 @media #{$max1200}{
                     min-width: 222px;
                     max-width: 222px;
+                }
+                @media #{$max1024}{
+                    min-height: 356px;
+                    max-height: 356px;
                 }
                 .tf-room-gallery {
                     &:nth-child(n+1) {
@@ -602,11 +609,27 @@
                 }
             }
             .tf-available-room-content {
+                @media #{$max1024}{
+                    padding: 24px 16px !important;
+                }
                 .tf-available-room-content-left {
                     display: flex;
                     flex-direction: column;
                     ul{
                         margin-top: auto;
+                        @media #{$max1024}{
+                            font-size: 14px !important;
+                        }
+                        li{
+                            @media #{$max1024}{
+                                font-size: 14px !important;
+                            }
+                        }
+                    }
+                    ul.features{
+                        @media #{$max767}{
+                            display: none;
+                        }
                     }
                     .tf-section-title-and-location {
                         .tf-section-title {
@@ -640,6 +663,15 @@
                     }
                     .tf-available-room-price {
                         margin-bottom: 12px;
+                        .tf-price-from{
+                            .amount{
+                                color: #595349;
+                                font-size: 24px;
+                                font-style: normal;
+                                font-weight: 400;
+                                line-height: 130%;
+                            }
+                        }
                     }
                     button {
                         padding: 12px 20px;

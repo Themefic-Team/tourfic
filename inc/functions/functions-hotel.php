@@ -2545,7 +2545,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 				</div>
 				</div>
 				<?php if ( $features ) { ?>
-				<ul>
+				<ul class="features">
 				<?php foreach ( $features as $tfkey => $feature ) {
 				$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
 				if ( ! empty( $feature_meta ) ) {
@@ -2556,7 +2556,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 				} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'c' ) {
 					$feature_icon = ! empty( $feature_meta['icon-c'] ) ? '<img src="' . $feature_meta['icon-c'] . '" style="min-width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />' : '';
 				}
-				if ( $tfkey < 6 ) {
+				if ( $tfkey < 5 ) {
 				?>
 					<li>
 					<?php
@@ -2566,6 +2566,9 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 					<?php echo $feature->name; ?>
 					</li>
 				<?php } } ?>
+				<?php if(count($features)>5){ ?>
+					<li><a href="<?php echo esc_url( $url ); ?>"><?php _e("View More", "tourfic"); ?></a></li>
+				<?php } ?>
 				</ul>
 				<?php } ?>
 			</div>
@@ -2591,7 +2594,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 					</span>
 				</div>
 				</div>              
-				<a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php _e("Available rooms", "tourfic"); ?></a>
+				<a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php _e("See details", "tourfic"); ?></a>
 			</div>
 		</div>
 	</div>

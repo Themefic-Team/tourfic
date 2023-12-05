@@ -265,7 +265,7 @@
             &.tf-archive-right{
                 background-color: #FCF4E8;
                 padding: 32px;                
-                width: 416px;
+                width: 480px;
                 @media #{$max991}{
                     display: none;
                     position: absolute;
@@ -315,6 +315,7 @@
                             font-weight: 400;
                             line-height: 130%;
                             color: #99948D;
+                            background: transparent;
                             @media #{$max1024}{
                                 font-size: 12px !important;
                             }

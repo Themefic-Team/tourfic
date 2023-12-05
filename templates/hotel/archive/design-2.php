@@ -68,9 +68,12 @@
                                 echo '<div class="tf-nothing-found" data-post-count="0" >' .__("No Tours Found!", "tourfic"). '</div>';
                             }
                             ?>
+                            <?php 
+                            if(tourfic_posts_navigation()){ ?>
                             <div class="tf-pagination-bar">
                                 <?php tourfic_posts_navigation(); ?>
                             </div>
+                            <?php } ?>
                         </div>
                         <!-- Available rooms end -->
 

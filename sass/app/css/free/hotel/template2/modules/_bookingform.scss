@@ -249,6 +249,7 @@
                 @media #{$max1024}{
                     padding-right: 15px !important;
                     padding-left: 15px !important;
+                    min-width: 160px;
                 }
 				.tf-booking-form-guest-and-room-inner {
 					.tf-booking-guest-and-room-wrap.tf-archive-guest-info { 
@@ -346,7 +347,7 @@
             font-size: 16px;
             font-style: normal;
             font-weight: 600;
-            color: #999 !important;
+            color: #595349 !important;
             text-align: center;
             padding-left: 0px !important;
             padding-right: 0px !important;
