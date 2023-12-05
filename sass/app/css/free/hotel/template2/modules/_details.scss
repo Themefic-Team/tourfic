@@ -81,6 +81,9 @@
                         font-style: normal;
                         font-weight: 400;
                         line-height: 130%; /* 20.8px */
+                        @media #{$max767}{
+                            font-size: 14px;
+                        }
                     }
                     span.tf-see-description,
                     span.tf-see-less-description{
@@ -91,9 +94,21 @@
                         font-weight: 400;
                         line-height: 130%;
                         cursor: pointer;
+                        @media #{$max767}{
+                            font-size: 14px;
+                        }
                     }
                     .tf-full-description{
                         display: none;
+                        color: #99948D;
+                        font-family: Josefin Sans;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 130%; /* 20.8px */
+                        @media #{$max767}{
+                            font-size: 14px;
+                        }
                     }
                 }
                 .tf-overview-popular-facilities {
@@ -116,6 +131,9 @@
                         li {
                             width: 25%;
                             display: flex;
+                            @media #{$max767}{
+                                width: 50% !important;
+                            }
                             i{
                                 margin-right: 8px;
                                 font-size: 20px;

@@ -56,7 +56,9 @@
 				}
 
 				p { 
-
+                    @media #{$max767}{
+                        font-size: 14px !important;
+                    }
 				}
 			}
 		}
@@ -149,6 +151,9 @@
                 }
 				.tf-question-desc { 
                     display: none;
+                    @media #{$max767}{
+                        font-size: 14px !important;
+                    }
 				}
 			}
 		}
@@ -172,7 +177,10 @@
         flex-direction: column;
         gap: 16px;
         p{
-            color: #99948D; 
+            color: #99948D;
+            @media #{$max767}{
+                font-size: 14px !important;
+            }
         }
 		.tf-policy-item { 
             display: flex;

@@ -9,13 +9,16 @@
     .tf-container {
         .tf-hero-content {
             min-height: 513px;
+            max-height: 513px;
             margin: 0;
             padding: 0;
             @media #{$max1024}{
                 min-height: 350px;
+                max-height: 350px;
             }
             @media #{$max767}{
                 min-height: 210px !important;
+                max-height: 210px !important;
             }
             .tf-wish-and-share {
                 display: flex;
@@ -24,8 +27,11 @@
                 margin-top: 161px;
                 display: flex;
                 gap: 16px;
+                @media #{$max1024}{
+                    margin-top: 32px;
+                }
                 @media #{$max767}{
-                    margin-top: 64px;
+                    margin-top: 16px;
                     padding-right: 16px;
                 }
                 a.tf-share-toggle,
@@ -176,6 +182,10 @@
                             width: 103px;
                             height: 40px;
                         }
+                        @media #{$max767}{
+                            width: 52px !important;
+                            height: 32px !important;
+                        }
                     }
                     a {
                         display: flex;
@@ -188,6 +198,9 @@
                         svg {
                             @media #{$max1024}{
                                 width: 16px !important;
+                            }
+                            @media #{$max767}{
+                                width: 12px !important;
                             }
                         }
                     }

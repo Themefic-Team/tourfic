@@ -3,17 +3,8 @@
         .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content {
             width: calc(100% - 230px);
         }
-        .tf-popup-body{
-            gap: 0;
-        }
         .tf-room-popup .tf-popup-inner{
             width: 80%;
-        }
-        .tf-popup-left{
-            width: 65%;
-        }
-        .tf-popup-right{
-            width: 35%;
         }
     }
 }
@@ -219,6 +210,9 @@
         .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-guest-and-room{
             padding-left: 20px !important;
         }
+        .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left ul li{
+            font-size: 16px;
+        }
     }
 }
 @media only screen and (max-width: 992px) {
@@ -283,6 +277,7 @@
 
 @media only screen and (max-width: 767.98px) {
     .tf-template-3 {
+        font-size: 14px;
         .tf-content-wrapper .tf-details .tf-details-left .tf-details-menu ul {
             gap: 16px;
         }

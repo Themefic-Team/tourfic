@@ -184,13 +184,19 @@
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     gap: 12px 5px;
+                    @media #{$max767}{
+                        gap: 8px 5px !important;
+                    }
                     &:last-child {
                         margin-bottom: 0;
                     }
                     li {
                         display: flex;
                         @media #{$max1024}{
-                            font-size: 14px;
+                            font-size: 16px;
+                        }
+                        @media #{$max767}{
+                            font-size: 14px !important;
                         }
                         i {
                             margin-right: 8px;
@@ -309,7 +315,13 @@
                         text-align: center;
                         background-color: #FAEEDC;
                         border: none;
-                        cursor: pointer;   
+                        cursor: pointer;
+                        font-weight: 700;
+                        // option:hover,
+                        // option:checked{
+                        //     accent-color: #B58E53 !important;
+                        //     background: #B58E53 !important;
+                        // }
                     }
                 }
             }
@@ -324,6 +336,11 @@
                 text-align: right;
                 label{
                     font-size: 12px;
+                }
+                input[type=checkbox]{
+                    background: #B58E53;
+                    border-color: #B58E53;
+                    accent-color: #B58E53;
                 }
             }
             .roomselectissue{
@@ -433,6 +450,9 @@
                                 display: flex;
                                 gap: 2px;
                                 justify-content: end;
+                                .amount{
+                                font-weight: 400;
+                                }
                             }
                             .sale-price {
                                 font-size: 24px;
