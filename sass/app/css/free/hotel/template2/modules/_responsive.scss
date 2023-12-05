@@ -377,8 +377,23 @@
             }
         }
         .tf-search-date-wrapper.tf-single-widgets{
-            display: none;
+            background-color: transparent;
+            gap: 0px;
+            padding: 0px;
+            margin: 0px;
+            .tf-section-title,
+            .tf_tours_booking > .tf-field-group,
+            .tf_tours_booking > .check-in-time-div,
+            .tf-tour-booking-box,
+            .tf_tours_booking > .tf-tours-booking-btn,
+            .tf-bottom-booking-bar{
+                display: none !important;
+            }
+            .tf-bottom-booking-bar.tf-mobile-booking-form{
+                display: block !important;
+            }
         }
+        
         .tf-reviews.tf-single-widgets,
         #tf-tour-faq,
         #tf-tour-reviews,

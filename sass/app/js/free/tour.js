@@ -520,6 +520,12 @@
             e.preventDefault();
             $(this).closest('.tf-bottom-booking-bar').toggleClass('mobile-active');
         });
+
+        //Template 3 Mobile Booking Btn
+        $('.tf-template-3 .tf-mobile-booking-btn').on('click', function() {
+            $('.tf-bottom-booking-bar').addClass('tf-mobile-booking-form');
+            $('.tf-template-3 .tf-mobile-booking-btn').slideUp(300);
+        });
     });
 
 })(jQuery, window);

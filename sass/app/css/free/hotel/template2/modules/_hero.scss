@@ -112,6 +112,7 @@
                 justify-content: space-between;
                 align-items: flex-end;
                 padding-bottom: 48px;
+                margin-top: 0px;
                 @media #{$max1024}{
                     align-items: center;
                     padding: 0px 0 32px 0;
@@ -121,6 +122,7 @@
                 }
                 .tf-head-title {
                     text-align: left;
+                    width: 100%;
                     h1{
                         color: #FDF9F3;
                         @media #{$max1024}{
@@ -138,8 +140,10 @@
                         color: #FDF9F3;
                         display: flex;
                         gap: 8px;
+                        width: 80%;
                         @media #{$max1024}{
                             font-size: 16px !important;
+                            width: auto;
                         }
                         @media #{$max767}{
                             font-size: 14px !important;

@@ -367,7 +367,7 @@
 .tf_acrselection-wrap.tf-show {
     visibility: visible;
     opacity: 1;
-    top: 100%;
+    top: 116%;
     display: block !important;
 }
 
@@ -565,7 +565,35 @@
         }
     }
 }
-
+.tf-mobile-booking-btn{
+    border: 1px solid #B58E53;
+    background: #B58E53;
+    padding: 12px 32px;
+    text-align: center;
+    cursor: pointer;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    display: none;
+    transition: .3s all ease;
+    &:hover{
+        background-color: #917242;
+        border-color: #917242;
+    }
+    @media #{$max1024}{
+        display: block;
+    }
+    span{
+        color: #FDF9F3;
+        font-family: Josefin Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 150%; /* 24px */
+    }
+}
 .tf-bottom-booking-bar{
     width: 100% !important;
     background: #FAEEDC;

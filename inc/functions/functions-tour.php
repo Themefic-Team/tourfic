@@ -1787,6 +1787,11 @@ function tf_single_tour_booking_form( $post_id ) {
             </div>
 
             <!-- bottom bar -->
+			<div class="tf-mobile-booking-btn">
+				<span>
+					<?php _e("Book Now", "tourfic"); ?>
+				</span>
+			</div>
             <div class="tf-bottom-booking-bar">
                 
 				<div class="tf-booking-form-fields">

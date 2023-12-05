@@ -262,6 +262,9 @@
                     z-index: 99;
                     top: 200px;
                 }
+                @media #{$max767}{
+                    top: 100px;
+                }
             }
 
             .tf_widget{
