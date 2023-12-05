@@ -91,10 +91,10 @@ if(!class_exists('Tour_Price')){
 
                         # Final output Regular (price range)
                         if(!empty($wc_regular_min_group_price) && !empty($wc_regular_max_group_price)) {
-                            $price = $wc_regular_min_group_price. '-' .$wc_regular_max_group_price; // Discounted price range
+                            $price = ($wc_regular_min_group_price != $wc_regular_max_group_price) ? $wc_regular_min_group_price. '-' .$wc_regular_max_group_price : $wc_regular_min_group_price; // Discounted price range
                         }
                         if(!empty($wc_regular_min_group_price) && !empty($wc_regular_max_group_price)) {
-                            $wc_price = $wc_regular_min_group_price. '-' .$wc_regular_max_group_price; // Discounted WooCommerce price range
+                            $wc_price = ($wc_regular_min_group_price != $wc_regular_max_group_price) ? $wc_regular_min_group_price. '-' .$wc_regular_max_group_price : $wc_regular_min_group_price; // Discounted WooCommerce price range
                         }
 
                         # WooCommerce Price
@@ -103,10 +103,10 @@ if(!class_exists('Tour_Price')){
 
                         # Final output (price range)
                         if(!empty($sale_min_group_price) && !empty($sale_max_group_price)) {
-                            $sale_price = $sale_min_group_price. '-' .$sale_max_group_price; // Discounted price range
+                            $sale_price = ($sale_min_group_price != $sale_max_group_price) ? $sale_min_group_price. '-' .$sale_max_group_price : $sale_min_group_price; // Discounted price range
                         }
                         if(!empty($wc_min_group_price) && !empty($wc_max_group_price)) {
-                            $wc_sale_price = $wc_min_group_price. '-' .$wc_max_group_price; // Discounted WooCommerce price range
+                            $wc_sale_price = ($wc_min_group_price != $wc_max_group_price) ? $wc_min_group_price. '-' .$wc_max_group_price : $wc_min_group_price; // Discounted WooCommerce price range
                         }
 
                     } else {
@@ -117,10 +117,10 @@ if(!class_exists('Tour_Price')){
 
                         # Final output (price range)
                         if(!empty($min_group_price) && !empty($max_group_price)) {
-                            $price = $min_group_price. '-' .$max_group_price; // Price range
+                            $price = ($min_group_price != $max_group_price) ? $min_group_price. '-' .$max_group_price : $min_group_price; // Price range
                         }
                         if(!empty($wc_min_group_price) && !empty($wc_max_group_price)) {
-                            $wc_price = $wc_min_group_price. '-' .$wc_max_group_price; // WooCommerce price range
+                            $wc_price = ($wc_min_group_price != $wc_max_group_price) ? $wc_min_group_price. '-' .$wc_max_group_price : $wc_min_group_price; // WooCommerce price range
                         }
                         
                     }

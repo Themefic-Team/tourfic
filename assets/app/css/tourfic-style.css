@@ -8352,7 +8352,10 @@ div#tf-contact-info {
   font-weight: 400;
 }
 .tf-search-results-list .tf-item-card .tf-item-details .tf-post-footer .tf-pricing del {
-  font-size: 20px;
+  font-size: 16px;
+}
+.tf-search-results-list .tf-item-card .tf-item-details .tf-post-footer .tf-pricing del span {
+  font-size: 16px;
 }
 .tf-search-results-list .tf-item-card .tf-item-details .tf-post-footer .tf-pricing span {
   font-size: 20px;
