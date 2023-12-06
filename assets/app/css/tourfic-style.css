@@ -11930,6 +11930,9 @@ html {
   border-radius: 0px !important;
   color: #99948D !important;
 }
+.tf-template-3 .tf_tours_booking .tf-field-calander .tf-field::placeholder {
+  color: #99948D !important;
+}
 .tf-template-3 .tf_tours_booking .tf-field-calander.check-in-time-div .tf-field {
   padding: 18.7px 40px !important;
 }
@@ -11979,12 +11982,12 @@ html {
   width: 100% !important;
   background: #FAEEDC;
   box-shadow: none;
+  gap: 24px;
 }
 .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields {
   display: flex;
 }
 .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-checkinout {
-  width: 185px;
   border-right: 1px solid #D6D4D2;
   flex-direction: column;
   position: relative;
@@ -12045,7 +12048,6 @@ html {
 .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room {
   position: relative;
   padding: 0px 38px;
-  width: 170px;
 }
 .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room .tf-booking-form-title {
   font-size: 16px;

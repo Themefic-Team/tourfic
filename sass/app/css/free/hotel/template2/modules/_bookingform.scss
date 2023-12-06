@@ -546,6 +546,9 @@
             background-color: #FDF9F3 !important;
             border-radius: 0px !important;
             color: #99948D !important;
+            &::placeholder{
+                color: #99948D !important;
+            }
         }
     }
     .tf-field-calander.check-in-time-div .tf-field{
@@ -598,10 +601,10 @@
     width: 100% !important;
     background: #FAEEDC;
     box-shadow: none;
+    gap: 24px;
     .tf-booking-form-fields{
         display: flex;
         .tf-booking-form-checkinout{
-            width: 185px;
             border-right: 1px solid #D6D4D2;
             flex-direction: column;
             position: relative;
@@ -664,7 +667,6 @@
         .tf-booking-form-guest-and-room{
             position: relative;
             padding: 0px 38px;
-            width: 170px;
             .tf-booking-form-title{
                 font-size: 16px;
                 font-weight: 600;
