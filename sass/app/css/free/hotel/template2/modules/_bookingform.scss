@@ -604,12 +604,18 @@
     gap: 24px;
     .tf-booking-form-fields{
         display: flex;
+        @media #{$max640}{
+            justify-content: center;
+        }
         .tf-booking-form-checkinout{
             border-right: 1px solid #D6D4D2;
             flex-direction: column;
             position: relative;
             padding: 0px 38px;
             display: flex;
+            @media #{$max640}{
+                padding: 0px 10px;
+            }
             span.tf-booking-form-title {
                 font-size: 16px;
                 font-weight: 600;
@@ -662,11 +668,17 @@
                 border-radius: 0px !important;
                 background-image: none;
                 text-align: center;
+                @media #{$max640}{
+                    padding: 0px 10px;
+                }
             }
         }
         .tf-booking-form-guest-and-room{
             position: relative;
             padding: 0px 38px;
+            @media #{$max640}{
+                padding: 0px 10px;
+            }
             .tf-booking-form-title{
                 font-size: 16px;
                 font-weight: 600;
@@ -717,12 +729,21 @@
             .tf_acrselection-wrap.tf-show{
                 left: 0;
                 right: auto;
-                top: -210px !important;
                 width: auto;
                 visibility: visible;
                 opacity: 1;
                 top: 100%;
                 display: block !important;
+                margin-top: 0px;
+                bottom: 162%;
+                top: auto;
+                @media #{$max1199}{
+                    bottom: 131%;
+                }
+                @media #{$max640}{
+                    left: auto;
+                    right: 0;
+                }
             }
         }
     }

@@ -11987,12 +11987,22 @@ html {
 .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields {
   display: flex;
 }
+@media only screen and (max-width: 640px) {
+  .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields {
+    justify-content: center;
+  }
+}
 .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-checkinout {
   border-right: 1px solid #D6D4D2;
   flex-direction: column;
   position: relative;
   padding: 0px 38px;
   display: flex;
+}
+@media only screen and (max-width: 640px) {
+  .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-checkinout {
+    padding: 0px 10px;
+  }
 }
 .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-checkinout span.tf-booking-form-title {
   font-size: 16px;
@@ -12045,9 +12055,19 @@ html {
   background-image: none;
   text-align: center;
 }
+@media only screen and (max-width: 640px) {
+  .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-bottom-booking-field.check-in-time-div select {
+    padding: 0px 10px;
+  }
+}
 .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room {
   position: relative;
   padding: 0px 38px;
+}
+@media only screen and (max-width: 640px) {
+  .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room {
+    padding: 0px 10px;
+  }
 }
 .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room .tf-booking-form-title {
   font-size: 16px;
@@ -12099,12 +12119,25 @@ html {
 .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room .tf_acrselection-wrap.tf-show {
   left: 0;
   right: auto;
-  top: -210px !important;
   width: auto;
   visibility: visible;
   opacity: 1;
   top: 100%;
   display: block !important;
+  margin-top: 0px;
+  bottom: 162%;
+  top: auto;
+}
+@media only screen and (max-width: 1199.98px) {
+  .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room .tf_acrselection-wrap.tf-show {
+    bottom: 131%;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room .tf_acrselection-wrap.tf-show {
+    left: auto;
+    right: 0;
+  }
 }
 .tf-template-3 .tf-bottom-booking-bar .tf-tours-booking-btn.tf-booking-bttns a {
   padding: 16px 32px !important;
