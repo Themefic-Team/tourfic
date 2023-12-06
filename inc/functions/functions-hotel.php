@@ -1958,7 +1958,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 				if ( empty( $check_in_out ) ) {
 					if ( ! empty( $b_room['price'] ) ) {
 						$b_room_price = $b_room['price'];
-						$room_price[] = $b_room_price;
+
 						$dicount_b_room_price = 0;
 
 						if ( $hotel_discount_type == "percent" ) {
@@ -1967,7 +1967,14 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 							$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $b_room_price - $hotel_discount_amount ), 2 ) ) );
 						}
 						if($dicount_b_room_price != 0) {
-							$room_price[] = $dicount_b_room_price;
+							$room_price[] = array(
+								"regular_price" => $b_room['price'],
+								"sale_price"    => $dicount_b_room_price,
+							);
+						} else {
+							$room_price[] = array(
+								"sale_price" => $b_room['price']
+							);
 						}
 					}
 				} else {
@@ -1988,30 +1995,43 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 									if ( ! empty( $repval['price'] ) ) {
 										$repval_price = $repval['price'];
 										$dicount_b_room_price = 0;
-										$room_price[] = $repval_price;
+
 										if ( $hotel_discount_type == "percent" ) {
 											$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $repval_price - ( ( $repval_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
 										} else if ( $hotel_discount_type == "fixed" ) {
 											$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $repval_price - $hotel_discount_amount ), 2 ) ) );
 										}
 										if($dicount_b_room_price != 0) {
-											$room_price[] = $dicount_b_room_price;
+											$room_price[] = array(
+												"regular_price" => $repval['price'],
+												"sale_price"    => $dicount_b_room_price
+											);
+										} else {
+											$room_price[] = array(
+												"sale_price" => $repval['price'],
+											);
 										}
 									}
 								} else {
 									if ( ! empty( $repval['price'] ) ) {
 										$repval_price = $repval['price'];
 										$dicount_b_room_price = 0;
-
-										$room_price[] = $repval_price;
+										
 										if ( $hotel_discount_type == "percent" ) {
 											$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $repval_price - ( ( $repval_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
 										} else if ( $hotel_discount_type == "fixed" ) {
 											$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $repval_price - $hotel_discount_amount ), 2 ) ) );
 										}
 										
-										if( $dicount_b_room_price != 0 ) {
-											$room_price[] = $dicount_b_room_price;
+										if($dicount_b_room_price != 0) {
+											$room_price[] = array(
+												"regular_price" => $repval['price'],
+												"sale_price"    => $dicount_b_room_price
+											);
+										} else {
+											$room_price[] = array(
+												"sale_price" => $repval['price'],
+											);
 										}
 									}
 								}
@@ -2020,7 +2040,6 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 					} else {
 						if ( ! empty( $b_room['price'] ) ) {
 							$b_room_price = $b_room['price'];
-							$room_price[] = $b_room_price;
 							
 							$dicount_b_room_price = 0;
 
@@ -2030,7 +2049,14 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 								$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $b_room_price - $hotel_discount_amount ), 2 ) ) );
 							}
 							if($dicount_b_room_price != 0) {
-								$room_price[] = $dicount_b_room_price;
+								$room_price[] = array(
+									"regular_price" => $b_room['price'],
+									"sale_price"    => $dicount_b_room_price
+								);
+							} else {
+								$room_price[] = array(
+									"sale_price" => $b_room['price'],
+								);
 							}
 						}
 					}
@@ -2052,31 +2078,59 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 
 					if ( $archive_page_price_settings == "all" ) {
 						if ( ! empty( $b_room['adult_price'] ) ) {
-							$room_price[] = $b_room['adult_price'];
+
 							if ( $dicount_adult_price != 0 ) {
-								$room_price[] = $dicount_adult_price;
+								$room_price[] = $room_price[] = array(
+									"regular_price" => $b_room['adult_price'],
+									"sale_price"    => $dicount_adult_price
+								);
+							} else {
+								$room_price[] = array(
+									"sale_price" => $b_room['adult_price'],
+								);
 							}
 						}
 						if ( ! empty( $b_room['child_price'] ) ) {
-							$room_price[] = $b_room['child_price'];
+
 							if ( $dicount_child_price != 0 ) {
-								$room_price[] = $dicount_child_price;
+								$room_price[] = array(
+									"regular_price" => $b_room['child_price'],
+									"sale_price"    => $dicount_child_price
+								);
+							} else {
+								$room_price[] = array(
+									"sale_price" => $b_room['child_price'],
+								);
 							}
 						}
 					}
 					if ( $archive_page_price_settings == "adult" ) {
 						if ( ! empty( $b_room['adult_price'] ) ) {
-							$room_price[] = $b_room['adult_price'];
+
 							if ( $dicount_adult_price != 0 ) {
-								$room_price[] = $dicount_adult_price;
+								$room_price[] = array(
+									"regular_price" => $b_room['adult_price'],
+									"sale_price"    => $dicount_adult_price
+								);
+							} else {
+								$room_price[] = array(
+									"sale_price" => $b_room['adult_price'],
+								);
 							}
 						}
 					}
 					if ( $archive_page_price_settings == "child" ) {
 						if ( ! empty( $b_room['child_price'] ) ) {
-							$room_price[] = $b_room['child_price'];
+
 							if ( $dicount_child_price != 0 ) {
-								$room_price[] = $dicount_child_price;
+								$room_price[] = array(
+									"regular_price" => $b_room['child_price'],
+									"sale_price"    => $dicount_child_price
+								);
+							} else {
+								$room_price[] = array(
+									"sale_price" => $b_room['child_price'],
+								);
 							}
 						}
 					}
@@ -2115,31 +2169,59 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 									// end
 									if ( $archive_page_price_settings == "all" ) {
 										if ( ! empty( $repval['adult_price'] ) ) {
-											$room_price[] = $repval['adult_price'];
+
 											if ( $dicount_adult_price != 0 ) {
-												$room_price[] = $dicount_adult_price;
+												$room_price[] = array(
+													"regular_price" => $repval['adult_price'],
+													"sale_price"    => $dicount_adult_price
+												);
+											} else {
+												$room_price[] = array(
+													"sale_price" => $repval['adult_price'],
+												);
 											}
 										}
 										if ( ! empty( $repval['child_price'] ) ) {
-											$room_price[] = $repval['child_price'];
+
 											if ( $dicount_child_price != 0  ) {
-												$room_price[] = $dicount_child_price;
+												$room_price[] = array(
+													"regular_price" => $repval['child_price'],
+													"sale_price"    => $dicount_child_price
+												);
+											} else {
+												$room_price[] = array(
+													"sale_price" => $repval['child_price'],
+												);
 											}
 										}
 									}
 									if ( $archive_page_price_settings == "adult" ) {
 										if ( ! empty( $repval['adult_price'] ) ) {
-											$room_price[] = $repval['adult_price'];
+
 											if ( $dicount_adult_price != 0 ) {
-												$room_price[] = $dicount_adult_price;
+												$room_price[] = array(
+													"regular_price" => $repval['adult_price'],
+													"sale_price"    => $dicount_adult_price
+												);
+											} else {
+												$room_price[] = array(
+													"sale_price" => $repval['adult_price'],
+												);
 											}
 										}
 									}
 									if ( $archive_page_price_settings == "child" ) {
 										if ( ! empty( $repval['child_price'] ) ) {
-											$room_price[] = $repval['child_price'];
+											
 											if ( $dicount_child_price != 0  ) {
-												$room_price[] = $dicount_child_price;
+												$room_price[] = array(
+													"regular_price" => $repval['child_price'],
+													"sale_price"    => $dicount_child_price
+												);
+											} else {
+												$room_price[] = array(
+													"sale_price" => $repval['child_price'],
+												);
 											}
 										}
 									}
@@ -2160,31 +2242,59 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 									// end
 									if ( $archive_page_price_settings == "all" ) {
 										if ( ! empty( $repval['adult_price'] ) ) {
-											$room_price[] = $repval['adult_price'];
+											
 											if ( $dicount_adult_price != 0 ) {
-												$room_price[] = $dicount_adult_price;
+												$room_price[] = array(
+													"regular_price" => $repval['adult_price'],
+													"sale_price"    => $dicount_adult_price
+												);
+											} else {
+												$room_price[] = array(
+													"sale_price" => $repval['adult_price'],
+												);
 											}
 										}
 										if ( ! empty( $repval['child_price'] ) ) {
-											$room_price[] = $repval['child_price'];
+											
 											if ( $dicount_child_price != 0 ) {
-												$room_price[] = $dicount_child_price;
+												$room_price[] = array(
+													"regular_price" => $repval['child_price'],
+													"sale_price"    => $dicount_child_price
+												);
+											} else {
+												$room_price[] = array(
+													"sale_price" => $repval['child_price'],
+												);
 											}
 										}
 									}
 									if ( $archive_page_price_settings == "adult" ) {
 										if ( ! empty( $repval['adult_price'] ) ) {
-											$room_price[] = $repval['adult_price'];
+											
 											if ( $dicount_adult_price != 0 ) {
-												$room_price[] = $dicount_adult_price;
+												$room_price[] = array(
+													"regular_price" => $repval['adult_price'],
+													"sale_price"    => $dicount_adult_price
+												);
+											} else {
+												$room_price[] = array(
+													"sale_price" => $repval['adult_price'],
+												);
 											}
 										}
 									}
 									if ( $archive_page_price_settings == "child" ) {
 										if ( $repval['child_price'] ) {
-											$room_price[] = $repval['child_price'];
+											
 											if ( $dicount_child_price != 0 ) {
-												$room_price[] = $dicount_child_price;
+												$room_price[] = array(
+													"regular_price" => $repval['child_price'],
+													"sale_price"    => $dicount_child_price
+												);
+											} else {
+												$room_price[] = array(
+													"sale_price" => $repval['child_price'],
+												);
 											}
 										}
 									}
@@ -2209,32 +2319,59 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 
 						if ( $archive_page_price_settings == "all" ) {
 							if ( ! empty( $b_room['adult_price'] ) ) {
-								$room_price[] = $b_room['adult_price'];
+								
 								if ( $dicount_adult_price != 0  ) {
-									$room_price[] = $dicount_adult_price;
+									$room_price[] = array(
+										"regular_price" => $b_room['adult_price'],
+										"sale_price"    => $dicount_adult_price
+									);
+								} else {
+									$room_price[] = array(
+										"sale_price" => $b_room['adult_price'],
+									);
 								}
 							}
 							if ( ! empty( $b_room['child_price'] ) ) {
-								$room_price[] = $b_room['child_price'];
 
 								if ( $dicount_child_price != 0  ) {
-									$room_price[] = $dicount_child_price;
+									$room_price[] = array(
+										"regular_price" => $b_room['child_price'],
+										"sale_price"    => $dicount_child_price
+									);
+								} else {
+									$room_price[] = array(
+										"sale_price" => $b_room['child_price'],
+									);
 								}
 							}
 						}
 						if ( $archive_page_price_settings == "adult" ) {
 							if ( ! empty( $b_room['adult_price'] ) ) {
-								$room_price[] = $b_room['adult_price'];
+
 								if ( $dicount_adult_price != 0 ) {
-									$room_price[] = $dicount_adult_price;
+									$room_price[] = array(
+										"regular_price" => $b_room['adult_price'],
+										"sale_price"    => $dicount_adult_price
+									);
+								} else {
+									$room_price[] = array(
+										"sale_price" => $b_room['adult_price'],
+									);
 								}
 							}
 						}
 						if ( $archive_page_price_settings == "child" ) {
 							if ( ! empty( $b_room['child_price'] ) ) {
-								$room_price[] = $b_room['child_price'];
+
 								if ( $dicount_child_price != 0  ) {
-									$room_price[] = $dicount_child_price;
+									$room_price[] = array(
+										"regular_price" => $b_room['child_price'],
+										"sale_price"    => $dicount_child_price
+									);
+								} else {
+									$room_price[] = array(
+										"sale_price" => $b_room['child_price'],
+									);
 								}
 							}
 						}
@@ -2329,10 +2466,28 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                     <div class="tf-pricing">
 						<?php
 						$room_price = array_filter( $room_price );
+						$min_sale_price =  !empty($room_price) ? min( array_column( $room_price, 'sale_price' ) ) : 0;
+
 						if ( ! empty( $room_price ) ):
+							$min_regular_price = 0;
+
+							array_walk( $room_price, function ( $value ) use ( $min_sale_price, &$min_regular_price ) {
+								if ( is_array( $value )  && count($value) > 0) {
+									if ( array_key_exists( "regular_price", $value ) ) {
+										if ( $value["sale_price"] == $min_sale_price ) {
+											$min_regular_price = $value["regular_price"];
+										}
+									}
+								}
+							} );
 							echo __( "From ", "tourfic" );
-							$lowest_price  = wc_price( min( $room_price ) );
-							echo " $lowest_price";
+							//get the lowest price from all available room price
+							$lowest_sale_price = wc_price( $min_sale_price );
+							echo " $lowest_sale_price" . " ";
+							if ( $min_regular_price != 0 ) {
+								$lowest_regular_price = wc_price( $min_regular_price );
+								echo "<del>" . $lowest_regular_price . "<del>";
+							}
 						endif; ?>
                     </div>
                     <div class="tf-booking-bttns">
@@ -2430,10 +2585,26 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 														?>
                                                         <div class="tf-room-price">
 															<?php
-															echo __( "From ", "tourfic" );
-															//get the lowest price from all available room price
-															$lowest_price  = wc_price( min( $room_price ) );
-															echo " $lowest_price"
+																$min_sale_price = min( array_column( $room_price, 'sale_price' ) );
+																$min_regular_price = 0;
+
+																array_walk($room_price, function($value) use ($min_sale_price, &$min_regular_price) {
+																	if(is_array($value)) {
+																		if(array_key_exists("regular_price", $value)) {
+																			if($value["sale_price"] == $min_sale_price) {
+																				$min_regular_price = $value["regular_price"];
+																			}
+																		}
+																	}
+																});
+																echo __( "From ", "tourfic" );
+																//get the lowest price from all available room price
+																$lowest_sale_price  = wc_price( $min_sale_price );
+																echo " $lowest_sale_price" . " ";
+																if($min_regular_price != 0) {
+																	$lowest_regular_price  = wc_price( $min_regular_price );
+																	echo "<del>" . $lowest_regular_price . "<del>";
+																}
 															?>
                                                         </div>
 													<?php endif; ?>
