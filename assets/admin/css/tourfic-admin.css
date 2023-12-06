@@ -540,6 +540,9 @@ button.tf-order-remove {
   font-size: 1rem;
 }
 
+.tf-license-activate {
+  display: inline-block;
+}
 .tf-license-activate p.submit {
   margin: 0px !important;
 }
@@ -551,6 +554,9 @@ button.tf-order-remove {
   font-size: 1rem;
 }
 
+.el-license-active-btn {
+  display: inline-block;
+}
 .el-license-active-btn p.submit {
   margin: 0px !important;
 }
@@ -577,6 +583,22 @@ input.select2-search__field {
 
 .tf-widget-field .select2-container:last-child {
   display: none;
+}
+
+.tf-duplicator-loader {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.4);
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+  cursor: wait;
+}
+
+.tf-post-data-duplicate:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 body.admin_page_tf-setup-wizard {
@@ -2425,6 +2447,19 @@ Steps
   box-shadow: none;
 }
 
+.tf-copy-item span.tf-copied-msg {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 9px;
+  padding-right: 10px;
+}
+
+.tf-exp-imp-field {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+}
+
 .tf-field {
   padding: 12px 0;
 }
@@ -2484,6 +2519,7 @@ Steps
 }
 
 .tf-field-ical input,
+.tf-field-ical_export input,
 .tf-field-text input {
   width: 100%;
   padding: 12px 8px 12px 12px;
@@ -2495,43 +2531,52 @@ Steps
   font-size: 14px;
 }
 .tf-field-ical input:focus,
+.tf-field-ical_export input:focus,
 .tf-field-text input:focus {
   background: #FFFFFF;
   box-shadow: 0 0 0 2px #2979ff;
   border-radius: 4px;
 }
 .tf-field-ical input::-webkit-input-placeholder,
+.tf-field-ical_export input::-webkit-input-placeholder,
 .tf-field-text input::-webkit-input-placeholder {
   color: #a6b1bf;
 }
 .tf-field-ical input::-ms-input-placeholder,
+.tf-field-ical_export input::-ms-input-placeholder,
 .tf-field-text input::-ms-input-placeholder {
   color: #a6b1bf;
 }
 .tf-field-ical input input:-ms-input-placeholder,
+.tf-field-ical_export input input:-ms-input-placeholder,
 .tf-field-text input input:-ms-input-placeholder {
   color: #a6b1bf;
 }
 .tf-field-ical input::-moz-placeholder,
+.tf-field-ical_export input::-moz-placeholder,
 .tf-field-text input::-moz-placeholder {
   opacity: 1;
   color: #a6b1bf;
 }
 .tf-field-ical input:-moz-placeholder,
+.tf-field-ical_export input:-moz-placeholder,
 .tf-field-text input:-moz-placeholder {
   opacity: 1;
   color: #a6b1bf;
 }
 .tf-field-ical input::placeholder,
+.tf-field-ical_export input::placeholder,
 .tf-field-text input::placeholder {
   color: #a6b1bf;
 }
 .tf-field-ical input:read-only,
+.tf-field-ical_export input:read-only,
 .tf-field-text input:read-only {
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
   background-color: #ebf2ff;
 }
 .tf-field-ical input:read-only:focus,
+.tf-field-ical_export input:read-only:focus,
 .tf-field-text input:read-only:focus {
   box-shadow: none;
   border: 1px solid #c4cbd4;
@@ -3701,6 +3746,16 @@ Steps
   color: #a6b1bf;
 }
 
+textarea.tf-exp-imp-field {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+a.tf-import-btn, a.tf-export-btn {
+  margin: 14px 0px !important;
+}
+
 .tf-image-radio-group {
   display: flex;
   align-items: initial;
@@ -3762,7 +3817,8 @@ Steps
   border-color: #003c79;
 }
 
-.tf-field-ical a.button-primary {
+.tf-field-ical a.button-primary,
+.tf-field-ical_export a.button-primary {
   background-color: #003c79;
   border-color: #003c79;
 }

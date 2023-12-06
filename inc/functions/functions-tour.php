@@ -1305,10 +1305,10 @@ function tf_single_tour_booking_form( $post_id ) {
                             </div>
 						<?php } ?>
 
-                        <!-- Popup Booking Summery -->
+                        <!-- Popup Booking Summary -->
                         <div class="tf-booking-summery" style="<?php echo empty($tour_extras) && empty($traveller_info_coll) && 3!=$tf_booking_by ? esc_attr( "width: 100%;" ) : ''; ?>">
                             <div class="tf-booking-fixed-summery">
-                                <h5><?php echo __( "Booking summery", "tourfic" ); ?></h5>
+                                <h5><?php echo __( "Booking Summary", "tourfic" ); ?></h5>
                                 <h4><?php echo get_the_title( $post_id ); ?></h4>
                             </div>
                             <div class="tf-booking-traveller-info">

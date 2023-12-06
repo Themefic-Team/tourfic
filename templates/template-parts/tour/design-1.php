@@ -194,29 +194,27 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         <div class="tf-column tf-tour-details-right">
                             <div class="tf-tour-booking-box tf-box">
 								<?php
-								$hide_price = tfopt( 't-hide-start-price' );
-								if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) :
-                                    if ( isset( $hide_price ) && $hide_price !== '1' ) : ?>
-                                        <!-- Tourfic Pricing Head -->
-                                        <div class="tf-booking-form-data">
-                                            <div class="tf-booking-block">
-                                                <div class="tf-booking-price tf-padbtm-12">
-                                                <?php
-                                                $tour_price = [];
-                                                $tf_pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
-                                                $tour_single_price_settings = !empty(tfopt('tf-template')["tour_archive_price_minimum_settings"]) ? tfopt('tf-template')["tour_archive_price_minimum_settings"] : 'all';
-                                                $custom_pricing_by_rule = !empty( $meta['custom_pricing_by'] ) ? $meta['custom_pricing_by'] : '';
-                                                if( $tf_pricing_rule  && $tf_pricing_rule == 'group' ){
-
-                                                    if ( !empty($meta['type'] ) && $meta['type'] === 'continuous' ) {
-                                                        $custom_availability = !empty($meta['custom_avail']) ? $meta['custom_avail'] : false;
-                                                        if ($custom_availability) {
-                                                            foreach ( $meta['cont_custom_date'] as $repval ) {
-
-                                                                if( $custom_pricing_by_rule  && $custom_pricing_by_rule == 'group' ){
-                                                                    if(! empty( $repval['group_price'] )){
-                                                                        $tour_price[] = $repval['group_price'];
-                                                                    }
+                                $hide_price = !empty( tfopt( 't-hide-start-price' ) ) ? tfopt( 't-hide-start-price' ) : '';
+								if ( isset( $hide_price ) && $hide_price !== '1' ) : ?>
+                                    <!-- Tourfic Pricing Head -->
+                                    <div class="tf-booking-form-data">
+                                        <div class="tf-booking-block">
+                                            <div class="tf-booking-price tf-padbtm-12">
+                                            <?php 
+                                            $tour_price = [];
+                                            $tf_pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
+                                            $tour_single_price_settings = !empty(tfopt('tf-template')["tour_archive_price_minimum_settings"]) ? tfopt('tf-template')["tour_archive_price_minimum_settings"] : 'all';
+                                            $custom_pricing_by_rule = !empty( $meta['custom_pricing_by'] ) ? $meta['custom_pricing_by'] : '';
+                                            if( $tf_pricing_rule  && $tf_pricing_rule == 'group' ){
+                                                
+                                                if ( !empty($meta['type'] ) && $meta['type'] === 'continuous' ) {
+                                                    $custom_availability = !empty($meta['custom_avail']) ? $meta['custom_avail'] : false;
+                                                    if ($custom_availability) {
+                                                        foreach ( $meta['cont_custom_date'] as $repval ) {
+                                        
+                                                            if( $custom_pricing_by_rule  && $custom_pricing_by_rule == 'group' ){
+                                                                if(! empty( $repval['group_price'] )){
+                                                                    $tour_price[] = $repval['group_price'];
                                                                 }
                                                                 if( $custom_pricing_by_rule  && $custom_pricing_by_rule == 'person' ){
                                                                     if($tour_single_price_settings == "all") {
@@ -541,7 +539,6 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                     </div>
                     <!-- Single Tour Body details End -->
                 </div>
-                <!--  Upcoming tours  -->
             </div>
         </div>
 
@@ -562,6 +559,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 					),
 				),
 			);
+
 			//show related tour based on selected tours
 			$selected_ids = !empty(tfopt( 'tf-related-tours' )) ? tfopt( 'tf-related-tours' ) : array();
 
@@ -585,6 +583,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
 			$tours = new WP_Query( $args );
 			if ( $tours->have_posts() ) {
+                if ($tours->found_posts > 0) :
 				?>
 
                 <!-- Tourfic upcomming tours tours -->
@@ -603,7 +602,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 								while ( $tours->have_posts() ) {
 									$tours->the_post();
 
-                                    $selected_design_post_id = $selected_id;
+                                    $selected_design_post_id = get_the_ID();
                                     $destinations           = get_the_terms( $selected_design_post_id, 'tour_destination' );
 
                                     $first_destination_name = $destinations[0]->name;
@@ -651,6 +650,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         </div>
                     </div>
                 </div>
+            <?php endif; ?>
 			<?php }
 			wp_reset_postdata();
 			?>

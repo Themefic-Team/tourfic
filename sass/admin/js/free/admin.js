@@ -299,6 +299,37 @@
                 }
             })
         });
+        /*
+        * Author @Jahid
+        * Hotel, Tour, Apartment Duplicator
+        */
+       
+        $('.tf-post-data-duplicate').on('click', function(e) {
+            e.preventDefault();
+            var postID = $(this).data('postid');
+            var postType = $(this).data('posttype');
+            var nonce = $(this).data('nonce');
+            $('#wpcontent').append('<div class="tf-duplicator-loader"></div>');
+            // AJAX request to duplicate post
+            $.ajax({
+                type: 'POST',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: 'tf_duplicate_post_data',
+                    postID: postID,
+                    postType: postType,
+                    security: nonce
+                },
+                success: function(response) {
+                    window.location.reload();
+                },
+                error: function(errorThrown) {
+                    // Handle errors (if any)
+                    console.error('Error duplicating post:', errorThrown);
+                }
+            });
+        });
+
     });
 
 })(jQuery);

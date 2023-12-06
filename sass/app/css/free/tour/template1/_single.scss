@@ -1160,8 +1160,8 @@
                     border-left-width: 0;
                     border-bottom-width: 0;
                     color: #ffffff;
-                    border-color: $color-theme;
-                    background: $color-theme;
+                    border-color: $color-theme !important;
+                    background: $color-theme !important;
                     border-radius: 2px;
                     padding-top: 15px;
                     padding-right: 30px;
