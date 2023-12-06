@@ -662,6 +662,22 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 $('.total-days-price-wrap .total-days').html(wc_price_per_night + ' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
                                 $('.total-days-price-wrap .days-total-price').html(total_days_price_html);
 
+								//discount
+                                var discount = <?php echo $discount; ?>;
+                                var discount_html = '<?php echo wc_price( 0 ); ?>';
+                                if (discount > 0) {
+                                    $('.apartment-discount-wrap').show();
+
+									<?php if ( $discount_type == 'percent' ): ?>
+                                    discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', (total_price * discount / 100).toFixed(2));
+                                    total_price = total_price - (total_price * discount / 100);
+									<?php else: ?>
+                                    discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', discount.toFixed(2));
+                                    total_price = total_price - discount;
+									<?php endif; ?>
+                                }
+                                $('.apartment-discount-wrap .apartment-discount').html('-' + discount_html);
+
 
                                 let totalPerson = parseInt($('.tf_acrselection #adults').val()) + parseInt($('.tf_acrselection #children').val()) + parseInt($('.tf_acrselection #infant').val());
 
@@ -709,22 +725,6 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 $('.additional-fee-wrap .additional-fee').html(additional_fee_html);
 								<?php endif; ?>
 								<?php endif; ?>
-
-                                //discount
-                                var discount = <?php echo $discount; ?>;
-                                var discount_html = '<?php echo wc_price( 0 ); ?>';
-                                if (discount > 0) {
-                                    $('.apartment-discount-wrap').show();
-
-									<?php if ( $discount_type == 'percent' ): ?>
-                                    discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', (total_price * discount / 100).toFixed(2));
-                                    total_price = total_price - (total_price * discount / 100);
-									<?php else: ?>
-                                    discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', discount.toFixed(2));
-                                    total_price = total_price - discount;
-									<?php endif; ?>
-                                }
-                                $('.apartment-discount-wrap .apartment-discount').html('-' + discount_html);
 
                                 //total price
                                 var total_price_html = '<?php echo wc_price( 0 ); ?>';
