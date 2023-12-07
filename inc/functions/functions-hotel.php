@@ -2589,10 +2589,12 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 																$min_regular_price = 0;
 
 																array_walk($room_price, function($value) use ($min_sale_price, &$min_regular_price) {
-																	if(is_array($value)) {
-																		if(array_key_exists("regular_price", $value)) {
-																			if($value["sale_price"] == $min_sale_price) {
-																				$min_regular_price = $value["regular_price"];
+																	if(!empty($value)) {
+																		if(is_array($value)) {
+																			if(array_key_exists("regular_price", $value)) {
+																				if($value["sale_price"] == $min_sale_price) {
+																					$min_regular_price = $value["regular_price"];
+																				}
 																			}
 																		}
 																	}
