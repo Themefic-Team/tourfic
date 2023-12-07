@@ -638,6 +638,45 @@ div#tf-destinationautocomplete-list {
                                 }
                             }
                         }
+                        .tf_acrselection-wrap {
+                            background: #FDF9F3;
+                            box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.10);
+                            top: 111%;
+                            .acr-label{
+                                color: #595349;
+                                font-family: Josefin Sans;
+                                font-size: 16px;
+                                font-style: normal;
+                                font-weight: 600;
+                                line-height: 130%;
+                            }
+                            .acr-select{
+                                text-align: right;
+                                width: 96px;
+                                input[type=tel]{
+                                    width: 34px !important;
+                                    height: 48px;
+                                    border: 1px solid !important;
+                                    font-size: 16px;
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    color: #595349 !important;
+                                    text-align: center;
+                                    padding-left: 0px !important;
+                                    padding-right: 0px !important;
+                                    border-radius: 20px;
+                                    background: #FCF4E8 !important;
+                                }
+                                .acr-dec,
+                                .acr-inc{
+                                    background: transparent;
+                                    border: none;
+                                    font-size: 31px;
+                                    font-weight: 400;
+                                    color: #595349;
+                                }
+                            }
+                        }
                     }
                 }
                 .tf_availability_checker_box{

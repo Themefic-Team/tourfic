@@ -471,8 +471,8 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 								<span class="tf-label"><?php _e( 'Start Date', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_checkin_dates">
-										<span class="date"><?php _e( 'Day', 'tourfic' ); ?></span>
-										<span class="month"><?php _e( 'Month', 'tourfic' ); ?></span>
+										<span class="date"><?php echo date('d'); ?></span>
+										<span class="month"><?php echo date('M'); ?></span>
 									</div>
 									<div class="tf_check_arrow">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -491,8 +491,8 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 								<span class="tf-label"><?php _e( 'End Date', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_checkout_dates">
-										<span class="date"><?php _e( 'Day', 'tourfic' ); ?></span>
-										<span class="month"><?php _e( 'Month', 'tourfic' ); ?></span>
+										<span class="date"><?php echo date('d'); ?></span>
+										<span class="month"><?php echo date('M'); ?></span>
 									</div>
 									<div class="tf_check_arrow">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -527,7 +527,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 										<div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
 										<div class="acr-select">
 											<div class="acr-dec">-</div>
-											<input type="number" class="adults-style2" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>">
+											<input type="tel" class="adults-style2" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>">
 											<div class="acr-inc">+</div>
 										</div>
 									</div>
@@ -538,7 +538,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 											<div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
 											<div class="acr-select">
 												<div class="acr-dec">-</div>
-												<input type="number" name="children" class="childs-style2" id="children" min="0" value="0">
+												<input type="tel" name="children" class="childs-style2" id="children" min="0" value="0">
 												<div class="acr-inc">+</div>
 											</div>
 										</div>
@@ -549,7 +549,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 											<div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
 											<div class="acr-select">
 												<div class="acr-dec">-</div>
-												<input type="number" name="infant" class="infant-style2" id="infant" min="0" value="0">
+												<input type="tel" name="infant" class="infant-style2" id="infant" min="0" value="0">
 												<div class="acr-inc">+</div>
 											</div>
 										</div>
@@ -609,12 +609,12 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 							if(selectedDates[0]){
 								const startDate = selectedDates[0];
 								$(".tf_tour_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
-								$(".tf_tour_check_in_out_date .tf_checkin_dates span.month").html(monthNames[startDate.getMonth()+1]);
+								$(".tf_tour_check_in_out_date .tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
 							}
 							if(selectedDates[1]){
 								const endDate = selectedDates[1];
 								$(".tf_tour_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
-								$(".tf_tour_check_in_out_date .tf_checkout_dates span.month").html(monthNames[endDate.getMonth()+1]);
+								$(".tf_tour_check_in_out_date .tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
 							}
 						}
 					}

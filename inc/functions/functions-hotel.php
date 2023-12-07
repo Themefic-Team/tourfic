@@ -1193,12 +1193,12 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 						</div>
 						
 						<div class="tf_checkin_date">
-							<label class="tf_label_checkin tf_check_inout_dates">
+							<label class="tf_label_checkin tf_check_inout_dates tf_hotel_check_in_out_date">
 								<span class="tf-label"><?php _e( 'Check in', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_checkin_dates">
-										<span class="date"><?php _e( 'Day', 'tourfic' ); ?></span>
-										<span class="month"><?php _e( 'Month', 'tourfic' ); ?></span>
+										<span class="date"><?php echo date('d'); ?></span>
+										<span class="month"><?php echo date('M'); ?></span>
 									</div>
 									<div class="tf_check_arrow">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -1211,13 +1211,13 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 							<input type="hidden" name="check-in-out-date" class="tf-check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo tfopt( 'date_hotel_search' ) ? 'required' : ''; ?>>
 						</div>
 						
-						<div class="tf_checkin_date tf_check_inout_dates">
+						<div class="tf_checkin_date tf_check_inout_dates tf_hotel_check_in_out_date">
 							<label class="tf_label_checkin">
 								<span class="tf-label"><?php _e( 'Check Out', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_checkout_dates">
-										<span class="date"><?php _e( 'Day', 'tourfic' ); ?></span>
-										<span class="month"><?php _e( 'Month', 'tourfic' ); ?></span>
+										<span class="date"><?php echo date('d'); ?></span>
+										<span class="month"><?php echo date('M'); ?></span>
 									</div>
 									<div class="tf_check_arrow">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -1256,7 +1256,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 										<div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
 										<div class="acr-select">
 											<div class="acr-dec">-</div>
-											<input type="number" class="adults-style2" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>">
+											<input type="tel" class="adults-style2" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>">
 											<div class="acr-inc">+</div>
 										</div>
 									</div>
@@ -1264,7 +1264,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 										<div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
 										<div class="acr-select">
 											<div class="acr-dec child-dec">-</div>
-											<input type="number" name="children" class="childs-style2" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
+											<input type="tel" name="children" class="childs-style2" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
 											<div class="acr-inc child-inc">+</div>
 										</div>
 									</div>
@@ -1272,7 +1272,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 										<div class="acr-label"><?php _e( 'Rooms', 'tourfic' ); ?></div>
 										<div class="acr-select">
 											<div class="acr-dec">-</div>
-											<input type="number" name="room" class="rooms-style2" id="room" min="1" value="<?php echo ! empty( $room ) ? $room : '1'; ?>">
+											<input type="tel" name="room" class="rooms-style2" id="room" min="1" value="<?php echo ! empty( $room ) ? $room : '1'; ?>">
 											<div class="acr-inc">+</div>
 										</div>
 									</div>
@@ -1350,13 +1350,13 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 							];
 							if(selectedDates[0]){
 								const startDate = selectedDates[0];
-								$(".tf_checkin_dates span.date").html(startDate.getDate());
-								$(".tf_checkin_dates span.month").html(monthNames[startDate.getMonth()+1]);
+								$(".tf_hotel_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
+								$(".tf_hotel_check_in_out_date .tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
 							}
 							if(selectedDates[1]){
 								const endDate = selectedDates[1];
-								$(".tf_checkout_dates span.date").html(endDate.getDate());
-								$(".tf_checkout_dates span.month").html(monthNames[endDate.getMonth()+1]);
+								$(".tf_hotel_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
+								$(".tf_hotel_check_in_out_date .tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
 							}
 						}
 					}
