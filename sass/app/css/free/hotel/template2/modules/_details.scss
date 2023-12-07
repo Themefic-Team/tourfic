@@ -4,6 +4,7 @@
         justify-content: space-between;
         flex-direction: row;
         gap: 40px;
+        align-items: start;
         @media #{$max1024}{
             gap: 24px;
         }

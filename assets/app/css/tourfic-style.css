@@ -10041,6 +10041,7 @@ html {
   justify-content: space-between;
   flex-direction: row;
   gap: 40px;
+  align-items: start;
 }
 @media only screen and (max-width: 1024px) {
   .tf-template-3 .tf-content-wrapper .tf-details {
@@ -10944,7 +10945,7 @@ html {
   grid-template-columns: 1fr;
 }
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room.tf-tabs-room .tf-available-room-content {
-  width: 100% !important;
+  width: auto !important;
   display: flow-root;
   padding: 16px;
 }
@@ -13854,7 +13855,7 @@ html {
     width: 10px !important;
   }
   .tf-template-3 .tf-archive-details .tf-available-room .tf-available-room-content {
-    width: 100% !important;
+    width: auto !important;
     display: flow-root;
   }
   .tf-template-3 .tf-archive-details .tf-available-room .tf-available-room-content .tf-available-room-content-left {
