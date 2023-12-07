@@ -268,7 +268,7 @@ function tf_hotel_booking_callback() {
 			}
 
 			# Multiply pricing by night number
-			$price_total = $total_price * ($room_selected * $day_difference+1);
+			$price_total = $total_price * ($room_selected * $day_difference);
 
 		}
 		# Set pricing
