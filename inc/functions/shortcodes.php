@@ -481,9 +481,9 @@ function tf_search_form_shortcode( $atts, $content = null ) {
                 <div id="tf-apartment-booking-form" class="tf-tabcontent" <?php echo tf_is_search_form_single_tab( $type ) ? 'style="display:block"' : '' ?><?php echo esc_attr( $child_age_limit ); ?>>
 					<?php
 					if ( $advanced == "enabled" ) {
-						tf_apartment_search_form_horizontal( $classes, $title, $subtitle, true );
+						tf_apartment_search_form_horizontal( $classes, $title, $subtitle, true, $design );
 					} else {
-						tf_apartment_search_form_horizontal( $classes, $title, $subtitle );
+						tf_apartment_search_form_horizontal( $classes, $title, $subtitle, false, $design );
 					}
 					?>
                 </div>
