@@ -512,7 +512,29 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
             <div class="tf-apartment-form-header">
 				<?php if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' ) || $tf_booking_type == 1 ) : ?>
                     <h3 class="tf-apartment-price-per-night">
-                        <span class="tf-apartment-base-price"><?php echo wc_price( $price_per_night ) ?></span>
+                        <span class="tf-apartment-base-price">
+						<?php
+							//get the lowest price from all available room price
+							$apartment_min_price = 0;
+							if ( ! empty( $discount_type ) && ! empty( $price_per_night  ) && ! empty( $discount ) ) {
+								if ( $discount_type == "percent" ) {
+									$apartment_min_discount = ( $price_per_night * (int) $discount ) / 100;
+									$apartment_min_price    = $price_per_night - $apartment_min_discount;
+								}
+								if ( $discount_type == "fixed" ) {
+									$apartment_min_discount = $discount;
+									$apartment_min_price    = $price_per_night - (int) $apartment_min_discount;
+								}
+							}
+							$lowest_price = wc_price( $apartment_min_price );
+							
+							if ( ! empty( $apartment_min_discount ) ) {
+								echo  "<del><b>" . strip_tags(wc_price( $price_per_night )) . "</b></del>" . " " . $lowest_price;
+							} else {
+								echo wc_price( $price_per_night );
+							}
+							?>
+						</span>
                         <span><?php _e( '/per night', 'tourfic' ) ?></span>
                     </h3>
 				<?php endif; ?>

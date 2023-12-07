@@ -309,18 +309,18 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                                                     <?php
                                                     //get the lowest price from all available room price
-                                                    $tf_tour_min_price      = min( $tour_price );
-                                                    $tf_tour_full_price     = min( $tour_price );
+                                                    $tf_tour_min_price      = !empty($tour_price) ? min( $tour_price ) : 0;
+                                                    $tf_tour_full_price     = !empty($tour_price) ? min( $tour_price ) : 0;
                                                     $tf_tour_discount_type  = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
                                                     $tf_tour_discount_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
                                                     if ( ! empty( $tf_tour_discount_type ) && ! empty( $tf_tour_min_price ) && ! empty( $tf_tour_discount_price ) ) {
                                                         if ( $tf_tour_discount_type == "percent" ) {
-                                                            $tf_tour_min_discount = ( $tf_tour_min_price * $tf_tour_discount_price ) / 100;
+                                                            $tf_tour_min_discount = ( $tf_tour_min_price * (int) $tf_tour_discount_price ) / 100;
                                                             $tf_tour_min_price    = $tf_tour_min_price - $tf_tour_min_discount;
                                                         }
                                                         if ( $tf_tour_discount_type == "fixed" ) {
                                                             $tf_tour_min_discount = $tf_tour_discount_price;
-                                                            $tf_tour_min_price    = $tf_tour_min_price - $tf_tour_discount_price;
+                                                            $tf_tour_min_price    = $tf_tour_min_price - (int) $tf_tour_discount_price;
                                                         }
                                                     }
                                                     $lowest_price = strip_tags(wc_price( $tf_tour_min_price ));
@@ -514,18 +514,18 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                         <p><span><?php _e( "From", "tourfic" ); ?></span>
                                                         <?php
                                                             //get the lowest price from all available room price
-                                                            $tf_tour_min_price      = min( $tour_price );
-                                                            $tf_tour_full_price     = min( $tour_price );
+                                                            $tf_tour_min_price      = !empty($tour_price) ? min( $tour_price ) : 0;
+                                                            $tf_tour_full_price     = !empty($tour_price) ? min( $tour_price ) : 0;
                                                             $tf_tour_discount_type  = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
                                                             $tf_tour_discount_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
                                                             if ( ! empty( $tf_tour_discount_type ) && ! empty( $tf_tour_min_price ) && ! empty( $tf_tour_discount_price ) ) {
                                                                 if ( $tf_tour_discount_type == "percent" ) {
-                                                                    $tf_tour_min_discount = ( $tf_tour_min_price * $tf_tour_discount_price ) / 100;
+                                                                    $tf_tour_min_discount = ( $tf_tour_min_price * (int) $tf_tour_discount_price ) / 100;
                                                                     $tf_tour_min_price    = $tf_tour_min_price - $tf_tour_min_discount;
                                                                 }
                                                                 if ( $tf_tour_discount_type == "fixed" ) {
                                                                     $tf_tour_min_discount = $tf_tour_discount_price;
-                                                                    $tf_tour_min_price    = $tf_tour_min_price - $tf_tour_discount_price;
+                                                                    $tf_tour_min_price    = $tf_tour_min_price - (int) $tf_tour_discount_price;
                                                                 }
                                                             }
                                                             $lowest_price = strip_tags(wc_price( $tf_tour_min_price ));
