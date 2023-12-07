@@ -175,7 +175,7 @@ function tf_hotel_booking_callback() {
 		 */
 		if ( $avail_by_date && function_exists('is_tf_pro') && is_tf_pro() ) {
 
-			if( !$price_multi_day ){
+			if(!$price_multi_day){
 				if ( $check_in && $check_out ) {
 					// Check availability by date option
 					$period = new DatePeriod(
@@ -184,7 +184,7 @@ function tf_hotel_booking_callback() {
 						new DateTime( $check_out . ' 23:59' )
 					);
 				}
-			} else {
+			}else{
 				if ( $check_in && $check_out ) {
 					$period = new DatePeriod(
 						new DateTime( $check_in . ' 00:00' ),
@@ -235,6 +235,7 @@ function tf_hotel_booking_callback() {
 			}
 
 			$price_total = $total_price * $room_selected;
+
 		} else {
 
 			if ( $pricing_by == '1' ) {
@@ -267,7 +268,7 @@ function tf_hotel_booking_callback() {
 			}
 
 			# Multiply pricing by night number
-			$price_total = $total_price * $room_selected * $day_difference;
+			$price_total = $total_price * ($room_selected * $day_difference+1);
 
 		}
 		# Set pricing
