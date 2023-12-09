@@ -1,9 +1,9 @@
-=== Tourfic – Ultimate Hotel Booking & Travel Booking WordPress Plugin | WooCommerce Booking ===
+=== Tourfic – Ultimate Hotel Booking, Travel Booking & Apartment Booking WordPress Plugin | WooCommerce Booking ===
 Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
-Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
+Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings, apartment-booking, apartment-rental
 Requires at least: 5.4
 Tested up to: 6.4
-Stable tag: 2.10.10
+Stable tag: 2.10.11
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -113,6 +113,7 @@ This All-in-One Travel Booking WordPress plugin consists of almost all the basic
 = 🎉 External Booking( Pro ) =
 * External Booking for Tour
 * External Booking for Hotel
+* External Booking for Apartment
 
 = 🎉  Multi-Vendor Functions(Pro) =
 * Vendors can add unlimited hotels, tours, and apartments with all the fields(Pro)
@@ -449,6 +450,22 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.10.11 - 09 December 2023 =
+
+- Fixed: Tour Availability issue fixed
+- Fixed: Location Require Error Message (Tour/Hotel/Apartment)
+- Fixed: Image replace issue on frontend dashboard On Apartment(Pro)
+- Fixed: External booking minor issues fixed(Pro)
+- Fixed: Import Export Issue
+- Improved: WooCommerce Currency Compatibility
+- Improved: Compatibility Issue with ACF
+- Improved: Pricing Accuracy for Tour/Hotel/Apartment
+- Improved: Per Itinerary Language to Location(Pro)
+- Added: External booking added for Apartment(Pro)
+- Added: External listing shortcode added(Pro)
+- Improved: Booking.com, Travelpayouts full-screen popup add(Pro)
+- Added: Affiliate Addon release(Pro)
 
 = 2.10.10 - 25 November 2023 =
 
