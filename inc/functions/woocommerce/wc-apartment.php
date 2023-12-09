@@ -89,6 +89,13 @@ function tf_apartment_booking_callback() {
 		if ( $days > 0 ) {
 			$total_price = $price_per_night * $days;
 
+
+			if ( $discount_type == 'percent' ) {
+				$total_price = $total_price - ( $total_price * ( $discount / 100 ) );
+			} elseif ( $discount_type == 'fixed' ) {
+				$total_price = $total_price - $discount;
+			}
+			
 			if ( defined( 'TF_PRO' ) ){
 				foreach ($additional_fees as $key => $item){
 					if ( $item['fee_type'] == 'per_night' ){
@@ -107,12 +114,6 @@ function tf_apartment_booking_callback() {
 				} else {
 					$total_price += $additional_fee;
 				}
-			}
-
-			if ( $discount_type == 'percent' ) {
-				$total_price = $total_price - ( $total_price * ( $discount / 100 ) );
-			} elseif ( $discount_type == 'fixed' ) {
-				$total_price = $total_price - $discount;
 			}
 
 			$tf_apartment_data['tf_apartment_data']['total_price'] = $total_price;

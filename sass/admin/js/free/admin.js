@@ -85,7 +85,7 @@
          * show notyf error
          */
         $(document).on('click', '.post-type-tf_tours #publish, .post-type-tf_tours #save-post', function (e) {
-            if ($('textarea[name="tf_tours_opt[text_location]"]').val().length === 0) {
+            if ($('input[name="tf_tours_opt[location][address]"]').val().length === 0) {
                 e.preventDefault;
                 e.stopImmediatePropagation();
                 notyf.error(tf_admin_params.tour_location_required);
@@ -99,7 +99,7 @@
          * show notyf error
          */
         $(document).on('click', '.post-type-tf_hotel #publish, .post-type-tf_hotel #save-post', function (e) {
-            if ($('textarea[name="tf_hotels_opt[address]"]').val().length === 0) {
+            if ($('input[name="tf_hotels_opt[map][address]"]').val().length === 0) {
                 e.preventDefault;
                 e.stopImmediatePropagation();
                 notyf.error(tf_admin_params.hotel_location_required);
@@ -113,7 +113,7 @@
          * show notyf error
          */
         $(document).on('click', '.post-type-tf_apartment #publish, .post-type-tf_apartment #save-post', function (e) {
-            if ($('[name="tf_apartment_opt[address]"]').val().length === 0) {
+            if ($('[name="tf_apartment_opt[map][address]"]').val().length === 0) {
                 e.preventDefault;
                 e.stopImmediatePropagation();
                 notyf.error(tf_admin_params.apartment_location_required);
@@ -228,6 +228,76 @@
                     }
                 });
             }
+        });
+
+        /*
+        * active tourfic affiliate plugin
+        */
+        $(document).on('click', '.tf-affiliate-active', function(e) {
+            e.preventDefault();
+
+            var btn = $(this);
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: 'tf_affiliate_active',
+                    nonce: tf_admin_params.tf_nonce,
+                },
+                beforeSend: function (data) {
+                    btn.addClass('tf-btn-loading').css({'pointer-events': 'none'});
+                },
+                success: function (data) {
+                    console.log('data', data)
+                    let response = JSON.parse(data);
+                    if( response.status === 'success' ) {
+                        notyf.success(response.message);
+
+                        setTimeout(function() {
+                            location.reload();
+                        }, 500);
+                    }
+                    btn.removeClass('tf-btn-loading').css({'pointer-events': 'auto'});
+                },
+                error: function (data) {
+                    btn.removeClass('tf-btn-loading').css({'pointer-events': 'auto'});
+                },
+                complete: function (data) {
+                    btn.removeClass('tf-btn-loading').css({'pointer-events': 'auto'});
+                }
+            })
+        });
+
+        /*
+        * install tourfic affiliate plugin
+        */
+        $(document).on('click', '.tf-affiliate-install', function(e) {
+            e.preventDefault();
+
+            var btn = $(this);
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: 'tf_affiliate_install',
+                    nonce: tf_admin_params.tf_nonce,
+                },
+                beforeSend: function (data) {
+                    btn.addClass('tf-btn-loading').css({'pointer-events': 'none'});
+                },
+                success: function (data) {
+                    let response = JSON.parse(data);
+                    if( response.status === 'success' ) {
+                        location.reload();
+                    }
+                    btn.removeClass('tf-btn-loading').css({'pointer-events': 'auto'});
+                },
+                error: function (data) {
+                    btn.removeClass('tf-btn-loading').css({'pointer-events': 'auto'});
+                }
+            })
         });
 
         /*
