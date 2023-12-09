@@ -31,7 +31,8 @@
 							}, $tf_custom_date );
 							$tf_custom_date      = unserialize( $tf_tour_conti_avail );
 						}
-						foreach ( $tf_custom_date as $item ) {
+						if(is_array($tf_custom_date)) {
+							foreach ( $tf_custom_date as $item ) {
 							$max_people = ! empty( $item['max_people'] ) ? $item['max_people'] : '';
 							if ( ! empty( $max_people ) ) {
 								$tf_max_people [] = $max_people;
@@ -40,6 +41,7 @@
 							if ( ! empty( $max_capacity ) ) {
 								$tf_max_capacity [] = $max_capacity;
 							}
+						}
 						}
 						if ( ! empty( $tf_max_capacity ) ) {
 							$tf_tour_booking_limit = max( $tf_max_capacity );
