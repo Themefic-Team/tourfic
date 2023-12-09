@@ -453,6 +453,9 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 = 2.10.11 - 09 December 2023 =
 
+- Added: External booking added for Apartment(Pro)
+- Added: External listing shortcode added(Pro)
+- Added: Affiliate Addon release(Pro)
 - Fixed: Tour Availability issue fixed
 - Fixed: Location Require Error Message (Tour/Hotel/Apartment)
 - Fixed: Image replace issue on frontend dashboard On Apartment(Pro)
@@ -462,10 +465,7 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 - Improved: Compatibility Issue with ACF
 - Improved: Pricing Accuracy for Tour/Hotel/Apartment
 - Improved: Per Itinerary Language to Location(Pro)
-- Added: External booking added for Apartment(Pro)
-- Added: External listing shortcode added(Pro)
 - Improved: Booking.com, Travelpayouts full-screen popup add(Pro)
-- Added: Affiliate Addon release(Pro)
 
 = 2.10.10 - 25 November 2023 =
 
