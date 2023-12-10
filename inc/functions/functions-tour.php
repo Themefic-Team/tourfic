@@ -3913,3 +3913,24 @@ function tf_tour_booking_popup_callback() {
 	echo wp_json_encode( $response );
 	die();
 }
+
+// Single Page dynamic Price Change
+
+add_action("wp_ajax_tf_single_price_dynamic_change", "tf_single_price_dynamic_change_callback");
+add_action("wp_ajax_nopriv_tf_single_price_dynamic_change", "tf_single_price_dynamic_change_callback");
+
+function tf_single_price_dynamic_change_callback() {
+	$post_id = !empty($_POST["post_id"]) ? sanitize_text_field($_POST["post_id"]) : 0;
+	$selected_date = !empty($_POST["selected_date"]) ? sanitize_text_field($_POST["selected_date"]) : 0;
+
+	$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+
+	wp_reset_postdata();
+	
+	wp_send_json_success(
+		array(
+			"post_id" => $meta,
+			"selected_date" => $selected_date,
+		)
+	);
+}

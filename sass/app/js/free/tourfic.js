@@ -432,6 +432,30 @@
             $('.tf-' + t).addClass('active');
         });
 
+        $(document).on("change", ".tours-check-in-out", function(e) {
+            let selectedDate = $(this).val();
+            let postID = $('input[name="post_id"]').val();
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: {
+                    action: "tf_single_price_dynamic_change",
+                    post_id: postID,
+                    selected_date: selectedDate
+                },
+                complete: function (data) {
+                   console.log(data)
+                },
+                success: function (data) {
+                    console.log(data)
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+            });
+        })
+
         //###############################
         //     Apartment                #
         //###############################
