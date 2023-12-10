@@ -16,9 +16,7 @@ class TF_PROMO_NOTICE {
     private $months = ['January', 'June', 'November', 'December']; 
     private $plugins_existes = ['ins', 'uacf7', 'beaf', 'ebef'];
 
-    public function __construct() {
-        // echo "hello";
-        // exit;
+    public function __construct() { 
         if(in_array(date('F'), $this->months) && !function_exists('is_tf_pro') ){ 
              
             add_filter('cron_schedules', array($this, 'tf_custom_cron_interval'));
