@@ -3933,24 +3933,57 @@ function tf_single_price_dynamic_change_callback() {
 	$tour_type = !empty($meta['type']) ? $meta['type'] : "continuous";
     $tour_archive_page_price_settings = !empty(tfopt('tour_archive_price_minimum_settings')) ? tfopt('tour_archive_price_minimum_settings') : 'all';
 
+	$tour_price = [];
 
-	if ( ! empty( $selected_date ) ) {
-		$period = new DatePeriod(
-			new DateTime( $tf_form_start ),
-			new DateInterval( 'P1D' ),
-			new DateTime( ! empty( $tf_form_end ) ? $tf_form_end : $tf_form_start . '23:59' )
-		);
-	} else {
-		$period = '';
+	if($cusom_avil) {
+		foreach($meta['cont_custom_date'] as $repval) {
+			
+			if( strtotime($selected_date) >= strtotime($repval["date"]["from"]) && strtotime($selected_date) <= strtotime($repval["date"]["to"])) {
+
+				if( $custom_pricing_by  && $custom_pricing_by == 'group' ){
+					if(! empty( $repval['group_price'] )){
+						$tour_price[] = $repval['group_price'];
+					}
+				}
+				if( $custom_pricing_by  && $custom_pricing_by == 'group' ){
+					if(! empty( $repval['group_price'] )){
+						$tour_price[] = $repval['group_price'];
+					}
+				}
+				if( $custom_pricing_by  && $custom_pricing_by == 'person' ){
+					if($tour_archive_page_price_settings == "all") {
+						if(!empty($repval['adult_price'])){
+							$tour_price[] = $repval['adult_price'];
+						}
+						if(!empty($repval['child_price'])){
+							$tour_price[] = $repval['child_price'];
+						}
+					}
+
+					if($tour_archive_page_price_settings == "adult") {
+						if(!empty($repval['adult_price'])){
+							$tour_price[] = $repval['adult_price'];
+						}
+					}
+
+					if($tour_archive_page_price_settings == "child") {
+						if(!empty($repval['child_price'])){
+							$tour_price[] = $repval['child_price'];
+						}
+					}
+				}
+			}
+		}
 	}
 
 	wp_reset_postdata();
 	
 	wp_send_json_success(
 		array(
-			"post_id" => $period,
+			"min_price" => is_array($tour_price) ? min($tour_price) : 0,
 			"selected_date" => $selected_date,
 		)
 	);
+	
 	die();
 }

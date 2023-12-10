@@ -444,11 +444,10 @@
                     post_id: postID,
                     selected_date: selectedDate
                 },
-                complete: function (data) {
-                   console.log(data)
-                },
-                success: function (data) {
-                    console.log(data)
+                success: function (resoponce) {
+                    console.log(resoponce)
+
+                    // $(".tf-booking-price p").html(resoponce.data.min_price)
                 },
                 error: function (data) {
                     console.log(data);
