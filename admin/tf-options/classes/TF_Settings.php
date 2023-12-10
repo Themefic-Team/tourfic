@@ -412,46 +412,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						<img src="<?php echo TF_ASSETS_APP_URL; ?>images/setup_wizard.png" alt="setup wizard">
 					</div>
 				</div>
-
-				<!-- Black Friday Admin Notice -->
-				<?php 
-
-				$tf_promo_option = get_option( 'tf_promo__schudle_option' ); 
-				if(  is_array($tf_promo_option) && !function_exists('is_tf_pro') && strtotime($tf_promo_option['end_date']) > time() && strtotime($tf_promo_option['start_date']) < time()){
-					$image_url = isset($tf_promo_option['dasboard_url']) ? esc_url($tf_promo_option['dasboard_url']) : '';
-					$deal_link = isset($tf_promo_option['promo_url']) ? esc_url($tf_promo_option['promo_url']) : ''; 
-					$tf_dismiss_admin_notice = get_option( 'tf_dismiss_admin_notice' );
-					if($tf_dismiss_admin_notice == 1  || time() >  $tf_dismiss_admin_notice ){ 
-				?>
-				<div class="notice notice-success tf_black_friday_2023_admin_notice" style="position: relative;padding: 0px; margin-left: 0px; margin-top: 0px; margin-bottom: 0px;"> 
-					<a href="<?php echo esc_attr( $deal_link ); ?>" style="display: block; line-height: 0;" target="_blank" >
-						<img  style="width: 100%;" src="<?php echo esc_attr($image_url) ?>" alt="">
-					</a> 
-					<?php if( isset($tf_promo_option['dasboard_dismiss']) && $tf_promo_option['dasboard_dismiss'] == true): ?>
-					<button type="button" class="notice-dismiss tf_black_friday_notice_dismiss"><span class="screen-reader-text"><?php echo __('Dismiss this notice.', 'ultimate-addons-cf7' ) ?></span></button>
-					<?php  endif; ?>
-				</div>
-				<script>
-					jQuery(document).ready(function($) {
-						$(document).on('click', '.tf_black_friday_notice_dismiss', function( event ) {
-							jQuery('.tf_black_friday_2023_admin_notice').css('display', 'none')
-							data = {
-								action : 'tf_black_friday_notice_dismiss_callback',
-							};
-
-							$.ajax({
-								url: ajaxurl,
-								type: 'post',
-								data: data,
-								success: function (data) { ;
-								},
-								error: function (data) { 
-								}
-							});
-						});
-					});
-				</script>
-				<?php } } ?>
+ 
                 <div class="tf-help-center-banner">
                     <div class="tf-help-center-content">
                         <h2><?php _e("Help Center","tourfic"); ?></h2>
