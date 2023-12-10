@@ -3923,14 +3923,34 @@ function tf_single_price_dynamic_change_callback() {
 	$post_id = !empty($_POST["post_id"]) ? sanitize_text_field($_POST["post_id"]) : 0;
 	$selected_date = !empty($_POST["selected_date"]) ? sanitize_text_field($_POST["selected_date"]) : 0;
 
+	$tour_price = [];
 	$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+	$price_setting = !empty($meta["pricing"]) ? $meta["pricing"] : "person";
+	$adult_price = !empty($meta["adult_price"]) ? $meta["adult_price"] : 0;
+	$child_price = !empty($meta["child_price"]) ? $meta["child_price"] : 0;
+	$cusom_avil = !empty($meta['custom_avail']) ? $meta['custom_avail'] : false;
+	$custom_pricing_by = !empty($meta['custom_pricing_by']) ? $meta['custom_pricing_by'] : 0;
+	$tour_type = !empty($meta['type']) ? $meta['type'] : "continuous";
+    $tour_archive_page_price_settings = !empty(tfopt('tour_archive_price_minimum_settings')) ? tfopt('tour_archive_price_minimum_settings') : 'all';
+
+
+	if ( ! empty( $selected_date ) ) {
+		$period = new DatePeriod(
+			new DateTime( $tf_form_start ),
+			new DateInterval( 'P1D' ),
+			new DateTime( ! empty( $tf_form_end ) ? $tf_form_end : $tf_form_start . '23:59' )
+		);
+	} else {
+		$period = '';
+	}
 
 	wp_reset_postdata();
 	
 	wp_send_json_success(
 		array(
-			"post_id" => $meta,
+			"post_id" => $period,
 			"selected_date" => $selected_date,
 		)
 	);
+	die();
 }
