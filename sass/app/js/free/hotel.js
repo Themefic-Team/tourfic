@@ -20,7 +20,6 @@
             // Child & Child Type
             var adult_field_type = $("#adults").attr('type');
             var child_field_type = $("#children").attr('type');
-
             if ($.trim($('input[name=check-in-out-date]').val()) == '') {
 
                 if ($('#tf-required').length === 0) {
@@ -43,12 +42,12 @@
             });
             var tf_room_avail_nonce = $("input[name=tf_room_avail_nonce]").val();
             var post_id = $('input[name=post_id]').val();
-            if (adult_field_type == "number") {
+            if (adult_field_type == "number" || adult_field_type == "tel") {
                 var adult = $('#adults').val();
             } else {
                 var adult = $('select[name=adults] option').filter(':selected').val();
             }
-            if (child_field_type == "number") {
+            if (child_field_type == "number" || child_field_type == "tel") {
                 var child = $('#children').val();
             } else {
                 var child = $('select[name=children] option').filter(':selected').val();

@@ -20,12 +20,9 @@ if( !empty($total_facilities_cat) && !empty($meta['hotel-facilities']) ){
         <div class="tf-facility-item">
             <?php
             $f_icon_single  = ! empty( $total_facilities_cat[$catkey]['hotel_facilities_cat_icon'] ) ? $total_facilities_cat[$catkey]['hotel_facilities_cat_icon'] : '';
-            if ( !empty($f_icon_single) ) {
-                $feature_icon = '<i class="' . $f_icon_single . '"></i>';
-            }
             ?>
             <h4>
-            <?php echo $feature_icon ?? ''; ?> <?php echo $total_facilities_cat[$catkey]['hotel_facilities_cat_name'] ?? ''; ?>
+            <?php echo !empty($f_icon_single) ? '<i class="' . $f_icon_single . '"></i>' : ''; ?> <?php echo $total_facilities_cat[$catkey]['hotel_facilities_cat_name'] ?? ''; ?>
             </h4>
             <ul>
                 <?php 
