@@ -447,7 +447,7 @@
                 success: function (resoponce) {
                     console.log(resoponce)
 
-                    // $(".tf-booking-price p").html(resoponce.data.min_price)
+                    $(".tf-booking-price p").html(resoponce.data.min_price)
                 },
                 error: function (data) {
                     console.log(data);

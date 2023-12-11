@@ -3934,6 +3934,7 @@ function tf_single_price_dynamic_change_callback() {
     $tour_archive_page_price_settings = !empty(tfopt('tour_archive_price_minimum_settings')) ? tfopt('tour_archive_price_minimum_settings') : 'all';
 
 	$tour_price = [];
+	$infant_price = [];
 
 	if($cusom_avil) {
 		foreach($meta['cont_custom_date'] as $repval) {
@@ -3942,45 +3943,68 @@ function tf_single_price_dynamic_change_callback() {
 
 				if( $custom_pricing_by  && $custom_pricing_by == 'group' ){
 					if(! empty( $repval['group_price'] )){
-						$tour_price[] = $repval['group_price'];
-					}
-				}
-				if( $custom_pricing_by  && $custom_pricing_by == 'group' ){
-					if(! empty( $repval['group_price'] )){
-						$tour_price[] = $repval['group_price'];
+						$tour_price["group_price"] = $repval['group_price'];
 					}
 				}
 				if( $custom_pricing_by  && $custom_pricing_by == 'person' ){
 					if($tour_archive_page_price_settings == "all") {
 						if(!empty($repval['adult_price'])){
-							$tour_price[] = $repval['adult_price'];
+							$tour_price["adult_price"] = $repval['adult_price'];
 						}
 						if(!empty($repval['child_price'])){
-							$tour_price[] = $repval['child_price'];
+							$tour_price["child_price"] = $repval['child_price'];
 						}
 					}
 
 					if($tour_archive_page_price_settings == "adult") {
 						if(!empty($repval['adult_price'])){
-							$tour_price[] = $repval['adult_price'];
+							$tour_price["adult_price"] = $repval['adult_price'];
 						}
 					}
 
 					if($tour_archive_page_price_settings == "child") {
 						if(!empty($repval['child_price'])){
-							$tour_price[] = $repval['child_price'];
+							$tour_price["child_price"] = $repval['child_price'];
 						}
+					}
+
+					if(!empty($repval['infant_price'])){
+						$infant_price["infant_price"] = $repval['infant_price'];
 					}
 				}
 			}
 		}
 	}
 
+	//get the lowest price from all available room price
+	$tf_tour_min_price      = !empty($tour_price) ? min( $tour_price ) : 0;
+	$tf_tour_full_price     = !empty($tour_price) ? min( $tour_price ) : 0;
+	$tf_tour_discount_type  = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : 'none';
+	$tf_tour_discount_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : 0;
+	if ( ($tf_tour_discount_type != "none" ) && ! empty( $tf_tour_min_price ) && ! empty( $tf_tour_discount_price ) ) {
+
+		if ( $tf_tour_discount_type == "percent" ) {
+			$tf_tour_min_discount = ( $tf_tour_min_price * $tf_tour_discount_price ) / 100;
+			$tf_tour_min_price    = (int) $tf_tour_min_price - $tf_tour_min_discount;
+		}
+		if ( $tf_tour_discount_type == "fixed" ) {
+			$tf_tour_min_discount = $tf_tour_discount_price;
+			$tf_tour_min_price    = $tf_tour_min_price - $tf_tour_discount_price;
+		}
+	}
+	$lowest_price = strip_tags(wc_price( $tf_tour_min_price ));
+	$html_price =  "<span>" . __( "From ", "tourfic" ) . "</span>" . $lowest_price . " ";
+	if ( ! empty( $tf_tour_min_discount ) ) {
+		$html_price .= "<span><del>" . strip_tags(wc_price( $tf_tour_full_price )) . "</del></span>";
+	}
+	
+	$tour_price = array_merge($tour_price, $infant_price);
+
 	wp_reset_postdata();
 	
-	wp_send_json_success(
+	wp_send_json_success (
 		array(
-			"min_price" => is_array($tour_price) ? min($tour_price) : 0,
+			"min_price" => $html_price,
 			"selected_date" => $selected_date,
 		)
 	);
