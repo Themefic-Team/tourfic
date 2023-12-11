@@ -2697,30 +2697,31 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                 <div class="tf-post-footer tf-flex tf-flex-align-center tf-flex-space-bttn tf-mt-16">
                     <div class="tf-pricing">
 						<?php
-						$room_price = array_filter( $room_price );
-						$min_sale_price =  !empty($room_price) ? min( array_column( $room_price, 'sale_price' ) ) : 0;
+							$room_price = array_filter( $room_price );
+							$min_sale_price =  !empty($room_price) ? min( array_column( $room_price, 'sale_price' ) ) : 0;
 
-						if ( ! empty( $room_price ) ):
-							$min_regular_price = 0;
+							if ( ! empty( $room_price ) ):
+								$min_regular_price = 0;
 
-							array_walk( $room_price, function ( $value ) use ( $min_sale_price, &$min_regular_price ) {
-								if ( is_array( $value )  && count($value) > 0) {
-									if ( array_key_exists( "regular_price", $value ) ) {
-										if ( $value["sale_price"] == $min_sale_price ) {
-											$min_regular_price = $value["regular_price"];
+								array_walk( $room_price, function ( $value ) use ( $min_sale_price, &$min_regular_price ) {
+									if ( is_array( $value )  && count($value) > 0) {
+										if ( array_key_exists( "regular_price", $value ) ) {
+											if ( $value["sale_price"] == $min_sale_price ) {
+												$min_regular_price = $value["regular_price"];
+											}
 										}
 									}
+								} );
+								echo __( "From ", "tourfic" );
+								//get the lowest price from all available room price
+								$lowest_sale_price = wc_price( $min_sale_price );
+								echo " $lowest_sale_price" . " ";
+								if ( $min_regular_price != 0 ) {
+									$lowest_regular_price = wc_price( $min_regular_price );
+									echo "<del>" . $lowest_regular_price . "<del>";
 								}
-							} );
-							echo __( "From ", "tourfic" );
-							//get the lowest price from all available room price
-							$lowest_sale_price = wc_price( $min_sale_price );
-							echo " $lowest_sale_price" . " ";
-							if ( $min_regular_price != 0 ) {
-								$lowest_regular_price = wc_price( $min_regular_price );
-								echo "<del>" . $lowest_regular_price . "<del>";
-							}
-						endif; ?>
+							endif; 
+						?>
                     </div>
                     <div class="tf-booking-bttns">
                         <a class="tf-btn-normal btn-secondary" href="<?php echo esc_url( $url ); ?>"><?php _e( "View Details", "tourfic" ); ?></a>
@@ -2806,12 +2807,31 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 					<div class="tf-available-room-price">
 						<span class="tf-price-from">
 						<?php
-						if ( ! empty( $room_price ) ):
-							echo __( "From ", "tourfic" );
-							//get the lowest price from all available room price
-							$lowest_price = wc_price( min( $room_price ) );
-							echo " $lowest_price";
-						endif; ?>
+							$room_price = array_filter( $room_price );
+							$min_sale_price =  !empty($room_price) ? min( array_column( $room_price, 'sale_price' ) ) : 0;
+
+							if ( ! empty( $room_price ) ):
+								$min_regular_price = 0;
+
+								array_walk( $room_price, function ( $value ) use ( $min_sale_price, &$min_regular_price ) {
+									if ( is_array( $value )  && count($value) > 0) {
+										if ( array_key_exists( "regular_price", $value ) ) {
+											if ( $value["sale_price"] == $min_sale_price ) {
+												$min_regular_price = $value["regular_price"];
+											}
+										}
+									}
+								} );
+								echo __( "From ", "tourfic" );
+								//get the lowest price from all available room price
+								$lowest_sale_price = wc_price( $min_sale_price );
+								echo " $lowest_sale_price" . " ";
+								if ( $min_regular_price != 0 ) {
+									$lowest_regular_price = wc_price( $min_regular_price );
+									echo "<del>" . $lowest_regular_price . "<del>";
+								}
+							endif; 
+						?>
 						</span>
 					</div>
 				</div>
@@ -2856,13 +2876,33 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 				<?php } ?>
 				<div class="tf-available-room-price">
 					<span class="tf-price-from">
-						<?php
+					<?php
+						$room_price = array_filter( $room_price );
+						$min_sale_price =  !empty($room_price) ? min( array_column( $room_price, 'sale_price' ) ) : 0;
+
 						if ( ! empty( $room_price ) ):
+							$min_regular_price = 0;
+
+							array_walk( $room_price, function ( $value ) use ( $min_sale_price, &$min_regular_price ) {
+								if ( is_array( $value )  && count($value) > 0) {
+									if ( array_key_exists( "regular_price", $value ) ) {
+										if ( $value["sale_price"] == $min_sale_price ) {
+											$min_regular_price = $value["regular_price"];
+										}
+									}
+								}
+							} );
 							echo __( "From ", "tourfic" );
 							//get the lowest price from all available room price
-							$lowest_price = wc_price( min( $room_price ) );
-							echo " $lowest_price";
-						endif; ?>
+							$lowest_sale_price = wc_price( $min_sale_price );
+							if ( $min_regular_price != 0 ) {
+								$lowest_regular_price = strip_tags( wc_price( $min_regular_price ) );
+								echo "<del>" . $lowest_regular_price . "</del>" . " " . "<span>" . $lowest_sale_price . "</span>";
+							} else {
+								echo " $lowest_sale_price" . " ";
+							}
+						endif; 
+					?>
 					</span>
 				</div>
 				</div>              
