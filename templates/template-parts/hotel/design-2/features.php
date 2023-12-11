@@ -3,7 +3,9 @@
     <div class="tf-overview-popular-facilities">
         <h3><?php _e("Popular facilities", "tourfic"); ?></h3>
         <ul>
-        <?php foreach ( $features as $feature ) {
+        <?php 
+        if(!empty($features)){
+        foreach ( $features as $feature ) {
             $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
             $f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
             if ( $f_icon_type == 'fa' && !empty($feature_meta['icon-fa']) ) {
@@ -13,10 +15,10 @@
             } ?>
 
             <li>
-                <?php echo $feature_icon ?? ''; ?>
+                <?php echo !empty($feature_icon) ? $feature_icon : ''; ?>
                 <?php echo $feature->name; ?>
             </li>
-        <?php } ?>
+        <?php } } ?>
         </ul>
     </div>
 </div>

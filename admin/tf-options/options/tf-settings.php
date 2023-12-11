@@ -1696,6 +1696,24 @@ TF_Settings::option( 'tf_settings', array(
 					),
 					'default'    => 'All',
 				),
+				array(
+					'id'           => 'hotel_facilities_cats',
+					'type'         => 'repeater',
+					'label'        => __( 'Facilities Categories', 'tourfic' ),
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'fields'       => array(
+						array(
+							'id'    => 'hotel_facilities_cat_name',
+							'type'  => 'text',
+							'label' => __( 'Category Name', 'tourfic' ),
+						),
+						array(
+							'id'    => 'hotel_facilities_cat_icon',
+							'type'  => 'icon',
+							'label' => __( 'Category Icon', 'tourfic' ),
+						),
+					),
+				),
 			),
 		),
 		'room_config'           => array(

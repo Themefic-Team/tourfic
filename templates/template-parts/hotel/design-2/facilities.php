@@ -1,6 +1,6 @@
 <?php 
-$tf_hotel_facilities = !empty(tfopt('hotel_facilities_cats')) ? tf_data_types(tfopt('hotel_facilities_cats')) : '';
-if( !empty($tf_hotel_facilities) && !empty($meta['hotel-facilities']) ){
+$total_facilities_cat = ! empty( tf_data_types( tfopt( 'hotel_facilities_cats' ) ) ) ? tf_data_types( tfopt( 'hotel_facilities_cats' ) ) : '';
+if( !empty($total_facilities_cat) && !empty($meta['hotel-facilities']) ){
 ?>
 
 <!-- Hotel facilities Srart -->
@@ -11,37 +11,31 @@ if( !empty($tf_hotel_facilities) && !empty($meta['hotel-facilities']) ){
         $facilites_list = [];
         if( !empty($meta['hotel-facilities']) ){
             foreach( $meta['hotel-facilities'] as $facility ){
-                if(!empty($facility['facilities-feature'])){
-                    $facilites_list [$facility['facilities-feature']] = $facility['facilities-feature'];
-                }
+                $facilites_list [$facility['facilities-category']] = $facility['facilities-category'];
             }
         }
-
         if(!empty($facilites_list)){
-        foreach( $facilites_list as $single_feature ){
+        foreach( $facilites_list as $catkey=> $single_feature ){
         ?>
-        
         <div class="tf-facility-item">
             <?php
-            $features_details = get_term($single_feature);
-            $feature_meta = get_term_meta( $single_feature, 'tf_hotel_feature', true );
-            $f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
-            if ( $f_icon_type == 'fa' && !empty($feature_meta['icon-fa']) ) {
-                $feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
-            } elseif ( $f_icon_type == 'c' && !empty($feature_meta['icon-c']) ) {
-                $feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
-            } ?>
+            $f_icon_single  = ! empty( $total_facilities_cat[$catkey]['hotel_facilities_cat_icon'] ) ? $total_facilities_cat[$catkey]['hotel_facilities_cat_icon'] : '';
+            if ( !empty($f_icon_single) ) {
+                $feature_icon = '<i class="' . $f_icon_single . '"></i>';
+            }
+            ?>
             <h4>
-            <?php echo $feature_icon ?? ''; ?> <?php echo $features_details->name ?? ''; ?>
+            <?php echo $feature_icon ?? ''; ?> <?php echo $total_facilities_cat[$catkey]['hotel_facilities_cat_name'] ?? ''; ?>
             </h4>
             <ul>
                 <?php 
                 foreach( $meta['hotel-facilities'] as $facility ){ 
-                if( $facility['facilities-feature'] == $single_feature ){
-                if(!empty($tf_hotel_facilities[$facility['facilities-category']]['hotel_facilities_cat_name'])){
+                if( $facility['facilities-category'] == $catkey ){
+                $features_details = get_term($facility['facilities-feature']);
+                if(!empty($features_details->name)){
                 ?>
                 <li>
-                    <?php echo esc_html($tf_hotel_facilities[$facility['facilities-category']]['hotel_facilities_cat_name']); ?>
+                    <?php echo esc_html($features_details->name); ?>
                 </li>
                 <?php }}} ?>
             </ul>

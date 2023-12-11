@@ -264,9 +264,9 @@
                             <h3><?php echo  $tf_enquiry_section_title; ?></h3>
                             <?php
                         }
-                        if(!empty($tf_enquiry_section_cont)) {
+                        if(!empty($tf_enquiry_section_des)) {
                             ?>
-                            <p><?php echo $tf_enquiry_section_cont;  ?></p>
+                            <p><?php echo $tf_enquiry_section_des;  ?></p>
                             <?php
                         }
                         if( !empty( $tf_enquiry_section_button )) {
