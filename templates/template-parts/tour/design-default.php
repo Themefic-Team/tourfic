@@ -203,8 +203,8 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         <?php echo ( $discount_type != 'none' ) ? '<del>' . $tour_price->wc_child . '</del>' : ''; ?>
                                     </div>
 
-                                <?php }
-                                if ( ! $disable_infant && ! empty( $tour_price->infant ) ) { ?>
+                            <?php }
+                            if ( !$disable_adult && (! $disable_infant && ! empty( $tour_price->infant )) ) { ?>
 
                                     <div class="tf-price infant-price tf-d-n">
                                         <span class="sale-price">
@@ -225,15 +225,15 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                                 } elseif ( $pricing_rule == 'person' ) {
 
-                                    if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
-                                        echo '<li id="adult" class="active">' . __( "Adult", "tourfic" ) . '</li>';
-                                    }
-                                    if ( ! $disable_child && ! empty( $tour_price->child ) ) {
-                                        echo '<li id="child">' . __( "Child", "tourfic" ) . '</li>';
-                                    }
-                                    if ( ! $disable_infant && ! empty( $tour_price->infant ) ) {
-                                        echo '<li id="infant">' . __( "Infant", "tourfic" ) . '</li>';
-                                    }
+                                if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
+                                    echo '<li id="adult" class="active">' . __( "Adult", "tourfic" ) . '</li>';
+                                }
+                                if ( ! $disable_child && ! empty( $tour_price->child ) ) {
+                                    echo '<li id="child">' . __( "Child", "tourfic" ) . '</li>';
+                                }
+                                if ( !$disable_adult && (! $disable_infant && ! empty( $tour_price->infant )) ) {
+                                    echo '<li id="infant">' . __( "Infant", "tourfic" ) . '</li>';
+                                }
 
                                 }
                                 ?>
@@ -651,11 +651,11 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
         );
         //show related tour based on selected tours
         $selected_ids = !empty(tfopt( 'tf-related-tours' )) ? tfopt( 'tf-related-tours' ) : array();
-        
+
         if ( $related_tour_type == 'selected' && defined( 'TF_PRO' ) ) {
             if(in_array($post_id, $selected_ids)) {
                 $index = array_search($post_id, $selected_ids);
-                
+
                 $args['post__not_in'] = array($selected_ids[$index]);
 
                 unset($selected_ids[$index]);
@@ -669,7 +669,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
         } else {
             $args['post__not_in'] = array($post_id);
         }
-        
+
         $tours = new WP_Query( $args );
         if ( $tours->have_posts() ) {
             if ($tours->found_posts > 0) :
@@ -694,7 +694,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                             while ( $tours->have_posts() ) {
                                 $tours->the_post();
 
-                                    $selected_post_id       = $selected_id;
+                                    $selected_post_id       = get_the_ID();
                                     $destinations           = get_the_terms( $selected_post_id, 'tour_destination' );
                                     $first_destination_name = $destinations[0]->name;
                                     $related_comments       = get_comments( array( 'post_id' => $selected_post_id ) );
@@ -702,7 +702,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                     $pricing_rule           = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
                                     $disable_adult          = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
                                     $disable_child          = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
-                                    $tour_price             = new Tour_Price( $meta );                                    
+                                    $tour_price             = new Tour_Price( $meta );
                                     ?>
                                     <div class="tf-slider-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $selected_post_id, 'full' ); ?>);">
                                         <div class="tf-slider-content">

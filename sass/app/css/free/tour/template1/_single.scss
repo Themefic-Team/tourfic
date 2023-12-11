@@ -1505,7 +1505,8 @@
     .tf_acrselection-wrap{
         left: 0;
         right: auto;
-        top: -210px;
+        top: unset;
+        bottom: 100%;
         width: auto;
     }
 

@@ -362,17 +362,6 @@ TF_Settings::option( 'tf_settings', array(
 									'default'    => 'List'
 								),
 								array(
-									'id'       => 'hotel_archive_price_minimum_settings',
-									'type'     => 'select',
-									'label'    => __( 'Show Minimum Price', 'tourfic' ),
-									'options'  => array(
-										'all'   => __( 'All', 'tourfic' ),
-										'adult'   => __( 'Adult', 'tourfic' ),
-										'child'   => __( 'Child', 'tourfic' ),
-									),
-									'default'    => 'All',
-								),
-								array(
 									'id'      => 'hotel_archive_notice',
 									'type'    => 'notice',
 									'content' => __( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
@@ -689,17 +678,6 @@ TF_Settings::option( 'tf_settings', array(
 									'default'    => 'List',
 								),
 								array(
-									'id'       => 'tour_archive_price_minimum_settings',
-									'type'     => 'select',
-									'label'    => __( 'Show Minimum Price', 'tourfic' ),
-									'options'  => array(
-										'all'   => __( 'All', 'tourfic' ),
-										'adult'   => __( 'Adult', 'tourfic' ),
-										'child'   => __( 'Child', 'tourfic' ),
-									),
-									'default'    => 'All',
-								),
-								array(
 									'id'      => 'tour_archive_notice',
 									'type'    => 'notice',
 									'content' => __( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
@@ -761,567 +739,6 @@ TF_Settings::option( 'tf_settings', array(
 						),
 					),
 				)
-			),
-		),
-		'hotel_option'          => array(
-			'title'  => __( 'Hotel Options', 'tourfic' ),
-			'icon'   => 'fas fa-hotel',
-			'fields' => array(),
-		),
-		'single_page'           => array(
-			'title'  => __( 'Single Page', 'tourfic' ),
-			'parent' => 'hotel_option',
-			'icon'   => 'fa fa-cog',
-			'fields' => array(
-				array(
-					'id'        => 'label_off_heading',
-					'type'      => 'heading',
-					'label'     => __( 'Global Settings for Single Hotel Page', 'tourfic' ),
-					'sub_title' => __( 'These options can be overridden from Single Hotel Settings.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'hotel-option-notice-one',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				array(
-					'id'        => 'h-review',
-					'type'      => 'switch',
-					'label'     => __( 'Disable Review Section', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => false,
-				),
-
-				array(
-					'id'        => 'h-share',
-					'type'      => 'switch',
-					'label'     => __( 'Disable Share Option', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => false,
-				),
-				//Feature filter setting
-				array(
-					'id'        => 'feature-filter',
-					'type'      => 'switch',
-					'label'     => __( 'Filter By Feature', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => true,
-					'is_pro'    => true
-				),
-				array(
-					'id'       => 'h-enquiry-email',
-					'type'     => 'text',
-					'label'    => __( 'Email for Enquiry Form', 'tourfic' ),
-					'subtitle' => __( 'Enter the email address that will receive all submissions from the enquiry form.', 'tourfic' ),
-					'is_pro' => true,
-				),
-				array(
-					'id'           => 'hotel_facilities_cats',
-					'type'         => 'repeater',
-					'label'        => __( 'Facilities Categories', 'tourfic' ),
-					'button_title' => __( 'Add New', 'tourfic' ),
-					'fields'       => array(
-						array(
-							'id'    => 'hotel_facilities_cat_name',
-							'type'  => 'text',
-							'label' => __( 'Category Name', 'tourfic' ),
-						),
-					),
-				),
-			),
-		),
-		'room_config'           => array(
-			'title'  => __( 'Room Config', 'tourfic' ),
-			'parent' => 'hotel_option',
-			'icon'   => 'fa fa-cog',
-			'fields' => array(
-				array(
-					'id'    => 'hotel_room_heading',
-					'type'  => 'heading',
-					'label' => __( 'Global Configuration for Hotel Rooms', 'tourfic' ),
-				),
-				array(
-					'id'      => 'hotel-option-notice-two',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/#room" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-				),
-
-				array(
-					'id'       => 'enable_child_age_limit',
-					'type'     => 'switch',
-					'label'    => __( 'Children Age Limit', 'tourfic' ),
-					'subtitle' => __( 'Turn on this option to set the Maximum age limit for Children. This can be overridden from Single Hotel Settings.', 'tourfic' ),
-					'is_pro'   => true,
-				),
-				array(
-					'id'         => '',
-					'type'       => 'number',
-					'label'      => __( 'Insert your Maximum Age Limit', 'tourfic' ),
-					'subtitle'   => __( 'Numbers Only', 'tourfic' ),
-					'attributes' => array(
-						'min' => '0',
-					),
-					'is_pro'     => true,
-				),
-			),
-		),
-		// Hotel service Popup
-		'payment_popup'         => array(
-			'title'  => __( 'Popup Settings', 'tourfic' ),
-			'parent' => 'hotel_option',
-			'icon'   => 'fa fa-cog',
-			'fields' => array(
-				array(
-					'id'    => 'hotel_popup_heading',
-					'type'  => 'heading',
-					'label' => __( 'Settings for Popup', 'tourfic' ),
-					'subtitle'   => __( 'The popup will appear when you enable the deposit option or the airport pickup service.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'hotel-option-notice-three',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/#popup" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				array(
-					'id'    => '',
-					'type'  => 'text',
-					'label' => __( 'Popup Title', 'tourfic' ),
-					'is_pro' => true,
-				),
-
-				array(
-					'id'     => '',
-					'type'   => 'textarea',
-					'label'  => __( 'Popup Description', 'tourfic' ),
-					'is_pro' => true,
-				),
-
-				array(
-					'id'      => '',
-					'type'    => 'text',
-					'label'   => __( 'Popup Button Text', 'tourfic' ),
-					'default' => __( 'Continue to booking', 'tourfic' ),
-					'is_pro'  => true,
-				)
-			),
-		),
-		/*'hotel_without_booking'  => array(
-			'title'  => __( 'Without Payment', 'tourfic' ),
-			'parent' => 'hotel_option',
-			'icon'   => 'fa fa-cog',
-			'fields' => array(
-				array(
-					'id'       => 'confirmation_fields_heading',
-					'type'     => 'heading',
-					'label'    => __( 'Settings for Booking Confirmation Fields', 'tourfic' ),
-					'subtitle' => __( 'Booking Confirmation Fields works for without payment.', 'tourfic' ),
-				),
-				array(
-					'id'           => '',
-					'class'        => 'disable-sortable',
-					'type'         => 'repeater',
-					'button_title' => __( 'Add New', 'tourfic' ),
-					'label'        => __( 'Fields for Booking Confirmation', 'tourfic' ),
-					'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
-					'is_pro'       => true,
-					'fields'       => array(
-						array(
-							'id'    => 'reg-field-label',
-							'type'  => 'text',
-							'label' => __( 'Label', 'tourfic' ),
-						),
-						array(
-							'id'       => 'reg-field-name',
-							'type'     => 'text',
-							'label'    => __( 'Name', 'tourfic' ),
-							'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
-							'validate' => 'no_space_no_special',
-							'class'    => 'tf_hidden_fields'
-						),
-						array(
-							'id'      => 'reg-fields-type',
-							'type'    => 'select',
-							'label'   => __( 'Field Type', 'tourfic' ),
-							'options' => array(
-								'text'     => __( 'Text', 'tourfic' ),
-								'email'    => __( 'Email', 'tourfic' ),
-								'date'     => __( 'Date', 'tourfic' ),
-								'radio'    => __( 'Radio', 'tourfic' ),
-								'checkbox' => __( 'Checkbox', 'tourfic' ),
-								'select'   => __( 'Select', 'tourfic' ),
-							),
-							'class'   => 'tf_hidden_fields'
-						),
-						array(
-							'id'           => 'reg-options',
-							'type'         => 'repeater',
-							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'        => __( 'Option Label', 'tourfic' ),
-							'dependency'   => array(
-								array( 'reg-fields-type', '==', 'radio' ),
-							),
-							'fields'       => array(
-								array(
-									'label' => __( 'Field Label', 'tourfic' ),
-									'id'    => 'option-label',
-									'type'  => 'text',
-								),
-								array(
-									'label' => __( 'Field Value', 'tourfic' ),
-									'id'    => 'option-value',
-									'type'  => 'text',
-								),
-							),
-						),
-						array(
-							'id'           => 'reg-options',
-							'type'         => 'repeater',
-							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'        => __( 'Option Label', 'tourfic' ),
-							'dependency'   => array(
-								array( 'reg-fields-type', '==', 'select' ),
-							),
-							'fields'       => array(
-								array(
-									'label' => __( 'Field Label', 'tourfic' ),
-									'id'    => 'option-label',
-									'type'  => 'text',
-								),
-								array(
-									'label' => __( 'Field Value', 'tourfic' ),
-									'id'    => 'option-value',
-									'type'  => 'text',
-								),
-							),
-						),
-						array(
-							'id'           => 'reg-options',
-							'type'         => 'repeater',
-							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'        => __( 'Option Label', 'tourfic' ),
-							'dependency'   => array(
-								array( 'reg-fields-type', '==', 'checkbox' ),
-							),
-							'fields'       => array(
-								array(
-									'label' => __( 'Field Label', 'tourfic' ),
-									'id'    => 'option-label',
-									'type'  => 'text',
-								),
-								array(
-									'label' => __( 'Field Value', 'tourfic' ),
-									'id'    => 'option-value',
-									'type'  => 'text',
-								),
-							),
-						),
-						array(
-							'id'    => 'reg-field-required',
-							'type'  => 'switch',
-							'label' => __( 'Required Field ?', 'tourfic' ),
-							'class' => 'tf_hidden_fields'
-						),
-
-					),
-					'default'      => array(
-						array(
-							'reg-field-label'    => __( 'First Name', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_first_name', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Last Name', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_last_name', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Email', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_email', 'tourfic' ),
-							'reg-fields-type'    => 'email',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Phone', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_phone', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Country', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_country', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Street Address', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_street_address', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Town/City', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_town_city', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'State/Country', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_state_country', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Postcode/ZIP', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_postcode', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-					),
-				),
-				array(
-					'id'      => '',
-					'type'    => 'editor',
-					'label'   => __( 'Booking Confirmation Message', 'tourfic' ),
-					'default' => 'Booked Successfully',
-					'is_pro'  => true,
-				),
-			),
-		),
-		'hotel_booking_settings' => array(
-			'title'  => __( 'Booking', 'tourfic' ),
-			'parent' => 'hotel_option',
-			'icon'   => 'fa fa-cog',
-			'fields' => array(
-				array( // start
-					'id'    => 'booking_hotel_heading',
-					'type'  => 'heading',
-					'label' => __( 'Settings for Booking', 'tourfic' ),
-				),
-				array(
-					'id'        => 'enable_guest_info',
-					'type'      => 'switch',
-					'label'     => __( 'Enable Guest Info', 'tourfic' ),
-					'subtitle'  => __( 'Enable this option, if you want to add guest info.', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'is_pro'    => true,
-					'default'   => true,
-				),
-				array(
-					'id'         => 'hotel_custom_fields_heading',
-					'type'       => 'heading',
-					'label'      => __( 'Settings for Guest Info Fields', 'tourfic' ),
-					'dependency' => array(
-						array( 'enable_guest_info', '==', 'true' ),
-					),
-				),
-				array(
-					'id'           => '',
-					'class'        => 'disable-sortable',
-					'type'         => 'repeater',
-					'button_title' => __( 'Add New', 'tourfic' ),
-					'label'        => __( 'Fields for Guest Info', 'tourfic' ),
-					'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
-					'is_pro'       => true,
-					'dependency'   => array(
-						array( 'enable_guest_info', '==', 'true' ),
-					),
-					'fields'       => array(
-						array(
-							'id'    => 'reg-field-label',
-							'type'  => 'text',
-							'label' => __( 'Label', 'tourfic' ),
-						),
-						array(
-							'id'       => 'reg-field-name',
-							'type'     => 'text',
-							'label'    => __( 'Name', 'tourfic' ),
-							'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
-							'validate' => 'no_space_no_special',
-						),
-						array(
-							'id'      => 'reg-fields-type',
-							'type'    => 'select',
-							'label'   => __( 'Field Type', 'tourfic' ),
-							'options' => array(
-								'text'     => __( 'Text', 'tourfic' ),
-								'email'    => __( 'Email', 'tourfic' ),
-								'date'     => __( 'Date', 'tourfic' ),
-								'radio'    => __( 'Radio', 'tourfic' ),
-								'checkbox' => __( 'Checkbox', 'tourfic' ),
-								'select'   => __( 'Select', 'tourfic' ),
-							),
-						),
-						array(
-							'id'           => 'reg-options',
-							'type'         => 'repeater',
-							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'        => __( 'Option Label', 'tourfic' ),
-							'dependency'   => array(
-								array( 'reg-fields-type', '==', 'radio' ),
-							),
-							'fields'       => array(
-								array(
-									'label' => __( 'Field Label', 'tourfic' ),
-									'id'    => 'option-label',
-									'type'  => 'text',
-								),
-								array(
-									'label' => __( 'Field Value', 'tourfic' ),
-									'id'    => 'option-value',
-									'type'  => 'text',
-								),
-							),
-						),
-						array(
-							'id'           => 'reg-options',
-							'type'         => 'repeater',
-							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'        => __( 'Option Label', 'tourfic' ),
-							'dependency'   => array(
-								array( 'reg-fields-type', '==', 'select' ),
-							),
-							'fields'       => array(
-								array(
-									'label' => __( 'Field Label', 'tourfic' ),
-									'id'    => 'option-label',
-									'type'  => 'text',
-								),
-								array(
-									'label' => __( 'Field Value', 'tourfic' ),
-									'id'    => 'option-value',
-									'type'  => 'text',
-								),
-							),
-						),
-						array(
-							'id'           => 'reg-options',
-							'type'         => 'repeater',
-							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'        => __( 'Option Label', 'tourfic' ),
-							'dependency'   => array(
-								array( 'reg-fields-type', '==', 'checkbox' ),
-							),
-							'fields'       => array(
-								array(
-									'label' => __( 'Field Label', 'tourfic' ),
-									'id'    => 'option-label',
-									'type'  => 'text',
-								),
-								array(
-									'label' => __( 'Field Value', 'tourfic' ),
-									'id'    => 'option-value',
-									'type'  => 'text',
-								),
-							),
-						),
-						array(
-							'id'    => 'reg-field-required',
-							'type'  => 'switch',
-							'label' => __( 'Required Field ?', 'tourfic' ),
-						),
-
-					),
-					'default'      => array(
-						array(
-							'reg-field-label'    => __( 'Full Name', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_full_name', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Date of birth', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_dob', 'tourfic' ),
-							'reg-fields-type'    => 'date',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'NID', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_nid', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						)
-					),
-				),
-				array(
-					'id'          => 'hotel_guest_details_text',
-					'type'        => 'text',
-					'label'       => __( 'Enter Guest Details Text', 'tourfic' ),
-					'default'     => "All of your information will be confidential and the reason of this is for your privacy purpose",
-					'placeholder' => "Ex: All of your information will be confidential and the reason of this is for your privacy purpose",
-					'is_pro'      => true
-				),
-			),
-		),*/
-
-		//Apartment Options
-		'apartment_option'      => array(
-			'title'  => __( 'Apartment Options', 'tourfic' ),
-			'icon'   => 'fa-solid fa-house-chimney',
-			'fields' => array(),
-		),
-		'apartment_single_page' => array(
-			'title'  => __( 'Single Page', 'tourfic' ),
-			'parent' => 'apartment_option',
-			'icon'   => 'fa fa-cog',
-			'fields' => array(
-				array(
-					'id'    => 'label_off_heading',
-					'type'  => 'heading',
-					'label' => __( 'Single Apartment Settings', 'tourfic' ),
-					'subtitle'   => __( 'These options can be overridden from Single Apartment Settings.', 'tourfic' ),
-				),
-
-				array(
-					'id'      => 'apartment-option-notice',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/apartment-options/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				array(
-					'id'           => 'amenities_cats',
-					'type'         => 'repeater',
-					'label'        => __( 'Amenities Categories', 'tourfic' ),
-					'button_title' => __( 'Add New', 'tourfic' ),
-					'fields'       => array(
-						array(
-							'id'    => 'amenities_cat_name',
-							'type'  => 'text',
-							'label' => __( 'Category Name', 'tourfic' ),
-						),
-					),
-				),
-
-				array(
-					'id'        => 'disable-apartment-review',
-					'type'      => 'switch',
-					'label'     => __( 'Disable Review Section', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => false
-				),
-
-				array(
-					'id'        => 'disable-apartment-share',
-					'type'      => 'switch',
-					'label'     => __( 'Disable Share Option', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => false
-				),
-
-				array(
-					'id'        => 'disable-related-apartment',
-					'type'      => 'switch',
-					'label'     => __( 'Disable Related Section', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => false
-				),
 			),
 		),
 
@@ -1449,7 +866,18 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'  => __( 'By enabling this feature, the starting price will be concealed from the tour listings.', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-				)
+				),
+				array(
+					'id'       => 'tour_archive_price_minimum_settings',
+					'type'     => 'select',
+					'label'    => __( 'Show Minimum Price', 'tourfic' ),
+					'options'  => array(
+						'all'   => __( 'All', 'tourfic' ),
+						'adult'   => __( 'Adult', 'tourfic' ),
+						'child'   => __( 'Child', 'tourfic' ),
+					),
+					'default'    => 'All',
+				),
 			),
 		),
 		// Partial Payment Popup
@@ -2198,6 +1626,216 @@ TF_Settings::option( 'tf_settings', array(
 					'default' 	  => "Your information will be kept confidential to protect your privacy.",
 					'placeholder' => "Your information will be kept confidential to protect your privacy.",
 					'is_pro'      => true
+				),
+			),
+		),
+		'hotel_option'          => array(
+			'title'  => __( 'Hotel Options', 'tourfic' ),
+			'icon'   => 'fas fa-hotel',
+			'fields' => array(),
+		),
+		'single_page'           => array(
+			'title'  => __( 'Single Page', 'tourfic' ),
+			'parent' => 'hotel_option',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'        => 'label_off_heading',
+					'type'      => 'heading',
+					'label'     => __( 'Global Settings for Single Hotel Page', 'tourfic' ),
+					'sub_title' => __( 'These options can be overridden from Single Hotel Settings.', 'tourfic' ),
+				),
+
+				array(
+					'id'      => 'hotel-option-notice-one',
+					'type'    => 'notice',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'        => 'h-review',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Review Section', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false,
+				),
+
+				array(
+					'id'        => 'h-share',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Share Option', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false,
+				),
+				//Feature filter setting
+				array(
+					'id'        => 'feature-filter',
+					'type'      => 'switch',
+					'label'     => __( 'Filter By Feature', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => true,
+					'is_pro'    => true
+				),
+				array(
+					'id'       => 'h-enquiry-email',
+					'type'     => 'text',
+					'label'    => __( 'Email for Enquiry Form', 'tourfic' ),
+					'subtitle' => __( 'Enter the email address that will receive all submissions from the enquiry form.', 'tourfic' ),
+					'is_pro' => true,
+				),
+				array(
+					'id'       => 'hotel_archive_price_minimum_settings',
+					'type'     => 'select',
+					'label'    => __( 'Show Minimum Price', 'tourfic' ),
+					'options'  => array(
+						'all'   => __( 'All', 'tourfic' ),
+						'adult'   => __( 'Adult', 'tourfic' ),
+						'child'   => __( 'Child', 'tourfic' ),
+					),
+					'default'    => 'All',
+				),
+			),
+		),
+		'room_config'           => array(
+			'title'  => __( 'Room Config', 'tourfic' ),
+			'parent' => 'hotel_option',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'    => 'hotel_room_heading',
+					'type'  => 'heading',
+					'label' => __( 'Global Configuration for Hotel Rooms', 'tourfic' ),
+				),
+				array(
+					'id'      => 'hotel-option-notice-two',
+					'type'    => 'notice',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/#room" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+				),
+
+				array(
+					'id'       => 'enable_child_age_limit',
+					'type'     => 'switch',
+					'label'    => __( 'Children Age Limit', 'tourfic' ),
+					'subtitle' => __( 'Turn on this option to set the Maximum age limit for Children. This can be overridden from Single Hotel Settings.', 'tourfic' ),
+					'is_pro'   => true,
+				),
+				array(
+					'id'         => '',
+					'type'       => 'number',
+					'label'      => __( 'Insert your Maximum Age Limit', 'tourfic' ),
+					'subtitle'   => __( 'Numbers Only', 'tourfic' ),
+					'attributes' => array(
+						'min' => '0',
+					),
+					'is_pro'     => true,
+				),
+			),
+		),
+		// Hotel service Popup
+		'payment_popup'         => array(
+			'title'  => __( 'Popup Settings', 'tourfic' ),
+			'parent' => 'hotel_option',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'    => 'hotel_popup_heading',
+					'type'  => 'heading',
+					'label' => __( 'Settings for Popup', 'tourfic' ),
+					'subtitle'   => __( 'The popup will appear when you enable the deposit option or the airport pickup service.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'hotel-option-notice-three',
+					'type'    => 'notice',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/#popup" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'    => '',
+					'type'  => 'text',
+					'label' => __( 'Popup Title', 'tourfic' ),
+					'is_pro' => true,
+				),
+
+				array(
+					'id'     => '',
+					'type'   => 'textarea',
+					'label'  => __( 'Popup Description', 'tourfic' ),
+					'is_pro' => true,
+				),
+
+				array(
+					'id'      => '',
+					'type'    => 'text',
+					'label'   => __( 'Popup Button Text', 'tourfic' ),
+					'default' => __( 'Continue to booking', 'tourfic' ),
+					'is_pro'  => true,
+				)
+			),
+		),
+
+		//Apartment Options
+		'apartment_option'      => array(
+			'title'  => __( 'Apartment Options', 'tourfic' ),
+			'icon'   => 'fa-solid fa-house-chimney',
+			'fields' => array(),
+		),
+		'apartment_single_page' => array(
+			'title'  => __( 'Single Page', 'tourfic' ),
+			'parent' => 'apartment_option',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'    => 'label_off_heading',
+					'type'  => 'heading',
+					'label' => __( 'Single Apartment Settings', 'tourfic' ),
+					'subtitle'   => __( 'These options can be overridden from Single Apartment Settings.', 'tourfic' ),
+				),
+
+				array(
+					'id'      => 'apartment-option-notice',
+					'type'    => 'notice',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/apartment-options/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'           => 'amenities_cats',
+					'type'         => 'repeater',
+					'label'        => __( 'Amenities Categories', 'tourfic' ),
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'fields'       => array(
+						array(
+							'id'    => 'amenities_cat_name',
+							'type'  => 'text',
+							'label' => __( 'Category Name', 'tourfic' ),
+						),
+					),
+				),
+
+				array(
+					'id'        => 'disable-apartment-review',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Review Section', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
+
+				array(
+					'id'        => 'disable-apartment-share',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Share Option', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
+
+				array(
+					'id'        => 'disable-related-apartment',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Related Section', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
 				),
 			),
 		),
@@ -4160,6 +3798,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'r-apartment',
 					'class'    => 'disable-sortable',
 					'type'     => 'repeater',
+					'button_title' => __( 'Add New', 'tourfic' ),
 					'label'    => __( 'Review Fields for Apartments', 'tourfic' ),
 					'subtitle' => __( 'Design customer review fields for apartments. Custom fields are permitted.', 'tourfic' ),
 					'max'      => '6',

@@ -255,7 +255,10 @@ i {
         font-size: $font-size-xs;
         font-weight: $font-weight-normal;
         del{
-            font-size: 20px;
+            font-size: 16px;
+            span {
+                font-size: 16px;
+            }
         }
         span {
             font-size: 20px;

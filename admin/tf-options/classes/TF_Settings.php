@@ -412,40 +412,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						<img src="<?php echo TF_ASSETS_APP_URL; ?>images/setup_wizard.png" alt="setup wizard">
 					</div>
 				</div>
-
-				<!-- Black Friday Admin Notice -->
-				<?php 
-				if (strtotime('2023-12-01') > time() && !function_exists('is_tf_pro')) {
-					if( !isset($_COOKIE['tf_black_friday_2023_admin_settings_notice']) ){
-				?>
-				<div class="notice notice-success tf_black_friday_2023_admin_notice" style="position: relative;padding: 0px; margin-left: 0px; margin-top: 0px; margin-bottom: 0px;"> 
-					<a href="https://themefic.com/deals/" target="_blank" style="display: block; line-height: 0;">
-						<img style="width: 100%; height: auto;" src="<?php echo TOURFIC_PLUGIN_URL ?>assets/admin/images/BLACK_FRIDAY_BACKGROUND_GRUNGE.png" alt="">
-					</a> 
-					<button type="button" class="notice-dismiss tf_black_friday_notice_dismiss">
-						<span class="screen-reader-text">Dismiss this notice.</span>
-					</button>
-				</div>
-				<script>
-				jQuery(document).ready(function($) {
-					$(document).on('click', '.tf_black_friday_notice_dismiss', function( event ) { 
-						jQuery('.tf_black_friday_2023_admin_notice').css('display', 'none')
-						var cookieName = "tf_black_friday_2023_admin_settings_notice";
-						var cookieValue = "1";
-
-						// Create a date object for the expiration date
-						var expirationDate = new Date();
-						expirationDate.setTime(expirationDate.getTime() + (15 * 24 * 60 * 60 * 1000)); // 5 days in milliseconds
-
-						// Construct the cookie string
-						var cookieString = cookieName + "=" + cookieValue + ";expires=" + expirationDate.toUTCString() + ";path=/";
-
-						// Set the cookie
-						document.cookie = cookieString;
-					});
-				});
-				</script>
-				<?php } } ?>
+ 
                 <div class="tf-help-center-banner">
                     <div class="tf-help-center-content">
                         <h2><?php _e("Help Center","tourfic"); ?></h2>
