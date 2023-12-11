@@ -865,8 +865,8 @@ div#tf-contact-info {
                                     position: absolute;
                                     top: 0px;
                                     left: 0px;
-                                    height: 16px;
-                                    width: 16px;
+                                    // height: 16px;
+                                    // width: 16px;
                                     background-color: #FCFDFF;
                                     border-radius: 5px;
                                     border: 1px solid #666D74;
@@ -901,6 +901,7 @@ div#tf-contact-info {
                                 }
                             }
                             .tf-extra-content{
+                                padding-left: 5px;
                                 h5{
                                     color: #666D74;
                                     font-family: inherit;

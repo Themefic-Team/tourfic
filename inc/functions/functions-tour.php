@@ -2862,8 +2862,22 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 			<?php } ?>
 			<div class="tf-available-labels">
 				<?php if ( $featured ): ?>
-				<span class="tf-available-labels-featured"><?php _e("Featured", "tourfic"); ?></span>
+					<span class="tf-available-labels-featured"><?php _e("Featured", "tourfic"); ?></span>
 				<?php endif; ?>
+				<?php
+				if(sizeof($tours_multiple_tags) > 0) {
+					foreach($tours_multiple_tags as $tag) {
+						$tour_tag_name = !empty($tag['tour-tag-title']) ? __($tag['tour-tag-title'], "tourfic") : '';
+						$tag_background_color = !empty($tag["tour-tag-color-settings"]["background"]) ? $tag["tour-tag-color-settings"]["background"] : "#003162";
+						$tag_font_color = !empty($tag["tour-tag-color-settings"]["font"]) ? $tag["tour-tag-color-settings"]["font"] : "#fff";
+
+						echo <<<EOD
+							<span class="tf-multiple-tag" style="color: $tag_font_color; background-color: $tag_background_color ">$tour_tag_name</span>
+						EOD;
+					}
+				}
+				?>
+				
 			</div>  
 			<div class="tf-available-ratings">
 				<?php tf_archive_single_rating(); ?>
