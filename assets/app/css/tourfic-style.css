@@ -7252,6 +7252,10 @@ div#tf-contact-info {
   margin: 4px 0px;
   font-weight: 500;
 }
+.tf-trip-info .tf-trip-pricing .tf-price-amount del {
+  font-size: 15px;
+  color: #686e7a !important;
+}
 @media only screen and (max-width: 767.98px) {
   .tf-trip-info .tf-trip-pricing .tf-price-amount {
     font-size: 22px;

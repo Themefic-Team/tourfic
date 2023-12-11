@@ -447,7 +447,10 @@
                 success: function (resoponce) {
                     console.log(resoponce)
 
-                    $(".tf-booking-price p").html(resoponce.data.min_price)
+                    if(typeof(resoponce.data.min_price) != "undefined") $(".tf-booking-price p").html(resoponce.data.min_price)
+                    if(typeof(resoponce.data.tour_prices.tour_adult_html) != "undefined") $(".tf-adult .tf-price-amount").html()
+                    if(typeof(resoponce.data.tour_prices.tour_child_html) != "undefined") $(".tf-child .tf-price-amount").html(resoponce.data.tour_prices.tour_child_html)
+                    if(typeof(resoponce.data.tour_prices.tour_infant_html) != "undefined") $(".tf-infant .tf-price-amount").html(resoponce.data.tour_prices.tour_infant_html)
                 },
                 error: function (data) {
                     console.log(data);

@@ -3999,11 +3999,41 @@ function tf_single_price_dynamic_change_callback() {
 	}
 	
 	$tour_price = array_merge($tour_price, $infant_price);
+	if(!empty($tour_price)) {
+		if(!empty($tour_price["adult_price"])) {
+			if($tf_tour_discount_type == "percent" && !empty($tf_tour_discount_price)) {
+				$discount_adult_price = (int) $tour_price["adult_price"] - (( $tour_price["adult_price"] * (int) $tf_tour_discount_price) / 100);
+			} else if($tf_tour_discount_type == "fixed" && !empty($tf_tour_discount_price)) {
+				$discount_adult_price = (int) $tour_price["adult_price"] - $tf_tour_discount_price;
+			}
+
+			$tour_price["tour_adult_html"] = ($tf_tour_discount_type != "none") ? wc_price($discount_adult_price) . " " . "<span><del>" . strip_tags(wc_price($tour_price["adult_price"])) . "</del></span>" : wc_price($tour_price["adult_price"]);
+		}
+		if(!empty($tour_price["child_price"])) {
+			if($tf_tour_discount_type == "percent" && !empty($tf_tour_discount_price)) {
+				$discount_child_price = (int) $tour_price["child_price"] - (( $tour_price["child_price"] * (int) $tf_tour_discount_price) / 100);
+			} else if($tf_tour_discount_type == "fixed" && !empty($tf_tour_discount_price)) {
+				$discount_child_price = (int) $tour_price["child_price"] - $tf_tour_discount_price;
+			}
+
+			$tour_price["tour_child_html"] = ($tf_tour_discount_type != "none") ? wc_price($discount_child_price) . " " . "<span><del>" . strip_tags(wc_price($tour_price["child_price"])) . "</del></span>" : wc_price($tour_price["child_price"]);
+		}
+		if(!empty($tour_price["infant_price"])) {
+			if($tf_tour_discount_type == "percent" && !empty($tf_tour_discount_price)) {
+				$discount_child_price = (int) $tour_price["infant_price"] - (( $tour_price["infant_price"] * (int) $tf_tour_discount_price) / 100);
+			} else if($tf_tour_discount_type == "fixed" && !empty($tf_tour_discount_price)) {
+				$discount_child_price = (int) $tour_price["infant_price"] - $tf_tour_discount_price;
+			}
+
+			$tour_price["tour_infant_html"] = ($tf_tour_discount_type != "none") ? wc_price($discount_child_price) . " " . "<span><del>" . strip_tags(wc_price($tour_price["infant_price"])) . "</del></span>" : wc_price($tour_price["infant_price"]);
+		}
+	}
 
 	wp_reset_postdata();
 	
 	wp_send_json_success (
 		array(
+			"tour_prices" => $tour_price,
 			"min_price" => $html_price,
 			"selected_date" => $selected_date,
 		)
