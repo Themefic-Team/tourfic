@@ -1054,19 +1054,38 @@ function tf_single_tour_booking_form( $post_id ) {
                                                 <div class="tf-single-tour-extra tour-extra-single">
                                                     <label for="extra<?php echo esc_attr( $extrakey ); ?>">
                                                         <div class="tf-extra-check-box">
-                                                            <input type="checkbox" value="<?php echo esc_attr( $extrakey ); ?>" data-title="<?php echo esc_attr( $tour_extra['title'] ); ?>"
+                                                            <input type="checkbox" class="<?php echo $tour_extra_pricetype == "quantity" ? "has-quantity" : " " ?> " value="<?php echo esc_attr( $extrakey ); ?>" data-title="<?php echo esc_attr( $tour_extra['title'] ); ?>"
                                                                    id="extra<?php echo esc_attr( $extrakey ); ?>" name="tf-tour-extra">
                                                             <span class="checkmark"></span>
                                                         </div>
                                                         <div class="tf-extra-content">
-                                                            <h5><?php _e( $tour_extra['title'] ); ?> <?php echo $tour_extra_pricetype == "fixed" ? esc_html( "(Fixed Price)" ) : esc_html( "(Per Person Price)" ); ?>
+                                                            <h5><?php _e( $tour_extra['title'] ); ?> <?php echo $tour_extra_pricetype == "fixed" ? esc_html( "(Fixed Price)" ) : ($tour_extra_pricetype == "person" ? esc_html( "(Per Person Price)" ) : esc_html( "(Per unit Price)" )); ?>
                                                                 <span><?php echo wc_price( $tour_extra['price'] ); ?></span></h5>
 															<?php
 															if(!empty($tour_extra['desc'])){ ?>
                                                             <p><?php echo esc_html( $tour_extra['desc'] ); ?></p>
 															<?php } ?>
+															
                                                         </div>
                                                     </label>
+													<?php if($tour_extra_pricetype == "quantity") : ?>
+														<div class="tf-field-group tf-mt-16 tf_quantity-acrselection">
+															<div class="tf-field tf-flex quanity-acr-fields">
+
+																<div class="quanity-acr-label">
+																	<?php echo __("Select Quantity", "tourfic"); ?>		
+																</div>
+
+																<div class="quanity-acr-select tf-flex">
+																	<div class="quanity-acr-dec">-</div>
+																	<input type="number" name="adults" id="adults" min="0" value="0">
+																	<div class="quanity-acr-inc">+</div>
+																</div>
+
+															</div>
+															
+														</div>
+													<?php endif; ?>
                                                 </div>
 											<?php }
 										} ?>

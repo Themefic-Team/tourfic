@@ -356,6 +356,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 							'options'  => [
 								'fixed'  => __( 'Fixed', 'tourfic' ),
 								'person' => __( 'Per Person', 'tourfic' ),
+								'quantity' => __( 'Choose Quantity', 'tourfic' ),
 							],
 							'default'  => 'fixed',
 							'is_pro' => true,
