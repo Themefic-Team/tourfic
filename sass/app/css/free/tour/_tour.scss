@@ -902,6 +902,9 @@ div#tf-contact-info {
                                 }
                             }
                         }
+                        .quantity-active {
+                            display: block !important;
+                        }
                         .tf_quantity-acrselection {
                             width: 70%;
                             display: none;
@@ -913,13 +916,14 @@ div#tf-contact-info {
                                 min-width: 95px;
                             }
 
-                            .quanity-acr-select {
-                                justify-content: flex-end;
-                            }
-
-                            .tf-field {
+                            .quanity-acr-fields {
+                                display: flex;
                                 align-items: center;
                                 padding: 15px !important;
+                            }
+
+                            .quanity-acr-select {
+                                justify-content: flex-end;
                             }
 
                             .quanity-acr-dec, .quanity-acr-inc {

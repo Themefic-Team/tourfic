@@ -317,7 +317,19 @@
             jQuery('.tour-extra-single input:checkbox:checked').each(function () {
                 tour_extra_total.push(jQuery(this).val());
             });
+
+            // Tour Extra Quantity
+            var tour_extra_quantity = [];
+            jQuery('input[name="extra-quantity"]').each(function(e) {
+                let parent = jQuery(this).parent().parent().parent();
+
+                if(parent.hasClass('quantity-active')) {
+                    tour_extra_quantity.push(jQuery(this).val())
+                }
+            })
+
             formData.append('tour_extra', tour_extra_total);
+            formData.append('tour_extra_quantity', tour_extra_quantity);
 
             $.ajax({
                 type: 'post',
@@ -376,26 +388,20 @@
             });
         });
 
-        // $('input[name="tf-tour-extra"]').on("change", function(e) {
+        $('input[name="tf-tour-extra"]').on("change", function(e) {
 
-        //     if($(".tf_quantity-acrselection").length > 0 ) {
-        //         if ($(this).is(':checked')) { 
-        //             $(".tf_quantity-acrselection").show();
-        //         } else {
-        //             $(".tf_quantity-acrselection").hide()
-        //         }
-        //     }
-
-        // })
-
-        $('.has-quantity').on("change", function (e) {
+            let parent = $(this).parent().parent().parent()
 
             if ($(this).is(':checked')) {
-                $(".tf_quantity-acrselection").show()
+
+                parent.find(".tf_quantity-acrselection").addClass('quantity-active')
+
             } else {
-                $(".tf_quantity-acrselection").hide();
+
+                parent.find(".tf_quantity-acrselection").removeClass('quantity-active')
+
             }
-        });
+        })
 
         /**
          * Single Tour Gallery
@@ -2449,12 +2455,22 @@
             let check_in_time = $('select[name=check-in-time] option').filter(':selected').val();
             var deposit = $('input[name=deposit]').is(':checked');
             var extras = [];
+            var quantity = [];
             $('[name*=tf-tour-extra]').each(function () {
                 if ($(this).is(':checked')) {
                     extras.push($(this).val());
                 }
             });
+            $('input[name="extra-quantity"]').each(function(e) {
+                let parent = $(this).parent().parent().parent();
+
+                if(parent.hasClass('quantity-active')) {
+                    quantity.push($(this).val())
+                }
+            })
+
             var extras = extras.join();
+            var quantities = quantity.join();
             var data = {
                 action: 'tf_tour_booking_popup',
                 post_id: post_id,
@@ -2464,6 +2480,7 @@
                 check_in_date: check_in_date,
                 check_in_time: check_in_time,
                 tour_extra: extras,
+                tour_extra_quantity : quantities, 
                 deposit: deposit
             };
 
@@ -2526,7 +2543,7 @@
             makeBooking();
         });
 
-        $(document).on('change', '[name*=tf-tour-extra]', function () {
+        $(document).on('change', '[name*=tf-tour-extra], input[name="extra-quantity"]', function () {
             makeBooking();
         });
         $(document).on('change', '[name=deposit]', function () {
