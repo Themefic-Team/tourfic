@@ -314,19 +314,25 @@
 
             // Tour Extra
             var tour_extra_total = [];
-            jQuery('.tour-extra-single input:checkbox:checked').each(function () {
-                tour_extra_total.push(jQuery(this).val());
-            });
-
-            // Tour Extra Quantity
             var tour_extra_quantity = [];
-            jQuery('input[name="extra-quantity"]').each(function(e) {
-                let parent = jQuery(this).parent().parent().parent();
 
-                if(parent.hasClass('quantity-active')) {
-                    tour_extra_quantity.push(jQuery(this).val())
-                }
-            })
+            jQuery('.tour-extra-single').each(function(e) {
+                let $this = jQuery(this);
+                
+                if($this.find('input[name="tf-tour-extra"]').is(':checked')){
+
+                   let tour_extras = $this.find('input[name="tf-tour-extra"]').val();
+                   tour_extra_total.push(tour_extras);
+
+                   if($this.find('.tf_quantity-acrselection').hasClass('quantity-active')){
+                       let qty = $this.find('input[name="extra-quantity"]').val();
+
+                       tour_extra_quantity.push(qty)
+                   }else{
+                    tour_extra_quantity.push(1)
+                   } 
+               }   
+           })
 
             formData.append('tour_extra', tour_extra_total);
             formData.append('tour_extra_quantity', tour_extra_quantity);
@@ -2456,17 +2462,23 @@
             var deposit = $('input[name=deposit]').is(':checked');
             var extras = [];
             var quantity = [];
-            $('[name*=tf-tour-extra]').each(function () {
-                if ($(this).is(':checked')) {
-                    extras.push($(this).val());
-                }
-            });
-            $('input[name="extra-quantity"]').each(function(e) {
-                let parent = $(this).parent().parent().parent();
 
-                if(parent.hasClass('quantity-active')) {
-                    quantity.push($(this).val())
-                }
+            $('.tour-extra-single').each(function(e) {
+                 let $this = $(this);
+                 
+                 if($this.find('input[name="tf-tour-extra"]').is(':checked')){
+
+                    let tour_extras = $this.find('input[name="tf-tour-extra"]').val();
+                     extras.push(tour_extras);
+
+                    if($this.find('.tf_quantity-acrselection').hasClass('quantity-active')){
+                        let qty = $this.find('input[name="extra-quantity"]').val();
+
+                        quantity.push(qty)
+                    }else{
+                        quantity.push(1)
+                    } 
+                }   
             })
 
             var extras = extras.join();

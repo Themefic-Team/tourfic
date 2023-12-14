@@ -3706,7 +3706,7 @@ function tf_tour_booking_popup_callback() {
 	if(!empty($tour_extra_meta)){
 		$tours_extra = explode(',', $_POST['tour_extra']);
 		$tour_extra_quantity = explode(',', $_POST["tour_extra_quantity"]);
-		foreach($tours_extra as $extra){
+		foreach($tours_extra as $extra_key => $extra){
 			$tour_extra_pricetype = !empty( $tour_extra_meta[$extra]['price_type'] ) ? $tour_extra_meta[$extra]['price_type'] : 'fixed';
 			if( $tour_extra_pricetype=="fixed" ){
 				if(!empty($tour_extra_meta[$extra]['title']) && !empty($tour_extra_meta[$extra]['price'])){
@@ -3718,10 +3718,10 @@ function tf_tour_booking_popup_callback() {
 				}
 			} else if ($tour_extra_pricetype == "quantity") {
 				if(!empty($tour_extra_meta[$extra]['title']) && !empty($tour_extra_meta[$extra]['price'])){
-					$tour_extra_total += $tour_extra_meta[$extra]['price'] * $tour_extra_quantity[$extra];
+					$tour_extra_total += $tour_extra_meta[$extra]['price'] * $tour_extra_quantity[$extra_key];
 					$tour_extra_title_arr[] =  array(
-						'title' => $tour_extra_meta[$extra]['title'] . " x " . $tour_extra_quantity[$extra],
-						'price' => $tour_extra_meta[$extra]['price'] * $tour_extra_quantity[$extra]
+						'title' => $tour_extra_meta[$extra]['title'] . " x " . $tour_extra_quantity[$extra_key],
+						'price' => $tour_extra_meta[$extra]['price'] * $tour_extra_quantity[$extra_key]
 					);
 				}
 			} else{
