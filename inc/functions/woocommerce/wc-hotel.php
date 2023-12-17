@@ -155,18 +155,18 @@ function tf_hotel_booking_callback() {
 
 		// Discount Calculation and Checking
 
-		$adult_price = !empty($rooms[$room_id]['adult_price']) ? $rooms[$room_id]['adult_price'] : '';
-		$child_price = !empty($rooms[$room_id]['child_price']) ? $rooms[$room_id]['child_price'] : '';
+		$adult_price = !empty($rooms[$room_id]['adult_price']) ? $rooms[$room_id]['adult_price'] : 0;
+		$child_price = !empty($rooms[$room_id]['child_price']) ? $rooms[$room_id]['child_price'] : 0;
 		$room_price = !empty($rooms[$room_id]['price']) ? $rooms[$room_id]['price'] : '';
 
 
 		if($hotel_discount_type == "percent") {
 			if($pricing_by == 1) {
-				$room_price = floatval( preg_replace( '/[^\d.]/', '',number_format( $room_price - ( ( $room_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+				$room_price = floatval( preg_replace( '/[^\d.]/', '',number_format( (int) $room_price - ( ( (int) $room_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
 			}
 			if($pricing_by == 2) {
-				$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
-				$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $child_price - ( ( $child_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+				$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
+				$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - ( ( (int) $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
 			}
 		}
 
