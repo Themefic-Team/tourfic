@@ -481,9 +481,11 @@ function tf_search_form_shortcode( $atts, $content = null ) {
                 <div id="tf-apartment-booking-form" class="tf-tabcontent" <?php echo tf_is_search_form_single_tab( $type ) ? 'style="display:block"' : '' ?><?php echo esc_attr( $child_age_limit ); ?>>
 					<?php
 					if ( $advanced == "enabled" ) {
-						tf_apartment_search_form_horizontal( $classes, $title, $subtitle, true, $design );
+						$advanced_opt = true;
+						tf_apartment_search_form_horizontal( $classes, $title, $subtitle, $advanced_opt, $design );
 					} else {
-						tf_apartment_search_form_horizontal( $classes, $title, $subtitle, false, $design );
+						$advanced_opt = false;
+						tf_apartment_search_form_horizontal( $classes, $title, $subtitle, $advanced_opt, $design );
 					}
 					?>
                 </div>
@@ -562,7 +564,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 	}elseif(!empty($_GET['type']) && $_GET['type'] == "tf_tours"){
 		$tf_defult_views = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour_archive_view'] ) ? tf_data_types(tfopt( 'tf-template' ))['tour_archive_view'] : 'list';
 	}else{
-
+		$tf_defult_views = 'list';
 	}
 
 	$paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;

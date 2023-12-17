@@ -267,7 +267,7 @@ if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-apartment.php' ) ) {
  * @author Foysal
  */
 if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
-	function tf_apartment_search_form_horizontal( $classes, $title, $subtitle, $advanced = false, $design ) {
+	function tf_apartment_search_form_horizontal( $classes, $title, $subtitle, $advanced, $design ) {
 		if ( isset( $_GET ) ) {
 			$_GET = array_map( 'stripslashes_deep', $_GET );
 		}
