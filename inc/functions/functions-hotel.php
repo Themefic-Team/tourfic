@@ -841,6 +841,9 @@ function tf_room_availability_callback() {
 				// Hotel Room Discount Data
 				$hotel_discount_type = !empty($room["discount_hotel_type"]) ? $room["discount_hotel_type"] : "none";
 				$hotel_discount_amount = !empty($room["discount_hotel_price"]) ? $room["discount_hotel_price"] : 0;
+				$d_room_price = 0;
+				$d_room_adult_price = 0;
+				$d_room_child_price = 0;
 
 				if($pricing_by == 1) {
 					if($hotel_discount_type == "percent") {
@@ -998,6 +1001,7 @@ function tf_room_availability_callback() {
 							$adult_price     = ! empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $room_adult_price;
 							$child_price     = ! empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $room['child_price'];
 							$price_by_date   = $pricing_by == '1' ? $room_price : ( ( $adult_price * $form_adult ) + ( $child_price * $form_child ) );
+							$d_price_by_date = 0;
 							$price 			+= $price_by_date;
 							$number_of_rooms = ! empty( $available_rooms[0]['num-room'] ) ? $available_rooms[0]['num-room'] : $room['num-room'];
 							$has_room[]      = 1;

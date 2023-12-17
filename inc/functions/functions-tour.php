@@ -858,7 +858,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
 				foreach($months as $month) {
 
-					if($month < date('m')) {
+					if($month < date('m') && $matches[1] < date('Y')) {
 						$year = $matches[1] + 1;
 
 					} else $year = $matches[1];
@@ -1722,6 +1722,7 @@ function tf_single_tour_booking_form( $post_id ) {
 							],
                             
 							<?php } else {?>
+							defaultDate: "<?php echo $departure_date ?>",
 							enable: ["<?php echo $departure_date; ?>"],
 							<?php } ?>
                             onReady: function (selectedDates, dateStr, instance) {
@@ -2030,23 +2031,30 @@ function tf_single_tour_booking_form( $post_id ) {
 					        // Flatpickt locale for translation
 					        tf_flatpickr_locale();
 
-					        if ($tour_type && $tour_type == 'fixed') { ?>
-
-                            mode: "range",
-                            defaultDate: ["<?php echo $departure_date; ?>", "<?php echo $return_date; ?>"],
-                            enable: [
-                                {
-                                    from: "<?php echo $departure_date; ?>",
-                                    to: "<?php echo $return_date; ?>"
-                                }
-                            ],
-                            onReady: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-								instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-								dateSetToFields(selectedDates, instance);
-                            },
-
-					        <?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
+					        if ($tour_type && $tour_type == 'fixed') {
+								$enable_repeat_dates = fixed_tour_start_date_changer( $departure_date, $tour_repeat_months );
+	
+									if(($repeated_fixed_tour_switch == 1) && ($enable_repeat_dates > 0)) { ?>
+								defaultDate: "<?php echo tf_nearest_default_day($enable_repeat_dates) ?>",
+								enable: [
+									<?php 
+									foreach($enable_repeat_dates as $enable_date) {
+									?>
+									'<?php echo $enable_date; ?>',
+	
+									<?php } ?>
+								],
+								
+								<?php } else {?>
+									defaultDate: "<?php echo $departure_date ?>",
+								enable: ["<?php echo $departure_date; ?>"],
+								<?php } ?>
+								onReady: function (selectedDates, dateStr, instance) {
+	
+									instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+									instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                            	},
+					<?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
 
                             minDate: "today",
                             disableMobile: "true",
@@ -2368,6 +2376,7 @@ function tf_single_tour_booking_form( $post_id ) {
 							],
                             
 							<?php } else {?>
+								defaultDate: "<?php echo $departure_date ?>",
 							enable: ["<?php echo $departure_date; ?>"],
 							<?php } ?>
                             onReady: function (selectedDates, dateStr, instance) {
@@ -2434,7 +2443,6 @@ function tf_single_tour_booking_form( $post_id ) {
                         onChange: function (selectedDates, dateStr, instance) {
 
                             instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                            // $(".tours-check-in-out").not(this).val(instance.altInput.value); // Todo: change the Input Value
                             if (custom_avail == true) {
 
                                 let times = allowed_times.filter((v) => {
