@@ -1357,7 +1357,6 @@ TF_Settings::option( 'tf_settings', array(
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => true,
-					'is_pro'    => true
 				),
 				array(
 					'id'       => 'h-enquiry-email',

@@ -1097,7 +1097,7 @@ function tf_room_availability_callback() {
 						$feature_result = array_intersect( $filtered_features, $room_features );
 					}
 
-					if ( ! empty( $filtered_features ) && defined( 'TF_PRO' ) ) {
+					if ( ! empty( $filtered_features ) ) {
 						if ( $feature_result ) {
 							if ( $form_total_person <= $total_person ) {
 
@@ -3617,4 +3617,31 @@ if ( ! function_exists( 'tf_hotel_search_ajax_callback' ) ) {
 		echo json_encode( $response );
 		wp_die();
 	}
+}
+
+add_action( 'tf_hotel_features_filter', 'tf_hotel_filter_by_features', 10, 1 );
+function tf_hotel_filter_by_features( $features ) {
+	//get all the hotel features
+	$feature_filter = ! empty( tfopt( 'feature-filter' ) ) ? tfopt( 'feature-filter' ) : false;
+
+	if ( ! empty( $features ) && $feature_filter ):
+		?>
+        <!-- Filter by feature  -->
+        <div class="tf-room-filter" style="display: none">
+            <h4 class="tf-room-feature-title"><?php echo __( 'Filter Rooms based on features', 'tourfic' ); ?></h4>
+            <ul class="tf-room-checkbox">
+				<?php
+				foreach ( $features as $feature ) {
+					//get the feature details by it's id
+					$term = get_term_by( 'id', $feature, 'hotel_feature' );
+					echo '<li><label for="' . $term->slug . '">';
+					echo '<input type="checkbox" name="features" class="" value="' . $feature . '" id="' . $term->slug . '">';
+					echo "<span class='checkmark'></span>";
+					echo $term->name . '</label>';
+					echo "</li>";
+				}
+				?>
+            </ul>
+        </div>
+	<?php endif;
 }
