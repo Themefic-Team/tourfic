@@ -160,6 +160,38 @@
                         <h2 class="tf-section-title"><?php _e("Available Date", "tourfic"); ?></h2>
                         <?php echo tf_single_tour_booking_form( $post->ID ); ?>
                     </div>
+                    
+                    <!-- Contact info - Start -->
+                    <?php if ( $email || $phone || $fax || $website ) : ?>
+                        <div class="tf-tour-contact-informations tf-single-widgets">
+                            <?php if( ! empty( $meta['contact-info-section-title']) ) : ?> 
+                                <div class="tf-contact-details-title">
+                                    <h3 class="tf-section-title"><?php echo esc_html( $meta['contact-info-section-title'] ) ?></h3>
+                                </div>
+                            <? endif; ?>
+                            
+                            <div class="tf-contact-details-items">
+                                <ul class="tf-list">
+                                    <?php
+                                    if ( ! empty( $phone ) ) { ?>
+                                        <li><i class="ri-customer-service-fill"></i> <a href="tel:<?php echo esc_html( $phone ) ?>"><?php echo esc_html( $phone ) ?></a></li>
+                                    <?php } ?>
+                                    <?php
+                                    if ( ! empty( $email ) ) { ?>
+                                        <li><i class="ri-mail-open-line"></i> <a href="mailto:<?php echo esc_html( $email ) ?>"><?php echo esc_html( $email ) ?></a></li>
+                                    <?php } ?>
+                                    <?php
+                                    if ( ! empty( $website ) ) { ?>
+                                        <li><i class="ri-global-line"></i> <a target="_blank" href="<?php echo esc_html( $website ) ?>"><?php echo esc_html( $website ) ?></a></li>
+                                    <?php } ?>
+                                    <?php
+                                    if ( ! empty( $fax ) ) { ?>
+                                        <li><i class="ri-printer-fill"></i> <a href="tel:<?php echo esc_html( $fax ) ?>"><?php echo esc_html( $fax ) ?></a></li>
+                                    <?php } ?>
+                                </ul>
+                            </div>
+                        </div>
+                    <? endif; ?>
                     <div class="tf-reviews tf-single-widgets">
                     <?php
                     global $current_user;

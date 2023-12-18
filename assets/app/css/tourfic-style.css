@@ -13110,6 +13110,30 @@ html {
     gap: 16px;
   }
 }
+.tf-template-3 .tf-tour-contact-informations {
+  width: 90%;
+  background-color: #fcf4e8;
+  padding: 24px;
+  height: 230px;
+}
+.tf-template-3 .tf-tour-contact-informations .tf-contact-details-title h3 {
+  font-weight: 700 !important;
+  font-size: 30px !important;
+  margin-bottom: 5px;
+}
+.tf-template-3 .tf-tour-contact-informations .tf-contact-details-items .tf-list li {
+  font-size: 18px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+.tf-template-3 .tf-tour-contact-informations .tf-contact-details-items .tf-list li a {
+  text-decoration: none;
+  color: #99948d;
+}
+.tf-template-3 .tf-tour-contact-informations .tf-contact-details-items .tf-list li i {
+  font-size: 20px;
+  color: #b58e53;
+}
 .tf-template-3 .tf-review-form-wrapper {
   background: #FCF4E8;
   padding: 24px;
