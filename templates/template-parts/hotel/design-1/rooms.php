@@ -324,13 +324,14 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         </td>
                         <td class="reserve tf-t-c">
                             <?php
+
                             if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' ) || $tf_booking_type == 1) {
                                 if ( $pricing_by == '1' ) {
-                                            if(!empty($discount_price )) {
+                                            if( $hotel_discount_type != 'none' && !empty($discount_price )) {
                                                 ?>
                                                 <span class="tf-price"><del><?php echo $price; ?></del> <?php echo $discount_price; ?></span>
                                                 <?php
-                                            } else if( $hotel_discount_type == "none" || empty($hotel_discount_amount)) {
+                                            } else if( $hotel_discount_type == "none") {
                                                 ?>
                                                 <span class="tf-price"><?php echo $price; ?></span>
                                                 <?php

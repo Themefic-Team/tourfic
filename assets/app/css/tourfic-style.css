@@ -11548,7 +11548,7 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-transform: lowercase;
+  text-transform: capitalize;
 }
 @media only screen and (max-width: 1024px) {
   .tf-template-3 .tf-booking-form-wrapper .tf-booking-form span.tf-booking-month {

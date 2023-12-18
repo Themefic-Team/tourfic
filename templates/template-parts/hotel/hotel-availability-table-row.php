@@ -410,41 +410,22 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
             <input type="hidden" id="hotel_room_uniqueid">
             <?php
             if ( $pricing_by == '1' ) {
-                if(!empty($hotel_discount_amount )) {
+                if($hotel_discount_type != 'none' && !empty($hotel_discount_amount)) {
                     ?>
                     <span class="tf-price">
                         <span class="discount-price">
-                            <?php esc_html_e( 'From', 'tourfic' ); ?><del><?php echo wc_price($price); ?></del> 
+                            <del><?php echo wc_price($price); ?></del> 
                         </span>
                         <span class="sale-price">
-                            <?php echo wc_price($hotel_discount_amount); ?>
-                            <span class="booking-type">
-                            <?php 
-                            if($multi_by_date){
-                                esc_html_e( '/night', 'tourfic' );
-                            }else{
-                                esc_html_e( '/day', 'tourfic' );
-                            } ?>
-                            </span>
+                            <?php echo wc_price($d_price); ?>
                         </span>
                     </span>
                     <?php
-                } else if($hotel_discount_type == "none") {
+                } else {
                     ?>
                     <span class="tf-price">
-                        <span class="discount-price">
-                            <?php esc_html_e( 'From', 'tourfic' ); ?> 
-                        </span>
                         <span class="sale-price">
                             <?php echo wc_price($price); ?>
-                            <span class="booking-type">
-                            <?php 
-                            if($multi_by_date){
-                                esc_html_e( '/night', 'tourfic' );
-                            }else{
-                                esc_html_e( '/day', 'tourfic' );
-                            } ?>
-                            </span>
                         </span>
                     </span>
                     <?php
@@ -452,50 +433,54 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                 ?>
                 <?php
             } else {
-                if(!empty($hotel_discount_amount )) {
+                if(!empty($hotel_discount_amount ) && $hotel_discount_type != 'none') {
                     ?>
                     <span class="tf-price">
                         <span class="discount-price">
-                            <?php esc_html_e( 'From', 'tourfic' ); ?><del><?php echo wc_price($price); ?></del> 
+                            <del><?php echo wc_price($price); ?></del> 
                         </span>
                         <span class="sale-price">
                             <?php echo wc_price($hotel_discount_amount); ?>
-                            <span class="booking-type">
-                            <?php 
-                            if($multi_by_date){
-                                esc_html_e( '/night', 'tourfic' );
-                            }else{
-                                esc_html_e( '/day', 'tourfic' );
-                            } ?>
-                            </span>
                         </span>
                     </span>
                     <?php
                 } else if($hotel_discount_type == "none") {
                     ?>
                     <span class="tf-price">
-                        <span class="discount-price">
-                            <?php esc_html_e( 'From', 'tourfic' ); ?> 
-                        </span>
                         <span class="sale-price">
                             <?php echo wc_price($price); ?>
-                            <span class="booking-type">
-                            <?php 
-                            if($multi_by_date){
-                                esc_html_e( '/night', 'tourfic' );
-                            }else{
-                                esc_html_e( '/day', 'tourfic' );
-                            } ?>
-                            </span>
                         </span>
                     </span>
                     <?php
                 }
                 ?>
-
                 <?php
             }
             ?>
+               <div class="tf-available-room-purchase-summery">
+                <?php
+                if ( $pricing_by == '1' ) { ?>
+                    <div class="price-per-night">
+                        <?php
+                        if($multi_by_date_ck){
+                            $days > 0 ? printf(__(' / for %s nights', 'tourfic'), $days) :  _e( 'per night', 'tourfic' );
+                        }else{
+                            $days > 0 ? printf(__(' / for %s days', 'tourfic'), $days) :  _e( 'per day', 'tourfic' );
+                        }
+                        ?>
+                    </div>
+                <?php } else {?>
+                    <div class="price-per-night">
+                        <?php
+                        if($multi_by_date_ck){
+                            $days > 0 ? printf(__(' / for %s nights', 'tourfic'), $days) : _e( 'per person/night', 'tourfic' );
+                        }else{
+                            $days > 0 ? printf(__(' /for %s days', 'tourfic'), $days) : _e( 'per person/day', 'tourfic' );
+                        }
+                        ?>
+                    </div>
+                <?php }?>
+            </div>
             </div>
             <div class="tf-available-room-select">
                 <span><?php _e("Select your Room", "tourfic"); ?></span>
@@ -506,39 +491,6 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                         }
                     ?>
                 </select>
-            </div>
-            <div class="tf-available-room-purchase-summery">
-            <?php
-            if(!empty($hotel_discount_amount) && $hotel_discount_type != "none"){
-                ?>
-                <span class="tf-price"><del><?php echo wc_price( $price ); ?></del> <?php echo wc_price( $hotel_discount_amount ); ?></span>
-                <?php
-            }else if($hotel_discount_type == "none" || empty($hotel_discount_amount)){
-                ?>
-                <span class="tf-price"><?php echo wc_price( $price ); ?></span>
-                <?php
-            }
-            if ( $pricing_by == '1' ) { ?>
-                <div class="price-per-night">
-                    <?php
-                    if($multi_by_date_ck){
-                        $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) :  _e( 'per night', 'tourfic' );
-                    }else{
-                        $days > 0 ? printf(__('for %s days', 'tourfic'), $days) :  _e( 'per day', 'tourfic' );
-                    }
-                    ?>
-                </div>
-            <?php } else {?>
-                <div class="price-per-night">
-                    <?php
-                    if($multi_by_date_ck){
-                        $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) : _e( 'per person/night', 'tourfic' );
-                    }else{
-                        $days > 0 ? printf(__('for %s days', 'tourfic'), $days) : _e( 'per person/day', 'tourfic' );
-                    }
-                    ?>
-                </div>
-            <?php }?>
             </div>
 
             <div class="room-submit-wrap">
@@ -681,7 +633,7 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                                 <?php echo wc_price($hotel_discount_amount); ?>
                                 <span class="booking-type">
                                 <?php 
-                                if($multi_by_date){
+                                if($multi_by_date_ck){
                                     esc_html_e( '/night', 'tourfic' );
                                 }else{
                                     esc_html_e( '/day', 'tourfic' );
@@ -700,7 +652,7 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                                 <?php echo wc_price($price); ?>
                                 <span class="booking-type">
                                 <?php 
-                                if($multi_by_date){
+                                if($multi_by_date_ck){
                                     esc_html_e( '/night', 'tourfic' );
                                 }else{
                                     esc_html_e( '/day', 'tourfic' );
@@ -723,7 +675,7 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                                 <?php echo wc_price($hotel_discount_amount); ?>
                                 <span class="booking-type">
                                 <?php 
-                                if($multi_by_date){
+                                if($multi_by_date_ck){
                                     esc_html_e( '/night', 'tourfic' );
                                 }else{
                                     esc_html_e( '/day', 'tourfic' );
@@ -742,7 +694,7 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                                 <?php echo wc_price($price); ?>
                                 <span class="booking-type">
                                 <?php 
-                                if($multi_by_date){
+                                if($multi_by_date_ck){
                                     esc_html_e( '/night', 'tourfic' );
                                 }else{
                                     esc_html_e( '/day', 'tourfic' );
@@ -835,39 +787,6 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                         }
                     ?>
                 </select>
-            </div>
-            <div class="tf-available-room-purchase-summery">
-            <?php
-            if(!empty($hotel_discount_amount) && $hotel_discount_type != "none"){
-                ?>
-                <span class="tf-price"><del><?php echo wc_price( $price ); ?></del> <?php echo wc_price( $hotel_discount_amount ); ?></span>
-                <?php
-            }else if($hotel_discount_type == "none" || empty($hotel_discount_amount)){
-                ?>
-                <span class="tf-price"><?php echo wc_price( $price ); ?></span>
-                <?php
-            }
-            if ( $pricing_by == '1' ) { ?>
-                <div class="price-per-night">
-                    <?php
-                    if($multi_by_date_ck){
-                        $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) :  _e( 'per night', 'tourfic' );
-                    }else{
-                        $days > 0 ? printf(__('for %s days', 'tourfic'), $days) :  _e( 'per day', 'tourfic' );
-                    }
-                    ?>
-                </div>
-            <?php } else {?>
-                <div class="price-per-night">
-                    <?php
-                    if($multi_by_date_ck){
-                        $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) : _e( 'per person/night', 'tourfic' );
-                    }else{
-                        $days > 0 ? printf(__('for %s days', 'tourfic'), $days) : _e( 'per person/day', 'tourfic' );
-                    }
-                    ?>
-                </div>
-            <?php }?>
             </div>
 
             <div class="room-submit-wrap">
