@@ -625,7 +625,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 
 	<?php }
 	if ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-2" ) || ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-2" ) ) { ?>
-		<div class="tf-booking-form-fields">
+		<div class="tf-booking-form-fields <?php echo $post_type == 'tf_tours' ? esc_attr( 'tf-tour-archive-block' ) : ''; ?>">
 			<div class="tf-booking-form-location">
 				<span class="tf-booking-form-title"><?php _e("Location", "tourfic"); ?></span>
 				<label for="tf-search-location" class="tf-booking-location-wrap">
@@ -638,6 +638,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                     <input type="hidden" name="place" id="tf-place" value="<?php echo $place_value ?? ''; ?>"/>
 				</label>
 			</div>
+			<?php if ( $post_type == 'tf_hotel' ) { ?>
 			<div class="tf-booking-form-checkin">
 				<span class="tf-booking-form-title"><?php _e("Check in", "tourfic"); ?></span>
 				<div class="tf-booking-date-wrap">
@@ -667,6 +668,35 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 				<input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" value="<?php echo $date ?>" required>
 
 			</div>
+			<?php } ?>
+
+			<?php if ( $post_type == 'tf_tours' ) { ?>
+			<div class="tf-booking-form-checkin">
+				<span class="tf-booking-form-title"><?php _e("Date", "tourfic"); ?></span>
+				<div class="tf-tour-searching-date-block">
+					<div class="tf-booking-date-wrap tf-tour-start-date">
+						<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
+						<span class="tf-booking-month">
+							<span><?php echo date('M'); ?></span>
+						</span>
+					</div>
+					<div class="tf-duration">
+						<span>-</span>
+					</div>
+					<div class="tf-booking-date-wrap tf-tour-end-date">
+						<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
+						<span class="tf-booking-month">
+							<span><?php echo date('M'); ?></span>
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+							<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+							</svg>
+						</span>
+					</div>
+					<input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $date ) ? 'value="' . $date . '"' : '' ?> required>
+				</div>
+			</div>
+			<?php } ?>
+
 			<div class="tf-booking-form-guest-and-room">
 				<?php if ( $post_type == 'tf_hotel' ) { ?>
 				<div class="tf-booking-form-guest-and-room-inner">
@@ -736,8 +766,66 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 			<input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type"/>
             <button class="tf-btn-normal btn-primary tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
 		</div>
-
+		<?php if ( $post_type == 'tf_tours' ) { ?>
 		<script>
+			(function ($) {
+				$(document).ready(function () {
+					// flatpickr locale first day of Week
+					<?php tf_flatpickr_locale("root"); ?>
+
+					$(".tf-template-3 .tf-booking-date-wrap").click(function(){
+						$("#check-in-out-date").click();
+					});
+					$("#check-in-out-date").flatpickr({
+						enableTime: false,
+						mode: "range",
+						dateFormat: "Y/m/d",
+						minDate: "today",
+
+						// flatpickr locale
+						<?php tf_flatpickr_locale(); ?>
+
+						onReady: function (selectedDates, dateStr, instance) {
+							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+							dateSetToFields(selectedDates, instance);
+						},
+						onChange: function (selectedDates, dateStr, instance) {
+							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+							dateSetToFields(selectedDates, instance);
+						},
+						<?php
+						if(!empty($date)){ ?>
+						defaultDate: <?php echo json_encode( explode( '-', $date ) ) ?>,
+						<?php } ?>
+					});
+
+					function dateSetToFields(selectedDates, instance) {
+						if (selectedDates.length === 2) {
+							const monthNames = [
+								"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+								"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+							];
+							if(selectedDates[0]){
+								const startDate = selectedDates[0];
+								$(".tf-template-3 .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-date").html(startDate.getDate());
+								$(".tf-template-3 .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+							}
+							if(selectedDates[1]){
+								const endDate = selectedDates[1];
+								$(".tf-template-3 .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-date").html(endDate.getDate());
+								$(".tf-template-3 .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
+							}
+						}
+					}
+
+				});
+			})(jQuery);
+		</script>
+		<?php } ?>
+
+		<?php if ( $post_type == 'tf_hotel' ) { ?>
+		
+			<script>
 			(function ($) {
 				$(document).ready(function () {
 				
@@ -790,6 +878,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 				});
 			})(jQuery);
 		</script>
+		<?php } ?>
 	<?php } else { ?>
         <!-- Start Booking widget -->
         <form class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
