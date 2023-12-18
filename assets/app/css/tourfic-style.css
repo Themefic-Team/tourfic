@@ -13303,6 +13303,9 @@ html {
     font-size: 12px !important;
   }
 }
+.tf-template-3 .tf-filter-wrapper .tf-filter-title button.filter-reset-btn {
+  display: none;
+}
 .tf-template-3 .tf-filter-wrapper .tf-filter-list-item h4 {
   margin-bottom: 12px;
   font-size: 16px;

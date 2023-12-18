@@ -59,7 +59,7 @@ if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
                     <div class="tf-filter-wrapper">
                         <div class="tf-filter-title">
                             <h2 class="tf-section-title"><?php _e("Filter", "tourfic"); ?></h2>
-                            <button><?php _e("Reset", "tourfic"); ?></button>
+                            <button class="filter-reset-btn" style="display: block;"><?php _e("Reset", "tourfic"); ?></button>
                         </div>
 
                         <?php if ( is_active_sidebar( 'tf_search_result' ) ) { ?>
