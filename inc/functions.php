@@ -2672,8 +2672,9 @@ function tf_update_email_template_default_content() {
 			update_option( $tf_settings['admin_booking_email_template'], TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ) );
 		}
 		//update email template for vendor
-		if ( empty( $tf_settings['vendor_booking_email_template'] ) ) {
-			update_option( $tf_settings['vendor_booking_email_template'], TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ) );
+		if ( empty( $tf_settings['vendor_booking_email_template'] )) {
+			if ( array_key_exists ('vendor_booking_email_template', $tf_settings ) )
+				update_option( $tf_settings['vendor_booking_email_template'], TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ) );
 		}
 		//update email template for customer
 		if ( empty( $tf_settings['customer_confirm_email_template'] ) ) {
@@ -2920,10 +2921,14 @@ add_action( 'init', 'tf_template_3_migrate_data' );
 * @Author Jahid
 */
 if( ! function_exists('tourfic_character_limit_callback') ){
-    function tourfic_character_limit_callback($str, $limit)
+    function tourfic_character_limit_callback($str, $limit, $dots = true)
     {
 		if(strlen($str) > $limit ){
-        	return substr($str, 0, $limit) . '...';
+			if($dots == true) {
+				return substr($str, 0, $limit) . '...';
+			} else {
+				return substr($str, 0, $limit);
+			}
 		}else{
 			return $str;
 		}

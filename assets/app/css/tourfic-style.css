@@ -11603,6 +11603,7 @@ html {
   display: flex;
   gap: 6px;
   margin-top: 4px;
+  text-transform: capitalize;
 }
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-person-count span {
   margin-right: 12px;
@@ -13609,6 +13610,7 @@ html {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  padding-left: 10px;
 }
 .tf-template-3 .tf-popup-wrapper.tf-room-popup .tf-popup-inner .tf-popup-body .tf-popup-right ul {
   margin: 0;
