@@ -2831,10 +2831,14 @@ add_action( 'init', 'tf_template_3_migrate_data' );
 * @Author Jahid
 */
 if( ! function_exists('tourfic_character_limit_callback') ){
-    function tourfic_character_limit_callback($str, $limit)
+    function tourfic_character_limit_callback($str, $limit, $dots = true)
     {
 		if(strlen($str) > $limit ){
-        	return substr($str, 0, $limit) . '...';
+			if($dots == true) {
+				return substr($str, 0, $limit) . '...';
+			} else {
+				return substr($str, 0, $limit);
+			}
 		}else{
 			return $str;
 		}
