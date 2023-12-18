@@ -76,6 +76,10 @@ if( !function_exists( 'tf_custom_css' ) ){
 		$tf_global_button_size = tfopt('button-font-size') ? tfopt('button-font-size') : 14;
 		$tf_global_button_line_height = tfopt('button-line-height') ? tfopt('button-line-height') : 1.2;
 
+		// Template 3 Global Settings
+		$tf_global_bg_clr_t3 = !empty(tf_data_types(tfopt( 'tourfic-template3-bg' ))['template3-bg']) ? tf_data_types(tfopt( 'tourfic-template3-bg' ))['template3-bg'] : '';
+		$tf_global_highlight_clr_t3 = !empty(tf_data_types(tfopt('tourfic-template3-bg'))["template3-highlight"]) ? tf_data_types(tfopt('tourfic-template3-bg'))["template3-highlight"] : '';
+
 		$output = '';
 		
 		// Template 1 Global CSS
@@ -125,6 +129,15 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-container-inner p,
 			.tf-main-wrapper p,
 			.tf-container p,
+			.tf-template-3,
+			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-description .tf-full-description,
+			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-description .tf-short-description,
+			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .ft-highlights-details p,
+			.tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room .tf-booking-form-title,
+			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper .tf-feature-block .tf-feature-block-details p,
+			.tf-template-3 .tf_tours_booking .tf-field-calander .tf-field,
+			.tf-template-3 .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question .tf-question-desc,
+			.tf-template-3 .tf-policies-wrapper .tf-policies p,
 			#tour_room_details_qv p{
 				color: '.$tf_template1_p_global_reg.'
 			}';
@@ -494,6 +507,39 @@ if( !function_exists( 'tf_custom_css' ) ){
 				color: '.$tf_review_color.' !important;
 			}
 		'; }
+
+		// Template 3 Global Colors
+		if(!empty($tf_global_bg_clr_t3)) {
+			$output .= '
+			.tf-template-3 .tf-related-tours .tf-slider-item .tf-meta-info,
+			.tf-template-3 .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question.tf-active,
+			.tf-template-3 .tf_tours_booking .tf-field-calander .tf-field,
+			.tf-template-3 .tf-search-date-wrapper .acr-select input[type=tel],
+			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room,
+			.tf-template-3 {
+				background: '.$tf_global_bg_clr_t3.' !important;
+			}
+			';
+		}
+
+		if(!empty($tf_global_highlight_clr_t3)) {
+			$output .= '
+			.tf-template-3 .tf-booking-form-wrapper,
+			.tf-template-3 .tf-available-rooms-wrapper,
+			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-details-menu,
+			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right.tf-archive-right,
+			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper,
+			.tf-template-3 .tf-bottom-booking-bar,
+			.tf-template-3 .tf-related-tours,
+			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper .tf-feature-block,
+			.tf-template-3 .tf-search-date-wrapper,
+			.tf-template-3 button.tf-review-open.button, .tf-template-3 .tf-reting-field button,
+			.tf-template-3 .tf-review-form-wrapper,
+			.tf-template-3 .tf-section {
+				background: '.$tf_global_highlight_clr_t3.' !important;
+			}
+			';
+		}
 		
 		wp_add_inline_style( 'tf-app-style', $output );
 	}

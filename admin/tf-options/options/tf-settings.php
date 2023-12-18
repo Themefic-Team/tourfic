@@ -2974,7 +2974,18 @@ TF_Settings::option( 'tf_settings', array(
 						'review_bg_color'       => __( 'Review Background', 'tourfic' ),
 					)
 				),
-
+				array(
+					'id'       => 'tourfic-template3-bg',
+					'type'     => 'color',
+					'label'    => __( 'Background and Highlight Colors for Template 3', 'tourfic' ),
+					'subtitle' => __( 'Set the background and highlight color for the template 3.', 'tourfic' ),
+					'multiple' => true,
+					'inline'   => true,
+					'colors'   => array(
+						'template3-bg' => __( 'Template 3 Background Color', 'tourfic' ),
+						'template3-highlight' => __( 'Template 3 Highlight Color', 'tourfic' ),
+					)
+				),
 			),
 		),
 		'hotel_design'          => array(
