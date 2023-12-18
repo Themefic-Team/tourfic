@@ -2761,7 +2761,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_destination_fields {
   width: 25%;
   padding-right: 40px;
-  border-right: 1px solid #D6D4D2;
+  border-right: 1px solid rgb(153, 148, 141);
 }
 @media only screen and (max-width: 1366px) {
   .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_destination_fields {
@@ -2777,7 +2777,7 @@ div#tf-destinationautocomplete-list div:before {
   }
 }
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_destination_fields .tf_label_location .tf_form_inners {
-  border: 1px solid #FCF4E8;
+  border: 0.5px solid #FCF4E8;
   display: flex;
   align-items: center;
   padding: 8px 0px 8px 12px;
@@ -2805,7 +2805,7 @@ div#tf-destinationautocomplete-list div:before {
   width: 22%;
   padding-left: 40px;
   padding-right: 40px;
-  border-right: 1px solid #D6D4D2;
+  border-right: 1px solid rgb(153, 148, 141);
 }
 @media only screen and (max-width: 1366px) {
   .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date {
@@ -2817,6 +2817,13 @@ div#tf-destinationautocomplete-list div:before {
   .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date {
     width: 30%;
     float: left;
+    padding-left: 0px;
+  }
+}
+@media only screen and (max-width: 575.98px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date {
+    width: 25%;
+    padding-right: 5px;
     padding-left: 0px;
   }
 }
@@ -2848,6 +2855,12 @@ div#tf-destinationautocomplete-list div:before {
     font-size: 20px;
   }
 }
+@media only screen and (max-width: 575.98px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf_form_inners .tf_checkin_dates span.date,
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf_form_inners .tf_checkout_dates span.date {
+    margin-right: 8px;
+  }
+}
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf_form_inners .tf_checkin_dates span.month,
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf_form_inners .tf_checkout_dates span.month {
   font-size: 16px;
@@ -2864,6 +2877,11 @@ div#tf-destinationautocomplete-list div:before {
 }
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date.tf_check_inout_dates {
   padding-left: 24px;
+}
+@media only screen and (max-width: 575.98px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date.tf_check_inout_dates {
+    padding-left: 5px;
+  }
 }
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_guest_info {
   width: 31%;
@@ -2886,6 +2904,12 @@ div#tf-destinationautocomplete-list div:before {
     padding-right: 0px !important;
   }
 }
+@media only screen and (max-width: 575.98px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_guest_info {
+    padding-left: 5px;
+    width: 50%;
+  }
+}
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_guest_info .tf_input-inner {
   display: flow-root;
 }
@@ -2902,12 +2926,23 @@ div#tf-destinationautocomplete-list div:before {
   color: #FDF9F3;
   margin-right: 16px;
 }
+@media only screen and (max-width: 575.98px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_guest_info .tf_input-inner .tf_form_inners .tf_guest_calculation .tf_guest_number span.guest,
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_guest_info .tf_input-inner .tf_form_inners .tf_guest_calculation .tf_guest_number span.room {
+    margin-right: 8px;
+  }
+}
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_guest_info .tf_input-inner .tf_form_inners .tf_guest_calculation .tf_guest_number span.label {
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 130%;
   color: #FDF9F3;
+}
+@media only screen and (max-width: 1366px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_guest_info .tf_input-inner .tf_form_inners .tf_guest_calculation .tf_guest_number span.label {
+    font-size: 12px;
+  }
 }
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_guest_info .tf_acrselection-wrap {
   background: #FDF9F3;

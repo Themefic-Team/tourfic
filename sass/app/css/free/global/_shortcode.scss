@@ -501,7 +501,7 @@ div#tf-destinationautocomplete-list {
                     .tf_destination_fields{
                         width: 25%;
                         padding-right: 40px;
-                        border-right: 1px solid #D6D4D2;
+                        border-right: 1px solid rgba(153, 148, 141, 1);
                         @media #{$max1366}{
                             padding-right: 24px;
                         }
@@ -513,7 +513,7 @@ div#tf-destinationautocomplete-list {
                         }
                         .tf_label_location{
                             .tf_form_inners{
-                                border: 1px solid #FCF4E8;
+                                border: .5px solid #FCF4E8;
                                 display: flex;
                                 align-items: center;
                                 padding: 8px 0px 8px 12px;
@@ -543,7 +543,7 @@ div#tf-destinationautocomplete-list {
                         width: 22%;
                         padding-left: 40px;
                         padding-right: 40px;
-                        border-right: 1px solid #D6D4D2;
+                        border-right: 1px solid rgba(153, 148, 141, 1);
                         @media #{$max1366}{
                             padding-left: 24px;
                             padding-right: 24px;
@@ -551,6 +551,11 @@ div#tf-destinationautocomplete-list {
                         @media #{$max767}{
                             width: 30%;
                             float: left;
+                            padding-left: 0px;
+                        }
+                        @media #{$max575}{
+                            width: 25%;
+                            padding-right: 5px;
                             padding-left: 0px;
                         }
                         .tf-check-in-out-date,
@@ -579,6 +584,9 @@ div#tf-destinationautocomplete-list {
                                     @media #{$max1366}{
                                         font-size: 20px;
                                     }
+                                    @media #{$max575}{
+                                        margin-right: 8px;
+                                    }
                                 }
                                 span.month{
                                     font-size: 16px;
@@ -595,6 +603,9 @@ div#tf-destinationautocomplete-list {
                     }
                     .tf_checkin_date.tf_check_inout_dates{
                         padding-left: 24px;
+                        @media #{$max575}{
+                            padding-left: 5px;
+                        }
                     }
                     .tf_guest_info{
                         width: 31%;
@@ -612,6 +623,10 @@ div#tf-destinationautocomplete-list {
                             padding-bottom: 0px !important;
                             padding-right: 0px !important;
                         }
+                        @media #{$max575}{
+                            padding-left: 5px;
+                            width: 50%;
+                        }
                         .tf_input-inner{
                             display: flow-root;
                             .tf_form_inners{
@@ -627,6 +642,9 @@ div#tf-destinationautocomplete-list {
                                             line-height: 130%;
                                             color: #FDF9F3;
                                             margin-right: 16px;
+                                            @media #{$max575}{
+                                                margin-right: 8px;
+                                            }
                                         }
                                         span.label{
                                             font-size: 16px;
@@ -634,6 +652,9 @@ div#tf-destinationautocomplete-list {
                                             font-weight: 400;
                                             line-height: 130%;
                                             color: #FDF9F3;
+                                            @media #{$max1366}{
+                                                font-size: 12px;
+                                            }
                                         }
                                     }
                                 }
