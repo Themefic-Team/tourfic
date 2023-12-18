@@ -46,6 +46,7 @@
             scrollbar-color: #aaa #eee;
             @media #{$max767}{
                 grid-template-columns: 1fr 1fr;
+                max-height: 320px;
             }
             scrollbar {
                 width: 5px; 
