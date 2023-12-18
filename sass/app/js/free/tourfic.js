@@ -1847,14 +1847,14 @@
 
         // Full Description Showing
         $('.tf-template-3 span.tf-see-description').on('click', function() {
-            $('.tf-short-description').hide();
-            $('.tf-full-description').show(500);
+            $('.tf-short-description').slideUp();
+            $('.tf-full-description').slideDown();
         });
 
         // See Less Description Showing
         $('.tf-template-3 span.tf-see-less-description').on('click', function() {
-            $('.tf-full-description').hide();
-            $('.tf-short-description').show(500);
+            $('.tf-full-description').slideUp();
+            $('.tf-short-description').slideDown();
         });
 
         $('.tf-template-3 .acr-inc , .tf-template-3 .acr-dec').on('click', function() {
