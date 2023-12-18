@@ -315,6 +315,9 @@
             makeFilter()
         });
         $(document).on('change', '[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types]', function () {
+            if($(".filter-reset-btn").length>0){
+                $(".filter-reset-btn").show();
+            }
             makeFilter();
         })
 
@@ -322,6 +325,14 @@
         $(document).on('submit', '.tf_archive_search_result', function (e) {
             e.preventDefault();
             makeFilter()
+        });
+
+        // Archive Page Filter Reset
+        $(document).on('click', '.filter-reset-btn', function (e) {
+            e.preventDefault();
+            $('[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types]').prop('checked', false);
+            makeFilter();
+            $(".filter-reset-btn").hide();
         });
 
         /*
@@ -1836,14 +1847,14 @@
 
         // Full Description Showing
         $('.tf-template-3 span.tf-see-description').on('click', function() {
-            $('.tf-short-description').hide();
-            $('.tf-full-description').show();
+            $('.tf-short-description').slideUp();
+            $('.tf-full-description').slideDown();
         });
 
         // See Less Description Showing
         $('.tf-template-3 span.tf-see-less-description').on('click', function() {
-            $('.tf-full-description').hide();
-            $('.tf-short-description').show();
+            $('.tf-full-description').slideUp();
+            $('.tf-short-description').slideDown();
         });
 
         $('.tf-template-3 .acr-inc , .tf-template-3 .acr-dec').on('click', function() {

@@ -11568,6 +11568,7 @@ html {
   display: flex;
   gap: 6px;
   margin-top: 4px;
+  text-transform: capitalize;
 }
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-person-count span {
   margin-right: 12px;
@@ -13303,6 +13304,9 @@ html {
     font-size: 12px !important;
   }
 }
+.tf-template-3 .tf-filter-wrapper .tf-filter-title button.filter-reset-btn {
+  display: none;
+}
 .tf-template-3 .tf-filter-wrapper .tf-filter-list-item h4 {
   margin-bottom: 12px;
   font-size: 16px;
@@ -13451,6 +13455,7 @@ html {
 @media only screen and (max-width: 767.98px) {
   .tf-template-3 .tf-popup-wrapper .tf-popup-inner .tf-popup-body {
     grid-template-columns: 1fr 1fr;
+    max-height: 320px;
   }
 }
 .tf-template-3 .tf-popup-wrapper .tf-popup-inner .tf-popup-body scrollbar {
@@ -13570,6 +13575,7 @@ html {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  padding-left: 10px;
 }
 .tf-template-3 .tf-popup-wrapper.tf-room-popup .tf-popup-inner .tf-popup-body .tf-popup-right ul {
   margin: 0;
