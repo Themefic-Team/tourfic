@@ -489,9 +489,8 @@ TF_Settings::option( 'tf_settings', array(
 					),
 				),
 				array(
-					'id'      => 'rt-display',
+					'id'      => 'rt_display',
 					'type'    => 'radio',
-					'is_pro' => true,
 					'label'   => __( 'Related Tour display logic', 'tourfic' ),
 					'options' => array(
 						'auto'     => __( 'Auto', 'tourfic' ),
@@ -504,16 +503,18 @@ TF_Settings::option( 'tf_settings', array(
 					),
 				),
 				array(
-					'id'         => 'tf-ralated-tours',
+					'id'         => 'tf-related-tours',
 					'type'       => 'select2',
-					'is_pro'     => true,
-					'label'      => __( 'Choose related tours for single page', 'tourfic' ),
+					'multiple'   => 'true',
+					'label'      => __( 'Choose Your Related Tours', 'tourfic' ),
+					'subtitle' => __( 'Select the tour you wish to feature in the “Related Tour” section on each single tour page.', 'tourfic' ),
 					'options'    => 'posts',
 					'query_args' => array(
 						'post_type'      => 'tf_tours',
 						'posts_per_page' => - 1,
 					),
-					'dependency'  => array(
+					'dependency' => array (
+						array( 'rt_display', '==', 'selected' ),
 						array( 't-related', '==', 'false' ),
 					),
 				),
