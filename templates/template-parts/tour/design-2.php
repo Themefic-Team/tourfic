@@ -168,7 +168,7 @@
                                 <div class="tf-contact-details-title">
                                     <h3 class="tf-section-title"><?php echo esc_html( $meta['contact-info-section-title'] ) ?></h3>
                                 </div>
-                            <? endif; ?>
+                            <?php endif; ?>
                             
                             <div class="tf-contact-details-items">
                                 <ul class="tf-list">
@@ -191,7 +191,7 @@
                                 </ul>
                             </div>
                         </div>
-                    <? endif; ?>
+                    <?php endif; ?>
                     <div class="tf-reviews tf-single-widgets">
                     <?php
                     global $current_user;
