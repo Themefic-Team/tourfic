@@ -2142,7 +2142,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h1',
 					'type'        => 'number',
 					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'subtitle'    => __( 'Font Size of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2153,7 +2152,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h1-line-height',
 					'type'        => 'text',
 					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2164,7 +2162,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h1-weight',
 					'type'        => 'select',
 					'label'       => __( 'Font Weight', 'tourfic' ),
-					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
@@ -2183,7 +2180,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h1-style',
 					'type'        => 'select',
 					'label'       => __( 'Font Style', 'tourfic' ),
-					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
@@ -2201,7 +2197,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h2',
 					'type'        => 'number',
 					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'subtitle'    => __( 'Font Size of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2212,7 +2207,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h2-line-height',
 					'type'        => 'text',
 					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2223,7 +2217,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h2-weight',
 					'type'        => 'select',
 					'label'       => __( 'Font Weight', 'tourfic' ),
-					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
@@ -2242,7 +2235,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h2-style',
 					'type'        => 'select',
 					'label'       => __( 'Font Style', 'tourfic' ),
-					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
@@ -2260,7 +2252,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h3',
 					'type'        => 'number',
 					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'subtitle'    => __( 'Font Size of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2271,7 +2262,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h3-line-height',
 					'type'        => 'text',
 					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2282,7 +2272,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h3-weight',
 					'type'        => 'select',
 					'label'       => __( 'Font Weight', 'tourfic' ),
-					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
@@ -2301,7 +2290,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h3-style',
 					'type'        => 'select',
 					'label'       => __( 'Font Style', 'tourfic' ),
-					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
@@ -2319,7 +2307,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h4',
 					'type'        => 'number',
 					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'subtitle'    => __( 'Font Size of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2330,7 +2317,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h4-line-height',
 					'type'        => 'text',
 					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2341,7 +2327,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h4-weight',
 					'type'        => 'select',
 					'label'       => __( 'Font Weight', 'tourfic' ),
-					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
@@ -2360,7 +2345,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h4-style',
 					'type'        => 'select',
 					'label'       => __( 'Font Style', 'tourfic' ),
-					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
@@ -2378,7 +2362,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h5',
 					'type'        => 'number',
 					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'subtitle'    => __( 'Font Size of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2389,7 +2372,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h5-line-height',
 					'type'        => 'text',
 					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2400,7 +2382,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h5-weight',
 					'type'        => 'select',
 					'label'       => __( 'Font Weight', 'tourfic' ),
-					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
@@ -2419,7 +2400,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h5-style',
 					'type'        => 'select',
 					'label'       => __( 'Font Style', 'tourfic' ),
-					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
@@ -2430,14 +2410,12 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'h6-heading',
 					'type'    => 'heading',
-					'label' => __( 'H6 Font Settings', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
 					'id'          => 'global-h6',
 					'type'        => 'number',
 					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'subtitle'    => __( 'Font Size of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2448,7 +2426,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h6-line-height',
 					'type'        => 'text',
 					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2459,7 +2436,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h6-weight',
 					'type'        => 'select',
 					'label'       => __( 'Font Weight', 'tourfic' ),
-					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
@@ -2478,7 +2454,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h6-style',
 					'type'        => 'select',
 					'label'       => __( 'Font Style', 'tourfic' ),
-					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
@@ -2496,7 +2471,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-p',
 					'type'        => 'number',
 					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'subtitle'    => __( 'Font Size of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2507,7 +2481,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-p-line-height',
 					'type'        => 'text',
 					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2518,7 +2491,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-p-weight',
 					'type'        => 'select',
 					'label'       => __( 'Font Weight', 'tourfic' ),
-					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
@@ -2537,7 +2509,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-p-style',
 					'type'        => 'select',
 					'label'       => __( 'Font Style', 'tourfic' ),
-					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
