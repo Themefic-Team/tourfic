@@ -172,6 +172,13 @@
     .tf-itinerary-content-images {
         height: fit-content;
         width: 320px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
         @media #{$max1366}{
             width: 252px;
         }

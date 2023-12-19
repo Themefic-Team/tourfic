@@ -330,6 +330,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-submit button,
 			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.availability,
 			.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right a.view-hotel,
+			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content button,
 			.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-review-submit input#comment-submit,
 			.tf-template-3 .tf-modify-search-btn{
 				color: '.$tf_primary_color_reg.' !important;
@@ -351,6 +352,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-3 .tf-send-inquiry .tf-send-inquiry-btn:hover,
 			.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right a.view-hotel:hover,
 			.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-review-submit input#comment-submit:hover,
+			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content button:hover,
 			.tf-template-3 .tf-modify-search-btn:hover {
 				color: '.$tf_primary_color_hov.' !important;
 			}
@@ -370,6 +372,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-submit button,
 			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.availability,
 			.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right a.view-hotel,
+			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content button,
 			.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-review-submit input#comment-submit,
 			.tf-template-3 .tf-modify-search-btn {
 				background: '.$tf_primary_bg_color_reg.' !important;
@@ -394,6 +397,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-3 .tf-send-inquiry .tf-send-inquiry-btn:hover,
 			.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right a.view-hotel:hover,
 			.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-review-submit input#comment-submit:hover,
+			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content button:hover,
 			.tf-template-3 .tf-modify-search-btn:hover {
 				background: '.$tf_primary_bg_color_hov.' !important;
 			}
