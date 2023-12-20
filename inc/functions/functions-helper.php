@@ -367,7 +367,7 @@ function tourfic_ask_question_ajax() {
 		do_action( 'enquiry_zapier_form_trigger', $post_id, $name, $email, $question );
 	}
 
-	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+	// if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 		if ( "tf_hotel" == get_post_type( $post_id ) ) {
 			$send_email_to = ! empty( tfopt( 'h-enquiry-email' ) ) ? sanitize_email( tfopt( 'h-enquiry-email' ) ) : sanitize_email( get_option( 'admin_email' ) );
 		} elseif ( "tf_apartment" == get_post_type( $post_id ) ) {
@@ -375,13 +375,9 @@ function tourfic_ask_question_ajax() {
 		} else {
 			$send_email_to = ! empty( tfopt( 't-enquiry-email' ) ) ? sanitize_email( tfopt( 't-enquiry-email' ) ) : sanitize_email( get_option( 'admin_email' ) );
 		}
-	} else {
-		if ( "tf_apartment" == get_post_type( $post_id ) ) {
-			$send_email_to = ! empty( $author_mail ) ? sanitize_email( $author_mail ) : sanitize_email( get_option( 'admin_email' ) );
-		} else {
-			$send_email_to = sanitize_email( get_option( 'admin_email' ) );
-		}
-	}
+	// }
+
+
 	$subject     = sprintf( __( 'Someone asked question on: %s', 'tourfic' ), $post_title );
 	$message     = "{$question}";
 	$headers[]   = 'Reply-To: ' . $name . ' <' . $email . '>';

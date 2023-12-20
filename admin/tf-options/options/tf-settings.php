@@ -523,7 +523,6 @@ TF_Settings::option( 'tf_settings', array(
 					'type'     => 'text',
 					'label'    => __( 'Email for Enquiry Form', 'tourfic' ),
 					'subtitle' => __( 'Enter the email address that will receive all submissions from the enquiry form.', 'tourfic' ),
-					'is_pro' => true,
 				),
 				array(
 					'id'        => 't-auto-draft',
@@ -896,7 +895,6 @@ TF_Settings::option( 'tf_settings', array(
 					'type'     => 'text',
 					'label'    => __( 'Email for Enquiry Form', 'tourfic' ),
 					'subtitle' => __( 'Enter the email address that will receive all submissions from the enquiry form.', 'tourfic' ),
-					'is_pro' => true,
 				),
 				array(
 					'id'       => 'hotel_archive_price_minimum_settings',
