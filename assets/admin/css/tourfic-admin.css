@@ -3040,6 +3040,11 @@ Steps
   color: #f44336;
 }
 
+.tour-option-itinerary-notice .tf-field-notice-content {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
 .tf-field-switch .tf-switch-label {
   position: relative;
   display: inline-block;

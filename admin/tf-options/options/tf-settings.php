@@ -624,88 +624,10 @@ TF_Settings::option( 'tf_settings', array(
 									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 								),
 								array(
-									'id'       => 'itinerary-builder-heading',
-									'type'     => 'heading',
-									'subtitle' => __( 'You can create your own Itinerary using Tourfic\'s Itinerary builder. The builder can be found on Single Tour Settings', 'tourfic' ),
-								),
-								array(
-									'id'           => '',
-									'type'         => 'repeater',
-									'label'        => __( 'Create Custom Itinerary options', 'tourfic' ),
-									'button_title' => __( 'Add New Options', 'tourfic' ),
-									'is_pro'       => true,
-									'fields'       => array(
-										array(
-											'id'    => 'sleep-mode-title',
-											'type'  => 'text',
-											'label' => __( 'Field Title', 'tourfic' ),
-										),
-										array(
-											'id'    => 'sleep-mode-icon',
-											'type'  => 'icon',
-											'label' => __( 'Field Icon', 'tourfic' ),
-										),
-									),
-								),
-								array(
-									'id'           => '',
-									'type'         => 'repeater',
-									'button_title' => __( 'Add New Meal', 'tourfic' ),
-									'label'        => __( 'Include Meal', 'tourfic' ),
-									'is_pro'       => true,
-									'fields'       => array(
-										array(
-											'id'    => 'meal',
-											'type'  => 'text',
-											'label' => __( 'Meal name', 'tourfic' ),
-										),
-									),
-								),
-								array(
-									'id'      => '',
-									'label'   => __( 'Elevation Input', 'tourfic' ),
-									'type'    => 'select',
-									'options' => [
-										'Meter' => __( 'Meter', 'tourfic' ),
-										'Feet'  => __( 'Feet', 'tourfic' ),
-									],
-									'is_pro'  => true,
-									'default' => 'Meter',
-								),
-								array(
-									'id'          => '',
-									'type'        => 'switch',
-									'is_pro'      => true,
-									'label'       => __( 'Show Chart on Trip Page', 'tourfic' ),
-									'field_width' => 50,
-								),
-								array(
-									'id'          => '',
-									'type'        => 'switch',
-									'is_pro'      => true,
-									'label'       => __( 'Always Show All Itinerary', 'tourfic' ),
-									'field_width' => 50,
-								),
-								array(
-									'id'          => '',
-									'type'        => 'switch',
-									'is_pro'      => true,
-									'label'       => __( 'Show X-Axis', 'tourfic' ),
-									'field_width' => 50,
-								),
-								array(
-									'id'          => '',
-									'type'        => 'switch',
-									'is_pro'      => true,
-									'label'       => __( 'Show Y-Axis', 'tourfic' ),
-									'field_width' => 50,
-								),
-								array(
-									'id'          => '',
-									'type'        => 'switch',
-									'is_pro'      => true,
-									'label'       => __( 'Show line Graph', 'tourfic' ),
-									'field_width' => 50,
+									'id'      => 'tour-option-itinerary-notice',
+									'type'    => 'notice',
+									'class'	  => 'tour-option-itinerary-notice',
+									'content' => __('By default, you can create your entire Tour Itinerary using our Default Itinerary editor found in the Single Tour settings. For access to an Itinerary builder with enhanced advanced features, please consider upgrading to our <b>Pro version.</b>', 'tourfic'),
 								),
 							),
 						),
@@ -720,224 +642,15 @@ TF_Settings::option( 'tf_settings', array(
 									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 								),
 								array(
-									'id'       => '',
-									'type'     => 'switch',
-									'is_pro'   => true,
-									'label'    => __( 'Enable Itinerary Downloader', 'tourfic' ),
-									'subtitle' => __( 'Turn this on to give customers the option to download the itinerary plan as a PDF.', 'tourfic' ),
-									"default" => true,
-								),
-								array(
-									'id'      => 'tour_pdf_downloader_section',
-									'type'    => 'heading',
-									'content' => __( 'Tour Itinerary Downloader Section', 'tourfic' ),
-								),
-								array(
-									'id'    => '',
-									'type'  => 'text',
-									'label' => __( 'Itinerary Downloader Title', 'tourfic' ),
-									'default' => "Want to read it later?",
-									'placeholder' => "Want to read it later?",
-									'is_pro'   => true,
-								),
-								array(
-									'id'    => '',
-									'type'  => 'text',
-									'label' => __( 'Itinerary Downloader Description', 'tourfic' ),
-									'default' => "Download this tour's PDF brochure and start your planning offline.",
-									'placeholder' => "Download this tour's PDF brochure and start your planning offline.",
-									'is_pro'   => true,
-								),
-								array(
-									'id'    => '',
-									'type'  => 'text',
-									'label' => __( 'Itinerary Downloader Button Text', 'tourfic' ),
-									'default' => "Download Now",
-									'placeholder' => "Download Now",
-									'is_pro'   => true,
-								),
-								array(
-									'id'      => 'tour_settings',
-									'type'    => 'heading',
-									'content' => __( 'Thumbnail Settings in PDF', 'tourfic' ),
-								),
-								array(
-									'id'          => '',
-									'type'        => 'number',
-									'label'       => __( 'Image Thumbnail Height', 'tourfic' ),
-									'field_width' => 50,
-									'is_pro'      => true,
-								),
-								array(
-									'id'          => '',
-									'type'        => 'number',
-									'label'       => __( 'Image Thumbnail Width', 'tourfic' ),
-									'field_width' => 50,
-									'is_pro'      => true,
-								),
-								array(
-									'id'      => 'companey_info_heading',
-									'type'    => 'heading',
-									'content' => __( 'Default Company Info in PDF', 'tourfic' ),
-								),
-								array(
-									'id'      => 'tour-option-notice-one',
+									'id'      => 'tour-option-itinerary-notice',
 									'type'    => 'notice',
-									'content' => __( 'If no company information is specified in the Single Tour Settings, this information will be used by default.', 'tourfic' ),
-								),
-
-								array(
-									'id'     => '',
-									'type'   => 'image',
-									'is_pro' => true,
-									'label'  => __( 'Company Logo', 'tourfic' ),
-								),
-								array(
-									'id'     => '',
-									'type'   => 'textarea',
-									'is_pro' => true,
-									'label'  => __( 'Company Description', 'tourfic' ),
-								),
-								array(
-									'id'          => '',
-									'type'        => 'text',
-									'is_pro'      => true,
-									'label'       => __( 'Company Email Address', 'tourfic' ),
-									'field_width' => 33.33,
-								),
-								array(
-									'id'          => '',
-									'type'        => 'text',
-									'is_pro'      => true,
-									'label'       => __( 'Company Address', 'tourfic' ),
-									'field_width' => 33.33,
-								),
-								array(
-									'id'          => '',
-									'type'        => 'text',
-									'is_pro'      => true,
-									'label'       => __( 'Company Phone', 'tourfic' ),
-									'field_width' => 33.33,
-								),
-								array(
-									'id'    => 'export_heading',
-									'type'  => 'heading',
-									'label' => __( 'Talk to Expert Section', 'tourfic' ),
-								),
-								array(
-									'id'      => '',
-									'type'    => 'switch',
-									'is_pro'  => true,
-									'label'   => __( 'Enable Talk To Expert Section in PDF', 'tourfic' ),
-									'default' => false,
-								),
-								array(
-									'id'          => '',
-									'type'        => 'text',
-									'is_pro'      => true,
-									'label'       => __( 'Talk to Expert - Label', 'tourfic' ),
-									'field_width' => 25,
-									'dependency'  => array(
-										array( 'itinerary-expert', '==', 'true' ),
-									),
-								),
-								array(
-									'id'          => '',
-									'type'        => 'text',
-									'label'       => __( 'Expert Name', 'tourfic' ),
-									'field_width' => 25,
-									'is_pro'      => true,
-									'dependency'  => array(
-										array( 'itinerary-expert', '==', 'true' ),
-									),
-								),
-								array(
-									'id'          => '',
-									'type'        => 'text',
-									'label'       => __( 'Expert Email Address', 'tourfic' ),
-									'field_width' => 25,
-									'is_pro'      => true,
-									'dependency'  => array(
-										array( 'itinerary-expert', '==', 'true' ),
-									),
-								),
-								array(
-									'id'          => '',
-									'type'        => 'text',
-									'label'       => __( 'Expert Phone Address', 'tourfic' ),
-									'field_width' => 25,
-									'is_pro'      => true,
-									'dependency'  => array(
-										array( 'itinerary-expert', '==', 'true' ),
-									),
-								),
-								array(
-									'id'         => '',
-									'type'       => 'image',
-									'is_pro'     => true,
-									'label'      => __( 'Expert Avatar Image', 'tourfic' ),
-									'dependency' => array(
-										array( 'itinerary-expert', '==', 'true' ),
-									),
-								),
-								array(
-									'id'         => '',
-									'type'       => 'switch',
-									'label'      => __( 'Enable Viber Contact', 'tourfic' ),
-									'dependency' => array(
-										array( 'itinerary-expert', '==', 'true' ),
-									),
-									'is_pro'  => true,
-								),
-								array(
-									'id'         => '',
-									'type'       => 'switch',
-									'is_pro'  => true,
-									'label'      => __( 'Enable WhatsApp Contact', 'tourfic' ),
-									'dependency' => array(
-										array( 'itinerary-expert', '==', 'true' ),
-									),
-								),
-								array(
-									'id'       => 'signle_tour_fonts',
-									'type'     => 'heading',
-									'label'    => __( 'PDF Downloader Font Support', 'tourfic' ),
-									'subtitle' => __( 'If your site\'s language is not English, then upload your language font. Otherwise, your Downloader PDF may not work properly.', 'tourfic' ),
-								),
-								array(
-									'id'     => '',
-									'type'   => 'file',
-									'label'  => __( 'Upload Fonts', 'tourfic' ),
-									'is_pro' => true,
+									'class'	  => 'tour-option-itinerary-notice',
+									'content' => __('By default, you can create your entire Tour Itinerary using our Default Itinerary editor found in the Single Tour settings. For access to an Itinerary builder with enhanced advanced features, please consider upgrading to our <b>Pro version.</b>', 'tourfic'),
 								),
 							),
 						),
 					),
 				),
-				array(
-					'id'          => '',
-					'type'        => 'switch',
-					'label'       => __( 'Enable Itinerary Map', 'tourfic' ),
-					'label_on'    => __( 'Yes', 'tourfic' ),
-					'label_off'   => __( 'No', 'tourfic' ),
-					'subtitle'  => __( 'To show the itinerary on a map, it is necessary to add your Google Maps API key in the settings under Miscellaneous -> Map.', 'tourfic' ),
-					'is_pro'      => true,
-					'field_width' => 50,
-				),
-				array(
-					'id'          => '',
-					'type'        => 'select',
-					'label'       => __( 'Map Mode', 'tourfic' ),
-					'options'     => array(
-						'DRIVING'   => __( 'Driving', 'tourfic' ),
-						'WALKING'   => __( 'Walking', 'tourfic' ),
-						'BICYCLING' => __( 'Bycycling', 'tourfic' ),
-					),
-					'default'     => 'driving',
-					'is_pro'      => true,
-					'field_width' => 50,
-				),
-
 			),
 		),
 		// Without Payment Popup
@@ -1341,6 +1054,7 @@ TF_Settings::option( 'tf_settings', array(
 		//Frontend Dashboard
 		'frontend_dashboard'    => array(
 			'title'  => __( 'Frontend Dashboard', 'tourfic' ),
+			'parent' => 'pro_options',
 			'icon'   => 'fa-solid fa-gauge-high',
 			'fields' => array(
 				//logo
@@ -1381,6 +1095,7 @@ TF_Settings::option( 'tf_settings', array(
 		//user options
 		'user_options'          => array(
 			'title'  => __( 'User Options', 'tourfic' ),
+			'parent' => 'pro_options',
 			'icon'   => 'fas fa-user',
 			'fields' => array(
 				array(
@@ -1542,6 +1257,7 @@ TF_Settings::option( 'tf_settings', array(
 		// Multi Vendor
 		'vendor'                => array(
 			'title'  => __( 'Multi Vendor', 'tourfic' ),
+			'parent' => 'pro_options',
 			'icon'   => 'fa fa-handshake',
 			'fields' => array(
 				array(
@@ -2700,7 +2416,7 @@ TF_Settings::option( 'tf_settings', array(
 		 */
 		'login_register'        => array(
 			'title'  => __( 'Login & Register', 'tourfic' ),
-			'parent' => 'miscellaneous',
+			'parent' => 'pro_options',
 			'icon'   => 'fas fa-user',
 			'fields' => array(
 				array(
@@ -3119,7 +2835,6 @@ TF_Settings::option( 'tf_settings', array(
 
 		'permalink' => array(
 			'title'  => __( 'Permalink Settings', 'tourfic' ),
-			'parent' => 'miscellaneous',
 			'icon'   => 'fas fa-link',
 			'fields' => array(
 				array(
@@ -3413,6 +3128,7 @@ TF_Settings::option( 'tf_settings', array(
 		 */
 		'affiliate' => array(
 			'title'  => __( 'Affiliate', 'tourfic' ),
+			'parent' => 'pro_options',
 			'icon'   => 'fa fa-handshake-o',
 			'fields' => array(
 				array(
@@ -3527,24 +3243,7 @@ TF_Settings::option( 'tf_settings', array(
 									'default'     => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ),
 									'description' => __( 'This template will be sent to admin', 'tourfic' )
 								),
-								//heading
-								array(
-									'id'    => 'vendor_email_heading',
-									'type'  => 'heading',
-									'label' => __( 'Vendor Email', 'tourfic' ),
-								),
-
-								array(
-									'id'          => 'vendor_booking_email_template',
-									'type'        => 'editor',
-									'label'       => __( 'Vendor Notification Template', 'tourfic' ),
-									'default'     => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ),
-									'description' => __( 'This template will be sent to vendor', 'tourfic' ),
-									'is_pro'    => true
-								),
-
 							),
-
 						),
 
 						//customer email tab
@@ -3632,6 +3331,7 @@ TF_Settings::option( 'tf_settings', array(
 		//QR Code settings
 		'qr_code' => array(
 			'title'  => __( 'QR Code', 'tourfic' ),
+			'parent' => 'pro_options',
 			'icon'   => 'fa fa-qrcode',
 			'fields' => array(
 				array(
@@ -3701,6 +3401,7 @@ TF_Settings::option( 'tf_settings', array(
 
 		'integration' => array(
 			'title'  => __( 'Integration', 'tourfic' ),
+			'parent' => 'pro_options',
 			'icon'   => 'fa fa-plus',
 			'fields' => array(
 				array(
@@ -4126,6 +3827,349 @@ TF_Settings::option( 'tf_settings', array(
 					'id' => 'backup',
 					'type' => 'backup',
 				),  
+
+			),
+		),
+		// Tour Options
+		'pro_options' => array(
+			'title'  => __( 'Pro Options', 'tourfic' ),
+			'icon'   => 'fa-solid fa-atom',
+			'fields' => array(),
+		),
+		// Itinerary Settings
+		'tour_itinerary-pro'        => array(
+			'title'  => __( 'Itinerary Settings', 'tourfic' ),
+			'parent' => 'pro_options',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'   => 'itinerary-builder-setings',
+					'type' => 'tab',
+					'tabs' => array(
+						array(
+							'id'     => 'itinerary-builder-setting',
+							'title'  => 'Itinerary Builder Settings',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'      => 'tour-option-notice-three',
+									'type'    => 'notice',
+									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+								),
+								array(
+									'id'       => 'itinerary-builder-heading',
+									'type'     => 'heading',
+									'subtitle' => __( 'You can create your own Itinerary using Tourfic\'s Itinerary builder. The builder can be found on Single Tour Settings', 'tourfic' ),
+								),
+								array(
+									'id'           => '',
+									'type'         => 'repeater',
+									'label'        => __( 'Create Custom Itinerary options', 'tourfic' ),
+									'button_title' => __( 'Add New Options', 'tourfic' ),
+									'is_pro'       => true,
+									'fields'       => array(
+										array(
+											'id'    => 'sleep-mode-title',
+											'type'  => 'text',
+											'label' => __( 'Field Title', 'tourfic' ),
+										),
+										array(
+											'id'    => 'sleep-mode-icon',
+											'type'  => 'icon',
+											'label' => __( 'Field Icon', 'tourfic' ),
+										),
+									),
+								),
+								array(
+									'id'           => '',
+									'type'         => 'repeater',
+									'button_title' => __( 'Add New Meal', 'tourfic' ),
+									'label'        => __( 'Include Meal', 'tourfic' ),
+									'is_pro'       => true,
+									'fields'       => array(
+										array(
+											'id'    => 'meal',
+											'type'  => 'text',
+											'label' => __( 'Meal name', 'tourfic' ),
+										),
+									),
+								),
+								array(
+									'id'      => '',
+									'label'   => __( 'Elevation Input', 'tourfic' ),
+									'type'    => 'select',
+									'options' => [
+										'Meter' => __( 'Meter', 'tourfic' ),
+										'Feet'  => __( 'Feet', 'tourfic' ),
+									],
+									'is_pro'  => true,
+									'default' => 'Meter',
+								),
+								array(
+									'id'          => '',
+									'type'        => 'switch',
+									'is_pro'      => true,
+									'label'       => __( 'Show Chart on Trip Page', 'tourfic' ),
+									'field_width' => 50,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'switch',
+									'is_pro'      => true,
+									'label'       => __( 'Always Show All Itinerary', 'tourfic' ),
+									'field_width' => 50,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'switch',
+									'is_pro'      => true,
+									'label'       => __( 'Show X-Axis', 'tourfic' ),
+									'field_width' => 50,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'switch',
+									'is_pro'      => true,
+									'label'       => __( 'Show Y-Axis', 'tourfic' ),
+									'field_width' => 50,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'switch',
+									'is_pro'      => true,
+									'label'       => __( 'Show line Graph', 'tourfic' ),
+									'field_width' => 50,
+								),
+							),
+						),
+						array(
+							'id'     => 'itinerary-downloader-setting',
+							'title'  => 'Itinerary Downloader Settings',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'      => 'tour-option-notice-three',
+									'type'    => 'notice',
+									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+								),
+								array(
+									'id'       => '',
+									'type'     => 'switch',
+									'is_pro'   => true,
+									'label'    => __( 'Enable Itinerary Downloader', 'tourfic' ),
+									'subtitle' => __( 'Turn this on to give customers the option to download the itinerary plan as a PDF.', 'tourfic' ),
+									"default" => true,
+								),
+								array(
+									'id'      => 'tour_pdf_downloader_section',
+									'type'    => 'heading',
+									'content' => __( 'Tour Itinerary Downloader Section', 'tourfic' ),
+								),
+								array(
+									'id'    => '',
+									'type'  => 'text',
+									'label' => __( 'Itinerary Downloader Title', 'tourfic' ),
+									'default' => "Want to read it later?",
+									'placeholder' => "Want to read it later?",
+									'is_pro'   => true,
+								),
+								array(
+									'id'    => '',
+									'type'  => 'text',
+									'label' => __( 'Itinerary Downloader Description', 'tourfic' ),
+									'default' => "Download this tour's PDF brochure and start your planning offline.",
+									'placeholder' => "Download this tour's PDF brochure and start your planning offline.",
+									'is_pro'   => true,
+								),
+								array(
+									'id'    => '',
+									'type'  => 'text',
+									'label' => __( 'Itinerary Downloader Button Text', 'tourfic' ),
+									'default' => "Download Now",
+									'placeholder' => "Download Now",
+									'is_pro'   => true,
+								),
+								array(
+									'id'      => 'tour_settings',
+									'type'    => 'heading',
+									'content' => __( 'Thumbnail Settings in PDF', 'tourfic' ),
+								),
+								array(
+									'id'          => '',
+									'type'        => 'number',
+									'label'       => __( 'Image Thumbnail Height', 'tourfic' ),
+									'field_width' => 50,
+									'is_pro'      => true,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'number',
+									'label'       => __( 'Image Thumbnail Width', 'tourfic' ),
+									'field_width' => 50,
+									'is_pro'      => true,
+								),
+								array(
+									'id'      => 'companey_info_heading',
+									'type'    => 'heading',
+									'content' => __( 'Default Company Info in PDF', 'tourfic' ),
+								),
+								array(
+									'id'      => 'tour-option-notice-one',
+									'type'    => 'notice',
+									'content' => __( 'If no company information is specified in the Single Tour Settings, this information will be used by default.', 'tourfic' ),
+								),
+
+								array(
+									'id'     => '',
+									'type'   => 'image',
+									'is_pro' => true,
+									'label'  => __( 'Company Logo', 'tourfic' ),
+								),
+								array(
+									'id'     => '',
+									'type'   => 'textarea',
+									'is_pro' => true,
+									'label'  => __( 'Company Description', 'tourfic' ),
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'is_pro'      => true,
+									'label'       => __( 'Company Email Address', 'tourfic' ),
+									'field_width' => 33.33,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'is_pro'      => true,
+									'label'       => __( 'Company Address', 'tourfic' ),
+									'field_width' => 33.33,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'is_pro'      => true,
+									'label'       => __( 'Company Phone', 'tourfic' ),
+									'field_width' => 33.33,
+								),
+								array(
+									'id'    => 'export_heading',
+									'type'  => 'heading',
+									'label' => __( 'Talk to Expert Section', 'tourfic' ),
+								),
+								array(
+									'id'      => '',
+									'type'    => 'switch',
+									'is_pro'  => true,
+									'label'   => __( 'Enable Talk To Expert Section in PDF', 'tourfic' ),
+									'default' => false,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'is_pro'      => true,
+									'label'       => __( 'Talk to Expert - Label', 'tourfic' ),
+									'field_width' => 25,
+									'dependency'  => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'label'       => __( 'Expert Name', 'tourfic' ),
+									'field_width' => 25,
+									'is_pro'      => true,
+									'dependency'  => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'label'       => __( 'Expert Email Address', 'tourfic' ),
+									'field_width' => 25,
+									'is_pro'      => true,
+									'dependency'  => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'label'       => __( 'Expert Phone Address', 'tourfic' ),
+									'field_width' => 25,
+									'is_pro'      => true,
+									'dependency'  => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+								),
+								array(
+									'id'         => '',
+									'type'       => 'image',
+									'is_pro'     => true,
+									'label'      => __( 'Expert Avatar Image', 'tourfic' ),
+									'dependency' => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+								),
+								array(
+									'id'         => '',
+									'type'       => 'switch',
+									'label'      => __( 'Enable Viber Contact', 'tourfic' ),
+									'dependency' => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+									'is_pro'  => true,
+								),
+								array(
+									'id'         => '',
+									'type'       => 'switch',
+									'is_pro'  => true,
+									'label'      => __( 'Enable WhatsApp Contact', 'tourfic' ),
+									'dependency' => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+								),
+								array(
+									'id'       => 'signle_tour_fonts',
+									'type'     => 'heading',
+									'label'    => __( 'PDF Downloader Font Support', 'tourfic' ),
+									'subtitle' => __( 'If your site\'s language is not English, then upload your language font. Otherwise, your Downloader PDF may not work properly.', 'tourfic' ),
+								),
+								array(
+									'id'     => '',
+									'type'   => 'file',
+									'label'  => __( 'Upload Fonts', 'tourfic' ),
+									'is_pro' => true,
+								),
+							),
+						),
+					),
+				),
+				array(
+					'id'          => '',
+					'type'        => 'switch',
+					'label'       => __( 'Enable Itinerary Map', 'tourfic' ),
+					'label_on'    => __( 'Yes', 'tourfic' ),
+					'label_off'   => __( 'No', 'tourfic' ),
+					'subtitle'  => __( 'To show the itinerary on a map, it is necessary to add your Google Maps API key in the settings under Miscellaneous -> Map.', 'tourfic' ),
+					'is_pro'      => true,
+					'field_width' => 50,
+				),
+				array(
+					'id'          => '',
+					'type'        => 'select',
+					'label'       => __( 'Map Mode', 'tourfic' ),
+					'options'     => array(
+						'DRIVING'   => __( 'Driving', 'tourfic' ),
+						'WALKING'   => __( 'Walking', 'tourfic' ),
+						'BICYCLING' => __( 'Bycycling', 'tourfic' ),
+					),
+					'default'     => 'driving',
+					'is_pro'      => true,
+					'field_width' => 50,
+				),
 
 			),
 		),

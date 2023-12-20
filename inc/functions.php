@@ -2091,9 +2091,9 @@ function tf_update_email_template_default_content() {
 			update_option( $tf_settings['admin_booking_email_template'], TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ) );
 		}
 		//update email template for vendor
-		if ( empty( $tf_settings['vendor_booking_email_template'] ) ) {
-			update_option( $tf_settings['vendor_booking_email_template'], TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ) );
-		}
+		// if ( empty( $tf_settings['vendor_booking_email_template'] ) ) {
+		// 	update_option( $tf_settings['vendor_booking_email_template'], TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ) );
+		// }
 		//update email template for customer
 		if ( empty( $tf_settings['customer_confirm_email_template'] ) ) {
 			update_option( $tf_settings['customer_confirm_email_template'], TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'customer' ) );
@@ -2101,7 +2101,7 @@ function tf_update_email_template_default_content() {
 	}
 }
 
-/**
+/**tf_ask_question
  * Retrive Orders Data
  *
  * @return void
