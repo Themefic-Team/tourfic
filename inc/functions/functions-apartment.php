@@ -958,7 +958,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 totalAdditionalFee_<?php echo $key ?> = additional_fee_<?php echo $key ?>;
 								<?php endif; ?>
 
-                                if (totalAdditionalFee_<?php echo $key ?> > 0 && newTotalPrice > 0 ) {
+                                if (totalAdditionalFee_<?php echo $key ?> > 0 ) {
                                     $('.additional-fee-wrap').show();
                                     total_price = total_price + totalAdditionalFee_<?php echo $key ?>;
                                     additional_fee_html_<?php echo $key ?> = '<?php echo wc_price( 0 ); ?>'.replace('0.00', totalAdditionalFee_<?php echo $key ?>.toFixed(2));
@@ -991,7 +991,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 
                                 //total price
                                 var total_price_html = '<?php echo wc_price( 0 ); ?>';
-                                if (total_price > 0 && newTotalPrice > 0) {
+                                if (total_price > 0) {
                                     $('.total-price-wrap').show();
                                     total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', total_price.toFixed(2));
                                 }

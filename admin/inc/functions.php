@@ -370,14 +370,10 @@ if ( ! function_exists( 'tf_update_room_avail_date_price' ) ) {
 							$hotel_avail_data = array_map( function ( $item ) use ( $pricing_by, $price, $adult_price, $child_price ) {
 
 								if ( $pricing_by == '1' ) {
-									if ( empty( $item['price'] ) ) {
-										$item['price'] = $price;
-									}
+									$item['price'] = !isset($item['price']) ? $price : $item['price'];
 								} else {
-									if ( empty( $item['adult_price'] ) || empty( $item['child_price'] ) ) {
-										$item['adult_price'] = $adult_price;
-										$item['child_price'] = $child_price;
-									}
+									$item['adult_price'] = !isset($item['adult_price']) ? $adult_price : $item['adult_price'];
+                                    $item['child_price'] = !isset($item['child_price']) ? $child_price : $item['child_price'];
 								}
 								$item['price_by'] = $pricing_by;
 
@@ -386,6 +382,24 @@ if ( ! function_exists( 'tf_update_room_avail_date_price' ) ) {
 						}
 
 						$meta['room'][ $roomIndex ]['avail_date'] = json_encode( $hotel_avail_data );
+					} elseif ( $avil_by_date === '1' && empty( $room['avail_date'] ) ) {
+						//add next 5 years availability
+						$hotel_avail_data = [];
+                        for ( $i = 0; $i <= 1825; $i ++ ) {
+                            $tf_room_date                     = date( 'Y/m/d', strtotime( "+$i day" ) );
+                            $tf_room_data                     = [
+                                'check_in'    => $tf_room_date,
+                                'check_out'   => $tf_room_date,
+                                'price_by'    => $pricing_by,
+                                'price'       => $price,
+                                'adult_price' => $adult_price,
+                                'child_price' => $child_price,
+                                'status'      => 'available'
+                            ];
+                            $hotel_avail_data[ $tf_room_date ] = $tf_room_data;
+                        }
+
+                        $meta['room'][ $roomIndex ]['avail_date'] = json_encode( $hotel_avail_data );
 					}
 				}
 			}
@@ -543,9 +557,7 @@ if ( ! function_exists( 'tf_update_apt_availability_price' ) ) {
 					$apt_availability_data = array_map( function ( $item ) use ( $pricing_type, $price, $adult_price, $child_price, $infant_price ) {
 
 						if ( $pricing_type == 'per_night' ) {
-							if ( empty( $item['price'] ) ) {
-								$item['price'] = $price;
-							}
+							$item['price'] = ! isset( $item['price'] ) ? $price : $item['price'];
 						} else {
 							$item['adult_price']  = ! isset( $item['adult_price'] ) ? $adult_price : $item['adult_price'];
 							$item['child_price']  = ! isset( $item['child_price'] ) ? $child_price : $item['child_price'];
@@ -561,7 +573,6 @@ if ( ! function_exists( 'tf_update_apt_availability_price' ) ) {
 				update_post_meta( $post_id, 'tf_apartment_opt', $meta );
 
 			} elseif ( $enable_availability === '1' && empty( $meta['apt_availability'] ) ) {
-				die( 'yyyyyyy' );
 				//add next 5 years availability
 				$apt_availability_data = [];
 				for ( $i = strtotime( date( 'Y-m-d' ) ); $i <= strtotime( '+5 year', strtotime( date( 'Y-m-d' ) ) ); $i = strtotime( '+1 day', $i ) ) {
