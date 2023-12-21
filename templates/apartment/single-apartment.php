@@ -444,7 +444,7 @@ while ( have_posts() ) : the_post();
 													foreach ( $categories as $cat => $features ) :
 														?>
                                                         <div class="tf-apartment-amenity-cat">
-                                                            <h3><?php echo esc_html( $amenities_cats[ $cat ]['amenities_cat_name'] ); ?></h3>
+                                                            <h3><?php echo !empty($amenities_cats[ $cat ]['amenities_cat_name']) ? esc_html( $amenities_cats[ $cat ]['amenities_cat_name'] ) : ''; ?></h3>
                                                             <div class="tf-apartment-amenities">
 																<?php foreach ( $features as $feature_id ):
 																	$_feature = get_term_by( 'id', $feature_id, 'apartment_feature' );

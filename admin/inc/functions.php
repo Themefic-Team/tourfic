@@ -354,7 +354,7 @@ if ( ! function_exists( 'tf_update_room_avail_date_price' ) ) {
 				$rooms                = unserialize( $tf_hotel_rooms_value );
 			}
 
-			if( !empty($rooms) ){
+			if ( ! empty( $rooms ) ) {
 				foreach ( $rooms as $roomIndex => $room ) {
 					$pricing_by   = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
 					$price        = ! empty( $room['price'] ) ? $room['price'] : '';
@@ -527,16 +527,16 @@ if ( ! function_exists( 'tf_get_apartment_availability' ) ) {
 if ( ! function_exists( 'tf_update_apt_availability_price' ) ) {
 	function tf_update_apt_availability_price( $post_id, $post ) {
 		if ( $post->post_type == 'tf_apartment' ) {
-			$apt_availability    = get_post_meta( $post_id, 'tf_apartment_opt', true );
-			$pricing_type        = ! empty( $apt_availability['pricing_type'] ) ? $apt_availability['pricing_type'] : '';
-			$price               = ! empty( $apt_availability['price_per_night'] ) ? $apt_availability['price_per_night'] : '';
-			$adult_price         = ! empty( $apt_availability['adult_price'] ) ? $apt_availability['adult_price'] : '';
-			$child_price         = ! empty( $apt_availability['child_price'] ) ? $apt_availability['child_price'] : '';
-			$infant_price        = ! empty( $apt_availability['infant_price'] ) ? $apt_availability['infant_price'] : '';
-			$enable_availability = ! empty( $apt_availability['enable_availability'] ) ? $apt_availability['enable_availability'] : '';
+			$meta                = get_post_meta( $post_id, 'tf_apartment_opt', true );
+			$pricing_type        = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : '';
+			$price               = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : '';
+			$adult_price         = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : '';
+			$child_price         = ! empty( $meta['child_price'] ) ? $meta['child_price'] : '';
+			$infant_price        = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : '';
+			$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
 
-			if ( $enable_availability === '1' && ! empty( $apt_availability['apt_availability'] ) ) {
-				$apt_availability_data = json_decode( $apt_availability['apt_availability'], true );
+			if ( $enable_availability === '1' && ! empty( $meta['apt_availability'] ) ) {
+				$apt_availability_data = json_decode( $meta['apt_availability'], true );
 
 				if ( isset( $apt_availability_data ) && ! empty( $apt_availability_data ) ) {
 
@@ -547,11 +547,9 @@ if ( ! function_exists( 'tf_update_apt_availability_price' ) ) {
 								$item['price'] = $price;
 							}
 						} else {
-							if ( empty( $item['adult_price'] ) || empty( $item['child_price'] ) || empty( $item['infant_price'] ) ) {
-								$item['adult_price']  = $adult_price;
-								$item['child_price']  = $child_price;
-								$item['infant_price'] = $infant_price;
-							}
+							$item['adult_price']  = ! isset( $item['adult_price'] ) ? $adult_price : $item['adult_price'];
+							$item['child_price']  = ! isset( $item['child_price'] ) ? $child_price : $item['child_price'];
+							$item['infant_price'] = ! isset( $item['infant_price'] ) ? $infant_price : $item['infant_price'];
 						}
 						$item['pricing_type'] = $pricing_type;
 
@@ -559,8 +557,30 @@ if ( ! function_exists( 'tf_update_apt_availability_price' ) ) {
 					}, $apt_availability_data );
 				}
 
-				$apt_availability['apt_availability'] = json_encode( $apt_availability_data );
-				update_post_meta( $post_id, 'tf_apartment_opt', $apt_availability );
+				$meta['apt_availability'] = json_encode( $apt_availability_data );
+				update_post_meta( $post_id, 'tf_apartment_opt', $meta );
+
+			} elseif ( $enable_availability === '1' && empty( $meta['apt_availability'] ) ) {
+				die( 'yyyyyyy' );
+				//add next 5 years availability
+				$apt_availability_data = [];
+				for ( $i = strtotime( date( 'Y-m-d' ) ); $i <= strtotime( '+5 year', strtotime( date( 'Y-m-d' ) ) ); $i = strtotime( '+1 day', $i ) ) {
+					$tf_apt_date                           = date( 'Y/m/d', $i );
+					$tf_apt_data                           = [
+						'check_in'     => $tf_apt_date,
+						'check_out'    => $tf_apt_date,
+						'pricing_type' => $pricing_type,
+						'price'        => $price,
+						'adult_price'  => $adult_price,
+						'child_price'  => $child_price,
+						'infant_price' => $infant_price,
+						'status'       => 'available'
+					];
+					$apt_availability_data[ $tf_apt_date ] = $tf_apt_data;
+				}
+
+				$meta['apt_availability'] = json_encode( $apt_availability_data );
+				update_post_meta( $post_id, 'tf_apartment_opt', $meta );
 			}
 		}
 	}

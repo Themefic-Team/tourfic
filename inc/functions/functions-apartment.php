@@ -901,13 +901,17 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                             if (d.getTime() !== checkInDate.getTime()) {
                                                 var availabilityData = apt_availability[date];
                                                 var pricing_type = availabilityData.pricing_type;
-                                                var price = parseFloat(availabilityData.price);
+                                                var price = availabilityData.price ? parseFloat(availabilityData.price) : 0;
+                                                var adultPrice = availabilityData.adult_price ? parseFloat(availabilityData.adult_price) : 0;
+                                                var childPrice = availabilityData.child_price ? parseFloat(availabilityData.child_price) : 0;
+                                                var infantPrice = availabilityData.infant_price ? parseFloat(availabilityData.infant_price) : 0;
 
                                                 if (pricing_type === 'per_night' && price > 0) {
                                                     total_price += price;
                                                 } else if (pricing_type === 'per_person') {
-                                                    var totalPersonPrice = (parseFloat(availabilityData.adult_price) * $('#adults').val()) + (parseFloat(availabilityData.child_price) * $('#children').val()) + (parseFloat(availabilityData.infant_price) * $('#infant').val());
+                                                    var totalPersonPrice = (adultPrice * $('#adults').val()) + (childPrice * $('#children').val()) + (infantPrice * $('#infant').val());
                                                     total_price += totalPersonPrice;
+                                                    // console.log('total_price', total_price);
                                                 }
                                             }
                                         }
@@ -954,7 +958,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 totalAdditionalFee_<?php echo $key ?> = additional_fee_<?php echo $key ?>;
 								<?php endif; ?>
 
-                                if (totalAdditionalFee_<?php echo $key ?> > 0 & newTotalPrice > 0 ) {
+                                if (totalAdditionalFee_<?php echo $key ?> > 0 && newTotalPrice > 0 ) {
                                     $('.additional-fee-wrap').show();
                                     total_price = total_price + totalAdditionalFee_<?php echo $key ?>;
                                     additional_fee_html_<?php echo $key ?> = '<?php echo wc_price( 0 ); ?>'.replace('0.00', totalAdditionalFee_<?php echo $key ?>.toFixed(2));
