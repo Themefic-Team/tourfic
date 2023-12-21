@@ -640,6 +640,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
 		$apt_availability    = ! empty( $meta['apt_availability'] ) ? $meta['apt_availability'] : '';
 		$booked_dates        = tf_apartment_booked_days( get_the_ID() );
+		$apt_reserve_button_text = !empty(tfopt('apartment_booking_form_button_text')) ? sanitize_text_field(tfopt('apartment_booking_form_button_text')) : __("Reserve", 'tourfic');
 
 		$tf_booking_type = '1';
 		$tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = '';
@@ -795,10 +796,14 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 
                 <div class="tf-btn">
 					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' ) || $tf_booking_type == 1 ) : ?>
-                        <button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e( 'Reserve', 'tourfic' ); ?></button>
+                        <?php if (!empty($apt_reserve_button_text)) : ?>
+							<button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e( $apt_reserve_button_text, 'tourfic' ); ?></button>
+						<?php endif; ?>
 					<?php else: ?>
-                        <a href="<?php echo esc_url( $tf_booking_url ); ?>"
-                           class="tf_button tf-submit btn-styled" <?php echo ! empty( $tf_booking_attribute ) ? $tf_booking_attribute : ''; ?> target="_blank"><?php esc_html_e( 'Reserve', 'tourfic' ); ?></a>
+						<?php if (!empty($apt_reserve_button_text)) : ?>
+							<a href="<?php echo esc_url( $tf_booking_url ); ?>"
+							class="tf_button tf-submit btn-styled" <?php echo ! empty( $tf_booking_attribute ) ? $tf_booking_attribute : ''; ?> target="_blank"><?php esc_html_e( $apt_reserve_button_text , 'tourfic' ); ?></a>
+						<?php endif; ?>
 					<?php endif; ?>
                 </div>
             </div>

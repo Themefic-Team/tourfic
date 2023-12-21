@@ -1862,6 +1862,13 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => false
 				),
+				array(
+					'id'       => 'apartment_booking_form_button_text',
+					'type'     => 'text',
+					'label'    => __( 'Change Booking Form Button Text', 'tourfic' ),
+					'subtitle'  => __( 'With this option, you can change the text of the booking form button on the single apartment pages.', 'tourfic' ),
+					'default'    => __('Reserve', 'tourfic'),
+				),
 			),
 		),
 		//Frontend Dashboard
