@@ -85,7 +85,7 @@
                         if(!empty($location)){ ?>
                         <div class="tf-title-meta">
                             <i class="ri-map-pin-line"></i>
-                            <a href="#tf-map"><?php echo esc_html( $location ); ?></a>
+                            <a href="#tour-location"><?php echo esc_html( $location ); ?></a>
                         </div>
                         <?php } ?>
                     </div>

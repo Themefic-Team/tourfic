@@ -82,7 +82,7 @@
                     <?php if(!empty($address)) { ?>
                     <div class="tf-title-meta">
                         <i class="ri-map-pin-line"></i>
-                        <a href="#tf-map"><?php echo esc_html( $address ); ?></a>
+                        <a href="#hotel-map-location"><?php echo esc_html( $address ); ?></a>
                     </div>
                     <?php } ?>
                 </div>
@@ -197,7 +197,7 @@
             </div>
             <?php } ?>
             
-            <div class="tf-location tf-single-widgets">
+            <div id="hotel-map-location" class="tf-location tf-single-widgets">
                 <h2 class="tf-section-title"><?php _e("Location", "tourfic"); ?></h2>
                 <?php if ( !defined( 'TF_PRO' ) ) { ?>
                     <?php 
