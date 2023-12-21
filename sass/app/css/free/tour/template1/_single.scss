@@ -627,6 +627,7 @@
                 height: 100%;
                 max-width: none;
             }
+            
         }
     }
 
@@ -707,6 +708,9 @@
                 }
             }
             .tf-itinerary-content-details{
+                p {
+                    margin-bottom: 5px;
+                }
                 flex-basis: 80%;
                 @media #{$tfmax767}{
                     flex-basis: 100%;
