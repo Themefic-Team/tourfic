@@ -875,7 +875,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 									'id'        => 'tf-repeat-months-switch',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Repeat by Months', 'tourfic' ),
-									'subtitle'  => __( 'Enable this option, if you want to repeat fixed tour by months', 'tourfic' ),
+									'subtitle'  => __( 'Enable this option, if you want to repeat fixed tour by months in one calendar year', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default' => false,
@@ -1516,9 +1516,16 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 			'icon'   => 'fa fa-list',
 			'fields' => array(
 				array(
+					'id'      => 'tf-tour-tags-heading',
+					'type'    => 'heading',
+					'label' => __( 'Tour labels', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
 					'id'           => 'tf-tour-tags',
 					'type'         => 'repeater',
 					'label'        => __( 'Labels', 'tourfic' ),
+					'subtitle' => __('Add some keywords that highlight your tour\'s Unique Selling Point (USP). This label will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
 					'button_title' => __( 'Add / Insert New Label', 'tourfic' ),
 					'fields'       => array(
 
@@ -1531,6 +1538,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						array(
 							'id'       => 'tour-tag-color-settings',
 							'type'     => 'color',
+							'class'    => 'tf-label-field',
 							'label'    => __( 'Label Colors', 'tourfic' ),
 							'subtitle' => __( 'Colors of Label Background and Font', 'tourfic' ),
 							'multiple' => true,

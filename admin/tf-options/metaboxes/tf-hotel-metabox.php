@@ -1031,9 +1031,16 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 			'icon'   => 'fa fa-list',
 			'fields' => array(
 				array(
+					'id'      => 'tf-hotel-tags-heading',
+					'type'    => 'heading',
+					'label' => __( 'Hotel labels', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
 					'id'           => 'tf-hotel-tags',
 					'type'         => 'repeater',
 					'label'        => __( 'Labels', 'tourfic' ),
+					'subtitle' => __('Add some keywords that highlight your hotel\'s Unique Selling Point (USP). This label will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
 					'button_title' => __( 'Add / Insert New Label', 'tourfic' ),
 					'fields'       => array(
 

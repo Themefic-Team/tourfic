@@ -2490,6 +2490,12 @@ Steps
   background-color: #006600 !important;
   margin: 0;
 }
+.tf-field .tf-label-field .tf-fieldset .tf-inline li {
+  background: #ededf8 !important;
+  padding: 20px 30px 13px 30px;
+  margin: 10px 0px;
+  border-radius: 8px;
+}
 .tf-field .tf-fieldset {
   font-style: normal;
   font-size: 14px;
