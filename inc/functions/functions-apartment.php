@@ -1156,7 +1156,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
                     <div class="tf_property_block_main_row">
                         <div class="tf_item_main_block">
                             <div class="tf-hotel__title-wrap">
-                                <a href="<?php echo $url; ?>"><h3 class="tourfic_hotel-title"><?php the_title(); ?></h3></a>
+                                <a href="<?php echo $url; ?>"><h3 class="tourfic_hotel-title"><?php echo get_the_title($post_id); ?></h3></a>
                             </div>
 							<?php
 							if ( $address ) {
@@ -1174,7 +1174,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
                             <div class="featuredRooms">
                                 <div class="prco-ltr-right-align-helper">
                                     <div class="tf-archive-shortdesc">
-										<?php echo substr( wp_strip_all_tags( get_the_content() ), 0, 160 ) . '...'; ?>
+										<?php echo substr( wp_strip_all_tags( get_the_content($post_id) ), 0, 160 ) . '...'; ?>
                                     </div>
                                 </div>
                                 <div class="roomNameInner">
