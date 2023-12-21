@@ -1046,6 +1046,8 @@ function tf_single_tour_booking_form( $post_id ) {
 	$tf_tour_selected_check = ! empty( $tf_tour_single_template ) ? $tf_tour_single_template : $tf_tour_global_template;
 
 	$tf_tour_selected_template = $tf_tour_selected_check;
+
+	$tf_tour_book_now_text = !empty(tfopt('tour_booking_form_button_text')) ? sanitize_text_field(tfopt('tour_booking_form_button_text')) : __("Book Now", 'tourfic');
 	
 	if ( ! function_exists( 'partial_payment_tag_replacement' ) ) {
 		function partial_payment_tag_replacement( $text, $arr ) {
@@ -1519,12 +1521,16 @@ function tf_single_tour_booking_form( $post_id ) {
 					<?php } ?>
 
 				<?php }; ?>
+				<?php 
+				?>
             </div>
 
             <div class="tf-tours-booking-btn tf-booking-bttns tf-mt-30">
-                <div class="tf-btn">
-                    <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php _e( 'Book Now', 'tourfic' ); ?></a>
+                <?php if (!empty($tf_tour_book_now_text) ) : ?>
+					<div class="tf-btn">
+                    <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php _e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
                 </div>
+				<?php endif; ?>
 				<?php echo tf_booking_popup( $post_id ); ?>
             </div>
 
@@ -1662,10 +1668,12 @@ function tf_single_tour_booking_form( $post_id ) {
                 </div>
 
                 <div class="tf-tours-booking-btn tf-booking-bttns">
+				<?php if (!empty($tf_tour_book_now_text) ) : ?>
                     <div class="tf-btn">
-                        <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php _e( 'Book Now', 'tourfic' ); ?></a>
-                        <a href="#" class="tf-btn-normal btn-primary tf-booking-mobile-btn"><?php _e( 'Book Now', 'tourfic' ); ?></a>
+                        <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php _e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
+                        <a href="#" class="tf-btn-normal btn-primary tf-booking-mobile-btn"><?php _e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
                     </div>
+				<?php endif; ?>
 		            <?php //echo tf_booking_popup( $post_id ); ?>
                 </div>
             </div>
@@ -1899,18 +1907,22 @@ function tf_single_tour_booking_form( $post_id ) {
             </div>
 
             <div class="tf-tours-booking-btn tf-booking-bttns">
-                <div class="tf-btn">
-                    <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php _e( 'Book Now', 'tourfic' ); ?></a>
-                </div>
+				<?php if(!empty($tf_tour_book_now_text)) : ?>
+					<div class="tf-btn">
+						<a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php _e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
+					</div>
+				<?php endif; ?>
 				<?php echo tf_booking_popup( $post_id ); ?>
             </div>
 
             <!-- bottom bar -->
-			<div class="tf-mobile-booking-btn">
-				<span>
-					<?php _e("Book Now", "tourfic"); ?>
-				</span>
-			</div>
+			<?php if(!empty($tf_tour_book_now_text)) : ?>
+				<div class="tf-mobile-booking-btn">
+					<span>
+						<?php _e($tf_tour_book_now_text, "tourfic"); ?>
+					</span>
+				</div>
+			<?php endif; ?>
             <div class="tf-bottom-booking-bar">
                 
 				<div class="tf-booking-form-fields">
@@ -1989,10 +2001,12 @@ function tf_single_tour_booking_form( $post_id ) {
 				</div>
 
                 <div class="tf-tours-booking-btn tf-booking-bttns">
+				<?php if (!empty($tf_tour_book_now_text) ) : ?>
                     <div class="tf-btn">
-                        <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php _e( 'Book Now', 'tourfic' ); ?></a>
-                        <a href="#" class="tf-btn-normal btn-primary tf-booking-mobile-btn"><?php _e( 'Book Now', 'tourfic' ); ?></a>
+                        <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php _e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
+                        <a href="#" class="tf-btn-normal btn-primary tf-booking-mobile-btn"><?php _e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
                     </div>
+					<?php endif; ?>
 		            <?php //echo tf_booking_popup( $post_id ); ?>
                 </div>
             </div>
@@ -2319,9 +2333,11 @@ function tf_single_tour_booking_form( $post_id ) {
 
                 <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
                 <div class="tf-tours-booking-btn">
+				<?php if (!empty($tf_tour_book_now_text) ) : ?>
                     <div class="tf-btn">
-                        <a href="#" class="tf_button btn-styled tf-booking-popup-btn"><?php _e('Book Now', 'tourfic'); ?></a>
+                        <a href="#" class="tf_button btn-styled tf-booking-popup-btn"><?php _e($tf_tour_book_now_text, 'tourfic'); ?></a>
                     </div>
+				<?php endif; ?>
                 </div>
 				<?php echo tf_booking_popup( $post_id ); ?>
             </form>
