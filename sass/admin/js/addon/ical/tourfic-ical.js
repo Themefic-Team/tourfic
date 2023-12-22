@@ -95,11 +95,11 @@
                     btn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
-                    if (response.status === true) {
-                        notyf.success(response.message);
-                        $('.apt_availability').val(response.apt_availability);
+                    if (response.data.status === true) {
+                        notyf.success(response.data.message);
+                        $('.apt_availability').val(response.data.apt_availability);
                     } else {
-                        notyf.error(response.message);
+                        notyf.error(response.data.message);
                     }
                     btn.removeClass('tf-btn-loading');
                 },
