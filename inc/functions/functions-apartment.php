@@ -670,6 +670,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? $_GET['check-in-out-date'] : '';
 
 		$apt_disable_dates = [];
+		$tf_apt_enable_dates = [];
 		if ( $enable_availability === '1' && ! empty( $apt_availability ) && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 			$apt_availability_arr = json_decode( $apt_availability, true );
 			//iterate all the available disabled dates
@@ -677,6 +678,9 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 				foreach ( $apt_availability_arr as $date ) {
 					if ( $date['status'] === 'unavailable' ) {
 						$apt_disable_dates[] = $date['check_in'];
+					}
+					if ( $date['status'] === 'available' ) {
+						$tf_apt_enable_dates[] = $date['check_in'];
 					}
 				}
 			}
@@ -1044,7 +1048,10 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                             instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                             bookingCalculation(selectedDates);
-                        },
+                        }, 
+						<?php if (!empty($tf_apt_enable_dates) && is_array($tf_apt_enable_dates)) : ?>
+							enable: [ <?php array_walk($tf_apt_enable_dates, function($date) {echo '"'. $date . '",';}); ?> ],
+						<?php endif; ?>
                         disable: [
 							<?php foreach ( $booked_dates as $booked_date ) : ?>
                             {
