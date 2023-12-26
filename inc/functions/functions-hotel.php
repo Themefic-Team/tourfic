@@ -1714,6 +1714,8 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 
 	$tf_hotel_selected_template = $tf_hotel_selected_check;
 
+	$tf_hotel_book_avaibality_button_text = !empty(tfopt('hotel_booking_check_button_text')) ? sanitize_text_field(tfopt('hotel_booking_check_button_text')) : "Booking Availability";
+
 	if ( $tf_hotel_selected_template == "design-1" ) {
 		?>
         <form id="tf-single-hotel-avail" class="widget tf-hotel-booking-sidebar tf-booking-form" method="get" autocomplete="off">
@@ -1770,7 +1772,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 
                 <div class="tf-btn">
                     <button class="tf-btn-normal btn-primary tf-submit"
-                            type="submit"><?php esc_html_e( 'Booking Availability', 'tourfic' ); ?></button>
+                            type="submit"><?php esc_html_e( $tf_hotel_book_avaibality_button_text, 'tourfic' ); ?></button>
                 </div>
 
 
@@ -1861,7 +1863,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 			<input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type"/>
 			<input type="hidden" name="post_id" value="<?php echo get_the_ID(); ?>"/>
 			<input type="hidden" name="children_ages" value="<?php echo $children_ages; ?>"/>
-			<button type="submit" class="btn-primary tf-submit"><?php _e("Check Availability", "tourfic"); ?></button>
+			<button type="submit" class="btn-primary tf-submit"><?php esc_html_e($tf_hotel_book_avaibality_button_text, "tourfic"); ?></button>
 		</div>
 	</form>
 
@@ -1986,7 +1988,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 
                 <div class="tf-btn">
                     <button class="tf_button tf-submit btn-styled"
-                            type="submit"><?php esc_html_e( 'Booking Availability', 'tourfic' ); ?></button>
+                            type="submit"><?php esc_html_e( $tf_hotel_book_avaibality_button_text, 'tourfic' ); ?></button>
                 </div>
 
 

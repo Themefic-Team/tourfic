@@ -1721,6 +1721,20 @@ TF_Settings::option( 'tf_settings', array(
 						),
 					),
 				),
+				array(
+					'id'       => 'hotel_booking_form_button_text',
+					'type'     => 'text',
+					'label'    => __( 'Change Booking Form Button Text', 'tourfic' ),
+					'subtitle'  => __( 'With this option, you can change the text of the booking form button on the single hotel pages.', 'tourfic' ),
+					'default'    => __('I\'ll Reserve', 'tourfic'),
+				),
+				array(
+					'id'       => 'hotel_booking_check_button_text',
+					'type'     => 'text',
+					'label'    => __( 'Change Book Availability Button Text', 'tourfic' ),
+					'subtitle'  => __( 'With this option, you can change the text of the check availability button on the single hotel pages.', 'tourfic' ),
+					'default'    => __('Check Availability', 'tourfic'),
+				),
 			),
 		),
 		'room_config'           => array(

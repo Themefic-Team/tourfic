@@ -1528,7 +1528,7 @@ function tf_single_tour_booking_form( $post_id ) {
             <div class="tf-tours-booking-btn tf-booking-bttns tf-mt-30">
                 <?php if (!empty($tf_tour_book_now_text) ) : ?>
 					<div class="tf-btn">
-                    <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php _e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
+                    <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php esc_html_e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
                 </div>
 				<?php endif; ?>
 				<?php echo tf_booking_popup( $post_id ); ?>
@@ -1670,8 +1670,8 @@ function tf_single_tour_booking_form( $post_id ) {
                 <div class="tf-tours-booking-btn tf-booking-bttns">
 				<?php if (!empty($tf_tour_book_now_text) ) : ?>
                     <div class="tf-btn">
-                        <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php _e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
-                        <a href="#" class="tf-btn-normal btn-primary tf-booking-mobile-btn"><?php _e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
+                        <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php esc_html_e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
+                        <a href="#" class="tf-btn-normal btn-primary tf-booking-mobile-btn"><?php esc_html_e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
                     </div>
 				<?php endif; ?>
 		            <?php //echo tf_booking_popup( $post_id ); ?>
@@ -1909,7 +1909,7 @@ function tf_single_tour_booking_form( $post_id ) {
             <div class="tf-tours-booking-btn tf-booking-bttns">
 				<?php if(!empty($tf_tour_book_now_text)) : ?>
 					<div class="tf-btn">
-						<a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php _e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
+						<a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php esc_html_e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
 					</div>
 				<?php endif; ?>
 				<?php echo tf_booking_popup( $post_id ); ?>
@@ -1919,7 +1919,7 @@ function tf_single_tour_booking_form( $post_id ) {
 			<?php if(!empty($tf_tour_book_now_text)) : ?>
 				<div class="tf-mobile-booking-btn">
 					<span>
-						<?php _e($tf_tour_book_now_text, "tourfic"); ?>
+						<?php esc_html_e($tf_tour_book_now_text, "tourfic"); ?>
 					</span>
 				</div>
 			<?php endif; ?>
@@ -2003,8 +2003,8 @@ function tf_single_tour_booking_form( $post_id ) {
                 <div class="tf-tours-booking-btn tf-booking-bttns">
 				<?php if (!empty($tf_tour_book_now_text) ) : ?>
                     <div class="tf-btn">
-                        <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php _e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
-                        <a href="#" class="tf-btn-normal btn-primary tf-booking-mobile-btn"><?php _e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
+                        <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php esc_html_e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
+                        <a href="#" class="tf-btn-normal btn-primary tf-booking-mobile-btn"><?php esc_html_e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
                     </div>
 					<?php endif; ?>
 		            <?php //echo tf_booking_popup( $post_id ); ?>
@@ -2335,7 +2335,7 @@ function tf_single_tour_booking_form( $post_id ) {
                 <div class="tf-tours-booking-btn">
 				<?php if (!empty($tf_tour_book_now_text) ) : ?>
                     <div class="tf-btn">
-                        <a href="#" class="tf_button btn-styled tf-booking-popup-btn"><?php _e($tf_tour_book_now_text, 'tourfic'); ?></a>
+                        <a href="#" class="tf_button btn-styled tf-booking-popup-btn"><?php esc_html_e($tf_tour_book_now_text, 'tourfic'); ?></a>
                     </div>
 				<?php endif; ?>
                 </div>

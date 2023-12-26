@@ -14,6 +14,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $room['avail_date
 $tf_room_disable_date = array_intersect( $avail_durationdate, $total_dis_dates );
 $room_book_by         = ! empty( $room['booking-by'] ) ? $room['booking-by'] : 1;
 $room_book_url        = ! empty( $room['booking-url'] ) ? $room['booking-url'] : '';
+$tf_hotel_reserve_button_text = !empty(tfopt('hotel_booking_form_button_text')) ? sanitize_text_field(tfopt('hotel_booking_form_button_text')) : "I'll Reserve";
 if ( $tf_hotel_selected_template_check == "design-1" ) {
 	if ( empty( $tf_room_disable_date ) ) {
 		?>
@@ -274,7 +275,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                 </div>
                 
                 <?php }else{ ?>
-                <button class="hotel-room-book tf-btn-normal btn-primary" type="submit"><?php _e( 'I\'ll reserve', 'tourfic' );?></button>
+                <button class="hotel-room-book tf-btn-normal btn-primary" type="submit"><?php esc_html_e( $tf_hotel_reserve_button_text, 'tourfic' );?></button>
                 <?php } ?>
             </div>
             <div class="tf_desc"></div>
@@ -555,7 +556,7 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                 </div>
 
                 <?php }else{ ?>
-                <button class="hotel-room-book" type="submit"><?php _e( 'I\'ll reserve', 'tourfic' );?></button>
+                <button class="hotel-room-book" type="submit"><?php esc_html_e( $tf_hotel_reserve_button_text, 'tourfic' );?></button>
                 <?php } ?>
             </div>
         </form>
@@ -836,7 +837,7 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                 </div>
 
                 <?php }else{ ?>
-                <button class="hotel-room-book" type="submit"><?php _e( 'I\'ll reserve', 'tourfic' );?></button>
+                <button class="hotel-room-book" type="submit"><?php esc_html_e( $tf_hotel_reserve_button_text, 'tourfic' );?></button>
                 <?php } ?>
             </div>
         </form>
@@ -1052,7 +1053,7 @@ if(empty($tf_room_disable_date)){
 
 						if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tour_hotel_service_avail ) && ! empty( $tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
 							?>
-                            <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' ); ?></a>
+                            <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php esc_html_e( $tf_hotel_reserve_button_text, 'tourfic' ); ?></a>
 
                             <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap" data-id="<?php echo $room_id ?>">
                                 <div class="tf-hotel-services">
@@ -1092,7 +1093,7 @@ if(empty($tf_room_disable_date)){
                             </div>
 
 						<?php } else { ?>
-                            <button class="hotel-room-book btn-styled tf-sml-btn tf-hotel-booking-popup-btn" type="submit"><?php _e( 'I\'ll reserve', 'tourfic' ); ?></button>
+                            <button class="hotel-room-book btn-styled tf-sml-btn tf-hotel-booking-popup-btn" type="submit"><?php esc_html_e( $tf_hotel_reserve_button_text, 'tourfic' ); ?></button>
 						<?php } ?>
                     </div>
                     <div class="tf_desc"></div>
