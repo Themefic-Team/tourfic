@@ -635,7 +635,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$adult_price         = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
 		$child_price         = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
 		$infant_price        = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
-		$discount_type       = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
+		$discount_type       = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : 'none';
 		$discount            = ! empty( $meta['discount'] ) ? $meta['discount'] : 0;
 		$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
 		$apt_availability    = ! empty( $meta['apt_availability'] ) ? $meta['apt_availability'] : '';
@@ -698,27 +698,32 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                         <span class="tf-apartment-base-price">
 						<?php
 							//get the lowest price from all available room price
-							$apartment_min_price = 0;
-							if ( ! empty( $discount_type ) && ! empty( $price_per_night  ) && ! empty( $discount ) ) {
+							$apartment_min_main_price = $apartment_min_price["min"];
+							if ( ! empty( $discount_type ) && ! empty( $apartment_min_price["min"]  ) && ! empty( $discount ) ) {
 								if ( $discount_type == "percent" ) {
-									$apartment_min_discount = ( $price_per_night * (int) $discount ) / 100;
-									$apartment_min_price    = $price_per_night - $apartment_min_discount;
+									$apartment_min_discount = ( $apartment_min_price["min"] * (int) $discount ) / 100;
+									$apartment_min_price    = $apartment_min_price["min"] - $apartment_min_discount;
 								}
 								if ( $discount_type == "fixed" ) {
 									$apartment_min_discount = $discount;
-									$apartment_min_price    = $price_per_night - (int) $apartment_min_discount;
+									$apartment_min_price    = $apartment_min_price["min"] - (int) $apartment_min_discount;
 								}
 							}
 							$lowest_price = wc_price( $apartment_min_price );
 							
 							if ( ! empty( $apartment_min_discount ) ) {
-								echo  "<del><b>" . strip_tags(wc_price( $price_per_night )) . "</b></del>" . " " . $lowest_price;
+								echo "<b>" . __("From ", "tourfic") . "</b>" . "<del>" . strip_tags(wc_price( $apartment_min_main_price )) . "</del>" . " " . $lowest_price;
 							} else {
-								echo wc_price( $price_per_night );
+								echo __("From ", "tourfic") . wc_price( $apartment_min_main_price );
 							}
 							?>
 						</span>
-                        <span><?php _e( '/per night', 'tourfic' ) ?></span>
+						<?php if ( $pricing_type == "per_night") : ?>
+                        	<span><?php _e( '/per night', 'tourfic' ) ?></span>
+						<?php else : ?>
+							<span><?php _e( '/per person', 'tourfic' ) ?></span>
+						<?php endif; ?>
+
                     </h3>
 				<?php endif; ?>
 				<?php if ( $comments && ! $disable_review_sec == '1' ): ?>
@@ -935,8 +940,9 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 }
 								//discount
                                 var discount = <?php echo $discount; ?>;
+								var discountType = "<?php echo $discount_type; ?>";
                                 var discount_html = '<?php echo wc_price( 0 ); ?>';
-                                if (discount > 0) {
+                                if (discount > 0 && discountType != "none") {
                                     $('.apartment-discount-wrap').show();
 
 									<?php if ( $discount_type == 'percent' ): ?>
@@ -2019,6 +2025,7 @@ if ( ! function_exists( 'get_apartment_min_max_price' ) ) {
 						foreach ( $apt_availability as $single_avail ) {
 							if ( $pricing_type === 'per_night' ) {
 								$min_max_price[] = ! empty( $single_avail['price'] ) ? intval( $single_avail['price'] ) : 0;
+
 							} else {
 								$min_max_price[] = ! empty( $single_avail['adult_price'] ) ? intval( $single_avail['adult_price'] ) : 0;
 							}
@@ -2030,6 +2037,8 @@ if ( ! function_exists( 'get_apartment_min_max_price' ) ) {
 				}
 			}
 		}
+
+		$min_max_price = array_filter($min_max_price);
 
 		wp_reset_query();
 
