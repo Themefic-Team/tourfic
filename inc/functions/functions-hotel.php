@@ -4010,7 +4010,7 @@ function tf_update_missing_room_id() {
 		$posts_array = get_posts( $args );
 		foreach ( $posts_array as $post_array ) {
 			$meta  = get_post_meta( $post_array->ID, 'tf_hotel', true );
-			if(!empty($meta)){
+			if(!empty($meta) && !empty($meta['room'])){
 				$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
 				if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
 					$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
