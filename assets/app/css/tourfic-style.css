@@ -10862,6 +10862,7 @@ html {
   color: #595349;
   font-weight: 400;
   line-height: 31.2px;
+  text-align: right;
 }
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-available-room-price .tf-price .discount-price {
   color: #99948D;
@@ -11251,6 +11252,7 @@ html {
 }
 .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-available-room-price {
   margin-bottom: 12px;
+  text-align: right;
 }
 .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-available-room-price .tf-price-from .amount {
   color: #595349;
