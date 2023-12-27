@@ -1714,7 +1714,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 
 	$tf_hotel_selected_template = $tf_hotel_selected_check;
 
-	$tf_hotel_book_avaibality_button_text = !empty(tfopt('hotel_booking_check_button_text')) ? sanitize_text_field(tfopt('hotel_booking_check_button_text')) : "Booking Availability";
+	$tf_hotel_book_avaibality_button_text = !empty(tfopt('hotel_booking_check_button_text')) ? stripslashes(sanitize_text_field(tfopt('hotel_booking_check_button_text'))) : "Booking Availability";
 
 	if ( $tf_hotel_selected_template == "design-1" ) {
 		?>
