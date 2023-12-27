@@ -451,22 +451,23 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 == Changelog ==
 
-= 2.10.14 - 21 December 2023 =
+= 2.10.14 - 27 December 2023 =
 
 Added: New Template for (Tour and Hotel)
-Added: Multiple Tags for Hotel/Tour/Apartment 
+Added: Multiple Tags for Hotel/Tour/Apartment
 Added: Add nearby places in hotels
-Added: Shortcode Generator for Apartment 
+Added: Shortcode Generator for Apartment
 Added: The first day of Week Dynamic (Frontend)
-Fixed: All date format issues 
-Fixed: Change orders and labels on Shortcode builder 
-Improved: Install and Active Woo Commerce using Single Button
-Fixed: External booking minor issues fixed( Pro )
-Fixed: Hotel availability calendar pricing issue fixed( Pro )
 Added: External listing Shortcode added( Pro )
 Added: Repeated Fixed Tour( Pro )
-Improved: Booking.com, Travelpayouts full-screen popup add( Pro )
 Added: Apartment iCal Added( Pro )
+Added: Apartment availability calendar
+Fixed: All date format issues
+Fixed: Change orders and labels on Shortcode builder
+Fixed: External booking minor issues fixed( Pro )
+Fixed: Hotel availability calendar pricing issue fixed( Pro )
+Improved: Booking.com, Travelpayouts full-screen popup add( Pro )
+Improved: Install and Active WooCommerce using Single Button
 
 = 2.10.13 - 15 December 2023 =
 
