@@ -4010,23 +4010,25 @@ function tf_update_missing_room_id() {
 		$posts_array = get_posts( $args );
 		foreach ( $posts_array as $post_array ) {
 			$meta  = get_post_meta( $post_array->ID, 'tf_hotel', true );
-			$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-			if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
-				$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-					return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-				}, $rooms );
-				$rooms                = unserialize( $tf_hotel_rooms_value );
-			}
-			$new_rooms = [];
-			foreach ( $rooms as $room ) {
-
-				if ( empty( $room['unique_id'] ) ) {
-					$room['unique_id'] = mt_rand( 1, time() );
+			if(!empty($meta)){
+				$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+				if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
+					$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+						return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+					}, $rooms );
+					$rooms                = unserialize( $tf_hotel_rooms_value );
 				}
-				$new_rooms[] = $room;
+				$new_rooms = [];
+				foreach ( $rooms as $room ) {
+
+					if ( empty( $room['unique_id'] ) ) {
+						$room['unique_id'] = mt_rand( 1, time() );
+					}
+					$new_rooms[] = $room;
+				}
+				$meta['room'] = $new_rooms;
+				update_post_meta( $post_array->ID, 'tf_hotel', $meta );
 			}
-			$meta['room'] = $new_rooms;
-			update_post_meta( $post_array->ID, 'tf_hotel', $meta );
 
 		}
 		update_option( 'tf_miss_room_id', 1 );
