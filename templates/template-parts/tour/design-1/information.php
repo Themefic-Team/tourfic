@@ -1,3 +1,4 @@
+
 <!-- Trip Features -->
 <?php if ( $tour_duration || $info_tour_type || $group_size || $language ) { ?>
     <div class="tf-trip-feature-blocks tf-mb-40 tf-template-section">

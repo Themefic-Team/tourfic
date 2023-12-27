@@ -1,0 +1,40 @@
+html {
+  scroll-behavior: smooth;
+}
+.tf_template_3_global_layouts{
+  .ast-container,
+  .container,
+  .col-full{
+    max-width: none !important;
+    padding: 0px !important;
+  }
+  .site-primary-header-wrap,
+  .header-container.container,
+  #footer .footer-bottom,
+  .page-top,
+  #masthead.site-header .col-full,
+  .storefront-breadcrumb,
+  #colophon.site-footer .site-info{
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+  }
+}
+@import './modules/common';
+
+.tf-template-3 {
+  @import './modules/hero';
+  @import './modules/details';
+  @import './modules/available';
+  @import './modules/bookingform';
+  @import './modules/facilities';
+  @import './modules/review';
+  // Single Tour page
+  @import './modules/include';
+  @import './modules/itinerary';
+  @import './modules/calander';
+  //SIngle Tour Page
+  @import './modules/sidebar';
+  @import './modules/popup';
+}
+
+@import './modules/responsive';

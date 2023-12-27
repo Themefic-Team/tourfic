@@ -304,7 +304,7 @@
         * Author @Jahid
         * Hotel, Tour, Apartment Duplicator
         */
-
+       
         $('.tf-post-data-duplicate').on('click', function(e) {
             e.preventDefault();
             var postID = $(this).data('postid');

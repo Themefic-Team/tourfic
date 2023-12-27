@@ -22,29 +22,44 @@ function tf_apartment_booking_callback() {
 	$infant            = isset( $_POST['infant'] ) ? intval( sanitize_text_field( $_POST['infant'] ) ) : '0';
 	$check_in_out_date = isset( $_POST['check-in-out-date'] ) ? sanitize_text_field( $_POST['check-in-out-date'] ) : '';
 
-	$product_id      = get_post_meta( $post_id, 'product_id', true );
-	$post_author     = get_post_field( 'post_author', $post_id );
-	$meta            = get_post_meta( $post_id, 'tf_apartment_opt', true );
-	$max_adults      = ! empty( $meta['max_adults'] ) ? $meta['max_adults'] : '';
-	$max_children    = ! empty( $meta['max_children'] ) ? $meta['max_children'] : '';
-	$max_infants     = ! empty( $meta['max_infants'] ) ? $meta['max_infants'] : '';
-	$price_per_night = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
-	$discount_type   = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
-	$discount        = ! empty( $meta['discount'] ) ? $meta['discount'] : 0;
+	$product_id          = get_post_meta( $post_id, 'product_id', true );
+	$post_author         = get_post_field( 'post_author', $post_id );
+	$meta                = get_post_meta( $post_id, 'tf_apartment_opt', true );
+	$max_adults          = ! empty( $meta['max_adults'] ) ? $meta['max_adults'] : '';
+	$max_children        = ! empty( $meta['max_children'] ) ? $meta['max_children'] : '';
+	$max_infants         = ! empty( $meta['max_infants'] ) ? $meta['max_infants'] : '';
+	$pricing_type        = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
+	$price_per_night     = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
+	$adult_price         = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
+	$child_price         = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
+	$infant_price        = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
+	$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
+	$discount_type       = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
+	$discount            = ! empty( $meta['discount'] ) ? $meta['discount'] : 0;
 
-	if ( defined( 'TF_PRO' ) ) {
+	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 		$additional_fees = ! empty( $meta['additional_fees'] ) ? $meta['additional_fees'] : array();
 	} else {
-		$additional_fee       = ! empty( $meta['additional_fee'] ) ? $meta['additional_fee'] : 0;
-		$fee_type             = ! empty( $meta['fee_type'] ) ? $meta['fee_type'] : '';
+		$additional_fee = ! empty( $meta['additional_fee'] ) ? $meta['additional_fee'] : 0;
+		$fee_type       = ! empty( $meta['fee_type'] ) ? $meta['fee_type'] : '';
+	}
+
+	// Booking Type
+	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+		$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
+		$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
+		$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
 	}
 
 	# Calculate nights
 	if ( ! empty( $check_in_out_date ) ) {
-		$check_in_out = explode( ' - ', $check_in_out_date );
-		$check_in_stt      = strtotime( $check_in_out[0] . ' +1 day' );
-		$check_out_stt     = strtotime( $check_in_out[1] );
-		$days              = round( ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1 );
+		$check_in_out  = explode( ' - ', $check_in_out_date );
+		$check_in_stt  = strtotime( $check_in_out[0] . ' +1 day' );
+		$check_in      = date( 'Y-m-d', $check_in_stt );
+		$check_out_stt = strtotime( $check_in_out[1] );
+		$check_out     = date( 'Y-m-d', $check_out_stt );
+		$days          = round( ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1 );
 	}
 
 	// Check errors
@@ -66,7 +81,7 @@ function tf_apartment_booking_callback() {
 	if ( $max_infants && $infant > $max_infants ) {
 		$response['errors'][] = sprintf( __( 'Maximum %s Infant(s) allowed.', 'tourfic' ), $max_infants );
 	}
-	if ( empty($post_id) ) {
+	if ( empty( $post_id ) ) {
 		$response['errors'][] = __( 'Unknown Error! Please try again.', 'tourfic' );
 	}
 
@@ -87,45 +102,88 @@ function tf_apartment_booking_callback() {
 		// Calculate price
 		$total_price = 0;
 		if ( $days > 0 ) {
-			$total_price = $price_per_night * $days;
+			if ( $enable_availability === '1' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+				$apt_availability = ! empty( $meta['apt_availability'] ) ? json_decode( $meta['apt_availability'], true ) : [];
 
+				if ( ! empty( $apt_availability ) && is_array( $apt_availability ) ) {
+					foreach ( $apt_availability as $key => $single_avail ) {
+						$_date_str = strtotime( $key );
+
+						if ( $_date_str >= $check_in_stt && $_date_str <= $check_out_stt ) {
+							if ( $pricing_type === 'per_night' ) {
+								$total_price += $single_avail['price'];
+							} else {
+								$total_price += ( ( $single_avail['adult_price'] * $adults ) + ( $single_avail['child_price'] * $children ) + ( $single_avail['infant_price'] * $infant ) );
+							}
+						}
+					}
+				}
+
+			} else {
+				if ( $pricing_type == 'per_night' ) {
+					$total_price = $price_per_night * $days;
+				} else {
+					$total_price = ( ( $adult_price * $adults ) + ( $child_price * $children ) + ( $infant_price * $infant ) ) * $days;
+				}
+			}
 
 			if ( $discount_type == 'percent' ) {
 				$total_price = $total_price - ( $total_price * ( $discount / 100 ) );
 			} elseif ( $discount_type == 'fixed' ) {
 				$total_price = $total_price - $discount;
 			}
-			
-			if ( defined( 'TF_PRO' ) ){
-				foreach ($additional_fees as $key => $item){
-					if ( $item['fee_type'] == 'per_night' ){
+
+			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $total_price > 0) {
+				foreach ( $additional_fees as $key => $item ) {
+					if ( $item['fee_type'] == 'per_night' ) {
 						$total_price += $item['additional_fee'] * $days;
-					} elseif($item['fee_type'] == 'per_person') {
+					} elseif ( $item['fee_type'] == 'per_person' ) {
 						$total_price += $item['additional_fee'] * ( $adults + $children + $infant );
 					} else {
 						$total_price += $item['additional_fee'];
 					}
 				}
 			} else {
-				if ( $fee_type == 'per_night' ){
+				if ( $fee_type == 'per_night' ) {
 					$total_price += $additional_fee * $days;
-				} elseif($fee_type == 'per_person') {
+				} elseif ( $fee_type == 'per_person' ) {
 					$total_price += $additional_fee * ( $adults + $children + $infant );
 				} else {
 					$total_price += $additional_fee;
 				}
 			}
 
-			$tf_apartment_data['tf_apartment_data']['total_price'] = $total_price;
+			$tf_apartment_data['tf_apartment_data']['pricing_type'] = $pricing_type;
+			$tf_apartment_data['tf_apartment_data']['total_price']  = $total_price;
 		}
 
+		if ( $tf_booking_type == 2 && ! empty( $tf_booking_url ) ) {
+			$external_search_info = array(
+				'{adult}'    => $adults,
+				'{child}'    => $children,
+				'{infant}'   => $infant,
+				'{checkin}'  => $check_in,
+				'{checkout}' => $check_out,
+			);
+			if ( ! empty( $tf_booking_attribute ) ) {
+				$tf_booking_query_url = str_replace( array_keys( $external_search_info ), array_values( $external_search_info ), $tf_booking_query_url );
+				if ( ! empty( $tf_booking_query_url ) ) {
+					$tf_booking_url = $tf_booking_url . '/?' . $tf_booking_query_url;
+				}
+			}
 
-		# Add product to cart with the custom cart item data
-		WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_apartment_data );
+			$response['product_id']  = $product_id;
+			$response['add_to_cart'] = 'true';
+			$response['redirect_to'] = $tf_booking_url;
+		} else {
 
-		$response['product_id']  = $product_id;
-		$response['add_to_cart'] = 'true';
-		$response['redirect_to'] = wc_get_checkout_url();
+			# Add product to cart with the custom cart item data
+			WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_apartment_data );
+
+			$response['product_id']  = $product_id;
+			$response['add_to_cart'] = 'true';
+			$response['redirect_to'] = wc_get_checkout_url();
+		}
 	} else {
 		$response['status'] = 'error';
 	}
@@ -268,7 +326,6 @@ function tf_apartment_custom_order_data( $item, $cart_item_key, $values, $order 
 add_action( 'woocommerce_checkout_create_order_line_item', 'tf_apartment_custom_order_data', 10, 4 );
 
 
-
 /**
  * Add order id to the hotel room meta field
  *
@@ -278,102 +335,102 @@ add_action( 'woocommerce_checkout_create_order_line_item', 'tf_apartment_custom_
  */
 function tf_add_apartment_data_checkout_order_processed( $order_id, $posted_data, $order ) {
 
-	$tf_integration_order_data = array(
+	$tf_integration_order_data   = array(
 		'order_id' => $order_id
 	);
 	$tf_integration_order_status = [];
 	# Get and Loop Over Order Line Items
 	foreach ( $order->get_items() as $item_id => $item ) {
-		
+
 		$order_type = $item->get_meta( '_order_type', true );
 
-		if("apartment"==$order_type){
-			$post_id   = $item->get_meta( '_post_id', true ); // Apartment id
+		if ( "apartment" == $order_type ) {
+			$post_id = $item->get_meta( '_post_id', true ); // Apartment id
 
 			//Order Data Insert 
 			$billinginfo = [
 				'billing_first_name' => $order->get_billing_first_name(),
-				'billing_last_name' => $order->get_billing_last_name(),
-				'billing_company' => $order->get_billing_company(),
-				'billing_address_1' => $order->get_billing_address_1(),
-				'billing_address_2' => $order->get_billing_address_2(),
-				'billing_city' => $order->get_billing_city(),
-				'billing_state' => $order->get_billing_state(),
-				'billing_postcode' => $order->get_billing_postcode(),
-				'billing_country' => $order->get_billing_country(),
-				'billing_email' => $order->get_billing_email(),
-				'billing_phone' => $order->get_billing_phone()
+				'billing_last_name'  => $order->get_billing_last_name(),
+				'billing_company'    => $order->get_billing_company(),
+				'billing_address_1'  => $order->get_billing_address_1(),
+				'billing_address_2'  => $order->get_billing_address_2(),
+				'billing_city'       => $order->get_billing_city(),
+				'billing_state'      => $order->get_billing_state(),
+				'billing_postcode'   => $order->get_billing_postcode(),
+				'billing_country'    => $order->get_billing_country(),
+				'billing_email'      => $order->get_billing_email(),
+				'billing_phone'      => $order->get_billing_phone()
 			];
 
 			$shippinginfo = [
 				'shipping_first_name' => $order->get_shipping_first_name(),
-				'shipping_last_name' => $order->get_shipping_last_name(),
-				'shipping_company' => $order->get_shipping_company(),
-				'shipping_address_1' => $order->get_shipping_address_1(),
-				'shipping_address_2' => $order->get_shipping_address_2(),
-				'shipping_city' => $order->get_shipping_city(),
-				'shipping_state' => $order->get_shipping_state(),
-				'shipping_postcode' => $order->get_shipping_postcode(),
-				'shipping_country' => $order->get_shipping_country(),
-				'shipping_phone' => $order->get_shipping_phone()
+				'shipping_last_name'  => $order->get_shipping_last_name(),
+				'shipping_company'    => $order->get_shipping_company(),
+				'shipping_address_1'  => $order->get_shipping_address_1(),
+				'shipping_address_2'  => $order->get_shipping_address_2(),
+				'shipping_city'       => $order->get_shipping_city(),
+				'shipping_state'      => $order->get_shipping_state(),
+				'shipping_postcode'   => $order->get_shipping_postcode(),
+				'shipping_country'    => $order->get_shipping_country(),
+				'shipping_phone'      => $order->get_shipping_phone()
 			];
 		}
 
 		// Apartment Item Data Insert 
-		if("apartment"==$order_type){
-			$price = $item->get_subtotal();
+		if ( "apartment" == $order_type ) {
+			$price             = $item->get_subtotal();
 			$check_in_out_date = $item->get_meta( 'check_in_out_date', true );
-			$adult = $item->get_meta( 'adults', true );
-			$child = $item->get_meta( 'children', true );
-			$infants = $item->get_meta( 'infant', true );
+			$adult             = $item->get_meta( 'adults', true );
+			$child             = $item->get_meta( 'children', true );
+			$infants           = $item->get_meta( 'infant', true );
 
 			if ( $check_in_out_date ) {
 				list( $check_in, $check_out ) = explode( ' - ', $check_in_out_date );
 			}
-			
+
 			$iteminfo = [
-				'check_in' => $check_in,
-				'check_out' => $check_out,
-				'adult' => $adult,
-				'child' => $child,
-				'infants' => $infants,
+				'check_in'    => $check_in,
+				'check_out'   => $check_out,
+				'adult'       => $adult,
+				'child'       => $child,
+				'infants'     => $infants,
 				'total_price' => $price,
 			];
 
 			$tf_integration_order_data[] = [
-				'check_in' => $check_in,
-				'check_out' => $check_out,
-				'adult' => $adult,
-				'child' => $child,
-				'infants' => $infants,
-				'total_price' => $price,
-				'customer_id' => $order->get_customer_id(),
+				'check_in'       => $check_in,
+				'check_out'      => $check_out,
+				'adult'          => $adult,
+				'child'          => $child,
+				'infants'        => $infants,
+				'total_price'    => $price,
+				'customer_id'    => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
-				'order_status' => $order->get_status(),
-				'order_date' => date('Y-m-d H:i:s')
+				'order_status'   => $order->get_status(),
+				'order_date'     => date( 'Y-m-d H:i:s' )
 			];
 
 			$tf_integration_order_status = [
-				'customer_id' => $order->get_customer_id(),
+				'customer_id'    => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
-				'order_status' => $order->get_status(),
-				'order_date' => date('Y-m-d H:i:s')
+				'order_status'   => $order->get_status(),
+				'order_date'     => date( 'Y-m-d H:i:s' )
 			];
 
-			$iteminfo_keys = array_keys($iteminfo);
-			$iteminfo_keys = array_map('sanitize_key', $iteminfo_keys);
+			$iteminfo_keys = array_keys( $iteminfo );
+			$iteminfo_keys = array_map( 'sanitize_key', $iteminfo_keys );
 
-			$iteminfo_values = array_values($iteminfo);
-			$iteminfo_values = array_map('sanitize_text_field', $iteminfo_values);
+			$iteminfo_values = array_values( $iteminfo );
+			$iteminfo_values = array_map( 'sanitize_text_field', $iteminfo_values );
 
-			$iteminfo = array_combine($iteminfo_keys, $iteminfo_values);
+			$iteminfo = array_combine( $iteminfo_keys, $iteminfo_values );
 
-			
-			global $wpdb;     
-			$table_name = $wpdb->prefix.'tf_order_data';  
+
+			global $wpdb;
+			$table_name = $wpdb->prefix . 'tf_order_data';
 			$wpdb->query(
 				$wpdb->prepare(
-				"INSERT INTO $table_name
+					"INSERT INTO $table_name
 				( order_id, post_id, post_type, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
 				VALUES ( %d, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
 					array(
@@ -382,18 +439,18 @@ function tf_add_apartment_data_checkout_order_processed( $order_id, $posted_data
 						$order_type,
 						$check_in,
 						$check_out,
-						json_encode($billinginfo),
-						json_encode($shippinginfo),
-						json_encode($iteminfo),
+						json_encode( $billinginfo ),
+						json_encode( $shippinginfo ),
+						json_encode( $iteminfo ),
 						$order->get_customer_id(),
 						$order->get_payment_method(),
 						$order->get_status(),
-						date('Y-m-d H:i:s')
+						date( 'Y-m-d H:i:s' )
 					)
 				)
 			);
 		}
-		
+
 	}
 
 	/**
@@ -401,10 +458,10 @@ function tf_add_apartment_data_checkout_order_processed( $order_id, $posted_data
 	 * @author Jahid
 	 */
 
-	if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($tf_integration_order_status) ) {
-		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status);
-		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status);
-	} 
+	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tf_integration_order_status ) ) {
+		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
+		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
+	}
 }
 
 add_action( 'woocommerce_checkout_order_processed', 'tf_add_apartment_data_checkout_order_processed', 10, 4 );

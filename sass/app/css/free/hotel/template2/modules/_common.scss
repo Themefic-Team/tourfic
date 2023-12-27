@@ -1,0 +1,133 @@
+.tf-template-3 {
+    font-family: 'Josefin Sans', sans-serif;
+    background: #FDF9F3;
+    color: #99948D;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20.80px;
+    width: 100%;
+    .tf-container {
+        margin: 0 auto;
+        max-width: 1520px;
+        padding: 0;
+        @media #{$max1600}{
+            max-width: 1320px;
+        }
+        @media #{$max1366}{
+            padding: 0px 56px;
+            max-width: none;
+        }
+        @media #{$max1200}{
+            padding: 0px 32px;
+        }
+        @media #{$max767}{
+            padding: 0px;
+        }
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 700;
+        margin: 0 0 .3em 0;
+        line-height: 1.3;
+    }
+    h1 {
+        font-size: 40px;
+        line-height: 52px;
+    }
+    h2 {
+        font-size: 32px;
+        line-height: 38.40px;
+    }
+    p {
+        margin: 0;
+    }
+    select {
+        appearance: none;
+        background-position: center right;
+        padding-right: 22px;
+        padding-top: 4px;
+        background-repeat: no-repeat;
+        background-size: 20px;
+    }
+    select:focus {
+        outline: none;
+    }
+    .tf-section {
+        background: #FCF4E8;
+        padding: 32px;
+        margin-bottom: 32px;
+    }
+    .tf-section-title {
+        margin-bottom: 32px;
+        color: #595349;
+    }
+    img.tf-payment-card {
+        width: 34px;
+        height: 24px;
+        margin-right: 16px;
+    }
+    a {
+        display: inherit;
+    }
+    div {
+        scroll-margin-top: 250px;
+    }
+    .tf-mobile {
+        display: none;
+    }
+    .tf-popup-buttons {
+        cursor: pointer;
+    }
+    button {
+        cursor: pointer;
+    }
+    .tf-scroll-bar {
+        overflow: hidden;
+        overflow-y: scroll;
+        height: inherit;
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+        /* Track */
+        &::-webkit-scrollbar-track {
+            background: #D6D4D2;
+        }
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+            background: #595349;
+            border-radius: 50px;
+            overflow: hidden;
+        }
+        .tf-popup-image {
+            width: calc(33.33% - 7px);
+            height: fit-content;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+    }
+}
+.tf-template-3.tf-hotel-single .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkin,
+.tf-template-3.tf-hotel-single .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkout{
+    max-width: none;
+    padding-left: 83px;
+    padding-right: 83px;
+}
+.tf-template-3.tf-tour-single{
+    margin-bottom: 93px;
+}
+.tf_template_3_global_layouts{
+    #tf-ask-question{
+        .tf-aq-outer .close-aq{
+            background: #B58E53 !important;
+        }
+        button{
+            background: #B58E53 !important;
+            border-color: #B58E53 !important;
+        }
+    }
+}

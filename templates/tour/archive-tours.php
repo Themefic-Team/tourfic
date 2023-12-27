@@ -44,15 +44,12 @@ $loop = new WP_Query( $args );
 $total_posts = $loop->found_posts;
 $tf_total_results = 0;
 
-$tf_plugin_installed = get_option('tourfic_template_installed'); 
-if (!empty($tf_plugin_installed)) {
-	$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
-}else{
-	$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'default';
-}
+$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
 
 if( $tf_tour_arc_selected_template=="design-1"){
 	include TF_TEMPLATE_PATH . 'tour/archive/design-1.php';
+}elseif( $tf_tour_arc_selected_template=="design-2"){
+	include TF_TEMPLATE_PATH . 'tour/archive/design-2.php';
 }else{
 	include TF_TEMPLATE_PATH . 'tour/archive/design-default.php';
 }

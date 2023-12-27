@@ -45,6 +45,61 @@ while ( have_posts() ) : the_post();
 	$post_type       = substr( get_post_type(), 3, - 1 );
 	$has_in_wishlist = tf_has_item_in_wishlist( $post_id );
 
+	// tour type meta
+	$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';
+	// Repeated Fixed Tour meta
+	if(!empty($tour_type) && ($tour_type == 'fixed')) {
+		$tf_start_date = ! empty( $meta['fixed_availability']['date']['from'] ) ? $meta['fixed_availability']['date']['from'] : '';
+		$tf_repeated_fixed_tour_switch = ! empty( $meta['fixed_availability']["tf-repeat-months-switch"] ) ? $meta['fixed_availability']["tf-repeat-months-switch"] : 0;
+		$tf_tour_repeat_months = ($tf_repeated_fixed_tour_switch == 1) && !empty($meta['fixed_availability']['tf-repeat-months-checkbox']) ? $meta['fixed_availability']['tf-repeat-months-checkbox'] : array();
+	}
+
+	// date format for users
+	$tf_tour_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+
+
+	if(!function_exists('tf_fixed_tour_start_date_changer')) {
+		function tf_fixed_tour_start_date_changer($date, $months) {
+			if( (count($months) > 0) && !empty($date)) {
+				preg_match('/(\d{4})\/(\d{2})\/(\d{2})/', $date, $matches);
+
+				$new_months[] = $matches[0];
+				
+				foreach($months as $month) {
+
+					if($month < date('m')) {
+						$year = $matches[1] + 1;
+
+					} else $year = $matches[1];
+
+					$day_selected = date('d', strtotime($date));
+					$last_day_of_month = date('t', strtotime(date('Y').'-'.$month.'-01'));
+					$matches[2] = $month;
+					$changed_date = sprintf("%s/%s/%s", $year, $matches[2], $matches[3]);
+
+					if(($day_selected == "31") && ($last_day_of_month != "31")) {
+						$new_months[] = date('Y/m/d', strtotime($changed_date . ' -1 day'));
+					} else {
+						$new_months[] = $changed_date;
+					}
+				}
+				return $new_months;
+
+			} else return array();
+		}
+	}
+	if(!function_exists('tf_tour_date_format_changer')) {
+		function tf_tour_date_format_changer($date, $format) {
+			if(!empty($date) && !empty($format)) {
+				$date = new DateTime($date);
+				$formattedDate = $date->format($format);
+
+				return $formattedDate;
+
+			} else return;
+		}
+	}
+
 	//Social Share
 	$share_text = get_the_title();
 	$share_link = get_permalink( $post_id );
@@ -144,9 +199,6 @@ while ( have_posts() ) : the_post();
         }, $itineraries );
         $itineraries = unserialize( $tf_hotel_itineraries_value );
     }
-	//continuous tour
-	$share_text = get_the_title();
-	$share_link = esc_url( home_url( "/?p=" ) . $post_id );
 
 	$terms_and_conditions = ! empty( $meta['terms_conditions'] ) ? $meta['terms_conditions'] : '';
 	$tf_faqs              = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $post->ID, 'tf_faqs', true ) : array();
@@ -189,21 +241,12 @@ while ( have_posts() ) : the_post();
 	$tf_tour_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-tour'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-tour'] : 'design-1';
 	$tf_tour_selected_check = !empty($tf_tour_single_template) ? $tf_tour_single_template : $tf_tour_global_template;
 
-	$tf_plugin_installed = get_option('tourfic_template_installed'); 
-	if (!empty($tf_plugin_installed)) {
-	    $tf_tour_selected_template = $tf_tour_selected_check;
-	}else{
-		if("single"==$tf_tour_layout_conditions){
-			$tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'default';
-		}
-		$tf_tour_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-tour'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-tour'] : 'default';
-		$tf_tour_selected_check = !empty($tf_tour_single_template) ? $tf_tour_single_template : $tf_tour_global_template;
-		
-	    $tf_tour_selected_template = $tf_tour_selected_check ? $tf_tour_selected_check : 'default';
-	}
+	$tf_tour_selected_template = $tf_tour_selected_check;
 
 	if( $tf_tour_selected_template == "design-1" ){
 		include TF_TEMPLATE_PART_PATH . 'tour/design-1.php';
+	}elseif( $tf_tour_selected_template == "design-2" ){
+		include TF_TEMPLATE_PART_PATH . 'tour/design-2.php';
 	}else{
 		include TF_TEMPLATE_PART_PATH . 'tour/design-default.php';
 	}

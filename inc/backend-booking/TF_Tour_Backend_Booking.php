@@ -444,19 +444,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 
 			$tf_tour_selected_check = ! empty( $tf_tour_single_template ) ? $tf_tour_single_template : $tf_tour_global_template;
 
-			$tf_plugin_installed = get_option( 'tourfic_template_installed' );
-			if ( ! empty( $tf_plugin_installed ) ) {
-				$tf_tour_selected_template = $tf_tour_selected_check;
-			} else {
-				if ( "single" == $tf_tour_layout_conditions ) {
-					$tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'default';
-				}
-				$tf_tour_global_template = ! empty( tf_data_types( tfopt( 'tf-template' ) )['single-tour'] ) ? tf_data_types( tfopt( 'tf-template' ) )['single-tour'] : 'default';
-
-				$tf_tour_selected_check = ! empty( $tf_tour_single_template ) ? $tf_tour_single_template : $tf_tour_global_template;
-
-				$tf_tour_selected_template = $tf_tour_selected_check ? $tf_tour_selected_check : 'default';
-			}
+			$tf_tour_selected_template = $tf_tour_selected_check;
 
 			if ( ! empty( $meta['cont_custom_date'] ) && gettype( $meta['cont_custom_date'] ) == "string" ) {
 

@@ -11,7 +11,7 @@ function tf_apt_amenities_cats() {
 		}
 	}
 
-	if(empty($all_cats)){
+	if ( empty( $all_cats ) ) {
 		$all_cats[''] = __( 'Select Category', 'tourfic' );
 	}
 
@@ -211,20 +211,60 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'default' => __( 'Book your apartment', 'tourfic' ),
 				),
 				array(
+					'id'         => 'pricing_type',
+					'type'       => 'select',
+					'label'      => __( 'Pricing Type', 'tourfic' ),
+					'subtitle'   => __( 'Select pricing type', 'tourfic' ),
+					'options'    => array(
+						'per_night'  => __( 'Per Night', 'tourfic' ),
+						'per_person' => __( 'Per Person (pro)', 'tourfic' ),
+					),
+					'attributes' => array(
+						'class' => 'tf_apt_pricing_type',
+					),
+				),
+				array(
 					'id'          => 'price_per_night',
 					'type'        => 'number',
 					'label'       => __( 'Price Per Night', 'tourfic' ),
 					'subtitle'    => __( 'The total booking cost is calculated by multiplying the nightly rate by the number of nights stayed, from check-in to check-out.', 'tourfic' ),
 					'field_width' => 50,
-					'attributes'  => array( 'min' => 0 )
+					'attributes'  => array( 'min' => 0 ),
+					'dependency' => array( 'pricing_type', '==', 'per_night' ),
+				),
+				array(
+					'id'          => '',
+					'type'        => 'number',
+					'label'       => __( 'Adult Price', 'tourfic' ),
+					'subtitle'    => __( 'Enter adult price', 'tourfic' ),
+					'field_width' => 33.33,
+					'attributes'  => array( 'min' => 0 ),
+					'dependency'  => array( 'pricing_type', '==', 'per_person' ),
+				),
+				array(
+					'id'          => '',
+					'type'        => 'number',
+					'label'       => __( 'Child Price', 'tourfic' ),
+					'subtitle'    => __( 'Enter child price', 'tourfic' ),
+					'field_width' => 33.33,
+					'attributes'  => array( 'min' => 0 ),
+					'dependency'  => array( 'pricing_type', '==', 'per_person' ),
+				),
+				array(
+					'id'          => '',
+					'type'        => 'number',
+					'label'       => __( 'Infant Price', 'tourfic' ),
+					'subtitle'    => __( 'Enter infant price', 'tourfic' ),
+					'field_width' => 33.33,
+					'attributes'  => array( 'min' => 0 ),
+					'dependency'  => array( 'pricing_type', '==', 'per_person' ),
 				),
 				array(
 					'id'          => 'min_stay',
 					'type'        => 'number',
 					'label'       => __( 'Minimum Night Stay', 'tourfic' ),
 					'subtitle'    => __( 'Specify the minimum number of nights required to book this room.', 'tourfic' ),
-					'field_width' => 50,
-					'attributes'  => array( 'min' => 0 )
+					'attributes'  => array( 'min' => 1 )
 				),
 				array(
 					'id'          => 'max_adults',
@@ -259,7 +299,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'          => 'additional_fee',
 					'type'        => 'number',
-					'label'       => __( 'Additional Fee', 'tourfic' ),
+					'label'       => __( 'Additional Fee Amount', 'tourfic' ),
 					'field_width' => 33.33,
 					'attributes'  => array( 'min' => 0 )
 				),
@@ -374,6 +414,47 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label'    => __( 'Monthly Discount Per Night', 'tourfic' ),
 					'subtitle' => __( 'Monthly discounts for stays longer than 30 days (per night)', 'tourfic' ),
 				),*/
+			),
+		),
+		'availability'    => array(
+			'title'  => __( 'Availability', 'tourfic' ),
+			'icon'   => 'fa-solid fa-calendar-alt',
+			'fields' => array(
+				array(
+					'id'      => 'Availability',
+					'type'    => 'heading',
+					'content' => __( 'Availability', 'tourfic' ),
+				),
+				array(
+					'id'      => '',
+					'type'    => 'switch',
+					'label'   => __( 'Enable Availability by Date', 'tourfic' ),
+					'is_pro'  => true,
+					'default' => true
+				),
+				array(
+					'id'        => '',
+					'type'      => 'aptAvailabilityCal',
+					'label'     => __( 'Availability Calendar', 'tourfic' ),
+					'is_pro'  => true,
+				),
+				array(
+					'id'      => 'ical',
+					'type'    => 'heading',
+					'content' => __( 'iCal Sync', 'tourfic' ),
+				),
+				array(
+					'id'          => '',
+					'type'        => 'ical',
+					'label'       => __( 'iCal URL', 'tourfic' ),
+					'placeholder' => __( 'https://website.com', 'tourfic' ),
+					'button_text' => __( 'Import', 'tourfic' ),
+					'button_class'   => 'apt-ical-import',
+					'is_pro'  => true,
+					'attributes'  => array(
+						'class' => 'ical_url_input',
+					),
+				),
 			),
 		),
 		//Room Management
@@ -775,7 +856,52 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				),
 			),
 		),
-		
+
+		// Multiple tags for apartments
+		'apartments_multiple_tags' => array(
+			'title'  => __( 'Labels', 'tourfic' ),
+			'icon'   => 'fa fa-list',
+			'fields' => array(
+				array(
+					'id'      => 'tf-apartment-tags-heading',
+					'type'    => 'heading',
+					'label' => __( 'Apartment labels', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'           => 'tf-apartment-tags',
+					'type'         => 'repeater',
+					'label'        => __( 'Labels', 'tourfic' ),
+					'subtitle' => __('Add some keywords that highlight your apartment\'s Unique Selling Point (USP). This label will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
+					'button_title' => __( 'Add / Insert New Label', 'tourfic' ),
+					'fields'       => array(
+						array(
+							'id'    => 'apartment-tag-title',
+							'type'  => 'text',
+							'label' => __( 'Label Title', 'tourfic' ),
+						),
+
+						array(
+							'id'       => 'apartment-tag-color-settings',
+							'type'     => 'color',
+							'class'    => 'tf-label-field',
+							'label'    => __( 'Label Colors', 'tourfic' ),
+							'subtitle' => __( 'Colors of Label Background and Font', 'tourfic' ),
+							'multiple' => true,
+							'inline'   => true,
+							'colors'   => array(
+								'background' => __( 'Background', 'tourfic' ),
+								'font'   => __( 'Font', 'tourfic' ),
+							),
+							'default' => array(
+								'background' => '#003162',
+								'font' => '#fff'
+							),
+						),
+					),
+				),
+			),
+		),
 		// Settings
 		'settings'        => array(
 			'title'  => __( 'Settings', 'tourfic' ),

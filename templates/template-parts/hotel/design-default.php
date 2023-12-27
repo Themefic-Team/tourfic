@@ -317,7 +317,35 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                                 </div>
                             </div>
                         </div>
-					<?php } ?>
+                    <?php } ?>
+                     <div class="desc-wrap">
+                         <?php the_content(); ?>
+                    </div>
+                     <!-- Start features -->
+                    <?php if ( $features && count( $features ) > 0 ) { ?>
+                        <div class="tf_features">
+                            <?php if( !empty( $meta['popular-section-title'] ) ): ?>
+                                <h3 class="section-heading"><?php echo esc_html($meta['popular-section-title']); ?></h3>
+                            <?php endif; ?>
+                            <div class="tf-feature-list">
+                                <?php foreach ( $features as $feature ) {
+                                    $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
+                                    $f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+                                    if ( $f_icon_type == 'fa' ) {
+                                        $feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
+                                    } elseif ( $f_icon_type == 'c' ) {
+                                        $feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
+                                    } ?>
+
+                                    <div class="single-feature-box">
+                                        <?php echo $feature_icon ?? ''; ?>
+                                        <span class="feature-list-title"><?php echo $feature->name; ?></span>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    <?php } ?>
+                    <!-- End features -->
                 </div>
                 <div class="hero-right">
 					<?php if ( ! defined( 'TF_PRO' ) && ( $address ) ) { ?>
@@ -386,50 +414,44 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                                 <?php } ?>
                             </div>
                         </div>
-					<?php } ?>
-                    <?php if(($tf_booking_type == 2 && $tf_hide_booking_form !== '1') || $tf_booking_type == 1) :?>
+                    <?php } ?>
+	                <?php if(($tf_booking_type == 2 && $tf_hide_booking_form !== '1') || $tf_booking_type == 1) :?>
                         <div class="hero-booking">
-                            <?php tf_hotel_sidebar_booking_form(); ?>
+			                <?php tf_hotel_sidebar_booking_form(); ?>
                         </div>
-                    <?php endif; ?>
+	                <?php endif; ?>
+                    <?php
+                    $places_section_title = !empty($meta["section-title"]) ? $meta["section-title"] : "What's around?";
+                    $places_meta = !empty($meta["nearby-places"]) ? $meta["nearby-places"] : array();
+                    ?>
+                    <?php if( count($places_meta) > 0 ) : ?> <!-- nearby places - start -->
+                        <div class="nearby-container"> 
+                            <div class="nearby-container-inner">
+                                <?php if(!empty($places_section_title)): ?>
+                                    <h3 class="section-heading"><?php echo __($places_section_title, 'tourfic'); ?></h3>
+                                <?php endif; ?>
+                                <ul>
+                                    <?php foreach($places_meta as $place) {
+                                        $place_icon = '<i class="' . $place['place-icon'] . '"></i>';
+                                        ?>
+                                        <li>
+                                            <span>
+                                                <?php echo $place_icon; ?> <?php echo $place["place-title"]; ?>
+                                            </span>
+                                            <span>
+                                                <?php echo $place["place-dist"]; ?>
+                                            </span>
+                                        </li>
+                                    <?php }; ?>
+                                </ul>
+                            </div>
+                        </div> 
+                    <?php endif; ?> <!-- nearby places - end -->
                 </div>
             </div>
         </div>
     </div>
     <!-- Hero End -->
-
-    <!-- Start description -->
-    <div class="description-section sp-50">
-        <div class="tf-container">
-            <div class="desc-wrap">
-				<?php the_content(); ?>
-            </div>
-            <!-- Start features -->
-			<?php if ( $features ) { ?>
-                <div class="tf_features">
-                    <h3 class="section-heading"><?php echo ! empty( $meta['popular-section-title'] ) ? esc_html( $meta['popular-section-title'] ) : ''; ?></h3>
-                    <div class="tf-feature-list">
-						<?php foreach ( $features as $feature ) {
-							$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
-							$f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
-							if ( $f_icon_type == 'fa' ) {
-								$feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
-							} elseif ( $f_icon_type == 'c' ) {
-								$feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
-							} ?>
-
-                            <div class="single-feature-box">
-								<?php echo $feature_icon ?? ''; ?>
-                                <span class="feature-list-title"><?php echo $feature->name; ?></span>
-                            </div>
-						<?php } ?>
-                    </div>
-                </div>
-			<?php } ?>
-            <!-- End features -->
-        </div>
-    </div>
-    <!-- End description -->
 
     <div class="tf-container">
         <div class="tf-divider"></div>
