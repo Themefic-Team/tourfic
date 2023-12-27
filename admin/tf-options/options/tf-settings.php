@@ -707,6 +707,10 @@ TF_Settings::option( 'tf_settings', array(
 											'title' => 'Default',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-apartment.jpg",
 										),
+										'design-1' => array(
+											'title' => 'Design 1',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design2-tour.jpg",
+										),
 									),
 									'default'  => 'default',
 								),
@@ -726,6 +730,10 @@ TF_Settings::option( 'tf_settings', array(
 										'default'  => array(
 											'title' => 'Default',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/apartment-archive-default.jpg",
+										),
+										'design-1' => array(
+											'title' => 'Design 1',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/tour-archive-design-2.jpg",
 										),
 									),
 									'default'  => 'default',

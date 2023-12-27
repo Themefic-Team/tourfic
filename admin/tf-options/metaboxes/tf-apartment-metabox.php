@@ -84,6 +84,10 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'title'			=> 'Default',
 							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-apartment.jpg",
 						),
+						'design-1' => array(
+							'title' => 'Design 1',
+							'url'   => TF_ASSETS_ADMIN_URL . "images/template/design2-tour.jpg",
+						),
 					),
 					'default'   	=> 'default',
 					'dependency'  => [
