@@ -1047,7 +1047,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
 	$tf_tour_selected_template = $tf_tour_selected_check;
 
-	$tf_tour_book_now_text = !empty(tfopt('tour_booking_form_button_text')) ? sanitize_text_field(tfopt('tour_booking_form_button_text')) : __("Book Now", 'tourfic');
+	$tf_tour_book_now_text = !empty(tfopt('tour_booking_form_button_text')) ? stripslashes(sanitize_text_field(tfopt('tour_booking_form_button_text'))) : __("Book Now", 'tourfic');
 	
 	if ( ! function_exists( 'partial_payment_tag_replacement' ) ) {
 		function partial_payment_tag_replacement( $text, $arr ) {

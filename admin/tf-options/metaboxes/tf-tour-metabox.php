@@ -687,7 +687,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'          => 'cont_min_people',
 					'type'        => 'number',
-					'label'       => __( 'Minimum Person', 'tourfic' ),
+					'label'       => __( 'Minimum Person (Required for Search)', 'tourfic' ),
 					'subtitle'    => __( 'Specify the minimum person required to book this tour.', 'tourfic' ),
 					'dependency'  => array(
 						array( 'type', '==', 'continuous' ),
@@ -698,7 +698,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'          => 'cont_max_people',
 					'type'        => 'number',
-					'label'       => __( 'Maximum Person', 'tourfic' ),
+					'label'       => __( 'Maximum Person (Required for Search)', 'tourfic' ),
 					'subtitle'    => __( 'Indicate the maximum number of persons this package can be booked for.', 'tourfic' ),
 					'dependency'  => array(
 						array( 'type', '==', 'continuous' ),
