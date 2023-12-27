@@ -242,7 +242,7 @@ if(!empty($rooms)){
                     $room_term = get_term( $feature ); ?>
                     <li>
                         <?php echo ! empty( $room_feature_icon ) ? $room_feature_icon : ''; ?>
-                        <?php echo $room_term->name; ?>
+                        <?php echo !empty($room_term->name) ? $room_term->name : ''; ?>
                     </li>
                     <?php } $tf_room_fec_key++; } } ?>
                     <?php 
@@ -533,7 +533,7 @@ if(!empty($rooms)){
                     $room_term = get_term( $feature ); ?>
                     <li>
                         <?php echo ! empty( $room_feature_icon ) ? $room_feature_icon : ''; ?>
-                        <?php echo $room_term->name; ?>
+                        <?php echo !empty($room_term->name) ? $room_term->name : ''; ?>
                     </li>
                     <?php } $tf_room_fec_key++; } } ?>
                     <?php 
