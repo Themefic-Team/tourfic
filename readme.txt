@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings, apartment-booking, apartment-rental
 Requires at least: 5.4
 Tested up to: 6.4
-Stable tag: 2.10.14
+Stable tag: 2.11.0
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -451,7 +451,7 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 == Changelog ==
 
-= 2.10.14 - 27 December 2023 =
+= 2.11.0 - 27 December 2023 =
 
 Added: New Template for (Tour and Hotel)
 Added: Multiple Tags for Hotel/Tour/Apartment
