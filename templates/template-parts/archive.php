@@ -25,6 +25,7 @@ $total_posts = $loop->found_posts;
 
 $tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
 $tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
+$tf_apartment_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['apartment-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 
 // Gird or List View
 if($post_type == "tf_hotel"){
@@ -130,7 +131,7 @@ if( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ) 
     </div>
 </div>
 <?php }
-elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2" ) || ( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-2" ) ){ ?>
+elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2" ) || ( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-2" ) || ( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template=="design-1" ) ){ ?>
 
     <!--Available rooms start -->
     <div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
@@ -158,6 +159,8 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
                         tf_hotel_archive_single_item();
                     } elseif( $post_type == 'tf_tours' ) {
                         tf_tour_archive_single_item();
+                    } elseif( $post_type == 'tf_apartment' ) {
+                        tf_apartment_archive_single_item();
                     }
                 }
             } else {
