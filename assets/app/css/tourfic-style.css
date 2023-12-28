@@ -11357,6 +11357,9 @@ html {
     padding: 0px 12px;
   }
 }
+.tf-template-3 .tf-related-tours .tf-slider-item .tf-post-single-box {
+  width: 100%;
+}
 .tf-template-3 .tf-related-tours .tf-slider-item .tf-image-data img {
   height: 240px;
   object-fit: cover;

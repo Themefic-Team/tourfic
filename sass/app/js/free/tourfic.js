@@ -1937,11 +1937,11 @@
             $(".tf-popup-wrapper").removeClass("tf-show")
         });
 
-        $(document).on('click', function (event) {
-            if (!$(event.target).closest(".tf-popup-wrapper .tf-popup-inner").length) {
-                $(".tf-popup-wrapper").removeClass('tf-show');
-            }
-        });
+        // $(document).on('click', function (event) {
+        //     if (!$(event.target).closest(".tf-popup-wrapper .tf-popup-inner").length) {
+        //         $(".tf-popup-wrapper").removeClass('tf-show');
+        //     }
+        // });
 
         $('.tf-template-3 .tf-details-menu a').on('click', function() {
             $(this).addClass('tf-hashlink');
