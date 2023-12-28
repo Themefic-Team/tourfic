@@ -83,7 +83,11 @@
             if ($.trim(checkin) === '' && tf_params.date_apartment_search && posttype === 'tf_apartment') {
 
                 if ($('#tf-required').length === 0) {
-                    $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
+                    if($('.tf_booking-dates .tf_label-row').length === 1){
+                        $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
+                    }else{
+                        $("#check-in-out-date").click();
+                    }
                 }
                 return;
             }

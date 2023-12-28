@@ -34,7 +34,7 @@
                     <!-- Booking form Start -->
                     <div class="tf-archive-search-form tf-booking-form-wrapper">
                         <form action="<?php echo tf_booking_search_action(); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
-                            <?php tf_archive_sidebar_search_form('tf_hotel'); ?>
+                            <?php tf_archive_sidebar_search_form('tf_apartment'); ?>
                         </form>
                     </div>
                     <!-- Booking form end -->  

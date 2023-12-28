@@ -31,7 +31,6 @@
                         b.innerHTML += `<input type='hidden' value="${value}" data-slug='${key}'>`;
                         b.addEventListener("click", function (e) {
                             let source = this.getElementsByTagName("input")[0];
-                            console.log(source.dataset.slug);
                             inp.value = source.value;
                             inp.closest('input').nextElementSibling.value = source.dataset.slug
                         });

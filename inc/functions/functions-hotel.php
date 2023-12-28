@@ -3967,6 +3967,14 @@ function tf_hotel_archive_popup_qv_callback(){
 		}
 	}
 
+	if( !empty($_POST['post_type']) && "tf_apartment"==$_POST['post_type']){
+		$meta = get_post_meta( $_POST['post_id'], 'tf_apartment_opt', true );
+		$gallery = ! empty( $meta['apartment_gallery'] ) ? $meta['apartment_gallery'] : '';
+		if ( $gallery ) {
+			$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
+		}
+	}
+
 	if ( ! empty( $gallery_ids ) ) {
 	foreach ( $gallery_ids as $key => $gallery_item_id ) {
 	$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
