@@ -12368,6 +12368,12 @@ html {
 .tf-template-3 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done, .tf-template-3 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done {
   background-color: #99948D;
 }
+.tf-template-3 .tf-single-tour-extra .tf_quantity-acrselection .quanity-acr-fields {
+  background-color: #f3f7fa !important;
+  padding: 15px 40px !important;
+  margin-bottom: 10px !important;
+  margin-left: 23px !important;
+}
 .tf-template-3 .tf-facilities-wrapper h2 {
   color: #595349;
   font-size: 32px !important;
