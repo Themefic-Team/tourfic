@@ -1198,7 +1198,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 				<div class="tf-available-room-content-left">
 					<div class="tf-card-heading-info">
 					<div class="tf-section-title-and-location">
-						<h2 class="tf-section-title"><?php echo tourfic_character_limit_callback( get_the_title(), 55 ); ?></h2>
+						<h2 class="tf-section-title"><?php echo tourfic_character_limit_callback( get_the_title($post_id), 55 ); ?></h2>
 						<?php
 						if ( ! empty( $address ) ) {
 						?>

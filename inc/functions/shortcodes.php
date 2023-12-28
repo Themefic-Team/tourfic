@@ -564,7 +564,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 	}elseif(!empty($_GET['type']) && $_GET['type'] == "tf_tours"){
 		$tf_defult_views = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour_archive_view'] ) ? tf_data_types(tfopt( 'tf-template' ))['tour_archive_view'] : 'list';
 	}else{
-		$tf_defult_views = 'list';
+		$tf_defult_views = ! empty( tf_data_types(tfopt( 'tf-template' ))['apartment_archive_view'] ) ? tf_data_types(tfopt( 'tf-template' ))['apartment_archive_view'] : 'list';
 	}
 
 	$paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
