@@ -1163,14 +1163,33 @@ function tf_single_tour_booking_form( $post_id ) {
                                                             <span class="checkmark"></span>
                                                         </div>
                                                         <div class="tf-extra-content">
-                                                            <h5><?php _e( $tour_extra['title'] ); ?> <?php echo $tour_extra_pricetype == "fixed" ? esc_html( "(Fixed Price)" ) : esc_html( "(Per Person Price)" ); ?>
+                                                            <h5><?php _e( $tour_extra['title'] ); ?> <?php echo $tour_extra_pricetype == "fixed" ? esc_html( "(Fixed Price)" ) : ($tour_extra_pricetype == "person" ? esc_html( "(Per Person Price)" ) : esc_html( "(Per unit Price)" )); ?>
                                                                 <span><?php echo wc_price( $tour_extra['price'] ); ?></span></h5>
 															<?php
 															if(!empty($tour_extra['desc'])){ ?>
                                                             <p><?php echo esc_html( $tour_extra['desc'] ); ?></p>
 															<?php } ?>
+															
                                                         </div>
                                                     </label>
+													<?php if($tour_extra_pricetype == "quantity") : ?>
+														<div class="tf-field-group tf-mt-16 tf_quantity-acrselection">
+															<div class="tf-field quanity-acr-fields">
+
+																<div class="quanity-acr-label">
+																	<?php echo __("Select Quantity", "tourfic"); ?>		
+																</div>
+
+																<div class="quanity-acr-select tf-flex">
+																	<div class="quanity-acr-dec">-</div>
+																	<input type="number" name="extra-quantity" id="extra-quantity" min="1" value="1">
+																	<div class="quanity-acr-inc">+</div>
+																</div>
+
+															</div>
+															
+														</div>
+													<?php endif; ?>
                                                 </div>
 											<?php }
 										} ?>
@@ -4416,7 +4435,8 @@ function tf_tour_booking_popup_callback() {
 	$tour_extra_meta = ! empty( $meta['tour-extra'] ) ? $meta['tour-extra'] : '';
 	if(!empty($tour_extra_meta)){
 		$tours_extra = explode(',', $_POST['tour_extra']);
-		foreach($tours_extra as $extra){
+		$tour_extra_quantity = explode(',', $_POST["tour_extra_quantity"]);
+		foreach($tours_extra as $extra_key => $extra){
 			$tour_extra_pricetype = !empty( $tour_extra_meta[$extra]['price_type'] ) ? $tour_extra_meta[$extra]['price_type'] : 'fixed';
 			if( $tour_extra_pricetype=="fixed" ){
 				if(!empty($tour_extra_meta[$extra]['title']) && !empty($tour_extra_meta[$extra]['price'])){
@@ -4426,7 +4446,15 @@ function tf_tour_booking_popup_callback() {
 						'price' => $tour_extra_meta[$extra]['price']
 					);
 				}
-			}else{
+			} else if ($tour_extra_pricetype == "quantity") {
+				if(!empty($tour_extra_meta[$extra]['title']) && !empty($tour_extra_meta[$extra]['price'])){
+					$tour_extra_total += $tour_extra_meta[$extra]['price'] * $tour_extra_quantity[$extra_key];
+					$tour_extra_title_arr[] =  array(
+						'title' => $tour_extra_meta[$extra]['title'] . " x " . $tour_extra_quantity[$extra_key],
+						'price' => $tour_extra_meta[$extra]['price'] * $tour_extra_quantity[$extra_key]
+					);
+				}
+			} else{
 				if(!empty($tour_extra_meta[$extra]['price']) && !empty($tour_extra_meta[$extra]['title'])){
 					$tour_extra_total += ($tour_extra_meta[$extra]['price']*$total_people);
 					$tour_extra_title_arr[] =  array(
