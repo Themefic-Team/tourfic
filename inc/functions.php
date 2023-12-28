@@ -511,6 +511,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 
 	$tf_tour_arc_selected_template  = ! empty( tf_data_types( tfopt( 'tf-template' ) )['tour-archive'] ) ? tf_data_types( tfopt( 'tf-template' ) )['tour-archive'] : 'design-1';
 	$tf_hotel_arc_selected_template = ! empty( tf_data_types( tfopt( 'tf-template' ) )['hotel-archive'] ) ? tf_data_types( tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
+	$tf_apartment_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['apartment-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 
 	$disable_child_search = ! empty( tfopt( 'disable_child_search' ) ) ? tfopt( 'disable_child_search' ) : '';
 	$disable_infant_search = ! empty( tfopt( 'disable_infant_search' ) ) ? tfopt( 'disable_infant_search' ) : '';
@@ -624,7 +625,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 		<?php } ?>
 
 	<?php }
-	if ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-2" ) || ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-2" ) ) { ?>
+	if ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-2" ) || ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-2" ) || ( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template == "design-1" ) ) { ?>
 		<div class="tf-booking-form-fields <?php echo $post_type == 'tf_tours' ? esc_attr( 'tf-tour-archive-block' ) : ''; ?>">
 			<div class="tf-booking-form-location">
 				<span class="tf-booking-form-title"><?php _e("Location", "tourfic"); ?></span>
@@ -638,7 +639,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                     <input type="hidden" name="place" id="tf-place" value="<?php echo $place_value ?? ''; ?>"/>
 				</label>
 			</div>
-			<?php if ( $post_type == 'tf_hotel' ) { ?>
+			<?php if ( $post_type == 'tf_hotel' || $post_type == "tf_apartment" ) { ?>
 			<div class="tf-booking-form-checkin">
 				<span class="tf-booking-form-title"><?php _e("Check in", "tourfic"); ?></span>
 				<div class="tf-booking-date-wrap">
@@ -710,7 +711,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 						</svg>
 					</div>
 				</div>
-				<?php } if ( $post_type == 'tf_tours' ) { ?>
+				<?php } if ( $post_type == 'tf_tours' || $post_type == 'tf_apartment' ) { ?>
 				<div class="tf-booking-form-guest-and-room-inner">
 					<span class="tf-booking-form-title"><?php _e("Guests", "tourfic"); ?></span>
 					<div class="tf-booking-guest-and-room-wrap">
@@ -823,7 +824,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 		</script>
 		<?php } ?>
 
-		<?php if ( $post_type == 'tf_hotel' ) { ?>
+		<?php if ( $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ) { ?>
 		
 			<script>
 			(function ($) {
@@ -1248,7 +1249,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 			</div>
 			<?php } ?>
 			<div class="tf-booking-form-guest-and-room">
-				<?php if ( $post_type !== 'tf_tours' ) { ?>
+				<?php if ( $post_type == 'tf_hotel' ) { ?>
 				<div class="tf-booking-form-guest-and-room-inner">
 					<span class="tf-booking-form-title"><?php _e("Guests & rooms", "tourfic"); ?></span>
 					<div class="tf-booking-guest-and-room-wrap tf-archive-guest-info">
@@ -1295,7 +1296,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 								<div class="acr-inc">+</div>
 							</div>
 						</div>
-						<?php if ( $post_type !== 'tf_tours' ) { ?>
+						<?php if ( $post_type == 'tf_hotel' ) { ?>
 						<div class="tf_acrselection">
 							<div class="acr-label"><?php _e("Rooms", "tourfic"); ?></div>
 							<div class="acr-select">
@@ -2000,12 +2001,14 @@ function tf_search_result_ajax_sidebar() {
 				}
 			}
 			$total_pages = ceil( $total_filtered_results / $post_per_page );
-			echo "<div class='tf_posts_navigation tf_posts_ajax_navigation'>";
-			echo paginate_links( array(
-				'total'   => $total_pages,
-				'current' => $current_page
-			) );
-			echo "</div>";
+			if($total_pages>1){
+				echo "<div class='tf_posts_navigation tf_posts_ajax_navigation'>";
+				echo paginate_links( array(
+					'total'   => $total_pages,
+					'current' => $current_page
+				) );
+				echo "</div>";
+			}
 		}
 	} else {
 

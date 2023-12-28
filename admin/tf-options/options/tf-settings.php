@@ -739,6 +739,24 @@ TF_Settings::option( 'tf_settings', array(
 									'default'  => 'default',
 								),
 								array(
+									'id'      => 'apartment_archive_design_1_bannar',
+									'type'    => 'image',
+									'label'    => __( 'Archive & Search Result Banner Image', 'tourfic' ),
+									'subtitle' => __( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
+									'library' => 'image',
+									'dependency' => array( 'apartment-archive', '==', 'design-1' ),
+								),
+								array(
+									'id'         => 'apartment_archive_view',
+									'type'       => 'select',
+									'label'      => __( 'Archive Layout', 'tourfic' ),
+									'options'    => array(
+										'list' => __( 'List', 'tourfic' ),
+										'grid' => __( 'Grid', 'tourfic' ),
+									),
+									'default'    => 'List',
+								),
+								array(
 									'id'      => 'apartment_archive_notice',
 									'type'    => 'notice',
 									'content' => __( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
