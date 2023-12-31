@@ -2955,7 +2955,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                                 <a href="<?php echo $url; ?>"><h3 class="tourfic_hotel-title"><?php the_title(); ?></h3></a>
                             </div>
 							<?php
-							if ( $address ) {
+							if ( !empty($address) ) {
 								echo '<div class="tf-map-link">';
 								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . $address . '</span>';
 								echo '</div>';

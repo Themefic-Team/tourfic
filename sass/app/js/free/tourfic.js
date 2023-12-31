@@ -1781,10 +1781,9 @@
     });
 
     /*
-    * Template 2 Script Start
+    * Template 3 Script Start
     * @author: Jahid
     */
-
     $(document).ready(function () {
 
         $('.tf-template-3 .tf-reviews-slider').slick({
@@ -1875,11 +1874,9 @@
             $('span.tf-room').html(room);
         })
 
-        $(document).mouseup(function(e)
-        {
+        $(document).mouseup(function(e) {
             var container = $(".tf-template-3 .tf_acrselection-wrap");
-            if (!container.is(e.target) && container.has(e.target).length === 0)
-            {
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
                 $(".tf-template-3 .tf-booking-form-guest-and-room .tf_acrselection-wrap").removeClass("tf-show");
             }
         });
@@ -1921,9 +1918,106 @@
     });
 
     /*
-    * Template 2 Script End
+    * Template 3 Script End
     * @author: Jahid
     */
+
+    /*
+    * Template 4 Script Start
+    * @author: Foysal
+    */
+    $(document).ready(function () {
+        $('.tf-hotel-template-4 .acr-inc , .tf-hotel-template-4 .acr-dec').on('click', function() {
+
+            if ($('input#infant').length){
+                var guest = Number($('input#adults').val()) + Number($('input#children').val()) + Number($('input#infant').val()) ;
+            }else{
+                var guest = Number($('input#adults').val()) + Number($('input#children').val());
+            }
+            if (guest.toString().length < 2) {
+                guest = '0' + guest;
+            }
+            $('span.tf-guest').html(guest);
+            var room = Number($('input#room').val()) ;
+            if (room.toString().length < 2) {
+                room = '0' + room;
+            }
+            $('span.tf-room').html(room);
+        })
+
+        $(document).mouseup(function(e) {
+            var container = $(".tf-hotel-template-4 .tf_acrselection-wrap");
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                $(".tf-hotel-template-4 .tf-search-guest-and-room .tf_acrselection-wrap").removeClass("tf-show");
+            }
+        });
+        $(".tf-hotel-template-4 .tf-search-guest-and-room").click(function(){
+            $(".tf-hotel-template-4 .tf-search-guest-and-room .tf_acrselection-wrap").addClass("tf-show");
+        });
+
+
+
+        // GOOGLE MAP INITIALIZE
+        var mapLocations = $('#map-datas').html();
+        if ($('#map-datas').length && mapLocations.length) {
+            console.log('mapLocations', mapLocations)
+            googleMapInit(mapLocations);
+        }
+
+        // GOOGLE MAP INIT
+        function googleMapInit(mapLocations) {
+            if (!mapLocations) {
+                return false;
+            }
+            var locations = JSON.parse(mapLocations);
+
+            var map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 1,
+                center: new google.maps.LatLng(23.8697847, 90.4219536),
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                styles: [
+                    {elementType: 'labels.text.fill', stylers: [{color: '#44348F'}]},
+                ]
+            });
+
+            var infowindow = new google.maps.InfoWindow({
+                maxWidth: 300
+            });
+
+            // Add some markers to the map.
+            // Note: The code uses the JavaScript Array.prototype.map() method to
+            // create an array of markers based on a given "locations" array.
+            // The map() method here has nothing to do with the Google Maps API.
+            var markers = new Array();
+            locations.map(function (location, i) {
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(location['lat'], location['lng']),
+                    map: map,
+                    icon: document.getElementById('map-marker').dataset.marker
+                });
+                markers.push(marker);
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        infowindow.setContent(window.atob(location['content']));
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+            });
+
+            // Add a marker clusterer to manage the markers.
+            var markerCluster = new MarkerClusterer(map, markers, {
+                imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+            });
+
+            //  Create a new viewpoint bound
+            var bounds = new google.maps.LatLngBounds();
+            markers.map(function (marker, index) {
+                bounds.extend(marker.position);
+            });
+            //  Fit these bounds to the map
+            map.fitBounds(bounds);
+        }
+    });
 
 })(jQuery, window);
 
