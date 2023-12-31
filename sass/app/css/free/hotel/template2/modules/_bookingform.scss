@@ -372,7 +372,87 @@
     top: 116%;
     display: block !important;
 }
-
+#tf-apartment-booking{
+    box-shadow: none;
+    padding: 0px;
+    margin: 0;
+    border: none;
+    border-radius: none;
+    .tf-apartment-form-header{
+        h3{
+            span{
+                color: #B58E53 !important;
+                font-size: 32px !important;
+                font-style: normal;
+                font-weight: 700 !important;
+                line-height: 120%; /* 38.4px */
+                bdi{
+                    font-size: 32px !important;
+                }
+            }
+            span.per-pricing-type{
+                font-size: 18px !important;
+            }
+        }
+    }
+    .tf-apartment-form-fields{
+        background-color: transparent;
+        border: 0px solid;
+        margin: 0;
+        border-radius: none;
+        .tf_booking-dates{
+            .tf-check-in-out-date{
+                height: 53px;
+                padding: 16px 32px 16px 16px;
+                background: #FDF9F3;
+                margin-bottom: 32px;
+                .tf_label-row{
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+            }
+        }
+        .tf-apartment-guest-row{
+            border-top: 0px solid #e1e5ea;
+            padding: 0px;
+            .tf_selectperson-wrap{
+                display: block;
+                .tf-form-title{
+                    margin-bottom: 24px;
+                    p{
+                        color: #595349;
+                        font-family: Cormorant Garamond;
+                        font-size: 32px !important;
+                        font-style: normal;
+                        font-weight: 700 !important;
+                        line-height: 120%;
+                    }
+                }
+            }
+        }
+    }
+    .tf-btn-booking{
+        button,
+        a{
+            border: 1px solid #B58E53;
+            background: #B58E53;
+            padding: 12px 32px;
+            color: #FDF9F3;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 150%;
+            width: 100%;
+            transition: .3s all ease;
+            text-decoration: none;
+            display: block;
+            &:hover{
+                background-color: #917242;
+            }
+        }
+    }
+}
 .tf-search-date-wrapper {
 
     background: #FAEEDC;

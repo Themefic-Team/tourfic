@@ -159,24 +159,9 @@
 
         </div>
         <div class="tf-details-right tf-sitebar-widgets">
-            <?php if( !empty($meta['nearby-places']) ){ ?>
-            <div class="tf-whats-around tf-single-widgets">
-                <h2 class="tf-section-title"><?php echo !empty($meta['section-title']) ? esc_html($meta['section-title']) : esc_html("What’s around?"); ?></h2>
-                <ul>
-                    <?php foreach($meta['nearby-places'] as $place){ ?>
-                    <li>
-                        <span>
-                        <?php if( !empty( $place['place-icon'] )){ ?>
-                            <i class="<?php echo esc_attr($place['place-icon']); ?>"></i>
-                        <?php } ?> 
-                        <?php echo !empty( $place['place-title'] ) ? esc_html($place['place-title']) : ''; ?>
-                        </span>
-                        <span><?php echo !empty( $place['place-dist'] ) ? esc_html($place['place-dist']) : ''; ?></span>
-                    </li>
-                    <?php } ?>
-                </ul>
+            <div class="tf-search-date-wrapper tf-single-widgets">
+                <?php tf_apartment_single_booking_form( $comments, $disable_review_sec ); ?>
             </div>
-            <?php } ?>
             
             <div id="hotel-map-location" class="tf-location tf-single-widgets">
                 <h2 class="tf-section-title"><?php _e("Location", "tourfic"); ?></h2>
