@@ -450,6 +450,7 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
 = 2.11.2 - 01 January 2024 =
 
 - Fixed: Performance issue fixed
