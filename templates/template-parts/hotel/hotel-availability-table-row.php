@@ -16,7 +16,6 @@ $room_book_by         = ! empty( $room['booking-by'] ) ? $room['booking-by'] : 1
 $room_book_url        = ! empty( $room['booking-url'] ) ? $room['booking-url'] : '';
 $tf_hotel_reserve_button_text = !empty(tfopt('hotel_booking_form_button_text')) ? stripslashes(sanitize_text_field(tfopt('hotel_booking_form_button_text'))) : "I'll Reserve";
 
-var_dump($tf_hotel_reserve_button_text);
 if ( $tf_hotel_selected_template_check == "design-1" ) {
 	if ( empty( $tf_room_disable_date ) ) {
 		?>
