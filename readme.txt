@@ -1,5 +1,5 @@
 === Tourfic – Ultimate Hotel Booking, Travel Booking & Apartment Booking WordPress Plugin | WooCommerce Booking ===
-Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
+Contributors: themefic, kamrul0424, jahidcse, mehedi890, mainulsunvi, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings, apartment-booking, apartment-rental
 Requires at least: 5.4
 Tested up to: 6.4.2
