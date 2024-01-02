@@ -1660,6 +1660,13 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'label' => __( 'Title of the Description Section', 'tourfic' ),
 					'default' => __("Description", 'tourfic'),
 				),
+
+				array(
+					'id'    => 'tour-features-section-title',
+					'type'  => 'text',
+					'label' => __( 'Title of the Features Section', 'tourfic' ),
+					'default' => __("Popular Features", 'tourfic'),
+				),
 				
 				array(
 					'id'    => 'map-section-title',
