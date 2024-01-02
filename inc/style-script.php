@@ -79,6 +79,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 		// Template 3 Global Settings
 		$tf_global_bg_clr_t3 = !empty(tf_data_types(tfopt( 'tourfic-template3-bg' ))['template3-bg']) ? tf_data_types(tfopt( 'tourfic-template3-bg' ))['template3-bg'] : '';
 		$tf_global_highlight_clr_t3 = !empty(tf_data_types(tfopt('tourfic-template3-bg'))["template3-highlight"]) ? tf_data_types(tfopt('tourfic-template3-bg'))["template3-highlight"] : '';
+		$tf_global_icon_clr_t3 = !empty(tf_data_types(tfopt('tourfic-template3-bg'))["template3-icon-color"]) ? tf_data_types(tfopt('tourfic-template3-bg'))["template3-icon-color"] : '';
 
 		$output = '';
 		
@@ -138,6 +139,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-3 .tf_tours_booking .tf-field-calander .tf-field,
 			.tf-template-3 .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question .tf-question-desc,
 			.tf-template-3 .tf-policies-wrapper .tf-policies p,
+			.tf-template-3 .tf-tour-contact-informations .tf-contact-details-items .tf-list li a,
 			#tour_room_details_qv p{
 				color: '.$tf_template1_p_global_reg.'
 			}';
@@ -332,6 +334,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right a.view-hotel,
 			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content button,
 			.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-review-submit input#comment-submit,
+			.tf-template-3 .tf-mobile-booking-btn span,
 			.tf-template-3 .tf-modify-search-btn{
 				color: '.$tf_primary_color_reg.' !important;
 			}
@@ -353,6 +356,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right a.view-hotel:hover,
 			.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-review-submit input#comment-submit:hover,
 			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content button:hover,
+			.tf-template-3 .tf-mobile-booking-btn span:hover,
 			.tf-template-3 .tf-modify-search-btn:hover {
 				color: '.$tf_primary_color_hov.' !important;
 			}
@@ -374,6 +378,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right a.view-hotel,
 			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content button,
 			.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-review-submit input#comment-submit,
+			.tf-template-3 .tf-mobile-booking-btn,
 			.tf-template-3 .tf-modify-search-btn {
 				background: '.$tf_primary_bg_color_reg.' !important;
 			}
@@ -398,6 +403,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right a.view-hotel:hover,
 			.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-review-submit input#comment-submit:hover,
 			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content button:hover,
+			.tf-template-3 .tf-mobile-booking-btn:hover,
 			.tf-template-3 .tf-modify-search-btn:hover {
 				background: '.$tf_primary_bg_color_hov.' !important;
 			}
@@ -528,6 +534,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-3 .tf_tours_booking .tf-field-calander .tf-field,
 			.tf-template-3 .tf-search-date-wrapper .acr-select input[type=tel],
 			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room,
+			.tf-template-3 .tf-itinerary-wrapper .tf-itinerary-wrapper span.tf-itinerary-time,
 			.tf-template-3 {
 				background: '.$tf_global_bg_clr_t3.' !important;
 			}
@@ -547,8 +554,30 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-3 .tf-search-date-wrapper,
 			.tf-template-3 button.tf-review-open.button, .tf-template-3 .tf-reting-field button,
 			.tf-template-3 .tf-review-form-wrapper,
+			tf-template-3 .tf-tour-contact-informations,
+			.tf-template-3 .tf-itinerary-wrapper .tf-itinerary-wrapper .tf-single-itinerary,
+			.tf-template-3 .tf-itinerary-wrapper .section-title a,
+			.tf-template-3 .tf-send-inquiry,
+			.tf-template-3 .tf-tour-contact-informations,
+			.tf-template-3 .tf-popup-wrapper.tf-room-popup .tf-popup-inner,
+			.tf-template-3 .tf-popup-wrapper.tf-show .tf-popup-inner,
+			.tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list,
 			.tf-template-3 .tf-section {
 				background: '.$tf_global_highlight_clr_t3.' !important;
+			}
+			';
+		}
+		if(!empty($tf_global_icon_clr_t3)) {
+			$output .= '
+			.tf-template-3 .tf-tour-contact-informations .tf-contact-details-items .tf-list li i,
+			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper .tf-feature-block i,
+			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-popular-facilities>ul li i,
+			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left ul li i,
+			.tf-template-3 .tf-facilities-wrapper .tf-facilities .tf-facility-item h4 i,
+			.tf-template-3 .tf-popup-wrapper.tf-room-popup .tf-popup-inner .tf-popup-body .tf-popup-right ul li i,
+			.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location i,
+			.tf-template-3 .tf-section {
+				color: '.$tf_global_icon_clr_t3.' !important;
 			}
 			';
 		}
