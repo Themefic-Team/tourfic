@@ -7559,6 +7559,7 @@ div#tf-contact-info {
 .tf-hero-gallery .tf-gallery-featured > img {
   min-height: 474px;
   max-height: 474px;
+  object-fit: cover;
 }
 @media only screen and (min-width: 767.99px) and (max-width: 991px) {
   .tf-hero-gallery .tf-gallery-featured > img {
@@ -8036,8 +8037,9 @@ div#tf-contact-info {
   position: relative;
 }
 .tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .ininerary-other-gallery a img {
-  height: 100%;
+  height: 91px;
   border-radius: 5px;
+  object-fit: cover;
 }
 .tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .ininerary-other-gallery a:nth-child(1), .tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .ininerary-other-gallery a:nth-child(2), .tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .ininerary-other-gallery a:nth-child(3), .tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .ininerary-other-gallery a:nth-child(4), .tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .ininerary-other-gallery a:nth-child(5) {
   display: block;
