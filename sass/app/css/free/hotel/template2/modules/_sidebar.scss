@@ -160,10 +160,8 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 .tf-tour-contact-informations {
-    width: 90%;
     background-color: #fcf4e8;
     padding: 24px;
-    height: 230px;
 
     .tf-contact-details-title {
         h3 {
@@ -176,8 +174,8 @@ button.tf-review-open.button, .tf-reting-field button {
         .tf-list {
         li {
             margin-top: 5px;
-            margin-bottom: 20px;
-            
+            margin-bottom: 15px;
+            align-items: center;
             
             a {
                 text-decoration: none;

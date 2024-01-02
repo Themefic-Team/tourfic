@@ -7898,6 +7898,31 @@ div#tf-contact-info {
   }
 }
 
+.tf-tour-features ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  list-style-type: none;
+  gap: 5px;
+}
+.tf-tour-features ul li {
+  display: inline-flex;
+  justify-content: flex-start;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 10px 15px;
+  text-transform: capitalize;
+  margin: 5px 16px 10px 0px;
+  box-shadow: 0px 0px 24px 5px #E0E8EE;
+  font-size: 15px;
+  font-weight: 300;
+}
+.tf-tour-features ul li .tf-tour-features-icon {
+  margin-right: 8px;
+}
+
 .tf-highlights-wrapper {
   background: #fff;
   border-radius: 5px;
@@ -13212,10 +13237,8 @@ html {
   }
 }
 .tf-template-3 .tf-tour-contact-informations {
-  width: 90%;
   background-color: #fcf4e8;
   padding: 24px;
-  height: 230px;
 }
 .tf-template-3 .tf-tour-contact-informations .tf-contact-details-title h3 {
   font-weight: 700 !important;
@@ -13224,7 +13247,8 @@ html {
 }
 .tf-template-3 .tf-tour-contact-informations .tf-contact-details-items .tf-list li {
   margin-top: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  align-items: center;
 }
 .tf-template-3 .tf-tour-contact-informations .tf-contact-details-items .tf-list li a {
   text-decoration: none;
@@ -14084,6 +14108,12 @@ html {
   }
   .tf-template-3 .tf-archive-details .tf-available-room .tf-available-room-content .tf-available-room-content-right a {
     width: 100% !important;
+  }
+  .tf-template-3 .tf-tour-contact-informations {
+    margin-bottom: 32px;
+    margin-top: 32px;
+    margin-right: 16px;
+    margin-left: 16px;
   }
   .tf-template-3.tf-tour-single .tf-content-wrapper .tf-details {
     display: flow-root;
