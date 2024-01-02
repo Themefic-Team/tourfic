@@ -850,7 +850,7 @@ div#tf-contact-info {
                     .tf-single-tour-extra{
                         label{
                             display: flex;
-                            padding-bottom: 16px;
+                            padding-bottom: 15px;
                             align-items: baseline;
                             .tf-extra-check-box{
                                 position: relative;
@@ -923,6 +923,67 @@ div#tf-contact-info {
                                     line-height: 20px !important;
                                     margin: 0 !important;
                                 }
+                            }
+                        }
+                        .quantity-active {
+                            display: block !important;
+                        }
+                        .tf_quantity-acrselection {
+                            width: 70%;
+                            display: none;
+                            margin-left: 23px;
+                            margin-bottom: 25px;
+                            margin-top: -5px;
+
+                            .quanity-acr-label {
+                                min-width: 95px;
+                            }
+
+                            .quanity-acr-fields {
+                                display: flex;
+                                align-items: center;
+                                padding: 15px !important;
+                            }
+
+                            .quanity-acr-select {
+                                justify-content: flex-end;
+                            }
+
+                            .quanity-acr-dec, .quanity-acr-inc {
+                                padding: 10px;
+                                user-select: none;
+                                height: auto;
+                                border: 1.2px solid #003162;
+                                margin: 0px 0px;
+                                text-align: center;
+                                cursor: pointer;
+                                border-radius: 5px;
+                                background: #fff;
+                                color: #003162;
+                                display: inline-flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-weight: 700;
+                                line-height: 10px;
+                            }
+
+                            input[type=number] {
+                                width: 25% !important;
+                                padding: 0px !important;
+                                margin: 0px !important;
+                                border: 0px !important;
+                                box-shadow: none;
+                                background: rgba(0,0,0,0) !important;
+                                text-align: center;
+                                font-size: 16px;
+                                font-weight: 600;
+                                color: #686e7a !important;
+                            }
+
+                            input::-webkit-outer-spin-button,
+                            input::-webkit-inner-spin-button {
+                                -webkit-appearance: none;
+                                margin: 0;
                             }
                         }
                     }
