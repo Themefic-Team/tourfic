@@ -138,6 +138,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-3 .tf_tours_booking .tf-field-calander .tf-field,
 			.tf-template-3 .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question .tf-question-desc,
 			.tf-template-3 .tf-policies-wrapper .tf-policies p,
+			.tf-template-3 .tf-tour-contact-informations .tf-contact-details-items .tf-list li a,
 			#tour_room_details_qv p{
 				color: '.$tf_template1_p_global_reg.'
 			}';
@@ -528,6 +529,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-3 .tf_tours_booking .tf-field-calander .tf-field,
 			.tf-template-3 .tf-search-date-wrapper .acr-select input[type=tel],
 			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room,
+			.tf-template-3 .tf-itinerary-wrapper .tf-itinerary-wrapper span.tf-itinerary-time,
 			.tf-template-3 {
 				background: '.$tf_global_bg_clr_t3.' !important;
 			}
@@ -547,6 +549,10 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-3 .tf-search-date-wrapper,
 			.tf-template-3 button.tf-review-open.button, .tf-template-3 .tf-reting-field button,
 			.tf-template-3 .tf-review-form-wrapper,
+			.tf-template-3 .tf-tour-contact-informations,
+			.tf-template-3 .tf-itinerary-wrapper .tf-itinerary-wrapper .tf-single-itinerary,
+			.tf-template-3 .tf-itinerary-wrapper .section-title a,
+			.tf-template-3 .tf-send-inquiry,
 			.tf-template-3 .tf-section {
 				background: '.$tf_global_highlight_clr_t3.' !important;
 			}

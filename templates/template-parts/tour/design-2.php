@@ -284,7 +284,7 @@
 
                     if ( ! empty( $tf_enquiry_section_status ) ) {
                     ?>
-                    <div class="tf-send-inquiry">
+                    <div class="tf-send-inquiry tf-single-widgets">
                         <?php 
                         if (!empty($tf_enquiry_section_icon)) {
                             ?>
