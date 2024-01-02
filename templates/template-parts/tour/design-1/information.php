@@ -101,7 +101,9 @@
     ?>
     <div class="tf-tour-features tf-mb-40 tf-template-section">
         <div class="tf-tour-features-container">
-            <h2 class="tf-title tf-section-title"><?php esc_html_e( 'Popular Features', 'tourfic' ); ?></h2>
+            <?php if (!empty($meta["tour-features-section-title"])) : ?>
+                <h2 class="tf-title tf-section-title"><?php esc_html_e( $meta["tour-features-section-title"], 'tourfic' ); ?></h2>
+            <?php endif; ?>
             <ul class="tf-tour-feature-list">
 
                 <?php foreach ( $features as $feature ) {
@@ -115,8 +117,8 @@
                     } ?>
 
                    <?php if( !empty($feature->name) ) : ?>
-                        <li class="single-feature-box">
-                            <span><?php echo $feature_icon ?? ''; ?></span>
+                        <li>
+                            <span class="tf-tour-features-icon"><?php echo !empty($feature_meta['icon-fa']) || !empty($feature_meta['icon-c'])  ? $feature_icon : ''; ?></span>
                             <span><?php echo $feature->name; ?></span>
                         </li>
                    <?php endif; ?>
