@@ -335,7 +335,7 @@
                 $tf_enquiry_section_button = !empty($meta['h-enquiry-option-btn']) ? esc_html($meta['h-enquiry-option-btn']) : '';
                 if(!empty($tf_enquiry_section_status) && ( !empty($tf_enquiry_section_icon) || !empty($tf_enquiry_section_title) || !empty($enquery_button_text))){
                 ?>
-                <div class="tf-send-inquiry">
+                <div class="tf-send-inquiry tf-single-widgets">
                     <?php 
                     if (!empty($tf_enquiry_section_icon)) {
                         ?>

@@ -10837,7 +10837,7 @@ html {
   height: 390px;
 }
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content {
-  width: calc(100% - 230px);
+  width: calc(100% - 283px);
   display: flex;
   justify-content: space-between;
   padding: 24px;
@@ -13244,7 +13244,7 @@ html {
 }
 .tf-template-3 .tf-tour-contact-informations .tf-contact-details-title h3 {
   font-weight: 700 !important;
-  font-size: 30px !important;
+  font-size: 30px;
   margin-bottom: 5px;
 }
 .tf-template-3 .tf-tour-contact-informations .tf-contact-details-items .tf-list li {
