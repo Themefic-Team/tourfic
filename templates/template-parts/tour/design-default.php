@@ -363,7 +363,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     <?php endif; ?>
 
     <?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) : ?> 
-        <?php if ( $features ) { ?>
+        <?php if ( $features && !empty($meta["features"])) { ?>
         <!-- Start features -->
         <div class="tf_features sp-50">
             <div class="tf-container">

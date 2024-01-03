@@ -98,7 +98,7 @@
 <?php } ?>
 
 <?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) : ?> 
-    <?php if( $features ) : ?>
+    <?php if( $features && !empty($meta["features"]) ) : ?>
         <div class="tf-tour-features tf-mb-40 tf-template-section">
             <div class="tf-tour-features-container">
                 <?php if (!empty($meta["tour-features-section-title"])) : ?>
