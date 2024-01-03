@@ -616,10 +616,12 @@ if( !function_exists( 'tf_hotel_css' ) ){
 		'; }
 		if( $tf_share_color_reg  ) { $output .= '
 			.tf-share .share-toggle i, .tf-single-page .tf-section.tf-single-head .tf-share > a i,
+			.tf-wishlist-button i,
 			.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share a.share-toggle i {color: '.$tf_share_color_reg.' !important;}
 		'; }
 		if( $tf_share_color_hov  ) { $output .= '
 			.tf-share .share-toggle i:hover, .tf-single-page .tf-section.tf-single-head .tf-share > a i:hover,
+			.tf-wishlist-button i:hover,
 			.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share a.share-toggle:hover i {color: '.$tf_share_color_hov.' !important;}
 		'; }
 		if( $tf_gradient_one_reg && $tf_gradient_two_reg  ) { $output .= '

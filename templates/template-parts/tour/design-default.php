@@ -362,7 +362,8 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     <!-- Highlight section end -->
     <?php endif; ?>
 
-    <?php if ( $features ) { ?>
+    <?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) : ?> 
+        <?php if ( $features ) { ?>
         <!-- Start features -->
         <div class="tf_features sp-50">
             <div class="tf-container">
@@ -389,6 +390,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
         </div>
         <!-- End features -->
     <?php } ?>
+    <?php endif; ?>
     <!-- Include-Exclude section Start -->
     <?php
     if ( $inc || $exc ) :
