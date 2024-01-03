@@ -178,7 +178,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-container-inner p,
 			.tf-main-wrapper p,
 			#tour_room_details_qv p,
-			.tf-container p{
+			.tf-container p,
+			.hero-booking .tf_booking-widget{
 				font-weight: '.$tf_global_font_weight_p.' !important;
 				font-size: '.$tf_global_font_p.'px !important;
 				font-style: '.$tf_global_font_style_p.' !important;

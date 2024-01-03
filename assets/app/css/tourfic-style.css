@@ -2723,6 +2723,55 @@ div#tf-destinationautocomplete-list div:before {
     display: flow-root;
   }
 }
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .autocomplete-items {
+  max-height: 140px;
+  position: absolute;
+  background: #fcf4e8;
+  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #aaa #eee;
+  padding: 8px;
+  z-index: 99;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 0px solid;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .autocomplete-items {
+    top: 97px !important;
+  }
+}
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .autocomplete-items::-webkit-scrollbar {
+  width: 5px;
+}
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .autocomplete-items::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 4px;
+}
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .autocomplete-items::-webkit-scrollbar-track {
+  background-color: #eee;
+}
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  margin-bottom: 4px;
+  color: #444;
+  display: block;
+  transition: 0.3s all ease;
+  border-bottom: 0px solid;
+}
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .autocomplete-items div:last-child {
+  margin-bottom: 0px;
+}
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .autocomplete-items div:hover {
+  background: #FAEEDC;
+}
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .autocomplete-items div::before {
+  display: none;
+}
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields {
   padding: 24px 40px;
   display: flex;
@@ -4864,6 +4913,10 @@ div#tf-contact-info {
 
 .tf-ititnerary-img {
   flex-basis: 30%;
+}
+.tf-ititnerary-img img {
+  width: 100%;
+  object-fit: cover;
 }
 
 .tf-accordion-content a:focus {
