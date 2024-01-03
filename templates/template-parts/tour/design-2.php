@@ -166,7 +166,7 @@
                         <div class="tf-tour-contact-informations tf-single-widgets">
                             <?php if( ! empty( $meta['contact-info-section-title']) ) : ?> 
                                 <div class="tf-contact-details-title">
-                                    <h3 class="tf-section-title"><?php echo esc_html( $meta['contact-info-section-title'] ) ?></h3>
+                                    <h2 class="tf-section-title"><?php echo esc_html( $meta['contact-info-section-title'] ) ?></h2>
                                 </div>
                             <?php endif; ?>
                             
@@ -284,7 +284,7 @@
 
                     if ( ! empty( $tf_enquiry_section_status ) ) {
                     ?>
-                    <div class="tf-send-inquiry">
+                    <div class="tf-send-inquiry tf-single-widgets">
                         <?php 
                         if (!empty($tf_enquiry_section_icon)) {
                             ?>

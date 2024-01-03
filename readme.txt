@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mainulsunvi, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings, apartment-booking, apartment-rental
 Requires at least: 5.4
 Tested up to: 6.4.2
-Stable tag: 2.11.2
+Stable tag: 2.11.3
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -451,6 +451,14 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 == Changelog ==
 
+= 2.11.3 - 03 January 2024 =
+
+- Improved: New Template Added to Setup Wizard
+- Improved: Added Icon Color Settings( Template - 3 )
+- Improved: Added Tour Features to Design( Template - 2 )(Pro)
+- Fixed: Contact Details Responsive( Template - 3 )
+- Fixed: Enquiry Responsive( Template - 3 )
+
 = 2.11.2 - 01 January 2024 =
 
 - Fixed: Performance issue fixed
@@ -458,7 +466,7 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 = 2.11.1 - 30 December 2023 =
 
-- Added: Add quantity based tour extras and unlimited tour extra(Pro)
+- Added: Add quantity-based tour extras and unlimited tour extra(Pro)
 - Added: Settings for Tour Extra Quantity in Tour Metabox > Tour Extra(Pro)
 - Added: Options in Frontend Tour Booking Popup > Tour Extras(Pro)
 

@@ -472,6 +472,53 @@ div#tf-destinationautocomplete-list {
                 @media #{$max830}{
                     display: flow-root;
                 }
+                .autocomplete-items {
+                    max-height: 140px;
+                    position: absolute;
+                    background: #fcf4e8;
+                    box-shadow: 0px 20px 40px 0px rgba(0,0,0,.1);
+                    overflow: auto;
+                    scrollbar-width: thin;
+                    scrollbar-color: #aaa #eee;
+                    padding: 8px;
+                    z-index: 99;
+                    top: 100%;
+                    left: 0;
+                    right: 0;
+                    border: 0px solid;
+                    @media #{$max767}{
+                        top: 97px !important;
+                    }
+                    &::-webkit-scrollbar{
+                        width: 5px;
+                    }
+                    &::-webkit-scrollbar-thumb {
+                        background-color: #aaa;
+                        border-radius: 4px;
+                    }
+                    &::-webkit-scrollbar-track {
+                        background-color: #eee;
+                    }
+                    div{
+                        padding: 10px;
+                        cursor: pointer;
+                        background-color: #fff;
+                        margin-bottom: 4px;
+                        color: #444;
+                        display: block;
+                        transition: .3s all ease;
+                        border-bottom: 0px solid;
+                        &:last-child{
+                            margin-bottom: 0px;
+                        }
+                        &:hover{
+                            background: #FAEEDC;
+                        }
+                        &::before{
+                            display: none;
+                        }
+                    }
+                }
                 .tf_form_fields{
                     padding: 24px 40px;
                     display: flex;
