@@ -197,6 +197,315 @@
         @include flexbox();
         background: var(--Orange-Background, #FEF9F6);
 
+        .tf-archive-available-rooms-head{
+            @include flexbox();
+            @include align-items(center);
+            @include justify-content(space-between);
+            margin-bottom: 16px;
+
+            .tf-total-results{
+                margin-bottom: 0;
+            }
+
+            .tf-archive-view{
+                @include flexbox();
+                list-style: none;
+                gap: 16px;
+
+                li{
+                    width: 32px;
+                    height: 32px;
+                    line-height: 36px;
+                    border-radius: 8px;
+                    background-color: #fff;
+                    text-align: center;
+                }
+            }
+        }
+
+        .tf-available-rooms {
+            @include flexbox();
+            @include flex-direction(column);
+            gap: 24px;
+
+            .tf-room-table.hotel-room-wrap{
+                overflow: unset;
+                .tf-available-room{
+                    margin-bottom: 32px;
+                    &:last-child{
+                        margin-bottom: 0px;
+                    }
+                }
+            }
+        }
+        .tf-available-room {
+            background: #FDF9F3;
+            display: flex;
+            .tf-available-room-gallery {
+                min-width: 230px;
+                max-width: 230px;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 10px;
+                height: fit-content;
+                .tf-room-gallery {
+                    img {
+                        height: 100%;
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                    &:nth-child(1) {
+                        width: 100%;
+                        height: 270px;
+                    }
+                    &:nth-child(n+2) {
+                        width: 110px;
+                        height: 110px;
+                    }
+                    &.tf-popup-buttons {
+                        background-size: cover;
+                        background-position: center;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        position: relative;
+                        z-index: 1;
+                        img {
+                            height: 30px;
+                            width: 30px;
+                        }
+                        &:after {
+                            position: absolute;
+                            content: "";
+                            height: 100%;
+                            width: 100%;
+                            background: #000;
+                            opacity: .5;
+                            z-index: -1;
+                        }
+                    }
+                }
+                .tf-room-gallery.tf-no-room-gallery{
+                    height: 390px;
+                }
+            }
+            .tf-available-room-content {
+                width: calc(100% - 230px);
+                display: flex;
+                justify-content: space-between;
+                padding: 24px;
+                .tf-available-room-content-left {
+                    width: 395px;
+                    display: flex;
+                    flex-direction: column;
+                    @media #{$max1366}{
+                        width: calc(100% - 206px);
+                    }
+                    @media #{$max1024}{
+                        width: calc(100% - 177px);
+                    }
+                    h3 {
+                        margin-bottom: 20px;
+                    }
+                    h2{
+                        font-weight: 700 !important;
+                        margin-bottom: 24px;
+                    }
+                    ul {
+                        margin: 0;
+                        padding: 0;
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 12px 5px;
+                        @media #{$max767}{
+                            gap: 8px 5px !important;
+                        }
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+                        li {
+                            display: flex;
+                            @media #{$max1024}{
+                                font-size: 16px;
+                            }
+                            @media #{$max767}{
+                                font-size: 14px !important;
+                            }
+                            i {
+                                margin-right: 8px;
+                                font-size: 20px;
+                                width: 20px;
+                                @media #{$max1024}{
+                                    font-size: 14px;
+                                }
+                            }
+                            a {
+                                color: #595349;
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                    h4 {
+                        color: #595349;
+                        font-size: 16px !important;
+                        font-weight: 600 !important;
+                        font-family: "Josefin Sans", sans-serif !important;
+                        margin-bottom: 16px;
+                        margin-top: auto;
+                        @media #{$max991}{
+                            margin-top: 16px;
+                        }
+                    }
+                }
+                .tf-available-room-content-right {
+                    width: 230px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    @media #{$max1024}{
+                        width: 153px !important;
+                    }
+                    .tf-cancellation-refundable-text {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-end;
+                        gap: 8px;
+                        margin-bottom: 24px;
+                        span {
+                            display: flex;
+                            align-items: center;
+                            color: #595349;
+                            svg{
+                                margin-left: 8px;
+                            }
+                        }
+                        i {
+                            font-size: 10px;
+                            border: 1px solid;
+                            height: 14px;
+                            width: 14px;
+                            border-radius: 50px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin-left: 6px;
+                        }
+                    }
+                    .tf-card-pricing-heading{
+                        display: flex;
+                        flex-direction: column;
+                        align-items: end;
+                    }
+                    .tf-available-room-price {
+                        display: flex;
+                        align-items: center;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        justify-content: space-between;
+                        gap: 4px;
+                        margin-bottom: 58px;
+                        .tf-price {
+                            color: #595349;
+                            font-weight: 400;
+                            line-height: 31.20px;
+                            .discount-price{
+                                color: #99948D;
+                                font-family: Josefin Sans;
+                                font-size: 16px;
+                                font-style: normal;
+                                font-weight: 400;
+                                line-height: 130%; /* 20.8px */
+                                display: inline-flex;
+                                gap: 2px;
+                                .amount{
+                                    font-weight: normal !important;
+                                }
+                            }
+                            .sale-price{
+                                font-size: 24px;
+                                display: inline-flex;
+                                .booking-type{
+                                    font-size: 16px;
+                                }
+                            }
+                        }
+                    }
+                    .tf-available-room-select {
+                        color: #595349;
+                        font-size: 16px;
+                        display: flex;
+                        width: fit-content;
+                        margin-bottom: 26px;
+                        gap: 8px;
+                        align-items: center;
+                        margin-top: auto;
+                        select {
+                            height: 37px;
+                            width: 70px;
+                            padding: 8px 20px 8px 13px;
+                            background-size: 10px;
+                            background-position: 80% 49%;
+                            text-align: center;
+                            background-color: #FAEEDC;
+                            border: none;
+                            cursor: pointer;
+                            font-weight: 700;
+                            // option:hover,
+                            // option:checked{
+                            //     accent-color: #B58E53 !important;
+                            //     background: #B58E53 !important;
+                            // }
+                        }
+                    }
+                }
+                .tf-available-room-purchase-summery {
+                    font-size: 12px;
+                    display: flex;
+                    .price-per-night{
+                        margin-left: 5px;
+                    }
+                }
+                .tf-deposit-content{
+                    text-align: right;
+                    label{
+                        font-size: 12px;
+                    }
+                    input[type=checkbox]{
+                        background: #B58E53;
+                        border-color: #B58E53;
+                        accent-color: #B58E53;
+                    }
+                }
+                .roomselectissue{
+                    text-align: right !important;
+                }
+                button,
+                a.tf_air_service,
+                a.availability {
+                    color: #FDF9F3;
+                    font-size: 16px;
+                    font-family: "Josefin Sans", sans-serif;
+                    font-weight: 700;
+                    line-height: 24px;
+                    background: #B58E53;
+                    min-width: 166px;
+                    border: none;
+                    padding: 12px 32px;
+                    display: inline-block;
+                    text-decoration: none;
+                    text-align: center;
+                    transition: .3s all ease;
+                    &:hover{
+                        background-color: #917242;
+                    }
+                }
+                a.availability {
+                    margin-top: auto;
+                }
+            }
+        }
+
         .tf-details-left{
             width: 787px;
             padding: 24px 16px 24px 32px;
@@ -215,7 +524,7 @@
             }
 
             .ic-properties-map{
-                height: 600px;
+                height: 890px;
                 width: 100%;
             }
             #map{
