@@ -15,7 +15,7 @@
         /**
          * Airport Service Price
          */
-        $(document).on("change", "#airport-service", function (e) {
+        /*$(document).on("change", "#airport-service", function (e) {
 
             $("#tour_room_details_loader").show();
             var service_type = $(this).val();
@@ -75,7 +75,7 @@
                     }
                 });
             }
-        });
+        });*/
 
 
         /*
