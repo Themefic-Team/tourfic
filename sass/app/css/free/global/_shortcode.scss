@@ -473,7 +473,7 @@ div#tf-destinationautocomplete-list {
                     display: flow-root;
                 }
                 .autocomplete-items {
-                    max-height: 140px;
+                    max-height: 200px;
                     position: absolute;
                     background: #fcf4e8;
                     box-shadow: 0px 20px 40px 0px rgba(0,0,0,.1);
@@ -484,8 +484,9 @@ div#tf-destinationautocomplete-list {
                     z-index: 99;
                     top: 100%;
                     left: 0;
-                    right: 0;
+                    right: auto;
                     border: 0px solid;
+                    width: 276px;
                     @media #{$max767}{
                         top: 97px !important;
                     }
@@ -621,6 +622,7 @@ div#tf-destinationautocomplete-list {
                         .tf_form_inners{
                             .tf_checkin_dates,
                             .tf_checkout_dates{
+                                display: flex;
                                 span.date{
                                     font-size: 24px;
                                     font-style: normal;
@@ -677,10 +679,13 @@ div#tf-destinationautocomplete-list {
                         .tf_input-inner{
                             display: flow-root;
                             .tf_form_inners{
+                                display: inline-block;
                                 .tf_guest_calculation{
                                     display: flex;
-                                    justify-content: space-between;
+                                    gap: 8px;
                                     .tf_guest_number{
+                                        display: flex;
+                                        align-items: center;
                                         span.guest,
                                         span.room{
                                             font-size: 24px;
@@ -688,7 +693,7 @@ div#tf-destinationautocomplete-list {
                                             font-weight: 400;
                                             line-height: 130%;
                                             color: #FDF9F3;
-                                            margin-right: 16px;
+                                            margin-right: 8px;
                                             @media #{$max575}{
                                                 margin-right: 8px;
                                             }
@@ -705,12 +710,16 @@ div#tf-destinationautocomplete-list {
                                         }
                                     }
                                 }
+                                .tf_check_arrow{
+                                    text-align: right;
+                                }
                             }
                         }
                         .tf_acrselection-wrap {
                             background: #FDF9F3;
                             box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.10);
                             top: 111%;
+                            border-radius: 0px;
                             .acr-label{
                                 color: #595349;
                                 font-family: Josefin Sans;
@@ -725,7 +734,7 @@ div#tf-destinationautocomplete-list {
                                 input[type=tel]{
                                     width: 34px !important;
                                     height: 48px;
-                                    border: 1px solid !important;
+                                    border: 0.2px solid !important;
                                     font-size: 16px;
                                     font-style: normal;
                                     font-weight: 600;
@@ -743,6 +752,7 @@ div#tf-destinationautocomplete-list {
                                     font-size: 31px;
                                     font-weight: 400;
                                     color: #595349;
+                                    padding: 0px !important;
                                 }
                             }
                         }
