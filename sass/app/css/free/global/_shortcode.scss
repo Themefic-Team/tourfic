@@ -487,6 +487,10 @@ div#tf-destinationautocomplete-list {
                     right: auto;
                     border: 0px solid;
                     width: 276px;
+                    @media #{$max1024}{
+                        width: auto;
+                        right: 0;
+                    }
                     @media #{$max767}{
                         top: 97px !important;
                     }

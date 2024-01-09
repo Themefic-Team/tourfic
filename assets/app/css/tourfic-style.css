@@ -2739,6 +2739,12 @@ div#tf-destinationautocomplete-list div:before {
   border: 0px solid;
   width: 276px;
 }
+@media only screen and (max-width: 1024px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .autocomplete-items {
+    width: auto;
+    right: 0;
+  }
+}
 @media only screen and (max-width: 767.98px) {
   .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .autocomplete-items {
     top: 97px !important;
