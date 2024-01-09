@@ -373,7 +373,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 												</defs>
 												</svg>
 											</div>
-											<input type="tel" name="adults" id="adults" min="1" value="1"/>
+											<input type="tel" name="adults" class="adults-style2" id="adults" min="1" value="1"/>
 											<div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<g clip-path="url(#clip0_3229_13100)">
@@ -404,7 +404,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 													</defs>
 													</svg>
 												</div>
-												<input type="tel" name="children" id="children" min="0" value="0"/>
+												<input type="tel" name="children" class="childs-style2" id="children" min="0" value="0"/>
 												<div class="acr-inc">
 													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 													<g clip-path="url(#clip0_3229_13100)">
@@ -436,7 +436,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 													</defs>
 													</svg>
 												</div>
-												<input type="tel" name="infant" id="infant" min="0" value="0"/>
+												<input type="tel" name="infant" class="infant-style2" id="infant" min="0" value="0"/>
 												<div class="acr-inc">
 													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 													<g clip-path="url(#clip0_3229_13100)">
@@ -536,6 +536,9 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 
                 <div class="tf_selectperson-wrap">
                     <div class="tf_input-inner">
+						<span class="tf_person-icon">
+                            <i class="fas fa-user"></i>
+                        </span>
                         <div class="adults-text"><?php _e( '1 Adults', 'tourfic' ); ?></div>
 						<?php if ( empty( $disable_apartment_child_search ) ): ?>
                             <div class="person-sep"></div>
