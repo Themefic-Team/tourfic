@@ -12047,6 +12047,7 @@ html {
   font-size: 31px;
   font-weight: 400;
   color: #595349;
+  padding: 0px;
 }
 .tf-template-3 .tf_acrselection-wrap.tf-show {
   visibility: visible;
@@ -12087,6 +12088,7 @@ html {
   font-size: 31px;
   font-weight: 400;
   color: #595349;
+  padding: 0px;
 }
 .tf-template-3 .tf-search-date-wrapper .acr-select input[type=tel] {
   width: 34px !important;
