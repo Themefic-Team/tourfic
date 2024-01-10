@@ -634,6 +634,58 @@ div#tf-contact-info {
     margin-top: 30px;
 }
 
+// .marker-label {
+//     background-color: azure;
+//     color: black !important;
+//     padding: 2px;
+//     display: inline-block;
+// }
+
+.gm-style-iw {
+
+    padding: 0px !important;
+    width: 230px;
+    border-radius: 5px !important;
+
+    .gm-style-iw-d {
+        overflow: hidden !important;
+
+        .itinerary-map-popup {
+            .itinerary-map-popup-img {
+                img {
+                    width: 100%;
+                    height: 142px;
+                    border-radius: 5px;
+                    object-fit: cover;
+                }
+            }
+            .itinerary-map-popup-content {
+                padding: 16px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                font-size: 14px;
+                font-weight: 500;
+                color: black;
+
+                .itinerary-map-popup-time {
+                    color: #5e5e5e;
+                }
+            }
+        }
+    }
+    
+    button {
+       top: 0 !important;
+       right: 0 !important;
+       display: none;
+    }
+
+    button:hover {
+        transform: scale(1.2);
+    }
+}
+
 // UNFOLD Compatibily
 #commentform label{
     position: static !important;
