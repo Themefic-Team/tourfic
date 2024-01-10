@@ -2724,7 +2724,7 @@ div#tf-destinationautocomplete-list div:before {
   }
 }
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .autocomplete-items {
-  max-height: 200px;
+  max-height: 240px;
   position: absolute;
   background: #fcf4e8;
   box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.1);
