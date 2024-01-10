@@ -130,7 +130,6 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-container-inner p,
 			.tf-main-wrapper p,
 			.tf-container p,
-			.tf-template-3,
 			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-description .tf-full-description,
 			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-description .tf-short-description,
 			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .ft-highlights-details p,

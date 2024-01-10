@@ -10259,6 +10259,7 @@ html {
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-archive-hero-content .tf-head-title h1 {
   color: #FDF9F3;
   margin: 0px;
+  font-size: 40px !important;
 }
 @media only screen and (max-width: 767.98px) {
   .tf-template-3 .tf-hero-section-wrap .tf-container .tf-archive-hero-content .tf-head-title h1 {
@@ -10277,6 +10278,8 @@ html {
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-archive-hero-content .tf-title-meta p {
   color: #FDF9F3;
   margin: 0px;
+  font-size: 24px !important;
+  line-height: 1.3;
 }
 .tf-template-3 .tf-content-wrapper .tf-details {
   display: flex;
@@ -11274,6 +11277,7 @@ html {
 }
 .tf-template-3 .tf-available-archive-hetels-wrapper {
   background: #FAEEDC;
+  margin-bottom: 56px;
 }
 @media only screen and (max-width: 767.98px) {
   .tf-template-3 .tf-available-archive-hetels-wrapper {
@@ -11858,7 +11862,7 @@ html {
 .tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap {
   display: flex;
   flex-direction: row;
-  background: #fff;
+  background: #FDF9F3;
   padding: 0 12px;
   width: 100%;
   align-items: center;
@@ -13544,6 +13548,7 @@ html {
 .tf-template-3 .tf-filter-wrapper .tf-filter-title .tf-section-title {
   margin: 0 !important;
   padding: 0;
+  font-weight: 700 !important;
 }
 @media only screen and (max-width: 1024px) {
   .tf-template-3 .tf-filter-wrapper .tf-filter-title .tf-section-title {
@@ -13562,11 +13567,15 @@ html {
   font-style: normal;
   font-weight: 700;
   line-height: 150%; /* 24px */
+  transition: 0.3s all ease;
 }
 @media only screen and (max-width: 1024px) {
   .tf-template-3 .tf-filter-wrapper .tf-filter-title button {
     font-size: 12px !important;
   }
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-title button:hover {
+  color: #B58E53;
 }
 .tf-template-3 .tf-filter-wrapper .tf-filter-title button.filter-reset-btn {
   display: none;

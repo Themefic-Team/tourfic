@@ -396,6 +396,7 @@ span.tf-reting-stars {
         .tf-section-title {
             margin: 0 !important;
             padding: 0;
+            font-weight: 700 !important;
             @media #{$max1024}{
                 font-size: 20px !important;
             }
@@ -412,8 +413,12 @@ span.tf-reting-stars {
             font-style: normal;
             font-weight: 700;
             line-height: 150%; /* 24px */
+            transition: .3s all ease;
             @media #{$max1024}{
                 font-size: 12px !important;
+            }
+            &:hover{
+                color: #B58E53;
             }
         }
         button.filter-reset-btn{
