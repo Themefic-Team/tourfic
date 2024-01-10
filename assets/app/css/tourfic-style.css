@@ -11688,6 +11688,7 @@ html {
 }
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form {
   display: flex;
+  margin: 0;
 }
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-fields {
   display: flex;
