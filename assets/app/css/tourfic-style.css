@@ -8425,6 +8425,9 @@ div#tf-contact-info {
 .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-ratings div {
   margin-right: 5px;
 }
+.tf-review-wrapper .tf-review-form {
+  padding-bottom: 30px;
+}
 .tf-review-wrapper .tf-review-form .tf-review-form-container {
   background: transparent !important;
   min-width: auto !important;

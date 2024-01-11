@@ -1888,18 +1888,18 @@
         });
 
         // Design 2 Toggle share buttons
-        $('.tf-share-toggle').click(function (e) {
+        $('.tf-template-3 .tf-share-toggle').click(function (e) {
             e.preventDefault();
             $('.tf-share-toggle').toggleClass('actives');
             $('.tf-off-canvas-share').toggleClass('show');
         });
 
         // Design 2 Wishlist buttons
-        $('.add-wishlist').click(function (e) {
+        $('.tf-template-3 .add-wishlist').click(function (e) {
             e.preventDefault();
             $(this).parents().find('.tf-wishlist-box').addClass('actives');
         });
-        $('.remove-wishlist').click(function (e) {
+        $('.tf-template-3 .remove-wishlist').click(function (e) {
             e.preventDefault();
             $(this).parents().find('.tf-wishlist-box').removeClass('actives');
         });
@@ -1953,19 +1953,24 @@
             $(this).find('.tf-question-desc').slideToggle();
         });
 
-        $(".tf-template-3 .tf-hero-hotel.tf-popup-buttons").click(function(){
-            $(".tf-hotel-popup").addClass("tf-show")
+        $(".tf-template-3 .tf-hero-hotel.tf-popup-buttons").click(function(e){
+            e.preventDefault();
+            $("#tour_room_details_loader").show();
+            setTimeout(function() {
+                $("#tour_room_details_loader").hide();
+                $(".tf-hotel-popup").addClass("tf-show");
+            }, 1000);
         });
 
         $(document).on('click', '.tf-template-3 .tf-popup-close', function () {
             $(".tf-popup-wrapper").removeClass("tf-show")
         });
         
-        // $(document).on('click', function (event) {
-        //     if (!$(event.target).closest(".tf-popup-wrapper .tf-popup-inner").length) {
-        //         $(".tf-popup-wrapper").removeClass('tf-show');
-        //     }
-        // });
+        $(document).on('click', function (event) {
+            if (!$(event.target).closest(".tf-popup-wrapper .tf-popup-inner").length) {
+                $(".tf-popup-wrapper").removeClass('tf-show');
+            }
+        });
 
         $('.tf-template-3 .tf-details-menu a').on('click', function() {
             $(this).addClass('tf-hashlink');
