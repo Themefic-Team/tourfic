@@ -10059,6 +10059,71 @@ html {
 .tf_template_3_global_layouts #tf-ask-question button:hover {
   background: #917242 !important;
 }
+.tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services {
+  background: #FDF9F3;
+  border-radius: 0px;
+  gap: 0px;
+}
+.tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf-hotel-services-text h3 {
+  color: #595349;
+  text-align: center;
+  font-family: Cormorant Garamond;
+  font-size: 32px !important;
+  font-style: normal;
+  font-weight: 700 !important;
+  line-height: 120%; /* 38.4px */
+  margin-bottom: 8px;
+}
+.tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf-hotel-services-text p {
+  color: #99948D;
+  text-align: center;
+  font-family: Josefin Sans;
+  font-size: 16px !important;
+  font-style: normal;
+  font-weight: 400 !important;
+  line-height: 130%; /* 20.8px */
+  margin-top: 0px;
+  margin-bottom: 32px;
+}
+.tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf-hotel-service label {
+  color: #595349;
+  font-family: Josefin Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%;
+  margin-bottom: 6px;
+  display: block;
+}
+.tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf-hotel-service select {
+  border-radius: 0px;
+  background: #FDF9F3;
+  height: 45px;
+  border: 1px solid #595349;
+}
+.tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf-airport-pickup-response {
+  margin-top: 15px;
+}
+.tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf_button_group {
+  height: auto;
+}
+.tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf_button_group button {
+  background: #b58e53 !important;
+  border-color: #b58e53 !important;
+  border-radius: 0px !important;
+  padding: 12px 32px !important;
+  color: #fdf9f3 !important;
+  font-family: Josefin Sans !important;
+  font-size: 16px !important;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150% !important;
+  transition: 0.3s all ease;
+  cursor: pointer;
+}
+.tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf_button_group button:hover {
+  background: #917242 !important;
+}
 
 .tf-template-3 .tf-hero-section-wrap {
   background-size: cover;
@@ -10978,7 +11043,7 @@ html {
   height: 390px;
 }
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content {
-  width: calc(100% - 283px);
+  width: calc(100% - 230px);
   display: flex;
   justify-content: space-between;
   padding: 24px;
@@ -11443,6 +11508,14 @@ html {
 }
 .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-gallery .tf-available-ratings i {
   color: #FEBB03;
+}
+.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content {
+  width: calc(100% - 283px);
+}
+@media only screen and (max-width: 1280px) {
+  .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content {
+    width: calc(100% - 222px);
+  }
 }
 @media only screen and (max-width: 1024px) {
   .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content {

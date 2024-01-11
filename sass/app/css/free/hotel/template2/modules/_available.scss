@@ -157,7 +157,7 @@
             }
         }
         .tf-available-room-content {
-            width: calc(100% - 283px);
+            width: calc(100% - 230px);
             display: flex;
             justify-content: space-between;
             padding: 24px;
@@ -611,6 +611,10 @@
                 }
             }
             .tf-available-room-content {
+                width: calc(100% - 283px);
+                @media #{$max1200}{
+                    width: calc(100% - 222px);
+                }
                 @media #{$max1024}{
                     padding: 24px 16px !important;
                 }
