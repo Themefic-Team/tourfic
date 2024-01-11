@@ -86,14 +86,16 @@
     color: #595349;
     font-size: 20px;
     line-height: 26px;
-}
-
-.tf-review-all-info span {
-    color: #99948D;
-    font-size: 16px;
-    line-height: 20.80px;
-    display: block;
-    margin-top: 6px;
+    p{
+        font-size: 20px !important;
+        span {
+            color: #99948D;
+            font-size: 16px;
+            line-height: 20.80px;
+            display: block;
+            margin-top: 6px;
+        }
+    }
 }
 
 .tf-progress-item {
@@ -360,24 +362,27 @@ span.tf-reting-stars {
             font-size: 14px !important;
         }
     }
-    .tf-send-inquiry-btn{
-        background: #B58E53;
-        padding: 12px 32px;
-        color: #FDF9F3;
-        font-family: Josefin Sans;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 150%;
-        display: inline-block;
-        text-align: center;
-        transition: .3s all ease;
-        text-decoration: none;
-        &:hover{
-            background-color: #917242;
-        }
-        @media #{$max1024}{
-            font-size: 12px;
+    .tf-btn{
+        width: auto;
+        .tf-send-inquiry-btn{
+            background: #B58E53;
+            padding: 12px 32px;
+            color: #FDF9F3;
+            font-family: Josefin Sans;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 150%;
+            display: inline-block;
+            text-align: center;
+            transition: .3s all ease;
+            text-decoration: none;
+            &:hover{
+                background-color: #917242;
+            }
+            @media #{$max1024}{
+                font-size: 12px;
+            }
         }
     }
 }
