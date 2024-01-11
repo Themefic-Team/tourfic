@@ -276,6 +276,9 @@
                         font-weight: 400;
                         line-height: 31.20px;
                         text-align: right;
+                        .amount{
+                            font-weight: 400 !important;
+                        }
                         .discount-price{
                             color: #99948D;
                             font-family: Josefin Sans;

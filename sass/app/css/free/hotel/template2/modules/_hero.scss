@@ -53,6 +53,11 @@
                     font-size: 16px;
                     text-decoration: none;
                 }
+                a.tf-share-toggle.actives,
+                a.tf-wishlist.actives {
+                    background: #B58E53;
+                    box-shadow: 0px 14px 30px 0px rgba(0, 23, 100, 0.07);
+                }
                 
                 .tf-off-canvas-share-box{
                     display: inline-flex;

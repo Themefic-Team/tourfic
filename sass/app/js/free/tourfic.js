@@ -1890,7 +1890,18 @@
         // Design 2 Toggle share buttons
         $('.tf-share-toggle').click(function (e) {
             e.preventDefault();
+            $('.tf-share-toggle').toggleClass('actives');
             $('.tf-off-canvas-share').toggleClass('show');
+        });
+
+        // Design 2 Wishlist buttons
+        $('.add-wishlist').click(function (e) {
+            e.preventDefault();
+            $(this).parents().find('.tf-wishlist-box').addClass('actives');
+        });
+        $('.remove-wishlist').click(function (e) {
+            e.preventDefault();
+            $(this).parents().find('.tf-wishlist-box').removeClass('actives');
         });
 
         // Copy button
