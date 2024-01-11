@@ -9985,9 +9985,12 @@ html {
   padding-left: 83px;
   padding-right: 83px;
 }
+.tf-template-3.tf-hotel-single .tf-content-wrapper .tf-container .tf-section.tf-policies-wrapper {
+  margin: 0;
+}
 
 .tf-template-3.tf-tour-single {
-  margin-bottom: 93px;
+  margin-bottom: 0px;
 }
 
 .tf_template_3_global_layouts #tf-ask-question .tf-aq-outer {
@@ -11650,7 +11653,7 @@ html {
 }
 .tf-template-3 .tf-related-tours {
   background-color: #FCF4E8;
-  padding: 32px 0px;
+  padding: 120px 0px;
 }
 .tf-template-3 .tf-related-tours h2 {
   color: #595349;
@@ -13937,14 +13940,13 @@ html {
   }
 }
 .tf-template-3 .tf-popup-wrapper.tf-room-popup .tf-popup-inner .tf-popup-body {
-  width: calc(100% - 8px);
+  width: 100%;
   max-height: 624px;
   overflow: hidden;
   overflow-y: auto;
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 10px;
-  padding-right: 8px;
   scrollbar-width: thin;
   scrollbar-color: #aaa #eee;
 }

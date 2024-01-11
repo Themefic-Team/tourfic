@@ -117,11 +117,18 @@
         max-width: none;
         padding-left: 83px;
         padding-right: 83px;
+    } 
+    .tf-content-wrapper{
+        .tf-container{
+            .tf-section.tf-policies-wrapper{        
+                margin: 0;
+            }
+        }
     }
 }
 
 .tf-template-3.tf-tour-single{
-    margin-bottom: 93px;
+    margin-bottom: 0px;
 }
 .tf_template_3_global_layouts{
     #tf-ask-question{
