@@ -1281,26 +1281,92 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 						<div class="tf_acrselection">
 							<div class="acr-label"><?php _e("Adults", "tourfic"); ?></div>
 							<div class="acr-select">
-								<div class="acr-dec">-</div>
+								<div class="acr-dec">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13094)">
+										<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13094">
+										<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
 								<input type="tel" name="adults" id="adults" min="1" value="1">
-								<div class="acr-inc">+</div>
+								<div class="acr-inc">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13100)">
+										<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13100">
+										<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
 							</div>
 						</div>
 						<div class="tf_acrselection">
 							<div class="acr-label"><?php _e("Children", "tourfic"); ?></div>
 							<div class="acr-select">
-								<div class="acr-dec">-</div>
+								<div class="acr-dec">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13094)">
+										<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13094">
+										<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
 								<input type="tel" name="childrens" id="children" min="0" value="0">
-								<div class="acr-inc">+</div>
+								<div class="acr-inc">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13100)">
+										<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13100">
+										<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
 							</div>
 						</div>
 						<?php if ( $post_type !== 'tf_tours' ) { ?>
 						<div class="tf_acrselection">
 							<div class="acr-label"><?php _e("Rooms", "tourfic"); ?></div>
 							<div class="acr-select">
-								<div class="acr-dec">-</div>
+								<div class="acr-dec">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13094)">
+										<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13094">
+										<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
 								<input type="tel" name="room" id="room" min="1" value="1">
-								<div class="acr-inc">+</div>
+								<div class="acr-inc">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13100)">
+										<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13100">
+										<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
 							</div>
 						</div>
 						<?php } ?>

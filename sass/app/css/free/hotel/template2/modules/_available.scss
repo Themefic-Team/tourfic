@@ -157,7 +157,7 @@
             }
         }
         .tf-available-room-content {
-            width: calc(100% - 283px);
+            width: calc(100% - 230px);
             display: flex;
             justify-content: space-between;
             padding: 24px;
@@ -268,7 +268,7 @@
                     align-items: center;
                     flex-direction: row;
                     flex-wrap: wrap;
-                    justify-content: space-between;
+                    justify-content: end;
                     gap: 4px;
                     margin-bottom: 58px;
                     .tf-price {
@@ -276,6 +276,9 @@
                         font-weight: 400;
                         line-height: 31.20px;
                         text-align: right;
+                        .amount{
+                            font-weight: 400 !important;
+                        }
                         .discount-price{
                             color: #99948D;
                             font-family: Josefin Sans;
@@ -506,6 +509,7 @@
 // Archive page
 .tf-available-archive-hetels-wrapper {
     background: #FAEEDC;
+    margin-bottom: 56px;
     @media #{$max767}{
         padding: 16px;
     }
@@ -610,6 +614,10 @@
                 }
             }
             .tf-available-room-content {
+                width: calc(100% - 283px);
+                @media #{$max1200}{
+                    width: calc(100% - 222px);
+                }
                 @media #{$max1024}{
                     padding: 24px 16px !important;
                 }
@@ -736,7 +744,7 @@
 // Related Tour Section
 .tf-related-tours{
     background-color: #FCF4E8;
-    padding: 32px 0px;
+    padding: 120px 0px;
     h2{
         color: #595349;
         font-size: 32px !important;

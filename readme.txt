@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mainulsunvi, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings, apartment-booking, apartment-rental
 Requires at least: 5.4
 Tested up to: 6.4.2
-Stable tag: 2.11.3
+Stable tag: 2.11.4
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -450,6 +450,18 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.11.4 - 14 January 2024 =
+
+- Added: Hide documentation link option in multi-vendor settings (pro)
+- Improved: Itinerary chart added in template 1 and 2 (pro)
+- Improved: Enhanced color settings for the frontend.
+- Fixed: Gallery popup close button issue
+- Fixed: Itinerary altitude negative value issue (pro)
+- Fixed: Single settings removed from single template settings for vendor (pro)
+- Fixed: Custom settings removed from Itinerary download settings for vendor (pro)
+- Fixed: Black screen issue fixed in vendor profile edit (pro)
+- Fixed: Booking.com and travelpayouts search issue (pro)
 
 = 2.11.3 - 03 January 2024 =
 
