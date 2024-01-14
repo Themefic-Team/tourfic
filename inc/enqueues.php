@@ -469,6 +469,12 @@ function tf_dequeue_theplus_script_on_settings_page($screen) {
 				wp_dequeue_script('select2');
 				wp_deregister_script('select2');
 			}
+			
+			if ( wp_script_is('acf-color-picker-alpha', 'enqueued') ) {
+
+				wp_dequeue_script('acf-color-picker-alpha');
+				wp_deregister_script('acf-color-picker-alpha');
+			}
 		}
 	}
 }
