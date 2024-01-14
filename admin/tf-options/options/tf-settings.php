@@ -1726,7 +1726,7 @@ TF_Settings::option( 'tf_settings', array(
 					'type'     => 'text',
 					'label'    => __( 'Change Booking Form Button Text', 'tourfic' ),
 					'subtitle'  => __( 'With this option, you can change the text of the booking form button on the single hotel pages.', 'tourfic' ),
-					'default'    => __('I\'ll Reserve', 'tourfic'),
+					'default'    => __('Reserve Now', 'tourfic'),
 				),
 				array(
 					'id'       => 'hotel_booking_check_button_text',

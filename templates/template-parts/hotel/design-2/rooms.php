@@ -355,7 +355,7 @@ if(!empty($rooms)){
                     }
                     ?>
                     </div>                     
-                    <a href="#availability" class="availability"><?php _e("Continue", "tourfic"); ?></a>
+                    <a href="#availability" class="availability"><?php _e("Check Availability", "tourfic"); ?></a>
                 </div>
 
             </div>
@@ -550,7 +550,7 @@ if(!empty($rooms)){
                 </div>
                 <div class="tf-available-room-content-right">
                                       
-                    <a href="#availability" class="availability"><?php _e("Continue", "tourfic"); ?></a>
+                    <a href="#availability" class="availability"><?php _e("Check Availability", "tourfic"); ?></a>
                 </div>
 
             </div>
