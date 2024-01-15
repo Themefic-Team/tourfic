@@ -12,7 +12,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 		// Store as PHP variables
 		// Template 1 Global CSS
 		$tf_template1_global_reg = !empty(tf_data_types(tfopt( 'tourfic-design1-global-color' ))['gcolor']) ? tf_data_types(tfopt( 'tourfic-design1-global-color' ))['gcolor'] : '';
-		$tf_template1_p_global_reg = !empty(tf_data_types(tfopt( 'tourfic-design1-p-global-color' ))['pgcolor']) ? tf_data_types(tfopt( 'tourfic-design1-p-global-color' ))['pgcolor'] : '#36383C';
+		$tf_template1_p_global_reg = !empty(tf_data_types(tfopt( 'tourfic-design1-p-global-color' ))['pgcolor']) ? tf_data_types(tfopt( 'tourfic-design1-p-global-color' ))['pgcolor'] : '';
 
 		// Common CSS
 		$tf_primary_color_reg = !empty(tf_data_types(tfopt( 'tourfic-button-color' ))['regular']) ? tf_data_types(tfopt( 'tourfic-button-color' ))['regular'] : '';
