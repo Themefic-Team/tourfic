@@ -81,11 +81,11 @@
             cursor: pointer;
         }
         button.next-arrow {
-            right: calc(50% - 95px);
+            right: calc(50% - 70px);
         }
         
         button.prev-arrow {
-            left: calc(50% - 95px);
+            left: calc(50% - 70px);
         }
 	}
 }
@@ -158,6 +158,9 @@
                     }
 				}
 			}
+            .tf-question:last-child {
+                margin-bottom: 0px !important;
+            }
 		}
 	}
 }
