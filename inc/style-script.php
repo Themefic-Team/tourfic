@@ -595,6 +595,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-3 .tf-popup-wrapper.tf-room-popup .tf-popup-inner .tf-popup-body .tf-popup-right ul li i,
 			.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location i,
 			.tf-template-3 .tf-section,
+			.tf-template-3 .tf-available-rooms-wrapper .tf-available-rooms-head .tf-filter i,
 			.tf-template-3 .tf-send-inquiry i {
 				color: '.$tf_global_icon_clr_t3.' !important;
 			}
