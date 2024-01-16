@@ -11544,6 +11544,13 @@ html {
   display: flex;
   flex-direction: column;
 }
+.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location a {
+  text-decoration: none;
+  color: inherit;
+}
+.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location a:hover {
+  color: inherit;
+}
 .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left ul {
   margin-top: auto;
 }
