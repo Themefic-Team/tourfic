@@ -357,22 +357,26 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 				}
 			}
 
-			// additional fees Calculation
-			if($addional_fees && !empty($addional_fees) && $apartment_pricing > 0 ) {
-				foreach($addional_fees as $fees) {
-					if(!empty($fees["additional_fee"])) {
-						if(!empty($fees["fee_type"]) && $fees["fee_type"] == "per_stay") {
-							$apartment_pricing += $fees["additional_fee"];
-						} 
-						if (!empty($fees["fee_type"]) && $fees["fee_type"] == "per_person") {
-							$apartment_pricing += intval((int) $fees["additional_fee"] * ((int) $adult_count + (int) $child_count + (int) $infant_count));
-						}
-						if(!empty($fees["fee_type"]) && $fees["fee_type"] == "per_night") {
-							$apartment_pricing += !empty($day_diff["days"]) ? intval( (int) $fees["additional_fee"] * $day_diff["days"] ) : $fees["additional_fee"];
+			// additional fees Calculation - more calculation needed
+			if(is_array($addional_fees) ) {
+
+				if($addional_fees && !empty($addional_fees) && $apartment_pricing > 0 ) {
+					foreach($addional_fees as $fees) {
+						if(!empty($fees["additional_fee"])) {
+							if(!empty($fees["fee_type"]) && $fees["fee_type"] == "per_stay") {
+								$apartment_pricing += $fees["additional_fee"];
+							} 
+							if (!empty($fees["fee_type"]) && $fees["fee_type"] == "per_person") {
+								$apartment_pricing += intval((int) $fees["additional_fee"] * ((int) $adult_count + (int) $child_count + (int) $infant_count));
+							}
+							if(!empty($fees["fee_type"]) && $fees["fee_type"] == "per_night") {
+								$apartment_pricing += !empty($day_diff["days"]) ? intval( (int) $fees["additional_fee"] * $day_diff["days"] ) : $fees["additional_fee"];
+							}
 						}
 					}
 				}
 			}
+			
 			return $apartment_pricing;
 		}
 
@@ -406,7 +410,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 			 }
 
 			$all_fees = [];
-			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($additional_fees)) :
+			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($additional_fees)) {
 				if ( count( $additional_fees ) > 0 ) {
 					foreach ( $additional_fees as $fees ) {
 						$all_fees[] = array(
@@ -417,7 +421,18 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 						);
 					}
 				}
-			endif;
+			} else {
+				$additional_fee_label = !empty( $this->get_apartment_meta_options( $apartment_id, "additional_fee_label" ) ) ? $this->get_apartment_meta_options( $apartment_id, "additional_fee_label" ) : '';
+				$additional_fee_amount = !empty( $this->get_apartment_meta_options( $apartment_id, "additional_fee" ) ) ? $this->get_apartment_meta_options( $apartment_id, "additional_fee" ) : 0;
+				$additional_fee_type = !empty( $this->get_apartment_meta_options( $apartment_id, "fee_type" ) ) ? $this->get_apartment_meta_options( $apartment_id, "fee_type" ) : '';
+
+				$all_fees[] = array(
+					"label" => $additional_fee_label,
+					"fee"   => $additional_fee_amount,
+					"price" => wc_price( $additional_fee_amount ),
+					"type"  => $additional_fee_type,
+				);
+			}
 
 			wp_reset_postdata();
 
@@ -427,7 +442,6 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 				) 
 			);
 		}
-
 		// Backend Booking
 
 		public function tf_backend_apartment_booking() {
@@ -486,7 +500,15 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 				$check_to = !empty($field['tf_apartment_date']['to']) ? $field['tf_apartment_date']['to'] : '';
 				$apt_data = $this->get_apartment_meta_options( intval( $apt_id ) );
 
-				$additional_fees = !empty($apt_data['additional_fees']) ? $apt_data['additional_fees'] : array();
+				if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) {
+					$additional_fees = !empty($apt_data['additional_fees']) ? $apt_data['additional_fees'] : array();
+				} else {
+					$additional_fees [] = array(
+						"label" => !empty($apt_data['additional_fee_label']) ? !empty($apt_data['additional_fee_label']) : '',
+						"fee"   => !empty($apt_data['additional_fee']) ? !empty($apt_data['additional_fee']) : 0,
+						"type"  => !empty($apt_data['fee_type']) ? !empty($apt_data['fee_type']) : '',
+					);
+				}
 
 
 				if ( $apt_data['max_adults'] < $adult_count ) {
