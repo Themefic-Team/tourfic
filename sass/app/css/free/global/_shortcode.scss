@@ -1,5 +1,8 @@
 .tf_form-inner {
     .autocomplete-items {
+        max-height: 120px;
+        overflow: scroll;
+        overflow-x: hidden;
         position: absolute;
         border: 1px solid #d4d4d4;
         border-bottom: none;
@@ -435,7 +438,7 @@ div#tf-destinationautocomplete-list {
     }
 }
 
-// Shortcode Form Design 2 
+// Shortcode Form Design 2
 .tf-shortcode-design-2-tab{
     .tf-booking-form-tab{
         button{
@@ -469,6 +472,58 @@ div#tf-destinationautocomplete-list {
                 @media #{$max830}{
                     display: flow-root;
                 }
+                .autocomplete-items {
+                    max-height: 240px;
+                    position: absolute;
+                    background: #fcf4e8;
+                    box-shadow: 0px 20px 40px 0px rgba(0,0,0,.1);
+                    overflow: auto;
+                    scrollbar-width: thin;
+                    scrollbar-color: #aaa #eee;
+                    padding: 8px;
+                    z-index: 99;
+                    top: 100%;
+                    left: 0;
+                    right: auto;
+                    border: 0px solid;
+                    width: 276px;
+                    @media #{$max1024}{
+                        width: auto;
+                        right: 0;
+                    }
+                    @media #{$max767}{
+                        top: 97px !important;
+                    }
+                    &::-webkit-scrollbar{
+                        width: 5px;
+                    }
+                    &::-webkit-scrollbar-thumb {
+                        background-color: #aaa;
+                        border-radius: 4px;
+                    }
+                    &::-webkit-scrollbar-track {
+                        background-color: #eee;
+                    }
+                    div{
+                        padding: 10px;
+                        cursor: pointer;
+                        background-color: #fff;
+                        margin-bottom: 4px;
+                        color: #444;
+                        display: block;
+                        transition: .3s all ease;
+                        border-bottom: 0px solid;
+                        &:last-child{
+                            margin-bottom: 0px;
+                        }
+                        &:hover{
+                            background: #FAEEDC;
+                        }
+                        &::before{
+                            display: none;
+                        }
+                    }
+                }
                 .tf_form_fields{
                     padding: 24px 40px;
                     display: flex;
@@ -498,7 +553,7 @@ div#tf-destinationautocomplete-list {
                     .tf_destination_fields{
                         width: 25%;
                         padding-right: 40px;
-                        border-right: 1px solid #D6D4D2;
+                        border-right: 1px solid rgba(153, 148, 141, 1);
                         @media #{$max1366}{
                             padding-right: 24px;
                         }
@@ -510,7 +565,7 @@ div#tf-destinationautocomplete-list {
                         }
                         .tf_label_location{
                             .tf_form_inners{
-                                border: 1px solid #FCF4E8;
+                                border: .5px solid #FCF4E8;
                                 display: flex;
                                 align-items: center;
                                 padding: 8px 0px 8px 12px;
@@ -540,7 +595,7 @@ div#tf-destinationautocomplete-list {
                         width: 22%;
                         padding-left: 40px;
                         padding-right: 40px;
-                        border-right: 1px solid #D6D4D2;
+                        border-right: 1px solid rgba(153, 148, 141, 1);
                         @media #{$max1366}{
                             padding-left: 24px;
                             padding-right: 24px;
@@ -550,8 +605,14 @@ div#tf-destinationautocomplete-list {
                             float: left;
                             padding-left: 0px;
                         }
+                        @media #{$max575}{
+                            width: 25%;
+                            padding-right: 5px;
+                            padding-left: 0px;
+                        }
                         .tf-check-in-out-date,
-                        .tf-tour-check-in-out-date{
+                        .tf-tour-check-in-out-date,
+                        .tf-apartment-check-in-out-date{
                             visibility: hidden;
                             height: 0px;
                             padding: 0px !important;
@@ -565,6 +626,7 @@ div#tf-destinationautocomplete-list {
                         .tf_form_inners{
                             .tf_checkin_dates,
                             .tf_checkout_dates{
+                                display: flex;
                                 span.date{
                                     font-size: 24px;
                                     font-style: normal;
@@ -574,6 +636,9 @@ div#tf-destinationautocomplete-list {
                                     margin-right: 16px;
                                     @media #{$max1366}{
                                         font-size: 20px;
+                                    }
+                                    @media #{$max575}{
+                                        margin-right: 8px;
                                     }
                                 }
                                 span.month{
@@ -591,6 +656,9 @@ div#tf-destinationautocomplete-list {
                     }
                     .tf_checkin_date.tf_check_inout_dates{
                         padding-left: 24px;
+                        @media #{$max575}{
+                            padding-left: 5px;
+                        }
                     }
                     .tf_guest_info{
                         width: 31%;
@@ -608,13 +676,20 @@ div#tf-destinationautocomplete-list {
                             padding-bottom: 0px !important;
                             padding-right: 0px !important;
                         }
+                        @media #{$max575}{
+                            padding-left: 5px;
+                            width: 50%;
+                        }
                         .tf_input-inner{
                             display: flow-root;
                             .tf_form_inners{
+                                display: inline-block;
                                 .tf_guest_calculation{
                                     display: flex;
-                                    justify-content: space-between;
+                                    gap: 8px;
                                     .tf_guest_number{
+                                        display: flex;
+                                        align-items: center;
                                         span.guest,
                                         span.room{
                                             font-size: 24px;
@@ -622,7 +697,10 @@ div#tf-destinationautocomplete-list {
                                             font-weight: 400;
                                             line-height: 130%;
                                             color: #FDF9F3;
-                                            margin-right: 16px;
+                                            margin-right: 8px;
+                                            @media #{$max575}{
+                                                margin-right: 8px;
+                                            }
                                         }
                                         span.label{
                                             font-size: 16px;
@@ -630,8 +708,55 @@ div#tf-destinationautocomplete-list {
                                             font-weight: 400;
                                             line-height: 130%;
                                             color: #FDF9F3;
+                                            @media #{$max1366}{
+                                                font-size: 12px;
+                                            }
                                         }
                                     }
+                                }
+                                .tf_check_arrow{
+                                    text-align: right;
+                                }
+                            }
+                        }
+                        .tf_acrselection-wrap {
+                            background: #FDF9F3;
+                            box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.10);
+                            top: 111%;
+                            border-radius: 0px;
+                            .acr-label{
+                                color: #595349;
+                                font-family: Josefin Sans;
+                                font-size: 16px;
+                                font-style: normal;
+                                font-weight: 600;
+                                line-height: 130%;
+                            }
+                            .acr-select{
+                                text-align: right;
+                                width: 96px;
+                                input[type=tel]{
+                                    width: 34px !important;
+                                    height: 48px;
+                                    border: 0.2px solid !important;
+                                    font-size: 16px;
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    color: #595349 !important;
+                                    text-align: center;
+                                    padding-left: 0px !important;
+                                    padding-right: 0px !important;
+                                    border-radius: 20px;
+                                    background: #FCF4E8 !important;
+                                }
+                                .acr-dec,
+                                .acr-inc{
+                                    background: transparent;
+                                    border: none;
+                                    font-size: 31px;
+                                    font-weight: 400;
+                                    color: #595349;
+                                    padding: 0px !important;
                                 }
                             }
                         }
@@ -658,6 +783,10 @@ div#tf-destinationautocomplete-list {
                         width: 100%;
                         border: 0px solid;
                         cursor: pointer;
+                        transition: .3s all ease;
+                        &:hover{
+                            background-color: #917242 !important;
+                        }
                         @media #{$max1366}{
                             font-size: 12px;
                         }

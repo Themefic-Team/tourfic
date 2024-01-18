@@ -6,13 +6,90 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 32px;
+        align-items: center;
+        @media #{$max1024}{
+            margin-bottom: 24px;
+        }
+        @media #{$max991}{
+            margin-bottom: 16px;
+        }
         &>h2{
             color: #595349;
-            font-size: 24px;
-            font-weight: 400;
-            line-height: 130%;            
-            font-family: 'Josefin Sans', sans-serif;
+            font-size: 24px !important;
+            font-weight: 400 !important;
+            line-height: 130% !important;            
+            font-family: 'Josefin Sans', sans-serif !important;
+            margin: 0px;
+            @media #{$max1024}{
+                font-size: 14px !important;
+            }
         }
+        .tf-archive-filter-showing{
+            padding: 0px;
+            cursor: pointer;
+            display: none;
+            @media #{$max991}{
+                display: block;
+            }
+        }
+        .tf-filter{
+            padding: 0px;
+            cursor: pointer;
+            i{
+                font-size: 24px;
+                color: #595349;
+            }
+        }
+    }
+    .tf-room-filter{
+        display: none !important;
+        h4{
+            font-weight: 600 !important;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            li{
+                margin: 0px;
+                padding-left: 0px;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 130%;
+                color: #99948D;
+                margin-right: 10px;
+                @media #{$max1024}{
+                    font-size: 12px !important;
+                }
+                label{
+                    padding-left: 25px;
+                    line-height: 16px;
+                    margin-left: 0px;
+                    .checkmark{
+                        border-radius: 4px;
+                        border: 1px solid #917242;
+                        background: #FDF9F3;
+                        height: 16px;
+                        width: 16px;
+                        &:hover{
+                            border-color: #B58E53;
+                        }
+                        &::after{
+                            top: 1px;
+                            left: 4px;
+                            border-color: rgb(145, 114, 66);
+                        }
+                    }
+                }
+                label input:checked~.checkmark {
+                    background-color: transparent !important;
+                    border-color: rgb(145, 114, 66);
+                }
+            }
+        }
+    }
+    .tf-room-filter.tf-filter-show{
+        display: block !important;
     }
     .tf-available-rooms {
         display: flex;
@@ -76,6 +153,9 @@
                     }
                 }
             }
+            .tf-room-gallery.tf-no-room-gallery{
+                height: 390px;
+            }
         }
         .tf-available-room-content {
             width: calc(100% - 230px);
@@ -84,23 +164,48 @@
             padding: 24px;
             .tf-available-room-content-left {
                 width: 395px;
+                display: flex;
+                flex-direction: column;
+                @media #{$max1366}{
+                    width: calc(100% - 206px);
+                }
+                @media #{$max1024}{
+                    width: calc(100% - 177px);
+                }
                 h3 {
                     margin-bottom: 20px;
+                }
+                h2{
+                    font-weight: 700 !important;
+                    margin-bottom: 24px;
                 }
                 ul {
                     margin: 0;
                     padding: 0;
                     display: grid;
-                    margin-bottom: 32px;
                     grid-template-columns: 1fr 1fr;
                     gap: 12px 5px;
+                    @media #{$max767}{
+                        gap: 8px 5px !important;
+                    }
                     &:last-child {
                         margin-bottom: 0;
                     }
                     li {
+                        display: flex;
+                        @media #{$max1024}{
+                            font-size: 16px;
+                        }
+                        @media #{$max767}{
+                            font-size: 14px !important;
+                        }
                         i {
-                            margin-right: 4px;
-                            ;
+                            margin-right: 8px;
+                            font-size: 20px;
+                            width: 20px;
+                            @media #{$max1024}{
+                                font-size: 14px;
+                            }
                         }
                         a {
                             color: #595349;
@@ -110,22 +215,29 @@
                 }
                 h4 {
                     color: #595349;
-                    font-size: 16px;
-                    font-weight: 600;
-                    font-family: "Josefin Sans", sans-serif;
+                    font-size: 16px !important;
+                    font-weight: 600 !important;
+                    font-family: "Josefin Sans", sans-serif !important;
                     margin-bottom: 16px;
+                    margin-top: auto;
+                    @media #{$max991}{
+                        margin-top: 16px;
+                    }
                 }
             }
             .tf-available-room-content-right {
-                width: 180px;
+                width: 230px;
                 display: flex;
                 flex-direction: column;
                 align-items: flex-end;
+                @media #{$max1024}{
+                    width: 153px !important;
+                }
                 .tf-cancellation-refundable-text {
                     display: flex;
                     flex-direction: column;
                     align-items: flex-end;
-                    gap: 4px;
+                    gap: 8px;
                     margin-bottom: 24px;
                     span {
                         display: flex;
@@ -147,21 +259,46 @@
                         margin-left: 6px;
                     }
                 }
+                .tf-card-pricing-heading{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: end;
+                }
                 .tf-available-room-price {
                     display: flex;
                     align-items: center;
                     flex-direction: row;
                     flex-wrap: wrap;
-                    justify-content: space-between;
+                    justify-content: end;
                     gap: 4px;
                     margin-bottom: 58px;
                     .tf-price {
                         color: #595349;
-                        font-size: 16px;
                         font-weight: 400;
                         line-height: 31.20px;
-                        span {
+                        text-align: right;
+                        .amount{
+                            font-weight: 400 !important;
+                        }
+                        .discount-price{
+                            color: #99948D;
+                            font-family: Josefin Sans;
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 130%; /* 20.8px */
+                            display: inline-flex;
+                            gap: 2px;
+                            .amount{
+                                font-weight: normal !important;
+                            }
+                        }
+                        .sale-price{
                             font-size: 24px;
+                            display: inline-flex;
+                            .booking-type{
+                                font-size: 16px;
+                            }
                         }
                     }
                 }
@@ -171,6 +308,9 @@
                     display: flex;
                     width: fit-content;
                     margin-bottom: 26px;
+                    gap: 8px;
+                    align-items: center;
+                    margin-top: auto;
                     select {
                         height: 37px;
                         width: 70px;
@@ -181,6 +321,12 @@
                         background-color: #FAEEDC;
                         border: none;
                         cursor: pointer;
+                        font-weight: 700;
+                        // option:hover,
+                        // option:checked{
+                        //     accent-color: #B58E53 !important;
+                        //     background: #B58E53 !important;
+                        // }
                     }
                 }
             }
@@ -195,6 +341,11 @@
                 text-align: right;
                 label{
                     font-size: 12px;
+                }
+                input[type=checkbox]{
+                    background: #B58E53;
+                    border-color: #B58E53;
+                    accent-color: #B58E53;
                 }
             }
             .roomselectissue{
@@ -216,6 +367,133 @@
                 text-decoration: none;
                 text-align: center;
                 transition: .3s all ease;
+                &:hover{
+                    background-color: #917242;
+                }
+            }
+            a.availability {
+                margin-top: auto;
+            }
+        }
+    }
+    .tf-available-room.tf-desktop-room{
+        @media #{$max991}{
+            display: none;
+        }
+    }
+    .tf-available-room.tf-tabs-room{
+        display: none;
+        @media #{$max991}{
+            display: flow-root;
+        }
+        .tf-available-room-gallery{
+            min-width: auto !important;
+            max-width: none !important;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            .tf-room-image{
+                height: 140px;
+                position: relative;
+                img{
+                    height: 140px;
+                    width: 100%;
+                    object-fit: cover;
+                }
+                .tf-available-room-off{
+                    position: absolute;
+                    top: 12px;
+                    left: 12px;
+                }
+            }
+            .tf-room-gallerys{
+                display: grid;
+                gap: 10px;
+                .tf-room-gallery{
+                    height: 66px;
+                    width: 100% !important;
+                    img{
+                        height: 66px;
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
+        .tf-available-room-gallery.tf-no-room-gallery{
+            grid-template-columns: 1fr;
+        }
+        .tf-available-room-content{
+            width: auto !important;
+            display: flow-root;
+            padding: 16px;
+            .tf-available-room-content-left{
+                width: 100% !important;
+                .room-heading-price{
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 30px;
+                    margin-bottom: 16px;
+                    h2{
+                        margin: 0;
+                        font-size: 20px !important;
+                    }
+                    .tf-available-room-price{
+                        display: flex;
+                        flex-direction: column;
+                        align-items: end;
+                        .tf-price{
+                            color: #595349;
+                            font-weight: 400;
+                            line-height: 31.2px;
+                            .discount-price {
+                                color: #99948D;
+                                font-family: Josefin Sans;
+                                font-size: 16px;
+                                font-style: normal;
+                                font-weight: 400;
+                                line-height: 130%;
+                                display: flex;
+                                gap: 2px;
+                                justify-content: end;
+                                .amount{
+                                font-weight: 400;
+                                }
+                            }
+                            .sale-price {
+                                font-size: 24px;
+                                display: flex;
+                                justify-content: end;
+                                .booking-type {
+                                    font-size: 16px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .tf-available-room-content-right{
+                width: 100% !important;
+                align-items: start;
+                a.availability{
+                    width: 100%;
+                    margin-top: 32px;
+                    font-size: 12px;
+                }
+                a.tf_air_service,
+                button{
+                    width: 100%;
+                    font-size: 12px;
+                }
+                .tf-available-room-select{
+                    margin-top: 32px;
+                    margin-bottom: 16px;
+                }
+                .room-submit-wrap{
+                    width: 100%;
+                    .tf-deposit-content{
+                        text-align: left;
+                    }
+                }
             }
         }
     }
@@ -232,6 +510,10 @@
 // Archive page
 .tf-available-archive-hetels-wrapper {
     background: #FAEEDC;
+    margin-bottom: 56px;
+    @media #{$max767}{
+        padding: 16px;
+    }
     .tf-archive-available-rooms-head {
         .tf-filter {
             background: #C1BFBB;
@@ -249,7 +531,16 @@
                 min-width: 283px;
                 max-width: 283px;
                 position: relative;
-                height: auto;
+                min-height: 328px;
+                max-height: 328px;
+                @media #{$max1200}{
+                    min-width: 222px;
+                    max-width: 222px;
+                }
+                @media #{$max1024}{
+                    min-height: 356px;
+                    max-height: 356px;
+                }
                 .tf-room-gallery {
                     &:nth-child(n+1) {
                         position: absolute;
@@ -272,6 +563,17 @@
                         }
                     }
                 }
+                .tf-room-gallery:first-child{
+                    &::before{
+                        position: absolute;
+                        content: "";
+                        left: 0;
+                        top: 0;
+                        height: 100%;
+                        width: 100%;
+                        background: rgba(238, 199, 140, 0.2);
+                    }
+                }
                 .tf-available-labels {
                     position: absolute;
                     display: flex;
@@ -280,7 +582,7 @@
                     left: 16px;
                     gap: 8px;
                     &>span {
-                        color: #fff;
+                        color: #FDF9F3;
                         font-size: 12px;
                         font-style: normal;
                         font-weight: 500;
@@ -306,22 +608,68 @@
                     background: rgba(253, 249, 243, 0.80);
                     padding: 5px 4px 0 8px;
                     font-size: 16px;
+                    color: #595349;
                     i {
                         color: #FEBB03;
                     }
                 }
             }
             .tf-available-room-content {
+                width: calc(100% - 283px);
+                @media #{$max1200}{
+                    width: calc(100% - 222px);
+                }
+                @media #{$max1024}{
+                    padding: 24px 16px !important;
+                }
                 .tf-available-room-content-left {
+                    display: flex;
+                    flex-direction: column;
                     .tf-section-title-and-location {
-                        margin-bottom: 64px;
+                        a {
+                            text-decoration: none;
+                            color: inherit;
+                        }
+                        a:hover {
+                            color: inherit;
+                        }
+                    }
+                    ul{
+                        margin-top: auto;
+                        @media #{$max1024}{
+                            font-size: 14px !important;
+                        }
+                        li{
+                            @media #{$max1024}{
+                                font-size: 14px !important;
+                            }
+                        }
+                    }
+                    ul.features{
+                        @media #{$max767}{
+                            display: none;
+                        }
+                    }
+                    .tf-section-title-and-location {
                         .tf-section-title {
                             margin: 0 0 10px 0;
+                            @media #{$max1200}{
+                                font-size: 24px !important;
+                            }
                         }
                         .tf-title-location {
-                            display: flex;
-                            svg{
+                            display: inline-flex;
+                            margin-top: 6px;
+                            @media #{$max1024}{
+                                margin-bottom: 36px;
+                                font-size: 14px;
+                            }
+                            i{
                                 margin-right: 8px;
+                                font-size: 20px;
+                                @media #{$max1024}{
+                                    font-size: 14px;
+                                }
                             }
                         }
                     }
@@ -334,6 +682,16 @@
                     }
                     .tf-available-room-price {
                         margin-bottom: 12px;
+                        text-align: right;
+                        .tf-price-from{
+                            .amount{
+                                color: #595349;
+                                font-size: 24px;
+                                font-style: normal;
+                                font-weight: 600;
+                                line-height: 130%;
+                            }
+                        }
                     }
                     button {
                         padding: 12px 20px;
@@ -345,11 +703,21 @@
                         font-weight: 700;
                         line-height: 24px;
                         background: #B58E53;
-                        padding: 12px 40px;
+                        padding: 12px 32px;
                         text-decoration: none;
                         display: inline-block;
                         text-align: center;
                         transition: .3s all ease;
+                        margin-top: auto;
+                        &:hover{
+                            background-color: #917242;
+                        }
+                        @media #{$max1366}{
+                            padding: 12px 32px;
+                        }
+                        @media #{$max1200}{
+                            font-size: 12px !important;
+                        }
                     }
                 }
             }
@@ -386,14 +754,54 @@
 // Related Tour Section
 .tf-related-tours{
     background-color: #FCF4E8;
-    padding: 32px 0px;
-
+    padding: 120px 0px;
+    h2{
+        color: #595349;
+        font-size: 32px !important;
+        font-style: normal !important;
+        font-weight: 700 !important;
+        line-height: 120%; /* 38.4px */
+        margin-bottom: 24px;
+        @media #{$max1024}{
+            font-size: 24px !important;
+            margin-bottom: 24px;
+        }
+    }
     .tf-slider-item{
-        height: auto;
+        height: auto !important;
         box-shadow: none;
         border: 0px solid;
         background-color: transparent;
+        padding: 0px 12px;
+        margin-bottom: 0px !important;
+        @media #{$max1024}{
+            padding: 0px 4px;
+        }
+        @media #{$max767}{
+            padding: 0px 12px;
+        }
+        .tf-image-data{
+            img{
+                height: 240px;
+                object-fit: cover;
+                width: 100%;
+            }
+        }
         .tf-meta-info{
+            padding: 16px 24px 24px 24px;
+            background-color: #FDF9F3;
+            min-height: 220px;
+            max-height: 220px;
+            display: flex;
+            flex-direction: column;
+            @media #{$max1366}{
+                min-height: none;
+                max-height: none;
+            }
+            @media #{$max1366}{
+                min-height: 195px;
+                max-height: 195px;
+            }
             a.see-details{
                 display: block;
                 padding: 8px 16px;
@@ -405,6 +813,16 @@
                 line-height: 150%; /* 24px */
                 text-decoration: none;
                 text-align: center;
+                transition: .3s all ease;
+                margin-top: auto;
+                &:hover{
+                    background-color: #917242;
+                    color: #FDF9F3;
+                    border-color: #917242;
+                }
+                @media #{$max1024}{
+                    font-size: 12px !important;
+                }
             }
             .tf-meta-location{
                 color: #99948D;
@@ -412,14 +830,14 @@
                 font-style: normal;
                 font-weight: 400;
                 line-height: 130%;
-                margin: 16px 0px 24px 0px;
+                margin: 0px 0px 24px 0px;
             }
             .tf-meta-title{
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                margin-top: 16px;
                 h2{
+                    margin-bottom: 16px;
                     a{
                         text-decoration: none;
                         color: #595349;
@@ -427,15 +845,25 @@
                         font-style: normal;
                         font-weight: 700;
                         line-height: 120%;
+                        @media #{$max1024}{
+                            font-size: 24px !important;
+                        }
                     }
                 }
                 .tf-meta-data-price{
+                    margin-left: 37px;
+                    @media #{$max1024}{
+                        margin-left: 23px;
+                    }
                     span{
                         color: #595349;
                         font-size: 24px;
                         font-style: normal;
                         font-weight: 400;
                         line-height: 130%;
+                        @media #{$max1024}{
+                            font-size: 20px !important;
+                        }
                     }
                 }
             }
@@ -445,7 +873,7 @@
     .slick-next.pull-right.slick-arrow{
         position: absolute;
         right: 50px;
-        top: -55px;
+        top: -37px;
         left: auto;
         &::before{
             font-family: "Font Awesome 6 Free";

@@ -4,13 +4,12 @@ defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'TF_Settings' ) ) {
 	class TF_Settings {
-
+		
 		public $option_id = null;
 		public $option_title = null;
 		public $option_icon = null;
 		public $option_position = null;
 		public $option_sections = array();
-
 		public $pre_tabs;
 		public $pre_fields;
 		public $pre_sections;
@@ -383,7 +382,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					</div>
 				</div>
 
-				<!-- deshboar-performance-section -->
+				<!-- dashboard-performance-section -->
 
 				</div>
 			</div>
@@ -399,7 +398,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		?>
 		<div class="tf-setting-dashboard">
 
-			<!-- deshboard-header-include -->
+			<!-- dashboard-header-include -->
 			<?php echo tf_dashboard_header(); ?>
 
 			<div class="tf-settings-help-center">
@@ -413,7 +412,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						<img src="<?php echo TF_ASSETS_APP_URL; ?>images/setup_wizard.png" alt="setup wizard">
 					</div>
 				</div>
-
+ 
                 <div class="tf-help-center-banner">
                     <div class="tf-help-center-content">
                         <h2><?php _e("Help Center","tourfic"); ?></h2>
@@ -575,7 +574,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		?>
 		<div class="tf-setting-dashboard">
 
-			<!-- deshboard-header-include -->
+			<!-- dashboard-header-include -->
 			<?php echo tf_dashboard_header(); ?>
 			
 			<div class="tf-setting-license">

@@ -1,23 +1,49 @@
-.tf-whats-around ul {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+.tf-whats-around {
+    @media #{$max767}{
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+    ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        @media #{$max767}{
+            gap: 8px;
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            @media #{$max1024}{
+                display: flow-root;
+            }
+            @media #{$max767}{
+                display: flex;
+            }
+            span{
+                width: 100% !important;
+                display: block;
+                &:last-child{
+                    text-align: right;
+                }
+            }
+            i {
+                margin-right: 8px;
+                width: 20px;
+                font-size: 20px;
+            }
+        }
+    }
 }
 
-.tf-whats-around ul li {
-    display: flex;
-    justify-content: space-between;
-}
 
 .tf-single-widgets h2 {
-    margin-bottom: 24px;
+    margin-bottom: 0px;
     font-weight: 700 !important;
-}
-
-.tf-whats-around ul li i {
-    margin-right: 8px;
+    @media #{$max1024}{
+        font-size: 20px !important;
+    }
 }
 
 .tf-location iframe {
@@ -32,17 +58,25 @@
 .tf-review-data {
     display: flex;
     gap: 53px;
+    margin-bottom: 24px;
+    @media #{$max1024}{
+        margin-bottom: 16px;
+    }
 }
 
 .tf-review-data-average {
     h2{
         margin-bottom: 0px;
+        font-size: 40px !important;
+        font-family: Josefin Sans !important;
+        font-weight: 400 !important;
+        line-height: 52px !important;
+        word-wrap: break-word;
+        color: #99948D;
+        @media #{$max1024}{
+            font-size: 24px !important;
+        }
     }
-    font-size: 40px !important;
-    font-family: Josefin Sans;
-    font-weight: 400 !important;
-    line-height: 52px !important;
-    word-wrap: break-word;
 }
 
 .tf-review-data-average span {
@@ -53,14 +87,16 @@
     color: #595349;
     font-size: 20px;
     line-height: 26px;
-}
-
-.tf-review-all-info span {
-    color: #99948D;
-    font-size: 16px;
-    line-height: 20.80px;
-    display: block;
-    margin-top: 6px;
+    p{
+        font-size: 20px !important;
+        span {
+            color: #99948D;
+            font-size: 16px;
+            line-height: 20.80px;
+            display: block;
+            margin-top: 6px;
+        }
+    }
 }
 
 .tf-progress-item {
@@ -72,6 +108,7 @@
 .tf-review-feature-label {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 4px;
 }
 
 .tf-progress-bar {
@@ -111,20 +148,62 @@ button.tf-review-open.button, .tf-reting-field button {
     width: 100%;
     border: none;
     padding: 12px 0;
+    border-radius: 0px;
+    @media #{$max1024}{
+        font-size: 12px;
+    }
 }
 
 .tf-single-widgets {
     display: flex;
     gap: 24px;
     flex-direction: column;
+    @media #{$max1024}{
+        gap: 16px;
+    }
+}
+
+.tf-tour-contact-informations {
+    background-color: #fcf4e8;
+    padding: 24px;
+
+    .tf-contact-details-title {
+        h3 {
+            font-weight: 700 !important;
+            font-size: 30px;
+            margin-bottom: 5px;
+        }
+    }
+    .tf-contact-details-items {
+        .tf-list {
+        li {
+            margin-top: 5px;
+            margin-bottom: 15px;
+            align-items: center;
+            
+            a {
+                text-decoration: none;
+                color: #99948d;
+            }
+            i {
+                font-size: 20px;
+                color: #b58e53;
+            }
+        }
+        }
+    }
+
 }
 
 .tf-review-form-wrapper {
     background: #FCF4E8;
     padding: 24px;
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 16px;
+}
+.tf-review-show{
+    display: flex;
 }
 
 .tf-review-form-wrapper h3 {
@@ -147,14 +226,19 @@ button.tf-review-open.button, .tf-reting-field button {
                 .tf-form-single-rating{
                     display: flow-root;
                     label{
-                        font-size: 14px;
+                        font-size: 14px !important;
                         font-weight: 600;
                         line-height: 18.2px;
                         display: block;
+                        margin-right: 4px;
                     }
                     .ratings-container{
                         width: auto !important;
                         text-align: left;
+                    }
+                    span.error{
+                        position: relative;
+                        top: 4px;
                     }
                 }
             }
@@ -170,6 +254,10 @@ button.tf-review-open.button, .tf-reting-field button {
                     border: none !important;
                     padding: 12px 0 !important;
                     border-radius: 0px !important;
+                    transition: .3s all ease;
+                    &:hover{
+                        background-color: #917242 !important;
+                    }
                 }
             }
             input,textarea{
@@ -177,8 +265,12 @@ button.tf-review-open.button, .tf-reting-field button {
                 background: transparent;
                 padding: 8px;
                 color: #222;
-                font-size: 12px;
+                font-size: 16px;
                 border-radius: 0px;
+                font-family: Josefin Sans !important;
+            }
+            textarea{
+                width: 100% !important;
             }
         }
     }
@@ -225,49 +317,76 @@ span.tf-reting-stars {
     color: #fff;
     width: 100%;
 }
-.tf-room-popup .tf-popup-inner {
-    width: 1500px;
-}
 
-.tf-popup-left {
-    width: 1100px;
-}
-
-.tf-popup-right h4 {
-    color: #595349;
-    font-size: 16px;
-    font-family: Josefin Sans;
-    font-weight: 600;
-    line-height: 20.80px;
-    word-wrap: break-word;
-}
-
-.tf-popup-right {
+// Inquery Box
+.tf-send-inquiry{
+    background: #FCF4E8;
     display: flex;
+    padding: 56px 80px;
     flex-direction: column;
+    align-items: center;
     gap: 24px;
-    width: calc(100% - 1110px);
-}
-
-.tf-popup-right ul {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 16px;
-}
-
-.tf-popup-right ul li {
-    width: calc(50% - 8px);
-}
-
-.tf-popup-right a {
-    color: #595349;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 20.80px;
-    text-decoration: none;
+    @media #{$max1366}{
+        padding: 56px 16px;
+    }
+    @media #{$max1024}{
+        padding: 16px;
+    }
+    @media #{$max767}{
+        gap: 16px;
+    }
+    i{
+        font-size: 64px;
+    }
+    h3{
+        color: #595349;
+        font-family: Cormorant Garamond;
+        font-size: 32px !important;
+        font-style: normal !important;
+        font-weight: 700 !important;
+        line-height: 120%;
+        margin: 0;
+        text-align: center;
+        @media #{$max1024}{
+            font-size: 20px !important;
+        }
+    }
+    p{
+        color: #99948D;
+        text-align: center;
+        font-family: Josefin Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 130%;
+        margin: 0;
+        @media #{$max767}{
+            font-size: 14px !important;
+        }
+    }
+    .tf-btn{
+        width: auto;
+        .tf-send-inquiry-btn{
+            background: #B58E53;
+            padding: 12px 32px;
+            color: #FDF9F3;
+            font-family: Josefin Sans;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 150%;
+            display: inline-block;
+            text-align: center;
+            transition: .3s all ease;
+            text-decoration: none;
+            &:hover{
+                background-color: #917242;
+            }
+            @media #{$max1024}{
+                font-size: 12px;
+            }
+        }
+    }
 }
 
 // archive
@@ -275,12 +394,19 @@ span.tf-reting-stars {
     display: flex;
     flex-direction: column;
     gap: 32px;
+    @media #{$max1024}{
+        gap: 16px;
+    }
     .tf-filter-title {
         display: flex;
         justify-content: space-between;
         .tf-section-title {
             margin: 0 !important;
             padding: 0;
+            font-weight: 700 !important;
+            @media #{$max1024}{
+                font-size: 20px !important;
+            }
         }
         button {
             margin: 0;
@@ -288,6 +414,22 @@ span.tf-reting-stars {
             line-height: 1;
             border: none;
             background: unset;
+            color: #595349;
+            font-family: Josefin Sans;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 150%; /* 24px */
+            transition: .3s all ease;
+            @media #{$max1024}{
+                font-size: 12px !important;
+            }
+            &:hover{
+                color: #B58E53;
+            }
+        }
+        button.filter-reset-btn{
+            display: none;
         }
     }
     .tf-filter-list-item {

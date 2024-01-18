@@ -85,7 +85,7 @@
          * show notyf error
          */
         $(document).on('click', '.post-type-tf_tours #publish, .post-type-tf_tours #save-post', function (e) {
-            if ($('textarea[name="tf_tours_opt[text_location]"]').val().length === 0) {
+            if ($('input[name="tf_tours_opt[location][address]"]').val().length === 0) {
                 e.preventDefault;
                 e.stopImmediatePropagation();
                 notyf.error(tf_admin_params.tour_location_required);
@@ -99,7 +99,7 @@
          * show notyf error
          */
         $(document).on('click', '.post-type-tf_hotel #publish, .post-type-tf_hotel #save-post', function (e) {
-            if ($('textarea[name="tf_hotels_opt[address]"]').val().length === 0) {
+            if ($('input[name="tf_hotels_opt[map][address]"]').val().length === 0) {
                 e.preventDefault;
                 e.stopImmediatePropagation();
                 notyf.error(tf_admin_params.hotel_location_required);
@@ -113,7 +113,7 @@
          * show notyf error
          */
         $(document).on('click', '.post-type-tf_apartment #publish, .post-type-tf_apartment #save-post', function (e) {
-            if ($('[name="tf_apartment_opt[address]"]').val().length === 0) {
+            if ($('[name="tf_apartment_opt[map][address]"]').val().length === 0) {
                 e.preventDefault;
                 e.stopImmediatePropagation();
                 notyf.error(tf_admin_params.apartment_location_required);
@@ -299,6 +299,38 @@
                 }
             })
         });
+
+        /*
+        * Author @Jahid
+        * Hotel, Tour, Apartment Duplicator
+        */
+       
+        $('.tf-post-data-duplicate').on('click', function(e) {
+            e.preventDefault();
+            var postID = $(this).data('postid');
+            var postType = $(this).data('posttype');
+            var nonce = $(this).data('nonce');
+            $('#wpcontent').append('<div class="tf-duplicator-loader"></div>');
+            // AJAX request to duplicate post
+            $.ajax({
+                type: 'POST',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: 'tf_duplicate_post_data',
+                    postID: postID,
+                    postType: postType,
+                    security: nonce
+                },
+                success: function(response) {
+                    window.location.reload();
+                },
+                error: function(errorThrown) {
+                    // Handle errors (if any)
+                    console.error('Error duplicating post:', errorThrown);
+                }
+            });
+        });
+
     });
 
 })(jQuery);

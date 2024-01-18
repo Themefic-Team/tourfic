@@ -1,7 +1,24 @@
 html {
   scroll-behavior: smooth;
 }
-
+.tf_template_3_global_layouts{
+  .ast-container,
+  .container,
+  .col-full{
+    max-width: none !important;
+    padding: 0px !important;
+  }
+  .site-primary-header-wrap,
+  .header-container.container,
+  #footer .footer-bottom,
+  .page-top,
+  #masthead.site-header .col-full,
+  .storefront-breadcrumb,
+  #colophon.site-footer .site-info{
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+  }
+}
 @import './modules/common';
 
 .tf-template-3 {
@@ -18,7 +35,6 @@ html {
   //SIngle Tour Page
   @import './modules/sidebar';
   @import './modules/popup';
-  // @import './modules/footer';
 }
 
 @import './modules/responsive';

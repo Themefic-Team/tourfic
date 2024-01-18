@@ -360,6 +360,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 							'options'  => [
 								'fixed'  => __( 'Fixed', 'tourfic' ),
 								'person' => __( 'Per Person', 'tourfic' ),
+								'quantity' => __( 'Choose Quantity', 'tourfic' ),
 							],
 							'default'  => 'fixed',
 							'is_pro' => true,
@@ -687,7 +688,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'          => 'cont_min_people',
 					'type'        => 'number',
-					'label'       => __( 'Minimum Person', 'tourfic' ),
+					'label'       => __( 'Minimum Person (Required for Search)', 'tourfic' ),
 					'subtitle'    => __( 'Specify the minimum person required to book this tour.', 'tourfic' ),
 					'dependency'  => array(
 						array( 'type', '==', 'continuous' ),
@@ -698,7 +699,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'          => 'cont_max_people',
 					'type'        => 'number',
-					'label'       => __( 'Maximum Person', 'tourfic' ),
+					'label'       => __( 'Maximum Person (Required for Search)', 'tourfic' ),
 					'subtitle'    => __( 'Indicate the maximum number of persons this package can be booked for.', 'tourfic' ),
 					'dependency'  => array(
 						array( 'type', '==', 'continuous' ),
@@ -875,7 +876,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 									'id'        => 'tf-repeat-months-switch',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Repeat by Months', 'tourfic' ),
-									'subtitle'  => __( 'Enable this option, if you want to repeat fixed tour by months', 'tourfic' ),
+									'subtitle'  => __( 'Enable this option, if you want to repeat fixed tour by months in one calendar year', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default' => false,
@@ -1512,27 +1513,35 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 
 		// Multiple tags for tours
 		'tours_multiple_tags' => array(
-			'title'  => __( 'Multiple Tags', 'tourfic' ),
+			'title'  => __( 'Labels', 'tourfic' ),
 			'icon'   => 'fa fa-list',
 			'fields' => array(
 				array(
+					'id'      => 'tf-tour-tags-heading',
+					'type'    => 'heading',
+					'label' => __( 'Tour labels', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
 					'id'           => 'tf-tour-tags',
 					'type'         => 'repeater',
-					'label'        => __( 'Multiple Tags', 'tourfic' ),
-					'button_title' => __( 'Add / Insert New Tag', 'tourfic' ),
+					'label'        => __( 'Labels', 'tourfic' ),
+					'subtitle' => __('Add some keywords that highlight your tour\'s Unique Selling Point (USP). This label will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
+					'button_title' => __( 'Add / Insert New Label', 'tourfic' ),
 					'fields'       => array(
 
 						array(
 							'id'    => 'tour-tag-title',
 							'type'  => 'text',
-							'label' => __( 'Tag', 'tourfic' ),
+							'label' => __( 'Label Title', 'tourfic' ),
 						),
 
 						array(
 							'id'       => 'tour-tag-color-settings',
 							'type'     => 'color',
-							'label'    => __( 'Tag Colors', 'tourfic' ),
-							'subtitle' => __( 'Colors of Tag Background and Font', 'tourfic' ),
+							'class'    => 'tf-label-field',
+							'label'    => __( 'Label Colors', 'tourfic' ),
+							'subtitle' => __( 'Colors of Label Background and Font', 'tourfic' ),
 							'multiple' => true,
 							'inline'   => true,
 							'colors'   => array(
@@ -1650,6 +1659,13 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'type'  => 'text',
 					'label' => __( 'Title of the Description Section', 'tourfic' ),
 					'default' => __("Description", 'tourfic'),
+				),
+
+				array(
+					'id'    => 'tour-features-section-title',
+					'type'  => 'text',
+					'label' => __( 'Title of the Features Section', 'tourfic' ),
+					'default' => __("Popular Features", 'tourfic'),
 				),
 				
 				array(

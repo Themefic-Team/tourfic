@@ -1,7 +1,7 @@
 <div class="tf-template-3 tf-tour-single">
 
     <!--Hero section start -->
-    <div class="tf-hero-section-wrap" style="<?php echo !empty(get_the_post_thumbnail_url()) ? 'background-image: url('.esc_url(get_the_post_thumbnail_url()).');' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
+    <div class="tf-hero-section-wrap" style="<?php echo !empty(get_the_post_thumbnail_url()) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.40) 0%, rgba(48, 40, 28, 0.40) 100%), url('.esc_url(get_the_post_thumbnail_url()).'), lightgray 0px -268.76px / 100% 249.543% no-repeat;background-size: cover; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
         <div class="tf-container">
             <div class="tf-hero-content">
                 <div class="tf-wish-and-share">
@@ -11,80 +11,68 @@
                         if ( is_user_logged_in() ) {
                         if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
                     ?>
-                    <a class="tf-icon tf-wishlist-box tf-wishlist">
+                    <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr('actives') : '' ?>">
                         <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
                     </a>
                     <?php } } else{ 
                     if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {    
                     ?>
-                    <a class="tf-icon tf-wishlist-box tf-wishlist">
+                    <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr('actives') : '' ?>">
                         <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
                     </a>
                     <?php } } } ?>
                 
                     <!-- Share Section -->
                     <?php if ( ! $disable_share_opt == '1' ) { ?>
-                    <div class="tf-share">
-                        <a href="#dropdown-share-center" class="share-toggle tf-icon tf-social-box"
+                    <div class="tf-share tf-off-canvas-share-box">
+
+                        <ul class="tf-off-canvas-share">
+                            <li>
+                                <a href="http://www.facebook.com/share.php?u=<?php echo esc_url( $share_link ); ?>"
+                                class="tf-dropdown-item" target="_blank">
+                            <span class="tf-dropdown-item-content">
+                                <i class="fab fa-facebook"></i>
+                            </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://twitter.com/share?text=<?php echo esc_attr( $share_text ); ?>&url=<?php echo esc_url( $share_link ); ?>"
+                                class="tf-dropdown-item" target="_blank">
+                            <span class="tf-dropdown-item-content">
+                                <i class="fab fa-twitter"></i>
+                            </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/cws/share?url=<?php echo esc_url( $share_link ); ?>"
+                                class="tf-dropdown-item" target="_blank">
+                            <span class="tf-dropdown-item-content">
+                                <i class="fab fa-linkedin"></i>
+                            </span>
+                                </a>
+                            </li>
+                            <?php $share_image_link = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' ); ?>
+                            <li>
+                                <a href="http://pinterest.com/pin/create/button/?url=<?php echo esc_url( $share_link ); ?>&media=<?php echo esc_url( get_the_post_thumbnail_url() ); ?>&description=<?php echo esc_attr( $share_text ); ?>"
+                                class="tf-dropdown-item" target="_blank">
+                            <span class="tf-dropdown-item-content">
+                                <i class="fab fa-pinterest"></i>
+                            </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" id="share_link_button" class="share-center-copy-cta">
+                                <i class="ri-links-line"></i>
+                                    <span class="tf-button-text share-center-copied-message"><?php esc_html_e( 'Link Copied!', 'tourfic' ); ?></span>
+                                </a>
+                                <input type="text" id="share_link_input" class="share-center-url share-center-url-input" value="<?php echo esc_attr( $share_link ); ?>" readonly style="opacity: 0; width: 0px !important;margin: 0px">
+                            </li>
+                        </ul>
+                        
+                        <a href="#dropdown-share-center" class="tf-share-toggle tf-icon tf-social-box"
                         data-toggle="true">
                             <i class="ri-share-line"></i>
                         </a>
-
-                        <div id="dropdown-share-center" class="share-tour-content">
-                            <div class="tf-dropdown-share-content">
-                                <h4><?php _e("Share with friends", "tourfic"); ?></h4>
-                                <ul>
-                                    <li>
-                                        <a href="http://www.facebook.com/share.php?u=<?php echo esc_url( $share_link ); ?>"
-                                        class="tf-dropdown-item" target="_blank">
-                                    <span class="tf-dropdown-item-content">
-                                        <i class="fab fa-facebook"></i>
-                                    </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="http://twitter.com/share?text=<?php echo esc_attr( $share_text ); ?>&url=<?php echo esc_url( $share_link ); ?>"
-                                        class="tf-dropdown-item" target="_blank">
-                                    <span class="tf-dropdown-item-content">
-                                        <i class="fab fa-twitter-square"></i>
-                                    </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.linkedin.com/cws/share?url=<?php echo esc_url( $share_link ); ?>"
-                                        class="tf-dropdown-item" target="_blank">
-                                    <span class="tf-dropdown-item-content">
-                                        <i class="fab fa-linkedin"></i>
-                                    </span>
-                                        </a>
-                                    </li>
-                                    <?php $share_image_link = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' ); ?>
-                                    <li>
-                                        <a href="http://pinterest.com/pin/create/button/?url=<?php echo esc_url( $share_link ); ?>&media=<?php echo esc_url( get_the_post_thumbnail_url() ); ?>&description=<?php echo esc_attr( $share_text ); ?>"
-                                        class="tf-dropdown-item" target="_blank">
-                                    <span class="tf-dropdown-item-content">
-                                        <i class="fab fa-pinterest"></i>
-                                    </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div title="<?php esc_attr_e( 'Share this link', 'tourfic' ); ?>"
-                                            aria-controls="share_link_button">
-                                            <button id="share_link_button" class="tf_button share-center-copy-cta" tabindex="0"
-                                                    role="button">
-                                                <i class="fa fa-link" aria-hidden="true"></i>
-                                                
-                                                <span class="tf-button-text share-center-copied-message"><?php esc_html_e( 'Link Copied!', 'tourfic' ); ?></span>
-                                            </button>
-                                            <input type="text" id="share_link_input"
-                                                class="share-center-url share-center-url-input"
-                                                value="<?php echo esc_attr( $share_link ); ?>" readonly style="opacity: 0; width: 0px !important;margin: 0px">
-                                            
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                     <?php } ?>
                     <!-- End Share Section -->
@@ -93,10 +81,13 @@
                 <div class="tf-hero-bottom-area">
                     <div class="tf-head-title">
                         <h1><?php echo get_the_title(); ?></h1>
+                        <?php 
+                        if(!empty($location)){ ?>
                         <div class="tf-title-meta">
                             <i class="ri-map-pin-line"></i>
-                            <a href="#tf-map"><?php echo esc_html( $location ); ?></a>
+                            <a href="#tour-location"><?php echo esc_html( $location ); ?></a>
                         </div>
+                        <?php } ?>
                     </div>
                     <div class="tf-hero-gallery-videos">
                         <?php
@@ -139,7 +130,7 @@
 
 
     <!--Content section end -->
-    <div class="tf-content-wrapper">
+    <div class="tf-content-wrapper tf-single-hotel-pb-56">
 
         <div class="tf-container">
 
@@ -169,6 +160,38 @@
                         <h2 class="tf-section-title"><?php _e("Available Date", "tourfic"); ?></h2>
                         <?php echo tf_single_tour_booking_form( $post->ID ); ?>
                     </div>
+                    
+                    <!-- Contact info - Start -->
+                    <?php if ( $email || $phone || $fax || $website ) : ?>
+                        <div class="tf-tour-contact-informations tf-single-widgets">
+                            <?php if( ! empty( $meta['contact-info-section-title']) ) : ?> 
+                                <div class="tf-contact-details-title">
+                                    <h2 class="tf-section-title"><?php echo esc_html( $meta['contact-info-section-title'] ) ?></h2>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <div class="tf-contact-details-items">
+                                <ul class="tf-list">
+                                    <?php
+                                    if ( ! empty( $phone ) ) { ?>
+                                        <li><i class="ri-customer-service-fill"></i> <a href="tel:<?php echo esc_html( $phone ) ?>"><?php echo esc_html( $phone ) ?></a></li>
+                                    <?php } ?>
+                                    <?php
+                                    if ( ! empty( $email ) ) { ?>
+                                        <li><i class="ri-mail-open-line"></i> <a href="mailto:<?php echo esc_html( $email ) ?>"><?php echo esc_html( $email ) ?></a></li>
+                                    <?php } ?>
+                                    <?php
+                                    if ( ! empty( $website ) ) { ?>
+                                        <li><i class="ri-global-line"></i> <a target="_blank" href="<?php echo esc_html( $website ) ?>"><?php echo esc_html( $website ) ?></a></li>
+                                    <?php } ?>
+                                    <?php
+                                    if ( ! empty( $fax ) ) { ?>
+                                        <li><i class="ri-printer-fill"></i> <a href="tel:<?php echo esc_html( $fax ) ?>"><?php echo esc_html( $fax ) ?></a></li>
+                                    <?php } ?>
+                                </ul>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                     <div class="tf-reviews tf-single-widgets">
                     <?php
                     global $current_user;
@@ -251,6 +274,41 @@
                     <?php } } } ?>
                         
                     </div>
+                     <!-- Enquery Section -->
+                    <?php 
+                    $tf_enquiry_section_status = ! empty( $meta['t-enquiry-section'] ) ? $meta['t-enquiry-section'] : "";
+                    $tf_enquiry_section_icon = ! empty( $meta['t-enquiry-option-icon'] ) ? esc_html( $meta['t-enquiry-option-icon'] ) : '';
+                    $tf_enquiry_section_title = ! empty( $meta['t-enquiry-option-title'] ) ? esc_html( $meta['t-enquiry-option-title'] ) : '';
+                    $tf_enquiry_section_des = ! empty( $meta['t-enquiry-option-content'] ) ? esc_html( $meta['t-enquiry-option-content'] ) : '';
+                    $tf_enquiry_section_button = ! empty( $meta['t-enquiry-option-btn'] ) ? esc_html( $meta['t-enquiry-option-btn'] ) : '';
+
+                    if ( ! empty( $tf_enquiry_section_status ) ) {
+                    ?>
+                    <div class="tf-send-inquiry tf-single-widgets">
+                        <?php 
+                        if (!empty($tf_enquiry_section_icon)) {
+                            ?>
+                            <i class="<?php echo $tf_enquiry_section_icon; ?>" aria-hidden="true"></i>
+                            <?php
+                        }
+                        if(!empty($tf_enquiry_section_title)) {
+                            ?>
+                            <h3><?php echo  $tf_enquiry_section_title; ?></h3>
+                            <?php
+                        }
+                        if(!empty($tf_enquiry_section_des)) {
+                            ?>
+                            <p><?php echo $tf_enquiry_section_des;  ?></p>
+                            <?php
+                        }
+                        if( !empty( $tf_enquiry_section_button )) {
+                            ?>
+                            <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-send-inquiry-btn"><span><?php echo $tf_enquiry_section_button; ?></span></a></div>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                    <?php } ?>
                 </div>
             </div>
             <!-- Hotel details End -->
@@ -310,85 +368,94 @@
             ),
         );
         //show related tour based on selected tours
-        $selected_ids         = tfopt( 'tf-related-tours' );
-        $args['post__not_in'] = array( $post_id );
+		$selected_ids = !empty(tfopt( 'tf-related-tours' )) ? tfopt( 'tf-related-tours' ) : array();
 
         if ( $related_tour_type == 'selected' && defined( 'TF_PRO' ) ) {
-            $args['post__in'] = $selected_ids;
+            if(in_array($post_id, $selected_ids)) {
+                $index = array_search($post_id, $selected_ids);
+                
+                $args['post__not_in'] = array($selected_ids[$index]);
+
+                unset($selected_ids[$index]);
+            }
+
+            if(count($selected_ids) > 0) {
+                $args['post__in'] = $selected_ids;
+            } else {
+                $args['post__in'] = array(-1);
+            }
+        } else {
+            $args['post__not_in'] = array($post_id);
         }
+
         $tours = new WP_Query( $args );
         if ( $tours->have_posts() ) {
-            ?>
+            if($tours->found_posts > 0) : ?>
 
-            <!-- Tourfic related tours tours -->
-            <div class="tf-related-tours">
-                <div class="tf-container">
-                    <div class="tf-container-inner">
-                        <div class="section-title">
-                            <h2 class="tf-title"><?php ! empty( tfopt( 'rt-title' ) ) ? esc_html_e( tfopt( 'rt-title' ), "tourfic" ) : _e( "You may also like", "tourfic" ); ?></h2>
-                            <?php
-                            if ( ! empty( tfopt( 'rt-description' ) ) ) { ?>
-                                <p><?php esc_html_e( tfopt( 'rt-description' ), "tourfic" ) ?></p>
-                            <?php } ?>
-                        </div>
-                        <div class="tf-design-3-slider-items-wrapper tf-upcomming-tours-list-outter tf-mt-40 tf-flex tf-flex-gap-24">
-                            <?php
-                            while ( $tours->have_posts() ) {
-                                $tours->the_post();
-                                if(!empty($selected_ids)){
-                                foreach($selected_ids as $selected_id) {
-                                    if($selected_id != $post_id) {
-                                        $selected_design_post_id = $selected_id;
-                                        $destinations           = get_the_terms( $selected_design_post_id, 'tour_destination' );
-                                        $first_destination_name = $destinations[0]->name;
-                                        $related_comments       = get_comments( array( 'post_id' => $selected_design_post_id ) );
-                                        $meta                   = get_post_meta( $selected_design_post_id, 'tf_tours_opt', true );
-                                        $pricing_rule           = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
-                                        $disable_adult          = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
-                                        $disable_child          = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
-                                        $tour_price             = new Tour_Price( $meta );
-                                        ?>
-                                        <div class="tf-slider-item tf-post-box-lists">
-                                            <div class="tf-post-single-box">
-                                                <div class="tf-image-data">
-                                                    <img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) ) ? get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) : TF_ASSETS_APP_URL . '/images/feature-default.jpg'; ?>" alt="">
-                                                    
-                                                </div>
-                                                <div class="tf-meta-info">
-                                                    <div class="tf-meta-title">
-                                                        <h2><a href="<?php echo get_permalink($selected_design_post_id) ?>"><?php echo  get_the_title($selected_design_post_id) ?></a></h2>
-                                                        <div class="tf-meta-data-price">
-                                                            <span>
-                                                            <?php if ( $pricing_rule == 'group' ) {
-                                                                echo $tour_price->wc_sale_group ?? $tour_price->wc_group;
-                                                            } else if ( $pricing_rule == 'person' ) {
-                                                                if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
-                                                                    echo $tour_price->wc_sale_adult ?? $tour_price->wc_adult;
-                                                                } else if ( ! $disable_child && ! empty( $tour_price->child ) ) {
-                                                                    echo $tour_price->wc_sale_child ?? $tour_price->wc_child;
-                                                                }
+                <!-- Tourfic related tours tours -->
+                <div class="tf-related-tours">
+                    <div class="tf-container">
+                        <div class="tf-container-inner">
+                            <div class="section-title">
+                                <h2 class="tf-title"><?php ! empty( tfopt( 'rt-title' ) ) ? esc_html_e( tfopt( 'rt-title' ), "tourfic" ) : _e( "You may also like", "tourfic" ); ?></h2>
+                                
+                            </div>
+                            <div class="tf-design-3-slider-items-wrapper tf-upcomming-tours-list-outter tf-flex tf-flex-gap-24">
+                                <?php
+                                while ( $tours->have_posts() ) {
+                                    $tours->the_post();
+
+                                    $selected_design_post_id = get_the_ID();
+                                    $destinations           = get_the_terms( $selected_design_post_id, 'tour_destination' );
+                                    $first_destination_name = $destinations[0]->name;
+                                    $related_comments       = get_comments( array( 'post_id' => $selected_design_post_id ) );
+                                    $meta                   = get_post_meta( $selected_design_post_id, 'tf_tours_opt', true );
+                                    $pricing_rule           = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
+                                    $disable_adult          = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
+                                    $disable_child          = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
+                                    $tour_price             = new Tour_Price( $meta );
+                                    ?>
+                                    <div class="tf-slider-item tf-post-box-lists">
+                                        <div class="tf-post-single-box">
+                                            <div class="tf-image-data">
+                                                <img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) ) ? get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) : TF_ASSETS_APP_URL . '/images/feature-default.jpg'; ?>" alt="">
+                                                
+                                            </div>
+                                            <div class="tf-meta-info">
+                                                <div class="tf-meta-title">
+                                                    <h2><a href="<?php echo get_permalink($selected_design_post_id) ?>">
+                                                    <?php echo tourfic_character_limit_callback(get_the_title($selected_design_post_id), 35); ?>
+                                                    </a></h2>
+                                                    <div class="tf-meta-data-price">
+                                                        <span>
+                                                        <?php if ( $pricing_rule == 'group' ) {
+                                                            echo $tour_price->wc_sale_group ?? $tour_price->wc_group;
+                                                        } else if ( $pricing_rule == 'person' ) {
+                                                            if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
+                                                                echo $tour_price->wc_sale_adult ?? $tour_price->wc_adult;
+                                                            } else if ( ! $disable_child && ! empty( $tour_price->child ) ) {
+                                                                echo $tour_price->wc_sale_child ?? $tour_price->wc_child;
                                                             }
-                                                            ?>
-                                                            </span>
-                                                        </div>
+                                                        }
+                                                        ?>
+                                                        </span>
                                                     </div>
-                                                    <div class="tf-meta-location">
-                                                        <i class="fa-solid fa-location-dot"></i> <?php echo $first_destination_name; ?>
-                                                    </div>
-                                                    <a class="see-details" href="<?php echo get_permalink($selected_design_post_id) ?>">
-                                                        <?php _e("See details", "tourfic"); ?>
-                                                    </a>
                                                 </div>
+                                                <div class="tf-meta-location">
+                                                    <i class="fa-solid fa-location-dot"></i> <?php echo $first_destination_name; ?>
+                                                </div>
+                                                <a class="see-details" href="<?php echo get_permalink($selected_design_post_id) ?>">
+                                                    <?php _e("See details", "tourfic"); ?>
+                                                </a>
                                             </div>
                                         </div>
-                                    <?php } ?>
-                                <?php } } ?>
-                                <?php break; ?>
-                            <?php } ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            <?php endif; ?>
         <?php }
         wp_reset_postdata();
         ?>

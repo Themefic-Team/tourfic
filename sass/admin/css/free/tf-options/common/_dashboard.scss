@@ -912,7 +912,7 @@
                     width: 100% !important;
 
                     span.select2-selection {
-                        height: 42px;
+                        min-height: 40px; 
                     }
                 }
 
@@ -1018,4 +1018,15 @@
             }
         }
     }
+}
+.tf-copy-item span.tf-copied-msg{
+  display: flex;
+  justify-content: end;
+  margin-bottom: 9px;
+  padding-right: 10px;
+}
+.tf-exp-imp-field {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
 }

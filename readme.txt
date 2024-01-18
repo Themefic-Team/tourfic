@@ -1,9 +1,9 @@
-=== Tourfic – Ultimate Hotel Booking & Travel Booking WordPress Plugin | WooCommerce Booking ===
-Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
-Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
+=== Tourfic – Ultimate Hotel Booking, Travel Booking & Apartment Booking WordPress Plugin | WooCommerce Booking ===
+Contributors: themefic, kamrul0424, jahidcse, mehedi890, mainulsunvi, hasanet
+Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings, apartment-booking, apartment-rental
 Requires at least: 5.4
-Tested up to: 6.4
-Stable tag: 2.10.6
+Tested up to: 6.4.2
+Stable tag: 2.11.4
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -12,7 +12,7 @@ Ultimate Tour, Travel & hotel booking WordPress plugin. Build your own travel ag
 
 == Description ==
 
-= The easiest and best WordPress Hotel, Tour, & Apartment Booking Plugin - Tourfic | Build Your own travel agency website like Agoda, Booking.com, Airbnb, Hotels.com =
+= The easiest and best WordPress Hotel, Tour, and apartment Booking Plugin - Tourfic | Build Your own travel agency website like Agoda, Booking.com, Airbnb, Hotels.com =
 
 👉 Official Demo Link: [Tourfic Live Preview](https://themefic.com/tourfic)
 👉 Buy Pro Version: [Tourfic Pro](https://themefic.com/tourfic/pricing)
@@ -31,9 +31,9 @@ This All-in-One Travel Booking WordPress plugin consists of almost all the basic
 * Add Unlimited Rooms (Up to 5 on Free Version)
 * Set room price per Room
 * Hotel Photo Gallery
-* Features, FAQs and Terms & Condition Per Room
+* Features, FAQs, and Terms & Conditions per Room
 * Room availability check based on Ajax
-* Dedicated Customer Review System (See Review section for breakdown)
+* Dedicated Customer Review System (See the Review section for breakdown)
 * Social Sharing Option (Facebook, Pinterest, LinkedIn, Twitter)
 * Enquiry / Ask a Question Form
 * Wishlist for Hotels
@@ -49,18 +49,18 @@ This All-in-One Travel Booking WordPress plugin consists of almost all the basic
 * Show Hotel Location on Map with Popup (Pro)
 * Add Video on Hotel Gallery (Pro)
 * Airport Pickup Service (Pro)
-* iCal integration with booking.com(Pro)
+* iCal two way sync(booking.com)(Pro)
 
 = 🎉  WordPress Travel Booking & Management System =
 * Add Unlimited Tours
 * Tour Photo Gallery
-* Features, FAQs and Terms & Condition Per Tour
+* Features, FAQs, and Terms & Conditions per Tour
 * Tour Highlights Section
 * Tour Include/Exclude Section
 * Tour Itinerary
 * Set tour as featured
 * Tour Price by Persons (Adult, Children, Infant)
-* Dedicated Customer Review System (See Review section for breakdown)
+* Dedicated Customer Review System (See the Review section for breakdown)
 * Wishlist for Tours
 * Enquiry / Ask a Question Form
 * Continuous Tour (Tour availability every month within the mentioned range)
@@ -80,7 +80,7 @@ This All-in-One Travel Booking WordPress plugin consists of almost all the basic
 * Add Unlimited Apartment
 * Apartment Photo Gallery
 * Apartment Set tour as featured
-* Location and Dynamic Location Search ( OpenStreetMap, Google map(Pro) )
+* Location and Dynamic Location Search ( OpenStreetMap, Google Map(Pro) )
 * Apartment Booking Management
 * Booking per night pricing, Minimum Night Stay
 * Apartment Pricing for Adults, Children, and Infant
@@ -94,12 +94,17 @@ This All-in-One Travel Booking WordPress plugin consists of almost all the basic
 * Apartment Terms & Conditions
 * Apartment Enquiry Section
 * Apartment Related Apartment
-* Dedicated Customer Review System (See Review section for breakdown)
+* Dedicated Customer Review System (See the Review section for breakdown)
 * Wishlist for Apartment
 * Apartment Specific Room Person Management( Pro )
 * Apartment Specific Room gallery( Pro ) 
 * Apartment Specific Room Type( Pro ) 
 * Property Surroundings( Pro )
+
+= 🎉 Data Import Export =
+* Hotel data import export( Pro )
+* Tour data import export( Pro )
+* Settings Panel import export
 
 = 🎉 Backend/Admin booking( Pro ) =
 * Backend/Admin booking for Hotel
@@ -108,6 +113,7 @@ This All-in-One Travel Booking WordPress plugin consists of almost all the basic
 = 🎉 External Booking( Pro ) =
 * External Booking for Tour
 * External Booking for Hotel
+* External Booking for Apartment
 
 = 🎉  Multi-Vendor Functions(Pro) =
 * Vendors can add unlimited hotels, tours, and apartments with all the fields(Pro)
@@ -176,7 +182,7 @@ In short, Tourfic is the ultimate WordPress tour booking plugin for hotel bookin
 
 <strong>Pro Version </strong>
 
-We believe the free version is good enough for most business. However, we have a **Pro version** of this plugin which has more advanced features as mentioned above.
+We believe the free version is good enough for most businesses. However, we have a **Pro version** of this plugin which has more advanced features as mentioned above.
 
 > <strong><a href="https://themefic.com/tourfic/pricing" target="_blank">Buy Tourfic Pro</a></strong>
 
@@ -191,7 +197,7 @@ We believe the free version is good enough for most business. However, we have a
 **With Tourfic, You can:**
 - Quickly and easily build a professional website for your tour operator or travel agency.
 - Develop a hotel reservation system for your hotel website.
-- Develop a apartment booking system for your website.
+- Develop an apartment booking system for your website.
 - Create your own professional tour operator and travel agency website within 59 minutes. The site would be similar to Booking.com, Agoda, Hotels.com, Airbnb etc.
 - Build your own online tour business and make money online by selling your tours worldwide with any payment of WooCommerce.
 
@@ -444,6 +450,107 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.11.4 - 14 January 2024 =
+
+- Added: Hide documentation link option in multi-vendor settings (pro)
+- Improved: Itinerary chart added in template 1 and 2 (pro)
+- Improved: Enhanced color settings for the frontend.
+- Fixed: Gallery popup close button issue
+- Fixed: Itinerary altitude negative value issue (pro)
+- Fixed: Single settings removed from single template settings for vendor (pro)
+- Fixed: Custom settings removed from Itinerary download settings for vendor (pro)
+- Fixed: Black screen issue fixed in vendor profile edit (pro)
+- Fixed: Booking.com and travelpayouts search issue (pro)
+
+= 2.11.3 - 03 January 2024 =
+
+- Improved: New Template Added to Setup Wizard
+- Improved: Added Icon Color Settings( Template - 3 )
+- Improved: Added Tour Features to Design( Template - 2 )(Pro)
+- Fixed: Contact Details Responsive( Template - 3 )
+- Fixed: Enquiry Responsive( Template - 3 )
+
+= 2.11.2 - 01 January 2024 =
+
+- Fixed: Performance issue fixed
+
+
+= 2.11.1 - 30 December 2023 =
+
+- Added: Add quantity-based tour extras and unlimited tour extra(Pro)
+- Added: Settings for Tour Extra Quantity in Tour Metabox > Tour Extra(Pro)
+- Added: Options in Frontend Tour Booking Popup > Tour Extras(Pro)
+
+= 2.11.0 - 27 December 2023 =
+
+- Added: New Template for (Tour and Hotel)
+- Added: Multiple Tags for Hotel/Tour/Apartment
+- Added: Add nearby places in hotels
+- Added: Shortcode Generator for Apartment
+- Added: The first day of Week Dynamic (Frontend)
+- Added: External listing Shortcode added( Pro )
+- Added: Repeated Fixed Tour( Pro )
+- Added: Apartment iCal Added( Pro )
+- Added: Apartment availability calendar
+- Fixed: All date format issues
+- Fixed: Change orders and labels on Shortcode builder
+- Fixed: External booking minor issues fixed( Pro )
+- Fixed: Hotel availability calendar pricing issue fixed( Pro )
+- Improved: Booking.com, Travelpayouts full-screen popup add( Pro )
+- Improved: Install and Active WooCommerce using Single Button
+
+= 2.10.13 - 15 December 2023 =
+
+- Improved: Itinerary builder settings
+- Added: Itinerary PDF color settings
+- Fixed: Itinerary Paragraph tag support
+
+= 2.10.12 - 10 December 2023 =
+
+- Updated: Extended Notice( Black Friday )
+- Improvement: System stability Improved
+
+= 2.10.11 - 09 December 2023 =
+
+- Added: External booking added for Apartment(Pro)
+- Added: External listing shortcode added(Pro)
+- Added: Affiliate Addon release(Pro)
+- Fixed: Tour Availability issue fixed
+- Fixed: Location Require Error Message (Tour/Hotel/Apartment)
+- Fixed: Image replace issue on frontend dashboard On Apartment(Pro)
+- Fixed: External booking minor issues fixed for hotels(Pro)
+- Fixed: Import Export Issue
+- Improved: WooCommerce Currency Compatibility
+- Improved: Compatibility Issue with ACF
+- Improved: Pricing Accuracy for Tour/Hotel/Apartment
+- Improved: Per Itinerary Language to Location(Pro)
+- Improved: Booking.com, Travelpayouts full-screen popup add(Pro)
+
+= 2.10.10 - 25 November 2023 =
+
+- Improved: Icon field Ajax infinite scroll
+- Fixed: Performance issue fixed
+
+= 2.10.9 - 23 November 2023 =
+
+- Added: Hotel and tour import-export(Pro)
+- Added: Tourfic settings panel import/export
+- Added: iCal two way sync(booking.com)(Pro)
+- Added: Hotel Tour and Apartment duplicator
+- Fixed: Hotel search issue 
+- Fixed: Fixed discount type issue
+- Improvement: Organized dashboard menu items
+
+= 2.10.8 - 16 November 2023 =
+
+- Updated: readme.txt
+- Updated: Black Friday Banner
+
+= 2.10.7 - 15 November 2023 =
+
+- Notice: Black Friday Announcements
+- Improvement: System stability Improved
 
 = 2.10.6 - 10 November 2023 =
 

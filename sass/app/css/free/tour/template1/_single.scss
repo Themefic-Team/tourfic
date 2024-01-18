@@ -278,6 +278,8 @@
         >img{
             min-height: 474px; 
             max-height: 474px; 
+            object-fit: cover;
+
             @media #{$tfmax991}{
                 min-height: auto;
                 max-height: auto;
@@ -614,6 +616,35 @@
     }
 }
 
+.tf-tour-features {
+    ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        list-style-type: none;
+        gap: 5px;
+
+        li{
+            display: inline-flex;
+            justify-content: flex-start;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 10px 15px;
+            text-transform: capitalize;
+            margin: 5px 16px 10px 0px;
+            box-shadow: 0px 0px 24px 5px #E0E8EE;
+            font-size: 15px;
+            font-weight: 300;
+            
+            .tf-tour-features-icon {
+                margin-right: 8px;
+            } 
+        }
+    }
+}
+
 //highlights
 .tf-highlights-wrapper {
     background: #fff;
@@ -627,6 +658,7 @@
                 height: 100%;
                 max-width: none;
             }
+            
         }
     }
 
@@ -707,6 +739,9 @@
                 }
             }
             .tf-itinerary-content-details{
+                p {
+                    margin-bottom: 5px;
+                }
                 flex-basis: 80%;
                 @media #{$tfmax767}{
                     flex-basis: 100%;
@@ -726,8 +761,9 @@
                     display: none;
                     position: relative;
                     img{
-                        height: 100%;
+                        height: 91px;
                         border-radius: 5px;
+                        object-fit: cover;
                     }
                     &:nth-child(1),
                     &:nth-child(2),
@@ -822,6 +858,9 @@
     .tf-itinerary-downloader-option{
         background-color: $color-theme;
         border-radius: $tf-brds-default;
+        .itinerary-downloader-left {
+            overflow: hidden;
+        }
         h3,p{
             color: #fff;
         }
@@ -1084,6 +1123,7 @@
         }
     }
     .tf-review-form{
+        padding-bottom: 30px;
         .tf-review-form-container{
             background: transparent !important;
             min-width: auto !important;
@@ -1157,8 +1197,8 @@
                     border-left-width: 0;
                     border-bottom-width: 0;
                     color: #ffffff;
-                    border-color: $color-theme;
-                    background: $color-theme;
+                    border-color: $color-theme !important;
+                    background: $color-theme !important;
                     border-radius: 2px;
                     padding-top: 15px;
                     padding-right: 30px;
@@ -1386,7 +1426,7 @@
     padding: 32px;
     background-color: #EDF2F7;
     box-shadow: 0px 0px 24px 5px #e0e8ee;
-    z-index: 999;
+    z-index: 9999;
     @include flexbox();
     @include justify-content(center);
     @include align-items(center);
@@ -1407,6 +1447,7 @@
     }
     &.active{
         transform: rotateX(0deg);
+        width: 100%;
     }
 
     &.mobile-active{
@@ -1501,7 +1542,8 @@
     .tf_acrselection-wrap{
         left: 0;
         right: auto;
-        top: -210px;
+        top: unset;
+        bottom: 100%;
         width: auto;
     }
 

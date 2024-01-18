@@ -165,7 +165,7 @@ add_action( 'admin_footer', 'tf_admin_footer' );
  */
 function tf_dashboard_header() {
 	?>
-    <!-- deshboard-top-section -->
+    <!-- dashboard-top-section -->
     <div class="tf-setting-top-bar">
         <div class="version">
             <img src="<?php echo TF_ASSETS_APP_URL; ?>images/tourfic-logo.webp" alt="logo">
@@ -209,7 +209,7 @@ function tf_dashboard_header() {
             </div>
         </div>
     </div>
-    <!-- deshboard-top-section -->
+    <!-- dashboard-top-section -->
 	<?php
 }
 
@@ -297,7 +297,7 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 
 /*
  * Get hotel availability calendar
- * @auther Foysal
+ * @author Foysal
  */
 if ( ! function_exists( 'tf_get_hotel_availability' ) ) {
 	function tf_get_hotel_availability() {
@@ -354,37 +354,53 @@ if ( ! function_exists( 'tf_update_room_avail_date_price' ) ) {
 				$rooms                = unserialize( $tf_hotel_rooms_value );
 			}
 
-			foreach ( $rooms as $roomIndex => $room ) {
-				$pricing_by   = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
-				$price        = ! empty( $room['price'] ) ? $room['price'] : '';
-				$adult_price  = ! empty( $room['adult_price'] ) ? $room['adult_price'] : '';
-				$child_price  = ! empty( $room['child_price'] ) ? $room['child_price'] : '';
-				$avil_by_date = ! empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : '';
+			if ( ! empty( $rooms ) ) {
+				foreach ( $rooms as $roomIndex => $room ) {
+					$pricing_by   = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
+					$price        = ! empty( $room['price'] ) ? $room['price'] : '';
+					$adult_price  = ! empty( $room['adult_price'] ) ? $room['adult_price'] : '';
+					$child_price  = ! empty( $room['child_price'] ) ? $room['child_price'] : '';
+					$avil_by_date = ! empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : '';
 
-				if ( $avil_by_date === '1' && ! empty( $room['avail_date'] ) ) {
-					$hotel_avail_data = json_decode( $room['avail_date'], true );
+					if ( $avil_by_date === '1' && ! empty( $room['avail_date'] ) ) {
+						$hotel_avail_data = json_decode( $room['avail_date'], true );
 
-					if ( isset( $hotel_avail_data ) && ! empty( $hotel_avail_data ) ) {
+						if ( isset( $hotel_avail_data ) && ! empty( $hotel_avail_data ) ) {
 
-						$hotel_avail_data = array_map( function ( $item ) use ( $pricing_by, $price, $adult_price, $child_price ) {
+							$hotel_avail_data = array_map( function ( $item ) use ( $pricing_by, $price, $adult_price, $child_price ) {
 
-							if ( $pricing_by == '1' ) {
-								if ( empty( $item['price'] ) ) {
-									$item['price'] = $price;
+								if ( $pricing_by == '1' ) {
+									$item['price'] = !isset($item['price']) ? $price : $item['price'];
+								} else {
+									$item['adult_price'] = !isset($item['adult_price']) ? $adult_price : $item['adult_price'];
+                                    $item['child_price'] = !isset($item['child_price']) ? $child_price : $item['child_price'];
 								}
-							} else {
-								if ( empty( $item['adult_price'] ) || empty( $item['child_price'] ) ) {
-									$item['adult_price'] = $adult_price;
-									$item['child_price'] = $child_price;
-								}
-							}
-							$item['price_by'] = $pricing_by;
+								$item['price_by'] = $pricing_by;
 
-							return $item;
-						}, $hotel_avail_data );
+								return $item;
+							}, $hotel_avail_data );
+						}
+
+						$meta['room'][ $roomIndex ]['avail_date'] = json_encode( $hotel_avail_data );
+					} elseif ( $avil_by_date === '1' && empty( $room['avail_date'] ) ) {
+						//add next 5 years availability
+						$hotel_avail_data = [];
+                        for ( $i = 0; $i <= 1825; $i ++ ) {
+                            $tf_room_date                     = date( 'Y/m/d', strtotime( "+$i day" ) );
+                            $tf_room_data                     = [
+                                'check_in'    => $tf_room_date,
+                                'check_out'   => $tf_room_date,
+                                'price_by'    => $pricing_by,
+                                'price'       => $price,
+                                'adult_price' => $adult_price,
+                                'child_price' => $child_price,
+                                'status'      => 'available'
+                            ];
+                            $hotel_avail_data[ $tf_room_date ] = $tf_room_data;
+                        }
+
+                        $meta['room'][ $roomIndex ]['avail_date'] = json_encode( $hotel_avail_data );
 					}
-
-					$meta['room'][ $roomIndex ]['avail_date'] = json_encode( $hotel_avail_data );
 				}
 			}
 			update_post_meta( $post_id, 'tf_hotels_opt', $meta );
@@ -525,31 +541,27 @@ if ( ! function_exists( 'tf_get_apartment_availability' ) ) {
 if ( ! function_exists( 'tf_update_apt_availability_price' ) ) {
 	function tf_update_apt_availability_price( $post_id, $post ) {
 		if ( $post->post_type == 'tf_apartment' ) {
-			$apt_availability    = get_post_meta( $post_id, 'tf_apartment_opt', true );
-			$pricing_type        = ! empty( $apt_availability['pricing_type'] ) ? $apt_availability['pricing_type'] : '';
-			$price               = ! empty( $apt_availability['price_per_night'] ) ? $apt_availability['price_per_night'] : '';
-			$adult_price         = ! empty( $apt_availability['adult_price'] ) ? $apt_availability['adult_price'] : '';
-			$child_price         = ! empty( $apt_availability['child_price'] ) ? $apt_availability['child_price'] : '';
-			$infant_price        = ! empty( $apt_availability['infant_price'] ) ? $apt_availability['infant_price'] : '';
-			$enable_availability = ! empty( $apt_availability['enable_availability'] ) ? $apt_availability['enable_availability'] : '';
+			$meta                = get_post_meta( $post_id, 'tf_apartment_opt', true );
+			$pricing_type        = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : '';
+			$price               = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : '';
+			$adult_price         = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : '';
+			$child_price         = ! empty( $meta['child_price'] ) ? $meta['child_price'] : '';
+			$infant_price        = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : '';
+			$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
 
-			if ( $enable_availability === '1' && ! empty( $apt_availability['apt_availability'] ) ) {
-				$apt_availability_data = json_decode( $apt_availability['apt_availability'], true );
+			if ( $enable_availability === '1' && ! empty( $meta['apt_availability'] ) ) {
+				$apt_availability_data = json_decode( $meta['apt_availability'], true );
 
 				if ( isset( $apt_availability_data ) && ! empty( $apt_availability_data ) ) {
 
 					$apt_availability_data = array_map( function ( $item ) use ( $pricing_type, $price, $adult_price, $child_price, $infant_price ) {
 
 						if ( $pricing_type == 'per_night' ) {
-							if ( empty( $item['price'] ) ) {
-								$item['price'] = $price;
-							}
+							$item['price'] = ! isset( $item['price'] ) ? $price : $item['price'];
 						} else {
-							if ( empty( $item['adult_price'] ) || empty( $item['child_price'] ) || empty( $item['infant_price'] ) ) {
-								$item['adult_price']  = $adult_price;
-								$item['child_price']  = $child_price;
-								$item['infant_price'] = $infant_price;
-							}
+							$item['adult_price']  = ! isset( $item['adult_price'] ) ? $adult_price : $item['adult_price'];
+							$item['child_price']  = ! isset( $item['child_price'] ) ? $child_price : $item['child_price'];
+							$item['infant_price'] = ! isset( $item['infant_price'] ) ? $infant_price : $item['infant_price'];
 						}
 						$item['pricing_type'] = $pricing_type;
 
@@ -557,12 +569,97 @@ if ( ! function_exists( 'tf_update_apt_availability_price' ) ) {
 					}, $apt_availability_data );
 				}
 
-				$apt_availability['apt_availability'] = json_encode( $apt_availability_data );
-				update_post_meta( $post_id, 'tf_apartment_opt', $apt_availability );
+				$meta['apt_availability'] = json_encode( $apt_availability_data );
+				update_post_meta( $post_id, 'tf_apartment_opt', $meta );
+
+			} elseif ( $enable_availability === '1' && empty( $meta['apt_availability'] ) ) {
+				//add next 5 years availability
+				$apt_availability_data = [];
+				for ( $i = strtotime( date( 'Y-m-d' ) ); $i <= strtotime( '+5 year', strtotime( date( 'Y-m-d' ) ) ); $i = strtotime( '+1 day', $i ) ) {
+					$tf_apt_date                           = date( 'Y/m/d', $i );
+					$tf_apt_data                           = [
+						'check_in'     => $tf_apt_date,
+						'check_out'    => $tf_apt_date,
+						'pricing_type' => $pricing_type,
+						'price'        => $price,
+						'adult_price'  => $adult_price,
+						'child_price'  => $child_price,
+						'infant_price' => $infant_price,
+						'status'       => 'available'
+					];
+					$apt_availability_data[ $tf_apt_date ] = $tf_apt_data;
+				}
+
+				$meta['apt_availability'] = json_encode( $apt_availability_data );
+				update_post_meta( $post_id, 'tf_apartment_opt', $meta );
 			}
 		}
 	}
 
 	add_action( 'save_post', 'tf_update_apt_availability_price', 99, 2 );
 }
+/*
+ * Get all icons list
+ * @author Foysal
+ */
+function get_icon_list() {
+	$icons = array(
+		'all'           => array(
+			'label'      => __( 'All Icons', 'tourfic' ),
+			'label_icon' => 'ri-grid-fill',
+			'icons'      => array_merge( fontawesome_four_icons(), fontawesome_five_icons(), fontawesome_six_icons(), remix_icon() ),
+		),
+		'fontawesome_4' => array(
+			'label'      => __( 'Font Awesome 4', 'tourfic' ),
+			'label_icon' => 'fa-regular fa-font-awesome',
+			'icons'      => fontawesome_four_icons(),
+		),
+		'fontawesome_5' => array(
+			'label'      => __( 'Font Awesome 5', 'tourfic' ),
+			'label_icon' => 'fa-regular fa-font-awesome',
+			'icons'      => fontawesome_five_icons(),
+		),
+		'fontawesome_6' => array(
+			'label'      => __( 'Font Awesome 6', 'tourfic' ),
+			'label_icon' => 'fa-regular fa-font-awesome',
+			'icons'      => fontawesome_six_icons(),
+		),
+		'remixicon'     => array(
+			'label'      => __( 'Remix Icon', 'tourfic' ),
+			'label_icon' => 'ri-remixicon-line',
+			'icons'      => remix_icon(),
+		),
+	);
 
+	$icons = apply_filters( 'tf_icon_list', $icons );
+
+	return $icons;
+}
+
+/*
+ * Icon infinite scroll
+ * @author Foysal
+ */
+if ( ! function_exists( 'tf_load_more_icons' ) ) {
+	add_action( 'wp_ajax_tf_load_more_icons', 'tf_load_more_icons' );
+	function tf_load_more_icons() {
+		$start_index = isset( $_POST['start_index'] ) ? intval( $_POST['start_index'] ) : 0;
+		$type        = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : 'all';
+		$icon_list   = get_icon_list();
+		$icons       = array_slice( $icon_list[ $type ]['icons'], $start_index, 100 );
+
+		$icons_html = '';
+		foreach ( $icons as $key => $icon ) {
+			$icons_html .= '<li data-icon="' . esc_attr( $icon ) . '">
+                            <div class="tf-icon-inner">
+                                <i title="' . esc_attr( $icon ) . '" class="tf-main-icon ' . esc_attr( $icon ) . '"></i>
+                                <span class="check-icon">
+                                    <i class="ri-check-line"></i>
+                                </span>
+                            </div>
+                        </li>';
+		}
+
+		wp_send_json_success( $icons_html );
+	}
+}

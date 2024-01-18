@@ -481,9 +481,11 @@ function tf_search_form_shortcode( $atts, $content = null ) {
                 <div id="tf-apartment-booking-form" class="tf-tabcontent" <?php echo tf_is_search_form_single_tab( $type ) ? 'style="display:block"' : '' ?><?php echo esc_attr( $child_age_limit ); ?>>
 					<?php
 					if ( $advanced == "enabled" ) {
-						tf_apartment_search_form_horizontal( $classes, $title, $subtitle, true );
+						$advanced_opt = true;
+						tf_apartment_search_form_horizontal( $classes, $title, $subtitle, $advanced_opt, $design );
 					} else {
-						tf_apartment_search_form_horizontal( $classes, $title, $subtitle );
+						$advanced_opt = false;
+						tf_apartment_search_form_horizontal( $classes, $title, $subtitle, $advanced_opt, $design );
 					}
 					?>
                 </div>
@@ -562,7 +564,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 	}elseif(!empty($_GET['type']) && $_GET['type'] == "tf_tours"){
 		$tf_defult_views = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour_archive_view'] ) ? tf_data_types(tfopt( 'tf-template' ))['tour_archive_view'] : 'list';
 	}else{
-
+		$tf_defult_views = 'list';
 	}
 
 	$paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
@@ -874,10 +876,9 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 				<?php if($post_type == "tf_tours"){ ?>
 				<h2 class="tf-total-results"><?php _e("Total", "tourfic"); ?> <span><?php echo $total_posts; ?></span> <?php _e("tours available", "tourfic"); ?></h2>
 				<?php } ?>
-				<!-- <div class="tf-filter">
-					<span><?php //_e("Best match", "tourfic"); ?></span>
-					<i class="fa-solid fa-chevron-down"></i>
-				</div> -->
+				<div class="tf-archive-filter-showing">
+					<i class="ri-equalizer-line"></i>
+				</div>
 			</div>
 			
 			<!-- Loader Image -->
@@ -1000,12 +1001,14 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 						}
 					}
 					$total_pages = ceil( $total_filtered_results / $post_per_page );
-					echo "<div class='tf_posts_navigation tf_posts_page_navigation'>";
-					echo paginate_links( array(
-						'total'   => $total_pages,
-						'current' => $current_page
-					) );
-					echo "</div>";
+					if($total_pages > 1){
+						echo "<div class='tf_posts_navigation tf_posts_page_navigation'>";
+						echo paginate_links( array(
+							'total'   => $total_pages,
+							'current' => $current_page
+						) );
+						echo "</div>";
+					}
 				}
 
 			} else {

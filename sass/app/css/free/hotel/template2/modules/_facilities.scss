@@ -1,4 +1,16 @@
 .tf-facilities-wrapper {
+    h2{
+        color: #595349;
+        font-size: 32px !important;
+        font-style: normal !important;
+        font-weight: 700 !important;
+        line-height: 120%; /* 38.4px */
+        margin-bottom: 24px !important;
+        @media #{$max1024}{
+            font-size: 24px !important;
+            margin-bottom: 16px !important;
+        }
+    }
     .tf-facilities {
         display: flex;
         flex-direction: row;
@@ -7,24 +19,29 @@
         margin-bottom: 32px;
         .tf-facility-item {
             width: 25%;
+            @media #{$max767}{
+                width: 50%;
+            }
             h4 {
                 color: #595349;
                 font-weight: 600;
                 line-height: 20.80px;
                 font-family: "Josefin Sans", sans-serif;
-                margin-bottom: 13px;
+                margin-bottom: 16px;
                 i {
-                    margin-right: 6px;
+                    margin-right: 8px;
+                    font-size: 20px;
+                    width: 20px;
                 }
             }
             ul {
                 margin: 0;
                 padding: 0;
-                padding-left: 22px;
+                padding-left: 34px;
                 display: flex;
                 flex-direction: column;
-                gap: 10px;
-                li {}
+                gap: 8px;
+                list-style: none;
             }
         }
     }

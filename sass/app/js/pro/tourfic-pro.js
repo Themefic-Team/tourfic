@@ -402,72 +402,74 @@
 
         //   Tour chart preview
         if (tf_params.showitinerarychart == 1) {
-            var ctx = document.getElementById('tour-itinerary-chart').getContext('2d');
-            var chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: tf_params.itinerarayday,
-                    // Information about the dataset
-                    datasets: [{
-                        label: tf_params.elevvationmode,
-                        backgroundColor: 'lightblue',
-                        borderColor: 'royalblue',
-                        tension: 0.1,
-                        data: tf_params.itineraraymeter,
-                    }]
-                },
-
-                // Configuration options
-                options: {
-                    tooltips: {
-                        enabled: true,
-                        mode: 'label',
-                        callbacks: {
-                            label: function (tooltipItems, data) {
-                                return tooltipItems.yLabel + ' ' + tf_params.elevvationmode;
-                            }
-                        }
-                    },
-                    layout: {
-                        padding: 10,
-                    },
-                    legend: {
-                        display: false
-                    },
-                    title: {
-                        display: true,
-                        text: tf_params.elevvationmode
-                    },
-                    scales: {
-                        yAxes: [{
-                            scaleLabel: {
-                                display: false,
-                                labelString: ''
-                            },
-                            ticks: {
-                                display: tf_params.showyaxis == 1 ? true : false
-                            },
-                            gridLines: {
-                                display: tf_params.showlinegraph == 1 ? true : false,
-                                drawBorder: tf_params.showlinegraph == 1 ? true : false,
-                            }
-                        }],
-                        xAxes: [{
-                            scaleLabel: {
-                                display: false,
-                                labelString: ''
-                            },
-                            ticks: {
-                                display: tf_params.showxaxis == 1 ? true : false
-                            },
-                            gridLines: {
-                                display: tf_params.showlinegraph == 1 ? true : false
-                            }
+            if ($('#tour-itinerary-chart').length > 0) {
+                var ctx = document.getElementById('tour-itinerary-chart').getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: tf_params.itinerarayday,
+                        // Information about the dataset
+                        datasets: [{
+                            label: tf_params.elevvationmode,
+                            backgroundColor: 'lightblue',
+                            borderColor: 'royalblue',
+                            tension: 0.1,
+                            data: tf_params.itineraraymeter,
                         }]
-                    }
-                }
+                    },
 
-            });
+                    // Configuration options
+                    options: {
+                        tooltips: {
+                            enabled: true,
+                            mode: 'label',
+                            callbacks: {
+                                label: function (tooltipItems, data) {
+                                    return tooltipItems.yLabel + ' ' + tf_params.elevvationmode;
+                                }
+                            }
+                        },
+                        layout: {
+                            padding: 10,
+                        },
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: tf_params.elevvationmode
+                        },
+                        scales: {
+                            yAxes: [{
+                                scaleLabel: {
+                                    display: false,
+                                    labelString: ''
+                                },
+                                ticks: {
+                                    display: tf_params.showyaxis == 1 ? true : false
+                                },
+                                gridLines: {
+                                    display: tf_params.showlinegraph == 1 ? true : false,
+                                    drawBorder: tf_params.showlinegraph == 1 ? true : false,
+                                }
+                            }],
+                            xAxes: [{
+                                scaleLabel: {
+                                    display: false,
+                                    labelString: ''
+                                },
+                                ticks: {
+                                    display: tf_params.showxaxis == 1 ? true : false
+                                },
+                                gridLines: {
+                                    display: tf_params.showlinegraph == 1 ? true : false
+                                }
+                            }]
+                        }
+                    }
+
+                });
+            }
         }
 
 

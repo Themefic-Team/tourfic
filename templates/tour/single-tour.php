@@ -199,9 +199,6 @@ while ( have_posts() ) : the_post();
         }, $itineraries );
         $itineraries = unserialize( $tf_hotel_itineraries_value );
     }
-	//continuous tour
-	$share_text = get_the_title();
-	$share_link = esc_url( home_url( "/?p=" ) . $post_id );
 
 	$terms_and_conditions = ! empty( $meta['terms_conditions'] ) ? $meta['terms_conditions'] : '';
 	$tf_faqs              = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $post->ID, 'tf_faqs', true ) : array();

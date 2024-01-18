@@ -1,6 +1,6 @@
 <div class="tf-template-3 tf-hotel-single">
 <!--Hero section start -->
-<div class="tf-hero-section-wrap" style="<?php echo !empty(get_the_post_thumbnail_url()) ? 'background-image: url('.esc_url(get_the_post_thumbnail_url()).');' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
+<div class="tf-hero-section-wrap" style="<?php echo !empty(get_the_post_thumbnail_url()) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.40) 0%, rgba(48, 40, 28, 0.40) 100%), url('.esc_url(get_the_post_thumbnail_url()).'), lightgray 0px -268.76px / 100% 249.543% no-repeat;background-size: cover; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
     <div class="tf-container">
         <div class="tf-hero-content">
             <div class="tf-wish-and-share">
@@ -10,13 +10,13 @@
                     if ( is_user_logged_in() ) {
                     if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
                 ?>
-                <a class="tf-icon tf-wishlist-box tf-wishlist">
+                <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr('actives') : '' ?>">
                     <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
                 </a>
                 <?php } } else{ 
                 if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {    
                 ?>
-                <a class="tf-icon tf-wishlist-box tf-wishlist">
+                <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr('actives') : '' ?>">
                     <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
                 </a>
                 <?php } } } ?>
@@ -24,67 +24,53 @@
                 
                 <!-- Share Section -->
                 <?php if ( ! $disable_share_opt == '1' ) { ?>
-                <div class="tf-share">
-                    <a href="#dropdown-share-center" class="share-toggle tf-icon tf-social-box"
+                <div class="tf-share tf-off-canvas-share-box">
+                    <ul class="tf-off-canvas-share">
+                        <li>
+                            <a href="http://www.facebook.com/share.php?u=<?php echo esc_url( $share_link ); ?>"
+                            class="tf-dropdown-item" target="_blank">
+                        <span class="tf-dropdown-item-content">
+                            <i class="fab fa-facebook"></i>
+                        </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://twitter.com/share?text=<?php echo esc_attr( $share_text ); ?>&url=<?php echo esc_url( $share_link ); ?>"
+                            class="tf-dropdown-item" target="_blank">
+                        <span class="tf-dropdown-item-content">
+                            <i class="fab fa-twitter"></i>
+                        </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/cws/share?url=<?php echo esc_url( $share_link ); ?>"
+                            class="tf-dropdown-item" target="_blank">
+                        <span class="tf-dropdown-item-content">
+                            <i class="fab fa-linkedin"></i>
+                        </span>
+                            </a>
+                        </li>
+                        <?php $share_image_link = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' ); ?>
+                        <li>
+                            <a href="http://pinterest.com/pin/create/button/?url=<?php echo esc_url( $share_link ); ?>&media=<?php echo esc_url( get_the_post_thumbnail_url() ); ?>&description=<?php echo esc_attr( $share_text ); ?>"
+                            class="tf-dropdown-item" target="_blank">
+                        <span class="tf-dropdown-item-content">
+                            <i class="fab fa-pinterest"></i>
+                        </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="share_link_button" class="share-center-copy-cta">
+                            <i class="ri-links-line"></i>
+                                <span class="tf-button-text share-center-copied-message"><?php esc_html_e( 'Link Copied!', 'tourfic' ); ?></span>
+                            </a>
+                            <input type="text" id="share_link_input" class="share-center-url share-center-url-input" value="<?php echo esc_attr( $share_link ); ?>" readonly style="opacity: 0; width: 0px !important;margin: 0px">
+                        </li>
+                    </ul>
+                    <a href="#dropdown-share-center" class="tf-share-toggle tf-icon tf-social-box"
                     data-toggle="true">
                         <i class="ri-share-line"></i>
                     </a>
-
-                    <div id="dropdown-share-center" class="share-tour-content">
-                        <div class="tf-dropdown-share-content">
-                            <h4><?php _e("Share with friends", "tourfic"); ?></h4>
-                            <ul>
-                                <li>
-                                    <a href="http://www.facebook.com/share.php?u=<?php echo esc_url( $share_link ); ?>"
-                                    class="tf-dropdown-item" target="_blank">
-                                <span class="tf-dropdown-item-content">
-                                    <i class="fab fa-facebook"></i>
-                                </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="http://twitter.com/share?text=<?php echo esc_attr( $share_text ); ?>&url=<?php echo esc_url( $share_link ); ?>"
-                                    class="tf-dropdown-item" target="_blank">
-                                <span class="tf-dropdown-item-content">
-                                    <i class="fab fa-twitter-square"></i>
-                                </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.linkedin.com/cws/share?url=<?php echo esc_url( $share_link ); ?>"
-                                    class="tf-dropdown-item" target="_blank">
-                                <span class="tf-dropdown-item-content">
-                                    <i class="fab fa-linkedin"></i>
-                                </span>
-                                    </a>
-                                </li>
-                                <?php $share_image_link = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' ); ?>
-                                <li>
-                                    <a href="http://pinterest.com/pin/create/button/?url=<?php echo esc_url( $share_link ); ?>&media=<?php echo esc_url( get_the_post_thumbnail_url() ); ?>&description=<?php echo esc_attr( $share_text ); ?>"
-                                    class="tf-dropdown-item" target="_blank">
-                                <span class="tf-dropdown-item-content">
-                                    <i class="fab fa-pinterest"></i>
-                                </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div title="<?php esc_attr_e( 'Share this link', 'tourfic' ); ?>"
-                                        aria-controls="share_link_button">
-                                        <button id="share_link_button" class="tf_button share-center-copy-cta" tabindex="0"
-                                                role="button">
-                                            <i class="fa fa-link" aria-hidden="true"></i>
-                                            
-                                            <span class="tf-button-text share-center-copied-message"><?php esc_html_e( 'Link Copied!', 'tourfic' ); ?></span>
-                                        </button>
-                                        <input type="text" id="share_link_input"
-                                            class="share-center-url share-center-url-input"
-                                            value="<?php echo esc_attr( $share_link ); ?>" readonly style="opacity: 0; width: 0px !important;margin: 0px">
-                                        
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
                 <?php } ?>
                 <!-- End Share Section -->
@@ -93,10 +79,12 @@
             <div class="tf-hero-bottom-area">
                 <div class="tf-head-title">
                     <h1><?php echo get_the_title(); ?></h1>
+                    <?php if(!empty($address)) { ?>
                     <div class="tf-title-meta">
                         <i class="ri-map-pin-line"></i>
-                        <a href="#tf-map"><?php echo esc_html( $address ); ?></a>
+                        <a href="#hotel-map-location"><?php echo esc_html( $address ); ?></a>
                     </div>
+                    <?php } ?>
                 </div>
                 <div class="tf-hero-gallery-videos">
                     <?php
@@ -139,7 +127,7 @@
 
 
 <!--Content section end -->
-<div class="tf-content-wrapper">
+<div class="tf-content-wrapper tf-single-hotel-pb-56">
     
     <div class="tf-container">
     
@@ -209,7 +197,7 @@
             </div>
             <?php } ?>
             
-            <div class="tf-location tf-single-widgets">
+            <div id="hotel-map-location" class="tf-location tf-single-widgets">
                 <h2 class="tf-section-title"><?php _e("Location", "tourfic"); ?></h2>
                 <?php if ( !defined( 'TF_PRO' ) ) { ?>
                     <?php 
@@ -307,7 +295,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="tf-all-reviews" href="#"><?php _e("See all reviews", "tourfic"); ?></a>
+                <a class="tf-all-reviews" href="#tf-hotel-reviews"><?php _e("See all reviews", "tourfic"); ?></a>
                 <?php } ?>
                 <button class="tf-review-open button">
                     <?php _e("Leave your review", "tourfic"); ?>
@@ -337,6 +325,41 @@
                     <?php tf_review_form(); ?>
                 </div>
                 <?php } } } ?>
+
+                <!-- Enquery Section -->
+                <?php 
+                $tf_enquiry_section_status = !empty($meta['h-enquiry-section']) ? $meta['h-enquiry-section'] : "";
+                $tf_enquiry_section_icon = !empty($meta['h-enquiry-option-icon']) ? esc_html($meta['h-enquiry-option-icon']) : '';
+                $tf_enquiry_section_title = !empty($meta['h-enquiry-option-title']) ? esc_html($meta['h-enquiry-option-title']) : '';
+                $tf_enquiry_section_cont = !empty($meta['h-enquiry-option-content']) ? esc_html($meta['h-enquiry-option-content']) : '';
+                $tf_enquiry_section_button = !empty($meta['h-enquiry-option-btn']) ? esc_html($meta['h-enquiry-option-btn']) : '';
+                if(!empty($tf_enquiry_section_status) && ( !empty($tf_enquiry_section_icon) || !empty($tf_enquiry_section_title) || !empty($enquery_button_text))){
+                ?>
+                <div class="tf-send-inquiry tf-single-widgets">
+                    <?php 
+                    if (!empty($tf_enquiry_section_icon)) {
+                        ?>
+                        <i class="<?php echo $tf_enquiry_section_icon; ?>" aria-hidden="true"></i>
+                        <?php
+                    }
+                    if(!empty($tf_enquiry_section_title)) {
+                        ?>
+                        <h3><?php echo  $tf_enquiry_section_title; ?></h3>
+                        <?php
+                    }
+                    if(!empty($tf_enquiry_section_cont)) {
+                        ?>
+                        <p><?php echo $tf_enquiry_section_cont;  ?></p>
+                        <?php
+                    }
+                    if( !empty( $tf_enquiry_section_button )) {
+                        ?>
+                        <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-send-inquiry-btn"><span><?php echo $tf_enquiry_section_button; ?></span></a></div>
+                        <?php
+                    }
+                    ?>
+                </div>
+                <?php } ?>
             </div>       
         </div>        
     </div>        

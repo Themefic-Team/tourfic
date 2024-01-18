@@ -85,7 +85,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-apartment.jpg",
 						),
 					),
-					'default'   	=> function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+					'default'   	=> 'default',
 					'dependency'  => [
 						array( 'tf_single_apartment_layout_opt', '==', 'single' )
 					],
@@ -353,6 +353,26 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'placeholder' => __( 'https://website.com', 'tourfic' ),
 					'is_pro'      => true,
 					'dependency'  => array( 'apt-booking-by', '==', '2' ),
+				),
+				array(
+					'id'        => '',
+					'type'      => 'switch',
+					'label'     => __( 'Hide Booking Form', 'tourfic' ),
+					'subtitle' => __( 'Enable this option to hide the booking form from the single hotel page.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'is_pro'  => true,
+					'dependency' => array( 'apt-booking-by', '==', '2' ),
+				),
+				array(
+					'id'        => '',
+					'type'      => 'switch',
+					'label'     => __( 'Hide Price', 'tourfic' ),
+					'subtitle' => __( 'Enable this option to hide the price from the single hotel page.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'is_pro'  => true,
+					'dependency' => array( 'apt-booking-by', '==', '2' ),
 				),
 				array(
 					'id'        => '',
@@ -839,27 +859,34 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 
 		// Multiple tags for apartments
 		'apartments_multiple_tags' => array(
-			'title'  => __( 'Multiple Tags', 'tourfic' ),
+			'title'  => __( 'Labels', 'tourfic' ),
 			'icon'   => 'fa fa-list',
 			'fields' => array(
 				array(
+					'id'      => 'tf-apartment-tags-heading',
+					'type'    => 'heading',
+					'label' => __( 'Apartment labels', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
 					'id'           => 'tf-apartment-tags',
 					'type'         => 'repeater',
-					'label'        => __( 'Multiple Tags', 'tourfic' ),
-					'button_title' => __( 'Add / Insert New Tag', 'tourfic' ),
+					'label'        => __( 'Labels', 'tourfic' ),
+					'subtitle' => __('Add some keywords that highlight your apartment\'s Unique Selling Point (USP). This label will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
+					'button_title' => __( 'Add / Insert New Label', 'tourfic' ),
 					'fields'       => array(
-
 						array(
 							'id'    => 'apartment-tag-title',
 							'type'  => 'text',
-							'label' => __( 'Tag', 'tourfic' ),
+							'label' => __( 'Label Title', 'tourfic' ),
 						),
 
 						array(
 							'id'       => 'apartment-tag-color-settings',
 							'type'     => 'color',
-							'label'    => __( 'Tag Colors', 'tourfic' ),
-							'subtitle' => __( 'Colors of Tag Background and Font', 'tourfic' ),
+							'class'    => 'tf-label-field',
+							'label'    => __( 'Label Colors', 'tourfic' ),
+							'subtitle' => __( 'Colors of Label Background and Font', 'tourfic' ),
 							'multiple' => true,
 							'inline'   => true,
 							'colors'   => array(

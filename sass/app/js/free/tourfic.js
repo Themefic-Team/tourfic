@@ -59,7 +59,11 @@
             if ($.trim(checkin) === '' && tf_params.date_hotel_search && posttype === 'tf_hotel') {
 
                 if ($('#tf-required').length === 0) {
-                    $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
+                    if($('.tf_booking-dates .tf_label-row').length === 1){
+                        $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
+                    }else{
+                        $("#check-in-out-date").click();
+                    }
                 }
                 return;
             }
@@ -67,7 +71,11 @@
             if ($.trim(checkin) === '' && tf_params.date_tour_search && posttype === 'tf_tours') {
 
                 if ($('#tf-required').length === 0) {
-                    $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
+                    if($('.tf_booking-dates .tf_label-row').length === 1){
+                        $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
+                    }else{
+                        $("#check-in-out-date").click();
+                    }
                 }
                 return;
             }
@@ -166,6 +174,10 @@
                     $('.archive_ajax_result').unblock();
                     $('#tf_ajax_searchresult_loader').hide();
                     $('.archive_ajax_result').html(data);
+                    // Filter Popup Removed
+                    if ($('.tf-details-right').length > 0) {
+                        $('.tf-details-right').removeClass('tf-filter-show');
+                    }
                     // @KK show notice in every success request
                     notyf.success(tf_params.ajax_result_success);
                 },
@@ -303,6 +315,9 @@
             makeFilter()
         });
         $(document).on('change', '[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types]', function () {
+            if($(".filter-reset-btn").length>0){
+                $(".filter-reset-btn").show();
+            }
             makeFilter();
         })
 
@@ -310,6 +325,14 @@
         $(document).on('submit', '.tf_archive_search_result', function (e) {
             e.preventDefault();
             makeFilter()
+        });
+
+        // Archive Page Filter Reset
+        $(document).on('click', '.filter-reset-btn', function (e) {
+            e.preventDefault();
+            $('[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types]').prop('checked', false);
+            makeFilter();
+            $(".filter-reset-btn").hide();
         });
 
         /*
@@ -364,13 +387,13 @@
         function fullwidthInit(selector) {
             function fullWidth(selector) {
                 $(selector).each(function () {
-                    $(this).width("100%").css({marginLeft: "-0px"});
+                    $(this).width("100%").css({ marginLeft: "-0px" });
 
                     var window_width = $(window).width();
 
                     var left_margin = "-" + $(this).offset().left + "px";
 
-                    $(this).width(window_width).css({marginLeft: left_margin});
+                    $(this).width(window_width).css({ marginLeft: left_margin });
                 });
             }
 
@@ -680,7 +703,7 @@
             if ($('body').hasClass('logged-in')) {
                 let tableNode = targetNode.closest('table');
                 let type = tableNode.data('type');
-                let data = {id, action: 'tf_remove_wishlist', type, nonce: targetNode.data('nonce')}
+                let data = { id, action: 'tf_remove_wishlist', type, nonce: targetNode.data('nonce') }
                 $.get(tf_params.ajax_url, data,
                     function (data) {
                         if (data.success) {
@@ -882,7 +905,7 @@
          * Number/text change horizontal search form
          */
         // Number Increment
-        $('.acr-inc').on('click', function (e) {
+        $('.acr-inc, .quanity-acr-inc').on('click', function (e) {
             var input = $(this).parent().find('input');
             var max = input.attr('max') ? input.attr('max') : 999;
             var step = input.attr('step') ? input.attr('step') : 1;
@@ -895,7 +918,7 @@
         });
 
         // Number Decrement
-        $('.acr-dec').on('click', function (e) {
+        $('.acr-dec, .quanity-acr-dec').on('click', function (e) {
 
             var input = $(this).parent().find('input');
             var min = input.attr('min');
@@ -1207,7 +1230,7 @@
             e.preventDefault();
             var targetUrl = (e.target.href) ? e.target.href : $(this).context.href;
             amPushAjax(targetUrl);
-            window.history.pushState({url: "" + targetUrl + ""}, "", targetUrl);
+            window.history.pushState({ url: "" + targetUrl + "" }, "", targetUrl);
         });
         // End Feed Ajax Trigger
 
@@ -1322,7 +1345,7 @@
         var postsCount = $('.tf-posts-count').html();
         $('.tf-total-results').find('span').html(postsCount);
 
-//Sidebar widget js
+        //Sidebar widget js
         $('.tf-widget-title').on('click', function () {
             $(this).find('i').toggleClass('collapsed');
             $(this).siblings('.tf-filter').slideToggle('medium');
@@ -1402,6 +1425,115 @@
                 }
             });
         });
+
+        /**
+         * Hotel Min and Max Range Filtering
+         * @author Jahid
+        */
+        let tf_hotel_range_options = {
+            range: {
+                min: parseInt(tf_params.tf_hotel_min_price),
+                max: parseInt(tf_params.tf_hotel_max_price),
+                step: 1
+            },
+            initialSelectedValues: {
+                from: parseInt(tf_params.tf_hotel_min_price),
+                to: parseInt(tf_params.tf_hotel_max_price) / 2
+            },
+            grid: false,
+            theme: "dark",
+        };
+        if (tf_params.tf_hotel_min_price != 0 && tf_params.tf_hotel_max_price != 0) {
+            $('.tf-hotel-filter-range').alRangeSlider(tf_hotel_range_options);
+        }
+
+        // Hotel Min and Max Range in Search Result
+        var tf_search_page_params = new window.URLSearchParams(window.location.search);
+        let tf_hotel_search_range = {
+            range: {
+                min: parseInt(tf_params.tf_hotel_min_price),
+                max: parseInt(tf_params.tf_hotel_max_price),
+                step: 1
+            },
+            initialSelectedValues: {
+                from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt(tf_params.tf_hotel_min_price),
+                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_hotel_max_price) / 2
+            },
+            grid: false,
+            theme: "dark",
+            onFinish: function () {
+                makeFilter();
+            }
+        };
+        if (tf_params.tf_hotel_min_price != 0 && tf_params.tf_hotel_max_price != 0) {
+            $('.tf-hotel-result-price-range').alRangeSlider(tf_hotel_search_range);
+        }
+
+        /**
+         * Tour Min and Max Range Filtering
+         * @author Jahid
+        */
+        let tf_tour_range_options = {
+            range: {
+                min: parseInt(tf_params.tf_tour_min_price),
+                max: parseInt(tf_params.tf_tour_max_price),
+                step: 1
+            },
+            initialSelectedValues: {
+                from: parseInt(tf_params.tf_tour_min_price),
+                to: parseInt(tf_params.tf_tour_max_price) / 2
+            },
+            grid: false,
+            theme: "dark",
+        };
+        if (tf_params.tf_tour_min_price != 0 && tf_params.tf_tour_max_price != 0) {
+            $('.tf-tour-filter-range').alRangeSlider(tf_tour_range_options);
+        }
+
+        // Tours Min and Max Range in Search Result
+        let tf_tours_search_range = {
+            range: {
+                min: parseInt(tf_params.tf_tour_min_price),
+                max: parseInt(tf_params.tf_tour_max_price),
+                step: 1
+            },
+            initialSelectedValues: {
+                from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt(tf_params.tf_tour_min_price),
+                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_tour_max_price) / 2
+            },
+            grid: false,
+            theme: "dark",
+            onFinish: function () {
+                makeFilter();
+            }
+        };
+        if (tf_params.tf_tour_min_price != 0 && tf_params.tf_tour_max_price != 0) {
+            $('.tf-tour-result-price-range').alRangeSlider(tf_tours_search_range);
+        }
+
+        /**
+         * Apartment Min and Max Range Filtering
+         * @author Jahid
+        */
+        let tf_apartment_search_range = {
+            range: {
+                min: parseInt(tf_params.tf_apartment_min_price),
+                max: parseInt(tf_params.tf_apartment_max_price),
+                step: 1
+            },
+            initialSelectedValues: {
+                from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt(tf_params.tf_apartment_min_price),
+                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_apartment_max_price) / 2
+            },
+            grid: false,
+            theme: "dark",
+            onFinish: function () {
+                makeFilter();
+            }
+        };
+        if (tf_params.tf_apartment_min_price != 0 && tf_params.tf_apartment_max_price != 0) {
+            $('.tf-apartment-result-price-range').alRangeSlider(tf_apartment_search_range);
+        }
 
         /*
         * Without Payment Booking
@@ -1558,12 +1690,28 @@
             let check_in_time = $('select[name=check-in-time] option').filter(':selected').val();
             var deposit = $('input[name=deposit]').is(':checked');
             var extras = [];
-            $('[name*=tf-tour-extra]').each(function () {
-                if ($(this).is(':checked')) {
-                    extras.push($(this).val());
-                }
-            });
+            var quantity = [];
+
+            $('.tour-extra-single').each(function(e) {
+                 let $this = $(this);
+                 
+                 if($this.find('input[name="tf-tour-extra"]').is(':checked')){
+
+                    let tour_extras = $this.find('input[name="tf-tour-extra"]').val();
+                     extras.push(tour_extras);
+
+                    if($this.find('.tf_quantity-acrselection').hasClass('quantity-active')){
+                        let qty = $this.find('input[name="extra-quantity"]').val();
+
+                        quantity.push(qty)
+                    }else{
+                        quantity.push(1)
+                    } 
+                }   
+            })
+
             var extras = extras.join();
+            var quantities = quantity.join();
             var data = {
                 action: 'tf_tour_booking_popup',
                 post_id: post_id,
@@ -1573,6 +1721,7 @@
                 check_in_date: check_in_date,
                 check_in_time: check_in_time,
                 tour_extra: extras,
+                tour_extra_quantity : quantities, 
                 deposit: deposit
             };
 
@@ -1634,7 +1783,7 @@
             tourPopupBooking();
         });
 
-        $(document).on('change', '[name*=tf-tour-extra]', function () {
+        $(document).on('change', '[name*=tf-tour-extra], input[name="extra-quantity"]', function () {
             tourPopupBooking();
         });
         $(document).on('change', '[name=deposit]', function () {
@@ -1738,6 +1887,34 @@
             });
         });
 
+        // Design 2 Toggle share buttons
+        $('.tf-template-3 .tf-share-toggle').click(function (e) {
+            e.preventDefault();
+            $('.tf-share-toggle').toggleClass('actives');
+            $('.tf-off-canvas-share').toggleClass('show');
+        });
+
+        // Design 2 Wishlist buttons
+        $('.tf-template-3 .add-wishlist').click(function (e) {
+            e.preventDefault();
+            $(this).parents().find('.tf-wishlist-box').addClass('actives');
+        });
+        $('.tf-template-3 .remove-wishlist').click(function (e) {
+            e.preventDefault();
+            $(this).parents().find('.tf-wishlist-box').removeClass('actives');
+        });
+
+        // Copy button
+        $('a#share_link_button').click(function (e) {
+            e.preventDefault();
+            $(this).addClass('copied');
+            setTimeout(function () {
+                $('a#share_link_button').removeClass('copied');
+            }, 3000);
+            $(this).parent().find("#share_link_input").select();
+            document.execCommand("copy");
+        });
+
     });
 
     /*
@@ -1746,11 +1923,6 @@
     */
 
     $(document).ready(function () {
-
-        // $.autofilter({
-        //     animation:true,
-        //     duration:300
-        // });
 
         $('.tf-template-3 .tf-reviews-slider').slick({
             infinite: true,
@@ -1770,31 +1942,34 @@
         });
 
         $(".tf-template-3 .tf-question").click(function(){
-            $(this).siblings().removeClass("tf-active");
-            $(this).siblings().find('.tf-question-desc').slideUp();
-            $(this).parents(".tf-questions-col").siblings().find('.tf-question').removeClass("tf-active");
-            $(this).parents(".tf-questions-col").siblings().find('.tf-question-desc').slideUp();
-
-            $(this).addClass("tf-active");
-            $(this).find('.tf-question-desc').slideDown();
+            var $this = $(this);
+            if (!$this.hasClass("tf-active")) {
+                $(this).siblings().removeClass("tf-active");
+                $(this).siblings().find('.tf-question-desc').slideUp();
+                $(this).parents(".tf-questions-col").siblings().find('.tf-question').removeClass("tf-active");
+                $(this).parents(".tf-questions-col").siblings().find('.tf-question-desc').slideUp();
+            }
+            $(this).toggleClass("tf-active");
+            $(this).find('.tf-question-desc').slideToggle();
         });
 
-        $(".tf-template-3 .tf-hero-hotel.tf-popup-buttons").click(function(){
-            $(".tf-hotel-popup").addClass("tf-show")
+        $(".tf-template-3 .tf-hero-hotel.tf-popup-buttons").click(function(e){
+            e.preventDefault();
+            $("#tour_room_details_loader").show();
+            setTimeout(function() {
+                $("#tour_room_details_loader").hide();
+                $(".tf-hotel-popup").addClass("tf-show");
+            }, 1000);
         });
 
         $(document).on('click', '.tf-template-3 .tf-popup-close', function () {
             $(".tf-popup-wrapper").removeClass("tf-show")
         });
-
-
-        function details_Menu_Width(){
-            var detailsMenuSourceDivWidth = $('.tf-details-left').width() - 60;
-            $('.tf-details-menu').css('width', detailsMenuSourceDivWidth);
-        }
-
-        $(window).resize(function(){
-            details_Menu_Width()
+        
+        $(document).on('click', function (event) {
+            if (!$(event.target).closest(".tf-popup-wrapper .tf-popup-inner").length) {
+                $(".tf-popup-wrapper").removeClass('tf-show');
+            }
         });
 
         $('.tf-template-3 .tf-details-menu a').on('click', function() {
@@ -1802,6 +1977,33 @@
             $(this).closest('li').siblings().find('a').removeClass('tf-hashlink');
         });
 
+        //Room Filter Showing 
+        $('.tf-template-3 .tf-available-rooms-head .tf-filter').on('click', function() {
+            $('.tf-room-filter').toggleClass('tf-filter-show');
+        });
+
+        //Archive Filter Showing
+        $('.tf-template-3 .tf-archive-filter-showing').on('click', function() {
+            $('.tf-archive-right').toggleClass('tf-filter-show');
+        });
+
+        //Search Form Showing
+        $('.tf-template-3 .tf-modify-search-btn').on('click', function() {
+            $('.tf-booking-form-wrapper').slideDown(300);
+            $('.tf-template-3 .tf-modify-search-btn').slideUp(300);
+        });
+
+        // Full Description Showing
+        $('.tf-template-3 span.tf-see-description').on('click', function() {
+            $('.tf-short-description').slideUp();
+            $('.tf-full-description').slideDown();
+        });
+
+        // See Less Description Showing
+        $('.tf-template-3 span.tf-see-less-description').on('click', function() {
+            $('.tf-full-description').slideUp();
+            $('.tf-short-description').slideDown();
+        });
 
         $('.tf-template-3 .acr-inc , .tf-template-3 .acr-dec').on('click', function() {
 
@@ -1831,6 +2033,10 @@
         });
         $(".tf-template-3 .tf-booking-form-guest-and-room").click(function(){
             $(".tf-template-3 .tf-booking-form-guest-and-room .tf_acrselection-wrap").addClass("tf-show");
+        });
+
+        $(".tf-template-3 .tf-review-open.button").click(function(){
+            $(".tf-template-3 .tf-sitebar-widgets .tf-review-form-wrapper").toggleClass("tf-review-show");
         });
 
         /**

@@ -183,6 +183,7 @@ button.tf-order-remove {
   font-size: 1rem;
 }
 .tf-license-activate {
+  display: inline-block;
   p.submit {
     margin: 0px !important;
     input {
@@ -195,6 +196,7 @@ button.tf-order-remove {
   }
 }
 .el-license-active-btn {
+  display: inline-block;
   p.submit {
     margin: 0px !important;
     input {
@@ -226,4 +228,20 @@ input.select2-search__field {
       display: none;
     }
   }
+}
+
+// Duplicator Loader
+.tf-duplicator-loader {
+  position: absolute;
+  background: rgba(255,255,255, .4);
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+  cursor: wait;
+}
+.tf-post-data-duplicate:focus{
+  outline: none;
+  box-shadow: none;
 }

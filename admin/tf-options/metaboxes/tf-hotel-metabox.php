@@ -955,7 +955,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'type'         => 'repeater',
 					'label'        => __( 'Add Your Questions', 'tourfic' ),
 					'subtitle'    => __( 'Click the button below to add Frequently Asked Questions (FAQs) for your hotel. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each FAQ using the icons on the right side.', 'tourfic' ),
-					'button_title' => __( 'Add FAQ', 'tourfic' ),
+					'button_title' => __( 'Add New FAQ', 'tourfic' ),
 					'fields'       => array(
 
 						array(
@@ -1027,27 +1027,34 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 		
 		// Multiple tags for hotels
 		'hotel_multiple_tags' => array(
-			'title'  => __( 'Multiple Tags', 'tourfic' ),
+			'title'  => __( 'Labels', 'tourfic' ),
 			'icon'   => 'fa fa-list',
 			'fields' => array(
 				array(
+					'id'      => 'tf-hotel-tags-heading',
+					'type'    => 'heading',
+					'label' => __( 'Hotel labels', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
 					'id'           => 'tf-hotel-tags',
 					'type'         => 'repeater',
-					'label'        => __( 'Multiple Tags', 'tourfic' ),
-					'button_title' => __( 'Add / Insert New Tag', 'tourfic' ),
+					'label'        => __( 'Labels', 'tourfic' ),
+					'subtitle' => __('Add some keywords that highlight your hotel\'s Unique Selling Point (USP). This label will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
+					'button_title' => __( 'Add / Insert New Label', 'tourfic' ),
 					'fields'       => array(
 
 						array(
 							'id'    => 'hotel-tag-title',
 							'type'  => 'text',
-							'label' => __( 'Tag', 'tourfic' ),
+							'label' => __( 'Label Title', 'tourfic' ),
 						),
 
 						array(
 							'id'       => 'hotel-tag-color-settings',
 							'type'     => 'color',
-							'label'    => __( 'Tag Colors', 'tourfic' ),
-							'subtitle' => __( 'Colors of Tag Background and Font', 'tourfic' ),
+							'label'    => __( 'Label Colors', 'tourfic' ),
+							'subtitle' => __( 'Colors of Label Background and Font', 'tourfic' ),
 							'multiple' => true,
 							'inline'   => true,
 							'colors'   => array(
