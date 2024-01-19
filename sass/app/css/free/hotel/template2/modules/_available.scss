@@ -37,6 +37,7 @@
             cursor: pointer;
             i{
                 font-size: 24px;
+                color: #595349;
             }
         }
     }
@@ -624,6 +625,15 @@
                 .tf-available-room-content-left {
                     display: flex;
                     flex-direction: column;
+                    .tf-section-title-and-location {
+                        a {
+                            text-decoration: none;
+                            color: inherit;
+                        }
+                        a:hover {
+                            color: inherit;
+                        }
+                    }
                     ul{
                         margin-top: auto;
                         @media #{$max1024}{

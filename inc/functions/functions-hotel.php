@@ -2083,7 +2083,6 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
             <div class="tf_booking-dates">
                 <div class="tf_form-row">
                     <label class="tf_label-row">
-                        <span class="tf-label"><?php _e( 'Check-in & Check-out date', 'tourfic' ); ?></span>
                         <div class="tf_form-inner">
                             <i class="far fa-calendar-alt"></i>
                             <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
@@ -2905,7 +2904,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 			<div class="tf-available-room-content-left">
 				<div class="tf-card-heading-info">
 				<div class="tf-section-title-and-location">
-					<h2 class="tf-section-title"><?php echo tourfic_character_limit_callback( get_the_title(), 55 ); ?></h2>
+					<a href="<?php echo esc_url( get_the_permalink() ); ?>"><h2 class="tf-section-title"><?php echo tourfic_character_limit_callback( get_the_title(), 55 ); ?></h2></a>
 					<?php
 					if ( ! empty( $address ) ) {
 					?>
@@ -3808,17 +3807,17 @@ function tf_hotel_quickview_callback() {
                                     <li><i class="fas fa-person-booth"></i> <?php echo $num_room; ?> <?php _e( 'Rooms', 'tourfic' ); ?></li>
 								<?php }
 								if ( $footage ) { ?>
-                                    <li><i class="fas fa-ruler-combined"></i> <?php echo $footage; ?> <?php _e( 'Sft', 'tourfic' ); ?></li>
+                                    <li><i class="ri-user-2-line"></i> <?php echo $footage; ?> <?php _e( 'Sft', 'tourfic' ); ?></li>
 								<?php }
 								if ( $bed ) { ?>
-                                    <li><i class="fas fa-bed"></i> <?php echo $bed; ?> <?php _e( ' Beds', 'tourfic' ); ?></li>
+                                    <li><i class="ri-hotel-bed-line"></i> <?php echo $bed; ?> <?php _e( ' Beds', 'tourfic' ); ?></li>
 								<?php } ?>
 								<?php if ( $adult_number ) { ?>
-                                    <li><i class="fas fa-male"></i> <?php echo $adult_number; ?> <?php _e( 'Adults', 'tourfic' ); ?></li>
+                                    <li><i class="ri-user-2-line"></i> <?php echo $adult_number; ?> <?php _e( 'Adults', 'tourfic' ); ?></li>
 								<?php }
 								if ( $child_number ) { ?>
                                     <li>
-                                        <i class="fas fa-baby"></i> <?php echo $child_number; ?> <?php _e( 'Children', 'tourfic' ); ?>
+										<i class="ri-user-smile-line"></i> <?php echo $child_number; ?> <?php _e( 'Children', 'tourfic' ); ?>
                                     </li>
 								<?php } ?>
                             </ul>
@@ -3876,7 +3875,7 @@ function tf_hotel_quickview_callback() {
 							if ( $footage ) { ?>
                                 <div class="tf-tooltip tf-d-ib">
                                     <div class="room-detail-icon">
-                                        <span class="room-icon-wrap"><i class="fas fa-ruler-combined"></i></span>
+                                        <span class="room-icon-wrap"><i class="ri-pencil-ruler-2-line"></i></span>
                                         <span class="icon-text tf-d-b"><?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></span>
                                     </div>
                                     <div class="tf-top">
@@ -3888,7 +3887,7 @@ function tf_hotel_quickview_callback() {
 							if ( $bed ) { ?>
                                 <div class="tf-tooltip tf-d-ib">
                                     <div class="room-detail-icon">
-                                        <span class="room-icon-wrap"><i class="fas fa-bed"></i></span>
+                                        <span class="room-icon-wrap"><i class="ri-hotel-bed-line"></i></i></span>
                                         <span class="icon-text tf-d-b">x<?php echo $bed; ?></span>
                                     </div>
                                     <div class="tf-top">
@@ -3949,7 +3948,7 @@ function tf_hotel_quickview_callback() {
 								if ( $child_number ) { ?>
                                     <div class="tf-tooltip tf-d-ib">
                                         <div class="room-detail-icon">
-                                            <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
+                                            <span class="room-icon-wrap"><i class="ri-user-smile-line"></i></i></span>
                                             <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
                                         </div>
                                         <div class="tf-top">
@@ -4008,16 +4007,16 @@ function tf_hotel_quickview_callback() {
                     <h4 class="tf-popup-info-title"><?php _e("Room details", "tourfic"); ?></h4>
                     <ul>
 						<?php if ( $footage ) { ?>
-							<li><i class="fas fa-ruler-combined"></i> <?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></li>
+							<li><i class="ri-pencil-ruler-2-line"></i> <?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></li>
 						<?php } ?>
 						<?php if ( $bed ) { ?>
-							<li><i class="fas fa-bed"></i> <?php echo $bed; ?><?php _e( ' Beds', 'tourfic' ); ?></li>
+							<li><i class="ri-hotel-bed-line"></i> <?php echo $bed; ?><?php _e( ' Beds', 'tourfic' ); ?></li>
 						<?php } ?>
 						<?php if ( $adult_number ) { ?>
-							<li><i class="fas fa-male"></i> <?php echo $adult_number; ?><?php _e( ' Adults', 'tourfic' ); ?></li>
+							<li><i class="ri-user-2-line"></i> <?php echo $adult_number; ?><?php _e( ' Adults', 'tourfic' ); ?></li>
 						<?php } ?>
 						<?php if ( $child_number ) { ?>
-							<li><i class="fas fa-baby"></i><?php echo $child_number; ?><?php _e( ' Child', 'tourfic' ); ?></li>
+							<li><i class="ri-user-smile-line"></i><?php echo $child_number; ?><?php _e( ' Child', 'tourfic' ); ?></li>
 						<?php } ?>                        
                     </ul> 
 					  

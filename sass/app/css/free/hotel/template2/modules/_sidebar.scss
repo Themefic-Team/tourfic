@@ -31,6 +31,7 @@
             i {
                 margin-right: 8px;
                 width: 20px;
+                font-size: 20px;
             }
         }
     }
@@ -107,6 +108,7 @@
 .tf-review-feature-label {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 4px;
 }
 
 .tf-progress-bar {

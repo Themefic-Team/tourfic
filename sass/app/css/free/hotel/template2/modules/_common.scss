@@ -118,6 +118,13 @@
         padding-left: 83px;
         padding-right: 83px;
     } 
+    .tf-single-hotel-pb-56 {
+        padding-bottom: 56px !important;
+
+        @media #{$max767}{
+            padding-bottom: 32px;
+        }
+    }
     .tf-content-wrapper{
         .tf-container{
             .tf-section.tf-policies-wrapper{        
@@ -129,6 +136,21 @@
 
 .tf-template-3.tf-tour-single{
     margin-bottom: 0px;
+    
+    .tf-single-hotel-pb-56 {
+        padding-bottom: 56px;
+
+        @media #{$max767}{
+            padding-bottom: 32px;
+        }
+    }
+    .tf-content-wrapper{
+        .tf-container{
+            .tf-section.tf-policies-wrapper{        
+                margin: 0;
+            }
+        }
+    }
 }
 .tf_template_3_global_layouts{
     #tf-ask-question{
@@ -151,6 +173,7 @@
                 border: 1px solid #595349;
                 box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
                 color: #C1BFBB;
+                background-color: #fdf9f3;
                 /* Body/P3 */
                 font-family: Josefin Sans;
                 font-size: 16px;
@@ -158,7 +181,7 @@
                 font-weight: 400;
                 line-height: 130%; /* 20.8px */
                 height: 45px;
-                padding: 0px 14px;
+                padding: 12px 14px;;
                 border-radius: 0px;
                 &::placeholder{
                     color: #C1BFBB;
@@ -167,6 +190,7 @@
             textarea{
                 border: 1px solid #595349;
                 box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+                background-color: #fdf9f3;
                 color: #C1BFBB;
                 /* Body/P3 */
                 font-family: Josefin Sans;

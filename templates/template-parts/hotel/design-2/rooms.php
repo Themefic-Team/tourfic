@@ -208,16 +208,16 @@ if(!empty($rooms)){
                     <h2 class="tf-section-title"><?php echo esc_html( $room['title'] ); ?></h2>
                     <ul>
                         <?php if ( $footage ) { ?>
-                            <li><i class="fas fa-ruler-combined"></i> <?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></li>
+                            <li><i class="ri-pencil-ruler-2-line"></i> <?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></li>
                         <?php } ?>
                         <?php if ( $bed ) { ?>
-                            <li><i class="fas fa-bed"></i> <?php echo $bed; ?><?php _e( ' Beds', 'tourfic' ); ?></li>
+                            <li><i class="ri-hotel-bed-line"></i> <?php echo $bed; ?><?php _e( ' Beds', 'tourfic' ); ?></li>
                         <?php } ?>
                         <?php if ( $adult_number ) { ?>
-                            <li><i class="fas fa-male"></i> <?php echo $adult_number; ?><?php _e( ' Adults', 'tourfic' ); ?></li>
+                            <li><i class="ri-user-2-line"></i> <?php echo $adult_number; ?><?php _e( ' Adults', 'tourfic' ); ?></li>
                         <?php } ?>
                         <?php if ( $child_number ) { ?>
-                            <li><i class="fas fa-baby"></i><?php echo $child_number; ?><?php _e( ' Child', 'tourfic' ); ?></li>
+                            <li><i class="ri-user-smile-line"></i> <?php echo $child_number; ?><?php _e( ' Child', 'tourfic' ); ?></li>
                         <?php } ?>
                         <li><a href="#" class="tf-room-detail-popup" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $post_id; ?>"><?php _e("View room details", "tourfic"); ?></a></li>
                         
@@ -499,16 +499,16 @@ if(!empty($rooms)){
                     </div>
                     <ul>
                         <?php if ( $footage ) { ?>
-                            <li><i class="fas fa-ruler-combined"></i> <?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></li>
+                            <li><i class="ri-pencil-ruler-2-line"></i> <?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></li>
                         <?php } ?>
                         <?php if ( $bed ) { ?>
-                            <li><i class="fas fa-bed"></i> <?php echo $bed; ?><?php _e( ' Beds', 'tourfic' ); ?></li>
+                            <li><i class="ri-hotel-bed-line"></i> <?php echo $bed; ?><?php _e( ' Beds', 'tourfic' ); ?></li>
                         <?php } ?>
                         <?php if ( $adult_number ) { ?>
-                            <li><i class="fas fa-male"></i> <?php echo $adult_number; ?><?php _e( ' Adults', 'tourfic' ); ?></li>
+                            <li><i class="ri-user-2-line"></i> <?php echo $adult_number; ?><?php _e( ' Adults', 'tourfic' ); ?></li>
                         <?php } ?>
                         <?php if ( $child_number ) { ?>
-                            <li><i class="fas fa-baby"></i><?php echo $child_number; ?><?php _e( ' Child', 'tourfic' ); ?></li>
+                            <li><i class="ri-user-smile-line"></i></i><?php echo $child_number; ?><?php _e( ' Child', 'tourfic' ); ?></li>
                         <?php } ?>
                         <li><a href="#" class="tf-room-detail-popup" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $post_id; ?>"><?php _e("View room details", "tourfic"); ?></a></li>
                         

@@ -145,13 +145,20 @@
                 .tf-features-block-wrapper {
                     display: grid;
                     gap: 24px;
-                    grid-template-columns: 1fr 1fr 1fr 1fr;
+                    grid-template-columns: repeat(auto-fit, minmax(23%, 1fr));
                     margin-bottom: 32px;
+                    
+                    @media #{$max1600}{
+                        grid-template-columns: repeat(auto-fit, minmax(23%, 1fr));
+                    }
                     @media #{$max1200}{
-                        grid-template-columns: 1fr 1fr 1fr;
+                        grid-template-columns: 1fr 1fr;
                     }
                     @media #{$max991}{
                         grid-template-columns: 1fr 1fr;
+                    }
+                    @media #{$max480}{
+                        grid-template-columns: 100%;
                     }
                     .tf-feature-block {
                         padding: 24px;
@@ -256,6 +263,7 @@
                 background-color: #FCF4E8;
                 padding: 32px;                
                 width: 480px;
+                margin-bottom: 56px;
                 @media #{$max991}{
                     display: none;
                     position: absolute;

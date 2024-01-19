@@ -469,6 +469,24 @@ function tf_dequeue_theplus_script_on_settings_page($screen) {
 				wp_dequeue_script('select2');
 				wp_deregister_script('select2');
 			}
+
+			if ( wp_script_is('acf-color-picker-alpha', 'enqueued') ) {
+
+				$handle = 'acf-color-picker-alpha';
+
+				wp_dequeue_script($handle);
+
+				global $wp_scripts;
+				
+				if( isset( $wp_scripts->registered[$handle] ) ) {
+
+					$src = $wp_scripts->registered [$handle ]->src;
+					$deps = $wp_scripts->registered[ $handle ]->deps;
+					$ver = $wp_scripts->registered [ $handle ] ->ver;
+
+					wp_enqueue_script( $handle, $src, $deps, $ver, true );
+				}
+			}
 		}
 	}
 }
