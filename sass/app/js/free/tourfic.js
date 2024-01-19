@@ -59,9 +59,9 @@
             if ($.trim(checkin) === '' && tf_params.date_hotel_search && posttype === 'tf_hotel') {
 
                 if ($('#tf-required').length === 0) {
-                    if($('.tf_booking-dates .tf_label-row').length === 1){
+                    if ($('.tf_booking-dates .tf_label-row').length === 1) {
                         $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
-                    }else{
+                    } else {
                         $("#check-in-out-date").click();
                     }
                 }
@@ -71,9 +71,9 @@
             if ($.trim(checkin) === '' && tf_params.date_tour_search && posttype === 'tf_tours') {
 
                 if ($('#tf-required').length === 0) {
-                    if($('.tf_booking-dates .tf_label-row').length === 1){
+                    if ($('.tf_booking-dates .tf_label-row').length === 1) {
                         $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
-                    }else{
+                    } else {
                         $("#check-in-out-date").click();
                     }
                 }
@@ -315,7 +315,7 @@
             makeFilter()
         });
         $(document).on('change', '[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types]', function () {
-            if($(".filter-reset-btn").length>0){
+            if ($(".filter-reset-btn").length > 0) {
                 $(".filter-reset-btn").show();
             }
             makeFilter();
@@ -474,8 +474,8 @@
             autoplaySpeed: 2000,
             slidesToShow: 3,
             slidesToScroll: 1,
-            prevArrow:'<button type="button" class="slick-prev pull-left"><svg xmlns="http://www.w3.org/2000/svg" width="49" height="24" viewBox="0 0 49 24" fill="none"><path d="M8.32843 10.997H44.5V12.997H8.32843L13.6924 18.3609L12.2782 19.7751L4.5 11.997L12.2782 4.21875L13.6924 5.63296L8.32843 10.997Z" fill="#B58E53"/></svg></button>',
-            nextArrow:'<button type="button" class="slick-next pull-right"><svg xmlns="http://www.w3.org/2000/svg" width="49" height="24" viewBox="0 0 49 24" fill="none"><path d="M40.6716 10.997H4.5V12.997H40.6716L35.3076 18.3609L36.7218 19.7751L44.5 11.997L36.7218 4.21875L35.3076 5.63296L40.6716 10.997Z" fill="#B58E53"/></svg></button>',
+            prevArrow: '<button type="button" class="slick-prev pull-left"><svg xmlns="http://www.w3.org/2000/svg" width="49" height="24" viewBox="0 0 49 24" fill="none"><path d="M8.32843 10.997H44.5V12.997H8.32843L13.6924 18.3609L12.2782 19.7751L4.5 11.997L12.2782 4.21875L13.6924 5.63296L8.32843 10.997Z" fill="#B58E53"/></svg></button>',
+            nextArrow: '<button type="button" class="slick-next pull-right"><svg xmlns="http://www.w3.org/2000/svg" width="49" height="24" viewBox="0 0 49 24" fill="none"><path d="M40.6716 10.997H4.5V12.997H40.6716L35.3076 18.3609L36.7218 19.7751L44.5 11.997L36.7218 4.21875L35.3076 5.63296L40.6716 10.997Z" fill="#B58E53"/></svg></button>',
             responsive: [
                 {
                     breakpoint: 1024,
@@ -1000,22 +1000,22 @@
             let thisVal = thisEml.val();
             let $this = $(this).closest('.tf_hotel-shortcode-design-2');
 
-             // Declare adults outside the if block
-             let adults = 0;
+            // Declare adults outside the if block
+            let adults = 0;
 
-             if (thisEml.parent().parent().siblings().find('.adults-style2').length > 0) {
+            if (thisEml.parent().parent().siblings().find('.adults-style2').length > 0) {
                 adults = parseInt(thisEml.parent().parent().siblings().find('.adults-style2').val());
-             } else {
+            } else {
                 adults = parseInt(0);
-             }
-             // Declare intant outside the if block
-             let intant = 0;
+            }
+            // Declare intant outside the if block
+            let intant = 0;
 
-             if (thisEml.parent().parent().siblings().find('.infant-style2').length > 0) {
-                 intant = parseInt(thisEml.parent().parent().siblings().find('.infant-style2').val());
-             } else {
-                 intant = parseInt(0);
-             }
+            if (thisEml.parent().parent().siblings().find('.infant-style2').length > 0) {
+                intant = parseInt(thisEml.parent().parent().siblings().find('.infant-style2').val());
+            } else {
+                intant = parseInt(0);
+            }
 
             let total_people = adults + intant + parseInt(thisVal);
             if (total_people > 1) {
@@ -1032,9 +1032,9 @@
             let adults = 0;
 
             if (thisEml.parent().parent().siblings().find('.adults-style2').length > 0) {
-               adults = parseInt(thisEml.parent().parent().siblings().find('.adults-style2').val());
+                adults = parseInt(thisEml.parent().parent().siblings().find('.adults-style2').val());
             } else {
-               adults = parseInt(0);
+                adults = parseInt(0);
             }
 
             // Declare child outside the if block
@@ -1273,7 +1273,6 @@
             $this.next().slideToggle();
             $(this).closest('.tf-faq-single').toggleClass('active');
         });
-
 
 
         /*
@@ -1794,16 +1793,16 @@
             nextArrow: '<button class="slide-arrow next-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="49" height="24" viewBox="0 0 49 24" fill="none"><path d="M40.6716 11.0009H4.5V13.0009H40.6716L35.3076 18.3648L36.7218 19.779L44.5 12.0009L36.7218 4.22266L35.3076 5.63687L40.6716 11.0009Z" fill="#B58E53"/></svg></button>',
             responsive: [
                 {
-                  breakpoint: 993,
-                  settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                  }
+                    breakpoint: 993,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    }
                 }
-              ]
+            ]
         });
 
-        $(".tf-template-3 .tf-question").click(function(){
+        $(".tf-template-3 .tf-question").click(function () {
             var $this = $(this);
             if (!$this.hasClass("tf-active")) {
                 $(this).siblings().removeClass("tf-active");
@@ -1815,7 +1814,7 @@
             $(this).find('.tf-question-desc').slideToggle();
         });
 
-        $(".tf-template-3 .tf-hero-hotel.tf-popup-buttons").click(function(){
+        $(".tf-template-3 .tf-hero-hotel.tf-popup-buttons").click(function () {
             $(".tf-hotel-popup").addClass("tf-show")
         });
 
@@ -1823,68 +1822,68 @@
             $(".tf-popup-wrapper").removeClass("tf-show")
         });
 
-        $('.tf-template-3 .tf-details-menu a').on('click', function() {
+        $('.tf-template-3 .tf-details-menu a').on('click', function () {
             $(this).addClass('tf-hashlink');
             $(this).closest('li').siblings().find('a').removeClass('tf-hashlink');
         });
 
         //Room Filter Showing 
-        $('.tf-template-3 .tf-available-rooms-head .tf-filter').on('click', function() {
+        $('.tf-template-3 .tf-available-rooms-head .tf-filter').on('click', function () {
             $('.tf-room-filter').toggleClass('tf-filter-show');
         });
 
         //Archive Filter Showing
-        $('.tf-template-3 .tf-archive-filter-showing').on('click', function() {
+        $('.tf-template-3 .tf-archive-filter-showing').on('click', function () {
             $('.tf-archive-right').toggleClass('tf-filter-show');
         });
 
         //Search Form Showing
-        $('.tf-template-3 .tf-modify-search-btn').on('click', function() {
+        $('.tf-template-3 .tf-modify-search-btn').on('click', function () {
             $('.tf-booking-form-wrapper').slideDown(300);
             $('.tf-template-3 .tf-modify-search-btn').slideUp(300);
         });
 
         // Full Description Showing
-        $('.tf-template-3 span.tf-see-description').on('click', function() {
+        $('.tf-template-3 span.tf-see-description').on('click', function () {
             $('.tf-short-description').slideUp();
             $('.tf-full-description').slideDown();
         });
 
         // See Less Description Showing
-        $('.tf-template-3 span.tf-see-less-description').on('click', function() {
+        $('.tf-template-3 span.tf-see-less-description').on('click', function () {
             $('.tf-full-description').slideUp();
             $('.tf-short-description').slideDown();
         });
 
-        $('.tf-template-3 .acr-inc , .tf-template-3 .acr-dec').on('click', function() {
+        $('.tf-template-3 .acr-inc , .tf-template-3 .acr-dec').on('click', function () {
 
-            if ($('input#infant').length){
-            var guest = Number($('input#adults').val()) + Number($('input#children').val()) + Number($('input#infant').val()) ;
-            }else{
+            if ($('input#infant').length) {
+                var guest = Number($('input#adults').val()) + Number($('input#children').val()) + Number($('input#infant').val());
+            } else {
                 var guest = Number($('input#adults').val()) + Number($('input#children').val());
             }
             if (guest.toString().length < 2) {
                 guest = '0' + guest;
             }
             $('span.tf-guest').html(guest);
-            var room = Number($('input#room').val()) ;
+            var room = Number($('input#room').val());
             if (room.toString().length < 2) {
                 room = '0' + room;
             }
             $('span.tf-room').html(room);
         })
 
-        $(document).mouseup(function(e) {
+        $(document).mouseup(function (e) {
             var container = $(".tf-template-3 .tf_acrselection-wrap");
             if (!container.is(e.target) && container.has(e.target).length === 0) {
                 $(".tf-template-3 .tf-booking-form-guest-and-room .tf_acrselection-wrap").removeClass("tf-show");
             }
         });
-        $(".tf-template-3 .tf-booking-form-guest-and-room").click(function(){
+        $(".tf-template-3 .tf-booking-form-guest-and-room").click(function () {
             $(".tf-template-3 .tf-booking-form-guest-and-room .tf_acrselection-wrap").addClass("tf-show");
         });
 
-        $(".tf-template-3 .tf-review-open.button").click(function(){
+        $(".tf-template-3 .tf-review-open.button").click(function () {
             $(".tf-template-3 .tf-sitebar-widgets .tf-review-form-wrapper").toggleClass("tf-review-show");
         });
 
@@ -1918,49 +1917,65 @@
     });
 
     /*
-    * Template 3 Script End
-    * @author: Jahid
-    */
-
-    /*
     * Template 4 Script Start
     * @author: Foysal
     */
     $(document).ready(function () {
-        $('.tf-hotel-template-4 .acr-inc , .tf-hotel-template-4 .acr-dec').on('click', function() {
+        $('.tf-hotel-template-4 .acr-inc , .tf-hotel-template-4 .acr-dec').on('click', function () {
 
-            if ($('input#infant').length){
-                var guest = Number($('input#adults').val()) + Number($('input#children').val()) + Number($('input#infant').val()) ;
-            }else{
+            if ($('input#infant').length) {
+                var guest = Number($('input#adults').val()) + Number($('input#children').val()) + Number($('input#infant').val());
+            } else {
                 var guest = Number($('input#adults').val()) + Number($('input#children').val());
             }
             if (guest.toString().length < 2) {
                 guest = '0' + guest;
             }
             $('span.tf-guest').html(guest);
-            var room = Number($('input#room').val()) ;
+            var room = Number($('input#room').val());
             if (room.toString().length < 2) {
                 room = '0' + room;
             }
             $('span.tf-room').html(room);
         })
 
-        $(document).mouseup(function(e) {
+        $(document).mouseup(function (e) {
             var container = $(".tf-hotel-template-4 .tf_acrselection-wrap");
             if (!container.is(e.target) && container.has(e.target).length === 0) {
                 $(".tf-hotel-template-4 .tf-search-guest-and-room .tf_acrselection-wrap").removeClass("tf-show");
             }
         });
-        $(".tf-hotel-template-4 .tf-search-guest-and-room").click(function(){
+        $(".tf-hotel-template-4 .tf-search-guest-and-room").click(function () {
             $(".tf-hotel-template-4 .tf-search-guest-and-room .tf_acrselection-wrap").addClass("tf-show");
         });
 
+        /*
+         * Grid/List
+         */
+        $(document).on('click', '.tf-archive-view li', function (e) {
+            e.preventDefault();
+            $('.tf-archive-view li').removeClass('active');
+            $(this).addClass('active');
 
+            let dataId = $(this).data('id');
+            let hotelContainer = $('.tf-archive-hotels');
+
+            if (dataId === 'grid-view') {
+                hotelContainer.addClass('tf-layout-grid');
+                hotelContainer.removeClass('tf-layout-list');
+            } else {
+                hotelContainer.addClass('tf-layout-list');
+                hotelContainer.removeClass('tf-layout-grid');
+            }
+        });
+
+        $('.tf-archive-hotel-type').select2({
+            allowClear: true,
+        });
 
         // GOOGLE MAP INITIALIZE
         var mapLocations = $('#map-datas').html();
         if ($('#map-datas').length && mapLocations.length) {
-            console.log('mapLocations', mapLocations)
             googleMapInit(mapLocations);
         }
 
@@ -1971,7 +1986,7 @@
             }
             var locations = JSON.parse(mapLocations);
 
-            var map = new google.maps.Map(document.getElementById("map"), {
+            var map = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
                 zoom: 1,
                 center: new google.maps.LatLng(23.8697847, 90.4219536),
                 mapTypeId: google.maps.MapTypeId.ROADMAP,

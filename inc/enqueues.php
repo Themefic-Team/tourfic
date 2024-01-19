@@ -157,13 +157,13 @@ if ( ! function_exists( 'tf_enqueue_scripts' ) ) {
 		/**
 		 * Google Map
 		 */
-		wp_enqueue_script( 'googleapis', 'https://maps.googleapis.com/maps/api/js?key=' . 'AIzaSyBNrASOuKNnXr4a5rEqDC_8fo_isduYSeU' . '&sensor=false&amp;libraries=places', array(), TOURFIC, true );
+		$tf_map_api_key = ! empty( tfopt( 'tf-googlemapapi' ) ) ? tfopt( 'tf-googlemapapi' ) : '';
+		wp_enqueue_script( 'googleapis', 'https://maps.googleapis.com/maps/api/js?key=' . $tf_map_api_key . '&sensor=false&amp;libraries=places', array(), TOURFIC, true );
 		wp_enqueue_script( 'markerclusterer', TF_ASSETS_URL . 'app/libs/markerclusterer.min.js', array(), TOURFIC, true );
 
 		/**
 		 * Hotel Min and Max Price
 		 */
-
 		$tfhotel_min_max       = array(
 			'posts_per_page' => - 1,
 			'post_type'      => 'tf_hotel',
@@ -307,6 +307,9 @@ if ( ! function_exists( 'tf_enqueue_scripts' ) ) {
 		}
 
 		$tf_apartment_min_max_price = get_apartment_min_max_price();
+
+		wp_enqueue_script( 'select2' );
+		wp_enqueue_style( 'select2' );
 
 		/**
 		 * Custom

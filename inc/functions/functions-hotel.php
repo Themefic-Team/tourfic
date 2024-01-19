@@ -1193,7 +1193,8 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                                     <span class="tf-label"><?php _e( 'Location', 'tourfic' ); ?></span>
                                     <div class="tf_form_inners tf_form-inner">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                            <path d="M8 13.9317L11.2998 10.6318C13.1223 8.80943 13.1223 5.85464 11.2998 4.0322C9.4774 2.20975 6.52261 2.20975 4.70017 4.0322C2.87772 5.85464 2.87772 8.80943 4.70017 10.6318L8 13.9317ZM8 15.8173L3.75736 11.5747C1.41421 9.2315 1.41421 5.43254 3.75736 3.08939C6.10051 0.746245 9.89947 0.746245 12.2427 3.08939C14.5858 5.43254 14.5858 9.2315 12.2427 11.5747L8 15.8173ZM8 8.66536C8.7364 8.66536 9.33333 8.06843 9.33333 7.33203C9.33333 6.59565 8.7364 5.9987 8 5.9987C7.2636 5.9987 6.66667 6.59565 6.66667 7.33203C6.66667 8.06843 7.2636 8.66536 8 8.66536ZM8 9.9987C6.52724 9.9987 5.33333 8.80476 5.33333 7.33203C5.33333 5.85927 6.52724 4.66536 8 4.66536C9.47273 4.66536 10.6667 5.85927 10.6667 7.33203C10.6667 8.80476 9.47273 9.9987 8 9.9987Z" fill="#FAEEDD"/>
+                                            <path d="M8 13.9317L11.2998 10.6318C13.1223 8.80943 13.1223 5.85464 11.2998 4.0322C9.4774 2.20975 6.52261 2.20975 4.70017 4.0322C2.87772 5.85464 2.87772 8.80943 4.70017 10.6318L8 13.9317ZM8 15.8173L3.75736 11.5747C1.41421 9.2315 1.41421 5.43254 3.75736 3.08939C6.10051 0.746245 9.89947 0.746245 12.2427 3.08939C14.5858 5.43254 14.5858 9.2315 12.2427 11.5747L8 15.8173ZM8 8.66536C8.7364 8.66536 9.33333 8.06843 9.33333 7.33203C9.33333 6.59565 8.7364 5.9987 8 5.9987C7.2636 5.9987 6.66667 6.59565 6.66667 7.33203C6.66667 8.06843 7.2636 8.66536 8 8.66536ZM8 9.9987C6.52724 9.9987 5.33333 8.80476 5.33333 7.33203C5.33333 5.85927 6.52724 4.66536 8 4.66536C9.47273 4.66536 10.6667 5.85927 10.6667 7.33203C10.6667 8.80476 9.47273 9.9987 8 9.9987Z"
+                                                  fill="#FAEEDD"/>
                                         </svg>
                                         <input type="text" name="place-name" required="" id="tf-location" class="" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" value="">
                                         <input type="hidden" name="place" id="tf-search-hotel" class="tf-place-input">
@@ -2921,88 +2922,72 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                 </div>
             </div>
         </div>
-	<?php elseif ( $tf_hotel_arc_selected_template == "design-3" ) :
-		$first_gallery_image = explode( ',', $gallery );
-		?>
-        <div class="tf-available-room">
-            <div class="tf-available-room-gallery">
-                <div class="tf-room-gallery">
+	<?php elseif ( $tf_hotel_arc_selected_template == "design-3" ) : ?>
+        <div class="tf-archive-hotel">
+            <div class="tf-archive-hotel-thumb">
+                <a href="<?php echo esc_url( $url ); ?>">
 					<?php
-					if ( has_post_thumbnail() ) {
+					if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
 						the_post_thumbnail( 'full' );
 					} else {
 						echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
 					}
 					?>
-                </div>
-				<?php
-				if ( ! empty( $gallery_ids ) ) { ?>
-                    <div data-id="<?php echo get_the_ID(); ?>" data-type="tf_hotel" class="tf-room-gallery tf-popup-buttons tf-hotel-room-popup"
-                         style="<?php echo ! empty( $first_gallery_image[0] ) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.70) 0%, rgba(48, 40, 28, 0.70) 100%), url(' . esc_url( wp_get_attachment_image_url( $first_gallery_image[0] ) ) . '), lightgray 50% / cover no-repeat; background-size: cover; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
-                        <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g id="content">
-                                <path id="Rectangle 2111"
-                                      d="M5.5 16.9745C5.6287 18.2829 5.91956 19.1636 6.57691 19.8209C7.75596 21 9.65362 21 13.4489 21C17.2442 21 19.1419 21 20.3209 19.8209C21.5 18.6419 21.5 16.7442 21.5 12.9489C21.5 9.15362 21.5 7.25596 20.3209 6.07691C19.6636 5.41956 18.7829 5.1287 17.4745 5"
-                                      stroke="#FDF9F4" stroke-width="1.5"></path>
-                                <path id="Rectangle 2109"
-                                      d="M1.5 9C1.5 5.22876 1.5 3.34315 2.67157 2.17157C3.84315 1 5.72876 1 9.5 1C13.2712 1 15.1569 1 16.3284 2.17157C17.5 3.34315 17.5 5.22876 17.5 9C17.5 12.7712 17.5 14.6569 16.3284 15.8284C15.1569 17 13.2712 17 9.5 17C5.72876 17 3.84315 17 2.67157 15.8284C1.5 14.6569 1.5 12.7712 1.5 9Z"
-                                      stroke="#FDF9F4" stroke-width="1.5"></path>
-                                <path id="Vector" d="M1.5 10.1185C2.11902 10.0398 2.74484 10.001 3.37171 10.0023C6.02365 9.9533 8.61064 10.6763 10.6711 12.0424C12.582 13.3094 13.9247 15.053 14.5 17" stroke="#FDF9F4"
-                                      stroke-width="1.5" stroke-linejoin="round"></path>
-                                <path id="Vector_2" d="M12.4998 6H12.5088" stroke="#FDF9F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </g>
-                        </svg>
-                    </div>
-				<?php } ?>
-                <div class="tf-available-labels">
-					<?php if ( $featured ): ?>
-                        <span class="tf-available-labels-featured"><?php _e( "Featured", "tourfic" ); ?></span>
-					<?php endif; ?>
-					<?php
-					if ( sizeof( $hotel_multiple_tags ) > 0 ) {
-						foreach ( $hotel_multiple_tags as $tag ) {
-							$hotel_tag_name       = ! empty( $tag['hotel-tag-title'] ) ? __( $tag['hotel-tag-title'], "tourfic" ) : '';
-							$tag_background_color = ! empty( $tag["hotel-tag-color-settings"]["background"] ) ? $tag["hotel-tag-color-settings"]["background"] : "#003162";
-							$tag_font_color       = ! empty( $tag["hotel-tag-color-settings"]["font"] ) ? $tag["hotel-tag-color-settings"]["font"] : "#fff";
+                </a>
 
-							echo <<<EOD
-								<span class="tf-multiple-tag" style="color: $tag_font_color; background-color: $tag_background_color ">$hotel_tag_name</span>
-							EOD;
-						}
-					}
-					?>
-                </div>
-                <div class="tf-available-ratings">
-					<?php tf_archive_single_rating(); ?>
-                    <i class="fa-solid fa-star"></i>
-                </div>
+				<?php
+				if ( ! empty( $tf_lowestAmount_items ) ) : ?>
+                    <div class="tf-archive-hotel-discount">
+						<?php echo $tf_lowestAmount_items['type'] == "percent" ? $tf_lowestAmount . '%' : wc_price( $tf_lowestAmount ) ?><?php _e( " Off", "tourfic" ); ?>
+                    </div>
+				<?php endif; ?>
             </div>
-            <div class="tf-available-room-content">
-                <div class="tf-available-room-content-left">
-                    <div class="tf-card-heading-info">
-                        <div class="tf-section-title-and-location">
-                            <h2 class="tf-section-title"><?php echo tourfic_character_limit_callback( get_the_title(), 55 ); ?></h2>
-							<?php
-							if ( ! empty( $address ) ) {
-								?>
-                                <div class="tf-title-location">
-                                    <div class="location-icon">
-                                        <i class="ri-map-pin-line"></i>
-                                    </div>
-                                    <span><?php echo tourfic_character_limit_callback( esc_html( $address ), 65 ); ?></span>
-                                </div>
-							<?php } ?>
+            <div class="tf-archive-hotel-content">
+                <div class="tf-archive-hotel-content-left">
+					<?php if ( ! empty( $address ) ) : ?>
+                        <div class="tf-title-location">
+                            <div class="location-icon">
+                                <i class="ri-map-pin-fill"></i>
+                            </div>
+                            <span><?php echo tourfic_character_limit_callback( esc_html( $address ), 40 ); ?></span>
                         </div>
-                        <div class="tf-mobile tf-pricing-info">
-							<?php if ( ! empty( $discount_amount ) ) { ?>
-                                <div class="tf-available-room-off">
-							<span>
-								<?php echo min( $discount_amount ); ?>% <?php _e( "Off ", "tourfic" ); ?>
-							</span>
-                                </div>
+					<?php endif; ?>
+                    <h4 class="tf-section-title"><a href="<?php echo esc_url( $url ); ?>"><?php echo tourfic_character_limit_callback( get_the_title(), 55 ); ?></a></h4>
+					<?php if ( $features ) { ?>
+                        <ul class="features">
+							<?php foreach ( array_slice( $features, 0, 3 ) as $tfkey => $feature ) :
+								$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
+								if ( ! empty( $feature_meta ) ) {
+									$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+								}
+								if ( ! empty( $f_icon_type ) && $f_icon_type == 'fa' ) {
+									$feature_icon = ! empty( $feature_meta['icon-fa'] ) ? '<i class="' . $feature_meta['icon-fa'] . '"></i>' : '';
+								} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'c' ) {
+									$feature_icon = ! empty( $feature_meta['icon-c'] ) ? '<img src="' . $feature_meta['icon-c'] . '" style="min-width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />' : '';
+								}
+
+								echo '<li>';
+								if ( ! empty( $feature_icon ) ) {
+									echo wp_kses_post( $feature_icon );
+								}
+								echo esc_html( $feature->name );
+								//add comma after each feature except last one, if only 1/2 exists then don't add comma to last one
+								if ( count( $features ) > 1 && $tfkey != count( $features ) - 1 ) {
+									echo ',';
+								}
+								echo '</li>';
+
+							endforeach;
+							?>
+							<?php if ( count( $features ) > 3 ) { ?>
+                                <li><a href="<?php echo esc_url( $url ); ?>"><?php _e( "View More", "tourfic" ); ?></a></li>
 							<?php } ?>
-                            <div class="tf-available-room-price">
-						<span class="tf-price-from">
+                        </ul>
+					<?php } ?>
+					<?php tf_archive_single_rating(); ?>
+                </div>
+                <div class="tf-archive-hotel-content-right">
+                    <div class="tf-archive-hotel-price">
 						<?php
 						$room_price     = array_filter( $room_price );
 						$min_sale_price = ! empty( $room_price ) ? min( array_column( $room_price, 'sale_price' ) ) : 0;
@@ -3022,89 +3007,16 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 							echo __( "From ", "tourfic" );
 							//get the lowest price from all available room price
 							$lowest_sale_price = wc_price( $min_sale_price );
-							echo " $lowest_sale_price" . " ";
 							if ( $min_regular_price != 0 ) {
-								$lowest_regular_price = wc_price( $min_regular_price );
-								echo "<del>" . $lowest_regular_price . "<del>";
+								$lowest_regular_price = strip_tags( wc_price( $min_regular_price ) );
+								echo "<del>" . $lowest_regular_price . "</del>" . " " . "<span>" . $lowest_sale_price . "</span>";
+							} else {
+								echo " $lowest_sale_price" . " ";
 							}
 						endif;
 						?>
-						</span>
-                            </div>
-                        </div>
                     </div>
-					<?php if ( $features ) { ?>
-                        <ul class="features">
-							<?php foreach ( $features as $tfkey => $feature ) {
-								$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
-								if ( ! empty( $feature_meta ) ) {
-									$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
-								}
-								if ( ! empty( $f_icon_type ) && $f_icon_type == 'fa' ) {
-									$feature_icon = ! empty( $feature_meta['icon-fa'] ) ? '<i class="' . $feature_meta['icon-fa'] . '"></i>' : '';
-								} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'c' ) {
-									$feature_icon = ! empty( $feature_meta['icon-c'] ) ? '<img src="' . $feature_meta['icon-c'] . '" style="min-width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />' : '';
-								}
-								if ( $tfkey < 5 ) {
-									?>
-                                    <li>
-										<?php
-										if ( ! empty( $feature_icon ) ) {
-											echo $feature_icon;
-										} ?>
-										<?php echo $feature->name; ?>
-                                    </li>
-								<?php }
-							} ?>
-							<?php if ( count( $features ) > 5 ) { ?>
-                                <li><a href="<?php echo esc_url( $url ); ?>"><?php _e( "View More", "tourfic" ); ?></a></li>
-							<?php } ?>
-                        </ul>
-					<?php } ?>
-                </div>
-                <div class="tf-available-room-content-right">
-                    <div class="tf-card-pricing-heading">
-						<?php
-						if ( ! empty( $tf_lowestAmount_items ) ) { ?>
-                            <div class="tf-available-room-off">
-						<span>
-							<?php echo $tf_lowestAmount_items['type'] == "percent" ? $tf_lowestAmount . '%' : wc_price( $tf_lowestAmount ) ?><?php _e( "Off ", "tourfic" ); ?>
-						</span>
-                            </div>
-						<?php } ?>
-                        <div class="tf-available-room-price">
-					<span class="tf-price-from">
-					<?php
-					$room_price     = array_filter( $room_price );
-					$min_sale_price = ! empty( $room_price ) ? min( array_column( $room_price, 'sale_price' ) ) : 0;
-
-					if ( ! empty( $room_price ) ):
-						$min_regular_price = 0;
-
-						array_walk( $room_price, function ( $value ) use ( $min_sale_price, &$min_regular_price ) {
-							if ( is_array( $value ) && count( $value ) > 0 ) {
-								if ( array_key_exists( "regular_price", $value ) ) {
-									if ( $value["sale_price"] == $min_sale_price ) {
-										$min_regular_price = $value["regular_price"];
-									}
-								}
-							}
-						} );
-						echo __( "From ", "tourfic" );
-						//get the lowest price from all available room price
-						$lowest_sale_price = wc_price( $min_sale_price );
-						if ( $min_regular_price != 0 ) {
-							$lowest_regular_price = strip_tags( wc_price( $min_regular_price ) );
-							echo "<del>" . $lowest_regular_price . "</del>" . " " . "<span>" . $lowest_sale_price . "</span>";
-						} else {
-							echo " $lowest_sale_price" . " ";
-						}
-					endif;
-					?>
-					</span>
-                        </div>
-                    </div>
-                    <a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php _e( "See details", "tourfic" ); ?></a>
+                    <a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php _e( "View Details", "tourfic" ); ?></a>
                 </div>
             </div>
         </div>
