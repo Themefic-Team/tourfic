@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mainulsunvi, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings, apartment-booking, apartment-rental
 Requires at least: 5.4
 Tested up to: 6.4.2
-Stable tag: 2.11.4
+Stable tag: 2.11.5
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -387,7 +387,7 @@ The icon and banner used on this plugin are taken from <a href="https://www.flat
 2. Active the plugin from the WordPress Plugins administration page.
 3. OR, Go to WP admin panel, click 'Plugins' -> 'Add new'. In the search input box, type 'Tourfic'.
 4. Install and activate the plugin.
-5. Check our youtube video for further instruction
+5. Check our YouTube video for further instruction
 
 == Frequently Asked Questions ==
 
@@ -451,6 +451,12 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 == Changelog ==
 
+= 2.11.5 - 20 January 2024 =
+
+- Fixed: Search page sidebar issue
+- Compatibility: Compatible with ACF Plugin(Colour picker)
+- Improved: Template design, and Updated style
+
 = 2.11.4 - 14 January 2024 =
 
 - Added: Hide documentation link option in multi-vendor settings (pro)
@@ -474,7 +480,6 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 = 2.11.2 - 01 January 2024 =
 
 - Fixed: Performance issue fixed
-
 
 = 2.11.1 - 30 December 2023 =
 
@@ -571,8 +576,8 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 = 2.10.4 -  02 November 2023 =
 
 - Fixed: High-Performance Order Storage issue for Woocommerce
-- Compatibility: Compitible with WooCommerce 8.2.1
-- Compatibility: Compitible with Elementor 3.17.2
+- Compatibility: Compatible with WooCommerce 8.2.1
+- Compatibility: Compatible with Elementor 3.17.2
 - Updated: readme.txt
 
 = 2.10.3 -  30 October 2023 =
