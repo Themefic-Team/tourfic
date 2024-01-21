@@ -14741,8 +14741,19 @@ html {
   -ms-flex-align: center;
   align-items: center;
 }
+.tf-hotel-template-4 .tf-archive-filter {
+  margin-bottom: 24px;
+}
 .tf-hotel-template-4 .select2-container {
   width: 100% !important;
+}
+.tf-hotel-template-4 .select2-container .select2-selection {
+  width: 100%;
+  border: 0.5px solid #FFEDE1;
+  background: #fff;
+  box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.4);
+  border-radius: 4px;
+  color: #6E655E;
 }
 .tf-hotel-template-4 .select2-container .select2-search--inline .select2-search__field {
   margin-top: 0;
@@ -14755,6 +14766,10 @@ html {
   font-family: sans-serif;
   overflow: hidden;
   word-break: keep-all;
+}
+.tf-hotel-template-4 .select2-container.select2-container--focus .select2-selection--multiple {
+  border: 0.5px solid #FFEDE1;
+  outline: 0;
 }
 .tf-hotel-template-4 .select2-container--default .select2-selection--single .select2-selection__arrow {
   height: 48px;

@@ -43,6 +43,9 @@
                                     ?>
                                 </select>
                             </div>
+                            <div class="tf-archive-filter-item">
+
+                            </div>
                         </div>
                         <div class="tf-archive-top">
                             <h5 class="tf-total-results"><?php _e( "Found", "tourfic" ); ?>
