@@ -651,12 +651,40 @@ div#tf-contact-info {
         overflow: hidden !important;
 
         .itinerary-map-popup {
-            .itinerary-map-popup-img {
+            .itinerary-map-popup-img-wrap {
+                height: 140px;
+                overflow: hidden;
+
+                overflow: hidden;
                 img {
                     width: 100%;
                     height: 140px;
                     border-radius: 12px 12px 0px 0px;;
                     object-fit: cover;
+                }
+
+                .popup-arrow-active {
+                    display: none !important;
+                }
+
+                .itinerary-map-popup-img-icons {
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 51px;
+                    right: 0;
+                    z-index: 99;
+
+                    .itinerary-map-popup-img-icon-left, .itinerary-map-popup-img-icon-right {
+                        cursor: pointer;
+                        user-select: none;
+                    }
+
+                }
+
+                img:hover .itinerary-map-popup-img-icons {
+                    opacity: 1;
                 }
             }
             .itinerary-map-popup-content {
@@ -705,7 +733,7 @@ div#tf-contact-info {
                 .itinerary-map-popup-options {
                     display: flex;
                     align-items: center;
-                    gap: 4px;
+                    gap: 8px;
                     flex-wrap: wrap;
 
                     .itinerary-map-popup-option {
@@ -729,24 +757,25 @@ div#tf-contact-info {
         }
     }
     
-    button {
+    button[title~=Close] {
        top: 8px !important;
        right: 8px !important;
-       background-color: #FFFFFF !important;
+       background-color: #F3F4F6 !important;
        opacity: 1 !important;
        border-radius: 6px;
        height: 24px !important;
        width: 24px !important;
-
+       
        span {
-        position: relative !important;
-       }
+           margin: auto !important;
+           
+        }
     }
-
+    
     button:hover {
         border-radius: 24px;
-        background-color: #F3F4F6 !important;
         border: 1px solid #8F94A3 !important;
+       
     }
 }
 
