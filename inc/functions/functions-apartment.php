@@ -949,7 +949,10 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 var infant_price = <?php echo $infant_price; ?>;
                                 var enable_availability = '<?php echo $enable_availability; ?>';
                                 var apt_availability = '<?php echo $apt_availability; ?>';
-                                apt_availability = JSON.parse(apt_availability);
+                                
+								if(apt_availability) {
+									apt_availability = JSON.parse(apt_availability);
+								}
 
                                 if (enable_availability !== '1') {
                                     if (pricing_type === 'per_night') {
