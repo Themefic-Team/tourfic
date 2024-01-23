@@ -846,28 +846,54 @@
         })
     });
 
-    $(document).ready(function(e) {
+    // $(document).ready(function(e) {
 
-        click = 1;
-        $(this).on("click", '.itinerary-map-popup-img-icon-right', function(e) {
+    //     click = 0;
 
-            $(".itinerary-map-popup-img").each(function(index, value) {
+    //     $(this).on("click", '.itinerary-map-popup-img-icon-right', function(e) {
 
-                if(click == index) {
+    //         $(".itinerary-map-popup-img").each(function(index, value) {
+
+    //             if(click == index ) {
                     
-                    $(value).show()
-                } else {
-                    $(value).hide()
-                }
+    //                 $(value).show()
+    //             } else {
+    //                 $(value).hide()
+    //             }
                 
-            })
-            click+= 1;
-            if (click === $(".itinerary-map-popup-img").length ) {
-                $(".itinerary-map-popup-img-icon-right").remove()
-            }
-            
-        })
-    })
+    //         })
+    //         click+= 1;
+
+    //         if (click === $(".itinerary-map-popup-img").length ) {
+    //             $(".itinerary-map-popup-img-icon-right").hide()
+    //         } else {
+    //             $(".itinerary-map-popup-img-icon-right").show()
+    //         }
+    //     })
+
+    //     $(this).on("click", ".itinerary-map-popup-img-icon-left", function(e) {
+    //         click-= 1;
+
+    //         $(".itinerary-map-popup-img").each(function(index, value) {
+
+    //             if(click == index) {
+                    
+    //                 $(value).show()
+    //             } else {
+    //                 $(value).hide()
+    //             }
+                
+    //         })
+
+    //         if (click == 0 ) {
+    //             $(".itinerary-map-popup-img-icon-left").hide()
+    //         } else {
+    //             $(".itinerary-map-popup-img-icon-left").show()
+    //         }
+
+    //         console.log(click)
+    //     })
+    // })
 })(jQuery);
 
 // QR Code Scan Function

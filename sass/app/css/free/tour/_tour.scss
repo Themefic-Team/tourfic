@@ -654,10 +654,10 @@ div#tf-contact-info {
             .itinerary-map-popup-img-wrap {
                 height: 140px;
                 overflow: hidden;
+                display: flex;
 
-                overflow: hidden;
                 img {
-                    width: 100%;
+                    width: 296px;
                     height: 140px;
                     border-radius: 12px 12px 0px 0px;;
                     object-fit: cover;
