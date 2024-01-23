@@ -836,64 +836,21 @@
             });
         });
 
+        // Itinerary Map Popup Slider Arrow Hide and Show
+
         $(document).on("mouseenter", '.itinerary-map-popup-img-wrap', function(e) {
             if($(".itinerary-map-popup-img").length > 1 ) {
                 $(".itinerary-map-popup-img-icons").removeClass("popup-arrow-active")
-                
             } else {
                 $(".itinerary-map-popup-img-icons").addClass("popup-arrow-active")
             }
+        }) 
+        $(document).on("mouseleave", '.itinerary-map-popup-img-wrap', function(e) {
+            
+            $(".itinerary-map-popup-img-icons").addClass("popup-arrow-active")
         })
     });
 
-    // $(document).ready(function(e) {
-
-    //     click = 0;
-
-    //     $(this).on("click", '.itinerary-map-popup-img-icon-right', function(e) {
-
-    //         $(".itinerary-map-popup-img").each(function(index, value) {
-
-    //             if(click == index ) {
-                    
-    //                 $(value).show()
-    //             } else {
-    //                 $(value).hide()
-    //             }
-                
-    //         })
-    //         click+= 1;
-
-    //         if (click === $(".itinerary-map-popup-img").length ) {
-    //             $(".itinerary-map-popup-img-icon-right").hide()
-    //         } else {
-    //             $(".itinerary-map-popup-img-icon-right").show()
-    //         }
-    //     })
-
-    //     $(this).on("click", ".itinerary-map-popup-img-icon-left", function(e) {
-    //         click-= 1;
-
-    //         $(".itinerary-map-popup-img").each(function(index, value) {
-
-    //             if(click == index) {
-                    
-    //                 $(value).show()
-    //             } else {
-    //                 $(value).hide()
-    //             }
-                
-    //         })
-
-    //         if (click == 0 ) {
-    //             $(".itinerary-map-popup-img-icon-left").hide()
-    //         } else {
-    //             $(".itinerary-map-popup-img-icon-left").show()
-    //         }
-
-    //         console.log(click)
-    //     })
-    // })
 })(jQuery);
 
 // QR Code Scan Function

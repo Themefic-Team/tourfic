@@ -4952,34 +4952,37 @@ div#tf-contact-info {
   overflow: hidden !important;
 }
 .gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-img-wrap {
+  width: 296px;
   height: 140px;
   overflow: hidden;
-  display: flex;
+  margin: 0px;
 }
 .gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-img-wrap img {
-  width: 296px;
+  width: 100%;
   height: 140px;
   border-radius: 12px 12px 0px 0px;
   object-fit: cover;
 }
-.gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-img-wrap .popup-arrow-active {
+.gm-style-iw .gm-style-iw-d .itinerary-map-popup .popup-arrow-active {
   display: none !important;
 }
-.gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-img-wrap .itinerary-map-popup-img-icons {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
+.gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-img-icons {
+  display: block;
+  z-index: 99;
+}
+.gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-img-icons .itinerary-map-popup-img-icon-right {
+  cursor: pointer;
+  user-select: none;
   position: absolute;
   top: 51px;
   right: 0;
-  z-index: 99;
 }
-.gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-img-wrap .itinerary-map-popup-img-icons .itinerary-map-popup-img-icon-left, .gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-img-wrap .itinerary-map-popup-img-icons .itinerary-map-popup-img-icon-right {
+.gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-img-icons .itinerary-map-popup-img-icon-left {
   cursor: pointer;
   user-select: none;
-}
-.gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-img-wrap img:hover .itinerary-map-popup-img-icons {
-  opacity: 1;
+  position: absolute;
+  top: 51px;
+  left: 0;
 }
 .gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-content {
   padding: 16px;

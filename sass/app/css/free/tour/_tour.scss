@@ -652,40 +652,41 @@ div#tf-contact-info {
 
         .itinerary-map-popup {
             .itinerary-map-popup-img-wrap {
+                width: 296px;
                 height: 140px;
                 overflow: hidden;
-                display: flex;
+                margin: 0px;
 
                 img {
-                    width: 296px;
+                    width: 100%;
                     height: 140px;
-                    border-radius: 12px 12px 0px 0px;;
+                    border-radius: 12px 12px 0px 0px;
                     object-fit: cover;
                 }
+            }
+            .popup-arrow-active {
+                display: none !important;
+            }
 
-                .popup-arrow-active {
-                    display: none !important;
-                }
+            .itinerary-map-popup-img-icons {
+                display: block;
+                z-index: 99;
 
-                .itinerary-map-popup-img-icons {
-                    display: flex;
-                    width: 100%;
-                    justify-content: space-between;
+                .itinerary-map-popup-img-icon-right {
+                    cursor: pointer;
+                    user-select: none;
                     position: absolute;
                     top: 51px;
                     right: 0;
-                    z-index: 99;
-
-                    .itinerary-map-popup-img-icon-left, .itinerary-map-popup-img-icon-right {
-                        cursor: pointer;
-                        user-select: none;
-                    }
-
+                }
+                .itinerary-map-popup-img-icon-left {
+                    cursor: pointer;
+                    user-select: none;
+                    position: absolute;
+                    top: 51px;
+                    left: 0;
                 }
 
-                img:hover .itinerary-map-popup-img-icons {
-                    opacity: 1;
-                }
             }
             .itinerary-map-popup-content {
                 padding: 16px;
