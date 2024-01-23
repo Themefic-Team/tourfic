@@ -824,11 +824,11 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 		<?php } ?>
 
 		<?php if ( $post_type == 'tf_hotel' ) { ?>
-		
+
 			<script>
 			(function ($) {
 				$(document).ready(function () {
-				
+
 					// flatpickr locale
 					<?php tf_flatpickr_locale("root"); ?>
 
@@ -1156,7 +1156,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 
 						// flatpickr locale
 						<?php tf_flatpickr_locale(); ?>
-						
+
 						onChange: function (selectedDates, dateStr, instance) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
@@ -2437,7 +2437,7 @@ function tf_is_search_form_single_tab( $type_arr ) {
 
 	return false;
 }
-
+// Utility Function
 function tf_var_dump( $var ) {
 	echo '<pre>';
 	var_dump( $var );
@@ -2983,7 +2983,7 @@ function tf_template_3_migrate_data() {
 
 add_action( 'init', 'tf_template_3_migrate_data' );
 
-/* Text Limit 
+/* Text Limit
 * @Author Jahid
 */
 if( ! function_exists('tourfic_character_limit_callback') ){
