@@ -1,5 +1,7 @@
 .tf-template-3{
+    @import './template1/rooms';
     @import './template1/rules';
+    @import './template1/offer';
 }
 
 .tf-apartment-title {

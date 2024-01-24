@@ -6108,6 +6108,88 @@ div#tf-contact-info {
     margin-bottom: 10px;
   }
 }
+.tf-template-3 .tf-apartment-rooms-section {
+  margin-left: 32px;
+  margin-right: 32px;
+}
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details {
+  border-radius: 4px;
+  background: #FCF4E8;
+  padding: 24px 24px 28px 24px;
+}
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details h4 {
+  color: #595349;
+  font-size: 20px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: 130%; /* 26px */
+  margin: 0 0 16px 0;
+}
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .slick-track {
+  margin: 0 !important;
+}
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .tf-apartment-room-item .tf-apartment-room-item-thumb a {
+  text-decoration: none;
+}
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .tf-apartment-room-item .tf-apartment-room-item-thumb a img {
+  height: 200px;
+  border-radius: 4px;
+}
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .tf-apartment-room-item .tf-apartment-room-item-content {
+  margin-top: 16px;
+}
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .tf-apartment-room-item .tf-apartment-room-item-content a {
+  text-decoration: none;
+}
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .tf-apartment-room-item .tf-apartment-room-item-content a span {
+  color: #595349;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  line-height: 130%; /* 20.8px */
+}
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .tf-apartment-room-item .tf-apartment-room-item-content p {
+  margin: 8px 0 0 0;
+  color: #99948D;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 130%; /* 20.8px */
+}
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .slick-dots {
+  bottom: -36px;
+}
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .slick-dots li {
+  width: 16px;
+  height: 16px;
+}
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .slick-dots li button {
+  background: transparent;
+  border-radius: 30px;
+  border: 1px solid rgb(153, 148, 141);
+  height: 12px;
+  width: 12px;
+}
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .slick-dots li button:before {
+  opacity: 0;
+  font-size: 0;
+  width: 6px;
+  height: 6px;
+  background: rgb(181, 142, 83);
+  top: 49%;
+  left: 50%;
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+}
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .slick-dots li.slick-active button {
+  background: transparent;
+  border: 1px solid rgb(181, 142, 83);
+  height: 16px;
+  width: 16px;
+}
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .slick-dots li.slick-active button:before {
+  opacity: 1;
+}
 .tf-template-3 .tf-aprtment-rules-section h2 {
   color: #595349;
   font-size: 32px !important;
@@ -6115,6 +6197,13 @@ div#tf-contact-info {
   font-weight: 700 !important;
   line-height: 120%;
   margin-bottom: 24px !important;
+}
+.tf-template-3 .tf-aprtment-rules-section .aprtment-inc-exc {
+  display: flex;
+  gap: 26px;
+}
+.tf-template-3 .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules {
+  width: 50%;
 }
 .tf-template-3 .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules ul {
   margin: 0;
@@ -6147,6 +6236,41 @@ div#tf-contact-info {
   font-weight: 400 !important;
   line-height: 130% !important; /* 20.8px */
   margin: 0;
+}
+.tf-template-3 .tf-aprtment-rules-section .aprtment-inc-exc.tf-inc-exc-full .aprtment-single-rules {
+  width: 100%;
+}
+.tf-template-3 .tf-place-offer-section h2 {
+  color: #595349;
+  font-size: 32px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: 120%;
+  margin-bottom: 24px !important;
+}
+.tf-template-3 .tf-place-offer-section .place-offer-items {
+  display: grid;
+  gap: 8px 16px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.tf-template-3 .tf-place-offer-section .place-offer-items .tf-apt-amenity {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+}
+.tf-template-3 .tf-place-offer-section .place-offer-items .tf-apt-amenity .tf-apt-amenity-icon {
+  line-height: 11px;
+}
+.tf-template-3 .tf-place-offer-section .place-offer-items .tf-apt-amenity .tf-apt-amenity-icon img {
+  height: 16px !important;
+  width: 16px !important;
+}
+.tf-template-3 .tf-place-offer-section .place-offer-items .tf-apt-amenity span {
+  color: #99948D;
+  font-size: 14px !important;
+  font-style: normal;
+  font-weight: 400 !important;
+  line-height: 13px;
 }
 
 .tf-apartment-title {

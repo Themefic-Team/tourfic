@@ -8,7 +8,10 @@
         margin-bottom: 24px !important;
     }
     .aprtment-inc-exc{
+        display: flex;
+        gap: 26px;
         .aprtment-single-rules{
+            width: 50%;
             ul{
                 margin: 0;
                 padding: 0;
@@ -43,6 +46,11 @@
                     }
                 }
             }
+        }
+    }
+    .aprtment-inc-exc.tf-inc-exc-full{
+        .aprtment-single-rules{
+            width: 100%;
         }
     }
 }
