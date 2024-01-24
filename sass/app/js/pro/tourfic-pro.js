@@ -840,9 +840,10 @@
 
         $(document).on("mouseenter", '.itinerary-map-popup-img-wrap', function(e) {
             if($(".itinerary-map-popup-img").length > 1 ) {
-                $(".itinerary-map-popup-img-icons").removeClass("popup-arrow-active")
+                $(e.currentTarget).find(".itinerary-map-popup-img-icons").removeClass("popup-arrow-active")
+
             } else {
-                $(".itinerary-map-popup-img-icons").addClass("popup-arrow-active")
+                $(e.currentTarget).find(".itinerary-map-popup-img-icons").addClass("popup-arrow-active")
             }
         }) 
         $(document).on("mouseleave", '.itinerary-map-popup-img-wrap', function(e) {
