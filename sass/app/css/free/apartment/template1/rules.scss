@@ -1,0 +1,48 @@
+.tf-aprtment-rules-section{
+    h2{
+        color: #595349;
+        font-size: 32px !important;
+        font-style: normal !important;
+        font-weight: 700 !important;
+        line-height: 120%;
+        margin-bottom: 24px !important;
+    }
+    .aprtment-inc-exc{
+        .aprtment-single-rules{
+            ul{
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                display: flex;
+                gap: 16px;
+                flex-wrap: wrap;
+                li{
+                    display: flex;
+                    gap: 8px;
+                    .rules-icon{
+                        width: 16px;
+                    }
+                    .rules-content{
+                        span{
+                            color: #595349;
+                            font-size: 16px !important;
+                            font-style: normal !important;
+                            font-weight: 600 !important;
+                            line-height: 130% !important; /* 20.8px */
+                            margin: 0 0 8px 0px;
+                            display: block;
+                        }
+                        p{
+                            color: #99948D;
+                            font-size: 16px !important;
+                            font-style: normal !important;
+                            font-weight: 400 !important;
+                            line-height: 130% !important; /* 20.8px */
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

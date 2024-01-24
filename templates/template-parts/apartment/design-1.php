@@ -151,6 +151,8 @@
             //     }
             // }else{
                 include TF_TEMPLATE_PART_PATH . 'apartment/design-1/description.php';
+                include TF_TEMPLATE_PART_PATH . 'apartment/design-1/features.php';
+                include TF_TEMPLATE_PART_PATH . 'apartment/design-1/rules.php';
                 include TF_TEMPLATE_PART_PATH . 'apartment/design-1/facilities.php';
             // }
             ?>

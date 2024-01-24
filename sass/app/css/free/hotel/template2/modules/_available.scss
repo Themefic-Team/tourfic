@@ -793,8 +793,6 @@
         .tf-meta-info{
             padding: 16px 24px 24px 24px;
             background-color: #FDF9F3;
-            min-height: 220px;
-            max-height: 220px;
             display: flex;
             flex-direction: column;
             @media #{$max1366}{
