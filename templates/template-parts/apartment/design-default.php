@@ -236,22 +236,14 @@
                                 <?php foreach ( tf_data_types( $meta['rooms'] ) as $key => $room ) : ?>
                                     <div class="tf-apartment-room-item">
                                         <div class="tf-apartment-room-item-thumb">
-                                            <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
-                                                <a href="#" class="tf-apt-room-qv" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">
-                                                    <img src="<?php echo esc_url( $room['thumbnail'] ) ?>" alt="room-thumbnail">
-                                                </a>
-                                            <?php else: ?>
-                                                <img src="<?php echo esc_url( $room['thumbnail'] ) ?>" alt="room-thumbnail">
-                                            <?php endif; ?>
+                                            <a href="#" class="tf-apt-room-qv" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">
+                                                <img src="<?php echo !empty($room['thumbnail']) ? esc_url( $room['thumbnail'] ) : TF_ASSETS_APP_URL . "images/feature-default.jpg" ?>" alt="room-thumbnail">
+                                            </a>
                                         </div>
                                         <div class="tf-apartment-room-item-content">
-                                            <?php if ( ! empty( $room['title'] ) && function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
-                                                <a href="#" class="tf-apt-room-qv" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">
-                                                    <h3><?php echo esc_html( $room['title'] ) ?></h3>
-                                                </a>
-                                            <?php elseif ( ! empty( $room['title'] ) ): ?>
+                                            <a href="#" class="tf-apt-room-qv" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">
                                                 <h3><?php echo esc_html( $room['title'] ) ?></h3>
-                                            <?php endif; ?>
+                                            </a>
                                             <p class="tf-apartment-room-item-price">
                                                 <?php echo ! empty( $room['price'] ) ? '<span>' . esc_html( $room['price'] ) . '</span>' : ''; ?>
                                                 <?php echo ! empty( $room['price_label'] ) ? '<span>' . esc_html( $room['price_label'] ) . '</span>' : ''; ?>
