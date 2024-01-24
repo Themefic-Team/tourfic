@@ -814,13 +814,14 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 				
                 <h2 class="tf-section-title"><?php _e("Available Date", "tourfic"); ?></h2>
                 <div class="tf-apartment-form-fields">
-                    <div class="tf_booking-dates">
-                        <div class="tf-check-in-out-date">
-                            <label class="tf_label-row">
+                    <div class="tf_booking-dates tf-check-in-out-date">
+                        <div class="tf-aprtment-check-in-out-date">
+                            <label class="tf_label_rows">
 								<i class="fa-sharp fa-solid fa-calendar-days"></i>
                                 <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Choose date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required>
                             </label>
                         </div>
+						<div class="tf_label-row"></div>
                     </div>
 
                     <div class="tf_form-row tf-apartment-guest-row">
@@ -833,25 +834,91 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 									<div class="tf_acrselection">
 										<div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
 										<div class="acr-select">
-											<div class="acr-dec">-</div>
+											<div class="acr-dec">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13094)">
+													<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13094">
+													<rect width="20" height="20" fill="white"/>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
 											<input type="tel" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1' ?>"/>
-											<div class="acr-inc">+</div>
+											<div class="acr-inc">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13100)">
+													<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13100">
+													<rect width="20" height="20" fill="white"/>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
 										</div>
 									</div>
 									<div class="tf_acrselection">
 										<div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
 										<div class="acr-select">
-											<div class="acr-dec">-</div>
+											<div class="acr-dec">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13094)">
+													<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13094">
+													<rect width="20" height="20" fill="white"/>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
 											<input type="tel" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0' ?>"/>
-											<div class="acr-inc">+</div>
+											<div class="acr-inc">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13100)">
+													<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13100">
+													<rect width="20" height="20" fill="white"/>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
 										</div>
 									</div>
 									<div class="tf_acrselection">
 										<div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
 										<div class="acr-select">
-											<div class="acr-dec">-</div>
+											<div class="acr-dec">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13094)">
+													<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13094">
+													<rect width="20" height="20" fill="white"/>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
 											<input type="tel" name="infant" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0' ?>"/>
-											<div class="acr-inc">+</div>
+											<div class="acr-inc">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13100)">
+													<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13100">
+													<rect width="20" height="20" fill="white"/>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
 										</div>
 									</div>
                                 </div>
@@ -880,7 +947,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                 </div>
             </div>
 
-            <ul class="tf-apartment-price-list">
+            <ul class="tf-apartment-price-list" style="display: none">
                 <li class="total-days-price-wrap" style="display: none">
                     <span class="total-days tf-price-list-label"></span>
                     <span class="days-total-price tf-price-list-price"></span>
@@ -1044,7 +1111,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                 </div>
             </div>
 
-            <ul class="tf-apartment-price-list">
+            <ul class="tf-apartment-price-list" style="display: none">
                 <li class="total-days-price-wrap" style="display: none">
                     <span class="total-days tf-price-list-label"></span>
                     <span class="days-total-price tf-price-list-price"></span>
@@ -1114,6 +1181,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                         var total_days_price_html = '<?php echo wc_price( 0 ); ?>';
                                         var wc_price_per_night = '<?php echo wc_price( $price_per_night ); ?>';
                                         if (total_price > 0) {
+											$('.tf-apartment-price-list').show();
                                             $('.total-days-price-wrap').show();
                                             total_days_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', total_price.toFixed(2));
                                         }
@@ -1125,6 +1193,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                         var total_days_price_html = '<?php echo wc_price( 0 ); ?>';
                                         var wc_price_per_person = '<?php echo wc_price( 0 ); ?>'.replace('0.00', totalPersonPrice.toFixed(2));
                                         if (total_price > 0) {
+											$('.tf-apartment-price-list').show();
                                             $('.total-days-price-wrap').show();
                                             total_days_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', total_price.toFixed(2));
                                         }
@@ -1162,6 +1231,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                     }
 
                                     if (total_price > 0) {
+                                        $('.tf-apartment-price-list').show();
                                         $('.total-days-price-wrap').show();
                                         total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', total_price.toFixed(2));
                                     }
@@ -1242,6 +1312,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 }
                                 $('.total-price-wrap .total-price').html(total_price_html);
                             } else {
+                                $('.tf-apartment-price-list').hide();
                                 $('.total-days-price-wrap').hide();
                                 $('.additional-fee-wrap').hide();
                                 $('.total-price-wrap').hide();

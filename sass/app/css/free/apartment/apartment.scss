@@ -1,7 +1,14 @@
-.tf-template-3{
+.tf-template-3.tf-apartment-single{
     @import './template1/rooms';
     @import './template1/rules';
     @import './template1/offer';
+    #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates{
+        flex-wrap: wrap;
+        margin-bottom: 32px;
+        .tf_label-row{
+            margin-top: 8px;
+        }
+    }
 }
 
 .tf-apartment-title {
@@ -1293,6 +1300,9 @@
                 border-top: 1px solid $stone5;
                 font-weight: 500;
                 color: $slate80;
+            }
+            &:last-child{
+                margin-bottom: 0px;
             }
         }
     }
