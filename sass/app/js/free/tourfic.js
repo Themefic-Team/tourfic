@@ -391,13 +391,13 @@
         function fullwidthInit(selector) {
             function fullWidth(selector) {
                 $(selector).each(function () {
-                    $(this).width("100%").css({marginLeft: "-0px"});
+                    $(this).width("100%").css({ marginLeft: "-0px" });
 
                     var window_width = $(window).width();
 
                     var left_margin = "-" + $(this).offset().left + "px";
 
-                    $(this).width(window_width).css({marginLeft: left_margin});
+                    $(this).width(window_width).css({ marginLeft: left_margin });
                 });
             }
 
@@ -707,7 +707,7 @@
             if ($('body').hasClass('logged-in')) {
                 let tableNode = targetNode.closest('table');
                 let type = tableNode.data('type');
-                let data = {id, action: 'tf_remove_wishlist', type, nonce: targetNode.data('nonce')}
+                let data = { id, action: 'tf_remove_wishlist', type, nonce: targetNode.data('nonce') }
                 $.get(tf_params.ajax_url, data,
                     function (data) {
                         if (data.success) {
@@ -909,7 +909,7 @@
          * Number/text change horizontal search form
          */
         // Number Increment
-        $('.acr-inc').on('click', function (e) {
+        $('.acr-inc, .quanity-acr-inc').on('click', function (e) {
             var input = $(this).parent().find('input');
             var max = input.attr('max') ? input.attr('max') : 999;
             var step = input.attr('step') ? input.attr('step') : 1;
@@ -922,7 +922,7 @@
         });
 
         // Number Decrement
-        $('.acr-dec').on('click', function (e) {
+        $('.acr-dec, .quanity-acr-dec').on('click', function (e) {
 
             var input = $(this).parent().find('input');
             var min = input.attr('min');
@@ -1234,7 +1234,7 @@
             e.preventDefault();
             var targetUrl = (e.target.href) ? e.target.href : $(this).context.href;
             amPushAjax(targetUrl);
-            window.history.pushState({url: "" + targetUrl + ""}, "", targetUrl);
+            window.history.pushState({ url: "" + targetUrl + "" }, "", targetUrl);
         });
         // End Feed Ajax Trigger
 
@@ -1694,12 +1694,28 @@
             let check_in_time = $('select[name=check-in-time] option').filter(':selected').val();
             var deposit = $('input[name=deposit]').is(':checked');
             var extras = [];
-            $('[name*=tf-tour-extra]').each(function () {
-                if ($(this).is(':checked')) {
-                    extras.push($(this).val());
-                }
-            });
+            var quantity = [];
+
+            $('.tour-extra-single').each(function(e) {
+                 let $this = $(this);
+                 
+                 if($this.find('input[name="tf-tour-extra"]').is(':checked')){
+
+                    let tour_extras = $this.find('input[name="tf-tour-extra"]').val();
+                     extras.push(tour_extras);
+
+                    if($this.find('.tf_quantity-acrselection').hasClass('quantity-active')){
+                        let qty = $this.find('input[name="extra-quantity"]').val();
+
+                        quantity.push(qty)
+                    }else{
+                        quantity.push(1)
+                    } 
+                }   
+            })
+
             var extras = extras.join();
+            var quantities = quantity.join();
             var data = {
                 action: 'tf_tour_booking_popup',
                 post_id: post_id,
@@ -1709,6 +1725,7 @@
                 check_in_date: check_in_date,
                 check_in_time: check_in_time,
                 tour_extra: extras,
+                tour_extra_quantity : quantities, 
                 deposit: deposit
             };
 
@@ -1770,7 +1787,7 @@
             tourPopupBooking();
         });
 
-        $(document).on('change', '[name*=tf-tour-extra]', function () {
+        $(document).on('change', '[name*=tf-tour-extra], input[name="extra-quantity"]', function () {
             tourPopupBooking();
         });
         $(document).on('change', '[name=deposit]', function () {
@@ -1875,9 +1892,20 @@
         });
 
         // Design 2 Toggle share buttons
-        $('.tf-share-toggle').click(function (e) {
+        $('.tf-template-3 .tf-share-toggle').click(function (e) {
             e.preventDefault();
+            $('.tf-share-toggle').toggleClass('actives');
             $('.tf-off-canvas-share').toggleClass('show');
+        });
+
+        // Design 2 Wishlist buttons
+        $('.tf-template-3 .add-wishlist').click(function (e) {
+            e.preventDefault();
+            $(this).parents().find('.tf-wishlist-box').addClass('actives');
+        });
+        $('.tf-template-3 .remove-wishlist').click(function (e) {
+            e.preventDefault();
+            $(this).parents().find('.tf-wishlist-box').removeClass('actives');
         });
 
         // Copy button
@@ -1929,19 +1957,24 @@
             $(this).find('.tf-question-desc').slideToggle();
         });
 
-        $(".tf-template-3 .tf-hero-hotel.tf-popup-buttons").click(function(){
-            $(".tf-hotel-popup").addClass("tf-show")
+        $(".tf-template-3 .tf-hero-hotel.tf-popup-buttons").click(function(e){
+            e.preventDefault();
+            $("#tour_room_details_loader").show();
+            setTimeout(function() {
+                $("#tour_room_details_loader").hide();
+                $(".tf-hotel-popup").addClass("tf-show");
+            }, 1000);
         });
 
         $(document).on('click', '.tf-template-3 .tf-popup-close', function () {
             $(".tf-popup-wrapper").removeClass("tf-show")
         });
-
-        // $(document).on('click', function (event) {
-        //     if (!$(event.target).closest(".tf-popup-wrapper .tf-popup-inner").length) {
-        //         $(".tf-popup-wrapper").removeClass('tf-show');
-        //     }
-        // });
+    
+        $(document).on('click', function (event) {
+            if (!$(event.target).closest(".tf-popup-wrapper .tf-popup-inner").length) {
+                $(".tf-popup-wrapper").removeClass('tf-show');
+            }
+        });
 
         $('.tf-template-3 .tf-details-menu a').on('click', function() {
             $(this).addClass('tf-hashlink');

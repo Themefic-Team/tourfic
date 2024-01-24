@@ -11,13 +11,13 @@
                         if ( is_user_logged_in() ) {
                         if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
                     ?>
-                    <a class="tf-icon tf-wishlist-box tf-wishlist">
+                    <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr('actives') : '' ?>">
                         <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
                     </a>
                     <?php } } else{ 
                     if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {    
                     ?>
-                    <a class="tf-icon tf-wishlist-box tf-wishlist">
+                    <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr('actives') : '' ?>">
                         <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
                     </a>
                     <?php } } } ?>
@@ -130,7 +130,7 @@
 
 
     <!--Content section end -->
-    <div class="tf-content-wrapper">
+    <div class="tf-content-wrapper tf-single-hotel-pb-56">
 
         <div class="tf-container">
 
@@ -166,7 +166,7 @@
                         <div class="tf-tour-contact-informations tf-single-widgets">
                             <?php if( ! empty( $meta['contact-info-section-title']) ) : ?> 
                                 <div class="tf-contact-details-title">
-                                    <h3 class="tf-section-title"><?php echo esc_html( $meta['contact-info-section-title'] ) ?></h3>
+                                    <h2 class="tf-section-title"><?php echo esc_html( $meta['contact-info-section-title'] ) ?></h2>
                                 </div>
                             <?php endif; ?>
                             
@@ -284,7 +284,7 @@
 
                     if ( ! empty( $tf_enquiry_section_status ) ) {
                     ?>
-                    <div class="tf-send-inquiry">
+                    <div class="tf-send-inquiry tf-single-widgets">
                         <?php 
                         if (!empty($tf_enquiry_section_icon)) {
                             ?>

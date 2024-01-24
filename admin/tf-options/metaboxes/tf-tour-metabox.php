@@ -252,12 +252,17 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'library' => 'image',
 				),
 				array(
-					'id'       => 'features',
-					'type'     => 'select2',
-					'multiple' => true,
-					'is_pro'   => true,
-					'label'    => __( 'Select features', 'tourfic' ),
+					'id'         => 'features',
+					'type'       => 'select2',
+					'multiple'   => true,
+					'label'      => __( 'Select features', 'tourfic' ),
 					'subtitle'   => __( 'For instance, select amenities like a Breakfast, AC Bus, Tour Guide, and more as applicable. You need to create these features from the ', 'tourfic' ) . ' <a href="'.admin_url('edit-tags.php?taxonomy=tour_features&post_type=tf_tours').'" target="_blank"><strong>' . __( '“Features”', 'tourfic' ) . '</strong></a> tab.',
+					'options'    => 'terms',
+					'query_args' => array(
+						'taxonomy'   => 'tour_features',
+						'hide_empty' => false,
+					),
+					'default'    => 'none',
 				),
 			),
 		),
@@ -360,6 +365,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 							'options'  => [
 								'fixed'  => __( 'Fixed', 'tourfic' ),
 								'person' => __( 'Per Person', 'tourfic' ),
+								'quantity' => __( 'Choose Quantity', 'tourfic' ),
 							],
 							'default'  => 'fixed',
 							'is_pro' => true,
@@ -1658,6 +1664,13 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'type'  => 'text',
 					'label' => __( 'Title of the Description Section', 'tourfic' ),
 					'default' => __("Description", 'tourfic'),
+				),
+
+				array(
+					'id'    => 'tour-features-section-title',
+					'type'  => 'text',
+					'label' => __( 'Title of the Features Section', 'tourfic' ),
+					'default' => __("Popular Features", 'tourfic'),
 				),
 				
 				array(

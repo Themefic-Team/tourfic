@@ -459,6 +459,7 @@ function tf_dequeue_theplus_script_on_settings_page($screen) {
     }
 
 	$get_screen = get_current_screen();
+	global $wp_scripts;
 
 	if(!empty($get_screen)) {
 
@@ -468,6 +469,31 @@ function tf_dequeue_theplus_script_on_settings_page($screen) {
 
 				wp_dequeue_script('select2');
 				wp_deregister_script('select2');
+			}
+
+			if ( wp_script_is('acf-color-picker-alpha', 'enqueued') ) {
+
+				$acf_script_handle = 'acf-color-picker-alpha';
+				$acf_script_data = $wp_scripts->registered[$acf_script_handle];
+
+				wp_dequeue_script($acf_script_handle);
+				
+				if( isset( $acf_script_data ) ) {
+					wp_enqueue_script( $acf_script_handle, $acf_script_data->src, $acf_script_data->deps, $acf_script_data->ver, true );
+				}
+			}
+
+			if ( wp_script_is('revbuilder-utils', 'enqueued') ) {
+
+				$rev_script_handle = 'revbuilder-utils';
+				$rev_slider_script = $wp_scripts->registered[$rev_script_handle];
+
+				wp_dequeue_script($rev_script_handle);
+				
+				if( isset( $rev_slider_script ) ) {
+
+					wp_enqueue_script( $rev_script_handle, $rev_slider_script->src, $rev_slider_script->deps, $rev_slider_script->ver, true );
+				}
 			}
 		}
 	}

@@ -304,12 +304,14 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 								<div class="tf_form_inners">
 									<div class="tf_checkin_dates">
 										<span class="date"><?php echo date('d'); ?></span>
-										<span class="month"><?php echo date('M'); ?></span>
-									</div>
-									<div class="tf_check_arrow">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-										<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
-										</svg>
+										<span class="month">
+											<span><?php echo date('M'); ?></span>
+											<div class="tf_check_arrow">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
+												</svg>
+											</div>
+										</span>
 									</div>
 								</div>
 							</label>
@@ -323,12 +325,14 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 								<div class="tf_form_inners">
 									<div class="tf_checkout_dates">
 										<span class="date"><?php echo date('d'); ?></span>
-										<span class="month"><?php echo date('M'); ?></span>
-									</div>
-									<div class="tf_check_arrow">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-										<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
-										</svg>
+										<span class="month">
+											<span><?php echo date('M'); ?></span>
+											<div class="tf_check_arrow">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
+												</svg>
+											</div>
+										</span>
 									</div>
 								</div>
 							</label>
@@ -357,18 +361,62 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 									<div class="tf_acrselection">
 										<div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
 										<div class="acr-select">
-											<div class="acr-dec">-</div>
-											<input type="tel" name="adults" id="adults" min="1" value="1"/>
-											<div class="acr-inc">+</div>
+											<div class="acr-dec">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13094)">
+													<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13094">
+													<rect width="20" height="20" fill="white"/>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
+											<input type="tel" name="adults" class="adults-style2" id="adults" min="1" value="1"/>
+											<div class="acr-inc">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13100)">
+													<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13100">
+													<rect width="20" height="20" fill="white"/>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
 										</div>
 									</div>
 									<?php if ( empty($disable_apartment_child_search) ): ?>
 										<div class="tf_acrselection">
 											<div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
 											<div class="acr-select">
-												<div class="acr-dec">-</div>
-												<input type="tel" name="children" id="children" min="0" value="0"/>
-												<div class="acr-inc">+</div>
+												<div class="acr-dec">
+													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+													<g clip-path="url(#clip0_3229_13094)">
+														<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+													</g>
+													<defs>
+														<clipPath id="clip0_3229_13094">
+														<rect width="20" height="20" fill="white"/>
+														</clipPath>
+													</defs>
+													</svg>
+												</div>
+												<input type="tel" name="children" class="childs-style2" id="children" min="0" value="0"/>
+												<div class="acr-inc">
+													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+													<g clip-path="url(#clip0_3229_13100)">
+														<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+													</g>
+													<defs>
+														<clipPath id="clip0_3229_13100">
+														<rect width="20" height="20" fill="white"/>
+														</clipPath>
+													</defs>
+													</svg>
+												</div>
 											</div>
 										</div>
 									<?php endif; ?>
@@ -376,9 +424,31 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 										<div class="tf_acrselection">
 											<div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
 											<div class="acr-select">
-												<div class="acr-dec">-</div>
-												<input type="tel" name="infant" id="infant" min="0" value="0"/>
-												<div class="acr-inc">+</div>
+												<div class="acr-dec">
+													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+													<g clip-path="url(#clip0_3229_13094)">
+														<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+													</g>
+													<defs>
+														<clipPath id="clip0_3229_13094">
+														<rect width="20" height="20" fill="white"/>
+														</clipPath>
+													</defs>
+													</svg>
+												</div>
+												<input type="tel" name="infant" class="infant-style2" id="infant" min="0" value="0"/>
+												<div class="acr-inc">
+													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+													<g clip-path="url(#clip0_3229_13100)">
+														<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+													</g>
+													<defs>
+														<clipPath id="clip0_3229_13100">
+														<rect width="20" height="20" fill="white"/>
+														</clipPath>
+													</defs>
+													</svg>
+												</div>
 											</div>
 										</div>
 									<?php endif; ?>
@@ -433,12 +503,12 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 							if(selectedDates[0]){
 								const startDate = selectedDates[0];
 								$(".tf_apartment_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
-								$(".tf_apartment_check_in_out_date .tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
+								$(".tf_apartment_check_in_out_date .tf_checkin_dates span.month span").html(monthNames[startDate.getMonth()]);
 							}
 							if(selectedDates[1]){
 								const endDate = selectedDates[1];
 								$(".tf_apartment_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
-								$(".tf_apartment_check_in_out_date .tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
+								$(".tf_apartment_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
 							}
 						}
 					}
@@ -466,6 +536,9 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 
                 <div class="tf_selectperson-wrap">
                     <div class="tf_input-inner">
+						<span class="tf_person-icon">
+                            <i class="fas fa-user"></i>
+                        </span>
                         <div class="adults-text"><?php _e( '1 Adults', 'tourfic' ); ?></div>
 						<?php if ( empty( $disable_apartment_child_search ) ): ?>
                             <div class="person-sep"></div>
@@ -1030,7 +1103,10 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 var infant_price = <?php echo $infant_price; ?>;
                                 var enable_availability = '<?php echo $enable_availability; ?>';
                                 var apt_availability = '<?php echo $apt_availability; ?>';
-                                apt_availability = JSON.parse(apt_availability);
+                                
+								if(apt_availability) {
+									apt_availability = JSON.parse(apt_availability);
+								}
 
                                 if (enable_availability !== '1') {
                                     if (pricing_type === 'per_night') {

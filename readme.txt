@@ -1,9 +1,9 @@
 === Tourfic – Ultimate Hotel Booking, Travel Booking & Apartment Booking WordPress Plugin | WooCommerce Booking ===
-Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
+Contributors: themefic, kamrul0424, jahidcse, mehedi890, mainulsunvi, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings, apartment-booking, apartment-rental
 Requires at least: 5.4
-Tested up to: 6.4
-Stable tag: 2.10.14
+Tested up to: 6.4.2
+Stable tag: 2.11.6
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -387,7 +387,7 @@ The icon and banner used on this plugin are taken from <a href="https://www.flat
 2. Active the plugin from the WordPress Plugins administration page.
 3. OR, Go to WP admin panel, click 'Plugins' -> 'Add new'. In the search input box, type 'Tourfic'.
 4. Install and activate the plugin.
-5. Check our youtube video for further instruction
+5. Check our YouTube video for further instruction
 
 == Frequently Asked Questions ==
 
@@ -451,22 +451,65 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 == Changelog ==
 
-= 2.10.14 - 21 December 2023 =
+= 2.11.6 - 23 January 2024 =
 
-Added: New Template for (Tour and Hotel)
-Added: Multiple Tags for Hotel/Tour/Apartment 
-Added: Add nearby places in hotels
-Added: Shortcode Generator for Apartment 
-Added: The first day of Week Dynamic (Frontend)
-Fixed: All date format issues 
-Fixed: Change orders and labels on Shortcode builder 
-Improved: Install and Active Woo Commerce using Single Button
-Fixed: External booking minor issues fixed( Pro )
-Fixed: Hotel availability calendar pricing issue fixed( Pro )
-Added: External listing Shortcode added( Pro )
-Added: Repeated Fixed Tour( Pro )
-Improved: Booking.com, Travelpayouts full-screen popup add( Pro )
-Added: Apartment iCal Added( Pro )
+- Compatibility: Compatible With Slider Revolution 
+- Improved: Apartment Single Page Price Calculation
+- Added: Tour Features Pro to Free
+
+= 2.11.5 - 20 January 2024 =
+
+- Fixed: Search page sidebar issue
+- Compatibility: Compatible with ACF Plugin(Colour picker)
+- Improved: Template design, and Updated style
+
+= 2.11.4 - 14 January 2024 =
+
+- Added: Hide documentation link option in multi-vendor settings (pro)
+- Improved: Itinerary chart added in template 1 and 2 (pro)
+- Improved: Enhanced color settings for the frontend.
+- Fixed: Gallery popup close button issue
+- Fixed: Itinerary altitude negative value issue (pro)
+- Fixed: Single settings removed from single template settings for vendor (pro)
+- Fixed: Custom settings removed from Itinerary download settings for vendor (pro)
+- Fixed: Black screen issue fixed in vendor profile edit (pro)
+- Fixed: Booking.com and travelpayouts search issue (pro)
+
+= 2.11.3 - 03 January 2024 =
+
+- Improved: New Template Added to Setup Wizard
+- Improved: Added Icon Color Settings( Template - 3 )
+- Improved: Added Tour Features to Design( Template - 2 )(Pro)
+- Fixed: Contact Details Responsive( Template - 3 )
+- Fixed: Enquiry Responsive( Template - 3 )
+
+= 2.11.2 - 01 January 2024 =
+
+- Fixed: Performance issue fixed
+
+= 2.11.1 - 30 December 2023 =
+
+- Added: Add quantity-based tour extras and unlimited tour extra(Pro)
+- Added: Settings for Tour Extra Quantity in Tour Metabox > Tour Extra(Pro)
+- Added: Options in Frontend Tour Booking Popup > Tour Extras(Pro)
+
+= 2.11.0 - 27 December 2023 =
+
+- Added: New Template for (Tour and Hotel)
+- Added: Multiple Tags for Hotel/Tour/Apartment
+- Added: Add nearby places in hotels
+- Added: Shortcode Generator for Apartment
+- Added: The first day of Week Dynamic (Frontend)
+- Added: External listing Shortcode added( Pro )
+- Added: Repeated Fixed Tour( Pro )
+- Added: Apartment iCal Added( Pro )
+- Added: Apartment availability calendar
+- Fixed: All date format issues
+- Fixed: Change orders and labels on Shortcode builder
+- Fixed: External booking minor issues fixed( Pro )
+- Fixed: Hotel availability calendar pricing issue fixed( Pro )
+- Improved: Booking.com, Travelpayouts full-screen popup add( Pro )
+- Improved: Install and Active WooCommerce using Single Button
 
 = 2.10.13 - 15 December 2023 =
 
@@ -539,8 +582,8 @@ Added: Apartment iCal Added( Pro )
 = 2.10.4 -  02 November 2023 =
 
 - Fixed: High-Performance Order Storage issue for Woocommerce
-- Compatibility: Compitible with WooCommerce 8.2.1
-- Compatibility: Compitible with Elementor 3.17.2
+- Compatibility: Compatible with WooCommerce 8.2.1
+- Compatibility: Compatible with Elementor 3.17.2
 - Updated: readme.txt
 
 = 2.10.3 -  30 October 2023 =

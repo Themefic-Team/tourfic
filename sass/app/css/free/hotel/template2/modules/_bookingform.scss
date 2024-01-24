@@ -23,6 +23,7 @@
     }
     .tf-booking-form {
         display: flex;
+        margin: 0;
         .tf-booking-form-fields {
             display: flex;
             width: 78%;
@@ -174,7 +175,7 @@
 				.tf-booking-location-wrap { 
                     display: flex;
                     flex-direction: row;
-                    background: #fff;
+                    background: #FDF9F3;
                     padding: 0 12px;
                     width: 100%;
                     align-items: center;
@@ -363,6 +364,7 @@
             font-size: 31px;
             font-weight: 400;
             color: #595349;
+            padding: 0px;
         }
     }
 }
@@ -490,6 +492,7 @@
         font-size: 31px;
         font-weight: 400;
         color: #595349;
+        padding: 0px;
     }
 
     .acr-select input[type=tel] {
@@ -878,4 +881,11 @@
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done, .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done{
     background-color: #99948D;
+}
+
+.tf-single-tour-extra .tf_quantity-acrselection .quanity-acr-fields {
+    background-color: #f3f7fa !important;
+    padding: 15px 40px !important;
+    margin-bottom: 10px !important;
+    margin-left: 23px !important;
 }

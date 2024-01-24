@@ -10,13 +10,13 @@
                     if ( is_user_logged_in() ) {
                     if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
                 ?>
-                <a class="tf-icon tf-wishlist-box tf-wishlist">
+                <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr('actives') : '' ?>">
                     <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
                 </a>
                 <?php } } else{ 
                 if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {    
                 ?>
-                <a class="tf-icon tf-wishlist-box tf-wishlist">
+                <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr('actives') : '' ?>">
                     <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
                 </a>
                 <?php } } } ?>
@@ -127,7 +127,7 @@
 
 
 <!--Content section end -->
-<div class="tf-content-wrapper">
+<div class="tf-content-wrapper tf-single-hotel-pb-56">
     
     <div class="tf-container">
     
@@ -335,7 +335,7 @@
                 $tf_enquiry_section_button = !empty($meta['h-enquiry-option-btn']) ? esc_html($meta['h-enquiry-option-btn']) : '';
                 if(!empty($tf_enquiry_section_status) && ( !empty($tf_enquiry_section_icon) || !empty($tf_enquiry_section_title) || !empty($enquery_button_text))){
                 ?>
-                <div class="tf-send-inquiry">
+                <div class="tf-send-inquiry tf-single-widgets">
                     <?php 
                     if (!empty($tf_enquiry_section_icon)) {
                         ?>

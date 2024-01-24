@@ -1023,7 +1023,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 						}
 					}
 					$total_pages = ceil( $total_filtered_results / $post_per_page );
-					if($total_pages>1){
+					if($total_pages > 1){
 						echo "<div class='tf_posts_navigation tf_posts_page_navigation'>";
 						echo paginate_links( array(
 							'total'   => $total_pages,

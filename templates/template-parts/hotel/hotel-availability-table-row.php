@@ -14,9 +14,8 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $room['avail_date
 $tf_room_disable_date = array_intersect( $avail_durationdate, $total_dis_dates );
 $room_book_by         = ! empty( $room['booking-by'] ) ? $room['booking-by'] : 1;
 $room_book_url        = ! empty( $room['booking-url'] ) ? $room['booking-url'] : '';
-$tf_hotel_reserve_button_text = !empty(tfopt('hotel_booking_form_button_text')) ? stripslashes(sanitize_text_field(tfopt('hotel_booking_form_button_text'))) : "I'll Reserve";
+$tf_hotel_reserve_button_text = !empty(tfopt('hotel_booking_form_button_text')) ? stripslashes(sanitize_text_field(tfopt('hotel_booking_form_button_text'))) : __("Reserve Now", 'tourfic');
 
-var_dump($tf_hotel_reserve_button_text);
 if ( $tf_hotel_selected_template_check == "design-1" ) {
 	if ( empty( $tf_room_disable_date ) ) {
 		?>
@@ -69,10 +68,10 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                         </div>
                         <ul>
 							<?php if ( $footage ) { ?>
-                                <li><i class="fas fa-ruler-combined"></i> <?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></li>
+                                <li><i class="ri-pencil-ruler-2-line"></i> <?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></li>
 							<?php } ?>
 							<?php if ( $bed ) { ?>
-                                <li><i class="fas fa-bed"></i> <?php echo $bed; ?><?php _e( ' Number of Beds', 'tourfic' ); ?></li>
+                                <li><i class="ri-hotel-bed-line"></i> <?php echo $bed; ?><?php _e( ' Number of Beds', 'tourfic' ); ?></li>
 							<?php } ?>
 							<?php
 							if ( ! empty( $room['features'] ) ) {
@@ -338,16 +337,16 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
             <h2 class="tf-section-title"><?php echo esc_html( $room['title'] ); ?></h2>
             <ul>
                 <?php if ( $footage ) { ?>
-                    <li><i class="fas fa-ruler-combined"></i> <?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></li>
+                    <li><i class="ri-pencil-ruler-2-line"></i> <?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></li>
                 <?php } ?>
                 <?php if ( $bed ) { ?>
-                    <li><i class="fas fa-bed"></i> <?php echo $bed; ?><?php _e( ' Beds', 'tourfic' ); ?></li>
+                    <li><i class="ri-hotel-bed-line"></i> <?php echo $bed; ?><?php _e( ' Beds', 'tourfic' ); ?></li>
                 <?php } ?>
                 <?php if ( $adult_number ) { ?>
-                    <li><i class="fas fa-male"></i> <?php echo $adult_number; ?><?php _e( ' Adults', 'tourfic' ); ?></li>
+                    <li><i class="ri-user-2-line"></i> <?php echo $adult_number; ?><?php _e( ' Adults', 'tourfic' ); ?></li>
                 <?php } ?>
                 <?php if ( $child_number ) { ?>
-                    <li><i class="fas fa-baby"></i><?php echo $child_number; ?><?php _e( ' Child', 'tourfic' ); ?></li>
+                    <li><i class="ri-user-smile-line"></i><?php echo $child_number; ?><?php _e( ' Child', 'tourfic' ); ?></li>
                 <?php } ?>
                 <li><a href="#" class="tf-room-detail-popup" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>"><?php _e("View room details", "tourfic"); ?></a></li>
 
@@ -701,16 +700,16 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
             </div>
             <ul>
                 <?php if ( $footage ) { ?>
-                    <li><i class="fas fa-ruler-combined"></i> <?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></li>
+                    <li><i class="ri-pencil-ruler-2-line"></i> <?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></li>
                 <?php } ?>
                 <?php if ( $bed ) { ?>
-                    <li><i class="fas fa-bed"></i> <?php echo $bed; ?><?php _e( ' Beds', 'tourfic' ); ?></li>
+                    <li><i class="ri-hotel-bed-line"></i> <?php echo $bed; ?><?php _e( ' Beds', 'tourfic' ); ?></li>
                 <?php } ?>
                 <?php if ( $adult_number ) { ?>
-                    <li><i class="fas fa-male"></i> <?php echo $adult_number; ?><?php _e( ' Adults', 'tourfic' ); ?></li>
+                    <li><i class="ri-user-2-line"></i> <?php echo $adult_number; ?><?php _e( ' Adults', 'tourfic' ); ?></li>
                 <?php } ?>
                 <?php if ( $child_number ) { ?>
-                    <li><i class="fas fa-baby"></i><?php echo $child_number; ?><?php _e( ' Child', 'tourfic' ); ?></li>
+                    <li><i class="ri-user-smile-line"></i><?php echo $child_number; ?><?php _e( ' Child', 'tourfic' ); ?></li>
                 <?php } ?>
                 <li><a href="#" class="tf-room-detail-popup" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>"><?php _e("View room details", "tourfic"); ?></a></li>
 
@@ -881,7 +880,7 @@ if(empty($tf_room_disable_date)){
 				<?php if ( $footage ) { ?>
                     <div class="tf-tooltip tf-d-ib">
                         <div class="room-detail-icon">
-                            <span class="room-icon-wrap"><i class="fas fa-ruler-combined"></i></span>
+                            <span class="room-icon-wrap"><i class="ri-pencil-ruler-2-line"></i></span>
                             <span class="icon-text tf-d-b"><?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></span>
                         </div>
                         <div class="tf-top">
@@ -893,7 +892,7 @@ if(empty($tf_room_disable_date)){
 				if ( $bed ) { ?>
                     <div class="tf-tooltip tf-d-ib">
                         <div class="room-detail-icon">
-                            <span class="room-icon-wrap"><i class="fas fa-bed"></i></span>
+                            <span class="room-icon-wrap"><i class="ri-hotel-bed-line"></i></i></span>
                             <span class="icon-text tf-d-b">x<?php echo $bed; ?></span>
                         </div>
                         <div class="tf-top">
@@ -954,7 +953,7 @@ if(empty($tf_room_disable_date)){
 				if ( $child_number ) { ?>
                     <div class="tf-tooltip tf-d-b">
                         <div class="room-detail-icon">
-                            <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
+                            <span class="room-icon-wrap"><i class="ri-user-smile-line"></i></span>
                             <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
                         </div>
                         <div class="tf-top">
