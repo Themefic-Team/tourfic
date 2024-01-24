@@ -4943,6 +4943,16 @@ div#tf-contact-info {
   color: #FFCD3D;
 }
 
+.itn-gm-m {
+  background-color: #002C66 !important;
+}
+
+.marker-label {
+  padding-top: 31px;
+  padding-left: 75px;
+  line-height: 1.33;
+}
+
 .gm-style-iw {
   padding: 0px !important;
   width: 296px;
