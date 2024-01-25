@@ -785,6 +785,36 @@ div#tf-contact-info {
         border: 1px solid #8F94A3 !important;
        
     }
+
+    
+    @media only screen and (max-width: 480px) {
+    
+        .gm-style-iw {
+            width: 148px !important;
+            .gm-style-iw-d {
+                .itinerary-map-popup {
+    
+                    .itinerary-map-popup-img-wrap {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+    @media only screen and (max-width: 480px) {
+    
+        .gm-style-iw {
+            width: 148px !important;
+            .gm-style-iw-d {
+                .itinerary-map-popup {
+    
+                    .itinerary-map-popup-img-wrap {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
 }
 
 // UNFOLD Compatibily
