@@ -455,7 +455,9 @@
                                     <?php foreach ( tf_data_types( $meta['surroundings_places'] ) as $surroundings_place ) : ?>
                                         <div class="tf-apartment-surronding-criteria">
                                             <div class="tf-apartment-surronding-criteria-label">
+                                                <?php if(!empty($surroundings_place['place_criteria_icon'])){ ?>
                                                 <i class="<?php echo esc_attr( $surroundings_place['place_criteria_icon'] ); ?>"></i>
+                                                <?php } ?>
                                                 <?php echo esc_html( $surroundings_place['place_criteria_label'] ); ?>
                                             </div>
 
