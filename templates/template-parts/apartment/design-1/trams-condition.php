@@ -1,8 +1,8 @@
 <?php 
 $tc = !empty($meta['terms_and_conditions']) ? $meta['terms_and_conditions'] : '';
 if ( $tc ) { ?>
-<!-- Hotel Policies Starts -->        
-<div class="tf-policies-wrapper tf-section" id="tf-hotel-policies">            
+<!-- apartment Policies Starts -->        
+<div class="tf-policies-wrapper tf-section" id="tf-apartment-policies">            
     <h2 class="tf-section-title">
         <?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : __("Hotel Terms & Conditions","tourfic"); ?>
     </h2>  
@@ -10,5 +10,5 @@ if ( $tc ) { ?>
         <?php echo wpautop( $tc ); ?>
     </div>
 </div>
-<!-- Hotel Policies end -->
+<!-- apartment Policies end -->
 <?php } ?>

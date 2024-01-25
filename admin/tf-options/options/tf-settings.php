@@ -709,10 +709,130 @@ TF_Settings::option( 'tf_settings', array(
 										),
 										'design-1' => array(
 											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design2-tour.jpg",
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design1-apartment.jpg",
 										),
 									),
 									'default'  => 'default',
+								),
+								array(
+									'id'      => 'aprtment_single_design_1_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'single-apartment', '==', 'design-1' ),
+								),
+								array(
+									'id'         => 'single-aprtment-layout-part-1',
+									'class'      => 'disable-sortable',
+									'type'       => 'repeater',
+									'drag_only'  => true,
+									'label'      => __( 'Single Aprtment Template Sections Part 1', 'tourfic' ),
+									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'dependency' => array( 'single-apartment', '==', 'design-1' ),
+									'fields'     => array(
+										array(
+											'id'         => 'aprtment-section',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Name', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'         => 'aprtment-section-slug',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Slug', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'       => 'aprtment-section-status',
+											'type'     => 'switch',
+											'label'    => __( 'Section Status', 'tourfic' ),
+											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
+										),
+									),
+									'default'    => array(
+										array(
+											'aprtment-section'        => __( 'Description', 'tourfic' ),
+											'aprtment-section-slug'   => __( 'description', 'tourfic' ),
+											'aprtment-section-status' => true,
+										),
+										array(
+											'aprtment-section'        => __( 'Highlights ', 'tourfic' ),
+											'aprtment-section-slug'   => __( 'features', 'tourfic' ),
+											'aprtment-section-status' => true,
+										),
+										array(
+											'aprtment-section'        => __( 'Apartment Rooms', 'tourfic' ),
+											'aprtment-section-slug'   => __( 'rooms', 'tourfic' ),
+											'aprtment-section-status' => true,
+										),
+										array(
+											'aprtment-section'        => __( 'Place offer', 'tourfic' ),
+											'aprtment-section-slug'   => __( 'offer', 'tourfic' ),
+											'aprtment-section-status' => true,
+										),
+										array(
+											'aprtment-section'        => __( 'House Rules', 'tourfic' ),
+											'aprtment-section-slug'   => __( 'rules', 'tourfic' ),
+											'aprtment-section-status' => true,
+										)
+									)
+								),
+								array(
+									'id'         => 'single-aprtment-layout-part-2',
+									'class'      => 'disable-sortable',
+									'type'       => 'repeater',
+									'drag_only'  => true,
+									'label'      => __( 'Single Aprtment Template Sections Part 2', 'tourfic' ),
+									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'dependency' => array( 'single-apartment', '==', 'design-1' ),
+									'fields'     => array(
+										array(
+											'id'         => 'aprtment-section',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Name', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'         => 'aprtment-section-slug',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Slug', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'       => 'aprtment-section-status',
+											'type'     => 'switch',
+											'label'    => __( 'Section Status', 'tourfic' ),
+											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
+										),
+									),
+									'default'    => array(
+										array(
+											'aprtment-section'        => __( 'Review', 'tourfic' ),
+											'aprtment-section-slug'   => __( 'review', 'tourfic' ),
+											'aprtment-section-status' => true,
+										),
+										array(
+											'aprtment-section'        => __( 'FAQ', 'tourfic' ),
+											'aprtment-section-slug'   => __( 'faq', 'tourfic' ),
+											'aprtment-section-status' => true,
+										),
+										array(
+											'aprtment-section'        => __( 'Terms & Conditions', 'tourfic' ),
+											'aprtment-section-slug'   => __( 'trams-condition', 'tourfic' ),
+											'aprtment-section-status' => true,
+										),
+									)
 								),
 								array(
 									'id'      => 'apartment-title',
@@ -755,6 +875,12 @@ TF_Settings::option( 'tf_settings', array(
 										'grid' => __( 'Grid', 'tourfic' ),
 									),
 									'default'    => 'List',
+								),
+								array(
+									'id'      => 'aprtment_design_1_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'apartment-archive', '==', 'design-1' ),
 								),
 								array(
 									'id'      => 'apartment_archive_notice',

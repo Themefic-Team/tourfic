@@ -117,24 +117,27 @@
     <div class="tf-container">
     
     <!-- Hotel details Srart -->
-    <div class="tf-details" id="tf-hotel-overview">
+    <div class="tf-details" id="tf-apartment-overview">
         <div class="tf-details-left">
             <!-- menu section Start -->
             <div class="tf-details-menu">
                 <ul>
-                    <li><a class="tf-hashlink" href="#tf-hotel-overview">
+                    <li><a class="tf-hashlink" href="#tf-apartment-overview">
                         <?php _e("Overview", "tourfic"); ?>
                     </a></li>
-                    <li><a href="#tf-hotel-facilities">
-                        <?php _e("Facilities", "tourfic"); ?>
+                    <li><a href="#tf-apartment-rooms">
+                        <?php _e("Rooms", "tourfic"); ?>
                     </a></li>
-                    <li><a href="#tf-hotel-faq">
+                    <li><a href="#tf-apartment-rules">
+                        <?php _e("House Rules", "tourfic"); ?>
+                    </a></li>
+                    <li><a href="#tf-apartment-faq">
                         <?php _e("FAQ's", "tourfic"); ?>
                     </a></li>
-                    <li><a href="#tf-hotel-reviews">
+                    <li><a href="#tf-apartment-reviews">
                         <?php _e("Reviews", "tourfic"); ?>
                     </a></li>
-                    <li><a href="#tf-hotel-policies">
+                    <li><a href="#tf-apartment-policies">
                         <?php _e("Policies", "tourfic"); ?>
                     </a></li>
                 </ul>
@@ -143,20 +146,20 @@
 
 
             <?php 
-            // if( !empty(tf_data_types(tfopt( 'tf-template' ))['single-hotel-layout-part-1']) ){
-            //     foreach(tf_data_types(tfopt( 'tf-template' ))['single-hotel-layout-part-1'] as $section){
-            //         if( !empty($section['hotel-section-status']) && $section['hotel-section-status']=="1" && !empty($section['hotel-section-slug']) ){
-            //             include TF_TEMPLATE_PART_PATH . 'hotel/design-2/'.$section['hotel-section-slug'].'.php';
-            //         }
-            //     }
-            // }else{
+            if( !empty(tf_data_types(tfopt( 'tf-template' ))['single-aprtment-layout-part-1']) ){
+                foreach(tf_data_types(tfopt( 'tf-template' ))['single-aprtment-layout-part-1'] as $section){
+                    if( !empty($section['aprtment-section-status']) && $section['aprtment-section-status']=="1" && !empty($section['aprtment-section-slug']) ){
+                        include TF_TEMPLATE_PART_PATH . 'aprtment/design-1/'.$section['aprtment-section-slug'].'.php';
+                    }
+                }
+            }else{
                 include TF_TEMPLATE_PART_PATH . 'apartment/design-1/description.php';
                 include TF_TEMPLATE_PART_PATH . 'apartment/design-1/features.php';
                 include TF_TEMPLATE_PART_PATH . 'apartment/design-1/rooms.php';
                 include TF_TEMPLATE_PART_PATH . 'apartment/design-1/offer.php';
                 include TF_TEMPLATE_PART_PATH . 'apartment/design-1/rules.php';
                 // include TF_TEMPLATE_PART_PATH . 'apartment/design-1/facilities.php';
-            // }
+            }
             ?>
 
 
@@ -361,17 +364,17 @@
     <!-- Hotel details End -->
     
     <?php 
-    // if( !empty(tf_data_types(tfopt( 'tf-template' ))['single-hotel-layout-part-2']) ){
-    //     foreach(tf_data_types(tfopt( 'tf-template' ))['single-hotel-layout-part-2'] as $section){
-    //         if( !empty($section['hotel-section-status']) && $section['hotel-section-status']=="1" && !empty($section['hotel-section-slug']) ){
-    //             include TF_TEMPLATE_PART_PATH . 'hotel/design-2/'.$section['hotel-section-slug'].'.php';
-    //         }
-    //     }
-    // }else{
+    if( !empty(tf_data_types(tfopt( 'tf-template' ))['single-aprtment-layout-part-2']) ){
+        foreach(tf_data_types(tfopt( 'tf-template' ))['single-aprtment-layout-part-2'] as $section){
+            if( !empty($section['aprtment-section-status']) && $section['aprtment-section-status']=="1" && !empty($section['aprtment-section-slug']) ){
+                include TF_TEMPLATE_PART_PATH . 'aprtment/design-1/'.$section['aprtment-section-slug'].'.php';
+            }
+        }
+    }else{
         include TF_TEMPLATE_PART_PATH . 'apartment/design-1/review.php';
         include TF_TEMPLATE_PART_PATH . 'apartment/design-1/faq.php';
         include TF_TEMPLATE_PART_PATH . 'apartment/design-1/trams-condition.php';
-    // }
+    }
     ?>
 
     <?php 

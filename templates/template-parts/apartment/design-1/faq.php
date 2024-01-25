@@ -1,8 +1,8 @@
 <?php 
 $faqs = !empty($meta['faq']) ? $meta['faq'] : '';
 if ( $faqs ): ?>
-<!-- Hotel Questions Srart -->
-<div class="tf-questions-wrapper tf-section" id="tf-hotel-faq">
+<!-- apartment Questions Srart -->
+<div class="tf-questions-wrapper tf-section" id="tf-apartment-faq">
     <h2 class="tf-section-title">
     <?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : __( "Faq’s", 'tourfic' ); ?>
     </h2>            

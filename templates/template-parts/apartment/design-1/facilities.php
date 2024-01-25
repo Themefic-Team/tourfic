@@ -3,8 +3,8 @@ $total_facilities_cat = ! empty( tf_data_types( tfopt( 'amenities_cats' ) ) ) ? 
 if( !empty($total_facilities_cat) && !empty($meta['amenities']) ){
 ?>
 
-<!-- Hotel facilities Srart -->
-<div class="tf-facilities-wrapper" id="tf-hotel-facilities">
+<!-- apartment facilities Srart -->
+<div class="tf-facilities-wrapper" id="tf-apartment-facilities">
     <h2 class="tf-section-title"><?php echo !empty($meta['facilities-section-title']) ? esc_html($meta['facilities-section-title']) : esc_html("Property facilities"); ?></h2>          
     <div class="tf-facilities">
         <?php 

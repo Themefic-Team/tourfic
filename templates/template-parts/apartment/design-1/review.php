@@ -1,7 +1,7 @@
 <?php
 if ( $comments ) { ?>
-<!-- Hotel reviews Srart -->
-<div class="tf-reviews-wrapper tf-section" id="tf-hotel-reviews">         
+<!-- apartment reviews Srart -->
+<div class="tf-reviews-wrapper tf-section" id="tf-apartment-reviews">         
     <h2 class="tf-section-title"><?php _e("Guest reviews", "tourfic"); ?></h2> 
     <p><?php _e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></p>
     <div class="tf-reviews-slider">

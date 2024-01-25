@@ -9,7 +9,7 @@ foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
     }
 }
 ?>
-<div class="tf-aprtment-rules-section">
+<div class="tf-aprtment-rules-section" id="tf-apartment-rules">
     <h2><?php ! empty( $meta['house_rules_title'] ) ? esc_html_e( $meta['house_rules_title'] ) : ''; ?></h2>
     <div class="aprtment-inc-exc <?php echo empty( $included_house_rules ) || empty( $not_included_house_rules ) ? esc_attr('tf-inc-exc-full') : ''; ?>">
         <?php if ( ! empty( $included_house_rules ) ): ?>

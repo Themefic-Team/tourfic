@@ -1,5 +1,5 @@
 <?php if ( isset( $meta['rooms'] ) && ! empty( tf_data_types( $meta['rooms'] ) ) ) : ?>
-<div class="tf-apartment-rooms-section">
+<div class="tf-apartment-rooms-section" id="tf-apartment-rooms">
     <div class="tf-apartment-room-details">
     <h4><?php echo esc_html( $meta['room_details_title'] ) ?></h4>
     <div class="tf-apartment-room-slider">
