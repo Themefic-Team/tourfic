@@ -106,7 +106,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 				background: '.$tf_template1_global_reg.' !important;
 			}';
 		}
-		if( !empty($tf_global_font_family) && $tf_global_font_family!="Default" && $tf_global_heading_font_family!="Default" ){
+		if( !empty($tf_global_font_family) && $tf_global_font_family!="Default" ){
 			$output .= '
 			.tf-container-inner,
 			.tf-main-wrapper,
@@ -121,7 +121,10 @@ if( !function_exists( 'tf_custom_css' ) ){
 			#tf-ask-question button,
 			#tf-ask-question input,
 			#tf-ask-question textarea,
-			.tf-withoutpayment-booking{
+			.tf-withoutpayment-booking,
+			.tf-container button,
+			.tf-container input,
+			.tf-container textarea{
 				font-family: "'.$tf_global_font_family.'", sans-serif !important;
 			}';
 		}
@@ -144,7 +147,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			}';
 		}
 		
-		if( !empty($tf_global_heading_font_family) && $tf_global_heading_font_family!="Default" && $tf_global_font_family!="Default"){
+		if( !empty($tf_global_heading_font_family) && $tf_global_heading_font_family!="Default" ){
 			$output .= '
 			.tf-container-inner h1,
 			.tf-main-wrapper h1,
@@ -580,7 +583,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-3 .tf-popup-wrapper.tf-room-popup .tf-popup-inner,
 			.tf-template-3 .tf-popup-wrapper.tf-show .tf-popup-inner,
 			.tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list,
-			.tf-template-3 .tf-section {
+			.tf-template-3 .tf-section,
+			.tf-template-3.tf-apartment-single .tf-apartment-rooms-section .tf-apartment-room-details {
 				background: '.$tf_global_highlight_clr_t3.' !important;
 			}
 			';

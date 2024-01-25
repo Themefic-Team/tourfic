@@ -37,14 +37,14 @@
 
 			.tf-reviews-text { 
 
-				h3 { 
+				.tf-review-rating { 
                     color: #595349;
                     font-size: 16px;
                     font-weight: 600;
                     line-height: 20.80px;
                     word-wrap: break-word;
                     margin: 0px 0px 8px 0px;
-                    font-family: "Josefin Sans", sans-serif;
+                    display: block;
                     >div{
                         display: none;
                     }
@@ -138,10 +138,9 @@
                     }
                 }
 				.tf-faq-head{
-                    h3 { 
+                    span { 
                         color: #595349;
                         font-size: 16px !important;
-                        font-family: "Josefin Sans", sans-serif !important;
                         font-weight: 600 !important;
                         line-height: 20.80px !important;
                         margin-bottom: 8px;

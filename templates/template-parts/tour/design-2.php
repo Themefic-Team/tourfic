@@ -210,9 +210,9 @@
                     <div class="tf-review-data-inner">
                         <div class="tf-review-data">
                             <div class="tf-review-data-average">
-                                <h2><span>
+                                <span class="avg-review"><span>
                                     <?php _e( sprintf( '%.1f', $total_rating ) ); ?>
-                                </span>/<?php echo $tf_settings_base; ?></h2>
+                                </span>/ <?php echo $tf_settings_base; ?></span>
                             </div>
                             <div class="tf-review-all-info">
                                 <p><?php _e("Excellent", "tourfic"); ?> <span><?php _e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></span></p>

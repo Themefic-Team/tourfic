@@ -4004,7 +4004,7 @@ function tf_hotel_quickview_callback() {
 					<?php } } ?>
                 </div>
                 <div class="tf-popup-right">
-                    <h4 class="tf-popup-info-title"><?php _e("Room details", "tourfic"); ?></h4>
+                    <span class="tf-popup-info-title"><?php _e("Room details", "tourfic"); ?></span>
                     <ul>
 						<?php if ( $footage ) { ?>
 							<li><i class="ri-pencil-ruler-2-line"></i> <?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></li>
@@ -4020,7 +4020,7 @@ function tf_hotel_quickview_callback() {
 						<?php } ?>                        
                     </ul> 
 					  
-                    <h4 class="tf-popup-info-title"><?php _e("Other benefits", "tourfic"); ?></h4>
+                    <span class="tf-popup-info-title"><?php _e("Other benefits", "tourfic"); ?></span>
                     <ul>
 						<?php 
 						if( !empty($room['features']) ){

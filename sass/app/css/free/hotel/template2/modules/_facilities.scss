@@ -22,12 +22,12 @@
             @media #{$max767}{
                 width: 50%;
             }
-            h4 {
+            span.single-facilities-title {
                 color: #595349;
                 font-weight: 600;
                 line-height: 20.80px;
-                font-family: "Josefin Sans", sans-serif;
                 margin-bottom: 16px;
+                display: block;
                 i {
                     margin-right: 8px;
                     font-size: 20px;

@@ -2781,7 +2781,7 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
 						<?php }} ?>
 					</div>
 					<div class="tf-popup-right">
-						<h4 class="tf-popup-info-title"><?php _e("Room details", "tourfic"); ?></h4>
+						<span class="tf-popup-info-title"><?php _e("Room details", "tourfic"); ?></span>
 						<ul>
 							<?php if ( $footage ) { ?>
 								<li><i class="ri-pencil-ruler-2-line"></i> <?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></li>

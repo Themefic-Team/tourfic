@@ -77,7 +77,6 @@
                     }
                     .tf-short-description{
                         color: #99948D;
-                        font-family: Josefin Sans;
                         font-size: 16px;
                         font-style: normal;
                         font-weight: 400;
@@ -89,7 +88,6 @@
                     span.tf-see-description,
                     span.tf-see-less-description{
                         color: #595349;
-                        font-family: Josefin Sans;
                         font-size: 16px;
                         font-style: normal;
                         font-weight: 400;
@@ -102,7 +100,6 @@
                     .tf-full-description{
                         display: none;
                         color: #99948D;
-                        font-family: Josefin Sans;
                         font-size: 16px;
                         font-style: normal;
                         font-weight: 400;
@@ -113,10 +110,10 @@
                     }
                 }
                 .tf-overview-popular-facilities {
-                    h3 {
+                    span.tf-popular-facilities-title {
                         color: #595349;
                         font-size: 16px !important;
-                        font-family: Josefin Sans !important;
+                        display: block;
                         font-weight: 600 !important;
                         line-height: 20.8px !important;
                         margin-bottom: 16px;
@@ -183,7 +180,6 @@
                             }
                             p{
                                 color: #99948D;
-                                font-family: Josefin Sans;
                                 font-size: 16px;
                                 font-style: normal;
                                 font-weight: 400;
@@ -353,7 +349,6 @@
                         text-decoration: none;
                         text-transform: capitalize;
                         color: #595349;
-                        font-family: Josefin Sans;
                         font-size: 16px;
                         font-style: normal;
                         font-weight: 400;
@@ -406,7 +401,6 @@
                     margin-bottom: 0px !important;
                     bottom: -40px;
                     color: #595349 !important;
-                    font-family: Josefin Sans;
                     font-size: 16px !important;
                     font-style: normal;
                     font-weight: 400;

@@ -14,8 +14,8 @@
             for ($i = 0; $i < $faqs_itemsPerColumn; $i++) { ?>
             <div class="tf-question <?php echo $i==0 ? esc_attr( 'tf-active' ) : ''; ?>">
                 <div class="tf-faq-head">
-                    <h3><?php echo esc_html( $faqs[$i]['title'] ); ?>
-                    <i class="fa-solid fa-chevron-down"></i></h3>
+                    <span><?php echo esc_html( $faqs[$i]['title'] ); ?>
+                    <i class="fa-solid fa-chevron-down"></i></span>
                 </div>
                 <div class="tf-question-desc" style="<?php echo $i==0 ? esc_attr( 'display: block;' ) : ''; ?>">
                 <?php echo wp_kses_post( $faqs[$i]['description'] ); ?>
@@ -29,8 +29,8 @@
             for ($i = $faqs_itemsPerColumn; $i < count($faqs); $i++) { ?>
             <div class="tf-question">
                 <div class="tf-faq-head">
-                    <h3><?php echo esc_html( $faqs[$i]['title'] ); ?>
-                    <i class="fa-solid fa-chevron-down"></i></h3>
+                    <span><?php echo esc_html( $faqs[$i]['title'] ); ?>
+                    <i class="fa-solid fa-chevron-down"></i></span>
                 </div>
                 <div class="tf-question-desc">
                 <?php echo wp_kses_post( $faqs[$i]['description'] ); ?>
