@@ -2556,10 +2556,22 @@ if ( ! function_exists( 'tf_apartment_host_rating' ) ) {
  */
 if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
 	function tf_apartment_room_quick_view() {
+		
+		$meta = get_post_meta( sanitize_text_field( $_POST['post_id'] ), 'tf_apartment_opt', true );
+		// Single Template Style
+		$tf_apartment_layout_conditions = ! empty( $meta['tf_single_apartment_layout_opt'] ) ? $meta['tf_single_apartment_layout_opt'] : 'global';
+		if("single"==$tf_apartment_layout_conditions){
+			$tf_apartment_single_template = ! empty( $meta['tf_single_apartment_template'] ) ? $meta['tf_single_apartment_template'] : 'default';
+		}
+		$tf_apartment_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-apartment'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-apartment'] : 'default';
+
+		$tf_apartment_selected_check = !empty($tf_apartment_single_template) ? $tf_apartment_single_template : $tf_apartment_global_template;
+
+		$tf_apartment_selected_template = $tf_apartment_selected_check;
+		if('default'==$tf_apartment_selected_template){
 		?>
         <div class="tf-hotel-quick-view" style="display: flex">
 			<?php
-			$meta = get_post_meta( sanitize_text_field( $_POST['post_id'] ), 'tf_apartment_opt', true );
 
 			foreach ( tf_data_types( $meta['rooms'] ) as $key => $room ) :
 				if ( $key == sanitize_text_field( $_POST['id'] ) ):
@@ -2739,7 +2751,64 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
 			endforeach;
 			?>
         </div>
-		<?php
+		<?php } 
+		if('design-1'==$tf_apartment_selected_template){ 
+			foreach ( tf_data_types( $meta['rooms'] ) as $key => $room ) :
+				if ( $key == sanitize_text_field( $_POST['id'] ) ):
+				$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
+				$tf_room_gallery_ids = !empty($tf_room_gallery) ? explode( ',', $tf_room_gallery ) : '';
+				$footage       = ! empty( $room['footage'] ) ? $room['footage'] : '';
+				$bed           = ! empty( $room['bed'] ) ? $room['bed'] : '';
+				$adult_number  = ! empty( $room['adult'] ) ? $room['adult'] : '0';
+				$child_number  = ! empty( $room['child'] ) ? $room['child'] : '0';
+				$infant_number = ! empty( $room['infant'] ) ? $room['infant'] : '0';
+			?>
+			<div class="tf-popup-inner">
+				<div class="tf-popup-body">
+					<div class="tf-popup-left">
+						<?php 
+						if ( ! empty( $tf_room_gallery_ids ) ) {
+						foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
+						$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+						if(!empty($image_url)){
+						?>
+						<img src="<?php echo esc_url($image_url); ?>" alt="<?php _e("Room Image","tourfic"); ?>" class="tf-popup-image">
+						<?php } } }else{ 
+						$aprt_thumbnail_url = get_the_post_thumbnail_url( $_POST['post_id'] );
+						if(!empty($aprt_thumbnail_url)){	
+						?>
+						<img src="<?php echo esc_url($aprt_thumbnail_url); ?>" alt="<?php _e("Room Image","tourfic"); ?>" class="tf-popup-image">
+						<?php }} ?>
+					</div>
+					<div class="tf-popup-right">
+						<h4 class="tf-popup-info-title"><?php _e("Room details", "tourfic"); ?></h4>
+						<ul>
+							<?php if ( $footage ) { ?>
+								<li><i class="ri-pencil-ruler-2-line"></i> <?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></li>
+							<?php } ?>
+							<?php if ( $bed ) { ?>
+								<li><i class="ri-hotel-bed-line"></i> <?php echo $bed; ?><?php _e( ' Beds', 'tourfic' ); ?></li>
+							<?php } ?>
+							<?php if ( $adult_number ) { ?>
+								<li><i class="ri-user-2-line"></i> <?php echo $adult_number; ?><?php _e( ' Adults', 'tourfic' ); ?></li>
+							<?php } ?>
+							<?php if ( $child_number ) { ?>
+								<li><i class="ri-user-smile-line"></i><?php echo $child_number; ?><?php _e( ' Child', 'tourfic' ); ?></li>
+							<?php } ?>
+							<?php if ( $infant_number ) { ?>
+								<li><i class="ri-user-smile-line"></i><?php echo $infant_number; ?><?php _e( ' Infant', 'tourfic' ); ?></li>
+							<?php } ?>                     
+						</ul> 
+					</div>
+				</div>                
+				<div class="tf-popup-close">
+					<i class="fa-solid fa-xmark"></i>
+				</div>
+			</div>
+		<?php 
+		endif;
+		endforeach;	
+		}
 		wp_die();
 	}
 

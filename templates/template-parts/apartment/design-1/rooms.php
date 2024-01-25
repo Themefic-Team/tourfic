@@ -6,12 +6,12 @@
     <?php foreach ( tf_data_types( $meta['rooms'] ) as $key => $room ) : ?>
         <div class="tf-apartment-room-item">
             <div class="tf-apartment-room-item-thumb">
-                <a href="#" class="tf-apt-room-qv" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">
+                <a href="#" class="tf-apt-room-qv-desgin-1" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">
                     <img src="<?php echo !empty($room['thumbnail']) ? esc_url( $room['thumbnail'] ) : TF_ASSETS_APP_URL . "images/feature-default.jpg" ?>" alt="room-thumbnail">
                 </a>
             </div>
             <div class="tf-apartment-room-item-content">
-                <a href="#" class="tf-apt-room-qv" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">
+                <a href="#" class="tf-apt-room-qv-desgin-1" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">
                     <span><?php echo esc_html( $room['title'] ) ?></span>
                 </a>
                 <?php echo ! empty( $room['subtitle'] ) ? '<p>' . esc_html( $room['subtitle'] ) . '</p>' : ''; ?>
@@ -19,7 +19,6 @@
         </div>
     <?php endforeach; ?>
     </div>
-    <div id="tf_apt_room_details_qv" class=""></div>
     <!-- Loader Image -->
     <div id="tour_room_details_loader">
         <div id="tour-room-details-loader-img">

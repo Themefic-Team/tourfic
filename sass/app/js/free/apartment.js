@@ -228,6 +228,66 @@
             });
         });
 
+        /*
+        * Apartment room quick view
+        * */
+        $(document).on('click', '.tf-apt-room-qv', function (e) {
+            e.preventDefault();
+            $("#tour_room_details_loader").show();
+            let post_id = $(this).data("post-id");
+            let id = $(this).data("id");
+            let data = {
+                action: 'tf_apt_room_details_qv',
+                post_id: post_id,
+                id: id
+            };
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: data,
+                success: function (response) {
+                    $("#tf_apt_room_details_qv").html(response);
+
+                    $("#tour_room_details_loader").hide();
+                    $.fancybox.open({
+                        src: '#tf_apt_room_details_qv',
+                        type: 'inline',
+                    });
+                }
+
+            });
+        });
+
+        /**
+         * Design 1 Apartment Room Popup
+         *
+         */
+        $(document).on('click', '.tf-apt-room-qv-desgin-1', function (e) {
+
+            e.preventDefault();
+            $("#tour_room_details_loader").show();
+            let post_id = $(this).data("post-id");
+            let id = $(this).data("id");
+            let data = {
+                action: 'tf_apt_room_details_qv',
+                post_id: post_id,
+                id: id
+            };
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: data,
+                success: function (response) {
+                    $(".tf-room-popup").html(response);
+                    $(".tf-room-popup").addClass("tf-show")
+                    $("#tour_room_details_loader").hide();
+                }
+
+            });
+        });
+
         /**
          * Apartment location autocomplete
          * @author Foysal
