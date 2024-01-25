@@ -638,11 +638,14 @@ div#tf-contact-info {
     background-color: #002C66 !important;
 }
 
-.marker-label {
-    padding-top: 31px;
-    padding-left: 75px;
-    line-height: 1.33;
-    // font-size: 13px !important;
+.gm-style {
+    .marker-label {
+        display: inline-block;
+        padding-top: 30px;
+        padding-left: 82px;
+        line-height: 1.33;
+        // font-size: 13px !important;
+    }
 }
 
 .gm-style-iw {
