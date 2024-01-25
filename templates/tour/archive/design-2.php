@@ -41,7 +41,7 @@
                     <!--Available rooms start -->
                     <div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
                         <div class="tf-archive-available-rooms-head tf-available-rooms-head">
-                            <h2 class="tf-total-results"><?php _e("Total", "tourfic"); ?> <span><?php echo $tf_total_results; ?></span> <?php _e("Tours available", "tourfic"); ?></h2>
+                            <span class="tf-total-results"><?php _e("Total", "tourfic"); ?> <span><?php echo $tf_total_results; ?></span> <?php _e("Tours available", "tourfic"); ?></span>
                             <div class="tf-archive-filter-showing">
                                 <i class="ri-equalizer-line"></i>
                             </div>

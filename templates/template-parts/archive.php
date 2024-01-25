@@ -138,7 +138,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
     <!--Available rooms start -->
     <div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
         <div class="tf-archive-available-rooms-head tf-available-rooms-head">
-            <h2 class="tf-total-results"><?php _e("Total", "tourfic"); ?> <span><?php echo $total_posts; ?></span> 
+            <span class="tf-total-results"><?php _e("Total", "tourfic"); ?> <span><?php echo $total_posts; ?></span> 
             <?php if($post_type == "tf_hotel"){
                 _e("hotels available", "tourfic");
             }elseif($post_type == "tf_apartment"){
@@ -146,7 +146,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
             }else{
                 _e("tours available", "tourfic");
             } ?>
-            </h2>
+            </span>
             <div class="tf-archive-filter-showing">
                 <i class="ri-equalizer-line"></i>
             </div>

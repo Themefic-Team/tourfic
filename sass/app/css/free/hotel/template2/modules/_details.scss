@@ -286,13 +286,12 @@
                     border: 0px solid;
                     border-radius: 8px 8px 0px 0px;
                     pointer-events: none;
-                    h4{
+                    span{
                         margin-bottom: 10px !important;
                         font-size: 16px !important;
                         font-weight: 600 !important;
                         line-height: 1.5 !important;
                         color: #595349 !important;
-                        font-family: Josefin Sans !important;
                         @media #{$max1024}{
                             font-size: 12px !important;
                         }

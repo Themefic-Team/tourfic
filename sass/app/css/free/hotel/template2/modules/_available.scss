@@ -13,12 +13,11 @@
         @media #{$max991}{
             margin-bottom: 16px;
         }
-        &>h2{
+        &>span{
             color: #595349;
             font-size: 24px !important;
             font-weight: 400 !important;
-            line-height: 130% !important;            
-            font-family: 'Josefin Sans', sans-serif !important;
+            line-height: 130% !important;
             margin: 0px;
             @media #{$max1024}{
                 font-size: 14px !important;
@@ -213,13 +212,13 @@
                         }
                     }
                 }
-                h4 {
+                span.tf-others-benefits-title {
                     color: #595349;
                     font-size: 16px !important;
                     font-weight: 600 !important;
-                    font-family: "Josefin Sans", sans-serif !important;
                     margin-bottom: 16px;
                     margin-top: auto;
+                    display: block;
                     @media #{$max991}{
                         margin-top: 16px;
                     }
@@ -282,7 +281,6 @@
                         }
                         .discount-price{
                             color: #99948D;
-                            font-family: Josefin Sans;
                             font-size: 16px;
                             font-style: normal;
                             font-weight: 400;
@@ -356,7 +354,6 @@
             a.availability {
                 color: #FDF9F3;
                 font-size: 16px;
-                font-family: "Josefin Sans", sans-serif;
                 font-weight: 700;
                 line-height: 24px;
                 background: #B58E53;
@@ -367,6 +364,7 @@
                 text-decoration: none;
                 text-align: center;
                 transition: .3s all ease;
+                border-radius: 0px;
                 &:hover{
                     background-color: #917242;
                 }
@@ -447,7 +445,6 @@
                             line-height: 31.2px;
                             .discount-price {
                                 color: #99948D;
-                                font-family: Josefin Sans;
                                 font-size: 16px;
                                 font-style: normal;
                                 font-weight: 400;
@@ -699,7 +696,6 @@
                     a.view-hotel{
                         color: #FDF9F3;
                         font-size: 16px;
-                        font-family: "Josefin Sans", sans-serif;
                         font-weight: 700;
                         line-height: 24px;
                         background: #B58E53;
@@ -732,7 +728,6 @@
                 background: #FDF9F3;
                 height: 40px;
                 color: #99948D;
-                font-family: Josefin Sans;
                 font-size: 16px;
                 font-style: normal;
                 font-weight: 400;

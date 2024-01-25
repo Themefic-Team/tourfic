@@ -351,7 +351,7 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                 <li><a href="#" class="tf-room-detail-popup" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>"><?php _e("View room details", "tourfic"); ?></a></li>
 
             </ul>
-            <h4><?php _e("Other benefits", "tourfic"); ?></h4>
+            <span class="tf-others-benefits-title"><?php _e("Other benefits", "tourfic"); ?></span>
             <ul>
             <?php
             if( !empty($room['features']) ){
@@ -714,7 +714,7 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                 <li><a href="#" class="tf-room-detail-popup" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>"><?php _e("View room details", "tourfic"); ?></a></li>
 
             </ul>
-            <h4><?php _e("Other benefits", "tourfic"); ?></h4>
+            <span class="tf-others-benefits-title"><?php _e("Other benefits", "tourfic"); ?></span>
             <ul>
             <?php
             if( !empty($room['features']) ){

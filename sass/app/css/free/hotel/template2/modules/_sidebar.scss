@@ -322,7 +322,7 @@ span.tf-reting-stars {
     flex-direction: column;
     align-items: center;
     gap: 24px;
-    @media #{$max1366}{
+    @media #{$max1600}{
         padding: 56px 16px;
     }
     @media #{$max1024}{

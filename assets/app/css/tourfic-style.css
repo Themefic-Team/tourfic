@@ -2107,10 +2107,9 @@ a.page-numbers {
   border-radius: 8px 8px 0px 0px;
   justify-content: space-between;
 }
-.tf_widget .tf-widget-title h4 {
+.tf_widget .tf-widget-title span {
   font-size: 16px;
   line-height: 24px;
-  font-family: "rubik", sans-serif;
   cursor: pointer;
   width: 100%;
 }
@@ -10036,7 +10035,6 @@ html {
 }
 
 .tf-template-3 {
-  font-family: "Josefin Sans", sans-serif;
   background: #FDF9F3;
   color: #99948D;
   font-size: 16px;
@@ -10076,7 +10074,6 @@ html {
 .tf-template-3 h4,
 .tf-template-3 h5,
 .tf-template-3 h6 {
-  font-family: "Cormorant Garamond", serif;
   font-weight: 700;
   margin: 0 0 0.3em 0;
   line-height: 1.3;
@@ -10197,7 +10194,6 @@ html {
 .tf_template_3_global_layouts #tf-ask-question .tf-aq-outer h4 {
   color: #595349;
   text-align: center;
-  font-family: Cormorant Garamond;
   font-size: 32px !important;
   font-style: normal;
   font-weight: 700 !important;
@@ -10209,8 +10205,6 @@ html {
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   color: #C1BFBB;
   background-color: #fdf9f3;
-  /* Body/P3 */
-  font-family: Josefin Sans;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -10227,8 +10221,6 @@ html {
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   background-color: #fdf9f3;
   color: #C1BFBB;
-  /* Body/P3 */
-  font-family: Josefin Sans;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -10248,7 +10240,6 @@ html {
   border-radius: 0px !important;
   padding: 12px 32px !important;
   color: #fdf9f3 !important;
-  font-family: Josefin Sans !important;
   font-size: 16px !important;
   font-style: normal;
   font-weight: 700;
@@ -10269,7 +10260,6 @@ html {
 .tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf-hotel-services-text h3 {
   color: #595349;
   text-align: center;
-  font-family: Cormorant Garamond;
   font-size: 32px !important;
   font-style: normal;
   font-weight: 700 !important;
@@ -10279,7 +10269,6 @@ html {
 .tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf-hotel-services-text p {
   color: #99948D;
   text-align: center;
-  font-family: Josefin Sans;
   font-size: 16px !important;
   font-style: normal;
   font-weight: 400 !important;
@@ -10289,7 +10278,6 @@ html {
 }
 .tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf-hotel-service label {
   color: #595349;
-  font-family: Josefin Sans;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -10315,7 +10303,6 @@ html {
   border-radius: 0px !important;
   padding: 12px 32px !important;
   color: #fdf9f3 !important;
-  font-family: Josefin Sans !important;
   font-size: 16px !important;
   font-style: normal;
   font-weight: 700;
@@ -10944,16 +10931,15 @@ html {
   border-radius: 8px 8px 0px 0px;
   pointer-events: none;
 }
-.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .tf-widget-title h4 {
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .tf-widget-title span {
   margin-bottom: 10px !important;
   font-size: 16px !important;
   font-weight: 600 !important;
   line-height: 1.5 !important;
   color: #595349 !important;
-  font-family: Josefin Sans !important;
 }
 @media only screen and (max-width: 1024px) {
-  .tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .tf-widget-title h4 {
+  .tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .tf-widget-title span {
     font-size: 12px !important;
   }
 }
@@ -11108,16 +11094,15 @@ html {
     margin-bottom: 16px;
   }
 }
-.tf-template-3 .tf-available-rooms-wrapper .tf-available-rooms-head > h2 {
+.tf-template-3 .tf-available-rooms-wrapper .tf-available-rooms-head > span {
   color: #595349;
   font-size: 24px !important;
   font-weight: 400 !important;
   line-height: 130% !important;
-  font-family: "Josefin Sans", sans-serif !important;
   margin: 0px;
 }
 @media only screen and (max-width: 1024px) {
-  .tf-template-3 .tf-available-rooms-wrapper .tf-available-rooms-head > h2 {
+  .tf-template-3 .tf-available-rooms-wrapper .tf-available-rooms-head > span {
     font-size: 14px !important;
   }
 }
@@ -11326,16 +11311,16 @@ html {
   color: #595349;
   text-decoration: none;
 }
-.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left h4 {
+.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left span.tf-others-benefits-title {
   color: #595349;
   font-size: 16px !important;
   font-weight: 600 !important;
-  font-family: "Josefin Sans", sans-serif !important;
   margin-bottom: 16px;
   margin-top: auto;
+  display: block;
 }
 @media only screen and (max-width: 991.98px) {
-  .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left h4 {
+  .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left span.tf-others-benefits-title {
     margin-top: 16px;
   }
 }
@@ -11401,7 +11386,6 @@ html {
 }
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-available-room-price .tf-price .discount-price {
   color: #99948D;
-  font-family: Josefin Sans;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -11467,7 +11451,6 @@ html {
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.availability {
   color: #FDF9F3;
   font-size: 16px;
-  font-family: "Josefin Sans", sans-serif;
   font-weight: 700;
   line-height: 24px;
   background: #B58E53;
@@ -11478,6 +11461,7 @@ html {
   text-decoration: none;
   text-align: center;
   transition: 0.3s all ease;
+  border-radius: 0px;
 }
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content button:hover,
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.tf_air_service:hover,
@@ -11566,7 +11550,6 @@ html {
 }
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room.tf-tabs-room .tf-available-room-content .tf-available-room-content-left .room-heading-price .tf-available-room-price .tf-price .discount-price {
   color: #99948D;
-  font-family: Josefin Sans;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -11818,7 +11801,6 @@ html {
 .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right a.view-hotel {
   color: #FDF9F3;
   font-size: 16px;
-  font-family: "Josefin Sans", sans-serif;
   font-weight: 700;
   line-height: 24px;
   background: #B58E53;
@@ -11855,7 +11837,6 @@ html {
   background: #FDF9F3;
   height: 40px;
   color: #99948D;
-  font-family: Josefin Sans;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -12027,7 +12008,6 @@ html {
   padding: 8px 32px;
   color: #FDF9F3;
   text-align: center;
-  font-family: Josefin Sans;
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
@@ -12186,7 +12166,6 @@ html {
   outline: none;
   color: #FDF9F3 !important;
   font-size: 16px !important;
-  font-family: Josefin Sans;
   font-weight: 700;
   line-height: 24px !important;
   cursor: pointer;
@@ -12389,7 +12368,6 @@ html {
 }
 .tf-template-3 .tf_acrselection-wrap .acr-label {
   color: #595349;
-  font-family: Josefin Sans;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -12498,13 +12476,13 @@ html {
 .tf-template-3 #tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf_selectperson-wrap .tf-form-title {
   margin-bottom: 24px;
 }
-.tf-template-3 #tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf_selectperson-wrap .tf-form-title p {
+.tf-template-3 #tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf_selectperson-wrap .tf-form-title h3.tf-person-info-title {
   color: #595349;
-  font-family: Cormorant Garamond;
   font-size: 32px !important;
   font-style: normal;
   font-weight: 700 !important;
   line-height: 120%;
+  margin: 0px;
 }
 .tf-template-3 #tf-apartment-booking .tf-btn-booking button,
 .tf-template-3 #tf-apartment-booking .tf-btn-booking a {
@@ -12597,7 +12575,6 @@ html {
 }
 .tf-template-3 .tf-search-date-wrapper .acr-label {
   color: #595349;
-  font-family: Josefin Sans;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -12634,7 +12611,6 @@ html {
 }
 .tf-template-3 .tf-search-date-wrapper .acr-label span {
   color: #99948D;
-  font-family: Josefin Sans;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -12643,20 +12619,19 @@ html {
 .tf-template-3 .tf-search-date-wrapper span.tf-search-date-info {
   color: #595349;
   font-size: 32px;
-  font-family: "Cormorant Garamond", serif;
   font-weight: 700;
   line-height: 1;
 }
-.tf-template-3 .tf_tours_booking .tf-form-title p {
+.tf-template-3 .tf_tours_booking .tf-form-title h3.tf-person-info-title {
   color: #595349;
-  font-family: Cormorant Garamond;
   font-size: 32px !important;
   font-style: normal !important;
   font-weight: 700 !important;
   line-height: 120% !important;
+  margin: 0;
 }
 @media only screen and (max-width: 1024px) {
-  .tf-template-3 .tf_tours_booking .tf-form-title p {
+  .tf-template-3 .tf_tours_booking .tf-form-title h3.tf-person-info-title {
     font-size: 24px !important;
   }
 }
@@ -12731,7 +12706,6 @@ html {
 }
 .tf-template-3 .tf-mobile-booking-btn span {
   color: #FDF9F3;
-  font-family: Josefin Sans;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -13927,7 +13901,7 @@ html {
   align-items: center;
   gap: 24px;
 }
-@media only screen and (max-width: 1366px) {
+@media only screen and (max-width: 1600px) {
   .tf-template-3 .tf-send-inquiry {
     padding: 56px 16px;
   }

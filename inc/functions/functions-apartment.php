@@ -829,7 +829,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                             <div class="tf_form-inner">
                                 <div class="tf_selectperson-wrap">
 								<div class="tf-form-title">
-									<p><?php _e( 'Person Info', 'tourfic' ); ?></p>
+									<h3 class="tf-person-info-title"><?php _e( 'Person Info', 'tourfic' ); ?></h3>
 								</div>
 									<div class="tf_acrselection">
 										<div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>

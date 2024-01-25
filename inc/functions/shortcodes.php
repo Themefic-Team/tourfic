@@ -872,7 +872,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 		<div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
 			<div class="tf-archive-available-rooms-head tf-available-rooms-head">
 				<?php if($post_type == "tf_hotel"){ ?>
-				<h2 class="tf-total-results"><?php _e("Total", "tourfic"); ?> <span><?php echo $total_posts; ?></span> 
+				<span class="tf-total-results"><?php _e("Total", "tourfic"); ?> <span><?php echo $total_posts; ?></span> 
 				<?php if($post_type == "tf_hotel"){
                 _e("hotels available", "tourfic");
 				}elseif($post_type == "tf_apartment"){
@@ -880,7 +880,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 				}else{
 					_e("tours available", "tourfic");
 				} ?>
-				</h2>
+				</span>
 				<?php } ?>
 				<div class="tf-archive-filter-showing">
 					<i class="ri-equalizer-line"></i>
