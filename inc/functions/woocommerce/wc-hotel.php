@@ -36,6 +36,7 @@ function tf_hotel_booking_callback() {
 	$post_id   = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : null;
 	$room_id   = isset( $_POST['room_id'] ) ? intval( sanitize_text_field( $_POST['room_id'] ) ) : null;
 	$unique_id = isset( $_POST['unique_id'] ) ? sanitize_text_field( $_POST['unique_id'] ) : null;
+	$option_id = isset( $_POST['option_id'] ) ? sanitize_text_field( $_POST['option_id'] ) : null;
 	$location  = isset( $_POST['location'] ) ? sanitize_text_field( $_POST['location'] ) : '';
 	// People number
 	$adult          = isset( $_POST['adult'] ) ? intval( sanitize_text_field( $_POST['adult'] ) ) : '0';
@@ -141,6 +142,7 @@ function tf_hotel_booking_callback() {
 		$tf_room_data['tf_hotel_data']['order_type']         = 'hotel';
 		$tf_room_data['tf_hotel_data']['post_id']            = $post_id;
 		$tf_room_data['tf_hotel_data']['unique_id']          = $unique_id;
+		$tf_room_data['tf_hotel_data']['option_id']          = $option_id;
 		$tf_room_data['tf_hotel_data']['post_permalink']     = get_permalink( $post_id );
 		$tf_room_data['tf_hotel_data']['post_author']        = $post_author;
 		$tf_room_data['tf_hotel_data']['post_id']            = $post_id;
@@ -173,7 +175,7 @@ function tf_hotel_booking_callback() {
 		/**
 		 * Calculate Pricing
 		 */
-		if ( $avail_by_date && function_exists('is_tf_pro') && is_tf_pro() ) {
+		if ( $avail_by_date && function_exists('is_tf_pro') && is_tf_pro() && $pricing_by !== '3') {
 
 			if(!$price_multi_day){
 				if ( $check_in && $check_out ) {
@@ -265,6 +267,49 @@ function tf_hotel_booking_callback() {
 
 				$tf_room_data['tf_hotel_data']['adult']          = $adult." × ".strip_tags(wc_price($adult_price));
 				$tf_room_data['tf_hotel_data']['child']          = $child." × ".strip_tags(wc_price($child_price));
+			} elseif ( $pricing_by == '3' ) {
+				$room_options = ! empty( $rooms[$room_id]['room-options'] ) ? $rooms[$room_id]['room-options'] : [];
+
+				if ( ! empty( $room_options ) ) {
+					foreach ( $room_options as $room_option_key => $room_option ) {
+						$_option_id = $unique_id.'_'.$room_option_key;
+						if ( $_option_id == $option_id ) {
+							$option_price_type = ! empty( $room_option['option_pricing_type'] ) ? $room_option['option_pricing_type'] : 'per_room';
+							if ( $option_price_type == 'per_room' ) {
+								$total_price = ! empty( $room_option['option_price'] ) ? floatval( $room_option['option_price'] ) : 0;
+							} elseif ( $option_price_type == 'per_person' ) {
+								$option_adult_price = ! empty( $room_option['option_adult_price'] ) ? floatval( $room_option['option_adult_price'] ) : 0;
+								$option_child_price = ! empty( $room_option['option_child_price'] ) ? floatval( $room_option['option_child_price'] ) : 0;
+								$total_price       = ( $option_adult_price * $adult ) + ( $option_child_price * $child );
+							}
+
+							if ( ! empty( $room_option['room-facilities'] ) ) {
+								foreach ( $room_option['room-facilities'] as $room_facility ) {
+									$facility_price_switch = ! empty( $room_facility['room_facilities_price_switch'] ) ? $room_facility['room_facilities_price_switch'] : '0';
+									$facility_price        = ! empty( $room_facility['room_facilities_price'] ) ? floatval( $room_facility['room_facilities_price'] ) : 0;
+									$facility_type         = ! empty( $room_facility['room_facilities_price_type'] ) ? $room_facility['room_facilities_price_type'] : 'per_person';
+
+									if ( $facility_price_switch == '1' ) {
+										switch ( $facility_type ) {
+											case 'per_person':
+												$total_price += ( $facility_price * $adult ) + ( $facility_price * $child );
+												break;
+											case 'per_stay':
+												$total_price += $facility_price;
+												break;
+										}
+									}
+								}
+							}
+
+							if ( $hotel_discount_type == "percent" ) {
+								$total_price = ! empty( $total_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $total_price - ( ( (int) $total_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
+							} else if ( $hotel_discount_type == "fixed" ) {
+								$total_price = ! empty( $total_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $total_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
+							}
+						}
+					}
+				}
 			}
 
 			# Multiply pricing by night number
