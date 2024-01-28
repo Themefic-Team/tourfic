@@ -243,6 +243,10 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 			$check_in  = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_in ) ) );
 			$check_out = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_out ) ) );
 		}
+        if($date_format == 'd/m/Y'){
+            $check_in  = date( "Y-m-d", strtotime( str_replace( "/", "-", $check_in ) ) );
+            $check_out = date( "Y-m-d", strtotime( str_replace( "/", "-", $check_out ) ) );
+        }
 
 		$check_in  = strtotime( $check_in );
 		$check_out = strtotime( $check_out );
@@ -435,6 +439,10 @@ if ( ! function_exists( 'tf_add_apartment_availability' ) ) {
 		if ( $date_format == 'Y.m.d' || $date_format == 'd.m.Y' ) {
 			$check_in  = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_in ) ) );
 			$check_out = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_out ) ) );
+		}
+		if($date_format == 'd/m/Y'){
+			$check_in  = date( "Y-m-d", strtotime( str_replace( "/", "-", $check_in ) ) );
+			$check_out = date( "Y-m-d", strtotime( str_replace( "/", "-", $check_out ) ) );
 		}
 
 		$check_in  = strtotime( $check_in );

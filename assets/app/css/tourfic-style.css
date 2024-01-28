@@ -9533,6 +9533,7 @@ div#tf-contact-info {
   padding-left: 30px;
   padding-top: 30px;
   padding-bottom: 30px;
+  vertical-align: top;
 }
 @media only screen and (max-width: 767.98px) {
   .tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table > tbody tr td.description {

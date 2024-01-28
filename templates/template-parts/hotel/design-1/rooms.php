@@ -64,8 +64,8 @@
 						$child_number = ! empty( $room['child'] ) ? $room['child'] : '0';
 						$total_person = $adult_number + $child_number;
 						$pricing_by = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
-						$avil_by_date = ! empty( $room['avil_by_date'] ) ? ! empty( $room['avil_by_date'] ) : false;
-						$multi_by_date = ! empty( $room['price_multi_day'] ) ? ! empty( $room['price_multi_day'] ) : false;
+						$avil_by_date = ! empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : false;
+						$multi_by_date = ! empty( $room['price_multi_day'] ) ? $room['price_multi_day'] : false;
 						$child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
 						$room_options = ! empty( $room['room-options'] ) ? $room['room-options'] : [];
 
@@ -186,7 +186,7 @@
 						}
 						?>
                         <tr>
-                        <td class="description" rowspan="<?php echo $room_options ? count( $room_options ) : 1; ?>">
+                        <td class="description" rowspan="<?php echo $room_options ? count( $room_options ) : 1; ?>" align="top">
                             <div class="tf-room-description-box tf-flex">
 								<?php
 								$tour_room_details_gall = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
@@ -435,17 +435,9 @@
                                             <div class="price-per-night">
 												<?php
 												if ( $option_price_type == 'per_room' ) {
-													if ( $multi_by_date ) {
-														esc_html_e( 'per room/night', 'tourfic' );
-													} else {
-														esc_html_e( 'per room/day', 'tourfic' );
-													}
+													echo $multi_by_date ? __( 'per room/night', 'tourfic' ) : __( 'per room/day', 'tourfic' );
 												} elseif ( $option_price_type == 'per_person' ) {
-													if ( $multi_by_date ) {
-														esc_html_e( 'per person/night', 'tourfic' );
-													} else {
-														esc_html_e( 'per person/day', 'tourfic' );
-													}
+													echo $multi_by_date ? __( 'per person/night', 'tourfic' ) : __( 'per person/day', 'tourfic' );
 												}
 												?>
                                             </div>

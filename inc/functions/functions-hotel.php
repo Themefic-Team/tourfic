@@ -829,7 +829,7 @@ function tf_room_availability_callback() {
 				$adult_number     = ! empty( $room['adult'] ) ? $room['adult'] : 0;
 				$child_number     = ! empty( $room['child'] ) ? $room['child'] : 0;
 				$pricing_by       = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
-				$multi_by_date_ck = ! empty( $room['price_multi_day'] ) ? ! empty( $room['price_multi_day'] ) : false;
+				$multi_by_date_ck = ! empty( $room['price_multi_day'] ) ? $room['price_multi_day'] : false;
 				$child_age_limit  = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
 				$room_price       = ! empty( $room['price'] ) ? $room['price'] : 0;
 				$room_adult_price = ! empty( $room['adult_price'] ) ? $room['adult_price'] : 0;
@@ -864,10 +864,7 @@ function tf_room_availability_callback() {
                     $d_price = $d_room_adult_price + $d_room_child_price;
 				}
 
-//				$d_price = $pricing_by == '1' ? $d_room_price : ($pricing_by == '2' ? $d_room_adult_price + $d_room_child_price : 0);
-
 				// Check availability by date option
-
 				$period = new DatePeriod(
 					new DateTime( $form_start . ' 00:00' ),
 					new DateInterval( 'P1D' ),
@@ -877,7 +874,6 @@ function tf_room_availability_callback() {
 				$days = iterator_count( $period );
 
 				// Check availability by date option
-
 				$tfperiod = new DatePeriod(
 					new DateTime( $tf_startdate . ' 00:00' ),
 					new DateInterval( 'P1D' ),
@@ -1079,8 +1075,6 @@ function tf_room_availability_callback() {
 
                                 $price_by_date = ( ( $option_adult_price * $form_adult ) + ( $option_child_price * $form_child ) );
                             }
-
-
                         }
                     }
 
