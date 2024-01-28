@@ -188,6 +188,44 @@
                         }
                     }
                 }
+                .tf-features-block-slides{
+                    .slick-track{
+                        display: flex;
+                        .slick-slide{
+                            height: inherit;
+                        }
+                    }
+                    .tf-feature-block {
+                        padding: 24px;
+                        display: flex;
+                        gap: 16px;
+                        background: #FCF4E8;
+                        @media #{$max1024}{
+                            padding: 16px !important;
+                            gap: 8px;
+                        }
+                        i {
+                            font-size: 24px;
+                            color: rgb(181, 142, 83);
+                        }
+                        .tf-feature-block-details {
+                            h5 {
+                                color: #595349;
+                                font-size: 20px !important;
+                                font-style: normal !important;
+                                font-weight: 700 !important;
+                                line-height: 1.3;
+                            }
+                            p{
+                                color: #99948D;
+                                font-size: 16px;
+                                font-style: normal;
+                                font-weight: 400;
+                                line-height: 130%; /* 20.8px */
+                            }
+                        }
+                    }
+                }
                 .tf-features-block-wrapper.tf-informations-secations{
                   margin: 0px;  
                 }

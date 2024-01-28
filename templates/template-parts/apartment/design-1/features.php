@@ -1,7 +1,9 @@
-<?php if ( isset( $meta['highlights'] ) && ! empty( tf_data_types( $meta['highlights'] ) ) ) : ?>
+<?php if ( isset( $meta['highlights'] ) && ! empty( tf_data_types( $meta['highlights'] ) ) ) : 
+   $tf_highlights_count = count(tf_data_types( $meta['highlights'] ));
+?>
 <!--Information Section Start -->
 <div class="tf-overview-wrapper">
-    <div class="tf-features-block-wrapper tf-informations-secations">
+    <div class="<?php echo $tf_highlights_count > 4 ? esc_attr('tf-features-block-slides') : esc_attr('tf-features-block-wrapper'); ?> tf-informations-secations">
         
         <?php
         foreach ( tf_data_types( $meta['highlights'] ) as $highlight ) :

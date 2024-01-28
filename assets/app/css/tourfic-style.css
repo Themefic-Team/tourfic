@@ -10816,6 +10816,42 @@ html {
   font-weight: 400;
   line-height: 130%; /* 20.8px */
 }
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-slides .slick-track {
+  display: flex;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-slides .slick-track .slick-slide {
+  height: inherit;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-slides .tf-feature-block {
+  padding: 24px;
+  display: flex;
+  gap: 16px;
+  background: #FCF4E8;
+}
+@media only screen and (max-width: 1024px) {
+  .tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-slides .tf-feature-block {
+    padding: 16px !important;
+    gap: 8px;
+  }
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-slides .tf-feature-block i {
+  font-size: 24px;
+  color: rgb(181, 142, 83);
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-slides .tf-feature-block .tf-feature-block-details h5 {
+  color: #595349;
+  font-size: 20px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: 1.3;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-slides .tf-feature-block .tf-feature-block-details p {
+  color: #99948D;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; /* 20.8px */
+}
 .tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper.tf-informations-secations {
   margin: 0px;
 }
@@ -11871,8 +11907,13 @@ html {
     margin-bottom: 24px;
   }
 }
+.tf-template-3 .tf-related-tours .slick-track {
+  display: flex;
+}
+.tf-template-3 .tf-related-tours .slick-track .slick-slide {
+  height: inherit !important;
+}
 .tf-template-3 .tf-related-tours .tf-slider-item {
-  height: auto !important;
   box-shadow: none;
   border: 0px solid;
   background-color: transparent;
@@ -11891,6 +11932,11 @@ html {
 }
 .tf-template-3 .tf-related-tours .tf-slider-item .tf-post-single-box {
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #fdf9f3;
+  justify-content: flex-start;
 }
 .tf-template-3 .tf-related-tours .tf-slider-item .tf-image-data img {
   height: 240px;
