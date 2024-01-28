@@ -790,14 +790,6 @@
             background-color: #FDF9F3;
             display: flex;
             flex-direction: column;
-            @media #{$max1366}{
-                min-height: none;
-                max-height: none;
-            }
-            @media #{$max1366}{
-                min-height: 195px;
-                max-height: 195px;
-            }
             a.see-details{
                 display: block;
                 padding: 8px 16px;

@@ -11903,18 +11903,6 @@ html {
   display: flex;
   flex-direction: column;
 }
-@media only screen and (max-width: 1366px) {
-  .tf-template-3 .tf-related-tours .tf-slider-item .tf-meta-info {
-    min-height: none;
-    max-height: none;
-  }
-}
-@media only screen and (max-width: 1366px) {
-  .tf-template-3 .tf-related-tours .tf-slider-item .tf-meta-info {
-    min-height: 195px;
-    max-height: 195px;
-  }
-}
 .tf-template-3 .tf-related-tours .tf-slider-item .tf-meta-info a.see-details {
   display: block;
   padding: 8px 16px;
