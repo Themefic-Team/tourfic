@@ -243,6 +243,10 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 			$check_in  = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_in ) ) );
 			$check_out = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_out ) ) );
 		}
+		if ( $date_format == 'd/m/Y' ) {
+			$check_in  = date( "Y-m-d", strtotime( str_replace( "/", "-", $check_in ) ) );
+			$check_out = date( "Y-m-d", strtotime( str_replace( "/", "-", $check_out ) ) );
+		}
 
 		$check_in  = strtotime( $check_in );
 		$check_out = strtotime( $check_out );
@@ -370,10 +374,10 @@ if ( ! function_exists( 'tf_update_room_avail_date_price' ) ) {
 							$hotel_avail_data = array_map( function ( $item ) use ( $pricing_by, $price, $adult_price, $child_price ) {
 
 								if ( $pricing_by == '1' ) {
-									$item['price'] = !isset($item['price']) ? $price : $item['price'];
+									$item['price'] = ! isset( $item['price'] ) ? $price : $item['price'];
 								} else {
-									$item['adult_price'] = !isset($item['adult_price']) ? $adult_price : $item['adult_price'];
-                                    $item['child_price'] = !isset($item['child_price']) ? $child_price : $item['child_price'];
+									$item['adult_price'] = ! isset( $item['adult_price'] ) ? $adult_price : $item['adult_price'];
+									$item['child_price'] = ! isset( $item['child_price'] ) ? $child_price : $item['child_price'];
 								}
 								$item['price_by'] = $pricing_by;
 
@@ -385,21 +389,21 @@ if ( ! function_exists( 'tf_update_room_avail_date_price' ) ) {
 					} elseif ( $avil_by_date === '1' && empty( $room['avail_date'] ) ) {
 						//add next 5 years availability
 						$hotel_avail_data = [];
-                        for ( $i = 0; $i <= 1825; $i ++ ) {
-                            $tf_room_date                     = date( 'Y/m/d', strtotime( "+$i day" ) );
-                            $tf_room_data                     = [
-                                'check_in'    => $tf_room_date,
-                                'check_out'   => $tf_room_date,
-                                'price_by'    => $pricing_by,
-                                'price'       => $price,
-                                'adult_price' => $adult_price,
-                                'child_price' => $child_price,
-                                'status'      => 'available'
-                            ];
-                            $hotel_avail_data[ $tf_room_date ] = $tf_room_data;
-                        }
+						for ( $i = 0; $i <= 1825; $i ++ ) {
+							$tf_room_date                      = date( 'Y/m/d', strtotime( "+$i day" ) );
+							$tf_room_data                      = [
+								'check_in'    => $tf_room_date,
+								'check_out'   => $tf_room_date,
+								'price_by'    => $pricing_by,
+								'price'       => $price,
+								'adult_price' => $adult_price,
+								'child_price' => $child_price,
+								'status'      => 'available'
+							];
+							$hotel_avail_data[ $tf_room_date ] = $tf_room_data;
+						}
 
-                        $meta['room'][ $roomIndex ]['avail_date'] = json_encode( $hotel_avail_data );
+						$meta['room'][ $roomIndex ]['avail_date'] = json_encode( $hotel_avail_data );
 					}
 				}
 			}
@@ -439,6 +443,10 @@ if ( ! function_exists( 'tf_add_apartment_availability' ) ) {
 		if ( $date_format == 'Y.m.d' || $date_format == 'd.m.Y' ) {
 			$check_in  = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_in ) ) );
 			$check_out = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_out ) ) );
+		}
+		if ( $date_format == 'd/m/Y' ) {
+			$check_in  = date( "Y-m-d", strtotime( str_replace( "/", "-", $check_in ) ) );
+			$check_out = date( "Y-m-d", strtotime( str_replace( "/", "-", $check_out ) ) );
 		}
 
 		$check_in  = strtotime( $check_in );
