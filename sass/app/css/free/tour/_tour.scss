@@ -640,11 +640,22 @@ div#tf-contact-info {
 
 .gm-style {
     .marker-label {
-        display: inline-block;
+        display: block;
         padding-top: 30px;
         padding-left: 82px;
         line-height: 1.33;
-        // font-size: 13px !important;
+        font-family: inherit !important;
+        font-weight: 600 !important;
+        align-items: baseline;
+        
+        &:before {
+            content: "\eb21";
+            font-size: 16px;
+            padding-right: 4px;
+            margin-top: 4px;
+            font-weight: 300 !important;
+            font-family: 'remixicon' !important;
+        }
     }
 }
 
