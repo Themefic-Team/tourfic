@@ -158,7 +158,7 @@
                 include TF_TEMPLATE_PART_PATH . 'apartment/design-1/rooms.php';
                 include TF_TEMPLATE_PART_PATH . 'apartment/design-1/offer.php';
                 include TF_TEMPLATE_PART_PATH . 'apartment/design-1/rules.php';
-                // include TF_TEMPLATE_PART_PATH . 'apartment/design-1/facilities.php';
+                include TF_TEMPLATE_PART_PATH . 'apartment/design-1/facilities.php';
             }
             ?>
 

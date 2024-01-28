@@ -3014,6 +3014,11 @@ function tf_template_3_migrate_data() {
 					"aprtment-section" => "House Rules",
 					"aprtment-section-slug" => "rules",
 					"aprtment-section-status" => "1"
+				),
+				array(
+					"aprtment-section" => "Amenities",
+					"aprtment-section-slug" => "facilities",
+					"aprtment-section-status" => "1"
 				)
 			);
 			$options["tf-template"]["single-aprtment-layout-part-2"] = array(
