@@ -454,6 +454,7 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 = 2.11.7 - 28 January 2024 =
 
 - Fixed: Search filter issue
+- Fixed: Availability by date issue
 - Improvement: System stability Improved
 
 = 2.11.6 - 23 January 2024 =
