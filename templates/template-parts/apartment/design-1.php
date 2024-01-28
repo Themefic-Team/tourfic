@@ -149,7 +149,7 @@
             if( !empty(tf_data_types(tfopt( 'tf-template' ))['single-aprtment-layout-part-1']) ){
                 foreach(tf_data_types(tfopt( 'tf-template' ))['single-aprtment-layout-part-1'] as $section){
                     if( !empty($section['aprtment-section-status']) && $section['aprtment-section-status']=="1" && !empty($section['aprtment-section-slug']) ){
-                        include TF_TEMPLATE_PART_PATH . 'aprtment/design-1/'.$section['aprtment-section-slug'].'.php';
+                        include TF_TEMPLATE_PART_PATH . 'apartment/design-1/'.$section['aprtment-section-slug'].'.php';
                     }
                 }
             }else{
@@ -367,7 +367,7 @@
     if( !empty(tf_data_types(tfopt( 'tf-template' ))['single-aprtment-layout-part-2']) ){
         foreach(tf_data_types(tfopt( 'tf-template' ))['single-aprtment-layout-part-2'] as $section){
             if( !empty($section['aprtment-section-status']) && $section['aprtment-section-status']=="1" && !empty($section['aprtment-section-slug']) ){
-                include TF_TEMPLATE_PART_PATH . 'aprtment/design-1/'.$section['aprtment-section-slug'].'.php';
+                include TF_TEMPLATE_PART_PATH . 'apartment/design-1/'.$section['aprtment-section-slug'].'.php';
             }
         }
     }else{

@@ -2885,6 +2885,7 @@ if ( ! function_exists( 'tourfic_vendor_order_table_data' ) ) {
  */
 function tf_template_3_migrate_data() {
 
+	// Hotel & Tour
 	if ( empty( get_option( 'tf_template_3_migrate_data' ) ) ) {
 
 		$options = get_option( 'tf_settings' );
@@ -2983,6 +2984,63 @@ function tf_template_3_migrate_data() {
 
 	}
 
+	// Apartment
+	if ( empty( get_option( 'tf_template_2_apartment_migrate_data' ) ) ) {
+
+		$options = get_option( 'tf_settings' );
+		if( !empty($options["tf-template"]) ){
+			$options["tf-template"]["single-aprtment-layout-part-1"] = array(
+				array(
+					"aprtment-section" => "Description",
+					"aprtment-section-slug" => "description",
+					"aprtment-section-status" => "1"
+				),
+				array(
+					"aprtment-section" => "Highlights",
+					"aprtment-section-slug" => "features",
+					"aprtment-section-status" => "1"
+				),
+				array(
+					"aprtment-section" => "Apartment Rooms",
+					"aprtment-section-slug" => "rooms",
+					"aprtment-section-status" => "1"
+				),
+				array(
+					"aprtment-section" => "Place offer",
+					"aprtment-section-slug" => "offer",
+					"aprtment-section-status" => "1"
+				),
+				array(
+					"aprtment-section" => "House Rules",
+					"aprtment-section-slug" => "rules",
+					"aprtment-section-status" => "1"
+				)
+			);
+			$options["tf-template"]["single-aprtment-layout-part-2"] = array(
+				array(
+					"aprtment-section" => "Review",
+					"aprtment-section-slug" => "review",
+					"aprtment-section-status" => "1"
+				),
+				array(
+					"aprtment-section" => "FAQ",
+					"aprtment-section-slug" => "faq",
+					"aprtment-section-status" => "1"
+				),
+				array(
+					"aprtment-section" => "Terms & Conditions",
+					"aprtment-section-slug" => "trams-condition",
+					"aprtment-section-status" => "1"
+				)
+			);
+		}
+
+		update_option( 'tf_settings', $options );
+		wp_cache_flush();
+		flush_rewrite_rules( true );
+		update_option( 'tf_template_2_apartment_migrate_data', 1 );
+
+	}
 }
 
 add_action( 'init', 'tf_template_3_migrate_data' );
