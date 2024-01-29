@@ -1850,12 +1850,6 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
             </div>
 
         </form>
-		<?php if ( is_active_sidebar( 'tf_single_booking_sidebar' ) ) { ?>
-        <div id="tf__booking_sidebar">
-			<?php dynamic_sidebar( 'tf_single_booking_sidebar' ); ?>
-            <br>
-        </div>
-		<?php } ?>
 	<?php }
 	elseif ( $tf_hotel_selected_template == "design-2" ) { ?>
 
@@ -2109,12 +2103,6 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
             </div>
 
         </form>
-		<?php if ( is_active_sidebar( 'tf_single_booking_sidebar' ) ) { ?>
-        <div id="tf__booking_sidebar">
-			<?php dynamic_sidebar( 'tf_single_booking_sidebar' ); ?>
-            <br>
-        </div>
-		<?php } ?>
 	<?php } ?>
     <script>
         (function ($) {

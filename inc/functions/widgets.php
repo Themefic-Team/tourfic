@@ -1548,15 +1548,6 @@ if ( !empty( $subtitle ) ) {
 function tourfic_sidebar_widgets_init() {
 
     register_sidebar( array(
-        'name'          => __( 'TOURFIC: Single Hotel Sidebar', 'tourfic' ),
-        'id'            => 'tf_single_booking_sidebar',
-        'description'   => __( 'Widgets in this area will be shown on hotel single page', 'tourfic' ),
-        'before_widget' => '<div id="%1$s" class="tf_widget widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<div class="tf-widget-title"><span>',
-        'after_title'   => '</span><i class="fa fa-angle-up"></i></div>',
-    ) );
-    register_sidebar( array(
         'name'          => __( 'TOURFIC: Archive Sidebar', 'tourfic' ),
         'id'            => 'tf_archive_booking_sidebar',
         'description'   => __( 'Widgets in this area will be shown on tourfic archive/search page', 'tourfic' ),
