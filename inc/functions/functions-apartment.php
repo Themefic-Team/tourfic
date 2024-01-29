@@ -1565,7 +1565,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 					if ( ! empty( $apartment_discount_amount ) && $apartment_discount_type!="none" ){ ?>
 						<div class="tf-available-room-off">
 							<span>
-								<?php echo $apartment_discount_type['type']=="percent" ? $apartment_discount_amount.'%' : wc_price($apartment_discount_amount) ?> <?php _e( "Off ", "tourfic" ); ?>
+								<?php echo $apartment_discount_type=="percent" ? $apartment_discount_amount.'%' : wc_price($apartment_discount_amount) ?> <?php _e( "Off ", "tourfic" ); ?>
 							</span>
 						</div>
 					<?php } ?>
