@@ -186,7 +186,7 @@
 						}
 						?>
                         <tr>
-                        <td class="description" rowspan="<?php echo $room_options ? count( $room_options ) : 1; ?>" align="top">
+                        <td class="description" rowspan="<?php echo $room_options ? count( $room_options ) : 1; ?>">
                             <div class="tf-room-description-box tf-flex">
 								<?php
 								$tour_room_details_gall = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
@@ -385,12 +385,7 @@
 											}
 											?>
                                             <div class="price-per-night">
-												<?php
-												if ( $multi_by_date ) {
-													esc_html_e( 'per night', 'tourfic' );
-												} else {
-													esc_html_e( 'per day', 'tourfic' );
-												} ?>
+												<?php echo $multi_by_date ? __( 'per night', 'tourfic' ) : __( 'per day', 'tourfic' ); ?>
                                             </div>
 											<?php
 										} elseif ( $pricing_by == '2' ) {
@@ -406,12 +401,7 @@
 											?>
 
                                             <div class="price-per-night">
-												<?php
-												if ( $multi_by_date ) {
-													esc_html_e( 'per person/night', 'tourfic' );
-												} else {
-													esc_html_e( 'per person/day', 'tourfic' );
-												} ?>
+												<?php echo $multi_by_date ? __( 'per person/night', 'tourfic' ) : __( 'per person/day', 'tourfic' ); ?>
                                             </div>
 											<?php
 										} elseif ( $pricing_by == '3' ) {

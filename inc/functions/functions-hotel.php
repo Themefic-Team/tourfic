@@ -800,6 +800,7 @@ function tf_room_availability_callback() {
     <thead>
     <tr>
         <th class="description"><?php _e( 'Room Details', 'tourfic' ); ?></th>
+        <th class="options"><?php _e( 'Options', 'tourfic' ); ?></th>
         <th class="pax"><?php _e( 'Pax', 'tourfic' ); ?></th>
         <th class="pricing"><?php _e( 'Price', 'tourfic' ); ?></th>
         <th class="reserve"><?php _e( 'Select Rooms', 'tourfic' ); ?></th>

@@ -4177,6 +4177,7 @@ ul.tf-room-checkbox label {
 
 .availability-table td.description {
   padding: 25px;
+  width: 40%;
 }
 
 .availability-table td.description h3 a,
@@ -4234,6 +4235,20 @@ ul.tf-room-checkbox label {
 .room-detail-icon .icon-text {
   font-size: 14px;
   color: #5e6d77;
+}
+
+.availability-table td.options ul {
+  list-style: none;
+}
+.availability-table td.options ul li {
+  margin-bottom: 4px;
+}
+.availability-table td.options ul li .room-extra-icon {
+  margin-right: 5px;
+}
+
+.availability-table td {
+  padding: 8px;
 }
 
 .hotel-room-availability,
