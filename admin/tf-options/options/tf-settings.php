@@ -564,47 +564,6 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
-		// Partial Payment Popup
-		'tour_payment_popup'    => array(
-			'title'  => __( 'Partial Payment', 'tourfic' ),
-			'parent' => 'tour',
-			'icon'   => 'fa fa-cog',
-			'fields' => array(
-				array(
-					'id'    => 'signle_tour_heading',
-					'type'  => 'heading',
-					'label' => __( 'Settings for Partial Payment', 'tourfic' ),
-					'subtitle'  => __( 'This option will appear as Popup during Booking.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'tour-option-notice-two',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#partial_payment" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-				),
-
-				array(
-					'id'      => 'deposit-title',
-					'type'    => 'text',
-					'label'   => __( 'Label', 'tourfic' ),
-					'default' => __( 'Partial payment of {amount} on total', 'tourfic' ),
-					'placeholder' => __( 'Partial payment of {amount} on total', 'tourfic' ),
-					'is_pro' => true,
-				),
-				array(
-					'id'      => '',
-					'type'    => 'textarea',
-					'label'   => __( 'Description', 'tourfic' ),
-					'is_pro' => true,
-					'default' => __( 'You have the option to make a partial payment to secure your tour booking. The remaining balance can then be settled after the tour is completed.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'notice_shortcode',
-					'type'    => 'notice',
-					'content' => __( 'Use shortcode <code>{amount}</code> to show percentage amount in Label', 'tourfic' ),
-					'is_pro' => true
-				),
-			),
-		),
 		// Itinerary Settings
 		'tour_itinerary'        => array(
 			'title'  => __( 'Itinerary Settings', 'tourfic' ),
@@ -944,46 +903,6 @@ TF_Settings::option( 'tf_settings', array(
 					),
 					'dependency' => array( 'enable_child_age_limit', '==', '1' ),
 				),
-			),
-		),
-		// Hotel service Popup
-		'payment_popup'         => array(
-			'title'  => __( 'Popup Settings', 'tourfic' ),
-			'parent' => 'hotel_option',
-			'icon'   => 'fa fa-cog',
-			'fields' => array(
-				array(
-					'id'    => 'hotel_popup_heading',
-					'type'  => 'heading',
-					'label' => __( 'Settings for Popup', 'tourfic' ),
-					'subtitle'   => __( 'The popup will appear when you enable the deposit option or the airport pickup service.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'hotel-option-notice-three',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/#popup" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				array(
-					'id'    => '',
-					'type'  => 'text',
-					'label' => __( 'Popup Title', 'tourfic' ),
-					'is_pro' => true,
-				),
-
-				array(
-					'id'     => '',
-					'type'   => 'textarea',
-					'label'  => __( 'Popup Description', 'tourfic' ),
-					'is_pro' => true,
-				),
-
-				array(
-					'id'      => '',
-					'type'    => 'text',
-					'label'   => __( 'Popup Button Text', 'tourfic' ),
-					'default' => __( 'Continue to booking', 'tourfic' ),
-					'is_pro'  => true,
-				)
 			),
 		),
 
@@ -3839,7 +3758,7 @@ TF_Settings::option( 'tf_settings', array(
 		),
 		// Itinerary Settings
 		'tour_itinerary-pro'        => array(
-			'title'  => __( 'Itinerary Settings', 'tourfic' ),
+			'title'  => __( 'Tour Itinerary Settings', 'tourfic' ),
 			'parent' => 'pro_options',
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
@@ -4172,6 +4091,87 @@ TF_Settings::option( 'tf_settings', array(
 					'field_width' => 50,
 				),
 
+			),
+		),
+		// Partial Payment Popup
+		'tour_payment_popup'    => array(
+			'title'  => __( 'Tour Partial Payment', 'tourfic' ),
+			'parent' => 'pro_options',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'    => 'signle_tour_heading',
+					'type'  => 'heading',
+					'label' => __( 'Settings for Partial Payment', 'tourfic' ),
+					'subtitle'  => __( 'This option will appear as Popup during Booking.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'tour-option-notice-two',
+					'type'    => 'notice',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#partial_payment" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+				),
+
+				array(
+					'id'      => 'deposit-title',
+					'type'    => 'text',
+					'label'   => __( 'Label', 'tourfic' ),
+					'default' => __( 'Partial payment of {amount} on total', 'tourfic' ),
+					'placeholder' => __( 'Partial payment of {amount} on total', 'tourfic' ),
+					'is_pro' => true,
+				),
+				array(
+					'id'      => '',
+					'type'    => 'textarea',
+					'label'   => __( 'Description', 'tourfic' ),
+					'is_pro' => true,
+					'default' => __( 'You have the option to make a partial payment to secure your tour booking. The remaining balance can then be settled after the tour is completed.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'notice_shortcode',
+					'type'    => 'notice',
+					'content' => __( 'Use shortcode <code>{amount}</code> to show percentage amount in Label', 'tourfic' ),
+					'is_pro' => true
+				),
+			),
+		),
+		// Hotel service Popup
+		'payment_popup'         => array(
+			'title'  => __( 'Hotel Popup Settings', 'tourfic' ),
+			'parent' => 'pro_options',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'    => 'hotel_popup_heading',
+					'type'  => 'heading',
+					'label' => __( 'Settings for Popup', 'tourfic' ),
+					'subtitle'   => __( 'The popup will appear when you enable the deposit option or the airport pickup service.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'hotel-option-notice-three',
+					'type'    => 'notice',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/#popup" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'    => '',
+					'type'  => 'text',
+					'label' => __( 'Popup Title', 'tourfic' ),
+					'is_pro' => true,
+				),
+
+				array(
+					'id'     => '',
+					'type'   => 'textarea',
+					'label'  => __( 'Popup Description', 'tourfic' ),
+					'is_pro' => true,
+				),
+
+				array(
+					'id'      => '',
+					'type'    => 'text',
+					'label'   => __( 'Popup Button Text', 'tourfic' ),
+					'default' => __( 'Continue to booking', 'tourfic' ),
+					'is_pro'  => true,
+				)
 			),
 		),
 	),
