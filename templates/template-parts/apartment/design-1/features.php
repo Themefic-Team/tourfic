@@ -15,7 +15,8 @@
             <?php echo ! empty( $highlight['icon'] ) ? "<i class='" . esc_attr( $highlight['icon'] ) . "'></i>" : ''; ?>
             <div class="tf-feature-block-details">
                 <h5><?php echo esc_html( $highlight['title'] ); ?></h5>
-                <?php echo ! empty( $highlight['subtitle'] ) ? '<p>' . esc_html( $highlight['subtitle'] ) . '</p>' : ''; ?>
+                <?php 
+                echo ! empty( $highlight['subtitle'] ) ? '<p>' . esc_html( $highlight['subtitle'] ) . '</p>' : ''; ?>
             </div>
         </div>
         <?php endforeach; ?>
