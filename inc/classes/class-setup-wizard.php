@@ -556,6 +556,13 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                                             <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/default-apartment.jpg" alt="Defult">
                                         </label>
                                     </li>
+                                    <li>
+                                        <label class="tf-image-checkbox">
+                                            <input type="radio" name="tf_single_apartment"
+                                                   value="design-1" <?php echo ! empty( $tf_apartment_single_template ) && $tf_apartment_single_template == "design-1" ? esc_attr( 'checked' ) : ''; ?> >
+                                            <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/design1-apartment.jpg" alt="Defult">
+                                        </label>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -570,6 +577,13 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                                             <input type="radio" name="tf_apartment_archive"
                                                    value="default" <?php echo ! empty( $tf_apartment_archive_template ) && $tf_apartment_archive_template == "default" ? esc_attr( 'checked' ) : ''; ?> >
                                             <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/apartment-archive-default.jpg" alt="Defult">
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="tf-image-checkbox">
+                                            <input type="radio" name="tf_apartment_archive"
+                                                   value="design-1" <?php echo ! empty( $tf_apartment_archive_template ) && $tf_apartment_archive_template == "design-1" ? esc_attr( 'checked' ) : ''; ?> >
+                                            <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/tour-archive-design-2.jpg" alt="Defult">
                                         </label>
                                     </li>
                                 </ul>
