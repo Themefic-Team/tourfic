@@ -1,4 +1,8 @@
 .tf-aprtment-rules-section{
+    @media #{$max767}{
+        padding-left: 16px;
+        padding-right: 16px;
+    }
     h2{
         color: #595349;
         font-size: 32px !important;
@@ -6,12 +10,21 @@
         font-weight: 700 !important;
         line-height: 120%;
         margin-bottom: 24px !important;
+        @media #{$max767}{
+            font-size: 24px !important;
+        }
     }
     .aprtment-inc-exc{
         display: flex;
         gap: 26px;
+        @media #{$max767}{
+            flex-wrap: wrap;
+        }
         .aprtment-single-rules{
             width: 50%;
+            @media #{$max767}{
+                width: 100%;
+            }
             ul{
                 margin: 0;
                 padding: 0;

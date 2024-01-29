@@ -1,4 +1,8 @@
 .tf-place-offer-section{
+    @media #{$max767}{
+        padding-left: 16px;
+        padding-right: 16px;
+    }
     h2{
         color: #595349;
         font-size: 32px !important;
@@ -6,11 +10,17 @@
         font-weight: 700 !important;
         line-height: 120%;
         margin-bottom: 24px !important;
+        @media #{$max767}{
+            font-size: 24px !important;
+        }
     }
     .place-offer-items{
         display: grid;
         gap: 8px 16px;
         grid-template-columns: 1fr 1fr 1fr 1fr;
+        @media #{$max767}{
+            grid-template-columns: 1fr 1fr;
+        }
         .tf-apt-amenity{
             display: flex;
             gap: 9px;

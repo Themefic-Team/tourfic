@@ -15,6 +15,9 @@
         }
         .slick-track{
             margin: 0 !important;
+            .slick-slide{
+                margin: 0px 5px !important;
+            }
         }
         .tf-apartment-room-item{
             .tf-apartment-room-item-thumb{
@@ -23,6 +26,7 @@
                     img{
                         height: 200px;
                         border-radius: 4px;
+                        object-fit: cover;
                     }
                 }
             }

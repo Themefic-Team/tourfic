@@ -1,4 +1,8 @@
 .tf-facilities-wrapper {
+    @media #{$max767}{
+        padding-left: 16px;
+        padding-right: 16px;
+    }
     h2{
         color: #595349;
         font-size: 32px !important;
@@ -19,7 +23,7 @@
         margin-bottom: 32px;
         .tf-facility-item {
             width: 25%;
-            @media #{$max767}{
+            @media #{$max1024}{
                 width: 50%;
             }
             span.single-facilities-title {

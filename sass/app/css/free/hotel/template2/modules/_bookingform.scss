@@ -385,8 +385,14 @@
                 font-style: normal;
                 font-weight: 700 !important;
                 line-height: 120%; /* 38.4px */
+                @media #{$max767}{
+                    font-size: 20px !important;
+                }
                 bdi{
                     font-size: 32px !important;
+                    @media #{$max767}{
+                        font-size: 20px !important;
+                    }
                 }
             }
             span.per-pricing-type{
@@ -449,6 +455,9 @@
                         font-weight: 700 !important;
                         line-height: 120%;
                         margin: 0px;
+                        @media #{$max767}{
+                            font-size: 20px !important;
+                        }
                     }
                 }
             }

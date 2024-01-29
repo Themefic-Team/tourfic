@@ -214,6 +214,16 @@
             font-size: 16px;
         }
     }
+
+    .tf-template-3.tf-apartment-single{
+        .tf-content-wrapper .tf-details .tf-details-left {
+            width: calc(100% - 264px);
+        }
+        .tf-content-wrapper .tf-details .tf-details-right{
+            width: 240px !important;
+            padding: 0px !important;
+        }
+    }
 }
 @media only screen and (max-width: 992px) {
 
