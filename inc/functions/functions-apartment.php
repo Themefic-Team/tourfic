@@ -9,6 +9,12 @@ defined( 'ABSPATH' ) || exit;
  * Register tf_apartment
  */
 function register_tf_apartment_post_type() {
+
+	$tf_apartment_setting_permalink_slug = ! empty(tfopt( 'apartment-permalink-setting' )) ? tfopt( 'apartment-permalink-setting' ) : "apartments";
+
+	update_option("apartment_slug", $tf_apartment_setting_permalink_slug);
+
+
 	$apartment_slug = ! empty( get_option( 'apartment_slug' ) ) ? get_option( 'apartment_slug' ) : apply_filters( 'tf_apartment_slug', 'apartments' );
 
 	$apartment_labels = apply_filters( 'tf_apartment_labels', array(

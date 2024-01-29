@@ -10,6 +10,11 @@ defined( 'ABSPATH' ) || exit;
  */
 function register_tf_hotel_post_type() {
 
+	$tf_hotel_setting_permalink_slug = ! empty(tfopt( 'hotel-permalink-setting' )) ? tfopt( 'hotel-permalink-setting' ) : "hotels";
+
+	update_option("hotel_slug", $tf_hotel_setting_permalink_slug);
+	
+
 	$hotel_slug = ! empty( get_option( 'hotel_slug' ) ) ? get_option( 'hotel_slug' ) : apply_filters( 'tf_hotel_slug', 'hotels' );
 
 	$hotel_labels = apply_filters( 'tf_hotel_labels', array(
