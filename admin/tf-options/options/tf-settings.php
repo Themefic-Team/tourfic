@@ -45,8 +45,8 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => __( 'Tour Permalink', 'tourfic' ),
 					'subtitle' => __( 'Enter a permalink for your tour archive page.', 'tourfic' ),
 					"field_width" => 29,
-					'default' => ! empty(get_option("tour_slug")) ? get_option("tour_slug") : __("tours", "tourfic"),,
-					'placeholder' => !empty(get_option("tour_slug")) ? get_option("tour_slug") : __("tours", "tourfic"),
+					'default' => "tours",
+					'placeholder' => !empty(get_option("tour_slug")) ? get_option("tour_slug") : "tours",
 					'dependency' => array( 'disable-services', '!=', 'tour' ),
 					
 				),
@@ -56,8 +56,8 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => __( 'Hotel Permalink', 'tourfic' ),
 					'subtitle' => __( 'Enter a permalink for your hotel archive page.', 'tourfic' ),
 					"field_width" => 29,
-					'default' => ! empty(get_option("hotel_slug")) ? get_option("hotel_slug") : __("hotels", "tourfic"),
-					'placeholder' => ! empty(get_option("hotel_slug")) ? get_option("hotel_slug") : __("hotels", "tourfic"),
+					'default' => "hotels",
+					'placeholder' => ! empty(get_option("hotel_slug")) ? get_option("hotel_slug") : "hotels",
 					'dependency' => array( 'disable-services', '!=', 'hotel' ),
 				),
 				array(
@@ -66,8 +66,8 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => __( 'Apartment Permalink', 'tourfic' ),
 					'subtitle' => __( 'Enter a permalink for your apartment archive page.', 'tourfic' ),
 					"field_width" => 29,
-					'default' => ! empty(get_option("apartment_slug")) ? get_option("apartment_slug") : __("apartments", 'tourfic'),
-					'placeholder' => ! empty(get_option("apartment_slug")) ? get_option("apartment_slug") : __("apartments", 'tourfic'),
+					'default' => "apartments",
+					'placeholder' => ! empty(get_option("apartment_slug")) ? get_option("apartment_slug") : "apartments",
 					'dependency' => array( 'disable-services', '!=', 'apartment' ),
 				),
 				array(

@@ -2225,3 +2225,34 @@ if ( ! function_exists( 'tourfic_vendor_order_table_data' ) ) {
 		return $orders_result;
 	}
 }
+
+function tf_permalink_settings_migration() {
+
+	if ( empty( get_option( 'tf_permalink_settings_migration' ) ) ) {
+
+		$options = get_option( 'tf_settings' );
+		$hotel_permalink_slug = ! empty( get_option( 'hotel_slug' ) ) ? get_option( 'hotel_slug' ) : '' ;
+		$tour_permalink_slug = ! empty( get_option( 'tour_slug' ) ) ? get_option( 'tour_slug' ) : '' ;
+		$apt_permalink_slug = ! empty( get_option( 'apartment_slug' ) ) ? get_option( 'apartment_slug' ) : '' ;
+
+		if (!empty($hotel_permalink_slug)) {
+			$options["hotel-permalink-setting"] = $hotel_permalink_slug;
+		}
+		
+		if (!empty($tour_permalink_slug)) {
+			$options["tour-permalink-setting"] = $tour_permalink_slug;
+		}
+		
+		if (!empty($apt_permalink_slug)) {
+			$options["apartment-permalink-setting"] = $apt_permalink_slug;
+		}
+		
+		update_option( 'tf_settings', $options );
+		wp_cache_flush();
+		flush_rewrite_rules( true );
+		update_option( 'tf_permalink_settings_migration', 1 );
+
+	}
+}
+
+add_action( 'init', 'tf_permalink_settings_migration' );
