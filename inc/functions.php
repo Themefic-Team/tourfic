@@ -2256,3 +2256,21 @@ function tf_permalink_settings_migration() {
 }
 
 add_action( 'init', 'tf_permalink_settings_migration' );
+
+/* Text Limit
+* @Author Jahid
+*/
+if( ! function_exists('tourfic_character_limit_callback') ){
+    function tourfic_character_limit_callback($str, $limit, $dots = true)
+    {
+		if(strlen($str) > $limit ){
+			if($dots == true) {
+				return substr($str, 0, $limit) . '...';
+			} else {
+				return substr($str, 0, $limit);
+			}
+		}else{
+			return $str;
+		}
+    }
+}

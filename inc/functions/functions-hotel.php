@@ -2427,7 +2427,15 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 					?>
                     <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
                         <i class="fa-solid fa-location-dot"></i>
-                        <p><?php echo $address; ?></p>
+                        <p>
+							<?php 
+								if (strlen($address) > 120 ) {
+									echo tourfic_character_limit_callback($address, 120);
+								} else {
+									echo $address;
+								}
+							?>
+						</p>
                     </div>
 				<?php } ?>
                 <div class="tf-title tf-mt-16">
@@ -2534,7 +2542,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 							<?php
 							if ( $address ) {
 								echo '<div class="tf-map-link">';
-								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . $address . '</span>';
+								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . strlen($address) > 75 ? tourfic_character_limit_callback($address, 76) : $address . '</span>';
 								echo '</div>';
 							}
 							?>

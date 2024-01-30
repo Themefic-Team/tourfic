@@ -2290,7 +2290,15 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
             ?>
             <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
                 <i class="fa-solid fa-location-dot"></i>
-                <p><?php echo $location; ?></p>
+                <p>
+				<?php 
+					if (strlen($location) > 120 ) {
+						echo tourfic_character_limit_callback($location, 120);
+					} else {
+						echo $location;
+					}
+				?>
+				</p>
             </div>
             <?php } ?>
             <div class="tf-title tf-mt-16">
@@ -2367,7 +2375,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 							<?php
 							if ( $location ) {
 								echo '<div class="tf-map-link">';
-								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . $location . '</span>';
+								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . strlen($location) > 75 ? tourfic_character_limit_callback($location, 76) : $location . '</span>';
 								echo '</div>';
 							}
 							?>

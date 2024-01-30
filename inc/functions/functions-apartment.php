@@ -898,7 +898,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 							<?php
 							if ( $address ) {
 								echo '<div class="tf-map-link">';
-								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . $address . '</span>';
+								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . strlen($address) > 75 ? tourfic_character_limit_callback($address, 76) : $address . '</span>';
 								echo '</div>';
 							}
 							?>
