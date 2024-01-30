@@ -717,7 +717,9 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 				$tf_settings['h-share']  = ! empty( $hotel_share ) ? 0 : 1;
 
 				if ( ! empty( $hotel_permalink ) ) {
-					update_option( 'hotel_slug', $hotel_permalink );
+					// update_option( 'hotel_slug', $hotel_permalink );
+                    $tf_settings["hotel-permalink-setting"] = $hotel_permalink;
+
 				}
 			}
 
@@ -726,7 +728,8 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 				$tf_settings['t-related'] = ! empty( $tour_related ) ? 0 : 1;
 
 				if ( ! empty( $tour_permalink ) ) {
-					update_option( 'tour_slug', $tour_permalink );
+					// update_option( 'tour_slug', $tour_permalink );
+                    $tf_settings["tour-permalink-setting"] = $tour_permalink;
 				}
 			}
 
@@ -735,7 +738,8 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 				$tf_settings['disable-apartment-share']  = ! empty( $apartment_share ) ? 0 : 1;
 
 				if ( ! empty( $apartment_permalink ) ) {
-					update_option( 'apartment_slug', $apartment_permalink );
+					// update_option( 'apartment_slug', $apartment_permalink );
+                    $tf_settings["apartment-permalink-setting"] = $apartment_permalink;
 				}
 			}
 
