@@ -12,11 +12,12 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.0
  */
 function register_tf_tours_post_type() {
-	$tf_tour_setting_permalink_slug = ! empty(tfopt( 'tour-permalink-setting' )) ? tfopt( 'tour-permalink-setting' ) : "tours";
+
+	$tf_tour_setting_permalink_slug = ! empty(tfopt( 'tour-permalink-setting' )) ? tfopt( 'tour-permalink-setting' ) : ( ! empty( get_option( 'tour_slug' ) ) ? get_option( 'tour_slug' ) : "tours" );
 
 	update_option("tour_slug", $tf_tour_setting_permalink_slug);
-
-	$tour_slug = ! empty( get_option( 'tour_slug' ) ) ? get_option( 'tour_slug' ) : apply_filters( 'tf_tours_slug', 'tours' );
+	
+	$tour_slug = get_option( 'tour_slug' );
 
 	$tour_labels = apply_filters( 'tf_tours_labels', array(
 		'name'                  => _x( '%2$s', 'tourfic post type name', 'tourfic' ),
