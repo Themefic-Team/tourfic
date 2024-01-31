@@ -468,12 +468,8 @@ if ( $disable_related_sec !== '1' ) {
                                                     <?php echo tourfic_character_limit_callback(get_the_title($selected_design_post_id), 35); ?>
                                                     </a></h2>
                                                     <div class="tf-meta-data-price">
-                                                        <span>
-                                                        <?php
-                                                        echo !empty($apartment_min_price["min"]) ? wc_price($apartment_min_price["min"]) : '';
-                                                        ?>
-                                                        </span>
-                                                        <span class="pricing_calc_type">/<?php echo $pricing_type; ?></span>
+                                                        <span><?php echo !empty($apartment_min_price["min"]) ? wc_price($apartment_min_price["min"]) : '';
+                                                        ?></span><span class="pricing_calc_type">/<?php echo $pricing_type; ?></span>
                                                     </div>
                                                 </div>
                                                 <div class="tf-meta-location">
