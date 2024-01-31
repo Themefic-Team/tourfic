@@ -468,21 +468,17 @@ add_filter( 'comment_link', 'tf_comment_reply_link_filter' );
 function tf_archive_single_rating() {
 
 	$comments        = get_comments( [ 'post_id' => get_the_ID(), 'status' => 'approve' ] );
+	$tf_current_post = get_post_type();
 	$tf_overall_rate = [];
 	tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rate );
 	if ( $comments ) {
 		ob_start();
 		?>
 		<?php
-		$tf_plugin_installed = get_option('tourfic_template_installed'); 
-		if (!empty($tf_plugin_installed)) {
-			$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
-			$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
-		}else{
-			$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'default';
-			$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'default';
-		}
-		if( ( $tf_tour_arc_selected_template=="design-1" ) || ( $tf_hotel_arc_selected_template=="design-1" ) ){
+		$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
+		$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
+		
+		if( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-1" ) || ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-1" ) ){
 		?>
 			<div class="tf-reviews tf-flex tf-mt-16 tf-flex-gap-12">
 				<div class="tf-review-items">
@@ -530,6 +526,10 @@ function tf_archive_single_rating() {
 				 (<?php tf_based_on_text( count( $comments ) ); ?>)
 				</div>
 			</div>
+		<?php } elseif( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-2" ) || ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-2" ) ){ ?>
+			<span class="tf-available-rating-number">
+				<?php _e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
+			</span>
 		<?php }else{ ?>
 			<div class="tf-archive-rating-wrapper">
 				<div class="tf-archive-rating">
@@ -543,15 +543,11 @@ function tf_archive_single_rating() {
 		}
 		echo ob_get_clean();
 	}else{
-		$tf_plugin_installed = get_option('tourfic_template_installed'); 
-		if (!empty($tf_plugin_installed)) {
-			$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
-			$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
-		}else{
-			$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'default';
-			$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'default';
-		}
-		if( ( $tf_tour_arc_selected_template=="design-1" ) || ( $tf_hotel_arc_selected_template=="design-1" ) ){
+		
+		$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
+		$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
+		
+		if( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-1" ) || ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-1" ) ){
 		?>
 		<div class="tf-reviews tf-flex tf-mt-16 tf-flex-gap-12">
 			<div class="tf-review-items">
@@ -562,7 +558,11 @@ function tf_archive_single_rating() {
 			</div>
 		</div>
 		<?php
-		}
+		} elseif( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-2" ) || ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-2" ) ){ ?>
+			<span class="tf-available-rating-number">
+				<?php _e('0.0','tourfic'); ?>
+			</span>
+		<?php }
 	}
 }
 

@@ -172,7 +172,7 @@ h3.section-heading {
         display: block;
         transition: 0.5s;
         position: absolute;
-        background: #0054a8;
+        background: #003162;
         content: attr(data-back);
         transform: translateY(-50%) rotateX(90deg);
         border-radius: 4px;
@@ -426,7 +426,7 @@ ul.tf-sidebar-checkbox {
     }
 }
 .tf_booking-widget {
-    background: #FA5535 !important;
+    background: #FA5535;
     background: linear-gradient(to bottom, #FD6143 0, #FA5535 100%);
     border-color: #FA5535;
     padding: 20px !important;

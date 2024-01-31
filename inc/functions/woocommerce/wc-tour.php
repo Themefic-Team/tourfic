@@ -94,6 +94,47 @@ function tf_tours_booking_function() {
 			$tf_tour_booking_limit = ! empty( $meta['fixed_availability']['max_capacity'] ) ? $meta['fixed_availability']['max_capacity'] : 0; 
 		}
 
+		if(!function_exists("selected_day_diff")) {
+			function selected_day_diff ($start_date, $end_date) {
+				if(!empty($start_date) && !empty($end_date)) {
+
+					$start_date = new DateTime($start_date);
+					$end_date   = new DateTime($end_date);
+					$interval 	= $start_date->diff($end_date);
+
+					return $interval->days;
+				}	
+			}
+		}
+
+		if(!function_exists("end_date_calculation")) {
+			function end_date_calculation ($start_date, $difference) {
+				if(!empty($start_date) && !empty($difference)) {
+					if(str_contains($start_date, ' - ')) {
+						return $start_date;
+
+					} else {
+						
+						$start_date  = new DateTime($start_date);
+						$new_end_day = $start_date->modify("+ $difference day");
+
+						return $new_end_day->format('Y/m/d');
+					}
+				}	
+			}
+		}
+
+		if( !empty($start_date) && !empty($end_date)) {
+			$day_diff = selected_day_diff($start_date, $end_date );
+		}
+
+		if(!empty($tour_type) && ($tour_type == "fixed")) {
+			$start_date = ! empty( $_POST['check-in-out-date'] ) ? sanitize_text_field( $_POST['check-in-out-date'] ) : '';
+		}
+
+		if(!empty($start_date) && !empty($day_diff)) {
+			$end_date = end_date_calculation($start_date, $day_diff);
+		}
 
 		// Fixed tour maximum capacity limit
 	
@@ -271,15 +312,22 @@ function tf_tours_booking_function() {
 	// Tour extra
 	$tour_extra_total = 0;
 	$tour_extra_title_arr = [];
+	
 	$tour_extra_meta = ! empty( $meta['tour-extra'] ) ? $meta['tour-extra'] : '';
 	if(!empty($tour_extra_meta)){
 		$tours_extra = explode(',', $_POST['tour_extra']);
-		foreach($tours_extra as $extra){
+		$tour_extra_quantity = explode(',', $_POST["tour_extra_quantity"]);
+		foreach($tours_extra as $extra_key => $extra){
 			$tour_extra_pricetype = !empty( $tour_extra_meta[$extra]['price_type'] ) ? $tour_extra_meta[$extra]['price_type'] : 'fixed';
 			if( $tour_extra_pricetype=="fixed" ){
 				if(!empty($tour_extra_meta[$extra]['title']) && !empty($tour_extra_meta[$extra]['price'])){
 					$tour_extra_total += $tour_extra_meta[$extra]['price'];
 					$tour_extra_title_arr[] =  $tour_extra_meta[$extra]['title']." (Fixed: ".wc_price($tour_extra_meta[$extra]['price']).")";
+				}
+			} else if($tour_extra_pricetype == "quantity") {
+				if(!empty($tour_extra_meta[$extra]['title']) && !empty($tour_extra_meta[$extra]['price'])){
+					$tour_extra_total += $tour_extra_meta[$extra]['price'] * $tour_extra_quantity[$extra_key];
+					$tour_extra_title_arr[] = $tour_extra_meta[$extra]['title']." (Per Unit: ".wc_price($tour_extra_meta[$extra]['price']).'*'.$tour_extra_quantity[$extra_key]."=".wc_price($tour_extra_meta[$extra]['price']*$tour_extra_quantity[$extra_key]).")";
 				}
 			}else{
 				if(!empty($tour_extra_meta[$extra]['price']) && !empty($tour_extra_meta[$extra]['title'])){

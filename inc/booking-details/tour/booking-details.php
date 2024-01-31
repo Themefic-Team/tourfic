@@ -80,7 +80,9 @@
         <thead>
             <tr>
                 <td id="cb">
-                    <input id="cb-select-all-1" type="checkbox">
+                    <div class="tf-checkbox-listing">
+                        <input id="cb-select-all-1" type="checkbox">
+                    </div>
                 </td>
                 <th id="order_id">
                     <?php _e("ID", "tourfic"); ?>
@@ -112,10 +114,12 @@
             foreach($tours_orders_result as $tour){ ?>
             <tr>
                 <th class="check-column">
-                    <input type="checkbox" name="order_id[]" value="<?php echo esc_html( $tour['id'] ); ?>">
+                    <div class="tf-checkbox-listing">
+                        <input type="checkbox" name="order_id[]" value="<?php echo esc_html( $tour['id'] ); ?>">
+                    </div>
                 </th>
                 <td>
-                    <a href="<?php echo admin_url(); ?>edit.php?post_type=tf_tours&amp;page=tf_tours_booking&amp;order_id=<?php echo esc_attr($tour['order_id']); ?>&amp;book_id=<?php echo esc_attr($tour['id']); ?>&amp;action=preview" class="tf_booking_details_view">
+                    <a href="<?php echo admin_url(); ?>edit.php?post_type=tf_tours&amp;page=tf_tours_booking&amp;order_id=<?php echo esc_attr($tour['order_id']); ?>&amp;book_id=<?php echo esc_attr($tour['id']); ?>&amp;action=preview">
                         <?php echo esc_html( $tour['order_id'] ); ?>
                     </a>
                 </td>

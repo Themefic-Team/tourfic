@@ -677,3 +677,4 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 			?>
 		<?php } ?>
     </div>
+</div>

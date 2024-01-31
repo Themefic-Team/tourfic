@@ -150,9 +150,6 @@ i {
     flex-basis: 41%;
     position: relative;
     .tf-features-box{
-        position: absolute;
-        top: 20px;
-        left: 20px;
         .tf-discount {
             background: #fff;
             padding: 6px 12px;
@@ -171,6 +168,28 @@ i {
             font-weight: $font-weight-medium;
             color: #fff;
             line-height: 1;
+            margin-right: 5px;
+        }
+    }
+    .tf-tag-items {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        max-height: 90%;
+        overflow: hidden;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        align-items: baseline;
+        text-transform: capitalize;
+
+        .tf-multiple-tag-item {
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: $font-weight-medium;
+            line-height: 1;
+            margin-top: 5px;
         }
     }
 
@@ -352,6 +371,9 @@ i {
     .tf-archive-right{
         .tf-destination-box{
             .autocomplete-items {
+                max-height: 120px;
+                overflow: scroll;
+                overflow-x: hidden;
                 position: absolute;
                 border: 1px solid #d4d4d4;
                 border-bottom: none;

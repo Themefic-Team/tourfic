@@ -5,6 +5,24 @@ $badge_up     = '<div class="tf-csf-badge"><span class="tf-upcoming">' . __( "Up
 $badge_pro    = '<div class="tf-csf-badge"><span class="tf-pro">' . __( "Pro Feature", "tourfic" ) . '</span></div>';
 $badge_up_pro = '<div class="tf-csf-badge"><span class="tf-upcoming">' . __( "Upcoming", "tourfic" ) . '</span><span class="tf-pro">' . __( "Pro Feature", "tourfic" ) . '</span></div>';
 
+if(!function_exists('tf_hotel_facilities_categories')) {
+	function tf_hotel_facilities_categories() {
+		$facilities_cats = ! empty( tf_data_types( tfopt( 'hotel_facilities_cats' ) ) ) ? tf_data_types( tfopt( 'hotel_facilities_cats' ) ) : '';
+		$all_cats       = [];
+		if ( ! empty( $facilities_cats ) && is_array( $facilities_cats ) ) {
+			foreach ( $facilities_cats as $key => $cat ) {
+				$all_cats[ (string) $key ] = $cat['hotel_facilities_cat_name'];
+			}
+		}
+	
+		if(empty($all_cats)){
+			$all_cats[''] = __( 'Select Category', 'tourfic' );
+		}
+	
+		return $all_cats;
+	}
+}
+
 TF_Metabox::metabox( 'tf_hotels_opt', array(
 	'title'     => 'Hotel Settings',
 	'post_type' => 'tf_hotel',
@@ -64,6 +82,10 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 						'design-1' 				=> array(
 							'title'			=> 'Design 1',
 							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design1-hotel.jpg",
+						),
+						'design-2' 				=> array(
+							'title'			=> 'Design 2',
+							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design2-hotel.jpg",
 						),
 						'default' 			=> array(
 							'title'			=> 'Defult',
@@ -179,6 +201,117 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 						'scrollWheelZoom' => true,
 					),
 				),
+			),
+		),
+		//Hotel Info
+		'hotel_info' => array(
+			'title'  => __( 'Information\'s', 'tourfic' ),
+			'icon'   => 'fa-solid fa-info-circle',
+			'fields' => array(
+				// nearby Places
+				array(
+					'id'      => 'nearby-places-heading',
+					'type'    => 'heading',
+					'content' => __( 'Nearby Places', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'          => 'section-title',
+					'type'        => 'text',
+					'label'       => __( 'Add Section Title', 'tourfic' ),
+					'placeholder' => __( "What's around?", 'tourfic' ),
+					'default' => __( "What's around?", 'tourfic' ),
+					'attributes'  => array(
+						'required' => 'required',
+					),
+				),
+				array(
+					'id'           => 'nearby-places',
+					'type'         => 'repeater',
+					'label'        => __( 'Insert / Create your hotel Place', 'tourfic' ),
+					'button_title' => __( 'Add New Place', 'tourfic' ),
+					'class'        => 'tf-field-class',
+					'fields'       => array(
+						array(
+							'id'          => 'place-title',
+							'type'        => 'text',
+							'subtitle'    => __( 'e.g. Rail Station', 'tourfic' ),
+							'label'       => __( 'Name', 'tourfic' ),
+							'field_width' => 50,
+						),
+						array(
+							'id'          => 'place-dist',
+							'type'        => 'text',
+							'label'       => __( 'Place Distance and Unit', 'tourfic' ),
+							'subtitle'    => __( 'Distance of the place from the Hotel with Unit', 'tourfic' ),
+							'field_width' => 50,
+							'attributes'  => array(
+								'min' => '0',
+							),
+						),
+						array(
+							'id'       => 'place-icon',
+							'type'     => 'icon',
+							'label'    => __( 'Place Item Icon', 'tourfic' ),
+							'subtitle' => __( 'Choose an appropriate icon', 'tourfic' ),
+						),
+					)
+				), // nearby places end
+
+				// facilities
+				array(
+					'id'      => 'facilities-heading',
+					'type'    => 'heading',
+					'content' => __( 'Hotel Facilities', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'          => 'facilities-section-title',
+					'type'        => 'text',
+					'label'       => __( 'Facilities Title', 'tourfic' ),
+					'placeholder' => __( "Property facilities", 'tourfic' ),
+					'default' => __( "Property facilities", 'tourfic' ),
+					'attributes'  => array(
+						'required' => 'required',
+					),
+				),
+				array(
+					'id'           => 'hotel-facilities',
+					'type'         => 'repeater',
+					'label'        => __( 'Insert / Create Hotel Facilities', 'tourfic' ),
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'class'        => 'tf-field-class',
+					'fields'       => array(
+						array(
+							'id'          => 'facilities-feature',
+							'type'        => 'select2',
+							'label'       => __( 'Facilities Feature', 'tourfic' ),
+							'placeholder' => __( 'Select facilities feature', 'tourfic' ),
+							'options'     => 'terms',
+							'query_args'  => array(
+								'taxonomy'   => 'hotel_feature',
+								'hide_empty' => false,
+							),
+							'field_width' => 50,
+						),
+						array(
+							'id'          => 'facilities-category',
+							'type'        => 'select2',
+							'label'       => __( 'Facilities Category', 'tourfic' ),
+							'placeholder' => __( 'Select facilities category', 'tourfic' ),
+							'options'     => tf_hotel_facilities_categories(),
+							'description' => __( 'Add new category from <a target="_blank" href="'.admin_url('admin.php?page=tf_settings#tab=single_page').'">Facilities Categories</a>', 'tourfic' ),
+							'field_width' => 50,
+						),
+						array(
+							'id'        => 'favorite',
+							'type'      => 'switch',
+							'label'     => __( 'Mark as Favorite', 'tourfic' ),
+							'label_on'  => __( 'Yes', 'tourfic' ),
+							'label_off' => __( 'No', 'tourfic' ),
+						),
+					)
+				), // facilities end
 			),
 		),
 		// Hotel Details
@@ -822,7 +955,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'type'         => 'repeater',
 					'label'        => __( 'Add Your Questions', 'tourfic' ),
 					'subtitle'    => __( 'Click the button below to add Frequently Asked Questions (FAQs) for your hotel. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each FAQ using the icons on the right side.', 'tourfic' ),
-					'button_title' => __( 'Add FAQ', 'tourfic' ),
+					'button_title' => __( 'Add New FAQ', 'tourfic' ),
 					'fields'       => array(
 
 						array(
@@ -888,6 +1021,52 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'label' => __( 'Enquiry Button Text', 'tourfic' ),
 					'default'    => "Ask a Question",
 					'dependency' => array( 'h-enquiry-section', '==', '1' ),
+				),
+			),
+		),
+		
+		// Multiple tags for hotels
+		'hotel_multiple_tags' => array(
+			'title'  => __( 'Labels', 'tourfic' ),
+			'icon'   => 'fa fa-list',
+			'fields' => array(
+				array(
+					'id'      => 'tf-hotel-tags-heading',
+					'type'    => 'heading',
+					'label' => __( 'Hotel labels', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'           => 'tf-hotel-tags',
+					'type'         => 'repeater',
+					'label'        => __( 'Labels', 'tourfic' ),
+					'subtitle' => __('Add some keywords that highlight your hotel\'s Unique Selling Point (USP). This label will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
+					'button_title' => __( 'Add / Insert New Label', 'tourfic' ),
+					'fields'       => array(
+
+						array(
+							'id'    => 'hotel-tag-title',
+							'type'  => 'text',
+							'label' => __( 'Label Title', 'tourfic' ),
+						),
+
+						array(
+							'id'       => 'hotel-tag-color-settings',
+							'type'     => 'color',
+							'label'    => __( 'Label Colors', 'tourfic' ),
+							'subtitle' => __( 'Colors of Label Background and Font', 'tourfic' ),
+							'multiple' => true,
+							'inline'   => true,
+							'colors'   => array(
+								'background' => __( 'Background', 'tourfic' ),
+								'font'   => __( 'Font', 'tourfic' ),
+							),
+							'default' => array(
+								'background' => '#003162',
+								'font' => '#fff'
+							),
+						),
+					),
 				),
 			),
 		),

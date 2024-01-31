@@ -413,6 +413,13 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                                     <li>
                                         <label class="tf-image-checkbox">
                                             <input type="radio" name="tf_single_hotel"
+                                                    value="design-2" <?php echo ! empty( $tf_hotel_single_template ) && $tf_hotel_single_template == "design-2" ? esc_attr( 'checked' ) : ''; ?> >
+                                            <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/design2-hotel.jpg" alt="Design 2">
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="tf-image-checkbox">
+                                            <input type="radio" name="tf_single_hotel"
                                                    value="default" <?php echo ! empty( $tf_hotel_single_template ) && $tf_hotel_single_template == "default" ? esc_attr( 'checked' ) : ''; ?> >
                                             <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/default-hotel.jpg" alt="Defult">
                                         </label>
@@ -431,6 +438,13 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                                             <input type="radio" name="tf_hotel_archive"
                                                    value="design-1" <?php echo ! empty( $tf_hotel_archive_template ) && $tf_hotel_archive_template == "design-1" ? esc_attr( 'checked' ) : ''; ?> >
                                             <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/hotel-archive-design1.jpg" alt="Design 1">
+                                        </label>
+                                    </li> 
+                                    <li>
+                                        <label class="tf-image-checkbox">
+                                            <input type="radio" name="tf_hotel_archive"
+                                                   value="design-2" <?php echo ! empty( $tf_hotel_archive_template ) && $tf_hotel_archive_template == "design-2" ? esc_attr( 'checked' ) : ''; ?> >
+                                            <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/hotel-archive-design2.jpg" alt="Design 1">
                                         </label>
                                     </li>
                                     <li>
@@ -472,6 +486,13 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                                     <li>
                                         <label class="tf-image-checkbox">
                                             <input type="radio" name="tf_single_tour"
+                                                   value="design-1" <?php echo ! empty( $tf_tour_single_template ) && $tf_tour_single_template == "design-2" ? esc_attr( 'checked' ) : ''; ?> >
+                                            <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/design2-tour.jpg" alt="Design 2">
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="tf-image-checkbox">
+                                            <input type="radio" name="tf_single_tour"
                                                    value="default" <?php echo ! empty( $tf_tour_single_template ) && $tf_tour_single_template == "default" ? esc_attr( 'checked' ) : ''; ?> >
                                             <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/default-tour.jpg" alt="Defult">
                                         </label>
@@ -490,6 +511,13 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                                             <input type="radio" name="tf_tour_archive"
                                                    value="design-1" <?php echo ! empty( $tf_tour_archive_template ) && $tf_tour_archive_template == "design-1" ? esc_attr( 'checked' ) : ''; ?> >
                                             <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/tour-archive-design-1.jpg" alt="Design 1">
+                                        </label>
+                                    </li> 
+                                    <li>
+                                        <label class="tf-image-checkbox">
+                                            <input type="radio" name="tf_tour_archive"
+                                                   value="design-2" <?php echo ! empty( $tf_tour_archive_template ) && $tf_tour_archive_template == "design-2" ? esc_attr( 'checked' ) : ''; ?> >
+                                            <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/tour-archive-design-2.jpg" alt="Design 2">
                                         </label>
                                     </li>
                                     <li>

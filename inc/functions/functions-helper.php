@@ -461,14 +461,16 @@ function tourfic_posts_navigation( $wp_query = '' ) {
 	}
 	$max_num_pages = $wp_query->max_num_pages;
 	$paged         = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
-	echo "<div id='tf_posts_navigation_bar'>";
-	echo paginate_links( array(
-		'current'   => $paged,
-		'total'     => $max_num_pages,
-		'mid_size'  => 2,
-		'prev_next' => true,
-	) );
-	echo "</div>";
+	if($max_num_pages>1){
+		echo "<div id='tf_posts_navigation_bar'>";
+		echo paginate_links( array(
+			'current'   => $paged,
+			'total'     => $max_num_pages,
+			'mid_size'  => 2,
+			'prev_next' => true,
+		) );
+		echo "</div>";
+	}
 
 }
 
@@ -476,10 +478,11 @@ function tourfic_posts_navigation( $wp_query = '' ) {
  * Flatpickr locale
  */
 if ( ! function_exists( 'tf_flatpickr_locale' ) ) {
-	function tf_flatpickr_locale() {
+	function tf_flatpickr_locale($placement = 0) {
 
 		$flatpickr_locale = ! empty( get_locale() ) ? get_locale() : 'en_US';
 		$allowed_locale   = array( 'ar', 'bn_BD', 'de_DE', 'es_ES', 'fr_FR', 'hi_IN', 'it_IT', 'nl_NL', 'ru_RU', 'zh_CN' );
+		$tf_first_day_of_week = !empty(tfopt("tf-week-day-flatpickr")) ? tfopt("tf-week-day-flatpickr") : 0;
 
 		if ( in_array( $flatpickr_locale, $allowed_locale ) ) {
 
@@ -512,12 +515,22 @@ if ( ! function_exists( 'tf_flatpickr_locale' ) ) {
 					$flatpickr_locale = 'zh';
 					break;
 			}
-
-			echo 'locale: "' . $flatpickr_locale . '",';
+		}else {
+			$flatpickr_locale = 'default';
 		}
 
+		if(!empty($placement) && !empty($flatpickr_locale) && $placement == "root") {
+
+			echo <<<EOD
+				window.flatpickr.l10ns.$flatpickr_locale.firstDayOfWeek = $tf_first_day_of_week;
+			EOD;
+
+		} else {
+			echo 'locale: "' . $flatpickr_locale . '",';
+		}
 	}
 }
+
 
 /**
  * Flatten a multi-dimensional array into a single level.
@@ -655,10 +668,19 @@ function tourfic_admin_menu_order_change ( $menu_order ) {
 
 		// // remove previous orders
 		unset( $menu_order[$tourfic_separator] );
-		unset( $menu_order[$tourfic_tours] );
-		unset( $menu_order[$tourfic_hotel] );
-		unset( $menu_order[$tourfic_apt] );
 		unset( $menu_order[$tourfic_separator2] );
+
+		if(!empty($tourfic_apt)) {
+			unset( $menu_order[$tourfic_apt] );
+		}
+
+		if(!empty($tourfic_tours)) {
+			unset( $menu_order[$tourfic_tours] );
+		}
+
+		if(!empty($tourfic_hotel)) {
+			unset( $menu_order[$tourfic_hotel] );
+		}
 		
 		if(!empty($tourfic_vendor)) {
 			unset( $menu_order[$tourfic_vendor] );

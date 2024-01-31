@@ -294,9 +294,40 @@ a.slick-slide-item-link {
     top: 33px;
     transform: rotate(-45deg);
   }
+
+  .nearby-container {
+    display: block;
+    background-color: #fff;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px 20px 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 24px 5px #E0E8EE;
+    h3{
+        margin: 0;
+        text-transform: capitalize;
+        font-size: 22px !important;
+    }
+    ul {
+        padding-left: 5px;
+        font-size: 15px; 
+        margin: 0;
+        li {
+            list-style-type: none;
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            text-transform: capitalize;
+            i {
+                padding-right: 5px;
+                font-size: 14px;
+            }
+        }
+    }
+  }
 /**************** FEATURES ****************/
 .tf_features {
-    padding-top: 50px;
+    padding: 5px 0 30px 0;
 }
 
 .tf_features .feature-list-title {
@@ -535,6 +566,12 @@ span.tf-price .amount {
             min-height: 50px;
             max-height: 50px;
         }
+    }
+}
+
+.tf-room{
+    .tf-withoutpayment-booking{
+        text-align: left;
     }
 }
 

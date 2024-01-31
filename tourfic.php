@@ -7,11 +7,11 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.10.13
- * Tested up to:    6.4
- * WC tested up to: 8.4
+ * Version:         2.11.7
+ * Tested up to:    6.4.2
+ * WC tested up to: 8.5
  * Requires PHP:    7.2
- * Elementor tested up to: 3.18.2
+ * Elementor tested up to: 3.18.3
  */
 
 // don't load directly
@@ -59,7 +59,7 @@ if ( ! class_exists( 'Appsero\Client' ) ) {
  * @since 1.0
  */
 if ( ! defined( 'TOURFIC' ) ) {
-	define( 'TOURFIC', '2.10.13' );
+	define( 'TOURFIC', '2.11.7' );
 }
 
 /**
@@ -81,50 +81,6 @@ if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 	return;
 }
 
-/**
- * Enqueue Main Admin scripts
- *
- * @since 1.0
- */
-if ( ! function_exists( 'tf_enqueue_main_admin_scripts' ) ) {
-	function tf_enqueue_main_admin_scripts() {
-
-		//date format
-		$date_format_change  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
-
-		// Custom
-		wp_enqueue_style( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css', '', TOURFIC );
-		wp_enqueue_style( 'tf-admin', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin.min.css', '', TOURFIC );
-		wp_enqueue_script( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js', array( 'jquery' ), TOURFIC, true );
-		wp_enqueue_script( 'tf-fullcalender', TF_ASSETS_ADMIN_URL . 'js/lib/fullcalender.min.js', array( 'jquery' ), TOURFIC, true );
-		wp_enqueue_script( 'tf-admin', TF_ASSETS_ADMIN_URL . 'js/tourfic-admin-scripts.min.js', array( 'jquery', 'wp-data', 'wp-editor', 'wp-edit-post' ), TOURFIC, true );
-		wp_localize_script( 'tf-admin', 'tf_admin_params',
-			array(
-				'tf_nonce'                         => wp_create_nonce( 'updates' ),
-				'ajax_url'                         => admin_url( 'admin-ajax.php' ),
-				'deleting_old_review_fields'       => __( 'Deleting old review fields...', 'tourfic' ),
-				'deleting_room_order_ids'          => __( 'Deleting order ids...', 'tourfic' ),
-				'tour_location_required'           => __( 'Tour Location is a required field!', 'tourfic' ),
-				'hotel_location_required'          => __( 'Hotel Location is a required field!', 'tourfic' ),
-				'apartment_location_required'      => __( 'Apartment Location is a required field!', 'tourfic' ),
-				'tour_feature_image_required'      => __( 'Tour image is a required!', 'tourfic' ),
-				'hotel_feature_image_required'     => __( 'Hotel image is a required!', 'tourfic' ),
-				'apartment_feature_image_required' => __( 'Apartment image is a required!', 'tourfic' ),
-				'installing'                       => __( 'Installing...', 'tourfic' ),
-				'activating'                       => __( 'Activating...', 'tourfic' ),
-				'installed'                        => __( 'Installed', 'tourfic' ),
-				'activated'                        => __( 'Activated', 'tourfic' ),
-				'install_failed'                   => __( 'Install failed', 'tourfic' ),
-				'date_format_change_backend' 	   => $date_format_change,
-				'i18n'                             => array(
-					'no_services_selected' => __( 'Please select at least one service.', 'tourfic' ),
-				)
-			)
-		);
-	}
-
-	add_action( 'admin_enqueue_scripts', 'tf_enqueue_main_admin_scripts', 9 );
-}
 
 // Styles & Scripts
 if ( ! defined( 'TOURFIC_PRO_SCRIPT' ) ) {
@@ -238,11 +194,41 @@ function tf_is_woo() {
 	if ( current_user_can( 'activate_plugins' ) ) {
 		if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) && ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) {
 			?>
-
             <div id="message" class="error">
                 <p><?php printf( __( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
-                <p><a class="install-now button" href="<?php echo esc_url( admin_url( '/plugin-install.php?s=slug:woocommerce&tab=search&type=term' ) ); ?>"><?php _e( 'Install Now', 'tourfic' ); ?></a></p>
+                <p><a id="tf_wooinstall" class="install-now button" data-plugin-slug="woocommerce"><?php _e( 'Install Now', 'tourfic' ); ?></a></p>
             </div>
+
+			<script>
+				jQuery(document).on('click', '#tf_wooinstall', function (e) {
+					e.preventDefault();
+					var current = jQuery(this);
+					var plugin_slug = current.attr("data-plugin-slug");
+					var ajax_url= '<?php echo admin_url( 'admin-ajax.php' )?>';
+
+					current.addClass('updating-message').text('Installing...');
+					
+					var data = {
+						action: 'tf_ajax_install_plugin',
+						_ajax_nonce: '<?php echo wp_create_nonce( 'updates' )?>',
+						slug: plugin_slug,
+					};
+
+					jQuery.post(ajax_url, data, function (response) {
+						current.removeClass('updating-message');
+						current.addClass('updated-message').text('Installing...');
+						current.attr("href", response.data.activateUrl);
+					})
+						.fail(function () {
+							current.removeClass('updating-message').text('Install Failed');
+						})
+						.always(function () {
+							current.removeClass('install-now updated-message').addClass('activate-now button-primary').text('Activating...');
+							current.unbind(e);
+							current[0].click();
+						});
+				});
+			</script>
 
 			<?php
 		} elseif ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) && file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) {
@@ -253,7 +239,6 @@ function tf_is_woo() {
                 <p><a href="<?php echo get_admin_url(); ?>plugins.php?_wpnonce=<?php echo wp_create_nonce( 'activate-plugin_woocommerce/woocommerce.php' ); ?>&action=activate&plugin=woocommerce/woocommerce.php"
                       class="button activate-now button-primary"><?php _e( 'Activate', 'tourfic' ); ?></a></p>
             </div>
-
 			<?php
 		} elseif ( version_compare( get_option( 'woocommerce_db_version' ), '2.5', '<' ) ) {
 			?>

@@ -393,8 +393,10 @@ while ( have_posts() ) : the_post();
 										<?php endforeach; ?>
 									<?php else :
 										foreach ( array_slice( tf_data_types( $meta['amenities'] ), 0, 10 ) as $amenity ) :
-											$feature = get_term_by( 'id', $amenity['feature'], 'apartment_feature' );
-											$feature_meta = get_term_meta( $amenity['feature'], 'tf_apartment_feature', true );
+                                            if(!empty($amenity['feature'])){
+                                                $feature = get_term_by( 'id', $amenity['feature'], 'apartment_feature' );
+                                                $feature_meta = get_term_meta( $amenity['feature'], 'tf_apartment_feature', true );
+                                            }
 											$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
 											if ( $f_icon_type == 'icon' ) {
 												$feature_icon = '<i class="' . $feature_meta['apartment-feature-icon'] . '"></i>';
@@ -404,7 +406,7 @@ while ( have_posts() ) : the_post();
 											?>
                                             <div class="tf-apt-amenity">
 												<?php echo ! empty( $feature_icon ) ? "<div class='tf-apt-amenity-icon'>" . $feature_icon . "</div>" : ""; ?>
-                                                <span><?php echo esc_html( $feature->name ); ?></span>
+                                                <span><?php echo !empty($feature->name) ? esc_html( $feature->name ) : ''; ?></span>
                                             </div>
 										<?php endforeach; ?>
 									<?php endif; ?>
@@ -442,7 +444,7 @@ while ( have_posts() ) : the_post();
 													foreach ( $categories as $cat => $features ) :
 														?>
                                                         <div class="tf-apartment-amenity-cat">
-                                                            <h3><?php echo esc_html( $amenities_cats[ $cat ]['amenities_cat_name'] ); ?></h3>
+                                                            <h3><?php echo !empty($amenities_cats[ $cat ]['amenities_cat_name']) ? esc_html( $amenities_cats[ $cat ]['amenities_cat_name'] ) : ''; ?></h3>
                                                             <div class="tf-apartment-amenities">
 																<?php foreach ( $features as $feature_id ):
 																	$_feature = get_term_by( 'id', $feature_id, 'apartment_feature' );
