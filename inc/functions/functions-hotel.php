@@ -1168,15 +1168,15 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 			$_GET = array_map( 'stripslashes_deep', $_GET );
 		}
 		// location
-		$location = ! empty( $_GET['place'] ) ? sanitize_text_field( $_GET['place'] ) : '';
+		$location = ! empty( $_GET['place'] ) ? esc_html( $_GET['place'] ) : '';
 		// Adults
-		$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
+		$adults = ! empty( $_GET['adults'] ) ? esc_html( $_GET['adults'] ) : '';
 		// children
-		$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
+		$child = ! empty( $_GET['children'] ) ? esc_html( $_GET['children'] ) : '';
 		// room
-		$room = ! empty( $_GET['room'] ) ? sanitize_text_field( $_GET['room'] ) : '';
+		$room = ! empty( $_GET['room'] ) ? esc_html( $_GET['room'] ) : '';
 		// Check-in & out date
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
+		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? esc_html( $_GET['check-in-out-date'] ) : '';
 
 		// date format for users output
 		$hotel_date_format_for_users = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
@@ -1508,7 +1508,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                                 <div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
-                                    <input type="number" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>">
+                                    <input type="number" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>" readonly>
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
