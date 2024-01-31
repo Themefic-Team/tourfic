@@ -218,7 +218,8 @@
                     action: 'tf_order_status_email_resend',
                     order_id: order_id,
                     status: selected_value,
-                    id : db_id
+                    id : db_id,
+                    _ajax_nonce: tf_admin_params.tf_nonce
                 },
                 beforeSend: function (data) {
                     $('.tf-preloader-box').show();

@@ -3630,7 +3630,10 @@ function tf_remove_order_ids_from_room() {
  */
 add_action( 'wp_ajax_tf_remove_room_order_ids', 'tf_remove_room_order_ids' );
 function tf_remove_room_order_ids() {
-
+	if( !empty($_POST['_ajax_nonce']) && !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_ajax_nonce'] ) ), 'updates' ) ){
+        return;
+    }
+	
 	# Get order id field's name
 	$meta_field = isset( $_POST['meta_field'] ) ? sanitize_text_field( $_POST['meta_field'] ) : '';
 	# Trim room id from order id name
