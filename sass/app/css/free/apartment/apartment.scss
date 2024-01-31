@@ -1,4 +1,5 @@
 .tf-template-3.tf-apartment-single{
+    @import './template1/informations';
     @import './template1/rooms';
     @import './template1/rules';
     @import './template1/offer';

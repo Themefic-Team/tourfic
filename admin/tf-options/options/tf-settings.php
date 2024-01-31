@@ -1999,6 +1999,11 @@ TF_Settings::option( 'tf_settings', array(
 							'type'  => 'text',
 							'label' => __( 'Category Name', 'tourfic' ),
 						),
+						array(
+							'id'    => 'amenities_cat_icon',
+							'type'  => 'icon',
+							'label' => __( 'Category Icon', 'tourfic' ),
+						),
 					),
 				),
 

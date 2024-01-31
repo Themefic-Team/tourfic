@@ -116,7 +116,7 @@
         padding-left: 83px;
         padding-right: 83px;
     } 
-    .tf-single-hotel-pb-56 {
+    .tf-single-pb-56 {
         padding-bottom: 56px !important;
 
         @media #{$max767}{
@@ -135,8 +135,8 @@
 .tf-template-3.tf-tour-single{
     margin-bottom: 0px;
     
-    .tf-single-hotel-pb-56 {
-        padding-bottom: 56px;
+    .tf-single-pb-56 {
+        padding-bottom: 56px !important;
 
         @media #{$max767}{
             padding-bottom: 32px;

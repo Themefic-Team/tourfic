@@ -4,7 +4,7 @@ if ( $tc ) { ?>
 <!-- apartment Policies Starts -->        
 <div class="tf-policies-wrapper tf-section" id="tf-apartment-policies">            
     <h2 class="tf-section-title">
-        <?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : __("Hotel Terms & Conditions","tourfic"); ?>
+        <?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : __("Policies","tourfic"); ?>
     </h2>  
     <div class="tf-policies">
         <?php echo wpautop( $tc ); ?>
