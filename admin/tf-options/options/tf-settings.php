@@ -40,37 +40,6 @@ TF_Settings::option( 'tf_settings', array(
 					),
 				),
 				array(
-					'id'       => 'tour-permalink-setting',
-					'type'     => 'text',
-					'label'    => __( 'Tour Permalink', 'tourfic' ),
-					'subtitle' => __( 'Enter a permalink for your tour archive page.', 'tourfic' ),
-					"field_width" => 29,
-					'default' => "tours",
-					'placeholder' => !empty(get_option("tour_slug")) ? get_option("tour_slug") : "tours",
-					'dependency' => array( 'disable-services', '!=', 'tour' ),
-					
-				),
-				array(
-					'id'       => 'hotel-permalink-setting',
-					'type'     => 'text',
-					'label'    => __( 'Hotel Permalink', 'tourfic' ),
-					'subtitle' => __( 'Enter a permalink for your hotel archive page.', 'tourfic' ),
-					"field_width" => 29,
-					'default' => "hotels",
-					'placeholder' => ! empty(get_option("hotel_slug")) ? get_option("hotel_slug") : "hotels",
-					'dependency' => array( 'disable-services', '!=', 'hotel' ),
-				),
-				array(
-					'id'       => 'apartment-permalink-setting',
-					'type'     => 'text',
-					'label'    => __( 'Apartment Permalink', 'tourfic' ),
-					'subtitle' => __( 'Enter a permalink for your apartment archive page.', 'tourfic' ),
-					"field_width" => 29,
-					'default' => "apartments",
-					'placeholder' => ! empty(get_option("apartment_slug")) ? get_option("apartment_slug") : "apartments",
-					'dependency' => array( 'disable-services', '!=', 'apartment' ),
-				),
-				array(
 					'id'       => 'tf-date-format-for-users',
 					'type'     => 'select',
 					'label'    => __( 'Select Date Format', 'tourfic' ),
@@ -3174,7 +3143,33 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'permalink_notice',
 					'type'    => 'notice',
-					'content' => __( 'For permalink settings go to default <a href="' . get_admin_url() . 'options-permalink.php">permalink settings page</a>.' . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/#permalink-settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>', 'tourfic' ),
+					'content' => __( 'Anything confusing?' . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/#permalink-settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>', 'tourfic' ),
+				),
+
+				array(
+					'id'       => 'tour-permalink-setting',
+					'type'     => 'text',
+					'label'    => __( 'Tour Permalink', 'tourfic' ),
+					'subtitle' => __( 'Enter a permalink for your tour archive page.', 'tourfic' ),
+					'default' => "tours",
+					'placeholder' => !empty(get_option("tour_slug")) ? get_option("tour_slug") : "tours",
+					
+				),
+				array(
+					'id'       => 'hotel-permalink-setting',
+					'type'     => 'text',
+					'label'    => __( 'Hotel Permalink', 'tourfic' ),
+					'subtitle' => __( 'Enter a permalink for your hotel archive page.', 'tourfic' ),
+					'default' => "hotels",
+					'placeholder' => ! empty(get_option("hotel_slug")) ? get_option("hotel_slug") : "hotels",
+				),
+				array(
+					'id'       => 'apartment-permalink-setting',
+					'type'     => 'text',
+					'label'    => __( 'Apartment Permalink', 'tourfic' ),
+					'subtitle' => __( 'Enter a permalink for your apartment archive page.', 'tourfic' ),
+					'default' => "apartments",
+					'placeholder' => ! empty(get_option("apartment_slug")) ? get_option("apartment_slug") : "apartments",
 				),
 
 			),
