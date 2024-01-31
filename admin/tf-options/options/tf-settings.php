@@ -40,6 +40,37 @@ TF_Settings::option( 'tf_settings', array(
 					),
 				),
 				array(
+					'id'       => '',
+					'type'     => 'text',
+					'label'    => __( 'Tour Post Type Rename', 'tourfic' ),
+					'subtitle' => __( 'Enter a name to rename your tour post type.', 'tourfic' ),
+					'default' => __("tours", "tourfic"),
+					'placeholder' => __("tours", "tourfic"),
+					'field_width' => 29,
+					'is_pro' => true
+					
+				),
+				array(
+					'id'       => '',
+					'type'     => 'text',
+					'label'    => __( 'Hotel Post Type Rename', 'tourfic' ),
+					'subtitle' => __( 'Enter a name to rename your hotel post type.', 'tourfic' ),
+					'default' => __("hotels", "tourfic"),
+					'placeholder' => __("hotels", "tourfic"),
+					'field_width' => 29,
+					'is_pro' => true
+				),
+				array(
+					'id'       => '',
+					'type'     => 'text',
+					'label'    => __( 'Apartment Post Type Rename', 'tourfic' ),
+					'subtitle' => __( 'Enter a name to rename your apartment post type.', 'tourfic' ),
+					'default' => __("apartments", "tourfic"),
+					'placeholder' => __("apartments", "tourfic"),
+					'field_width' => 29,
+					'is_pro' => true
+				),
+				array(
 					'id'       => 'tf-date-format-for-users',
 					'type'     => 'select',
 					'label'    => __( 'Select Date Format', 'tourfic' ),
