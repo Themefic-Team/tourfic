@@ -12109,6 +12109,13 @@ html {
     font-size: 20px !important;
   }
 }
+.tf-template-3 .tf-related-tours .tf-slider-item .tf-meta-info .tf-meta-title .tf-meta-data-price span.pricing_calc_type {
+  color: #99948D;
+  font-size: 16px !important;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+}
 .tf-template-3 .tf-related-tours .slick-prev.pull-left.slick-arrow,
 .tf-template-3 .tf-related-tours .slick-next.pull-right.slick-arrow {
   position: absolute;

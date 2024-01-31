@@ -452,6 +452,8 @@ if ( $disable_related_sec !== '1' ) {
                                 $first_destination_name = $destinations[0]->name;
                                 $meta                   = get_post_meta( $selected_design_post_id, 'tf_apartment_opt', true );
                                 $apartment_min_price = get_apartment_min_max_price( get_the_ID() );
+
+                                $pricing_type = ! empty( $meta['pricing_type'] ) && "per_person" == $meta['pricing_type'] ? __("Person", "tourfic") : __("Night", "tourfic");
                                 ?>
                                 <div class="tf-slider-item tf-post-box-lists">
                                     <div class="tf-post-single-box">
@@ -471,6 +473,7 @@ if ( $disable_related_sec !== '1' ) {
                                                         echo !empty($apartment_min_price["min"]) ? wc_price($apartment_min_price["min"]) : '';
                                                         ?>
                                                         </span>
+                                                        <span class="pricing_calc_type">/<?php echo $pricing_type; ?></span>
                                                     </div>
                                                 </div>
                                                 <div class="tf-meta-location">
