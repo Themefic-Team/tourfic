@@ -107,6 +107,7 @@
 
             var formData = new FormData(this);
             formData.append('action', 'tf_visitor_details_edit');
+            formData.append('_ajax_nonce', tf_admin_params.tf_nonce);
             $.ajax({
                 type: 'post',
                 url: tf_admin_params.ajax_url,
@@ -145,7 +146,8 @@
                 data: {
                     action: 'tf_checkinout_details_edit',
                     order_id: order_id,
-                    checkinout: selected_value
+                    checkinout: selected_value,
+                    _ajax_nonce: tf_admin_params.tf_nonce
                 },
                 beforeSend: function (data) {
                     $('.tf-preloader-box').show();
@@ -179,7 +181,8 @@
                 data: {
                     action: 'tf_order_status_edit',
                     order_id: order_id,
-                    status: selected_value
+                    status: selected_value,
+                    _ajax_nonce: tf_admin_params.tf_nonce
                 },
                 beforeSend: function (data) {
                     $('.tf-preloader-box').show();
@@ -280,7 +283,8 @@
                     data: {
                         action: 'tf_order_bulk_action_edit',
                         orders: order_list,
-                        status: bulk_action
+                        status: bulk_action,
+                        _ajax_nonce: tf_admin_params.tf_nonce
                     },
                     beforeSend: function (data) {
                         $('.tf-preloader-box').show();
