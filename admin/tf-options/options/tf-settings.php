@@ -40,34 +40,70 @@ TF_Settings::option( 'tf_settings', array(
 					),
 				),
 				array(
+					'id'      => 'post-type-rename-heading',
+					'type'  => 'heading',
+					'label' => __( 'Post Type Rename Settings', 'tourfic' ),
+					'subtitle'   => __( 'From this settings, you can change your post type names.', 'tourfic' ),
+					'is_pro' => true
+				),
+				array(
 					'id'       => '',
 					'type'     => 'text',
-					'label'    => __( 'Tour Post Type Rename', 'tourfic' ),
+					'label'    => __( 'Tour Post Type Singular Name', 'tourfic' ),
+					'subtitle' => __( 'Enter a name to rename your tour post type.', 'tourfic' ),
+					'default' => __("tour", "tourfic"),
+					'placeholder' => __("tour", "tourfic"),
+					'field_width' => 46,
+					'is_pro' => true
+				),
+				array(
+					'id'       => '',
+					'type'     => 'text',
+					'label'    => __( 'Tour Post Type Plural Name', 'tourfic' ),
 					'subtitle' => __( 'Enter a name to rename your tour post type.', 'tourfic' ),
 					'default' => __("tours", "tourfic"),
 					'placeholder' => __("tours", "tourfic"),
-					'field_width' => 29,
+					'field_width' => 46,
 					'is_pro' => true
-					
 				),
 				array(
 					'id'       => '',
 					'type'     => 'text',
-					'label'    => __( 'Hotel Post Type Rename', 'tourfic' ),
+					'label'    => __( 'Hotel Post Type Singular Name', 'tourfic' ),
+					'subtitle' => __( 'Enter a name to rename your hotel post type.', 'tourfic' ),
+					'default' => __("hotel", "tourfic"),
+					'placeholder' => __("hotel", "tourfic"),
+					'field_width' => 46,
+					'is_pro' => true
+				),
+				array(
+					'id'       => '',
+					'type'     => 'text',
+					'label'    => __( 'Hotel Post Type Plural Name', 'tourfic' ),
 					'subtitle' => __( 'Enter a name to rename your hotel post type.', 'tourfic' ),
 					'default' => __("hotels", "tourfic"),
 					'placeholder' => __("hotels", "tourfic"),
-					'field_width' => 29,
+					'field_width' => 46,
 					'is_pro' => true
 				),
 				array(
 					'id'       => '',
 					'type'     => 'text',
-					'label'    => __( 'Apartment Post Type Rename', 'tourfic' ),
+					'label'    => __( 'Apartment Post Type Singular Name', 'tourfic' ),
+					'subtitle' => __( 'Enter a name to rename your apartment post type.', 'tourfic' ),
+					'default' => __("apartment", "tourfic"),
+					'placeholder' => __("apartment", "tourfic"),
+					'field_width' => 46,
+					'is_pro' => true
+				),
+				array(
+					'id'       => '',
+					'type'     => 'text',
+					'label'    => __( 'Apartment Post Type Plural Name', 'tourfic' ),
 					'subtitle' => __( 'Enter a name to rename your apartment post type.', 'tourfic' ),
 					'default' => __("apartments", "tourfic"),
 					'placeholder' => __("apartments", "tourfic"),
-					'field_width' => 29,
+					'field_width' => 46,
 					'is_pro' => true
 				),
 				array(
