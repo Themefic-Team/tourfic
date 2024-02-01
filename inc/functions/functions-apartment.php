@@ -16,30 +16,36 @@ function register_tf_apartment_post_type() {
 	
 	$apartment_slug = get_option( 'apartment_slug' );
 
-	$apartment_labels = apply_filters( 'tf_apartment_labels', array(
-		'name'                  => _x( 'Apartments', 'post type general name', 'tourfic' ),
-		'singular_name'         => _x( 'Apartment', 'post type singular name', 'tourfic' ),
+	$apartment_labels =  apply_filters( 'tf_apartment_labels', array(
+		'name'                  => _x( '%2$s', 'post type general name', 'tourfic' ),
+		'singular_name'         => _x( '%1$s', 'post type singular name', 'tourfic' ),
 		'add_new'               => _x( 'Add New', 'tourfic' ),
-		'add_new_item'          => __( 'Add New Apartment', 'tourfic' ),
-		'edit_item'             => __( 'Edit Apartment', 'tourfic' ),
-		'new_item'              => __( 'New Apartment', 'tourfic' ),
-		'all_items'             => __( 'All Apartment', 'tourfic' ),
-		'view_item'             => __( 'View Apartment', 'tourfic' ),
-		'view_items'            => __( 'View Apartments', 'tourfic' ),
-		'search_items'          => __( 'Search Apartments', 'tourfic' ),
-		'not_found'             => __( 'No apartments found', 'tourfic' ),
-		'not_found_in_trash'    => __( 'No apartments found in the Trash', 'tourfic' ),
+		'add_new_item'          => __( 'Add New %1$s', 'tourfic' ),
+		'edit_item'             => __( 'Edit %1$s', 'tourfic' ),
+		'new_item'              => __( 'New %1$s', 'tourfic' ),
+		'all_items'             => __( 'All %1$s', 'tourfic' ),
+		'view_item'             => __( 'View %1$s', 'tourfic' ),
+		'view_items'            => __( 'View %2$s', 'tourfic' ),
+		'search_items'          => __( 'Search %2$s', 'tourfic' ),
+		'not_found'             => __( 'No %2$s found', 'tourfic' ),
+		'not_found_in_trash'    => __( 'No %2$s found in the Trash', 'tourfic' ),
 		'parent_item_colon'     => '',
-		'menu_name'             => __( 'Apartments', 'tourfic' ),
-		'featured_image'        => __( 'Apartment Featured Image', 'tourfic' ),
-		'set_featured_image'    => __( 'Set Apartment Featured Image', 'tourfic' ),
-		'remove_featured_image' => __( 'Remove Apartment Featured Image', 'tourfic' ),
-		'use_featured_image'    => __( 'Use as Apartment Featured Image', 'tourfic' ),
-		'attributes'            => __( 'Apartment Attributes', 'tourfic' ),
-		'filter_items_list'     => __( 'Filter Apartment list', 'tourfic' ),
-		'items_list_navigation' => __( 'Apartment list navigation', 'tourfic' ),
-		'items_list'            => __( 'Apartment list', 'tourfic' )
-	) );
+		'menu_name'             => __( '%2$s', 'tourfic' ),
+		'featured_image'        => __( '%1$s Featured Image', 'tourfic' ),
+		'set_featured_image'    => __( 'Set %1$s Featured Image', 'tourfic' ),
+		'remove_featured_image' => __( 'Remove %1$s Featured Image', 'tourfic' ),
+		'use_featured_image'    => __( 'Use as %1$s Featured Image', 'tourfic' ),
+		'attributes'            => __( '%1$s Attributes', 'tourfic' ),
+		'filter_items_list'     => __( 'Filter %1$s list', 'tourfic' ),
+		'items_list_navigation' => __( '%1$s list navigation', 'tourfic' ),
+		'items_list'            => __( '%1$s list', 'tourfic' )
+	));
+
+
+	foreach ( $apartment_labels as $key => $value ) {
+		$apartment_labels[ $key ] = sprintf( $value, tf_apartments_singular_label(), tf_apartments_plural_label() );
+	}
+
 	$apartment_args   = array(
 		'labels'             => $apartment_labels,
 		'public'             => true,
@@ -73,6 +79,38 @@ if ( tfopt( 'disable-services' ) && in_array( 'apartment', tfopt( 'disable-servi
 add_filter( 'use_block_editor_for_post_type', function ( $enabled, $post_type ) {
 	return ( 'tf_apartment' === $post_type ) ? false : $enabled;
 }, 10, 2 );
+
+function tf_apartments_default_labels() {
+	$default_apartment = array(
+		'singular' => __( 'Apartment', 'tourfic' ),
+		'plural'   => __( 'Apartments', 'tourfic' ),
+	);
+
+	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		$tf_apartment_single_name = ! empty(tfopt( 'tf-apartment-post-rename-singular' )) ? tfopt( 'tf-apartment-post-rename-singular' ) : __("Apartment", "tourfic");
+		$tf_apartment_plural_name = ! empty(tfopt( 'tf-apartment-post-rename-plural' )) ? tfopt( 'tf-apartment-post-rename-plural' ) : __('Apartments', 'tourfic');
+
+		$default_apartment = array(
+			'singular' => $tf_apartment_single_name,
+			'plural'   => $tf_apartment_plural_name
+		);
+
+	}
+
+	return apply_filters( 'tf_apartment_labels', $default_apartment );
+}
+
+function tf_apartments_singular_label( $lowercase = false ) {
+	$default_apartment = tf_apartments_default_labels();
+
+	return ( $lowercase ) ? strtolower( $default_apartment['singular'] ) : $default_apartment['singular'];
+}
+
+function tf_apartments_plural_label( $lowercase = false ) {
+	$default_apartment = tf_apartments_default_labels();
+
+	return ( $lowercase ) ? strtolower( $default_apartment['plural'] ) : $default_apartment['plural'];
+}
 
 /**
  * Register taxonomies for tf_apartment

@@ -31,7 +31,7 @@ function register_tf_hotel_post_type() {
 		'not_found'             => __( 'No %2$s found', 'tourfic' ),
 		'not_found_in_trash'    => __( 'No %2$s found in Trash', 'tourfic' ),
 		'parent_item_colon'     => '',
-		'menu_name'             => _x( 'Hotels', 'tourfic post type menu name', 'tourfic' ),
+		'menu_name'             => _x( '%2$s', 'tourfic post type menu name', 'tourfic' ),
 		'featured_image'        => __( '%1$s Image', 'tourfic' ),
 		'set_featured_image'    => __( 'Set %1$s Image', 'tourfic' ),
 		'remove_featured_image' => __( 'Remove %1$s Image', 'tourfic' ),
@@ -87,6 +87,17 @@ function tf_hotel_default_labels() {
 		'singular' => __( 'Hotel', 'tourfic' ),
 		'plural'   => __( 'Hotels', 'tourfic' ),
 	);
+
+	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		$tf_hotel_single_name = ! empty(tfopt( 'tf-hotel-post-rename-singular' )) ? tfopt( 'tf-hotel-post-rename-singular' ) : __("'Hotel'", "tourfic");
+		$tf_hotel_plural_name = ! empty(tfopt( 'tf-hotel-post-rename-plural' )) ? tfopt( 'tf-hotel-post-rename-plural' ) : __('Hotels', 'tourfic');
+
+		$default_hotel = array(
+			'singular' => $tf_hotel_single_name,
+			'plural'   => $tf_hotel_plural_name
+		);
+
+	}
 
 	return apply_filters( 'tf_hotel_name', $default_hotel );
 }

@@ -33,7 +33,7 @@ function register_tf_tours_post_type() {
 		'not_found'             => __( 'No %2$s found', 'tourfic' ),
 		'not_found_in_trash'    => __( 'No %2$s found in Trash', 'tourfic' ),
 		'parent_item_colon'     => '',
-		'menu_name'             => _x( 'Tours', 'tourfic post type menu name', 'tourfic' ),
+		'menu_name'             => _x( '%2$s', 'tourfic post type menu name', 'tourfic' ),
 		'featured_image'        => __( '%1$s Image', 'tourfic' ),
 		'set_featured_image'    => __( 'Set %1$s Image', 'tourfic' ),
 		'remove_featured_image' => __( 'Remove %1$s Image', 'tourfic' ),
@@ -89,6 +89,17 @@ function tf_tours_default_labels() {
 		'singular' => __( 'Tour', 'tourfic' ),
 		'plural'   => __( 'Tours', 'tourfic' ),
 	);
+
+	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		$tf_tour_single_name = ! empty(tfopt( 'tf-tour-post-rename-singular' )) ? tfopt( 'tf-tour-post-rename-singular' ) : __("Tour", "tourfic");
+		$tf_tour_plural_name = ! empty(tfopt( 'tf-tour-post-rename-plural' )) ? tfopt( 'tf-tour-post-rename-plural' ) : __('Tours', 'tourfic');
+
+		$default_tour = array(
+			'singular' => $tf_tour_single_name,
+			'plural'   => $tf_tour_plural_name
+		);
+
+	}
 
 	return apply_filters( 'tf_tours_name', $default_tour );
 }
