@@ -455,6 +455,8 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 - Fixed: Booking Details export issue
 - Fixed: Vulnerability issue
+- Fixed: Template 3 Layout issue
+- Improvement: Removed Unused CSS/JS
 
 = 2.11.7 - 28 January 2024 =
 
