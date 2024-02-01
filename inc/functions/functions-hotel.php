@@ -1281,7 +1281,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 												</defs>
 												</svg>
 											</div>
-											<input type="tel" class="adults-style2" name="adults" id="adults" min="1" value="1">
+											<input type="tel" class="adults-style2" name="adults" id="adults" min="1" value="1" readonly>
 											<div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<g clip-path="url(#clip0_3229_13100)">
@@ -1311,7 +1311,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 												</defs>
 												</svg>
 											</div>
-											<input type="tel" name="children" class="childs-style2" id="children" min="0" value="0">
+											<input type="tel" name="children" class="childs-style2" id="children" min="0" value="0" readonly>
 											<div class="acr-inc child-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<g clip-path="url(#clip0_3229_13100)">
@@ -1341,7 +1341,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 												</defs>
 												</svg>
 											</div>
-											<input type="tel" name="room" class="rooms-style2" id="room" min="1" value="1">
+											<input type="tel" name="room" class="rooms-style2" id="room" min="1" value="1" readonly>
 											<div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<g clip-path="url(#clip0_3229_13100)">
@@ -1920,7 +1920,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 									</defs>
 									</svg>
 								</div>
-								<input type="tel" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>">
+								<input type="tel" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>" readonly>
 								<div class="acr-inc">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 									<g clip-path="url(#clip0_3229_13100)">
@@ -1950,7 +1950,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 									</defs>
 									</svg>
 								</div>
-								<input type="tel" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
+								<input type="tel" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>" readonly>
 								<div class="acr-inc">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 									<g clip-path="url(#clip0_3229_13100)">

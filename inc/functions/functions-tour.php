@@ -542,7 +542,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 												</defs>
 												</svg>
 											</div>
-											<input type="tel" class="adults-style2" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>">
+											<input type="tel" class="adults-style2" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>" readonly>
 											<div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<g clip-path="url(#clip0_3229_13100)">
@@ -575,7 +575,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 													</defs>
 													</svg>
 												</div>
-												<input type="tel" name="children" class="childs-style2" id="children" min="0" value="0">
+												<input type="tel" name="children" class="childs-style2" id="children" min="0" value="0" readonly>
 												<div class="acr-inc">
 													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 													<g clip-path="url(#clip0_3229_13100)">
@@ -608,7 +608,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 													</defs>
 													</svg>
 												</div>
-												<input type="tel" name="infant" class="infant-style2" id="infant" min="0" value="0">
+												<input type="tel" name="infant" class="infant-style2" id="infant" min="0" value="0" readonly>
 												<div class="acr-inc">
 													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 													<g clip-path="url(#clip0_3229_13100)">
@@ -1959,7 +1959,7 @@ function tf_single_tour_booking_form( $post_id ) {
 									</defs>
 									</svg>
 								</div>
-                                <input type="tel" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>">
+                                <input type="tel" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>" readonly>
                                 <div class="acr-inc">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 									<g clip-path="url(#clip0_3229_13100)">
@@ -2001,7 +2001,7 @@ function tf_single_tour_booking_form( $post_id ) {
 									</defs>
 									</svg>
 								</div>
-                                <input type="tel" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
+                                <input type="tel" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>" readonly>
                                 <div class="acr-inc">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 									<g clip-path="url(#clip0_3229_13100)">
@@ -2042,7 +2042,7 @@ function tf_single_tour_booking_form( $post_id ) {
 									</defs>
 									</svg>
 								</div>
-                                <input type="tel" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>">
+                                <input type="tel" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>" readonly>
                                 <div class="acr-inc">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 									<g clip-path="url(#clip0_3229_13100)">
@@ -2136,7 +2136,7 @@ function tf_single_tour_booking_form( $post_id ) {
 												</defs>
 												</svg>
 											</div>
-                                            <input type="tel" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>">
+                                            <input type="tel" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>" readonly>
                                             <div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<g clip-path="url(#clip0_3229_13100)">
@@ -2168,7 +2168,7 @@ function tf_single_tour_booking_form( $post_id ) {
 												</defs>
 												</svg>
 											</div>
-                                            <input type="tel" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
+                                            <input type="tel" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>" readonly>
                                             <div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<g clip-path="url(#clip0_3229_13100)">
@@ -2200,7 +2200,7 @@ function tf_single_tour_booking_form( $post_id ) {
 												</defs>
 												</svg>
 											</div>
-                                            <input type="tel" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>">
+                                            <input type="tel" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>" readonly>
                                             <div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<g clip-path="url(#clip0_3229_13100)">
