@@ -2261,6 +2261,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'h6-heading',
 					'type'    => 'heading',
+					'label' => __( 'H6 Font Settings', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
