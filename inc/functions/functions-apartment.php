@@ -272,7 +272,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 			$_GET = array_map( 'stripslashes_deep', $_GET );
 		}
 		// Check-in & out date
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
+		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? esc_html( $_GET['check-in-out-date'] ) : '';
 
 		// date format for apartments
 		$date_format_change_apartments = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
@@ -373,7 +373,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 												</defs>
 												</svg>
 											</div>
-											<input type="tel" name="adults" class="adults-style2" id="adults" min="1" value="1"/>
+											<input type="tel" name="adults" class="adults-style2" id="adults" min="1" value="1" readonly />
 											<div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<g clip-path="url(#clip0_3229_13100)">
@@ -404,7 +404,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 													</defs>
 													</svg>
 												</div>
-												<input type="tel" name="children" class="childs-style2" id="children" min="0" value="0"/>
+												<input type="tel" name="children" class="childs-style2" id="children" min="0" value="0" readonly />
 												<div class="acr-inc">
 													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 													<g clip-path="url(#clip0_3229_13100)">
@@ -436,7 +436,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 													</defs>
 													</svg>
 												</div>
-												<input type="tel" name="infant" class="infant-style2" id="infant" min="0" value="0"/>
+												<input type="tel" name="infant" class="infant-style2" id="infant" min="0" value="0" readonly />
 												<div class="acr-inc">
 													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 													<g clip-path="url(#clip0_3229_13100)">
@@ -682,8 +682,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                             instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                        },
-                        defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
+                        }
                     });
 
                 });
