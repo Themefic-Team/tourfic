@@ -330,9 +330,13 @@ function tourfic_ask_question_ajax() {
 
 	$post_id    = isset( $_POST['post_id'] ) ? intval( $_POST['post_id'] ) : null;
 	$post_title = get_the_title( $post_id );
+
 	//post author mail
 	$author_id   = get_post_field( 'post_author', $post_id );
 	$author_mail = get_the_author_meta( 'user_email', $author_id );
+
+	// Post Author Data
+	$author_data = get_userdata( $author_id );
 
 	// Enquiry Store on Database
 	$tf_post_author_id = get_post_field( 'post_author', $post_id );
@@ -367,16 +371,26 @@ function tourfic_ask_question_ajax() {
 		do_action( 'enquiry_zapier_form_trigger', $post_id, $name, $email, $question );
 	}
 
-	// if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-		if ( "tf_hotel" == get_post_type( $post_id ) ) {
-			$send_email_to = ! empty( tfopt( 'h-enquiry-email' ) ) ? sanitize_email( tfopt( 'h-enquiry-email' ) ) : sanitize_email( get_option( 'admin_email' ) );
-		} elseif ( "tf_apartment" == get_post_type( $post_id ) ) {
-			$send_email_to = ! empty( $author_mail ) ? sanitize_email( $author_mail ) : sanitize_email( get_option( 'admin_email' ) );
-		} else {
-			$send_email_to = ! empty( tfopt( 't-enquiry-email' ) ) ? sanitize_email( tfopt( 't-enquiry-email' ) ) : sanitize_email( get_option( 'admin_email' ) );
-		}
-	// }
+	if ( "tf_hotel" == get_post_type( $post_id ) ) {
+		$send_email_to[] = ! empty( tfopt( 'h-enquiry-email' ) ) ? sanitize_email( tfopt( 'h-enquiry-email' ) ) : sanitize_email( get_option( 'admin_email' ) );
+	} elseif ( "tf_apartment" == get_post_type( $post_id ) ) {
+		$send_email_to[] = ! empty( $author_mail ) ? sanitize_email( $author_mail ) : sanitize_email( get_option( 'admin_email' ) );
+	} else {
+		$send_email_to[] = ! empty( tfopt( 't-enquiry-email' ) ) ? sanitize_email( tfopt( 't-enquiry-email' ) ) : sanitize_email( get_option( 'admin_email' ) );
+	}
 
+	$tf_vendor_email_enable_setting = !empty(tfopt( 'email_template_settings')['enable_vendor_enquiry_email']) ? tfopt( 'email_template_settings')['enable_vendor_enquiry_email'] : 0;
+
+
+	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( $tf_vendor_email_enable_setting == 1)) {
+		if ( in_array( "tf_vendor", $tf_user_roles ) ) {
+			if ( "tf_hotel" == get_post_type( $post_id ) ) {
+				$send_email_to[] = !empty($author_mail) ? $author_mail : '';
+			} elseif ( "tf_tours" == get_post_type( $post_id ) ) {
+				$send_email_to[] = !empty($author_mail) ? $author_mail : '';
+			}
+		}
+	}
 
 	$subject     = sprintf( __( 'Someone asked question on: %s', 'tourfic' ), $post_title );
 	$message     = "{$question}";
@@ -399,7 +413,6 @@ function tourfic_ask_question_ajax() {
 
 add_action( 'wp_ajax_tf_ask_question', 'tourfic_ask_question_ajax' );
 add_action( 'wp_ajax_nopriv_tf_ask_question', 'tourfic_ask_question_ajax' );
-
 /**
  * Dropdown Multiple Support
  */
