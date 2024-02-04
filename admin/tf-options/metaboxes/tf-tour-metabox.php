@@ -1034,6 +1034,14 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'is_pro'  => true,
 					'dependency'  => array( 'booking-by', '==', '2' ),
 				),
+				array(
+					'id'        => 'is_taxable',
+					'type'      => 'switch',
+					'label'     => __( 'Taxable', 'tourfic' ),
+					'subtitle' => __( 'Activate this option to enable tax for this hotel.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				),
 			),
 		),
 		// // Exclude/Include

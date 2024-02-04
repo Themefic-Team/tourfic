@@ -123,6 +123,15 @@ if( file_exists( TF_INC_PATH . 'functions/functions_duplicator.php' ) ){
 }
 
 /**
+ * Include Functions Vat
+ */
+if( file_exists( TF_INC_PATH . 'functions/functions_vat.php' ) ){
+	require_once TF_INC_PATH . 'functions/functions_vat.php';
+}else{
+	tf_file_missing( TF_INC_PATH . 'functions/functions_vat.php' );
+}
+
+/**
  * Including CSS & JS
  *
  * @since 1.0
