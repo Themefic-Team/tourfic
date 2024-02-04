@@ -453,6 +453,7 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 = 2.11.9 - 04 February 2024 =
 
+- Compatibility: Compatible With Elementor(3.19.0)
 - Updated: Vulnerability(XSS) issue
 - Fixed: Minor Bugs
 
