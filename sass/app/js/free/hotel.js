@@ -132,6 +132,12 @@
             if ($(this).closest('.room-submit-wrap').find('input[name=option_id]').length > 0) {
                 var option_id = $(this).closest('.room-submit-wrap').find('input[name=option_id]').val();
             }
+            if ($(this).closest('tr').find('input[name="room_facilities_' + unique_id + '"]').length > 0) {
+                var facilitiesVal = $(this).closest('tr').find('input[name="room_facilities_' + unique_id + '"]:checked').map(function (err, el) {
+                    return $(el).val();
+                }).get();
+            }
+
             var location = $('input[name=place]').val();
             var adult = $('input[name=adult]').val();
             var child = $('input[name=child]').val();
@@ -162,7 +168,8 @@
                 check_out_date: check_out_date,
                 room: room,
                 deposit: deposit,
-                airport_service: airport_service
+                airport_service: airport_service,
+                facilitiesVal: facilitiesVal
             };
 
             $.ajax({

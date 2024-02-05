@@ -58,6 +58,7 @@
 				<?php foreach ( $rooms as $key => $room ) :
 					$enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
 					if ( $enable == '1' ) :
+						$unique_id = ! empty( $room['unique_id'] ) ? $room['unique_id'] : '';
 						$footage = ! empty( $room['footage'] ) ? $room['footage'] : '';
 						$bed = ! empty( $room['bed'] ) ? $room['bed'] : '';
 						$adult_number = ! empty( $room['adult'] ) ? $room['adult'] : '0';
@@ -68,6 +69,8 @@
 						$multi_by_date = ! empty( $room['price_multi_day'] ) ? $room['price_multi_day'] : false;
 						$child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
 						$room_options = ! empty( $room['room-options'] ) ? $room['room-options'] : [];
+						$room_facilities_switch = ! empty( $room['room_facilities_switch'] ) ? $room['room_facilities_switch'] : [];
+						$room_facilities = ! empty( $room['room-facilities'] ) ? $room['room-facilities'] : [];
 
 						// Hotel Room Discount Data
 						$hotel_discount_type   = ! empty( $room["discount_hotel_type"] ) ? $room["discount_hotel_type"] : "none";
@@ -186,7 +189,7 @@
 						}
 						?>
                         <tr>
-                        <td class="description" rowspan="<?php echo $room_options ? count( $room_options ) : 1; ?>">
+                        <td class="description" rowspan="<?php echo ( $pricing_by == '3' && ! empty( $room_options ) ) ? count( $room_options ) : 1; ?>">
                             <div class="tf-room-description-box tf-flex">
 								<?php
 								$tour_room_details_gall = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
@@ -293,7 +296,7 @@
 							<?php } ?>
                         </td>
 						<?php
-						if ( $room_options ):
+						if ( $pricing_by == '3' && ! empty( $room_options ) ):
 							foreach ( $room_options as $room_option_key => $room_option ):
 								if ( $pricing_by == '3' ) {
 									$option_price_type = ! empty( $room_option['option_pricing_type'] ) ? $room_option['option_pricing_type'] : 'per_room';
@@ -453,7 +456,25 @@
 							endforeach;
 						else:
 							?>
-                            <td class="options"></td>
+                            <td class="options require-avail-check">
+                                <ul>
+									<?php if ( $room_facilities_switch == '1' && ! empty( $room_facilities ) ) :
+										foreach ( $room_facilities as $facility_key => $room_facility ) :
+											$facility_price_switch = ! empty( $room_facility['room_facilities_price_switch'] ) ? $room_facility['room_facilities_price_switch'] : '0';
+											$facility_price = ! empty( $room_facility['room_facilities_price'] ) ? floatval( $room_facility['room_facilities_price'] ) : 0;
+											$facility_type = ! empty( $room_facility['room_facilities_price_type'] ) ? $room_facility['room_facilities_price_type'] : 'per_person';
+											$facility_type_label = $facility_type == 'per_person' ? __( 'per person', 'tourfic' ) : ( $facility_type == 'per_night' ? __( 'per night', 'tourfic' ) : __( 'per stay', 'tourfic' ) );
+                                            ?>
+                                            <li>
+                                                <label class="room-extra-checkbox">
+                                                    <input type="checkbox" disabled name="room_facilities_<?php echo $unique_id; ?>" value="<?php echo esc_attr( $facility_key ); ?>">
+                                                    <span class="room-extra-label"><?php echo wp_kses_post( $room_facility['room_facilities_label'] ); ?><?php echo $facility_price_switch == '1' ? ' (' . wc_price( $facility_price ) . ' - ' . $facility_type_label . ')' : ''; ?></span>
+                                                </label>
+                                            </li>
+										<?php endforeach;
+									endif; ?>
+                                </ul>
+                            </td>
                             <td class="pax">
                                 <div style="text-align:center; width: 100%;"><?php echo __( "Pax:", "tourfic" ); ?></div>
 								<?php if ( $adult_number ) { ?>
@@ -490,7 +511,6 @@
                             </td>
                             <td class="reserve tf-t-c">
 								<?php
-
 								if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' ) || $tf_booking_type == 1 ) {
 									if ( $pricing_by == '1' ) {
 										if ( $hotel_discount_type != 'none' && ! empty( $discount_price ) ) {

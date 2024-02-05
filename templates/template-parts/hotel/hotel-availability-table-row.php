@@ -16,12 +16,14 @@ $room_book_by                   = ! empty( $room['booking-by'] ) ? $room['bookin
 $room_book_url                  = ! empty( $room['booking-url'] ) ? $room['booking-url'] : '';
 $tf_hotel_reserve_button_text   = ! empty( tfopt( 'hotel_booking_form_button_text' ) ) ? stripslashes( sanitize_text_field( tfopt( 'hotel_booking_form_button_text' ) ) ) : __( "Reserve Now", 'tourfic' );
 $room_options                   = ! empty( $room['room-options'] ) ? $room['room-options'] : [];
+$room_facilities_switch         = ! empty( $room['room_facilities_switch'] ) ? $room['room_facilities_switch'] : [];
+$room_facilities                = ! empty( $room['room-facilities'] ) ? $room['room-facilities'] : [];
 
 if ( $tf_hotel_selected_template_check == "design-1" ) {
 	if ( empty( $tf_room_disable_date ) ) {
 		?>
         <tr>
-        <td class="description" rowspan="<?php echo $room_options ? count( $room_options ) : 1; ?>">
+        <td class="description" rowspan="<?php echo ( $pricing_by == '3' && ! empty( $room_options ) ) ? count( $room_options ) : 1; ?>">
             <div class="tf-room-description-box tf-flex">
 				<?php
 				$tour_room_details_gall = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
@@ -128,7 +130,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 			<?php } ?>
         </td>
 		<?php
-		if ( $room_options ):
+		if ( $pricing_by == '3' && ! empty( $room_options ) ):
 			$option_price = 0;
 			$option_adult_price = 0;
 			$option_child_price = 0;
@@ -388,7 +390,27 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 			endforeach;
 		else:
 			?>
-            <td class="options"></td>
+            <td class="options">
+                <input type="hidden" name="price" value="<?php echo $price; ?>">
+                <input type="hidden" name="d_price" value="<?php echo $d_price; ?>">
+                <ul>
+					<?php if ( $room_facilities_switch == '1' && ! empty( $room_facilities ) ) :
+						foreach ( $room_facilities as $facility_key => $room_facility ) :
+							$facility_price_switch = ! empty( $room_facility['room_facilities_price_switch'] ) ? $room_facility['room_facilities_price_switch'] : '0';
+							$facility_price = ! empty( $room_facility['room_facilities_price'] ) ? floatval( $room_facility['room_facilities_price'] ) : 0;
+							$facility_type = ! empty( $room_facility['room_facilities_price_type'] ) ? $room_facility['room_facilities_price_type'] : 'per_person';
+							$facility_type_label = $facility_type == 'per_person' ? __( 'per person', 'tourfic' ) : ( $facility_type == 'per_night' ? __( 'per night', 'tourfic' ) : __( 'per stay', 'tourfic' ) );
+							?>
+                            <li>
+                                <label class="room-extra-checkbox">
+                                    <input type="checkbox" name="room_facilities_<?php echo $unique_id; ?>" class="room-facility-checkbox" value="<?php echo esc_attr( $facility_key ); ?>">
+                                    <span class="room-extra-label"><?php echo wp_kses_post( $room_facility['room_facilities_label'] ); ?><?php echo $facility_price_switch == '1' ? ' (' . wc_price( $facility_price ) . ' - ' . $facility_type_label . ')' : ''; ?></span>
+                                </label>
+                            </li>
+						<?php endforeach;
+					endif; ?>
+                </ul>
+            </td>
             <td class="pax">
                 <div style="text-align:center; width: 100%;"><?php echo __( "Pax:", "tourfic" ); ?></div>
 				<?php if ( $adult_number ) { ?>
@@ -504,7 +526,6 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tour_hotel_service_avail ) && ! empty( $tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
 							?>
                             <a class="tf_air_service tf-btn-normal btn-secondary" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' ); ?></a>
-
 
                             <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-hotel-service-design-1" data-id="<?php echo $room_id ?>">
                                 <div class="tf-hotel-services">

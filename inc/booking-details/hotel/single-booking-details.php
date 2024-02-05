@@ -104,6 +104,13 @@
                                     <td><?php echo esc_html($tf_tour_details->option); ?></td>
                                 </tr>
                                 <?php } ?>
+	                            <?php if ( !empty($tf_tour_details->facilities) ) { ?>
+                                    <tr>
+                                        <th><?php _e("Facilities", "tourfic"); ?></th>
+                                        <td>:</td>
+                                        <td><?php echo esc_html($tf_tour_details->facilities); ?></td>
+                                    </tr>
+	                            <?php } ?>
                                 <?php 
                                 $book_adult  = !empty( $tf_tour_details->adult ) ? $tf_tour_details->adult : '';
                                 if(!empty($book_adult)){
