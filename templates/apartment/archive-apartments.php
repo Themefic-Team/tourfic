@@ -40,7 +40,18 @@ $post_count = $GLOBALS['wp_query']->post_count;
 						while ( have_posts() ) {
 							the_post();
 							// Location: functions-apartment.php
-							tf_apartment_archive_single_item();
+							$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
+							if ( $apartment_meta[ "apartment_as_featured" ]) {
+								tf_apartment_archive_single_item();
+							}
+						}
+						while ( have_posts() ) {
+							the_post();
+							// Location: functions-apartment.php
+							$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
+							if ( ! $apartment_meta[ "apartment_as_featured" ] ) {
+								tf_apartment_archive_single_item();
+							}
 						}
 					} else {
 						echo '<div class="tf-nothing-found" data-post-count="0">' .__("No Apartments Found!", "tourfic"). '</div>';
