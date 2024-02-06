@@ -11,6 +11,10 @@ $t4-main-color: #060D1C;
 .tf-hotel-template-4 {
     font-family: Ubuntu, sans-serif;
 
+    *{
+        box-sizing: border-box;
+    }
+
     /* Search form */
     .tf-archive-search-form {
         padding: 64px 0;
@@ -589,6 +593,21 @@ $t4-main-color: #060D1C;
 
     .tf-archive-filter{
         margin-bottom: 24px;
+
+        .tf-archive-filter-sidebar{
+            position: fixed;
+            top: 0;
+            left: -450px;
+            width: 448px;
+            height: 100vh;
+            background-color: #fff;
+            padding: 32px 24px 32px 24px;
+            z-index: 1;
+
+            &.tf-show{
+                left: 0;
+            }
+        }
     }
 
     .select2-container{

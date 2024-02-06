@@ -1969,6 +1969,13 @@
             }
         });
 
+        /*
+        * Filter btn
+        */
+        $(document).on('click', '.tf-hotel-template-4 .tf-archive-filter-btn', function () {
+            $('.tf-hotel-template-4 .tf-archive-filter-sidebar').toggleClass('tf-show');
+        });
+
         $('.tf-archive-hotel-type').select2({
             allowClear: true,
         });

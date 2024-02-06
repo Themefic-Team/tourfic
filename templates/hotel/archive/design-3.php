@@ -20,31 +20,44 @@
                     <!--Available rooms start -->
                     <div class="tf-archive-hotels-wrapper">
                         <div class="tf-archive-filter">
-                            <?php
-                            $hotel_types = get_terms( array(
-	                            'hide_empty' => true,
-	                            'taxonomy'   => 'hotel_type',
-                            ));
-                            ?>
+							<?php
+							$hotel_types = get_terms( array(
+								'hide_empty' => true,
+								'taxonomy'   => 'hotel_type',
+							) );
+							?>
                             <div class="tf-archive-filter-item">
                                 <select name="tf-hotel-type" class="tf-archive-hotel-type" multiple data-placeholder="<?php _e( "Select Hotel Type", "tourfic" ); ?>">
-                                    <?php
-                                    $destination_name = !empty( $_GET['destination'] ) ? $_GET['destination'] : '';
-                                    $search_types_query = !empty($_GET['types']) ? $_GET['types'] : array();
-                                    foreach ( $hotel_types as $key => $term ) {
-	                                    $id = $term->term_id;
-	                                    $name = $term->name;
-	                                    $fslug = $term->slug;
-	                                    $default_count = $term->count;
-	                                    $count = '<span>' . tf_term_count( $term->slug, $destination_name, $default_count ) . '</span>';
-	                                    $defult_select =  in_array($fslug, $search_types_query) ? 'selected' : '';
-	                                    echo "<option value='{$fslug}' {$defult_select}>{$name} {$count}</option>";
-                                    }
-                                    ?>
+									<?php
+									$destination_name   = ! empty( $_GET['destination'] ) ? $_GET['destination'] : '';
+									$search_types_query = ! empty( $_GET['types'] ) ? $_GET['types'] : array();
+									foreach ( $hotel_types as $key => $term ) {
+										$id            = $term->term_id;
+										$name          = $term->name;
+										$fslug         = $term->slug;
+										$default_count = $term->count;
+										$count         = '<span>' . tf_term_count( $term->slug, $destination_name, $default_count ) . '</span>';
+										$defult_select = in_array( $fslug, $search_types_query ) ? 'selected' : '';
+										echo "<option value='{$fslug}' {$defult_select}>{$name} {$count}</option>";
+									}
+									?>
                                 </select>
                             </div>
                             <div class="tf-archive-filter-item">
-
+                                <button class="tf-archive-filter-btn"><?php _e( "All Filter", "tourfic" ); ?></button>
+                            </div>
+                            <div class="tf-archive-filter-sidebar">
+                                <div class="tf-filter-wrapper">
+                                    <div class="tf-filter-title">
+                                        <h2 class="tf-section-title"><?php _e( "Filter", "tourfic" ); ?></h2>
+                                        <button class="filter-reset-btn"><?php _e( "Reset", "tourfic" ); ?></button>
+                                    </div>
+									<?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
+                                        <div id="tf__booking_sidebar">
+											<?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
+                                        </div>
+									<?php } ?>
+                                </div>
                             </div>
                         </div>
                         <div class="tf-archive-top">
@@ -85,7 +98,7 @@
                         </div>
 
                         <!--Available rooms start -->
-                        <div class="tf-archive-hotels archive_ajax_result <?php echo $tf_defult_views=="list" ? esc_attr('tf-layout-list') : esc_attr('tf-layout-grid'); ?>">
+                        <div class="tf-archive-hotels archive_ajax_result <?php echo $tf_defult_views == "list" ? esc_attr( 'tf-layout-list' ) : esc_attr( 'tf-layout-grid' ); ?>">
 
 							<?php
 							$count     = 0;
@@ -673,19 +686,5 @@
 		<?php endif; ?>
     </div>
     <!--Content section end -->
-
-
-    <!-- Hotel PopUp Starts -->
-    <div class="tf-popup-wrapper tf-hotel-popup">
-        <div class="tf-popup-inner">
-            <div class="tf-popup-body">
-
-            </div>
-            <div class="tf-popup-close">
-                <i class="fa-solid fa-xmark"></i>
-            </div>
-        </div>
-    </div>
-    <!-- Hotel PopUp end -->
 
 </div>
