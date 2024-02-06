@@ -1411,6 +1411,12 @@ function tf_single_tour_booking_form( $post_id ) {
 
                     <!-- Popup Footer Control & Partial Payment -->
                     <div class="tf-booking-pagination">
+						<?php 
+						if(!empty($meta['is_taxable'])){ ?>
+						<div class="tf-tax-notice">
+							<span>"<?php _e("Taxes will be calculated during checkout", "tourfic"); ?>"</span>
+						</div>
+						<?php } ?>
 					    <?php if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] ) && 3!=$tf_booking_by ) {
 						    $tf_deposit_amount =  array (
 								"{amount}" => $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount']. '%'

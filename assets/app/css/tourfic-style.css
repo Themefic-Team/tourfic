@@ -5716,6 +5716,14 @@ div#tf-contact-info {
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination {
   padding: 0 24px;
 }
+.tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-tax-notice,
+.tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-tax-notice {
+  padding-bottom: 16px;
+}
+.tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-tax-notice span,
+.tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-tax-notice span {
+  font-size: 16px;
+}
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher {
   padding-bottom: 16px;
@@ -5738,7 +5746,6 @@ div#tf-contact-info {
   top: 11px;
   display: flex;
   padding-left: 10px;
-  overflow: hidden;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn {
@@ -5749,6 +5756,7 @@ div#tf-contact-info {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn i,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn i {
   padding: 0px !important;
+  font-weight: 400 !important;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn .tf-tooltip,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn .tf-tooltip {
