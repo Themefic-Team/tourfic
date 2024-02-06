@@ -220,7 +220,6 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 							'attributes'  => array( 'disabled' => 'disabled' ),
 							'placeholder' => __( 'Please choose the apartment first', 'tourfic' ),
 							'field_width' => 50,
-							'is_pro'      => true
 						),
 						array(
 							'id'          => 'tf_apartment_adults_number',
@@ -357,7 +356,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 				}
 			}
 
-			// additional fees Calculation - more calculation needed
+			// additional fees Calculation 
 			if(is_array($addional_fees) ) {
 
 				if($addional_fees && !empty($addional_fees) && $apartment_pricing > 0 ) {
@@ -426,12 +425,14 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 				$additional_fee_amount = !empty( $this->get_apartment_meta_options( $apartment_id, "additional_fee" ) ) ? $this->get_apartment_meta_options( $apartment_id, "additional_fee" ) : 0;
 				$additional_fee_type = !empty( $this->get_apartment_meta_options( $apartment_id, "fee_type" ) ) ? $this->get_apartment_meta_options( $apartment_id, "fee_type" ) : '';
 
-				$all_fees[] = array(
-					"label" => $additional_fee_label,
-					"fee"   => $additional_fee_amount,
-					"price" => wc_price( $additional_fee_amount ),
-					"type"  => $additional_fee_type,
-				);
+				if($additional_fee_amount != 0) {
+					$all_fees[] = array(
+						"label" => $additional_fee_label,
+						"fee"   => $additional_fee_amount,
+						"price" => wc_price( $additional_fee_amount ),
+						"type"  => $additional_fee_type,
+					);
+				}
 			}
 
 			wp_reset_postdata();
@@ -504,9 +505,9 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 					$additional_fees = !empty($apt_data['additional_fees']) ? $apt_data['additional_fees'] : array();
 				} else {
 					$additional_fees [] = array(
-						"label" => !empty($apt_data['additional_fee_label']) ? !empty($apt_data['additional_fee_label']) : '',
-						"fee"   => !empty($apt_data['additional_fee']) ? !empty($apt_data['additional_fee']) : 0,
-						"type"  => !empty($apt_data['fee_type']) ? !empty($apt_data['fee_type']) : '',
+						"additional_fee_label" => !empty($apt_data['additional_fee_label']) ? $apt_data['additional_fee_label'] : '',
+						"additional_fee"   => !empty($apt_data['additional_fee']) ? $apt_data['additional_fee'] : 0,
+						"fee_type"  => !empty($apt_data['fee_type']) ? $apt_data['fee_type'] : '',
 					);
 				}
 
@@ -563,6 +564,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 					$order_data = array(
 						'post_id'          => intval( $field['tf_available_apartments'] ),
 						'post_type'        => 'apartment',
+						'room_number'      => null,
 						'check_in'         => $check_from,
 						'check_out'        => $check_to,
 						'billing_details'  => $billing_details,
