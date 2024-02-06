@@ -65,9 +65,9 @@ if ( tfopt( 'disable-services' ) && in_array( 'apartment', tfopt( 'disable-servi
 	add_action( 'init', 'register_tf_apartment_post_type' );
 }
 
-add_filter( 'use_block_editor_for_post_type', function ( $enabled, $post_type ) {
-	return ( 'tf_apartment' === $post_type ) ? false : $enabled;
-}, 10, 2 );
+// add_filter( 'use_block_editor_for_post_type', function ( $enabled, $post_type ) {
+// 	return ( 'tf_apartment' === $post_type ) ? false : $enabled;
+// }, 10, 2 );
 
 /**
  * Register taxonomies for tf_apartment

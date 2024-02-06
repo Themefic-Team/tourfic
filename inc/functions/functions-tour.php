@@ -70,9 +70,9 @@ if ( tfopt( 'disable-services' ) && in_array( 'tour', tfopt( 'disable-services' 
 	add_action( 'init', 'register_tf_tours_post_type' );
 }
 
-add_filter( 'use_block_editor_for_post_type', function ( $enabled, $post_type ) {
-	return ( 'tf_tours' === $post_type ) ? false : $enabled;
-}, 10, 2 );
+// add_filter( 'use_block_editor_for_post_type', function ( $enabled, $post_type ) {
+// 	return ( 'tf_tours' === $post_type ) ? false : $enabled;
+// }, 10, 2 );
 
 /**
  * Get Default Labels

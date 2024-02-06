@@ -35,7 +35,8 @@
         </div>
         <div class="tf-full-description">
             <?php 
-                echo get_the_content().'<span class="tf-see-less-description"> See less</span>';
+                the_content();
+                echo '<span class="tf-see-less-description"> See less</span>';
             ?>
         </div>
     </div>
