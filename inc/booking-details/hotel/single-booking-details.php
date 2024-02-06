@@ -176,9 +176,9 @@
                                 </tr>
                                 <?php if ( !empty($tf_tour_details->airport_service_fee) ) { ?>
                                 <tr>
-                                    <th><?php _e("Airport Service Fee", "tourfic"); ?></th>
+                                    <th><?php _e("Airport Service", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo wc_price($tf_tour_details->airport_service_fee); ?></td>
+                                    <td><?php echo $tf_tour_details->airport_service_fee; ?></td>
                                 </tr>
                                 <?php } ?>
                                 <?php 
