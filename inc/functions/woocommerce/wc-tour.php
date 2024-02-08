@@ -10,6 +10,10 @@ add_action( 'wp_ajax_tf_tours_booking', 'tf_tours_booking_function' );
 add_action( 'wp_ajax_nopriv_tf_tours_booking', 'tf_tours_booking_function' );
 function tf_tours_booking_function() {
 
+	if ( ! isset( $_POST['_ajax_nonce'] ) || ! wp_verify_nonce( $_POST['_ajax_nonce'], 'tf_ajax_nonce' ) ) {
+		return;
+	}
+
 	// Declaring errors & tour data array
 	$response      = array();
 	$tf_tours_data = array();
@@ -312,15 +316,22 @@ function tf_tours_booking_function() {
 	// Tour extra
 	$tour_extra_total = 0;
 	$tour_extra_title_arr = [];
+	
 	$tour_extra_meta = ! empty( $meta['tour-extra'] ) ? $meta['tour-extra'] : '';
 	if(!empty($tour_extra_meta)){
 		$tours_extra = explode(',', $_POST['tour_extra']);
-		foreach($tours_extra as $extra){
+		$tour_extra_quantity = explode(',', $_POST["tour_extra_quantity"]);
+		foreach($tours_extra as $extra_key => $extra){
 			$tour_extra_pricetype = !empty( $tour_extra_meta[$extra]['price_type'] ) ? $tour_extra_meta[$extra]['price_type'] : 'fixed';
 			if( $tour_extra_pricetype=="fixed" ){
 				if(!empty($tour_extra_meta[$extra]['title']) && !empty($tour_extra_meta[$extra]['price'])){
 					$tour_extra_total += $tour_extra_meta[$extra]['price'];
 					$tour_extra_title_arr[] =  $tour_extra_meta[$extra]['title']." (Fixed: ".wc_price($tour_extra_meta[$extra]['price']).")";
+				}
+			} else if($tour_extra_pricetype == "quantity") {
+				if(!empty($tour_extra_meta[$extra]['title']) && !empty($tour_extra_meta[$extra]['price'])){
+					$tour_extra_total += $tour_extra_meta[$extra]['price'] * $tour_extra_quantity[$extra_key];
+					$tour_extra_title_arr[] = $tour_extra_meta[$extra]['title']." (Per Unit: ".wc_price($tour_extra_meta[$extra]['price']).'*'.$tour_extra_quantity[$extra_key]."=".wc_price($tour_extra_meta[$extra]['price']*$tour_extra_quantity[$extra_key]).")";
 				}
 			}else{
 				if(!empty($tour_extra_meta[$extra]['price']) && !empty($tour_extra_meta[$extra]['title'])){

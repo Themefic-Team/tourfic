@@ -362,11 +362,14 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     <!-- Highlight section end -->
     <?php endif; ?>
 
-    <?php if ( $features ) { ?>
+    <?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) : ?> 
+        <?php if ( $features && !empty($meta["features"])) { ?>
         <!-- Start features -->
         <div class="tf_features sp-50">
             <div class="tf-container">
-                <h3 class="section-heading"><?php esc_html_e( 'Popular Features', 'tourfic' ); ?></h3>
+                <?php if (!empty($meta["tour-features-section-title"])) : ?>
+                    <h3 class="tf-title tf-section-title"><?php esc_html_e( $meta["tour-features-section-title"], 'tourfic' ); ?></h3>
+                <?php endif; ?>
                 <div class="tf-feature-list">
                     <?php foreach ( $features as $feature ) {
                         $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tour_features', true );
@@ -378,7 +381,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         } ?>
 
                         <div class="single-feature-box">
-                            <?php echo $feature_icon ?? ''; ?>
+                            <?php echo ( !empty($feature_meta['icon-c']) || !empty($feature_meta['icon-fa']) ) ? $feature_icon : ''; ?>
                             <p class="feature-list-title"><?php echo $feature->name; ?></p>
                         </div>
                     <?php } ?>
@@ -387,6 +390,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
         </div>
         <!-- End features -->
     <?php } ?>
+    <?php endif; ?>
     <!-- Include-Exclude section Start -->
     <?php
     if ( $inc || $exc ) :

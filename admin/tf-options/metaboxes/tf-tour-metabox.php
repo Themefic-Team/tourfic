@@ -252,12 +252,17 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'library' => 'image',
 				),
 				array(
-					'id'       => 'features',
-					'type'     => 'select2',
-					'multiple' => true,
-					'is_pro'   => true,
-					'label'    => __( 'Select features', 'tourfic' ),
+					'id'         => 'features',
+					'type'       => 'select2',
+					'multiple'   => true,
+					'label'      => __( 'Select features', 'tourfic' ),
 					'subtitle'   => __( 'For instance, select amenities like a Breakfast, AC Bus, Tour Guide, and more as applicable. You need to create these features from the ', 'tourfic' ) . ' <a href="'.admin_url('edit-tags.php?taxonomy=tour_features&post_type=tf_tours').'" target="_blank"><strong>' . __( '“Features”', 'tourfic' ) . '</strong></a> tab.',
+					'options'    => 'terms',
+					'query_args' => array(
+						'taxonomy'   => 'tour_features',
+						'hide_empty' => false,
+					),
+					'default'    => 'none',
 				),
 			),
 		),
@@ -360,6 +365,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 							'options'  => [
 								'fixed'  => __( 'Fixed', 'tourfic' ),
 								'person' => __( 'Per Person', 'tourfic' ),
+								'quantity' => __( 'Choose Quantity', 'tourfic' ),
 							],
 							'default'  => 'fixed',
 							'is_pro' => true,
@@ -687,7 +693,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'          => 'cont_min_people',
 					'type'        => 'number',
-					'label'       => __( 'Minimum Person', 'tourfic' ),
+					'label'       => __( 'Minimum Person (Required for Search)', 'tourfic' ),
 					'subtitle'    => __( 'Specify the minimum person required to book this tour.', 'tourfic' ),
 					'dependency'  => array(
 						array( 'type', '==', 'continuous' ),
@@ -698,7 +704,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'          => 'cont_max_people',
 					'type'        => 'number',
-					'label'       => __( 'Maximum Person', 'tourfic' ),
+					'label'       => __( 'Maximum Person (Required for Search)', 'tourfic' ),
 					'subtitle'    => __( 'Indicate the maximum number of persons this package can be booked for.', 'tourfic' ),
 					'dependency'  => array(
 						array( 'type', '==', 'continuous' ),
@@ -875,7 +881,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 									'id'        => 'tf-repeat-months-switch',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Repeat by Months', 'tourfic' ),
-									'subtitle'  => __( 'Enable this option, if you want to repeat fixed tour by months', 'tourfic' ),
+									'subtitle'  => __( 'Enable this option, if you want to repeat fixed tour by months in one calendar year', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default' => false,
@@ -1516,9 +1522,16 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 			'icon'   => 'fa fa-list',
 			'fields' => array(
 				array(
+					'id'      => 'tf-tour-tags-heading',
+					'type'    => 'heading',
+					'label' => __( 'Tour labels', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
 					'id'           => 'tf-tour-tags',
 					'type'         => 'repeater',
 					'label'        => __( 'Labels', 'tourfic' ),
+					'subtitle' => __('Add some keywords that highlight your tour\'s Unique Selling Point (USP). This label will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
 					'button_title' => __( 'Add / Insert New Label', 'tourfic' ),
 					'fields'       => array(
 
@@ -1531,6 +1544,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						array(
 							'id'       => 'tour-tag-color-settings',
 							'type'     => 'color',
+							'class'    => 'tf-label-field',
 							'label'    => __( 'Label Colors', 'tourfic' ),
 							'subtitle' => __( 'Colors of Label Background and Font', 'tourfic' ),
 							'multiple' => true,
@@ -1650,6 +1664,13 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'type'  => 'text',
 					'label' => __( 'Title of the Description Section', 'tourfic' ),
 					'default' => __("Description", 'tourfic'),
+				),
+
+				array(
+					'id'    => 'tour-features-section-title',
+					'type'  => 'text',
+					'label' => __( 'Title of the Features Section', 'tourfic' ),
+					'default' => __("Popular Features", 'tourfic'),
 				),
 				
 				array(

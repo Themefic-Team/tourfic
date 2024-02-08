@@ -152,9 +152,10 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				'tf_tours_page_tf-tour-backend-booking',
 				'tf_tours_page_tf_tours_booking',
 				'tf_hotel_page_tf_hotel_booking',
-				'tf_apartment_page_tf_apartment_booking'
+				'tf_apartment_page_tf_apartment_booking',
+				'admin_page_tf-setup-wizard'
 			);
-			$tf_options_post_type = array( 'tf_hotel', 'tf_tours', 'tf_apartment' );
+			$tf_options_post_type = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_email_templates' );
 			$admin_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
 			if("tourfic-settings_page_tf_dashboard"==$screen){
 				//Order Data Retrive
@@ -302,7 +303,8 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			//Color-Picker Css
 			wp_enqueue_style( 'wp-color-picker' );
 			if ( in_array( $screen, $tf_options_screens ) || in_array( $post_type, $tf_options_post_type ) ) {
-
+				wp_enqueue_style( 'tf-admin', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin.min.css', '', TOURFIC );
+				wp_enqueue_style( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css', '', TOURFIC );
 				wp_enqueue_style( 'tf-fontawesome-4', '//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css', array(), $this->tf_options_version() );
 				wp_enqueue_style( 'tf-fontawesome-5', '//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css', array(), $this->tf_options_version() );
 				wp_enqueue_style( 'tf-fontawesome-6', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css', array(), $this->tf_options_version() );
@@ -313,6 +315,36 @@ if ( ! class_exists( 'TF_Options' ) ) {
 
 			//Js
 			if ( in_array( $screen, $tf_options_screens ) || in_array( $post_type, $tf_options_post_type ) ) {
+				
+				//date format
+				$date_format_change  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+				wp_enqueue_script( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js', array( 'jquery' ), TOURFIC, true );
+				wp_enqueue_script( 'tf-fullcalender', TF_ASSETS_ADMIN_URL . 'js/lib/fullcalender.min.js', array( 'jquery' ), TOURFIC, true );
+				
+				wp_enqueue_script( 'tf-admin', TF_ASSETS_ADMIN_URL . 'js/tourfic-admin-scripts.min.js', array( 'jquery', 'wp-data', 'wp-editor', 'wp-edit-post' ), TOURFIC, true );
+				wp_localize_script( 'tf-admin', 'tf_admin_params',
+					array(
+						'tf_nonce'                         => wp_create_nonce( 'updates' ),
+						'ajax_url'                         => admin_url( 'admin-ajax.php' ),
+						'deleting_old_review_fields'       => __( 'Deleting old review fields...', 'tourfic' ),
+						'deleting_room_order_ids'          => __( 'Deleting order ids...', 'tourfic' ),
+						'tour_location_required'           => __( 'Tour Location is a required field!', 'tourfic' ),
+						'hotel_location_required'          => __( 'Hotel Location is a required field!', 'tourfic' ),
+						'apartment_location_required'      => __( 'Apartment Location is a required field!', 'tourfic' ),
+						'tour_feature_image_required'      => __( 'Tour image is a required!', 'tourfic' ),
+						'hotel_feature_image_required'     => __( 'Hotel image is a required!', 'tourfic' ),
+						'apartment_feature_image_required' => __( 'Apartment image is a required!', 'tourfic' ),
+						'installing'                       => __( 'Installing...', 'tourfic' ),
+						'activating'                       => __( 'Activating...', 'tourfic' ),
+						'installed'                        => __( 'Installed', 'tourfic' ),
+						'activated'                        => __( 'Activated', 'tourfic' ),
+						'install_failed'                   => __( 'Install failed', 'tourfic' ),
+						'date_format_change_backend' 	   => $date_format_change,
+						'i18n'                             => array(
+							'no_services_selected' => __( 'Please select at least one service.', 'tourfic' ),
+						)
+					)
+				);
 				wp_enqueue_script( 'Chart-js', '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js', array( 'jquery' ), '2.6.0', true );
 				wp_enqueue_script( 'tf-flatpickr', '//cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js', array( 'jquery' ), $this->tf_options_version(), true );
 				wp_enqueue_script( 'tf-select2', '//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array( 'jquery' ), $this->tf_options_version(), true );

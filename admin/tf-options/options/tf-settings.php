@@ -882,6 +882,13 @@ TF_Settings::option( 'tf_settings', array(
 					),
 					'default'    => 'All',
 				),
+				array(
+					'id'       => 'tour_booking_form_button_text',
+					'type'     => 'text',
+					'label'    => __( 'Change Booking Form Button Text', 'tourfic' ),
+					'subtitle'  => __( 'With this option, you can change the text of the booking form button on the single tour pages.', 'tourfic' ),
+					'default'    => __('Book Now', 'tourfic'),
+				),
 			),
 		),
 		// Partial Payment Popup
@@ -1718,6 +1725,20 @@ TF_Settings::option( 'tf_settings', array(
 						),
 					),
 				),
+				array(
+					'id'       => 'hotel_booking_form_button_text',
+					'type'     => 'text',
+					'label'    => __( 'Change Booking Form Button Text', 'tourfic' ),
+					'subtitle'  => __( 'With this option, you can change the text of the booking form button on the single hotel pages.', 'tourfic' ),
+					'default'    => __('Reserve Now', 'tourfic'),
+				),
+				array(
+					'id'       => 'hotel_booking_check_button_text',
+					'type'     => 'text',
+					'label'    => __( 'Change Book Availability Button Text', 'tourfic' ),
+					'subtitle'  => __( 'With this option, you can change the text of the check availability button on the single hotel pages.', 'tourfic' ),
+					'default'    => __('Check Availability', 'tourfic'),
+				),
 			),
 		),
 		'room_config'           => array(
@@ -1858,6 +1879,13 @@ TF_Settings::option( 'tf_settings', array(
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => false
+				),
+				array(
+					'id'       => 'apartment_booking_form_button_text',
+					'type'     => 'text',
+					'label'    => __( 'Change Booking Form Button Text', 'tourfic' ),
+					'subtitle'  => __( 'With this option, you can change the text of the booking form button on the single apartment pages.', 'tourfic' ),
+					'default'    => __('Reserve', 'tourfic'),
 				),
 			),
 		),
@@ -2981,13 +3009,14 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'tourfic-template3-bg',
 					'type'     => 'color',
-					'label'    => __( 'Background and Highlight Colors for Template 3', 'tourfic' ),
-					'subtitle' => __( 'Set the background and highlight color for the template 3.', 'tourfic' ),
+					'label'    => __( 'Colors Settings for Template 3', 'tourfic' ),
+					'subtitle' => __( 'Set the colors for the template 3.', 'tourfic' ),
 					'multiple' => true,
 					'inline'   => true,
 					'colors'   => array(
 						'template3-bg' => __( 'Template 3 Background Color', 'tourfic' ),
 						'template3-highlight' => __( 'Template 3 Highlight Color', 'tourfic' ),
+						'template3-icon-color' => __( 'Template 3 Icon Color', 'tourfic' ),
 					)
 				),
 			),

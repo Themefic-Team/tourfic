@@ -26,41 +26,57 @@
         });
 
         // Pyment Status Section
-        $('.tf-order-payment-status').select2({
-            dropdownCssClass: 'tf-booking-filter-modal',
-            placeholder: "Order Status",
-            allowClear: true
-        });
+        if ($('.tf-order-payment-status').length > 0 ) {
+            $('.tf-order-payment-status').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Order Status",
+                allowClear: true
+            });
+        }
         // Bulk Section
-        $('.tf-filter-bulk-option').select2({
-            dropdownCssClass: 'tf-booking-filter-modal',
-            placeholder: "Bulk Action",
-        });
+        if ( $('.tf-filter-bulk-option').length > 0 ) {
+            $('.tf-filter-bulk-option').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Bulk Action",
+            });
+        }
+        
         // Tour Post Section
-        $('.tf-post-id-filter-options').select2({
-            dropdownCssClass: 'tf-booking-filter-modal',
-            placeholder: "Tour Name",
-            allowClear: true
-        });
+        if( $('.tf-post-id-filter-options').length > 0 ) {
+            $('.tf-post-id-filter-options').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Tour Name",
+                allowClear: true
+            });
+        }
+        
         // Hotel Post Section
-        $('.tf-hotel-id-filter-options').select2({
-            dropdownCssClass: 'tf-booking-filter-modal',
-            placeholder: "Hotel Name",
-            allowClear: true
-        });
+        if ( $('.tf-hotel-id-filter-options').length > 0 ) {
+            $('.tf-hotel-id-filter-options').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Hotel Name",
+                allowClear: true
+            });
+        }
+        
         // Apartment Post Section
-        $('.tf-apartment-id-filter-options').select2({
-            dropdownCssClass: 'tf-booking-filter-modal',
-            placeholder: "Apartment Name",
-            allowClear: true
-        });
+        if ( $('.tf-apartment-id-filter-options').length > 0 ) {
+            $('.tf-apartment-id-filter-options').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Apartment Name",
+                allowClear: true
+            });
+        }
+        
 
         // Checked Section
-        $('.tf-tour-checkinout-options').select2({
-            dropdownCssClass: 'tf-booking-checkinout-filter-modal',
-            placeholder: "Checked in status",
-            allowClear: true
-        });
+        if ( $('.tf-tour-checkinout-options').length > 0 ) {
+            $('.tf-tour-checkinout-options').select2({
+                dropdownCssClass: 'tf-booking-checkinout-filter-modal',
+                placeholder: "Checked in status",
+                allowClear: true
+            });
+        }
 
         /**
          * Visitor Details Popup Open
@@ -91,6 +107,7 @@
 
             var formData = new FormData(this);
             formData.append('action', 'tf_visitor_details_edit');
+            formData.append('_ajax_nonce', tf_admin_params.tf_nonce);
             $.ajax({
                 type: 'post',
                 url: tf_admin_params.ajax_url,
@@ -129,7 +146,8 @@
                 data: {
                     action: 'tf_checkinout_details_edit',
                     order_id: order_id,
-                    checkinout: selected_value
+                    checkinout: selected_value,
+                    _ajax_nonce: tf_admin_params.tf_nonce
                 },
                 beforeSend: function (data) {
                     $('.tf-preloader-box').show();
@@ -163,7 +181,8 @@
                 data: {
                     action: 'tf_order_status_edit',
                     order_id: order_id,
-                    status: selected_value
+                    status: selected_value,
+                    _ajax_nonce: tf_admin_params.tf_nonce
                 },
                 beforeSend: function (data) {
                     $('.tf-preloader-box').show();
@@ -199,7 +218,8 @@
                     action: 'tf_order_status_email_resend',
                     order_id: order_id,
                     status: selected_value,
-                    id : db_id
+                    id : db_id,
+                    _ajax_nonce: tf_admin_params.tf_nonce
                 },
                 beforeSend: function (data) {
                     $('.tf-preloader-box').show();
@@ -264,7 +284,8 @@
                     data: {
                         action: 'tf_order_bulk_action_edit',
                         orders: order_list,
-                        status: bulk_action
+                        status: bulk_action,
+                        _ajax_nonce: tf_admin_params.tf_nonce
                     },
                     beforeSend: function (data) {
                         $('.tf-preloader-box').show();

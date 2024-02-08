@@ -863,12 +863,18 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 			'icon'   => 'fa fa-list',
 			'fields' => array(
 				array(
+					'id'      => 'tf-apartment-tags-heading',
+					'type'    => 'heading',
+					'label' => __( 'Apartment labels', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
 					'id'           => 'tf-apartment-tags',
 					'type'         => 'repeater',
 					'label'        => __( 'Labels', 'tourfic' ),
+					'subtitle' => __('Add some keywords that highlight your apartment\'s Unique Selling Point (USP). This label will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
 					'button_title' => __( 'Add / Insert New Label', 'tourfic' ),
 					'fields'       => array(
-
 						array(
 							'id'    => 'apartment-tag-title',
 							'type'  => 'text',
@@ -878,6 +884,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 						array(
 							'id'       => 'apartment-tag-color-settings',
 							'type'     => 'color',
+							'class'    => 'tf-label-field',
 							'label'    => __( 'Label Colors', 'tourfic' ),
 							'subtitle' => __( 'Colors of Label Background and Font', 'tourfic' ),
 							'multiple' => true,

@@ -623,15 +623,14 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 		<?php } ?>
 
 	<?php }
-	if ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-2" ) || ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-2" ) ) { ?>
-        <div class="tf-booking-form-fields <?php echo $post_type == 'tf_tours' ? esc_attr( 'tf-tour-archive-block' ) : ''; ?>">
-            <div class="tf-booking-form-location">
-                <span class="tf-booking-form-title"><?php _e( "Location", "tourfic" ); ?></span>
-                <label for="tf-search-location" class="tf-booking-location-wrap">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
-                        <path d="M8.5 13.9317L11.7998 10.6318C13.6223 8.80943 13.6223 5.85464 11.7998 4.0322C9.9774 2.20975 7.02261 2.20975 5.20017 4.0322C3.37772 5.85464 3.37772 8.80943 5.20017 10.6318L8.5 13.9317ZM8.5 15.8173L4.25736 11.5747C1.91421 9.2315 1.91421 5.43254 4.25736 3.08939C6.60051 0.746245 10.3995 0.746245 12.7427 3.08939C15.0858 5.43254 15.0858 9.2315 12.7427 11.5747L8.5 15.8173ZM8.5 8.66536C9.2364 8.66536 9.83333 8.06843 9.83333 7.33203C9.83333 6.59565 9.2364 5.9987 8.5 5.9987C7.7636 5.9987 7.16667 6.59565 7.16667 7.33203C7.16667 8.06843 7.7636 8.66536 8.5 8.66536ZM8.5 9.9987C7.02724 9.9987 5.83333 8.80476 5.83333 7.33203C5.83333 5.85927 7.02724 4.66536 8.5 4.66536C9.97273 4.66536 11.1667 5.85927 11.1667 7.33203C11.1667 8.80476 9.97273 9.9987 8.5 9.9987Z"
-                              fill="#595349"/>
-                    </svg>
+	elseif ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-2" ) || ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-2" ) ) { ?>
+		<div class="tf-booking-form-fields <?php echo $post_type == 'tf_tours' ? esc_attr( 'tf-tour-archive-block' ) : ''; ?>">
+			<div class="tf-booking-form-location">
+				<span class="tf-booking-form-title"><?php _e("Location", "tourfic"); ?></span>
+				<label for="tf-search-location" class="tf-booking-location-wrap">
+					<svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+					<path d="M8.5 13.9317L11.7998 10.6318C13.6223 8.80943 13.6223 5.85464 11.7998 4.0322C9.9774 2.20975 7.02261 2.20975 5.20017 4.0322C3.37772 5.85464 3.37772 8.80943 5.20017 10.6318L8.5 13.9317ZM8.5 15.8173L4.25736 11.5747C1.91421 9.2315 1.91421 5.43254 4.25736 3.08939C6.60051 0.746245 10.3995 0.746245 12.7427 3.08939C15.0858 5.43254 15.0858 9.2315 12.7427 11.5747L8.5 15.8173ZM8.5 8.66536C9.2364 8.66536 9.83333 8.06843 9.83333 7.33203C9.83333 6.59565 9.2364 5.9987 8.5 5.9987C7.7636 5.9987 7.16667 6.59565 7.16667 7.33203C7.16667 8.06843 7.7636 8.66536 8.5 8.66536ZM8.5 9.9987C7.02724 9.9987 5.83333 8.80476 5.83333 7.33203C5.83333 5.85927 7.02724 4.66536 8.5 4.66536C9.97273 4.66536 11.1667 5.85927 11.1667 7.33203C11.1667 8.80476 9.97273 9.9987 8.5 9.9987Z" fill="#595349"/>
+					</svg>
 
                     <input type="text" id="<?php echo $place_input_id ?? ''; ?>" required="" class="tf-field" placeholder="<?php echo $place_placeholder ?? __( 'Location/Destination', 'tourfic' ); ?>"
                            value="<?php echo ! empty( $place_title ) ? $place_title : ''; ?>">
@@ -729,33 +728,99 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                     </div>
 				<?php } ?>
 
-                <div class="tf_acrselection-wrap">
-                    <div class="tf_acrselection-inner">
-                        <div class="tf_acrselection">
-                            <div class="acr-label"><?php _e( "Adults", "tourfic" ); ?></div>
-                            <div class="acr-select">
-                                <div class="acr-dec">-</div>
-                                <input type="tel" name="adults" id="adults" min="1" value="<?php echo ! empty( $adult ) ? $adult : 1; ?>">
-                                <div class="acr-inc">+</div>
-                            </div>
-                        </div>
-                        <div class="tf_acrselection">
-                            <div class="acr-label"><?php _e( "Children", "tourfic" ); ?></div>
-                            <div class="acr-select">
-                                <div class="acr-dec">-</div>
-                                <input type="tel" name="childrens" id="children" min="0" value="<?php echo ! empty( $children ) ? $children : 0; ?>">
-                                <div class="acr-inc">+</div>
-                            </div>
-                        </div>
+				<div class="tf_acrselection-wrap">
+					<div class="tf_acrselection-inner">
+						<div class="tf_acrselection">
+							<div class="acr-label"><?php _e("Adults", "tourfic"); ?></div>
+							<div class="acr-select">
+								<div class="acr-dec">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13094)">
+										<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"></rect>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13094">
+										<rect width="20" height="20" fill="white"></rect>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
+								<input type="tel" name="adults" id="adults" min="1" value="<?php echo ! empty( $adult ) ? $adult : 1; ?>" readonly>
+								<div class="acr-inc">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13100)">
+										<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"></path>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13100">
+										<rect width="20" height="20" fill="white"></rect>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
+							</div>
+						</div>
+						<div class="tf_acrselection">
+							<div class="acr-label"><?php _e("Children", "tourfic"); ?></div>
+							<div class="acr-select">
+								<div class="acr-dec">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13094)">
+										<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"></rect>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13094">
+										<rect width="20" height="20" fill="white"></rect>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
+								<input type="tel" name="childrens" id="children" min="0" value="<?php echo ! empty( $children ) ? $children : 0; ?>" readonly>
+								<div class="acr-inc">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13100)">
+										<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"></path>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13100">
+										<rect width="20" height="20" fill="white"></rect>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
+							</div>
+						</div>
 						<?php if ( $post_type == 'tf_hotel' ) { ?>
-                            <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e( "Rooms", "tourfic" ); ?></div>
-                                <div class="acr-select">
-                                    <div class="acr-dec">-</div>
-                                    <input type="tel" name="room" id="room" min="1" value="<?php echo ! empty( $room ) ? $room : 1; ?>">
-                                    <div class="acr-inc">+</div>
-                                </div>
-                            </div>
+						<div class="tf_acrselection">
+							<div class="acr-label"><?php _e("Rooms", "tourfic"); ?></div>
+							<div class="acr-select">
+								<div class="acr-dec">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13094)">
+										<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"></rect>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13094">
+										<rect width="20" height="20" fill="white"></rect>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
+								<input type="tel" name="room" id="room" min="1" value="<?php echo ! empty( $room ) ? $room : 1; ?>" readonly>
+								<div class="acr-inc">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13100)">
+										<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"></path>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13100">
+										<rect width="20" height="20" fill="white"></rect>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
+							</div>
+						</div>
 						<?php } ?>
                     </div>
                 </div>
@@ -827,12 +892,12 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 
 		<?php if ( $post_type == 'tf_hotel' ) { ?>
 
-            <script>
-                (function ($) {
-                    $(document).ready(function () {
+			<script>
+			(function ($) {
+				$(document).ready(function () {
 
-                        // flatpickr locale
-						<?php tf_flatpickr_locale( "root" ); ?>
+					// flatpickr locale
+					<?php tf_flatpickr_locale("root"); ?>
 
                         $(".tf-template-3 .tf-booking-date-wrap").click(function () {
                             $("#check-in-out-date").click();
@@ -1161,14 +1226,14 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
                             altInput: true,
                             altFormat: '<?php echo $date_format_for_users; ?>',
 
-                            // flatpickr locale
-							<?php tf_flatpickr_locale(); ?>
+						// flatpickr locale
+						<?php tf_flatpickr_locale(); ?>
 
-                            onChange: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                            },
-                        });
+						onChange: function (selectedDates, dateStr, instance) {
+							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+						},
+					});
 
                         // open flatpickr on focus
                         calander.open();
@@ -1289,33 +1354,99 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
                     </div>
 				<?php } ?>
 
-                <div class="tf_acrselection-wrap">
-                    <div class="tf_acrselection-inner">
-                        <div class="tf_acrselection">
-                            <div class="acr-label"><?php _e( "Adults", "tourfic" ); ?></div>
-                            <div class="acr-select">
-                                <div class="acr-dec">-</div>
-                                <input type="tel" name="adults" id="adults" min="1" value="1">
-                                <div class="acr-inc">+</div>
-                            </div>
-                        </div>
-                        <div class="tf_acrselection">
-                            <div class="acr-label"><?php _e( "Children", "tourfic" ); ?></div>
-                            <div class="acr-select">
-                                <div class="acr-dec">-</div>
-                                <input type="tel" name="childrens" id="children" min="0" value="0">
-                                <div class="acr-inc">+</div>
-                            </div>
-                        </div>
+				<div class="tf_acrselection-wrap">
+					<div class="tf_acrselection-inner">
+						<div class="tf_acrselection">
+							<div class="acr-label"><?php _e("Adults", "tourfic"); ?></div>
+							<div class="acr-select">
+								<div class="acr-dec">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13094)">
+										<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13094">
+										<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
+								<input type="tel" name="adults" id="adults" min="1" value="1" readonly>
+								<div class="acr-inc">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13100)">
+										<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13100">
+										<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
+							</div>
+						</div>
+						<div class="tf_acrselection">
+							<div class="acr-label"><?php _e("Children", "tourfic"); ?></div>
+							<div class="acr-select">
+								<div class="acr-dec">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13094)">
+										<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13094">
+										<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
+								<input type="tel" name="childrens" id="children" min="0" value="0" readonly>
+								<div class="acr-inc">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13100)">
+										<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13100">
+										<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
+							</div>
+						</div>
 						<?php if ( $post_type !== 'tf_tours' ) { ?>
-                            <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e( "Rooms", "tourfic" ); ?></div>
-                                <div class="acr-select">
-                                    <div class="acr-dec">-</div>
-                                    <input type="tel" name="room" id="room" min="1" value="1">
-                                    <div class="acr-inc">+</div>
-                                </div>
-                            </div>
+						<div class="tf_acrselection">
+							<div class="acr-label"><?php _e("Rooms", "tourfic"); ?></div>
+							<div class="acr-select">
+								<div class="acr-dec">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13094)">
+										<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13094">
+										<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
+								<input type="tel" name="room" id="room" min="1" value="1" readonly>
+								<div class="acr-inc">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13100)">
+										<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13100">
+										<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
+							</div>
+						</div>
 						<?php } ?>
                     </div>
                 </div>

@@ -272,7 +272,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 			$_GET = array_map( 'stripslashes_deep', $_GET );
 		}
 		// Check-in & out date
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
+		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? esc_html( $_GET['check-in-out-date'] ) : '';
 
 		// date format for apartments
 		$date_format_change_apartments = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
@@ -304,12 +304,14 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 								<div class="tf_form_inners">
 									<div class="tf_checkin_dates">
 										<span class="date"><?php echo date('d'); ?></span>
-										<span class="month"><?php echo date('M'); ?></span>
-									</div>
-									<div class="tf_check_arrow">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-										<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
-										</svg>
+										<span class="month">
+											<span><?php echo date('M'); ?></span>
+											<div class="tf_check_arrow">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
+												</svg>
+											</div>
+										</span>
 									</div>
 								</div>
 							</label>
@@ -323,12 +325,14 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 								<div class="tf_form_inners">
 									<div class="tf_checkout_dates">
 										<span class="date"><?php echo date('d'); ?></span>
-										<span class="month"><?php echo date('M'); ?></span>
-									</div>
-									<div class="tf_check_arrow">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-										<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
-										</svg>
+										<span class="month">
+											<span><?php echo date('M'); ?></span>
+											<div class="tf_check_arrow">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
+												</svg>
+											</div>
+										</span>
 									</div>
 								</div>
 							</label>
@@ -357,18 +361,62 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 									<div class="tf_acrselection">
 										<div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
 										<div class="acr-select">
-											<div class="acr-dec">-</div>
-											<input type="tel" name="adults" id="adults" min="1" value="1"/>
-											<div class="acr-inc">+</div>
+											<div class="acr-dec">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13094)">
+													<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13094">
+													<rect width="20" height="20" fill="white"/>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
+											<input type="tel" name="adults" class="adults-style2" id="adults" min="1" value="1" readonly />
+											<div class="acr-inc">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13100)">
+													<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13100">
+													<rect width="20" height="20" fill="white"/>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
 										</div>
 									</div>
 									<?php if ( empty($disable_apartment_child_search) ): ?>
 										<div class="tf_acrselection">
 											<div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
 											<div class="acr-select">
-												<div class="acr-dec">-</div>
-												<input type="tel" name="children" id="children" min="0" value="0"/>
-												<div class="acr-inc">+</div>
+												<div class="acr-dec">
+													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+													<g clip-path="url(#clip0_3229_13094)">
+														<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+													</g>
+													<defs>
+														<clipPath id="clip0_3229_13094">
+														<rect width="20" height="20" fill="white"/>
+														</clipPath>
+													</defs>
+													</svg>
+												</div>
+												<input type="tel" name="children" class="childs-style2" id="children" min="0" value="0" readonly />
+												<div class="acr-inc">
+													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+													<g clip-path="url(#clip0_3229_13100)">
+														<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+													</g>
+													<defs>
+														<clipPath id="clip0_3229_13100">
+														<rect width="20" height="20" fill="white"/>
+														</clipPath>
+													</defs>
+													</svg>
+												</div>
 											</div>
 										</div>
 									<?php endif; ?>
@@ -376,9 +424,31 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 										<div class="tf_acrselection">
 											<div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
 											<div class="acr-select">
-												<div class="acr-dec">-</div>
-												<input type="tel" name="infant" id="infant" min="0" value="0"/>
-												<div class="acr-inc">+</div>
+												<div class="acr-dec">
+													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+													<g clip-path="url(#clip0_3229_13094)">
+														<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+													</g>
+													<defs>
+														<clipPath id="clip0_3229_13094">
+														<rect width="20" height="20" fill="white"/>
+														</clipPath>
+													</defs>
+													</svg>
+												</div>
+												<input type="tel" name="infant" class="infant-style2" id="infant" min="0" value="0" readonly />
+												<div class="acr-inc">
+													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+													<g clip-path="url(#clip0_3229_13100)">
+														<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+													</g>
+													<defs>
+														<clipPath id="clip0_3229_13100">
+														<rect width="20" height="20" fill="white"/>
+														</clipPath>
+													</defs>
+													</svg>
+												</div>
 											</div>
 										</div>
 									<?php endif; ?>
@@ -433,12 +503,12 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 							if(selectedDates[0]){
 								const startDate = selectedDates[0];
 								$(".tf_apartment_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
-								$(".tf_apartment_check_in_out_date .tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
+								$(".tf_apartment_check_in_out_date .tf_checkin_dates span.month span").html(monthNames[startDate.getMonth()]);
 							}
 							if(selectedDates[1]){
 								const endDate = selectedDates[1];
 								$(".tf_apartment_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
-								$(".tf_apartment_check_in_out_date .tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
+								$(".tf_apartment_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
 							}
 						}
 					}
@@ -466,6 +536,9 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 
                 <div class="tf_selectperson-wrap">
                     <div class="tf_input-inner">
+						<span class="tf_person-icon">
+                            <i class="fas fa-user"></i>
+                        </span>
                         <div class="adults-text"><?php _e( '1 Adults', 'tourfic' ); ?></div>
 						<?php if ( empty( $disable_apartment_child_search ) ): ?>
                             <div class="person-sep"></div>
@@ -609,8 +682,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                             instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                        },
-                        defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
+                        }
                     });
 
                 });
@@ -635,11 +707,12 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$adult_price         = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
 		$child_price         = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
 		$infant_price        = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
-		$discount_type       = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
+		$discount_type       = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : 'none';
 		$discount            = ! empty( $meta['discount'] ) ? $meta['discount'] : 0;
 		$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
 		$apt_availability    = ! empty( $meta['apt_availability'] ) ? $meta['apt_availability'] : '';
 		$booked_dates        = tf_apartment_booked_days( get_the_ID() );
+		$apt_reserve_button_text = !empty(tfopt('apartment_booking_form_button_text')) ? stripslashes(sanitize_text_field(tfopt('apartment_booking_form_button_text'))) : __("Reserve", 'tourfic');
 
 		$tf_booking_type = '1';
 		$tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = '';
@@ -669,6 +742,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? $_GET['check-in-out-date'] : '';
 
 		$apt_disable_dates = [];
+		$tf_apt_enable_dates = [];
 		if ( $enable_availability === '1' && ! empty( $apt_availability ) && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 			$apt_availability_arr = json_decode( $apt_availability, true );
 			//iterate all the available disabled dates
@@ -676,6 +750,9 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 				foreach ( $apt_availability_arr as $date ) {
 					if ( $date['status'] === 'unavailable' ) {
 						$apt_disable_dates[] = $date['check_in'];
+					}
+					if ( $date['status'] === 'available' ) {
+						$tf_apt_enable_dates[] = $date['check_in'];
 					}
 				}
 			}
@@ -693,27 +770,32 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                         <span class="tf-apartment-base-price">
 						<?php
 							//get the lowest price from all available room price
-							$apartment_min_price = 0;
-							if ( ! empty( $discount_type ) && ! empty( $price_per_night  ) && ! empty( $discount ) ) {
+							$apartment_min_main_price = $apartment_min_price["min"];
+							if ( ! empty( $discount_type ) && ! empty( $apartment_min_price["min"]  ) && ! empty( $discount ) ) {
 								if ( $discount_type == "percent" ) {
-									$apartment_min_discount = ( $price_per_night * (int) $discount ) / 100;
-									$apartment_min_price    = $price_per_night - $apartment_min_discount;
+									$apartment_min_discount = ( $apartment_min_price["min"] * (int) $discount ) / 100;
+									$apartment_min_price    = $apartment_min_price["min"] - $apartment_min_discount;
 								}
 								if ( $discount_type == "fixed" ) {
 									$apartment_min_discount = $discount;
-									$apartment_min_price    = $price_per_night - (int) $apartment_min_discount;
+									$apartment_min_price    = $apartment_min_price["min"] - (int) $apartment_min_discount;
 								}
 							}
 							$lowest_price = wc_price( $apartment_min_price );
 							
 							if ( ! empty( $apartment_min_discount ) ) {
-								echo  "<del><b>" . strip_tags(wc_price( $price_per_night )) . "</b></del>" . " " . $lowest_price;
+								echo "<b>" . __("From ", "tourfic") . "</b>" . "<del>" . strip_tags(wc_price( $apartment_min_main_price )) . "</del>" . " " . $lowest_price;
 							} else {
-								echo wc_price( $price_per_night );
+								echo __("From ", "tourfic") . wc_price( $apartment_min_main_price );
 							}
 							?>
 						</span>
-                        <span><?php _e( '/per night', 'tourfic' ) ?></span>
+						<?php if ( $pricing_type == "per_night") : ?>
+                        	<span><?php _e( '/per night', 'tourfic' ) ?></span>
+						<?php else : ?>
+							<span><?php _e( '/per person', 'tourfic' ) ?></span>
+						<?php endif; ?>
+
                     </h3>
 				<?php endif; ?>
 				<?php if ( $comments && ! $disable_review_sec == '1' ): ?>
@@ -795,10 +877,14 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 
                 <div class="tf-btn">
 					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' ) || $tf_booking_type == 1 ) : ?>
-                        <button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e( 'Reserve', 'tourfic' ); ?></button>
+                        <?php if (!empty($apt_reserve_button_text)) : ?>
+							<button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e( $apt_reserve_button_text, 'tourfic' ); ?></button>
+						<?php endif; ?>
 					<?php else: ?>
-                        <a href="<?php echo esc_url( $tf_booking_url ); ?>"
-                           class="tf_button tf-submit btn-styled" <?php echo ! empty( $tf_booking_attribute ) ? $tf_booking_attribute : ''; ?> target="_blank"><?php esc_html_e( 'Reserve', 'tourfic' ); ?></a>
+						<?php if (!empty($apt_reserve_button_text)) : ?>
+							<a href="<?php echo esc_url( $tf_booking_url ); ?>"
+							class="tf_button tf-submit btn-styled" <?php echo ! empty( $tf_booking_attribute ) ? $tf_booking_attribute : ''; ?> target="_blank"><?php esc_html_e( $apt_reserve_button_text , 'tourfic' ); ?></a>
+						<?php endif; ?>
 					<?php endif; ?>
                 </div>
             </div>
@@ -862,7 +948,10 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 var infant_price = <?php echo $infant_price; ?>;
                                 var enable_availability = '<?php echo $enable_availability; ?>';
                                 var apt_availability = '<?php echo $apt_availability; ?>';
-                                apt_availability = JSON.parse(apt_availability);
+                                
+								if(apt_availability) {
+									apt_availability = JSON.parse(apt_availability);
+								}
 
                                 if (enable_availability !== '1') {
                                     if (pricing_type === 'per_night') {
@@ -901,13 +990,17 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                             if (d.getTime() !== checkInDate.getTime()) {
                                                 var availabilityData = apt_availability[date];
                                                 var pricing_type = availabilityData.pricing_type;
-                                                var price = parseFloat(availabilityData.price);
+                                                var price = availabilityData.price ? parseFloat(availabilityData.price) : 0;
+                                                var adultPrice = availabilityData.adult_price ? parseFloat(availabilityData.adult_price) : 0;
+                                                var childPrice = availabilityData.child_price ? parseFloat(availabilityData.child_price) : 0;
+                                                var infantPrice = availabilityData.infant_price ? parseFloat(availabilityData.infant_price) : 0;
 
                                                 if (pricing_type === 'per_night' && price > 0) {
                                                     total_price += price;
                                                 } else if (pricing_type === 'per_person') {
-                                                    var totalPersonPrice = (parseFloat(availabilityData.adult_price) * $('#adults').val()) + (parseFloat(availabilityData.child_price) * $('#children').val()) + (parseFloat(availabilityData.infant_price) * $('#infant').val());
+                                                    var totalPersonPrice = (adultPrice * $('#adults').val()) + (childPrice * $('#children').val()) + (infantPrice * $('#infant').val());
                                                     total_price += totalPersonPrice;
+                                                    // console.log('total_price', total_price);
                                                 }
                                             }
                                         }
@@ -922,8 +1015,9 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 }
 								//discount
                                 var discount = <?php echo $discount; ?>;
+								var discountType = "<?php echo $discount_type; ?>";
                                 var discount_html = '<?php echo wc_price( 0 ); ?>';
-                                if (discount > 0) {
+                                if (discount > 0 && discountType != "none") {
                                     $('.apartment-discount-wrap').show();
 
 									<?php if ( $discount_type == 'percent' ): ?>
@@ -954,7 +1048,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 totalAdditionalFee_<?php echo $key ?> = additional_fee_<?php echo $key ?>;
 								<?php endif; ?>
 
-                                if (totalAdditionalFee_<?php echo $key ?> > 0 & newTotalPrice > 0 ) {
+                                if (totalAdditionalFee_<?php echo $key ?> > 0 ) {
                                     $('.additional-fee-wrap').show();
                                     total_price = total_price + totalAdditionalFee_<?php echo $key ?>;
                                     additional_fee_html_<?php echo $key ?> = '<?php echo wc_price( 0 ); ?>'.replace('0.00', totalAdditionalFee_<?php echo $key ?>.toFixed(2));
@@ -987,7 +1081,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 
                                 //total price
                                 var total_price_html = '<?php echo wc_price( 0 ); ?>';
-                                if (total_price > 0 && newTotalPrice > 0) {
+                                if (total_price > 0) {
                                     $('.total-price-wrap').show();
                                     total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', total_price.toFixed(2));
                                 }
@@ -1035,7 +1129,10 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                             instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                             bookingCalculation(selectedDates);
-                        },
+                        }, 
+						<?php if (!empty($tf_apt_enable_dates) && is_array($tf_apt_enable_dates)) : ?>
+							enable: [ <?php array_walk($tf_apt_enable_dates, function($date) {echo '"'. $date . '",';}); ?> ],
+						<?php endif; ?>
                         disable: [
 							<?php foreach ( $booked_dates as $booked_date ) : ?>
                             {
@@ -1152,7 +1249,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
                     <div class="tf_property_block_main_row">
                         <div class="tf_item_main_block">
                             <div class="tf-hotel__title-wrap">
-                                <a href="<?php echo $url; ?>"><h3 class="tourfic_hotel-title"><?php the_title(); ?></h3></a>
+                                <a href="<?php echo $url; ?>"><h3 class="tourfic_hotel-title"><?php echo get_the_title($post_id); ?></h3></a>
                             </div>
 							<?php
 							if ( $address ) {
@@ -1170,7 +1267,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
                             <div class="featuredRooms">
                                 <div class="prco-ltr-right-align-helper">
                                     <div class="tf-archive-shortdesc">
-										<?php echo substr( wp_strip_all_tags( get_the_content() ), 0, 160 ) . '...'; ?>
+										<?php echo substr( wp_strip_all_tags( get_the_content($post_id) ), 0, 160 ) . '...'; ?>
                                     </div>
                                 </div>
                                 <div class="roomNameInner">
@@ -1287,8 +1384,149 @@ if ( ! function_exists( 'tf_filter_apartment_by_date' ) ) {
 
 								if ( ! empty( $infant ) && ! empty( $meta['max_infants'] ) ) {
 									if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
-										if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
-											if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
+										if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
+											$tf_aprt_booked_dates = [];
+											if ( ! empty( $booked_dates ) ) {
+												foreach ( $booked_dates as $booked_date ) {
+													$booked_from = $booked_date['check_in'];
+													$booked_to   = $booked_date['check_out'];
+
+													$tfbookedperiod = new DatePeriod(
+														new DateTime( $booked_from . ' 00:00' ),
+														new DateInterval( 'P1D' ),
+														new DateTime( $booked_to . ' 23:59' )
+													);
+
+													foreach ( $tfbookedperiod as $date ) {
+														$tf_aprt_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
+													}
+												}
+											}
+											$avil_by_date = !empty($meta['enable_availability']) ? $meta['enable_availability'] : '';
+											$apt_availability_dates = !empty($meta['apt_availability']) ? $meta['apt_availability'] : '';
+											if(!empty($avil_by_date) && !empty($apt_availability_dates)){
+												$tf_check_in_date = 0;
+												$searching_period = [];
+												// Check if any date range match with search form date range and set them on array
+												if ( ! empty( $period ) ) {
+													foreach ( $period as $datekey => $date ) {
+														if(0==$datekey){
+															$tf_check_in_date = $date->format( 'Y/m/d' );
+														}
+														$searching_period[$date->format( 'Y/m/d' )] = $date->format( 'Y/m/d' );
+													}
+												}
+
+												$availability_dates = [];
+												$tf_check_in_date_price = [];
+												// Run loop through custom date range repeater and filter out only the dates
+											
+												if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
+													$apt_availability_dates = json_decode( $apt_availability_dates, true );
+													foreach($apt_availability_dates as $sdate){
+														if($tf_check_in_date==$sdate['check_in']){
+															$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
+														}
+														if(!array_key_exists($sdate['check_in'], $tf_aprt_booked_dates)){
+															$availability_dates[$sdate['check_in']] =  $sdate['check_in'];
+														}
+													}
+												}
+												
+												$tf_common_dates = array_intersect($availability_dates, $searching_period);
+												if (count($tf_common_dates) === count($searching_period)) {
+													if ( ! empty( $tf_check_in_date_price['price'] ) ) {
+														if ( $startprice <= $tf_check_in_date_price['price'] && $tf_check_in_date_price['price'] <= $endprice ) {
+															$has_apartment = true;
+														}
+													}
+												}
+											}else{
+												if ( ! empty( $meta['price_per_night'] ) && $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
+													$tf_booked_dates = [];
+													if ( ! empty( $booked_dates ) ) {
+														foreach ( $booked_dates as $booked_date ) {
+															$booked_from = $booked_date['check_in'];
+															$booked_to   = $booked_date['check_out'];
+
+															$tfbookedperiod = new DatePeriod(
+																new DateTime( $booked_from . ' 00:00' ),
+																new DateInterval( 'P1D' ),
+																new DateTime( $booked_to . ' 23:59' )
+															);
+
+															foreach ( $tfbookedperiod as $date ) {
+																$tf_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
+															}
+														}
+														foreach ( $avail_searching_date as $searching ) {
+															if ( array_key_exists( $searching, $tf_booked_dates ) ) {
+																$has_apartment = false;
+																break;
+															} else {
+																$has_apartment = true;
+															}
+														}
+													} else {
+														$has_apartment = true;
+													}
+												}
+											}
+										} else {
+
+											$tf_aprt_booked_dates = [];
+											if ( ! empty( $booked_dates ) ) {
+												foreach ( $booked_dates as $booked_date ) {
+													$booked_from = $booked_date['check_in'];
+													$booked_to   = $booked_date['check_out'];
+
+													$tfbookedperiod = new DatePeriod(
+														new DateTime( $booked_from . ' 00:00' ),
+														new DateInterval( 'P1D' ),
+														new DateTime( $booked_to . ' 23:59' )
+													);
+
+													foreach ( $tfbookedperiod as $date ) {
+														$tf_aprt_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
+													}
+												}
+											}
+											$avil_by_date = !empty($meta['enable_availability']) ? $meta['enable_availability'] : '';
+											$apt_availability_dates = !empty($meta['apt_availability']) ? $meta['apt_availability'] : '';
+											if(!empty($avil_by_date) && !empty($apt_availability_dates)){
+												$tf_check_in_date = 0;
+												$searching_period = [];
+												// Check if any date range match with search form date range and set them on array
+												if ( ! empty( $period ) ) {
+													foreach ( $period as $datekey => $date ) {
+														if(0==$datekey){
+															$tf_check_in_date = $date->format( 'Y/m/d' );
+														}
+														$searching_period[$date->format( 'Y/m/d' )] = $date->format( 'Y/m/d' );
+													}
+												}
+
+												$availability_dates = [];
+												$tf_check_in_date_price = [];
+												// Run loop through custom date range repeater and filter out only the dates
+											
+												if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
+													$apt_availability_dates = json_decode( $apt_availability_dates, true );
+													foreach($apt_availability_dates as $sdate){
+														if($tf_check_in_date==$sdate['check_in']){
+															$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
+														}
+														if(!array_key_exists($sdate['check_in'], $tf_aprt_booked_dates)){
+															$availability_dates[$sdate['check_in']] =  $sdate['check_in'];
+														}
+													}
+												}
+												
+												$tf_common_dates = array_intersect($availability_dates, $searching_period);
+												if (count($tf_common_dates) === count($searching_period)) {
+													$has_apartment = true;
+												}
+											}else{
 												$tf_booked_dates = [];
 												if ( ! empty( $booked_dates ) ) {
 													foreach ( $booked_dates as $booked_date ) {
@@ -1317,7 +1555,152 @@ if ( ! function_exists( 'tf_filter_apartment_by_date' ) ) {
 													$has_apartment = true;
 												}
 											}
-										} else {
+										}
+									}
+								} else {
+									if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
+										$tf_aprt_booked_dates = [];
+										if ( ! empty( $booked_dates ) ) {
+											foreach ( $booked_dates as $booked_date ) {
+												$booked_from = $booked_date['check_in'];
+												$booked_to   = $booked_date['check_out'];
+
+												$tfbookedperiod = new DatePeriod(
+													new DateTime( $booked_from . ' 00:00' ),
+													new DateInterval( 'P1D' ),
+													new DateTime( $booked_to . ' 23:59' )
+												);
+
+												foreach ( $tfbookedperiod as $date ) {
+													$tf_aprt_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
+												}
+											}
+										}
+										$avil_by_date = !empty($meta['enable_availability']) ? $meta['enable_availability'] : '';
+										$apt_availability_dates = !empty($meta['apt_availability']) ? $meta['apt_availability'] : '';
+										if(!empty($avil_by_date) && !empty($apt_availability_dates)){
+											$tf_check_in_date = 0;
+											$searching_period = [];
+											// Check if any date range match with search form date range and set them on array
+											if ( ! empty( $period ) ) {
+												foreach ( $period as $datekey => $date ) {
+													if(0==$datekey){
+														$tf_check_in_date = $date->format( 'Y/m/d' );
+													}
+													$searching_period[$date->format( 'Y/m/d' )] = $date->format( 'Y/m/d' );
+												}
+											}
+
+											$availability_dates = [];
+											$tf_check_in_date_price = [];
+											// Run loop through custom date range repeater and filter out only the dates
+										
+											if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
+												$apt_availability_dates = json_decode( $apt_availability_dates, true );
+												foreach($apt_availability_dates as $sdate){
+													if($tf_check_in_date==$sdate['check_in']){
+														$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
+													}
+													if(!array_key_exists($sdate['check_in'], $tf_aprt_booked_dates)){
+														$availability_dates[$sdate['check_in']] =  $sdate['check_in'];
+													}
+												}
+											}
+											
+											$tf_common_dates = array_intersect($availability_dates, $searching_period);
+											if (count($tf_common_dates) === count($searching_period)) {
+												if ( ! empty( $tf_check_in_date_price['price'] ) ) {
+													if ( $startprice <= $tf_check_in_date_price['price'] && $tf_check_in_date_price['price'] <= $endprice ) {
+														$has_apartment = true;
+													}
+												}
+											}
+										}else{
+											if ( ! empty( $meta['price_per_night'] ) && $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
+												$tf_booked_dates = [];
+												if ( ! empty( $booked_dates ) ) {
+													foreach ( $booked_dates as $booked_date ) {
+														$booked_from = $booked_date['check_in'];
+														$booked_to   = $booked_date['check_out'];
+
+														$tfbookedperiod = new DatePeriod(
+															new DateTime( $booked_from . ' 00:00' ),
+															new DateInterval( 'P1D' ),
+															new DateTime( $booked_to . ' 23:59' )
+														);
+
+														foreach ( $tfbookedperiod as $date ) {
+															$tf_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
+														}
+													}
+													foreach ( $avail_searching_date as $searching ) {
+														if ( array_key_exists( $searching, $tf_booked_dates ) ) {
+															$has_apartment = false;
+															break;
+														} else {
+															$has_apartment = true;
+														}
+													}
+												} else {
+													$has_apartment = true;
+												}
+											}
+										}
+									} else {
+
+										$tf_aprt_booked_dates = [];
+										if ( ! empty( $booked_dates ) ) {
+											foreach ( $booked_dates as $booked_date ) {
+												$booked_from = $booked_date['check_in'];
+												$booked_to   = $booked_date['check_out'];
+
+												$tfbookedperiod = new DatePeriod(
+													new DateTime( $booked_from . ' 00:00' ),
+													new DateInterval( 'P1D' ),
+													new DateTime( $booked_to . ' 23:59' )
+												);
+
+												foreach ( $tfbookedperiod as $date ) {
+													$tf_aprt_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
+												}
+											}
+										}
+										$avil_by_date = !empty($meta['enable_availability']) ? $meta['enable_availability'] : '';
+										$apt_availability_dates = !empty($meta['apt_availability']) ? $meta['apt_availability'] : '';
+										if(!empty($avil_by_date) && !empty($apt_availability_dates)){
+											$tf_check_in_date = 0;
+											$searching_period = [];
+											// Check if any date range match with search form date range and set them on array
+											if ( ! empty( $period ) ) {
+												foreach ( $period as $datekey => $date ) {
+													if(0==$datekey){
+														$tf_check_in_date = $date->format( 'Y/m/d' );
+													}
+													$searching_period[$date->format( 'Y/m/d' )] = $date->format( 'Y/m/d' );
+												}
+											}
+
+											$availability_dates = [];
+											$tf_check_in_date_price = [];
+											// Run loop through custom date range repeater and filter out only the dates
+										
+											if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
+												$apt_availability_dates = json_decode( $apt_availability_dates, true );
+												foreach($apt_availability_dates as $sdate){
+													if($tf_check_in_date==$sdate['check_in']){
+														$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
+													}
+													if(!array_key_exists($sdate['check_in'], $tf_aprt_booked_dates)){
+														$availability_dates[$sdate['check_in']] =  $sdate['check_in'];
+													}
+												}
+											}
+											
+											$tf_common_dates = array_intersect($availability_dates, $searching_period);
+											if (count($tf_common_dates) === count($searching_period)) {
+												$has_apartment = true;
+											}
+										}else{
 											$tf_booked_dates = [];
 											if ( ! empty( $booked_dates ) ) {
 												foreach ( $booked_dates as $booked_date ) {
@@ -1347,38 +1730,68 @@ if ( ! function_exists( 'tf_filter_apartment_by_date' ) ) {
 											}
 										}
 									}
-								} else {
-									if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
-										if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
-											$tf_booked_dates = [];
-											if ( ! empty( $booked_dates ) ) {
-												foreach ( $booked_dates as $booked_date ) {
-													$booked_from = $booked_date['check_in'];
-													$booked_to   = $booked_date['check_out'];
+								}
+							}
+						} else {
+							if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
+								$tf_aprt_booked_dates = [];
+								if ( ! empty( $booked_dates ) ) {
+									foreach ( $booked_dates as $booked_date ) {
+										$booked_from = $booked_date['check_in'];
+										$booked_to   = $booked_date['check_out'];
 
-													$tfbookedperiod = new DatePeriod(
-														new DateTime( $booked_from . ' 00:00' ),
-														new DateInterval( 'P1D' ),
-														new DateTime( $booked_to . ' 23:59' )
-													);
+										$tfbookedperiod = new DatePeriod(
+											new DateTime( $booked_from . ' 00:00' ),
+											new DateInterval( 'P1D' ),
+											new DateTime( $booked_to . ' 23:59' )
+										);
 
-													foreach ( $tfbookedperiod as $date ) {
-														$tf_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
-													}
-												}
-												foreach ( $avail_searching_date as $searching ) {
-													if ( array_key_exists( $searching, $tf_booked_dates ) ) {
-														$has_apartment = false;
-														break;
-													} else {
-														$has_apartment = true;
-													}
-												}
-											} else {
+										foreach ( $tfbookedperiod as $date ) {
+											$tf_aprt_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
+										}
+									}
+								}
+								$avil_by_date = !empty($meta['enable_availability']) ? $meta['enable_availability'] : '';
+								$apt_availability_dates = !empty($meta['apt_availability']) ? $meta['apt_availability'] : '';
+								if(!empty($avil_by_date) && !empty($apt_availability_dates)){
+									$tf_check_in_date = 0;
+									$searching_period = [];
+									// Check if any date range match with search form date range and set them on array
+									if ( ! empty( $period ) ) {
+										foreach ( $period as $datekey => $date ) {
+											if(0==$datekey){
+												$tf_check_in_date = $date->format( 'Y/m/d' );
+											}
+											$searching_period[$date->format( 'Y/m/d' )] = $date->format( 'Y/m/d' );
+										}
+									}
+
+									$availability_dates = [];
+									$tf_check_in_date_price = [];
+									// Run loop through custom date range repeater and filter out only the dates
+								
+									if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
+										$apt_availability_dates = json_decode( $apt_availability_dates, true );
+										foreach($apt_availability_dates as $sdate){
+											if($tf_check_in_date==$sdate['check_in']){
+												$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
+											}
+											if(!array_key_exists($sdate['check_in'], $tf_aprt_booked_dates)){
+												$availability_dates[$sdate['check_in']] =  $sdate['check_in'];
+											}
+										}
+									}
+									
+									$tf_common_dates = array_intersect($availability_dates, $searching_period);
+									if (count($tf_common_dates) === count($searching_period)) {
+										if ( ! empty( $tf_check_in_date_price['price'] ) ) {
+											if ( $startprice <= $tf_check_in_date_price['price'] && $tf_check_in_date_price['price'] <= $endprice ) {
 												$has_apartment = true;
 											}
 										}
-									} else {
+									}
+								}else{
+									if ( ! empty( $meta['price_per_night'] ) && $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
 										$tf_booked_dates = [];
 										if ( ! empty( $booked_dates ) ) {
 											foreach ( $booked_dates as $booked_date ) {
@@ -1408,10 +1821,60 @@ if ( ! function_exists( 'tf_filter_apartment_by_date' ) ) {
 										}
 									}
 								}
-							}
-						} else {
-							if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
-								if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
+							} else {
+								$tf_aprt_booked_dates = [];
+								if ( ! empty( $booked_dates ) ) {
+									foreach ( $booked_dates as $booked_date ) {
+										$booked_from = $booked_date['check_in'];
+										$booked_to   = $booked_date['check_out'];
+
+										$tfbookedperiod = new DatePeriod(
+											new DateTime( $booked_from . ' 00:00' ),
+											new DateInterval( 'P1D' ),
+											new DateTime( $booked_to . ' 23:59' )
+										);
+
+										foreach ( $tfbookedperiod as $date ) {
+											$tf_aprt_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
+										}
+									}
+								}
+								$avil_by_date = !empty($meta['enable_availability']) ? $meta['enable_availability'] : '';
+								$apt_availability_dates = !empty($meta['apt_availability']) ? $meta['apt_availability'] : '';
+								if(!empty($avil_by_date) && !empty($apt_availability_dates)){
+									$tf_check_in_date = 0;
+									$searching_period = [];
+									// Check if any date range match with search form date range and set them on array
+									if ( ! empty( $period ) ) {
+										foreach ( $period as $datekey => $date ) {
+											if(0==$datekey){
+												$tf_check_in_date = $date->format( 'Y/m/d' );
+											}
+											$searching_period[$date->format( 'Y/m/d' )] = $date->format( 'Y/m/d' );
+										}
+									}
+
+									$availability_dates = [];
+									$tf_check_in_date_price = [];
+									// Run loop through custom date range repeater and filter out only the dates
+								
+									if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
+										$apt_availability_dates = json_decode( $apt_availability_dates, true );
+										foreach($apt_availability_dates as $sdate){
+											if($tf_check_in_date==$sdate['check_in']){
+												$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
+											}
+											if(!array_key_exists($sdate['check_in'], $tf_aprt_booked_dates)){
+												$availability_dates[$sdate['check_in']] =  $sdate['check_in'];
+											}
+										}
+									}
+									
+									$tf_common_dates = array_intersect($availability_dates, $searching_period);
+									if (count($tf_common_dates) === count($searching_period)) {
+										$has_apartment = true;
+									}
+								}else{
 									$tf_booked_dates = [];
 									if ( ! empty( $booked_dates ) ) {
 										foreach ( $booked_dates as $booked_date ) {
@@ -1439,35 +1902,6 @@ if ( ! function_exists( 'tf_filter_apartment_by_date' ) ) {
 									} else {
 										$has_apartment = true;
 									}
-
-								}
-							} else {
-								$tf_booked_dates = [];
-								if ( ! empty( $booked_dates ) ) {
-									foreach ( $booked_dates as $booked_date ) {
-										$booked_from = $booked_date['check_in'];
-										$booked_to   = $booked_date['check_out'];
-
-										$tfbookedperiod = new DatePeriod(
-											new DateTime( $booked_from . ' 00:00' ),
-											new DateInterval( 'P1D' ),
-											new DateTime( $booked_to . ' 23:59' )
-										);
-
-										foreach ( $tfbookedperiod as $date ) {
-											$tf_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
-										}
-									}
-									foreach ( $avail_searching_date as $searching ) {
-										if ( array_key_exists( $searching, $tf_booked_dates ) ) {
-											$has_apartment = false;
-											break;
-										} else {
-											$has_apartment = true;
-										}
-									}
-								} else {
-									$has_apartment = true;
 								}
 							}
 						}
@@ -1666,6 +2100,7 @@ if ( ! function_exists( 'get_apartment_min_max_price' ) ) {
 						foreach ( $apt_availability as $single_avail ) {
 							if ( $pricing_type === 'per_night' ) {
 								$min_max_price[] = ! empty( $single_avail['price'] ) ? intval( $single_avail['price'] ) : 0;
+
 							} else {
 								$min_max_price[] = ! empty( $single_avail['adult_price'] ) ? intval( $single_avail['adult_price'] ) : 0;
 							}
@@ -1677,6 +2112,8 @@ if ( ! function_exists( 'get_apartment_min_max_price' ) ) {
 				}
 			}
 		}
+
+		$min_max_price = array_filter($min_max_price);
 
 		wp_reset_query();
 

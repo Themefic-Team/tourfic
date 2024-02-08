@@ -15,11 +15,11 @@
 
 		.tf-reviews-item { 
             background: #FDF9F3;
-            margin-right: 48px !important;
+            margin-right: 35px !important;
             padding: 24px;
             display: flex !important;
             flex-direction: row;
-            gap: 10px;
+            gap: 8px;
             min-height: 212px;
             @media #{$max767}{
                 min-height: auto;
@@ -43,6 +43,7 @@
                     font-weight: 600;
                     line-height: 20.80px;
                     word-wrap: break-word;
+                    margin: 0px 0px 8px 0px;
                     font-family: "Josefin Sans", sans-serif;
                     >div{
                         display: none;
@@ -50,8 +51,8 @@
 				}
 
 				.tf-reviews-meta { 
-                    color: #A1A1A1;
-                    margin-bottom: 12px;
+                    color: #99948D;
+                    margin-bottom: 16px;
                     display: inline-block;
 				}
 
@@ -63,7 +64,7 @@
 			}
 		}
         .slick-list {
-            padding: 32px 0 42px;
+            padding: 32px 0;
             @media #{$max767}{
                 padding-top: 16px;
                 padding-bottom: 16px;
@@ -80,11 +81,11 @@
             cursor: pointer;
         }
         button.next-arrow {
-            right: calc(50% - 95px);
+            right: calc(50% - 70px);
         }
         
         button.prev-arrow {
-            left: calc(50% - 95px);
+            left: calc(50% - 70px);
         }
 	}
 }
@@ -157,6 +158,9 @@
                     }
 				}
 			}
+            .tf-question:last-child {
+                margin-bottom: 0px !important;
+            }
 		}
 	}
 }

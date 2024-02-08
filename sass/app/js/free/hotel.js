@@ -497,45 +497,7 @@
             $(".tf-hotel-locations").removeClass('tf-locations-show');
         });
 
-        // Hotel Min and Max Range
-        let tf_hotel_range_options = {
-            range: {
-                min: parseInt(tf_params.tf_hotel_min_price),
-                max: parseInt(tf_params.tf_hotel_max_price),
-                step: 1
-            },
-            initialSelectedValues: {
-                from: parseInt(tf_params.tf_hotel_min_price),
-                to: parseInt(tf_params.tf_hotel_max_price) / 2
-            },
-            grid: false,
-            theme: "dark",
-        };
-        if (tf_params.tf_hotel_min_price != 0 && tf_params.tf_hotel_max_price != 0) {
-            $('.tf-hotel-filter-range').alRangeSlider(tf_hotel_range_options);
-        }
-
-        // Hotel Min and Max Range in Search Result
-        var tf_search_page_params = new window.URLSearchParams(window.location.search);
-        let tf_hotel_search_range = {
-            range: {
-                min: parseInt(tf_params.tf_hotel_min_price),
-                max: parseInt(tf_params.tf_hotel_max_price),
-                step: 1
-            },
-            initialSelectedValues: {
-                from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt(tf_params.tf_hotel_min_price),
-                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_hotel_max_price) / 2
-            },
-            grid: false,
-            theme: "dark",
-            onFinish: function () {
-                makeFilter();
-            }
-        };
-        if (tf_params.tf_hotel_min_price != 0 && tf_params.tf_hotel_max_price != 0) {
-            $('.tf-hotel-result-price-range').alRangeSlider(tf_hotel_search_range);
-        }
+        
 
         // Hotel location autocomplete
         var hotel_location_input = document.getElementById("tf-location");

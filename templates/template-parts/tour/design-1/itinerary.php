@@ -31,7 +31,7 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ) {
                             </div>
                         <?php } ?>
                         <div class="<?php echo !empty($itinerary['image']) ? esc_attr('tf-itinerary-content-details') : ''; ?>">
-                        <p><?php _e( $itinerary['desc'] ); ?></p>
+                        <p><?php _e( wpautop($itinerary['desc']) ); ?></p>
                         </div>
                     </div>
                 </div>

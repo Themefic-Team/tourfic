@@ -672,10 +672,19 @@ function tourfic_admin_menu_order_change ( $menu_order ) {
 
 		// // remove previous orders
 		unset( $menu_order[$tourfic_separator] );
-		unset( $menu_order[$tourfic_tours] );
-		unset( $menu_order[$tourfic_hotel] );
-		unset( $menu_order[$tourfic_apt] );
 		unset( $menu_order[$tourfic_separator2] );
+
+		if(!empty($tourfic_apt)) {
+			unset( $menu_order[$tourfic_apt] );
+		}
+
+		if(!empty($tourfic_tours)) {
+			unset( $menu_order[$tourfic_tours] );
+		}
+
+		if(!empty($tourfic_hotel)) {
+			unset( $menu_order[$tourfic_hotel] );
+		}
 		
 		if(!empty($tourfic_vendor)) {
 			unset( $menu_order[$tourfic_vendor] );

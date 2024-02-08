@@ -10,12 +10,14 @@
             $f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
             if ( $f_icon_type == 'fa' && !empty($feature_meta['icon-fa']) ) {
                 $feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
-            } elseif ( $f_icon_type == 'c' && !empty($feature_meta['icon-c']) ) {
+            }
+            if ( $f_icon_type == 'c' && !empty($feature_meta['icon-c']) ) {
                 $feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
-            } ?>
+            }
+            ?>
 
             <li>
-                <?php echo !empty($feature_icon) ? $feature_icon : ''; ?>
+                <?php echo !empty($feature_meta) && !empty($feature_icon) ? $feature_icon : ''; ?>
                 <?php echo $feature->name; ?>
             </li>
         <?php } } ?>

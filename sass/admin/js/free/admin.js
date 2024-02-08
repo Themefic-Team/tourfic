@@ -23,7 +23,8 @@
             var $this = $(this);
             var data = {
                 action: 'tf_delete_old_review_fields',
-                deleteAll: $(this).data('delete-all')
+                deleteAll: $(this).data('delete-all'),
+                _ajax_nonce: tf_admin_params.tf_nonce
             };
 
             $.ajax({
@@ -59,6 +60,7 @@
                 action: 'tf_remove_room_order_ids',
                 meta_field: meta_field,
                 post_id: post_id,
+                _ajax_nonce: tf_admin_params.tf_nonce
             };
 
             $.ajax({
