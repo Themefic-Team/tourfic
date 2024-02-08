@@ -3938,7 +3938,7 @@ a.tf-import-btn, a.tf-export-btn {
   line-height: normal;
   padding: 0;
 }
-.tf_booking_details_wrap .tf_booking_wrap_header .tf_header_wrap_button a.tf-export-btn {
+.tf_booking_details_wrap .tf_booking_wrap_header .tf_header_wrap_button a.tf-booking-export-btn {
   padding: 10px 32px;
   border-radius: 8px;
   border: 1px solid #003C79;
@@ -3952,7 +3952,7 @@ a.tf-import-btn, a.tf-export-btn {
   line-height: 24px; /* 150% */
   transition: 0.3s all ease;
 }
-.tf_booking_details_wrap .tf_booking_wrap_header .tf_header_wrap_button a.tf-export-btn:hover {
+.tf_booking_details_wrap .tf_booking_wrap_header .tf_header_wrap_button a.tf-booking-export-btn:hover {
   color: #f0f0f1;
   background-color: #003C79;
 }

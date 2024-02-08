@@ -24,6 +24,7 @@
 
             var formData = new FormData(this);
             formData.append('action', 'tf_tours_booking');
+            formData.append('_ajax_nonce', tf_params.nonce);
 
 
             // Tour Extra

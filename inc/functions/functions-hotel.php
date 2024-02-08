@@ -1184,15 +1184,15 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 			$_GET = array_map( 'stripslashes_deep', $_GET );
 		}
 		// location
-		$location = ! empty( $_GET['place'] ) ? sanitize_text_field( $_GET['place'] ) : '';
+		$location = ! empty( $_GET['place'] ) ? esc_html( $_GET['place'] ) : '';
 		// Adults
-		$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
+		$adults = ! empty( $_GET['adults'] ) ? esc_html( $_GET['adults'] ) : '';
 		// children
-		$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
+		$child = ! empty( $_GET['children'] ) ? esc_html( $_GET['children'] ) : '';
 		// room
-		$room = ! empty( $_GET['room'] ) ? sanitize_text_field( $_GET['room'] ) : '';
+		$room = ! empty( $_GET['room'] ) ? esc_html( $_GET['room'] ) : '';
 		// Check-in & out date
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
+		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? esc_html( $_GET['check-in-out-date'] ) : '';
 
 		// date format for users output
 		$hotel_date_format_for_users = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
@@ -1297,7 +1297,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 												</defs>
 												</svg>
 											</div>
-											<input type="tel" class="adults-style2" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>">
+											<input type="tel" class="adults-style2" name="adults" id="adults" min="1" value="1" readonly>
 											<div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<g clip-path="url(#clip0_3229_13100)">
@@ -1327,7 +1327,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 												</defs>
 												</svg>
 											</div>
-											<input type="tel" name="children" class="childs-style2" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
+											<input type="tel" name="children" class="childs-style2" id="children" min="0" value="0" readonly>
 											<div class="acr-inc child-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<g clip-path="url(#clip0_3229_13100)">
@@ -1357,7 +1357,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 												</defs>
 												</svg>
 											</div>
-											<input type="tel" name="room" class="rooms-style2" id="room" min="1" value="<?php echo ! empty( $room ) ? $room : '1'; ?>">
+											<input type="tel" name="room" class="rooms-style2" id="room" min="1" value="1" readonly>
 											<div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<g clip-path="url(#clip0_3229_13100)">
@@ -1434,8 +1434,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 						onChange: function (selectedDates, dateStr, instance) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 							dateSetToFields(selectedDates, instance);
-						},
-						defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
+						}
 					});
 
 					function dateSetToFields(selectedDates, instance) {
@@ -1509,13 +1508,13 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                         <span class="tf_person-icon">
                             <i class="fas fa-user"></i>
                         </span>
-                        <div class="adults-text"><?php echo ( ! empty( $adults ) ? $adults : '1' ) . ' ' . __( 'Adults', 'tourfic' ); ?></div>
+                        <div class="adults-text"><?php echo __( '1 Adults', 'tourfic' ); ?></div>
                         <?php if(empty($disable_hotel_child_search)) : ?>
                             <div class="person-sep"></div>
-                            <div class="child-text"><?php echo ( ! empty( $child ) ? $child : '0' ) . ' ' . __( 'Children', 'tourfic' ); ?></div>
+                            <div class="child-text"><?php echo __( '0 Children', 'tourfic' ); ?></div>
                         <?php endif; ?>
                         <div class="person-sep"></div>
-                        <div class="room-text"><?php echo ( ! empty( $room ) ? $room : '1' ) . ' ' . __( 'Room', 'tourfic' ); ?></div>
+                        <div class="room-text"><?php echo __( '1 Room', 'tourfic' ); ?></div>
                     </div>
 
                     <div class="tf_acrselection-wrap">
@@ -1524,7 +1523,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                                 <div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
-                                    <input type="number" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>">
+                                    <input type="number" name="adults" id="adults" min="1" value="1" readonly>
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
@@ -1533,7 +1532,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                                     <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
                                     <div class="acr-select">
                                         <div class="acr-dec">-</div>
-                                        <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
+                                        <input type="number" name="children" id="children" min="0" value="0">
                                         <div class="acr-inc">+</div>
                                     </div>
                                 </div>
@@ -1542,7 +1541,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                                 <div class="acr-label"><?php _e( 'Rooms', 'tourfic' ); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
-                                    <input type="number" name="room" id="room" min="1" value="<?php echo ! empty( $room ) ? $room : '1'; ?>">
+                                    <input type="number" name="room" id="room" min="1" value="1">
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
@@ -1678,8 +1677,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                             instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                        },
-                        defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
+                        }
                     });
 
                 });
@@ -1938,7 +1936,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 									</defs>
 									</svg>
 								</div>
-								<input type="tel" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>">
+								<input type="tel" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>" readonly>
 								<div class="acr-inc">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 									<g clip-path="url(#clip0_3229_13100)">
@@ -1968,7 +1966,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 									</defs>
 									</svg>
 								</div>
-								<input type="tel" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
+								<input type="tel" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>" readonly>
 								<div class="acr-inc">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 									<g clip-path="url(#clip0_3229_13100)">
@@ -3654,7 +3652,10 @@ function tf_remove_order_ids_from_room() {
  */
 add_action( 'wp_ajax_tf_remove_room_order_ids', 'tf_remove_room_order_ids' );
 function tf_remove_room_order_ids() {
-
+	if( !empty($_POST['_ajax_nonce']) && !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_ajax_nonce'] ) ), 'updates' ) ){
+        return;
+    }
+	
 	# Get order id field's name
 	$meta_field = isset( $_POST['meta_field'] ) ? sanitize_text_field( $_POST['meta_field'] ) : '';
 	# Trim room id from order id name

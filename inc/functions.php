@@ -744,7 +744,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 									</defs>
 									</svg>
 								</div>
-								<input type="tel" name="adults" id="adults" min="1" value="<?php echo ! empty( $adult ) ? $adult : 1; ?>">
+								<input type="tel" name="adults" id="adults" min="1" value="<?php echo ! empty( $adult ) ? $adult : 1; ?>" readonly>
 								<div class="acr-inc">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 									<g clip-path="url(#clip0_3229_13100)">
@@ -774,7 +774,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 									</defs>
 									</svg>
 								</div>
-								<input type="tel" name="childrens" id="children" min="0" value="<?php echo ! empty( $children ) ? $children : 0; ?>">
+								<input type="tel" name="childrens" id="children" min="0" value="<?php echo ! empty( $children ) ? $children : 0; ?>" readonly>
 								<div class="acr-inc">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 									<g clip-path="url(#clip0_3229_13100)">
@@ -805,7 +805,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 									</defs>
 									</svg>
 								</div>
-								<input type="tel" name="room" id="room" min="1" value="<?php echo ! empty( $room ) ? $room : 1; ?>">
+								<input type="tel" name="room" id="room" min="1" value="<?php echo ! empty( $room ) ? $room : 1; ?>" readonly>
 								<div class="acr-inc">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 									<g clip-path="url(#clip0_3229_13100)">
@@ -1359,7 +1359,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 									</defs>
 									</svg>
 								</div>
-								<input type="tel" name="adults" id="adults" min="1" value="1">
+								<input type="tel" name="adults" id="adults" min="1" value="1" readonly>
 								<div class="acr-inc">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 									<g clip-path="url(#clip0_3229_13100)">
@@ -1389,7 +1389,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 									</defs>
 									</svg>
 								</div>
-								<input type="tel" name="childrens" id="children" min="0" value="0">
+								<input type="tel" name="childrens" id="children" min="0" value="0" readonly>
 								<div class="acr-inc">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 									<g clip-path="url(#clip0_3229_13100)">
@@ -1420,7 +1420,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 									</defs>
 									</svg>
 								</div>
-								<input type="tel" name="room" id="room" min="1" value="1">
+								<input type="tel" name="room" id="room" min="1" value="1" readonly>
 								<div class="acr-inc">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 									<g clip-path="url(#clip0_3229_13100)">

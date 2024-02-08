@@ -909,7 +909,9 @@
             var input = $(this).parent().find('input');
             var max = input.attr('max') ? input.attr('max') : 999;
             var step = input.attr('step') ? input.attr('step') : 1;
-
+            if(!input.val()){
+                input.val(0);
+            }
             if (input.val() < max) {
                 input.val(parseInt(input.val()) + parseInt(step)).change();
             }
@@ -923,7 +925,9 @@
             var input = $(this).parent().find('input');
             var min = input.attr('min');
             var step = input.attr('step') ? input.attr('step') : 1;
-
+            if(!input.val()){
+                input.val(0);
+            }
             if (input.val() > min) {
                 input.val(input.val() - parseInt(step)).change();
             }
