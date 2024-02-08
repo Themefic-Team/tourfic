@@ -460,6 +460,7 @@
                                 <ul>
 									<?php if ( $room_facilities_switch == '1' && ! empty( $room_facilities ) ) :
 										foreach ( $room_facilities as $facility_key => $room_facility ) :
+											$room_facilities_icon = ! empty( $room_facility['room_facilities_icon'] ) ? $room_facility['room_facilities_icon'] : '';
 											$facility_price_switch = ! empty( $room_facility['room_facilities_price_switch'] ) ? $room_facility['room_facilities_price_switch'] : '0';
 											$facility_price = ! empty( $room_facility['room_facilities_price'] ) ? floatval( $room_facility['room_facilities_price'] ) : 0;
 											$facility_type = ! empty( $room_facility['room_facilities_price_type'] ) ? $room_facility['room_facilities_price_type'] : 'per_person';
@@ -468,6 +469,7 @@
                                             <li>
                                                 <label class="room-extra-checkbox">
                                                     <input type="checkbox" disabled name="room_facilities_<?php echo $unique_id; ?>" value="<?php echo esc_attr( $facility_key ); ?>">
+                                                    <span class="room-extra-icon"><i class="<?php echo esc_attr( $room_facilities_icon ); ?>"></i></span>
                                                     <span class="room-extra-label"><?php echo wp_kses_post( $room_facility['room_facilities_label'] ); ?><?php echo $facility_price_switch == '1' ? ' (' . wc_price( $facility_price ) . ' - ' . $facility_type_label . ')' : ''; ?></span>
                                                 </label>
                                             </li>

@@ -404,6 +404,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                             <li>
                                 <label class="room-extra-checkbox">
                                     <input type="checkbox" name="room_facilities_<?php echo $unique_id; ?>" class="room-facility-checkbox" value="<?php echo esc_attr( $facility_key ); ?>">
+                                    <span class="room-extra-icon"><i class="<?php echo esc_attr( $room_facility['room_facilities_icon'] ); ?>"></i></span>
                                     <span class="room-extra-label"><?php echo wp_kses_post( $room_facility['room_facilities_label'] ); ?><?php echo $facility_price_switch == '1' ? ' (' . wc_price( $facility_price ) . ' - ' . $facility_type_label . ')' : ''; ?></span>
                                 </label>
                             </li>
