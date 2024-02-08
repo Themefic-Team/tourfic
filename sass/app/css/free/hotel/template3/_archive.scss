@@ -11,7 +11,7 @@ $t4-main-color: #060D1C;
 .tf-hotel-template-4 {
     font-family: Ubuntu, sans-serif;
 
-    *{
+    * {
         box-sizing: border-box;
     }
 
@@ -65,7 +65,7 @@ $t4-main-color: #060D1C;
                 background: transparent;
                 padding: 0;
                 border: none;
-                width: 110px;
+                width: 90px;
                 color: $t4-paragraph;
                 font-size: 12px;
                 outline: none;
@@ -376,7 +376,7 @@ $t4-main-color: #060D1C;
                 list-style: none;
                 gap: 16px;
 
-                li {
+                li.tf-archive-view-item {
                     width: 32px;
                     height: 32px;
                     line-height: 36px;
@@ -384,6 +384,44 @@ $t4-main-color: #060D1C;
                     background-color: #fff;
                     text-align: center;
                     cursor: pointer;
+                    @include transition();
+
+                    &:hover {
+                        background: #FEF9F6;
+                        box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
+                    }
+
+                    &.active {
+                        background-color: $t4-orange-light;
+
+                        svg path {
+                            stroke: $t4-primary;
+                        }
+                    }
+                }
+
+                li.tf-archive-filter-btn {
+                    padding: 0 16px;
+                    color: $t4-paragraph;
+                    font-size: 14px;
+                    font-weight: 500;
+                    height: 32px;
+                    line-height: 34px;
+                    border-radius: 4px;
+                    background-color: #fff;
+                    text-align: center;
+                    cursor: pointer;
+                    @include transition();
+
+                    i {
+                        margin-right: 8px;
+                    }
+
+                    &:hover {
+                        border-radius: 4px;
+                        background: $t4-orange-light;
+                        box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
+                    }
 
                     &.active {
                         background-color: $t4-orange-light;
@@ -591,26 +629,238 @@ $t4-main-color: #060D1C;
         }
     }
 
-    .tf-archive-filter{
+    .tf-archive-filter {
         margin-bottom: 24px;
 
-        .tf-archive-filter-sidebar{
+        label input:checked ~ .checkmark{
+            background-color: $t4-primary !important;
+            border-color: $t4-primary !important;
+        }
+
+        .tf-archive-filter-sidebar {
             position: fixed;
             top: 0;
             left: -450px;
             width: 448px;
             height: 100vh;
             background-color: #fff;
-            padding: 32px 24px 32px 24px;
-            z-index: 1;
+            box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
+            padding: 32px 24px;
+            z-index: 9999;
+            @include transition();
 
-            &.tf-show{
+            &.tf-show {
                 left: 0;
+            }
+        }
+
+        .tf-filter-title {
+            @include flexbox();
+            @include justify-content(space-between);
+            margin-bottom: 32px;
+
+            .tf-section-title {
+                margin: 0;
+                padding: 0;
+                font-size: 24px;
+                font-weight: 500;
+            }
+
+            button {
+                margin: 0;
+                padding: 0;
+                border: none;
+                color: $t4-primary;
+                font-weight: 700;
+                line-height: 175%;
+                background-color: transparent;
+                letter-spacing: 0.15px;
+                cursor: pointer;
+                @media #{$max1024}{
+                    font-size: 12px !important;
+                }
+            }
+
+            button.filter-reset-btn {
+                //display: none;
+            }
+        }
+
+        .tf_widget {
+            .tf-hotel-result-price-range,
+            .tf-tour-result-price-range {
+                margin-top: 20px;
+                padding-bottom: 20px;
+            }
+
+            h4 {
+                font-size: 20px;
+                font-weight: 500;
+            }
+
+            .al-range-slider__track {
+                background: #EEE;
+                height: 10px;
+                box-shadow: none !important;
+                margin: 30px 0px 10px 0px;
+            }
+
+            .al-range-slider_dark {
+                padding: 0px !important;
+
+                .al-range-slider__bar {
+                    background: $color-theme !important;
+                    box-shadow: none !important;
+                }
+            }
+
+            .al-range-slider__knob {
+                background: $color-theme !important;
+                height: 15px;
+                width: 15px;
+                box-shadow: none !important;
+                border: 3px solid $color-theme !important;
+
+                &:first-child {
+                    span {
+                        left: 10px !important;
+                    }
+                }
+            }
+
+            .al-range-slider__tooltip {
+                background: $color-theme !important;
+                border-radius: 5px;
+                box-shadow: none;
+                padding: 3px 10px;
+                color: #fff !important;
+                font-size: 13px !important;
+                margin-bottom: 0px !important;
+            }
+
+            .al-range-slider__input.js-al-range-slider__input {
+                display: none !important;
+            }
+        }
+
+        #tf__booking_sidebar {
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+            scrollbar-width: thin;
+
+            &::-webkit-scrollbar {
+                width: 4px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: $t4-paragraph;
+                border-radius: 32px;
+            }
+
+            &::-webkit-scrollbar-track {
+                border-radius: 32px;
+                background: rgba(6, 13, 28, 0.20);
+            }
+
+            .widget {
+                border: 0px solid;
+                background: inherit;
+                border-radius: 0px;
+                margin-bottom: 26px;
+                border-bottom: 1px solid #E3E6F0;
+                padding: 0px !important;
+
+                .tf-widget-title {
+                    background-color: inherit;
+                    border: 0px solid;
+                    padding: 0px;
+                    border-radius: 0px;
+                    height: auto;
+                    pointer-events: none;
+
+                    h4 {
+                        font-family: inherit;
+                        font-size: 20px;
+                        font-weight: 500;
+                    }
+
+                    i {
+                        display: none;
+                    }
+                }
+
+                .tf-filter {
+                    padding: 0;
+
+                    ul {
+                        padding: 0;
+
+                        li {
+                            padding: 6px 0px;
+                            margin: 5px 0px;
+
+                            label {
+                                position: relative;
+                                cursor: pointer;
+                                width: 100%;
+                                display: inline-block;
+                                padding-left: 32px;
+                                line-height: 1.3;
+                                font-size: 16px;
+                                font-weight: 400;
+
+                                input {
+                                    display: none;
+                                }
+
+                                .checkmark {
+                                    position: absolute;
+                                    top: 0px;
+                                    left: 0px;
+                                    height: 20px;
+                                    width: 20px;
+                                    background-color: #fff;
+                                    border-radius: 5px;
+                                    border: 1px solid #D2D2D6;
+
+                                    &:after{
+                                        left: 5.5px;
+                                        top: 1.5px;
+                                        width: 5px;
+                                        border-width: 0 2px 2px 0;
+                                    }
+                                }
+                            }
+                        }
+
+                        li.active {
+                            background: transparent !important;
+                        }
+                    }
+
+                    a {
+                        text-align: left;
+                        color: $color-theme !important;
+                        text-transform: capitalize;
+                        margin-bottom: 26px;
+                        font-weight: 400;
+                        text-decoration: none;
+
+                        span {
+                            margin-left: 8px;
+                        }
+                    }
+
+                    a.see-less {
+                        display: none;
+                        text-decoration: none;
+                    }
+                }
             }
         }
     }
 
-    .select2-container{
+    .select2-container {
         width: 100% !important;
 
         .select2-selection {
@@ -621,6 +871,7 @@ $t4-main-color: #060D1C;
             border-radius: 4px;
             color: $t4-paragraph;
         }
+
         //
         //    .select2-selection__choice {
         //        background-color: $slate10;
@@ -669,6 +920,7 @@ $t4-main-color: #060D1C;
             outline: 0;
         }
     }
+
     .select2-container--default .select2-selection--single .select2-selection__arrow {
         height: 48px;
     }

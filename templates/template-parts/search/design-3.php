@@ -9,7 +9,7 @@
         <div class="tf-archive-search-form tf-booking-form-wrapper">
             <div class="tf-container">
                 <form action="<?php echo tf_booking_search_action(); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
-					<?php tf_archive_sidebar_search_form( 'tf_hotel' ); ?>
+	                <?php tf_search_result_sidebar_form( 'archive' ); ?>
                 </form>
             </div>
         </div>
@@ -29,18 +29,18 @@
                             <!--<div class="tf-archive-filter-item">
                                 <select name="tf-hotel-type" class="tf-archive-hotel-type" multiple data-placeholder="<?php /*_e( "Select Hotel Type", "tourfic" ); */?>">
 									<?php
-/*									$destination_name   = ! empty( $_GET['destination'] ) ? $_GET['destination'] : '';
-									$search_types_query = ! empty( $_GET['types'] ) ? $_GET['types'] : array();
-									foreach ( $hotel_types as $key => $term ) {
-										$id            = $term->term_id;
-										$name          = $term->name;
-										$fslug         = $term->slug;
-										$default_count = $term->count;
-										$count         = '<span>' . tf_term_count( $term->slug, $destination_name, $default_count ) . '</span>';
-										$defult_select = in_array( $fslug, $search_types_query ) ? 'selected' : '';
-										echo "<option value='{$fslug}' {$defult_select}>{$name} {$count}</option>";
-									}
-									*/?>
+							/*									$destination_name   = ! empty( $_GET['destination'] ) ? $_GET['destination'] : '';
+																$search_types_query = ! empty( $_GET['types'] ) ? $_GET['types'] : array();
+																foreach ( $hotel_types as $key => $term ) {
+																	$id            = $term->term_id;
+																	$name          = $term->name;
+																	$fslug         = $term->slug;
+																	$default_count = $term->count;
+																	$count         = '<span>' . tf_term_count( $term->slug, $destination_name, $default_count ) . '</span>';
+																	$defult_select = in_array( $fslug, $search_types_query ) ? 'selected' : '';
+																	echo "<option value='{$fslug}' {$defult_select}>{$name} {$count}</option>";
+																}
+																*/?>
                                 </select>
                             </div>
                             <div class="tf-archive-filter-item">

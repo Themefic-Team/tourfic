@@ -333,6 +333,11 @@
             $('[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types]').prop('checked', false);
             makeFilter();
             $(".filter-reset-btn").hide();
+
+            //template 4
+            if ($(".tf-archive-filter-sidebar").length > 0) {
+                $(".tf-archive-filter-sidebar").removeClass('tf-show');
+            }
         });
 
         /*
@@ -1952,9 +1957,9 @@
         /*
          * Grid/List
          */
-        $(document).on('click', '.tf-archive-view li', function (e) {
+        $(document).on('click', '.tf-archive-view li.tf-archive-view-item', function (e) {
             e.preventDefault();
-            $('.tf-archive-view li').removeClass('active');
+            $('.tf-archive-view li.tf-archive-view-item').removeClass('active');
             $(this).addClass('active');
 
             let dataId = $(this).data('id');
@@ -1974,6 +1979,11 @@
         */
         $(document).on('click', '.tf-hotel-template-4 .tf-archive-filter-btn', function () {
             $('.tf-hotel-template-4 .tf-archive-filter-sidebar').toggleClass('tf-show');
+        });
+        $(document).click(function (event) {
+            if (!$(event.target).closest(".tf-hotel-template-4 .tf-archive-filter-sidebar,.tf-hotel-template-4 .tf-archive-filter-btn").length) {
+                $(".tf-hotel-template-4 .tf-archive-filter-sidebar").removeClass("tf-show");
+            }
         });
 
         $('.tf-archive-hotel-type').select2({
