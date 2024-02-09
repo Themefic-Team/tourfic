@@ -14750,6 +14750,7 @@ html {
   font-size: 31px;
   font-weight: 400;
   color: #6E655E;
+  padding: 0;
 }
 .tf-hotel-template-4 .tf_acrselection-wrap.tf-show {
   visibility: visible;
@@ -14896,6 +14897,7 @@ html {
 }
 .tf-hotel-template-4 .tf-archive-details .tf-details-right .tf-map-item .tf-map-item-content .tf-reviews .tf-avarage-review {
   line-height: 20px;
+  color: #6E655E;
 }
 .tf-hotel-template-4 .tf-archive-details .tf-archive-top {
   display: -webkit-box;
@@ -15117,6 +15119,7 @@ html {
 }
 .tf-hotel-template-4 .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-reviews .tf-avarage-review {
   line-height: 20px;
+  color: #6E655E;
 }
 .tf-hotel-template-4 .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-right {
   display: -webkit-box;
@@ -15176,7 +15179,7 @@ html {
   height: 165px;
 }
 .tf-hotel-template-4 .tf-archive-details .tf-archive-hotels.tf-layout-grid .tf-archive-hotel .tf-archive-hotel-content {
-  width: calc(100% - 32px);
+  width: 100%;
   display: block;
 }
 .tf-hotel-template-4 .tf-archive-details .tf-archive-hotels.tf-layout-grid .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left {

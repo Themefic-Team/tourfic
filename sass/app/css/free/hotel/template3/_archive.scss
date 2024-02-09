@@ -198,6 +198,7 @@ $t4-main-color: #060D1C;
                 font-size: 31px;
                 font-weight: 400;
                 color: $t4-paragraph;
+                padding: 0;
             }
         }
     }
@@ -352,7 +353,7 @@ $t4-main-color: #060D1C;
 
                         .tf-avarage-review {
                             line-height: 20px;
-
+                            color: $t4-paragraph;
                         }
                     }
                 }
@@ -551,6 +552,7 @@ $t4-main-color: #060D1C;
 
                         .tf-avarage-review {
                             line-height: 20px;
+                            color: $t4-paragraph;
                         }
                     }
                 }
@@ -604,7 +606,7 @@ $t4-main-color: #060D1C;
                 }
 
                 .tf-archive-hotel-content {
-                    width: calc(100% - 32px);
+                    width: 100%;
                     display: block;
 
                     .tf-archive-hotel-content-left {

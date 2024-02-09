@@ -178,6 +178,11 @@
                     if ($('.tf-details-right').length > 0) {
                         $('.tf-details-right').removeClass('tf-filter-show');
                     }
+                    //update map
+                    var mapLocations = $('#map-datas').html();
+                    if ($('#map-datas').length && mapLocations.length) {
+                        googleMapInit(mapLocations);
+                    }
                     // @KK show notice in every success request
                     notyf.success(tf_params.ajax_result_success);
                 },
@@ -2148,61 +2153,62 @@
             googleMapInit(mapLocations);
         }
 
-        // GOOGLE MAP INIT
-        function googleMapInit(mapLocations) {
-            if (!mapLocations) {
-                return false;
-            }
-            var locations = JSON.parse(mapLocations);
 
-            var map = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
-                zoom: 1,
-                center: new google.maps.LatLng(23.8697847, 90.4219536),
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                styles: [
-                    {elementType: 'labels.text.fill', stylers: [{color: '#44348F'}]},
-                ]
-            });
-
-            var infowindow = new google.maps.InfoWindow({
-                maxWidth: 300
-            });
-
-            // Add some markers to the map.
-            // Note: The code uses the JavaScript Array.prototype.map() method to
-            // create an array of markers based on a given "locations" array.
-            // The map() method here has nothing to do with the Google Maps API.
-            var markers = new Array();
-            locations.map(function (location, i) {
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(location['lat'], location['lng']),
-                    map: map,
-                    icon: document.getElementById('map-marker').dataset.marker
-                });
-                markers.push(marker);
-                google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                    return function () {
-                        infowindow.setContent(window.atob(location['content']));
-                        infowindow.open(map, marker);
-                    }
-                })(marker, i));
-            });
-
-            // Add a marker clusterer to manage the markers.
-            var markerCluster = new MarkerClusterer(map, markers, {
-                imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
-            });
-
-            //  Create a new viewpoint bound
-            var bounds = new google.maps.LatLngBounds();
-            markers.map(function (marker, index) {
-                bounds.extend(marker.position);
-            });
-            //  Fit these bounds to the map
-            map.fitBounds(bounds);
-        }
     });
 
+    // GOOGLE MAP INIT
+    function googleMapInit(mapLocations) {
+        if (!mapLocations) {
+            return false;
+        }
+        var locations = JSON.parse(mapLocations);
+
+        var map = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
+            zoom: 1,
+            center: new google.maps.LatLng(23.8697847, 90.4219536),
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            styles: [
+                {elementType: 'labels.text.fill', stylers: [{color: '#44348F'}]},
+            ]
+        });
+
+        var infowindow = new google.maps.InfoWindow({
+            maxWidth: 300
+        });
+
+        // Add some markers to the map.
+        // Note: The code uses the JavaScript Array.prototype.map() method to
+        // create an array of markers based on a given "locations" array.
+        // The map() method here has nothing to do with the Google Maps API.
+        var markers = new Array();
+        locations.map(function (location, i) {
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(location['lat'], location['lng']),
+                map: map,
+                icon: document.getElementById('map-marker').dataset.marker
+            });
+            markers.push(marker);
+            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                return function () {
+                    infowindow.setContent(window.atob(location['content']));
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+        });
+
+        // Add a marker clusterer to manage the markers.
+        var markerCluster = new MarkerClusterer(map, markers, {
+            imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+        });
+
+        //  Create a new viewpoint bound
+        var bounds = new google.maps.LatLngBounds();
+        markers.map(function (marker, index) {
+            bounds.extend(marker.position);
+        });
+        //  Fit these bounds to the map
+        map.fitBounds(bounds);
+    }
 })(jQuery, window);
 
 /**
