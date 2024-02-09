@@ -940,196 +940,6 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
-		// Without Payment Popup
-		'without_payment_book'  => array(
-			'title'  => __( 'Without Payment Settings', 'tourfic' ),
-			'parent' => 'tour',
-			'icon'   => 'fa fa-cog',
-			'fields' => array(
-				array(
-					'id'       => 'confirmation_fields_heading',
-					'type'     => 'heading',
-					'label'    => __( 'Settings for Without Payment Option', 'tourfic' ),
-					'subtitle' => __( 'Activating the "Without Payment" booking option will enable the use of this section.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'tour-option-notice-four',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#Without_payment_Book" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				array(
-					'id'           => 'book-confirm-field',
-					'class'        => 'disable-sortable',
-					'type'         => 'repeater',
-					'button_title' => __( 'Add New', 'tourfic' ),
-					'label'        => __( 'Fields for Booking Confirmation', 'tourfic' ),
-					'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
-					'is_pro'       => true,
-					'fields'       => array(
-						array(
-							'id'    => 'reg-field-label',
-							'type'  => 'text',
-							'label' => __( 'Label', 'tourfic' ),
-						),
-						array(
-							'id'       => 'reg-field-name',
-							'type'     => 'text',
-							'label'    => __( 'Name', 'tourfic' ),
-							'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
-							'validate' => 'no_space_no_special',
-							'class'    => 'tf_hidden_fields'
-						),
-						array(
-							'id'      => 'reg-fields-type',
-							'type'    => 'select',
-							'label'   => __( 'Field Type', 'tourfic' ),
-							'options' => array(
-								'text'     => __( 'Text', 'tourfic' ),
-								'email'    => __( 'Email', 'tourfic' ),
-								'date'     => __( 'Date', 'tourfic' ),
-								'radio'    => __( 'Radio', 'tourfic' ),
-								'checkbox' => __( 'Checkbox', 'tourfic' ),
-								'select'   => __( 'Select', 'tourfic' ),
-							),
-							'class'   => 'tf_hidden_fields'
-						),
-						array(
-							'id'           => 'reg-options',
-							'type'         => 'repeater',
-							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'        => __( 'Option Label', 'tourfic' ),
-							'dependency'   => array(
-								array( 'reg-fields-type', '==', 'radio' ),
-							),
-							'fields'       => array(
-								array(
-									'label' => __( 'Field Label', 'tourfic' ),
-									'id'    => 'option-label',
-									'type'  => 'text',
-								),
-								array(
-									'label' => __( 'Field Value', 'tourfic' ),
-									'id'    => 'option-value',
-									'type'  => 'text',
-								),
-							),
-						),
-						array(
-							'id'           => 'reg-options',
-							'type'         => 'repeater',
-							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'        => __( 'Option Label', 'tourfic' ),
-							'dependency'   => array(
-								array( 'reg-fields-type', '==', 'select' ),
-							),
-							'fields'       => array(
-								array(
-									'label' => __( 'Field Label', 'tourfic' ),
-									'id'    => 'option-label',
-									'type'  => 'text',
-								),
-								array(
-									'label' => __( 'Field Value', 'tourfic' ),
-									'id'    => 'option-value',
-									'type'  => 'text',
-								),
-							),
-						),
-						array(
-							'id'           => 'reg-options',
-							'type'         => 'repeater',
-							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'        => __( 'Option Label', 'tourfic' ),
-							'dependency'   => array(
-								array( 'reg-fields-type', '==', 'checkbox' ),
-							),
-							'fields'       => array(
-								array(
-									'label' => __( 'Field Label', 'tourfic' ),
-									'id'    => 'option-label',
-									'type'  => 'text',
-								),
-								array(
-									'label' => __( 'Field Value', 'tourfic' ),
-									'id'    => 'option-value',
-									'type'  => 'text',
-								),
-							),
-						),
-						array(
-							'id'    => 'reg-field-required',
-							'type'  => 'switch',
-							'label' => __( 'Required Field ?', 'tourfic' ),
-							'class' => 'tf_hidden_fields'
-						),
-
-					),
-					'default'      => array(
-						array(
-							'reg-field-label'    => __( 'First Name', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_first_name', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Last Name', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_last_name', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Email', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_email', 'tourfic' ),
-							'reg-fields-type'    => 'email',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Phone', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_phone', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Country', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_country', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Street Address', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_street_address', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Town/City', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_town_city', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'State/Country', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_state_country', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Postcode/ZIP', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_postcode', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-					),
-				),
-				array(
-					'id'          => '',
-					'type'        => 'editor',
-					'label'       => __( 'Booking Confirmation Message', 'tourfic' ),
-					'default' 	  => 'Booked Successfully',
-					'is_pro'       => true,
-				),
-			),
-		),
 		'hotel_option'          => array(
 			'title'  => __( 'Hotel Options', 'tourfic' ),
 			'icon'   => 'fas fa-hotel',
@@ -4154,11 +3964,86 @@ TF_Settings::option( 'tf_settings', array(
 
 			),
 		),
-		// Tour Options
+		// Pro Options
 		'pro_options' => array(
 			'title'  => __( 'Pro Options', 'tourfic' ),
 			'icon'   => 'fa-solid fa-atom',
 			'fields' => array(),
+		),
+		// Post Type Rename Setting
+		'tf_post_type_rename'    => array(
+			'title'  => __( 'Post Type Rename', 'tourfic' ),
+			'parent' => 'pro_options',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'      => 'post-type-rename-heading',
+					'type'  => 'heading',
+					'label' => __( 'Post Type Rename Settings', 'tourfic' ),
+					'subtitle'   => __( 'From this settings, you can change your post type names.', 'tourfic' ),
+					'is_pro' => true
+				),
+				array(
+					'id'       => '',
+					'type'     => 'text',
+					'label'    => __( 'Tour Post Type Singular Name', 'tourfic' ),
+					'subtitle' => __( 'Enter a name to rename your tour post type.', 'tourfic' ),
+					'default' => __("tour", "tourfic"),
+					'placeholder' => __("tour", "tourfic"),
+					'field_width' => 46,
+					'is_pro' => true
+				),
+				array(
+					'id'       => '',
+					'type'     => 'text',
+					'label'    => __( 'Tour Post Type Plural Name', 'tourfic' ),
+					'subtitle' => __( 'Enter a name to rename your tour post type.', 'tourfic' ),
+					'default' => __("tours", "tourfic"),
+					'placeholder' => __("tours", "tourfic"),
+					'field_width' => 46,
+					'is_pro' => true
+				),
+				array(
+					'id'       => '',
+					'type'     => 'text',
+					'label'    => __( 'Hotel Post Type Singular Name', 'tourfic' ),
+					'subtitle' => __( 'Enter a name to rename your hotel post type.', 'tourfic' ),
+					'default' => __("hotel", "tourfic"),
+					'placeholder' => __("hotel", "tourfic"),
+					'field_width' => 46,
+					'is_pro' => true
+				),
+				array(
+					'id'       => '',
+					'type'     => 'text',
+					'label'    => __( 'Hotel Post Type Plural Name', 'tourfic' ),
+					'subtitle' => __( 'Enter a name to rename your hotel post type.', 'tourfic' ),
+					'default' => __("hotels", "tourfic"),
+					'placeholder' => __("hotels", "tourfic"),
+					'field_width' => 46,
+					'is_pro' => true
+				),
+				array(
+					'id'       => '',
+					'type'     => 'text',
+					'label'    => __( 'Apartment Post Type Singular Name', 'tourfic' ),
+					'subtitle' => __( 'Enter a name to rename your apartment post type.', 'tourfic' ),
+					'default' => __("apartment", "tourfic"),
+					'placeholder' => __("apartment", "tourfic"),
+					'field_width' => 46,
+					'is_pro' => true
+				),
+				array(
+					'id'       => '',
+					'type'     => 'text',
+					'label'    => __( 'Apartment Post Type Plural Name', 'tourfic' ),
+					'subtitle' => __( 'Enter a name to rename your apartment post type.', 'tourfic' ),
+					'default' => __("apartments", "tourfic"),
+					'placeholder' => __("apartments", "tourfic"),
+					'field_width' => 46,
+					'is_pro' => true
+				),
+			),
 		),
 		// Itinerary Settings
 		'tour_itinerary-pro'        => array(
@@ -4538,6 +4423,196 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
+		// Without Payment Popup
+		'without_payment_book'  => array(
+			'title'  => __( 'Tour Without Payment', 'tourfic' ),
+			'parent' => 'pro_options',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'       => 'confirmation_fields_heading',
+					'type'     => 'heading',
+					'label'    => __( 'Settings for Without Payment Option', 'tourfic' ),
+					'subtitle' => __( 'Activating the "Without Payment" booking option will enable the use of this section.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'tour-option-notice-four',
+					'type'    => 'notice',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#Without_payment_Book" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'           => 'book-confirm-field',
+					'class'        => 'disable-sortable',
+					'type'         => 'repeater',
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'label'        => __( 'Fields for Booking Confirmation', 'tourfic' ),
+					'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
+					'is_pro'       => true,
+					'fields'       => array(
+						array(
+							'id'    => 'reg-field-label',
+							'type'  => 'text',
+							'label' => __( 'Label', 'tourfic' ),
+						),
+						array(
+							'id'       => 'reg-field-name',
+							'type'     => 'text',
+							'label'    => __( 'Name', 'tourfic' ),
+							'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
+							'validate' => 'no_space_no_special',
+							'class'    => 'tf_hidden_fields'
+						),
+						array(
+							'id'      => 'reg-fields-type',
+							'type'    => 'select',
+							'label'   => __( 'Field Type', 'tourfic' ),
+							'options' => array(
+								'text'     => __( 'Text', 'tourfic' ),
+								'email'    => __( 'Email', 'tourfic' ),
+								'date'     => __( 'Date', 'tourfic' ),
+								'radio'    => __( 'Radio', 'tourfic' ),
+								'checkbox' => __( 'Checkbox', 'tourfic' ),
+								'select'   => __( 'Select', 'tourfic' ),
+							),
+							'class'   => 'tf_hidden_fields'
+						),
+						array(
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
+								array( 'reg-fields-type', '==', 'radio' ),
+							),
+							'fields'       => array(
+								array(
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
+								),
+								array(
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
+								),
+							),
+						),
+						array(
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
+								array( 'reg-fields-type', '==', 'select' ),
+							),
+							'fields'       => array(
+								array(
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
+								),
+								array(
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
+								),
+							),
+						),
+						array(
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
+								array( 'reg-fields-type', '==', 'checkbox' ),
+							),
+							'fields'       => array(
+								array(
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
+								),
+								array(
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
+								),
+							),
+						),
+						array(
+							'id'    => 'reg-field-required',
+							'type'  => 'switch',
+							'label' => __( 'Required Field ?', 'tourfic' ),
+							'class' => 'tf_hidden_fields'
+						),
+
+					),
+					'default'      => array(
+						array(
+							'reg-field-label'    => __( 'First Name', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_first_name', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Last Name', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_last_name', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Email', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_email', 'tourfic' ),
+							'reg-fields-type'    => 'email',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Phone', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_phone', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Country', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_country', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Street Address', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_street_address', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Town/City', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_town_city', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'State/Country', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_state_country', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Postcode/ZIP', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_postcode', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+					),
+				),
+				array(
+					'id'          => '',
+					'type'        => 'editor',
+					'label'       => __( 'Booking Confirmation Message', 'tourfic' ),
+					'default' 	  => 'Booked Successfully',
+					'is_pro'       => true,
+				),
+			),
+		),
 		// Hotel service Popup
 		'payment_popup'         => array(
 			'title'  => __( 'Hotel Popup Settings', 'tourfic' ),
@@ -4576,81 +4651,6 @@ TF_Settings::option( 'tf_settings', array(
 					'default' => __( 'Continue to booking', 'tourfic' ),
 					'is_pro'  => true,
 				)
-			),
-		),
-		// Post Type Rename Setting
-		'tf_post_type_rename'    => array(
-			'title'  => __( 'Post Type Rename', 'tourfic' ),
-			'parent' => 'pro_options',
-			'icon'   => 'fa fa-cog',
-			'fields' => array(
-				array(
-					'id'      => 'post-type-rename-heading',
-					'type'  => 'heading',
-					'label' => __( 'Post Type Rename Settings', 'tourfic' ),
-					'subtitle'   => __( 'From this settings, you can change your post type names.', 'tourfic' ),
-					'is_pro' => true
-				),
-				array(
-					'id'       => '',
-					'type'     => 'text',
-					'label'    => __( 'Tour Post Type Singular Name', 'tourfic' ),
-					'subtitle' => __( 'Enter a name to rename your tour post type.', 'tourfic' ),
-					'default' => __("tour", "tourfic"),
-					'placeholder' => __("tour", "tourfic"),
-					'field_width' => 46,
-					'is_pro' => true
-				),
-				array(
-					'id'       => '',
-					'type'     => 'text',
-					'label'    => __( 'Tour Post Type Plural Name', 'tourfic' ),
-					'subtitle' => __( 'Enter a name to rename your tour post type.', 'tourfic' ),
-					'default' => __("tours", "tourfic"),
-					'placeholder' => __("tours", "tourfic"),
-					'field_width' => 46,
-					'is_pro' => true
-				),
-				array(
-					'id'       => '',
-					'type'     => 'text',
-					'label'    => __( 'Hotel Post Type Singular Name', 'tourfic' ),
-					'subtitle' => __( 'Enter a name to rename your hotel post type.', 'tourfic' ),
-					'default' => __("hotel", "tourfic"),
-					'placeholder' => __("hotel", "tourfic"),
-					'field_width' => 46,
-					'is_pro' => true
-				),
-				array(
-					'id'       => '',
-					'type'     => 'text',
-					'label'    => __( 'Hotel Post Type Plural Name', 'tourfic' ),
-					'subtitle' => __( 'Enter a name to rename your hotel post type.', 'tourfic' ),
-					'default' => __("hotels", "tourfic"),
-					'placeholder' => __("hotels", "tourfic"),
-					'field_width' => 46,
-					'is_pro' => true
-				),
-				array(
-					'id'       => '',
-					'type'     => 'text',
-					'label'    => __( 'Apartment Post Type Singular Name', 'tourfic' ),
-					'subtitle' => __( 'Enter a name to rename your apartment post type.', 'tourfic' ),
-					'default' => __("apartment", "tourfic"),
-					'placeholder' => __("apartment", "tourfic"),
-					'field_width' => 46,
-					'is_pro' => true
-				),
-				array(
-					'id'       => '',
-					'type'     => 'text',
-					'label'    => __( 'Apartment Post Type Plural Name', 'tourfic' ),
-					'subtitle' => __( 'Enter a name to rename your apartment post type.', 'tourfic' ),
-					'default' => __("apartments", "tourfic"),
-					'placeholder' => __("apartments", "tourfic"),
-					'field_width' => 46,
-					'is_pro' => true
-				),
 			),
 		),
 	),
