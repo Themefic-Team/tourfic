@@ -844,7 +844,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 											if( $tour_meta["tour_as_featured"] ) tf_tour_archive_single_item();
 										}
 									} else {
-										$apartment_meta = get_post_meta( get_the_ID() , 'tf_hapartment_opt', true );
+										$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
 										if ( ! empty( $data ) ) {
 											if ( isset( $data[4] ) && isset( $data[5] ) ) {
 												if( $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item( $data );
@@ -889,7 +889,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 											if( ! $tour_meta["tour_as_featured"] )	tf_tour_archive_single_item();
 										}
 									} else {
-										$apartment_meta = get_post_meta( get_the_ID() , 'tf_hapartment_opt', true );
+										$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
 										if ( ! empty( $data ) ) {
 											if ( isset( $data[4] ) && isset( $data[5] ) ) {
 												if( ! $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item( $data );
@@ -1071,7 +1071,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 									if( $tour_meta["tour_as_featured"] ) tf_tour_archive_single_item();
 								}
 							} else {
-								$apartment_meta = get_post_meta( get_the_ID() , 'tf_hapartment_opt', true );
+								$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
 								if ( ! empty( $data ) ) {
 									if ( isset( $data[4] ) && isset( $data[5] ) ) {
 										if( $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item( $data );
@@ -1116,7 +1116,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 									if( ! $tour_meta["tour_as_featured"] )	tf_tour_archive_single_item();
 								}
 							} else {
-								$apartment_meta = get_post_meta( get_the_ID() , 'tf_hapartment_opt', true );
+								$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
 								if ( ! empty( $data ) ) {
 									if ( isset( $data[4] ) && isset( $data[5] ) ) {
 										if( ! $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item( $data );
@@ -1279,7 +1279,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 										if( $tour_meta["tour_as_featured"] ) tf_tour_archive_single_item();
 									}
 								} else {
-									$apartment_meta = get_post_meta( get_the_ID() , 'tf_hapartment_opt', true );
+									$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
 									if ( ! empty( $data ) ) {
 										if ( isset( $data[4] ) && isset( $data[5] ) ) {
 											if( $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item( $data );
@@ -1324,7 +1324,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 										if( ! $tour_meta["tour_as_featured"] )	tf_tour_archive_single_item();
 									}
 								} else {
-									$apartment_meta = get_post_meta( get_the_ID() , 'tf_hapartment_opt', true );
+									$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
 									if ( ! empty( $data ) ) {
 										if ( isset( $data[4] ) && isset( $data[5] ) ) {
 											if( ! $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item( $data );
