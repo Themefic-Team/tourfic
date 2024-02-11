@@ -3793,10 +3793,10 @@ a.tf-import-btn, a.tf-export-btn {
 }
 .tf-image-radio-group li .tf-image-checkbox > img {
   cursor: pointer;
-  border: 3px solid transparent;
+  border: 3px solid transparent !important;
 }
 .tf-image-radio-group li .tf-image-checkbox > input:checked + img {
-  border-color: #607085;
+  border-color: #607085 !important;
   border-radius: 5px;
 }
 
@@ -4909,7 +4909,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-visitor-vouchers .tf-voucher-header .title h1 {
   color: #002043;
   font-size: 24px;
-  font-family: Istok Web;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   line-height: 32px;
   font-weight: 700;
   margin: 0;
@@ -4917,7 +4917,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-visitor-vouchers .tf-voucher-header .title span {
   color: #828C99;
   font-size: 20px;
-  font-family: Istok Web;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   line-height: 32px;
   font-weight: 700;
   margin: 0;
@@ -4940,7 +4940,7 @@ a.tf-import-btn, a.tf-export-btn {
   font-size: 16px;
   line-height: 28px;
   font-weight: 400;
-  font-family: Istok Web;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
 }
 .tf-visitor-vouchers .tf-voucher-qr-code .time-info h5 b {
   color: #002043;
@@ -4959,7 +4959,7 @@ a.tf-import-btn, a.tf-export-btn {
   font-size: 16px;
   line-height: 28px;
   font-weight: 400;
-  font-family: Istok Web;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   margin: 0;
 }
 .tf-visitor-vouchers .tf-voucher-billing-info .tf-cta-info h4 {
@@ -4967,7 +4967,7 @@ a.tf-import-btn, a.tf-export-btn {
   font-size: 16px;
   line-height: 28px;
   font-weight: 700;
-  font-family: Istok Web;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   margin: 0;
 }
 .tf-visitor-vouchers .tf-voucher-billing-info .tf-cta-info h5 {
@@ -4976,12 +4976,12 @@ a.tf-import-btn, a.tf-export-btn {
   line-height: 28px;
   font-weight: 400;
   margin: 0;
-  font-family: Istok Web;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
 }
 .tf-visitor-vouchers .tf-voucher-footer-qoute p {
   color: #828C99;
   font-size: 11px;
-  font-family: Istok Web;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   line-height: 20px;
 }
 
