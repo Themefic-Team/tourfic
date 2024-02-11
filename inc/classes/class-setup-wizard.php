@@ -119,7 +119,13 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <h1 class="tf-setup-welcome-title"><?php _e( 'Welcome to Tourfic!', 'tourfic' ) ?></h1>
                     <div class="tf-setup-welcome-description"><?php _e( 'Thanks for choosing Tourfic for your travel/hotel/apartment business. We are excited to have you on board. This quick setup wizard is simple and straightforward and shouldn’t take longer than five minutes. It will help you configure the basic settings of Tourfic to get started. Please note that this setup guide is entirely optional.', 'tourfic' ) ?></div>
                     <div class="tf-setup-welcome-footer">
-                        <button type="button" class="tf-admin-btn tf-btn-secondary tf-setup-start-btn"><span><?php _e( 'Get Started', 'tourfic' ) ?></span></button>
+                        <button type="button" class="tf-quick-setup-btn tf-setup-start-btn">
+                            <span><?php _e( 'Get Started', 'tourfic' ) ?></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 12H19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 5L19 12L12 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -135,8 +141,8 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
             <div class="tf-setup-step-container tf-setup-step-1 <?php echo self::$current_step == 'step_1' ? 'active' : ''; ?>" data-step="1">
                 <section class="tf-setup-step-layout">
 					<?php $this->tf_setup_wizard_steps_header() ?>
-                    <h1 class="tf-setup-step-title"><?php _e( 'Select your service type', 'tourfic' ) ?></h1>
-                    <p class="tf-setup-step-desc"><?php _e( '(You can choose any one or both)', 'tourfic' ) ?></p>
+                    <h1 class="tf-setup-step-title"><?php _e( 'Select your Service Type', 'tourfic' ) ?></h1>
+                    <p class="tf-setup-step-desc"><?php _e( 'You can choose anyone or all of them', 'tourfic' ) ?></p>
                     <ul class="tf-select-service">
                         <li>
                             <input type="checkbox" id="tf-hotel" name="tf-services[]"
@@ -162,14 +168,20 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             </label>
                         </li>
                     </ul>
-                </section>
-                <div class="tf-setup-action-btn-wrapper">
-                    <div></div>
-                    <div class="tf-setup-action-btn-next">
-                        <button type="button" class="tf-setup-skip-btn tf-link-btn"><?php _e( 'Skip this step', 'tourfic' ) ?></button>
-                        <button type="button" class="tf-setup-next-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Next', 'tourfic' ) ?></button>
+                    <div class="tf-setup-action-btn-wrapper">
+                        <div class="tf-setup-action-btn-next">
+                            <button type="button" class="tf-setup-skip-btn tf-link-skip-btn"><?php _e( 'Skip', 'tourfic' ) ?></button>
+                            <button type="button" class="tf-setup-next-btn tf-quick-setup-btn">
+                                <span><?php _e( 'Next', 'tourfic' ) ?></span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 5L19 12L12 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </section>
+                
             </div>
 			<?php
 		}
@@ -651,55 +663,47 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		}
 
 		private function tf_setup_wizard_steps_header( $active_step = 1 ) {
-			$inactive_icon = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" stroke="#D8D9DF" stroke-width="2"></circle></svg>';
-			$active_icon   = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#5D5DFF"></circle><circle cx="12" cy="12" r="4" fill="white"></circle></svg>';
-			$finish_icon   = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#5D5DFF"></circle><path fill-rule="evenodd" clip-rule="evenodd" d="M17.7077 8.29352C18.0979 8.68439 18.0974 9.31755 17.7065 9.70773L11.703 15.7007C11.3123 16.0906 10.6796 16.0903 10.2894 15.7L7.29289 12.7036C6.90237 12.3131 6.90237 11.6799 7.29289 11.2894C7.68342 10.8988 8.31658 10.8988 8.70711 11.2894L10.9971 13.5794L16.2935 8.29227C16.6844 7.90209 17.3176 7.90265 17.7077 8.29352Z" fill="white"></path></svg>';
+			$inactive_icon = '<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" fill="none"><circle cx="4" cy="4" r="4" fill="#B6D6F7"/></svg>';
+			$active_icon   = '<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" fill="none"><circle cx="4" cy="4" r="4" fill="#003C79"/></svg>';
+			$finish_icon   = '<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" fill="none"><circle cx="4" cy="4" r="4" fill="#003C79"/></svg>';
 			?>
             <div class="tf-setup-steps">
                 <div class="tf-steps-item <?php echo $active_step == 1 ? 'active' : ''; ?>">
                     <div class="tf-steps-item-container">
-                        <div class="tf-steps-item-tail"></div>
                         <div class="tf-steps-item-icon">
                             <span class="tf-steps-icon">
                                 <?php echo $active_step == 1 ? $active_icon : $finish_icon; ?>
                             </span>
                         </div>
-                        <div class="tf-steps-item-title"><?php _e( 'Step 1', 'tourfic' ); ?></div>
                     </div>
                 </div>
 
                 <div class="tf-steps-item <?php echo $active_step == 2 ? 'active' : ''; ?>">
                     <div class="tf-steps-item-container">
-                        <div class="tf-steps-item-tail"></div>
                         <div class="tf-steps-item-icon">
                             <span class="tf-steps-icon">
                                 <?php echo $active_step == 2 ? $active_icon : ( $active_step > 2 ? $finish_icon : $inactive_icon ); ?>
                             </span>
                         </div>
-                        <div class="tf-steps-item-title"><?php _e( 'Step 2', 'tourfic' ); ?></div>
                     </div>
                 </div>
                 <div class="tf-steps-item <?php echo $active_step == 3 ? 'active' : ''; ?>">
                     <div class="tf-steps-item-container">
-                        <div class="tf-steps-item-tail"></div>
                         <div class="tf-steps-item-icon">
                             <span class="tf-steps-icon">
                                 <?php echo $active_step == 3 ? $active_icon : ( $active_step > 3 ? $finish_icon : $inactive_icon ); ?>
                             </span>
                         </div>
-                        <div class="tf-steps-item-title"><?php _e( 'Step 3', 'tourfic' ); ?></div>
                     </div>
                 </div>
 
                 <div class="tf-steps-item <?php echo $active_step == 4 ? 'active' : ''; ?>">
                     <div class="tf-steps-item-container">
-                        <div class="tf-steps-item-tail"></div>
                         <div class="tf-steps-item-icon">
                             <span class="tf-steps-icon">
                                 <?php echo $active_step == 4 ? $active_icon : ( $active_step > 4 ? $finish_icon : $inactive_icon ); ?>
                             </span>
                         </div>
-                        <div class="tf-steps-item-title"><?php _e( 'Step 4', 'tourfic' ); ?></div>
                     </div>
                 </div>
             </div>

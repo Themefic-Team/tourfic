@@ -605,6 +605,47 @@ body.admin_page_tf-setup-wizard {
   background-color: #EBF5FF;
 }
 
+.tf-quick-setup-btn {
+  border-radius: 8px;
+  background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
+  cursor: pointer;
+  border: 0px solid;
+  padding: 12px 32px;
+  color: #FFF;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  display: inline-flex;
+  gap: 8px;
+  transition: 0.3s all ease;
+}
+.tf-quick-setup-btn:hover {
+  background: linear-gradient(0deg, #0051A3 0%, #003C79 100%);
+  box-shadow: 0px 24px 20px 0px rgba(8, 20, 33, 0.08), 0px 8px 16px 0px rgba(8, 20, 33, 0.08), 0px 16px 8px 0px rgba(8, 20, 33, 0.04);
+}
+
+.tf-link-skip-btn {
+  border-radius: 8px;
+  background: #EBF5FF;
+  cursor: pointer;
+  border: 0px solid;
+  padding: 12px 32px;
+  color: #003C79;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 160% */
+  transition: 0.3s all ease;
+}
+.tf-link-skip-btn:hover {
+  background: linear-gradient(0deg, #0051A3 0%, #003C79 100%);
+  box-shadow: 0px 24px 20px 0px rgba(8, 20, 33, 0.08), 0px 8px 16px 0px rgba(8, 20, 33, 0.08), 0px 16px 8px 0px rgba(8, 20, 33, 0.04);
+  color: #FFF;
+}
+
 .admin_page_tf-setup-wizard #wpcontent {
   margin-left: 0 !important;
 }
@@ -649,7 +690,7 @@ body.admin_page_tf-setup-wizard {
   width: 44px;
   height: 48px;
 }
-.tf-setup-header .get-help-link a span {
+.tf-setup-header .tf-setup-header-right span {
   color: #566676;
   font-family: Inter;
   font-size: 15px;
@@ -657,7 +698,7 @@ body.admin_page_tf-setup-wizard {
   font-weight: 400;
   line-height: 24px; /* 160% */
 }
-.tf-setup-header .get-help-link a span a {
+.tf-setup-header .tf-setup-header-right span a {
   color: #003C79;
   font-family: Inter;
   font-size: 15px;
@@ -775,17 +816,25 @@ Welcome Step
   margin-right: 10px;
 }
 
+.tf-setup-step-container {
+  min-width: 886px;
+  width: 886px;
+  display: none;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 72px;
+}
+
 /*
 Steps
 */
 .tf-setup-steps {
-  max-width: 600px;
-  margin: 0 auto 40px;
   box-sizing: border-box;
   padding: 0;
   color: rgba(0, 0, 0, 0.85);
   font-size: 0;
-  line-height: 1.5715;
   list-style: none;
   width: 100%;
   text-align: initial;
@@ -794,15 +843,13 @@ Steps
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 48px;
 }
 .tf-setup-steps .tf-steps-item {
   position: relative;
   display: inline-block;
-  flex: 1;
-  vertical-align: top;
-}
-.tf-setup-steps .tf-steps-item .tf-steps-item-container {
-  outline: 0;
 }
 .tf-setup-steps .tf-steps-item .tf-steps-item-tail {
   padding: 3.5px 45px 3.5px 35px;
@@ -834,50 +881,11 @@ Steps
   background: 0 0;
   border: 0;
   border-radius: 0;
-  margin: 0 8px 0 0;
-  margin-left: 46px;
   display: inline-block;
   font-size: 12px;
   text-align: center;
   border-color: #1890ff;
-}
-@media only screen and (max-width: 575.98px) {
-  .tf-setup-steps .tf-steps-item .tf-steps-item-icon {
-    margin: 0 0 0 5px;
-  }
-}
-.tf-setup-steps .tf-steps-item .tf-steps-item-icon .tf-steps-icon {
-  font-size: 24px;
-  line-height: 24px;
-  transform: none;
-  color: #1890ff;
-  top: 0;
-  left: 0.5px;
-  width: 32px;
-  height: 32px;
-  position: relative;
-}
-.tf-setup-steps .tf-steps-item .tf-steps-item-title {
-  margin-top: -4px;
-  text-align: center;
   display: block;
-  vertical-align: top;
-  width: 116px;
-  font-weight: 700;
-  font-size: 12px;
-  text-transform: uppercase;
-}
-@media only screen and (max-width: 575.98px) {
-  .tf-setup-steps .tf-steps-item .tf-steps-item-title {
-    width: auto;
-    text-align: left;
-  }
-}
-.tf-setup-steps .tf-steps-item:last-child {
-  flex: none;
-}
-.tf-setup-steps .tf-steps-item:last-child .tf-steps-item-tail {
-  display: none;
 }
 
 .tf-setup-step-container {
@@ -890,12 +898,10 @@ Steps
   display: block;
 }
 .tf-setup-step-container .tf-setup-step-layout {
-  padding: 40px 50px 25px;
-  box-shadow: 0 0 200px rgba(0, 0, 0, 0.08);
-  border-radius: 20px;
-  background-color: #fff;
+  padding: 56px 96px;
+  border-radius: 16px;
+  background: var(--UI-0, #FFF);
   text-align: center;
-  min-height: 640px;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -905,29 +911,14 @@ Steps
   -ms-flex-direction: column;
   flex-direction: column;
 }
-@media only screen and (max-width: 991.98px) {
-  .tf-setup-step-container .tf-setup-step-layout {
-    min-height: auto;
-    padding: 40px 30px 40px;
-  }
-}
-@media only screen and (max-width: 575.98px) {
-  .tf-setup-step-container .tf-setup-step-layout {
-    padding: 40px 15px 40px;
-  }
-}
 .tf-setup-step-container .tf-setup-step-title {
-  font-weight: 700;
-  text-transform: capitalize;
-  font-size: 32px;
-  line-height: 47px;
-  color: #003c79;
-  margin: 0 0 15px;
-}
-@media only screen and (max-width: 575.98px) {
-  .tf-setup-step-container .tf-setup-step-title {
-    font-size: 24px;
-  }
+  color: #27333F;
+  font-family: Inter;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
+  margin: 0px 0px 0px 0px;
 }
 .tf-setup-step-container .tf-setup-step-subtitle {
   text-transform: capitalize;
@@ -941,8 +932,13 @@ Steps
   }
 }
 .tf-setup-step-container .tf-setup-step-desc {
-  margin: 0 0 15px;
-  font-size: 16px;
+  color: #566676;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 160% */
+  margin: 8px 0px 32px 0px;
 }
 .tf-setup-step-container .tf-select-service {
   display: -webkit-box;
@@ -1031,9 +1027,8 @@ Steps
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-  margin: 30px 0 50px 0;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 @media only screen and (max-width: 375px) {
   .tf-setup-step-container .tf-setup-action-btn-wrapper .tf-setup-action-btn-next {
@@ -1043,6 +1038,10 @@ Steps
     display: -webkit-flex;
     display: flex;
   }
+}
+.tf-setup-step-container .tf-setup-action-btn-wrapper .tf-setup-action-btn-next {
+  display: flex;
+  gap: 16px;
 }
 .tf-setup-step-container .tf-setup-form-item {
   text-align: end;

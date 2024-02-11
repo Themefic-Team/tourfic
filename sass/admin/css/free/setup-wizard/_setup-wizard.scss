@@ -2,7 +2,45 @@
 body.admin_page_tf-setup-wizard {
   background-color: #EBF5FF;
 }
-
+.tf-quick-setup-btn{
+  border-radius: 8px;
+  background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
+  cursor: pointer;
+  border: 0px solid;
+  padding: 12px 32px;
+  color: #FFF;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  display: inline-flex;
+  gap: 8px;
+  transition: .3s all ease;
+  &:hover{
+    background: linear-gradient(0deg, #0051A3 0%, #003C79 100%);
+    box-shadow: 0px 24px 20px 0px rgba(8, 20, 33, 0.08), 0px 8px 16px 0px rgba(8, 20, 33, 0.08), 0px 16px 8px 0px rgba(8, 20, 33, 0.04);
+  }
+}
+.tf-link-skip-btn{
+  border-radius: 8px;
+  background: #EBF5FF;
+  cursor: pointer;
+  border: 0px solid;
+  padding: 12px 32px;
+  color: #003C79;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 160% */
+  transition: .3s all ease;
+  &:hover{
+    background: linear-gradient(0deg, #0051A3 0%, #003C79 100%);
+    box-shadow: 0px 24px 20px 0px rgba(8, 20, 33, 0.08), 0px 8px 16px 0px rgba(8, 20, 33, 0.08), 0px 16px 8px 0px rgba(8, 20, 33, 0.04);
+    color: #FFF;
+  }
+}
 .admin_page_tf-setup-wizard #wpcontent {
   margin-left: 0 !important;
 }
@@ -41,7 +79,7 @@ body.admin_page_tf-setup-wizard {
       height: 48px;
     }
   }
-  .get-help-link a {
+  .tf-setup-header-right {
     span{
       color: #566676;
       font-family: Inter;
@@ -156,32 +194,33 @@ Welcome Step
     }
   }
 }
+.tf-setup-step-container{
+  min-width: 886px;
+  width: 886px;
+  display: none;
+  @include flex-direction(column);
+  margin: 0 auto;
+  margin-top: 72px;
+}
 
 /*
 Steps
 */
 .tf-setup-steps {
-  max-width: 600px;
-  margin: 0 auto 40px;
   box-sizing: border-box;
   padding: 0;
   color: rgba(0, 0, 0, .85);
   font-size: 0;
-  line-height: 1.5715;
   list-style: none;
   width: 100%;
   text-align: initial;
   @include flexbox();
-
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 48px;
   .tf-steps-item {
     position: relative;
     display: inline-block;
-    flex: 1;
-    vertical-align: top;
-
-    .tf-steps-item-container {
-      outline: 0;
-    }
 
     .tf-steps-item-tail {
       padding: 3.5px 45px 3.5px 35px;
@@ -207,7 +246,6 @@ Steps
       }
 
     }
-
     .tf-steps-item-icon {
       width: auto;
       height: inherit;
@@ -215,56 +253,12 @@ Steps
       background: 0 0;
       border: 0;
       border-radius: 0;
-      margin: 0 8px 0 0;
-      margin-left: 46px;
       display: inline-block;
       font-size: 12px;
       text-align: center;
       border-color: #1890ff;
-
-      @media #{$max575} {
-        margin: 0 0 0 5px;
-      }
-
-      .tf-steps-icon {
-        font-size: 24px;
-        line-height: 24px;
-        transform: none;
-        color: #1890ff;
-        top: 0;
-        left: 0.5px;
-        width: 32px;
-        height: 32px;
-        position: relative;
-      }
-
-
-    }
-
-    .tf-steps-item-title {
-      margin-top: -4px;
-      text-align: center;
       display: block;
-      vertical-align: top;
-      width: 116px;
-      font-weight: 700;
-      font-size: 12px;
-      text-transform: uppercase;
-
-      @media #{$max575} {
-        width: auto;
-        text-align: left;
-      }
     }
-
-    &:last-child {
-      flex: none;
-
-      .tf-steps-item-tail {
-        display: none;
-      }
-    }
-
   }
 }
 
@@ -276,38 +270,23 @@ Steps
   }
 
   .tf-setup-step-layout {
-    padding: 40px 50px 25px;
-    box-shadow: 0 0 200px rgb(0 0 0 / 8%);
-    border-radius: 20px;
-    background-color: #fff;
+    padding: 56px 96px;
+    border-radius: 16px;
+    background: var(--UI-0, #FFF);
     text-align: center;
-    min-height: 640px;
     @include flexbox();
     @include flex-direction(column);
-    //@include justify-content(center);
-    //@include align-items(center);
 
-    @media #{$max991} {
-      min-height: auto;
-      padding: 40px 30px 40px;
-    }
-
-    @media #{$max575} {
-      padding: 40px 15px 40px;
-    }
   }
 
   .tf-setup-step-title {
-    font-weight: 700;
-    text-transform: capitalize;
-    font-size: 32px;
-    line-height: 47px;
-    color: #003c79;
-    margin: 0 0 15px;
-
-    @media #{$max575} {
-      font-size: 24px;
-    }
+    color: #27333F;
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+    margin: 0px 0px 0px 0px;
   }
 
   .tf-setup-step-subtitle {
@@ -322,8 +301,13 @@ Steps
   }
 
   .tf-setup-step-desc{
-    margin: 0 0 15px;
-    font-size: 16px;
+    color: #566676;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 160% */
+    margin: 8px 0px 32px 0px;
   }
 
   .tf-select-service {
@@ -410,13 +394,15 @@ Steps
 
   .tf-setup-action-btn-wrapper {
     @include flexbox();
-    @include justify-content(space-between);
-    margin: 30px 0 50px 0;
-
+    @include justify-content(center);
     @media #{$max375} {
       .tf-setup-action-btn-next {
         @include flexbox();
       }
+    }
+    .tf-setup-action-btn-next{
+      display: flex;
+      gap: 16px;
     }
   }
 
