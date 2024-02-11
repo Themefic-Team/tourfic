@@ -666,12 +666,9 @@
 							wp_reset_query();
 							?>
                             <div id="map-datas" style="display: none"><?php echo array_filter( $locations ) ? json_encode( array_values( $locations ) ) : []; ?></div>
-							<?php
-							if ( tourfic_posts_navigation() ) { ?>
-                                <div class="tf-pagination-bar">
-									<?php tourfic_posts_navigation(); ?>
-                                </div>
-							<?php } ?>
+                            <div class="tf-pagination-bar">
+		                        <?php tourfic_posts_navigation(); ?>
+                            </div>
                         </div>
                         <!-- Available rooms end -->
 

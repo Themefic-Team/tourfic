@@ -1,10 +1,15 @@
 <div class="tf-hotel-template-4 tf-hotel-single">
-    <!--Hero section start -->
-    <div class="tf-hero-section-wrap"
-         style="<?php echo ! empty( get_the_post_thumbnail_url() ) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.40) 0%, rgba(48, 40, 28, 0.40) 100%), url(' . esc_url( get_the_post_thumbnail_url() ) . '), lightgray 0px -268.76px / 100% 249.543% no-repeat;background-size: cover; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
+    <div class="tf-title-area tf-hotel-title">
         <div class="tf-container">
-            <div class="tf-hero-content">
-                <div class="tf-wish-and-share">
+            <div class="tf-title-wrap">
+                <div class="tf-title-left">
+                    <h1><?php the_title(); ?></h1>
+					<?php if ( ! empty( $address ) ) { ?>
+                        <div class="tf-map-link"><i class="fa-solid fa-location-dot"></i> <?php echo esc_html( $address ); ?></div>
+					<?php } ?>
+                </div>
+
+                <div class="tf-title-right tf-wish-and-share">
 					<?php
 					// Wishlist
 					if ( tfopt( 'wl-bt-for' ) && in_array( '2', tfopt( 'wl-bt-for' ) ) ) {
@@ -31,42 +36,30 @@
 						}
 					} ?>
 
-
                     <!-- Share Section -->
 					<?php if ( ! $disable_share_opt == '1' ) { ?>
                         <div class="tf-share tf-off-canvas-share-box">
                             <ul class="tf-off-canvas-share">
                                 <li>
-                                    <a href="http://www.facebook.com/share.php?u=<?php echo esc_url( $share_link ); ?>"
-                                       class="tf-dropdown-item" target="_blank">
-                        <span class="tf-dropdown-item-content">
-                            <i class="fab fa-facebook"></i>
-                        </span>
+                                    <a href="http://www.facebook.com/share.php?u=<?php echo esc_url( $share_link ); ?>" class="tf-dropdown-item" target="_blank">
+                                        <span class="tf-dropdown-item-content"><i class="fa-brands fa-facebook-f"></i></span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="http://twitter.com/share?text=<?php echo esc_attr( $share_text ); ?>&url=<?php echo esc_url( $share_link ); ?>"
-                                       class="tf-dropdown-item" target="_blank">
-                        <span class="tf-dropdown-item-content">
-                            <i class="fab fa-twitter"></i>
-                        </span>
+                                    <a href="http://twitter.com/share?text=<?php echo esc_attr( $share_text ); ?>&url=<?php echo esc_url( $share_link ); ?>" class="tf-dropdown-item" target="_blank">
+                                        <span class="tf-dropdown-item-content"><i class="fab fa-twitter"></i></span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://www.linkedin.com/cws/share?url=<?php echo esc_url( $share_link ); ?>"
-                                       class="tf-dropdown-item" target="_blank">
-                        <span class="tf-dropdown-item-content">
-                            <i class="fab fa-linkedin"></i>
-                        </span>
+                                    <a href="https://www.linkedin.com/cws/share?url=<?php echo esc_url( $share_link ); ?>" class="tf-dropdown-item" target="_blank">
+                                        <span class="tf-dropdown-item-content"><i class="fa-brands fa-linkedin-in"></i></span>
                                     </a>
                                 </li>
 								<?php $share_image_link = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' ); ?>
                                 <li>
                                     <a href="http://pinterest.com/pin/create/button/?url=<?php echo esc_url( $share_link ); ?>&media=<?php echo esc_url( get_the_post_thumbnail_url() ); ?>&description=<?php echo esc_attr( $share_text ); ?>"
                                        class="tf-dropdown-item" target="_blank">
-                        <span class="tf-dropdown-item-content">
-                            <i class="fab fa-pinterest"></i>
-                        </span>
+                                        <span class="tf-dropdown-item-content"><i class="fa-brands fa-pinterest-p"></i></span>
                                     </a>
                                 </li>
                                 <li>
@@ -78,123 +71,107 @@
                                            style="opacity: 0; width: 0px !important;margin: 0px">
                                 </li>
                             </ul>
-                            <a href="#dropdown-share-center" class="tf-share-toggle tf-icon tf-social-box"
-                               data-toggle="true">
-                                <i class="ri-share-line"></i>
+                            <a href="#dropdown-share-center" class="tf-share-toggle tf-icon tf-social-box" data-toggle="true">
+                                <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5.5 6H14.0938L9.15625 1.90625C8.9375 1.71875 8.9375 1.40625 9.09375 1.1875C9.28125 0.96875 9.59375 0.96875 9.8125 1.125L15.8125 6.09375C15.9062 6.21875 16 6.375 16 6.5C16 6.625 15.9062 6.78125 15.8125 6.875L9.8125 11.8438C9.71875 11.9062 9.59375 11.9688 9.5 11.9688C9.34375 11.9688 9.1875 11.9062 9.09375 11.7812C8.9375 11.5625 8.9375 11.25 9.15625 11.0625L14.0938 6.96875H5.5C3 6.96875 1 8.96875 1 11.4375V12.4062C1 12.7812 0.75 13 0.5 13C0.21875 13 0 12.7812 0 12.5V11.5312C0 8.46875 2.4375 6 5.5 6Z"
+                                          fill="#FF6B00"/>
+                                </svg>
                             </a>
                         </div>
 					<?php } ?>
                     <!-- End Share Section -->
-
-                </div>
-                <div class="tf-hero-bottom-area">
-                    <div class="tf-head-title">
-                        <h1><?php echo get_the_title(); ?></h1>
-						<?php if ( ! empty( $address ) ) { ?>
-                            <div class="tf-title-meta">
-                                <i class="ri-map-pin-line"></i>
-                                <a href="#hotel-map-location"><?php echo esc_html( $address ); ?></a>
-                            </div>
-						<?php } ?>
-                    </div>
-                    <div class="tf-hero-gallery-videos">
-						<?php
-						$hotel_video = ! empty( $meta['video'] ) ? $meta['video'] : '';
-						if ( ! empty( $hotel_video ) ) { ?>
-                            <div class="tf-hero-video tf-popup-buttons">
-                                <a class="tf-tour-video" id="featured-video" href="<?php echo esc_url( $hotel_video ); ?>" data-fancybox="tour-video">
-                                    <svg width="23" height="18" viewBox="0 0 23 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g id="content">
-                                            <path id="Vector 3570" d="M10.5 5L12.5 5" stroke="#FDF9F4" stroke-width="1.5" stroke-linecap="round"/>
-                                            <path id="Rectangle 368"
-                                                  d="M1.5 8C1.5 4.70017 1.5 3.05025 2.52513 2.02513C3.55025 1 5.20017 1 8.5 1H9.5C12.7998 1 14.4497 1 15.4749 2.02513C16.5 3.05025 16.5 4.70017 16.5 8V10C16.5 13.2998 16.5 14.9497 15.4749 15.9749C14.4497 17 12.7998 17 9.5 17H8.5C5.20017 17 3.55025 17 2.52513 15.9749C1.5 14.9497 1.5 13.2998 1.5 10V8Z"
-                                                  stroke="#FDF9F4" stroke-width="1.5"/>
-                                            <path id="Rectangle 369"
-                                                  d="M16.5 5.90585L16.6259 5.80196C18.7417 4.05623 19.7996 3.18336 20.6498 3.60482C21.5 4.02628 21.5 5.42355 21.5 8.21808V9.78192C21.5 12.5765 21.5 13.9737 20.6498 14.3952C19.7996 14.8166 18.7417 13.9438 16.6259 12.198L16.5 12.0941"
-                                                  stroke="#FDF9F4" stroke-width="1.5" stroke-linecap="round"/>
-                                        </g>
-                                    </svg>
-                                </a>
-                            </div>
-						<?php } ?>
-						<?php
-						if ( ! empty( $gallery_ids ) ) {
-							?>
-                            <div class="tf-hero-hotel tf-popup-buttons">
-                                <a href="#">
-                                    <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g id="content">
-                                            <path id="Rectangle 2111"
-                                                  d="M5.5 16.9745C5.6287 18.2829 5.91956 19.1636 6.57691 19.8209C7.75596 21 9.65362 21 13.4489 21C17.2442 21 19.1419 21 20.3209 19.8209C21.5 18.6419 21.5 16.7442 21.5 12.9489C21.5 9.15362 21.5 7.25596 20.3209 6.07691C19.6636 5.41956 18.7829 5.1287 17.4745 5"
-                                                  stroke="#FDF9F4" stroke-width="1.5"/>
-                                            <path id="Rectangle 2109"
-                                                  d="M1.5 9C1.5 5.22876 1.5 3.34315 2.67157 2.17157C3.84315 1 5.72876 1 9.5 1C13.2712 1 15.1569 1 16.3284 2.17157C17.5 3.34315 17.5 5.22876 17.5 9C17.5 12.7712 17.5 14.6569 16.3284 15.8284C15.1569 17 13.2712 17 9.5 17C5.72876 17 3.84315 17 2.67157 15.8284C1.5 14.6569 1.5 12.7712 1.5 9Z"
-                                                  stroke="#FDF9F4" stroke-width="1.5"/>
-                                            <path id="Vector" d="M1.5 10.1185C2.11902 10.0398 2.74484 10.001 3.37171 10.0023C6.02365 9.9533 8.61064 10.6763 10.6711 12.0424C12.582 13.3094 13.9247 15.053 14.5 17"
-                                                  stroke="#FDF9F4" stroke-width="1.5" stroke-linejoin="round"/>
-                                            <path id="Vector_2" d="M12.4998 6H12.5088" stroke="#FDF9F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </g>
-                                    </svg>
-                                </a>
-                            </div>
-						<?php } ?>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--Hero section End -->
 
-
-    <!--Content section end -->
-    <div class="tf-content-wrapper tf-single-hotel-pb-56">
-
+    <div class="tf-hotel-hero-section">
         <div class="tf-container">
+            <div class="tf-hotel-hero-wrapper">
+                <div class="tf-hotel-thumb">
+					<?php
+					if ( has_post_thumbnail() ) {
+						the_post_thumbnail( 'tf_apartment_single_thumb' );
+					}
+					?>
+                    <div class="featured-meta-gallery-videos">
+                        <div class="featured-column tf-gallery-box">
+							<?php if ( ! empty( $gallery_ids ) ) { ?>
+                                <a id="featured-gallery" href="#" class="tf-tour-gallery">
+                                    <i class="fa-solid fa-camera-retro"></i><?php echo __( "Gallery", "tourfic" ); ?>
+                                </a>
+							<?php } ?>
+                        </div>
+						<?php
+						$hotel_video = ! empty( $meta['video'] ) ? $meta['video'] : '';
+						if ( ! empty( $hotel_video ) ) { ?>
+                            <div class="featured-column tf-video-box">
+                                <a class="tf-tour-video" id="featured-video" data-fancybox="tour-video" href="<?php echo esc_url( $hotel_video ); ?>">
+                                    <i class="fa-solid fa-video"></i> <?php echo __( "Video", "tourfic" ); ?>
+                                </a>
+                            </div>
+						<?php } ?>
+                    </div>
+                </div>
+				<?php if ( ! empty( $gallery_ids ) ) : ?>
+                    <div class="tf-hotel-gallery tf-gallery-count-<?php echo count( $gallery_ids ) >= 6 ? esc_attr( '6' ) : esc_attr( count( $gallery_ids ) ); ?>">
+						<?php
+						if ( ! empty( $gallery_ids ) ) {
+							foreach ( $gallery_ids as $key => $gallery_item_id ) {
+								?>
+                                <a
+                                        class="<?php echo $key == 5 ? esc_attr( 'tf-gallery-more' ) : ''; ?>"
+                                        href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_item_id, 'full' ) ); ?>"
+                                        style="<?php echo $key > 5 ? esc_attr( 'display: none;' ) : ''; ?>"
+                                        data-fancybox="hotel-gallery"
+                                        id="tour-gallery"
+                                >
+									<?php if ( $key <= 5 ) : ?>
+                                        <img src="<?php echo esc_url( wp_get_attachment_image_url( $gallery_item_id, 'full' ) ); ?>" alt=""/>
+									<?php endif; ?>
+                                </a>
+								<?php
+							}
+						} ?>
+                    </div>
+				<?php endif; ?>
+            </div>
+        </div>
+    </div>
 
-            <!-- Hotel details Srart -->
-            <div class="tf-details" id="tf-hotel-overview">
+    <div class="tf-content-wrapper">
+        <div class="tf-container">
+            <div class="tf-details" id="tf-hotel-description">
                 <div class="tf-details-left">
                     <!-- menu section Start -->
                     <div class="tf-details-menu">
                         <ul>
-                            <li><a class="tf-hashlink" href="#tf-hotel-overview">
-									<?php _e( "Overview", "tourfic" ); ?>
-                                </a></li>
-                            <li><a href="#tf-hotel-rooms">
-									<?php _e( "Rooms", "tourfic" ); ?>
-                                </a></li>
-                            <li><a href="#tf-hotel-facilities">
-									<?php _e( "Facilities", "tourfic" ); ?>
-                                </a></li>
-                            <li><a href="#tf-hotel-reviews">
-									<?php _e( "Reviews", "tourfic" ); ?>
-                                </a></li>
-                            <li><a href="#tf-hotel-faq">
-									<?php _e( "FAQ's", "tourfic" ); ?>
-                                </a></li>
-                            <li><a href="#tf-hotel-policies">
-									<?php _e( "Policies", "tourfic" ); ?>
-                                </a></li>
+                            <li><a class="tf-hashlink" href="#tf-hotel-description"><?php _e( "Description", "tourfic" ); ?></a></li>
+                            <li><a href="#tf-hotel-rooms"><?php _e( "Rooms", "tourfic" ); ?></a></li>
+                            <li><a href="#tf-hotel-facilities"><?php _e( "Amenities", "tourfic" ); ?></a></li>
+                            <li><a href="#tf-hotel-faq"><?php _e( "FAQ", "tourfic" ); ?></a></li>
+                            <li><a href="#tf-hotel-reviews"><?php _e( "Reviews", "tourfic" ); ?></a></li>
+                            <li><a href="#tf-hotel-policies"><?php _e( "Policies", "tourfic" ); ?></a></li>
                         </ul>
                     </div>
                     <!-- menu section End -->
 
-
-					<?php
-					if ( ! empty( tf_data_types( tfopt( 'tf-template' ) )['single-hotel-layout-part-1'] ) ) {
-						foreach ( tf_data_types( tfopt( 'tf-template' ) )['single-hotel-layout-part-1'] as $section ) {
-							if ( ! empty( $section['hotel-section-status'] ) && $section['hotel-section-status'] == "1" && ! empty( $section['hotel-section-slug'] ) ) {
-								include TF_TEMPLATE_PART_PATH . 'hotel/design-2/' . $section['hotel-section-slug'] . '.php';
-							}
-						}
-					} else {
-						include TF_TEMPLATE_PART_PATH . 'hotel/design-2/description.php';
-						include TF_TEMPLATE_PART_PATH . 'hotel/design-2/features.php';
-						include TF_TEMPLATE_PART_PATH . 'hotel/design-2/rooms.php';
-					}
-					?>
-
-
+	                <?php
+	                if( !empty(tf_data_types(tfopt( 'tf-template' ))['single-hotel-layout-3']) ){
+		                foreach(tf_data_types(tfopt( 'tf-template' ))['single-hotel-layout-3'] as $section){
+			                if( !empty($section['hotel-section-status']) && $section['hotel-section-status']=="1" && !empty($section['hotel-section-slug']) ){
+				                include TF_TEMPLATE_PART_PATH . 'hotel/design-3/'.$section['hotel-section-slug'].'.php';
+			                }
+		                }
+	                }else{
+		                include TF_TEMPLATE_PART_PATH . 'hotel/design-3/description.php';
+		                include TF_TEMPLATE_PART_PATH . 'hotel/design-3/rooms.php';
+		                include TF_TEMPLATE_PART_PATH . 'hotel/design-3/features.php';
+		                include TF_TEMPLATE_PART_PATH . 'hotel/design-3/faq.php';
+		                include TF_TEMPLATE_PART_PATH . 'hotel/design-3/review.php';
+		                include TF_TEMPLATE_PART_PATH . 'hotel/design-3/trams-condition.php';
+	                }
+	                ?>
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets">
 					<?php if ( ! empty( $meta['nearby-places'] ) ) { ?>
@@ -203,12 +180,12 @@
                             <ul>
 								<?php foreach ( $meta['nearby-places'] as $place ) { ?>
                                     <li>
-                        <span>
-                        <?php if ( ! empty( $place['place-icon'] ) ) { ?>
-                            <i class="<?php echo esc_attr( $place['place-icon'] ); ?>"></i>
-                        <?php } ?>
-	                        <?php echo ! empty( $place['place-title'] ) ? esc_html( $place['place-title'] ) : ''; ?>
-                        </span>
+                                        <span>
+                                            <?php if ( ! empty( $place['place-icon'] ) ) { ?>
+                                                <i class="<?php echo esc_attr( $place['place-icon'] ); ?>"></i>
+                                            <?php } ?>
+                                            <?php echo ! empty( $place['place-title'] ) ? esc_html( $place['place-title'] ) : ''; ?>
+                                        </span>
                                         <span><?php echo ! empty( $place['place-dist'] ) ? esc_html( $place['place-dist'] ) : ''; ?></span>
                                     </li>
 								<?php } ?>
@@ -262,7 +239,6 @@
 						<?php } ?>
 						<?php } ?>
                     </div>
-
 
                     <div class="tf-location tf-single-widgets">
 						<?php
@@ -387,37 +363,21 @@
             </div>
             <!-- Hotel details End -->
 
-			<?php
-			if ( ! empty( tf_data_types( tfopt( 'tf-template' ) )['single-hotel-layout-part-2'] ) ) {
-				foreach ( tf_data_types( tfopt( 'tf-template' ) )['single-hotel-layout-part-2'] as $section ) {
-					if ( ! empty( $section['hotel-section-status'] ) && $section['hotel-section-status'] == "1" && ! empty( $section['hotel-section-slug'] ) ) {
-						include TF_TEMPLATE_PART_PATH . 'hotel/design-2/' . $section['hotel-section-slug'] . '.php';
-					}
-				}
-			} else {
-				include TF_TEMPLATE_PART_PATH . 'hotel/design-2/facilities.php';
-				include TF_TEMPLATE_PART_PATH . 'hotel/design-2/review.php';
-				include TF_TEMPLATE_PART_PATH . 'hotel/design-2/faq.php';
-				include TF_TEMPLATE_PART_PATH . 'hotel/design-2/trams-condition.php';
-			}
-			?>
-
-			<?php
-			if ( ! empty( $gallery_ids ) ) {
-				?>
+	        <?php
+	        if ( ! empty( $gallery_ids ) ) {
+		        ?>
                 <!-- Hotel PopUp Starts -->
                 <div class="tf-popup-wrapper tf-hotel-popup">
                     <div class="tf-popup-inner">
 
                         <div class="tf-popup-body">
-							<?php
-							if ( ! empty( $gallery_ids ) ) {
-								foreach ( $gallery_ids as $key => $gallery_item_id ) {
-									$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
-									?>
-                                    <img src="<?php echo esc_url( $image_url ); ?>" alt="" class="tf-popup-image">
-								<?php }
-							} ?>
+					        <?php
+					        if ( ! empty( $gallery_ids ) ) {
+						        foreach ( $gallery_ids as $key => $gallery_item_id ) {
+							        $image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+							        ?>
+                                    <img src="<?php echo esc_url($image_url); ?>" alt="" class="tf-popup-image">
+						        <?php } } ?>
                         </div>
                         <div class="tf-popup-close">
                             <i class="fa-solid fa-xmark"></i>
@@ -425,16 +385,13 @@
                     </div>
                 </div>
                 <!-- Hotel PopUp end -->
-			<?php } ?>
-
+	        <?php } ?>
 
             <!-- Room PopUp Starts -->
             <div class="tf-popup-wrapper tf-room-popup">
 
             </div>
             <!-- Room PopUp end -->
-
-
         </div>
     </div>
     <!--Content section end -->

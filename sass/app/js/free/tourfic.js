@@ -1901,18 +1901,19 @@
         });
 
         // Design 2 Toggle share buttons
-        $('.tf-template-3 .tf-share-toggle').click(function (e) {
+        $('.tf-template-3 .tf-share-toggle, .tf-hotel-template-4 .tf-share-toggle').click(function (e) {
             e.preventDefault();
             $('.tf-share-toggle').toggleClass('actives');
             $('.tf-off-canvas-share').toggleClass('show');
         });
 
         // Design 2 Wishlist buttons
-        $('.tf-template-3 .add-wishlist').click(function (e) {
+        $(document).on('click', '.tf-template-3 .add-wishlist, .tf-hotel-template-4 .add-wishlist', function (e) {
             e.preventDefault();
             $(this).parents().find('.tf-wishlist-box').addClass('actives');
         });
-        $('.tf-template-3 .remove-wishlist').click(function (e) {
+
+        $(document).on('click', '.tf-template-3 .remove-wishlist, .tf-hotel-template-4 .remove-wishlist', function (e) {
             e.preventDefault();
             $(this).parents().find('.tf-wishlist-box').removeClass('actives');
         });
