@@ -602,7 +602,7 @@ input.select2-search__field {
 }
 
 body.admin_page_tf-setup-wizard {
-  background-color: #ecf5ff;
+  background-color: #EBF5FF;
 }
 
 .admin_page_tf-setup-wizard #wpcontent {
@@ -619,15 +619,10 @@ body.admin_page_tf-setup-wizard {
   display: none;
 }
 
-.tf-setup-wizard-wrapper {
-  max-width: 900px;
-  margin: auto;
-  width: calc(100% - 40px);
-  padding-top: 30px;
-}
-
 .tf-setup-header {
-  padding: 0 0 30px;
+  padding: 16px 56px;
+  background: #F8FAFC;
+  box-shadow: 0px 32px 32px 0px rgba(125, 168, 212, 0.02), 0px 16px 40px 0px rgba(125, 168, 212, 0.04), 0px 32px 56px 0px rgba(125, 168, 212, 0.08);
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -647,36 +642,67 @@ body.admin_page_tf-setup-wizard {
     gap: 15px;
   }
 }
-.tf-setup-header .get-help-link a {
-  color: #000;
-  font-weight: 700;
-  text-decoration: underline;
+.tf-setup-header .tf-setup-header-left {
+  height: 48px;
+}
+.tf-setup-header .tf-setup-header-left img {
+  width: 44px;
+  height: 48px;
+}
+.tf-setup-header .get-help-link a span {
+  color: #566676;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 160% */
+}
+.tf-setup-header .get-help-link a span a {
+  color: #003C79;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  text-decoration-line: underline;
 }
 
 /*
 Welcome Step
 */
 .tf-setup-content-layout {
-  padding: 40px 50px 25px;
-  box-shadow: 0 0 200px rgba(0, 0, 0, 0.08);
-  border-radius: 20px;
-  background-color: #fff;
-  text-align: center;
-  min-height: 700px;
+  min-width: 886px;
+  width: 886px;
   display: none;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
+  margin: 0 auto;
+  margin-top: 72px;
 }
-@media only screen and (max-width: 575.98px) {
-  .tf-setup-content-layout {
-    padding: 40px 20px 25px;
-  }
+.tf-setup-content-layout .tf-back-btn {
+  display: inline-flex;
+  gap: 8px;
+  text-decoration: none;
+  margin: 0px 0px 16px 8px;
+}
+.tf-setup-content-layout .tf-back-btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+.tf-setup-content-layout .tf-back-btn span {
+  color: #003C79;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
+.tf-setup-content-layout .setup-content-warper {
+  border-radius: 16px;
+  background: #FFF;
+  text-align: center;
+  padding: 104px 112px;
 }
 .tf-setup-content-layout.active {
   display: -webkit-box;
@@ -686,33 +712,29 @@ Welcome Step
   display: flex;
 }
 .tf-setup-content-layout .welcome-img {
-  margin-bottom: 50px;
-  min-height: 295px;
-}
-@media only screen and (max-width: 575.98px) {
-  .tf-setup-content-layout .welcome-img {
-    min-height: auto;
-  }
+  margin-bottom: 24px;
 }
 .tf-setup-content-layout .welcome-img img {
-  max-width: 100%;
+  width: 87px;
 }
 .tf-setup-content-layout .tf-setup-welcome-title {
-  font-weight: 700;
-  font-size: 40px;
-  line-height: 47px;
-  color: #11142e;
-  margin: 0 0 10px;
-}
-@media only screen and (max-width: 575.98px) {
-  .tf-setup-content-layout .tf-setup-welcome-title {
-    font-size: 30px;
-    line-height: 37px;
-  }
+  color: #27333F;
+  font-family: Inter;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%; /* 36px */
+  margin: 0px;
 }
 .tf-setup-content-layout .tf-setup-welcome-description {
-  max-width: 450px;
-  margin: 14px auto 30px;
+  color: #566676;
+  text-align: center;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  margin-top: 8px;
 }
 .tf-setup-content-layout .tf-setup-welcome-footer {
   display: -webkit-box;
@@ -726,9 +748,7 @@ Welcome Step
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-}
-.tf-setup-content-layout .tf-setup-welcome-footer .tf-admin-btn {
-  margin-bottom: 10px;
+  margin-top: 48px;
 }
 .tf-setup-content-layout .tf-setup-welcome-footer .tf-link-btn {
   color: #11142e;
