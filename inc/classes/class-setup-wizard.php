@@ -29,6 +29,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			add_action( 'admin_init', [ $this, 'tf_activation_redirect' ] );
 			add_action( 'wp_ajax_tf_setup_wizard_submit', [ $this, 'tf_setup_wizard_submit_ajax' ] );
 			add_action( 'in_admin_header', [ $this, 'remove_notice' ], 1000 );
+            add_action( 'admin_enqueue_scripts', array( $this, 'tf_setup_wizard_admin_enqueue_scripts' ),9 );
 
 			self::$current_step = isset( $_GET['step'] ) ? sanitize_key( $_GET['step'] ) : 'welcome';
 		}
@@ -50,6 +51,11 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 				);
 			}
 		}
+        public function tf_setup_wizard_admin_enqueue_scripts( $screen ) {
+            if(!empty($screen) && 'admin_page_tf-setup-wizard'==$screen){
+                wp_enqueue_style( 'travelfic-toolkit-fonts', '//fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap', array(), '2.11.9' );
+            }
+        }
 
 		/**
 		 * Remove all notice in setup wizard page
