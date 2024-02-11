@@ -121,10 +121,11 @@ if( !function_exists( 'tf_custom_css' ) ){
 			#tf-ask-question button,
 			#tf-ask-question input,
 			#tf-ask-question textarea,
-			.tf-withoutpayment-booking,
 			.tf-container button,
 			.tf-container input,
 			.tf-container textarea{
+			.gm-style .marker-label,
+			.tf-withoutpayment-booking{
 				font-family: "'.$tf_global_font_family.'", sans-serif !important;
 			}';
 		}

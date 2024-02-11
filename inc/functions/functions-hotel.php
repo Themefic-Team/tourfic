@@ -10,7 +10,12 @@ defined( 'ABSPATH' ) || exit;
  */
 function register_tf_hotel_post_type() {
 
-	$hotel_slug = ! empty( get_option( 'hotel_slug' ) ) ? get_option( 'hotel_slug' ) : apply_filters( 'tf_hotel_slug', 'hotels' );
+	$tf_hotel_setting_permalink_slug = ! empty(tfopt( 'hotel-permalink-setting' )) ? tfopt( 'hotel-permalink-setting' ) : ( ! empty( get_option( 'hotel_slug' ) ) ? get_option( 'hotel_slug' ) : "hotels" );
+
+	update_option("hotel_slug", $tf_hotel_setting_permalink_slug);
+	
+
+	$hotel_slug = get_option( 'hotel_slug' );
 
 	$hotel_labels = apply_filters( 'tf_hotel_labels', array(
 		'name'                  => _x( '%2$s', 'tourfic post type name', 'tourfic' ),
@@ -26,7 +31,7 @@ function register_tf_hotel_post_type() {
 		'not_found'             => __( 'No %2$s found', 'tourfic' ),
 		'not_found_in_trash'    => __( 'No %2$s found in Trash', 'tourfic' ),
 		'parent_item_colon'     => '',
-		'menu_name'             => _x( 'Hotels', 'tourfic post type menu name', 'tourfic' ),
+		'menu_name'             => _x( '%2$s', 'tourfic post type menu name', 'tourfic' ),
 		'featured_image'        => __( '%1$s Image', 'tourfic' ),
 		'set_featured_image'    => __( 'Set %1$s Image', 'tourfic' ),
 		'remove_featured_image' => __( 'Remove %1$s Image', 'tourfic' ),
@@ -82,6 +87,17 @@ function tf_hotel_default_labels() {
 		'singular' => __( 'Hotel', 'tourfic' ),
 		'plural'   => __( 'Hotels', 'tourfic' ),
 	);
+
+	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		$tf_hotel_single_name = ! empty(tfopt( 'tf-hotel-post-rename-singular' )) ? tfopt( 'tf-hotel-post-rename-singular' ) : __("'Hotel'", "tourfic");
+		$tf_hotel_plural_name = ! empty(tfopt( 'tf-hotel-post-rename-plural' )) ? tfopt( 'tf-hotel-post-rename-plural' ) : __('Hotels', 'tourfic');
+
+		$default_hotel = array(
+			'singular' => $tf_hotel_single_name,
+			'plural'   => $tf_hotel_plural_name
+		);
+
+	}
 
 	return apply_filters( 'tf_hotel_name', $default_hotel );
 }
@@ -1087,7 +1103,7 @@ function tf_room_availability_callback() {
 						$feature_result = array_intersect( $filtered_features, $room_features );
 					}
 
-					if ( ! empty( $filtered_features ) && defined( 'TF_PRO' ) ) {
+					if ( ! empty( $filtered_features ) ) {
 						if ( $feature_result ) {
 							if ( $form_total_person <= $total_person ) {
 
@@ -2755,7 +2771,15 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 					?>
                     <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
                         <i class="fa-solid fa-location-dot"></i>
-                        <p><?php echo $address; ?></p>
+                        <p>
+							<?php 
+								if (strlen($address) > 120 ) {
+									echo tourfic_character_limit_callback($address, 120);
+								} else {
+									echo $address;
+								}
+							?>
+						</p>
                     </div>
 				<?php } ?>
                 <div class="tf-title tf-mt-16">
@@ -3059,7 +3083,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 							<?php
 							if ( $address ) {
 								echo '<div class="tf-map-link">';
-								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . $address . '</span>';
+								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . strlen($address) > 75 ? tourfic_character_limit_callback($address, 76) : $address . '</span>';
 								echo '</div>';
 							}
 							?>
@@ -4269,6 +4293,32 @@ if ( ! function_exists( 'tf_hotel_search_ajax_callback' ) ) {
 	}
 }
 
+add_action( 'tf_hotel_features_filter', 'tf_hotel_filter_by_features', 10, 1 );
+function tf_hotel_filter_by_features( $features ) {
+	//get all the hotel features
+	$feature_filter = ! empty( tfopt( 'feature-filter' ) ) ? tfopt( 'feature-filter' ) : false;
+
+	if ( ! empty( $features ) && $feature_filter ):
+		?>
+        <!-- Filter by feature  -->
+        <div class="tf-room-filter" style="display: none">
+            <h4 class="tf-room-feature-title"><?php echo __( 'Filter Rooms based on features', 'tourfic' ); ?></h4>
+            <ul class="tf-room-checkbox">
+				<?php
+				foreach ( $features as $feature ) {
+					//get the feature details by it's id
+					$term = get_term_by( 'id', $feature, 'hotel_feature' );
+					echo '<li><label for="' . $term->slug . '">';
+					echo '<input type="checkbox" name="features" class="" value="' . $feature . '" id="' . $term->slug . '">';
+					echo "<span class='checkmark'></span>";
+					echo $term->name . '</label>';
+					echo "</li>";
+				}
+				?>
+            </ul>
+        </div>
+	<?php endif;
+}
 /*
  * Hotel without booking ajax
  * @since 2.10.3

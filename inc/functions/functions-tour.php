@@ -13,7 +13,11 @@ defined( 'ABSPATH' ) || exit;
  */
 function register_tf_tours_post_type() {
 
-	$tour_slug = ! empty( get_option( 'tour_slug' ) ) ? get_option( 'tour_slug' ) : apply_filters( 'tf_tours_slug', 'tours' );
+	$tf_tour_setting_permalink_slug = ! empty(tfopt( 'tour-permalink-setting' )) ? tfopt( 'tour-permalink-setting' ) : ( ! empty( get_option( 'tour_slug' ) ) ? get_option( 'tour_slug' ) : "tours" );
+
+	update_option("tour_slug", $tf_tour_setting_permalink_slug);
+	
+	$tour_slug = get_option( 'tour_slug' );
 
 	$tour_labels = apply_filters( 'tf_tours_labels', array(
 		'name'                  => _x( '%2$s', 'tourfic post type name', 'tourfic' ),
@@ -29,7 +33,7 @@ function register_tf_tours_post_type() {
 		'not_found'             => __( 'No %2$s found', 'tourfic' ),
 		'not_found_in_trash'    => __( 'No %2$s found in Trash', 'tourfic' ),
 		'parent_item_colon'     => '',
-		'menu_name'             => _x( 'Tours', 'tourfic post type menu name', 'tourfic' ),
+		'menu_name'             => _x( '%2$s', 'tourfic post type menu name', 'tourfic' ),
 		'featured_image'        => __( '%1$s Image', 'tourfic' ),
 		'set_featured_image'    => __( 'Set %1$s Image', 'tourfic' ),
 		'remove_featured_image' => __( 'Remove %1$s Image', 'tourfic' ),
@@ -85,6 +89,17 @@ function tf_tours_default_labels() {
 		'singular' => __( 'Tour', 'tourfic' ),
 		'plural'   => __( 'Tours', 'tourfic' ),
 	);
+
+	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		$tf_tour_single_name = ! empty(tfopt( 'tf-tour-post-rename-singular' )) ? tfopt( 'tf-tour-post-rename-singular' ) : __("Tour", "tourfic");
+		$tf_tour_plural_name = ! empty(tfopt( 'tf-tour-post-rename-plural' )) ? tfopt( 'tf-tour-post-rename-plural' ) : __('Tours', 'tourfic');
+
+		$default_tour = array(
+			'singular' => $tf_tour_single_name,
+			'plural'   => $tf_tour_plural_name
+		);
+
+	}
 
 	return apply_filters( 'tf_tours_name', $default_tour );
 }
@@ -3035,7 +3050,15 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
             ?>
             <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
                 <i class="fa-solid fa-location-dot"></i>
-                <p><?php echo $location; ?></p>
+                <p>
+				<?php 
+					if (strlen($location) > 120 ) {
+						echo tourfic_character_limit_callback($location, 120);
+					} else {
+						echo $location;
+					}
+				?>
+				</p>
             </div>
             <?php } ?>
             <div class="tf-title tf-mt-16">
@@ -3320,7 +3343,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 							<?php
 							if ( $location ) {
 								echo '<div class="tf-map-link">';
-								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . $location . '</span>';
+								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . strlen($location) > 75 ? tourfic_character_limit_callback($location, 76) : $location . '</span>';
 								echo '</div>';
 							}
 							?>
