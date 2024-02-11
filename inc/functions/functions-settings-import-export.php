@@ -8,8 +8,11 @@ defined( 'ABSPATH' ) || exit;
 add_action( 'wp_ajax_tf_import', 'tf_import_callback' );
 function tf_import_callback(){
 
-    $imported_data = stripslashes( $_POST['tf_import_option'] );
-    $imported_data = unserialize( $imported_data );
+    if( !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'updates' ) ){
+        return;
+    }
+
+    $imported_data = maybe_unserialize( stripslashes( $_POST['tf_import_option'] ) );
     
     // QR CODE Company Logo
     if(!empty($imported_data["qr_logo"])){

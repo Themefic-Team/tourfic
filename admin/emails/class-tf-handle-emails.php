@@ -1116,6 +1116,11 @@ class TF_Handle_Emails {
      *
      */
     public function tf_order_status_email_resend_function(){
+
+        if( !empty($_POST['_ajax_nonce']) && !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_ajax_nonce'] ) ), 'updates' ) ){
+            return;
+        }
+        
         $tf_mail_type = !empty($_POST['status']) ? esc_attr( $_POST['status'] ) : '';
         $order_id = !empty($_POST['order_id']) ? esc_attr( $_POST['order_id'] ) : '';
         $db_id = !empty($_POST['id']) ? esc_attr( $_POST['id'] ) : '';

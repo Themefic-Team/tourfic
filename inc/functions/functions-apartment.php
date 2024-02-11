@@ -65,9 +65,9 @@ if ( tfopt( 'disable-services' ) && in_array( 'apartment', tfopt( 'disable-servi
 	add_action( 'init', 'register_tf_apartment_post_type' );
 }
 
-add_filter( 'use_block_editor_for_post_type', function ( $enabled, $post_type ) {
-	return ( 'tf_apartment' === $post_type ) ? false : $enabled;
-}, 10, 2 );
+// add_filter( 'use_block_editor_for_post_type', function ( $enabled, $post_type ) {
+// 	return ( 'tf_apartment' === $post_type ) ? false : $enabled;
+// }, 10, 2 );
 
 /**
  * Register taxonomies for tf_apartment
@@ -272,7 +272,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 			$_GET = array_map( 'stripslashes_deep', $_GET );
 		}
 		// Check-in & out date
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
+		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? esc_html( $_GET['check-in-out-date'] ) : '';
 
 		// date format for apartments
 		$date_format_change_apartments = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
@@ -373,7 +373,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 												</defs>
 												</svg>
 											</div>
-											<input type="tel" name="adults" class="adults-style2" id="adults" min="1" value="1"/>
+											<input type="tel" name="adults" class="adults-style2" id="adults" min="1" value="1" readonly />
 											<div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<g clip-path="url(#clip0_3229_13100)">
@@ -404,7 +404,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 													</defs>
 													</svg>
 												</div>
-												<input type="tel" name="children" class="childs-style2" id="children" min="0" value="0"/>
+												<input type="tel" name="children" class="childs-style2" id="children" min="0" value="0" readonly />
 												<div class="acr-inc">
 													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 													<g clip-path="url(#clip0_3229_13100)">
@@ -436,7 +436,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 													</defs>
 													</svg>
 												</div>
-												<input type="tel" name="infant" class="infant-style2" id="infant" min="0" value="0"/>
+												<input type="tel" name="infant" class="infant-style2" id="infant" min="0" value="0" readonly />
 												<div class="acr-inc">
 													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 													<g clip-path="url(#clip0_3229_13100)">
@@ -682,8 +682,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                             instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                        },
-                        defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
+                        }
                     });
 
                 });
@@ -846,7 +845,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 												</defs>
 												</svg>
 											</div>
-											<input type="tel" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1' ?>"/>
+											<input type="tel" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1' ?>" readonly/>
 											<div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<g clip-path="url(#clip0_3229_13100)">
@@ -876,7 +875,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 												</defs>
 												</svg>
 											</div>
-											<input type="tel" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0' ?>"/>
+											<input type="tel" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0' ?>" readonly/>
 											<div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<g clip-path="url(#clip0_3229_13100)">
@@ -906,7 +905,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 												</defs>
 												</svg>
 											</div>
-											<input type="tel" name="infant" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0' ?>"/>
+											<input type="tel" name="infant" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0' ?>" readonly/>
 											<div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<g clip-path="url(#clip0_3229_13100)">
@@ -1420,10 +1419,12 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 			}, $map );
 			$map                    = unserialize( $tf_apartment_map_value );
 			$address                = ! empty( $map['address'] ) ? $map['address'] : '';
+		}else{
+			$address                = ! empty( $map['address'] ) ? $map['address'] : '';
 		}
 		$featured        = ! empty( $meta['apartment_as_featured'] ) ? $meta['apartment_as_featured'] : '';
 		$pricing_type    = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
-		$apartment_multiple_tags = !empty($meta['tf-apartment-tags']) ? $meta['tf-apartment-tags'] : [];
+		$apartment_multiple_tags = !empty($meta['tf-apartment-tags']) ? tf_data_types($meta['tf-apartment-tags']) : [];
 		//Discout Info
 		$apartment_discount_type = !empty($meta["discount_type"]) ? $meta["discount_type"] : "none";
 		$apartment_discount_amount = !empty($meta["discount"]) ? $meta["discount"] : 0;
@@ -1626,7 +1627,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
                                 <a href="<?php echo $url; ?>"><h3 class="tourfic_hotel-title"><?php echo get_the_title($post_id); ?></h3></a>
                             </div>
 							<?php
-							if ( $address ) {
+							if ( !empty($address) ) {
 								echo '<div class="tf-map-link">';
 								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . $address . '</span>';
 								echo '</div>';

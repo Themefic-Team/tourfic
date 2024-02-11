@@ -1163,6 +1163,12 @@ div#tf-contact-info {
         }
         .tf-booking-pagination{
             padding: 0 24px;
+            .tf-tax-notice{
+                padding-bottom: 16px;
+                span{
+                    font-size: 16px;
+                }
+            }
             .tf-diposit-switcher{
                 padding-bottom: 16px;
                 display: flex;
@@ -1181,13 +1187,13 @@ div#tf-contact-info {
                     top: 11px;
                     display: flex;
                     padding-left: 10px;
-                    overflow: hidden;
                     .tf-info-btn{
                         width: 40px;
                         text-align: center;
                         position: relative;
                         i{
                             padding: 0px !important;
+                            font-weight: 400 !important;
                         }
                         .tf-tooltip {
                             padding: 10px 10px;
