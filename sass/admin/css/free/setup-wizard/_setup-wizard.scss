@@ -313,7 +313,7 @@ Steps
   .tf-select-service {
     @include flexbox();
     @include justify-content(center);
-    gap: 20px;
+    gap: 56px;
 
     li {
       @include flex(0 0 200px);
@@ -329,9 +329,6 @@ Steps
 
     label {
       //border: 2px solid #fff;
-      background-color: #fff;
-      box-shadow: 0 0 10px rgba(0, 0, 0, .08);
-      padding: 10px;
       display: block;
       position: relative;
       cursor: pointer;
@@ -342,10 +339,14 @@ Steps
       }
 
       span {
-        font-weight: 600;
-        font-size: 16px;
-        display: inline-block;
-        margin-top: 5px;
+        color: #566676;
+        font-family: Inter;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+        display: block;
+        margin-top: 16px;
       }
     }
 
@@ -378,7 +379,7 @@ Steps
     }
 
     label img {
-      width: 100%;
+      width: 150px;
     }
 
     :checked + label {

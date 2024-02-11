@@ -948,7 +948,7 @@ Steps
   display: flex;
   -webkit-justify-content: center;
   justify-content: center;
-  gap: 20px;
+  gap: 56px;
 }
 .tf-setup-step-container .tf-select-service li {
   -webkit-flex: 0 0 200px;
@@ -966,9 +966,6 @@ Steps
   display: none;
 }
 .tf-setup-step-container .tf-select-service label {
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
-  padding: 10px;
   display: block;
   position: relative;
   cursor: pointer;
@@ -980,10 +977,14 @@ Steps
   }
 }
 .tf-setup-step-container .tf-select-service label span {
-  font-weight: 600;
-  font-size: 16px;
-  display: inline-block;
-  margin-top: 5px;
+  color: #566676;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  display: block;
+  margin-top: 16px;
 }
 .tf-setup-step-container .tf-select-service label:before {
   background-color: white;
@@ -1014,7 +1015,7 @@ Steps
   }
 }
 .tf-setup-step-container .tf-select-service label img {
-  width: 100%;
+  width: 150px;
 }
 .tf-setup-step-container .tf-select-service :checked + label:before {
   content: "\f15e";
