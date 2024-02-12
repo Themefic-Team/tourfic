@@ -260,7 +260,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                         
                         <div class="tf-setup-action-btn-next">
                             <button type="button" class="tf-setup-skip-btn tf-link-skip-btn"><?php _e( 'Keep Existing Theme', 'tourfic' ) ?></button>
-                            <button type="button" class="tf-setup-next-btn tf-quick-setup-btn">
+                            <button type="button" class="tf-setup-travelfic-theme-btn tf-quick-setup-btn">
                                 <span><?php _e( 'Continue With Travelfic', 'tourfic' ) ?></span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path d="M5 12H19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
