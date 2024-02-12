@@ -1271,7 +1271,27 @@ Steps
 .tf-setup-step-container .tf-setup-step-description {
   margin-bottom: 30px;
 }
-.tf-setup-step-container.tf-setup-step-3 .tf-setup-step-desc, .tf-setup-step-container.tf-setup-step-4 .tf-setup-step-desc {
+.tf-setup-step-container.tf-setup-step-2 .tf-setup-step-layout {
+  padding-left: 73px;
+  padding-right: 73px;
+}
+.tf-setup-step-container.tf-setup-step-2 .tf-setup-step-layout .tf-theme-setting-heading {
+  position: relative;
+  z-index: 0;
+}
+.tf-setup-step-container.tf-setup-step-2 .tf-setup-step-layout .tf-theme-setting-heading .tf-setup-title-shape {
+  position: absolute;
+  left: 2px;
+  bottom: 20px;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+.tf-setup-step-container.tf-setup-step-2 .tf-setup-step-layout .tf-setup-step-desc a {
+  text-decoration: none;
+  color: #003C79;
+}
+.tf-setup-step-container.tf-setup-step-4 .tf-setup-step-desc, .tf-setup-step-container.tf-setup-step-5 .tf-setup-step-desc {
   margin-bottom: 0px;
 }
 .tf-setup-step-container .tf-hotel-setup-wizard,
@@ -1296,7 +1316,7 @@ Steps
 .tf-setup-step-container .tf-apartment-setup-wizard .tf-setup-step-desc span {
   color: #27333F;
 }
-.tf-setup-step-container.tf-setup-step-4 .setup-form-group {
+.tf-setup-step-container.tf-setup-step-5 .setup-form-group {
   gap: 32px;
 }
 .tf-setup-step-container .tf-btn-loading {
