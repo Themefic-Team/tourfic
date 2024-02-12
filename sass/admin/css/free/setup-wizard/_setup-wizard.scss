@@ -269,6 +269,25 @@ Steps
     display: block;
   }
 
+  .tf-back-btn{
+    display: inline-flex;
+    gap: 8px;
+    text-decoration: none;
+    margin: 0px 0px 16px 8px;
+    &:focus{
+      outline: none;
+      box-shadow: none;
+    }
+    span{
+      color: #003C79;
+      font-family: Inter;
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 24px;
+    }
+  }
+  
   .tf-setup-step-layout {
     padding: 56px 96px;
     border-radius: 16px;
@@ -314,13 +333,8 @@ Steps
     @include flexbox();
     @include justify-content(center);
     gap: 56px;
-
+    margin: 0;
     li {
-      @include flex(0 0 200px);
-
-      @media #{$max480} {
-        @include flex(0 0 130px);
-      }
     }
 
     input[type="checkbox"] {
@@ -378,17 +392,38 @@ Steps
       }
     }
 
-    label img {
-      width: 150px;
+    label {
+      position: relative;
+      .tf-inactive{
+        img {
+          width: 150px;
+          transition: .3s all ease;
+          &:hover{
+            border-radius: 12px;
+            background: #FFF;
+            box-shadow: 0px 10px 16px 0px rgba(0, 36, 72, 0.04), 0px 10px 20px 0px rgba(0, 36, 72, 0.04);
+          }
+        }
+      }
+      .tf-active{
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        transition: .3s all ease;
+        opacity: 0;
+        z-index: -1;
+        img {
+          width: 150px;
+        }
+      }
     }
 
     :checked + label {
-      //border-color: #003c79;
-
-      &:before {
-        content: "\f15e";
-        background-color: #003c79;
-        transform: scale(1);
+      .tf-active{
+        opacity: 1;
+        z-index: 99;
       }
     }
   }
@@ -396,54 +431,37 @@ Steps
   .tf-setup-action-btn-wrapper {
     @include flexbox();
     @include justify-content(center);
-    @media #{$max375} {
-      .tf-setup-action-btn-next {
-        @include flexbox();
-      }
-    }
+    margin-top: 48px;
     .tf-setup-action-btn-next{
       display: flex;
       gap: 16px;
     }
   }
 
+.setup-form-group{
+  border-radius: 12px;
+  border: 1px solid #EEF2F6;
+  background: #FFF;
+  padding: 16px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   .tf-setup-form-item {
-    text-align: end;
-    background: #f8f9fb;
-    padding: 14px 30px 14px 25px;
-    border-radius: 10px;
-    margin: 0 0 13px 0;
-    @include flexbox();
-    flex-flow: row wrap;
-    min-width: 0;
-
-    @media #{$max575} {
-      @include flex-direction(column);
-      text-align: center;
-    }
-
+    width: 100%;
     .tf-setup-form-item-label {
-      display: inline-block;
+      display: block;
       flex-grow: 0;
       overflow: hidden;
       white-space: nowrap;
-      text-align: right;
-      vertical-align: middle;
-
-      @media #{$max575} {
-        text-align: center;
-      }
-
+      text-align: left;
+      margin-bottom: 4px;
       label {
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 17px;
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        max-width: 100%;
-        height: 32px;
-        color: rgba(0, 0, 0, .85);
+        color: #27333F;
+        font-family: Inter;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
       }
     }
 
@@ -455,26 +473,29 @@ Steps
       input[type="email"],
       input[type="number"],
       select {
-        border: 1px solid #e4e6eb;
-        border-radius: 5px;
-        height: 36px;
-        padding: 6px 18px;
-        font-size: 14px;
-        line-height: 1.5;
-        color: rgba(0, 0, 0, .85);
-        background-color: #fff;
+        border-radius: 4px;
+        border: 1px solid #EEF2F6;
+        background: #F8FAFC;
+        height: 40px;
+        padding: 8px 12px;
+        color: #566676;
+        font-family: Inter;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
         transition: all .3s;
         outline: none;
-        min-width: 200px;
-        max-width: 200px;
+        max-width: 100%;
+        width: 100%;
       }
     }
 
     .tf-switch-label {
       position: relative;
       display: inline-block;
-      width: 60px;
-      height: 26px;
+      width: 32px;
+      height: 20px;
       border-radius: 20px;
 
       input {
@@ -488,19 +509,19 @@ Steps
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: $red60;
+        background-color: rgba(192, 204, 216, 1);
         border-radius: 20px;
         @include transition(all, 0.4s);
 
         &::before {
           position: absolute;
           content: "";
-          height: 18px;
-          width: 18px;
+          height: 14px;
+          width: 14px;
           border-radius: 12px;
-          top: 4px;
+          top: 3px;
           left: 4px;
-          background-color: white;
+          background-color: rgba(255, 255, 255, 1);
           box-shadow: 0px 0px 8px rgba(27, 25, 25, 0.3);
           @include transition(all, 0.4s);
         }
@@ -508,16 +529,33 @@ Steps
 
       input:checked {
         & + .tf-switch-slider {
-          background-color: #060;
+          background-color: rgba(0, 60, 121, 1);
 
           &:before {
             left: 100%;
-            margin-left: -22px;
+            margin-left: -18px;
           }
         }
       }
     }
   }
+  .tf-setup-form-item-inline{
+    border-radius: 4px;
+    border: 1px solid #EEF2F6;
+    background: #F8FAFC;
+    display: flex;
+    padding: 16px 12px;
+    justify-content: space-between;
+    box-sizing: border-box;
+    align-items: center;
+    .tf-setup-form-item-label{
+      margin: 0;
+    }
+    .tf-setup-form-item-input{
+      text-align: right;
+    }
+  }
+}
 
   .tf-setup-step-description {
     margin-bottom: 30px;

@@ -897,6 +897,24 @@ Steps
 .tf-setup-step-container.active {
   display: block;
 }
+.tf-setup-step-container .tf-back-btn {
+  display: inline-flex;
+  gap: 8px;
+  text-decoration: none;
+  margin: 0px 0px 16px 8px;
+}
+.tf-setup-step-container .tf-back-btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+.tf-setup-step-container .tf-back-btn span {
+  color: #003C79;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
 .tf-setup-step-container .tf-setup-step-layout {
   padding: 56px 96px;
   border-radius: 16px;
@@ -949,18 +967,7 @@ Steps
   -webkit-justify-content: center;
   justify-content: center;
   gap: 56px;
-}
-.tf-setup-step-container .tf-select-service li {
-  -webkit-flex: 0 0 200px;
-  -ms-flex: 0 0 200px;
-  flex: 0 0 200px;
-}
-@media only screen and (max-width: 480px) {
-  .tf-setup-step-container .tf-select-service li {
-    -webkit-flex: 0 0 130px;
-    -ms-flex: 0 0 130px;
-    flex: 0 0 130px;
-  }
+  margin: 0;
 }
 .tf-setup-step-container .tf-select-service input[type=checkbox] {
   display: none;
@@ -1014,13 +1021,34 @@ Steps
     line-height: 20px;
   }
 }
-.tf-setup-step-container .tf-select-service label img {
+.tf-setup-step-container .tf-select-service label {
+  position: relative;
+}
+.tf-setup-step-container .tf-select-service label .tf-inactive img {
+  width: 150px;
+  transition: 0.3s all ease;
+}
+.tf-setup-step-container .tf-select-service label .tf-inactive img:hover {
+  border-radius: 12px;
+  background: #FFF;
+  box-shadow: 0px 10px 16px 0px rgba(0, 36, 72, 0.04), 0px 10px 20px 0px rgba(0, 36, 72, 0.04);
+}
+.tf-setup-step-container .tf-select-service label .tf-active {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.3s all ease;
+  opacity: 0;
+  z-index: -1;
+}
+.tf-setup-step-container .tf-select-service label .tf-active img {
   width: 150px;
 }
-.tf-setup-step-container .tf-select-service :checked + label:before {
-  content: "\f15e";
-  background-color: #003c79;
-  transform: scale(1);
+.tf-setup-step-container .tf-select-service :checked + label .tf-active {
+  opacity: 1;
+  z-index: 99;
 }
 .tf-setup-step-container .tf-setup-action-btn-wrapper {
   display: -webkit-box;
@@ -1030,132 +1058,125 @@ Steps
   display: flex;
   -webkit-justify-content: center;
   justify-content: center;
-}
-@media only screen and (max-width: 375px) {
-  .tf-setup-step-container .tf-setup-action-btn-wrapper .tf-setup-action-btn-next {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-  }
+  margin-top: 48px;
 }
 .tf-setup-step-container .tf-setup-action-btn-wrapper .tf-setup-action-btn-next {
   display: flex;
   gap: 16px;
 }
-.tf-setup-step-container .tf-setup-form-item {
-  text-align: end;
-  background: #f8f9fb;
-  padding: 14px 30px 14px 25px;
-  border-radius: 10px;
-  margin: 0 0 13px 0;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
+.tf-setup-step-container .setup-form-group {
+  border-radius: 12px;
+  border: 1px solid #EEF2F6;
+  background: #FFF;
+  padding: 16px 24px 24px 24px;
   display: flex;
-  flex-flow: row wrap;
-  min-width: 0;
+  flex-direction: column;
+  gap: 16px;
 }
-@media only screen and (max-width: 575.98px) {
-  .tf-setup-step-container .tf-setup-form-item {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    text-align: center;
-  }
+.tf-setup-step-container .setup-form-group .tf-setup-form-item {
+  width: 100%;
 }
-.tf-setup-step-container .tf-setup-form-item .tf-setup-form-item-label {
-  display: inline-block;
+.tf-setup-step-container .setup-form-group .tf-setup-form-item .tf-setup-form-item-label {
+  display: block;
   flex-grow: 0;
   overflow: hidden;
   white-space: nowrap;
-  text-align: right;
-  vertical-align: middle;
+  text-align: left;
+  margin-bottom: 4px;
 }
-@media only screen and (max-width: 575.98px) {
-  .tf-setup-step-container .tf-setup-form-item .tf-setup-form-item-label {
-    text-align: center;
-  }
+.tf-setup-step-container .setup-form-group .tf-setup-form-item .tf-setup-form-item-label label {
+  color: #27333F;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
 }
-.tf-setup-step-container .tf-setup-form-item .tf-setup-form-item-label label {
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  max-width: 100%;
-  height: 32px;
-  color: rgba(0, 0, 0, 0.85);
-}
-.tf-setup-step-container .tf-setup-form-item .tf-setup-form-item-input {
+.tf-setup-step-container .setup-form-group .tf-setup-form-item .tf-setup-form-item-input {
   flex: 1 1 0;
   min-width: 0;
 }
-.tf-setup-step-container .tf-setup-form-item .tf-setup-form-item-input input[type=text],
-.tf-setup-step-container .tf-setup-form-item .tf-setup-form-item-input input[type=email],
-.tf-setup-step-container .tf-setup-form-item .tf-setup-form-item-input input[type=number],
-.tf-setup-step-container .tf-setup-form-item .tf-setup-form-item-input select {
-  border: 1px solid #e4e6eb;
-  border-radius: 5px;
-  height: 36px;
-  padding: 6px 18px;
-  font-size: 14px;
-  line-height: 1.5;
-  color: rgba(0, 0, 0, 0.85);
-  background-color: #fff;
+.tf-setup-step-container .setup-form-group .tf-setup-form-item .tf-setup-form-item-input input[type=text],
+.tf-setup-step-container .setup-form-group .tf-setup-form-item .tf-setup-form-item-input input[type=email],
+.tf-setup-step-container .setup-form-group .tf-setup-form-item .tf-setup-form-item-input input[type=number],
+.tf-setup-step-container .setup-form-group .tf-setup-form-item .tf-setup-form-item-input select {
+  border-radius: 4px;
+  border: 1px solid #EEF2F6;
+  background: #F8FAFC;
+  height: 40px;
+  padding: 8px 12px;
+  color: #566676;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
   transition: all 0.3s;
   outline: none;
-  min-width: 200px;
-  max-width: 200px;
+  max-width: 100%;
+  width: 100%;
 }
-.tf-setup-step-container .tf-setup-form-item .tf-switch-label {
+.tf-setup-step-container .setup-form-group .tf-setup-form-item .tf-switch-label {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 26px;
+  width: 32px;
+  height: 20px;
   border-radius: 20px;
 }
-.tf-setup-step-container .tf-setup-form-item .tf-switch-label input {
+.tf-setup-step-container .setup-form-group .tf-setup-form-item .tf-switch-label input {
   display: none;
 }
-.tf-setup-step-container .tf-setup-form-item .tf-switch-label .tf-switch-slider {
+.tf-setup-step-container .setup-form-group .tf-setup-form-item .tf-switch-label .tf-switch-slider {
   position: absolute;
   cursor: pointer;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #f44336;
+  background-color: rgb(192, 204, 216);
   border-radius: 20px;
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
 }
-.tf-setup-step-container .tf-setup-form-item .tf-switch-label .tf-switch-slider::before {
+.tf-setup-step-container .setup-form-group .tf-setup-form-item .tf-switch-label .tf-switch-slider::before {
   position: absolute;
   content: "";
-  height: 18px;
-  width: 18px;
+  height: 14px;
+  width: 14px;
   border-radius: 12px;
-  top: 4px;
+  top: 3px;
   left: 4px;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   box-shadow: 0px 0px 8px rgba(27, 25, 25, 0.3);
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
 }
-.tf-setup-step-container .tf-setup-form-item .tf-switch-label input:checked + .tf-switch-slider {
-  background-color: #060;
+.tf-setup-step-container .setup-form-group .tf-setup-form-item .tf-switch-label input:checked + .tf-switch-slider {
+  background-color: rgb(0, 60, 121);
 }
-.tf-setup-step-container .tf-setup-form-item .tf-switch-label input:checked + .tf-switch-slider:before {
+.tf-setup-step-container .setup-form-group .tf-setup-form-item .tf-switch-label input:checked + .tf-switch-slider:before {
   left: 100%;
-  margin-left: -22px;
+  margin-left: -18px;
+}
+.tf-setup-step-container .setup-form-group .tf-setup-form-item-inline {
+  border-radius: 4px;
+  border: 1px solid #EEF2F6;
+  background: #F8FAFC;
+  display: flex;
+  padding: 16px 12px;
+  justify-content: space-between;
+  box-sizing: border-box;
+  align-items: center;
+}
+.tf-setup-step-container .setup-form-group .tf-setup-form-item-inline .tf-setup-form-item-label {
+  margin: 0;
+}
+.tf-setup-step-container .setup-form-group .tf-setup-form-item-inline .tf-setup-form-item-input {
+  text-align: right;
 }
 .tf-setup-step-container .tf-setup-step-description {
   margin-bottom: 30px;

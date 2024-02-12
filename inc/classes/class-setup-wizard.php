@@ -148,14 +148,24 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             <input type="checkbox" id="tf-hotel" name="tf-services[]"
                                    value="hotel" <?php echo empty( $tf_disable_services ) || ! in_array( 'hotel', $tf_disable_services ) ? esc_attr( 'checked' ) : ''; ?>/>
                             <label for="tf-hotel">
-                                <img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/hotel.png' ?>" alt="<?php esc_attr_e( 'Hotel', 'tourfic' ) ?>">
+                                <div class="tf-inactive">
+                                    <img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/hotel.png' ?>" alt="<?php esc_attr_e( 'Hotel', 'tourfic' ) ?>">
+                                </div>
+                                <div class="tf-active">
+                                    <img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/active-hotel.png' ?>" alt="<?php esc_attr_e( 'Hotel', 'tourfic' ) ?>">
+                                </div>
                                 <span><?php _e( 'Hotel', 'tourfic' ) ?></span>
                             </label>
                         </li>
                         <li>
                             <input type="checkbox" id="tf-tour" name="tf-services[]" value="tour" <?php echo empty( $tf_disable_services ) || ! in_array( 'tour', $tf_disable_services ) ? esc_attr( 'checked' ) : ''; ?>/>
                             <label for="tf-tour">
-                                <img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/tour.png' ?>" alt="<?php esc_attr_e( 'Tour', 'tourfic' ) ?>">
+                                <div class="tf-inactive">
+                                    <img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/tour.png' ?>" alt="<?php esc_attr_e( 'Tour', 'tourfic' ) ?>">
+                                </div>
+                                <div class="tf-active">
+                                    <img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/active-tour.png' ?>" alt="<?php esc_attr_e( 'Tour', 'tourfic' ) ?>">
+                                </div>
                                 <span><?php _e( 'Tour', 'tourfic' ) ?></span>
                             </label>
                         </li>
@@ -163,7 +173,12 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             <input type="checkbox" id="tf-apartment" name="tf-services[]"
                                    value="apartment" <?php echo empty( $tf_disable_services ) || ! in_array( 'apartment', $tf_disable_services ) ? esc_attr( 'checked' ) : ''; ?>/>
                             <label for="tf-apartment">
-                                <img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/apartment.png' ?>" alt="<?php esc_attr_e( 'Apartment', 'tourfic' ) ?>">
+                                <div class="tf-inactive">
+                                    <img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/apartment.png' ?>" alt="<?php esc_attr_e( 'Apartment', 'tourfic' ) ?>">
+                                </div>
+                                <div class="tf-active">
+                                    <img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/active-apartment.png' ?>" alt="<?php esc_attr_e( 'Apartment', 'tourfic' ) ?>">
+                                </div>
                                 <span><?php _e( 'Apartment', 'tourfic' ) ?></span>
                             </label>
                         </li>
@@ -194,70 +209,92 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			$tf_review_autopublish = ! empty( tfopt( 'r-auto-publish' ) ) ? tfopt( 'r-auto-publish' ) : '';
 			?>
             <div class="tf-setup-step-container tf-setup-step-2 <?php echo self::$current_step == 'step_2' ? 'active' : ''; ?>" data-step="2">
+                <div class="back-to-dashboard">
+                    <a href="#" class="tf-back-btn tf-setup-prev-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 19L5 12L12 5" stroke="#003C79" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M19 12H5" stroke="#003C79" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span><?php _e( 'Back', 'tourfic' ) ?></span>
+                    </a>
+                </div>
                 <section class="tf-setup-step-layout">
 					<?php $this->tf_setup_wizard_steps_header( 2 ) ?>
                     <h1 class="tf-setup-step-title"><?php _e( 'General Settings', 'tourfic' ) ?></h1>
-                    <div class="tf-setup-form-item">
-                        <div class="tf-setup-form-item-label"><label class=""><?php _e( 'Select Search Result Page', 'tourfic' ) ?></label></div>
-                        <div class="tf-setup-form-item-input">
-                            <select name="tf-search-result-page" id="tf-search-result-page">
-                                <option value=""><?php _e( 'Select a page', 'tourfic' ) ?></option>
-								<?php
-								$pages              = get_pages();
-								$search_result_page = get_option( 'tf_search_page_id' );
-								foreach ( $pages as $page ) {
-									echo '<option value="' . $page->ID . '" ' . selected( $search_result_page, $page->ID, false ) . '>' . $page->post_title . '</option>';
-								}
-								?>
-                            </select>
+                    <p class="tf-setup-step-desc"><?php _e( 'From here you can customize your website according to your need', 'tourfic' ) ?></p>
+
+                    <div class="setup-form-group">
+
+                        <div class="tf-setup-form-item">
+                            <div class="tf-setup-form-item-label"><label class=""><?php _e( 'Select Search Result Page', 'tourfic' ) ?></label></div>
+                            <div class="tf-setup-form-item-input">
+                                <select name="tf-search-result-page" id="tf-search-result-page">
+                                    <option value=""><?php _e( 'Select a page', 'tourfic' ) ?></option>
+                                    <?php
+                                    $pages              = get_pages();
+                                    $search_result_page = get_option( 'tf_search_page_id' );
+                                    foreach ( $pages as $page ) {
+                                        echo '<option value="' . $page->ID . '" ' . selected( $search_result_page, $page->ID, false ) . '>' . $page->post_title . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!--Search result posts per page-->
+                        <div class="tf-setup-form-item">
+                            <div class="tf-setup-form-item-label"><label class=""><?php _e( 'Posts Per Page on Search Result', 'tourfic' ) ?></label></div>
+                            <div class="tf-setup-form-item-input">
+                                <input type="number" name="tf-search-result-posts-per-page" id="tf-search-result-posts-per-page" value="<?php echo esc_attr( $tf_search_result ); ?>">
+                            </div>
+                        </div>
+
+                        <!--wishlist page-->
+                        <div class="tf-setup-form-item">
+                            <div class="tf-setup-form-item-label"><label class=""><?php _e( 'Select Wishlist Page', 'tourfic' ) ?></label></div>
+                            <div class="tf-setup-form-item-input">
+                                <select name="tf-wishlist-page" id="tf-wishlist-page">
+                                    <option value=""><?php _e( 'Select a page', 'tourfic' ) ?></option>
+                                    <?php
+                                    $pages         = get_pages();
+                                    $wishlist_page = get_option( 'tf_wishlist_page_id' );
+                                    foreach ( $pages as $page ) {
+                                        echo '<option value="' . $page->ID . '" ' . selected( $wishlist_page, $page->ID, false ) . '>' . $page->post_title . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!--Auto Publish Review-->
+                        <div class="tf-setup-form-item tf-setup-form-item-inline">
+                            <div class="tf-setup-form-item-label"><label class="" for="tf-auto-publish-review"><?php _e( 'Auto Publish Review', 'tourfic' ) ?></label></div>
+                            <div class="tf-setup-form-item-input">
+                                <label for="tf-auto-publish-review" class="tf-switch-label">
+                                    <input type="checkbox" id="tf-auto-publish-review" name="tf-auto-publish-review" value="<?php echo ! empty( $tf_review_autopublish ) ? esc_attr( '1' ) : ''; ?>"
+                                        class="tf-switch" <?php echo ! empty( $tf_review_autopublish ) ? esc_attr( 'checked' ) : ''; ?>/>
+                                    <span class="tf-switch-slider"></span>
+                                </label>
+                            </div>
                         </div>
                     </div>
-
-                    <!--Search result posts per page-->
-                    <div class="tf-setup-form-item">
-                        <div class="tf-setup-form-item-label"><label class=""><?php _e( 'Posts Per Page on Search Result', 'tourfic' ) ?></label></div>
-                        <div class="tf-setup-form-item-input">
-                            <input type="number" name="tf-search-result-posts-per-page" id="tf-search-result-posts-per-page" value="<?php echo esc_attr( $tf_search_result ); ?>">
+                    
+                    <div class="tf-setup-action-btn-wrapper">
+                        
+                        <div class="tf-setup-action-btn-next">
+                            <button type="button" class="tf-setup-skip-btn tf-link-skip-btn"><?php _e( 'Skip', 'tourfic' ) ?></button>
+                            <button type="button" class="tf-setup-next-btn tf-quick-setup-btn">
+                                <span><?php _e( 'Next', 'tourfic' ) ?></span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 5L19 12L12 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>
-
-                    <!--wishlist page-->
-                    <div class="tf-setup-form-item">
-                        <div class="tf-setup-form-item-label"><label class=""><?php _e( 'Select Wishlist Page', 'tourfic' ) ?></label></div>
-                        <div class="tf-setup-form-item-input">
-                            <select name="tf-wishlist-page" id="tf-wishlist-page">
-                                <option value=""><?php _e( 'Select a page', 'tourfic' ) ?></option>
-								<?php
-								$pages         = get_pages();
-								$wishlist_page = get_option( 'tf_wishlist_page_id' );
-								foreach ( $pages as $page ) {
-									echo '<option value="' . $page->ID . '" ' . selected( $wishlist_page, $page->ID, false ) . '>' . $page->post_title . '</option>';
-								}
-								?>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!--Auto Publish Review-->
-                    <div class="tf-setup-form-item">
-                        <div class="tf-setup-form-item-label"><label class="" for="tf-auto-publish-review"><?php _e( 'Auto Publish Review', 'tourfic' ) ?></label></div>
-                        <div class="tf-setup-form-item-input">
-                            <label for="tf-auto-publish-review" class="tf-switch-label">
-                                <input type="checkbox" id="tf-auto-publish-review" name="tf-auto-publish-review" value="<?php echo ! empty( $tf_review_autopublish ) ? esc_attr( '1' ) : ''; ?>"
-                                       class="tf-switch" <?php echo ! empty( $tf_review_autopublish ) ? esc_attr( 'checked' ) : ''; ?>/>
-                                <span class="tf-switch-slider"></span>
-                            </label>
-                        </div>
-                    </div>
-
+                    
                 </section>
-                <div class="tf-setup-action-btn-wrapper">
-                    <button type="button" class="tf-setup-prev-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Previous', 'tourfic' ) ?></button>
-                    <div class="tf-setup-action-btn-next">
-                        <button type="button" class="tf-setup-skip-btn tf-link-btn"><?php _e( 'Skip this step', 'tourfic' ) ?></button>
-                        <button type="button" class="tf-setup-next-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Next', 'tourfic' ) ?></button>
-                    </div>
-                </div>
+                
             </div>
 			<?php
 		}
