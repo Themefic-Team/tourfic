@@ -620,8 +620,10 @@ body.admin_page_tf-setup-wizard {
   display: inline-flex;
   gap: 8px;
   transition: 0.3s all ease;
+  text-decoration: none;
 }
 .tf-quick-setup-btn:hover {
+  color: #FFF;
   background: linear-gradient(0deg, #0051A3 0%, #003C79 100%);
   box-shadow: 0px 24px 20px 0px rgba(8, 20, 33, 0.08), 0px 8px 16px 0px rgba(8, 20, 33, 0.08), 0px 16px 8px 0px rgba(8, 20, 33, 0.04);
 }
@@ -639,6 +641,7 @@ body.admin_page_tf-setup-wizard {
   font-weight: 600;
   line-height: 24px; /* 160% */
   transition: 0.3s all ease;
+  text-decoration: none;
 }
 .tf-link-skip-btn:hover {
   background: linear-gradient(0deg, #0051A3 0%, #003C79 100%);
@@ -815,6 +818,26 @@ Welcome Step
   margin-bottom: 0;
   margin-right: 10px;
 }
+.tf-setup-content-layout .tf-setup-finish-content {
+  border-radius: 16px;
+  background: #FFF;
+  padding: 56px 32px 96px 32px;
+  text-align: center;
+}
+.tf-setup-content-layout .tf-setup-finish-content .welcome-img {
+  margin-bottom: 50px;
+}
+.tf-setup-content-layout .tf-setup-finish-content .welcome-img img {
+  width: 133px;
+  height: 130px;
+  transform: rotate(-45deg);
+}
+.tf-setup-content-layout .tf-setup-finish-content .tf-setup-welcome-description {
+  margin-top: 8px;
+}
+.tf-setup-content-layout .tf-setup-finish-content .tf-setup-finish-footer {
+  gap: 16px;
+}
 
 .tf-setup-step-container {
   min-width: 886px;
@@ -939,15 +962,14 @@ Steps
   margin: 0px 0px 0px 0px;
 }
 .tf-setup-step-container .tf-setup-step-subtitle {
-  text-transform: capitalize;
-  color: #003c79;
-  margin: 20px 0 15px;
   text-align: left;
-}
-@media only screen and (max-width: 575.98px) {
-  .tf-setup-step-container .tf-setup-step-subtitle {
-    text-align: center;
-  }
+  color: #27333F;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 0 0 2px 0px;
 }
 .tf-setup-step-container .tf-setup-step-desc {
   color: #566676;
@@ -1045,6 +1067,7 @@ Steps
 }
 .tf-setup-step-container .tf-select-service label .tf-active img {
   width: 150px;
+  box-shadow: 0px 10px 16px 0px rgba(0, 36, 72, 0.04), 0px 10px 20px 0px rgba(0, 36, 72, 0.04);
 }
 .tf-setup-step-container .tf-select-service :checked + label .tf-active {
   opacity: 1;
@@ -1116,6 +1139,13 @@ Steps
   max-width: 100%;
   width: 100%;
 }
+.tf-setup-step-container .setup-form-group .tf-setup-form-item .tf-setup-form-item-input input[type=text]:focus,
+.tf-setup-step-container .setup-form-group .tf-setup-form-item .tf-setup-form-item-input input[type=email]:focus,
+.tf-setup-step-container .setup-form-group .tf-setup-form-item .tf-setup-form-item-input input[type=number]:focus,
+.tf-setup-step-container .setup-form-group .tf-setup-form-item .tf-setup-form-item-input select:focus {
+  outline: none;
+  box-shadow: none;
+}
 .tf-setup-step-container .setup-form-group .tf-setup-form-item .tf-switch-label {
   position: relative;
   display: inline-block;
@@ -1171,18 +1201,103 @@ Steps
   justify-content: space-between;
   box-sizing: border-box;
   align-items: center;
+  height: 56px;
 }
 .tf-setup-step-container .setup-form-group .tf-setup-form-item-inline .tf-setup-form-item-label {
   margin: 0;
 }
 .tf-setup-step-container .setup-form-group .tf-setup-form-item-inline .tf-setup-form-item-input {
   text-align: right;
+  max-width: 246px !important;
+}
+.tf-setup-step-container .setup-form-group .tf-setup-form-item-inline .tf-setup-form-item-input input[type=text] {
+  height: 32px;
+  margin: 0;
+}
+.tf-setup-step-container .setup-form-group .tf-field-imageselect {
+  padding: 0;
+}
+.tf-setup-step-container .setup-form-group .tf-field-imageselect label {
+  color: #27333F;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 0;
+}
+.tf-setup-step-container .setup-form-group .tf-field-imageselect .tf-fieldset {
+  margin-top: 16px;
+}
+.tf-setup-step-container .setup-form-group .tf-field-imageselect .tf-fieldset .tf-image-radio-group {
+  gap: 22px;
+}
+.tf-setup-step-container .setup-form-group .tf-field-imageselect .tf-fieldset .tf-image-radio-group li {
+  margin: 0;
+  width: 200px;
+  height: 180px;
+  border-radius: 8px;
+  background-color: hsl(210, 100%, 96%);
+  box-sizing: border-box;
+}
+.tf-setup-step-container .setup-form-group .tf-field-imageselect .tf-fieldset .tf-image-radio-group li .tf-image-checkbox .select-image-box {
+  width: 200px;
+  height: 180px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+.tf-setup-step-container .setup-form-group .tf-field-imageselect .tf-fieldset .tf-image-radio-group li .tf-image-checkbox .select-image-box img {
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(0, 0, 0, 0) !important;
+  object-fit: cover;
+  object-position: top;
+  transition: object-position 2s ease-in-out, border-color 0.3s ease-in-out;
+}
+.tf-setup-step-container .setup-form-group .tf-field-imageselect .tf-fieldset .tf-image-radio-group li .tf-image-checkbox .select-image-box img:hover {
+  object-position: bottom;
+}
+.tf-setup-step-container .setup-form-group .tf-field-imageselect .tf-fieldset .tf-image-radio-group li .tf-image-checkbox .select-image-box {
+  border: 2px solid transparent !important;
+  border-radius: 8px;
+}
+.tf-setup-step-container .setup-form-group .tf-field-imageselect .tf-fieldset .tf-image-radio-group li .tf-image-checkbox > input:checked + .select-image-box {
+  border-color: #003C79 !important;
+  border-radius: 8px;
+}
+.tf-setup-step-container .setup-form-group .tf-setup-permalink {
+  padding: 12px;
 }
 .tf-setup-step-container .tf-setup-step-description {
   margin-bottom: 30px;
 }
-.tf-setup-step-container.tf-setup-step-3 .tf-setup-step-desc {
+.tf-setup-step-container.tf-setup-step-3 .tf-setup-step-desc, .tf-setup-step-container.tf-setup-step-4 .tf-setup-step-desc {
+  margin-bottom: 0px;
+}
+.tf-setup-step-container .tf-hotel-setup-wizard,
+.tf-setup-step-container .tf-tour-setup-wizard,
+.tf-setup-step-container .tf-apartment-setup-wizard {
+  margin-top: 48px;
+}
+.tf-setup-step-container .tf-hotel-setup-wizard .tf-setup-step-desc,
+.tf-setup-step-container .tf-tour-setup-wizard .tf-setup-step-desc,
+.tf-setup-step-container .tf-apartment-setup-wizard .tf-setup-step-desc {
   text-align: left;
+  margin: 0 0 16px 0;
+  color: #566676;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+.tf-setup-step-container .tf-hotel-setup-wizard .tf-setup-step-desc span,
+.tf-setup-step-container .tf-tour-setup-wizard .tf-setup-step-desc span,
+.tf-setup-step-container .tf-apartment-setup-wizard .tf-setup-step-desc span {
+  color: #27333F;
+}
+.tf-setup-step-container.tf-setup-step-4 .setup-form-group {
+  gap: 32px;
 }
 .tf-setup-step-container .tf-btn-loading {
   padding-right: 40px;

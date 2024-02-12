@@ -9,7 +9,7 @@
         $(document).on('click', '.tf-setup-start-btn', function (e) {
             e.preventDefault();
             $('.tf-welcome-step').hide();
-            $('.tf-setup-step-1').show();
+            $('.tf-setup-step-1').fadeIn(600);
         });
 
         $(document).on('click', '.tf-setup-next-btn, .tf-setup-skip-btn', function (e) {
@@ -96,12 +96,12 @@
         */
         $(document).on('click', '.tf-setup-submit-btn', function (e) {
             e.preventDefault();
-            let submitBtn = $('.tf-setup-submit-btn.tf-admin-btn');
+            let submitBtn = $('.tf-setup-submit-btn.tf-quick-setup-btn');
             let form = $(this).closest('#tf-setup-wizard-form');
             let step = $(this).closest('.tf-setup-step-container').data('step');
             let skipSteps = form.find('input[name="tf-skip-steps"]').val();
 
-            if($(this).hasClass('tf-admin-btn') && skipSteps.indexOf(step) !== -1) {
+            if($(this).hasClass('tf-quick-setup-btn') && skipSteps.indexOf(step) !== -1) {
                 skipSteps = skipSteps.replace(step, '');
                 form.find('input[name="tf-skip-steps"]').val(skipSteps);
             }
