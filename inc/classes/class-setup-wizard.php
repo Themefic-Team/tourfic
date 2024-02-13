@@ -31,6 +31,12 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			add_action( 'in_admin_header', [ $this, 'remove_notice' ], 1000 );
             add_action( 'admin_enqueue_scripts', array( $this, 'tf_setup_wizard_admin_enqueue_scripts' ),9 );
 
+            add_action( 'wp_ajax_tf_theme_installing', 'wp_ajax_install_theme' );
+            add_action( 'wp_ajax_tf_travelfic_toolkit_installing', 'wp_ajax_install_plugin' );
+            add_action( 'wp_ajax_tf_travelfic_toolkit_activate', array( $this, 'tf_travelfic_toolkit_activate_callabck' ) );
+            add_action( 'wp_ajax_tf_setup_travelfic_theme_active', array( $this, 'tf_setup_travelfic_theme_active_callabck' ) );
+
+            
 			self::$current_step = isset( $_GET['step'] ) ? sanitize_key( $_GET['step'] ) : 'welcome';
 		}
 
@@ -255,17 +261,28 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <div class="setup-theme-style">
                         <img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/themes.png' ?>" alt="<?php esc_attr_e( 'Travelfic Theme', 'tourfic' ) ?>">
                     </div>
-                    
                     <div class="tf-setup-action-btn-wrapper">
                         
                         <div class="tf-setup-action-btn-next">
                             <button type="button" class="tf-setup-skip-btn tf-link-skip-btn"><?php _e( 'Keep Existing Theme', 'tourfic' ) ?></button>
-                            <button type="button" class="tf-setup-travelfic-theme-btn tf-quick-setup-btn">
+                            <button type="button" class="tf-setup-travelfic-theme-btn tf-quick-setup-btn" data-install="travelfic">
                                 <span><?php _e( 'Continue With Travelfic', 'tourfic' ) ?></span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path d="M5 12H19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M12 5L19 12L12 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
+                            </button>
+
+                            <button type="button" class="tf-setup-travelfic-theme-active" data-install="travelfic" style="display: none;">
+                                <span><?php _e( 'Travelfic Active', 'tourfic' ) ?></span>
+                            </button>
+
+                            <button type="button" class="tf-setup-travelfic-toolkit-btn" data-install="travelfic-toolkit" style="display: none;">
+                                <span><?php _e( 'Travelfic Toolklit', 'tourfic' ) ?></span>
+                            </button>
+
+                            <button type="button" class="tf-setup-travelfic-toolkit-active" data-install="travelfic-toolkit" style="display: none;">
+                                <span><?php _e( 'Travelfic Toolklit Active', 'tourfic' ) ?></span>
                             </button>
                         </div>
                     </div>
@@ -1036,7 +1053,47 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			echo json_encode( $response );
 			wp_die();
 		}
-	}
+
+        public function tf_travelfic_toolkit_activate_callabck(){
+            check_ajax_referer('updates', '_ajax_nonce');
+            // Check user capabilities
+            if (!current_user_can('install_plugins')) {
+                wp_send_json_error('Permission denied');
+            }
+            //Activation
+            $activate_plugin = activate_plugin('travelfic-toolkit/travelfic-toolkit.php');
+            $toolkit_activate_plugin = activate_plugin('travelfic-toolkit/travelfic-toolkit.php');
+
+            if(is_plugin_active( 'travelfic-toolkit/travelfic-toolkit.php' )){
+                wp_send_json_success('Toolkit activated successfully.');
+            }else{
+                $result = activate_plugin('travelfic-toolkit/travelfic-toolkit.php');
+                if (is_wp_error($result)) {
+                    wp_send_json_error('Error: ' . $result->get_error_message());
+                } else {
+                    wp_send_json_success('Toolkit activated successfully!');
+                }
+            }
+            wp_die();
+        }
+
+        public function tf_setup_travelfic_theme_active_callabck(){
+
+            check_ajax_referer('updates', '_ajax_nonce');
+
+            if (!current_user_can('switch_themes')) {
+                wp_send_json_error('User does not have permission to switch themes.');
+            }
+
+            $theme_slug = isset($_POST['slug']) ? sanitize_text_field($_POST['slug']) : '';
+
+            if (!wp_get_theme($theme_slug)->exists()) {
+                wp_send_json_error('Theme does not exist.');
+            }
+            switch_theme($theme_slug);
+            wp_send_json_success('Theme activated successfully.');
+        }
+    }
 }
 
 TF_Setup_Wizard::instance();
