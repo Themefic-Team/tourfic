@@ -256,7 +256,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             </svg>
                         </div>
                     </div>
-                    <p class="tf-setup-step-desc"><?php _e( "Travelfic is a WordPress theme created by us to improve your site’s frontend. While Tourfic </br>manages your backend and booking, Travelfic ensures your travel site looks great and </br>operates smoothly. ", "tourfic" ) ?><a href=""><?php _e("Know more about Travelfic", "tourfic"); ?></a></p>
+                    <p class="tf-setup-step-desc"><?php _e( "Travelfic is a WordPress theme created by us to improve your site’s frontend. While Tourfic </br>manages your backend and booking, Travelfic ensures your travel site looks great and </br>operates smoothly. ", "tourfic" ) ?><a href="https://wordpress.org/themes/travelfic/" target="_blank"><?php _e("Know more about Travelfic", "tourfic"); ?></a></p>
 
                     <div class="setup-theme-style">
                         <img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/themes.png' ?>" alt="<?php esc_attr_e( 'Travelfic Theme', 'tourfic' ) ?>">
