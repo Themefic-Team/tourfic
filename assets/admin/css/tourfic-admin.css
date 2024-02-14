@@ -1290,7 +1290,7 @@ Steps
 .tf-setup-step-container .setup-form-group .tf-field-imageselect .tf-fieldset .tf-image-radio-group li .tf-image-checkbox .select-image-box {
   width: 200px;
   height: 180px;
-  padding: 16px;
+  padding: 16px 16px 2px 16px;
   box-sizing: border-box;
 }
 .tf-setup-step-container .setup-form-group .tf-field-imageselect .tf-fieldset .tf-image-radio-group li .tf-image-checkbox .select-image-box img {
