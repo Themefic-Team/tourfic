@@ -867,7 +867,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		 * redirect to set up wizard when active plugin
 		 */
 		public function tf_activation_redirect() {
-			if ( ! get_option( 'tf_setup_wizard' ) && ! get_option( 'tf_settings' ) ) {
+			if ( ! get_option( 'tf_setup_wizard' ) ) {
 				update_option( 'tf_setup_wizard', 'active' );
 				wp_redirect( admin_url( 'admin.php?page=tf-setup-wizard' ) );
 				exit;
