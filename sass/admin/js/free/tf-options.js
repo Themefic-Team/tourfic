@@ -988,7 +988,11 @@
 
         $('textarea.wp_editor, textarea.tf_wp_editor').each(function () {
             let $id = $(this).attr('id');
-            TF_wp_editor($id);
+
+            setTimeout(function() { 
+                TF_wp_editor($id);
+            }, 1000);
+            
         });
 
         /*

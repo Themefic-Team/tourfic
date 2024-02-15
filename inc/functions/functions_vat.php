@@ -12,3 +12,27 @@ if ( ! function_exists( 'tf_taxable_option_callback' ) ) {
 		return $all_classes;
 	}
 }
+if( ! defined( 'TF_PRO' ) ){
+	add_action('woocommerce_before_calculate_totals', 'tf_cart_item_tax_class_for_default_taxs');
+}
+function tf_cart_item_tax_class_for_default_taxs( $cart ){
+    if ((is_admin() && !defined('DOING_AJAX')))
+        return;
+
+    if (did_action('woocommerce_before_calculate_totals') >= 2)
+        return;
+
+    foreach ($cart->get_cart() as $item) {
+
+        if(!empty($item['tf_hotel_data'])){
+            $item['data']->set_tax_class('zero-rate');
+        }elseif(!empty($item['tf_tours_data'])){
+            $item['data']->set_tax_class('zero-rate');
+        }elseif(!empty($item['tf_apartment_data'])){
+            $item['data']->set_tax_class('zero-rate');
+        }else{
+
+        }
+
+    }
+}
