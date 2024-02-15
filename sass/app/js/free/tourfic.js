@@ -397,13 +397,13 @@
         function fullwidthInit(selector) {
             function fullWidth(selector) {
                 $(selector).each(function () {
-                    $(this).width("100%").css({ marginLeft: "-0px" });
+                    $(this).width("100%").css({marginLeft: "-0px"});
 
                     var window_width = $(window).width();
 
                     var left_margin = "-" + $(this).offset().left + "px";
 
-                    $(this).width(window_width).css({ marginLeft: left_margin });
+                    $(this).width(window_width).css({marginLeft: left_margin});
                 });
             }
 
@@ -713,7 +713,7 @@
             if ($('body').hasClass('logged-in')) {
                 let tableNode = targetNode.closest('table');
                 let type = tableNode.data('type');
-                let data = { id, action: 'tf_remove_wishlist', type, nonce: targetNode.data('nonce') }
+                let data = {id, action: 'tf_remove_wishlist', type, nonce: targetNode.data('nonce')}
                 $.get(tf_params.ajax_url, data,
                     function (data) {
                         if (data.success) {
@@ -919,7 +919,7 @@
             var input = $(this).parent().find('input');
             var max = input.attr('max') ? input.attr('max') : 999;
             var step = input.attr('step') ? input.attr('step') : 1;
-            if(!input.val()){
+            if (!input.val()) {
                 input.val(0);
             }
             if (input.val() < max) {
@@ -935,7 +935,7 @@
             var input = $(this).parent().find('input');
             var min = input.attr('min');
             var step = input.attr('step') ? input.attr('step') : 1;
-            if(!input.val()){
+            if (!input.val()) {
                 input.val(0);
             }
             if (input.val() > min) {
@@ -1244,7 +1244,7 @@
             e.preventDefault();
             var targetUrl = (e.target.href) ? e.target.href : $(this).context.href;
             amPushAjax(targetUrl);
-            window.history.pushState({ url: "" + targetUrl + "" }, "", targetUrl);
+            window.history.pushState({url: "" + targetUrl + ""}, "", targetUrl);
         });
         // End Feed Ajax Trigger
 
@@ -1442,7 +1442,7 @@
         /**
          * Hotel Min and Max Range Filtering
          * @author Jahid
-        */
+         */
         let tf_hotel_range_options = {
             range: {
                 min: parseInt(tf_params.tf_hotel_min_price),
@@ -1485,7 +1485,7 @@
         /**
          * Tour Min and Max Range Filtering
          * @author Jahid
-        */
+         */
         let tf_tour_range_options = {
             range: {
                 min: parseInt(tf_params.tf_tour_min_price),
@@ -1527,7 +1527,7 @@
         /**
          * Apartment Min and Max Range Filtering
          * @author Jahid
-        */
+         */
         let tf_apartment_search_range = {
             range: {
                 min: parseInt(tf_params.tf_apartment_min_price),
@@ -1705,19 +1705,19 @@
             var extras = [];
             var quantity = [];
 
-            $('.tour-extra-single').each(function(e) {
-                 let $this = $(this);
+            $('.tour-extra-single').each(function (e) {
+                let $this = $(this);
 
-                 if($this.find('input[name="tf-tour-extra"]').is(':checked')){
+                if ($this.find('input[name="tf-tour-extra"]').is(':checked')) {
 
                     let tour_extras = $this.find('input[name="tf-tour-extra"]').val();
-                     extras.push(tour_extras);
+                    extras.push(tour_extras);
 
-                    if($this.find('.tf_quantity-acrselection').hasClass('quantity-active')){
+                    if ($this.find('.tf_quantity-acrselection').hasClass('quantity-active')) {
                         let qty = $this.find('input[name="extra-quantity"]').val();
 
                         quantity.push(qty)
-                    }else{
+                    } else {
                         quantity.push(1)
                     }
                 }
@@ -1734,7 +1734,7 @@
                 check_in_date: check_in_date,
                 check_in_time: check_in_time,
                 tour_extra: extras,
-                tour_extra_quantity : quantities,
+                tour_extra_quantity: quantities,
                 deposit: deposit
             };
 
@@ -1966,10 +1966,10 @@
             $(this).find('.tf-question-desc').slideToggle();
         });
 
-        $(".tf-template-3 .tf-hero-hotel.tf-popup-buttons").click(function(e){
+        $(".tf-template-3 .tf-hero-hotel.tf-popup-buttons").click(function (e) {
             e.preventDefault();
             $("#tour_room_details_loader").show();
-            setTimeout(function() {
+            setTimeout(function () {
                 $("#tour_room_details_loader").hide();
                 $(".tf-hotel-popup").addClass("tf-show");
             }, 1000);
@@ -2186,8 +2186,10 @@
             var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(location['lat'], location['lng']),
                 map: map,
-                icon: document.getElementById('map-marker').dataset.marker
+                icon: document.getElementById('map-marker').dataset.marker,
+                label: 'Helldadaso',
             });
+            console.log(i);
             markers.push(marker);
             google.maps.event.addListener(marker, 'click', (function (marker, i) {
                 return function () {
@@ -2209,6 +2211,107 @@
         });
         //  Fit these bounds to the map
         map.fitBounds(bounds);
+    }
+
+    function initHalfMap(mapEl, mapData, mapLat, mapLng, mapZoom, mapIcon) {
+        var popupPos = mapEl.data('popup-position');
+        if (mapData.length <= 0)
+            mapData = mapEl.data('data_show');
+        if (mapLat.length <= 0)
+            mapLat = mapEl.data('lat');
+        if (mapLng.length <= 0)
+            mapLng = mapEl.data('lng');
+        if (mapZoom.length <= 0)
+            mapZoom = mapEl.data('zoom');
+        if (mapIcon.length <= 0)
+            mapIcon = mapEl.data('icon');
+        var map = new google.maps.Map(mapEl.get(0), {zoom: mapZoom, center: {lat: parseFloat(mapLat), lng: parseFloat(mapLng)}, disableDefaultUI: true});
+        bounds = new google.maps.LatLngBounds();
+        if (typeof mapData != 'undefined' && Object.keys(mapData).length) {
+            var marker = [];
+            var ib = [];
+            var c = {};
+            var markers = jQuery.map(mapData, function (location, i) {
+                marker[i] = new google.maps.Marker({position: {lat: parseFloat(location.lat), lng: parseFloat(location.lng)}, options: {icon: mapIcon, animation: google.maps.Animation.DROP}, map: map});
+                var loc = new google.maps.LatLng(parseFloat(location.lat), parseFloat(location.lng));
+                bounds.extend(loc);
+                var ibOptions = {
+                    content: '',
+                    disableAutoPan: true,
+                    maxWidth: 0,
+                    pixelOffset: new google.maps.Size(-135, -55),
+                    zIndex: null,
+                    boxStyle: {padding: "0px 0px 0px 0px", width: "270px",},
+                    closeBoxURL: "",
+                    cancelBubble: true,
+                    infoBoxClearance: new google.maps.Size(1, 1),
+                    isHidden: false,
+                    pane: "floatPane",
+                    enableEventPropagation: true,
+                    alignBottom: true
+                };
+                if (window.matchMedia("(min-width: 768px)").matches) {
+                    if (popupPos == 'right') {
+                        ibOptions.pixelOffset = new google.maps.Size(35, -208);
+                        ibOptions.alignBottom = false;
+                    }
+                }
+                jQuery(window).on('resize', function () {
+                    if (window.matchMedia("(min-width: 768px)").matches) {
+                        if (popupPos == 'right') {
+                            ibOptions.pixelOffset = new google.maps.Size(35, -208);
+                            ibOptions.alignBottom = false;
+                        }
+                    }
+                });
+                google.maps.event.addListener(marker[i], 'click', (function () {
+                    var source = location.content_html;
+                    var boxText = document.createElement("div");
+                    if (window.matchMedia("(min-width: 768px)").matches) {
+                        if (popupPos == 'right') {
+                            boxText.classList.add("right-box");
+                        }
+                    }
+                    jQuery(window).on('resize', function () {
+                        if (window.matchMedia("(min-width: 768px)").matches) {
+                            if (popupPos == 'right') {
+                                boxText.classList.add("right-box");
+                            }
+                        } else {
+                            boxText.classList.remove("right-box");
+                        }
+                    });
+                    boxText.style.cssText = "border-radius: 5px; background: #fff; padding: 0px;";
+                    boxText.innerHTML = source;
+                    ibOptions.content = boxText;
+                    var ks = Object.keys(c);
+                    if (ks.length) {
+                        for (var j = 0; j < ks.length; j++) {
+                            c[ks[j]].close();
+                        }
+                    }
+                    ib[i] = new InfoBox(ibOptions);
+                    c[i] = ib[i];
+                    ib[i].open(map, this);
+                    map.panTo(ib[i].getPosition());
+                    google.maps.event.addListener(ib[i], 'domready', function () {
+                        var closeInfoBox = document.getElementById("close-popup-on-map");
+                        google.maps.event.addDomListener(closeInfoBox, 'click', function () {
+                            ib[i].close();
+                        });
+                    });
+                }));
+                return marker[i];
+            });
+            customControlGoogleMap(mapEl.get(0), map);
+        }
+        map.fitBounds(bounds);
+        map.panToBounds(bounds);
+        var listener = google.maps.event.addListener(map, "idle", function () {
+            if (map.getZoom() > 16)
+                map.setZoom(16);
+            google.maps.event.removeListener(listener);
+        });
     }
 })(jQuery, window);
 
