@@ -5738,7 +5738,6 @@ div#tf-contact-info {
   top: 11px;
   display: flex;
   padding-left: 10px;
-  overflow: hidden;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn {
