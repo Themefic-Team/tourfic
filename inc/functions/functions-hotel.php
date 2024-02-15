@@ -88,7 +88,7 @@ function tf_hotel_default_labels() {
 	);
 
 	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-		$tf_hotel_single_name = ! empty(tfopt( 'tf-hotel-post-rename-singular' )) ? tfopt( 'tf-hotel-post-rename-singular' ) : __("'Hotel'", "tourfic");
+		$tf_hotel_single_name = ! empty(tfopt( 'tf-hotel-post-rename-singular' )) ? tfopt( 'tf-hotel-post-rename-singular' ) : __("Hotel", "tourfic");
 		$tf_hotel_plural_name = ! empty(tfopt( 'tf-hotel-post-rename-plural' )) ? tfopt( 'tf-hotel-post-rename-plural' ) : __('Hotels', 'tourfic');
 
 		$default_hotel = array(
