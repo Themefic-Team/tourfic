@@ -45,8 +45,9 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 		}
 
 		function tf_apartment_backend_booking_menu() {
+			$tf_aprt_parentmenu = !empty($_GET['page']) && "tf-apartment-backend-booking"==$_GET['page'] ? 'edit.php?post_type=tf_apartment' : '';
 			add_submenu_page(
-				null,
+				$tf_aprt_parentmenu,
 				__( 'Add New Booking', 'tourfic' ),
 				__( 'Add New Booking', 'tourfic' ),
 				'edit_tf_apartments',
