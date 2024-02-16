@@ -247,31 +247,13 @@ function tf_hotel_booking_callback() {
 					if ( $facility_price_switch == '1' ) {
 						switch ( $facility_type ) {
 							case 'per_person':
-								$f_price = $facility_price * ( $adult + $child );
-
-								if ( $hotel_discount_type == "percent" ) {
-									$total_price += ! empty( $f_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $f_price - ( ( (int) $f_price / 100 ) * (int) (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-								} elseif ( $hotel_discount_type == "fixed" ) {
-									$total_price += ! empty( $f_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $f_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-								}
+								$total_price += $facility_price * ( $adult + $child );
 								break;
 							case 'per_night':
-								$f_price = $facility_price * $day_difference;
-
-								if ( $hotel_discount_type == "percent" ) {
-									$total_price += ! empty( $f_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $f_price - ( ( (int) $f_price / 100 ) * (int) (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-								} elseif ( $hotel_discount_type == "fixed" ) {
-									$total_price += ! empty( $f_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $f_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-								}
+								$total_price += $facility_price * $day_difference;
 								break;
 							case 'per_stay':
 								$total_price += $facility_price;
-
-								if ( $hotel_discount_type == "percent" ) {
-									$total_price += ! empty( $facility_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $facility_price - ( ( (int) $facility_price / 100 ) * (int) (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-								} elseif ( $hotel_discount_type == "fixed" ) {
-									$total_price += ! empty( $facility_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $facility_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-								}
 								break;
 						}
 					}
@@ -364,6 +346,9 @@ function tf_hotel_booking_callback() {
 				$tf_room_data['tf_hotel_data']['child'] = $child;
 			}
 
+			# Multiply pricing by night number
+			$day_price_total = $total_price * $day_difference;
+
 			if ( $room_facilities_switch == '1' && ! empty( $facilities ) ) {
 				$tf_room_data['tf_hotel_data']['facilities'] = [];
 				foreach ( $facilities as $facility ) {
@@ -371,34 +356,17 @@ function tf_hotel_booking_callback() {
 					$facility_price        = ! empty( $room_facilities[ $facility ]['room_facilities_price'] ) ? floatval( $room_facilities[ $facility ]['room_facilities_price'] ) : 0;
 					$facility_type         = ! empty( $room_facilities[ $facility ]['room_facilities_price_type'] ) ? $room_facilities[ $facility ]['room_facilities_price_type'] : 'per_person';
 
+					$facility_total_price = 0;
 					if ( $facility_price_switch == '1' ) {
 						switch ( $facility_type ) {
 							case 'per_person':
-								$f_price = $facility_price * ( $adult + $child );
-
-								if ( $hotel_discount_type == "percent" ) {
-									$total_price += ! empty( $f_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $f_price - ( ( (int) $f_price / 100 ) * (int) (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-								} elseif ( $hotel_discount_type == "fixed" ) {
-									$total_price += ! empty( $f_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $f_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-								}
+								$facility_total_price += ($facility_price * ( $adult + $child )) * $day_difference;
 								break;
 							case 'per_night':
-								$f_price = $facility_price * $day_difference;
-
-								if ( $hotel_discount_type == "percent" ) {
-									$total_price += ! empty( $f_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $f_price - ( ( (int) $f_price / 100 ) * (int) (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-								} elseif ( $hotel_discount_type == "fixed" ) {
-									$total_price += ! empty( $f_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $f_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-								}
+								$facility_total_price += $facility_price * $day_difference;
 								break;
 							case 'per_stay':
-								$total_price += $facility_price;
-
-								if ( $hotel_discount_type == "percent" ) {
-									$total_price += ! empty( $facility_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $facility_price - ( ( (int) $facility_price / 100 ) * (int) (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-								} elseif ( $hotel_discount_type == "fixed" ) {
-									$total_price += ! empty( $facility_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $facility_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-								}
+								$facility_total_price += $facility_price;
 								break;
 						}
 					}
@@ -407,8 +375,13 @@ function tf_hotel_booking_callback() {
 				}
 			}
 
-			# Multiply pricing by night number
-			$price_total = $total_price * ( $room_selected * $day_difference );
+			$price_total = $day_price_total + $facility_total_price;
+
+			$response['$room_selected'] = $room_selected;
+			$response['$day_difference'] = $day_difference;
+			$response['$day_price_total'] = $day_price_total;
+			$response['$facility_total_price'] = $facility_total_price;
+			$response['$price_total'] = $price_total;
 
 		}
 
