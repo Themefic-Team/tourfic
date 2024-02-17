@@ -14988,6 +14988,25 @@ html {
   line-height: 20px;
   color: #6E655E;
 }
+.tf-hotel-template-4 .tf-archive-details .tf-details-right .tf_map_price .tf_price_inner {
+  background: #fff;
+  border-radius: 30px;
+  text-align: center;
+  color: #6E655E;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 700;
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+  box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.4);
+}
+.tf-hotel-template-4 .tf-archive-details .tf-details-right .tf_map_price .tf_price_inner.active {
+  background: #0E3DD8;
+  color: #fff;
+}
 .tf-hotel-template-4 .tf-archive-details .tf-archive-top {
   display: -webkit-box;
   display: -moz-box;

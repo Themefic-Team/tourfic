@@ -27,24 +27,24 @@
 							) );
 							?>
                             <!--<div class="tf-archive-filter-item">
-                                <select name="tf-hotel-type" class="tf-archive-hotel-type" multiple data-placeholder="<?php /*_e( "Select Hotel Type", "tourfic" ); */?>">
+                                <select name="tf-hotel-type" class="tf-archive-hotel-type" multiple data-placeholder="<?php /*_e( "Select Hotel Type", "tourfic" ); */ ?>">
 									<?php
-/*									$destination_name   = ! empty( $_GET['destination'] ) ? $_GET['destination'] : '';
-									$search_types_query = ! empty( $_GET['types'] ) ? $_GET['types'] : array();
-									foreach ( $hotel_types as $key => $term ) {
-										$id            = $term->term_id;
-										$name          = $term->name;
-										$fslug         = $term->slug;
-										$default_count = $term->count;
-										$count         = '<span>' . tf_term_count( $term->slug, $destination_name, $default_count ) . '</span>';
-										$defult_select = in_array( $fslug, $search_types_query ) ? 'selected' : '';
-										echo "<option value='{$fslug}' {$defult_select}>{$name} {$count}</option>";
-									}
-									*/?>
+							/*									$destination_name   = ! empty( $_GET['destination'] ) ? $_GET['destination'] : '';
+																$search_types_query = ! empty( $_GET['types'] ) ? $_GET['types'] : array();
+																foreach ( $hotel_types as $key => $term ) {
+																	$id            = $term->term_id;
+																	$name          = $term->name;
+																	$fslug         = $term->slug;
+																	$default_count = $term->count;
+																	$count         = '<span>' . tf_term_count( $term->slug, $destination_name, $default_count ) . '</span>';
+																	$defult_select = in_array( $fslug, $search_types_query ) ? 'selected' : '';
+																	echo "<option value='{$fslug}' {$defult_select}>{$name} {$count}</option>";
+																}
+																*/ ?>
                                 </select>
                             </div>
                             <div class="tf-archive-filter-item">
-                                <button class="tf-archive-filter-btn"><?php /*_e( "All Filter", "tourfic" ); */?></button>
+                                <button class="tf-archive-filter-btn"><?php /*_e( "All Filter", "tourfic" ); */ ?></button>
                             </div>-->
                             <div class="tf-archive-filter-sidebar">
                                 <div class="tf-filter-wrapper">
@@ -656,8 +656,10 @@
 									$infoWindowtext = ob_get_clean();
 
 									$locations[ $count ] = [
+										'id'      => get_the_ID(),
 										'lat'     => (float) $lat,
 										'lng'     => (float) $lng,
+										'price'   => base64_encode( wc_price( $min_sale_price ) ),
 										'content' => base64_encode( $infoWindowtext )
 									];
 								}
@@ -667,7 +669,7 @@
 							?>
                             <div id="map-datas" style="display: none"><?php echo array_filter( $locations ) ? json_encode( array_values( $locations ) ) : []; ?></div>
                             <div class="tf-pagination-bar">
-		                        <?php tourfic_posts_navigation(); ?>
+								<?php tourfic_posts_navigation(); ?>
                             </div>
                         </div>
                         <!-- Available rooms end -->
@@ -678,6 +680,18 @@
                 <div class="tf-details-right tf-archive-right">
                     <div id="map-marker" data-marker="<?php echo TF_ASSETS_URL . 'app/images/cluster-marker.png'; ?>"></div>
                     <div class="tf-hotel-archive-map-wrap">
+                        <div class="toggle-map" id="st-toggle-map"><span class="stt-icon stt-icon-arrow-left"></span></div>
+                        <div class="close-map-new" id="st-close-map"><span class="stt-icon stt-icon-close"></span></div>
+                        <div class="search-move-map">
+                            <div class="st-icheck-item">
+                                <label for="st-move-map" class="c-grey">
+                                    <input type="checkbox" name="movemap" id="st-move-map" value="1">
+				                    <?php echo esc_html__('Search as I move the map', 'traveler'); ?>
+                                    <span class="checkmark fcheckbox"></span>
+                                </label>
+                            </div>
+                            <input type="hidden" name="st-map-coordinate" value="" id="st-map-coordinate"/>
+                        </div>
                         <div id="tf-hotel-archive-map"></div>
                     </div>
                 </div>

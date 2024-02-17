@@ -358,6 +358,26 @@ $t4-main-color: #060D1C;
                     }
                 }
             }
+
+            .tf_map_price {
+                .tf_price_inner {
+                    background: #fff;
+                    border-radius: 30px;
+                    text-align: center;
+                    color: $t4-paragraph;
+                    padding: 8px 12px;
+                    font-size: 14px;
+                    line-height: 14px;
+                    font-weight: 700;
+                    @include transition();
+                    box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
+
+                    &.active {
+                        background: #0E3DD8;
+                        color: #fff;
+                    }
+                }
+            }
         }
 
         .tf-archive-top {

@@ -1,4 +1,5 @@
 (function ($, win) {
+    var data = [];
     $(document).ready(function () {
 
         // Create an instance of Notyf
@@ -40,7 +41,7 @@
 
         var filter_xhr;
         // Creating a function for reuse this filter in any where we needs.
-        const makeFilter = () => {
+        var makeFilter = () => {
             var dest = $('#tf-place').val();
             var adults = $('#adults').val();
             var room = $('#room').val();
@@ -1929,14 +1930,10 @@
             document.execCommand("copy");
         });
 
-    });
-
-    /*
-    * Template 3 Script Start
-    * @author: Jahid
-    */
-    $(document).ready(function () {
-
+        /*
+        * Template 3 Script Start
+        * @author: Jahid
+        */
         $('.tf-template-3 .tf-reviews-slider').slick({
             infinite: true,
             slidesToShow: 3,
@@ -2077,13 +2074,11 @@
                 }
             });
         });
-    });
 
-    /*
-    * Template 4 Script Start
-    * @author: Foysal
-    */
-    $(document).ready(function () {
+        /*
+        * Template 4 Script Start
+        * @author: Foysal
+        */
         $('.tf-hotel-template-4 .acr-inc , .tf-hotel-template-4 .acr-dec').on('click', function () {
 
             if ($('input#infant').length) {
@@ -2154,6 +2149,43 @@
             googleMapInit(mapLocations);
         }
 
+        /*
+        * Hotel hover effect on map marker
+        * */
+        $(document).on('mouseover', '.tf-hotel-template-4 .tf-archive-hotel', function () {
+            let id = $(this).data('id');
+            $('.tf_map_price .tf_price_inner[data-post-id="' + id + '"]').addClass('active');
+        });
+        $(document).on('mouseleave', '.tf-hotel-template-4 .tf-archive-hotel', function () {
+            let id = $(this).data('id');
+            $('.tf_map_price .tf_price_inner[data-post-id="' + id + '"]').removeClass('active');
+        });
+
+        $('#st-map-coordinate').on('change', function () {
+            let coordinate = $('#st-map-coordinate').val();
+            if (coordinate.length > 0) {
+                let objCoordinate = coordinate.split('_');
+                if (objCoordinate.length === 3) {
+                    data['location_lat'] = objCoordinate[0];
+                    data['location_lng'] = objCoordinate[1];
+                    data['location_distance'] = objCoordinate[2];
+                    data['move_map'] = true;
+                }
+            }
+            makeFilter();
+        });
+        jQuery('.search-move-map .fcheckbox').on('click', function () {
+            if (jQuery('#st-move-map').length) {
+                if (jQuery('#st-move-map').is(':checked')) {
+                    jQuery('#st-map-coordinate').val("");
+                    data['location_lat'] = null;
+                    data['location_lng'] = null;
+                    data['location_distance'] = null;
+                    data['move_map'] = false;
+                    makeFilter();
+                }
+            }
+        });
 
     });
 
@@ -2164,8 +2196,8 @@
         }
         var locations = JSON.parse(mapLocations);
 
-        var map = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
-            zoom: 1,
+        var hotelMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
+            zoom: 14,
             center: new google.maps.LatLng(23.8697847, 90.4219536),
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             styles: [
@@ -2177,30 +2209,42 @@
             maxWidth: 300
         });
 
-        // Add some markers to the map.
-        // Note: The code uses the JavaScript Array.prototype.map() method to
-        // create an array of markers based on a given "locations" array.
-        // The map() method here has nothing to do with the Google Maps API.
-        var markers = new Array();
+        google.maps.event.addListener(hotelMap, "dragend", function (ev) {
+            var moveLat = hotelMap.getCenter().lat();
+            var moveLng = hotelMap.getCenter().lng();
+            if (jQuery('#st-move-map').length) {
+                if (jQuery('#st-move-map').is(':checked')) {
+                    let distance = getMapDistance(hotelMap);
+                    jQuery('#st-map-coordinate').val(moveLat + '_' + moveLng + '_' + distance).change();
+                } else {
+                    jQuery('#st-map-coordinate').val("");
+                }
+            }
+        });
+
+        var markers = [];
         locations.map(function (location, i) {
-            var marker = new google.maps.Marker({
+            var marker = new MarkerWithLabel({
                 position: new google.maps.LatLng(location['lat'], location['lng']),
-                map: map,
+                map: hotelMap,
                 icon: document.getElementById('map-marker').dataset.marker,
-                label: 'Helldadaso',
+                labelContent: '<div class="tf_price_inner" data-post-id="' + location['id'] + '">' + window.atob(location['price']) + '</div>',
+                labelAnchor: new google.maps.Point(0, 0),
+                labelClass: "tf_map_price",
+                animation: google.maps.Animation.DROP,
             });
-            console.log(i);
+
             markers.push(marker);
             google.maps.event.addListener(marker, 'click', (function (marker, i) {
                 return function () {
                     infowindow.setContent(window.atob(location['content']));
-                    infowindow.open(map, marker);
+                    infowindow.open(hotelMap, marker);
                 }
             })(marker, i));
         });
 
         // Add a marker clusterer to manage the markers.
-        var markerCluster = new MarkerClusterer(map, markers, {
+        var markerCluster = new MarkerClusterer(hotelMap, markers, {
             imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
         });
 
@@ -2210,7 +2254,21 @@
             bounds.extend(marker.position);
         });
         //  Fit these bounds to the map
-        map.fitBounds(bounds);
+        hotelMap.fitBounds(bounds);
+    }
+
+    function getMapDistance(map) {
+        var bounds = map.getBounds();
+        var center = bounds.getCenter();
+        var ne = bounds.getNorthEast();
+        var r = 3963.0;
+        var lat1 = center.lat() / 57.2958;
+        var lon1 = center.lng() / 57.2958;
+        var lat2 = ne.lat() / 57.2958;
+        var lon2 = ne.lng() / 57.2958;
+        var dis = r * Math.acos(Math.sin(lat1) * Math.sin(lat2) +
+            Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1));
+        return dis;
     }
 
     function initHalfMap(mapEl, mapData, mapLat, mapLng, mapZoom, mapIcon) {

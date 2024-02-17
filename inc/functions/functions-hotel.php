@@ -3049,7 +3049,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
             </div>
         </div>
 	<?php elseif ( $tf_hotel_arc_selected_template == "design-3" ) : ?>
-        <div class="tf-archive-hotel">
+        <div class="tf-archive-hotel" data-id="<?php echo get_the_ID(); ?>">
             <div class="tf-archive-hotel-thumb">
                 <a href="<?php echo esc_url( $url ); ?>">
 					<?php
