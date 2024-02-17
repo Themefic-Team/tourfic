@@ -903,6 +903,198 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 
 add_action( 'woocommerce_checkout_order_processed', 'tf_add_order_id_room_checkout_order_processed', 10, 4 );
 
+/**
+ * Add order id to the hotel room meta field
+ * runs during WooCommerce checkout process for block checkout
+ * @param $order
+ * @return void
+ * @since 2.11.10
+ * @author Foysal
+ */
+function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) {
+
+	$order_id = $order->get_id();
+	$tf_integration_order_data = array(
+		'order_id' => $order_id
+	);
+	$tf_integration_order_status = [];
+	# Get and Loop Over Order Line Items
+	foreach ( $order->get_items() as $item_id => $item ) {
+
+		$order_type = $item->get_meta( '_order_type', true );
+		if("hotel"==$order_type){
+			$post_id   = $item->get_meta( '_post_id', true ); // Hotel id
+			$unique_id = $item->get_meta( '_unique_id', true ); // Unique id of rooms
+			$meta      = get_post_meta( $post_id, 'tf_hotels_opt', true ); // Hotel meta
+			$rooms     = ! empty( $meta['room'] ) ? $meta['room'] : '';
+			if( !empty($rooms) && gettype($rooms)=="string" ){
+				$tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+					return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+				}, $rooms );
+				$rooms = unserialize( $tf_hotel_rooms_value );
+			}
+			$new_rooms = [];
+
+			# Get and Loop Over Room Meta
+			if ( ! empty( $rooms ) ) {
+				foreach ( $rooms as $room ) {
+
+					# Check if order is for this room
+					if ( $room['unique_id'] == $unique_id ) {
+
+						$old_order_id = $room['order_id'];
+
+						$old_order_id != "" && $old_order_id .= ",";
+						$old_order_id .= $order_id;
+
+						# set old + new data to the oder_id meta
+						$room['order_id'] = $old_order_id;
+					}
+
+					# Set whole room array
+					$new_rooms[] = $room;
+				}
+			}
+
+			# Set whole room array to the room meta
+			$meta['room'] = $new_rooms;
+			# Update hotel post meta with array values
+			update_post_meta( $post_id, 'tf_hotels_opt', $meta );
+		}
+
+		// Hotel Item Data Insert
+		if("hotel"==$order_type){
+
+			//Order Data Insert
+			$billinginfo = [
+				'billing_first_name' => $order->get_billing_first_name(),
+				'billing_last_name' => $order->get_billing_last_name(),
+				'billing_company' => $order->get_billing_company(),
+				'billing_address_1' => $order->get_billing_address_1(),
+				'billing_address_2' => $order->get_billing_address_2(),
+				'billing_city' => $order->get_billing_city(),
+				'billing_state' => $order->get_billing_state(),
+				'billing_postcode' => $order->get_billing_postcode(),
+				'billing_country' => $order->get_billing_country(),
+				'billing_email' => $order->get_billing_email(),
+				'billing_phone' => $order->get_billing_phone()
+			];
+
+			$shippinginfo = [
+				'shipping_first_name' => $order->get_shipping_first_name(),
+				'shipping_last_name' => $order->get_shipping_last_name(),
+				'shipping_company' => $order->get_shipping_company(),
+				'shipping_address_1' => $order->get_shipping_address_1(),
+				'shipping_address_2' => $order->get_shipping_address_2(),
+				'shipping_city' => $order->get_shipping_city(),
+				'shipping_state' => $order->get_shipping_state(),
+				'shipping_postcode' => $order->get_shipping_postcode(),
+				'shipping_country' => $order->get_shipping_country(),
+				'shipping_phone' => $order->get_shipping_phone()
+			];
+
+			$unique_id = $item->get_meta( '_unique_id', true ); // Unique id of rooms
+			$room_selected = $item->get_meta( 'number_room_booked', true );
+			$check_in = $item->get_meta( 'check_in', true );
+			$check_out = $item->get_meta( 'check_out', true );
+			$price = $item->get_subtotal();
+			$due = $item->get_meta( 'due', true );
+			$room_name = $item->get_meta( 'room_name', true );
+			$adult = $item->get_meta( 'adult', true );
+			$child = $item->get_meta( 'child', true );
+			$children_ages = $item->get_meta( 'Children Ages', true );
+			$airport_service_type = $item->get_meta( 'Airport Service', true );
+			$airport_service_fee = $item->get_meta( 'Airport Service Fee', true );
+
+			$iteminfo = [
+				'room' => $room_selected,
+				'room_unique_id' => $unique_id,
+				'check_in' => $check_in,
+				'check_out' => $check_out,
+				'room_name' => $room_name,
+				'adult' => $adult,
+				'child' => $child,
+				'children_ages' => $children_ages,
+				'airport_service_type' => $airport_service_type,
+				'airport_service_fee' => $airport_service_fee,
+				'total_price' => $price,
+				'due_price' => $due,
+			];
+
+			$tf_integration_order_data[] = [
+				'room' => $room_selected,
+				'check_in' => $check_in,
+				'check_out' => $check_out,
+				'room_name' => $room_name,
+				'adult' => $adult,
+				'child' => $child,
+				'children_ages' => $children_ages,
+				'airport_service_type' => $airport_service_type,
+				'airport_service_fee' => $airport_service_fee,
+				'total_price' => $price,
+				'due_price' => $due,
+				'customer_id' => $order->get_customer_id(),
+				'payment_method' => $order->get_payment_method(),
+				'order_status' => $order->get_status(),
+				'order_date' => date('Y-m-d H:i:s')
+			];
+
+			$tf_integration_order_status = [
+				'customer_id' => $order->get_customer_id(),
+				'payment_method' => $order->get_payment_method(),
+				'order_status' => $order->get_status(),
+				'order_date' => date('Y-m-d H:i:s')
+			];
+
+			$iteminfo_keys = array_keys($iteminfo);
+			$iteminfo_keys = array_map('sanitize_key', $iteminfo_keys);
+
+			$iteminfo_values = array_values($iteminfo);
+			$iteminfo_values = array_map('sanitize_text_field', $iteminfo_values);
+
+			$iteminfo = array_combine($iteminfo_keys, $iteminfo_values);
+
+			global $wpdb;
+			$table_name = $wpdb->prefix.'tf_order_data';
+			$wpdb->query(
+				$wpdb->prepare(
+					"INSERT INTO $table_name
+				( order_id, post_id, post_type, room_number, room_id, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
+				VALUES ( %d, %d, %s, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
+					array(
+						$order_id,
+						sanitize_key( $post_id ),
+						$order_type,
+						$room_selected,
+						$unique_id,
+						$check_in,
+						$check_out,
+						json_encode($billinginfo),
+						json_encode($shippinginfo),
+						json_encode($iteminfo),
+						$order->get_customer_id(),
+						$order->get_payment_method(),
+						$order->get_status(),
+						date('Y-m-d H:i:s')
+					)
+				)
+			);
+		}
+
+	}
+
+	/**
+	 * New Order Pabbly Integration
+	 * @author Jahid
+	 */
+	if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($tf_integration_order_status) ) {
+		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status);
+		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status);
+	}
+}
+
+add_action( 'woocommerce_store_api_checkout_order_processed', 'tf_add_order_id_room_checkout_order_processed_block_checkout' );
+
 
 
 /*
