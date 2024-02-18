@@ -1003,6 +1003,43 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 		// Hotel Item Data Insert
 		if("hotel"==$order_type){
 
+			//Tax Calculation
+			$tax_labels = array();
+			if(!empty($meta['is_taxable'])){
+				$single_price = $item->get_subtotal();
+				$finding_location = array(
+					'country' => !empty($order->get_billing_country()) ? $order->get_billing_country() : '',
+					'state' => !empty($order->get_billing_state()) ? $order->get_billing_state() : '',
+					'postcode' => !empty($order->get_billing_postcode()) ? $order->get_billing_postcode() : '',
+					'city' => !empty($order->get_billing_city()) ? $order->get_billing_city() : '',
+					'tax_class' => !empty($meta['taxable_class']) && "standard"!=$meta['taxable_class'] ? $meta['taxable_class'] : ''
+				);
+	
+				$tax_rate = WC_Tax::find_rates( $finding_location );
+				if(!empty($tax_rate)){
+					foreach($tax_rate as $rate){
+						$tf_vat =  (float)$single_price * $rate['rate'] / 100;
+						$tax_labels [] = array(
+							'label' => $rate['label'],
+							'price' => $tf_vat
+						);
+					}
+					
+				}
+			}
+		
+			$fee_sums = array();
+			// Sum the prices for each label
+			foreach ( $tax_labels as $fee ) {
+				$label = $fee["label"];
+				$price = $fee["price"];
+				if ( isset( $fee_sums[ $label ] ) ) {
+					$fee_sums[ $label ] += $price;
+				} else {
+					$fee_sums[ $label ] = $price;
+				}
+			}
+
 			//Order Data Insert
 			$billinginfo = [
 				'billing_first_name' => $order->get_billing_first_name(),
@@ -1057,6 +1094,7 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 				'airport_service_fee' => $airport_service_fee,
 				'total_price' => $price,
 				'due_price' => $due,
+				'tax_info' => json_encode($fee_sums)
 			];
 
 			$tf_integration_order_data[] = [
