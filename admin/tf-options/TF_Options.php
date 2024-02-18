@@ -153,6 +153,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				'tf_tours_page_tf_tours_booking',
 				'tf_hotel_page_tf_hotel_booking',
 				'tf_apartment_page_tf_apartment_booking',
+				'tf_apartment_page_tf-apartment-backend-booking',
 				'tourfic-settings_page_tf-setup-wizard'
 			);
 			$tf_options_post_type = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_email_templates' );
