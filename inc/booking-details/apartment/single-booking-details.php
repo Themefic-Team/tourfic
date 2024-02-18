@@ -197,7 +197,7 @@
                                 <tr>
                                     <th><?php _e("Due Price", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo wc_price($tf_tour_details->due_price); ?></td>
+                                    <td><?php echo $tf_tour_details->due_price; ?></td>
                                 </tr>
                                 <?php } ?>
                             </table>
