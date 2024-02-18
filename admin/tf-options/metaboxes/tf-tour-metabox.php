@@ -1047,7 +1047,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'      => 'taxable_class',
 					'type'    => 'select',
 					'label'   => __( 'Tax class', 'tourfic' ),
-					'subtitle'  => __( 'Select your class, and Tex will calculate based on your chosen class.', 'tourfic' ),
+					'subtitle'  => __( 'Select your class, and tax will calculate based on your chosen class. PS: If you activate partial payment option tax will be calculated upon partial amount as woocommerce regulations.', 'tourfic' ),
 					'options' => tf_taxable_option_callback(),
 					'is_pro'  => true
 				),
