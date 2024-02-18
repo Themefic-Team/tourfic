@@ -782,6 +782,11 @@ TF_Settings::option( 'tf_settings', array(
 											'aprtment-section'        => __( 'House Rules', 'tourfic' ),
 											'aprtment-section-slug'   => __( 'rules', 'tourfic' ),
 											'aprtment-section-status' => true,
+										),
+										array(
+											'aprtment-section'        => __( 'Amenities', 'tourfic' ),
+											'aprtment-section-slug'   => __( 'facilities', 'tourfic' ),
+											'aprtment-section-status' => true,
 										)
 									)
 								),

@@ -72,6 +72,8 @@ while ( have_posts() ) : the_post();
 		}, $map );
 		$map                    = unserialize( $tf_apartment_map_value );
         $address = ! empty($map['address'] ) ? $map['address'] : '';
+	}else{
+		$address = ! empty($map['address'] ) ? $map['address'] : '';
 	}
 
 	// Map Type

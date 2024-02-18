@@ -5925,9 +5925,9 @@ div#tf-contact-info {
   box-sizing: border-box;
   border: 1px solid #333333;
   box-shadow: 0 1px 8px transparent;
-  visibility: visible;
+  visibility: hidden;
   transition: 0.3s all ease;
-  opacity: 0;
+  display: none;
   text-align: center;
   line-height: 17px;
   width: 220px;
@@ -5943,7 +5943,7 @@ div#tf-contact-info {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tooltip-title-box:hover + .tf-tooltip,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tooltip-title-box:hover + .tf-tooltip {
   visibility: visible;
-  opacity: 1;
+  display: block;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-tooltip::before,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-tooltip::before {
