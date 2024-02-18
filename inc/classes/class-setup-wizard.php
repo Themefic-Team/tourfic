@@ -39,7 +39,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		public function tf_wizard_menu() {
 
 			if ( current_user_can( 'manage_options' ) ) {
-				$tf_settings_parentmenu = !empty($_GET['page']) && "tf-setup-wizard"==$_GET['page'] ? 'tf_settings' : '';
+                $tf_settings_parentmenu = !empty($_GET['page']) && "tf-setup-wizard"==$_GET['page'] ? 'tf_settings' : '';
 				add_submenu_page(
 					$tf_settings_parentmenu,
 					esc_html__( 'TF Setup Wizard', 'tourfic' ),
