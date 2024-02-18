@@ -12,7 +12,7 @@
         } ?>
 
         <li>
-            <?php echo $feature_icon ?? ''; ?>
+            <?php echo !empty($feature_meta) && !empty($feature_icon) ? $feature_icon : ''; ?>
             <?php echo $feature->name; ?>
         </li>
     <?php } ?>

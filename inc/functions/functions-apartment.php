@@ -1527,9 +1527,11 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 								$tag_background_color = !empty($tag["apartment-tag-color-settings"]["background"]) ? $tag["apartment-tag-color-settings"]["background"] : "#003162";
 								$tag_font_color = !empty($tag["apartment-tag-color-settings"]["font"]) ? $tag["apartment-tag-color-settings"]["font"] : "#fff";
 
-								echo <<<EOD
-									<span class="tf-multiple-tag" style="color: $tag_font_color; background-color: $tag_background_color ">$apartment_tag_name</span>
-								EOD;
+								if (!empty($apartment_tag_name)) {
+									echo <<<EOD
+										<span class="tf-multiple-tag" style="color: $tag_font_color; background-color: $tag_background_color ">$apartment_tag_name</span>
+									EOD;
+								}
 							}
 						}
 					?>
@@ -1646,9 +1648,11 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 							$tag_background_color = !empty($tag["apartment-tag-color-settings"]["background"]) ? $tag["apartment-tag-color-settings"]["background"] : "#003162";
 							$tag_font_color = !empty($tag["apartment-tag-color-settings"]["font"]) ? $tag["apartment-tag-color-settings"]["font"] : "#fff";
 
-							echo <<<EOD
-								<span class="default-single-tag" style="color: $tag_font_color; background-color: $tag_background_color">$tag_title</span>
-							EOD;
+							if (!empty($tag_title)) {
+								echo <<<EOD
+									<span class="default-single-tag" style="color: $tag_font_color; background-color: $tag_background_color">$tag_title</span>
+								EOD;
+							}
 						}
 					}
 					?>

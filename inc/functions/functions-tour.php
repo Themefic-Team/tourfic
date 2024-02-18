@@ -3025,11 +3025,13 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 							$tag_background_color = !empty($tag["tour-tag-color-settings"]["background"]) ? $tag["tour-tag-color-settings"]["background"] : "#003162";
 							$tag_font_color = !empty($tag["tour-tag-color-settings"]["font"]) ? $tag["tour-tag-color-settings"]["font"] : "#fff";
 
-							echo <<<EOD
-								<div class="tf-multiple-tag-item" style="color: $tag_font_color; background-color: $tag_background_color ">
-									<span class="tf-multiple-tag">$tour_tag_name</span>
-								</div>
-							EOD;
+							if (!empty($tour_tag_name)) {
+								echo <<<EOD
+									<div class="tf-multiple-tag-item" style="color: $tag_font_color; background-color: $tag_background_color ">
+										<span class="tf-multiple-tag">$tour_tag_name</span>
+									</div>
+								EOD;
+							}
 						}
 					}
 				?>
@@ -3144,9 +3146,11 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 						$tag_background_color = !empty($tag["tour-tag-color-settings"]["background"]) ? $tag["tour-tag-color-settings"]["background"] : "#003162";
 						$tag_font_color = !empty($tag["tour-tag-color-settings"]["font"]) ? $tag["tour-tag-color-settings"]["font"] : "#fff";
 
-						echo <<<EOD
-							<span class="tf-multiple-tag" style="color: $tag_font_color; background-color: $tag_background_color ">$tour_tag_name</span>
-						EOD;
+						if (!empty($tour_tag_name)) {
+							echo <<<EOD
+								<span class="tf-multiple-tag" style="color: $tag_font_color; background-color: $tag_background_color ">$tour_tag_name</span>
+							EOD;
+						}
 					}
 				}
 				?>

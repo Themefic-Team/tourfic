@@ -41,7 +41,7 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ) {
     <?php } ?>
         
     </div>
-    <?php if ( $location && $itinerary_map != 0 ): ?>
+    <?php if ( $location && $itinerary_map != 1 ): ?>
     <!-- Map start -->
     <div id="tf-map" class="tf-itinerary-map">
     <?php if ( $tf_openstreet_map=="default" && !empty($location_latitude) && !empty($location_longitude) && empty($tf_google_map_key) ) {  ?>

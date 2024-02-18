@@ -2745,11 +2745,13 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 								$tag_background_color = !empty($tag["hotel-tag-color-settings"]["background"]) ? $tag["hotel-tag-color-settings"]["background"] : "#003162";
 								$tag_font_color = !empty($tag["hotel-tag-color-settings"]["font"]) ? $tag["hotel-tag-color-settings"]["font"] : "#fff";
 
-								echo <<<EOD
-									<div class="tf-multiple-tag-item" style="color: $tag_font_color; background-color: $tag_background_color ">
-										<span class="tf-multiple-tag">$hotel_tag_name</span>
-									</div>
-								EOD;
+								if (!empty($hotel_tag_name)) {
+									echo <<<EOD
+										<div class="tf-multiple-tag-item" style="color: $tag_font_color; background-color: $tag_background_color ">
+											<span class="tf-multiple-tag">$hotel_tag_name</span>
+										</div>
+									EOD;
+								}
 							}
 						}
 					?>
@@ -2897,9 +2899,11 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 							$tag_background_color = !empty($tag["hotel-tag-color-settings"]["background"]) ? $tag["hotel-tag-color-settings"]["background"] : "#003162";
 							$tag_font_color = !empty($tag["hotel-tag-color-settings"]["font"]) ? $tag["hotel-tag-color-settings"]["font"] : "#fff";
 
-							echo <<<EOD
-								<span class="tf-multiple-tag" style="color: $tag_font_color; background-color: $tag_background_color ">$hotel_tag_name</span>
-							EOD;
+							if (!empty($hotel_tag_name)) {
+								echo <<<EOD
+									<span class="tf-multiple-tag" style="color: $tag_font_color; background-color: $tag_background_color ">$hotel_tag_name</span>
+								EOD;
+							}
 						}
 					}
 				?>
@@ -3056,9 +3060,11 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 								$tag_background_color = !empty($tag["hotel-tag-color-settings"]["background"]) ? $tag["hotel-tag-color-settings"]["background"] : "#003162";
 								$tag_font_color = !empty($tag["hotel-tag-color-settings"]["font"]) ? $tag["hotel-tag-color-settings"]["font"] : "#fff";
 
-								echo <<<EOD
-									<span class="default-single-tag" style="color: $tag_font_color; background-color: $tag_background_color">$hotel_tag_name</span>
-								EOD;
+								if (!empty($hotel_tag_name)) { 
+									echo <<<EOD
+										<span class="default-single-tag" style="color: $tag_font_color; background-color: $tag_background_color">$hotel_tag_name</span>
+									EOD;
+								}
 							}
 						}
 						?>
