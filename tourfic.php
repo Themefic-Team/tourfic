@@ -14,6 +14,10 @@
  * Elementor tested up to: 3.19.0
  */
 
+namespace TOURFIC\CORE\CLASS\BACKEND;
+namespace TOURFIC\APP\CLASS\PRICING;
+namespace TOURFIC\CLASS\PRICING;
+
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 

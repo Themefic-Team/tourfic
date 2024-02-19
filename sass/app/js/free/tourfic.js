@@ -41,7 +41,7 @@
 
         var filter_xhr;
         // Creating a function for reuse this filter in any where we needs.
-        var makeFilter = () => {
+        var makeFilter = (map_lat='', map_lng='', map_distance='') => {
             var dest = $('#tf-place').val();
             var adults = $('#adults').val();
             var room = $('#room').val();
@@ -119,6 +119,9 @@
             formData.append('tf_apartment_features', tfApartmentFeatures);
             formData.append('tf_apartment_types', tfApartmentTypes);
             formData.append('checked', checked);
+            formData.append('map_lat', map_lat);
+            formData.append('map_lng', map_lng);
+            formData.append('map_distance', map_distance);
             if (startprice) {
                 formData.append('startprice', startprice);
             }
@@ -182,7 +185,7 @@
                     //update map
                     var mapLocations = $('#map-datas').html();
                     if ($('#map-datas').length && mapLocations.length) {
-                        googleMapInit(mapLocations);
+                        googleMapInit(mapLocations, map_lat, map_lng, map_distance);
                     }
                     // @KK show notice in every success request
                     notyf.success(tf_params.ajax_result_success);
@@ -2166,22 +2169,19 @@
             if (coordinate.length > 0) {
                 let objCoordinate = coordinate.split('_');
                 if (objCoordinate.length === 3) {
-                    data['location_lat'] = objCoordinate[0];
-                    data['location_lng'] = objCoordinate[1];
-                    data['location_distance'] = objCoordinate[2];
-                    data['move_map'] = true;
+                    console.log('objCoordinate', objCoordinate);
+                    let map_lat = objCoordinate[0];
+                    let map_lng = objCoordinate[1];
+                    let map_distance = objCoordinate[2];
+                    makeFilter(map_lat, map_lng, map_distance);
                 }
             }
-            makeFilter();
+
         });
-        jQuery('.search-move-map .fcheckbox').on('click', function () {
-            if (jQuery('#st-move-map').length) {
-                if (jQuery('#st-move-map').is(':checked')) {
-                    jQuery('#st-map-coordinate').val("");
-                    data['location_lat'] = null;
-                    data['location_lng'] = null;
-                    data['location_distance'] = null;
-                    data['move_map'] = false;
+        $('.search-move-map .fcheckbox').on('click', function () {
+            if ($('#st-move-map').length) {
+                if ($('#st-move-map').is(':checked')) {
+                    $('#st-map-coordinate').val("");
                     makeFilter();
                 }
             }
@@ -2190,15 +2190,15 @@
     });
 
     // GOOGLE MAP INIT
-    function googleMapInit(mapLocations) {
+    function googleMapInit(mapLocations, mapLat=23.8697847, mapLng=90.4219536) {
         if (!mapLocations) {
             return false;
         }
         var locations = JSON.parse(mapLocations);
 
         var hotelMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
-            zoom: 14,
-            center: new google.maps.LatLng(23.8697847, 90.4219536),
+            zoom: 13,
+            center: new google.maps.LatLng(mapLat, mapLng),
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             styles: [
                 {elementType: 'labels.text.fill', stylers: [{color: '#44348F'}]},
@@ -2212,12 +2212,12 @@
         google.maps.event.addListener(hotelMap, "dragend", function (ev) {
             var moveLat = hotelMap.getCenter().lat();
             var moveLng = hotelMap.getCenter().lng();
-            if (jQuery('#st-move-map').length) {
-                if (jQuery('#st-move-map').is(':checked')) {
+            if ($('#st-move-map').length) {
+                if ($('#st-move-map').is(':checked')) {
                     let distance = getMapDistance(hotelMap);
-                    jQuery('#st-map-coordinate').val(moveLat + '_' + moveLng + '_' + distance).change();
+                    $('#st-map-coordinate').val(moveLat + '_' + moveLng + '_' + distance).change();
                 } else {
-                    jQuery('#st-map-coordinate').val("");
+                    $('#st-map-coordinate').val("");
                 }
             }
         });
@@ -2271,106 +2271,6 @@
         return dis;
     }
 
-    function initHalfMap(mapEl, mapData, mapLat, mapLng, mapZoom, mapIcon) {
-        var popupPos = mapEl.data('popup-position');
-        if (mapData.length <= 0)
-            mapData = mapEl.data('data_show');
-        if (mapLat.length <= 0)
-            mapLat = mapEl.data('lat');
-        if (mapLng.length <= 0)
-            mapLng = mapEl.data('lng');
-        if (mapZoom.length <= 0)
-            mapZoom = mapEl.data('zoom');
-        if (mapIcon.length <= 0)
-            mapIcon = mapEl.data('icon');
-        var map = new google.maps.Map(mapEl.get(0), {zoom: mapZoom, center: {lat: parseFloat(mapLat), lng: parseFloat(mapLng)}, disableDefaultUI: true});
-        bounds = new google.maps.LatLngBounds();
-        if (typeof mapData != 'undefined' && Object.keys(mapData).length) {
-            var marker = [];
-            var ib = [];
-            var c = {};
-            var markers = jQuery.map(mapData, function (location, i) {
-                marker[i] = new google.maps.Marker({position: {lat: parseFloat(location.lat), lng: parseFloat(location.lng)}, options: {icon: mapIcon, animation: google.maps.Animation.DROP}, map: map});
-                var loc = new google.maps.LatLng(parseFloat(location.lat), parseFloat(location.lng));
-                bounds.extend(loc);
-                var ibOptions = {
-                    content: '',
-                    disableAutoPan: true,
-                    maxWidth: 0,
-                    pixelOffset: new google.maps.Size(-135, -55),
-                    zIndex: null,
-                    boxStyle: {padding: "0px 0px 0px 0px", width: "270px",},
-                    closeBoxURL: "",
-                    cancelBubble: true,
-                    infoBoxClearance: new google.maps.Size(1, 1),
-                    isHidden: false,
-                    pane: "floatPane",
-                    enableEventPropagation: true,
-                    alignBottom: true
-                };
-                if (window.matchMedia("(min-width: 768px)").matches) {
-                    if (popupPos == 'right') {
-                        ibOptions.pixelOffset = new google.maps.Size(35, -208);
-                        ibOptions.alignBottom = false;
-                    }
-                }
-                jQuery(window).on('resize', function () {
-                    if (window.matchMedia("(min-width: 768px)").matches) {
-                        if (popupPos == 'right') {
-                            ibOptions.pixelOffset = new google.maps.Size(35, -208);
-                            ibOptions.alignBottom = false;
-                        }
-                    }
-                });
-                google.maps.event.addListener(marker[i], 'click', (function () {
-                    var source = location.content_html;
-                    var boxText = document.createElement("div");
-                    if (window.matchMedia("(min-width: 768px)").matches) {
-                        if (popupPos == 'right') {
-                            boxText.classList.add("right-box");
-                        }
-                    }
-                    jQuery(window).on('resize', function () {
-                        if (window.matchMedia("(min-width: 768px)").matches) {
-                            if (popupPos == 'right') {
-                                boxText.classList.add("right-box");
-                            }
-                        } else {
-                            boxText.classList.remove("right-box");
-                        }
-                    });
-                    boxText.style.cssText = "border-radius: 5px; background: #fff; padding: 0px;";
-                    boxText.innerHTML = source;
-                    ibOptions.content = boxText;
-                    var ks = Object.keys(c);
-                    if (ks.length) {
-                        for (var j = 0; j < ks.length; j++) {
-                            c[ks[j]].close();
-                        }
-                    }
-                    ib[i] = new InfoBox(ibOptions);
-                    c[i] = ib[i];
-                    ib[i].open(map, this);
-                    map.panTo(ib[i].getPosition());
-                    google.maps.event.addListener(ib[i], 'domready', function () {
-                        var closeInfoBox = document.getElementById("close-popup-on-map");
-                        google.maps.event.addDomListener(closeInfoBox, 'click', function () {
-                            ib[i].close();
-                        });
-                    });
-                }));
-                return marker[i];
-            });
-            customControlGoogleMap(mapEl.get(0), map);
-        }
-        map.fitBounds(bounds);
-        map.panToBounds(bounds);
-        var listener = google.maps.event.addListener(map, "idle", function () {
-            if (map.getZoom() > 16)
-                map.setZoom(16);
-            google.maps.event.removeListener(listener);
-        });
-    }
 })(jQuery, window);
 
 /**

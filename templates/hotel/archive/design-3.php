@@ -680,18 +680,18 @@
                 <div class="tf-details-right tf-archive-right">
                     <div id="map-marker" data-marker="<?php echo TF_ASSETS_URL . 'app/images/cluster-marker.png'; ?>"></div>
                     <div class="tf-hotel-archive-map-wrap">
-                        <div class="toggle-map" id="st-toggle-map"><span class="stt-icon stt-icon-arrow-left"></span></div>
+                        <!--<div class="toggle-map" id="st-toggle-map"><span class="stt-icon stt-icon-arrow-left"></span></div>
                         <div class="close-map-new" id="st-close-map"><span class="stt-icon stt-icon-close"></span></div>
                         <div class="search-move-map">
                             <div class="st-icheck-item">
                                 <label for="st-move-map" class="c-grey">
                                     <input type="checkbox" name="movemap" id="st-move-map" value="1">
-				                    <?php echo esc_html__('Search as I move the map', 'traveler'); ?>
+				                    <?php /*echo esc_html__('Search as I move the map', 'traveler'); */?>
                                     <span class="checkmark fcheckbox"></span>
                                 </label>
                             </div>
                             <input type="hidden" name="st-map-coordinate" value="" id="st-map-coordinate"/>
-                        </div>
+                        </div>-->
                         <div id="tf-hotel-archive-map"></div>
                     </div>
                 </div>

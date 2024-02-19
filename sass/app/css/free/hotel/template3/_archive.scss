@@ -23,6 +23,10 @@ $t4-main-color: #060D1C;
         background-repeat: no-repeat;
         background-position: center center;
 
+        @media #{$max1024} {
+            padding: 16px 0;
+        }
+
         .tf-booking-form {
             @include flexbox();
             @include justify-content(center);
@@ -32,6 +36,12 @@ $t4-main-color: #060D1C;
             padding: 24px 48px;
             max-width: 1050px;
             margin: 0 auto;
+
+            @media #{$max1024} {
+                padding: 16px;
+                gap: 16px;
+                @include flex-direction(column);
+            }
         }
     }
 
@@ -39,10 +49,21 @@ $t4-main-color: #060D1C;
         @include flexbox();
         gap: 48px;
 
+        @media #{$max1024} {
+            @include flex-direction(column);
+            gap: 8px;
+        }
+
         .tf-search-field {
             @include flexbox();
             @include align-items(center);
             gap: 8px;
+
+            @media #{$max1024} {
+                padding: 16px;
+                border-radius: 4px;
+                background: $t4-orange-100;
+            }
 
             .tf-search-field-icon {
                 @include flexbox();
@@ -80,11 +101,20 @@ $t4-main-color: #060D1C;
             @include flexbox();
             @include align-items(center);
             gap: 24px;
+
+            @media #{$max1024} {
+                border-radius: 4px;
+                background: $t4-orange-100;
+            }
         }
 
         .tf-search-field-divider {
             background-color: #fff;
             width: 1px;
+
+            @media #{$max1024} {
+                display: none;
+            }
         }
 
         #tf-check-in {
@@ -213,10 +243,18 @@ $t4-main-color: #060D1C;
     .tf-booking-form-submit {
         margin-left: 48px;
 
+        @media #{$max1024} {
+            margin-left: 0;
+        }
+
         .btn-primary {
             border-radius: 4px;
             background: $t4-primary !important;
             box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
+
+            @media #{$max1024} {
+                width: 100%;
+            }
         }
     }
 
@@ -229,18 +267,18 @@ $t4-main-color: #060D1C;
             width: 787px;
             padding: 24px 16px 24px 32px;
             gap: 24px;
-            border-top: 0.5px solid var(--Orange-200, #F5E9E0);
+            border-top: 0.5px solid $t4-orange-200;
 
-            @media #{$max1366} {
-                width: 50%;
+            @media #{$max1024} {
+                width: 620px;
             }
         }
 
         .tf-details-right {
             width: calc(100% - 787px);
 
-            @media #{$max1366} {
-                width: 50%;
+            @media #{$max1024} {
+                width: calc(100% - 620px);
             }
 
             .tf-hotel-archive-map-wrap {
