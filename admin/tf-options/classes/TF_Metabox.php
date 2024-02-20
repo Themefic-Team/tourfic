@@ -176,7 +176,9 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			if ( wp_is_post_revision( $post_id ) ) {
 				return;
 			}
-
+			if ( get_post_type($post_id) !== $this->metabox_post_type ) {
+				return;
+			}
 			$tf_meta_box_value = array();
 			$metabox_request   = ( ! empty( $_POST[ $this->metabox_id ] ) ) ? $_POST[ $this->metabox_id ] : array();
 
@@ -195,6 +197,10 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 								if ( class_exists( $fieldClass ) ) {
 									$_field                            = new $fieldClass( $field, $data, $this->metabox_id );
 									$tf_meta_box_value[ $field['id'] ] = $_field->sanitize();
+
+									if( !empty($field['is_search_able']) ){
+										update_post_meta( $post_id, 'tf_search_'.$field['id'], $_field->sanitize() );
+									}
 								}
 
 							}

@@ -52,6 +52,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 					'subtitle'    => __( 'Enable this option to feature this apartment at the top of search results.', 'tourfic' ),
+					'is_search_able' => true
 				),
 				array(
 					'id'          => 'featured_text',
@@ -129,7 +130,8 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'height'   => '250px',
 					'settings' => array(
 						'scrollWheelZoom' => true,
-					)
+					),
+					'is_search_able' => true
 				),
 				//Property Surroundings
 				array(
@@ -226,6 +228,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'attributes' => array(
 						'class' => 'tf_apt_pricing_type',
 					),
+					'is_search_able' => true
 				),
 				array(
 					'id'          => 'price_per_night',
@@ -235,6 +238,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'field_width' => 50,
 					'attributes'  => array( 'min' => 0 ),
 					'dependency' => array( 'pricing_type', '==', 'per_night' ),
+					'is_search_able' => true
 				),
 				array(
 					'id'          => '',
@@ -268,7 +272,8 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'        => 'number',
 					'label'       => __( 'Minimum Night Stay', 'tourfic' ),
 					'subtitle'    => __( 'Specify the minimum number of nights required to book this room.', 'tourfic' ),
-					'attributes'  => array( 'min' => 1 )
+					'attributes'  => array( 'min' => 1 ),
+					'is_search_able' => true
 				),
 				array(
 					'id'          => 'max_adults',
@@ -276,7 +281,8 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label'       => __( 'Maximum Adults', 'tourfic' ),
 					'subtitle'    => __( 'Max number of adults allowed in the apartment.', 'tourfic' ),
 					'field_width' => 33.33,
-					'attributes'  => array( 'min' => 1 )
+					'attributes'  => array( 'min' => 1 ),
+					'is_search_able' => true
 				),
 				array(
 					'id'          => 'max_children',
@@ -284,7 +290,8 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label'       => __( 'Maximum Children', 'tourfic' ),
 					'subtitle'    => __( 'Max number of child allowed in the apartment.', 'tourfic' ),
 					'field_width' => 33.33,
-					'attributes'  => array( 'min' => 0 )
+					'attributes'  => array( 'min' => 0 ),
+					'is_search_able' => true
 				),
 				array(
 					'id'          => 'max_infants',
@@ -292,7 +299,8 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label'       => __( 'Maximum Infants', 'tourfic' ),
 					'subtitle'    => __( 'Max number of infants allowed in the apartment.', 'tourfic' ),
 					'field_width' => 33.33,
-					'attributes'  => array( 'min' => 0 )
+					'attributes'  => array( 'min' => 0 ),
+					'is_search_able' => true
 				),
 				array(
 					'id'          => 'additional_fee_label',

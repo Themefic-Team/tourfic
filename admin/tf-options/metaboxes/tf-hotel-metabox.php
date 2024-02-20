@@ -51,6 +51,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => false,
+					'is_search_able' => true
 				),
 				array(
 					'id'          => 'featured_text',
@@ -217,6 +218,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'settings' => array(
 						'scrollWheelZoom' => true,
 					),
+					'is_search_able' => true
 				),
 			),
 		),

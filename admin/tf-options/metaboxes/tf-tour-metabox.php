@@ -46,6 +46,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'type'     => 'switch',
 					'label'    => __( 'Set as featured', 'tourfic' ),
 					'subtitle' => __( 'This tour will be featured at the top of both the search results and the tour archive page.', 'tourfic' ),
+					'is_search_able' => true
 				),
 				array(
 					'id'          => 'featured_text',
@@ -138,6 +139,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'attributes'  => array(
 						'required' => 'required',
 					),
+					'is_search_able' => true
 				),
 			),
 		),
@@ -412,6 +414,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						''       => __( 'Per Group (Pro)', 'tourfic' ),
 					],
 					'default'  => 'person',
+					'is_search_able' => true
 				),
 				array(
 					'id'          => 'adult_price',
@@ -426,6 +429,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						'min' => '0',
 					),
 					'field_width' => '33.33',
+					'is_search_able' => true
 				),
 				array(
 					'id'          => 'child_price',
@@ -440,6 +444,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						'min' => '0',
 					),
 					'field_width' => '33.33',
+					'is_search_able' => true
 				),
 				array(
 					'id'          => 'infant_price',
@@ -455,6 +460,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						'min' => '0',
 					),
 					'field_width' => '33.33',
+					'is_search_able' => true
 				),
 				array(
 					'id'         => '',
@@ -553,6 +559,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						'fixed'      => __( 'Fixed (Pro)', 'tourfic' ),
 					],
 					'default'  => 'continuous',
+					'is_search_able' => true
 
 				),
 				array(
@@ -700,6 +707,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						array( 'custom_avail', '==', 'false' ),
 					),
 					'field_width' => '50',
+					'is_search_able' => true
 				),
 				array(
 					'id'          => 'cont_max_people',
@@ -711,6 +719,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						array( 'custom_avail', '==', 'false' ),
 					),
 					'field_width' => '50',
+					'is_search_able' => true
 				),
 				array(
 					'id'          => 'cont_max_capacity',
@@ -721,6 +730,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						array( 'type', '==', 'continuous' ),
 						array( 'custom_avail', '==', 'false' ),
 					),
+					'is_search_able' => true
 				),
 				array(
 					'id'           => 'allowed_time',
@@ -805,6 +815,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						),
 
 					),
+					'is_search_able' => true
 				),
 				array(
 					'id'         => '',
