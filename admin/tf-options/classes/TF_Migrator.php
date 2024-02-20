@@ -20,6 +20,7 @@ if ( ! class_exists( 'TF_Migrator' ) ) {
 
         public function __construct() {
 			add_action( 'admin_init', [ $this, 'tf_searchable_meta' ] );
+			add_action( 'admin_init', [ $this, 'tf_hotel_room_migrate' ] );
 		}
 
         public function tf_searchable_meta(){
@@ -146,6 +147,11 @@ if ( ! class_exists( 'TF_Migrator' ) ) {
             }else{
 
             }
+        }
+
+        // Hotel Room Migration
+        public function tf_hotel_room_migrate(){
+
         }
     }
 }
