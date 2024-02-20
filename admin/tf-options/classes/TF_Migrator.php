@@ -23,9 +23,21 @@ if ( ! class_exists( 'TF_Migrator' ) ) {
 		}
 
         public function tf_searchable_meta(){
-            $this->regenerate_search_meta('tf_hotel');
-            $this->regenerate_search_meta('tf_tours');
-            $this->regenerate_search_meta('tf_apartment');
+            $tf_hotel_searchable_migration = !empty(get_option( 'tf_hotel_searchable_migration' )) ? get_option( 'tf_hotel_searchable_migration' ) : 0;
+            $tf_tour_searchable_migration = !empty(get_option( 'tf_tour_searchable_migration' )) ? get_option( 'tf_tour_searchable_migration' ) : 0;
+            $tf_apartment_searchable_migration = !empty(get_option( 'tf_apartment_searchable_migration' )) ? get_option( 'tf_apartment_searchable_migration' ) : 0;
+            if ( $tf_hotel_searchable_migration < 1 ) {
+                $this->regenerate_search_meta('tf_hotel');
+                update_option( 'tf_hotel_searchable_migration', $tf_hotel_searchable_migration+1 );
+            }
+            if ( $tf_tour_searchable_migration < 1 ) {
+                $this->regenerate_search_meta('tf_tours');
+                update_option( 'tf_tour_searchable_migration', $tf_tour_searchable_migration+1 );
+            }
+            if ( $tf_apartment_searchable_migration < 1 ) {
+                $this->regenerate_search_meta('tf_apartment');
+                update_option( 'tf_apartment_searchable_migration', $tf_apartment_searchable_migration+1 );
+            }
         }
 
         // Migrator Function
