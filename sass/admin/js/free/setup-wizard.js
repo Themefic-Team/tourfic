@@ -1,8 +1,8 @@
 (function ($) {
     $(document).ready(function () {
 
-        //if body has class .admin_page_tf-setup-wizard then add background-color: #ecf5ff; to html
-        if ($('body').hasClass('admin_page_tf-setup-wizard')) {
+        //if body has class .tourfic-settings_page_tf-setup-wizard then add background-color: #ecf5ff; to html
+        if ($('body').hasClass('tourfic-settings_page_tf-setup-wizard')) {
             $('html').css('padding', '0');
         }
 

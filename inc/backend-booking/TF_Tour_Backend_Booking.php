@@ -41,8 +41,9 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 		 * @since 2.9.26
 		 */
 		public function tf_backend_booking_menu() {
+			$tf_tour_parentmenu = !empty($_GET['page']) && "tf-tour-backend-booking"==$_GET['page'] ? 'edit.php?post_type=tf_tours' : '';
 			add_submenu_page(
-				null,
+				$tf_tour_parentmenu,
 				__( 'Add New Booking', 'tourfic' ),
 				__( 'Add New Booking', 'tourfic' ),
 				'edit_tf_tourss',

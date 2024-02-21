@@ -1,19 +1,19 @@
 //hide wp menu and admin bar
-body.admin_page_tf-setup-wizard {
+body.tourfic-settings_page_tf-setup-wizard {
   background-color: #ecf5ff;
 }
 
-.admin_page_tf-setup-wizard #wpcontent {
+.tourfic-settings_page_tf-setup-wizard #wpcontent {
   margin-left: 0 !important;
 }
 
-.admin_page_tf-setup-wizard #wpbody-content, .admin_page_tf-setup-wizard #wpcontent {
+.tourfic-settings_page_tf-setup-wizard #wpbody-content, .tourfic-settings_page_tf-setup-wizard #wpcontent {
   padding: 0;
   overflow-x: hidden !important;
   min-height: calc(100vh - 32px);
 }
 
-.admin_page_tf-setup-wizard #adminmenumain, .admin_page_tf-setup-wizard .error, .admin_page_tf-setup-wizard .notice, .admin_page_tf-setup-wizard .update-nag, .admin_page_tf-setup-wizard .updated, .admin_page_tf-setup-wizard div#wpadminbar, .admin_page_tf-setup-wizard div#wpfooter {
+.tourfic-settings_page_tf-setup-wizard #adminmenumain, .tourfic-settings_page_tf-setup-wizard .error, .tourfic-settings_page_tf-setup-wizard .notice, .tourfic-settings_page_tf-setup-wizard .update-nag, .tourfic-settings_page_tf-setup-wizard .updated, .tourfic-settings_page_tf-setup-wizard div#wpadminbar, .tourfic-settings_page_tf-setup-wizard div#wpfooter {
   display: none;
 }
 

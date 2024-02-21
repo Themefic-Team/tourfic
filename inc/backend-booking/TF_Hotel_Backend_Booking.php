@@ -42,8 +42,9 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 		 * @since 2.9.26
 		 */
 		public function tf_backend_booking_menu() {
+			$tf_hotel_parentmenu = !empty($_GET['page']) && "tf-hotel-backend-booking"==$_GET['page'] ? 'edit.php?post_type=tf_hotel' : '';
 			add_submenu_page(
-				null,
+				$tf_hotel_parentmenu,
 				__( 'Add New Booking', 'tourfic' ),
 				__( 'Add New Booking', 'tourfic' ),
 				'edit_tf_hotels',

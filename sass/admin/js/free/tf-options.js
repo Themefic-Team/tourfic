@@ -2295,6 +2295,7 @@ var frame, gframe;
                     method: 'POST',
                     data: {
                         action: 'tf_import',
+                        nonce: tf_admin_params.tf_nonce,
                         tf_import_option: importData,
                     },
                     beforeSend: function () {
