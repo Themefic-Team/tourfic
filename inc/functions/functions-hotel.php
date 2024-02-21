@@ -1229,23 +1229,22 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 												</svg>
 											</div>
 										</span>
-                                        </div>
+									</div>
 
-                                    </div>
-                                </label>
+								</div>
+							</label>
 
-                                <input type="hidden" name="check-in-out-date" class="tf-check-in-out-date" onkeypress="return false;"
-                                       placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo tfopt( 'date_hotel_search' ) ? 'required' : ''; ?>>
-                            </div>
+							<input type="hidden" name="check-in-out-date" class="tf-check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo tfopt( 'date_hotel_search' ) ? 'required' : ''; ?>>
+						</div>
 
-                            <div class="tf_checkin_date tf_check_inout_dates tf_hotel_check_in_out_date">
-                                <label class="tf_label_checkin">
-                                    <span class="tf-label"><?php _e( 'Check Out', 'tourfic' ); ?></span>
-                                    <div class="tf_form_inners">
-                                        <div class="tf_checkout_dates">
-                                            <span class="date"><?php echo date( 'd' ); ?></span>
-                                            <span class="month">
-											<span><?php echo date( 'M' ); ?></span>
+						<div class="tf_checkin_date tf_check_inout_dates tf_hotel_check_in_out_date">
+							<label class="tf_label_checkin">
+								<span class="tf-label"><?php _e( 'Check Out', 'tourfic' ); ?></span>
+								<div class="tf_form_inners">
+									<div class="tf_checkout_dates">
+										<span class="date"><?php echo date('d'); ?></span>
+										<span class="month">
+											<span><?php echo date('M'); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -2737,8 +2736,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 
 	$tf_hotel_arc_selected_template = ! empty( tf_data_types( tfopt( 'tf-template' ) )['hotel-archive'] ) ? tf_data_types( tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
 
-	if ( $tf_hotel_arc_selected_template == "design-1" ) {
-		?>
+	if ( $tf_hotel_arc_selected_template == "design-1" ):?>
         <div class="tf-item-card tf-flex tf-item-hotel">
             <div class="tf-item-featured">
                 <div class="tf-tag-items">
@@ -2863,7 +2861,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                 </div>
             </div>
         </div>
-	<?php } elseif ( $tf_hotel_arc_selected_template == "design-2" ) {
+	<?php elseif ( $tf_hotel_arc_selected_template == "design-2" ) :
 		$first_gallery_image = explode( ',', $gallery );
 		?>
         <div class="tf-available-room">
@@ -3050,7 +3048,105 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                 </div>
             </div>
         </div>
-	<?php } else { ?>
+	<?php elseif ( $tf_hotel_arc_selected_template == "design-3" ) : ?>
+        <div class="tf-archive-hotel" data-id="<?php echo get_the_ID(); ?>">
+            <div class="tf-archive-hotel-thumb">
+                <a href="<?php echo esc_url( $url ); ?>">
+					<?php
+					if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
+						the_post_thumbnail( 'full' );
+					} else {
+						echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+					}
+					?>
+                </a>
+
+				<?php
+				if ( ! empty( $tf_lowestAmount_items ) ) : ?>
+                    <div class="tf-archive-hotel-discount">
+						<?php echo $tf_lowestAmount_items['type'] == "percent" ? $tf_lowestAmount . '%' : wc_price( $tf_lowestAmount ) ?><?php _e( " Off", "tourfic" ); ?>
+                    </div>
+				<?php endif; ?>
+            </div>
+            <div class="tf-archive-hotel-content">
+                <div class="tf-archive-hotel-content-left">
+					<?php if ( ! empty( $address ) ) : ?>
+                        <div class="tf-title-location">
+                            <div class="location-icon">
+                                <i class="ri-map-pin-fill"></i>
+                            </div>
+                            <span><?php echo tourfic_character_limit_callback( esc_html( $address ), 40 ); ?></span>
+                        </div>
+					<?php endif; ?>
+                    <h4 class="tf-section-title"><a href="<?php echo esc_url( $url ); ?>"><?php echo tourfic_character_limit_callback( get_the_title(), 55 ); ?></a></h4>
+					<?php if ( $features ) { ?>
+                        <ul class="features">
+							<?php foreach ( array_slice( $features, 0, 3 ) as $tfkey => $feature ) :
+								$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
+								if ( ! empty( $feature_meta ) ) {
+									$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+								}
+								if ( ! empty( $f_icon_type ) && $f_icon_type == 'fa' ) {
+									$feature_icon = ! empty( $feature_meta['icon-fa'] ) ? '<i class="' . $feature_meta['icon-fa'] . '"></i>' : '';
+								} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'c' ) {
+									$feature_icon = ! empty( $feature_meta['icon-c'] ) ? '<img src="' . $feature_meta['icon-c'] . '" style="min-width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />' : '';
+								}
+
+								echo '<li>';
+								if ( ! empty( $feature_icon ) ) {
+									echo wp_kses_post( $feature_icon );
+								}
+								echo esc_html( $feature->name );
+								//add comma after each feature except last one, if only 1/2 exists then don't add comma to last one
+								if ( count( $features ) > 1 && $tfkey != count( $features ) - 1 ) {
+									echo ',';
+								}
+								echo '</li>';
+
+							endforeach;
+							?>
+							<?php if ( count( $features ) > 3 ) { ?>
+                                <li><a href="<?php echo esc_url( $url ); ?>"><?php _e( "View More", "tourfic" ); ?></a></li>
+							<?php } ?>
+                        </ul>
+					<?php } ?>
+					<?php tf_archive_single_rating(); ?>
+                </div>
+                <div class="tf-archive-hotel-content-right">
+                    <div class="tf-archive-hotel-price">
+						<?php
+						$room_price     = array_filter( $room_price );
+						$min_sale_price = ! empty( $room_price ) ? min( array_column( $room_price, 'sale_price' ) ) : 0;
+
+						if ( ! empty( $room_price ) ):
+							$min_regular_price = 0;
+
+							array_walk( $room_price, function ( $value ) use ( $min_sale_price, &$min_regular_price ) {
+								if ( is_array( $value ) && count( $value ) > 0 ) {
+									if ( array_key_exists( "regular_price", $value ) ) {
+										if ( $value["sale_price"] == $min_sale_price ) {
+											$min_regular_price = $value["regular_price"];
+										}
+									}
+								}
+							} );
+							echo __( "From ", "tourfic" );
+							//get the lowest price from all available room price
+							$lowest_sale_price = wc_price( $min_sale_price );
+							if ( $min_regular_price != 0 ) {
+								$lowest_regular_price = strip_tags( wc_price( $min_regular_price ) );
+								echo "<del>" . $lowest_regular_price . "</del>" . " " . "<span>" . $lowest_sale_price . "</span>";
+							} else {
+								echo " $lowest_sale_price" . " ";
+							}
+						endif;
+						?>
+                    </div>
+                    <a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php _e( "View Details", "tourfic" ); ?></a>
+                </div>
+            </div>
+        </div>
+	<?php else: ?>
         <div class="single-tour-wrap <?php echo $featured ? esc_attr( 'tf-featured' ) : '' ?>">
             <div class="single-tour-inner">
 				<?php if ( $featured ): ?>
@@ -3091,7 +3187,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                                 <a href="<?php echo $url; ?>"><h3 class="tourfic_hotel-title"><?php the_title(); ?></h3></a>
                             </div>
 							<?php
-							if ( $address ) {
+							if ( ! empty( $address ) ) {
 								echo '<div class="tf-map-link">';
 								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . $address . '</span>';
 								echo '</div>';
@@ -3190,8 +3286,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                 </div>
             </div>
         </div>
-		<?php
-	}
+	<?php endif;
 }
 
 /**
@@ -4060,24 +4155,23 @@ function tf_hotel_quickview_callback() {
 											$room_feature_icon = '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />';
 										}
 
-										$room_term = get_term( $feature ); ?>
-                                        <li>
-											<?php echo ! empty( $room_feature_icon ) ? $room_feature_icon : ''; ?>
-											<?php echo $room_term->name; ?>
-                                        </li>
-									<?php }
-								} ?>
+						$room_term = get_term( $feature ); ?>
+						<li>
+							<?php echo ! empty( $room_feature_icon ) ? $room_feature_icon : ''; ?>
+							<?php echo $room_term->name; ?>
+						</li>
+						<?php } } ?>
 
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="tf-popup-close">
-                        <i class="fa-solid fa-xmark"></i>
-                    </div>
+                    </ul>
                 </div>
-			<?php
-			endif;
-		endforeach;
+            </div>
+            <div class="tf-popup-close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+	<?php
+	endif;
+	endforeach;
 	}
 	wp_die();
 }

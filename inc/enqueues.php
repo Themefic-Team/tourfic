@@ -148,7 +148,6 @@ if ( ! function_exists( 'tf_enqueue_scripts' ) ) {
 		 * Openstreet Map
 		 * v1.9
 		 */
-
 		$tf_openstreet_map = ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "default";
 		if ( $tf_openstreet_map == "default" ) {
 			wp_enqueue_script( 'tf-leaflet', esc_url( '//cdn.jsdelivr.net/npm/leaflet@' . '1.9' . '/dist/leaflet.js' ), array(), '1.9' );
@@ -156,9 +155,16 @@ if ( ! function_exists( 'tf_enqueue_scripts' ) ) {
 		}
 
 		/**
+		 * Google Map
+		 */
+		$tf_map_api_key = ! empty( tfopt( 'tf-googlemapapi' ) ) ? tfopt( 'tf-googlemapapi' ) : '';
+		wp_enqueue_script( 'googleapis', 'https://maps.googleapis.com/maps/api/js?key=' . $tf_map_api_key . '&sensor=false&amp;libraries=places', array(), TOURFIC, true );
+		wp_enqueue_script( 'markerclusterer', TF_ASSETS_URL . 'app/libs/markerclusterer.min.js', array(), TOURFIC, true );
+		wp_enqueue_script('map-marker-label', TF_ASSETS_URL . 'app/libs/markerwithlabel.js', array(), TOURFIC, true);
+
+		/**
 		 * Hotel Min and Max Price
 		 */
-
 		$tfhotel_min_max       = array(
 			'posts_per_page' => - 1,
 			'post_type'      => 'tf_hotel',
@@ -303,6 +309,9 @@ if ( ! function_exists( 'tf_enqueue_scripts' ) ) {
 
 		$tf_apartment_min_max_price = get_apartment_min_max_price();
 
+		wp_enqueue_script( 'select2' );
+		wp_enqueue_style( 'select2' );
+
 		/**
 		 * Custom
 		 */
@@ -333,6 +342,8 @@ if ( ! function_exists( 'tf_enqueue_scripts' ) ) {
 				'tf_hotel_min_price'     => isset( $hotel_min_price ) ? $hotel_min_price : '',
 				'tf_tour_max_price'      => isset( $tour_max_price ) ? $tour_max_price : '',
 				'tf_tour_min_price'      => isset( $tour_min_price ) ? $tour_min_price : '',
+				'tf_apartment_max_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['max'] : 0,
+				'tf_apartment_min_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['min'] : 0,
 				'itinerarayday'          => isset( $itinerarayday ) ? $itinerarayday : '',
 				'itineraraymeter'        => isset( $itineraraymeter ) ? $itineraraymeter : '',
 				'showxaxis'              => isset( $showxaxis ) ? $showxaxis : '',
@@ -344,8 +355,6 @@ if ( ! function_exists( 'tf_enqueue_scripts' ) ) {
 				'date_hotel_search'      => tfopt( 'date_hotel_search' ),
 				'date_tour_search'       => tfopt( 'date_tour_search' ),
 				'date_apartment_search'  => tfopt( 'date_apartment_search' ),
-				'tf_apartment_max_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['max'] : 0,
-				'tf_apartment_min_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['min'] : 0,
 			)
 		);
 		//wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/old/responsive.css', '', TOURFIC );
