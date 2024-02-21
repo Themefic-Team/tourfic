@@ -205,13 +205,11 @@
 
                         return false;
                     } else {
-
                         if (response.redirect_to) {
                             window.location.replace(response.redirect_to);
                         } else {
                             jQuery(document.body).trigger('added_to_cart');
                         }
-
                     }
                 },
                 error: function (data) {

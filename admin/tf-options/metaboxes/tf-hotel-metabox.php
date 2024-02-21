@@ -751,6 +751,12 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'subtitle'    => __( 'Add description specific for this room.', 'tourfic' ),
 						),
 						array(
+							'id'       => 'electricity_usage',
+							'type'     => 'text',
+							'label'    => __( 'Average Electricity Usage', 'tourfic' ),
+							'subtitle' => __( 'Add average electricity usage for this room.', 'tourfic' ),
+						),
+						array(
 							'id'      => 'minimum_maximum_stay_requirements',
 							'type'    => 'heading',
 							'content' => __( 'Stay Requirements', 'tourfic' ),
