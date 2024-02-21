@@ -197,7 +197,9 @@ function tf_hotel_booking_callback() {
 				}
 			}
 
-			$total_price = 0;
+			$availability_day_difference = 0;
+			$total_price                 = 0;
+
 			foreach ( $period as $date ) {
 
 				$available_rooms = array_values( array_filter( $avail_date, function ( $date_availability ) use ( $date ) {
@@ -235,6 +237,7 @@ function tf_hotel_booking_callback() {
 
 				};
 
+				$availability_day_difference ++;
 			}
 
 			if ( $room_facilities_switch == '1' && ! empty( $facilities ) ) {
@@ -247,10 +250,10 @@ function tf_hotel_booking_callback() {
 					if ( $facility_price_switch == '1' ) {
 						switch ( $facility_type ) {
 							case 'per_person':
-								$total_price += $facility_price * ( $adult + $child );
+								$total_price += ( $facility_price * ( $adult + $child ) ) * $availability_day_difference;
 								break;
 							case 'per_night':
-								$total_price += $facility_price * $day_difference;
+								$total_price += $facility_price * $availability_day_difference;
 								break;
 							case 'per_stay':
 								$total_price += $facility_price;
@@ -351,16 +354,15 @@ function tf_hotel_booking_callback() {
 
 			if ( $room_facilities_switch == '1' && ! empty( $facilities ) ) {
 				$tf_room_data['tf_hotel_data']['facilities'] = [];
+				$facility_total_price                        = 0;
 				foreach ( $facilities as $facility ) {
 					$facility_price_switch = ! empty( $room_facilities[ $facility ]['room_facilities_price_switch'] ) ? $room_facilities[ $facility ]['room_facilities_price_switch'] : '0';
 					$facility_price        = ! empty( $room_facilities[ $facility ]['room_facilities_price'] ) ? floatval( $room_facilities[ $facility ]['room_facilities_price'] ) : 0;
 					$facility_type         = ! empty( $room_facilities[ $facility ]['room_facilities_price_type'] ) ? $room_facilities[ $facility ]['room_facilities_price_type'] : 'per_person';
-
-					$facility_total_price = 0;
 					if ( $facility_price_switch == '1' ) {
 						switch ( $facility_type ) {
 							case 'per_person':
-								$facility_total_price += ($facility_price * ( $adult + $child )) * $day_difference;
+								$facility_total_price += ( $facility_price * ( $adult + $child ) ) * $day_difference;
 								break;
 							case 'per_night':
 								$facility_total_price += $facility_price * $day_difference;
@@ -375,14 +377,7 @@ function tf_hotel_booking_callback() {
 				}
 			}
 
-			$price_total = $day_price_total + $facility_total_price;
-
-			$response['$room_selected'] = $room_selected;
-			$response['$day_difference'] = $day_difference;
-			$response['$day_price_total'] = $day_price_total;
-			$response['$facility_total_price'] = $facility_total_price;
-			$response['$price_total'] = $price_total;
-
+			$price_total = ( $day_price_total + $facility_total_price ) * $room_selected;
 		}
 
 		# Set pricing
