@@ -535,7 +535,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
             <form class="widget tf-hotel-side-booking" method="get" autocomplete="off"
                   action="<?php echo tf_booking_search_action(); ?>" id="tf-widget-booking-search">
 
-                <div class="tf-field-group tf-destination-box">
+                <div class="tf-field-group tf-destination-box" <?php echo $post_type == 'tf_hotel' && tfopt( "hide_hotel_location_search" ) == 1 && tfopt( "required_location_hotel_search" ) != 1 ? 'style="display:none"' : ''?>>
                     <i class="fa-solid fa-location-dot"></i>
 
                     <?php if($post_type == "tf_hotel" ) { ?>
@@ -546,7 +546,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                            value="<?php echo ! empty( $place_title ) ? $place_title : ''; ?>">
 					<?php } ?>
 
-                    <input type="hidden" name="place" id="tf-place" value="<?php echo $place_value ?? ''; ?>"/>
+                    <input type="hidden" name="place" id="tf-place" value="<?php echo $place_value ?? ''; ?> "/>
                 </div>
                 <div class="tf-field-group tf-mt-8 tf_acrselection">
                     <div class="tf-field tf-flex">
@@ -644,7 +644,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 	<?php }
 	elseif ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-2" ) || ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-2" ) || ( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template == "design-1" ) ) { ?>
 		<div class="tf-booking-form-fields <?php echo $post_type == 'tf_tours' ? esc_attr( 'tf-tour-archive-block' ) : ''; ?>">
-			<div class="tf-booking-form-location">
+			<div class="tf-booking-form-location" <?php echo $post_type == 'tf_hotel' && tfopt( "hide_hotel_location_search" ) == 1 && tfopt( "required_location_hotel_search" ) != 1 ? 'style="display:none"' : ''?>>
 				<span class="tf-booking-form-title"><?php _e("Location", "tourfic"); ?></span>
 				<label for="tf-search-location" class="tf-booking-location-wrap">
 					<svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
@@ -976,7 +976,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 
             <div class="tf_form-row">
                 <label class="tf_label-row">
-                    <div class="tf_form-inner">
+                    <div class="tf_form-inner" <?php echo $post_type == 'tf_hotel' && tfopt( "hide_hotel_location_search" ) == 1 && tfopt( "required_location_hotel_search" ) != 1 ? 'style="display:none"' : ''?>>
                         <i class="fas fa-map-marker-alt"></i>
 
                         <?php if($post_type == "tf_hotel" ) { ?>

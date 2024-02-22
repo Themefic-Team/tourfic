@@ -1463,7 +1463,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 		}else{ ?>
         <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
             <div class="tf_homepage-booking">
-			<?php if( ! tfopt( 'hide_hotel_location_search' ) ): ?>
+			<?php if( tfopt( 'hide_hotel_location_search' ) != 1 || tfopt( 'required_location_hotel_search' ) ): ?>
 				<div class="tf_destination-wrap">
                     <div class="tf_input-inner">
                         <div class="tf_form-row">
