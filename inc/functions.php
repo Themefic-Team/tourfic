@@ -2553,7 +2553,7 @@ function tf_migrate_option_data() {
 			$tf_settings['license-email'] = $old_setting_option['license-email'];
 			update_option( 'tf_license_settings', $tf_settings ) || add_option( 'tf_license_settings', $tf_settings );
 		} else {
-			$tf_setting_option            = get_option( 'tf_settings' );
+			$tf_setting_option            = !empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
 			$tf_settings['license-key']   = ! empty( $tf_setting_option['license-key'] ) ? $tf_setting_option['license-key'] : '';
 			$tf_settings['license-email'] = ! empty( $tf_setting_option['license-email'] ) ? $tf_setting_option['license-email'] : '';
 			update_option( 'tf_license_settings', $tf_settings ) || add_option( 'tf_license_settings', $tf_settings );
@@ -2839,7 +2839,7 @@ if ( ! function_exists( 'tourfic_template_settings' ) ) {
 add_action( 'admin_init', 'tf_update_email_template_default_content' );
 function tf_update_email_template_default_content() {
 
-	$tf_settings = get_option( 'tf_settings' );
+	$tf_settings = !empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
 	if ( isset( $tf_settings['email-settings'] ) ) {
 		$tf_settings = $tf_settings['email-settings'];
 
@@ -2992,7 +2992,7 @@ function tf_permalink_settings_migration() {
 
 	if ( empty( get_option( 'tf_permalink_settings_migration' ) ) ) {
 
-		$options = get_option( 'tf_settings' );
+		$options = !empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
 		$hotel_permalink_slug = ! empty( get_option( 'hotel_slug' ) ) ? get_option( 'hotel_slug' ) : '' ;
 		$tour_permalink_slug = ! empty( get_option( 'tour_slug' ) ) ? get_option( 'tour_slug' ) : '' ;
 		$apt_permalink_slug = ! empty( get_option( 'apartment_slug' ) ) ? get_option( 'apartment_slug' ) : '' ;
@@ -3028,7 +3028,7 @@ function tf_template_3_migrate_data() {
 	// Hotel & Tour
 	if ( empty( get_option( 'tf_template_3_migrate_data' ) ) ) {
 
-		$options = get_option( 'tf_settings' );
+		$options = !empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
 		if( !empty($options["tf-template"]) ){
 			$options["tf-template"]["single-hotel-layout-part-1"] = array(
 				array(
@@ -3127,7 +3127,7 @@ function tf_template_3_migrate_data() {
 	// Apartment
 	if ( empty( get_option( 'tf_template_2_apartment_migrate_data' ) ) ) {
 
-		$options = get_option( 'tf_settings' );
+		$options = !empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
 		if( !empty($options["tf-template"]) ){
 			$options["tf-template"]["single-aprtment-layout-part-1"] = array(
 				array(
