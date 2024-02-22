@@ -245,3 +245,7 @@ input.select2-search__field {
   outline: none;
   box-shadow: none;
 }
+.tf-field.tf-field-text.unique-id,
+.tf-field.tf-field-text.tf-order_id{
+  display: none;
+}

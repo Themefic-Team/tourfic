@@ -601,6 +601,11 @@ input.select2-search__field {
   box-shadow: none;
 }
 
+.tf-field.tf-field-text.unique-id,
+.tf-field.tf-field-text.tf-order_id {
+  display: none;
+}
+
 body.tourfic-settings_page_tf-setup-wizard {
   background-color: #EBF5FF;
 }
