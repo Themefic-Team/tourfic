@@ -120,3 +120,38 @@ function tf_room_plural_label( $lowercase = false ) {
 
 	return ( $lowercase ) ? strtolower( $default_room['plural'] ) : $default_room['plural'];
 }
+
+/**
+ * Add Hotel Column Into Room List
+ * @author Jahid
+ */
+
+function tf_room_list_column( $columns ) {
+	$date = $columns['date'];
+	$author = $columns['author'];
+    unset($columns['date']);
+    unset($columns['author']);
+    $columns["hotel_id"] = "Hotel";
+    $columns['author'] = $author;
+    $columns['date'] = $date;
+    return $columns;
+}
+add_filter('manage_edit-tf_room_columns', 'tf_room_list_column');
+
+/**
+ * Add Hotel Column Value Into Room List
+ * @author Jahid
+ */
+
+function tf_room_list_column_value( $colname, $post_id ) {
+	
+	if ( $colname == 'hotel_id'){
+		$meta = get_post_meta( $post_id, 'tf_rooms_opt', true );
+		$hotel_name = !empty($meta['tf_hotel']) ? esc_html(get_the_title($meta['tf_hotel'])) : '';
+		if(!empty($hotel_name)){
+			echo '<a href="'.admin_url().'post.php?post='.$meta['tf_hotel'].'&action=edit" target="_blank">'.$hotel_name.'</a>';
+		}
+	}
+		
+}
+add_action('manage_tf_room_posts_custom_column', 'tf_room_list_column_value', 10, 2);
