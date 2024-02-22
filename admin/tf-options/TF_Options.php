@@ -158,7 +158,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				'tf_apartment_page_tf-apartment-backend-booking',
 				'tourfic-settings_page_tf-setup-wizard'
 			);
-			$tf_options_post_type = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_email_templates' );
+			$tf_options_post_type = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_email_templates', 'tf_room' );
 			$admin_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
 			if("tourfic-settings_page_tf_dashboard"==$screen){
 				//Order Data Retrive

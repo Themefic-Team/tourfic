@@ -52,6 +52,15 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-tour.php' ) ) {
 }
 
 /**
+ * Rooms Functions
+ */
+if ( file_exists( TF_INC_PATH . 'functions/functions-rooms.php' ) ) {
+	require_once TF_INC_PATH . 'functions/functions-rooms.php';
+} else {
+	tf_file_missing( TF_INC_PATH . 'functions/functions-rooms.php' );
+}
+
+/**
  * WooCommerce Common Functions
  */
 if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-common.php' ) ) {
