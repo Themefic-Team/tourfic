@@ -4286,7 +4286,7 @@ if ( ! function_exists( 'tf_hotel_search_ajax_callback' ) ) {
 		}
 
 		if ( tfopt( 'date_hotel_search' ) ) {
-			if ( ! empty( $_POST['place'] ) && ! empty( $_POST['check-in-out-date'] ) ) {
+			if ( ! empty( $_POST['check-in-out-date'] ) ) {
 				$response['query_string'] = str_replace( '&action=tf_hotel_search', '', http_build_query( $_POST ) );
 				$response['status']       = 'success';
 			}
