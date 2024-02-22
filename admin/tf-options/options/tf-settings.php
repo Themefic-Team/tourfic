@@ -1789,6 +1789,24 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'No', 'tourfic' ),
 				),
 				array(
+					'id'        => 'optional_hotel_search_field',
+					'type'      => 'switch',
+					'label'     => __( ' Location Required in Hotel Search', 'tourfic' ),
+					'subtitle'  => __( 'Enable this setting to make the location field optional for the search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => true,
+				),
+				array(
+					'id'        => 'hide_hotel_location_search',
+					'type'      => 'switch',
+					'label'     => __( 'Hide Location in Hotel Search', 'tourfic' ),
+					'subtitle'  => __( 'Enable this setting to hide the location option from the search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'dependency' => array( "optional_hotel_search_field", "==", "false")
+				),
+				array(
 					'id'       => 'tour_search_heading',
 					'type'     => 'heading',
 					'label'    => __( 'Tour Search', 'tourfic' ),
