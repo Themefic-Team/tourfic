@@ -335,18 +335,6 @@ TF_Settings::option( 'tf_settings', array(
 									'default'  => 'design-1',
 								),
 								array(
-									'id'      => 'hotel_design_1_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Jost" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'hotel-archive', '==', 'design-1' ),
-								),
-								array(
-									'id'      => 'hotel_design_2_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'hotel-archive', '==', 'design-2' ),
-								),
-								array(
 									'id'      => 'hotel_archive_design_2_bannar',
 									'type'    => 'image',
 									'label'    => __( 'Archive & Search Result Banner Image', 'tourfic' ),
@@ -362,7 +350,20 @@ TF_Settings::option( 'tf_settings', array(
 										'list' => __( 'List', 'tourfic' ),
 										'grid' => __( 'Grid', 'tourfic' ),
 									),
-									'default'    => 'List'
+									'default'    => 'List',
+									'dependency' => array( 'hotel-archive', '!=', 'design-2' ),
+								),
+								array(
+									'id'      => 'hotel_design_1_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Jost" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'hotel-archive', '==', 'design-1' ),
+								),
+								array(
+									'id'      => 'hotel_design_2_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'hotel-archive', '==', 'design-2' ),
 								),
 								array(
 									'id'      => 'hotel_archive_notice',
@@ -651,18 +652,6 @@ TF_Settings::option( 'tf_settings', array(
 									'default'  => 'design-1',
 								),
 								array(
-									'id'      => 'tour_design_1_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Jost" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'tour-archive', '==', 'design-1' ),
-								),
-								array(
-									'id'      => 'tour_design_2_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'tour-archive', '==', 'design-2' ),
-								),
-								array(
 									'id'      => 'tour_archive_design_2_bannar',
 									'type'    => 'image',
 									'label'    => __( 'Archive & Search Result Banner Image', 'tourfic' ),
@@ -679,6 +668,19 @@ TF_Settings::option( 'tf_settings', array(
 										'grid' => __( 'Grid', 'tourfic' ),
 									),
 									'default'    => 'List',
+									'dependency' => array( 'tour-archive', '!=', 'design-2' ),
+								),
+								array(
+									'id'      => 'tour_design_1_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Jost" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'tour-archive', '==', 'design-1' ),
+								),
+								array(
+									'id'      => 'tour_design_2_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'tour-archive', '==', 'design-2' ),
 								),
 								array(
 									'id'      => 'tour_archive_notice',
@@ -883,6 +885,7 @@ TF_Settings::option( 'tf_settings', array(
 										'grid' => __( 'Grid', 'tourfic' ),
 									),
 									'default'    => 'List',
+									'dependency' => array( 'apartment-archive', '!=', 'design-1' ),
 								),
 								array(
 									'id'      => 'aprtment_design_1_fonts_notice',

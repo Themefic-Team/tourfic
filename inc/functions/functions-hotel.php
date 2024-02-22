@@ -4314,11 +4314,14 @@ if (! function_exists ("tf_hotel_filter_by_features") ) {
 					foreach ( $features as $feature ) {
 						//get the feature details by it's id
 						$term = get_term_by( 'id', $feature, 'hotel_feature' );
-						echo '<li><label for="' . $term->slug . '">';
-						echo '<input type="checkbox" name="features" class="" value="' . $feature . '" id="' . $term->slug . '">';
-						echo "<span class='checkmark'></span>";
-						echo $term->name . '</label>';
-						echo "</li>";
+						
+						if ($term ) {
+							echo '<li><label for="' . $term->slug . '">';
+							echo '<input type="checkbox" name="features" class="" value="' . $feature . '" id="' . $term->slug . '">';
+							echo "<span class='checkmark'></span>";
+							echo $term->name . '</label>';
+							echo "</li>";
+						}
 					}
 					?>
 				</ul>
