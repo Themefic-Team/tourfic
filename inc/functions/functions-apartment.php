@@ -86,17 +86,6 @@ function tf_apartments_default_labels() {
 		'plural'   => __( 'Apartments', 'tourfic' ),
 	);
 
-	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-		$tf_apartment_single_name = ! empty(tfopt( 'tf-apartment-post-rename-singular' )) ? tfopt( 'tf-apartment-post-rename-singular' ) : __("Apartment", "tourfic");
-		$tf_apartment_plural_name = ! empty(tfopt( 'tf-apartment-post-rename-plural' )) ? tfopt( 'tf-apartment-post-rename-plural' ) : __('Apartments', 'tourfic');
-
-		$default_apartment = array(
-			'singular' => $tf_apartment_single_name,
-			'plural'   => $tf_apartment_plural_name
-		);
-
-	}
-
 	return apply_filters( 'tf_apartment_labels', $default_apartment );
 }
 

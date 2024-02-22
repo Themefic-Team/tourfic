@@ -90,17 +90,6 @@ function tf_tours_default_labels() {
 		'plural'   => __( 'Tours', 'tourfic' ),
 	);
 
-	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-		$tf_tour_single_name = ! empty(tfopt( 'tf-tour-post-rename-singular' )) ? tfopt( 'tf-tour-post-rename-singular' ) : __("Tour", "tourfic");
-		$tf_tour_plural_name = ! empty(tfopt( 'tf-tour-post-rename-plural' )) ? tfopt( 'tf-tour-post-rename-plural' ) : __('Tours', 'tourfic');
-
-		$default_tour = array(
-			'singular' => $tf_tour_single_name,
-			'plural'   => $tf_tour_plural_name
-		);
-
-	}
-
 	return apply_filters( 'tf_tours_name', $default_tour );
 }
 
