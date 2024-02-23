@@ -1053,8 +1053,8 @@
                         endTime = startTime;
                     }
                     setSingleRoomCheckInOut(startTime, endTime, self.tfSingleRoomCalData);
-                    let pricingType = $('.tf_room_pricing_type').val();
-                    if (pricingType === 'per_night') {
+                    let pricingType = $('.tf_room_pricing_by').val();
+                    if (pricingType === '1') {
                         if (typeof event.extendedProps.price != 'undefined') {
                             $("[name='tf_room_price']", self.tfSingleRoomCalData).val(event.extendedProps.price);
                         }
@@ -1064,9 +1064,6 @@
                         }
                         if (typeof event.extendedProps.child_price != 'undefined') {
                             $("[name='tf_room_child_price']", self.tfSingleRoomCalData).val(event.extendedProps.child_price);
-                        }
-                        if (typeof event.extendedProps.infant_price != 'undefined') {
-                            $("[name='tf_room_infant_price']", self.tfSingleRoomCalData).val(event.extendedProps.infant_price);
                         }
                     }
                     if (event.extendedProps.status) {
