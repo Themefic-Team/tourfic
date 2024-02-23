@@ -973,9 +973,9 @@
 
 
         /*
-        * Apartment Availability Calendar
+        * Room Availability Calendar
         * @since 2.10.2
-        * @auther: Foysal
+        * @auther: Jahid
         */
         var tfSingleRoomCal = function (container) {
             var self = this;
@@ -1190,7 +1190,7 @@
         });
 
         $(document).on('change', '#tf_rooms_opt .tf_room_pricing_by', function (e) {
-            let room = $(this).closest('#room_details');
+            let room = $(this).closest('#tf_rooms_opt');
             let pricing_by = $(this).val();
 
             if (pricing_by === '1') {

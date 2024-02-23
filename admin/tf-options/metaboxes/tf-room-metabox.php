@@ -5,14 +5,15 @@ $badge_up     = '<div class="tf-csf-badge"><span class="tf-upcoming">' . __( "Up
 $badge_pro    = '<div class="tf-csf-badge"><span class="tf-pro">' . __( "Pro Feature", "tourfic" ) . '</span></div>';
 $badge_up_pro = '<div class="tf-csf-badge"><span class="tf-upcoming">' . __( "Upcoming", "tourfic" ) . '</span><span class="tf-pro">' . __( "Pro Feature", "tourfic" ) . '</span></div>';
 
+
 TF_Metabox::metabox( 'tf_rooms_opt', array(
 	'title'     => 'Room Settings',
 	'post_type' => 'tf_room',
 	'sections'  => array(
 		
 		// Room Details
-		'room_details'     => array(
-			'title'  => __( 'Room Management', 'tourfic' ),
+		'room_details_general'     => array(
+			'title'  => __( 'General', 'tourfic' ),
 			'icon'   => 'fa-sharp fa-solid fa-door-open',
 			'fields' => array(
 				array(
@@ -67,7 +68,7 @@ TF_Metabox::metabox( 'tf_rooms_opt', array(
                     'label_on'  => __( 'Enabled', 'tourfic' ),
                     'label_off' => __( 'Disabled', 'tourfic' ),
                     'width'     => 100,
-                    'default'   => 1,
+                    'default'   => true,
                 ),
                 array(
                     'id'          => 'title',
@@ -75,8 +76,15 @@ TF_Metabox::metabox( 'tf_rooms_opt', array(
                     'subtitle'    => __( 'e.g. Superior Queen Room with Two Queen Beds', 'tourfic' ),
                     'label'       => __( 'Room Title', 'tourfic' ),
                     'field_width' => 100,
-                ),
+                )
 
+			),
+		),
+
+        'room_details'     => array(
+			'title'  => __( 'Room Details', 'tourfic' ),
+			'icon'   => 'fa-sharp fa-solid fa-door-open',
+			'fields' => array(
                 array(
                     'id'      => 'Details',
                     'type'    => 'heading',
@@ -84,11 +92,11 @@ TF_Metabox::metabox( 'tf_rooms_opt', array(
                     'class'   => 'tf-field-class',
                 ),
                 array(
-                    'id'      => 'room_preview_img',
-                    'type'    => 'image',
+                    'id'       => 'room_preview_img',
+                    'type'     => 'image',
                     'label'    => __( 'Room Image Thumbnail', 'tourfic' ),
                     'subtitle' => __( 'Upload Thumbnail Image for this room', 'tourfic' ),
-                    'library' => 'image',
+                    'library'  => 'image',
                 ),
                 array(
                     'id'       => 'gallery',
@@ -140,6 +148,7 @@ TF_Metabox::metabox( 'tf_rooms_opt', array(
                     ),
                     'field_width' => 50,
                 ),
+
                 array(
                     'id'          => 'footage',
                     'type'        => 'text',
@@ -167,6 +176,13 @@ TF_Metabox::metabox( 'tf_rooms_opt', array(
                     'label' => __( 'Room Description', 'tourfic' ),
                     'subtitle'    => __( 'Add description specific for this room.', 'tourfic' ),
                 ),
+			),
+		),
+
+        'room_stay_requirement'     => array(
+			'title'  => __( 'Stay Requirements', 'tourfic' ),
+			'icon'   => 'fa-sharp fa-solid fa-door-open',
+			'fields' => array(
                 array(
                     'id'      => 'minimum_maximum_stay_requirements',
                     'type'    => 'heading',
@@ -191,8 +207,15 @@ TF_Metabox::metabox( 'tf_rooms_opt', array(
                     'subtitle'    => __( 'Indicate the maximum number of nights a guest can book this room for.', 'tourfic' ),
                     'field_width' => 50,
                 ),
+			),
+		),
+
+        'room_price'     => array(
+			'title'  => __( 'Room Price', 'tourfic' ),
+			'icon'   => 'fa-sharp fa-solid fa-door-open',
+			'fields' => array(
                 array(
-                    'id'      => 'Pricing',
+                    'id'      => 'Room Pricing',
                     'type'    => 'heading',
                     'content' => __( 'Pricing', 'tourfic' ),
                     'class'   => 'tf-field-class',
@@ -213,7 +236,7 @@ TF_Metabox::metabox( 'tf_rooms_opt', array(
                 ),
                 array(
                     'id'         => 'price',
-                    'type'       => 'text',
+                    'type'       => 'number',
                     'label'      => __( 'Insert Your Price', 'tourfic' ),
                     'subtitle'   => __( 'Enter the per-night rate for the room.', 'tourfic' ),
                     'dependency' => array( 'pricing-by', '==', '1' ),
@@ -269,6 +292,84 @@ TF_Metabox::metabox( 'tf_rooms_opt', array(
                     'label_off' => __( 'No', 'tourfic' ),
                     'default'   => true,
                 ),
+			),
+		),
+
+        'room_deposit'     => array(
+			'title'  => __( 'Deposit', 'tourfic' ),
+			'icon'   => 'fa-sharp fa-solid fa-door-open',
+			'fields' => array(
+                array(
+                    'id'      => 'Deposit',
+                    'type'    => 'heading',
+                    'content' => __( 'Deposit', 'tourfic' ),
+                    'class'   => 'tf-field-class',
+                ),
+                array(
+                    'id'      => '',
+                    'type'    => 'switch',
+                    'label'   => __( 'Enable Deposit', 'tourfic' ),
+                    'is_pro'  => true,
+                    'default' => false,
+                ),
+                array(
+                    'id'         => 'deposit_type',
+                    'type'       => 'select',
+                    'label'      => __( 'Deposit Type', 'tourfic' ),
+                    'subtitle'   => __( 'Select Deposit Type: Percentage or Fixed', 'tourfic' ),
+                    'options'    => array(
+                        'none'    => __( 'None', 'tourfic' ),
+                        'percent' => __( 'Percent', 'tourfic' ),
+                        'fixed'   => __( 'Fixed', 'tourfic' ),
+                    ),
+                    'default'    => 'none',
+                    'dependency' => array( 'allow_deposit', '!=', 'false' ),
+                ),
+
+                array(
+                    'id'         => 'deposit_amount',
+                    'type'       => 'number',
+                    'label'      => __( 'Deposit Amount', 'tourfic' ),
+                    'subtitle'   => __( 'Insert your deposit amount', 'tourfic' ),
+                    'attributes' => array(
+                        'min' => '0',
+                    ),
+                    'dependency' => array(
+                        array( 'deposit_type', '!=', 'none' ),
+                        // array( 'allow_deposit', '!=', 'false' ),
+                    ),
+                ),
+			),
+		),
+
+        'room_ical'     => array(
+			'title'  => __( 'iCal Sync', 'tourfic' ),
+			'icon'   => 'fa-sharp fa-solid fa-door-open',
+			'fields' => array(
+                array(
+                    'id'      => 'ical',
+                    'type'    => 'heading',
+                    'content' => __( 'iCal Sync', 'tourfic' ),
+                ),
+                array(
+                    'id'          => '',
+                    'type'        => 'ical',
+                    'label'       => __( 'iCal URL', 'tourfic' ),
+                    'placeholder' => __( 'https://website.com', 'tourfic' ),
+                    'button_text' => __( 'Import', 'tourfic' ),
+                    'button_class'   => 'room-ical-import',
+                    'attributes'  => array(
+                        'class' => 'ical_url_input',
+                    ),
+                    'is_pro'      => true
+                )
+			),
+		),
+
+        'room_availability'     => array(
+			'title'  => __( 'Availability', 'tourfic' ),
+			'icon'   => 'fa-sharp fa-solid fa-door-open',
+			'fields' => array(
                 array(
                     'id'      => 'Availability',
                     'type'    => 'heading',
@@ -280,10 +381,10 @@ TF_Metabox::metabox( 'tf_rooms_opt', array(
                     'type'        => 'number',
                     'label'       => __( 'Room Availability', 'tourfic' ),
                     'subtitle'    => __( 'Number of rooms available for booking', 'tourfic' ),
-                    'field_width' => 100,
                     'attributes'  => array(
                         'min' => '0',
                     ),
+                    'field_width' => 100,
                     'is_search_able' => true
                 ),
                 array(
@@ -314,35 +415,18 @@ TF_Metabox::metabox( 'tf_rooms_opt', array(
                     'dependency' => array( 'avil_by_date', '!=', 'false' ),
                 ),
                 array(
-                    'id'      => 'Deposit',
-                    'type'    => 'heading',
-                    'content' => __( 'Deposit', 'tourfic' ),
-                    'class'   => 'tf-field-class',
+                    'id'         => 'tf-others-heading',
+                    'type'       => 'heading',
+                    'content'    => __( 'Other', 'tourfic' ),
+                    'dependency' => array( 'reduce_num_room', '==', '1' ),
+                    'class'      => 'tf-field-class',
                 ),
                 array(
-                    'id'      => '',
-                    'type'    => 'switch',
-                    'label'   => __( 'Enable Deposit', 'tourfic' ),
-                    'is_pro'  => true,
-                    'default' => false,
+                    'id'         => 'tf-callback',
+                    'type'       => 'callback',
+                    'dependency' => array( 'reduce_num_room', '==', '1' ),
+                    'function'   => 'tf_remove_order_ids_from_room',
                 ),
-                array(
-                    'id'      => 'ical',
-                    'type'    => 'heading',
-                    'content' => __( 'iCal Sync', 'tourfic' ),
-                ),
-                array(
-                    'id'          => '',
-                    'type'        => 'ical',
-                    'label'       => __( 'iCal URL', 'tourfic' ),
-                    'placeholder' => __( 'https://website.com', 'tourfic' ),
-                    'button_text' => __( 'Import', 'tourfic' ),
-                    'button_class'   => 'room-ical-import',
-                    'attributes'  => array(
-                        'class' => 'ical_url_input',
-                    ),
-                    'is_pro'      => true
-                )
 			),
 		),
 
