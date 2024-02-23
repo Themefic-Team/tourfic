@@ -3649,23 +3649,16 @@ function tf_remove_room_order_ids() {
         return;
     }
 	
-	# Get order id field's name
-	$meta_field = isset( $_POST['meta_field'] ) ? sanitize_text_field( $_POST['meta_field'] ) : '';
-	# Trim room id from order id name
-	$room_id = trim( $meta_field, "tf_hotels_opt[room][][order_id]" );
+
 	# Get post id
 	$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
 	# Get hotel meta
-	$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
+	$meta = get_post_meta( $post_id, 'tf_rooms_opt', true );
 
-	$order_id_retrive = tf_data_types( $meta['room'] );
-
-	# Set order id field's value to blank
-	$order_id_retrive[ $room_id ]['order_id'] = '';
-
-	$meta['room'] = $order_id_retrive;
+	$meta['order_id'] = '';
 	# Update whole hotel meta
-	update_post_meta( $post_id, 'tf_hotels_opt', $meta );
+	update_post_meta( $post_id, 'tf_rooms_opt', $meta );
+	update_post_meta( $post_id, 'tf_search_order_id', '' );
 
 	# Send success message
 	wp_send_json_success( array(

@@ -55,10 +55,8 @@
 
             var $this = $(this);
             var post_id = $("#post_ID").val();
-            var meta_field = $this.closest('.tf-repeater-content-wrap').find('.tf-order_id input').attr('name');
             var data = {
                 action: 'tf_remove_room_order_ids',
-                meta_field: meta_field,
                 post_id: post_id,
                 _ajax_nonce: tf_admin_params.tf_nonce
             };
