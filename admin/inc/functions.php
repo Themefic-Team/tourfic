@@ -616,19 +616,19 @@ if ( ! function_exists( 'tf_update_apt_availability_price' ) ) {
 if ( ! function_exists( 'tf_get_single_room_availability' ) ) {
 	function tf_get_single_room_availability() {
 		$new_post         = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
-		$apartment_id     = isset( $_POST['apartment_id'] ) && ! empty( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
-		$apt_availability = isset( $_POST['apt_availability'] ) && ! empty( $_POST['apt_availability'] ) ? sanitize_text_field( $_POST['apt_availability'] ) : '';
+		$room_id     = isset( $_POST['room_id'] ) && ! empty( $_POST['room_id'] ) ? sanitize_text_field( $_POST['room_id'] ) : '';
+		$tf_room_availability = isset( $_POST['tf_room_availability'] ) && ! empty( $_POST['tf_room_availability'] ) ? sanitize_text_field( $_POST['tf_room_availability'] ) : '';
 
 		if ( $new_post != 'true' ) {
-			$apartment_data        = get_post_meta( $apartment_id, 'tf_rooms_opt', true );
-			$apt_availability_data = isset( $apartment_data['avail_date'] ) && ! empty( $apartment_data['avail_date'] ) ? json_decode( $apartment_data['avail_date'], true ) : [];
+			$apartment_data        = get_post_meta( $room_id, 'tf_rooms_opt', true );
+			$tf_room_availability_data = isset( $apartment_data['avail_date'] ) && ! empty( $apartment_data['avail_date'] ) ? json_decode( $apartment_data['avail_date'], true ) : [];
 		} else {
-			$apt_availability_data = json_decode( stripslashes( $apt_availability ), true );
+			$tf_room_availability_data = json_decode( stripslashes( $tf_room_availability ), true );
 		}
 
-		if ( ! empty( $apt_availability_data ) && is_array( $apt_availability_data ) ) {
-			$apt_availability_data = array_values( $apt_availability_data );
-			$apt_availability_data = array_map( function ( $item ) {
+		if ( ! empty( $tf_room_availability_data ) && is_array( $tf_room_availability_data ) ) {
+			$tf_room_availability_data = array_values( $tf_room_availability_data );
+			$tf_room_availability_data = array_map( function ( $item ) {
 				$item['start'] = date( 'Y-m-d', strtotime( $item['check_in'] ) );
 				$item['title'] = $item['pricing-by'] == '1' ? __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
 
@@ -638,16 +638,103 @@ if ( ! function_exists( 'tf_get_single_room_availability' ) ) {
 				}
 
 				return $item;
-			}, $apt_availability_data );
+			}, $tf_room_availability_data );
 		} else {
-			$apt_availability_data = [];
+			$tf_room_availability_data = [];
 		}
 
-		echo json_encode( $apt_availability_data );
+		echo json_encode( $tf_room_availability_data );
 		die();
 	}
 
 	add_action( 'wp_ajax_tf_get_single_room_availability', 'tf_get_single_room_availability' );
+}
+
+
+/*
+ * Room availability calendar update
+ * @auther Jahid
+ */
+if ( ! function_exists( 'tf_add_single_room_availability' ) ) {
+	function tf_add_single_room_availability() {
+		$date_format         = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+		$room_id        = isset( $_POST['room_id'] ) && ! empty( $_POST['room_id'] ) ? sanitize_text_field( $_POST['room_id'] ) : '';
+		$new_post            = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? $_POST['new_post'] : '';
+		$check_in            = isset( $_POST['tf_room_check_in'] ) && ! empty( $_POST['tf_room_check_in'] ) ? sanitize_text_field( $_POST['tf_room_check_in'] ) : '';
+		$check_out           = isset( $_POST['tf_room_check_out'] ) && ! empty( $_POST['tf_room_check_out'] ) ? sanitize_text_field( $_POST['tf_room_check_out'] ) : '';
+		$status              = isset( $_POST['tf_room_status'] ) && ! empty( $_POST['tf_room_status'] ) ? sanitize_text_field( $_POST['tf_room_status'] ) : '';
+		$pricing_type        = isset( $_POST['pricing_type'] ) && ! empty( $_POST['pricing_type'] ) ? sanitize_text_field( $_POST['pricing_type'] ) : '';
+		$tf_room_price        = isset( $_POST['tf_room_price'] ) && ! empty( $_POST['tf_room_price'] ) ? sanitize_text_field( $_POST['tf_room_price'] ) : '';
+		$tf_room_adult_price  = isset( $_POST['tf_room_adult_price'] ) && ! empty( $_POST['tf_room_adult_price'] ) ? sanitize_text_field( $_POST['tf_room_adult_price'] ) : '';
+		$tf_room_child_price  = isset( $_POST['tf_room_child_price'] ) && ! empty( $_POST['tf_room_child_price'] ) ? sanitize_text_field( $_POST['tf_room_child_price'] ) : '';
+
+		$single_room_availability    = isset( $_POST['room_availability'] ) && ! empty( $_POST['room_availability'] ) ? sanitize_text_field( $_POST['room_availability'] ) : '';
+
+		if ( empty( $check_in ) || empty( $check_out ) ) {
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'Please select check in and check out date.', 'tourfic' )
+			] );
+		}
+
+		if ( $date_format == 'Y.m.d' || $date_format == 'd.m.Y' ) {
+			$check_in  = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_in ) ) );
+			$check_out = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_out ) ) );
+		}
+		if ( $date_format == 'd/m/Y' ) {
+			$check_in  = date( "Y-m-d", strtotime( str_replace( "/", "-", $check_in ) ) );
+			$check_out = date( "Y-m-d", strtotime( str_replace( "/", "-", $check_out ) ) );
+		}
+
+		$check_in  = strtotime( $check_in );
+		$check_out = strtotime( $check_out );
+		if ( $check_in > $check_out ) {
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'Check in date must be less than check out date.', 'tourfic' )
+			] );
+		}
+
+		$single_room_availability_data = [];
+		for ( $i = $check_in; $i <= $check_out; $i = strtotime( '+1 day', $i ) ) {
+			$tf_apt_date                           = date( 'Y/m/d', $i );
+			$tf_apt_data                           = [
+				'check_in'     => $tf_apt_date,
+				'check_out'    => $tf_apt_date,
+				'pricing-by' => $pricing_type,
+				'price'        => $tf_room_price,
+				'adult_price'  => $tf_room_adult_price,
+				'child_price'  => $tf_room_child_price,
+				'status'       => $status
+			];
+			$single_room_availability_data[ $tf_apt_date ] = $tf_apt_data;
+		}
+
+		$apartment_data = get_post_meta( $room_id, 'tf_rooms_opt', true );
+		if ( $new_post != 'true' ) {
+			$single_room_availability = json_decode( $apartment_data['avail_date'], true );
+			if ( isset( $single_room_availability ) && ! empty( $single_room_availability ) ) {
+				$single_room_availability_data = array_merge( $single_room_availability, $single_room_availability_data );
+			}
+			$apartment_data['avail_date'] = json_encode( $single_room_availability_data );
+			update_post_meta( $room_id, 'tf_rooms_opt', $apartment_data );
+		} else {
+			$single_room_availability = json_decode( stripslashes( $single_room_availability ), true );
+			if ( isset( $single_room_availability ) && ! empty( $single_room_availability ) ) {
+				$single_room_availability_data = array_merge( $single_room_availability, $single_room_availability_data );
+			}
+		}
+
+		wp_send_json_success( [
+			'status'           => true,
+			'message'          => __( 'Availability updated successfully.', 'tourfic' ),
+			'single_room_availability' => json_encode( $single_room_availability_data ),
+		] );
+
+		die();
+	}
+
+	add_action( 'wp_ajax_tf_add_single_room_availability', 'tf_add_single_room_availability' );
 }
 
 

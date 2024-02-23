@@ -1015,8 +1015,8 @@
                         data: {
                             action: "tf_get_single_room_availability",
                             new_post: $('[name="new_post"]').val(),
-                            apartment_id: $('[name="apartment_id"]').val(),
-                            apt_availability: $('.avail_date').val(),
+                            room_id: $('[name="room_id"]').val(),
+                            tf_room_availability: $('.avail_date').val(),
                         },
                         beforeSend: function () {
                             $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
@@ -1131,7 +1131,7 @@
         }
         tfSingleRoomCalendar();
 
-        $(document).on('click', '#tf_rooms_opt .tf_room_cal_update', function (e) {
+        $(document).on('click', '#tf_rooms_opt .tf_room_single_cal_update', function (e) {
             e.preventDefault();
 
             let btn = $(this);
@@ -1139,11 +1139,11 @@
             let containerEl = btn.closest('.tf-room-cal-wrap')[0];
             let cal = container.find('.tf-room-cal');
             let data = $('input, select', container.find('.tf-room-cal-field')).serializeArray();
-            let pricingType = $('.tf_room_pricing_type').val();
+            let pricingType = $('.tf_room_pricing_by').val();
             let aptAvailability = container.find('.avail_date');
-            data.push({name: 'action', value: 'tf_add_apartment_availability'});
+            data.push({name: 'action', value: 'tf_add_single_room_availability'});
             data.push({name: 'pricing_type', value: pricingType});
-            data.push({name: 'apt_availability', value: aptAvailability.val()});
+            data.push({name: 'room_availability', value: aptAvailability.val()});
 
             $.ajax({
                 url: tf_options.ajax_url,
@@ -1157,11 +1157,11 @@
                 success: function (response) {
                     if (typeof response == 'object') {
                         if (response.data.status === true) {
-                            aptAvailability.val(response.data.apt_availability)
+                            aptAvailability.val(response.data.single_room_availability)
                             notyf.success(response.data.message);
                             roomSingleResetForm(container);
 
-                            var apt = new apartmentCal(containerEl);
+                            var apt = new tfSingleRoomCal(containerEl);
                             apt.init();
                             if (apt.fullCalendar) {
                                 apt.fullCalendar.refetchEvents();
