@@ -606,6 +606,51 @@ if ( ! function_exists( 'tf_update_apt_availability_price' ) ) {
 
 	add_action( 'save_post', 'tf_update_apt_availability_price', 99, 2 );
 }
+
+
+
+/*
+ * Get Room availability calendar
+ * @auther Jahid
+ */
+if ( ! function_exists( 'tf_get_single_room_availability' ) ) {
+	function tf_get_single_room_availability() {
+		$new_post         = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
+		$apartment_id     = isset( $_POST['apartment_id'] ) && ! empty( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
+		$apt_availability = isset( $_POST['apt_availability'] ) && ! empty( $_POST['apt_availability'] ) ? sanitize_text_field( $_POST['apt_availability'] ) : '';
+
+		if ( $new_post != 'true' ) {
+			$apartment_data        = get_post_meta( $apartment_id, 'tf_rooms_opt', true );
+			$apt_availability_data = isset( $apartment_data['avail_date'] ) && ! empty( $apartment_data['avail_date'] ) ? json_decode( $apartment_data['avail_date'], true ) : [];
+		} else {
+			$apt_availability_data = json_decode( stripslashes( $apt_availability ), true );
+		}
+
+		if ( ! empty( $apt_availability_data ) && is_array( $apt_availability_data ) ) {
+			$apt_availability_data = array_values( $apt_availability_data );
+			$apt_availability_data = array_map( function ( $item ) {
+				$item['start'] = date( 'Y-m-d', strtotime( $item['check_in'] ) );
+				$item['title'] = $item['pricing-by'] == '1' ? __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
+
+				if ( $item['status'] == 'unavailable' ) {
+					$item['display'] = 'background';
+					$item['color']   = '#003c79';
+				}
+
+				return $item;
+			}, $apt_availability_data );
+		} else {
+			$apt_availability_data = [];
+		}
+
+		echo json_encode( $apt_availability_data );
+		die();
+	}
+
+	add_action( 'wp_ajax_tf_get_single_room_availability', 'tf_get_single_room_availability' );
+}
+
+
 /*
  * Get all icons list
  * @author Foysal

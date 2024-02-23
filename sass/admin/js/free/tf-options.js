@@ -730,11 +730,15 @@
                 var value = $this.val('');
             }
 
-            if ($this.hasClass('tf_room_availability_by_date')) {
-                tfHotelCalendar();
-            }
+            // if ($this.hasClass('tf_room_availability_by_date')) {
+            //     tfHotelCalendar();
+            // }
             if ($this.hasClass('tf_apartment_availability_by_date')){
                 tfApartmentCalendar();
+            }
+
+            if ($this.hasClass('tf_room_single_availability_by_date')){
+                tfSingleRoomCalendar();
             }
         });
 
@@ -967,6 +971,236 @@
             }
         });
 
+
+        /*
+        * Apartment Availability Calendar
+        * @since 2.10.2
+        * @auther: Foysal
+        */
+        var tfSingleRoomCal = function (container) {
+            var self = this;
+            this.container = container;
+            this.calendar = null
+            this.tfSingleRoomCalData = null;
+            this.fullCalendar;
+            this.timeOut;
+            this.fullCalendarOptions = {
+                initialView: 'dayGridMonth',
+                firstDay: 1,
+                headerToolbar: {
+                    start: 'today',
+                    center: 'title',
+                    end: 'prev,next'
+                },
+                displayEventTime: true,
+                selectable: true,
+                select: function ({start, end, startStr, endStr, allDay, jsEvent, view, resource}) {
+                    if (moment(start).isBefore(moment(), 'day') || moment(end).isBefore(moment(), 'day')) {
+                        self.fullCalendar.unselect();
+                        setSingleRoomCheckInOut("", "", self.tfSingleRoomCalData);
+                    } else {
+                        var zone = moment(start).format("Z");
+                        zone = zone.split(":");
+                        zone = "" + parseInt(zone[0]) + ":00";
+                        var check_in = moment(start).utcOffset(zone).format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        var check_out = moment(end).utcOffset(zone).subtract(1, 'day').format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        setSingleRoomCheckInOut(check_in, check_out, self.tfSingleRoomCalData);
+                    }
+                },
+                events: function ({start, end, startStr, endStr, timeZone}, successCallback, failureCallback) {
+                    $.ajax({
+                        url: tf_options.ajax_url,
+                        dataType: "json",
+                        type: "POST",
+                        data: {
+                            action: "tf_get_single_room_availability",
+                            new_post: $('[name="new_post"]').val(),
+                            apartment_id: $('[name="apartment_id"]').val(),
+                            apt_availability: $('.avail_date').val(),
+                        },
+                        beforeSend: function () {
+                            $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
+                            $(self.calendar).addClass('tf-content-loading');
+                        },
+                        success: function (doc) {
+                            if (typeof doc == "object") {
+                                successCallback(doc);
+                            }
+
+                            $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
+                            $(self.calendar).removeClass('tf-content-loading');
+                        },
+                        error: function (e) {
+                            console.log(e);
+                        }
+                    });
+                },
+                eventContent: function (arg) {
+                    const title = arg.event.title;
+                    const eventTitleElement = document.createElement('div');
+                    eventTitleElement.classList.add('fc-event-title');
+                    eventTitleElement.innerHTML = title;
+                    return {domNodes: [eventTitleElement]};
+                },
+                eventClick: function ({event, el, jsEvent, view}) {
+                    let startTime = moment(event.start, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
+                        .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
+                    let endTime;
+                    if (event.end) {
+                        endTime = moment(event.end, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
+                            .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
+                    } else {
+                        endTime = startTime;
+                    }
+                    setSingleRoomCheckInOut(startTime, endTime, self.tfSingleRoomCalData);
+                    let pricingType = $('.tf_room_pricing_type').val();
+                    if (pricingType === 'per_night') {
+                        if (typeof event.extendedProps.price != 'undefined') {
+                            $("[name='tf_room_price']", self.tfSingleRoomCalData).val(event.extendedProps.price);
+                        }
+                    } else {
+                        if (typeof event.extendedProps.adult_price != 'undefined') {
+                            $("[name='tf_room_adult_price']", self.tfSingleRoomCalData).val(event.extendedProps.adult_price);
+                        }
+                        if (typeof event.extendedProps.child_price != 'undefined') {
+                            $("[name='tf_room_child_price']", self.tfSingleRoomCalData).val(event.extendedProps.child_price);
+                        }
+                        if (typeof event.extendedProps.infant_price != 'undefined') {
+                            $("[name='tf_room_infant_price']", self.tfSingleRoomCalData).val(event.extendedProps.infant_price);
+                        }
+                    }
+                    if (event.extendedProps.status) {
+                        $("[name='tf_room_status'] option[value=" + event.extendedProps.status + "]", self.tfSingleRoomCalData).prop("selected", true);
+                    }
+                },
+            };
+            this.init = function () {
+                self.container = jQuery(container);
+                self.calendar = container.querySelector('.tf-room-cal');
+                self.tfSingleRoomCalData = $('.tf-room-cal-field', self.container);
+                setSingleRoomCheckInOut('', '', self.tfSingleRoomCalData);
+                self.initCalendar();
+            }
+            this.initCalendar = function () {
+                if (typeof FullCalendar != 'undefined') {
+                    self.fullCalendar = new FullCalendar.Calendar(self.calendar, self.fullCalendarOptions);
+                    self.fullCalendar.render();
+                }
+            }
+        };
+
+        function setSingleRoomCheckInOut(check_in, check_out, tfSingleRoomCalData) {
+            $('.tf_room_check_in', tfSingleRoomCalData).val(check_in);
+            $('.tf_room_check_out', tfSingleRoomCalData).val(check_out);
+        }
+
+        function roomSingleResetForm(tfSingleRoomCalData) {
+            $('.tf_room_check_in', tfSingleRoomCalData).val('');
+            $('.tf_room_check_out', tfSingleRoomCalData).val('');
+            $('[name="tf_room_price"]', tfSingleRoomCalData).val('');
+            $('[name="tf_room_adult_price"]', tfSingleRoomCalData).val('');
+            $('[name="tf_room_child_price"]', tfSingleRoomCalData).val('');
+            $('[name="tf_room_infant_price"]', tfSingleRoomCalData).val('');
+        }
+
+        const tfSingleRoomCalendar = () => {
+            $('.tf-room-cal-wrap').each(function (index, el) {
+                var apt = new tfSingleRoomCal(el);
+                apt.init();
+
+                let checkIn = $(el).find('[name="tf_room_check_in"]').flatpickr({
+                    dateFormat: 'Y-m-d',
+                    minDate: 'today',
+                    altInput: true,
+                    altFormat: tf_options.tf_admin_date_format,
+                    onChange: function (selectedDates, dateStr, instance) {
+                        checkOut.set('minDate', dateStr);
+                    }
+                });
+
+                let checkOut = $(el).find('[name="tf_room_check_out"]').flatpickr({
+                    dateFormat: 'Y-m-d',
+                    minDate: 'today',
+                    altInput: true,
+                    altFormat: tf_options.tf_admin_date_format,
+                    onChange: function (selectedDates, dateStr, instance) {
+                        checkIn.set('maxDate', dateStr);
+                    }
+                });
+            });
+        }
+        tfSingleRoomCalendar();
+
+        $(document).on('click', '#tf_rooms_opt .tf_room_cal_update', function (e) {
+            e.preventDefault();
+
+            let btn = $(this);
+            let container = btn.closest('.tf-room-cal-wrap');
+            let containerEl = btn.closest('.tf-room-cal-wrap')[0];
+            let cal = container.find('.tf-room-cal');
+            let data = $('input, select', container.find('.tf-room-cal-field')).serializeArray();
+            let pricingType = $('.tf_room_pricing_type').val();
+            let aptAvailability = container.find('.avail_date');
+            data.push({name: 'action', value: 'tf_add_apartment_availability'});
+            data.push({name: 'pricing_type', value: pricingType});
+            data.push({name: 'apt_availability', value: aptAvailability.val()});
+
+            $.ajax({
+                url: tf_options.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
+                    cal.addClass('tf-content-loading');
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    if (typeof response == 'object') {
+                        if (response.data.status === true) {
+                            aptAvailability.val(response.data.apt_availability)
+                            notyf.success(response.data.message);
+                            roomSingleResetForm(container);
+
+                            var apt = new apartmentCal(containerEl);
+                            apt.init();
+                            if (apt.fullCalendar) {
+                                apt.fullCalendar.refetchEvents();
+                            }
+                        } else {
+                            notyf.error(response.data.message);
+                        }
+
+                        container.css({'pointer-events': 'auto', 'opacity': '1'})
+                        cal.removeClass('tf-content-loading');
+                        btn.removeClass('tf-btn-loading');
+                    }
+                },
+                error: function (e) {
+                    console.log(e);
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+                complete: function () {
+                    container.css({'pointer-events': 'auto', 'opacity': '1'});
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+            });
+        });
+
+        $(document).on('change', '#tf_rooms_opt .tf_room_pricing_by', function (e) {
+            let room = $(this).closest('#room_details');
+            let pricing_by = $(this).val();
+
+            if (pricing_by === '1') {
+                room.find('.tf-price-by-room').show();
+                room.find('.tf-price-by-person').hide();
+            } else if (pricing_by === '2') {
+                room.find('.tf-price-by-person').show();
+                room.find('.tf-price-by-room').hide();
+            }
+        });
 
         /*
         * Options WP editor
