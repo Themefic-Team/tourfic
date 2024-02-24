@@ -706,7 +706,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
                                 <span class="tf-label"><?php _e( 'Destination', 'tourfic' ); ?>:</span>
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="fas fa-search"></i>
-                                    <?php if ( empty($advanced) && "enabled"!=$advanced ){ ?>
+                                    <?php if ( (empty($advanced) || !empty($advanced)) && "enabled"!=$advanced ){ ?>
                                     <input type="text" name="place-name" required id="tf-destination" class="" placeholder="<?php _e( 'Enter Destination', 'tourfic' ); ?>" value="">
                                     <input type="hidden" name="place" id="tf-search-tour" class="tf-place-input"/>
 									<?php } 
