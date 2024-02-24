@@ -547,10 +547,10 @@ function tf_tours_booking_function() {
 
 	if ( $tour_type === 'continuous' && ! empty( $tf_cont_custom_date ) && ! empty( $seasional_price ) ) {
 
-		$group_price    = $seasional_price[0]['group_price'];
-		$adult_price    = $seasional_price[0]['adult_price'];
-		$children_price = $seasional_price[0]['child_price'];
-		$infant_price   = $seasional_price[0]['infant_price'];
+		$group_price    = !empty($seasional_price[0]['group_price']) ? $seasional_price[0]['group_price'] : 0;
+		$adult_price    = !empty($seasional_price[0]['adult_price']) ? $seasional_price[0]['adult_price'] : 0;
+		$children_price = !empty($seasional_price[0]['child_price']) ? $seasional_price[0]['child_price'] : 0;
+		$infant_price   = !empty($seasional_price[0]['infant_price']) ? $seasional_price[0]['infant_price'] : 0;
 
 	} else {
 
