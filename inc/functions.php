@@ -1,7 +1,5 @@
 <?php
 // don't load directly
-use TOURFIC\inc\Core\emails\TF_Handle_Emails;
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -493,6 +491,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 	$post_type             = $_GET['type'] ?? '';
 	$place_title           = '';
 	$date_format_for_users = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+	$hotel_location_field_required = !empty( tfopt( "required_location_hotel_search" )) ?  tfopt( "required_location_hotel_search" ) : 0;
 
 	if ( ! empty( $post_type ) ) {
 
@@ -536,11 +535,18 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
             <form class="widget tf-hotel-side-booking" method="get" autocomplete="off"
                   action="<?php echo tf_booking_search_action(); ?>" id="tf-widget-booking-search">
 
-                <div class="tf-field-group tf-destination-box">
+                <div class="tf-field-group tf-destination-box" <?php echo $post_type == 'tf_hotel' && tfopt( "hide_hotel_location_search" ) == 1 && tfopt( "required_location_hotel_search" ) != 1 ? 'style="display:none"' : ''?>>
                     <i class="fa-solid fa-location-dot"></i>
-                    <input type="text" id="<?php echo $place_input_id ?? ''; ?>" required="" class="tf-field" placeholder="<?php echo $place_placeholder ?? __( 'Location/Destination', 'tourfic' ); ?>"
+
+                    <?php if($post_type == "tf_hotel" ) { ?>
+						<input type="text" id="<?php echo $place_input_id ?? ''; ?>" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> class="tf-field" placeholder="<?php echo $place_placeholder ?? __( 'Location/Destination', 'tourfic' ); ?>"
                            value="<?php echo ! empty( $place_title ) ? $place_title : ''; ?>">
-                    <input type="hidden" name="place" id="tf-place" value="<?php echo $place_value ?? ''; ?>"/>
+					<?php } else { ?>
+						<input type="text" id="<?php echo $place_input_id ?? ''; ?>" required class="tf-field" placeholder="<?php echo $place_placeholder ?? __( 'Location/Destination', 'tourfic' ); ?>"
+                           value="<?php echo ! empty( $place_title ) ? $place_title : ''; ?>">
+					<?php } ?>
+
+                    <input type="hidden" name="place" id="tf-place" value="<?php echo $place_value ?? ''; ?> "/>
                 </div>
                 <div class="tf-field-group tf-mt-8 tf_acrselection">
                     <div class="tf-field tf-flex">
@@ -638,15 +644,21 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 	<?php }
 	elseif ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-2" ) || ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-2" ) || ( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template == "design-1" ) ) { ?>
 		<div class="tf-booking-form-fields <?php echo $post_type == 'tf_tours' ? esc_attr( 'tf-tour-archive-block' ) : ''; ?>">
-			<div class="tf-booking-form-location">
+			<div class="tf-booking-form-location" <?php echo $post_type == 'tf_hotel' && tfopt( "hide_hotel_location_search" ) == 1 && tfopt( "required_location_hotel_search" ) != 1 ? 'style="display:none"' : ''?>>
 				<span class="tf-booking-form-title"><?php _e("Location", "tourfic"); ?></span>
 				<label for="tf-search-location" class="tf-booking-location-wrap">
 					<svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
 					<path d="M8.5 13.9317L11.7998 10.6318C13.6223 8.80943 13.6223 5.85464 11.7998 4.0322C9.9774 2.20975 7.02261 2.20975 5.20017 4.0322C3.37772 5.85464 3.37772 8.80943 5.20017 10.6318L8.5 13.9317ZM8.5 15.8173L4.25736 11.5747C1.91421 9.2315 1.91421 5.43254 4.25736 3.08939C6.60051 0.746245 10.3995 0.746245 12.7427 3.08939C15.0858 5.43254 15.0858 9.2315 12.7427 11.5747L8.5 15.8173ZM8.5 8.66536C9.2364 8.66536 9.83333 8.06843 9.83333 7.33203C9.83333 6.59565 9.2364 5.9987 8.5 5.9987C7.7636 5.9987 7.16667 6.59565 7.16667 7.33203C7.16667 8.06843 7.7636 8.66536 8.5 8.66536ZM8.5 9.9987C7.02724 9.9987 5.83333 8.80476 5.83333 7.33203C5.83333 5.85927 7.02724 4.66536 8.5 4.66536C9.97273 4.66536 11.1667 5.85927 11.1667 7.33203C11.1667 8.80476 9.97273 9.9987 8.5 9.9987Z" fill="#595349"/>
 					</svg>
 
-					<input type="text" id="<?php echo $place_input_id ?? ''; ?>" required="" class="tf-field" placeholder="<?php echo $place_placeholder ?? __( 'Location/Destination', 'tourfic' ); ?>"
+					<?php if($post_type == "tf_hotel" ) { ?>
+						<input type="text" id="<?php echo $place_input_id ?? ''; ?>" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> class="tf-field" placeholder="<?php echo $place_placeholder ?? __( 'Location/Destination', 'tourfic' ); ?>"
                            value="<?php echo !empty($place_title) ? $place_title : ''; ?>">
+					<?php } else { ?>
+						<input type="text" id="<?php echo $place_input_id ?? ''; ?>" required class="tf-field" placeholder="<?php echo $place_placeholder ?? __( 'Location/Destination', 'tourfic' ); ?>"
+                           value="<?php echo !empty($place_title) ? $place_title : ''; ?>">
+					<?php } ?>
+
                     <input type="hidden" name="place" id="tf-place" value="<?php echo $place_value ?? ''; ?>"/>
 				</label>
 			</div>
@@ -964,10 +976,16 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 
             <div class="tf_form-row">
                 <label class="tf_label-row">
-                    <div class="tf_form-inner">
+                    <div class="tf_form-inner" <?php echo $post_type == 'tf_hotel' && tfopt( "hide_hotel_location_search" ) == 1 && tfopt( "required_location_hotel_search" ) != 1 ? 'style="display:none"' : ''?>>
                         <i class="fas fa-map-marker-alt"></i>
-                        <input type="text" id="<?php echo $place_input_id ?? ''; ?>" required="" class="" placeholder="<?php echo $place_placeholder ?? __( 'Location/Destination', 'tourfic' ); ?>"
+
+                        <?php if($post_type == "tf_hotel" ) { ?>
+							<input type="text" id="<?php echo $place_input_id ?? ''; ?>" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> class="" placeholder="<?php echo $place_placeholder ?? __( 'Location/Destination', 'tourfic' ); ?>"
                                value="<?php echo ! empty( $place_title ) ? $place_title : ''; ?>">
+						<?php } else { ?>
+							<input type="text" id="<?php echo $place_input_id ?? ''; ?>" required class="" placeholder="<?php echo $place_placeholder ?? __( 'Location/Destination', 'tourfic' ); ?>"
+							value="<?php echo ! empty( $place_title ) ? $place_title : ''; ?>">
+						<?php } ?>
                         <input type="hidden" name="place" id="tf-place" value="<?php echo $place_value ?? ''; ?>"/>
                     </div>
                 </label>
@@ -1150,15 +1168,22 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 	$tf_tour_arc_selected_template  = ! empty( tf_data_types( tfopt( 'tf-template' ) )['tour-archive'] ) ? tf_data_types( tfopt( 'tf-template' ) )['tour-archive'] : 'design-1';
 	$tf_hotel_arc_selected_template = ! empty( tf_data_types( tfopt( 'tf-template' ) )['hotel-archive'] ) ? tf_data_types( tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
 	$tf_apartment_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['apartment-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['apartment-archive'] : 'default';
+	$hotel_location_field_required = !empty( tfopt( "required_location_hotel_search" )) ?  tfopt( "required_location_hotel_search" ) : 0;
 
 	if ( ( is_post_type_archive( 'tf_hotel' ) && $tf_hotel_arc_selected_template == "design-1" ) || ( is_post_type_archive( 'tf_tours' ) && $tf_tour_arc_selected_template == "design-1" ) || ( $post_type == 'tf_hotel' && $tf_hotel_arc_selected_template == "design-1" ) || ( $post_type == 'tf_tours' && $tf_tour_arc_selected_template == "design-1" ) ) {
 		?>
         <div class="tf-box-wrapper tf-box tf-mrbottom-30">
             <form action="<?php echo tf_booking_search_action(); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking">
-                <div class="tf-field-group tf-destination-box">
+                <div class="tf-field-group tf-destination-box" <?php echo $post_type == 'tf_hotel' && tfopt( "hide_hotel_location_search" ) == 1 && tfopt( "required_location_hotel_search" ) != 1 ? 'style="display:none"' : ''?>>
                     <i class="fa-solid fa-location-dot"></i>
-                    <input type="text" required="" id="<?php echo $place; ?>" class="tf-field" placeholder="<?php echo $place_text; ?>" value="<?php echo ! empty( $taxonomy_name ) ? $taxonomy_name : ''; ?>">
+
+					<?php if(is_post_type_archive("tf_hotel" )) { ?>
+						   <input type="text" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo $place; ?>" class="tf-field" placeholder="<?php echo $place_text; ?>" value="<?php echo ! empty( $taxonomy_name ) ? $taxonomy_name : ''; ?>">
+					<?php } else { ?>
+						<input type="text" required="" id="<?php echo $place; ?>" class="tf-field" placeholder="<?php echo $place_text; ?>" value="<?php echo ! empty( $taxonomy_name ) ? $taxonomy_name : ''; ?>">
+					<?php } ?>
                     <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? $taxonomy_slug : ''; ?>"/>
+
                 </div>
                 <div class="tf-field-group tf-mt-8 tf_acrselection">
                     <div class="tf-field tf-flex">
@@ -1259,14 +1284,17 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 	}
 	elseif ( ( is_post_type_archive( 'tf_hotel' ) && $tf_hotel_arc_selected_template == "design-2" ) || ( is_post_type_archive( 'tf_tours' ) && $tf_tour_arc_selected_template == "design-2" ) || ( is_post_type_archive( 'tf_apartment' ) && $tf_apartment_arc_selected_template == "design-1" ) || ( $post_type == 'tf_hotel' && $tf_hotel_arc_selected_template == "design-2" ) || ( $post_type == 'tf_tours' && $tf_tour_arc_selected_template == "design-2" ) || ( $post_type == 'tf_apartment' && $tf_apartment_arc_selected_template == "design-1" ) ) { ?>
 		<div class="tf-booking-form-fields <?php echo $post_type == 'tf_tours' ? esc_attr( 'tf-tour-archive-block' ) : ''; ?>">
-			<div class="tf-booking-form-location">
+			<div class="tf-booking-form-location" <?php echo $post_type == 'tf_hotel' && tfopt( "hide_hotel_location_search" ) == 1 && tfopt( "required_location_hotel_search" ) != 1 ? 'style="display:none"' : ''?>>
 				<span class="tf-booking-form-title"><?php _e("Location", "tourfic"); ?></span>
 				<label for="tf-search-location" class="tf-booking-location-wrap">
 					<svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
 					<path d="M8.5 13.9317L11.7998 10.6318C13.6223 8.80943 13.6223 5.85464 11.7998 4.0322C9.9774 2.20975 7.02261 2.20975 5.20017 4.0322C3.37772 5.85464 3.37772 8.80943 5.20017 10.6318L8.5 13.9317ZM8.5 15.8173L4.25736 11.5747C1.91421 9.2315 1.91421 5.43254 4.25736 3.08939C6.60051 0.746245 10.3995 0.746245 12.7427 3.08939C15.0858 5.43254 15.0858 9.2315 12.7427 11.5747L8.5 15.8173ZM8.5 8.66536C9.2364 8.66536 9.83333 8.06843 9.83333 7.33203C9.83333 6.59565 9.2364 5.9987 8.5 5.9987C7.7636 5.9987 7.16667 6.59565 7.16667 7.33203C7.16667 8.06843 7.7636 8.66536 8.5 8.66536ZM8.5 9.9987C7.02724 9.9987 5.83333 8.80476 5.83333 7.33203C5.83333 5.85927 7.02724 4.66536 8.5 4.66536C9.97273 4.66536 11.1667 5.85927 11.1667 7.33203C11.1667 8.80476 9.97273 9.9987 8.5 9.9987Z" fill="#595349"/>
 					</svg>
-
+					<?php if(is_post_type_archive("tf_hotel" )) { ?>
+						<input type="text" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo $place; ?>" class="tf-field" placeholder="<?php echo $place_text; ?>" value="<?php echo ! empty( $taxonomy_name ) ? $taxonomy_name : ''; ?>">
+					<?php } else { ?>
 					<input type="text" required="" id="<?php echo $place; ?>" class="tf-field" placeholder="<?php echo $place_text; ?>" value="<?php echo ! empty( $taxonomy_name ) ? $taxonomy_name : ''; ?>">
+					<?php } ?>
                     <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? $taxonomy_slug : ''; ?>"/>
 				</label>
 			</div>
@@ -1580,9 +1608,15 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 
             <div class="tf_form-row">
                 <label class="tf_label-row">
-                    <div class="tf_form-inner">
+                    <div class="tf_form-inner" <?php echo $post_type == 'tf_hotel' && tfopt( "hide_hotel_location_search" ) == 1 && tfopt( "required_location_hotel_search" ) != 1 ? 'style="display:none"' : ''?>>
                         <i class="fas fa-map-marker-alt"></i>
-                        <input type="text" required="" id="<?php echo $place; ?>" class="" placeholder="<?php echo $place_text; ?>" value="<?php echo ! empty( $taxonomy_name ) ? $taxonomy_name : ''; ?>">
+
+						<?php if(is_post_type_archive("tf_hotel" )) { ?>
+							<input type="text" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo $place; ?>" class="" placeholder="<?php echo $place_text; ?>" value="<?php echo ! empty( $taxonomy_name ) ? $taxonomy_name : ''; ?>">
+						<?php } else { ?>
+							<input type="text" required="" id="<?php echo $place; ?>" class="" placeholder="<?php echo $place_text; ?>" value="<?php echo ! empty( $taxonomy_name ) ? $taxonomy_name : ''; ?>">
+						<?php } ?>
+
                         <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? $taxonomy_slug : ''; ?>"/>
                     </div>
                 </label>
@@ -2537,7 +2571,7 @@ function tf_migrate_option_data() {
 		if ( isset( $old_setting_option['itinerary-builder-setings']['expert_logo'] ) && is_array( $old_setting_option['itinerary-builder-setings']['expert_logo'] ) ) {
 			$old_setting_option['itinerary-builder-setings']['expert_logo'] = $old_setting_option['itinerary-builder-setings']['expert_logo']['url'];
 		}
-		update_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings', $old_setting_option );
+		update_option( 'tf_settings', $old_setting_option );
 
 		wp_cache_flush();
 		flush_rewrite_rules( true );
@@ -2555,7 +2589,7 @@ function tf_migrate_option_data() {
 			$tf_settings['license-email'] = $old_setting_option['license-email'];
 			update_option( 'tf_license_settings', $tf_settings ) || add_option( 'tf_license_settings', $tf_settings );
 		} else {
-			$tf_setting_option            = get_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings' );
+			$tf_setting_option            = !empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
 			$tf_settings['license-key']   = ! empty( $tf_setting_option['license-key'] ) ? $tf_setting_option['license-key'] : '';
 			$tf_settings['license-email'] = ! empty( $tf_setting_option['license-email'] ) ? $tf_setting_option['license-email'] : '';
 			update_option( 'tf_license_settings', $tf_settings ) || add_option( 'tf_license_settings', $tf_settings );
@@ -2841,7 +2875,7 @@ if ( ! function_exists( 'tourfic_template_settings' ) ) {
 add_action( 'admin_init', 'tf_update_email_template_default_content' );
 function tf_update_email_template_default_content() {
 
-	$tf_settings = get_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings' );
+	$tf_settings = !empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
 	if ( isset( $tf_settings['email-settings'] ) ) {
 		$tf_settings = $tf_settings['email-settings'];
 
@@ -2994,7 +3028,7 @@ function tf_permalink_settings_migration() {
 
 	if ( empty( get_option( 'tf_permalink_settings_migration' ) ) ) {
 
-		$options = get_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings' );
+		$options = !empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
 		$hotel_permalink_slug = ! empty( get_option( 'hotel_slug' ) ) ? get_option( 'hotel_slug' ) : '' ;
 		$tour_permalink_slug = ! empty( get_option( 'tour_slug' ) ) ? get_option( 'tour_slug' ) : '' ;
 		$apt_permalink_slug = ! empty( get_option( 'apartment_slug' ) ) ? get_option( 'apartment_slug' ) : '' ;
@@ -3011,7 +3045,7 @@ function tf_permalink_settings_migration() {
 			$options["apartment-permalink-setting"] = $apt_permalink_slug;
 		}
 		
-		update_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings', $options );
+		update_option( 'tf_settings', $options );
 		wp_cache_flush();
 		flush_rewrite_rules( true );
 		update_option( 'tf_permalink_settings_migration', 1 );
@@ -3030,7 +3064,7 @@ function tf_template_3_migrate_data() {
 	// Hotel & Tour
 	if ( empty( get_option( 'tf_template_3_migrate_data' ) ) ) {
 
-		$options = get_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings' );
+		$options = !empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
 		if( !empty($options["tf-template"]) ){
 			$options["tf-template"]["single-hotel-layout-part-1"] = array(
 				array(
@@ -3119,7 +3153,7 @@ function tf_template_3_migrate_data() {
 			);
 		}
 
-		update_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings', $options );
+		update_option( 'tf_settings', $options );
 		wp_cache_flush();
 		flush_rewrite_rules( true );
 		update_option( 'tf_template_3_migrate_data', 1 );
@@ -3129,7 +3163,7 @@ function tf_template_3_migrate_data() {
 	// Apartment
 	if ( empty( get_option( 'tf_template_2_apartment_migrate_data' ) ) ) {
 
-		$options = get_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings' );
+		$options = !empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
 		if( !empty($options["tf-template"]) ){
 			$options["tf-template"]["single-aprtment-layout-part-1"] = array(
 				array(
@@ -3182,7 +3216,7 @@ function tf_template_3_migrate_data() {
 			);
 		}
 
-		update_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings', $options );
+		update_option( 'tf_settings', $options );
 		wp_cache_flush();
 		flush_rewrite_rules( true );
 		update_option( 'tf_template_2_apartment_migrate_data', 1 );

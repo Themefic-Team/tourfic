@@ -90,17 +90,6 @@ function tf_tours_default_labels() {
 		'plural'   => __( 'Tours', 'tourfic' ),
 	);
 
-	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-		$tf_tour_single_name = ! empty(tfopt( 'tf-tour-post-rename-singular' )) ? tfopt( 'tf-tour-post-rename-singular' ) : __("Tour", "tourfic");
-		$tf_tour_plural_name = ! empty(tfopt( 'tf-tour-post-rename-plural' )) ? tfopt( 'tf-tour-post-rename-plural' ) : __('Tours', 'tourfic');
-
-		$default_tour = array(
-			'singular' => $tf_tour_single_name,
-			'plural'   => $tf_tour_plural_name
-		);
-
-	}
-
 	return apply_filters( 'tf_tours_name', $default_tour );
 }
 
@@ -717,7 +706,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
                                 <span class="tf-label"><?php _e( 'Destination', 'tourfic' ); ?>:</span>
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="fas fa-search"></i>
-                                    <?php if ( empty($advanced) && "enabled"!=$advanced ){ ?>
+                                    <?php if ( (empty($advanced) || !empty($advanced)) && "enabled"!=$advanced ){ ?>
                                     <input type="text" name="place-name" required id="tf-destination" class="" placeholder="<?php _e( 'Enter Destination', 'tourfic' ); ?>" value="">
                                     <input type="hidden" name="place" id="tf-search-tour" class="tf-place-input"/>
 									<?php } 

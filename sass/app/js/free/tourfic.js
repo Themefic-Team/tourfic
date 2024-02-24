@@ -940,10 +940,12 @@
             let thisEml = $(this);
             let thisVal = thisEml.val();
 
+            console.log( thisEml)
+
             if (thisVal > 1) {
-                thisEml.closest('.tf_selectperson-wrap').find('.adults-text').text(thisVal + " " + tf_params.adult);
+                $('.tf_selectperson-wrap').find('.adults-text').text(thisVal + " " + tf_params.adult + 's');
             } else {
-                thisEml.closest('.tf_selectperson-wrap').find('.adults-text').text(thisVal + " " + tf_params.adult);
+                $('.tf_selectperson-wrap').find('.adults-text').text(thisVal + " " + tf_params.adult);
             }
 
         });
@@ -954,9 +956,9 @@
             let thisVal = thisEml.val();
 
             if (thisVal > 1) {
-                thisEml.closest('.tf_selectperson-wrap').find('.child-text').text(thisVal + " " + tf_params.children);
+                $('.tf_selectperson-wrap').find('.child-text').text(thisVal + " " + tf_params.children);
             } else {
-                thisEml.closest('.tf_selectperson-wrap').find('.child-text').text(thisVal + " " + tf_params.children);
+                $('.tf_selectperson-wrap').find('.child-text').text(thisVal + " " + tf_params.children);
             }
 
         });
@@ -967,9 +969,9 @@
             let thisVal = thisEml.val();
 
             if (thisVal > 1) {
-                thisEml.closest('.tf_selectperson-wrap').find('.infant-text').text(thisVal + " " + tf_params.infant);
+                $('.tf_selectperson-wrap').find('.infant-text').text(thisVal + " " + tf_params.infant);
             } else {
-                thisEml.closest('.tf_selectperson-wrap').find('.infant-text').text(thisVal + " " + tf_params.infant);
+                $('.tf_selectperson-wrap').find('.infant-text').text(thisVal + " " + tf_params.infant);
             }
 
         });
