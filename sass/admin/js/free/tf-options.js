@@ -37,7 +37,8 @@
                 }).parent().addClass("current");
             }
 
-            tfApartmentCalendar()
+            tfApartmentCalendar();
+            // tfSingleRoomCalendar()
         });
 
         /*

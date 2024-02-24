@@ -325,7 +325,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 
 			//Js
 			if ( in_array( $screen, $tf_options_screens ) || in_array( $post_type, $tf_options_post_type ) ) {
-				
+
 				//date format
 				$date_format_change  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
 				wp_enqueue_script( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js', array( 'jquery' ), TOURFIC, true );
@@ -379,7 +379,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 
 			wp_enqueue_style( 'wp-color-picker' );
 			wp_enqueue_script( 'wp-color-picker' );
-
+			$tf_current_post_type = !empty($post_type) ? $post_type : '';
 			$tf_google_map = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "false";
 			wp_localize_script( 'tf-admin', 'tf_options', array(
 				'ajax_url'             => admin_url( 'admin-ajax.php' ),
@@ -393,7 +393,8 @@ if ( ! class_exists( 'TF_Options' ) ) {
 					'imported'       => __( 'Imported successfully!', 'tourfic' ),
 					'import_confirm' => __( 'Are you sure you want to import this data?', 'tourfic' ),
 					'import_empty'   => __( 'Import Data cannot be empty!', 'tourfic' ),
-				)
+				),
+				'tf_current_post' => $tf_current_post_type
 			) );
 		}
 
