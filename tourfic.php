@@ -140,17 +140,17 @@ final class Tourfic {
 	 */
 	public function includes() {
 		if ( ! class_exists( 'Appsero\Client' ) ) {
-			require_once( TF_INC_PATH . 'app/src/Client.php' );
+			require_once( TF_INC_PATH . 'Appsero/src/Client.php' );
 		}
 		if ( ! defined( 'TOURFIC_PRO_SCRIPT' ) ) {
 			//require_once TF_INC_PATH . 'style-script.php';
 		}
 		// Classes
-		if ( file_exists( TF_INC_PATH . 'classes.php' ) ) {
-			require_once TF_INC_PATH . 'classes.php';
-		} else {
-			tf_file_missing( TF_INC_PATH . 'classes.php' );
-		}
+//		if ( file_exists( TF_INC_PATH . 'classes.php' ) ) {
+//			require_once TF_INC_PATH . 'classes.php';
+//		} else {
+//			tf_file_missing( TF_INC_PATH . 'classes.php' );
+//		}
 
 		if ( file_exists( TF_INC_PATH . 'functions.php' ) ) {
 			require_once TF_INC_PATH . 'functions.php';
