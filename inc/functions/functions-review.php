@@ -27,7 +27,7 @@ function tf_review_script() {
 		 *
 		 * v1.19.5
 		 */
-		wp_enqueue_script( 'jquery-validate', '//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js', array( 'jquery' ), TOURFIC, true );
+		wp_enqueue_script( 'jquery-validate', '//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js', array( 'jquery' ), TF_VERSION, true );
 
 		$data = '
         

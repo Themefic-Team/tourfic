@@ -705,7 +705,7 @@ function tourfic_admin_menu_order_change ( $menu_order ) {
 
 		foreach ( $menu_order as $index => $item ) {
 
-			if ( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings' === $item ) {
+			if ( 'tf_settings' === $item ) {
 				$tourfic_menu_order[] = 'separator-tourfic';
 				$tourfic_menu_order[] = $item;
 				$tourfic_menu_order[] = 'edit.php?post_type=tf_tours';

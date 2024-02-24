@@ -46,7 +46,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		public function tf_wizard_menu() {
 
 			if ( current_user_can( 'manage_options' ) ) {
-                $tf_settings_parentmenu = !empty($_GET['page']) && "tf-setup-wizard"==$_GET['page'] ? 'TOURFIC\inc\Core\tf-options\classes\TF_Settings' : '';
+                $tf_settings_parentmenu = !empty($_GET['page']) && "tf-setup-wizard"==$_GET['page'] ? 'tf_settings' : '';
 				add_submenu_page(
 					$tf_settings_parentmenu,
 					esc_html__( 'TF Setup Wizard', 'tourfic' ),
@@ -950,7 +950,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 				return;
 			}
 
-			$tf_settings            = get_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings' );
+			$tf_settings            = get_option( 'tf_settings' );
 			$tf_services            = array( 'hotel', 'tour', 'apartment' );
 			$services               = isset( $_POST['tf-services'] ) ? $_POST['tf-services'] : [];
 			$search_page            = isset( $_POST['tf-search-result-page'] ) ? $_POST['tf-search-result-page'] : '';
@@ -1045,7 +1045,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 				$tf_settings['tf-template']['apartment-archive'] = ! empty( $tf_apartment_archive ) ? $tf_apartment_archive : '';
 			}
 
-			update_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings', $tf_settings );
+			update_option( 'tf_settings', $tf_settings );
 			$response = [
 				'success'      => true,
 				'redirect_url' => esc_url( admin_url( 'admin.php?page=tf_settings' ) )
