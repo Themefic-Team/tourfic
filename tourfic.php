@@ -105,24 +105,6 @@ function tf_file_missing( $files = '' ) {
 
 add_action( 'admin_notices', 'tf_file_missing' );
 
-
-/**
- * Load the text domain to make the plugin's strings available for localisation.
- *
- * @since 1.0.0
- */
-function tf_load_textdomain() {
-
-	$locale = apply_filters( 'plugin_locale', get_locale(), 'tourfic' );
-	// Allow upgrade safe, site specific language files in /wp-content/languages/tourfic/
-	load_textdomain( 'tourfic', WP_LANG_DIR . '/tourfic/tourfic-' . $locale . '.mo' );
-	// Then check for a language file in /wp-content/plugins/tourfic/lang/ (this will be overriden by any file already loaded)
-	load_plugin_textdomain( 'tourfic', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
-
-}
-
-add_action( 'plugins_loaded', 'tf_load_textdomain' );
-
 /**
  * Plugins Loaded Actions
  *

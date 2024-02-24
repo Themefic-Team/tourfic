@@ -335,18 +335,6 @@ TF_Settings::option( 'tf_settings', array(
 									'default'  => 'design-1',
 								),
 								array(
-									'id'      => 'hotel_design_1_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Jost" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'hotel-archive', '==', 'design-1' ),
-								),
-								array(
-									'id'      => 'hotel_design_2_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'hotel-archive', '==', 'design-2' ),
-								),
-								array(
 									'id'      => 'hotel_archive_design_2_bannar',
 									'type'    => 'image',
 									'label'    => __( 'Archive & Search Result Banner Image', 'tourfic' ),
@@ -362,7 +350,20 @@ TF_Settings::option( 'tf_settings', array(
 										'list' => __( 'List', 'tourfic' ),
 										'grid' => __( 'Grid', 'tourfic' ),
 									),
-									'default'    => 'List'
+									'default'    => 'List',
+									'dependency' => array( 'hotel-archive', '!=', 'design-2' ),
+								),
+								array(
+									'id'      => 'hotel_design_1_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Jost" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'hotel-archive', '==', 'design-1' ),
+								),
+								array(
+									'id'      => 'hotel_design_2_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'hotel-archive', '==', 'design-2' ),
 								),
 								array(
 									'id'      => 'hotel_archive_notice',
@@ -651,18 +652,6 @@ TF_Settings::option( 'tf_settings', array(
 									'default'  => 'design-1',
 								),
 								array(
-									'id'      => 'tour_design_1_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Jost" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'tour-archive', '==', 'design-1' ),
-								),
-								array(
-									'id'      => 'tour_design_2_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'tour-archive', '==', 'design-2' ),
-								),
-								array(
 									'id'      => 'tour_archive_design_2_bannar',
 									'type'    => 'image',
 									'label'    => __( 'Archive & Search Result Banner Image', 'tourfic' ),
@@ -679,6 +668,19 @@ TF_Settings::option( 'tf_settings', array(
 										'grid' => __( 'Grid', 'tourfic' ),
 									),
 									'default'    => 'List',
+									'dependency' => array( 'tour-archive', '!=', 'design-2' ),
+								),
+								array(
+									'id'      => 'tour_design_1_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Jost" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'tour-archive', '==', 'design-1' ),
+								),
+								array(
+									'id'      => 'tour_design_2_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'tour-archive', '==', 'design-2' ),
 								),
 								array(
 									'id'      => 'tour_archive_notice',
@@ -883,6 +885,7 @@ TF_Settings::option( 'tf_settings', array(
 										'grid' => __( 'Grid', 'tourfic' ),
 									),
 									'default'    => 'List',
+									'dependency' => array( 'apartment-archive', '!=', 'design-1' ),
 								),
 								array(
 									'id'      => 'aprtment_design_1_fonts_notice',
@@ -1784,6 +1787,24 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'  => __( 'Turn on this setting to hide the child option from the search form.', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'        => 'optional_hotel_search_field',
+					'type'      => 'switch',
+					'label'     => __( ' Location Required in Hotel Search', 'tourfic' ),
+					'subtitle'  => __( 'Enable this setting to make the location field optional for the search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => true,
+				),
+				array(
+					'id'        => 'hide_hotel_location_search',
+					'type'      => 'switch',
+					'label'     => __( 'Hide Location in Hotel Search', 'tourfic' ),
+					'subtitle'  => __( 'Enable this setting to hide the location option from the search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'dependency' => array( "optional_hotel_search_field", "==", "false")
 				),
 				array(
 					'id'       => 'tour_search_heading',
@@ -4131,81 +4152,6 @@ TF_Settings::option( 'tf_settings', array(
 			'title'  => __( 'Pro Options', 'tourfic' ),
 			'icon'   => 'fa-solid fa-atom',
 			'fields' => array(),
-		),
-		// Post Type Rename Setting
-		'tf_post_type_rename'    => array(
-			'title'  => __( 'Post Type Rename', 'tourfic' ),
-			'parent' => 'pro_options',
-			'icon'   => 'fa fa-cog',
-			'fields' => array(
-				array(
-					'id'      => 'post-type-rename-heading',
-					'type'  => 'heading',
-					'label' => __( 'Post Type Rename Settings', 'tourfic' ),
-					'subtitle'   => __( 'From this settings, you can change your post type names.', 'tourfic' ),
-					'is_pro' => true
-				),
-				array(
-					'id'       => '',
-					'type'     => 'text',
-					'label'    => __( 'Tour Post Type Singular Name', 'tourfic' ),
-					'subtitle' => __( 'Enter a name to rename your tour post type.', 'tourfic' ),
-					'default' => __("tour", "tourfic"),
-					'placeholder' => __("tour", "tourfic"),
-					'field_width' => 46,
-					'is_pro' => true
-				),
-				array(
-					'id'       => '',
-					'type'     => 'text',
-					'label'    => __( 'Tour Post Type Plural Name', 'tourfic' ),
-					'subtitle' => __( 'Enter a name to rename your tour post type.', 'tourfic' ),
-					'default' => __("tours", "tourfic"),
-					'placeholder' => __("tours", "tourfic"),
-					'field_width' => 46,
-					'is_pro' => true
-				),
-				array(
-					'id'       => '',
-					'type'     => 'text',
-					'label'    => __( 'Hotel Post Type Singular Name', 'tourfic' ),
-					'subtitle' => __( 'Enter a name to rename your hotel post type.', 'tourfic' ),
-					'default' => __("hotel", "tourfic"),
-					'placeholder' => __("hotel", "tourfic"),
-					'field_width' => 46,
-					'is_pro' => true
-				),
-				array(
-					'id'       => '',
-					'type'     => 'text',
-					'label'    => __( 'Hotel Post Type Plural Name', 'tourfic' ),
-					'subtitle' => __( 'Enter a name to rename your hotel post type.', 'tourfic' ),
-					'default' => __("hotels", "tourfic"),
-					'placeholder' => __("hotels", "tourfic"),
-					'field_width' => 46,
-					'is_pro' => true
-				),
-				array(
-					'id'       => '',
-					'type'     => 'text',
-					'label'    => __( 'Apartment Post Type Singular Name', 'tourfic' ),
-					'subtitle' => __( 'Enter a name to rename your apartment post type.', 'tourfic' ),
-					'default' => __("apartment", "tourfic"),
-					'placeholder' => __("apartment", "tourfic"),
-					'field_width' => 46,
-					'is_pro' => true
-				),
-				array(
-					'id'       => '',
-					'type'     => 'text',
-					'label'    => __( 'Apartment Post Type Plural Name', 'tourfic' ),
-					'subtitle' => __( 'Enter a name to rename your apartment post type.', 'tourfic' ),
-					'default' => __("apartments", "tourfic"),
-					'placeholder' => __("apartments", "tourfic"),
-					'field_width' => 46,
-					'is_pro' => true
-				),
-			),
 		),
 		// Itinerary Settings
 		'tour_itinerary-pro'        => array(

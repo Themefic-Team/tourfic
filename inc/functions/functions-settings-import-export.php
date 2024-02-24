@@ -272,7 +272,7 @@ function tf_import_callback(){
         }
     }
 
-    update_option( 'tf_settings', $imported_data );
+    update_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings', $imported_data );
     wp_send_json_success($imported_data);
     die();
 }

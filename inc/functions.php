@@ -1,5 +1,7 @@
 <?php
 // don't load directly
+use TOURFIC\inc\Core\emails\TF_Handle_Emails;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -2535,7 +2537,7 @@ function tf_migrate_option_data() {
 		if ( isset( $old_setting_option['itinerary-builder-setings']['expert_logo'] ) && is_array( $old_setting_option['itinerary-builder-setings']['expert_logo'] ) ) {
 			$old_setting_option['itinerary-builder-setings']['expert_logo'] = $old_setting_option['itinerary-builder-setings']['expert_logo']['url'];
 		}
-		update_option( 'tf_settings', $old_setting_option );
+		update_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings', $old_setting_option );
 
 		wp_cache_flush();
 		flush_rewrite_rules( true );
@@ -2553,7 +2555,7 @@ function tf_migrate_option_data() {
 			$tf_settings['license-email'] = $old_setting_option['license-email'];
 			update_option( 'tf_license_settings', $tf_settings ) || add_option( 'tf_license_settings', $tf_settings );
 		} else {
-			$tf_setting_option            = get_option( 'tf_settings' );
+			$tf_setting_option            = get_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings' );
 			$tf_settings['license-key']   = ! empty( $tf_setting_option['license-key'] ) ? $tf_setting_option['license-key'] : '';
 			$tf_settings['license-email'] = ! empty( $tf_setting_option['license-email'] ) ? $tf_setting_option['license-email'] : '';
 			update_option( 'tf_license_settings', $tf_settings ) || add_option( 'tf_license_settings', $tf_settings );
@@ -2839,7 +2841,7 @@ if ( ! function_exists( 'tourfic_template_settings' ) ) {
 add_action( 'admin_init', 'tf_update_email_template_default_content' );
 function tf_update_email_template_default_content() {
 
-	$tf_settings = get_option( 'tf_settings' );
+	$tf_settings = get_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings' );
 	if ( isset( $tf_settings['email-settings'] ) ) {
 		$tf_settings = $tf_settings['email-settings'];
 
@@ -2992,7 +2994,7 @@ function tf_permalink_settings_migration() {
 
 	if ( empty( get_option( 'tf_permalink_settings_migration' ) ) ) {
 
-		$options = get_option( 'tf_settings' );
+		$options = get_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings' );
 		$hotel_permalink_slug = ! empty( get_option( 'hotel_slug' ) ) ? get_option( 'hotel_slug' ) : '' ;
 		$tour_permalink_slug = ! empty( get_option( 'tour_slug' ) ) ? get_option( 'tour_slug' ) : '' ;
 		$apt_permalink_slug = ! empty( get_option( 'apartment_slug' ) ) ? get_option( 'apartment_slug' ) : '' ;
@@ -3009,7 +3011,7 @@ function tf_permalink_settings_migration() {
 			$options["apartment-permalink-setting"] = $apt_permalink_slug;
 		}
 		
-		update_option( 'tf_settings', $options );
+		update_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings', $options );
 		wp_cache_flush();
 		flush_rewrite_rules( true );
 		update_option( 'tf_permalink_settings_migration', 1 );
@@ -3028,7 +3030,7 @@ function tf_template_3_migrate_data() {
 	// Hotel & Tour
 	if ( empty( get_option( 'tf_template_3_migrate_data' ) ) ) {
 
-		$options = get_option( 'tf_settings' );
+		$options = get_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings' );
 		if( !empty($options["tf-template"]) ){
 			$options["tf-template"]["single-hotel-layout-part-1"] = array(
 				array(
@@ -3117,7 +3119,7 @@ function tf_template_3_migrate_data() {
 			);
 		}
 
-		update_option( 'tf_settings', $options );
+		update_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings', $options );
 		wp_cache_flush();
 		flush_rewrite_rules( true );
 		update_option( 'tf_template_3_migrate_data', 1 );
@@ -3127,7 +3129,7 @@ function tf_template_3_migrate_data() {
 	// Apartment
 	if ( empty( get_option( 'tf_template_2_apartment_migrate_data' ) ) ) {
 
-		$options = get_option( 'tf_settings' );
+		$options = get_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings' );
 		if( !empty($options["tf-template"]) ){
 			$options["tf-template"]["single-aprtment-layout-part-1"] = array(
 				array(
@@ -3180,7 +3182,7 @@ function tf_template_3_migrate_data() {
 			);
 		}
 
-		update_option( 'tf_settings', $options );
+		update_option( 'TOURFIC\inc\Core\tf-options\classes\TF_Settings', $options );
 		wp_cache_flush();
 		flush_rewrite_rules( true );
 		update_option( 'tf_template_2_apartment_migrate_data', 1 );
