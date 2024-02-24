@@ -106,7 +106,7 @@ if( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ) 
     <!-- Loader Image -->
     <div id="tf_ajax_searchresult_loader">
         <div id="tf-searchresult-loader-img">
-            <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+            <img src="<?php echo TF_APP_ASSETS_URL ?>images/loader.gif" alt="">
         </div>
     </div>
     <div class="tf-search-results-list tf-mt-30">
@@ -155,7 +155,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
         <!-- Loader Image -->
         <div id="tour_room_details_loader">
             <div id="tour-room-details-loader-img">
-                <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+                <img src="<?php echo TF_APP_ASSETS_URL ?>images/loader.gif" alt="">
             </div>
         </div>
         

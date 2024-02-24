@@ -237,7 +237,7 @@
                                     <div class="tf-apartment-room-item">
                                         <div class="tf-apartment-room-item-thumb">
                                             <a href="#" class="tf-apt-room-qv" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">
-                                                <img src="<?php echo !empty($room['thumbnail']) ? esc_url( $room['thumbnail'] ) : TF_ASSETS_APP_URL . "images/feature-default.jpg" ?>" alt="room-thumbnail">
+                                                <img src="<?php echo !empty($room['thumbnail']) ? esc_url( $room['thumbnail'] ) : TF_APP_ASSETS_URL . "images/feature-default.jpg" ?>" alt="room-thumbnail">
                                             </a>
                                         </div>
                                         <div class="tf-apartment-room-item-content">
@@ -257,7 +257,7 @@
                             <!-- Loader Image -->
                             <div id="tour_room_details_loader">
                                 <div id="tour-room-details-loader-img">
-                                    <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+                                    <img src="<?php echo TF_APP_ASSETS_URL ?>images/loader.gif" alt="">
                                 </div>
                             </div>
                         </div>

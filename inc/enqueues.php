@@ -307,7 +307,7 @@ if ( ! function_exists( 'tf_enqueue_scripts' ) ) {
 		 * Custom
 		 */
 
-		wp_enqueue_script( 'tourfic', TF_ASSETS_APP_URL . 'js/tourfic-scripts' . $min_js . '.js', '', TF_VERSION, true );
+		wp_enqueue_script( 'tourfic', TF_APP_ASSETS_URL . 'js/tourfic-scripts' . $min_js . '.js', '', TF_VERSION, true );
 		wp_localize_script( 'tourfic', 'tf_params',
 			array(
 				'nonce'                  => wp_create_nonce( 'tf_ajax_nonce' ),

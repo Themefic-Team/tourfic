@@ -16,6 +16,7 @@
 
 // don't load directly
 defined( 'ABSPATH' ) || exit;
+
 final class Tourfic {
 
 	/**
@@ -71,8 +72,19 @@ final class Tourfic {
 	public function __construct() {
 		$this->define_constants();
 
+        //Check if WooCommerce is active, and if it isn't, disable the plugin.
+		if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
+			add_action( 'admin_notices', array( $this, 'tf_is_woo' ) );
+
+			//Ajax install & activate WooCommerce
+			add_action( "wp_ajax_tf_ajax_install_plugin", "wp_ajax_install_plugin" );
+
+			return;
+		}
+
 		$this->init_hooks();
 		$this->includes();
+        $this->appsero_init_tracker_tourfic();
 	}
 
 	/**
@@ -88,8 +100,8 @@ final class Tourfic {
 		define( 'TF_ASSETS_URL', TF_URL . 'assets/' );
 		define( 'TF_APP_ASSETS_URL', TF_ASSETS_URL . 'app/' );
 		define( 'TF_ADMIN_ASSETS_URL', TF_ASSETS_URL . 'admin/' );
-		define( 'TF_PATH', plugin_dir_path( __FILE__ ) );
-		define( 'TF_ADMIN_PATH', TF_PATH . 'admin/' );
+		define( 'TF_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
+		define( 'TF_ADMIN_PATH', TF_PATH . 'inc/Admin/' );
 		define( 'TF_INC_PATH', TF_PATH . 'inc/' );
 		define( 'TF_TEMPLATE_PATH', TF_PATH . 'templates/' );
 		define( 'TF_TEMPLATE_PART_PATH', TF_TEMPLATE_PATH . 'template-parts/' );
@@ -102,10 +114,15 @@ final class Tourfic {
 	 * Hook into actions and filters.
 	 */
 	private function init_hooks() {
+
 		// plugin loaded action hook.
 		add_action( 'plugins_loaded', array( $this, 'init_plugin' ) );
 		// Load the text domain for translation.
 		add_action( 'plugins_loaded', array( $this, 'tf_load_textdomain' ) );
+		//add_action( 'plugins_loaded', array( $this, 'tf_plugin_loaded_action' ) );
+
+		//Compatibility with custom order tables for the WooCommerce plugin
+		add_action( 'before_woocommerce_init', array($this, 'tf_woocommerce_compatibility') );
 	}
 
 	/**
@@ -115,7 +132,7 @@ final class Tourfic {
 		// autoloader
 		require_once TF_PATH . 'autoloader.php';
 
-		\TOURFIC\Classes\Core::instance();
+		\Tourfic\Classes\Base::instance();
 	}
 
 	/**
@@ -126,7 +143,31 @@ final class Tourfic {
 			require_once( TF_INC_PATH . 'app/src/Client.php' );
 		}
 		if ( ! defined( 'TOURFIC_PRO_SCRIPT' ) ) {
-			require_once TF_INC_PATH . 'style-script.php';
+			//require_once TF_INC_PATH . 'style-script.php';
+		}
+		// Classes
+		if ( file_exists( TF_INC_PATH . 'classes.php' ) ) {
+			require_once TF_INC_PATH . 'classes.php';
+		} else {
+			tf_file_missing( TF_INC_PATH . 'classes.php' );
+		}
+
+		if ( file_exists( TF_INC_PATH . 'functions.php' ) ) {
+			require_once TF_INC_PATH . 'functions.php';
+		} else {
+			tf_file_missing( TF_INC_PATH . 'functions.php' );
+		}
+
+		if ( file_exists( TF_ADMIN_PATH . 'inc/functions.php' ) ) {
+			require_once TF_ADMIN_PATH . 'inc/functions.php';
+		} else {
+			tf_file_missing( TF_ADMIN_PATH . 'inc/functions.php' );
+		}
+
+		if ( file_exists( TF_ADMIN_PATH . 'emails/TF_Handle_Emails.php' ) ) {
+			require_once TF_ADMIN_PATH . 'emails/TF_Handle_Emails.php';
+		} else {
+			tf_file_missing( TF_ADMIN_PATH . 'emails/TF_Handle_Emails.php' );
 		}
 	}
 
@@ -137,5 +178,118 @@ final class Tourfic {
 		// Then check for a language file in /wp-content/plugins/tourfic/lang/ (this will be overriden by any file already loaded)
 		load_plugin_textdomain( 'tourfic', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 	}
+
+	function tf_plugin_loaded_action() {
+//		if ( file_exists( TF_ADMIN_PATH . 'tf-options/TF_Options.php' ) ) {
+//			require_once TF_ADMIN_PATH . 'tf-options/TF_Options.php';
+//		} else {
+//			tf_file_missing( TF_ADMIN_PATH . 'tf-options/TF_Options.php' );
+//		}
+	}
+
+	/**
+	 * Called when WooCommerce is inactive to display an inactive notice.
+	 *
+	 * @since 1.0
+	 */
+	function tf_is_woo() {
+		if ( current_user_can( 'activate_plugins' ) ) {
+			if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) && ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) {
+				?>
+                <div id="message" class="error">
+                    <p><?php printf( __( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
+                    <p><a id="tf_wooinstall" class="install-now button" data-plugin-slug="woocommerce"><?php _e( 'Install Now', 'tourfic' ); ?></a></p>
+                </div>
+
+                <script>
+                    jQuery(document).on('click', '#tf_wooinstall', function (e) {
+                        e.preventDefault();
+                        var current = jQuery(this);
+                        var plugin_slug = current.attr("data-plugin-slug");
+                        var ajax_url = '<?php echo admin_url( 'admin-ajax.php' )?>';
+
+                        current.addClass('updating-message').text('Installing...');
+
+                        var data = {
+                            action: 'tf_ajax_install_plugin',
+                            _ajax_nonce: '<?php echo wp_create_nonce( 'updates' )?>',
+                            slug: plugin_slug,
+                        };
+
+                        jQuery.post(ajax_url, data, function (response) {
+                            current.removeClass('updating-message');
+                            current.addClass('updated-message').text('Installing...');
+                            current.attr("href", response.data.activateUrl);
+                        })
+                            .fail(function () {
+                                current.removeClass('updating-message').text('Install Failed');
+                            })
+                            .always(function () {
+                                current.removeClass('install-now updated-message').addClass('activate-now button-primary').text('Activating...');
+                                current.unbind(e);
+                                current[0].click();
+                            });
+                    });
+                </script>
+
+				<?php
+			} elseif ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) && file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) {
+				?>
+
+                <div id="message" class="error">
+                    <p><?php printf( __( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
+                    <p><a href="<?php echo get_admin_url(); ?>plugins.php?_wpnonce=<?php echo wp_create_nonce( 'activate-plugin_woocommerce/woocommerce.php' ); ?>&action=activate&plugin=woocommerce/woocommerce.php"
+                          class="button activate-now button-primary"><?php _e( 'Activate', 'tourfic' ); ?></a></p>
+                </div>
+				<?php
+			} elseif ( version_compare( get_option( 'woocommerce_db_version' ), '2.5', '<' ) ) {
+				?>
+
+                <div id="message" class="error">
+                    <p><?php printf( __( '%sTourfic is inactive.%s This plugin requires WooCommerce 2.5 or newer. Please %supdate WooCommerce to version 2.5 or newer%s', 'tourfic' ), '<strong>', '</strong>', '<a href="' . admin_url( 'plugins.php' ) . '">', '&nbsp;&raquo;</a>' ); ?></p>
+                </div>
+
+				<?php
+			}
+		}
+	}
+
+	/**
+	 * Initialize the plugin tracker
+	 *
+	 * @return void
+	 */
+	private function appsero_init_tracker_tourfic() {
+
+		if ( ! class_exists( 'Appsero\Client' ) ) {
+			require_once __DIR__ . '/app/src/Client.php';
+		}
+
+		$client = new Appsero\Client( '19134f1b-2838-4a45-ac05-772b7dfc9850', 'tourfic', __FILE__ );
+		// Admin notice text
+		$notice = sprintf( $client->__trans( 'Want to help make <strong>%1$s</strong> even more awesome? Allow %1$s to collect non-sensitive diagnostic data and usage information. I agree to get Important Product Updates & Discount related information on my email from %1$s (I can unsubscribe anytime).' ), $client->name );
+		$client->insights()->notice( $notice );
+		// Active insights
+		$client->insights()->init();
+
+	}
+
+	function tf_woocommerce_compatibility () {
+		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+		}
+	}
 }
+
+/**
+ * Global Admin Get Option
+ */
+if ( ! function_exists( 'tfopt' ) ) {
+	function tfopt( $option = '', $default = null ) {
+		$options = get_option( 'tf_settings' );
+
+		return ( isset( $options[ $option ] ) ) ? $options[ $option ] : $default;
+	}
+}
+
 Tourfic::instance();

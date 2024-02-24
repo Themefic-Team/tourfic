@@ -74,7 +74,7 @@
                 <!-- Loader Image -->
                 <div id="tf_ajax_searchresult_loader">
                     <div id="tf-searchresult-loader-img">
-                        <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+                        <img src="<?php echo TF_APP_ASSETS_URL ?>images/loader.gif" alt="">
                     </div>
                 </div>
                 <div class="tf-search-results-list tf-mt-30">

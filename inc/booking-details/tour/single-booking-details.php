@@ -353,7 +353,7 @@
                             $uri = $tour_ides;
                             $title = get_the_title( $tf_order_details->post_id );
                             
-                            $tf_qr_watermark = ! empty( tfopt( 'qr_background' ) ) ? tfopt( 'qr_background' ) : TF_ASSETS_APP_URL.'images/ticket-banner.png';
+                            $tf_qr_watermark = ! empty( tfopt( 'qr_background' ) ) ? tfopt( 'qr_background' ) : TF_APP_ASSETS_URL.'images/ticket-banner.png';
                             if(!empty($tour_ides)){
                         ?>
                         <div class="tf-single-box tf-voucher-preview">
@@ -800,6 +800,6 @@ if(!empty($tour_ides)){
 
 <div class="tf-preloader-box">
     <div class="tf-loader-preview">
-        <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="Loader">
+        <img src="<?php echo TF_APP_ASSETS_URL ?>images/loader.gif" alt="Loader">
     </div>
 </div>

@@ -776,7 +776,7 @@ function tf_room_availability_callback() {
     <div class="tf-room-table hotel-room-wrap">
     <div id="tour_room_details_loader">
         <div id="tour-room-details-loader-img">
-            <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+            <img src="<?php echo TF_APP_ASSETS_URL ?>images/loader.gif" alt="">
         </div>
     </div>
 	<?php 
@@ -2755,7 +2755,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 					if ( has_post_thumbnail() ) {
 						the_post_thumbnail( 'full' );
 					} else {
-						echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+						echo '<img src="' . TF_APP_ASSETS_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
 					}
 					?>
                 </a>
@@ -2865,7 +2865,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 					if ( has_post_thumbnail() ) {
 						the_post_thumbnail( 'full' );
 					} else {
-						echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+						echo '<img src="' . TF_APP_ASSETS_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
 					}
 					?>
 			</div>
@@ -3068,7 +3068,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 						if ( has_post_thumbnail() ) {
 							the_post_thumbnail( 'full' );
 						} else {
-							echo '<img width="100%" height="100%" src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+							echo '<img width="100%" height="100%" src="' . TF_APP_ASSETS_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
 						}
 						?>
                     </a>
@@ -4695,7 +4695,7 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
         <!-- Loader Image -->
         <div id="tour_room_details_loader">
             <div id="tour-room-details-loader-img">
-                <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="Loader">
+                <img src="<?php echo TF_APP_ASSETS_URL ?>images/loader.gif" alt="Loader">
             </div>
         </div>
         <div class="tf-withoutpayment-booking-confirm">
@@ -4709,7 +4709,7 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
                         </svg>
                     </span>
                 </div>
-                <img src="<?php echo TF_ASSETS_APP_URL ?>images/thank-you.gif" alt="Thank You">
+                <img src="<?php echo TF_APP_ASSETS_URL ?>images/thank-you.gif" alt="Thank You">
                 <h2>
 					<?php
 					$booking_confirmation_msg = ! empty( tfopt( 'booking-confirmation-msg' ) ) ? tfopt( 'booking-confirmation-msg' ) : 'Booked Successfully';

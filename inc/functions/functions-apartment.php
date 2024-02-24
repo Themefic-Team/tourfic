@@ -1488,7 +1488,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 						if ( has_post_thumbnail($post_id) ) {
 							echo get_the_post_thumbnail($post_id, 'full' );
 						} else {
-							echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+							echo '<img src="' . TF_APP_ASSETS_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
 						}
 						?>
 				</div>
@@ -1651,7 +1651,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 						if ( has_post_thumbnail($post_id) ) {
 							echo get_the_post_thumbnail($post_id, 'full' );
 						} else {
-							echo '<img width="100%" height="100%" src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+							echo '<img width="100%" height="100%" src="' . TF_APP_ASSETS_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
 						}
 						?>
                     </a>

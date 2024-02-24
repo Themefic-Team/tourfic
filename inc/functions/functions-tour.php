@@ -1138,7 +1138,7 @@ function tf_single_tour_booking_form( $post_id ) {
             <!-- Loader Image -->
             <div id="tour_room_details_loader">
                 <div id="tour-room-details-loader-img">
-                    <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="Loader">
+                    <img src="<?php echo TF_APP_ASSETS_URL ?>images/loader.gif" alt="Loader">
                 </div>
             </div>
             <div class="tf-withoutpayment-booking-confirm">
@@ -1152,7 +1152,7 @@ function tf_single_tour_booking_form( $post_id ) {
 							</svg>
 						</span>
                     </div>
-                    <img src="<?php echo TF_ASSETS_APP_URL ?>images/thank-you.gif" alt="Thank You">
+                    <img src="<?php echo TF_APP_ASSETS_URL ?>images/thank-you.gif" alt="Thank You">
                     <h2>
 					<?php
 					$booking_confirmation_msg = !empty(tfopt( 'booking-confirmation-msg' )) ? tfopt( 'booking-confirmation-msg' ) : 'Booked Successfully';
@@ -3030,7 +3030,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
                 if (has_post_thumbnail()) {
                     the_post_thumbnail( 'full' );
                 } else {
-                    echo '<img src="' .TF_ASSETS_APP_URL . "images/feature-default.jpg". '" class="attachment-full size-full wp-post-image">';
+                    echo '<img src="' .TF_APP_ASSETS_URL . "images/feature-default.jpg". '" class="attachment-full size-full wp-post-image">';
                 }
             ?>
             </a>
@@ -3107,7 +3107,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 					if ( has_post_thumbnail() ) {
 						the_post_thumbnail( 'full' );
 					} else {
-						echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+						echo '<img src="' . TF_APP_ASSETS_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
 					}
 					?>
 			</div>
@@ -3322,7 +3322,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 						if ( has_post_thumbnail() ) {
 							the_post_thumbnail( 'full' );
 						} else {
-							echo '<img width="100%" height="100%" src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+							echo '<img width="100%" height="100%" src="' . TF_APP_ASSETS_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
 						}
 						?>
                     </a>

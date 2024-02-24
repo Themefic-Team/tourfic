@@ -62,7 +62,7 @@ function tf_hotel_docs_callback() {
 	?>
     <div class="tf_docs_preview">
         <a href="<?php echo $tfhoteldocumentation; ?>" target="_blank">
-			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
+			<img src="<?php echo esc_url(TF_ADMIN_ASSETS_URL . 'images/banner-cta.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
 		</a>
     </div>
 	<?php
@@ -74,7 +74,7 @@ function tf_apartment_docs_callback() {
 	?>
     <div class="tf_docs_preview">
         <a href="<?php echo $tf_apartment_documentation; ?>" target="_blank">
-			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
+			<img src="<?php echo esc_url(TF_ADMIN_ASSETS_URL . 'images/banner-cta.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
 		</a>
     </div>
 	<?php
@@ -85,7 +85,7 @@ function tf_tour_docs_callback() {
 	?>
     <div class="tf_docs_preview">
         <a href="<?php echo $tf_tour_documentation; ?>" target="_blank">
-			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
+			<img src="<?php echo esc_url(TF_ADMIN_ASSETS_URL . 'images/banner-cta.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
 		</a>
     </div>
 	<?php

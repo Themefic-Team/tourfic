@@ -114,13 +114,11 @@ add_action( 'admin_notices', 'tf_file_missing' );
  */
 if ( ! function_exists( 'tf_plugin_loaded_action' ) ) {
 	function tf_plugin_loaded_action() {
-
 		if ( file_exists( TF_ADMIN_PATH . 'tf-options/TF_Options.php' ) ) {
 			require_once TF_ADMIN_PATH . 'tf-options/TF_Options.php';
 		} else {
 			tf_file_missing( TF_ADMIN_PATH . 'tf-options/TF_Options.php' );
 		}
-
 	}
 }
 add_action( 'plugins_loaded', 'tf_plugin_loaded_action' );
