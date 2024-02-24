@@ -1485,8 +1485,8 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 			<div class="tf-available-room-gallery">                       
 				<div class="tf-room-gallery">
 						<?php
-						if ( has_post_thumbnail() ) {
-							the_post_thumbnail( 'full' );
+						if ( has_post_thumbnail($post_id) ) {
+							echo get_the_post_thumbnail($post_id, 'full' );
 						} else {
 							echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
 						}
@@ -1648,8 +1648,8 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 					</div>
                     <a href="<?php echo $url; ?>">
 						<?php
-						if ( has_post_thumbnail() ) {
-							the_post_thumbnail( 'full' );
+						if ( has_post_thumbnail($post_id) ) {
+							echo get_the_post_thumbnail($post_id, 'full' );
 						} else {
 							echo '<img width="100%" height="100%" src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
 						}
