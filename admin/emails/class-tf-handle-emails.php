@@ -127,14 +127,27 @@ class TF_Handle_Emails {
                 'item_quantity'     => $item_quantity,
                 'item_total'        => $item_total,
                 'item_subtotal'     => $item_subtotal,
-                'item_subtotal_tax' => $item_subtotal_tax,
-                'item_total_tax'    => $item_total_tax,
-                'item_taxes'        => $item_taxes,
                 'item_meta_data'    => $item_meta_data_array,
             );
 
         }
        
+
+        global $wpdb;
+        $taxs_summations = 0;
+        $tf_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT order_details FROM {$wpdb->prefix}tf_order_data WHERE order_id = %s", $order_id ), ARRAY_A );
+        if(!empty($tf_book_orders)){
+            foreach($tf_book_orders as $sbook){
+                $tf_order_details = !empty($sbook['order_details']) ? json_decode($sbook['order_details']) : '';
+
+                $taxs = !empty($tf_order_details->tax_info) ? json_decode($tf_order_details->tax_info,true) : [];
+                if(!empty($taxs)){
+                    foreach ( $taxs as $label => $sum ) {
+                        $taxs_summations += $sum;
+                    }
+                }
+            }
+        }
 
         $booking_details = '<table width="100%" style="max-width: 600px;border-collapse: collapse; color: #5A5A5A; font-family: Inter,sans-serif;"><thead><tr><th align="left" style="color:#0209AF;">Item Name</th><th align="center" style="color:#0209AF;">Quantity</th><th align="right" style="color:#0209AF;">Price</th></tr></thead><tbody style="border-bottom: 1px solid #D9D9D9">';
         foreach ( $order_items_data as $item ) {
@@ -184,6 +197,11 @@ class TF_Handle_Emails {
         //payment method
         $booking_details .= '<tr style="border-bottom: 1px solid #D9D9D9;"><th colspan="2" align="left" style="padding-bottom:10px">Payment Method</th>';
         $booking_details .= '<td align="right"><b>' . $payment_method_title . '</b></td></tr>';
+        //Tax
+        if(!empty($taxs_summations)){
+            $booking_details .= '<tr style="border-bottom: 1px solid #D9D9D9;"><th colspan="2" align="left" style="padding-bottom:10px">Tax</th>';
+            $booking_details .= '<td align="right"><b>' . wc_price($taxs_summations) . '</b></td></tr>';
+        }
         //total
         $booking_details .= '<tr><th colspan="2" align="left" style="padding-bottom:10px; font-weight: 900;">Total Amount</th>';
         $booking_details .= '<td align="right"><b style="font-weight: 900;">' . wc_price( $order_total ) . '</b></td></tr>';
