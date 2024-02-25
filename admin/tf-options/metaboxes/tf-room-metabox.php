@@ -292,13 +292,7 @@ TF_Metabox::metabox( 'tf_rooms_opt', array(
                     'label_off' => __( 'No', 'tourfic' ),
                     'default'   => true,
                 ),
-			),
-		),
 
-        'room_deposit'     => array(
-			'title'  => __( 'Deposit', 'tourfic' ),
-			'icon'   => 'fa-solid fa-money-bill-transfer',
-			'fields' => array(
                 array(
                     'id'      => 'Deposit',
                     'type'    => 'heading',
@@ -339,30 +333,6 @@ TF_Metabox::metabox( 'tf_rooms_opt', array(
                         // array( 'allow_deposit', '!=', 'false' ),
                     ),
                 ),
-			),
-		),
-
-        'room_ical'     => array(
-			'title'  => __( 'iCal Sync', 'tourfic' ),
-			'icon'   => 'fa-solid fa-calendar-days',
-			'fields' => array(
-                array(
-                    'id'      => 'ical',
-                    'type'    => 'heading',
-                    'content' => __( 'iCal Sync', 'tourfic' ),
-                ),
-                array(
-                    'id'          => '',
-                    'type'        => 'ical',
-                    'label'       => __( 'iCal URL', 'tourfic' ),
-                    'placeholder' => __( 'https://website.com', 'tourfic' ),
-                    'button_text' => __( 'Import', 'tourfic' ),
-                    'button_class'   => 'room-ical-import',
-                    'attributes'  => array(
-                        'class' => 'ical_url_input',
-                    ),
-                    'is_pro'      => true
-                )
 			),
 		),
 
@@ -427,6 +397,30 @@ TF_Metabox::metabox( 'tf_rooms_opt', array(
                     'dependency' => array( 'reduce_num_room', '==', '1' ),
                     'function'   => 'tf_remove_order_ids_from_room',
                 ),
+			),
+		),
+
+        'room_ical'     => array(
+			'title'  => __( 'iCal Sync', 'tourfic' ),
+			'icon'   => 'fa-solid fa-calendar-days',
+			'fields' => array(
+                array(
+                    'id'      => 'ical',
+                    'type'    => 'heading',
+                    'content' => __( 'iCal Sync', 'tourfic' ),
+                ),
+                array(
+                    'id'          => '',
+                    'type'        => 'ical',
+                    'label'       => __( 'iCal URL', 'tourfic' ),
+                    'placeholder' => __( 'https://website.com', 'tourfic' ),
+                    'button_text' => __( 'Import', 'tourfic' ),
+                    'button_class'   => 'room-ical-import',
+                    'attributes'  => array(
+                        'class' => 'ical_url_input',
+                    ),
+                    'is_pro'      => true
+                )
 			),
 		),
 
