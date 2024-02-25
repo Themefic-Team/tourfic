@@ -9,7 +9,7 @@
         $(document).on('click', '.tf-setup-start-btn', function (e) {
             e.preventDefault();
             $('.tf-welcome-step').hide();
-            $('.tf-setup-step-1').show();
+            $('.tf-setup-step-1').fadeIn(600);
         });
 
         $(document).on('click', '.tf-setup-next-btn, .tf-setup-skip-btn', function (e) {
@@ -96,12 +96,12 @@
         */
         $(document).on('click', '.tf-setup-submit-btn', function (e) {
             e.preventDefault();
-            let submitBtn = $('.tf-setup-submit-btn.tf-admin-btn');
+            let submitBtn = $('.tf-setup-submit-btn.tf-quick-setup-btn');
             let form = $(this).closest('#tf-setup-wizard-form');
             let step = $(this).closest('.tf-setup-step-container').data('step');
             let skipSteps = form.find('input[name="tf-skip-steps"]').val();
 
-            if($(this).hasClass('tf-admin-btn') && skipSteps.indexOf(step) !== -1) {
+            if($(this).hasClass('tf-quick-setup-btn') && skipSteps.indexOf(step) !== -1) {
                 skipSteps = skipSteps.replace(step, '');
                 form.find('input[name="tf-skip-steps"]').val(skipSteps);
             }
@@ -129,6 +129,118 @@
                 error: function (error) {
                     submitBtn.removeClass('tf-btn-loading');
                     console.log(error);
+                }
+            });
+        });
+
+        /*
+        * Travelfic Theme Installing
+        * @author: Jahid
+        */
+        let travelfic_toolkit_active_plugins = tf_admin_params.is_travelfic_toolkit_active;
+
+        $(document).on('click', '.tf-setup-travelfic-theme-btn', function (e) {
+            e.preventDefault();
+            if(tf_admin_params.current_active_theme && "travelfic"!=tf_admin_params.current_active_theme){
+                let theme_slug = $(this).attr('data-install');
+                $('.tf-setup-travelfic-theme-btn').text("Travelfic Installing...");
+                $('.tf-setup-travelfic-theme-btn').addClass('tf-btn-loading');
+                var data = {
+                    action: "tf_theme_installing",
+                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    slug: theme_slug,
+                };
+                // Installing Function
+                jQuery.post(tf_admin_params.ajax_url, data, function (response) {
+                    $('.tf-setup-travelfic-theme-active').click();
+                })
+            }else{
+                $('.tf-setup-travelfic-toolkit-btn').click();
+            }
+            
+        });
+
+        /*
+        * Travelfic Theme Activating
+        * @author: Jahid
+        */
+
+        $(document).on('click', '.tf-setup-travelfic-theme-active', function (e) {
+
+            e.preventDefault();
+            let theme_slug = $(this).attr('data-install');
+            $('.tf-setup-travelfic-theme-btn').text("Travelfic Activate...");
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: "tf_setup_travelfic_theme_active",
+                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    slug: theme_slug,
+                },
+                success: function(response) {
+                    if ($.inArray("travelfic-toolkit", travelfic_toolkit_active_plugins) !== -1) {
+                        $('.tf-setup-travelfic-toolkit-btn').click();
+                    }else{
+                        window.location.replace(tf_admin_params.toolkit_page_url);
+                    }
+                },
+                error: function(error) {
+                    
+                }
+            });
+
+        });
+
+        /*
+        * Travelfic Toolkit Installing
+        * @author: Jahid
+        */
+       
+        $(document).on('click', '.tf-setup-travelfic-toolkit-btn', function (e) {
+            e.preventDefault();
+            if ($.inArray("travelfic-toolkit", travelfic_toolkit_active_plugins) !== -1) {
+                let plugin_slug = $(this).attr('data-install');
+                $('.tf-setup-travelfic-theme-btn').text("Toolkit Installing...");
+
+                var data = {
+                    action: "tf_travelfic_toolkit_installing",
+                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    slug: plugin_slug,
+                };
+                // Installing Function
+                jQuery.post(tf_admin_params.ajax_url, data, function (response) {
+                    $('.tf-setup-travelfic-toolkit-active').click();
+                })
+            }else{
+                window.location.replace(tf_admin_params.toolkit_page_url);
+            }
+        });
+
+        /*
+        * Travelfic Toolkit Activating
+        * @author: Jahid
+        */
+        $(document).on('click', '.tf-setup-travelfic-toolkit-active', function (e) {
+
+            e.preventDefault();
+            let plugin_slug = $(this).attr('data-install');
+            $('.tf-setup-travelfic-theme-btn').text("Toolkit Activate...");
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: "tf_travelfic_toolkit_activate",
+                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    slug: plugin_slug,
+                },
+                success: function(response) {
+                    window.location.replace(tf_admin_params.toolkit_page_url);
+                },
+                error: function(error) {
+                    
                 }
             });
         });

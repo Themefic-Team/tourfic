@@ -172,6 +172,23 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'is_pro'  => true,
 					'dependency'  => array( 'booking-by', '==', '2' ),
 				),
+				array(
+					'id'        => 'is_taxable',
+					'type'      => 'switch',
+					'label'     => __( 'Taxable', 'tourfic' ),
+					'subtitle' => __( 'Activate this option to enable tax for this Hotel.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'is_pro'  => true
+				),
+				array(
+					'id'      => 'taxable_class',
+					'type'    => 'select',
+					'label'   => __( 'Tax class', 'tourfic' ),
+					'subtitle'  => __( 'Select your class, and tax will calculate based on your chosen class. PS: If you activate partial payment option tax will be calculated upon partial amount as woocommerce regulations.', 'tourfic' ),
+					'options' => tf_taxable_option_callback(),
+					'is_pro'  => true
+				),
 			),
 		),
 		'location'         => array(

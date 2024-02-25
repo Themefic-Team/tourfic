@@ -20,7 +20,6 @@
         flex-direction: row;
         color: #595349;
         font-size: 16px;
-        font-family: Josefin Sans;
         font-weight: 700;
         line-height: 24px;
         word-wrap: break-word;
@@ -60,10 +59,9 @@
                 transform: rotate(180deg);
             }
         }
-        .tf-itinerary-title h4 {
+        .tf-itinerary-title span.tf-head-title {
             color: #595349;
             font-size: 20px !important;
-            font-family: Josefin Sans !important;
             font-weight: 400 !important;
             line-height: 26px !important;
             word-wrap: break-word;
@@ -75,14 +73,14 @@
                 display: flex;
                 align-items: center;
             }
+            span.tf-itinerary-time {
+                padding: 8px 16px;
+                background: #FAEEDC;
+                margin-right: 16px;
+            }
         }
 
 
-        span.tf-itinerary-time {
-            padding: 8px 16px;
-            background: #FAEEDC;
-            margin-right: 16px;
-        }
 
         .tf-itinerary-content {
             display: flex;
@@ -113,7 +111,6 @@
                 .tf-itinerary-single-meta{
                     li{
                         color: #99948D;
-                        font-family: Josefin Sans;
                         font-size: 16px;
                         font-style: normal;
                         font-weight: 400;
@@ -125,7 +122,6 @@
                         }
                         a{
                             color: #99948D;
-                            font-family: Josefin Sans;
                             font-size: 16px;
                             font-style: normal;
                             font-weight: 400;

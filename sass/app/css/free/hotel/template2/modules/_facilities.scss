@@ -1,4 +1,8 @@
 .tf-facilities-wrapper {
+    @media #{$max767}{
+        padding-left: 16px;
+        padding-right: 16px;
+    }
     h2{
         color: #595349;
         font-size: 32px !important;
@@ -19,15 +23,15 @@
         margin-bottom: 32px;
         .tf-facility-item {
             width: 25%;
-            @media #{$max767}{
+            @media #{$max1024}{
                 width: 50%;
             }
-            h4 {
+            span.single-facilities-title {
                 color: #595349;
                 font-weight: 600;
                 line-height: 20.80px;
-                font-family: "Josefin Sans", sans-serif;
                 margin-bottom: 16px;
+                display: block;
                 i {
                     margin-right: 8px;
                     font-size: 20px;

@@ -22,7 +22,7 @@ if(!empty($rooms)){
 <!--Available rooms start -->
 <div class="tf-available-rooms-wrapper" id="tf-hotel-rooms">
     <div class="tf-available-rooms-head">
-        <h2 class=""><?php _e("Available rooms", "tourfic"); ?></h2>
+        <span class=""><?php _e("Available rooms", "tourfic"); ?></span>
         <div class="tf-filter">
             <i class="ri-equalizer-line"></i>
         </div>
@@ -222,7 +222,7 @@ if(!empty($rooms)){
                         <li><a href="#" class="tf-room-detail-popup" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $post_id; ?>"><?php _e("View room details", "tourfic"); ?></a></li>
                         
                     </ul>
-                    <h4><?php _e("Other benefits", "tourfic"); ?></h4>
+                    <span class="tf-others-benefits-title"><?php _e("Other benefits", "tourfic"); ?></span>
                     <ul>
                     <?php 
                     if( !empty($room['features']) ){
@@ -513,7 +513,7 @@ if(!empty($rooms)){
                         <li><a href="#" class="tf-room-detail-popup" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $post_id; ?>"><?php _e("View room details", "tourfic"); ?></a></li>
                         
                     </ul>
-                    <h4><?php _e("Other benefits", "tourfic"); ?></h4>
+                    <span class="tf-others-benefits-title"><?php _e("Other benefits", "tourfic"); ?></span>
                     <ul>
                     <?php 
                     if( !empty($room['features']) ){

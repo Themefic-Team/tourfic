@@ -41,7 +41,7 @@
                     <!--Available rooms start -->
                     <div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
                         <div class="tf-archive-available-rooms-head tf-available-rooms-head">
-                            <h2 class="tf-total-results"><?php _e("Total", "tourfic"); ?> <span><?php echo $tf_total_results; ?></span> <?php _e("Tours available", "tourfic"); ?></h2>
+                            <span class="tf-total-results"><?php _e("Total", "tourfic"); ?> <span><?php echo $tf_total_results; ?></span> <?php _e("Tours available", "tourfic"); ?></span>
                             <div class="tf-archive-filter-showing">
                                 <i class="ri-equalizer-line"></i>
                             </div>
@@ -58,11 +58,29 @@
                         <div class="tf-archive-available-rooms tf-available-rooms archive_ajax_result">
 
                             <?php
+                            $loop2 = $loop;
                             if ( $loop->have_posts() ) {          
                                 while ( $loop->have_posts() ) {
                                     $loop->the_post();
-                                    tf_tour_archive_single_item();
+                                    $tour_meta = get_post_meta( get_the_ID() , 'tf_tours_opt', true );
+                                    
+                                    if($tour_meta["tour_as_featured"]) {
+                                        tf_tour_archive_single_item();
+                                        $featured_post_id[] = get_the_ID(); 
+                                    }
+
                                     $tf_total_results+=1;
+                                }
+
+                                if (!empty($featured_post_id)) $loop2->set("post__not_in", $featured_post_id);
+                                
+                                while ( $loop2->have_posts() ) {
+                                    $loop2->the_post();
+                                    $tour_meta = get_post_meta( get_the_ID() , 'tf_tours_opt', true );
+                                    
+                                    if( !empty($tour_meta["tour_as_featured"]) ) {
+                                        tf_tour_archive_single_item();
+                                    }
                                 }
                             } else {
                                 echo '<div class="tf-nothing-found" data-post-count="0" >' .__("No Tours Found!", "tourfic"). '</div>';

@@ -10,7 +10,11 @@ defined( 'ABSPATH' ) || exit;
  */
 function register_tf_hotel_post_type() {
 
-	$hotel_slug = ! empty( get_option( 'hotel_slug' ) ) ? get_option( 'hotel_slug' ) : apply_filters( 'tf_hotel_slug', 'hotels' );
+	$tf_hotel_setting_permalink_slug = ! empty(tfopt( 'hotel-permalink-setting' )) ? tfopt( 'hotel-permalink-setting' ) : "hotels";
+
+	update_option("hotel_slug", $tf_hotel_setting_permalink_slug);
+
+	$hotel_slug = get_option( 'hotel_slug' );
 
 	$hotel_labels = apply_filters( 'tf_hotel_labels', array(
 		'name'                  => _x( '%2$s', 'tourfic post type name', 'tourfic' ),
@@ -26,7 +30,7 @@ function register_tf_hotel_post_type() {
 		'not_found'             => __( 'No %2$s found', 'tourfic' ),
 		'not_found_in_trash'    => __( 'No %2$s found in Trash', 'tourfic' ),
 		'parent_item_colon'     => '',
-		'menu_name'             => _x( 'Hotels', 'tourfic post type menu name', 'tourfic' ),
+		'menu_name'             => _x( '%2$s', 'tourfic post type menu name', 'tourfic' ),
 		'featured_image'        => __( '%1$s Image', 'tourfic' ),
 		'set_featured_image'    => __( 'Set %1$s Image', 'tourfic' ),
 		'remove_featured_image' => __( 'Remove %1$s Image', 'tourfic' ),
@@ -67,9 +71,9 @@ if ( tfopt( 'disable-services' ) && in_array( 'hotel', tfopt( 'disable-services'
 	add_action( 'init', 'register_tf_hotel_post_type' );
 }
 
-add_filter( 'use_block_editor_for_post_type', function ( $enabled, $post_type ) {
-	return ( 'tf_hotel' === $post_type ) ? false : $enabled;
-}, 10, 2 );
+// add_filter( 'use_block_editor_for_post_type', function ( $enabled, $post_type ) {
+// 	return ( 'tf_hotel' === $post_type ) ? false : $enabled;
+// }, 10, 2 );
 
 /**
  * Get Default Labels
@@ -1087,7 +1091,7 @@ function tf_room_availability_callback() {
 						$feature_result = array_intersect( $filtered_features, $room_features );
 					}
 
-					if ( ! empty( $filtered_features ) && defined( 'TF_PRO' ) ) {
+					if ( ! empty( $filtered_features ) ) {
 						if ( $feature_result ) {
 							if ( $form_total_person <= $total_person ) {
 
@@ -1180,6 +1184,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 
 		// date format for users output
 		$hotel_date_format_for_users = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+		$hotel_location_field_required = ! empty( tfopt( "required_location_hotel_search" ) ) ? tfopt( "required_location_hotel_search" ) : 0;
 
 		$disable_hotel_child_search  = ! empty( tfopt( 'disable_hotel_child_search' ) ) ? tfopt( 'disable_hotel_child_search' ) : '';
 		if( !empty($design) && 2==$design ){
@@ -1195,7 +1200,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 									<path d="M8 13.9317L11.2998 10.6318C13.1223 8.80943 13.1223 5.85464 11.2998 4.0322C9.4774 2.20975 6.52261 2.20975 4.70017 4.0322C2.87772 5.85464 2.87772 8.80943 4.70017 10.6318L8 13.9317ZM8 15.8173L3.75736 11.5747C1.41421 9.2315 1.41421 5.43254 3.75736 3.08939C6.10051 0.746245 9.89947 0.746245 12.2427 3.08939C14.5858 5.43254 14.5858 9.2315 12.2427 11.5747L8 15.8173ZM8 8.66536C8.7364 8.66536 9.33333 8.06843 9.33333 7.33203C9.33333 6.59565 8.7364 5.9987 8 5.9987C7.2636 5.9987 6.66667 6.59565 6.66667 7.33203C6.66667 8.06843 7.2636 8.66536 8 8.66536ZM8 9.9987C6.52724 9.9987 5.33333 8.80476 5.33333 7.33203C5.33333 5.85927 6.52724 4.66536 8 4.66536C9.47273 4.66536 10.6667 5.85927 10.6667 7.33203C10.6667 8.80476 9.47273 9.9987 8 9.9987Z" fill="#FAEEDD"/>
 									</svg>
-									<input type="text" name="place-name" required="" id="tf-location" class="" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" value="">
+									<input type="text" name="place-name" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> id="tf-location" class="" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" value="">
 									<input type="hidden" name="place" id="tf-search-hotel" class="tf-place-input">
 								</div>
 							</label>
@@ -1447,19 +1452,21 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 		}else{ ?>
         <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
             <div class="tf_homepage-booking">
-                <div class="tf_destination-wrap">
+			<?php if( tfopt( 'hide_hotel_location_search' ) != 1 || tfopt( 'required_location_hotel_search' ) ): ?>
+				<div class="tf_destination-wrap">
                     <div class="tf_input-inner">
                         <div class="tf_form-row">
                             <label class="tf_label-row">
                                 <span class="tf-label"><?php _e( 'Location', 'tourfic' ); ?>:</span>
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="fas fa-search"></i>
-									<?php if ( empty($advanced) && "enabled"!=$advanced ){ ?>
-                                    <input type="text" name="place-name" required="" id="tf-location" class="" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" value="">
+									<?php 
+									if ( (empty($advanced) || !empty($advanced)) && "enabled"!=$advanced ){ ?>
+                                    <input type="text" name="place-name" <?php echo $hotel_location_field_required != 1 ? '' : 'required'; ?> id="tf-location" class="" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" value="">
                                     <input type="hidden" name="place" id="tf-search-hotel" class="tf-place-input">
 									<?php } 
 									if ( !empty($advanced) && "enabled"==$advanced ){ ?>
-									<input type="text" name="place-name" required id="tf-destination-adv" class="tf-advance-destination tf-preview-destination" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>">
+									<input type="text" name="place-name" <?php echo $hotel_location_field_required != 1 ? '' : 'required'; ?> id="tf-destination-adv" class="tf-advance-destination tf-preview-destination" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>">
                                     <input type="hidden" name="place" id="tf-place-destination" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>">
 									<div class="tf-hotel-locations tf-hotel-results">
                                         <ul id="ui-id-1">
@@ -1486,6 +1493,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                         </div>
                     </div>
                 </div>
+			<?php endif; ?>
 
                 <div class="tf_selectperson-wrap">
                     <div class="tf_input-inner">
@@ -1784,6 +1792,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 	$tf_hotel_selected_template = $tf_hotel_selected_check;
 
 	$tf_hotel_book_avaibality_button_text = !empty(tfopt('hotel_booking_check_button_text')) ? stripslashes(sanitize_text_field(tfopt('hotel_booking_check_button_text'))) : "Booking Availability";
+	$hotel_location_field_required = ! empty( tfopt( "required_location_hotel_search" ) ) ? tfopt( "required_location_hotel_search" ) : 1;
 
 	if ( $tf_hotel_selected_template == "design-1" ) {
 		?>
@@ -1848,12 +1857,6 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
             </div>
 
         </form>
-		<?php if ( is_active_sidebar( 'tf_single_booking_sidebar' ) ) { ?>
-        <div id="tf__booking_sidebar">
-			<?php dynamic_sidebar( 'tf_single_booking_sidebar' ); ?>
-            <br>
-        </div>
-		<?php } ?>
 	<?php }
 	elseif ( $tf_hotel_selected_template == "design-2" ) { ?>
 
@@ -2107,12 +2110,6 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
             </div>
 
         </form>
-		<?php if ( is_active_sidebar( 'tf_single_booking_sidebar' ) ) { ?>
-        <div id="tf__booking_sidebar">
-			<?php dynamic_sidebar( 'tf_single_booking_sidebar' ); ?>
-            <br>
-        </div>
-		<?php } ?>
 	<?php } ?>
     <script>
         (function ($) {
@@ -2742,11 +2739,13 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 								$tag_background_color = !empty($tag["hotel-tag-color-settings"]["background"]) ? $tag["hotel-tag-color-settings"]["background"] : "#003162";
 								$tag_font_color = !empty($tag["hotel-tag-color-settings"]["font"]) ? $tag["hotel-tag-color-settings"]["font"] : "#fff";
 
-								echo <<<EOD
-									<div class="tf-multiple-tag-item" style="color: $tag_font_color; background-color: $tag_background_color ">
-										<span class="tf-multiple-tag">$hotel_tag_name</span>
-									</div>
-								EOD;
+								if (!empty($hotel_tag_name)) {
+									echo <<<EOD
+										<div class="tf-multiple-tag-item" style="color: $tag_font_color; background-color: $tag_background_color ">
+											<span class="tf-multiple-tag">$hotel_tag_name</span>
+										</div>
+									EOD;
+								}
 							}
 						}
 					?>
@@ -2767,7 +2766,15 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 					?>
                     <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
                         <i class="fa-solid fa-location-dot"></i>
-                        <p><?php echo $address; ?></p>
+                        <p>
+							<?php 
+								if (strlen($address) > 120 ) {
+									echo tourfic_character_limit_callback($address, 120);
+								} else {
+									echo $address;
+								}
+							?>
+						</p>
                     </div>
 				<?php } ?>
                 <div class="tf-title tf-mt-16">
@@ -2886,9 +2893,11 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 							$tag_background_color = !empty($tag["hotel-tag-color-settings"]["background"]) ? $tag["hotel-tag-color-settings"]["background"] : "#003162";
 							$tag_font_color = !empty($tag["hotel-tag-color-settings"]["font"]) ? $tag["hotel-tag-color-settings"]["font"] : "#fff";
 
-							echo <<<EOD
-								<span class="tf-multiple-tag" style="color: $tag_font_color; background-color: $tag_background_color ">$hotel_tag_name</span>
-							EOD;
+							if (!empty($hotel_tag_name)) {
+								echo <<<EOD
+									<span class="tf-multiple-tag" style="color: $tag_font_color; background-color: $tag_background_color ">$hotel_tag_name</span>
+								EOD;
+							}
 						}
 					}
 				?>
@@ -3045,9 +3054,11 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 								$tag_background_color = !empty($tag["hotel-tag-color-settings"]["background"]) ? $tag["hotel-tag-color-settings"]["background"] : "#003162";
 								$tag_font_color = !empty($tag["hotel-tag-color-settings"]["font"]) ? $tag["hotel-tag-color-settings"]["font"] : "#fff";
 
-								echo <<<EOD
-									<span class="default-single-tag" style="color: $tag_font_color; background-color: $tag_background_color">$hotel_tag_name</span>
-								EOD;
+								if (!empty($hotel_tag_name)) { 
+									echo <<<EOD
+										<span class="default-single-tag" style="color: $tag_font_color; background-color: $tag_background_color">$hotel_tag_name</span>
+									EOD;
+								}
 							}
 						}
 						?>
@@ -3071,7 +3082,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 							<?php
 							if ( $address ) {
 								echo '<div class="tf-map-link">';
-								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . $address . '</span>';
+								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . strlen($address) > 75 ? tourfic_character_limit_callback($address, 76) : $address . '</span>';
 								echo '</div>';
 							}
 							?>
@@ -4005,7 +4016,7 @@ function tf_hotel_quickview_callback() {
 					<?php } } ?>
                 </div>
                 <div class="tf-popup-right">
-                    <h4 class="tf-popup-info-title"><?php _e("Room details", "tourfic"); ?></h4>
+                    <span class="tf-popup-info-title"><?php _e("Room details", "tourfic"); ?></span>
                     <ul>
 						<?php if ( $footage ) { ?>
 							<li><i class="ri-pencil-ruler-2-line"></i> <?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></li>
@@ -4021,7 +4032,7 @@ function tf_hotel_quickview_callback() {
 						<?php } ?>                        
                     </ul> 
 					  
-                    <h4 class="tf-popup-info-title"><?php _e("Other benefits", "tourfic"); ?></h4>
+                    <span class="tf-popup-info-title"><?php _e("Other benefits", "tourfic"); ?></span>
                     <ul>
 						<?php 
 						if( !empty($room['features']) ){
@@ -4077,6 +4088,14 @@ function tf_hotel_archive_popup_qv_callback(){
 	if( !empty($_POST['post_type']) && "tf_tours"==$_POST['post_type']){
 		$meta = get_post_meta( $_POST['post_id'], 'tf_tours_opt', true );
 		$gallery = ! empty( $meta['tour_gallery'] ) ? $meta['tour_gallery'] : '';
+		if ( $gallery ) {
+			$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
+		}
+	}
+
+	if( !empty($_POST['post_type']) && "tf_apartment"==$_POST['post_type']){
+		$meta = get_post_meta( $_POST['post_id'], 'tf_apartment_opt', true );
+		$gallery = ! empty( $meta['apartment_gallery'] ) ? $meta['apartment_gallery'] : '';
 		if ( $gallery ) {
 			$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
 		}
@@ -4250,19 +4269,19 @@ if ( ! function_exists( 'tf_hotel_search_ajax_callback' ) ) {
 			'message' => '',
 		];
 
-		if ( ! isset( $_POST['place'] ) || empty( $_POST['place'] ) ) {
+		if ( tfopt( 'required_location_hotel_search' ) && (! isset( $_POST['place'] ) || empty( $_POST['place'] ) )) {
 			$response['message'] = esc_html__( 'Please enter your location', 'tourfic' );
 		} elseif ( tfopt( 'date_hotel_search' ) && ( ! isset( $_POST['check-in-out-date'] ) || empty( $_POST['check-in-out-date'] ) ) ) {
 			$response['message'] = esc_html__( 'Please select check in and check out date', 'tourfic' );
 		}
 
 		if ( tfopt( 'date_hotel_search' ) ) {
-			if ( ! empty( $_POST['place'] ) && ! empty( $_POST['check-in-out-date'] ) ) {
+			if ( ! empty( $_POST['check-in-out-date'] ) ) {
 				$response['query_string'] = str_replace( '&action=tf_hotel_search', '', http_build_query( $_POST ) );
 				$response['status']       = 'success';
 			}
 		} else {
-			if ( ! empty( $_POST['place'] ) ) {
+			if ( ! tfopt( 'required_location_hotel_search' ) || ! empty( $_POST['place'] ) ) {
 				$response['query_string'] = str_replace( '&action=tf_hotel_search', '', http_build_query( $_POST ) );
 				$response['status']       = 'success';
 			}
@@ -4273,6 +4292,37 @@ if ( ! function_exists( 'tf_hotel_search_ajax_callback' ) ) {
 	}
 }
 
+add_action( 'tf_hotel_features_filter', 'tf_hotel_filter_by_features', 10, 1 );
+if (! function_exists ("tf_hotel_filter_by_features") ) {
+	function tf_hotel_filter_by_features( $features ) {
+		//get all the hotel features
+		$feature_filter = ! empty( tfopt( 'feature-filter' ) ) ? tfopt( 'feature-filter' ) : false;
+	
+		if ( ! empty( $features ) && $feature_filter ):
+			?>
+			<!-- Filter by feature  -->
+			<div class="tf-room-filter" style="display: none">
+				<h4 class="tf-room-feature-title"><?php echo __( 'Filter Rooms based on features', 'tourfic' ); ?></h4>
+				<ul class="tf-room-checkbox">
+					<?php
+					foreach ( $features as $feature ) {
+						//get the feature details by it's id
+						$term = get_term_by( 'id', $feature, 'hotel_feature' );
+						
+						if ($term ) {
+							echo '<li><label for="' . $term->slug . '">';
+							echo '<input type="checkbox" name="features" class="" value="' . $feature . '" id="' . $term->slug . '">';
+							echo "<span class='checkmark'></span>";
+							echo $term->name . '</label>';
+							echo "</li>";
+						}
+					}
+					?>
+				</ul>
+			</div>
+		<?php endif;
+	}
+}
 /*
  * Hotel without booking ajax
  * @since 2.10.3

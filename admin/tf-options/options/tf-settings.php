@@ -46,11 +46,14 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle' => __( 'Choose the display format for the date as seen by the user upon selection.', 'tourfic' ),
 					'options'  => array(
 						'Y/m/d'  => __( 'YYYY/MM/DD', 'tourfic' ),
+						'd/m/Y'  => __( 'DD/MM/YYYY', 'tourfic' ),
+						'm/d/Y' => __('MM/DD/YYYY', 'tourfic'),
 						'Y-m-d' => __( 'YYYY-MM-DD', 'tourfic' ),
 						'd-m-Y'  => __( 'DD-MM-YYYY', 'tourfic' ),
-						'd/m/Y'  => __( 'DD/MM/YYYY', 'tourfic' ),
+						'm-d-Y' => __('MM-DD-YYYY', 'tourfic'),
 						'Y.m.d'  => __( 'YYYY.MM.DD', 'tourfic' ),
 						'd.m.Y'  => __( 'DD.MM.YYYY', 'tourfic' ),
+						'm.d.Y' => __('MM.DD.YYYY', 'tourfic'),
 					),
 					'default'    => 'Y/m/d',
 				),
@@ -332,18 +335,6 @@ TF_Settings::option( 'tf_settings', array(
 									'default'  => 'design-1',
 								),
 								array(
-									'id'      => 'hotel_design_1_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Jost" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'hotel-archive', '==', 'design-1' ),
-								),
-								array(
-									'id'      => 'hotel_design_2_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'hotel-archive', '==', 'design-2' ),
-								),
-								array(
 									'id'      => 'hotel_archive_design_2_bannar',
 									'type'    => 'image',
 									'label'    => __( 'Archive & Search Result Banner Image', 'tourfic' ),
@@ -359,7 +350,20 @@ TF_Settings::option( 'tf_settings', array(
 										'list' => __( 'List', 'tourfic' ),
 										'grid' => __( 'Grid', 'tourfic' ),
 									),
-									'default'    => 'List'
+									'default'    => 'List',
+									'dependency' => array( 'hotel-archive', '!=', 'design-2' ),
+								),
+								array(
+									'id'      => 'hotel_design_1_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Jost" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'hotel-archive', '==', 'design-1' ),
+								),
+								array(
+									'id'      => 'hotel_design_2_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'hotel-archive', '==', 'design-2' ),
 								),
 								array(
 									'id'      => 'hotel_archive_notice',
@@ -648,18 +652,6 @@ TF_Settings::option( 'tf_settings', array(
 									'default'  => 'design-1',
 								),
 								array(
-									'id'      => 'tour_design_1_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Jost" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'tour-archive', '==', 'design-1' ),
-								),
-								array(
-									'id'      => 'tour_design_2_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'tour-archive', '==', 'design-2' ),
-								),
-								array(
 									'id'      => 'tour_archive_design_2_bannar',
 									'type'    => 'image',
 									'label'    => __( 'Archive & Search Result Banner Image', 'tourfic' ),
@@ -676,6 +668,19 @@ TF_Settings::option( 'tf_settings', array(
 										'grid' => __( 'Grid', 'tourfic' ),
 									),
 									'default'    => 'List',
+									'dependency' => array( 'tour-archive', '!=', 'design-2' ),
+								),
+								array(
+									'id'      => 'tour_design_1_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Jost" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'tour-archive', '==', 'design-1' ),
+								),
+								array(
+									'id'      => 'tour_design_2_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'tour-archive', '==', 'design-2' ),
 								),
 								array(
 									'id'      => 'tour_archive_notice',
@@ -707,8 +712,137 @@ TF_Settings::option( 'tf_settings', array(
 											'title' => 'Default',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-apartment.jpg",
 										),
+										'design-1' => array(
+											'title' => 'Design 1',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design1-apartment.jpg",
+										),
 									),
 									'default'  => 'default',
+								),
+								array(
+									'id'      => 'aprtment_single_design_1_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'single-apartment', '==', 'design-1' ),
+								),
+								array(
+									'id'         => 'single-aprtment-layout-part-1',
+									'class'      => 'disable-sortable',
+									'type'       => 'repeater',
+									'drag_only'  => true,
+									'label'      => __( 'Single Aprtment Template Sections Part 1', 'tourfic' ),
+									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'dependency' => array( 'single-apartment', '==', 'design-1' ),
+									'fields'     => array(
+										array(
+											'id'         => 'aprtment-section',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Name', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'         => 'aprtment-section-slug',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Slug', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'       => 'aprtment-section-status',
+											'type'     => 'switch',
+											'label'    => __( 'Section Status', 'tourfic' ),
+											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
+										),
+									),
+									'default'    => array(
+										array(
+											'aprtment-section'        => __( 'Description', 'tourfic' ),
+											'aprtment-section-slug'   => __( 'description', 'tourfic' ),
+											'aprtment-section-status' => true,
+										),
+										array(
+											'aprtment-section'        => __( 'Highlights ', 'tourfic' ),
+											'aprtment-section-slug'   => __( 'features', 'tourfic' ),
+											'aprtment-section-status' => true,
+										),
+										array(
+											'aprtment-section'        => __( 'Apartment Rooms', 'tourfic' ),
+											'aprtment-section-slug'   => __( 'rooms', 'tourfic' ),
+											'aprtment-section-status' => true,
+										),
+										array(
+											'aprtment-section'        => __( 'Place offer', 'tourfic' ),
+											'aprtment-section-slug'   => __( 'offer', 'tourfic' ),
+											'aprtment-section-status' => true,
+										),
+										array(
+											'aprtment-section'        => __( 'House Rules', 'tourfic' ),
+											'aprtment-section-slug'   => __( 'rules', 'tourfic' ),
+											'aprtment-section-status' => true,
+										),
+										array(
+											'aprtment-section'        => __( 'Amenities', 'tourfic' ),
+											'aprtment-section-slug'   => __( 'facilities', 'tourfic' ),
+											'aprtment-section-status' => true,
+										)
+									)
+								),
+								array(
+									'id'         => 'single-aprtment-layout-part-2',
+									'class'      => 'disable-sortable',
+									'type'       => 'repeater',
+									'drag_only'  => true,
+									'label'      => __( 'Single Aprtment Template Sections Part 2', 'tourfic' ),
+									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'dependency' => array( 'single-apartment', '==', 'design-1' ),
+									'fields'     => array(
+										array(
+											'id'         => 'aprtment-section',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Name', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'         => 'aprtment-section-slug',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Slug', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'       => 'aprtment-section-status',
+											'type'     => 'switch',
+											'label'    => __( 'Section Status', 'tourfic' ),
+											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
+										),
+									),
+									'default'    => array(
+										array(
+											'aprtment-section'        => __( 'Review', 'tourfic' ),
+											'aprtment-section-slug'   => __( 'review', 'tourfic' ),
+											'aprtment-section-status' => true,
+										),
+										array(
+											'aprtment-section'        => __( 'FAQ', 'tourfic' ),
+											'aprtment-section-slug'   => __( 'faq', 'tourfic' ),
+											'aprtment-section-status' => true,
+										),
+										array(
+											'aprtment-section'        => __( 'Terms & Conditions', 'tourfic' ),
+											'aprtment-section-slug'   => __( 'trams-condition', 'tourfic' ),
+											'aprtment-section-status' => true,
+										),
+									)
 								),
 								array(
 									'id'      => 'apartment-title',
@@ -727,8 +861,37 @@ TF_Settings::option( 'tf_settings', array(
 											'title' => 'Default',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/apartment-archive-default.jpg",
 										),
+										'design-1' => array(
+											'title' => 'Design 1',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/tour-archive-design-2.jpg",
+										),
 									),
 									'default'  => 'default',
+								),
+								array(
+									'id'      => 'apartment_archive_design_1_bannar',
+									'type'    => 'image',
+									'label'    => __( 'Archive & Search Result Banner Image', 'tourfic' ),
+									'subtitle' => __( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
+									'library' => 'image',
+									'dependency' => array( 'apartment-archive', '==', 'design-1' ),
+								),
+								array(
+									'id'         => 'apartment_archive_view',
+									'type'       => 'select',
+									'label'      => __( 'Archive Layout', 'tourfic' ),
+									'options'    => array(
+										'list' => __( 'List', 'tourfic' ),
+										'grid' => __( 'Grid', 'tourfic' ),
+									),
+									'default'    => 'List',
+									'dependency' => array( 'apartment-archive', '!=', 'design-1' ),
+								),
+								array(
+									'id'      => 'aprtment_design_1_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'apartment-archive', '==', 'design-1' ),
 								),
 								array(
 									'id'      => 'apartment_archive_notice',
@@ -808,9 +971,8 @@ TF_Settings::option( 'tf_settings', array(
 					),
 				),
 				array(
-					'id'      => 'rt-display',
+					'id'      => 'rt_display',
 					'type'    => 'radio',
-					'is_pro' => true,
 					'label'   => __( 'Related Tour display logic', 'tourfic' ),
 					'options' => array(
 						'auto'     => __( 'Auto', 'tourfic' ),
@@ -823,16 +985,18 @@ TF_Settings::option( 'tf_settings', array(
 					),
 				),
 				array(
-					'id'         => 'tf-ralated-tours',
+					'id'         => 'tf-related-tours',
 					'type'       => 'select2',
-					'is_pro'     => true,
-					'label'      => __( 'Choose related tours for single page', 'tourfic' ),
+					'multiple'   => 'true',
+					'label'      => __( 'Choose Your Related Tours', 'tourfic' ),
+					'subtitle' => __( 'Select the tour you wish to feature in the “Related Tour” section on each single tour page.', 'tourfic' ),
 					'options'    => 'posts',
 					'query_args' => array(
 						'post_type'      => 'tf_tours',
 						'posts_per_page' => - 1,
 					),
-					'dependency'  => array(
+					'dependency' => array (
+						array( 'rt_display', '==', 'selected' ),
 						array( 't-related', '==', 'false' ),
 					),
 				),
@@ -841,7 +1005,6 @@ TF_Settings::option( 'tf_settings', array(
 					'type'     => 'text',
 					'label'    => __( 'Email for Enquiry Form', 'tourfic' ),
 					'subtitle' => __( 'Enter the email address that will receive all submissions from the enquiry form.', 'tourfic' ),
-					'is_pro' => true,
 				),
 				array(
 					'id'        => 't-auto-draft',
@@ -887,47 +1050,6 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
-		// Partial Payment Popup
-		'tour_payment_popup'    => array(
-			'title'  => __( 'Partial Payment', 'tourfic' ),
-			'parent' => 'tour',
-			'icon'   => 'fa fa-cog',
-			'fields' => array(
-				array(
-					'id'    => 'signle_tour_heading',
-					'type'  => 'heading',
-					'label' => __( 'Settings for Partial Payment', 'tourfic' ),
-					'subtitle'  => __( 'This option will appear as Popup during Booking.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'tour-option-notice-two',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#partial_payment" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-				),
-
-				array(
-					'id'      => 'deposit-title',
-					'type'    => 'text',
-					'label'   => __( 'Label', 'tourfic' ),
-					'default' => __( 'Partial payment of {amount} on total', 'tourfic' ),
-					'placeholder' => __( 'Partial payment of {amount} on total', 'tourfic' ),
-					'is_pro' => true,
-				),
-				array(
-					'id'      => '',
-					'type'    => 'textarea',
-					'label'   => __( 'Description', 'tourfic' ),
-					'is_pro' => true,
-					'default' => __( 'You have the option to make a partial payment to secure your tour booking. The remaining balance can then be settled after the tour is completed.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'notice_shortcode',
-					'type'    => 'notice',
-					'content' => __( 'Use shortcode <code>{amount}</code> to show percentage amount in Label', 'tourfic' ),
-					'is_pro' => true
-				),
-			),
-		),
 		// Itinerary Settings
 		'tour_itinerary'        => array(
 			'title'  => __( 'Itinerary Settings', 'tourfic' ),
@@ -949,88 +1071,10 @@ TF_Settings::option( 'tf_settings', array(
 									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 								),
 								array(
-									'id'       => 'itinerary-builder-heading',
-									'type'     => 'heading',
-									'subtitle' => __( 'You can create your own Itinerary using Tourfic\'s Itinerary builder. The builder can be found on Single Tour Settings', 'tourfic' ),
-								),
-								array(
-									'id'           => '',
-									'type'         => 'repeater',
-									'label'        => __( 'Create Custom Itinerary options', 'tourfic' ),
-									'button_title' => __( 'Add New Options', 'tourfic' ),
-									'is_pro'       => true,
-									'fields'       => array(
-										array(
-											'id'    => 'sleep-mode-title',
-											'type'  => 'text',
-											'label' => __( 'Field Title', 'tourfic' ),
-										),
-										array(
-											'id'    => 'sleep-mode-icon',
-											'type'  => 'icon',
-											'label' => __( 'Field Icon', 'tourfic' ),
-										),
-									),
-								),
-								array(
-									'id'           => '',
-									'type'         => 'repeater',
-									'button_title' => __( 'Add New Meal', 'tourfic' ),
-									'label'        => __( 'Include Meal', 'tourfic' ),
-									'is_pro'       => true,
-									'fields'       => array(
-										array(
-											'id'    => 'meal',
-											'type'  => 'text',
-											'label' => __( 'Meal name', 'tourfic' ),
-										),
-									),
-								),
-								array(
-									'id'      => '',
-									'label'   => __( 'Elevation Input', 'tourfic' ),
-									'type'    => 'select',
-									'options' => [
-										'Meter' => __( 'Meter', 'tourfic' ),
-										'Feet'  => __( 'Feet', 'tourfic' ),
-									],
-									'is_pro'  => true,
-									'default' => 'Meter',
-								),
-								array(
-									'id'          => '',
-									'type'        => 'switch',
-									'is_pro'      => true,
-									'label'       => __( 'Show Chart on Trip Page', 'tourfic' ),
-									'field_width' => 50,
-								),
-								array(
-									'id'          => '',
-									'type'        => 'switch',
-									'is_pro'      => true,
-									'label'       => __( 'Always Show All Itinerary', 'tourfic' ),
-									'field_width' => 50,
-								),
-								array(
-									'id'          => '',
-									'type'        => 'switch',
-									'is_pro'      => true,
-									'label'       => __( 'Show X-Axis', 'tourfic' ),
-									'field_width' => 50,
-								),
-								array(
-									'id'          => '',
-									'type'        => 'switch',
-									'is_pro'      => true,
-									'label'       => __( 'Show Y-Axis', 'tourfic' ),
-									'field_width' => 50,
-								),
-								array(
-									'id'          => '',
-									'type'        => 'switch',
-									'is_pro'      => true,
-									'label'       => __( 'Show line Graph', 'tourfic' ),
-									'field_width' => 50,
+									'id'      => 'tour-option-itinerary-notice',
+									'type'    => 'notice',
+									'class'	  => 'tour-option-itinerary-notice',
+									'content' => __('By default, you can create your entire Tour Itinerary using our Default Itinerary editor found in the Single Tour settings. For access to an Itinerary builder with enhanced advanced features, please consider upgrading to our <b>Pro version.</b>', 'tourfic'),
 								),
 							),
 						),
@@ -1045,594 +1089,14 @@ TF_Settings::option( 'tf_settings', array(
 									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 								),
 								array(
-									'id'       => '',
-									'type'     => 'switch',
-									'is_pro'   => true,
-									'label'    => __( 'Enable Itinerary Downloader', 'tourfic' ),
-									'subtitle' => __( 'Turn this on to give customers the option to download the itinerary plan as a PDF.', 'tourfic' ),
-									"default" => true,
-								),
-								array(
-									'id'      => 'tour_pdf_downloader_section',
-									'type'    => 'heading',
-									'content' => __( 'Tour Itinerary Downloader Section', 'tourfic' ),
-								),
-								array(
-									'id'    => '',
-									'type'  => 'text',
-									'label' => __( 'Itinerary Downloader Title', 'tourfic' ),
-									'default' => "Want to read it later?",
-									'placeholder' => "Want to read it later?",
-									'is_pro'   => true,
-								),
-								array(
-									'id'    => '',
-									'type'  => 'text',
-									'label' => __( 'Itinerary Downloader Description', 'tourfic' ),
-									'default' => "Download this tour's PDF brochure and start your planning offline.",
-									'placeholder' => "Download this tour's PDF brochure and start your planning offline.",
-									'is_pro'   => true,
-								),
-								array(
-									'id'    => '',
-									'type'  => 'text',
-									'label' => __( 'Itinerary Downloader Button Text', 'tourfic' ),
-									'default' => "Download Now",
-									'placeholder' => "Download Now",
-									'is_pro'   => true,
-								),
-								array(
-									'id'      => 'tour_settings',
-									'type'    => 'heading',
-									'content' => __( 'Thumbnail Settings in PDF', 'tourfic' ),
-								),
-								array(
-									'id'          => '',
-									'type'        => 'number',
-									'label'       => __( 'Image Thumbnail Height', 'tourfic' ),
-									'field_width' => 50,
-									'is_pro'      => true,
-								),
-								array(
-									'id'          => '',
-									'type'        => 'number',
-									'label'       => __( 'Image Thumbnail Width', 'tourfic' ),
-									'field_width' => 50,
-									'is_pro'      => true,
-								),
-								array(
-									'id'      => 'companey_info_heading',
-									'type'    => 'heading',
-									'content' => __( 'Default Company Info in PDF', 'tourfic' ),
-								),
-								array(
-									'id'      => 'tour-option-notice-one',
+									'id'      => 'tour-option-itinerary-notice',
 									'type'    => 'notice',
-									'content' => __( 'If no company information is specified in the Single Tour Settings, this information will be used by default.', 'tourfic' ),
-								),
-
-								array(
-									'id'     => '',
-									'type'   => 'image',
-									'is_pro' => true,
-									'label'  => __( 'Company Logo', 'tourfic' ),
-								),
-								array(
-									'id'     => '',
-									'type'   => 'textarea',
-									'is_pro' => true,
-									'label'  => __( 'Company Description', 'tourfic' ),
-								),
-								array(
-									'id'          => '',
-									'type'        => 'text',
-									'is_pro'      => true,
-									'label'       => __( 'Company Email Address', 'tourfic' ),
-									'field_width' => 33.33,
-								),
-								array(
-									'id'          => '',
-									'type'        => 'text',
-									'is_pro'      => true,
-									'label'       => __( 'Company Address', 'tourfic' ),
-									'field_width' => 33.33,
-								),
-								array(
-									'id'          => '',
-									'type'        => 'text',
-									'is_pro'      => true,
-									'label'       => __( 'Company Phone', 'tourfic' ),
-									'field_width' => 33.33,
-								),
-								array(
-									'id'    => 'export_heading',
-									'type'  => 'heading',
-									'label' => __( 'Talk to Expert Section', 'tourfic' ),
-								),
-								array(
-									'id'      => '',
-									'type'    => 'switch',
-									'is_pro'  => true,
-									'label'   => __( 'Enable Talk To Expert Section in PDF', 'tourfic' ),
-									'default' => false,
-								),
-								array(
-									'id'          => '',
-									'type'        => 'text',
-									'is_pro'      => true,
-									'label'       => __( 'Talk to Expert - Label', 'tourfic' ),
-									'field_width' => 25,
-									'dependency'  => array(
-										array( 'itinerary-expert', '==', 'true' ),
-									),
-								),
-								array(
-									'id'          => '',
-									'type'        => 'text',
-									'label'       => __( 'Expert Name', 'tourfic' ),
-									'field_width' => 25,
-									'is_pro'      => true,
-									'dependency'  => array(
-										array( 'itinerary-expert', '==', 'true' ),
-									),
-								),
-								array(
-									'id'          => '',
-									'type'        => 'text',
-									'label'       => __( 'Expert Email Address', 'tourfic' ),
-									'field_width' => 25,
-									'is_pro'      => true,
-									'dependency'  => array(
-										array( 'itinerary-expert', '==', 'true' ),
-									),
-								),
-								array(
-									'id'          => '',
-									'type'        => 'text',
-									'label'       => __( 'Expert Phone Address', 'tourfic' ),
-									'field_width' => 25,
-									'is_pro'      => true,
-									'dependency'  => array(
-										array( 'itinerary-expert', '==', 'true' ),
-									),
-								),
-								array(
-									'id'         => '',
-									'type'       => 'image',
-									'is_pro'     => true,
-									'label'      => __( 'Expert Avatar Image', 'tourfic' ),
-									'dependency' => array(
-										array( 'itinerary-expert', '==', 'true' ),
-									),
-								),
-								array(
-									'id'         => '',
-									'type'       => 'switch',
-									'label'      => __( 'Enable Viber Contact', 'tourfic' ),
-									'dependency' => array(
-										array( 'itinerary-expert', '==', 'true' ),
-									),
-									'is_pro'  => true,
-								),
-								array(
-									'id'         => '',
-									'type'       => 'switch',
-									'is_pro'  => true,
-									'label'      => __( 'Enable WhatsApp Contact', 'tourfic' ),
-									'dependency' => array(
-										array( 'itinerary-expert', '==', 'true' ),
-									),
-								),
-								array(
-									'id'       => 'signle_tour_fonts',
-									'type'     => 'heading',
-									'label'    => __( 'PDF Downloader Font Support', 'tourfic' ),
-									'subtitle' => __( 'If your site\'s language is not English, then upload your language font. Otherwise, your Downloader PDF may not work properly.', 'tourfic' ),
-								),
-								array(
-									'id'     => '',
-									'type'   => 'file',
-									'label'  => __( 'Upload Fonts', 'tourfic' ),
-									'is_pro' => true,
+									'class'	  => 'tour-option-itinerary-notice',
+									'content' => __('By default, you can create your entire Tour Itinerary using our Default Itinerary editor found in the Single Tour settings. For access to an Itinerary builder with enhanced advanced features, please consider upgrading to our <b>Pro version.</b>', 'tourfic'),
 								),
 							),
 						),
 					),
-				),
-				array(
-					'id'          => '',
-					'type'        => 'switch',
-					'label'       => __( 'Enable Itinerary Map', 'tourfic' ),
-					'label_on'    => __( 'Yes', 'tourfic' ),
-					'label_off'   => __( 'No', 'tourfic' ),
-					'subtitle'  => __( 'To show the itinerary on a map, it is necessary to add your Google Maps API key in the settings under Miscellaneous -> Map.', 'tourfic' ),
-					'is_pro'      => true,
-					'field_width' => 50,
-				),
-				array(
-					'id'          => '',
-					'type'        => 'select',
-					'label'       => __( 'Map Mode', 'tourfic' ),
-					'options'     => array(
-						'DRIVING'   => __( 'Driving', 'tourfic' ),
-						'WALKING'   => __( 'Walking', 'tourfic' ),
-						'BICYCLING' => __( 'Bycycling', 'tourfic' ),
-					),
-					'default'     => 'driving',
-					'is_pro'      => true,
-					'field_width' => 50,
-				),
-
-			),
-		),
-		// Without Payment Popup
-		'without_payment_book'  => array(
-			'title'  => __( 'Without Payment Settings', 'tourfic' ),
-			'parent' => 'tour',
-			'icon'   => 'fa fa-cog',
-			'fields' => array(
-				array(
-					'id'       => 'confirmation_fields_heading',
-					'type'     => 'heading',
-					'label'    => __( 'Settings for Without Payment Option', 'tourfic' ),
-					'subtitle' => __( 'Activating the "Without Payment" booking option will enable the use of this section.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'tour-option-notice-four',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#Without_payment_Book" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				array(
-					'id'           => 'book-confirm-field',
-					'class'        => 'disable-sortable',
-					'type'         => 'repeater',
-					'button_title' => __( 'Add New', 'tourfic' ),
-					'label'        => __( 'Fields for Booking Confirmation', 'tourfic' ),
-					'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
-					'is_pro'       => true,
-					'fields'       => array(
-						array(
-							'id'    => 'reg-field-label',
-							'type'  => 'text',
-							'label' => __( 'Label', 'tourfic' ),
-						),
-						array(
-							'id'       => 'reg-field-name',
-							'type'     => 'text',
-							'label'    => __( 'Name', 'tourfic' ),
-							'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
-							'validate' => 'no_space_no_special',
-							'class'    => 'tf_hidden_fields'
-						),
-						array(
-							'id'      => 'reg-fields-type',
-							'type'    => 'select',
-							'label'   => __( 'Field Type', 'tourfic' ),
-							'options' => array(
-								'text'     => __( 'Text', 'tourfic' ),
-								'email'    => __( 'Email', 'tourfic' ),
-								'date'     => __( 'Date', 'tourfic' ),
-								'radio'    => __( 'Radio', 'tourfic' ),
-								'checkbox' => __( 'Checkbox', 'tourfic' ),
-								'select'   => __( 'Select', 'tourfic' ),
-							),
-							'class'   => 'tf_hidden_fields'
-						),
-						array(
-							'id'           => 'reg-options',
-							'type'         => 'repeater',
-							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'        => __( 'Option Label', 'tourfic' ),
-							'dependency'   => array(
-								array( 'reg-fields-type', '==', 'radio' ),
-							),
-							'fields'       => array(
-								array(
-									'label' => __( 'Field Label', 'tourfic' ),
-									'id'    => 'option-label',
-									'type'  => 'text',
-								),
-								array(
-									'label' => __( 'Field Value', 'tourfic' ),
-									'id'    => 'option-value',
-									'type'  => 'text',
-								),
-							),
-						),
-						array(
-							'id'           => 'reg-options',
-							'type'         => 'repeater',
-							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'        => __( 'Option Label', 'tourfic' ),
-							'dependency'   => array(
-								array( 'reg-fields-type', '==', 'select' ),
-							),
-							'fields'       => array(
-								array(
-									'label' => __( 'Field Label', 'tourfic' ),
-									'id'    => 'option-label',
-									'type'  => 'text',
-								),
-								array(
-									'label' => __( 'Field Value', 'tourfic' ),
-									'id'    => 'option-value',
-									'type'  => 'text',
-								),
-							),
-						),
-						array(
-							'id'           => 'reg-options',
-							'type'         => 'repeater',
-							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'        => __( 'Option Label', 'tourfic' ),
-							'dependency'   => array(
-								array( 'reg-fields-type', '==', 'checkbox' ),
-							),
-							'fields'       => array(
-								array(
-									'label' => __( 'Field Label', 'tourfic' ),
-									'id'    => 'option-label',
-									'type'  => 'text',
-								),
-								array(
-									'label' => __( 'Field Value', 'tourfic' ),
-									'id'    => 'option-value',
-									'type'  => 'text',
-								),
-							),
-						),
-						array(
-							'id'    => 'reg-field-required',
-							'type'  => 'switch',
-							'label' => __( 'Required Field ?', 'tourfic' ),
-							'class' => 'tf_hidden_fields'
-						),
-
-					),
-					'default'      => array(
-						array(
-							'reg-field-label'    => __( 'First Name', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_first_name', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Last Name', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_last_name', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Email', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_email', 'tourfic' ),
-							'reg-fields-type'    => 'email',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Phone', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_phone', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Country', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_country', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Street Address', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_street_address', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Town/City', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_town_city', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'State/Country', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_state_country', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Postcode/ZIP', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_postcode', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-					),
-				),
-				array(
-					'id'          => '',
-					'type'        => 'editor',
-					'label'       => __( 'Booking Confirmation Message', 'tourfic' ),
-					'default' 	  => 'Booked Successfully',
-					'is_pro'       => true,
-				),
-			),
-		),
-		// Booking Settings
-		'tour_booking_settings'  => array(
-			'title'  => __( 'Extras', 'tourfic' ),
-			'parent' => 'tour',
-			'icon'   => 'fa fa-cog',
-			'fields' => array(
-				array( // start
-					'id'    => 'booking_tour_heading',
-					'type'  => 'heading',
-					'label' => __( 'Additional Tour Options', 'tourfic' ),
-				),
-				array(
-					'id'      => 'tour-option-notice-four',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#extras" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				array(
-					'id'        => 'disable_traveller_info',
-					'type'      => 'switch',
-					'label'     => __( 'Enable Traveler Info', 'tourfic' ),
-					'subtitle'  => __( 'Enable this option, if you want to add traveler info.', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'is_pro'    => true
-				),
-				array(
-					'id'    => 'custom_fields_heading',
-					'type'  => 'heading',
-					'label' => __( 'Settings for Traveler Info Fields', 'tourfic' ),
-					'dependency' => array(
-						array( 'disable_traveller_info', '==', 'true' ),
-					),
-				),
-				array(
-					'id'           => 'without-payment-field',
-					'class'        => 'disable-sortable',
-					'type'         => 'repeater',
-					'button_title' => __( 'Add New', 'tourfic' ),
-					'label'        => __( 'Fields for Traveler Info', 'tourfic' ),
-					'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
-					'is_pro'       => true,
-					'dependency' => array(
-						array( 'disable_traveller_info', '==', 'true' ),
-					),
-					'fields'       => array(
-						array(
-							'id'    => 'reg-field-label',
-							'type'  => 'text',
-							'label' => __( 'Label', 'tourfic' ),
-						),
-						array(
-							'id'       => 'reg-field-name',
-							'type'     => 'text',
-							'label'    => __( 'Name', 'tourfic' ),
-							'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
-							'validate' => 'no_space_no_special',
-						),
-						array(
-							'id'      => 'reg-fields-type',
-							'type'    => 'select',
-							'label'   => __( 'Field Type', 'tourfic' ),
-							'options' => array(
-								'text'     => __( 'Text', 'tourfic' ),
-								'email'    => __( 'Email', 'tourfic' ),
-								'date'     => __( 'Date', 'tourfic' ),
-								'radio'    => __( 'Radio', 'tourfic' ),
-								'checkbox' => __( 'Checkbox', 'tourfic' ),
-								'select'   => __( 'Select', 'tourfic' ),
-							),
-						),
-						array(
-							'id'           => 'reg-options',
-							'type'         => 'repeater',
-							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'        => __( 'Option Label', 'tourfic' ),
-							'dependency'   => array(
-								array( 'reg-fields-type', '==', 'radio' ),
-							),
-							'fields'       => array(
-								array(
-									'label' => __( 'Field Label', 'tourfic' ),
-									'id'    => 'option-label',
-									'type'  => 'text',
-								),
-								array(
-									'label' => __( 'Field Value', 'tourfic' ),
-									'id'    => 'option-value',
-									'type'  => 'text',
-								),
-							),
-						),
-						array(
-							'id'           => 'reg-options',
-							'type'         => 'repeater',
-							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'        => __( 'Option Label', 'tourfic' ),
-							'dependency'   => array(
-								array( 'reg-fields-type', '==', 'select' ),
-							),
-							'fields'       => array(
-								array(
-									'label' => __( 'Field Label', 'tourfic' ),
-									'id'    => 'option-label',
-									'type'  => 'text',
-								),
-								array(
-									'label' => __( 'Field Value', 'tourfic' ),
-									'id'    => 'option-value',
-									'type'  => 'text',
-								),
-							),
-						),
-						array(
-							'id'           => 'reg-options',
-							'type'         => 'repeater',
-							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'        => __( 'Option Label', 'tourfic' ),
-							'dependency'   => array(
-								array( 'reg-fields-type', '==', 'checkbox' ),
-							),
-							'fields'       => array(
-								array(
-									'label' => __( 'Field Label', 'tourfic' ),
-									'id'    => 'option-label',
-									'type'  => 'text',
-								),
-								array(
-									'label' => __( 'Field Value', 'tourfic' ),
-									'id'    => 'option-value',
-									'type'  => 'text',
-								),
-							),
-						),
-						array(
-							'id'    => 'reg-field-required',
-							'type'  => 'switch',
-							'label' => __( 'Required Field ?', 'tourfic' ),
-						),
-
-					),
-					'default'      => array(
-						array(
-							'reg-field-label'    => __( 'Full Name', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_full_name', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'Date of birth', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_dob', 'tourfic' ),
-							'reg-fields-type'    => 'date',
-							'reg-field-required' => true,
-						),
-						array(
-							'reg-field-label'    => __( 'NID', 'tourfic' ),
-							'reg-field-name'     => __( 'tf_nid', 'tourfic' ),
-							'reg-fields-type'    => 'text',
-							'reg-field-required' => true,
-						)
-					),
-				),
-				array(
-					'id'          => 'tour_popup_extras_text',
-					'type'        => 'text',
-					'label'       => __( 'Tour Extra Description', 'tourfic' ),
-					'subtitle'    => __( 'Description Text for Tours Extras Section', 'tourfic' ),
-					'default' 	  => "In this section, you'll find the additional services we offer for our tours. If you wish to avail of any extra services, simply select them here. Your cultural journey begins and ends in Edinburgh, offering an in-depth exploration.",
-					'placeholder' => "In this section, you'll find the additional services we offer for our tours. If you wish to avail of any extra services, simply select them here. Your cultural journey begins and ends in Edinburgh, offering an in-depth exploration.",
-					'is_pro'      => true
-				),
-				array(
-					'id'          => 'tour_traveler_details_text',
-					'type'        => 'text',
-					'label'       => __( 'Traveler Details', 'tourfic' ),
-					'subtitle'    => __( 'Enter description for traveler details sectopm', 'tourfic' ),
-					'default' 	  => "Your information will be kept confidential to protect your privacy.",
-					'placeholder' => "Your information will be kept confidential to protect your privacy.",
-					'is_pro'      => true
 				),
 			),
 		),
@@ -1683,14 +1147,12 @@ TF_Settings::option( 'tf_settings', array(
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => true,
-					'is_pro'    => true
 				),
 				array(
 					'id'       => 'h-enquiry-email',
 					'type'     => 'text',
 					'label'    => __( 'Email for Enquiry Form', 'tourfic' ),
 					'subtitle' => __( 'Enter the email address that will receive all submissions from the enquiry form.', 'tourfic' ),
-					'is_pro' => true,
 				),
 				array(
 					'id'       => 'hotel_archive_price_minimum_settings',
@@ -1758,58 +1220,17 @@ TF_Settings::option( 'tf_settings', array(
 					'type'     => 'switch',
 					'label'    => __( 'Children Age Limit', 'tourfic' ),
 					'subtitle' => __( 'Turn on this option to set the Maximum age limit for Children. This can be overridden from Single Hotel Settings.', 'tourfic' ),
-					'is_pro'   => true,
 				),
 				array(
-					'id'         => '',
+					'id'         => 'children_age_limit',
 					'type'       => 'number',
 					'label'      => __( 'Insert your Maximum Age Limit', 'tourfic' ),
 					'subtitle'   => __( 'Numbers Only', 'tourfic' ),
 					'attributes' => array(
 						'min' => '0',
 					),
-					'is_pro'     => true,
+					'dependency' => array( 'enable_child_age_limit', '==', '1' ),
 				),
-			),
-		),
-		// Hotel service Popup
-		'payment_popup'         => array(
-			'title'  => __( 'Popup Settings', 'tourfic' ),
-			'parent' => 'hotel_option',
-			'icon'   => 'fa fa-cog',
-			'fields' => array(
-				array(
-					'id'    => 'hotel_popup_heading',
-					'type'  => 'heading',
-					'label' => __( 'Settings for Popup', 'tourfic' ),
-					'subtitle'   => __( 'The popup will appear when you enable the deposit option or the airport pickup service.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'hotel-option-notice-three',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/#popup" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				array(
-					'id'    => '',
-					'type'  => 'text',
-					'label' => __( 'Popup Title', 'tourfic' ),
-					'is_pro' => true,
-				),
-
-				array(
-					'id'     => '',
-					'type'   => 'textarea',
-					'label'  => __( 'Popup Description', 'tourfic' ),
-					'is_pro' => true,
-				),
-
-				array(
-					'id'      => '',
-					'type'    => 'text',
-					'label'   => __( 'Popup Button Text', 'tourfic' ),
-					'default' => __( 'Continue to booking', 'tourfic' ),
-					'is_pro'  => true,
-				)
 			),
 		),
 
@@ -1846,6 +1267,11 @@ TF_Settings::option( 'tf_settings', array(
 							'id'    => 'amenities_cat_name',
 							'type'  => 'text',
 							'label' => __( 'Category Name', 'tourfic' ),
+						),
+						array(
+							'id'    => 'amenities_cat_icon',
+							'type'  => 'icon',
+							'label' => __( 'Category Icon', 'tourfic' ),
 						),
 					),
 				),
@@ -1888,6 +1314,7 @@ TF_Settings::option( 'tf_settings', array(
 		//Frontend Dashboard
 		'frontend_dashboard'    => array(
 			'title'  => __( 'Frontend Dashboard', 'tourfic' ),
+			'parent' => 'pro_options',
 			'icon'   => 'fa-solid fa-gauge-high',
 			'fields' => array(
 				//logo
@@ -1928,6 +1355,7 @@ TF_Settings::option( 'tf_settings', array(
 		//user options
 		'user_options'          => array(
 			'title'  => __( 'User Options', 'tourfic' ),
+			'parent' => 'pro_options',
 			'icon'   => 'fas fa-user',
 			'fields' => array(
 				array(
@@ -2089,6 +1517,7 @@ TF_Settings::option( 'tf_settings', array(
 		// Multi Vendor
 		'vendor'                => array(
 			'title'  => __( 'Multi Vendor', 'tourfic' ),
+			'parent' => 'pro_options',
 			'icon'   => 'fa fa-handshake',
 			'fields' => array(
 				array(
@@ -2347,19 +1776,35 @@ TF_Settings::option( 'tf_settings', array(
 					'type'      => 'switch',
 					'label'     => __( 'Date Required in Hotel Search', 'tourfic' ),
 					'subtitle'  => __( 'Activate this feature to enable users to pick their check-in and check-out dates for searching.', 'tourfic' ),
-					'is_pro'    => true,
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => false,
+					'default'   => true,
 				),
 				array(
 					'id'        => 'disable_hotel_child_search',
 					'type'      => 'switch',
 					'label'     => __( 'Disable Child in Hotel Search', 'tourfic' ),
-					'is_pro'    => true,
 					'subtitle'  => __( 'Turn on this setting to hide the child option from the search form.', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'        => 'optional_hotel_search_field',
+					'type'      => 'switch',
+					'label'     => __( ' Location Required in Hotel Search', 'tourfic' ),
+					'subtitle'  => __( 'Enable this setting to make the location field optional for the search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => true,
+				),
+				array(
+					'id'        => 'hide_hotel_location_search',
+					'type'      => 'switch',
+					'label'     => __( 'Hide Location in Hotel Search', 'tourfic' ),
+					'subtitle'  => __( 'Enable this setting to hide the location option from the search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'dependency' => array( "optional_hotel_search_field", "==", "false")
 				),
 				array(
 					'id'       => 'tour_search_heading',
@@ -2371,9 +1816,9 @@ TF_Settings::option( 'tf_settings', array(
 					'type'      => 'switch',
 					'label'     => __( 'Date Required in Tour Search', 'tourfic' ),
 					'subtitle'  => __( 'Activate this feature to enable users to pick their check-in and check-out dates for searching.', 'tourfic' ),
-					'is_pro'    => true,
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => true,
 				),
 				array(
 					'id'        => 'disable_child_search',
@@ -2401,7 +1846,6 @@ TF_Settings::option( 'tf_settings', array(
 					'type'      => 'switch',
 					'label'     => __( 'Date Required in Apartment Search', 'tourfic' ),
 					'subtitle'  => __( 'Activate this feature to enable users to pick their check-in and check-out dates for searching.', 'tourfic' ),
-					'is_pro'    => true,
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 				),
@@ -2511,7 +1955,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h1',
 					'type'        => 'number',
 					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'subtitle'    => __( 'Font Size of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2522,7 +1965,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h1-line-height',
 					'type'        => 'text',
 					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2533,7 +1975,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h1-weight',
 					'type'        => 'select',
 					'label'       => __( 'Font Weight', 'tourfic' ),
-					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
@@ -2552,7 +1993,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h1-style',
 					'type'        => 'select',
 					'label'       => __( 'Font Style', 'tourfic' ),
-					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
@@ -2570,7 +2010,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h2',
 					'type'        => 'number',
 					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'subtitle'    => __( 'Font Size of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2581,7 +2020,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h2-line-height',
 					'type'        => 'text',
 					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2592,7 +2030,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h2-weight',
 					'type'        => 'select',
 					'label'       => __( 'Font Weight', 'tourfic' ),
-					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
@@ -2611,7 +2048,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h2-style',
 					'type'        => 'select',
 					'label'       => __( 'Font Style', 'tourfic' ),
-					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
@@ -2629,7 +2065,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h3',
 					'type'        => 'number',
 					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'subtitle'    => __( 'Font Size of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2640,7 +2075,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h3-line-height',
 					'type'        => 'text',
 					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2651,7 +2085,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h3-weight',
 					'type'        => 'select',
 					'label'       => __( 'Font Weight', 'tourfic' ),
-					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
@@ -2670,7 +2103,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h3-style',
 					'type'        => 'select',
 					'label'       => __( 'Font Style', 'tourfic' ),
-					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
@@ -2688,7 +2120,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h4',
 					'type'        => 'number',
 					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'subtitle'    => __( 'Font Size of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2699,7 +2130,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h4-line-height',
 					'type'        => 'text',
 					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2710,7 +2140,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h4-weight',
 					'type'        => 'select',
 					'label'       => __( 'Font Weight', 'tourfic' ),
-					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
@@ -2729,7 +2158,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h4-style',
 					'type'        => 'select',
 					'label'       => __( 'Font Style', 'tourfic' ),
-					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
@@ -2747,7 +2175,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h5',
 					'type'        => 'number',
 					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'subtitle'    => __( 'Font Size of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2758,7 +2185,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h5-line-height',
 					'type'        => 'text',
 					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2769,7 +2195,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h5-weight',
 					'type'        => 'select',
 					'label'       => __( 'Font Weight', 'tourfic' ),
-					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
@@ -2788,7 +2213,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h5-style',
 					'type'        => 'select',
 					'label'       => __( 'Font Style', 'tourfic' ),
-					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
@@ -2806,7 +2230,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h6',
 					'type'        => 'number',
 					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'subtitle'    => __( 'Font Size of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2817,7 +2240,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h6-line-height',
 					'type'        => 'text',
 					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2828,7 +2250,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h6-weight',
 					'type'        => 'select',
 					'label'       => __( 'Font Weight', 'tourfic' ),
-					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
@@ -2847,7 +2268,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-h6-style',
 					'type'        => 'select',
 					'label'       => __( 'Font Style', 'tourfic' ),
-					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
@@ -2865,7 +2285,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-p',
 					'type'        => 'number',
 					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'subtitle'    => __( 'Font Size of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2876,7 +2295,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-p-line-height',
 					'type'        => 'text',
 					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
@@ -2887,7 +2305,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-p-weight',
 					'type'        => 'select',
 					'label'       => __( 'Font Weight', 'tourfic' ),
-					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
@@ -2906,7 +2323,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'global-p-style',
 					'type'        => 'select',
 					'label'       => __( 'Font Style', 'tourfic' ),
-					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
 					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
@@ -3291,7 +2707,7 @@ TF_Settings::option( 'tf_settings', array(
 		 */
 		'login_register'        => array(
 			'title'  => __( 'Login & Register', 'tourfic' ),
-			'parent' => 'miscellaneous',
+			'parent' => 'pro_options',
 			'icon'   => 'fas fa-user',
 			'fields' => array(
 				array(
@@ -3710,7 +3126,6 @@ TF_Settings::option( 'tf_settings', array(
 
 		'permalink' => array(
 			'title'  => __( 'Permalink Settings', 'tourfic' ),
-			'parent' => 'miscellaneous',
 			'icon'   => 'fas fa-link',
 			'fields' => array(
 				array(
@@ -3722,7 +3137,33 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'permalink_notice',
 					'type'    => 'notice',
-					'content' => __( 'For permalink settings go to default <a href="' . get_admin_url() . 'options-permalink.php">permalink settings page</a>.' . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/#permalink-settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>', 'tourfic' ),
+					'content' => __( 'Anything confusing?' . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/#permalink-settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>', 'tourfic' ),
+				),
+
+				array(
+					'id'       => 'tour-permalink-setting',
+					'type'     => 'text',
+					'label'    => __( 'Tour Permalink', 'tourfic' ),
+					'subtitle' => __( 'Enter a permalink for your tour archive page.', 'tourfic' ),
+					'default' => "tours",
+					'placeholder' => !empty(get_option("tour_slug")) ? get_option("tour_slug") : "tours",
+					
+				),
+				array(
+					'id'       => 'hotel-permalink-setting',
+					'type'     => 'text',
+					'label'    => __( 'Hotel Permalink', 'tourfic' ),
+					'subtitle' => __( 'Enter a permalink for your hotel archive page.', 'tourfic' ),
+					'default' => "hotels",
+					'placeholder' => ! empty(get_option("hotel_slug")) ? get_option("hotel_slug") : "hotels",
+				),
+				array(
+					'id'       => 'apartment-permalink-setting',
+					'type'     => 'text',
+					'label'    => __( 'Apartment Permalink', 'tourfic' ),
+					'subtitle' => __( 'Enter a permalink for your apartment archive page.', 'tourfic' ),
+					'default' => "apartments",
+					'placeholder' => ! empty(get_option("apartment_slug")) ? get_option("apartment_slug") : "apartments",
 				),
 
 			),
@@ -4004,6 +3445,7 @@ TF_Settings::option( 'tf_settings', array(
 		 */
 		'affiliate' => array(
 			'title'  => __( 'Affiliate', 'tourfic' ),
+			'parent' => 'pro_options',
 			'icon'   => 'fa fa-handshake-o',
 			'fields' => array(
 				array(
@@ -4118,24 +3560,7 @@ TF_Settings::option( 'tf_settings', array(
 									'default'     => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ),
 									'description' => __( 'This template will be sent to admin', 'tourfic' )
 								),
-								//heading
-								array(
-									'id'    => 'vendor_email_heading',
-									'type'  => 'heading',
-									'label' => __( 'Vendor Email', 'tourfic' ),
-								),
-
-								array(
-									'id'          => 'vendor_booking_email_template',
-									'type'        => 'editor',
-									'label'       => __( 'Vendor Notification Template', 'tourfic' ),
-									'default'     => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ),
-									'description' => __( 'This template will be sent to vendor', 'tourfic' ),
-									'is_pro'    => true
-								),
-
 							),
-
 						),
 
 						//customer email tab
@@ -4223,6 +3648,7 @@ TF_Settings::option( 'tf_settings', array(
 		//QR Code settings
 		'qr_code' => array(
 			'title'  => __( 'QR Code', 'tourfic' ),
+			'parent' => 'pro_options',
 			'icon'   => 'fa fa-qrcode',
 			'fields' => array(
 				array(
@@ -4292,6 +3718,7 @@ TF_Settings::option( 'tf_settings', array(
 
 		'integration' => array(
 			'title'  => __( 'Integration', 'tourfic' ),
+			'parent' => 'pro_options',
 			'icon'   => 'fa fa-plus',
 			'fields' => array(
 				array(
@@ -4718,6 +4145,620 @@ TF_Settings::option( 'tf_settings', array(
 					'type' => 'backup',
 				),  
 
+			),
+		),
+		// Pro Options
+		'pro_options' => array(
+			'title'  => __( 'Pro Options', 'tourfic' ),
+			'icon'   => 'fa-solid fa-atom',
+			'fields' => array(),
+		),
+		// Itinerary Settings
+		'tour_itinerary-pro'        => array(
+			'title'  => __( 'Tour Itinerary Settings', 'tourfic' ),
+			'parent' => 'pro_options',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'   => 'itinerary-builder-setings',
+					'type' => 'tab',
+					'tabs' => array(
+						array(
+							'id'     => 'itinerary-builder-setting',
+							'title'  => 'Itinerary Builder Settings',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'      => 'tour-option-notice-three',
+									'type'    => 'notice',
+									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+								),
+								array(
+									'id'       => 'itinerary-builder-heading',
+									'type'     => 'heading',
+									'subtitle' => __( 'You can create your own Itinerary using Tourfic\'s Itinerary builder. The builder can be found on Single Tour Settings', 'tourfic' ),
+								),
+								array(
+									'id'           => '',
+									'type'         => 'repeater',
+									'label'        => __( 'Create Custom Itinerary options', 'tourfic' ),
+									'button_title' => __( 'Add New Options', 'tourfic' ),
+									'is_pro'       => true,
+									'fields'       => array(
+										array(
+											'id'    => 'sleep-mode-title',
+											'type'  => 'text',
+											'label' => __( 'Field Title', 'tourfic' ),
+										),
+										array(
+											'id'    => 'sleep-mode-icon',
+											'type'  => 'icon',
+											'label' => __( 'Field Icon', 'tourfic' ),
+										),
+									),
+								),
+								array(
+									'id'           => '',
+									'type'         => 'repeater',
+									'button_title' => __( 'Add New Meal', 'tourfic' ),
+									'label'        => __( 'Include Meal', 'tourfic' ),
+									'is_pro'       => true,
+									'fields'       => array(
+										array(
+											'id'    => 'meal',
+											'type'  => 'text',
+											'label' => __( 'Meal name', 'tourfic' ),
+										),
+									),
+								),
+								array(
+									'id'      => '',
+									'label'   => __( 'Elevation Input', 'tourfic' ),
+									'type'    => 'select',
+									'options' => [
+										'Meter' => __( 'Meter', 'tourfic' ),
+										'Feet'  => __( 'Feet', 'tourfic' ),
+									],
+									'is_pro'  => true,
+									'default' => 'Meter',
+								),
+								array(
+									'id'          => '',
+									'type'        => 'switch',
+									'is_pro'      => true,
+									'label'       => __( 'Show Chart on Trip Page', 'tourfic' ),
+									'field_width' => 50,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'switch',
+									'is_pro'      => true,
+									'label'       => __( 'Always Show All Itinerary', 'tourfic' ),
+									'field_width' => 50,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'switch',
+									'is_pro'      => true,
+									'label'       => __( 'Show X-Axis', 'tourfic' ),
+									'field_width' => 50,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'switch',
+									'is_pro'      => true,
+									'label'       => __( 'Show Y-Axis', 'tourfic' ),
+									'field_width' => 50,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'switch',
+									'is_pro'      => true,
+									'label'       => __( 'Show line Graph', 'tourfic' ),
+									'field_width' => 50,
+								),
+							),
+						),
+						array(
+							'id'     => 'itinerary-downloader-setting',
+							'title'  => 'Itinerary Downloader Settings',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'      => 'tour-option-notice-three',
+									'type'    => 'notice',
+									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+								),
+								array(
+									'id'       => '',
+									'type'     => 'switch',
+									'is_pro'   => true,
+									'label'    => __( 'Enable Itinerary Downloader', 'tourfic' ),
+									'subtitle' => __( 'Turn this on to give customers the option to download the itinerary plan as a PDF.', 'tourfic' ),
+									"default" => true,
+								),
+								array(
+									'id'      => 'tour_pdf_downloader_section',
+									'type'    => 'heading',
+									'content' => __( 'Tour Itinerary Downloader Section', 'tourfic' ),
+								),
+								array(
+									'id'    => '',
+									'type'  => 'text',
+									'label' => __( 'Itinerary Downloader Title', 'tourfic' ),
+									'default' => "Want to read it later?",
+									'placeholder' => "Want to read it later?",
+									'is_pro'   => true,
+								),
+								array(
+									'id'    => '',
+									'type'  => 'text',
+									'label' => __( 'Itinerary Downloader Description', 'tourfic' ),
+									'default' => "Download this tour's PDF brochure and start your planning offline.",
+									'placeholder' => "Download this tour's PDF brochure and start your planning offline.",
+									'is_pro'   => true,
+								),
+								array(
+									'id'    => '',
+									'type'  => 'text',
+									'label' => __( 'Itinerary Downloader Button Text', 'tourfic' ),
+									'default' => "Download Now",
+									'placeholder' => "Download Now",
+									'is_pro'   => true,
+								),
+								array(
+									'id'      => 'tour_settings',
+									'type'    => 'heading',
+									'content' => __( 'Thumbnail Settings in PDF', 'tourfic' ),
+								),
+								array(
+									'id'          => '',
+									'type'        => 'number',
+									'label'       => __( 'Image Thumbnail Height', 'tourfic' ),
+									'field_width' => 50,
+									'is_pro'      => true,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'number',
+									'label'       => __( 'Image Thumbnail Width', 'tourfic' ),
+									'field_width' => 50,
+									'is_pro'      => true,
+								),
+								array(
+									'id'      => 'companey_info_heading',
+									'type'    => 'heading',
+									'content' => __( 'Default Company Info in PDF', 'tourfic' ),
+								),
+								array(
+									'id'      => 'tour-option-notice-one',
+									'type'    => 'notice',
+									'content' => __( 'If no company information is specified in the Single Tour Settings, this information will be used by default.', 'tourfic' ),
+								),
+
+								array(
+									'id'     => '',
+									'type'   => 'image',
+									'is_pro' => true,
+									'label'  => __( 'Company Logo', 'tourfic' ),
+								),
+								array(
+									'id'     => '',
+									'type'   => 'textarea',
+									'is_pro' => true,
+									'label'  => __( 'Company Description', 'tourfic' ),
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'is_pro'      => true,
+									'label'       => __( 'Company Email Address', 'tourfic' ),
+									'field_width' => 33.33,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'is_pro'      => true,
+									'label'       => __( 'Company Address', 'tourfic' ),
+									'field_width' => 33.33,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'is_pro'      => true,
+									'label'       => __( 'Company Phone', 'tourfic' ),
+									'field_width' => 33.33,
+								),
+								array(
+									'id'    => 'export_heading',
+									'type'  => 'heading',
+									'label' => __( 'Talk to Expert Section', 'tourfic' ),
+								),
+								array(
+									'id'      => '',
+									'type'    => 'switch',
+									'is_pro'  => true,
+									'label'   => __( 'Enable Talk To Expert Section in PDF', 'tourfic' ),
+									'default' => false,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'is_pro'      => true,
+									'label'       => __( 'Talk to Expert - Label', 'tourfic' ),
+									'field_width' => 25,
+									'dependency'  => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'label'       => __( 'Expert Name', 'tourfic' ),
+									'field_width' => 25,
+									'is_pro'      => true,
+									'dependency'  => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'label'       => __( 'Expert Email Address', 'tourfic' ),
+									'field_width' => 25,
+									'is_pro'      => true,
+									'dependency'  => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'label'       => __( 'Expert Phone Address', 'tourfic' ),
+									'field_width' => 25,
+									'is_pro'      => true,
+									'dependency'  => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+								),
+								array(
+									'id'         => '',
+									'type'       => 'image',
+									'is_pro'     => true,
+									'label'      => __( 'Expert Avatar Image', 'tourfic' ),
+									'dependency' => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+								),
+								array(
+									'id'         => '',
+									'type'       => 'switch',
+									'label'      => __( 'Enable Viber Contact', 'tourfic' ),
+									'dependency' => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+									'is_pro'  => true,
+								),
+								array(
+									'id'         => '',
+									'type'       => 'switch',
+									'is_pro'  => true,
+									'label'      => __( 'Enable WhatsApp Contact', 'tourfic' ),
+									'dependency' => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+								),
+								array(
+									'id'       => 'signle_tour_fonts',
+									'type'     => 'heading',
+									'label'    => __( 'PDF Downloader Font Support', 'tourfic' ),
+									'subtitle' => __( 'If your site\'s language is not English, then upload your language font. Otherwise, your Downloader PDF may not work properly.', 'tourfic' ),
+								),
+								array(
+									'id'     => '',
+									'type'   => 'file',
+									'label'  => __( 'Upload Fonts', 'tourfic' ),
+									'is_pro' => true,
+								),
+							),
+						),
+					),
+				),
+				array(
+					'id'          => '',
+					'type'        => 'switch',
+					'label'       => __( 'Enable Itinerary Map', 'tourfic' ),
+					'label_on'    => __( 'Yes', 'tourfic' ),
+					'label_off'   => __( 'No', 'tourfic' ),
+					'subtitle'  => __( 'To show the itinerary on a map, it is necessary to add your Google Maps API key in the settings under Miscellaneous -> Map.', 'tourfic' ),
+					'is_pro'      => true,
+					'field_width' => 50,
+				),
+				array(
+					'id'          => '',
+					'type'        => 'select',
+					'label'       => __( 'Map Mode', 'tourfic' ),
+					'options'     => array(
+						'DRIVING'   => __( 'Driving', 'tourfic' ),
+						'WALKING'   => __( 'Walking', 'tourfic' ),
+						'BICYCLING' => __( 'Bycycling', 'tourfic' ),
+					),
+					'default'     => 'driving',
+					'is_pro'      => true,
+					'field_width' => 50,
+				),
+
+			),
+		),
+		// Partial Payment Popup
+		'tour_payment_popup'    => array(
+			'title'  => __( 'Tour Partial Payment', 'tourfic' ),
+			'parent' => 'pro_options',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'    => 'signle_tour_heading',
+					'type'  => 'heading',
+					'label' => __( 'Settings for Partial Payment', 'tourfic' ),
+					'subtitle'  => __( 'This option will appear as Popup during Booking.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'tour-option-notice-two',
+					'type'    => 'notice',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#partial_payment" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+				),
+
+				array(
+					'id'      => 'deposit-title',
+					'type'    => 'text',
+					'label'   => __( 'Label', 'tourfic' ),
+					'default' => __( 'Partial payment of {amount} on total', 'tourfic' ),
+					'placeholder' => __( 'Partial payment of {amount} on total', 'tourfic' ),
+					'is_pro' => true,
+				),
+				array(
+					'id'      => '',
+					'type'    => 'textarea',
+					'label'   => __( 'Description', 'tourfic' ),
+					'is_pro' => true,
+					'default' => __( 'You have the option to make a partial payment to secure your tour booking. The remaining balance can then be settled after the tour is completed.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'notice_shortcode',
+					'type'    => 'notice',
+					'content' => __( 'Use shortcode <code>{amount}</code> to show percentage amount in Label', 'tourfic' ),
+					'is_pro' => true
+				),
+			),
+		),
+		// Without Payment Popup
+		'without_payment_book'  => array(
+			'title'  => __( 'Tour Without Payment', 'tourfic' ),
+			'parent' => 'pro_options',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'       => 'confirmation_fields_heading',
+					'type'     => 'heading',
+					'label'    => __( 'Settings for Without Payment Option', 'tourfic' ),
+					'subtitle' => __( 'Activating the "Without Payment" booking option will enable the use of this section.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'tour-option-notice-four',
+					'type'    => 'notice',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#Without_payment_Book" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'           => 'book-confirm-field',
+					'class'        => 'disable-sortable',
+					'type'         => 'repeater',
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'label'        => __( 'Fields for Booking Confirmation', 'tourfic' ),
+					'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
+					'is_pro'       => true,
+					'fields'       => array(
+						array(
+							'id'    => 'reg-field-label',
+							'type'  => 'text',
+							'label' => __( 'Label', 'tourfic' ),
+						),
+						array(
+							'id'       => 'reg-field-name',
+							'type'     => 'text',
+							'label'    => __( 'Name', 'tourfic' ),
+							'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
+							'validate' => 'no_space_no_special',
+							'class'    => 'tf_hidden_fields'
+						),
+						array(
+							'id'      => 'reg-fields-type',
+							'type'    => 'select',
+							'label'   => __( 'Field Type', 'tourfic' ),
+							'options' => array(
+								'text'     => __( 'Text', 'tourfic' ),
+								'email'    => __( 'Email', 'tourfic' ),
+								'date'     => __( 'Date', 'tourfic' ),
+								'radio'    => __( 'Radio', 'tourfic' ),
+								'checkbox' => __( 'Checkbox', 'tourfic' ),
+								'select'   => __( 'Select', 'tourfic' ),
+							),
+							'class'   => 'tf_hidden_fields'
+						),
+						array(
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
+								array( 'reg-fields-type', '==', 'radio' ),
+							),
+							'fields'       => array(
+								array(
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
+								),
+								array(
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
+								),
+							),
+						),
+						array(
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
+								array( 'reg-fields-type', '==', 'select' ),
+							),
+							'fields'       => array(
+								array(
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
+								),
+								array(
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
+								),
+							),
+						),
+						array(
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
+								array( 'reg-fields-type', '==', 'checkbox' ),
+							),
+							'fields'       => array(
+								array(
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
+								),
+								array(
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
+								),
+							),
+						),
+						array(
+							'id'    => 'reg-field-required',
+							'type'  => 'switch',
+							'label' => __( 'Required Field ?', 'tourfic' ),
+							'class' => 'tf_hidden_fields'
+						),
+
+					),
+					'default'      => array(
+						array(
+							'reg-field-label'    => __( 'First Name', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_first_name', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Last Name', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_last_name', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Email', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_email', 'tourfic' ),
+							'reg-fields-type'    => 'email',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Phone', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_phone', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Country', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_country', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Street Address', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_street_address', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Town/City', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_town_city', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'State/Country', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_state_country', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Postcode/ZIP', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_postcode', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+					),
+				),
+				array(
+					'id'          => '',
+					'type'        => 'editor',
+					'label'       => __( 'Booking Confirmation Message', 'tourfic' ),
+					'default' 	  => 'Booked Successfully',
+					'is_pro'       => true,
+				),
+			),
+		),
+		// Hotel service Popup
+		'payment_popup'         => array(
+			'title'  => __( 'Hotel Popup Settings', 'tourfic' ),
+			'parent' => 'pro_options',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'    => 'hotel_popup_heading',
+					'type'  => 'heading',
+					'label' => __( 'Settings for Popup', 'tourfic' ),
+					'subtitle'   => __( 'The popup will appear when you enable the deposit option or the airport pickup service.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'hotel-option-notice-three',
+					'type'    => 'notice',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/#popup" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'    => '',
+					'type'  => 'text',
+					'label' => __( 'Popup Title', 'tourfic' ),
+					'is_pro' => true,
+				),
+
+				array(
+					'id'     => '',
+					'type'   => 'textarea',
+					'label'  => __( 'Popup Description', 'tourfic' ),
+					'is_pro' => true,
+				),
+
+				array(
+					'id'      => '',
+					'type'    => 'text',
+					'label'   => __( 'Popup Button Text', 'tourfic' ),
+					'default' => __( 'Continue to booking', 'tourfic' ),
+					'is_pro'  => true,
+				)
 			),
 		),
 	),

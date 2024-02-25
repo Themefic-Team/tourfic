@@ -341,7 +341,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 				$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
 					return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
 				}, $rooms );
-				$rooms                = unserialize( $tf_hotel_rooms_value );
+				$rooms  = unserialize( $tf_hotel_rooms_value );
 			}
 
 			$room_array = array();
@@ -621,6 +621,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 						'shipping_postcode'   => $field['tf_customer_zip'],
 						'shipping_country'    => $field['tf_customer_country'],
 						'shipping_phone'      => $field['tf_customer_phone'],
+						'tf_email'      => $field['tf_customer_email'],
 					);
 					$order_details    = [
 						'order_by'             => $field['tf_hotel_booked_by'],
@@ -646,7 +647,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 						'billing_details'  => $billing_details,
 						'shipping_details' => $shipping_details,
 						'order_details'    => $order_details,
-						'payment_method'   => "Booked by " . $field['tf_hotel_booked_by'],
+						'payment_method'   => "offline",
 						'status'           => 'processing',
 						'order_date'       => date( 'Y-m-d H:i:s' ),
 					);

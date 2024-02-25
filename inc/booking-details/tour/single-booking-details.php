@@ -204,12 +204,26 @@
                                     <td><?php echo wc_price($tf_tour_details->total_price); ?></td>
                                 </tr>
                                 <?php } ?>
+                                <?php $taxs = !empty($tf_tour_details->tax_info) ? json_decode($tf_tour_details->tax_info, true) : '';;
+                                $taxs_summations = 0;
+                                foreach ( $taxs as $label => $sum ) {
+                                    $taxs_summations += $sum;
+                                }
+                                ?>
+                                <?php 
+                                if(!empty($taxs_summations)){ ?>
+                                <tr>
+                                    <th><?php _e("Tax", "tourfic"); ?></th>
+                                    <td>:</td>
+                                    <td><?php echo wc_price($taxs_summations); ?></td>
+                                </tr>
+                                <?php } ?>
                                 <?php 
                                 if(!empty($tf_tour_details->due_price)){ ?>
                                 <tr>
                                     <th><?php _e("Due Price", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo wc_price($tf_tour_details->due_price); ?></td>
+                                    <td><?php echo $tf_tour_details->due_price; ?></td>
                                 </tr>
                                 <?php } ?>
                             </table>

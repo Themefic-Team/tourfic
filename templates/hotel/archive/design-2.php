@@ -42,7 +42,7 @@
                     <!--Available rooms start -->
                     <div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
                         <div class="tf-archive-available-rooms-head tf-available-rooms-head">
-                            <h2 class="tf-total-results"><?php _e("Total", "tourfic"); ?> <span><?php echo $post_count; ?></span> <?php _e("hotels available", "tourfic"); ?></h2>
+                            <span class="tf-total-results"><?php _e("Total", "tourfic"); ?> <span><?php echo $post_count; ?></span> <?php _e("hotels available", "tourfic"); ?></span>
                             <div class="tf-archive-filter-showing">
                                 <i class="ri-equalizer-line"></i>
                             </div>
@@ -62,7 +62,17 @@
                             if ( have_posts() ) {
                                 while ( have_posts() ) {
                                     the_post();
-                                    tf_hotel_archive_single_item();
+                                    $hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
+                                    if ( !empty( $hotel_meta[ "featured" ] ) && $hotel_meta[ "featured" ] == 1 ) {
+                                        tf_hotel_archive_single_item();
+                                    }
+                                }
+                                while ( have_posts() ) {
+                                    the_post();
+                                    $hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
+                                    if ( !empty($hotel_meta[ "featured" ]) ) {
+                                        tf_hotel_archive_single_item();
+                                    }
                                 }
                             } else {
                                 echo '<div class="tf-nothing-found" data-post-count="0" >' .__("No Tours Found!", "tourfic"). '</div>';

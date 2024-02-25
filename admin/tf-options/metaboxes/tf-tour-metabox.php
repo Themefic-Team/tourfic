@@ -1034,6 +1034,23 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'is_pro'  => true,
 					'dependency'  => array( 'booking-by', '==', '2' ),
 				),
+				array(
+					'id'        => 'is_taxable',
+					'type'      => 'switch',
+					'label'     => __( 'Taxable', 'tourfic' ),
+					'subtitle' => __( 'Activate this option to enable tax for this Tour.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'is_pro'  => true
+				),
+				array(
+					'id'      => 'taxable_class',
+					'type'    => 'select',
+					'label'   => __( 'Tax class', 'tourfic' ),
+					'subtitle'  => __( 'Select your class, and tax will calculate based on your chosen class. PS: If you activate partial payment option tax will be calculated upon partial amount as woocommerce regulations.', 'tourfic' ),
+					'options' => tf_taxable_option_callback(),
+					'is_pro'  => true
+				),
 			),
 		),
 		// // Exclude/Include
@@ -1226,6 +1243,25 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 							'class'       => 'ininenary-group',
 							'placeholder' => 'Location',
 							'field_width' => 33,
+							'is_pro'      => true,
+						),
+						array(
+							'id'               => 'valuetype',
+							'label'            => __( 'Elevation Input', 'tourfic' ),
+							'type'             => 'select',
+							'class'            => 'ininenary-group',
+							'options_callback' => 'elevation_option_callback',
+							'field_width'      => 33,
+							'is_pro'      => true,
+						),
+						array(
+							'id'          => 'loacation-latitude',
+							'label'       => __( 'Location Latitude', 'tourfic' ),
+							'type'        => 'text',
+							'subtitle'     => __("Enter Latitude to Pin it on the map", 'tourfic'),
+							'class'       => 'ininenary-group',
+							'placeholder' => 'Latitude',
+							'field_width' => 50,
 							'is_pro'      => true,
 						),
 						array(

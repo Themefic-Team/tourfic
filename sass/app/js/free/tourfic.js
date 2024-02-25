@@ -83,7 +83,11 @@
             if ($.trim(checkin) === '' && tf_params.date_apartment_search && posttype === 'tf_apartment') {
 
                 if ($('#tf-required').length === 0) {
-                    $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
+                    if($('.tf_booking-dates .tf_label-row').length === 1){
+                        $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
+                    }else{
+                        $("#check-in-out-date").click();
+                    }
                 }
                 return;
             }
@@ -474,8 +478,6 @@
             autoplaySpeed: 2000,
             slidesToShow: 3,
             slidesToScroll: 1,
-            prevArrow:'<button type="button" class="slick-prev pull-left"><svg xmlns="http://www.w3.org/2000/svg" width="49" height="24" viewBox="0 0 49 24" fill="none"><path d="M8.32843 10.997H44.5V12.997H8.32843L13.6924 18.3609L12.2782 19.7751L4.5 11.997L12.2782 4.21875L13.6924 5.63296L8.32843 10.997Z" fill="#B58E53"/></svg></button>',
-            nextArrow:'<button type="button" class="slick-next pull-right"><svg xmlns="http://www.w3.org/2000/svg" width="49" height="24" viewBox="0 0 49 24" fill="none"><path d="M40.6716 10.997H4.5V12.997H40.6716L35.3076 18.3609L36.7218 19.7751L44.5 11.997L36.7218 4.21875L35.3076 5.63296L40.6716 10.997Z" fill="#B58E53"/></svg></button>',
             responsive: [
                 {
                     breakpoint: 1024,
@@ -938,10 +940,12 @@
             let thisEml = $(this);
             let thisVal = thisEml.val();
 
+            console.log( thisEml)
+
             if (thisVal > 1) {
-                thisEml.closest('.tf_selectperson-wrap').find('.adults-text').text(thisVal + " " + tf_params.adult);
+                $('.tf_selectperson-wrap').find('.adults-text').text(thisVal + " " + tf_params.adult + 's');
             } else {
-                thisEml.closest('.tf_selectperson-wrap').find('.adults-text').text(thisVal + " " + tf_params.adult);
+                $('.tf_selectperson-wrap').find('.adults-text').text(thisVal + " " + tf_params.adult);
             }
 
         });
@@ -952,9 +956,9 @@
             let thisVal = thisEml.val();
 
             if (thisVal > 1) {
-                thisEml.closest('.tf_selectperson-wrap').find('.child-text').text(thisVal + " " + tf_params.children);
+                $('.tf_selectperson-wrap').find('.child-text').text(thisVal + " " + tf_params.children);
             } else {
-                thisEml.closest('.tf_selectperson-wrap').find('.child-text').text(thisVal + " " + tf_params.children);
+                $('.tf_selectperson-wrap').find('.child-text').text(thisVal + " " + tf_params.children);
             }
 
         });
@@ -965,9 +969,9 @@
             let thisVal = thisEml.val();
 
             if (thisVal > 1) {
-                thisEml.closest('.tf_selectperson-wrap').find('.infant-text').text(thisVal + " " + tf_params.infant);
+                $('.tf_selectperson-wrap').find('.infant-text').text(thisVal + " " + tf_params.infant);
             } else {
-                thisEml.closest('.tf_selectperson-wrap').find('.infant-text').text(thisVal + " " + tf_params.infant);
+                $('.tf_selectperson-wrap').find('.infant-text').text(thisVal + " " + tf_params.infant);
             }
 
         });
@@ -1969,7 +1973,7 @@
         $(document).on('click', '.tf-template-3 .tf-popup-close', function () {
             $(".tf-popup-wrapper").removeClass("tf-show")
         });
-        
+    
         $(document).on('click', function (event) {
             if (!$(event.target).closest(".tf-popup-wrapper .tf-popup-inner").length) {
                 $(".tf-popup-wrapper").removeClass('tf-show');
@@ -2070,6 +2074,7 @@
                 }
             });
         });
+
     });
 
     /*

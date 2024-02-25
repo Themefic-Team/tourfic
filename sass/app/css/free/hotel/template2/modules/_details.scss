@@ -77,7 +77,6 @@
                     }
                     .tf-short-description{
                         color: #99948D;
-                        font-family: Josefin Sans;
                         font-size: 16px;
                         font-style: normal;
                         font-weight: 400;
@@ -89,7 +88,6 @@
                     span.tf-see-description,
                     span.tf-see-less-description{
                         color: #595349;
-                        font-family: Josefin Sans;
                         font-size: 16px;
                         font-style: normal;
                         font-weight: 400;
@@ -102,7 +100,6 @@
                     .tf-full-description{
                         display: none;
                         color: #99948D;
-                        font-family: Josefin Sans;
                         font-size: 16px;
                         font-style: normal;
                         font-weight: 400;
@@ -113,10 +110,10 @@
                     }
                 }
                 .tf-overview-popular-facilities {
-                    h3 {
+                    span.tf-popular-facilities-title {
                         color: #595349;
                         font-size: 16px !important;
-                        font-family: Josefin Sans !important;
+                        display: block;
                         font-weight: 600 !important;
                         line-height: 20.8px !important;
                         margin-bottom: 16px;
@@ -183,11 +180,57 @@
                             }
                             p{
                                 color: #99948D;
-                                font-family: Josefin Sans;
                                 font-size: 16px;
                                 font-style: normal;
                                 font-weight: 400;
                                 line-height: 130%; /* 20.8px */
+                            }
+                        }
+                    }
+                }
+                .tf-features-block-slides{
+                    .slick-track{
+                        display: flex;
+                        .slick-slide{
+                            height: inherit;
+                            margin: 0px 5px !important;
+                        }
+                    }
+                    .tf-feature-block {
+                        padding: 24px;
+                        display: flex;
+                        gap: 16px;
+                        background: #FCF4E8;
+                        @media #{$max1024}{
+                            padding: 16px !important;
+                            gap: 8px;
+                        }
+                        i {
+                            font-size: 24px;
+                            color: rgb(181, 142, 83);
+                        }
+                        .tf-feature-block-details {
+                            h5 {
+                                color: #595349;
+                                font-size: 20px !important;
+                                font-style: normal !important;
+                                font-weight: 700 !important;
+                                line-height: 1.3;
+                            }
+                            p{
+                                color: #99948D;
+                                font-size: 16px;
+                                font-style: normal;
+                                font-weight: 400;
+                                line-height: 130%; /* 20.8px */
+                                span.show_sub_title{
+                                    color: #595349;
+                                    font-size: 16px;
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    line-height: 130%;
+                                    cursor: pointer;
+                                }
                             }
                         }
                     }
@@ -290,13 +333,12 @@
                     border: 0px solid;
                     border-radius: 8px 8px 0px 0px;
                     pointer-events: none;
-                    h4{
+                    span{
                         margin-bottom: 10px !important;
                         font-size: 16px !important;
                         font-weight: 600 !important;
                         line-height: 1.5 !important;
                         color: #595349 !important;
-                        font-family: Josefin Sans !important;
                         @media #{$max1024}{
                             font-size: 12px !important;
                         }
@@ -353,7 +395,6 @@
                         text-decoration: none;
                         text-transform: capitalize;
                         color: #595349;
-                        font-family: Josefin Sans;
                         font-size: 16px;
                         font-style: normal;
                         font-weight: 400;
@@ -406,7 +447,6 @@
                     margin-bottom: 0px !important;
                     bottom: -40px;
                     color: #595349 !important;
-                    font-family: Josefin Sans;
                     font-size: 16px !important;
                     font-style: normal;
                     font-weight: 400;

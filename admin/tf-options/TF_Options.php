@@ -153,6 +153,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				'tf_tours_page_tf_tours_booking',
 				'tf_hotel_page_tf_hotel_booking',
 				'tf_apartment_page_tf_apartment_booking',
+				'tf_apartment_page_tf-apartment-backend-booking',
 				'tourfic-settings_page_tf-setup-wizard'
 			);
 			$tf_options_post_type = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_email_templates' );
@@ -298,6 +299,13 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			}
 
 
+			$travelfic_toolkit_active_plugins = [];
+			if ( ! is_plugin_active( 'travelfic-toolkit/travelfic-toolkit.php' ) ) {
+				$travelfic_toolkit_active_plugins[] = "travelfic-toolkit";
+			}
+
+			$current_active_theme = !empty(get_option('stylesheet')) ? get_option('stylesheet') : '';
+			
 			//Css
 
 			//Color-Picker Css
@@ -326,6 +334,9 @@ if ( ! class_exists( 'TF_Options' ) ) {
 					array(
 						'tf_nonce'                         => wp_create_nonce( 'updates' ),
 						'ajax_url'                         => admin_url( 'admin-ajax.php' ),
+						'toolkit_page_url'                 => admin_url( 'admin.php?page=travelfic-template-list' ),
+						'is_travelfic_toolkit_active'	   => $travelfic_toolkit_active_plugins,
+						'current_active_theme'			   => $current_active_theme,
 						'deleting_old_review_fields'       => __( 'Deleting old review fields...', 'tourfic' ),
 						'deleting_room_order_ids'          => __( 'Deleting order ids...', 'tourfic' ),
 						'tour_location_required'           => __( 'Tour Location is a required field!', 'tourfic' ),

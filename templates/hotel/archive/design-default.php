@@ -31,8 +31,17 @@
 					if ( have_posts() ) {
 						while ( have_posts() ) {
 							the_post();
-							// Location: functions-hotel.php
-							tf_hotel_archive_single_item();
+							$hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
+							if ( !empty( $hotel_meta[ "featured" ] ) && $hotel_meta[ "featured" ] == 1 ) {
+								tf_hotel_archive_single_item();
+							}
+						}
+						while ( have_posts() ) {
+							the_post();
+							$hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
+							if ( !empty($hotel_meta[ "featured" ]) ) {
+								tf_hotel_archive_single_item();
+							}
 						}
 					} else {
 						echo '<div class="tf-nothing-found" data-post-count="0">' .__("No Hotels Found!", "tourfic"). '</div>';

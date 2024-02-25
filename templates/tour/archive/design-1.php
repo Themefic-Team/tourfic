@@ -81,12 +81,31 @@
                     <div class="archive_ajax_result tf-item-cards tf-flex <?php echo $tf_defult_views=="list" ? esc_attr('tf-layout-list') : esc_attr('tf-layout-grid'); ?> ">
 
                     <?php
-					if ( $loop->have_posts() ) {          
-						while ( $loop->have_posts() ) {
-							$loop->the_post();
-							tf_tour_archive_single_item();
-							$tf_total_results+=1;
-						}
+                    $loop2 = $loop;
+                    if ( $loop->have_posts() ) {          
+                        while ( $loop->have_posts() ) {
+                            $loop->the_post();
+                            $tour_meta = get_post_meta( get_the_ID() , 'tf_tours_opt', true );
+                            
+                            if($tour_meta["tour_as_featured"]) {
+                                tf_tour_archive_single_item();
+                                $featured_post_id[] = get_the_ID(); 
+                            }
+
+                            $tf_total_results+=1;
+                        }
+
+                        if (!empty($featured_post_id)) $loop2->set("post__not_in", $featured_post_id);
+                        
+                        while ( $loop2->have_posts() ) {
+                            $loop2->the_post();
+                            $tour_meta = get_post_meta( get_the_ID() , 'tf_tours_opt', true );
+                            
+                            if( !empty($tour_meta["tour_as_featured"]) ) {
+                                tf_tour_archive_single_item();
+                            }
+                        }
+                        
 					} else {
 						echo '<div class="tf-nothing-found" data-post-count="0" >' .__("No Tours Found!", "tourfic"). '</div>';
 					}

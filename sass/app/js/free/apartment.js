@@ -31,7 +31,6 @@
                         b.innerHTML += `<input type='hidden' value="${value}" data-slug='${key}'>`;
                         b.addEventListener("click", function (e) {
                             let source = this.getElementsByTagName("input")[0];
-                            console.log(source.dataset.slug);
                             inp.value = source.value;
                             inp.closest('input').nextElementSibling.value = source.dataset.slug
                         });
@@ -229,6 +228,66 @@
             });
         });
 
+        /*
+        * Apartment room quick view
+        * */
+        $(document).on('click', '.tf-apt-room-qv', function (e) {
+            e.preventDefault();
+            $("#tour_room_details_loader").show();
+            let post_id = $(this).data("post-id");
+            let id = $(this).data("id");
+            let data = {
+                action: 'tf_apt_room_details_qv',
+                post_id: post_id,
+                id: id
+            };
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: data,
+                success: function (response) {
+                    $("#tf_apt_room_details_qv").html(response);
+
+                    $("#tour_room_details_loader").hide();
+                    $.fancybox.open({
+                        src: '#tf_apt_room_details_qv',
+                        type: 'inline',
+                    });
+                }
+
+            });
+        });
+
+        /**
+         * Design 1 Apartment Room Popup
+         *
+         */
+        $(document).on('click', '.tf-apt-room-qv-desgin-1', function (e) {
+
+            e.preventDefault();
+            $("#tour_room_details_loader").show();
+            let post_id = $(this).data("post-id");
+            let id = $(this).data("id");
+            let data = {
+                action: 'tf_apt_room_details_qv',
+                post_id: post_id,
+                id: id
+            };
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: data,
+                success: function (response) {
+                    $(".tf-room-popup").html(response);
+                    $(".tf-room-popup").addClass("tf-show")
+                    $("#tour_room_details_loader").hide();
+                }
+
+            });
+        });
+
         /**
          * Apartment location autocomplete
          * @author Foysal
@@ -378,6 +437,46 @@
                 }
             ]
         });
+
+        /**
+         * Apartment 2 design Highlights sliers
+         *
+         * Slick
+         */
+        $('.tf-features-block-slides').slick({
+            dots: true,
+            arrows: false,
+            infinite: true,
+            speed: 300,
+            autoplay: false,
+            autoplaySpeed: 2000,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+
     });
 
 })(jQuery, window);
