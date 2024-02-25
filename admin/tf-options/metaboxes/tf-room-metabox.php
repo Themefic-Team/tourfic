@@ -14,7 +14,7 @@ TF_Metabox::metabox( 'tf_rooms_opt', array(
 		// Room Details
 		'room_details_general'     => array(
 			'title'  => __( 'General', 'tourfic' ),
-			'icon'   => 'fa-sharp fa-solid fa-door-open',
+			'icon'   => 'fa fa-cog',
 			'fields' => array(
 				array(
 					'id'    => 'hotel-room-heading',
@@ -181,7 +181,7 @@ TF_Metabox::metabox( 'tf_rooms_opt', array(
 
         'room_stay_requirement'     => array(
 			'title'  => __( 'Stay Requirements', 'tourfic' ),
-			'icon'   => 'fa-sharp fa-solid fa-door-open',
+			'icon'   => 'fa-solid fa-bed',
 			'fields' => array(
                 array(
                     'id'      => 'minimum_maximum_stay_requirements',
@@ -212,7 +212,7 @@ TF_Metabox::metabox( 'tf_rooms_opt', array(
 
         'room_price'     => array(
 			'title'  => __( 'Room Price', 'tourfic' ),
-			'icon'   => 'fa-sharp fa-solid fa-door-open',
+			'icon'   => 'fa-regular fa-money-bill-1',
 			'fields' => array(
                 array(
                     'id'      => 'Room Pricing',
@@ -297,7 +297,7 @@ TF_Metabox::metabox( 'tf_rooms_opt', array(
 
         'room_deposit'     => array(
 			'title'  => __( 'Deposit', 'tourfic' ),
-			'icon'   => 'fa-sharp fa-solid fa-door-open',
+			'icon'   => 'fa-solid fa-money-bill-transfer',
 			'fields' => array(
                 array(
                     'id'      => 'Deposit',
@@ -344,7 +344,7 @@ TF_Metabox::metabox( 'tf_rooms_opt', array(
 
         'room_ical'     => array(
 			'title'  => __( 'iCal Sync', 'tourfic' ),
-			'icon'   => 'fa-sharp fa-solid fa-door-open',
+			'icon'   => 'fa-solid fa-calendar-days',
 			'fields' => array(
                 array(
                     'id'      => 'ical',
@@ -368,7 +368,7 @@ TF_Metabox::metabox( 'tf_rooms_opt', array(
 
         'room_availability'     => array(
 			'title'  => __( 'Availability', 'tourfic' ),
-			'icon'   => 'fa-sharp fa-solid fa-door-open',
+			'icon'   => 'fa-solid fa-clipboard',
 			'fields' => array(
                 array(
                     'id'      => 'Availability',
