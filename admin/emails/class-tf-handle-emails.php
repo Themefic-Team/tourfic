@@ -1153,7 +1153,9 @@ class TF_Handle_Emails {
  
                 //get customer email
                 $order_customer_data = json_decode($tf_db_order->shipping_details);
-                $order_billing_email    = $order_customer_data->tf_email;
+                $order_customer_bill = json_decode($tf_db_order->billing_details);
+                $order_customer_billing_email = !empty($order_customer_bill->billing_email) ? $order_customer_bill->billing_email : "";
+                $order_billing_email    = !empty($order_customer_data->tf_email) ? $order_customer_data->tf_email : $order_customer_billing_email;
                 $order_items    = json_decode($tf_db_order->order_details);
                 $booking_details = '<div style="padding-left: 40px; padding-right: 40px; margin: 0 auto; padding-top: 30px; border: 1px solid #ddd;">
                 <h3 class="greeting" style="margin: 0; padding: 0; color: #5a5a5a; font-family: Work Sans,sans-serif; font-size: 24px;">Dear,</h3>
