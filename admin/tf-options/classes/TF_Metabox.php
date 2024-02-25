@@ -210,8 +210,9 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			}
 
 			if ( ! empty( $tf_meta_box_value ) ) {
-//                tf_var_dump($tf_meta_box_value);
-//                die();
+				if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_room" ){
+					// $tf_meta_box_value['tf_hotel']
+				}
 				update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );
 			} else {
 				delete_post_meta( $post_id, $this->metabox_id );
