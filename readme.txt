@@ -3,8 +3,8 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings, apartment-booking, apartment-rental, Accommodation Reservations, Luxury Hotels, Budget Stays, Online Hotel Reservations, Room Booking, Hotel Deals, Hotel Room Availability, Business Hotels, Resort Accommodations, Guided Tours, Tour Packages, Vacation Rentals, Short-Term Apartment Rentals, Furnished Apartments, Holiday Flats, Studio Apartments
 Requires at least: 5.4
 Tested up to: 6.4.3
-Stable tag: 2.11.10
-Requires PHP: 7.2
+Stable tag: 2.11.11
+Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -104,6 +104,7 @@ This All-in-One Travel Booking WordPress plugin consists of almost all the basic
 = 🎉 Data Import Export =
 * Hotel data import export( Pro )
 * Tour data import export( Pro )
+* Apartment data import export( Pro )
 * Settings Panel import export
 
 = 🎉 Backend/Admin booking( Pro ) =
@@ -450,6 +451,25 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.11.11 - 25 February 2024 =
+
+- Added: Gutenberg Compatibility with tourfic
+- Added: Apartment New Template
+- Added: Apartment Export and Import (Pro)
+- Added: Tax Feature for Hotel, Tour and Apartment (Pro)
+- Added: Apartment Backend Booking 
+- Added: New Date format (MM/DD/YYYY)
+- Improved: Quick setup
+- Improved: Organized free and pro option panel
+- Improved: Tour itinerary map for Google Maps(Pro)
+- Improved: Permalink Settings
+- Improved: Tour/Hotel/Apartment featured posts
+- Improved: Hotel location optional on search
+- Fixed: PHP Deprecated issue
+- Fixed: Hotel, Tour, Apartment Booking Details Issue
+- Fixed: Vendor Enquiry Mail Setting (Pro)
+- Updated: Popup Design style
 
 = 2.11.10 - 17 February 2024 =
 
