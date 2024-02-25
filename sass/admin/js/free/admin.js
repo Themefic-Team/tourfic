@@ -122,6 +122,20 @@
         });
 
         /**
+         * Hotel Required for Room
+         *
+         * show notyf error
+         */
+        $(document).on('click', '.post-type-tf_room #publish, .post-type-tf_room #save-post', function (e) {
+            if (!$('[name="tf_rooms_opt[tf_hotel]"]').val()) {
+                e.preventDefault;
+                e.stopImmediatePropagation();
+                notyf.error(tf_admin_params.room_hotel_id);
+                return false;
+            }
+        });
+
+        /**
          * Ajax install
          *
          * @since 1.0

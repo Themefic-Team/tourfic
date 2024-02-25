@@ -112,6 +112,7 @@ function tf_required_taxonomies( $hook ) {
 		'tour_feature_image_required'      => __( 'Tour image is a required!', 'tourfic' ),
 		'hotel_feature_image_required'     => __( 'Hotel image is a required!', 'tourfic' ),
 		'apartment_feature_image_required' => __( 'Apartment image is a required!', 'tourfic' ),
+		'room_hotel_id' 				   => __( 'Select Hotel, Hotel is a required!', 'tourfic' ),
 		'installing'                       => __( 'Installing...', 'tourfic' ),
 		'activating'                       => __( 'Activating...', 'tourfic' ),
 		'installed'                        => __( 'Installed', 'tourfic' ),
@@ -630,7 +631,7 @@ if ( ! function_exists( 'tf_get_single_room_availability' ) ) {
 			$tf_room_availability_data = array_values( $tf_room_availability_data );
 			$tf_room_availability_data = array_map( function ( $item ) {
 				$item['start'] = date( 'Y-m-d', strtotime( $item['check_in'] ) );
-				$item['title'] = $item['pricing-by'] == '1' ? __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
+				$item['title'] = !empty($item['pricing-by']) && $item['pricing-by'] == '1' ? __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
 
 				if ( $item['status'] == 'unavailable' ) {
 					$item['display'] = 'background';

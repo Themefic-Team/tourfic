@@ -344,6 +344,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 						'tour_location_required'           => __( 'Tour Location is a required field!', 'tourfic' ),
 						'hotel_location_required'          => __( 'Hotel Location is a required field!', 'tourfic' ),
 						'apartment_location_required'      => __( 'Apartment Location is a required field!', 'tourfic' ),
+						'room_hotel_id' 				   => __( 'Select Hotel, Hotel is a required!', 'tourfic' ),
 						'tour_feature_image_required'      => __( 'Tour image is a required!', 'tourfic' ),
 						'hotel_feature_image_required'     => __( 'Hotel image is a required!', 'tourfic' ),
 						'apartment_feature_image_required' => __( 'Apartment image is a required!', 'tourfic' ),
