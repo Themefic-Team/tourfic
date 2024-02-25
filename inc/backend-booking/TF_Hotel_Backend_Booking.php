@@ -646,7 +646,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 						'billing_details'  => $billing_details,
 						'shipping_details' => $shipping_details,
 						'order_details'    => $order_details,
-						'payment_method'   => "Booked by " . $field['tf_hotel_booked_by'],
+						'payment_method'   => "offline",
 						'status'           => 'processing',
 						'order_date'       => date( 'Y-m-d H:i:s' ),
 					);
