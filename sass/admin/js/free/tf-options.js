@@ -36,9 +36,12 @@
                     return e.href.indexOf(query) > -1;
                 }).parent().addClass("current");
             }
-
-            tfApartmentCalendar();
-            // tfSingleRoomCalendar()
+            if("availability"==slug){
+                tfApartmentCalendar();
+            }
+            if("room_availability"==slug){
+                tfSingleRoomCalendar();
+            }
         });
 
         /*

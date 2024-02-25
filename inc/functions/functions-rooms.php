@@ -81,8 +81,8 @@ function tf_room_default_labels() {
 	);
 
 	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-		$tf_room_single_name = ! empty(tfopt( 'tf-room-post-rename-singular' )) ? tfopt( 'tf-room-post-rename-singular' ) : __("room", "tourfic");
-		$tf_room_plural_name = ! empty(tfopt( 'tf-room-post-rename-plural' )) ? tfopt( 'tf-room-post-rename-plural' ) : __('rooms', 'tourfic');
+		$tf_room_single_name = ! empty(tfopt( 'tf-room-post-rename-singular' )) ? tfopt( 'tf-room-post-rename-singular' ) : __("Room", "tourfic");
+		$tf_room_plural_name = ! empty(tfopt( 'tf-room-post-rename-plural' )) ? tfopt( 'tf-room-post-rename-plural' ) : __('Rooms', 'tourfic');
 
 		$default_room = array(
 			'singular' => $tf_room_single_name,
