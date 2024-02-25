@@ -610,6 +610,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 						'shipping_postcode'   => $field['tf_customer_zip'],
 						'shipping_country'    => $field['tf_customer_country'],
 						'shipping_phone'      => $field['tf_customer_phone'],
+						'tf_email'      => $field['tf_customer_email'],
 					);
 
 					if ( $field['tf_tour_date'] ) {

@@ -621,6 +621,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 						'shipping_postcode'   => $field['tf_customer_zip'],
 						'shipping_country'    => $field['tf_customer_country'],
 						'shipping_phone'      => $field['tf_customer_phone'],
+						'tf_email'      => $field['tf_customer_email'],
 					);
 					$order_details    = [
 						'order_by'             => $field['tf_hotel_booked_by'],
