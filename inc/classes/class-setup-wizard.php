@@ -400,13 +400,13 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		private function tf_setup_step_three() {
 			$tf_hotel_review     = ! empty( tfopt( 'h-review' ) ) ? tfopt( 'h-review' ) : '';
 			$tf_hotel_share      = ! empty( tfopt( 'h-share' ) ) ? tfopt( 'h-share' ) : '';
-			$tf_hotel_slug       = ! empty( get_option( 'hotel_slug' ) ) ? get_option( 'hotel_slug' ) : '/hotels';
+			$tf_hotel_slug       = ! empty( get_option( 'hotel_slug' ) ) ? get_option( 'hotel_slug' ) : 'hotels';
 			$tf_tour_review      = ! empty( tfopt( 't-review' ) ) ? tfopt( 't-review' ) : '';
 			$tf_tour_related     = ! empty( tfopt( 't-related' ) ) ? tfopt( 't-related' ) : '';
-			$tf_tour_slug        = ! empty( get_option( 'tour_slug' ) ) ? get_option( 'tour_slug' ) : '/tours';
+			$tf_tour_slug        = ! empty( get_option( 'tour_slug' ) ) ? get_option( 'tour_slug' ) : 'tours';
 			$tf_apartment_review = ! empty( tfopt( 'disable-apartment-review' ) ) ? tfopt( 'disable-apartment-review' ) : '';
 			$tf_apartment_share  = ! empty( tfopt( 'disable-apartment-share' ) ) ? tfopt( 'disable-apartment-share' ) : '';
-			$tf_apartment_slug   = ! empty( get_option( 'apartment_slug' ) ) ? get_option( 'apartment_slug' ) : '/apartments';
+			$tf_apartment_slug   = ! empty( get_option( 'apartment_slug' ) ) ? get_option( 'apartment_slug' ) : 'apartments';
 			?>
             <div class="tf-setup-step-container tf-setup-step-4 <?php echo self::$current_step == 'step_4' ? 'active' : ''; ?>" data-step="4">
                 <div class="back-to-dashboard">
