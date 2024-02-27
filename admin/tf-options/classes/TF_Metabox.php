@@ -210,9 +210,18 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			}
 
 			if ( ! empty( $tf_meta_box_value ) ) {
-				if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_room" ){
-					// $tf_meta_box_value['tf_hotel']
-				}
+				// if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_room" ){
+				// 	if(!empty($tf_meta_box_value['tf_hotel'])){
+				// 		$post_hotel_meta = get_post_meta( $tf_meta_box_value['tf_hotel'], 'tf_hotels_opt', true );
+				// 		$rooms = ! empty( $post_hotel_meta['room'] ) ? $post_hotel_meta['room'] : '';
+				// 		if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
+				// 			$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+				// 				return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+				// 			}, $rooms );
+				// 			$rooms = unserialize( $tf_hotel_rooms_value );
+				// 		}
+				// 	}
+				// }
 				update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );
 			} else {
 				delete_post_meta( $post_id, $this->metabox_id );
