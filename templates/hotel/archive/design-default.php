@@ -39,7 +39,7 @@
 						while ( have_posts() ) {
 							the_post();
 							$hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
-							if ( !empty($hotel_meta[ "featured" ]) ) {
+							if ( empty($hotel_meta[ "featured" ]) ) {
 								tf_hotel_archive_single_item();
 							}
 						}
