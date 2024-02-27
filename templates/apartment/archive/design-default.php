@@ -39,7 +39,7 @@
 						while ( have_posts() ) {
 							the_post();
 							$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
-							if ( !empty($apartment_meta[ "apartment_as_featured" ])) {
+							if ( empty($apartment_meta[ "apartment_as_featured" ])) {
 								tf_apartment_archive_single_item();
 							}
 						}

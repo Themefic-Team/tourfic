@@ -46,7 +46,7 @@
                             $loop2->the_post();
                             $tour_meta = get_post_meta( get_the_ID() , 'tf_tours_opt', true );
                             
-                            if( !empty($tour_meta["tour_as_featured"]) ) {
+                            if( empty($tour_meta["tour_as_featured"]) ) {
                                 tf_tour_archive_single_item();
                             }
                         }

@@ -3722,6 +3722,7 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
 			}
 
 		} else {
+			$tf_disable_dates = [];
 			array_key_exists('disable_specific', $meta) ?? $tf_disable_dates = explode( ", ", $meta['disable_specific'] );
 			if ( ! empty( $meta['disable_range'] ) && gettype( $meta['disable_range'] ) == "string" ) {
 				$tf_tour_unserial_disable_date_range = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {

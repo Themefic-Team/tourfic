@@ -28,7 +28,7 @@ if( !empty($total_facilities_cat) && !empty($meta['hotel-facilities']) ){
                 <?php 
                 foreach( $meta['hotel-facilities'] as $facility ){ 
                 if( $facility['facilities-category'] == $catkey ){
-                $features_details = get_term($facility['facilities-feature']);
+                $features_details = !empty( $facility['facilities-feature'] ) ? get_term( $facility['facilities-feature'] ) : '';
                 if(!empty($features_details->name)){
                 ?>
                 <li>
