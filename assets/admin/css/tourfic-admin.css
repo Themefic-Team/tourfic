@@ -1375,6 +1375,10 @@ Steps
 .tf-setup-step-container .setup-form-group .tf-setup-permalink {
   padding: 12px;
 }
+.tf-setup-step-container .tf-setup-group-general {
+  padding-top: 24px;
+  gap: 24px;
+}
 .tf-setup-step-container .tf-setup-step-description {
   margin-bottom: 30px;
 }

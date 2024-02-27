@@ -425,7 +425,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                         <h3 class="tf-setup-step-subtitle"><?php _e( 'Hotel settings', 'tourfic' ) ?></h3>
                         <p class="tf-setup-step-desc"><?php _e( 'These settings can be overridden from <span>Tourfic Settings > Hotel Settings</span>', 'tourfic' ) ?></p>
 
-                        <div class="setup-form-group">
+                        <div class="setup-form-group tf-setup-group-general">
                             <!--Review Section-->
                             <div class="tf-setup-form-item tf-setup-form-item-inline">
                                 <div class="tf-setup-form-item-label"><label class="" for="tf-hotel-review-section"><?php _e( 'Review Section', 'tourfic' ) ?></label></div>
@@ -464,7 +464,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                         <h3 class="tf-setup-step-subtitle"><?php _e( 'Tour settings', 'tourfic' ) ?></h3>
                         <p class="tf-setup-step-desc"><?php _e( 'These settings can be overridden from <span>Tourfic Settings > Tour Settings</span>', 'tourfic' ) ?></p>
 
-                        <div class="setup-form-group">
+                        <div class="setup-form-group  tf-setup-group-general">
                             <!--Review Section-->
                             <div class="tf-setup-form-item tf-setup-form-item-inline">
                                 <div class="tf-setup-form-item-label"><label class="" for="tf-tour-review-section"><?php _e( 'Review Section', 'tourfic' ) ?></label></div>
