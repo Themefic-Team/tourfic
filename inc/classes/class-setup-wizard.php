@@ -298,7 +298,9 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		 * Setup step two
 		 */
 		private function tf_setup_step_two() {
+			$tf_search_result_page      = ! empty( tfopt( 'search-result-page' ) ) ? tfopt( 'search-result-page' ) : '';
 			$tf_search_result      = ! empty( tfopt( 'posts_per_page' ) ) ? tfopt( 'posts_per_page' ) : 10;
+            $tf_wishlist_page      = ! empty( tfopt( 'wl-page' ) ) ? tfopt( 'wl-page' ) : '';
 			$tf_review_autopublish = ! empty( tfopt( 'r-auto-publish' ) ) ? tfopt( 'r-auto-publish' ) : '';
 			?>
             <div class="tf-setup-step-container tf-setup-step-3 <?php echo self::$current_step == 'step_3' ? 'active' : ''; ?>" data-step="3">
@@ -325,7 +327,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                                     <option value=""><?php _e( 'Select a page', 'tourfic' ) ?></option>
                                     <?php
                                     $pages              = get_pages();
-                                    $search_result_page = get_option( 'tf_search_page_id' );
+                                    $search_result_page = !empty($tf_search_result_page) ? $tf_search_result_page : get_option( 'tf_search_page_id' );
                                     foreach ( $pages as $page ) {
                                         echo '<option value="' . $page->ID . '" ' . selected( $search_result_page, $page->ID, false ) . '>' . $page->post_title . '</option>';
                                     }
@@ -350,7 +352,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                                     <option value=""><?php _e( 'Select a page', 'tourfic' ) ?></option>
                                     <?php
                                     $pages         = get_pages();
-                                    $wishlist_page = get_option( 'tf_wishlist_page_id' );
+                                    $wishlist_page = !empty($tf_wishlist_page) ? $tf_wishlist_page : get_option( 'tf_wishlist_page_id' );
                                     foreach ( $pages as $page ) {
                                         echo '<option value="' . $page->ID . '" ' . selected( $wishlist_page, $page->ID, false ) . '>' . $page->post_title . '</option>';
                                     }
@@ -991,14 +993,14 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 				}
 			}
 
-			if ( ! in_array( 2, $skip_steps ) ) {
-				$tf_settings['search-result-page'] = ! empty( $search_page ) ? $search_page : '';
-				$tf_settings['posts_per_page']     = ! empty( $search_result_per_page ) ? $search_result_per_page : '';
-				$tf_settings['wl-page']            = ! empty( $wishlist_page ) ? $wishlist_page : '';
-				$tf_settings['r-auto-publish']     = ! empty( $auto_publish ) ? $auto_publish : '';
-			}
+			
+            $tf_settings['search-result-page'] = ! empty( $search_page ) ? $search_page : '';
+            $tf_settings['posts_per_page']     = ! empty( $search_result_per_page ) ? $search_result_per_page : '';
+            $tf_settings['wl-page']            = ! empty( $wishlist_page ) ? $wishlist_page : '';
+            $tf_settings['r-auto-publish']     = ! empty( $auto_publish ) ? $auto_publish : '';
+			
 
-			if ( ! in_array( 3, $skip_steps ) && ! in_array( 'hotel', $services ) ) {
+			if ( ! in_array( 4, $skip_steps ) && ! in_array( 'hotel', $services ) ) {
 				$tf_settings['h-review'] = ! empty( $hotel_review ) ? 0 : 1;
 				$tf_settings['h-share']  = ! empty( $hotel_share ) ? 0 : 1;
 
@@ -1009,7 +1011,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 				}
 			}
 
-			if ( ! in_array( 3, $skip_steps ) && ! in_array( 'tour', $services ) ) {
+			if ( ! in_array( 4, $skip_steps ) && ! in_array( 'tour', $services ) ) {
 				$tf_settings['t-review']  = ! empty( $tour_review ) ? 0 : 1;
 				$tf_settings['t-related'] = ! empty( $tour_related ) ? 0 : 1;
 
@@ -1019,7 +1021,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 				}
 			}
 
-			if ( ! in_array( 3, $skip_steps ) && ! in_array( 'apartment', $services ) ) {
+			if ( ! in_array( 4, $skip_steps ) && ! in_array( 'apartment', $services ) ) {
 				$tf_settings['disable-apartment-review'] = ! empty( $apartment_review ) ? 0 : 1;
 				$tf_settings['disable-apartment-share']  = ! empty( $apartment_share ) ? 0 : 1;
 
@@ -1030,17 +1032,17 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			}
 
 			// Settings Template
-			if ( ! in_array( 4, $skip_steps ) && ! in_array( 'hotel', $services ) ) {
+			if ( ! in_array( 5, $skip_steps ) && ! in_array( 'hotel', $services ) ) {
 				$tf_settings['tf-template']['single-hotel']  = ! empty( $tf_hotel_single ) ? $tf_hotel_single : '';
 				$tf_settings['tf-template']['hotel-archive'] = ! empty( $tf_hotel_archive ) ? $tf_hotel_archive : '';
 			}
 
-			if ( ! in_array( 4, $skip_steps ) && ! in_array( 'tour', $services ) ) {
+			if ( ! in_array( 5, $skip_steps ) && ! in_array( 'tour', $services ) ) {
 				$tf_settings['tf-template']['single-tour']  = ! empty( $tf_tour_single ) ? $tf_tour_single : '';
 				$tf_settings['tf-template']['tour-archive'] = ! empty( $tf_tour_archive ) ? $tf_tour_archive : '';
 			}
 
-			if ( ! in_array( 4, $skip_steps ) && ! in_array( 'apartment', $services ) ) {
+			if ( ! in_array( 5, $skip_steps ) && ! in_array( 'apartment', $services ) ) {
 				$tf_settings['tf-template']['single-apartment']  = ! empty( $tf_apartment_single ) ? $tf_apartment_single : '';
 				$tf_settings['tf-template']['apartment-archive'] = ! empty( $tf_apartment_archive ) ? $tf_apartment_archive : '';
 			}
