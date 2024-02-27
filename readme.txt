@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings, apartment-booking, apartment-rental, Accommodation Reservations, Luxury Hotels, Budget Stays, Online Hotel Reservations, Room Booking, Hotel Deals, Hotel Room Availability, Business Hotels, Resort Accommodations, Guided Tours, Tour Packages, Vacation Rentals, Short-Term Apartment Rentals, Furnished Apartments, Holiday Flats, Studio Apartments
 Requires at least: 5.4
 Tested up to: 6.4.3
-Stable tag: 2.11.11
+Stable tag: 2.11.12
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -451,6 +451,11 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.11.12 - 27 February 2024 =
+
+- Fixed: Archive Pagination issue
+- Fixed: Archive Tour Search issue
 
 = 2.11.11 - 25 February 2024 =
 
