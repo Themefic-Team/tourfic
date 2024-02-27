@@ -994,11 +994,12 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			}
 
 			
-            $tf_settings['search-result-page'] = ! empty( $search_page ) ? $search_page : '';
-            $tf_settings['posts_per_page']     = ! empty( $search_result_per_page ) ? $search_result_per_page : '';
-            $tf_settings['wl-page']            = ! empty( $wishlist_page ) ? $wishlist_page : '';
-            $tf_settings['r-auto-publish']     = ! empty( $auto_publish ) ? $auto_publish : '';
-			
+           	if ( ! in_array( 3, $skip_steps ) ) {
+		    $tf_settings['search-result-page'] = ! empty( $search_page ) ? $search_page : '';
+		    $tf_settings['posts_per_page']     = ! empty( $search_result_per_page ) ? $search_result_per_page : '';
+		    $tf_settings['wl-page']            = ! empty( $wishlist_page ) ? $wishlist_page : '';
+		    $tf_settings['r-auto-publish']     = ! empty( $auto_publish ) ? $auto_publish : '';
+		}
 
 			if ( ! in_array( 4, $skip_steps ) && ! in_array( 'hotel', $services ) ) {
 				$tf_settings['h-review'] = ! empty( $hotel_review ) ? 0 : 1;
