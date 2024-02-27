@@ -621,11 +621,29 @@ body.tourfic-settings_page_tf-setup-wizard {
   gap: 8px;
   transition: 0.3s all ease;
   text-decoration: none;
+  min-width: 130px;
+  position: relative;
+  z-index: 0;
+}
+.tf-quick-setup-btn::after {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  opacity: 0;
+  background: linear-gradient(0deg, #0051A3 0%, #003C79 100%);
+  border-radius: 8px;
+  transition: 0.3s all ease;
 }
 .tf-quick-setup-btn:hover {
   color: #FFF;
-  background: linear-gradient(0deg, #0051A3 0%, #003C79 100%);
   box-shadow: 0px 24px 20px 0px rgba(8, 20, 33, 0.08), 0px 8px 16px 0px rgba(8, 20, 33, 0.08), 0px 16px 8px 0px rgba(8, 20, 33, 0.04);
+}
+.tf-quick-setup-btn:hover::after {
+  opacity: 1;
 }
 
 .tf-link-skip-btn {
@@ -642,11 +660,41 @@ body.tourfic-settings_page_tf-setup-wizard {
   line-height: 24px; /* 160% */
   transition: 0.3s all ease;
   text-decoration: none;
+  min-width: 130px;
+  position: relative;
+  z-index: 0;
+}
+.tf-link-skip-btn::after {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  opacity: 0;
+  background: linear-gradient(0deg, #0051A3 0%, #003C79 100%);
+  border-radius: 8px;
+  transition: 0.3s all ease;
 }
 .tf-link-skip-btn:hover {
-  background: linear-gradient(0deg, #0051A3 0%, #003C79 100%);
   box-shadow: 0px 24px 20px 0px rgba(8, 20, 33, 0.08), 0px 8px 16px 0px rgba(8, 20, 33, 0.08), 0px 16px 8px 0px rgba(8, 20, 33, 0.04);
   color: #FFF;
+}
+.tf-link-skip-btn:hover::after {
+  opacity: 1;
+}
+
+.tf-theme-activation-btn {
+  min-width: 267px;
+}
+
+.tf-settings-finish-btn {
+  min-width: 140px;
+}
+
+.tf-settings-default-button {
+  min-width: auto;
 }
 
 .tourfic-settings_page_tf-setup-wizard #wpcontent {
@@ -774,7 +822,7 @@ Welcome Step
   display: flex;
 }
 .tf-setup-content-layout .welcome-img {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 .tf-setup-content-layout .welcome-img img {
   width: 87px;
@@ -856,6 +904,10 @@ Welcome Step
 .tf-setup-content-layout .tf-setup-finish-content .tf-setup-finish-footer {
   gap: 16px;
   flex-wrap: wrap;
+}
+.tf-setup-content-layout .tf-setup-finish-content a:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .tf-setup-step-container {
@@ -1247,6 +1299,9 @@ Steps
 .tf-setup-step-container .setup-form-group .tf-setup-form-item-inline .tf-setup-form-item-label {
   margin: 0;
 }
+.tf-setup-step-container .setup-form-group .tf-setup-form-item-inline .tf-setup-form-item-label label {
+  font-size: 15px;
+}
 .tf-setup-step-container .setup-form-group .tf-setup-form-item-inline .tf-setup-form-item-input {
   text-align: right;
   max-width: 246px !important;
@@ -1259,6 +1314,7 @@ Steps
 .tf-setup-step-container .setup-form-group .tf-setup-form-item-inline .tf-setup-form-item-input input[type=text] {
   height: 32px;
   margin: 0;
+  background: #FFF;
 }
 .tf-setup-step-container .setup-form-group .tf-field-imageselect {
   padding: 0;
@@ -1307,10 +1363,14 @@ Steps
 .tf-setup-step-container .setup-form-group .tf-field-imageselect .tf-fieldset .tf-image-radio-group li .tf-image-checkbox .select-image-box {
   border: 2px solid transparent !important;
   border-radius: 8px;
+  background-color: rgb(235, 245, 255);
 }
 .tf-setup-step-container .setup-form-group .tf-field-imageselect .tf-fieldset .tf-image-radio-group li .tf-image-checkbox > input:checked + .select-image-box {
   border-color: #003C79 !important;
   border-radius: 8px;
+}
+.tf-setup-step-container .setup-form-group .tf-archive-imageselect-box .tf-image-checkbox .select-image-box {
+  background-color: #FFFAEB !important;
 }
 .tf-setup-step-container .setup-form-group .tf-setup-permalink {
   padding: 12px;
