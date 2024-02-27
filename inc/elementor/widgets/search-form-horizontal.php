@@ -26,7 +26,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Tourfic Search Form (Horizontal)', 'tourfic' );
+		return __( 'Tourfic Search Form', 'tourfic' );
 	}
 
 	/**
@@ -133,6 +133,18 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'pricing-filter',
+			[
+				'label'        => esc_html__( 'Pricing Filter', 'tourfic' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'tourfic' ),
+				'label_off'    => esc_html__( 'No', 'tourfic' ),
+				'return_value' => true,
+				'default'      => false,
+			]
+		);
+
 		$this->end_controls_section();
 
 
@@ -216,8 +228,9 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 		$type_arr           = ! is_array( $settings['type'] ) ? array( $settings['type'] ) : $settings['type'];
 		$type               = $settings['type'] ? implode( ',', $type_arr ) : implode( ',', [ 'all' ] );
 		$full_width         = $settings['full-width'];
+		$pricing_filter         = !empty($settings['pricing-filter']) ? "enabled" : '';
 
-		echo do_shortcode( '[tf_search_form title="' . $tf_search_title . '" subtitle="' . $tf_search_subtitle . '" type="' . $type . '" fullwidth="' . $full_width . '"]' );
+		echo do_shortcode( '[tf_search_form title="' . $tf_search_title . '" subtitle="' . $tf_search_subtitle . '" type="' . $type . '" fullwidth="' . $full_width . '" advanced="'. $pricing_filter .'"]' );
 
 	}
 

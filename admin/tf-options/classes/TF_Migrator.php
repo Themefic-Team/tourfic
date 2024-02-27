@@ -206,7 +206,7 @@ if ( ! class_exists( 'TF_Migrator' ) ) {
                         $room_post_id = wp_insert_post( $post_data );
                         update_post_meta( $room_post_id, 'tf_rooms_opt', $room );
 
-                        // Room Id add to the roomwise
+                        // Room Id add to the Hotelwise
                         $hotel_room_meta = !empty(get_post_meta( $post_id, 'tf_search_hotel_room_id', true )) ? get_post_meta( $post_id, 'tf_search_hotel_room_id', true ) : [];
                         $hotel_room_meta[$room_post_id] = $room_post_id;
                         update_post_meta( $post_id, 'tf_search_hotel_room_id', $hotel_room_meta );
