@@ -210,18 +210,34 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			}
 
 			if ( ! empty( $tf_meta_box_value ) ) {
-				// if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_room" ){
-				// 	if(!empty($tf_meta_box_value['tf_hotel'])){
-				// 		$post_hotel_meta = get_post_meta( $tf_meta_box_value['tf_hotel'], 'tf_hotels_opt', true );
-				// 		$rooms = ! empty( $post_hotel_meta['room'] ) ? $post_hotel_meta['room'] : '';
-				// 		if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
-				// 			$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-				// 				return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-				// 			}, $rooms );
-				// 			$rooms = unserialize( $tf_hotel_rooms_value );
-				// 		}
-				// 	}
-				// }
+				if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_room" ){
+					if(!empty($tf_meta_box_value['tf_hotel'])){
+						$hotel_room_meta = !empty(get_post_meta( $tf_meta_box_value['tf_hotel'], 'tf_search_hotel_room_id', true )) ? get_post_meta( $tf_meta_box_value['tf_hotel'], 'tf_search_hotel_room_id', true ) : [];
+
+						$hotel_prev_meta = get_post_meta( $post_id, 'tf_rooms_opt', true );
+						if(!empty($hotel_prev_meta['tf_hotel']) && $hotel_prev_meta['tf_hotel']==$tf_meta_box_value['tf_hotel']){
+							// New add/update
+							$hotel_room_meta[$post_id] = $post_id;
+							update_post_meta( $tf_meta_box_value['tf_hotel'], 'tf_search_hotel_room_id', $hotel_room_meta );
+						}elseif(!empty($hotel_prev_meta['tf_hotel']) && $hotel_prev_meta['tf_hotel']!=$tf_meta_box_value['tf_hotel']){
+							// If id change old delete
+							$Prev_hotel_room_meta = !empty(get_post_meta( $hotel_prev_meta['tf_hotel'], 'tf_search_hotel_room_id', true )) ? get_post_meta( $hotel_prev_meta['tf_hotel'], 'tf_search_hotel_room_id', true ) : [];
+							if(!empty($Prev_hotel_room_meta)){
+								unset($Prev_hotel_room_meta[$post_id]);
+								update_post_meta( $hotel_prev_meta['tf_hotel'], 'tf_search_hotel_room_id', $Prev_hotel_room_meta );
+							}
+
+							// New add/update
+							$hotel_room_meta[$post_id] = $post_id;
+							update_post_meta( $tf_meta_box_value['tf_hotel'], 'tf_search_hotel_room_id', $hotel_room_meta );
+						}else{
+							// New add/update
+							$hotel_room_meta[$post_id] = $post_id;
+							update_post_meta( $tf_meta_box_value['tf_hotel'], 'tf_search_hotel_room_id', $hotel_room_meta );
+						}
+						
+					}
+				}
 				update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );
 			} else {
 				delete_post_meta( $post_id, $this->metabox_id );
