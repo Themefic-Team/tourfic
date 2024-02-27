@@ -265,8 +265,8 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <div class="tf-setup-action-btn-wrapper">
                         
                         <div class="tf-setup-action-btn-next">
-                            <button type="button" class="tf-setup-skip-btn tf-link-skip-btn"><?php _e( 'Keep Existing Theme', 'tourfic' ) ?></button>
-                            <button type="button" class="tf-setup-travelfic-theme-btn tf-quick-setup-btn" data-install="travelfic">
+                            <button type="button" class="tf-setup-skip-btn tf-link-skip-btn tf-theme-activation-btn"><?php _e( 'Keep Existing Theme', 'tourfic' ) ?></button>
+                            <button type="button" class="tf-setup-travelfic-theme-btn tf-quick-setup-btn tf-theme-activation-btn" data-install="travelfic">
                                 <span><?php _e( 'Continue With Travelfic', 'tourfic' ) ?></span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path d="M5 12H19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -628,7 +628,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             </div>
 
                             <!--Hotel Archive Page-->
-                            <div class="tf-field tf-field-imageselect  " style="width:100%;">
+                            <div class="tf-field tf-field-imageselect tf-archive-imageselect-box " style="width:100%;">
                                 <label for="tf_settings[hotel-archive]" class="tf-field-label"> <?php echo __( "Choose Archive / Search Result Template ", "tourfic" ); ?> </label>
                                 <div class="tf-fieldset">
                                     <ul class="tf-image-radio-group tf-inline">
@@ -709,7 +709,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             </div>
 
                             <!--Tour Archive Page-->
-                            <div class="tf-field tf-field-imageselect  " style="width:100%;">
+                            <div class="tf-field tf-field-imageselect tf-archive-imageselect-box " style="width:100%;">
                                 <label for="tf_settings[tour-archive]" class="tf-field-label"> <?php echo __( "Choose Archive / Search Result Template ", "tourfic" ); ?> </label>
                                 <div class="tf-fieldset">
                                     <ul class="tf-image-radio-group tf-inline">
@@ -782,7 +782,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             </div>
 
                             <!--Apartment Archive Page-->
-                            <div class="tf-field tf-field-imageselect  " style="width:100%;">
+                            <div class="tf-field tf-field-imageselect tf-archive-imageselect-box " style="width:100%;">
                                 <label for="tf_settings[apartment-archive]" class="tf-field-label"> <?php echo __( "Choose Archive / Search Result Template ", "tourfic" ); ?> </label>
                                 <div class="tf-fieldset">
                                     <ul class="tf-image-radio-group tf-inline">
@@ -812,8 +812,8 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 
                     <div class="tf-setup-action-btn-wrapper">
                         <div class="tf-setup-action-btn-next">
-                            <button type="submit" class="tf-setup-skip-btn tf-link-skip-btn tf-setup-submit-btn"><?php _e( 'Skip', 'tourfic' ) ?></button>
-                            <button type="submit" class="tf-setup-submit-btn tf-quick-setup-btn">
+                            <button type="submit" class="tf-setup-skip-btn tf-link-skip-btn tf-setup-submit-btn tf-settings-finish-btn"><?php _e( 'Skip', 'tourfic' ) ?></button>
+                            <button type="submit" class="tf-setup-submit-btn tf-quick-setup-btn tf-settings-finish-btn">
                                 <span><?php _e( 'Finish', 'tourfic' ) ?></span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path d="M5 12H19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -848,10 +848,10 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <h1 class="tf-setup-welcome-title"><?php _e( 'Hooray! You’re all set.', 'tourfic' ) ?></h1>
                     <div class="tf-setup-welcome-description"><?php _e( 'Let\'s get started with Tourfic. Provide your customers with a seamless booking </br> experience with this plugin. Let\'s streamline your business operations now!', 'tourfic' ) ?></div>
                     <div class="tf-setup-welcome-footer tf-setup-finish-footer">
-                        <a href="<?php echo admin_url( 'post-new.php?post_type=tf_hotel' ) ?>" class="tf-link-skip-btn tf-add-new-hotel"><?php _e( 'Create Hotel', 'tourfic' ) ?></a>
-                        <a href="<?php echo admin_url( 'post-new.php?post_type=tf_tours' ) ?>" class="tf-link-skip-btn tf-add-new-tour"><?php _e( 'Create Tour', 'tourfic' ) ?></a>
-                        <a href="<?php echo admin_url( 'post-new.php?post_type=tf_apartment' ) ?>" class="tf-link-skip-btn tf-add-new-apartment"><?php _e( 'Create Apartment', 'tourfic' ) ?></a>
-                        <a href="<?php echo admin_url( 'admin.php?page=tf_settings' ) ?>" class="tf-quick-setup-btn">
+                        <a href="<?php echo admin_url( 'post-new.php?post_type=tf_hotel' ) ?>" class="tf-link-skip-btn tf-add-new-hotel tf-settings-default-button"><?php _e( 'Create Hotel', 'tourfic' ) ?></a>
+                        <a href="<?php echo admin_url( 'post-new.php?post_type=tf_tours' ) ?>" class="tf-link-skip-btn tf-add-new-tour tf-settings-default-button"><?php _e( 'Create Tour', 'tourfic' ) ?></a>
+                        <a href="<?php echo admin_url( 'post-new.php?post_type=tf_apartment' ) ?>" class="tf-link-skip-btn tf-add-new-apartment tf-settings-default-button"><?php _e( 'Create Apartment', 'tourfic' ) ?></a>
+                        <a href="<?php echo admin_url( 'admin.php?page=tf_settings' ) ?>" class="tf-quick-setup-btn tf-settings-default-button">
                             <span><?php _e( 'Tourfic Setting', 'tourfic' ) ?></span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M5 12H19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
