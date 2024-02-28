@@ -31,7 +31,7 @@ class Functions
 
         global $post_type;
 
-        $tf_is_gutenberg_active = tf_is_gutenberg_active();
+        $tf_is_gutenberg_active = $this->tf_is_gutenberg_active();
 
         $default_post_types = array(
             'tf_hotel' => array(
