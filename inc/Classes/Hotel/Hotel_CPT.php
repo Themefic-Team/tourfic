@@ -15,7 +15,7 @@ class Hotel_CPT extends \Tourfic\Classes\Post_Type {
 			'name'          => 'Hotels',
 			'singular_name' => 'Hotel',
 			'slug'          => 'tf_hotel',
-			'menu_icon'     => 'dashicons-calendar-alt',
+			'menu_icon'     => 'dashicons-building',
 			'menu_position' => 5,
             'supports'      => apply_filters( 'tf_hotel_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
 		);
@@ -30,6 +30,11 @@ class Hotel_CPT extends \Tourfic\Classes\Post_Type {
                 'name' => 'Features',
                 'singular_name' => 'Feature',
                 'taxonomy' => 'hotel_feature',
+            ),
+            array(
+                'name' => 'Types',
+                'singular_name' => 'Type',
+                'taxonomy' => 'hotel_type',
             )
         );
 
