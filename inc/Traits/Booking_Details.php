@@ -2,6 +2,6 @@
 
 namespace Tourfic\Traits;
 
-trait DB {
-
+trait Enquiry {
+    
 }

@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class TF_PROMO_NOTICE {
+class Notice {
 
 	// private $api_url = 'http://tf-api.test/';
 	private $api_url = 'https://api.themefic.com/';

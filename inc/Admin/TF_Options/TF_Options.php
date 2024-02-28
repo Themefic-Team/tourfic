@@ -4,20 +4,7 @@ defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'TF_Options' ) ) {
 	class TF_Options {
-
-		private static $instance = null;
-
-		/**
-		 * Singleton instance
-		 * @since 1.0.0
-		 */
-		public static function instance() {
-			if ( self::$instance == null ) {
-				self::$instance = new self;
-			}
-
-			return self::$instance;
-		}
+		use \Tourfic\Traits\Singleton;
 
 		public function __construct() {
 			//load files

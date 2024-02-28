@@ -2,6 +2,6 @@
 
 namespace Tourfic\Admin;
 
-class Quick_Setup {
+class Enquiry {
 
 }

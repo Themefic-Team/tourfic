@@ -1,4 +1,5 @@
 <?php
+use Tourfic\Traits\Helpers;
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
@@ -8,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.7.0
  */
 function tf_tour_meals() {
-	$itinerary_options = ! empty( tf_data_types( tfopt( 'itinerary-builder-setings' ) ) ) ? tf_data_types( tfopt( 'itinerary-builder-setings' ) ) : '';
+	$itinerary_options = ! empty( Helpers::tf_data_types( tfopt( 'itinerary-builder-setings' ) ) ) ? Helpers::tf_data_types( tfopt( 'itinerary-builder-setings' ) ) : '';
 	$all_meals         = [];
 	if ( ! empty( $itinerary_options['meals'] ) && is_array( $itinerary_options['meals'] ) ) {
 		$meals = $itinerary_options['meals'];
@@ -1048,7 +1049,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'type'    => 'select',
 					'label'   => __( 'Tax class', 'tourfic' ),
 					'subtitle'  => __( 'Select your class, and tax will calculate based on your chosen class. PS: If you activate partial payment option tax will be calculated upon partial amount as woocommerce regulations.', 'tourfic' ),
-					'options' => tf_taxable_option_callback(),
+					//'options' => tf_taxable_option_callback(),
 					'is_pro'  => true
 				),
 			),

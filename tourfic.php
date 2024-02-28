@@ -70,6 +70,7 @@ final class Tourfic {
 	 * Tourfic Constructor.
 	 */
 	public function __construct() {
+		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		$this->define_constants();
 
         //Check if WooCommerce is active, and if it isn't, disable the plugin.
@@ -152,23 +153,23 @@ final class Tourfic {
 //			tf_file_missing( TF_INC_PATH . 'classes.php' );
 //		}
 
-		if ( file_exists( TF_INC_PATH . 'functions.php' ) ) {
-			require_once TF_INC_PATH . 'functions.php';
-		} else {
-			tf_file_missing( TF_INC_PATH . 'functions.php' );
-		}
+		// if ( file_exists( TF_INC_PATH . 'functions.php' ) ) {
+		// 	require_once TF_INC_PATH . 'functions.php';
+		// } else {
+		// 	tf_file_missing( TF_INC_PATH . 'functions.php' );
+		// }
 
-		if ( file_exists( TF_ADMIN_PATH . 'inc/functions.php' ) ) {
-			require_once TF_ADMIN_PATH . 'inc/functions.php';
-		} else {
-			tf_file_missing( TF_ADMIN_PATH . 'inc/functions.php' );
-		}
+		// if ( file_exists( TF_ADMIN_PATH . 'inc/functions.php' ) ) {
+		// 	require_once TF_ADMIN_PATH . 'inc/functions.php';
+		// } else {
+		// 	tf_file_missing( TF_ADMIN_PATH . 'inc/functions.php' );
+		// }
 
-		if ( file_exists( TF_ADMIN_PATH . 'emails/TF_Handle_Emails.php' ) ) {
-			require_once TF_ADMIN_PATH . 'emails/TF_Handle_Emails.php';
-		} else {
-			tf_file_missing( TF_ADMIN_PATH . 'emails/TF_Handle_Emails.php' );
-		}
+		// if ( file_exists( TF_ADMIN_PATH . 'emails/TF_Handle_Emails.php' ) ) {
+		// 	require_once TF_ADMIN_PATH . 'emails/TF_Handle_Emails.php';
+		// } else {
+		// 	tf_file_missing( TF_ADMIN_PATH . 'emails/TF_Handle_Emails.php' );
+		// }
 	}
 
 	function tf_load_textdomain() {

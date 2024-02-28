@@ -1,13 +1,15 @@
 <?php
+use Tourfic\Traits\Helpers;
 // don't load directly
 defined( 'ABSPATH' ) || exit;
+
 $badge_up     = '<div class="tf-csf-badge"><span class="tf-upcoming">' . __( "Upcoming", "tourfic" ) . '</span></div>';
 $badge_pro    = '<div class="tf-csf-badge"><span class="tf-pro">' . __( "Pro Feature", "tourfic" ) . '</span></div>';
 $badge_up_pro = '<div class="tf-csf-badge"><span class="tf-upcoming">' . __( "Upcoming", "tourfic" ) . '</span><span class="tf-pro">' . __( "Pro Feature", "tourfic" ) . '</span></div>';
 
 if(!function_exists('tf_hotel_facilities_categories')) {
 	function tf_hotel_facilities_categories() {
-		$facilities_cats = ! empty( tf_data_types( tfopt( 'hotel_facilities_cats' ) ) ) ? tf_data_types( tfopt( 'hotel_facilities_cats' ) ) : '';
+		$facilities_cats = ! empty( Helpers::tf_data_types( tfopt( 'hotel_facilities_cats' ) ) ) ? Helpers::tf_data_types( tfopt( 'hotel_facilities_cats' ) ) : '';
 		$all_cats       = [];
 		if ( ! empty( $facilities_cats ) && is_array( $facilities_cats ) ) {
 			foreach ( $facilities_cats as $key => $cat ) {
@@ -186,7 +188,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'type'    => 'select',
 					'label'   => __( 'Tax class', 'tourfic' ),
 					'subtitle'  => __( 'Select your class, and tax will calculate based on your chosen class. PS: If you activate partial payment option tax will be calculated upon partial amount as woocommerce regulations.', 'tourfic' ),
-					'options' => tf_taxable_option_callback(),
+					//'options' => tf_taxable_option_callback(),
 					'is_pro'  => true
 				),
 			),
