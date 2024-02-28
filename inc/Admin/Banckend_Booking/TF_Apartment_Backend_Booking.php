@@ -1,4 +1,5 @@
 <?php
+namespace Tourfic\Admin\Banckend_Booking;
 
 defined( 'ABSPATH' ) || exit;
 

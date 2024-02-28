@@ -1,6 +1,6 @@
 <?php
 
-namespace Tourfic\Classes;
+namespace Tourfic\Admin;
 
 class Shortcode_Generator {
 

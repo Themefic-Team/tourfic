@@ -1,4 +1,6 @@
 <?php
+namespace Tourfic\Admin\Banckend_Booking;
+
 defined( 'ABSPATH' ) || exit;
 /**
  * TF Hotel Backend Booking
