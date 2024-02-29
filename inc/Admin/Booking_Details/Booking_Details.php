@@ -187,7 +187,18 @@ class Booking_Details {
 
                 <div class="tf-filter-options">
                     <div class="tf-order-status-filter">
-                        <select class="tf-tour-filter-options tf-hotel-id-filter-options">
+						<?php 
+						if("tf_hotel"==$this->booking_args['post_type']){
+							$tf_postwise_filter_class = 'tf-hotel-id-filter-options';
+						}elseif("tf_tours"==$this->booking_args['post_type']){
+							$tf_postwise_filter_class = 'tf-post-id-filter-options';
+						}elseif("tf_apartment"==$this->booking_args['post_type']){
+							$tf_postwise_filter_class = 'tf-apartment-id-filter-options';
+						}else{
+							$tf_postwise_filter_class = '';
+						}
+						?>
+                        <select class="tf-tour-filter-options <?php echo esc_attr($tf_postwise_filter_class); ?>">
                             <option value=""><?php _e( $this->booking_args['booking_title']." name", "tourfic" ); ?></option>
 							<?php
 							$tf_posts_list       = array(
@@ -210,7 +221,7 @@ class Booking_Details {
                 </div>
             </div>
             <form class="tf-right-search-filter">
-                <input type="number" value="<?php echo ! empty( $_GET['post'] ) ? esc_attr( $_GET['post'] ) : ''; ?>" placeholder="Search by Hotel ID" id="tf-searching-key">
+                <input type="number" value="<?php echo ! empty( $_GET['post'] ) ? esc_attr( $_GET['post'] ) : ''; ?>" placeholder="Search by <?php echo esc_html( $this->booking_args['booking_title'] ); ?> ID" id="tf-searching-key">
                 <button class="tf-search-by-id" type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M17.5 17.5L14.5834 14.5833M16.6667 9.58333C16.6667 13.4954 13.4954 16.6667 9.58333 16.6667C5.67132 16.6667 2.5 13.4954 2.5 9.58333C2.5 5.67132 5.67132 2.5 9.58333 2.5C13.4954 2.5 16.6667 5.67132 16.6667 9.58333Z"
