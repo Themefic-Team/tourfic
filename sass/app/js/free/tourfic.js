@@ -940,8 +940,6 @@
             let thisEml = $(this);
             let thisVal = thisEml.val();
 
-            console.log( thisEml)
-
             if (thisVal > 1) {
                 $('.tf_selectperson-wrap').find('.adults-text').text(thisVal + " " + tf_params.adult + 's');
             } else {
