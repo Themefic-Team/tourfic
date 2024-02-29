@@ -21,7 +21,7 @@ class Booking_Details {
 		$booking_args = $this->booking_args;
 		add_submenu_page( 'edit.php?post_type='.$booking_args['post_type'],
 			__( $booking_args['menu_title'], 'tourfic' ),
-			__( $booking_args['menu_title'], 'tourfic' ),
+			__('Booking Details', 'tourfic' ),
 			$booking_args['capability'],
 			$booking_args['menu_slug'],
 			array($this,'tf_booking_page_callback')
@@ -114,7 +114,7 @@ class Booking_Details {
                     <img src="<?php echo TF_ASSETS_URL; ?>app/images/loader.gif" alt="Loader">
                 </div>
                 <div class="tf_booking_wrap_header">
-                    <h1 class="wp-heading-inline"><?php _e( 'Hotel Booking Details', 'tourfic' ); ?></h1>
+                    <h1 class="wp-heading-inline"><?php _e( $this->booking_args['booking_title'].' Booking Details', 'tourfic' ); ?></h1>
                     <div class="tf_header_wrap_button">
 						<?php
 						/**
@@ -188,16 +188,16 @@ class Booking_Details {
                 <div class="tf-filter-options">
                     <div class="tf-order-status-filter">
                         <select class="tf-tour-filter-options tf-hotel-id-filter-options">
-                            <option value=""><?php _e( "Hotel name", "tourfic" ); ?></option>
+                            <option value=""><?php _e( $this->booking_args['booking_title']." name", "tourfic" ); ?></option>
 							<?php
-							$tf_hotel_list       = array(
+							$tf_posts_list       = array(
 								'posts_per_page' => - 1,
-								'post_type'      => 'tf_hotel',
+								'post_type'      => $this->booking_args['post_type'],
 								'post_status'    => 'publish'
 							);
-							$tf_hotel_list_query = new \WP_Query( $tf_hotel_list );
-							if ( $tf_hotel_list_query->have_posts() ):
-								while ( $tf_hotel_list_query->have_posts() ) : $tf_hotel_list_query->the_post();
+							$tf_posts_list_query = new \WP_Query( $tf_posts_list );
+							if ( $tf_posts_list_query->have_posts() ):
+								while ( $tf_posts_list_query->have_posts() ) : $tf_posts_list_query->the_post();
 									?>
                                     <option value="<?php echo get_the_ID(); ?>" <?php echo ! empty( $_GET['post'] ) && get_the_ID() == $_GET['post'] ? esc_attr( 'selected' ) : ''; ?>><?php echo get_the_title(); ?></option>
 								<?php
@@ -233,7 +233,7 @@ class Booking_Details {
 						<?php _e( "ID", "tourfic" ); ?>
                     </th>
                     <th id="odetails">
-						<?php _e( "Hotel name", "tourfic" ); ?>
+						<?php _e( $this->booking_args["booking_title"]." name", "tourfic" ); ?>
                     </th>
                     <th id="cdetails">
 						<?php _e( "Customer details", "tourfic" ); ?>
