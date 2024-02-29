@@ -101,7 +101,7 @@ class Booking_Details {
 					$tf_orders_select    = array(
 						'select'    => "*",
 						'post_type' => $booking_type,
-						'query'     => " ORDER BY order_id DESC LIMIT 15"
+						'query'     => " $tf_filter_query ORDER BY order_id DESC LIMIT 15"
 					);
 					$tf_order_details_result = $this->tourfic_order_table_data( $tf_orders_select );
 				}
