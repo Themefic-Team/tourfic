@@ -705,6 +705,77 @@ class Booking_Details {
 					</div>
 					<?php } ?>
 
+					<?php if("tf_apartment" == $this->booking_args['post_type']){ ?>
+					<!-- Pricing Details -->
+					<div class="customers-order-date details-box">
+						<h4>
+							<?php _e("Pricing details", "tourfic"); ?>
+						</h4>
+						<div class="tf-grid-box tf-pricing-grid-box">
+
+							<div class="tf-grid-single">
+								<div class="tf-single-box">
+									<table class="table">
+										
+										<tr>
+											<th><?php _e("Payment method", "tourfic"); ?></th>
+											<td>:</td>
+											<td>
+											<?php 
+												if ( ! function_exists( 'tf_get_payment_method_full_name' ) ) {
+													function tf_get_payment_method_full_name( $sort_name ) {
+														$payment_gateways = \WC_Payment_Gateways::instance()->get_available_payment_gateways();
+										
+														if ( isset( $payment_gateways[ $sort_name ] ) ) {
+															return $payment_gateways[ $sort_name ]->title;
+														} else {
+															return 'Offline Payment';
+														}
+													}
+												}
+												$sort_name = $tf_order_details->payment_method;
+												echo tf_get_payment_method_full_name( $sort_name );
+											?>
+											</td>
+										</tr>
+										
+										<?php 
+										if(!empty($tf_sorder_details->total_price)){ ?>
+										<tr>
+											<th><?php _e("Total", "tourfic"); ?></th>
+											<td>:</td>
+											<td><?php echo wc_price($tf_sorder_details->total_price); ?></td>
+										</tr>
+										<?php } ?>
+										<?php $taxs = !empty($tf_sorder_details->tax_info) ? json_decode($tf_sorder_details->tax_info,true) : "";
+										$taxs_summations = 0;
+										foreach ( $taxs as $label => $sum ) {
+											$taxs_summations += $sum;
+										}
+										?>
+										<?php 
+										if(!empty($taxs_summations)){ ?>
+										<tr>
+											<th><?php _e("Tax", "tourfic"); ?></th>
+											<td>:</td>
+											<td><?php echo wc_price($taxs_summations); ?></td>
+										</tr>
+										<?php } ?>
+										<?php 
+										if(!empty($tf_sorder_details->due_price)){ ?>
+										<tr>
+											<th><?php _e("Due Price", "tourfic"); ?></th>
+											<td>:</td>
+											<td><?php echo $tf_sorder_details->due_price; ?></td>
+										</tr>
+										<?php } ?>
+									</table>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<?php } ?>
 					<?php if("tf_tours" == $this->booking_args['post_type']){ ?>
 					<!-- Pricing Details -->
 					<div class="customers-order-date details-box">
