@@ -18,6 +18,7 @@ class Base {
 		\Tourfic\Admin\TF_Options\TF_Options::instance();
 		\Tourfic\Classes\Hotel\Hotel_CPT::instance();
 		\Tourfic\Admin\Booking_Details\Hotel\Hotel_Booking_Details::instance();
+		\Tourfic\Admin\Enquiry\Hotel\Hotel_Enquiry::instance();
 		\Tourfic\Classes\Tour\Tour_CPT::instance();
 		\Tourfic\Admin\Booking_Details\Tour\Tour_Booking_Details::instance();
 		\Tourfic\Classes\Apartment\Apartment_CPT::instance();
