@@ -122,7 +122,28 @@ class Booking_Details {
 						 * @hooked tf_before_hotel_booking_details - 10
 						 * @since 2.9.18
 						 */
-						do_action( 'tf_before_hotel_booking_details' );
+						if( "tf_hotel"==$this->booking_args['post_type'] ){
+							do_action( 'tf_before_hotel_booking_details' );
+						}
+
+						/**
+						 * Before Tour booking details table hook
+						 * @hooked tf_before_tour_booking_details - 10
+						 * @since 2.9.18
+						 */
+						if( "tf_tours"==$this->booking_args['post_type'] ){
+							do_action( 'tf_before_tour_booking_details' );
+						}
+
+						/**
+						 * Before Apartment booking details table hook
+						 * @hooked tf_before_apartment_booking_details - 10
+						 * @since 2.9.18
+						 */
+						if( "tf_apartment"==$this->booking_args['post_type'] ){
+							do_action( 'tf_before_apartment_booking_details' );
+						}
+						
 						?>
                     </div>
                 </div>
