@@ -16,7 +16,7 @@ class Hotel_CPT extends \Tourfic\Classes\Post_Type {
 			'singular_name' => 'Hotel',
 			'slug'          => 'tf_hotel',
 			'menu_icon'     => 'dashicons-building',
-			'menu_position' => 5,
+			'menu_position' => 26.2,
             'supports'      => apply_filters( 'tf_hotel_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
 		);
 
