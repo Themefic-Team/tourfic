@@ -22,28 +22,28 @@ class Tour_CPT extends \Tourfic\Classes\Post_Type {
 
         $tax_args = array(
             array(
-                'name' => 'Tour Destinations',
-                'singular_name' => 'Tour Destinations',
+                'name' => 'Destinations',
+                'singular_name' => 'Destinations',
                 'taxonomy' => 'tour_destination',
             ),
             array(
-                'name' => 'Tour Attractions',
-                'singular_name' => 'Tour Attractions',
+                'name' => 'Attractions',
+                'singular_name' => 'Attractions',
                 'taxonomy' => 'tour_attraction',
             ),
             array(
-                'name' => 'Tour Activities',
-                'singular_name' => 'Tour Activity',
+                'name' => 'Activities',
+                'singular_name' => 'Activity',
                 'taxonomy' => 'tour_activities',
             ),
             array(
-                'name' => 'Tour Features',
-                'singular_name' => 'Tour Feature',
+                'name' => 'Features',
+                'singular_name' => 'Feature',
                 'taxonomy' => 'tour_features',
             ),
             array(
-                'name' => 'Tour Types',
-                'singular_name' => 'Tour Type',
+                'name' => 'Types',
+                'singular_name' => 'Type',
                 'taxonomy' => 'tour_type',
             )
         );
