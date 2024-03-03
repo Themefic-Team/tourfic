@@ -319,6 +319,10 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 - Updated: Reorganized readme.txt for WP ORG
 
+= 2.11.13 - 03 March 2024 =
+
+- Updated: Updated: readme.txt
+
 = 2.11.12 - 27 February 2024 =
 
 - Fixed: Archive Pagination issue
