@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.4.3
-Stable tag: 2.11.13
+Stable tag: 2.11.14
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -14,9 +14,7 @@ Ultimate Tour, Travel, Accommodation & Hotel Booking WordPress plugin. Build you
 
 ## THE BEST HOTEL BOOKING, ACCOMMODATION BOOKING AND TOUR BOOKING PLUGIN FOR WORDPRESS - TOURFIC
 
-> Build Your own travel agency website like Agoda, Booking.com, Airbnb, Hotels.com
-
-👉 Official Website: [Click Here](https://themefic.com/tourfic)
+👉 Our Official Website: [Click Here](https://themefic.com/tourfic)
 👉 Live Demo Link: [Click Here](https://tourfic.com)
 👉 Need a WordPress Theme? Use [Travelfic](https://tourfic.site/travelfic/)
 👉 Buy Pro Version: [Click Here](https://themefic.com/tourfic/pricing)
@@ -31,7 +29,7 @@ This Hotel / Tour booking WordPress plugin empowers your customers to create acc
 As a comprehensive solution for travel booking on WordPress, Tourfic encompasses a broad range of functionalities, from basic to advanced, to meet all the requirements for your next project in the hotel, apartment, and travel sector. Here are some of the noteworthy features of Tourfic:
 
 = 🎉  A DEDICATED HOTEL & TRAVEL BOOKING WORDPRESS THEME =
-Our team has released a dedicated WordPress theme, Travelfic, exclusively for Tourfic users. This theme offers multiple demo versions for free. Feel free to explore it [here](https://wordpress.org/themes/travelfic/).
+Our team has released a dedicated WordPress theme, [Travelfic](https://tourfic.site/travelfic/), exclusively for Tourfic users. It offers multiple demo versions for free. Check it [here](https://wordpress.org/themes/travelfic/).
 
 = 🎉  WORDPRESS HOTEL BOOKING & ROOM MANAGEMENT =
 * Add Unlimited Hotels
@@ -175,16 +173,13 @@ Furthermore, an array of indispensable features solidifies Tourfic's position as
 * Shortcodes & Elementor Widgets
 * Speed Optimization (Minification of Tourfic CSS, JS & Use of CDN service for 3rd Party asset files) (Pro)
 
-**Demo Link**
-> [Check out the demo](https://themefic.com/tourfic) to see it in action!
-
 In short, Tourfic is the ultimate WordPress tour booking plugin for hotel booking, tour operator and travel agency websites.
 
 **Pro Version**
 
-We believe the free version is good enough for most businesses. However, we have a **Pro version** of this plugin which has more advanced features as mentioned above.
+We believe the free version is good enough for most businesses. However, we have a **Pro version** with more advanced features.
 
-> **Upscale your Travel Business with Advanced Features of ** [Tourfic Pro](https://themefic.com/tourfic/pricing).
+> Upscale your Travel Business with Advanced Features of [Tourfic Pro](https://themefic.com/tourfic/pricing).
 
 ### How to create a Hotel Booking Website with WooCommerce & Tourfic:
 
@@ -204,7 +199,7 @@ We believe the free version is good enough for most businesses. However, we have
 
 ### Tourfic Shortcodes
 
-With shortcodes, you can embed important tourfic functions and features into different pages or posts. We currently have shortcodes for the following items:
+With shortcodes, you can embed important functions and features into pages or posts. We currently have following shortcodes:
 
 * Display Tours
 * Tour Destination
@@ -225,11 +220,11 @@ You can find all our available shortcodes [here](https://themefic.com/docs/tourf
 
 ### Join our Community to stay updated
 
-Want to stay informed with all the latest news and updates about Tourfic? Join our [Facebook Community group](https://www.facebook.com/groups/tourfic)
+Join our [Facebook group](https://www.facebook.com/groups/tourfic) to stay informed with latest news and updates about Tourfic.
 
 ### Our Support
 
-We provide full support on the WordPress.org forums. In addition, please feel free to post questions or bug reports through [Our Website](https://portal.themefic.com/support/) or [Facebook Group](https://www.facebook.com/groups/tourfic/). For details, please read our [Support Policy](https://themefic.com/support-policy/).
+We provide full support on the WordPress.org forums & [Our Website](https://portal.themefic.com/support/). Check our [Support Policy](https://themefic.com/support-policy/).
 
 ### Privacy Policy
 Tourfic uses [Appsero](https://appsero.com/) SDK to collect some telemetry data. Appsero SDK does not gather any data by default. The SDK only starts gathering basic telemetry data when a user allows it via the admin notice. Appsero SDK DOES NOT IMMEDIATELY start gathering data, without confirmation from users in any case. We use this data to troubleshoot problems faster, make product improvements & ensure a great user experience for all our users.
@@ -320,9 +315,9 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.11.13 - 03 March 2024 =
+= 2.11.14 - 03 March 2024 =
 
-- Updated: readme.txt
+- Updated: Reorganized readme.txt for WP ORG
 
 = 2.11.12 - 27 February 2024 =
 
@@ -526,26 +521,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Revamped: Totel, tour, and apartment booking details.
 - Revamped: The hotel room availability repeater to a calendar(Pro).
 
-= 2.10.1 -  26 September 2023 =
-
-- Update: readme.txt
-
-= 2.10.0 -  25 September 2023 =
-
-- Added: Apartment Booking feature.
-- Added: Hotel, Tour, Apartment type Taxonomy.
-- Added: Hotel and tour type filter widget.
-- Added: Hotel and tour Backend/Admin booking add( Pro ).
-- Added: Hotel and tour External Booking( Pro ).
-- Added: Without payment option in the tour( Pro ).
-- Added: Date format settings.
-- Fixed: Settings page saving issue.
-- Fixed: Tour single responsive issue.
-- Fixed: Map issue
-- Improvement: Tour start price hide option added to tourfic settings.
-- Updated: Appsero updated Version 1.2.4
-
-Old Changelog can be found [here](https://themefic.com/tourfic/changelog/).
+**Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
 = 1.0.0 - 23/03/2021 =
 
