@@ -700,48 +700,50 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 		<?php }else{ ?>
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
             <div class="tf_homepage-booking">
-                <div class="tf_destination-wrap">
-                    <div class="tf_input-inner">
-                        <div class="tf_form-row">
-                            <label class="tf_label-row">
-                                <span class="tf-label"><?php _e( 'Destination', 'tourfic' ); ?>:</span>
-                                <div class="tf_form-inner tf-d-g">
-                                    <i class="fas fa-search"></i>
-                                    <?php if ( (empty($advanced) || !empty($advanced)) && "enabled"!=$advanced ){ ?>
-                                    <input type="text" name="place-name" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> id="tf-destination" class="" placeholder="<?php _e( 'Enter Destination', 'tourfic' ); ?>" value="">
-                                    <input type="hidden" name="place" id="tf-search-tour" class="tf-place-input"/>
-									<?php } 
-									if ( !empty($advanced) && "enabled"==$advanced ){ ?>
-									<input type="text" name="place-name" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> id="tf-tour-location-adv" class="tf-tour-preview-place" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>">
-                                    <input type="hidden" name="place" id="tf-tour-place">
-                                    <div class="tf-hotel-results tf-tour-results">
-                                        <ul id="ui-id-2">
-											<?php
-											$tf_tour_destination = get_terms( array(
-												'taxonomy'     => 'tour_destination',
-												'orderby'      => 'title',
-												'order'        => 'ASC',
-												'hide_empty'   => false,
-												'hierarchical' => 0,
-											) );
-											if ( $tf_tour_destination ) {
-												foreach ( $tf_tour_destination as $term ) {
-													if ( ! empty( $term->name ) ) {
-														?>
-                                                        <li data-name="<?php echo $term->name; ?>" data-slug="<?php echo $term->slug; ?>"><i class="fa fa-map-marker"></i><?php echo $term->name; ?></li>
-														<?php
+				<?php if( tfopt( 'hide_tour_location_search' ) != 1 || tfopt( 'required_location_tour_search' ) ): ?>
+					<div class="tf_destination-wrap">
+						<div class="tf_input-inner">
+							<div class="tf_form-row">
+								<label class="tf_label-row">
+									<span class="tf-label"><?php _e( 'Destination', 'tourfic' ); ?>:</span>
+									<div class="tf_form-inner tf-d-g">
+										<i class="fas fa-search"></i>
+										<?php if ( (empty($advanced) || !empty($advanced)) && "enabled"!=$advanced ){ ?>
+										<input type="text" name="place-name" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> id="tf-destination" class="" placeholder="<?php _e( 'Enter Destination', 'tourfic' ); ?>" value="">
+										<input type="hidden" name="place" id="tf-search-tour" class="tf-place-input"/>
+										<?php } 
+										if ( !empty($advanced) && "enabled"==$advanced ){ ?>
+										<input type="text" name="place-name" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> id="tf-tour-location-adv" class="tf-tour-preview-place" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>">
+										<input type="hidden" name="place" id="tf-tour-place">
+										<div class="tf-hotel-results tf-tour-results">
+											<ul id="ui-id-2">
+												<?php
+												$tf_tour_destination = get_terms( array(
+													'taxonomy'     => 'tour_destination',
+													'orderby'      => 'title',
+													'order'        => 'ASC',
+													'hide_empty'   => false,
+													'hierarchical' => 0,
+												) );
+												if ( $tf_tour_destination ) {
+													foreach ( $tf_tour_destination as $term ) {
+														if ( ! empty( $term->name ) ) {
+															?>
+															<li data-name="<?php echo $term->name; ?>" data-slug="<?php echo $term->slug; ?>"><i class="fa fa-map-marker"></i><?php echo $term->name; ?></li>
+															<?php
+														}
 													}
 												}
-											}
-											?>
-                                        </ul>
-                                    </div>
-									<?php } ?>
-								</div>
-                            </label>
-                        </div>
-                    </div>
-                </div>
+												?>
+											</ul>
+										</div>
+										<?php } ?>
+									</div>
+								</label>
+							</div>
+						</div>
+					</div>
+				<?php endif; ?>
 
                 <div class="tf_selectperson-wrap">
                     <div class="tf_input-inner">
@@ -4014,7 +4016,7 @@ if ( ! function_exists( 'tf_tour_search_ajax_callback' ) ) {
 		}
 
 		if ( tfopt( 'date_tour_search' ) ) {
-			if ( ! empty( $_POST['place'] ) && ! empty( $_POST['check-in-out-date'] ) ) {
+			if ( ! empty( $_POST['check-in-out-date'] ) ) {
 				$response['query_string'] = str_replace( '&action=tf_tour_search', '', http_build_query( $_POST ) );
 				$response['status']       = 'success';
 			}
