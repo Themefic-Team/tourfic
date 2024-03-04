@@ -1789,7 +1789,7 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'No', 'tourfic' ),
 				),
 				array(
-					'id'        => 'optional_hotel_search_field',
+					'id'        => 'required_location_hotel_search',
 					'type'      => 'switch',
 					'label'     => __( ' Location Required in Hotel Search', 'tourfic' ),
 					'subtitle'  => __( 'Enable this setting to make the location field optional for the search form.', 'tourfic' ),
@@ -1804,7 +1804,8 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'  => __( 'Enable this setting to hide the location option from the search form.', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-					'dependency' => array( "optional_hotel_search_field", "==", "false")
+					'default'   => false,
+					'dependency' => array( "required_location_hotel_search", "==", "false")
 				),
 				array(
 					'id'       => 'tour_search_heading',
@@ -1835,6 +1836,25 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'  => __( 'Turn on this setting to hide the infant option from the search form.', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'        => 'required_location_tour_search',
+					'type'      => 'switch',
+					'label'     => __( ' Location Required in Tour Search', 'tourfic' ),
+					'subtitle'  => __( 'Enable this setting to make the location field optional for the search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => true,
+				),
+				array(
+					'id'        => 'hide_tour_location_search',
+					'type'      => 'switch',
+					'label'     => __( 'Hide Location in Tour Search', 'tourfic' ),
+					'subtitle'  => __( 'Enable this setting to hide the location option from the search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false,
+					'dependency' => array( "required_location_tour_search", "==", "false")
 				),
 				array(
 					'id'       => 'apartment_search_heading',
