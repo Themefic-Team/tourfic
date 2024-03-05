@@ -76,8 +76,8 @@ class Post_Type {
 			$tax_labels = array(
 				'name'                       => __( $tax_args['name'], 'tourfic' ),
 				'singular_name'              => __( $tax_args['singular_name'], 'tourfic' ),
-				'menu_name'                  => __( $tax_args['singular_name'], 'tourfic' ),
-				'all_items'                  => __( 'All Locations', 'tourfic' ),
+				'menu_name'                  => __( $tax_args['name'], 'tourfic' ),
+				'all_items'                  => __( 'All ' . $tax_args['name'], 'tourfic' ),
 				'edit_item'                  => __( 'Edit ' . $tax_args['singular_name'], 'tourfic' ),
 				'view_item'                  => __( 'View ' . $tax_args['singular_name'], 'tourfic' ),
 				'update_item'                => __( 'Update ' . strtolower( $tax_args['singular_name'] ) . ' name', 'tourfic' ),

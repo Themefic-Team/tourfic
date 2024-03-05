@@ -1,10 +1,13 @@
 <?php
+
 namespace Tourfic\Classes\Tour;
 defined( 'ABSPATH' ) || exit;
 
 class Tour_CPT extends \Tourfic\Classes\Post_Type {
 
-    use \Tourfic\Traits\Singleton;
+	use \Tourfic\Traits\Singleton;
+	use \Tourfic\Traits\Helper;
+
 	/**
 	 * Initialize custom post type
 	 * @access public
@@ -17,42 +20,75 @@ class Tour_CPT extends \Tourfic\Classes\Post_Type {
 			'slug'          => 'tf_tours',
 			'menu_icon'     => 'dashicons-location-alt',
 			'menu_position' => 26.3,
-            'supports'      => apply_filters( 'tf_tours_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
+			'supports'      => apply_filters( 'tf_tours_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
+			'capability'    => array( 'tf_tours', 'tf_tourss' ),
+			'rewrite_slug'  => $this->get_tour_slug(),
 		);
 
-        $tax_args = array(
-            array(
-                'name' => 'Destinations',
-                'singular_name' => 'Destinations',
-                'taxonomy' => 'tour_destination',
-            ),
-            array(
-                'name' => 'Attractions',
-                'singular_name' => 'Attractions',
-                'taxonomy' => 'tour_attraction',
-            ),
-            array(
-                'name' => 'Activities',
-                'singular_name' => 'Activity',
-                'taxonomy' => 'tour_activities',
-            ),
-            array(
-                'name' => 'Features',
-                'singular_name' => 'Feature',
-                'taxonomy' => 'tour_features',
-            ),
-            array(
-                'name' => 'Types',
-                'singular_name' => 'Type',
-                'taxonomy' => 'tour_type',
-            )
-        );
+		$tax_args = array(
+			array(
+				'name'          => 'Destinations',
+				'singular_name' => 'Destinations',
+				'taxonomy'      => 'tour_destination',
+				'rewrite_slug'  => apply_filters( 'tf_tour_destination_slug', 'tour-destination' ),
+				'capability'    => array(
+					'assign_terms' => 'edit_tf_tours',
+					'edit_terms'   => 'edit_tf_tours',
+				),
+			),
+			array(
+				'name'          => 'Attractions',
+				'singular_name' => 'Attractions',
+				'taxonomy'      => 'tour_attraction',
+				'rewrite_slug'  => apply_filters( 'tf_tour_attraction_slug', 'tour-attraction' ),
+				'capability'    => array(
+					'assign_terms' => 'edit_tf_tours',
+					'edit_terms'   => 'edit_tf_tours',
+				),
+			),
+			array(
+				'name'          => 'Activities',
+				'singular_name' => 'Activity',
+				'taxonomy'      => 'tour_activities',
+				'rewrite_slug'  => apply_filters( 'tf_tour_activities_slug', 'tour-activities' ),
+				'capability'    => array(
+					'assign_terms' => 'edit_tf_tours',
+					'edit_terms'   => 'edit_tf_tours',
+				),
+			),
+			array(
+				'name'          => 'Features',
+				'singular_name' => 'Feature',
+				'taxonomy'      => 'tour_features',
+				'rewrite_slug'  => apply_filters( 'tf_tour_features_slug', 'tour-features' ),
+				'capability'    => array(
+					'assign_terms' => 'edit_tf_tours',
+					'edit_terms'   => 'edit_tf_tours',
+				),
+			),
+			array(
+				'name'          => 'Types',
+				'singular_name' => 'Type',
+				'taxonomy'      => 'tour_type',
+				'rewrite_slug'  => apply_filters( 'tf_tour_type_slug', 'tour-type' ),
+				'capability'    => array(
+					'assign_terms' => 'edit_tf_tours',
+					'edit_terms'   => 'edit_tf_tours',
+				),
+			)
+		);
 
 		parent::__construct( $tour_args, $tax_args );
 
-
 		add_action( 'init', array( $this, 'tf_post_type_taxonomy_register' ) );
-		
+	}
+
+	private function get_tour_slug() {
+		$tf_tour_setting_permalink_slug = ! empty( self::tfopt( 'tour-permalink-setting' ) ) ? self::tfopt( 'tour-permalink-setting' ) : "tours";
+
+		update_option( "tour_slug", $tf_tour_setting_permalink_slug );
+
+		return apply_filters( 'tf_tours_slug', get_option( "tour_slug" ) );
 	}
 
 }

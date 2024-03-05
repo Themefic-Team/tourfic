@@ -1,4 +1,5 @@
 <?php
+
 namespace Tourfic\Classes;
 
 defined( 'ABSPATH' ) || exit;
@@ -21,9 +22,15 @@ class Base {
 		}
 		\Tourfic\Admin\Booking_Details\Hotel\Hotel_Booking_Details::instance();
 		\Tourfic\Admin\Enquiry\Hotel\Hotel_Enquiry::instance();
-//		\Tourfic\Classes\Tour\Tour_CPT::instance();
+		if ( self::tfopt( 'disable-services' ) && in_array( 'tour', self::tfopt( 'disable-services' ) ) ) {
+		} else {
+			\Tourfic\Classes\Tour\Tour_CPT::instance();
+		}
+		if ( self::tfopt( 'disable-services' ) && in_array( 'apartment', self::tfopt( 'disable-services' ) ) ) {
+		} else {
+			\Tourfic\Classes\Apartment\Apartment_CPT::instance();
+		}
 		\Tourfic\Admin\Booking_Details\Tour\Tour_Booking_Details::instance();
-//		\Tourfic\Classes\Apartment\Apartment_CPT::instance();
 		\Tourfic\Admin\Booking_Details\Apartment\Apartment_Booking_Details::instance();
 	}
 

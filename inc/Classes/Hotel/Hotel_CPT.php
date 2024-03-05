@@ -64,12 +64,12 @@ class Hotel_CPT extends \Tourfic\Classes\Post_Type {
 		add_action( 'init', array( $this, 'tf_post_type_taxonomy_register' ) );
 	}
 
-	function get_hotel_slug() {
+	private function get_hotel_slug() {
 		$tf_hotel_setting_permalink_slug = ! empty( self::tfopt( 'hotel-permalink-setting' ) ) ? self::tfopt( 'hotel-permalink-setting' ) : "hotels";
 
 		update_option( "hotel_slug", $tf_hotel_setting_permalink_slug );
 
-		return get_option( 'hotel_slug' );
+		return apply_filters( 'tf_hotel_slug', get_option( "hotel_slug" ) );
 	}
 
 }
