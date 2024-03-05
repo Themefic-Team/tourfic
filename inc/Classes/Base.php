@@ -14,14 +14,14 @@ class Base {
 	}
 
 	public function init() {
+		\Tourfic\Classes\Helper::instance();
+		\Tourfic\Classes\Enqueue::instance();
 		\Tourfic\Admin\Functions::instance();
 //		\Tourfic\Admin\TF_Options\TF_Options::instance();
 		if ( self::tfopt( 'disable-services' ) && in_array( 'hotel', self::tfopt( 'disable-services' ) ) ) {
 		} else {
 			\Tourfic\Classes\Hotel\Hotel_CPT::instance();
 		}
-		\Tourfic\Admin\Booking_Details\Hotel\Hotel_Booking_Details::instance();
-		\Tourfic\Admin\Enquiry\Hotel\Hotel_Enquiry::instance();
 		if ( self::tfopt( 'disable-services' ) && in_array( 'tour', self::tfopt( 'disable-services' ) ) ) {
 		} else {
 			\Tourfic\Classes\Tour\Tour_CPT::instance();
@@ -30,6 +30,9 @@ class Base {
 		} else {
 			\Tourfic\Classes\Apartment\Apartment_CPT::instance();
 		}
+
+		\Tourfic\Admin\Booking_Details\Hotel\Hotel_Booking_Details::instance();
+		\Tourfic\Admin\Enquiry\Hotel\Hotel_Enquiry::instance();
 		\Tourfic\Admin\Booking_Details\Tour\Tour_Booking_Details::instance();
 		\Tourfic\Admin\Booking_Details\Apartment\Apartment_Booking_Details::instance();
 	}
