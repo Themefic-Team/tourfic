@@ -1946,7 +1946,7 @@ function tf_single_tour_booking_form( $post_id ) {
             <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
             <div class="tf-booking-person tf-tour-booking-box">
                 <div class="tf-form-title">
-					<h3 class="tf-person-info-title"><?php _e( "Person Info", "tourfic" ); ?></span>
+					<h3 class="tf-person-info-title"><?php _e( "Person Info", "tourfic" ); ?></h3>
                 </div>
 				<?php if ( $custom_avail == true || ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
                     <div class="tf-field-group tf-mt-16 tf_acrselection">
