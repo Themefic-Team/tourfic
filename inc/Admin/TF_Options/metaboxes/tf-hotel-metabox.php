@@ -1,5 +1,5 @@
 <?php
-use Tourfic\Traits\Helpers;
+use Tourfic\Traits\Helper;
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
@@ -9,7 +9,7 @@ $badge_up_pro = '<div class="tf-csf-badge"><span class="tf-upcoming">' . __( "Up
 
 if(!function_exists('tf_hotel_facilities_categories')) {
 	function tf_hotel_facilities_categories() {
-		$facilities_cats = ! empty( Helpers::tf_data_types( tfopt( 'hotel_facilities_cats' ) ) ) ? Helpers::tf_data_types( tfopt( 'hotel_facilities_cats' ) ) : '';
+		$facilities_cats = ! empty( Helper::tf_data_types( tfopt( 'hotel_facilities_cats' ) ) ) ? Helper::tf_data_types( tfopt( 'hotel_facilities_cats' ) ) : '';
 		$all_cats       = [];
 		if ( ! empty( $facilities_cats ) && is_array( $facilities_cats ) ) {
 			foreach ( $facilities_cats as $key => $cat ) {

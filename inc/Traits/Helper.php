@@ -3,7 +3,13 @@ namespace Tourfic\Traits;
 
 defined( 'ABSPATH' ) || exit;
 
-trait Helpers {
+trait Helper {
+
+	static function tfopt( $option = '', $default = null ) {
+		$options = get_option( 'tf_settings' );
+
+		return ( isset( $options[ $option ] ) ) ? $options[ $option ] : $default;
+	}
 
     static function tf_data_types( $var ) {
 		if ( ! empty( $var ) && gettype( $var ) == "string" ) {

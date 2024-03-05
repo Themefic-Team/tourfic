@@ -282,15 +282,4 @@ final class Tourfic {
 	}
 }
 
-/**
- * Global Admin Get Option
- */
-if ( ! function_exists( 'tfopt' ) ) {
-	function tfopt( $option = '', $default = null ) {
-		$options = get_option( 'tf_settings' );
-
-		return ( isset( $options[ $option ] ) ) ? $options[ $option ] : $default;
-	}
-}
-
 Tourfic::instance();

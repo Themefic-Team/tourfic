@@ -1,93 +1,123 @@
 <?php
+
 namespace Tourfic\Classes;
 
-class Post_Type
-{
-    use \Tourfic\Traits\Singleton;
-    protected $post_args;
-    protected $tax_args;
+defined( 'ABSPATH' ) || exit;
 
-    public function __construct($post_args = array(), $tax_args = array())
-    {
-        $this->post_args = $post_args;
-        $this->tax_args = $tax_args;
+class Post_Type {
+	use \Tourfic\Traits\Singleton;
 
-        // Add form.
-        add_action('init', array($this, 'tf_post_type'));
+	protected $post_args;
+	protected $tax_args;
 
-    }
+	public function __construct( $post_args = array(), $tax_args = array() ) {
+		$this->post_args = $post_args;
+		$this->tax_args  = $tax_args;
 
-    public function tf_post_type()
-    {
-        $post_args = $this->post_args;
-        $labels = array(
-            'name' => __($post_args['name'], 'tourfic'),
-            'singular_name' => __($post_args['singular_name'], 'tourfic'),
-            'add_new' => __('Add New ' . $post_args['singular_name'], 'tourfic'),
-            'add_new_item' => __('Add New', 'tourfic'),
-            'edit_item' => __('Edit ' . $post_args['singular_name'], 'tourfic'),
-            'new_item' => __('New ' . $post_args['singular_name'], 'tourfic'),
-            'view_item' => __('View ' . $post_args['singular_name'], 'tourfic'),
-            'search_items' => __('Search ' . $post_args['singular_name'], 'tourfic'),
-            'not_found' => __('No ' . $post_args['singular_name'] . ' found', 'tourfic'),
-            'not_found_in_trash' => __('No ' . $post_args['singular_name'] . ' found in Trash', 'tourfic'),
-            'parent_item_colon' => '',
-        );
+		add_action( 'init', array( $this, 'tf_post_type_register' ) );
+	}
 
-        $labels = apply_filters('tf_post_type_labels_' . $post_args['slug'], $labels);
+	public function tf_post_type_register() {
+		$post_args = $this->post_args;
 
-        $args = array(
-            'labels' => $labels,
-            'public' => true,
-            'publicly_queryable' => true,
-            'show_ui' => true,
-            'show_in_menu' => true,
-            'query_var' => true,
-            'has_archive' => true,
-            'capability_type' => 'post',
-            'map_meta_cap' => true,
-            'hierarchical' => true,
-            'menu_icon' => $post_args['menu_icon'],
-            'menu_position' => $post_args['menu_position'],
-            'show_in_admin_bar' => true,
-            'show_in_nav_menus' => true,
-            'can_export' => true,
-            'show_in_rest' => true,
-            'supports' => $post_args['supports'],
-        );
+		$labels = array(
+			'name'                  => _x( $post_args['name'], 'tourfic post type name', 'tourfic' ),
+			'singular_name'         => _x( $post_args['singular_name'], 'singular tourfic post type name', 'tourfic' ),
+			'add_new'               => __( 'Add New', 'tourfic' ),
+			'add_new_item'          => __( 'Add New ' . $post_args['singular_name'], 'tourfic' ),
+			'edit_item'             => __( 'Edit ' . $post_args['singular_name'], 'tourfic' ),
+			'new_item'              => __( 'New ' . $post_args['singular_name'], 'tourfic' ),
+			'all_items'             => __( 'All ' . $post_args['name'], 'tourfic' ),
+			'view_item'             => __( 'View ' . $post_args['singular_name'], 'tourfic' ),
+			'view_items'            => __( 'View ' . $post_args['name'], 'tourfic' ),
+			'search_items'          => __( 'Search ' . $post_args['name'], 'tourfic' ),
+			'not_found'             => __( 'No ' . $post_args['name'] . ' found', 'tourfic' ),
+			'not_found_in_trash'    => __( 'No ' . $post_args['name'] . ' found in Trash', 'tourfic' ),
+			'parent_item_colon'     => '',
+			'menu_name'             => _x( $post_args['name'], 'tourfic post type menu name', 'tourfic' ),
+			'featured_image'        => __( $post_args['singular_name'] . ' Image', 'tourfic' ),
+			'set_featured_image'    => __( 'Set ' . $post_args['singular_name'] . ' Image', 'tourfic' ),
+			'remove_featured_image' => __( 'Remove ' . $post_args['singular_name'] . ' Image', 'tourfic' ),
+			'use_featured_image'    => __( 'Use as ' . $post_args['singular_name'] . ' Image', 'tourfic' ),
+			'attributes'            => __( $post_args['singular_name'] . ' Attributes', 'tourfic' ),
+			'filter_items_list'     => __( 'Filter ' . $post_args['name'] . ' list', 'tourfic' ),
+			'items_list_navigation' => __( $post_args['name'] . ' list navigation', 'tourfic' ),
+			'items_list'            => __( $post_args['name'] . ' list', 'tourfic' ),
+		);
 
-        $args = apply_filters('tf_post_type_args_' . $post_args['slug'], $args);
+		$labels = apply_filters( $post_args['slug'] . '_labels', $labels );
 
-        register_post_type($post_args['slug'], $args);
-    }
+		$args = array(
+			'labels'             => $labels,
+			'public'             => true,
+			'show_in_rest'       => true,
+			'publicly_queryable' => true,
+			'show_ui'            => true,
+			'show_in_menu'       => true,
+			'query_var'          => true,
+			'menu_icon'          => $post_args['menu_icon'],
+			'rewrite'            => array( 'slug' => $post_args['rewrite_slug'], 'with_front' => false ),
+			'capability_type'    => $post_args['capability'],
+			'has_archive'        => true,
+			'hierarchical'       => false,
+			'menu_position'      => $post_args['menu_position'],
+			'supports'           => $post_args['supports'],
+		);
 
-    public function tf_cpt_taxonomy()
-    {
+		$args = apply_filters( $post_args['slug'] . '_args', $args );
 
-        foreach ($this->tax_args as $tax_args) {
-            $tf_cpt_tax_labels = array(
-                'name' => __($tax_args['name'], 'tourfic'),
-                'add_new_item' => __('Add New ' . $tax_args['singular_name'], 'tourfic'),
-                'new_item_name' => __('New ' . $tax_args['singular_name'], 'tourfic'),
-            );
-            $tf_cpt_tax_labels = apply_filters('tf_cpt_tax_labels_' . $tax_args['taxonomy'], $tf_cpt_tax_labels);
+		register_post_type( $post_args['slug'], $args );
+	}
 
-            $post_type = apply_filters('tf_cpt_tax_post_type_filter_' . $tax_args['taxonomy'], array($this->post_args['slug']));
+	public function tf_post_type_taxonomy_register() {
 
-            $args = array(
-                'labels' => $tf_cpt_tax_labels,
-                'hierarchical' => true,
-                'query_var' => true,
-                'show_in_rest' => true,
-                'show_ui' => true,
-                'show_admin_column' => true,
-                'show_in_nav_menus' => true,
-                'rest_base' => $tax_args['taxonomy'],
-                'rest_controller_class' => 'WP_REST_Terms_Controller',
-            );
-            $args = apply_filters('tf_cpt_tax_args_filter_' . $tax_args['taxonomy'], $args);
+		foreach ( $this->tax_args as $tax_args ) {
 
-            register_taxonomy($tax_args['taxonomy'], $post_type, $args); // Register Custom Taxonomy
-        }
-    }
+			$tax_labels = array(
+				'name'                       => __( $tax_args['name'], 'tourfic' ),
+				'singular_name'              => __( $tax_args['singular_name'], 'tourfic' ),
+				'menu_name'                  => __( $tax_args['singular_name'], 'tourfic' ),
+				'all_items'                  => __( 'All Locations', 'tourfic' ),
+				'edit_item'                  => __( 'Edit ' . $tax_args['singular_name'], 'tourfic' ),
+				'view_item'                  => __( 'View ' . $tax_args['singular_name'], 'tourfic' ),
+				'update_item'                => __( 'Update ' . strtolower( $tax_args['singular_name'] ) . ' name', 'tourfic' ),
+				'add_new_item'               => __( 'Add new ' . strtolower( $tax_args['singular_name'] ), 'tourfic' ),
+				'new_item_name'              => __( 'New ' . strtolower( $tax_args['singular_name'] ) . ' name', 'tourfic' ),
+				'parent_item'                => __( 'Parent ' . $tax_args['singular_name'], 'tourfic' ),
+				'parent_item_colon'          => __( 'Parent :' . $tax_args['singular_name'], 'tourfic' ),
+				'search_items'               => __( 'Search ' . $tax_args['singular_name'], 'tourfic' ),
+				'popular_items'              => __( 'Popular ' . $tax_args['singular_name'], 'tourfic' ),
+				'separate_items_with_commas' => __( 'Separate ' . strtolower( $tax_args['singular_name'] ) . ' with commas', 'tourfic' ),
+				'add_or_remove_items'        => __( 'Add or remove ' . strtolower( $tax_args['singular_name'] ), 'tourfic' ),
+				'choose_from_most_used'      => __( 'Choose from the most used ' . strtolower( $tax_args['singular_name'] ), 'tourfic' ),
+				'not_found'                  => __( 'No ' . strtolower( $tax_args['singular_name'] ) . ' found', 'tourfic' ),
+				'no_terms'                   => __( 'No ' . strtolower( $tax_args['singular_name'] ), 'tourfic' ),
+				'items_list_navigation'      => __( $tax_args['singular_name'] . ' list navigation', 'tourfic' ),
+				'items_list'                 => __( $tax_args['name'] . ' list', 'tourfic' ),
+				'back_to_items'              => __( 'Back to ' . strtolower( $tax_args['singular_name'] ), 'tourfic' ),
+			);
+			$tax_labels = apply_filters( 'tf_' . $tax_args['taxonomy'] . '_labels', $tax_labels );
+
+			$tf_tax_args = array(
+				'labels'                => $tax_labels,
+				'public'                => true,
+				'publicly_queryable'    => true,
+				'hierarchical'          => true,
+				'show_ui'               => true,
+				'show_in_menu'          => true,
+				'show_in_nav_menus'     => true,
+				'query_var'             => true,
+				'rewrite'               => array( 'slug' => $tax_args['rewrite_slug'], 'with_front' => false ),
+				'show_admin_column'     => true,
+				'show_in_rest'          => true,
+				'rest_base'             => $tax_args['taxonomy'],
+				'rest_controller_class' => 'WP_REST_Terms_Controller',
+				'show_in_quick_edit'    => true,
+				'capabilities'          => $tax_args['capability'],
+			);
+			$tf_tax_args = apply_filters( 'tf_' . $tax_args['taxonomy'] . '_args', $tf_tax_args );
+
+			register_taxonomy( $tax_args['taxonomy'], $this->post_args['slug'], $tf_tax_args );
+		}
+	}
 }

@@ -1,10 +1,14 @@
 <?php
+
 namespace Tourfic\Classes\Hotel;
+
 defined( 'ABSPATH' ) || exit;
 
 class Hotel_CPT extends \Tourfic\Classes\Post_Type {
 
-    use \Tourfic\Traits\Singleton;
+	use \Tourfic\Traits\Singleton;
+	use \Tourfic\Traits\Helper;
+
 	/**
 	 * Initialize custom post type
 	 * @access public
@@ -17,32 +21,55 @@ class Hotel_CPT extends \Tourfic\Classes\Post_Type {
 			'slug'          => 'tf_hotel',
 			'menu_icon'     => 'dashicons-building',
 			'menu_position' => 26.2,
-            'supports'      => apply_filters( 'tf_hotel_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
+			'supports'      => apply_filters( 'tf_hotel_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
+			'capability'    => array( 'tf_hotel', 'tf_hotels' ),
+			'rewrite_slug'  => $this->get_hotel_slug(),
 		);
 
-        $tax_args = array(
-            array(
-                'name' => 'Locations',
-                'singular_name' => 'Location',
-                'taxonomy' => 'hotel_location',
-            ),
-            array(
-                'name' => 'Features',
-                'singular_name' => 'Feature',
-                'taxonomy' => 'hotel_feature',
-            ),
-            array(
-                'name' => 'Types',
-                'singular_name' => 'Type',
-                'taxonomy' => 'hotel_type',
-            )
-        );
+		$tax_args = array(
+			array(
+				'name'          => 'Locations',
+				'singular_name' => 'Location',
+				'taxonomy'      => 'hotel_location',
+				'rewrite_slug'  => apply_filters( 'tf_hotel_location_slug', 'hotel-location' ),
+				'capability'    => array(
+					'assign_terms' => 'edit_tf_hotel',
+					'edit_terms'   => 'edit_tf_hotel',
+				),
+			),
+			array(
+				'name'          => 'Features',
+				'singular_name' => 'Feature',
+				'taxonomy'      => 'hotel_feature',
+				'rewrite_slug'  => apply_filters( 'tf_hotel_feature_slug', 'hotel-feature' ),
+				'capability'    => array(
+					'assign_terms' => 'edit_tf_hotel',
+					'edit_terms'   => 'edit_tf_hotel',
+				),
+			),
+			array(
+				'name'          => 'Types',
+				'singular_name' => 'Type',
+				'taxonomy'      => 'hotel_type',
+				'rewrite_slug'  => apply_filters( 'tf_hotel_type_slug', 'hotel-type' ),
+				'capability'    => array(
+					'assign_terms' => 'edit_tf_hotel',
+					'edit_terms'   => 'edit_tf_hotel',
+				),
+			)
+		);
 
 		parent::__construct( $hotel_args, $tax_args );
 
+		add_action( 'init', array( $this, 'tf_post_type_taxonomy_register' ) );
+	}
 
-		add_action( 'init', array( $this, 'tf_cpt_taxonomy' ) );
-		
+	function get_hotel_slug() {
+		$tf_hotel_setting_permalink_slug = ! empty( self::tfopt( 'hotel-permalink-setting' ) ) ? self::tfopt( 'hotel-permalink-setting' ) : "hotels";
+
+		update_option( "hotel_slug", $tf_hotel_setting_permalink_slug );
+
+		return get_option( 'hotel_slug' );
 	}
 
 }

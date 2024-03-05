@@ -47,7 +47,7 @@ class Apartment_CPT extends \Tourfic\Classes\Post_Type {
 		parent::__construct( $tour_args, $tax_args );
 
 
-		add_action( 'init', array( $this, 'tf_cpt_taxonomy' ) );
+		add_action( 'init', array( $this, 'tf_post_type_taxonomy_register' ) );
 		
 	}
 

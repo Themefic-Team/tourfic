@@ -1,5 +1,5 @@
 <?php
-use Tourfic\Traits\Helpers;
+use Tourfic\Traits\Helper;
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.7.0
  */
 function tf_tour_meals() {
-	$itinerary_options = ! empty( Helpers::tf_data_types( tfopt( 'itinerary-builder-setings' ) ) ) ? Helpers::tf_data_types( tfopt( 'itinerary-builder-setings' ) ) : '';
+	$itinerary_options = ! empty( Helper::tf_data_types( tfopt( 'itinerary-builder-setings' ) ) ) ? Helper::tf_data_types( tfopt( 'itinerary-builder-setings' ) ) : '';
 	$all_meals         = [];
 	if ( ! empty( $itinerary_options['meals'] ) && is_array( $itinerary_options['meals'] ) ) {
 		$meals = $itinerary_options['meals'];
