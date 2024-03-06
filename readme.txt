@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.4.3
-Stable tag: 2.11.14
+Stable tag: 2.11.15
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -240,7 +240,7 @@ Tourfic uses [Appsero](https://appsero.com/) SDK to collect some telemetry data.
 1. Download and unzip the plugin. Upload the unzipped folder to the wp-contents/plugins folder of your WordPress installation.
 2. Active the plugin from the WordPress Plugins administration page OR, Go to WP admin panel, click 'Plugins' -> 'Add new'. In the search input box, type 'Tourfic'.
 3. Install and activate the plugin.
-4. Go through the Quick setup wizard for the basic setup.
+4. Go through the Quick Setup wizard for the basic setup.
 5. Check our Documentation & YouTube videos for further instruction.
 
 == Frequently Asked Questions ==
@@ -314,6 +314,12 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.11.15 - 06 March 2024 =
+
+- Improvement: Tour location optional on search
+- Improvement: Updated Design
+- Fixed: Minor Bug Fixing
 
 = 2.11.14 - 03 March 2024 =
 
@@ -511,19 +517,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 - Fixed: Fixed Booking Date issue
 - Compatibility: Compitible with Elementor 3.17.1
-
-= 2.10.2 -  23 October 2023 =
-
-- Added: iCal integration for Tourfic hotels with booking.com(Pro).
-- Added: Discount feature for hotel rooms.
-- Added: The ability to set minimum and maximum stay duration for hotels.
-- Fixed: Partial payment popup label and description for tours.
-- Added: Global and custom settings option for Tour Itinerary Builder.
-- Added: The option to hide contact information for vendors’ front end and itinerary.
-- Added: Automatic location suggestions on all Search Pages
-- Fixed: Selected related tour issues.
-- Revamped: Totel, tour, and apartment booking details.
-- Revamped: The hotel room availability repeater to a calendar(Pro).
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
