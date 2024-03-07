@@ -27,7 +27,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
 		public static function tf_shortcode_callback() {
 			echo '<div class="tf-setting-dashboard">';
 			//dashboard-header-include
-			echo tf_dashboard_header();
+			echo esc_html( tf_dashboard_header() );
 			?>
             <div class="tf-shortcode-generator-section">
                 <div class="tf-shortcode-generators">
@@ -913,7 +913,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                                 <select class="tf-select-field tf-setting-field">
 													<?php
 													foreach ( $tf_vendor_query_lists as $single ) { ?>
-                                                        <option value="vendor='<?php echo $single->user_nicename; ?>' vendor_id='<?php echo $single->ID; ?>' "><?php echo $single->user_nicename; ?></option>
+                                                        <option value="vendor='<?php echo esc_html($single->user_nicename); ?>' vendor_id='<?php echo esc_html($single->ID); ?>' "><?php echo esc_html($single->user_nicename); ?></option>
 													<?php } ?>
                                                 </select>
 											<?php } else {
