@@ -399,7 +399,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		<div class="tf-setting-dashboard">
 
 			<!-- dashboard-header-include -->
-			<?php echo wp_kses(tf_dashboard_header()); ?>
+			<?php tf_dashboard_header(); ?>
 
 			<div class="tf-settings-help-center">
 				<div class="tf-help-center-banner">
@@ -409,7 +409,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                         <a href="<?php echo esc_url(admin_url( 'admin.php?page=tf-setup-wizard' )) ?>" class="tf-admin-btn tf-btn-secondary"><?php esc_html_e("Setup Wizard","tourfic"); ?></a>
 					</div>
 					<div class="tf-help-center-image">
-						<img src="<?php echo wp_kses(TF_ASSETS_APP_URL); ?>images/setup_wizard.png" alt="setup wizard">
+						<img src="<?php echo esc_url(TF_ASSETS_APP_URL); ?>images/setup_wizard.png" alt="setup wizard">
 					</div>
 				</div>
  
@@ -419,21 +419,21 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                         <p><?php esc_html_e("To help you to get started, we put together the documentation, support link, videos and FAQs here.","tourfic"); ?></p>
                     </div>
                     <div class="tf-help-center-image">
-                        <img src="<?php echo wp_kses(TF_ASSETS_APP_URL); ?>images/help-center.jpg" alt="HELP Center Image">
+                        <img src="<?php echo esc_url(TF_ASSETS_APP_URL); ?>images/help-center.jpg" alt="HELP Center Image">
                     </div>
                 </div>
 
 				<div class="tf-support-document">
 					<div class="tf-single-support">
 						<a href="https://themefic.com/docs/tourfic/" target="_blank">
-							<img src="<?php echo wp_kses(TF_ASSETS_APP_URL); ?>images/tf-documents.png" alt="Document">
+							<img src="<?php echo esc_url(TF_ASSETS_APP_URL); ?>images/tf-documents.png" alt="Document">
 							<h3><?php esc_html_e("Documentation","tourfic"); ?></h3>
 							<span><?php esc_html_e("Read More","tourfic"); ?></span>
 						</a>
 					</div>
 					<div class="tf-single-support">
 						<a href="https://portal.themefic.com/support/" target="_blank">
-							<img src="<?php echo wp_kses(TF_ASSETS_APP_URL); ?>images/tf-mail.png" alt="Document">
+							<img src="<?php echo esc_url(TF_ASSETS_APP_URL); ?>images/tf-mail.png" alt="Document">
 							<h3><?php esc_html_e("Email Support","tourfic"); ?></h3>
 							<span><?php esc_html_e("Contact Us","tourfic"); ?></span>
 						</a>
@@ -441,7 +441,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					
 					<div class="tf-single-support">
 						<a href="https://themefic.com/tourfic/" target="_blank">
-							<img src="<?php echo wp_kses(TF_ASSETS_APP_URL); ?>images/tf-comment.png" alt="Document">
+							<img src="<?php echo esc_url(TF_ASSETS_APP_URL); ?>images/tf-comment.png" alt="Document">
 							<h3><?php esc_html_e("Live Chat","tourfic"); ?></h3>
 							<span><?php esc_html_e("Chat Now","tourfic"); ?></span>
 						</a>
@@ -449,7 +449,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					
 					<div class="tf-single-support">
 						<a href="https://www.youtube.com/playlist?list=PLY0rtvOwg0ylCl7NTwNHUPq-eY1qwUH_N" target="_blank">
-							<img src="<?php echo wp_kses(TF_ASSETS_APP_URL); ?>images/tf-tutorial.png" alt="Document">
+							<img src="<?php echo esc_url(TF_ASSETS_APP_URL); ?>images/tf-tutorial.png" alt="Document">
 							<h3><?php esc_html_e("Video Tutorials","tourfic"); ?></h3>
 							<span><?php esc_html_e("Watch Video","tourfic"); ?></span>
 						</a>
@@ -575,7 +575,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		<div class="tf-setting-dashboard">
 
 			<!-- dashboard-header-include -->
-			<?php echo wp_kses(tf_dashboard_header()); ?>
+			<?php tf_dashboard_header(); ?>
 			
 			<div class="tf-setting-license">
 				<div class="tf-setting-license-tabs">
@@ -661,7 +661,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				?>
 				<div class="tf-setting-dashboard">
 				<!-- dashboard-header-include -->
-				<?php echo wp_kses(tf_dashboard_header()); ?>
+				<?php tf_dashboard_header(); ?>
 
                 <div class="tf-option-wrapper tf-setting-wrapper">
                     <form method="post" action="" class="tf-option-form <?php echo esc_attr($ajax_save_class) ?>" enctype="multipart/form-data">
@@ -676,10 +676,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                                     <div class="tf-admin-tab-item<?php echo ! empty( $section['sub_section'] ) ? ' tf-has-submenu' : '' ?>">
 									
                                         <a href="#<?php echo esc_attr( $parent_tab_key ); ?>"
-                                           class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>"
+                                           class="tf-tablinks <?php echo esc_attr($section_count == 0 ? 'active' : ''); ?>"
                                            data-tab="<?php echo esc_attr( $parent_tab_key ) ?>">
 											<?php echo ! empty( $section['icon'] ) ? '<span class="tf-sec-icon"><i class="' . esc_attr( $section['icon'] ) . '"></i></span>' : ''; ?>
-											<?php echo wp_kses($section['title']); ?>
+											<?php echo esc_html($section['title']); ?>
                                         </a>
 										
 										<?php if ( ! empty( $section['sub_section'] ) ): ?>
@@ -687,11 +687,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 												<?php foreach ( $section['sub_section'] as $sub_key => $sub ): ?>
                                                     <li>
                                                         <a href="#<?php echo esc_attr( $sub_key ); ?>"
-                                                           class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>"
+                                                           class="tf-tablinks <?php echo esc_attr($section_count == 0 ? 'active' : ''); ?>"
                                                            data-tab="<?php echo esc_attr( $sub_key ) ?>">
 														<span class="tf-tablinks-inner">
                                                             <?php echo ! empty( $sub['icon'] ) ? '<span class="tf-sec-icon"><i class="' . esc_attr( $sub['icon'] ) . '"></i></span>' : ''; ?>
-                                                            <?php echo wp_kses($sub['title']); ?>
+                                                            <?php echo esc_html($sub['title']); ?>
                                                         </span>
                                                         </a>
                                                     </li>
@@ -709,7 +709,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								<?php
 								$content_count = 0;
 								foreach ( $this->option_sections as $key => $section ) : ?>
-                                    <div id="<?php echo esc_attr( $key ) ?>" class="tf-tab-content <?php echo $content_count == 0 ? 'active' : ''; ?>">
+                                    <div id="<?php echo esc_attr( $key ) ?>" class="tf-tab-content <?php echo esc_attr($content_count == 0 ? 'active' : ''); ?>">
 
 										<?php
 										if ( ! empty( $section['fields'] ) ):

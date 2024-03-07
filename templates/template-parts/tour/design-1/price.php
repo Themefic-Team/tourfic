@@ -73,10 +73,10 @@
                     <li class="tf-flex tf-flex-gap-8">
                         <i class="fa-solid fa-people-group"></i>
 						<?php if ( ! empty( $tf_tour_booking_limit ) ) {
-							echo __( "Maximum Capacity: ", "tourfic" );
+							echo esc_html__( "Maximum Capacity: ", "tourfic" );
 							echo $tf_tour_booking_limit;
 						} else {
-							echo __( "Maximum Allowed Per Booking: ", "tourfic" );
+							echo esc_html__( "Maximum Allowed Per Booking: ", "tourfic" );
 							echo $max_people;
 						} ?>
                     </li>
@@ -98,18 +98,18 @@
 					<?php
 					if ( $pricing_rule == 'group' ) {
 
-						echo '<li data="group" class="person-info active"><i class="fa-solid fa-users"></i><p>' . __( "Group", "tourfic" ) . '</p></li>';
+						echo '<li data="group" class="person-info active"><i class="fa-solid fa-users"></i><p>' . esc_html__( "Group", "tourfic" ) . '</p></li>';
 
 					} elseif ( $pricing_rule == 'person' ) {
 
 						if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
-							echo '<li data="adult" class="person-info active"><i class="fa-solid fa-user"></i><p>' . __( "Adult", "tourfic" ) . '</p></li>';
+							echo '<li data="adult" class="person-info active"><i class="fa-solid fa-user"></i><p>' . esc_html__( "Adult", "tourfic" ) . '</p></li>';
 						}
 						if ( ! $disable_child && ! empty( $tour_price->child ) ) {
-							echo '<li data="child" class="person-info"><i class="fa-solid fa-child"></i><p>' . __( "Child", "tourfic" ) . '</p></li>';
+							echo '<li data="child" class="person-info"><i class="fa-solid fa-child"></i><p>' . esc_html__( "Child", "tourfic" ) . '</p></li>';
 						}
 						if ( ! $disable_adult && ( ! $disable_infant && ! empty( $tour_price->infant ) ) ) {
-							echo '<li data="infant" class="person-info"><i class="fa-solid fa-baby"></i><p>' . __( "Infant", "tourfic" ) . '</p></li>';
+							echo '<li data="infant" class="person-info"><i class="fa-solid fa-baby"></i><p>' . esc_html__( "Infant", "tourfic" ) . '</p></li>';
 						}
 					}
 					?>

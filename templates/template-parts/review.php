@@ -187,7 +187,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 }
 }else{
 	echo '<div class="no-review">';
-	echo '<h4>' . __( "No Review Available", "tourfic" ) . '</h4>';
+	echo '<h4>' . esc_html__( "No Review Available", "tourfic" ) . '</h4>';
 	if ( $is_user_logged_in ) {
 
 		// Add Review button
@@ -336,7 +336,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 
 		echo '<div class="no-review">';
 
-		echo '<h4>' . __( "No Review Available", "tourfic" ) . '</h4>';
+		echo '<h4>' . esc_html__( "No Review Available", "tourfic" ) . '</h4>';
 
 		if ( $is_user_logged_in ) {
 

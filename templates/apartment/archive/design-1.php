@@ -51,7 +51,7 @@
                         <!-- Loader Image -->
                         <div id="tour_room_details_loader">
                             <div id="tour-room-details-loader-img">
-                                <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+                                <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
                             </div>
                         </div>
                         
@@ -75,7 +75,7 @@
                                     }
                                 }
                             } else {
-                                echo '<div class="tf-nothing-found" data-post-count="0" >' .__("No Tours Found!", "tourfic"). '</div>';
+                                echo '<div class="tf-nothing-found" data-post-count="0" >' .esc_html__("No Tours Found!", "tourfic"). '</div>';
                             }
                             ?>
                             <?php 

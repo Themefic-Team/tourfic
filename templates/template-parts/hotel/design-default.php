@@ -43,7 +43,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 							} ?>
 
                             <a href="<?php echo $first_location_url; ?>" class="more-hotel tf-d-ib">
-								<?php printf( __( 'Show more hotels in %s', 'tourfic' ), $first_location_name ); ?>
+								<?php printf( esc_html__( 'Show more hotels in %s', 'tourfic' ), $first_location_name ); ?>
                             </a>
                         </div>
 					<?php } ?>
@@ -428,7 +428,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                         <div class="nearby-container"> 
                             <div class="nearby-container-inner">
                                 <?php if(!empty($places_section_title)): ?>
-                                    <h3 class="section-heading"><?php echo __($places_section_title, 'tourfic'); ?></h3>
+                                    <h3 class="section-heading"><?php echo esc_html__($places_section_title, 'tourfic'); ?></h3>
                                 <?php endif; ?>
                                 <ul>
                                     <?php foreach($places_meta as $place) {
@@ -478,7 +478,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                     <div class="tf-room-table hotel-room-wrap">
                         <div id="tour_room_details_loader">
                             <div id="tour-room-details-loader-img">
-                                <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+                                <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
                             </div>
                         </div>
                         <table class="availability-table" cellpadding="0" cellspacing="0">
@@ -733,7 +733,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                                                     <div class="tf-top">
 														<?php
 														if ( ! empty( $child_age_limit ) ) {
-															printf( __( 'Children Age Limit %s Years', 'tourfic' ), $child_age_limit );
+															printf( esc_html__( 'Children Age Limit %s Years', 'tourfic' ), $child_age_limit );
 														} else {
 															esc_html_e( 'Number of Children', 'tourfic' );
 														}

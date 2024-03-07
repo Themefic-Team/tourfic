@@ -39,7 +39,7 @@ function hotel_locations_shortcode( $atts, $content = null ) {
 				<?php foreach ( $locations as $term ) {
 
 					$meta      = get_term_meta( $term->term_id, 'tf_hotel_location', true );
-					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : TF_ASSETS_APP_URL . 'images/feature-default.jpg';
+					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg');
 					$term_link = get_term_link( $term ); ?>
 
                     <div class="single_recomended_item">
@@ -109,7 +109,7 @@ function shortcode_tour_destinations( $atts, $content = null ) {
 				<?php foreach ( $destinations as $term ) {
 
 					$meta      = get_term_meta( $term->term_id, 'tf_tour_destination', true );
-					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : TF_ASSETS_APP_URL . 'images/feature-default.jpg';
+					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg');
 					$term_link = get_term_link( $term );
 
 					if ( is_wp_error( $term_link ) ) {
@@ -244,7 +244,7 @@ function tf_recent_hotel_shortcode( $atts, $content = null ) {
 
 					?>
                     <div class="tf-slider-item"
-                         style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? get_the_post_thumbnail_url( $post_id, 'full' ) : TF_ASSETS_APP_URL . '/images/feature-default.jpg'; ?>);">
+                         style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? get_the_post_thumbnail_url( $post_id, 'full' ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>);">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
                                 <h3>
@@ -729,7 +729,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
             <!-- Loader Image -->
             <div id="tf_ajax_searchresult_loader">
                 <div id="tf-searchresult-loader-img">
-                    <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+                    <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
                 </div>
             </div>
             <div class="tf-search-results-list tf-mt-30">
@@ -949,7 +949,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 			<!-- Loader Image -->
 			<div id="tour_room_details_loader">
 				<div id="tour-room-details-loader-img">
-					<img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+					<img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
 				</div>
 			</div>
 			
@@ -1603,7 +1603,7 @@ function tf_hotels_grid_slider( $atts, $content = null ) {
 					}
 					?>
                     <div class="tf-slider-item"
-                         style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? get_the_post_thumbnail_url( $post_id, 'full' ) : TF_ASSETS_APP_URL . '/images/feature-default.jpg'; ?>);">
+                         style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? get_the_post_thumbnail_url( $post_id, 'full' ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>);">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
                                 <h3>
@@ -2051,7 +2051,7 @@ function shortcode_apartment_location( $atts, $content = null ) {
 				<?php foreach ( $locations as $term ) {
 
 					$meta      = get_term_meta( $term->term_id, 'tf_apartment_location', true );
-					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : TF_ASSETS_APP_URL . 'images/feature-default.jpg';
+					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg');
 					$term_link = get_term_link( $term );
 
 					if ( is_wp_error( $term_link ) ) {
@@ -2119,7 +2119,7 @@ function tf_vendor_post_callback( $atts, $content = null ) {
 					$related_comments = get_comments( array( 'post_id' => $post_id ) );
 					?>
                     <div class="tf-slider-item"
-                         style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? get_the_post_thumbnail_url( $post_id, 'full' ) : TF_ASSETS_APP_URL . '/images/feature-default.jpg'; ?>);">
+                         style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? get_the_post_thumbnail_url( $post_id, 'full' ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>);">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
                                 <h3>
@@ -2227,7 +2227,7 @@ function tf_external_listings_shortcode( $atts, $content = null ) {
 
                     if($tf_booking_type == 2 && !empty($tf_booking_url)):
 					?>
-                    <div class="tf-slider-item" style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? get_the_post_thumbnail_url( $post_id, 'full' ) : TF_ASSETS_APP_URL . '/images/feature-default.jpg'; ?>);">
+                    <div class="tf-slider-item" style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? get_the_post_thumbnail_url( $post_id, 'full' ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>);">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
                                 <h3><a href="<?php echo esc_url($tf_booking_url) ?>" target="_blank"><?php the_title() ?></a></h3>

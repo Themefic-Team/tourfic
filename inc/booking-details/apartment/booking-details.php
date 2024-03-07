@@ -192,6 +192,6 @@
 
 <div class="tf-preloader-box">
     <div class="tf-loader-preview">
-        <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="Loader">
+        <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="Loader">
     </div>
 </div>

@@ -95,7 +95,7 @@ function tf_file_missing( $files = '' ) {
 	if ( is_admin() ) {
 		if ( ! empty( $files ) ) {
 			$class   = 'notice notice-error';
-			$message = '<strong>' . $files . '</strong>' . __( ' file is missing! It is required to function Tourfic properly!', 'tourfic' );
+			$message = '<strong>' . $files . '</strong>' . esc_html__( ' file is missing! It is required to function Tourfic properly!', 'tourfic' );
 
 			printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message );
 		}
@@ -195,7 +195,7 @@ function tf_is_woo() {
 		if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) && ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) {
 			?>
             <div id="message" class="error">
-                <p><?php printf( __( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
+                <p><?php printf( esc_html__( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
                 <p><a id="tf_wooinstall" class="install-now button" data-plugin-slug="woocommerce"><?php esc_html_e( 'Install Now', 'tourfic' ); ?></a></p>
             </div>
 
@@ -235,7 +235,7 @@ function tf_is_woo() {
 			?>
 
             <div id="message" class="error">
-                <p><?php printf( __( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
+                <p><?php printf( esc_html__( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
                 <p><a href="<?php echo get_admin_url(); ?>plugins.php?_wpnonce=<?php echo wp_create_nonce( 'activate-plugin_woocommerce/woocommerce.php' ); ?>&action=activate&plugin=woocommerce/woocommerce.php"
                       class="button activate-now button-primary"><?php esc_html_e( 'Activate', 'tourfic' ); ?></a></p>
             </div>
@@ -244,7 +244,7 @@ function tf_is_woo() {
 			?>
 
             <div id="message" class="error">
-                <p><?php printf( __( '%sTourfic is inactive.%s This plugin requires WooCommerce 2.5 or newer. Please %supdate WooCommerce to version 2.5 or newer%s', 'tourfic' ), '<strong>', '</strong>', '<a href="' . admin_url( 'plugins.php' ) . '">', '&nbsp;&raquo;</a>' ); ?></p>
+                <p><?php printf( esc_html__( '%sTourfic is inactive.%s This plugin requires WooCommerce 2.5 or newer. Please %supdate WooCommerce to version 2.5 or newer%s', 'tourfic' ), '<strong>', '</strong>', '<a href="' . admin_url( 'plugins.php' ) . '">', '&nbsp;&raquo;</a>' ); ?></p>
             </div>
 
 			<?php

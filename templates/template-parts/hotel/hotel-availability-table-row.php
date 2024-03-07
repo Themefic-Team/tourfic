@@ -14,7 +14,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $room['avail_date
 $tf_room_disable_date = array_intersect( $avail_durationdate, $total_dis_dates );
 $room_book_by         = ! empty( $room['booking-by'] ) ? $room['booking-by'] : 1;
 $room_book_url        = ! empty( $room['booking-url'] ) ? $room['booking-url'] : '';
-$tf_hotel_reserve_button_text = !empty(tfopt('hotel_booking_form_button_text')) ? stripslashes(sanitize_text_field(tfopt('hotel_booking_form_button_text'))) : __("Reserve Now", 'tourfic');
+$tf_hotel_reserve_button_text = !empty(tfopt('hotel_booking_form_button_text')) ? stripslashes(sanitize_text_field(tfopt('hotel_booking_form_button_text'))) : esc_html__("Reserve Now", 'tourfic');
 
 if ( $tf_hotel_selected_template_check == "design-1" ) {
 	if ( empty( $tf_room_disable_date ) ) {
@@ -122,7 +122,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 
             </td>
             <td class="pax">
-                <div style="text-align:center; width: 100%;"><?php echo __( "Pax:", "tourfic" ); ?></div>
+                <div style="text-align:center; width: 100%;"><?php echo esc_html__( "Pax:", "tourfic" ); ?></div>
 				<?php if ( $adult_number ) { ?>
                     <div class="tf-tooltip tf-d-b">
                         <div class="room-detail-icon">
@@ -145,7 +145,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                         <div class="tf-top">
 							<?php
 							if ( ! empty( $child_age_limit ) ) {
-								printf( __( 'Children Age Limit %s Years', 'tourfic' ), $child_age_limit );
+								printf( esc_html__( 'Children Age Limit %s Years', 'tourfic' ), $child_age_limit );
 							} else {
 								esc_html_e( 'Number of Children', 'tourfic' );
 							}
@@ -172,9 +172,9 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                         <div class="price-per-night">
 							<?php
 							if ( $multi_by_date_ck ) {
-								$days > 0 ? printf( __( 'for %s nights', 'tourfic' ), $days ) : esc_html_e( 'per night', 'tourfic' );
+								$days > 0 ? printf( esc_html__( 'for %s nights', 'tourfic' ), $days ) : esc_html_e( 'per night', 'tourfic' );
 							} else {
-								$days > 0 ? printf( __( 'for %s days', 'tourfic' ), $days ) : esc_html_e( 'per day', 'tourfic' );
+								$days > 0 ? printf( esc_html__( 'for %s days', 'tourfic' ), $days ) : esc_html_e( 'per day', 'tourfic' );
 							}
 							?>
                         </div>
@@ -182,9 +182,9 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                         <div class="price-per-night">
 							<?php
 							if ( $multi_by_date_ck ) {
-								$days > 0 ? printf( __( 'for %s nights', 'tourfic' ), $days ) : esc_html_e( 'per person/night', 'tourfic' );
+								$days > 0 ? printf( esc_html__( 'for %s nights', 'tourfic' ), $days ) : esc_html_e( 'per person/night', 'tourfic' );
 							} else {
-								$days > 0 ? printf( __( 'for %s days', 'tourfic' ), $days ) : esc_html_e( 'per person/day', 'tourfic' );
+								$days > 0 ? printf( esc_html__( 'for %s days', 'tourfic' ), $days ) : esc_html_e( 'per person/day', 'tourfic' );
 							}
 							?>
                         </div>
@@ -465,9 +465,9 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                     <div class="price-per-night">
                         <?php
                         if($multi_by_date_ck){
-                            $days > 0 ? printf(__(' / for %s nights', 'tourfic'), $days) :  esc_html_e( 'per night', 'tourfic' );
+                            $days > 0 ? printf(esc_html__(' / for %s nights', 'tourfic'), $days) :  esc_html_e( 'per night', 'tourfic' );
                         }else{
-                            $days > 0 ? printf(__(' / for %s days', 'tourfic'), $days) :  esc_html_e( 'per day', 'tourfic' );
+                            $days > 0 ? printf(esc_html__(' / for %s days', 'tourfic'), $days) :  esc_html_e( 'per day', 'tourfic' );
                         }
                         ?>
                     </div>
@@ -475,9 +475,9 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                     <div class="price-per-night">
                         <?php
                         if($multi_by_date_ck){
-                            $days > 0 ? printf(__(' / for %s nights', 'tourfic'), $days) : esc_html_e( 'per person/night', 'tourfic' );
+                            $days > 0 ? printf(esc_html__(' / for %s nights', 'tourfic'), $days) : esc_html_e( 'per person/night', 'tourfic' );
                         }else{
-                            $days > 0 ? printf(__(' /for %s days', 'tourfic'), $days) : esc_html_e( 'per person/day', 'tourfic' );
+                            $days > 0 ? printf(esc_html__(' /for %s days', 'tourfic'), $days) : esc_html_e( 'per person/day', 'tourfic' );
                         }
                         ?>
                     </div>
@@ -486,7 +486,7 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
             </div>
             <div class="tf-available-room-select">
                 <span><?php esc_html_e("Select your Room", "tourfic"); ?></span>
-                <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg);">
+                <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/select-arrow-dark.svg);">
                     <?php
                         foreach ( range( 0, $num_room_available) as $value ) {
                             echo '<option>' . $value . '</option>';
@@ -678,9 +678,9 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                         <div class="price-per-night">
                             <?php
                             if($multi_by_date_ck){
-                                $days > 0 ? printf(__(' / for %s nights', 'tourfic'), $days) :  esc_html_e( 'per night', 'tourfic' );
+                                $days > 0 ? printf(esc_html__(' / for %s nights', 'tourfic'), $days) :  esc_html_e( 'per night', 'tourfic' );
                             }else{
-                                $days > 0 ? printf(__(' / for %s days', 'tourfic'), $days) :  esc_html_e( 'per day', 'tourfic' );
+                                $days > 0 ? printf(esc_html__(' / for %s days', 'tourfic'), $days) :  esc_html_e( 'per day', 'tourfic' );
                             }
                             ?>
                         </div>
@@ -688,9 +688,9 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                         <div class="price-per-night">
                             <?php
                             if($multi_by_date_ck){
-                                $days > 0 ? printf(__(' / for %s nights', 'tourfic'), $days) : esc_html_e( 'per person/night', 'tourfic' );
+                                $days > 0 ? printf(esc_html__(' / for %s nights', 'tourfic'), $days) : esc_html_e( 'per person/night', 'tourfic' );
                             }else{
-                                $days > 0 ? printf(__(' /for %s days', 'tourfic'), $days) : esc_html_e( 'per person/day', 'tourfic' );
+                                $days > 0 ? printf(esc_html__(' /for %s days', 'tourfic'), $days) : esc_html_e( 'per person/day', 'tourfic' );
                             }
                             ?>
                         </div>
@@ -767,7 +767,7 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
             
             <div class="tf-available-room-select">
                 <span><?php esc_html_e("Select your Room", "tourfic"); ?></span>
-                <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg);">
+                <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/select-arrow-dark.svg);">
                     <?php
                         foreach ( range( 0, $num_room_available) as $value ) {
                             echo '<option>' . $value . '</option>';
@@ -959,7 +959,7 @@ if(empty($tf_room_disable_date)){
                         <div class="tf-top">
 							<?php
 							if ( ! empty( $child_age_limit ) ) {
-								printf( __( 'Children Age Limit %s Years', 'tourfic' ), $child_age_limit );
+								printf( esc_html__( 'Children Age Limit %s Years', 'tourfic' ), $child_age_limit );
 							} else {
 								esc_html_e( 'Number of Children', 'tourfic' );
 							}
@@ -988,9 +988,9 @@ if(empty($tf_room_disable_date)){
                         <div class="price-per-night">
 							<?php
 							if ( $multi_by_date_ck ) {
-								$days > 0 ? printf( __( 'for %s nights', 'tourfic' ), $days ) : esc_html_e( 'per night', 'tourfic' );
+								$days > 0 ? printf( esc_html__( 'for %s nights', 'tourfic' ), $days ) : esc_html_e( 'per night', 'tourfic' );
 							} else {
-								$days > 0 ? printf( __( 'for %s days', 'tourfic' ), $days ) : esc_html_e( 'per day', 'tourfic' );
+								$days > 0 ? printf( esc_html__( 'for %s days', 'tourfic' ), $days ) : esc_html_e( 'per day', 'tourfic' );
 							}
 							?>
                         </div>
@@ -998,9 +998,9 @@ if(empty($tf_room_disable_date)){
                         <div class="price-per-night">
 							<?php
 							if ( $multi_by_date_ck ) {
-								$days > 0 ? printf( __( 'for %s nights', 'tourfic' ), $days ) : esc_html_e( 'per person/night', 'tourfic' );
+								$days > 0 ? printf( esc_html__( 'for %s nights', 'tourfic' ), $days ) : esc_html_e( 'per person/night', 'tourfic' );
 							} else {
-								$days > 0 ? printf( __( 'for %s days', 'tourfic' ), $days ) : esc_html_e( 'per person/day', 'tourfic' );
+								$days > 0 ? printf( esc_html__( 'for %s days', 'tourfic' ), $days ) : esc_html_e( 'per person/day', 'tourfic' );
 							}
 							?>
                         </div>

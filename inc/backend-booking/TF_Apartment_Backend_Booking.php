@@ -40,7 +40,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 		function tf_apartment_backend_booking_button() { 
 			$edit_url = admin_url( 'edit.php?post_type=tf_apartment&page=tf-apartment-backend-booking' );
 			?>
-            <a href="<?php echo $edit_url; ?>" class="button button-primary tf-booking-btn"><?php esc_html_e( 'Add New Booking', 'tourfic' ); ?></a>
+            <a href="<?php echo esc_url($edit_url); ?>" class="button button-primary tf-booking-btn"><?php esc_html_e( 'Add New Booking', 'tourfic' ); ?></a>
 			<?php
 		}
 

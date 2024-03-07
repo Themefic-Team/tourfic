@@ -42,7 +42,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
         <!-- Loader Image -->
         <div id="tour_room_details_loader">
             <div id="tour-room-details-loader-img">
-                <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+                <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
             </div>
         </div>
 
@@ -289,7 +289,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                         </td>
                         <td class="pax">
-                            <div style="text-align:center; width: 100%;"><?php echo __("Pax:", "tourfic"); ?></div>
+                            <div style="text-align:center; width: 100%;"><?php echo esc_html__("Pax:", "tourfic"); ?></div>
                             <?php if ( $adult_number ) { ?>
                                 <div class="tf-tooltip tf-d-b">
                                     <div class="room-detail-icon">
@@ -312,7 +312,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                     <div class="tf-top">
                                         <?php
                                         if(!empty($child_age_limit)){
-                                            printf(__('Children Age Limit %s Years', 'tourfic'), $child_age_limit);
+                                            printf(esc_html__('Children Age Limit %s Years', 'tourfic'), $child_age_limit);
                                         }else{
                                             esc_html_e( 'Number of Children', 'tourfic' );
                                         }

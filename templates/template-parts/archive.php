@@ -42,7 +42,7 @@ if( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ) 
 <!-- Search Head Section -->
     <div class="tf-archive-head tf-flex tf-flex-align-center tf-flex-space-bttn">
         <div class="tf-search-result tf-flex">
-            <span class="tf-counter-title"><?php echo __( 'Total Results ', 'tourfic' ); ?> </span>
+            <span class="tf-counter-title"><?php echo esc_html__( 'Total Results ', 'tourfic' ); ?> </span>
             <span><?php echo ' ('; ?> </span>
             <div class="tf-total-results">
                 <span><?php echo $total_posts; ?> </span>
@@ -106,7 +106,7 @@ if( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ) 
     <!-- Loader Image -->
     <div id="tf_ajax_searchresult_loader">
         <div id="tf-searchresult-loader-img">
-            <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+            <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
         </div>
     </div>
     <div class="tf-search-results-list tf-mt-30">
@@ -123,7 +123,7 @@ if( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ) 
                 }
             }
         } else {
-            echo '<div class="tf-nothing-found" data-post-count="0" >' .__("No Tours Found!", "tourfic"). '</div>';
+            echo '<div class="tf-nothing-found" data-post-count="0" >' .esc_html__("No Tours Found!", "tourfic"). '</div>';
         }
         ?>
             <div class="tf-pagination-bar">
@@ -155,7 +155,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
         <!-- Loader Image -->
         <div id="tour_room_details_loader">
             <div id="tour-room-details-loader-img">
-                <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+                <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
             </div>
         </div>
         
@@ -174,7 +174,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
                     }
                 }
             } else {
-                echo '<div class="tf-nothing-found" data-post-count="0" >' .__("No Tours Found!", "tourfic"). '</div>';
+                echo '<div class="tf-nothing-found" data-post-count="0" >' .esc_html__("No Tours Found!", "tourfic"). '</div>';
             }
             ?>
             <div class="tf-pagination-bar">
@@ -190,7 +190,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
 <div class="tf_search_result">
     <div class="tf-action-top">
         <div class="tf-result-counter-info">
-            <span class="tf-counter-title"><?php echo __( 'Total Results', 'tourfic' ); ?> </span>
+            <span class="tf-counter-title"><?php echo esc_html__( 'Total Results', 'tourfic' ); ?> </span>
             <span><?php echo '('; ?> </span>
             <div class="tf-total-results">
                 <span><?php echo $total_posts; ?> </span>
@@ -219,7 +219,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
                     
             }           
         } else {
-            echo '<div class="tf-nothing-found" data-post-count="0">' .__("Nothing Found!", "tourfic"). '</div>';
+            echo '<div class="tf-nothing-found" data-post-count="0">' .esc_html__("Nothing Found!", "tourfic"). '</div>';
         }
         ?>
     </div>

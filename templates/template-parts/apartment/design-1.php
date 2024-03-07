@@ -453,12 +453,12 @@ if ( $disable_related_sec !== '1' ) {
                                 $meta                   = get_post_meta( $selected_design_post_id, 'tf_apartment_opt', true );
                                 $apartment_min_price = get_apartment_min_max_price( get_the_ID() );
 
-                                $pricing_type = ! empty( $meta['pricing_type'] ) && "per_person" == $meta['pricing_type'] ? __("Person", "tourfic") : __("Night", "tourfic");
+                                $pricing_type = ! empty( $meta['pricing_type'] ) && "per_person" == $meta['pricing_type'] ? esc_html__("Person", "tourfic") : esc_html__("Night", "tourfic");
                                 ?>
                                 <div class="tf-slider-item tf-post-box-lists">
                                     <div class="tf-post-single-box">
                                         <div class="tf-image-data">
-                                            <img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) ) ? get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) : TF_ASSETS_APP_URL . '/images/feature-default.jpg'; ?>" alt="">
+                                            <img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) ) ? get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>" alt="">
                                             
                                         </div>
                                         <div class="tf-meta-info">

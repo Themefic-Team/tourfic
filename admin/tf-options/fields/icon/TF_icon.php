@@ -33,7 +33,7 @@ if ( ! class_exists( 'TF_icon' ) ) {
                     </span>
                 </div>
                 <a href="#" class="tf-admin-btn tf-modal-btn"><i class="ri-add-fill"></i><?php esc_html_e( 'Add Icon', 'tourfic' ); ?></a>
-                <input type="hidden" class="tf-icon-value" name="<?php echo esc_attr( $this->field_name() ); ?>" value="<?php echo esc_attr( $value ); ?>" <?php echo $this->field_attributes() ?>/>
+                <input type="hidden" class="tf-icon-value" name="<?php echo esc_attr( $this->field_name() ); ?>" value="<?php echo esc_attr( $value ); ?>" <?php echo wp_kses_post($this->field_attributes()) ?>/>
             </div>
 			<?php
 		}

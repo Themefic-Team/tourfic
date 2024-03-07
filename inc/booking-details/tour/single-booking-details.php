@@ -193,7 +193,7 @@
                                 <tr>
                                     <th><?php esc_html_e("Extra", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo $tf_tour_details->tour_extra; ?></td>
+                                    <td><?php echo wp_kses_post($tf_tour_details->tour_extra); ?></td>
                                 </tr>
                                 <?php } ?>
                                 <?php 
@@ -201,7 +201,7 @@
                                 <tr>
                                     <th><?php esc_html_e("Total", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo wc_price($tf_tour_details->total_price); ?></td>
+                                    <td><?php echo wp_kses_post(wc_price($tf_tour_details->total_price)); ?></td>
                                 </tr>
                                 <?php } ?>
                                 <?php $taxs = !empty($tf_tour_details->tax_info) ? json_decode($tf_tour_details->tax_info, true) : '';;
@@ -215,7 +215,7 @@
                                 <tr>
                                     <th><?php esc_html_e("Tax", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo wc_price($taxs_summations); ?></td>
+                                    <td><?php echo wp_kses_post(wc_price($taxs_summations)); ?></td>
                                 </tr>
                                 <?php } ?>
                                 <?php 
@@ -223,7 +223,7 @@
                                 <tr>
                                     <th><?php esc_html_e("Due Price", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo $tf_tour_details->due_price; ?></td>
+                                    <td><?php echo wp_kses_post($tf_tour_details->due_price); ?></td>
                                 </tr>
                                 <?php } ?>
                             </table>
@@ -382,7 +382,7 @@
                                         <?php } ?>
                                         <h5><?php esc_html_e("Address:", "tourfic"); ?> <b style="color: #002043;"><?php echo esc_html( $location ) ?></b></h5>
                                     </div>
-                                    <img style="border: 1px solid #ccc;" src="//chart.apis.google.com/chart?cht=qr&chs=<?php echo $width;?>x<?php echo $height; ?>&chl=<?php echo htmlspecialchars($uri); ?>&choe=UTF-8" alt="<?php echo htmlspecialchars( $title ); ?>"/>
+                                    <img style="border: 1px solid #ccc;" src="//chart.apis.google.com/chart?cht=qr&chs=<?php echo esc_attr($width);?>x<?php echo esc_attr($height); ?>&chl=<?php echo htmlspecialchars($uri); ?>&choe=UTF-8" alt="<?php echo htmlspecialchars( $title ); ?>"/>
                                 </div>
                                 <div class="tf-voucher-billing-info">
                                     <div class="tf-billing-details">
@@ -609,7 +609,7 @@
         </div>
         
         <div class="visitor-details-popup">
-        <input type="hidden" class="tf_single_order_id" name="order_id" value="<?php echo $tf_order_details->id; ?>">
+        <input type="hidden" class="tf_single_order_id" name="order_id" value="<?php echo esc_attr($tf_order_details->id); ?>">
         <?php 
         for($traveller_in = 1; $traveller_in <= $tf_total_visitor; $traveller_in++){ ?>
             <div class="tf-single-tour-traveller tf-single-travel">
@@ -639,8 +639,8 @@
                         $field_keys = $field['reg-field-name'];
                         ?>
                         <div class="traveller-single-info">
-                            <label for="<?php echo $field['reg-field-name'].$traveller_in ?>"><?php echo sprintf( esc_html__( '%s', 'tourfic' ),$field['reg-field-label']); ?></label>
-                            <input type="<?php echo $field['reg-fields-type']; ?>" name="traveller[<?php echo $traveller_in; ?>][<?php echo $field['reg-field-name']; ?>]" id="<?php echo $field['reg-field-name'].$traveller_in; ?>" value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{$field_keys}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{$field_keys} ) : '' ?>" />
+                            <label for="<?php echo esc_attr($field['reg-field-name']).$traveller_in ?>"><?php echo sprintf( esc_html__( '%s', 'tourfic' ),$field['reg-field-label']); ?></label>
+                            <input type="<?php echo esc_attr($field['reg-fields-type']); ?>" name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>]" id="<?php echo esc_attr($field['reg-field-name']).$traveller_in; ?>" value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{$field_keys}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{$field_keys} ) : '' ?>" />
                         </div>
                     <?php
                     }
@@ -648,15 +648,15 @@
                         $field_keys = $field['reg-field-name'];
                     ?>
                     <div class="traveller-single-info">
-                        <label for="<?php echo $field['reg-field-name'].$traveller_in ?>">
+                        <label for="<?php echo esc_attr($field['reg-field-name']).$traveller_in ?>">
                             <?php echo sprintf( esc_html__( '%s', 'tourfic' ),$field['reg-field-label']); ?>
                         </label>
-                        <select id="<?php echo $field['reg-field-name'].$traveller_in ?>" name="traveller[<?php echo $traveller_in; ?>][<?php echo $field['reg-field-name']; ?>]">
+                        <select id="<?php echo esc_attr($field['reg-field-name']).$traveller_in ?>" name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>]">
                         <option value=""><?php echo sprintf( esc_html__( 'Select One', 'tourfic' )); ?></option>
                         <?php
                         foreach($field['reg-options'] as $sfield){
                             if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){ ?>
-                                <option value="<?php echo $sfield['option-value']; ?>" <?php echo !empty($tf_visitors_details->{$traveller_in}->{$field_keys}) && $sfield['option-value']==$tf_visitors_details->{$traveller_in}->{$field_keys} ? esc_attr( 'selected' ) : '' ?>><?php echo $sfield['option-label']; ?></option>';
+                                <option value="<?php echo esc_attr($sfield['option-value']); ?>" <?php echo !empty($tf_visitors_details->{$traveller_in}->{$field_keys}) && $sfield['option-value']==$tf_visitors_details->{$traveller_in}->{$field_keys} ? esc_attr( 'selected' ) : '' ?>><?php echo esc_html($sfield['option-label']); ?></option>';
                             <?php
                             }
                         } ?>
@@ -670,7 +670,7 @@
                     ?>
                         
                     <div class="traveller-single-info">
-                    <label for="<?php echo $field['reg-field-name'].$traveller_in ?>">
+                    <label for="<?php echo esc_attr($field['reg-field-name']).$traveller_in ?>">
                     <?php echo sprintf( esc_html__( '%s', 'tourfic' ),$field['reg-field-label']); ?>
                     </label>
                         <?php
@@ -678,8 +678,8 @@
                             if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){
                                 ?>
                                 <div class="tf-single-checkbox">
-                                    <input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="traveller[<?php echo $traveller_in; ?>][<?php echo $field['reg-field-name']; ?>][]" id="<?php echo $sfield['option-value'].$traveller_in; ?>" value="<?php echo $sfield['option-value']; ?>" <?php echo in_array($sfield['option-value'], $tf_fields_values) ? esc_attr( 'checked' ) : ''; ?> />
-                                    <label for="<?php echo $sfield['option-value'].$traveller_in; ?>">
+                                    <input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>][]" id="<?php echo esc_attr($sfield['option-value'].$traveller_in); ?>" value="<?php echo esc_attr($sfield['option-value']); ?>" <?php echo in_array($sfield['option-value'], $tf_fields_values) ? esc_attr( 'checked' ) : ''; ?> />
+                                    <label for="<?php echo esc_attr($sfield['option-value'].$traveller_in); ?>">
                                     <?php echo sprintf( esc_html__( '%s', 'tourfic' ),$sfield['option-label']); ?>
                                     </label>
                                 </div>
@@ -748,7 +748,7 @@ if(!empty($tour_ides)){
                     <?php } ?>
                     <h5><?php esc_html_e("Address:", "tourfic"); ?> <b style="color: #002043;"><?php echo esc_html( $location ) ?></b></h5>
                 </div>
-                <img style="border: 1px solid #ccc;" src="//chart.apis.google.com/chart?cht=qr&chs=<?php echo $width;?>x<?php echo $height; ?>&chl=<?php echo htmlspecialchars($uri); ?>&choe=UTF-8" alt="<?php echo htmlspecialchars( $title ); ?>"/>
+                <img style="border: 1px solid #ccc;" src="//chart.apis.google.com/chart?cht=qr&chs=<?php echo esc_attr($width);?>x<?php echo esc_attr($height); ?>&chl=<?php echo htmlspecialchars($uri); ?>&choe=UTF-8" alt="<?php echo htmlspecialchars( $title ); ?>"/>
             </div>
             <div class="tf-voucher-billing-info">
                 <div class="tf-billing-details">
@@ -800,6 +800,6 @@ if(!empty($tour_ides)){
 
 <div class="tf-preloader-box">
     <div class="tf-loader-preview">
-        <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="Loader">
+        <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="Loader">
     </div>
 </div>

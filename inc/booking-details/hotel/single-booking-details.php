@@ -178,7 +178,7 @@
                                 <tr>
                                     <th><?php esc_html_e("Airport Service", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo $tf_tour_details->airport_service_fee; ?></td>
+                                    <td><?php echo wp_kses_post($tf_tour_details->airport_service_fee); ?></td>
                                 </tr>
                                 <?php } ?>
                                 <?php 
@@ -186,7 +186,7 @@
                                 <tr>
                                     <th><?php esc_html_e("Total", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo wc_price($tf_tour_details->total_price); ?></td>
+                                    <td><?php echo wp_kses_post(wc_price($tf_tour_details->total_price)); ?></td>
                                 </tr>
                                 <?php } ?>
                                 <?php $taxs = !empty($tf_tour_details->tax_info) ? json_decode($tf_tour_details->tax_info, true) : '';
@@ -200,7 +200,7 @@
                                 <tr>
                                     <th><?php esc_html_e("Tax", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo wc_price($taxs_summations); ?></td>
+                                    <td><?php echo wp_kses_post(wc_price($taxs_summations)); ?></td>
                                 </tr>
                                 <?php } ?>
                                 <?php 
@@ -208,7 +208,7 @@
                                 <tr>
                                     <th><?php esc_html_e("Due Price", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo $tf_tour_details->due_price; ?></td>
+                                    <td><?php echo wp_kses_post($tf_tour_details->due_price); ?></td>
                                 </tr>
                                 <?php } ?>
                             </table>
@@ -336,7 +336,7 @@
                         </svg>
                     </label>
                     <input type="hidden" id="tf_email_order_id" value="<?php echo !empty($_GET['order_id']) ? esc_html( $_GET['order_id'] ) : ''; ?>">
-                    <input type="hidden" class="tf_single_order_id" name="order_id" value="<?php echo $tf_order_details->id; ?>">
+                    <input type="hidden" class="tf_single_order_id" name="order_id" value="<?php echo esc_attr($tf_order_details->id); ?>">
                     <ul>
                         <li class="checkin" data-value="in"><?php esc_html_e("Checked in", "tourfic"); ?></li>
                         <li class="checkout" data-value="out"><?php esc_html_e("Checked Out", "tourfic"); ?></li>
@@ -376,6 +376,6 @@
 
 <div class="tf-preloader-box">
     <div class="tf-loader-preview">
-        <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="Loader">
+        <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="Loader">
     </div>
 </div>

@@ -22,7 +22,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                         echo '<i class="fa-solid fa-location-dot"></i> ' . $address . ' –';
                                     } ?>
                                     <a href="<?php echo $first_location_url; ?>" class="more-hotel tf-d-ib">
-                                        <?php printf( __( 'Show more hotels in %s', 'tourfic' ), $first_location_name ); ?>
+                                        <?php printf( esc_html__( 'Show more hotels in %s', 'tourfic' ), $first_location_name ); ?>
                                     </a>
                             <?php } ?>
                             </div>
@@ -149,7 +149,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                         if ( ! empty( $gallery_ids ) ) {
                                         ?>
                                         <a id="featured-gallery" href="#" class="tf-tour-gallery">
-                                            <i class="fa-solid fa-camera-retro"></i><?php echo __("Gallery","tourfic"); ?>
+                                            <i class="fa-solid fa-camera-retro"></i><?php echo esc_html__("Gallery","tourfic"); ?>
                                         </a>
                                         <?php 
                                         }
@@ -161,7 +161,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                     if ( !empty($hotel_video) ) { ?>
                                     <div class="featured-column tf-video-box">
                                         <a class="tf-tour-video" id="featured-video" data-fancybox="tour-video" href="<?php echo esc_url($hotel_video); ?>">
-                                            <i class="fa-solid fa-video"></i> <?php echo __("Video","tourfic"); ?>
+                                            <i class="fa-solid fa-video"></i> <?php echo esc_html__("Video","tourfic"); ?>
                                         </a>
                                     </div>
                                     <?php } ?>

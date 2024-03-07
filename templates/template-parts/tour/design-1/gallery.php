@@ -8,7 +8,7 @@
             if ( ! empty( $gallery_ids ) ) {
             ?>
             <a id="featured-gallery" href="#" class="tf-tour-gallery">
-                <i class="fa-solid fa-camera-retro"></i><?php echo __("Gallery","tourfic"); ?>
+                <i class="fa-solid fa-camera-retro"></i><?php echo esc_html__("Gallery","tourfic"); ?>
             </a>
             <?php 
             }
@@ -20,7 +20,7 @@
         if ( !empty($tour_video) ) { ?>
         <div class="featured-column tf-video-box">
             <a class="tf-tour-video" id="featured-video" data-fancybox="tour-video" href="<?php echo esc_url($tour_video); ?>">
-                <i class="fa-solid fa-video"></i> <?php echo __("Video","tourfic"); ?>
+                <i class="fa-solid fa-video"></i> <?php echo esc_html__("Video","tourfic"); ?>
             </a>
         </div>
         <?php } ?>

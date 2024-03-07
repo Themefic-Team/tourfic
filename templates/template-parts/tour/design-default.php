@@ -221,18 +221,18 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                 <?php
                                 if ( $pricing_rule == 'group' ) {
 
-                                    echo '<li id="group" class="active">' . __( "Group", "tourfic" ) . '</li>';
+                                    echo '<li id="group" class="active">' . esc_html__( "Group", "tourfic" ) . '</li>';
 
                                 } elseif ( $pricing_rule == 'person' ) {
 
                                 if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
-                                    echo '<li id="adult" class="active">' . __( "Adult", "tourfic" ) . '</li>';
+                                    echo '<li id="adult" class="active">' . esc_html__( "Adult", "tourfic" ) . '</li>';
                                 }
                                 if ( ! $disable_child && ! empty( $tour_price->child ) ) {
-                                    echo '<li id="child">' . __( "Child", "tourfic" ) . '</li>';
+                                    echo '<li id="child">' . esc_html__( "Child", "tourfic" ) . '</li>';
                                 }
                                 if ( !$disable_adult && (! $disable_infant && ! empty( $tour_price->infant )) ) {
-                                    echo '<li id="infant">' . __( "Infant", "tourfic" ) . '</li>';
+                                    echo '<li id="infant">' . esc_html__( "Infant", "tourfic" ) . '</li>';
                                 }
 
                                 }
@@ -267,7 +267,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         <?php if ( $tour_duration ) { ?>
                             <div class="tf-single-square-block first">
                                 <i class="fas fa-clock"></i>
-                                <h4><?php echo __( 'Duration', 'tourfic' ); ?></h4>
+                                <h4><?php echo esc_html__( 'Duration', 'tourfic' ); ?></h4>
                                 <p><?php echo esc_html( $tour_duration ); ?>
                                 <span> 
                                     <?php
@@ -314,21 +314,21 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                             ?>
                             <div class="tf-single-square-block second">
                                 <i class="fas fa-map"></i>
-                                <h4><?php echo __( 'Tour Type', 'tourfic' ); ?></h4>
+                                <h4><?php echo esc_html__( 'Tour Type', 'tourfic' ); ?></h4>
                                 <p><?php echo esc_html( $info_tour_type ); ?></p>
                             </div>
                         <?php } ?>
                         <?php if ( $group_size ) { ?>
                             <div class="tf-single-square-block third">
                                 <i class="fas fa-users"></i>
-                                <h4><?php echo __( 'Group Size', 'tourfic' ); ?></h4>
+                                <h4><?php echo esc_html__( 'Group Size', 'tourfic' ); ?></h4>
                                 <p><?php echo esc_html( $group_size ) ?></p>
                             </div>
                         <?php } ?>
                         <?php if ( $language ) { ?>
                             <div class="tf-single-square-block fourth">
                                 <i class="fas fa-language"></i>
-                                <h4><?php echo __( 'Language', 'tourfic' ); ?></h4>
+                                <h4><?php echo esc_html__( 'Language', 'tourfic' ); ?></h4>
                                 <p><?php echo esc_html( $language ) ?></p>
                             </div>
                         <?php } ?>

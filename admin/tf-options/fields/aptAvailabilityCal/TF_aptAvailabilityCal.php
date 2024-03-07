@@ -32,22 +32,22 @@ if ( ! class_exists( 'TF_aptAvailabilityCal' ) ) {
                         <input readonly="readonly" type="text" class="tf_apt_check_out" name="tf_apt_check_out" placeholder="<?php echo esc_html__( 'Check Out', 'tourfic' ); ?>">
                     </div>
 
-                    <div class="tf-field-text tf-price-by-night" style="display: <?php echo $pricing_type == 'per_night' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
+                    <div class="tf-field-text tf-price-by-night" style="display: <?php echo esc_attr($pricing_type == 'per_night' ? 'block' : 'none') ?>; width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo esc_html__( 'Price', 'tourfic' ); ?></label>
                         <input type="number" min="0" name="tf_apt_price" placeholder="<?php echo esc_html__( 'Price', 'tourfic' ); ?>">
                     </div>
 
-                    <div class="tf-field-text tf-price-by-person" style="display: <?php echo $pricing_type == 'per_person' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
+                    <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr($pricing_type == 'per_person' ? 'block' : 'none') ?>; width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo esc_html__( 'Adult Price', 'tourfic' ); ?></label>
                         <input type="number" min="0" name="tf_apt_adult_price" placeholder="<?php echo esc_html__( 'Adult Price', 'tourfic' ); ?>">
                     </div>
 
-                    <div class="tf-field-text tf-price-by-person" style="display: <?php echo $pricing_type == 'per_person' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
+                    <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr($pricing_type == 'per_person' ? 'block' : 'none') ?>; width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo esc_html__( 'Child Price', 'tourfic' ); ?></label>
                         <input type="number" min="0" name="tf_apt_child_price" placeholder="<?php echo esc_html__( 'Child Price', 'tourfic' ); ?>">
                     </div>
 
-                    <div class="tf-field-text tf-price-by-person" style="display: <?php echo $pricing_type == 'per_person' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
+                    <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr($pricing_type == 'per_person' ? 'block' : 'none') ?>; width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo esc_html__( 'Infant Price', 'tourfic' ); ?></label>
                         <input type="number" min="0" name="tf_apt_infant_price" placeholder="<?php echo esc_html__( 'Infant Price', 'tourfic' ); ?>">
                     </div>
@@ -67,7 +67,7 @@ if ( ! class_exists( 'TF_aptAvailabilityCal' ) ) {
                     </div>
 
                 </div>
-                <input type="hidden" class="apt_availability" name="<?php echo esc_attr( $this->field_name() ); ?>" id="<?php echo esc_attr( $this->field_name() ); ?>" value='<?php echo $this->value; ?>'/>
+                <input type="hidden" class="apt_availability" name="<?php echo esc_attr( $this->field_name() ); ?>" id="<?php echo esc_attr( $this->field_name() ); ?>" value='<?php echo esc_attr($this->value); ?>'/>
             </div>
 			<?php
 		}

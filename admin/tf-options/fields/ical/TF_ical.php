@@ -32,7 +32,7 @@ if ( ! class_exists( 'TF_ical' ) ) {
 			}
 
 			$placeholder = ( ! empty( $this->field['placeholder'] ) ) ? 'placeholder="' . $this->field['placeholder'] . '"' : '';
-			echo '<input type="text" name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr( $this->value ) . '" ' . $placeholder . ' ' . $this->field_attributes() . '/>';
+			echo '<input type="text" name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr( $this->value ) . '" ' . $placeholder . ' ' . wp_kses_post($this->field_attributes()) . '/>';
 
 			if ( isset( $this->field['button_text'] ) && ! empty( $this->field['button_text'] ) ) {
 				$button_class = 'button button-primary button-large';

@@ -14,7 +14,7 @@
 			<div class="tf-search-left">
 				<div class="tf-action-top">
 					<div class="tf-result-counter-info">
-						<span class="tf-counter-title"><?php echo __( 'Total Results', 'tourfic' ); ?> </span>
+						<span class="tf-counter-title"><?php echo esc_html__( 'Total Results', 'tourfic' ); ?> </span>
 						<span><?php echo '('; ?> </span>
 						<div class="tf-total-results">
 							<span><?php echo $post_count; ?> </span>
@@ -44,7 +44,7 @@
 							}
 						}
 					} else {
-						echo '<div class="tf-nothing-found" data-post-count="0">' .__("No Hotels Found!", "tourfic"). '</div>';
+						echo '<div class="tf-nothing-found" data-post-count="0">' .esc_html__("No Hotels Found!", "tourfic"). '</div>';
 					}
 					?>
 					

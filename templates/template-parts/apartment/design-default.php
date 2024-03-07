@@ -13,7 +13,7 @@
                             } ?>
 
                             <a href="<?php echo $first_location_url; ?>" class="more-apartment tf-d-ib">
-                                <?php printf( __( 'Show more apartments in %s', 'tourfic' ), $first_location_name ); ?>
+                                <?php printf( esc_html__( 'Show more apartments in %s', 'tourfic' ), $first_location_name ); ?>
                             </a>
                         </div>
                     <?php } ?>
@@ -38,7 +38,7 @@
                             <div id="dropdown-share-center" class="share-tour-content">
                                 <ul class="tf-dropdown-content">
                                     <li>
-                                        <a href="http://www.facebook.com/share.php?u=<?php _e( $share_link ); ?>"
+                                        <a href="http://www.facebook.com/share.php?u=<?php esc_url( $share_link ); ?>"
                                             class="tf-dropdown-item" target="_blank">
                                             <span class="tf-dropdown-item-content">
                                                 <i class="fab fa-facebook-square"></i>
@@ -47,7 +47,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://twitter.com/share?text=<?php _e( $share_text ); ?>&url=<?php _e( $share_link ); ?>"
+                                        <a href="http://twitter.com/share?text=<?php esc_attr( $share_text ); ?>&url=<?php esc_url( $share_link ); ?>"
                                             class="tf-dropdown-item" target="_blank">
                                             <span class="tf-dropdown-item-content">
                                                 <i class="fab fa-twitter-square"></i>
@@ -56,7 +56,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="https://www.linkedin.com/cws/share?url=<?php _e( $share_link ); ?>"
+                                        <a href="https://www.linkedin.com/cws/share?url=<?php esc_url( $share_link ); ?>"
                                             class="tf-dropdown-item" target="_blank">
                                             <span class="tf-dropdown-item-content">
                                                 <i class="fab fa-linkedin"></i>
@@ -68,7 +68,7 @@
                                     $share_image_link = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
                                     ?>
                                     <li>
-                                        <a href="http://pinterest.com/pin/create/button/?url=<?php _e( $share_link ); ?>&media=<?php _e( $share_image_link[0] ); ?>&description=<?php _e( $share_text ); ?>"
+                                        <a href="http://pinterest.com/pin/create/button/?url=<?php esc_url( $share_link ); ?>&media=<?php esc_url( $share_image_link[0] ); ?>&description=<?php esc_attr( $share_text ); ?>"
                                             class="tf-dropdown-item" target="_blank">
                                             <span class="tf-dropdown-item-content">
                                                 <i class="fab fa-pinterest"></i>
@@ -83,7 +83,7 @@
                                                     for="share_link_input"><?php esc_html_e( 'Share this link', 'tourfic' ); ?></label>
                                             <input type="text" id="share_link_input"
                                                     class="share-center-url share-center-url-input"
-                                                    value="<?php _e( $share_link ); ?>" readonly>
+                                                    value="<?php esc_attr( $share_link ); ?>" readonly>
                                             <button id="share_link_button" class="tf_button share-center-copy-cta"
                                                     tabindex="0" role="button">
                                                 <span class="tf-button-text share-center-copy-message"><?php esc_html_e( 'Copy link', 'tourfic' ); ?></span>
@@ -257,7 +257,7 @@
                             <!-- Loader Image -->
                             <div id="tour_room_details_loader">
                                 <div id="tour-room-details-loader-img">
-                                    <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+                                    <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
                                 </div>
                             </div>
                         </div>
@@ -400,7 +400,7 @@
                             <ul>
                                 <?php
                                 if ( ! empty( get_the_author_meta( 'language', $post_author_id ) ) ) {
-                                    echo sprintf( '<li>%s <span>%s</span></li>', __( 'Language: ', 'tourfic' ), get_the_author_meta( 'language', $post_author_id ) );
+                                    echo sprintf( '<li>%s <span>%s</span></li>', esc_html__( 'Language: ', 'tourfic' ), get_the_author_meta( 'language', $post_author_id ) );
                                 }
                                 ?>
                             </ul>

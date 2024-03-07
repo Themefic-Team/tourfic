@@ -33,7 +33,7 @@ if(!empty($rooms)){
     <!-- Loader Image -->
     <div id="tour_room_details_loader">
         <div id="tour-room-details-loader-img">
-            <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+            <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
         </div>
     </div>
     <?php if ( $rooms ) : ?>
