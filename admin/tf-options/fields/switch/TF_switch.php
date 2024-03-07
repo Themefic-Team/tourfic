@@ -12,8 +12,8 @@ if ( ! class_exists( 'TF_switch' ) ) {
 		public function render() {
 
 			$args = wp_parse_args( $this->field, array(
-				'label_on'  => __( 'On', 'tourfic' ),
-				'label_off' => __( 'Off', 'tourfic' ),
+				'label_on'  => esc_html__( 'On', 'tourfic' ),
+				'label_off' => esc_html__( 'Off', 'tourfic' ),
 			) );
 
 			$on    = ( ! empty( $args['label_on'] ) ) ? $args['label_on'] : esc_html__( 'On', 'tourfic' );

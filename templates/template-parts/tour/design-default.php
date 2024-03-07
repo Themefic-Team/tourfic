@@ -241,7 +241,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         </div>
                     <?php endif; ?>
                     <?php if ($tf_booking_type == 2 && $tf_hide_booking_form == 1):?>
-                        <a href="<?php echo esc_url($tf_booking_url) ?>" target="_blank" class="tf_button btn-styled" style="margin-left: 16px;"><?php _e('Book now', 'tourfic'); ?></a>
+                        <a href="<?php echo esc_url($tf_booking_url) ?>" target="_blank" class="tf_button btn-styled" style="margin-left: 16px;"><?php esc_html_e('Book now', 'tourfic'); ?></a>
                     <?php endif; ?>
                 </div>
             </div>
@@ -401,7 +401,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                 <div class="tf-inc-exc-content">
                     <?php if ( $inc ) { ?>
                         <div class="tf-include-section <?php echo esc_attr( $custom_inc_icon ); ?>">
-                            <h4><?php _e( 'Included', 'tourfic' ); ?></h4>
+                            <h4><?php esc_html_e( 'Included', 'tourfic' ); ?></h4>
                             <ul>
                                 <?php
                                 foreach ( $inc as $key => $val ) {
@@ -413,7 +413,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                     <?php } ?>
                     <?php if ( $exc ) { ?>
                         <div class="tf-exclude-section <?php echo esc_attr( $custom_exc_icon ); ?>">
-                            <h4><?php _e( 'Excluded', 'tourfic' ); ?></h4>
+                            <h4><?php esc_html_e( 'Excluded', 'tourfic' ); ?></h4>
                             <ul>
                                 <?php
                                 foreach ( $exc as $key => $val ) {
@@ -459,7 +459,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                 echo '<div class="tf-ititnerary-img"><a class="tf-itinerary-gallery" href="' . esc_url( $itinerary['image'] ) . '"><img src="' . esc_url( $itinerary['image'] ) . '"></a></div>';
                                             } ?>
                                             <div class="trav-cont tf-travel-description">
-                                                <p><?php _e( $itinerary['desc'] ); ?></p>
+                                                <p><?php esc_html_e( $itinerary['desc'] ); ?></p>
                                             </div>
                                         </div>
                                     </div>
@@ -541,7 +541,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
             <div class="tf-container">
                 <div class="tf-faq-sec-title">
                     <h2 class="section-heading"><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : ''; ?></h2>
-                    <p><?php _e( "Let’s clarify your confusions. Here are some of the Frequently Asked Questions which most of our client asks.", 'tourfic' ); ?></p>
+                    <p><?php esc_html_e( "Let’s clarify your confusions. Here are some of the Frequently Asked Questions which most of our client asks.", 'tourfic' ); ?></p>
                 </div>
 
                 <div class="tf-faq-content-wrapper">

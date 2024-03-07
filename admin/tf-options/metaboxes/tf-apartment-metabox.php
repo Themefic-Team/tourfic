@@ -12,71 +12,71 @@ function tf_apt_amenities_cats() {
 	}
 
 	if ( empty( $all_cats ) ) {
-		$all_cats[''] = __( 'Select Category', 'tourfic' );
+		$all_cats[''] = esc_html__( 'Select Category', 'tourfic' );
 	}
 
 	return $all_cats;
 }
 
 TF_Metabox::metabox( 'tf_apartment_opt', array(
-	'title'     => __( 'Apartment Settings', 'tourfic' ),
+	'title'     => esc_html__( 'Apartment Settings', 'tourfic' ),
 	'post_type' => 'tf_apartment',
 	'sections'  => array(
 		// General
 		'general'         => array(
-			'title'  => __( 'General', 'tourfic' ),
+			'title'  => esc_html__( 'General', 'tourfic' ),
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
 				array(
 					'id'    => 'apartment-general-heading',
 					'type'  => 'heading',
 					'label' => 'General Settings ',
-					'subtitle' => __( 'These are some common settings specific to this Apartment.', 'tourfic' ),
+					'subtitle' => esc_html__( 'These are some common settings specific to this Apartment.', 'tourfic' ),
 				),
 				array(
 					'id'      => 'apartment-general-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
-					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/general-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/general-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'    => 'apartment_gallery',
 					'type'  => 'gallery',
-					'label' => __( 'Apartment Gallery', 'tourfic' ),
-					'subtitle'    => __( 'Add multiple images to craft a captivating gallery for your apartments, giving potential customers a visual tour.', 'tourfic' ),
+					'label' => esc_html__( 'Apartment Gallery', 'tourfic' ),
+					'subtitle'    => esc_html__( 'Add multiple images to craft a captivating gallery for your apartments, giving potential customers a visual tour.', 'tourfic' ),
 				),
 				array(
 					'id'        => 'apartment_as_featured',
 					'type'      => 'switch',
-					'label'     => __( 'Featured Apartment', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'subtitle'    => __( 'Enable this option to feature this apartment at the top of search results.', 'tourfic' ),
+					'label'     => esc_html__( 'Featured Apartment', 'tourfic' ),
+					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+					'label_off' => esc_html__( 'No', 'tourfic' ),
+					'subtitle'    => esc_html__( 'Enable this option to feature this apartment at the top of search results.', 'tourfic' ),
 				),
 				array(
 					'id'          => 'featured_text',
 					'type'        => 'text',
-					'label'       => __( 'Apartment Featured Text', 'tourfic' ),
-					'subtitle'    => __( 'Enter Featured Apartment Text', 'tourfic' ),
-					'placeholder' => __( 'Enter Featured Apartment Text', 'tourfic' ),
-					'default'     => __( 'Hot Deal', 'tourfic' ),
+					'label'       => esc_html__( 'Apartment Featured Text', 'tourfic' ),
+					'subtitle'    => esc_html__( 'Enter Featured Apartment Text', 'tourfic' ),
+					'placeholder' => esc_html__( 'Enter Featured Apartment Text', 'tourfic' ),
+					'default'     => esc_html__( 'Hot Deal', 'tourfic' ),
 					'dependency'  => array( 'apartment_as_featured', '==', true ),
 				),
 				array(
 					'id'       => 'tf_single_apartment_layout_opt',
 					'type'     => 'select',
-					'label'    => __( 'Single Apartment Template Settings', 'tourfic' ),
-					'subtitle' => __( 'You can keep the Global Template settings or choose a different layout for this apartment.', 'tourfic' ),
+					'label'    => esc_html__( 'Single Apartment Template Settings', 'tourfic' ),
+					'subtitle' => esc_html__( 'You can keep the Global Template settings or choose a different layout for this apartment.', 'tourfic' ),
 					'options'  => [
-						'global' => __( 'Global Settings', 'tourfic' ),
-						'single' => __( 'Single Settings', 'tourfic' ),
+						'global' => esc_html__( 'Global Settings', 'tourfic' ),
+						'single' => esc_html__( 'Single Settings', 'tourfic' ),
 					],
 					'default'  => 'global',
 				),
 				array(
 					'id'       => 'tf_single_apartment_template',
 					'type'     => 'imageselect',
-					'label'    => __( 'Single Apartment Page Layout', 'tourfic' ),
+					'label'    => esc_html__( 'Single Apartment Page Layout', 'tourfic' ),
 					'multiple' 		=> true,
 					'inline'   		=> true,
 					'options'   	=> array(
@@ -98,34 +98,34 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 		),
 		// location
 		'location'        => array(
-			'title'  => __( 'Location', 'tourfic' ),
+			'title'  => esc_html__( 'Location', 'tourfic' ),
 			'icon'   => 'fa-solid fa-location-dot',
 			'fields' => array(
 				array(
 					'id'    => 'apartment-location-heading',
 					'type'  => 'heading',
 					'label' => 'Location Settings',
-					'subtitle' => __( 'The location of an apartment is a crucial element for every apartment. Set your apartment locations in this section.', 'tourfic' ),
+					'subtitle' => esc_html__( 'The location of an apartment is a crucial element for every apartment. Set your apartment locations in this section.', 'tourfic' ),
 				),
 				array(
 					'id'      => 'apartment-location-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
-					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/location-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/location-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'       => 'location_title',
 					'type'     => 'text',
-					'label'    => __( 'Title of this Section', 'tourfic' ),
-					'subtitle' => __( 'This text will appear as the heading of the Location section on the frontend.', 'tourfic' ),
-					'default'  => __( 'Where you’ll be', 'tourfic' ),
+					'label'    => esc_html__( 'Title of this Section', 'tourfic' ),
+					'subtitle' => esc_html__( 'This text will appear as the heading of the Location section on the frontend.', 'tourfic' ),
+					'default'  => esc_html__( 'Where you’ll be', 'tourfic' ),
 				),
 				array(
 					'id'       => 'map',
 					'class'    => 'gmaps',
 					'type'     => 'map',
-					'label'    => __( 'Dynamic Location Search', 'tourfic' ),
-					'subtitle' => __( 'Enter the specific address you wish to use for the apartment and select the correct option from the suggested addresses. This will be used to hyperlink address and display the address on the front-end map. Note that the address provided in the previous section is solely for display purposes!', 'tourfic' ),
+					'label'    => esc_html__( 'Dynamic Location Search', 'tourfic' ),
+					'subtitle' => esc_html__( 'Enter the specific address you wish to use for the apartment and select the correct option from the suggested addresses. This will be used to hyperlink address and display the address on the front-end map. Note that the address provided in the previous section is solely for display purposes!', 'tourfic' ),
 					'height'   => '250px',
 					'settings' => array(
 						'scrollWheelZoom' => true,
@@ -135,55 +135,55 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'surroundings_heading',
 					'type'  => 'heading',
-					'label' => __( 'Property Surroundings', 'tourfic' ),
+					'label' => esc_html__( 'Property Surroundings', 'tourfic' ),
 				),
 				array(
 					'id'       => 'surroundings_sec_title',
 					'type'     => 'text',
-					'label'    => __( 'Title of the Section', 'tourfic' ),
+					'label'    => esc_html__( 'Title of the Section', 'tourfic' ),
 					'is_pro'   => true,
 				),
 				array(
 					'id'       => 'surroundings_subtitle',
 					'type'     => 'text',
-					'label'    => __( 'Section Description', 'tourfic' ),
+					'label'    => esc_html__( 'Section Description', 'tourfic' ),
 					'is_pro'   => true,
 				),
 				array(
 					'id'     => 'surroundings_places',
 					'type'   => 'repeater',
-					'label'    => __( 'Add Surrounding Places', 'tourfic' ),
-					'button_title' => __( 'Add New Criteria & Place', 'tourfic' ),
+					'label'    => esc_html__( 'Add Surrounding Places', 'tourfic' ),
+					'button_title' => esc_html__( 'Add New Criteria & Place', 'tourfic' ),
 					'is_pro' => true,
 					'fields' => array(
 						array(
 							'id'          => 'place_criteria_label',
 							'type'        => 'text',
-							'label'    => __( 'Place Criteria Heading', 'tourfic' ),
-							'placeholder' => __( 'Enter place criteria label', 'tourfic' ),
+							'label'    => esc_html__( 'Place Criteria Heading', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter place criteria label', 'tourfic' ),
 						),
 						array(
 							'id'    => 'place_criteria_icon',
 							'type'  => 'icon',
-							'label' => __( 'Criteria Icon', 'tourfic' ),
+							'label' => esc_html__( 'Criteria Icon', 'tourfic' ),
 						),
 						array(
 							'id'     => 'places',
 							'type'   => 'repeater',
-							'label'  => __( 'Places', 'tourfic' ),
-							'button_title' => __( 'Add New Place', 'tourfic' ),
+							'label'  => esc_html__( 'Places', 'tourfic' ),
+							'button_title' => esc_html__( 'Add New Place', 'tourfic' ),
 							'fields' => array(
 								array(
 									'id'          => 'place_name',
 									'type'        => 'text',
-									'label'       => __( 'Place Name', 'tourfic' ),
-									'placeholder' => __( 'Enter place name', 'tourfic' ),
+									'label'       => esc_html__( 'Place Name', 'tourfic' ),
+									'placeholder' => esc_html__( 'Enter place name', 'tourfic' ),
 								),
 								array(
 									'id'          => 'place_distance',
 									'type'        => 'text',
-									'label'       => __( 'Place Distance', 'tourfic' ),
-									'placeholder' => __( 'Enter place distance', 'tourfic' ),
+									'label'       => esc_html__( 'Place Distance', 'tourfic' ),
+									'placeholder' => esc_html__( 'Enter place distance', 'tourfic' ),
 								),
 							),
 						)
@@ -193,35 +193,35 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 		),
 		// Booking
 		'booking'         => array(
-			'title'  => __( 'Booking Settings', 'tourfic' ),
+			'title'  => esc_html__( 'Booking Settings', 'tourfic' ),
 			'icon'   => 'fa-solid fa-calendar-check',
 			'fields' => array(
 				array(
 					'id'    => 'apartment-booking-heading',
 					'type'  => 'heading',
 					'label' => 'Booking Settings',
-					'subtitle' => __( 'This section offer the options to customize the booking process for this apartment.', 'tourfic' ),
+					'subtitle' => esc_html__( 'This section offer the options to customize the booking process for this apartment.', 'tourfic' ),
 				),
 				array(
 					'id'      => 'apartment-booking-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
-					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/booking-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/booking-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'    => 'booking_form_title',
 					'type'  => 'text',
-					'label' => __( 'Form Title', 'tourfic' ),
-					'default' => __( 'Book your apartment', 'tourfic' ),
+					'label' => esc_html__( 'Form Title', 'tourfic' ),
+					'default' => esc_html__( 'Book your apartment', 'tourfic' ),
 				),
 				array(
 					'id'         => 'pricing_type',
 					'type'       => 'select',
-					'label'      => __( 'Pricing Type', 'tourfic' ),
-					'subtitle'   => __( 'Select pricing type', 'tourfic' ),
+					'label'      => esc_html__( 'Pricing Type', 'tourfic' ),
+					'subtitle'   => esc_html__( 'Select pricing type', 'tourfic' ),
 					'options'    => array(
-						'per_night'  => __( 'Per Night', 'tourfic' ),
-						'per_person' => __( 'Per Person (pro)', 'tourfic' ),
+						'per_night'  => esc_html__( 'Per Night', 'tourfic' ),
+						'per_person' => esc_html__( 'Per Person (pro)', 'tourfic' ),
 					),
 					'attributes' => array(
 						'class' => 'tf_apt_pricing_type',
@@ -230,8 +230,8 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'          => 'price_per_night',
 					'type'        => 'number',
-					'label'       => __( 'Price Per Night', 'tourfic' ),
-					'subtitle'    => __( 'The total booking cost is calculated by multiplying the nightly rate by the number of nights stayed, from check-in to check-out.', 'tourfic' ),
+					'label'       => esc_html__( 'Price Per Night', 'tourfic' ),
+					'subtitle'    => esc_html__( 'The total booking cost is calculated by multiplying the nightly rate by the number of nights stayed, from check-in to check-out.', 'tourfic' ),
 					'field_width' => 50,
 					'attributes'  => array( 'min' => 0 ),
 					'dependency' => array( 'pricing_type', '==', 'per_night' ),
@@ -239,8 +239,8 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'          => '',
 					'type'        => 'number',
-					'label'       => __( 'Adult Price', 'tourfic' ),
-					'subtitle'    => __( 'Enter adult price', 'tourfic' ),
+					'label'       => esc_html__( 'Adult Price', 'tourfic' ),
+					'subtitle'    => esc_html__( 'Enter adult price', 'tourfic' ),
 					'field_width' => 33.33,
 					'attributes'  => array( 'min' => 0 ),
 					'dependency'  => array( 'pricing_type', '==', 'per_person' ),
@@ -248,8 +248,8 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'          => '',
 					'type'        => 'number',
-					'label'       => __( 'Child Price', 'tourfic' ),
-					'subtitle'    => __( 'Enter child price', 'tourfic' ),
+					'label'       => esc_html__( 'Child Price', 'tourfic' ),
+					'subtitle'    => esc_html__( 'Enter child price', 'tourfic' ),
 					'field_width' => 33.33,
 					'attributes'  => array( 'min' => 0 ),
 					'dependency'  => array( 'pricing_type', '==', 'per_person' ),
@@ -257,8 +257,8 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'          => '',
 					'type'        => 'number',
-					'label'       => __( 'Infant Price', 'tourfic' ),
-					'subtitle'    => __( 'Enter infant price', 'tourfic' ),
+					'label'       => esc_html__( 'Infant Price', 'tourfic' ),
+					'subtitle'    => esc_html__( 'Enter infant price', 'tourfic' ),
 					'field_width' => 33.33,
 					'attributes'  => array( 'min' => 0 ),
 					'dependency'  => array( 'pricing_type', '==', 'per_person' ),
@@ -266,23 +266,23 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'          => 'min_stay',
 					'type'        => 'number',
-					'label'       => __( 'Minimum Night Stay', 'tourfic' ),
-					'subtitle'    => __( 'Specify the minimum number of nights required to book this room.', 'tourfic' ),
+					'label'       => esc_html__( 'Minimum Night Stay', 'tourfic' ),
+					'subtitle'    => esc_html__( 'Specify the minimum number of nights required to book this room.', 'tourfic' ),
 					'attributes'  => array( 'min' => 1 )
 				),
 				array(
 					'id'          => 'max_adults',
 					'type'        => 'number',
-					'label'       => __( 'Maximum Adults', 'tourfic' ),
-					'subtitle'    => __( 'Max number of adults allowed in the apartment.', 'tourfic' ),
+					'label'       => esc_html__( 'Maximum Adults', 'tourfic' ),
+					'subtitle'    => esc_html__( 'Max number of adults allowed in the apartment.', 'tourfic' ),
 					'field_width' => 33.33,
 					'attributes'  => array( 'min' => 1 )
 				),
 				array(
 					'id'          => 'max_children',
 					'type'        => 'number',
-					'label'       => __( 'Maximum Children', 'tourfic' ),
-					'subtitle'    => __( 'Max number of child allowed in the apartment.', 'tourfic' ),
+					'label'       => esc_html__( 'Maximum Children', 'tourfic' ),
+					'subtitle'    => esc_html__( 'Max number of child allowed in the apartment.', 'tourfic' ),
 					'field_width' => 33.33,
 					'attributes'  => array( 'min' => 0 )
 				),

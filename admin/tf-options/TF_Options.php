@@ -494,10 +494,10 @@ if ( ! class_exists( 'TF_Options' ) ) {
                     <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-label">
 						<?php echo esc_html( $field['label'] ) ?>
 						<?php if ( $is_pro ): ?>
-                            <div class="tf-csf-badge"><span class="tf-pro"><?php _e( "Pro", "tourfic" ); ?></span></div>
+                            <div class="tf-csf-badge"><span class="tf-pro"><?php esc_html_e( "Pro", "tourfic" ); ?></span></div>
 						<?php endif; ?>
 						<?php if ( $badge_up ): ?>
-                            <div class="tf-csf-badge"><span class="tf-upcoming"><?php _e( "Upcoming", "tourfic" ); ?></span></div>
+                            <div class="tf-csf-badge"><span class="tf-upcoming"><?php esc_html_e( "Upcoming", "tourfic" ); ?></span></div>
 						<?php endif; ?>
                     </label>
 				<?php endif; ?>

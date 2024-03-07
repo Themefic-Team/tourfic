@@ -33,7 +33,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
         <div class="tf-container">
             <div class="tf-title-wrap">
                 <div class="tf-title-left">
-                    <span class="post-type"><?php _e( 'Hotel', 'tourfic' ) ?></span>
+                    <span class="post-type"><?php esc_html_e( 'Hotel', 'tourfic' ) ?></span>
                     <h1><?php the_title(); ?></h1>
                     <!-- Start map link -->
 					<?php if ( $locations ) { ?>
@@ -484,10 +484,10 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                         <table class="availability-table" cellpadding="0" cellspacing="0">
                             <thead>
                             <tr>
-                                <th class="description"><?php _e( 'Room Details', 'tourfic' ); ?></th>
-                                <th class="pax"><?php _e( 'Pax', 'tourfic' ); ?></th>
+                                <th class="description"><?php esc_html_e( 'Room Details', 'tourfic' ); ?></th>
+                                <th class="pax"><?php esc_html_e( 'Pax', 'tourfic' ); ?></th>
                                 <?php if(($tf_booking_type == 2 && $tf_hide_price !== '1') || $tf_booking_type == 1) : ?>
-                                    <th class="pricing"><?php _e( 'Price', 'tourfic' ); ?></th>
+                                    <th class="pricing"><?php esc_html_e( 'Price', 'tourfic' ); ?></th>
                                 <?php endif; ?>
                                 <th></th>
                             </tr>
@@ -648,7 +648,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 															}
 															?>
                                                 </div>
-                                                <div class="bed-facilities"><p><?php _e( $room['description'] ); ?></p></div>
+                                                <div class="bed-facilities"><p><?php esc_html_e( $room['description'] ); ?></p></div>
                                             </div>
 
 											<?php if ( $footage ) { ?>
@@ -656,10 +656,10 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                                                     <div class="room-detail-icon">
                                             <span class="room-icon-wrap"><i
                                                         class="fas fa-ruler-combined"></i></span>
-                                                        <span class="icon-text tf-d-b"><?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></span>
+                                                        <span class="icon-text tf-d-b"><?php echo $footage; ?><?php esc_html_e( 'sft', 'tourfic' ); ?></span>
                                                     </div>
                                                     <div class="tf-top">
-														<?php _e( 'Room Footage', 'tourfic' ); ?>
+														<?php esc_html_e( 'Room Footage', 'tourfic' ); ?>
                                                         <i class="tool-i"></i>
                                                     </div>
                                                 </div>
@@ -671,7 +671,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                                                         <span class="icon-text tf-d-b">x<?php echo $bed; ?></span>
                                                     </div>
                                                     <div class="tf-top">
-														<?php _e( 'Number of Beds', 'tourfic' ); ?>
+														<?php esc_html_e( 'Number of Beds', 'tourfic' ); ?>
                                                         <i class="tool-i"></i>
                                                     </div>
                                                 </div>
@@ -719,7 +719,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                                                         <span class="icon-text tf-d-b">x<?php echo $adult_number; ?></span>
                                                     </div>
                                                     <div class="tf-top">
-														<?php _e( 'Number of Adults', 'tourfic' ); ?>
+														<?php esc_html_e( 'Number of Adults', 'tourfic' ); ?>
                                                         <i class="tool-i"></i>
                                                     </div>
                                                 </div>
@@ -735,7 +735,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 														if ( ! empty( $child_age_limit ) ) {
 															printf( __( 'Children Age Limit %s Years', 'tourfic' ), $child_age_limit );
 														} else {
-															_e( 'Number of Children', 'tourfic' );
+															esc_html_e( 'Number of Children', 'tourfic' );
 														}
 														?>
                                                         <i class="tool-i"></i>

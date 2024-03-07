@@ -32,7 +32,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 
 		function tf_tour_backend_booking_button() {
 			?>
-            <a href="<?php echo admin_url( 'edit.php?post_type=tf_tours&page=tf-tour-backend-booking' ); ?>" class="button button-primary tf-booking-btn"><?php _e( 'Add New Booking', 'tourfic' ); ?></a>
+            <a href="<?php echo admin_url( 'edit.php?post_type=tf_tours&page=tf-tour-backend-booking' ); ?>" class="button button-primary tf-booking-btn"><?php esc_html_e( 'Add New Booking', 'tourfic' ); ?></a>
 			<?php
 		}
 
@@ -44,8 +44,8 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 			$tf_tour_parentmenu = !empty($_GET['page']) && "tf-tour-backend-booking"==$_GET['page'] ? 'edit.php?post_type=tf_tours' : '';
 			add_submenu_page(
 				$tf_tour_parentmenu,
-				__( 'Add New Booking', 'tourfic' ),
-				__( 'Add New Booking', 'tourfic' ),
+				esc_html__( 'Add New Booking', 'tourfic' ),
+				esc_html__( 'Add New Booking', 'tourfic' ),
 				'edit_tf_tourss',
 				'tf-tour-backend-booking',
 				array( $this, 'tf_backend_booking_page' ),
@@ -61,7 +61,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 			tf_dashboard_header()
 			?>
             <form method="post" action="" class="tf-backend-tour-booking" enctype="multipart/form-data">
-                <h1><?php _e( 'Add New Tour Booking', 'tourfic' ); ?></h1>
+                <h1><?php esc_html_e( 'Add New Tour Booking', 'tourfic' ); ?></h1>
 				<?php
 				$tf_backend_booking_form_fields = $this->tf_backend_booking_form_fields();
 				foreach ( $tf_backend_booking_form_fields as $id => $tf_backend_booking_form_field ) : ?>
@@ -90,7 +90,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 
                 <!-- Footer -->
                 <div class="tf-backend-booking-footer">
-                    <button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn" id="tf-backend-tour-book-btn"><?php _e( 'Book Now', 'tourfic' ); ?></button>
+                    <button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn" id="tf-backend-tour-book-btn"><?php esc_html_e( 'Book Now', 'tourfic' ); ?></button>
                 </div>
             </form>
 			<?php
@@ -105,11 +105,11 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 			$current_user = wp_get_current_user();
 			$fields       = array(
 				'tf_booking_customer_fields' => array(
-					'title'  => __( 'Customer Information', 'tourfic' ),
+					'title'  => esc_html__( 'Customer Information', 'tourfic' ),
 					'fields' => array(
 						array(
 							'id'         => 'tf_tour_booked_by',
-							'label'      => __( 'Booked By', 'tourfic' ),
+							'label'      => esc_html__( 'Booked By', 'tourfic' ),
 							'type'       => 'text',
 							'default'    => $current_user->display_name ?: $current_user->user_login,
 							'attributes' => array(
@@ -118,82 +118,82 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 						),
 						array(
 							'id'          => 'tf_customer_first_name',
-							'label'       => __( 'First Name', 'tourfic' ),
+							'label'       => esc_html__( 'First Name', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer First Name', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer First Name', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
 							'id'          => 'tf_customer_last_name',
-							'label'       => __( 'Last Name', 'tourfic' ),
+							'label'       => esc_html__( 'Last Name', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Last Name', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Last Name', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
 							'id'          => 'tf_customer_email',
-							'label'       => __( 'Email', 'tourfic' ),
+							'label'       => esc_html__( 'Email', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Email', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Email', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
 							'id'          => 'tf_customer_phone',
-							'label'       => __( 'Phone', 'tourfic' ),
+							'label'       => esc_html__( 'Phone', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Phone', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Phone', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
 							'id'          => 'tf_customer_country',
-							'label'       => __( 'Country / Region', 'tourfic' ),
+							'label'       => esc_html__( 'Country / Region', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Country', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Country', 'tourfic' ),
 							'field_width' => 33.33,
 						),
 						array(
 							'id'          => 'tf_customer_address',
-							'label'       => __( 'Address', 'tourfic' ),
+							'label'       => esc_html__( 'Address', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Address', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Address', 'tourfic' ),
 							'field_width' => 33.33,
 						),
 						array(
 							'id'          => 'tf_customer_address_2',
-							'label'       => __( 'Address 2', 'tourfic' ),
+							'label'       => esc_html__( 'Address 2', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Address 2', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Address 2', 'tourfic' ),
 							'field_width' => 33.33,
 						),
 						array(
 							'id'          => 'tf_customer_city',
-							'label'       => __( 'Town / City', 'tourfic' ),
+							'label'       => esc_html__( 'Town / City', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer City', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer City', 'tourfic' ),
 							'field_width' => 33,
 						),
 						array(
 							'id'          => 'tf_customer_state',
-							'label'       => __( 'State', 'tourfic' ),
+							'label'       => esc_html__( 'State', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer State', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer State', 'tourfic' ),
 							'field_width' => 33,
 						),
 						array(
 							'id'          => 'tf_customer_zip',
-							'label'       => __( 'Postcode / ZIP', 'tourfic' ),
+							'label'       => esc_html__( 'Postcode / ZIP', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Zip', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Zip', 'tourfic' ),
 							'field_width' => 33,
 						),
 					),
 				),
 				'tf_booking_fields'          => array(
-					'title'  => __( 'Booking Information', 'tourfic' ),
+					'title'  => esc_html__( 'Booking Information', 'tourfic' ),
 					'fields' => array(
 						array(
 							'id'         => 'tf_available_tours',
-							'label'      => __( 'Available Tours', 'tourfic' ),
+							'label'      => esc_html__( 'Available Tours', 'tourfic' ),
 							'type'       => 'select2',
 							'options'    => 'posts',
 							'query_args' => array(
@@ -204,12 +204,12 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 						),
 						array(
 							'id'    => 'tf_tour_date',
-							'label' => __( 'Date', 'tourfic' ),
+							'label' => esc_html__( 'Date', 'tourfic' ),
 							'type'  => 'date',
 						),
 						array(
 							'id'          => 'tf_tour_adults_number',
-							'label'       => __( 'Adults', 'tourfic' ),
+							'label'       => esc_html__( 'Adults', 'tourfic' ),
 							'type'        => 'number',
 							'attributes'  => array(
 								'min' => '0',
@@ -218,7 +218,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 						),
 						array(
 							'id'          => 'tf_tour_children_number',
-							'label'       => __( 'Children', 'tourfic' ),
+							'label'       => esc_html__( 'Children', 'tourfic' ),
 							'type'        => 'number',
 							'attributes'  => array(
 								'min' => '0',
@@ -227,7 +227,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 						),
 						array(
 							'id'          => 'tf_tour_infants_number',
-							'label'       => __( 'Infants', 'tourfic' ),
+							'label'       => esc_html__( 'Infants', 'tourfic' ),
 							'type'        => 'number',
 							'attributes'  => array(
 								'min' => '0',
@@ -236,18 +236,18 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 						),
 						array(
 							'id'          => 'tf_tour_time',
-							'label'       => __( 'Tour Time', 'tourfic' ),
+							'label'       => esc_html__( 'Tour Time', 'tourfic' ),
 							'type'        => 'select',
 							'options'     => array(
 								'10:00 AM' => '10:00 AM',
 							),
-							'placeholder' => __( 'Select Time', 'tourfic' ),
+							'placeholder' => esc_html__( 'Select Time', 'tourfic' ),
 							'field_width' => 50,
 							'is_pro'      => true,
 						),
 						array(
 							'id'          => 'tf_tour_extras',
-							'label'       => __( 'Tour Extras', 'tourfic' ),
+							'label'       => esc_html__( 'Tour Extras', 'tourfic' ),
 							'type'        => 'select2',
 							'multiple'    => true,
 							'options'     => 'posts',
@@ -576,11 +576,11 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 			);
 
 			if ( ! isset( $field['tf_backend_booking_nonce'] ) || ! wp_verify_nonce( $field['tf_backend_booking_nonce'], 'tf_backend_booking_nonce_action' ) ) {
-				$response['message'] = __( 'Sorry, your nonce did not verify.', 'tourfic' );
+				$response['message'] = esc_html__( 'Sorry, your nonce did not verify.', 'tourfic' );
 			} else {
 				foreach ( $required_fields as $required_field ) {
 					if ( empty( $field[ $required_field ] ) ) {
-						$response['fieldErrors'][ $required_field . '_error' ] = __( 'The field is required', 'tourfic' );
+						$response['fieldErrors'][ $required_field . '_error' ] = esc_html__( 'The field is required', 'tourfic' );
 					}
 				}
 
@@ -645,7 +645,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 					if ( ! array_key_exists( 'errors', $res['response'] ) || count( $res['response']['errors'] ) == 0 ) {
 						tf_set_order( $order_data );
 						$response['success'] = true;
-						$response['message'] = __( 'Your booking has been successfully submitted.', 'tourfic' );
+						$response['message'] = esc_html__( 'Your booking has been successfully submitted.', 'tourfic' );
 					} else {
 						$response['errors'] = $res['response']['errors'];
 					}
@@ -680,7 +680,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 			 * @return
 			 */
 			if ( $tour_type == 'fixed' && function_exists( 'is_tf_pro' ) && ! is_tf_pro() ) {
-				$response['errors'][] = __( 'Fixed Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
+				$response['errors'][] = esc_html__( 'Fixed Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
 				$response['status']   = 'error';
 				echo wp_json_encode( $response );
 				die();
@@ -749,10 +749,10 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 					if ( ! empty( $tf_tour_booking_limit ) ) {
 						$tf_today_limit = $tf_tour_booking_limit - $tf_total_people;
 						if ( $tf_total_people > 0 && $tf_total_people == $tf_tour_booking_limit ) {
-							$response['errors'][] = __( 'Booking limit is Reached this Tour', 'tourfic' );
+							$response['errors'][] = esc_html__( 'Booking limit is Reached this Tour', 'tourfic' );
 						}
 						if ( $tf_total_people != $tf_tour_booking_limit && $tf_today_limit < $total_people_booking ) {
-							$response['errors'][] = sprintf( __( 'Only %1$s Adult/Children are available this Tour', 'tourfic' ), $tf_today_limit );
+							$response['errors'][] = sprintf( esc_html__( 'Only %1$s Adult/Children are available this Tour', 'tourfic' ), $tf_today_limit );
 						}
 					}
 				}
@@ -849,10 +849,10 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 						$tf_today_limit = $tf_tour_booking_limit - $tf_total_people;
 
 						if ( $tf_total_people > 0 && $tf_total_people == $tf_tour_booking_limit ) {
-							$response['errors'][] = __( 'Booking limit is Reached this Date', 'tourfic' );
+							$response['errors'][] = esc_html__( 'Booking limit is Reached this Date', 'tourfic' );
 						}
 						if ( $tf_total_people != $tf_tour_booking_limit && $tf_today_limit < $total_people_booking ) {
-							$response['errors'][] = sprintf( __( 'Only %1$s Adult/Children are available this Date', 'tourfic' ), $tf_today_limit );
+							$response['errors'][] = sprintf( esc_html__( 'Only %1$s Adult/Children are available this Date', 'tourfic' ), $tf_today_limit );
 						}
 					}
 				}
@@ -867,7 +867,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 			 * @return
 			 */
 			if ( $tour_type == 'continuous' && $custom_avail == true && function_exists( 'is_tf_pro' ) && ! is_tf_pro() ) {
-				$response['errors'][] = __( 'Custom Continous Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
+				$response['errors'][] = esc_html__( 'Custom Continous Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
 				$response['status']   = 'error';
 				echo wp_json_encode( $response );
 				die();
@@ -907,7 +907,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 			 * People 0 number validation
 			 */
 			if ( $total_people == 0 ) {
-				$response['errors'][] = __( 'Please Select Adults/Children/Infant required', 'tourfic' );
+				$response['errors'][] = esc_html__( 'Please Select Adults/Children/Infant required', 'tourfic' );
 			}
 
 			/**
@@ -920,10 +920,10 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 				$max_text = sprintf( _n( '%s person', '%s people', $max_people, 'tourfic' ), $max_people );
 
 				if ( $total_people < $min_people && $min_people > 0 ) {
-					$response['errors'][] = sprintf( __( 'Minimum %1$s required', 'tourfic' ), $min_text );
+					$response['errors'][] = sprintf( esc_html__( 'Minimum %1$s required', 'tourfic' ), $min_text );
 
 				} else if ( $total_people > $max_people && $max_people > 0 ) {
-					$response['errors'][] = sprintf( __( 'Maximum %1$s allowed', 'tourfic' ), $max_text );
+					$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_text );
 
 				}
 
@@ -933,10 +933,10 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 				$max_text = sprintf( _n( '%s person', '%s people', $max_people, 'tourfic' ), $max_people );
 
 				if ( $total_people < $min_people && $min_people > 0 ) {
-					$response['errors'][] = sprintf( __( 'Minimum %1$s required', 'tourfic' ), $min_text );
+					$response['errors'][] = sprintf( esc_html__( 'Minimum %1$s required', 'tourfic' ), $min_text );
 
 				} else if ( $total_people > $max_people && $max_people > 0 ) {
-					$response['errors'][] = sprintf( __( 'Maximum %1$s allowed', 'tourfic' ), $max_text );
+					$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_text );
 
 				}
 
@@ -961,10 +961,10 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 					// Compare backend & frontend date values to show specific people number error
 					if ( $front_date >= $back_date_from_stt && $front_date <= $back_date_to_stt ) {
 						if ( $total_people < $min_people && $min_people > 0 ) {
-							$response['errors'][] = sprintf( __( 'Minimum %1$s required for date %2$s - %3$s', 'tourfic' ), $min_text, $back_date_from, $back_date_to );
+							$response['errors'][] = sprintf( esc_html__( 'Minimum %1$s required for date %2$s - %3$s', 'tourfic' ), $min_text, $back_date_from, $back_date_to );
 						}
 						if ( $total_people > $max_people && $max_people > 0 ) {
-							$response['errors'][] = sprintf( __( 'Maximum %1$s allowed for date %2$s - %3$s', 'tourfic' ), $max_text, $back_date_from, $back_date_to );
+							$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed for date %2$s - %3$s', 'tourfic' ), $max_text, $back_date_from, $back_date_to );
 						}
 
 						$allowed_times_field = ! empty( $item['allowed_time'] ) ? $item['allowed_time'] : '';
@@ -1040,10 +1040,10 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 							$tf_today_limit = $tf_tour_booking_limit - $tf_total_people;
 
 							if ( $tf_total_people > 0 && $tf_total_people == $tf_tour_booking_limit ) {
-								$response['errors'][] = __( 'Booking limit is Reached this Date', 'tourfic' );
+								$response['errors'][] = esc_html__( 'Booking limit is Reached this Date', 'tourfic' );
 							}
 							if ( $tf_total_people != $tf_tour_booking_limit && $tf_today_limit < $total_people_booking ) {
-								$response['errors'][] = sprintf( __( 'Only %1$s Adult/Children are available this Date', 'tourfic' ), $tf_today_limit );
+								$response['errors'][] = sprintf( esc_html__( 'Only %1$s Adult/Children are available this Date', 'tourfic' ), $tf_today_limit );
 							}
 						}
 					}
@@ -1062,13 +1062,13 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 
 
 			if ( $day_difference < $min_days_before_book ) {
-				$response['errors'][] = sprintf( __( 'Present date to booking date required minimum %1$s gap', 'tourfic' ), $min_days_before_book_text );
+				$response['errors'][] = sprintf( esc_html__( 'Present date to booking date required minimum %1$s gap', 'tourfic' ), $min_days_before_book_text );
 			}
 			if ( ! $start_date ) {
-				$response['errors'][] = __( 'You must select booking date', 'tourfic' );
+				$response['errors'][] = esc_html__( 'You must select booking date', 'tourfic' );
 			}
 			if ( ! $post_id ) {
-				$response['errors'][] = __( 'Unknown Error! Please try again.', 'tourfic' );
+				$response['errors'][] = esc_html__( 'Unknown Error! Please try again.', 'tourfic' );
 			}
 
 			/**
@@ -1117,32 +1117,32 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 				}
 
 				if ( $custom_avail == false && ! empty( $tf_allowed_times ) && empty( $tour_time_title ) ) {
-					$response['errors'][] = __( 'Please select time', 'tourfic' );
+					$response['errors'][] = esc_html__( 'Please select time', 'tourfic' );
 				}
 				if ( $custom_avail == true && ! empty( $seasional_price[0]['allowed_time'] ) && empty( $tour_time_title ) ) {
-					$response['errors'][] = __( 'Please select time', 'tourfic' );
+					$response['errors'][] = esc_html__( 'Please select time', 'tourfic' );
 				}
 			}
 
 			if ( ( ! empty( $custom_avail ) && $custom_avail == true ) || $pricing_rule == 'person' ) {
 
 				if ( ! $disable_adult_price && $adults > 0 && empty( $adult_price ) ) {
-					$response['errors'][] = __( 'Adult price is blank!', 'tourfic' );
+					$response['errors'][] = esc_html__( 'Adult price is blank!', 'tourfic' );
 				}
 				if ( ! $disable_child_price && $children > 0 && empty( $children_price ) ) {
-					$response['errors'][] = __( 'Childern price is blank!', 'tourfic' );
+					$response['errors'][] = esc_html__( 'Childern price is blank!', 'tourfic' );
 				}
 				if ( ! $disable_infant_price && $infant > 0 && empty( $infant_price ) ) {
-					$response['errors'][] = __( 'Infant price is blank!', 'tourfic' );
+					$response['errors'][] = esc_html__( 'Infant price is blank!', 'tourfic' );
 				}
 				if ( $infant > 0 && ! empty( $infant_price ) && ! $adults ) {
-					$response['errors'][] = __( 'Infant without adults is not allowed!', 'tourfic' );
+					$response['errors'][] = esc_html__( 'Infant without adults is not allowed!', 'tourfic' );
 				}
 
 			} else if ( ( ! empty( $custom_avail ) && $custom_avail == true ) || $pricing_rule == 'group' ) {
 
 				if ( empty( $group_price ) ) {
-					$response['errors'][] = __( 'Group price is blank!', 'tourfic' );
+					$response['errors'][] = esc_html__( 'Group price is blank!', 'tourfic' );
 				}
 			}
 

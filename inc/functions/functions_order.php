@@ -14,24 +14,24 @@ if ( ! function_exists( 'tf_add_order_submenu' ) ) {
 		$current_user_role = ! empty( $current_user->roles[0] ) ? $current_user->roles[0] : '';
 		if ( $current_user_role == 'administrator' ) {
 			// Tour booking
-			add_submenu_page( 'edit.php?post_type=tf_tours', __( 'Tour Booking Details', 'tourfic' ), __( 'Booking Details', 'tourfic' ), 'edit_tf_tourss', 'tf_tours_booking', 'tf_tour_booking_page_callback' );
+			add_submenu_page( 'edit.php?post_type=tf_tours', esc_html__( 'Tour Booking Details', 'tourfic' ), esc_html__( 'Booking Details', 'tourfic' ), 'edit_tf_tourss', 'tf_tours_booking', 'tf_tour_booking_page_callback' );
 
 			// Hotel booking
-			add_submenu_page( 'edit.php?post_type=tf_hotel', __( 'Hotel Booking Details', 'tourfic' ), __( 'Booking Details', 'tourfic' ), 'edit_tf_hotels', 'tf_hotel_booking', 'tf_hotel_booking_page_callback' );
+			add_submenu_page( 'edit.php?post_type=tf_hotel', esc_html__( 'Hotel Booking Details', 'tourfic' ), esc_html__( 'Booking Details', 'tourfic' ), 'edit_tf_hotels', 'tf_hotel_booking', 'tf_hotel_booking_page_callback' );
 
 			//Apartment booking
-			add_submenu_page( 'edit.php?post_type=tf_apartment', __( 'Apartment Booking Details', 'tourfic' ), __( 'Booking Details', 'tourfic' ), 'edit_tf_apartments', 'tf_apartment_booking', 'tf_apartment_booking_page_callback' );
+			add_submenu_page( 'edit.php?post_type=tf_apartment', esc_html__( 'Apartment Booking Details', 'tourfic' ), esc_html__( 'Booking Details', 'tourfic' ), 'edit_tf_apartments', 'tf_apartment_booking', 'tf_apartment_booking_page_callback' );
 		}
 		if ( $current_user_role == 'tf_vendor' ) {
 			if ( ! empty( tf_data_types( tfopt( 'multi-vendor-setings' ) )['vendor-booking-history'] ) && tf_data_types( tfopt( 'multi-vendor-setings' ) )['vendor-booking-history'] == '1' ) {
 				// Tour booking
-				add_submenu_page( 'edit.php?post_type=tf_tours', __( 'Tour Booking Details', 'tourfic' ), __( 'Booking Details', 'tourfic' ), 'edit_tf_tourss', 'tf_tours_booking', 'tf_tour_booking_page_callback' );
+				add_submenu_page( 'edit.php?post_type=tf_tours', esc_html__( 'Tour Booking Details', 'tourfic' ), esc_html__( 'Booking Details', 'tourfic' ), 'edit_tf_tourss', 'tf_tours_booking', 'tf_tour_booking_page_callback' );
 
 				// Hotel booking
-				add_submenu_page( 'edit.php?post_type=tf_hotel', __( 'Hotel Booking Details', 'tourfic' ), __( 'Booking Details', 'tourfic' ), 'edit_tf_hotels', 'tf_hotel_booking', 'tf_hotel_booking_page_callback' );
+				add_submenu_page( 'edit.php?post_type=tf_hotel', esc_html__( 'Hotel Booking Details', 'tourfic' ), esc_html__( 'Booking Details', 'tourfic' ), 'edit_tf_hotels', 'tf_hotel_booking', 'tf_hotel_booking_page_callback' );
 
 				//Apartment booking
-				add_submenu_page( 'edit.php?post_type=tf_apartment', __( 'Apartment Booking Details', 'tourfic' ), __( 'Booking Details', 'tourfic' ), 'edit_tf_apartments', 'tf_apartment_booking', 'tf_apartment_booking_page_callback' );
+				add_submenu_page( 'edit.php?post_type=tf_apartment', esc_html__( 'Apartment Booking Details', 'tourfic' ), esc_html__( 'Booking Details', 'tourfic' ), 'edit_tf_apartments', 'tf_apartment_booking', 'tf_apartment_booking_page_callback' );
 			}
 		}
 	}
@@ -70,7 +70,7 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 		// if is not desired user role die
 		if ( $current_user_role == 'administrator' || $current_user_role == 'tf_vendor' ) {
 		} else {
-			wp_die( __( 'You are not allowed in this page', 'tourfic' ) );
+			wp_die( esc_html__( 'You are not allowed in this page', 'tourfic' ) );
 		}
 
 		global $wpdb;
@@ -137,7 +137,7 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
                 <img src="<?php echo TF_ASSETS_URL; ?>app/images/loader.gif" alt="Loader">
             </div>
 			<div class="tf_booking_wrap_header">
-				<h1 class="wp-heading-inline"><?php _e( 'Tour Booking Details', 'tourfic' ); ?></h1>
+				<h1 class="wp-heading-inline"><?php esc_html_e( 'Tour Booking Details', 'tourfic' ); ?></h1>
 				<div class="tf_header_wrap_button">
 					<?php
 					/**
@@ -195,7 +195,7 @@ if ( ! function_exists( 'tf_hotel_booking_page_callback' ) ) {
 			// if is not desired user role die
 			if ( $current_user_role == 'administrator' || $current_user_role == 'tf_vendor' ) {
 			} else {
-				wp_die( __( 'You are not allowed in this page', 'tourfic' ) );
+				wp_die( esc_html__( 'You are not allowed in this page', 'tourfic' ) );
 			}
 
 			if ( $current_user_role == 'administrator' ) {
@@ -262,7 +262,7 @@ if ( ! function_exists( 'tf_hotel_booking_page_callback' ) ) {
                 <img src="<?php echo TF_ASSETS_URL; ?>app/images/loader.gif" alt="Loader">
             </div>
 			<div class="tf_booking_wrap_header">
-				<h1 class="wp-heading-inline"><?php _e( 'Hotel Booking Details', 'tourfic' ); ?></h1>
+				<h1 class="wp-heading-inline"><?php esc_html_e( 'Hotel Booking Details', 'tourfic' ); ?></h1>
 				<div class="tf_header_wrap_button">
 					<?php
 					/**
@@ -324,7 +324,7 @@ if ( ! function_exists( 'tf_apartment_booking_page_callback' ) ) {
 		// if is not desired user role die
 		if ( $current_user_role == 'administrator' || $current_user_role == 'tf_vendor' ) {
 		} else {
-			wp_die( __( 'You are not allowed in this page', 'tourfic' ) );
+			wp_die( esc_html__( 'You are not allowed in this page', 'tourfic' ) );
 		}
 
 		// Filter Perameters
@@ -390,7 +390,7 @@ if ( ! function_exists( 'tf_apartment_booking_page_callback' ) ) {
                 <img src="<?php echo TF_ASSETS_URL; ?>app/images/loader.gif" alt="Loader">
             </div>
 			<div class="tf_booking_wrap_header">
-				<h1 class="wp-heading-inline"><?php _e( 'Apartment Booking Details', 'tourfic' ); ?></h1>
+				<h1 class="wp-heading-inline"><?php esc_html_e( 'Apartment Booking Details', 'tourfic' ); ?></h1>
 				<div class="tf_header_wrap_button">
 					<?php
 					/**

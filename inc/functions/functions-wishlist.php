@@ -51,7 +51,7 @@ function tf_add_to_wishlists()
                 // update if the wp_usermeta meta_key[wishlist_item] => meta_value[ $parameters[ $post_id ] ] pair already exists
                 update_user_meta($user_id, 'wishlist_item', $data, $previous_wishlist_item[$post_id]);
             }
-            wp_send_json_success(__("Item added to wishlist", 'tourfic'));
+            wp_send_json_success(esc_html__("Item added to wishlist", 'tourfic'));
         }
     }
 }
@@ -141,7 +141,7 @@ function tf_generate_table_guest()
 function tf_generate_table($ids, $type = null)
 {
     if (empty($ids)) {
-        return __('<p>No items added yet!</p>', 'tourfic');
+        return esc_html__('<p>No items added yet!</p>', 'tourfic');
         exit;
     }
     ob_start();

@@ -38,10 +38,10 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 									$tf_repater_default_value = $value['title'];
 								}
                                 if($this->field['id']=="amenities"){
-                                    $tf_repater_default_value = __('Amenity', 'tourfic');
+                                    $tf_repater_default_value = esc_html__('Amenity', 'tourfic');
                                 }
 								if ( $this->field['id'] == "hotel-facilities" ) {
-									$tf_repater_default_value = __( 'Hotel Facility', 'tourfic' );
+									$tf_repater_default_value = esc_html__( 'Hotel Facility', 'tourfic' );
 								}
 							?>
                             <div class="tf-single-repeater tf-single-repeater-<?php echo $this->field['id'];?>">

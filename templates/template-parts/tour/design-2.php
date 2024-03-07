@@ -157,7 +157,7 @@
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets">
                     <div class="tf-search-date-wrapper tf-single-widgets">
-                        <h2 class="tf-section-title"><?php _e("Available Date", "tourfic"); ?></h2>
+                        <h2 class="tf-section-title"><?php esc_html_e("Available Date", "tourfic"); ?></h2>
                         <?php echo tf_single_tour_booking_form( $post->ID ); ?>
                     </div>
                     
@@ -206,16 +206,16 @@
                         tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rating );
                         tf_get_review_fields( $fields );
                     ?>
-                    <h2 class="tf-section-title"><?php _e("Overall reviews", "tourfic"); ?></h2>
+                    <h2 class="tf-section-title"><?php esc_html_e("Overall reviews", "tourfic"); ?></h2>
                     <div class="tf-review-data-inner">
                         <div class="tf-review-data">
                             <div class="tf-review-data-average">
                                 <span class="avg-review"><span>
-                                    <?php _e( sprintf( '%.1f', $total_rating ) ); ?>
+                                    <?php esc_html_e( sprintf( '%.1f', $total_rating ) ); ?>
                                 </span>/ <?php echo $tf_settings_base; ?></span>
                             </div>
                             <div class="tf-review-all-info">
-                                <p><?php _e("Excellent", "tourfic"); ?> <span><?php _e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></span></p>
+                                <p><?php esc_html_e("Excellent", "tourfic"); ?> <span><?php esc_html_e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></span></p>
                             </div>
                         </div>
                         <div class="tf-review-data-features">
@@ -242,10 +242,10 @@
                             </div>
                         </div>
                     </div>
-                    <a class="tf-all-reviews" href="#"><?php _e("See all reviews", "tourfic"); ?></a>
+                    <a class="tf-all-reviews" href="#"><?php esc_html_e("See all reviews", "tourfic"); ?></a>
                     <?php } ?>
                     <button class="tf-review-open button">
-                        <?php _e("Leave your review", "tourfic"); ?>
+                        <?php esc_html_e("Leave your review", "tourfic"); ?>
                     </button>
                     <?php
                     // Review moderation notice
@@ -257,8 +257,8 @@
                         if ( in_array( 'li', $tf_ratings_for ) && ! tf_user_has_comments() ) {
                         ?>
                     <div class="tf-review-form-wrapper" action="">
-                        <h3><?php _e("Leave your review", "tourfic"); ?></h3>
-                        <p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
+                        <h3><?php esc_html_e("Leave your review", "tourfic"); ?></h3>
+                        <p><?php esc_html_e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
                         <?php tf_review_form(); ?>
                     </div>
                     <?php
@@ -267,8 +267,8 @@
                     if ( in_array( 'lo', $tf_ratings_for ) ) {
                     ?>
                     <div class="tf-review-form-wrapper" action="">
-                        <h3><?php _e("Leave your review", "tourfic"); ?></h3>
-                        <p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
+                        <h3><?php esc_html_e("Leave your review", "tourfic"); ?></h3>
+                        <p><?php esc_html_e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
                         <?php tf_review_form(); ?>
                     </div>
                     <?php } } } ?>
@@ -397,7 +397,7 @@
                     <div class="tf-container">
                         <div class="tf-container-inner">
                             <div class="section-title">
-                                <h2 class="tf-title"><?php ! empty( tfopt( 'rt-title' ) ) ? esc_html_e( tfopt( 'rt-title' ), "tourfic" ) : _e( "You may also like", "tourfic" ); ?></h2>
+                                <h2 class="tf-title"><?php ! empty( tfopt( 'rt-title' ) ) ? esc_html_e( tfopt( 'rt-title' ), "tourfic" ) : esc_html_e( "You may also like", "tourfic" ); ?></h2>
                                 
                             </div>
                             <div class="tf-design-3-slider-items-wrapper tf-upcomming-tours-list-outter tf-flex tf-flex-gap-24">
@@ -447,7 +447,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="see-details" href="<?php echo get_permalink($selected_design_post_id) ?>">
-                                                    <?php _e("See details", "tourfic"); ?>
+                                                    <?php esc_html_e("See details", "tourfic"); ?>
                                                 </a>
                                             </div>
                                         </div>

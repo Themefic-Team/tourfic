@@ -8,7 +8,7 @@
         <div class="tf-container">
             <div class="tf-hero-content tf-archive-hero-content">
                 <div class="tf-head-title">
-                    <h1><?php _e("Hotels", "tourfic"); ?></h1>
+                    <h1><?php esc_html_e("Hotels", "tourfic"); ?></h1>
                 </div>
             </div>
         </div>
@@ -29,7 +29,7 @@
 
                 <div class="tf-details-left tf-result-previews">
                     <span class="tf-modify-search-btn">
-                        <?php _e("Modify search", "tourfic"); ?>
+                        <?php esc_html_e("Modify search", "tourfic"); ?>
                     </span>
                     <!-- Booking form Start -->
                     <div class="tf-archive-search-form tf-booking-form-wrapper">
@@ -42,7 +42,7 @@
                     <!--Available rooms start -->
                     <div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
                         <div class="tf-archive-available-rooms-head tf-available-rooms-head">
-                            <span class="tf-total-results"><?php _e("Total", "tourfic"); ?> <span><?php echo $post_count; ?></span> <?php _e("hotels available", "tourfic"); ?></span>
+                            <span class="tf-total-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo $post_count; ?></span> <?php esc_html_e("hotels available", "tourfic"); ?></span>
                             <div class="tf-archive-filter-showing">
                                 <i class="ri-equalizer-line"></i>
                             </div>
@@ -94,8 +94,8 @@
                 <div class="tf-details-right tf-sitebar-widgets tf-archive-right">
                     <div class="tf-filter-wrapper">
                         <div class="tf-filter-title">
-                            <h2 class="tf-section-title"><?php _e("Filter", "tourfic"); ?></h2>
-                            <button class="filter-reset-btn"><?php _e("Reset", "tourfic"); ?></button>
+                            <h2 class="tf-section-title"><?php esc_html_e("Filter", "tourfic"); ?></h2>
+                            <button class="filter-reset-btn"><?php esc_html_e("Reset", "tourfic"); ?></button>
                         </div>   
                         <?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
                         <div id="tf__booking_sidebar">

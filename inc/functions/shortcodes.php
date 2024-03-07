@@ -262,7 +262,7 @@ function tf_recent_hotel_shortcode( $atts, $content = null ) {
 										if ( ! empty( $room_price ) ) {
 											//get the lowest price from all available room price
 											$lowest_price = wc_price( min( $room_price ) );
-											echo __( "From ", "tourfic" ) . $lowest_price;
+											echo esc_html__( "From ", "tourfic" ) . $lowest_price;
 										}
 										?>
                                     </div>
@@ -418,15 +418,15 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 			<?php do_action( 'tf_before_booking_form_tab', $type ) ?>
 
 			<?php if ( ! in_array( 'hotel', $disable_services ) && tf_is_search_form_tab_type( 'hotel', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
-                <button class="tf-tablinks active" data-form-id="tf-hotel-booking-form"><?php _e( 'Hotel', 'tourfic' ); ?></button>
+                <button class="tf-tablinks active" data-form-id="tf-hotel-booking-form"><?php esc_html_e( 'Hotel', 'tourfic' ); ?></button>
 			<?php endif; ?>
 
 			<?php if ( ! in_array( 'tour', $disable_services ) && tf_is_search_form_tab_type( 'tour', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
-                <button class="tf-tablinks" data-form-id="tf-tour-booking-form"><?php _e( 'Tour', 'tourfic' ); ?></button>
+                <button class="tf-tablinks" data-form-id="tf-tour-booking-form"><?php esc_html_e( 'Tour', 'tourfic' ); ?></button>
 			<?php endif ?>
 
 			<?php if ( ! in_array( 'apartment', $disable_services ) && tf_is_search_form_tab_type( 'apartment', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
-                <button class="tf-tablinks" data-form-id="tf-apartment-booking-form"><?php _e( 'Apartment', 'tourfic' ); ?></button>
+                <button class="tf-tablinks" data-form-id="tf-apartment-booking-form"><?php esc_html_e( 'Apartment', 'tourfic' ); ?></button>
 			<?php endif ?>
 
 			<?php do_action( 'tf_after_booking_form_tab', $type ) ?>
@@ -439,13 +439,13 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 					<?php do_action( 'tf_before_booking_form_mobile_tab', $type ) ?>
 
 					<?php if ( ! in_array( 'hotel', $disable_services ) && tf_is_search_form_tab_type( 'hotel', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
-                        <option value="tf-hotel-booking-form"><?php _e( 'Hotel', 'tourfic' ); ?></option>
+                        <option value="tf-hotel-booking-form"><?php esc_html_e( 'Hotel', 'tourfic' ); ?></option>
 					<?php endif; ?>
 					<?php if ( ! in_array( 'tour', $disable_services ) && tf_is_search_form_tab_type( 'tour', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
-                        <option value="tf-tour-booking-form"><?php _e( 'Tour', 'tourfic' ); ?></option>
+                        <option value="tf-tour-booking-form"><?php esc_html_e( 'Tour', 'tourfic' ); ?></option>
 					<?php endif ?>
 					<?php if ( ! in_array( 'apartment', $disable_services ) && tf_is_search_form_tab_type( 'apartment', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
-                        <option value="tf-apartment-booking-form"><?php _e( 'Apartment', 'tourfic' ); ?></option>
+                        <option value="tf-apartment-booking-form"><?php esc_html_e( 'Apartment', 'tourfic' ); ?></option>
 					<?php endif ?>
 
 					<?php do_action( 'tf_after_booking_form_mobile_tab', $type ) ?>
@@ -519,7 +519,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 	// Get post type
 	$post_type = isset( $_GET['type'] ) ? sanitize_text_field( $_GET['type'] ) : '';
 	if ( empty( $post_type ) ) {
-		_e( '<h3>Please select fields from the search form!</h3>', 'tourfic' );
+		esc_html_e( '<h3>Please select fields from the search form!</h3>', 'tourfic' );
 
 		return;
 	}
@@ -666,7 +666,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
             <!-- Search Head Section -->
             <div class="tf-archive-head tf-flex tf-flex-align-center tf-flex-space-bttn">
                 <div class="tf-search-result tf-flex">
-                    <span class="tf-counter-title"><?php echo __( 'Total Results ', 'tourfic' ); ?> </span>
+                    <span class="tf-counter-title"><?php echo esc_html__( 'Total Results ', 'tourfic' ); ?> </span>
                     <span><?php echo ' ('; ?> </span>
                     <div class="tf-total-results">
                         <span><?php echo $total_posts; ?> </span>
@@ -784,7 +784,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 							}
 						}
 						if ( empty( $tf_total_filters ) ) {
-							echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
+							echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 						}
 						$post_per_page = tfopt( 'posts_per_page' ) ? tfopt( 'posts_per_page' ) : 10;
 						// Main Query args
@@ -913,7 +913,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 						}
 
 					} else {
-						echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
+						echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 					}
 					echo "<span hidden=hidden class='tf-posts-count'>";
 					echo ! empty( $tf_total_results ) ? $tf_total_results : 0;
@@ -931,13 +931,13 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 		<div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
 			<div class="tf-archive-available-rooms-head tf-available-rooms-head">
 				<?php if($post_type == "tf_hotel"){ ?>
-				<span class="tf-total-results"><?php _e("Total", "tourfic"); ?> <span><?php echo $total_posts; ?></span> 
+				<span class="tf-total-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo $total_posts; ?></span>
 				<?php if($post_type == "tf_hotel"){
-                _e("hotels available", "tourfic");
+                esc_html_e("hotels available", "tourfic");
 				}elseif($post_type == "tf_apartment"){
-					_e("apartments available", "tourfic");
+					esc_html_e("apartments available", "tourfic");
 				}else{
-					_e("tours available", "tourfic");
+					esc_html_e("tours available", "tourfic");
 				} ?>
 				</span>
 				<?php } ?>
@@ -1012,7 +1012,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 					}
 				}
 				if ( empty( $tf_total_filters ) ) {
-					echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
+					echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 				}
 				$post_per_page = tfopt( 'posts_per_page' ) ? tfopt( 'posts_per_page' ) : 10;
 				// Main Query args
@@ -1142,7 +1142,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 				}
 
 			} else {
-				echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
+				echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 			}
 			echo "<span hidden=hidden class='tf-posts-count'>";
 			echo ! empty( $tf_total_results ) ? $tf_total_results : 0;
@@ -1161,8 +1161,8 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 					<?php echo esc_html__( 'Total Results ', 'tourfic' ) . '(<span>' . $total_posts . '</span>)'; ?>
                 </div>
                 <div class="tf-list-grid">
-                    <a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php _e( 'List View', 'tourfic' ); ?>"><i class="fas fa-list"></i></a>
-                    <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php _e( 'Grid View', 'tourfic' ); ?>"><i class="fas fa-border-all"></i></a>
+                    <a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e( 'List View', 'tourfic' ); ?>"><i class="fas fa-list"></i></a>
+                    <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e( 'Grid View', 'tourfic' ); ?>"><i class="fas fa-border-all"></i></a>
                 </div>
             </div>
             <div class="archive_ajax_result <?php echo $tf_defult_views=="grid" ? esc_attr('tours-grid') : '' ?>">
@@ -1221,7 +1221,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 						}
 					}
 					if ( empty( $tf_total_filters ) ) {
-						echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
+						echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 					}
 					$post_per_page = tfopt( 'posts_per_page' ) ? tfopt( 'posts_per_page' ) : 10;
 					// Main Query args
@@ -1348,7 +1348,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 					}
 
 				} else {
-					echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
+					echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 				}
 				echo "<span hidden=hidden class='tf-posts-count'>";
 				echo ! empty( $tf_total_results ) ? $tf_total_results : 0;
@@ -1621,7 +1621,7 @@ function tf_hotels_grid_slider( $atts, $content = null ) {
 										if ( ! empty( $room_price ) ) {
 											//get the lowest price from all available room price
 											$lowest_price = wc_price( min( $room_price ) );
-											echo __( "From ", "tourfic" ) . $lowest_price;
+											echo esc_html__( "From ", "tourfic" ) . $lowest_price;
 										}
 										?>
                                     </div>
@@ -1828,7 +1828,7 @@ function tf_recent_blog_callback( $atts, $content = null ) {
             </div>
         </div>
 	<?php } else {
-		echo __( 'No posts found', 'tourfic' );
+		echo esc_html__( 'No posts found', 'tourfic' );
 	}
 	wp_reset_postdata();
 
@@ -2243,7 +2243,7 @@ function tf_external_listings_shortcode( $atts, $content = null ) {
 										if ( ! empty( $room_price ) ) {
 											//get the lowest price from all available room price
 											$lowest_price = wc_price( min( $room_price ) );
-											echo __( "From ", "tourfic" ) . $lowest_price;
+											echo esc_html__( "From ", "tourfic" ) . $lowest_price;
 										}
 										?>
                                     </div>

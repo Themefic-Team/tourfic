@@ -114,8 +114,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
             //Dashboard submenu
 			add_submenu_page(
 				$this->option_id,
-				__('Dashboard', 'tourfic'),
-				__('Dashboard', 'tourfic'),
+				esc_html__('Dashboard', 'tourfic'),
+				esc_html__('Dashboard', 'tourfic'),
 				'manage_options',
 				'tf_dashboard',
 				array( $this, 'tf_dashboard_page' ),
@@ -124,8 +124,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			//Setting submenu
 			add_submenu_page(
 				$this->option_id,
-				__('Settings', 'tourfic'),
-				__('Settings', 'tourfic'),
+				esc_html__('Settings', 'tourfic'),
+				esc_html__('Settings', 'tourfic'),
 				'manage_options',
 				$this->option_id . '#tab=general',
 				array( $this, 'tf_options_page' ),
@@ -134,8 +134,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			//Get Help submenu
 			add_submenu_page(
 				$this->option_id,
-				__('Get Help', 'tourfic'),
-				__('Get Help', 'tourfic'),
+				esc_html__('Get Help', 'tourfic'),
+				esc_html__('Get Help', 'tourfic'),
 				'manage_options',
 				'tf_get_help',
 				array( $this,'tf_get_help_callback'),
@@ -144,8 +144,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			// Shortcode submenu
 			add_submenu_page(
 				$this->option_id,
-				__('Shortcodes', 'tourfic'),
-				__('Shortcodes', 'tourfic'),
+				esc_html__('Shortcodes', 'tourfic'),
+				esc_html__('Shortcodes', 'tourfic'),
 				'manage_options',
 				'tf_shortcodes',
 				array( 'TF_Shortcodes','tf_shortcode_callback'),
@@ -155,8 +155,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				//License Info submenu
 				add_submenu_page(
 					$this->option_id,
-					__('License Info', 'tourfic'),
-					__('License Info', 'tourfic'),
+					esc_html__('License Info', 'tourfic'),
+					esc_html__('License Info', 'tourfic'),
 					'manage_options',
 					'tf_license_info',
 					array( $this,'tf_license_info_callback'),
@@ -404,9 +404,9 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			<div class="tf-settings-help-center">
 				<div class="tf-help-center-banner">
 					<div class="tf-help-center-content">
-						<h2><?php _e("Setup Wizard","tourfic"); ?></h2>
-						<p><?php _e("Click the button below to run the setup wizard of Tourfic. Your existing settings will not change.","tourfic"); ?></p>
-                        <a href="<?php echo esc_url(admin_url( 'admin.php?page=tf-setup-wizard' )) ?>" class="tf-admin-btn tf-btn-secondary"><?php _e("Setup Wizard","tourfic"); ?></a>
+						<h2><?php esc_html_e("Setup Wizard","tourfic"); ?></h2>
+						<p><?php esc_html_e("Click the button below to run the setup wizard of Tourfic. Your existing settings will not change.","tourfic"); ?></p>
+                        <a href="<?php echo esc_url(admin_url( 'admin.php?page=tf-setup-wizard' )) ?>" class="tf-admin-btn tf-btn-secondary"><?php esc_html_e("Setup Wizard","tourfic"); ?></a>
 					</div>
 					<div class="tf-help-center-image">
 						<img src="<?php echo TF_ASSETS_APP_URL; ?>images/setup_wizard.png" alt="setup wizard">
@@ -415,8 +415,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
  
                 <div class="tf-help-center-banner">
                     <div class="tf-help-center-content">
-                        <h2><?php _e("Help Center","tourfic"); ?></h2>
-                        <p><?php _e("To help you to get started, we put together the documentation, support link, videos and FAQs here.","tourfic"); ?></p>
+                        <h2><?php esc_html_e("Help Center","tourfic"); ?></h2>
+                        <p><?php esc_html_e("To help you to get started, we put together the documentation, support link, videos and FAQs here.","tourfic"); ?></p>
                     </div>
                     <div class="tf-help-center-image">
                         <img src="<?php echo TF_ASSETS_APP_URL; ?>images/help-center.jpg" alt="HELP Center Image">
@@ -427,48 +427,48 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					<div class="tf-single-support">
 						<a href="https://themefic.com/docs/tourfic/" target="_blank">
 							<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-documents.png" alt="Document">
-							<h3><?php _e("Documentation","tourfic"); ?></h3>
-							<span><?php _e("Read More","tourfic"); ?></span>
+							<h3><?php esc_html_e("Documentation","tourfic"); ?></h3>
+							<span><?php esc_html_e("Read More","tourfic"); ?></span>
 						</a>
 					</div>
 					<div class="tf-single-support">
 						<a href="https://portal.themefic.com/support/" target="_blank">
 							<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-mail.png" alt="Document">
-							<h3><?php _e("Email Support","tourfic"); ?></h3>
-							<span><?php _e("Contact Us","tourfic"); ?></span>
+							<h3><?php esc_html_e("Email Support","tourfic"); ?></h3>
+							<span><?php esc_html_e("Contact Us","tourfic"); ?></span>
 						</a>
 					</div>
 					
 					<div class="tf-single-support">
 						<a href="https://themefic.com/tourfic/" target="_blank">
 							<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-comment.png" alt="Document">
-							<h3><?php _e("Live Chat","tourfic"); ?></h3>
-							<span><?php _e("Chat Now","tourfic"); ?></span>
+							<h3><?php esc_html_e("Live Chat","tourfic"); ?></h3>
+							<span><?php esc_html_e("Chat Now","tourfic"); ?></span>
 						</a>
 					</div>
 					
 					<div class="tf-single-support">
 						<a href="https://www.youtube.com/playlist?list=PLY0rtvOwg0ylCl7NTwNHUPq-eY1qwUH_N" target="_blank">
 							<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-tutorial.png" alt="Document">
-							<h3><?php _e("Video Tutorials","tourfic"); ?></h3>
-							<span><?php _e("Watch Video","tourfic"); ?></span>
+							<h3><?php esc_html_e("Video Tutorials","tourfic"); ?></h3>
+							<span><?php esc_html_e("Watch Video","tourfic"); ?></span>
 						</a>
 					</div>
 				</div>
 
 				<div class="tf-settings-faq">
-					<h2><?php _e("Common FAQs","tourfic"); ?></h2>
+					<h2><?php esc_html_e("Common FAQs","tourfic"); ?></h2>
 
 					<div class="tf-accordion-wrapper">
 						<div class="tf-accrodian-item">
 							<div class="tf-single-faq">
 								<div class="tf-faq-title">
 									<i class="fas fa-angle-down"></i>
-									<h4><?php _e("What is Tourfic? ","tourfic"); ?></h4>
+									<h4><?php esc_html_e("What is Tourfic? ","tourfic"); ?></h4>
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									<?php _e("Tourfic is the ultimate WordPress travel plugin for hotel booking, tour operator and travel agency websites.","tourfic"); ?>
+									<?php esc_html_e("Tourfic is the ultimate WordPress travel plugin for hotel booking, tour operator and travel agency websites.","tourfic"); ?>
 									</p>
 								</div>
 							</div>
@@ -477,11 +477,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<div class="tf-single-faq">
 								<div class="tf-faq-title">
 									<i class="fas fa-angle-down"></i>
-									<h4><?php _e("How to install Tourfic? ","tourfic"); ?></h4>
+									<h4><?php esc_html_e("How to install Tourfic? ","tourfic"); ?></h4>
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									<?php _e("Please check our documentations","tourfic"); ?>
+									<?php esc_html_e("Please check our documentations","tourfic"); ?>
 									</p>
 								</div>
 							</div>
@@ -490,11 +490,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<div class="tf-single-faq">
 								<div class="tf-faq-title">
 									<i class="fas fa-angle-down"></i>
-									<h4><?php _e("Is Free version fully free or there is a gap? ","tourfic"); ?></h4>
+									<h4><?php esc_html_e("Is Free version fully free or there is a gap? ","tourfic"); ?></h4>
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									<?php _e("Yes, Tourfic is fully free which is available on WordPress.org. This free version will always be free. It also has a pro version with additional features which you can purchase from our official website.","tourfic"); ?>
+									<?php esc_html_e("Yes, Tourfic is fully free which is available on WordPress.org. This free version will always be free. It also has a pro version with additional features which you can purchase from our official website.","tourfic"); ?>
 									</p>
 								</div>
 							</div>
@@ -503,11 +503,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<div class="tf-single-faq">
 								<div class="tf-faq-title">
 									<i class="fas fa-angle-down"></i>
-									<h4><?php _e("Can I create a hotel booking website with Tourfic? ","tourfic"); ?></h4>
+									<h4><?php esc_html_e("Can I create a hotel booking website with Tourfic? ","tourfic"); ?></h4>
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									<?php _e("Yes, You create your own professional hotel booking website easily with tourfic.","tourfic"); ?>
+									<?php esc_html_e("Yes, You create your own professional hotel booking website easily with tourfic.","tourfic"); ?>
 									</p>
 								</div>
 							</div>
@@ -516,11 +516,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<div class="tf-single-faq">
 								<div class="tf-faq-title">
 									<i class="fas fa-angle-down"></i>
-									<h4><?php _e("Can I create a travel or tour booking website with Tourfic? ","tourfic"); ?></h4>
+									<h4><?php esc_html_e("Can I create a travel or tour booking website with Tourfic? ","tourfic"); ?></h4>
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									<?php _e("Yes, You create your own professional travel or tour booking website easily with tourfic.","tourfic"); ?>
+									<?php esc_html_e("Yes, You create your own professional travel or tour booking website easily with tourfic.","tourfic"); ?>
 									</p>
 								</div>
 							</div>
@@ -529,11 +529,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<div class="tf-single-faq">
 								<div class="tf-faq-title">
 									<i class="fas fa-angle-down"></i>
-									<h4><?php _e("Can Tourfic be used as WooCommerce Accommodation Bookings? ","tourfic"); ?></h4>
+									<h4><?php esc_html_e("Can Tourfic be used as WooCommerce Accommodation Bookings? ","tourfic"); ?></h4>
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									<?php _e("Yes, You create your own professional accommodation booking website easily with tourfic.","tourfic"); ?>
+									<?php esc_html_e("Yes, You create your own professional accommodation booking website easily with tourfic.","tourfic"); ?>
 									</p>
 								</div>
 							</div>
@@ -542,11 +542,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<div class="tf-single-faq">
 								<div class="tf-faq-title">
 									<i class="fas fa-angle-down"></i>
-									<h4><?php _e("Can I create a website similar to Booking.com with Tourfic? ","tourfic"); ?></h4>
+									<h4><?php esc_html_e("Can I create a website similar to Booking.com with Tourfic? ","tourfic"); ?></h4>
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									<?php _e("Yes, You can create your own professional tour operator and travel agency website within 5 minutes, just like Booking.com, Agoda, Hotels.com, Airbnb etc.","tourfic"); ?>
+									<?php esc_html_e("Yes, You can create your own professional tour operator and travel agency website within 5 minutes, just like Booking.com, Agoda, Hotels.com, Airbnb etc.","tourfic"); ?>
 									</p>
 								</div>
 							</div>
@@ -555,11 +555,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<div class="tf-single-faq">
 								<div class="tf-faq-title">
 									<i class="fas fa-angle-down"></i>
-									<h4><?php _e("Is free version supported? ","tourfic"); ?></h4>
+									<h4><?php esc_html_e("Is free version supported? ","tourfic"); ?></h4>
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									<?php _e("Yes, We provide full support on the WordPress.org forums. You can also post questions or bug reports through our Facebook group! or our website. However, please note that, for free version’s support/replies, there can be delays upto 24-48 hours.","tourfic"); ?>
+									<?php esc_html_e("Yes, We provide full support on the WordPress.org forums. You can also post questions or bug reports through our Facebook group! or our website. However, please note that, for free version’s support/replies, there can be delays upto 24-48 hours.","tourfic"); ?>
 									</p>
 								</div>
 							</div>
@@ -583,7 +583,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						<li class="active">
 							<span>
 								<i class="fas fa-key"></i>
-								<?php _e("License Info","tourfic"); ?>
+								<?php esc_html_e("License Info","tourfic"); ?>
 							</span>
 						</li>
 					</ul>
@@ -603,9 +603,9 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							} else {
 							?>
 							<div class="tf-field tf-field-text" style="width: 100%;">
-								<label for="tf_settings[license-key]" class="tf-field-label"> <?php _e("License Key","tourfic"); ?></label>
+								<label for="tf_settings[license-key]" class="tf-field-label"> <?php esc_html_e("License Key","tourfic"); ?></label>
 
-								<span class="tf-field-sub-title"><?php _e("Enter your license key here, to activate the product, and get full feature updates and premium support.","tourfic"); ?></span>
+								<span class="tf-field-sub-title"><?php esc_html_e("Enter your license key here, to activate the product, and get full feature updates and premium support.","tourfic"); ?></span>
 
 								<div class="tf-fieldset">
 									<input type="text" name="tf_settings[license-key]" id="tf_settings[license-key]" value="" placeholder="xxxxxxxx-xxxxxxxx-xxxxxxxx-xxxxxxxx" />
@@ -613,9 +613,9 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							</div>
 
 							<div class="tf-field tf-field-text" style="width: 100%;">
-								<label for="tf_settings[license-email]" class="tf-field-label"> <?php _e("License Email ","tourfic"); ?></label>
+								<label for="tf_settings[license-email]" class="tf-field-label"> <?php esc_html_e("License Email ","tourfic"); ?></label>
 
-								<span class="tf-field-sub-title"><?php _e("We will send update news of this product by this email address, don't worry, we hate spam","tourfic"); ?></span>
+								<span class="tf-field-sub-title"><?php esc_html_e("We will send update news of this product by this email address, don't worry, we hate spam","tourfic"); ?></span>
 
 								<div class="tf-fieldset">
 									<input type="text" name="tf_settings[license-email]" id="tf_settings[license-email]" value="" />
@@ -729,7 +729,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 									<!-- Footer -->
 									<div class="tf-option-footer">
-										<button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn"><?php _e( 'Save', 'tourfic' ); ?></button>
+										<button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn"><?php esc_html_e( 'Save', 'tourfic' ); ?></button>
 									</div>
                             </div>
                         </div>
@@ -848,14 +848,14 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		public function tf_ajax_save_options() {
 			$response    = [
 				'status'  => 'error',
-				'message' => __( 'Something went wrong!', 'tourfic' ),
+				'message' => esc_html__( 'Something went wrong!', 'tourfic' ),
 			];
 
             if( ! empty( $_POST['tf_option_nonce'] ) && wp_verify_nonce( $_POST['tf_option_nonce'], 'tf_option_nonce_action' ) ) {
                 $this->save_options();
                 $response = [
                     'status'  => 'success',
-                    'message' => __( 'Options saved successfully!', 'tourfic' ),
+                    'message' => esc_html__( 'Options saved successfully!', 'tourfic' ),
                 ];
             }
 

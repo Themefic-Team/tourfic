@@ -138,13 +138,13 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
     <!--Available rooms start -->
     <div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
         <div class="tf-archive-available-rooms-head tf-available-rooms-head">
-            <span class="tf-total-results"><?php _e("Total", "tourfic"); ?> <span><?php echo $total_posts; ?></span> 
+            <span class="tf-total-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo $total_posts; ?></span>
             <?php if($post_type == "tf_hotel"){
-                _e("hotels available", "tourfic");
+                esc_html_e("hotels available", "tourfic");
             }elseif($post_type == "tf_apartment"){
-                _e("apartments available", "tourfic");
+                esc_html_e("apartments available", "tourfic");
             }else{
-                _e("tours available", "tourfic");
+                esc_html_e("tours available", "tourfic");
             } ?>
             </span>
             <div class="tf-archive-filter-showing">
@@ -198,8 +198,8 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
             <span><?php echo ')'; ?> </span>
         </div>
         <div class="tf-list-grid">
-            <a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php _e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
-            <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php _e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
+            <a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
+            <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
         </div>
     </div>
     <div class="archive_ajax_result <?php echo $tf_defult_views=="grid" ? esc_attr('tours-grid') : '' ?>">

@@ -86,8 +86,8 @@
                                                     value="<?php _e( $share_link ); ?>" readonly>
                                             <button id="share_link_button" class="tf_button share-center-copy-cta"
                                                     tabindex="0" role="button">
-                                                <span class="tf-button-text share-center-copy-message"><?php _e( 'Copy link', 'tourfic' ); ?></span>
-                                                <span class="tf-button-text share-center-copied-message"><?php _e( 'Link Copied!', 'tourfic' ); ?></span>
+                                                <span class="tf-button-text share-center-copy-message"><?php esc_html_e( 'Copy link', 'tourfic' ); ?></span>
+                                                <span class="tf-button-text share-center-copied-message"><?php esc_html_e( 'Link Copied!', 'tourfic' ); ?></span>
                                             </button>
                                         </div>
                                     </li>
@@ -101,7 +101,7 @@
                         if ( is_user_logged_in() ) {
                             if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
                                 ?>
-                                <a class="tf-wishlist-button" title="<?php _e( 'Click to toggle wishlist', 'tourfic' ); ?>">
+                                <a class="tf-wishlist-button" title="<?php esc_html_e( 'Click to toggle wishlist', 'tourfic' ); ?>">
                                     <i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart"
                                         data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
                                         data-id="<?php echo $post_id ?>"
@@ -113,7 +113,7 @@
                             if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {
                                 ?>
                                 <a class="tf-wishlist-button"
-                                    title="<?php _e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i
+                                    title="<?php esc_html_e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i
                                             class="<?php echo $has_in_wishlist ? 'far tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart-o"
                                             data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
                                             data-id="<?php echo $post_id ?>"
@@ -164,7 +164,7 @@
                                 <div class="gallery-all-photos">
                                     <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[3], 'full' ) ); ?>"
                                         class="tf_button btn-styled" data-fancybox="hotel-gallery">
-                                        <?php _e( 'All Photos', 'tourfic' ) ?>
+                                        <?php esc_html_e( 'All Photos', 'tourfic' ) ?>
                                     </a>
                                     <?php foreach ( $gallery_ids as $key => $item ) :
                                         if ( $key < 4 ) {
@@ -314,7 +314,7 @@
                             </div>
                             <?php if ( count( tf_data_types( $meta['amenities'] ) ) > 10 ): ?>
                                 <div class="tf-apartment-amenities-more">
-                                    <a class="tf_button btn-styled tf-modal-btn" data-target="#tf-amenities-modal"><?php _e( 'Show all amenities', 'tourfic' ) ?></a>
+                                    <a class="tf_button btn-styled tf-modal-btn" data-target="#tf-amenities-modal"><?php esc_html_e( 'Show all amenities', 'tourfic' ) ?></a>
                                 </div>
 
                                 <!-- Modal -->
@@ -404,7 +404,7 @@
                                 }
                                 ?>
                             </ul>
-                            <a href="" id="tf-ask-question-trigger" class="tf_button btn-styled"><i class="far fa-comments"></i><?php _e( 'Contact Host', 'tourfic' ) ?></a>
+                            <a href="" id="tf-ask-question-trigger" class="tf_button btn-styled"><i class="far fa-comments"></i><?php esc_html_e( 'Contact Host', 'tourfic' ) ?></a>
                         </div>
                     </div>
                 </div>

@@ -2,7 +2,7 @@
     <table class="table" data-type='<?php echo $type ?>'>
         <thead>
         <tr>
-            <th><?php _e( 'Your Wishlist', 'tourfic' ) ?></th>
+            <th><?php esc_html_e( 'Your Wishlist', 'tourfic' ) ?></th>
         </tr>
         </thead>
         <tbody>

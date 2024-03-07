@@ -2,19 +2,19 @@
 <div class="tf-details-menu">
     <ul>
         <li><a class="tf-hashlink" href="#tf-tour-overview">
-            <?php _e("Overview", "tourfic"); ?>
+            <?php esc_html_e("Overview", "tourfic"); ?>
         </a></li>
         <li><a href="#tf-tour-itinerary">
-            <?php _e("Tour Plan", "tourfic"); ?>
+            <?php esc_html_e("Tour Plan", "tourfic"); ?>
         </a></li>
         <li><a href="#tf-tour-faq">
-            <?php _e("FAQ's", "tourfic"); ?>
+            <?php esc_html_e("FAQ's", "tourfic"); ?>
         </a></li>
         <li><a href="#tf-tour-policies">
-            <?php _e("Policies", "tourfic"); ?>
+            <?php esc_html_e("Policies", "tourfic"); ?>
         </a></li>
         <li><a href="#tf-tour-reviews">
-            <?php _e("Reviews", "tourfic"); ?>
+            <?php esc_html_e("Reviews", "tourfic"); ?>
         </a></li>
     </ul>
 </div>

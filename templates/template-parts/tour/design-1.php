@@ -100,7 +100,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                     </a>
                                     <div id="dropdown-share-center" class="share-tour-content">
                                         <div class="tf-dropdown-share-content">
-                                            <h4><?php _e( "Share with friends", "tourfic" ); ?></h4>
+                                            <h4><?php esc_html_e( "Share with friends", "tourfic" ); ?></h4>
                                             <ul>
                                                 <li>
                                                     <a href="http://www.facebook.com/share.php?u=<?php echo esc_url( $share_link ); ?>"
@@ -331,7 +331,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                     }
                                                 }
                                                 ?>
-                                                    <p> <span><?php _e("From","tourfic"); ?></span>
+                                                    <p> <span><?php esc_html_e("From","tourfic"); ?></span>
 
                                                     <?php
                                                     //get the lowest price from all available room price
@@ -373,7 +373,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         }
                                         ?>
 	                                    <?php if ($tf_booking_type == 2 && $tf_hide_booking_form == 1):?>
-                                            <a href="<?php echo esc_url($tf_booking_url) ?>" target="_blank" class="tf-btn-normal btn-primary" style="margin-top: 10px;"><?php _e('Book now', 'tourfic'); ?></a>
+                                            <a href="<?php echo esc_url($tf_booking_url) ?>" target="_blank" class="tf-btn-normal btn-primary" style="margin-top: 10px;"><?php esc_html_e('Book now', 'tourfic'); ?></a>
 	                                    <?php endif; ?>
                                     </div>
                                 </div>
@@ -551,7 +551,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                             }
 														}
 														?>
-                                                        <p><span><?php _e( "From", "tourfic" ); ?></span>
+                                                        <p><span><?php esc_html_e( "From", "tourfic" ); ?></span>
                                                         <?php
                                                             //get the lowest price from all available room price
                                                             $tf_tour_min_price      = !empty($tour_price) ? min( $tour_price ) : 0;
@@ -677,7 +677,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                 <img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) ) ? get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) : TF_ASSETS_APP_URL . '/images/feature-default.jpg'; ?>"
                                                     alt="">
                                                 <div class="tf-meta-data-price">
-                                                    <?php _e( "From", "tourfic" ); ?>
+                                                    <?php esc_html_e( "From", "tourfic" ); ?>
                                                     <span>
                                         <?php if ( $pricing_rule == 'group' ) {
                                             echo $tour_price->wc_sale_group ?? $tour_price->wc_group;

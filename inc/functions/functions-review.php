@@ -46,7 +46,7 @@ function tf_review_script() {
                         }
                     },
                     messages: {
-                        "tf_comment_meta[]": "' . __( "Please provide a ratings", "tourfic" ) . '",
+                        "tf_comment_meta[]": "' . esc_html__( "Please provide a ratings", "tourfic" ) . '",
                     },
                     errorElement: "span",
                     errorPlacement: function(error, element) {
@@ -80,16 +80,16 @@ if ( ! function_exists( 'tf_review_form' ) ) {
 		tf_get_review_fields( $fields );
 
 		//Declare Vars
-		$comment_send      = __( 'Submit', 'tourfic' );
-		$comment_reply     = __( 'Write a Review', 'tourfic' );
-		$comment_reply_to  = __( 'Reply', 'tourfic' );
-		$comment_author    = __( 'Your Name', 'tourfic' );
-		$comment_email     = __( 'Email Address', 'tourfic' );
-		$comment_body      = __( 'Review Description', 'tourfic' );
-		$comment_cookies_1 = __( ' By commenting you accept the', 'tourfic' );
-		$comment_cookies_2 = __( ' Privacy Policy', 'tourfic' );
-		$comment_before    = __( '', 'tourfic' );
-		$comment_cancel    = __( 'Cancel Reply', 'tourfic' );
+		$comment_send      = esc_html__( 'Submit', 'tourfic' );
+		$comment_reply     = esc_html__( 'Write a Review', 'tourfic' );
+		$comment_reply_to  = esc_html__( 'Reply', 'tourfic' );
+		$comment_author    = esc_html__( 'Your Name', 'tourfic' );
+		$comment_email     = esc_html__( 'Email Address', 'tourfic' );
+		$comment_body      = esc_html__( 'Review Description', 'tourfic' );
+		$comment_cookies_1 = esc_html__( ' By commenting you accept the', 'tourfic' );
+		$comment_cookies_2 = esc_html__( ' Privacy Policy', 'tourfic' );
+		$comment_before    = esc_html__( '', 'tourfic' );
+		$comment_cancel    = esc_html__( 'Cancel Reply', 'tourfic' );
 		$comment_meta      = tf_generate_review_meta_fields( $fields );
 		//Array
 		$comments_args = [
@@ -159,56 +159,56 @@ function tf_get_review_fields( &$fields, $type = null ) {
 	 */
 	$default_hotels_field     = [
 		array(
-			'r-field-type' => __( 'Staff', 'tourfic' ),
+			'r-field-type' => esc_html__( 'Staff', 'tourfic' ),
 		),
 		array(
-			'r-field-type' => __( 'Facilities', 'tourfic' ),
+			'r-field-type' => esc_html__( 'Facilities', 'tourfic' ),
 		),
 		array(
-			'r-field-type' => __( 'Cleanliness', 'tourfic' ),
+			'r-field-type' => esc_html__( 'Cleanliness', 'tourfic' ),
 		),
 		array(
-			'r-field-type' => __( 'Comfort', 'tourfic' ),
+			'r-field-type' => esc_html__( 'Comfort', 'tourfic' ),
 		),
 		array(
-			'r-field-type' => __( 'Value for money', 'tourfic' ),
+			'r-field-type' => esc_html__( 'Value for money', 'tourfic' ),
 		),
 		array(
-			'r-field-type' => __( 'Location', 'tourfic' ),
+			'r-field-type' => esc_html__( 'Location', 'tourfic' ),
 		),
 	];
 	$default_apartments_field = [
 		array(
-			'r-field-type' => __( 'Staff', 'tourfic' ),
+			'r-field-type' => esc_html__( 'Staff', 'tourfic' ),
 		),
 		array(
-			'r-field-type' => __( 'Facilities', 'tourfic' ),
+			'r-field-type' => esc_html__( 'Facilities', 'tourfic' ),
 		),
 		array(
-			'r-field-type' => __( 'Cleanliness', 'tourfic' ),
+			'r-field-type' => esc_html__( 'Cleanliness', 'tourfic' ),
 		),
 		array(
-			'r-field-type' => __( 'Comfort', 'tourfic' ),
+			'r-field-type' => esc_html__( 'Comfort', 'tourfic' ),
 		),
 		array(
-			'r-field-type' => __( 'Value for money', 'tourfic' ),
+			'r-field-type' => esc_html__( 'Value for money', 'tourfic' ),
 		),
 		array(
-			'r-field-type' => __( 'Location', 'tourfic' ),
+			'r-field-type' => esc_html__( 'Location', 'tourfic' ),
 		),
 	];
 	$default_tours_field      = [
 		array(
-			'r-field-type' => __( 'Guide', 'tourfic' ),
+			'r-field-type' => esc_html__( 'Guide', 'tourfic' ),
 		),
 		array(
-			'r-field-type' => __( 'Transportation', 'tourfic' ),
+			'r-field-type' => esc_html__( 'Transportation', 'tourfic' ),
 		),
 		array(
-			'r-field-type' => __( 'Value for money', 'tourfic' ),
+			'r-field-type' => esc_html__( 'Value for money', 'tourfic' ),
 		),
 		array(
-			'r-field-type' => __( 'Safety', 'tourfic' ),
+			'r-field-type' => esc_html__( 'Safety', 'tourfic' ),
 		),
 	];
 
@@ -523,19 +523,19 @@ function tf_archive_single_rating() {
 				?>
 				</div>
 				<div class="tf-avarage-review">
-				<?php _e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
+				<?php esc_html_e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
 				 (<?php tf_based_on_text( count( $comments ) ); ?>)
 				</div>
 			</div>
 		<?php } elseif( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-2" ) || ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-2" ) || ( "tf_apartment"==$tf_current_post && $tf_apartment_arc_selected_template=="design-1" ) ){ ?>
 			<span class="tf-available-rating-number">
-				<?php _e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
+				<?php esc_html_e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
 			</span>
 		<?php }else{ ?>
 			<div class="tf-archive-rating-wrapper">
 				<div class="tf-archive-rating">
 					<span>
-						<?php _e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
+						<?php esc_html_e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
 					</span>
 				</div>
 				<h6><?php tf_based_on_text( count( $comments ) ); ?></h6>
@@ -556,13 +556,13 @@ function tf_archive_single_rating() {
 				<i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>
 			</div>
 			<div class="tf-avarage-review">
-				<?php _e(" (No Review)", "tourfic"); ?>
+				<?php esc_html_e(" (No Review)", "tourfic"); ?>
 			</div>
 		</div>
 		<?php
 		} elseif( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-2" ) || ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-2" ) || ( "tf_apartment"==$tf_current_post && $tf_apartment_arc_selected_template=="design-1" ) ){ ?>
 			<span class="tf-available-rating-number">
-				<?php _e('0.0','tourfic'); ?>
+				<?php esc_html_e('0.0','tourfic'); ?>
 			</span>
 		<?php }
 	}
@@ -690,7 +690,7 @@ function tf_pending_review_notice( $post_id ) {
 				$comment_author_id = $comment->user_id;
 
 				if ( $comment->comment_approved === '0' && $logged_in_id == $comment_author_id ) {
-					return '<div class="tf-review-pending">' . __( "Your review is waiting for approval", "tourfic" ) . '</div>';
+					return '<div class="tf-review-pending">' . esc_html__( "Your review is waiting for approval", "tourfic" ) . '</div>';
 				}
 			}
 		}
@@ -703,7 +703,7 @@ function tf_pending_review_notice( $post_id ) {
 			foreach ( $comments as $comment ) {
 				$cookie_name = 'tf_review_' . $comment->comment_ID;
 				if ( $comment->comment_approved === '0' && isset( $_COOKIE[ $cookie_name ] ) ) {
-					return '<div class="tf-review-pending">' . __( "Your review is waiting for approval", "tourfic" ) . '</div>';
+					return '<div class="tf-review-pending">' . esc_html__( "Your review is waiting for approval", "tourfic" ) . '</div>';
 				} else {
 					return '';
 				}
@@ -719,11 +719,11 @@ function tf_pending_review_notice( $post_id ) {
 function tf_delete_old_review_fields_button() {
 	echo '
     <div class="csf-title">
-        <h4>' . __( "Delete Old Review Fields", "tourfic" ) . '</h4>
-        <div class="csf-subtitle-text">' . __( "Delete review fields that don't match with the present fields.<br><b style='color: red;'>Be aware! You will lose your old data!</b>", "tourfic" ) . '</div>
+        <h4>' . esc_html__( "Delete Old Review Fields", "tourfic" ) . '</h4>
+        <div class="csf-subtitle-text">' . esc_html__( "Delete review fields that don't match with the present fields.<br><b style='color: red;'>Be aware! You will lose your old data!</b>", "tourfic" ) . '</div>
     </div>
     <div class="csf-fieldset">
-        <button type="button" data-delete-all="no" class="button button-large csf-warning-primary tf-del-old-review-fields tf-order-remove">' . __( "Delete Fields", "tourfic" ) . '</button>
+        <button type="button" data-delete-all="no" class="button button-large csf-warning-primary tf-del-old-review-fields tf-order-remove">' . esc_html__( "Delete Fields", "tourfic" ) . '</button>
     </div>
     <div class="clear"></div>
     ';
@@ -736,11 +736,11 @@ function tf_delete_old_complete_review_button() {
 
 	echo '
     <div class="csf-title">
-        <h4>' . __( "Delete Old Reviews", "tourfic" ) . '</h4>
-        <div class="csf-subtitle-text">' . __( "Delete reviews that don't have any review (rating) fields.<br><b style='color: red;'>Be aware! You will lose your old data!</b>", "tourfic" ) . '</div>
+        <h4>' . esc_html__( "Delete Old Reviews", "tourfic" ) . '</h4>
+        <div class="csf-subtitle-text">' . esc_html__( "Delete reviews that don't have any review (rating) fields.<br><b style='color: red;'>Be aware! You will lose your old data!</b>", "tourfic" ) . '</div>
     </div>
     <div class="csf-fieldset">
-        <button type="button" data-delete-all="yes" class="button button-large csf-warning-primary tf-del-old-review-fields tf-order-remove">' . __( "Delete Reviews", "tourfic" ) . '</button>
+        <button type="button" data-delete-all="yes" class="button button-large csf-warning-primary tf-del-old-review-fields tf-order-remove">' . esc_html__( "Delete Reviews", "tourfic" ) . '</button>
     </div>
     <div class="clear"></div>
     ';

@@ -4,29 +4,29 @@
             <div class="tf-filter-options">
                 <div class="tf-order-status-filter">
                     <select class="tf-tour-filter-options tf-filter-bulk-option" name="tours">
-                        <option value=""><?php _e("Bulk action", "tourfic"); ?></option>
-                        <option value="trash"><?php _e("Trash", "tourfic"); ?></option>
-                        <option value="processing"><?php _e("Processing", "tourfic"); ?></option>
-                        <option value="on-hold"><?php _e("On Hold", "tourfic"); ?></option>
-                        <option value="completed"><?php _e("Complete", "tourfic"); ?></option>
-                        <option value="cancelled"><?php _e("Cancelled", "tourfic"); ?></option>
+                        <option value=""><?php esc_html_e("Bulk action", "tourfic"); ?></option>
+                        <option value="trash"><?php esc_html_e("Trash", "tourfic"); ?></option>
+                        <option value="processing"><?php esc_html_e("Processing", "tourfic"); ?></option>
+                        <option value="on-hold"><?php esc_html_e("On Hold", "tourfic"); ?></option>
+                        <option value="completed"><?php esc_html_e("Complete", "tourfic"); ?></option>
+                        <option value="cancelled"><?php esc_html_e("Cancelled", "tourfic"); ?></option>
                     </select>
                 </div>
             </div>
             <button class="tf-order-status-filter-btn">
-                <?php _e("Apply", "tourfic"); ?>
+                <?php esc_html_e("Apply", "tourfic"); ?>
             </button>
         </div>
 
         <div class="tf-filter-options">
             <div class="tf-order-status-filter">
                 <select class="tf-tour-filter-options tf-order-payment-status" name="tours">
-                    <option value=""><?php _e("Order status", "tourfic"); ?></option>
-                    <option value="processing" <?php echo !empty($_GET['payment']) && "processing"==$_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php _e("Processing", "tourfic"); ?></option>
-                    <option value="on-hold" <?php echo !empty($_GET['payment']) && "on-hold"==$_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php _e("On Hold", "tourfic"); ?></option>
-                    <option value="completed" <?php echo !empty($_GET['payment']) && "completed"==$_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php _e("Complete", "tourfic"); ?></option>
-                    <option value="cancelled" <?php echo !empty($_GET['payment']) && "cancelled"==$_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php _e("Cancelled", "tourfic"); ?></option>
-                    <option value="refunded" <?php echo !empty($_GET['payment']) && "refunded"==$_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php _e("Refund", "tourfic"); ?></option>
+                    <option value=""><?php esc_html_e("Order status", "tourfic"); ?></option>
+                    <option value="processing" <?php echo !empty($_GET['payment']) && "processing"==$_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e("Processing", "tourfic"); ?></option>
+                    <option value="on-hold" <?php echo !empty($_GET['payment']) && "on-hold"==$_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e("On Hold", "tourfic"); ?></option>
+                    <option value="completed" <?php echo !empty($_GET['payment']) && "completed"==$_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e("Complete", "tourfic"); ?></option>
+                    <option value="cancelled" <?php echo !empty($_GET['payment']) && "cancelled"==$_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e("Cancelled", "tourfic"); ?></option>
+                    <option value="refunded" <?php echo !empty($_GET['payment']) && "refunded"==$_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e("Refund", "tourfic"); ?></option>
                 </select>
             </div>
         </div>
@@ -34,9 +34,9 @@
         <div class="tf-filter-options">
             <div class="tf-order-status-filter">
                 <select class="tf-tour-checkinout-options" name="tours">
-                    <option value=""><?php _e("Checked in status", "tourfic"); ?></option>
-                    <option value="in" <?php echo !empty($_GET['checkinout']) && "in"==$_GET['checkinout'] ? esc_attr( 'selected' ) : ''; ?>><?php _e("Checked in", "tourfic"); ?></option>
-                    <option value="out" <?php echo !empty($_GET['checkinout']) && "out"==$_GET['checkinout'] ? esc_attr( 'selected' ) : ''; ?>><?php _e("Checked out", "tourfic"); ?></option>
+                    <option value=""><?php esc_html_e("Checked in status", "tourfic"); ?></option>
+                    <option value="in" <?php echo !empty($_GET['checkinout']) && "in"==$_GET['checkinout'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e("Checked in", "tourfic"); ?></option>
+                    <option value="out" <?php echo !empty($_GET['checkinout']) && "out"==$_GET['checkinout'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e("Checked out", "tourfic"); ?></option>
                 </select>
             </div>
         </div>
@@ -44,7 +44,7 @@
         <div class="tf-filter-options">
             <div class="tf-order-status-filter">
                 <select class="tf-tour-filter-options tf-post-id-filter-options" name="tours">
-                    <option value=""><?php _e("Tour name", "tourfic"); ?></option>
+                    <option value=""><?php esc_html_e("Tour name", "tourfic"); ?></option>
                     <?php 
                     $tftours_list = array(
                         'posts_per_page' => - 1,
@@ -85,25 +85,25 @@
                     </div>
                 </td>
                 <th id="order_id">
-                    <?php _e("ID", "tourfic"); ?>
+                    <?php esc_html_e("ID", "tourfic"); ?>
                 </th>
                 <th id="odetails">
-                    <?php _e("Tour name", "tourfic"); ?>
+                    <?php esc_html_e("Tour name", "tourfic"); ?>
                 </th>
                 <th id="cdetails">
-                    <?php _e("Customer details", "tourfic"); ?>
+                    <?php esc_html_e("Customer details", "tourfic"); ?>
                 </th>
                 <th id="odate">
-                    <?php _e("Booking date", "tourfic"); ?>
+                    <?php esc_html_e("Booking date", "tourfic"); ?>
                 </th>
                 <th id="ostatus">
-                    <?php _e("Order status", "tourfic"); ?>
+                    <?php esc_html_e("Order status", "tourfic"); ?>
                 </th>
                 <th id="check_status">
-                    <?php _e("Checked in status", "tourfic"); ?>
+                    <?php esc_html_e("Checked in status", "tourfic"); ?>
                 </th>
                 <th id="action">
-                    <?php _e("Action", "tourfic"); ?>
+                    <?php esc_html_e("Action", "tourfic"); ?>
                 </th>
             </tr>
         </thead>
@@ -181,7 +181,7 @@
                 <tr class="pro-row" style="text-align: center; background-color: #ededf8">
                     <td colspan="8" style="text-align: center;">
                         <a href="https://tourfic.com/" target="_blank">
-                            <h3 class="tf-admin-btn tf-btn-secondary" style="color:#fff;margin: 15px 0;"><?php _e( 'Upgrade to Pro Version to See More', 'tourfic' ); ?></h3>
+                            <h3 class="tf-admin-btn tf-btn-secondary" style="color:#fff;margin: 15px 0;"><?php esc_html_e( 'Upgrade to Pro Version to See More', 'tourfic' ); ?></h3>
                         </a>
                     </td>
                 </tr>
@@ -194,7 +194,7 @@
                         <?php if(!empty($paged) && $paged>=2){ ?>
                             <li><a href="<?php echo tf_booking_details_pagination( $paged-1 ); ?>"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M15.8333 10.0001H4.16663M4.16663 10.0001L9.99996 15.8334M4.16663 10.0001L9.99996 4.16675" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg><?php _e("Previous", "tourfic"); ?></a></li>
+                            </svg><?php esc_html_e("Previous", "tourfic"); ?></a></li>
                         <?php } 
                         if(!empty($total_pages) && $total_pages > 1){
                         for ($i=1; $i<=$total_pages; $i++) {
@@ -210,7 +210,7 @@
                         <?php } } }
                         if(!empty($total_pages) && !empty($paged) && $paged < $total_pages){
                         ?>
-                            <li><a href="<?php echo tf_booking_details_pagination( $paged+1 ); ?>"><?php _e("Next", "tourfic"); ?> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <li><a href="<?php echo tf_booking_details_pagination( $paged+1 ); ?>"><?php esc_html_e("Next", "tourfic"); ?> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M4.16669 10.0001H15.8334M15.8334 10.0001L10 4.16675M15.8334 10.0001L10 15.8334" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg></a></li>
                         <?php } ?>

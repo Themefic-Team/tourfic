@@ -27,9 +27,9 @@ function tf_documentation_page_integration() {
 	$tfhoteldocumentation = sanitize_url( 'https://themefic.com/docs/tourfic/' );
 	$tftourdocumentation  = sanitize_url( 'https://themefic.com/docs/tourfic/' );
 	if ( $tf_current_role == "administrator" ) {
-		$submenu['edit.php?post_type=tf_hotel'][]     = array( sprintf( '<span class="tf-go-docs" style=color:#ffba00;">%s</span>', __( 'Go to Documentation', 'tourfic' ) ), 'edit_tf_hotels', $tfhoteldocumentation );
-		$submenu['edit.php?post_type=tf_apartment'][] = array( sprintf( '<span class="tf-go-docs" style=color:#ffba00;">%s</span>', __( 'Go to Documentation', 'tourfic' ) ), 'edit_tf_apartments', $tfhoteldocumentation );
-		$submenu['edit.php?post_type=tf_tours'][]     = array( sprintf( '<span class="tf-go-docs" style=color:#ffba00;">%s</span>', __( 'Go to Documentation', 'tourfic' ) ), 'edit_tf_tourss', $tftourdocumentation );
+		$submenu['edit.php?post_type=tf_hotel'][]     = array( sprintf( '<span class="tf-go-docs" style=color:#ffba00;">%s</span>', esc_html__( 'Go to Documentation', 'tourfic' ) ), 'edit_tf_hotels', $tfhoteldocumentation );
+		$submenu['edit.php?post_type=tf_apartment'][] = array( sprintf( '<span class="tf-go-docs" style=color:#ffba00;">%s</span>', esc_html__( 'Go to Documentation', 'tourfic' ) ), 'edit_tf_apartments', $tfhoteldocumentation );
+		$submenu['edit.php?post_type=tf_tours'][]     = array( sprintf( '<span class="tf-go-docs" style=color:#ffba00;">%s</span>', esc_html__( 'Go to Documentation', 'tourfic' ) ), 'edit_tf_tourss', $tftourdocumentation );
 	}
 }
 
@@ -45,9 +45,9 @@ function tf_hotel_tour_docs() {
 	global $current_user;
 	$tf_current_role = $current_user->roles[0];
 	if ( $tf_current_role == "administrator" ) {
-		add_meta_box( 'tfhotel_docs', __( 'Tourfic Documentation', 'tourfic' ), 'tf_hotel_docs_callback', 'tf_hotel', 'side', 'high' );
-		add_meta_box( 'tfapartment_docs', __( 'Tourfic Documantation', 'tourfic' ), 'tf_apartment_docs_callback', 'tf_apartment', 'side', 'high' );
-		add_meta_box( 'tftour_docs', __( 'Tourfic Documentation', 'tourfic' ), 'tf_tour_docs_callback', 'tf_tours', 'side', 'high' );
+		add_meta_box( 'tfhotel_docs', esc_html__( 'Tourfic Documentation', 'tourfic' ), 'tf_hotel_docs_callback', 'tf_hotel', 'side', 'high' );
+		add_meta_box( 'tfapartment_docs', esc_html__( 'Tourfic Documantation', 'tourfic' ), 'tf_apartment_docs_callback', 'tf_apartment', 'side', 'high' );
+		add_meta_box( 'tftour_docs', esc_html__( 'Tourfic Documentation', 'tourfic' ), 'tf_tour_docs_callback', 'tf_tours', 'side', 'high' );
 
 		add_filter( 'get_user_option_meta-box-order_tf_tours', 'tour_metabox_order' );
 		add_filter( 'get_user_option_meta-box-order_tf_apartment', 'apartment_metabox_order' );
@@ -62,7 +62,7 @@ function tf_hotel_docs_callback() {
 	?>
     <div class="tf_docs_preview">
         <a href="<?php echo $tfhoteldocumentation; ?>" target="_blank">
-			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
+			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
 		</a>
     </div>
 	<?php
@@ -74,7 +74,7 @@ function tf_apartment_docs_callback() {
 	?>
     <div class="tf_docs_preview">
         <a href="<?php echo $tf_apartment_documentation; ?>" target="_blank">
-			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
+			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
 		</a>
     </div>
 	<?php
@@ -85,7 +85,7 @@ function tf_tour_docs_callback() {
 	?>
     <div class="tf_docs_preview">
         <a href="<?php echo $tf_tour_documentation; ?>" target="_blank">
-			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo __( 'Go to Documentation', 'tourfic' ); ?>">
+			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
 		</a>
     </div>
 	<?php
@@ -283,7 +283,7 @@ function tourfic_ask_question() {
         <div class="tf-aq-outer">
             <span class="close-aq">&times;</span>
             <div class="tf-aq-inner">
-                <h4><?php _e( 'Submit your question', 'tourfic' ); ?></h4>
+                <h4><?php esc_html_e( 'Submit your question', 'tourfic' ); ?></h4>
                 <form id="ask-question" action="" method="post">
                     <div class="tf-aq-field">
                         <input type="text" name="your-name" placeholder="<?php esc_attr_e( 'Your Name', 'tourfic' ); ?>" required/>
@@ -319,7 +319,7 @@ function tourfic_ask_question_ajax() {
 
 	if ( ! check_ajax_referer( 'ask_question_nonce' ) ) {
 		$response['status'] = 'error';
-		$response['msg']    = __( 'Security error! Reload the page and try again.', 'tourfic' );
+		$response['msg']    = esc_html__( 'Security error! Reload the page and try again.', 'tourfic' );
 		echo json_encode( $response );
 		wp_die();
 	}
@@ -392,7 +392,7 @@ function tourfic_ask_question_ajax() {
 		}
 	}
 
-	$subject     = sprintf( __( 'Someone asked question on: %s', 'tourfic' ), $post_title );
+	$subject     = sprintf( esc_html__( 'Someone asked question on: %s', 'tourfic' ), $post_title );
 	$message     = "{$question}";
 	$headers[]   = 'Reply-To: ' . $name . ' <' . $email . '>';
 	$attachments = array();
@@ -400,10 +400,10 @@ function tourfic_ask_question_ajax() {
 
 	if ( wp_mail( $send_email_to, $subject, $message, $headers, $attachments ) ) {
 		$response['status'] = 'sent';
-		$response['msg']    = __( 'Your question has been sent!', 'tourfic' );
+		$response['msg']    = esc_html__( 'Your question has been sent!', 'tourfic' );
 	} else {
 		$response['status'] = 'error';
-		$response['msg']    = __( 'Message sent failed!', 'tourfic' );
+		$response['msg']    = esc_html__( 'Message sent failed!', 'tourfic' );
 	}
 
 	echo json_encode( $response );
@@ -613,16 +613,16 @@ if ( ! function_exists( 'tf_get_deposit_amount' ) ) {
  */
 if ( ! function_exists( 'tf_extra_user_profile_fields' ) ) {
 	function tf_extra_user_profile_fields( $user ) { ?>
-        <h3><?php _e( 'Tourfic Extra profile information', 'tourfic' ); ?></h3>
+        <h3><?php esc_html_e( 'Tourfic Extra profile information', 'tourfic' ); ?></h3>
 
         <table class="form-table">
             <tr>
-                <th><label for="language"><?php _e( 'Language', 'tourfic' ); ?></label></th>
+                <th><label for="language"><?php esc_html_e( 'Language', 'tourfic' ); ?></label></th>
                 <td>
                     <input type="text" name="language" id="language"
                            value="<?php echo esc_attr( get_the_author_meta( 'language', $user->ID ) ); ?>"
                            class="regular-text"/><br/>
-                    <span class="description"><?php _e( "Please enter your languages. Example: Bangla, English, Hindi" ); ?></span>
+                    <span class="description"><?php esc_html_e( "Please enter your languages. Example: Bangla, English, Hindi" ); ?></span>
                 </td>
             </tr>
         </table>
