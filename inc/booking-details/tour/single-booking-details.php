@@ -270,7 +270,7 @@
                                     if("array"!=gettype($visitor->$field_key)){
                                         echo esc_html( $visitor->$field_key );
                                     }else{
-                                        echo implode(",", $visitor->$field_key );
+                                        echo esc_html( implode(",", $visitor->$field_key ) );
                                     }
                                     ?>
                                     </td>

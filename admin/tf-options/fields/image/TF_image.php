@@ -13,7 +13,7 @@ if ( ! class_exists( 'TF_image' ) ) {
 		}
 
 		public function render() {
-			echo '<div class="tf-fieldset-media-preview tf-fieldset-media-preview ' . str_replace(array("[","]","-"),"_",esc_attr( $this->field_name() ) ) . '">';
+			echo '<div class="tf-fieldset-media-preview tf-fieldset-media-preview ' . esc_attr( str_replace(array("[","]","-"),"_",esc_attr( $this->field_name() ) ) ) . '">';
 			if(!empty($this->value)){
 			echo '<div class="tf-image-close" tf-field-name='. esc_attr( $this->field_name() ) .'>✖</div><img src='. esc_url($this->value) . ' />
 			';
