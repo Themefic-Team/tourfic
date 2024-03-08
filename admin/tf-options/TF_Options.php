@@ -487,7 +487,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			}
 			?>
 
-            <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?> <?php echo ! empty( $visible ) ? $visible : ''; ?>" <?php echo ! empty( $depend ) ? $depend : ''; ?>
+            <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?> <?php echo ! empty( $visible ) ? wp_kses_post($visible) : ''; ?>" <?php echo ! empty( $depend ) ? wp_kses_post($depend) : ''; ?>
                  style="<?php echo esc_attr( $field_style ); ?>">
 
 				<?php if ( ! empty( $field['label'] ) ): ?>
