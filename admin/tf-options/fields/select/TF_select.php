@@ -36,12 +36,12 @@ if ( ! class_exists( 'TF_select' ) ) {
 			}
 
 			$class = 'tf-select';
-			if (preg_match('/class="([^"]*)"/', $this->field_attributes(), $matches)) {
+			if (preg_match('/class="([^"]*)"/', wp_kses_post($this->field_attributes()), $matches)) {
 				$class_attribute_value = $matches[1];
 				$class = $class . ' ' . $class_attribute_value;
 			}
 
-			echo '<select name="' . $this->field_name() . '" id="' . esc_attr( $this->field_name() ) . '" data-depend-id="' . esc_attr( $this->field['id'] ) . '' . $this->parent_field . '" class="'. esc_attr($class) .'" ' . $this->field_attributes() .'>';
+			echo '<select name="' . $this->field_name() . '" id="' . esc_attr( $this->field_name() ) . '" data-depend-id="' . esc_attr( $this->field['id'] ) . '' . $this->parent_field . '" class="'. esc_attr($class) .'" ' . wp_kses_post($this->field_attributes()) .'>';
 			if ( ! empty( $this->field['placeholder'] ) ) {
 				echo '<option value="">' . esc_html( $this->field['placeholder'] ) . '</option>';
 			}

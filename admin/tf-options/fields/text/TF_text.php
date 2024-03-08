@@ -16,7 +16,7 @@ if ( ! class_exists( 'TF_text' ) ) {
 				//remove special characters, replace space with underscore and convert to lowercase
 				$this->value = sanitize_title( str_replace( ' ', '_', strtolower( $this->value ) ) );
 			}
-			echo '<input type="' . esc_attr( $type ) . '" name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr( $this->value ) . '" ' . $placeholder . ' ' . $this->field_attributes() . '/>';
+			echo '<input type="' . esc_attr( $type ) . '" name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr( $this->value ) . '" ' . $placeholder . ' ' . wp_kses_post($this->field_attributes()) . '/>';
 
 			if ( isset( $this->field['button_text'] ) && ! empty( $this->field['button_text'] ) ) {
 				$button_id = isset( $this->field['button_id'] ) ? 'id="' . $this->field['button_id'] . '"' : '';

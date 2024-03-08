@@ -33,7 +33,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 
 		function tf_hotel_backend_booking_button() {
 			?>
-            <a href="<?php echo admin_url( 'edit.php?post_type=tf_hotel&page=tf-hotel-backend-booking' ); ?>" class="button button-primary tf-booking-btn"><?php _e( 'Add New Booking', 'tourfic' ); ?></a>
+            <a href="<?php echo admin_url( 'edit.php?post_type=tf_hotel&page=tf-hotel-backend-booking' ); ?>" class="button button-primary tf-booking-btn"><?php esc_html_e( 'Add New Booking', 'tourfic' ); ?></a>
 			<?php
 		}
 
@@ -45,8 +45,8 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 			$tf_hotel_parentmenu = !empty($_GET['page']) && "tf-hotel-backend-booking"==$_GET['page'] ? 'edit.php?post_type=tf_hotel' : '';
 			add_submenu_page(
 				$tf_hotel_parentmenu,
-				__( 'Add New Booking', 'tourfic' ),
-				__( 'Add New Booking', 'tourfic' ),
+				esc_html__( 'Add New Booking', 'tourfic' ),
+				esc_html__( 'Add New Booking', 'tourfic' ),
 				'edit_tf_hotels',
 				'tf-hotel-backend-booking',
 				array( $this, 'tf_backend_booking_page' ),
@@ -62,7 +62,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 			tf_dashboard_header()
 			?>
             <form method="post" action="" class="tf-backend-hotel-booking" enctype="multipart/form-data">
-                <h1><?php _e( 'Add New Hotel Booking', 'tourfic' ); ?></h1>
+                <h1><?php esc_html_e( 'Add New Hotel Booking', 'tourfic' ); ?></h1>
 				<?php
 				$tf_backend_booking_form_fields = $this->tf_backend_booking_form_fields();
 				foreach ( $tf_backend_booking_form_fields as $id => $tf_backend_booking_form_field ) : ?>
@@ -91,7 +91,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 
                 <!-- Footer -->
                 <div class="tf-backend-booking-footer">
-                    <button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn" id="tf-backend-hotel-book-btn"><?php _e( 'Book Now', 'tourfic' ); ?></button>
+                    <button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn" id="tf-backend-hotel-book-btn"><?php esc_html_e( 'Book Now', 'tourfic' ); ?></button>
                 </div>
             </form>
 			<?php
@@ -106,11 +106,11 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 			$current_user = wp_get_current_user();
 			$fields       = array(
 				'tf_booking_customer_fields' => array(
-					'title'  => __( 'Customer Information', 'tourfic' ),
+					'title'  => esc_html__( 'Customer Information', 'tourfic' ),
 					'fields' => array(
 						array(
 							'id'         => 'tf_hotel_booked_by',
-							'label'      => __( 'Booked By', 'tourfic' ),
+							'label'      => esc_html__( 'Booked By', 'tourfic' ),
 							'type'       => 'text',
 							'default'    => $current_user->display_name ?: $current_user->user_login,
 							'attributes' => array(
@@ -119,82 +119,82 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 						),
 						array(
 							'id'          => 'tf_customer_first_name',
-							'label'       => __( 'First Name', 'tourfic' ),
+							'label'       => esc_html__( 'First Name', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer First Name', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer First Name', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
 							'id'          => 'tf_customer_last_name',
-							'label'       => __( 'Last Name', 'tourfic' ),
+							'label'       => esc_html__( 'Last Name', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Last Name', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Last Name', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
 							'id'          => 'tf_customer_email',
-							'label'       => __( 'Email', 'tourfic' ),
+							'label'       => esc_html__( 'Email', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Email', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Email', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
 							'id'          => 'tf_customer_phone',
-							'label'       => __( 'Phone', 'tourfic' ),
+							'label'       => esc_html__( 'Phone', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Phone', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Phone', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
 							'id'          => 'tf_customer_country',
-							'label'       => __( 'Country / Region', 'tourfic' ),
+							'label'       => esc_html__( 'Country / Region', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Country', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Country', 'tourfic' ),
 							'field_width' => 33.33,
 						),
 						array(
 							'id'          => 'tf_customer_address',
-							'label'       => __( 'Address', 'tourfic' ),
+							'label'       => esc_html__( 'Address', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Address', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Address', 'tourfic' ),
 							'field_width' => 33.33,
 						),
 						array(
 							'id'          => 'tf_customer_address_2',
-							'label'       => __( 'Address 2', 'tourfic' ),
+							'label'       => esc_html__( 'Address 2', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Address 2', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Address 2', 'tourfic' ),
 							'field_width' => 33.33,
 						),
 						array(
 							'id'          => 'tf_customer_city',
-							'label'       => __( 'Town / City', 'tourfic' ),
+							'label'       => esc_html__( 'Town / City', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer City', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer City', 'tourfic' ),
 							'field_width' => 33,
 						),
 						array(
 							'id'          => 'tf_customer_state',
-							'label'       => __( 'State', 'tourfic' ),
+							'label'       => esc_html__( 'State', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer State', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer State', 'tourfic' ),
 							'field_width' => 33,
 						),
 						array(
 							'id'          => 'tf_customer_zip',
-							'label'       => __( 'Postcode / ZIP', 'tourfic' ),
+							'label'       => esc_html__( 'Postcode / ZIP', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Zip', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Zip', 'tourfic' ),
 							'field_width' => 33,
 						),
 					),
 				),
 				'tf_booking_fields'          => array(
-					'title'  => __( 'Booking Information', 'tourfic' ),
+					'title'  => esc_html__( 'Booking Information', 'tourfic' ),
 					'fields' => array(
 						array(
 							'id'      => 'tf_hotel_date',
-							'label'   => __( 'Date', 'tourfic' ),
+							'label'   => esc_html__( 'Date', 'tourfic' ),
 							'type'    => 'date',
 							'format'  => 'Y/m/d',
 							'range'   => true,
@@ -202,7 +202,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 						),
 						array(
 							'id'          => 'tf_available_hotels',
-							'label'       => __( 'Available Hotels', 'tourfic' ),
+							'label'       => esc_html__( 'Available Hotels', 'tourfic' ),
 							'type'        => 'select2',
 							'options'     => 'posts',
 							'query_args'  => array(
@@ -214,20 +214,20 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 						),
 						array(
 							'id'          => 'tf_hotel_service_type',
-							'label'       => __( 'Service Type', 'tourfic' ),
+							'label'       => esc_html__( 'Service Type', 'tourfic' ),
 							'type'        => 'select',
 							'options'     => array(
-								'pickup'  => __( 'Pickup Service', 'tourfic' ),
-								'dropoff' => __( 'Drop-off Service', 'tourfic' ),
-								'both'    => __( 'Pickup & Drop-off Service', 'tourfic' ),
+								'pickup'  => esc_html__( 'Pickup Service', 'tourfic' ),
+								'dropoff' => esc_html__( 'Drop-off Service', 'tourfic' ),
+								'both'    => esc_html__( 'Pickup & Drop-off Service', 'tourfic' ),
 							),
-							'placeholder' => __( 'Select Service Type', 'tourfic' ),
+							'placeholder' => esc_html__( 'Select Service Type', 'tourfic' ),
 							'field_width' => 50,
 							'is_pro'      => true
 						),
 						array(
 							'id'          => 'tf_available_rooms',
-							'label'       => __( 'Available Rooms', 'tourfic' ),
+							'label'       => esc_html__( 'Available Rooms', 'tourfic' ),
 							'type'        => 'select2',
 							'options'     => 'posts',
 							'attributes'  => array(
@@ -237,20 +237,20 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 						),
 						array(
 							'id'          => 'tf_hotel_rooms_number',
-							'label'       => __( 'Number of Rooms', 'tourfic' ),
+							'label'       => esc_html__( 'Number of Rooms', 'tourfic' ),
 							'type'        => 'select',
 							'options'     => array(
-								'1' => __( '1 Room', 'tourfic' ),
-								'2' => __( '2 Rooms', 'tourfic' ),
-								'3' => __( '3 Rooms', 'tourfic' ),
-								'4' => __( '4 Rooms', 'tourfic' ),
-								'5' => __( '5 Rooms', 'tourfic' ),
+								'1' => esc_html__( '1 Room', 'tourfic' ),
+								'2' => esc_html__( '2 Rooms', 'tourfic' ),
+								'3' => esc_html__( '3 Rooms', 'tourfic' ),
+								'4' => esc_html__( '4 Rooms', 'tourfic' ),
+								'5' => esc_html__( '5 Rooms', 'tourfic' ),
 							),
 							'field_width' => 50,
 						),
 						array(
 							'id'          => 'tf_hotel_adults_number',
-							'label'       => __( 'Adults', 'tourfic' ),
+							'label'       => esc_html__( 'Adults', 'tourfic' ),
 							'type'        => 'number',
 							'attributes'  => array(
 								'min' => '0',
@@ -259,7 +259,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 						),
 						array(
 							'id'          => 'tf_hotel_children_number',
-							'label'       => __( 'Children', 'tourfic' ),
+							'label'       => esc_html__( 'Children', 'tourfic' ),
 							'type'        => 'number',
 							'attributes'  => array(
 								'min' => '0',
@@ -395,20 +395,20 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 
 			//hotel service
 			$hotel_services      = array(
-				'' => __( 'Select Service Type', 'tourfic' )
+				'' => esc_html__( 'Select Service Type', 'tourfic' )
 			);
 			$hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 			$hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
 			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $hotel_service_avail ) && ! empty( $hotel_service_type ) ) {
 				foreach ( $hotel_service_type as $single_service_type ) {
 					if ( "pickup" == $single_service_type ) {
-						$hotel_services['pickup'] = __( 'Pickup Service', 'tourfic' );
+						$hotel_services['pickup'] = esc_html__( 'Pickup Service', 'tourfic' );
 					}
 					if ( "dropoff" == $single_service_type ) {
-						$hotel_services['dropoff'] = __( 'Drop-off Service', 'tourfic' );
+						$hotel_services['dropoff'] = esc_html__( 'Drop-off Service', 'tourfic' );
 					}
 					if ( "both" == $single_service_type ) {
-						$hotel_services['both'] = __( 'Pickup & Drop-off Service', 'tourfic' );
+						$hotel_services['both'] = esc_html__( 'Pickup & Drop-off Service', 'tourfic' );
 					}
 				}
 			}
@@ -526,7 +526,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 			} else {
 
 				wp_send_json_error( array(
-					'message' => __( 'Something went wrong!', 'tourfic' ),
+					'message' => esc_html__( 'Something went wrong!', 'tourfic' ),
 				) );
 
 			}
@@ -569,19 +569,19 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 			);
 
 			if ( ! isset( $field['tf_backend_booking_nonce'] ) || ! wp_verify_nonce( $field['tf_backend_booking_nonce'], 'tf_backend_booking_nonce_action' ) ) {
-				$response['message'] = __( 'Sorry, your nonce did not verify.', 'tourfic' );
+				$response['message'] = esc_html__( 'Sorry, your nonce did not verify.', 'tourfic' );
 			} else {
 				foreach ( $required_fields as $required_field ) {
 					if ( $required_field === 'tf_hotel_date' ) {
 						if ( empty( $field[ $required_field ]['from'] ) ) {
-							$response['fieldErrors'][ $required_field . '[from]_error' ] = __( 'The field is required', 'tourfic' );
+							$response['fieldErrors'][ $required_field . '[from]_error' ] = esc_html__( 'The field is required', 'tourfic' );
 						}
 						if ( empty( $field[ $required_field ]['to'] ) ) {
-							$response['fieldErrors'][ $required_field . '[to]_error' ] = __( 'The field is required', 'tourfic' );
+							$response['fieldErrors'][ $required_field . '[to]_error' ] = esc_html__( 'The field is required', 'tourfic' );
 						}
 					} else {
 						if ( empty( $field[ $required_field ] ) ) {
-							$response['fieldErrors'][ $required_field . '_error' ] = __( 'The field is required', 'tourfic' );
+							$response['fieldErrors'][ $required_field . '_error' ] = esc_html__( 'The field is required', 'tourfic' );
 						}
 					}
 				}
@@ -589,10 +589,10 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 				$room_data = $this->tf_get_room_data( intval( $field['tf_available_hotels'] ), $field['tf_available_rooms'] );
 
 				if ( $field['tf_hotel_rooms_number'] * $room_data['adult'] < $field['tf_hotel_adults_number'] ) {
-					$response['fieldErrors']['tf_hotel_adults_number_error'] = __( "You can't book more than " . $field['tf_hotel_rooms_number'] * $room_data['adult'] . " adults", 'tourfic' );
+					$response['fieldErrors']['tf_hotel_adults_number_error'] = esc_html__( "You can't book more than " . $field['tf_hotel_rooms_number'] * $room_data['adult'] . " adults", 'tourfic' );
 				}
 				if ( $field['tf_hotel_rooms_number'] * $room_data['child'] < $field['tf_hotel_children_number'] ) {
-					$response['fieldErrors']['tf_hotel_children_number_error'] = __( "You can't book more than " . $field['tf_hotel_rooms_number'] * $room_data['child'] . " children", 'tourfic' );
+					$response['fieldErrors']['tf_hotel_children_number_error'] = esc_html__( "You can't book more than " . $field['tf_hotel_rooms_number'] * $room_data['child'] . " children", 'tourfic' );
 				}
 
 				if ( ! $response['fieldErrors'] ) {
@@ -655,7 +655,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 					tf_set_order( $order_data );
 
 					$response['success'] = true;
-					$response['message'] = __( 'Your booking has been successfully submitted.', 'tourfic' );
+					$response['message'] = esc_html__( 'Your booking has been successfully submitted.', 'tourfic' );
 				}
 			}
 
@@ -784,7 +784,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 						$price_total       += $airport_service_price_total;
 						if ( $child != 0 ) {
 
-							$air_service_info = sprintf( __( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s ) = %5$s', 'tourfic' ),
+							$air_service_info = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s ) = %5$s', 'tourfic' ),
 								$adult,
 								strip_tags( wc_price( $service_adult_fee ) ),
 								$child,
@@ -793,7 +793,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 							);
 
 						} else {
-							$air_service_info = sprintf( __( 'Adult ( %1$s × %2$s ) = %3$s', 'tourfic' ),
+							$air_service_info = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) = %3$s', 'tourfic' ),
 								$adult,
 								strip_tags( wc_price( $service_adult_fee ) ),
 								strip_tags( wc_price( $airport_service_price_total ) )
@@ -805,7 +805,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 						$airport_service_price_total = ! empty( $airport_pickup_price['airport_service_fee_fixed'] ) ? $airport_pickup_price['airport_service_fee_fixed'] : 0;
 						$air_service_price           = $airport_service_price_total;
 						$price_total                 += $airport_service_price_total;
-						$air_service_info            = sprintf( __( '( Fixed ) = %1$s', 'tourfic' ),
+						$air_service_info            = sprintf( esc_html__( '( Fixed ) = %1$s', 'tourfic' ),
 							strip_tags( wc_price( $airport_service_price_total ) )
 						);
 					}
@@ -832,7 +832,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 						$air_service_price = $airport_service_price_total;
 						$price_total       += $airport_service_price_total;
 						if ( $child != 0 ) {
-							$air_service_info = sprintf( __( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s ) = %5$s', 'tourfic' ),
+							$air_service_info = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s ) = %5$s', 'tourfic' ),
 								$adult,
 								strip_tags( wc_price( $service_adult_fee ) ),
 								$child,
@@ -841,7 +841,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 							);
 
 						} else {
-							$air_service_info = sprintf( __( 'Adult ( %1$s × %2$s ) = %3$s', 'tourfic' ),
+							$air_service_info = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) = %3$s', 'tourfic' ),
 								$adult,
 								strip_tags( wc_price( $service_adult_fee ) ),
 								strip_tags( wc_price( $airport_service_price_total ) )
@@ -853,7 +853,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 						$airport_service_price_total = ! empty( $airport_pickup_price['airport_service_fee_fixed'] ) ? $airport_pickup_price['airport_service_fee_fixed'] : 0;
 						$air_service_price           = $airport_service_price_total;
 						$price_total                 += $airport_service_price_total;
-						$air_service_info            = sprintf( __( '( Fixed ) = %1$s', 'tourfic' ),
+						$air_service_info            = sprintf( esc_html__( '( Fixed ) = %1$s', 'tourfic' ),
 							strip_tags( wc_price( $airport_service_price_total ) )
 						);
 					}
@@ -881,7 +881,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 						$price_total       += $airport_service_price_total;
 						if ( $child != 0 ) {
 
-							$air_service_info = sprintf( __( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s ) = %5$s', 'tourfic' ),
+							$air_service_info = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s ) = %5$s', 'tourfic' ),
 								$adult,
 								strip_tags( wc_price( $service_adult_fee ) ),
 								$child,
@@ -890,7 +890,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 							);
 
 						} else {
-							$air_service_info = sprintf( __( 'Adult ( %1$s × %2$s ) = %3$s', 'tourfic' ),
+							$air_service_info = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) = %3$s', 'tourfic' ),
 								$adult,
 								strip_tags( wc_price( $service_adult_fee ) ),
 								strip_tags( wc_price( $airport_service_price_total ) )
@@ -902,7 +902,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 						$airport_service_price_total = ! empty( $airport_pickup_price['airport_service_fee_fixed'] ) ? $airport_pickup_price['airport_service_fee_fixed'] : 0;
 						$air_service_price           = $airport_service_price_total;
 						$price_total                 += $airport_service_price_total;
-						$air_service_info            = sprintf( __( '( Fixed ) = %1$s', 'tourfic' ),
+						$air_service_info            = sprintf( esc_html__( '( Fixed ) = %1$s', 'tourfic' ),
 							strip_tags( wc_price( $airport_service_price_total ) )
 						);
 					}

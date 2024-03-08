@@ -5,7 +5,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M15 18L9 12L15 6" stroke="#003C79" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-                <?php _e("Back", "tourfic"); ?>
+                <?php esc_html_e("Back", "tourfic"); ?>
             </a>
         </div>
         <input type="hidden" id="tf_email_order_id" value="<?php echo !empty($_GET['order_id']) ? esc_html( $_GET['order_id'] ) : ''; ?>">
@@ -18,11 +18,11 @@
         </div>
         <div class="tf-booking-id-author">
             <ul>
-                <li><?php _e("Booking ID", "tourfic"); ?>: #<?php echo esc_html( $tf_order_details->order_id ); ?></li>
+                <li><?php esc_html_e("Booking ID", "tourfic"); ?>: #<?php echo esc_html( $tf_order_details->order_id ); ?></li>
                 <li>|</li>
-                <li><?php _e("Booking created", "tourfic"); ?>: <?php echo date('F d, Y',strtotime($tf_order_details->order_date)); ?></li>
+                <li><?php esc_html_e("Booking created", "tourfic"); ?>: <?php echo date('F d, Y',strtotime($tf_order_details->order_date)); ?></li>
                 <li>|</li>
-                <li><?php _e("Booking by", "tourfic"); ?>: <span style="text-transform: capitalize;">
+                <li><?php esc_html_e("Booking by", "tourfic"); ?>: <span style="text-transform: capitalize;">
                 <?php 
                     $tf_booking_by = get_user_by('id', $tf_order_details->customer_id);
                     if("offline"==$tf_order_details->payment_method && empty($tf_booking_by)){
@@ -42,14 +42,14 @@
             <!-- Booking Details -->
             <div class="customers-order-date details-box">
                 <h4>
-                    <?php _e("Booking details", "tourfic"); ?>
+                    <?php esc_html_e("Booking details", "tourfic"); ?>
                 </h4>
                 <div class="tf-grid-box tf-customer-details-boxs">
                     <?php
                     $tf_billing_details = json_decode($tf_order_details->billing_details);
                     if(!empty($tf_billing_details)){ ?>
                     <div class="tf-grid-single">
-                        <h3><?php _e("Customer details", "tourfic"); ?></h3>
+                        <h3><?php esc_html_e("Customer details", "tourfic"); ?></h3>
                         <div class="tf-single-box">
                             <table class="table" cellpadding="0" callspacing="0">
                                 <?php 
@@ -68,24 +68,24 @@
                     $tf_tour_details = json_decode($tf_order_details->order_details);
                     if(!empty( $tf_tour_details )){ ?>
                     <div class="tf-grid-single">
-                        <h3><?php _e("Other details", "tourfic"); ?></h3>
+                        <h3><?php esc_html_e("Other details", "tourfic"); ?></h3>
                         <div class="tf-single-box">
                             <table class="table">
                                 <?php if ( !empty($tf_tour_details->tour_date) ) { ?>
                                 <tr>
-                                    <th><?php _e("Tour Date", "tourfic"); ?></th>
+                                    <th><?php esc_html_e("Tour Date", "tourfic"); ?></th>
                                     <td>:</td>
                                     <td><?php echo esc_html($tf_tour_details->tour_date); ?></td>
                                 </tr>
                                 <?php } ?>
                                 <tr>
-                                    <th><?php _e("Name", "tourfic"); ?></th>
+                                    <th><?php esc_html_e("Name", "tourfic"); ?></th>
                                     <td>:</td>
                                     <td><?php echo esc_html( get_the_title( $tf_order_details->post_id ) ); ?></td>
                                 </tr>
                                 <?php if ( !empty($tf_tour_details->tour_time) ) { ?>
                                 <tr>
-                                    <th><?php _e("Time", "tourfic"); ?></th>
+                                    <th><?php esc_html_e("Time", "tourfic"); ?></th>
                                     <td>:</td>
                                     <td><?php echo esc_html($tf_tour_details->tour_time); ?></td>
                                 </tr>
@@ -97,7 +97,7 @@
                                     $tf_total_adult = explode( " × ", $book_adult );
                                 } ?>
                                 <tr>
-                                    <th><?php _e("Adult", "tourfic"); ?></th>
+                                    <th><?php esc_html_e("Adult", "tourfic"); ?></th>
                                     <td>:</td>
                                     <td>
                                         <?php if(!empty($tf_total_adult[0])) {
@@ -116,7 +116,7 @@
                                     $tf_total_children = explode( " × ", $book_children );
                                 } ?>
                                 <tr>
-                                    <th><?php _e("Child", "tourfic"); ?></th>
+                                    <th><?php esc_html_e("Child", "tourfic"); ?></th>
                                     <td>:</td>
                                     <td>
                                         <?php if(!empty($tf_total_children[0])) {
@@ -135,7 +135,7 @@
                                     $tf_total_infants = explode( " × ", $book_infants );
                                 } ?>
                                 <tr>
-                                    <th><?php _e("Infant", "tourfic"); ?></th>
+                                    <th><?php esc_html_e("Infant", "tourfic"); ?></th>
                                     <td>:</td>
                                     <td>
                                         <?php if(!empty($tf_total_infants[0])) {
@@ -158,7 +158,7 @@
             <!-- Pricing Details -->
             <div class="customers-order-date details-box">
                 <h4>
-                    <?php _e("Pricing details", "tourfic"); ?>
+                    <?php esc_html_e("Pricing details", "tourfic"); ?>
                 </h4>
                 <div class="tf-grid-box tf-pricing-grid-box">
 
@@ -167,7 +167,7 @@
                             <table class="table">
                                 
                                 <tr>
-                                    <th><?php _e("Payment method", "tourfic"); ?></th>
+                                    <th><?php esc_html_e("Payment method", "tourfic"); ?></th>
                                     <td>:</td>
                                     <td>
                                     <?php 
@@ -191,17 +191,17 @@
                                 if(!empty($tf_tour_details->tour_extra)){
                                 ?>
                                 <tr>
-                                    <th><?php _e("Extra", "tourfic"); ?></th>
+                                    <th><?php esc_html_e("Extra", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo $tf_tour_details->tour_extra; ?></td>
+                                    <td><?php echo wp_kses_post($tf_tour_details->tour_extra); ?></td>
                                 </tr>
                                 <?php } ?>
                                 <?php 
                                 if(!empty($tf_tour_details->total_price)){ ?>
                                 <tr>
-                                    <th><?php _e("Total", "tourfic"); ?></th>
+                                    <th><?php esc_html_e("Total", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo wc_price($tf_tour_details->total_price); ?></td>
+                                    <td><?php echo wp_kses_post(wc_price($tf_tour_details->total_price)); ?></td>
                                 </tr>
                                 <?php } ?>
                                 <?php $taxs = !empty($tf_tour_details->tax_info) ? json_decode($tf_tour_details->tax_info, true) : '';;
@@ -213,17 +213,17 @@
                                 <?php 
                                 if(!empty($taxs_summations)){ ?>
                                 <tr>
-                                    <th><?php _e("Tax", "tourfic"); ?></th>
+                                    <th><?php esc_html_e("Tax", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo wc_price($taxs_summations); ?></td>
+                                    <td><?php echo wp_kses_post(wc_price($taxs_summations)); ?></td>
                                 </tr>
                                 <?php } ?>
                                 <?php 
                                 if(!empty($tf_tour_details->due_price)){ ?>
                                 <tr>
-                                    <th><?php _e("Due Price", "tourfic"); ?></th>
+                                    <th><?php esc_html_e("Due Price", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo $tf_tour_details->due_price; ?></td>
+                                    <td><?php echo wp_kses_post($tf_tour_details->due_price); ?></td>
                                 </tr>
                                 <?php } ?>
                             </table>
@@ -236,13 +236,13 @@
             <!-- Visitor Details -->
             <div class="customers-order-date details-box">
                 <h4>
-                    <?php _e("Visitor details", "tourfic"); ?>
+                    <?php esc_html_e("Visitor details", "tourfic"); ?>
                     <div class="others-button visitor_edit">
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M2.39662 15.0963C2.43491 14.7517 2.45405 14.5794 2.50618 14.4184C2.55243 14.2755 2.61778 14.1396 2.70045 14.0142C2.79363 13.8729 2.91621 13.7503 3.16136 13.5052L14.1666 2.49992C15.0871 1.57945 16.5795 1.57945 17.4999 2.49993C18.4204 3.4204 18.4204 4.91279 17.4999 5.83326L6.49469 16.8385C6.24954 17.0836 6.12696 17.2062 5.98566 17.2994C5.86029 17.3821 5.72433 17.4474 5.58146 17.4937C5.42042 17.5458 5.24813 17.5649 4.90356 17.6032L2.08325 17.9166L2.39662 15.0963Z" stroke="#003C79" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <?php _e("Edit", "tourfic"); ?>
+                            <?php esc_html_e("Edit", "tourfic"); ?>
                         </span>
                     </div>
                 </h4>
@@ -255,7 +255,7 @@
                         foreach($tf_visitors_details as $visitor){
                     ?>
                     <div class="tf-grid-single">
-                        <h3><?php _e("Visitor ".$visitor_count, "tourfic"); ?></h3>
+                        <h3><?php esc_html_e("Visitor ".$visitor_count, "tourfic"); ?></h3>
                         <div class="tf-single-box">
                             <table class="table" cellpadding="0" callspacing="0">
                                 <?php 
@@ -277,17 +277,17 @@
                                 </tr>
                                 <?php } }else{ ?>
                                     <tr>
-                                        <th><?php _e("Full Name", "tourfic"); ?></th>
+                                        <th><?php esc_html_e("Full Name", "tourfic"); ?></th>
                                         <td>:</td>
                                         <td><?php echo !empty($visitor->tf_full_name) ? esc_html( $visitor->tf_full_name ) : ''; ?></td>
                                     </tr>
                                     <tr>
-                                        <th><?php _e("Date of birth", "tourfic"); ?></th>
+                                        <th><?php esc_html_e("Date of birth", "tourfic"); ?></th>
                                         <td>:</td>
                                         <td><?php echo !empty($visitor->tf_dob) ? esc_html( $visitor->tf_dob ) : ''; ?></td>
                                     </tr>
                                     <tr>
-                                        <th><?php _e("NID", "tourfic"); ?></th>
+                                        <th><?php esc_html_e("NID", "tourfic"); ?></th>
                                         <td>:</td>
                                         <td><?php echo !empty($visitor->tf_nid) ? esc_html( $visitor->tf_nid ) : ''; ?></td>
                                     </tr>
@@ -304,7 +304,7 @@
             <!-- Voucher details -->
             <div class="customers-order-date details-box">
                 <h4>
-                    <?php _e("Voucher details", "tourfic"); ?>
+                    <?php esc_html_e("Voucher details", "tourfic"); ?>
                     <div class="others-button">
                         <?php 
                         $tf_qr_download_link = !empty($tf_tour_details->unique_id) ? $tf_tour_details->unique_id : '';
@@ -321,7 +321,7 @@
                 <div class="tf-grid-box">
 
                     <div class="tf-grid-single">
-                        <h3><?php _e("Your voucher", "tourfic"); ?></h3>
+                        <h3><?php esc_html_e("Your voucher", "tourfic"); ?></h3>
                         <?php 
                             $meta = get_post_meta( $tf_order_details->post_id, 'tf_tours_opt', true );
                             $tour_ides = !empty($tf_tour_details->unique_id) ? $tf_tour_details->unique_id : '';
@@ -376,13 +376,13 @@
                                 </div>
                                 <div class="tf-voucher-qr-code">
                                     <div class="time-info">
-                                        <h5><?php _e("Date:", "tourfic"); ?> <b><?php echo esc_html( $tour_duration ); ?></b></h5>
+                                        <h5><?php esc_html_e("Date:", "tourfic"); ?> <b><?php echo esc_html( $tour_duration ); ?></b></h5>
                                         <?php if(!empty($tour_time)){ ?>
-                                            <h5><?php _e("Time:", "tourfic"); ?> <b style="color: #002043;"><?php echo esc_html( $tour_time ); ?></b></h5>
+                                            <h5><?php esc_html_e("Time:", "tourfic"); ?> <b style="color: #002043;"><?php echo esc_html( $tour_time ); ?></b></h5>
                                         <?php } ?>
-                                        <h5><?php _e("Address:", "tourfic"); ?> <b style="color: #002043;"><?php echo esc_html( $location ) ?></b></h5>
+                                        <h5><?php esc_html_e("Address:", "tourfic"); ?> <b style="color: #002043;"><?php echo esc_html( $location ) ?></b></h5>
                                     </div>
-                                    <img style="border: 1px solid #ccc;" src="//chart.apis.google.com/chart?cht=qr&chs=<?php echo $width;?>x<?php echo $height; ?>&chl=<?php echo htmlspecialchars($uri); ?>&choe=UTF-8" alt="<?php echo htmlspecialchars( $title ); ?>"/>
+                                    <img style="border: 1px solid #ccc;" src="//chart.apis.google.com/chart?cht=qr&chs=<?php echo esc_attr($width);?>x<?php echo esc_attr($height); ?>&chl=<?php echo htmlspecialchars($uri); ?>&choe=UTF-8" alt="<?php echo htmlspecialchars( $title ); ?>"/>
                                 </div>
                                 <div class="tf-voucher-billing-info">
                                     <div class="tf-billing-details">
@@ -390,34 +390,34 @@
                                         $billing_first_name = !empty($tf_billing_details->billing_first_name) ? $tf_billing_details->billing_first_name : '';
                                         $billing_last_name = !empty($tf_billing_details->billing_last_name) ? $tf_billing_details->billing_last_name : '';
                                         ?>
-                                        <h5><?php _e("Name:", "tourfic"); ?> <?php echo esc_html( $billing_first_name.' '.$billing_last_name ); ?></h5>
-                                        <h5><?php _e("Price:", "tourfic"); ?> <?php echo wc_price( $tf_tour_details->total_price ) ?></h5>
+                                        <h5><?php esc_html_e("Name:", "tourfic"); ?> <?php echo esc_html( $billing_first_name.' '.$billing_last_name ); ?></h5>
+                                        <h5><?php esc_html_e("Price:", "tourfic"); ?> <?php echo wc_price( $tf_tour_details->total_price ) ?></h5>
                                         <?php if(!empty($tf_tour_details->due_price)){ ?>
-                                        <h5><?php _e("Due Price:", "tourfic"); ?> <?php echo wc_price( $tf_tour_details->due_price ) ?></h5>
+                                        <h5><?php esc_html_e("Due Price:", "tourfic"); ?> <?php echo wc_price( $tf_tour_details->due_price ) ?></h5>
                                         <?php } ?>
-                                        <h5 style="text-transform: uppercase;"><?php _e("Payment Status:", "tourfic"); ?> <?php echo esc_html( $tf_order_details->payment_method ) ?></h5>
+                                        <h5 style="text-transform: uppercase;"><?php esc_html_e("Payment Status:", "tourfic"); ?> <?php echo esc_html( $tf_order_details->payment_method ) ?></h5>
                                         <?php 
                                         if(!empty($tf_total_adult[0])){ ?>
-                                            <h5><?php _e("Adult:", "tourfic"); ?> <?php echo esc_html( $tf_total_adult[0] ) ?></h5>
+                                            <h5><?php esc_html_e("Adult:", "tourfic"); ?> <?php echo esc_html( $tf_total_adult[0] ) ?></h5>
                                             <?php
                                         }
                                         if(!empty($tf_total_children[0])){ ?>
-                                            <h5><?php _e("Child:", "tourfic"); ?> <?php echo esc_html( $tf_total_children[0] ) ?></h5>
+                                            <h5><?php esc_html_e("Child:", "tourfic"); ?> <?php echo esc_html( $tf_total_children[0] ) ?></h5>
                                             <?php
                                         }
                                         if(!empty($tf_total_infants[0])){
                                             ?>
-                                            <h5><?php _e("Infant:", "tourfic"); ?> <?php echo esc_html( $tf_total_infants[0] ) ?></h5>
+                                            <h5><?php esc_html_e("Infant:", "tourfic"); ?> <?php echo esc_html( $tf_total_infants[0] ) ?></h5>
                                             <?php
                                         } ?>
                                     </div>
                                     <div class="tf-cta-info">
                                     <?php
                                     if(!empty($tour_phone) || !empty($tour_email)){ ?>
-                                        <h4><b><?php _e("Contact Information:", "tourfic"); ?></b></h4>
-                                        <h5><?php _e("For any inquiries or assistance,", "tourfic"); ?></h5>
-                                        <h5><?php _e("Phone:", "tourfic"); ?> <?php echo esc_html( $tour_phone ) ?></h5>
-                                        <h5><?php _e("Email:", "tourfic"); ?> <?php echo esc_html( $tour_email ) ?></h5>
+                                        <h4><b><?php esc_html_e("Contact Information:", "tourfic"); ?></b></h4>
+                                        <h5><?php esc_html_e("For any inquiries or assistance,", "tourfic"); ?></h5>
+                                        <h5><?php esc_html_e("Phone:", "tourfic"); ?> <?php echo esc_html( $tour_phone ) ?></h5>
+                                        <h5><?php esc_html_e("Email:", "tourfic"); ?> <?php echo esc_html( $tour_email ) ?></h5>
                                         <?php
                                     } ?>
                                     </div>
@@ -429,30 +429,30 @@
                                 </div>
                             </div>
                             <div class="tf-preview-btn">
-                                <a href="#"><?php _e("Preview", "tourfic"); ?></a>
+                                <a href="#"><?php esc_html_e("Preview", "tourfic"); ?></a>
                             </div>
                         </div>
                         <?php } ?>
                     </div>
                     <div class="tf-grid-single">
-                        <h3><?php _e("Others information", "tourfic"); ?></h3>
+                        <h3><?php esc_html_e("Others information", "tourfic"); ?></h3>
                         <div class="tf-single-box tf-checkin-by">
                             <table class="table" cellpadding="0" callspacing="0">
                                 <tr>
-                                    <th><?php _e("Checked status", "tourfic"); ?></th>
+                                    <th><?php esc_html_e("Checked status", "tourfic"); ?></th>
                                     <td>:</td>
                                     <td>
                                         <?php 
                                             if( !empty($tf_order_details->checkinout) ){
                                                 if( "in"==$tf_order_details->checkinout ){
-                                                    _e("Checked in", "tourfic");
+                                                    esc_html_e("Checked in", "tourfic");
                                                 }elseif( "out"==$tf_order_details->checkinout ){
-                                                    _e("Checked Out", "tourfic");
+                                                    esc_html_e("Checked Out", "tourfic");
                                                 }elseif( "not"==$tf_order_details->checkinout ){
-                                                    _e("Not checked in", "tourfic");
+                                                    esc_html_e("Not checked in", "tourfic");
                                                 }
                                             }else{
-                                                _e("Not checked in", "tourfic");
+                                                esc_html_e("Not checked in", "tourfic");
                                             }
                                         ?>
                                     </td>
@@ -461,7 +461,7 @@
                                 $tf_checkinout_by = !empty($tf_order_details->checkinout_by) ? json_decode($tf_order_details->checkinout_by) : '';
                                 ?>
                                 <tr>
-                                    <th><?php _e("Checked in by", "tourfic"); ?></th>
+                                    <th><?php esc_html_e("Checked in by", "tourfic"); ?></th>
                                     <td>:</td>
                                     <td>
                                         <?php
@@ -473,7 +473,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><?php _e("Checked Time", "tourfic"); ?></th>
+                                    <th><?php esc_html_e("Checked Time", "tourfic"); ?></th>
                                     <td>:</td>
                                     <td>
                                         <?php
@@ -493,27 +493,27 @@
         </div>
         <div class="tf-booking-actions">
             <div class="tf-filter-selection">
-                <h3><?php _e("Actions", "tourfic"); ?></h3>
+                <h3><?php esc_html_e("Actions", "tourfic"); ?></h3>
                 <div class="tf-order-status-filter tf-order-ostatus">
                     <label>
                         <span>
                             <?php 
                                 if( !empty($tf_order_details->ostatus) ){
                                     if( "trash"==$tf_order_details->ostatus ){
-                                        _e("Trash", "tourfic");
+                                        esc_html_e("Trash", "tourfic");
                                     }elseif( "processing"==$tf_order_details->ostatus ){
-                                        _e("Processing", "tourfic");
+                                        esc_html_e("Processing", "tourfic");
                                     }elseif( "on-hold"==$tf_order_details->ostatus ){
-                                        _e("On Hold", "tourfic");
+                                        esc_html_e("On Hold", "tourfic");
                                     }elseif( "completed"==$tf_order_details->ostatus ){
-                                        _e("Complete", "tourfic");
+                                        esc_html_e("Complete", "tourfic");
                                     }elseif( "cancelled"==$tf_order_details->ostatus ){
-                                        _e("Cancelled", "tourfic");
+                                        esc_html_e("Cancelled", "tourfic");
                                     }elseif( "refunded"==$tf_order_details->ostatus ){
-                                        _e("Refund", "tourfic");
+                                        esc_html_e("Refund", "tourfic");
                                     }
                                 }else{
-                                    _e("Processing", "tourfic");
+                                    esc_html_e("Processing", "tourfic");
                                 }
                             ?>
                         </span>
@@ -522,32 +522,32 @@
                         </svg>
                     </label>
                     <ul>
-                        <li data-value="trash"><?php _e("Trash", "tourfic"); ?></li>
-                        <li data-value="processing"><?php _e("Processing", "tourfic"); ?></li>
-                        <li data-value="on-hold"><?php _e("On Hold", "tourfic"); ?></li>
-                        <li data-value="completed"><?php _e("Complete", "tourfic"); ?></li>
-                        <li data-value="cancelled"><?php _e("Cancelled", "tourfic"); ?></li>
-                        <li data-value="refunded"><?php _e("Refund", "tourfic"); ?></li>
+                        <li data-value="trash"><?php esc_html_e("Trash", "tourfic"); ?></li>
+                        <li data-value="processing"><?php esc_html_e("Processing", "tourfic"); ?></li>
+                        <li data-value="on-hold"><?php esc_html_e("On Hold", "tourfic"); ?></li>
+                        <li data-value="completed"><?php esc_html_e("Complete", "tourfic"); ?></li>
+                        <li data-value="cancelled"><?php esc_html_e("Cancelled", "tourfic"); ?></li>
+                        <li data-value="refunded"><?php esc_html_e("Refund", "tourfic"); ?></li>
                     </ul>
                 </div>
             </div>
 
             <div class="tf-filter-selection">
-                <h3><?php _e("Checked in status", "tourfic"); ?></h3>
+                <h3><?php esc_html_e("Checked in status", "tourfic"); ?></h3>
                 <div class="tf-order-status-filter tf-order-checkinout-status">
                     <label>
                         <span>
                             <?php 
                                 if( !empty($tf_order_details->checkinout) ){
                                     if( "in"==$tf_order_details->checkinout ){
-                                        _e("Checked in", "tourfic");
+                                        esc_html_e("Checked in", "tourfic");
                                     }elseif( "out"==$tf_order_details->checkinout ){
-                                        _e("Checked Out", "tourfic");
+                                        esc_html_e("Checked Out", "tourfic");
                                     }elseif( "not"==$tf_order_details->checkinout ){
-                                        _e("Not checked in", "tourfic");
+                                        esc_html_e("Not checked in", "tourfic");
                                     }
                                 }else{
-                                    _e("Not checked in", "tourfic");
+                                    esc_html_e("Not checked in", "tourfic");
                                 }
                             ?>
                         </span>
@@ -556,24 +556,24 @@
                         </svg>
                     </label>
                     <ul>
-                        <li class="checkin" data-value="in"><?php _e("Checked in", "tourfic"); ?></li>
-                        <li class="checkout" data-value="out"><?php _e("Checked Out", "tourfic"); ?></li>
-                        <li class="checkout" data-value="not"><?php _e("Not checked in", "tourfic"); ?></li>
+                        <li class="checkin" data-value="in"><?php esc_html_e("Checked in", "tourfic"); ?></li>
+                        <li class="checkout" data-value="out"><?php esc_html_e("Checked Out", "tourfic"); ?></li>
+                        <li class="checkout" data-value="not"><?php esc_html_e("Not checked in", "tourfic"); ?></li>
                     </ul>
                 </div>
             </div>
 
             <div class="tf-filter-selection">
-                <h3><?php _e("Sent order mail", "tourfic"); ?></h3>
+                <h3><?php esc_html_e("Sent order mail", "tourfic"); ?></h3>
                 <div class="tf-order-status-filter tf-order-email-resend">
                     <label>
-                        <span><?php _e("Resend Order Mail", "tourfic"); ?></span>
+                        <span><?php esc_html_e("Resend Order Mail", "tourfic"); ?></span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M5 7.5L10 12.5L15 7.5" stroke="#F0F0F1" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </label>
                     <ul>
-                        <li data-value="customer"><?php _e("Customer", "tourfic"); ?></li>
+                        <li data-value="customer"><?php esc_html_e("Customer", "tourfic"); ?></li>
                         <?php 
                         $tf_vendor_id = get_post_field ('post_author', $tf_order_details->post_id);
                         //get user role by id
@@ -582,7 +582,7 @@
                         //check if user role is vendor
                         if( $tf_user_role == 'tf_vendor' ){
                         ?>
-                            <li data-value="vendor"><?php _e("Vendor", "tourfic"); ?></li>
+                            <li data-value="vendor"><?php esc_html_e("Vendor", "tourfic"); ?></li>
                         <?php } ?>
                     </ul>
                 </div>
@@ -595,7 +595,7 @@
     <form class="visitor-details-edit-popup">
         <div class="tf-visitor-details-edit-header">
             <h2>
-                <?php _e("Edit visitor details", "tourfic"); ?>
+                <?php esc_html_e("Edit visitor details", "tourfic"); ?>
             </h2>
             <div class="tf-booking-times">
                 <span>
@@ -609,26 +609,26 @@
         </div>
         
         <div class="visitor-details-popup">
-        <input type="hidden" class="tf_single_order_id" name="order_id" value="<?php echo $tf_order_details->id; ?>">
+        <input type="hidden" class="tf_single_order_id" name="order_id" value="<?php echo esc_attr($tf_order_details->id); ?>">
         <?php 
         for($traveller_in = 1; $traveller_in <= $tf_total_visitor; $traveller_in++){ ?>
             <div class="tf-single-tour-traveller tf-single-travel">
-                <h4><?php _e( 'Traveler '.$traveller_in, 'tourfic' ); ?></h4>
+                <h4><?php esc_html_e( 'Traveler '.$traveller_in, 'tourfic' ); ?></h4>
                 <div class="traveller-info">
                 <?php
                 if(empty($traveler_fields)){ ?>
                 <div class="traveller-single-info">
-                    <label for="tf_full_name<?php echo esc_attr($traveller_in); ?>"><?php _e( 'Full Name', 'tourfic' ); ?></label>
+                    <label for="tf_full_name<?php echo esc_attr($traveller_in); ?>"><?php esc_html_e( 'Full Name', 'tourfic' ); ?></label>
                     <input type="text" name="traveller[<?php echo esc_attr($traveller_in); ?>][tf_full_name]" id="tf_full_name<?php echo esc_attr($traveller_in); ?>" data-required="1" value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{'tf_full_name'}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{'tf_full_name'} ) : '' ?>" />
                     
                 </div>
                 <div class="traveller-single-info">
-                    <label for="tf_dob<?php echo esc_attr($traveller_in); ?>"><?php _e( 'Date of birth', 'tourfic' ); ?></label>
+                    <label for="tf_dob<?php echo esc_attr($traveller_in); ?>"><?php esc_html_e( 'Date of birth', 'tourfic' ); ?></label>
                     <input type="date" name="traveller[<?php echo esc_attr($traveller_in); ?>][tf_dob]" id="tf_dob<?php echo esc_attr($traveller_in); ?>" data-required="1" value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{'tf_dob'}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{'tf_dob'} ) : '' ?>"/>
                     
                 </div>
                 <div class="traveller-single-info">
-                    <label for="tf_nid<?php echo esc_attr($traveller_in); ?>"><?php _e( 'NID', 'tourfic' ); ?></label>
+                    <label for="tf_nid<?php echo esc_attr($traveller_in); ?>"><?php esc_html_e( 'NID', 'tourfic' ); ?></label>
                     <input type="text" name="traveller[<?php echo esc_attr($traveller_in); ?>][tf_nid]" id="tf_nid<?php echo esc_attr($traveller_in); ?>" data-required="1" value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{'tf_nid'}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{'tf_nid'} ) : '' ?>"/>
                     
                 </div>
@@ -639,8 +639,8 @@
                         $field_keys = $field['reg-field-name'];
                         ?>
                         <div class="traveller-single-info">
-                            <label for="<?php echo $field['reg-field-name'].$traveller_in ?>"><?php echo sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']); ?></label>
-                            <input type="<?php echo $field['reg-fields-type']; ?>" name="traveller[<?php echo $traveller_in; ?>][<?php echo $field['reg-field-name']; ?>]" id="<?php echo $field['reg-field-name'].$traveller_in; ?>" value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{$field_keys}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{$field_keys} ) : '' ?>" />
+                            <label for="<?php echo esc_attr($field['reg-field-name']).$traveller_in ?>"><?php echo sprintf( esc_html__( '%s', 'tourfic' ),$field['reg-field-label']); ?></label>
+                            <input type="<?php echo esc_attr($field['reg-fields-type']); ?>" name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>]" id="<?php echo esc_attr($field['reg-field-name']).$traveller_in; ?>" value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{$field_keys}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{$field_keys} ) : '' ?>" />
                         </div>
                     <?php
                     }
@@ -648,15 +648,15 @@
                         $field_keys = $field['reg-field-name'];
                     ?>
                     <div class="traveller-single-info">
-                        <label for="<?php echo $field['reg-field-name'].$traveller_in ?>">
-                            <?php echo sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']); ?>
+                        <label for="<?php echo esc_attr($field['reg-field-name']).$traveller_in ?>">
+                            <?php echo sprintf( esc_html__( '%s', 'tourfic' ),$field['reg-field-label']); ?>
                         </label>
-                        <select id="<?php echo $field['reg-field-name'].$traveller_in ?>" name="traveller[<?php echo $traveller_in; ?>][<?php echo $field['reg-field-name']; ?>]">
-                        <option value=""><?php echo sprintf( __( 'Select One', 'tourfic' )); ?></option>
+                        <select id="<?php echo esc_attr($field['reg-field-name']).$traveller_in ?>" name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>]">
+                        <option value=""><?php echo sprintf( esc_html__( 'Select One', 'tourfic' )); ?></option>
                         <?php
                         foreach($field['reg-options'] as $sfield){
                             if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){ ?>
-                                <option value="<?php echo $sfield['option-value']; ?>" <?php echo !empty($tf_visitors_details->{$traveller_in}->{$field_keys}) && $sfield['option-value']==$tf_visitors_details->{$traveller_in}->{$field_keys} ? esc_attr( 'selected' ) : '' ?>><?php echo $sfield['option-label']; ?></option>';
+                                <option value="<?php echo esc_attr($sfield['option-value']); ?>" <?php echo !empty($tf_visitors_details->{$traveller_in}->{$field_keys}) && $sfield['option-value']==$tf_visitors_details->{$traveller_in}->{$field_keys} ? esc_attr( 'selected' ) : '' ?>><?php echo esc_html($sfield['option-label']); ?></option>';
                             <?php
                             }
                         } ?>
@@ -670,17 +670,17 @@
                     ?>
                         
                     <div class="traveller-single-info">
-                    <label for="<?php echo $field['reg-field-name'].$traveller_in ?>">
-                    <?php echo sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']); ?>
+                    <label for="<?php echo esc_attr($field['reg-field-name']).$traveller_in ?>">
+                    <?php echo sprintf( esc_html__( '%s', 'tourfic' ),$field['reg-field-label']); ?>
                     </label>
                         <?php
                         foreach($field['reg-options'] as $sfield){
                             if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){
                                 ?>
                                 <div class="tf-single-checkbox">
-                                    <input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="traveller[<?php echo $traveller_in; ?>][<?php echo $field['reg-field-name']; ?>][]" id="<?php echo $sfield['option-value'].$traveller_in; ?>" value="<?php echo $sfield['option-value']; ?>" <?php echo in_array($sfield['option-value'], $tf_fields_values) ? esc_attr( 'checked' ) : ''; ?> />
-                                    <label for="<?php echo $sfield['option-value'].$traveller_in; ?>">
-                                    <?php echo sprintf( __( '%s', 'tourfic' ),$sfield['option-label']); ?>
+                                    <input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>][]" id="<?php echo esc_attr($sfield['option-value'].$traveller_in); ?>" value="<?php echo esc_attr($sfield['option-value']); ?>" <?php echo in_array($sfield['option-value'], $tf_fields_values) ? esc_attr( 'checked' ) : ''; ?> />
+                                    <label for="<?php echo esc_attr($sfield['option-value'].$traveller_in); ?>">
+                                    <?php echo sprintf( esc_html__( '%s', 'tourfic' ),$sfield['option-label']); ?>
                                     </label>
                                 </div>
                                 <?php
@@ -697,7 +697,7 @@
         <?php } ?>
         </div>
         <div class="details-update-btn">
-            <button type="submit"><?php _e("Update", "tourfic"); ?></button>
+            <button type="submit"><?php esc_html_e("Update", "tourfic"); ?></button>
         </div>
     </form>
 </div>
@@ -710,7 +710,7 @@ if(!empty($tour_ides)){
     <div class="voucher-quick-view">
         <div class="tf-voucher-details-preview-header">
             <h2>
-                <?php _e("Voucher", "tourfic"); ?>
+                <?php esc_html_e("Voucher", "tourfic"); ?>
             </h2>
             <div class="tf-quick-view-times">
                 <span>
@@ -742,13 +742,13 @@ if(!empty($tour_ides)){
             </div>
             <div class="tf-voucher-qr-code">
                 <div class="time-info">
-                    <h5><?php _e("Date:", "tourfic"); ?> <b><?php echo esc_html( $tour_duration ); ?></b></h5>
+                    <h5><?php esc_html_e("Date:", "tourfic"); ?> <b><?php echo esc_html( $tour_duration ); ?></b></h5>
                     <?php if(!empty($tour_time)){ ?>
-                        <h5><?php _e("Time:", "tourfic"); ?> <b style="color: #002043;"><?php echo esc_html( $tour_time ); ?></b></h5>
+                        <h5><?php esc_html_e("Time:", "tourfic"); ?> <b style="color: #002043;"><?php echo esc_html( $tour_time ); ?></b></h5>
                     <?php } ?>
-                    <h5><?php _e("Address:", "tourfic"); ?> <b style="color: #002043;"><?php echo esc_html( $location ) ?></b></h5>
+                    <h5><?php esc_html_e("Address:", "tourfic"); ?> <b style="color: #002043;"><?php echo esc_html( $location ) ?></b></h5>
                 </div>
-                <img style="border: 1px solid #ccc;" src="//chart.apis.google.com/chart?cht=qr&chs=<?php echo $width;?>x<?php echo $height; ?>&chl=<?php echo htmlspecialchars($uri); ?>&choe=UTF-8" alt="<?php echo htmlspecialchars( $title ); ?>"/>
+                <img style="border: 1px solid #ccc;" src="//chart.apis.google.com/chart?cht=qr&chs=<?php echo esc_attr($width);?>x<?php echo esc_attr($height); ?>&chl=<?php echo htmlspecialchars($uri); ?>&choe=UTF-8" alt="<?php echo htmlspecialchars( $title ); ?>"/>
             </div>
             <div class="tf-voucher-billing-info">
                 <div class="tf-billing-details">
@@ -756,34 +756,34 @@ if(!empty($tour_ides)){
                     $billing_first_name = !empty($tf_billing_details->billing_first_name) ? $tf_billing_details->billing_first_name : '';
                     $billing_last_name = !empty($tf_billing_details->billing_last_name) ? $tf_billing_details->billing_last_name : '';
                     ?>
-                    <h5><?php _e("Name:", "tourfic"); ?> <?php echo esc_html( $billing_first_name.' '.$billing_last_name ); ?></h5>
-                    <h5><?php _e("Price:", "tourfic"); ?> <?php echo wc_price( $tf_tour_details->total_price ) ?></h5>
+                    <h5><?php esc_html_e("Name:", "tourfic"); ?> <?php echo esc_html( $billing_first_name.' '.$billing_last_name ); ?></h5>
+                    <h5><?php esc_html_e("Price:", "tourfic"); ?> <?php echo wc_price( $tf_tour_details->total_price ) ?></h5>
                     <?php if(!empty($tf_tour_details->due_price)){ ?>
-                    <h5><?php _e("Due Price:", "tourfic"); ?> <?php echo wc_price( $tf_tour_details->due_price ) ?></h5>
+                    <h5><?php esc_html_e("Due Price:", "tourfic"); ?> <?php echo wc_price( $tf_tour_details->due_price ) ?></h5>
                     <?php } ?>
-                    <h5 style="text-transform: uppercase;"><?php _e("Payment Status:", "tourfic"); ?> <?php echo esc_html( $tf_order_details->payment_method ) ?></h5>
+                    <h5 style="text-transform: uppercase;"><?php esc_html_e("Payment Status:", "tourfic"); ?> <?php echo esc_html( $tf_order_details->payment_method ) ?></h5>
                     <?php 
                     if(!empty($tf_total_adult[0])){ ?>
-                        <h5><?php _e("Adult:", "tourfic"); ?> <?php echo esc_html( $tf_total_adult[0] ) ?></h5>
+                        <h5><?php esc_html_e("Adult:", "tourfic"); ?> <?php echo esc_html( $tf_total_adult[0] ) ?></h5>
                         <?php
                     }
                     if(!empty($tf_total_children[0])){ ?>
-                        <h5><?php _e("Child:", "tourfic"); ?> <?php echo esc_html( $tf_total_children[0] ) ?></h5>
+                        <h5><?php esc_html_e("Child:", "tourfic"); ?> <?php echo esc_html( $tf_total_children[0] ) ?></h5>
                         <?php
                     }
                     if(!empty($tf_total_infants[0])){
                         ?>
-                        <h5><?php _e("Infant:", "tourfic"); ?> <?php echo esc_html( $tf_total_infants[0] ) ?></h5>
+                        <h5><?php esc_html_e("Infant:", "tourfic"); ?> <?php echo esc_html( $tf_total_infants[0] ) ?></h5>
                         <?php
                     } ?>
                 </div>
                 <div class="tf-cta-info">
                 <?php
                 if(!empty($tour_phone) || !empty($tour_email)){ ?>
-                    <h4><b><?php _e("Contact Information:", "tourfic"); ?></b></h4>
-                    <h5><?php _e("For any inquiries or assistance,", "tourfic"); ?></h5>
-                    <h5><?php _e("Phone:", "tourfic"); ?> <?php echo esc_html( $tour_phone ) ?></h5>
-                    <h5><?php _e("Email:", "tourfic"); ?> <?php echo esc_html( $tour_email ) ?></h5>
+                    <h4><b><?php esc_html_e("Contact Information:", "tourfic"); ?></b></h4>
+                    <h5><?php esc_html_e("For any inquiries or assistance,", "tourfic"); ?></h5>
+                    <h5><?php esc_html_e("Phone:", "tourfic"); ?> <?php echo esc_html( $tour_phone ) ?></h5>
+                    <h5><?php esc_html_e("Email:", "tourfic"); ?> <?php echo esc_html( $tour_email ) ?></h5>
                     <?php
                 } ?>
                 </div>
@@ -800,6 +800,6 @@ if(!empty($tour_ides)){
 
 <div class="tf-preloader-box">
     <div class="tf-loader-preview">
-        <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="Loader">
+        <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="Loader">
     </div>
 </div>

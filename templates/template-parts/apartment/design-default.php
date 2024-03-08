@@ -13,7 +13,7 @@
                             } ?>
 
                             <a href="<?php echo $first_location_url; ?>" class="more-apartment tf-d-ib">
-                                <?php printf( __( 'Show more apartments in %s', 'tourfic' ), $first_location_name ); ?>
+                                <?php printf( esc_html__( 'Show more apartments in %s', 'tourfic' ), $first_location_name ); ?>
                             </a>
                         </div>
                     <?php } ?>
@@ -38,7 +38,7 @@
                             <div id="dropdown-share-center" class="share-tour-content">
                                 <ul class="tf-dropdown-content">
                                     <li>
-                                        <a href="http://www.facebook.com/share.php?u=<?php _e( $share_link ); ?>"
+                                        <a href="http://www.facebook.com/share.php?u=<?php esc_url( $share_link ); ?>"
                                             class="tf-dropdown-item" target="_blank">
                                             <span class="tf-dropdown-item-content">
                                                 <i class="fab fa-facebook-square"></i>
@@ -47,7 +47,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://twitter.com/share?text=<?php _e( $share_text ); ?>&url=<?php _e( $share_link ); ?>"
+                                        <a href="http://twitter.com/share?text=<?php esc_attr( $share_text ); ?>&url=<?php esc_url( $share_link ); ?>"
                                             class="tf-dropdown-item" target="_blank">
                                             <span class="tf-dropdown-item-content">
                                                 <i class="fab fa-twitter-square"></i>
@@ -56,7 +56,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="https://www.linkedin.com/cws/share?url=<?php _e( $share_link ); ?>"
+                                        <a href="https://www.linkedin.com/cws/share?url=<?php esc_url( $share_link ); ?>"
                                             class="tf-dropdown-item" target="_blank">
                                             <span class="tf-dropdown-item-content">
                                                 <i class="fab fa-linkedin"></i>
@@ -68,7 +68,7 @@
                                     $share_image_link = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
                                     ?>
                                     <li>
-                                        <a href="http://pinterest.com/pin/create/button/?url=<?php _e( $share_link ); ?>&media=<?php _e( $share_image_link[0] ); ?>&description=<?php _e( $share_text ); ?>"
+                                        <a href="http://pinterest.com/pin/create/button/?url=<?php esc_url( $share_link ); ?>&media=<?php esc_url( $share_image_link[0] ); ?>&description=<?php esc_attr( $share_text ); ?>"
                                             class="tf-dropdown-item" target="_blank">
                                             <span class="tf-dropdown-item-content">
                                                 <i class="fab fa-pinterest"></i>
@@ -83,11 +83,11 @@
                                                     for="share_link_input"><?php esc_html_e( 'Share this link', 'tourfic' ); ?></label>
                                             <input type="text" id="share_link_input"
                                                     class="share-center-url share-center-url-input"
-                                                    value="<?php _e( $share_link ); ?>" readonly>
+                                                    value="<?php esc_attr( $share_link ); ?>" readonly>
                                             <button id="share_link_button" class="tf_button share-center-copy-cta"
                                                     tabindex="0" role="button">
-                                                <span class="tf-button-text share-center-copy-message"><?php _e( 'Copy link', 'tourfic' ); ?></span>
-                                                <span class="tf-button-text share-center-copied-message"><?php _e( 'Link Copied!', 'tourfic' ); ?></span>
+                                                <span class="tf-button-text share-center-copy-message"><?php esc_html_e( 'Copy link', 'tourfic' ); ?></span>
+                                                <span class="tf-button-text share-center-copied-message"><?php esc_html_e( 'Link Copied!', 'tourfic' ); ?></span>
                                             </button>
                                         </div>
                                     </li>
@@ -101,7 +101,7 @@
                         if ( is_user_logged_in() ) {
                             if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
                                 ?>
-                                <a class="tf-wishlist-button" title="<?php _e( 'Click to toggle wishlist', 'tourfic' ); ?>">
+                                <a class="tf-wishlist-button" title="<?php esc_html_e( 'Click to toggle wishlist', 'tourfic' ); ?>">
                                     <i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart"
                                         data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
                                         data-id="<?php echo $post_id ?>"
@@ -113,7 +113,7 @@
                             if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {
                                 ?>
                                 <a class="tf-wishlist-button"
-                                    title="<?php _e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i
+                                    title="<?php esc_html_e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i
                                             class="<?php echo $has_in_wishlist ? 'far tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart-o"
                                             data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
                                             data-id="<?php echo $post_id ?>"
@@ -164,7 +164,7 @@
                                 <div class="gallery-all-photos">
                                     <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[3], 'full' ) ); ?>"
                                         class="tf_button btn-styled" data-fancybox="hotel-gallery">
-                                        <?php _e( 'All Photos', 'tourfic' ) ?>
+                                        <?php esc_html_e( 'All Photos', 'tourfic' ) ?>
                                     </a>
                                     <?php foreach ( $gallery_ids as $key => $item ) :
                                         if ( $key < 4 ) {
@@ -257,7 +257,7 @@
                             <!-- Loader Image -->
                             <div id="tour_room_details_loader">
                                 <div id="tour-room-details-loader-img">
-                                    <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+                                    <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
                                 </div>
                             </div>
                         </div>
@@ -314,7 +314,7 @@
                             </div>
                             <?php if ( count( tf_data_types( $meta['amenities'] ) ) > 10 ): ?>
                                 <div class="tf-apartment-amenities-more">
-                                    <a class="tf_button btn-styled tf-modal-btn" data-target="#tf-amenities-modal"><?php _e( 'Show all amenities', 'tourfic' ) ?></a>
+                                    <a class="tf_button btn-styled tf-modal-btn" data-target="#tf-amenities-modal"><?php esc_html_e( 'Show all amenities', 'tourfic' ) ?></a>
                                 </div>
 
                                 <!-- Modal -->
@@ -400,11 +400,11 @@
                             <ul>
                                 <?php
                                 if ( ! empty( get_the_author_meta( 'language', $post_author_id ) ) ) {
-                                    echo sprintf( '<li>%s <span>%s</span></li>', __( 'Language: ', 'tourfic' ), get_the_author_meta( 'language', $post_author_id ) );
+                                    echo sprintf( '<li>%s <span>%s</span></li>', esc_html__( 'Language: ', 'tourfic' ), get_the_author_meta( 'language', $post_author_id ) );
                                 }
                                 ?>
                             </ul>
-                            <a href="" id="tf-ask-question-trigger" class="tf_button btn-styled"><i class="far fa-comments"></i><?php _e( 'Contact Host', 'tourfic' ) ?></a>
+                            <a href="" id="tf-ask-question-trigger" class="tf_button btn-styled"><i class="far fa-comments"></i><?php esc_html_e( 'Contact Host', 'tourfic' ) ?></a>
                         </div>
                     </div>
                 </div>

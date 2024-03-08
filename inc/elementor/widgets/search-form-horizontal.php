@@ -26,7 +26,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Tourfic Search Form (Horizontal)', 'tourfic' );
+		return esc_html__( 'Tourfic Search Form (Horizontal)', 'tourfic' );
 	}
 
 	/**
@@ -58,16 +58,16 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 
 	public function tf_search_types() {
 		$types = array(
-			'all'       => __( 'All', 'tourfic' ),
-			'hotel'     => __( 'Hotel', 'tourfic' ),
-			'tour'      => __( 'Tour', 'tourfic' ),
-			'apartment' => __( 'Apartment', 'tourfic' ),
+			'all'       => esc_html__( 'All', 'tourfic' ),
+			'hotel'     => esc_html__( 'Hotel', 'tourfic' ),
+			'tour'      => esc_html__( 'Tour', 'tourfic' ),
+			'apartment' => esc_html__( 'Apartment', 'tourfic' ),
 		);
 
 		if ( function_exists('is_tf_pro') && is_tf_pro() ) {
-			$types['booking']   = __( 'Booking.com', 'tourfic' );
-			$types['tp-flight'] = __( 'TravelPayouts Flight', 'tourfic' );
-			$types['tp-hotel']  = __( 'TravelPayouts Hotel', 'tourfic' );
+			$types['booking']   = esc_html__( 'Booking.com', 'tourfic' );
+			$types['tp-flight'] = esc_html__( 'TravelPayouts Flight', 'tourfic' );
+			$types['tp-hotel']  = esc_html__( 'TravelPayouts Hotel', 'tourfic' );
 		}
 
 		return $types;
@@ -86,7 +86,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'tf_search_content_section',
 			[
-				'label' => __( 'Content', 'tourfic' ),
+				'label' => esc_html__( 'Content', 'tourfic' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -94,7 +94,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 		$this->add_control(
 			'tf_search_title',
 			[
-				'label' => __( 'Title', 'tourfic' ),
+				'label' => esc_html__( 'Title', 'tourfic' ),
 				'type'  => \Elementor\Controls_Manager::TEXTAREA,
 				'rows'  => 1,
 			]
@@ -104,7 +104,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 		$this->add_control(
 			'tf_search_subtitle',
 			[
-				'label' => __( 'Subtitle', 'tourfic' ),
+				'label' => esc_html__( 'Subtitle', 'tourfic' ),
 				'type'  => \Elementor\Controls_Manager::TEXTAREA,
 				'rows'  => 2,
 			]
@@ -139,7 +139,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'tf_search_style_section',
 			[
-				'label' => __( 'Style', 'tourfic' ),
+				'label' => esc_html__( 'Style', 'tourfic' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -148,14 +148,14 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name'     => 'title_typography',
-				'label'    => __( 'Title Typography', 'tourfic' ),
+				'label'    => esc_html__( 'Title Typography', 'tourfic' ),
 				'selector' => '{{WRAPPER}} .tf_widget-title h2',
 			]
 		);
 		$this->add_control(
 			'tf_search_title_color',
 			[
-				'label'     => __( 'Title Color', 'tourfic' ),
+				'label'     => esc_html__( 'Title Color', 'tourfic' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'scheme'    => [
 					'type'  => \Elementor\Core\Schemes\Color::get_type(),
@@ -178,7 +178,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name'     => 'subtitle_typography',
-				'label'    => __( 'Subtitle Typography', 'tourfic' ),
+				'label'    => esc_html__( 'Subtitle Typography', 'tourfic' ),
 				'selector' => '{{WRAPPER}} .tf_widget-subtitle',
 			]
 		);
@@ -186,7 +186,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 		$this->add_control(
 			'tf_search_subtitle_color',
 			[
-				'label'     => __( 'Subtitle Color', 'tourfic' ),
+				'label'     => esc_html__( 'Subtitle Color', 'tourfic' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'scheme'    => [
 					'type'  => \Elementor\Core\Schemes\Color::get_type(),

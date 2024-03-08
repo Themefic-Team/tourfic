@@ -11,7 +11,7 @@ if ( ! class_exists( 'TF_textarea' ) ) {
 
 		public function render() {
 			$placeholder = ( ! empty( $this->field['placeholder'] ) ) ? 'placeholder="' . $this->field['placeholder'] . '"' : '';
-			echo '<textarea name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '"' . $placeholder . ' '. $this->field_attributes() .'>' . $this->value . '</textarea>';
+			echo '<textarea name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '"' . $placeholder . ' '. wp_kses_post($this->field_attributes()) .'>' . $this->value . '</textarea>';
 		}
 
 	}

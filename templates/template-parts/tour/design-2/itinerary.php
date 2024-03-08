@@ -6,7 +6,7 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ) {
 <?php if ( $itineraries ) { ?>
 <div class="tf-itinerary-wrapper" id="tf-tour-itinerary">
     <div class="section-title">
-        <h2 class="tf-title tf-section-title"><?php _e("Travel Itinerary", "tourfic"); ?></h2>
+        <h2 class="tf-title tf-section-title"><?php esc_html_e("Travel Itinerary", "tourfic"); ?></h2>
     </div>
     <div class="tf-itinerary-wrapper">
 
@@ -28,11 +28,11 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ) {
             <div class="tf-itinerary-content-wrap" style="display: none;">
                 <div class="tf-itinerary-content">
                     <div class="tf-itinerary-content-details">
-                    <?php _e( $itinerary['desc'] ); ?>
+                    <?php esc_html_e( $itinerary['desc'] ); ?>
                     </div>
                     <?php if ( $itinerary['image'] ) { ?>
                     <div class="tf-itinerary-content-images">
-                        <img src="<?php echo esc_url( $itinerary['image'] ); ?>" alt="<?php _e("Itinerary Image","tourfic"); ?>" />
+                        <img src="<?php echo esc_url( $itinerary['image'] ); ?>" alt="<?php esc_html_e("Itinerary Image","tourfic"); ?>" />
                     </div>
                     <?php } ?>
                 </div>

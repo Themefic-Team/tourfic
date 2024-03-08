@@ -27,7 +27,7 @@ class TF_Recent_Apartments_slider extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Recent Apartments Slider', 'tourfic' );
+		return esc_html__( 'Recent Apartments Slider', 'tourfic' );
 	}
 
 	/**
@@ -69,7 +69,7 @@ class TF_Recent_Apartments_slider extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content',
 			[
-				'label' => __( 'Content', 'tourfic' ),
+				'label' => esc_html__( 'Content', 'tourfic' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -97,7 +97,7 @@ class TF_Recent_Apartments_slider extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Total Apartments', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::NUMBER,
-				'description' => __( 'Number of total apartments to show. Min 3. Default to 7', 'tourfic' ),
+				'description' => esc_html__( 'Number of total apartments to show. Min 3. Default to 7', 'tourfic' ),
 				'min' => 3,
 				'step' => 1,
 				'default' => 7,
@@ -109,7 +109,7 @@ class TF_Recent_Apartments_slider extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Slide to Show', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::NUMBER,
-				'description' => __( 'Number of apartments to show on the slider at a time. Min 1. Default to 3', 'tourfic' ),
+				'description' => esc_html__( 'Number of apartments to show on the slider at a time. Min 1. Default to 3', 'tourfic' ),
 				'min' => 1,
 				'step' => 1,
 				'default' => 3,
@@ -122,7 +122,7 @@ class TF_Recent_Apartments_slider extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section',
 			[
-				'label' => __( 'Style', 'tourfic' ),
+				'label' => esc_html__( 'Style', 'tourfic' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -131,14 +131,14 @@ class TF_Recent_Apartments_slider extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name' => 'title_typography',
-				'label' => __( 'Title Typography', 'tourfic' ),
+				'label' => esc_html__( 'Title Typography', 'tourfic' ),
 				'selector' => '{{WRAPPER}} .tf-widget-slider .tf-heading h2',
 			]
 		);
 		$this->add_control(
 			'title_color',
 			[
-				'label' => __( 'Title Color', 'tourfic' ),
+				'label' => esc_html__( 'Title Color', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .tf-widget-slider .tf-heading h2' => 'color: {{VALUE}}',
@@ -157,7 +157,7 @@ class TF_Recent_Apartments_slider extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name' => 'subtitle_typography',
-				'label' => __( 'Subtitle Typography', 'tourfic' ),
+				'label' => esc_html__( 'Subtitle Typography', 'tourfic' ),
 				'selector' => '{{WRAPPER}} .tf-widget-slider .tf-heading p',
 			]
 		);
@@ -165,7 +165,7 @@ class TF_Recent_Apartments_slider extends \Elementor\Widget_Base {
 		$this->add_control(
 			'subtitle_color',
 			[
-				'label' => __( 'Subtitle Color', 'tourfic' ),
+				'label' => esc_html__( 'Subtitle Color', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .tf-widget-slider .tf-heading p' => 'color: {{VALUE}}',

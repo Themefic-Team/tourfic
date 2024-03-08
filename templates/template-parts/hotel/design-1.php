@@ -22,7 +22,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                         echo '<i class="fa-solid fa-location-dot"></i> ' . $address . ' –';
                                     } ?>
                                     <a href="<?php echo $first_location_url; ?>" class="more-hotel tf-d-ib">
-                                        <?php printf( __( 'Show more hotels in %s', 'tourfic' ), $first_location_name ); ?>
+                                        <?php printf( esc_html__( 'Show more hotels in %s', 'tourfic' ), $first_location_name ); ?>
                                     </a>
                             <?php } ?>
                             </div>
@@ -74,7 +74,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 
                                 <div id="dropdown-share-center" class="share-tour-content">
                                     <div class="tf-dropdown-share-content">
-                                        <h4><?php _e("Share with friends", "tourfic"); ?></h4>
+                                        <h4><?php esc_html_e("Share with friends", "tourfic"); ?></h4>
                                         <ul>
                                             <li>
                                                 <a href="http://www.facebook.com/share.php?u=<?php echo esc_url( $share_link ); ?>"
@@ -142,14 +142,14 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                             <!-- Hotel Gallery Section -->
                             <div class="tf-hero-gallery tf-mrbottom-30">
                             <div class="tf-gallery-featured <?php echo empty($gallery_ids) ? esc_attr('tf-without-gallery-featured') : ''; ?>">
-                                <img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : TF_ASSETS_APP_URL.'/images/feature-default.jpg'; ?>" alt="<?php _e( 'Hotel Image', 'tourfic' ); ?>">
+                                <img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : TF_ASSETS_APP_URL.'/images/feature-default.jpg'; ?>" alt="<?php esc_html_e( 'Hotel Image', 'tourfic' ); ?>">
                                 <div class="featured-meta-gallery-videos">
                                     <div class="featured-column tf-gallery-box">
                                         <?php 
                                         if ( ! empty( $gallery_ids ) ) {
                                         ?>
                                         <a id="featured-gallery" href="#" class="tf-tour-gallery">
-                                            <i class="fa-solid fa-camera-retro"></i><?php echo __("Gallery","tourfic"); ?>
+                                            <i class="fa-solid fa-camera-retro"></i><?php echo esc_html__("Gallery","tourfic"); ?>
                                         </a>
                                         <?php 
                                         }
@@ -161,7 +161,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                     if ( !empty($hotel_video) ) { ?>
                                     <div class="featured-column tf-video-box">
                                         <a class="tf-tour-video" id="featured-video" data-fancybox="tour-video" href="<?php echo esc_url($hotel_video); ?>">
-                                            <i class="fa-solid fa-video"></i> <?php echo __("Video","tourfic"); ?>
+                                            <i class="fa-solid fa-video"></i> <?php echo esc_html__("Video","tourfic"); ?>
                                         </a>
                                     </div>
                                     <?php } ?>
@@ -175,7 +175,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                     </a>
                                     <?php }else{ ?>
                                         <a href="#tf-review" class="tf-single-rating">
-                                            <span><?php _e( "0.0", "tourfic" ) ?></span> (<?php _e( "0 review", "tourfic" ) ?>)
+                                            <span><?php esc_html_e( "0.0", "tourfic" ) ?></span> (<?php esc_html_e( "0 review", "tourfic" ) ?>)
                                         </a>
                                     <?php } ?>
                                 <?php } ?>

@@ -28,7 +28,7 @@ class TF_Reviews_Slider extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Review Slider', 'tourfic' );
+		return esc_html__( 'Review Slider', 'tourfic' );
 	}
 
 	/**
@@ -70,7 +70,7 @@ class TF_Reviews_Slider extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content',
 			[
-				'label' => __( 'Slider Settings', 'tourfic' ),
+				'label' => esc_html__( 'Slider Settings', 'tourfic' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -80,7 +80,7 @@ class TF_Reviews_Slider extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Reviews Type', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
-				'description' => __( 'Choose the reviews type you want to show.', 'tourfic' ),
+				'description' => esc_html__( 'Choose the reviews type you want to show.', 'tourfic' ),
 				'options' => [
 					'tf_hotel' => 'Hotel',
 					'tf_tours' => 'Tour',
@@ -94,7 +94,7 @@ class TF_Reviews_Slider extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Total Reviews', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::NUMBER,
-				'description' => __( 'Number of total reviews to show. Min 3.', 'tourfic' ),
+				'description' => esc_html__( 'Number of total reviews to show. Min 3.', 'tourfic' ),
 				'min' => 1,
 				'step' => 1,
 				'default' => 3,
@@ -137,7 +137,7 @@ class TF_Reviews_Slider extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Infinite Slider', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::SWITCHER,
-				'description' => __( 'Enable Infinite Slider', 'tourfic' ),
+				'description' => esc_html__( 'Enable Infinite Slider', 'tourfic' ),
 			]
 		);
 		

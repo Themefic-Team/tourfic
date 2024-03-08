@@ -55,7 +55,7 @@ if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
                 
                 <div class="tf-details-left tf-result-previews">
                     <span class="tf-modify-search-btn">
-                        <?php _e("Modify search", "tourfic"); ?>
+                        <?php esc_html_e("Modify search", "tourfic"); ?>
                     </span>
                     <!-- Booking form Start -->
                     <div class="tf-archive-search-form tf-booking-form-wrapper">
@@ -69,8 +69,8 @@ if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
                 <div class="tf-details-right tf-sitebar-widgets tf-archive-right">
                     <div class="tf-filter-wrapper">
                         <div class="tf-filter-title">
-                            <h2 class="tf-section-title"><?php _e("Filter", "tourfic"); ?></h2>
-                            <button class="filter-reset-btn"><?php _e("Reset", "tourfic"); ?></button>
+                            <h2 class="tf-section-title"><?php esc_html_e("Filter", "tourfic"); ?></h2>
+                            <button class="filter-reset-btn"><?php esc_html_e("Reset", "tourfic"); ?></button>
                         </div>   
                         <?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
                         <div id="tf__booking_sidebar">

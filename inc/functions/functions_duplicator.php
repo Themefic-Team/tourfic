@@ -5,11 +5,11 @@ if ( ! function_exists( 'tf_add_duplicate_post_button' ) ) {
     function tf_add_duplicate_post_button($actions, $post) {
         if (current_user_can('edit_posts') && ( "tf_tours"==$post->post_type || "tf_hotel"==$post->post_type || "tf_apartment"==$post->post_type )) {
             if("tf_tours"==$post->post_type){
-                $tf_duplicate_label = __("Duplicate Tour", "tourfic");
+                $tf_duplicate_label = esc_html__("Duplicate Tour", "tourfic");
             }elseif("tf_hotel"==$post->post_type){
-                $tf_duplicate_label = __("Duplicate Hotel", "tourfic");
+                $tf_duplicate_label = esc_html__("Duplicate Hotel", "tourfic");
             }else{
-                $tf_duplicate_label = __("Duplicate Apartment", "tourfic");
+                $tf_duplicate_label = esc_html__("Duplicate Apartment", "tourfic");
             }
             $tf_duplicate_nonce = wp_create_nonce('tf_duplicate_nonce_' . $post->ID);
             $actions['duplicate'] = '<a class="tf-post-data-duplicate" href="#" data-postid="'. $post->ID .'" data-posttype="' . $post->post_type . '" data-nonce="' . esc_attr($tf_duplicate_nonce) . '">'. $tf_duplicate_label .'</a>';

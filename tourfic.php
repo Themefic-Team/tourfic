@@ -95,7 +95,7 @@ function tf_file_missing( $files = '' ) {
 	if ( is_admin() ) {
 		if ( ! empty( $files ) ) {
 			$class   = 'notice notice-error';
-			$message = '<strong>' . $files . '</strong>' . __( ' file is missing! It is required to function Tourfic properly!', 'tourfic' );
+			$message = '<strong>' . $files . '</strong>' . esc_html__( ' file is missing! It is required to function Tourfic properly!', 'tourfic' );
 
 			printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message );
 		}
@@ -195,56 +195,56 @@ function tf_is_woo() {
 		if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) && ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) {
 			?>
             <div id="message" class="error">
-                <p><?php printf( __( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
-                <p><a id="tf_wooinstall" class="install-now button" data-plugin-slug="woocommerce"><?php _e( 'Install Now', 'tourfic' ); ?></a></p>
+                <p><?php printf( esc_html__( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
+                <p><a id="tf_wooinstall" class="install-now button" data-plugin-slug="woocommerce"><?php esc_html_e( 'Install Now', 'tourfic' ); ?></a></p>
             </div>
 
-			<script>
-				jQuery(document).on('click', '#tf_wooinstall', function (e) {
-					e.preventDefault();
-					var current = jQuery(this);
-					var plugin_slug = current.attr("data-plugin-slug");
-					var ajax_url= '<?php echo admin_url( 'admin-ajax.php' )?>';
+            <script>
+                jQuery(document).on('click', '#tf_wooinstall', function (e) {
+                    e.preventDefault();
+                    var current = jQuery(this);
+                    var plugin_slug = current.attr("data-plugin-slug");
+                    var ajax_url= '<?php echo admin_url( 'admin-ajax.php' )?>';
 
-					current.addClass('updating-message').text('Installing...');
-					
-					var data = {
-						action: 'tf_ajax_install_plugin',
-						_ajax_nonce: '<?php echo wp_create_nonce( 'updates' )?>',
-						slug: plugin_slug,
-					};
+                    current.addClass('updating-message').text('Installing...');
 
-					jQuery.post(ajax_url, data, function (response) {
-						current.removeClass('updating-message');
-						current.addClass('updated-message').text('Installing...');
-						current.attr("href", response.data.activateUrl);
-					})
-						.fail(function () {
-							current.removeClass('updating-message').text('Install Failed');
-						})
-						.always(function () {
-							current.removeClass('install-now updated-message').addClass('activate-now button-primary').text('Activating...');
-							current.unbind(e);
-							current[0].click();
-						});
-				});
-			</script>
+                    var data = {
+                        action: 'tf_ajax_install_plugin',
+                        _ajax_nonce: '<?php echo wp_create_nonce( 'updates' )?>',
+                        slug: plugin_slug,
+                    };
+
+                    jQuery.post(ajax_url, data, function (response) {
+                        current.removeClass('updating-message');
+                        current.addClass('updated-message').text('Installing...');
+                        current.attr("href", response.data.activateUrl);
+                    })
+                        .fail(function () {
+                            current.removeClass('updating-message').text('Install Failed');
+                        })
+                        .always(function () {
+                            current.removeClass('install-now updated-message').addClass('activate-now button-primary').text('Activating...');
+                            current.unbind(e);
+                            current[0].click();
+                        });
+                });
+            </script>
 
 			<?php
 		} elseif ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) && file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) {
 			?>
 
             <div id="message" class="error">
-                <p><?php printf( __( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
+                <p><?php printf( esc_html__( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
                 <p><a href="<?php echo get_admin_url(); ?>plugins.php?_wpnonce=<?php echo wp_create_nonce( 'activate-plugin_woocommerce/woocommerce.php' ); ?>&action=activate&plugin=woocommerce/woocommerce.php"
-                      class="button activate-now button-primary"><?php _e( 'Activate', 'tourfic' ); ?></a></p>
+                      class="button activate-now button-primary"><?php esc_html_e( 'Activate', 'tourfic' ); ?></a></p>
             </div>
 			<?php
 		} elseif ( version_compare( get_option( 'woocommerce_db_version' ), '2.5', '<' ) ) {
 			?>
 
             <div id="message" class="error">
-                <p><?php printf( __( '%sTourfic is inactive.%s This plugin requires WooCommerce 2.5 or newer. Please %supdate WooCommerce to version 2.5 or newer%s', 'tourfic' ), '<strong>', '</strong>', '<a href="' . admin_url( 'plugins.php' ) . '">', '&nbsp;&raquo;</a>' ); ?></p>
+                <p><?php printf( esc_html__( '%sTourfic is inactive.%s This plugin requires WooCommerce 2.5 or newer. Please %supdate WooCommerce to version 2.5 or newer%s', 'tourfic' ), '<strong>', '</strong>', '<a href="' . admin_url( 'plugins.php' ) . '">', '&nbsp;&raquo;</a>' ); ?></p>
             </div>
 
 			<?php

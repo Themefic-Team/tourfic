@@ -38,7 +38,7 @@ if ( ! class_exists( 'TF_ical_export' ) ) {
 			$export_url = add_query_arg( $query_args, site_url( '/' ) );
 
 			$placeholder = ( ! empty( $this->field['placeholder'] ) ) ? 'placeholder="' . $this->field['placeholder'] . '"' : '';
-			echo '<input type="text" readonly name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '" value="' . esc_url( $export_url ) . '" ' . $placeholder . ' ' . $this->field_attributes() . '/>';
+			echo '<input type="text" readonly name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '" value="' . esc_url( $export_url ) . '" ' . $placeholder . ' ' . wp_kses_post($this->field_attributes()) . '/>';
 
 			if ( isset( $this->field['button_text'] ) && ! empty( $this->field['button_text'] ) ) {
 				$button_class = 'button button-primary button-large';

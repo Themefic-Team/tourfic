@@ -27,7 +27,7 @@ class TF_Tour_Destinations extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Tour Destinations', 'tourfic' );
+		return esc_html__( 'Tour Destinations', 'tourfic' );
 	}
 
 	/**
@@ -70,7 +70,7 @@ class TF_Tour_Destinations extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'tour_destination_content',
 			[
-				'label' => __( 'Content', 'tourfic' ),
+				'label' => esc_html__( 'Content', 'tourfic' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -100,12 +100,12 @@ class TF_Tour_Destinations extends \Elementor\Widget_Base {
 		$this->add_control(
 			'order',
 			[
-				'label'   => __( 'Order', 'tourfic' ),
+				'label'   => esc_html__( 'Order', 'tourfic' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => 'ASC',
 				'options' => [
-					'ASC'  => __( 'Ascending', 'tourfic' ),
-					'DESC' => __( 'Descending', 'tourfic' ),
+					'ASC'  => esc_html__( 'Ascending', 'tourfic' ),
+					'DESC' => esc_html__( 'Descending', 'tourfic' ),
 				],
 			]
 		);
@@ -113,17 +113,17 @@ class TF_Tour_Destinations extends \Elementor\Widget_Base {
 		$this->add_control(
 			'orderby',
 			[
-				'label'   => __( 'Order By', 'tourfic' ),
+				'label'   => esc_html__( 'Order By', 'tourfic' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => 'name',
 				'options' => [
-					'none'       => __( 'None', 'tourfic' ),
-					'type'       => __( 'Type', 'tourfic' ),
-					'title'      => __( 'Title', 'tourfic' ),
-					'name'       => __( 'Name', 'tourfic' ),
-					'date'       => __( 'Date', 'tourfic' ),
-					'ID'         => __( 'ID', 'tourfic' ),
-					'menu_order' => __( 'Menu Order', 'tourfic' ),
+					'none'       => esc_html__( 'None', 'tourfic' ),
+					'type'       => esc_html__( 'Type', 'tourfic' ),
+					'title'      => esc_html__( 'Title', 'tourfic' ),
+					'name'       => esc_html__( 'Name', 'tourfic' ),
+					'date'       => esc_html__( 'Date', 'tourfic' ),
+					'ID'         => esc_html__( 'ID', 'tourfic' ),
+					'menu_order' => esc_html__( 'Menu Order', 'tourfic' ),
 				],
 			]
 		);
@@ -146,7 +146,7 @@ class TF_Tour_Destinations extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'tour_destination_style',
 			[
-				'label' => __( 'Style', 'tourfic' ),
+				'label' => esc_html__( 'Style', 'tourfic' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -155,7 +155,7 @@ class TF_Tour_Destinations extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name'     => 'tf_destination_title_typography',
-				'label'    => __( 'Destination Title Typography', 'tourfic' ),
+				'label'    => esc_html__( 'Destination Title Typography', 'tourfic' ),
 				'selector' => '{{WRAPPER}} .recomended_place_info_header h3',
 			]
 		);
@@ -163,7 +163,7 @@ class TF_Tour_Destinations extends \Elementor\Widget_Base {
 		$this->add_control(
 			'tf_destination_title_color',
 			[
-				'label'     => __( 'Destination Title Color', 'tourfic' ),
+				'label'     => esc_html__( 'Destination Title Color', 'tourfic' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'scheme'    => [
 					'type'  => \Elementor\Core\Schemes\Color::get_type(),
@@ -179,7 +179,7 @@ class TF_Tour_Destinations extends \Elementor\Widget_Base {
 		$this->add_control(
 			'tf_destination_title_hover_color',
 			[
-				'label'     => __( 'Destination Title Hover Color', 'tourfic' ),
+				'label'     => esc_html__( 'Destination Title Hover Color', 'tourfic' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'scheme'    => [
 					'type'  => \Elementor\Core\Schemes\Color::get_type(),
@@ -197,7 +197,7 @@ class TF_Tour_Destinations extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name'     => 'tf_destination_subtitle_typography',
-				'label'    => __( 'Destination Subitle Typography', 'tourfic' ),
+				'label'    => esc_html__( 'Destination Subitle Typography', 'tourfic' ),
 				'selector' => '{{WRAPPER}} .recomended_place_info_header p',
 			]
 		);
@@ -205,7 +205,7 @@ class TF_Tour_Destinations extends \Elementor\Widget_Base {
 		$this->add_control(
 			'tf_destination_subtitle_color',
 			[
-				'label'     => __( 'Destination Subtitle Color', 'tourfic' ),
+				'label'     => esc_html__( 'Destination Subtitle Color', 'tourfic' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'scheme'    => [
 					'type'  => \Elementor\Core\Schemes\Color::get_type(),
@@ -221,7 +221,7 @@ class TF_Tour_Destinations extends \Elementor\Widget_Base {
 		$this->add_control(
 			'tf_destination_subtitle_hover_color',
 			[
-				'label'     => __( 'Destination Subtitle Hover Color', 'tourfic' ),
+				'label'     => esc_html__( 'Destination Subtitle Hover Color', 'tourfic' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'scheme'    => [
 					'type'  => \Elementor\Core\Schemes\Color::get_type(),
@@ -238,7 +238,7 @@ class TF_Tour_Destinations extends \Elementor\Widget_Base {
 		$this->add_control(
 			'tf_info_options',
 			[
-				'label'     => __( 'Info Background', 'tourfic' ),
+				'label'     => esc_html__( 'Info Background', 'tourfic' ),
 				'type'      => \Elementor\Controls_Manager::HEADING,
 				'separator' => 'after',
 			]
@@ -248,7 +248,7 @@ class TF_Tour_Destinations extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Background::get_type(),
 			[
 				'name'     => 'tf_info_background',
-				'label'    => __( 'Background Color', 'tourfic' ),
+				'label'    => esc_html__( 'Background Color', 'tourfic' ),
 				'types'    => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .recomended_place_info_header',
 			]
@@ -256,7 +256,7 @@ class TF_Tour_Destinations extends \Elementor\Widget_Base {
 		$this->add_control(
 			'tf_info_hover_options',
 			[
-				'label'     => __( 'Info Hover Background', 'tourfic' ),
+				'label'     => esc_html__( 'Info Hover Background', 'tourfic' ),
 				'type'      => \Elementor\Controls_Manager::HEADING,
 				'separator' => 'after',
 			]
@@ -265,7 +265,7 @@ class TF_Tour_Destinations extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Background::get_type(),
 			[
 				'name'     => 'tf_info_hover_background',
-				'label'    => __( 'Background Color', 'tourfic' ),
+				'label'    => esc_html__( 'Background Color', 'tourfic' ),
 				'types'    => [ 'classic', 'gradient', 'video' ],
 				'selector' => '{{WRAPPER}} .single_recomended_item:hover .recomended_place_info_header',
 			]
