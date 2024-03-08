@@ -55,7 +55,7 @@
                     if ( $tf_hotel_list_query->have_posts() ):
                         while ( $tf_hotel_list_query->have_posts() ) : $tf_hotel_list_query->the_post();
                     ?>
-                    <option value="<?php echo get_the_ID(); ?>" <?php echo !empty($_GET['post']) && get_the_ID()==$_GET['post'] ? esc_attr( 'selected' ) : ''; ?>><?php echo get_the_title(); ?></option>
+                    <option value="<?php echo esc_attr(get_the_ID()); ?>" <?php echo !empty($_GET['post']) && get_the_ID()==$_GET['post'] ? esc_attr( 'selected' ) : ''; ?>><?php echo esc_html(get_the_title()); ?></option>
                     <?php 
                         endwhile;
                     endif;
@@ -119,12 +119,12 @@
                     </div>
                 </th>
                 <td>
-                    <a href="<?php echo admin_url(); ?>edit.php?post_type=tf_hotel&amp;page=tf_hotel_booking&amp;order_id=<?php echo esc_attr($hotel['order_id']); ?>&amp;book_id=<?php echo esc_attr($hotel['id']); ?>&amp;action=preview">
-                        <?php echo esc_html( $hotel['order_id'] ); ?>
-                    </a>
+                <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=tf_hotel&page=tf_hotel_booking&order_id=' . esc_attr( $hotel['order_id'] ) . '&book_id=' . esc_attr( $hotel['id'] ) . '&action=preview' ) ); ?>">
+                    <?php echo esc_html( $hotel['order_id'] ); ?>
+                </a>
                 </td>
                 <td>
-                    <?php echo get_the_title($hotel['post_id']); ?>
+                    <?php echo esc_html(get_the_title($hotel['post_id'])); ?>
                 </td>
                 <td>
                     <?php 
@@ -144,7 +144,7 @@
                     ?>
                 </td>
                 <td>
-                    <?php echo date('F d, Y',strtotime($hotel['order_date'])); ?>
+                    <?php echo esc_html(date('F d, Y',strtotime($hotel['order_date']))); ?>
                 </td>
                 <td>
                     <?php 
@@ -192,7 +192,7 @@
                 <th colspan="8">
                     <ul class="tf-booking-details-pagination">
                         <?php if(!empty($paged) && $paged>=2){ ?>
-                            <li><a href="<?php echo tf_booking_details_pagination( $paged-1 ); ?>"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <li><a href="<?php echo esc_url(tf_booking_details_pagination( $paged-1 )); ?>"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M15.8333 10.0001H4.16663M4.16663 10.0001L9.99996 15.8334M4.16663 10.0001L9.99996 4.16675" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg><?php esc_html_e("Previous", "tourfic"); ?></a></li>
                         <?php } 
@@ -201,16 +201,16 @@
                             if ($i == $paged) {  
                         ?>
                             <li class="active">
-                                <a href="<?php echo tf_booking_details_pagination( $i ); ?>"><?php echo esc_html($i); ?></a>
+                                <a href="<?php echo esc_url(tf_booking_details_pagination( $i )); ?>"><?php echo esc_html($i); ?></a>
                             </li>
                         <?php } else{ ?>
                             <li>
-                            <a href="<?php echo tf_booking_details_pagination( $i ); ?>"><?php echo esc_html($i); ?></a>
+                            <a href="<?php echo esc_url(tf_booking_details_pagination( $i )); ?>"><?php echo esc_html($i); ?></a>
                             </li>
                         <?php } } }
                         if(!empty($total_pages) && !empty($paged) && $paged < $total_pages){
                         ?>
-                            <li><a href="<?php echo tf_booking_details_pagination( $paged+1 ); ?>"><?php esc_html_e("Next", "tourfic"); ?> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <li><a href="<?php echo esc_url(tf_booking_details_pagination( $paged+1 )); ?>"><?php esc_html_e("Next", "tourfic"); ?> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M4.16669 10.0001H15.8334M15.8334 10.0001L10 4.16675M15.8334 10.0001L10 15.8334" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg></a></li>
                         <?php } ?>

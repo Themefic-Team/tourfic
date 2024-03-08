@@ -1,7 +1,7 @@
 <div class="tf-booking-details-preview">
     <div class="tf-details-preview-header">
         <div class="tf-back">
-            <a href="<?php echo get_admin_url( null, 'edit.php?post_type=tf_tours&page=tf_tours_booking' ); ?>">
+            <a href="<?php echo esc_url(get_admin_url( null, 'edit.php?post_type=tf_tours&page=tf_tours_booking' )); ?>">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M15 18L9 12L15 6" stroke="#003C79" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -20,7 +20,7 @@
             <ul>
                 <li><?php esc_html_e("Booking ID", "tourfic"); ?>: #<?php echo esc_html( $tf_order_details->order_id ); ?></li>
                 <li>|</li>
-                <li><?php esc_html_e("Booking created", "tourfic"); ?>: <?php echo date('F d, Y',strtotime($tf_order_details->order_date)); ?></li>
+                <li><?php esc_html_e("Booking created", "tourfic"); ?>: <?php echo esc_html(date('F d, Y',strtotime($tf_order_details->order_date))); ?></li>
                 <li>|</li>
                 <li><?php esc_html_e("Booking by", "tourfic"); ?>: <span style="text-transform: capitalize;">
                 <?php 
@@ -28,7 +28,7 @@
                     if("offline"==$tf_order_details->payment_method && empty($tf_booking_by)){
                         echo "Administrator";
                     }else{
-                        echo !empty($tf_booking_by->roles[0]) ? $tf_booking_by->roles[0] : 'Administrator';
+                        echo !empty($tf_booking_by->roles[0]) ? esc_html($tf_booking_by->roles[0]) : 'Administrator';
                     }
                 ?>
                 </span>
@@ -55,7 +55,7 @@
                                 <?php 
                                 foreach($tf_billing_details as $key=>$customer_info){ ?>
                                 <tr>
-                                    <th><?php echo str_replace("_"," ",esc_html( $key )); ?></th>
+                                    <th><?php echo esc_html(str_replace("_"," ", $key )); ?></th>
                                     <td>:</td>
                                     <td><?php echo esc_html( $customer_info ); ?></td>
                                 </tr>
@@ -183,7 +183,7 @@
                                             }
                                         }
                                         $sort_name = $tf_order_details->payment_method;
-                                        echo tf_get_payment_method_full_name( $sort_name );
+                                        echo esc_html(tf_get_payment_method_full_name( $sort_name ));
                                     ?>
                                     </td>
                                 </tr>
@@ -310,7 +310,7 @@
                         $tf_qr_download_link = !empty($tf_tour_details->unique_id) ? $tf_tour_details->unique_id : '';
                         if(!empty($tf_qr_download_link)){
                         ?>
-                        <a href="<?php echo !empty($tf_qr_download_link) ? site_url().'?qr_id='.$tf_qr_download_link : '#'; ?>" target="_blank">
+                        <a href="<?php echo !empty($tf_qr_download_link) ? esc_url(site_url().'?qr_id='.esc_atttr($tf_qr_download_link)) : '#'; ?>" target="_blank">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M13 10H18L12 16L6 10H11V3H13V10ZM4 19H20V12H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V12H4V19Z" fill="#003C79"/>
                             </svg>
@@ -382,7 +382,7 @@
                                         <?php } ?>
                                         <h5><?php esc_html_e("Address:", "tourfic"); ?> <b style="color: #002043;"><?php echo esc_html( $location ) ?></b></h5>
                                     </div>
-                                    <img style="border: 1px solid #ccc;" src="//chart.apis.google.com/chart?cht=qr&chs=<?php echo esc_attr($width);?>x<?php echo esc_attr($height); ?>&chl=<?php echo htmlspecialchars($uri); ?>&choe=UTF-8" alt="<?php echo htmlspecialchars( $title ); ?>"/>
+                                    <img style="border: 1px solid #ccc;" src="//chart.apis.google.com/chart?cht=qr&chs=<?php echo esc_attr($width);?>x<?php echo esc_attr($height); ?>&chl=<?php echo esc_url($uri); ?>&choe=UTF-8" alt="<?php echo esc_attr( $title ); ?>"/>
                                 </div>
                                 <div class="tf-voucher-billing-info">
                                     <div class="tf-billing-details">
@@ -391,9 +391,9 @@
                                         $billing_last_name = !empty($tf_billing_details->billing_last_name) ? $tf_billing_details->billing_last_name : '';
                                         ?>
                                         <h5><?php esc_html_e("Name:", "tourfic"); ?> <?php echo esc_html( $billing_first_name.' '.$billing_last_name ); ?></h5>
-                                        <h5><?php esc_html_e("Price:", "tourfic"); ?> <?php echo wc_price( $tf_tour_details->total_price ) ?></h5>
+                                        <h5><?php esc_html_e("Price:", "tourfic"); ?> <?php echo esc_html( wc_price( $tf_tour_details->total_price ) ); ?></h5>
                                         <?php if(!empty($tf_tour_details->due_price)){ ?>
-                                        <h5><?php esc_html_e("Due Price:", "tourfic"); ?> <?php echo wc_price( $tf_tour_details->due_price ) ?></h5>
+                                        <h5><?php esc_html_e("Due Price:", "tourfic"); ?> <?php echo esc_html(wc_price( $tf_tour_details->due_price )) ?></h5>
                                         <?php } ?>
                                         <h5 style="text-transform: uppercase;"><?php esc_html_e("Payment Status:", "tourfic"); ?> <?php echo esc_html( $tf_order_details->payment_method ) ?></h5>
                                         <?php 
@@ -639,8 +639,8 @@
                         $field_keys = $field['reg-field-name'];
                         ?>
                         <div class="traveller-single-info">
-                            <label for="<?php echo esc_attr($field['reg-field-name']).$traveller_in ?>"><?php echo sprintf( esc_html__( '%s', 'tourfic' ),$field['reg-field-label']); ?></label>
-                            <input type="<?php echo esc_attr($field['reg-fields-type']); ?>" name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>]" id="<?php echo esc_attr($field['reg-field-name']).$traveller_in; ?>" value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{$field_keys}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{$field_keys} ) : '' ?>" />
+                            <label for="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in) ?>"><?php echo sprintf( esc_html__( '%s', 'tourfic' ),esc_html($field['reg-field-label'])); ?></label>
+                            <input type="<?php echo esc_attr($field['reg-fields-type']); ?>" name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>]" id="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in); ?>" value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{$field_keys}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{$field_keys} ) : '' ?>" />
                         </div>
                     <?php
                     }
@@ -648,10 +648,10 @@
                         $field_keys = $field['reg-field-name'];
                     ?>
                     <div class="traveller-single-info">
-                        <label for="<?php echo esc_attr($field['reg-field-name']).$traveller_in ?>">
-                            <?php echo sprintf( esc_html__( '%s', 'tourfic' ),$field['reg-field-label']); ?>
+                        <label for="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in) ?>">
+                            <?php echo sprintf( esc_html__( '%s', 'tourfic' ),esc_html($field['reg-field-label'])); ?>
                         </label>
-                        <select id="<?php echo esc_attr($field['reg-field-name']).$traveller_in ?>" name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>]">
+                        <select id="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in) ?>" name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>]">
                         <option value=""><?php echo sprintf( esc_html__( 'Select One', 'tourfic' )); ?></option>
                         <?php
                         foreach($field['reg-options'] as $sfield){
@@ -670,8 +670,8 @@
                     ?>
                         
                     <div class="traveller-single-info">
-                    <label for="<?php echo esc_attr($field['reg-field-name']).$traveller_in ?>">
-                    <?php echo sprintf( esc_html__( '%s', 'tourfic' ),$field['reg-field-label']); ?>
+                    <label for="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in) ?>">
+                    <?php echo sprintf( esc_html__( '%s', 'tourfic' ),esc_html($field['reg-field-label'])); ?>
                     </label>
                         <?php
                         foreach($field['reg-options'] as $sfield){
@@ -680,7 +680,7 @@
                                 <div class="tf-single-checkbox">
                                     <input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>][]" id="<?php echo esc_attr($sfield['option-value'].$traveller_in); ?>" value="<?php echo esc_attr($sfield['option-value']); ?>" <?php echo in_array($sfield['option-value'], $tf_fields_values) ? esc_attr( 'checked' ) : ''; ?> />
                                     <label for="<?php echo esc_attr($sfield['option-value'].$traveller_in); ?>">
-                                    <?php echo sprintf( esc_html__( '%s', 'tourfic' ),$sfield['option-label']); ?>
+                                    <?php echo sprintf( esc_html__( '%s', 'tourfic' ),esc_html($sfield['option-label'])); ?>
                                     </label>
                                 </div>
                                 <?php
@@ -748,7 +748,7 @@ if(!empty($tour_ides)){
                     <?php } ?>
                     <h5><?php esc_html_e("Address:", "tourfic"); ?> <b style="color: #002043;"><?php echo esc_html( $location ) ?></b></h5>
                 </div>
-                <img style="border: 1px solid #ccc;" src="//chart.apis.google.com/chart?cht=qr&chs=<?php echo esc_attr($width);?>x<?php echo esc_attr($height); ?>&chl=<?php echo htmlspecialchars($uri); ?>&choe=UTF-8" alt="<?php echo htmlspecialchars( $title ); ?>"/>
+                <img style="border: 1px solid #ccc;" src="//chart.apis.google.com/chart?cht=qr&chs=<?php echo esc_attr( $width ); ?>x<?php echo esc_attr( $height ); ?>&chl=<?php echo esc_url( htmlspecialchars( $uri ) ); ?>&choe=UTF-8" alt="<?php echo esc_attr( htmlspecialchars( $title ) ); ?>"/>
             </div>
             <div class="tf-voucher-billing-info">
                 <div class="tf-billing-details">
@@ -757,9 +757,9 @@ if(!empty($tour_ides)){
                     $billing_last_name = !empty($tf_billing_details->billing_last_name) ? $tf_billing_details->billing_last_name : '';
                     ?>
                     <h5><?php esc_html_e("Name:", "tourfic"); ?> <?php echo esc_html( $billing_first_name.' '.$billing_last_name ); ?></h5>
-                    <h5><?php esc_html_e("Price:", "tourfic"); ?> <?php echo wc_price( $tf_tour_details->total_price ) ?></h5>
+                    <h5><?php esc_html_e("Price:", "tourfic"); ?> <?php echo esc_html(wc_price( $tf_tour_details->total_price )) ?></h5>
                     <?php if(!empty($tf_tour_details->due_price)){ ?>
-                    <h5><?php esc_html_e("Due Price:", "tourfic"); ?> <?php echo wc_price( $tf_tour_details->due_price ) ?></h5>
+                    <h5><?php esc_html_e("Due Price:", "tourfic"); ?> <?php echo esc_html(wc_price( $tf_tour_details->due_price )) ?></h5>
                     <?php } ?>
                     <h5 style="text-transform: uppercase;"><?php esc_html_e("Payment Status:", "tourfic"); ?> <?php echo esc_html( $tf_order_details->payment_method ) ?></h5>
                     <?php 

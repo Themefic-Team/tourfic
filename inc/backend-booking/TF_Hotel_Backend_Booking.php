@@ -33,7 +33,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 
 		function tf_hotel_backend_booking_button() {
 			?>
-            <a href="<?php echo admin_url( 'edit.php?post_type=tf_hotel&page=tf-hotel-backend-booking' ); ?>" class="button button-primary tf-booking-btn"><?php esc_html_e( 'Add New Booking', 'tourfic' ); ?></a>
+            <a href="<?php echo esc_url(admin_url( 'edit.php?post_type=tf_hotel&page=tf-hotel-backend-booking' )); ?>" class="button button-primary tf-booking-btn"><?php esc_html_e( 'Add New Booking', 'tourfic' ); ?></a>
 			<?php
 		}
 

@@ -1,7 +1,7 @@
 <div class="tf-booking-details-preview">
     <div class="tf-details-preview-header">
         <div class="tf-back">
-            <a href="<?php echo get_admin_url( null, 'edit.php?post_type=tf_hotel&page=tf_hotel_booking' ); ?>">
+            <a href="<?php echo esc_url(get_admin_url( null, 'edit.php?post_type=tf_hotel&page=tf_hotel_booking' )); ?>">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M15 18L9 12L15 6" stroke="#003C79" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -19,7 +19,7 @@
             <ul>
                 <li><?php esc_html_e("Booking ID", "tourfic"); ?>: #<?php echo esc_html( $tf_order_details->order_id ); ?></li>
                 <li>|</li>
-                <li><?php esc_html_e("Booking created", "tourfic"); ?>: <?php echo date('F d, Y',strtotime($tf_order_details->order_date)); ?></li>
+                <li><?php esc_html_e("Booking created", "tourfic"); ?>: <?php echo esc_html(date('F d, Y',strtotime($tf_order_details->order_date))); ?></li>
                 <li>|</li>
                 <li><?php esc_html_e("Booking by", "tourfic"); ?>: <span style="text-transform: capitalize;">
                 <?php 
@@ -27,7 +27,7 @@
                     if("offline"==$tf_order_details->payment_method && empty($tf_booking_by)){
                         echo "Administrator";
                     }else{
-                        echo !empty($tf_booking_by->roles[0]) ? $tf_booking_by->roles[0] : 'Administrator';
+                        echo !empty($tf_booking_by->roles[0]) ? esc_html($tf_booking_by->roles[0]) : 'Administrator';
                     }
                 ?>
                 </span>
@@ -54,7 +54,7 @@
                                 <?php 
                                 foreach($tf_billing_details as $key=>$customer_info){ ?>
                                 <tr>
-                                    <th><?php echo str_replace("_"," ",esc_html( $key )); ?></th>
+                                    <th><?php echo esc_html(str_replace("_"," ", $key )); ?></th>
                                     <td>:</td>
                                     <td><?php echo esc_html( $customer_info ); ?></td>
                                 </tr>
@@ -170,7 +170,7 @@
                                             }
                                         }
                                         $sort_name = $tf_order_details->payment_method;
-                                        echo tf_get_payment_method_full_name( $sort_name );
+                                        echo esc_html(tf_get_payment_method_full_name( $sort_name ));
                                     ?>
                                     </td>
                                 </tr>
