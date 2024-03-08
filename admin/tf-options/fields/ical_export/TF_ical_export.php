@@ -38,12 +38,12 @@ if ( ! class_exists( 'TF_ical_export' ) ) {
 			$export_url = add_query_arg( $query_args, site_url( '/' ) );
 
 			$placeholder = ( ! empty( $this->field['placeholder'] ) ) ? 'placeholder="' . $this->field['placeholder'] . '"' : '';
-			echo '<input type="text" readonly name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '" value="' . esc_url( $export_url ) . '" ' . $placeholder . ' ' . wp_kses_post($this->field_attributes()) . '/>';
+			echo '<input type="text" readonly name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '" value="' . esc_url( $export_url ) . '" ' . wp_kses_post($placeholder) . ' ' . wp_kses_post($this->field_attributes()) . '/>';
 
 			if ( isset( $this->field['button_text'] ) && ! empty( $this->field['button_text'] ) ) {
 				$button_class = 'button button-primary button-large';
 				$button_class .= isset( $this->field['button_class'] ) ? ' ' . $this->field['button_class'] : '';
-				echo '<a href="' . esc_url( $export_url ) . '" target="_blank" class="' . $button_class . '" style="margin-top: 16px;">' . $this->field['button_text'] . '</a>';
+				echo '<a href="' . esc_url( $export_url ) . '" target="_blank" class="' . esc_attr($button_class) . '" style="margin-top: 16px;">' . esc_html($this->field['button_text']) . '</a>';
 			}
 		}
 
