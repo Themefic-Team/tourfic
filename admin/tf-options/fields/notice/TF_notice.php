@@ -14,7 +14,7 @@ if ( ! class_exists( 'TF_notice' ) ) {
 				return;
 			}
 			?>
-            <div class="tf-field-notice-inner tf-notice-<?php echo !empty( $this->field['notice']) ? $this->field['notice'] : 'info' ?>">
+            <div class="tf-field-notice-inner tf-notice-<?php echo !empty( $this->field['notice']) ? esc_attr($this->field['notice']) : 'info' ?>">
 				<?php if ( ! empty( $this->field['icon'] ) ): ?>
                     <div class="tf-field-notice-icon">
                         <i class="<?php echo esc_attr( $this->field['icon'] ); ?>"></i>
