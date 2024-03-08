@@ -88,11 +88,11 @@ if ( $comments ) {
 			?>
 			<div class="tf-progress-item">
 				<div class="tf-progress-bar">
-					<span class="percent-progress" style="width: <?php echo tf_average_rating_percent( $value, tfopt( 'r-base' ) ); ?>%"></span>
+					<span class="percent-progress" style="width: <?php echo esc_html(tf_average_rating_percent( $value, tfopt( 'r-base' ) )); ?>%"></span>
 				</div>
 				<div class="tf-review-feature-label tf-flex tf-flex-space-bttn">
 					<p class="feature-label"><?php esc_html_e( $key, "tourfic" ); ?></p>
-					<p class="feature-rating"> <?php echo $value; ?></p>
+					<p class="feature-rating"> <?php echo esc_html($value); ?></p>
 				</div>
 			</div>
 			<?php } } ?>
@@ -131,17 +131,17 @@ if ( $comments ) {
 			</div>
 			<div class="tf-review-details">
 				<div class="tf-review-author-name">
-					<h3><?php echo $c_author_name; ?></h3>
+					<h3><?php echo esc_html($c_author_name); ?></h3>
 				</div>
 				<div class="tf-review-ratings tf-mt-8">
-				<?php echo $c_rating; ?>
+				<?php echo esc_html($c_rating); ?>
 				</div>
 				<div class="tf-review-message">
-					<p><?php echo $c_content; ?></p>
+					<p><?php echo esc_html($c_content); ?></p>
 				</div>
 				<div class="tf-review-date">
 					<ul class="tf-list">
-						<li><i class="fa-regular fa-clock"></i> <?php echo date("F d, Y", strtotime($c_date)); ?></li>
+						<li><i class="fa-regular fa-clock"></i> <?php echo esc_html(date("F d, Y", strtotime($c_date))); ?></li>
 					</ul>
 				</div>
 			</div>
@@ -314,12 +314,12 @@ if ( ! empty( $tf_ratings_for ) ) {
                     <div class="tf-single-details">
                         <div class="tf-review-avatar"><?php echo $c_avatar; ?></div>
                         <div class="tf-review-details">
-                            <div class="tf-name"><?php echo $c_author_name; ?></div>
-                            <div class="tf-date"><?php echo $c_date; ?></div>
+                            <div class="tf-name"><?php echo esc_html($c_author_name); ?></div>
+                            <div class="tf-date"><?php echo esc_html($c_date); ?></div>
                             <div class="tf-rating-stars">
-								<?php echo $c_rating; ?>
+								<?php echo esc_html($c_rating); ?>
                             </div>
-                            <div class="tf-description"><p><?php echo $c_content; ?></p></div>
+                            <div class="tf-description"><p><?php echo esc_html($c_content); ?></p></div>
                         </div>
                     </div>
 					<?php

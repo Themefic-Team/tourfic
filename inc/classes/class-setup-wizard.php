@@ -329,7 +329,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                                     $pages              = get_pages();
                                     $search_result_page = !empty($tf_search_result_page) ? $tf_search_result_page : get_option( 'tf_search_page_id' );
                                     foreach ( $pages as $page ) {
-                                        echo '<option value="' . $page->ID . '" ' . selected( $search_result_page, $page->ID, false ) . '>' . $page->post_title . '</option>';
+                                        echo '<option value="' . esc_attr($page->ID) . '" ' . selected( $search_result_page, $page->ID, false ) . '>' . esc_html($page->post_title) . '</option>';
                                     }
                                     ?>
                                 </select>
@@ -354,7 +354,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                                     $pages         = get_pages();
                                     $wishlist_page = !empty($tf_wishlist_page) ? $tf_wishlist_page : get_option( 'tf_wishlist_page_id' );
                                     foreach ( $pages as $page ) {
-                                        echo '<option value="' . $page->ID . '" ' . selected( $wishlist_page, $page->ID, false ) . '>' . $page->post_title . '</option>';
+                                        echo '<option value="' . esc_attr($page->ID) . '" ' . selected( $wishlist_page, $page->ID, false ) . '>' . esc_html($page->post_title) . '</option>';
                                     }
                                     ?>
                                 </select>
@@ -850,10 +850,10 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <h1 class="tf-setup-welcome-title"><?php esc_html_e( 'Hooray! You’re all set.', 'tourfic' ) ?></h1>
                     <div class="tf-setup-welcome-description"><?php esc_html_e( 'Let\'s get started with Tourfic. Provide your customers with a seamless booking </br> experience with this plugin. Let\'s streamline your business operations now!', 'tourfic' ) ?></div>
                     <div class="tf-setup-welcome-footer tf-setup-finish-footer">
-                        <a href="<?php echo admin_url( 'post-new.php?post_type=tf_hotel' ) ?>" class="tf-link-skip-btn tf-add-new-hotel tf-settings-default-button"><?php esc_html_e( 'Create Hotel', 'tourfic' ) ?></a>
-                        <a href="<?php echo admin_url( 'post-new.php?post_type=tf_tours' ) ?>" class="tf-link-skip-btn tf-add-new-tour tf-settings-default-button"><?php esc_html_e( 'Create Tour', 'tourfic' ) ?></a>
-                        <a href="<?php echo admin_url( 'post-new.php?post_type=tf_apartment' ) ?>" class="tf-link-skip-btn tf-add-new-apartment tf-settings-default-button"><?php esc_html_e( 'Create Apartment', 'tourfic' ) ?></a>
-                        <a href="<?php echo admin_url( 'admin.php?page=tf_settings' ) ?>" class="tf-quick-setup-btn tf-settings-default-button">
+                        <a href="<?php echo esc_url(admin_url( 'post-new.php?post_type=tf_hotel' )) ?>" class="tf-link-skip-btn tf-add-new-hotel tf-settings-default-button"><?php esc_html_e( 'Create Hotel', 'tourfic' ) ?></a>
+                        <a href="<?php echo esc_url(admin_url( 'post-new.php?post_type=tf_tours' )) ?>" class="tf-link-skip-btn tf-add-new-tour tf-settings-default-button"><?php esc_html_e( 'Create Tour', 'tourfic' ) ?></a>
+                        <a href="<?php echo esc_url(admin_url( 'post-new.php?post_type=tf_apartment' )) ?>" class="tf-link-skip-btn tf-add-new-apartment tf-settings-default-button"><?php esc_html_e( 'Create Apartment', 'tourfic' ) ?></a>
+                        <a href="<?php echo esc_url(admin_url( 'admin.php?page=tf_settings' )) ?>" class="tf-quick-setup-btn tf-settings-default-button">
                             <span><?php esc_html_e( 'Tourfic Setting', 'tourfic' ) ?></span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M5 12H19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
