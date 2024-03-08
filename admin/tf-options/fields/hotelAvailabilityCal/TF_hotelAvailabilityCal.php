@@ -78,7 +78,7 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
                     </div>
 
                 </div>
-                <input type="hidden" class="avail_date" name="<?php echo esc_attr( $this->field_name() ); ?>" id="<?php echo esc_attr( $this->field_name() ); ?>" value='<?php echo $this->value; ?>'/>
+                <input type="hidden" class="avail_date" name="<?php echo esc_attr( $this->field_name() ); ?>" id="<?php echo esc_attr( $this->field_name() ); ?>" value='<?php echo esc_html($this->value); ?>'/>
             </div>
 			<?php
 		}
