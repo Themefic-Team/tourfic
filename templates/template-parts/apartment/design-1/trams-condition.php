@@ -7,7 +7,7 @@ if ( $tc ) { ?>
         <?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : esc_html__("Policies","tourfic"); ?>
     </h2>  
     <div class="tf-policies">
-        <?php echo wpautop( $tc ); ?>
+        <?php echo wp_kses_post(wpautop( $tc )); ?>
     </div>
 </div>
 <!-- apartment Policies end -->

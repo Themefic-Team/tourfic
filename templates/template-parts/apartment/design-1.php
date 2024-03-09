@@ -300,7 +300,7 @@
                 </button>
                 <?php
                 // Review moderation notice
-                echo tf_pending_review_notice( $post_id );
+                echo wp_kses_post(tf_pending_review_notice( $post_id ));
                 ?>
                 <?php
                 if ( ! empty( $tf_ratings_for ) ) {
@@ -459,7 +459,6 @@ if ( $disable_related_sec !== '1' ) {
                                     <div class="tf-post-single-box">
                                         <div class="tf-image-data">
                                             <img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $selected_design_post_id, 'full' )  ): esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>" alt="">
-                                            
                                         </div>
                                         <div class="tf-meta-info">
                                             <div class="meta-content">
@@ -468,7 +467,7 @@ if ( $disable_related_sec !== '1' ) {
                                                     <?php echo esc_html( tourfic_character_limit_callback(get_the_title($selected_design_post_id), 35) ); ?>
                                                     </a></h2>
                                                     <div class="tf-meta-data-price">
-                                                        <span><?php echo !empty($apartment_min_price["min"]) ? wc_price($apartment_min_price["min"]) : '';
+                                                        <span><?php echo !empty($apartment_min_price["min"]) ? wp_kses_post(wc_price($apartment_min_price["min"])) : '';
                                                         ?></span><span class="pricing_calc_type">/<?php echo esc_html( $pricing_type ); ?></span>
                                                     </div>
                                                 </div>
