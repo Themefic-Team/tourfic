@@ -887,7 +887,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <div class="tf-steps-item-container">
                         <div class="tf-steps-item-icon">
                             <span class="tf-steps-icon">
-                                <?php echo $active_step == 1 ? $active_icon : $finish_icon; ?>
+                                <?php echo $active_step == 1 ? wp_kses_post($active_icon) : wp_kses_post($finish_icon); ?>
                             </span>
                         </div>
                     </div>
@@ -897,7 +897,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <div class="tf-steps-item-container">
                         <div class="tf-steps-item-icon">
                             <span class="tf-steps-icon">
-                                <?php echo $active_step == 2 ? $active_icon : ( $active_step > 2 ? $finish_icon : $inactive_icon ); ?>
+                                <?php echo $active_step == 2 ? wp_kses_post($active_icon) : ( $active_step > 2 ? wp_kses_post($finish_icon) : wp_kses_post($inactive_icon) ); ?>
                             </span>
                         </div>
                     </div>
@@ -906,7 +906,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <div class="tf-steps-item-container">
                         <div class="tf-steps-item-icon">
                             <span class="tf-steps-icon">
-                                <?php echo $active_step == 3 ? $active_icon : ( $active_step > 3 ? $finish_icon : $inactive_icon ); ?>
+                                <?php echo $active_step == 3 ? wp_kses_post($active_icon) : ( $active_step > 3 ? wp_kses_post($finish_icon) : wp_kses_post($inactive_icon) ); ?>
                             </span>
                         </div>
                     </div>
@@ -916,7 +916,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <div class="tf-steps-item-container">
                         <div class="tf-steps-item-icon">
                             <span class="tf-steps-icon">
-                                <?php echo $active_step == 4 ? $active_icon : ( $active_step > 4 ? $finish_icon : $inactive_icon ); ?>
+                                <?php echo $active_step == 4 ? wp_kses_post($active_icon) : ( $active_step > 4 ? wp_kses_post($finish_icon) : wp_kses_post($inactive_icon) ); ?>
                             </span>
                         </div>
                     </div>
@@ -926,7 +926,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <div class="tf-steps-item-container">
                         <div class="tf-steps-item-icon">
                             <span class="tf-steps-icon">
-                                <?php echo $active_step == 5 ? $active_icon : ( $active_step > 5 ? $finish_icon : $inactive_icon ); ?>
+                                <?php echo $active_step == 5 ? wp_kses_post($active_icon) : ( $active_step > 5 ? wp_kses_post($finish_icon) : wp_kses_post($inactive_icon) ); ?>
                             </span>
                         </div>
                     </div>
