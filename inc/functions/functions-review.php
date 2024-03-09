@@ -519,7 +519,7 @@ function tf_archive_single_rating() {
 				} else if ( $rating_star == 0.5 ) {
 					$icons .= '<i class="fas fa-star-half-alt"></i>';
 				}
-				echo $icons;
+				echo wp_kses_post( $icons );
 				?>
 				</div>
 				<div class="tf-avarage-review">
