@@ -454,7 +454,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 		$tour_location_field_required = ! empty( tfopt( 'tour_location_field_required' ) ) ? tfopt( 'tour_location_field_required' ) : '';
         if( !empty($design) && 2==$design ){
 		?>
-		<form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
+		<form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(tf_booking_search_action()); ?>">
 			<div class="tf_hotel_searching">
 				<div class="tf_form_innerbody">
 					<div class="tf_form_fields">
@@ -698,7 +698,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 			})(jQuery);
 		</script>
 		<?php }else{ ?>
-        <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
+        <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(tf_booking_search_action()); ?>">
             <div class="tf_homepage-booking">
 				<?php if( tfopt( 'hide_tour_location_search' ) != 1 || tfopt( 'required_location_tour_search' ) ): ?>
 					<div class="tf_destination-wrap">
@@ -1241,7 +1241,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                                         </div>
                                                         <div class="tf-extra-content">
                                                             <h5><?php esc_html_e( $tour_extra['title'] ); ?> <?php echo $tour_extra_pricetype == "fixed" ? esc_html( "(Fixed Price)" ) : ($tour_extra_pricetype == "person" ? esc_html( "(Per Person Price)" ) : esc_html( "(Per unit Price)" )); ?>
-                                                                <span><?php echo wc_price( $tour_extra['price'] ); ?></span></h5>
+                                                                <span><?php echo wp_kses_post(wc_price( $tour_extra['price'] )); ?></span></h5>
 															<?php
 															if(!empty($tour_extra['desc'])){ ?>
                                                             <p><?php echo esc_html( $tour_extra['desc'] ); ?></p>
@@ -1633,7 +1633,7 @@ function tf_single_tour_booking_form( $post_id ) {
                     <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php esc_html_e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
                 </div>
 				<?php endif; ?>
-				<?php echo tf_booking_popup( $post_id ); ?>
+				<?php echo wp_kses_post(tf_booking_popup( $post_id )); ?>
             </div>
 
             <!-- bottom bar -->
@@ -1776,7 +1776,7 @@ function tf_single_tour_booking_form( $post_id ) {
                         <a href="#" class="tf-btn-normal btn-primary tf-booking-mobile-btn"><?php esc_html_e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
                     </div>
 				<?php endif; ?>
-		            <?php //echo tf_booking_popup( $post_id ); ?>
+		            <?php //echo wp_kses_post(tf_booking_popup( $post_id )); ?>
                 </div>
             </div>
             <script>
@@ -2080,7 +2080,7 @@ function tf_single_tour_booking_form( $post_id ) {
 						<a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php esc_html_e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
 					</div>
 				<?php endif; ?>
-				<?php echo tf_booking_popup( $post_id ); ?>
+				<?php echo wp_kses_post(tf_booking_popup( $post_id )); ?>
             </div>
 
             <!-- bottom bar -->
@@ -2241,7 +2241,7 @@ function tf_single_tour_booking_form( $post_id ) {
                         <a href="#" class="tf-btn-normal btn-primary tf-booking-mobile-btn"><?php esc_html_e( $tf_tour_book_now_text, 'tourfic' ); ?></a>
                     </div>
 					<?php endif; ?>
-		            <?php //echo tf_booking_popup( $post_id ); ?>
+		            <?php //echo wp_kses_post(tf_booking_popup( $post_id )); ?>
                 </div>
             </div>
             <script>
@@ -2573,7 +2573,7 @@ function tf_single_tour_booking_form( $post_id ) {
                     </div>
 				<?php endif; ?>
                 </div>
-				<?php echo tf_booking_popup( $post_id ); ?>
+				<?php echo wp_kses_post(tf_booking_popup( $post_id )); ?>
             </form>
         </div>
         <script>
@@ -2999,7 +2999,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 					<?php 
 					if( !empty($tf_discount_type) && $tf_discount_type!="none" && !empty($tf_discount_amount) ){
 					?>
-					<div class="tf-discount"><?php echo $tf_discount_type == "percent" ? esc_attr($tf_discount_amount)."%" : wc_price($tf_discount_amount); ?> <?php esc_html_e("Off", "tourfic"); ?></div>
+					<div class="tf-discount"><?php echo $tf_discount_type == "percent" ? esc_attr($tf_discount_amount)."%" : wp_kses_post(wc_price($tf_discount_amount)); ?> <?php esc_html_e("Off", "tourfic"); ?></div>
 					<?php } ?>
 
 					<?php if( $featured ): ?>
@@ -3018,11 +3018,11 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 							$tag_font_color = !empty($tag["tour-tag-color-settings"]["font"]) ? $tag["tour-tag-color-settings"]["font"] : "#fff";
 
 							if (!empty($tour_tag_name)) {
-								echo <<<EOD
-									<div class="tf-multiple-tag-item" style="color: $tag_font_color; background-color: $tag_background_color ">
-										<span class="tf-multiple-tag">$tour_tag_name</span>
+								?>
+									<div class="tf-multiple-tag-item" style="color: <?php echo esc_attr($tag_font_color) ?>; background-color: <?php echo esc_attr($tag_background_color); ?>; ">
+										<span class="tf-multiple-tag"><?php echo esc_html($tour_tag_name) ?></span>
 									</div>
-								EOD;
+								<?php
 							}
 						}
 					}
@@ -3062,7 +3062,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
             <?php tf_archive_single_rating();?>
             
             <div class="tf-details tf-mt-16">
-                <p><?php echo substr(wp_strip_all_tags(get_the_content()), 0, 100). '...'; ?></p>
+                <p><?php echo wp_kses_post(substr(wp_strip_all_tags(get_the_content()), 0, 100). '...'); ?></p>
             </div>
             <div class="tf-post-footer tf-flex tf-flex-align-center tf-flex-space-bttn tf-mt-16">
                 <div class="tf-pricing">
@@ -3085,9 +3085,9 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 						}
 					}
 					$lowest_price = wc_price( $tf_tour_min_price );
-					echo esc_html__( "From ", "tourfic" ) . esc_attr($lowest_price) . " ";
+					echo esc_html__( "From ", "tourfic" ) . wp_kses_post($lowest_price) . " ";
 					if ( ! empty( $tf_tour_min_discount ) ) {
-						echo "<del>" . wc_price( $tf_tour_full_price ) . "</del>";
+						echo "<del>" . wp_kses_post(wc_price( $tf_tour_full_price )) . "</del>";
 					}
 				?>
 
@@ -3139,9 +3139,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 						$tag_font_color = !empty($tag["tour-tag-color-settings"]["font"]) ? $tag["tour-tag-color-settings"]["font"] : "#fff";
 
 						if (!empty($tour_tag_name)) {
-							echo <<<EOD
-								<span class="tf-multiple-tag" style="color: $tag_font_color; background-color: $tag_background_color ">$tour_tag_name</span>
-							EOD;
+							echo '<span class="tf-multiple-tag" style="color: '.esc_attr($tag_font_color).'; background-color: '.esc_attr($tag_background_color).' ">'.esc_html($tour_tag_name).'</span>';
 						}
 					}
 				}
@@ -3177,7 +3175,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 					?>
 						<div class="tf-available-room-off">
 							<span>
-								<?php echo $tf_discount_type == "percent" ? $tf_discount_amount."%" : wc_price($tf_discount_amount); ?> <?php esc_html_e("Off", "tourfic"); ?>
+								<?php echo $tf_discount_type == "percent" ? esc_html($tf_discount_amount."%") : wp_kses_post(wc_price($tf_discount_amount)); ?> <?php esc_html_e("Off", "tourfic"); ?>
 							</span>
 						</div>
 					<?php } ?>
@@ -3201,9 +3199,9 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 								}
 							}
 							$lowest_price = wc_price( $tf_tour_min_price );
-							echo esc_html__( "From ", "tourfic" ) . $lowest_price . " ";
+							echo esc_html__( "From ", "tourfic" ) . wp_kses_post($lowest_price) . " ";
 							if ( ! empty( $tf_tour_min_discount ) ) {
-								echo "<del>" . wc_price( $tf_tour_full_price ) . "</del>";
+								echo "<del>" . wp_kses_post(wc_price( $tf_tour_full_price )) . "</del>";
 							}
 						?>
 						</span>
@@ -3254,7 +3252,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 					?>
 						<div class="tf-available-room-off">
 							<span>
-								<?php echo $tf_discount_type == "percent" ? esc_attr($tf_discount_amount)."%" : wc_price($tf_discount_amount); ?> <?php esc_html_e("Off", "tourfic"); ?>
+								<?php echo $tf_discount_type == "percent" ? esc_attr($tf_discount_amount)."%" : wp_kses_post(wc_price($tf_discount_amount)); ?> <?php esc_html_e("Off", "tourfic"); ?>
 							</span>
 						</div>
 					<?php } ?>
@@ -3280,9 +3278,9 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 							$lowest_price = wc_price( $tf_tour_min_price );
 							
 							if ( ! empty( $tf_tour_min_discount ) ) {
-								echo esc_html__( "From ", "tourfic" ) . " " . "<del>" . strip_tags(wc_price( $tf_tour_full_price )) . "</del>" . " ". $lowest_price ;
+								echo esc_html__( "From ", "tourfic" ) . " " . "<del>" . wp_kses_post(strip_tags(wc_price( $tf_tour_full_price ))) . "</del>" . " ". wp_kses_post($lowest_price) ;
 							} else {
-								echo esc_html__( "From ", "tourfic" ) . esc_attr($lowest_price) . " ";
+								echo esc_html__( "From ", "tourfic" ) . wp_kses_post($lowest_price) . " ";
 							}
 						?>
 						</span>
@@ -3312,9 +3310,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 								$tag_font_color = !empty($tag["tour-tag-color-settings"]["font"]) ? $tag["tour-tag-color-settings"]["font"] : "#fff";
 
 								if(!empty($hotel_tag_name)) {
-									echo <<<EOD
-										<span class="default-single-tag" style="color: $tag_font_color; background-color: $tag_background_color">$hotel_tag_name</span>
-									EOD;
+									echo '<span class="default-single-tag" style="color: '.esc_attr($tag_font_color).'; background-color: '.esc_attr($tag_background_color).'">'.esc_html($hotel_tag_name).'</span>';
 								}
 							}
 						}
@@ -3347,7 +3343,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 						<?php tf_archive_single_rating(); ?>
                     </div>
                     <div class="tf-tour-desc">
-                        <p><?php echo substr( wp_strip_all_tags( get_the_content() ), 0, 160 ) . '...'; ?></p>
+                        <p><?php echo wp_kses_post(substr( wp_strip_all_tags( get_the_content() ), 0, 160 ) . '...'); ?></p>
                     </div>
 
                     <div class="availability-btn-area tour-search">
@@ -3549,9 +3545,9 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 								}
 							}
 							$lowest_price = wc_price( $tf_tour_min_price );
-							echo esc_html__( "From ", "tourfic" ) . esc_attr($lowest_price);
+							echo esc_html__( "From ", "tourfic" ) . wp_kses_post($lowest_price);
 							if ( ! empty( $tf_tour_min_discount ) ) {
-								echo "<del>" . wc_price( $tf_tour_full_price ) . "</del>";
+								echo "<del>" . wp_kses_post(wc_price( $tf_tour_full_price )) . "</del>";
 							}
 							?>
                         </div>
