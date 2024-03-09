@@ -80,7 +80,7 @@
                 </div>
                 <div class="tf-hero-bottom-area">
                     <div class="tf-head-title">
-                        <h1><?php echo get_the_title(); ?></h1>
+                        <h1><?php the_title(); ?></h1>
                         <?php 
                         if(!empty($location)){ ?>
                         <div class="tf-title-meta">
@@ -158,7 +158,7 @@
                 <div class="tf-details-right tf-sitebar-widgets">
                     <div class="tf-search-date-wrapper tf-single-widgets">
                         <h2 class="tf-section-title"><?php esc_html_e("Available Date", "tourfic"); ?></h2>
-                        <?php echo tf_single_tour_booking_form( $post->ID ); ?>
+                        <?php echo wp_kses_post(tf_single_tour_booking_form( $post->ID )); ?>
                     </div>
                     
                     <!-- Contact info - Start -->
@@ -212,7 +212,7 @@
                             <div class="tf-review-data-average">
                                 <span class="avg-review"><span>
                                     <?php esc_html_e( sprintf( '%.1f', $total_rating ) ); ?>
-                                </span>/ <?php echo $tf_settings_base; ?></span>
+                                </span>/ <?php echo wp_kses_post($tf_settings_base); ?></span>
                             </div>
                             <div class="tf-review-all-info">
                                 <p><?php esc_html_e("Excellent", "tourfic"); ?> <span><?php esc_html_e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></span></p>
@@ -231,10 +231,10 @@
                                 <div class="tf-progress-item">                                    
                                     <div class="tf-review-feature-label">
                                         <p class="feature-label"><?php esc_html_e( $key, "tourfic" ); ?></p>
-                                        <p class="feature-rating"> <?php echo $value; ?></p>
+                                        <p class="feature-rating"> <?php echo esc_html($value); ?></p>
                                     </div>
                                     <div class="tf-progress-bar">
-                                        <span class="percent-progress" style="width: <?php echo tf_average_rating_percent( $value, tfopt( 'r-base' ) ); ?>%"></span>
+                                        <span class="percent-progress" style="width: <?php echo esc_attr(tf_average_rating_percent( $value, tfopt( 'r-base' ) )); ?>%"></span>
                                     </div>
                                 </div>
                                 <?php } } ?>
@@ -249,7 +249,7 @@
                     </button>
                     <?php
                     // Review moderation notice
-                    echo tf_pending_review_notice( $post_id );
+                    echo wp_kses_post(tf_pending_review_notice( $post_id ));
                     ?>
                     <?php
                     if ( ! empty( $tf_ratings_for ) ) {
@@ -288,22 +288,22 @@
                         <?php 
                         if (!empty($tf_enquiry_section_icon)) {
                             ?>
-                            <i class="<?php echo $tf_enquiry_section_icon; ?>" aria-hidden="true"></i>
+                            <i class="<?php echo esc_attr($tf_enquiry_section_icon); ?>" aria-hidden="true"></i>
                             <?php
                         }
                         if(!empty($tf_enquiry_section_title)) {
                             ?>
-                            <h3><?php echo  $tf_enquiry_section_title; ?></h3>
+                            <h3><?php echo esc_html($tf_enquiry_section_title); ?></h3>
                             <?php
                         }
                         if(!empty($tf_enquiry_section_des)) {
                             ?>
-                            <p><?php echo $tf_enquiry_section_des;  ?></p>
+                            <p><?php echo wp_kses_post($tf_enquiry_section_des);  ?></p>
                             <?php
                         }
                         if( !empty( $tf_enquiry_section_button )) {
                             ?>
-                            <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-send-inquiry-btn"><span><?php echo $tf_enquiry_section_button; ?></span></a></div>
+                            <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-send-inquiry-btn"><span><?php echo esc_html($tf_enquiry_section_button); ?></span></a></div>
                             <?php
                         }
                         ?>
@@ -418,24 +418,23 @@
                                     <div class="tf-slider-item tf-post-box-lists">
                                         <div class="tf-post-single-box">
                                             <div class="tf-image-data">
-                                                <img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) ) ? get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) : TF_ASSETS_APP_URL . '/images/feature-default.jpg'; ?>" alt="">
-                                                
+                                                <img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) ) ? esc_url(get_the_post_thumbnail_url( $selected_design_post_id, 'full' )) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>" alt="">
                                             </div>
                                             <div class="tf-meta-info">
                                                 <div class="meta-content">
                                                     <div class="tf-meta-title">
-                                                        <h2><a href="<?php echo get_permalink($selected_design_post_id) ?>">
-                                                        <?php echo tourfic_character_limit_callback(get_the_title($selected_design_post_id), 35); ?>
+                                                        <h2><a href="<?php the_permalink($selected_design_post_id) ?>">
+                                                        <?php echo wp_kses_post(tourfic_character_limit_callback(get_the_title($selected_design_post_id), 35)); ?>
                                                         </a></h2>
                                                         <div class="tf-meta-data-price">
                                                             <span>
                                                             <?php if ( $pricing_rule == 'group' ) {
-                                                                echo $tour_price->wc_sale_group ?? $tour_price->wc_group;
+                                                                echo wp_kses_post($tour_price->wc_sale_group) ?? $tour_price->wc_group;
                                                             } else if ( $pricing_rule == 'person' ) {
                                                                 if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
-                                                                    echo $tour_price->wc_sale_adult ?? $tour_price->wc_adult;
+                                                                    echo wp_kses_post($tour_price->wc_sale_adult) ?? $tour_price->wc_adult;
                                                                 } else if ( ! $disable_child && ! empty( $tour_price->child ) ) {
-                                                                    echo $tour_price->wc_sale_child ?? $tour_price->wc_child;
+                                                                    echo wp_kses_post($tour_price->wc_sale_child) ?? $tour_price->wc_child;
                                                                 }
                                                             }
                                                             ?>
@@ -443,10 +442,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="tf-meta-location">
-                                                        <i class="fa-solid fa-location-dot"></i> <?php echo $first_destination_name; ?>
+                                                        <i class="fa-solid fa-location-dot"></i> <?php echo esc_html($first_destination_name); ?>
                                                     </div>
                                                 </div>
-                                                <a class="see-details" href="<?php echo get_permalink($selected_design_post_id) ?>">
+                                                <a class="see-details" href="<?php the_permalink($selected_design_post_id) ?>">
                                                     <?php esc_html_e("See details", "tourfic"); ?>
                                                 </a>
                                             </div>
