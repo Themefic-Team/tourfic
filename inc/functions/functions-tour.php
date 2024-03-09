@@ -3299,7 +3299,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
             <div class="single-tour-inner">
 				<?php if ( $featured ): ?>
                     <div class="tf-featured-badge">
-                        <span><?php echo ! empty( $meta['featured_text'] ) ? $meta['featured_text'] : esc_html( "HOT DEAL" ); ?></span>
+                        <span><?php echo ! empty( $meta['featured_text'] ) ? esc_html($meta['featured_text']) : esc_html( "HOT DEAL" ); ?></span>
                     </div>
 				<?php endif; ?>
                 <div class="tourfic-single-left">
@@ -3334,12 +3334,12 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
                     <div class="tf_property_block_main_row">
                         <div class="tf_item_main_block">
                             <div class="tf-hotel__title-wrap tf-tours-title-wrap">
-                                <a href="<?php echo $url; ?>"><h3 class="tourfic_hotel-title"><?php the_title(); ?></h3></a>
+                                <a href="<?php echo esc_url($url); ?>"><h3 class="tourfic_hotel-title"><?php the_title(); ?></h3></a>
                             </div>
 							<?php
 							if ( $location ) {
 								echo '<div class="tf-map-link">';
-								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . strlen($location) > 75 ? tourfic_character_limit_callback($location, 76) : $location . '</span>';
+								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . strlen($location) > 75 ? esc_html(tourfic_character_limit_callback($location, 76)) : esc_html($location) . '</span>';
 								echo '</div>';
 							}
 							?>
@@ -3351,7 +3351,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
                     </div>
 
                     <div class="availability-btn-area tour-search">
-                        <a href="<?php echo $url; ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
+                        <a href="<?php echo esc_url($url); ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
                     </div>
 
 					<?php
@@ -3549,7 +3549,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 								}
 							}
 							$lowest_price = wc_price( $tf_tour_min_price );
-							echo esc_html__( "From ", "tourfic" ) . $lowest_price;
+							echo esc_html__( "From ", "tourfic" ) . esc_attr($lowest_price);
 							if ( ! empty( $tf_tour_min_discount ) ) {
 								echo "<del>" . wc_price( $tf_tour_full_price ) . "</del>";
 							}
