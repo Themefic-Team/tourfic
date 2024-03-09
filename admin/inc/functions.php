@@ -84,7 +84,11 @@ function tf_required_taxonomies( $hook ) {
 
 		if ( ! isset( $config['message'] ) || $taxonomy === $config ) {
 			$post_type_labels  = get_post_type_labels( get_post_type_object( $post_type ) );
-			$config['message'] = sprintf( __( 'Please choose at least one %s before publishing this %s.', 'tourfic' ), $taxonomy_labels->singular_name, $post_type_labels->singular_name );
+            /*
+             * translators: %s: taxonomy singular name
+             * translators: %s: post type singular name
+             */
+			$config['message'] = sprintf( __( 'Please choose at least one %1$s before publishing this %2$s.', 'tourfic' ), $taxonomy_labels->singular_name, $post_type_labels->singular_name );
 		}
 
 		$post_types[ $post_type ][ $taxonomy ]['message'] = $config['message'];

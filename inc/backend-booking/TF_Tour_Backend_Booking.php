@@ -752,6 +752,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 							$response['errors'][] = esc_html__( 'Booking limit is Reached this Tour', 'tourfic' );
 						}
 						if ( $tf_total_people != $tf_tour_booking_limit && $tf_today_limit < $total_people_booking ) {
+                            // translators: %1$s is the number of available seats */
 							$response['errors'][] = sprintf( esc_html__( 'Only %1$s Adult/Children are available this Tour', 'tourfic' ), $tf_today_limit );
 						}
 					}
@@ -852,6 +853,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 							$response['errors'][] = esc_html__( 'Booking limit is Reached this Date', 'tourfic' );
 						}
 						if ( $tf_total_people != $tf_tour_booking_limit && $tf_today_limit < $total_people_booking ) {
+                            // translators: %1$s is the number of available seats */
 							$response['errors'][] = sprintf( esc_html__( 'Only %1$s Adult/Children are available this Date', 'tourfic' ), $tf_today_limit );
 						}
 					}
@@ -916,26 +918,36 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 			 */
 			if ( $tour_type == 'fixed' ) {
 
+                /* translators: %s minimum people */
 				$min_text = sprintf( _n( '%s person', '%s people', $min_people, 'tourfic' ), $min_people );
+
+                /* translators: %s maximum people */
 				$max_text = sprintf( _n( '%s person', '%s people', $max_people, 'tourfic' ), $max_people );
 
 				if ( $total_people < $min_people && $min_people > 0 ) {
+                    /* translators: %s minimum people */
 					$response['errors'][] = sprintf( esc_html__( 'Minimum %1$s required', 'tourfic' ), $min_text );
 
 				} else if ( $total_people > $max_people && $max_people > 0 ) {
+                    /* translators: %s maximum people */
 					$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_text );
 
 				}
 
 			} elseif ( $tour_type == 'continuous' && $custom_avail == false ) {
 
+                /* translators: %s minimum people */
 				$min_text = sprintf( _n( '%s person', '%s people', $min_people, 'tourfic' ), $min_people );
+
+                /* translators: %s maximum people */
 				$max_text = sprintf( _n( '%s person', '%s people', $max_people, 'tourfic' ), $max_people );
 
 				if ( $total_people < $min_people && $min_people > 0 ) {
+                    /* translators: %s minimum people */
 					$response['errors'][] = sprintf( esc_html__( 'Minimum %1$s required', 'tourfic' ), $min_text );
 
 				} else if ( $total_people > $max_people && $max_people > 0 ) {
+                    /* translators: %s maximum people */
 					$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_text );
 
 				}
@@ -954,16 +966,22 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 					// Backend continuous min/max people values
 					$min_people = ! empty( $item['min_people'] ) ? $item['min_people'] : '';
 					$max_people = ! empty( $item['max_people'] ) ? $item['max_people'] : '';
+
+                    /* translators: %s minimum people */
 					$min_text   = sprintf( _n( '%s person', '%s people', $min_people, 'tourfic' ), $min_people );
-					$max_text   = sprintf( _n( '%s person', '%s people', $max_people, 'tourfic' ), $max_people );
+
+                    /* translators: %s maximum people */
+                    $max_text   = sprintf( _n( '%s person', '%s people', $max_people, 'tourfic' ), $max_people );
 
 
 					// Compare backend & frontend date values to show specific people number error
 					if ( $front_date >= $back_date_from_stt && $front_date <= $back_date_to_stt ) {
 						if ( $total_people < $min_people && $min_people > 0 ) {
+                            /* translators: %1$s minimum people, %2$s date from, %3$s date to */
 							$response['errors'][] = sprintf( esc_html__( 'Minimum %1$s required for date %2$s - %3$s', 'tourfic' ), $min_text, $back_date_from, $back_date_to );
 						}
 						if ( $total_people > $max_people && $max_people > 0 ) {
+                            /* translators: %1$s maximum people, %2$s date from, %3$s date to */
 							$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed for date %2$s - %3$s', 'tourfic' ), $max_text, $back_date_from, $back_date_to );
 						}
 
@@ -1043,6 +1061,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 								$response['errors'][] = esc_html__( 'Booking limit is Reached this Date', 'tourfic' );
 							}
 							if ( $tf_total_people != $tf_tour_booking_limit && $tf_today_limit < $total_people_booking ) {
+                                // translators: %1$s is the number of available seats */
 								$response['errors'][] = sprintf( esc_html__( 'Only %1$s Adult/Children are available this Date', 'tourfic' ), $tf_today_limit );
 							}
 						}
@@ -1055,13 +1074,15 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 			 */
 			/* Minimum days to book before departure */
 			$min_days_before_book      = ! empty( $meta['min_days_before_book'] ) ? $meta['min_days_before_book'] : '0';
-			$min_days_before_book_text = sprintf( _n( '%s day', '%s days', $min_days_before_book, 'tourfic' ), $min_days_before_book );
+			/* translators: %s minimum days before booking */
+            $min_days_before_book_text = sprintf( _n( '%s day', '%s days', $min_days_before_book, 'tourfic' ), $min_days_before_book );
 			$today_stt                 = new DateTime( date( 'Y-m-d', strtotime( date( 'Y-m-d' ) ) ) );
 			$tour_date_stt             = new DateTime( date( 'Y-m-d', strtotime( $start_date ) ) );
 			$day_difference            = $today_stt->diff( $tour_date_stt )->days;
 
 
 			if ( $day_difference < $min_days_before_book ) {
+                // translators: %1$s is the number of days */
 				$response['errors'][] = sprintf( esc_html__( 'Present date to booking date required minimum %1$s gap', 'tourfic' ), $min_days_before_book_text );
 			}
 			if ( ! $start_date ) {

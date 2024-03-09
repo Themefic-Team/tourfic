@@ -684,7 +684,11 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'type'        => 'select2',
 							'label'       => __( 'Feature', 'tourfic' ),
 							'placeholder' => __( 'Select feature', 'tourfic' ),
-							'description' => __( 'Add new features from <a target="_blank" href="'.admin_url('edit-tags.php?taxonomy=apartment_feature&post_type=tf_apartment').'">Apartment Features</a>.', 'tourfic' ),
+							'description' => sprintf(
+								// translators: %s: URL
+								__( 'Add new features from <a target="_blank" href="%s">Apartment Features</a>.', 'tourfic' ),
+								esc_url( admin_url('edit-tags.php?taxonomy=apartment_feature&post_type=tf_apartment') )
+							),
 							'options'     => 'terms',
 							'query_args'  => array(
 								'taxonomy'   => 'apartment_feature',
@@ -698,7 +702,11 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'label'       => __( 'Category', 'tourfic' ),
 							'placeholder' => __( 'Select category', 'tourfic' ),
 							'options'     => tf_apt_amenities_cats(),
-							'description' => __( 'Add new category from <a target="_blank" href="'.admin_url('admin.php?page=tf_settings#tab=apartment_single_page').'">Amenities Categories</a>.', 'tourfic' ),
+							'description' => sprintf(
+								// translators: %s: URL
+								__( 'Add new category from <a target="_blank" href="%s">Amenities Categories</a>.', 'tourfic' ),
+								esc_url( admin_url('admin.php?page=tf_settings#tab=apartment_single_page') )
+							),
 							'field_width' => 50,
 						),
 						array(

@@ -14,11 +14,11 @@ if(!function_exists('tf_hotel_facilities_categories')) {
 				$all_cats[ (string) $key ] = $cat['hotel_facilities_cat_name'];
 			}
 		}
-	
+
 		if(empty($all_cats)){
 			$all_cats[''] = esc_html__( 'Select Category', 'tourfic' );
 		}
-	
+
 		return $all_cats;
 	}
 }
@@ -78,7 +78,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'label'    => esc_html__( 'Single Hotel Page Layout', 'tourfic' ),
 					'multiple' 		=> true,
 					'inline'   		=> true,
-					'options'   	=> array( 
+					'options'   	=> array(
 						'design-1' 				=> array(
 							'title'			=> 'Design 1',
 							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design1-hotel.jpg",
@@ -317,7 +317,11 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'label'       => __( 'Facilities Category', 'tourfic' ),
 							'placeholder' => __( 'Select facilities category', 'tourfic' ),
 							'options'     => tf_hotel_facilities_categories(),
-							'description' => __( 'Add new category from <a target="_blank" href="'.admin_url('admin.php?page=tf_settings#tab=single_page').'">Facilities Categories</a>', 'tourfic' ),
+							'description' => sprintf(
+								// translators: %s: Facilities Categories
+								__( 'Add new category from <a target="_blank" href="%s">Facilities Categories</a>', 'tourfic' ),
+								esc_url(admin_url('admin.php?page=tf_settings#tab=single_page'))
+							),
 							'field_width' => 50,
 						),
 						array(
@@ -649,7 +653,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'attributes'  => array(
 								'readonly' => 'readonly',
 							),
-							'placeholder' => __( '', 'tourfic' ),
+							'placeholder' => '',
 						),
 						array(
 							'id'          => 'order_id',
@@ -659,7 +663,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'attributes'  => array(
 								'readonly' => 'readonly',
 							),
-							'placeholder' => __( '', 'tourfic' ),
+							'placeholder' => '',
 						),
 						array(
 							'id'        => 'enable',
@@ -1041,7 +1045,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				),
 			),
 		),
-		
+
 		// Multiple tags for hotels
 		'hotel_multiple_tags' => array(
 			'title'  => __( 'Labels', 'tourfic' ),

@@ -514,13 +514,16 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 
 
 				if ( $apt_data['max_adults'] < $adult_count ) {
-					$response['fieldErrors']['tf_apartment_adults_number_error'] = esc_html__( "You can't book more than " . $apt_data['max_adults'] . " adults", 'tourfic' );
+                    /* translators: %s max adults */
+					$response['fieldErrors']['tf_apartment_adults_number_error'] = sprintf( esc_html__( "You can't book more than %s adults", 'tourfic' ), $apt_data['max_adults']);
 				}
 				if ( $apt_data['max_children'] < $child_count ) {
-					$response['fieldErrors']['tf_apartment_children_number_error'] = esc_html__( "You can't book more than " . $apt_data['max_children'] . " children", 'tourfic' );
+                    /* translators: %s max children */
+					$response['fieldErrors']['tf_apartment_children_number_error'] = sprintf( esc_html__( "You can't book more than %s children", 'tourfic' ), $apt_data['max_children']);
 				}
 				if ( $apt_data['max_infants'] < $infant_count ) {
-					$response['fieldErrors']['tf_apartment_infant_number_error'] = esc_html__( "You can't book more than " . $apt_data['max_infants'] . " infants", 'tourfic' );
+                    /* translators: %s max infants */
+					$response['fieldErrors']['tf_apartment_infant_number_error'] = sprintf( esc_html__( "You can't book more than %s infants", 'tourfic' ), $apt_data['max_infants']);
 				}
 
 				if ( ! array_key_exists("fieldErrors", $response) || ! $response['fieldErrors'] ) {

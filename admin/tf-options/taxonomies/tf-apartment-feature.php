@@ -3,7 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 TF_Taxonomy_Metabox::taxonomy( 'tf_apartment_feature', array(
-	'title'    => esc_html__( '', 'tourfic' ),
+	'title'    => '',
 	'taxonomy' => 'apartment_feature',
 	'fields'   => array(
 		array(
