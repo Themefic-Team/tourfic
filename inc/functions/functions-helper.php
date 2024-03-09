@@ -236,10 +236,10 @@ function tf_tours_price_html() {
 	ob_start();
 	?>
 	<?php if ( $sale_price < $price && $discounted_price > 0 && $discount_type != 'none' ) { ?>
-        <span class="tf-price"><del><?php echo wc_price( $price ); ?></del></span>
-        <span class="tf-price"><?php echo wc_price( $sale_price ); ?></span>
+        <span class="tf-price"><del><?php echo wp_kses_post(wc_price( $price )); ?></del></span>
+        <span class="tf-price"><?php echo wp_kses_post(wc_price( $sale_price )); ?></span>
 	<?php } else { ?>
-        <span class="tf-price"><?php echo wc_price( $price ); ?></span>
+        <span class="tf-price"><?php echo wp_kses_post(wc_price( $price )); ?></span>
 	<?php } ?>
 
 	<?php
