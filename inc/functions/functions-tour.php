@@ -1864,7 +1864,7 @@ function tf_single_tour_booking_form( $post_id ) {
 						        <?php if ($disabled_day) { ?>
                                 function (date) {
                                     return (date.getDay() === 8 <?php foreach ( $disabled_day as $dis_day ) {
-								        echo '|| date.getDay() === ' . $dis_day . ' ';
+								        echo '|| date.getDay() === ' . esc_attr($dis_day) . ' ';
 							        } ?>);
                                 },
 						        <?php }
@@ -2327,7 +2327,7 @@ function tf_single_tour_booking_form( $post_id ) {
 						        <?php if ($disabled_day) { ?>
                                 function (date) {
                                     return (date.getDay() === 8 <?php foreach ( $disabled_day as $dis_day ) {
-								        echo '|| date.getDay() === ' . $dis_day . ' ';
+								        echo '|| date.getDay() === ' . esc_attr($dis_day) . ' ';
 							        } ?>);
                                 },
 						        <?php }
@@ -2661,7 +2661,7 @@ function tf_single_tour_booking_form( $post_id ) {
 							<?php if ($disabled_day) { ?>
                             function (date) {
                                 return (date.getDay() === 8 <?php foreach ( $disabled_day as $dis_day ) {
-									echo '|| date.getDay() === ' . $dis_day . ' ';
+									echo '|| date.getDay() === ' . esc_attr($dis_day) . ' ';
 								} ?>);
                             },
 							<?php }
@@ -3239,9 +3239,9 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 					<li>
 					<?php
 					if ( ! empty( $feature_icon ) ) {
-						echo $feature_icon;
+						echo esc_attr($feature_icon);
 					} ?>
-					<?php echo $features_details->name ?? ''; ?>
+					<?php echo esc_attr($features_details->name) ?? ''; ?>
 					</li>
 				<?php } } } ?>
 				</ul>
@@ -3254,7 +3254,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 					?>
 						<div class="tf-available-room-off">
 							<span>
-								<?php echo $tf_discount_type == "percent" ? $tf_discount_amount."%" : wc_price($tf_discount_amount); ?> <?php esc_html_e("Off", "tourfic"); ?>
+								<?php echo $tf_discount_type == "percent" ? esc_attr($tf_discount_amount)."%" : wc_price($tf_discount_amount); ?> <?php esc_html_e("Off", "tourfic"); ?>
 							</span>
 						</div>
 					<?php } ?>
@@ -3282,7 +3282,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 							if ( ! empty( $tf_tour_min_discount ) ) {
 								echo esc_html__( "From ", "tourfic" ) . " " . "<del>" . strip_tags(wc_price( $tf_tour_full_price )) . "</del>" . " ". $lowest_price ;
 							} else {
-								echo esc_html__( "From ", "tourfic" ) . $lowest_price . " ";
+								echo esc_html__( "From ", "tourfic" ) . esc_attr($lowest_price) . " ";
 							}
 						?>
 						</span>
