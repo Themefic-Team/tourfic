@@ -61,7 +61,7 @@ function tf_hotel_docs_callback() {
 	$tfhoteldocumentation = sanitize_url( 'https://themefic.com/docs/tourfic/how-it-works/add-new-hotel/' );
 	?>
     <div class="tf_docs_preview">
-        <a href="<?php echo $tfhoteldocumentation; ?>" target="_blank">
+        <a href="<?php echo esc_url( $tfhoteldocumentation ); ?>" target="_blank">
 			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
 		</a>
     </div>
@@ -73,7 +73,7 @@ function tf_apartment_docs_callback() {
 	$tf_apartment_documentation = sanitize_url( 'https://themefic.com/docs/tourfic/add-new-apartment/locations-types-and-featured-image/' );
 	?>
     <div class="tf_docs_preview">
-        <a href="<?php echo $tf_apartment_documentation; ?>" target="_blank">
+        <a href="<?php echo esc_url( $tf_apartment_documentation ); ?>" target="_blank">
 			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
 		</a>
     </div>
@@ -84,7 +84,7 @@ function tf_tour_docs_callback() {
 	$tf_tour_documentation = sanitize_url( 'https://themefic.com/docs/tourfic/tours/tourfic-hotel-general-settings/' );
 	?>
     <div class="tf_docs_preview">
-        <a href="<?php echo $tf_tour_documentation; ?>" target="_blank">
+        <a href="<?php echo esc_url( $tf_tour_documentation); ?>" target="_blank">
 			<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
 		</a>
     </div>
@@ -534,12 +534,12 @@ if ( ! function_exists( 'tf_flatpickr_locale' ) ) {
 
 		if(!empty($placement) && !empty($flatpickr_locale) && $placement == "root") {
 
-			echo <<<EOD
+			echo esc_html( <<<EOD
 				window.flatpickr.l10ns.$flatpickr_locale.firstDayOfWeek = $tf_first_day_of_week;
-			EOD;
+			EOD );
 
 		} else {
-			echo 'locale: "' . $flatpickr_locale . '",';
+			echo 'locale: "' . esc_html( $flatpickr_locale ) . '",';
 		}
 	}
 }

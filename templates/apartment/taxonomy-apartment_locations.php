@@ -26,7 +26,7 @@ if( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template=="design
         <div class="tf-container">
             <div class="tf-hero-content tf-archive-hero-content">
                 <div class="tf-head-title">
-                    <h1><?php echo $taxonomy_name; ?></h1>
+                    <h1><?php echo esc_html( $taxonomy_name ); ?></h1>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@ if( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template=="design
                     </span>
                     <!-- Booking form Start -->
                     <div class="tf-archive-search-form tf-booking-form-wrapper">
-                        <form action="<?php echo tf_booking_search_action(); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
+                        <form action="<?php echo esc_attr( tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
                             <?php tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug); ?>
                         </form>
                     </div>
@@ -91,7 +91,7 @@ if( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template=="design
 <div class="tf-main-wrapper" data-fullwidth="true">
 	<?php do_action( 'tf_before_container' ); ?>
 	<div class="tf-container">
-		<h3><?php echo $taxonomy_name; ?></h3>
+		<h3><?php echo esc_html( $taxonomy_name ); ?></h3>
 		<div class="search-result-inner">
 
 			<div class="tf-search-left">

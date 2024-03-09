@@ -1151,7 +1151,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 				<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
 					<?php foreach ( $additional_fees as $key => $additional_fee ) : ?>
                         <li class="additional-fee-wrap" style="display: none">
-                            <span class="additional-fee-label tf-price-list-label"><?php echo $esc_html( additional_fee['additional_fee_label'] ); ?></span>
+                            <span class="additional-fee-label tf-price-list-label"><?php echo esc_html( $additional_fee['additional_fee_label'] ); ?></span>
                             <span class="additional-fee-<?php echo esc_attr( $key ) ?> tf-price-list-price"></span>
                         </li>
 					<?php endforeach; ?>
@@ -1304,7 +1304,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 totalAdditionalFee_<?php echo esc_html( $key ) ?> = additional_fee_<?php echo esc_html( $key ) ?>;
 								<?php endif; ?>
 
-                                if (totalAdditionalFee_<?php echo $key ?> > 0 ) {
+                                if (totalAdditionalFee_<?php echo esc_html( $key ) ?> > 0 ) {
                                     $('.additional-fee-wrap').show();
                                     total_price = total_price + totalAdditionalFee_<?php echo esc_html( $key ) ?>;
                                     additional_fee_html_<?php echo esc_html( $key ) ?> = '<?php echo wc_price( 0 ); ?>'.replace('0.00', totalAdditionalFee_<?php echo esc_html( $key ) ?>.toFixed(2));
@@ -1517,9 +1517,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 								$tag_font_color = !empty($tag["apartment-tag-color-settings"]["font"]) ? esc_attr($tag["apartment-tag-color-settings"]["font"]) : "#fff";
 
 								if (!empty($apartment_tag_name)) {
-									echo <<<EOD
-										<span class="tf-multiple-tag" style="color: $tag_font_color; background-color: $tag_background_color ">$apartment_tag_name</span>
-									EOD;
+									echo '<span class="tf-multiple-tag" style="color: ' . esc_attr( $tag_font_color ) . '; background-color: ' . esc_attr( $tag_background_color ) . '">' . esc_html( $apartment_tag_name ) . '</span>';
 								}
 							}
 						}
@@ -1585,7 +1583,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 						if ( ! empty( $feature_icon ) ) {
 							echo $feature_icon;
 						} ?>
-						<?php echo $feature->name; ?>
+						<?php echo esc_html( $feature->name ); ?>
 						</li>
 					<?php } } ?>
 					<?php if(count($features)>5){ ?>
@@ -1600,7 +1598,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 					if ( ! empty( $apartment_discount_amount ) && $apartment_discount_type!="none" ){ ?>
 						<div class="tf-available-room-off">
 							<span>
-								<?php echo $apartment_discount_type=="percent" ? $apartment_discount_amount.'%' : wc_price($apartment_discount_amount) ?> <?php esc_html_e( "Off ", "tourfic" ); ?>
+								<?php echo $apartment_discount_type=="percent" ? esc_html( $apartment_discount_amount ).'%' : wc_price($apartment_discount_amount) ?> <?php esc_html_e( "Off ", "tourfic" ); ?>
 							</span>
 						</div>
 					<?php } ?>
@@ -1624,7 +1622,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
             <div class="single-tour-inner">
 				<?php if ( $featured ): ?>
                     <div class="tf-featured-badge">
-                        <span><?php echo ! empty( $meta['featured_text'] ) ? $meta['featured_text'] : esc_html( "HOT DEAL" ); ?></span>
+                        <span><?php echo ! empty( $meta['featured_text'] ) ? esc_html( $meta['featured_text'] ) : esc_html( "HOT DEAL" ); ?></span>
                     </div>
 				<?php endif; ?>
                 <div class="tourfic-single-left">
@@ -1634,19 +1632,17 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 					if(sizeof($apartment_multiple_tags) > 0) {
 						foreach($apartment_multiple_tags as $tag) {
 							$tag_title = !empty($tag["apartment-tag-title"]) ? esc_html__($tag["apartment-tag-title"], 'tourfic') : '';
-							$tag_background_color = !empty($tag["apartment-tag-color-settings"]["background"]) ? $tag["apartment-tag-color-settings"]["background"] : "#003162";
-							$tag_font_color = !empty($tag["apartment-tag-color-settings"]["font"]) ? $tag["apartment-tag-color-settings"]["font"] : "#fff";
+							$tag_background_color = !empty($tag["apartment-tag-color-settings"]["background"]) ? esc_attr( $tag["apartment-tag-color-settings"]["background"] ) : "#003162";
+							$tag_font_color = !empty($tag["apartment-tag-color-settings"]["font"]) ? esc_attr( $tag["apartment-tag-color-settings"]["font"] ) : "#fff";
 
 							if (!empty($tag_title)) {
-								echo <<<EOD
-									<span class="default-single-tag" style="color: $tag_font_color; background-color: $tag_background_color">$tag_title</span>
-								EOD;
+									echo '<span class="default-single-tag" style="color: ' . esc_attr( $tag_font_color ) . '; background-color: ' . esc_attr( $tag_background_color ) . '">' . esc_html( $tag_title ) . '</span>';
 							}
 						}
 					}
 					?>
 					</div>
-                    <a href="<?php echo $url; ?>">
+                    <a href="<?php echo esc_url( $url ); ?>">
 						<?php
 						if ( has_post_thumbnail($post_id) ) {
 							echo get_the_post_thumbnail($post_id, 'full' );
@@ -1660,12 +1656,12 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
                     <div class="tf_property_block_main_row">
                         <div class="tf_item_main_block">
                             <div class="tf-hotel__title-wrap">
-                                <a href="<?php echo $url; ?>"><h3 class="tourfic_hotel-title"><?php echo get_the_title($post_id); ?></h3></a>
+                                <a href="<?php echo esc_url( $url ); ?>"><h3 class="tourfic_hotel-title"><?php echo esc_html( get_the_title($post_id) ); ?></h3></a>
                             </div>
 							<?php
 							if ( !empty($address) ) {
 								echo '<div class="tf-map-link">';
-								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . strlen($address) > 75 ? tourfic_character_limit_callback($address, 76) : $address . '</span>';
+								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . strlen($address) > 75 ? esc_html( tourfic_character_limit_callback($address, 76) ) : esc_html( $address ) . '</span>';
 								echo '</div>';
 							}
 							?>
@@ -1678,7 +1674,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
                             <div class="featuredRooms">
                                 <div class="prco-ltr-right-align-helper">
                                     <div class="tf-archive-shortdesc">
-										<?php echo substr( wp_strip_all_tags( get_the_content($post_id) ), 0, 160 ) . '...'; ?>
+										<?php echo esc_html( substr( wp_strip_all_tags( get_the_content($post_id) ), 0, 160 ) ) . '...'; ?>
                                     </div>
                                 </div>
                                 <div class="roomNameInner">
@@ -1706,7 +1702,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 																	echo $feature_icon;
 																} ?>
                                                                 <div class="tf-top">
-																	<?php echo $feature->name; ?>
+																	<?php echo esc_html( $feature->name ); ?>
                                                                     <i class="tool-i"></i>
                                                                 </div>
                                                             </li>
@@ -1716,7 +1712,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 											<?php } ?>
                                             <div class="roomPrice roomPrice_flex sr_discount" style="<?php echo empty( $features ) ? 'text-align:left' : ''; ?>">
                                                 <div class="availability-btn-area">
-                                                    <a href="<?php echo $url; ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
+                                                    <a href="<?php echo esc_url( $url ); ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
                                                 </div>
                                                 <!-- Show minimum price @author - Hena -->
                                                 <div class="tf-room-price-area">
@@ -2576,7 +2572,7 @@ if ( ! function_exists( 'tf_apartment_host_rating' ) ) {
             <div class="tf-host-rating-wrapper">
                 <i class="fas fa-star"></i>
                 <div class="tf-host-rating">
-					<?php echo tf_average_ratings( array_values( $total_comment_rating ?? [] ) ); ?>
+					<?php echo esc_html( tf_average_ratings( array_values( $total_comment_rating ?? [] ) ) ); ?>
                 </div>
                 <h6>(<?php tf_based_on_text( $comment_count ); ?>)</h6>
             </div>
@@ -2627,7 +2623,7 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
                                         <div class="tf-details-qcs">
 											<?php
 											$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
-											echo '<img src="' . $image_url . '" alt="">';
+											echo '<img src="' . esc_url( $image_url ) . '" alt="">';
 											?>
                                         </div>
 									<?php }
@@ -2641,7 +2637,7 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
                                         <div class="tf-details-qcs">
 											<?php
 											$image_url = wp_get_attachment_url( $gallery_item_id, 'thumbnail' );
-											echo '<img src="' . $image_url . '" alt="">';
+											echo '<img src="' . esc_url( $image_url ) . '" alt="">';
 											?>
                                         </div>
 									<?php }
@@ -2719,13 +2715,13 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
 						$infant_number = ! empty( $room['infant'] ) ? $room['infant'] : '0';
 						?>
                         <h3><?php echo esc_html( $room['title'] ); ?></h3>
-                        <p><?php echo $room['description']; ?></p>
+                        <p><?php echo esc_html( $room['description'] ); ?></p>
                         <div class="tf-room-title description">
 							<?php if ( $footage ) { ?>
                                 <div class="tf-tooltip tf-d-ib">
                                     <div class="room-detail-icon">
                                         <span class="room-icon-wrap"><i class="fas fa-ruler-combined"></i></span>
-                                        <span class="icon-text tf-d-b"><?php echo $footage; ?><?php esc_html_e( 'sft', 'tourfic' ); ?></span>
+                                        <span class="icon-text tf-d-b"><?php echo esc_html( $footage ); ?><?php esc_html_e( 'sft', 'tourfic' ); ?></span>
                                     </div>
                                     <div class="tf-top">
 										<?php esc_html_e( 'Room Footage', 'tourfic' ); ?>
@@ -2737,7 +2733,7 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
                                 <div class="tf-tooltip tf-d-ib">
                                     <div class="room-detail-icon">
                                         <span class="room-icon-wrap"><i class="fas fa-bed"></i></span>
-                                        <span class="icon-text tf-d-b">x<?php echo $bed; ?></span>
+                                        <span class="icon-text tf-d-b">x<?php echo esc_html( $bed ); ?></span>
                                     </div>
                                     <div class="tf-top">
 										<?php esc_html_e( 'Number of Beds', 'tourfic' ); ?>
@@ -2749,7 +2745,7 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
                                 <div class="tf-tooltip tf-d-ib">
                                     <div class="room-detail-icon">
                                         <span class="room-icon-wrap"><i class="fas fa-male"></i><i class="fas fa-female"></i></span>
-                                        <span class="icon-text tf-d-b">x<?php echo $adult_number; ?></span>
+                                        <span class="icon-text tf-d-b">x<?php echo esc_html( $adult_number ); ?></span>
                                     </div>
                                     <div class="tf-top">
 										<?php esc_html_e( 'Number of Adults', 'tourfic' ); ?>
@@ -2761,7 +2757,7 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
                                 <div class="tf-tooltip tf-d-ib">
                                     <div class="room-detail-icon">
                                         <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
-                                        <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
+                                        <span class="icon-text tf-d-b">x<?php echo esc_html( $child_number ); ?></span>
                                     </div>
                                     <div class="tf-top">
 										<?php esc_html_e( 'Number of Children', 'tourfic' ); ?>
@@ -2773,7 +2769,7 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
                                 <div class="tf-tooltip tf-d-ib">
                                     <div class="room-detail-icon">
                                         <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
-                                        <span class="icon-text tf-d-b">x<?php echo $infant_number; ?></span>
+                                        <span class="icon-text tf-d-b">x<?php echo esc_html( $infant_number); ?></span>
                                     </div>
                                     <div class="tf-top">
 										<?php esc_html_e( 'Number of Infants', 'tourfic' ); ?>
@@ -2821,19 +2817,19 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
 						<span class="tf-popup-info-title"><?php esc_html_e("Room details", "tourfic"); ?></span>
 						<ul>
 							<?php if ( $footage ) { ?>
-								<li><i class="ri-pencil-ruler-2-line"></i> <?php echo $footage; ?><?php esc_html_e( 'sft', 'tourfic' ); ?></li>
+								<li><i class="ri-pencil-ruler-2-line"></i> <?php echo esc_html( $footage ); ?><?php esc_html_e( 'sft', 'tourfic' ); ?></li>
 							<?php } ?>
 							<?php if ( $bed ) { ?>
-								<li><i class="ri-hotel-bed-line"></i> <?php echo $bed; ?><?php esc_html_e( ' Beds', 'tourfic' ); ?></li>
+								<li><i class="ri-hotel-bed-line"></i> <?php echo esc_html( $bed ); ?><?php esc_html_e( ' Beds', 'tourfic' ); ?></li>
 							<?php } ?>
 							<?php if ( $adult_number ) { ?>
-								<li><i class="ri-user-2-line"></i> <?php echo $adult_number; ?><?php esc_html_e( ' Adults', 'tourfic' ); ?></li>
+								<li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?><?php esc_html_e( ' Adults', 'tourfic' ); ?></li>
 							<?php } ?>
 							<?php if ( $child_number ) { ?>
-								<li><i class="ri-user-smile-line"></i><?php echo $child_number; ?><?php esc_html_e( ' Child', 'tourfic' ); ?></li>
+								<li><i class="ri-user-smile-line"></i><?php echo esc_html( $child_number ); ?><?php esc_html_e( ' Child', 'tourfic' ); ?></li>
 							<?php } ?>
 							<?php if ( $infant_number ) { ?>
-								<li><i class="ri-user-smile-line"></i><?php echo $infant_number; ?><?php esc_html_e( ' Infant', 'tourfic' ); ?></li>
+								<li><i class="ri-user-smile-line"></i><?php echo esc_html( $infant_number ); ?><?php esc_html_e( ' Infant', 'tourfic' ); ?></li>
 							<?php } ?>                     
 						</ul> 
 					</div>

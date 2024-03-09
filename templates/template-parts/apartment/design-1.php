@@ -11,13 +11,13 @@
                     if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
                 ?>
                 <a class="tf-icon tf-wishlist-box tf-wishlist">
-                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
+                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( "wishlist-nonce" ) ) ?>" data-id="<?php echo esc_attr( $post_id ) ?>" data-type="<?php echo esc_attr( $post_type ) ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_attr( get_the_title( tfopt( 'wl-page' ) ) ) . '" data-page-url="' . esc_url( get_permalink( tfopt( 'wl-page' ) ) ) . '"'; } ?>></i>
                 </a>
                 <?php } } else{ 
                 if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {    
                 ?>
                 <a class="tf-icon tf-wishlist-box tf-wishlist">
-                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
+                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( "wishlist-nonce" ) ) ?>" data-id="<?php echo esc_attr( $post_id ) ?>" data-type="<?php echo esc_attr( $post_type ) ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_attr( get_the_title( tfopt( 'wl-page' ) ) ) . '" data-page-url="' . esc_url( get_permalink( tfopt( 'wl-page' ) ) ) . '"'; } ?>></i>
                 </a>
                 <?php } } } ?>
             
@@ -78,7 +78,7 @@
             </div>
             <div class="tf-hero-bottom-area">
                 <div class="tf-head-title">
-                    <h1><?php echo get_the_title(); ?></h1>
+                    <h1><?php echo esc_html( get_the_title() ); ?></h1>
                     <?php if(!empty($address)) { ?>
                     <div class="tf-title-meta">
                         <i class="ri-map-pin-line"></i>
@@ -200,44 +200,44 @@
                 <?php if ( !defined( 'TF_PRO' ) ) { ?>
                     <?php 
                     if( $address && $tf_openstreet_map!="default" && ( empty($address_latitude) || empty($address_longitude) ) ){ ?>
-                        <iframe src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address ); ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     <?php } elseif( $address && $tf_openstreet_map=="default" && !empty($address_latitude) && !empty($address_longitude)) {
                     ?>
                         <div id="hotel-location" style="height: 250px"></div>
                         <script>
-                            const map = L.map('hotel-location').setView([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], <?php echo $address_zoom; ?>);
+                            const map = L.map('hotel-location').setView([<?php echo esc_html( $address_latitude ); ?>, <?php echo esc_html( $address_longitude ); ?>], <?php echo esc_html( $address_zoom ); ?>);
 
                             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                                 maxZoom: 20,
                                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                             }).addTo(map);
 
-                            const marker = L.marker([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], {alt: '<?php echo $address; ?>'}).addTo(map)
-                                .bindPopup('<?php echo $address; ?>');
+                            const marker = L.marker([<?php echo esc_html( $address_latitude ); ?>, <?php echo esc_html( $address_longitude ); ?>], {alt: '<?php echo esc_html( $address ); ?>'}).addTo(map)
+                                .bindPopup('<?php echo esc_html( $address ); ?>');
                         </script>
                     <?php }else{ ?>
-                        <iframe src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address ); ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     <?php } ?>
                 <?php }else{ ?>
                     <?php 
                     if( $address && $tf_openstreet_map!="default" && ( empty($address_latitude) || empty($address_longitude) ) ){ ?>
-                        <iframe src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address ); ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     <?php } elseif( $address && $tf_openstreet_map=="default" && !empty($address_latitude) && !empty($address_longitude)) {
                     ?>
                         <div id="hotel-location" style="height: 250px"></div>
                         <script>
-                            const map = L.map('hotel-location').setView([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], <?php echo $address_zoom; ?>);
+                            const map = L.map('hotel-location').setView([<?php echo esc_html( $address_latitude ); ?>, <?php echo esc_html( $address_longitude ); ?>], <?php echo esc_html( $address_zoom ); ?>);
 
                             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                                 maxZoom: 20,
                                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                             }).addTo(map);
 
-                            const marker = L.marker([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], {alt: '<?php echo $address; ?>'}).addTo(map)
-                                .bindPopup('<?php echo $address; ?>');
+                            const marker = L.marker([<?php echo esc_html( $address_latitude ); ?>, <?php echo esc_html( $address_longitude ); ?>], {alt: '<?php echo esc_html( $address ); ?>'}).addTo(map)
+                                .bindPopup('<?php echo esc_html( $address ); ?>');
                         </script>
                     <?php }else{ ?>
-                        <iframe src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address ); ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     <?php } ?>
                 <?php } ?>
             </div>   
@@ -263,7 +263,7 @@
                         <div class="tf-review-data-average">
                             <span class="avg-review"><span>
                                 <?php esc_html_e( sprintf( '%.1f', $total_rating ) ); ?>
-                            </span>/ <?php echo $tf_settings_base; ?></span>
+                            </span>/ <?php echo esc_html( $tf_settings_base ); ?></span>
                         </div>
                         <div class="tf-review-all-info">
                             <p><?php esc_html_e("Excellent", "tourfic"); ?> <span><?php esc_html_e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></span></p>
@@ -282,10 +282,10 @@
                             <div class="tf-progress-item">                                    
                                 <div class="tf-review-feature-label">
                                     <p class="feature-label"><?php esc_html_e( $key, "tourfic" ); ?></p>
-                                    <p class="feature-rating"> <?php echo $value; ?></p>
+                                    <p class="feature-rating"> <?php echo esc_html( $value ); ?></p>
                                 </div>
                                 <div class="tf-progress-bar">
-                                    <span class="percent-progress" style="width: <?php echo tf_average_rating_percent( $value, tfopt( 'r-base' ) ); ?>%"></span>
+                                    <span class="percent-progress" style="width: <?php echo esc_html( tf_average_rating_percent( $value, tfopt( 'r-base' ) ) ); ?>%"></span>
                                 </div>
                             </div>
                             <?php } } ?>
@@ -337,22 +337,22 @@
                     <?php 
                     if (!empty($tf_enquiry_section_icon)) {
                         ?>
-                        <i class="<?php echo $tf_enquiry_section_icon; ?>" aria-hidden="true"></i>
+                        <i class="<?php echo esc_attr( $tf_enquiry_section_icon ); ?>" aria-hidden="true"></i>
                         <?php
                     }
                     if(!empty($tf_enquiry_section_title)) {
                         ?>
-                        <h3><?php echo  $tf_enquiry_section_title; ?></h3>
+                        <h3><?php echo  esc_html( $tf_enquiry_section_title ); ?></h3>
                         <?php
                     }
                     if(!empty($tf_enquiry_section_cont)) {
                         ?>
-                        <p><?php echo $tf_enquiry_section_cont;  ?></p>
+                        <p><?php echo esc_html( $tf_enquiry_section_cont );  ?></p>
                         <?php
                     }
                     if( !empty( $tf_enquiry_section_button )) {
                         ?>
-                        <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-send-inquiry-btn"><span><?php echo $tf_enquiry_section_button; ?></span></a></div>
+                        <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-send-inquiry-btn"><span><?php echo esc_html( $tf_enquiry_section_button ); ?></span></a></div>
                         <?php
                     }
                     ?>
@@ -458,25 +458,25 @@ if ( $disable_related_sec !== '1' ) {
                                 <div class="tf-slider-item tf-post-box-lists">
                                     <div class="tf-post-single-box">
                                         <div class="tf-image-data">
-                                            <img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) ) ? get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>" alt="">
+                                            <img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $selected_design_post_id, 'full' )  ): esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>" alt="">
                                             
                                         </div>
                                         <div class="tf-meta-info">
                                             <div class="meta-content">
                                                 <div class="tf-meta-title">
-                                                    <h2><a href="<?php echo get_permalink($selected_design_post_id) ?>">
-                                                    <?php echo tourfic_character_limit_callback(get_the_title($selected_design_post_id), 35); ?>
+                                                    <h2><a href="<?php echo esc_url( get_permalink($selected_design_post_id) ) ?>">
+                                                    <?php echo esc_html( tourfic_character_limit_callback(get_the_title($selected_design_post_id), 35) ); ?>
                                                     </a></h2>
                                                     <div class="tf-meta-data-price">
                                                         <span><?php echo !empty($apartment_min_price["min"]) ? wc_price($apartment_min_price["min"]) : '';
-                                                        ?></span><span class="pricing_calc_type">/<?php echo $pricing_type; ?></span>
+                                                        ?></span><span class="pricing_calc_type">/<?php echo esc_html( $pricing_type ); ?></span>
                                                     </div>
                                                 </div>
                                                 <div class="tf-meta-location">
-                                                    <i class="fa-solid fa-location-dot"></i> <?php echo $first_destination_name; ?>
+                                                    <i class="fa-solid fa-location-dot"></i> <?php echo esc_html( $first_destination_name ); ?>
                                                 </div>
                                             </div>
-                                            <a class="see-details" href="<?php echo get_permalink($selected_design_post_id) ?>">
+                                            <a class="see-details" href="<?php echo esc_url( get_permalink($selected_design_post_id) ) ?>">
                                                 <?php esc_html_e("See details", "tourfic"); ?>
                                             </a>
                                         </div>
