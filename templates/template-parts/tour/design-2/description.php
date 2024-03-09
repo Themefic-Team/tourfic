@@ -27,7 +27,7 @@
         <div class="tf-short-description">
             <?php 
             if(strlen(get_the_content()) > 300 ){
-                echo strip_tags(tourfic_character_limit_callback(get_the_content(), 300)) . '<span class="tf-see-description">See more</span>';
+                echo wp_kses_post(strip_tags(tourfic_character_limit_callback(get_the_content(), 300))) . '<span class="tf-see-description">See more</span>';
             }else{
                 the_content(); 
             }
@@ -36,7 +36,7 @@
         <div class="tf-full-description">
             <?php 
                 the_content();
-                echo '<span class="tf-see-less-description"> See less</span>';
+                echo '<span class="tf-see-less-description">See less</span>';
             ?>
         </div>
     </div>

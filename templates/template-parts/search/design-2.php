@@ -50,7 +50,7 @@ if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
                     </span>
                     <!-- Booking form Start -->
                     <div class="tf-archive-search-form tf-booking-form-wrapper">
-                        <form action="<?php echo tf_booking_search_action(); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
+                        <form action="<?php echo esc_url(tf_booking_search_action()); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
                             <?php tf_search_result_sidebar_form( 'archive' ); ?>
                         </form>
                     </div>
