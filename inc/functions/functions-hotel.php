@@ -812,7 +812,7 @@ function tf_room_availability_callback() {
 	<?php } ?>
     <tbody>
 	<?php
-	echo ob_get_clean();
+	echo wp_kses_post( ob_get_clean() );
 	$error    = $rows = null;
 	$has_room = false;
 

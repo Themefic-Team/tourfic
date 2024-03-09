@@ -542,7 +542,7 @@ function tf_archive_single_rating() {
 			</div>
 		<?php
 		}
-		echo ob_get_clean();
+		echo wp_kses_post( ob_get_clean() );
 	}else{
 		
 		$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';

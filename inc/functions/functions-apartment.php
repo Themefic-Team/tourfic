@@ -972,7 +972,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 					<?php else: ?>
 						<?php if (!empty($apt_reserve_button_text)) : ?>
 							<a href="<?php echo esc_url( $tf_booking_url ); ?>"
-							class="tf_button tf-submit" <?php echo ! empty( $tf_booking_attribute ) ? $tf_booking_attribute : ''; ?> target="_blank"><?php esc_html_e( $apt_reserve_button_text , 'tourfic' ); ?></a>
+							class="tf_button tf-submit" <?php echo ! empty( $tf_booking_attribute ) ? esc_attr( $tf_booking_attribute ) : ''; ?> target="_blank"><?php esc_html_e( $apt_reserve_button_text , 'tourfic' ); ?></a>
 						<?php endif; ?>
 					<?php endif; ?>
                 </div>
@@ -1136,7 +1136,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 					<?php else: ?>
 						<?php if (!empty($apt_reserve_button_text)) : ?>
 							<a href="<?php echo esc_url( $tf_booking_url ); ?>"
-							class="tf_button tf-submit btn-styled" <?php echo ! empty( $tf_booking_attribute ) ? $tf_booking_attribute : ''; ?> target="_blank"><?php esc_html_e( $apt_reserve_button_text , 'tourfic' ); ?></a>
+							class="tf_button tf-submit btn-styled" <?php echo ! empty( $tf_booking_attribute ) ? esc_attr( $tf_booking_attribute ) : ''; ?> target="_blank"><?php esc_html_e( $apt_reserve_button_text , 'tourfic' ); ?></a>
 						<?php endif; ?>
 					<?php endif; ?>
                 </div>
@@ -2578,7 +2578,7 @@ if ( ! function_exists( 'tf_apartment_host_rating' ) ) {
             </div>
 
 			<?php
-			echo ob_get_clean();
+			echo wp_kses_post( ob_get_clean() );
 		}
 	}
 }
