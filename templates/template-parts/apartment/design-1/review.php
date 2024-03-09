@@ -24,7 +24,7 @@ if ( $comments ) { ?>
         ?>
         <div class="tf-reviews-item">
             <div class="tf-reviews-avater">
-                <?php echo $c_avatar; ?>
+                <?php echo wp_kses_post($c_avatar); ?>
             </div>
             <div class="tf-reviews-text">
                 <span class="tf-review-rating"><?php echo esc_html( $c_rating ); ?></span>

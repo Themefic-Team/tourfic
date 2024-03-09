@@ -201,7 +201,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                     <?php
                                     if ( $tour_room_details_gall ){
                                     ?>
-                                    <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] . $key : '' ?>" data-hotel="<?php echo $post_id; ?>">
+                                    <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr($room['unique_id'] . $key) : '' ?>" data-hotel="<?php echo esc_attr($post_id); ?>">
                                         <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php esc_html_e("Room Image","tourfic"); ?>">
                                         <!-- <span><?php //esc_html_e("Best Offer", "tourfic"); ?></span> -->
                                     </a>
@@ -219,8 +219,8 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                             if ( $tour_room_details_gall ){
                                             ?>
                                             <h3>
-                                                <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] . $key : '' ?>"
-                                                data-hotel="<?php echo $post_id; ?>"><?php echo esc_html( $room['title'] ); ?></a>
+                                                <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr($room['unique_id'] . $key) : '' ?>"
+                                                data-hotel="<?php echo esc_attr($post_id); ?>"><?php echo esc_html( $room['title'] ); ?></a>
                                             </h3>
                                             <?php
                                             }else{ ?>
@@ -230,17 +230,17 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         <?php if(!empty($room['description'])) : ?>
                                             <div class="bed-facilities">
                                                 <p>
-                                                    <?php echo substr(wp_strip_all_tags($room['description']), 0, 120). '...'; ?>
+                                                    <?php echo wp_kses_post(substr(wp_strip_all_tags($room['description']), 0, 120). '...'); ?>
                                                 </p>
                                             </div>
                                         <?php endif; ?>
                                     </div>
                                     <ul>
                                         <?php if ( $footage ) { ?>
-                                            <li><i class="fas fa-ruler-combined"></i> <?php echo $footage; ?><?php esc_html_e( 'sft', 'tourfic' ); ?></li>
+                                            <li><i class="fas fa-ruler-combined"></i> <?php echo esc_html($footage); ?><?php esc_html_e( 'sft', 'tourfic' ); ?></li>
                                         <?php } ?>
                                         <?php if ( $bed ) { ?>
-                                            <li><i class="fas fa-bed"></i> <?php echo $bed; ?><?php esc_html_e( ' Number of Beds', 'tourfic' ); ?></li>
+                                            <li><i class="fas fa-bed"></i> <?php echo esc_html($bed); ?><?php esc_html_e( ' Number of Beds', 'tourfic' ); ?></li>
                                         <?php } ?>
                                         <?php
                                         if( !empty($room['features']) ){
@@ -259,8 +259,8 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                                         $room_term = get_term( $feature ); ?>
                                         <li>
-                                            <?php echo ! empty( $room_feature_icon ) ? $room_feature_icon : ''; ?>
-                                            <?php echo $room_term->name; ?>
+                                            <?php echo ! empty( $room_feature_icon ) ? wp_kses_post($room_feature_icon) : ''; ?>
+                                            <?php echo esc_html($room_term->name); ?>
                                         </li>
                                         <?php } $tf_room_fec_key++; } } ?>
                                         <?php
@@ -275,8 +275,8 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                     <?php
                                     if ( $tour_room_details_gall ){
                                         ?>
-                                        <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] . $key : '' ?>"
-                                                data-hotel="<?php echo $post_id; ?>" style="text-decoration: underline;">
+                                        <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr($room['unique_id'] . $key) : '' ?>"
+                                                data-hotel="<?php echo esc_attr($post_id); ?>" style="text-decoration: underline;">
                                                 <?php esc_html_e("Room Photos & Details","tourfic"); ?>
                                             </a>
 
@@ -295,7 +295,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                     <div class="room-detail-icon">
                             <span class="room-icon-wrap"><i class="fas fa-male"></i><i
                                         class="fas fa-female"></i></span>
-                                        <span class="icon-text tf-d-b">x<?php echo $adult_number; ?></span>
+                                        <span class="icon-text tf-d-b">x<?php echo esc_html($adult_number); ?></span>
                                     </div>
                                     <div class="tf-top">
                                         <?php esc_html_e( 'Number of Adults', 'tourfic' ); ?>
@@ -307,12 +307,12 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                 <div class="tf-tooltip tf-d-b">
                                     <div class="room-detail-icon">
                                         <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
-                                        <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
+                                        <span class="icon-text tf-d-b">x<?php echo esc_html($child_number); ?></span>
                                     </div>
                                     <div class="tf-top">
                                         <?php
                                         if(!empty($child_age_limit)){
-                                            printf(esc_html__('Children Age Limit %s Years', 'tourfic'), $child_age_limit);
+                                            printf(esc_html__('Children Age Limit %s Years', 'tourfic'), esc_html($child_age_limit));
                                         }else{
                                             esc_html_e( 'Number of Children', 'tourfic' );
                                         }
@@ -324,16 +324,15 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         </td>
                         <td class="reserve tf-t-c">
                             <?php
-
                             if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' ) || $tf_booking_type == 1) {
                                 if ( $pricing_by == '1' ) {
                                             if( $hotel_discount_type != 'none' && !empty($discount_price )) {
                                                 ?>
-                                                <span class="tf-price"><del><?php echo $price; ?></del> <?php echo $discount_price; ?></span>
+                                                <span class="tf-price"><del><?php echo wp_kses_post($price); ?></del> <?php echo wp_kses_post($discount_price); ?></span>
                                                 <?php
                                             } else if( $hotel_discount_type == "none") {
                                                 ?>
-                                                <span class="tf-price"><?php echo $price; ?></span>
+                                                <span class="tf-price"><?php echo wp_kses_post($price); ?></span>
                                                 <?php
                                             }
                                             ?>
@@ -349,11 +348,11 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         } else {
                                             if(!empty($discount_price ) && $hotel_discount_type != "none" && !empty($hotel_discount_type)) {
                                                 ?>
-                                                <span class="tf-price"><del><?php echo $price; ?></del> <?php echo $discount_price; ?></span>
+                                                <span class="tf-price"><del><?php echo wp_kses_post($price); ?></del> <?php echo wp_kses_post($discount_price); ?></span>
                                                 <?php
                                             } else if($hotel_discount_type == "none") {
                                                 ?>
-                                                <span class="tf-price"><?php echo $price; ?></span>
+                                                <span class="tf-price"><?php echo wp_kses_post($price); ?></span>
                                                 <?php
                                             }
                                             ?>

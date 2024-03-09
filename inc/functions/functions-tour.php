@@ -476,9 +476,9 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 								<span class="tf-label"><?php esc_html_e( 'Start Date', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_checkin_dates">
-										<span class="date"><?php echo date('d'); ?></span>
+										<span class="date"><?php echo esc_html(date('d')); ?></span>
 										<span class="month">
-											<span><?php echo date('M'); ?></span>
+											<span><?php echo esc_html(date('M')); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -498,9 +498,9 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 								<span class="tf-label"><?php esc_html_e( 'End Date', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_checkout_dates">
-										<span class="date"><?php echo date('d'); ?></span>
+										<span class="date"><?php echo esc_html(date('d')); ?></span>
 										<span class="month">
-											<span><?php echo date('M'); ?></span>
+											<span><?php echo esc_html(date('M')); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -547,7 +547,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 												</defs>
 												</svg>
 											</div>
-											<input type="tel" class="adults-style2" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>" readonly>
+											<input type="tel" class="adults-style2" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? esc_attr($adults) : '1'; ?>" readonly>
 											<div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<g clip-path="url(#clip0_3229_13100)">
@@ -638,7 +638,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 						<input type="hidden" name="type" value="tf_tours" class="tf-post-type"/>
 						<?php
 						if ( $author ) { ?>
-							<input type="hidden" name="tf-author" value="<?php echo $author; ?>" class="tf-post-type"/>
+							<input type="hidden" name="tf-author" value="<?php echo esc_attr($author); ?>" class="tf-post-type"/>
 						<?php } ?>
 						<button><?php echo esc_html_e("Check availability", "tourfic"); ?></button>
 					</div>
@@ -729,7 +729,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 													foreach ( $tf_tour_destination as $term ) {
 														if ( ! empty( $term->name ) ) {
 															?>
-															<li data-name="<?php echo $term->name; ?>" data-slug="<?php echo $term->slug; ?>"><i class="fa fa-map-marker"></i><?php echo $term->name; ?></li>
+															<li data-name="<?php echo esc_attr($term->name); ?>" data-slug="<?php echo esc_attr($term->slug); ?>"><i class="fa fa-map-marker"></i><?php echo esc_attr($term->name); ?></li>
 															<?php
 														}
 													}
@@ -854,7 +854,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
                     <input type="hidden" name="type" value="tf_tours" class="tf-post-type"/>
 					<?php
 					if ( $author ) { ?>
-                        <input type="hidden" name="tf-author" value="<?php echo $author; ?>" class="tf-post-type"/>
+                        <input type="hidden" name="tf-author" value="<?php echo esc_attr($author); ?>" class="tf-post-type"/>
 					<?php } ?>
                     <button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
                 </div>
@@ -874,7 +874,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 						mode: "range",
 						altInput: true,
 						dateFormat: "Y/m/d",
-						altFormat: '<?php echo $tour_date_format_for_users; ?>',
+						altFormat: '<?php echo esc_attr($tour_date_format_for_users); ?>',
 						minDate: "today",
 						
 						// flatpickr locale
@@ -1159,7 +1159,7 @@ function tf_single_tour_booking_form( $post_id ) {
                     <h2>
 					<?php
 					$booking_confirmation_msg = !empty(tfopt( 'booking-confirmation-msg' )) ? tfopt( 'booking-confirmation-msg' ) : 'Booked Successfully';
-					echo $booking_confirmation_msg;
+					echo esc_html($booking_confirmation_msg);
 					?>
 					</h2>
                 </div>
@@ -1351,7 +1351,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                                         <div class="traveller-single-info tf-confirm-fields">
                                                             <label for="<?php echo esc_attr( $field['reg-field-name'] ); ?>"><?php echo esc_html( $field['reg-field-label'] ); ?></label>
                                                             <input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="booking_confirm[<?php echo esc_attr( $field['reg-field-name'] ); ?>]"
-                                                                   id="<?php echo esc_attr( $field['reg-field-name'] ); ?>" data-required="<?php echo $field['reg-field-required']; ?>"/>
+                                                                   id="<?php echo esc_attr( $field['reg-field-name'] ); ?>" data-required="<?php echo esc_attr($field['reg-field-required']); ?>"/>
                                                             <div class="error-text" data-error-for="<?php echo esc_attr( $field['reg-field-name'] ); ?>"></div>
                                                         </div>
 													<?php }
@@ -1361,7 +1361,7 @@ function tf_single_tour_booking_form( $post_id ) {
 																<?php echo esc_html( $field['reg-field-label'] ); ?>
                                                             </label>
                                                             <select name="booking_confirm[<?php echo esc_attr( $field['reg-field-name'] ); ?>]" id="<?php echo esc_attr( $field['reg-field-name'] ); ?>"
-                                                                    data-required="<?php echo $field['reg-field-required']; ?>">
+                                                                    data-required="<?php echo esc_attr($field['reg-field-required']); ?>">
                                                                 <option value="">
 																	<?php echo sprintf( esc_html__( 'Select One', 'tourfic' ) ); ?>
                                                                 </option>

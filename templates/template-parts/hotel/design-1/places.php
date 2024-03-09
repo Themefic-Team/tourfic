@@ -14,8 +14,8 @@ $places_meta = !empty($meta["nearby-places"]) ? $meta["nearby-places"] : array()
             $place_icon = '<i class="' . $place['place-icon'] . '"></i>';
             ?>
             <li>
-                <span> <?php echo $place_icon; ?> <?php echo $place["place-title"] ?></span> 
-                <span> <?php echo $place["place-dist"] ?></span>
+                <span> <?php echo wp_kses_post($place_icon); ?> <?php echo esc_html($place["place-title"]) ?></span>
+                <span> <?php echo esc_html($place["place-dist"]) ?></span>
             </li>
             <?php } ;?>
         </ul>
