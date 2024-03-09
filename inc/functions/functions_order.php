@@ -134,7 +134,7 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 
         <div class="wrap tf_booking_details_wrap" style="margin-right: 20px;">
             <div id="tf-booking-status-loader">
-                <img src="<?php echo TF_ASSETS_URL; ?>app/images/loader.gif" alt="Loader">
+                <img src="<?php echo esc_url( TF_ASSETS_URL ); ?>app/images/loader.gif" alt="Loader">
             </div>
 			<div class="tf_booking_wrap_header">
 				<h1 class="wp-heading-inline"><?php esc_html_e( 'Tour Booking Details', 'tourfic' ); ?></h1>
@@ -259,7 +259,7 @@ if ( ! function_exists( 'tf_hotel_booking_page_callback' ) ) {
 
 		<div class="wrap tf_booking_details_wrap" style="margin-right: 20px;">
             <div id="tf-booking-status-loader">
-                <img src="<?php echo TF_ASSETS_URL; ?>app/images/loader.gif" alt="Loader">
+                <img src="<?php echo esc_url( TF_ASSETS_URL ); ?>app/images/loader.gif" alt="Loader">
             </div>
 			<div class="tf_booking_wrap_header">
 				<h1 class="wp-heading-inline"><?php esc_html_e( 'Hotel Booking Details', 'tourfic' ); ?></h1>
@@ -387,7 +387,7 @@ if ( ! function_exists( 'tf_apartment_booking_page_callback' ) ) {
 
 		<div class="wrap tf_booking_details_wrap" style="margin-right: 20px;">
             <div id="tf-booking-status-loader">
-                <img src="<?php echo TF_ASSETS_URL; ?>app/images/loader.gif" alt="Loader">
+                <img src="<?php echo esc_url( TF_ASSETS_URL ); ?>app/images/loader.gif" alt="Loader">
             </div>
 			<div class="tf_booking_wrap_header">
 				<h1 class="wp-heading-inline"><?php esc_html_e( 'Apartment Booking Details', 'tourfic' ); ?></h1>
