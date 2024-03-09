@@ -8,7 +8,7 @@
             <h2 class="tf-section-title">
             <?php echo !empty($meta['highlights-section-title']) ? esc_html($meta['highlights-section-title']) : esc_html__("Highlights","tourfic"); ?>
             </h2>
-            <p><?php echo $highlights; ?></p>
+            <p><?php echo wp_kses_post($highlights); ?></p>
         </div>
     </div>
 </div>

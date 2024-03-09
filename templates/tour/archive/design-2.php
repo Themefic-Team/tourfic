@@ -32,7 +32,7 @@
                     </span>
                     <!-- Booking form Start -->
                     <div class="tf-archive-search-form tf-booking-form-wrapper">
-                        <form action="<?php echo tf_booking_search_action(); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
+                        <form action="<?php echo esc_url(tf_booking_search_action()); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
                             <?php tf_archive_sidebar_search_form('tf_tours'); ?>
                         </form>
                     </div>
@@ -41,7 +41,7 @@
                     <!--Available rooms start -->
                     <div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
                         <div class="tf-archive-available-rooms-head tf-available-rooms-head">
-                            <span class="tf-total-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo $tf_total_results; ?></span> <?php esc_html_e("Tours available", "tourfic"); ?></span>
+                            <span class="tf-total-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html($tf_total_results); ?></span> <?php esc_html_e("Tours available", "tourfic"); ?></span>
                             <div class="tf-archive-filter-showing">
                                 <i class="ri-equalizer-line"></i>
                             </div>
@@ -87,7 +87,7 @@
                             }
                             ?>
                             <span class="tf-posts-count" hidden="hidden">
-                                <?php echo $tf_total_results; ?>
+                                <?php echo esc_html($tf_total_results); ?>
                             </span>
                             <?php 
                             if(tourfic_posts_navigation()){ ?>

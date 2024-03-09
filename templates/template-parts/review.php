@@ -127,7 +127,7 @@ if ( $comments ) {
 		<!-- reviews and replies -->
 		<div class="tf-review-reply-data tf-flex-gap-24 tf-flex">
 			<div class="tf-review-author">
-				<?php echo $c_avatar; ?>
+				<?php echo wp_kses_post($c_avatar); ?>
 			</div>
 			<div class="tf-review-details">
 				<div class="tf-review-author-name">
@@ -153,7 +153,7 @@ if ( $comments ) {
 </div>
 <?php
 // Review moderation notice
-echo tf_pending_review_notice( $post_id );
+echo wp_kses_post(tf_pending_review_notice( $post_id ));
 ?>
 <?php
 if ( ! empty( $tf_ratings_for ) ) {
@@ -220,7 +220,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 		}
 	}
 	// Pending review notice
-	echo tf_pending_review_notice( $post_id );
+	echo wp_kses_post(tf_pending_review_notice( $post_id ));
 	echo '</div>';
 } 
 }else{
@@ -312,7 +312,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 					$c_content     = $comment->comment_content;
 					?>
                     <div class="tf-single-details">
-                        <div class="tf-review-avatar"><?php echo $c_avatar; ?></div>
+                        <div class="tf-review-avatar"><?php echo wp_kses_post($c_avatar); ?></div>
                         <div class="tf-review-details">
                             <div class="tf-name"><?php echo esc_html($c_author_name); ?></div>
                             <div class="tf-date"><?php echo esc_html($c_date); ?></div>
@@ -330,7 +330,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 
 		<?php
 		// Review moderation notice
-		echo tf_pending_review_notice( $post_id );
+		echo wp_kses_post(tf_pending_review_notice( $post_id ));
 
 	} else {
 
@@ -365,7 +365,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 			}
 		}
 		// Pending review notice
-		echo tf_pending_review_notice( $post_id );
+		echo wp_kses_post(tf_pending_review_notice( $post_id ));
 
 		echo '</div>';
 	}

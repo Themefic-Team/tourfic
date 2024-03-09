@@ -11,7 +11,7 @@
                         <span class="tf-counter-title"><?php echo esc_html__( 'Total Results ', 'tourfic' ); ?> </span>
 						<span><?php echo ' ('; ?> </span>
 						<div class="tf-total-results">
-							<span><?php echo $tf_total_results; ?> </span>
+							<span><?php echo esc_html($tf_total_results); ?> </span>
 						</div>
 						<span><?php echo ')'; ?> </span>
                     </div>
@@ -111,7 +111,7 @@
 					}
 					?>
                     <span class="tf-posts-count" hidden="hidden">
-					    <?php echo $tf_total_results; ?>
+					    <?php echo esc_html($tf_total_results); ?>
 					</span>
                         <div class="tf-pagination-bar">
                             <?php tourfic_posts_navigation(); ?>

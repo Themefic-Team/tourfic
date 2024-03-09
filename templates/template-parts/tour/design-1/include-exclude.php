@@ -11,7 +11,7 @@
                 ?>
                 <li>
                     <i class="<?php echo !empty($inc_icon) ? esc_attr( $inc_icon ) : 'fa-regular fa-circle-check'; ?>"></i>
-                    <?php echo $val['inc']; ?>
+                    <?php echo wp_kses_post($val['inc']); ?>
                 </li>
                 <?php } ?>
             </ul>
@@ -26,7 +26,7 @@
                 ?>
                 <li>
                     <i class="<?php echo !empty($exc_icon) ? esc_attr( $exc_icon ) : 'fa-regular fa-circle-check'; ?>"></i>
-                    <?php echo $val['exc']; ?>
+                    <?php echo wp_kses_post($val['exc']); ?>
                 </li>
                 <?php } ?>
             </ul>

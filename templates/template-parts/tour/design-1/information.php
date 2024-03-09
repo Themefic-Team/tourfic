@@ -118,8 +118,8 @@
 
                     <?php if( !empty($feature->name) ) : ?>
                             <li class="single-feature-box">
-                                <span class="tf-tour-features-icon"><?php echo !empty($feature_meta['icon-fa']) || !empty($feature_meta['icon-c'])  ? $feature_icon : ''; ?></span>
-                                <span><?php echo $feature->name; ?></span>
+                                <span class="tf-tour-features-icon"><?php echo !empty($feature_meta['icon-fa']) || !empty($feature_meta['icon-c'])  ? wp_kses_post($feature_icon) : ''; ?></span>
+                                <span><?php echo esc_html($feature->name); ?></span>
                             </li>
                     <?php endif; ?>
                     <?php } ?>

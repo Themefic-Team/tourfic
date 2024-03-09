@@ -1,7 +1,7 @@
 <!-- Tour Gallery Section -->
 <div class="tf-hero-gallery tf-mb-30 tf-template-section">
 <div class="tf-gallery-featured">
-    <img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : TF_ASSETS_APP_URL.'/images/feature-default.jpg'; ?>" alt="<?php esc_html_e( 'Tour Image', 'tourfic' ); ?>">
+    <img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>" alt="<?php esc_html_e( 'Tour Image', 'tourfic' ); ?>">
     <div class="featured-meta-gallery-videos">
         <div class="featured-column tf-gallery-box">
             <?php 
@@ -30,7 +30,7 @@
         <?php
         if($comments){ ?>
         <a href="#tf-review" class="tf-single-rating">
-            <span><?php echo tf_total_avg_rating( $comments ); ?></span> (<?php tf_based_on_text( count( $comments ) ); ?>)
+            <span><?php echo wp_kses_post(tf_total_avg_rating( $comments )); ?></span> (<?php tf_based_on_text( count( $comments ) ); ?>)
         </a>
         <?php }else{ ?>
             <a href="#tf-review" class="tf-single-rating">

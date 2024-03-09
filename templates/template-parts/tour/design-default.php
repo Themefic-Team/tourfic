@@ -29,13 +29,13 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     <!-- Hero section Start -->
     <div class="tf-hero-wrapper">
         <div class="tf-container">
-            <div class="tf-hero-content" style="background-image: url(<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : TF_ASSETS_APP_URL.'/images/feature-default.jpg'; ?>);">
+            <div class="tf-hero-content" style="background-image: url(<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>);">
                 <div class="tf-hero-top">
                     <div class="tf-top-review">
                         <?php if ( $comments && ! $disable_review_sec == '1' ) { ?>
                             <a href="#tf-review">
                                 <div class="tf-single-rating">
-                                    <i class="fas fa-star"></i> <span><?php echo tf_total_avg_rating( $comments ); ?></span> (<?php tf_based_on_text( count( $comments ) ); ?>)
+                                    <i class="fas fa-star"></i> <span><?php echo wp_kses_post(tf_total_avg_rating( $comments )); ?></span> (<?php tf_based_on_text( count( $comments ) ); ?>)
                                 </div>
                             </a>
                         <?php } ?>
@@ -46,14 +46,14 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         if($disable_wishlist_tour==0){
                             if ( is_user_logged_in() ) {
                             if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) { ?>
-                                <span class="single-tour-wish-bt"><i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>"  data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
-                                    echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
+                                <span class="single-tour-wish-bt"><i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>"  data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( tfopt( 'wl-page' ) ) {
+                                    echo 'data-page-title="' . esc_attr(get_the_title( tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( tfopt( 'wl-page' ) )) . '"';
                                 } ?>></i></span>
                             <?php }
                             } else {
                             if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) { ?>
-                            <span class="single-tour-wish-bt"><i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
-                                echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
+                            <span class="single-tour-wish-bt"><i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( tfopt( 'wl-page' ) ) {
+                                echo 'data-page-title="' . esc_attr(get_the_title( tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( tfopt( 'wl-page' ) )) . '"';
                             } ?>></i></span>
                             <?php } } ?>
                         <?php }else{
@@ -61,16 +61,16 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                             if ( is_user_logged_in() ) {
                                 if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
                                     ?>
-                                    <span class="single-tour-wish-bt"><i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>"  data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
-                                        echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
+                                    <span class="single-tour-wish-bt"><i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>"  data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( tfopt( 'wl-page' ) ) {
+                                        echo 'data-page-title="' . esc_attr(get_the_title( tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( tfopt( 'wl-page' ) )) . '"';
                                     } ?>></i></span>
                                     <?php
                                 }
                             } else {
                                 if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {
                                     ?>
-                                    <span class="single-tour-wish-bt"><i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
-                                        echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
+                                    <span class="single-tour-wish-bt"><i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( tfopt( 'wl-page' ) ) {
+                                        echo 'data-page-title="' . esc_attr(get_the_title( tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( tfopt( 'wl-page' ) )) . '"';
                                     } ?>></i></span>
                                     <?php
                                 }
@@ -81,7 +81,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                 </div>
 	            <?php if( ($tf_booking_type == 2 && $tf_hide_booking_form !== '1') || $tf_booking_type == 1 || $tf_booking_type == 3) : ?>
                     <div class="tf-tours-form-wrap">
-                        <?php echo tf_single_tour_booking_form( $post->ID ); ?>
+                        <?php echo wp_kses_post(tf_single_tour_booking_form( $post->ID )); ?>
                     </div>
                 <?php endif; ?>
                 <div class="tf-hero-bottom-area">
@@ -89,7 +89,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                     $tour_video = ! empty( $meta['tour_video'] ) ? $meta['tour_video'] : '';
                     if ( !empty($tour_video) ) {
                         ?>
-                        <div class="tf-hero-btm-icon tf-tour-video" data-fancybox="tour-video" href="<?php echo $tour_video; ?>">
+                        <div class="tf-hero-btm-icon tf-tour-video" data-fancybox="tour-video" href="<?php echo esc_url($tour_video); ?>">
                             <i class="fab fa-youtube"></i>
                         </div>
                     <?php }
@@ -99,11 +99,11 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                             $image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
                             if ( $key === array_key_first( $gallery_ids ) ) {
                                 ?>
-                                <div data-fancybox="tour-gallery" class="tf-hero-btm-icon tf-tour-gallery" data-src="<?php echo $image_url; ?>">
+                                <div data-fancybox="tour-gallery" class="tf-hero-btm-icon tf-tour-gallery" data-src="<?php echo esc_url($image_url); ?>">
                                     <i class="far fa-image"></i>
                                 </div>
                             <?php } else {
-                                echo '<a data-fancybox="tour-gallery" href="' . $image_url . '" style="display:none;"></a>';
+                                echo '<a data-fancybox="tour-gallery" href="' . esc_url($image_url) . '" style="display:none;"></a>';
                             }
                         }
                     }
@@ -112,7 +112,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                         if (  $email || $phone || $fax || $website) {
                             ?>
-                            <div class="tf-hero-btm-icon tf-tour-info" data-fancybox data-src="#tf-contact-info" href="<?php echo $tour_video; ?>">
+                            <div class="tf-hero-btm-icon tf-tour-info" data-fancybox data-src="#tf-contact-info" href="<?php echo esc_url($tour_video); ?>">
                             <i class="fa fa-circle-info"></i>
                             </div>
                             <div class="tf-contact-info-wrapper" id="tf-contact-info" style="display:none">
@@ -164,7 +164,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                     <!-- Start map link -->
                     <div class="tf-map-link" id="tf-map-location" data-location="<?php echo esc_attr( $location ) ?>">
                         <?php if ( $location ) {
-                            echo '<a href="#tour-map"><span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . $location . '.</span></a>';
+                            echo '<a href="#tour-map"><span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . wp_kses_post($location) . '.</span></a>';
                         } ?>
                     </div>
                     <!-- End map link -->
@@ -177,9 +177,9 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                                 <div class="tf-price group-price">
                                     <span class="sale-price">
-                                        <?php echo $tour_price->wc_sale_group ?? $tour_price->wc_group; ?>
+                                        <?php echo wp_kses_post($tour_price->wc_sale_group) ?? $tour_price->wc_group; ?>
                                     </span>
-                                    <?php echo ( $discount_type != 'none' ) ? '<del>' . $tour_price->wc_group . '</del>' : ''; ?>
+                                    <?php echo ( $discount_type != 'none' ) ? '<del>' . wp_kses_post($tour_price->wc_group) . '</del>' : ''; ?>
                                 </div>
 
                             <?php } elseif ( $pricing_rule == 'person' ) { ?>
@@ -188,9 +188,9 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                                     <div class="tf-price adult-price">
                                         <span class="sale-price">
-                                            <?php echo $tour_price->wc_sale_adult ?? $tour_price->wc_adult; ?>
+                                            <?php echo wp_kses_post($tour_price->wc_sale_adult) ?? $tour_price->wc_adult; ?>
                                         </span>
-                                        <?php echo ( $discount_type != 'none' ) ? '<del>' . $tour_price->wc_adult . '</del>' : ''; ?>
+                                        <?php echo ( $discount_type != 'none' ) ? '<del>' . wp_kses_post($tour_price->wc_adult) . '</del>' : ''; ?>
                                     </div>
 
                                 <?php }
@@ -198,9 +198,9 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                                     <div class="tf-price child-price tf-d-n">
                                         <span class="sale-price">
-                                            <?php echo $tour_price->wc_sale_child ?? $tour_price->wc_child; ?>
+                                            <?php echo wp_kses_post($tour_price->wc_sale_child) ?? $tour_price->wc_child; ?>
                                         </span>
-                                        <?php echo ( $discount_type != 'none' ) ? '<del>' . $tour_price->wc_child . '</del>' : ''; ?>
+                                        <?php echo ( $discount_type != 'none' ) ? '<del>' . wp_kses_post($tour_price->wc_child) . '</del>' : ''; ?>
                                     </div>
 
                             <?php }
@@ -208,9 +208,9 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                                     <div class="tf-price infant-price tf-d-n">
                                         <span class="sale-price">
-                                            <?php echo $tour_price->wc_sale_infant ?? $tour_price->wc_infant; ?>
+                                            <?php echo wp_kses_post($tour_price->wc_sale_infant) ?? $tour_price->wc_infant; ?>
                                         </span>
-                                        <?php echo ( $discount_type != 'none' ) ? '<del>' . $tour_price->wc_infant . '</del>' : ''; ?>
+                                        <?php echo ( $discount_type != 'none' ) ? '<del>' . wp_kses_post($tour_price->wc_infant) . '</del>' : ''; ?>
                                     </div>
 
                                 <?php } ?>
@@ -348,7 +348,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                 <div class="tf-highlight-item">
                     <div class="tf-highlight-text">
                         <h2 class="section-heading"><?php echo !empty($meta['highlights-section-title']) ? esc_html($meta['highlights-section-title']) : ''; ?></h2>
-                        <p><?php echo $highlights; ?></p>
+                        <p><?php echo wp_kses_post($highlights); ?></p>
                     </div>
                     <?php if ( ! empty( $meta['hightlights_thumbnail'] ) ): ?>
                         <div class="tf-highlight-image">
@@ -381,8 +381,8 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         } ?>
 
                         <div class="single-feature-box">
-                            <?php echo ( !empty($feature_meta['icon-c']) || !empty($feature_meta['icon-fa']) ) ? $feature_icon : ''; ?>
-                            <p class="feature-list-title"><?php echo $feature->name; ?></p>
+                            <?php echo ( !empty($feature_meta['icon-c']) || !empty($feature_meta['icon-fa']) ) ? wp_kses_post($feature_icon) : ''; ?>
+                            <p class="feature-list-title"><?php echo esc_html($feature->name); ?></p>
                         </div>
                     <?php } ?>
                 </div>
@@ -405,7 +405,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                             <ul>
                                 <?php
                                 foreach ( $inc as $key => $val ) {
-                                    echo "<li><i class='" . esc_attr( $inc_icon ) . "'></i>" . $val['inc'] . "</li>";
+                                    echo "<li><i class='" . esc_attr( $inc_icon ) . "'></i>" . wp_kses_post($val['inc']) . "</li>";
                                 }
                                 ?>
                             </ul>
@@ -417,7 +417,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                             <ul>
                                 <?php
                                 foreach ( $exc as $key => $val ) {
-                                    echo "<li><i class='" . esc_attr( $exc_icon ) . "'></i>" . $val['exc'] . "</li>";
+                                    echo "<li><i class='" . esc_attr( $exc_icon ) . "'></i>" . wp_kses_post($val['exc']) . "</li>";
                                 }
                                 ?>
                             </ul>
@@ -476,15 +476,15 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         <?php if ( $tf_openstreet_map=="default" && !empty($location_latitude) && !empty($location_longitude) && empty($tf_google_map_key) ) {  ?>
                             <div id="tour-location" style="height: 500px;"></div>
                             <script>
-                            const map = L.map('tour-location').setView([<?php echo $location_latitude; ?>, <?php echo $location_longitude; ?>], <?php echo $location_zoom; ?>);
+                            const map = L.map('tour-location').setView([<?php echo esc_html($location_latitude); ?>, <?php echo esc_html($location_longitude); ?>], <?php echo esc_html($location_zoom); ?>);
 
                             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                                 maxZoom: 20,
                                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                             }).addTo(map);
 
-                            const marker = L.marker([<?php echo $location_latitude; ?>, <?php echo $location_longitude; ?>], {alt: '<?php echo $location; ?>'}).addTo(map)
-                                .bindPopup('<?php echo $location; ?>');
+                            const marker = L.marker([<?php echo esc_html($location_latitude); ?>, <?php echo esc_html($location_longitude); ?>], {alt: '<?php echo esc_html($location); ?>'}).addTo(map)
+                                .bindPopup('<?php echo esc_html($location); ?>');
                             </script>
                         <?php } ?>
                         <?php if ( $tf_openstreet_map=="default" && (empty($location_latitude) || empty($location_longitude)) && empty($tf_google_map_key) ) {  ?>
@@ -511,15 +511,15 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                     <?php if ( $tf_openstreet_map=="default" && !empty($location_latitude) && !empty($location_longitude) ) {  ?>
                         <div id="tour-location" style="height: 500px;"></div>
                         <script>
-                        const map = L.map('tour-location').setView([<?php echo $location_latitude; ?>, <?php echo $location_longitude; ?>], <?php echo $location_zoom; ?>);
+                        const map = L.map('tour-location').setView([<?php echo esc_html($location_latitude); ?>, <?php echo esc_html($location_longitude); ?>], <?php echo esc_html($location_zoom); ?>);
 
                         const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                             maxZoom: 20,
                             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                         }).addTo(map);
 
-                        const marker = L.marker([<?php echo $location_latitude; ?>, <?php echo $location_longitude; ?>], {alt: '<?php echo $location; ?>'}).addTo(map)
-                            .bindPopup('<?php echo $location; ?>');
+                        const marker = L.marker([<?php echo esc_html($location_latitude); ?>, <?php echo esc_html($location_longitude); ?>], {alt: '<?php echo esc_html($location); ?>'}).addTo(map)
+                            .bindPopup('<?php echo esc_html($location); ?>');
                         </script>
                     <?php } ?>
                     <?php if ( $tf_openstreet_map=="default" && (empty($location_latitude) || empty($location_longitude)) && empty($tf_google_map_key) ) {  ?>
@@ -560,12 +560,12 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                             <?php
                             if(!empty($tf_enquiry_section_icon)) {
                                 ?>
-                                <i class="<?php echo $tf_enquiry_section_icon ?>" aria-hidden="true"></i>
+                                <i class="<?php echo esc_attr($tf_enquiry_section_icon) ?>" aria-hidden="true"></i>
                                 <?php
                             }
                             if(!empty($tf_enquiry_section_title)) {
                                 ?>
-                                <h3><?php echo $tf_enquiry_section_title ?></h3>
+                                <h3><?php echo esc_html($tf_enquiry_section_title) ?></h3>
                                 <?php
                             }
                             ?>
@@ -573,7 +573,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         <?php
                         if(!empty($tf_enquiry_section_des)) {
                             ?>
-                                <p><?php echo $tf_enquiry_section_des; ?></p>
+                                <p><?php echo wp_kses_post($tf_enquiry_section_des); ?></p>
                             <?php
                             }
                             ?>
@@ -581,7 +581,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         if(!empty($enquery_button_text)) {
                             ?>
                             <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="btn-styled">
-                                <span><?php echo $enquery_button_text; ?>
+                                <span><?php echo esc_html($enquery_button_text); ?>
                             </span></a></div>
                             <?php
                         }
@@ -614,7 +614,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                 <div class="tf-toc-wrap">
                     <h2 class="section-heading"><?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : ''; ?></h2>
                     <div class="tf-toc-inner">
-                        <?php echo wpautop( $terms_and_conditions ); ?>
+                        <?php echo wp_kses_post(wpautop( $terms_and_conditions )); ?>
                     </div>
                 </div>
             </div>
@@ -708,25 +708,24 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                     $disable_child          = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
                                     $tour_price             = new Tour_Price( $meta );
                                     ?>
-                                    <div class="tf-slider-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $selected_post_id, 'full' ); ?>);">
+                                    <div class="tf-slider-item" style="background-image: url(<?php echo esc_url(get_the_post_thumbnail_url( $selected_post_id, 'full' )); ?>);">
                                         <div class="tf-slider-content">
                                             <div class="tf-slider-desc">
                                                 <h3>
-                                                    <a href="<?php echo get_permalink($selected_post_id) ?>"><?php echo get_the_title($selected_post_id) ?></a>
-                                                    <span><?php echo $first_destination_name; ?></span>
+                                                    <a href="<?php the_permalink($selected_post_id) ?>"><?php the_title($selected_post_id) ?></a>
+                                                    <span><?php echo esc_html($first_destination_name); ?></span>
                                                 </h3>
                                             </div>
                                             <div class="tf-suggestion-rating">
                                                 <div class="tf-suggestion-price">
                                         <span>
                                         <?php if ( $pricing_rule == 'group' ) {
-                                            echo $tour_price->wc_sale_group ?? $tour_price->wc_group;
+                                            echo wp_kses_post($tour_price->wc_sale_group) ?? $tour_price->wc_group;
                                         } else if ( $pricing_rule == 'person' ) {
                                             if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
-                                                echo $tour_price->wc_sale_adult ?? $tour_price->wc_adult;
+                                                echo wp_kses_post($tour_price->wc_sale_adult) ?? $tour_price->wc_adult;
                                             } else if ( ! $disable_child && ! empty( $tour_price->child ) ) {
-                                                echo $tour_price->wc_sale_child ?? $tour_price->wc_child;
-
+                                                echo wp_kses_post($tour_price->wc_sale_child) ?? $tour_price->wc_child;
                                             }
                                         }
                                         ?>
@@ -736,7 +735,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                 if ( $related_comments ) {
                                                     ?>
                                                     <div class="tf-slider-rating-star">
-                                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tf_total_avg_rating( $related_comments ); ?></span>
+                                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo wp_kses_post(tf_total_avg_rating( $related_comments )); ?></span>
                                                     </div>
                                                     <?php
                                                 }

@@ -6,7 +6,7 @@ if($terms_and_conditions){ ?>
     <?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : esc_html__("Tour Terms & Conditions","tourfic"); ?>
     </h2>
     <div class="tf-policies">
-        <?php echo wpautop( $terms_and_conditions ); ?>
+        <?php echo wp_kses_post(wpautop( $terms_and_conditions )); ?>
     </div>
 </div>
 <!-- Hotel Policies end -->
