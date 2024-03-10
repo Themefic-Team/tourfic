@@ -145,6 +145,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                         <div class="tf-top">
 							<?php
 							if ( ! empty( $child_age_limit ) ) {
+                                /* translators: %s: Child Age Limit */
 								printf( esc_html__( 'Children Age Limit %s Years', 'tourfic' ), esc_html($child_age_limit) );
 							} else {
 								esc_html_e( 'Number of Children', 'tourfic' );
@@ -172,8 +173,10 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                         <div class="price-per-night">
 							<?php
 							if ( $multi_by_date_ck ) {
+                                /* translators: %s: Days */
 								$days > 0 ? printf( esc_html__( 'for %s nights', 'tourfic' ), esc_html($days) ) : esc_html_e( 'per night', 'tourfic' );
 							} else {
+                                /* translators: %s: Days */
 								$days > 0 ? printf( esc_html__( 'for %s days', 'tourfic' ), esc_html($days) ) : esc_html_e( 'per day', 'tourfic' );
 							}
 							?>
@@ -182,8 +185,10 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                         <div class="price-per-night">
 							<?php
 							if ( $multi_by_date_ck ) {
+                                /* translators: %s: Days */
 								$days > 0 ? printf( esc_html__( 'for %s nights', 'tourfic' ), esc_html($days) ) : esc_html_e( 'per person/night', 'tourfic' );
 							} else {
+                                /* translators: %s: Days */
 								$days > 0 ? printf( esc_html__( 'for %s days', 'tourfic' ), esc_html($days) ) : esc_html_e( 'per person/day', 'tourfic' );
 							}
 							?>
@@ -241,8 +246,8 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                 <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-hotel-service-design-1" data-id="<?php echo esc_attr($room_id) ?>">
                     <div class="tf-hotel-services">
                         <div class="tf-hotel-services-text">
-                            <h3><?php esc_html_e(tfopt('hotel_service_popup_title', 'Add Service to your Booking.'), 'tourfic');?></h3>
-                            <p><?php esc_html_e(tfopt('hotel_service_popup_subtile', 'Select the services you want to add to your booking.'), 'tourfic');?></p>
+                            <h3><?php echo esc_html(tfopt('hotel_service_popup_title', esc_html__('Add Service to your Booking.', 'tourfic')));?></h3>
+                            <p><?php esc_html(tfopt('hotel_service_popup_subtile', esc_html__('Select the services you want to add to your booking.', 'tourfic')));?></p>
                         </div>
                         <div class="tf-hotel-service">
                             <label><?php esc_html_e('Pickup & Drop-off Service', 'tourfic');?></label>
@@ -270,13 +275,13 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                         </div>
                         <div class="tf-airport-pickup-response"> </div>
                         <div class="tf_button_group">
-                        <button class="hotel-room-book tf-btn-normal btn-primary" type="submit" style="width: 100%"><?php esc_html_e(tfopt('hotel_service_popup_action', 'Continue to booking'), 'tourfic');?></button>
+                        <button class="hotel-room-book tf-btn-normal btn-primary" type="submit" style="width: 100%"><?php echo esc_html(tfopt('hotel_service_popup_action', esc_html__('Continue to booking', 'tourfic')));?></button>
                         </div>
                     </div>
                 </div>
 
                 <?php }else{ ?>
-                <button class="hotel-room-book tf-btn-normal btn-primary" type="submit"><?php esc_html_e( $tf_hotel_reserve_button_text, 'tourfic' );?></button>
+                <button class="hotel-room-book tf-btn-normal btn-primary" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text );?></button>
                 <?php } ?>
             </div>
             <div class="tf_desc"></div>
@@ -465,8 +470,10 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                     <div class="price-per-night">
                         <?php
                         if($multi_by_date_ck){
+                            /* translators: %s: Days */
                             $days > 0 ? printf(esc_html__(' / for %s nights', 'tourfic'), esc_html($days)) :  esc_html_e( 'per night', 'tourfic' );
                         }else{
+                            /* translators: %s: Days */
                             $days > 0 ? printf(esc_html__(' / for %s days', 'tourfic'), esc_html($days)) :  esc_html_e( 'per day', 'tourfic' );
                         }
                         ?>
@@ -475,8 +482,10 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                     <div class="price-per-night">
                         <?php
                         if($multi_by_date_ck){
+                            /* translators: %s: Days */
                             $days > 0 ? printf(esc_html__(' / for %s nights', 'tourfic'), esc_html($days)) : esc_html_e( 'per person/night', 'tourfic' );
                         }else{
+                            /* translators: %s: Days */
                             $days > 0 ? printf(esc_html__(' /for %s days', 'tourfic'), esc_html($days)) : esc_html_e( 'per person/day', 'tourfic' );
                         }
                         ?>
@@ -522,8 +531,8 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                 <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-hotel-service-design-1" data-id="<?php echo esc_attr($room_id) ?>">
                     <div class="tf-hotel-services">
                         <div class="tf-hotel-services-text">
-                            <h3><?php esc_html_e(tfopt('hotel_service_popup_title', 'Add Service to your Booking.'), 'tourfic');?></h3>
-                            <p><?php esc_html_e(tfopt('hotel_service_popup_subtile', 'Select the services you want to add to your booking.'), 'tourfic');?></p>
+                            <h3><?php echo esc_html(tfopt('hotel_service_popup_title', esc_html__('Add Service to your Booking.', 'tourfic')));?></h3>
+                            <p><?php echo esc_html(tfopt('hotel_service_popup_subtile', esc_html__('Select the services you want to add to your booking.', 'tourfic')));?></p>
                         </div>
                         <div class="tf-hotel-service">
                             <label><?php esc_html_e('Pickup & Drop-off Service', 'tourfic');?></label>
@@ -551,13 +560,13 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                         </div>
                         <div class="tf-airport-pickup-response"> </div>
                         <div class="tf_button_group">
-                        <button class="hotel-room-book" type="submit" style="width: 100%"><?php esc_html_e(tfopt('hotel_service_popup_action', 'Continue to booking'), 'tourfic');?></button>
+                        <button class="hotel-room-book" type="submit" style="width: 100%"><?php echo esc_html(tfopt('hotel_service_popup_action', esc_html__('Continue to booking', 'tourfic')));?></button>
                         </div>
                     </div>
                 </div>
 
                 <?php }else{ ?>
-                <button class="hotel-room-book" type="submit"><?php esc_html_e( $tf_hotel_reserve_button_text, 'tourfic' );?></button>
+                <button class="hotel-room-book" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text );?></button>
                 <?php } ?>
             </div>
         </form>
@@ -678,8 +687,10 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                         <div class="price-per-night">
                             <?php
                             if($multi_by_date_ck){
+                                /* translators: %s: Days */
                                 $days > 0 ? printf(esc_html__(' / for %s nights', 'tourfic'), esc_html($days)) :  esc_html_e( 'per night', 'tourfic' );
                             }else{
+                                /* translators: %s: Days */
                                 $days > 0 ? printf(esc_html__(' / for %s days', 'tourfic'), esc_html($days)) :  esc_html_e( 'per day', 'tourfic' );
                             }
                             ?>
@@ -688,8 +699,10 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                         <div class="price-per-night">
                             <?php
                             if($multi_by_date_ck){
+                                /* translators: %s: Days */
                                 $days > 0 ? printf(esc_html__(' / for %s nights', 'tourfic'), esc_html($days)) : esc_html_e( 'per person/night', 'tourfic' );
                             }else{
+                                /* translators: %s: Days */
                                 $days > 0 ? printf(esc_html__(' /for %s days', 'tourfic'), esc_html($days)) : esc_html_e( 'per person/day', 'tourfic' );
                             }
                             ?>
@@ -803,8 +816,8 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                 <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-hotel-service-design-1" data-id="<?php echo esc_attr($room_id) ?>">
                     <div class="tf-hotel-services">
                         <div class="tf-hotel-services-text">
-                            <h3><?php esc_html_e(tfopt('hotel_service_popup_title', 'Add Service to your Booking.'), 'tourfic');?></h3>
-                            <p><?php esc_html_e(tfopt('hotel_service_popup_subtile', 'Select the services you want to add to your booking.'), 'tourfic');?></p>
+                            <h3><?php echo esc_html(tfopt('hotel_service_popup_title', esc_html__('Add Service to your Booking.', 'tourfic')));?></h3>
+                            <p><?php echo esc_html(tfopt('hotel_service_popup_subtile', esc_html__('Select the services you want to add to your booking.', 'tourfic')));?></p>
                         </div>
                         <div class="tf-hotel-service">
                             <label><?php esc_html_e('Pickup & Drop-off Service', 'tourfic');?></label>
@@ -832,13 +845,13 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                         </div>
                         <div class="tf-airport-pickup-response"> </div>
                         <div class="tf_button_group">
-                        <button class="hotel-room-book" type="submit" style="width: 100%"><?php esc_html_e(tfopt('hotel_service_popup_action', 'Continue to booking'), 'tourfic');?></button>
+                        <button class="hotel-room-book" type="submit" style="width: 100%"><?php echo esc_html(tfopt('hotel_service_popup_action', esc_html__('Continue to booking', 'tourfic')));?></button>
                         </div>
                     </div>
                 </div>
 
                 <?php }else{ ?>
-                <button class="hotel-room-book" type="submit"><?php esc_html_e( $tf_hotel_reserve_button_text, 'tourfic' );?></button>
+                <button class="hotel-room-book" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text );?></button>
                 <?php } ?>
             </div>
         </form>
@@ -873,7 +886,7 @@ if(empty($tf_room_disable_date)){
 						?>
                     </div>
                     <?php if(!empty($room['description'])): ?>
-                        <div class="bed-facilities"><p><?php esc_html_e( $room['description'] ); ?></p></div>
+                        <div class="bed-facilities"><p><?php echo wp_kses_post( $room['description'] ); ?></p></div>
                     <?php endif; ?>
                 </div>
 
@@ -959,6 +972,7 @@ if(empty($tf_room_disable_date)){
                         <div class="tf-top">
 							<?php
 							if ( ! empty( $child_age_limit ) ) {
+                                /* translators: %s: Child Age Limit */
 								printf( esc_html__( 'Children Age Limit %s Years', 'tourfic' ), esc_html($child_age_limit) );
 							} else {
 								esc_html_e( 'Number of Children', 'tourfic' );
@@ -988,8 +1002,10 @@ if(empty($tf_room_disable_date)){
                         <div class="price-per-night">
 							<?php
 							if ( $multi_by_date_ck ) {
+                                /* translators: %s: Days */
 								$days > 0 ? printf( esc_html__( 'for %s nights', 'tourfic' ), esc_html($days) ) : esc_html_e( 'per night', 'tourfic' );
 							} else {
+                                /* translators: %s: Days */
 								$days > 0 ? printf( esc_html__( 'for %s days', 'tourfic' ), esc_html($days) ) : esc_html_e( 'per day', 'tourfic' );
 							}
 							?>
@@ -998,8 +1014,10 @@ if(empty($tf_room_disable_date)){
                         <div class="price-per-night">
 							<?php
 							if ( $multi_by_date_ck ) {
+                                /* translators: %s: Days */
 								$days > 0 ? printf( esc_html__( 'for %s nights', 'tourfic' ), esc_html($days) ) : esc_html_e( 'per person/night', 'tourfic' );
 							} else {
+                                /* translators: %s: Days */
 								$days > 0 ? printf( esc_html__( 'for %s days', 'tourfic' ), esc_html($days) ) : esc_html_e( 'per person/day', 'tourfic' );
 							}
 							?>
@@ -1054,13 +1072,13 @@ if(empty($tf_room_disable_date)){
 
 						if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tour_hotel_service_avail ) && ! empty( $tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
 							?>
-                            <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo esc_attr($room_id); ?>"><?php esc_html_e( $tf_hotel_reserve_button_text, 'tourfic' ); ?></a>
+                            <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo esc_attr($room_id); ?>"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></a>
 
                             <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap" data-id="<?php echo esc_attr($room_id) ?>">
                                 <div class="tf-hotel-services">
                                     <div class="tf-hotel-services-text">
-                                        <h3><?php esc_html_e( tfopt( 'hotel_service_popup_title', 'Add Service to your Booking.' ), 'tourfic' ); ?></h3>
-                                        <p><?php esc_html_e( tfopt( 'hotel_service_popup_subtile', 'Select the services you want to add to your booking.' ), 'tourfic' ); ?></p>
+                                        <h3><?php echo esc_html( tfopt( 'hotel_service_popup_title', esc_html__('Add Service to your Booking.', 'tourfic') ) ); ?></h3>
+                                        <p><?php echo esc_html( tfopt( 'hotel_service_popup_subtile', esc_html__('Select the services you want to add to your booking.', 'tourfic') ) ); ?></p>
                                     </div>
                                     <div class="tf-hotel-service">
                                         <label><?php esc_html_e( 'Pickup & Drop-off Service', 'tourfic' ); ?></label>
@@ -1088,13 +1106,13 @@ if(empty($tf_room_disable_date)){
                                     </div>
                                     <div class="tf-airport-pickup-response"></div>
                                     <div class="tf_button_group">
-                                        <button class="hotel-room-book btn-styled" type="submit"><?php esc_html_e( tfopt( 'hotel_service_popup_action', 'Continue to booking' ), 'tourfic' ); ?></button>
+                                        <button class="hotel-room-book btn-styled" type="submit"><?php echo esc_html( tfopt( 'hotel_service_popup_action', esc_html__('Continue to booking', 'tourfic') ) ); ?></button>
                                     </div>
                                 </div>
                             </div>
 
 						<?php } else { ?>
-                            <button class="hotel-room-book btn-styled tf-sml-btn tf-hotel-booking-popup-btn" type="submit"><?php esc_html_e( $tf_hotel_reserve_button_text, 'tourfic' ); ?></button>
+                            <button class="hotel-room-book btn-styled tf-sml-btn tf-hotel-booking-popup-btn" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
 						<?php } ?>
                     </div>
                     <div class="tf_desc"></div>

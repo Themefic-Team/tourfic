@@ -263,7 +263,7 @@
                     <div class="tf-review-data">
                         <div class="tf-review-data-average">
                             <span class="avg-review"><span>
-                                <?php esc_html_e( sprintf( '%.1f', $total_rating ) ); ?>
+                                <?php echo sprintf( '%.1f', $total_rating ); ?>
                             </span>/ <?php echo wp_kses_post($tf_settings_base); ?></span>
                         </div>
                         <div class="tf-review-all-info">
@@ -282,7 +282,7 @@
                         ?>
                             <div class="tf-progress-item">                                    
                                 <div class="tf-review-feature-label">
-                                    <p class="feature-label"><?php esc_html_e( $key, "tourfic" ); ?></p>
+                                    <p class="feature-label"><?php echo esc_html( $key ); ?></p>
                                     <p class="feature-rating"> <?php echo wp_kses_post($value); ?></p>
                                 </div>
                                 <div class="tf-progress-bar">

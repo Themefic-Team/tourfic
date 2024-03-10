@@ -22,7 +22,10 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                         echo '<i class="fa-solid fa-location-dot"></i> ' . wp_kses_post($address) . ' –';
                                     } ?>
                                     <a href="<?php echo esc_url($first_location_url); ?>" class="more-hotel tf-d-ib">
-                                        <?php printf( esc_html__( 'Show more hotels in %s', 'tourfic' ), esc_html($first_location_name) ); ?>
+                                        <?php
+                                        /* translators: %s location name */
+                                        printf( esc_html__( 'Show more hotels in %s', 'tourfic' ), esc_html($first_location_name) );
+                                        ?>
                                     </a>
                             <?php } ?>
                             </div>
