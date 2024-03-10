@@ -263,7 +263,7 @@
                     <div class="tf-review-data">
                         <div class="tf-review-data-average">
                             <span class="avg-review"><span>
-                                <?php echo sprintf( '%.1f', $total_rating ); ?>
+                                <?php echo esc_html(sprintf( '%.1f', $total_rating )); ?>
                             </span>/ <?php echo wp_kses_post($tf_settings_base); ?></span>
                         </div>
                         <div class="tf-review-all-info">

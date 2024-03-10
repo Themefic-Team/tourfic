@@ -368,7 +368,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
         <div class="tf_features sp-50">
             <div class="tf-container">
                 <?php if (!empty($meta["tour-features-section-title"])) : ?>
-                    <h3 class="tf-title tf-section-title"><?php esc_html_e( $meta["tour-features-section-title"], 'tourfic' ); ?></h3>
+                    <h3 class="tf-title tf-section-title"><?php echo esc_html( $meta["tour-features-section-title"], 'tourfic' ); ?></h3>
                 <?php endif; ?>
                 <div class="tf-feature-list">
                     <?php foreach ( $features as $feature ) {
@@ -459,7 +459,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                 echo '<div class="tf-ititnerary-img"><a class="tf-itinerary-gallery" href="' . esc_url( $itinerary['image'] ) . '"><img src="' . esc_url( $itinerary['image'] ) . '"></a></div>';
                                             } ?>
                                             <div class="trav-cont tf-travel-description">
-                                                <p><?php esc_html_e( $itinerary['desc'] ); ?></p>
+                                                <p><?php echo wp_kses_post( $itinerary['desc'] ); ?></p>
                                             </div>
                                         </div>
                                     </div>
@@ -685,11 +685,11 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         <div class="tf-suggestion-sec-head">
                             <?php 
                             if( !empty( tfopt('rt-title') ) ){ ?>
-                                <h2 class="section-heading"><?php esc_html_e( tfopt('rt-title'), "tourfic" ) ?></h2>
+                                <h2 class="section-heading"><?php echo esc_html( tfopt('rt-title') ) ?></h2>
                             <?php } ?>
                             <?php 
                             if( !empty( tfopt('rt-description') ) ){ ?>
-                                <p><?php esc_html_e( tfopt('rt-description'), "tourfic" ) ?></p>
+                                <p><?php echo wp_kses_post( tfopt('rt-description') ) ?></p>
                             <?php } ?>
                         </div>
 

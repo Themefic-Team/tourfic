@@ -649,10 +649,10 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                     <div class="tf-template-container">
                         <div class="tf-container-inner">
                             <div class="section-title">
-                                <h2 class="tf-title"><?php ! empty( tfopt( 'rt-title' ) ) ? esc_html_e( tfopt( 'rt-title' ), "tourfic" ) : ''; ?></h2>
+                                <h2 class="tf-title"><?php echo ! empty( tfopt( 'rt-title' ) ) ? esc_html( tfopt( 'rt-title' )) : ''; ?></h2>
 								<?php
 								if ( ! empty( tfopt( 'rt-description' ) ) ) { ?>
-                                    <p><?php esc_html_e( tfopt( 'rt-description' ), "tourfic" ) ?></p>
+                                    <p><?php echo wp_kses_post(tfopt( 'rt-description')) ?></p>
 								<?php } ?>
                             </div>
                             <div class="tf-slider-items-wrapper tf-upcomming-tours-list-outter tf-mt-40 tf-flex tf-flex-gap-24">
