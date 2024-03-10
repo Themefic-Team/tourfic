@@ -2276,7 +2276,7 @@ function tf_search_result_ajax_sidebar() {
 			$total_pages = ceil( $total_filtered_results / $post_per_page );
 			if($total_pages>1){
 				echo "<div class='tf_posts_navigation tf_posts_ajax_navigation'>";
-				echo esc_attr (
+				echo wp_kses_post (
 					paginate_links( array(
 						'total'   => $total_pages,
 						'current' => $current_page

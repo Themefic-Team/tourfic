@@ -73,12 +73,15 @@ function tf_apartment_booking_callback() {
 		$response['errors'][] = esc_html__( 'Select Adult(s).', 'tourfic' );
 	}
 	if ( $max_adults && $adults > $max_adults ) {
+		/* translators: %s Adult Count */
 		$response['errors'][] = sprintf( esc_html__( 'Maximum %s Adult(s) allowed.', 'tourfic' ), $max_adults );
 	}
 	if ( $max_children && $children > $max_children ) {
+		/* translators: %s Children Count */
 		$response['errors'][] = sprintf( esc_html__( 'Maximum %s Children(s) allowed.', 'tourfic' ), $max_children );
 	}
 	if ( $max_infants && $infant > $max_infants ) {
+		/* translators: %s Infant Count */
 		$response['errors'][] = sprintf( esc_html__( 'Maximum %s Infant(s) allowed.', 'tourfic' ), $max_infants );
 	}
 	if ( empty( $post_id ) ) {

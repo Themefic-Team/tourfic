@@ -47,6 +47,7 @@ function hotel_locations_shortcode( $atts, $content = null ) {
                             <div class="single_recomended_content" style="background-image: url(<?php echo esc_url( $image_url ); ?>);">
                                 <div class="recomended_place_info_header">
                                     <h3><?php echo esc_html( $term->name ); ?></h3>
+									<?php /* translators: %s Hotel Count */ ?>
                                     <p><?php printf( esc_html( _n( '%s hotel', '%s hotels', $term->count, 'tourfic' ) ), esc_html( $term->count ) ); ?></p>
                                 </div>
                             </div>
@@ -121,6 +122,7 @@ function shortcode_tour_destinations( $atts, $content = null ) {
                             <div class="single_recomended_content" style="background-image: url(<?php echo esc_url( $image_url ); ?>);">
                                 <div class="recomended_place_info_header">
                                     <h3><?php echo esc_html( $term->name ); ?></h3>
+									<?php /* translators: %s Tour Count */ ?>
                                     <p><?php printf( esc_html( _n( '%s tour', '%s tours', $term->count, 'tourfic' ) ), esc_html( $term->count ) ); ?></p>
                                 </div>
                             </div>
@@ -519,7 +521,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 	// Get post type
 	$post_type = isset( $_GET['type'] ) ? sanitize_text_field( $_GET['type'] ) : '';
 	if ( empty( $post_type ) ) {
-		esc_html_e( '<h3>Please select fields from the search form!</h3>', 'tourfic' );
+		echo '<h3>' . esc_html__(" Please select fields from the search form! ", "tourfic") . '</h3>';
 
 		return;
 	}
@@ -905,7 +907,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 							}
 							$total_pages = ceil( $total_filtered_results / $post_per_page );
 							echo "<div class='tf_posts_navigation tf_posts_page_navigation'>";
-							echo esc_attr(
+							echo wp_kses_post(
 								paginate_links( array(
 									'total'   => $total_pages,
 									'current' => $current_page
@@ -1135,7 +1137,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 					$total_pages = ceil( $total_filtered_results / $post_per_page );
 					if($total_pages > 1){
 						echo "<div class='tf_posts_navigation tf_posts_page_navigation'>";
-						echo esc_attr(
+						echo wp_kses_post(
 							paginate_links( array(
 								'total'   => $total_pages,
 								'current' => $current_page
@@ -1344,7 +1346,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 						}
 						$total_pages = ceil( $total_filtered_results / $post_per_page );
 						echo "<div class='tf_posts_navigation tf_posts_page_navigation'>";
-						echo esc_attr(
+						echo wp_kses_post(
 							paginate_links( array(
 								'total'   => $total_pages,
 								'current' => $current_page,
@@ -2069,6 +2071,7 @@ function shortcode_apartment_location( $atts, $content = null ) {
                             <div class="single_recomended_content" style="background-image: url(<?php echo esc_url( $image_url ); ?>);">
                                 <div class="recomended_place_info_header">
                                     <h3><?php echo esc_html( $term->name ); ?></h3>
+									<?php /* translators: %s Apartment Count */ ?>
                                     <p><?php printf( esc_html( _n( '%s apartment', '%s apartments', $term->count, 'tourfic' ) ), esc_html( $term->count ) ); ?></p>
                                 </div>
                             </div>

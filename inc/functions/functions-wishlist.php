@@ -141,7 +141,7 @@ function tf_generate_table_guest()
 function tf_generate_table($ids, $type = null)
 {
     if (empty($ids)) {
-        return esc_html__('<p>No items added yet!</p>', 'tourfic');
+        return '<p>' . esc_html__('No items added yet!', 'tourfic') . '</p>';
         exit;
     }
     ob_start();

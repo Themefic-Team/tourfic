@@ -294,6 +294,7 @@ function tf_hotel_booking_callback() {
 					$tf_room_data['tf_hotel_data']['price_total']       += $airport_service_price_total;
 					if ( $child != 0 ) {
 
+						/* translators: %1$s Adult Count, %2$s Adult Fee, %3$s Child Count, %4$s Child Fee, %5$s Service Fee  */
 						$tf_room_data['tf_hotel_data']['air_service_info'] = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s ) = %5$s', 'tourfic' ),
 							$adult,
 							strip_tags(wc_price( $service_adult_fee )),
@@ -303,6 +304,7 @@ function tf_hotel_booking_callback() {
 						);
 
 					} else {
+						/* translators: %1$s Adult Count, %2$s Adult Fee, %3$s Service Fee  */
 						$tf_room_data['tf_hotel_data']['air_service_info'] = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) = %3$s', 'tourfic' ),
 							$adult,
 							strip_tags(wc_price( $service_adult_fee )),
@@ -315,6 +317,7 @@ function tf_hotel_booking_callback() {
 					$airport_service_price_total                        = !empty( $airport_pickup_price['airport_service_fee_fixed'] ) ? $airport_pickup_price['airport_service_fee_fixed'] : 0;
 					$tf_room_data['tf_hotel_data']['air_service_price'] = $airport_service_price_total;
 					$tf_room_data['tf_hotel_data']['price_total']       += $airport_service_price_total;
+					/* translators: %1$s Service Fee  */
 					$tf_room_data['tf_hotel_data']['air_service_info']  = sprintf( esc_html__( '( Fixed ) = %1$s', 'tourfic' ),
 						strip_tags(wc_price( $airport_service_price_total ))
 					);
@@ -342,6 +345,7 @@ function tf_hotel_booking_callback() {
 					$tf_room_data['tf_hotel_data']['air_service_price'] = $airport_service_price_total;
 					$tf_room_data['tf_hotel_data']['price_total']       += $airport_service_price_total;
 					if ( $child != 0 ) {
+						/* translators: %1$s Adult Count, %2$s Adult Fee, %3$s Child Count, %4$s Child Fee, %5$s Service Fee  */
 						$tf_room_data['tf_hotel_data']['air_service_info'] = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s ) = %5$s', 'tourfic' ),
 							$adult,
 							strip_tags(wc_price( $service_adult_fee )),
@@ -351,6 +355,7 @@ function tf_hotel_booking_callback() {
 						);
 
 					} else {
+						/* translators: %1$s Adult Count, %2$s Adult Fee, %3$s Service Fee  */
 						$tf_room_data['tf_hotel_data']['air_service_info'] = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) = %3$s', 'tourfic' ),
 							$adult,
 							strip_tags(wc_price( $service_adult_fee )),
@@ -363,6 +368,7 @@ function tf_hotel_booking_callback() {
 					$airport_service_price_total                        = !empty( $airport_pickup_price['airport_service_fee_fixed'] ) ? $airport_pickup_price['airport_service_fee_fixed'] : 0;
 					$tf_room_data['tf_hotel_data']['air_service_price'] = $airport_service_price_total;
 					$tf_room_data['tf_hotel_data']['price_total']       += $airport_service_price_total;
+					/* translators: %1$s Service Fee  */
 					$tf_room_data['tf_hotel_data']['air_service_info']  = sprintf( esc_html__( '( Fixed ) = %1$s', 'tourfic' ),
 						strip_tags(wc_price( $airport_service_price_total ))
 					);
@@ -390,7 +396,7 @@ function tf_hotel_booking_callback() {
 					$tf_room_data['tf_hotel_data']['air_service_price'] = $airport_service_price_total;
 					$tf_room_data['tf_hotel_data']['price_total']       += $airport_service_price_total;
 					if ( $child != 0 ) {
-
+						/* translators: %1$s Adult Count, %2$s Adult Fee, %3$s Child Count, %4$s Child Fee, %5$s Service Fee  */
 						$tf_room_data['tf_hotel_data']['air_service_info'] = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s ) = %5$s', 'tourfic' ),
 							$adult,
 							strip_tags(wc_price( $service_adult_fee )),
@@ -400,6 +406,7 @@ function tf_hotel_booking_callback() {
 						);
 
 					} else {
+						/* translators: %1$s Adult Count, %2$s Adult Fee, %3$s Service Fee  */
 						$tf_room_data['tf_hotel_data']['air_service_info'] = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) = %3$s', 'tourfic' ),
 							$adult,
 							strip_tags(wc_price( $service_adult_fee )),
@@ -412,6 +419,7 @@ function tf_hotel_booking_callback() {
 					$airport_service_price_total                        = !empty( $airport_pickup_price['airport_service_fee_fixed'] ) ? $airport_pickup_price['airport_service_fee_fixed'] : 0;
 					$tf_room_data['tf_hotel_data']['air_service_price'] = $airport_service_price_total;
 					$tf_room_data['tf_hotel_data']['price_total']       += $airport_service_price_total;
+					/* translators: %1$s Service Fee  */
 					$tf_room_data['tf_hotel_data']['air_service_info']  = sprintf( esc_html__( '( Fixed ) = %1$s', 'tourfic' ),
 						strip_tags(wc_price( $airport_service_price_total ))
 					);

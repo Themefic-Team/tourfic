@@ -134,7 +134,7 @@ if ( $comments ) {
 					<h3><?php echo esc_html($c_author_name); ?></h3>
 				</div>
 				<div class="tf-review-ratings tf-mt-8">
-				<?php echo esc_html($c_rating); ?>
+				<?php echo wp_kses_post($c_rating); ?>
 				</div>
 				<div class="tf-review-message">
 					<p><?php echo esc_html($c_content); ?></p>
@@ -317,7 +317,7 @@ if ( ! empty( $tf_ratings_for ) ) {
                             <div class="tf-name"><?php echo esc_html($c_author_name); ?></div>
                             <div class="tf-date"><?php echo esc_html($c_date); ?></div>
                             <div class="tf-rating-stars">
-								<?php echo esc_html($c_rating); ?>
+								<?php echo wp_kses_post($c_rating); ?>
                             </div>
                             <div class="tf-description"><p><?php echo esc_html($c_content); ?></p></div>
                         </div>

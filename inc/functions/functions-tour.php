@@ -3159,7 +3159,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 						<div class="location-icon">
 							<i class="ri-map-pin-line"></i>
 						</div>
-						<span><?php echo esc_html(tourfic_character_limit_callback( $location ), 65 ); ?></span>
+						<span><?php echo esc_html(tourfic_character_limit_callback( $location, 65 ) ); ?></span>
 					</div>
 					<?php } ?>
 				</div>
