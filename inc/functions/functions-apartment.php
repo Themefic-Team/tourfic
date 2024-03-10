@@ -17,34 +17,34 @@ function register_tf_apartment_post_type() {
 	$apartment_slug = get_option( 'apartment_slug' );
 
 	$apartment_labels =  apply_filters( 'tf_apartment_labels', array(
-		'name'                  => _x( '%2$s', 'post type general name', 'tourfic' ),
-		'singular_name'         => _x( '%1$s', 'post type singular name', 'tourfic' ),
+		'name'                  => _x( 'Apartments', 'post type general name', 'tourfic' ),
+		'singular_name'         => _x( 'Apartment', 'post type singular name', 'tourfic' ),
 		'add_new'               => _x( 'Add New', 'tourfic' ),
-		'add_new_item'          => esc_html__( 'Add New %1$s', 'tourfic' ),
-		'edit_item'             => esc_html__( 'Edit %1$s', 'tourfic' ),
-		'new_item'              => esc_html__( 'New %1$s', 'tourfic' ),
-		'all_items'             => esc_html__( 'All %1$s', 'tourfic' ),
-		'view_item'             => esc_html__( 'View %1$s', 'tourfic' ),
-		'view_items'            => esc_html__( 'View %2$s', 'tourfic' ),
-		'search_items'          => esc_html__( 'Search %2$s', 'tourfic' ),
-		'not_found'             => esc_html__( 'No %2$s found', 'tourfic' ),
-		'not_found_in_trash'    => esc_html__( 'No %2$s found in the Trash', 'tourfic' ),
+		'add_new_item'          => esc_html__( 'Add New Apartment', 'tourfic' ),
+		'edit_item'             => esc_html__( 'Edit Apartment', 'tourfic' ),
+		'new_item'              => esc_html__( 'New Apartment', 'tourfic' ),
+		'all_items'             => esc_html__( 'All Apartment', 'tourfic' ),
+		'view_item'             => esc_html__( 'View Apartment', 'tourfic' ),
+		'view_items'            => esc_html__( 'View Apartments', 'tourfic' ),
+		'search_items'          => esc_html__( 'Search Apartments', 'tourfic' ),
+		'not_found'             => esc_html__( 'No Apartments found', 'tourfic' ),
+		'not_found_in_trash'    => esc_html__( 'No Apartments found in the Trash', 'tourfic' ),
 		'parent_item_colon'     => '',
-		'menu_name'             => esc_html__( '%2$s', 'tourfic' ),
-		'featured_image'        => esc_html__( '%1$s Featured Image', 'tourfic' ),
-		'set_featured_image'    => esc_html__( 'Set %1$s Featured Image', 'tourfic' ),
-		'remove_featured_image' => esc_html__( 'Remove %1$s Featured Image', 'tourfic' ),
-		'use_featured_image'    => esc_html__( 'Use as %1$s Featured Image', 'tourfic' ),
-		'attributes'            => esc_html__( '%1$s Attributes', 'tourfic' ),
-		'filter_items_list'     => esc_html__( 'Filter %1$s list', 'tourfic' ),
-		'items_list_navigation' => esc_html__( '%1$s list navigation', 'tourfic' ),
-		'items_list'            => esc_html__( '%1$s list', 'tourfic' )
+		'menu_name'             => esc_html__( 'Apartments', 'tourfic' ),
+		'featured_image'        => esc_html__( 'Apartment Featured Image', 'tourfic' ),
+		'set_featured_image'    => esc_html__( 'Set Apartment Featured Image', 'tourfic' ),
+		'remove_featured_image' => esc_html__( 'Remove Apartment Featured Image', 'tourfic' ),
+		'use_featured_image'    => esc_html__( 'Use as Apartment Featured Image', 'tourfic' ),
+		'attributes'            => esc_html__( 'Apartment Attributes', 'tourfic' ),
+		'filter_items_list'     => esc_html__( 'Filter Apartment list', 'tourfic' ),
+		'items_list_navigation' => esc_html__( 'Apartment list navigation', 'tourfic' ),
+		'items_list'            => esc_html__( 'Apartment list', 'tourfic' )
 	));
 
 
-	foreach ( $apartment_labels as $key => $value ) {
-		$apartment_labels[ $key ] = sprintf( $value, tf_apartments_singular_label(), tf_apartments_plural_label() );
-	}
+	// foreach ( $apartment_labels as $key => $value ) {
+	// 	$apartment_labels[ $key ] = sprintf( $value, tf_apartments_singular_label(), tf_apartments_plural_label() );
+	// }
 
 	$apartment_args   = array(
 		'labels'             => $apartment_labels,

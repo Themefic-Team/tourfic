@@ -392,7 +392,7 @@ function tourfic_ask_question_ajax() {
 		}
 	}
 
-	$subject     = sprintf( esc_html__( 'Someone asked question on: %s', 'tourfic' ), $post_title );
+	$subject     = esc_html__( 'Someone asked question on: ', 'tourfic' ) . esc_html( $post_title );
 	$message     = "{$question}";
 	$headers[]   = 'Reply-To: ' . $name . ' <' . $email . '>';
 	$attachments = array();
