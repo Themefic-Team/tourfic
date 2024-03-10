@@ -255,7 +255,7 @@
                         foreach($tf_visitors_details as $visitor){
                     ?>
                     <div class="tf-grid-single">
-                        <h3><?php esc_html_e("Visitor ".$visitor_count, "tourfic"); ?></h3>
+                        <h3><?php echo esc_html("Visitor ".$visitor_count, "tourfic"); ?></h3>
                         <div class="tf-single-box">
                             <table class="table" cellpadding="0" callspacing="0">
                                 <?php 
@@ -613,7 +613,7 @@
         <?php 
         for($traveller_in = 1; $traveller_in <= $tf_total_visitor; $traveller_in++){ ?>
             <div class="tf-single-tour-traveller tf-single-travel">
-                <h4><?php esc_html_e( 'Traveler '.$traveller_in, 'tourfic' ); ?></h4>
+                <h4><?php echo esc_html( 'Traveler '.$traveller_in, 'tourfic' ); ?></h4>
                 <div class="traveller-info">
                 <?php
                 if(empty($traveler_fields)){ ?>
@@ -639,7 +639,7 @@
                         $field_keys = $field['reg-field-name'];
                         ?>
                         <div class="traveller-single-info">
-                            <label for="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in) ?>"><?php echo sprintf( esc_html__( '%s', 'tourfic' ),esc_html($field['reg-field-label'])); ?></label>
+                            <label for="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in) ?>"><?php echo esc_html( $field['reg-field-label'] ); ?></label>
                             <input type="<?php echo esc_attr($field['reg-fields-type']); ?>" name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>]" id="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in); ?>" value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{$field_keys}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{$field_keys} ) : '' ?>" />
                         </div>
                     <?php
@@ -649,10 +649,10 @@
                     ?>
                     <div class="traveller-single-info">
                         <label for="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in) ?>">
-                            <?php echo sprintf( esc_html__( '%s', 'tourfic' ),esc_html($field['reg-field-label'])); ?>
+                            <?php echo esc_html( $field['reg-field-label'] ); ?>
                         </label>
                         <select id="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in) ?>" name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>]">
-                        <option value=""><?php echo sprintf( esc_html__( 'Select One', 'tourfic' )); ?></option>
+                        <option value=""><?php echo esc_html__( 'Select One', 'tourfic' ); ?></option>
                         <?php
                         foreach($field['reg-options'] as $sfield){
                             if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){ ?>
@@ -671,7 +671,7 @@
                         
                     <div class="traveller-single-info">
                     <label for="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in) ?>">
-                    <?php echo sprintf( esc_html__( '%s', 'tourfic' ),esc_html($field['reg-field-label'])); ?>
+                    <?php echo esc_html($field['reg-field-label']); ?>
                     </label>
                         <?php
                         foreach($field['reg-options'] as $sfield){
@@ -680,7 +680,7 @@
                                 <div class="tf-single-checkbox">
                                     <input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>][]" id="<?php echo esc_attr($sfield['option-value'].$traveller_in); ?>" value="<?php echo esc_attr($sfield['option-value']); ?>" <?php echo in_array($sfield['option-value'], $tf_fields_values) ? esc_attr( 'checked' ) : ''; ?> />
                                     <label for="<?php echo esc_attr($sfield['option-value'].$traveller_in); ?>">
-                                    <?php echo sprintf( esc_html__( '%s', 'tourfic' ),esc_html($sfield['option-label'])); ?>
+                                    <?php echo esc_html($sfield['option-label']); ?>
                                     </label>
                                 </div>
                                 <?php
