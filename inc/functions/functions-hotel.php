@@ -4414,16 +4414,20 @@ if ( ! function_exists( 'tf_hotel_booking_popup_callback' ) ) {
 			if ( $day_difference < $min_max_days["min_stay"] && $min_max_days["min_stay"] > 0 ) {
 				if ( $min_max_days["uid"] == $unique_id ) {
 					if ( $min_max_days["max_stay"] == 0 ) {
-						$response['errors'][] = esc_html__( "Your Stay Requirement is Minimum {$min_max_days['min_stay']} Days", 'tourfic' );
+                        /* translators: %1$s Minimum Stay Requirement */
+						$response['errors'][] = sprintf(esc_html__( 'Your Stay Requirement is Minimum %1$s Days', 'tourfic' ), $min_max_days['min_stay']);
 					} else {
-						$response['errors'][] = esc_html__( "Your Stay Requirement is Minimum {$min_max_days['min_stay']} Days to Maximum {$min_max_days['max_stay']}", 'tourfic' );
-
-
+                        /* translators: %1$s Minimum Stay Requirement %2$s Maximum Stay Requirement */
+						$response['errors'][] = sprintf(esc_html__( 'Your Stay Requirement is Minimum %1$s Days to Maximum %2$s', 'tourfic' ),
+                            $min_max_days['min_stay'],
+							$min_max_days['max_stay']
+						);
 					}
 				}
 			} else if ( $day_difference > $min_max_days["max_stay"] && $min_max_days["max_stay"] > 0 ) {
 				if ( $min_max_days["uid"] == $unique_id ) {
-					$response['errors'][] = esc_html__( "Your Maximum Stay Requirement is {$min_max_days['max_stay']} Days", 'tourfic' );
+                    /* translators: %1$s Maximum Stay Requirement */
+					$response['errors'][] = sprintf(esc_html__( 'Your Maximum Stay Requirement is %1$s Days', 'tourfic' ), $min_max_days['max_stay']);
 				}
 			}
 		}

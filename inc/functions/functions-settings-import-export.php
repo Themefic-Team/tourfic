@@ -12,17 +12,11 @@ function tf_import_callback(){
         return;
     }
 
-    $current_user = wp_get_current_user();
-    // get user id
-    $current_user_id = $current_user->ID;
-    // get user role
-    $current_user_role = $current_user->roles[0];
-
-    // if is not desired user role die
-    if ( $current_user_role == 'administrator' ) {
-    } else {
-        wp_die( __( 'You are not allowed to import', 'tourfic' ) );
-    }
+	$current_user = wp_get_current_user();
+	$current_user_role = $current_user->roles[0];
+	if ( $current_user_role !== 'administrator' && !is_admin()) {
+		wp_die( 'You do not have sufficient permissions to access this page.' );
+	}
 
     $imported_data = maybe_unserialize( stripslashes( $_POST['tf_import_option'] ) );
     
