@@ -88,7 +88,7 @@ if ( ! function_exists( 'tf_review_form' ) ) {
 		$comment_body      = esc_html__( 'Review Description', 'tourfic' );
 		$comment_cookies_1 = esc_html__( ' By commenting you accept the', 'tourfic' );
 		$comment_cookies_2 = esc_html__( ' Privacy Policy', 'tourfic' );
-		$comment_before    = esc_html__( '', 'tourfic' );
+		$comment_before    = '';
 		$comment_cancel    = esc_html__( 'Cancel Reply', 'tourfic' );
 		$comment_meta      = tf_generate_review_meta_fields( $fields );
 		//Array
@@ -523,19 +523,19 @@ function tf_archive_single_rating() {
 				?>
 				</div>
 				<div class="tf-avarage-review">
-				<?php esc_html_e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
+				<?php echo wp_kses_post( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
 				 (<?php tf_based_on_text( count( $comments ) ); ?>)
 				</div>
 			</div>
 		<?php } elseif( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-2" ) || ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-2" ) || ( "tf_apartment"==$tf_current_post && $tf_apartment_arc_selected_template=="design-1" ) ){ ?>
 			<span class="tf-available-rating-number">
-				<?php esc_html_e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
+				<?php echo wp_kses_post( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
 			</span>
 		<?php }else{ ?>
 			<div class="tf-archive-rating-wrapper">
 				<div class="tf-archive-rating">
 					<span>
-						<?php esc_html_e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
+						<?php echo wp_kses_post( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
 					</span>
 				</div>
 				<h6><?php tf_based_on_text( count( $comments ) ); ?></h6>
