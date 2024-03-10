@@ -64,25 +64,25 @@ function tf_apartment_booking_callback() {
 
 	// Check errors
 	if ( empty( $check_in_out[0] ) ) {
-		$response['errors'][] = __( 'Check-in date missing.', 'tourfic' );
+		$response['errors'][] = esc_html__( 'Check-in date missing.', 'tourfic' );
 	}
 	if ( empty( $check_in_out[1] ) ) {
-		$response['errors'][] = __( 'Check-out date missing.', 'tourfic' );
+		$response['errors'][] = esc_html__( 'Check-out date missing.', 'tourfic' );
 	}
 	if ( empty( $adults ) ) {
-		$response['errors'][] = __( 'Select Adult(s).', 'tourfic' );
+		$response['errors'][] = esc_html__( 'Select Adult(s).', 'tourfic' );
 	}
 	if ( $max_adults && $adults > $max_adults ) {
-		$response['errors'][] = sprintf( __( 'Maximum %s Adult(s) allowed.', 'tourfic' ), $max_adults );
+		$response['errors'][] = sprintf( esc_html__( 'Maximum %s Adult(s) allowed.', 'tourfic' ), $max_adults );
 	}
 	if ( $max_children && $children > $max_children ) {
-		$response['errors'][] = sprintf( __( 'Maximum %s Children(s) allowed.', 'tourfic' ), $max_children );
+		$response['errors'][] = sprintf( esc_html__( 'Maximum %s Children(s) allowed.', 'tourfic' ), $max_children );
 	}
 	if ( $max_infants && $infant > $max_infants ) {
-		$response['errors'][] = sprintf( __( 'Maximum %s Infant(s) allowed.', 'tourfic' ), $max_infants );
+		$response['errors'][] = sprintf( esc_html__( 'Maximum %s Infant(s) allowed.', 'tourfic' ), $max_infants );
 	}
 	if ( empty( $post_id ) ) {
-		$response['errors'][] = __( 'Unknown Error! Please try again.', 'tourfic' );
+		$response['errors'][] = esc_html__( 'Unknown Error! Please try again.', 'tourfic' );
 	}
 
 	/**
@@ -227,28 +227,28 @@ function tf_apartment_cart_item_custom_meta_data( $item_data, $cart_item ) {
 
 	if ( isset( $cart_item['tf_apartment_data']['adults'] ) && $cart_item['tf_apartment_data']['adults'] >= 1 ) {
 		$item_data[] = array(
-			'key'   => __( 'Adults', 'tourfic' ),
+			'key'   => esc_html__( 'Adults', 'tourfic' ),
 			'value' => $cart_item['tf_apartment_data']['adults'],
 		);
 	}
 
 	if ( isset( $cart_item['tf_apartment_data']['children'] ) && $cart_item['tf_apartment_data']['children'] >= 1 ) {
 		$item_data[] = array(
-			'key'   => __( 'Children', 'tourfic' ),
+			'key'   => esc_html__( 'Children', 'tourfic' ),
 			'value' => $cart_item['tf_apartment_data']['children'],
 		);
 	}
 
 	if ( isset( $cart_item['tf_apartment_data']['infant'] ) && $cart_item['tf_apartment_data']['infant'] >= 1 ) {
 		$item_data[] = array(
-			'key'   => __( 'Infant', 'tourfic' ),
+			'key'   => esc_html__( 'Infant', 'tourfic' ),
 			'value' => $cart_item['tf_apartment_data']['infant'],
 		);
 	}
 
 	if ( isset( $cart_item['tf_apartment_data']['check_in_out_date'] ) ) {
 		$item_data[] = array(
-			'key'   => __( 'Check-in-out', 'tourfic' ),
+			'key'   => esc_html__( 'Check-in-out', 'tourfic' ),
 			'value' => $cart_item['tf_apartment_data']['check_in_out_date'],
 		);
 	}

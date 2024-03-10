@@ -68,11 +68,11 @@ if ( $comments ) {
 <div class="tf-review-data-inner tf-flex tf-flex-gap-24">
 	<div class="tf-review-data">
 		<div class="tf-review-data-average">
-			<p><?php _e( sprintf( '%.1f', $total_rating ) ); ?></p>
+			<p><?php esc_html_e( sprintf( '%.1f', $total_rating ) ); ?></p>
 		</div>
 		<div class="tf-review-all-info">
 			<ul class="tf-list">
-				<li><i class="fa-solid fa-circle-check"></i><?php _e("From", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></li>
+				<li><i class="fa-solid fa-circle-check"></i><?php esc_html_e("From", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></li>
 			</ul>
 		</div>
 	</div>
@@ -88,11 +88,11 @@ if ( $comments ) {
 			?>
 			<div class="tf-progress-item">
 				<div class="tf-progress-bar">
-					<span class="percent-progress" style="width: <?php echo tf_average_rating_percent( $value, tfopt( 'r-base' ) ); ?>%"></span>
+					<span class="percent-progress" style="width: <?php echo esc_html(tf_average_rating_percent( $value, tfopt( 'r-base' ) )); ?>%"></span>
 				</div>
 				<div class="tf-review-feature-label tf-flex tf-flex-space-bttn">
 					<p class="feature-label"><?php esc_html_e( $key, "tourfic" ); ?></p>
-					<p class="feature-rating"> <?php echo $value; ?></p>
+					<p class="feature-rating"> <?php echo esc_html($value); ?></p>
 				</div>
 			</div>
 			<?php } } ?>
@@ -104,7 +104,7 @@ if ( $comments ) {
 <!-- Tourfic review reply -->
 <div class="tf-review-reply tf-mt-50">
 	<div class="tf-section-head">
-		<h2 class="tf-title tf-section-title"><?php _e("Showing", "tourfic"); ?> <span><?php echo count($comments); ?></span> <?php _e("Review", "tourfic"); ?></h2>
+		<h2 class="tf-title tf-section-title"><?php esc_html_e("Showing", "tourfic"); ?> <span><?php echo count($comments); ?></span> <?php esc_html_e("Review", "tourfic"); ?></h2>
 	</div>
 	<?php
 	foreach ( $comments as $comment ) {
@@ -127,21 +127,21 @@ if ( $comments ) {
 		<!-- reviews and replies -->
 		<div class="tf-review-reply-data tf-flex-gap-24 tf-flex">
 			<div class="tf-review-author">
-				<?php echo $c_avatar; ?>
+				<?php echo wp_kses_post($c_avatar); ?>
 			</div>
 			<div class="tf-review-details">
 				<div class="tf-review-author-name">
-					<h3><?php echo $c_author_name; ?></h3>
+					<h3><?php echo esc_html($c_author_name); ?></h3>
 				</div>
 				<div class="tf-review-ratings tf-mt-8">
-				<?php echo $c_rating; ?>
+				<?php echo esc_html($c_rating); ?>
 				</div>
 				<div class="tf-review-message">
-					<p><?php echo $c_content; ?></p>
+					<p><?php echo esc_html($c_content); ?></p>
 				</div>
 				<div class="tf-review-date">
 					<ul class="tf-list">
-						<li><i class="fa-regular fa-clock"></i> <?php echo date("F d, Y", strtotime($c_date)); ?></li>
+						<li><i class="fa-regular fa-clock"></i> <?php echo esc_html(date("F d, Y", strtotime($c_date))); ?></li>
 					</ul>
 				</div>
 			</div>
@@ -153,7 +153,7 @@ if ( $comments ) {
 </div>
 <?php
 // Review moderation notice
-echo tf_pending_review_notice( $post_id );
+echo wp_kses_post(tf_pending_review_notice( $post_id ));
 ?>
 <?php
 if ( ! empty( $tf_ratings_for ) ) {
@@ -163,8 +163,8 @@ if ( ! empty( $tf_ratings_for ) ) {
 			<!-- Replay form  -->
 			<div class="tf-review-form tf-mt-40">
 				<div class="tf-section-head">
-					<h2 class="tf-title tf-section-title"><?php _e("Leave a Review", "tourfic"); ?></h2>
-					<p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
+					<h2 class="tf-title tf-section-title"><?php esc_html_e("Leave a Review", "tourfic"); ?></h2>
+					<p><?php esc_html_e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
 				</div>
 				<?php tf_review_form(); ?>
 			</div>
@@ -176,8 +176,8 @@ if ( ! empty( $tf_ratings_for ) ) {
 			<!-- Replay form  -->
 			<div class="tf-review-form tf-mt-40">
 				<div class="tf-section-head">
-					<h2 class="tf-title tf-section-title"><?php _e("Leave a Review", "tourfic"); ?></h2>
-					<p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
+					<h2 class="tf-title tf-section-title"><?php esc_html_e("Leave a Review", "tourfic"); ?></h2>
+					<p><?php esc_html_e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
 				</div>
 				<?php tf_review_form(); ?>
 			</div>
@@ -187,7 +187,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 }
 }else{
 	echo '<div class="no-review">';
-	echo '<h4>' . __( "No Review Available", "tourfic" ) . '</h4>';
+	echo '<h4>' . esc_html__( "No Review Available", "tourfic" ) . '</h4>';
 	if ( $is_user_logged_in ) {
 
 		// Add Review button
@@ -196,8 +196,8 @@ if ( ! empty( $tf_ratings_for ) ) {
 			<!-- Replay form  -->
 			<div class="tf-review-form tf-mt-40">
 				<div class="tf-section-head">
-					<h2 class="tf-title tf-section-title"><?php _e("Leave a Review", "tourfic"); ?></h2>
-					<p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
+					<h2 class="tf-title tf-section-title"><?php esc_html_e("Leave a Review", "tourfic"); ?></h2>
+					<p><?php esc_html_e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
 				</div>
 				<?php tf_review_form(); ?>
 			</div>
@@ -211,8 +211,8 @@ if ( ! empty( $tf_ratings_for ) ) {
 			<!-- Replay form  -->
 			<div class="tf-review-form tf-mt-40">
 				<div class="tf-section-head">
-					<h2 class="tf-title tf-section-title"><?php _e("Leave a Review", "tourfic"); ?></h2>
-					<p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
+					<h2 class="tf-title tf-section-title"><?php esc_html_e("Leave a Review", "tourfic"); ?></h2>
+					<p><?php esc_html_e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
 				</div>
 				<?php tf_review_form(); ?>
 			</div>
@@ -220,7 +220,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 		}
 	}
 	// Pending review notice
-	echo tf_pending_review_notice( $post_id );
+	echo wp_kses_post(tf_pending_review_notice( $post_id ));
 	echo '</div>';
 } 
 }else{
@@ -256,7 +256,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 
         <div class="tf-total-review">
             <div class="tf-total-average">
-                <div><?php _e( sprintf( '%.1f', $total_rating ) ); ?></div>
+                <div><?php esc_html_e( sprintf( '%.1f', $total_rating ) ); ?></div>
                 <span><?php tf_based_on_text( count( $comments ) ); ?></span>
             </div>
 			<?php
@@ -266,7 +266,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 						?>
                         <div class="tf-btn">
                             <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
-                                <i class="fas fa-plus"></i> <?php _e( 'Add Review', 'tourfic' ); ?>
+                                <i class="fas fa-plus"></i> <?php esc_html_e( 'Add Review', 'tourfic' ); ?>
                             </button>
                         </div>
 						<?php
@@ -276,7 +276,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 						?>
                         <div class="tf-btn">
                             <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
-                                <i class="fas fa-plus"></i> <?php _e( 'Add Review', 'tourfic' ) ?>
+                                <i class="fas fa-plus"></i> <?php esc_html_e( 'Add Review', 'tourfic' ) ?>
                             </button>
                         </div>
 						<?php
@@ -287,7 +287,7 @@ if ( ! empty( $tf_ratings_for ) ) {
         </div>
 		<?php if ( ! empty( $tf_rating_progress_bar ) ) { ?>
             <div class="tf-review-progress-bar">
-				<?php _e( $tf_rating_progress_bar ); ?>
+				<?php esc_html_e( $tf_rating_progress_bar ); ?>
             </div>
 		<?php } ?>
 
@@ -312,14 +312,14 @@ if ( ! empty( $tf_ratings_for ) ) {
 					$c_content     = $comment->comment_content;
 					?>
                     <div class="tf-single-details">
-                        <div class="tf-review-avatar"><?php echo $c_avatar; ?></div>
+                        <div class="tf-review-avatar"><?php echo wp_kses_post($c_avatar); ?></div>
                         <div class="tf-review-details">
-                            <div class="tf-name"><?php echo $c_author_name; ?></div>
-                            <div class="tf-date"><?php echo $c_date; ?></div>
+                            <div class="tf-name"><?php echo esc_html($c_author_name); ?></div>
+                            <div class="tf-date"><?php echo esc_html($c_date); ?></div>
                             <div class="tf-rating-stars">
-								<?php echo $c_rating; ?>
+								<?php echo esc_html($c_rating); ?>
                             </div>
-                            <div class="tf-description"><p><?php echo $c_content; ?></p></div>
+                            <div class="tf-description"><p><?php echo esc_html($c_content); ?></p></div>
                         </div>
                     </div>
 					<?php
@@ -330,13 +330,13 @@ if ( ! empty( $tf_ratings_for ) ) {
 
 		<?php
 		// Review moderation notice
-		echo tf_pending_review_notice( $post_id );
+		echo wp_kses_post(tf_pending_review_notice( $post_id ));
 
 	} else {
 
 		echo '<div class="no-review">';
 
-		echo '<h4>' . __( "No Review Available", "tourfic" ) . '</h4>';
+		echo '<h4>' . esc_html__( "No Review Available", "tourfic" ) . '</h4>';
 
 		if ( $is_user_logged_in ) {
 
@@ -345,7 +345,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 				?>
                 <div class="tf-btn">
                     <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
-                        <i class="fas fa-plus"></i> <?php _e( 'Add Review', 'tourfic' ); ?>
+                        <i class="fas fa-plus"></i> <?php esc_html_e( 'Add Review', 'tourfic' ); ?>
                     </button>
                 </div>
 
@@ -358,14 +358,14 @@ if ( ! empty( $tf_ratings_for ) ) {
 				?>
                 <div class="tf-btn">
                     <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
-                        <i class="fas fa-plus"></i> <?php _e( 'Add Review', 'tourfic' ) ?>
+                        <i class="fas fa-plus"></i> <?php esc_html_e( 'Add Review', 'tourfic' ) ?>
                     </button>
                 </div>
 				<?php
 			}
 		}
 		// Pending review notice
-		echo tf_pending_review_notice( $post_id );
+		echo wp_kses_post(tf_pending_review_notice( $post_id ));
 
 		echo '</div>';
 	}

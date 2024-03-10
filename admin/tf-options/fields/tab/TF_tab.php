@@ -21,7 +21,7 @@ if ( ! class_exists( 'TF_text' ) ) {
 									echo "show";
 								} ?>" data-tab-id="<?php if ( isset( $value['id'] ) ) {
 									echo esc_attr( $value['id'] );
-								} ?>"><?php echo $value['title'] ?></li>
+								} ?>"><?php echo esc_html($value['title']) ?></li>
 							<?php endforeach; ?>
 						<?php endif; ?>
                     </ul>

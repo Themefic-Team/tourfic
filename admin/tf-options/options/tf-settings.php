@@ -3157,7 +3157,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'permalink_notice',
 					'type'    => 'notice',
-					'content' => __( 'Anything confusing?' . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/#permalink-settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>', 'tourfic' ),
+					'content' => __( 'Anything confusing? <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/#permalink-settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>Read Documentation</strong></a>', 'tourfic' ),
 				),
 
 				array(

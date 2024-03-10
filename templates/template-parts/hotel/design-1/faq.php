@@ -15,22 +15,22 @@
                 <?php 
                 if (!empty($tf_enquiry_section_icon)) {
                     ?>
-                    <i class="<?php echo $tf_enquiry_section_icon; ?>" aria-hidden="true"></i>
+                    <i class="<?php echo esc_attr($tf_enquiry_section_icon); ?>" aria-hidden="true"></i>
                     <?php
                 }
                 if(!empty($tf_enquiry_section_title)) {
                     ?>
-                    <h3><?php echo  $tf_enquiry_section_title; ?></h3>
+                    <h3><?php echo wp_kses_post($tf_enquiry_section_title); ?></h3>
                     <?php
                 }
                 if(!empty($tf_enquiry_section_cont)) {
                     ?>
-                     <p><?php echo $tf_enquiry_section_cont;  ?></p>
+                     <p><?php echo wp_kses_post($tf_enquiry_section_cont);  ?></p>
                     <?php
                 }
                 if( !empty( $tf_enquiry_section_button )) {
                     ?>
-                    <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-btn-normal btn-primary"><span><?php echo $tf_enquiry_section_button; ?></span></a></div>
+                    <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-btn-normal btn-primary"><span><?php echo esc_html($tf_enquiry_section_button); ?></span></a></div>
                     <?php
                 }
                 ?>

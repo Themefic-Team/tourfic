@@ -337,22 +337,22 @@ if ( ! class_exists( 'TF_Options' ) ) {
 						'toolkit_page_url'                 => admin_url( 'admin.php?page=travelfic-template-list' ),
 						'is_travelfic_toolkit_active'	   => $travelfic_toolkit_active_plugins,
 						'current_active_theme'			   => $current_active_theme,
-						'deleting_old_review_fields'       => __( 'Deleting old review fields...', 'tourfic' ),
-						'deleting_room_order_ids'          => __( 'Deleting order ids...', 'tourfic' ),
-						'tour_location_required'           => __( 'Tour Location is a required field!', 'tourfic' ),
-						'hotel_location_required'          => __( 'Hotel Location is a required field!', 'tourfic' ),
-						'apartment_location_required'      => __( 'Apartment Location is a required field!', 'tourfic' ),
-						'tour_feature_image_required'      => __( 'Tour image is a required!', 'tourfic' ),
-						'hotel_feature_image_required'     => __( 'Hotel image is a required!', 'tourfic' ),
-						'apartment_feature_image_required' => __( 'Apartment image is a required!', 'tourfic' ),
-						'installing'                       => __( 'Installing...', 'tourfic' ),
-						'activating'                       => __( 'Activating...', 'tourfic' ),
-						'installed'                        => __( 'Installed', 'tourfic' ),
-						'activated'                        => __( 'Activated', 'tourfic' ),
-						'install_failed'                   => __( 'Install failed', 'tourfic' ),
+						'deleting_old_review_fields'       => esc_html__( 'Deleting old review fields...', 'tourfic' ),
+						'deleting_room_order_ids'          => esc_html__( 'Deleting order ids...', 'tourfic' ),
+						'tour_location_required'           => esc_html__( 'Tour Location is a required field!', 'tourfic' ),
+						'hotel_location_required'          => esc_html__( 'Hotel Location is a required field!', 'tourfic' ),
+						'apartment_location_required'      => esc_html__( 'Apartment Location is a required field!', 'tourfic' ),
+						'tour_feature_image_required'      => esc_html__( 'Tour image is a required!', 'tourfic' ),
+						'hotel_feature_image_required'     => esc_html__( 'Hotel image is a required!', 'tourfic' ),
+						'apartment_feature_image_required' => esc_html__( 'Apartment image is a required!', 'tourfic' ),
+						'installing'                       => esc_html__( 'Installing...', 'tourfic' ),
+						'activating'                       => esc_html__( 'Activating...', 'tourfic' ),
+						'installed'                        => esc_html__( 'Installed', 'tourfic' ),
+						'activated'                        => esc_html__( 'Activated', 'tourfic' ),
+						'install_failed'                   => esc_html__( 'Install failed', 'tourfic' ),
 						'date_format_change_backend' 	   => $date_format_change,
 						'i18n'                             => array(
-							'no_services_selected' => __( 'Please select at least one service.', 'tourfic' ),
+							'no_services_selected' => esc_html__( 'Please select at least one service.', 'tourfic' ),
 						)
 					)
 				);
@@ -388,9 +388,9 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				'tf_chart_enable'      => isset( $tf_chart_enable ) ? $tf_chart_enable : '',
 				'tf_admin_date_format' => $admin_date_format_for_users,
 				'tf_export_import_msg' => array(
-					'imported'       => __( 'Imported successfully!', 'tourfic' ),
-					'import_confirm' => __( 'Are you sure you want to import this data?', 'tourfic' ),
-					'import_empty'   => __( 'Import Data cannot be empty!', 'tourfic' ),
+					'imported'       => esc_html__( 'Imported successfully!', 'tourfic' ),
+					'import_confirm' => esc_html__( 'Are you sure you want to import this data?', 'tourfic' ),
+					'import_empty'   => esc_html__( 'Import Data cannot be empty!', 'tourfic' ),
 				)
 			) );
 		}
@@ -487,17 +487,17 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			}
 			?>
 
-            <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?> <?php echo ! empty( $visible ) ? $visible : ''; ?>" <?php echo ! empty( $depend ) ? $depend : ''; ?>
+            <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?> <?php echo ! empty( $visible ) ? wp_kses_post($visible) : ''; ?>" <?php echo ! empty( $depend ) ? wp_kses_post($depend) : ''; ?>
                  style="<?php echo esc_attr( $field_style ); ?>">
 
 				<?php if ( ! empty( $field['label'] ) ): ?>
                     <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-label">
 						<?php echo esc_html( $field['label'] ) ?>
 						<?php if ( $is_pro ): ?>
-                            <div class="tf-csf-badge"><span class="tf-pro"><?php _e( "Pro", "tourfic" ); ?></span></div>
+                            <div class="tf-csf-badge"><span class="tf-pro"><?php esc_html_e( "Pro", "tourfic" ); ?></span></div>
 						<?php endif; ?>
 						<?php if ( $badge_up ): ?>
-                            <div class="tf-csf-badge"><span class="tf-upcoming"><?php _e( "Upcoming", "tourfic" ); ?></span></div>
+                            <div class="tf-csf-badge"><span class="tf-upcoming"><?php esc_html_e( "Upcoming", "tourfic" ); ?></span></div>
 						<?php endif; ?>
                     </label>
 				<?php endif; ?>
@@ -513,7 +513,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 						$_field = new $fieldClass( $field, $value, $settings_id, $parent );
 						$_field->render();
 					} else {
-						echo '<p>' . __( 'Field not found!', 'tourfic' ) . '</p>';
+						echo '<p>' . esc_html__( 'Field not found!', 'tourfic' ) . '</p>';
 					}
 					?>
                 </div>

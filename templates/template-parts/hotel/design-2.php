@@ -11,16 +11,15 @@
                     if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
                 ?>
                 <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr('actives') : '' ?>">
-                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
+                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_html(get_the_title( tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( tfopt( 'wl-page' ) )) . '"'; } ?>></i>
                 </a>
                 <?php } } else{ 
                 if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {    
                 ?>
                 <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr('actives') : '' ?>">
-                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
+                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_html(get_the_title( tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( tfopt( 'wl-page' ) )) . '"'; } ?>></i>
                 </a>
                 <?php } } } ?>
-            
                 
                 <!-- Share Section -->
                 <?php if ( ! $disable_share_opt == '1' ) { ?>
@@ -29,34 +28,34 @@
                         <li>
                             <a href="http://www.facebook.com/share.php?u=<?php echo esc_url( $share_link ); ?>"
                             class="tf-dropdown-item" target="_blank">
-                        <span class="tf-dropdown-item-content">
-                            <i class="fab fa-facebook"></i>
-                        </span>
+                                <span class="tf-dropdown-item-content">
+                                    <i class="fab fa-facebook"></i>
+                                </span>
                             </a>
                         </li>
                         <li>
                             <a href="http://twitter.com/share?text=<?php echo esc_attr( $share_text ); ?>&url=<?php echo esc_url( $share_link ); ?>"
                             class="tf-dropdown-item" target="_blank">
-                        <span class="tf-dropdown-item-content">
-                            <i class="fab fa-twitter"></i>
-                        </span>
+                                <span class="tf-dropdown-item-content">
+                                    <i class="fab fa-twitter"></i>
+                                </span>
                             </a>
                         </li>
                         <li>
                             <a href="https://www.linkedin.com/cws/share?url=<?php echo esc_url( $share_link ); ?>"
                             class="tf-dropdown-item" target="_blank">
-                        <span class="tf-dropdown-item-content">
-                            <i class="fab fa-linkedin"></i>
-                        </span>
+                                <span class="tf-dropdown-item-content">
+                                    <i class="fab fa-linkedin"></i>
+                                </span>
                             </a>
                         </li>
                         <?php $share_image_link = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' ); ?>
                         <li>
                             <a href="http://pinterest.com/pin/create/button/?url=<?php echo esc_url( $share_link ); ?>&media=<?php echo esc_url( get_the_post_thumbnail_url() ); ?>&description=<?php echo esc_attr( $share_text ); ?>"
                             class="tf-dropdown-item" target="_blank">
-                        <span class="tf-dropdown-item-content">
-                            <i class="fab fa-pinterest"></i>
-                        </span>
+                                <span class="tf-dropdown-item-content">
+                                    <i class="fab fa-pinterest"></i>
+                                </span>
                             </a>
                         </li>
                         <li>
@@ -78,7 +77,7 @@
             </div>
             <div class="tf-hero-bottom-area">
                 <div class="tf-head-title">
-                    <h1><?php echo get_the_title(); ?></h1>
+                    <h1><?php the_title(); ?></h1>
                     <?php if(!empty($address)) { ?>
                     <div class="tf-title-meta">
                         <i class="ri-map-pin-line"></i>
@@ -138,22 +137,22 @@
             <div class="tf-details-menu">
                 <ul>
                     <li><a class="tf-hashlink" href="#tf-hotel-overview">
-                        <?php _e("Overview", "tourfic"); ?>
+                        <?php esc_html_e("Overview", "tourfic"); ?>
                     </a></li>
                     <li><a href="#tf-hotel-rooms">
-                        <?php _e("Rooms", "tourfic"); ?>
+                        <?php esc_html_e("Rooms", "tourfic"); ?>
                     </a></li>
                     <li><a href="#tf-hotel-facilities">
-                        <?php _e("Facilities", "tourfic"); ?>
+                        <?php esc_html_e("Facilities", "tourfic"); ?>
                     </a></li>
                     <li><a href="#tf-hotel-reviews">
-                        <?php _e("Reviews", "tourfic"); ?>
+                        <?php esc_html_e("Reviews", "tourfic"); ?>
                     </a></li>
                     <li><a href="#tf-hotel-faq">
-                        <?php _e("FAQ's", "tourfic"); ?>
+                        <?php esc_html_e("FAQ's", "tourfic"); ?>
                     </a></li>
                     <li><a href="#tf-hotel-policies">
-                        <?php _e("Policies", "tourfic"); ?>
+                        <?php esc_html_e("Policies", "tourfic"); ?>
                     </a></li>
                 </ul>
             </div>
@@ -198,48 +197,48 @@
             <?php } ?>
             
             <div id="hotel-map-location" class="tf-location tf-single-widgets">
-                <h2 class="tf-section-title"><?php _e("Location", "tourfic"); ?></h2>
+                <h2 class="tf-section-title"><?php esc_html_e("Location", "tourfic"); ?></h2>
                 <?php if ( !defined( 'TF_PRO' ) ) { ?>
                     <?php 
                     if( $address && $tf_openstreet_map!="default" && ( empty($address_latitude) || empty($address_longitude) ) ){ ?>
-                        <iframe src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr($address); ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     <?php } elseif( $address && $tf_openstreet_map=="default" && !empty($address_latitude) && !empty($address_longitude)) {
                     ?>
                         <div id="hotel-location" style="height: 250px"></div>
                         <script>
-                            const map = L.map('hotel-location').setView([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], <?php echo $address_zoom; ?>);
+                            const map = L.map('hotel-location').setView([<?php echo esc_html($address_latitude); ?>, <?php echo esc_html($address_longitude); ?>], <?php echo esc_html($address_zoom); ?>);
 
                             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                                 maxZoom: 20,
                                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                             }).addTo(map);
 
-                            const marker = L.marker([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], {alt: '<?php echo $address; ?>'}).addTo(map)
-                                .bindPopup('<?php echo $address; ?>');
+                            const marker = L.marker([<?php echo esc_html($address_latitude); ?>, <?php echo esc_html($address_longitude); ?>], {alt: '<?php echo esc_html($address); ?>'}).addTo(map)
+                                .bindPopup('<?php echo esc_html($address); ?>');
                         </script>
                     <?php }else{ ?>
-                        <iframe src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_html($address); ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     <?php } ?>
                 <?php }else{ ?>
                     <?php 
                     if( $address && $tf_openstreet_map!="default" && ( empty($address_latitude) || empty($address_longitude) ) ){ ?>
-                        <iframe src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_html($address); ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     <?php } elseif( $address && $tf_openstreet_map=="default" && !empty($address_latitude) && !empty($address_longitude)) {
                     ?>
                         <div id="hotel-location" style="height: 250px"></div>
                         <script>
-                            const map = L.map('hotel-location').setView([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], <?php echo $address_zoom; ?>);
+                            const map = L.map('hotel-location').setView([<?php echo esc_html($address_latitude); ?>, <?php echo esc_html($address_longitude); ?>], <?php echo esc_html($address_zoom); ?>);
 
                             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                                 maxZoom: 20,
                                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                             }).addTo(map);
 
-                            const marker = L.marker([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], {alt: '<?php echo $address; ?>'}).addTo(map)
-                                .bindPopup('<?php echo $address; ?>');
+                            const marker = L.marker([<?php echo esc_html($address_latitude); ?>, <?php echo esc_html($address_longitude); ?>], {alt: '<?php echo esc_html($address); ?>'}).addTo(map)
+                                .bindPopup('<?php echo esc_html($address); ?>');
                         </script>
                     <?php }else{ ?>
-                        <iframe src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_html($address); ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     <?php } ?>
                 <?php } ?>
             </div>   
@@ -259,16 +258,16 @@
                     tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rating );
                     tf_get_review_fields( $fields );
                 ?>
-                <h2 class="tf-section-title"><?php _e("Overall reviews", "tourfic"); ?></h2>
+                <h2 class="tf-section-title"><?php esc_html_e("Overall reviews", "tourfic"); ?></h2>
                 <div class="tf-review-data-inner">
                     <div class="tf-review-data">
                         <div class="tf-review-data-average">
                             <span class="avg-review"><span>
-                                <?php _e( sprintf( '%.1f', $total_rating ) ); ?>
-                            </span>/ <?php echo $tf_settings_base; ?></span>
+                                <?php esc_html_e( sprintf( '%.1f', $total_rating ) ); ?>
+                            </span>/ <?php echo wp_kses_post($tf_settings_base); ?></span>
                         </div>
                         <div class="tf-review-all-info">
-                            <p><?php _e("Excellent", "tourfic"); ?> <span><?php _e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></span></p>
+                            <p><?php esc_html_e("Excellent", "tourfic"); ?> <span><?php esc_html_e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></span></p>
                         </div>
                     </div>
                     <div class="tf-review-data-features">
@@ -284,10 +283,10 @@
                             <div class="tf-progress-item">                                    
                                 <div class="tf-review-feature-label">
                                     <p class="feature-label"><?php esc_html_e( $key, "tourfic" ); ?></p>
-                                    <p class="feature-rating"> <?php echo $value; ?></p>
+                                    <p class="feature-rating"> <?php echo wp_kses_post($value); ?></p>
                                 </div>
                                 <div class="tf-progress-bar">
-                                    <span class="percent-progress" style="width: <?php echo tf_average_rating_percent( $value, tfopt( 'r-base' ) ); ?>%"></span>
+                                    <span class="percent-progress" style="width: <?php echo wp_kses_post(tf_average_rating_percent( $value, tfopt( 'r-base' ) )); ?>%"></span>
                                 </div>
                             </div>
                             <?php } } ?>
@@ -295,14 +294,14 @@
                         </div>
                     </div>
                 </div>
-                <a class="tf-all-reviews" href="#tf-hotel-reviews"><?php _e("See all reviews", "tourfic"); ?></a>
+                <a class="tf-all-reviews" href="#tf-hotel-reviews"><?php esc_html_e("See all reviews", "tourfic"); ?></a>
                 <?php } ?>
                 <button class="tf-review-open button">
-                    <?php _e("Leave your review", "tourfic"); ?>
+                    <?php esc_html_e("Leave your review", "tourfic"); ?>
                 </button>
                 <?php
                 // Review moderation notice
-                echo tf_pending_review_notice( $post_id );
+                echo wp_kses_post(tf_pending_review_notice( $post_id ));
                 ?>
                 <?php
                 if ( ! empty( $tf_ratings_for ) ) {
@@ -310,8 +309,8 @@
                     if ( in_array( 'li', $tf_ratings_for ) && ! tf_user_has_comments() ) {
                     ?>
                 <div class="tf-review-form-wrapper" action="">
-                    <h3><?php _e("Leave your review", "tourfic"); ?></h3>
-                    <p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
+                    <h3><?php esc_html_e("Leave your review", "tourfic"); ?></h3>
+                    <p><?php esc_html_e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
                     <?php tf_review_form(); ?>
                 </div>
                 <?php
@@ -320,8 +319,8 @@
 		        if ( in_array( 'lo', $tf_ratings_for ) ) {
 			    ?>
                 <div class="tf-review-form-wrapper" action="">
-                    <h3><?php _e("Leave your review", "tourfic"); ?></h3>
-                    <p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
+                    <h3><?php esc_html_e("Leave your review", "tourfic"); ?></h3>
+                    <p><?php esc_html_e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
                     <?php tf_review_form(); ?>
                 </div>
                 <?php } } } ?>
@@ -339,22 +338,22 @@
                     <?php 
                     if (!empty($tf_enquiry_section_icon)) {
                         ?>
-                        <i class="<?php echo $tf_enquiry_section_icon; ?>" aria-hidden="true"></i>
+                        <i class="<?php echo wp_kses_post($tf_enquiry_section_icon); ?>" aria-hidden="true"></i>
                         <?php
                     }
                     if(!empty($tf_enquiry_section_title)) {
                         ?>
-                        <h3><?php echo  $tf_enquiry_section_title; ?></h3>
+                        <h3><?php echo wp_kses_post($tf_enquiry_section_title); ?></h3>
                         <?php
                     }
                     if(!empty($tf_enquiry_section_cont)) {
                         ?>
-                        <p><?php echo $tf_enquiry_section_cont;  ?></p>
+                        <p><?php echo wp_kses_post($tf_enquiry_section_cont);  ?></p>
                         <?php
                     }
                     if( !empty( $tf_enquiry_section_button )) {
                         ?>
-                        <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-send-inquiry-btn"><span><?php echo $tf_enquiry_section_button; ?></span></a></div>
+                        <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-send-inquiry-btn"><span><?php echo esc_html($tf_enquiry_section_button); ?></span></a></div>
                         <?php
                     }
                     ?>

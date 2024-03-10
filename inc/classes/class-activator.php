@@ -256,7 +256,7 @@ if ( ! class_exists( 'TF_Activator' ) ) {
 			     $post->ID == get_option( 'tf_dashboard_page_id' ) ||
 			     $post->ID == get_option( 'tf_qr_code_scanner_page_id' )
 			) {
-				$post_states[] = '<div class="tf-post-states">' . __( 'Tourfic', 'tourfic' ) . '</div>';
+				$post_states[] = '<div class="tf-post-states">' . esc_html__( 'Tourfic', 'tourfic' ) . '</div>';
 			}
 
 			return $post_states;

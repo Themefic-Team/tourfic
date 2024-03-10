@@ -22,7 +22,7 @@ if( !empty($total_facilities_cat) && !empty($meta['amenities']) ){
             $f_icon_single  = ! empty( $total_facilities_cat[$catkey]['amenities_cat_icon'] ) ? $total_facilities_cat[$catkey]['amenities_cat_icon'] : '';
             ?>
             <span class="single-facilities-title">
-            <?php echo !empty($f_icon_single) ? '<i class="' . $f_icon_single . '"></i>' : ''; ?> <?php echo $total_facilities_cat[$catkey]['amenities_cat_name'] ?? ''; ?>
+            <?php echo !empty($f_icon_single) ? '<i class="' . esc_attr( $f_icon_single ) . '"></i>' : ''; ?> <?php echo esc_html( $total_facilities_cat[$catkey]['amenities_cat_name'] ) ?? ''; ?>
             </span>
             <ul>
                 <?php 

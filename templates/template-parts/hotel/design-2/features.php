@@ -1,7 +1,7 @@
 <!--Popular Features -->
 <div class="tf-overview-wrapper">
     <div class="tf-overview-popular-facilities">
-        <span class="tf-popular-facilities-title"><?php _e("Popular facilities", "tourfic"); ?></span>
+        <span class="tf-popular-facilities-title"><?php esc_html_e("Popular facilities", "tourfic"); ?></span>
         <ul>
         <?php 
         if(!empty($features)){
@@ -17,8 +17,8 @@
             ?>
 
             <li>
-                <?php echo !empty($feature_meta) && !empty($feature_icon) ? $feature_icon : ''; ?>
-                <?php echo $feature->name; ?>
+                <?php echo !empty($feature_meta) && !empty($feature_icon) ? wp_kses_post($feature_icon) : ''; ?>
+                <?php echo esc_html($feature->name); ?>
             </li>
         <?php } } ?>
         </ul>

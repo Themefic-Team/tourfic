@@ -19,10 +19,10 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                 <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
                                 <?php if ( $locations ) { ?>
                                     <?php if ( $address ) {
-                                        echo '<i class="fa-solid fa-location-dot"></i> ' . $address . ' –';
+                                        echo '<i class="fa-solid fa-location-dot"></i> ' . wp_kses_post($address) . ' –';
                                     } ?>
-                                    <a href="<?php echo $first_location_url; ?>" class="more-hotel tf-d-ib">
-                                        <?php printf( __( 'Show more hotels in %s', 'tourfic' ), $first_location_name ); ?>
+                                    <a href="<?php echo esc_url($first_location_url); ?>" class="more-hotel tf-d-ib">
+                                        <?php printf( esc_html__( 'Show more hotels in %s', 'tourfic' ), esc_html($first_location_name) ); ?>
                                     </a>
                             <?php } ?>
                             </div>
@@ -35,13 +35,13 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                 if ( is_user_logged_in() ) {
                                     if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) { ?>
                                     <div class="tf-icon tf-wishlist-box">
-                                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
+                                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_html(get_the_title( tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( tfopt( 'wl-page' ) )) . '"'; } ?>></i>
                                     </div>
                             <?php } }else{ 
                                 if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {   ?>
                                     <div class="tf-icon tf-wishlist-box">
-                                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
-                                        echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
+                                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( tfopt( 'wl-page' ) ) {
+                                        echo 'data-page-title="' . esc_html(get_the_title( tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( tfopt( 'wl-page' ) )) . '"';
                                     } ?>></i>
                                     </div>
                                 <?php }} ?>
@@ -52,14 +52,14 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                 if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
                             ?>
                             <div class="tf-icon tf-wishlist-box">
-                            <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
+                            <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_html(get_the_title( tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( tfopt( 'wl-page' ) )) . '"'; } ?>></i>
                             </div>
                             <?php } } else{ 
                             if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {    
                             ?>
                             <div class="tf-icon tf-wishlist-box">
-                            <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
-                                echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
+                            <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( tfopt( 'wl-page' ) ) {
+                                echo 'data-page-title="' . esc_html(get_the_title( tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( tfopt( 'wl-page' ) )) . '"';
                             } ?>></i>
                             </div>
                             <?php } } } } ?>
@@ -74,7 +74,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 
                                 <div id="dropdown-share-center" class="share-tour-content">
                                     <div class="tf-dropdown-share-content">
-                                        <h4><?php _e("Share with friends", "tourfic"); ?></h4>
+                                        <h4><?php esc_html_e("Share with friends", "tourfic"); ?></h4>
                                         <ul>
                                             <li>
                                                 <a href="http://www.facebook.com/share.php?u=<?php echo esc_url( $share_link ); ?>"
@@ -142,14 +142,14 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                             <!-- Hotel Gallery Section -->
                             <div class="tf-hero-gallery tf-mrbottom-30">
                             <div class="tf-gallery-featured <?php echo empty($gallery_ids) ? esc_attr('tf-without-gallery-featured') : ''; ?>">
-                                <img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : TF_ASSETS_APP_URL.'/images/feature-default.jpg'; ?>" alt="<?php _e( 'Hotel Image', 'tourfic' ); ?>">
+                                <img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>" alt="<?php esc_html_e( 'Hotel Image', 'tourfic' ); ?>">
                                 <div class="featured-meta-gallery-videos">
                                     <div class="featured-column tf-gallery-box">
                                         <?php 
                                         if ( ! empty( $gallery_ids ) ) {
                                         ?>
                                         <a id="featured-gallery" href="#" class="tf-tour-gallery">
-                                            <i class="fa-solid fa-camera-retro"></i><?php echo __("Gallery","tourfic"); ?>
+                                            <i class="fa-solid fa-camera-retro"></i><?php echo esc_html__("Gallery","tourfic"); ?>
                                         </a>
                                         <?php 
                                         }
@@ -161,7 +161,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                     if ( !empty($hotel_video) ) { ?>
                                     <div class="featured-column tf-video-box">
                                         <a class="tf-tour-video" id="featured-video" data-fancybox="tour-video" href="<?php echo esc_url($hotel_video); ?>">
-                                            <i class="fa-solid fa-video"></i> <?php echo __("Video","tourfic"); ?>
+                                            <i class="fa-solid fa-video"></i> <?php echo esc_html__("Video","tourfic"); ?>
                                         </a>
                                     </div>
                                     <?php } ?>
@@ -171,11 +171,11 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                     <?php
                                     if($comments){ ?>
                                     <a href="#tf-review" class="tf-single-rating">
-                                        <span><?php echo tf_total_avg_rating( $comments ); ?></span> (<?php tf_based_on_text( count( $comments ) ); ?>)
+                                        <span><?php echo wp_kses_post(tf_total_avg_rating( $comments )); ?></span> (<?php tf_based_on_text( count( $comments ) ); ?>)
                                     </a>
                                     <?php }else{ ?>
                                         <a href="#tf-review" class="tf-single-rating">
-                                            <span><?php _e( "0.0", "tourfic" ) ?></span> (<?php _e( "0 review", "tourfic" ) ?>)
+                                            <span><?php esc_html_e( "0.0", "tourfic" ) ?></span> (<?php esc_html_e( "0 review", "tourfic" ) ?>)
                                         </a>
                                     <?php } ?>
                                 <?php } ?>
@@ -204,23 +204,23 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                             <div class="tf-hotel-location-map">
                                 <?php if ( !defined( 'TF_PRO' ) && !empty( $address ) && $tf_openstreet_map!="default" && (empty($address_latitude) || empty($address_longitude)) ) { ?>
                                     <div class="tf-hotel-location-preview show-on-map">
-                                    <iframe src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed" width="100%" height="258" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                                        <a href="https://www.google.com/maps/search/<?php echo $address; ?>" class="map-pre" target="_blank"><i class="fa-solid fa-location-dot"></i></a>
+                                    <iframe src="https://maps.google.com/maps?q=<?php echo wp_kses_post($address); ?>&output=embed" width="100%" height="258" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                        <a href="https://www.google.com/maps/search/<?php echo wp_kses_post($address); ?>" class="map-pre" target="_blank"><i class="fa-solid fa-location-dot"></i></a>
                                     </div>
                                 <?php } elseif ( !defined( 'TF_PRO' ) && !empty( $address ) && $tf_openstreet_map=="default" && !empty($address_latitude) && !empty($address_longitude)) {  ?>
                                     <div class="tf-hotel-location-preview show-on-map">
                                         <div id="hotel-location"></div>
                                     </div>
                                     <script>
-                                        const map = L.map('hotel-location').setView([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], <?php echo $address_zoom; ?>);
+                                        const map = L.map('hotel-location').setView([<?php echo esc_html($address_latitude); ?>, <?php echo esc_html($address_longitude); ?>], <?php echo esc_html($address_zoom); ?>);
 
                                         const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                                             maxZoom: 20,
                                             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                                         }).addTo(map);
 
-                                        const marker = L.marker([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], {alt: '<?php echo $address; ?>'}).addTo(map)
-                                            .bindPopup('<?php echo $address; ?>');
+                                        const marker = L.marker([<?php echo esc_html($address_latitude); ?>, <?php echo esc_html($address_longitude); ?>], {alt: '<?php echo esc_html($address); ?>'}).addTo(map)
+                                            .bindPopup('<?php echo esc_html($address); ?>');
                                     </script>
                                 <?php } elseif ( !defined( 'TF_PRO' ) && !empty( $address ) && $tf_openstreet_map=="default" && (empty($address_latitude) || empty($address_longitude)) ) {  ?>
                                     <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address_latitude ); ?>,<?php echo esc_attr( $address_longitude ); ?>&output=embed" width="100%" height="258" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
@@ -248,15 +248,15 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                         </a>
                                         </div>
                                         <script>
-                                            const map = L.map('hotel-location').setView([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], <?php echo $address_zoom; ?>);
+                                            const map = L.map('hotel-location').setView([<?php echo esc_html($address_latitude); ?>, <?php echo esc_html($address_longitude); ?>], <?php echo esc_html($address_zoom); ?>);
 
                                             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                                                 maxZoom: 20,
                                                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                                             }).addTo(map);
 
-                                            const marker = L.marker([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], {alt: '<?php echo $address; ?>'}).addTo(map)
-                                                .bindPopup('<?php echo $address; ?>');
+                                            const marker = L.marker([<?php echo esc_html($address_latitude); ?>, <?php echo esc_html($address_longitude); ?>], {alt: '<?php echo esc_html($address); ?>'}).addTo(map)
+                                                .bindPopup('<?php echo esc_html($address); ?>');
                                         </script>
                                     <?php } ?>
 

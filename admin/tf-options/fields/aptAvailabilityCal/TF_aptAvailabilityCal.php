@@ -23,51 +23,51 @@ if ( ! class_exists( 'TF_aptAvailabilityCal' ) ) {
                 <div class="tf-apt-cal-field" style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
 
                     <div class="tf-field-text" style="width: calc(50% - 5px)">
-                        <label class="tf-field-label"><?php echo __( 'Check In', 'tourfic' ); ?></label>
-                        <input readonly="readonly" type="text" class="tf_apt_check_in" name="tf_apt_check_in" placeholder="<?php echo __( 'Check In', 'tourfic' ); ?>">
+                        <label class="tf-field-label"><?php echo esc_html__( 'Check In', 'tourfic' ); ?></label>
+                        <input readonly="readonly" type="text" class="tf_apt_check_in" name="tf_apt_check_in" placeholder="<?php echo esc_html__( 'Check In', 'tourfic' ); ?>">
                     </div>
 
                     <div class="tf-field-text" style="width: calc(50% - 5px)">
-                        <label class="tf-field-label"><?php echo __( 'Check Out', 'tourfic' ); ?></label>
-                        <input readonly="readonly" type="text" class="tf_apt_check_out" name="tf_apt_check_out" placeholder="<?php echo __( 'Check Out', 'tourfic' ); ?>">
+                        <label class="tf-field-label"><?php echo esc_html__( 'Check Out', 'tourfic' ); ?></label>
+                        <input readonly="readonly" type="text" class="tf_apt_check_out" name="tf_apt_check_out" placeholder="<?php echo esc_html__( 'Check Out', 'tourfic' ); ?>">
                     </div>
 
-                    <div class="tf-field-text tf-price-by-night" style="display: <?php echo $pricing_type == 'per_night' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
-                        <label class="tf-field-label"><?php echo __( 'Price', 'tourfic' ); ?></label>
-                        <input type="number" min="0" name="tf_apt_price" placeholder="<?php echo __( 'Price', 'tourfic' ); ?>">
+                    <div class="tf-field-text tf-price-by-night" style="display: <?php echo esc_attr($pricing_type == 'per_night' ? 'block' : 'none') ?>; width: calc(50% - 5px)">
+                        <label class="tf-field-label"><?php echo esc_html__( 'Price', 'tourfic' ); ?></label>
+                        <input type="number" min="0" name="tf_apt_price" placeholder="<?php echo esc_html__( 'Price', 'tourfic' ); ?>">
                     </div>
 
-                    <div class="tf-field-text tf-price-by-person" style="display: <?php echo $pricing_type == 'per_person' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
-                        <label class="tf-field-label"><?php echo __( 'Adult Price', 'tourfic' ); ?></label>
-                        <input type="number" min="0" name="tf_apt_adult_price" placeholder="<?php echo __( 'Adult Price', 'tourfic' ); ?>">
+                    <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr($pricing_type == 'per_person' ? 'block' : 'none') ?>; width: calc(50% - 5px)">
+                        <label class="tf-field-label"><?php echo esc_html__( 'Adult Price', 'tourfic' ); ?></label>
+                        <input type="number" min="0" name="tf_apt_adult_price" placeholder="<?php echo esc_html__( 'Adult Price', 'tourfic' ); ?>">
                     </div>
 
-                    <div class="tf-field-text tf-price-by-person" style="display: <?php echo $pricing_type == 'per_person' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
-                        <label class="tf-field-label"><?php echo __( 'Child Price', 'tourfic' ); ?></label>
-                        <input type="number" min="0" name="tf_apt_child_price" placeholder="<?php echo __( 'Child Price', 'tourfic' ); ?>">
+                    <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr($pricing_type == 'per_person' ? 'block' : 'none') ?>; width: calc(50% - 5px)">
+                        <label class="tf-field-label"><?php echo esc_html__( 'Child Price', 'tourfic' ); ?></label>
+                        <input type="number" min="0" name="tf_apt_child_price" placeholder="<?php echo esc_html__( 'Child Price', 'tourfic' ); ?>">
                     </div>
 
-                    <div class="tf-field-text tf-price-by-person" style="display: <?php echo $pricing_type == 'per_person' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
-                        <label class="tf-field-label"><?php echo __( 'Infant Price', 'tourfic' ); ?></label>
-                        <input type="number" min="0" name="tf_apt_infant_price" placeholder="<?php echo __( 'Infant Price', 'tourfic' ); ?>">
+                    <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr($pricing_type == 'per_person' ? 'block' : 'none') ?>; width: calc(50% - 5px)">
+                        <label class="tf-field-label"><?php echo esc_html__( 'Infant Price', 'tourfic' ); ?></label>
+                        <input type="number" min="0" name="tf_apt_infant_price" placeholder="<?php echo esc_html__( 'Infant Price', 'tourfic' ); ?>">
                     </div>
 
                     <div class="tf-field-select" style="width: calc(50% - 5px)">
-                        <label class="tf-field-label"><?php echo __( 'Status', 'tourfic' ); ?></label>
+                        <label class="tf-field-label"><?php echo esc_html__( 'Status', 'tourfic' ); ?></label>
                         <select name="tf_apt_status" class="tf-select">
-                            <option value="available"><?php echo __( 'Available', 'tourfic' ); ?></option>
-                            <option value="unavailable"><?php echo __( 'Unavailable', 'tourfic' ); ?></option>
+                            <option value="available"><?php echo esc_html__( 'Available', 'tourfic' ); ?></option>
+                            <option value="unavailable"><?php echo esc_html__( 'Unavailable', 'tourfic' ); ?></option>
                         </select>
                     </div>
 
                     <div style="width: 100%">
                         <input type="hidden" name="new_post" value="<?php echo $this->value ? 'false' : 'true'; ?>">
                         <input type="hidden" name="apartment_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
-                        <span class="tf_apt_cal_update button button-primary button-large"><?php echo __( 'Save Calendar', 'tourfic' ); ?></span>
+                        <span class="tf_apt_cal_update button button-primary button-large"><?php echo esc_html__( 'Save Calendar', 'tourfic' ); ?></span>
                     </div>
 
                 </div>
-                <input type="hidden" class="apt_availability" name="<?php echo esc_attr( $this->field_name() ); ?>" id="<?php echo esc_attr( $this->field_name() ); ?>" value='<?php echo $this->value; ?>'/>
+                <input type="hidden" class="apt_availability" name="<?php echo esc_attr( $this->field_name() ); ?>" id="<?php echo esc_attr( $this->field_name() ); ?>" value='<?php echo esc_attr($this->value); ?>'/>
             </div>
 			<?php
 		}

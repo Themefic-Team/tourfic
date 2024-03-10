@@ -15,11 +15,11 @@ if ( ! class_exists( 'TF_radio' ) ) {
 				echo '<ul class="tf-radio-group ' . esc_attr( $inline ) . '">';
 				foreach ( $this->field['options'] as $key => $value ) {
 					$checked = $key == $this->value ? ' checked' : '';
-					echo '<li><input type="radio" id="' . $this->field_name() . '[' . $key . ']" name="' . $this->field_name() . '" data-depend-id="' . esc_attr( $this->field['id'] ) . '' . $this->parent_field . '" value="' . esc_attr( $key ) . '" ' . $checked . ' '. $this->field_attributes() .'/><label for="' . $this->field_name() . '[' . $key . ']">' . $value . '</label></li>';
+					echo '<li><input type="radio" id="' . esc_attr($this->field_name()) . '[' . esc_attr($key) . ']" name="' . esc_attr($this->field_name()) . '" data-depend-id="' . esc_attr( $this->field['id'] ) . '' . esc_attr($this->parent_field) . '" value="' . esc_attr( $key ) . '" ' . esc_attr($checked) . ' '. wp_kses_post($this->field_attributes()) .'/><label for="' . esc_attr($this->field_name()) . '[' . esc_attr($key) . ']">' . esc_attr($value) . '</label></li>';
 				}
 				echo '</ul>';
 			} else {
-				echo '<input type="radio" id="' . $this->field_name() . '" name="' . $this->field_name() . '" data-depend-id="' . esc_attr( $this->field['id'] ) . '' . $this->parent_field . '" value="1" ' . checked( $this->value, 1, false ) . ' '. $this->field_attributes() .'/><label for="' . $this->field_name() . '">' . $this->field['title'] . '</label>';
+				echo '<input type="radio" id="' . esc_attr($this->field_name()) . '" name="' . esc_attr($this->field_name()) . '" data-depend-id="' . esc_attr( $this->field['id'] ) . '' . esc_attr($this->parent_field) . '" value="1" ' . checked( esc_attr($this->value), 1, false ) . ' '. wp_kses_post($this->field_attributes()) .'/><label for="' . esc_attr($this->field_name()) . '">' . esc_html($this->field['title']) . '</label>';
 			}
 		}
 	}

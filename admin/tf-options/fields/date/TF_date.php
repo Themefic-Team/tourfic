@@ -38,7 +38,7 @@ if ( ! class_exists( 'TF_date' ) ) {
                         <label for="" class="tf-field-label"><?php echo esc_html( $args['label_from'] ) ?></label>
                         <div class="" style="position:relative;">
                             <input type="text" name="<?php echo esc_attr( $this->field_name() ); ?>[from]" placeholder="<?php echo esc_attr( $placeholder ) ?>" value="<?php echo esc_attr( $value['from'] ); ?>"
-                                   class="flatpickr " data-format="<?php echo esc_attr( $format ); ?>" <?php echo $this->field_attributes() ?> data-min-date="<?php echo esc_attr( $minDate ); ?>"/>
+                                   class="flatpickr " data-format="<?php echo esc_attr( $format ); ?>" <?php echo wp_kses_post($this->field_attributes()) ?> data-min-date="<?php echo esc_attr( $minDate ); ?>"/>
                             <i class="fa-solid fa-calendar-days"></i>
                         </div>
                     </div>
@@ -46,14 +46,14 @@ if ( ! class_exists( 'TF_date' ) ) {
                         <label for="" class="tf-field-label"><?php echo esc_html( $args['label_to'] ) ?></label>
                         <div class="" style="position:relative;">
                             <input type="text" name="<?php echo esc_attr( $this->field_name() ); ?>[to]" placeholder="<?php echo esc_attr( $placeholder ) ?>" value="<?php echo esc_attr( $value['to'] ); ?>"
-                                   class="flatpickr " data-format="<?php echo esc_attr( $format ); ?>" <?php echo $this->field_attributes() ?> data-min-date="<?php echo esc_attr( $minDate ); ?>"/>
+                                   class="flatpickr " data-format="<?php echo esc_attr( $format ); ?>" <?php echo wp_kses_post($this->field_attributes()) ?> data-min-date="<?php echo esc_attr( $minDate ); ?>"/>
                             <i class="fa-solid fa-calendar-days"></i>
                         </div>
                     </div>
                 </div>
 			<?php else: ?>
                 <input type="text" name="<?php echo esc_attr( $this->field_name() ); ?>" placeholder="<?php echo esc_attr( $placeholder ) ?>" value="<?php echo esc_attr( $this->value ); ?>"
-                       class="flatpickr " data-format="<?php echo esc_attr( $format ); ?>" data-multiple="<?php echo esc_attr( $multiple ); ?>" <?php echo $this->field_attributes() ?> data-min-date="<?php echo esc_attr( $minDate ); ?>"/>
+                       class="flatpickr " data-format="<?php echo esc_attr( $format ); ?>" data-multiple="<?php echo esc_attr( $multiple ); ?>" <?php echo wp_kses_post($this->field_attributes()) ?> data-min-date="<?php echo esc_attr( $minDate ); ?>"/>
                 <i class="fa-solid fa-calendar-days"></i>
 			<?php
 			endif;
