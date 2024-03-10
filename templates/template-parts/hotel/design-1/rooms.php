@@ -312,6 +312,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                     <div class="tf-top">
                                         <?php
                                         if(!empty($child_age_limit)){
+                                            /* translators: %s child age limit */
                                             printf(esc_html__('Children Age Limit %s Years', 'tourfic'), esc_html($child_age_limit));
                                         }else{
                                             esc_html_e( 'Number of Children', 'tourfic' );

@@ -68,7 +68,7 @@ if ( $comments ) {
 <div class="tf-review-data-inner tf-flex tf-flex-gap-24">
 	<div class="tf-review-data">
 		<div class="tf-review-data-average">
-			<p><?php esc_html_e( sprintf( '%.1f', $total_rating ) ); ?></p>
+			<p><?php echo esc_html( sprintf( '%.1f', $total_rating ) ); ?></p>
 		</div>
 		<div class="tf-review-all-info">
 			<ul class="tf-list">
@@ -91,7 +91,7 @@ if ( $comments ) {
 					<span class="percent-progress" style="width: <?php echo esc_html(tf_average_rating_percent( $value, tfopt( 'r-base' ) )); ?>%"></span>
 				</div>
 				<div class="tf-review-feature-label tf-flex tf-flex-space-bttn">
-					<p class="feature-label"><?php esc_html_e( $key, "tourfic" ); ?></p>
+					<p class="feature-label"><?php echo esc_html( $key ); ?></p>
 					<p class="feature-rating"> <?php echo esc_html($value); ?></p>
 				</div>
 			</div>
@@ -256,7 +256,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 
         <div class="tf-total-review">
             <div class="tf-total-average">
-                <div><?php esc_html_e( sprintf( '%.1f', $total_rating ) ); ?></div>
+                <div><?php echo esc_html( sprintf( '%.1f', $total_rating ) ); ?></div>
                 <span><?php tf_based_on_text( count( $comments ) ); ?></span>
             </div>
 			<?php
@@ -287,7 +287,7 @@ if ( ! empty( $tf_ratings_for ) ) {
         </div>
 		<?php if ( ! empty( $tf_rating_progress_bar ) ) { ?>
             <div class="tf-review-progress-bar">
-				<?php esc_html_e( $tf_rating_progress_bar ); ?>
+				<?php echo wp_kses_post( $tf_rating_progress_bar ); ?>
             </div>
 		<?php } ?>
 

@@ -43,7 +43,10 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 							} ?>
 
                             <a href="<?php echo esc_url($first_location_url); ?>" class="more-hotel tf-d-ib">
-								<?php printf( esc_html__( 'Show more hotels in %s', 'tourfic' ), esc_html($first_location_name) ); ?>
+								<?php
+                                /* translators: %s location name */
+                                printf( esc_html__( 'Show more hotels in %s', 'tourfic' ), esc_html($first_location_name) );
+                                ?>
                             </a>
                         </div>
 					<?php } ?>
@@ -428,7 +431,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                         <div class="nearby-container"> 
                             <div class="nearby-container-inner">
                                 <?php if(!empty($places_section_title)): ?>
-                                    <h3 class="section-heading"><?php echo esc_html__($places_section_title, 'tourfic'); ?></h3>
+                                    <h3 class="section-heading"><?php echo esc_html($places_section_title); ?></h3>
                                 <?php endif; ?>
                                 <ul>
                                     <?php foreach($places_meta as $place) {
@@ -648,7 +651,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 															}
 															?>
                                                 </div>
-                                                <div class="bed-facilities"><p><?php esc_html_e( $room['description'] ); ?></p></div>
+                                                <div class="bed-facilities"><p><?php echo wp_kses_post( $room['description'] ); ?></p></div>
                                             </div>
 
 											<?php if ( $footage ) { ?>
@@ -733,6 +736,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                                                     <div class="tf-top">
 														<?php
 														if ( ! empty( $child_age_limit ) ) {
+                                                            /* translators: %s child age limit */
 															printf( esc_html__( 'Children Age Limit %s Years', 'tourfic' ), esc_html($child_age_limit) );
 														} else {
 															esc_html_e( 'Number of Children', 'tourfic' );
@@ -872,7 +876,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 						<?php foreach ( $faqs as $key => $faq ): ?>
                             <div id="tf-faq-item">
                                 <div class="tf-faq-title">
-                                    <h4><?php esc_html_e( $faq['title'] ); ?></h4>
+                                    <h4><?php echo esc_html( $faq['title'] ); ?></h4>
                                     <i class="fas fa-angle-down arrow"></i>
                                 </div>
                                 <div class="tf-faq-desc">

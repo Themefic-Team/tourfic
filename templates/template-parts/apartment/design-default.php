@@ -13,7 +13,10 @@
 							} ?>
 
                             <a href="<?php echo esc_url( $first_location_url ); ?>" class="more-apartment tf-d-ib">
-								<?php printf( esc_html__( 'Show more apartments in %s', 'tourfic' ), esc_html( $first_location_name ) ); ?>
+								<?php
+                                /* translators: %s: location name */
+                                printf( esc_html__( 'Show more apartments in %s', 'tourfic' ), esc_html( $first_location_name ) );
+                                ?>
                             </a>
                         </div>
 					<?php } ?>
@@ -274,7 +277,7 @@
 						?>
                         <!-- Start Key Features Section -->
                         <div class="tf-apartment-amenities-section">
-                            <h2 class="section-heading"><?php ! empty( $meta['amenities_title'] ) ? esc_html_e( $meta['amenities_title'] ) : ''; ?></h2>
+                            <h2 class="section-heading"><?php echo ! empty( $meta['amenities_title'] ) ? esc_html( $meta['amenities_title'] ) : ''; ?></h2>
                             <div class="tf-apartment-amenities">
 								<?php if ( ! empty( $fav_amenities ) ):
 									foreach ( array_slice( $fav_amenities, 0, 10 ) as $amenity ) :
@@ -325,7 +328,7 @@
                                                 <a data-dismiss="modal" class="tf-modal-close">&#10005;</a>
                                             </div>
                                             <div class="tf-modal-body">
-                                                <h2 class="section-heading"><?php ! empty( $meta['amenities_title'] ) ? esc_html_e( $meta['amenities_title'] ) : ''; ?></h2>
+                                                <h2 class="section-heading"><?php echo ! empty( $meta['amenities_title'] ) ? esc_html( $meta['amenities_title'] ) : ''; ?></h2>
 												<?php
 												$categories     = [];
 												$amenities_cats = ! empty( tf_data_types( tfopt( 'amenities_cats' ) ) ) ? tf_data_types( tfopt( 'amenities_cats' ) ) : '';
@@ -420,7 +423,7 @@
                     <div class="tf-map-content-wrapper <?php echo empty( $map['address'] ) || empty( $meta['surroundings_places'] ) ? 'tf-map-content-full' : ''; ?> <?php echo ! function_exists( 'is_tf_pro' ) ? 'tf-map-content-full' : '' ?>">
 						<?php if ( ! empty( $map['address'] ) ): ?>
                             <div class="tf-apartment-map">
-                                <h2 class="section-heading"><?php ! empty( $meta['location_title'] ) ? esc_html_e( $meta['location_title'] ) : ''; ?></h2>
+                                <h2 class="section-heading"><?php echo ! empty( $meta['location_title'] ) ? esc_html( $meta['location_title'] ) : ''; ?></h2>
 
 								<?php if ( $tf_openstreet_map == "default" && ! empty( $map["latitude"] ) && ! empty( $map["longitude"] ) ) { ?>
                                     <div id="apartment-location" style="height: 500px;"></div>
@@ -496,7 +499,7 @@
 		?>
         <div class="tf-house-rules">
             <div class="tf-container">
-                <h3 class="section-heading"><?php ! empty( $meta['house_rules_title'] ) ? esc_html_e( $meta['house_rules_title'] ) : ''; ?></h3>
+                <h3 class="section-heading"><?php echo ! empty( $meta['house_rules_title'] ) ? esc_html( $meta['house_rules_title'] ) : ''; ?></h3>
                 <div class="tf-house-rules-wrapper <?php echo empty( $included_house_rules ) || empty( $not_included_house_rules ) ? 'tf-house-rules-full' : ''; ?>">
 					<?php if ( ! empty( $included_house_rules ) ): ?>
                         <ul class="tf-included-house-rules">
@@ -536,7 +539,7 @@
 						<?php foreach ( tf_data_types( $meta['faq'] ) as $key => $faq ): ?>
                             <div id="tf-faq-item">
                                 <div class="tf-faq-title">
-                                    <h4><?php esc_html_e( $faq['title'] ); ?></h4>
+                                    <h4><?php echo esc_html( $faq['title'] ); ?></h4>
                                     <i class="fas fa-angle-down arrow"></i>
                                 </div>
                                 <div class="tf-faq-desc">
