@@ -102,7 +102,7 @@
         <div class="tf-tour-features tf-mb-40 tf-template-section">
             <div class="tf-tour-features-container">
                 <?php if (!empty($meta["tour-features-section-title"])) : ?>
-                    <h2 class="tf-title tf-section-title"><?php esc_html_e( $meta["tour-features-section-title"], 'tourfic' ); ?></h2>
+                    <h2 class="tf-title tf-section-title"><?php echo esc_html( $meta["tour-features-section-title"] ); ?></h2>
                 <?php endif; ?>
                 <ul class="tf-tour-feature-list">
 

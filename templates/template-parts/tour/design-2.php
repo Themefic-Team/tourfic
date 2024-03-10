@@ -211,7 +211,7 @@
                         <div class="tf-review-data">
                             <div class="tf-review-data-average">
                                 <span class="avg-review"><span>
-                                    <?php esc_html_e( sprintf( '%.1f', $total_rating ) ); ?>
+                                    <?php echo esc_html( sprintf( '%.1f', $total_rating ) ); ?>
                                 </span>/ <?php echo wp_kses_post($tf_settings_base); ?></span>
                             </div>
                             <div class="tf-review-all-info">
@@ -230,7 +230,7 @@
                             ?>
                                 <div class="tf-progress-item">                                    
                                     <div class="tf-review-feature-label">
-                                        <p class="feature-label"><?php esc_html_e( $key, "tourfic" ); ?></p>
+                                        <p class="feature-label"><?php echo esc_html( $key ); ?></p>
                                         <p class="feature-rating"> <?php echo esc_html($value); ?></p>
                                     </div>
                                     <div class="tf-progress-bar">
@@ -397,8 +397,7 @@
                     <div class="tf-container">
                         <div class="tf-container-inner">
                             <div class="section-title">
-                                <h2 class="tf-title"><?php ! empty( tfopt( 'rt-title' ) ) ? esc_html_e( tfopt( 'rt-title' ), "tourfic" ) : esc_html_e( "You may also like", "tourfic" ); ?></h2>
-                                
+                                <h2 class="tf-title"><?php echo ! empty( tfopt( 'rt-title' ) ) ? esc_html( tfopt( 'rt-title' ), "tourfic" ) : esc_html_e( "You may also like", "tourfic" ); ?></h2>
                             </div>
                             <div class="tf-design-3-slider-items-wrapper tf-upcomming-tours-list-outter tf-flex tf-flex-gap-24">
                                 <?php
