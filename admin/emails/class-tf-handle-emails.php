@@ -506,9 +506,9 @@ class TF_Handle_Emails {
                 $default_mail = '<p>' . __( 'Dear Admin', 'tourfic' ) . '</p></br>';
                 $default_mail .= '<p>' . __( 'You have received a new booking. The details are as follows:', 'tourfic' ) . '</p></br>';
                 $default_mail .= __( '{booking_details}', 'tourfic' ) . '</br>';
-                $default_mail .= __( '<strong>Customer details</strong>', 'tourfic' ) . '</br>';
+                $default_mail .= '<strong>' . __( 'Customer details', 'tourfic' ) . '</strong>' . '</br>';
                 $default_mail .= __( '{customer_details}', 'tourfic' ) . '</br>';
-                $default_mail .= __( '<p>Thank you</p>', 'tourfic' );
+                $default_mail .= '<p>' . __( 'Thank you', 'tourfic' ) . '</p>';
                 $default_mail .= __( 'Regards', 'tourfic' ) . '</br>';
                 $default_mail .= __( '{site_name}', 'tourfic' ) . '</br>';
 
@@ -544,7 +544,7 @@ class TF_Handle_Emails {
                 $default_mail = '<p>' . __( 'Dear Admin', 'tourfic' ) . '</p></br>';
                 $default_mail .= '<p>' . __( 'You have received a new booking. The details are as follows:', 'tourfic' ) . '</p></br>';
                 $default_mail .= __( '{booking_details}', 'tourfic' ) . '</br>';
-                $default_mail .= __( '<strong>Customer details</strong>', 'tourfic' ) . '</br>';
+                $default_mail .=  '<strong>' . __( 'Customer details', 'tourfic' ) . '</strong>' . '</br>';
                 $default_mail .= __( '{customer_details}', 'tourfic' ) . '</br>';
                 $default_mail .= __( 'Thank you', 'tourfic' ) . '</br>';
                 $default_mail .= __( 'Regards', 'tourfic' ) . '</br>';
@@ -588,7 +588,7 @@ class TF_Handle_Emails {
                 $default_mail = '<p>' . __( 'Dear', 'tourfic' ) . ' {fullname}</p></br>';
                 $default_mail .= '<p>' . __( 'Thank you for your booking. The details are as follows:', 'tourfic' ) . '</p></br>';
                 $default_mail .= __( '{booking_details}', 'tourfic' ) . '</br>';
-                $default_mail .= __( '<strong>Shipping Details</strong>', 'tourfic' ) . '</br>';
+                $default_mail .= '<strong>' .__( 'Shipping Details', 'tourfic' ) . '</strong>' . '</br>';
                 $default_mail .= __( '{customer_details}', 'tourfic' ) . '</br>';
                 $default_mail .= __( 'Thank you', 'tourfic' ) . '</br>';
                 $default_mail .= __( 'Regards', 'tourfic' ) . '</br>';
@@ -1627,7 +1627,7 @@ class TF_Handle_Emails {
                         $default_mail = '<p>' . __( 'Dear Admin', 'tourfic' ) . '</p></br>';
                         $default_mail .= '<p>' . __( 'You have received a new booking. The details are as follows:', 'tourfic' ) . '</p></br>';
                         $default_mail .= __( '{booking_details}', 'tourfic' ) . '</br>';
-                        $default_mail .= __( '<strong>Customer details</strong>', 'tourfic' ) . '</br>';
+                        $default_mail .= '<strong>' . __( 'Customer details', 'tourfic' ) . '</strong>' . '</br>';
                         $default_mail .= __( '{customer_details}', 'tourfic' ) . '</br>';
                         $default_mail .= __( 'Thank you', 'tourfic' ) . '</br>';
                         $default_mail .= __( 'Regards', 'tourfic' ) . '</br>';
@@ -1672,7 +1672,7 @@ class TF_Handle_Emails {
                         $default_mail = '<p>' . __( 'Dear', 'tourfic' ) . ' {fullname}</p></br>';
                         $default_mail .= '<p>' . __( 'Thank you for your booking. The details are as follows:', 'tourfic' ) . '</p></br>';
                         $default_mail .= __( '{booking_details}', 'tourfic' ) . '</br>';
-                        $default_mail .= __( '<strong>Shipping Details</strong>', 'tourfic' ) . '</br>';
+                        $default_mail .= '<strong>' . __( 'Shipping Details', 'tourfic' ) . '</strong>' . '</br>';
                         $default_mail .= __( '{customer_details}', 'tourfic' ) . '</br>';
                         $default_mail .= __( 'Thank you', 'tourfic' ) . '</br>';
                         $default_mail .= __( 'Regards', 'tourfic' ) . '</br>';
