@@ -1125,7 +1125,7 @@ function tf_room_availability_callback() {
 
 	if ( ! empty( $rows ) ) {
 
-		echo wp_kses_post( $rows ) . '</tbody> </table> </div>';
+		echo wp_kses( $rows, tf_custom_wp_kses_allow_tags()) . '</tbody> </table> </div>';
 
 	} else {
 
@@ -1610,8 +1610,8 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                             <div class="tf-hotel-types" style="overflow: hidden">
 								<?php foreach ( $tf_hoteltype as $term ) : ?>
                                     <div class="form-group form-check">
-                                        <input type="checkbox" name="types[]" class="form-check-input" value="<?php echo esc_htm( $term->slug ); ?>" id="<?php echo esc_htm( $term->slug ); ?>">
-                                        <label class="form-check-label" for="<?php echo esc_htm( $term->slug ); ?>"><?php echo esc_htm( $term->name ); ?></label>
+                                        <input type="checkbox" name="types[]" class="form-check-input" value="<?php echo esc_attr( $term->slug ); ?>" id="<?php echo esc_attr( $term->slug ); ?>">
+                                        <label class="form-check-label" for="<?php echo esc_attr( $term->slug ); ?>"><?php echo esc_html( $term->name ); ?></label>
                                     </div>
 								<?php endforeach; ?>
                             </div>

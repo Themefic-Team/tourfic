@@ -81,10 +81,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                 </div>
 	            <?php if( ($tf_booking_type == 2 && $tf_hide_booking_form !== '1') || $tf_booking_type == 1 || $tf_booking_type == 3) : ?>
                     <div class="tf-tours-form-wrap">
-                        <?php
-
-                        echo tf_kses(tf_single_tour_booking_form( $post->ID ));
-                        ?>
+                        <?php echo wp_kses(tf_single_tour_booking_form( $post->ID ), tf_custom_wp_kses_allow_tags()); ?>
                     </div>
                 <?php endif; ?>
                 <div class="tf-hero-bottom-area">
@@ -715,7 +712,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         <div class="tf-slider-content">
                                             <div class="tf-slider-desc">
                                                 <h3>
-                                                    <a href="<?php the_permalink($selected_post_id) ?>"><?php the_title($selected_post_id) ?></a>
+                                                    <a href="<?php the_permalink($selected_post_id) ?>"><?php echo esc_html(get_the_title($selected_post_id)) ?></a>
                                                     <span><?php echo esc_html($first_destination_name); ?></span>
                                                 </h3>
                                             </div>

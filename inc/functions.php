@@ -3372,3 +3372,86 @@ function tf_shortcode_type_to_location_callback() {
 		"termName" => $term_name
 	) );
 }
+
+function tf_custom_wp_kses_allow_tags() {
+	// Allow all HTML tags and attributes
+	$allowed_tags = wp_kses_allowed_html('post');
+
+	// Add form-related tags to the allowed tags
+	$allowed_tags['form'] = array(
+		'action' => true,
+		'method' => true,
+		'enctype' => true,
+        'class' => true,
+        'id' => true,
+	);
+
+	$allowed_tags['input'] = array(
+		'type' => true,
+		'name' => true,
+		'value' => true,
+		'placeholder' => true,
+		'class' => true,
+		'id' => true,
+	);
+
+	$allowed_tags['select'] = array(
+		'name' => true,
+		'class' => true,
+		'id' => true,
+	);
+
+	$allowed_tags['option'] = array(
+		'value' => true,
+		'class' => true,
+		'id' => true,
+	);
+
+	$allowed_tags['textarea'] = array(
+        'name' => true,
+        'rows' => true,
+        'cols' => true,
+        'class' => true,
+        'id' => true,
+    );
+
+    $allowed_tags['button'] = array(
+        'type' => true,
+        'name' => true,
+        'class' => true,
+        'id' => true,
+    );
+
+    $allowed_tags['label'] = array(
+        'for' => true,
+        'class' => true,
+        'id' => true,
+    );
+
+    $allowed_tags['fieldset'] = array(
+        'name' => true,
+        'class' => true,
+        'id' => true,
+    );
+
+    $allowed_tags['legend'] = array(
+        'name' => true,
+        'class' => true,
+        'id' => true,
+    );
+
+    $allowed_tags['optgroup'] = array(
+        'label' => true,
+        'class' => true,
+        'id' => true,
+    );
+
+    $allowed_tags['script'] = array(
+        'src' => true,
+        'type' => true,
+        'class' => true,
+        'id' => true,
+    );
+
+    return $allowed_tags;
+}

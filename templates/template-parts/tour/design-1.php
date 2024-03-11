@@ -369,7 +369,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         <h3><?php echo ! empty( $meta['booking-section-title'] ) ? esc_html( $meta['booking-section-title'] ) : ''; ?></h3>
 	                                    <?php
                                         if( ($tf_booking_type == 2 && $tf_hide_booking_form !== '1') || $tf_booking_type == 1 || $tf_booking_type == 3) {
-		                                    echo wp_kses_post(tf_single_tour_booking_form( $post->ID ));
+		                                    echo wp_kses(tf_single_tour_booking_form( $post->ID ), tf_custom_wp_kses_allow_tags());
                                         }
                                         ?>
 	                                    <?php if ($tf_booking_type == 2 && $tf_hide_booking_form == 1):?>
@@ -585,7 +585,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                             <div class="tf-booking-form">
                                                 <div class="tf-booking-form-inner tf-mt-24">
                                                     <h3><?php echo ! empty( $meta['booking-section-title'] ) ? esc_html( $meta['booking-section-title'] ) : ''; ?></h3>
-													<?php echo wp_kses_post(tf_single_tour_booking_form( $post->ID )); ?>
+													<?php echo wp_kses(tf_single_tour_booking_form( $post->ID ), tf_custom_wp_kses_allow_tags()); ?>
 
                                                 </div>
                                             </div>

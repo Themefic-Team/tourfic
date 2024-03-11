@@ -158,7 +158,7 @@
                 <div class="tf-details-right tf-sitebar-widgets">
                     <div class="tf-search-date-wrapper tf-single-widgets">
                         <h2 class="tf-section-title"><?php esc_html_e("Available Date", "tourfic"); ?></h2>
-                        <?php echo wp_kses_post(tf_single_tour_booking_form( $post->ID )); ?>
+                        <?php echo wp_kses(tf_single_tour_booking_form( $post->ID ), tf_custom_wp_kses_allow_tags()); ?>
                     </div>
                     
                     <!-- Contact info - Start -->
