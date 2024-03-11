@@ -3453,5 +3453,35 @@ function tf_custom_wp_kses_allow_tags() {
         'id' => true,
     );
 
+	$allowed_tags["svg"] = array(
+		'class'           => true,
+		'aria-hidden'     => true,
+		'aria-labelledby' => true,
+		'role'            => true,
+		'xmlns'           => true,
+		'width'           => true,
+		'height'          => true,
+		'viewbox'         => true,
+		'fill' 			  => true,
+	);
+
+	$allowed_tags['g'] = array( 'fill' => true, "clip-path" => true );
+	$allowed_tags['title'] = array( 'title' => true );
+	$allowed_tags['rect'] = array( 'x' => true, 'y' => true, 'width' => true, 'height' => true, 'fill' => true );
+	$allowed_tags['path'] = array(
+		'd'    			  => true,
+		'fill' 			  => true,
+		'stroke'		  => true,
+		'stroke-width'    => true,
+		'stroke-linecap'  => true,
+		"stroke-linejoin" => true,
+	);
+	$allowed_tags['defs'] = array(
+		'd' => true
+	);
+	$allowed_tags['clipPath'] = array(
+		'd' => true
+	);
+
     return $allowed_tags;
 }
