@@ -1872,7 +1872,8 @@ function tf_apartments_grid_slider( $atts, $content = null ) {
 
 	if ( ! empty( $locations ) ) {
 		if($locations === 'all') {
-			$locations = get_terms( 'apartment_location', array(
+			$locations = get_terms( array(
+                'taxonomy' => 'apartment_location',
 				'hide_empty' => 0,
 				'fields' => 'ids'
 			) );
@@ -2222,8 +2223,8 @@ function tf_external_listings_shortcode( $atts, $content = null ) {
 						$external_search_info = array(
 							'{adult}'    => ! empty( $adult ) ? $adult : 1,
 							'{child}'    => ! empty( $child ) ? $child : 0,
-							'{checkin}'  => ! empty( $check_in ) ? $check_in : date( 'Y-m-d' ),
-							'{checkout}' => ! empty( $check_out ) ? $check_out : date( 'Y-m-d', strtotime( '+1 day' ) ),
+							'{checkin}'  => ! empty( $check_in ) ? $check_in : gmdate( 'Y-m-d' ),
+							'{checkout}' => ! empty( $check_out ) ? $check_out : gmdate( 'Y-m-d', strtotime( '+1 day' ) ),
 							'{room}'     => ! empty( $room_selected ) ? $room_selected : 1,
 						);
 						if ( ! empty( $tf_booking_attribute ) ) {

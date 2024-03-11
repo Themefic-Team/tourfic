@@ -142,10 +142,10 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
      * @return array Updated safe values to be saved.
      */
     public function update( $new_instance, $old_instance ) {
-        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? wp_strip_all_tags( $new_instance['title'] ) : '';
         $instance['terms'] = (!empty($new_instance['terms'])) ? $new_instance['terms'] : 'all';
-        $instance['show_count'] = ( !empty( $new_instance['show_count'] ) ) ? strip_tags( $new_instance['show_count'] ) : '';
-        $instance['hide_empty'] = ( !empty( $new_instance['hide_empty'] ) ) ? strip_tags( $new_instance['hide_empty'] ) : '';
+        $instance['show_count'] = ( !empty( $new_instance['show_count'] ) ) ? wp_strip_all_tags( $new_instance['show_count'] ) : '';
+        $instance['hide_empty'] = ( !empty( $new_instance['hide_empty'] ) ) ? wp_strip_all_tags( $new_instance['hide_empty'] ) : '';
 
         return $instance;
     }
@@ -292,10 +292,10 @@ class TF_Hotel_Type_Filter extends WP_Widget {
      * @return array Updated safe values to be saved.
      */
     public function update( $new_instance, $old_instance ) {
-        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? wp_strip_all_tags( $new_instance['title'] ) : '';
         $instance['terms'] = (!empty($new_instance['terms'])) ? $new_instance['terms'] : 'all';
-        $instance['show_count'] = ( !empty( $new_instance['show_count'] ) ) ? strip_tags( $new_instance['show_count'] ) : '';
-        $instance['hide_empty'] = ( !empty( $new_instance['hide_empty'] ) ) ? strip_tags( $new_instance['hide_empty'] ) : '';
+        $instance['show_count'] = ( !empty( $new_instance['show_count'] ) ) ? wp_strip_all_tags( $new_instance['show_count'] ) : '';
+        $instance['hide_empty'] = ( !empty( $new_instance['hide_empty'] ) ) ? wp_strip_all_tags( $new_instance['hide_empty'] ) : '';
 
         return $instance;
     }
@@ -438,10 +438,10 @@ class TF_Tour_Feature_Filter extends WP_Widget {
      * @return array Updated safe values to be saved.
      */
     public function update( $new_instance, $old_instance ) {
-        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? wp_strip_all_tags( $new_instance['title'] ) : '';
         $instance['terms'] = (!empty($new_instance['terms'])) ? $new_instance['terms'] : 'all';
-        $instance['show_count'] = ( !empty( $new_instance['show_count'] ) ) ? strip_tags( $new_instance['show_count'] ) : '';
-        $instance['hide_empty'] = ( !empty( $new_instance['hide_empty'] ) ) ? strip_tags( $new_instance['hide_empty'] ) : '';
+        $instance['show_count'] = ( !empty( $new_instance['show_count'] ) ) ? wp_strip_all_tags( $new_instance['show_count'] ) : '';
+        $instance['hide_empty'] = ( !empty( $new_instance['hide_empty'] ) ) ? wp_strip_all_tags( $new_instance['hide_empty'] ) : '';
 
         return $instance;
     }
@@ -578,10 +578,10 @@ class TF_Tour_Attraction_Filter extends WP_Widget {
      * @return array Updated safe values to be saved.
      */
     public function update( $new_instance, $old_instance ) {
-        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? wp_strip_all_tags( $new_instance['title'] ) : '';
         $instance['terms'] = ( !empty( $new_instance['terms'] ) ) ? $new_instance['terms'] : 'all';
-        $instance['show_count'] = ( !empty( $new_instance['show_count'] ) ) ? strip_tags( $new_instance['show_count'] ) : '';
-        $instance['hide_empty'] = ( !empty( $new_instance['hide_empty'] ) ) ? strip_tags( $new_instance['hide_empty'] ) : '';
+        $instance['show_count'] = ( !empty( $new_instance['show_count'] ) ) ? wp_strip_all_tags( $new_instance['show_count'] ) : '';
+        $instance['hide_empty'] = ( !empty( $new_instance['hide_empty'] ) ) ? wp_strip_all_tags( $new_instance['hide_empty'] ) : '';
 
         return $instance;
     }
@@ -726,10 +726,10 @@ class TF_Tour_Activities_Filter extends WP_Widget {
      * @return array Updated safe values to be saved.
      */
     public function update( $new_instance, $old_instance ) {
-        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? wp_strip_all_tags( $new_instance['title'] ) : '';
         $instance['terms'] = ( !empty( $new_instance['terms'] ) ) ? $new_instance['terms'] : 'all';
-        $instance['show_count'] = ( !empty( $new_instance['show_count'] ) ) ? strip_tags( $new_instance['show_count'] ) : '';
-        $instance['hide_empty'] = ( !empty( $new_instance['hide_empty'] ) ) ? strip_tags( $new_instance['hide_empty'] ) : '';
+        $instance['show_count'] = ( !empty( $new_instance['show_count'] ) ) ? wp_strip_all_tags( $new_instance['show_count'] ) : '';
+        $instance['hide_empty'] = ( !empty( $new_instance['hide_empty'] ) ) ? wp_strip_all_tags( $new_instance['hide_empty'] ) : '';
 
         return $instance;
     }
@@ -875,10 +875,10 @@ class TF_Tour_Type_Filter extends WP_Widget {
 	 * @return array Updated safe values to be saved.
 	 */
 	public function update( $new_instance, $old_instance ) {
-		$instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+		$instance['title'] = ( !empty( $new_instance['title'] ) ) ? wp_strip_all_tags( $new_instance['title'] ) : '';
 		$instance['terms'] = (!empty($new_instance['terms'])) ? $new_instance['terms'] : 'all';
-		$instance['show_count'] = ( !empty( $new_instance['show_count'] ) ) ? strip_tags( $new_instance['show_count'] ) : '';
-		$instance['hide_empty'] = ( !empty( $new_instance['hide_empty'] ) ) ? strip_tags( $new_instance['hide_empty'] ) : '';
+		$instance['show_count'] = ( !empty( $new_instance['show_count'] ) ) ? wp_strip_all_tags( $new_instance['show_count'] ) : '';
+		$instance['hide_empty'] = ( !empty( $new_instance['hide_empty'] ) ) ? wp_strip_all_tags( $new_instance['hide_empty'] ) : '';
 
 		return $instance;
 	}
@@ -1025,10 +1025,10 @@ class TF_Apartment_Features_Filter extends WP_Widget {
 	 * @return array Updated safe values to be saved.
 	 */
 	public function update( $new_instance, $old_instance ) {
-		$instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+		$instance['title'] = ( !empty( $new_instance['title'] ) ) ? wp_strip_all_tags( $new_instance['title'] ) : '';
 		$instance['terms'] = (!empty($new_instance['terms'])) ? $new_instance['terms'] : 'all';
-		$instance['show_count'] = ( !empty( $new_instance['show_count'] ) ) ? strip_tags( $new_instance['show_count'] ) : '';
-		$instance['hide_empty'] = ( !empty( $new_instance['hide_empty'] ) ) ? strip_tags( $new_instance['hide_empty'] ) : '';
+		$instance['show_count'] = ( !empty( $new_instance['show_count'] ) ) ? wp_strip_all_tags( $new_instance['show_count'] ) : '';
+		$instance['hide_empty'] = ( !empty( $new_instance['hide_empty'] ) ) ? wp_strip_all_tags( $new_instance['hide_empty'] ) : '';
 
 		return $instance;
 	}
@@ -1174,10 +1174,10 @@ class TF_Apartment_Type_Filter extends WP_Widget {
 	 * @return array Updated safe values to be saved.
 	 */
 	public function update( $new_instance, $old_instance ) {
-		$instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+		$instance['title'] = ( !empty( $new_instance['title'] ) ) ? wp_strip_all_tags( $new_instance['title'] ) : '';
 		$instance['terms'] = (!empty($new_instance['terms'])) ? $new_instance['terms'] : 'all';
-		$instance['show_count'] = ( !empty( $new_instance['show_count'] ) ) ? strip_tags( $new_instance['show_count'] ) : '';
-		$instance['hide_empty'] = ( !empty( $new_instance['hide_empty'] ) ) ? strip_tags( $new_instance['hide_empty'] ) : '';
+		$instance['show_count'] = ( !empty( $new_instance['show_count'] ) ) ? wp_strip_all_tags( $new_instance['show_count'] ) : '';
+		$instance['hide_empty'] = ( !empty( $new_instance['hide_empty'] ) ) ? wp_strip_all_tags( $new_instance['hide_empty'] ) : '';
 
 		return $instance;
 	}
@@ -1273,8 +1273,8 @@ if ( !empty( $title ) ) {
      */
     public function update( $new_instance, $old_instance ) {
         $instance = array();
-        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-        $instance['btn_label'] = ( !empty( $new_instance['btn_label'] ) ) ? strip_tags( $new_instance['btn_label'] ) : '';
+        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? wp_strip_all_tags( $new_instance['title'] ) : '';
+        $instance['btn_label'] = ( !empty( $new_instance['btn_label'] ) ) ? wp_strip_all_tags( $new_instance['btn_label'] ) : '';
 
         return $instance;
     }
@@ -1424,7 +1424,7 @@ class Tourfic_Price_Filter extends WP_Widget {
      */
     public function update( $new_instance, $old_instance ) {
         $instance = array();
-        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? wp_strip_all_tags( $new_instance['title'] ) : '';
 
         return $instance;
     }
@@ -1533,9 +1533,9 @@ if ( !empty( $subtitle ) ) {
      */
     public function update( $new_instance, $old_instance ) {
         $instance = array();
-        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-        $instance['btn_label'] = ( !empty( $new_instance['btn_label'] ) ) ? strip_tags( $new_instance['btn_label'] ) : '';
-        $instance['subtitle'] = ( !empty( $new_instance['subtitle'] ) ) ? strip_tags( $new_instance['subtitle'] ) : '';
+        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? wp_strip_all_tags( $new_instance['title'] ) : '';
+        $instance['btn_label'] = ( !empty( $new_instance['btn_label'] ) ) ? wp_strip_all_tags( $new_instance['btn_label'] ) : '';
+        $instance['subtitle'] = ( !empty( $new_instance['subtitle'] ) ) ? wp_strip_all_tags( $new_instance['subtitle'] ) : '';
 
         return $instance;
     }

@@ -130,7 +130,7 @@
                     ?>
                 </td>
                 <td>
-                    <?php echo esc_html(date('F d, Y',strtotime($apartment['order_date']))); ?>
+                    <?php echo esc_html(gmdate('F d, Y',strtotime($apartment['order_date']))); ?>
                 </td>
                 <td style="text-transform: capitalize;">
                     <?php echo esc_html( $apartment['ostatus'] ); ?>

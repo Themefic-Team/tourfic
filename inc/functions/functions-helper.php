@@ -320,7 +320,7 @@ function tourfic_ask_question_ajax() {
 	if ( ! check_ajax_referer( 'ask_question_nonce' ) ) {
 		$response['status'] = 'error';
 		$response['msg']    = esc_html__( 'Security error! Reload the page and try again.', 'tourfic' );
-		echo json_encode( $response );
+		echo wp_json_encode( $response );
 		wp_die();
 	}
 
@@ -357,7 +357,7 @@ function tourfic_ask_question_ajax() {
 				$question,
 				sanitize_key( $tf_post_author_id ),
 				$tf_user_roles[0],
-				date( 'Y-m-d H:i:s' )
+				gmdate( 'Y-m-d H:i:s' )
 			)
 		)
 	);
@@ -406,7 +406,7 @@ function tourfic_ask_question_ajax() {
 		$response['msg']    = esc_html__( 'Message sent failed!', 'tourfic' );
 	}
 
-	echo json_encode( $response );
+	echo wp_json_encode( $response );
 
 	die();
 }

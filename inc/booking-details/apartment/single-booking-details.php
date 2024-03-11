@@ -19,7 +19,7 @@
             <ul>
                 <li><?php esc_html_e("Booking ID", "tourfic"); ?>: #<?php echo esc_html( $tf_order_details->order_id ); ?></li>
                 <li>|</li>
-                <li><?php esc_html_e("Booking created", "tourfic"); ?>: <?php echo esc_html(date('F d, Y',strtotime($tf_order_details->order_date))); ?></li>
+                <li><?php esc_html_e("Booking created", "tourfic"); ?>: <?php echo esc_html(gmdate('F d, Y',strtotime($tf_order_details->order_date))); ?></li>
                 <li>|</li>
                 <li><?php esc_html_e("Booking by", "tourfic"); ?>: <span style="text-transform: capitalize;">
                 <?php 

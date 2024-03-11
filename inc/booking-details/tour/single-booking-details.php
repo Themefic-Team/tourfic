@@ -20,7 +20,7 @@
             <ul>
                 <li><?php esc_html_e("Booking ID", "tourfic"); ?>: #<?php echo esc_html( $tf_order_details->order_id ); ?></li>
                 <li>|</li>
-                <li><?php esc_html_e("Booking created", "tourfic"); ?>: <?php echo esc_html(date('F d, Y',strtotime($tf_order_details->order_date))); ?></li>
+                <li><?php esc_html_e("Booking created", "tourfic"); ?>: <?php echo esc_html(gmdate('F d, Y',strtotime($tf_order_details->order_date))); ?></li>
                 <li>|</li>
                 <li><?php esc_html_e("Booking by", "tourfic"); ?>: <span style="text-transform: capitalize;">
                 <?php 
@@ -341,7 +341,7 @@
                                     $tour_out = $tour_date_duration[1];
                                 }
                             }
-                            $tour_duration = !empty($tour_out) ? date('d F, Y', strtotime($tour_in)).' - '. date('d F, Y', strtotime($tour_out)) : date('d F, Y', strtotime($tour_in));
+                            $tour_duration = !empty($tour_out) ? gmdate('d F, Y', strtotime($tour_in)).' - '. gmdate('d F, Y', strtotime($tour_out)) : gmdate('d F, Y', strtotime($tour_in));
                             $tour_time = !empty($tf_tour_details->tour_time) ? $tf_tour_details->tour_time : '';
 
                             // Contact Information

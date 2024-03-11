@@ -17,7 +17,7 @@ class TF_PROMO_NOTICE {
     private $plugins_existes = ['ins', 'uacf7', 'beaf', 'ebef'];
 
     public function __construct() { 
-        if(in_array(date('F'), $this->months) && !function_exists('is_tf_pro') ){ 
+        if(in_array(gmdate('F'), $this->months) && !function_exists('is_tf_pro') ){
              
             add_filter('cron_schedules', array($this, 'tf_custom_cron_interval'));
         
@@ -60,7 +60,7 @@ class TF_PROMO_NOTICE {
             'plugin' => 'tf', 
         );
         $response = wp_remote_post($this->api_url, array(
-            'body'    => json_encode($query_params),
+            'body'    => wp_json_encode($query_params),
             'headers' => array('Content-Type' => 'application/json'),
         )); 
         if (is_wp_error($response)) {

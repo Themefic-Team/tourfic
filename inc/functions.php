@@ -632,7 +632,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
 						},
-						defaultDate: <?php echo json_encode( explode( '-', $date ) ) ?>,
+						defaultDate: <?php echo wp_json_encode( explode( '-', $date ) ) ?>,
 					});
 
 				});
@@ -675,7 +675,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 				<div class="tf-booking-date-wrap">
 					<span class="tf-booking-date"><?php esc_html_e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
-						<span><?php echo esc_html( date('M') ); ?></span>
+						<span><?php echo esc_html( gmdate('M') ); ?></span>
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 						<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
 						</svg>
@@ -690,7 +690,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 				<div class="tf-booking-date-wrap">
 					<span class="tf-booking-date"><?php esc_html_e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
-						<span><?php echo esc_html( date('M') ); ?></span>
+						<span><?php echo esc_html( gmdate('M') ); ?></span>
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 						<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
 						</svg>
@@ -708,7 +708,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 					<div class="tf-booking-date-wrap tf-tour-start-date">
 						<span class="tf-booking-date"><?php esc_html_e("00", "tourfic"); ?></span>
 						<span class="tf-booking-month">
-							<span><?php echo esc_html( date('M') ); ?></span>
+							<span><?php echo esc_html( gmdate('M') ); ?></span>
 						</span>
 					</div>
 					<div class="tf-duration">
@@ -717,7 +717,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 					<div class="tf-booking-date-wrap tf-tour-end-date">
 						<span class="tf-booking-date"><?php esc_html_e("00", "tourfic"); ?></span>
 						<span class="tf-booking-month">
-							<span><?php echo esc_html( date('M') ); ?></span>
+							<span><?php echo esc_html( gmdate('M') ); ?></span>
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 							<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
 							</svg>
@@ -892,7 +892,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 						},
 						<?php
 						if(!empty($date)){ ?>
-						defaultDate: <?php echo json_encode( explode( '-', $date ) ) ?>,
+						defaultDate: <?php echo wp_json_encode( explode( '-', $date ) ) ?>,
 						<?php } ?>
 					});
 
@@ -950,7 +950,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 							dateSetToFields(selectedDates, instance);
 						},
-						defaultDate: <?php echo json_encode( explode( '-', $date ) ) ?>,
+						defaultDate: <?php echo wp_json_encode( explode( '-', $date ) ) ?>,
 					});
 
 					function dateSetToFields(selectedDates, instance) {
@@ -1146,7 +1146,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
 						},
-						defaultDate: <?php echo json_encode( explode( '-', $date ) ) ?>,
+						defaultDate: <?php echo wp_json_encode( explode( '-', $date ) ) ?>,
 					});
 
 				});
@@ -1320,7 +1320,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 				<div class="tf-booking-date-wrap">
 					<span class="tf-booking-date"><?php esc_html_e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
-						<span><?php echo esc_html( date('M') ); ?></span>
+						<span><?php echo esc_html( gmdate('M') ); ?></span>
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 						<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
 						</svg>
@@ -1332,7 +1332,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 				<div class="tf-booking-date-wrap">
 					<span class="tf-booking-date"><?php esc_html_e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
-						<span><?php echo esc_html( date('M') ); ?></span>
+						<span><?php echo esc_html( gmdate('M') ); ?></span>
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 						<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
 						</svg>
@@ -1349,7 +1349,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 					<div class="tf-booking-date-wrap tf-tour-start-date">
 						<span class="tf-booking-date"><?php esc_html_e("00", "tourfic"); ?></span>
 						<span class="tf-booking-month">
-							<span><?php echo esc_html( date('M') ); ?></span>
+							<span><?php echo esc_html( gmdate('M') ); ?></span>
 						</span>
 					</div>
 					<div class="tf-duration">
@@ -1358,7 +1358,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 					<div class="tf-booking-date-wrap tf-tour-end-date">
 						<span class="tf-booking-date"><?php esc_html_e("00", "tourfic"); ?></span>
 						<span class="tf-booking-month">
-							<span><?php echo esc_html( date('M') ); ?></span>
+							<span><?php echo esc_html( gmdate('M') ); ?></span>
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 							<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
 							</svg>
@@ -1531,7 +1531,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 						},
 						<?php
 						if(!empty($check_in_out)){ ?>
-						defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
+						defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
 						<?php } ?>
 					});
 
@@ -1589,7 +1589,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 						},
 						<?php
 						if(!empty($check_in_out)){ ?>
-						defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
+						defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
 						<?php } ?>
 					});
 
@@ -2739,7 +2739,7 @@ function tf_month_chart_filter_callback() {
 		$itemmeta         = wc_get_order( $item );
 		$tf_ordering_date = $itemmeta->get_date_created();
 		for ( $i = 1; $i <= $month_dates; $i ++ ) {
-			if ( $tf_ordering_date->date( 'n-j-y' ) == $search_month . '-' . $i . '-' . $search_year ) {
+			if ( $tf_ordering_date->gmdate( 'n-j-y' ) == $search_month . '-' . $i . '-' . $search_year ) {
 				if ( "completed" == $itemmeta->get_status() ) {
 					${"tf_co$i"} += 1;
 				}
@@ -2759,7 +2759,7 @@ function tf_month_chart_filter_callback() {
 	$response['months_day_number']  = $months_day_number;
 	$response['tf_complete_orders'] = $tf_complete_orders;
 	$response['tf_cancel_orders']   = $tf_cancel_orders;
-	$response['tf_search_month']    = date( "F", strtotime( '2000-' . $search_month . '-01' ) );
+	$response['tf_search_month']    = gmdate( "F", strtotime( '2000-' . $search_month . '-01' ) );
 	echo wp_json_encode( $response );
 
 	die();
@@ -3031,13 +3031,12 @@ if ( ! function_exists( 'tourfic_vendor_order_table_data' ) ) {
 		$query_author = $query['author'];
 		$query_limit  = $query['limit'];
 
-		$vendor_query  = $wpdb->prepare(
+		$orders_result = $wpdb->get_results($wpdb->prepare(
 			"SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s AND post_id IN (
 				SELECT ID FROM {$wpdb->posts} WHERE post_author = %d
 			) ORDER BY order_id DESC $query_limit",
 			$query_type, $query_author
-		);
-		$orders_result = $wpdb->get_results( $vendor_query, ARRAY_A );
+		), ARRAY_A );
 
 		return $orders_result;
 	}

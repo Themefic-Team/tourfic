@@ -94,7 +94,8 @@ class TF_Recent_Blog extends \Elementor\Widget_Base {
 		);
 
 		//get the location IDs
-		$cats = get_terms( 'category', array(
+		$cats = get_terms( array(
+			'taxonomy' => 'category',
 			'orderby'    => 'count',
 			'hide_empty' => 0,
 		) );

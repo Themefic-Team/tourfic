@@ -94,7 +94,8 @@ class TF_Tour_Grid_Slider extends \Elementor\Widget_Base {
 		);
 
 		//get the location IDs
-		$destinations = get_terms( 'tour_destination', array(
+		$destinations = get_terms( array(
+			'taxonomy'   => 'tour_destination',
 			'orderby'    => 'count',
 			'hide_empty' => 0,
 		) );

@@ -141,7 +141,7 @@ if ( $comments ) {
 				</div>
 				<div class="tf-review-date">
 					<ul class="tf-list">
-						<li><i class="fa-regular fa-clock"></i> <?php echo esc_html(date("F d, Y", strtotime($c_date))); ?></li>
+						<li><i class="fa-regular fa-clock"></i> <?php echo esc_html(gmdate("F d, Y", strtotime($c_date))); ?></li>
 					</ul>
 				</div>
 			</div>

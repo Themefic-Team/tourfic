@@ -737,11 +737,11 @@ function tf_room_availability_callback() {
 	$tf_enddate   = $form_end;
 
 	if ( empty( $form_end ) ) {
-		$form_end   = date( 'Y/m/d', strtotime( $form_start . " + 1 day" ) );
-		$tf_enddate = date( 'Y/m/d', strtotime( $form_start . " + 1 day" ) );
+		$form_end   = gmdate( 'Y/m/d', strtotime( $form_start . " + 1 day" ) );
+		$tf_enddate = gmdate( 'Y/m/d', strtotime( $form_start . " + 1 day" ) );
 	}
 	$form_check_in = $form_start;
-	$form_start    = date( 'Y/m/d', strtotime( $form_start . ' +1 day' ) );
+	$form_start    = gmdate( 'Y/m/d', strtotime( $form_start . ' +1 day' ) );
 	/**
 	 * Backend data
 	 */
@@ -1199,9 +1199,9 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 								<span class="tf-label"><?php esc_html_e( 'Check in', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_checkin_dates">
-										<span class="date"><?php echo esc_html( date('d') ); ?></span>
+										<span class="date"><?php echo esc_html( gmdate('d') ); ?></span>
 										<span class="month">
-											<span><?php echo esc_html( date('M') ); ?></span>
+											<span><?php echo esc_html( gmdate('M') ); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -1221,9 +1221,9 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 								<span class="tf-label"><?php esc_html_e( 'Check Out', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_checkout_dates">
-										<span class="date"><?php echo esc_html( date('d') ); ?></span>
+										<span class="date"><?php echo esc_html( gmdate('d') ); ?></span>
 										<span class="month">
-											<span><?php echo esc_html( date('M') ); ?></span>
+											<span><?php echo esc_html( gmdate('M') ); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -1857,7 +1857,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 					<span class="tf-booking-date"><?php esc_html_e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
 						<span>
-							<?php echo esc_html( date('M') ); ?>
+							<?php echo esc_html( gmdate('M') ); ?>
 						</span>
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 						<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
@@ -1870,7 +1870,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 				<div class="tf-booking-date-wrap">
 					<span class="tf-booking-date"><?php esc_html_e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
-						<span><?php echo esc_html( date('M') ); ?></span>
+						<span><?php echo esc_html( gmdate('M') ); ?></span>
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 						<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
 						</svg>
@@ -1998,7 +1998,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 						instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 						dateSetToFields(selectedDates, instance);
 					},
-					defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
+					defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
 				});
 
 				function dateSetToFields(selectedDates, instance) {
@@ -2121,7 +2121,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
                         instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                         instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                     },
-                    defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
+                    defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
 					<?php
 					// Flatpickr locale for translation
 					tf_flatpickr_locale();
@@ -3015,7 +3015,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 							//get the lowest price from all available room price
 							$lowest_sale_price = wc_price( $min_sale_price );
 							if ( $min_regular_price != 0 ) {
-								$lowest_regular_price = strip_tags( wc_price( $min_regular_price ) );
+								$lowest_regular_price = wp_strip_all_tags( wc_price( $min_regular_price ) );
 								echo "<del>" . esc_html( $lowest_regular_price ) . "</del>" . " " . "<span>" . wp_kses_post( $lowest_sale_price  ). "</span>";
 							} else {
 								echo wp_kses_post( $lowest_sale_price ) . " ";
@@ -4151,7 +4151,7 @@ function tf_update_missing_room_id() {
 				foreach ( $rooms as $room ) {
 
 					if ( empty( $room['unique_id'] ) ) {
-						$room['unique_id'] = mt_rand( 1, time() );
+						$room['unique_id'] = wp_rand( 1, time() );
 					}
 					$new_rooms[] = $room;
 				}
@@ -4282,7 +4282,7 @@ if ( ! function_exists( 'tf_hotel_search_ajax_callback' ) ) {
 			}
 		}
 
-		echo json_encode( $response );
+		echo wp_json_encode( $response );
 		wp_die();
 	}
 }
@@ -5039,9 +5039,9 @@ if ( ! function_exists( 'tf_hotel_airport_service_title_price' ) ) {
 							/* translators: %1$s Adult Count, %2$s Adult Fee, %3$s Child Count, %4$s Child Fee */
 							'title' => sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s )', 'tourfic' ),
 								$adult,
-								esc_html( strip_tags( wc_price( $service_adult_fee ) ) ),
+								esc_html( wp_strip_all_tags( wc_price( $service_adult_fee ) ) ),
 								$child,
-								esc_html( strip_tags( wc_price( $service_child_fee ) ) )
+								esc_html( wp_strip_all_tags( wc_price( $service_child_fee ) ) )
 							),
 							'price' => $airport_service_price_total
 						);
@@ -5050,7 +5050,7 @@ if ( ! function_exists( 'tf_hotel_airport_service_title_price' ) ) {
 							/* translators: %1$s Adult Count, %2$s Adult Fee */
 							'title' => sprintf( esc_html__( 'Adult ( %1$s × %2$s )', 'tourfic' ),
 								$adult,
-								esc_html( strip_tags( wc_price( $service_adult_fee ) ) )
+								esc_html( wp_strip_all_tags( wc_price( $service_adult_fee ) ) )
 							),
 							'price' => $airport_service_price_total
 						);
@@ -5094,9 +5094,9 @@ if ( ! function_exists( 'tf_hotel_airport_service_title_price' ) ) {
 							/* translators: %1$s Adult Count, %2$s Adult Fee, %3$s Child Count, %4$s Child Fee */
 							'title' => sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s )', 'tourfic' ),
 								$adult,
-								esc_html( strip_tags( wc_price( $service_adult_fee ) ) ),
+								esc_html( wp_strip_all_tags( wc_price( $service_adult_fee ) ) ),
 								$child,
-								esc_html( strip_tags( wc_price( $service_child_fee ) ) )
+								esc_html( wp_strip_all_tags( wc_price( $service_child_fee ) ) )
 							),
 							'price' => $airport_service_price_total
 						);
@@ -5105,7 +5105,7 @@ if ( ! function_exists( 'tf_hotel_airport_service_title_price' ) ) {
 							/* translators: %1$s Adult Count, %2$s Adult Fee */
 							'title' => sprintf( esc_html__( 'Adult ( %1$s × %2$s )', 'tourfic' ),
 								$adult,
-								esc_html( strip_tags( wc_price( $service_adult_fee ) ) )
+								esc_html( wp_strip_all_tags( wc_price( $service_adult_fee ) ) )
 							),
 							'price' => $airport_service_price_total
 						);
@@ -5149,9 +5149,9 @@ if ( ! function_exists( 'tf_hotel_airport_service_title_price' ) ) {
 							/* translators: %1$s Adult Count, %2$s Adult Fee, %3$s Child Count, %4$s Child Fee */
 							'title' => sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s )', 'tourfic' ),
 								$adult,
-								esc_html( strip_tags( wc_price( $service_adult_fee ) ) ),
+								esc_html( wp_strip_all_tags( wc_price( $service_adult_fee ) ) ),
 								$child,
-								esc_html( strip_tags( wc_price( $service_child_fee )  ) )
+								esc_html( wp_strip_all_tags( wc_price( $service_child_fee )  ) )
 							),
 							'price' => $airport_service_price_total
 						);
@@ -5160,7 +5160,7 @@ if ( ! function_exists( 'tf_hotel_airport_service_title_price' ) ) {
 							/* translators: %1$s Adult Count, %2$s Adult Fee */
 							'title' => sprintf( esc_html__( 'Adult ( %1$s × %2$s )', 'tourfic' ),
 								$adult,
-								esc_html( strip_tags( wc_price( $service_adult_fee ) ) )
+								esc_html( wp_strip_all_tags( wc_price( $service_adult_fee ) ) )
 							),
 							'price' => $airport_service_price_total
 						);

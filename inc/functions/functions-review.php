@@ -656,10 +656,15 @@ function tf_user_has_comments() {
 	if ( is_user_logged_in() ) {
 		global $wpdb, $current_user, $post;
 		$userId = $current_user->ID;
-		$count  = $wpdb->get_var( '
-             SELECT COUNT(comment_ID) 
-             FROM ' . $wpdb->comments . ' 
-             WHERE user_id = "' . $userId . '"' . ' and comment_post_ID = "' . $post->ID . '"' );
+		$count  = $wpdb->get_var( $wpdb->prepare(
+			"
+			SELECT COUNT(comment_ID) 
+			FROM $wpdb->comments 
+			WHERE user_id = %d AND comment_post_ID = %d
+			",
+			$userId,
+			$post->ID
+		) );
 
 		return boolval( $count ) ?? false;
 	}

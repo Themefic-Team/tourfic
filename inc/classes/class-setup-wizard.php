@@ -1054,7 +1054,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 				'redirect_url' => esc_url( admin_url( 'admin.php?page=tf_settings' ) )
 			];
 
-			echo json_encode( $response );
+			echo wp_json_encode( $response );
 			wp_die();
 		}
 
