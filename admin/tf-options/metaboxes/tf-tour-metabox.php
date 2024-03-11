@@ -907,7 +907,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 										'11' => __('November', 'tourfic'),
 										'12' => __('December', 'tourfic')
 									),
-									// 'default' => date('m'),
+									// 'default' => gmdate('m'),
 									'inline' => 1,
 									"dependency" => array(
 										array("tf-repeat-months-switch", "==", 'true')

@@ -62,7 +62,7 @@ if ( ! class_exists( 'TF_map' ) ) {
                 echo '<div class="tf--address-field" data-address-field="'. esc_attr( $args['address_field'] ) .'"></div>';
               }
         
-              echo '<div class="tf--map-osm-wrap"><div class="tf--map-osm" data-map="'. esc_attr( json_encode( $settings ) ) .'"></div></div>';
+              echo '<div class="tf--map-osm-wrap"><div class="tf--map-osm" data-map="'. esc_attr( wp_json_encode( $settings ) ) .'"></div></div>';
         
               echo '<div class="tf--map-inputs">';
         

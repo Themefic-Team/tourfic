@@ -349,10 +349,10 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                             $tf_tour_min_price    = $tf_tour_min_price - (int) $tf_tour_discount_price;
                                                         }
                                                     }
-                                                    $lowest_price = strip_tags(wc_price( $tf_tour_min_price ));
+                                                    $lowest_price = wp_strip_all_tags(wc_price( $tf_tour_min_price ));
                                                     
                                                     if ( ! empty( $tf_tour_min_discount ) ) {
-                                                        echo wp_kses_post($lowest_price). " " . "<span><del>" . wp_kses_post(strip_tags(wc_price( $tf_tour_full_price ))) . "</del></span>";
+                                                        echo wp_kses_post($lowest_price). " " . "<span><del>" . wp_kses_post(wp_strip_all_tags(wc_price( $tf_tour_full_price ))) . "</del></span>";
                                                     } else {
                                                         echo wp_kses_post($lowest_price);
                                                     }
@@ -568,10 +568,10 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                                     $tf_tour_min_price    = $tf_tour_min_price - (int) $tf_tour_discount_price;
                                                                 }
                                                             }
-                                                            $lowest_price = strip_tags(wc_price( $tf_tour_min_price ));
+                                                            $lowest_price = wp_strip_all_tags(wc_price( $tf_tour_min_price ));
                                                             
                                                             if ( ! empty( $tf_tour_min_discount ) ) {
-                                                                echo wp_kses_post($lowest_price). " " . "<span><del>" . wp_kses_post(strip_tags(wc_price( $tf_tour_full_price ))) . "</del></span>";
+                                                                echo wp_kses_post($lowest_price). " " . "<span><del>" . wp_kses_post(wp_strip_all_tags(wc_price( $tf_tour_full_price ))) . "</del></span>";
                                                             } else {
                                                                 echo wp_kses_post($lowest_price);
                                                             }

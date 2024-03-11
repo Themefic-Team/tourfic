@@ -522,8 +522,8 @@ function tf_tours_booking_function() {
 	$min_days_before_book      = ! empty( $meta['min_days_before_book'] ) ? $meta['min_days_before_book'] : '0';
 	/* translators: %1$s Min Day Before Book  */
 	$min_days_before_book_text = sprintf( _n( '%s day', '%s days', $min_days_before_book, 'tourfic' ), $min_days_before_book );
-	$today_stt                 = new DateTime( date( 'Y-m-d', strtotime( date( 'Y-m-d' ) ) ) );
-	$tour_date_stt             = new DateTime( date( 'Y-m-d', strtotime( $start_date ) ) );
+	$today_stt                 = new DateTime( gmdate( 'Y-m-d', strtotime( gmdate( 'Y-m-d' ) ) ) );
+	$tour_date_stt             = new DateTime( gmdate( 'Y-m-d', strtotime( $start_date ) ) );
 	$day_difference            = $today_stt->diff( $tour_date_stt )->days;
 
 
@@ -747,7 +747,7 @@ function tf_tours_booking_function() {
 			'infants'     => $infant,
 			'total_price' => $without_payment_price,
 			'due_price'   => wc_price($without_payment_price),
-			'visitor_details' => json_encode($tf_visitor_details)
+			'visitor_details' => wp_json_encode($tf_visitor_details)
 		];
 
 		$order_data = array(
@@ -762,7 +762,7 @@ function tf_tours_booking_function() {
 			'payment_method'   => 'offline',
 			'customer_id'	   => $tf_offline_user_id,
 			'status'           => 'completed',
-			'order_date'       => date( 'Y-m-d H:i:s' ),
+			'order_date'       => gmdate( 'Y-m-d H:i:s' ),
 		);
 		$response['without_payment'] = 'true';
 		$order_id = tf_set_order( $order_data );
@@ -784,7 +784,7 @@ function tf_tours_booking_function() {
 			$tf_tours_data['tf_tours_data']['tour_date']        = $tour_date;
 			$tf_tours_data['tf_tours_data']['tour_extra_total'] = $tour_extra_total;
 			// Visitor Details
-			$tf_tours_data['tf_tours_data']['visitor_details'] = json_encode($tf_visitor_details);
+			$tf_tours_data['tf_tours_data']['visitor_details'] = wp_json_encode($tf_visitor_details);
 			if($tour_extra_title){
 				$tf_tours_data['tf_tours_data']['tour_extra_title'] = $tour_extra_title;
 			}
@@ -824,9 +824,9 @@ function tf_tours_booking_function() {
 			} else {
 
 				$tf_tours_data['tf_tours_data']['price']     = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
-				$tf_tours_data['tf_tours_data']['adults']    = $adults . " × " . strip_tags(wc_price( $adult_price ));
-				$tf_tours_data['tf_tours_data']['childrens'] = $children . " × " . strip_tags(wc_price( $children_price ));
-				$tf_tours_data['tf_tours_data']['infants']   = $infant . " × " . strip_tags(wc_price( $infant_price ));
+				$tf_tours_data['tf_tours_data']['adults']    = $adults . " × " . wp_strip_all_tags(wc_price( $adult_price ));
+				$tf_tours_data['tf_tours_data']['childrens'] = $children . " × " . wp_strip_all_tags(wc_price( $children_price ));
+				$tf_tours_data['tf_tours_data']['infants']   = $infant . " × " . wp_strip_all_tags(wc_price( $infant_price ));
 			}
 
 			# Deposit information
@@ -938,7 +938,7 @@ function tf_tours_cart_item_custom_data( $item_data, $cart_item ) {
 		if ( $tour_date ) {
 			$item_data[] = array(
 				'key'   => esc_html__( 'Tour Date', 'tourfic' ),
-				'value' => date( "F j, Y", strtotime( $tour_date ) ),
+				'value' => gmdate( "F j, Y", strtotime( $tour_date ) ),
 			);
 		}
 		if($tour_time){
@@ -960,7 +960,7 @@ function tf_tours_cart_item_custom_data( $item_data, $cart_item ) {
 	if ( ! empty( $due ) ) {
 		$item_data[] = [
 			'key'   => esc_html__( 'Due ', 'tourfic' ),
-			'value' => strip_tags(wc_price( $due )),
+			'value' => wp_strip_all_tags(wc_price( $due )),
 		];
 	}
 
@@ -1025,7 +1025,7 @@ function tf_tour_custom_order_data( $item, $cart_item_key, $values, $order ) {
 		}
 	} elseif ( $tour_type && $tour_type == 'continuous' ) {
 		if ( $tour_date ) {
-			$item->update_meta_data( 'Tour Date', date( "Y/m/d", strtotime( $tour_date ) ) );
+			$item->update_meta_data( 'Tour Date', gmdate( "Y/m/d", strtotime( $tour_date ) ) );
 		}
 	}
 	if($tour_time){
@@ -1037,11 +1037,11 @@ function tf_tour_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	}
 
 	if ( ! empty( $due ) ) {
-		$item->update_meta_data( 'Due', strip_tags(wc_price( $due ) ));
+		$item->update_meta_data( 'Due', wp_strip_all_tags(wc_price( $due ) ));
 	}
 
 	// Tour Unique ID 
-	$item->update_meta_data( '_tour_unique_id', rand());
+	$item->update_meta_data( '_tour_unique_id', wp_rand());
 
 	// visitor details
 	if ( $visitor_details ) {
@@ -1172,7 +1172,7 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 				'due_price' => $due,
 				'unique_id' => $tour_ides,
 				'visitor_details' => $visitor_details,
-				'tax_info' => json_encode($fee_sums)
+				'tax_info' => wp_json_encode($fee_sums)
 			];
 
 			$tf_integration_order_data[] = [
@@ -1190,7 +1190,7 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 				'customer_id' => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status' => $order->get_status(),
-				'order_date' => date('Y-m-d H:i:s')
+				'order_date' => gmdate('Y-m-d H:i:s')
 			];
 
 			$iteminfo_keys = array_keys($iteminfo);
@@ -1214,13 +1214,13 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 						$order_type,
 						$tour_in,
 						$tour_out,
-						json_encode($billinginfo),
-						json_encode($shippinginfo),
-						json_encode($iteminfo),
+						wp_json_encode($billinginfo),
+						wp_json_encode($shippinginfo),
+						wp_json_encode($iteminfo),
 						$order->get_customer_id(),
 						$order->get_payment_method(),
 						$order->get_status(),
-						date('Y-m-d H:i:s')
+						gmdate('Y-m-d H:i:s')
 					)
 				)
 			);
@@ -1360,7 +1360,7 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 				'due_price' => $due,
 				'unique_id' => $tour_ides,
 				'visitor_details' => $visitor_details,
-				'tax_info' => json_encode($fee_sums)
+				'tax_info' => wp_json_encode($fee_sums)
 			];
 
 			$tf_integration_order_data[] = [
@@ -1378,7 +1378,7 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 				'customer_id' => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status' => $order->get_status(),
-				'order_date' => date('Y-m-d H:i:s')
+				'order_date' => gmdate('Y-m-d H:i:s')
 			];
 
 			$iteminfo_keys = array_keys($iteminfo);
@@ -1402,13 +1402,13 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 						$order_type,
 						$tour_in,
 						$tour_out,
-						json_encode($billinginfo),
-						json_encode($shippinginfo),
-						json_encode($iteminfo),
+						wp_json_encode($billinginfo),
+						wp_json_encode($shippinginfo),
+						wp_json_encode($iteminfo),
 						$order->get_customer_id(),
 						$order->get_payment_method(),
 						$order->get_status(),
-						date('Y-m-d H:i:s')
+						gmdate('Y-m-d H:i:s')
 					)
 				)
 			);
@@ -1467,7 +1467,7 @@ function tf_tour_unique_id_order_data_migration(){
 						if(empty($order_details->unique_id)){
 							$order_details->unique_id = $unique_id;
 							$wpdb->query(
-								$wpdb->prepare("UPDATE $table_name SET order_details=%s WHERE id=%d",json_encode($order_details), $tf_order_checked->id)
+								$wpdb->prepare("UPDATE $table_name SET order_details=%s WHERE id=%d",wp_json_encode($order_details), $tf_order_checked->id)
 							);
 
 						}

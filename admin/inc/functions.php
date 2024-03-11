@@ -241,12 +241,12 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 		}
 
 		if ( $date_format == 'Y.m.d' || $date_format == 'd.m.Y' ) {
-			$check_in  = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_in ) ) );
-			$check_out = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_out ) ) );
+			$check_in  = gmdate( "Y-m-d", strtotime( str_replace( ".", "-", $check_in ) ) );
+			$check_out = gmdate( "Y-m-d", strtotime( str_replace( ".", "-", $check_out ) ) );
 		}
 		if ( $date_format == 'd/m/Y' ) {
-			$check_in  = date( "Y-m-d", strtotime( str_replace( "/", "-", $check_in ) ) );
-			$check_out = date( "Y-m-d", strtotime( str_replace( "/", "-", $check_out ) ) );
+			$check_in  = gmdate( "Y-m-d", strtotime( str_replace( "/", "-", $check_in ) ) );
+			$check_out = gmdate( "Y-m-d", strtotime( str_replace( "/", "-", $check_out ) ) );
 		}
 
 		$check_in  = strtotime( $check_in );
@@ -260,7 +260,7 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 
 		$room_avail_data = [];
 		for ( $i = $check_in; $i <= $check_out; $i = strtotime( '+1 day', $i ) ) {
-			$tf_room_date                     = date( 'Y/m/d', $i );
+			$tf_room_date                     = gmdate( 'Y/m/d', $i );
 			$tf_room_data                     = [
 				'check_in'    => $tf_room_date,
 				'check_out'   => $tf_room_date,
@@ -279,7 +279,7 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 			if ( isset( $avail_date ) && ! empty( $avail_date ) ) {
 				$room_avail_data = array_merge( $avail_date, $room_avail_data );
 			}
-			$hotel_avail_data['room'][ $room_index ]['avail_date'] = json_encode( $room_avail_data );
+			$hotel_avail_data['room'][ $room_index ]['avail_date'] = wp_json_encode( $room_avail_data );
 			update_post_meta( $hotel_id, 'tf_hotels_opt', $hotel_avail_data );
 		} else {
 			$avail_date = json_decode( stripslashes( $avail_date ), true );
@@ -291,7 +291,7 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 		wp_send_json_success( [
 			'status'     => true,
 			'message'    => __( 'Availability updated successfully.', 'tourfic' ),
-			'avail_date' => json_encode( $room_avail_data ),
+			'avail_date' => wp_json_encode( $room_avail_data ),
 		] );
 
 		die();
@@ -321,7 +321,7 @@ if ( ! function_exists( 'tf_get_hotel_availability' ) ) {
 		if ( ! empty( $room_avail_data ) && is_array( $room_avail_data ) ) {
 			$room_avail_data = array_values( $room_avail_data );
 			$room_avail_data = array_map( function ( $item ) {
-				$item['start'] = date( 'Y-m-d', strtotime( $item['check_in'] ) );
+				$item['start'] = gmdate( 'Y-m-d', strtotime( $item['check_in'] ) );
 				$item['title'] = $item['price_by'] == '1' ? __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
 //				$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) . '<br>' . __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
 
@@ -336,7 +336,7 @@ if ( ! function_exists( 'tf_get_hotel_availability' ) ) {
 			$room_avail_data = [];
 		}
 
-		echo json_encode( $room_avail_data );
+		echo wp_json_encode( $room_avail_data );
 		die();
 	}
 
@@ -386,12 +386,12 @@ if ( ! function_exists( 'tf_update_room_avail_date_price' ) ) {
 							}, $hotel_avail_data );
 						}
 
-						$meta['room'][ $roomIndex ]['avail_date'] = json_encode( $hotel_avail_data );
+						$meta['room'][ $roomIndex ]['avail_date'] = wp_json_encode( $hotel_avail_data );
 					} elseif ( $avil_by_date === '1' && empty( $room['avail_date'] ) ) {
 						//add next 5 years availability
 						$hotel_avail_data = [];
 						for ( $i = 0; $i <= 1825; $i ++ ) {
-							$tf_room_date                      = date( 'Y/m/d', strtotime( "+$i day" ) );
+							$tf_room_date                      = gmdate( 'Y/m/d', strtotime( "+$i day" ) );
 							$tf_room_data                      = [
 								'check_in'    => $tf_room_date,
 								'check_out'   => $tf_room_date,
@@ -404,7 +404,7 @@ if ( ! function_exists( 'tf_update_room_avail_date_price' ) ) {
 							$hotel_avail_data[ $tf_room_date ] = $tf_room_data;
 						}
 
-						$meta['room'][ $roomIndex ]['avail_date'] = json_encode( $hotel_avail_data );
+						$meta['room'][ $roomIndex ]['avail_date'] = wp_json_encode( $hotel_avail_data );
 					}
 				}
 			}
@@ -442,12 +442,12 @@ if ( ! function_exists( 'tf_add_apartment_availability' ) ) {
 		}
 
 		if ( $date_format == 'Y.m.d' || $date_format == 'd.m.Y' ) {
-			$check_in  = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_in ) ) );
-			$check_out = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_out ) ) );
+			$check_in  = gmdate( "Y-m-d", strtotime( str_replace( ".", "-", $check_in ) ) );
+			$check_out = gmdate( "Y-m-d", strtotime( str_replace( ".", "-", $check_out ) ) );
 		}
 		if ( $date_format == 'd/m/Y' ) {
-			$check_in  = date( "Y-m-d", strtotime( str_replace( "/", "-", $check_in ) ) );
-			$check_out = date( "Y-m-d", strtotime( str_replace( "/", "-", $check_out ) ) );
+			$check_in  = gmdate( "Y-m-d", strtotime( str_replace( "/", "-", $check_in ) ) );
+			$check_out = gmdate( "Y-m-d", strtotime( str_replace( "/", "-", $check_out ) ) );
 		}
 
 		$check_in  = strtotime( $check_in );
@@ -461,7 +461,7 @@ if ( ! function_exists( 'tf_add_apartment_availability' ) ) {
 
 		$apt_availability_data = [];
 		for ( $i = $check_in; $i <= $check_out; $i = strtotime( '+1 day', $i ) ) {
-			$tf_apt_date                           = date( 'Y/m/d', $i );
+			$tf_apt_date                           = gmdate( 'Y/m/d', $i );
 			$tf_apt_data                           = [
 				'check_in'     => $tf_apt_date,
 				'check_out'    => $tf_apt_date,
@@ -481,7 +481,7 @@ if ( ! function_exists( 'tf_add_apartment_availability' ) ) {
 			if ( isset( $apt_availability ) && ! empty( $apt_availability ) ) {
 				$apt_availability_data = array_merge( $apt_availability, $apt_availability_data );
 			}
-			$apartment_data['apt_availability'] = json_encode( $apt_availability_data );
+			$apartment_data['apt_availability'] = wp_json_encode( $apt_availability_data );
 			update_post_meta( $apartment_id, 'tf_apartment_opt', $apartment_data );
 		} else {
 			$apt_availability = json_decode( stripslashes( $apt_availability ), true );
@@ -493,7 +493,7 @@ if ( ! function_exists( 'tf_add_apartment_availability' ) ) {
 		wp_send_json_success( [
 			'status'           => true,
 			'message'          => __( 'Availability updated successfully.', 'tourfic' ),
-			'apt_availability' => json_encode( $apt_availability_data ),
+			'apt_availability' => wp_json_encode( $apt_availability_data ),
 		] );
 
 		die();
@@ -522,7 +522,7 @@ if ( ! function_exists( 'tf_get_apartment_availability' ) ) {
 		if ( ! empty( $apt_availability_data ) && is_array( $apt_availability_data ) ) {
 			$apt_availability_data = array_values( $apt_availability_data );
 			$apt_availability_data = array_map( function ( $item ) {
-				$item['start'] = date( 'Y-m-d', strtotime( $item['check_in'] ) );
+				$item['start'] = gmdate( 'Y-m-d', strtotime( $item['check_in'] ) );
 				$item['title'] = $item['pricing_type'] == 'per_night' ? __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] ) . '<br>' . __( 'Infant: ', 'tourfic' ) . wc_price( $item['infant_price'] );
 
 				if ( $item['status'] == 'unavailable' ) {
@@ -536,7 +536,7 @@ if ( ! function_exists( 'tf_get_apartment_availability' ) ) {
 			$apt_availability_data = [];
 		}
 
-		echo json_encode( $apt_availability_data );
+		echo wp_json_encode( $apt_availability_data );
 		die();
 	}
 
@@ -578,14 +578,14 @@ if ( ! function_exists( 'tf_update_apt_availability_price' ) ) {
 					}, $apt_availability_data );
 				}
 
-				$meta['apt_availability'] = json_encode( $apt_availability_data );
+				$meta['apt_availability'] = wp_json_encode( $apt_availability_data );
 				update_post_meta( $post_id, 'tf_apartment_opt', $meta );
 
 			} elseif ( $enable_availability === '1' && empty( $meta['apt_availability'] ) ) {
 				//add next 5 years availability
 				$apt_availability_data = [];
-				for ( $i = strtotime( date( 'Y-m-d' ) ); $i <= strtotime( '+5 year', strtotime( date( 'Y-m-d' ) ) ); $i = strtotime( '+1 day', $i ) ) {
-					$tf_apt_date                           = date( 'Y/m/d', $i );
+				for ( $i = strtotime( gmdate( 'Y-m-d' ) ); $i <= strtotime( '+5 year', strtotime( gmdate( 'Y-m-d' ) ) ); $i = strtotime( '+1 day', $i ) ) {
+					$tf_apt_date                           = gmdate( 'Y/m/d', $i );
 					$tf_apt_data                           = [
 						'check_in'     => $tf_apt_date,
 						'check_out'    => $tf_apt_date,
@@ -599,7 +599,7 @@ if ( ! function_exists( 'tf_update_apt_availability_price' ) ) {
 					$apt_availability_data[ $tf_apt_date ] = $tf_apt_data;
 				}
 
-				$meta['apt_availability'] = json_encode( $apt_availability_data );
+				$meta['apt_availability'] = wp_json_encode( $apt_availability_data );
 				update_post_meta( $post_id, 'tf_apartment_opt', $meta );
 			}
 		}

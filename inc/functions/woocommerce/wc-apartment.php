@@ -56,9 +56,9 @@ function tf_apartment_booking_callback() {
 	if ( ! empty( $check_in_out_date ) ) {
 		$check_in_out  = explode( ' - ', $check_in_out_date );
 		$check_in_stt  = strtotime( $check_in_out[0] . ' +1 day' );
-		$check_in      = date( 'Y-m-d', $check_in_stt );
+		$check_in      = gmdate( 'Y-m-d', $check_in_stt );
 		$check_out_stt = strtotime( $check_in_out[1] );
-		$check_out     = date( 'Y-m-d', $check_out_stt );
+		$check_out     = gmdate( 'Y-m-d', $check_out_stt );
 		$days          = round( ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1 );
 	}
 
@@ -436,7 +436,7 @@ function tf_add_apartment_data_checkout_order_processed( $order_id, $posted_data
 				'child'       => $child,
 				'infants'     => $infants,
 				'total_price' => $price,
-				'tax_info' => json_encode($fee_sums)
+				'tax_info' => wp_json_encode($fee_sums)
 			];
 
 			$tf_integration_order_data[] = [
@@ -449,14 +449,14 @@ function tf_add_apartment_data_checkout_order_processed( $order_id, $posted_data
 				'customer_id'    => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status'   => $order->get_status(),
-				'order_date'     => date( 'Y-m-d H:i:s' )
+				'order_date'     => gmdate( 'Y-m-d H:i:s' )
 			];
 
 			$tf_integration_order_status = [
 				'customer_id'    => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status'   => $order->get_status(),
-				'order_date'     => date( 'Y-m-d H:i:s' )
+				'order_date'     => gmdate( 'Y-m-d H:i:s' )
 			];
 
 			$iteminfo_keys = array_keys( $iteminfo );
@@ -481,13 +481,13 @@ function tf_add_apartment_data_checkout_order_processed( $order_id, $posted_data
 						$order_type,
 						$check_in,
 						$check_out,
-						json_encode( $billinginfo ),
-						json_encode( $shippinginfo ),
-						json_encode( $iteminfo ),
+						wp_json_encode( $billinginfo ),
+						wp_json_encode( $shippinginfo ),
+						wp_json_encode( $iteminfo ),
 						$order->get_customer_id(),
 						$order->get_payment_method(),
 						$order->get_status(),
-						date( 'Y-m-d H:i:s' )
+						gmdate( 'Y-m-d H:i:s' )
 					)
 				)
 			);
@@ -619,7 +619,7 @@ function tf_add_apartment_data_checkout_order_processed_block_checkout( $order )
 				'child'       => $child,
 				'infants'     => $infants,
 				'total_price' => $price,
-				'tax_info' => json_encode($fee_sums)
+				'tax_info' => wp_json_encode($fee_sums)
 			];
 
 			$tf_integration_order_data[] = [
@@ -632,14 +632,14 @@ function tf_add_apartment_data_checkout_order_processed_block_checkout( $order )
 				'customer_id'    => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status'   => $order->get_status(),
-				'order_date'     => date( 'Y-m-d H:i:s' )
+				'order_date'     => gmdate( 'Y-m-d H:i:s' )
 			];
 
 			$tf_integration_order_status = [
 				'customer_id'    => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status'   => $order->get_status(),
-				'order_date'     => date( 'Y-m-d H:i:s' )
+				'order_date'     => gmdate( 'Y-m-d H:i:s' )
 			];
 
 			$iteminfo_keys = array_keys( $iteminfo );
@@ -664,13 +664,13 @@ function tf_add_apartment_data_checkout_order_processed_block_checkout( $order )
 						$order_type,
 						$check_in,
 						$check_out,
-						json_encode( $billinginfo ),
-						json_encode( $shippinginfo ),
-						json_encode( $iteminfo ),
+						wp_json_encode( $billinginfo ),
+						wp_json_encode( $shippinginfo ),
+						wp_json_encode( $iteminfo ),
 						$order->get_customer_id(),
 						$order->get_payment_method(),
 						$order->get_status(),
-						date( 'Y-m-d H:i:s' )
+						gmdate( 'Y-m-d H:i:s' )
 					)
 				)
 			);

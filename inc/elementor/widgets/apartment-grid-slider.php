@@ -93,7 +93,8 @@ class TF_Apartment_Grid_Slider extends \Elementor\Widget_Base {
 		);
 
 		//get the location IDs
-		$locations = get_terms( 'apartment_location', array(
+		$locations = get_terms( array(
+			'taxonomy' => 'apartment_location',
 			'orderby'    => 'count',
 			'hide_empty' => 0,
 		) );

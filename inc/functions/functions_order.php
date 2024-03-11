@@ -490,7 +490,7 @@ if ( ! function_exists( 'tf_set_order' ) ) {
 		$table_name    = $wpdb->prefix . 'tf_order_data';
 		$all_order_ids = $wpdb->get_col( "SELECT order_id FROM $table_name" );
 		do {
-			$order_id = mt_rand( 10000000, 99999999 );
+			$order_id = wp_rand( 10000000, 99999999 );
 		} while ( in_array( $order_id, $all_order_ids ) );
 
 		$defaults = array(
@@ -506,7 +506,7 @@ if ( ! function_exists( 'tf_set_order' ) ) {
 			'customer_id'      => 1,
 			'payment_method'   => 'cod',
 			'status'           => 'processing',
-			'order_date'       => date( 'Y-m-d H:i:s' ),
+			'order_date'       => gmdate( 'Y-m-d H:i:s' ),
 		);
 
 		$order_data = wp_parse_args( $order_data, $defaults );
@@ -523,9 +523,9 @@ if ( ! function_exists( 'tf_set_order' ) ) {
 					$order_data['room_number'],
 					$order_data['check_in'],
 					$order_data['check_out'],
-					json_encode( $order_data['billing_details'] ),
-					json_encode( $order_data['shipping_details'] ),
-					json_encode( $order_data['order_details'] ),
+					wp_json_encode( $order_data['billing_details'] ),
+					wp_json_encode( $order_data['shipping_details'] ),
+					wp_json_encode( $order_data['order_details'] ),
 					$order_data['customer_id'],
 					$order_data['payment_method'],
 					$order_data['status'],
@@ -566,17 +566,21 @@ if ( ! function_exists( 'tf_admin_table_alter_order_data' ) ) {
 		// Check if the 'checkinout' & 'checkinout_by' column exists before attempting to add it
 		if ( !$wpdb->get_var("SHOW COLUMNS FROM $order_table_name LIKE 'checkinout'") &&
 		!$wpdb->get_var("SHOW COLUMNS FROM $order_table_name LIKE 'checkinout_by'") ) {
-			$sql = "ALTER TABLE $order_table_name 
-					ADD COLUMN checkinout varchar(255) NULL,
-					ADD COLUMN checkinout_by varchar(255) NULL";
-			$wpdb->query($sql);
+			$wpdb->query($wpdb->prepare(
+                    "ALTER TABLE %s 
+                ADD COLUMN checkinout varchar(255) NULL,
+                ADD COLUMN checkinout_by varchar(255) NULL",
+				$order_table_name
+			));
 		}
 
         // Check if the 'room_id' column exists before attempting to add it
         if ( !$wpdb->get_var("SHOW COLUMNS FROM $order_table_name LIKE 'room_id'") ) {
-            $sql = "ALTER TABLE $order_table_name 
-                    ADD COLUMN room_id varchar(255) NULL";
-            $wpdb->query($sql);
+	        $wpdb->query($wpdb->prepare(
+                "ALTER TABLE %s 
+                ADD COLUMN room_id varchar(255) NULL",
+                $order_table_name
+            ));
         }
 	}
 }

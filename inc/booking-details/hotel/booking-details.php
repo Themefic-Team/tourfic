@@ -144,7 +144,7 @@
                     ?>
                 </td>
                 <td>
-                    <?php echo esc_html(date('F d, Y',strtotime($hotel['order_date']))); ?>
+                    <?php echo esc_html(gmdate('F d, Y',strtotime($hotel['order_date']))); ?>
                 </td>
                 <td>
                     <?php 

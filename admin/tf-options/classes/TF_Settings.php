@@ -859,7 +859,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                 ];
             }
 
-            echo json_encode( $response );
+            echo wp_json_encode( $response );
             wp_die();
 		}
 
@@ -880,7 +880,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
          * @author Foysal
          */
         public function get_query_string( $url ) {
-	        $url_parts = parse_url( $url );
+	        $url_parts = wp_parse_url( $url );
 	        parse_str( $url_parts['query'], $query_string );
 
             return $query_string;

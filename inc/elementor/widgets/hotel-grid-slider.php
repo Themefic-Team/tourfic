@@ -95,7 +95,8 @@ class TF_Hotel_Grid_Slider extends \Elementor\Widget_Base {
 
 		//get the location IDs
 		//function tf_hotel_locations(){
-			$locations = get_terms( 'hotel_location', array(
+			$locations = get_terms( array(
+				'taxonomy' => 'hotel_location',
 				'orderby'    => 'count',
 				'hide_empty' => 0,
 			) );

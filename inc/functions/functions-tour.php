@@ -472,9 +472,9 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 								<span class="tf-label"><?php esc_html_e( 'Start Date', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_checkin_dates">
-										<span class="date"><?php echo esc_html(date('d')); ?></span>
+										<span class="date"><?php echo esc_html(gmdate('d')); ?></span>
 										<span class="month">
-											<span><?php echo esc_html(date('M')); ?></span>
+											<span><?php echo esc_html(gmdate('M')); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -494,9 +494,9 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 								<span class="tf-label"><?php esc_html_e( 'End Date', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_checkout_dates">
-										<span class="date"><?php echo esc_html(date('d')); ?></span>
+										<span class="date"><?php echo esc_html(gmdate('d')); ?></span>
 										<span class="month">
-											<span><?php echo esc_html(date('M')); ?></span>
+											<span><?php echo esc_html(gmdate('M')); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -931,19 +931,19 @@ function tf_single_tour_booking_form( $post_id ) {
 
 				foreach($months as $month) {
 
-					if($month < date('m') && $matches[1] < date('Y')) {
+					if($month < gmdate('m') && $matches[1] < gmdate('Y')) {
 						$year = $matches[1] + 1;
 
 					} else $year = $matches[1];
 
 
-					$day_selected = date('d', strtotime($date));
-					$last_day_of_month = date('t', strtotime(date('Y').'-'.$month.'-01'));
+					$day_selected = gmdate('d', strtotime($date));
+					$last_day_of_month = gmdate('t', strtotime(gmdate('Y').'-'.$month.'-01'));
 					$matches[2] = $month;
 					$changed_date = sprintf("%s/%s/%s", $year, $matches[2], $matches[3]);
 
 					if(($day_selected == "31") && ($last_day_of_month != "31")) {
-						$new_months[] = date('Y/m/d', strtotime($changed_date . ' -1 day'));
+						$new_months[] = gmdate('Y/m/d', strtotime($changed_date . ' -1 day'));
 					} else {
 						$new_months[] = $changed_date;
 					}
@@ -3274,7 +3274,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 							$lowest_price = wc_price( $tf_tour_min_price );
 							
 							if ( ! empty( $tf_tour_min_discount ) ) {
-								echo esc_html__( "From ", "tourfic" ) . " " . "<del>" . wp_kses_post(strip_tags(wc_price( $tf_tour_full_price ))) . "</del>" . " ". wp_kses_post($lowest_price) ;
+								echo esc_html__( "From ", "tourfic" ) . " " . "<del>" . wp_kses_post(wp_strip_all_tags(wc_price( $tf_tour_full_price ))) . "</del>" . " ". wp_kses_post($lowest_price) ;
 							} else {
 								echo esc_html__( "From ", "tourfic" ) . wp_kses_post($lowest_price) . " ";
 							}
@@ -4019,7 +4019,7 @@ if ( ! function_exists( 'tf_tour_search_ajax_callback' ) ) {
 			}
 		}
 
-		echo json_encode( $response );
+		echo wp_json_encode( $response );
 		wp_die();
 	}
 }
@@ -4064,7 +4064,7 @@ function tf_every_date_function() {
 			}
 			if ( ! empty( $fixed_availability ) ) {
 				$show_fixed_tour   = [];
-				$show_fixed_tour[] = intval( strtotime( date( 'Y-m-d' ) ) >= strtotime( $fixed_availability['from'] ) && strtotime( date( 'Y-m-d' ) ) <= strtotime( $fixed_availability['to'] ) );
+				$show_fixed_tour[] = intval( strtotime( gmdate( 'Y-m-d' ) ) >= strtotime( $fixed_availability['from'] ) && strtotime( gmdate( 'Y-m-d' ) ) <= strtotime( $fixed_availability['to'] ) );
 				if ( empty( $show_fixed_tour['0'] ) ) {
 					$tf_tour_data = array(
 						'ID'          => $post_id,
@@ -4576,8 +4576,8 @@ function tf_tour_booking_popup_callback() {
 	$min_days_before_book      = ! empty( $meta['min_days_before_book'] ) ? $meta['min_days_before_book'] : '0';
     /* translators: %s: minimum days to book before departure */
 	$min_days_before_book_text = sprintf( _n( '%s day', '%s days', $min_days_before_book, 'tourfic' ), $min_days_before_book );
-	$today_stt                 = new DateTime( date( 'Y-m-d', strtotime( date( 'Y-m-d' ) ) ) );
-	$tour_date_stt             = new DateTime( date( 'Y-m-d', strtotime( $start_date ) ) );
+	$today_stt                 = new DateTime( gmdate( 'Y-m-d', strtotime( gmdate( 'Y-m-d' ) ) ) );
+	$tour_date_stt             = new DateTime( gmdate( 'Y-m-d', strtotime( $start_date ) ) );
 	$day_difference            = $today_stt->diff( $tour_date_stt )->days;
 
 
@@ -4831,11 +4831,11 @@ function tf_tour_booking_popup_callback() {
 					if(!empty($date) && !empty($format)) {
 					if(str_contains( $date, " - ") == true) {
 						list($first_date, $last_date) = explode(" - ", $date);
-						$first_date = date($format, strtotime($first_date));
-						$last_date = date($format, strtotime($last_date));
+						$first_date = gmdate($format, strtotime($first_date));
+						$last_date = gmdate($format, strtotime($last_date));
 						return "{$first_date} - {$last_date}";
 					} else {
-						return date($format, strtotime($date));
+						return gmdate($format, strtotime($date));
 					}
 					}else {
 						return;

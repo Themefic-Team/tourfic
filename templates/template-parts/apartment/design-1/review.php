@@ -28,7 +28,7 @@ if ( $comments ) { ?>
             </div>
             <div class="tf-reviews-text">
                 <span class="tf-review-rating"><?php echo esc_html( $c_rating ); ?></span>
-                <span class="tf-reviews-meta"><?php echo esc_html( $c_author_name ); ?>, <?php echo esc_html( date("F Y", strtotime($c_date)) ); ?></span>
+                <span class="tf-reviews-meta"><?php echo esc_html( $c_author_name ); ?>, <?php echo esc_html( gmdate("F Y", strtotime($c_date)) ); ?></span>
                 <p><?php echo esc_html( tourfic_character_limit_callback($c_content, 180) ); ?></p>
             </div>
         </div>

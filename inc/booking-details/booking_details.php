@@ -20,12 +20,12 @@ function tf_visitor_details_edit_function() {
     global $wpdb;
     $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id,order_details FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
     $tf_order_details = json_decode($tf_order->order_details);
-    $tf_order_details->visitor_details = json_encode($tf_visitor_details);
+    $tf_order_details->visitor_details = wp_json_encode($tf_visitor_details);
 
     // Visitor Details Update
     if(!empty($tf_order)){
         $wpdb->query(
-            $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET order_details=%s WHERE id=%s", json_encode($tf_order_details), sanitize_key($tf_order_id))
+            $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET order_details=%s WHERE id=%s", wp_json_encode($tf_order_details), sanitize_key($tf_order_id))
         );
     }
     die();
@@ -57,7 +57,7 @@ function tf_checkinout_details_edit_function() {
     $current_user_id = $current_user->ID;
     $ft_checkinout_by = array(
         'userid' => $current_user_id,
-        'time'   => date("d F, Y h:i:s a")
+        'time'   => gmdate("d F, Y h:i:s a")
     );
 
     global $wpdb;
@@ -66,7 +66,7 @@ function tf_checkinout_details_edit_function() {
     // Checkinout Status Update into Database
     if(!empty($tf_order)){
         $wpdb->query(
-            $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET checkinout=%s, checkinout_by=%s WHERE id=%s", sanitize_title( $tf_checkinout ), json_encode( $ft_checkinout_by ), sanitize_key($tf_order_id))
+            $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET checkinout=%s, checkinout_by=%s WHERE id=%s", sanitize_title( $tf_checkinout ), wp_json_encode( $ft_checkinout_by ), sanitize_key($tf_order_id))
         );
     }
     die();

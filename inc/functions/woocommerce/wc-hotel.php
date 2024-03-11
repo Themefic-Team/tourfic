@@ -232,8 +232,8 @@ function tf_hotel_booking_callback() {
 						$tf_room_data['tf_hotel_data']['child'] = $child;
 					}
 					if ( $pricing_by == '2' ) {
-						$tf_room_data['tf_hotel_data']['adult'] = $adult . " × " . strip_tags(wc_price($adult_price ));
-						$tf_room_data['tf_hotel_data']['child'] = $child . " × " . strip_tags(wc_price( $child_price ));
+						$tf_room_data['tf_hotel_data']['adult'] = $adult . " × " . wp_strip_all_tags(wc_price($adult_price ));
+						$tf_room_data['tf_hotel_data']['child'] = $child . " × " . wp_strip_all_tags(wc_price( $child_price ));
 					}
 
 				};
@@ -269,8 +269,8 @@ function tf_hotel_booking_callback() {
 				$child_price = $child_price * $child;
 				$total_price = $adult_price + $child_price;
 
-				$tf_room_data['tf_hotel_data']['adult']          = $adult." × ".strip_tags(wc_price($adult_price));
-				$tf_room_data['tf_hotel_data']['child']          = $child." × ".strip_tags(wc_price($child_price));
+				$tf_room_data['tf_hotel_data']['adult']          = $adult." × ".wp_strip_all_tags(wc_price($adult_price));
+				$tf_room_data['tf_hotel_data']['child']          = $child." × ".wp_strip_all_tags(wc_price($child_price));
 			}
 
 			# Multiply pricing by night number
@@ -303,18 +303,18 @@ function tf_hotel_booking_callback() {
 						/* translators: %1$s Adult Count, %2$s Adult Fee, %3$s Child Count, %4$s Child Fee, %5$s Service Fee  */
 						$tf_room_data['tf_hotel_data']['air_service_info'] = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s ) = %5$s', 'tourfic' ),
 							$adult,
-							strip_tags(wc_price( $service_adult_fee )),
+							wp_strip_all_tags(wc_price( $service_adult_fee )),
 							$child,
-							strip_tags(wc_price( $service_child_fee )),
-							strip_tags(wc_price( $airport_service_price_total ))
+							wp_strip_all_tags(wc_price( $service_child_fee )),
+							wp_strip_all_tags(wc_price( $airport_service_price_total ))
 						);
 
 					} else {
 						/* translators: %1$s Adult Count, %2$s Adult Fee, %3$s Service Fee  */
 						$tf_room_data['tf_hotel_data']['air_service_info'] = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) = %3$s', 'tourfic' ),
 							$adult,
-							strip_tags(wc_price( $service_adult_fee )),
-							strip_tags(wc_price( $airport_service_price_total ))
+							wp_strip_all_tags(wc_price( $service_adult_fee )),
+							wp_strip_all_tags(wc_price( $airport_service_price_total ))
 						);
 
 					}
@@ -325,13 +325,13 @@ function tf_hotel_booking_callback() {
 					$tf_room_data['tf_hotel_data']['price_total']       += $airport_service_price_total;
 					/* translators: %1$s Service Fee  */
 					$tf_room_data['tf_hotel_data']['air_service_info']  = sprintf( esc_html__( '( Fixed ) = %1$s', 'tourfic' ),
-						strip_tags(wc_price( $airport_service_price_total ))
+						wp_strip_all_tags(wc_price( $airport_service_price_total ))
 					);
 				}
 				if ( "free" == $tf_room_data['tf_hotel_data']['price_type'] ) {
 					$tf_room_data['tf_hotel_data']['air_service_price'] = 0;
 					$tf_room_data['tf_hotel_data']['price_total']       += 0;
-					$tf_room_data['tf_hotel_data']['air_service_info']  = strip_tags(wc_price( 0 ));
+					$tf_room_data['tf_hotel_data']['air_service_info']  = wp_strip_all_tags(wc_price( 0 ));
 				}
 			}
 			if ( "dropoff" == $airport_service ) {
@@ -354,18 +354,18 @@ function tf_hotel_booking_callback() {
 						/* translators: %1$s Adult Count, %2$s Adult Fee, %3$s Child Count, %4$s Child Fee, %5$s Service Fee  */
 						$tf_room_data['tf_hotel_data']['air_service_info'] = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s ) = %5$s', 'tourfic' ),
 							$adult,
-							strip_tags(wc_price( $service_adult_fee )),
+							wp_strip_all_tags(wc_price( $service_adult_fee )),
 							$child,
-							strip_tags(wc_price( $service_child_fee )),
-							strip_tags(wc_price( $airport_service_price_total ))
+							wp_strip_all_tags(wc_price( $service_child_fee )),
+							wp_strip_all_tags(wc_price( $airport_service_price_total ))
 						);
 
 					} else {
 						/* translators: %1$s Adult Count, %2$s Adult Fee, %3$s Service Fee  */
 						$tf_room_data['tf_hotel_data']['air_service_info'] = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) = %3$s', 'tourfic' ),
 							$adult,
-							strip_tags(wc_price( $service_adult_fee )),
-							strip_tags(wc_price( $airport_service_price_total ))
+							wp_strip_all_tags(wc_price( $service_adult_fee )),
+							wp_strip_all_tags(wc_price( $airport_service_price_total ))
 						);
 
 					}
@@ -376,13 +376,13 @@ function tf_hotel_booking_callback() {
 					$tf_room_data['tf_hotel_data']['price_total']       += $airport_service_price_total;
 					/* translators: %1$s Service Fee  */
 					$tf_room_data['tf_hotel_data']['air_service_info']  = sprintf( esc_html__( '( Fixed ) = %1$s', 'tourfic' ),
-						strip_tags(wc_price( $airport_service_price_total ))
+						wp_strip_all_tags(wc_price( $airport_service_price_total ))
 					);
 				}
 				if ( "free" == $tf_room_data['tf_hotel_data']['price_type'] ) {
 					$tf_room_data['tf_hotel_data']['air_service_price'] = 0;
 					$tf_room_data['tf_hotel_data']['price_total']       += 0;
-					$tf_room_data['tf_hotel_data']['air_service_info']  = strip_tags(wc_price( 0 ));
+					$tf_room_data['tf_hotel_data']['air_service_info']  = wp_strip_all_tags(wc_price( 0 ));
 				}
 			}
 			if ( "both" == $airport_service ) {
@@ -405,18 +405,18 @@ function tf_hotel_booking_callback() {
 						/* translators: %1$s Adult Count, %2$s Adult Fee, %3$s Child Count, %4$s Child Fee, %5$s Service Fee  */
 						$tf_room_data['tf_hotel_data']['air_service_info'] = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s ) = %5$s', 'tourfic' ),
 							$adult,
-							strip_tags(wc_price( $service_adult_fee )),
+							wp_strip_all_tags(wc_price( $service_adult_fee )),
 							$child,
-							strip_tags(wc_price( $service_child_fee )),
-							strip_tags(wc_price( $airport_service_price_total ))
+							wp_strip_all_tags(wc_price( $service_child_fee )),
+							wp_strip_all_tags(wc_price( $airport_service_price_total ))
 						);
 
 					} else {
 						/* translators: %1$s Adult Count, %2$s Adult Fee, %3$s Service Fee  */
 						$tf_room_data['tf_hotel_data']['air_service_info'] = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) = %3$s', 'tourfic' ),
 							$adult,
-							strip_tags(wc_price( $service_adult_fee )),
-							strip_tags(wc_price( $airport_service_price_total ))
+							wp_strip_all_tags(wc_price( $service_adult_fee )),
+							wp_strip_all_tags(wc_price( $airport_service_price_total ))
 						);
 
 					}
@@ -427,13 +427,13 @@ function tf_hotel_booking_callback() {
 					$tf_room_data['tf_hotel_data']['price_total']       += $airport_service_price_total;
 					/* translators: %1$s Service Fee  */
 					$tf_room_data['tf_hotel_data']['air_service_info']  = sprintf( esc_html__( '( Fixed ) = %1$s', 'tourfic' ),
-						strip_tags(wc_price( $airport_service_price_total ))
+						wp_strip_all_tags(wc_price( $airport_service_price_total ))
 					);
 				}
 				if ( "free" == $tf_room_data['tf_hotel_data']['price_type'] ) {
 					$tf_room_data['tf_hotel_data']['air_service_price'] = 0;
 					$tf_room_data['tf_hotel_data']['price_total']       += 0;
-					$tf_room_data['tf_hotel_data']['air_service_info']  = strip_tags(wc_price( 0 ));
+					$tf_room_data['tf_hotel_data']['air_service_info']  = wp_strip_all_tags(wc_price( 0 ));
 				}
 			}
 		}
@@ -604,7 +604,7 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
 	if ( isset( $cart_item['tf_hotel_data']['due'] ) ) {
 		$item_data[] = array(
 			'key'   => esc_html__( 'Due', 'tourfic' ),
-			'value' => strip_tags(wc_price( $cart_item['tf_hotel_data']['due'] )),
+			'value' => wp_strip_all_tags(wc_price( $cart_item['tf_hotel_data']['due'] )),
 		);
 	}
 
@@ -719,7 +719,7 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	}
 
 	if ( ! empty( $due ) ) {
-		$item->update_meta_data( 'due', strip_tags(wc_price( $due )) );
+		$item->update_meta_data( 'due', wp_strip_all_tags(wc_price( $due )) );
 	}
 
 
@@ -878,7 +878,7 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				'airport_service_fee' => $airport_service_fee,
 				'total_price' => $price,
 				'due_price' => $due,
-				'tax_info' => json_encode($fee_sums)
+				'tax_info' => wp_json_encode($fee_sums)
 			];
 
 			$tf_integration_order_data[] = [
@@ -896,14 +896,14 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				'customer_id' => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status' => $order->get_status(),
-				'order_date' => date('Y-m-d H:i:s')
+				'order_date' => gmdate('Y-m-d H:i:s')
 			];
 
 			$tf_integration_order_status = [
 				'customer_id' => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status' => $order->get_status(),
-				'order_date' => date('Y-m-d H:i:s')
+				'order_date' => gmdate('Y-m-d H:i:s')
 			];
 
 			$iteminfo_keys = array_keys($iteminfo);
@@ -929,13 +929,13 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 						$unique_id,
 						$check_in,
 						$check_out,
-						json_encode($billinginfo),
-						json_encode($shippinginfo),
-						json_encode($iteminfo),
+						wp_json_encode($billinginfo),
+						wp_json_encode($shippinginfo),
+						wp_json_encode($iteminfo),
 						$order->get_customer_id(),
 						$order->get_payment_method(),
 						$order->get_status(),
-						date('Y-m-d H:i:s')
+						gmdate('Y-m-d H:i:s')
 					)
 				)
 			);
@@ -1108,7 +1108,7 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 				'airport_service_fee' => $airport_service_fee,
 				'total_price' => $price,
 				'due_price' => $due,
-				'tax_info' => json_encode($fee_sums)
+				'tax_info' => wp_json_encode($fee_sums)
 			];
 
 			$tf_integration_order_data[] = [
@@ -1126,14 +1126,14 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 				'customer_id' => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status' => $order->get_status(),
-				'order_date' => date('Y-m-d H:i:s')
+				'order_date' => gmdate('Y-m-d H:i:s')
 			];
 
 			$tf_integration_order_status = [
 				'customer_id' => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status' => $order->get_status(),
-				'order_date' => date('Y-m-d H:i:s')
+				'order_date' => gmdate('Y-m-d H:i:s')
 			];
 
 			$iteminfo_keys = array_keys($iteminfo);
@@ -1159,13 +1159,13 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 						$unique_id,
 						$check_in,
 						$check_out,
-						json_encode($billinginfo),
-						json_encode($shippinginfo),
-						json_encode($iteminfo),
+						wp_json_encode($billinginfo),
+						wp_json_encode($shippinginfo),
+						wp_json_encode($iteminfo),
 						$order->get_customer_id(),
 						$order->get_payment_method(),
 						$order->get_status(),
-						date('Y-m-d H:i:s')
+						gmdate('Y-m-d H:i:s')
 					)
 				)
 			);
@@ -1275,14 +1275,14 @@ function tf_order_status_changed($order_id, $old_status, $new_status, $order)
 				'customer_id' => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status' => $order->get_status(),
-				'order_date' => date('Y-m-d H:i:s')
+				'order_date' => gmdate('Y-m-d H:i:s')
 			];
 
 			$tf_integration_order_status = [
 				'customer_id' => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status' => $order->get_status(),
-				'order_date' => date('Y-m-d H:i:s')
+				'order_date' => gmdate('Y-m-d H:i:s')
 			];
 
 		}
@@ -1317,7 +1317,7 @@ function tf_order_status_changed($order_id, $old_status, $new_status, $order)
 				'customer_id' => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status' => $order->get_status(),
-				'order_date' => date('Y-m-d H:i:s')
+				'order_date' => gmdate('Y-m-d H:i:s')
 			];
 
 		}
@@ -1375,7 +1375,7 @@ function tf_woocommerce_before_save_order_items( $order_id, $items ) {
 	$tf_order_checked = $wpdb->query($wpdb->prepare("SELECT * FROM $table_name WHERE order_id=%s",$order_id));
 	if( !empty($tf_order_checked) ){
 		$wpdb->query(
-			$wpdb->prepare("UPDATE $table_name SET billing_details=%s, shipping_details=%s, payment_method=%s WHERE order_id=%s",json_encode($billinginfo),json_encode($shippinginfo),$tf_payment_method, $order_id)
+			$wpdb->prepare("UPDATE $table_name SET billing_details=%s, shipping_details=%s, payment_method=%s WHERE order_id=%s",wp_json_encode($billinginfo),wp_json_encode($shippinginfo),$tf_payment_method, $order_id)
 		);
 	}
 }
@@ -1518,13 +1518,13 @@ function tf_admin_order_data_migration(){
 								$room_selected,
 								$check_in,
 								$check_out,
-								json_encode($billinginfo),
-								json_encode($shippinginfo),
-								json_encode($iteminfo),
+								wp_json_encode($billinginfo),
+								wp_json_encode($shippinginfo),
+								wp_json_encode($iteminfo),
 								$itemmeta->get_customer_id(),
 								$itemmeta->get_payment_method(),
 								$itemmeta->get_status(),
-								$tf_ordering_date->date('Y-m-d H:i:s')
+								$tf_ordering_date->gmdate('Y-m-d H:i:s')
 							)
 						)
 					);
@@ -1544,7 +1544,7 @@ function tf_admin_order_data_migration(){
 						list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
 					}
 					if ( !empty($tour_date) && empty($datatype_check) ) {
-						$tour_in = date( "Y-m-d", strtotime( $tour_date ) );
+						$tour_in = gmdate( "Y-m-d", strtotime( $tour_date ) );
 						$tour_out = "0000-00-00";
 					}
 
@@ -1579,15 +1579,15 @@ function tf_admin_order_data_migration(){
 								$item,
 								sanitize_key( $post_id ),
 								$order_type,
-								date( "Y-m-d", strtotime( $tour_in ) ),
-								date( "Y-m-d", strtotime( $tour_out ) ),
-								json_encode($billinginfo),
-								json_encode($shippinginfo),
-								json_encode($iteminfo),
+								gmdate( "Y-m-d", strtotime( $tour_in ) ),
+								gmdate( "Y-m-d", strtotime( $tour_out ) ),
+								wp_json_encode($billinginfo),
+								wp_json_encode($shippinginfo),
+								wp_json_encode($iteminfo),
 								$itemmeta->get_customer_id(),
 								$itemmeta->get_payment_method(),
 								$itemmeta->get_status(),
-								$tf_ordering_date->date('Y-m-d H:i:s')
+								$tf_ordering_date->gmdate('Y-m-d H:i:s')
 							)
 						)
 					);

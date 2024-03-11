@@ -512,7 +512,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 					foreach ( $tour_extras as $extrakey => $tour_extra ) {
 						$pricetype                             = ! empty( $tour_extra['price_type'] ) ? $tour_extra['price_type'] : 'fixed';
 						$tour_extra_pricetype                  = $pricetype === "fixed" ? esc_html( "(Fixed Price)" ) : esc_html( "(Per Person Price)" );
-						$tour_extras_select_array[ $extrakey ] = $tour_extra['title'] . $tour_extra_pricetype . ' - ' . strip_tags( wc_price( $tour_extra['price'] ) );
+						$tour_extras_select_array[ $extrakey ] = $tour_extra['title'] . $tour_extra_pricetype . ' - ' . wp_strip_all_tags( wc_price( $tour_extra['price'] ) );
 					}
 				}
 			}
@@ -640,7 +640,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 						'order_details'    => $order_details,
 						'payment_method'   => "offline",
 						'status'           => 'processing',
-						'order_date'       => date( 'Y-m-d H:i:s' ),
+						'order_date'       => gmdate( 'Y-m-d H:i:s' ),
 					);
 					if ( ! array_key_exists( 'errors', $res['response'] ) || count( $res['response']['errors'] ) == 0 ) {
 						tf_set_order( $order_data );
@@ -652,7 +652,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 				}
 			}
 
-			echo json_encode( $response );
+			echo wp_json_encode( $response );
 			die();
 		}
 
@@ -892,12 +892,12 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 					if ( $tour_extra_pricetype == "fixed" ) {
 						if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
 							$tour_extra_total       += $tour_extra_meta[ $extra ]['price'];
-							$tour_extra_title_arr[] = $tour_extra_meta[ $extra ]['title'] . " (Fixed: " . strip_tags( wc_price( $tour_extra_meta[ $extra ]['price'] ) ) . ")";
+							$tour_extra_title_arr[] = $tour_extra_meta[ $extra ]['title'] . " (Fixed: " . wp_strip_all_tags( wc_price( $tour_extra_meta[ $extra ]['price'] ) ) . ")";
 						}
 					} else {
 						if ( ! empty( $tour_extra_meta[ $extra ]['price'] ) && ! empty( $tour_extra_meta[ $extra ]['title'] ) ) {
 							$tour_extra_total       += ( $tour_extra_meta[ $extra ]['price'] * $total_people );
-							$tour_extra_title_arr[] = $tour_extra_meta[ $extra ]['title'] . " (Per Person: " . strip_tags( wc_price( $tour_extra_meta[ $extra ]['price'] ) ) . '*' . $total_people . "=" . strip_tags( wc_price( $tour_extra_meta[ $extra ]['price'] * $total_people ) ) . ")";
+							$tour_extra_title_arr[] = $tour_extra_meta[ $extra ]['title'] . " (Per Person: " . wp_strip_all_tags( wc_price( $tour_extra_meta[ $extra ]['price'] ) ) . '*' . $total_people . "=" . wp_strip_all_tags( wc_price( $tour_extra_meta[ $extra ]['price'] * $total_people ) ) . ")";
 						}
 					}
 				}
@@ -1076,8 +1076,8 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 			$min_days_before_book      = ! empty( $meta['min_days_before_book'] ) ? $meta['min_days_before_book'] : '0';
 			/* translators: %s minimum days before booking */
             $min_days_before_book_text = sprintf( _n( '%s day', '%s days', $min_days_before_book, 'tourfic' ), $min_days_before_book );
-			$today_stt                 = new DateTime( date( 'Y-m-d', strtotime( date( 'Y-m-d' ) ) ) );
-			$tour_date_stt             = new DateTime( date( 'Y-m-d', strtotime( $start_date ) ) );
+			$today_stt                 = new DateTime( gmdate( 'Y-m-d', strtotime( gmdate( 'Y-m-d' ) ) ) );
+			$tour_date_stt             = new DateTime( gmdate( 'Y-m-d', strtotime( $start_date ) ) );
 			$day_difference            = $today_stt->diff( $tour_date_stt )->days;
 
 

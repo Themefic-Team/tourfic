@@ -13,8 +13,8 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 	$external_search_info = array(
 		'{adult}'    => ! empty( $adult ) ? $adult : 1,
 		'{child}'    => ! empty( $child ) ? $child : 0,
-		'{checkin}'  => ! empty( $check_in ) ? $check_in : date( 'Y-m-d' ),
-		'{checkout}' => ! empty( $check_out ) ? $check_out : date( 'Y-m-d', strtotime( '+1 day' ) ),
+		'{checkin}'  => ! empty( $check_in ) ? $check_in : gmdate( 'Y-m-d' ),
+		'{checkout}' => ! empty( $check_out ) ? $check_out : gmdate( 'Y-m-d', strtotime( '+1 day' ) ),
 		'{room}'     => ! empty( $room_selected ) ? $room_selected : 1,
 	);
 	if ( ! empty( $tf_booking_attribute ) ) {

@@ -577,7 +577,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 						'order_details'    => $order_details,
 						'payment_method'   => "offline",
 						'status'           => 'processing',
-						'order_date'       => date( 'Y-m-d H:i:s' ),
+						'order_date'       => gmdate( 'Y-m-d H:i:s' ),
 					);
 
 					tf_set_order( $order_data );
@@ -587,7 +587,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 				}
 			}
 
-			echo json_encode( $response );
+			echo wp_json_encode( $response );
 			die();
 		}
 	}
