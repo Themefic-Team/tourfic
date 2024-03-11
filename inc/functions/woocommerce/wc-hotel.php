@@ -1524,7 +1524,7 @@ function tf_admin_order_data_migration(){
 								$itemmeta->get_customer_id(),
 								$itemmeta->get_payment_method(),
 								$itemmeta->get_status(),
-								$tf_ordering_date->gmdate('Y-m-d H:i:s')
+								$tf_ordering_date->date('Y-m-d H:i:s')
 							)
 						)
 					);
@@ -1587,7 +1587,7 @@ function tf_admin_order_data_migration(){
 								$itemmeta->get_customer_id(),
 								$itemmeta->get_payment_method(),
 								$itemmeta->get_status(),
-								$tf_ordering_date->gmdate('Y-m-d H:i:s')
+								$tf_ordering_date->date('Y-m-d H:i:s')
 							)
 						)
 					);
