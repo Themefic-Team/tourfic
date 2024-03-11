@@ -1498,7 +1498,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 		</div>
 		<div class="tf-booking-form-submit">
 			<input type="hidden" name="type" value="<?php echo esc_attr( $post_type ); ?>" class="tf-post-type"/>
-            <button class="tf-btn-normal btn-primary tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
+            <button class="tf-btn-normal btn-primary tf-submit"><?php echo esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
 		</div>
 
 		<?php if ( $post_type == 'tf_tours' ) { ?>
@@ -2815,7 +2815,7 @@ function tf_remove_icon_add_to_order_item( $subtotal, $cart_item, $cart_item_key
 	$product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
 	?>
     <div class="tf-product-total">
-		<?php echo esc_html( $subtotal ); ?>
+		<?php echo wp_kses_post( $subtotal ); ?>
 		<?php
 		echo sprintf(
 			'<a href="#" class="remove remove_from_cart_button" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s">&times;</a>',

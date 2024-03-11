@@ -222,7 +222,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 		),
 		//Hotel Info
 		'hotel_info' => array(
-			'title'  => esc_html__( 'Information\'s', 'tourfic' ),
+			'title'  => esc_html__( 'Information', 'tourfic' ),
 			'icon'   => 'fa-solid fa-info-circle',
 			'fields' => array(
 				// nearby Places

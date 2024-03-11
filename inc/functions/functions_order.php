@@ -585,3 +585,36 @@ if ( ! function_exists( 'tf_admin_table_alter_order_data' ) ) {
 	}
 }
 add_action('admin_init', 'tf_admin_table_alter_order_data');
+
+if(! function_exists( 'get_kses_extended_ruleset' ) ) {
+	function tf_kses_svg_esc_rule() {
+		$tf_kses_defaults = wp_kses_allowed_html( 'post' );
+	
+		$tf_svg_args = array(
+			'svg'   => array(
+				'class'           => true,
+				'aria-hidden'     => true,
+				'aria-labelledby' => true,
+				'role'            => true,
+				'xmlns'           => true,
+				'width'           => true,
+				'height'          => true,
+				'viewbox'         => true,
+				'fill' 			  => true, // <= Must be lower case!
+			),
+			'g'     			  => array( 'fill' => true ),
+			'title' 			  => array( 'title' => true ),
+			'path'  			  => array(
+				'd'    			  => true,
+				'fill' 			  => true,
+				'stroke'		  => true,
+				'stroke-width'    => true,
+				'stroke-linecap'  => true,
+				"stroke-linejoin" => true,
+			),
+		);
+
+		return array_merge( $tf_kses_defaults, $tf_svg_args );
+	}
+
+}
