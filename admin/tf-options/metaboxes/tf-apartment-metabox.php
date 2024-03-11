@@ -712,7 +712,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 						array(
 							'id'        => 'favorite',
 							'type'      => 'switch',
-							'label'     => __( 'Mark as Favorite', 'tourfic' ),
+							'label'     => __( 'Mark as favourite', 'tourfic' ),
 							'label_on'  => __( 'Yes', 'tourfic' ),
 							'label_off' => __( 'No', 'tourfic' ),
 						),

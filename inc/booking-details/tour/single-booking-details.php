@@ -204,7 +204,7 @@
                                     <td><?php echo wp_kses_post(wc_price($tf_tour_details->total_price)); ?></td>
                                 </tr>
                                 <?php } ?>
-                                <?php $taxs = !empty($tf_tour_details->tax_info) ? json_decode($tf_tour_details->tax_info, true) : '';;
+                                <?php $taxs = !empty($tf_tour_details->tax_info) ? json_decode($tf_tour_details->tax_info, true) : array();
                                 $taxs_summations = 0;
                                 foreach ( $taxs as $label => $sum ) {
                                     $taxs_summations += $sum;
