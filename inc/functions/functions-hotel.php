@@ -1967,7 +1967,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 			<input type="hidden" name="type" value="<?php echo esc_html( $ptype ); ?>" class="tf-post-type"/>
 			<input type="hidden" name="post_id" value="<?php echo esc_html( get_the_ID() ); ?>"/>
 			<input type="hidden" name="children_ages" value="<?php echo esc_html( $children_ages ); ?>"/>
-			<button type="submit" class="btn-primary tf-submit"><?php esc_html($tf_hotel_book_avaibality_button_text); ?></button>
+			<button type="submit" class="btn-primary tf-submit"><?php echo esc_html($tf_hotel_book_avaibality_button_text); ?></button>
 		</div>
 	</form>
 
