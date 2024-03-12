@@ -220,6 +220,9 @@ function tf_dashboard_header() {
  */
 if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 	function tf_add_hotel_availability() {
+		// Add nonce for security and authentication.
+		check_ajax_referer('updates', '_nonce');
+
 		$date_format         = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		$hotel_id            = isset( $_POST['hotel_id'] ) && ! empty( $_POST['hotel_id'] ) ? sanitize_text_field( $_POST['hotel_id'] ) : '';
 		$new_post            = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? $_POST['new_post'] : '';
@@ -306,6 +309,9 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
  */
 if ( ! function_exists( 'tf_get_hotel_availability' ) ) {
 	function tf_get_hotel_availability() {
+		// Add nonce for security and authentication.
+		check_ajax_referer('updates', '_nonce');
+
 		$new_post   = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
 		$hotel_id   = isset( $_POST['hotel_id'] ) && ! empty( $_POST['hotel_id'] ) ? sanitize_text_field( $_POST['hotel_id'] ) : '';
 		$room_index = isset( $_POST['room_index'] ) ? intval( $_POST['room_index'] ) : '';
@@ -421,6 +427,9 @@ if ( ! function_exists( 'tf_update_room_avail_date_price' ) ) {
  */
 if ( ! function_exists( 'tf_add_apartment_availability' ) ) {
 	function tf_add_apartment_availability() {
+		// Add nonce for security and authentication.
+		check_ajax_referer('updates', '_nonce');
+
 		$date_format         = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		$apartment_id        = isset( $_POST['apartment_id'] ) && ! empty( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
 		$new_post            = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? $_POST['new_post'] : '';
@@ -508,6 +517,9 @@ if ( ! function_exists( 'tf_add_apartment_availability' ) ) {
  */
 if ( ! function_exists( 'tf_get_apartment_availability' ) ) {
 	function tf_get_apartment_availability() {
+		// Add nonce for security and authentication.
+		check_ajax_referer('updates', '_nonce');
+
 		$new_post         = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
 		$apartment_id     = isset( $_POST['apartment_id'] ) && ! empty( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
 		$apt_availability = isset( $_POST['apt_availability'] ) && ! empty( $_POST['apt_availability'] ) ? sanitize_text_field( $_POST['apt_availability'] ) : '';
@@ -652,6 +664,9 @@ function get_icon_list() {
 if ( ! function_exists( 'tf_load_more_icons' ) ) {
 	add_action( 'wp_ajax_tf_load_more_icons', 'tf_load_more_icons' );
 	function tf_load_more_icons() {
+		// Add nonce for security and authentication.
+		check_ajax_referer('updates', '_nonce');
+		
 		$start_index = isset( $_POST['start_index'] ) ? intval( $_POST['start_index'] ) : 0;
 		$type        = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : 'all';
 		$icon_list   = get_icon_list();

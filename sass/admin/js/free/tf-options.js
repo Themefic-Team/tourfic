@@ -395,6 +395,7 @@
                         type: 'POST',
                         data: {
                             action: 'tf_load_more_icons',
+                            _nonce: tf_admin_params.tf_nonce,
                             start_index: startIndex,
                             type: type,
                         },
@@ -534,6 +535,7 @@
                         type: "POST",
                         data: {
                             action: "tf_get_hotel_availability",
+                            _nonce: tf_admin_params.tf_nonce,
                             new_post: $(self.container).find('[name="new_post"]').val(),
                             hotel_id: $(self.container).find('[name="hotel_id"]').val(),
                             room_index: $(self.container).find('[name="room_index"]').val(),
@@ -661,6 +663,7 @@
             let priceBy = container.closest('.tf-single-repeater-room').find('.tf_room_pricing_by').val();
             let avail_date = container.find('.avail_date');
             data.push({name: 'action', value: 'tf_add_hotel_availability'});
+            data.push({name: '_nonce', value: tf_admin_params.tf_nonce});
             data.push({name: 'price_by', value: priceBy});
             data.push({name: 'avail_date', value: avail_date.val()});
 
@@ -780,6 +783,7 @@
                         type: "POST",
                         data: {
                             action: "tf_get_apartment_availability",
+                            _nonce: tf_admin_params.tf_nonce,
                             new_post: $('[name="new_post"]').val(),
                             apartment_id: $('[name="apartment_id"]').val(),
                             apt_availability: $('.apt_availability').val(),
@@ -908,6 +912,7 @@
             let pricingType = $('.tf_apt_pricing_type').val();
             let aptAvailability = container.find('.apt_availability');
             data.push({name: 'action', value: 'tf_add_apartment_availability'});
+            data.push({name: '_nonce', value: tf_admin_params.tf_nonce});
             data.push({name: 'pricing_type', value: pricingType});
             data.push({name: 'apt_availability', value: aptAvailability.val()});
 
