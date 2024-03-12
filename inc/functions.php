@@ -988,16 +988,16 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                         <i class="fas fa-map-marker-alt"></i>
 
                         <?php if($post_type == "tf_hotel" ) { ?>
-							<input type="text" id="<?php echo isset($place_input_id) ? esc_attr( $place_input_id ) : ''; ?>" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> class="" placeholder="<?php echo isset( $place_placeholder ) ? $place_placeholder : esc_html__( 'Location/Destination', 'tourfic' ); ?>"
+							<input type="text" id="<?php echo isset($place_input_id) ? esc_attr( $place_input_id ) : ''; ?>" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> class="" placeholder="<?php echo isset( $place_placeholder ) ? esc_attr($place_placeholder) : esc_html__( 'Location/Destination', 'tourfic' ); ?>"
                                value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
 						<?php } elseif( $post_type == "tf_tours" ) { ?>
-							<input type="text" id="<?php echo isset($place_input_id) ? esc_attr( $place_input_id ) : ''; ?>" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> class="" placeholder="<?php echo isset( $place_placeholder ) ? $place_placeholder : esc_html__( 'Location/Destination', 'tourfic' ); ?>"
+							<input type="text" id="<?php echo isset($place_input_id) ? esc_attr( $place_input_id ) : ''; ?>" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> class="" placeholder="<?php echo isset( $place_placeholder ) ? esc_attr($place_placeholder) : esc_html__( 'Location/Destination', 'tourfic' ); ?>"
 							value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
 						<?php } else { ?>
-							<input type="text" id="<?php echo isset($place_input_id) ? esc_attr( $place_input_id ) : ''; ?>" required class="" placeholder="<?php echo isset( $place_placeholder ) ? $place_placeholder : esc_html__( 'Location/Destination', 'tourfic' ); ?>"
+							<input type="text" id="<?php echo isset($place_input_id) ? esc_attr( $place_input_id ) : ''; ?>" required class="" placeholder="<?php echo isset( $place_placeholder ) ? esc_attr($place_placeholder) : esc_html__( 'Location/Destination', 'tourfic' ); ?>"
 							value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
 						<?php } ?>
-                        <input type="hidden" name="place" id="tf-place" value="<?php echo isset( $place_value ) ? $place_value : ''; ?>"/>
+                        <input type="hidden" name="place" id="tf-place" value="<?php echo isset( $place_value ) ? esc_attr($place_value) : ''; ?>"/>
                     </div>
                 </label>
             </div>
