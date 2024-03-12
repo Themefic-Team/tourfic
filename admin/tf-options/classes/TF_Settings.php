@@ -745,18 +745,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		 * @author Foysal
 		 */
 		public function save_options() {
-
-			// Add nonce for security and authentication.
-			$nonce_name   = isset( $_POST['tf_option_nonce'] ) ? $_POST['tf_option_nonce'] : '';
-			$nonce_action = 'tf_option_nonce_action';
-
-			// Check if a nonce is set.
-			if ( ! isset( $nonce_name ) ) {
-				return;
-			}
-
 			// Check if a nonce is valid.
-			if ( ! wp_verify_nonce( $nonce_name, $nonce_action ) ) {
+			if ( !empty($_POST['tf_option_nonce']) && ! wp_verify_nonce( esc_attr($_POST['tf_option_nonce']), 'tf_option_nonce_action' ) ) {
 				return;
 			}
 
