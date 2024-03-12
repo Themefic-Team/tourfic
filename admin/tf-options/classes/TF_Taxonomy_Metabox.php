@@ -111,7 +111,18 @@ if ( ! class_exists( 'TF_Taxonomy_Metabox' ) ) {
 		 */
 		public function save_taxonomy( $term_id ) {
 			// Add nonce for security and authentication.
-			check_ajax_referer('tf_taxonomy_nonce_action', 'tf_taxonomy_nonce');
+			$nonce_name   = isset( $_POST['tf_taxonomy_nonce'] ) ? $_POST['tf_taxonomy_nonce'] : '';
+			$nonce_action = 'tf_taxonomy_nonce_action';
+
+			// Check if a nonce is set.
+			if ( ! isset( $nonce_name ) ) {
+				return;
+			}
+
+			// Check if a nonce is valid.
+			if ( ! wp_verify_nonce( $nonce_name, $nonce_action ) ) {
+				return;
+			}
 
 			$tf_taxonomy_value = array();
 			$taxonomy_request  = ( ! empty( $_POST[ $this->taxonomy_id ] ) ) ? $_POST[ $this->taxonomy_id ] : array();
