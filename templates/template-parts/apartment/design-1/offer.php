@@ -23,7 +23,7 @@ if ( ! empty( $fav_amenities ) ){
                 }
                 ?>
                 <div class="tf-apt-amenity">
-                    <?php echo ! empty( $feature_icon ) ? "<div class='tf-apt-amenity-icon'>" . esc_attr( $feature_icon ). "</div>" : ""; ?>
+                    <?php echo ! empty( $feature_icon ) ? "<div class='tf-apt-amenity-icon'>" . wp_kses_post( $feature_icon ). "</div>" : ""; ?>
                     <span><?php echo esc_html( $feature->name ); ?></span>
                 </div>
             <?php endforeach; ?>
