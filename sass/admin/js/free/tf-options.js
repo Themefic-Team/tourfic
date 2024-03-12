@@ -432,6 +432,17 @@
                     data.append('file[]', fontsfile[i]);
                 }
             }
+            // get tf_import_option from data  
+            let tf_import_option =  false
+            if (typeof data.get('tf_import_option') !== "undefined" && data.get('tf_import_option').trim() != '') {
+            
+                //  confirm data before send
+                if (!confirm(tf_options.tf_export_import_msg.import_confirm)) {
+                    return;
+                }
+                
+                tf_import_option = true; 
+            }
             data.append('action', 'tf_options_save');
 
             $.ajax({
@@ -441,17 +452,27 @@
                 processData: false,
                 contentType: false,
                 beforeSend: function () {
+                    if(tf_import_option == true ){
+                        $this.find('.tf-import-btn').addClass('tf-btn-loading');
+                    }
                     submitBtn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
                     let obj = JSON.parse(response);
                     if (obj.status === 'success') {
+                        
                         notyf.success(obj.message);
+
+                        if(tf_import_option == true ){
+                            window.location.reload();;
+                        }
                     } else {
                         notyf.error(obj.message);
                     }
                     submitBtn.removeClass('tf-btn-loading');
-
+                    if(tf_import_option == true ){
+                        $this.find('.tf-import-btn').removeClass('tf-btn-loading');
+                    }
                 },
                 error: function (error) {
                     console.log(error);
@@ -2274,50 +2295,64 @@ var frame, gframe;
     });
     
     $(document).ready(function () {
-        $('.tf-import-btn').on('click', function (event) {
+        // $('.tf-import-btn').on('click', function (event) {
+        //     event.preventDefault();
+
+        //     // Get the import URL from the button's href attribute
+        //     var importUrl = $(this).attr('href');
+
+        //     // Get the import data from the textarea
+        //     var importData = $('textarea[name="tf_import_option"]').val().trim();
+        //     if (importData == '') {
+        //         alert(tf_options.tf_export_import_msg.import_empty);
+        //         let importField = $('textarea[name="tf_import_option"]');
+        //         importField.focus();
+        //         importField.css('border', '1px solid red');
+        //         return;
+        //     } else {
+        //         //confirm data before send
+        //         if (!confirm(tf_options.tf_export_import_msg.import_confirm)) {
+        //             return;
+        //         }
+
+        //         $.ajax({
+        //             url: importUrl,
+        //             method: 'POST',
+        //             data: {
+        //                 action: 'tf_import',
+        //                 nonce: tf_admin_params.tf_nonce,
+        //                 tf_import_option: importData,
+        //             },
+        //             beforeSend: function () {
+        //                 $('.tf-import-btn').html('Importing...');
+        //                 $('.tf-import-btn').attr('disabled', 'disabled');
+        //             },
+        //             success: function (response) {
+        //                 if (response.success) {
+        //                     alert(tf_options.tf_export_import_msg.imported);
+        //                     $('.tf-import-btn').html('Imported');
+        //                     window.location.reload();
+        //                 } else {
+        //                     alert('Something went wrong!');
+        //                 }
+        //             }
+        //         });
+        //     }
+        // })
+        $(document).on('click', '.tf-import-btn', function (event) { 
             event.preventDefault();
-
-            // Get the import URL from the button's href attribute
-            var importUrl = $(this).attr('href');
-
-            // Get the import data from the textarea
-            var importData = $('textarea[name="tf_import_option"]').val().trim();
+            var textarea = $('textarea[name="tf_import_option"]'); 
+            var importData = textarea.val().trim();
             if (importData == '') {
                 alert(tf_options.tf_export_import_msg.import_empty);
                 let importField = $('textarea[name="tf_import_option"]');
                 importField.focus();
                 importField.css('border', '1px solid red');
                 return;
-            } else {
-                //confirm data before send
-                if (!confirm(tf_options.tf_export_import_msg.import_confirm)) {
-                    return;
-                }
-
-                $.ajax({
-                    url: importUrl,
-                    method: 'POST',
-                    data: {
-                        action: 'tf_import',
-                        nonce: tf_admin_params.tf_nonce,
-                        tf_import_option: importData,
-                    },
-                    beforeSend: function () {
-                        $('.tf-import-btn').html('Importing...');
-                        $('.tf-import-btn').attr('disabled', 'disabled');
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            alert(tf_options.tf_export_import_msg.imported);
-                            $('.tf-import-btn').html('Imported');
-                            window.location.reload();
-                        } else {
-                            alert('Something went wrong!');
-                        }
-                    }
-                });
-            }
-        })
+            } 
+            // Triger the form submit
+            $(".tf-option-form.tf-ajax-save").submit(); 
+        });
     });
 
     //export the data in txt file
@@ -2337,7 +2372,7 @@ var frame, gframe;
             // Create a temporary link element
             var link = document.createElement('a');
             link.href = url;
-            link.download = 'tf-settings-export.txt';
+            link.download = 'tf-settings-export.json';
 
             // Programmatically click the link to initiate the file download
             link.click();
