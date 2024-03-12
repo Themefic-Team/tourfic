@@ -766,7 +766,9 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			if(isset($_POST['tf_import_option']) && !empty($_POST['tf_import_option'])){
 
 				$tf_import_option = json_decode( wp_unslash( trim( $_POST['tf_import_option']) ), true ); 
-				$option_request = !empty($tf_import_option) && is_array($tf_import_option) ? $tf_import_option : $option_request;
+				// $option_request = !empty($tf_import_option) && is_array($tf_import_option) ? $tf_import_option : $option_request;
+				update_option( $this->option_id, $tf_import_option );
+				return;
 			}
 
 			if ( ! empty( $option_request ) && ! empty( $this->option_sections ) ) {
