@@ -9,17 +9,14 @@ if ( ! class_exists( 'TF_Backup' ) ) {
         }
         public function render() {
             global $wpdb;
-            $option_table     = $wpdb->prefix . 'options';
             $import_url       = admin_url( 'admin-ajax.php');
-            $current_settings = $wpdb->get_results( "SELECT option_value FROM $option_table WHERE option_name = 'tf_settings'" );
+            $current_settings = $wpdb->get_results( $wpdb->prepare("SELECT option_value FROM {$wpdb->prefix}options WHERE option_name = %s", 'tf_settings'), ARRAY_A );
+
             if( !empty( $current_settings ) ){
-                $current_settings = $current_settings[0]->option_value;
+                $current_settings = $current_settings[0]['option_value'];
             }else{
                 $current_settings = '';
-            }
-            //var_dump(get_option('tf_settings'));
-            //$current_settings = get_option('tf_settings'); 
-            //print_r($current_settings);         
+            }      
 
             $placeholder = ( ! empty( $this->field['placeholder'] ) ) ? 'placeholder="' . $this->field['placeholder'] . '"' : '';
             echo '<textarea class="tf-exp-imp-field" cols="50" rows="15" name="tf_import_option" id="' . esc_attr( $this->field_name() ) . '"' . wp_kses_post($placeholder) . ' '. wp_kses_post($this->field_attributes()) .'> </textarea>';
