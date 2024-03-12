@@ -348,6 +348,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<div class="tf-month-filter">
 								<span><?php esc_html_e("Year","tourfic"); ?></span>
 								<select name="tf-year-report" id="tf-year-report">
+									<option value="24"><?php esc_html_e("2024","tourfic"); ?></option>
 									<option value="23"><?php esc_html_e("2023","tourfic"); ?></option>
 									<option value="22"><?php esc_html_e("2022","tourfic"); ?></option>
 									<option value="21"><?php esc_html_e("2021","tourfic"); ?></option>

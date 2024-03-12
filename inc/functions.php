@@ -2710,10 +2710,12 @@ add_action( 'admin_init', 'tf_save_custom_fields' );
  *
  * @author Jahid
  */
-add_action( 'wp_ajax_nopriv_tf_month_reports', 'tf_month_chart_filter_callback' );
 add_action( 'wp_ajax_tf_month_reports', 'tf_month_chart_filter_callback' );
 
 function tf_month_chart_filter_callback() {
+	//Verify Nonce
+	check_ajax_referer('updates', '_nonce');
+	
 	$search_month = sanitize_key( $_POST['month'] );
 	$search_year  = sanitize_key( $_POST['year'] );
 	$month_dates  = cal_days_in_month( CAL_GREGORIAN, $search_month, $search_year );
@@ -2919,7 +2921,7 @@ function tf_update_email_template_default_content() {
 	}
 }
 
-/**tf_ask_question
+/*
  * Retrive Orders Data
  *
  * @return void
@@ -3035,8 +3037,8 @@ if ( ! function_exists( 'tourfic_vendor_order_table_data' ) ) {
 		$orders_result = $wpdb->get_results($wpdb->prepare(
 			"SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s AND post_id IN (
 				SELECT ID FROM {$wpdb->posts} WHERE post_author = %d
-			) ORDER BY order_id DESC $query_limit",
-			$query_type, $query_author
+			) ORDER BY order_id DESC %d",
+			$query_type, $query_author, $query_limit
 		), ARRAY_A );
 
 		return $orders_result;
@@ -3358,6 +3360,9 @@ if( ! function_exists('tourfic_character_limit_callback') ){
 add_action( "wp_ajax_tf_shortcode_type_to_location", "tf_shortcode_type_to_location_callback" );
 
 function tf_shortcode_type_to_location_callback() {
+	//Nonce Verification
+	check_ajax_referer('updates', '_nonce');
+
     $term_name = $_POST['termName'] ? sanitize_text_field( $_POST['termName'] ) : 'tf_hotel';
 
 	$terms = get_terms( array(
