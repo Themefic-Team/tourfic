@@ -348,6 +348,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<div class="tf-month-filter">
 								<span><?php esc_html_e("Year","tourfic"); ?></span>
 								<select name="tf-year-report" id="tf-year-report">
+									<option value="24"><?php esc_html_e("2024","tourfic"); ?></option>
 									<option value="23"><?php esc_html_e("2023","tourfic"); ?></option>
 									<option value="22"><?php esc_html_e("2022","tourfic"); ?></option>
 									<option value="21"><?php esc_html_e("2021","tourfic"); ?></option>
@@ -745,18 +746,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		 * @author Foysal
 		 */
 		public function save_options() {
-
-			// Add nonce for security and authentication.
-			$nonce_name   = isset( $_POST['tf_option_nonce'] ) ? $_POST['tf_option_nonce'] : '';
-			$nonce_action = 'tf_option_nonce_action';
-
-			// Check if a nonce is set.
-			if ( ! isset( $nonce_name ) ) {
-				return;
-			}
-
 			// Check if a nonce is valid.
-			if ( ! wp_verify_nonce( $nonce_name, $nonce_action ) ) {
+			if ( !empty($_POST['tf_option_nonce']) && ! wp_verify_nonce( esc_attr($_POST['tf_option_nonce']), 'tf_option_nonce_action' ) ) {
 				return;
 			}
 

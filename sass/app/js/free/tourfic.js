@@ -1418,6 +1418,7 @@
                 url: tf_params.ajax_url,
                 data: {
                     action: 'tf_checkout_cart_item_remove',
+                    _nonce: tf_params.nonce,
                     cart_item_key: cart_item_key,
                 },
                 beforeSend: function () {

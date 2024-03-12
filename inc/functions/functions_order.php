@@ -46,6 +46,11 @@ if ( ! function_exists( 'tf_add_order_submenu' ) ) {
 if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 	function tf_tour_booking_page_callback() {
 
+		if ( !empty($_REQUEST['nonce']) && (! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'updates' ) && ! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'tf_booking_details' ) ) ) {
+			// This nonce is not valid.
+			die( esc_html_e( 'Security Reasons', 'tourfic' ) ); 
+		}
+
 		if(!empty($_GET['order_id']) && !empty($_GET['action']) && !empty($_GET['book_id'])){
 			/**
 			 * Booking Details showing new template
@@ -175,6 +180,12 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
  */
 if ( ! function_exists( 'tf_hotel_booking_page_callback' ) ) {
 	function tf_hotel_booking_page_callback() {
+
+		if ( !empty($_REQUEST['nonce']) && (! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'updates' ) && ! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'tf_booking_details' ) ) ) {
+			// This nonce is not valid.
+			die( esc_html_e( 'Security Reasons', 'tourfic' ) ); 
+		}
+
 		if(!empty($_GET['order_id']) && !empty($_GET['action']) && !empty($_GET['book_id'])){
 			/**
 			 * Booking Details showing new template
@@ -300,6 +311,12 @@ if ( ! function_exists( 'tf_hotel_booking_page_callback' ) ) {
  */
 if ( ! function_exists( 'tf_apartment_booking_page_callback' ) ) {
 	function tf_apartment_booking_page_callback() {
+
+		if ( !empty($_REQUEST['nonce']) && (! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'updates' ) && ! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'tf_booking_details' ) ) ) {
+			// This nonce is not valid.
+			die( esc_html_e( 'Security Reasons', 'tourfic' ) ); 
+		}
+
 		if(!empty($_GET['order_id']) && !empty($_GET['action']) && !empty($_GET['book_id'])){
 			/**
 			 * Booking Details showing new template
@@ -487,8 +504,7 @@ if ( ! function_exists( 'tf_custom_query_var_get_orders' ) ) {
 if ( ! function_exists( 'tf_set_order' ) ) {
 	function tf_set_order( $order_data ) {
 		global $wpdb;
-		$table_name    = $wpdb->prefix . 'tf_order_data';
-		$all_order_ids = $wpdb->get_col( "SELECT order_id FROM $table_name" );
+		$all_order_ids = $wpdb->get_col( "SELECT order_id FROM {$wpdb->prefix}tf_order_data" );
 		do {
 			$order_id = wp_rand( 10000000, 99999999 );
 		} while ( in_array( $order_id, $all_order_ids ) );
@@ -513,7 +529,7 @@ if ( ! function_exists( 'tf_set_order' ) ) {
 
 		$wpdb->query(
 			$wpdb->prepare(
-				"INSERT INTO $table_name
+				"INSERT INTO {$wpdb->prefix}tf_order_data
 				( order_id, post_id, post_type, room_number, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
 				VALUES ( %d, %d, %s, %d, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
 				array(
@@ -546,8 +562,7 @@ if ( ! function_exists( 'tf_set_order' ) ) {
 if ( ! function_exists( 'tf_get_all_order_id' ) ) {
 	function tf_get_all_order_id() {
 		global $wpdb;
-		$table_name = $wpdb->prefix . 'tf_order_data';
-		$order_ids  = $wpdb->get_col( "SELECT order_id FROM $table_name" );
+		$order_ids  = $wpdb->get_col( "SELECT order_id FROM {$wpdb->prefix}tf_order_data" );
 
 		return $order_ids;
 	}
@@ -564,8 +579,8 @@ if ( ! function_exists( 'tf_admin_table_alter_order_data' ) ) {
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 		
 		// Check if the 'checkinout' & 'checkinout_by' column exists before attempting to add it
-		if ( !$wpdb->get_var("SHOW COLUMNS FROM $order_table_name LIKE 'checkinout'") &&
-		!$wpdb->get_var("SHOW COLUMNS FROM $order_table_name LIKE 'checkinout_by'") ) {
+		if ( !$wpdb->get_var("SHOW COLUMNS FROM {$wpdb->prefix}tf_order_data LIKE 'checkinout'") &&
+		!$wpdb->get_var("SHOW COLUMNS FROM {$wpdb->prefix}tf_order_data LIKE 'checkinout_by'") ) {
 			$wpdb->query($wpdb->prepare(
                     "ALTER TABLE %s 
                 ADD COLUMN checkinout varchar(255) NULL,
@@ -575,7 +590,7 @@ if ( ! function_exists( 'tf_admin_table_alter_order_data' ) ) {
 		}
 
         // Check if the 'room_id' column exists before attempting to add it
-        if ( !$wpdb->get_var("SHOW COLUMNS FROM $order_table_name LIKE 'room_id'") ) {
+        if ( !$wpdb->get_var("SHOW COLUMNS FROM {$wpdb->prefix}tf_order_data LIKE 'room_id'") ) {
 	        $wpdb->query($wpdb->prepare(
                 "ALTER TABLE %s 
                 ADD COLUMN room_id varchar(255) NULL",

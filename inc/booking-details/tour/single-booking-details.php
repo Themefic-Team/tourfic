@@ -8,11 +8,16 @@
                 <?php esc_html_e("Back", "tourfic"); ?>
             </a>
         </div>
-        <input type="hidden" id="tf_email_order_id" value="<?php echo !empty($_GET['order_id']) ? esc_html( $_GET['order_id'] ) : ''; ?>">
         <?php 
+        if ( ! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'tf_booking_details' ) ) {
+            // This nonce is not valid.
+            die( esc_html_e( 'Security Reasons', 'tourfic' ) ); 
+        }
+
         global $wpdb;
         $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s AND order_id = %s",sanitize_key( $_GET['book_id'] ), sanitize_key( $_GET['order_id'] ) ) );
         ?>
+        <input type="hidden" id="tf_email_order_id" value="<?php echo !empty($_GET['order_id']) ? esc_html( $_GET['order_id'] ) : ''; ?>">
         <div class="tf-title">
             <h2><?php echo esc_html( get_the_title( $tf_order_details->post_id ) ); ?></h2>
         </div>
