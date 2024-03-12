@@ -343,10 +343,9 @@ function tourfic_ask_question_ajax() {
 	$tf_user_meta      = get_userdata( $tf_post_author_id );
 	$tf_user_roles     = $tf_user_meta->roles;
 	global $wpdb;
-	$table_name = $wpdb->prefix . 'tf_enquiry_data';
 	$wpdb->query(
 		$wpdb->prepare(
-			"INSERT INTO $table_name
+			"INSERT INTO {$wpdb->prefix}tf_enquiry_data
         ( post_id, post_type, uname, uemail, udescription, author_id, author_roles, created_at )
         VALUES ( %d, %s, %s, %s, %s, %d, %s, %s )",
 			array(
