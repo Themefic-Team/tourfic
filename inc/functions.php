@@ -2715,7 +2715,7 @@ add_action( 'wp_ajax_tf_month_reports', 'tf_month_chart_filter_callback' );
 function tf_month_chart_filter_callback() {
 	//Verify Nonce
 	check_ajax_referer('updates', '_nonce');
-	
+
 	$search_month = sanitize_key( $_POST['month'] );
 	$search_year  = sanitize_key( $_POST['year'] );
 	$month_dates  = cal_days_in_month( CAL_GREGORIAN, $search_month, $search_year );
@@ -2841,6 +2841,8 @@ function tf_remove_icon_add_to_order_item( $subtotal, $cart_item, $cart_item_key
 add_action( 'wp_ajax_tf_checkout_cart_item_remove', 'tf_checkout_cart_item_remove' );
 add_action( 'wp_ajax_nopriv_tf_checkout_cart_item_remove', 'tf_checkout_cart_item_remove' );
 function tf_checkout_cart_item_remove() {
+	check_ajax_referer('tf_ajax_nonce', '_nonce');
+
 	if ( isset( $_POST['cart_item_key'] ) ) {
 		$cart_item_key = sanitize_key( $_POST['cart_item_key'] );
 
