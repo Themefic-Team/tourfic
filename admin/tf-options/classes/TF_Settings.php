@@ -860,7 +860,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
             if( ! empty( $_POST['tf_option_nonce'] ) && wp_verify_nonce( $_POST['tf_option_nonce'], 'tf_option_nonce_action' ) ) {
 				
-				if(isset($_POST['tf_import_option']) && !empty($_POST['tf_import_option'])){
+				if(isset($_POST['tf_import_option']) && !empty(wp_unslash( trim( $_POST['tf_import_option']) )) ){
 
 					$tf_import_option = json_decode( wp_unslash( trim( $_POST['tf_import_option']) ), true );
 					 if(empty($tf_import_option) || !is_array($tf_import_option)){
