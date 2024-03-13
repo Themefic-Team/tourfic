@@ -746,13 +746,36 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		 * @author Foysal
 		 */
 		public function save_options() {
+
+
 			// Check if a nonce is valid.
-			if ( !empty($_POST['tf_option_nonce']) && ! wp_verify_nonce( esc_attr($_POST['tf_option_nonce']), 'tf_option_nonce_action' ) ) {
+			if (  !isset( $_POST['tf_option_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tf_option_nonce'] ) ), 'tf_option_nonce_action' ) ) {
 				return;
+			}
+
+			//  Checked Currenct can save option
+			$current_user = wp_get_current_user();
+			$current_user_role = $current_user->roles[0];
+
+			if ( $current_user_role !== 'administrator' && !is_admin()) {
+				wp_die( 'You do not have sufficient permissions to access this page.' );
 			}
 
 			$tf_option_value = array();
 			$option_request  = ( ! empty( $_POST[ $this->option_id ] ) ) ? $_POST[ $this->option_id ] : array();
+
+			if(isset($_POST['tf_import_option']) && !empty(wp_unslash( trim( $_POST['tf_import_option']) ))){
+
+				$tf_import_option = json_decode( wp_unslash( trim( $_POST['tf_import_option']) ), true );
+
+				do_action( 'tf_setting_import_before_save', $tf_import_option );
+
+				// $option_request = !empty($tf_import_option) && is_array($tf_import_option) ? $tf_import_option : $option_request;
+				update_option( $this->option_id, $tf_import_option );
+				return;
+			}
+
+
 			if ( ! empty( $option_request ) && ! empty( $this->option_sections ) ) {
 				foreach ( $this->option_sections as $section ) {
 					if ( ! empty( $section['fields'] ) ) {
@@ -763,14 +786,14 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 								$fieldClass = 'TF_' . $field['type'];
 
-                                if($fieldClass == 'TF_tab'){
-	                                $data = isset( $option_request[ $field['id'] ] ) ? $option_request[ $field['id'] ] : '';
-	                                foreach ( $field['tabs'] as $tab ) {
-		                                foreach ( $tab['fields'] as $tab_fields ) {
-                                            if($tab_fields['type'] == 'repeater') {
-	                                            foreach ( $tab_fields['fields'] as $key => $tab_field ) {
-		                                            if ( isset( $tab_field['validate'] ) && $tab_field['validate'] == 'no_space_no_special' ) {
-                                                        $sanitize_data_array = [];
+								if($fieldClass == 'TF_tab'){
+									$data = isset( $option_request[ $field['id'] ] ) ? $option_request[ $field['id'] ] : '';
+									foreach ( $field['tabs'] as $tab ) {
+										foreach ( $tab['fields'] as $tab_fields ) {
+											if($tab_fields['type'] == 'repeater') {
+												foreach ( $tab_fields['fields'] as $key => $tab_field ) {
+													if ( isset( $tab_field['validate'] ) && $tab_field['validate'] == 'no_space_no_special' ) {
+														$sanitize_data_array = [];
 														if(!empty($data[$tab_fields['id']])){
 															foreach ( $data[$tab_fields['id']] as $_key=> $datum ) {
 																//unique id 3 digit
@@ -785,14 +808,14 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 																$data[$tab_fields['id']][$_key][$tab_field['id']] = $sanitize_data;
 															}
 														}
-		                                            }
-	                                            }
-                                            }
-                                        }
-                                    }
-                                } else {
-	                                $data = isset( $option_request[ $field['id'] ] ) ? $option_request[ $field['id'] ] : '';
-                                }
+													}
+												}
+											}
+										}
+									}
+								} else {
+									$data = isset( $option_request[ $field['id'] ] ) ? $option_request[ $field['id'] ] : '';
+								}
 
 								if($fieldClass != 'TF_file'){
 									$data       = $fieldClass == 'TF_repeater' || $fieldClass == 'TF_map'  || $fieldClass == 'TF_color' ? serialize( $data ) : $data;
@@ -845,19 +868,39 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		public function tf_ajax_save_options() {
 			$response    = [
 				'status'  => 'error',
-				'message' => esc_html__( 'Something went wrong!', 'tourfic' ),
+				'message' => __( 'Something went wrong!', 'tourfic' ),
 			];
 
-            if( ! empty( $_POST['tf_option_nonce'] ) && wp_verify_nonce( $_POST['tf_option_nonce'], 'tf_option_nonce_action' ) ) {
-                $this->save_options();
-                $response = [
-                    'status'  => 'success',
-                    'message' => esc_html__( 'Options saved successfully!', 'tourfic' ),
-                ];
-            }
+			if( ! empty( $_POST['tf_option_nonce'] ) && wp_verify_nonce( $_POST['tf_option_nonce'], 'tf_option_nonce_action' ) ) {
 
-            echo wp_json_encode( $response );
-            wp_die();
+				if(isset($_POST['tf_import_option']) && !empty(wp_unslash( trim( $_POST['tf_import_option']) )) ){
+
+					$tf_import_option = json_decode( wp_unslash( trim( $_POST['tf_import_option']) ), true );
+					if(empty($tf_import_option) || !is_array($tf_import_option)){
+						$response    = [
+							'status'  => 'error',
+							'message' => __( 'Your imported data is not valid', 'tourfic' ),
+						];
+					}else{
+						$this->save_options();
+						$response = [
+							'status'  => 'success',
+							'message' => __( 'Options imported successfully!', 'tourfic' ),
+						];
+					}
+				}else{
+					$this->save_options();
+					$response = [
+						'status'  => 'success',
+						'message' => __( 'Options saved successfully!', 'tourfic' ),
+					];
+
+				}
+
+			}
+
+			echo wp_json_encode( $response );
+			wp_die();
 		}
 
 		/*
