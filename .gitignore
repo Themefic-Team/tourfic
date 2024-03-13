@@ -7,5 +7,7 @@ tourfic
 .gitignore
 README.md
 *.LICENSE.txt
+.DS_Store
+inc/.DS_Store
 *.map
 yarn*
