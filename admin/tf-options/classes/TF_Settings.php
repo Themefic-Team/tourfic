@@ -746,30 +746,34 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		 */
 		public function save_options() {
 
-			// Add nonce for security and authentication.
-			$nonce_name   = isset( $_POST['tf_option_nonce'] ) ? $_POST['tf_option_nonce'] : '';
-			$nonce_action = 'tf_option_nonce_action';
-
-			// Check if a nonce is set.
-			if ( ! isset( $nonce_name ) ) {
+			
+			// Check if a nonce is valid.
+			if (  !isset( $_POST['tf_option_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tfhb_hydra_nonce'] ) ), 'tf_option_nonce_action' ) ) {
 				return;
 			}
 
-			// Check if a nonce is valid.
-			if ( ! wp_verify_nonce( $nonce_name, $nonce_action ) ) {
-				return;
+			//  Checked Currenct can save option
+			$current_user = wp_get_current_user();
+			$current_user_role = $current_user->roles[0];
+
+			if ( $current_user_role !== 'administrator' && !is_admin()) {
+				wp_die( 'You do not have sufficient permissions to access this page.' );
 			}
 
 			$tf_option_value = array();
 			$option_request  = ( ! empty( $_POST[ $this->option_id ] ) ) ? $_POST[ $this->option_id ] : array();
 
-			if(isset($_POST['tf_import_option']) && !empty($_POST['tf_import_option'])){
-
+			if(isset($_POST['tf_import_option']) && !empty(wp_unslash( trim( $_POST['tf_import_option']) ))){
+				
 				$tf_import_option = json_decode( wp_unslash( trim( $_POST['tf_import_option']) ), true ); 
+
+				do_action( 'tf_setting_import_before_save', $tf_import_option );
+
 				// $option_request = !empty($tf_import_option) && is_array($tf_import_option) ? $tf_import_option : $option_request;
 				update_option( $this->option_id, $tf_import_option );
 				return;
 			}
+
 
 			if ( ! empty( $option_request ) && ! empty( $this->option_sections ) ) {
 				foreach ( $this->option_sections as $section ) {

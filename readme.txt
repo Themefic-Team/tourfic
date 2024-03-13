@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.4.3
-Stable tag: 2.11.18
+Stable tag: 2.11.19
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -315,6 +315,12 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.11.19 - 13 March 2024 =
+
+- Updated: Import Export Secured by Role Check
+- Updated: Import Export Secured by Nonce Verification
+- Updated: Imported Data Converted into JSON
+
 = 2.11.18 - 12 March 2024 =
 
 - Fixed: PHP Object Injection vulnerability issue
@@ -518,14 +524,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Improvement: Hotel room inventory moved to free
 - Improvement: Review filed moved to free
 - Improvement: Optimization moved to free
-
-= 2.10.4 -  02 November 2023 =
-
-- Fixed: High-Performance Order Storage issue for Woocommerce
-- Compatibility: Compatible with WooCommerce 8.2.1
-- Compatibility: Compatible with Elementor 3.17.2
-- Updated: readme.txt
-
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
