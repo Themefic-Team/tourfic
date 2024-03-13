@@ -1778,7 +1778,7 @@ function tf_search_result_ajax_sidebar() {
 	 */
 	$adults       = ! empty( $_POST['adults'] ) ? sanitize_text_field( $_POST['adults'] ) : '';
 	$child        = ! empty( $_POST['children'] ) ? sanitize_text_field( $_POST['children'] ) : '';
-	$infant       = ! empty( $_POST['infant'] ) ? sanitize_text_field( $_POST['infant'] ) : '';
+	$infant       = ! empty( $_POST['infant'] ) && $_POST['infant'] != "undefined" ? sanitize_text_field( $_POST['infant'] ) : '';
 	$room         = ! empty( $_POST['room'] ) ? sanitize_text_field( $_POST['room'] ) : '';
 	$check_in_out = ! empty( $_POST['checked'] ) ? sanitize_text_field( $_POST['checked'] ) : '';
 
