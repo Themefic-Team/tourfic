@@ -808,7 +808,13 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 										for($i = 0; $i < count($_FILES['file']['name']); $i++) {
 											if (in_array($_FILES['file']['type'][$i], $tf_fonts_extantions)) {
 												$tf_font_filename = $_FILES['file']['name'][$i];
-												move_uploaded_file($_FILES['file']['tmp_name'][$i], $tf_itinerary_fonts .'/'. $tf_font_filename);
+												$uploaded_file_tmp = $_FILES['file']['tmp_name'][$i];
+												$destination_path = $tf_itinerary_fonts .'/'. $tf_font_filename;
+												if (copy($uploaded_file_tmp, $destination_path)) {
+													// File copied successfully, you can perform further actions if needed
+												} else {
+													// Handle error if copy operation failed
+												}
 											}
 										}
 									}
