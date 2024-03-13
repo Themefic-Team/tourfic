@@ -118,28 +118,28 @@
 			<?php if ( $pricing_rule == 'group' ) { ?>
                 <div class="tf-trip-pricing tf-flex tf-group active">
                     <span class="tf-price-label"> <?php esc_html_e( "From", "tourfic" ); ?>, </span>
-                    <span class="tf-price-amount"><?php echo isset($tour_price->wc_sale_group) ? wp_kses_post($tour_price->wc_sale_group) : $tour_price->wc_group; ?></span>
+                    <span class="tf-price-amount"><?php echo isset($tour_price->wc_sale_group) ? wp_kses_post($tour_price->wc_sale_group) : wp_kses_post($tour_price->wc_group); ?></span>
                     <span class="tf-price-label-bttm"><?php esc_html_e( "Per Group", "tourfic" ); ?></span>
                 </div>
 			<?php } elseif ( $pricing_rule == 'person' ) { ?>
 				<?php if ( ! $disable_adult && ! empty( $tour_price->adult ) ) { ?>
                     <div class="tf-trip-pricing tf-flex tf-adult active">
                         <span class="tf-price-label"> <?php esc_html_e( "From", "tourfic" ); ?>, </span>
-                        <span class="tf-price-amount"><?php echo isset($tour_price->wc_sale_adult) ? wp_kses_post($tour_price->wc_sale_adult) : $tour_price->wc_adult; ?></span>
+                        <span class="tf-price-amount"><?php echo isset($tour_price->wc_sale_adult) ? wp_kses_post($tour_price->wc_sale_adult) : wp_kses_post($tour_price->wc_adult); ?></span>
                         <span class="tf-price-label-bttm"><?php esc_html_e( "Per Adult", "tourfic" ); ?></span>
                     </div>
 				<?php }
 				if ( ! $disable_child && ! empty( $tour_price->child ) ) { ?>
                     <div class="tf-trip-pricing tf-flex tf-child">
                         <span class="tf-price-label"> <?php esc_html_e( "From", "tourfic" ); ?>, </span>
-                        <span class="tf-price-amount"><?php echo isset( $tour_price->wc_sale_child ) ? wp_kses_post($tour_price->wc_sale_child) : $tour_price->wc_child; ?></span>
+                        <span class="tf-price-amount"><?php echo isset( $tour_price->wc_sale_child ) ? wp_kses_post($tour_price->wc_sale_child) : wp_kses_post($tour_price->wc_child); ?></span>
                         <span class="tf-price-label-bttm"><?php esc_html_e( "Per Child", "tourfic" ); ?></span>
                     </div>
 				<?php }
 				if ( ! $disable_adult && ( ! $disable_infant && ! empty( $tour_price->infant ) ) ) { ?>
                     <div class="tf-trip-pricing tf-flex tf-infant">
                         <span class="tf-price-label"> <?php esc_html_e( "From", "tourfic" ); ?>, </span>
-                        <span class="tf-price-amount"><?php echo isset($tour_price->wc_sale_infant) ? wp_kses_post() : $tour_price->wc_infant; ?></span>
+                        <span class="tf-price-amount"><?php echo isset($tour_price->wc_sale_infant) ? wp_kses_post() : wp_kses_post($tour_price->wc_infant); ?></span>
                         <span class="tf-price-label-bttm"><?php esc_html_e( "Per Infant", "tourfic" ); ?></span>
                     </div>
 				<?php } ?>
