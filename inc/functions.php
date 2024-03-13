@@ -535,7 +535,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 		?>
         <div class="tf-box-wrapper tf-box tf-mrbottom-30">
             <form class="widget tf-hotel-side-booking" method="get" autocomplete="off"
-                  action="<?php echo esc_attr( tf_booking_search_action() ); ?>" id="tf-widget-booking-search">
+                  action="<?php echo esc_url( tf_booking_search_action() ); ?>" id="tf-widget-booking-search">
 
                 <div class="tf-field-group tf-destination-box" <?php echo ($post_type == 'tf_hotel' && tfopt( "hide_hotel_location_search" ) == 1 && tfopt( "required_location_hotel_search" ) != 1) || ($post_type == 'tf_tours' && tfopt( "hide_tour_location_search" ) == 1 && tfopt( "required_location_tour_search" ) != 1) ? 'style="display:none"' : ''?>>
                     <i class="fa-solid fa-location-dot"></i>
@@ -980,7 +980,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 	<?php } else { ?>
         <!-- Start Booking widget -->
         <form class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
-              action="<?php echo esc_attr( tf_booking_search_action() ); ?>" id="tf-widget-booking-search">
+              action="<?php echo esc_url( tf_booking_search_action() ); ?>" id="tf-widget-booking-search">
 
             <div class="tf_form-row">
                 <label class="tf_label-row">
@@ -1185,7 +1185,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 	if ( ( is_post_type_archive( 'tf_hotel' ) && $tf_hotel_arc_selected_template == "design-1" ) || ( is_post_type_archive( 'tf_tours' ) && $tf_tour_arc_selected_template == "design-1" ) || ( $post_type == 'tf_hotel' && $tf_hotel_arc_selected_template == "design-1" ) || ( $post_type == 'tf_tours' && $tf_tour_arc_selected_template == "design-1" ) ) {
 		?>
         <div class="tf-box-wrapper tf-box tf-mrbottom-30">
-            <form action="<?php echo esc_attr( tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking">
+            <form action="<?php echo esc_url( tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking">
                 <div class="tf-field-group tf-destination-box" <?php echo ($post_type == 'tf_hotel' && tfopt( "hide_hotel_location_search" ) == 1 && tfopt( "required_location_hotel_search" ) != 1) || ( $post_type == 'tf_tours' && tfopt( "hide_tour_location_search" ) == 1 && tfopt( "required_location_tour_search" ) != 1 ) ? 'style="display:none"' : ''?>>
                     <i class="fa-solid fa-location-dot"></i>
 
@@ -1620,7 +1620,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 
 	<?php } else { ?>
         <form class="tf_archive_search_result tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
-              action="<?php echo esc_attr( tf_booking_search_action() ); ?>">
+              action="<?php echo esc_url( tf_booking_search_action() ); ?>">
 
             <div class="tf_form-row">
                 <label class="tf_label-row">

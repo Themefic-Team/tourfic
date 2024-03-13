@@ -1177,7 +1177,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 		$disable_hotel_child_search  = ! empty( tfopt( 'disable_hotel_child_search' ) ) ? tfopt( 'disable_hotel_child_search' ) : '';
 		if( !empty($design) && 2==$design ){
 		?>
-		<form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_attr( tf_booking_search_action() ); ?>">
+		<form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( tf_booking_search_action() ); ?>">
 			<div class="tf_hotel_searching">
 				<div class="tf_form_innerbody">
 					<div class="tf_form_fields">
@@ -1438,7 +1438,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 		</script>
 		<?php
 		}else{ ?>
-        <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_attr( tf_booking_search_action() ); ?>">
+        <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( tf_booking_search_action() ); ?>">
             <div class="tf_homepage-booking">
 			<?php if( tfopt( 'hide_hotel_location_search' ) != 1 || tfopt( 'required_location_hotel_search' ) ): ?>
 				<div class="tf_destination-wrap">
