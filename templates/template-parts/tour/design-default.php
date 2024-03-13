@@ -660,7 +660,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
             if(in_array($post_id, $selected_ids)) {
                 $index = array_search($post_id, $selected_ids);
 
-                $args['post__not_in'] = array($selected_ids[$index]);
+	            $current_post_id = array($selected_ids[$index]);
 
                 unset($selected_ids[$index]);
             }
@@ -671,14 +671,13 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                 $args['post__in'] = array(-1);
             }
         } else {
-            $args['post__not_in'] = array($post_id);
+	        $current_post_id = array($post_id);
         }
 
         $tours = new WP_Query( $args );
         if ( $tours->have_posts() ) {
-            if ($tours->found_posts > 0) :
+	        if(!in_array(get_the_ID(), $current_post_id)):
             ?>
-
             <div class="tf-suggestion-wrapper gray-wrap sp-50">
                 <div class="tf-container">
                     <div class="tf-slider-content-wrapper">

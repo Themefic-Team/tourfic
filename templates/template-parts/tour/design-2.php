@@ -373,8 +373,8 @@
         if ( $related_tour_type == 'selected' && defined( 'TF_PRO' ) ) {
             if(in_array($post_id, $selected_ids)) {
                 $index = array_search($post_id, $selected_ids);
-                
-                $args['post__not_in'] = array($selected_ids[$index]);
+
+	            $current_post_id = array($selected_ids[$index]);
 
                 unset($selected_ids[$index]);
             }
@@ -385,13 +385,13 @@
                 $args['post__in'] = array(-1);
             }
         } else {
-            $args['post__not_in'] = array($post_id);
+	        $current_post_id = array($post_id);
         }
 
         $tours = new WP_Query( $args );
         if ( $tours->have_posts() ) {
-            if($tours->found_posts > 0) : ?>
-
+	        if(!in_array(get_the_ID(), $current_post_id)):
+            ?>
                 <!-- Tourfic related tours tours -->
                 <div class="tf-related-tours">
                     <div class="tf-container">
