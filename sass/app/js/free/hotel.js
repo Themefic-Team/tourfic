@@ -122,13 +122,17 @@
             if ($(this).closest('.room-submit-wrap').find('input[name=room_id]').val()) {
                 var room_id = $(this).closest('.room-submit-wrap').find('input[name=room_id]').val();
             } else {
-                var room_id = $("#hotel_roomid").val();
+                 // var unique_id = $("#hotel_roomid").val();
+                var room_id =  $(this).parent().prev().prev().find("input[name=room_id]").val();
             }
             if ($(this).closest('.room-submit-wrap').find('input[name=unique_id]').val()) {
                 var unique_id = $(this).closest('.room-submit-wrap').find('input[name=unique_id]').val();
             } else {
-                var unique_id = $("#hotel_room_uniqueid").val();
+                // var unique_id = $("#hotel_room_uniqueid").val();
+                var unique_id = $(this).parent().prev().prev().find("input[name=unique_id]").val();
             }
+
+            console.log( unique_id )
             var location = $('input[name=place]').val();
             var adult = $('input[name=adult]').val();
             var child = $('input[name=child]').val();

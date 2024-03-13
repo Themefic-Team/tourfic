@@ -469,10 +469,9 @@ function tf_add_apartment_data_checkout_order_processed( $order_id, $posted_data
 
 
 			global $wpdb;
-			$table_name = $wpdb->prefix . 'tf_order_data';
 			$wpdb->query(
 				$wpdb->prepare(
-					"INSERT INTO $table_name
+					"INSERT INTO {$wpdb->prefix}tf_order_data
 				( order_id, post_id, post_type, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
 				VALUES ( %d, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
 					array(
@@ -652,10 +651,9 @@ function tf_add_apartment_data_checkout_order_processed_block_checkout( $order )
 
 
 			global $wpdb;
-			$table_name = $wpdb->prefix . 'tf_order_data';
 			$wpdb->query(
 				$wpdb->prepare(
-					"INSERT INTO $table_name
+					"INSERT INTO {$wpdb->prefix}tf_order_data
 				( order_id, post_id, post_type, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
 				VALUES ( %d, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
 					array(

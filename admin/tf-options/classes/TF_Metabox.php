@@ -148,17 +148,9 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 		 * @author Foysal
 		 */
 		public function save_metabox( $post_id ) {
-			// Add nonce for security and authentication.
-			$nonce_name   = isset( $_POST['tf_meta_box_nonce'] ) ? $_POST['tf_meta_box_nonce'] : '';
-			$nonce_action = 'tf_meta_box_nonce_action';
-
-			// Check if a nonce is set.
-			if ( ! isset( $nonce_name ) ) {
-				return;
-			}
-
 			// Check if a nonce is valid.
-			if ( ! wp_verify_nonce( $nonce_name, $nonce_action ) ) {
+
+			if ( !empty($_POST['tf_meta_box_nonce']) && ! wp_verify_nonce( esc_attr($_POST['tf_meta_box_nonce']), 'tf_meta_box_nonce_action' ) ) {
 				return;
 			}
 

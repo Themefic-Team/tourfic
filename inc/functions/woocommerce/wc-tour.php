@@ -1202,10 +1202,9 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 			$iteminfo = array_combine($iteminfo_keys, $iteminfo_values);
 			
 			global $wpdb;     
-			$table_name = $wpdb->prefix.'tf_order_data';  
 			$wpdb->query(
 				$wpdb->prepare(
-				"INSERT INTO $table_name
+				"INSERT INTO {$wpdb->prefix}tf_order_data
 				( order_id, post_id, post_type, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
 				VALUES ( %d, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
 					array(
@@ -1390,10 +1389,9 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 			$iteminfo = array_combine($iteminfo_keys, $iteminfo_values);
 
 			global $wpdb;
-			$table_name = $wpdb->prefix.'tf_order_data';
 			$wpdb->query(
 				$wpdb->prepare(
-					"INSERT INTO $table_name
+					"INSERT INTO {$wpdb->prefix}tf_order_data
 				( order_id, post_id, post_type, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
 				VALUES ( %d, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
 					array(
@@ -1438,8 +1436,7 @@ function tf_tour_unique_id_order_data_migration(){
 
 	if ( empty( get_option( 'tf_old_tour_order_unique_id_data_migrate' ) ) ) {
 
-		global $wpdb;     
-		$table_name = $wpdb->prefix.'tf_order_data'; 
+		global $wpdb;
 		$tf_old_order_limit = new WC_Order_Query( array (
 			'limit' => -1,
 			'orderby' => 'date',
@@ -1461,13 +1458,13 @@ function tf_tour_unique_id_order_data_migration(){
 					$post_id   = wc_get_order_item_meta( $item_key, '_tour_id', true );
 					$unique_id   = wc_get_order_item_meta( $item_key, '_tour_unique_id', true );
 
-					$tf_order_checked = $wpdb->get_row( $wpdb->prepare("SELECT id,order_details FROM $table_name WHERE order_id=%s AND post_id=%s",$item,$post_id) );
+					$tf_order_checked = $wpdb->get_row( $wpdb->prepare("SELECT id,order_details FROM {$wpdb->prefix}tf_order_data WHERE order_id=%s AND post_id=%s",$item,$post_id) );
 					if( !empty($tf_order_checked) && !empty($unique_id) ){
 						$order_details = json_decode($tf_order_checked->order_details);
 						if(empty($order_details->unique_id)){
 							$order_details->unique_id = $unique_id;
 							$wpdb->query(
-								$wpdb->prepare("UPDATE $table_name SET order_details=%s WHERE id=%d",wp_json_encode($order_details), $tf_order_checked->id)
+								$wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET order_details=%s WHERE id=%d",wp_json_encode($order_details), $tf_order_checked->id)
 							);
 
 						}

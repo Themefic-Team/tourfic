@@ -915,10 +915,9 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 			$iteminfo = array_combine($iteminfo_keys, $iteminfo_values);
 
 			global $wpdb;
-			$table_name = $wpdb->prefix.'tf_order_data';
 			$wpdb->query(
 				$wpdb->prepare(
-					"INSERT INTO $table_name
+					"INSERT INTO {$wpdb->prefix}tf_order_data
 				( order_id, post_id, post_type, room_number, room_id, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
 				VALUES ( %d, %d, %s, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
 					array(
@@ -1145,10 +1144,9 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 			$iteminfo = array_combine($iteminfo_keys, $iteminfo_values);
 
 			global $wpdb;
-			$table_name = $wpdb->prefix.'tf_order_data';
 			$wpdb->query(
 				$wpdb->prepare(
-					"INSERT INTO $table_name
+					"INSERT INTO {$wpdb->prefix}tf_order_data
 				( order_id, post_id, post_type, room_number, room_id, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
 				VALUES ( %d, %d, %s, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
 					array(
@@ -1197,11 +1195,10 @@ add_action('woocommerce_order_status_changed', 'tf_order_status_changed', 10, 4)
 function tf_order_status_changed($order_id, $old_status, $new_status, $order)
 {
 	global $wpdb;
-	$table_name = $wpdb->prefix.'tf_order_data';
-	$tf_order_checked = $wpdb->query($wpdb->prepare("SELECT * FROM $table_name WHERE order_id=%s",$order_id));
+	$tf_order_checked = $wpdb->query($wpdb->prepare("SELECT * FROM {$wpdb->prefix}tf_order_data WHERE order_id=%s",$order_id));
 	if( !empty($tf_order_checked) ){
 		$wpdb->query(
-			$wpdb->prepare("UPDATE $table_name SET ostatus=%s WHERE order_id=%s",$new_status,$order_id)
+			$wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET ostatus=%s WHERE order_id=%s",$new_status,$order_id)
 		);
 	}
 
@@ -1371,11 +1368,10 @@ function tf_woocommerce_before_save_order_items( $order_id, $items ) {
 	];
 	$tf_payment_method = $items['_payment_method'];
 	global $wpdb;
-	$table_name = $wpdb->prefix.'tf_order_data';
-	$tf_order_checked = $wpdb->query($wpdb->prepare("SELECT * FROM $table_name WHERE order_id=%s",$order_id));
+	$tf_order_checked = $wpdb->query($wpdb->prepare("SELECT * FROM {$wpdb->prefix}tf_order_data WHERE order_id=%s",$order_id));
 	if( !empty($tf_order_checked) ){
 		$wpdb->query(
-			$wpdb->prepare("UPDATE $table_name SET billing_details=%s, shipping_details=%s, payment_method=%s WHERE order_id=%s",wp_json_encode($billinginfo),wp_json_encode($shippinginfo),$tf_payment_method, $order_id)
+			$wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET billing_details=%s, shipping_details=%s, payment_method=%s WHERE order_id=%s",wp_json_encode($billinginfo),wp_json_encode($shippinginfo),$tf_payment_method, $order_id)
 		);
 	}
 }
@@ -1505,10 +1501,9 @@ function tf_admin_order_data_migration(){
 					$iteminfo = array_combine($iteminfo_keys, $iteminfo_values);
 
 					global $wpdb;
-					$table_name = $wpdb->prefix.'tf_order_data';
 					$wpdb->query(
 						$wpdb->prepare(
-							"INSERT INTO $table_name
+							"INSERT INTO {$wpdb->prefix}tf_order_data
 						( order_id, post_id, post_type, room_number, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
 						VALUES ( %d, %d, %s, %d, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
 							array(
@@ -1569,10 +1564,9 @@ function tf_admin_order_data_migration(){
 					$iteminfo = array_combine($iteminfo_keys, $iteminfo_values);
 
 					global $wpdb;
-					$table_name = $wpdb->prefix.'tf_order_data';
 					$wpdb->query(
 						$wpdb->prepare(
-							"INSERT INTO $table_name
+							"INSERT INTO {$wpdb->prefix}tf_order_data
 						( order_id, post_id, post_type, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
 						VALUES ( %d, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
 							array(

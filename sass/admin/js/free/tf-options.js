@@ -2033,6 +2033,7 @@ var frame, gframe;
                     url: tf_options.ajax_url,
                     data: {
                         action: 'tf_month_reports',
+                        _nonce: tf_admin_params.tf_nonce,
                         month: monthTarget,
                         year: yearTarget,
                     },
@@ -2098,6 +2099,7 @@ var frame, gframe;
                     url: tf_options.ajax_url,
                     data: {
                         action: 'tf_month_reports',
+                        _nonce: tf_admin_params.tf_nonce,
                         month: monthTarget,
                         year: yearTarget,
                     },
@@ -2248,6 +2250,7 @@ var frame, gframe;
             type: 'POST',
             data: {
                 action: "tf_shortcode_type_to_location",
+                _nonce: tf_admin_params.tf_nonce,
                 typeValue: selectedValue,
                 termName: termName
             },
