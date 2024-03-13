@@ -6,22 +6,22 @@
             <div class="tf-wish-and-share">
                 <?php
                 // Wishlist
-                if ( tfopt( 'wl-bt-for' ) && in_array( '2', tfopt( 'wl-bt-for' ) ) ) { 
+                if ( tfopt( 'wl-bt-for' ) && in_array( '2', tfopt( 'wl-bt-for' ) ) ) {
                     if ( is_user_logged_in() ) {
                     if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
                 ?>
                 <a class="tf-icon tf-wishlist-box tf-wishlist">
                     <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( "wishlist-nonce" ) ) ?>" data-id="<?php echo esc_attr( $post_id ) ?>" data-type="<?php echo esc_attr( $post_type ) ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_attr( get_the_title( tfopt( 'wl-page' ) ) ) . '" data-page-url="' . esc_url( get_permalink( tfopt( 'wl-page' ) ) ) . '"'; } ?>></i>
                 </a>
-                <?php } } else{ 
-                if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {    
+                <?php } } else{
+                if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {
                 ?>
                 <a class="tf-icon tf-wishlist-box tf-wishlist">
                     <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( "wishlist-nonce" ) ) ?>" data-id="<?php echo esc_attr( $post_id ) ?>" data-type="<?php echo esc_attr( $post_type ) ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_attr( get_the_title( tfopt( 'wl-page' ) ) ) . '" data-page-url="' . esc_url( get_permalink( tfopt( 'wl-page' ) ) ) . '"'; } ?>></i>
                 </a>
                 <?php } } } ?>
-            
-                
+
+
                 <!-- Share Section -->
                 <?php if ( ! $disable_share_opt == '1' ) { ?>
                 <div class="tf-share tf-off-canvas-share-box">
@@ -74,7 +74,7 @@
                 </div>
                 <?php } ?>
                 <!-- End Share Section -->
-                
+
             </div>
             <div class="tf-hero-bottom-area">
                 <div class="tf-head-title">
@@ -87,7 +87,7 @@
                     <?php } ?>
                 </div>
                 <div class="tf-hero-gallery-videos">
-                    <?php 
+                    <?php
                     if ( ! empty( $gallery_ids ) ) {
                     ?>
                     <div class="tf-hero-hotel tf-popup-buttons">
@@ -113,9 +113,9 @@
 
 <!--Content section end -->
 <div class="tf-content-wrapper tf-single-pb-56">
-    
+
     <div class="tf-container">
-    
+
     <!-- Hotel details Srart -->
     <div class="tf-details" id="tf-apartment-overview">
         <div class="tf-details-left">
@@ -145,7 +145,7 @@
             <!-- menu section End -->
 
 
-            <?php 
+            <?php
             if( !empty(tf_data_types(tfopt( 'tf-template' ))['single-aprtment-layout-part-1']) ){
                 foreach(tf_data_types(tfopt( 'tf-template' ))['single-aprtment-layout-part-1'] as $section){
                     if( !empty($section['aprtment-section-status']) && $section['aprtment-section-status']=="1" && !empty($section['aprtment-section-slug']) ){
@@ -198,7 +198,7 @@
             <div id="hotel-map-location" class="tf-location tf-single-widgets">
                 <h2 class="tf-section-title"><?php esc_html_e("Location", "tourfic"); ?></h2>
                 <?php if ( !defined( 'TF_PRO' ) ) { ?>
-                    <?php 
+                    <?php
                     if( $address && $tf_openstreet_map!="default" && ( empty($address_latitude) || empty($address_longitude) ) ){ ?>
                         <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address ); ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     <?php } elseif( $address && $tf_openstreet_map=="default" && !empty($address_latitude) && !empty($address_longitude)) {
@@ -219,7 +219,7 @@
                         <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address ); ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     <?php } ?>
                 <?php }else{ ?>
-                    <?php 
+                    <?php
                     if( $address && $tf_openstreet_map!="default" && ( empty($address_latitude) || empty($address_longitude) ) ){ ?>
                         <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address ); ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     <?php } elseif( $address && $tf_openstreet_map=="default" && !empty($address_latitude) && !empty($address_longitude)) {
@@ -240,9 +240,9 @@
                         <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address ); ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     <?php } ?>
                 <?php } ?>
-            </div>   
-            
-            
+            </div>
+
+
             <div class="tf-location tf-single-widgets">
                 <?php
                 global $current_user;
@@ -271,7 +271,7 @@
                     </div>
                     <div class="tf-review-data-features">
                         <div class="tf-percent-progress">
-                        <?php 
+                        <?php
                         if ( $tf_overall_rate ) {
                         foreach ( $tf_overall_rate as $key => $value ) {
                         if ( empty( $value ) || ! in_array( $key, $fields ) ) {
@@ -279,7 +279,7 @@
                         }
                         $value = tf_average_ratings( $value );
                         ?>
-                            <div class="tf-progress-item">                                    
+                            <div class="tf-progress-item">
                                 <div class="tf-review-feature-label">
                                     <p class="feature-label"><?php echo esc_html($key); ?></p>
                                     <p class="feature-rating"> <?php echo esc_html( $value ); ?></p>
@@ -289,7 +289,7 @@
                                 </div>
                             </div>
                             <?php } } ?>
-                                   
+
                         </div>
                     </div>
                 </div>
@@ -325,7 +325,7 @@
                 <?php } } } ?>
 
                 <!-- Enquery Section -->
-                <?php 
+                <?php
                 $tf_enquiry_section_status = !empty($meta['enquiry-section']) ? $meta['enquiry-section'] : "";
                 $tf_enquiry_section_icon = !empty($meta['apartment-enquiry-icon']) ? esc_html($meta['apartment-enquiry-icon']) : '';
                 $tf_enquiry_section_title = !empty($meta['enquiry-title']) ? esc_html($meta['enquiry-title']) : '';
@@ -334,7 +334,7 @@
                 if(!empty($tf_enquiry_section_status) && ( !empty($tf_enquiry_section_icon) || !empty($tf_enquiry_section_title) || !empty($enquery_button_text))){
                 ?>
                 <div class="tf-send-inquiry">
-                    <?php 
+                    <?php
                     if (!empty($tf_enquiry_section_icon)) {
                         ?>
                         <i class="<?php echo esc_attr( $tf_enquiry_section_icon ); ?>" aria-hidden="true"></i>
@@ -358,12 +358,12 @@
                     ?>
                 </div>
                 <?php } ?>
-            </div>       
-        </div>        
-    </div>        
+            </div>
+        </div>
+    </div>
     <!-- Hotel details End -->
-    
-    <?php 
+
+    <?php
     if( !empty(tf_data_types(tfopt( 'tf-template' ))['single-aprtment-layout-part-2']) ){
         foreach(tf_data_types(tfopt( 'tf-template' ))['single-aprtment-layout-part-2'] as $section){
             if( !empty($section['aprtment-section-status']) && $section['aprtment-section-status']=="1" && !empty($section['aprtment-section-slug']) ){
@@ -377,36 +377,36 @@
     }
     ?>
 
-    <?php 
+    <?php
     if ( ! empty( $gallery_ids ) ) {
     ?>
-    <!-- Hotel PopUp Starts -->       
+    <!-- Hotel PopUp Starts -->
     <div class="tf-popup-wrapper tf-hotel-popup">
         <div class="tf-popup-inner">
-            
+
             <div class="tf-popup-body">
-                <?php 
+                <?php
                     if ( ! empty( $gallery_ids ) ) {
                     foreach ( $gallery_ids as $key => $gallery_item_id ) {
                     $image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
                 ?>
                 <img src="<?php echo esc_url($image_url); ?>" alt="" class="tf-popup-image">
                 <?php } } ?>
-            </div>                
+            </div>
             <div class="tf-popup-close">
                 <i class="fa-solid fa-xmark"></i>
             </div>
         </div>
     </div>
-    <!-- Hotel PopUp end -->  
+    <!-- Hotel PopUp end -->
     <?php } ?>
 
 
-    <!-- Room PopUp Starts -->        
+    <!-- Room PopUp Starts -->
     <div class="tf-popup-wrapper tf-room-popup">
-        
+
     </div>
-    <!-- Room PopUp end --> 
+    <!-- Room PopUp end -->
 
 
     </div>
@@ -421,8 +421,7 @@ if ( $disable_related_sec !== '1' ) {
         'posts_per_page' => 8,
         'orderby'        => 'title',
         'order'          => 'ASC',
-        'post__not_in'   => array( $post_id ),
-        'tax_query'      => array(
+        'tax_query'      => array( // WPCS: slow query ok.
             array(
                 'taxonomy' => 'apartment_location',
                 'field'    => 'term_id',
@@ -431,30 +430,29 @@ if ( $disable_related_sec !== '1' ) {
         ),
     );
     $related_apartment = new WP_Query( $args );
-    if ( $related_apartment->have_posts() ) {
-        if($related_apartment->found_posts > 0) : ?>
+    if ( $related_apartment->have_posts() ) { ?>
+        <!-- Tourfic related tours tours -->
+        <div class="tf-related-tours">
+            <div class="tf-container">
+                <div class="tf-container-inner">
+                    <div class="section-title">
+                        <h2 class="tf-title"><?php esc_html_e( "You may also like", "tourfic" ); ?></h2>
 
-            <!-- Tourfic related tours tours -->
-            <div class="tf-related-tours">
-                <div class="tf-container">
-                    <div class="tf-container-inner">
-                        <div class="section-title">
-                            <h2 class="tf-title"><?php esc_html_e( "You may also like", "tourfic" ); ?></h2>
-                            
-                        </div>
-                        <div class="tf-design-3-slider-items-wrapper tf-upcomming-tours-list-outter tf-flex tf-flex-gap-24">
-                            <?php
-                            while ( $related_apartment->have_posts() ) {
-                                $related_apartment->the_post();
+                    </div>
+                    <div class="tf-design-3-slider-items-wrapper tf-upcomming-tours-list-outter tf-flex tf-flex-gap-24">
+                        <?php
+                        while ( $related_apartment->have_posts() ) {
+                            $related_apartment->the_post();
 
-                                $selected_design_post_id = get_the_ID();
-                                $destinations           = get_the_terms( $selected_design_post_id, 'apartment_location' );
-                                $first_destination_name = $destinations[0]->name;
-                                $meta                   = get_post_meta( $selected_design_post_id, 'tf_apartment_opt', true );
-                                $apartment_min_price = get_apartment_min_max_price( get_the_ID() );
+                            $selected_design_post_id = get_the_ID();
+                            $destinations           = get_the_terms( $selected_design_post_id, 'apartment_location' );
+                            $first_destination_name = $destinations[0]->name;
+                            $meta                   = get_post_meta( $selected_design_post_id, 'tf_apartment_opt', true );
+                            $apartment_min_price = get_apartment_min_max_price( get_the_ID() );
 
-                                $pricing_type = ! empty( $meta['pricing_type'] ) && "per_person" == $meta['pricing_type'] ? esc_html__("Person", "tourfic") : esc_html__("Night", "tourfic");
-                                ?>
+                            $pricing_type = ! empty( $meta['pricing_type'] ) && "per_person" == $meta['pricing_type'] ? esc_html__("Person", "tourfic") : esc_html__("Night", "tourfic");
+                            if(!in_array(get_the_ID(), array($post_id))){
+                            ?>
                                 <div class="tf-slider-item tf-post-box-lists">
                                     <div class="tf-post-single-box">
                                         <div class="tf-image-data">
@@ -482,11 +480,11 @@ if ( $disable_related_sec !== '1' ) {
                                     </div>
                                 </div>
                             <?php } ?>
-                        </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
-        <?php endif; ?>
+        </div>
     <?php }
     wp_reset_postdata();
     ?>

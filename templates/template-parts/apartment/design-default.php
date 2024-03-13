@@ -637,8 +637,7 @@
 		'posts_per_page' => 8,
 		'orderby'        => 'title',
 		'order'          => 'ASC',
-		'post__not_in'   => array( $post_id ),
-		'tax_query'      => array(
+		'tax_query'      => array( // WPCS: slow query ok.
 			array(
 				'taxonomy' => 'apartment_location',
 				'field'    => 'term_id',
@@ -653,21 +652,25 @@
             <div class="tf-container">
                 <h2 class="section-heading"><?php echo ! empty( $meta['related_apartment_title'] ) ? esc_html( $meta['related_apartment_title'] ) : ''; ?></h2>
                 <div class="tf-related-apartment-slider">
-					<?php while ( $related_apartment->have_posts() ) : $related_apartment->the_post(); ?>
-                        <div class="tf-apartment-item">
-							<?php if ( has_post_thumbnail() ) : ?>
-                                <div class="tf-apartment-item-thumb">
-                                    <a href="<?php the_permalink(); ?>">
-										<?php the_post_thumbnail( 'tourfic-370x250' ); ?>
-                                    </a>
+					<?php while ( $related_apartment->have_posts() ) : $related_apartment->the_post();
+                        if(!in_array(get_the_ID(), array($post_id))):
+                        ?>
+                            <div class="tf-apartment-item">
+                                <?php if ( has_post_thumbnail() ) : ?>
+                                    <div class="tf-apartment-item-thumb">
+                                        <a href="<?php the_permalink(); ?>">
+                                            <?php the_post_thumbnail( 'tourfic-370x250' ); ?>
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
+                                <div class="tf-related-apartment-content">
+                                    <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                                    <span><?php echo get_the_date( 'F j, Y' ); ?></span>
                                 </div>
-							<?php endif; ?>
-                            <div class="tf-related-apartment-content">
-                                <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                                <span><?php echo get_the_date( 'F j, Y' ); ?></span>
                             </div>
-                        </div>
-					<?php endwhile;
+                        <?php
+                        endif;
+                    endwhile;
 					wp_reset_query(); ?>
                 </div>
             </div>
