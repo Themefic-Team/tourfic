@@ -14,11 +14,11 @@ add_action('wp_ajax_nopriv_tf_add_to_wishlists', 'tf_add_to_wishlists');
  */
 function tf_add_to_wishlists()
 {
-    // check nonce
-    $nonce = $_POST['nonce'];
-    if (!wp_verify_nonce($nonce, 'wishlist-nonce')) {
-        die('Whoops!');
-    }
+    // Check nonce security
+	if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'wishlist-nonce' ) ) {
+		die('Whoops!');
+	}
+
     if (isset($_POST)) {
         if (defined('DOING_AJAX') && DOING_AJAX) {
 
@@ -118,11 +118,11 @@ add_action('wp_ajax_nopriv_tf_generate_table', 'tf_generate_table_guest');
  */
 function tf_generate_table_guest()
 {
-    // check nonce
-    $nonce = $_POST['nonce'];
-    if (!wp_verify_nonce($nonce, 'populate-wishlist-guest-nonce')) {
-        die('Whoops!');
-    }
+    // Check nonce security
+	if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'populate-wishlist-guest-nonce' ) ) {
+		die('Whoops!');
+	}
+
     if (isset($_POST)) {
         if (defined('DOING_AJAX') && DOING_AJAX) {
             $ids = $_POST['ids'];

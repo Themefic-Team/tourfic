@@ -3996,6 +3996,10 @@ add_action( 'wp_ajax_tf_tour_search', 'tf_tour_search_ajax_callback' );
 add_action( 'wp_ajax_nopriv_tf_tour_search', 'tf_tour_search_ajax_callback' );
 if ( ! function_exists( 'tf_tour_search_ajax_callback' ) ) {
 	function tf_tour_search_ajax_callback() {
+		// Check nonce security
+		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], 'tf_ajax_nonce' ) ) {
+			return;
+		}
 		$response = [
 			'status'  => 'error',
 			'message' => '',
@@ -4169,6 +4173,10 @@ function tf_tour_type_assign_taxonomies( $post_id, $post, $old_status ) {
 add_action( 'wp_ajax_nopriv_tf_tour_booking_popup', 'tf_tour_booking_popup_callback' );
 add_action( 'wp_ajax_tf_tour_booking_popup', 'tf_tour_booking_popup_callback' );
 function tf_tour_booking_popup_callback() {
+	// Check nonce security
+	if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], 'tf_ajax_nonce' ) ) {
+		return;
+	}
 	$response             = array();
 	$adults               = isset( $_POST['adults'] ) ? intval( sanitize_text_field( $_POST['adults'] ) ) : 0;
 	$children             = isset( $_POST['children'] ) ? intval( sanitize_text_field( $_POST['children'] ) ) : 0;

@@ -185,6 +185,7 @@
                 formData = new FormData(form[0]);
 
             formData.append('action', 'tf_tour_search');
+            formData.append('_nonce', tf_params.nonce);
 
             $.ajax({
                 url: tf_params.ajax_url,

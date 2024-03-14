@@ -1723,6 +1723,7 @@
             var quantities = quantity.join();
             var data = {
                 action: 'tf_tour_booking_popup',
+                _nonce: tf_params.nonce,
                 post_id: post_id,
                 adults: adults,
                 children: children,

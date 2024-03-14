@@ -939,16 +939,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		function tf_setup_wizard_submit_ajax() {
 
 			// Add nonce for security and authentication.
-			$nonce_name   = isset( $_POST['tf_setup_wizard_nonce'] ) ? $_POST['tf_setup_wizard_nonce'] : '';
-			$nonce_action = 'tf_setup_wizard_action';
-
-			// Check if a nonce is set.
-			if ( ! isset( $nonce_name ) ) {
-				return;
-			}
-
-			// Check if a nonce is valid.
-			if ( ! wp_verify_nonce( $nonce_name, $nonce_action ) ) {
+			if ( isset( $_POST['tf_setup_wizard_nonce'] ) && ! wp_verify_nonce( $_POST['tf_setup_wizard_nonce'], 'tf_setup_wizard_action' ) ) {
 				return;
 			}
 
