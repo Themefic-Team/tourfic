@@ -40,7 +40,7 @@
                     tour_extra_quantity.push(qty)
                 } else {
                     tour_extra_quantity.push(1)
-                } 
+                }
             });
             formData.append('tour_extra', tour_extra_total);
             formData.append('tour_extra_quantity', tour_extra_quantity);
@@ -508,10 +508,140 @@
         });
 
         //Template 3 Mobile Booking Btn
-        $('.tf-template-3 .tf-mobile-booking-btn').on('click', function() {
+        $('.tf-template-3 .tf-mobile-booking-btn').on('click', function () {
             $('.tf-bottom-booking-bar').addClass('tf-mobile-booking-form');
             $('.tf-template-3 .tf-mobile-booking-btn').slideUp(300);
         });
+
+        console.log('form data', tf_params.tour_form_data);
+
+        /**
+         * Single tour booking form
+         */
+        const allowed_times = JSON.parse(tf_params.tour_form_data.allowed_times);
+        const custom_avail = tf_params.tour_form_data.custom_avail;
+        if (custom_avail == false && allowed_times.length > 0) {
+            populateTimeSelect(allowed_times)
+        }
+
+        // First Day of Week
+        //const first_day_of_week = tf_params.tour_form_data.flatpickr_locale;
+
+        function populateTimeSelect(times) {
+            let timeSelect = $('select[name="check-in-time"]');
+            let timeSelectDiv = $(".check-in-time-div");
+            timeSelect.empty();
+            if (times.length > 0) {
+                timeSelect.append(`<option value="" selected hidden>${tf_params.tour_form_data.select_time_text}</option>`);
+                $.each(times, function (i, v) {
+                    timeSelect.append(`<option value="${i}">${v}</option>`);
+                });
+                timeSelectDiv.show();
+            } else timeSelectDiv.hide();
+        }
+
+        var tour_date_options = {
+            enableTime: false,
+            dateFormat: "Y/m/d",
+            altInput: true,
+            altFormat: tf_params.tour_form_data.date_format,
+            // locale: {
+            //     firstDayOfWeek: first_day_of_week,
+            // },
+            defaultDate: tf_params.tour_form_data.defaultDate,
+            enable: tf_params.tour_form_data.enable,
+            onReady: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+            },
+
+            onChange: function (selectedDates, dateStr, instance) {
+
+                instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                $(".tours-check-in-out").val(instance.altInput.value);
+                $('.tours-check-in-out[type="hidden"]').val(dateStr.replace(/[a-z]+/g, '-'));
+                if (custom_avail == true) {
+                    let times = allowed_times.filter((v) => {
+                        let date_str = Date.parse(dateStr);
+                        let start_date = Date.parse(v.date.from);
+                        let end_date = Date.parse(v.date.to);
+                        return start_date <= date_str && end_date >= date_str;
+                    });
+                    times = times.length > 0 && times[0].times ? times[0].times : null;
+                    populateTimeSelect(times);
+                }
+
+            },
+
+        };
+
+        if(tf_params.tour_form_data.tour_type == 'continuous'){
+            tour_date_options.minDate = "today";
+            tour_date_options.disableMobile = "true";
+            if (custom_avail == true) {
+                tour_date_options.enable = tf_params.tour_form_data.cont_custom_date.map((v) => {
+                    return {
+                        from: v.date.from,
+                        to: v.date.to
+                    }
+                });
+            }
+            if (custom_avail == false) {
+                if (tf_params.tour_form_data.disabled_day || tf_params.tour_form_data.disable_range || tf_params.tour_form_data.disable_specific || tf_params.tour_form_data.disable_same_day) {
+                    tour_date_options.disable = [];
+                    if (tf_params.tour_form_data.disabled_day) {
+                        tour_date_options.disable.push(function (date) {
+                            return (date.getDay() === 8 || tf_params.tour_form_data.disabled_day.includes(date.getDay()));
+                        });
+                    }
+                    if (tf_params.tour_form_data.disable_range) {
+                        tf_params.tour_form_data.disable_range.forEach((d_item) => {
+                            tour_date_options.disable.push({
+                                from: d_item.date.from,
+                                to: d_item.date.to
+                            });
+                        });
+                    }
+                    if (tf_params.tour_form_data.disable_same_day) {
+                        tour_date_options.disable.push("today");
+                        if (tf_params.tour_form_data.disable_specific) {
+                            tour_date_options.disable.push(tf_params.tour_form_data.disable_specific);
+                        }
+                    }
+                }
+            }
+        }
+
+
+        if(tf_params.tour_form_data.tf_tour_selected_template === 'design-1') {
+            $(".tours-check-in-out").flatpickr(tour_date_options);
+
+            $("select[name='check-in-time']").on("change", function () {
+                var selectedTime = $(this).val();
+                $("select[name='check-in-time']").not(this).val(selectedTime);
+            });
+
+            $(".acr-select input[type='number']").on("change", function () {
+                var inputName = $(this).attr("name");
+                var selectedValue = $(this).val();
+
+                // Update all inputs with the same name
+                $(".acr-select input[type='number'][name='" + inputName + "']").val(selectedValue)
+            });
+        }
+
+        $(document).on('click', "#tour-deposit > div > div.tf_button_group > button", function (e) {
+            e.preventDefault();
+            var form = $(document).find('form.tf_tours_booking');
+            var has_deposit = $(this).data('deposit');
+            if (has_deposit === true) {
+                form.find('input[name="deposit"]').val(1);
+            } else {
+                form.find('input[name="deposit"]').val(0);
+            }
+            form.submit();
+        });
+
     });
 
 })(jQuery, window);
