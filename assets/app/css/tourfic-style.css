@@ -9217,6 +9217,9 @@ div#tf-contact-info {
     flex-grow: 1;
   }
 }
+.tf-bottom-booking-bar .tf-bottom-booking-field.check-in-time-div {
+  display: none;
+}
 .tf-bottom-booking-bar .tf-bottom-booking-field-icon {
   height: 56px;
   width: 56px;
