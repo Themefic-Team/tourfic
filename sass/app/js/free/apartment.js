@@ -238,6 +238,7 @@
             let id = $(this).data("id");
             let data = {
                 action: 'tf_apt_room_details_qv',
+                _nonce: tf_params.nonce,
                 post_id: post_id,
                 id: id
             };
@@ -271,6 +272,7 @@
             let id = $(this).data("id");
             let data = {
                 action: 'tf_apt_room_details_qv',
+                _nonce: tf_params.nonce,
                 post_id: post_id,
                 id: id
             };

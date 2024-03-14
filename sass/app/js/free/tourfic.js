@@ -1846,6 +1846,7 @@
             var uniqid_id = $(this).attr("data-uniqid");
             var data = {
                 action: 'tf_tour_details_qv',
+                _nonce: tf_params.nonce,
                 post_id: post_id,
                 uniqid_id: uniqid_id
             };
@@ -1878,6 +1879,7 @@
             var uniqid_id = $(this).attr("data-uniqid");
             var data = {
                 action: 'tf_tour_details_qv',
+                _nonce: tf_params.nonce,
                 post_id: post_id,
                 uniqid_id: uniqid_id
             };
@@ -2059,6 +2061,7 @@
             var post_type = $(this).attr("data-type");
             var data = {
                 action: 'tf_hotel_archive_popup_qv',
+                _nonce: tf_params.nonce,
                 post_id: post_id,
                 post_type: post_type
             };
