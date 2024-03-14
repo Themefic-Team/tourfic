@@ -927,7 +927,7 @@
         $('.acr-dec, .quanity-acr-dec').on('click', function (e) {
 
             var input = $(this).parent().find('input');
-            var min = input.attr('min');
+            var min = input.attr('min') ? input.attr('min') : 0;
             var step = input.attr('step') ? input.attr('step') : 1;
             if(!input.val()){
                 input.val(0);
