@@ -535,7 +535,7 @@
                 $.each(times, function (i, v) {
                     timeSelect.append(`<option value="${i}">${v}</option>`);
                 });
-                timeSelectDiv.show();
+                timeSelectDiv.css('display', 'flex');
             } else timeSelectDiv.hide();
         }
 
