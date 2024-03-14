@@ -549,8 +549,7 @@
             // locale: {
             //     firstDayOfWeek: first_day_of_week,
             // },
-            defaultDate: tf_params.tour_form_data.defaultDate,
-            enable: tf_params.tour_form_data.enable,
+            
             onReady: function (selectedDates, dateStr, instance) {
                 instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                 instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
@@ -575,6 +574,11 @@
             },
 
         };
+        
+        if(tf_params.tour_form_data.tour_type == 'fixed'){
+            tour_date_options.defaultDate= tf_params.tour_form_data.defaultDate;
+            tour_date_options.enable= tf_params.tour_form_data.enable;
+        }
 
         if(tf_params.tour_form_data.tour_type == 'continuous'){
             tour_date_options.minDate = "today";
@@ -614,8 +618,9 @@
         }
 
 
-        if(tf_params.tour_form_data.tf_tour_selected_template === 'design-1') {
-            $(".tours-check-in-out").flatpickr(tour_date_options);
+        if(tf_params.tour_form_data.tf_tour_selected_template === 'default') {
+
+            $("#check-in-out-date").flatpickr(tour_date_options);
 
             $("select[name='check-in-time']").on("change", function () {
                 var selectedTime = $(this).val();
