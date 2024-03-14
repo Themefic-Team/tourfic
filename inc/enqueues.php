@@ -524,7 +524,7 @@ if ( ! function_exists( 'tf_enqueue_scripts' ) ) {
 			$single_tour_form_data['tf_tour_selected_template'] = $tf_tour_selected_template;
 			$single_tour_form_data['tour_type'] = $tour_type;
 			$single_tour_form_data['allowed_times'] = wp_json_encode( $allowed_times ?? [] );
-			$single_tour_form_data['custom_avail'] = $custom_avail;
+			$single_tour_form_data['custom_avail'] = !empty($custom_avail) ? $custom_avail : false;
 			$single_tour_form_data['cont_custom_date'] = !empty($cont_custom_date) ? $cont_custom_date : '';
 //			$single_tour_form_data['flatpickr_locale'] = tf_flatpickr_locale("root");
 			$single_tour_form_data['select_time_text'] = esc_html__( "Select Time", "tourfic" );

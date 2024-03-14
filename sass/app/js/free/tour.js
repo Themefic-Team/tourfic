@@ -574,7 +574,7 @@
             },
 
         };
-        
+
         if(tf_params.tour_form_data.tour_type == 'fixed'){
             tour_date_options.defaultDate= tf_params.tour_form_data.defaultDate;
             tour_date_options.enable= tf_params.tour_form_data.enable;
