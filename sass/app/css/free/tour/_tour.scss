@@ -201,6 +201,11 @@ div#tf-contact-info {
         margin: auto;
     }
 }
+.tf_tours-template-default{
+    .tf-tour-booking-wrap.tf-tours-fixed .tf_tours_booking{
+        margin: 0 auto !important;
+    }
+}
 .tf-single-tour-pricing {
     width: 200px;
     .tf-price {
