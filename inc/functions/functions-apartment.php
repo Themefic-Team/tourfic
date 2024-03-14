@@ -2593,7 +2593,10 @@ if ( ! function_exists( 'tf_apartment_host_rating' ) ) {
  */
 if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
 	function tf_apartment_room_quick_view() {
-		
+		// Check nonce security
+		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], 'tf_ajax_nonce' ) ) {
+			return;
+		}
 		$meta = get_post_meta( sanitize_text_field( $_POST['post_id'] ), 'tf_apartment_opt', true );
 		// Single Template Style
 		$tf_apartment_layout_conditions = ! empty( $meta['tf_single_apartment_layout_opt'] ) ? $meta['tf_single_apartment_layout_opt'] : 'global';
