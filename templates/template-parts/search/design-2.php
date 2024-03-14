@@ -1,5 +1,9 @@
 <div class="tf-template-3">
 <?php 
+// Check nonce security
+if ( ! isset( $_GET['_nonce'] ) || ! wp_verify_nonce( $_GET['_nonce'], 'tf_ajax_nonce' ) ) {
+	return;
+}
 if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
 	$tf_search_result_banner = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] : '';
 }elseif( !empty($_GET['type']) && $_GET['type']=="tf_hotel" ){
