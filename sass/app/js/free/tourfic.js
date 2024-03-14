@@ -104,6 +104,7 @@
 
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
+            formData.append('_nonce', tf_params.nonce);
             formData.append('type', posttype);
             formData.append('dest', dest);
             formData.append('adults', adults);
@@ -234,6 +235,7 @@
 
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
+            formData.append('_nonce', tf_params.nonce);
             formData.append('type', posttype);
             formData.append('page', page);
             formData.append('dest', dest);

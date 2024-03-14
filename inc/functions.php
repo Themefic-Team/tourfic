@@ -1772,7 +1772,10 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 add_action( 'wp_ajax_nopriv_tf_trigger_filter', 'tf_search_result_ajax_sidebar' );
 add_action( 'wp_ajax_tf_trigger_filter', 'tf_search_result_ajax_sidebar' );
 function tf_search_result_ajax_sidebar() {
-
+	// Check nonce security
+	if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], 'tf_ajax_nonce' ) ) {
+		return;
+	}
 	/**
 	 * Get form data
 	 */
@@ -2677,33 +2680,6 @@ if ( ! function_exists( 'tf_data_types' ) ) {
 		}
 	}
 }
-
-
-# ================================== #
-# Custom Option Fields               #
-# ================================== #
-
-/**
- * Register settings field
- */
-function tf_save_custom_fields() {
-
-	// Tour
-	if ( isset( $_POST['tour_slug'] ) ) {
-		update_option( 'tour_slug', $_POST['tour_slug'] );
-	}
-	// Hotel
-	if ( isset( $_POST['hotel_slug'] ) ) {
-		update_option( 'hotel_slug', $_POST['hotel_slug'] );
-	}
-	// Apartment
-	if ( isset( $_POST['apartment_slug'] ) ) {
-		update_option( 'apartment_slug', $_POST['apartment_slug'] );
-	}
-
-}
-
-add_action( 'admin_init', 'tf_save_custom_fields' );
 
 
 /**

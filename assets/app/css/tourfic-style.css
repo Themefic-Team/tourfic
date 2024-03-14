@@ -4298,6 +4298,10 @@ span.tf-price .amount {
   text-align: left;
 }
 
+#tf-hotel-services.tf-hotel-services-wrap {
+  display: none;
+}
+
 /********************** RESPONSIVE **********************/
 @media only screen and (min-width: 951px) {
   .popupmap-for-mobile {

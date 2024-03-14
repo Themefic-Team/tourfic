@@ -332,7 +332,10 @@ add_action( 'wp_ajax_tf_hotel_airport_service_price', 'tf_hotel_airport_service_
 add_action( 'wp_ajax_nopriv_tf_hotel_airport_service_price', 'tf_hotel_airport_service_callback' );
 
 function tf_hotel_airport_service_callback() {
-
+	// Check nonce security
+	if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], 'tf_ajax_nonce' ) ) {
+		return;
+	}
 	$meta            = get_post_meta( sanitize_key( $_POST['id'] ), 'tf_hotels_opt', true );
 	$airport_service = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 

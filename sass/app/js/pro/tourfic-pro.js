@@ -29,6 +29,7 @@
             var check_out_date = $("input[name=check_out_date]").val();
             var data = {
                 action: 'tf_hotel_airport_service_price',
+                _nonce: tf_params.nonce,
                 service_type: service_type,
                 roomid: roomid,
                 id: hotelid,
