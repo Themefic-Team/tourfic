@@ -6094,6 +6094,10 @@ div#tf-contact-info {
   display: flex;
 }
 
+.check-in-time-div {
+  display: none;
+}
+
 @media only screen and (max-width: 1200px) {
   .tf-tour-booking-wrap {
     width: 95%;

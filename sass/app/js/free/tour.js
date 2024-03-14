@@ -514,8 +514,6 @@
             $('.tf-template-3 .tf-mobile-booking-btn').slideUp(300);
         });
 
-        console.log('form data', tf_params.tour_form_data);
-
         /**
          * Single tour booking form
          */
