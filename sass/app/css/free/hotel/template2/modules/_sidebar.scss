@@ -31,6 +31,7 @@
             i {
                 margin-right: 8px;
                 width: 20px;
+                font-size: 20px;
             }
         }
     }
@@ -64,10 +65,9 @@
 }
 
 .tf-review-data-average {
-    h2{
+    span.avg-review{
         margin-bottom: 0px;
         font-size: 40px !important;
-        font-family: Josefin Sans !important;
         font-weight: 400 !important;
         line-height: 52px !important;
         word-wrap: break-word;
@@ -75,25 +75,26 @@
         @media #{$max1024}{
             font-size: 24px !important;
         }
+        span {
+            color: #595349;
+        }
     }
-}
-
-.tf-review-data-average span {
-    color: #595349;
 }
 
 .tf-review-all-info {
     color: #595349;
     font-size: 20px;
     line-height: 26px;
-}
-
-.tf-review-all-info span {
-    color: #99948D;
-    font-size: 16px;
-    line-height: 20.80px;
-    display: block;
-    margin-top: 6px;
+    p{
+        font-size: 20px !important;
+        span {
+            color: #99948D;
+            font-size: 16px;
+            line-height: 20.80px;
+            display: block;
+            margin-top: 6px;
+        }
+    }
 }
 
 .tf-progress-item {
@@ -105,6 +106,7 @@
 .tf-review-feature-label {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 4px;
 }
 
 .tf-progress-bar {
@@ -205,7 +207,6 @@ button.tf-review-open.button, .tf-reting-field button {
 .tf-review-form-wrapper h3 {
     color: #595349;
     font-size: 20px !important;
-    font-family: Cormorant Garamond;
     font-weight: 700;
     line-height: 24px;
 }
@@ -263,7 +264,6 @@ button.tf-review-open.button, .tf-reting-field button {
                 color: #222;
                 font-size: 16px;
                 border-radius: 0px;
-                font-family: Josefin Sans !important;
             }
             textarea{
                 width: 100% !important;
@@ -322,7 +322,7 @@ span.tf-reting-stars {
     flex-direction: column;
     align-items: center;
     gap: 24px;
-    @media #{$max1366}{
+    @media #{$max1600}{
         padding: 56px 16px;
     }
     @media #{$max1024}{
@@ -336,7 +336,6 @@ span.tf-reting-stars {
     }
     h3{
         color: #595349;
-        font-family: Cormorant Garamond;
         font-size: 32px !important;
         font-style: normal !important;
         font-weight: 700 !important;
@@ -350,7 +349,6 @@ span.tf-reting-stars {
     p{
         color: #99948D;
         text-align: center;
-        font-family: Josefin Sans;
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
@@ -360,24 +358,26 @@ span.tf-reting-stars {
             font-size: 14px !important;
         }
     }
-    .tf-send-inquiry-btn{
-        background: #B58E53;
-        padding: 12px 32px;
-        color: #FDF9F3;
-        font-family: Josefin Sans;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 150%;
-        display: inline-block;
-        text-align: center;
-        transition: .3s all ease;
-        text-decoration: none;
-        &:hover{
-            background-color: #917242;
-        }
-        @media #{$max1024}{
-            font-size: 12px;
+    .tf-btn{
+        width: auto;
+        .tf-send-inquiry-btn{
+            background: #B58E53;
+            padding: 12px 32px;
+            color: #FDF9F3;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 150%;
+            display: inline-block;
+            text-align: center;
+            transition: .3s all ease;
+            text-decoration: none;
+            &:hover{
+                background-color: #917242;
+            }
+            @media #{$max1024}{
+                font-size: 12px;
+            }
         }
     }
 }
@@ -396,6 +396,7 @@ span.tf-reting-stars {
         .tf-section-title {
             margin: 0 !important;
             padding: 0;
+            font-weight: 700 !important;
             @media #{$max1024}{
                 font-size: 20px !important;
             }
@@ -407,13 +408,16 @@ span.tf-reting-stars {
             border: none;
             background: unset;
             color: #595349;
-            font-family: Josefin Sans;
             font-size: 16px;
             font-style: normal;
             font-weight: 700;
             line-height: 150%; /* 24px */
+            transition: .3s all ease;
             @media #{$max1024}{
                 font-size: 12px !important;
+            }
+            &:hover{
+                color: #B58E53;
             }
         }
         button.filter-reset-btn{
@@ -426,7 +430,6 @@ span.tf-reting-stars {
             font-size: 16px;
             font-weight: 600;
             line-height: 1.5;
-            font-family: "Josefin Sans", sans-serif;
             color: #595349;
         }
         label.tf-filter-location {

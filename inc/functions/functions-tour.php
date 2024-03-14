@@ -13,7 +13,11 @@ defined( 'ABSPATH' ) || exit;
  */
 function register_tf_tours_post_type() {
 
-	$tour_slug = ! empty( get_option( 'tour_slug' ) ) ? get_option( 'tour_slug' ) : apply_filters( 'tf_tours_slug', 'tours' );
+	$tf_tour_setting_permalink_slug = ! empty(tfopt( 'tour-permalink-setting' )) ? tfopt( 'tour-permalink-setting' ) : "tours";
+
+	update_option("tour_slug", $tf_tour_setting_permalink_slug);
+	
+	$tour_slug = get_option( 'tour_slug' );
 
 	$tour_labels = apply_filters( 'tf_tours_labels', array(
 		'name'                  => _x( '%2$s', 'tourfic post type name', 'tourfic' ),
@@ -29,7 +33,7 @@ function register_tf_tours_post_type() {
 		'not_found'             => __( 'No %2$s found', 'tourfic' ),
 		'not_found_in_trash'    => __( 'No %2$s found in Trash', 'tourfic' ),
 		'parent_item_colon'     => '',
-		'menu_name'             => _x( 'Tours', 'tourfic post type menu name', 'tourfic' ),
+		'menu_name'             => _x( '%2$s', 'tourfic post type menu name', 'tourfic' ),
 		'featured_image'        => __( '%1$s Image', 'tourfic' ),
 		'set_featured_image'    => __( 'Set %1$s Image', 'tourfic' ),
 		'remove_featured_image' => __( 'Remove %1$s Image', 'tourfic' ),
@@ -70,9 +74,9 @@ if ( tfopt( 'disable-services' ) && in_array( 'tour', tfopt( 'disable-services' 
 	add_action( 'init', 'register_tf_tours_post_type' );
 }
 
-add_filter( 'use_block_editor_for_post_type', function ( $enabled, $post_type ) {
-	return ( 'tf_tours' === $post_type ) ? false : $enabled;
-}, 10, 2 );
+// add_filter( 'use_block_editor_for_post_type', function ( $enabled, $post_type ) {
+// 	return ( 'tf_tours' === $post_type ) ? false : $enabled;
+// }, 10, 2 );
 
 /**
  * Get Default Labels
@@ -447,6 +451,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
         $tour_date_format_for_users = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
 		$disable_child_search  = ! empty( tfopt( 'disable_child_search' ) ) ? tfopt( 'disable_child_search' ) : '';
 		$disable_infant_search = ! empty( tfopt( 'disable_infant_search' ) ) ? tfopt( 'disable_infant_search' ) : '';
+		$tour_location_field_required = ! empty( tfopt( 'tour_location_field_required' ) ) ? tfopt( 'tour_location_field_required' ) : '';
         if( !empty($design) && 2==$design ){
 		?>
 		<form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
@@ -460,7 +465,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 									<path d="M8 13.9317L11.2998 10.6318C13.1223 8.80943 13.1223 5.85464 11.2998 4.0322C9.4774 2.20975 6.52261 2.20975 4.70017 4.0322C2.87772 5.85464 2.87772 8.80943 4.70017 10.6318L8 13.9317ZM8 15.8173L3.75736 11.5747C1.41421 9.2315 1.41421 5.43254 3.75736 3.08939C6.10051 0.746245 9.89947 0.746245 12.2427 3.08939C14.5858 5.43254 14.5858 9.2315 12.2427 11.5747L8 15.8173ZM8 8.66536C8.7364 8.66536 9.33333 8.06843 9.33333 7.33203C9.33333 6.59565 8.7364 5.9987 8 5.9987C7.2636 5.9987 6.66667 6.59565 6.66667 7.33203C6.66667 8.06843 7.2636 8.66536 8 8.66536ZM8 9.9987C6.52724 9.9987 5.33333 8.80476 5.33333 7.33203C5.33333 5.85927 6.52724 4.66536 8 4.66536C9.47273 4.66536 10.6667 5.85927 10.6667 7.33203C10.6667 8.80476 9.47273 9.9987 8 9.9987Z" fill="#FAEEDD"/>
 									</svg>
-									<input type="text" name="place-name" required id="tf-destination" class="" placeholder="<?php _e( 'Enter Destination', 'tourfic' ); ?>" value="">
+									<input type="text" name="place-name" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> id="tf-destination" class="" placeholder="<?php _e( 'Enter Destination', 'tourfic' ); ?>" value="">
 									<input type="hidden" name="place" id="tf-search-tour" class="tf-place-input"/>
 								</div>
 							</label>
@@ -472,12 +477,14 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 								<div class="tf_form_inners">
 									<div class="tf_checkin_dates">
 										<span class="date"><?php echo date('d'); ?></span>
-										<span class="month"><?php echo date('M'); ?></span>
-									</div>
-									<div class="tf_check_arrow">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-										<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
-										</svg>
+										<span class="month">
+											<span><?php echo date('M'); ?></span>
+											<div class="tf_check_arrow">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
+												</svg>
+											</div>
+										</span>
 									</div>
 								</div>
 							</label>
@@ -492,12 +499,14 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 								<div class="tf_form_inners">
 									<div class="tf_checkout_dates">
 										<span class="date"><?php echo date('d'); ?></span>
-										<span class="month"><?php echo date('M'); ?></span>
-									</div>
-									<div class="tf_check_arrow">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-										<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
-										</svg>
+										<span class="month">
+											<span><?php echo date('M'); ?></span>
+											<div class="tf_check_arrow">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
+												</svg>
+											</div>
+										</span>
 									</div>
 								</div>
 							</label>
@@ -526,9 +535,31 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 									<div class="tf_acrselection">
 										<div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
 										<div class="acr-select">
-											<div class="acr-dec">-</div>
-											<input type="tel" class="adults-style2" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>">
-											<div class="acr-inc">+</div>
+											<div class="acr-dec">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13094)">
+													<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13094">
+													<rect width="20" height="20" fill="white"/>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
+											<input type="tel" class="adults-style2" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>" readonly>
+											<div class="acr-inc">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13100)">
+													<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13100">
+													<rect width="20" height="20" fill="white"/>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
 										</div>
 									</div>
 									<?php
@@ -537,9 +568,31 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 										<div class="tf_acrselection">
 											<div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
 											<div class="acr-select">
-												<div class="acr-dec">-</div>
-												<input type="tel" name="children" class="childs-style2" id="children" min="0" value="0">
-												<div class="acr-inc">+</div>
+												<div class="acr-dec">
+													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+													<g clip-path="url(#clip0_3229_13094)">
+														<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+													</g>
+													<defs>
+														<clipPath id="clip0_3229_13094">
+														<rect width="20" height="20" fill="white"/>
+														</clipPath>
+													</defs>
+													</svg>
+												</div>
+												<input type="tel" name="children" class="childs-style2" id="children" min="0" value="0" readonly>
+												<div class="acr-inc">
+													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+													<g clip-path="url(#clip0_3229_13100)">
+														<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+													</g>
+													<defs>
+														<clipPath id="clip0_3229_13100">
+														<rect width="20" height="20" fill="white"/>
+														</clipPath>
+													</defs>
+													</svg>
+												</div>
 											</div>
 										</div>
 									<?php }
@@ -548,9 +601,31 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 										<div class="tf_acrselection">
 											<div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
 											<div class="acr-select">
-												<div class="acr-dec">-</div>
-												<input type="tel" name="infant" class="infant-style2" id="infant" min="0" value="0">
-												<div class="acr-inc">+</div>
+												<div class="acr-dec">
+													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+													<g clip-path="url(#clip0_3229_13094)">
+														<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+													</g>
+													<defs>
+														<clipPath id="clip0_3229_13094">
+														<rect width="20" height="20" fill="white"/>
+														</clipPath>
+													</defs>
+													</svg>
+												</div>
+												<input type="tel" name="infant" class="infant-style2" id="infant" min="0" value="0" readonly>
+												<div class="acr-inc">
+													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+													<g clip-path="url(#clip0_3229_13100)">
+														<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+													</g>
+													<defs>
+														<clipPath id="clip0_3229_13100">
+														<rect width="20" height="20" fill="white"/>
+														</clipPath>
+													</defs>
+													</svg>
+												</div>
 											</div>
 										</div>
 									<?php } ?>
@@ -609,12 +684,12 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 							if(selectedDates[0]){
 								const startDate = selectedDates[0];
 								$(".tf_tour_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
-								$(".tf_tour_check_in_out_date .tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
+								$(".tf_tour_check_in_out_date .tf_checkin_dates span.month span").html(monthNames[startDate.getMonth()]);
 							}
 							if(selectedDates[1]){
 								const endDate = selectedDates[1];
 								$(".tf_tour_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
-								$(".tf_tour_check_in_out_date .tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
+								$(".tf_tour_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
 							}
 						}
 					}
@@ -625,48 +700,50 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 		<?php }else{ ?>
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
             <div class="tf_homepage-booking">
-                <div class="tf_destination-wrap">
-                    <div class="tf_input-inner">
-                        <div class="tf_form-row">
-                            <label class="tf_label-row">
-                                <span class="tf-label"><?php _e( 'Destination', 'tourfic' ); ?>:</span>
-                                <div class="tf_form-inner tf-d-g">
-                                    <i class="fas fa-search"></i>
-                                    <?php if ( empty($advanced) && "enabled"!=$advanced ){ ?>
-                                    <input type="text" name="place-name" required id="tf-destination" class="" placeholder="<?php _e( 'Enter Destination', 'tourfic' ); ?>" value="">
-                                    <input type="hidden" name="place" id="tf-search-tour" class="tf-place-input"/>
-									<?php } 
-									if ( !empty($advanced) && "enabled"==$advanced ){ ?>
-									<input type="text" name="place-name" required id="tf-tour-location-adv" class="tf-tour-preview-place" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>">
-                                    <input type="hidden" name="place" id="tf-tour-place">
-                                    <div class="tf-hotel-results tf-tour-results">
-                                        <ul id="ui-id-2">
-											<?php
-											$tf_tour_destination = get_terms( array(
-												'taxonomy'     => 'tour_destination',
-												'orderby'      => 'title',
-												'order'        => 'ASC',
-												'hide_empty'   => false,
-												'hierarchical' => 0,
-											) );
-											if ( $tf_tour_destination ) {
-												foreach ( $tf_tour_destination as $term ) {
-													if ( ! empty( $term->name ) ) {
-														?>
-                                                        <li data-name="<?php echo $term->name; ?>" data-slug="<?php echo $term->slug; ?>"><i class="fa fa-map-marker"></i><?php echo $term->name; ?></li>
-														<?php
+				<?php if( tfopt( 'hide_tour_location_search' ) != 1 || tfopt( 'required_location_tour_search' ) ): ?>
+					<div class="tf_destination-wrap">
+						<div class="tf_input-inner">
+							<div class="tf_form-row">
+								<label class="tf_label-row">
+									<span class="tf-label"><?php _e( 'Destination', 'tourfic' ); ?>:</span>
+									<div class="tf_form-inner tf-d-g">
+										<i class="fas fa-search"></i>
+										<?php if ( (empty($advanced) || !empty($advanced)) && "enabled"!=$advanced ){ ?>
+										<input type="text" name="place-name" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> id="tf-destination" class="" placeholder="<?php _e( 'Enter Destination', 'tourfic' ); ?>" value="">
+										<input type="hidden" name="place" id="tf-search-tour" class="tf-place-input"/>
+										<?php } 
+										if ( !empty($advanced) && "enabled"==$advanced ){ ?>
+										<input type="text" name="place-name" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> id="tf-tour-location-adv" class="tf-tour-preview-place" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>">
+										<input type="hidden" name="place" id="tf-tour-place">
+										<div class="tf-hotel-results tf-tour-results">
+											<ul id="ui-id-2">
+												<?php
+												$tf_tour_destination = get_terms( array(
+													'taxonomy'     => 'tour_destination',
+													'orderby'      => 'title',
+													'order'        => 'ASC',
+													'hide_empty'   => false,
+													'hierarchical' => 0,
+												) );
+												if ( $tf_tour_destination ) {
+													foreach ( $tf_tour_destination as $term ) {
+														if ( ! empty( $term->name ) ) {
+															?>
+															<li data-name="<?php echo $term->name; ?>" data-slug="<?php echo $term->slug; ?>"><i class="fa fa-map-marker"></i><?php echo $term->name; ?></li>
+															<?php
+														}
 													}
 												}
-											}
-											?>
-                                        </ul>
-                                    </div>
-									<?php } ?>
-								</div>
-                            </label>
-                        </div>
-                    </div>
-                </div>
+												?>
+											</ul>
+										</div>
+										<?php } ?>
+									</div>
+								</label>
+							</div>
+						</div>
+					</div>
+				<?php endif; ?>
 
                 <div class="tf_selectperson-wrap">
                     <div class="tf_input-inner">
@@ -1341,6 +1418,12 @@ function tf_single_tour_booking_form( $post_id ) {
 
                     <!-- Popup Footer Control & Partial Payment -->
                     <div class="tf-booking-pagination">
+						<?php 
+						if(!empty($meta['is_taxable'])){ ?>
+						<div class="tf-tax-notice">
+							<span>"<?php _e("Taxes will be calculated during checkout", "tourfic"); ?>"</span>
+						</div>
+						<?php } ?>
 					    <?php if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] ) && 3!=$tf_booking_by ) {
 						    $tf_deposit_amount =  array (
 								"{amount}" => $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount']. '%'
@@ -1863,7 +1946,7 @@ function tf_single_tour_booking_form( $post_id ) {
             <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
             <div class="tf-booking-person tf-tour-booking-box">
                 <div class="tf-form-title">
-                    <p><?php _e( "Person Info", "tourfic" ); ?></p>
+					<h3 class="tf-person-info-title"><?php _e( "Person Info", "tourfic" ); ?></h3>
                 </div>
 				<?php if ( $custom_avail == true || ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
                     <div class="tf-field-group tf-mt-16 tf_acrselection">
@@ -1877,9 +1960,31 @@ function tf_single_tour_booking_form( $post_id ) {
 								</div>
                             </div>
                             <div class="acr-select">
-                                <div class="acr-dec">-</div>
-                                <input type="tel" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>">
-                                <div class="acr-inc">+</div>
+                                <div class="acr-dec">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13094)">
+										<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13094">
+										<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
+                                <input type="tel" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>" readonly>
+                                <div class="acr-inc">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13100)">
+										<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13100">
+										<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
                             </div>
                         </div>
                     </div>
@@ -1897,9 +2002,31 @@ function tf_single_tour_booking_form( $post_id ) {
 								</div>
                             </div>
                             <div class="acr-select">
-                                <div class="acr-dec">-</div>
-                                <input type="tel" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
-                                <div class="acr-inc">+</div>
+                                <div class="acr-dec">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13094)">
+										<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13094">
+										<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
+                                <input type="tel" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>" readonly>
+                                <div class="acr-inc">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13100)">
+										<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13100">
+										<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
                             </div>
                         </div>
                     </div>
@@ -1916,9 +2043,31 @@ function tf_single_tour_booking_form( $post_id ) {
 								</div>
                             </div>
                             <div class="acr-select">
-                                <div class="acr-dec">-</div>
-                                <input type="tel" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>">
-                                <div class="acr-inc">+</div>
+                                <div class="acr-dec">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13094)">
+										<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13094">
+										<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
+                                <input type="tel" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>" readonly>
+                                <div class="acr-inc">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_3229_13100)">
+										<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_3229_13100">
+										<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+									</svg>
+								</div>
                             </div>
                         </div>
                     </div>
@@ -1988,9 +2137,31 @@ function tf_single_tour_booking_form( $post_id ) {
                                     <div class="tf_acrselection">
                                         <div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
                                         <div class="acr-select">
-                                            <div class="acr-dec">-</div>
-                                            <input type="tel" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>">
-                                            <div class="acr-inc">+</div>
+                                            <div class="acr-dec">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13094)">
+													<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"></rect>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13094">
+													<rect width="20" height="20" fill="white"></rect>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
+                                            <input type="tel" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>" readonly>
+                                            <div class="acr-inc">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13100)">
+													<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"></path>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13100">
+													<rect width="20" height="20" fill="white"></rect>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
                                         </div>
                                     </div>
 				                <?php } ?>
@@ -1998,9 +2169,31 @@ function tf_single_tour_booking_form( $post_id ) {
                                     <div class="tf_acrselection">
                                         <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
                                         <div class="acr-select">
-                                            <div class="acr-dec">-</div>
-                                            <input type="tel" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
-                                            <div class="acr-inc">+</div>
+                                            <div class="acr-dec">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13094)">
+													<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"></rect>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13094">
+													<rect width="20" height="20" fill="white"></rect>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
+                                            <input type="tel" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>" readonly>
+                                            <div class="acr-inc">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13100)">
+													<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"></path>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13100">
+													<rect width="20" height="20" fill="white"></rect>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
                                         </div>
                                     </div>
 				                <?php } ?>
@@ -2008,9 +2201,31 @@ function tf_single_tour_booking_form( $post_id ) {
                                     <div class="tf_acrselection">
                                         <div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
                                         <div class="acr-select">
-                                            <div class="acr-dec">-</div>
-                                            <input type="tel" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>">
-                                            <div class="acr-inc">+</div>
+                                            <div class="acr-dec">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13094)">
+													<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"></rect>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13094">
+													<rect width="20" height="20" fill="white"></rect>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
+                                            <input type="tel" name="infants" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0'; ?>" readonly>
+                                            <div class="acr-inc">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13100)">
+													<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"></path>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13100">
+													<rect width="20" height="20" fill="white"></rect>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
                                         </div>
                                     </div>
 				                <?php } ?>
@@ -2802,11 +3017,13 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 							$tag_background_color = !empty($tag["tour-tag-color-settings"]["background"]) ? $tag["tour-tag-color-settings"]["background"] : "#003162";
 							$tag_font_color = !empty($tag["tour-tag-color-settings"]["font"]) ? $tag["tour-tag-color-settings"]["font"] : "#fff";
 
-							echo <<<EOD
-								<div class="tf-multiple-tag-item" style="color: $tag_font_color; background-color: $tag_background_color ">
-									<span class="tf-multiple-tag">$tour_tag_name</span>
-								</div>
-							EOD;
+							if (!empty($tour_tag_name)) {
+								echo <<<EOD
+									<div class="tf-multiple-tag-item" style="color: $tag_font_color; background-color: $tag_background_color ">
+										<span class="tf-multiple-tag">$tour_tag_name</span>
+									</div>
+								EOD;
+							}
 						}
 					}
 				?>
@@ -2827,7 +3044,15 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
             ?>
             <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
                 <i class="fa-solid fa-location-dot"></i>
-                <p><?php echo $location; ?></p>
+                <p>
+				<?php 
+					if (strlen($location) > 120 ) {
+						echo tourfic_character_limit_callback($location, 120);
+					} else {
+						echo $location;
+					}
+				?>
+				</p>
             </div>
             <?php } ?>
             <div class="tf-title tf-mt-16">
@@ -2913,9 +3138,11 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 						$tag_background_color = !empty($tag["tour-tag-color-settings"]["background"]) ? $tag["tour-tag-color-settings"]["background"] : "#003162";
 						$tag_font_color = !empty($tag["tour-tag-color-settings"]["font"]) ? $tag["tour-tag-color-settings"]["font"] : "#fff";
 
-						echo <<<EOD
-							<span class="tf-multiple-tag" style="color: $tag_font_color; background-color: $tag_background_color ">$tour_tag_name</span>
-						EOD;
+						if (!empty($tour_tag_name)) {
+							echo <<<EOD
+								<span class="tf-multiple-tag" style="color: $tag_font_color; background-color: $tag_background_color ">$tour_tag_name</span>
+							EOD;
+						}
 					}
 				}
 				?>
@@ -2930,7 +3157,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 			<div class="tf-available-room-content-left">
 				<div class="tf-card-heading-info">
 				<div class="tf-section-title-and-location">
-					<h2 class="tf-section-title"><?php echo tourfic_character_limit_callback( get_the_title(), 55 ); ?></h2>
+					<h2 class="tf-section-title"><a href="<?php echo esc_url( get_the_permalink() ); ?>"><?php echo tourfic_character_limit_callback( get_the_title(), 55 ); ?></a></h2>
 					<?php
 					if ( ! empty( $location ) ) {
 					?>
@@ -3112,7 +3339,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 							<?php
 							if ( $location ) {
 								echo '<div class="tf-map-link">';
-								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . $location . '</span>';
+								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . strlen($location) > 75 ? tourfic_character_limit_callback($location, 76) : $location . '</span>';
 								echo '</div>';
 							}
 							?>
@@ -3373,6 +3600,11 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
 	// Set initial tour availability status
 	$has_tour = false;
 
+	$tf_searching_period = [];
+	foreach ( $period as $date ) {
+		$tf_searching_period[$date->format( 'Y/m/d' )] = $date->format( 'Y/m/d' );
+	}
+
 	// Total People
 	$total_people = intval( $adults ) + intval( $child );
 
@@ -3398,36 +3630,33 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
 		if ( $people_counter > 0 ) {
 			$show_fixed_tour = [];
 
-			foreach ( $period as $date ) {
-
-				$show_fixed_tour[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $fixed_availability['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $fixed_availability['to'] ) );
-
+			if (!empty($fixed_availability['from']) && array_key_exists($fixed_availability['from'], $tf_searching_period)) {
+				$show_fixed_tour[] = 1;
 			}
-
 
 			if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
 				if ( ! empty( $meta['adult_price'] ) ) {
 					if ( $startprice <= $meta['adult_price'] && $meta['adult_price'] <= $endprice ) {
-						$has_tour = ! in_array( 0, $show_fixed_tour );
+						$has_tour = !empty($show_fixed_tour) && ! in_array( 0, $show_fixed_tour );
 					}
 				}
 				if ( ! empty( $meta['child_price'] ) ) {
 					if ( $startprice <= $meta['child_price'] && $meta['child_price'] <= $endprice ) {
-						$has_tour = ! in_array( 0, $show_fixed_tour );
+						$has_tour = !empty($show_fixed_tour) && ! in_array( 0, $show_fixed_tour );
 					}
 				}
 				if ( ! empty( $meta['infant_price'] ) ) {
 					if ( $startprice <= $meta['infant_price'] && $meta['infant_price'] <= $endprice ) {
-						$has_tour = ! in_array( 0, $show_fixed_tour );
+						$has_tour = !empty($show_fixed_tour) && ! in_array( 0, $show_fixed_tour );
 					}
 				}
 				if ( ! empty( $meta['group_price'] ) ) {
 					if ( $startprice <= $meta['group_price'] && $meta['group_price'] <= $endprice ) {
-						$has_tour = ! in_array( 0, $show_fixed_tour );
+						$has_tour = !empty($show_fixed_tour) && ! in_array( 0, $show_fixed_tour );
 					}
 				}
 			} else {
-				$has_tour = true;
+				$has_tour = !empty($show_fixed_tour) && ! in_array( 0, $show_fixed_tour );
 			}
 		}
 	}
@@ -3459,10 +3688,11 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
 			if ( $people_counter > 0 ) {
 				foreach ( $custom_dates as $custom_date ) {
 					$show_continuous_tour = [];
-					foreach ( $period as $date ) {
-						$show_continuous_tour[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $custom_date['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $custom_date['to'] ) );
+					if (!empty($custom_date['from']) && array_key_exists($custom_date['from'], $tf_searching_period)) {
+						$show_continuous_tour[] = 1;
 					}
-					if ( ! in_array( 0, $show_continuous_tour ) ) {
+
+					if ( !empty($show_continuous_tour) && ! in_array( 0, $show_continuous_tour ) ) {
 						if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
 							foreach ( $meta['cont_custom_date'] as $single_avail ) {
 								if ( ! empty( $single_avail['adult_price'] ) ) {
@@ -3495,6 +3725,7 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
 			}
 
 		} else {
+			$tf_disable_dates = [];
 			array_key_exists('disable_specific', $meta) ?? $tf_disable_dates = explode( ", ", $meta['disable_specific'] );
 			if ( ! empty( $meta['disable_range'] ) && gettype( $meta['disable_range'] ) == "string" ) {
 				$tf_tour_unserial_disable_date_range = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
@@ -3778,19 +4009,19 @@ if ( ! function_exists( 'tf_tour_search_ajax_callback' ) ) {
 			'message' => '',
 		];
 
-		if ( ! isset( $_POST['place'] ) || empty( $_POST['place'] ) ) {
+		if ( tfopt( 'required_location_tour_search' ) && (! isset( $_POST['place'] ) || empty( $_POST['place'] ) ) ) {
 			$response['message'] = esc_html__( 'Please enter your location', 'tourfic' );
 		} elseif ( tfopt( 'date_tour_search' ) && ( ! isset( $_POST['check-in-out-date'] ) || empty( $_POST['check-in-out-date'] ) ) ) {
 			$response['message'] = esc_html__( 'Please select a date', 'tourfic' );
 		}
 
 		if ( tfopt( 'date_tour_search' ) ) {
-			if ( ! empty( $_POST['place'] ) && ! empty( $_POST['check-in-out-date'] ) ) {
+			if ( ! empty( $_POST['check-in-out-date'] ) ) {
 				$response['query_string'] = str_replace( '&action=tf_tour_search', '', http_build_query( $_POST ) );
 				$response['status']       = 'success';
 			}
 		} else {
-			if ( ! empty( $_POST['place'] ) ) {
+			if ( ! tfopt( 'required_location_tour_search' ) || ! empty( $_POST['place'] ) ) {
 				$response['query_string'] = str_replace( '&action=tf_tour_search', '', http_build_query( $_POST ) );
 				$response['status']       = 'success';
 			}
@@ -4375,10 +4606,10 @@ function tf_tour_booking_popup_callback() {
 
 	if ( $tour_type === 'continuous' && ! empty( $tf_cont_custom_date ) && ! empty( $seasional_price ) ) {
 
-		$group_price    = $seasional_price[0]['group_price'];
-		$adult_price    = $seasional_price[0]['adult_price'];
-		$children_price = $seasional_price[0]['child_price'];
-		$infant_price   = $seasional_price[0]['infant_price'];
+		$group_price    = !empty($seasional_price[0]['group_price']) ? $seasional_price[0]['group_price'] : 0;
+		$adult_price    = !empty($seasional_price[0]['adult_price']) ? $seasional_price[0]['adult_price'] : 0;
+		$children_price = !empty($seasional_price[0]['child_price']) ? $seasional_price[0]['child_price'] : 0;
+		$infant_price   = !empty($seasional_price[0]['infant_price']) ? $seasional_price[0]['infant_price'] : 0;
 
 	} else {
 

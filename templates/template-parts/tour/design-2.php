@@ -11,13 +11,13 @@
                         if ( is_user_logged_in() ) {
                         if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
                     ?>
-                    <a class="tf-icon tf-wishlist-box tf-wishlist">
+                    <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr('actives') : '' ?>">
                         <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
                     </a>
                     <?php } } else{ 
                     if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {    
                     ?>
-                    <a class="tf-icon tf-wishlist-box tf-wishlist">
+                    <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr('actives') : '' ?>">
                         <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
                     </a>
                     <?php } } } ?>
@@ -130,7 +130,7 @@
 
 
     <!--Content section end -->
-    <div class="tf-content-wrapper">
+    <div class="tf-content-wrapper tf-single-pb-56">
 
         <div class="tf-container">
 
@@ -210,9 +210,9 @@
                     <div class="tf-review-data-inner">
                         <div class="tf-review-data">
                             <div class="tf-review-data-average">
-                                <h2><span>
+                                <span class="avg-review"><span>
                                     <?php _e( sprintf( '%.1f', $total_rating ) ); ?>
-                                </span>/<?php echo $tf_settings_base; ?></h2>
+                                </span>/ <?php echo $tf_settings_base; ?></span>
                             </div>
                             <div class="tf-review-all-info">
                                 <p><?php _e("Excellent", "tourfic"); ?> <span><?php _e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></span></p>
@@ -422,27 +422,29 @@
                                                 
                                             </div>
                                             <div class="tf-meta-info">
-                                                <div class="tf-meta-title">
-                                                    <h2><a href="<?php echo get_permalink($selected_design_post_id) ?>">
-                                                    <?php echo tourfic_character_limit_callback(get_the_title($selected_design_post_id), 35); ?>
-                                                    </a></h2>
-                                                    <div class="tf-meta-data-price">
-                                                        <span>
-                                                        <?php if ( $pricing_rule == 'group' ) {
-                                                            echo $tour_price->wc_sale_group ?? $tour_price->wc_group;
-                                                        } else if ( $pricing_rule == 'person' ) {
-                                                            if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
-                                                                echo $tour_price->wc_sale_adult ?? $tour_price->wc_adult;
-                                                            } else if ( ! $disable_child && ! empty( $tour_price->child ) ) {
-                                                                echo $tour_price->wc_sale_child ?? $tour_price->wc_child;
+                                                <div class="meta-content">
+                                                    <div class="tf-meta-title">
+                                                        <h2><a href="<?php echo get_permalink($selected_design_post_id) ?>">
+                                                        <?php echo tourfic_character_limit_callback(get_the_title($selected_design_post_id), 35); ?>
+                                                        </a></h2>
+                                                        <div class="tf-meta-data-price">
+                                                            <span>
+                                                            <?php if ( $pricing_rule == 'group' ) {
+                                                                echo $tour_price->wc_sale_group ?? $tour_price->wc_group;
+                                                            } else if ( $pricing_rule == 'person' ) {
+                                                                if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
+                                                                    echo $tour_price->wc_sale_adult ?? $tour_price->wc_adult;
+                                                                } else if ( ! $disable_child && ! empty( $tour_price->child ) ) {
+                                                                    echo $tour_price->wc_sale_child ?? $tour_price->wc_child;
+                                                                }
                                                             }
-                                                        }
-                                                        ?>
-                                                        </span>
+                                                            ?>
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="tf-meta-location">
-                                                    <i class="fa-solid fa-location-dot"></i> <?php echo $first_destination_name; ?>
+                                                    <div class="tf-meta-location">
+                                                        <i class="fa-solid fa-location-dot"></i> <?php echo $first_destination_name; ?>
+                                                    </div>
                                                 </div>
                                                 <a class="see-details" href="<?php echo get_permalink($selected_design_post_id) ?>">
                                                     <?php _e("See details", "tourfic"); ?>

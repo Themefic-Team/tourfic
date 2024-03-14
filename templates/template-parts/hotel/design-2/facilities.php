@@ -21,14 +21,14 @@ if( !empty($total_facilities_cat) && !empty($meta['hotel-facilities']) ){
             <?php
             $f_icon_single  = ! empty( $total_facilities_cat[$catkey]['hotel_facilities_cat_icon'] ) ? $total_facilities_cat[$catkey]['hotel_facilities_cat_icon'] : '';
             ?>
-            <h4>
+            <span class="single-facilities-title">
             <?php echo !empty($f_icon_single) ? '<i class="' . $f_icon_single . '"></i>' : ''; ?> <?php echo $total_facilities_cat[$catkey]['hotel_facilities_cat_name'] ?? ''; ?>
-            </h4>
+            </span>
             <ul>
                 <?php 
                 foreach( $meta['hotel-facilities'] as $facility ){ 
                 if( $facility['facilities-category'] == $catkey ){
-                $features_details = get_term($facility['facilities-feature']);
+                $features_details = !empty( $facility['facilities-feature'] ) ? get_term( $facility['facilities-feature'] ) : '';
                 if(!empty($features_details->name)){
                 ?>
                 <li>

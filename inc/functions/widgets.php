@@ -1318,7 +1318,7 @@ class Tourfic_Price_Filter extends WP_Widget {
             if( is_post_type_archive('tf_hotel') ){
             ?>
                 <div class="tf-widget-title">
-                    <h4><?php _e("Hotel Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</h4></i>
+                    <span><?php _e("Hotel Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</span>
                 </div>
                 <div class="tf-hotel-result-price-range"></div>
             <?php
@@ -1326,7 +1326,7 @@ class Tourfic_Price_Filter extends WP_Widget {
             if( is_post_type_archive('tf_tours') ){
             ?>
                 <div class="tf-widget-title">
-                    <h4><?php _e("Tour Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</h4></i>
+                    <span><?php _e("Tour Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</span>
                 </div>
                 <div class="tf-tour-result-price-range"></div>
             <?php
@@ -1334,7 +1334,7 @@ class Tourfic_Price_Filter extends WP_Widget {
             if( is_post_type_archive('tf_apartment') ){
             ?>
             <div class="tf-widget-title">
-                <h4><?php _e("Apartment Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</h4></i>
+                <span><?php _e("Apartment Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</span>
             </div>
             <div class="tf-apartment-result-price-range"></div>
             <?php 
@@ -1342,7 +1342,7 @@ class Tourfic_Price_Filter extends WP_Widget {
             if( !is_post_type_archive('tf_hotel') && !is_post_type_archive('tf_tours') && !is_post_type_archive('tf_apartment') && ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) && get_taxonomy(get_queried_object()->taxonomy)->object_type[0]=="tf_hotel" ) ){
                 ?>
                     <div class="tf-widget-title">
-                        <h4><?php _e("Hotel Price Range","tourfic"); ?></h4> (<?php echo get_woocommerce_currency_symbol(); ?>)</i>
+                        <span><?php _e("Hotel Price Range","tourfic"); ?></span> (<?php echo get_woocommerce_currency_symbol(); ?>)
                     </div>
                     <div class="tf-hotel-result-price-range"></div>
                 <?php
@@ -1350,7 +1350,7 @@ class Tourfic_Price_Filter extends WP_Widget {
             if( !is_post_type_archive('tf_hotel') && !is_post_type_archive('tf_tours') && !is_post_type_archive('tf_apartment') && ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) && get_taxonomy(get_queried_object()->taxonomy)->object_type[0]=="tf_tours" ) ){
                 ?>
                     <div class="tf-widget-title">
-                        <h4><?php _e("Tour Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</h4></i>
+                        <span><?php _e("Tour Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</span>
                     </div>
                     <div class="tf-tour-result-price-range"></div>
                 <?php
@@ -1358,7 +1358,7 @@ class Tourfic_Price_Filter extends WP_Widget {
             if( !is_post_type_archive('tf_hotel') && !is_post_type_archive('tf_tours') && !is_post_type_archive('tf_apartment') && ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) && get_taxonomy(get_queried_object()->taxonomy)->object_type[0]=="tf_apartment" ) ){
                 ?>
                     <div class="tf-widget-title">
-                        <h4><?php _e("Apartment Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</h4></i>
+                        <span><?php _e("Apartment Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</span>
                     </div>
                     <div class="tf-apartment-result-price-range"></div>
                 <?php
@@ -1370,21 +1370,21 @@ class Tourfic_Price_Filter extends WP_Widget {
             if( !empty($_GET['type']) && $_GET['type']=="tf_tours" && !empty($_GET['from']) && !empty($_GET['to'] ) ){
             ?>
                 <div class="tf-widget-title">
-                    <h4><?php _e("Tour Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</h4></i>
+                    <span><?php _e("Tour Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</span>
                 </div>
                 <div class="tf-tour-result-price-range"></div>
             <?php }
             if( !empty($_GET['type']) && $_GET['type']=="tf_hotel" && !empty($_GET['from']) && !empty($_GET['to'] ) ){
             ?>
                 <div class="tf-widget-title">
-                    <h4><?php _e("Hotel Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</h4></i>
+                    <span><?php _e("Hotel Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</span>
                 </div>
                 <div class="tf-hotel-result-price-range"></div>
             <?php }
             if( !empty($_GET['type']) && $_GET['type']=="tf_apartment" && !empty($_GET['from']) && !empty($_GET['to'] ) ){
             ?>
                 <div class="tf-widget-title">
-                    <h4><?php _e("Apartment Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</h4></i>
+                    <span><?php _e("Apartment Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</span>
                 </div>
                 <div class="tf-apartment-result-price-range"></div>
 		<?php } } ?>
@@ -1548,22 +1548,13 @@ if ( !empty( $subtitle ) ) {
 function tourfic_sidebar_widgets_init() {
 
     register_sidebar( array(
-        'name'          => __( 'TOURFIC: Single Hotel Sidebar', 'tourfic' ),
-        'id'            => 'tf_single_booking_sidebar',
-        'description'   => __( 'Widgets in this area will be shown on hotel single page', 'tourfic' ),
-        'before_widget' => '<div id="%1$s" class="tf_widget widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<div class="tf-widget-title"><h4>',
-        'after_title'   => '</h4><i class="fa fa-angle-up"></i></div>',
-    ) );
-    register_sidebar( array(
         'name'          => __( 'TOURFIC: Archive Sidebar', 'tourfic' ),
         'id'            => 'tf_archive_booking_sidebar',
         'description'   => __( 'Widgets in this area will be shown on tourfic archive/search page', 'tourfic' ),
         'before_widget' => '<div id="%1$s" class="tf_widget widget %2$s">',
         'after_widget'  => '</div>',
-        'before_title'  => '<div class="tf-widget-title"><h4>',
-        'after_title'   => '</h4><i class="fa fa-angle-up"></i></div>',
+        'before_title'  => '<div class="tf-widget-title"><span>',
+        'after_title'   => '</span><i class="fa fa-angle-up"></i></div>',
     ) );
 
     register_sidebar( array(
@@ -1572,8 +1563,8 @@ function tourfic_sidebar_widgets_init() {
         'description'   => __( 'Widgets in this area will be shown on tourfic search page', 'tourfic' ),
         'before_widget' => '<div id="%1$s" class="tf_widget widget %2$s">',
         'after_widget'  => '</div>',
-        'before_title'  => '<div class="tf-widget-title"><h4>',
-        'after_title'   => '</h4><i class="fa fa-angle-up"></i></div>',
+        'before_title'  => '<div class="tf-widget-title"><span>',
+        'after_title'   => '</span><i class="fa fa-angle-up"></i></div>',
     ) );
 
     // Register Custom Widgets

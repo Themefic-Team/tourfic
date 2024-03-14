@@ -10,13 +10,13 @@
                     if ( is_user_logged_in() ) {
                     if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
                 ?>
-                <a class="tf-icon tf-wishlist-box tf-wishlist">
+                <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr('actives') : '' ?>">
                     <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
                 </a>
                 <?php } } else{ 
                 if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {    
                 ?>
-                <a class="tf-icon tf-wishlist-box tf-wishlist">
+                <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr('actives') : '' ?>">
                     <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
                 </a>
                 <?php } } } ?>
@@ -127,7 +127,7 @@
 
 
 <!--Content section end -->
-<div class="tf-content-wrapper">
+<div class="tf-content-wrapper tf-single-pb-56">
     
     <div class="tf-container">
     
@@ -263,9 +263,9 @@
                 <div class="tf-review-data-inner">
                     <div class="tf-review-data">
                         <div class="tf-review-data-average">
-                            <h2><span>
+                            <span class="avg-review"><span>
                                 <?php _e( sprintf( '%.1f', $total_rating ) ); ?>
-                            </span>/<?php echo $tf_settings_base; ?></h2>
+                            </span>/ <?php echo $tf_settings_base; ?></span>
                         </div>
                         <div class="tf-review-all-info">
                             <p><?php _e("Excellent", "tourfic"); ?> <span><?php _e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></span></p>

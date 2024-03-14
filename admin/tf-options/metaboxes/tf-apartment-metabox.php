@@ -84,6 +84,10 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'title'			=> 'Default',
 							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-apartment.jpg",
 						),
+						'design-1' => array(
+							'title' => 'Design 1',
+							'url'   => TF_ASSETS_ADMIN_URL . "images/template/design1-apartment.jpg",
+						),
 					),
 					'default'   	=> 'default',
 					'dependency'  => [
@@ -400,6 +404,23 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					<strong>{infant} </strong> : To display the infant number from Search.<br>
 					<strong>{checkin} </strong> : To display the Checkin date from Search.<br>
 					<strong>{checkout} </strong> : To display the Checkout date from Search.<br>',
+					'is_pro'  => true
+				),
+				array(
+					'id'        => 'is_taxable',
+					'type'      => 'switch',
+					'label'     => __( 'Taxable', 'tourfic' ),
+					'subtitle' => __( 'Activate this option to enable tax for this Apartment.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'is_pro'  => true
+				),
+				array(
+					'id'      => 'taxable_class',
+					'type'    => 'select',
+					'label'   => __( 'Tax class', 'tourfic' ),
+					'subtitle'  => __( 'Select your class, and tax will calculate based on your chosen class. PS: If you activate partial payment option tax will be calculated upon partial amount as woocommerce regulations.', 'tourfic' ),
+					'options' => tf_taxable_option_callback(),
 					'is_pro'  => true
 				),
 				/*array(

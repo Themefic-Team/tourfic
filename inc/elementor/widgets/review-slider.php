@@ -158,8 +158,7 @@ class TF_Reviews_Slider extends \Elementor\Widget_Base {
 		$count = $settings['count'];
 		$arrows = $settings['arrows'];
 		$arrows == 'yes' ? $arrows = 'true' : $arrows = 'false';
-		$dots = $settings['dots'];
-		$dots == 'yes' ? $dots = 'true' : $dots = 'false';
+		$dots == !empty($settings['dots']) && 'yes'==$settings['dots'] ? esc_attr('true') : esc_attr('false');
 		$autoplay = $settings['autoplay'];
 		$autoplay == 'yes' ? $autoplay = 'true' : $autoplay = 'false';
 		$autoplay_speed = $settings['autoplay_speed'];

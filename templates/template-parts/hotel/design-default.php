@@ -338,7 +338,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                                     } ?>
 
                                     <div class="single-feature-box">
-                                        <?php echo $feature_icon ?? ''; ?>
+                                    <?php echo !empty($feature_meta) && !empty($feature_icon) ? $feature_icon : ''; ?>
                                         <span class="feature-list-title"><?php echo $feature->name; ?></span>
                                     </div>
                                 <?php } ?>

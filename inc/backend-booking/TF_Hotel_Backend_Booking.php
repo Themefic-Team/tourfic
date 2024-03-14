@@ -42,8 +42,9 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 		 * @since 2.9.26
 		 */
 		public function tf_backend_booking_menu() {
+			$tf_hotel_parentmenu = !empty($_GET['page']) && "tf-hotel-backend-booking"==$_GET['page'] ? 'edit.php?post_type=tf_hotel' : '';
 			add_submenu_page(
-				null,
+				$tf_hotel_parentmenu,
 				__( 'Add New Booking', 'tourfic' ),
 				__( 'Add New Booking', 'tourfic' ),
 				'edit_tf_hotels',
@@ -340,7 +341,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 				$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
 					return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
 				}, $rooms );
-				$rooms                = unserialize( $tf_hotel_rooms_value );
+				$rooms  = unserialize( $tf_hotel_rooms_value );
 			}
 
 			$room_array = array();
@@ -620,6 +621,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 						'shipping_postcode'   => $field['tf_customer_zip'],
 						'shipping_country'    => $field['tf_customer_country'],
 						'shipping_phone'      => $field['tf_customer_phone'],
+						'tf_email'      => $field['tf_customer_email'],
 					);
 					$order_details    = [
 						'order_by'             => $field['tf_hotel_booked_by'],
@@ -645,7 +647,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 						'billing_details'  => $billing_details,
 						'shipping_details' => $shipping_details,
 						'order_details'    => $order_details,
-						'payment_method'   => "Booked by " . $field['tf_hotel_booked_by'],
+						'payment_method'   => "offline",
 						'status'           => 'processing',
 						'order_date'       => date( 'Y-m-d H:i:s' ),
 					);

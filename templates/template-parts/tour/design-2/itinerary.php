@@ -15,14 +15,14 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ) {
     ?>
         <div class="tf-single-itinerary">
             <div class="tf-itinerary-title">
-                <h4>
+                <span class="tf-head-title">
                     <span class="tf-itinerary-time">
                         <?php echo esc_html( $itinerary['time'] ) ?>
                     </span>
                     <span class="tf-itinerary-title-text">
                         <?php echo esc_html( $itinerary['title'] ); ?>
                     </span>
-                </h4>
+                </span>
                 <i class="fa-solid fa-chevron-down"></i>
             </div>
             <div class="tf-itinerary-content-wrap" style="display: none;">

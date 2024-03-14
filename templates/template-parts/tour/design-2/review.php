@@ -27,7 +27,7 @@ if ( $comments ) { ?>
                 <?php echo $c_avatar; ?>
             </div>
             <div class="tf-reviews-text">
-                <h3><?php echo $c_rating; ?></h3>
+                <span class="tf-review-rating"><?php echo $c_rating; ?></span>
                 <span class="tf-reviews-meta"><?php echo $c_author_name; ?>, <?php echo date("F Y", strtotime($c_date)); ?></span>
                 <p><?php echo tourfic_character_limit_callback($c_content, 180); ?></p>
             </div>

@@ -10,6 +10,10 @@ add_action( 'wp_ajax_tf_tours_booking', 'tf_tours_booking_function' );
 add_action( 'wp_ajax_nopriv_tf_tours_booking', 'tf_tours_booking_function' );
 function tf_tours_booking_function() {
 
+	if ( ! isset( $_POST['_ajax_nonce'] ) || ! wp_verify_nonce( $_POST['_ajax_nonce'], 'tf_ajax_nonce' ) ) {
+		return;
+	}
+
 	// Declaring errors & tour data array
 	$response      = array();
 	$tf_tours_data = array();
@@ -543,10 +547,10 @@ function tf_tours_booking_function() {
 
 	if ( $tour_type === 'continuous' && ! empty( $tf_cont_custom_date ) && ! empty( $seasional_price ) ) {
 
-		$group_price    = $seasional_price[0]['group_price'];
-		$adult_price    = $seasional_price[0]['adult_price'];
-		$children_price = $seasional_price[0]['child_price'];
-		$infant_price   = $seasional_price[0]['infant_price'];
+		$group_price    = !empty($seasional_price[0]['group_price']) ? $seasional_price[0]['group_price'] : 0;
+		$adult_price    = !empty($seasional_price[0]['adult_price']) ? $seasional_price[0]['adult_price'] : 0;
+		$children_price = !empty($seasional_price[0]['child_price']) ? $seasional_price[0]['child_price'] : 0;
+		$infant_price   = !empty($seasional_price[0]['infant_price']) ? $seasional_price[0]['infant_price'] : 0;
 
 	} else {
 
@@ -725,7 +729,7 @@ function tf_tours_booking_function() {
 			'child'       => $children,
 			'infants'     => $infant,
 			'total_price' => $without_payment_price,
-			'due_price'   => $without_payment_price,
+			'due_price'   => wc_price($without_payment_price),
 			'visitor_details' => json_encode($tf_visitor_details)
 		];
 
@@ -1049,6 +1053,44 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 
 		if("tour"==$order_type){
 			$post_id   = $item->get_meta( '_tour_id', true ); // Tour id
+
+			//Tax Calculation
+			$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+			$tax_labels = array();
+			if(!empty($meta['is_taxable'])){
+				$single_price = $item->get_subtotal();
+				$finding_location = array(
+					'country' => !empty($order->get_billing_country()) ? $order->get_billing_country() : '',
+					'state' => !empty($order->get_billing_state()) ? $order->get_billing_state() : '',
+					'postcode' => !empty($order->get_billing_postcode()) ? $order->get_billing_postcode() : '',
+					'city' => !empty($order->get_billing_city()) ? $order->get_billing_city() : '',
+					'tax_class' => !empty($meta['taxable_class']) && "standard"!=$meta['taxable_class'] ? $meta['taxable_class'] : ''
+				);
+	
+				$tax_rate = WC_Tax::find_rates( $finding_location );
+				if(!empty($tax_rate)){
+					foreach($tax_rate as $rate){
+						$tf_vat =  (float)$single_price * $rate['rate'] / 100;
+						$tax_labels [] = array(
+							'label' => $rate['label'],
+							'price' => $tf_vat
+						);
+					}
+					
+				}
+			}
+		
+			$fee_sums = array();
+			// Sum the prices for each label
+			foreach ( $tax_labels as $fee ) {
+				$label = $fee["label"];
+				$price = $fee["price"];
+				if ( isset( $fee_sums[ $label ] ) ) {
+					$fee_sums[ $label ] += $price;
+				} else {
+					$fee_sums[ $label ] = $price;
+				}
+			}
 			
 			//Order Data Insert 
 			$billinginfo = [
@@ -1094,7 +1136,12 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 			$visitor_details = $item->get_meta( '_visitor_details', true );
 			
 			if ( $tour_date ) {
-				list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
+				if (str_contains($tour_date, " - ")) {
+					list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
+				} else {
+					$tour_in = $tour_date;
+					$tour_out = '';
+				}
 			}
 
 			$iteminfo = [
@@ -1107,7 +1154,8 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 				'total_price' => $price,
 				'due_price' => $due,
 				'unique_id' => $tour_ides,
-				'visitor_details' => $visitor_details
+				'visitor_details' => $visitor_details,
+				'tax_info' => json_encode($fee_sums)
 			];
 
 			$tf_integration_order_data[] = [
@@ -1175,6 +1223,192 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 
 add_action( 'woocommerce_checkout_order_processed', 'tf_add_order_tour_details_checkout_order_processed', 10, 4 );
 
+/**
+ * Add order id to the tour meta field
+ * runs during WooCommerce checkout process for block checkout
+ * @param $order
+ * @return void
+ * @since 2.11.10
+ * @author Foysal
+ */
+function tf_add_order_tour_details_checkout_order_processed_block_checkout( $order ) {
+
+	$order_id = $order->get_id();
+
+	$tf_integration_order_data = array(
+		'order_id' => $order_id,
+	);
+	$tf_integration_order_status = [];
+	# Get and Loop Over Order Line Items
+	foreach ( $order->get_items() as $item_id => $item ) {
+
+		$order_type = $item->get_meta( '_order_type', true );
+
+		if("tour"==$order_type){
+			$post_id   = $item->get_meta( '_tour_id', true ); // Tour id
+
+			//Tax Calculation
+			$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+			$tax_labels = array();
+			if(!empty($meta['is_taxable'])){
+				$single_price = $item->get_subtotal();
+				$finding_location = array(
+					'country' => !empty($order->get_billing_country()) ? $order->get_billing_country() : '',
+					'state' => !empty($order->get_billing_state()) ? $order->get_billing_state() : '',
+					'postcode' => !empty($order->get_billing_postcode()) ? $order->get_billing_postcode() : '',
+					'city' => !empty($order->get_billing_city()) ? $order->get_billing_city() : '',
+					'tax_class' => !empty($meta['taxable_class']) && "standard"!=$meta['taxable_class'] ? $meta['taxable_class'] : ''
+				);
+	
+				$tax_rate = WC_Tax::find_rates( $finding_location );
+				if(!empty($tax_rate)){
+					foreach($tax_rate as $rate){
+						$tf_vat =  (float)$single_price * $rate['rate'] / 100;
+						$tax_labels [] = array(
+							'label' => $rate['label'],
+							'price' => $tf_vat
+						);
+					}
+					
+				}
+			}
+		
+			$fee_sums = array();
+			// Sum the prices for each label
+			foreach ( $tax_labels as $fee ) {
+				$label = $fee["label"];
+				$price = $fee["price"];
+				if ( isset( $fee_sums[ $label ] ) ) {
+					$fee_sums[ $label ] += $price;
+				} else {
+					$fee_sums[ $label ] = $price;
+				}
+			}
+
+			//Order Data Insert
+			$billinginfo = [
+				'billing_first_name' => $order->get_billing_first_name(),
+				'billing_last_name' => $order->get_billing_last_name(),
+				'billing_company' => $order->get_billing_company(),
+				'billing_address_1' => $order->get_billing_address_1(),
+				'billing_address_2' => $order->get_billing_address_2(),
+				'billing_city' => $order->get_billing_city(),
+				'billing_state' => $order->get_billing_state(),
+				'billing_postcode' => $order->get_billing_postcode(),
+				'billing_country' => $order->get_billing_country(),
+				'billing_email' => $order->get_billing_email(),
+				'billing_phone' => $order->get_billing_phone()
+			];
+
+			$shippinginfo = [
+				'shipping_first_name' => $order->get_shipping_first_name(),
+				'shipping_last_name' => $order->get_shipping_last_name(),
+				'shipping_company' => $order->get_shipping_company(),
+				'shipping_address_1' => $order->get_shipping_address_1(),
+				'shipping_address_2' => $order->get_shipping_address_2(),
+				'shipping_city' => $order->get_shipping_city(),
+				'shipping_state' => $order->get_shipping_state(),
+				'shipping_postcode' => $order->get_shipping_postcode(),
+				'shipping_country' => $order->get_shipping_country(),
+				'shipping_phone' => $order->get_shipping_phone()
+			];
+
+			// Tour Unique ID Store to Option
+			$tour_ides = $item->get_meta( '_tour_unique_id', true );
+			update_option( $tour_ides, $order_id);
+			update_option( 'tf_order_uni_'.$order_id, $tour_ides);
+			update_option( 'tf_order_tour_'.$tour_ides, $post_id);
+			$tour_date = $item->get_meta( 'Tour Date', true );
+			$tour_time = $item->get_meta( 'Tour Time', true );
+			$price = $item->get_subtotal();
+			$due = $item->get_meta( 'Due', true );
+			$tour_extra = $item->get_meta( 'Tour Extra', true );
+			$adult = $item->get_meta( 'Adults', true );
+			$child = $item->get_meta( 'Children', true );
+			$infants = $item->get_meta( 'Infants', true );
+			$visitor_details = $item->get_meta( '_visitor_details', true );
+
+			if ( $tour_date ) {
+				list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
+			}
+
+			$iteminfo = [
+				'tour_date' => $tour_date,
+				'tour_time' => $tour_time,
+				'tour_extra' => $tour_extra,
+				'adult' => $adult,
+				'child' => $child,
+				'infants' => $infants,
+				'total_price' => $price,
+				'due_price' => $due,
+				'unique_id' => $tour_ides,
+				'visitor_details' => $visitor_details,
+				'tax_info' => json_encode($fee_sums)
+			];
+
+			$tf_integration_order_data[] = [
+				'tour_date' => $tour_date,
+				'tour_time' => $tour_time,
+				'tour_extra' => $tour_extra,
+				'adult' => $adult,
+				'child' => $child,
+				'infants' => $infants,
+				'total_price' => $price,
+				'due_price' => $due,
+			];
+
+			$tf_integration_order_status = [
+				'customer_id' => $order->get_customer_id(),
+				'payment_method' => $order->get_payment_method(),
+				'order_status' => $order->get_status(),
+				'order_date' => date('Y-m-d H:i:s')
+			];
+
+			$iteminfo_keys = array_keys($iteminfo);
+			$iteminfo_keys = array_map('sanitize_key', $iteminfo_keys);
+
+			$iteminfo_values = array_values($iteminfo);
+			$iteminfo_values = array_map('sanitize_text_field', $iteminfo_values);
+
+			$iteminfo = array_combine($iteminfo_keys, $iteminfo_values);
+
+			global $wpdb;
+			$table_name = $wpdb->prefix.'tf_order_data';
+			$wpdb->query(
+				$wpdb->prepare(
+					"INSERT INTO $table_name
+				( order_id, post_id, post_type, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
+				VALUES ( %d, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
+					array(
+						$order_id,
+						sanitize_key( $post_id ),
+						$order_type,
+						$tour_in,
+						$tour_out,
+						json_encode($billinginfo),
+						json_encode($shippinginfo),
+						json_encode($iteminfo),
+						$order->get_customer_id(),
+						$order->get_payment_method(),
+						$order->get_status(),
+						date('Y-m-d H:i:s')
+					)
+				)
+			);
+		}
+	}
+
+	/**
+	 * New Order Pabbly Integration
+	 * @author Jahid
+	 */
+
+	if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($tf_integration_order_status) ) {
+		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status);
+		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status);
+	}
+}
+add_action('woocommerce_store_api_checkout_order_processed', 'tf_add_order_tour_details_checkout_order_processed_block_checkout');
 
 
 /*

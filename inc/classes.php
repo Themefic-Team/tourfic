@@ -70,4 +70,10 @@ if(is_admin()){
 	} else {
 		tf_file_missing(TF_INC_PATH . 'backend-booking/TF_Tour_Backend_Booking.php');
 	}
+	
+	if ( file_exists( TF_INC_PATH . 'backend-booking/TF_Apartment_Backend_Booking.php' ) ) {
+		require_once TF_INC_PATH . 'backend-booking/TF_Apartment_Backend_Booking.php';
+	} else {
+		tf_file_missing(TF_INC_PATH . 'backend-booking/TF_Apartment_Backend_Booking.php');
+	}
 }

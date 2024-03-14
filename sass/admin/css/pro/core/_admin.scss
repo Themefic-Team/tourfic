@@ -107,6 +107,19 @@ a.tf-export-btn {
     form {
       overflow: hidden;
     }
+    .tf-admin-btn{
+      background-color: #003c79;
+      border-color: #003c79;
+      color: #fff;
+      font-weight: 600;
+      border: 1px solid #003c79;
+      padding: 10px 25px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+      display: inline-block;
+      text-decoration: none;
+    }
 }
 
 ol.tf-progress-steps {

@@ -249,6 +249,10 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                                 $tour_price[] = $meta['group_price'];
                                                             }
                                                         }
+                                                    } else {
+                                                        if(!empty($meta['group_price'])){
+                                                            $tour_price[] = $meta['group_price'];
+                                                        }
                                                     }
 
                                                 }
@@ -303,6 +307,25 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                                 if(!empty($meta['child_price']) && !$disable_adult){
                                                                     $tour_price[] = $meta['child_price'];
                                                                 }
+                                                            }
+                                                        }
+                                                    } else {
+                                                        if($tour_single_price_settings == 'all') {
+                                                            if(!empty($meta['adult_price']) && !$disable_adult){
+                                                                $tour_price[] = $meta['adult_price'];
+                                                            }
+                                                            if(!empty($meta['child_price']) && !$disable_child){
+                                                                $tour_price[] = $meta['child_price'];
+                                                            }
+                                                        }
+                                                        if($tour_single_price_settings == "adult") {
+                                                            if(!empty($meta['adult_price']) && !$disable_adult){
+                                                                $tour_price[] = $meta['adult_price'];
+                                                            }
+                                                        }
+                                                        if($tour_single_price_settings == "child") {
+                                                            if(!empty($meta['child_price']) && !$disable_adult){
+                                                                $tour_price[] = $meta['child_price'];
                                                             }
                                                         }
                                                     }
@@ -473,7 +496,11 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 																		$tour_price[] = $meta['group_price'];
 																	}
 																}
-															}
+															} else {
+                                                                if ( ! empty( $meta['group_price'] ) ) {
+                                                                    $tour_price[] = $meta['group_price'];
+                                                                }
+                                                            }
 
 														}
 														if ( $tf_pricing_rule && $tf_pricing_rule == 'person' ) {
@@ -511,7 +538,17 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 																		$tour_price[] = $meta['infant_price'];
 																	}
 																}
-															}
+															} else {
+                                                                if ( ! empty( $meta['adult_price'] ) && ! $disable_adult ) {
+                                                                    $tour_price[] = $meta['adult_price'];
+                                                                }
+                                                                if ( ! empty( $meta['child_price'] ) && ! $disable_child ) {
+                                                                    $tour_price[] = $meta['child_price'];
+                                                                }
+                                                                if ( ! empty( $meta['infant_price'] ) && ! $disable_infant ) {
+                                                                    $tour_price[] = $meta['infant_price'];
+                                                                }
+                                                            }
 														}
 														?>
                                                         <p><span><?php _e( "From", "tourfic" ); ?></span>
@@ -584,7 +621,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 			//show related tour based on selected tours
 			$selected_ids = !empty(tfopt( 'tf-related-tours' )) ? tfopt( 'tf-related-tours' ) : array();
 
-			if ( $related_tour_type == 'selected' && defined( 'TF_PRO' ) ) {
+			if ( $related_tour_type == 'selected') {
                 if(in_array($post_id, $selected_ids)) {
                     $index = array_search($post_id, $selected_ids);
 

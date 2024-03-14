@@ -835,7 +835,23 @@
 
             });
         });
+
+        // Itinerary Map Popup Slider Arrow Hide and Show
+
+        $(document).on("mouseenter", '#itn-infowindow', function(e) {
+            if($(".itinerary-map-popup-img").length > 1 ) {
+                $(e.currentTarget).find(".itinerary-map-popup-img-icons").removeClass("popup-arrow-active")
+
+            } else {
+                $(e.currentTarget).find(".itinerary-map-popup-img-icons").addClass("popup-arrow-active")
+            }
+        }) 
+        $(document).on("mouseleave", '#itn-infowindow', function(e) {
+            
+            $(".itinerary-map-popup-img-icons").addClass("popup-arrow-active")
+        })
     });
+
 })(jQuery);
 
 // QR Code Scan Function
