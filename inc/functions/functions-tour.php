@@ -1802,7 +1802,7 @@ function tf_single_tour_booking_form( $post_id ) {
 								<?php esc_html_e( 'Adults', 'tourfic' ); ?>
 								<div class="acr-adult-price">
 									<?php if( $pricing_rule == 'person' && !empty($tour_price->wc_sale_adult) && !empty($tour_price->wc_adult) ){
-										echo esc_html($tour_price->wc_sale_adult) ?? esc_html($tour_price->wc_adult);
+										echo wp_kses_post($tour_price->wc_sale_adult) ?? wp_kses_post($tour_price->wc_adult);
 									} ?>
 								</div>
                             </div>
@@ -1844,7 +1844,7 @@ function tf_single_tour_booking_form( $post_id ) {
 								<?php esc_html_e( 'Children', 'tourfic' ); ?>
 								<div class="acr-child-price">
 									<?php if( $pricing_rule == 'person' && !empty($tour_price->wc_sale_child) && !empty($tour_price->wc_child) ){
-										echo esc_html($tour_price->wc_sale_child) ?? esc_html($tour_price->wc_child);
+										echo wp_kses_post($tour_price->wc_sale_child) ?? wp_kses_post($tour_price->wc_child);
 									} ?>
 								</div>
                             </div>
@@ -1885,7 +1885,7 @@ function tf_single_tour_booking_form( $post_id ) {
 								<?php esc_html_e( 'Infant', 'tourfic' ); ?>
 								<div class="acr-infant-price">
 									<?php if( $pricing_rule == 'person' && !empty($tour_price->wc_sale_infant) && !empty($tour_price->wc_infant) ){
-										echo esc_html($tour_price->wc_sale_infant) ?? esc_html($tour_price->wc_infant);
+										echo wp_kses_post($tour_price->wc_sale_infant) ?? wp_kses_post($tour_price->wc_infant);
 									} ?>
 								</div>
                             </div>

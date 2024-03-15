@@ -95,13 +95,20 @@
                                     <td><?php echo esc_html($tf_tour_details->check_out); ?></td>
                                 </tr>
                                 <?php } ?>
-                                <?php if ( !empty($tf_tour_details->room) ) { ?>
+                                <?php if ( !empty($tf_tour_details->room_name) ) { ?>
                                 <tr>
-                                    <th><?php esc_html_e("Room", "tourfic"); ?></th>
+                                    <th><?php esc_html_e("Room Name", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo esc_html($tf_tour_details->room); ?></td>
+                                    <td><?php echo esc_html(ucfirst($tf_tour_details->room_name)); ?></td>
                                 </tr>
                                 <?php } ?>
+	                            <?php if ( !empty($tf_tour_details->room) ) { ?>
+                                    <tr>
+                                        <th><?php esc_html_e("Room", "tourfic"); ?></th>
+                                        <td>:</td>
+                                        <td><?php echo esc_html($tf_tour_details->room); ?></td>
+                                    </tr>
+	                            <?php } ?>
                                 <?php 
                                 $book_adult  = !empty( $tf_tour_details->adult ) ? $tf_tour_details->adult : '';
                                 if(!empty($book_adult)){
