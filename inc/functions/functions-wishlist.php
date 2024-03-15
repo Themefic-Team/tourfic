@@ -156,16 +156,16 @@ add_action('wp_ajax_tf_remove_wishlist', 'tf_remove_wishlist');
  */
 function tf_remove_wishlist()
 {
-    // check nonce
-    $nonce = $_GET['nonce'];
-    if (!wp_verify_nonce($nonce, 'wishlist-nonce')) {
-        die('Whoops!');
-    }
+    // Check nonce security
+	if ( ! isset( $_GET['nonce'] ) || ! wp_verify_nonce( $_GET['nonce'], 'wishlist-nonce' ) ) {
+		die('Whoops!');
+	}
+
     if (isset($_GET)) {
         if (defined('DOING_AJAX') && DOING_AJAX) {
             global $wpdb;
-            $id = $_GET['id'];
-            $type = $_GET['type'];
+            $id = esc_attr($_GET['id']);
+            $type = esc_attr($_GET['type']);
             $user_id = get_current_user_id();
             $previous_wishlist_item = get_user_meta($user_id, 'wishlist_item', false);
             // search recursively through records returned from get_user_meta for the record you want to replace, as identified by `post_id` - credit: http://php.net/manual/en/function.array-search.php#116635

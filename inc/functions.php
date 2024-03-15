@@ -488,7 +488,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 	}
 
 	// Get post type
-	$post_type             = $_GET['type'] ?? '';
+	$post_type             = esc_attr($_GET['type']) ?? '';
 	$place_title           = '';
 	$date_format_for_users = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 	$hotel_location_field_required = !empty( tfopt( "required_location_hotel_search" )) ? tfopt( "required_location_hotel_search" ) : 0;
@@ -504,22 +504,22 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 		$place_placeholder = ( $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ) ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Enter Destination', 'tourfic' );
 
 		$place_key   = 'place';
-		$place_value = $_GET[ $place_key ] ?? '';
-		$place_title = ! empty( $_GET['place-name'] ) ? $_GET['place-name'] : '';
+		$place_value = !empty($_GET[ $place_key ]) ? esc_attr($_GET[ $place_key ]) : '';
+		$place_title = ! empty( $_GET['place-name'] ) ? esc_attr($_GET['place-name']) : '';
 
 		$taxonomy = $post_type == 'tf_hotel' ? 'hotel_location' : ( $post_type == 'tf_tour' ? 'tour_destination' : 'apartment_location' );
 		// $place_name = ! empty( $place_value ) ? get_term_by( 'slug', $place_value, $taxonomy )->name : '';
 		$place_name = ! empty( $place_value ) ? esc_attr( $place_value ) : '';
 
-		$room = $_GET['room'] ?? 0;
+		$room = !empty($_GET['room']) ? esc_attr($_GET['room']) : 0;
 	}
 
-	$adult      = $_GET['adults'] ?? 0;
-	$children   = $_GET['children'] ?? 0;
-	$infant     = $_GET['infant'] ?? 0;
-	$date       = $_GET['check-in-out-date'] ?? '';
-	$startprice = $_GET['from'] ?? '';
-	$endprice   = $_GET['to'] ?? '';
+	$adult      = !empty($_GET['adults']) ? esc_attr($_GET['adults']) : 0;
+	$children   = !empty($_GET['children']) ? esc_attr($_GET['children']) : 0;
+	$infant     = !empty($_GET['infant']) ? esc_attr($_GET['infant']) : 0;
+	$date       = !empty($_GET['check-in-out-date']) ? esc_attr($_GET['check-in-out-date']) : '';
+	$startprice = !empty($_GET['from']) ? esc_attr($_GET['from']) : '';
+	$endprice   = !empty($_GET['to']) ? esc_attr($_GET['to']) : '';
 
 	$tf_tour_arc_selected_template  = ! empty( tf_data_types( tfopt( 'tf-template' ) )['tour-archive'] ) ? tf_data_types( tfopt( 'tf-template' ) )['tour-archive'] : 'design-1';
 	$tf_hotel_arc_selected_template = ! empty( tf_data_types( tfopt( 'tf-template' ) )['hotel-archive'] ) ? tf_data_types( tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
@@ -606,7 +606,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 
                 <div class="tf-booking-bttns tf-mt-30">
 					<?php
-					$ptype = $_GET['type'] ?? get_post_type();
+					$ptype = esc_attr($_GET['type']) ?? get_post_type();
 					?>
                     <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                     <button class="tf-btn-normal btn-primary tf-submit"
@@ -859,7 +859,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 		</div>
 		<div class="tf-booking-form-submit">
 			<?php
-			$ptype = $_GET['type'] ?? get_post_type();
+			$ptype = esc_attr($_GET['type']) ?? get_post_type();
 			?>
 			<input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
             <button class="tf-btn-normal btn-primary tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
@@ -1113,7 +1113,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                     <input type="hidden" id="tf_author" value="<?php echo esc_html( $_GET['tf-author'] ); ?>">
 				<?php } ?>
 				<?php
-				$ptype = $_GET['type'] ?? get_post_type();
+				$ptype = esc_attr($_GET['type']) ?? get_post_type();
 				?>
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                 <button class="tf_button tf-submit btn-styled"

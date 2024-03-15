@@ -960,7 +960,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 			<?php endif; ?>
 
             <div class="tf_form-row">
-				<?php $ptype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type(); ?>
+				<?php $ptype = isset( $_GET['type'] ) ? esc_attr($_GET['type']) : get_post_type(); ?>
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                 <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
 
@@ -1127,7 +1127,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 			<?php endif; ?>
 
             <div class="tf_form-row">
-				<?php $ptype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type(); ?>
+				<?php $ptype = isset( $_GET['type'] ) ? esc_attr($_GET['type']) : get_post_type(); ?>
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype); ?>" class="tf-post-type"/>
                 <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
 
