@@ -19,8 +19,8 @@ if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
                 <div class="tf-head-title">
                     <h1><?php echo !empty($_GET['place-name']) ? esc_html( $_GET['place-name'] ) : '' ?></h1>
                     <?php if( !empty($_GET['type']) && "tf_tours"==$_GET['type'] ){ 
-                    $tf_adults = !empty($_GET['adults']) ? $_GET['adults'] : 0;
-                    $tf_children = !empty($_GET['children']) ? $_GET['children'] : 0;
+                    $tf_adults = !empty($_GET['adults']) ? absint( sanitize_key($_GET['adults']) ) : 0;
+                    $tf_children = !empty($_GET['children']) ? absint( sanitize_key($_GET['children']) ) : 0;
                     ?>
                         <div class="tf-title-meta">
                             <p>( <?php echo esc_html( $tf_adults + $tf_children ); ?> <?php esc_html_e("Guest", "tourfic"); ?>, <?php echo !empty($_GET['check-in-out-date']) ? esc_html( $_GET['check-in-out-date'] ) : '' ?> )</p>
