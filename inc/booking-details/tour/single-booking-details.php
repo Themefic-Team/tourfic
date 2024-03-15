@@ -316,7 +316,7 @@
                         $tf_qr_download_link = !empty($tf_tour_details->unique_id) ? $tf_tour_details->unique_id : '';
                         if(!empty($tf_qr_download_link)){
                         ?>
-                        <a href="<?php echo !empty($tf_qr_download_link) ? esc_url(site_url().'?qr_id='.esc_atttr($tf_qr_download_link)) : '#'; ?>" target="_blank">
+                        <a href="<?php echo !empty($tf_qr_download_link) ? esc_url(site_url().'?qr_id='.esc_attr($tf_qr_download_link)) : '#'; ?>" target="_blank">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M13 10H18L12 16L6 10H11V3H13V10ZM4 19H20V12H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V12H4V19Z" fill="#003C79"/>
                             </svg>
