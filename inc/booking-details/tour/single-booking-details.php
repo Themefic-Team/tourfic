@@ -238,6 +238,7 @@
                 </div>
             </div>
 
+            <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro()){ ?>
             <!-- Visitor Details -->
             <div class="customers-order-date details-box">
                 <h4>
@@ -304,7 +305,7 @@
                     
                 </div>
             </div>
-
+            <?php } ?>
             
             <!-- Voucher details -->
             <div class="customers-order-date details-box">
@@ -324,7 +325,7 @@
                     </div>
                 </h4>
                 <div class="tf-grid-box">
-
+                    <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro()){ ?>
                     <div class="tf-grid-single">
                         <h3><?php esc_html_e("Your voucher", "tourfic"); ?></h3>
                         <?php 
@@ -439,6 +440,7 @@
                         </div>
                         <?php } ?>
                     </div>
+                    <?php } ?>
                     <div class="tf-grid-single">
                         <h3><?php esc_html_e("Others information", "tourfic"); ?></h3>
                         <div class="tf-single-box tf-checkin-by">
