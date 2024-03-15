@@ -8,9 +8,8 @@
 add_action( 'wp_ajax_tf_visitor_details_edit', 'tf_visitor_details_edit_function' );
 function tf_visitor_details_edit_function() {
 
-    if( !empty($_POST['_ajax_nonce']) && !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_ajax_nonce'] ) ), 'updates' ) ){
-        return;
-    }
+    // Add nonce for security and authentication.
+	check_ajax_referer('updates', '_ajax_nonce');
 
     // Order Id
     $tf_order_id = !empty($_POST['order_id']) ? $_POST['order_id'] : "";
@@ -40,9 +39,8 @@ function tf_visitor_details_edit_function() {
 add_action( 'wp_ajax_tf_checkinout_details_edit', 'tf_checkinout_details_edit_function' );
 function tf_checkinout_details_edit_function() {
 
-    if( !empty($_POST['_ajax_nonce']) && !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_ajax_nonce'] ) ), 'updates' ) ){
-        return;
-    }
+    // Add nonce for security and authentication.
+	check_ajax_referer('updates', '_ajax_nonce');
 
     // Order Id
     $tf_order_id = !empty($_POST['order_id']) ? $_POST['order_id'] : "";
@@ -81,9 +79,8 @@ function tf_checkinout_details_edit_function() {
  add_action( 'wp_ajax_tf_order_status_edit', 'tf_order_status_edit_function' );
  function tf_order_status_edit_function() {
 
-    if( !empty($_POST['_ajax_nonce']) && !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_ajax_nonce'] ) ), 'updates' ) ){
-        return;
-    }
+    // Add nonce for security and authentication.
+	check_ajax_referer('updates', '_ajax_nonce');
     
     // Order Id
     $tf_order_id = !empty($_POST['order_id']) ? $_POST['order_id'] : "";
@@ -118,9 +115,8 @@ function tf_checkinout_details_edit_function() {
  add_action( 'wp_ajax_tf_order_bulk_action_edit', 'tf_order_bulk_action_edit_function' );
  function tf_order_bulk_action_edit_function() {
 
-    if( !empty($_POST['_ajax_nonce']) && !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_ajax_nonce'] ) ), 'updates' ) ){
-        return;
-    }
+    // Add nonce for security and authentication.
+	check_ajax_referer('updates', '_ajax_nonce');
     
     // Order Id
     $tf_orders = !empty($_POST['orders']) ? $_POST['orders'] : "";

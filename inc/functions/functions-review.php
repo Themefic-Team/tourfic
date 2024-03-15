@@ -763,9 +763,8 @@ function tf_delete_old_complete_review_button() {
 add_action( 'wp_ajax_tf_delete_old_review_fields', 'tf_delete_old_review_fields' );
 function tf_delete_old_review_fields() {
 
-	if( !empty($_POST['_ajax_nonce']) && !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_ajax_nonce'] ) ), 'updates' ) ){
-        return;
-    }
+	// Add nonce for security and authentication.
+	check_ajax_referer('updates', '_ajax_nonce');
 
 	global $wpdb;
 
