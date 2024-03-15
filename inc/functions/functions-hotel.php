@@ -1819,7 +1819,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 
             <div class="tf_form-row">
 				<?php
-				$ptype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
+				$ptype = isset( $_GET['type'] ) ? esc_attr($_GET['type']) : get_post_type();
 				?>
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                 <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
@@ -1951,7 +1951,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 		</div>
 		<div class="tf-booking-form-submit">
 			<?php
-			$ptype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
+			$ptype = isset( $_GET['type'] ) ? esc_attr($_GET['type']) : get_post_type();
 			?>
 			<input type="hidden" name="type" value="<?php echo esc_html( $ptype ); ?>" class="tf-post-type"/>
 			<input type="hidden" name="post_id" value="<?php echo esc_html( get_the_ID() ); ?>"/>
@@ -2072,7 +2072,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 
             <div class="tf_form-row">
 				<?php
-				$ptype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
+				$ptype = isset( $_GET['type'] ) ? esc_attr($_GET['type']) : get_post_type();
 				?>
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                 <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
