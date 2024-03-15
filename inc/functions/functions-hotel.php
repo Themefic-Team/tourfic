@@ -1019,9 +1019,14 @@ function tf_room_availability_callback() {
 					// Check if date is provided and within date range
 					if ( ! in_array( 0, $has_room ) ) {
 						tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price);
-						if ( $form_total_person <= $total_person ) {
-
-							include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
+						if ( $form_adult <= $adult_number ) {
+							if ( !empty($form_child) ){
+								if($form_child <= $child_number ) {
+									include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
+								}
+							}else{
+								include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
+							}
 
 						} else {
 
@@ -1070,9 +1075,14 @@ function tf_room_availability_callback() {
 
 					if ( ! empty( $filtered_features ) ) {
 						if ( $feature_result ) {
-							if ( $form_total_person <= $total_person ) {
-
-								include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
+							if ( $form_adult <= $adult_number ) {
+								if ( !empty($form_child) ){
+									if($form_child <= $child_number ) {
+										include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
+									}
+								}else{
+									include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
+								}
 
 							} else {
 
@@ -1085,9 +1095,14 @@ function tf_room_availability_callback() {
 						/* feature filter ended here */
 
 					} else {
-						if ( $form_total_person <= $total_person ) {
-
-							include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
+						if ( $form_adult <= $adult_number ) {
+							if ( !empty($form_child) ){
+								if($form_child <= $child_number ) {
+									include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
+								}
+							}else{
+								include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
+							}
 
 						} else {
 
