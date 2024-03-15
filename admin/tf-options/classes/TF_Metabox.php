@@ -218,9 +218,9 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			}
 			$post_basic_info = array(
 				'post_id' => sanitize_key( $post_id ),
-				'post_title' => sanitize_text_field( $_POST['post_title'] ),
-				'post_content' => sanitize_text_field( $_POST['content'] ),
-				'post_status' => sanitize_text_field( $_POST['post_status'] ),
+				'post_title' => !empty($_POST['post_title']) ? sanitize_text_field( $_POST['post_title'] ) : '',
+				'post_content' => !empty($_POST['content']) ? sanitize_text_field( $_POST['content'] ) : '',
+				'post_status' => !empty($_POST['post_status']) ? sanitize_text_field( $_POST['post_status'] ) : '',
 				'post_thumbnail' => !empty( get_the_post_thumbnail_url($post_id,'full') ) ?  get_the_post_thumbnail_url($post_id,'full') : '',
 				'post_date' => get_the_date( 'Y-m-d H:i:s', $post_id )
 			);
