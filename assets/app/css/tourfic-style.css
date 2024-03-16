@@ -6102,6 +6102,10 @@ div#tf-contact-info {
   display: none;
 }
 
+.tours-grid .tf_posts_navigation {
+  grid-column: span 2;
+}
+
 @media only screen and (max-width: 1200px) {
   .tf-tour-booking-wrap {
     width: 95%;

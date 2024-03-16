@@ -251,7 +251,6 @@
                     btn.addClass('tf-btn-loading').css({'pointer-events': 'none'});
                 },
                 success: function (data) {
-                    console.log('data', data)
                     let response = JSON.parse(data);
                     if( response.status === 'success' ) {
                         notyf.success(response.message);

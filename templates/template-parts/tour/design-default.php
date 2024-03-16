@@ -177,7 +177,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                                 <div class="tf-price group-price">
                                     <span class="sale-price">
-                                        <?php echo wp_kses_post($tour_price->wc_sale_group) ?? $tour_price->wc_group; ?>
+                                        <?php echo !empty($tour_price->wc_sale_group) ? wp_kses_post($tour_price->wc_sale_group) : wp_kses_post($tour_price->wc_group); ?>
                                     </span>
                                     <?php echo ( $discount_type != 'none' ) ? '<del>' . wp_kses_post($tour_price->wc_group) . '</del>' : ''; ?>
                                 </div>
@@ -188,7 +188,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                                     <div class="tf-price adult-price">
                                         <span class="sale-price">
-                                            <?php echo wp_kses_post($tour_price->wc_sale_adult) ?? $tour_price->wc_adult; ?>
+                                            <?php echo !empty($tour_price->wc_sale_adult) ? wp_kses_post($tour_price->wc_sale_adult) : wp_kses_post($tour_price->wc_adult); ?>
                                         </span>
                                         <?php echo ( $discount_type != 'none' ) ? '<del>' . wp_kses_post($tour_price->wc_adult) . '</del>' : ''; ?>
                                     </div>
@@ -198,7 +198,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                                     <div class="tf-price child-price tf-d-n">
                                         <span class="sale-price">
-                                            <?php echo wp_kses_post($tour_price->wc_sale_child) ?? $tour_price->wc_child; ?>
+                                            <?php echo !empty($tour_price->wc_sale_child) ? wp_kses_post($tour_price->wc_sale_child) : wp_kses_post($tour_price->wc_child); ?>
                                         </span>
                                         <?php echo ( $discount_type != 'none' ) ? '<del>' . wp_kses_post($tour_price->wc_child) . '</del>' : ''; ?>
                                     </div>
@@ -208,7 +208,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                                     <div class="tf-price infant-price tf-d-n">
                                         <span class="sale-price">
-                                            <?php echo wp_kses_post($tour_price->wc_sale_infant) ?? $tour_price->wc_infant; ?>
+                                            <?php echo !empty($tour_price->wc_sale_infant) ? wp_kses_post($tour_price->wc_sale_infant) : wp_kses_post($tour_price->wc_infant); ?>
                                         </span>
                                         <?php echo ( $discount_type != 'none' ) ? '<del>' . wp_kses_post($tour_price->wc_infant) . '</del>' : ''; ?>
                                     </div>

@@ -132,7 +132,6 @@
                 var unique_id = $(this).parent().prev().prev().find("input[name=unique_id]").val();
             }
 
-            console.log( unique_id )
             var location = $('input[name=place]').val();
             var adult = $('input[name=adult]').val();
             var child = $('input[name=child]').val();
@@ -372,7 +371,6 @@
                         /*execute a function when someone clicks on the item value (DIV element):*/
                         b.addEventListener("click", function (e) {
                             let source = this.getElementsByTagName("input")[0];
-                            console.log(source.dataset.slug);
                             /*insert the value for the autocomplete text field:*/
                             inp.value = source.value;
                             inp.closest('input').nextElementSibling.value = source.dataset.slug //source.dataset.slug

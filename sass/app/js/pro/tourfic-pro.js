@@ -717,7 +717,6 @@
             e.preventDefault();
 
             var user_id = $(this).attr("data-id");
-            console.log(user_id);
 
             var data = {
                 action: 'tf_resend_verification',

@@ -232,7 +232,6 @@
                         b.innerHTML += `<input type='hidden' value="${value}" data-slug='${key}'>`;
                         b.addEventListener("click", function (e) {
                             let source = this.getElementsByTagName("input")[0];
-                            console.log(source.dataset.slug);
                             inp.value = source.value;
                             inp.closest('input').nextElementSibling.value = source.dataset.slug
                         });
@@ -517,7 +516,7 @@
         /**
          * Single tour booking form
          */
-        const allowed_times = JSON.parse(tf_params.tour_form_data.allowed_times);
+        const allowed_times = tf_params.tour_form_data.allowed_times ? JSON.parse(tf_params.tour_form_data.allowed_times) : [];
         const custom_avail = tf_params.tour_form_data.custom_avail;
         if (custom_avail == false && allowed_times.length > 0) {
             populateTimeSelect(allowed_times)
@@ -622,7 +621,6 @@
                 }
             }
         }
-        console.log(tf_params.tour_form_data);
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'design-1') {
             $(".tours-check-in-out").flatpickr(tour_date_options);
