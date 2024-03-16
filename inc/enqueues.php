@@ -401,7 +401,6 @@ if ( ! function_exists( 'tf_enqueue_scripts' ) ) {
 
 				}
 				$disable_specific = ! empty( $meta['disable_specific'] ) ? $meta['disable_specific'] : '';
-				$disable_specific = str_replace( ', ', '", "', $disable_specific );
 
 				if ( $custom_avail == true ) {
 
