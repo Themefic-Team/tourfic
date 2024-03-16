@@ -523,6 +523,7 @@
             populateTimeSelect(allowed_times)
         }
 
+        
         // First Day of Week
         //const first_day_of_week = tf_params.tour_form_data.flatpickr_locale;
 
