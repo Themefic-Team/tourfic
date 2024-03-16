@@ -1422,7 +1422,7 @@ function tf_single_tour_booking_form( $post_id ) {
 						<?php } ?>
 					    <?php if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] ) && 3!=$tf_booking_by ) {
 						    $tf_deposit_amount =  array (
-								"{amount}" => $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount']. '%'
+								"{amount}" => $meta['deposit_type'] == 'fixed' ? wp_kses_post(wc_price( $meta['deposit_amount'] )) : $meta['deposit_amount']. '%'
 							);
 							$tf_partial_payment_label = !empty(tfopt("deposit-title")) ? tfopt("deposit-title") : '';
 							$tf_partial_payment_description = !empty(tfopt("deposit-subtitle")) ? tfopt("deposit-subtitle") : '';
@@ -1435,7 +1435,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
 								<div class="tooltip-box">
 									<?php if( !empty($tf_partial_payment_label) ){ ?>
-									<h4><?php echo esc_html( partial_payment_tag_replacement($tf_partial_payment_label, $tf_deposit_amount) ) ?></h4>
+									<h4><?php echo wp_kses_post( partial_payment_tag_replacement($tf_partial_payment_label, $tf_deposit_amount) ) ?></h4>
 									<?php }
 									if( !empty($tf_partial_payment_description) ){ ?>
 									<div class="tf-info-btn">

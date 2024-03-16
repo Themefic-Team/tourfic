@@ -595,9 +595,12 @@
                 if (tf_params.tour_form_data.disabled_day || tf_params.tour_form_data.disable_range || tf_params.tour_form_data.disable_specific || tf_params.tour_form_data.disable_same_day) {
                     tour_date_options.disable = [];
                     if (tf_params.tour_form_data.disabled_day) {
-                        tour_date_options.disable.push(function (date) {
-                            return (date.getDay() === 8 || tf_params.tour_form_data.disabled_day.includes(date.getDay()));
-                        });
+                        var disabledDays = tf_params.tour_form_data.disabled_day.map(Number);
+                        tour_date_options.disable.push(
+                            function (date) {
+                            return (date.getDay() === 8 || disabledDays.includes(date.getDay()));
+                        }
+                        );
                     }
                     if (tf_params.tour_form_data.disable_range) {
                         tf_params.tour_form_data.disable_range.forEach((d_item) => {
@@ -610,12 +613,16 @@
                     if (tf_params.tour_form_data.disable_same_day) {
                         tour_date_options.disable.push("today");
                         if (tf_params.tour_form_data.disable_specific) {
-                            tour_date_options.disable.push(tf_params.tour_form_data.disable_specific);
+                            var disable_specific_string = tf_params.tour_form_data.disable_specific.split(", ");
+                            disable_specific_string.forEach(function(date) {
+                                tour_date_options.disable.push(date);
+                            });
                         }
                     }
                 }
             }
         }
+        console.log(tf_params.tour_form_data);
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'design-1') {
             $(".tours-check-in-out").flatpickr(tour_date_options);

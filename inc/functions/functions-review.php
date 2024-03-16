@@ -730,7 +730,7 @@ function tf_delete_old_review_fields_button() {
 	echo '
     <div class="csf-title">
         <h4>' . esc_html__( "Delete Old Review Fields", "tourfic" ) . '</h4>
-        <div class="csf-subtitle-text">' . esc_html__( "Delete review fields that don't match with the present fields.<br><b style='color: red;'>Be aware! You will lose your old data!</b>", "tourfic" ) . '</div>
+        <div class="csf-subtitle-text">' . wp_kses_post( "Delete review fields that don't match with the present fields.<br><b style='color: red;'>Be aware! You will lose your old data!</b>") . '</div>
     </div>
     <div class="csf-fieldset">
         <button type="button" data-delete-all="no" class="button button-large csf-warning-primary tf-del-old-review-fields tf-order-remove">' . esc_html__( "Delete Fields", "tourfic" ) . '</button>
@@ -747,7 +747,7 @@ function tf_delete_old_complete_review_button() {
 	echo '
     <div class="csf-title">
         <h4>' . esc_html__( "Delete Old Reviews", "tourfic" ) . '</h4>
-        <div class="csf-subtitle-text">' . esc_html__( "Delete reviews that don't have any review (rating) fields.<br><b style='color: red;'>Be aware! You will lose your old data!</b>", "tourfic" ) . '</div>
+        <div class="csf-subtitle-text">' . wp_kses_post( "Delete reviews that don't have any review (rating) fields.<br><b style='color: red;'>Be aware! You will lose your old data!</b>") . '</div>
     </div>
     <div class="csf-fieldset">
         <button type="button" data-delete-all="yes" class="button button-large csf-warning-primary tf-del-old-review-fields tf-order-remove">' . esc_html__( "Delete Reviews", "tourfic" ) . '</button>
