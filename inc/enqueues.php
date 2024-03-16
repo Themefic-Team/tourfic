@@ -318,23 +318,12 @@ if ( ! function_exists( 'tf_enqueue_scripts' ) ) {
 				$tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'design-1';
 			}
 			$tf_tour_global_template = ! empty( tf_data_types( tfopt( 'tf-template' ) )['single-tour'] ) ? tf_data_types( tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
-
 			$tf_tour_selected_template = ! empty( $tf_tour_single_template ) ? $tf_tour_single_template : $tf_tour_global_template;
-
-
-
 			$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';
-			// Continuous custom availability
 			$custom_avail = ! empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : '';
-
-			# Get Pricing
-			$tour_price = new Tour_Price( $meta );
-			// Date format for Users Oputput
 			$tour_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
 
 			// Repeated Fixed Tour
-
-
 			if(!function_exists('fixed_tour_start_date_changer')) {
 				function fixed_tour_start_date_changer($date, $months) {
 					if( (count($months) > 0) && !empty($date)) {
@@ -443,14 +432,6 @@ if ( ! function_exists( 'tf_enqueue_scripts' ) ) {
 				}
 			}
 
-			$disable_adult_price  = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
-			$disable_child_price  = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
-			$disable_infant_price = ! empty( $meta['disable_infant_price'] ) ? $meta['disable_infant_price'] : false;
-			$pricing_rule         = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
-			$group_price          = ! empty( $meta['group_price'] ) ? $meta['group_price'] : false;
-			$adult_price          = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : false;
-			$child_price          = ! empty( $meta['child_price'] ) ? $meta['child_price'] : false;
-			$infant_price         = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : false;
 			$tour_extras          = isset( $meta['tour-extra'] ) ? $meta['tour-extra'] : null;
 
 			if ( ! empty( $tour_extras ) && gettype( $tour_extras ) == "string" ) {
