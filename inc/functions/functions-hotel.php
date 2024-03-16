@@ -490,7 +490,7 @@ function tf_hotel_airport_service_callback() {
 						wp_kses_post(wc_price( $service_adult_fee )),
 						sanitize_key( $_POST['hotelchildren'] ),
 						wp_kses_post(wc_price( $service_child_fee )),
-						wp_kses_post(wc_price( $service_fee ))
+						"<b>".wp_kses_post(wc_price( $service_fee ))."</b>"
 					);
 					echo "</span></br>";
 				} else {
@@ -519,29 +519,29 @@ function tf_hotel_airport_service_callback() {
 			if ( "fixed" == $airport_pickup_price['airport_pickup_price_type'] ) {
 				$service_fee = ! empty( $airport_pickup_price['airport_service_fee_fixed'] ) ? $airport_pickup_price['airport_service_fee_fixed'] : 0;
 				/* translators: %s Service Fee */
-				echo sprintf( esc_html__( '<span>Airport Pickup Fee (Fixed): <b>%s</b></span></br>', 'tourfic' ),
+				echo sprintf( esc_html__( 'Airport Pickup Fee (Fixed): %s', 'tourfic' ),
 					wp_kses_post(wc_price( $service_fee ))
 				);
 				if ( $deposit == "true" ) {
-					echo "<span>";
+					echo "</br><span>";
 					echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post(wc_price( $price_total - $deposit_amount )) . " + " . wp_kses_post(wc_price( $service_fee )). '</b>';
-					echo "</span></br>";
+					echo "</span>";
 					
 					/* translators: %s Payable Amount */
-					echo '<span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $deposit_amount )) . '</b></span>';
+					echo '</br><span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $deposit_amount )) . '</b></span>';
 					
 				} else {
 					/* translators: %s Payable Amount */
-					echo '<span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $price_total + $service_fee )) . '</b></span>';
+					echo '</br><span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $price_total + $service_fee )) . '</b></span>';
 				}
 			}
 			if ( "free" == $airport_pickup_price['airport_pickup_price_type'] ) {
-				echo esc_html__( '<span>Airport Pickup Fee: <b>Free</b></span></br>', 'tourfic' );
+				echo esc_html__( 'Airport Pickup Fee: Free', 'tourfic' );
 				if ( $deposit == "true" ) {
-					echo '<span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $price_total - $deposit_amount )) . '</b></span>';
+					echo '</br><span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $price_total - $deposit_amount )) . '</b></span>';
 				} else {
 
-					echo '<span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $price_total )) . '</b></span>';
+					echo '</br><span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $price_total )) . '</b></span>';
 				}
 			}
 		}
@@ -585,30 +585,30 @@ function tf_hotel_airport_service_callback() {
 			if ( "fixed" == $airport_dropoff_price['airport_pickup_price_type'] ) {
 				$service_fee = ! empty( $airport_dropoff_price['airport_service_fee_fixed'] ) ? $airport_dropoff_price['airport_service_fee_fixed'] : 0;
 				/* translators: %s Service Fee */
-				echo sprintf( esc_html__( '<span>Airport Dropoff Fee (Fixed): <b>%s</b></span></br>', 'tourfic' ),
+				echo sprintf( esc_html__( 'Airport Dropoff Fee (Fixed): %s', 'tourfic' ),
 					wp_kses_post(wc_price( $service_fee ))
 				);
 				if ( $deposit == "true" ) {
 					/* translators: %1$s Due Amount, %2$s Service Fee */
-					echo "<span>";
+					echo "</br><span>";
 					echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post(wc_price( $price_total - $deposit_amount )) . " + " . wp_kses_post(wc_price( $service_fee )). '</b>';
-					echo "</span></br>";
+					echo "</span>";
 
-					echo '<span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $deposit_amount )) . '</b></span>';
+					echo '</br><span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $deposit_amount )) . '</b></span>';
 				} else {
-					echo '<span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $price_total + $service_fee )) . '</b></span>';
+					echo '</br><span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $price_total + $service_fee )) . '</b></span>';
 				}
 			}
 			if ( "free" == $airport_dropoff_price['airport_pickup_price_type'] ) {
-				echo esc_html__( '<span>Airport Dropoff Fee: <b>Free</b></span></br>', 'tourfic' );
+				echo esc_html__( 'Airport Dropoff Fee: Free', 'tourfic' );
 				if ( $deposit == "true" ) {
-					echo "<span>";
+					echo "</br><span>";
 					echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post(wc_price( $price_total - $deposit_amount )) . '</b>';
-					echo "</span></br>";
+					echo "</span>";
 					/* translators: %s Deposit Amount */
-					echo '<span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $deposit_amount )) . '</b></span>';
+					echo '</br><span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $deposit_amount )) . '</b></span>';
 				} else {
-					echo '<span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $price_total )) . '</b></span>';
+					echo '</br><span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $price_total )) . '</b></span>';
 				}
 			}
 		}
@@ -655,31 +655,31 @@ function tf_hotel_airport_service_callback() {
 			if ( "fixed" == $airport_pickup_dropoff_price['airport_pickup_price_type'] ) {
 				$service_fee = ! empty( $airport_pickup_dropoff_price['airport_service_fee_fixed'] ) ? $airport_pickup_dropoff_price['airport_service_fee_fixed'] : 0;
 				/* translators: %s Service Fee */
-				echo sprintf( esc_html__( '<span>Airport Pickup & Dropoff Fee (Fixed): <b>%s</b></span></br>', 'tourfic' ),
+				echo sprintf( esc_html__( 'Airport Pickup & Dropoff Fee (Fixed): %s', 'tourfic' ),
 					wp_kses_post(wc_price( $service_fee ))
 				);
 
 				if ( $deposit == "true" ) {
-					echo "<span>";
+					echo "</br><span>";
 					echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post(wc_price( $price_total - $deposit_amount )) . " + " . wp_kses_post(wc_price( $service_fee )). '</b>';
-					echo "</span></br>";
+					echo "</span>";
 
 					/* translators: %s Deposit Amount */
-					echo '<span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $deposit_amount )) . '</b></span>';
+					echo '</br><span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $deposit_amount )) . '</b></span>';
 				} else {
-					echo '<span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $price_total + $service_fee )) . '</b></span>';
+					echo '</br><span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $price_total + $service_fee )) . '</b></span>';
 				}
 			}
 			if ( "free" == $airport_pickup_dropoff_price['airport_pickup_price_type'] ) {
-				echo esc_html__( '<span>Airport Pickup & Dropoff Fee: <b>Free</b></span></br>', 'tourfic' );
+				echo esc_html__( 'Airport Pickup & Dropoff Fee: Free', 'tourfic' );
 				if ( $deposit == "true" ) {
-					echo "<span>";
+					echo "</br><span>";
 					echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post(wc_price( $price_total - $deposit_amount )) . '</b>';
-					echo "</span></br>";
+					echo "</span>";
 					/* translators: %s Deposit Amount */
-					echo '<span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $deposit_amount )) . '</b></span>';
+					echo '</br><span>' .  esc_html__('Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post(wc_price( $deposit_amount )) . '</b></span>';
 				} else {
-					echo "<span>Total Payable Amount : <b>" . wp_kses_post(wc_price( $price_total )) . "</b></span>";
+					echo "</br><span>Total Payable Amount : <b>" . wp_kses_post(wc_price( $price_total )) . "</b></span>";
 				}
 			}
 		}
