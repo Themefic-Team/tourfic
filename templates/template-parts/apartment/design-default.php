@@ -656,13 +656,17 @@
                         if(!in_array(get_the_ID(), array($post_id))):
                         ?>
                             <div class="tf-apartment-item">
-                                <?php if ( has_post_thumbnail() ) : ?>
                                     <div class="tf-apartment-item-thumb">
+                                    <?php if ( has_post_thumbnail() ) { ?>
                                         <a href="<?php the_permalink(); ?>">
                                             <?php the_post_thumbnail( 'tourfic-370x250' ); ?>
                                         </a>
+                                    <?php }else{ ?>
+                                        <a href="<?php the_permalink(); ?>">
+                                            <img src="<?php echo esc_url(TF_ASSETS_APP_URL) . "images/feature-default.jpg"; ?>" />
+                                        </a>
+                                    <?php } ?>
                                     </div>
-                                <?php endif; ?>
                                 <div class="tf-related-apartment-content">
                                     <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
                                     <span><?php echo get_the_date( 'F j, Y' ); ?></span>

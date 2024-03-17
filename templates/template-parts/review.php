@@ -57,7 +57,21 @@ if( get_post_type($post_id) == 'tf_hotel' ){
 
 }
 
-if( ( get_post_type($post_id) == 'tf_tours' && $tf_tour_selected_template == "design-1" ) || ( get_post_type($post_id) == "tf_hotel" && $tf_hotel_selected_template == "design-1" ) ){
+if( get_post_type($post_id) == 'tf_apartment' ){
+
+	$meta = get_post_meta( $post_id, 'tf_apartment_opt', true );
+	// Single Template Check
+	$tf_apartment_layout_conditions = ! empty( $meta['tf_single_apartment_layout_opt'] ) ? $meta['tf_single_apartment_layout_opt'] : 'global';
+	if("single"==$tf_apartment_layout_conditions){
+    	$tf_apartment_single_template = ! empty( $meta['tf_single_apartment_template'] ) ? $meta['tf_single_apartment_template'] : 'default';
+	}
+	$tf_apartment_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-apartment'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-apartment'] : 'default';
+
+	$tf_apartment_selected_template = !empty($tf_apartment_single_template) ? $tf_apartment_single_template : $tf_apartment_global_template;
+
+}
+
+if( ( get_post_type($post_id) == 'tf_tours' && $tf_tour_selected_template == "design-1" ) || ( get_post_type($post_id) == "tf_hotel" && $tf_hotel_selected_template == "design-1" ) || ( get_post_type($post_id) == "tf_apartment" && $tf_apartment_selected_template != "default") ){
 
 if ( $comments ) {
 	$tf_overall_rate        = [];
@@ -227,6 +241,20 @@ if ( ! empty( $tf_ratings_for ) ) {
 ?>
 <div class="tf-review-container">
 	<?php
+	// get post id
+	$post_id = $post->ID;
+
+	/**
+	 * Review query
+	 */
+	$args           = array(
+		'post_id' => $post_id,
+		'status'  => 'approve',
+		'type'    => 'comment',
+	);
+	$comments_query = new WP_Comment_Query( $args );
+	$comments       = $comments_query->comments;
+
 	if ( $comments ) {
 
 		$tf_rating_progress_bar = '';
@@ -265,7 +293,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 					if ( in_array( 'li', $tf_ratings_for ) && ! tf_user_has_comments() ) {
 						?>
                         <div class="tf-btn">
-                            <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
+                            <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" >
                                 <i class="fas fa-plus"></i> <?php esc_html_e( 'Add Review', 'tourfic' ); ?>
                             </button>
                         </div>
@@ -275,7 +303,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 					if ( in_array( 'lo', $tf_ratings_for ) ) {
 						?>
                         <div class="tf-btn">
-                            <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
+                            <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" >
                                 <i class="fas fa-plus"></i> <?php esc_html_e( 'Add Review', 'tourfic' ) ?>
                             </button>
                         </div>
@@ -344,7 +372,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 			if ( is_array( $tf_ratings_for ) && in_array( 'li', $tf_ratings_for ) && ! tf_user_has_comments() ) {
 				?>
                 <div class="tf-btn">
-                    <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
+                    <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" >
                         <i class="fas fa-plus"></i> <?php esc_html_e( 'Add Review', 'tourfic' ); ?>
                     </button>
                 </div>
@@ -357,7 +385,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 			if ( is_array( $tf_ratings_for ) && in_array( 'lo', $tf_ratings_for ) ) {
 				?>
                 <div class="tf-btn">
-                    <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
+                    <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" >
                         <i class="fas fa-plus"></i> <?php esc_html_e( 'Add Review', 'tourfic' ) ?>
                     </button>
                 </div>

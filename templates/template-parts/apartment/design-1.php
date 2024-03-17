@@ -448,10 +448,10 @@ if ( $disable_related_sec !== '1' ) {
                             $destinations           = get_the_terms( $selected_design_post_id, 'apartment_location' );
                             $first_destination_name = $destinations[0]->name;
                             $meta                   = get_post_meta( $selected_design_post_id, 'tf_apartment_opt', true );
-                            $apartment_min_price = get_apartment_min_max_price( get_the_ID() );
+                            $apartment_min_price = get_apartment_min_max_price( $selected_design_post_id );
 
                             $pricing_type = ! empty( $meta['pricing_type'] ) && "per_person" == $meta['pricing_type'] ? esc_html__("Person", "tourfic") : esc_html__("Night", "tourfic");
-                            if(!in_array(get_the_ID(), array($post_id))){
+                            if(!in_array($selected_design_post_id, array($post_id))){
                             ?>
                                 <div class="tf-slider-item tf-post-box-lists">
                                     <div class="tf-post-single-box">
@@ -480,14 +480,14 @@ if ( $disable_related_sec !== '1' ) {
                                     </div>
                                 </div>
                             <?php } ?>
-                        <?php } ?>
+                        <?php }
+                        wp_reset_postdata();
+                        ?>
                     </div>
                 </div>
             </div>
         </div>
-    <?php }
-    wp_reset_postdata();
-    ?>
+    <?php } ?>
 <?php } ?>
 
 </div>
