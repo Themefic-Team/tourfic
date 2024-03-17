@@ -4254,8 +4254,8 @@ if (! function_exists ("tf_hotel_filter_by_features") ) {
  * @author Foysal
  */
 if ( ! function_exists( 'tf_hotel_booking_popup_callback' ) ) {
-	add_action( 'wp_ajax_tf_hotel_booking_popup', 'tf_hotel_booking_popup_callback' );
-	add_action( 'wp_ajax_nopriv_tf_hotel_booking_popup', 'tf_hotel_booking_popup_callback' );
+//	add_action( 'wp_ajax_tf_hotel_booking_popup', 'tf_hotel_booking_popup_callback' );
+//	add_action( 'wp_ajax_nopriv_tf_hotel_booking_popup', 'tf_hotel_booking_popup_callback' );
 
 	function tf_hotel_booking_popup_callback() {
 		// Check nonce security
