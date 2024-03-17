@@ -2879,3 +2879,38 @@ if ( ! function_exists( 'tf_apartment_feature_assign_taxonomies' ) ) {
 		}
 	}
 }
+
+
+/*
+ * Apartment search ajax
+ * @since 2.9.7
+ * @author Jahid
+ */
+add_action( 'wp_ajax_tf_apartments_search', 'tf_apartments_search_ajax_callback' );
+add_action( 'wp_ajax_nopriv_tf_apartments_search', 'tf_apartments_search_ajax_callback' );
+if ( ! function_exists( 'tf_apartments_search_ajax_callback' ) ) {
+	function tf_apartments_search_ajax_callback() {
+		// Check nonce security
+		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], 'tf_ajax_nonce' ) ) {
+			return;
+		}
+		$response = [
+			'status'  => 'error',
+			'message' => '',
+		];
+
+		if ( tfopt( 'date_apartment_search' ) && ( ! isset( $_POST['check-in-out-date'] ) || empty( $_POST['check-in-out-date'] ) ) ) {
+			$response['message'] = esc_html__( 'Please select a date', 'tourfic' );
+		}
+
+		if ( tfopt( 'date_apartment_search' ) ) {
+			if ( ! empty( $_POST['check-in-out-date'] ) ) {
+				$response['query_string'] = str_replace( '&action=tf_apartments_search', '', http_build_query( $_POST ) );
+				$response['status']       = 'success';
+			}
+		}
+
+		echo wp_json_encode( $response );
+		wp_die();
+	}
+}
