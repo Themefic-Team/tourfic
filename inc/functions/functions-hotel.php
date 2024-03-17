@@ -1511,13 +1511,16 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
-	                        <?php if(empty($disable_hotel_child_search)) : ?>
+	                        <?php 
+							$children_age        = tfopt( 'children_age_limit' );
+							$children_age_status = tfopt( 'enable_child_age_limit' );
+							if(empty($disable_hotel_child_search)) : ?>
                                 <div class="tf_acrselection">
                                     <div class="acr-label"><?php esc_html_e( 'Children', 'tourfic' ); ?></div>
                                     <div class="acr-select">
-                                        <div class="acr-dec">-</div>
+                                        <div class="acr-dec <?php echo ! empty( $children_age_status ) && !empty($children_age_status) ? esc_attr('child-dec') : ''; ?>">-</div>
                                         <input type="number" name="children" id="children" min="0" value="0">
-                                        <div class="acr-inc">+</div>
+                                        <div class="acr-inc <?php echo ! empty( $children_age_status ) && !empty($children_age_status) ? esc_attr('child-inc') : ''; ?>">+</div>
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -1531,9 +1534,6 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                             </div>
                         </div>
 						<?php
-
-						$children_age        = tfopt( 'children_age_limit' );
-						$children_age_status = tfopt( 'enable_child_age_limit' );
 						if ( ! empty( $children_age_status ) && $children_age_status == "1" ) {
 							?>
                             <div class="tf-children-age-fields">
