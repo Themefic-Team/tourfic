@@ -139,7 +139,7 @@
 				if ( ! $disable_adult && ( ! $disable_infant && ! empty( $tour_price->infant ) ) ) { ?>
                     <div class="tf-trip-pricing tf-flex tf-infant">
                         <span class="tf-price-label"> <?php esc_html_e( "From", "tourfic" ); ?>, </span>
-                        <span class="tf-price-amount"><?php echo isset($tour_price->wc_sale_infant) ? wp_kses_post($tour_price->wc_infant) : wp_kses_post($tour_price->wc_infant); ?></span>
+                        <span class="tf-price-amount"><?php echo isset($tour_price->wc_sale_infant) ? wp_kses_post($tour_price->wc_sale_infant) : wp_kses_post($tour_price->wc_infant); ?></span>
                         <span class="tf-price-label-bttm"><?php esc_html_e( "Per Infant", "tourfic" ); ?></span>
                     </div>
 				<?php } ?>
