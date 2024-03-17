@@ -1296,7 +1296,11 @@ function tf_order_status_changed($order_id, $old_status, $new_status, $order)
 			$infants = $item->get_meta( 'Infants', true );
 
 			if ( $tour_date ) {
-				list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
+				if (str_contains($tour_date, ' - ')) {
+					list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
+				} else {
+					$tour_in = $tour_date;
+				}
 			}
 
 			$tf_integration_order_data[] = [
