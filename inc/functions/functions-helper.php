@@ -342,24 +342,6 @@ function tourfic_ask_question_ajax() {
 	$tf_post_author_id = get_post_field( 'post_author', $post_id );
 	$tf_user_meta      = get_userdata( $tf_post_author_id );
 	$tf_user_roles     = $tf_user_meta->roles;
-	global $wpdb;
-	$wpdb->query(
-		$wpdb->prepare(
-			"INSERT INTO {$wpdb->prefix}tf_enquiry_data
-        ( post_id, post_type, uname, uemail, udescription, author_id, author_roles, created_at )
-        VALUES ( %d, %s, %s, %s, %s, %d, %s, %s )",
-			array(
-				sanitize_key( $post_id ),
-				get_post_type( $post_id ),
-				$name,
-				$email,
-				$question,
-				sanitize_key( $tf_post_author_id ),
-				$tf_user_roles[0],
-				gmdate( 'Y-m-d H:i:s' )
-			)
-		)
-	);
 
 	/**
 	 * Enquiry Pabbly Integration
@@ -400,6 +382,26 @@ function tourfic_ask_question_ajax() {
 	if ( wp_mail( $send_email_to, $subject, $message, $headers, $attachments ) ) {
 		$response['status'] = 'sent';
 		$response['msg']    = esc_html__( 'Your question has been sent!', 'tourfic' );
+
+		// Data Store to the DB
+		global $wpdb;
+		$wpdb->query(
+			$wpdb->prepare(
+				"INSERT INTO {$wpdb->prefix}tf_enquiry_data
+			( post_id, post_type, uname, uemail, udescription, author_id, author_roles, created_at )
+			VALUES ( %d, %s, %s, %s, %s, %d, %s, %s )",
+				array(
+					sanitize_key( $post_id ),
+					get_post_type( $post_id ),
+					$name,
+					$email,
+					$question,
+					sanitize_key( $tf_post_author_id ),
+					$tf_user_roles[0],
+					gmdate( 'Y-m-d H:i:s' )
+				)
+			)
+		);
 	} else {
 		$response['status'] = 'error';
 		$response['msg']    = esc_html__( 'Message sent failed!', 'tourfic' );
