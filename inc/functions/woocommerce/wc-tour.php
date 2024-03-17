@@ -793,7 +793,7 @@ function tf_tours_booking_function() {
 			$discounted_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
 
 			if ( $tour_type == 'continuous' ) {
-				$tf_tours_data['tf_tours_data']['tour_time'] = $tour_time_title;
+				$tf_tours_data['tf_tours_data']['tour_time'] = !emtpy($tour_time_title) ? $tour_time_title : '';
 			}
 
 			# Calculate discounted price
