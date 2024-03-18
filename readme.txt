@@ -324,7 +324,9 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 = 2.11.21 - 19 March 2024 =
 
-- Fixed: Security issues
+- Fixed: Nonce Validation and escaping issues
+- Improvement: Security patches resolved
+- Improvement: Internal code enhancement
 - Improvement: Overall performance improved
 - Improvement: System stability improved
 
