@@ -609,7 +609,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 
 		// Information
 		'information'     => array(
-			'title'  => __( 'Information', 'tourfic' ),
+			'title'  => __( 'Informations', 'tourfic' ),
 			'icon'   => 'fa-solid fa-circle-info',
 			'fields' => array(
 				array(
