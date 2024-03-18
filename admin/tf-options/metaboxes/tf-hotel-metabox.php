@@ -222,7 +222,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 		),
 		//Hotel Info
 		'hotel_info' => array(
-			'title'  => esc_html__( 'Information', 'tourfic' ),
+			'title'  => esc_html__( 'Informations', 'tourfic' ),
 			'icon'   => 'fa-solid fa-info-circle',
 			'fields' => array(
 				// nearby Places
@@ -317,11 +317,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'label'       => __( 'Facilities Category', 'tourfic' ),
 							'placeholder' => __( 'Select facilities category', 'tourfic' ),
 							'options'     => tf_hotel_facilities_categories(),
-							'description' => sprintf(
-								// translators: %s: Facilities Categories
-								__( 'Add new category from <a target="_blank" href="%s">Facilities Categories</a>', 'tourfic' ),
-								esc_url(admin_url('admin.php?page=tf_settings#tab=single_page'))
-							),
+							'description' => __( 'Add new category from ', 'tourfic' ) . '<a target="_blank" href="' . esc_url( admin_url('admin.php?page=tf_settings#tab=single_page') ) .'">' . __("Facilities Categories", 'tourfic') . '</a>',
 							'field_width' => 50,
 						),
 						array(
