@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.4.3
-Stable tag: 2.11.20
+Stable tag: 2.11.21
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -322,6 +322,12 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.11.21 - 19 March 2024 =
+
+- Fixed: Security issues
+- Improvement: Overall performance improved
+- Improvement: System stability improved
+
 = 2.11.20 - 15 March 2024 =
 
 - Added: Disclaimer for Patchstack VDP
@@ -521,12 +527,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Notice: Black Friday Announcements
 - Improvement: System stability Improved
 
-= 2.10.6 - 10 November 2023 =
-
-- Compatibility: Compatible with WordPress 6.4.
-- Updated: Updated label for settings panel.
-- Fixed: Map issue fixed.
-- Fixed: Hotel booking issue.
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
