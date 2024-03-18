@@ -128,8 +128,8 @@
             if ($(this).closest('.room-submit-wrap').find('input[name=unique_id]').val()) {
                 var unique_id = $(this).closest('.room-submit-wrap').find('input[name=unique_id]').val();
             } else {
-                // var unique_id = $("#hotel_room_uniqueid").val();
-                var unique_id = $(this).parent().prev().prev().find("input[name=unique_id]").val();
+                var unique_id = $("#hotel_room_uniqueid").val();
+                // var unique_id = $(this).parent().prev().prev().find("input[name=unique_id]").val();
             }
 
             var location = $('input[name=place]').val();
