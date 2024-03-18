@@ -778,6 +778,7 @@
             $(".tf-scanner-preloader").show();
             var data = {
                 action: 'tf_qr_code_verification',
+                _nonce: tf_params.nonce,
                 tf_qr_code: qr_code,
             };
 
@@ -832,6 +833,7 @@ const TFQRSCANER = () => {
             jQuery(".tf_qr_code_number").val(content);
             var data = {
                 action: 'tf_qr_code_quick_info',
+                _nonce: tf_params.nonce,
                 tf_qr_code: content,
             };
             jQuery.ajax({
@@ -864,6 +866,7 @@ const TFQRSCANER = () => {
             jQuery(".tf-scanner-preloader").show();
             var data = {
                 action: 'tf_qr_code_verification',
+                _nonce: tf_params.nonce,
                 tf_qr_code: content,
             };
             jQuery.ajax({

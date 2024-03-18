@@ -207,6 +207,7 @@
                     url: tf_admin_params.ajax_url,
                     data: {
                         action: 'tf_ticket_status_change',
+                        _ajax_nonce: tf_admin_params.tf_nonce,
                         status: "check in",
                         order_unique_id: order_unique_id,
                     },
@@ -222,6 +223,7 @@
                     url: tf_admin_params.ajax_url,
                     data: {
                         action: 'tf_ticket_status_change',
+                        _ajax_nonce: tf_admin_params.tf_nonce,
                         status: "",
                         order_unique_id: order_unique_id,
                     },

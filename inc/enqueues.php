@@ -309,7 +309,7 @@ if ( ! function_exists( 'tf_enqueue_scripts' ) ) {
 		global $post;
 		$post_id = ! empty( $post->ID ) ? $post->ID : '';
 		$post_type = ! empty( $post->post_type ) ? $post->post_type : '';
-		if($post_type == 'tf_tours' && !empty($post_id)) {
+		if($post_type == 'tf_tours' && !empty($post_id) && !is_post_type_archive('tf_tours')) {
 			$single_tour_form_data = array();
 			
 			$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
@@ -521,7 +521,7 @@ if ( ! function_exists( 'tf_enqueue_scripts' ) ) {
 					$enable_repeat_dates = fixed_tour_start_date_changer( $departure_date, $tour_repeat_months );
 				}
 
-				if(($repeated_fixed_tour_switch == 1) && ($enable_repeat_dates > 0)) {
+				if(($repeated_fixed_tour_switch == 1) && !empty($enable_repeat_dates) && ($enable_repeat_dates > 0)) {
 					
 					$single_tour_form_data['defaultDate'] = esc_html(tf_nearest_default_day($enable_repeat_dates));
 					
