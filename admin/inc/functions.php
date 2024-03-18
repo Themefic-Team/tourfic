@@ -83,8 +83,8 @@ function tf_required_taxonomies( $hook ) {
 		$post_types[ $post_type ][ $taxonomy ]['type'] = $config['type'] = ( is_taxonomy_hierarchical( $taxonomy ) ? 'hierarchical' : 'non-hierarchical' );
 
 		if ( ! isset( $config['message'] ) || $taxonomy === $config ) {
-			$post_type_labels  = get_post_type_labels( get_post_type_object( $post_type ) );
-            /* translators: %s taxonomy singular name, translators: %s: post type singular name */
+			$post_type_labels = get_post_type_labels( get_post_type_object( $post_type ) );
+			/* translators: %s taxonomy singular name, translators: %s: post type singular name */
 			$config['message'] = sprintf( __( 'Please choose at least one %1$s before publishing this %2$s.', 'tourfic' ), $taxonomy_labels->singular_name, $post_type_labels->singular_name );
 		}
 
@@ -152,7 +152,7 @@ function tf_admin_footer() {
 		global $post;
 		?>
         <script>
-            var post_id = '<?php echo esc_html($post->ID); ?>';
+            var post_id = '<?php echo esc_html( $post->ID ); ?>';
         </script>
 		<?php
 	}
@@ -169,7 +169,7 @@ function tf_dashboard_header() {
     <!-- dashboard-top-section -->
     <div class="tf-setting-top-bar">
         <div class="version">
-            <img src="<?php echo esc_url(TF_ASSETS_APP_URL); ?>images/tourfic-logo.webp" alt="logo">
+            <img src="<?php echo esc_url( TF_ASSETS_APP_URL ); ?>images/tourfic-logo.webp" alt="logo">
             <span>v<?php echo esc_html( TOURFIC ); ?></span>
         </div>
         <div class="other-document">
@@ -221,7 +221,7 @@ function tf_dashboard_header() {
 if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 	function tf_add_hotel_availability() {
 		// Add nonce for security and authentication.
-		check_ajax_referer('updates', '_nonce');
+		check_ajax_referer( 'updates', '_nonce' );
 
 		$date_format         = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		$hotel_id            = isset( $_POST['hotel_id'] ) && ! empty( $_POST['hotel_id'] ) ? sanitize_text_field( $_POST['hotel_id'] ) : '';
@@ -310,7 +310,7 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 if ( ! function_exists( 'tf_get_hotel_availability' ) ) {
 	function tf_get_hotel_availability() {
 		// Add nonce for security and authentication.
-		check_ajax_referer('updates', '_nonce');
+		check_ajax_referer( 'updates', '_nonce' );
 
 		$new_post   = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
 		$hotel_id   = isset( $_POST['hotel_id'] ) && ! empty( $_POST['hotel_id'] ) ? sanitize_text_field( $_POST['hotel_id'] ) : '';
@@ -428,7 +428,7 @@ if ( ! function_exists( 'tf_update_room_avail_date_price' ) ) {
 if ( ! function_exists( 'tf_add_apartment_availability' ) ) {
 	function tf_add_apartment_availability() {
 		// Add nonce for security and authentication.
-		check_ajax_referer('updates', '_nonce');
+		check_ajax_referer( 'updates', '_nonce' );
 
 		$date_format         = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		$apartment_id        = isset( $_POST['apartment_id'] ) && ! empty( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
@@ -518,7 +518,7 @@ if ( ! function_exists( 'tf_add_apartment_availability' ) ) {
 if ( ! function_exists( 'tf_get_apartment_availability' ) ) {
 	function tf_get_apartment_availability() {
 		// Add nonce for security and authentication.
-		check_ajax_referer('updates', '_nonce');
+		check_ajax_referer( 'updates', '_nonce' );
 
 		$new_post         = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
 		$apartment_id     = isset( $_POST['apartment_id'] ) && ! empty( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
@@ -665,12 +665,19 @@ if ( ! function_exists( 'tf_load_more_icons' ) ) {
 	add_action( 'wp_ajax_tf_load_more_icons', 'tf_load_more_icons' );
 	function tf_load_more_icons() {
 		// Add nonce for security and authentication.
-		check_ajax_referer('updates', '_nonce');
-		
+		check_ajax_referer( 'updates', '_nonce' );
+
 		$start_index = isset( $_POST['start_index'] ) ? intval( $_POST['start_index'] ) : 0;
 		$type        = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : 'all';
+		$search      = isset( $_POST['search'] ) ? sanitize_text_field( $_POST['search'] ) : '';
 		$icon_list   = get_icon_list();
 		$icons       = array_slice( $icon_list[ $type ]['icons'], $start_index, 100 );
+
+		if ( ! empty( $search ) ) {
+			$icons = array_filter( $icons, function ( $icon ) use ( $search ) {
+				return strpos( $icon, $search ) !== false;
+			} );
+		}
 
 		$icons_html = '';
 		foreach ( $icons as $key => $icon ) {
@@ -685,5 +692,43 @@ if ( ! function_exists( 'tf_load_more_icons' ) ) {
 		}
 
 		wp_send_json_success( $icons_html );
+	}
+}
+
+/*
+ * Icon search filter
+ * @auther Foysal
+ */
+if ( ! function_exists( 'tf_icon_search' ) ) {
+	add_action( 'wp_ajax_tf_icon_search', 'tf_icon_search' );
+	function tf_icon_search() {
+		// Add nonce for security and authentication.
+		check_ajax_referer( 'updates', '_nonce' );
+
+		$search_text = isset( $_POST['search'] ) ? sanitize_text_field( $_POST['search'] ) : '';
+		$type        = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : 'all';
+		$icon_list   = get_icon_list();
+		$icons       = $icon_list[ $type ]['icons'];
+
+		$icons = array_filter( $icons, function ( $icon ) use ( $search_text ) {
+			return strpos( $icon, $search_text ) !== false;
+		} );
+
+		$icons_html = '';
+		foreach ( $icons as $key => $icon ) {
+			$icons_html .= '<li data-icon="' . esc_attr( $icon ) . '">
+                            <div class="tf-icon-inner">
+                                <i title="' . esc_attr( $icon ) . '" class="tf-main-icon ' . esc_attr( $icon ) . '"></i>
+                                <span class="check-icon">
+                                    <i class="ri-check-line"></i>
+                                </span>
+                            </div>
+                        </li>';
+		}
+
+		wp_send_json_success( array(
+			'html'  => $icons_html,
+			'count' => count( $icons )
+		) );
 	}
 }
