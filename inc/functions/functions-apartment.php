@@ -1188,7 +1188,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 					// First Day of Week
 					<?php tf_flatpickr_locale("root"); ?>
 
-                    let minStay = <?php echo esc_html( $min_stay ) ?>;
+                    let minStay = <?php echo esc_js( $min_stay ) ?>;
 
                     const bookingCalculation = (selectedDates) => {
 						<?php if ( ( $pricing_type === 'per_night' && ! empty( $price_per_night ) ) || ( $pricing_type === 'per_person' && ! empty( $adult_price ) ) ): ?>
@@ -1197,14 +1197,14 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                             var diff = Math.abs(selectedDates[1] - selectedDates[0]);
                             var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
                             if (days > 0) {
-                                var pricing_type = '<?php echo esc_html( $pricing_type ); ?>';
-                                var price_per_night = <?php echo esc_html( $price_per_night ); ?>;
-                                var adult_price = <?php echo esc_html( $adult_price ); ?>;
-                                var child_price = <?php echo esc_html( $child_price ); ?>;
-                                var infant_price = <?php echo esc_html( $infant_price ); ?>;
-                                var enable_availability = '<?php echo esc_html( $enable_availability ); ?>';
-                                var apt_availability = '<?php echo esc_html( $apt_availability ); ?>';
-                                
+                                var pricing_type = '<?php echo esc_js( $pricing_type ); ?>';
+                                var price_per_night = <?php echo esc_js( $price_per_night ); ?>;
+                                var adult_price = <?php echo esc_js( $adult_price ); ?>;
+                                var child_price = <?php echo esc_js( $child_price ); ?>;
+                                var infant_price = <?php echo esc_js( $infant_price ); ?>;
+                                var enable_availability = '<?php echo esc_js( $enable_availability ); ?>';
+                                var apt_availability = '<?php echo wp_kses_post($apt_availability); ?>';
+
 								if(apt_availability) {
 									apt_availability = JSON.parse(apt_availability);
 								}

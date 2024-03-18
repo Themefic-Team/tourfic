@@ -57,7 +57,7 @@ function tf_apartment_booking_callback() {
 		$check_in_out  = explode( ' - ', $check_in_out_date );
 		$check_in_stt  = strtotime( $check_in_out[0] . ' +1 day' );
 		$check_in      = gmdate( 'Y-m-d', $check_in_stt );
-		$check_out_stt = strtotime( $check_in_out[1] );
+		$check_out_stt = !empty($check_in_out) && is_array($check_in_out) ? strtotime( $check_in_out[1] ) : '';
 		$check_out     = gmdate( 'Y-m-d', $check_out_stt );
 		$days          = round( ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1 );
 	}

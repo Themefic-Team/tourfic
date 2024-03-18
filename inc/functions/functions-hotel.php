@@ -890,15 +890,16 @@ function tf_room_availability_callback() {
 				if ( ! empty( $order_ids ) && $reduce_num_room == true ) {
 
 					# Get backend available date range as an array
-					if ( $avil_by_date ) {
+					if ( !empty( $avil_by_date ) ) {
 
 						$order_date_ranges = array();
 
 						$backend_date_ranges = array();
 						foreach ( $avail_date as $single_date_range ) {
 
-							array_push( $backend_date_ranges, array( strtotime( $single_date_range["availability"]["from"] ), strtotime( $single_date_range["availability"]["to"] ) ) );
-
+                            if(is_array($single_date_range)){
+							    array_push( $backend_date_ranges, array( strtotime( $single_date_range["availability"]["from"] ), strtotime( $single_date_range["availability"]["to"] ) ) );
+                            }
 						}
 					}
 
@@ -1013,8 +1014,8 @@ function tf_room_availability_callback() {
 						$days = $days+1;
 					}
 
-					$d_price = $d_price_by_date * $days;
-					$price = $price_by_date * $days;
+					$d_price = !empty($d_price_by_date) ? $d_price_by_date * $days : 0;
+					$price = !empty($price_by_date) ? $price_by_date * $days : 0;
 
 					// Check if date is provided and within date range
 					if ( ! in_array( 0, $has_room ) ) {
