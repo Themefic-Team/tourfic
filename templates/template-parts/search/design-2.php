@@ -1,5 +1,9 @@
 <div class="tf-template-3">
 <?php 
+// Check nonce security
+if ( ! isset( $_GET['_nonce'] ) || ! wp_verify_nonce( $_GET['_nonce'], 'tf_ajax_nonce' ) ) {
+	return;
+}
 if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
 	$tf_search_result_banner = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] : '';
 }elseif( !empty($_GET['type']) && $_GET['type']=="tf_hotel" ){
@@ -15,15 +19,15 @@ if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
                 <div class="tf-head-title">
                     <h1><?php echo !empty($_GET['place-name']) ? esc_html( $_GET['place-name'] ) : '' ?></h1>
                     <?php if( !empty($_GET['type']) && "tf_tours"==$_GET['type'] ){ 
-                    $tf_adults = !empty($_GET['adults']) ? $_GET['adults'] : 0;
-                    $tf_children = !empty($_GET['children']) ? $_GET['children'] : 0;
+                    $tf_adults = !empty($_GET['adults']) ? absint( sanitize_key($_GET['adults']) ) : 0;
+                    $tf_children = !empty($_GET['children']) ? absint( sanitize_key($_GET['children']) ) : 0;
                     ?>
                         <div class="tf-title-meta">
-                            <p>( <?php echo esc_html( $tf_adults + $tf_children ); ?> <?php _e("Guest", "tourfic"); ?>, <?php echo !empty($_GET['check-in-out-date']) ? esc_html( $_GET['check-in-out-date'] ) : '' ?> )</p>
+                            <p>( <?php echo esc_html( $tf_adults + $tf_children ); ?> <?php esc_html_e("Guest", "tourfic"); ?>, <?php echo !empty($_GET['check-in-out-date']) ? esc_html( $_GET['check-in-out-date'] ) : '' ?> )</p>
                         </div>
                     <?php } if( !empty($_GET['type']) && "tf_hotel"==$_GET['type'] ){ ?>
                     <div class="tf-title-meta">
-                        <p>( <?php echo !empty($_GET['room']) ? esc_html( $_GET['room'] ) : '0' ?> <?php _e("room", "tourfic"); ?>, <?php echo !empty($_GET['check-in-out-date']) ? esc_html( $_GET['check-in-out-date'] ) : '' ?> )</p>
+                        <p>( <?php echo !empty($_GET['room']) ? esc_html( $_GET['room'] ) : '0' ?> <?php esc_html_e("room", "tourfic"); ?>, <?php echo !empty($_GET['check-in-out-date']) ? esc_html( $_GET['check-in-out-date'] ) : '' ?> )</p>
                     </div>
                     <?php } ?>
                 </div>
@@ -46,11 +50,11 @@ if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
                 
                 <div class="tf-details-left tf-result-previews">
                     <span class="tf-modify-search-btn">
-                        <?php _e("Modify search", "tourfic"); ?>
+                        <?php esc_html_e("Modify search", "tourfic"); ?>
                     </span>
                     <!-- Booking form Start -->
                     <div class="tf-archive-search-form tf-booking-form-wrapper">
-                        <form action="<?php echo tf_booking_search_action(); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
+                        <form action="<?php echo esc_url(tf_booking_search_action()); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
                             <?php tf_search_result_sidebar_form( 'archive' ); ?>
                         </form>
                     </div>
@@ -60,8 +64,8 @@ if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
                 <div class="tf-details-right tf-sitebar-widgets tf-archive-right">
                     <div class="tf-filter-wrapper">
                         <div class="tf-filter-title">
-                            <h2 class="tf-section-title"><?php _e("Filter", "tourfic"); ?></h2>
-                            <button class="filter-reset-btn" style="display: block;"><?php _e("Reset", "tourfic"); ?></button>
+                            <h2 class="tf-section-title"><?php esc_html_e("Filter", "tourfic"); ?></h2>
+                            <button class="filter-reset-btn" style="display: block;"><?php esc_html_e("Reset", "tourfic"); ?></button>
                         </div>
 
                         <?php if ( is_active_sidebar( 'tf_search_result' ) ) { ?>

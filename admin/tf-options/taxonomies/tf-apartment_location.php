@@ -3,13 +3,13 @@
 defined( 'ABSPATH' ) || exit;
 
 TF_Taxonomy_Metabox::taxonomy( 'tf_apartment_location', array(
-	'title'    => __( 'Apartment Location Settings', 'tourfic' ),
+	'title'    => esc_html__( 'Apartment Location Settings', 'tourfic' ),
 	'taxonomy' => 'apartment_location',
 	'fields'   => array(
 		array(
 			'id'    => 'image',
 			'type'  => 'image',
-			'title' => __( 'Upload location photo', 'tourfic' ),
+			'title' => esc_html__( 'Upload location photo', 'tourfic' ),
 		),
 	),
 ) );

@@ -10,7 +10,7 @@ foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
 }
 ?>
 <div class="tf-aprtment-rules-section" id="tf-apartment-rules">
-    <h2><?php ! empty( $meta['house_rules_title'] ) ? esc_html_e( $meta['house_rules_title'] ) : ''; ?></h2>
+    <h2><?php echo ! empty( $meta['house_rules_title'] ) ? esc_html($meta['house_rules_title']) : ''; ?></h2>
     <div class="aprtment-inc-exc <?php echo empty( $included_house_rules ) || empty( $not_included_house_rules ) ? esc_attr('tf-inc-exc-full') : ''; ?>">
         <?php if ( ! empty( $included_house_rules ) ): ?>
         <div class="aprtment-single-rules">
@@ -25,7 +25,7 @@ foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
                     </div>
                     <div class="rules-content">
                         <?php echo ! empty( $item['title'] ) ? '<span>' . esc_html( $item['title'] ) . '</span>' : ''; ?>
-                        <?php echo ! empty( $item['desc'] ) ? '<p>' . esc_html( $item['desc'] ) . '</p>' : ''; ?>
+                        <?php echo ! empty( $item['desc'] ) ? '<p>' . wp_kses_post( $item['desc'] ) . '</p>' : ''; ?>
                     </div>
                 </li>
                 <?php } ?>
@@ -46,7 +46,7 @@ foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
                     </div>
                     <div class="rules-content">
                         <?php echo ! empty( $item['title'] ) ? '<span>' . esc_html( $item['title'] ) . '</span>' : ''; ?>
-                        <?php echo ! empty( $item['desc'] ) ? '<p>' . esc_html( $item['desc'] ) . '</p>' : ''; ?>
+                        <?php echo ! empty( $item['desc'] ) ? '<p>' . wp_kses_post( $item['desc'] ) . '</p>' : ''; ?>
                     </div>
                 </li>
                 <?php } ?>

@@ -33,7 +33,7 @@ if ( ! class_exists( 'TF_icon' ) ) {
                     </span>
                 </div>
                 <a href="#" class="tf-admin-btn tf-modal-btn"><i class="ri-add-fill"></i><?php esc_html_e( 'Add Icon', 'tourfic' ); ?></a>
-                <input type="hidden" class="tf-icon-value" name="<?php echo esc_attr( $this->field_name() ); ?>" value="<?php echo esc_attr( $value ); ?>" <?php echo $this->field_attributes() ?>/>
+                <input type="hidden" class="tf-icon-value" name="<?php echo esc_attr( $this->field_name() ); ?>" value="<?php echo esc_attr( $value ); ?>" <?php echo wp_kses_post($this->field_attributes()) ?>/>
             </div>
 			<?php
 		}
@@ -101,27 +101,27 @@ if ( ! class_exists( 'TF_icon' ) ) {
 		public function get_icon_list() {
 			$icons = array(
 				'all'           => array(
-					'label'      => __( 'All Icons', 'tourfic' ),
+					'label'      => esc_html__( 'All Icons', 'tourfic' ),
 					'label_icon' => 'ri-grid-fill',
 					'icons'      => array_merge( fontawesome_four_icons(), fontawesome_five_icons(), fontawesome_six_icons(), remix_icon() ),
 				),
 				'fontawesome_4' => array(
-					'label'      => __( 'Font Awesome 4', 'tourfic' ),
+					'label'      => esc_html__( 'Font Awesome 4', 'tourfic' ),
 					'label_icon' => 'fa-regular fa-font-awesome',
 					'icons'      => fontawesome_four_icons(),
 				),
 				'fontawesome_5' => array(
-					'label'      => __( 'Font Awesome 5', 'tourfic' ),
+					'label'      => esc_html__( 'Font Awesome 5', 'tourfic' ),
 					'label_icon' => 'fa-regular fa-font-awesome',
 					'icons'      => fontawesome_five_icons(),
 				),
 				'fontawesome_6' => array(
-					'label'      => __( 'Font Awesome 6', 'tourfic' ),
+					'label'      => esc_html__( 'Font Awesome 6', 'tourfic' ),
 					'label_icon' => 'fa-regular fa-font-awesome',
 					'icons'      => fontawesome_six_icons(),
 				),
 				'remixicon'     => array(
-					'label'      => __( 'Remix Icon', 'tourfic' ),
+					'label'      => esc_html__( 'Remix Icon', 'tourfic' ),
 					'label_icon' => 'ri-remixicon-line',
 					'icons'      => remix_icon(),
 				),

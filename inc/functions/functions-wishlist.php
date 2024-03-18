@@ -14,11 +14,11 @@ add_action('wp_ajax_nopriv_tf_add_to_wishlists', 'tf_add_to_wishlists');
  */
 function tf_add_to_wishlists()
 {
-    // check nonce
-    $nonce = $_POST['nonce'];
-    if (!wp_verify_nonce($nonce, 'wishlist-nonce')) {
-        die('Whoops!');
-    }
+    // Check nonce security
+	if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'wishlist-nonce' ) ) {
+		die('Whoops!');
+	}
+
     if (isset($_POST)) {
         if (defined('DOING_AJAX') && DOING_AJAX) {
 
@@ -51,7 +51,7 @@ function tf_add_to_wishlists()
                 // update if the wp_usermeta meta_key[wishlist_item] => meta_value[ $parameters[ $post_id ] ] pair already exists
                 update_user_meta($user_id, 'wishlist_item', $data, $previous_wishlist_item[$post_id]);
             }
-            wp_send_json_success(__("Item added to wishlist", 'tourfic'));
+            wp_send_json_success(esc_html__("Item added to wishlist", 'tourfic'));
         }
     }
 }
@@ -118,11 +118,11 @@ add_action('wp_ajax_nopriv_tf_generate_table', 'tf_generate_table_guest');
  */
 function tf_generate_table_guest()
 {
-    // check nonce
-    $nonce = $_POST['nonce'];
-    if (!wp_verify_nonce($nonce, 'populate-wishlist-guest-nonce')) {
-        die('Whoops!');
-    }
+    // Check nonce security
+	if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'populate-wishlist-guest-nonce' ) ) {
+		die('Whoops!');
+	}
+
     if (isset($_POST)) {
         if (defined('DOING_AJAX') && DOING_AJAX) {
             $ids = $_POST['ids'];
@@ -141,7 +141,7 @@ function tf_generate_table_guest()
 function tf_generate_table($ids, $type = null)
 {
     if (empty($ids)) {
-        return __('<p>No items added yet!</p>', 'tourfic');
+        return '<p>' . esc_html__('No items added yet!', 'tourfic') . '</p>';
         exit;
     }
     ob_start();
@@ -156,16 +156,16 @@ add_action('wp_ajax_tf_remove_wishlist', 'tf_remove_wishlist');
  */
 function tf_remove_wishlist()
 {
-    // check nonce
-    $nonce = $_GET['nonce'];
-    if (!wp_verify_nonce($nonce, 'wishlist-nonce')) {
-        die('Whoops!');
-    }
+    // Check nonce security
+	if ( ! isset( $_GET['nonce'] ) || ! wp_verify_nonce( $_GET['nonce'], 'wishlist-nonce' ) ) {
+		die('Whoops!');
+	}
+
     if (isset($_GET)) {
         if (defined('DOING_AJAX') && DOING_AJAX) {
             global $wpdb;
-            $id = $_GET['id'];
-            $type = $_GET['type'];
+            $id = esc_attr($_GET['id']);
+            $type = esc_attr($_GET['type']);
             $user_id = get_current_user_id();
             $previous_wishlist_item = get_user_meta($user_id, 'wishlist_item', false);
             // search recursively through records returned from get_user_meta for the record you want to replace, as identified by `post_id` - credit: http://php.net/manual/en/function.array-search.php#116635

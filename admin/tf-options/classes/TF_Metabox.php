@@ -111,7 +111,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 					<?php
 					$section_count = 0;
 					foreach ( $this->metabox_sections as $key => $section ) : ?>
-                        <a class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>" data-tab="<?php echo esc_attr( $key ) ?>">
+                        <a class="tf-tablinks <?php echo esc_attr($section_count == 0 ? 'active' : ''); ?>" data-tab="<?php echo esc_attr( $key ) ?>">
 							<?php echo ! empty( $section['icon'] ) ? '<span class="tf-sec-icon"><i class="' . esc_attr( $section['icon'] ) . '"></i></span>' : ''; ?>
 							<?php echo esc_html( $section['title'] ); ?>
                         </a>
@@ -121,7 +121,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
                 <div class="tf-tab-wrapper">
 					<?php $content_count = 0;
 					foreach ( $this->metabox_sections as $key => $section ) : ?>
-                        <div id="<?php echo esc_attr( $key ) ?>" class="tf-tab-content <?php echo $content_count == 0 ? 'active' : ''; ?>">
+                        <div id="<?php echo esc_attr( $key ) ?>" class="tf-tab-content <?php echo esc_attr($content_count == 0 ? 'active' : ''); ?>">
 
 							<?php
 							if ( ! empty( $section['fields'] ) ):
@@ -148,17 +148,9 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 		 * @author Foysal
 		 */
 		public function save_metabox( $post_id ) {
-			// Add nonce for security and authentication.
-			$nonce_name   = isset( $_POST['tf_meta_box_nonce'] ) ? $_POST['tf_meta_box_nonce'] : '';
-			$nonce_action = 'tf_meta_box_nonce_action';
-
-			// Check if a nonce is set.
-			if ( ! isset( $nonce_name ) ) {
-				return;
-			}
-
 			// Check if a nonce is valid.
-			if ( ! wp_verify_nonce( $nonce_name, $nonce_action ) ) {
+
+			if ( !empty($_POST['tf_meta_box_nonce']) && ! wp_verify_nonce( esc_attr($_POST['tf_meta_box_nonce']), 'tf_meta_box_nonce_action' ) ) {
 				return;
 			}
 
@@ -226,9 +218,9 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			}
 			$post_basic_info = array(
 				'post_id' => sanitize_key( $post_id ),
-				'post_title' => sanitize_text_field( $_POST['post_title'] ),
-				'post_content' => sanitize_text_field( $_POST['content'] ),
-				'post_status' => sanitize_text_field( $_POST['post_status'] ),
+				'post_title' => !empty($_POST['post_title']) ? sanitize_text_field( $_POST['post_title'] ) : '',
+				'post_content' => !empty($_POST['content']) ? sanitize_text_field( $_POST['content'] ) : '',
+				'post_status' => !empty($_POST['post_status']) ? sanitize_text_field( $_POST['post_status'] ) : '',
 				'post_thumbnail' => !empty( get_the_post_thumbnail_url($post_id,'full') ) ?  get_the_post_thumbnail_url($post_id,'full') : '',
 				'post_date' => get_the_date( 'Y-m-d H:i:s', $post_id )
 			);

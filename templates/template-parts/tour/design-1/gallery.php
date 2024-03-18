@@ -1,14 +1,14 @@
 <!-- Tour Gallery Section -->
 <div class="tf-hero-gallery tf-mb-30 tf-template-section">
 <div class="tf-gallery-featured">
-    <img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : TF_ASSETS_APP_URL.'/images/feature-default.jpg'; ?>" alt="<?php _e( 'Tour Image', 'tourfic' ); ?>">
+    <img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>" alt="<?php esc_html_e( 'Tour Image', 'tourfic' ); ?>">
     <div class="featured-meta-gallery-videos">
         <div class="featured-column tf-gallery-box">
             <?php 
             if ( ! empty( $gallery_ids ) ) {
             ?>
             <a id="featured-gallery" href="#" class="tf-tour-gallery">
-                <i class="fa-solid fa-camera-retro"></i><?php echo __("Gallery","tourfic"); ?>
+                <i class="fa-solid fa-camera-retro"></i><?php echo esc_html__("Gallery","tourfic"); ?>
             </a>
             <?php 
             }
@@ -20,7 +20,7 @@
         if ( !empty($tour_video) ) { ?>
         <div class="featured-column tf-video-box">
             <a class="tf-tour-video" id="featured-video" data-fancybox="tour-video" href="<?php echo esc_url($tour_video); ?>">
-                <i class="fa-solid fa-video"></i> <?php echo __("Video","tourfic"); ?>
+                <i class="fa-solid fa-video"></i> <?php echo esc_html__("Video","tourfic"); ?>
             </a>
         </div>
         <?php } ?>
@@ -30,11 +30,11 @@
         <?php
         if($comments){ ?>
         <a href="#tf-review" class="tf-single-rating">
-            <span><?php echo tf_total_avg_rating( $comments ); ?></span> (<?php tf_based_on_text( count( $comments ) ); ?>)
+            <span><?php echo wp_kses_post(tf_total_avg_rating( $comments )); ?></span> (<?php tf_based_on_text( count( $comments ) ); ?>)
         </a>
         <?php }else{ ?>
             <a href="#tf-review" class="tf-single-rating">
-                <span><?php _e( "0.0", "tourfic" ) ?></span> (<?php _e( "0 review", "tourfic" ) ?>)
+                <span><?php esc_html_e( "0.0", "tourfic" ) ?></span> (<?php esc_html_e( "0 review", "tourfic" ) ?>)
             </a>
         <?php } ?>
     <?php } ?>

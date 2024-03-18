@@ -7,7 +7,7 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.11.20
+ * Version:         2.11.21
  * Tested up to:    6.4.3
  * WC tested up to: 8.6
  * Requires PHP:    7.4
@@ -49,17 +49,13 @@ define( 'TF_OPTIONS_PATH', TF_ADMIN_PATH . 'options/' );
 define( 'TF_ASSETS_PATH', TF_PATH . 'assets/' );
 define( 'TF_EMAIL_TEMPLATES_PATH', TF_PATH . 'admin/emails/templates/' );
 
-if ( ! class_exists( 'Appsero\Client' ) ) {
-	require_once( TF_INC_PATH . 'app/src/Client.php' );
-}
-
 /**
  * Tourfic Define
  *
  * @since 1.0
  */
 if ( ! defined( 'TOURFIC' ) ) {
-	define( 'TOURFIC', '2.11.20' );
+	define( 'TOURFIC', '2.11.21' );
 }
 
 /**
@@ -95,9 +91,9 @@ function tf_file_missing( $files = '' ) {
 	if ( is_admin() ) {
 		if ( ! empty( $files ) ) {
 			$class   = 'notice notice-error';
-			$message = '<strong>' . $files . '</strong>' . __( ' file is missing! It is required to function Tourfic properly!', 'tourfic' );
+			$message = '<strong>' . $files . '</strong>' . esc_html__( ' file is missing! It is required to function Tourfic properly!', 'tourfic' );
 
-			printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message );
+			printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), wp_kses_post( $message ) );
 		}
 	}
 
@@ -195,84 +191,65 @@ function tf_is_woo() {
 		if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) && ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) {
 			?>
             <div id="message" class="error">
-                <p><?php printf( __( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
-                <p><a id="tf_wooinstall" class="install-now button" data-plugin-slug="woocommerce"><?php _e( 'Install Now', 'tourfic' ); ?></a></p>
+                <?php /* translators: %1$s: WooCommerce plugin url start, %2$s: WooCommerce plugin url end */ ?>
+                <p><?php printf( esc_html__( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
+                <p><a id="tf_wooinstall" class="install-now button" data-plugin-slug="woocommerce"><?php esc_html_e( 'Install Now', 'tourfic' ); ?></a></p>
             </div>
 
-			<script>
-				jQuery(document).on('click', '#tf_wooinstall', function (e) {
-					e.preventDefault();
-					var current = jQuery(this);
-					var plugin_slug = current.attr("data-plugin-slug");
-					var ajax_url= '<?php echo admin_url( 'admin-ajax.php' )?>';
+            <script>
+                jQuery(document).on('click', '#tf_wooinstall', function (e) {
+                    e.preventDefault();
+                    var current = jQuery(this);
+                    var plugin_slug = current.attr("data-plugin-slug");
+                    var ajax_url= '<?php echo esc_url( admin_url( 'admin-ajax.php' ) )?>';
 
-					current.addClass('updating-message').text('Installing...');
-					
-					var data = {
-						action: 'tf_ajax_install_plugin',
-						_ajax_nonce: '<?php echo wp_create_nonce( 'updates' )?>',
-						slug: plugin_slug,
-					};
+                    current.addClass('updating-message').text('Installing...');
 
-					jQuery.post(ajax_url, data, function (response) {
-						current.removeClass('updating-message');
-						current.addClass('updated-message').text('Installing...');
-						current.attr("href", response.data.activateUrl);
-					})
-						.fail(function () {
-							current.removeClass('updating-message').text('Install Failed');
-						})
-						.always(function () {
-							current.removeClass('install-now updated-message').addClass('activate-now button-primary').text('Activating...');
-							current.unbind(e);
-							current[0].click();
-						});
-				});
-			</script>
+                    var data = {
+                        action: 'tf_ajax_install_plugin',
+                        _ajax_nonce: '<?php echo esc_html( wp_create_nonce( 'updates' ) ); ?>',
+                        slug: plugin_slug,
+                    };
+
+                    jQuery.post(ajax_url, data, function (response) {
+                        current.removeClass('updating-message');
+                        current.addClass('updated-message').text('Installing...');
+                        current.attr("href", response.data.activateUrl);
+                    })
+                        .fail(function () {
+                            current.removeClass('updating-message').text('Install Failed');
+                        })
+                        .always(function () {
+                            current.removeClass('install-now updated-message').addClass('activate-now button-primary').text('Activating...');
+                            current.unbind(e);
+                            current[0].click();
+                        });
+                });
+            </script>
 
 			<?php
 		} elseif ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) && file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) {
 			?>
 
             <div id="message" class="error">
-                <p><?php printf( __( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
-                <p><a href="<?php echo get_admin_url(); ?>plugins.php?_wpnonce=<?php echo wp_create_nonce( 'activate-plugin_woocommerce/woocommerce.php' ); ?>&action=activate&plugin=woocommerce/woocommerce.php"
-                      class="button activate-now button-primary"><?php _e( 'Activate', 'tourfic' ); ?></a></p>
+                <?php /* translators: %1$s: WooCommerce plugin url start, %2$s: WooCommerce plugin url end */ ?>
+                <p><?php printf( esc_html__( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
+                <p><a href="<?php echo esc_url( get_admin_url() ); ?>plugins.php?_wpnonce=<?php echo esc_attr( wp_create_nonce( 'activate-plugin_woocommerce/woocommerce.php' ) ); ?>&action=activate&plugin=woocommerce/woocommerce.php"
+                      class="button activate-now button-primary"><?php esc_html_e( 'Activate', 'tourfic' ); ?></a></p>
             </div>
 			<?php
 		} elseif ( version_compare( get_option( 'woocommerce_db_version' ), '2.5', '<' ) ) {
 			?>
 
             <div id="message" class="error">
-                <p><?php printf( __( '%sTourfic is inactive.%s This plugin requires WooCommerce 2.5 or newer. Please %supdate WooCommerce to version 2.5 or newer%s', 'tourfic' ), '<strong>', '</strong>', '<a href="' . admin_url( 'plugins.php' ) . '">', '&nbsp;&raquo;</a>' ); ?></p>
+                <?php /* translators: %1$s: strong tag start, %2$s: strong tag end, %3$s: plugin url start, %4$s: plugin url end */ ?>
+                <p><?php printf( esc_html__( '%1$sTourfic is inactive.%2$s This plugin requires WooCommerce 2.5 or newer. Please %3$supdate WooCommerce to version 2.5 or newer%4$s', 'tourfic' ), '<strong>', '</strong>', '<a href="' . esc_url( admin_url( 'plugins.php' ) ) . '">', '&nbsp;&raquo;</a>' ); ?></p>
             </div>
 
 			<?php
 		}
 	}
 }
-
-/**
- * Initialize the plugin tracker
- *
- * @return void
- */
-function appsero_init_tracker_tourfic() {
-
-	if ( ! class_exists( 'Appsero\Client' ) ) {
-		require_once __DIR__ . '/app/src/Client.php';
-	}
-
-	$client = new Appsero\Client( '19134f1b-2838-4a45-ac05-772b7dfc9850', 'tourfic', __FILE__ );
-	// Admin notice text
-	$notice = sprintf( $client->__trans( 'Want to help make <strong>%1$s</strong> even more awesome? Allow %1$s to collect non-sensitive diagnostic data and usage information. I agree to get Important Product Updates & Discount related information on my email from %1$s (I can unsubscribe anytime).' ), $client->name );
-	$client->insights()->notice( $notice );
-	// Active insights
-	$client->insights()->init();
-
-}
-
-appsero_init_tracker_tourfic();
 
 function tf_active_template_settings_callback() {
 	//all code goes here if need

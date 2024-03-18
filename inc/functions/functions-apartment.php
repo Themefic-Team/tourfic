@@ -17,34 +17,34 @@ function register_tf_apartment_post_type() {
 	$apartment_slug = get_option( 'apartment_slug' );
 
 	$apartment_labels =  apply_filters( 'tf_apartment_labels', array(
-		'name'                  => _x( '%2$s', 'post type general name', 'tourfic' ),
-		'singular_name'         => _x( '%1$s', 'post type singular name', 'tourfic' ),
+		'name'                  => _x( 'Apartments', 'post type general name', 'tourfic' ),
+		'singular_name'         => _x( 'Apartment', 'post type singular name', 'tourfic' ),
 		'add_new'               => _x( 'Add New', 'tourfic' ),
-		'add_new_item'          => __( 'Add New %1$s', 'tourfic' ),
-		'edit_item'             => __( 'Edit %1$s', 'tourfic' ),
-		'new_item'              => __( 'New %1$s', 'tourfic' ),
-		'all_items'             => __( 'All %1$s', 'tourfic' ),
-		'view_item'             => __( 'View %1$s', 'tourfic' ),
-		'view_items'            => __( 'View %2$s', 'tourfic' ),
-		'search_items'          => __( 'Search %2$s', 'tourfic' ),
-		'not_found'             => __( 'No %2$s found', 'tourfic' ),
-		'not_found_in_trash'    => __( 'No %2$s found in the Trash', 'tourfic' ),
+		'add_new_item'          => esc_html__( 'Add New Apartment', 'tourfic' ),
+		'edit_item'             => esc_html__( 'Edit Apartment', 'tourfic' ),
+		'new_item'              => esc_html__( 'New Apartment', 'tourfic' ),
+		'all_items'             => esc_html__( 'All Apartment', 'tourfic' ),
+		'view_item'             => esc_html__( 'View Apartment', 'tourfic' ),
+		'view_items'            => esc_html__( 'View Apartments', 'tourfic' ),
+		'search_items'          => esc_html__( 'Search Apartments', 'tourfic' ),
+		'not_found'             => esc_html__( 'No Apartments found', 'tourfic' ),
+		'not_found_in_trash'    => esc_html__( 'No Apartments found in the Trash', 'tourfic' ),
 		'parent_item_colon'     => '',
-		'menu_name'             => __( '%2$s', 'tourfic' ),
-		'featured_image'        => __( '%1$s Featured Image', 'tourfic' ),
-		'set_featured_image'    => __( 'Set %1$s Featured Image', 'tourfic' ),
-		'remove_featured_image' => __( 'Remove %1$s Featured Image', 'tourfic' ),
-		'use_featured_image'    => __( 'Use as %1$s Featured Image', 'tourfic' ),
-		'attributes'            => __( '%1$s Attributes', 'tourfic' ),
-		'filter_items_list'     => __( 'Filter %1$s list', 'tourfic' ),
-		'items_list_navigation' => __( '%1$s list navigation', 'tourfic' ),
-		'items_list'            => __( '%1$s list', 'tourfic' )
+		'menu_name'             => esc_html__( 'Apartments', 'tourfic' ),
+		'featured_image'        => esc_html__( 'Apartment Featured Image', 'tourfic' ),
+		'set_featured_image'    => esc_html__( 'Set Apartment Featured Image', 'tourfic' ),
+		'remove_featured_image' => esc_html__( 'Remove Apartment Featured Image', 'tourfic' ),
+		'use_featured_image'    => esc_html__( 'Use as Apartment Featured Image', 'tourfic' ),
+		'attributes'            => esc_html__( 'Apartment Attributes', 'tourfic' ),
+		'filter_items_list'     => esc_html__( 'Filter Apartment list', 'tourfic' ),
+		'items_list_navigation' => esc_html__( 'Apartment list navigation', 'tourfic' ),
+		'items_list'            => esc_html__( 'Apartment list', 'tourfic' )
 	));
 
 
-	foreach ( $apartment_labels as $key => $value ) {
-		$apartment_labels[ $key ] = sprintf( $value, tf_apartments_singular_label(), tf_apartments_plural_label() );
-	}
+	// foreach ( $apartment_labels as $key => $value ) {
+	// 	$apartment_labels[ $key ] = sprintf( $value, tf_apartments_singular_label(), tf_apartments_plural_label() );
+	// }
 
 	$apartment_args   = array(
 		'labels'             => $apartment_labels,
@@ -82,8 +82,8 @@ if ( tfopt( 'disable-services' ) && in_array( 'apartment', tfopt( 'disable-servi
 
 function tf_apartments_default_labels() {
 	$default_apartment = array(
-		'singular' => __( 'Apartment', 'tourfic' ),
-		'plural'   => __( 'Apartments', 'tourfic' ),
+		'singular' => esc_html__( 'Apartment', 'tourfic' ),
+		'plural'   => esc_html__( 'Apartments', 'tourfic' ),
 	);
 
 	return apply_filters( 'tf_apartment_labels', $default_apartment );
@@ -113,27 +113,27 @@ function tf_apartment_taxonomies_register() {
 	 */
 	$apartment_location_slug   = apply_filters( 'apartment_location_slug', 'apartment-location' );
 	$apartment_location_labels = array(
-		'name'                       => __( 'Locations', 'tourfic' ),
-		'singular_name'              => __( 'Location', 'tourfic' ),
-		'menu_name'                  => __( 'Location', 'tourfic' ),
-		'all_items'                  => __( 'All Locations', 'tourfic' ),
-		'edit_item'                  => __( 'Edit Location', 'tourfic' ),
-		'view_item'                  => __( 'View Location', 'tourfic' ),
-		'update_item'                => __( 'Update location name', 'tourfic' ),
-		'add_new_item'               => __( 'Add new location', 'tourfic' ),
-		'new_item_name'              => __( 'New location name', 'tourfic' ),
-		'parent_item'                => __( 'Parent Location', 'tourfic' ),
-		'parent_item_colon'          => __( 'Parent Location:', 'tourfic' ),
-		'search_items'               => __( 'Search Location', 'tourfic' ),
-		'popular_items'              => __( 'Popular Location', 'tourfic' ),
-		'separate_items_with_commas' => __( 'Separate location with commas', 'tourfic' ),
-		'add_or_remove_items'        => __( 'Add or remove location', 'tourfic' ),
-		'choose_from_most_used'      => __( 'Choose from the most used location', 'tourfic' ),
-		'not_found'                  => __( 'No location found', 'tourfic' ),
-		'no_terms'                   => __( 'No location', 'tourfic' ),
-		'items_list_navigation'      => __( 'Location list navigation', 'tourfic' ),
-		'items_list'                 => __( 'Locations list', 'tourfic' ),
-		'back_to_items'              => __( 'Back to location', 'tourfic' ),
+		'name'                       => esc_html__( 'Locations', 'tourfic' ),
+		'singular_name'              => esc_html__( 'Location', 'tourfic' ),
+		'menu_name'                  => esc_html__( 'Location', 'tourfic' ),
+		'all_items'                  => esc_html__( 'All Locations', 'tourfic' ),
+		'edit_item'                  => esc_html__( 'Edit Location', 'tourfic' ),
+		'view_item'                  => esc_html__( 'View Location', 'tourfic' ),
+		'update_item'                => esc_html__( 'Update location name', 'tourfic' ),
+		'add_new_item'               => esc_html__( 'Add new location', 'tourfic' ),
+		'new_item_name'              => esc_html__( 'New location name', 'tourfic' ),
+		'parent_item'                => esc_html__( 'Parent Location', 'tourfic' ),
+		'parent_item_colon'          => esc_html__( 'Parent Location:', 'tourfic' ),
+		'search_items'               => esc_html__( 'Search Location', 'tourfic' ),
+		'popular_items'              => esc_html__( 'Popular Location', 'tourfic' ),
+		'separate_items_with_commas' => esc_html__( 'Separate location with commas', 'tourfic' ),
+		'add_or_remove_items'        => esc_html__( 'Add or remove location', 'tourfic' ),
+		'choose_from_most_used'      => esc_html__( 'Choose from the most used location', 'tourfic' ),
+		'not_found'                  => esc_html__( 'No location found', 'tourfic' ),
+		'no_terms'                   => esc_html__( 'No location', 'tourfic' ),
+		'items_list_navigation'      => esc_html__( 'Location list navigation', 'tourfic' ),
+		'items_list'                 => esc_html__( 'Locations list', 'tourfic' ),
+		'back_to_items'              => esc_html__( 'Back to location', 'tourfic' ),
 	);
 
 	$apartment_location_args = array(
@@ -162,27 +162,27 @@ function tf_apartment_taxonomies_register() {
 	 */
 	$apartment_feature_slug   = apply_filters( 'apartment_feature_slug', 'apartment-feature' );
 	$apartment_feature_labels = [
-		"name"                       => __( "Features", 'tourfic' ),
-		"singular_name"              => __( "Feature", 'tourfic' ),
-		"menu_name"                  => __( "Features", 'tourfic' ),
-		"all_items"                  => __( "All Features", 'tourfic' ),
-		"edit_item"                  => __( "Edit Feature", 'tourfic' ),
-		"view_item"                  => __( "View Feature", 'tourfic' ),
-		"update_item"                => __( "Update Feature", 'tourfic' ),
-		"add_new_item"               => __( "Add new Feature", 'tourfic' ),
-		"new_item_name"              => __( "New Feature name", 'tourfic' ),
-		"parent_item"                => __( "Parent Feature", 'tourfic' ),
-		"parent_item_colon"          => __( "Parent Feature:", 'tourfic' ),
-		"search_items"               => __( "Search Feature", 'tourfic' ),
-		"popular_items"              => __( "Popular Features", 'tourfic' ),
-		"separate_items_with_commas" => __( "Separate Features with commas", 'tourfic' ),
-		"add_or_remove_items"        => __( "Add or remove Features", 'tourfic' ),
-		"choose_from_most_used"      => __( "Choose from the most used Features", 'tourfic' ),
-		"not_found"                  => __( "No Features found", 'tourfic' ),
-		"no_terms"                   => __( "No Features", 'tourfic' ),
-		"items_list_navigation"      => __( "Features list navigation", 'tourfic' ),
-		"items_list"                 => __( "Features list", 'tourfic' ),
-		"back_to_items"              => __( "Back to Features", 'tourfic' ),
+		"name"                       => esc_html__( "Features", 'tourfic' ),
+		"singular_name"              => esc_html__( "Feature", 'tourfic' ),
+		"menu_name"                  => esc_html__( "Features", 'tourfic' ),
+		"all_items"                  => esc_html__( "All Features", 'tourfic' ),
+		"edit_item"                  => esc_html__( "Edit Feature", 'tourfic' ),
+		"view_item"                  => esc_html__( "View Feature", 'tourfic' ),
+		"update_item"                => esc_html__( "Update Feature", 'tourfic' ),
+		"add_new_item"               => esc_html__( "Add new Feature", 'tourfic' ),
+		"new_item_name"              => esc_html__( "New Feature name", 'tourfic' ),
+		"parent_item"                => esc_html__( "Parent Feature", 'tourfic' ),
+		"parent_item_colon"          => esc_html__( "Parent Feature:", 'tourfic' ),
+		"search_items"               => esc_html__( "Search Feature", 'tourfic' ),
+		"popular_items"              => esc_html__( "Popular Features", 'tourfic' ),
+		"separate_items_with_commas" => esc_html__( "Separate Features with commas", 'tourfic' ),
+		"add_or_remove_items"        => esc_html__( "Add or remove Features", 'tourfic' ),
+		"choose_from_most_used"      => esc_html__( "Choose from the most used Features", 'tourfic' ),
+		"not_found"                  => esc_html__( "No Features found", 'tourfic' ),
+		"no_terms"                   => esc_html__( "No Features", 'tourfic' ),
+		"items_list_navigation"      => esc_html__( "Features list navigation", 'tourfic' ),
+		"items_list"                 => esc_html__( "Features list", 'tourfic' ),
+		"back_to_items"              => esc_html__( "Back to Features", 'tourfic' ),
 	];
 
 	$apartment_feature_args = [
@@ -212,27 +212,27 @@ function tf_apartment_taxonomies_register() {
 	 */
 	$apartment_type_slug   = apply_filters( 'apartment_type_slug', 'apartment-type' );
 	$apartment_type_labels = [
-		"name"                       => __( "Types", 'tourfic' ),
-		"singular_name"              => __( "Type", 'tourfic' ),
-		"menu_name"                  => __( "Types", 'tourfic' ),
-		"all_items"                  => __( "All Types", 'tourfic' ),
-		"edit_item"                  => __( "Edit Type", 'tourfic' ),
-		"view_item"                  => __( "View Type", 'tourfic' ),
-		"update_item"                => __( "Update Type", 'tourfic' ),
-		"add_new_item"               => __( "Add new Type", 'tourfic' ),
-		"new_item_name"              => __( "New Type name", 'tourfic' ),
-		"parent_item"                => __( "Parent Type", 'tourfic' ),
-		"parent_item_colon"          => __( "Parent Type:", 'tourfic' ),
-		"search_items"               => __( "Search Type", 'tourfic' ),
-		"popular_items"              => __( "Popular Types", 'tourfic' ),
-		"separate_items_with_commas" => __( "Separate Types with commas", 'tourfic' ),
-		"add_or_remove_items"        => __( "Add or remove Types", 'tourfic' ),
-		"choose_from_most_used"      => __( "Choose from the most used Types", 'tourfic' ),
-		"not_found"                  => __( "No Types found", 'tourfic' ),
-		"no_terms"                   => __( "No Types", 'tourfic' ),
-		"items_list_navigation"      => __( "Types list navigation", 'tourfic' ),
-		"items_list"                 => __( "Types list", 'tourfic' ),
-		"back_to_items"              => __( "Back to Types", 'tourfic' ),
+		"name"                       => esc_html__( "Types", 'tourfic' ),
+		"singular_name"              => esc_html__( "Type", 'tourfic' ),
+		"menu_name"                  => esc_html__( "Types", 'tourfic' ),
+		"all_items"                  => esc_html__( "All Types", 'tourfic' ),
+		"edit_item"                  => esc_html__( "Edit Type", 'tourfic' ),
+		"view_item"                  => esc_html__( "View Type", 'tourfic' ),
+		"update_item"                => esc_html__( "Update Type", 'tourfic' ),
+		"add_new_item"               => esc_html__( "Add new Type", 'tourfic' ),
+		"new_item_name"              => esc_html__( "New Type name", 'tourfic' ),
+		"parent_item"                => esc_html__( "Parent Type", 'tourfic' ),
+		"parent_item_colon"          => esc_html__( "Parent Type:", 'tourfic' ),
+		"search_items"               => esc_html__( "Search Type", 'tourfic' ),
+		"popular_items"              => esc_html__( "Popular Types", 'tourfic' ),
+		"separate_items_with_commas" => esc_html__( "Separate Types with commas", 'tourfic' ),
+		"add_or_remove_items"        => esc_html__( "Add or remove Types", 'tourfic' ),
+		"choose_from_most_used"      => esc_html__( "Choose from the most used Types", 'tourfic' ),
+		"not_found"                  => esc_html__( "No Types found", 'tourfic' ),
+		"no_terms"                   => esc_html__( "No Types", 'tourfic' ),
+		"items_list_navigation"      => esc_html__( "Types list navigation", 'tourfic' ),
+		"items_list"                 => esc_html__( "Types list", 'tourfic' ),
+		"back_to_items"              => esc_html__( "Back to Types", 'tourfic' ),
 	];
 
 	$apartment_type_args = [
@@ -313,18 +313,18 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 		$disable_apartment_infant_search  = ! empty( tfopt( 'disable_apartment_infant_search' ) ) ? tfopt( 'disable_apartment_infant_search' ) : '';
 		if( !empty($design) && 2==$design ){
 		?>
-		<form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
+		<form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo esc_url( tf_booking_search_action() ); ?>">
 			<div class="tf_hotel_searching">
 				<div class="tf_form_innerbody">
 					<div class="tf_form_fields">
 						<div class="tf_destination_fields">
 							<label class="tf_label_location">
-								<span class="tf-label"><?php _e( 'Location', 'tourfic' ); ?></span>
+								<span class="tf-label"><?php esc_html_e( 'Location', 'tourfic' ); ?></span>
 								<div class="tf_form_inners tf_form-inner">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 									<path d="M8 13.9317L11.2998 10.6318C13.1223 8.80943 13.1223 5.85464 11.2998 4.0322C9.4774 2.20975 6.52261 2.20975 4.70017 4.0322C2.87772 5.85464 2.87772 8.80943 4.70017 10.6318L8 13.9317ZM8 15.8173L3.75736 11.5747C1.41421 9.2315 1.41421 5.43254 3.75736 3.08939C6.10051 0.746245 9.89947 0.746245 12.2427 3.08939C14.5858 5.43254 14.5858 9.2315 12.2427 11.5747L8 15.8173ZM8 8.66536C8.7364 8.66536 9.33333 8.06843 9.33333 7.33203C9.33333 6.59565 8.7364 5.9987 8 5.9987C7.2636 5.9987 6.66667 6.59565 6.66667 7.33203C6.66667 8.06843 7.2636 8.66536 8 8.66536ZM8 9.9987C6.52724 9.9987 5.33333 8.80476 5.33333 7.33203C5.33333 5.85927 6.52724 4.66536 8 4.66536C9.47273 4.66536 10.6667 5.85927 10.6667 7.33203C10.6667 8.80476 9.47273 9.9987 8 9.9987Z" fill="#FAEEDD"/>
 									</svg>
-									<input type="text" required="" name="place-name" id="tf-apartment-location" class="" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" value="">
+									<input type="text" required="" name="place-name" id="tf-apartment-location" class="" placeholder="<?php esc_html_e( 'Enter Location', 'tourfic' ); ?>" value="">
                                     <input type="hidden" name="place" class="tf-place-input">
 								</div>
 							</label>
@@ -332,12 +332,12 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 						
 						<div class="tf_checkin_date">
 							<label class="tf_label_checkin tf_apartment_check_in_out_date">
-								<span class="tf-label"><?php _e( 'Check in', 'tourfic' ); ?></span>
+								<span class="tf-label"><?php esc_html_e( 'Check in', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_checkin_dates">
-										<span class="date"><?php echo date('d'); ?></span>
+										<span class="date"><?php echo esc_html( gmdate('d') ); ?></span>
 										<span class="month">
-											<span><?php echo date('M'); ?></span>
+											<span><?php echo esc_html( gmdate('M') ); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -353,12 +353,12 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 						
 						<div class="tf_checkin_date tf_apartment_check_in_out_date">
 							<label class="tf_label_checkin">
-								<span class="tf-label"><?php _e( 'Check Out', 'tourfic' ); ?></span>
+								<span class="tf-label"><?php esc_html_e( 'Check Out', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_checkout_dates">
-										<span class="date"><?php echo date('d'); ?></span>
+										<span class="date"><?php echo esc_html( gmdate('d') ); ?></span>
 										<span class="month">
-											<span><?php echo date('M'); ?></span>
+											<span><?php echo esc_html( gmdate('M') ); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -372,12 +372,12 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 
 						<div class="tf_guest_info tf_selectperson-wrap">
 							<label class="tf_label_checkin tf_input-inner">
-								<span class="tf-label"><?php _e( 'Guests', 'tourfic' ); ?></span>
+								<span class="tf-label"><?php esc_html_e( 'Guests', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_guest_calculation">
 										<div class="tf_guest_number">
-											<span class="guest"><?php _e( '1', 'tourfic' ); ?></span>
-											<span class="label"><?php _e( 'Guests', 'tourfic' ); ?></span>
+											<span class="guest"><?php esc_html_e( '1', 'tourfic' ); ?></span>
+											<span class="label"><?php esc_html_e( 'Guests', 'tourfic' ); ?></span>
 										</div>
 									</div>
 									<div class="tf_check_arrow">
@@ -391,7 +391,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 							<div class="tf_acrselection-wrap">
 								<div class="tf_acrselection-inner">
 									<div class="tf_acrselection">
-										<div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
+										<div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
 										<div class="acr-select">
 											<div class="acr-dec">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -422,7 +422,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 									</div>
 									<?php if ( empty($disable_apartment_child_search) ): ?>
 										<div class="tf_acrselection">
-											<div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
+											<div class="acr-label"><?php esc_html_e( 'Children', 'tourfic' ); ?></div>
 											<div class="acr-select">
 												<div class="acr-dec">
 													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -454,7 +454,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 									<?php endif; ?>
 									<?php if ( empty($disable_apartment_infant_search) ): ?>
 										<div class="tf_acrselection">
-											<div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
+											<div class="acr-label"><?php esc_html_e( 'Infant', 'tourfic' ); ?></div>
 											<div class="acr-select">
 												<div class="acr-dec">
 													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -491,7 +491,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 					</div>
 					<div class="tf_availability_checker_box">
 						<input type="hidden" name="type" value="tf_apartment" class="tf-post-type"/>
-						<button><?php echo _e("Check availability", "tourfic"); ?></button>
+						<button><?php echo esc_html_e("Check availability", "tourfic"); ?></button>
 					</div>
 				</div>
 			</div>
@@ -549,16 +549,16 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 			})(jQuery);
 		</script>
 		<?php } else{ ?>
-        <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
+        <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo esc_url( tf_booking_search_action() ); ?>">
             <div class="tf_homepage-booking">
                 <div class="tf_destination-wrap">
                     <div class="tf_input-inner">
                         <div class="tf_form-row">
                             <label class="tf_label-row">
-                                <span class="tf-label"><?php _e( 'Location', 'tourfic' ); ?>:</span>
+                                <span class="tf-label"><?php esc_html_e( 'Location', 'tourfic' ); ?>:</span>
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="fas fa-search"></i>
-                                    <input type="text" required="" name="place-name" id="tf-apartment-location" class="" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" value="">
+                                    <input type="text" required="" name="place-name" id="tf-apartment-location" class="" placeholder="<?php esc_html_e( 'Enter Location', 'tourfic' ); ?>" value="">
                                     <input type="hidden" name="place" class="tf-place-input">
                                 </div>
                             </label>
@@ -571,20 +571,20 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 						<span class="tf_person-icon">
                             <i class="fas fa-user"></i>
                         </span>
-                        <div class="adults-text"><?php _e( '1 Adults', 'tourfic' ); ?></div>
+                        <div class="adults-text"><?php esc_html_e( '1 Adults', 'tourfic' ); ?></div>
 						<?php if ( empty( $disable_apartment_child_search ) ): ?>
                             <div class="person-sep"></div>
-                            <div class="child-text"><?php _e( '0 Children', 'tourfic' ); ?></div>
+                            <div class="child-text"><?php esc_html_e( '0 Children', 'tourfic' ); ?></div>
 						<?php endif; ?>
 						<?php if ( empty( $disable_apartment_infant_search ) ): ?>
                             <div class="person-sep"></div>
-                            <div class="infant-text"><?php _e( '0 Infant', 'tourfic' ); ?></div>
+                            <div class="infant-text"><?php esc_html_e( '0 Infant', 'tourfic' ); ?></div>
 						<?php endif; ?>
                     </div>
                     <div class="tf_acrselection-wrap">
                         <div class="tf_acrselection-inner">
                             <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
+                                <div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
                                     <input type="number" name="adults" id="adults" min="1" value="1"/>
@@ -593,7 +593,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                             </div>
 							<?php if ( empty( $disable_apartment_child_search ) ): ?>
                                 <div class="tf_acrselection">
-                                    <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
+                                    <div class="acr-label"><?php esc_html_e( 'Children', 'tourfic' ); ?></div>
                                     <div class="acr-select">
                                         <div class="acr-dec">-</div>
                                         <input type="number" name="children" id="children" min="0" value="0"/>
@@ -603,7 +603,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 							<?php endif; ?>
 							<?php if ( empty( $disable_apartment_infant_search ) ): ?>
                                 <div class="tf_acrselection">
-                                    <div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
+                                    <div class="acr-label"><?php esc_html_e( 'Infant', 'tourfic' ); ?></div>
                                     <div class="acr-select">
                                         <div class="acr-dec">-</div>
                                         <input type="number" name="infant" id="infant" min="0" value="0"/>
@@ -619,7 +619,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                     <div class="tf_input-inner">
                         <div class="tf_form-row">
                             <label class="tf_label-row">
-                                <span class="tf-label"><?php _e( 'Check-in & Check-out date', 'tourfic' ); ?></span>
+                                <span class="tf-label"><?php esc_html_e( 'Check-in & Check-out date', 'tourfic' ); ?></span>
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="far fa-calendar-alt"></i>
                                     <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
@@ -634,17 +634,17 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                     <div class="tf_selectdate-wrap tf_more_info_selections">
                         <div class="tf_input-inner">
                             <label class="tf_label-row" style="width: 100%;">
-                                <span class="tf-label"><?php _e( 'More', 'tourfic' ); ?></span>
-                                <span style="text-decoration: none; display: block; cursor: pointer;"><?php _e( 'Filter', 'tourfic' ); ?>  <i class="fas fa-angle-down"></i></span>
+                                <span class="tf-label"><?php esc_html_e( 'More', 'tourfic' ); ?></span>
+                                <span style="text-decoration: none; display: block; cursor: pointer;"><?php esc_html_e( 'Filter', 'tourfic' ); ?>  <i class="fas fa-angle-down"></i></span>
                             </label>
                         </div>
                         <div class="tf-more-info">
-                            <h3><?php _e( 'Filter Price (Per Night)', 'tourfic' ); ?></h3>
+                            <h3><?php esc_html_e( 'Filter Price (Per Night)', 'tourfic' ); ?></h3>
                             <div class="tf-filter-price-range">
                                 <div class="tf-apartment-filter-range"></div>
                             </div>
 
-                            <h3 style="margin-top: 20px"><?php _e( 'Apartment Features', 'tourfic' ); ?></h3>
+                            <h3 style="margin-top: 20px"><?php esc_html_e( 'Apartment Features', 'tourfic' ); ?></h3>
 							<?php
 							$tf_apartment_feature = get_terms( array(
 								'taxonomy'     => 'apartment_feature',
@@ -657,14 +657,14 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                                 <div class="tf-apartment-features" style="overflow: hidden">
 									<?php foreach ( $tf_apartment_feature as $term ) : ?>
                                         <div class="form-group form-check">
-                                            <input type="checkbox" name="features[]" class="form-check-input" value="<?php _e( $term->slug ); ?>" id="<?php _e( $term->slug ); ?>">
-                                            <label class="form-check-label" for="<?php _e( $term->slug ); ?>"><?php _e( $term->name ); ?></label>
+                                            <input type="checkbox" name="features[]" class="form-check-input" value="<?php echo esc_html( $term->slug ); ?>" id="<?php echo esc_html( $term->slug ); ?>">
+                                            <label class="form-check-label" for="<?php echo esc_html( $term->slug ); ?>"><?php echo esc_html( $term->name ); ?></label>
                                         </div>
 									<?php endforeach; ?>
                                 </div>
 							<?php endif; ?>
 
-                            <h3 style="margin-top: 20px"><?php _e( 'Apartment Types', 'tourfic' ); ?></h3>
+                            <h3 style="margin-top: 20px"><?php esc_html_e( 'Apartment Types', 'tourfic' ); ?></h3>
 							<?php
 							$tf_apartment_type = get_terms( array(
 								'taxonomy'     => 'apartment_type',
@@ -677,8 +677,8 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                                 <div class="tf-apartment-types" style="overflow: hidden">
 									<?php foreach ( $tf_apartment_type as $term ) : ?>
                                         <div class="form-group form-check">
-                                            <input type="checkbox" name="types[]" class="form-check-input" value="<?php _e( $term->slug ); ?>" id="<?php _e( $term->slug ); ?>">
-                                            <label class="form-check-label" for="<?php _e( $term->slug ); ?>"><?php _e( $term->name ); ?></label>
+                                            <input type="checkbox" name="types[]" class="form-check-input" value="<?php echo esc_html( $term->slug ); ?>" id="<?php echo esc_html( $term->slug ); ?>">
+                                            <label class="form-check-label" for="<?php echo esc_html( $term->slug ); ?>"><?php echo esc_html( $term->name ); ?></label>
                                         </div>
 									<?php endforeach; ?>
                                 </div>
@@ -689,7 +689,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 
                 <div class="tf_submit-wrap">
                     <input type="hidden" name="type" value="tf_apartment" class="tf-post-type"/>
-                    <button class="tf_button tf-submit btn-styled" type="submit"><?php _e( 'Search', 'tourfic' ); ?></button>
+                    <button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
                 </div>
 
             </div>
@@ -705,7 +705,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                         mode: "range",
                         dateFormat: "Y/m/d",
                         altInput: true,
-                        altFormat: '<?php echo $date_format_change_apartments; ?>',
+                        altFormat: '<?php echo esc_html( $date_format_change_apartments ); ?>',
                         minDate: "today",
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -744,7 +744,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
 		$apt_availability    = ! empty( $meta['apt_availability'] ) ? $meta['apt_availability'] : '';
 		$booked_dates        = tf_apartment_booked_days( get_the_ID() );
-		$apt_reserve_button_text = !empty(tfopt('apartment_booking_form_button_text')) ? stripslashes(sanitize_text_field(tfopt('apartment_booking_form_button_text'))) : __("Reserve", 'tourfic');
+		$apt_reserve_button_text = !empty(tfopt('apartment_booking_form_button_text')) ? stripslashes(sanitize_text_field(tfopt('apartment_booking_form_button_text'))) : esc_html__("Reserve", 'tourfic');
 
 		$tf_booking_type = '1';
 		$tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = '';
@@ -825,16 +825,16 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 							$lowest_price = wc_price( $apartment_min_price );
 							
 							if ( ! empty( $apartment_min_discount ) ) {
-								echo "<b>" . __("From ", "tourfic") . "</b>" . "<del>" . strip_tags(wc_price( $apartment_min_main_price )) . "</del>" . " " . $lowest_price;
+								echo "<b>" . esc_html__("From ", "tourfic") . "</b>" . "<del>" . esc_html( wp_strip_all_tags(wc_price( $apartment_min_main_price )) ) . "</del>" . " " . wp_kses_post( $lowest_price );
 							} else {
-								echo __("From ", "tourfic") . wc_price( $apartment_min_main_price );
+								echo esc_html__("From ", "tourfic") . wp_kses_post(wc_price( $apartment_min_main_price ));	;
 							}
 							?>
 						</span>
 						<?php if ( $pricing_type == "per_night") : ?>
-                        	<span class="per-pricing-type"><?php _e( '/per night', 'tourfic' ) ?></span>
+                        	<span class="per-pricing-type"><?php esc_html_e( '/per night', 'tourfic' ) ?></span>
 						<?php else : ?>
-							<span class="per-pricing-type"><?php _e( '/per person', 'tourfic' ) ?></span>
+							<span class="per-pricing-type"><?php esc_html_e( '/per person', 'tourfic' ) ?></span>
 						<?php endif; ?>
 
                     </h3>
@@ -843,13 +843,13 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 
 			<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' ) || $tf_booking_type == 1 ) : ?>
 				
-                <h2 class="tf-section-title"><?php _e("Available Date", "tourfic"); ?></h2>
+                <h2 class="tf-section-title"><?php esc_html_e("Available Date", "tourfic"); ?></h2>
                 <div class="tf-apartment-form-fields">
                     <div class="tf_booking-dates tf-check-in-out-date">
                         <div class="tf-aprtment-check-in-out-date">
                             <label class="tf_label_rows">
 								<i class="fa-sharp fa-solid fa-calendar-days"></i>
-                                <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Choose date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required>
+                                <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Choose date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?> required>
                             </label>
                         </div>
 						<div class="tf_label-row"></div>
@@ -860,10 +860,10 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                             <div class="tf_form-inner">
                                 <div class="tf_selectperson-wrap">
 								<div class="tf-form-title">
-									<h3 class="tf-person-info-title"><?php _e( 'Person Info', 'tourfic' ); ?></h3>
+									<h3 class="tf-person-info-title"><?php esc_html_e( 'Person Info', 'tourfic' ); ?></h3>
 								</div>
 									<div class="tf_acrselection">
-										<div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
+										<div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
 										<div class="acr-select">
 											<div class="acr-dec">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -877,7 +877,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 												</defs>
 												</svg>
 											</div>
-											<input type="tel" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1' ?>" readonly/>
+											<input type="tel" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? esc_attr( $adults ) : '1' ?>" readonly/>
 											<div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<g clip-path="url(#clip0_3229_13100)">
@@ -893,7 +893,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 										</div>
 									</div>
 									<div class="tf_acrselection">
-										<div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
+										<div class="acr-label"><?php esc_html_e( 'Children', 'tourfic' ); ?></div>
 										<div class="acr-select">
 											<div class="acr-dec">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -907,7 +907,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 												</defs>
 												</svg>
 											</div>
-											<input type="tel" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0' ?>" readonly/>
+											<input type="tel" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? esc_attr( $child ) : '0' ?>" readonly/>
 											<div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<g clip-path="url(#clip0_3229_13100)">
@@ -923,7 +923,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 										</div>
 									</div>
 									<div class="tf_acrselection">
-										<div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
+										<div class="acr-label"><?php esc_html_e( 'Infant', 'tourfic' ); ?></div>
 										<div class="acr-select">
 											<div class="acr-dec">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -937,7 +937,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 												</defs>
 												</svg>
 											</div>
-											<input type="tel" name="infant" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0' ?>" readonly/>
+											<input type="tel" name="infant" id="infant" min="0" value="<?php echo ! empty( $infant ) ? esc_attr( $infant ) : '0' ?>" readonly/>
 											<div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<g clip-path="url(#clip0_3229_13100)">
@@ -960,19 +960,19 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 			<?php endif; ?>
 
             <div class="tf_form-row">
-				<?php $ptype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type(); ?>
-                <input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type"/>
-                <input type="hidden" name="post_id" value="<?php echo get_the_ID(); ?>"/>
+				<?php $ptype = isset( $_GET['type'] ) ? esc_attr($_GET['type']) : get_post_type(); ?>
+                <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
+                <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
 
                 <div class="tf-btn-booking">
 					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' ) || $tf_booking_type == 1 ) : ?>
                         <?php if (!empty($apt_reserve_button_text)) : ?>
-							<button class="tf_button tf-submit" type="submit"><?php esc_html_e( $apt_reserve_button_text, 'tourfic' ); ?></button>
+							<button class="tf_button tf-submit" type="submit"><?php echo esc_html( $apt_reserve_button_text ); ?></button>
 						<?php endif; ?>
 					<?php else: ?>
 						<?php if (!empty($apt_reserve_button_text)) : ?>
 							<a href="<?php echo esc_url( $tf_booking_url ); ?>"
-							class="tf_button tf-submit" <?php echo ! empty( $tf_booking_attribute ) ? $tf_booking_attribute : ''; ?> target="_blank"><?php esc_html_e( $apt_reserve_button_text , 'tourfic' ); ?></a>
+							class="tf_button tf-submit" <?php echo ! empty( $tf_booking_attribute ) ? esc_attr( $tf_booking_attribute ) : ''; ?> target="_blank"><?php echo esc_html($apt_reserve_button_text ); ?></a>
 						<?php endif; ?>
 					<?php endif; ?>
                 </div>
@@ -987,26 +987,26 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 				<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
 					<?php foreach ( $additional_fees as $key => $additional_fee ) : ?>
                         <li class="additional-fee-wrap" style="display: none">
-                            <span class="additional-fee-label tf-price-list-label"><?php echo $additional_fee['additional_fee_label']; ?></span>
+                            <span class="additional-fee-label tf-price-list-label"><?php echo esc_html( $additional_fee['additional_fee_label'] ); ?></span>
                             <span class="additional-fee-<?php echo esc_attr( $key ) ?> tf-price-list-price"></span>
                         </li>
 					<?php endforeach; ?>
 				<?php elseif ( ! empty( $additional_fee_label ) && ! empty( $additional_fee ) ): ?>
                     <li class="additional-fee-wrap" style="display: none">
-                        <span class="additional-fee-label tf-price-list-label"><?php echo $additional_fee_label; ?></span>
+                        <span class="additional-fee-label tf-price-list-label"><?php echo esc_html( $additional_fee_label ); ?></span>
                         <span class="additional-fee tf-price-list-price"></span>
                     </li>
 				<?php endif; ?>
 
 				<?php if ( ! empty( $discount ) ): ?>
                     <li class="apartment-discount-wrap" style="display: none">
-                        <span class="apartment-discount-label tf-price-list-label"><?php _e( 'Discount', 'tourfic' ); ?></span>
+                        <span class="apartment-discount-label tf-price-list-label"><?php esc_html_e( 'Discount', 'tourfic' ); ?></span>
                         <span class="apartment-discount tf-price-list-price"></span>
                     </li>
 				<?php endif; ?>
 
                 <li class="total-price-wrap" style="display: none">
-                    <span class="total-price-label tf-price-list-label"><?php _e( 'Total Price', 'tourfic' ); ?></span>
+                    <span class="total-price-label tf-price-list-label"><?php esc_html_e( 'Total Price', 'tourfic' ); ?></span>
                     <span class="total-price"></span>
                 </li>
             </ul>
@@ -1016,7 +1016,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		<?php }else{ ?>
         <!-- Start Booking widget -->
         <form id="tf-apartment-booking" class="tf-apartment-side-booking" method="get" autocomplete="off">
-            <h4><?php ! empty( $meta['booking_form_title'] ) ? _e( $meta['booking_form_title'] ) : _e( 'Book your Apartment', 'tourfic' ); ?></h4>
+            <h4><?php echo ! empty( $meta['booking_form_title'] ) ? esc_html( $meta['booking_form_title'] ) : esc_html_e( 'Book your Apartment', 'tourfic' ); ?></h4>
             <div class="tf-apartment-form-header">
 				<?php if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' ) || $tf_booking_type == 1 ) : ?>
                     <h3 class="tf-apartment-price-per-night">
@@ -1037,16 +1037,16 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 							$lowest_price = wc_price( $apartment_min_price );
 							
 							if ( ! empty( $apartment_min_discount ) ) {
-								echo "<b>" . __("From ", "tourfic") . "</b>" . "<del>" . strip_tags(wc_price( $apartment_min_main_price )) . "</del>" . " " . $lowest_price;
+								echo "<b>" . esc_html__("From ", "tourfic") . "</b>" . "<del>" . esc_html( wp_strip_all_tags(wc_price( $apartment_min_main_price )) ) . "</del>" . " " . wp_kses_post( $lowest_price );
 							} else {
-								echo __("From ", "tourfic") . wc_price( $apartment_min_main_price );
+								echo esc_html__("From ", "tourfic") . wp_kses_post(wc_price( $apartment_min_main_price ));	;
 							}
 							?>
 						</span>
 						<?php if ( $pricing_type == "per_night") : ?>
-                        	<span><?php _e( '/per night', 'tourfic' ) ?></span>
+                        	<span><?php esc_html_e( '/per night', 'tourfic' ) ?></span>
 						<?php else : ?>
-							<span><?php _e( '/per person', 'tourfic' ) ?></span>
+							<span><?php esc_html_e( '/per person', 'tourfic' ) ?></span>
 						<?php endif; ?>
 
                     </h3>
@@ -1055,7 +1055,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                     <div class="tf-top-review">
                         <a href="#tf-review">
                             <div class="tf-single-rating">
-                                <i class="fas fa-star"></i> <span><?php echo tf_total_avg_rating( $comments ); ?></span>
+                                <i class="fas fa-star"></i> <span><?php echo esc_html( tf_total_avg_rating( $comments ) ); ?></span>
                                 (<?php tf_based_on_text( count( $comments ) ); ?>)
                             </div>
                         </a>
@@ -1068,9 +1068,9 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                     <div class="tf_booking-dates">
                         <div class="tf-check-in-out-date">
                             <label class="tf_label-row">
-                                <span class="tf-label"><?php _e( 'Check in & out date', 'tourfic' ); ?></span>
+                                <span class="tf-label"><?php esc_html_e( 'Check in & out date', 'tourfic' ); ?></span>
                                 <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                       placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?>
+                                       placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?>
                                        required>
                             </label>
                         </div>
@@ -1078,39 +1078,42 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 
                     <div class="tf_form-row tf-apartment-guest-row">
                         <label class="tf_label-row">
-                            <span class="tf-label"><?php _e( 'Guests', 'tourfic' ); ?></span>
+                            <span class="tf-label"><?php esc_html_e( 'Guests', 'tourfic' ); ?></span>
                             <div class="tf_form-inner">
                                 <div class="tf_selectperson-wrap">
                                     <div class="tf_input-inner">
-                                        <div class="adults-text"><?php echo sprintf( __( '%s Adults', 'tourfic' ), ! empty( $adults ) ? $adults : 1 ); ?></div>
+										<?php /* translators: %s Adult Number */ ?>
+                                        <div class="adults-text"><?php echo sprintf( esc_html__( '%s Adults', 'tourfic' ), ! empty( $adults ) ? esc_html( $adults ) : 1 ); ?></div>
                                         <div class="person-sep"></div>
-                                        <div class="child-text"><?php echo sprintf( __( '%s Children', 'tourfic' ), ! empty( $child ) ? $child : 0 ); ?></div>
+										<?php /* translators: %s Children Number */ ?>
+                                        <div class="child-text"><?php echo sprintf( esc_html__( '%s Children', 'tourfic' ), ! empty( $child ) ? esc_html( $child ) : 0 ); ?></div>
                                         <div class="person-sep"></div>
-                                        <div class="infant-text"><?php echo sprintf( __( '%s Infant', 'tourfic' ), ! empty( $infant ) ? $infant : 0 ); ?></div>
+										<?php /* translators: %s Infant Number */ ?>
+                                        <div class="infant-text"><?php echo sprintf( esc_html__( '%s Infant', 'tourfic' ), ! empty( $infant ) ? esc_html( $infant ) : 0 ); ?></div>
                                     </div>
                                     <div class="tf_acrselection-wrap">
                                         <div class="tf_acrselection-inner">
                                             <div class="tf_acrselection">
-                                                <div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
+                                                <div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
                                                 <div class="acr-select">
                                                     <div class="acr-dec">-</div>
-                                                    <input type="number" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1' ?>"/>
+                                                    <input type="number" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? esc_attr( $adults ) : '1' ?>"/>
                                                     <div class="acr-inc">+</div>
                                                 </div>
                                             </div>
                                             <div class="tf_acrselection">
-                                                <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
+                                                <div class="acr-label"><?php esc_html_e( 'Children', 'tourfic' ); ?></div>
                                                 <div class="acr-select">
                                                     <div class="acr-dec">-</div>
-                                                    <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0' ?>"/>
+                                                    <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? esc_attr( $child ) : '0' ?>"/>
                                                     <div class="acr-inc">+</div>
                                                 </div>
                                             </div>
                                             <div class="tf_acrselection">
-                                                <div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
+                                                <div class="acr-label"><?php esc_html_e( 'Infant', 'tourfic' ); ?></div>
                                                 <div class="acr-select">
                                                     <div class="acr-dec">-</div>
-                                                    <input type="number" name="infant" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0' ?>"/>
+                                                    <input type="number" name="infant" id="infant" min="0" value="<?php echo ! empty( $infant ) ? esc_attr( $infant ) : '0' ?>"/>
                                                     <div class="acr-inc">+</div>
                                                 </div>
                                             </div>
@@ -1124,19 +1127,19 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 			<?php endif; ?>
 
             <div class="tf_form-row">
-				<?php $ptype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type(); ?>
-                <input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type"/>
-                <input type="hidden" name="post_id" value="<?php echo get_the_ID(); ?>"/>
+				<?php $ptype = isset( $_GET['type'] ) ? esc_attr($_GET['type']) : get_post_type(); ?>
+                <input type="hidden" name="type" value="<?php echo esc_attr( $ptype); ?>" class="tf-post-type"/>
+                <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
 
                 <div class="tf-btn">
 					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' ) || $tf_booking_type == 1 ) : ?>
                         <?php if (!empty($apt_reserve_button_text)) : ?>
-							<button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e( $apt_reserve_button_text, 'tourfic' ); ?></button>
+							<button class="tf_button tf-submit btn-styled" type="submit"><?php echo esc_html( $apt_reserve_button_text ); ?></button>
 						<?php endif; ?>
 					<?php else: ?>
 						<?php if (!empty($apt_reserve_button_text)) : ?>
 							<a href="<?php echo esc_url( $tf_booking_url ); ?>"
-							class="tf_button tf-submit btn-styled" <?php echo ! empty( $tf_booking_attribute ) ? $tf_booking_attribute : ''; ?> target="_blank"><?php esc_html_e( $apt_reserve_button_text , 'tourfic' ); ?></a>
+							class="tf_button tf-submit btn-styled" <?php echo ! empty( $tf_booking_attribute ) ? esc_attr( $tf_booking_attribute ) : ''; ?> target="_blank"><?php echo esc_html( $apt_reserve_button_text ); ?></a>
 						<?php endif; ?>
 					<?php endif; ?>
                 </div>
@@ -1151,26 +1154,26 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 				<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
 					<?php foreach ( $additional_fees as $key => $additional_fee ) : ?>
                         <li class="additional-fee-wrap" style="display: none">
-                            <span class="additional-fee-label tf-price-list-label"><?php echo $additional_fee['additional_fee_label']; ?></span>
+                            <span class="additional-fee-label tf-price-list-label"><?php echo esc_html( $additional_fee['additional_fee_label'] ); ?></span>
                             <span class="additional-fee-<?php echo esc_attr( $key ) ?> tf-price-list-price"></span>
                         </li>
 					<?php endforeach; ?>
 				<?php elseif ( ! empty( $additional_fee_label ) && ! empty( $additional_fee ) ): ?>
                     <li class="additional-fee-wrap" style="display: none">
-                        <span class="additional-fee-label tf-price-list-label"><?php echo $additional_fee_label; ?></span>
+                        <span class="additional-fee-label tf-price-list-label"><?php echo esc_html( $additional_fee_label ); ?></span>
                         <span class="additional-fee tf-price-list-price"></span>
                     </li>
 				<?php endif; ?>
 
 				<?php if ( ! empty( $discount ) ): ?>
                     <li class="apartment-discount-wrap" style="display: none">
-                        <span class="apartment-discount-label tf-price-list-label"><?php _e( 'Discount', 'tourfic' ); ?></span>
+                        <span class="apartment-discount-label tf-price-list-label"><?php esc_html_e( 'Discount', 'tourfic' ); ?></span>
                         <span class="apartment-discount tf-price-list-price"></span>
                     </li>
 				<?php endif; ?>
 
                 <li class="total-price-wrap" style="display: none">
-                    <span class="total-price-label tf-price-list-label"><?php _e( 'Total Price', 'tourfic' ); ?></span>
+                    <span class="total-price-label tf-price-list-label"><?php esc_html_e( 'Total Price', 'tourfic' ); ?></span>
                     <span class="total-price"></span>
                 </li>
             </ul>
@@ -1185,7 +1188,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 					// First Day of Week
 					<?php tf_flatpickr_locale("root"); ?>
 
-                    let minStay = <?php echo $min_stay ?>;
+                    let minStay = <?php echo esc_js( $min_stay ) ?>;
 
                     const bookingCalculation = (selectedDates) => {
 						<?php if ( ( $pricing_type === 'per_night' && ! empty( $price_per_night ) ) || ( $pricing_type === 'per_person' && ! empty( $adult_price ) ) ): ?>
@@ -1194,14 +1197,14 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                             var diff = Math.abs(selectedDates[1] - selectedDates[0]);
                             var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
                             if (days > 0) {
-                                var pricing_type = '<?php echo $pricing_type; ?>';
-                                var price_per_night = <?php echo $price_per_night; ?>;
-                                var adult_price = <?php echo $adult_price; ?>;
-                                var child_price = <?php echo $child_price; ?>;
-                                var infant_price = <?php echo $infant_price; ?>;
-                                var enable_availability = '<?php echo $enable_availability; ?>';
-                                var apt_availability = '<?php echo $apt_availability; ?>';
-                                
+                                var pricing_type = '<?php echo esc_js( $pricing_type ); ?>';
+                                var price_per_night = <?php echo esc_js( $price_per_night ); ?>;
+                                var adult_price = <?php echo esc_js( $adult_price ); ?>;
+                                var child_price = <?php echo esc_js( $child_price ); ?>;
+                                var infant_price = <?php echo esc_js( $infant_price ); ?>;
+                                var enable_availability = '<?php echo esc_js( $enable_availability ); ?>';
+                                var apt_availability = '<?php echo wp_kses_post($apt_availability); ?>';
+
 								if(apt_availability) {
 									apt_availability = JSON.parse(apt_availability);
 								}
@@ -1209,31 +1212,31 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 if (enable_availability !== '1') {
                                     if (pricing_type === 'per_night') {
                                         var total_price = price_per_night * days;
-                                        var total_days_price_html = '<?php echo wc_price( 0 ); ?>';
-                                        var wc_price_per_night = '<?php echo wc_price( $price_per_night ); ?>';
+                                        var total_days_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>';
+                                        var wc_price_per_night = '<?php echo wp_kses_post(wc_price( $price_per_night ));	; ?>';
                                         if (total_price > 0) {
 											$('.tf-apartment-price-list').show();
                                             $('.total-days-price-wrap').show();
-                                            total_days_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', total_price.toFixed(2));
+                                            total_days_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', total_price.toFixed(2));
                                         }
-                                        $('.total-days-price-wrap .total-days').html(wc_price_per_night + ' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
+                                        $('.total-days-price-wrap .total-days').html(wc_price_per_night + ' x ' + days + ' <?php esc_html_e( 'nights', 'tourfic' ); ?>');
                                         $('.total-days-price-wrap .days-total-price').html(total_days_price_html);
                                     } else {
                                         let totalPersonPrice = (adult_price * $('#adults').val()) + (child_price * $('#children').val()) + (infant_price * $('#infant').val());
                                         var total_price = totalPersonPrice * days;
-                                        var total_days_price_html = '<?php echo wc_price( 0 ); ?>';
-                                        var wc_price_per_person = '<?php echo wc_price( 0 ); ?>'.replace('0.00', totalPersonPrice.toFixed(2));
+                                        var total_days_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>';
+                                        var wc_price_per_person = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', totalPersonPrice.toFixed(2));
                                         if (total_price > 0) {
 											$('.tf-apartment-price-list').show();
                                             $('.total-days-price-wrap').show();
-                                            total_days_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', total_price.toFixed(2));
+                                            total_days_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', total_price.toFixed(2));
                                         }
-                                        $('.total-days-price-wrap .total-days').html(wc_price_per_person + ' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
+                                        $('.total-days-price-wrap .total-days').html(wc_price_per_person + ' x ' + days + ' <?php esc_html_e( 'nights', 'tourfic' ); ?>');
                                         $('.total-days-price-wrap .days-total-price').html(total_days_price_html);
                                     }
                                 } else {
                                     var total_price = 0;
-                                    var total_price_html = '<?php echo wc_price( 0 ); ?>';
+                                    var total_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>';
                                     var checkInDate = new Date(selectedDates[0]);
                                     var checkOutDate = new Date(selectedDates[1]);
 
@@ -1264,23 +1267,23 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                     if (total_price > 0) {
                                         $('.tf-apartment-price-list').show();
                                         $('.total-days-price-wrap').show();
-                                        total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', total_price.toFixed(2));
+                                        total_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', total_price.toFixed(2));
                                     }
-                                    $('.total-days-price-wrap .total-days').html(days + ' <?php _e( 'nights', 'tourfic' ); ?>');
+                                    $('.total-days-price-wrap .total-days').html(days + ' <?php esc_html_e( 'nights', 'tourfic' ); ?>');
                                     $('.total-days-price-wrap .days-total-price').html(total_price_html);
                                 }
 								//discount
-                                var discount = <?php echo $discount; ?>;
-								var discountType = "<?php echo $discount_type; ?>";
-                                var discount_html = '<?php echo wc_price( 0 ); ?>';
+                                var discount = <?php echo esc_html( $discount ); ?>;
+								var discountType = "<?php echo esc_html( $discount_type ); ?>";
+                                var discount_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>';
                                 if (discount > 0 && discountType != "none") {
                                     $('.apartment-discount-wrap').show();
 
 									<?php if ( $discount_type == 'percent' ): ?>
-                                    discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', (total_price * discount / 100).toFixed(2));
+                                    discount_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', (total_price * discount / 100).toFixed(2));
                                     total_price = total_price - (total_price * discount / 100);
 									<?php else: ?>
-                                    discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', discount.toFixed(2));
+                                    discount_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', discount.toFixed(2));
                                     total_price = total_price - discount;
 									<?php endif; ?>
                                 }
@@ -1292,29 +1295,29 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 //additional fee
 								<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
 								<?php foreach ($additional_fees as $key => $item) : ?>
-                                let additional_fee_<?php echo $key ?> = <?php echo $item['additional_fee']; ?>;
-                                let additional_fee_html_<?php echo $key ?> = '<?php echo wc_price( 0 ); ?>';
-                                let totalAdditionalFee_<?php echo $key ?> = 0;
+                                let additional_fee_<?php echo esc_html( $key ) ?> = <?php echo esc_html( $item['additional_fee'] ); ?>;
+                                let additional_fee_html_<?php echo esc_html( $key ) ?> = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>';
+                                let totalAdditionalFee_<?php echo esc_html ( $key ) ?> = 0;
 
 								<?php if ( $item['fee_type'] == 'per_night' ): ?>
-                                totalAdditionalFee_<?php echo $key ?> = additional_fee_<?php echo $key ?> * days;
+                                totalAdditionalFee_<?php echo esc_html( $key ) ?> = additional_fee_<?php echo esc_html( $key ) ?> * days;
 								<?php elseif($item['fee_type'] == 'per_person'): ?>
-                                totalAdditionalFee_<?php echo $key ?> = additional_fee_<?php echo $key ?> * totalPerson;
+                                totalAdditionalFee_<?php echo esc_html( $key ) ?> = additional_fee_<?php echo esc_html( $key ) ?> * totalPerson;
 								<?php else: ?>
-                                totalAdditionalFee_<?php echo $key ?> = additional_fee_<?php echo $key ?>;
+                                totalAdditionalFee_<?php echo esc_html( $key ) ?> = additional_fee_<?php echo esc_html( $key ) ?>;
 								<?php endif; ?>
 
-                                if (totalAdditionalFee_<?php echo $key ?> > 0 ) {
+                                if (totalAdditionalFee_<?php echo esc_html( $key ) ?> > 0 ) {
                                     $('.additional-fee-wrap').show();
-                                    total_price = total_price + totalAdditionalFee_<?php echo $key ?>;
-                                    additional_fee_html_<?php echo $key ?> = '<?php echo wc_price( 0 ); ?>'.replace('0.00', totalAdditionalFee_<?php echo $key ?>.toFixed(2));
+                                    total_price = total_price + totalAdditionalFee_<?php echo esc_html( $key ) ?>;
+                                    additional_fee_html_<?php echo esc_html( $key ) ?> = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', totalAdditionalFee_<?php echo esc_html( $key ) ?>.toFixed(2));
                                 }
-                                $('.additional-fee-wrap .additional-fee-<?php echo $key ?>').html(additional_fee_html_<?php echo $key ?>);
+                                $('.additional-fee-wrap .additional-fee-<?php echo esc_html( $key ) ?>').html(additional_fee_html_<?php echo esc_html( $key ) ?>);
 								<?php endforeach; ?>
 								<?php else: ?>
 								<?php if ( ! empty( $additional_fee ) ): ?>
-                                let additional_fee = <?php echo $additional_fee; ?>;
-                                let additional_fee_html = '<?php echo wc_price( 0 ); ?>';
+                                let additional_fee = <?php echo esc_html( $additional_fee ); ?>;
+                                let additional_fee_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>';
                                 let totalAdditionalFee = 0;
 
 								<?php if ( $fee_type == 'per_night' ): ?>
@@ -1328,7 +1331,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 if (totalAdditionalFee > 0) {
                                     $('.additional-fee-wrap').show();
                                     total_price = total_price + totalAdditionalFee;
-                                    additional_fee_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', totalAdditionalFee.toFixed(2));
+                                    additional_fee_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', totalAdditionalFee.toFixed(2));
                                 }
                                 $('.additional-fee-wrap .additional-fee').html(additional_fee_html);
 								<?php endif; ?>
@@ -1336,10 +1339,10 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 //end additional fee
 
                                 //total price
-                                var total_price_html = '<?php echo wc_price( 0 ); ?>';
+                                var total_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>';
                                 if (total_price > 0) {
                                     $('.total-price-wrap').show();
-                                    total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', total_price.toFixed(2));
+                                    total_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', total_price.toFixed(2));
                                 }
                                 $('.total-price-wrap .total-price').html(total_price_html);
                             } else {
@@ -1360,7 +1363,8 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 $('.tf-submit').attr('disabled', 'disabled');
                                 $('.tf-submit').addClass('disabled');
                                 $('.tf-check-in-out-date .tf_label-row .tf-err-msg').remove();
-                                $('.tf-check-in-out-date .tf_label-row').append('<span class="tf-err-msg"><?php echo sprintf( __( 'Minimum stay is %s nights', 'tourfic' ), $min_stay ); ?></span>');
+								<?php /* translators: %s minimum stay */ ?>
+                                $('.tf-check-in-out-date .tf_label-row').append('<span class="tf-err-msg"><?php echo sprintf( esc_html__( 'Minimum stay is %s nights', 'tourfic' ), esc_html( $min_stay ) ); ?></span>');
                             } else {
                                 $('.tf-submit').removeAttr('disabled');
                                 $('.tf-submit').removeClass('disabled');
@@ -1374,9 +1378,9 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                         mode: "range",
                         minDate: "today",
                         altInput: true,
-                        altFormat: '<?php echo $date_format_change_appartments; ?>',
+                        altFormat: '<?php echo esc_html( $date_format_change_appartments ); ?>',
                         dateFormat: "Y/m/d",
-                        defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
+                        defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                             instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
@@ -1388,19 +1392,19 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                             bookingCalculation(selectedDates);
                         }, 
 						<?php if (!empty($tf_apt_enable_dates) && is_array($tf_apt_enable_dates)) : ?>
-							enable: [ <?php array_walk($tf_apt_enable_dates, function($date) {echo '"'. $date . '",';}); ?> ],
+							enable: [ <?php array_walk($tf_apt_enable_dates, function($date) {echo '"'. esc_html( $date ) . '",';}); ?> ],
 						<?php endif; ?>
                         disable: [
 							<?php foreach ( $booked_dates as $booked_date ) : ?>
                             {
-                                from: "<?php echo $booked_date['check_in']; ?>",
-                                to: "<?php echo $booked_date['check_out']; ?>"
+                                from: "<?php echo esc_html( $booked_date['check_in'] ); ?>",
+                                to: "<?php echo esc_html( $booked_date['check_out'] ); ?>"
                             },
 							<?php endforeach; ?>
 							<?php foreach ( $apt_disable_dates as $apt_disable_date ) : ?>
                             {
-                                from: "<?php echo $apt_disable_date; ?>",
-                                to: "<?php echo $apt_disable_date; ?>"
+                                from: "<?php echo esc_html( $apt_disable_date ); ?>",
+                                to: "<?php echo esc_html( $apt_disable_date ); ?>"
                             },
 							<?php endforeach; ?>
                         ],
@@ -1488,13 +1492,13 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 						if ( has_post_thumbnail($post_id) ) {
 							echo get_the_post_thumbnail($post_id, 'full' );
 						} else {
-							echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+							echo '<img src="' . esc_url(TF_ASSETS_APP_URL) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
 						}
 						?>
 				</div>
 				<?php 
 				if( !empty($gallery_ids) ){ ?>                                                                     
-				<div data-id="<?php echo get_the_ID(); ?>" data-type="tf_apartment" class="tf-room-gallery tf-popup-buttons tf-hotel-room-popup" style="<?php echo !empty($first_gallery_image[0]) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.70) 0%, rgba(48, 40, 28, 0.70) 100%), url('.esc_url(wp_get_attachment_image_url($first_gallery_image[0])).'), lightgray 50% / cover no-repeat; background-size: cover; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
+				<div data-id="<?php echo esc_attr( get_the_ID() ); ?>" data-type="tf_apartment" class="tf-room-gallery tf-popup-buttons tf-hotel-room-popup" style="<?php echo !empty($first_gallery_image[0]) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.70) 0%, rgba(48, 40, 28, 0.70) 100%), url('.esc_url(wp_get_attachment_image_url($first_gallery_image[0])).'), lightgray 50% / cover no-repeat; background-size: cover; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
 					<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g id="content">
 					<path id="Rectangle 2111" d="M5.5 16.9745C5.6287 18.2829 5.91956 19.1636 6.57691 19.8209C7.75596 21 9.65362 21 13.4489 21C17.2442 21 19.1419 21 20.3209 19.8209C21.5 18.6419 21.5 16.7442 21.5 12.9489C21.5 9.15362 21.5 7.25596 20.3209 6.07691C19.6636 5.41956 18.7829 5.1287 17.4745 5" stroke="#FDF9F4" stroke-width="1.5"></path>
@@ -1507,19 +1511,17 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 				<?php } ?>
 				<div class="tf-available-labels">
 					<?php if ( $featured ): ?>
-					<span class="tf-available-labels-featured"><?php _e("Featured", "tourfic"); ?></span>
+					<span class="tf-available-labels-featured"><?php esc_html_e("Featured", "tourfic"); ?></span>
 					<?php endif; ?>
 					<?php
 						if(sizeof($apartment_multiple_tags) > 0) {
 							foreach($apartment_multiple_tags as $tag) {
-								$apartment_tag_name = !empty($tag['apartment-tag-title']) ? __($tag['apartment-tag-title'], "tourfic") : '';
-								$tag_background_color = !empty($tag["apartment-tag-color-settings"]["background"]) ? $tag["apartment-tag-color-settings"]["background"] : "#003162";
-								$tag_font_color = !empty($tag["apartment-tag-color-settings"]["font"]) ? $tag["apartment-tag-color-settings"]["font"] : "#fff";
+								$apartment_tag_name = !empty($tag['apartment-tag-title']) ? esc_html( $tag['apartment-tag-title'] ) : '';
+								$tag_background_color = !empty($tag["apartment-tag-color-settings"]["background"]) ? esc_attr($tag["apartment-tag-color-settings"]["background"]) : "#003162";
+								$tag_font_color = !empty($tag["apartment-tag-color-settings"]["font"]) ? esc_attr($tag["apartment-tag-color-settings"]["font"]) : "#fff";
 
 								if (!empty($apartment_tag_name)) {
-									echo <<<EOD
-										<span class="tf-multiple-tag" style="color: $tag_font_color; background-color: $tag_background_color ">$apartment_tag_name</span>
-									EOD;
+									echo '<span class="tf-multiple-tag" style="color: ' . esc_attr( $tag_font_color ) . '; background-color: ' . esc_attr( $tag_background_color ) . '">' . esc_html( $apartment_tag_name ) . '</span>';
 								}
 							}
 						}
@@ -1534,7 +1536,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 				<div class="tf-available-room-content-left">
 					<div class="tf-card-heading-info">
 					<div class="tf-section-title-and-location">
-						<a href="<?php echo esc_url( get_the_permalink($post_id) ); ?>"><h2 class="tf-section-title"><?php echo tourfic_character_limit_callback( get_the_title($post_id), 55 ); ?></h2></a>
+						<a href="<?php echo esc_url( get_the_permalink($post_id) ); ?>"><h2 class="tf-section-title"><?php echo esc_html( tourfic_character_limit_callback( get_the_title($post_id), 55 ) ); ?></h2></a>
 						<?php
 						if ( ! empty( $address ) ) {
 						?>
@@ -1542,7 +1544,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 							<div class="location-icon">
 								<i class="ri-map-pin-line"></i>
 							</div>
-							<span><?php echo tourfic_character_limit_callback( esc_html( $address ), 65 ); ?></span>
+							<span><?php echo esc_html( tourfic_character_limit_callback( esc_html( $address ), 65 ) ); ?></span>
 						</div>
 						<?php } ?>
 					</div>
@@ -1550,7 +1552,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 						<?php if ( ! empty( $discount_amount ) ){ ?>
 							<div class="tf-available-room-off">
 								<span>
-									<?php echo min( $discount_amount ); ?>% <?php _e( "Off ", "tourfic" ); ?>
+									<?php echo esc_html( min( $discount_amount ) ); ?>% <?php esc_html_e( "Off ", "tourfic" ); ?>
 								</span>
 							</div>
 						<?php } ?>
@@ -1558,8 +1560,8 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 							<span class="tf-price-from">
 							<?php
 							if(!empty($apartment_min_price['min'])){
-								echo __( "From ", "tourfic" );
-								echo wc_price( $apartment_min_price['min'] );
+								echo esc_html__( "From ", "tourfic" );
+								echo wp_kses_post(wc_price( $apartment_min_price['min'] ));	;
 							}
 							?>
 							</span>
@@ -1574,22 +1576,22 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 						$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
 					}
 					if ( ! empty( $f_icon_type ) && $f_icon_type == 'icon' ) {
-						$feature_icon = ! empty( $feature_meta['apartment-feature-icon'] ) ? '<i class="' . $feature_meta['apartment-feature-icon'] . '"></i>' : '';
+						$feature_icon = ! empty( $feature_meta['apartment-feature-icon'] ) ? '<i class="' . esc_attr( $feature_meta['apartment-feature-icon'] ) . '"></i>' : '';
 					} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'custom' ) {
-						$feature_icon = ! empty( $feature_meta['apartment-feature-icon-custom'] ) ? '<img src="' . $feature_meta['apartment-feature-icon-custom'] . '" style="min-width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />' : '';
+						$feature_icon = ! empty( $feature_meta['apartment-feature-icon-custom'] ) ? '<img src="' . esc_url( $feature_meta['apartment-feature-icon-custom'] ) . '" style="min-width: ' . esc_attr( $feature_meta['apartment-feature-icon-dimension'] ) . 'px; height: ' . esc_attr( $feature_meta['apartment-feature-icon-dimension'] ) . 'px;" />' : '';
 					}
 					if ( $tfkey < 5 ) {
 					?>
 						<li>
 						<?php
 						if ( ! empty( $feature_icon ) ) {
-							echo $feature_icon;
+							echo wp_kses_post( $feature_icon );
 						} ?>
-						<?php echo $feature->name; ?>
+						<?php echo esc_html( $feature->name ); ?>
 						</li>
 					<?php } } ?>
 					<?php if(count($features)>5){ ?>
-						<li><a href="<?php echo esc_url( $url ); ?>"><?php _e("View More", "tourfic"); ?></a></li>
+						<li><a href="<?php echo esc_url( $url ); ?>"><?php esc_html_e("View More", "tourfic"); ?></a></li>
 					<?php } ?>
 					</ul>
 					<?php } ?>
@@ -1600,7 +1602,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 					if ( ! empty( $apartment_discount_amount ) && $apartment_discount_type!="none" ){ ?>
 						<div class="tf-available-room-off">
 							<span>
-								<?php echo $apartment_discount_type=="percent" ? $apartment_discount_amount.'%' : wc_price($apartment_discount_amount) ?> <?php _e( "Off ", "tourfic" ); ?>
+								<?php echo $apartment_discount_type=="percent" ? esc_html( $apartment_discount_amount ).'%' : wp_kses_post(wc_price($apartment_discount_amount));	 ?> <?php esc_html_e( "Off ", "tourfic" ); ?>
 							</span>
 						</div>
 					<?php } ?>
@@ -1608,14 +1610,14 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 						<span class="tf-price-from">
 						<?php
 							if(!empty($apartment_min_price['min'])){
-								echo __( "From ", "tourfic" );
-								echo wc_price( $apartment_min_price['min'] );
+								echo esc_html__( "From ", "tourfic" );
+								echo wp_kses_post(wc_price( $apartment_min_price['min'] ));	;
 							}
 						?>
 						</span>
 					</div>
 					</div>              
-					<a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php _e("See details", "tourfic"); ?></a>
+					<a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php esc_html_e("See details", "tourfic"); ?></a>
 				</div>
 			</div>
 		</div>
@@ -1624,7 +1626,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
             <div class="single-tour-inner">
 				<?php if ( $featured ): ?>
                     <div class="tf-featured-badge">
-                        <span><?php echo ! empty( $meta['featured_text'] ) ? $meta['featured_text'] : esc_html( "HOT DEAL" ); ?></span>
+                        <span><?php echo ! empty( $meta['featured_text'] ) ? esc_html( $meta['featured_text'] ) : esc_html( "HOT DEAL" ); ?></span>
                     </div>
 				<?php endif; ?>
                 <div class="tourfic-single-left">
@@ -1633,25 +1635,23 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 					<?php
 					if(sizeof($apartment_multiple_tags) > 0) {
 						foreach($apartment_multiple_tags as $tag) {
-							$tag_title = !empty($tag["apartment-tag-title"]) ? __($tag["apartment-tag-title"], 'tourfic') : '';
-							$tag_background_color = !empty($tag["apartment-tag-color-settings"]["background"]) ? $tag["apartment-tag-color-settings"]["background"] : "#003162";
-							$tag_font_color = !empty($tag["apartment-tag-color-settings"]["font"]) ? $tag["apartment-tag-color-settings"]["font"] : "#fff";
+							$tag_title = !empty($tag["apartment-tag-title"]) ? esc_html( $tag["apartment-tag-title"], 'tourfic') : '';
+							$tag_background_color = !empty($tag["apartment-tag-color-settings"]["background"]) ? esc_attr( $tag["apartment-tag-color-settings"]["background"] ) : "#003162";
+							$tag_font_color = !empty($tag["apartment-tag-color-settings"]["font"]) ? esc_attr( $tag["apartment-tag-color-settings"]["font"] ) : "#fff";
 
 							if (!empty($tag_title)) {
-								echo <<<EOD
-									<span class="default-single-tag" style="color: $tag_font_color; background-color: $tag_background_color">$tag_title</span>
-								EOD;
+									echo '<span class="default-single-tag" style="color: ' . esc_attr( $tag_font_color ) . '; background-color: ' . esc_attr( $tag_background_color ) . '">' . esc_html( $tag_title ) . '</span>';
 							}
 						}
 					}
 					?>
 					</div>
-                    <a href="<?php echo $url; ?>">
+                    <a href="<?php echo esc_url( $url ); ?>">
 						<?php
 						if ( has_post_thumbnail($post_id) ) {
 							echo get_the_post_thumbnail($post_id, 'full' );
 						} else {
-							echo '<img width="100%" height="100%" src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+							echo '<img width="100%" height="100%" src="' . esc_url(TF_ASSETS_APP_URL) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
 						}
 						?>
                     </a>
@@ -1660,12 +1660,12 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
                     <div class="tf_property_block_main_row">
                         <div class="tf_item_main_block">
                             <div class="tf-hotel__title-wrap">
-                                <a href="<?php echo $url; ?>"><h3 class="tourfic_hotel-title"><?php echo get_the_title($post_id); ?></h3></a>
+                                <a href="<?php echo esc_url( $url ); ?>"><h3 class="tourfic_hotel-title"><?php echo esc_html( get_the_title($post_id) ); ?></h3></a>
                             </div>
 							<?php
 							if ( !empty($address) ) {
 								echo '<div class="tf-map-link">';
-								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . strlen($address) > 75 ? tourfic_character_limit_callback($address, 76) : $address . '</span>';
+								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . strlen($address) > 75 ? esc_html( tourfic_character_limit_callback($address, 76) ) : esc_html( $address ) . '</span>';
 								echo '</div>';
 							}
 							?>
@@ -1678,7 +1678,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
                             <div class="featuredRooms">
                                 <div class="prco-ltr-right-align-helper">
                                     <div class="tf-archive-shortdesc">
-										<?php echo substr( wp_strip_all_tags( get_the_content($post_id) ), 0, 160 ) . '...'; ?>
+										<?php echo esc_html( substr( wp_strip_all_tags( get_the_content($post_id) ), 0, 160 ) ) . '...'; ?>
                                     </div>
                                 </div>
                                 <div class="roomNameInner">
@@ -1703,10 +1703,10 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
                                                             <li class="tf-tooltip">
 																<?php
 																if ( ! empty( $feature_icon ) ) {
-																	echo $feature_icon;
+																	echo wp_kses_post( $feature_icon );
 																} ?>
                                                                 <div class="tf-top">
-																	<?php echo $feature->name; ?>
+																	<?php echo esc_html( $feature->name ); ?>
                                                                     <i class="tool-i"></i>
                                                                 </div>
                                                             </li>
@@ -1716,14 +1716,14 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 											<?php } ?>
                                             <div class="roomPrice roomPrice_flex sr_discount" style="<?php echo empty( $features ) ? 'text-align:left' : ''; ?>">
                                                 <div class="availability-btn-area">
-                                                    <a href="<?php echo $url; ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
+                                                    <a href="<?php echo esc_url( $url ); ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
                                                 </div>
                                                 <!-- Show minimum price @author - Hena -->
                                                 <div class="tf-room-price-area">
                                                     <div class="tf-room-price">
                                                         <h6 class="tf-apartment-price-per-night">
-                                                            <span class="tf-apartment-base-price"><?php echo wc_price( $apartment_min_price['min'] ) ?></span>
-                                                            <span><?php echo $pricing_type === 'per_night' ? __( '/per night', 'tourfic' ) : __( '/per person', 'tourfic' ) ?></span>
+                                                            <span class="tf-apartment-base-price"><?php echo wp_kses_post(wc_price( $apartment_min_price['min'] ));	 ?></span>
+                                                            <span><?php echo $pricing_type === 'per_night' ? esc_html__( '/per night', 'tourfic' ) : esc_html__( '/per person', 'tourfic' ) ?></span>
                                                         </h6>
                                                     </div>
                                                 </div>
@@ -2576,13 +2576,13 @@ if ( ! function_exists( 'tf_apartment_host_rating' ) ) {
             <div class="tf-host-rating-wrapper">
                 <i class="fas fa-star"></i>
                 <div class="tf-host-rating">
-					<?php echo tf_average_ratings( array_values( $total_comment_rating ?? [] ) ); ?>
+					<?php echo esc_html( tf_average_ratings( array_values( $total_comment_rating ?? [] ) ) ); ?>
                 </div>
                 <h6>(<?php tf_based_on_text( $comment_count ); ?>)</h6>
             </div>
 
 			<?php
-			echo ob_get_clean();
+			echo wp_kses_post( ob_get_clean() );
 		}
 	}
 }
@@ -2593,7 +2593,10 @@ if ( ! function_exists( 'tf_apartment_host_rating' ) ) {
  */
 if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
 	function tf_apartment_room_quick_view() {
-		
+		// Check nonce security
+		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], 'tf_ajax_nonce' ) ) {
+			return;
+		}
 		$meta = get_post_meta( sanitize_text_field( $_POST['post_id'] ), 'tf_apartment_opt', true );
 		// Single Template Style
 		$tf_apartment_layout_conditions = ! empty( $meta['tf_single_apartment_layout_opt'] ) ? $meta['tf_single_apartment_layout_opt'] : 'global';
@@ -2627,7 +2630,7 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
                                         <div class="tf-details-qcs">
 											<?php
 											$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
-											echo '<img src="' . $image_url . '" alt="">';
+											echo '<img src="' . esc_url( $image_url ) . '" alt="">';
 											?>
                                         </div>
 									<?php }
@@ -2641,7 +2644,7 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
                                         <div class="tf-details-qcs">
 											<?php
 											$image_url = wp_get_attachment_url( $gallery_item_id, 'thumbnail' );
-											echo '<img src="' . $image_url . '" alt="">';
+											echo '<img src="' . esc_url( $image_url ) . '" alt="">';
 											?>
                                         </div>
 									<?php }
@@ -2719,16 +2722,16 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
 						$infant_number = ! empty( $room['infant'] ) ? $room['infant'] : '0';
 						?>
                         <h3><?php echo esc_html( $room['title'] ); ?></h3>
-                        <p><?php echo $room['description']; ?></p>
+                        <p><?php echo esc_html( $room['description'] ); ?></p>
                         <div class="tf-room-title description">
 							<?php if ( $footage ) { ?>
                                 <div class="tf-tooltip tf-d-ib">
                                     <div class="room-detail-icon">
                                         <span class="room-icon-wrap"><i class="fas fa-ruler-combined"></i></span>
-                                        <span class="icon-text tf-d-b"><?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></span>
+                                        <span class="icon-text tf-d-b"><?php echo esc_html( $footage ); ?><?php esc_html_e( 'sft', 'tourfic' ); ?></span>
                                     </div>
                                     <div class="tf-top">
-										<?php _e( 'Room Footage', 'tourfic' ); ?>
+										<?php esc_html_e( 'Room Footage', 'tourfic' ); ?>
                                         <i class="tool-i"></i>
                                     </div>
                                 </div>
@@ -2737,10 +2740,10 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
                                 <div class="tf-tooltip tf-d-ib">
                                     <div class="room-detail-icon">
                                         <span class="room-icon-wrap"><i class="fas fa-bed"></i></span>
-                                        <span class="icon-text tf-d-b">x<?php echo $bed; ?></span>
+                                        <span class="icon-text tf-d-b">x<?php echo esc_html( $bed ); ?></span>
                                     </div>
                                     <div class="tf-top">
-										<?php _e( 'Number of Beds', 'tourfic' ); ?>
+										<?php esc_html_e( 'Number of Beds', 'tourfic' ); ?>
                                         <i class="tool-i"></i>
                                     </div>
                                 </div>
@@ -2749,10 +2752,10 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
                                 <div class="tf-tooltip tf-d-ib">
                                     <div class="room-detail-icon">
                                         <span class="room-icon-wrap"><i class="fas fa-male"></i><i class="fas fa-female"></i></span>
-                                        <span class="icon-text tf-d-b">x<?php echo $adult_number; ?></span>
+                                        <span class="icon-text tf-d-b">x<?php echo esc_html( $adult_number ); ?></span>
                                     </div>
                                     <div class="tf-top">
-										<?php _e( 'Number of Adults', 'tourfic' ); ?>
+										<?php esc_html_e( 'Number of Adults', 'tourfic' ); ?>
                                         <i class="tool-i"></i>
                                     </div>
                                 </div>
@@ -2761,10 +2764,10 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
                                 <div class="tf-tooltip tf-d-ib">
                                     <div class="room-detail-icon">
                                         <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
-                                        <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
+                                        <span class="icon-text tf-d-b">x<?php echo esc_html( $child_number ); ?></span>
                                     </div>
                                     <div class="tf-top">
-										<?php _e( 'Number of Children', 'tourfic' ); ?>
+										<?php esc_html_e( 'Number of Children', 'tourfic' ); ?>
                                         <i class="tool-i"></i>
                                     </div>
                                 </div>
@@ -2773,10 +2776,10 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
                                 <div class="tf-tooltip tf-d-ib">
                                     <div class="room-detail-icon">
                                         <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
-                                        <span class="icon-text tf-d-b">x<?php echo $infant_number; ?></span>
+                                        <span class="icon-text tf-d-b">x<?php echo esc_html( $infant_number); ?></span>
                                     </div>
                                     <div class="tf-top">
-										<?php _e( 'Number of Infants', 'tourfic' ); ?>
+										<?php esc_html_e( 'Number of Infants', 'tourfic' ); ?>
                                         <i class="tool-i"></i>
                                     </div>
                                 </div>
@@ -2809,31 +2812,31 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
 						$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
 						if(!empty($image_url)){
 						?>
-						<img src="<?php echo esc_url($image_url); ?>" alt="<?php _e("Room Image","tourfic"); ?>" class="tf-popup-image">
+						<img src="<?php echo esc_url($image_url); ?>" alt="<?php esc_html_e("Room Image","tourfic"); ?>" class="tf-popup-image">
 						<?php } } }else{ 
 						$aprt_thumbnail_url = get_the_post_thumbnail_url( $_POST['post_id'] );
 						if(!empty($aprt_thumbnail_url)){	
 						?>
-						<img src="<?php echo esc_url($aprt_thumbnail_url); ?>" alt="<?php _e("Room Image","tourfic"); ?>" class="tf-popup-image">
+						<img src="<?php echo esc_url($aprt_thumbnail_url); ?>" alt="<?php esc_html_e("Room Image","tourfic"); ?>" class="tf-popup-image">
 						<?php }} ?>
 					</div>
 					<div class="tf-popup-right">
-						<span class="tf-popup-info-title"><?php _e("Room details", "tourfic"); ?></span>
+						<span class="tf-popup-info-title"><?php esc_html_e("Room details", "tourfic"); ?></span>
 						<ul>
 							<?php if ( $footage ) { ?>
-								<li><i class="ri-pencil-ruler-2-line"></i> <?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></li>
+								<li><i class="ri-pencil-ruler-2-line"></i> <?php echo esc_html( $footage ); ?><?php esc_html_e( 'sft', 'tourfic' ); ?></li>
 							<?php } ?>
 							<?php if ( $bed ) { ?>
-								<li><i class="ri-hotel-bed-line"></i> <?php echo $bed; ?><?php _e( ' Beds', 'tourfic' ); ?></li>
+								<li><i class="ri-hotel-bed-line"></i> <?php echo esc_html( $bed ); ?><?php esc_html_e( ' Beds', 'tourfic' ); ?></li>
 							<?php } ?>
 							<?php if ( $adult_number ) { ?>
-								<li><i class="ri-user-2-line"></i> <?php echo $adult_number; ?><?php _e( ' Adults', 'tourfic' ); ?></li>
+								<li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?><?php esc_html_e( ' Adults', 'tourfic' ); ?></li>
 							<?php } ?>
 							<?php if ( $child_number ) { ?>
-								<li><i class="ri-user-smile-line"></i><?php echo $child_number; ?><?php _e( ' Child', 'tourfic' ); ?></li>
+								<li><i class="ri-user-smile-line"></i><?php echo esc_html( $child_number ); ?><?php esc_html_e( ' Child', 'tourfic' ); ?></li>
 							<?php } ?>
 							<?php if ( $infant_number ) { ?>
-								<li><i class="ri-user-smile-line"></i><?php echo $infant_number; ?><?php _e( ' Infant', 'tourfic' ); ?></li>
+								<li><i class="ri-user-smile-line"></i><?php echo esc_html( $infant_number ); ?><?php esc_html_e( ' Infant', 'tourfic' ); ?></li>
 							<?php } ?>                     
 						</ul> 
 					</div>
@@ -2874,5 +2877,40 @@ if ( ! function_exists( 'tf_apartment_feature_assign_taxonomies' ) ) {
 			}
 			wp_set_object_terms( $post_id, $apartment_features, 'apartment_feature' );
 		}
+	}
+}
+
+
+/*
+ * Apartment search ajax
+ * @since 2.9.7
+ * @author Jahid
+ */
+add_action( 'wp_ajax_tf_apartments_search', 'tf_apartments_search_ajax_callback' );
+add_action( 'wp_ajax_nopriv_tf_apartments_search', 'tf_apartments_search_ajax_callback' );
+if ( ! function_exists( 'tf_apartments_search_ajax_callback' ) ) {
+	function tf_apartments_search_ajax_callback() {
+		// Check nonce security
+		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], 'tf_ajax_nonce' ) ) {
+			return;
+		}
+		$response = [
+			'status'  => 'error',
+			'message' => '',
+		];
+
+		if ( tfopt( 'date_apartment_search' ) && ( ! isset( $_POST['check-in-out-date'] ) || empty( $_POST['check-in-out-date'] ) ) ) {
+			$response['message'] = esc_html__( 'Please select a date', 'tourfic' );
+		}
+
+		if ( tfopt( 'date_apartment_search' ) ) {
+			if ( ! empty( $_POST['check-in-out-date'] ) ) {
+				$response['query_string'] = str_replace( '&action=tf_apartments_search', '', http_build_query( $_POST ) );
+				$response['status']       = 'success';
+			}
+		}
+
+		echo wp_json_encode( $response );
+		wp_die();
 	}
 }

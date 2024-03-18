@@ -28,7 +28,7 @@ class TF_Tour_Grid_Slider extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Tours by Destination', 'tourfic' );
+		return esc_html__( 'Tours by Destination', 'tourfic' );
 	}
 
 	/**
@@ -70,7 +70,7 @@ class TF_Tour_Grid_Slider extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content',
 			[
-				'label' => __( 'Settings', 'tourfic' ),
+				'label' => esc_html__( 'Settings', 'tourfic' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -94,7 +94,8 @@ class TF_Tour_Grid_Slider extends \Elementor\Widget_Base {
 		);
 
 		//get the location IDs
-		$destinations = get_terms( 'tour_destination', array(
+		$destinations = get_terms( array(
+			'taxonomy'   => 'tour_destination',
 			'orderby'    => 'count',
 			'hide_empty' => 0,
 		) );
@@ -109,7 +110,7 @@ class TF_Tour_Grid_Slider extends \Elementor\Widget_Base {
 			[
 				'label'       => esc_html__( 'Destinations', 'tourfic' ),
 				'type'        => \Elementor\Controls_Manager::SELECT2,
-				'description' => __( 'Choose destinations.', 'tourfic' ),
+				'description' => esc_html__( 'Choose destinations.', 'tourfic' ),
 				'options'     => $term_ids,
 				'multiple' => true,
 			]
@@ -120,7 +121,7 @@ class TF_Tour_Grid_Slider extends \Elementor\Widget_Base {
 			[
 				'label'       => esc_html__( 'Total Tours', 'tourfic' ),
 				'type'        => \Elementor\Controls_Manager::NUMBER,
-				'description' => __( 'Number of total tours. Min 3.', 'tourfic' ),
+				'description' => esc_html__( 'Number of total tours. Min 3.', 'tourfic' ),
 				'min'         => 1,
 				'default'     => 3,
 			]
@@ -130,10 +131,10 @@ class TF_Tour_Grid_Slider extends \Elementor\Widget_Base {
 			[
 				'label'       => esc_html__( 'Total Tours', 'tourfic' ),
 				'type'        => \Elementor\Controls_Manager::SELECT,
-				'description' => __( 'Tour layout style', 'tourfic' ),
+				'description' => esc_html__( 'Tour layout style', 'tourfic' ),
 				'options'     => array(
-					'grid'   => __( 'Grid', 'tourfic' ),
-					'slider' => __( 'Slider', 'tourfic' ),
+					'grid'   => esc_html__( 'Grid', 'tourfic' ),
+					'slider' => esc_html__( 'Slider', 'tourfic' ),
 				),
 				'default' 	  => 'grid'
 			]
@@ -143,7 +144,7 @@ class TF_Tour_Grid_Slider extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_section',
 			[
-				'label' => __( 'Style', 'tourfic' ),
+				'label' => esc_html__( 'Style', 'tourfic' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -152,14 +153,14 @@ class TF_Tour_Grid_Slider extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name' => 'title_typography',
-				'label' => __( 'Title Typography', 'tourfic' ),
+				'label' => esc_html__( 'Title Typography', 'tourfic' ),
 				'selector' => '{{WRAPPER}} .tf-widget-slider .tf-heading h2',
 			]
 		);
 		$this->add_control(
 			'title_color',
 			[
-				'label' => __( 'Title Color', 'tourfic' ),
+				'label' => esc_html__( 'Title Color', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => \Elementor\Core\Schemes\Color::get_type(),
@@ -182,7 +183,7 @@ class TF_Tour_Grid_Slider extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name' => 'subtitle_typography',
-				'label' => __( 'Subtitle Typography', 'tourfic' ),
+				'label' => esc_html__( 'Subtitle Typography', 'tourfic' ),
 				'selector' => '{{WRAPPER}} .tf-widget-slider .tf-heading p',
 			]
 		);
@@ -190,7 +191,7 @@ class TF_Tour_Grid_Slider extends \Elementor\Widget_Base {
 		$this->add_control(
 			'subtitle_color',
 			[
-				'label' => __( 'Subtitle Color', 'tourfic' ),
+				'label' => esc_html__( 'Subtitle Color', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => \Elementor\Core\Schemes\Color::get_type(),

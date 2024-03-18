@@ -8,10 +8,10 @@
                 <!-- Search Head Section -->
                 <div class="tf-archive-head tf-flex tf-flex-align-center tf-flex-space-bttn">
                     <div class="tf-search-result tf-flex">
-                        <span class="tf-counter-title"><?php echo __( 'Total Results ', 'tourfic' ); ?> </span>
+                        <span class="tf-counter-title"><?php echo esc_html__( 'Total Results ', 'tourfic' ); ?> </span>
 						<span><?php echo ' ('; ?> </span>
 						<div class="tf-total-results">
-							<span><?php echo $tf_total_results; ?> </span>
+							<span><?php echo esc_html($tf_total_results); ?> </span>
 						</div>
 						<span><?php echo ')'; ?> </span>
                     </div>
@@ -74,7 +74,7 @@
                 <!-- Loader Image -->
                 <div id="tf_ajax_searchresult_loader">
                     <div id="tf-searchresult-loader-img">
-                        <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+                        <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
                     </div>
                 </div>
                 <div class="tf-search-results-list tf-mt-30">
@@ -87,7 +87,7 @@
                             $loop->the_post();
                             $tour_meta = get_post_meta( get_the_ID() , 'tf_tours_opt', true );
                             
-                            if($tour_meta["tour_as_featured"]) {
+                            if(!empty($tour_meta["tour_as_featured"])) {
                                 tf_tour_archive_single_item();
                                 $featured_post_id[] = get_the_ID(); 
                             }
@@ -107,11 +107,11 @@
                         }
                         
 					} else {
-						echo '<div class="tf-nothing-found" data-post-count="0" >' .__("No Tours Found!", "tourfic"). '</div>';
+						echo '<div class="tf-nothing-found" data-post-count="0" >' .esc_html__("No Tours Found!", "tourfic"). '</div>';
 					}
 					?>
                     <span class="tf-posts-count" hidden="hidden">
-					    <?php echo $tf_total_results; ?>
+					    <?php echo esc_html($tf_total_results); ?>
 					</span>
                         <div class="tf-pagination-bar">
                             <?php tourfic_posts_navigation(); ?>

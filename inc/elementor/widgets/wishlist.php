@@ -28,7 +28,7 @@ class TF_Wishlist extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Wishlist', 'tourfic' );
+		return esc_html__( 'Wishlist', 'tourfic' );
 	}
 
 	/**

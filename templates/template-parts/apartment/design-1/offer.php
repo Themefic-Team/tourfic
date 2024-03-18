@@ -9,7 +9,7 @@ foreach ( tf_data_types( $meta['amenities'] ) as $amenity ) {
 if ( ! empty( $fav_amenities ) ){
 ?>
 <div class="tf-place-offer-section">
-    <h2><?php ! empty( $meta['amenities_title'] ) ? esc_html_e( $meta['amenities_title'] ) : ''; ?></h2>
+    <h2><?php echo ! empty( $meta['amenities_title'] ) ? esc_html($meta['amenities_title']) : ''; ?></h2>
     <div class="place-offer-items">
         <?php
             foreach ( array_slice( $fav_amenities, 0, 10 ) as $amenity ) :
@@ -23,7 +23,7 @@ if ( ! empty( $fav_amenities ) ){
                 }
                 ?>
                 <div class="tf-apt-amenity">
-                    <?php echo ! empty( $feature_icon ) ? "<div class='tf-apt-amenity-icon'>" . $feature_icon . "</div>" : ""; ?>
+                    <?php echo ! empty( $feature_icon ) ? "<div class='tf-apt-amenity-icon'>" . wp_kses_post( $feature_icon ). "</div>" : ""; ?>
                     <span><?php echo esc_html( $feature->name ); ?></span>
                 </div>
             <?php endforeach; ?>

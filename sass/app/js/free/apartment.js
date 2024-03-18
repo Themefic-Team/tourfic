@@ -67,7 +67,6 @@
                         /*execute a function when someone clicks on the item value (DIV element):*/
                         b.addEventListener("click", function (e) {
                             let source = this.getElementsByTagName("input")[0];
-                            console.log(source.dataset.slug);
                             /*insert the value for the autocomplete text field:*/
                             inp.value = source.value;
                             inp.closest('input').nextElementSibling.value = source.dataset.slug //source.dataset.slug
@@ -228,6 +227,46 @@
             });
         });
 
+
+        /*
+        * Apartment Search submit
+        * @since 2.9.7
+        * @author Jahid
+        */
+        $(document).on('submit', '#tf_apartment_booking', function (e) {
+            e.preventDefault();
+            let form = $(this),
+                submitBtn = form.find('.tf-submit'),
+                formData = new FormData(form[0]);
+
+            formData.append('action', 'tf_apartments_search');
+            formData.append('_nonce', tf_params.nonce);
+
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                beforeSend: function () {
+                    form.css({'opacity': '0.5', 'pointer-events': 'none'});
+                    submitBtn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    let obj = JSON.parse(response);
+                    form.css({'opacity': '1', 'pointer-events': 'all'});
+                    submitBtn.removeClass('tf-btn-loading');
+                    if (obj.status === 'error') {
+                        notyf.error(obj.message);
+                    }
+                    if (obj.status === 'success') {
+                        //location redirect to form action url with query string
+                        location.href = form.attr('action') + '?' + obj.query_string;
+                    }
+                }
+            });
+        });
+
         /*
         * Apartment room quick view
         * */
@@ -238,6 +277,7 @@
             let id = $(this).data("id");
             let data = {
                 action: 'tf_apt_room_details_qv',
+                _nonce: tf_params.nonce,
                 post_id: post_id,
                 id: id
             };
@@ -271,6 +311,7 @@
             let id = $(this).data("id");
             let data = {
                 action: 'tf_apt_room_details_qv',
+                _nonce: tf_params.nonce,
                 post_id: post_id,
                 id: id
             };

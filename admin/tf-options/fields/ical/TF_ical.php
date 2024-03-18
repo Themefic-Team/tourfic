@@ -32,12 +32,12 @@ if ( ! class_exists( 'TF_ical' ) ) {
 			}
 
 			$placeholder = ( ! empty( $this->field['placeholder'] ) ) ? 'placeholder="' . $this->field['placeholder'] . '"' : '';
-			echo '<input type="text" name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr( $this->value ) . '" ' . $placeholder . ' ' . $this->field_attributes() . '/>';
+			echo '<input type="text" name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr( $this->value ) . '" ' . wp_kses_post($placeholder) . ' ' . wp_kses_post($this->field_attributes()) . '/>';
 
 			if ( isset( $this->field['button_text'] ) && ! empty( $this->field['button_text'] ) ) {
 				$button_class = 'button button-primary button-large';
 				$button_class .= isset( $this->field['button_class'] ) ? ' ' . $this->field['button_class'] : '';
-				echo '<a href="#" class="' . $button_class . '" style="margin-top: 16px;" data-room-index="' . $room_index . '" data-pricing-type="' . $pricing_type . '">' . $this->field['button_text'] . '</a>';
+				echo '<a href="#" class="' . esc_attr($button_class) . '" style="margin-top: 16px;" data-room-index="' . esc_attr($room_index) . '" data-pricing-type="' . esc_attr($pricing_type) . '">' . esc_html($this->field['button_text']) . '</a>';
 			}
 		}
 

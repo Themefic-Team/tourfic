@@ -29,6 +29,7 @@
             var check_out_date = $("input[name=check_out_date]").val();
             var data = {
                 action: 'tf_hotel_airport_service_price',
+                _nonce: tf_params.nonce,
                 service_type: service_type,
                 roomid: roomid,
                 id: hotelid,
@@ -58,6 +59,7 @@
             var room_id = $(this).closest('.room-submit-wrap').find('input[name=room_id]').val();
             var unique_id = $(this).closest('.room-submit-wrap').find('input[name=unique_id]').val();
             var hotel_deposit = $(this).closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked');
+
             if (roomnumber == 0) {
                 $(this).closest('.room-submit-wrap').find('.roomselectissue').html('<span style="color:red">' + tf_pro_params.select_room + '</span>');
             } else {
@@ -716,7 +718,6 @@
             e.preventDefault();
 
             var user_id = $(this).attr("data-id");
-            console.log(user_id);
 
             var data = {
                 action: 'tf_resend_verification',
@@ -778,6 +779,7 @@
             $(".tf-scanner-preloader").show();
             var data = {
                 action: 'tf_qr_code_verification',
+                _nonce: tf_params.nonce,
                 tf_qr_code: qr_code,
             };
 
@@ -802,37 +804,6 @@
                 error: function (data) {
                     console.log(data);
                 }
-            });
-        });
-
-        /*
-        * Apartment room quick view
-        * */
-        $(document).on('click', '.tf-apt-room-qv', function (e) {
-            e.preventDefault();
-            $("#tour_room_details_loader").show();
-            let post_id = $(this).data("post-id");
-            let id = $(this).data("id");
-            let data = {
-                action: 'tf_apt_room_details_qv',
-                post_id: post_id,
-                id: id
-            };
-
-            $.ajax({
-                type: 'post',
-                url: tf_params.ajax_url,
-                data: data,
-                success: function (response) {
-                    $("#tf_apt_room_details_qv").html(response);
-
-                    $("#tour_room_details_loader").hide();
-                    $.fancybox.open({
-                        src: '#tf_apt_room_details_qv',
-                        type: 'inline',
-                    });
-                }
-
             });
         });
 
@@ -863,6 +834,7 @@ const TFQRSCANER = () => {
             jQuery(".tf_qr_code_number").val(content);
             var data = {
                 action: 'tf_qr_code_quick_info',
+                _nonce: tf_params.nonce,
                 tf_qr_code: content,
             };
             jQuery.ajax({
@@ -895,6 +867,7 @@ const TFQRSCANER = () => {
             jQuery(".tf-scanner-preloader").show();
             var data = {
                 action: 'tf_qr_code_verification',
+                _nonce: tf_params.nonce,
                 tf_qr_code: content,
             };
             jQuery.ajax({

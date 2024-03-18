@@ -17,7 +17,7 @@ class TF_PROMO_NOTICE {
     private $plugins_existes = ['ins', 'uacf7', 'beaf', 'ebef'];
 
     public function __construct() { 
-        if(in_array(date('F'), $this->months) && !function_exists('is_tf_pro') ){ 
+        if(in_array(gmdate('F'), $this->months) && !function_exists('is_tf_pro') ){
              
             add_filter('cron_schedules', array($this, 'tf_custom_cron_interval'));
         
@@ -60,7 +60,7 @@ class TF_PROMO_NOTICE {
             'plugin' => 'tf', 
         );
         $response = wp_remote_post($this->api_url, array(
-            'body'    => json_encode($query_params),
+            'body'    => wp_json_encode($query_params),
             'headers' => array('Content-Type' => 'application/json'),
         )); 
         if (is_wp_error($response)) {
@@ -92,7 +92,7 @@ class TF_PROMO_NOTICE {
         $schedules['every_day'] = array(
             'interval' => 86400, // Every 24 hours
             // 'interval' => 5, // Every 24 hours
-            'display' => __('Every 24 hours')
+            'display' => esc_html__('Every 24 hours')
         );
         return $schedules;
     }
@@ -143,7 +143,7 @@ class TF_PROMO_NOTICE {
                     <img  style="width: 100%;" src="<?php echo esc_attr($image_url) ?>" alt="">
                 </a> 
                 <?php if( isset($this->tf_promo_option['dasboard_dismiss']) && $this->tf_promo_option['dasboard_dismiss'] == true): ?>
-                <button type="button" class="notice-dismiss tf_black_friday_notice_dismiss"><span class="screen-reader-text"><?php echo __('Dismiss this notice.', 'ultimate-addons-cf7' ) ?></span></button>
+                <button type="button" class="notice-dismiss tf_black_friday_notice_dismiss"><span class="screen-reader-text"><?php echo esc_html__('Dismiss this notice.', 'ultimate-addons-cf7' ) ?></span></button>
                 <?php  endif; ?>
             </div>
             <script>
@@ -188,17 +188,17 @@ class TF_PROMO_NOTICE {
     public function tf_black_friday_2023_hotel_tour_docs() {
         $tf_hotel_friday_sidbar_notice = get_option( 'tf_hotel_friday_sidbar_notice' );  
 		if ( $tf_hotel_friday_sidbar_notice == 1  || time() >  $tf_hotel_friday_sidbar_notice ) {
-			add_meta_box( 'tfhotel_black_friday_docs', __( ' ', 'tourfic' ), array($this, 'tf_black_friday_2023_callback_hotel'), 'tf_hotel', 'side', 'high' );
+			add_meta_box( 'tfhotel_black_friday_docs', esc_html( ' ', 'tourfic' ), array($this, 'tf_black_friday_2023_callback_hotel'), 'tf_hotel', 'side', 'high' );
 		}
 
         $tf_tour_friday_sidbar_notice = get_option( 'tf_tour_friday_sidbar_notice' );  
 		if ( $tf_tour_friday_sidbar_notice == 1  || time() >  $tf_tour_friday_sidbar_notice ) { 
-			add_meta_box( 'tftour_black_friday_docs', __( ' ', 'tourfic' ), array($this, 'tf_black_friday_2023_callback_tour'), 'tf_tours', 'side', 'high' );
+			add_meta_box( 'tftour_black_friday_docs', esc_html( ' ', 'tourfic' ), array($this, 'tf_black_friday_2023_callback_tour'), 'tf_tours', 'side', 'high' );
 		}
 
         $tf_apartment_friday_sidbar_notice = get_option( 'tf_apartment_friday_sidbar_notice' );  
 		if ( $tf_apartment_friday_sidbar_notice == 1  || time() >  $tf_apartment_friday_sidbar_notice ) {  
-			add_meta_box( 'tfapartment_black_friday_docs', __( ' ', 'tourfic' ), array($this, 'tf_black_friday_2023_callback_apartment'), 'tf_apartment', 'side', 'high' );
+			add_meta_box( 'tfapartment_black_friday_docs', esc_html( ' ', 'tourfic' ), array($this, 'tf_black_friday_2023_callback_apartment'), 'tf_apartment', 'side', 'high' );
 		}
 	}
 

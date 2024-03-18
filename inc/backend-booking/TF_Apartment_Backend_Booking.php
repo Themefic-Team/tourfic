@@ -40,16 +40,15 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 		function tf_apartment_backend_booking_button() { 
 			$edit_url = admin_url( 'edit.php?post_type=tf_apartment&page=tf-apartment-backend-booking' );
 			?>
-            <a href="<?php echo $edit_url; ?>" class="button button-primary tf-booking-btn"><?php _e( 'Add New Booking', 'tourfic' ); ?></a>
+            <a href="<?php echo esc_url($edit_url); ?>" class="button button-primary tf-booking-btn"><?php esc_html_e( 'Add New Booking', 'tourfic' ); ?></a>
 			<?php
 		}
 
 		function tf_apartment_backend_booking_menu() {
-			$tf_aprt_parentmenu = !empty($_GET['page']) && "tf-apartment-backend-booking"==$_GET['page'] ? 'edit.php?post_type=tf_apartment' : '';
 			add_submenu_page(
-				$tf_aprt_parentmenu,
-				__( 'Add New Booking', 'tourfic' ),
-				__( 'Add New Booking', 'tourfic' ),
+				'edit.php?post_type=tf_apartment',
+				esc_html__( 'Add New Booking', 'tourfic' ),
+				esc_html__( 'Add New Booking', 'tourfic' ),
 				'edit_tf_apartments',
 				'tf-apartment-backend-booking',
 				array( $this, 'tf_backend_booking_page' ),
@@ -61,7 +60,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 			tf_dashboard_header()
 			?>
             <form method="post" action="" class="tf-backend-apartment-booking" enctype="multipart/form-data">
-                <h1><?php _e( 'Add New Apartment Booking', 'tourfic' ); ?></h1>
+                <h1><?php esc_html_e( 'Add New Apartment Booking', 'tourfic' ); ?></h1>
 				<?php
 				$tf_backend_booking_form_fields = $this->tf_backend_booking_form_fields();
 				foreach ( $tf_backend_booking_form_fields as $id => $tf_backend_booking_form_field ) : ?>
@@ -90,7 +89,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 
                 <!-- Footer -->
                 <div class="tf-backend-booking-footer">
-                    <button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn" id="tf-backend-apartment-book-btn"><?php _e( 'Book Now', 'tourfic' ); ?></button>
+                    <button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn" id="tf-backend-apartment-book-btn"><?php esc_html_e( 'Book Now', 'tourfic' ); ?></button>
                 </div>
             </form>
 			<?php
@@ -104,11 +103,11 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 			$current_user = wp_get_current_user();
 			$fields       = array(
 				'tf_booking_customer_fields' => array(
-					'title'  => __( 'Customer Information', 'tourfic' ),
+					'title'  => esc_html__( 'Customer Information', 'tourfic' ),
 					'fields' => array(
 						array(
 							'id'         => 'tf_apartment_booked_by',
-							'label'      => __( 'Booked By', 'tourfic' ),
+							'label'      => esc_html__( 'Booked By', 'tourfic' ),
 							'type'       => 'text',
 							'default'    => $current_user->display_name ?: $current_user->user_login,
 							'attributes' => array(
@@ -117,82 +116,82 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 						),
 						array(
 							'id'          => 'tf_apartment_customer_first_name',
-							'label'       => __( 'First Name', 'tourfic' ),
+							'label'       => esc_html__( 'First Name', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer First Name', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer First Name', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
 							'id'          => 'tf_apartment_customer_last_name',
-							'label'       => __( 'Last Name', 'tourfic' ),
+							'label'       => esc_html__( 'Last Name', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Last Name', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Last Name', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
 							'id'          => 'tf_apartment_customer_email',
-							'label'       => __( 'Email', 'tourfic' ),
+							'label'       => esc_html__( 'Email', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Email', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Email', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
 							'id'          => 'tf_apartment_customer_phone',
-							'label'       => __( 'Phone', 'tourfic' ),
+							'label'       => esc_html__( 'Phone', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Phone', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Phone', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
 							'id'          => 'tf_apartment_customer_country',
-							'label'       => __( 'Country / Region', 'tourfic' ),
+							'label'       => esc_html__( 'Country / Region', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Country', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Country', 'tourfic' ),
 							'field_width' => 33.33,
 						),
 						array(
 							'id'          => 'tf_apartment_customer_address',
-							'label'       => __( 'Address', 'tourfic' ),
+							'label'       => esc_html__( 'Address', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Address', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Address', 'tourfic' ),
 							'field_width' => 33.33,
 						),
 						array(
 							'id'          => 'tf_apartment_customer_address_2',
-							'label'       => __( 'Address 2', 'tourfic' ),
+							'label'       => esc_html__( 'Address 2', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Address 2', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Address 2', 'tourfic' ),
 							'field_width' => 33.33,
 						),
 						array(
 							'id'          => 'tf_apartment_customer_city',
-							'label'       => __( 'Town / City', 'tourfic' ),
+							'label'       => esc_html__( 'Town / City', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer City', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer City', 'tourfic' ),
 							'field_width' => 33,
 						),
 						array(
 							'id'          => 'tf_apartment_customer_state',
-							'label'       => __( 'State', 'tourfic' ),
+							'label'       => esc_html__( 'State', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer State', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer State', 'tourfic' ),
 							'field_width' => 33,
 						),
 						array(
 							'id'          => 'tf_apartment_customer_zip',
-							'label'       => __( 'Postcode / ZIP', 'tourfic' ),
+							'label'       => esc_html__( 'Postcode / ZIP', 'tourfic' ),
 							'type'        => 'text',
-							'placeholder' => __( 'Enter Customer Zip', 'tourfic' ),
+							'placeholder' => esc_html__( 'Enter Customer Zip', 'tourfic' ),
 							'field_width' => 33,
 						),
 					),
 				),
 				'tf_booking_fields' => array(
-					'title'  => __( 'Booking Information', 'tourfic' ),
+					'title'  => esc_html__( 'Booking Information', 'tourfic' ),
 					'fields' => array(
 						array(
 							'id'      => 'tf_apartment_date',
-							'label'   => __( 'Date', 'tourfic' ),
+							'label'   => esc_html__( 'Date', 'tourfic' ),
 							'class'   => 'tf-field-class',
 							'type'    => 'date',
 							'format'  => 'Y/m/d',
@@ -201,7 +200,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 						),
 						array(
 							'id'          => 'tf_available_apartments',
-							'label'       => __( 'Available Apartments', 'tourfic' ),
+							'label'       => esc_html__( 'Available Apartments', 'tourfic' ),
 							'type'        => 'select2',
 							'class'   => 'tf-field-class',
 							'options'     => 'posts',
@@ -214,17 +213,17 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 						),
 						array(
 							'id'          => 'tf_apartment_additional_fees',
-							'label'       => __( 'Additional Fees', 'tourfic' ),
+							'label'       => esc_html__( 'Additional Fees', 'tourfic' ),
 							'class'   => 'tf-field-class',
 							'type'        => 'select2',
 							'options'     => 'posts',
 							'attributes'  => array( 'disabled' => 'disabled' ),
-							'placeholder' => __( 'Please choose the apartment first', 'tourfic' ),
+							'placeholder' => esc_html__( 'Please choose the apartment first', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
 							'id'          => 'tf_apartment_adults_number',
-							'label'       => __( 'Adults', 'tourfic' ),
+							'label'       => esc_html__( 'Adults', 'tourfic' ),
 							'type'        => 'number',
 							'attributes'  => array(
 								'min' => 1,
@@ -233,7 +232,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 						),
 						array(
 							'id'          => 'tf_apartment_children_number',
-							'label'       => __( 'Children', 'tourfic' ),
+							'label'       => esc_html__( 'Children', 'tourfic' ),
 							'type'        => 'number',
 							'attributes'  => array(
 								'min' => '0',
@@ -242,7 +241,7 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 						),
 						array(
 							'id'          => 'tf_apartment_infant_number',
-							'label'       => __( 'Infant', 'tourfic' ),
+							'label'       => esc_html__( 'Infant', 'tourfic' ),
 							'type'        => 'number',
 							'attributes'  => array(
 								'min' => '0',
@@ -257,6 +256,9 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 		}
 
 		public function tf_check_available_apartment() {
+			// Add nonce for security and authentication.
+			check_ajax_referer('updates', '_nonce');
+
 			$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
 			$from = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
 			$to   = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
@@ -399,6 +401,9 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 		}
 
 		public function tf_check_apartment_aditional_fees() {
+			// Add nonce for security and authentication.
+			check_ajax_referer('updates', '_nonce');
+
 			$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : 0;
 			$from = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
 			$to   = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
@@ -447,6 +452,9 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 		// Backend Booking
 
 		public function tf_backend_apartment_booking() {
+			// Add nonce for security and authentication.
+			check_ajax_referer('tf_backend_booking_nonce_action', 'tf_backend_booking_nonce');
+
 			$response = array(
 				'success' => false,
 			);
@@ -476,115 +484,115 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 				'tf_apartment_adults_number'
 			);
 
-			if ( ! isset( $field['tf_backend_booking_nonce'] ) || ! wp_verify_nonce( $field['tf_backend_booking_nonce'], 'tf_backend_booking_nonce_action' ) ) {
-				$response['message'] = __( 'Sorry, your nonce did not verify.', 'tourfic' );
-			} else {
-				foreach ( $required_fields as $required_field ) {
-					if ( $required_field === 'tf_apartment_date' ) {
-						if ( empty( $field[ $required_field ]['from'] ) ) {
-							$response['fieldErrors'][ $required_field . '[from]_error' ] = __( 'The field is required', 'tourfic' );
-						}
-						if ( empty( $field[ $required_field ]['to'] ) ) {
-							$response['fieldErrors'][ $required_field . '[to]_error' ] = __( 'The field is required', 'tourfic' );
-						}
-					} else {
-						if ( empty( $field[ $required_field ] ) ) {
-							$response['fieldErrors'][ $required_field . '_error' ] = __( 'The field is required', 'tourfic' );
-						}
+			foreach ( $required_fields as $required_field ) {
+				if ( $required_field === 'tf_apartment_date' ) {
+					if ( empty( $field[ $required_field ]['from'] ) ) {
+						$response['fieldErrors'][ $required_field . '[from]_error' ] = esc_html__( 'The field is required', 'tourfic' );
 					}
-				}
-
-				$apt_id = !empty($field['tf_available_apartments']) ? intval($field['tf_available_apartments']) : 0;
-				$adult_count = !empty($field['tf_apartment_adults_number']) ? intval($field['tf_apartment_adults_number']) : 0;
-				$child_count = !empty($field['tf_apartment_children_number']) ? intval($field['tf_apartment_children_number']) : 0;
-				$infant_count = !empty($field['tf_apartment_infant_number']) ? intval($field['tf_apartment_infant_number']) : 0;
-				$check_from = !empty($field['tf_apartment_date']['from']) ? $field['tf_apartment_date']['from'] : '';
-				$check_to = !empty($field['tf_apartment_date']['to']) ? $field['tf_apartment_date']['to'] : '';
-				$apt_data = $this->get_apartment_meta_options( intval( $apt_id ) );
-
-				if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) {
-					$additional_fees = !empty($apt_data['additional_fees']) ? $apt_data['additional_fees'] : array();
+					if ( empty( $field[ $required_field ]['to'] ) ) {
+						$response['fieldErrors'][ $required_field . '[to]_error' ] = esc_html__( 'The field is required', 'tourfic' );
+					}
 				} else {
-					$additional_fees [] = array(
-						"additional_fee_label" => !empty($apt_data['additional_fee_label']) ? $apt_data['additional_fee_label'] : '',
-						"additional_fee"   => !empty($apt_data['additional_fee']) ? $apt_data['additional_fee'] : 0,
-						"fee_type"  => !empty($apt_data['fee_type']) ? $apt_data['fee_type'] : '',
-					);
-				}
-
-
-				if ( $apt_data['max_adults'] < $adult_count ) {
-					$response['fieldErrors']['tf_apartment_adults_number_error'] = __( "You can't book more than " . $apt_data['max_adults'] . " adults", 'tourfic' );
-				}
-				if ( $apt_data['max_children'] < $child_count ) {
-					$response['fieldErrors']['tf_apartment_children_number_error'] = __( "You can't book more than " . $apt_data['max_children'] . " children", 'tourfic' );
-				}
-				if ( $apt_data['max_infants'] < $infant_count ) {
-					$response['fieldErrors']['tf_apartment_infant_number_error'] = __( "You can't book more than " . $apt_data['max_infants'] . " infants", 'tourfic' );
-				}
-
-				if ( ! array_key_exists("fieldErrors", $response) || ! $response['fieldErrors'] ) {
-					$total_price = $this->get_total_apartment_price($apt_id, $check_from, $check_to, $adult_count, $child_count, $infant_count, $additional_fees);
-					$billing_details  = array(
-						'billing_first_name' => $field['tf_apartment_customer_first_name'],
-						'billing_last_name'  => $field['tf_apartment_customer_last_name'],
-						'billing_company'    => '',
-						'billing_address_1'  => $field['tf_apartment_customer_address'],
-						'billing_address_2'  => $field['tf_apartment_customer_address_2'],
-						'billing_city'       => $field['tf_apartment_customer_city'],
-						'billing_state'      => $field['tf_apartment_customer_state'],
-						'billing_postcode'   => $field['tf_apartment_customer_zip'],
-						'billing_country'    => $field['tf_apartment_customer_country'],
-						'billing_email'      => $field['tf_apartment_customer_email'],
-						'billing_phone'      => $field['tf_apartment_customer_phone'],
-					);
-					$shipping_details = array(
-						'shipping_first_name' => $field['tf_apartment_customer_first_name'],
-						'shipping_last_name'  => $field['tf_apartment_customer_last_name'],
-						'shipping_company'    => '',
-						'shipping_address_1'  => $field['tf_apartment_customer_address'],
-						'shipping_address_2'  => $field['tf_apartment_customer_address_2'],
-						'shipping_city'       => $field['tf_apartment_customer_city'],
-						'shipping_state'      => $field['tf_apartment_customer_state'],
-						'shipping_postcode'   => $field['tf_apartment_customer_zip'],
-						'shipping_country'    => $field['tf_apartment_customer_country'],
-						'shipping_phone'      => $field['tf_apartment_customer_phone'],
-						'tf_email'      => $field['tf_customer_email'],
-					);
-					$order_details    = [
-						'order_by'             => $field['tf_apartment_booked_by'],
-						'check_in'             => $field['tf_apartment_date']['from'],
-						'check_out'            => $field['tf_apartment_date']['to'],
-						'adult'                => $field['tf_apartment_adults_number'],
-						'child'                => $field['tf_apartment_children_number'],
-						'infant'                => $field['tf_apartment_infant_number'],
-						'children_ages'        => '',
-						'total_price'          => $total_price,
-						'due_price'            => '',
-					];
-
-					$order_data = array(
-						'post_id'          => intval( $field['tf_available_apartments'] ),
-						'post_type'        => 'apartment',
-						'room_number'      => null,
-						'check_in'         => $check_from,
-						'check_out'        => $check_to,
-						'billing_details'  => $billing_details,
-						'shipping_details' => $shipping_details,
-						'order_details'    => $order_details,
-						'payment_method'   => "offline",
-						'status'           => 'processing',
-						'order_date'       => date( 'Y-m-d H:i:s' ),
-					);
-
-					tf_set_order( $order_data );
-
-					$response['success'] = true;
-					$response['message'] = __( 'Your booking has been successfully submitted.', 'tourfic' );
+					if ( empty( $field[ $required_field ] ) ) {
+						$response['fieldErrors'][ $required_field . '_error' ] = esc_html__( 'The field is required', 'tourfic' );
+					}
 				}
 			}
 
-			echo json_encode( $response );
+			$apt_id = !empty($field['tf_available_apartments']) ? intval($field['tf_available_apartments']) : 0;
+			$adult_count = !empty($field['tf_apartment_adults_number']) ? intval($field['tf_apartment_adults_number']) : 0;
+			$child_count = !empty($field['tf_apartment_children_number']) ? intval($field['tf_apartment_children_number']) : 0;
+			$infant_count = !empty($field['tf_apartment_infant_number']) ? intval($field['tf_apartment_infant_number']) : 0;
+			$check_from = !empty($field['tf_apartment_date']['from']) ? $field['tf_apartment_date']['from'] : '';
+			$check_to = !empty($field['tf_apartment_date']['to']) ? $field['tf_apartment_date']['to'] : '';
+			$apt_data = $this->get_apartment_meta_options( intval( $apt_id ) );
+
+			if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) {
+				$additional_fees = !empty($apt_data['additional_fees']) ? $apt_data['additional_fees'] : array();
+			} else {
+				$additional_fees [] = array(
+					"additional_fee_label" => !empty($apt_data['additional_fee_label']) ? $apt_data['additional_fee_label'] : '',
+					"additional_fee"   => !empty($apt_data['additional_fee']) ? $apt_data['additional_fee'] : 0,
+					"fee_type"  => !empty($apt_data['fee_type']) ? $apt_data['fee_type'] : '',
+				);
+			}
+
+
+			if ( $apt_data['max_adults'] < $adult_count ) {
+				/* translators: %s max adults */
+				$response['fieldErrors']['tf_apartment_adults_number_error'] = sprintf( esc_html__( "You can't book more than %s adults", 'tourfic' ), $apt_data['max_adults']);
+			}
+			if ( $apt_data['max_children'] < $child_count ) {
+				/* translators: %s max children */
+				$response['fieldErrors']['tf_apartment_children_number_error'] = sprintf( esc_html__( "You can't book more than %s children", 'tourfic' ), $apt_data['max_children']);
+			}
+			if ( $apt_data['max_infants'] < $infant_count ) {
+				/* translators: %s max infants */
+				$response['fieldErrors']['tf_apartment_infant_number_error'] = sprintf( esc_html__( "You can't book more than %s infants", 'tourfic' ), $apt_data['max_infants']);
+			}
+
+			if ( ! array_key_exists("fieldErrors", $response) || ! $response['fieldErrors'] ) {
+				$total_price = $this->get_total_apartment_price($apt_id, $check_from, $check_to, $adult_count, $child_count, $infant_count, $additional_fees);
+				$billing_details  = array(
+					'billing_first_name' => $field['tf_apartment_customer_first_name'],
+					'billing_last_name'  => $field['tf_apartment_customer_last_name'],
+					'billing_company'    => '',
+					'billing_address_1'  => $field['tf_apartment_customer_address'],
+					'billing_address_2'  => $field['tf_apartment_customer_address_2'],
+					'billing_city'       => $field['tf_apartment_customer_city'],
+					'billing_state'      => $field['tf_apartment_customer_state'],
+					'billing_postcode'   => $field['tf_apartment_customer_zip'],
+					'billing_country'    => $field['tf_apartment_customer_country'],
+					'billing_email'      => $field['tf_apartment_customer_email'],
+					'billing_phone'      => $field['tf_apartment_customer_phone'],
+				);
+				$shipping_details = array(
+					'shipping_first_name' => $field['tf_apartment_customer_first_name'],
+					'shipping_last_name'  => $field['tf_apartment_customer_last_name'],
+					'shipping_company'    => '',
+					'shipping_address_1'  => $field['tf_apartment_customer_address'],
+					'shipping_address_2'  => $field['tf_apartment_customer_address_2'],
+					'shipping_city'       => $field['tf_apartment_customer_city'],
+					'shipping_state'      => $field['tf_apartment_customer_state'],
+					'shipping_postcode'   => $field['tf_apartment_customer_zip'],
+					'shipping_country'    => $field['tf_apartment_customer_country'],
+					'shipping_phone'      => $field['tf_apartment_customer_phone'],
+					'tf_email'      => $field['tf_customer_email'],
+				);
+				$order_details    = [
+					'order_by'             => $field['tf_apartment_booked_by'],
+					'check_in'             => $field['tf_apartment_date']['from'],
+					'check_out'            => $field['tf_apartment_date']['to'],
+					'adult'                => $field['tf_apartment_adults_number'],
+					'child'                => $field['tf_apartment_children_number'],
+					'infant'                => $field['tf_apartment_infant_number'],
+					'children_ages'        => '',
+					'total_price'          => $total_price,
+					'due_price'            => '',
+				];
+
+				$order_data = array(
+					'post_id'          => intval( $field['tf_available_apartments'] ),
+					'post_type'        => 'apartment',
+					'room_number'      => null,
+					'check_in'         => $check_from,
+					'check_out'        => $check_to,
+					'billing_details'  => $billing_details,
+					'shipping_details' => $shipping_details,
+					'order_details'    => $order_details,
+					'payment_method'   => "offline",
+					'status'           => 'processing',
+					'order_date'       => gmdate( 'Y-m-d H:i:s' ),
+				);
+
+				tf_set_order( $order_data );
+
+				$response['success'] = true;
+				$response['message'] = esc_html__( 'Your booking has been successfully submitted.', 'tourfic' );
+			}
+			
+
+			echo wp_json_encode( $response );
 			die();
 		}
 	}

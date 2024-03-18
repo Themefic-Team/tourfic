@@ -104,6 +104,7 @@
 
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
+            formData.append('_nonce', tf_params.nonce);
             formData.append('type', posttype);
             formData.append('dest', dest);
             formData.append('adults', adults);
@@ -234,6 +235,7 @@
 
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
+            formData.append('_nonce', tf_params.nonce);
             formData.append('type', posttype);
             formData.append('page', page);
             formData.append('dest', dest);
@@ -599,10 +601,9 @@
         const removeWish = id => {
             let userLists = getWish()
             let index = userLists.findIndex(x => x.post == id);
-            console.log(index, id, userLists);
+
             if (index >= 0) {
                 userLists.splice(index, 1)
-                console.log(userLists);
                 localStorage.setItem(wishKey, JSON.stringify(userLists));
                 if (tf_params.single != '1') getAllWish()
                 return true;
@@ -754,7 +755,6 @@
                         b.innerHTML += `<input type='hidden' value="${value}" data-slug='${key}'>`;
                         b.addEventListener("click", function (e) {
                             let source = this.getElementsByTagName("input")[0];
-                            console.log(source.dataset.slug);
                             inp.value = source.value;
                             inp.closest('input').nextElementSibling.value = source.dataset.slug
                         });
@@ -791,7 +791,6 @@
                         /*execute a function when someone clicks on the item value (DIV element):*/
                         b.addEventListener("click", function (e) {
                             let source = this.getElementsByTagName("input")[0];
-                            console.log(source.dataset.slug);
                             /*insert the value for the autocomplete text field:*/
                             inp.value = source.value;
                             inp.closest('input').nextElementSibling.value = source.dataset.slug //source.dataset.slug
@@ -925,7 +924,7 @@
         $('.acr-dec, .quanity-acr-dec').on('click', function (e) {
 
             var input = $(this).parent().find('input');
-            var min = input.attr('min');
+            var min = input.attr('min') ? input.attr('min') : 0;
             var step = input.attr('step') ? input.attr('step') : 1;
             if(!input.val()){
                 input.val(0);
@@ -1418,6 +1417,7 @@
                 url: tf_params.ajax_url,
                 data: {
                     action: 'tf_checkout_cart_item_remove',
+                    _nonce: tf_params.nonce,
                     cart_item_key: cart_item_key,
                 },
                 beforeSend: function () {
@@ -1720,6 +1720,7 @@
             var quantities = quantity.join();
             var data = {
                 action: 'tf_tour_booking_popup',
+                _nonce: tf_params.nonce,
                 post_id: post_id,
                 adults: adults,
                 children: children,
@@ -1843,6 +1844,7 @@
             var uniqid_id = $(this).attr("data-uniqid");
             var data = {
                 action: 'tf_tour_details_qv',
+                _nonce: tf_params.nonce,
                 post_id: post_id,
                 uniqid_id: uniqid_id
             };
@@ -1875,6 +1877,7 @@
             var uniqid_id = $(this).attr("data-uniqid");
             var data = {
                 action: 'tf_tour_details_qv',
+                _nonce: tf_params.nonce,
                 post_id: post_id,
                 uniqid_id: uniqid_id
             };
@@ -2056,6 +2059,7 @@
             var post_type = $(this).attr("data-type");
             var data = {
                 action: 'tf_hotel_archive_popup_qv',
+                _nonce: tf_params.nonce,
                 post_id: post_id,
                 post_type: post_type
             };

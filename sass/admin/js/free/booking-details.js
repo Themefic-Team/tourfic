@@ -354,6 +354,13 @@
                 let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
                 window.location.href = updatedUrl;
             }
+
+            //Nonce
+            if (!currentURLParams.has("nonce")) {
+                currentURLParams.set("nonce", tf_admin_params.tf_nonce);
+                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
+                window.location.href = updatedUrl;
+            }
         });
 
         /**
@@ -378,6 +385,13 @@
                 let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
                 window.location.href = updatedUrl;
             }
+
+            //Nonce
+            if (!currentURLParams.has("nonce")) {
+                currentURLParams.set("nonce", tf_admin_params.tf_nonce);
+                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
+                window.location.href = updatedUrl;
+            }
         });
 
         /**
@@ -399,6 +413,13 @@
                 window.location.href = updatedUrl;
             }else{
                 currentURLParams.set("payment", changeValue);
+                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
+                window.location.href = updatedUrl;
+            }
+            
+            //Nonce
+            if (!currentURLParams.has("nonce")) {
+                currentURLParams.set("nonce", tf_admin_params.tf_nonce);
                 let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
                 window.location.href = updatedUrl;
             }

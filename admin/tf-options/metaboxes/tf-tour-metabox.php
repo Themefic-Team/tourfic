@@ -21,56 +21,56 @@ function tf_tour_meals() {
 }
 
 TF_Metabox::metabox( 'tf_tours_opt', array(
-	'title'     => __( 'Tour Settings', 'tourfic' ),
+	'title'     => esc_html__( 'Tour Settings', 'tourfic' ),
 	'post_type' => 'tf_tours',
 	'sections'  => array(
 		// General
 		'general'              => array(
-			'title'  => __( 'General', 'tourfic' ),
+			'title'  => esc_html__( 'General', 'tourfic' ),
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
 				array(
 					'id'    => 'tour-general-heading',
 					'type'  => 'heading',
 					'label' => 'General Settings',
-					'subtitle' => __( 'These are some common settings specific to this Tour Package.', 'tourfic' ),
+					'subtitle' => esc_html__( 'These are some common settings specific to this Tour Package.', 'tourfic' ),
 				),
 				array(
 					'id'      => 'tour-general-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
-					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tourfic-hotel-general-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tourfic-hotel-general-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'       => 'tour_as_featured',
 					'type'     => 'switch',
-					'label'    => __( 'Set as featured', 'tourfic' ),
-					'subtitle' => __( 'This tour will be featured at the top of both the search results and the tour archive page.', 'tourfic' ),
+					'label'    => esc_html__( 'Set as featured', 'tourfic' ),
+					'subtitle' => esc_html__( 'This tour will be featured at the top of both the search results and the tour archive page.', 'tourfic' ),
 				),
 				array(
 					'id'          => 'featured_text',
 					'type'        => 'text',
-					'label'       => __( 'Tour Featured Text', 'tourfic' ),
-					'subtitle'    => __( 'Enter Featured Tour Text', 'tourfic' ),
-					'placeholder' => __( 'Enter Featured Tour Text', 'tourfic' ),
-					'default' => __( 'Hot Deal', 'tourfic' ),
+					'label'       => esc_html__( 'Tour Featured Text', 'tourfic' ),
+					'subtitle'    => esc_html__( 'Enter Featured Tour Text', 'tourfic' ),
+					'placeholder' => esc_html__( 'Enter Featured Tour Text', 'tourfic' ),
+					'default' => esc_html__( 'Hot Deal', 'tourfic' ),
 					'dependency'  => array( 'tour_as_featured', '==', true ),
 				),
 				array(
 					'id'       => 'tf_single_tour_layout_opt',
 					'type'     => 'select',
-					'label'    => __( 'Single Tour Template Settings', 'tourfic' ),
-					'subtitle' => __( 'You can keep the Global Template settings or choose a different layout for this tour.', 'tourfic' ),
+					'label'    => esc_html__( 'Single Tour Template Settings', 'tourfic' ),
+					'subtitle' => esc_html__( 'You can keep the Global Template settings or choose a different layout for this tour.', 'tourfic' ),
 					'options'  => [
-						'global' => __( 'Global Settings', 'tourfic' ),
-						'single' => __( 'Single Settings', 'tourfic' ),
+						'global' => esc_html__( 'Global Settings', 'tourfic' ),
+						'single' => esc_html__( 'Single Settings', 'tourfic' ),
 					],
 					'default'  => 'global',
 				),
 				array(
 					'id'       => 'tf_single_tour_template',
 					'type'     => 'imageselect',
-					'label'    => __( 'Single Tour Page Layout', 'tourfic' ),
+					'label'    => esc_html__( 'Single Tour Page Layout', 'tourfic' ),
 					'multiple' 		=> true,
 					'inline'   		=> true,
 					'options'   	=> array( 
@@ -96,41 +96,41 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'    => 'tour_gallery',
 					'type'  => 'gallery',
-					'label' => __( 'Tour Gallery', 'tourfic' ),
-					'subtitle' => __( 'Add multiple images to craft a captivating gallery for your tour, giving potential customers a visual tour.', 'tourfic' ),
+					'label' => esc_html__( 'Tour Gallery', 'tourfic' ),
+					'subtitle' => esc_html__( 'Add multiple images to craft a captivating gallery for your tour, giving potential customers a visual tour.', 'tourfic' ),
 				),
 
 				array(
 					'id'     => 'tour_video',
 					'type'   => 'text',
-					'label'  => __( 'Tour Video', 'tourfic' ),
-					'subtitle' => __( 'If you have an enticing video of your tour, simply upload it to YouTube or Vimeo and insert the URL here to showcase it to your guests.', 'tourfic' ),
+					'label'  => esc_html__( 'Tour Video', 'tourfic' ),
+					'subtitle' => esc_html__( 'If you have an enticing video of your tour, simply upload it to YouTube or Vimeo and insert the URL here to showcase it to your guests.', 'tourfic' ),
 				),
 			),
 		),
 		// Location
 		'location'             => array(
-			'title'  => __( 'Location', 'tourfic' ),
+			'title'  => esc_html__( 'Location', 'tourfic' ),
 			'icon'   => 'fa-solid fa-location-dot',
 			'fields' => array(
 				array(
 					'id'    => 'tour-location-heading',
 					'type'  => 'heading',
 					'label' => 'Location Settings',
-					'subtitle' => __( 'The location of a tour is a crucial element for every tour package. Set your tour locations in this section.', 'tourfic' ),
+					'subtitle' => esc_html__( 'The location of a tour is a crucial element for every tour package. Set your tour locations in this section.', 'tourfic' ),
 				),
 				array(
 					'id'      => 'tour-location-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
-					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-location-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-location-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'       => 'location',
 					'class'    => 'gmaps',
 					'type'     => 'map',
-					'label'    => __( 'Dynamic Location Search', 'tourfic' ),
-					'subtitle' => __( 'Enter the specific address you wish to use for the tour and select the correct option from the suggested addresses. This will be used to hyperlink address and display the address on the front-end map. Note that the address provided in the previous section is solely for display purposes!', 'tourfic' ),
+					'label'    => esc_html__( 'Dynamic Location Search', 'tourfic' ),
+					'subtitle' => esc_html__( 'Enter the specific address you wish to use for the tour and select the correct option from the suggested addresses. This will be used to hyperlink address and display the address on the front-end map. Note that the address provided in the previous section is solely for display purposes!', 'tourfic' ),
 					'height'   => '250px',
 					'settings' => array(
 						'scrollWheelZoom' => true,
@@ -143,20 +143,20 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 		),
 		// Information
 		'information'          => array(
-			'title'  => __( 'Information', 'tourfic' ),
+			'title'  => esc_html__( 'Informations', 'tourfic' ),
 			'icon'   => 'fa-solid fa-circle-info',
 			'fields' => array(
 				array(
 					'id'    => 'tour-info-heading',
 					'type'  => 'heading',
 					'label' => 'Tour Information Section',
-					'subtitle' => __( 'Ensure to furnish customers with all the essential information they need to fully understand your tour package.', 'tourfic' ),
+					'subtitle' => esc_html__( 'Ensure to furnish customers with all the essential information they need to fully understand your tour package.', 'tourfic' ),
 				),
 				array(
 					'id'      => 'tour-info-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
-					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-information/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-information/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'          => 'duration',
@@ -907,7 +907,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 										'11' => __('November', 'tourfic'),
 										'12' => __('December', 'tourfic')
 									),
-									// 'default' => date('m'),
+									// 'default' => gmdate('m'),
 									'inline' => 1,
 									"dependency" => array(
 										array("tf-repeat-months-switch", "==", 'true')

@@ -83,8 +83,9 @@ function tf_required_taxonomies( $hook ) {
 		$post_types[ $post_type ][ $taxonomy ]['type'] = $config['type'] = ( is_taxonomy_hierarchical( $taxonomy ) ? 'hierarchical' : 'non-hierarchical' );
 
 		if ( ! isset( $config['message'] ) || $taxonomy === $config ) {
-			$post_type_labels  = get_post_type_labels( get_post_type_object( $post_type ) );
-			$config['message'] = sprintf( __( 'Please choose at least one %s before publishing this %s.', 'tourfic' ), $taxonomy_labels->singular_name, $post_type_labels->singular_name );
+			$post_type_labels = get_post_type_labels( get_post_type_object( $post_type ) );
+			/* translators: %s taxonomy singular name, translators: %s: post type singular name */
+			$config['message'] = sprintf( __( 'Please choose at least one %1$s before publishing this %2$s.', 'tourfic' ), $taxonomy_labels->singular_name, $post_type_labels->singular_name );
 		}
 
 		$post_types[ $post_type ][ $taxonomy ]['message'] = $config['message'];
@@ -151,7 +152,7 @@ function tf_admin_footer() {
 		global $post;
 		?>
         <script>
-            var post_id = '<?php echo $post->ID; ?>';
+            var post_id = '<?php echo esc_html( $post->ID ); ?>';
         </script>
 		<?php
 	}
@@ -168,8 +169,8 @@ function tf_dashboard_header() {
     <!-- dashboard-top-section -->
     <div class="tf-setting-top-bar">
         <div class="version">
-            <img src="<?php echo TF_ASSETS_APP_URL; ?>images/tourfic-logo.webp" alt="logo">
-            <span>v<?php echo esc_attr( TOURFIC ); ?></span>
+            <img src="<?php echo esc_url( TF_ASSETS_APP_URL ); ?>images/tourfic-logo.webp" alt="logo">
+            <span>v<?php echo esc_html( TOURFIC ); ?></span>
         </div>
         <div class="other-document">
             <svg width="26" height="25" viewBox="0 0 26 25" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -187,14 +188,14 @@ function tf_dashboard_header() {
                             <path d="M17.9423 5.08086V8.67502C17.9423 10.4721 17.3855 11.6941 16.272 12.368C16.0026 12.5298 15.6884 12.3141 15.6884 11.9996L15.6973 8.67502C15.6973 5.08086 13.641 3.0232 10.0491 3.0232L4.58048 3.03219C4.26619 3.03219 4.05067 2.7177 4.21231 2.44814C4.88578 1.33395 6.10702 0.776855 7.89398 0.776855H13.641C16.5055 0.776855 17.9423 2.21452 17.9423 5.08086Z"
                                   fill="#003c79"></path>
                         </svg>
-                        <span><?php _e( "Need Help?", "tourfic" ); ?></span>
+                        <span><?php esc_html_e( "Need Help?", "tourfic" ); ?></span>
                     </a>
                     <a href="https://themefic.com/docs/tourfic/" target="_blank">
                         <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16.1896 7.57803H13.5902C11.4586 7.57803 9.72274 5.84103 9.72274 3.70803V1.10703C9.72274 0.612031 9.318 0.207031 8.82332 0.207031H5.00977C2.23956 0.207031 0 2.00703 0 5.22003V13.194C0 16.407 2.23956 18.207 5.00977 18.207H12.0792C14.8494 18.207 17.089 16.407 17.089 13.194V8.47803C17.089 7.98303 16.6843 7.57803 16.1896 7.57803ZM8.09478 14.382H4.4971C4.12834 14.382 3.82254 14.076 3.82254 13.707C3.82254 13.338 4.12834 13.032 4.4971 13.032H8.09478C8.46355 13.032 8.76935 13.338 8.76935 13.707C8.76935 14.076 8.46355 14.382 8.09478 14.382ZM9.89363 10.782H4.4971C4.12834 10.782 3.82254 10.476 3.82254 10.107C3.82254 9.73803 4.12834 9.43203 4.4971 9.43203H9.89363C10.2624 9.43203 10.5682 9.73803 10.5682 10.107C10.5682 10.476 10.2624 10.782 9.89363 10.782Z"
                                   fill="#003c79"></path>
                         </svg>
-                        <span><?php _e( "Documentation", "tourfic" ); ?></span>
+                        <span><?php esc_html_e( "Documentation", "tourfic" ); ?></span>
 
                     </a>
                     <a href="https://portal.themefic.com/support/" target="_blank">
@@ -203,7 +204,7 @@ function tf_dashboard_header() {
                                   d="M13.5902 7.57803H16.1896C16.6843 7.57803 17.089 7.98303 17.089 8.47803V13.194C17.089 16.407 14.8494 18.207 12.0792 18.207H5.00977C2.23956 18.207 0 16.407 0 13.194V5.22003C0 2.00703 2.23956 0.207031 5.00977 0.207031H8.82332C9.318 0.207031 9.72274 0.612031 9.72274 1.10703V3.70803C9.72274 5.84103 11.4586 7.57803 13.5902 7.57803ZM11.9613 0.396012C11.5926 0.0270125 10.954 0.279013 10.954 0.792013V3.93301C10.954 5.24701 12.0693 6.33601 13.4274 6.33601C14.2818 6.34501 15.4689 6.34501 16.4852 6.34501H16.4854C16.998 6.34501 17.2679 5.74201 16.9081 5.38201C16.4894 4.96018 15.9637 4.42927 15.3988 3.85888L15.3932 3.85325L15.3913 3.85133L15.3905 3.8505L15.3902 3.85016C14.2096 2.65803 12.86 1.29526 11.9613 0.396012ZM3.0145 12.0732C3.0145 11.7456 3.28007 11.48 3.60768 11.48H5.32132V9.76639C5.32132 9.43879 5.58689 9.17321 5.9145 9.17321C6.2421 9.17321 6.50768 9.43879 6.50768 9.76639V11.48H8.22131C8.54892 11.48 8.8145 11.7456 8.8145 12.0732C8.8145 12.4008 8.54892 12.6664 8.22131 12.6664H6.50768V14.38C6.50768 14.7076 6.2421 14.9732 5.9145 14.9732C5.58689 14.9732 5.32132 14.7076 5.32132 14.38V12.6664H3.60768C3.28007 12.6664 3.0145 12.4008 3.0145 12.0732Z"
                                   fill="#003c79"></path>
                         </svg>
-                        <span><?php _e( "Feature Request", "tourfic" ); ?></span>
+                        <span><?php esc_html_e( "Feature Request", "tourfic" ); ?></span>
                     </a>
                 </div>
             </div>
@@ -219,6 +220,9 @@ function tf_dashboard_header() {
  */
 if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 	function tf_add_hotel_availability() {
+		// Add nonce for security and authentication.
+		check_ajax_referer( 'updates', '_nonce' );
+
 		$date_format         = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		$hotel_id            = isset( $_POST['hotel_id'] ) && ! empty( $_POST['hotel_id'] ) ? sanitize_text_field( $_POST['hotel_id'] ) : '';
 		$new_post            = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? $_POST['new_post'] : '';
@@ -240,12 +244,12 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 		}
 
 		if ( $date_format == 'Y.m.d' || $date_format == 'd.m.Y' ) {
-			$check_in  = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_in ) ) );
-			$check_out = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_out ) ) );
+			$check_in  = gmdate( "Y-m-d", strtotime( str_replace( ".", "-", $check_in ) ) );
+			$check_out = gmdate( "Y-m-d", strtotime( str_replace( ".", "-", $check_out ) ) );
 		}
 		if ( $date_format == 'd/m/Y' ) {
-			$check_in  = date( "Y-m-d", strtotime( str_replace( "/", "-", $check_in ) ) );
-			$check_out = date( "Y-m-d", strtotime( str_replace( "/", "-", $check_out ) ) );
+			$check_in  = gmdate( "Y-m-d", strtotime( str_replace( "/", "-", $check_in ) ) );
+			$check_out = gmdate( "Y-m-d", strtotime( str_replace( "/", "-", $check_out ) ) );
 		}
 
 		$check_in  = strtotime( $check_in );
@@ -259,7 +263,7 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 
 		$room_avail_data = [];
 		for ( $i = $check_in; $i <= $check_out; $i = strtotime( '+1 day', $i ) ) {
-			$tf_room_date                     = date( 'Y/m/d', $i );
+			$tf_room_date                     = gmdate( 'Y/m/d', $i );
 			$tf_room_data                     = [
 				'check_in'    => $tf_room_date,
 				'check_out'   => $tf_room_date,
@@ -278,7 +282,7 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 			if ( isset( $avail_date ) && ! empty( $avail_date ) ) {
 				$room_avail_data = array_merge( $avail_date, $room_avail_data );
 			}
-			$hotel_avail_data['room'][ $room_index ]['avail_date'] = json_encode( $room_avail_data );
+			$hotel_avail_data['room'][ $room_index ]['avail_date'] = wp_json_encode( $room_avail_data );
 			update_post_meta( $hotel_id, 'tf_hotels_opt', $hotel_avail_data );
 		} else {
 			$avail_date = json_decode( stripslashes( $avail_date ), true );
@@ -290,7 +294,7 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 		wp_send_json_success( [
 			'status'     => true,
 			'message'    => __( 'Availability updated successfully.', 'tourfic' ),
-			'avail_date' => json_encode( $room_avail_data ),
+			'avail_date' => wp_json_encode( $room_avail_data ),
 		] );
 
 		die();
@@ -305,6 +309,9 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
  */
 if ( ! function_exists( 'tf_get_hotel_availability' ) ) {
 	function tf_get_hotel_availability() {
+		// Add nonce for security and authentication.
+		check_ajax_referer( 'updates', '_nonce' );
+
 		$new_post   = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
 		$hotel_id   = isset( $_POST['hotel_id'] ) && ! empty( $_POST['hotel_id'] ) ? sanitize_text_field( $_POST['hotel_id'] ) : '';
 		$room_index = isset( $_POST['room_index'] ) ? intval( $_POST['room_index'] ) : '';
@@ -320,7 +327,7 @@ if ( ! function_exists( 'tf_get_hotel_availability' ) ) {
 		if ( ! empty( $room_avail_data ) && is_array( $room_avail_data ) ) {
 			$room_avail_data = array_values( $room_avail_data );
 			$room_avail_data = array_map( function ( $item ) {
-				$item['start'] = date( 'Y-m-d', strtotime( $item['check_in'] ) );
+				$item['start'] = gmdate( 'Y-m-d', strtotime( $item['check_in'] ) );
 				$item['title'] = $item['price_by'] == '1' ? __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
 //				$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) . '<br>' . __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
 
@@ -335,7 +342,7 @@ if ( ! function_exists( 'tf_get_hotel_availability' ) ) {
 			$room_avail_data = [];
 		}
 
-		echo json_encode( $room_avail_data );
+		echo wp_json_encode( $room_avail_data );
 		die();
 	}
 
@@ -385,12 +392,12 @@ if ( ! function_exists( 'tf_update_room_avail_date_price' ) ) {
 							}, $hotel_avail_data );
 						}
 
-						$meta['room'][ $roomIndex ]['avail_date'] = json_encode( $hotel_avail_data );
+						$meta['room'][ $roomIndex ]['avail_date'] = wp_json_encode( $hotel_avail_data );
 					} elseif ( $avil_by_date === '1' && empty( $room['avail_date'] ) ) {
 						//add next 5 years availability
 						$hotel_avail_data = [];
 						for ( $i = 0; $i <= 1825; $i ++ ) {
-							$tf_room_date                      = date( 'Y/m/d', strtotime( "+$i day" ) );
+							$tf_room_date                      = gmdate( 'Y/m/d', strtotime( "+$i day" ) );
 							$tf_room_data                      = [
 								'check_in'    => $tf_room_date,
 								'check_out'   => $tf_room_date,
@@ -403,7 +410,7 @@ if ( ! function_exists( 'tf_update_room_avail_date_price' ) ) {
 							$hotel_avail_data[ $tf_room_date ] = $tf_room_data;
 						}
 
-						$meta['room'][ $roomIndex ]['avail_date'] = json_encode( $hotel_avail_data );
+						$meta['room'][ $roomIndex ]['avail_date'] = wp_json_encode( $hotel_avail_data );
 					}
 				}
 			}
@@ -420,6 +427,9 @@ if ( ! function_exists( 'tf_update_room_avail_date_price' ) ) {
  */
 if ( ! function_exists( 'tf_add_apartment_availability' ) ) {
 	function tf_add_apartment_availability() {
+		// Add nonce for security and authentication.
+		check_ajax_referer( 'updates', '_nonce' );
+
 		$date_format         = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		$apartment_id        = isset( $_POST['apartment_id'] ) && ! empty( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
 		$new_post            = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? $_POST['new_post'] : '';
@@ -441,12 +451,12 @@ if ( ! function_exists( 'tf_add_apartment_availability' ) ) {
 		}
 
 		if ( $date_format == 'Y.m.d' || $date_format == 'd.m.Y' ) {
-			$check_in  = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_in ) ) );
-			$check_out = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_out ) ) );
+			$check_in  = gmdate( "Y-m-d", strtotime( str_replace( ".", "-", $check_in ) ) );
+			$check_out = gmdate( "Y-m-d", strtotime( str_replace( ".", "-", $check_out ) ) );
 		}
 		if ( $date_format == 'd/m/Y' ) {
-			$check_in  = date( "Y-m-d", strtotime( str_replace( "/", "-", $check_in ) ) );
-			$check_out = date( "Y-m-d", strtotime( str_replace( "/", "-", $check_out ) ) );
+			$check_in  = gmdate( "Y-m-d", strtotime( str_replace( "/", "-", $check_in ) ) );
+			$check_out = gmdate( "Y-m-d", strtotime( str_replace( "/", "-", $check_out ) ) );
 		}
 
 		$check_in  = strtotime( $check_in );
@@ -460,7 +470,7 @@ if ( ! function_exists( 'tf_add_apartment_availability' ) ) {
 
 		$apt_availability_data = [];
 		for ( $i = $check_in; $i <= $check_out; $i = strtotime( '+1 day', $i ) ) {
-			$tf_apt_date                           = date( 'Y/m/d', $i );
+			$tf_apt_date                           = gmdate( 'Y/m/d', $i );
 			$tf_apt_data                           = [
 				'check_in'     => $tf_apt_date,
 				'check_out'    => $tf_apt_date,
@@ -480,7 +490,7 @@ if ( ! function_exists( 'tf_add_apartment_availability' ) ) {
 			if ( isset( $apt_availability ) && ! empty( $apt_availability ) ) {
 				$apt_availability_data = array_merge( $apt_availability, $apt_availability_data );
 			}
-			$apartment_data['apt_availability'] = json_encode( $apt_availability_data );
+			$apartment_data['apt_availability'] = wp_json_encode( $apt_availability_data );
 			update_post_meta( $apartment_id, 'tf_apartment_opt', $apartment_data );
 		} else {
 			$apt_availability = json_decode( stripslashes( $apt_availability ), true );
@@ -492,7 +502,7 @@ if ( ! function_exists( 'tf_add_apartment_availability' ) ) {
 		wp_send_json_success( [
 			'status'           => true,
 			'message'          => __( 'Availability updated successfully.', 'tourfic' ),
-			'apt_availability' => json_encode( $apt_availability_data ),
+			'apt_availability' => wp_json_encode( $apt_availability_data ),
 		] );
 
 		die();
@@ -507,6 +517,9 @@ if ( ! function_exists( 'tf_add_apartment_availability' ) ) {
  */
 if ( ! function_exists( 'tf_get_apartment_availability' ) ) {
 	function tf_get_apartment_availability() {
+		// Add nonce for security and authentication.
+		check_ajax_referer( 'updates', '_nonce' );
+
 		$new_post         = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
 		$apartment_id     = isset( $_POST['apartment_id'] ) && ! empty( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
 		$apt_availability = isset( $_POST['apt_availability'] ) && ! empty( $_POST['apt_availability'] ) ? sanitize_text_field( $_POST['apt_availability'] ) : '';
@@ -521,7 +534,7 @@ if ( ! function_exists( 'tf_get_apartment_availability' ) ) {
 		if ( ! empty( $apt_availability_data ) && is_array( $apt_availability_data ) ) {
 			$apt_availability_data = array_values( $apt_availability_data );
 			$apt_availability_data = array_map( function ( $item ) {
-				$item['start'] = date( 'Y-m-d', strtotime( $item['check_in'] ) );
+				$item['start'] = gmdate( 'Y-m-d', strtotime( $item['check_in'] ) );
 				$item['title'] = $item['pricing_type'] == 'per_night' ? __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] ) . '<br>' . __( 'Infant: ', 'tourfic' ) . wc_price( $item['infant_price'] );
 
 				if ( $item['status'] == 'unavailable' ) {
@@ -535,7 +548,7 @@ if ( ! function_exists( 'tf_get_apartment_availability' ) ) {
 			$apt_availability_data = [];
 		}
 
-		echo json_encode( $apt_availability_data );
+		echo wp_json_encode( $apt_availability_data );
 		die();
 	}
 
@@ -577,14 +590,14 @@ if ( ! function_exists( 'tf_update_apt_availability_price' ) ) {
 					}, $apt_availability_data );
 				}
 
-				$meta['apt_availability'] = json_encode( $apt_availability_data );
+				$meta['apt_availability'] = wp_json_encode( $apt_availability_data );
 				update_post_meta( $post_id, 'tf_apartment_opt', $meta );
 
 			} elseif ( $enable_availability === '1' && empty( $meta['apt_availability'] ) ) {
 				//add next 5 years availability
 				$apt_availability_data = [];
-				for ( $i = strtotime( date( 'Y-m-d' ) ); $i <= strtotime( '+5 year', strtotime( date( 'Y-m-d' ) ) ); $i = strtotime( '+1 day', $i ) ) {
-					$tf_apt_date                           = date( 'Y/m/d', $i );
+				for ( $i = strtotime( gmdate( 'Y-m-d' ) ); $i <= strtotime( '+5 year', strtotime( gmdate( 'Y-m-d' ) ) ); $i = strtotime( '+1 day', $i ) ) {
+					$tf_apt_date                           = gmdate( 'Y/m/d', $i );
 					$tf_apt_data                           = [
 						'check_in'     => $tf_apt_date,
 						'check_out'    => $tf_apt_date,
@@ -598,7 +611,7 @@ if ( ! function_exists( 'tf_update_apt_availability_price' ) ) {
 					$apt_availability_data[ $tf_apt_date ] = $tf_apt_data;
 				}
 
-				$meta['apt_availability'] = json_encode( $apt_availability_data );
+				$meta['apt_availability'] = wp_json_encode( $apt_availability_data );
 				update_post_meta( $post_id, 'tf_apartment_opt', $meta );
 			}
 		}
@@ -651,10 +664,20 @@ function get_icon_list() {
 if ( ! function_exists( 'tf_load_more_icons' ) ) {
 	add_action( 'wp_ajax_tf_load_more_icons', 'tf_load_more_icons' );
 	function tf_load_more_icons() {
+		// Add nonce for security and authentication.
+		check_ajax_referer( 'updates', '_nonce' );
+
 		$start_index = isset( $_POST['start_index'] ) ? intval( $_POST['start_index'] ) : 0;
 		$type        = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : 'all';
+		$search      = isset( $_POST['search'] ) ? sanitize_text_field( $_POST['search'] ) : '';
 		$icon_list   = get_icon_list();
 		$icons       = array_slice( $icon_list[ $type ]['icons'], $start_index, 100 );
+
+		if ( ! empty( $search ) ) {
+			$icons = array_filter( $icons, function ( $icon ) use ( $search ) {
+				return strpos( $icon, $search ) !== false;
+			} );
+		}
 
 		$icons_html = '';
 		foreach ( $icons as $key => $icon ) {
@@ -669,5 +692,43 @@ if ( ! function_exists( 'tf_load_more_icons' ) ) {
 		}
 
 		wp_send_json_success( $icons_html );
+	}
+}
+
+/*
+ * Icon search filter
+ * @auther Foysal
+ */
+if ( ! function_exists( 'tf_icon_search' ) ) {
+	add_action( 'wp_ajax_tf_icon_search', 'tf_icon_search' );
+	function tf_icon_search() {
+		// Add nonce for security and authentication.
+		check_ajax_referer( 'updates', '_nonce' );
+
+		$search_text = isset( $_POST['search'] ) ? sanitize_text_field( $_POST['search'] ) : '';
+		$type        = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : 'all';
+		$icon_list   = get_icon_list();
+		$icons       = $icon_list[ $type ]['icons'];
+
+		$icons = array_filter( $icons, function ( $icon ) use ( $search_text ) {
+			return strpos( $icon, $search_text ) !== false;
+		} );
+
+		$icons_html = '';
+		foreach ( $icons as $key => $icon ) {
+			$icons_html .= '<li data-icon="' . esc_attr( $icon ) . '">
+                            <div class="tf-icon-inner">
+                                <i title="' . esc_attr( $icon ) . '" class="tf-main-icon ' . esc_attr( $icon ) . '"></i>
+                                <span class="check-icon">
+                                    <i class="ri-check-line"></i>
+                                </span>
+                            </div>
+                        </li>';
+		}
+
+		wp_send_json_success( array(
+			'html'  => $icons_html,
+			'count' => count( $icons )
+		) );
 	}
 }

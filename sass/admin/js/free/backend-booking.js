@@ -28,6 +28,7 @@
                     url: tf_admin_params.ajax_url,
                     data: {
                         action: 'tf_check_available_hotel',
+                        _nonce: tf_admin_params.tf_nonce,
                         from: from,
                         to: to,
                     },
@@ -73,6 +74,7 @@
                     url: tf_admin_params.ajax_url,
                     data: {
                         action: 'tf_check_available_room',
+                        _nonce: tf_admin_params.tf_nonce,
                         hotel_id: hotel_id,
                         from: from,
                         to: to,
@@ -128,6 +130,7 @@
                     url: tf_admin_params.ajax_url,
                     data: {
                         action: 'tf_update_room_fields',
+                        _nonce: tf_admin_params.tf_nonce,
                         hotel_id: hotel_id,
                         room_id: room_id,
                     },
@@ -305,6 +308,7 @@
                     url: tf_admin_params.ajax_url,
                     data: {
                         action: 'tf_tour_date_time_update',
+                        _nonce: tf_admin_params.tf_nonce,
                         tour_id: tourId,
                     },
                     beforeSend: function () {
@@ -515,6 +519,7 @@
                     url: tf_admin_params.ajax_url,
                     data: {
                         action: 'tf_check_available_apartment',
+                        _nonce: tf_admin_params.tf_nonce,
                         from: fromValue,
                         to: toValue,
                         apartment_id: apartment_id
@@ -560,6 +565,7 @@
                     url: tf_admin_params.ajax_url,
                     data: {
                         action: 'tf_check_apartment_aditional_fees',
+                        _nonce: tf_admin_params.tf_nonce,
                         apartment_id: apartment_id,
                         from: from,
                         to: to,

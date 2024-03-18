@@ -56,33 +56,36 @@ function tf_apartment_booking_callback() {
 	if ( ! empty( $check_in_out_date ) ) {
 		$check_in_out  = explode( ' - ', $check_in_out_date );
 		$check_in_stt  = strtotime( $check_in_out[0] . ' +1 day' );
-		$check_in      = date( 'Y-m-d', $check_in_stt );
-		$check_out_stt = strtotime( $check_in_out[1] );
-		$check_out     = date( 'Y-m-d', $check_out_stt );
+		$check_in      = gmdate( 'Y-m-d', $check_in_stt );
+		$check_out_stt = !empty($check_in_out) && is_array($check_in_out) ? strtotime( $check_in_out[1] ) : '';
+		$check_out     = gmdate( 'Y-m-d', $check_out_stt );
 		$days          = round( ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1 );
 	}
 
 	// Check errors
 	if ( empty( $check_in_out[0] ) ) {
-		$response['errors'][] = __( 'Check-in date missing.', 'tourfic' );
+		$response['errors'][] = esc_html__( 'Check-in date missing.', 'tourfic' );
 	}
 	if ( empty( $check_in_out[1] ) ) {
-		$response['errors'][] = __( 'Check-out date missing.', 'tourfic' );
+		$response['errors'][] = esc_html__( 'Check-out date missing.', 'tourfic' );
 	}
 	if ( empty( $adults ) ) {
-		$response['errors'][] = __( 'Select Adult(s).', 'tourfic' );
+		$response['errors'][] = esc_html__( 'Select Adult(s).', 'tourfic' );
 	}
 	if ( $max_adults && $adults > $max_adults ) {
-		$response['errors'][] = sprintf( __( 'Maximum %s Adult(s) allowed.', 'tourfic' ), $max_adults );
+		/* translators: %s Adult Count */
+		$response['errors'][] = sprintf( esc_html__( 'Maximum %s Adult(s) allowed.', 'tourfic' ), $max_adults );
 	}
 	if ( $max_children && $children > $max_children ) {
-		$response['errors'][] = sprintf( __( 'Maximum %s Children(s) allowed.', 'tourfic' ), $max_children );
+		/* translators: %s Children Count */
+		$response['errors'][] = sprintf( esc_html__( 'Maximum %s Children(s) allowed.', 'tourfic' ), $max_children );
 	}
 	if ( $max_infants && $infant > $max_infants ) {
-		$response['errors'][] = sprintf( __( 'Maximum %s Infant(s) allowed.', 'tourfic' ), $max_infants );
+		/* translators: %s Infant Count */
+		$response['errors'][] = sprintf( esc_html__( 'Maximum %s Infant(s) allowed.', 'tourfic' ), $max_infants );
 	}
 	if ( empty( $post_id ) ) {
-		$response['errors'][] = __( 'Unknown Error! Please try again.', 'tourfic' );
+		$response['errors'][] = esc_html__( 'Unknown Error! Please try again.', 'tourfic' );
 	}
 
 	/**
@@ -227,28 +230,28 @@ function tf_apartment_cart_item_custom_meta_data( $item_data, $cart_item ) {
 
 	if ( isset( $cart_item['tf_apartment_data']['adults'] ) && $cart_item['tf_apartment_data']['adults'] >= 1 ) {
 		$item_data[] = array(
-			'key'   => __( 'Adults', 'tourfic' ),
+			'key'   => esc_html__( 'Adults', 'tourfic' ),
 			'value' => $cart_item['tf_apartment_data']['adults'],
 		);
 	}
 
 	if ( isset( $cart_item['tf_apartment_data']['children'] ) && $cart_item['tf_apartment_data']['children'] >= 1 ) {
 		$item_data[] = array(
-			'key'   => __( 'Children', 'tourfic' ),
+			'key'   => esc_html__( 'Children', 'tourfic' ),
 			'value' => $cart_item['tf_apartment_data']['children'],
 		);
 	}
 
 	if ( isset( $cart_item['tf_apartment_data']['infant'] ) && $cart_item['tf_apartment_data']['infant'] >= 1 ) {
 		$item_data[] = array(
-			'key'   => __( 'Infant', 'tourfic' ),
+			'key'   => esc_html__( 'Infant', 'tourfic' ),
 			'value' => $cart_item['tf_apartment_data']['infant'],
 		);
 	}
 
 	if ( isset( $cart_item['tf_apartment_data']['check_in_out_date'] ) ) {
 		$item_data[] = array(
-			'key'   => __( 'Check-in-out', 'tourfic' ),
+			'key'   => esc_html__( 'Check-in-out', 'tourfic' ),
 			'value' => $cart_item['tf_apartment_data']['check_in_out_date'],
 		);
 	}
@@ -433,7 +436,7 @@ function tf_add_apartment_data_checkout_order_processed( $order_id, $posted_data
 				'child'       => $child,
 				'infants'     => $infants,
 				'total_price' => $price,
-				'tax_info' => json_encode($fee_sums)
+				'tax_info' => wp_json_encode($fee_sums)
 			];
 
 			$tf_integration_order_data[] = [
@@ -446,14 +449,14 @@ function tf_add_apartment_data_checkout_order_processed( $order_id, $posted_data
 				'customer_id'    => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status'   => $order->get_status(),
-				'order_date'     => date( 'Y-m-d H:i:s' )
+				'order_date'     => gmdate( 'Y-m-d H:i:s' )
 			];
 
 			$tf_integration_order_status = [
 				'customer_id'    => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status'   => $order->get_status(),
-				'order_date'     => date( 'Y-m-d H:i:s' )
+				'order_date'     => gmdate( 'Y-m-d H:i:s' )
 			];
 
 			$iteminfo_keys = array_keys( $iteminfo );
@@ -466,10 +469,9 @@ function tf_add_apartment_data_checkout_order_processed( $order_id, $posted_data
 
 
 			global $wpdb;
-			$table_name = $wpdb->prefix . 'tf_order_data';
 			$wpdb->query(
 				$wpdb->prepare(
-					"INSERT INTO $table_name
+					"INSERT INTO {$wpdb->prefix}tf_order_data
 				( order_id, post_id, post_type, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
 				VALUES ( %d, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
 					array(
@@ -478,13 +480,13 @@ function tf_add_apartment_data_checkout_order_processed( $order_id, $posted_data
 						$order_type,
 						$check_in,
 						$check_out,
-						json_encode( $billinginfo ),
-						json_encode( $shippinginfo ),
-						json_encode( $iteminfo ),
+						wp_json_encode( $billinginfo ),
+						wp_json_encode( $shippinginfo ),
+						wp_json_encode( $iteminfo ),
 						$order->get_customer_id(),
 						$order->get_payment_method(),
 						$order->get_status(),
-						date( 'Y-m-d H:i:s' )
+						gmdate( 'Y-m-d H:i:s' )
 					)
 				)
 			);
@@ -616,7 +618,7 @@ function tf_add_apartment_data_checkout_order_processed_block_checkout( $order )
 				'child'       => $child,
 				'infants'     => $infants,
 				'total_price' => $price,
-				'tax_info' => json_encode($fee_sums)
+				'tax_info' => wp_json_encode($fee_sums)
 			];
 
 			$tf_integration_order_data[] = [
@@ -629,14 +631,14 @@ function tf_add_apartment_data_checkout_order_processed_block_checkout( $order )
 				'customer_id'    => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status'   => $order->get_status(),
-				'order_date'     => date( 'Y-m-d H:i:s' )
+				'order_date'     => gmdate( 'Y-m-d H:i:s' )
 			];
 
 			$tf_integration_order_status = [
 				'customer_id'    => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status'   => $order->get_status(),
-				'order_date'     => date( 'Y-m-d H:i:s' )
+				'order_date'     => gmdate( 'Y-m-d H:i:s' )
 			];
 
 			$iteminfo_keys = array_keys( $iteminfo );
@@ -649,10 +651,9 @@ function tf_add_apartment_data_checkout_order_processed_block_checkout( $order )
 
 
 			global $wpdb;
-			$table_name = $wpdb->prefix . 'tf_order_data';
 			$wpdb->query(
 				$wpdb->prepare(
-					"INSERT INTO $table_name
+					"INSERT INTO {$wpdb->prefix}tf_order_data
 				( order_id, post_id, post_type, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
 				VALUES ( %d, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
 					array(
@@ -661,13 +662,13 @@ function tf_add_apartment_data_checkout_order_processed_block_checkout( $order )
 						$order_type,
 						$check_in,
 						$check_out,
-						json_encode( $billinginfo ),
-						json_encode( $shippinginfo ),
-						json_encode( $iteminfo ),
+						wp_json_encode( $billinginfo ),
+						wp_json_encode( $shippinginfo ),
+						wp_json_encode( $iteminfo ),
 						$order->get_customer_id(),
 						$order->get_payment_method(),
 						$order->get_status(),
-						date( 'Y-m-d H:i:s' )
+						gmdate( 'Y-m-d H:i:s' )
 					)
 				)
 			);

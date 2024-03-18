@@ -276,8 +276,10 @@
             $this.addClass('active');
 
             $('#' + tab).addClass('active').siblings().removeClass('active');
+            let searchVal = $('.tf-icon-search-input').val();
 
             tfIconInfiniteScroll();
+            tfIconFilter(searchVal);
         });
 
         /*
@@ -331,29 +333,6 @@
         })
 
         /*
-        * Icon search
-        * @author: Foysal
-        */
-        $(document).on('change keyup', '.tf-icon-search-input', function () {
-
-            let searchVal = $(this).val(),
-                $icons = $('#tf-icon-modal').find('.tf-icon-list li');
-
-            $icons.each(function () {
-
-                var $this = $(this);
-
-                if ($this.data('icon').search(new RegExp(searchVal, 'i')) < 0) {
-                    $this.hide();
-                } else {
-                    $this.show();
-                }
-
-            });
-
-        });
-
-        /*
         * Icon remove
         * @author: Foysal
         */
@@ -373,14 +352,50 @@
         })
 
         /*
+        * Icon search
+        * @author: Foysal
+        */
+        $(document).on('change keyup', '.tf-icon-search-input', function () {
+            let searchVal = $(this).val();
+            tfIconFilter(searchVal);
+        });
+
+        const tfIconFilter = (searchVal) => {
+            let type = $('.tf-icon-tab-pane.active').data('type');
+            let iconList = $('.tf-icon-tab-pane.active .tf-icon-list');
+
+            $.ajax({
+                url: tf_options.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'tf_icon_search',
+                    _nonce: tf_admin_params.tf_nonce,
+                    search: searchVal,
+                    type: type,
+                },
+                beforeSend: function () {
+                    iconList.html('<div class="tf-icon-loading">Loading...</div>');
+                },
+                success: function (response) {
+                    iconList.html(response.data.html);
+                    $('.tf-icon-tab-pane.active').attr('data-max', response.data.count);
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+
+        /*
         * Icon Infinite Scroll
         * @author: Foysal
         */
         const tfIconInfiniteScroll = () => {
             var loading = false;
-            var startIndex = 0;
+            var startIndex = 100;
             let iconList = $('.tf-icon-tab-pane.active .tf-icon-list');
             let iconListBottom = 0;
+            let searchVal = $('.tf-icon-search-input').val();
 
             iconList.scroll(function () {
                 let type = $('.tf-icon-tab-pane.active').data('type');
@@ -389,22 +404,25 @@
 
                 if (iconList.scrollTop() >= iconListBottom && !loading && startIndex < max) {
                     loading = true;
-                    startIndex += 100;
                     $.ajax({
                         url: tf_options.ajax_url,
                         type: 'POST',
                         data: {
                             action: 'tf_load_more_icons',
+                            _nonce: tf_admin_params.tf_nonce,
                             start_index: startIndex,
                             type: type,
+                            search: searchVal,
                         },
                         beforeSend: function () {
                             $('.tf-icon-list').append('<div class="tf-icon-loading">Loading...</div>');
+                            console.log('startIndexxx', startIndex);
                         },
                         success: function (response) {
                             loading = false;
                             $('#tf-icon-tab-'+type+' .tf-icon-list').append(response.data);
                             $('.tf-icon-loading').remove();
+                            startIndex += 100;
                         },
                         error: function (xhr, status, error) {
                             loading = false;
@@ -555,6 +573,7 @@
                         type: "POST",
                         data: {
                             action: "tf_get_hotel_availability",
+                            _nonce: tf_admin_params.tf_nonce,
                             new_post: $(self.container).find('[name="new_post"]').val(),
                             hotel_id: $(self.container).find('[name="hotel_id"]').val(),
                             room_index: $(self.container).find('[name="room_index"]').val(),
@@ -682,6 +701,7 @@
             let priceBy = container.closest('.tf-single-repeater-room').find('.tf_room_pricing_by').val();
             let avail_date = container.find('.avail_date');
             data.push({name: 'action', value: 'tf_add_hotel_availability'});
+            data.push({name: '_nonce', value: tf_admin_params.tf_nonce});
             data.push({name: 'price_by', value: priceBy});
             data.push({name: 'avail_date', value: avail_date.val()});
 
@@ -801,6 +821,7 @@
                         type: "POST",
                         data: {
                             action: "tf_get_apartment_availability",
+                            _nonce: tf_admin_params.tf_nonce,
                             new_post: $('[name="new_post"]').val(),
                             apartment_id: $('[name="apartment_id"]').val(),
                             apt_availability: $('.apt_availability').val(),
@@ -929,6 +950,7 @@
             let pricingType = $('.tf_apt_pricing_type').val();
             let aptAvailability = container.find('.apt_availability');
             data.push({name: 'action', value: 'tf_add_apartment_availability'});
+            data.push({name: '_nonce', value: tf_admin_params.tf_nonce});
             data.push({name: 'pricing_type', value: pricingType});
             data.push({name: 'apt_availability', value: aptAvailability.val()});
 
@@ -2049,6 +2071,7 @@ var frame, gframe;
                     url: tf_options.ajax_url,
                     data: {
                         action: 'tf_month_reports',
+                        _nonce: tf_admin_params.tf_nonce,
                         month: monthTarget,
                         year: yearTarget,
                     },
@@ -2114,6 +2137,7 @@ var frame, gframe;
                     url: tf_options.ajax_url,
                     data: {
                         action: 'tf_month_reports',
+                        _nonce: tf_admin_params.tf_nonce,
                         month: monthTarget,
                         year: yearTarget,
                     },
@@ -2264,6 +2288,7 @@ var frame, gframe;
             type: 'POST',
             data: {
                 action: "tf_shortcode_type_to_location",
+                _nonce: tf_admin_params.tf_nonce,
                 typeValue: selectedValue,
                 termName: termName
             },

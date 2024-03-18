@@ -14,16 +14,16 @@
 			<div class="tf-search-left">
 				<div class="tf-action-top">
                     <div class="tf-result-counter-info">
-                        <span class="tf-counter-title"><?php echo __( 'Total Results', 'tourfic' ); ?> </span>
+                        <span class="tf-counter-title"><?php echo esc_html__( 'Total Results', 'tourfic' ); ?> </span>
                         <span><?php echo '('; ?> </span>
                         <div class="tf-total-results">
-                            <span><?php echo $post_count; ?> </span>
+                            <span><?php echo esc_html( $post_count ); ?> </span>
                         </div>
                         <span><?php echo ')'; ?> </span>
                     </div>
 					<div class="tf-list-grid">
-		                <a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php _e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
-		                <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php _e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
+		                <a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
+		                <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
 		            </div>
 		        </div>
 				<div class="archive_ajax_result <?php echo $tf_defult_views=="grid" ? esc_attr('tours-grid') : '' ?>">
@@ -32,7 +32,7 @@
 						while ( have_posts() ) {
 							the_post();
 							$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
-							if ( $apartment_meta[ "apartment_as_featured" ]) {
+							if (!empty($apartment_meta[ "apartment_as_featured" ])) {
 								tf_apartment_archive_single_item();
 							}
 						}
@@ -44,7 +44,7 @@
 							}
 						}
 					} else {
-						echo '<div class="tf-nothing-found" data-post-count="0">' .__("No Apartments Found!", "tourfic"). '</div>';
+						echo '<div class="tf-nothing-found" data-post-count="0">' .esc_html__("No Apartments Found!", "tourfic"). '</div>';
 					}
 					?>
 				</div>

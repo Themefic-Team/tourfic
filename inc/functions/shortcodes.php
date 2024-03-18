@@ -39,15 +39,16 @@ function hotel_locations_shortcode( $atts, $content = null ) {
 				<?php foreach ( $locations as $term ) {
 
 					$meta      = get_term_meta( $term->term_id, 'tf_hotel_location', true );
-					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : TF_ASSETS_APP_URL . 'images/feature-default.jpg';
+					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg');
 					$term_link = get_term_link( $term ); ?>
 
                     <div class="single_recomended_item">
-                        <a href="<?php echo $term_link; ?>">
-                            <div class="single_recomended_content" style="background-image: url(<?php echo $image_url; ?>);">
+                        <a href="<?php echo esc_url( $term_link ); ?>">
+                            <div class="single_recomended_content" style="background-image: url(<?php echo esc_url( $image_url ); ?>);">
                                 <div class="recomended_place_info_header">
                                     <h3><?php echo esc_html( $term->name ); ?></h3>
-                                    <p><?php printf( _n( '%s hotel', '%s hotels', $term->count, 'tourfic' ), $term->count ); ?></p>
+									<?php /* translators: %s Hotel Count */ ?>
+                                    <p><?php printf( esc_html( _n( '%s hotel', '%s hotels', $term->count, 'tourfic' ) ), esc_html( $term->count ) ); ?></p>
                                 </div>
                             </div>
                         </a>
@@ -109,7 +110,7 @@ function shortcode_tour_destinations( $atts, $content = null ) {
 				<?php foreach ( $destinations as $term ) {
 
 					$meta      = get_term_meta( $term->term_id, 'tf_tour_destination', true );
-					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : TF_ASSETS_APP_URL . 'images/feature-default.jpg';
+					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg');
 					$term_link = get_term_link( $term );
 
 					if ( is_wp_error( $term_link ) ) {
@@ -117,11 +118,12 @@ function shortcode_tour_destinations( $atts, $content = null ) {
 					} ?>
 
                     <div class="single_recomended_item">
-                        <a href="<?php echo $term_link; ?>">
-                            <div class="single_recomended_content" style="background-image: url(<?php echo $image_url; ?>);">
+                        <a href="<?php echo esc_url( $term_link ); ?>">
+                            <div class="single_recomended_content" style="background-image: url(<?php echo esc_url( $image_url ); ?>);">
                                 <div class="recomended_place_info_header">
                                     <h3><?php echo esc_html( $term->name ); ?></h3>
-                                    <p><?php printf( _n( '%s tour', '%s tours', $term->count, 'tourfic' ), $term->count ); ?></p>
+									<?php /* translators: %s Tour Count */ ?>
+                                    <p><?php printf( esc_html( _n( '%s tour', '%s tours', $term->count, 'tourfic' ) ), esc_html( $term->count ) ); ?></p>
                                 </div>
                             </div>
                         </a>
@@ -244,7 +246,7 @@ function tf_recent_hotel_shortcode( $atts, $content = null ) {
 
 					?>
                     <div class="tf-slider-item"
-                         style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? get_the_post_thumbnail_url( $post_id, 'full' ) : TF_ASSETS_APP_URL . '/images/feature-default.jpg'; ?>);">
+                         style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>);">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
                                 <h3>
@@ -252,17 +254,17 @@ function tf_recent_hotel_shortcode( $atts, $content = null ) {
                                 </h3>
 								<?php if ( $related_comments_hotel ) { ?>
                                     <div class="tf-slider-rating-star">
-                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tf_total_avg_rating( $related_comments_hotel ); ?></span>
+                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo esc_html( tf_total_avg_rating( $related_comments_hotel ) ); ?></span>
                                     </div>
 								<?php } ?>
-                                <p><?php echo wp_trim_words( get_the_content(), 10 ); ?></p>
+                                <p><?php echo wp_kses_post( wp_trim_words( get_the_content(), 10 ) ); ?></p>
 								<?php if ( ! empty( $rooms ) ): ?>
                                     <div class="tf-recent-room-price">
 										<?php
 										if ( ! empty( $room_price ) ) {
 											//get the lowest price from all available room price
 											$lowest_price = wc_price( min( $room_price ) );
-											echo __( "From ", "tourfic" ) . $lowest_price;
+											echo esc_html__( "From ", "tourfic" ) . wp_kses_post( $lowest_price );
 										}
 										?>
                                     </div>
@@ -337,7 +339,7 @@ function tf_recent_tour_shortcode( $atts, $content = null ) {
 					$post_id          = get_the_ID();
 					$related_comments = get_comments( array( 'post_id' => $post_id ) );
 					?>
-                    <div class="tf-slider-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+                    <div class="tf-slider-item" style="background-image: url(<?php echo esc_attr( get_the_post_thumbnail_url( $post_id, 'full' ) ); ?>);">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
                                 <h3>
@@ -345,10 +347,10 @@ function tf_recent_tour_shortcode( $atts, $content = null ) {
                                 </h3>
 								<?php if ( $related_comments ) { ?>
                                     <div class="tf-slider-rating-star">
-                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tf_total_avg_rating( $related_comments ); ?></span>
+                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo esc_html( tf_total_avg_rating( $related_comments ) ); ?></span>
                                     </div>
 								<?php } ?>
-                                <p><?php echo wp_trim_words( get_the_excerpt(), 10 ); ?></p>
+                                <p><?php echo wp_kses_post( wp_trim_words( get_the_excerpt(), 10 ) ); ?></p>
 
                             </div>
                         </div>
@@ -418,15 +420,15 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 			<?php do_action( 'tf_before_booking_form_tab', $type ) ?>
 
 			<?php if ( ! in_array( 'hotel', $disable_services ) && tf_is_search_form_tab_type( 'hotel', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
-                <button class="tf-tablinks active" data-form-id="tf-hotel-booking-form"><?php _e( 'Hotel', 'tourfic' ); ?></button>
+                <button class="tf-tablinks active" data-form-id="tf-hotel-booking-form"><?php esc_html_e( 'Hotel', 'tourfic' ); ?></button>
 			<?php endif; ?>
 
 			<?php if ( ! in_array( 'tour', $disable_services ) && tf_is_search_form_tab_type( 'tour', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
-                <button class="tf-tablinks" data-form-id="tf-tour-booking-form"><?php _e( 'Tour', 'tourfic' ); ?></button>
+                <button class="tf-tablinks" data-form-id="tf-tour-booking-form"><?php esc_html_e( 'Tour', 'tourfic' ); ?></button>
 			<?php endif ?>
 
 			<?php if ( ! in_array( 'apartment', $disable_services ) && tf_is_search_form_tab_type( 'apartment', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
-                <button class="tf-tablinks" data-form-id="tf-apartment-booking-form"><?php _e( 'Apartment', 'tourfic' ); ?></button>
+                <button class="tf-tablinks" data-form-id="tf-apartment-booking-form"><?php esc_html_e( 'Apartment', 'tourfic' ); ?></button>
 			<?php endif ?>
 
 			<?php do_action( 'tf_after_booking_form_tab', $type ) ?>
@@ -439,13 +441,13 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 					<?php do_action( 'tf_before_booking_form_mobile_tab', $type ) ?>
 
 					<?php if ( ! in_array( 'hotel', $disable_services ) && tf_is_search_form_tab_type( 'hotel', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
-                        <option value="tf-hotel-booking-form"><?php _e( 'Hotel', 'tourfic' ); ?></option>
+                        <option value="tf-hotel-booking-form"><?php esc_html_e( 'Hotel', 'tourfic' ); ?></option>
 					<?php endif; ?>
 					<?php if ( ! in_array( 'tour', $disable_services ) && tf_is_search_form_tab_type( 'tour', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
-                        <option value="tf-tour-booking-form"><?php _e( 'Tour', 'tourfic' ); ?></option>
+                        <option value="tf-tour-booking-form"><?php esc_html_e( 'Tour', 'tourfic' ); ?></option>
 					<?php endif ?>
 					<?php if ( ! in_array( 'apartment', $disable_services ) && tf_is_search_form_tab_type( 'apartment', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
-                        <option value="tf-apartment-booking-form"><?php _e( 'Apartment', 'tourfic' ); ?></option>
+                        <option value="tf-apartment-booking-form"><?php esc_html_e( 'Apartment', 'tourfic' ); ?></option>
 					<?php endif ?>
 
 					<?php do_action( 'tf_after_booking_form_mobile_tab', $type ) ?>
@@ -519,7 +521,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 	// Get post type
 	$post_type = isset( $_GET['type'] ) ? sanitize_text_field( $_GET['type'] ) : '';
 	if ( empty( $post_type ) ) {
-		_e( '<h3>Please select fields from the search form!</h3>', 'tourfic' );
+		echo '<h3>' . esc_html__(" Please select fields from the search form! ", "tourfic") . '</h3>';
 
 		return;
 	}
@@ -666,10 +668,10 @@ function tf_search_result_shortcode( $atts, $content = null ) {
             <!-- Search Head Section -->
             <div class="tf-archive-head tf-flex tf-flex-align-center tf-flex-space-bttn">
                 <div class="tf-search-result tf-flex">
-                    <span class="tf-counter-title"><?php echo __( 'Total Results ', 'tourfic' ); ?> </span>
+                    <span class="tf-counter-title"><?php echo esc_html__( 'Total Results ', 'tourfic' ); ?> </span>
                     <span><?php echo ' ('; ?> </span>
                     <div class="tf-total-results">
-                        <span><?php echo $total_posts; ?> </span>
+                        <span><?php echo esc_html( $total_posts ); ?> </span>
                     </div>
                     <span><?php echo ')'; ?> </span>
                 </div>
@@ -729,7 +731,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
             <!-- Loader Image -->
             <div id="tf_ajax_searchresult_loader">
                 <div id="tf-searchresult-loader-img">
-                    <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+                    <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
                 </div>
             </div>
             <div class="tf-search-results-list tf-mt-30">
@@ -784,7 +786,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 							}
 						}
 						if ( empty( $tf_total_filters ) ) {
-							echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
+							echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 						}
 						$post_per_page = tfopt( 'posts_per_page' ) ? tfopt( 'posts_per_page' ) : 10;
 						// Main Query args
@@ -905,18 +907,20 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 							}
 							$total_pages = ceil( $total_filtered_results / $post_per_page );
 							echo "<div class='tf_posts_navigation tf_posts_page_navigation'>";
-							echo paginate_links( array(
-								'total'   => $total_pages,
-								'current' => $current_page
-							) );
+							echo wp_kses_post(
+								paginate_links( array(
+									'total'   => $total_pages,
+									'current' => $current_page
+								) )
+							);
 							echo "</div>";
 						}
 
 					} else {
-						echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
+						echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 					}
 					echo "<span hidden=hidden class='tf-posts-count'>";
-					echo ! empty( $tf_total_results ) ? $tf_total_results : 0;
+					echo ! empty( $tf_total_results ) ? esc_html( $tf_total_results ) : 0;
 					echo "</span>";
 					?>
 
@@ -931,13 +935,13 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 		<div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
 			<div class="tf-archive-available-rooms-head tf-available-rooms-head">
 				<?php if($post_type == "tf_hotel"){ ?>
-				<span class="tf-total-results"><?php _e("Total", "tourfic"); ?> <span><?php echo $total_posts; ?></span> 
+				<span class="tf-total-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html( $total_posts ); ?></span>
 				<?php if($post_type == "tf_hotel"){
-                _e("hotels available", "tourfic");
+                esc_html_e("hotels available", "tourfic");
 				}elseif($post_type == "tf_apartment"){
-					_e("apartments available", "tourfic");
+					esc_html_e("apartments available", "tourfic");
 				}else{
-					_e("tours available", "tourfic");
+					esc_html_e("tours available", "tourfic");
 				} ?>
 				</span>
 				<?php } ?>
@@ -949,7 +953,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 			<!-- Loader Image -->
 			<div id="tour_room_details_loader">
 				<div id="tour-room-details-loader-img">
-					<img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+					<img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
 				</div>
 			</div>
 			
@@ -1012,7 +1016,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 					}
 				}
 				if ( empty( $tf_total_filters ) ) {
-					echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
+					echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 				}
 				$post_per_page = tfopt( 'posts_per_page' ) ? tfopt( 'posts_per_page' ) : 10;
 				// Main Query args
@@ -1133,19 +1137,21 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 					$total_pages = ceil( $total_filtered_results / $post_per_page );
 					if($total_pages > 1){
 						echo "<div class='tf_posts_navigation tf_posts_page_navigation'>";
-						echo paginate_links( array(
-							'total'   => $total_pages,
-							'current' => $current_page
-						) );
+						echo wp_kses_post(
+							paginate_links( array(
+								'total'   => $total_pages,
+								'current' => $current_page
+							) )
+						);
 						echo "</div>";
 					}
 				}
 
 			} else {
-				echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
+				echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 			}
 			echo "<span hidden=hidden class='tf-posts-count'>";
-			echo ! empty( $tf_total_results ) ? $tf_total_results : 0;
+			echo ! empty( $tf_total_results ) ? esc_html( $tf_total_results ) : 0;
 			echo "</span>";
 			?>
 				
@@ -1158,11 +1164,11 @@ function tf_search_result_shortcode( $atts, $content = null ) {
         <div class="tf_search_result">
             <div class="tf-action-top">
                 <div class="tf-total-results">
-					<?php echo esc_html__( 'Total Results ', 'tourfic' ) . '(<span>' . $total_posts . '</span>)'; ?>
+					<?php echo esc_html__( 'Total Results ', 'tourfic' ) . '(<span>' . esc_html( $total_posts ) . '</span>)'; ?>
                 </div>
                 <div class="tf-list-grid">
-                    <a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php _e( 'List View', 'tourfic' ); ?>"><i class="fas fa-list"></i></a>
-                    <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php _e( 'Grid View', 'tourfic' ); ?>"><i class="fas fa-border-all"></i></a>
+                    <a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e( 'List View', 'tourfic' ); ?>"><i class="fas fa-list"></i></a>
+                    <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e( 'Grid View', 'tourfic' ); ?>"><i class="fas fa-border-all"></i></a>
                 </div>
             </div>
             <div class="archive_ajax_result <?php echo $tf_defult_views=="grid" ? esc_attr('tours-grid') : '' ?>">
@@ -1221,7 +1227,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 						}
 					}
 					if ( empty( $tf_total_filters ) ) {
-						echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
+						echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 					}
 					$post_per_page = tfopt( 'posts_per_page' ) ? tfopt( 'posts_per_page' ) : 10;
 					// Main Query args
@@ -1340,18 +1346,20 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 						}
 						$total_pages = ceil( $total_filtered_results / $post_per_page );
 						echo "<div class='tf_posts_navigation tf_posts_page_navigation'>";
-						echo paginate_links( array(
-							'total'   => $total_pages,
-							'current' => $current_page
-						) );
+						echo wp_kses_post(
+							paginate_links( array(
+								'total'   => $total_pages,
+								'current' => $current_page,
+							) )
+						);
 						echo "</div>";
 					}
 
 				} else {
-					echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
+					echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 				}
 				echo "<span hidden=hidden class='tf-posts-count'>";
-				echo ! empty( $tf_total_results ) ? $tf_total_results : 0;
+				echo ! empty( $tf_total_results ) ? esc_html( $tf_total_results ) : 0;
 				echo "</span>";
 				?>
             </div>
@@ -1423,14 +1431,14 @@ function tf_reviews_shortcode( $atts, $content = null ) {
 				$c_content     = $comment->comment_content;
 				?>
                 <div class="tf-single-details">
-                    <div class="tf-review-avatar"><?php echo $c_avatar; ?></div>
+                    <div class="tf-review-avatar"><?php echo wp_kses_post( $c_avatar ); ?></div>
                     <div class="tf-review-details">
-                        <div class="tf-name"><?php echo $c_author_name; ?></div>
-                        <div class="tf-date"><?php echo $c_date; ?></div>
+                        <div class="tf-name"><?php echo esc_html( $c_author_name ); ?></div>
+                        <div class="tf-date"><?php echo esc_html( $c_date ); ?></div>
                         <div class="tf-rating-stars">
-							<?php echo $c_rating; ?>
+							<?php echo wp_kses_post( $c_rating ); ?>
                         </div>
-                        <div class="tf-description"><?php echo wp_trim_words( $c_content, 25 ); ?></div>
+                        <div class="tf-description"><?php echo wp_kses_post( wp_trim_words( $c_content, 25 ) ); ?></div>
                     </div>
                 </div>
 				<?php
@@ -1603,7 +1611,7 @@ function tf_hotels_grid_slider( $atts, $content = null ) {
 					}
 					?>
                     <div class="tf-slider-item"
-                         style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? get_the_post_thumbnail_url( $post_id, 'full' ) : TF_ASSETS_APP_URL . '/images/feature-default.jpg'; ?>);">
+                         style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>);">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
                                 <h3>
@@ -1611,17 +1619,17 @@ function tf_hotels_grid_slider( $atts, $content = null ) {
                                 </h3>
 								<?php if ( $related_comments_hotel ) { ?>
                                     <div class="tf-slider-rating-star">
-                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tf_total_avg_rating( $related_comments_hotel ); ?></span>
+                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo esc_html( tf_total_avg_rating( $related_comments_hotel ) ); ?></span>
                                     </div>
 								<?php } ?>
-                                <p><?php echo wp_trim_words( get_the_content(), 10 ); ?></p>
+                                <p><?php echo wp_kses_post( wp_trim_words( get_the_content(), 10 ) ); ?></p>
 								<?php if ( ! empty( $rooms ) ): ?>
                                     <div class="tf-recent-room-price">
 										<?php
 										if ( ! empty( $room_price ) ) {
 											//get the lowest price from all available room price
 											$lowest_price = wc_price( min( $room_price ) );
-											echo __( "From ", "tourfic" ) . $lowest_price;
+											echo esc_html__( "From ", "tourfic" ) . wp_kses_post( $lowest_price );
 										}
 										?>
                                     </div>
@@ -1702,7 +1710,7 @@ function tf_tours_grid_slider( $atts, $content = null ) {
 					$post_id          = get_the_ID();
 					$related_comments = get_comments( array( 'post_id' => $post_id ) );
 					?>
-                    <div class="tf-slider-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+                    <div class="tf-slider-item" style="background-image: url(<?php echo esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ); ?>);">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
                                 <h3>
@@ -1710,10 +1718,10 @@ function tf_tours_grid_slider( $atts, $content = null ) {
                                 </h3>
 								<?php if ( $related_comments ) { ?>
                                     <div class="tf-slider-rating-star">
-                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tf_total_avg_rating( $related_comments ); ?></span>
+                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo esc_html( tf_total_avg_rating( $related_comments ) ); ?></span>
                                     </div>
 								<?php } ?>
-                                <p><?php echo wp_trim_words( get_the_excerpt(), 10 ); ?></p>
+                                <p><?php echo wp_kses_post( wp_trim_words( get_the_excerpt(), 10 ) ); ?></p>
 
                             </div>
                         </div>
@@ -1795,13 +1803,13 @@ function tf_recent_blog_callback( $atts, $content = null ) {
 					if ( $loop->current_post <= 2 ) {
 						?>
 
-                        <div class="tf-single-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+                        <div class="tf-single-item" style="background-image: url(<?php echo esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ); ?>);">
                             <div class="tf-post-content">
                                 <div class="tf-post-desc">
                                     <h3>
                                         <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
                                     </h3>
-                                    <p><?php echo wp_trim_words( get_the_excerpt(), 10 ); ?></p>
+                                    <p><?php echo wp_kses_post( wp_trim_words( get_the_excerpt(), 10 ) ); ?></p>
 
                                 </div>
                             </div>
@@ -1811,13 +1819,13 @@ function tf_recent_blog_callback( $atts, $content = null ) {
 							echo "</div>";
 						}
 					} else { ?>
-                        <div class="tf-single-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+                        <div class="tf-single-item" style="background-image: url(<?php echo esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ); ?>);">
                             <div class="tf-post-content">
                                 <div class="tf-post-desc">
                                     <h3>
                                         <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
                                     </h3>
-                                    <p><?php echo wp_trim_words( get_the_excerpt(), 10 ); ?></p>
+                                    <p><?php echo wp_kses_post( wp_trim_words( get_the_excerpt(), 10 ) ); ?></p>
 
                                 </div>
                             </div>
@@ -1828,7 +1836,7 @@ function tf_recent_blog_callback( $atts, $content = null ) {
             </div>
         </div>
 	<?php } else {
-		echo __( 'No posts found', 'tourfic' );
+		echo esc_html__( 'No posts found', 'tourfic' );
 	}
 	wp_reset_postdata();
 
@@ -1864,7 +1872,8 @@ function tf_apartments_grid_slider( $atts, $content = null ) {
 
 	if ( ! empty( $locations ) ) {
 		if($locations === 'all') {
-			$locations = get_terms( 'apartment_location', array(
+			$locations = get_terms( array(
+                'taxonomy' => 'apartment_location',
 				'hide_empty' => 0,
 				'fields' => 'ids'
 			) );
@@ -1906,7 +1915,7 @@ function tf_apartments_grid_slider( $atts, $content = null ) {
 					$post_id       = get_the_ID();
 					$post_comments = get_comments( array( 'post_id' => $post_id ) );
 					?>
-                    <div class="tf-slider-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+                    <div class="tf-slider-item" style="background-image: url(<?php echo esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ); ?>);">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
                                 <h3>
@@ -1914,10 +1923,10 @@ function tf_apartments_grid_slider( $atts, $content = null ) {
                                 </h3>
 								<?php if ( $post_comments ) { ?>
                                     <div class="tf-slider-rating-star">
-                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tf_total_avg_rating( $post_comments ); ?></span>
+                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo esc_html( tf_total_avg_rating( $post_comments ) ); ?></span>
                                     </div>
 								<?php } ?>
-                                <p><?php echo wp_trim_words( get_the_content(), 10 ); ?></p>
+                                <p><?php echo wp_kses_post( wp_trim_words( get_the_content(), 10 ) ); ?></p>
                             </div>
                         </div>
                     </div>
@@ -1983,7 +1992,7 @@ function tf_recent_apartment_shortcode( $atts, $content = null ) {
 					$meta                       = get_post_meta( $post_id, 'tf_apartment_opt', true );
 
 					?>
-                    <div class="tf-slider-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+                    <div class="tf-slider-item" style="background-image: url(<?php echo esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ); ?>);">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
                                 <h3>
@@ -1991,10 +2000,10 @@ function tf_recent_apartment_shortcode( $atts, $content = null ) {
                                 </h3>
 								<?php if ( $related_comments_apartment ) { ?>
                                     <div class="tf-slider-rating-star">
-                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tf_total_avg_rating( $related_comments_apartment ); ?></span>
+                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo esc_html( tf_total_avg_rating( $related_comments_apartment ) ); ?></span>
                                     </div>
 								<?php } ?>
-                                <p><?php echo wp_trim_words( get_the_content(), 10 ); ?></p>
+                                <p><?php echo wp_kses_post( wp_trim_words( get_the_content(), 10 ) ); ?></p>
                             </div>
                         </div>
                     </div>
@@ -2051,7 +2060,7 @@ function shortcode_apartment_location( $atts, $content = null ) {
 				<?php foreach ( $locations as $term ) {
 
 					$meta      = get_term_meta( $term->term_id, 'tf_apartment_location', true );
-					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : TF_ASSETS_APP_URL . 'images/feature-default.jpg';
+					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg');
 					$term_link = get_term_link( $term );
 
 					if ( is_wp_error( $term_link ) ) {
@@ -2059,11 +2068,12 @@ function shortcode_apartment_location( $atts, $content = null ) {
 					} ?>
 
                     <div class="single_recomended_item">
-                        <a href="<?php echo $term_link; ?>">
-                            <div class="single_recomended_content" style="background-image: url(<?php echo $image_url; ?>);">
+                        <a href="<?php echo esc_url( $term_link ); ?>">
+                            <div class="single_recomended_content" style="background-image: url(<?php echo esc_url( $image_url ); ?>);">
                                 <div class="recomended_place_info_header">
                                     <h3><?php echo esc_html( $term->name ); ?></h3>
-                                    <p><?php printf( _n( '%s apartment', '%s apartments', $term->count, 'tourfic' ), $term->count ); ?></p>
+									<?php /* translators: %s Apartment Count */ ?>
+                                    <p><?php printf( esc_html( _n( '%s apartment', '%s apartments', $term->count, 'tourfic' ) ), esc_html( $term->count ) ); ?></p>
                                 </div>
                             </div>
                         </a>
@@ -2119,13 +2129,13 @@ function tf_vendor_post_callback( $atts, $content = null ) {
 					$related_comments = get_comments( array( 'post_id' => $post_id ) );
 					?>
                     <div class="tf-slider-item"
-                         style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? get_the_post_thumbnail_url( $post_id, 'full' ) : TF_ASSETS_APP_URL . '/images/feature-default.jpg'; ?>);">
+                         style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>);">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
                                 <h3>
                                     <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
                                 </h3>
-                                <p><?php echo wp_trim_words( get_the_excerpt(), 10 ); ?></p>
+                                <p><?php echo wp_kses_post( wp_trim_words( get_the_excerpt(), 10 ) ); ?></p>
 
                             </div>
                         </div>
@@ -2213,8 +2223,8 @@ function tf_external_listings_shortcode( $atts, $content = null ) {
 						$external_search_info = array(
 							'{adult}'    => ! empty( $adult ) ? $adult : 1,
 							'{child}'    => ! empty( $child ) ? $child : 0,
-							'{checkin}'  => ! empty( $check_in ) ? $check_in : date( 'Y-m-d' ),
-							'{checkout}' => ! empty( $check_out ) ? $check_out : date( 'Y-m-d', strtotime( '+1 day' ) ),
+							'{checkin}'  => ! empty( $check_in ) ? $check_in : gmdate( 'Y-m-d' ),
+							'{checkout}' => ! empty( $check_out ) ? $check_out : gmdate( 'Y-m-d', strtotime( '+1 day' ) ),
 							'{room}'     => ! empty( $room_selected ) ? $room_selected : 1,
 						);
 						if ( ! empty( $tf_booking_attribute ) ) {
@@ -2227,23 +2237,23 @@ function tf_external_listings_shortcode( $atts, $content = null ) {
 
                     if($tf_booking_type == 2 && !empty($tf_booking_url)):
 					?>
-                    <div class="tf-slider-item" style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? get_the_post_thumbnail_url( $post_id, 'full' ) : TF_ASSETS_APP_URL . '/images/feature-default.jpg'; ?>);">
+                    <div class="tf-slider-item" style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>);">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
                                 <h3><a href="<?php echo esc_url($tf_booking_url) ?>" target="_blank"><?php the_title() ?></a></h3>
 								<?php if ( $post_comments ) { ?>
                                     <div class="tf-slider-rating-star">
-                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tf_total_avg_rating( $post_comments ); ?></span>
+                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo esc_html( tf_total_avg_rating( $post_comments ) ); ?></span>
                                     </div>
 								<?php } ?>
-                                <p><?php echo wp_trim_words( get_the_content(), 10 ); ?></p>
+                                <p><?php echo wp_kses_post( wp_trim_words( get_the_content(), 10 ) ); ?></p>
 								<?php if ( ! empty( $rooms ) ): ?>
                                     <div class="tf-recent-room-price">
 										<?php
 										if ( ! empty( $room_price ) ) {
 											//get the lowest price from all available room price
 											$lowest_price = wc_price( min( $room_price ) );
-											echo __( "From ", "tourfic" ) . $lowest_price;
+											echo esc_html__( "From ", "tourfic" ) . wp_kses_post( $lowest_price );
 										}
 										?>
                                     </div>

@@ -207,6 +207,7 @@
                     url: tf_admin_params.ajax_url,
                     data: {
                         action: 'tf_ticket_status_change',
+                        _ajax_nonce: tf_admin_params.tf_nonce,
                         status: "check in",
                         order_unique_id: order_unique_id,
                     },
@@ -222,6 +223,7 @@
                     url: tf_admin_params.ajax_url,
                     data: {
                         action: 'tf_ticket_status_change',
+                        _ajax_nonce: tf_admin_params.tf_nonce,
                         status: "",
                         order_unique_id: order_unique_id,
                     },
@@ -251,7 +253,6 @@
                     btn.addClass('tf-btn-loading').css({'pointer-events': 'none'});
                 },
                 success: function (data) {
-                    console.log('data', data)
                     let response = JSON.parse(data);
                     if( response.status === 'success' ) {
                         notyf.success(response.message);

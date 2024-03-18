@@ -122,13 +122,16 @@
             if ($(this).closest('.room-submit-wrap').find('input[name=room_id]').val()) {
                 var room_id = $(this).closest('.room-submit-wrap').find('input[name=room_id]').val();
             } else {
-                var room_id = $("#hotel_roomid").val();
+                 // var unique_id = $("#hotel_roomid").val();
+                var room_id =  $(this).parent().prev().prev().find("input[name=room_id]").val();
             }
             if ($(this).closest('.room-submit-wrap').find('input[name=unique_id]').val()) {
                 var unique_id = $(this).closest('.room-submit-wrap').find('input[name=unique_id]').val();
             } else {
                 var unique_id = $("#hotel_room_uniqueid").val();
+                // var unique_id = $(this).parent().prev().prev().find("input[name=unique_id]").val();
             }
+
             var location = $('input[name=place]').val();
             var adult = $('input[name=adult]').val();
             var child = $('input[name=child]').val();
@@ -286,6 +289,7 @@
                 formData = new FormData(form[0]);
 
             formData.append('action', 'tf_hotel_search');
+            formData.append('_nonce', tf_params.nonce);
 
             $.ajax({
                 url: tf_params.ajax_url,
@@ -367,7 +371,6 @@
                         /*execute a function when someone clicks on the item value (DIV element):*/
                         b.addEventListener("click", function (e) {
                             let source = this.getElementsByTagName("input")[0];
-                            console.log(source.dataset.slug);
                             /*insert the value for the autocomplete text field:*/
                             inp.value = source.value;
                             inp.closest('input').nextElementSibling.value = source.dataset.slug //source.dataset.slug
