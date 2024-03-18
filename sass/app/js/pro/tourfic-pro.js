@@ -59,6 +59,7 @@
             var room_id = $(this).closest('.room-submit-wrap').find('input[name=room_id]').val();
             var unique_id = $(this).closest('.room-submit-wrap').find('input[name=unique_id]').val();
             var hotel_deposit = $(this).closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked');
+            console.log(unique_id);
             if (roomnumber == 0) {
                 $(this).closest('.room-submit-wrap').find('.roomselectissue').html('<span style="color:red">' + tf_pro_params.select_room + '</span>');
             } else {
