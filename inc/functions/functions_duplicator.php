@@ -28,28 +28,34 @@ function tf_duplicate_post_data_function() {
     check_ajax_referer('tf_duplicate_nonce_' . $_POST['postID'], 'security');
     
     $postID = intval($_POST['postID']);
-    $postType = $_POST['postType'];
-    $post_meta     = array();
+    $postType = esc_attr($_POST['postType']);
     if( "tf_hotel"==$postType ){
 	    $meta = get_post_meta( $postID, 'tf_hotels_opt', true );
-        $post_meta['tf_hotels_opt'] = $meta;
     }
     if( "tf_tours"==$postType ){
 	    $meta = get_post_meta( $postID, 'tf_tours_opt', true );
-        $post_meta['tf_tours_opt'] = $meta;
     }
     if( "tf_apartment"==$postType ){
 	    $meta = get_post_meta( $postID, 'tf_apartment_opt', true );
-        $post_meta['tf_apartment_opt'] = $meta;
     }
 
     $tf_duplicate_post = wp_insert_post(wp_slash([
         'post_type' => $postType,
         'post_status' => 'publish',
         'post_title' => get_the_title($postID) . ' (Copy)',
-        'post_content' => get_post_field('post_content', $postID),
-        'meta_input'   => $post_meta,
+        'post_content' => get_post_field('post_content', $postID)
     ]));
+    
+    //Update Post Meta
+    if( "tf_hotel"==$postType ){
+        update_post_meta($tf_duplicate_post, 'tf_hotels_opt', $meta);
+    }
+    if( "tf_tours"==$postType ){
+        update_post_meta($tf_duplicate_post, 'tf_tours_opt', $meta);
+    }
+    if( "tf_apartment"==$postType ){
+        update_post_meta($tf_duplicate_post, 'tf_apartment_opt', $meta);
+    }
 
     // Duplicate featured image
     $featured_image_id = get_post_thumbnail_id($postID);
