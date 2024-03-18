@@ -3013,12 +3013,13 @@ if ( ! function_exists( 'tourfic_vendor_order_table_data' ) ) {
 		$query_author = $query['author'];
 		$query_limit  = $query['limit'];
 
-		$orders_result = $wpdb->get_results($wpdb->prepare(
+		$vendor_query  = $wpdb->prepare(
 			"SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s AND post_id IN (
 				SELECT ID FROM {$wpdb->posts} WHERE post_author = %d
-			) ORDER BY order_id DESC %d",
-			$query_type, $query_author, $query_limit
-		), ARRAY_A );
+			) ORDER BY order_id DESC $query_limit",
+			$query_type, $query_author
+		);
+		$orders_result = $wpdb->get_results( $vendor_query, ARRAY_A );
 
 		return $orders_result;
 	}
