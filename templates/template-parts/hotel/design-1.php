@@ -196,7 +196,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 
                         <!-- SIdebar Tour single -->
                         <div class="tf-column tf-tour-details-right">
-	                        <?php if(($tf_booking_type == 2 && $tf_hide_booking_form !== '1') || $tf_booking_type == 1) :?>
+	                        <?php if(($tf_booking_type == 2 && $tf_hide_booking_form !== '1') || $tf_booking_type == 1 || $tf_booking_type == 3 ) :?>
                                 <div class="tf-tour-booking-box tf-box">
                                     <?php tf_hotel_sidebar_booking_form(); ?>
                                 </div>
