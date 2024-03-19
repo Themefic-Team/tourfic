@@ -516,37 +516,45 @@
             }
         });
 
-        if (tf_params.showitinerarystatus == 1) {
-            $('.ininerary-other-gallery').slick({
-                slidesToShow: 6,
-                slidesToScroll: 1,
-                arrows: true,
-                fade: false,
-                adaptiveHeight: true,
-                infinite: true,
-                useTransform: true,
-                speed: 400,
-                cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
-                responsive: [{
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 4,
-                        slidesToScroll: 1,
-                    }
-                }, {
-                    breakpoint: 640,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                    }
-                }, {
-                    breakpoint: 420,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                    }
-                }]
-            });
+        if(tf_params.showitinerarystatus == 1) {
+            if($(".tf-accordion-content")) {
+                $(".tf-accordion-content").find('.ininerary-other-gallery').slick({
+                    slidesToShow: 6,
+                    slidesToScroll: 1,
+                    arrows: true,
+                    fade: false,
+                    adaptiveHeight: true,
+                    infinite: true,
+                    useTransform: true,
+                    speed: 400,
+                    cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
+                    responsive: [{
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 4,
+                            slidesToScroll: 1,
+                        }
+                    }, {
+                        breakpoint: 640,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1,
+                        }
+                    }, {
+                        breakpoint: 420,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1,
+                        }
+                    }]
+                });
+            }
+            
+
+            if( $('.tf-itinerary-content-wrap')) {
+                $(document).find( ".tf-itinerary-content-wrap" ).show()
+            }
+            $(document).find( ".tf-itinerary-content-box" ).show()
         }
 
         /**
