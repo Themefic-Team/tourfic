@@ -3370,3 +3370,13 @@ function tf_shortcode_type_to_location_callback() {
 		"termName" => $term_name
 	) );
 }
+
+if ( ! function_exists( 'partial_payment_tag_replacement' ) ) {
+	function partial_payment_tag_replacement( $text, $arr ) {
+		if(!empty($arr)) {
+			$tag = array_keys($arr);
+			$value = array_values($arr);
+		}
+		return str_replace($tag, $value, $text);
+	}
+}

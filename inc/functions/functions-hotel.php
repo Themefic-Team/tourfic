@@ -4649,15 +4649,17 @@ if ( ! function_exists( 'tf_hotel_booking_popup_callback' ) ) {
 			if ( ! empty( $tf_due_amount ) ) {
 				$response['hotel_booking_summery'] .= '<tr>
                     <td align="left">' . sprintf( __( 'Due', 'tourfic' ) ) . '</td>
-                    <td align="right">' . wc_price( $tf_due_amount ) . '</td>
+                    <td align="right">' . wc_price( $tf_due_amount + $airport_service_arr['price'] ) . '</td>
                 </tr>';
 			}
+
+			$total_price = ! empty( $tf_due_amount ) ? wc_price( $price_total - $tf_due_amount ) : wc_price( $price_total + $airport_service_arr['price'] );
 
 			$response['hotel_booking_summery'] .= '</tbody>
             <tfoot>
                 <tr>
-                    <th align="left">' . sprintf( __( 'Total', 'tourfic' ) ) . '</th>
-                    <th align="right">' . wc_price( $price_total + $airport_service_arr['price'] ) . '</th>
+                    <th align="left">' . __( 'Total', 'tourfic' ) . '</th>
+                    <th align="right">' . $total_price . '</th>
                 </tr>
             </tfoot>
         </table>';
@@ -4687,6 +4689,9 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
 		$airport_service_type     = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
 		$room_book_by             = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 		$room_book_url            = ! empty( $rooms[ $room_index ]['booking-url'] ) ? $rooms[ $room_index ]['booking-url'] : '';
+		$room_allow_deposit       = ! empty( $rooms[ $room_index ]['allow_deposit'] ) ? $rooms[ $room_index ]['allow_deposit'] : '';
+		$room_deposit_type       = ! empty( $rooms[ $room_index ]['deposit_type'] ) ? $rooms[ $room_index ]['deposit_type'] : '';
+		$room_deposit_amount       = ! empty( $rooms[ $room_index ]['deposit_amount'] ) ? $rooms[ $room_index ]['deposit_amount'] : 0;
 		$airport_service_type     = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $enable_airport_service ) && ! empty( $airport_service_type ) ? $airport_service_type : null;
 		$enable_guest_info_global = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( tfopt( 'enable_guest_info' ) ) ? tfopt( 'enable_guest_info' ) : 0;
 		$enable_guest_info        = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['enable_guest_info'] ) ? $meta['enable_guest_info'] : $enable_guest_info_global;
@@ -4937,27 +4942,6 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
 
                 <!-- Popup Footer Control & Partial Payment -->
                 <div class="tf-booking-pagination">
-					<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] ) && 3 != $room_book_by ) {
-						$tf_deposit_amount              = array(
-							"{amount}" => $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount'] . '%'
-						);
-						$tf_partial_payment_label       = ! empty( tfopt( "deposit-title" ) ) ? tfopt( "deposit-title" ) : 'Pertial payment of {amount} on total';
-						$tf_partial_payment_description = ! empty( tfopt( "deposit-subtitle" ) ) ? tfopt( "deposit-subtitle" ) : 'You can Partial Payment amount for booking the tour. After booking the tour, you can pay the rest amount after the tour is completed.';
-						?>
-                        <div class="tf-diposit-switcher">
-                            <label class="switch">
-                                <input type="checkbox" name="deposit" class="diposit-status-switcher">
-                                <span class="switcher round"></span>
-                            </label>
-                            <div class="tooltip-box">
-                                <h4><?php echo __( partial_payment_tag_replacement( $tf_partial_payment_label, $tf_deposit_amount ), 'tourfic' ) ?></h4>
-                                <div class="tf-info-btn">
-                                    <i class="fa fa-circle-exclamation tooltip-title-box" style="padding-left: 5px; padding-top: 5px" title=""></i>
-                                    <div class="tf-tooltip"><?php echo __( $tf_partial_payment_description ) ?></div>
-                                </div>
-                            </div>
-                        </div>
-					<?php } ?>
 					<?php if ( empty( $airport_service_type ) && 3 != $room_book_by && empty( $enable_guest_info ) ) { ?>
                         <div class="tf-control-pagination show">
                             <button type="submit"><?php echo __( "Continue", "tourfic" ); ?></button>
