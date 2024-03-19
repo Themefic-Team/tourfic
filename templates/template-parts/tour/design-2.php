@@ -377,6 +377,8 @@
 	            $current_post_id = array($selected_ids[$index]);
 
                 unset($selected_ids[$index]);
+            } else {
+                $current_post_id = array($post_id);
             }
 
             if(count($selected_ids) > 0) {
