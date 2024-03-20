@@ -1594,6 +1594,7 @@
 
         // Booking Confirmation Form Validation
         $(document).on('click', '.tf-book-confirm-error', function (e) {
+            e.preventDefault();
             let hasErrors = [];
             let $this = $(this).closest('.tf-withoutpayment-booking');
             $('.error-text').text("");

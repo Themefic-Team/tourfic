@@ -574,9 +574,9 @@
                 type: 'post',
                 url: tf_params.ajax_url,
                 data: data,
-                beforeSend: function (data) {
-                    $('#tour_room_details_loader').show();
-                },
+                // beforeSend: function (data) {
+                //     $('#tour_room_details_loader').show();
+                // },
                 complete: function (data) {
                     $this.unblock();
                 },
@@ -621,6 +621,14 @@
             var $this = $(this);
 
             hotelPopupBooking($this);
+        }); 
+        
+        $(document).on('click', '.tf-hotel-book-confirm-error', function (e) {
+            e.preventDefault();
+            var $this = $(this).closest(".tf-withoutpayment-booking").siblings(".room-submit-wrap").find("input[name=post_id]").val();
+            console.log($this)
+
+            // hotelPopupBooking($this);
         });
 
 
@@ -628,7 +636,7 @@
             var $this = $(this);
 
             hotelPopupBooking($this);
-        });
+        });                                                                                                                                                                                                                      
     });
 
 })(jQuery, window);

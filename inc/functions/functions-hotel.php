@@ -4575,11 +4575,12 @@ if ( ! function_exists( 'tf_hotel_booking_popup_callback' ) ) {
                     ';
 				} else {
 					foreach ( $hotel_guest_info_fields as $field ) {
+						$reg_field_required = !empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : 0;
 						if ( "text" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] || "date" == $field['reg-fields-type'] ) {
 							$response['guest_info'] .= '
                             <div class="traveller-single-info">
                                 <label for="' . $field['reg-field-name'] . $guest_in . '">' . sprintf( __( '%s', 'tourfic' ), $field['reg-field-label'] ) . '</label>
-                                <input type="' . $field['reg-fields-type'] . '" name="guest[' . $guest_in . '][' . $field['reg-field-name'] . ']" data-required="' . $field['reg-field-required'] . '" id="' . $field['reg-field-name'] . $guest_in . '" />
+                                <input type="' . $field['reg-fields-type'] . '" name="guest[' . $guest_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" id="' . $field['reg-field-name'] . $guest_in . '" />
                                 <div class="error-text" data-error-for="' . $field['reg-field-name'] . $guest_in . '"></div>
                             </div>';
 						}
@@ -4653,7 +4654,7 @@ if ( ! function_exists( 'tf_hotel_booking_popup_callback' ) ) {
                 </tr>';
 			}
 
-			$total_price = ! empty( $tf_due_amount ) ? wc_price( $price_total - $tf_due_amount ) : wc_price( $price_total + $airport_service_arr['price'] );
+			$total_price = ! empty( $tf_due_amount ) ? wc_price( $price_total - $tf_due_amount ) : ( !empty( $airport_service_arr['price'] ) ? wc_price( $price_total + $airport_service_arr['price'] ) : wc_price( $price_total ) );
 
 			$response['hotel_booking_summery'] .= '</tbody>
             <tfoot>
@@ -4821,7 +4822,7 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
                                     <h4><?php echo __( "Billing details", "tourfic" ); ?></h4>
                                     <div class="traveller-info billing-details">
 										<?php
-										$confirm_book_fields = ! empty( tfopt( 'book-confirm-field' ) ) ? tf_data_types( tfopt( 'book-confirm-field' ) ) : '';
+										$confirm_book_fields = ! empty( tfopt( 'hotel-book-confirm-field' ) ) ? tf_data_types( tfopt( 'hotel-book-confirm-field' ) ) : '';
 										if ( empty( $confirm_book_fields ) ) {
 											?>
                                             <div class="traveller-single-info tf-confirm-fields">
@@ -4885,7 +4886,7 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
 															<?php echo esc_html( $field['reg-field-label'] ); ?>
                                                         </label>
                                                         <select name="booking_confirm[<?php echo esc_attr( $field['reg-field-name'] ); ?>]" id="<?php echo esc_attr( $field['reg-field-name'] ); ?>"
-                                                                data-required="<?php echo $field['reg-field-required']; ?>">
+                                                                data-required="<?php echo !empty($field['reg-field-required']) ? esc_html__($field['reg-field-required']) : esc_html(0); ?>">
                                                             <option value="">
 																<?php echo sprintf( __( 'Select One', 'tourfic' ) ); ?>
                                                             </option>
@@ -4984,7 +4985,7 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( $airport_service_type || $enable_guest_info ) ) { ?>
                                 <a href="#" class="tf-back-control tf-step-back" data-step="2"><i class="fa fa-angle-left"></i><?php echo __( "Back", "tourfic" ); ?></a>
 							<?php } ?>
-                            <button type="submit" class="tf-book-confirm-error"><?php echo __( "Continue", "tourfic" ); ?></button>
+                            <button type="submit" class="tf-hotel-book-confirm-error"><?php echo __( "Continue", "tourfic" ); ?></button>
                         </div>
 					<?php } ?>
                 </div>
@@ -5164,6 +5165,6 @@ if ( ! function_exists( 'tf_hotel_airport_service_title_price' ) ) {
 			}
 		}
 
-		return $airport_service_arr;
-	}
+		return !empty( $airport_service_arr ) ? $airport_service_arr : array( 'title' => '', 'price' => 0 );
+	} 
 }
