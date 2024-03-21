@@ -257,7 +257,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             </svg>
                         </div>
                     </div>
-                    <p class="tf-setup-step-desc"><?php esc_html_e( "Travelfic is a WordPress theme created by us to improve your site’s frontend. While Tourfic </br>manages your backend and booking, Travelfic ensures your travel site looks great and </br>operates smoothly. ", "tourfic" ) ?><a href="https://wordpress.org/themes/travelfic/" target="_blank"><?php esc_html_e("Know more about Travelfic", "tourfic"); ?></a></p>
+                    <p class="tf-setup-step-desc"><?php esc_html_e( "Travelfic is a WordPress theme created by us to improve your site’s frontend. While Tourfic manages your backend and booking, Travelfic ensures your travel site looks great and operates smoothly. ", "tourfic" ) ?><a href="https://wordpress.org/themes/travelfic/" target="_blank"><?php esc_html_e("Know more about Travelfic", "tourfic"); ?></a></p>
 
                     <div class="setup-theme-style">
                         <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL) . 'images/themes.png' ?>" alt="<?php esc_attr_e( 'Travelfic Theme', 'tourfic' ) ?>">
@@ -425,7 +425,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 
                     <div class="tf-hotel-setup-wizard">
                         <h3 class="tf-setup-step-subtitle"><?php esc_html_e( 'Hotel settings', 'tourfic' ) ?></h3>
-                        <p class="tf-setup-step-desc"><?php esc_html_e( 'These settings can be overridden from <span>Tourfic Settings > Hotel Settings</span>', 'tourfic' ) ?></p>
+                        <p class="tf-setup-step-desc"><?php echo wp_kses_post( 'These settings can be overridden from <span>Tourfic Settings > Hotel Settings</span>' ) ?></p>
 
                         <div class="setup-form-group tf-setup-group-general">
                             <!--Review Section-->
@@ -464,7 +464,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 
                     <div class="tf-tour-setup-wizard">
                         <h3 class="tf-setup-step-subtitle"><?php esc_html_e( 'Tour settings', 'tourfic' ) ?></h3>
-                        <p class="tf-setup-step-desc"><?php esc_html_e( 'These settings can be overridden from <span>Tourfic Settings > Tour Settings</span>', 'tourfic' ) ?></p>
+                        <p class="tf-setup-step-desc"><?php echo wp_kses_post( 'These settings can be overridden from <span>Tourfic Settings > Tour Settings</span>' ) ?></p>
 
                         <div class="setup-form-group  tf-setup-group-general">
                             <!--Review Section-->
@@ -503,7 +503,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 
                     <div class="tf-apartment-setup-wizard">
                         <h3 class="tf-setup-step-subtitle"><?php esc_html_e( 'Apartment settings', 'tourfic' ) ?></h3>
-                        <p class="tf-setup-step-desc"><?php esc_html_e( 'These settings can be overridden from <span>Tourfic Settings > Apartment Settings</span>', 'tourfic' ) ?></p>
+                        <p class="tf-setup-step-desc"><?php echo wp_kses_post( 'These settings can be overridden from <span>Tourfic Settings > Apartment Settings</span>' ) ?></p>
 
                         <div class="setup-form-group">
                             <!--Review Section-->
@@ -590,7 +590,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <div class="tf-hotel-setup-wizard">
 
                         <h3 class="tf-setup-step-subtitle"><?php esc_html_e( 'Hotel Template', 'tourfic' ) ?></h3>
-                        <p class="tf-setup-step-desc"><?php esc_html_e( 'These settings can be overridden from <span>Tourfic Settings > Hotel Settings</span>', 'tourfic' ) ?></p>
+                        <p class="tf-setup-step-desc"><?php echo wp_kses_post( 'These settings can be overridden from <span>Tourfic Settings > Hotel Settings</span>' ) ?></p>
 
                         <div class="setup-form-group">
                             <!--Hotel Single Template-->
@@ -670,7 +670,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <div class="tf-tour-setup-wizard">
 
                         <h3 class="tf-setup-step-subtitle"><?php esc_html_e( 'Tour settings', 'tourfic' ) ?></h3>
-                        <p class="tf-setup-step-desc"><?php esc_html_e( 'These settings can be overridden from <span>Tourfic Settings > Tour Settings</span>', 'tourfic' ) ?></p>
+                        <p class="tf-setup-step-desc"><?php echo wp_kses_post( 'These settings can be overridden from <span>Tourfic Settings > Tour Settings</span>' ) ?></p>
 
                         <div class="setup-form-group">
 
@@ -752,7 +752,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <div class="tf-apartment-setup-wizard">
 
                         <h3 class="tf-setup-step-subtitle"><?php esc_html_e( 'Apartment settings', 'tourfic' ) ?></h3>
-                        <p class="tf-setup-step-desc"><?php esc_html_e( 'These settings can be overridden from <span>Tourfic Settings > Apartment Settings</span>', 'tourfic' ) ?></p>
+                        <p class="tf-setup-step-desc"><?php wp_kses_post( 'These settings can be overridden from <span>Tourfic Settings > Apartment Settings</span>' ) ?></p>
 
                         <div class="setup-form-group">
                             
