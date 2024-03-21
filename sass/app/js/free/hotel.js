@@ -622,15 +622,50 @@
 
             hotelPopupBooking($this);
         }); 
-        
-        $(document).on('click', '.tf-hotel-book-confirm-error', function (e) {
+
+        $(document).on('submit', 'form.tf-room', function (e) {
             e.preventDefault();
-            var $this = $(this).closest(".tf-withoutpayment-booking").siblings(".room-submit-wrap").find("input[name=post_id]").val();
-            console.log($this)
+            
+            var $this = $(this);
+            var formData = new FormData(this);
 
-            // hotelPopupBooking($this);
+            //TODO: Add pricing data attribute and catch it here
+
+            formData.append('action', 'tf_hotel_booking');
+            formData.append('_ajax_nonce', tf_params.nonce);
+
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (data) {
+                    $this.block({
+                        message: null,
+                        overlayCSS: {
+                            background: "#fff",
+                            opacity: .5
+                        }
+                    });
+                    $('#tour_room_details_loader').show();
+                    $('.tf-notice-wrapper').html("").hide();
+                },
+                success: function (data) {
+                   console.log(data)
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+                complete: function (data) {
+                    $this.unblock()
+                    $('#tour_room_details_loader').hide();
+                    $('.tf-withoutpayment-booking').removeClass('show');
+                    $('.tf-withoutpayment-booking-confirm').addClass('show');
+                },
+            })
         });
-
 
         $(document).on("change", "[name='tf_airport_service']", function (e) {
             var $this = $(this);

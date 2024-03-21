@@ -4575,7 +4575,7 @@ if ( ! function_exists( 'tf_hotel_booking_popup_callback' ) ) {
                     ';
 				} else {
 					foreach ( $hotel_guest_info_fields as $field ) {
-						$reg_field_required = !empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : 0;
+						$reg_field_required = !empty( $field['reg-field-required'] ) ? esc_attr( $field['reg-field-required'] ) : 0;
 						if ( "text" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] || "date" == $field['reg-fields-type'] ) {
 							$response['guest_info'] .= '
                             <div class="traveller-single-info">
@@ -4660,7 +4660,7 @@ if ( ! function_exists( 'tf_hotel_booking_popup_callback' ) ) {
             <tfoot>
                 <tr>
                     <th align="left">' . __( 'Total', 'tourfic' ) . '</th>
-                    <th align="right">' . $total_price . '</th>
+                    <th align="right" data-hotel-total-price="' . $price_total . '">' . $total_price . '</th>
                 </tr>
             </tfoot>
         </table>';
@@ -4719,12 +4719,12 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
                 <h2>
 					<?php
 					$booking_confirmation_msg = ! empty( tfopt( 'hotel-booking-confirmation-msg' ) ) ? tfopt( 'hotel-booking-confirmation-msg' ) : esc_html__('Booked Successfully', 'tourfic');
-					echo esc_html( $booking_confirmation_msg );
+					echo wp_kses_post( $booking_confirmation_msg );
 					?>
                 </h2>
             </div>
         </div>
-        <div class="tf-withoutpayment-booking">
+        <div class="tf-withoutpayment-booking tf-hotel-withoutpayment-booking">
             <div class="tf-withoutpayment-popup">
                 <div class="tf-booking-tabs">
                     <div class="tf-booking-tab-menu">
@@ -4872,11 +4872,12 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
                                             </div>
 										<?php } else {
 											foreach ( $confirm_book_fields as $field ) {
+												$reg_field_required = !empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : 0;
 												if ( "text" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] || "date" == $field['reg-fields-type'] ) { ?>
                                                     <div class="traveller-single-info tf-confirm-fields">
                                                         <label for="<?php echo esc_attr( $field['reg-field-name'] ); ?>"><?php echo esc_html( $field['reg-field-label'] ); ?></label>
                                                         <input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="booking_confirm[<?php echo esc_attr( $field['reg-field-name'] ); ?>]"
-                                                               id="<?php echo esc_attr( $field['reg-field-name'] ); ?>" data-required="<?php echo $field['reg-field-required']; ?>"/>
+                                                               id="<?php echo esc_attr( $field['reg-field-name'] ); ?>" data-required="<?php echo esc_attr( $reg_field_required ); ?>"/>
                                                         <div class="error-text" data-error-for="<?php echo esc_attr( $field['reg-field-name'] ); ?>"></div>
                                                     </div>
 												<?php }
