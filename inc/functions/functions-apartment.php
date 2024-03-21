@@ -2895,12 +2895,13 @@ if ( ! function_exists( 'tf_apartments_search_ajax_callback' ) ) {
 			return;
 		}
 		$response = [
-			'status'  => 'error',
+			'status'  => 'success',
 			'message' => '',
 		];
 
 		if ( tfopt( 'date_apartment_search' ) && ( ! isset( $_POST['check-in-out-date'] ) || empty( $_POST['check-in-out-date'] ) ) ) {
 			$response['message'] = esc_html__( 'Please select a date', 'tourfic' );
+			$response['status'] = 'error';
 		}
 
 		if ( tfopt( 'date_apartment_search' ) ) {
@@ -2908,6 +2909,9 @@ if ( ! function_exists( 'tf_apartments_search_ajax_callback' ) ) {
 				$response['query_string'] = str_replace( '&action=tf_apartments_search', '', http_build_query( $_POST ) );
 				$response['status']       = 'success';
 			}
+		}else{
+			$response['query_string'] = str_replace( '&action=tf_apartments_search', '', http_build_query( $_POST ) );
+			$response['status']       = 'success';
 		}
 
 		echo wp_json_encode( $response );
