@@ -10,7 +10,7 @@ add_action( 'wp_ajax_tf_tours_booking', 'tf_tours_booking_function' );
 add_action( 'wp_ajax_nopriv_tf_tours_booking', 'tf_tours_booking_function' );
 function tf_tours_booking_function() {
 
-	if ( ! isset( $_POST['_ajax_nonce'] ) || ! wp_verify_nonce( $_POST['_ajax_nonce'], 'tf_ajax_nonce' ) ) {
+	if ( ! empty( $_POST['_ajax_nonce'] ) && ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_ajax_nonce'])), 'tf_ajax_nonce' ) ) {
 		return;
 	}
 

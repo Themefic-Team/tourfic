@@ -112,7 +112,7 @@ if ( ! class_exists( 'TF_Taxonomy_Metabox' ) ) {
 		public function save_taxonomy( $term_id ) {
 
 			// Check if a nonce is valid.
-			if ( !empty($_POST['tf_taxonomy_nonce']) && ! wp_verify_nonce( esc_attr($_POST['tf_taxonomy_nonce']), 'tf_taxonomy_nonce_action' ) ) {
+			if ( !empty($_POST['tf_taxonomy_nonce']) && ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_taxonomy_nonce'])), 'tf_taxonomy_nonce_action' ) ) {
 				return;
 			}
 

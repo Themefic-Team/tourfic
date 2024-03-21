@@ -1,7 +1,6 @@
 <?php 
-if ( !empty($_REQUEST['nonce']) && ! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'updates' ) ) {
-    // This nonce is not valid.
-    die( esc_html_e( 'Security Reasons', 'tourfic' ) ); 
+if ( !empty($_REQUEST['nonce']) && ! wp_verify_nonce( sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'updates' ) ) {
+    die( esc_html_e( 'Security Reasons', 'tourfic' ) );
 }
 ?>
 <div class="tf-booking-header-filter">

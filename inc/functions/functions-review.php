@@ -291,7 +291,7 @@ if ( ! function_exists( 'tf_save_rating' ) ) {
 		// Get the post ID from the comment data
         $post_id = $commentdata['comment_post_ID'];
 		// Check nonce security
-		if ( ! isset( $_POST['_wp_unfiltered_html_comment'] ) || ! wp_verify_nonce( $_POST['_wp_unfiltered_html_comment'], 'unfiltered-html-comment_' . $post_id ) ) {
+		if ( ! empty( $_POST['_wp_unfiltered_html_comment'] ) && ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_wp_unfiltered_html_comment'])), 'unfiltered-html-comment_' . $post_id ) ) {
 			return;
 		}
 		if ( ( isset( $_POST[ TF_COMMENT_META ] ) ) && ( '' !== $_POST[ TF_COMMENT_META ] ) ) {
