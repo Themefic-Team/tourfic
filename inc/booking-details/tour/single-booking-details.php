@@ -9,7 +9,7 @@
             </a>
         </div>
         <?php 
-        if ( !empty($_REQUEST['nonce']) && ! wp_verify_nonce( sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'tf_booking_details' ) ) {
+        if ( !isset($_REQUEST['nonce']) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'tf_booking_details' ) ) {
             // This nonce is not valid.
             die( esc_html_e( 'Security Reasons', 'tourfic' ) ); 
         }

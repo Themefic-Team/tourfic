@@ -15,7 +15,7 @@ add_action('wp_ajax_nopriv_tf_add_to_wishlists', 'tf_add_to_wishlists');
 function tf_add_to_wishlists()
 {
     // Check nonce security
-	if ( ! empty( $_POST['nonce'] ) && ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['nonce'])), 'wishlist-nonce' ) ) {
+	if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['nonce'])), 'wishlist-nonce' ) ) {
 		die(esc_html_e( 'Nonce verification failed', 'tourfic' ));
 	}
 
@@ -119,7 +119,7 @@ add_action('wp_ajax_nopriv_tf_generate_table', 'tf_generate_table_guest');
 function tf_generate_table_guest()
 {
     // Check nonce security
-	if ( ! empty( $_POST['nonce'] ) && ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['nonce'])), 'populate-wishlist-guest-nonce' ) ) {
+	if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['nonce'])), 'populate-wishlist-guest-nonce' ) ) {
 		die(esc_html_e( 'Nonce verification failed', 'tourfic' ));
 	}
 
@@ -157,7 +157,7 @@ add_action('wp_ajax_tf_remove_wishlist', 'tf_remove_wishlist');
 function tf_remove_wishlist()
 {
     // Check nonce security
-	if ( ! empty( $_GET['nonce'] ) && ! wp_verify_nonce( sanitize_text_field(wp_unslash($_GET['nonce'])), 'wishlist-nonce' ) ) {
+	if ( ! isset( $_GET['nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_GET['nonce'])), 'wishlist-nonce' ) ) {
 		die(esc_html_e( 'Nonce verification failed', 'tourfic' ));
 	}
 

@@ -749,7 +749,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 
 			// Check if a nonce is valid.
-			if (  !empty( $_POST['tf_option_nonce'] ) && !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tf_option_nonce'] ) ), 'tf_option_nonce_action' ) ) {
+			if (  !isset( $_POST['tf_option_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tf_option_nonce'] ) ), 'tf_option_nonce_action' ) ) {
 				return;
 			}
 
@@ -871,7 +871,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				'message' => __( 'Something went wrong!', 'tourfic' ),
 			];
 
-			if( ! empty( $_POST['tf_option_nonce'] ) && wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_option_nonce'])), 'tf_option_nonce_action' ) ) {
+			if( isset( $_POST['tf_option_nonce'] ) || wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_option_nonce'])), 'tf_option_nonce_action' ) ) {
 
 				if(isset($_POST['tf_import_option']) && !empty(wp_unslash( trim( $_POST['tf_import_option']) )) ){
 

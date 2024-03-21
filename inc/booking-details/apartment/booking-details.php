@@ -1,5 +1,5 @@
 <?php 
-if ( !empty($_REQUEST['nonce']) && ! wp_verify_nonce( sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'updates' ) ) {
+if ( !isset($_REQUEST['nonce']) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'updates' ) ) {
     die( esc_html_e( 'Security Reasons', 'tourfic' ) );
 }
 ?>

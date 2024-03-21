@@ -1,7 +1,7 @@
 <div class="tf-template-3">
 <?php 
 // Check nonce security
-if ( ! empty( $_GET['_nonce'] ) && ! wp_verify_nonce( sanitize_text_field(wp_unslash($_GET['_nonce'])), 'tf_ajax_nonce' ) ) {
+if ( ! isset( $_GET['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_GET['_nonce'])), 'tf_ajax_nonce' ) ) {
 	return;
 }
 if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){

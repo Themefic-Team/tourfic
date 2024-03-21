@@ -2594,7 +2594,7 @@ if ( ! function_exists( 'tf_apartment_host_rating' ) ) {
 if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
 	function tf_apartment_room_quick_view() {
 		// Check nonce security
-		if ( ! empty( $_POST['_nonce'] ) && ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
+		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
 			return;
 		}
 		$meta = get_post_meta( sanitize_text_field( $_POST['post_id'] ), 'tf_apartment_opt', true );
@@ -2891,7 +2891,7 @@ add_action( 'wp_ajax_nopriv_tf_apartments_search', 'tf_apartments_search_ajax_ca
 if ( ! function_exists( 'tf_apartments_search_ajax_callback' ) ) {
 	function tf_apartments_search_ajax_callback() {
 		// Check nonce security
-		if ( ! empty( $_POST['_nonce'] ) && ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
+		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
 			return;
 		}
 		$response = [
