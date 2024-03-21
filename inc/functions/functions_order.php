@@ -46,11 +46,6 @@ if ( ! function_exists( 'tf_add_order_submenu' ) ) {
 if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 	function tf_tour_booking_page_callback() {
 
-		if ( !empty($_REQUEST['nonce']) && (! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'updates' ) && ! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'tf_booking_details' ) ) ) {
-			// This nonce is not valid.
-			die( esc_html_e( 'Security Reasons', 'tourfic' ) ); 
-		}
-
 		if(!empty($_GET['order_id']) && !empty($_GET['action']) && !empty($_GET['book_id'])){
 			/**
 			 * Booking Details showing new template
@@ -181,11 +176,6 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 if ( ! function_exists( 'tf_hotel_booking_page_callback' ) ) {
 	function tf_hotel_booking_page_callback() {
 
-		if ( !empty($_REQUEST['nonce']) && (! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'updates' ) && ! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'tf_booking_details' ) ) ) {
-			// This nonce is not valid.
-			die( esc_html_e( 'Security Reasons', 'tourfic' ) ); 
-		}
-
 		if(!empty($_GET['order_id']) && !empty($_GET['action']) && !empty($_GET['book_id'])){
 			/**
 			 * Booking Details showing new template
@@ -311,11 +301,6 @@ if ( ! function_exists( 'tf_hotel_booking_page_callback' ) ) {
  */
 if ( ! function_exists( 'tf_apartment_booking_page_callback' ) ) {
 	function tf_apartment_booking_page_callback() {
-
-		if ( !empty($_REQUEST['nonce']) && (! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'updates' ) && ! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'tf_booking_details' ) ) ) {
-			// This nonce is not valid.
-			die( esc_html_e( 'Security Reasons', 'tourfic' ) ); 
-		}
 
 		if(!empty($_GET['order_id']) && !empty($_GET['action']) && !empty($_GET['book_id'])){
 			/**

@@ -12,7 +12,7 @@ function tf_apartment_booking_callback() {
 	$tf_apartment_data = [];
 
 	// Check nonce security
-	if ( ! isset( $_POST['tf_apartment_nonce'] ) || ! wp_verify_nonce( $_POST['tf_apartment_nonce'], 'tf_apartment_booking' ) ) {
+	if ( ! isset( $_POST['tf_apartment_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_apartment_nonce'])), 'tf_apartment_booking' ) ) {
 		return;
 	}
 

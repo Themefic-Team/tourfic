@@ -149,8 +149,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 		 */
 		public function save_metabox( $post_id ) {
 			// Check if a nonce is valid.
-
-			if ( !empty($_POST['tf_meta_box_nonce']) && ! wp_verify_nonce( esc_attr($_POST['tf_meta_box_nonce']), 'tf_meta_box_nonce_action' ) ) {
+			if ( !isset($_POST['tf_meta_box_nonce']) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_meta_box_nonce'])), 'tf_meta_box_nonce_action' ) ) {
 				return;
 			}
 

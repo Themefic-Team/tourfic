@@ -641,7 +641,7 @@ if ( ! function_exists( 'tf_extra_user_profile_fields' ) ) {
  */
 if ( ! function_exists( 'tf_save_extra_user_profile_fields' ) ) {
 	function tf_save_extra_user_profile_fields( $user_id ) {
-		if ( empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'update-user_' . $user_id ) ) {
+		if ( !isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'update-user_' . $user_id ) ) {
 			return;
 		}
 

@@ -1773,7 +1773,7 @@ add_action( 'wp_ajax_nopriv_tf_trigger_filter', 'tf_search_result_ajax_sidebar' 
 add_action( 'wp_ajax_tf_trigger_filter', 'tf_search_result_ajax_sidebar' );
 function tf_search_result_ajax_sidebar() {
 	// Check nonce security
-	if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], 'tf_ajax_nonce' ) ) {
+	if ( !isset( $_POST['_nonce'] ) || !wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
 		return;
 	}
 	/**
@@ -2986,8 +2986,7 @@ function tf_affiliate_install_callback() {
 		'status'  => 'error',
 		'message' => esc_html__( 'Something went wrong. Please try again.', 'tourfic' )
 	];
-	$nonce    = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
-	if ( ! wp_verify_nonce( $nonce, 'tf_affiliate_install' ) ) {
+	if ( !isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash($_POST['nonce']) ), 'tf_affiliate_install' ) ) {
 		wp_send_json_error( $response );
 	}
 	if ( current_user_can( 'activate_plugins' ) ) {
