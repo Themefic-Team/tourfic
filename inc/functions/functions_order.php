@@ -46,19 +46,15 @@ if ( ! function_exists( 'tf_add_order_submenu' ) ) {
 if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 	function tf_tour_booking_page_callback() {
 
-		if ( !empty($_REQUEST['nonce']) && (! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'updates' ) && ! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'tf_booking_details' ) ) ) {
-			// This nonce is not valid.
-			die( esc_html_e( 'Security Reasons', 'tourfic' ) ); 
-		}
 		if ( !class_exists( 'WooCommerce' ) ) {
-            ?>
+			?>
             <div class="tf-container">
                 <div class="tf-notice tf-notice-danger">
 					<?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>
                 </div>
             </div>
-            <?php
-            return;
+			<?php
+			return;
 		}
 
 		if(!empty($_GET['order_id']) && !empty($_GET['action']) && !empty($_GET['book_id'])){
@@ -190,11 +186,6 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
  */
 if ( ! function_exists( 'tf_hotel_booking_page_callback' ) ) {
 	function tf_hotel_booking_page_callback() {
-
-		if ( !empty($_REQUEST['nonce']) && (! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'updates' ) && ! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'tf_booking_details' ) ) ) {
-			// This nonce is not valid.
-			die( esc_html_e( 'Security Reasons', 'tourfic' ) ); 
-		}
 
 		if ( !class_exists( 'WooCommerce' ) ) {
 			?>
@@ -332,11 +323,6 @@ if ( ! function_exists( 'tf_hotel_booking_page_callback' ) ) {
  */
 if ( ! function_exists( 'tf_apartment_booking_page_callback' ) ) {
 	function tf_apartment_booking_page_callback() {
-
-		if ( !empty($_REQUEST['nonce']) && (! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'updates' ) && ! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'tf_booking_details' ) ) ) {
-			// This nonce is not valid.
-			die( esc_html_e( 'Security Reasons', 'tourfic' ) ); 
-		}
 
 		if ( !class_exists( 'WooCommerce' ) ) {
 			?>

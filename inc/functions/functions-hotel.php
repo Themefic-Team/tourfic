@@ -333,7 +333,7 @@ add_action( 'wp_ajax_nopriv_tf_hotel_airport_service_price', 'tf_hotel_airport_s
 
 function tf_hotel_airport_service_callback() {
 	// Check nonce security
-	if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], 'tf_ajax_nonce' ) ) {
+	if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
 		return;
 	}
 	$meta            = get_post_meta( sanitize_key( $_POST['id'] ), 'tf_hotels_opt', true );
@@ -702,7 +702,7 @@ add_action( 'wp_ajax_nopriv_tf_room_availability', 'tf_room_availability_callbac
 function tf_room_availability_callback() {
 
 	// Check nonce security
-	if ( ! isset( $_POST['tf_room_avail_nonce'] ) || ! wp_verify_nonce( $_POST['tf_room_avail_nonce'], 'check_room_avail_nonce' ) ) {
+	if ( ! isset( $_POST['tf_room_avail_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_room_avail_nonce'])), 'check_room_avail_nonce' ) ) {
 		return;
 	}
 
@@ -3638,7 +3638,7 @@ function tf_remove_order_ids_from_room() {
  */
 add_action( 'wp_ajax_tf_remove_room_order_ids', 'tf_remove_room_order_ids' );
 function tf_remove_room_order_ids() {
-	if( !empty($_POST['_ajax_nonce']) && !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_ajax_nonce'] ) ), 'updates' ) ){
+	if( !isset($_POST['_ajax_nonce']) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_ajax_nonce'] ) ), 'updates' ) ){
         return;
     }
 	
@@ -3674,7 +3674,7 @@ function tf_remove_room_order_ids() {
 
 function tf_hotel_quickview_callback() {
 	// Check nonce security
-	if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], 'tf_ajax_nonce' ) ) {
+	if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
 		return;
 	}
 	$meta = get_post_meta( $_POST['post_id'], 'tf_hotels_opt', true );
@@ -4081,7 +4081,7 @@ add_action( 'wp_ajax_nopriv_tf_tour_details_qv', 'tf_hotel_quickview_callback' )
 
 function tf_hotel_archive_popup_qv_callback(){
 	// Check nonce security
-	if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], 'tf_ajax_nonce' ) ) {
+	if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
 		return;
 	}
 	if( !empty($_POST['post_type']) && "tf_hotel"==$_POST['post_type']){
@@ -4187,7 +4187,7 @@ add_action( 'wp_ajax_nopriv_tf_hotel_search', 'tf_hotel_search_ajax_callback' );
 if ( ! function_exists( 'tf_hotel_search_ajax_callback' ) ) {
 	function tf_hotel_search_ajax_callback() {
 		// Check nonce security
-		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], 'tf_ajax_nonce' ) ) {
+		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
 			return;
 		}
 		$response = [
@@ -4260,7 +4260,7 @@ if ( ! function_exists( 'tf_hotel_booking_popup_callback' ) ) {
 
 	function tf_hotel_booking_popup_callback() {
 		// Check nonce security
-		if ( ! isset( $_POST['tf_room_booking_nonce'] ) || ! wp_verify_nonce( $_POST['tf_room_booking_nonce'], 'check_room_booking_nonce' ) ) {
+		if ( ! isset( $_POST['tf_room_booking_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_room_booking_nonce'])), 'check_room_booking_nonce' ) ) {
 			return;
 		}
 

@@ -8,12 +8,7 @@
                 <?php esc_html_e("Back", "tourfic"); ?>
             </a>
         </div>
-        <?php 
-        if ( ! wp_verify_nonce( esc_attr($_REQUEST['nonce']), 'tf_booking_details' ) ) {
-            // This nonce is not valid.
-            die( esc_html_e( 'Security Reasons', 'tourfic' ) ); 
-        }
-
+        <?php
         global $wpdb;
         $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s AND order_id = %s",sanitize_key( $_GET['book_id'] ), sanitize_key( $_GET['order_id'] ) ) );
         ?>
