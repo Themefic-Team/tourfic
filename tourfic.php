@@ -63,8 +63,8 @@ if ( ! defined( 'TOURFIC' ) ) {
  *
  * @since 1.0
  */
-if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
-	add_action( 'admin_notices', 'tf_is_woo' );
+//if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
+//	add_action( 'admin_notices', 'tf_is_woo' );
 
 	/**
 	 * Ajax install & activate WooCommerce
@@ -72,10 +72,10 @@ if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 	 * @since 1.0
 	 * @link https://developer.wordpress.org/reference/functions/wp_ajax_install_plugin/
 	 */
-	add_action( "wp_ajax_tf_ajax_install_plugin", "wp_ajax_install_plugin" );
+//	add_action( "wp_ajax_tf_ajax_install_plugin", "wp_ajax_install_plugin" );
 
-	return;
-}
+//	return;
+//}
 
 
 // Styles & Scripts

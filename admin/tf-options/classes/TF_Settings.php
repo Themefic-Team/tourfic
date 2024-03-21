@@ -306,13 +306,17 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								<p><?php esc_html_e("Total Bookings","tourfic"); ?></p>
 								<h3>
 									<?php
-									$tf_order_query_orders = wc_get_orders( array(
-											'limit'  => - 1,
-											'type'   => 'shop_order',
-											'status' => array( 'wc-completed' ),
-										)
-									);
-									echo count( $tf_order_query_orders );
+                                    if ( class_exists( 'WooCommerce' ) ) {
+                                        $tf_order_query_orders = wc_get_orders( array(
+                                                'limit'  => - 1,
+                                                'type'   => 'shop_order',
+                                                'status' => array( 'wc-completed' ),
+                                            )
+                                        );
+                                        echo count( $tf_order_query_orders );
+                                    } else {
+                                        echo '0';
+                                    }
 									?>
 								</h3>
 							</div>
