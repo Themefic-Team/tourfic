@@ -22,7 +22,7 @@ if( !empty($total_facilities_cat) && !empty($meta['hotel-facilities']) ){
             $f_icon_single  = ! empty( $total_facilities_cat[$catkey]['hotel_facilities_cat_icon'] ) ? esc_attr($total_facilities_cat[$catkey]['hotel_facilities_cat_icon']) : '';
             ?>
             <span class="single-facilities-title">
-            <?php echo !empty($f_icon_single) ? '<i class="' . esc_attr($f_icon_single) . '"></i>' : ''; ?> <?php echo esc_html($total_facilities_cat[$catkey]['hotel_facilities_cat_name']) ?? ''; ?>
+            <?php echo !empty($f_icon_single) ? '<i class="' . esc_attr($f_icon_single) . '"></i>' : ''; ?> <?php echo !empty($total_facilities_cat[$catkey]['hotel_facilities_cat_name']) ? esc_html($total_facilities_cat[$catkey]['hotel_facilities_cat_name']) : ''; ?>
             </span>
             <ul>
                 <?php 
