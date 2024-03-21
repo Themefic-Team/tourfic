@@ -1,8 +1,3 @@
-<?php 
-if ( !isset($_REQUEST['nonce']) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'updates' ) ) {
-    die( esc_html_e( 'Security Reasons', 'tourfic' ) );
-}
-?>
 <div class="tf-booking-header-filter">
     <div class="tf-left-search-filter">
         <div class="tf-bulk-action-form">
