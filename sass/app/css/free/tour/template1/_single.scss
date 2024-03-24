@@ -1444,6 +1444,7 @@
 
     @media #{$max767} {
         transform: rotateX(0);
+        z-index: 999;
     }
     &.active{
         transform: rotateX(0deg);
