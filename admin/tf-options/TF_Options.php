@@ -351,6 +351,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 						'installed'                        => esc_html__( 'Installed', 'tourfic' ),
 						'activated'                        => esc_html__( 'Activated', 'tourfic' ),
 						'install_failed'                   => esc_html__( 'Install failed', 'tourfic' ),
+						'is_woo_not_active'                => ( ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) || ! is_plugin_active( 'woocommerce/woocommerce.php' ) ),
 						'date_format_change_backend' 	   => $date_format_change,
 						'i18n'                             => array(
 							'no_services_selected' => esc_html__( 'Please select at least one service.', 'tourfic' ),

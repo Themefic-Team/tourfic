@@ -2781,7 +2781,7 @@ if ( ! function_exists( 'tf_terms_dropdown' ) ) {
 		} else {
 			$select .= esc_html__( "Invalid taxonomy!!", 'tourfic' );
 		}
-		echo wp_kses_post( $select );
+		echo wp_kses( $select, tf_custom_wp_kses_allow_tags() );
 	}
 }
 
@@ -3445,6 +3445,36 @@ function tf_custom_wp_kses_allow_tags() {
 		'stroke-linecap'  => true,
 		"stroke-linejoin" => true,
 	);
+    $allowed_tags['polygon'] = array(
+        'points' => true,
+        'fill'   => true,
+        'stroke' => true,
+        'stroke-width' => true,
+    );
+    $allowed_tags['circle'] = array(
+        'cx' => true,
+        'cy' => true,
+        'r'  => true,
+        'fill' => true,
+        'stroke' => true,
+        'stroke-width' => true,
+    );
+    $allowed_tags['line'] = array(
+        'x1' => true,
+        'y1' => true,
+        'x2' => true,
+        'y2' => true,
+        'stroke' => true,
+        'stroke-width' => true,
+    );
+    $allowed_tags['text'] = array(
+        'x' => true,
+        'y' => true,
+        'fill' => true,
+        'font-size' => true,
+        'font-family' => true,
+        'text-anchor' => true,
+    );
 	$allowed_tags['defs'] = array(
 		'd' => true
 	);

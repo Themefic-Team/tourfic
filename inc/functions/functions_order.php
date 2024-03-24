@@ -48,10 +48,8 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 
 		if ( !class_exists( 'WooCommerce' ) ) {
 			?>
-            <div class="tf-container">
-                <div class="tf-notice tf-notice-danger">
-					<?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>
-                </div>
+            <div class="tf-field-notice-inner tf-notice-danger" style="margin-top: 20px;">
+                <?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>
             </div>
 			<?php
 			return;
@@ -189,10 +187,8 @@ if ( ! function_exists( 'tf_hotel_booking_page_callback' ) ) {
 
 		if ( !class_exists( 'WooCommerce' ) ) {
 			?>
-            <div class="tf-container">
-                <div class="tf-notice tf-notice-danger">
-					<?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>
-                </div>
+            <div class="tf-field-notice-inner tf-notice-danger" style="margin-top: 20px;">
+				<?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>
             </div>
 			<?php
 			return;
@@ -326,10 +322,8 @@ if ( ! function_exists( 'tf_apartment_booking_page_callback' ) ) {
 
 		if ( !class_exists( 'WooCommerce' ) ) {
 			?>
-            <div class="tf-container">
-                <div class="tf-notice tf-notice-danger">
-					<?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>
-                </div>
+            <div class="tf-field-notice-inner tf-notice-danger" style="margin-top: 20px;">
+				<?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>
             </div>
 			<?php
 			return;

@@ -1,6 +1,17 @@
 (function ($) {
     $(document).ready(function () {
 
+        // Create an instance of Notyf
+        const notyf = new Notyf({
+            ripple: true,
+            dismissable: true,
+            duration: 3000,
+            position: {
+                x: 'right',
+                y: 'bottom',
+            },
+        });
+
         //if body has class .tourfic-settings_page_tf-setup-wizard then add background-color: #ecf5ff; to html
         if ($('body').hasClass('tourfic-settings_page_tf-setup-wizard')) {
             $('html').css('padding', '0');
@@ -9,7 +20,11 @@
         $(document).on('click', '.tf-setup-start-btn', function (e) {
             e.preventDefault();
             $('.tf-welcome-step').hide();
-            $('.tf-setup-step-1').fadeIn(600);
+            if(tf_admin_params.is_woo_not_active) {
+                $('.tf-setup-step-1').fadeIn(600);
+            } else {
+                $('.tf-setup-step-2').fadeIn(600);
+            }
         });
 
         $(document).on('click', '.tf-setup-next-btn, .tf-setup-skip-btn', function (e) {
@@ -20,7 +35,7 @@
             let nextStep = step + 1;
 
             //min one service required
-            if (step === 1 && $(this).hasClass('tf-setup-next-btn')) {
+            if (step === 2 && $(this).hasClass('tf-setup-next-btn')) {
                 let services = $('input[name="tf-services[]"]:checked').length;
 
                 if (!services) {
@@ -85,9 +100,15 @@
             e.preventDefault();
             let step = $(this).closest('.tf-setup-step-container').data('step');
             let prevStep = step - 1;
-            $('.tf-setup-step-' + step).fadeOut(300, function () {
-                $('.tf-setup-step-' + prevStep).fadeIn(300);
-            });
+            if(step === 2 && !tf_admin_params.is_woo_not_active) {
+                $('.tf-setup-step-2').fadeOut(300, function () {
+                    $('.tf-setup-step-0').fadeIn(300);
+                });
+            } else {
+                $('.tf-setup-step-' + step).fadeOut(300, function () {
+                    $('.tf-setup-step-' + prevStep).fadeIn(300);
+                });
+            }
         });
 
         /*
@@ -245,6 +266,71 @@
             });
         });
 
+        /*
+        * WooCommerce Plugin Install
+        * @auther: Foysal
+        */
+        $(document).on('click', '.tf-install-woo-btn', function (e) {
+            e.preventDefault();
+            let btn = $(this);
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: "tf_ajax_install_woo",
+                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    slug: 'woocommerce',
+                },
+                beforeSend: function () {
+                    btn.text(tf_admin_params.installing)
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function(response) {
+                    btn.text(tf_admin_params.activating);
+                    $('.tf-active-woo-btn').click();
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        /*
+        * WooCommerce Plugin Activate
+        * @auther: Foysal
+        */
+        $(document).on('click', '.tf-active-woo-btn', function (e) {
+            e.preventDefault();
+            let btn = $(this);
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: "tf_ajax_activate_woo",
+                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    slug: 'woocommerce',
+                },
+                beforeSend: function () {
+                    btn.text(tf_admin_params.activating)
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function(response) {
+                    notyf.success(response.data);
+
+                    setTimeout(function(){
+                        btn.closest('.tf-setup-step-layout').find('.tf-setup-next-btn').click();
+                    }, 500);
+
+                    btn.removeClass('tf-btn-loading');
+                    $('.tf-install-woo-btn').removeClass('tf-btn-loading');
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
     });
 
 })(jQuery);

@@ -31,6 +31,8 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			add_action( 'in_admin_header', [ $this, 'remove_notice' ], 1000 );
             add_action( 'admin_enqueue_scripts', array( $this, 'tf_setup_wizard_admin_enqueue_scripts' ),9 );
 
+            add_action( 'wp_ajax_tf_ajax_install_woo', 'wp_ajax_install_plugin' );
+            add_action( 'wp_ajax_tf_ajax_activate_woo', array( $this, 'tf_ajax_activate_woo_callback' ) );
             add_action( 'wp_ajax_tf_theme_installing', 'wp_ajax_install_theme' );
             add_action( 'wp_ajax_tf_travelfic_toolkit_installing', 'wp_ajax_install_plugin' );
             add_action( 'wp_ajax_tf_travelfic_toolkit_activate', array( $this, 'tf_travelfic_toolkit_activate_callabck' ) );
@@ -92,6 +94,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <form method="post" id="tf-setup-wizard-form" data-skip-steps="">
 						<?php
 						$this->tf_setup_welcome_step();
+						$this->tf_install_woocommerce();
 						$this->tf_setup_step_one();
 						$this->tf_setup_step_travelfic();
 						$this->tf_setup_step_two();
@@ -141,12 +144,67 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		}
 
 		/**
+		 * WooCommerce Check
+		 */
+		private function tf_install_woocommerce() {
+			if ( current_user_can( 'activate_plugins' ) ) {
+                if ( ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) || ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
+                    ?>
+                    <div class="tf-setup-step-container tf-setup-step-1 <?php echo self::$current_step == 'step_1' ? 'active' : ''; ?>" data-step="1">
+                        <div class="back-to-dashboard">
+                            <a href="#" class="tf-back-btn tf-setup-prev-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 19L5 12L12 5" stroke="#003C79" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M19 12H5" stroke="#003C79" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span><?php esc_html_e( 'Back', 'tourfic' ) ?></span>
+                            </a>
+                        </div>
+                        <section class="tf-setup-step-layout">
+                            <?php $this->tf_setup_wizard_steps_header() ?>
+                            <div class="welcome-img"><img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL) . 'images/woocommerce.png' ?>" alt="<?php esc_attr_e( 'Woocommerce', 'tourfic' ) ?>"></div>
+                            <h1 class="tf-setup-step-title"><?php esc_html_e( 'Install WooCommerce', 'tourfic' ) ?></h1>
+                            <p class="tf-setup-step-desc"><?php esc_html_e( 'Tourfic requires WooCommerce to be installed and activated.', 'tourfic' ) ?></p>
+
+                            <div class="tf-setup-action-btn-wrapper">
+                                <div class="tf-setup-action-btn-next">
+                                    <?php if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) && ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) : ?>
+                                        <button type="button" class="tf-install-woo-btn tf-quick-setup-btn" data-install="woocommerce">
+                                            <span><?php esc_html_e( 'Install WooCommerce', 'tourfic' ) ?></span>
+                                        </button>
+
+                                        <button type="button" class="tf-active-woo-btn tf-quick-setup-btn" style="display: none;">
+                                            <span><?php esc_html_e( 'WooCommerce Active', 'tourfic' ) ?></span>
+                                        </button>
+                                    <?php elseif( ! is_plugin_active( 'woocommerce/woocommerce.php' ) && file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) : ?>
+                                        <button type="button" class="tf-active-woo-btn tf-quick-setup-btn" data-install="woocommerce">
+                                            <span><?php esc_html_e( 'Activate WooCommerce', 'tourfic' ) ?></span>
+                                        </button>
+                                    <?php endif; ?>
+
+                                    <button type="button" class="tf-setup-next-btn tf-quick-setup-btn" style="display: none">
+                                        <span><?php esc_html_e( 'Next', 'tourfic' ) ?></span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M5 12H19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M12 5L19 12L12 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <?php
+                }
+			}
+		}
+
+		/**
 		 * Setup step one
 		 */
 		private function tf_setup_step_one() {
 			$tf_disable_services = ! empty( tfopt( 'disable-services' ) ) ? tfopt( 'disable-services' ) : '';
 			?>
-            <div class="tf-setup-step-container tf-setup-step-1 <?php echo self::$current_step == 'step_1' ? 'active' : ''; ?>" data-step="1">
+            <div class="tf-setup-step-container tf-setup-step-2 <?php echo self::$current_step == 'step_2' ? 'active' : ''; ?>" data-step="2">
                 <div class="back-to-dashboard">
                     <a href="#" class="tf-back-btn tf-setup-prev-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -223,7 +281,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		 */
 		private function tf_setup_step_travelfic() {
 			?>
-            <div class="tf-setup-step-container tf-setup-step-2 <?php echo self::$current_step == 'step_2' ? 'active' : ''; ?>" data-step="2">
+            <div class="tf-setup-step-container tf-setup-step-3 <?php echo self::$current_step == 'step_3' ? 'active' : ''; ?>" data-step="3">
                 <div class="back-to-dashboard">
                     <a href="#" class="tf-back-btn tf-setup-prev-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -303,7 +361,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
             $tf_wishlist_page      = ! empty( tfopt( 'wl-page' ) ) ? tfopt( 'wl-page' ) : '';
 			$tf_review_autopublish = ! empty( tfopt( 'r-auto-publish' ) ) ? tfopt( 'r-auto-publish' ) : '';
 			?>
-            <div class="tf-setup-step-container tf-setup-step-3 <?php echo self::$current_step == 'step_3' ? 'active' : ''; ?>" data-step="3">
+            <div class="tf-setup-step-container tf-setup-step-4 <?php echo self::$current_step == 'step_4' ? 'active' : ''; ?>" data-step="4">
                 <div class="back-to-dashboard">
                     <a href="#" class="tf-back-btn tf-setup-prev-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -408,7 +466,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			$tf_apartment_share  = ! empty( tfopt( 'disable-apartment-share' ) ) ? tfopt( 'disable-apartment-share' ) : '';
 			$tf_apartment_slug   = ! empty( get_option( 'apartment_slug' ) ) ? get_option( 'apartment_slug' ) : 'apartments';
 			?>
-            <div class="tf-setup-step-container tf-setup-step-4 <?php echo self::$current_step == 'step_4' ? 'active' : ''; ?>" data-step="4">
+            <div class="tf-setup-step-container tf-setup-step-5 <?php echo self::$current_step == 'step_5' ? 'active' : ''; ?>" data-step="5">
                 <div class="back-to-dashboard">
                     <a href="#" class="tf-back-btn tf-setup-prev-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -570,7 +628,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			$tf_apartment_single_template  = ! empty( tf_data_types( tfopt( 'tf-template' ) )['single-apartment'] ) ? tf_data_types( tfopt( 'tf-template' ) )['single-apartment'] : 'default';
 			$tf_apartment_archive_template = ! empty( tf_data_types( tfopt( 'tf-template' ) )['apartment-archive'] ) ? tf_data_types( tfopt( 'tf-template' ) )['apartment-archive'] : 'default';
 			?>
-            <div class="tf-setup-step-container tf-setup-step-5 <?php echo self::$current_step == 'step_5' ? 'active' : ''; ?>" data-step="5">
+            <div class="tf-setup-step-container tf-setup-step-6 <?php echo self::$current_step == 'step_6' ? 'active' : ''; ?>" data-step="6">
 
                 <div class="back-to-dashboard">
                     <a href="#" class="tf-back-btn tf-setup-prev-btn">
@@ -835,7 +893,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		 */
 		private function tf_setup_finish_step() {
 			?>
-            <div class="tf-setup-step-container tf-setup-content-layout tf-setup-step-6 tf-finish-step <?php echo self::$current_step == 'finish' ? 'active' : ''; ?>" data-step="6">
+            <div class="tf-setup-step-container tf-setup-content-layout tf-setup-step-7 tf-finish-step <?php echo self::$current_step == 'finish' ? 'active' : ''; ?>" data-step="7">
                 <div class="back-to-dashboard">
                     <a href="#" class="tf-back-btn tf-setup-prev-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -887,7 +945,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <div class="tf-steps-item-container">
                         <div class="tf-steps-item-icon">
                             <span class="tf-steps-icon">
-                                <?php echo $active_step == 1 ? wp_kses_post($active_icon) : wp_kses_post($finish_icon); ?>
+                                <?php echo $active_step == 1 ? wp_kses($active_icon, tf_custom_wp_kses_allow_tags()) : wp_kses($finish_icon, tf_custom_wp_kses_allow_tags()); ?>
                             </span>
                         </div>
                     </div>
@@ -897,7 +955,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <div class="tf-steps-item-container">
                         <div class="tf-steps-item-icon">
                             <span class="tf-steps-icon">
-                                <?php echo $active_step == 2 ? wp_kses_post($active_icon) : ( $active_step > 2 ? wp_kses_post($finish_icon) : wp_kses_post($inactive_icon) ); ?>
+                                <?php echo $active_step == 2 ? wp_kses($active_icon, tf_custom_wp_kses_allow_tags()) : ( $active_step > 2 ? wp_kses($finish_icon, tf_custom_wp_kses_allow_tags()) : wp_kses($inactive_icon, tf_custom_wp_kses_allow_tags()) ); ?>
                             </span>
                         </div>
                     </div>
@@ -906,7 +964,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <div class="tf-steps-item-container">
                         <div class="tf-steps-item-icon">
                             <span class="tf-steps-icon">
-                                <?php echo $active_step == 3 ? wp_kses_post($active_icon) : ( $active_step > 3 ? wp_kses_post($finish_icon) : wp_kses_post($inactive_icon) ); ?>
+                                <?php echo $active_step == 3 ? wp_kses($active_icon, tf_custom_wp_kses_allow_tags()) : ( $active_step > 3 ? wp_kses($finish_icon, tf_custom_wp_kses_allow_tags()) : wp_kses($inactive_icon, tf_custom_wp_kses_allow_tags()) ); ?>
                             </span>
                         </div>
                     </div>
@@ -916,7 +974,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <div class="tf-steps-item-container">
                         <div class="tf-steps-item-icon">
                             <span class="tf-steps-icon">
-                                <?php echo $active_step == 4 ? wp_kses_post($active_icon) : ( $active_step > 4 ? wp_kses_post($finish_icon) : wp_kses_post($inactive_icon) ); ?>
+                                <?php echo $active_step == 4 ? wp_kses($active_icon, tf_custom_wp_kses_allow_tags()) : ( $active_step > 4 ? wp_kses($finish_icon, tf_custom_wp_kses_allow_tags()) : wp_kses($inactive_icon, tf_custom_wp_kses_allow_tags()) ); ?>
                             </span>
                         </div>
                     </div>
@@ -926,7 +984,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <div class="tf-steps-item-container">
                         <div class="tf-steps-item-icon">
                             <span class="tf-steps-icon">
-                                <?php echo $active_step == 5 ? wp_kses_post($active_icon) : ( $active_step > 5 ? wp_kses_post($finish_icon) : wp_kses_post($inactive_icon) ); ?>
+                                <?php echo $active_step == 5 ? wp_kses($active_icon, tf_custom_wp_kses_allow_tags()) : ( $active_step > 5 ? wp_kses($finish_icon, tf_custom_wp_kses_allow_tags()) : wp_kses($inactive_icon, tf_custom_wp_kses_allow_tags()) ); ?>
                             </span>
                         </div>
                     </div>
@@ -1087,6 +1145,26 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
             }
             switch_theme($theme_slug);
             wp_send_json_success('Theme activated successfully.');
+        }
+
+        public function tf_ajax_activate_woo_callback(){
+	        check_ajax_referer('updates', '_ajax_nonce');
+	        // Check user capabilities
+	        if (!current_user_can('install_plugins')) {
+		        wp_send_json_error('Permission denied');
+	        }
+
+	        if(is_plugin_active( 'woocommerce/woocommerce.php' )){
+		        wp_send_json_success('WooCommerce activated successfully.');
+	        }else{
+		        $result = activate_plugin('woocommerce/woocommerce.php');
+		        if (is_wp_error($result)) {
+			        wp_send_json_error('Error: ' . $result->get_error_message());
+		        } else {
+			        wp_send_json_success('WooCommerce activated successfully!');
+		        }
+	        }
+	        wp_die();
         }
     }
 }
