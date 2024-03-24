@@ -392,7 +392,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                         </div>
                     <?php else : ?>
                         <div class="tf-field-notice-inner tf-notice-danger" style="margin-top: 20px;">
-                            <?php esc_html_e( 'Please install and activate WooCommerce plugin to see the reports.', 'tourfic' ); ?>
+                            <?php esc_html_e( 'Please install and activate WooCommerce plugin to view reports.', 'tourfic' ); ?>
                         </div>
                     <?php endif; ?>
 				</div>
