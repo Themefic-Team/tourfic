@@ -9156,6 +9156,7 @@ div#tf-contact-info {
 @media only screen and (max-width: 767.98px) {
   .tf-bottom-booking-bar {
     transform: rotateX(0);
+    z-index: 999;
   }
 }
 .tf-bottom-booking-bar.active {

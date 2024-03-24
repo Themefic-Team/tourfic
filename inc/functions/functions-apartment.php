@@ -1678,7 +1678,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
                             <div class="featuredRooms">
                                 <div class="prco-ltr-right-align-helper">
                                     <div class="tf-archive-shortdesc">
-										<?php echo esc_html( substr( wp_strip_all_tags( get_the_content($post_id) ), 0, 160 ) ) . '...'; ?>
+										<?php echo esc_html( substr( wp_strip_all_tags( get_the_content( get_the_ID() ) ), 0, 160 ) ) . '...'; ?>
                                     </div>
                                 </div>
                                 <div class="roomNameInner">
