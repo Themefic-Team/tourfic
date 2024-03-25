@@ -1625,7 +1625,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
                 <label class="tf_label-row">
                     <div class="tf_form-inner" <?php echo ($post_type == 'tf_hotel' && tfopt( "hide_hotel_location_search" ) == 1 && tfopt( "required_location_hotel_search" ) != 1) || ($post_type == 'tf_tours' && tfopt( "hide_tour_location_search" ) == 1 && tfopt( "required_location_tour_search" ) != 1 ) ? 'style="display:none"' : ''?>>
                         <i class="fas fa-map-marker-alt"></i>
-						
+
 						<?php if(is_post_type_archive("tf_hotel" )) { ?>
 							<input type="text" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo $place; ?>" class="" placeholder="<?php echo $place_text; ?>" value="<?php echo ! empty( $taxonomy_name ) ? $taxonomy_name : ''; ?>">
 						<?php } elseif(is_post_type_archive("tf_tours")) { ?>
@@ -1633,7 +1633,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 						<?php } else { ?>
 							<input type="text" required="" id="<?php echo $place; ?>" class="" placeholder="<?php echo $place_text; ?>" value="<?php echo ! empty( $taxonomy_name ) ? $taxonomy_name : ''; ?>">
 						<?php } ?>
-                        
+
                         <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? $taxonomy_slug : ''; ?>"/>
                     </div>
                 </label>

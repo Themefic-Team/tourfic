@@ -674,7 +674,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                     <div class="tf-slider-item tf-post-box-lists">
                                         <div class="tf-post-single-box">
                                             <div class="tf-image-data">
-                                                <img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) ) ? get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) : TF_ASSETS_APP_URL . '/images/feature-default.jpg'; ?>"
+                                                <img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) ) ? get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) : TF_APP_ASSETS_URL . '/images/feature-default.jpg'; ?>"
                                                     alt="">
                                                 <div class="tf-meta-data-price">
                                                     <?php _e( "From", "tourfic" ); ?>

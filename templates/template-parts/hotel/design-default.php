@@ -221,9 +221,9 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                                 <div class="single-slider-wrapper fl-wrap">
                                     <div class="tf_slider-for fl-wrap">
 
-                                        <a href="<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) : TF_ASSETS_APP_URL . '/images/feature-default.jpg'; ?>"
+                                        <a href="<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) : TF_APP_ASSETS_URL . '/images/feature-default.jpg'; ?>"
                                            class="slick-slide-item-link" data-fancybox="hotel-gallery">
-                                            <img src="<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) : TF_ASSETS_APP_URL . '/images/feature-default.jpg'; ?>"
+                                            <img src="<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) : TF_APP_ASSETS_URL . '/images/feature-default.jpg'; ?>"
                                                  alt="">
                                         </a>
 
@@ -478,7 +478,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                     <div class="tf-room-table hotel-room-wrap">
                         <div id="tour_room_details_loader">
                             <div id="tour-room-details-loader-img">
-                                <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+                                <img src="<?php echo TF_APP_ASSETS_URL ?>images/loader.gif" alt="">
                             </div>
                         </div>
                         <table class="availability-table" cellpadding="0" cellspacing="0">

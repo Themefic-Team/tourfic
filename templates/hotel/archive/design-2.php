@@ -51,7 +51,7 @@
                         <!-- Loader Image -->
                         <div id="tour_room_details_loader">
                             <div id="tour-room-details-loader-img">
-                                <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+                                <img src="<?php echo TF_APP_ASSETS_URL ?>images/loader.gif" alt="">
                             </div>
                         </div>
                         

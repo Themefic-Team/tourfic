@@ -1,7 +1,7 @@
 <!-- Tour Gallery Section -->
 <div class="tf-hero-gallery tf-mb-30 tf-template-section">
 <div class="tf-gallery-featured">
-    <img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : TF_ASSETS_APP_URL.'/images/feature-default.jpg'; ?>" alt="<?php _e( 'Tour Image', 'tourfic' ); ?>">
+    <img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : TF_APP_ASSETS_URL.'/images/feature-default.jpg'; ?>" alt="<?php _e( 'Tour Image', 'tourfic' ); ?>">
     <div class="featured-meta-gallery-videos">
         <div class="featured-column tf-gallery-box">
             <?php 

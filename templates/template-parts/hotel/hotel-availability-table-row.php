@@ -486,7 +486,7 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
             </div>
             <div class="tf-available-room-select">
                 <span><?php _e("Select your Room", "tourfic"); ?></span>
-                <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg);">
+                <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo TF_APP_ASSETS_URL ?>images/select-arrow-dark.svg);">
                     <?php
                         foreach ( range( 0, $num_room_available) as $value ) {
                             echo '<option>' . $value . '</option>';
@@ -767,7 +767,7 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
             
             <div class="tf-available-room-select">
                 <span><?php _e("Select your Room", "tourfic"); ?></span>
-                <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg);">
+                <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo TF_APP_ASSETS_URL ?>images/select-arrow-dark.svg);">
                     <?php
                         foreach ( range( 0, $num_room_available) as $value ) {
                             echo '<option>' . $value . '</option>';
