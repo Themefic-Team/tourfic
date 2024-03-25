@@ -1446,6 +1446,9 @@ Steps
   padding-right: 40px;
   position: relative;
 }
+.tf-setup-step-container .tf-quick-setup-btn.tf-btn-loading {
+  padding-right: 50px !important;
+}
 .tf-setup-step-container .tf-btn-loading:before {
   content: "";
   position: absolute;

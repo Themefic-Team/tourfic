@@ -306,13 +306,17 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								<p><?php esc_html_e("Total Bookings","tourfic"); ?></p>
 								<h3>
 									<?php
-									$tf_order_query_orders = wc_get_orders( array(
-											'limit'  => - 1,
-											'type'   => 'shop_order',
-											'status' => array( 'wc-completed' ),
-										)
-									);
-									echo count( $tf_order_query_orders );
+                                    if ( class_exists( 'WooCommerce' ) ) {
+                                        $tf_order_query_orders = wc_get_orders( array(
+                                                'limit'  => - 1,
+                                                'type'   => 'shop_order',
+                                                'status' => array( 'wc-completed' ),
+                                            )
+                                        );
+                                        echo count( $tf_order_query_orders );
+                                    } else {
+                                        echo '0';
+                                    }
 									?>
 								</h3>
 							</div>
@@ -344,43 +348,53 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					</div>
 					<div class="tf-report-filter">
 						<h2><?php esc_html_e("Reports","tourfic"); ?></h2>
-						<div class="tf-dates-filter">
-							<div class="tf-month-filter">
-								<span><?php esc_html_e("Year","tourfic"); ?></span>
-								<select name="tf-year-report" id="tf-year-report">
-									<option value="24"><?php esc_html_e("2024","tourfic"); ?></option>
-									<option value="23"><?php esc_html_e("2023","tourfic"); ?></option>
-									<option value="22"><?php esc_html_e("2022","tourfic"); ?></option>
-									<option value="21"><?php esc_html_e("2021","tourfic"); ?></option>
-									<option value="20"><?php esc_html_e("2020","tourfic"); ?></option>
-									<option value="19"><?php esc_html_e("2019","tourfic"); ?></option>
-									<option value="18"><?php esc_html_e("2018","tourfic"); ?></option>
-									<option value="17"><?php esc_html_e("2017","tourfic"); ?></option>
-								</select>
-							</div>
-							<div class="tf-month-filter">
-								<span><?php esc_html_e("Month","tourfic"); ?></span>
-								<select name="tf-month-report" id="tf-month-report">
-									<option value=""><?php esc_html_e("Select Month","tourfic"); ?></option>
-									<option value="1"><?php esc_html_e("January","tourfic"); ?></option>
-									<option value="2"><?php esc_html_e("February","tourfic"); ?></option>
-									<option value="3"><?php esc_html_e("March","tourfic"); ?></option>
-									<option value="4"><?php esc_html_e("April","tourfic"); ?></option>
-									<option value="5"><?php esc_html_e("May","tourfic"); ?></option>
-									<option value="6"><?php esc_html_e("June","tourfic"); ?></option>
-									<option value="7"><?php esc_html_e("July","tourfic"); ?></option>
-									<option value="8"><?php esc_html_e("August","tourfic"); ?></option>
-									<option value="9"><?php esc_html_e("September","tourfic"); ?></option>
-									<option value="10"><?php esc_html_e("October","tourfic"); ?></option>
-									<option value="11"><?php esc_html_e("November","tourfic"); ?></option>
-									<option value="12"><?php esc_html_e("December","tourfic"); ?></option>
-								</select>
-							</div>
-						</div>
+
+                        <?php if(class_exists('WooCommerce')): ?>
+                            <div class="tf-dates-filter">
+                                <div class="tf-month-filter">
+                                    <span><?php esc_html_e("Year","tourfic"); ?></span>
+                                    <select name="tf-year-report" id="tf-year-report">
+                                        <option value="24"><?php esc_html_e("2024","tourfic"); ?></option>
+                                        <option value="23"><?php esc_html_e("2023","tourfic"); ?></option>
+                                        <option value="22"><?php esc_html_e("2022","tourfic"); ?></option>
+                                        <option value="21"><?php esc_html_e("2021","tourfic"); ?></option>
+                                        <option value="20"><?php esc_html_e("2020","tourfic"); ?></option>
+                                        <option value="19"><?php esc_html_e("2019","tourfic"); ?></option>
+                                        <option value="18"><?php esc_html_e("2018","tourfic"); ?></option>
+                                        <option value="17"><?php esc_html_e("2017","tourfic"); ?></option>
+                                    </select>
+                                </div>
+                                <div class="tf-month-filter">
+                                    <span><?php esc_html_e("Month","tourfic"); ?></span>
+                                    <select name="tf-month-report" id="tf-month-report">
+                                        <option value=""><?php esc_html_e("Select Month","tourfic"); ?></option>
+                                        <option value="1"><?php esc_html_e("January","tourfic"); ?></option>
+                                        <option value="2"><?php esc_html_e("February","tourfic"); ?></option>
+                                        <option value="3"><?php esc_html_e("March","tourfic"); ?></option>
+                                        <option value="4"><?php esc_html_e("April","tourfic"); ?></option>
+                                        <option value="5"><?php esc_html_e("May","tourfic"); ?></option>
+                                        <option value="6"><?php esc_html_e("June","tourfic"); ?></option>
+                                        <option value="7"><?php esc_html_e("July","tourfic"); ?></option>
+                                        <option value="8"><?php esc_html_e("August","tourfic"); ?></option>
+                                        <option value="9"><?php esc_html_e("September","tourfic"); ?></option>
+                                        <option value="10"><?php esc_html_e("October","tourfic"); ?></option>
+                                        <option value="11"><?php esc_html_e("November","tourfic"); ?></option>
+                                        <option value="12"><?php esc_html_e("December","tourfic"); ?></option>
+                                    </select>
+                                </div>
+                            </div>
+                        <?php endif; ?>
 					</div>
-					<div class="tf-order-report">
-						<canvas id="tf_months" width="800" height="450"></canvas>
-					</div>
+
+                    <?php if(class_exists('WooCommerce')): ?>
+                        <div class="tf-order-report">
+                            <canvas id="tf_months" width="800" height="450"></canvas>
+                        </div>
+                    <?php else : ?>
+                        <div class="tf-field-notice-inner tf-notice-danger" style="margin-top: 20px;">
+                            <?php esc_html_e( 'Please install and activate WooCommerce plugin to view reports.', 'tourfic' ); ?>
+                        </div>
+                    <?php endif; ?>
 				</div>
 
 				<!-- dashboard-performance-section -->

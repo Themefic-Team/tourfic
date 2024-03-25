@@ -46,6 +46,15 @@ if ( ! function_exists( 'tf_add_order_submenu' ) ) {
 if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 	function tf_tour_booking_page_callback() {
 
+		if ( !class_exists( 'WooCommerce' ) ) {
+			?>
+            <div class="tf-field-notice-inner tf-notice-danger" style="margin-top: 20px;">
+                <?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>
+            </div>
+			<?php
+			return;
+		}
+
 		if(!empty($_GET['order_id']) && !empty($_GET['action']) && !empty($_GET['book_id'])){
 			/**
 			 * Booking Details showing new template
@@ -176,6 +185,15 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 if ( ! function_exists( 'tf_hotel_booking_page_callback' ) ) {
 	function tf_hotel_booking_page_callback() {
 
+		if ( !class_exists( 'WooCommerce' ) ) {
+			?>
+            <div class="tf-field-notice-inner tf-notice-danger" style="margin-top: 20px;">
+				<?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>
+            </div>
+			<?php
+			return;
+		}
+
 		if(!empty($_GET['order_id']) && !empty($_GET['action']) && !empty($_GET['book_id'])){
 			/**
 			 * Booking Details showing new template
@@ -301,6 +319,15 @@ if ( ! function_exists( 'tf_hotel_booking_page_callback' ) ) {
  */
 if ( ! function_exists( 'tf_apartment_booking_page_callback' ) ) {
 	function tf_apartment_booking_page_callback() {
+
+		if ( !class_exists( 'WooCommerce' ) ) {
+			?>
+            <div class="tf-field-notice-inner tf-notice-danger" style="margin-top: 20px;">
+				<?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>
+            </div>
+			<?php
+			return;
+		}
 
 		if(!empty($_GET['order_id']) && !empty($_GET['action']) && !empty($_GET['book_id'])){
 			/**

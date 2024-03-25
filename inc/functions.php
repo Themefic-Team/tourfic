@@ -10,7 +10,9 @@ if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-product-extend.php' ) 
 		require_once TF_INC_PATH . 'functions/woocommerce/wc-product-extend.php';
 	}
 
-	add_action( 'init', 'fida' );
+	if ( class_exists( 'WooCommerce' ) ) {
+		add_action( 'init', 'fida' );
+	}
 } else {
 	tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-product-extend.php' );
 }
@@ -125,10 +127,12 @@ if( file_exists( TF_INC_PATH . 'functions/functions_duplicator.php' ) ){
 /**
  * Include Functions Vat
  */
-if( file_exists( TF_INC_PATH . 'functions/functions_vat.php' ) ){
-	require_once TF_INC_PATH . 'functions/functions_vat.php';
-}else{
-	tf_file_missing( TF_INC_PATH . 'functions/functions_vat.php' );
+if ( class_exists( 'WooCommerce' ) ) {
+	if ( file_exists( TF_INC_PATH . 'functions/functions_vat.php' ) ) {
+		require_once TF_INC_PATH . 'functions/functions_vat.php';
+	} else {
+		tf_file_missing( TF_INC_PATH . 'functions/functions_vat.php' );
+	}
 }
 
 /**
@@ -2777,7 +2781,7 @@ if ( ! function_exists( 'tf_terms_dropdown' ) ) {
 		} else {
 			$select .= esc_html__( "Invalid taxonomy!!", 'tourfic' );
 		}
-		echo wp_kses_post( $select );
+		echo wp_kses( $select, tf_custom_wp_kses_allow_tags() );
 	}
 }
 
@@ -3441,6 +3445,36 @@ function tf_custom_wp_kses_allow_tags() {
 		'stroke-linecap'  => true,
 		"stroke-linejoin" => true,
 	);
+    $allowed_tags['polygon'] = array(
+        'points' => true,
+        'fill'   => true,
+        'stroke' => true,
+        'stroke-width' => true,
+    );
+    $allowed_tags['circle'] = array(
+        'cx' => true,
+        'cy' => true,
+        'r'  => true,
+        'fill' => true,
+        'stroke' => true,
+        'stroke-width' => true,
+    );
+    $allowed_tags['line'] = array(
+        'x1' => true,
+        'y1' => true,
+        'x2' => true,
+        'y2' => true,
+        'stroke' => true,
+        'stroke-width' => true,
+    );
+    $allowed_tags['text'] = array(
+        'x' => true,
+        'y' => true,
+        'fill' => true,
+        'font-size' => true,
+        'font-family' => true,
+        'text-anchor' => true,
+    );
 	$allowed_tags['defs'] = array(
 		'd' => true
 	);

@@ -5,6 +5,18 @@
 
 get_header();
 
+if ( !class_exists( 'WooCommerce' ) ) {
+	?>
+	<div class="tf-container">
+		<div class="tf-notice tf-notice-danger">
+			<?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>
+		</div>
+	</div>
+	<?php
+	get_footer();
+	return;
+}
+
 /**
  * Query start
  */
