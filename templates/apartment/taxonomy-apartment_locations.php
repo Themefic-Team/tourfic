@@ -6,6 +6,18 @@
 
 get_header();
 
+if ( class_exists( 'WooCommerce' ) ) {
+    ?>
+    <div class="tf-container">
+        <div class="tf-notice tf-notice-danger">
+            <?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>
+        </div>
+    </div>
+    <?php
+    get_footer();
+    return;
+}
+
 $term = get_queried_object();
 $post_type = 'tf_apartment';
 $taxonomy = $term->taxonomy;
@@ -26,7 +38,7 @@ if( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template=="design
         <div class="tf-container">
             <div class="tf-hero-content tf-archive-hero-content">
                 <div class="tf-head-title">
-                    <h1><?php echo $taxonomy_name; ?></h1>
+                    <h1><?php echo esc_html( $taxonomy_name ); ?></h1>
                 </div>
             </div>
         </div>
@@ -42,11 +54,11 @@ if( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template=="design
                 
                 <div class="tf-details-left tf-result-previews">
                     <span class="tf-modify-search-btn">
-                        <?php _e("Modify search", "tourfic"); ?>
+                        <?php esc_html_e("Modify search", "tourfic"); ?>
                     </span>
                     <!-- Booking form Start -->
                     <div class="tf-archive-search-form tf-booking-form-wrapper">
-                        <form action="<?php echo tf_booking_search_action(); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
+                        <form action="<?php echo esc_url( tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
                             <?php tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug); ?>
                         </form>
                     </div>
@@ -56,8 +68,8 @@ if( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template=="design
                 <div class="tf-details-right tf-sitebar-widgets tf-archive-right">
                     <div class="tf-filter-wrapper">
                         <div class="tf-filter-title">
-                            <h2 class="tf-section-title"><?php _e("Filter", "tourfic"); ?></h2>
-                            <button class="filter-reset-btn"><?php _e("Reset", "tourfic"); ?></button>
+                            <h2 class="tf-section-title"><?php esc_html_e("Filter", "tourfic"); ?></h2>
+                            <button class="filter-reset-btn"><?php esc_html_e("Reset", "tourfic"); ?></button>
                         </div>   
                         <?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
                         <div id="tf__booking_sidebar">
@@ -91,7 +103,7 @@ if( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template=="design
 <div class="tf-main-wrapper" data-fullwidth="true">
 	<?php do_action( 'tf_before_container' ); ?>
 	<div class="tf-container">
-		<h3><?php echo $taxonomy_name; ?></h3>
+		<h3><?php echo esc_html( $taxonomy_name ); ?></h3>
 		<div class="search-result-inner">
 
 			<div class="tf-search-left">

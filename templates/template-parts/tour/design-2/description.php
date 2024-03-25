@@ -2,19 +2,19 @@
 <div class="tf-details-menu">
     <ul>
         <li><a class="tf-hashlink" href="#tf-tour-overview">
-            <?php _e("Overview", "tourfic"); ?>
+            <?php esc_html_e("Overview", "tourfic"); ?>
         </a></li>
         <li><a href="#tf-tour-itinerary">
-            <?php _e("Tour Plan", "tourfic"); ?>
+            <?php esc_html_e("Tour Plan", "tourfic"); ?>
         </a></li>
         <li><a href="#tf-tour-faq">
-            <?php _e("FAQ's", "tourfic"); ?>
+            <?php esc_html_e("FAQ's", "tourfic"); ?>
         </a></li>
         <li><a href="#tf-tour-policies">
-            <?php _e("Policies", "tourfic"); ?>
+            <?php esc_html_e("Policies", "tourfic"); ?>
         </a></li>
         <li><a href="#tf-tour-reviews">
-            <?php _e("Reviews", "tourfic"); ?>
+            <?php esc_html_e("Reviews", "tourfic"); ?>
         </a></li>
     </ul>
 </div>
@@ -27,7 +27,7 @@
         <div class="tf-short-description">
             <?php 
             if(strlen(get_the_content()) > 300 ){
-                echo strip_tags(tourfic_character_limit_callback(get_the_content(), 300)) . '<span class="tf-see-description">See more</span>';
+                echo wp_kses_post(wp_strip_all_tags(tourfic_character_limit_callback(get_the_content(), 300))) . '<span class="tf-see-description">See more</span>';
             }else{
                 the_content(); 
             }
@@ -36,7 +36,7 @@
         <div class="tf-full-description">
             <?php 
                 the_content();
-                echo '<span class="tf-see-less-description"> See less</span>';
+                echo '<span class="tf-see-less-description">See less</span>';
             ?>
         </div>
     </div>

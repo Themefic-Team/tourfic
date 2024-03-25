@@ -2,8 +2,8 @@
 if ( $comments ) { ?>
 <!-- Hotel reviews Srart -->
 <div class="tf-reviews-wrapper tf-section" id="tf-hotel-reviews">         
-    <h2 class="tf-section-title"><?php _e("Guest reviews", "tourfic"); ?></h2> 
-    <p><?php _e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></p>
+    <h2 class="tf-section-title"><?php esc_html_e("Guest reviews", "tourfic"); ?></h2>
+    <p><?php esc_html_e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></p>
     <div class="tf-reviews-slider">
         <?php
         foreach ( $comments as $comment ) {
@@ -24,12 +24,12 @@ if ( $comments ) { ?>
         ?>
         <div class="tf-reviews-item">
             <div class="tf-reviews-avater">
-                <?php echo $c_avatar; ?>
+                <?php echo wp_kses_post($c_avatar); ?>
             </div>
             <div class="tf-reviews-text">
-                <span class="tf-review-rating"><?php echo $c_rating; ?></span>
-                <span class="tf-reviews-meta"><?php echo $c_author_name; ?>, <?php echo date("F Y", strtotime($c_date)); ?></span>
-                <p><?php echo tourfic_character_limit_callback($c_content, 180); ?></p>
+                <span class="tf-review-rating"><?php echo wp_kses_post($c_rating); ?></span>
+                <span class="tf-reviews-meta"><?php echo esc_html($c_author_name); ?>, <?php echo wp_kses_post(gmdate("F Y", strtotime($c_date))); ?></span>
+                <p><?php echo wp_kses_post(tourfic_character_limit_callback($c_content, 180)); ?></p>
             </div>
         </div>
         <?php } ?>

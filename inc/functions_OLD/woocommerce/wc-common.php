@@ -13,21 +13,21 @@ defined( 'ABSPATH' ) || exit;
 function tf_change_meta_key_title( $key, $meta, $item ) {
     
     // By using $meta-key we are sure we have the correct one.
-    if ( 'room_name' === $meta->key ) { $key = __( 'Room Name', 'tourfic'); }
-    if ( 'number_room_booked' === $meta->key ) { $key = __( 'Number of Room Booked', 'tourfic'); }
-    if ( 'adult' === $meta->key ) { $key = __( 'Adult Number', 'tourfic'); }
-    if ( 'child' === $meta->key ) { $key = __( 'Children Number', 'tourfic'); }
-    if ( 'check_in' === $meta->key ) { $key = __( 'Check-in Date', 'tourfic'); }
-    if ( 'check_out' === $meta->key ) { $key = __( 'Check-out Date', 'tourfic'); }
-    if ( 'due' === $meta->key ) { $key = __( 'Due', 'tourfic'); }
-    if ( '_tour_id' === $meta->key ) { $key = __( 'Tour ID', 'tourfic'); }
-    if ( 'Adults' === $meta->key ) { $key = __( 'Adults', 'tourfic'); }
-	if ( 'Children' === $meta->key ) { $key = __( 'Children', 'tourfic'); }
-	if ( 'Infants' === $meta->key ) { $key = __( 'Infants', 'tourfic'); }
-	if ( 'Tour Date' === $meta->key ) { $key = __( 'Tour Date', 'tourfic'); }
-	if ( 'Tour Time' === $meta->key ) { $key = __( 'Tour Time', 'tourfic'); }
-	if ( 'Tour Extra' === $meta->key ) { $key = __( 'Tour Extra', 'tourfic'); }
-	if ( 'Due' === $meta->key ) { $key = __( 'Due', 'tourfic'); }
+    if ( 'room_name' === $meta->key ) { $key = esc_html__( 'Room Name', 'tourfic'); }
+    if ( 'number_room_booked' === $meta->key ) { $key = esc_html__( 'Number of Room Booked', 'tourfic'); }
+    if ( 'adult' === $meta->key ) { $key = esc_html__( 'Adult Number', 'tourfic'); }
+    if ( 'child' === $meta->key ) { $key = esc_html__( 'Children Number', 'tourfic'); }
+    if ( 'check_in' === $meta->key ) { $key = esc_html__( 'Check-in Date', 'tourfic'); }
+    if ( 'check_out' === $meta->key ) { $key = esc_html__( 'Check-out Date', 'tourfic'); }
+    if ( 'due' === $meta->key ) { $key = esc_html__( 'Due', 'tourfic'); }
+    if ( '_tour_id' === $meta->key ) { $key = esc_html__( 'Tour ID', 'tourfic'); }
+    if ( 'Adults' === $meta->key ) { $key = esc_html__( 'Adults', 'tourfic'); }
+	if ( 'Children' === $meta->key ) { $key = esc_html__( 'Children', 'tourfic'); }
+	if ( 'Infants' === $meta->key ) { $key = esc_html__( 'Infants', 'tourfic'); }
+	if ( 'Tour Date' === $meta->key ) { $key = esc_html__( 'Tour Date', 'tourfic'); }
+	if ( 'Tour Time' === $meta->key ) { $key = esc_html__( 'Tour Time', 'tourfic'); }
+	if ( 'Tour Extra' === $meta->key ) { $key = esc_html__( 'Tour Extra', 'tourfic'); }
+	if ( 'Due' === $meta->key ) { $key = esc_html__( 'Due', 'tourfic'); }
 
     return $key;
 }

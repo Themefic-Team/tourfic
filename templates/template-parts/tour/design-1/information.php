@@ -10,7 +10,7 @@
                             <i class="fa-regular fa-clock"></i>
                         </div>
                         <div class="tf-feature-block-details">
-                            <h5><?php echo __( 'Duration', 'tourfic' ); ?></h5>
+                            <h5><?php echo esc_html__( 'Duration', 'tourfic' ); ?></h5>
                             <p><?php echo esc_html( $tour_duration ); ?>
 								<?php
 								if ( $tour_duration > 1 ) {
@@ -61,7 +61,7 @@
                             <i class="fa-regular fa-clock"></i>
                         </div>
                         <div class="tf-feature-block-details">
-                            <h5><?php echo __( 'Tour Type', 'tourfic' ); ?></h5>
+                            <h5><?php echo esc_html__( 'Tour Type', 'tourfic' ); ?></h5>
                             <p><?php echo esc_html( $info_tour_type ) ?></p>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                             <i class="fa-regular fa-clock"></i>
                         </div>
                         <div class="tf-feature-block-details">
-                            <h5><?php echo __( 'Group Size', 'tourfic' ); ?></h5>
+                            <h5><?php echo esc_html__( 'Group Size', 'tourfic' ); ?></h5>
                             <p><?php echo esc_html( $group_size ) ?></p>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                             <i class="fa-regular fa-clock"></i>
                         </div>
                         <div class="tf-feature-block-details">
-                            <h5><?php echo __( 'Language', 'tourfic' ); ?></h5>
+                            <h5><?php echo esc_html__( 'Language', 'tourfic' ); ?></h5>
                             <p><?php echo esc_html( $language ) ?></p>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
         <div class="tf-tour-features tf-mb-40 tf-template-section">
             <div class="tf-tour-features-container">
                 <?php if (!empty($meta["tour-features-section-title"])) : ?>
-                    <h2 class="tf-title tf-section-title"><?php esc_html_e( $meta["tour-features-section-title"], 'tourfic' ); ?></h2>
+                    <h2 class="tf-title tf-section-title"><?php echo esc_html( $meta["tour-features-section-title"] ); ?></h2>
                 <?php endif; ?>
                 <ul class="tf-tour-feature-list">
 
@@ -118,8 +118,8 @@
 
                     <?php if( !empty($feature->name) ) : ?>
                             <li class="single-feature-box">
-                                <span class="tf-tour-features-icon"><?php echo !empty($feature_meta['icon-fa']) || !empty($feature_meta['icon-c'])  ? $feature_icon : ''; ?></span>
-                                <span><?php echo $feature->name; ?></span>
+                                <span class="tf-tour-features-icon"><?php echo !empty($feature_meta['icon-fa']) || !empty($feature_meta['icon-c'])  ? wp_kses_post($feature_icon) : ''; ?></span>
+                                <span><?php echo esc_html($feature->name); ?></span>
                             </li>
                     <?php endif; ?>
                     <?php } ?>

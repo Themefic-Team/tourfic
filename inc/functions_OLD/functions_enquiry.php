@@ -16,13 +16,13 @@ if ( ! function_exists( 'tf_add_enquiry_submenu' ) ) {
 
 			if ( $current_user_role == 'administrator' ) {
 				// Tour enquiry
-				add_submenu_page( 'edit.php?post_type=tf_tours', __( 'Tour Enquiry Details', 'tourfic' ), __( 'Enquiry Details', 'tourfic' ), 'edit_tf_tourss', 'tf_tours_enquiry', 'tf_tour_enquiry_page_callback' );
+				add_submenu_page( 'edit.php?post_type=tf_tours', esc_html__( 'Tour Enquiry Details', 'tourfic' ), esc_html__( 'Enquiry Details', 'tourfic' ), 'edit_tf_tourss', 'tf_tours_enquiry', 'tf_tour_enquiry_page_callback' );
 
 				// Hotel enquiry
-				add_submenu_page( 'edit.php?post_type=tf_hotel', __( 'Hotel Enquiry Details', 'tourfic' ), __( 'Enquiry Details', 'tourfic' ), 'edit_tf_hotels', 'tf_hotel_enquiry', 'tf_hotel_enquiry_page_callback' );
+				add_submenu_page( 'edit.php?post_type=tf_hotel', esc_html__( 'Hotel Enquiry Details', 'tourfic' ), esc_html__( 'Enquiry Details', 'tourfic' ), 'edit_tf_hotels', 'tf_hotel_enquiry', 'tf_hotel_enquiry_page_callback' );
 
 				//Apartment enquiry
-				add_submenu_page( 'edit.php?post_type=tf_apartment', __( 'Apartment Enquiry Details', 'tourfic' ), __( 'Enquiry Details', 'tourfic' ), 'edit_tf_apartments', 'tf_apartment_enquiry', 'tf_apartment_enquiry_page_callback' );
+				add_submenu_page( 'edit.php?post_type=tf_apartment', esc_html__( 'Apartment Enquiry Details', 'tourfic' ), esc_html__( 'Enquiry Details', 'tourfic' ), 'edit_tf_apartments', 'tf_apartment_enquiry', 'tf_apartment_enquiry_page_callback' );
 			}
 			
 		}
@@ -40,7 +40,7 @@ if ( ! function_exists( 'tf_tour_enquiry_page_callback' ) ) {
 	function tf_tour_enquiry_page_callback() {
 		?>
         <div class="wrap" style="margin-right: 20px;">
-            <h1 class="wp-heading-inline"><?php _e( 'Tour Enquiry Details', 'tourfic' ); ?></h1>
+            <h1 class="wp-heading-inline"><?php esc_html_e( 'Tour Enquiry Details', 'tourfic' ); ?></h1>
 
 			<?php
 			/**
@@ -61,12 +61,11 @@ if ( ! function_exists( 'tf_tour_enquiry_page_callback' ) ) {
 			// get user role
 			$current_user_role = $current_user->roles[0];
 			global $wpdb;
-			$table_name = $wpdb->prefix . 'tf_enquiry_data';
 
 			if ( $current_user_role == 'administrator' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-				$tour_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY id DESC", 'tf_tours' ), ARRAY_A );
+				$tour_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE post_type = %s ORDER BY id DESC", 'tf_tours' ), ARRAY_A );
 			} elseif ( $current_user_role == 'administrator' ) {
-				$tour_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY id DESC LIMIT 15", 'tf_tours' ), ARRAY_A );
+				$tour_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE post_type = %s ORDER BY id DESC LIMIT 15", 'tf_tours' ), ARRAY_A );
 			}
 			
 			$tour_enquiry_results = new DBTFTable( $tour_enquiry_result );
@@ -87,7 +86,7 @@ if ( ! function_exists( 'tf_hotel_enquiry_page_callback' ) ) {
 	function tf_hotel_enquiry_page_callback() {
 		?>
         <div class="wrap" style="margin-right: 20px;">
-            <h1 class="wp-heading-inline"><?php _e( 'Hotel Enquiry Details', 'tourfic' ); ?></h1>
+            <h1 class="wp-heading-inline"><?php esc_html_e( 'Hotel Enquiry Details', 'tourfic' ); ?></h1>
 			<?php
 			/**
 			 * Before enquiry details table hook
@@ -106,12 +105,11 @@ if ( ! function_exists( 'tf_hotel_enquiry_page_callback' ) ) {
 			// get user role
 			$current_user_role = $current_user->roles[0];
 			global $wpdb;
-			$table_name = $wpdb->prefix . 'tf_enquiry_data';
 
 			if ( $current_user_role == 'administrator' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-				$hotel_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY id DESC", 'tf_hotel' ), ARRAY_A );
+				$hotel_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE post_type = %s ORDER BY id DESC", 'tf_hotel' ), ARRAY_A );
 			} elseif ( $current_user_role == 'administrator' ) {
-				$hotel_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY id DESC LIMIT 15", 'tf_hotel' ), ARRAY_A );
+				$hotel_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE post_type = %s ORDER BY id DESC LIMIT 15", 'tf_hotel' ), ARRAY_A );
 			}
 
 			$hotel_enquiry_results = new DBTFTable( $hotel_enquiry_result );
@@ -132,7 +130,7 @@ if ( ! function_exists( 'tf_apartment_enquiry_page_callback' ) ) {
 	function tf_apartment_enquiry_page_callback() {
 		?>
         <div class="wrap" style="margin-right: 20px;">
-            <h1 class="wp-heading-inline"><?php _e( 'Apartment Enquiry Details', 'tourfic' ); ?></h1>
+            <h1 class="wp-heading-inline"><?php esc_html_e( 'Apartment Enquiry Details', 'tourfic' ); ?></h1>
 			<?php
 			do_action( 'tf_before_enquiry_details' );
 			if ( file_exists( TF_INC_PATH . 'functions/class.tf_enquiry.php' ) ) {
@@ -146,12 +144,11 @@ if ( ! function_exists( 'tf_apartment_enquiry_page_callback' ) ) {
 			// get user role
 			$current_user_role = $current_user->roles[0];
 			global $wpdb;
-			$table_name = $wpdb->prefix . 'tf_enquiry_data';
 
 			if ( $current_user_role == 'administrator' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-				$apartment_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY id DESC", 'tf_apartment' ), ARRAY_A );
+				$apartment_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE post_type = %s ORDER BY id DESC", 'tf_apartment' ), ARRAY_A );
 			} elseif ( $current_user_role == 'administrator' ) {
-				$apartment_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY id DESC LIMIT 15", 'tf_apartment' ), ARRAY_A );
+				$apartment_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE post_type = %s ORDER BY id DESC LIMIT 15", 'tf_apartment' ), ARRAY_A );
 			}
 
 			$apartment_enquiry_results = new DBTFTable( $apartment_enquiry_result );

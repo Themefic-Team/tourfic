@@ -20,7 +20,7 @@ class TF_Product_Data_Store_CPT extends WC_Product_Data_Store_CPT implements WC_
         $product->set_defaults();
 
         if ( (! $product->get_id() || ! ( $post_object = get_post( $product->get_id() ) ) || 'product' !== $post_object->post_type) && 'tf_tours' !== $post_object->post_type && 'tf_hotel' !== $post_object->post_type && 'tf_apartment' !== $post_object->post_type ) {
-            throw new Exception( __( 'Invalid product.', 'tourfic' ) );
+            throw new Exception( esc_html__( 'Invalid product.', 'tourfic' ) );
         }
 
         $id = $product->get_id();

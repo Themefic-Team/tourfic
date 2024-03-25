@@ -12,8 +12,8 @@
         } ?>
 
         <li>
-            <?php echo !empty($feature_meta) && !empty($feature_icon) ? $feature_icon : ''; ?>
-            <?php echo $feature->name; ?>
+            <?php echo !empty($feature_meta) && !empty($feature_icon) ? wp_kses_post($feature_icon) : ''; ?>
+            <?php echo esc_html($feature->name); ?>
         </li>
     <?php } ?>
     </ul>

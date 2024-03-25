@@ -2,7 +2,7 @@
 <!-- Tour Questions Srart -->
 <div class="tf-questions-wrapper tf-section" id="tf-tour-faq">
     <h2 class="tf-section-title">
-    <?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : __( "Faq’s", 'tourfic' ); ?>
+    <?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : esc_html__( "Faq’s", 'tourfic' ); ?>
     </h2>            
     <div class="tf-questions">
         

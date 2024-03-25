@@ -5,6 +5,18 @@
 // Get header
 get_header();
 
+if ( !class_exists( 'WooCommerce' ) ) {
+	?>
+	<div class="tf-container">
+		<div class="tf-notice tf-notice-danger">
+			<?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>
+		</div>
+	</div>
+	<?php
+	get_footer();
+	return;
+}
+
 // Main query
 while ( have_posts() ) : the_post();
 
@@ -67,18 +79,18 @@ while ( have_posts() ) : the_post();
 				
 				foreach($months as $month) {
 
-					if($month < date('m')) {
+					if($month < gmdate('m')) {
 						$year = $matches[1] + 1;
 
 					} else $year = $matches[1];
 
-					$day_selected = date('d', strtotime($date));
-					$last_day_of_month = date('t', strtotime(date('Y').'-'.$month.'-01'));
+					$day_selected = gmdate('d', strtotime($date));
+					$last_day_of_month = gmdate('t', strtotime(gmdate('Y').'-'.$month.'-01'));
 					$matches[2] = $month;
 					$changed_date = sprintf("%s/%s/%s", $year, $matches[2], $matches[3]);
 
 					if(($day_selected == "31") && ($last_day_of_month != "31")) {
-						$new_months[] = date('Y/m/d', strtotime($changed_date . ' -1 day'));
+						$new_months[] = gmdate('Y/m/d', strtotime($changed_date . ' -1 day'));
 					} else {
 						$new_months[] = $changed_date;
 					}

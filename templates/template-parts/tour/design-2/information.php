@@ -6,7 +6,7 @@
         <div class="tf-feature-block">
             <i class="ri-history-line"></i>
             <div class="tf-feature-block-details">
-                <h5><?php echo __( 'Duration', 'tourfic' ); ?></h5>
+                <h5><?php echo esc_html__( 'Duration', 'tourfic' ); ?></h5>
                 <p><?php echo esc_html( $tour_duration ); ?>
                 <?php
                 if ( $tour_duration > 1 ) {
@@ -39,7 +39,7 @@
         <div class="tf-feature-block">
             <i class="ri-team-line"></i>
             <div class="tf-feature-block-details">
-                <h5><?php echo __( 'Max people', 'tourfic' ); ?></h5>
+                <h5><?php echo esc_html__( 'Max people', 'tourfic' ); ?></h5>
                 <p><?php echo esc_html( $group_size ) ?></p>
             </div>
         </div>
@@ -61,7 +61,7 @@
         <div class="tf-feature-block">
             <i class="ri-menu-unfold-line"></i>
             <div class="tf-feature-block-details">
-                <h5><?php echo __( 'Tour Type', 'tourfic' ); ?></h5>
+                <h5><?php echo esc_html__( 'Tour Type', 'tourfic' ); ?></h5>
                 <p><?php echo esc_html( $info_tour_type ) ?></p>
             </div>
         </div>
@@ -70,7 +70,7 @@
         <div class="tf-feature-block">
             <i class="ri-global-line"></i>
             <div class="tf-feature-block-details">
-                <h5><?php echo __( 'Language', 'tourfic' ); ?></h5>
+                <h5><?php echo esc_html__( 'Language', 'tourfic' ); ?></h5>
                 <p><?php echo esc_html( $language ) ?></p>
             </div>
         </div>

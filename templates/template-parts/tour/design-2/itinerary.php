@@ -6,7 +6,7 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ) {
 <?php if ( $itineraries ) { ?>
 <div class="tf-itinerary-wrapper" id="tf-tour-itinerary">
     <div class="section-title">
-        <h2 class="tf-title tf-section-title"><?php _e("Travel Itinerary", "tourfic"); ?></h2>
+        <h2 class="tf-title tf-section-title"><?php esc_html_e("Travel Itinerary", "tourfic"); ?></h2>
     </div>
     <div class="tf-itinerary-wrapper">
 
@@ -28,11 +28,11 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ) {
             <div class="tf-itinerary-content-wrap" style="display: none;">
                 <div class="tf-itinerary-content">
                     <div class="tf-itinerary-content-details">
-                    <?php _e( $itinerary['desc'] ); ?>
+                    <?php echo wp_kses_post( $itinerary['desc'] ); ?>
                     </div>
                     <?php if ( $itinerary['image'] ) { ?>
                     <div class="tf-itinerary-content-images">
-                        <img src="<?php echo esc_url( $itinerary['image'] ); ?>" alt="<?php _e("Itinerary Image","tourfic"); ?>" />
+                        <img src="<?php echo esc_url( $itinerary['image'] ); ?>" alt="<?php esc_html_e("Itinerary Image","tourfic"); ?>" />
                     </div>
                     <?php } ?>
                 </div>
@@ -47,15 +47,15 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ) {
     <?php if ( $tf_openstreet_map=="default" && !empty($location_latitude) && !empty($location_longitude) && empty($tf_google_map_key) ) {  ?>
         <div id="tour-location" style="height: 450px;"></div>
         <script>
-        const map = L.map('tour-location').setView([<?php echo $location_latitude; ?>, <?php echo $location_longitude; ?>], <?php echo $location_zoom; ?>);
+        const map = L.map('tour-location').setView([<?php echo esc_html($location_latitude); ?>, <?php echo esc_html($location_longitude); ?>], <?php echo esc_html($location_zoom); ?>);
 
         const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 20,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-        const marker = L.marker([<?php echo $location_latitude; ?>, <?php echo $location_longitude; ?>], {alt: '<?php echo $location; ?>'}).addTo(map)
-            .bindPopup('<?php echo $location; ?>');
+        const marker = L.marker([<?php echo esc_html($location_latitude); ?>, <?php echo esc_html($location_longitude); ?>], {alt: '<?php echo esc_html($location); ?>'}).addTo(map)
+            .bindPopup('<?php echo esc_html($location); ?>');
         </script>
     <?php } ?>
     <?php if ( $tf_openstreet_map=="default" && (empty($location_latitude) || empty($location_longitude)) && empty($tf_google_map_key) ) {  ?>
