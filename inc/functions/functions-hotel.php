@@ -4576,11 +4576,12 @@ if ( ! function_exists( 'tf_hotel_booking_popup_callback' ) ) {
 				} else {
 					foreach ( $hotel_guest_info_fields as $field ) {
 						$reg_field_required = !empty( $field['reg-field-required'] ) ? esc_attr( $field['reg-field-required'] ) : 0;
-						if ( "text" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] || "date" == $field['reg-fields-type'] ) {
+						$number_field_min_attribuite = $field['reg-fields-type'] == "number" ? 'min="0"' : '';
+						if ( "text" == $field['reg-fields-type'] || "number" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] || "date" == $field['reg-fields-type'] ) {
 							$response['guest_info'] .= '
                             <div class="traveller-single-info">
                                 <label for="' . $field['reg-field-name'] . $guest_in . '">' . sprintf( __( '%s', 'tourfic' ), $field['reg-field-label'] ) . '</label>
-                                <input type="' . $field['reg-fields-type'] . '" name="guest[' . $guest_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" id="' . $field['reg-field-name'] . $guest_in . '" />
+                                <input type="' . $field['reg-fields-type'] . '" name="guest[' . $guest_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" id="' . $field['reg-field-name'] . $guest_in . '"' . $number_field_min_attribuite .' />
                                 <div class="error-text" data-error-for="' . $field['reg-field-name'] . $guest_in . '"></div>
                             </div>';
 						}
@@ -4873,11 +4874,11 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
 										<?php } else {
 											foreach ( $confirm_book_fields as $field ) {
 												$reg_field_required = !empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : 0;
-												if ( "text" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] || "date" == $field['reg-fields-type'] ) { ?>
+												if ( "text" == $field['reg-fields-type'] || "number" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] || "date" == $field['reg-fields-type'] ) { ?>
                                                     <div class="traveller-single-info tf-confirm-fields">
                                                         <label for="<?php echo esc_attr( $field['reg-field-name'] ); ?>"><?php echo esc_html( $field['reg-field-label'] ); ?></label>
                                                         <input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="booking_confirm[<?php echo esc_attr( $field['reg-field-name'] ); ?>]"
-                                                               id="<?php echo esc_attr( $field['reg-field-name'] ); ?>" data-required="<?php echo esc_attr( $reg_field_required ); ?>"/>
+                                                               id="<?php echo esc_attr( $field['reg-field-name'] ); ?>" data-required="<?php echo esc_attr( $reg_field_required ); ?>" <?php echo $field['reg-fields-type'] == "number" ? 'min="0"' : ''; ?> />
                                                         <div class="error-text" data-error-for="<?php echo esc_attr( $field['reg-field-name'] ); ?>"></div>
                                                     </div>
 												<?php }

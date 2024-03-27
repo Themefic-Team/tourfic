@@ -209,8 +209,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                     </div>
                     <div class="room-submit-wrap">
                         <div class="roomselectissue"></div>
-						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) && ( $room["deposit_type"] != "none" ) ) { ?>
-
+						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) && ( $room["deposit_type"] != "none" ) && ( $meta["booking-by"] != 3 ) ) { ?>
                             <div class="room-deposit-wrap">
                                 <input type="checkbox" id="tf-make-deposit<?php echo $room_id ?>" name="make_deposit" value="<?php echo $room_id ?>">
                                 <label for="tf-make-deposit<?php echo $room_id ?>"><?php _e( "I'll make a Partial Payment", "tourfic" ) ?></label><br>

@@ -629,8 +629,6 @@
             var $this = $(this);
             var formData = new FormData(this);
 
-            //TODO: Add pricing data attribute and catch it here
-
             formData.append('action', 'tf_hotel_booking');
             formData.append('_ajax_nonce', tf_params.nonce);
 
