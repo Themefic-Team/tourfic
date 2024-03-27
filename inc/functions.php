@@ -2,8 +2,10 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-function tf_is_woo_active() {
-    return is_plugin_active( 'woocommerce/woocommerce.php' );
+if ( ! function_exists( 'tf_is_woo_active' ) ) {
+	function tf_is_woo_active() {
+		return is_plugin_active( 'woocommerce/woocommerce.php' );
+	}
 }
 
 /**
