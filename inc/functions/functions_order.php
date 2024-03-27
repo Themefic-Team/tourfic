@@ -611,7 +611,9 @@ if ( ! function_exists( 'tf_admin_table_alter_order_data' ) ) {
         }
 	}
 }
-add_action('admin_init', 'tf_admin_table_alter_order_data');
+if ( class_exists( 'WooCommerce' ) ) {
+	add_action( 'admin_init', 'tf_admin_table_alter_order_data' );
+}
 
 if(! function_exists( 'get_kses_extended_ruleset' ) ) {
 	function tf_kses_svg_esc_rule() {

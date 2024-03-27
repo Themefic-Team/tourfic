@@ -151,10 +151,12 @@ if ( file_exists( TF_INC_PATH . 'enqueues.php' ) ) {
  *
  * @since 1.0
  */
-if ( file_exists( TF_INC_PATH . 'functions/shortcodes.php' ) ) {
-	require_once TF_INC_PATH . 'functions/shortcodes.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/shortcodes.php' );
+if ( class_exists( 'WooCommerce' ) ) {
+	if ( file_exists( TF_INC_PATH . 'functions/shortcodes.php' ) ) {
+		require_once TF_INC_PATH . 'functions/shortcodes.php';
+	} else {
+		tf_file_missing( TF_INC_PATH . 'functions/shortcodes.php' );
+	}
 }
 
 /**
@@ -162,10 +164,12 @@ if ( file_exists( TF_INC_PATH . 'functions/shortcodes.php' ) ) {
  *
  * @since 1.0
  */
-if ( file_exists( TF_INC_PATH . 'functions/widgets.php' ) ) {
-	require_once TF_INC_PATH . 'functions/widgets.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/widgets.php' );
+if ( class_exists( 'WooCommerce' ) ) {
+	if ( file_exists( TF_INC_PATH . 'functions/widgets.php' ) ) {
+		require_once TF_INC_PATH . 'functions/widgets.php';
+	} else {
+		tf_file_missing( TF_INC_PATH . 'functions/widgets.php' );
+	}
 }
 
 # Google Fonts
