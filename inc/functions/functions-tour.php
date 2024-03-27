@@ -3096,10 +3096,12 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
  *
  * @include
  */
-if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-tour.php' ) ) {
-	require_once TF_INC_PATH . 'functions/woocommerce/wc-tour.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-tour.php' );
+if ( class_exists( 'WooCommerce' ) ) {
+	if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-tour.php' ) ) {
+		require_once TF_INC_PATH . 'functions/woocommerce/wc-tour.php';
+	} else {
+		tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-tour.php' );
+	}
 }
 
 /**

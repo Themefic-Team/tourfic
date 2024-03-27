@@ -288,10 +288,12 @@ register_activation_hook( TF_PATH . 'tourfic.php', 'tf_apartment_rewrite_flush' 
  *
  * @include
  */
-if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-apartment.php' ) ) {
-	require_once TF_INC_PATH . 'functions/woocommerce/wc-apartment.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-apartment.php' );
+if ( class_exists( 'WooCommerce' ) ) {
+	if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-apartment.php' ) ) {
+		require_once TF_INC_PATH . 'functions/woocommerce/wc-apartment.php';
+	} else {
+		tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-apartment.php' );
+	}
 }
 
 /**

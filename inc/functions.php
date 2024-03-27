@@ -56,10 +56,12 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-tour.php' ) ) {
 /**
  * WooCommerce Common Functions
  */
-if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-common.php' ) ) {
-	require_once TF_INC_PATH . 'functions/woocommerce/wc-common.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-common.php' );
+if ( class_exists( 'WooCommerce' ) ) {
+	if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-common.php' ) ) {
+		require_once TF_INC_PATH . 'functions/woocommerce/wc-common.php';
+	} else {
+		tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-common.php' );
+	}
 }
 
 /**
