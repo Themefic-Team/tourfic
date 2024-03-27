@@ -100,6 +100,7 @@
                                 <?php 
                                 $book_adult  = !empty( $tf_tour_details->adult ) ? $tf_tour_details->adult : '';
                                 if(!empty($book_adult)){
+                                    
                                     $tf_total_adult = explode( " × ", $book_adult );
                                 } ?>
                                 <tr>
@@ -288,6 +289,7 @@
                     <?php 
                     $tf_visitors_details = !empty($tf_tour_details->visitor_details) ? json_decode($tf_tour_details->visitor_details) : '';
                     $traveler_fields = !empty(tfopt('without-payment-field')) ? tf_data_types(tfopt('without-payment-field')) : '';
+                    $total_guests_count = (int) $book_adult + (int) $book_children;
                     if(!empty($tf_visitors_details)){
                         $visitor_count = 1;
                         foreach($tf_visitors_details as $visitor){
@@ -462,9 +464,9 @@
         <div class="visitor-details-popup">
         <input type="hidden" class="tf_single_order_id" name="order_id" value="<?php echo $tf_order_details->id; ?>">
         <?php 
-        for($traveller_in = 1; $traveller_in <= $tf_total_visitor; $traveller_in++){ ?>
+        for($traveller_in = 1; $traveller_in <= $total_guests_count; $traveller_in++){ ?>
             <div class="tf-single-tour-traveller tf-single-travel">
-                <h4><?php _e( 'Traveler '.$traveller_in, 'tourfic' ); ?></h4>
+                <h4><?php _e( 'Guest '.$traveller_in, 'tourfic' ); ?></h4>
                 <div class="traveller-info">
                 <?php
                 if(empty($traveler_fields)){ ?>
