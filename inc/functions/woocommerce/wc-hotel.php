@@ -41,7 +41,7 @@ function tf_hotel_booking_callback() {
 	$adult          = isset( $_POST['adult'] ) ? intval( sanitize_text_field( $_POST['adult'] ) ) : '0';
 	$child          = isset( $_POST['child'] ) ? intval( sanitize_text_field( $_POST['child'] ) ) : '0';
 	$children_ages  = isset( $_POST['children_ages'] ) ? sanitize_text_field( $_POST['children_ages'] ) : '0';
-	$room_selected  = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : '1';
+	$room_selected  = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : ( (isset($_POST["hotel_room_selected"]) && !empty($_POST["hotel_room_selected"])) ? intval( sanitize_text_field( $_POST['hotel_room_selected'] ) ) : 1 );
 	$check_in       = isset( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
 	$check_out      = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
 	$deposit        = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
@@ -52,7 +52,6 @@ function tf_hotel_booking_callback() {
 	// Without Payment Booking Data
 	$tf_without_payment_guest_info = !empty( $_POST['guest'] ) ? $_POST['guest'] : '';
 	$tf_without_payment_confirmation_details = !empty( $_POST['booking_confirm'] ) ? $_POST['booking_confirm'] : array();
-	$selected_hotel_room =  isset( $_POST['hotel_room_selected'] ) ? $_POST['hotel_room_selected'] : '1';
 
 	// Check errors
 	if ( ! $check_in ) {
@@ -64,7 +63,7 @@ function tf_hotel_booking_callback() {
 	if ( ! $adult ) {
 		$response['errors'][] = __( 'Select Adult(s).', 'tourfic' );
 	}
-	if ( ! $room_selected || ! $selected_hotel_room) {
+	if ( ! $room_selected ) {
 		$response['errors'][] = __( 'Select Room(s).', 'tourfic' );
 	}
 	if ( ! $post_id ) {
@@ -556,18 +555,17 @@ function tf_hotel_booking_callback() {
 
 		// without payment booking
 		if( $tf_hotel_booking_type == 3 ) {
-			
 			$without_payment_order_details    = [
 				'order_by'             => '',
-				'room'                 => !empty($tf_room_data['tf_hotel_data']['room_id']) ? $tf_room_data['tf_hotel_data']['room_id'] : 0,
+				'room'                 => !empty( $tf_room_data['tf_hotel_data']['room'] ) ? $tf_room_data['tf_hotel_data']['room'] : 1,
 				'check_in'             => !empty($tf_room_data['tf_hotel_data']['check_in']) ? $tf_room_data['tf_hotel_data']['check_in'] : '',
 				'check_out'            => !empty($tf_room_data['tf_hotel_data']['check_out']) ? $tf_room_data['tf_hotel_data']['check_out'] : '',
 				'room_name'            => !empty($tf_room_data['tf_hotel_data']['room_name']) ? $tf_room_data['tf_hotel_data']['room_name'] : '',
 				'adult'                => $adult,
 				'child'                => $child,
 				'children_ages'        => $children_ages,
-				'airport_service_type' => !empty($tf_room_data['tf_hotel_data']['air_serivicetype']) ? $tf_room_data['tf_hotel_data']['air_serivicetype'] : '',
-				'airport_service_fee'  => $airport_service_price_total,
+				'airport_service_type' => $airport_service,
+				'airport_service_fee'  => wc_price( $airport_service_price_total ),
 				'total_price'          => !empty($tf_room_data['tf_hotel_data']['price_total']) ? $tf_room_data['tf_hotel_data']['price_total'] : 0,
 				'due_price'            => '',
 				'visitor_details' => json_encode($tf_without_payment_guest_info),
@@ -577,7 +575,7 @@ function tf_hotel_booking_callback() {
 			$without_payment_order_data = array(
 				'post_id'          => !empty( $tf_room_data['tf_hotel_data']['post_id'] ) ? $tf_room_data['tf_hotel_data']['post_id'] : '',
 				'post_type'        => 'hotel',
-				'room_number'      => !empty( $tf_room_data['tf_hotel_data']['room_number'] ) ? $tf_room_data['tf_hotel_data']['room_number'] : 1,
+				'room_number'      => !empty($tf_room_data['tf_hotel_data']['room_id']) ? $tf_room_data['tf_hotel_data']['room_id'] : 0,
 				'check_in'         => !empty( $tf_room_data['tf_hotel_data']['check_in'] ) ? $tf_room_data['tf_hotel_data']['check_in'] : '',
 				'check_out'        => !empty( $tf_room_data['tf_hotel_data']['check_out'] ) ? $tf_room_data['tf_hotel_data']['check_out'] : '',
 				'billing_details'  => $billing_details,
@@ -592,9 +590,15 @@ function tf_hotel_booking_callback() {
 			$response['without_payment'] = 'true';
 			tf_set_order( $without_payment_order_data );
 			if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($order_id) ) {
-				do_action( 'tf_offline_payment_booking_confirmation', $order_id, $order_data );
+				do_action( 'tf_offline_payment_booking_confirmation', $order_id, $without_payment_order_data );
 			}
 		} else {
+
+			echo "<pre>";
+			print_r($_POST);
+			echo "</pre>";
+			// die(); // added by - Sunvi
+
 			WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_room_data );
 
 			$response['product_id']  = $product_id;

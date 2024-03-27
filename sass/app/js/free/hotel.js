@@ -141,7 +141,9 @@
             } else {
                 var room = $("#hotel_room_number").val();
                 var deposit = $("#hotel_room_depo").val();
+
             }
+            console.log(room)
             var airport_service = $('.fancybox-slide #airport-service').val();
 
             var data = {
@@ -551,7 +553,7 @@
                 var room = $("#hotel_room_number").val();
                 var deposit = $("#hotel_room_depo").val();
             }
-            var airport_service = $('[name="tf_airport_service"]:checked').val();
+            var airport_service = $('[name="airport_service"]:checked').val();
 
             var data = {
                 action: 'tf_hotel_booking_popup',
@@ -625,7 +627,7 @@
 
         $(document).on('submit', 'form.tf-room', function (e) {
             e.preventDefault();
-            
+
             var $this = $(this);
             var formData = new FormData(this);
 
@@ -665,7 +667,7 @@
             })
         });
 
-        $(document).on("change", "[name='tf_airport_service']", function (e) {
+        $(document).on("change", "[name='airport_service']", function (e) {
             var $this = $(this);
 
             hotelPopupBooking($this);
