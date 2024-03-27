@@ -1,18 +1,24 @@
 <?php 
 if ( ! function_exists( 'tf_taxable_option_callback' ) ) {
 	function tf_taxable_option_callback() {
-		$tax_classes = WC_Tax::get_tax_classes();
-		$all_classes = array(
-			'standard' => 'Standard Rates'
-		);
-    	foreach($tax_classes as $tax){
-			$all_classes [sanitize_title($tax)] = $tax. ' Rates';
+		if ( class_exists( 'WooCommerce' ) ) {
+			$tax_classes = WC_Tax::get_tax_classes();
+			$all_classes = array(
+				'standard' => 'Standard Rates'
+			);
+			foreach ( $tax_classes as $tax ) {
+				$all_classes [ sanitize_title( $tax ) ] = $tax . ' Rates';
+			}
+		} else {
+			$all_classes = array(
+				'standard' => 'Standard Rates'
+			);
 		}
 
 		return $all_classes;
 	}
 }
-if( ! defined( 'TF_PRO' ) ){
+if( class_exists( 'WooCommerce' ) && ! defined( 'TF_PRO' ) ){
 	add_action('woocommerce_before_calculate_totals', 'tf_cart_item_tax_class_for_default_taxs');
 }
 function tf_cart_item_tax_class_for_default_taxs( $cart ){

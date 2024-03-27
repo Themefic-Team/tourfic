@@ -127,12 +127,10 @@ if( file_exists( TF_INC_PATH . 'functions/functions_duplicator.php' ) ){
 /**
  * Include Functions Vat
  */
-if ( class_exists( 'WooCommerce' ) ) {
-	if ( file_exists( TF_INC_PATH . 'functions/functions_vat.php' ) ) {
-		require_once TF_INC_PATH . 'functions/functions_vat.php';
-	} else {
-		tf_file_missing( TF_INC_PATH . 'functions/functions_vat.php' );
-	}
+if ( file_exists( TF_INC_PATH . 'functions/functions_vat.php' ) ) {
+    require_once TF_INC_PATH . 'functions/functions_vat.php';
+} else {
+    tf_file_missing( TF_INC_PATH . 'functions/functions_vat.php' );
 }
 
 /**
