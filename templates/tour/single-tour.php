@@ -9,7 +9,7 @@ if ( !class_exists( 'WooCommerce' ) ) {
 	?>
 	<div class="tf-container">
 		<div class="tf-notice tf-notice-danger">
-			<?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>
+			<?php esc_html_e( 'Please install and activate WooCommerce plugin to view tour details.', 'tourfic' ); ?>
 		</div>
 	</div>
 	<?php
