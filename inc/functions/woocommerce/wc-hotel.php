@@ -594,11 +594,6 @@ function tf_hotel_booking_callback() {
 			}
 		} else {
 
-			echo "<pre>";
-			print_r($_POST);
-			echo "</pre>";
-			// die(); // added by - Sunvi
-
 			WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_room_data );
 
 			$response['product_id']  = $product_id;
