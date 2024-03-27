@@ -1384,20 +1384,20 @@ Steps
 .tf-setup-step-container .tf-setup-step-description {
   margin-bottom: 30px;
 }
-.tf-setup-step-container.tf-setup-step-2 .tf-setup-step-layout {
+.tf-setup-step-container.tf-setup-step-3 .tf-setup-step-layout {
   padding-left: 73px;
   padding-right: 73px;
 }
 @media only screen and (max-width: 885px) {
-  .tf-setup-step-container.tf-setup-step-2 .tf-setup-step-layout {
+  .tf-setup-step-container.tf-setup-step-3 .tf-setup-step-layout {
     padding: 32px;
   }
 }
-.tf-setup-step-container.tf-setup-step-2 .tf-setup-step-layout .tf-theme-setting-heading {
+.tf-setup-step-container.tf-setup-step-3 .tf-setup-step-layout .tf-theme-setting-heading {
   position: relative;
   z-index: 0;
 }
-.tf-setup-step-container.tf-setup-step-2 .tf-setup-step-layout .tf-theme-setting-heading .tf-setup-title-shape {
+.tf-setup-step-container.tf-setup-step-3 .tf-setup-step-layout .tf-theme-setting-heading .tf-setup-title-shape {
   position: absolute;
   left: 2px;
   bottom: 20px;
@@ -1405,12 +1405,12 @@ Steps
   width: 100%;
   z-index: -1;
 }
-.tf-setup-step-container.tf-setup-step-2 .tf-setup-step-layout .tf-setup-step-desc a {
+.tf-setup-step-container.tf-setup-step-3 .tf-setup-step-layout .tf-setup-step-desc a {
   text-decoration: none;
   color: #003C79;
 }
 @media only screen and (max-width: 885px) {
-  .tf-setup-step-container.tf-setup-step-2 .tf-setup-step-layout .setup-theme-style img {
+  .tf-setup-step-container.tf-setup-step-3 .tf-setup-step-layout .setup-theme-style img {
     width: 100%;
   }
 }
