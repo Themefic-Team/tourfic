@@ -2,6 +2,10 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+function tf_is_woo_active() {
+    return is_plugin_active( 'woocommerce/woocommerce.php' );
+}
+
 /**
  * WC Product Extend
  */
@@ -10,7 +14,7 @@ if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-product-extend.php' ) 
 		require_once TF_INC_PATH . 'functions/woocommerce/wc-product-extend.php';
 	}
 
-	if ( class_exists( 'WooCommerce' ) ) {
+	if ( tf_is_woo_active() ) {
 		add_action( 'init', 'fida' );
 	}
 } else {
@@ -56,7 +60,7 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-tour.php' ) ) {
 /**
  * WooCommerce Common Functions
  */
-if ( class_exists( 'WooCommerce' ) ) {
+if ( tf_is_woo_active() ) {
 	if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-common.php' ) ) {
 		require_once TF_INC_PATH . 'functions/woocommerce/wc-common.php';
 	} else {
@@ -151,7 +155,7 @@ if ( file_exists( TF_INC_PATH . 'enqueues.php' ) ) {
  *
  * @since 1.0
  */
-if ( class_exists( 'WooCommerce' ) ) {
+if ( tf_is_woo_active() ) {
 	if ( file_exists( TF_INC_PATH . 'functions/shortcodes.php' ) ) {
 		require_once TF_INC_PATH . 'functions/shortcodes.php';
 	} else {
@@ -164,7 +168,7 @@ if ( class_exists( 'WooCommerce' ) ) {
  *
  * @since 1.0
  */
-if ( class_exists( 'WooCommerce' ) ) {
+if ( tf_is_woo_active() ) {
 	if ( file_exists( TF_INC_PATH . 'functions/widgets.php' ) ) {
 		require_once TF_INC_PATH . 'functions/widgets.php';
 	} else {

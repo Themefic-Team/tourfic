@@ -13,7 +13,7 @@ get_header();
 
 $tf_apartment_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['apartment-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 
-if ( class_exists( 'WooCommerce' ) ) {
+if ( tf_is_woo_active() ) {
 	if ( $tf_apartment_arc_selected_template == "design-1" ) {
 		include TF_TEMPLATE_PATH . 'apartment/archive/design-1.php';
 	} else {

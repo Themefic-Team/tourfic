@@ -17,7 +17,7 @@ if ( ! class_exists( 'TF_aptAvailabilityCal' ) ) {
 			}
 			$meta         = get_post_meta( $post->ID, 'tf_apartment_opt', true );
 			$pricing_type = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
-			if ( class_exists( 'WooCommerce' ) ) {
+			if ( tf_is_woo_active() ) {
 				?>
                 <div class="tf-apt-cal-wrap">
                     <div class='tf-apt-cal'></div>

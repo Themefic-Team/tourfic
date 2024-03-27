@@ -26,7 +26,7 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
 
 			$room_index = str_replace( array( '[', ']', 'room' ), '', $this->parent_field );
 			$pricing_by = ! empty( $rooms[ $room_index ]['pricing-by'] ) ? $rooms[ $room_index ]['pricing-by'] : '1';
-			if ( class_exists( 'WooCommerce' ) ) {
+			if ( tf_is_woo_active() ) {
 				?>
                 <div class="tf-room-cal-wrap">
                     <div class='tf-room-cal'></div>

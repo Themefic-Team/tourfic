@@ -306,7 +306,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								<p><?php esc_html_e("Total Bookings","tourfic"); ?></p>
 								<h3>
 									<?php
-                                    if ( class_exists( 'WooCommerce' ) ) {
+                                    if ( tf_is_woo_active() ) {
                                         $tf_order_query_orders = wc_get_orders( array(
                                                 'limit'  => - 1,
                                                 'type'   => 'shop_order',

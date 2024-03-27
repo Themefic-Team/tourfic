@@ -6,7 +6,7 @@
 
 get_header();
 
-if ( class_exists( 'WooCommerce' ) ) {
+if ( tf_is_woo_active() ) {
     ?>
     <div class="tf-container">
         <div class="tf-notice tf-notice-danger">

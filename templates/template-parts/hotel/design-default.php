@@ -685,8 +685,8 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                                                     <div class="tf-room-title"><h4><?php esc_html_e( 'Amenities', 'tourfic' ); ?></h4>
                                                     </div>
                                                     <ul class="room-feature-list">
-
-														<?php foreach ( $room['features'] as $feature ) {
+														<?php
+                                                        foreach ( $room['features'] as $feature ) {
 
 															$room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
 															if ( ! empty( $room_f_meta ) ) {
@@ -700,7 +700,9 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 																$room_feature_icon = '<i class="fas fa-bread-slice"></i>';
 															}
 
-															$room_term = get_term( $feature ); ?>
+															$room_term = get_term( $feature );
+	                                                        if ( ! empty( $room_term->name ) ) {
+                                                            ?>
                                                             <li class="tf-tooltip">
 																<?php echo ! empty( $room_feature_icon ) ? wp_kses_post($room_feature_icon) : ''; ?>
                                                                 <div class="tf-top">
@@ -708,7 +710,8 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                                                                     <i class="tool-i"></i>
                                                                 </div>
                                                             </li>
-														<?php } ?>
+														<?php }
+														}?>
                                                     </ul>
                                                 </div>
 											<?php } ?>

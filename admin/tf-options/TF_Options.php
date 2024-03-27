@@ -158,7 +158,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			);
 			$tf_options_post_type = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_email_templates' );
 			$admin_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
-			if ( class_exists( 'WooCommerce' ) ) {
+			if ( tf_is_woo_active() ) {
 				if ( "tourfic-settings_page_tf_dashboard" == $screen ) {
 					//Order Data Retrive
 					$tf_old_order_limit = new WC_Order_Query( array(

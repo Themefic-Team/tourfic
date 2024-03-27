@@ -962,7 +962,9 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
 								}
 
 
-								$room_term = get_term( $feature ); ?>
+								$room_term = get_term( $feature );
+								if ( ! empty( $room_term->name ) ) {
+                                ?>
                                 <li class="tf-tooltip">
 									<?php echo wp_kses_post( $room_feature_icon ); ?>
                                     <div class="tf-top">
@@ -971,6 +973,7 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                                     </div>
                                 </li>
 							<?php }
+							}
 						} ?>
                     </ul>
                 </div>

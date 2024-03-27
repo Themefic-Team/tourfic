@@ -46,7 +46,7 @@ $tf_total_results = 0;
 
 $tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
 
-if ( class_exists( 'WooCommerce' ) ) {
+if ( tf_is_woo_active() ) {
 	if ( $tf_tour_arc_selected_template == "design-1" ) {
 		include TF_TEMPLATE_PATH . 'tour/archive/design-1.php';
 	} elseif ( $tf_tour_arc_selected_template == "design-2" ) {

@@ -4128,7 +4128,7 @@ add_action( 'wp_ajax_nopriv_tf_hotel_archive_popup_qv', 'tf_hotel_archive_popup_
  * @include
  */
 
-if ( class_exists( 'WooCommerce' ) ) {
+if ( tf_is_woo_active() ) {
 	if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-hotel.php' ) ) {
 		require_once TF_INC_PATH . 'functions/woocommerce/wc-hotel.php';
 	} else {
