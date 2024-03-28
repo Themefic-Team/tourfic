@@ -525,6 +525,10 @@ function tf_hotel_booking_callback() {
 
 			}
 		}
+
+		if (!empty( $tf_without_payment_guest_info )) {
+			$tf_room_data['tf_hotel_data']['visitor_details']	=	json_encode($tf_without_payment_guest_info);
+		}
 		// Booking Type
 		/*if ( function_exists('is_tf_pro') && is_tf_pro() ){
 			$tf_booking_type = !empty($rooms[$room_id]['booking-by']) ? $rooms[$room_id]['booking-by'] : 1;
@@ -766,6 +770,7 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	$due = !empty($values['tf_hotel_data']['due']) ? $values['tf_hotel_data']['due'] : '';
 	$airport_service_type = !empty($values['tf_hotel_data']['air_serivicetype']) ? $values['tf_hotel_data']['air_serivicetype'] : null;
 	$airport_fees = !empty($values['tf_hotel_data']['air_service_info']) ? $values['tf_hotel_data']['air_service_info'] : null;
+	$guest_details = !empty($values['tf_hotel_data']['visitor_details']) ? $values['tf_hotel_data']['visitor_details'] : null;
 
 	/**
 	 * Show data in order meta & email
@@ -836,6 +841,10 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
 
 	if ( ! empty( $due ) ) {
 		$item->update_meta_data( 'due', strip_tags(wc_price( $due )) );
+	}
+	
+	if ( ! empty( $guest_details ) ) {
+		$item->update_meta_data( '_visitor_details', $guest_details );
 	}
 
 
@@ -980,6 +989,8 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 			$children_ages = $item->get_meta( 'Children Ages', true );
 			$airport_service_type = $item->get_meta( 'Airport Service', true );
 			$airport_service_fee = $item->get_meta( 'Airport Service Fee', true );
+			$airport_service_fee = $item->get_meta( '', true );
+			$guest_details = $item->get_meta( '_visitor_details', true );
 
 			$iteminfo = [
 				'room' => $room_selected,
@@ -994,7 +1005,8 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				'airport_service_fee' => $airport_service_fee,
 				'total_price' => $price,
 				'due_price' => $due,
-				'tax_info' => json_encode($fee_sums)
+				'tax_info' => json_encode($fee_sums),
+				'visitor_details' => $guest_details
 			];
 
 			$tf_integration_order_data[] = [
@@ -1210,6 +1222,7 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 			$children_ages = $item->get_meta( 'Children Ages', true );
 			$airport_service_type = $item->get_meta( 'Airport Service', true );
 			$airport_service_fee = $item->get_meta( 'Airport Service Fee', true );
+			$guest_details = $item->get_meta( '_visitor_details', true );
 
 			$iteminfo = [
 				'room' => $room_selected,
@@ -1224,7 +1237,8 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 				'airport_service_fee' => $airport_service_fee,
 				'total_price' => $price,
 				'due_price' => $due,
-				'tax_info' => json_encode($fee_sums)
+				'tax_info' => json_encode($fee_sums),
+				'visitor_details' => $guest_details
 			];
 
 			$tf_integration_order_data[] = [

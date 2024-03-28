@@ -336,7 +336,6 @@
                         </div>
                     </div>
                     <?php $visitor_count++; } } ?>
-                    
                 </div>
             </div>
 

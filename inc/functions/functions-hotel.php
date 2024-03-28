@@ -4944,7 +4944,7 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
                 </div>
 
                 <!-- Popup Footer Control & Partial Payment -->
-                <div class="tf-booking-pagination">
+                <div class="tf-booking-pagination tf-hotel-booking-pagination">
 					<?php if ( empty( $airport_service_type ) && 3 != $room_book_by && empty( $enable_guest_info ) ) { ?>
                         <div class="tf-control-pagination show">
                             <button type="submit"><?php echo __( "Continue", "tourfic" ); ?></button>
@@ -4955,7 +4955,7 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
                         <div class="tf-control-pagination show tf-pagination-content-1">
 							<?php
 							if ( 3 != $room_book_by && empty( $enable_guest_info ) ) { ?>
-                                <button type="submit"><?php echo !empty( tfopt( 'hotel_service_popup_action' ) ) ? tfopt( 'hotel_service_popup_action' ) : __( "Continue", "tourfic" ); ?></button>
+                                <button type="submit" class="hotel-room-book"><?php echo !empty( tfopt( 'hotel_service_popup_action' ) ) ? tfopt( 'hotel_service_popup_action' ) : __( "Continue", "tourfic" ); ?></button>
 							<?php } else { ?>
                                 <a href="#" class="tf-next-control tf-tabs-control"
                                    data-step="<?php echo 3 == $room_book_by && empty( $enable_guest_info ) ? esc_attr( "3" ) : esc_attr( "2" ); ?>"><?php echo !empty( tfopt( 'hotel_service_popup_action' ) ) ? tfopt( 'hotel_service_popup_action' ) : __( "Continue", "tourfic" ); ?></a>

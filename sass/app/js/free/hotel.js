@@ -137,14 +137,16 @@
             var check_out_date = $('input[name=check_out_date]').val();
             if ($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()) {
                 var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
-                var deposit = $(this).closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked');
+                var deposit = $(this).closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked') ? $(this).closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked') : $(this).closest('.tf-withoutpayment-booking').siblings(".room-submit-wrap").find('input[name=make_deposit]').is(':checked');
             } else {
                 var room = $("#hotel_room_number").val();
                 var deposit = $("#hotel_room_depo").val();
-
             }
-            console.log(room)
-            var airport_service = $('.fancybox-slide #airport-service').val();
+
+            var traveller_data = {};
+           
+
+            var airport_service = $('input[name="airport_service"]:checked').val();
 
             var data = {
                 action: 'tf_hotel_booking',
@@ -162,6 +164,10 @@
                 deposit: deposit,
                 airport_service: airport_service
             };
+            $this.closest(".tf-booking-pagination").siblings(".tf-booking-content-summery").find( '.traveller-single-info input' ).each(function (index, element) {
+                var element_name = $(element).attr("name");
+                data[ element_name ] = $(element).val();
+           })
 
             $.ajax({
                 type: 'post',
@@ -580,6 +586,7 @@
                 //     $('#tour_room_details_loader').show();
                 // },
                 complete: function (data) {
+                    $this.closest(".room-submit-wrap").siblings(".tf-withoutpayment-booking").find('.tf-hotel-booking-content').show()
                     $this.unblock();
                 },
                 success: function (data) {
@@ -610,6 +617,8 @@
                             $('.tf-booking-traveller-info').html(response.hotel_booking_summery);
                         }
                         $this.closest('form.tf-room').find('.tf-withoutpayment-booking').addClass('show');
+                        // 
+                        $this.closest(".room-submit-wrap").siblings(".tf-withoutpayment-booking").find('.tf-control-pagination:first-child').show()
                     }
                 },
                 error: function (data) {
@@ -621,6 +630,8 @@
         $(document).on('click', '.tf-hotel-booking-popup-btn', function (e) {
             e.preventDefault();
             var $this = $(this);
+
+            
 
             hotelPopupBooking($this);
         }); 
