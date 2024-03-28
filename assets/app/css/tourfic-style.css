@@ -5209,6 +5209,7 @@ div#tf-contact-info {
   background-color: #FCFDFF;
   border-radius: 24px;
   position: relative;
+  padding: 0px 10px;
 }
 @media only screen and (max-width: 767.98px) {
   .tf-withoutpayment-booking .tf-confirm-popup,
