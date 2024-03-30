@@ -1639,6 +1639,14 @@ function tf_single_tour_booking_form( $post_id ) {
             <!-- bottom bar -->
             <div class="tf-bottom-booking-bar">
                 <div class="tf-bottom-booking-fields">
+                    <?php if(
+                            (! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false) ||
+                            (! $disable_child_price && $pricing_rule == 'person' && $child_price != false) ||
+                            (! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false) ||
+                            (! $disable_adult_price && $pricing_rule == 'group' && $group_price != false) ||
+                            (! $disable_child_price && $pricing_rule == 'group' && $group_price != false) ||
+                            (! $disable_infant_price && $pricing_rule == 'group' && $group_price != false)
+                    ): ?>
                     <div class="tf_selectperson-wrap tf-bottom-booking-field">
                         <div class="tf-bottom-booking-field-icon">
                             <i class="ri-user-line"></i>
@@ -1650,7 +1658,9 @@ function tf_single_tour_booking_form( $post_id ) {
 								<?php } ?>
 
 								<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-									<div class="person-sep"></div>
+									<?php if(!$disable_adult_price && $adult_price != false) :?>
+                                        <div class="person-sep"></div>
+                                    <?php endif; ?>
 									<div class="child-text"><?php echo ( ! empty( $child ) ? esc_attr($child) : '0' ) . ' ' . esc_html__( "Children", "tourfic" ); ?></div>
 								<?php } ?>
 
@@ -1666,7 +1676,9 @@ function tf_single_tour_booking_form( $post_id ) {
 								<?php } ?>
 
 								<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-									<div class="person-sep"></div>
+									<?php if(!$disable_adult_price && $adult_price != false) :?>
+                                        <div class="person-sep"></div>
+									<?php endif; ?>
 									<div class="child-text"><?php echo ( ! empty( $child ) ? esc_attr($child) : '0' ) . ' ' . esc_html__( "Children", "tourfic" ); ?></div>
 								<?php } ?>
 
@@ -1751,6 +1763,7 @@ function tf_single_tour_booking_form( $post_id ) {
                             </div>
                         </div>
                     </div>
+                    <?php endif; ?>
 
                     <div class="tf-bottom-booking-field">
                         <div class="tf-bottom-booking-field-icon">

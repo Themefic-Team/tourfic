@@ -128,7 +128,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                 <div class="setup-content-warper">
                     <div class="welcome-img"><img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL) . 'images/welcome.png' ?>" alt="<?php esc_attr_e( 'Welcome to Tourfic!', 'tourfic' ) ?>"></div>
                     <h1 class="tf-setup-welcome-title"><?php esc_html_e( 'Welcome to Tourfic!', 'tourfic' ) ?></h1>
-                    <div class="tf-setup-welcome-description"><?php esc_html_e( 'Thanks for choosing Tourfic for your travel/hotel/apartment business. We are excited to have you on board. This quick setup wizard is simple and straightforward and shouldn’t take longer than five minutes. It will help you configure the basic settings of Tourfic to get started. Please note that this setup guide is entirely optional.', 'tourfic' ) ?></div>
+                    <div class="tf-setup-welcome-description"><?php esc_html_e( 'This quick setup wizard is simple and straightforward and shouldn’t take longer than five minutes. It will help you configure the basic settings of Tourfic to get started. Please note that this setup guide is entirely optional.', 'tourfic' ) ?></div>
                     <div class="tf-setup-welcome-footer">
                         <button type="button" class="tf-quick-setup-btn tf-setup-start-btn">
                             <span><?php esc_html_e( 'Get Started', 'tourfic' ) ?></span>
@@ -906,7 +906,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                 <div class="tf-setup-finish-content">
                     <div class="welcome-img"><img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL) . 'images/hooray.gif' ?>" alt="<?php esc_attr_e( 'Thank you', 'tourfic' ) ?>"></div>
                     <h1 class="tf-setup-welcome-title"><?php esc_html_e( 'Hooray! You’re all set.', 'tourfic' ) ?></h1>
-                    <div class="tf-setup-welcome-description"><?php esc_html_e( 'Let\'s get started with Tourfic. Provide your customers with a seamless booking </br> experience with this plugin. Let\'s streamline your business operations now!', 'tourfic' ) ?></div>
+                    <div class="tf-setup-welcome-description"><?php echo wp_kses_post( 'Let\'s get started with Tourfic. Provide your customers with a seamless booking </br> experience with this plugin. Let\'s streamline your business operations now!', 'tourfic' ) ?></div>
                     <div class="tf-setup-welcome-footer tf-setup-finish-footer">
                         <a href="<?php echo esc_url(admin_url( 'post-new.php?post_type=tf_hotel' )) ?>" class="tf-link-skip-btn tf-add-new-hotel tf-settings-default-button"><?php esc_html_e( 'Create Hotel', 'tourfic' ) ?></a>
                         <a href="<?php echo esc_url(admin_url( 'post-new.php?post_type=tf_tours' )) ?>" class="tf-link-skip-btn tf-add-new-tour tf-settings-default-button"><?php esc_html_e( 'Create Tour', 'tourfic' ) ?></a>
