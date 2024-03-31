@@ -150,30 +150,30 @@ function tf_hotel_booking_callback() {
 
 			if(empty($tf_booking_fields)){
 				$billing_details  = array(
-					'billing_first_name' => sanitize_text_field($tf_without_payment_confirmation_details['tf_first_name']),
-					'billing_last_name'  => sanitize_text_field($tf_without_payment_confirmation_details['tf_last_name']),
+					'billing_first_name' => isset( $tf_without_payment_confirmation_details['tf_first_name'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_first_name']) : '',
+					'billing_last_name'  => isset( $tf_without_payment_confirmation_details['tf_last_name'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_last_name']) : '',
 					'billing_company'    => '',
-					'billing_address_1'  => sanitize_text_field($tf_without_payment_confirmation_details['tf_street_address']),
+					'billing_address_1'  => isset( $tf_without_payment_confirmation_details['tf_street_address'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_street_address']) : '',
 					'billing_address_2'  => "",
-					'billing_city'       => sanitize_text_field($tf_without_payment_confirmation_details['tf_town_city']),
-					'billing_state'      => sanitize_text_field($tf_without_payment_confirmation_details['tf_state_country']),
-					'billing_postcode'   => sanitize_text_field($tf_without_payment_confirmation_details['tf_postcode']),
-					'billing_country'    => sanitize_text_field($tf_without_payment_confirmation_details['tf_country']),
-					'billing_email'      => sanitize_email($tf_without_payment_confirmation_details['tf_email']),
-					'billing_phone'      => sanitize_text_field($tf_without_payment_confirmation_details['tf_phone']),
+					'billing_city'       => isset( $tf_without_payment_confirmation_details['tf_town_city'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_town_city']) : '',
+					'billing_state'      => isset( $tf_without_payment_confirmation_details['tf_state_country'] ) ? sanitize_text_field( $tf_without_payment_confirmation_details['tf_state_country'] ) : '',
+					'billing_postcode'   => isset( $tf_without_payment_confirmation_details['tf_postcode'] ) ? sanitize_text_field( $tf_without_payment_confirmation_details['tf_postcode'] ) : '',
+					'billing_country'    => isset( $tf_without_payment_confirmation_details['tf_country'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_country']) : '',
+					'billing_email'      => isset( $tf_without_payment_confirmation_details['tf_email'] ) ? sanitize_email($tf_without_payment_confirmation_details['tf_email']) : '',
+					'billing_phone'      => isset( $tf_without_payment_confirmation_details['tf_phone'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_phone']) : '',
 				);
 				$shipping_details  = array(
-					'billing_first_name' => sanitize_text_field($tf_without_payment_confirmation_details['tf_first_name']),
-					'billing_last_name'  => sanitize_text_field($tf_without_payment_confirmation_details['tf_last_name']),
+					'billing_first_name' => isset( $tf_without_payment_confirmation_details['tf_first_name'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_first_name']) : '',
+					'billing_last_name'  => isset( $tf_without_payment_confirmation_details['tf_last_name'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_last_name']) : '',
 					'billing_company'    => '',
-					'billing_address_1'  => sanitize_text_field($tf_without_payment_confirmation_details['tf_street_address']),
+					'billing_address_1'  => isset( $tf_without_payment_confirmation_details['tf_street_address'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_street_address']) : '',
 					'billing_address_2'  => "",
-					'billing_city'       => sanitize_text_field($tf_without_payment_confirmation_details['tf_town_city']),
-					'billing_state'      => sanitize_text_field($tf_without_payment_confirmation_details['tf_state_country']),
-					'billing_postcode'   => sanitize_text_field($tf_without_payment_confirmation_details['tf_postcode']),
-					'billing_country'    => sanitize_text_field($tf_without_payment_confirmation_details['tf_country']),
-					'billing_email'      => sanitize_email($tf_without_payment_confirmation_details['tf_email']),
-					'billing_phone'      => sanitize_text_field($tf_without_payment_confirmation_details['tf_phone']),
+					'billing_city'       => isset( $tf_without_payment_confirmation_details['tf_town_city'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_town_city']) : '',
+					'billing_state'      => isset( $tf_without_payment_confirmation_details['tf_state_country'] ) ? sanitize_text_field( $tf_without_payment_confirmation_details['tf_state_country'] ) : '',
+					'billing_postcode'   => isset( $tf_without_payment_confirmation_details['tf_postcode'] ) ? sanitize_text_field( $tf_without_payment_confirmation_details['tf_postcode'] ) : '',
+					'billing_country'    => isset( $tf_without_payment_confirmation_details['tf_country'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_country']) : '',
+					'billing_email'      => isset( $tf_without_payment_confirmation_details['tf_email'] ) ? sanitize_email($tf_without_payment_confirmation_details['tf_email']) : '',
+					'billing_phone'      => isset( $tf_without_payment_confirmation_details['tf_phone'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_phone']) : '',
 				);
 			} else {
 				$billing_details = [];
