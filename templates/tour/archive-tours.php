@@ -46,12 +46,22 @@ $tf_total_results = 0;
 
 $tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
 
-if( $tf_tour_arc_selected_template=="design-1"){
-	include TF_TEMPLATE_PATH . 'tour/archive/design-1.php';
-}elseif( $tf_tour_arc_selected_template=="design-2"){
-	include TF_TEMPLATE_PATH . 'tour/archive/design-2.php';
-}else{
-	include TF_TEMPLATE_PATH . 'tour/archive/design-default.php';
+if ( tf_is_woo_active() ) {
+	if ( $tf_tour_arc_selected_template == "design-1" ) {
+		include TF_TEMPLATE_PATH . 'tour/archive/design-1.php';
+	} elseif ( $tf_tour_arc_selected_template == "design-2" ) {
+		include TF_TEMPLATE_PATH . 'tour/archive/design-2.php';
+	} else {
+		include TF_TEMPLATE_PATH . 'tour/archive/design-default.php';
+	}
+} else {
+	?>
+	<div class="tf-container">
+		<div class="tf-notice tf-notice-danger">
+			<?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>
+		</div>
+	</div>
+	<?php
 }
 
 ?>

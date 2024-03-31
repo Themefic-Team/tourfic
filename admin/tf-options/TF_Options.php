@@ -158,146 +158,147 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			);
 			$tf_options_post_type = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_email_templates' );
 			$admin_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
-			if("tourfic-settings_page_tf_dashboard"==$screen){
-				//Order Data Retrive
-				$tf_old_order_limit = new WC_Order_Query( array(
-					'limit'   => - 1,
-					'orderby' => 'date',
-					'order'   => 'ASC',
-					'return'  => 'ids',
-				) );
-				$order              = $tf_old_order_limit->get_orders();
-				// Booking Month
-				$tf_co1  = 0;
-				$tf_co2  = 0;
-				$tf_co3  = 0;
-				$tf_co4  = 0;
-				$tf_co5  = 0;
-				$tf_co6  = 0;
-				$tf_co7  = 0;
-				$tf_co8  = 0;
-				$tf_co9  = 0;
-				$tf_co10 = 0;
-				$tf_co11 = 0;
-				$tf_co12 = 0;
-				// Booking Cancel Month
-				$tf_cr1  = 0;
-				$tf_cr2  = 0;
-				$tf_cr3  = 0;
-				$tf_cr4  = 0;
-				$tf_cr5  = 0;
-				$tf_cr6  = 0;
-				$tf_cr7  = 0;
-				$tf_cr8  = 0;
-				$tf_cr9  = 0;
-				$tf_cr10 = 0;
-				$tf_cr11 = 0;
-				$tf_cr12 = 0;
-				foreach ( $order as $item_id => $item ) {
-					$itemmeta         = wc_get_order( $item );
-					$tf_ordering_date = $itemmeta->get_date_created();
-					if ( $tf_ordering_date->date( 'n-y' ) == '1-' . gmdate( 'y' ) ) {
-						if ( "completed" == $itemmeta->get_status() ) {
-							$tf_co1 += 1;
+			if ( tf_is_woo_active() ) {
+				if ( "tourfic-settings_page_tf_dashboard" == $screen ) {
+					//Order Data Retrive
+					$tf_old_order_limit = new WC_Order_Query( array(
+						'limit'   => - 1,
+						'orderby' => 'date',
+						'order'   => 'ASC',
+						'return'  => 'ids',
+					) );
+					$order              = $tf_old_order_limit->get_orders();
+					// Booking Month
+					$tf_co1  = 0;
+					$tf_co2  = 0;
+					$tf_co3  = 0;
+					$tf_co4  = 0;
+					$tf_co5  = 0;
+					$tf_co6  = 0;
+					$tf_co7  = 0;
+					$tf_co8  = 0;
+					$tf_co9  = 0;
+					$tf_co10 = 0;
+					$tf_co11 = 0;
+					$tf_co12 = 0;
+					// Booking Cancel Month
+					$tf_cr1  = 0;
+					$tf_cr2  = 0;
+					$tf_cr3  = 0;
+					$tf_cr4  = 0;
+					$tf_cr5  = 0;
+					$tf_cr6  = 0;
+					$tf_cr7  = 0;
+					$tf_cr8  = 0;
+					$tf_cr9  = 0;
+					$tf_cr10 = 0;
+					$tf_cr11 = 0;
+					$tf_cr12 = 0;
+					foreach ( $order as $item_id => $item ) {
+						$itemmeta         = wc_get_order( $item );
+						$tf_ordering_date = $itemmeta->get_date_created();
+						if ( $tf_ordering_date->date( 'n-y' ) == '1-' . gmdate( 'y' ) ) {
+							if ( "completed" == $itemmeta->get_status() ) {
+								$tf_co1 += 1;
+							}
+							if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+								$tf_cr1 += 1;
+							}
 						}
-						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
-							$tf_cr1 += 1;
+						if ( $tf_ordering_date->date( 'n-y' ) == '2-' . gmdate( 'y' ) ) {
+							if ( "completed" == $itemmeta->get_status() ) {
+								$tf_co2 += 1;
+							}
+							if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+								$tf_cr2 += 1;
+							}
+						}
+						if ( $tf_ordering_date->date( 'n-y' ) == '3-' . gmdate( 'y' ) ) {
+							if ( "completed" == $itemmeta->get_status() ) {
+								$tf_co3 += 1;
+							}
+							if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+								$tf_cr3 += 1;
+							}
+						}
+						if ( $tf_ordering_date->date( 'n-y' ) == '4-' . gmdate( 'y' ) ) {
+							if ( "completed" == $itemmeta->get_status() ) {
+								$tf_co4 += 1;
+							}
+							if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+								$tf_cr4 += 1;
+							}
+						}
+						if ( $tf_ordering_date->date( 'n-y' ) == '5-' . gmdate( 'y' ) ) {
+							if ( "completed" == $itemmeta->get_status() ) {
+								$tf_co5 += 1;
+							}
+							if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+								$tf_cr5 += 1;
+							}
+						}
+						if ( $tf_ordering_date->date( 'n-y' ) == '6-' . gmdate( 'y' ) ) {
+							if ( "completed" == $itemmeta->get_status() ) {
+								$tf_co6 += 1;
+							}
+							if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+								$tf_cr6 += 1;
+							}
+						}
+						if ( $tf_ordering_date->date( 'n-y' ) == '7-' . gmdate( 'y' ) ) {
+							if ( "completed" == $itemmeta->get_status() ) {
+								$tf_co7 += 1;
+							}
+							if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+								$tf_cr7 += 1;
+							}
+						}
+						if ( $tf_ordering_date->date( 'n-y' ) == '8-' . gmdate( 'y' ) ) {
+							if ( "completed" == $itemmeta->get_status() ) {
+								$tf_co8 += 1;
+							}
+							if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+								$tf_cr8 += 1;
+							}
+						}
+						if ( $tf_ordering_date->date( 'n-y' ) == '9-' . gmdate( 'y' ) ) {
+							if ( "completed" == $itemmeta->get_status() ) {
+								$tf_co9 += 1;
+							}
+							if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+								$tf_cr9 += 1;
+							}
+						}
+						if ( $tf_ordering_date->date( 'n-y' ) == '10-' . gmdate( 'y' ) ) {
+							if ( "completed" == $itemmeta->get_status() ) {
+								$tf_co10 += 1;
+							}
+							if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+								$tf_cr10 += 1;
+							}
+						}
+						if ( $tf_ordering_date->date( 'n-y' ) == '11-' . gmdate( 'y' ) ) {
+							if ( "completed" == $itemmeta->get_status() ) {
+								$tf_co11 += 1;
+							}
+							if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+								$tf_cr11 += 1;
+							}
+						}
+						if ( $tf_ordering_date->date( 'n-y' ) == '12-' . gmdate( 'y' ) ) {
+							if ( "completed" == $itemmeta->get_status() ) {
+								$tf_co12 += 1;
+							}
+							if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+								$tf_cr12 += 1;
+							}
 						}
 					}
-					if ( $tf_ordering_date->date( 'n-y' ) == '2-' . gmdate( 'y' ) ) {
-						if ( "completed" == $itemmeta->get_status() ) {
-							$tf_co2 += 1;
-						}
-						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
-							$tf_cr2 += 1;
-						}
-					}
-					if ( $tf_ordering_date->date( 'n-y' ) == '3-' . gmdate( 'y' ) ) {
-						if ( "completed" == $itemmeta->get_status() ) {
-							$tf_co3 += 1;
-						}
-						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
-							$tf_cr3 += 1;
-						}
-					}
-					if ( $tf_ordering_date->date( 'n-y' ) == '4-' . gmdate( 'y' ) ) {
-						if ( "completed" == $itemmeta->get_status() ) {
-							$tf_co4 += 1;
-						}
-						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
-							$tf_cr4 += 1;
-						}
-					}
-					if ( $tf_ordering_date->date( 'n-y' ) == '5-' . gmdate( 'y' ) ) {
-						if ( "completed" == $itemmeta->get_status() ) {
-							$tf_co5 += 1;
-						}
-						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
-							$tf_cr5 += 1;
-						}
-					}
-					if ( $tf_ordering_date->date( 'n-y' ) == '6-' . gmdate( 'y' ) ) {
-						if ( "completed" == $itemmeta->get_status() ) {
-							$tf_co6 += 1;
-						}
-						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
-							$tf_cr6 += 1;
-						}
-					}
-					if ( $tf_ordering_date->date( 'n-y' ) == '7-' . gmdate( 'y' ) ) {
-						if ( "completed" == $itemmeta->get_status() ) {
-							$tf_co7 += 1;
-						}
-						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
-							$tf_cr7 += 1;
-						}
-					}
-					if ( $tf_ordering_date->date( 'n-y' ) == '8-' . gmdate( 'y' ) ) {
-						if ( "completed" == $itemmeta->get_status() ) {
-							$tf_co8 += 1;
-						}
-						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
-							$tf_cr8 += 1;
-						}
-					}
-					if ( $tf_ordering_date->date( 'n-y' ) == '9-' . gmdate( 'y' ) ) {
-						if ( "completed" == $itemmeta->get_status() ) {
-							$tf_co9 += 1;
-						}
-						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
-							$tf_cr9 += 1;
-						}
-					}
-					if ( $tf_ordering_date->date( 'n-y' ) == '10-' . gmdate( 'y' ) ) {
-						if ( "completed" == $itemmeta->get_status() ) {
-							$tf_co10 += 1;
-						}
-						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
-							$tf_cr10 += 1;
-						}
-					}
-					if ( $tf_ordering_date->date( 'n-y' ) == '11-' . gmdate( 'y' ) ) {
-						if ( "completed" == $itemmeta->get_status() ) {
-							$tf_co11 += 1;
-						}
-						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
-							$tf_cr11 += 1;
-						}
-					}
-					if ( $tf_ordering_date->date( 'n-y' ) == '12-' . gmdate( 'y' ) ) {
-						if ( "completed" == $itemmeta->get_status() ) {
-							$tf_co12 += 1;
-						}
-						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
-							$tf_cr12 += 1;
-						}
-					}
+					$tf_complete_orders = [ $tf_co1, $tf_co2, $tf_co3, $tf_co4, $tf_co5, $tf_co6, $tf_co7, $tf_co8, $tf_co9, $tf_co10, $tf_co11, $tf_co12 ];
+					$tf_cancel_orders   = [ $tf_cr1, $tf_cr2, $tf_cr3, $tf_cr4, $tf_cr5, $tf_cr6, $tf_cr7, $tf_cr8, $tf_cr9, $tf_cr10, $tf_cr11, $tf_cr12 ];
+					$tf_chart_enable    = 1;
 				}
-				$tf_complete_orders = [ $tf_co1, $tf_co2, $tf_co3, $tf_co4, $tf_co5, $tf_co6, $tf_co7, $tf_co8, $tf_co9, $tf_co10, $tf_co11, $tf_co12 ];
-				$tf_cancel_orders   = [ $tf_cr1, $tf_cr2, $tf_cr3, $tf_cr4, $tf_cr5, $tf_cr6, $tf_cr7, $tf_cr8, $tf_cr9, $tf_cr10, $tf_cr11, $tf_cr12 ];
-				$tf_chart_enable    = 1;
 			}
-
 
 			$travelfic_toolkit_active_plugins = [];
 			if ( ! is_plugin_active( 'travelfic-toolkit/travelfic-toolkit.php' ) ) {
@@ -350,6 +351,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 						'installed'                        => esc_html__( 'Installed', 'tourfic' ),
 						'activated'                        => esc_html__( 'Activated', 'tourfic' ),
 						'install_failed'                   => esc_html__( 'Install failed', 'tourfic' ),
+						'is_woo_not_active'                => ( ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) || ! is_plugin_active( 'woocommerce/woocommerce.php' ) ),
 						'date_format_change_backend' 	   => $date_format_change,
 						'i18n'                             => array(
 							'no_services_selected' => esc_html__( 'Please select at least one service.', 'tourfic' ),

@@ -3096,10 +3096,12 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
  *
  * @include
  */
-if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-tour.php' ) ) {
-	require_once TF_INC_PATH . 'functions/woocommerce/wc-tour.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-tour.php' );
+if ( tf_is_woo_active() ) {
+	if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-tour.php' ) ) {
+		require_once TF_INC_PATH . 'functions/woocommerce/wc-tour.php';
+	} else {
+		tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-tour.php' );
+	}
 }
 
 /**
@@ -4323,10 +4325,11 @@ function tf_tour_booking_popup_callback() {
 			} else {
 				foreach ( $traveller_info_fields as $field ) {
 					if ( "text" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] || "date" == $field['reg-fields-type'] ) {
+						$reg_field_required = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : '';
 						$response['traveller_info'] .= '
                             <div class="traveller-single-info">
                                 <label for="' . $field['reg-field-name'] . $traveller_in . '">' . esc_html($field['reg-field-label']) . '</label>
-                                <input type="' . $field['reg-fields-type'] . '" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . ']" data-required="' . $field['reg-field-required'] . '" id="' . $field['reg-field-name'] . $traveller_in . '" />
+                                <input type="' . $field['reg-fields-type'] . '" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" id="' . $field['reg-field-name'] . $traveller_in . '" />
                                 <div class="error-text" data-error-for="' . $field['reg-field-name'] . $traveller_in . '"></div>
                             </div>';
 					}

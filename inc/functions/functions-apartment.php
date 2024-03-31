@@ -288,10 +288,12 @@ register_activation_hook( TF_PATH . 'tourfic.php', 'tf_apartment_rewrite_flush' 
  *
  * @include
  */
-if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-apartment.php' ) ) {
-	require_once TF_INC_PATH . 'functions/woocommerce/wc-apartment.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-apartment.php' );
+if ( tf_is_woo_active() ) {
+	if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-apartment.php' ) ) {
+		require_once TF_INC_PATH . 'functions/woocommerce/wc-apartment.php';
+	} else {
+		tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-apartment.php' );
+	}
 }
 
 /**
@@ -1678,7 +1680,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
                             <div class="featuredRooms">
                                 <div class="prco-ltr-right-align-helper">
                                     <div class="tf-archive-shortdesc">
-										<?php echo esc_html( substr( wp_strip_all_tags( get_the_content($post_id) ), 0, 160 ) ) . '...'; ?>
+										<?php echo esc_html( substr( wp_strip_all_tags( get_post_field('post_content', $post_id) ), 0, 160 ) ) . '...'; ?>
                                     </div>
                                 </div>
                                 <div class="roomNameInner">

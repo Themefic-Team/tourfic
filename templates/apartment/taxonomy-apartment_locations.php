@@ -6,6 +6,18 @@
 
 get_header();
 
+if ( !tf_is_woo_active() ) {
+    ?>
+    <div class="tf-container">
+        <div class="tf-notice tf-notice-danger">
+            <?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>
+        </div>
+    </div>
+    <?php
+    get_footer();
+    return;
+}
+
 $term = get_queried_object();
 $post_type = 'tf_apartment';
 $taxonomy = $term->taxonomy;

@@ -2,6 +2,12 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+if ( ! function_exists( 'tf_is_woo_active' ) ) {
+	function tf_is_woo_active() {
+		return is_plugin_active( 'woocommerce/woocommerce.php' );
+	}
+}
+
 /**
  * WC Product Extend
  */
@@ -10,7 +16,9 @@ if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-product-extend.php' ) 
 		require_once TF_INC_PATH . 'functions/woocommerce/wc-product-extend.php';
 	}
 
-	add_action( 'init', 'fida' );
+	if ( tf_is_woo_active() ) {
+		add_action( 'init', 'fida' );
+	}
 } else {
 	tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-product-extend.php' );
 }
@@ -54,10 +62,12 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-tour.php' ) ) {
 /**
  * WooCommerce Common Functions
  */
-if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-common.php' ) ) {
-	require_once TF_INC_PATH . 'functions/woocommerce/wc-common.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-common.php' );
+if ( tf_is_woo_active() ) {
+	if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-common.php' ) ) {
+		require_once TF_INC_PATH . 'functions/woocommerce/wc-common.php';
+	} else {
+		tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-common.php' );
+	}
 }
 
 /**
@@ -125,10 +135,10 @@ if( file_exists( TF_INC_PATH . 'functions/functions_duplicator.php' ) ){
 /**
  * Include Functions Vat
  */
-if( file_exists( TF_INC_PATH . 'functions/functions_vat.php' ) ){
-	require_once TF_INC_PATH . 'functions/functions_vat.php';
-}else{
-	tf_file_missing( TF_INC_PATH . 'functions/functions_vat.php' );
+if ( file_exists( TF_INC_PATH . 'functions/functions_vat.php' ) ) {
+    require_once TF_INC_PATH . 'functions/functions_vat.php';
+} else {
+    tf_file_missing( TF_INC_PATH . 'functions/functions_vat.php' );
 }
 
 /**
@@ -147,10 +157,12 @@ if ( file_exists( TF_INC_PATH . 'enqueues.php' ) ) {
  *
  * @since 1.0
  */
-if ( file_exists( TF_INC_PATH . 'functions/shortcodes.php' ) ) {
-	require_once TF_INC_PATH . 'functions/shortcodes.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/shortcodes.php' );
+if ( tf_is_woo_active() ) {
+	if ( file_exists( TF_INC_PATH . 'functions/shortcodes.php' ) ) {
+		require_once TF_INC_PATH . 'functions/shortcodes.php';
+	} else {
+		tf_file_missing( TF_INC_PATH . 'functions/shortcodes.php' );
+	}
 }
 
 /**
@@ -158,10 +170,12 @@ if ( file_exists( TF_INC_PATH . 'functions/shortcodes.php' ) ) {
  *
  * @since 1.0
  */
-if ( file_exists( TF_INC_PATH . 'functions/widgets.php' ) ) {
-	require_once TF_INC_PATH . 'functions/widgets.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/widgets.php' );
+if ( tf_is_woo_active() ) {
+	if ( file_exists( TF_INC_PATH . 'functions/widgets.php' ) ) {
+		require_once TF_INC_PATH . 'functions/widgets.php';
+	} else {
+		tf_file_missing( TF_INC_PATH . 'functions/widgets.php' );
+	}
 }
 
 # Google Fonts
@@ -2777,7 +2791,7 @@ if ( ! function_exists( 'tf_terms_dropdown' ) ) {
 		} else {
 			$select .= esc_html__( "Invalid taxonomy!!", 'tourfic' );
 		}
-		echo wp_kses_post( $select );
+		echo wp_kses( $select, tf_custom_wp_kses_allow_tags() );
 	}
 }
 
@@ -3441,6 +3455,36 @@ function tf_custom_wp_kses_allow_tags() {
 		'stroke-linecap'  => true,
 		"stroke-linejoin" => true,
 	);
+    $allowed_tags['polygon'] = array(
+        'points' => true,
+        'fill'   => true,
+        'stroke' => true,
+        'stroke-width' => true,
+    );
+    $allowed_tags['circle'] = array(
+        'cx' => true,
+        'cy' => true,
+        'r'  => true,
+        'fill' => true,
+        'stroke' => true,
+        'stroke-width' => true,
+    );
+    $allowed_tags['line'] = array(
+        'x1' => true,
+        'y1' => true,
+        'x2' => true,
+        'y2' => true,
+        'stroke' => true,
+        'stroke-width' => true,
+    );
+    $allowed_tags['text'] = array(
+        'x' => true,
+        'y' => true,
+        'fill' => true,
+        'font-size' => true,
+        'font-family' => true,
+        'text-anchor' => true,
+    );
 	$allowed_tags['defs'] = array(
 		'd' => true
 	);

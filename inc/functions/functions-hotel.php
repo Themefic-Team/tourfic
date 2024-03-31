@@ -1134,7 +1134,7 @@ function tf_room_availability_callback() {
 
 	} else {
 
-		echo '<tr><td colspan="4" style="text-align:center;font-weight:bold;">' . esc_html( $error ) . '%s</td></tr>';
+		echo '<tr><td colspan="4" style="text-align:center;font-weight:bold;">' . esc_html( $error ) . '</td></tr>';
 		?>
         </tbody>
         </table>
@@ -4127,10 +4127,13 @@ add_action( 'wp_ajax_nopriv_tf_hotel_archive_popup_qv', 'tf_hotel_archive_popup_
  *
  * @include
  */
-if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-hotel.php' ) ) {
-	require_once TF_INC_PATH . 'functions/woocommerce/wc-hotel.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-hotel.php' );
+
+if ( tf_is_woo_active() ) {
+	if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-hotel.php' ) ) {
+		require_once TF_INC_PATH . 'functions/woocommerce/wc-hotel.php';
+	} else {
+		tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-hotel.php' );
+	}
 }
 
 /*

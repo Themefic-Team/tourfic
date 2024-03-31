@@ -5,6 +5,18 @@
 // Get header
 get_header();
 
+if ( !tf_is_woo_active() ) {
+	?>
+	<div class="tf-container">
+		<div class="tf-notice tf-notice-danger">
+			<?php esc_html_e( 'Please install and activate WooCommerce plugin to view tour details.', 'tourfic' ); ?>
+		</div>
+	</div>
+	<?php
+	get_footer();
+	return;
+}
+
 // Main query
 while ( have_posts() ) : the_post();
 

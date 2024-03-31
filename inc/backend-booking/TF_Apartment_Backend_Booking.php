@@ -56,6 +56,15 @@ if ( ! class_exists( 'TF_Apartment_Backend_Booking' ) ) {
 		}
 
 		public function tf_backend_booking_page() {
+			if ( !tf_is_woo_active() ) {
+				?>
+                <div class="tf-field-notice-inner tf-notice-danger" style="margin-top: 20px;">
+					<?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>
+                </div>
+				<?php
+				return;
+			}
+
 			echo '<div class="tf-setting-dashboard">';
 			tf_dashboard_header()
 			?>
