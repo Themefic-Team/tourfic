@@ -1134,7 +1134,7 @@ function tf_room_availability_callback() {
 
 	} else {
 
-		echo '<tr><td colspan="4" style="text-align:center;font-weight:bold;">' . esc_html( $error ) . '%s</td></tr>';
+		echo '<tr><td colspan="4" style="text-align:center;font-weight:bold;">' . esc_html( $error ) . '</td></tr>';
 		?>
         </tbody>
         </table>

@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.4.3
-Stable tag: 2.11.22
+Stable tag: 2.11.23
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -322,6 +322,17 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.11.23 - 31 March 2024 =
+
+- Fixed: Tour Mobile Booking Popup Accessibility
+- Fixed: Apartment Location Archive Description Duplicate
+- Fixed: Archive Filter Issue 
+- Fixed: Shortcode Generator Dropdown Issue
+- Fixed: Setup Wizard Step Header Issue
+- Improved: Woocommerce Required Notice Added In Setup Wizard
+- Improved: Woocommerce Condition Added( Pro )
+- Improved: Woocommerce Require Notice Message Added( Pro )
+
 = 2.11.22 - 21 March 2024 =
 
 - Updated: Nonce Validation and escaping patches
@@ -523,17 +534,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Fixed: Hotel search issue 
 - Fixed: Fixed discount type issue
 - Improvement: Organized dashboard menu items
-
-= 2.10.8 - 16 November 2023 =
-
-- Updated: readme.txt
-- Updated: Black Friday Banner
-
-= 2.10.7 - 15 November 2023 =
-
-- Notice: Black Friday Announcements
-- Improvement: System stability Improved
-
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
