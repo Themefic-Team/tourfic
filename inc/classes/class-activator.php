@@ -225,12 +225,12 @@ if ( ! class_exists( 'TF_Activator' ) ) {
 			}
 
 			if ( get_page_template_slug() == 'tf-dashboard' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-				$theme_files     = TF_FD_TEMPLATE_PATH . 'page-templates/frontend-dashboard.php';
+				$theme_files     = TF_PRO_INC_PATH . 'frontend-dashboard/template-parts/page-templates/frontend-dashboard.php';
 				$exists_in_theme = locate_template( $theme_files, false );
 				if ( $exists_in_theme ) {
 					return $exists_in_theme;
 				} else {
-					return TF_FD_TEMPLATE_PATH . 'page-templates/frontend-dashboard.php';
+					return TF_PRO_INC_PATH . 'frontend-dashboard/template-parts/page-templates/frontend-dashboard.php';
 				}
 			}
 
