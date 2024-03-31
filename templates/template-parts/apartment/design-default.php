@@ -71,7 +71,7 @@
 									$share_image_link = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
 									?>
                                     <li>
-                                        <a href="http://pinterest.com/pin/create/button/?url=<?php esc_url( $share_link ); ?>&media=<?php esc_url( $share_image_link[0] ); ?>&description=<?php esc_attr( $share_text ); ?>"
+                                        <a href="http://pinterest.com/pin/create/button/?url=<?php echo esc_url( $share_link ); ?>&media=<?php echo !empty( $share_image_link[0] ) ? esc_url( $share_image_link[0] ) : ''; ?>&description=<?php echo esc_attr( $share_text ); ?>"
                                            class="tf-dropdown-item" target="_blank">
                                             <span class="tf-dropdown-item-content">
                                                 <i class="fab fa-pinterest"></i>
@@ -86,7 +86,7 @@
                                                    for="share_link_input"><?php esc_html_e( 'Share this link', 'tourfic' ); ?></label>
                                             <input type="text" id="share_link_input"
                                                    class="share-center-url share-center-url-input"
-                                                   value="<?php esc_attr( $share_link ); ?>" readonly>
+                                                   value="<?php echo esc_attr( $share_link ); ?>" readonly>
                                             <button id="share_link_button" class="tf_button share-center-copy-cta"
                                                     tabindex="0" role="button">
                                                 <span class="tf-button-text share-center-copy-message"><?php esc_html_e( 'Copy link', 'tourfic' ); ?></span>
