@@ -14152,6 +14152,18 @@ html {
     gap: 16px;
   }
 }
+.tf-template-3 .tour-external-booking-form {
+  background-color: #fcf4e8;
+  padding: 24px;
+}
+.tf-template-3 .tour-external-booking-form .tf-tour-external-booking-button {
+  border: 1px solid #b58e53 !important;
+  background: #b58e53 !important;
+  padding: 12px 32px !important;
+  justify-content: center;
+  transition: 0.3s all ease;
+  border-radius: 0px;
+}
 .tf-template-3 .tf-tour-contact-informations {
   background-color: #fcf4e8;
   padding: 24px;
