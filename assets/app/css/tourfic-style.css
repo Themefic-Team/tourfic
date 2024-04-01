@@ -5247,7 +5247,7 @@ div#tf-contact-info {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 9999;
+  z-index: 99999;
   display: none;
   align-items: center;
   justify-content: center;
@@ -9209,7 +9209,8 @@ div#tf-contact-info {
 @media only screen and (max-width: 767.98px) {
   .tf-bottom-booking-bar {
     transform: rotateX(0);
-    z-index: 999;
+    z-index: 9999;
+    width: 100%;
   }
 }
 .tf-bottom-booking-bar.active {
@@ -9318,6 +9319,7 @@ div#tf-contact-info {
 @media only screen and (max-width: 767.98px) {
   .tf-bottom-booking-bar .tf_selectperson-wrap .tf_input-inner {
     flex-grow: 1;
+    width: 100%;
   }
 }
 .tf-bottom-booking-bar .tf_acrselection-wrap {
