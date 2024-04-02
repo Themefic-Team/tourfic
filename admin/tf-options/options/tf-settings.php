@@ -1756,7 +1756,8 @@ TF_Settings::option( 'tf_settings', array(
 					'query_args'  => array(
 						'post_type'      => 'page',
 						'posts_per_page' => - 1,
-					)
+					),
+					'default'     => tf_search_page_default(),
 				),
 
 				array(
