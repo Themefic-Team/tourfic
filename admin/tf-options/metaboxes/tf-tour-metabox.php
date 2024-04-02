@@ -130,7 +130,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'class'    => 'gmaps',
 					'type'     => 'map',
 					'label'    => esc_html__( 'Dynamic Location Search', 'tourfic' ),
-					'subtitle' => sprintf( wp_kses_post(__( 'Enter the specific address you wish to use for the hotel and select the correct option from the suggested addresses. This will be used to hyperlink address and display the address on the front-end map. <strong>Google Maps is also available for location. Simply set up your <a href="%s" target="_blank">Google Maps API Key</a></strong>', 'tourfic' )), esc_url( admin_url('admin.php?page=tf_settings#tab=map_settings') ) ),
+					'subtitle' => sprintf( wp_kses_post(__( 'Enter the specific address you wish to use for the tour and select the correct option from the suggested addresses. This will be used to hyperlink address and display the address on the front-end map. <strong>Google Maps is also available for location. Simply set up your <a href="%s" target="_blank">Google Maps API Key</a></strong>', 'tourfic' )), esc_url( admin_url('admin.php?page=tf_settings#tab=map_settings') ) ),
 					'height'   => '250px',
 					'settings' => array(
 						'scrollWheelZoom' => true,
@@ -1554,35 +1554,35 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 
 		// Multiple tags for tours
 		'tours_multiple_tags' => array(
-			'title'  => __( 'Labels', 'tourfic' ),
+			'title'  => __( 'Promotional Tags', 'tourfic' ),
 			'icon'   => 'fa fa-list',
 			'fields' => array(
 				array(
 					'id'      => 'tf-tour-tags-heading',
 					'type'    => 'heading',
-					'label' => __( 'Tour labels', 'tourfic' ),
+					'label' => __( 'Tour tags', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
 					'id'           => 'tf-tour-tags',
 					'type'         => 'repeater',
-					'label'        => __( 'Labels', 'tourfic' ),
-					'subtitle' => __('Add some keywords that highlight your tour\'s Unique Selling Point (USP). This label will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
-					'button_title' => __( 'Add / Insert New Label', 'tourfic' ),
+					'label'        => __( 'Promotional Tags', 'tourfic' ),
+					'subtitle' => __('Add some keywords that highlight your tour\'s Unique Selling Point (USP). This tag will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
+					'button_title' => __( 'Add / Insert New Tag', 'tourfic' ),
 					'fields'       => array(
 
 						array(
 							'id'    => 'tour-tag-title',
 							'type'  => 'text',
-							'label' => __( 'Label Title', 'tourfic' ),
+							'label' => __( 'Tag Title', 'tourfic' ),
 						),
 
 						array(
 							'id'       => 'tour-tag-color-settings',
 							'type'     => 'color',
 							'class'    => 'tf-label-field',
-							'label'    => __( 'Label Colors', 'tourfic' ),
-							'subtitle' => __( 'Colors of Label Background and Font', 'tourfic' ),
+							'label'    => __( 'Tag Colors', 'tourfic' ),
+							'subtitle' => __( 'Colors of Tag Background and Font', 'tourfic' ),
 							'multiple' => true,
 							'inline'   => true,
 							'colors'   => array(

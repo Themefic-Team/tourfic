@@ -761,7 +761,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		 */
 		public function save_options() {
 
-
 			// Check if a nonce is valid.
 			if (  !isset( $_POST['tf_option_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tf_option_nonce'] ) ), 'tf_option_nonce_action' ) ) {
 				return;

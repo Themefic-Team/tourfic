@@ -26,9 +26,9 @@
                                         echo esc_html(', '. $night_count );
                                         if ( ! empty( $night_count ) ) {
                                             if ( $night_count > 1 ) {
-                                                echo esc_html__( 'Nights', 'tourfic' );
+                                                echo esc_html__( ' Nights', 'tourfic' );
                                             } else {
-                                                echo esc_html__( 'Night', 'tourfic' );
+                                                echo esc_html__( ' Night', 'tourfic' );
                                             }
                                         }
                                     echo '</span>';
