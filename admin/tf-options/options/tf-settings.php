@@ -8,6 +8,26 @@ if ( file_exists( TF_ADMIN_PATH . 'tf-options/options/tf-menu-icon.php' ) ) {
 	$menu_icon = 'dashicons-palmtree';
 }
 
+if ( ! function_exists( 'tf_search_page_default') ) {
+	function tf_search_page_default() {
+		$args = array(
+			'post_type'      => 'page',
+			'posts_per_page' => - 1,
+			'post_status' => 'publish',
+		);
+
+		$loop = new WP_Query( $args );
+		if( $loop->have_posts() ) {
+			foreach( $loop->posts as $post ) {
+				if( $post->post_name == 'tf-search') {
+					return $post->ID;
+				}
+			}
+		}
+		return;
+	}
+}
+
 TF_Settings::option( 'tf_settings', array(
 	'title'    => __( 'Tourfic Settings ', 'tourfic' ),
 	'icon'     => $menu_icon,
@@ -1756,7 +1776,8 @@ TF_Settings::option( 'tf_settings', array(
 					'query_args'  => array(
 						'post_type'      => 'page',
 						'posts_per_page' => - 1,
-					)
+					),
+					'default'     => tf_search_page_default(),
 				),
 
 				array(

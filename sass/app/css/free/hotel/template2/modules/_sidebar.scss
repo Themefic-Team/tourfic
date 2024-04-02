@@ -161,6 +161,20 @@ button.tf-review-open.button, .tf-reting-field button {
     }
 }
 
+.tour-external-booking-form {
+    background-color: #fcf4e8;
+    padding: 24px;
+
+    .tf-tour-external-booking-button {
+        border: 1px solid #b58e53 !important;
+        background: #b58e53 !important;
+        padding: 12px 32px !important;
+        justify-content: center;
+        transition: .3s all ease;
+        border-radius: 0px;
+    }
+}
+
 .tf-tour-contact-informations {
     background-color: #fcf4e8;
     padding: 24px;

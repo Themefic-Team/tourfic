@@ -5247,7 +5247,7 @@ div#tf-contact-info {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 9999;
+  z-index: 99999;
   display: none;
   align-items: center;
   justify-content: center;
@@ -9209,7 +9209,8 @@ div#tf-contact-info {
 @media only screen and (max-width: 767.98px) {
   .tf-bottom-booking-bar {
     transform: rotateX(0);
-    z-index: 999;
+    z-index: 9999;
+    width: 100%;
   }
 }
 .tf-bottom-booking-bar.active {
@@ -9318,6 +9319,7 @@ div#tf-contact-info {
 @media only screen and (max-width: 767.98px) {
   .tf-bottom-booking-bar .tf_selectperson-wrap .tf_input-inner {
     flex-grow: 1;
+    width: 100%;
   }
 }
 .tf-bottom-booking-bar .tf_acrselection-wrap {
@@ -14149,6 +14151,18 @@ html {
   .tf-template-3 .tf-single-widgets {
     gap: 16px;
   }
+}
+.tf-template-3 .tour-external-booking-form {
+  background-color: #fcf4e8;
+  padding: 24px;
+}
+.tf-template-3 .tour-external-booking-form .tf-tour-external-booking-button {
+  border: 1px solid #b58e53 !important;
+  background: #b58e53 !important;
+  padding: 12px 32px !important;
+  justify-content: center;
+  transition: 0.3s all ease;
+  border-radius: 0px;
 }
 .tf-template-3 .tf-tour-contact-informations {
   background-color: #fcf4e8;

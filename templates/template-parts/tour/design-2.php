@@ -1,3 +1,31 @@
+
+<?php
+    $tf_booking_type = '1';
+    $tf_booking_url = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = '';
+    if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+        $tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+        $tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
+        $tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
+        $tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
+        $tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
+        $tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
+    }
+    if( 2==$tf_booking_type && !empty($tf_booking_url) ){
+        $external_search_info = array(
+            '{adult}'    => !empty($adults) ? $adults : 1,
+            '{child}'    => !empty($children) ? $children : 0,
+            '{infant}'     => !empty($infant) ? $infant : 0,
+            '{booking_date}' => !empty($tour_date) ? $tour_date : '',
+        );
+        if(!empty($tf_booking_attribute)){
+            $tf_booking_query_url = str_replace(array_keys($external_search_info), array_values($external_search_info), $tf_booking_query_url);
+            if( !empty($tf_booking_query_url) ){
+                $tf_booking_url = $tf_booking_url.'/?'.$tf_booking_query_url;
+            }
+        }
+    }
+?>
+
 <div class="tf-template-3 tf-tour-single">
 
     <!--Hero section start -->
@@ -156,10 +184,22 @@
                     
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets">
-                    <div class="tf-search-date-wrapper tf-single-widgets">
-                        <h2 class="tf-section-title"><?php esc_html_e("Available Date", "tourfic"); ?></h2>
-                        <?php echo wp_kses(tf_single_tour_booking_form( $post->ID ), tf_custom_wp_kses_allow_tags()); ?>
-                    </div>
+                    <?php  if( ($tf_booking_type == 2 && $tf_hide_booking_form !== '1') || $tf_booking_type == 1 || $tf_booking_type == 3) : ?>
+                        <div class="tf-search-date-wrapper tf-single-widgets">
+                            <h2 class="tf-section-title"><?php esc_html_e("Available Date", "tourfic"); ?></h2>
+                            <?php echo wp_kses(tf_single_tour_booking_form( $post->ID ), tf_custom_wp_kses_allow_tags()); ?>
+                        </div>
+                    <?php endif; ?>
+                    
+                    <!-- Tour External Booking From -->
+                    <?php if ($tf_booking_type == 2 && $tf_hide_booking_form == 1 ): ?>
+                        <div class="tour-external-booking-form tf-single-widgets">
+                            <h2 class="tf-section-title"><?php esc_html_e("Book This Tour", "tourfic"); ?></h2>
+                            <div class="tf-btn">
+                                <a href="<?php echo esc_url($tf_booking_url) ?>" target="_blank" class="tf-btn-normal btn-primary tf-tour-external-booking-button" style="margin-top: 10px;"><?php esc_html_e('Book now', 'tourfic'); ?></a>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                     
                     <!-- Contact info - Start -->
                     <?php if ( $email || $phone || $fax || $website ) : ?>
