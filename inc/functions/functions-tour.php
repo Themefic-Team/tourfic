@@ -1135,6 +1135,18 @@ function tf_single_tour_booking_form( $post_id ) {
 			return str_replace($tag, $value, $text);
 		}
 	}
+
+	$tf_booking_type = '1';
+    $tf_booking_url = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = '';
+    if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+        $tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+        $tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
+        $tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
+        $tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
+        $tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
+        $tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
+    }
+	
 	if ( ! function_exists( 'tf_booking_popup' ) ) {
 		function tf_booking_popup( $post_id ) {
 			?>
