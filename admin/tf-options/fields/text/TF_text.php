@@ -29,7 +29,7 @@ if ( ! class_exists( 'TF_text' ) ) {
 				//remove special characters, replace space with underscore and convert to lowercase
 				return sanitize_title( str_replace( ' ', '_', strtolower( $this->value ) ) );
 			} else {
-				return sanitize_text_field( $this->value );
+				return stripslashes(sanitize_text_field( $this->value ));
 			}
 		}
 	}

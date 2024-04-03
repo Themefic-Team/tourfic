@@ -54,6 +54,11 @@ if ( ! class_exists( 'TF_Activator' ) ) {
 					'title'   => _x( 'TF Search', 'Page title', 'tourfic' ),
 					'content' => '',
 				),
+				'search_form' => array(
+					'name'    => _x( 'tf-search-form', 'Page slug', 'tourfic' ),
+					'title'   => _x( 'TF Search Form', 'Page title', 'tourfic' ),
+					'content' => "[tf_search_form style='default' type='all' fullwidth='true' title='' subtitle='' classes='' advanced='enabled']",
+				),
 				'wishlist'           => array(
 					'name'    => _x( 'tf-wishlist', 'Page slug', 'tourfic' ),
 					'title'   => _x( 'TF Wishlist', 'Page title', 'tourfic' ),
@@ -249,6 +254,7 @@ if ( ! class_exists( 'TF_Activator' ) ) {
 
 		public function add_post_state( $post_states, $post ) {
 			if ( $post->ID == get_option( 'tf_search_page_id' ) ||
+			     $post->ID == get_option( 'tf_search_form_page_id' ) ||
 			     $post->ID == get_option( 'tf_wishlist_page_id' ) ||
 			     $post->ID == get_option( 'tf_login_page_id' ) ||
 			     $post->ID == get_option( 'tf_register_page_id' ) ||

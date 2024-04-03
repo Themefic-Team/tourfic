@@ -702,8 +702,10 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 							<div class="tf_form-row">
 								<label class="tf_label-row">
 									<span class="tf-label"><?php esc_html_e( 'Destination', 'tourfic' ); ?>:</span>
-									<div class="tf_form-inner tf-d-g">
-										<i class="fas fa-search"></i>
+									<div class="tf_form-inner">
+                                        <div class="tf-search-form-field-icon">
+										    <i class="fas fa-search"></i>
+                                        </div>
 										<?php if ( (empty($advanced) || !empty($advanced)) && "enabled"!=$advanced ){ ?>
 										<input type="text" name="place-name" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> id="tf-destination" class="" placeholder="<?php esc_html_e( 'Enter Destination', 'tourfic' ); ?>" value="">
 										<input type="hidden" name="place" id="tf-search-tour" class="tf-place-input"/>
@@ -743,7 +745,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 
                 <div class="tf_selectperson-wrap">
                     <div class="tf_input-inner">
-                        <span class="tf_person-icon">
+                        <span class="tf_person-icon tf-search-form-field-icon">
                             <i class="fas fa-user"></i>
                         </span>
                         <div class="adults-text"><?php esc_html_e( '1 Adults', 'tourfic' ); ?></div>
@@ -801,8 +803,10 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
                     <div class="tf_input-inner">
                         <label class="tf_label-row">
                             <span class="tf-label"><?php esc_html_e( 'Check-in & Check-out date', 'tourfic' ); ?></span>
-                            <div class="tf_form-inner tf-d-g">
-                                <i class="far fa-calendar-alt"></i>
+                            <div class="tf_form-inner">
+                                <div class="tf-search-form-field-icon">
+                                    <i class="far fa-calendar-alt"></i>
+                                </div>
                                 <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
                                        placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo tfopt( 'date_tour_search' ) ? 'required' : ''; ?>>
                             </div>
