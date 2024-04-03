@@ -4,7 +4,8 @@ class TF_Demo_Importer {
     public function __construct() {
     //     add_action( 'wp_ajax_travelfic-demo-hotel-import', array( $this, 'prepare_travelfic_hotel_imports' ) );
     //     add_action( 'wp_ajax_travelfic-demo-tour-import', array( $this, 'prepare_travelfic_tour_imports' ) );
-        // add_action( 'init', array( $this, 'prepare_travelfic_tour_imports' ) );
+        add_action( 'init', array( $this, 'prepare_travelfic_tour_imports' ) );
+        // add_action( 'init', array( $this, 'prepare_travelfic_hotel_imports' ) );
     }
 
     private static $instance = null;
@@ -1101,7 +1102,7 @@ class TF_Demo_Importer {
                         $tf_tour_features = array();
                         foreach( $features as $feature ){
                             $term = get_term_by( 'name', $feature, 'tour_features' );
-                            $term_id = $term->term_id;
+                            $term_id =  $term ? $term->term_id : '';
                             $tf_tour_features[] = $term_id;
                         }
                         $post_meta['tf_tours_opt']['features'] = $tf_tour_features;
@@ -1111,7 +1112,7 @@ class TF_Demo_Importer {
                         $tf_tour_types = array();
                         foreach( $tour_types as $feature ){
                             $term = get_term_by( 'name', $feature, 'tour_type' );
-                            $term_id = $term->term_id;
+                            $term_id = $term ? $term->term_id : '';
                             $tf_tour_types[] = $term_id;
                         }
                         $post_meta['tf_tours_opt']['tour_types'] = $tf_tour_types;
