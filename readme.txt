@@ -2,7 +2,7 @@
 Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi, hasanet
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
-Tested up to: 6.4.3
+Tested up to: 6.5
 Stable tag: 2.11.24
 Requires PHP: 7.4
 License: GPLv2 or later
@@ -322,7 +322,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.11.24 - 31 March 2024 =
+= 2.11.24 - 31 April 2024 =
 
 - Improved: Permalink Settings Migration
 - Compatibility: Compatible with WordPress 6.5
