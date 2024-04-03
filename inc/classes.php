@@ -77,3 +77,11 @@ if(is_admin()){
 		tf_file_missing(TF_INC_PATH . 'backend-booking/TF_Apartment_Backend_Booking.php');
 	}
 }
+
+// demo hotel/tour/apartment 
+
+if ( file_exists( TF_INC_PATH . 'classes/class-tf-demo-importer.php' ) ) {
+	require_once TF_INC_PATH . 'classes/class-tf-demo-importer.php';
+} else {
+	tf_file_missing(TF_INC_PATH . 'classes/class-tf-demo-importer.php');
+}
