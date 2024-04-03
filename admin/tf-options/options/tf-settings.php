@@ -4350,12 +4350,14 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'tour_settings',
 									'type'    => 'heading',
-									'content' => __( 'Thumbnail Settings in PDF', 'tourfic' ),
+									'label' => __( 'Thumbnail Settings in PDF', 'tourfic' ),
+									'subtitle' => esc_html__( 'These settings will adjust the height and width of the main tour image in the itinerary.', 'tourfic' ),
 								),
 								array(
 									'id'          => '',
 									'type'        => 'number',
 									'label'       => __( 'Image Thumbnail Height', 'tourfic' ),
+									'subtitle' => esc_html__( 'Adjust the height of the tour image in the itinerary. Leave blank to use the image in its full size.', 'tourfic' ),
 									'field_width' => 50,
 									'is_pro'      => true,
 								),
@@ -4363,6 +4365,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'          => '',
 									'type'        => 'number',
 									'label'       => __( 'Image Thumbnail Width', 'tourfic' ),
+									'subtitle' => esc_html__( 'Adjust the width of the tour image in the itinerary. Leave blank to use the image in its full size.', 'tourfic' ),
 									'field_width' => 50,
 									'is_pro'      => true,
 								),
