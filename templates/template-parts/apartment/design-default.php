@@ -6,18 +6,9 @@
             <div class="tf-title-wrap">
                 <div class="tf-title-left">
                     <h1><?php the_title(); ?></h1>
-					<?php if ( $locations ) { ?>
+					<?php if ( !empty($address) ) { ?>
                         <div class="tf-map-link">
-							<?php if ( $address ) {
-								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . wp_kses_post( $address ) . ' – </span>';
-							} ?>
-
-                            <a href="<?php echo esc_url( $first_location_url ); ?>" class="more-apartment tf-d-ib">
-								<?php
-                                /* translators: %s: location name */
-                                printf( esc_html__( 'Show more apartments in %s', 'tourfic' ), esc_html( $first_location_name ) );
-                                ?>
-                            </a>
+							<?php echo  wp_kses_post( $address ); ?>
                         </div>
 					<?php } ?>
                 </div>
@@ -37,7 +28,12 @@
 
 					<?php if ( ! $disable_share_opt == '1' ) : ?>
                         <div class="tf-share">
-                            <a href="#dropdown-share-center" class="share-toggle" data-toggle="true"><i class="far fa-share-alt"></i></a>
+                            <a href="#dropdown-share-center" class="share-toggle" data-toggle="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M4 12V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V12M16 6L12 2M12 2L8 6M12 2V15" stroke="#8997A9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span><?php esc_html_e('Share', 'tourfic'); ?></span>
+                            </a>
                             <div id="dropdown-share-center" class="share-tour-content">
                                 <ul class="tf-dropdown-content">
                                     <li>
@@ -105,10 +101,11 @@
 							if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
 								?>
                                 <a class="tf-wishlist-button" title="<?php esc_html_e( 'Click to toggle wishlist', 'tourfic' ); ?>">
-                                    <i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart"
+                                    <i class="<?php echo $has_in_wishlist ? 'far tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart"
                                        data-nonce="<?php echo esc_attr( wp_create_nonce( "wishlist-nonce" ) ) ?>"
                                        data-id="<?php echo esc_attr( $post_id ) ?>"
                                        data-type="<?php echo esc_attr( $post_type ) ?>" <?php echo tfopt( 'wl-page' ) ? 'data-page-title="' . esc_attr( get_the_title( tfopt( 'wl-page' ) ) ) . '" data-page-url="' . esc_url( get_permalink( tfopt( 'wl-page' ) ) ) . '"' : ''; ?>></i>
+                                    <span><?php esc_html_e('Save', 'tourfic'); ?></span>
                                 </a>
 								<?php
 							}
@@ -280,102 +277,109 @@
                         <!-- Start Key Features Section -->
                         <div class="tf-apartment-amenities-section">
                             <h2 class="section-heading"><?php echo ! empty( $meta['amenities_title'] ) ? esc_html( $meta['amenities_title'] ) : ''; ?></h2>
-                            <div class="tf-apartment-amenities">
-								<?php if ( ! empty( $fav_amenities ) ):
-									foreach ( array_slice( $fav_amenities, 0, 10 ) as $amenity ) :
-										$feature = get_term_by( 'id', $amenity['feature'], 'apartment_feature' );
-										$feature_meta = get_term_meta( $amenity['feature'], 'tf_apartment_feature', true );
-										$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
-										if ( $f_icon_type == 'icon' ) {
-											$feature_icon = '<i class="' . $feature_meta['apartment-feature-icon'] . '"></i>';
-										} elseif ( $f_icon_type == 'custom' ) {
-											$feature_icon = '<img src="' . esc_url( $feature_meta['apartment-feature-icon-custom'] ) . '" style="width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
-										}
-										?>
-                                        <div class="tf-apt-amenity">
-											<?php echo ! empty( $feature_icon ) ? "<div class='tf-apt-amenity-icon'>" . wp_kses_post($feature_icon) . "</div>" : ""; ?>
-                                            <span><?php echo esc_html( $feature->name ); ?></span>
-                                        </div>
-									<?php endforeach; ?>
-								<?php else :
-									foreach ( array_slice( tf_data_types( $meta['amenities'] ), 0, 10 ) as $amenity ) :
-										if ( ! empty( $amenity['feature'] ) ) {
-											$feature      = get_term_by( 'id', $amenity['feature'], 'apartment_feature' );
-											$feature_meta = get_term_meta( $amenity['feature'], 'tf_apartment_feature', true );
-										}
-										$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
-										if ( $f_icon_type == 'icon' ) {
-											$feature_icon = '<i class="' . $feature_meta['apartment-feature-icon'] . '"></i>';
-										} elseif ( $f_icon_type == 'custom' ) {
-											$feature_icon = '<img src="' . esc_url( $feature_meta['apartment-feature-icon-custom'] ) . '" style="width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
-										}
-										?>
-                                        <div class="tf-apt-amenity">
-											<?php echo ! empty( $feature_icon ) ? "<div class='tf-apt-amenity-icon'>" . wp_kses_post($feature_icon) . "</div>" : ""; ?>
-                                            <span><?php echo ! empty( $feature->name ) ? esc_html( $feature->name ) : ''; ?></span>
-                                        </div>
-									<?php endforeach; ?>
-								<?php endif; ?>
-                            </div>
-							<?php if ( count( tf_data_types( $meta['amenities'] ) ) > 10 ): ?>
-                                <div class="tf-apartment-amenities-more">
-                                    <a class="tf_button btn-styled tf-modal-btn" data-target="#tf-amenities-modal"><?php esc_html_e( 'Show all amenities', 'tourfic' ) ?></a>
-                                </div>
-
-                                <!-- Modal -->
-                                <div class="tf-modal" id="tf-amenities-modal">
-                                    <div class="tf-modal-dialog">
-                                        <div class="container tf-modal-content">
-                                            <div class="tf-modal-header">
-                                                <a data-dismiss="modal" class="tf-modal-close">&#10005;</a>
+                            <div class="tf-apartment-amenities-inner">
+                                <div class="tf-apartment-amenities">
+		                            <?php if ( ! empty( $fav_amenities ) ):
+			                            foreach ( array_slice( $fav_amenities, 0, 10 ) as $amenity ) :
+				                            $feature = get_term_by( 'id', $amenity['feature'], 'apartment_feature' );
+				                            $feature_meta = get_term_meta( $amenity['feature'], 'tf_apartment_feature', true );
+				                            $f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+				                            if ( $f_icon_type == 'icon' ) {
+					                            $feature_icon = '<i class="' . $feature_meta['apartment-feature-icon'] . '"></i>';
+				                            } elseif ( $f_icon_type == 'custom' ) {
+					                            $feature_icon = '<img src="' . esc_url( $feature_meta['apartment-feature-icon-custom'] ) . '" style="width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
+				                            }
+				                            ?>
+                                            <div class="tf-apt-amenity">
+					                            <?php echo ! empty( $feature_icon ) ? "<div class='tf-apt-amenity-icon'>" . wp_kses_post($feature_icon) . "</div>" : ""; ?>
+                                                <span><?php echo esc_html( $feature->name ); ?></span>
                                             </div>
-                                            <div class="tf-modal-body">
-                                                <h2 class="section-heading"><?php echo ! empty( $meta['amenities_title'] ) ? esc_html( $meta['amenities_title'] ) : ''; ?></h2>
-												<?php
-												$categories     = [];
-												$amenities_cats = ! empty( tf_data_types( tfopt( 'amenities_cats' ) ) ) ? tf_data_types( tfopt( 'amenities_cats' ) ) : '';
-												foreach ( tf_data_types( $meta['amenities'] ) as $amenity ) {
-													$cat     = $amenity['cat'];
-													$feature = $amenity['feature'];
+			                            <?php endforeach; ?>
+		                            <?php else :
+			                            foreach ( array_slice( tf_data_types( $meta['amenities'] ), 0, 10 ) as $amenity ) :
+				                            if ( ! empty( $amenity['feature'] ) ) {
+					                            $feature      = get_term_by( 'id', $amenity['feature'], 'apartment_feature' );
+					                            $feature_meta = get_term_meta( $amenity['feature'], 'tf_apartment_feature', true );
+				                            }
+				                            $f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+				                            if ( $f_icon_type == 'icon' ) {
+					                            $feature_icon = '<i class="' . $feature_meta['apartment-feature-icon'] . '"></i>';
+				                            } elseif ( $f_icon_type == 'custom' ) {
+					                            $feature_icon = '<img src="' . esc_url( $feature_meta['apartment-feature-icon-custom'] ) . '" style="width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
+				                            }
+				                            ?>
+                                            <div class="tf-apt-amenity">
+					                            <?php echo ! empty( $feature_icon ) ? "<div class='tf-apt-amenity-icon'>" . wp_kses_post($feature_icon) . "</div>" : ""; ?>
+                                                <span><?php echo ! empty( $feature->name ) ? esc_html( $feature->name ) : ''; ?></span>
+                                            </div>
+			                            <?php endforeach; ?>
+		                            <?php endif; ?>
+                                </div>
+	                            <?php if ( count( tf_data_types( $meta['amenities'] ) ) > 10 ): ?>
+                                    <div class="tf-apartment-amenities-more">
+                                        <a class="tf-modal-btn" data-target="#tf-amenities-modal">
+                                            <?php esc_html_e( 'All Amenities', 'tourfic' ) ?>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M10.0252 4.22852L9.08457 5.17353L11.2647 7.34351L2.1947 7.35263L2.19604 8.68597L11.2412 8.67686L9.09779 10.8304L10.0428 11.771L13.8052 7.99092L10.0252 4.22852Z" fill="#2A3343"/>
+                                            </svg>
+                                        </a>
+                                    </div>
 
-													// Check if the category exists in the $categories array
-													if ( ! isset( $categories[ $cat ] ) ) {
-														$categories[ $cat ] = [];
-													}
+                                    <!-- Modal -->
+                                    <div class="tf-modal" id="tf-amenities-modal">
+                                        <div class="tf-modal-dialog">
+                                            <div class="container tf-modal-content">
+                                                <div class="tf-modal-header">
+                                                    <a data-dismiss="modal" class="tf-modal-close">&#10005;</a>
+                                                </div>
+                                                <div class="tf-modal-body">
+                                                    <h2 class="section-heading"><?php echo ! empty( $meta['amenities_title'] ) ? esc_html( $meta['amenities_title'] ) : ''; ?></h2>
+						                            <?php
+						                            $categories     = [];
+						                            $amenities_cats = ! empty( tf_data_types( tfopt( 'amenities_cats' ) ) ) ? tf_data_types( tfopt( 'amenities_cats' ) ) : '';
+						                            foreach ( tf_data_types( $meta['amenities'] ) as $amenity ) {
+							                            $cat     = $amenity['cat'];
+							                            $feature = $amenity['feature'];
 
-													// Add the feature to the category
-													$categories[ $cat ][] = $feature;
-												}
+							                            // Check if the category exists in the $categories array
+							                            if ( ! isset( $categories[ $cat ] ) ) {
+								                            $categories[ $cat ] = [];
+							                            }
 
-												foreach ( $categories as $cat => $features ) :
-													?>
-                                                    <div class="tf-apartment-amenity-cat">
-                                                        <h3><?php echo ! empty( $amenities_cats[ $cat ]['amenities_cat_name'] ) ? esc_html( $amenities_cats[ $cat ]['amenities_cat_name'] ) : ''; ?></h3>
-                                                        <div class="tf-apartment-amenities">
-															<?php foreach ( $features as $feature_id ):
-																$_feature = get_term_by( 'id', $feature_id, 'apartment_feature' );
-																$_feature_meta = get_term_meta( $feature_id, 'tf_apartment_feature', true );
-																$f_icon_type = ! empty( $_feature_meta['icon-type'] ) ? $_feature_meta['icon-type'] : '';
-																if ( $f_icon_type == 'icon' ) {
-																	$feature_icon = '<i class="' . $_feature_meta['apartment-feature-icon'] . '"></i>';
-																} elseif ( $f_icon_type == 'custom' ) {
-																	$feature_icon = '<img src="' . esc_url( $_feature_meta['apartment-feature-icon-custom'] ) . '" style="width: ' . $_feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $_feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
-																}
-																?>
-                                                                <div class="tf-apt-amenity">
-																	<?php echo ! empty( $feature_icon ) ? "<div class='tf-apt-amenity-icon'>" . wp_kses_post($feature_icon) . "</div>" : ""; ?>
-                                                                    <span><?php echo esc_html( $_feature->name ); ?></span>
-                                                                </div>
-															<?php endforeach; ?>
+							                            // Add the feature to the category
+							                            $categories[ $cat ][] = $feature;
+						                            }
+
+						                            foreach ( $categories as $cat => $features ) :
+							                            ?>
+                                                        <div class="tf-apartment-amenity-cat">
+                                                            <h3><?php echo ! empty( $amenities_cats[ $cat ]['amenities_cat_name'] ) ? esc_html( $amenities_cats[ $cat ]['amenities_cat_name'] ) : ''; ?></h3>
+                                                            <div class="tf-apartment-amenities">
+									                            <?php foreach ( $features as $feature_id ):
+										                            $_feature = get_term_by( 'id', $feature_id, 'apartment_feature' );
+										                            $_feature_meta = get_term_meta( $feature_id, 'tf_apartment_feature', true );
+										                            $f_icon_type = ! empty( $_feature_meta['icon-type'] ) ? $_feature_meta['icon-type'] : '';
+										                            if ( $f_icon_type == 'icon' ) {
+											                            $feature_icon = '<i class="' . $_feature_meta['apartment-feature-icon'] . '"></i>';
+										                            } elseif ( $f_icon_type == 'custom' ) {
+											                            $feature_icon = '<img src="' . esc_url( $_feature_meta['apartment-feature-icon-custom'] ) . '" style="width: ' . $_feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $_feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
+										                            }
+										                            ?>
+                                                                    <div class="tf-apt-amenity">
+											                            <?php echo ! empty( $feature_icon ) ? "<div class='tf-apt-amenity-icon'>" . wp_kses_post($feature_icon) . "</div>" : ""; ?>
+                                                                        <span><?php echo esc_html( $_feature->name ); ?></span>
+                                                                    </div>
+									                            <?php endforeach; ?>
+                                                            </div>
                                                         </div>
-                                                    </div>
-												<?php endforeach; ?>
+						                            <?php endforeach; ?>
 
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-							<?php endif; ?>
+	                            <?php endif; ?>
+                            </div>
                         </div>
 					<?php endif; ?>
                 </div>

@@ -510,6 +510,17 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                                 </div>
                             </div>
 
+                            <!--Demo Data Import Section-->
+                            <div class="tf-setup-form-item tf-setup-form-item-inline">
+                                <div class="tf-setup-form-item-label"><label class="" for="tf-hotel-demo-data-import"><?php esc_html_e( 'Import Demo Data', 'tourfic' ) ?></label></div>
+                                <div class="tf-setup-form-item-input">
+                                    <label for="tf-hotel-demo-data-import" class="tf-switch-label">
+                                        <input type="checkbox" id="tf-hotel-demo-data-import" name="tf-hotel-demo-data-import" value="1" checked class="tf-switch"/>
+                                        <span class="tf-switch-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+
                             <!--Hotel Permalink-->
                             <div class="tf-setup-form-item tf-setup-form-item-inline tf-setup-permalink">
                                 <div class="tf-setup-form-item-label"><label class=""><?php esc_html_e( 'Hotel Permalink', 'tourfic' ) ?></label></div>
@@ -549,6 +560,17 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                                 </div>
                             </div>
 
+                            <!--Demo Data Import Section-->
+                            <div class="tf-setup-form-item tf-setup-form-item-inline">
+                                <div class="tf-setup-form-item-label"><label class="" for="tf-tour-demo-data-import"><?php esc_html_e( 'Import Demo Data', 'tourfic' ) ?></label></div>
+                                <div class="tf-setup-form-item-input">
+                                    <label for="tf-tour-demo-data-import" class="tf-switch-label">
+                                        <input type="checkbox" id="tf-tour-demo-data-import" name="tf-tour-demo-data-import" value="1" checked class="tf-switch"/>
+                                        <span class="tf-switch-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+
                             <!--Tour Permalink-->
                             <div class="tf-setup-form-item tf-setup-form-item-inline tf-setup-permalink">
                                 <div class="tf-setup-form-item-label"><label class=""><?php esc_html_e( 'Tour Permalink', 'tourfic' ) ?></label></div>
@@ -583,6 +605,17 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                                     <label for="tf-apartment-share-option" class="tf-switch-label">
                                         <input type="checkbox" id="tf-apartment-share-option" name="tf-apartment-share-option" value="<?php echo empty( $tf_apartment_share ) ? esc_attr( '1' ) : ''; ?>"
                                             class="tf-switch" <?php echo empty( $tf_apartment_share ) ? esc_attr( 'checked' ) : ''; ?>/>
+                                        <span class="tf-switch-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!--Demo Data Import Section-->
+                            <div class="tf-setup-form-item tf-setup-form-item-inline">
+                                <div class="tf-setup-form-item-label"><label class="" for="tf-apartment-demo-data-import"><?php esc_html_e( 'Import Demo Data', 'tourfic' ) ?></label></div>
+                                <div class="tf-setup-form-item-input">
+                                    <label for="tf-apartment-demo-data-import" class="tf-switch-label">
+                                        <input type="checkbox" id="tf-apartment-demo-data-import" name="tf-apartment-demo-data-import" value="1" checked class="tf-switch"/>
                                         <span class="tf-switch-slider"></span>
                                     </label>
                                 </div>
