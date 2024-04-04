@@ -870,8 +870,8 @@ h3.tf-sidebar-widget_title {
   outline: 0;
 }
 
-.tf_person-icon {
-  padding-right: 10px;
+.tf-search-form-field-icon {
+  margin-right: 8px;
 }
 
 .tf_destination-wrap {
@@ -2323,6 +2323,17 @@ a.page-numbers {
     padding: 0 !important;
   }
 }
+.tf-booking-form-tab .btn-styled {
+  background-color: #e6e6e6 !important;
+  border-color: #e6e6e6 !important;
+  color: #333 !important;
+}
+.tf-booking-form-tab .btn-styled.active {
+  background-color: #003162 !important;
+  border-color: #003162 !important;
+  color: #fff !important;
+}
+
 .tf_form-inner .autocomplete-items {
   max-height: 120px;
   overflow: scroll;
@@ -2436,15 +2447,22 @@ a.page-numbers {
 
 .tf_submit-wrap {
   border-right: 0;
+  border-radius: 0 8px 8px 0;
   background: #003162;
   width: 15%;
 }
-.tf_submit-wrap .btn-styled {
-  padding: 20px 20px;
+@media only screen and (max-width: 767.98px) {
+  .tf_submit-wrap {
+    border-radius: 0 0 8px 8px;
+  }
 }
 .tf_submit-wrap button {
   width: 100%;
   height: 100%;
+  border-radius: 8px !important;
+}
+.tf_submit-wrap .btn-styled {
+  padding: 20px 20px;
 }
 
 .tf-tabcontent {
@@ -2469,7 +2487,7 @@ button.tf-tablinks:focus {
 }
 .tf_booking-widget.default-form .tf_form-inner {
   padding: 0;
-  grid-template-columns: 6% 94%;
+  display: flex;
   align-items: center;
 }
 .tf_booking-widget.default-form .tf-label {
@@ -2564,7 +2582,7 @@ button.tf-tablinks:focus {
 .tf_homepage-booking {
   display: table;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  border-radius: 4px;
+  border-radius: 8px;
   position: relative;
   border: 1px solid #cccccc;
   justify-content: space-between;
@@ -3183,8 +3201,8 @@ div#tf-destinationautocomplete-list div:before {
   width: 100%;
   max-width: 428px;
   background: #fff;
-  padding: 40px;
-  border-radius: 10px;
+  padding: 48px 40px 32px 48px;
+  border-radius: 16px;
   transform: translateY(-50%);
   height: auto;
 }
@@ -3196,32 +3214,80 @@ div#tf-destinationautocomplete-list div:before {
 
 span.close-aq {
   position: absolute;
-  right: -15px;
-  top: -15px;
-  width: 35px;
-  text-align: center;
-  height: 35px;
-  background: #003162;
-  color: #fff;
-  font-size: 20px;
+  right: 16px;
+  top: 16px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
-  line-height: 31px;
-  border-radius: 50%;
   z-index: 9999;
+}
+
+div.tf-aq-inner {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+div.tf-aq-inner .tf-ask-question-head-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+div.tf-aq-inner .tf-ask-question-head-content h3 {
+  text-align: center;
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+div.tf-aq-inner form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+div.tf-aq-inner form .tf-ask-question-submit {
+  padding: 12px 32px;
+  border-radius: 4px;
+  background: #003C7A;
+  color: #FFF;
+  font-family: "Josefin Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+}
+div.tf-aq-inner form .tf-ask-question-submit:hover {
+  background: #0A5AC2;
 }
 
 .tf-aq-field {
   position: relative;
-  margin: 10px 0;
+  margin: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
-.tf-aq-field input {
-  max-width: 100%;
+.tf-aq-field label {
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 8px;
 }
-.tf-aq-field textarea {
+.tf-aq-field input, .tf-aq-field textarea {
   max-width: 100%;
+  border-radius: 4px !important;
+  border: 1px solid #C0CCD8;
+}
+.tf-aq-field input::placeholder, .tf-aq-field textarea::placeholder {
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .tf-booking-form-tab-mobile {
@@ -9178,8 +9244,7 @@ div#tf-contact-info {
   bottom: 0;
   left: 0;
   padding: 32px;
-  background-color: #EDF2F7;
-  box-shadow: 0px 0px 24px 5px #e0e8ee;
+  background-color: rgba(255, 255, 255, 0.9);
   z-index: 9999;
   display: -webkit-box;
   display: -moz-box;
@@ -9191,7 +9256,7 @@ div#tf-contact-info {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  gap: 64px;
+  gap: 24px;
   transform-origin: bottom;
   transform: rotateX(90deg);
   transition: all 0.3s ease-in-out;
@@ -9236,7 +9301,7 @@ div#tf-contact-info {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  gap: 32px;
+  gap: 24px;
 }
 @media only screen and (max-width: 1199.98px) {
   .tf-bottom-booking-bar .tf-bottom-booking-fields {
@@ -9269,11 +9334,12 @@ div#tf-contact-info {
 }
 .tf-bottom-booking-bar .tf-bottom-booking-field input.tf-field, .tf-bottom-booking-bar .tf-bottom-booking-field select.tf-field {
   border-radius: 8px;
-  border: 1px solid var(--Primary, #003C7A);
+  border: 1px solid #0E3DD8;
   padding: 0 16px;
-  background-color: transparent;
+  background-color: #fff;
   outline: none;
   min-width: 220px;
+  font-size: 16px;
 }
 @media only screen and (max-width: 767.98px) {
   .tf-bottom-booking-bar .tf-bottom-booking-field input.tf-field, .tf-bottom-booking-bar .tf-bottom-booking-field select.tf-field {
@@ -9289,7 +9355,7 @@ div#tf-contact-info {
   line-height: 56px;
   font-size: 24px;
   border-radius: 8px;
-  background-color: #003C7A;
+  background-color: #0E3DD8;
   text-align: center;
   color: #fff;
 }
@@ -9315,6 +9381,7 @@ div#tf-contact-info {
   border-radius: 8px;
   border: 1px solid #003C7A;
   padding: 0 16px;
+  background-color: #fff;
 }
 @media only screen and (max-width: 767.98px) {
   .tf-bottom-booking-bar .tf_selectperson-wrap .tf_input-inner {
@@ -9323,7 +9390,7 @@ div#tf-contact-info {
   }
 }
 .tf-bottom-booking-bar .tf_acrselection-wrap {
-  left: 0;
+  left: 64px;
   right: auto;
   top: unset;
   bottom: 100%;
@@ -9339,6 +9406,9 @@ div#tf-contact-info {
 }
 .tf-bottom-booking-bar .tf-btn-normal {
   padding: 19px 32px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 8px;
 }
 @media only screen and (max-width: 767.98px) {
   .tf-bottom-booking-bar .tf-btn-normal {

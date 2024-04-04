@@ -217,6 +217,7 @@ function tf_hotel_taxonomies_register() {
 		"rest_base"             => "hotel_feature",
 		"rest_controller_class" => "WP_REST_Terms_Controller",
 		"show_in_quick_edit"    => true,
+		'meta_box_cb'           => false,
 		'capabilities'          => array(
 			'assign_terms' => 'edit_tf_hotel',
 			'edit_terms'   => 'edit_tf_hotel',
