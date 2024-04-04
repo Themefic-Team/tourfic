@@ -2378,7 +2378,42 @@ var frame, gframe;
             // Triger the form submit
             $(".tf-option-form.tf-ajax-save").submit(); 
         });
+
+        // $('#addtag > .submit #submit').click(function (event) {
+
+        //     data = {
+        //         action: 'tf_taxonomy_update_dynamically',
+        //         taxonomy : $("input[name='taxonomy']").val(),
+        //     }
+           
+        //     $.ajax({
+        //         url: tf_options.ajax_url,
+        //         method: 'POST',
+        //         data: data,
+        //         success: function (response) {
+        //             console.log(response);
+        //         },
+        //         error: function (response) {
+        //             console.log(response);
+        //         },
+        //     });
+        // });
     });
+
+    /*
+        $(document).on("ajaxSuccess", function (event, xhr, settings) {
+
+            console.log(settings)
+            
+
+            data = {
+                action: 'tf_taxonomy_update_dynamically',
+                taxonomy : $("input[name='taxonomy']").val(),
+            }
+          
+        })
+
+    */
 
     //export the data in txt file
     jQuery(document).ready(function ($) {
