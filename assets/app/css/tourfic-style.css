@@ -3222,6 +3222,10 @@ span.close-aq {
   z-index: 9999;
 }
 
+span.close-aq:hover {
+  scale: 1.2;
+}
+
 div.tf-aq-inner {
   display: flex;
   flex-direction: column;
@@ -10650,9 +10654,6 @@ html {
 }
 .tf_template_3_global_layouts #tf-ask-question .tf-aq-field textarea::placeholder {
   color: #C1BFBB;
-}
-.tf_template_3_global_layouts #tf-ask-question .tf-aq-outer .close-aq {
-  background: #B58E53 !important;
 }
 .tf_template_3_global_layouts #tf-ask-question button {
   background: #b58e53 !important;
