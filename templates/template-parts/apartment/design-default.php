@@ -455,7 +455,7 @@
 						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && isset( $meta['surroundings_places'] ) && ! empty( tf_data_types( $meta['surroundings_places'] ) ) ): ?>
                             <div class="about-location">
 								<?php if ( ! empty( $meta['surroundings_sec_title'] ) ): ?>
-                                    <h2 class="section-heading"><?php echo esc_html( $meta['surroundings_sec_title'] ); ?></h2>
+                                    <h3 class="surroundings_sec_title"><?php echo esc_html( $meta['surroundings_sec_title'] ); ?></h3>
 								<?php endif; ?>
 								<?php if ( ! empty( $meta['surroundings_subtitle'] ) ): ?>
                                     <p class="surroundings_subtitle"><?php echo esc_html( $meta['surroundings_subtitle'] ); ?></p>

@@ -9,7 +9,7 @@ class TF_Demo_Importer {
 		//     add_action( 'wp_ajax_travelfic-demo-hotel-import', array( $this, 'prepare_travelfic_hotel_imports' ) );
 		//     add_action( 'wp_ajax_travelfic-demo-tour-import', array( $this, 'prepare_travelfic_tour_imports' ) );
 		//add_action( 'init', array( $this, 'prepare_travelfic_tour_imports' ) );
-		// add_action( 'init', array( $this, 'prepare_travelfic_hotel_imports' ) );
+//		 add_action( 'init', array( $this, 'tf_dummy_hotels_import' ) );
 	}
 
 	/**
@@ -24,22 +24,21 @@ class TF_Demo_Importer {
 		return self::$instance;
 	}
 
-	public function prepare_travelfic_hotel_imports() {
+	public function tf_dummy_hotels_import() {
 
-		// check_ajax_referer('updates', '_ajax_nonce');
-
-		$hotels_post = array(
-			'post_type'      => 'tf_hotel',
-			'posts_per_page' => - 1,
-		);
-
-		$hotels_query = new WP_Query( $hotels_post );
-		if ( ! empty( $hotels_query ) ) {
-			$hotels_count = $hotels_query->post_count;
-			if ( $hotels_count >= 5 ) {
-				return;
-			}
-		}
+//		$hotels_post = array(
+//			'post_type'      => 'tf_hotel',
+//			'posts_per_page' => - 1,
+//			'post_status'    => 'publish'
+//		);
+//
+//		$hotels_query = new WP_Query( $hotels_post );
+//		if ( ! empty( $hotels_query ) ) {
+//			$hotels_count = $hotels_query->post_count;
+//			if ( $hotels_count >= 3 ) {
+//				return;
+//			}
+//		}
 
 		$dummy_hotels_files = TF_ASSETS_PATH . '/demo/hotel-data.csv';
 		if ( file_exists( $dummy_hotels_files ) ) {
@@ -100,7 +99,6 @@ class TF_Demo_Importer {
 				'post_date'
 			);
 
-
 			//save column mapping data
 			if ( isset( $dummy_hotel_fields ) ) {
 				$column_mapping_data = $dummy_hotel_fields;
@@ -135,7 +133,7 @@ class TF_Demo_Importer {
 					}
 
 					// Assign taxonomies to the post
-					if ( ! empty( $taxonomies ) ) {
+					/*if ( ! empty( $taxonomies ) ) {
 						foreach ( $taxonomies as $taxonomy => $values ) {
 							// Extract the taxonomy terms from the CSV row
 							$taxonomy_terms = explode( ',', $values );
@@ -221,7 +219,7 @@ class TF_Demo_Importer {
 								}
 							}
 						}
-					}
+					}*/
 
 					//assign features icons
 					if ( ! empty( $features_icons ) ) {
@@ -484,7 +482,7 @@ class TF_Demo_Importer {
 
 						}
 
-						if ( $field == 'features' ) {
+						/*if ( $field == 'features' ) {
 
 							if ( ! empty( $post_meta['tf_hotels_opt']['room'] ) && gettype( $post_meta['tf_hotels_opt']['room'] ) == "string" ) {
 								$tf_hotel_exc_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
@@ -510,7 +508,7 @@ class TF_Demo_Importer {
 								$post_meta['tf_hotels_opt']['room'] = serialize( $room );
 							}
 
-						}
+						}*/
 
 						if ( $field == 'avail_date' ) {
 
@@ -549,12 +547,13 @@ class TF_Demo_Importer {
 						'post_author'  => 1,
 						'post_date'    => $post_date,
 						'meta_input'   => $post_meta,
-						'post_name'    => ! empty( $post_slug ) ? $post_slug : $post_default_slug,
+						'post_name'    => !empty($post_slug) ? $post_slug : $post_default_slug,
+
 					);
 
 					$post_id = wp_insert_post( $post_data );
 
-					// Assign taxonomies to the post
+					/*// Assign taxonomies to the post
 					if ( ! empty( $taxonomies ) ) {
 						foreach ( $taxonomies as $taxonomy => $values ) {
 							// Extract the taxonomy terms from the CSV row
@@ -641,14 +640,13 @@ class TF_Demo_Importer {
 								}
 							}
 						}
-					}
+					}*/
 
 					//reset the post meta array
 					$post_meta = array();
 				}
 
 			}
-			wp_die();
 		}
 	}
 

@@ -142,10 +142,13 @@
                 success: function (response) {
                     let data = JSON.parse(response);
                     submitBtn.removeClass('tf-btn-loading');
-                    if (data.success) {
-                        $('.tf-finish-step').show();
-                        $('.tf-setup-step-' + step).hide();
-                    }
+                    // if (data.success) {
+                    //     $('.tf-finish-step').show();
+                    //     $('.tf-setup-step-' + step).hide();
+                    // }
+                },
+                complete: function () {
+                    submitBtn.removeClass('tf-btn-loading');
                 },
                 error: function (error) {
                     submitBtn.removeClass('tf-btn-loading');
