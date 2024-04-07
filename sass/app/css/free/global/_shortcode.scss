@@ -869,6 +869,10 @@ span.close-aq {
     z-index: 9999;
 }
 
+span.close-aq:hover {
+    scale: 1.2;
+}
+
 div.tf-aq-inner {
     display: flex;
     flex-direction: column;

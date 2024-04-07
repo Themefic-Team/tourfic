@@ -316,7 +316,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 				border: 1px solid '.$tf_template1_global_reg.';
 				border-color: '.$tf_template1_global_reg.' !important;
 			}
-			.tf-aq-outer span.close-aq {background: '.$tf_template1_global_reg.' !important;}
+			.tf-aq-outer span.close-aq svg path {stroke: '.$tf_template1_global_reg.' !important;}
 			.tf-aq-field .tf-ask-question-submit {background: '.$tf_template1_global_reg.' !important;}';
 
 		}
@@ -394,7 +394,6 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-3 .tf-mobile-booking-btn,
 			.tf-template-3 .tf-modify-search-btn,
 			.tf_template_3_global_layouts #tf-ask-question button,
-			.tf_template_3_global_layouts #tf-ask-question .tf-aq-outer .close-aq,
 			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.tf_air_service,
 			.tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf_button_group button {
 				background: '.$tf_primary_bg_color_reg.' !important;
