@@ -913,17 +913,35 @@
     }
 
     .tf-faq-content-wrapper {
-        background: #F5F8FF;
-        padding: 20px 25px;
-        border-radius: 4px;
+        background: #F8F9FB;
         border: 1px solid #F0F2F4;
+        border-radius: 8px;
+        padding: 40px;
+    }
+
+    .tf-faq-items-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-self: stretch;
+        gap: 16px;
     }
 
     #tf-faq-item {
-        border-bottom: 1px solid #dfdfdf;
+        border-radius: 8px;
+        border-bottom: none !important;
+        padding-top: 8px;
+        padding-bottom: 8px;
 
         .tf-faq-title h4{
-            margin: 4px 0;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px !important;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.5;
+            letter-spacing: 0.5px;
+        }
+        .tf-faq-title h4:active {
+            color: #2979FF;
         }
 
         .tf-faq-desc {
