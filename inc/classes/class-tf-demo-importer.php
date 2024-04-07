@@ -9,7 +9,7 @@ class TF_Demo_Importer {
 		//     add_action( 'wp_ajax_travelfic-demo-hotel-import', array( $this, 'prepare_travelfic_hotel_imports' ) );
 		//     add_action( 'wp_ajax_travelfic-demo-tour-import', array( $this, 'prepare_travelfic_tour_imports' ) );
 		//add_action( 'init', array( $this, 'prepare_travelfic_tour_imports' ) );
-		 add_action( 'init', array( $this, 'tf_dummy_hotels_import' ) );
+//		 add_action( 'init', array( $this, 'tf_dummy_hotels_import' ) );
 	}
 
 	/**
@@ -38,7 +38,7 @@ class TF_Demo_Importer {
 			}
 		}
 
-		$dummy_hotels_files = TF_ASSETS_PATH . '/demo/hotel-data.csv';
+		$dummy_hotels_files = TF_ASSETS_PATH . 'demo/hotel-data.csv';
 		if ( file_exists( $dummy_hotels_files ) ) {
 			$dummy_hotel_fields = array(
 				'id',
@@ -96,7 +96,6 @@ class TF_Demo_Importer {
 				'tc',
 				'post_date'
 			);
-
 
 			//save column mapping data
 			if( isset( $dummy_hotel_fields ) ){
@@ -157,9 +156,7 @@ class TF_Demo_Importer {
 										if (!is_wp_error($parent_result)) {
 											$parent_term_id = $parent_result['term_id'];
 										} else {
-											// Handle error if necessary
-											echo 'Error creating parent term: ' . $parent_result->get_error_message();
-											continue;
+											error_log('Error creating parent term: ' . $parent_result->get_error_message());
 										}
 									} else {
 										$parent_term_id = $parent_term->term_id;
@@ -182,9 +179,7 @@ class TF_Demo_Importer {
 											if (!is_wp_error($child_result)) {
 												$child_term_id = $child_result['term_id'];
 											} else {
-												// Handle error if necessary
-												echo 'Error creating child term: ' . $child_result->get_error_message();
-												continue;
+												error_log('Error creating child term: ' . $child_result->get_error_message());
 											}
 										} else {
 											$child_term_id = $child_term->term_id;
@@ -209,8 +204,7 @@ class TF_Demo_Importer {
 											$term_id = $term_result['term_id'];
 											wp_set_post_terms($post_id, $term_id, $taxonomy_name, true);
 										} else {
-											// Handle error if necessary
-											echo 'Error creating term: ' . $term_result->get_error_message();
+											error_log('Error creating term: ' . $term_result->get_error_message());
 										}
 									} else {
 										wp_set_post_terms($post_id, $term->term_id, $taxonomy_name, true);
@@ -495,8 +489,12 @@ class TF_Demo_Importer {
 							foreach( $features as $fkey => $feature ){
 								foreach( $feature as $key => $value ){
 									$term = get_term_by( 'name', $value, 'hotel_feature' );
-									$term_id = $term->term_id;
-									$room_features[$fkey][$key] = $term_id;
+									if ($term && !is_wp_error($term)) {
+										$term_id = $term->term_id;
+										$room_features[$fkey][$key] = $term_id;
+									} else {
+										$room_features[$fkey][$key] = null;
+									}
 								}
 							}
 							if(!empty($room)){
@@ -577,9 +575,7 @@ class TF_Demo_Importer {
 										if (!is_wp_error($parent_result)) {
 											$parent_term_id = $parent_result['term_id'];
 										} else {
-											// Handle error if necessary
-											echo 'Error creating parent term: ' . $parent_result->get_error_message();
-											continue;
+											error_log('Error creating parent term: ' . $parent_result->get_error_message());
 										}
 									} else {
 										$parent_term_id = $parent_term->term_id;
@@ -602,9 +598,7 @@ class TF_Demo_Importer {
 											if (!is_wp_error($child_result)) {
 												$child_term_id = $child_result['term_id'];
 											} else {
-												// Handle error if necessary
-												echo 'Error creating child term: ' . $child_result->get_error_message();
-												continue;
+												error_log('Error creating child term: ' . $child_result->get_error_message());
 											}
 										} else {
 											$child_term_id = $child_term->term_id;
@@ -629,8 +623,7 @@ class TF_Demo_Importer {
 											$term_id = $term_result['term_id'];
 											wp_set_post_terms($post_id, $term_id, $taxonomy_name, true);
 										} else {
-											// Handle error if necessary
-											echo 'Error creating term: ' . $term_result->get_error_message();
+											error_log('Error creating term: ' . $term_result->get_error_message());
 										}
 									} else {
 										wp_set_post_terms($post_id, $term->term_id, $taxonomy_name, true);
@@ -651,9 +644,7 @@ class TF_Demo_Importer {
 	/**
 	 * Tourfic Tour importer Settings
 	 */
-	public function prepare_travelfic_tour_imports() {
-
-		// check_ajax_referer('updates', '_ajax_nonce');
+	public function tf_dummy_tours_import() {
 
 		$tours_post = array(
 			'post_type'      => 'tf_tours',
@@ -668,7 +659,7 @@ class TF_Demo_Importer {
 			}
 		}
 
-		$dummy_tours_files  = TF_ASSETS_PATH . '/demo/tour-data.csv';
+		$dummy_tours_files  = TF_ASSETS_PATH . 'demo/tour-data.csv';
 		$dummy_tours_fields = array(
 			'id',
 			'post_title',
@@ -800,82 +791,78 @@ class TF_Demo_Importer {
 
 			//skip the first row
 			array_shift( $csv_data );
-			$post_meta = array();
+			$post_meta     = array();
 
 			foreach ( $csv_data as $row_index => $row ) {
-				$post_id           = '';
-				$post_title        = '';
-				$post_default_slug = '';
-				$post_slug         = '';
-				$post_content      = '';
-				$post_date         = '';
+				$post_id      = '';
+				$post_title   = '';
+				$post_default_slug   = '';
+				$post_slug   = '';
+				$post_content = '';
+				$post_date    = '';
 				//$disable_day = array();
-				$taxonomies = array();
-				$tax_icons  = array();
+				$taxonomies   = array();
+				$tax_icons    = array();
 
 				foreach ( $column_mapping_data as $column_index => $field ) {
-					if ( ( $field == 'tour_destination' || $field == 'tour_activities' || $field == 'tour_attraction' || $field == 'tour_features' || $field == 'tour_types' ) && ! empty( $row[ $column_index ] ) ) {
-						if ( $field == 'tour_types' ) {
-							$taxonomies['tour_type'] = $row[ $column_index ];
-						} else {
-							$taxonomies[ $field ] = $row[ $column_index ];
+					if( ( $field == 'tour_destination' || $field == 'tour_activities' || $field == 'tour_attraction' || $field == 'tour_features' || $field == 'tour_types' ) && ! empty( $row[$column_index] ) ){
+						if($field == 'tour_types'){
+							$taxonomies['tour_type'] = $row[$column_index];
+						}else{
+							$taxonomies[$field] = $row[$column_index];
 						}
 					}
 				}
 
-				if ( ! empty( $taxonomies ) ) {
-					foreach ( $taxonomies as $taxonomy => $values ) {
+				if (!empty($taxonomies)) {
+					foreach ($taxonomies as $taxonomy => $values) {
 						// Extract the taxonomy terms from the CSV row
-						$taxonomy_terms = explode( ',', $values );
+						$taxonomy_terms = explode(',', $values);
 
-						foreach ( $taxonomy_terms as $taxonomy_term ) {
+						foreach ($taxonomy_terms as $taxonomy_term) {
 							// Get the taxonomy name based on the column name
 							$taxonomy_name = $taxonomy; // Assuming the column names match the taxonomy names
 
 							// Check if ">" string is present in the text
-							if ( strpos( $taxonomy_term, '>' ) !== false ) {
-								$taxonomy_parts = explode( '>', $taxonomy_term );
-								$parent_name    = trim( $taxonomy_parts[0] );
-								if ( strpos( $taxonomy_parts[1], '+' ) !== false ) {
-									$child_terms = explode( '+', $taxonomy_parts[1] );
-								} else {
+							if (strpos($taxonomy_term, '>') !== false) {
+								$taxonomy_parts = explode('>', $taxonomy_term);
+								$parent_name    = trim($taxonomy_parts[0]);
+								if(  strpos( $taxonomy_parts[1], '+' ) !== false ){
+									$child_terms = explode('+', $taxonomy_parts[1]);
+								}else{
 									$child_terms = array( $taxonomy_parts[1] );
 								}
 
 								// Get or create the parent term
-								$parent_term = get_term_by( 'name', $parent_name, $taxonomy_name );
-								if ( ! $parent_term ) {
-									$parent_result = wp_insert_term( $parent_name, $taxonomy_name );
-									if ( ! is_wp_error( $parent_result ) ) {
+								$parent_term = get_term_by('name', $parent_name, $taxonomy_name);
+								if (!$parent_term) {
+									$parent_result = wp_insert_term($parent_name, $taxonomy_name);
+									if (!is_wp_error($parent_result)) {
 										$parent_term_id = $parent_result['term_id'];
 									} else {
-										// Handle error if necessary
-										echo 'Error creating parent term: ' . $parent_result->get_error_message();
-										continue;
+										error_log('Error creating parent term: ' . $parent_result->get_error_message());
 									}
 								} else {
 									$parent_term_id = $parent_term->term_id;
 									//check if parrent term is already assigned to the post
 									$assigned_terms = wp_get_post_terms( $post_id, $taxonomy_name, array( 'fields' => 'ids' ) );
-									if ( ! in_array( $parent_term_id, $assigned_terms ) ) {
+									if( ! in_array( $parent_term_id, $assigned_terms ) ){
 										wp_set_post_terms( $post_id, $parent_term_id, $taxonomy_name, true );
 									}
 								}
 
 								// Get or create the child terms under the parent term
 								$child_term_ids = array();
-								foreach ( $child_terms as $child_name ) {
-									$child_name = trim( $child_name );
+								foreach ($child_terms as $child_name) {
+									$child_name = trim($child_name);
 
-									$child_term = get_term_by( 'name', $child_name, $taxonomy_name );
-									if ( ! $child_term ) {
-										$child_result = wp_insert_term( $child_name, $taxonomy_name, array( 'parent' => $parent_term_id ) );
-										if ( ! is_wp_error( $child_result ) ) {
+									$child_term = get_term_by('name', $child_name, $taxonomy_name);
+									if (!$child_term) {
+										$child_result = wp_insert_term($child_name, $taxonomy_name, array('parent' => $parent_term_id));
+										if (!is_wp_error($child_result)) {
 											$child_term_ids[] = $child_result['term_id'];
 										} else {
-											// Handle error if necessary
-											echo 'Error creating child term: ' . $child_result->get_error_message();
-											continue;
+											error_log('Error creating child term: ' . $child_result->get_error_message());
 										}
 									} else {
 										$child_term_ids[] = $child_term->term_id;
@@ -883,28 +870,27 @@ class TF_Demo_Importer {
 								}
 
 								// Assign the parent and child terms to the post
-								wp_set_post_terms( $post_id, array_merge( array( $parent_term_id ), $child_term_ids ), $taxonomy_name, true );
+								wp_set_post_terms($post_id, array_merge(array($parent_term_id), $child_term_ids), $taxonomy_name, true);
 							} else {
 								// No hierarchy, it's a standalone term
-								$term_name = trim( $taxonomy_term );
+								$term_name = trim($taxonomy_term);
 
 								// Get or create the term by name and taxonomy
-								$term = get_term_by( 'name', $term_name, $taxonomy_name );
+								$term = get_term_by('name', $term_name, $taxonomy_name);
 
-								if ( ! $term ) {
+								if (!$term) {
 									// Term does not exist, create a new one
-									$term_result = wp_insert_term( $term_name, $taxonomy_name );
+									$term_result = wp_insert_term($term_name, $taxonomy_name);
 
-									if ( ! is_wp_error( $term_result ) ) {
+									if (!is_wp_error($term_result)) {
 										// Term already exists, assign it to the post
 										$term_id = $term_result['term_id'];
-										wp_set_post_terms( $post_id, $term_id, $taxonomy_name, true );
+										wp_set_post_terms($post_id, $term_id, $taxonomy_name, true);
 									} else {
-										// Handle error if necessary
-										echo 'Error creating term: ' . $term_result->get_error_message();
+										error_log('Error creating term: ' . $term_result->get_error_message());
 									}
 								} else {
-									wp_set_post_terms( $post_id, $term->term_id, $taxonomy_name, true );
+									wp_set_post_terms($post_id, $term->term_id, $taxonomy_name, true);
 								}
 							}
 						}
@@ -912,19 +898,19 @@ class TF_Demo_Importer {
 				}
 
 				//update all the custom taxonomies icons if has any
-				if ( ! empty( $tax_icons ) ) {
-					foreach ( $tax_icons as $tax => $values ) {
+				if( ! empty( $tax_icons ) ){
+					foreach( $tax_icons as $tax => $values ){
 						// Parse the data format to extract term names and icons (image URLs).
 						$terms_with_icons = explode( ',', $values );
 
 						foreach ( $terms_with_icons as $term_with_icon ) {
-							$parts      = explode( '(', $term_with_icon );
-							$term_name  = trim( $parts[0] );
-							$icon_value = trim( str_replace( ')', '', $parts[1] ) );
+							$parts = explode('(', $term_with_icon);
+							$term_name = trim($parts[0]);
+							$icon_value = trim(str_replace(')', '', $parts[1]));
 
 							// Get the term ID for the given term name.
 							$term = get_term_by( 'name', $term_name, $tax );
-							if ( $term ) {
+							if ($term) {
 								$term_id = $term->term_id;
 
 								// Check if the icon value is an image URL or FontAwesome icon class.
@@ -943,96 +929,96 @@ class TF_Demo_Importer {
 				}
 
 				foreach ( $column_mapping_data as $column_index => $field ) {
-					if ( $field == 'id' ) {
-						$post_id = $row[ $column_index ];
+					if( $field == 'id' ){
+						$post_id = $row[$column_index];
 					}
 					if ( $field == 'post_title' ) {
-						$post_default_slug = $row[ $column_index ];
-						$post_title        = ucwords( str_replace( '-', ' ', $row[ $column_index ] ) );
-						if ( empty( $post_title ) ) {
+						$post_default_slug = $row[$column_index];
+						$post_title = ucwords(str_replace('-', ' ', $row[$column_index]));
+						if( empty( $post_title ) ){
 							$post_title = 'No Title';
 						}
 					} else if ( $field == 'post_content' ) {
-						$post_content = $row[ $column_index ];
-						if ( empty( $post_content ) ) {
+						$post_content = $row[$column_index];
+						if( empty( $post_content ) ){
 							$post_content = 'No Content';
 						}
 					}
 					if ( $field == 'slug' ) {
-						$post_slug = $row[ $column_index ];
+						$post_slug = $row[$column_index];
 					}
-					if ( $field == 'thumbnail' ) {
-						$thumbnail = $row[ $column_index ];
+					if( $field == 'thumbnail' ){
+						$thumbnail = $row[$column_index];
 						//set as the post thumbnail.
-						if ( ! empty( $thumbnail ) ) {
+						if (!empty( $thumbnail )) {
 							// Get the file name from the URL.
-							$filename = basename( $thumbnail );
+							$filename = basename($thumbnail);
 
 							// Download the image to the server.
 							$upload_dir = wp_upload_dir();
 							$image_path = $upload_dir['path'] . '/' . $filename;
 
-							$image_data = file_get_contents( $thumbnail );
-							file_put_contents( $image_path, $image_data );
+							$image_data = file_get_contents($thumbnail);
+							file_put_contents($image_path, $image_data);
 
 							// Check if the image was downloaded successfully.
-							if ( file_exists( $image_path ) ) {
+							if (file_exists($image_path)) {
 								// Create the attachment in the media library.
 								$attachment = array(
 									'guid'           => $upload_dir['url'] . '/' . $filename,
 									'post_mime_type' => 'image/jpeg', // Replace with the appropriate mime type if needed.
-									'post_title'     => sanitize_file_name( $filename ),
+									'post_title'     => sanitize_file_name($filename),
 									'post_content'   => '',
 									'post_status'    => 'inherit',
 								);
 
-								$attach_id = wp_insert_attachment( $attachment, $image_path, $post_id );
+								$attach_id = wp_insert_attachment($attachment, $image_path, $post_id);
 
 								// Include the necessary file
-								require_once( ABSPATH . 'wp-admin/includes/image.php' );
+								require_once(ABSPATH . 'wp-admin/includes/image.php');
 
 								// Set the image as the post thumbnail.
-								$attach_data = wp_generate_attachment_metadata( $attach_id, $image_path );
-								wp_update_attachment_metadata( $attach_id, $attach_data );
+								$attach_data = wp_generate_attachment_metadata($attach_id, $image_path);
+								wp_update_attachment_metadata($attach_id, $attach_data);
 
 								$post_meta['_thumbnail_id'] = $attach_id;
 							}
 						}
 
 					}
-					if ( $field == 'post_date' ) {
-						$post_date = $row[ $column_index ];
+					if( $field == 'post_date' ){
+						$post_date = $row[$column_index];
 					}
 
-					if ( $field == 'longitude' ) {
-						$post_meta['tf_tours_opt']['location'][ $field ] = $row[ $column_index ];
-					} else if ( $field == 'latitude' ) {
-						$post_meta['tf_tours_opt']['location'][ $field ] = $row[ $column_index ];
-					} else if ( $field == 'min_seat' ) {
-						$post_meta['tf_tours_opt']['fixed_availability'][ $field ] = $row[ $column_index ];
-					} else if ( $field == 'max_seat' ) {
-						$post_meta['tf_tours_opt']['fixed_availability'][ $field ] = $row[ $column_index ];
-					} else if ( $field === 'tour_gallery' && ! empty( $row[ $column_index ] ) ) {
+					if( $field == 'longitude' ){
+						$post_meta['tf_tours_opt']['location'][$field] = $row[$column_index];
+					}else if( $field == 'latitude' ){
+						$post_meta['tf_tours_opt']['location'][$field] = $row[$column_index];
+					}else if( $field == 'min_seat' ){
+						$post_meta['tf_tours_opt']['fixed_availability'][$field] = $row[$column_index];
+					}else if( $field == 'max_seat' ){
+						$post_meta['tf_tours_opt']['fixed_availability'][$field] = $row[$column_index];
+					}else if ( $field === 'tour_gallery' && ! empty( $row[ $column_index ] ) ) {
 						// Extract the image URLs from the CSV row
-						$image_urls = explode( ',', $row[ $column_index ] );
+						$image_urls = explode( ',', $row[ $column_index] );
 
 						$gallery_images = array();
 
 						//include image.php for wp_generate_attachment_metadata() function
-						if ( ! function_exists( 'wp_crop_image' ) ) {
+						if( ! function_exists( 'wp_crop_image' ) ){
 							require_once ABSPATH . 'wp-admin/includes/image.php';
 						}
 
 						foreach ( $image_urls as $image_url ) {
-							if ( ! empty( $image_url ) ) {
+							if(!empty($image_url)){
 								// Download the image file
 								$image_data = file_get_contents( $image_url );
 								//if not found image
-								if ( $image_data === false ) {
+								if( $image_data === false ){
 									continue;
 								}
 								// Create a unique filename for the image
-								$filename   = basename( $image_url );
+								$filename = basename( $image_url );
 								$upload_dir = wp_upload_dir();
 								$image_path = $upload_dir['path'] . '/' . $filename;
 
@@ -1040,7 +1026,7 @@ class TF_Demo_Importer {
 								$result = file_put_contents( $image_path, $image_data );
 
 								//failed to save image
-								if ( $result === false ) {
+								if( $result === false ){
 									continue;
 								}
 
@@ -1074,121 +1060,125 @@ class TF_Demo_Importer {
 					} else if ( strpos( $field, '[' ) !== false && strpos( $field, ']' ) !== false ) {
 						//exclude title, post content, features from adding into the array
 						// Field is a multidimensional array key, e.g., [location][latitude]
-						$nested_keys = explode( '][', trim( $field, '[]' ) );
-						$meta_value  = &$post_meta['tf_tours_opt'];
+						$nested_keys = explode( '][', trim($field, '[]' ) );
+						$meta_value = &$post_meta['tf_tours_opt'];
 
 						// Iterate through nested keys except the last one
-						for ( $i = 0; $i < count( $nested_keys ) - 1; $i ++ ) {
-							$nested_key = $nested_keys[ $i ];
+						for ( $i = 0; $i < count( $nested_keys ) - 1; $i++ ) {
+							$nested_key = $nested_keys[$i];
 
 							// Create the nested array if it doesn't exist
-							if ( ! isset( $meta_value[ $nested_key ] ) ) {
-								$meta_value[ $nested_key ] = array();
+							if ( !isset( $meta_value[$nested_key] ) ) {
+								$meta_value[$nested_key] = array();
 							}
 
-							$meta_value = &$meta_value[ $nested_key ];
+							$meta_value = &$meta_value[$nested_key];
 						}
 
 						// Assign the value to the last nested key
-						$last_nested_key                = end( $nested_keys );
-						$meta_value[ $last_nested_key ] = $row[ $column_index ];
+						$last_nested_key = end( $nested_keys );
+						$meta_value[$last_nested_key] = $row[$column_index];
 
 
-					} else if ( $field == 'tour_features' ) {
-						$features         = explode( ',', $row[ $column_index ] );
+					} else if( $field == 'tour_features' ){
+						$features = explode( ',', $row[$column_index] );
 						$tf_tour_features = array();
-						foreach ( $features as $feature ) {
-							$term               = get_term_by( 'name', $feature, 'tour_features' );
-							$term_id            = $term ? $term->term_id : '';
-							$tf_tour_features[] = $term_id;
+						foreach( $features as $feature ){
+							$term = get_term_by( 'name', $feature, 'tour_features' );
+							if ($term && !is_wp_error($term)) {
+								$term_id            = $term->term_id;
+								$tf_tour_features[] = $term_id;
+							}
 						}
 						$post_meta['tf_tours_opt']['features'] = $tf_tour_features;
 
-					} else if ( $field == 'tour_types' ) {
-						$tour_types    = explode( ',', $row[ $column_index ] );
+					} else if( $field == 'tour_types' ){
+						$tour_types = explode( ',', $row[$column_index] );
 						$tf_tour_types = array();
-						foreach ( $tour_types as $feature ) {
-							$term            = get_term_by( 'name', $feature, 'tour_type' );
-							$term_id         = $term ? $term->term_id : '';
-							$tf_tour_types[] = $term_id;
+						foreach( $tour_types as $feature ){
+							$term = get_term_by( 'name', $feature, 'tour_type' );
+							if ($term && !is_wp_error($term)) {
+								$term_id = $term->term_id;
+								$tf_tour_types[] = $term_id;
+							}
 						}
 						$post_meta['tf_tours_opt']['tour_types'] = $tf_tour_types;
 
-					} else if ( $field == 'features_icon' || $field == 'destinations_icon' || $field == 'activities_icon' || $field == 'attraction_icon' ) {
+					}else if( $field == 'features_icon' || $field == 'destinations_icon' || $field == 'activities_icon' || $field == 'attraction_icon' ){
 						$field == 'features_icon' ? $field = 'tour_features' : '';
 						$field == 'destinations_icon' ? $field = 'tour_destination' : '';
 						$field == 'activities_icon' ? $field = 'tour_activities' : '';
 						$field == 'attraction_icon' ? $field = 'tour_attraction' : '';
-						$tax_icons[ $field ] = $row[ $column_index ];
+						$tax_icons[$field] = $row[$column_index];
 
-					} else if ( $field == 'included' && ! empty( $row[ $column_index ] ) ) {
-						$includes       = explode( ',', $row[ $column_index ] );
+					} else if( $field == 'included' && ! empty( $row[$column_index] ) ){
+						$includes  = explode(',', $row[$column_index] );
 						$total_includes = count( $includes ) - 1;
-						for ( $inc = 0; $inc <= $total_includes; $inc ++ ) {
-							$inc_index                                             = $inc;
-							$post_meta['tf_tours_opt']['inc'][ $inc_index ]['inc'] = $includes[ $inc_index ];
+						for( $inc = 0; $inc <= $total_includes; $inc++ ){
+							$inc_index = $inc;
+							$post_meta['tf_tours_opt']['inc'][$inc_index]['inc'] = $includes[$inc_index];
 						}
-					} else if ( $field == 'excluded' && ! empty( $row[ $column_index ] ) ) {
-						$excludes       = explode( ',', $row[ $column_index ] );
+					} else if( $field == 'excluded' && ! empty( $row[$column_index] ) ){
+						$excludes  = explode(',', $row[$column_index] );
 						$total_excludes = count( $excludes ) - 1;
-						for ( $exc = 0; $exc <= $total_excludes; $exc ++ ) {
-							$exc_index                                             = $exc;
-							$post_meta['tf_tours_opt']['exc'][ $exc_index ]['exc'] = $excludes[ $exc_index ];
+						for( $exc = 0; $exc <= $total_excludes; $exc++ ){
+							$exc_index = $exc;
+							$post_meta['tf_tours_opt']['exc'][$exc_index]['exc'] = $excludes[$exc_index];
 						}
-					} else if ( $field == 'included_icon' && ! empty( $row[ $column_index ] ) ) {
-						$inc_icon                              = ! empty( $row[ $column_index ] ) ? $row[ $column_index ] : '';
+					} else if( $field == 'included_icon' && ! empty( $row[$column_index] ) ){
+						$inc_icon  = !empty($row[$column_index]) ? $row[$column_index] : '';
 						$post_meta['tf_tours_opt']['inc_icon'] = $inc_icon;
-					} else if ( $field == 'excluded_icon' && ! empty( $row[ $column_index ] ) ) {
-						$exc_icon                              = ! empty( $row[ $column_index ] ) ? $row[ $column_index ] : '';
+					} else if( $field == 'excluded_icon' && ! empty( $row[$column_index] ) ){
+						$exc_icon  = !empty($row[$column_index]) ? $row[$column_index] : '';
 						$post_meta['tf_tours_opt']['exc_icon'] = $exc_icon;
-					} else if ( $field == 'cont_custom_date' && ! empty( $row[ $column_index ] ) ) {
-						$cont_custom_date                              = json_decode( $row[ $column_index ], true );
-						$response['cont_custom_date']                  = $cont_custom_date;
+					} else if( $field == 'cont_custom_date' && ! empty( $row[$column_index] ) ){
+						$cont_custom_date = json_decode( $row[$column_index], true );
+						$response['cont_custom_date'] = $cont_custom_date;
 						$post_meta['tf_tours_opt']['cont_custom_date'] = $cont_custom_date;
 
 					} else {
 						// Create an array to store post meta for the current row
-						$post_meta['tf_tours_opt'][ $field ] = $row[ $column_index ];
+						$post_meta['tf_tours_opt'][$field] = $row[$column_index];
 					}
 
-					if ( $field == 'faqs' && ! empty( $row[ $column_index ] ) ) {
-						$faqs = json_decode( $row[ $column_index ], true );
+					if( $field == 'faqs' && ! empty( $row[$column_index] ) ){
+						$faqs = json_decode( $row[$column_index], true );
 						//$faqs = $row[$column_index];
-						$post_meta['tf_tours_opt'][ $field ] = serialize( $faqs );
+						$post_meta['tf_tours_opt'][$field] = serialize( $faqs );
 
 					}
 
-					if ( $field == 'disabled_day' && ! empty( $row[ $column_index ] ) ) {
-						$post_meta['tf_tours_opt']['disabled_day'] = unserialize( $row[ $column_index ] );
+					if( $field == 'disabled_day'  && ! empty( $row[$column_index] ) ){
+						$post_meta['tf_tours_opt']['disabled_day'] = unserialize( $row[$column_index] );
 					}
 
-					if ( $field == 'tc-section-title' ) {
-						$post_meta['tf_tours_opt']['tc-section-title'] = $row[ $column_index ];
+					if( $field == 'tc-section-title' ){
+						$post_meta['tf_tours_opt']['tc-section-title'] =  $row[$column_index];
 					}
-					if ( $field == 't-enquiry-option-icon' ) {
-						$post_meta['tf_tours_opt']['t-enquiry-option-icon'] = $row[ $column_index ];
+					if( $field == 't-enquiry-option-icon' ){
+						$post_meta['tf_tours_opt']['t-enquiry-option-icon'] = $row[$column_index];
 					}
-					if ( $field == 'itinerary_gallery' && ! empty( $row[ $column_index ] ) ) {
+					if( $field == 'itinerary_gallery' && ! empty( $row[ $column_index ] ) ){
 						$itn_gallery_array = json_decode( $row[ $column_index ], true );
-						$total_itn         = count( $itn_gallery_array ) - 1;
-						for ( $itn = 0; $itn <= $total_itn; $itn ++ ) {
+						$total_itn = count( $itn_gallery_array ) - 1;
+						for( $itn = 0; $itn <= $total_itn; $itn++ ){
 							// Extract the image URLs from the CSV row
-							$gallery_index = $itn + 1;
-							$image_urls    = explode( ',', $itn_gallery_array[ $gallery_index ] );
+							$gallery_index     = $itn + 1;
+							$image_urls        = explode( ',', $itn_gallery_array[$gallery_index] );
 
 							$gallery_images = array();
 
 							//include image.php for wp_generate_attachment_metadata() function
-							if ( ! function_exists( 'wp_crop_image' ) ) {
+							if( ! function_exists( 'wp_crop_image' ) ){
 								require_once ABSPATH . 'wp-admin/includes/image.php';
 							}
 
 							foreach ( $image_urls as $image_url ) {
-								if ( ! empty( $image_url ) ) {
+								if(!empty($image_url)){
 									// Download the image file
 									$image_data = file_get_contents( $image_url );
 									//if not found image
-									if ( $image_data === false ) {
+									if( $image_data === false ){
 										continue;
 									}
 									// Create a unique filename for the image
@@ -1200,7 +1190,7 @@ class TF_Demo_Importer {
 									$result = file_put_contents( $image_path, $image_data );
 
 									//failed to save image
-									if ( $result === false ) {
+									if( $result === false ){
 										continue;
 									}
 
@@ -1225,18 +1215,18 @@ class TF_Demo_Importer {
 								}
 							}
 
-							if ( ! empty( $post_meta['tf_tours_opt']['itinerary'] ) && gettype( $post_meta['tf_tours_opt']['itinerary'] ) == "string" ) {
-								$tf_hotel_exc_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-									return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+							if( !empty($post_meta['tf_tours_opt']['itinerary']) && gettype($post_meta['tf_tours_opt']['itinerary'])=="string" ){
+								$tf_hotel_exc_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+									return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
 								}, $post_meta['tf_tours_opt']['itinerary'] );
-								$itinerary          = unserialize( $tf_hotel_exc_value );
+								$itinerary = unserialize( $tf_hotel_exc_value );
 							}
 
 							// Combine the attachment IDs into a comma-separated string
 							$gallery_ids_string = implode( ',', $gallery_images );
 							// Assign the gallery IDs string to the tour_gallery meta field
-							$itinerary[ $itn ]['gallery_image']     = $gallery_ids_string;
-							$post_meta['tf_tours_opt']['itinerary'] = serialize( $itinerary );
+							$itinerary[$itn]['gallery_image'] = $gallery_ids_string;
+							$post_meta['tf_tours_opt']['itinerary'] = serialize($itinerary );
 						}
 
 					}
@@ -1256,65 +1246,61 @@ class TF_Demo_Importer {
 					'post_author'  => 1,
 					'post_date'    => $post_date,
 					'meta_input'   => $post_meta,
-					'post_name'    => ! empty( $post_slug ) ? $post_slug : $post_default_slug,
+					'post_name'    => !empty($post_slug) ? $post_slug : $post_default_slug,
 				);
 
 				$post_id = wp_insert_post( $post_data );
 
 				//assign or create taxonomies to the imported tours
-				if ( ! empty( $taxonomies ) ) {
-					foreach ( $taxonomies as $taxonomy => $values ) {
+				if (!empty($taxonomies)) {
+					foreach ($taxonomies as $taxonomy => $values) {
 						// Extract the taxonomy terms from the CSV row
-						$taxonomy_terms = explode( ',', $values );
+						$taxonomy_terms = explode(',', $values);
 
-						foreach ( $taxonomy_terms as $taxonomy_term ) {
+						foreach ($taxonomy_terms as $taxonomy_term) {
 							// Get the taxonomy name based on the column name
 							$taxonomy_name = $taxonomy; // Assuming the column names match the taxonomy names
 
 							// Check if ">" string is present in the text
-							if ( strpos( $taxonomy_term, '>' ) !== false ) {
-								$taxonomy_parts = explode( '>', $taxonomy_term );
-								$parent_name    = trim( $taxonomy_parts[0] );
-								if ( strpos( $taxonomy_parts[1], '+' ) !== false ) {
-									$child_terms = explode( '+', $taxonomy_parts[1] );
-								} else {
+							if (strpos($taxonomy_term, '>') !== false) {
+								$taxonomy_parts = explode('>', $taxonomy_term);
+								$parent_name    = trim($taxonomy_parts[0]);
+								if(  strpos( $taxonomy_parts[1], '+' ) !== false ){
+									$child_terms = explode('+', $taxonomy_parts[1]);
+								}else{
 									$child_terms = array( $taxonomy_parts[1] );
 								}
 
 								// Get or create the parent term
-								$parent_term = get_term_by( 'name', $parent_name, $taxonomy_name );
-								if ( ! $parent_term ) {
-									$parent_result = wp_insert_term( $parent_name, $taxonomy_name );
-									if ( ! is_wp_error( $parent_result ) ) {
+								$parent_term = get_term_by('name', $parent_name, $taxonomy_name);
+								if (!$parent_term) {
+									$parent_result = wp_insert_term($parent_name, $taxonomy_name);
+									if (!is_wp_error($parent_result)) {
 										$parent_term_id = $parent_result['term_id'];
 									} else {
-										// Handle error if necessary
-										echo 'Error creating parent term: ' . $parent_result->get_error_message();
-										continue;
+										error_log('Error creating parent term: ' . $parent_result->get_error_message());
 									}
 								} else {
 									$parent_term_id = $parent_term->term_id;
 									//check if parrent term is already assigned to the post
 									$assigned_terms = wp_get_post_terms( $post_id, $taxonomy_name, array( 'fields' => 'ids' ) );
-									if ( ! in_array( $parent_term_id, $assigned_terms ) ) {
+									if( ! in_array( $parent_term_id, $assigned_terms ) ){
 										wp_set_post_terms( $post_id, $parent_term_id, $taxonomy_name, true );
 									}
 								}
 
 								// Get or create the child terms under the parent term
 								$child_term_ids = array();
-								foreach ( $child_terms as $child_name ) {
-									$child_name = trim( $child_name );
+								foreach ($child_terms as $child_name) {
+									$child_name = trim($child_name);
 
-									$child_term = get_term_by( 'name', $child_name, $taxonomy_name );
-									if ( ! $child_term ) {
-										$child_result = wp_insert_term( $child_name, $taxonomy_name, array( 'parent' => $parent_term_id ) );
-										if ( ! is_wp_error( $child_result ) ) {
+									$child_term = get_term_by('name', $child_name, $taxonomy_name);
+									if (!$child_term) {
+										$child_result = wp_insert_term($child_name, $taxonomy_name, array('parent' => $parent_term_id));
+										if (!is_wp_error($child_result)) {
 											$child_term_ids[] = $child_result['term_id'];
 										} else {
-											// Handle error if necessary
-											echo 'Error creating child term: ' . $child_result->get_error_message();
-											continue;
+											error_log('Error creating child term: ' . $child_result->get_error_message());
 										}
 									} else {
 										$child_term_ids[] = $child_term->term_id;
@@ -1322,28 +1308,27 @@ class TF_Demo_Importer {
 								}
 
 								// Assign the parent and child terms to the post
-								wp_set_post_terms( $post_id, array_merge( array( $parent_term_id ), $child_term_ids ), $taxonomy_name, true );
+								wp_set_post_terms($post_id, array_merge(array($parent_term_id), $child_term_ids), $taxonomy_name, true);
 							} else {
 								// No hierarchy, it's a standalone term
-								$term_name = trim( $taxonomy_term );
+								$term_name = trim($taxonomy_term);
 
 								// Get or create the term by name and taxonomy
-								$term = get_term_by( 'name', $term_name, $taxonomy_name );
+								$term = get_term_by('name', $term_name, $taxonomy_name);
 
-								if ( ! $term ) {
+								if (!$term) {
 									// Term does not exist, create a new one
-									$term_result = wp_insert_term( $term_name, $taxonomy_name );
+									$term_result = wp_insert_term($term_name, $taxonomy_name);
 
-									if ( ! is_wp_error( $term_result ) ) {
+									if (!is_wp_error($term_result)) {
 										// Term already exists, assign it to the post
 										$term_id = $term_result['term_id'];
-										wp_set_post_terms( $post_id, $term_id, $taxonomy_name, true );
+										wp_set_post_terms($post_id, $term_id, $taxonomy_name, true);
 									} else {
-										// Handle error if necessary
-										echo 'Error creating term: ' . $term_result->get_error_message();
+										error_log('Error creating term: ' . $term_result->get_error_message());
 									}
 								} else {
-									wp_set_post_terms( $post_id, $term->term_id, $taxonomy_name, true );
+									wp_set_post_terms($post_id, $term->term_id, $taxonomy_name, true);
 								}
 							}
 						}
@@ -1352,10 +1337,6 @@ class TF_Demo_Importer {
 				//reset the post meta array
 				$post_meta = array();
 			}
-
-			wp_die();
 		}
 	}
 }
-
-TF_Demo_Importer::instance();

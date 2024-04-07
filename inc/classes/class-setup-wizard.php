@@ -1120,6 +1120,10 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 					// update_option( 'tour_slug', $tour_permalink );
                     $tf_settings["tour-permalink-setting"] = $tour_permalink;
 				}
+
+                if ( ! empty( $tour_demo_data ) && $tour_demo_data == '1' ) {
+                    TF_Demo_Importer::instance()->tf_dummy_tours_import();
+                }
 			}
 
 			if ( ! in_array( 5, $skip_steps ) && ! in_array( 'apartment', $services ) ) {
