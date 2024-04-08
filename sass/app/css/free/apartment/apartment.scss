@@ -435,8 +435,23 @@
             margin: 0 !important;
         }
 
+        .slick-prev {
+            left: 1px;
+        }
+
         .slick-arrow {
+            display: block;
             z-index: 999;
+            right: 12px;
+            top: 80px;
+            bottom: 136px;
+        }
+
+        
+
+        .slick-arrow::before {
+            font-size: 32px;
+            color: rgba(255, 255, 255, 0.70);
         }
 
         .slick-dotted.slick-slider{

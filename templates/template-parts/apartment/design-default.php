@@ -234,7 +234,7 @@
 							<?php if ( ! empty( $meta['room_details_title'] ) ): ?>
                                 <h2 class="section-heading"><?php echo esc_html( $meta['room_details_title'] ) ?></h2>
 							<?php endif; ?>
-                            <div class="tf-apartment-room-slider">
+                            <div class="tf-apartment-default-design-room-slider">
 								<?php foreach ( tf_data_types( $meta['rooms'] ) as $key => $room ) : ?>
                                     <div class="tf-apartment-room-item">
                                         <div class="tf-apartment-room-item-thumb">
