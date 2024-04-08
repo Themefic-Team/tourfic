@@ -554,6 +554,36 @@
             ]
         });
 
+        $(document).on('click', '.tf-apartment-show-more', function (e) {
+            if ($(this).siblings('.tf-full-description')) {
+                $(this).siblings('.tf-full-description').show();
+                $(this).siblings('.tf-description').hide();
+                $(this).text("Show Less");
+                $(this).addClass('tf-apartment-show-less');
+            }
+        });
+        
+        $(document).on('click', '.tf-apartment-show-less', function (e) {
+            if ($(this).siblings('.tf-full-description')) {
+                $(this).siblings('.tf-full-description').hide();
+                $(this).siblings('.tf-description').show();
+                $(this).text("Show More");
+                $(this).removeClass('tf-apartment-show-less');
+            }
+        });
+        
+        $('.tf-single-details').each(function (index, val) {
+            if (index > 1) {
+                $(this).hide();
+            }
+        });
+
+        $(".tf-apaartment-show-all").on('click', function (e) { 
+            $('.tf-single-details').each(function (index, val) {
+                $(val).show();
+            });
+        });
+
     });
 
 })(jQuery, window);

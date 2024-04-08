@@ -338,6 +338,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 					$c_author_name = $comment->comment_author;
 					$c_date        = $comment->comment_date;
 					$c_content     = $comment->comment_content;
+					global $post_type;
 					?>
                     <div class="tf-single-details">
                         <div class="tf-review-avatar"><?php echo wp_kses_post($c_avatar); ?></div>
@@ -347,7 +348,29 @@ if ( ! empty( $tf_ratings_for ) ) {
                             <div class="tf-rating-stars">
 								<?php echo wp_kses_post($c_rating); ?>
                             </div>
-                            <div class="tf-description"><p><?php echo wp_kses_post($c_content); ?></p></div>
+                            <?php if( $post_type == 'apartment') { 
+								if( $tf_apartment_selected_template  == "default") { 
+									if( strlen($c_content) > 120 ) { ?>
+											<div class="tf-description">
+												<p><?php echo wp_kses_post( tourfic_character_limit_callback($c_content, 120) ) ?></p>
+											</div>
+											<div class="tf-full-description" style="display:none;">
+												<p><?php echo wp_kses_post( $c_content ) ?></p>
+											</div>
+									<?php } else { ?>
+											<div class="tf-description">
+												<p><?php echo wp_kses_post($c_content); ?></p>
+											</div>
+									<?php
+								}
+							}	
+							} else { ?>
+								<div class="tf-description"><p><?php echo wp_kses_post($c_content); ?></p></div>
+							<?php } ?>
+							<?php if( $post_type == 'apartment' && $tf_apartment_selected_template  == "default" && strlen($c_content) > 120 ): ?>
+								<div class="tf-apartment-show-more"><?php esc_html_e("Show more", "tourfic") ?></div>
+							
+							<?php endif;?>
                         </div>
                     </div>
 					<?php
@@ -355,6 +378,15 @@ if ( ! empty( $tf_ratings_for ) ) {
 			}
 			?>
         </div>
+		<?php if ( $post_type == "apartment" && $tf_apartment_selected_template == 'default' ): ?>
+			<div class="show-all-review-wrap">
+				<div>
+					<div class="tf-apaartment-show-all">
+						<?php esc_html_e( "Show all reviews", "tourfic" );?>
+					</div>
+				</div>
+			</div>
+		<?php endif;?>
 
 		<?php
 		// Review moderation notice

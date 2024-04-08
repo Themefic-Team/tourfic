@@ -1161,6 +1161,68 @@
 
 .tf-apartment-review{
     margin-bottom: 48px;
+
+    .tf-review-progress-bar {
+        background: #D8E6FF;
+        border-radius: 8px;
+        border: 1px solid #EBF2FF;
+        column-gap: 120px;
+
+        row-gap: 16px;
+
+        .tf-single {
+            grid-template-columns: calc(50% - 100px) calc(50% - 50px) 30px !important;
+        }
+    }
+
+    .tf-single-review{
+        background-color: transparent;
+        .tf-single-details {
+            background-color: transparent;
+        }
+        .tf-review-details {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            
+             .tf-apartment-show-more {
+                font-family: Roboto;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 1.7;
+                letter-spacing: 0.5px;
+                color: #2A3343; 
+                cursor: pointer;
+                user-select: none;
+            }
+        }
+        p {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.show-all-review-wrap{
+    padding: 8px 24px;
+    border-radius: 4px;
+    background:#F5F8FF;
+    border: 1px solid #2979FF;
+    width: 200px;
+    margin: auto;
+
+    .tf-apaartment-show-all {
+        color: #2979FF;
+        text-align: center;
+        font-family: Roboto;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.7;
+        letter-spacing: 0.5px;
+        user-select: none;
+        cursor: pointer;
+    }
 }
 
 .tf-related-apartment {
