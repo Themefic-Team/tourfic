@@ -218,18 +218,17 @@ if ( ! function_exists( 'tfopt' ) ) {
 /**
  * All the requires
  */
-// Classes
-if ( file_exists( TF_INC_PATH . 'classes.php' ) ) {
-	require_once TF_INC_PATH . 'classes.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'classes.php' );
-}
-
 // Functions
 if ( file_exists( TF_INC_PATH . 'functions.php' ) ) {
 	require_once TF_INC_PATH . 'functions.php';
 } else {
 	tf_file_missing( TF_INC_PATH . 'functions.php' );
+}
+// Classes
+if ( file_exists( TF_INC_PATH . 'classes.php' ) ) {
+	require_once TF_INC_PATH . 'classes.php';
+} else {
+	tf_file_missing( TF_INC_PATH . 'classes.php' );
 }
 
 // Admin Functions
