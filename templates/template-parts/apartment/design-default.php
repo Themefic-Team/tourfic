@@ -234,7 +234,7 @@
 							<?php if ( ! empty( $meta['room_details_title'] ) ): ?>
                                 <h2 class="section-heading"><?php echo esc_html( $meta['room_details_title'] ) ?></h2>
 							<?php endif; ?>
-                            <div class="tf-apartment-room-slider">
+                            <div class="tf-apartment-default-design-room-slider">
 								<?php foreach ( tf_data_types( $meta['rooms'] ) as $key => $room ) : ?>
                                     <div class="tf-apartment-room-item">
                                         <div class="tf-apartment-room-item-thumb">
@@ -397,12 +397,13 @@
                             <img src="<?php echo esc_url(get_avatar_url( $post_author_id )); ?>" alt="">
                             <div class="host-meta">
 								<?php echo sprintf( '<h4>%s %s</h4>', esc_html__( 'Hosted by', 'tourfic' ), esc_html($author_info->display_name) ); ?>
-								<?php echo sprintf( '<p>%s <span>%s</span></p>', esc_html__( 'Joined in', 'tourfic' ), wp_kses_post(gmdate( 'F Y', strtotime( $author_info->user_registered ) )) ); ?>
+								<?php echo sprintf( '<span class="tf-apartment-joined-text">%s <span>:</span> <span>%s</span></span>', esc_html__( 'Joined', 'tourfic' ), wp_kses_post(gmdate( 'F Y', strtotime( $author_info->user_registered ) )) ); ?>
 								<?php tf_apartment_host_rating( $post_author_id ) ?>
 
                             </div>
                         </div>
                         <div class="host-bottom">
+                            <h4><?php esc_html_e("During Your Stay", 'tourfic'); ?></h4>
                             <p class="host-desc">
 								<?php echo wp_kses_post(get_the_author_meta( 'description', $post_author_id )); ?>
                             </p>
@@ -413,7 +414,7 @@
 								}
 								?>
                             </ul>
-                            <a href="" id="tf-ask-question-trigger" class="tf_button btn-styled"><i class="far fa-comments"></i><?php esc_html_e( 'Contact Host', 'tourfic' ) ?></a>
+                            <a href="" id="tf-ask-question-trigger" class="tf-apartment-contact-button"><i class="fas fa-phone"></i><?php esc_html_e( 'Contact Host', 'tourfic' ) ?></a>
                         </div>
                     </div>
                 </div>
