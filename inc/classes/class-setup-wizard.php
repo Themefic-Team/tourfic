@@ -522,7 +522,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 
                             <!--Demo Data Import Section-->
                             <div class="tf-setup-form-item tf-setup-form-item-inline">
-                                <div class="tf-setup-form-item-label"><label class="" for="tf-hotel-demo-data-import"><?php esc_html_e( 'Import Demo Data', 'tourfic' ) ?></label></div>
+                                <div class="tf-setup-form-item-label"><label class="" for="tf-hotel-demo-data-import"><?php esc_html_e( 'Import Demo Hotels', 'tourfic' ) ?></label></div>
                                 <div class="tf-setup-form-item-input">
                                     <label for="tf-hotel-demo-data-import" class="tf-switch-label">
                                         <input type="checkbox" id="tf-hotel-demo-data-import" name="tf-hotel-demo-data-import" value="1" checked class="tf-switch"/>
@@ -572,7 +572,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 
                             <!--Demo Data Import Section-->
                             <div class="tf-setup-form-item tf-setup-form-item-inline">
-                                <div class="tf-setup-form-item-label"><label class="" for="tf-tour-demo-data-import"><?php esc_html_e( 'Import Demo Data', 'tourfic' ) ?></label></div>
+                                <div class="tf-setup-form-item-label"><label class="" for="tf-tour-demo-data-import"><?php esc_html_e( 'Import Demo Tours', 'tourfic' ) ?></label></div>
                                 <div class="tf-setup-form-item-input">
                                     <label for="tf-tour-demo-data-import" class="tf-switch-label">
                                         <input type="checkbox" id="tf-tour-demo-data-import" name="tf-tour-demo-data-import" value="1" checked class="tf-switch"/>
@@ -622,7 +622,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 
                             <!--Demo Data Import Section-->
                             <div class="tf-setup-form-item tf-setup-form-item-inline">
-                                <div class="tf-setup-form-item-label"><label class="" for="tf-apartment-demo-data-import"><?php esc_html_e( 'Import Demo Data', 'tourfic' ) ?></label></div>
+                                <div class="tf-setup-form-item-label"><label class="" for="tf-apartment-demo-data-import"><?php esc_html_e( 'Import Demo Apartments', 'tourfic' ) ?></label></div>
                                 <div class="tf-setup-form-item-input">
                                     <label for="tf-apartment-demo-data-import" class="tf-switch-label">
                                         <input type="checkbox" id="tf-apartment-demo-data-import" name="tf-apartment-demo-data-import" value="1" checked class="tf-switch"/>
@@ -1134,6 +1134,10 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 					// update_option( 'apartment_slug', $apartment_permalink );
                     $tf_settings["apartment-permalink-setting"] = $apartment_permalink;
 				}
+
+                if ( ! empty( $apartment_demo_data ) && $apartment_demo_data == '1' ) {
+                    TF_Demo_Importer::instance()->tf_dummy_apartments_import();
+                }
 			}
 
 			// Settings Template
