@@ -26,7 +26,7 @@ class TF_Demo_Importer {
 		$hotels_query = new WP_Query( $hotels_post );
 		if ( ! empty( $hotels_query ) ) {
 			$hotels_count = $hotels_query->post_count;
-			if ( $hotels_count >= 5 ) {
+			if ( $hotels_count >= 3 ) {
 				return;
 			}
 		}
@@ -643,7 +643,7 @@ class TF_Demo_Importer {
 		$tours_query = new WP_Query( $tours_post );
 		if ( ! empty( $tours_query ) ) {
 			$tours_count = $tours_query->post_count;
-			if ( $tours_count >= 5 ) {
+			if ( $tours_count >= 3 ) {
 				return;
 			}
 		}
@@ -1337,7 +1337,7 @@ class TF_Demo_Importer {
 		$apartments_query = new WP_Query( $apartments_post );
 		if ( ! empty( $apartments_query ) ) {
 			$apartments_count = $apartments_query->post_count;
-			if ( $apartments_count >= 5 ) {
+			if ( $apartments_count >= 2 ) {
 				return;
 			}
 		}

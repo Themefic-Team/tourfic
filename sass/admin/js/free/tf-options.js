@@ -2271,7 +2271,7 @@ var frame, gframe;
 
     // external listing dynamic location
 
-    $('[name="type-selector"]').on("change", function (e) {
+    /*$('[name="type-selector"]').on("change", function (e) {
         const selectedValue = $(this).val();
         let termName = "hotel_location";
 
@@ -2317,7 +2317,7 @@ var frame, gframe;
         if (select_val && select_val.includes("all")) {
             $(this).val(["all"]).trigger('change.select2');
         }
-    });
+    });*/
     
     $(document).ready(function () {
         // $('.tf-import-btn').on('click', function (event) {
