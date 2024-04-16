@@ -147,6 +147,9 @@
                         $('.tf-setup-step-' + step).hide();
                     }
                 },
+                complete: function () {
+                    submitBtn.removeClass('tf-btn-loading');
+                },
                 error: function (error) {
                     submitBtn.removeClass('tf-btn-loading');
                     console.log(error);

@@ -8,6 +8,26 @@ if ( file_exists( TF_ADMIN_PATH . 'tf-options/options/tf-menu-icon.php' ) ) {
 	$menu_icon = 'dashicons-palmtree';
 }
 
+if ( ! function_exists( 'tf_search_page_default') ) {
+	function tf_search_page_default() {
+		$args = array(
+			'post_type'      => 'page',
+			'posts_per_page' => - 1,
+			'post_status' => 'publish',
+		);
+
+		$loop = new WP_Query( $args );
+		if( $loop->have_posts() ) {
+			foreach( $loop->posts as $post ) {
+				if( $post->post_name == 'tf-search') {
+					return $post->ID;
+				}
+			}
+		}
+		return;
+	}
+}
+
 TF_Settings::option( 'tf_settings', array(
 	'title'    => __( 'Tourfic Settings ', 'tourfic' ),
 	'icon'     => $menu_icon,
@@ -1756,7 +1776,8 @@ TF_Settings::option( 'tf_settings', array(
 					'query_args'  => array(
 						'post_type'      => 'page',
 						'posts_per_page' => - 1,
-					)
+					),
+					'default'     => tf_search_page_default(),
 				),
 
 				array(
@@ -4329,12 +4350,14 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'tour_settings',
 									'type'    => 'heading',
-									'content' => __( 'Thumbnail Settings in PDF', 'tourfic' ),
+									'label' => __( 'Thumbnail Settings in PDF', 'tourfic' ),
+									'subtitle' => esc_html__( 'These settings will adjust the height and width of the main tour image in the itinerary.', 'tourfic' ),
 								),
 								array(
 									'id'          => '',
 									'type'        => 'number',
 									'label'       => __( 'Image Thumbnail Height', 'tourfic' ),
+									'subtitle' => esc_html__( 'Adjust the height of the tour image in the itinerary. Leave blank to use the image in its full size.', 'tourfic' ),
 									'field_width' => 50,
 									'is_pro'      => true,
 								),
@@ -4342,6 +4365,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'          => '',
 									'type'        => 'number',
 									'label'       => __( 'Image Thumbnail Width', 'tourfic' ),
+									'subtitle' => esc_html__( 'Adjust the width of the tour image in the itinerary. Leave blank to use the image in its full size.', 'tourfic' ),
 									'field_width' => 50,
 									'is_pro'      => true,
 								),

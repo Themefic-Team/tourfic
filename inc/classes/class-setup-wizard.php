@@ -94,12 +94,12 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <form method="post" id="tf-setup-wizard-form" data-skip-steps="">
 						<?php
 						$this->tf_setup_welcome_step();
-						$this->tf_install_woocommerce();
 						$this->tf_setup_step_one();
-						$this->tf_setup_step_travelfic();
 						$this->tf_setup_step_two();
 						$this->tf_setup_step_three();
 						$this->tf_setup_step_four();
+						$this->tf_setup_step_five();
+						$this->tf_setup_step_six();
 						$this->tf_setup_finish_step();
 						?>
 						<?php wp_nonce_field( 'tf_setup_wizard_action', 'tf_setup_wizard_nonce' ); ?>
@@ -128,7 +128,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                 <div class="setup-content-warper">
                     <div class="welcome-img"><img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL) . 'images/welcome.png' ?>" alt="<?php esc_attr_e( 'Welcome to Tourfic!', 'tourfic' ) ?>"></div>
                     <h1 class="tf-setup-welcome-title"><?php esc_html_e( 'Welcome to Tourfic!', 'tourfic' ) ?></h1>
-                    <div class="tf-setup-welcome-description"><?php esc_html_e( 'Thanks for choosing Tourfic for your travel/hotel/apartment business. We are excited to have you on board. This quick setup wizard is simple and straightforward and shouldn’t take longer than five minutes. It will help you configure the basic settings of Tourfic to get started. Please note that this setup guide is entirely optional.', 'tourfic' ) ?></div>
+                    <div class="tf-setup-welcome-description"><?php esc_html_e( 'This quick setup wizard is simple and straightforward and shouldn’t take longer than five minutes. It will help you configure the basic settings of Tourfic to get started. Please note that this setup guide is entirely optional.', 'tourfic' ) ?></div>
                     <div class="tf-setup-welcome-footer">
                         <button type="button" class="tf-quick-setup-btn tf-setup-start-btn">
                             <span><?php esc_html_e( 'Get Started', 'tourfic' ) ?></span>
@@ -144,9 +144,11 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		}
 
 		/**
+         * Setup step one
+         *
 		 * WooCommerce Check
 		 */
-		private function tf_install_woocommerce() {
+		private function tf_setup_step_one() {
 			if ( current_user_can( 'activate_plugins' ) ) {
                 if ( ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) || ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
                     ?>
@@ -199,9 +201,11 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		}
 
 		/**
-		 * Setup step one
+		 * Setup step two
+         *
+         * Service Type
 		 */
-		private function tf_setup_step_one() {
+		private function tf_setup_step_two() {
 			$tf_disable_services = ! empty( tfopt( 'disable-services' ) ) ? tfopt( 'disable-services' ) : '';
 			?>
             <div class="tf-setup-step-container tf-setup-step-2 <?php echo self::$current_step == 'step_2' ? 'active' : ''; ?>" data-step="2">
@@ -277,9 +281,11 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		}
 
         /**
-		 * Setup step Travelfic
+		 * Setup step three
+         *
+         * Travelfic Theme
 		 */
-		private function tf_setup_step_travelfic() {
+		private function tf_setup_step_three() {
 			?>
             <div class="tf-setup-step-container tf-setup-step-3 <?php echo self::$current_step == 'step_3' ? 'active' : ''; ?>" data-step="3">
                 <div class="back-to-dashboard">
@@ -353,9 +359,11 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		}
 
 		/**
-		 * Setup step two
+		 * Setup step four
+         *
+         * General Settings
 		 */
-		private function tf_setup_step_two() {
+		private function tf_setup_step_four() {
 			$tf_search_result_page      = ! empty( tfopt( 'search-result-page' ) ) ? tfopt( 'search-result-page' ) : '';
 			$tf_search_result      = ! empty( tfopt( 'posts_per_page' ) ) ? tfopt( 'posts_per_page' ) : 10;
             $tf_wishlist_page      = ! empty( tfopt( 'wl-page' ) ) ? tfopt( 'wl-page' ) : '';
@@ -453,9 +461,11 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		}
 
 		/**
-		 * Setup step three
+		 * Setup step five
+         *
+         * Hotel, Tour, Apartment Settings
 		 */
-		private function tf_setup_step_three() {
+		private function tf_setup_step_five() {
 			$tf_hotel_review     = ! empty( tfopt( 'h-review' ) ) ? tfopt( 'h-review' ) : '';
 			$tf_hotel_share      = ! empty( tfopt( 'h-share' ) ) ? tfopt( 'h-share' ) : '';
 			$tf_hotel_slug       = ! empty( get_option( 'hotel_slug' ) ) ? get_option( 'hotel_slug' ) : 'hotels';
@@ -510,6 +520,17 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                                 </div>
                             </div>
 
+                            <!--Demo Data Import Section-->
+                            <div class="tf-setup-form-item tf-setup-form-item-inline">
+                                <div class="tf-setup-form-item-label"><label class="" for="tf-hotel-demo-data-import"><?php esc_html_e( 'Import Demo Hotels', 'tourfic' ) ?></label></div>
+                                <div class="tf-setup-form-item-input">
+                                    <label for="tf-hotel-demo-data-import" class="tf-switch-label">
+                                        <input type="checkbox" id="tf-hotel-demo-data-import" name="tf-hotel-demo-data-import" value="1" checked class="tf-switch"/>
+                                        <span class="tf-switch-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+
                             <!--Hotel Permalink-->
                             <div class="tf-setup-form-item tf-setup-form-item-inline tf-setup-permalink">
                                 <div class="tf-setup-form-item-label"><label class=""><?php esc_html_e( 'Hotel Permalink', 'tourfic' ) ?></label></div>
@@ -544,6 +565,17 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                                     <label for="tf-tour-related-section" class="tf-switch-label">
                                         <input type="checkbox" id="tf-tour-related-section" name="tf-tour-related-section" value="<?php echo empty( $tf_tour_related ) ? esc_attr( '1' ) : ''; ?>"
                                             class="tf-switch" <?php echo empty( $tf_tour_related ) ? esc_attr( 'checked' ) : ''; ?>/>
+                                        <span class="tf-switch-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!--Demo Data Import Section-->
+                            <div class="tf-setup-form-item tf-setup-form-item-inline">
+                                <div class="tf-setup-form-item-label"><label class="" for="tf-tour-demo-data-import"><?php esc_html_e( 'Import Demo Tours', 'tourfic' ) ?></label></div>
+                                <div class="tf-setup-form-item-input">
+                                    <label for="tf-tour-demo-data-import" class="tf-switch-label">
+                                        <input type="checkbox" id="tf-tour-demo-data-import" name="tf-tour-demo-data-import" value="1" checked class="tf-switch"/>
                                         <span class="tf-switch-slider"></span>
                                     </label>
                                 </div>
@@ -588,6 +620,17 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                                 </div>
                             </div>
 
+                            <!--Demo Data Import Section-->
+                            <div class="tf-setup-form-item tf-setup-form-item-inline">
+                                <div class="tf-setup-form-item-label"><label class="" for="tf-apartment-demo-data-import"><?php esc_html_e( 'Import Demo Apartments', 'tourfic' ) ?></label></div>
+                                <div class="tf-setup-form-item-input">
+                                    <label for="tf-apartment-demo-data-import" class="tf-switch-label">
+                                        <input type="checkbox" id="tf-apartment-demo-data-import" name="tf-apartment-demo-data-import" value="1" checked class="tf-switch"/>
+                                        <span class="tf-switch-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+
                             <!--Apartment Permalink-->
                             <div class="tf-setup-form-item tf-setup-form-item-inline tf-setup-permalink">
                                 <div class="tf-setup-form-item-label"><label class=""><?php esc_html_e( 'Apartment Permalink', 'tourfic' ) ?></label></div>
@@ -612,15 +655,16 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     </div>
                     
                 </section>
-                
             </div>
 			<?php
 		}
 
 		/**
-		 * Setup step four
+		 * Setup step six
+         *
+         * Template Settings
 		 */
-		private function tf_setup_step_four() {
+		private function tf_setup_step_six() {
 			$tf_hotel_single_template  = ! empty( tf_data_types( tfopt( 'tf-template' ) )['single-hotel'] ) ? tf_data_types( tfopt( 'tf-template' ) )['single-hotel'] : 'design-1';
 			$tf_hotel_archive_template = ! empty( tf_data_types( tfopt( 'tf-template' ) )['hotel-archive'] ) ? tf_data_types( tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
 			$tf_tour_single_template   = ! empty( tf_data_types( tfopt( 'tf-template' ) )['single-tour'] ) ? tf_data_types( tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
@@ -906,7 +950,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                 <div class="tf-setup-finish-content">
                     <div class="welcome-img"><img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL) . 'images/hooray.gif' ?>" alt="<?php esc_attr_e( 'Thank you', 'tourfic' ) ?>"></div>
                     <h1 class="tf-setup-welcome-title"><?php esc_html_e( 'Hooray! You’re all set.', 'tourfic' ) ?></h1>
-                    <div class="tf-setup-welcome-description"><?php esc_html_e( 'Let\'s get started with Tourfic. Provide your customers with a seamless booking </br> experience with this plugin. Let\'s streamline your business operations now!', 'tourfic' ) ?></div>
+                    <div class="tf-setup-welcome-description"><?php echo wp_kses_post( 'Let\'s get started with Tourfic. Provide your customers with a seamless booking </br> experience with this plugin. Let\'s streamline your business operations now!', 'tourfic' ) ?></div>
                     <div class="tf-setup-welcome-footer tf-setup-finish-footer">
                         <a href="<?php echo esc_url(admin_url( 'post-new.php?post_type=tf_hotel' )) ?>" class="tf-link-skip-btn tf-add-new-hotel tf-settings-default-button"><?php esc_html_e( 'Create Hotel', 'tourfic' ) ?></a>
                         <a href="<?php echo esc_url(admin_url( 'post-new.php?post_type=tf_tours' )) ?>" class="tf-link-skip-btn tf-add-new-tour tf-settings-default-button"><?php esc_html_e( 'Create Tour', 'tourfic' ) ?></a>
@@ -1011,12 +1055,15 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			$hotel_review           = isset( $_POST['tf-hotel-review-section'] ) ? $_POST['tf-hotel-review-section'] : '';
 			$hotel_share            = isset( $_POST['tf-hotel-share-option'] ) ? $_POST['tf-hotel-share-option'] : '';
 			$hotel_permalink        = isset( $_POST['tf-hotel-permalink'] ) ? $_POST['tf-hotel-permalink'] : '';
+			$hotel_demo_data        = isset( $_POST['tf-hotel-demo-data-import'] ) ? $_POST['tf-hotel-demo-data-import'] : '';
 			$tour_review            = isset( $_POST['tf-tour-review-section'] ) ? $_POST['tf-tour-review-section'] : '';
 			$tour_related           = isset( $_POST['tf-tour-related-section'] ) ? $_POST['tf-tour-related-section'] : '';
 			$tour_permalink         = isset( $_POST['tf-tour-permalink'] ) ? $_POST['tf-tour-permalink'] : '';
+			$tour_demo_data         = isset( $_POST['tf-tour-demo-data-import'] ) ? $_POST['tf-tour-demo-data-import'] : '';
 			$apartment_review       = isset( $_POST['tf-apartment-review-section'] ) ? $_POST['tf-apartment-review-section'] : '';
 			$apartment_share        = isset( $_POST['tf-apartment-share-option'] ) ? $_POST['tf-apartment-share-option'] : '';
 			$apartment_permalink    = isset( $_POST['tf-apartment-permalink'] ) ? $_POST['tf-apartment-permalink'] : '';
+			$apartment_demo_data    = isset( $_POST['tf-apartment-demo-data-import'] ) ? $_POST['tf-apartment-demo-data-import'] : '';
 
 			// Template Step
 			$tf_hotel_single  = isset( $_POST['tf_single_hotel'] ) ? $_POST['tf_single_hotel'] : 'design-1';
@@ -1030,7 +1077,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			$skip_steps = isset( $_POST['tf-skip-steps'] ) ? $_POST['tf-skip-steps'] : [];
 			$skip_steps = explode( ',', $skip_steps );
 
-			if ( ! in_array( 1, $skip_steps ) ) {
+			if ( ! in_array( 2, $skip_steps ) ) {
 				$services = array_diff( $tf_services, $services );
 				$services = array_map( 'sanitize_text_field', $services );
 
@@ -1042,26 +1089,30 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 				}
 			}
 
-			
-           	if ( ! in_array( 3, $skip_steps ) ) {
-		    $tf_settings['search-result-page'] = ! empty( $search_page ) ? $search_page : '';
-		    $tf_settings['posts_per_page']     = ! empty( $search_result_per_page ) ? $search_result_per_page : '';
-		    $tf_settings['wl-page']            = ! empty( $wishlist_page ) ? $wishlist_page : '';
-		    $tf_settings['r-auto-publish']     = ! empty( $auto_publish ) ? $auto_publish : '';
-		}
+			//General Settings
+			if ( ! in_array( 4, $skip_steps ) ) {
+				$tf_settings['search-result-page'] = ! empty( $search_page ) ? $search_page : '';
+				$tf_settings['posts_per_page']     = ! empty( $search_result_per_page ) ? $search_result_per_page : '';
+				$tf_settings['wl-page']            = ! empty( $wishlist_page ) ? $wishlist_page : '';
+				$tf_settings['r-auto-publish']     = ! empty( $auto_publish ) ? $auto_publish : '';
+			}
 
-			if ( ! in_array( 4, $skip_steps ) && ! in_array( 'hotel', $services ) ) {
+			// Hotel, Tour, Apartment Settings
+			if ( ! in_array( 5, $skip_steps ) && ! in_array( 'hotel', $services ) ) {
 				$tf_settings['h-review'] = ! empty( $hotel_review ) ? 0 : 1;
 				$tf_settings['h-share']  = ! empty( $hotel_share ) ? 0 : 1;
 
 				if ( ! empty( $hotel_permalink ) ) {
 					// update_option( 'hotel_slug', $hotel_permalink );
                     $tf_settings["hotel-permalink-setting"] = $hotel_permalink;
-
 				}
+
+                if ( ! empty( $hotel_demo_data ) && $hotel_demo_data == '1' ) {
+	                TF_Demo_Importer::instance()->tf_dummy_hotels_import();
+                }
 			}
 
-			if ( ! in_array( 4, $skip_steps ) && ! in_array( 'tour', $services ) ) {
+			if ( ! in_array( 5, $skip_steps ) && ! in_array( 'tour', $services ) ) {
 				$tf_settings['t-review']  = ! empty( $tour_review ) ? 0 : 1;
 				$tf_settings['t-related'] = ! empty( $tour_related ) ? 0 : 1;
 
@@ -1069,9 +1120,13 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 					// update_option( 'tour_slug', $tour_permalink );
                     $tf_settings["tour-permalink-setting"] = $tour_permalink;
 				}
+
+                if ( ! empty( $tour_demo_data ) && $tour_demo_data == '1' ) {
+                    TF_Demo_Importer::instance()->tf_dummy_tours_import();
+                }
 			}
 
-			if ( ! in_array( 4, $skip_steps ) && ! in_array( 'apartment', $services ) ) {
+			if ( ! in_array( 5, $skip_steps ) && ! in_array( 'apartment', $services ) ) {
 				$tf_settings['disable-apartment-review'] = ! empty( $apartment_review ) ? 0 : 1;
 				$tf_settings['disable-apartment-share']  = ! empty( $apartment_share ) ? 0 : 1;
 
@@ -1079,20 +1134,24 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 					// update_option( 'apartment_slug', $apartment_permalink );
                     $tf_settings["apartment-permalink-setting"] = $apartment_permalink;
 				}
+
+                if ( ! empty( $apartment_demo_data ) && $apartment_demo_data == '1' ) {
+                    TF_Demo_Importer::instance()->tf_dummy_apartments_import();
+                }
 			}
 
 			// Settings Template
-			if ( ! in_array( 5, $skip_steps ) && ! in_array( 'hotel', $services ) ) {
+			if ( ! in_array( 6, $skip_steps ) && ! in_array( 'hotel', $services ) ) {
 				$tf_settings['tf-template']['single-hotel']  = ! empty( $tf_hotel_single ) ? $tf_hotel_single : '';
 				$tf_settings['tf-template']['hotel-archive'] = ! empty( $tf_hotel_archive ) ? $tf_hotel_archive : '';
 			}
 
-			if ( ! in_array( 5, $skip_steps ) && ! in_array( 'tour', $services ) ) {
+			if ( ! in_array( 6, $skip_steps ) && ! in_array( 'tour', $services ) ) {
 				$tf_settings['tf-template']['single-tour']  = ! empty( $tf_tour_single ) ? $tf_tour_single : '';
 				$tf_settings['tf-template']['tour-archive'] = ! empty( $tf_tour_archive ) ? $tf_tour_archive : '';
 			}
 
-			if ( ! in_array( 5, $skip_steps ) && ! in_array( 'apartment', $services ) ) {
+			if ( ! in_array( 6, $skip_steps ) && ! in_array( 'apartment', $services ) ) {
 				$tf_settings['tf-template']['single-apartment']  = ! empty( $tf_apartment_single ) ? $tf_apartment_single : '';
 				$tf_settings['tf-template']['apartment-archive'] = ! empty( $tf_apartment_archive ) ? $tf_apartment_archive : '';
 			}

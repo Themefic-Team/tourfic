@@ -213,6 +213,7 @@ function tf_hotel_taxonomies_register() {
 		"rest_base"             => "hotel_feature",
 		"rest_controller_class" => "WP_REST_Terms_Controller",
 		"show_in_quick_edit"    => true,
+		'meta_box_cb'           => false,
 		'capabilities'          => array(
 			'assign_terms' => 'edit_tf_hotel',
 			'edit_terms'   => 'edit_tf_hotel',
@@ -1053,8 +1054,8 @@ function tf_room_availability_callback() {
 						$days = $days+1;
 					}
 
-					$price = !empty($room['price_multi_day']) && $room['price_multi_day'] == '1' ? $price_by_date * $days : $price_by_date * $days;
-					$d_price = !empty($room['price_multi_day']) && $room['price_multi_day'] == '1' ? $d_price_by_date * $days : $d_price_by_date * $days;
+					$price = !empty($room['price_multi_day']) && $room['price_multi_day'] == '1' && !empty( $price_by_date ) ? $price_by_date * $days : $price_by_date * $days;
+					$d_price = !empty($room['price_multi_day']) && $room['price_multi_day'] == '1' && !empty( $price_by_date ) ? $d_price_by_date * $days : $d_price_by_date * $days;
 
 					tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price );
 
@@ -1447,8 +1448,10 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                         <div class="tf_form-row">
                             <label class="tf_label-row">
                                 <span class="tf-label"><?php esc_html_e( 'Location', 'tourfic' ); ?>:</span>
-                                <div class="tf_form-inner tf-d-g">
-                                    <i class="fas fa-search"></i>
+                                <div class="tf_form-inner">
+                                    <div class="tf-search-form-field-icon">
+                                        <i class="fas fa-search"></i>
+                                    </div>
 									<?php 
 									if ( (empty($advanced) || !empty($advanced)) && "enabled"!=$advanced ){ ?>
                                     <input type="text" name="place-name" <?php echo $hotel_location_field_required != 1 ? '' : 'required'; ?> id="tf-location" class="" placeholder="<?php esc_html_e( 'Enter Location', 'tourfic' ); ?>" value="">
@@ -1486,7 +1489,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 
                 <div class="tf_selectperson-wrap">
                     <div class="tf_input-inner">
-                        <span class="tf_person-icon">
+                        <span class="tf_person-icon tf-search-form-field-icon">
                             <i class="fas fa-user"></i>
                         </span>
                         <div class="adults-text"><?php echo esc_html__( '1 Adults', 'tourfic' ); ?></div>
@@ -1554,8 +1557,10 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                         <div class="tf_form-row">
                             <label class="tf_label-row">
                                 <span class="tf-label"><?php esc_html_e( 'Check-in & Check-out date', 'tourfic' ); ?></span>
-                                <div class="tf_form-inner tf-d-g">
-                                    <i class="far fa-calendar-alt"></i>
+                                <div class="tf_form-inner">
+                                    <div class="tf-search-form-field-icon">
+                                        <i class="far fa-calendar-alt"></i>
+                                    </div>
                                     <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
                                            placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo tfopt( 'date_hotel_search' ) ? 'required' : ''; ?>>
                                 </div>

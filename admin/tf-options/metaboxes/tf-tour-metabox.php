@@ -130,7 +130,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'class'    => 'gmaps',
 					'type'     => 'map',
 					'label'    => esc_html__( 'Dynamic Location Search', 'tourfic' ),
-					'subtitle' => esc_html__( 'Enter the specific address you wish to use for the tour and select the correct option from the suggested addresses. This will be used to hyperlink address and display the address on the front-end map. Note that the address provided in the previous section is solely for display purposes!', 'tourfic' ),
+					'subtitle' => sprintf( wp_kses_post(__( 'Enter the specific address you wish to use for the tour and select the correct option from the suggested addresses. This will be used to hyperlink address and display the address on the front-end map. <strong>Google Maps is also available for location. Simply set up your <a href="%s" target="_blank">Google Maps API Key</a></strong>', 'tourfic' )), esc_url( admin_url('admin.php?page=tf_settings#tab=map_settings') ) ),
 					'height'   => '250px',
 					'settings' => array(
 						'scrollWheelZoom' => true,
@@ -1342,11 +1342,13 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'      => 'tour_settings',
 					'type'    => 'heading',
 					'content' => __( 'Thumbnail Settings in PDF', 'tourfic' ),
+					'subtitle' => esc_html__( 'These settings will adjust the height and width of the main tour image in the itinerary.', 'tourfic' ),
 				),
 				array(
 					'id'          => '',
 					'type'        => 'number',
 					'label'   => __( 'Image Thumbnail Height', 'tourfic' ),
+					'subtitle' => esc_html__( 'Adjust the height of the tour image in the itinerary. Leave blank to use the image in its full size.', 'tourfic' ),
 					'field_width' => 50,
 					'is_pro'      => true,
 				),
@@ -1354,6 +1356,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'          => '',
 					'type'        => 'number',
 					'label'   => __( 'Image Thumbnail Width ', 'tourfic' ),
+					'subtitle' => esc_html__( 'Adjust the width of the tour image in the itinerary. Leave blank to use the image in its full size.', 'tourfic' ),
 					'field_width' => 50,
 					'is_pro'      => true,
 				),
@@ -1554,35 +1557,35 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 
 		// Multiple tags for tours
 		'tours_multiple_tags' => array(
-			'title'  => __( 'Labels', 'tourfic' ),
+			'title'  => __( 'Promotional Tags', 'tourfic' ),
 			'icon'   => 'fa fa-list',
 			'fields' => array(
 				array(
 					'id'      => 'tf-tour-tags-heading',
 					'type'    => 'heading',
-					'label' => __( 'Tour labels', 'tourfic' ),
+					'label' => __( 'Tour tags', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
 					'id'           => 'tf-tour-tags',
 					'type'         => 'repeater',
-					'label'        => __( 'Labels', 'tourfic' ),
-					'subtitle' => __('Add some keywords that highlight your tour\'s Unique Selling Point (USP). This label will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
-					'button_title' => __( 'Add / Insert New Label', 'tourfic' ),
+					'label'        => __( 'Promotional Tags', 'tourfic' ),
+					'subtitle' => __('Add some keywords that highlight your tour\'s Unique Selling Point (USP). This tag will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
+					'button_title' => __( 'Add / Insert New Tag', 'tourfic' ),
 					'fields'       => array(
 
 						array(
 							'id'    => 'tour-tag-title',
 							'type'  => 'text',
-							'label' => __( 'Label Title', 'tourfic' ),
+							'label' => __( 'Tag Title', 'tourfic' ),
 						),
 
 						array(
 							'id'       => 'tour-tag-color-settings',
 							'type'     => 'color',
 							'class'    => 'tf-label-field',
-							'label'    => __( 'Label Colors', 'tourfic' ),
-							'subtitle' => __( 'Colors of Label Background and Font', 'tourfic' ),
+							'label'    => __( 'Tag Colors', 'tourfic' ),
+							'subtitle' => __( 'Colors of Tag Background and Font', 'tourfic' ),
 							'multiple' => true,
 							'inline'   => true,
 							'colors'   => array(

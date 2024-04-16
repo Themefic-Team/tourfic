@@ -13,17 +13,51 @@
 }
 
 .tf-apartment-title {
-    padding-bottom: 20px;
+    padding-bottom: 40px;
 
     .tf-title-wrap{
+        @include align-items(flex-end);
         @media #{$max767} {
             @include flex-direction(column);
+        }
+    }
+
+    .tf-title-left-bottom{
+        @include flexbox();
+        @include align-items(center);
+        gap: 32px;
+        
+        a{
+            text-decoration: none;
+        }
+
+        .tf-single-rating {
+            color: #607085;
+            background-color: transparent;
+            padding: 0;
+            font-size: 12px;
+            @include flexbox();
+            @include align-items(center);
+
+            i {
+                color: $yellow60;
+                font-size: 16px;
+                margin-top: -3px;
+            }
+
+            span {
+                font-size: 14px;
+                font-weight: 500;
+                color: #8997A9;
+                margin: 0 4px;
+            }
         }
     }
 
     .tf-title-right{
         @include flex(0 0 350px);
         @include justify-content(flex-end);
+        gap: 24px;
 
         @media #{$max767} {
             @include flex(0 0 100%);
@@ -34,10 +68,147 @@
         a {
             text-decoration: none;
         }
+
+        .tf-wishlist-button {
+            font-size: 14px;
+            cursor: pointer;
+            line-height: 1;
+            color: #8997A9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            i{
+                font-size: 24px;
+            }
+        }
+
+        .tf-share {
+            position: relative;
+
+            a {
+                line-height: 1;
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+                outline: none;
+                color: #8997A9;
+                gap: 8px;
+            }
+
+            .share-tour-content {
+                display: none;
+                position: absolute;
+                min-width: 100%;
+                top: 100%;
+                transform: translateY(8px);
+                z-index: 99999;
+                left: auto;
+                right: 0;
+
+                .tf-dropdown-content {
+                    margin: 0;
+                    background: #fff;
+                    border-radius: 4px;
+                    overflow: hidden;
+                    min-width: 200px;
+                    z-index: 100;
+                    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 3px -1px rgba(0, 0, 0, 0.2);
+
+                    li {
+                        display: inline-block;
+
+                        a i {
+                            color: #1D75E3;
+                            font-size: 17px;
+                        }
+
+                        &:nth-child(2) a i {
+                            color: #1D9BF0;
+                        }
+
+                        &:nth-child(3) a i {
+                            color: #0A66C2;
+                        }
+
+                        &:nth-child(4) a i {
+                            color: #CC0000;
+                        }
+                    }
+                }
+
+                .tf-dropdown-item-content {
+                    white-space: nowrap;
+                    display: flex;
+                    align-items: center;
+                    column-gap: 5px;
+                }
+
+                .tf-dropdown-item {
+                    border: 0;
+                    margin: 0;
+                    cursor: pointer;
+                    padding: 12px 16px;
+                    white-space: nowrap;
+                    text-decoration: none;
+                    color: #333;
+                    background-color: #fff;
+                    fill: #333;
+                    display: flex;
+                    align-items: center;
+                    font-weight: 400;
+                    font-size: 14px;
+
+                    &:hover {
+                        background-color: #f5f5f5;
+                    }
+                }
+
+                .share-center-copy-form {
+                    display: flex;
+                    align-items: center;
+                    padding: 12px 16px;
+                }
+
+                .share-center-copy-label {
+                    white-space: nowrap;
+                }
+
+                .share-center-copied-message {
+                    display: none;
+                }
+
+                #share_link_button {
+                    white-space: nowrap;
+                    font-size: 13px;
+                    padding: 5px 12px;
+                }
+
+                input#share_link_input {
+                    width: auto !important;
+                    flex-grow: 1;
+                    margin: 0 8px;
+                    background-color: #e6e6e6;
+                    padding: 0;
+                    border: 2px solid rgba(118, 118, 118, 0.3);
+                }
+            }
+
+            .share-center-copy-cta.copied {
+                .share-center-copied-message {
+                    display: inline-block;
+                    font-weight: bold;
+                }
+
+                .share-center-copy-message {
+                    display: none;
+                }
+            }
+        }
     }
     
     h1 {
-        color: $slate80;
+        color: #2A3343;
         font-weight: 500;
         font-size: 36px;
         line-height: 40px;
@@ -53,22 +224,7 @@
         }
     }
 
-    .tf-single-rating {
-        color: $slate60;
-        font-weight: 500;
-        background-color: transparent;
-        padding: 0;
-        @include flexbox();
-
-        i {
-            color: $yellow60;
-            font-size: 16px;
-        }
-
-        span {
-            font-size: 16px;
-        }
-    }
+    
 }
 
 .tf-apartment {
@@ -77,7 +233,7 @@
         font-size: 24px !important;
         line-height: 32px !important;
         margin-bottom: 16px;
-        color: $slate80;
+        color: #2A3343;
     }
 
     .tf-apt-hero-section{
@@ -159,8 +315,9 @@
 
             a.tf_button {
                 max-width: 130px;
-                background: rgba(0, 0, 0, 0.85);
-                border: none;
+                border-radius: 4px !important;
+                border: 1px solid rgba(255, 255, 255, 0.40) !important;
+                background: rgba(255, 255, 255, 0.60) !important;
             }
         }
 
@@ -198,13 +355,13 @@
         gap: 16px;
         padding-bottom: 24px;
         border-bottom: 1px solid $slate10;
-        margin-bottom: 24px;
+        margin-bottom: 24px !important;
 
         &.slick-dotted{
-            padding-bottom: 52px;
+            padding-bottom: 70px;
         }
         .slick-dots {
-            bottom: 16px;
+            bottom: 24px;
 
             li {
                 width: 16px;
@@ -295,8 +452,23 @@
             margin: 0 !important;
         }
 
+        .slick-prev {
+            left: 1px;
+        }
+
         .slick-arrow {
+            display: block;
             z-index: 999;
+            right: 12px;
+            top: 80px;
+            bottom: 136px;
+        }
+
+        
+
+        .slick-arrow::before {
+            font-size: 32px;
+            color: rgba(255, 255, 255, 0.70);
         }
 
         .slick-dotted.slick-slider{
@@ -348,7 +520,8 @@
 
             .tf-apartment-room-item-thumb{
                 overflow: hidden;
-                border-radius: 6px 6px 0 0;
+                border-radius: 8px;
+                margin-bottom: 8px;
 
                 img {
                     height: 170px;
@@ -365,20 +538,20 @@
             }
 
             .tf-apartment-room-item-content {
-                padding: 16px;
-                border: 1px solid #ddd;
-                border-top: none;
-                border-radius: 0 0 6px 6px;
+                
+                a{
+                    text-decoration: none;
+                }
 
                 h3 {
                     font-size: 18px !important;
-                    color: $slate80;
-                    margin: 0 0 8px 0;
+                    color: #2A3343;
+                    margin: 0;
                 }
 
                 p {
                     font-size: 14px !important;
-                    color: $slate40;
+                    color: #8997A9;
                     margin: 0;
                 }
             }
@@ -388,17 +561,24 @@
     .tf-apartment-amenities-section{
         margin-bottom: 48px;
 
+        .tf-apartment-amenities-inner{
+            border-radius: 8px;
+            border: 1px solid var(--Slate-5, #F0F2F4);
+            background: var(--Slate-0, #F8F9FB);
+            padding: 24px 40px;
+        }
         .tf-apartment-amenities {
             @include flexbox();
             @include flex-wrap(wrap);
             gap: 16px;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
 
             .tf-apt-amenity{
                 @include flex(0 0 calc(100% / 2 - 11px));
                 @include flexbox();
                 gap: 16px;
                 margin-bottom: 5px;
+                color: #607085;
 
                 .tf-apt-amenity-icon {
                     @include flexbox();
@@ -408,9 +588,23 @@
 
                     i {
                         font-size: 24px;
-                        color: $slate80;
+                        color:#607085;
                     }
                 }
+            }
+        }
+
+        .tf-apartment-amenities-more{
+
+            .tf-modal-btn{
+                @include flexbox();
+                @include align-items(center);
+                @include justify-content(flex-end);
+                gap: 4px;
+                font-size: 14px;
+                font-weight: 500;
+                color: #2A3343;
+                cursor: pointer;
             }
         }
     }
@@ -457,133 +651,7 @@
     }
 }
 
-.tf-wishlist-button {
-    font-size: 24px;
-    cursor: pointer;
-    margin: 0 5px 0 0;
-    line-height: 1;
-}
 
-.tf-share {
-    position: relative;
-
-    a {
-        line-height: 1;
-        font-size: 22px;
-        display: block;
-        margin: 0 10px 0 0;
-        outline: none;
-    }
-
-    .share-tour-content {
-        display: none;
-        position: absolute;
-        min-width: 100%;
-        top: 100%;
-        transform: translateY(8px);
-        z-index: 99999;
-        left: auto;
-        right: 0;
-
-        .tf-dropdown-content {
-            margin: 0;
-            background: #fff;
-            border-radius: 4px;
-            overflow: hidden;
-            min-width: 200px;
-            z-index: 100;
-            box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 3px -1px rgba(0, 0, 0, 0.2);
-
-            li {
-                display: inline-block;
-
-                a i {
-                    color: #1D75E3;
-                    font-size: 17px;
-                }
-
-                &:nth-child(2) a i {
-                    color: #1D9BF0;
-                }
-
-                &:nth-child(3) a i {
-                    color: #0A66C2;
-                }
-
-                &:nth-child(4) a i {
-                    color: #CC0000;
-                }
-            }
-        }
-
-        .tf-dropdown-item-content {
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            column-gap: 5px;
-        }
-
-        .tf-dropdown-item {
-            border: 0;
-            margin: 0;
-            cursor: pointer;
-            padding: 12px 16px;
-            white-space: nowrap;
-            text-decoration: none;
-            color: #333;
-            background-color: #fff;
-            fill: #333;
-            display: flex;
-            align-items: center;
-            font-weight: 400;
-            font-size: 14px;
-
-            &:hover {
-                background-color: #f5f5f5;
-            }
-        }
-
-        .share-center-copy-form {
-            display: flex;
-            align-items: center;
-            padding: 12px 16px;
-        }
-
-        .share-center-copy-label {
-            white-space: nowrap;
-        }
-
-        .share-center-copied-message {
-            display: none;
-        }
-
-        #share_link_button {
-            white-space: nowrap;
-            font-size: 13px;
-            padding: 5px 12px;
-        }
-
-        input#share_link_input {
-            width: auto !important;
-            flex-grow: 1;
-            margin: 0 8px;
-            background-color: #e6e6e6;
-            padding: 0;
-            border: 2px solid rgba(118, 118, 118, 0.3);
-        }
-    }
-
-    .share-center-copy-cta.copied {
-        .share-center-copied-message {
-            display: inline-block;
-            font-weight: bold;
-        }
-
-        .share-center-copy-message {
-            display: none;
-        }
-    }
-}
 
 .show-on-map {
     .btn-styled {
@@ -593,28 +661,54 @@
 }
 
 .host-details {
-    background: $blue0;
+    background: #F5F8FF;
     border-radius: 8px;
-    padding: 25px;
+    padding: 24px;
     border: 1px solid $blue5;
     margin-bottom: 25px;
 
     .host-top {
         @include flexbox();
-        gap: 15px;
+        gap: 11px;
+        align-items: center;
+        margin-bottom: 24px;
 
         img {
             width: 80px;
             height: 80px;
             object-fit: cover;
-            border-radius: 50%;
+            border-radius: 40px;
+            border: 1px solid $slate5;
         }
     }
 
     .host-meta {
-        h4, p {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        h4 {
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 1.33;
+            color:#607085;
             margin-bottom: 0;
-            margin-top: 0;
+        }
+        .tf-apartment-joined-text {
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 16px;
+            letter-spacing: 0.2px;
+            margin: 0;
+            color: #8997A9;
+            @include flexbox();
+
+            span {
+                letter-spacing: 0.2px;
+                padding-left: 8px;
+                font-weight: normal;
+            }
         }
 
         i {
@@ -627,45 +721,87 @@
     }
 
     .host-bottom {
-        p {
+        @include flexbox();
+        flex-direction: column;
+        gap: 8px;
+
+        h4 {
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.33;
+            letter-spacing: 0.5px;
+            color: $slate60;
             margin: 0;
+        }
+        p {
+            color: #8997A9;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 24px;
+            letter-spacing: 0.2px;
+            margin: 0 !important;
         }
 
         ul {
             list-style: none;
             margin: 0;
-            margin-bottom: 25px;
             padding: 0;
 
             li {
+                padding: 8px 0 !important;
+                color: #8997A9;
+
                 span {
                     text-align: right;
-                    font-weight: bold;
                     float: right;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 24px;
+                    letter-spacing: 0.5px;
+                    color: #607085;
                 }
 
-                padding-bottom: 10px;
-
                 &:last-child {
-                    padding-bottom: 0;
+                    margin-bottom: 0px;
                 }
             }
         }
 
         a {
-            i {
-                padding-right: 8px;
-            }
+
+
         }
 
         .btn-styled {
             width: auto !important;
             display: block;
         }
-    }
 
-    .host-desc {
-        padding: 25px 0;
+        .tf-apartment-contact-button {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 12px 24px;
+            border-radius: 4px;
+            background-color: #fff;
+            border: 1px solid #2979FF;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.5;
+            text-decoration: none;
+            color: #2979FF;
+            transition: all 0.3s ease-in-out;
+
+            i {
+                padding-right: 8px;
+            }
+
+            &:hover{
+                background-color: #2979FF;
+                color: #fff;
+            }
+        }
     }
 }
 
@@ -702,6 +838,10 @@
             margin-bottom: 24px;
         }
 
+        #apartment-location{
+            border-radius: 8px;
+        }
+
         iframe {
             border-radius: 8px;
         }
@@ -718,12 +858,13 @@
             font-weight: 600;
             font-size: 24px;
             line-height: 32px;
-            color: $slate80;
+            color: #2A3343;
             margin-bottom: 8px;
         }
 
         .surroundings_subtitle {
-            color: $slate40;
+            color: #8997A9;
+            font-size: 16px;
             margin-bottom: 30px;
         }
 
@@ -872,17 +1013,59 @@
     }
 
     .tf-faq-content-wrapper {
-        background: #F5F8FF;
-        padding: 20px 25px;
-        border-radius: 4px;
+        background: #F8F9FB;
         border: 1px solid #F0F2F4;
+        border-radius: 8px;
+        padding: 40px;
+    }
+
+    .tf-faq-items-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-self: stretch;
+        gap: 16px;
     }
 
     #tf-faq-item {
-        border-bottom: 1px solid #dfdfdf;
+        border-radius: 8px;
+        border-bottom: none !important;
+        padding: 8px 0;
+        margin-bottom: 0;
 
-        .tf-faq-title h4{
-            margin: 4px 0;
+        .tf-faq-title{
+            @include flexbox();
+            @include align-items(center);
+            gap: 8px;
+
+            h4{
+                font-size: 16px !important;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 1.5;
+                letter-spacing: 0.5px;
+                margin: 0 !important;
+
+                &:hover{
+                    color: #2979FF;
+                }
+            }
+
+            .tf-faq-minus{
+                display: none;
+            }
+
+            &.active{
+                .tf-faq-plus{
+                    display: none;
+                }
+                .tf-faq-minus{
+                    display: inline-block;
+                }
+
+                h4{
+                    color: #2979FF;
+                }
+            }
         }
 
         .tf-faq-desc {
@@ -955,29 +1138,35 @@
 }
 
 .apartment-question {
-    .question-left {
+    .tf-question-left {
+        @include flexbox();
+        @include align-items(center);
+        gap: 16px;
+
+        .tf-apartment-question-icon{
+            @include flexbox();
+        }
+        i {
+            align-self: flex-start;
+            font-size: 40px;
+        }
+
         .default-enquiry-title-section {
             justify-content: flex-start;
-
-            i {
-                align-self: flex-start;
-
-                &:before {
-                    font-weight: 900;
-                    padding-right: 7px;
-                    color: #003162;
-                    position: absolute;
-                    font-size: 30px;
-                }
-            }
         }
        
         h3 {
-            padding-left: 45px;
+            margin: 0;
+            font-size: 20px;
+            color: #2A3343;
+            font-weight: 600;
+            line-height: 32px;
         }
 
         p {
-            margin-bottom: 0;
+            font-size: 14px;
+            color: #607085;
+            margin: 0;
         }
     }
 
@@ -999,12 +1188,6 @@
         @media #{$max575} {
             width: 100%;
         }
-    }
-}
-
-.question-left {
-    p {
-        padding-left: 45px;
     }
 }
 
@@ -1035,6 +1218,87 @@
 
 .tf-apartment-review{
     margin-bottom: 48px;
+
+    .tf-review-container .tf-total-review{
+        margin: 0 0 24px 0;
+
+        .tf-total-average{
+            div{
+                border-radius: 8px;
+                background-color: #2979FF;
+            }
+            span{
+                color: #8997A9;
+            }
+        }
+    }
+
+    .tf-review-progress-bar {
+        background: #F8F9FB;
+        border-radius: 8px;
+        border: 1px solid #EBF2FF;
+        column-gap: 200px;
+        row-gap: 16px;
+        grid-template-columns: calc(50% - 100px) calc(50% - 100px);
+
+        .tf-single {
+            grid-template-columns: 102px calc(100% - 212px) 30px !important;
+            column-gap: 40px;
+        }
+    }
+
+    .tf-single-review{
+        background-color: transparent;
+        .tf-single-details {
+            background-color: transparent;
+        }
+        .tf-review-details {
+
+            .tf-rating-stars{
+                font-size: 14px;
+            }
+            
+             .tf-apartment-show-more {
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 1.7;
+                letter-spacing: 0.5px;
+                color: #2A3343; 
+                cursor: pointer;
+                user-select: none;
+            }
+            .tf-full-description{
+                margin-top: 8px;
+            }
+        }
+        p {
+            margin: 0 0 8px 0;
+            color: #607085;
+            font-size: 14px;
+        }
+    }
+}
+
+.show-all-review-wrap{
+    padding: 8px 24px;
+    border-radius: 4px;
+    background:#F5F8FF;
+    border: 1px solid #2979FF;
+    width: 200px;
+    margin: auto;
+
+    .tf-apaartment-show-all {
+        color: #2979FF;
+        text-align: center;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.7;
+        letter-spacing: 0.5px;
+        user-select: none;
+        cursor: pointer;
+    }
 }
 
 .tf-related-apartment {
@@ -1095,10 +1359,11 @@
 
         .tf-apartment-item-thumb{
             overflow: hidden;
-            border-radius: 6px 6px 0 0;
+            border-radius: 8px;
+            margin-bottom: 8px;
 
             img {
-                height: 220px;
+                height: 170px;
                 object-fit: cover;
                 width: 100%;
                 transition: all 0.3s ease-in-out;
@@ -1112,20 +1377,19 @@
         }
 
         .tf-related-apartment-content {
-            padding: 16px;
-            border: 1px solid #ddd;
-            border-top: none;
-            border-radius: 0 0 6px 6px;
+            a{
+                text-decoration: none;
+            }
 
             h3 {
                 font-size: 18px !important;
-                color: $slate80;
-                margin: 0 0 8px 0;
+                color: #2A3343;
+                margin: 0;
             }
 
             span {
                 font-size: 14px !important;
-                color: $slate40;
+                color: #8997A9;
                 margin: 0;
             }
         }
@@ -1147,7 +1411,7 @@
     margin-bottom: 40px;
 
     h4 {
-        color: $slate80;
+        color: #2A3343;
         font-weight: 500;
         font-size: 18px;
         line-height: 24px;
@@ -1164,16 +1428,10 @@
         .tf-apartment-price-per-night {
             margin: 0;
 
-            .woocommerce-Price-currencySymbol,
-            bdi {
-                font-size: 22px;
-                font-weight: 700;
-            }
-
             span:not(.woocommerce-Price-amount, .woocommerce-Price-currencySymbol) {
                 font-size: 16px;
-                font-weight: 400;
-                color: $slate60;
+                font-weight: 600;
+                color: #2A3343;
             }
         }
 
@@ -1182,19 +1440,24 @@
         }
 
         .tf-single-rating {
-            color: $slate60;
-            font-weight: 500;
+            color: #8997A9;
             background-color: transparent;
             padding: 0;
+            font-size: 10px;
             @include flexbox();
+            @include align-items(center);
 
             i {
                 color: $yellow60;
                 font-size: 16px;
+                margin-top: -3px;
             }
 
             span {
-                font-size: 16px;
+                font-size: 14px;
+                font-weight: 500;
+                color: #8997A9;
+                margin: 0 4px;
             }
         }
     }
@@ -1277,6 +1540,16 @@
         }
     }
 
+    .btn-styled{
+        border-radius: 8px !important;
+        background: #2979FF;
+        padding: 12px 24px;
+        box-shadow: 0px 1px 1px 0px rgba(0, 60, 121, 0.16);
+        font-size: 16px !important;
+        font-weight: 500 !important;
+        line-height: 24px;
+        letter-spacing: 0.5px;
+    }
 
     .tf-apartment-price-list {
         margin: 15px 0 0 !important;

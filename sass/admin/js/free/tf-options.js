@@ -2271,7 +2271,7 @@ var frame, gframe;
 
     // external listing dynamic location
 
-    $('[name="type-selector"]').on("change", function (e) {
+    /*$('[name="type-selector"]').on("change", function (e) {
         const selectedValue = $(this).val();
         let termName = "hotel_location";
 
@@ -2317,7 +2317,7 @@ var frame, gframe;
         if (select_val && select_val.includes("all")) {
             $(this).val(["all"]).trigger('change.select2');
         }
-    });
+    });*/
     
     $(document).ready(function () {
         // $('.tf-import-btn').on('click', function (event) {
@@ -2378,7 +2378,42 @@ var frame, gframe;
             // Triger the form submit
             $(".tf-option-form.tf-ajax-save").submit(); 
         });
+
+        // $('#addtag > .submit #submit').click(function (event) {
+
+        //     data = {
+        //         action: 'tf_taxonomy_update_dynamically',
+        //         taxonomy : $("input[name='taxonomy']").val(),
+        //     }
+           
+        //     $.ajax({
+        //         url: tf_options.ajax_url,
+        //         method: 'POST',
+        //         data: data,
+        //         success: function (response) {
+        //             console.log(response);
+        //         },
+        //         error: function (response) {
+        //             console.log(response);
+        //         },
+        //     });
+        // });
     });
+
+    /*
+        $(document).on("ajaxSuccess", function (event, xhr, settings) {
+
+            console.log(settings)
+            
+
+            data = {
+                action: 'tf_taxonomy_update_dynamically',
+                taxonomy : $("input[name='taxonomy']").val(),
+            }
+          
+        })
+
+    */
 
     //export the data in txt file
     jQuery(document).ready(function ($) {

@@ -109,85 +109,16 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'label'   => esc_html__( 'Booking Type', 'tourfic' ),
 					'options' => array(
 						'1' => esc_html__( 'Default Booking (WooCommerce)', 'tourfic' ),
-						'2' => esc_html__( 'External Booking (Pro)', 'tourfic' ),
+						'' => esc_html__( 'External Booking (Pro)', 'tourfic' ),
 					),
 					'default' => '1',
 				),
 				array(
-					'id'          => '',
-					'type'        => 'text',
-					'label'       => esc_html__( 'External Booking URL', 'tourfic' ),
-					'placeholder' => esc_html__( 'https://website.com', 'tourfic' ),
-					'is_pro'  => true,
-					'dependency'  => array( 'booking-by', '==', '2' ),
-				),
-				array(
-					'id'        => '',
-					'type'      => 'switch',
-					'label'     => esc_html__( 'Hide Booking Form', 'tourfic' ),
-					'subtitle' => esc_html__( 'Enable this option to hide the booking form from the single hotel page.', 'tourfic' ),
-					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
-					'label_off' => esc_html__( 'No', 'tourfic' ),
-					'is_pro'  => true,
-					'dependency' => array( 'booking-by', '==', '2' ),
-				),
-				array(
-					'id'        => '',
-					'type'      => 'switch',
-					'label'     => esc_html__( 'Hide Price', 'tourfic' ),
-					'subtitle' => esc_html__( 'Enable this option to hide the price from the single hotel page.', 'tourfic' ),
-					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
-					'label_off' => esc_html__( 'No', 'tourfic' ),
-					'is_pro'  => true,
-					'dependency' => array( 'booking-by', '==', '2' ),
-				),
-				array(
-					'id'        => '',
-					'type'      => 'switch',
-					'label'     => esc_html__( 'Allow Attribute', 'tourfic' ),
-					'subtitle'  => esc_html__( 'If attribute allow, You can able to add custom Attribute', 'tourfic' ),
-					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
-					'label_off' => esc_html__( 'No', 'tourfic' ),
-					'is_pro'  => true,
-					'dependency'  => array( 'booking-by', '==', '2' ),
-				),
-				array(
-					'id'          => '',
-					'type'        => 'textarea',
-					'label'       => esc_html__( 'Query Attribute', 'tourfic' ),
-					'placeholder' => esc_html__( 'adult={adult}&child={child}&room={room}', 'tourfic' ),
-					'is_pro'  => true,
-					'dependency'  => array( 'booking-by', '==', '2' ),
-				),
-				array(
-					'id'      => 'booking-notice',
+					'id'      => 'hotel-general-pro-notice',
 					'type'    => 'notice',
-					'class'   => 'info',
-					'title'   => esc_html__( 'Query Attribute List', 'tourfic' ),
-					'content' => esc_html__( 'You can use the following placeholders in the Query Attribute body:', 'tourfic' ) . '<br><br><strong>{adult} </strong> : To Display Adult Number from Search.<br>
-							<strong>{child} </strong> : To Display Child Number from Search.<br>
-							<strong>{checkin} </strong> : To display the Checkin date from Search.<br>
-							<strong>{checkout} </strong> : To display the Checkout date from Search.<br>
-							<strong>{room} </strong> : To display the room number from Search.<br>',
-					'is_pro'  => true,
-					'dependency'  => array( 'booking-by', '==', '2' ),
-				),
-				array(
-					'id'        => 'is_taxable',
-					'type'      => 'switch',
-					'label'     => esc_html__( 'Taxable', 'tourfic' ),
-					'subtitle' => esc_html__( 'Activate this option to enable tax for this Hotel.', 'tourfic' ),
-					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
-					'label_off' => esc_html__( 'No', 'tourfic' ),
-					'is_pro'  => true
-				),
-				array(
-					'id'      => 'taxable_class',
-					'type'    => 'select',
-					'label'   => esc_html__( 'Tax class', 'tourfic' ),
-					'subtitle'  => esc_html__( 'Select your class, and tax will calculate based on your chosen class. PS: If you activate partial payment option tax will be calculated upon partial amount as woocommerce regulations.', 'tourfic' ),
-					'options' => tf_taxable_option_callback(),
-					'is_pro'  => true
+					'style'   => 'success',
+					'icon'    => 'fa fa-info-circle',
+					'content' => esc_html__( 'External Booking is a Pro Feature. To enable this feature, please upgrade to the Pro version of Tourfic.', 'tourfic' ),
 				),
 			),
 		),
@@ -212,7 +143,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'class'    => 'gmaps',
 					'type'     => 'map',
 					'label'    => esc_html__( 'Dynamic Location Search', 'tourfic' ),
-					'subtitle' => esc_html__( 'Enter the specific address you wish to use for the hotel and select the correct option from the suggested addresses. This will be used to hyperlink address and display the address on the front-end map. Note that the address provided in the previous section is solely for display purposes!', 'tourfic' ),
+					'subtitle' => sprintf( wp_kses_post(__( 'Enter the specific address you wish to use for the hotel and select the correct option from the suggested addresses. This will be used to hyperlink address and display the address on the front-end map. <strong>Google Maps is also available for location. Simply set up your <a href="%s" target="_blank">Google Maps API Key</a></strong>', 'tourfic' )), esc_url( admin_url('admin.php?page=tf_settings#tab=map_settings') ) ),
 					'height'   => '250px',
 					'settings' => array(
 						'scrollWheelZoom' => true,
@@ -1044,34 +975,34 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 
 		// Multiple tags for hotels
 		'hotel_multiple_tags' => array(
-			'title'  => __( 'Labels', 'tourfic' ),
+			'title'  => __( 'Promotional Tags', 'tourfic' ),
 			'icon'   => 'fa fa-list',
 			'fields' => array(
 				array(
 					'id'      => 'tf-hotel-tags-heading',
 					'type'    => 'heading',
-					'label' => __( 'Hotel labels', 'tourfic' ),
+					'label' => __( 'Hotel tags', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
 					'id'           => 'tf-hotel-tags',
 					'type'         => 'repeater',
-					'label'        => __( 'Labels', 'tourfic' ),
-					'subtitle' => __('Add some keywords that highlight your hotel\'s Unique Selling Point (USP). This label will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
-					'button_title' => __( 'Add / Insert New Label', 'tourfic' ),
+					'label'        => __( 'Promotional Tags', 'tourfic' ),
+					'subtitle' => __('Add some keywords that highlight your hotel\'s Unique Selling Point (USP). This tag will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
+					'button_title' => __( 'Add / Insert New Tag', 'tourfic' ),
 					'fields'       => array(
 
 						array(
 							'id'    => 'hotel-tag-title',
 							'type'  => 'text',
-							'label' => __( 'Label Title', 'tourfic' ),
+							'label' => __( 'Tag Title', 'tourfic' ),
 						),
 
 						array(
 							'id'       => 'hotel-tag-color-settings',
 							'type'     => 'color',
-							'label'    => __( 'Label Colors', 'tourfic' ),
-							'subtitle' => __( 'Colors of Label Background and Font', 'tourfic' ),
+							'label'    => __( 'Tag Colors', 'tourfic' ),
+							'subtitle' => __( 'Colors of Tag Background and Font', 'tourfic' ),
 							'multiple' => true,
 							'inline'   => true,
 							'colors'   => array(

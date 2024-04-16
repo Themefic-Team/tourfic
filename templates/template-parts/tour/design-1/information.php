@@ -20,21 +20,20 @@
 									$duration_time_html = $duration_time;
 								}
 								echo " " . esc_html( $duration_time_html );
-								?>
-								<?php if ( $night ) { ?>
-                                    <span>
-                                        <?php echo esc_html( $night_count ); ?>
-                                        <?php
+
+                                if ( $night ) {
+                                    echo '<span>';
+                                        echo esc_html(', '. $night_count );
                                         if ( ! empty( $night_count ) ) {
                                             if ( $night_count > 1 ) {
-                                                echo esc_html__( 'Nights', 'tourfic' );
+                                                echo esc_html__( ' Nights', 'tourfic' );
                                             } else {
-                                                echo esc_html__( 'Night', 'tourfic' );
+                                                echo esc_html__( ' Night', 'tourfic' );
                                             }
                                         }
-                                        ?>
-                                    </span>
-								<?php } ?>
+                                    echo '</span>';
+								}
+                                ?>
                             </p>
 
                         </div>
