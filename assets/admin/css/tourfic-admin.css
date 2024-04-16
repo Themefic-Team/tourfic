@@ -1220,7 +1220,7 @@ Steps
 .tf-setup-step-container .setup-form-group .tf-setup-form-item .tf-setup-form-item-input select {
   border-radius: 4px;
   border: 1px solid #EEF2F6;
-  background: #F8FAFC;
+  background-color: #F8FAFC;
   height: 40px;
   padding: 8px 12px;
   color: #566676;
@@ -3370,9 +3370,9 @@ Steps
 .tf-field-switch .tf-switch-label {
   position: relative;
   display: inline-block;
-  width: 80px;
-  height: 32px;
-  border-radius: 20px;
+  width: 62px;
+  height: 28px;
+  border-radius: 32px;
 }
 .tf-field-switch .tf-switch-label input {
   display: none;
@@ -3384,7 +3384,7 @@ Steps
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #f44336;
+  background-color: #DEE6EE;
   border-radius: 20px;
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
@@ -3394,20 +3394,20 @@ Steps
 .tf-field-switch .tf-switch-label .tf-switch-slider::before {
   position: absolute;
   content: "";
-  height: 24px;
-  width: 24px;
-  border-radius: 12px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50px;
   top: 4px;
   left: 4px;
-  background-color: white;
-  box-shadow: 0px 0px 8px rgba(27, 25, 25, 0.3);
+  background-color: #ECF2F8;
+  filter: drop-shadow(0px 2px 4px rgba(12, 31, 49, 0.12));
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
 }
 .tf-field-switch .tf-switch-label .tf-switch-slider .tf-switch-on, .tf-field-switch .tf-switch-label .tf-switch-slider .tf-switch-off {
-  color: white;
+  color: #fff;
   position: absolute;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
@@ -3415,7 +3415,7 @@ Steps
   transform: translateY(-50%);
   top: 50%;
   left: 12px;
-  font-size: 14px;
+  font-size: 12px;
   opacity: 0;
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
@@ -3423,16 +3423,19 @@ Steps
   transition: all 0.4s ease-in-out;
 }
 .tf-field-switch .tf-switch-label .tf-switch-slider .tf-switch-off {
+  color: #8999A9;
   left: auto;
   right: 12px;
   opacity: 1;
 }
 .tf-field-switch .tf-switch-label input:checked + .tf-switch-slider {
-  background-color: #060;
+  background-color: #21A159;
 }
 .tf-field-switch .tf-switch-label input:checked + .tf-switch-slider:before {
   left: 100%;
-  margin-left: -28px;
+  margin-left: -24px;
+  background-color: #fff;
+  filter: drop-shadow(0px 2px 4px rgba(12, 31, 49, 0.12));
 }
 .tf-field-switch .tf-switch-label input:checked + .tf-switch-slider .tf-switch-on {
   opacity: 1;
