@@ -167,7 +167,7 @@ if ( $comments ) {
 </div>
 <?php
 // Review moderation notice
-echo wp_kses_post(tf_pending_review_notice( $post_id ));
+echo wp_kses_post(tf_pending_review_notice( $post_id ) ?? '');
 ?>
 <?php
 if ( ! empty( $tf_ratings_for ) ) {
@@ -234,7 +234,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 		}
 	}
 	// Pending review notice
-	echo wp_kses_post(tf_pending_review_notice( $post_id ));
+	echo wp_kses_post(tf_pending_review_notice( $post_id ) ?? '');
 	echo '</div>';
 } 
 }else{
@@ -390,7 +390,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 
 		<?php
 		// Review moderation notice
-		echo wp_kses_post(tf_pending_review_notice( $post_id ));
+		echo wp_kses_post(tf_pending_review_notice( $post_id ) ?? '');
 
 	} else {
 
@@ -425,7 +425,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 			}
 		}
 		// Pending review notice
-		echo wp_kses_post(tf_pending_review_notice( $post_id ));
+		echo wp_kses_post(tf_pending_review_notice( $post_id ) ?? '');
 
 		echo '</div>';
 	}
