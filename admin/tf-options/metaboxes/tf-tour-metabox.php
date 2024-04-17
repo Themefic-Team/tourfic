@@ -143,7 +143,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 		),
 		// Information
 		'information'          => array(
-			'title'  => esc_html__( 'Informations', 'tourfic' ),
+			'title'  => esc_html__( 'Information', 'tourfic' ),
 			'icon'   => 'fa-solid fa-circle-info',
 			'fields' => array(
 				array(
