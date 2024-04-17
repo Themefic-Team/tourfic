@@ -2013,7 +2013,7 @@ function tf_single_tour_booking_form( $post_id ) {
 								<span class="tf-booking-form-title"><?php esc_html_e("Guests", "tourfic"); ?></span>
 								<div class="tf-booking-guest-and-room-wrap">
 									<span class="tf-guest tf-booking-date">
-										<?php esc_html_e("01", "tourfic"); ?>
+										<?php esc_html_e("00", "tourfic"); ?>
 									</span> 
 									<span class="tf-booking-month">
 										<span><?php esc_html_e("Guest", "tourfic"); ?></span>
