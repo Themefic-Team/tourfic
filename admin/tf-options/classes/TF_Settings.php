@@ -34,29 +34,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			//ajax save options
 			add_action( 'wp_ajax_tf_options_save', array( $this, 'tf_ajax_save_options' ) );
-
-            add_action('init', array($this, 'tf_update_htaccess'));
-        }
-
-		function tf_update_htaccess() {
-
-            // Read the contents of .htaccess
-            $htaccess_contents = file_get_contents('.htaccess');
-
-            // Update max_input_vars if it exists, otherwise add it
-            if (preg_match('/^\s*php_value\s+max_input_vars\s+(\d+)\s*$/m', $htaccess_contents, $matches)) {
-                // If max_input_vars directive already exists, update its value
-                $max_input_vars = intval($matches[1]);
-                if ($max_input_vars < 3000) {
-                    $htaccess_contents = preg_replace('/^\s*php_value\s+max_input_vars\s+\d+\s*$/m', 'php_value max_input_vars 3000', $htaccess_contents);
-                }
-            } else {
-                // If max_input_vars directive doesn't exist, add it
-                $htaccess_contents .= "\nphp_value max_input_vars 3000\n";
-            }
-
-            // Write the updated contents back to .htaccess
-            file_put_contents('.htaccess', $htaccess_contents);
         }
 
         public static function option( $key, $params = array() ) {
@@ -693,7 +670,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			}
 
 
-            $ajax_save_class = 'tf-ajax-save';
+            $ajax_save_class = 'tf-ajax-savess';
 
 			if ( ! empty( $this->option_sections ) ) :
 				?>
