@@ -15416,7 +15416,7 @@ html {
   .tf-template-3.tf-tour-single .tf-search-date-wrapper.tf-single-widgets .tf_tours_booking > .tf-field-group,
   .tf-template-3.tf-tour-single .tf-search-date-wrapper.tf-single-widgets .tf_tours_booking > .check-in-time-div,
   .tf-template-3.tf-tour-single .tf-search-date-wrapper.tf-single-widgets .tf-tour-booking-box,
-  .tf-template-3.tf-tour-single .tf-search-date-wrapper.tf-single-widgets .tf_tours_booking > .tf-tours-booking-btn,
+  .tf-template-3.tf-tour-single .tf-search-date-wrapper.tf-single-widgets .tf_tours_booking > .tf-tours-booking-btn .tf-btn,
   .tf-template-3.tf-tour-single .tf-search-date-wrapper.tf-single-widgets .tf-bottom-booking-bar {
     display: none !important;
   }
