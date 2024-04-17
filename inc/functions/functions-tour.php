@@ -2341,6 +2341,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 
 	// Informations
 	$tour_duration = ! empty( $meta['duration'] ) ? $meta['duration'] : '';
+	$tour_duration_time = ! empty( $meta['duration_time'] ) ? $meta['duration_time'] : '';
 	$group_size    = ! empty( $meta['group_size'] ) ? $meta['group_size'] : '';
 	$features    = ! empty( $meta['features'] ) ? $meta['features'] : '';
 
@@ -2794,7 +2795,10 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 					</li>
 					<?php } if(!empty($tour_duration)){ ?>
 					<li>
-						<i class="ri-history-fill"></i> <?php echo esc_html($tour_duration); ?> <?php esc_html_e("days", "tourfic"); ?>
+						<?php 
+						$tour_duration_time = $tour_duration > 1 ? $tour_duration_time . 's' : $tour_duration_time;
+						?>
+						<i class="ri-history-fill"></i> <?php echo esc_html($tour_duration); ?> <?php esc_html_e($tour_duration_time, "tourfic"); ?>
 					</li>
 					<?php } ?>
 				<?php 
