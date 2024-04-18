@@ -3378,6 +3378,8 @@ function tf_custom_wp_kses_allow_tags() {
 		'name' => true,
 		'class' => true,
 		'id' => true,
+		'data-*' => true,
+		'multiple' => true
 	);
 
 	$allowed_tags['option'] = array(
