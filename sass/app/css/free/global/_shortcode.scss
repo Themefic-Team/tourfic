@@ -851,7 +851,7 @@ div#tf-destinationautocomplete-list {
     width: 100%;
     max-width: 428px;
     background: #fff;
-    padding: 48px 40px 32px 48px;
+    padding: 48px 40px 32px 40px;
     border-radius: 16px;
     transform: translateY(-50%);
     height: auto;
@@ -882,7 +882,7 @@ div.tf-aq-inner {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 24px;
+        gap: 16px;
         margin-bottom: 24px;
 
         h3 {
