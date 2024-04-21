@@ -352,24 +352,24 @@ if ( ! function_exists( 'tourfic_archive_page_template' ) ) {
  *
  * @since 1.0
  */
-// if ( ! function_exists( 'load_comment_template' ) ) {
-// 	function load_comment_template( $comment_template ) {
-// 		global $post;
+if ( ! function_exists( 'load_comment_template' ) ) {
+	function load_comment_template( $comment_template ) {
+		global $post;
 
-// 		if ( 'tf_hotel' === $post->post_type || 'tf_tours' === $post->post_type || 'tf_apartment' === $post->post_type ) {
-// 			// $theme_files     = array( 'tourfic/template-parts/review.php' );
-// 			// $exists_in_theme = locate_template( $theme_files, false );
-// 			if ( $exists_in_theme ) {
-// 				return $exists_in_theme;
-// 			} else {
-// 				return TF_TEMPLATE_PATH . 'template-parts/review.php';
-// 			}
-// 		}
+		if ( 'tf_hotel' === $post->post_type || 'tf_tours' === $post->post_type || 'tf_apartment' === $post->post_type ) {
+			// $theme_files     = array( 'tourfic/template-parts/review.php' );
+			// $exists_in_theme = locate_template( $theme_files, false );
+			if ( $exists_in_theme ) {
+				return $exists_in_theme;
+			} else {
+				return TF_TEMPLATE_PATH . 'template-parts/review.php';
+			}
+		}
 
-// 	}
+	}
 
-// 	add_filter( 'comments_template', 'load_comment_template' );
-// }
+	add_filter( 'comments_template', 'load_comment_template' );
+}
 
 /*
  * Asign Destination taxonomy template
