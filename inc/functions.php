@@ -357,8 +357,8 @@ if ( ! function_exists( 'load_comment_template' ) ) {
 		global $post;
 
 		if ( 'tf_hotel' === $post->post_type || 'tf_tours' === $post->post_type || 'tf_apartment' === $post->post_type ) {
-			// $theme_files     = array( 'tourfic/template-parts/review.php' );
-			// $exists_in_theme = locate_template( $theme_files, false );
+			$theme_files     = array( 'tourfic/template-parts/review.php' );
+			$exists_in_theme = locate_template( $theme_files, false );
 			if ( $exists_in_theme ) {
 				return $exists_in_theme;
 			} else {
