@@ -33,13 +33,14 @@ entryPoints['tourfic-ical/assets/admin/js/tourfic-ical.min'] = iCalAdminJs;
 const appScss = glob.sync('./sass/app/css/free/tourfic.scss');
 const proAppScss = glob.sync('./sass/app/css/pro/tourfic-pro.scss');
 const adminScss = glob.sync('./sass/admin/css/free/tourfic-admin.scss');
-// const proAdminScss = glob.sync('./sass/admin/css/free/tourfic-admin.scss');
+const proAdminScss = glob.sync('./sass/admin/css/pro/tourfic-pro-admin.scss');
 const addonAdminScss = glob.sync('./sass/admin/css/addon/tourfic-addon/tourfic-vendor.scss'); 
 const addonAppScss = glob.sync('./sass/app/css/addon/tourfic-vendor.scss'); 
 
 StyleEntryPoints['tourfic/assets/app/css/tourfic-style'] = appScss;
 StyleEntryPoints['tourfic-pro/assets/app/css/tourfic-pro'] = proAppScss;
 StyleEntryPoints['tourfic/assets/admin/css/tourfic-admin'] = adminScss;
+StyleEntryPoints['tourfic-pro/assets/admin/css/tourfic-pro-admin'] = proAdminScss;
 StyleEntryPoints['/tourfic-vendor/admin/assets/css/tourfic-vendor'] = addonAdminScss;
 StyleEntryPoints['/tourfic-vendor/public/assets/css/tourfic-vendor'] = addonAppScss;
 
