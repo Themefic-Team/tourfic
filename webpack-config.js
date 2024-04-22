@@ -1,6 +1,10 @@
 const path = require('path');
 const glob = require('glob');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+// Entrypoints Object
 const entryPoints = {};
+const StyleEntryPoints = {};
 
 const freeAppJs = glob.sync('./sass/app/js/free/*.js');
 const freeAdminJs = glob.sync('./sass/admin/js/free/*.js');
@@ -25,14 +29,23 @@ entryPoints['tourfic-vendor/public/assets/js/tourfic-vendor'] = vendorAppJs;
 //tourfic ical addon
 entryPoints['tourfic-ical/assets/admin/js/tourfic-ical.min'] = iCalAdminJs;
 
-//scss entry points
-// const appScss = glob.sync('./sass/app/css/tourfic.scss');
-// const adminScss = glob.sync('./sass/admin/css/tourfic-admin.scss');
-//
-// entryPoints['app/css/tourfic-style'] = appScss;
-// entryPoints['admin/css/tourfic-admin'] = adminScss;
+// SASS entry points
+const appScss = glob.sync('./sass/app/css/free/tourfic.scss');
+const proAppScss = glob.sync('./sass/app/css/pro/tourfic-pro.scss');
+const adminScss = glob.sync('./sass/admin/css/free/tourfic-admin.scss');
+const proAdminScss = glob.sync('./sass/admin/css/pro/tourfic-pro-admin.scss');
+const addonAdminScss = glob.sync('./sass/admin/css/addon/tourfic-addon/tourfic-vendor.scss'); 
+const addonAppScss = glob.sync('./sass/app/css/addon/tourfic-vendor.scss'); 
 
-const config = {
+StyleEntryPoints['tourfic/assets/app/css/tourfic-style'] = appScss;
+StyleEntryPoints['tourfic-pro/assets/app/css/tourfic-pro'] = proAppScss;
+StyleEntryPoints['tourfic/assets/admin/css/tourfic-admin'] = adminScss;
+StyleEntryPoints['tourfic-pro/assets/admin/css/tourfic-pro-admin'] = proAdminScss;
+StyleEntryPoints['/tourfic-vendor/admin/assets/css/tourfic-vendor'] = addonAdminScss;
+StyleEntryPoints['/tourfic-vendor/public/assets/css/tourfic-vendor'] = addonAppScss;
+
+
+const JSconfig = {
     entry: entryPoints,
 
     output: {
@@ -40,23 +53,113 @@ const config = {
         filename: '[name].js',
         clean: false
     },
+}
 
-    /*module: {
+const styleMinConfig = {
+    entry: StyleEntryPoints,
+    devtool: 'source-map',
+    performance: {
+        hints: false,
+        maxEntrypointSize: 500,
+        maxAssetSize: 500
+    },
+
+    output: {
+        path: path.resolve(__dirname, '../'),
+        filename: '[name].css.js',
+        clean: false
+    },
+
+    module: {
         rules: [
             {
                 test: /\.s[ac]ss$/i,
                 use: [
-                    // Creates `style` nodes from JS strings
                     'style-loader',
-                    // Translates CSS into CommonJS
-                    'css-loader',
-                    // Compiles Sass to CSS
-                    'sass-loader',
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            esModule: false,
+                        },
+
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            url: false,
+                            sourceMap: true
+                        },
+                    },           
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true,
+                            sassOptions: {
+                                outputStyle: "compressed",
+                              },
+                        },
+                    },         
                 ],
             },
         ],
-    }*/
+    },
+
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: '[name].min.css',
+        })
+    ]
+}
+const StyleConfig = {
+    entry: StyleEntryPoints,
+    devtool: 'source-map',
+    performance: {
+        maxEntrypointSize: 500,
+        maxAssetSize: 500
+    },
+
+    output: {
+        path: path.resolve(__dirname, '../'),
+        filename: '[name].css.js',
+        clean: false
+    },
+
+    module: {
+        rules: [
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    'style-loader',
+                    {
+                        loader: MiniCssExtractPlugin.loader, 
+                        options: {
+                            esModule: false,
+                        },
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            url: false,
+                            sourceMap: true
+                        },
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true,
+                        },
+                    },         
+                ],
+            },
+        ],
+    },
+
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+        })
+    ]
 }
 
 // Export the config object.
-module.exports = config;
+module.exports = [JSconfig, StyleConfig, styleMinConfig];
