@@ -147,6 +147,9 @@ const StyleConfig = {
                         loader: 'sass-loader',
                         options: {
                             sourceMap: true,
+                            sassOptions: {
+                                outputStyle: "extended",
+                              },
                         },
                     },         
                 ],
