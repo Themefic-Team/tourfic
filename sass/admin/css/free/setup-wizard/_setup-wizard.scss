@@ -309,6 +309,16 @@ Welcome Step
     }
 }
 
+/*
+Woocommerce
+*/
+.tf-setup-woocommerce-step{
+    .welcome-img img{
+        width: 96px;
+        margin-bottom: 16px;
+    }
+}
+
 .tf-setup-step-container {
     min-width: 886px;
     width: 886px;
@@ -848,8 +858,8 @@ Steps
         }
     }
 
-    &.tf-setup-step-4,
-    &.tf-setup-step-5 {
+    &.tf-setup-step-5,
+    &.tf-setup-step-6 {
         .tf-setup-step-desc {
             margin-bottom: 0px;
         }
@@ -880,6 +890,10 @@ Steps
         .setup-form-group {
             gap: 32px;
         }
+    }
+
+    .tf-auto-publish-field{
+        margin-top: 8px;
     }
 
 

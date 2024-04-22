@@ -162,7 +162,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                                 <span><?php esc_html_e( 'Back', 'tourfic' ) ?></span>
                             </a>
                         </div>
-                        <section class="tf-setup-step-layout">
+                        <section class="tf-setup-step-layout tf-setup-woocommerce-step">
                             <?php $this->tf_setup_wizard_steps_header() ?>
                             <div class="welcome-img"><img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL) . 'images/woocommerce.png' ?>" alt="<?php esc_attr_e( 'Woocommerce', 'tourfic' ) ?>"></div>
                             <h1 class="tf-setup-step-title"><?php esc_html_e( 'Install WooCommerce', 'tourfic' ) ?></h1>
@@ -428,7 +428,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                         </div>
 
                         <!--Auto Publish Review-->
-                        <div class="tf-setup-form-item tf-setup-form-item-inline">
+                        <div class="tf-setup-form-item tf-setup-form-item-inline tf-auto-publish-field">
                             <div class="tf-setup-form-item-label"><label class="" for="tf-auto-publish-review"><?php esc_html_e( 'Auto Publish Review', 'tourfic' ) ?></label></div>
                             <div class="tf-setup-form-item-input">
                                 <label for="tf-auto-publish-review" class="tf-switch-label">
@@ -687,7 +687,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 					<?php $this->tf_setup_wizard_steps_header( 5 ) ?>
 
                     <h1 class="tf-setup-step-title"><?php esc_html_e( 'Choose Templates for Single & Archive Pages', 'tourfic' ) ?></h1>
-                    <p class="tf-setup-step-desc"><?php esc_html_e( 'These templates are designed for showcasing your Single Hotel, Tour, and Apartment pages, along with their respective Archive Pages', 'tourfic' ) ?></p>
+                    <p class="tf-setup-step-desc"><?php echo wp_kses_post( 'These templates are designed for showcasing your Single Hotel, Tour, and <br> Apartment pages, along with their respective Archive Pages' ) ?></p>
 
                     <div class="tf-hotel-setup-wizard">
 
@@ -994,6 +994,19 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                         </div>
                     </div>
                 </div>
+
+                <!-- if woocommerce not active or install -->
+                <?php if ( ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) || ! is_plugin_active( 'woocommerce/woocommerce.php' ) ): ?>
+                    <div class="tf-steps-item <?php echo $active_step == 2 ? 'active' : ''; ?>">
+                        <div class="tf-steps-item-container">
+                            <div class="tf-steps-item-icon">
+                                <span class="tf-steps-icon">
+                                    <?php echo $active_step == 2 ? wp_kses($active_icon, tf_custom_wp_kses_allow_tags()) : ( $active_step > 2 ? wp_kses($finish_icon, tf_custom_wp_kses_allow_tags()) : wp_kses($inactive_icon, tf_custom_wp_kses_allow_tags()) ); ?>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
 
                 <div class="tf-steps-item <?php echo $active_step == 2 ? 'active' : ''; ?>">
                     <div class="tf-steps-item-container">
