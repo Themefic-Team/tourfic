@@ -2834,7 +2834,8 @@ Steps
     font-size: 22px; }
   .tf-pro-notice .tf-field-notice-inner .tf-field-notice-content {
     color: #000;
-    line-height: 1.6; }
+    line-height: 1.6;
+    align-self: center; }
 
 .tf-field-switch .tf-switch-label {
   position: relative;

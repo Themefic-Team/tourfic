@@ -131,7 +131,6 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'type'     => 'map',
 					'label'    => esc_html__( 'Dynamic Location Search', 'tourfic' ),
 					/* translators: %s is the link to the Google Maps API Key settings */
-					'subtitle' => sprintf( wp_kses_post(esc_html__( 'Enter the specific address you wish to use for the tour and select the correct option from the suggested addresses. This will be used to hyperlink address and display the address on the front-end map. <strong>Google Maps is also available for location. Simply set up your <a href="esc_url( admin_url("admin.php?page=tf_settings#tab=map_settings") )" target="_blank">Google Maps API Key</a></strong>', 'tourfic' )) ),
 					'subtitle' => esc_html__( 'Enter the specific address you wish to use for the tour and select the correct option from the suggested addresses. This will be used to hyperlink address and display the address on the front-end map. ', 'tourfic' ) . '<strong>' . esc_html__('Google Maps is also available for location. Simply set up your ', 'tourfic' ) . '<a href="' . esc_url( admin_url("admin.php?page=tf_settings#tab=map_settings") ) . '" target="_blank">' . esc_html__('Google Maps API Key', 'tourfic') . '</a></strong>',
 					'height'   => '250px',
 					'settings' => array(
@@ -263,7 +262,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'class' => 'tf-pro-notice',
 					'notice' => 'info',
 					'icon' => 'ri-lightbulb-flash-fill',
-					'content' => esc_html__( "We're offering some extra features like 'Tour Type' in our pro plan,", 'tourfic' ) . ' <a href="https://tourfic.com/" target="_blank"><strong>' . esc_html__( 'Upgrade to our Pro package today to take advantage of these fantastic options!', 'tourfic' ) . '</strong></a>',
+					'content' => esc_html__( "We're offering some extra features like tour type in our pro plan,", 'tourfic' ) . ' <a href="https://tourfic.com/" target="_blank"><strong>' . esc_html__( 'Upgrade to our Pro package today to take advantage of these fantastic options!', 'tourfic' ) . '</strong></a>',
 				),
 			),
 		),
@@ -590,7 +589,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'class' => 'tf-pro-notice',
 					'notice' => 'info',
 					'icon' => 'ri-lightbulb-flash-fill',
-					'content' => esc_html__( "We're offering some extra features like Fixed Tour Type, Custom Availability, Allowed Time, Select day to disable, Disable Specific Dates in our pro plan,", 'tourfic' ) . ' <a href="https://tourfic.com/" target="_blank"><strong>' . esc_html__( 'Upgrade to our Pro package today to take advantage of these fantastic options!', 'tourfic' ) . '</strong></a>',
+					'content' => esc_html__( "We're offering some extra features like fixed tour type, custom availability, allowed time, select day to disable, disable specific dates in our pro plan. ", 'tourfic' ) . ' <a href="https://tourfic.com/" target="_blank"><strong>' . esc_html__( 'Upgrade to our pro package today to take advantage of these fantastic options!', 'tourfic' ) . '</strong></a>',
 				),
 
 			),
@@ -637,7 +636,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'class' => 'tf-pro-notice',
 					'notice' => 'info',
 					'icon' => 'ri-lightbulb-flash-fill',
-					'content' => esc_html__( "We're offering some extra features like Minimum days for Booking, Enable Traveler Info, External Booking, Booking Without Payment, Taxable Tour, Tax class for Woocommerce in our pro plan,", 'tourfic' ) . ' <a href="https://tourfic.com/" target="_blank"><strong>' . esc_html__( 'Upgrade to our Pro package today to take advantage of these fantastic options!', 'tourfic' ) . '</strong></a>',
+					'content' => esc_html__( "We're offering some extra features like minimum days for booking, enable traveler info, external booking, booking without payment, taxable tour, tax class for Woocommerce in our pro plan. ", 'tourfic' ) . ' <a href="https://tourfic.com/" target="_blank"><strong>' . esc_html__( 'Upgrade to our pro package today to take advantage of these fantastic options!', 'tourfic' ) . '</strong></a>',
 				),
 			),
 		),
@@ -780,7 +779,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'class' => 'tf-pro-notice',
 					'notice' => 'info',
 					'icon' => 'ri-lightbulb-flash-fill',
-					'content' => esc_html__( "We're offering some advanced itinerary features inside every repeater like Duration, Itinerary Gallery, Custom Itinerary Options, Meals, Location, Altitude. Also our Pro package includes a feature that allows customers to download their itinerary directly from the frontend as a PDF. This enhancement is perfect for travelers who need offline access or wish to share their itinerary with others,", 'tourfic') . ' <a href="https://tourfic.com/" target="_blank"><strong>' . esc_html__( 'Upgrade to our Pro package today to take advantage of this fantastic option!', 'tourfic' ) . '</strong></a>',
+					'content' => esc_html__( "We're offering some advanced itinerary features inside every repeater like duration, itinerary gallery, custom itinerary options, meals, location, altitude. Also our pro package includes a feature that allows customers to download their itinerary directly from the frontend as a PDF. This enhancement is perfect for travelers who need offline access or wish to share their itinerary with others. ", 'tourfic') . ' <a href="https://tourfic.com/" target="_blank"><strong>' . esc_html__( 'Upgrade to our pro package today to take advantage of these fantastic option!', 'tourfic' ) . '</strong></a>',
 				),
 			),
 		),
