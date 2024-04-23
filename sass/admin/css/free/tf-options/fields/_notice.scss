@@ -66,9 +66,18 @@
   }
 
   .tf-pro-notice {
-    .tf-field-notice-inner .tf-field-notice-content {
-      color: #000;
-      line-height: 1.6;
-    }
+    .tf-field-notice-inner {
+      background-color: #fff;
+      border: 1.5px solid #d1ebec;
+
+      .tf-field-notice-icon {
+        font-size: 22px;
+      }
+
+      .tf-field-notice-content {
+        color: #000;
+        line-height: 1.6;
+      }
+    } 
   }
 // }

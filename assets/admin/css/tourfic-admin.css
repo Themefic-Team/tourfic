@@ -2827,9 +2827,14 @@ Steps
   font-size: 16px;
   line-height: 1.5; }
 
-.tf-pro-notice .tf-field-notice-inner .tf-field-notice-content {
-  color: #000;
-  line-height: 1.6; }
+.tf-pro-notice .tf-field-notice-inner {
+  background-color: #fff;
+  border: 1.5px solid #d1ebec; }
+  .tf-pro-notice .tf-field-notice-inner .tf-field-notice-icon {
+    font-size: 22px; }
+  .tf-pro-notice .tf-field-notice-inner .tf-field-notice-content {
+    color: #000;
+    line-height: 1.6; }
 
 .tf-field-switch .tf-switch-label {
   position: relative;
