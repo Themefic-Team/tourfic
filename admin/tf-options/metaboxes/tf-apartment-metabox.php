@@ -328,7 +328,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'class' => 'tf-pro-notice',
 					'notice' => 'info',
 					'icon' => 'ri-megaphone-line',
-					'content' => esc_html__( "We're offering some extra features like per person pricing, external booking, taxable apartment, tax class for Woocommerce in our pro plan, also you can add unlimited additional fees for apartment. ", 'tourfic') . ' <a href="https://tourfic.com/" target="_blank"><strong>' . esc_html__( 'Upgrade to our pro package today to take advantage of these fantastic option!', 'tourfic' ) . '</strong></a>',
+					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>per person pricing</b>, <b>external booking</b>, <b>taxable apartment</b>, <b>tax class for Woocommerce</b> in our pro plan, also you can add unlimited additional fees for apartment. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic option!</a>', 'tourfic')),
 				),
 				/*array(
 					'id'       => 'weekly_discount',
@@ -359,7 +359,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'class' => 'tf-pro-notice',
 					'notice' => 'info',
 					'icon' => 'ri-megaphone-line',
-					'content' => esc_html__( "Are you looking to enhance the booking system for your apartment? Our Pro package offers a powerful feature that includes custom availability settings and iCal Sync. This integration will streamline your operations and improve the booking experience, giving a significant boost to your apartment business. ", 'tourfic') . ' <a href="https://tourfic.com/" target="_blank"><strong>' . esc_html__( 'Upgrade to our pro package today to take advantage of these fantastic option!', 'tourfic' ) . '</strong></a>',
+					'content' => wp_kses_post(__( 'Are you looking to enhance the booking system for your apartment? Our pro package offers a powerful feature that includes <strong>custom availability settings</strong> and <strong>iCal sync</strong>. This integration will streamline your operations and improve the booking experience, giving a significant boost to your apartment business. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic option!</a>', 'tourfic' ) ),
 				),
 				
 			),
