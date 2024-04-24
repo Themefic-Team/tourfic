@@ -597,6 +597,15 @@ Steps
         flex-direction: column;
         gap: 16px;
 
+        .tf-setup-form-item-wrap {
+            text-align: left;
+        }
+
+        .tf-setup-field-desc{
+            display: block;
+            margin-top: 4px;
+        }
+
         .tf-setup-form-item {
             width: 100%;
 

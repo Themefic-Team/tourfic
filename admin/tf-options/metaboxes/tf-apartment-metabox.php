@@ -126,7 +126,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'     => 'map',
 					'label'    => esc_html__( 'Dynamic Location Search', 'tourfic' ),
 					/* translators: %s is the link to the Google Maps API Key settings */
-					'subtitle' => esc_html__( 'Enter the specific address you wish to use for the tour and select the correct option from the suggested addresses. This will be used to hyperlink address and display the address on the front-end map. ', 'tourfic' ) . '<strong>' . esc_html__('Google Maps is also available for location. Simply set up your ', 'tourfic' ) . '<a href="' . esc_url( admin_url("admin.php?page=tf_settings#tab=map_settings") ) . '" target="_blank">' . esc_html__('Google Maps API Key', 'tourfic') . '</a></strong>',
+					'subtitle' => sprintf( wp_kses_post(__( 'Enter the specific address you wish to use for the apartment and select the correct option from the suggested addresses. This will be used to hyperlink address and display the address on the front-end map. <strong>Google Maps is also available for location. Simply set up your <a href="%s" target="_blank">Google Maps API Key</a></strong>', 'tourfic' )), esc_url( admin_url('admin.php?page=tf_settings#tab=map_settings') ) ),
 					'height'   => '250px',
 					'settings' => array(
 						'scrollWheelZoom' => true,
@@ -361,7 +361,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'icon' => 'ri-megaphone-line',
 					'content' => wp_kses_post(__( 'Are you looking to enhance the booking system for your apartment? Our pro package offers a powerful feature that includes <strong>custom availability settings</strong> and <strong>iCal sync</strong>. This integration will streamline your operations and improve the booking experience, giving a significant boost to your apartment business. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic option!</a>', 'tourfic' ) ),
 				),
-				
+
 			),
 		),
 		//Room Management
