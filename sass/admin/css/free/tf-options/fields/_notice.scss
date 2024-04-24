@@ -68,16 +68,21 @@
   .tf-pro-notice {
     .tf-field-notice-inner {
       background-color: #fff;
-      border: 1.5px solid #d1ebec;
+      border: 1.5px solid #003c79;
 
       .tf-field-notice-icon {
-        font-size: 22px;
+        font-size: 24px;
+        color: #003c79;
       }
 
       .tf-field-notice-content {
         color: #000;
         line-height: 1.6;
         align-self: center;
+
+        a {
+          color: #003c79;
+        }
       }
     } 
   }
