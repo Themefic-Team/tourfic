@@ -222,7 +222,6 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'subtitle'   => esc_html__( 'Select pricing type', 'tourfic' ),
 					'options'    => array(
 						'per_night'  => esc_html__( 'Per Night', 'tourfic' ),
-						'per_person' => esc_html__( 'Per Person (pro)', 'tourfic' ),
 					),
 					'attributes' => array(
 						'class' => 'tf_apt_pricing_type',
@@ -236,33 +235,6 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'field_width' => 50,
 					'attributes'  => array( 'min' => 0 ),
 					'dependency' => array( 'pricing_type', '==', 'per_night' ),
-				),
-				array(
-					'id'          => '',
-					'type'        => 'number',
-					'label'       => esc_html__( 'Adult Price', 'tourfic' ),
-					'subtitle'    => esc_html__( 'Enter adult price', 'tourfic' ),
-					'field_width' => 33.33,
-					'attributes'  => array( 'min' => 0 ),
-					'dependency'  => array( 'pricing_type', '==', 'per_person' ),
-				),
-				array(
-					'id'          => '',
-					'type'        => 'number',
-					'label'       => esc_html__( 'Child Price', 'tourfic' ),
-					'subtitle'    => esc_html__( 'Enter child price', 'tourfic' ),
-					'field_width' => 33.33,
-					'attributes'  => array( 'min' => 0 ),
-					'dependency'  => array( 'pricing_type', '==', 'per_person' ),
-				),
-				array(
-					'id'          => '',
-					'type'        => 'number',
-					'label'       => esc_html__( 'Infant Price', 'tourfic' ),
-					'subtitle'    => esc_html__( 'Enter infant price', 'tourfic' ),
-					'field_width' => 33.33,
-					'attributes'  => array( 'min' => 0 ),
-					'dependency'  => array( 'pricing_type', '==', 'per_person' ),
 				),
 				array(
 					'id'          => 'min_stay',
@@ -347,26 +319,16 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label'   => __( 'Booking Type', 'tourfic' ),
 					'options' => array(
 						'1' => __( 'Default Booking (WooCommerce)', 'tourfic' ),
-						'2' => __( 'External Booking (Pro)', 'tourfic' ),
 					),
 					'default' => '1',
 				),
 				array(
-					'id'        => 'is_taxable',
-					'type'      => 'switch',
-					'label'     => __( 'Taxable', 'tourfic' ),
-					'subtitle' => __( 'Activate this option to enable tax for this Apartment.', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'is_pro'  => true
-				),
-				array(
-					'id'      => 'taxable_class',
-					'type'    => 'select',
-					'label'   => __( 'Tax class', 'tourfic' ),
-					'subtitle'  => __( 'Select your class, and tax will calculate based on your chosen class. PS: If you activate partial payment option tax will be calculated upon partial amount as woocommerce regulations.', 'tourfic' ),
-					'options' => tf_taxable_option_callback(),
-					'is_pro'  => true
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-lightbulb-flash-fill',
+					'content' => esc_html__( "We're offering some extra features like per person pricing, external booking, taxable apartment, tax class for Woocommerce in our pro plan, also you can add unlimited additional fees for apartment. ", 'tourfic') . ' <a href="https://tourfic.com/" target="_blank"><strong>' . esc_html__( 'Upgrade to our pro package today to take advantage of these fantastic option!', 'tourfic' ) . '</strong></a>',
 				),
 				/*array(
 					'id'       => 'weekly_discount',
@@ -392,35 +354,14 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'content' => __( 'Availability', 'tourfic' ),
 				),
 				array(
-					'id'      => '',
-					'type'    => 'switch',
-					'label'   => __( 'Enable Availability by Date', 'tourfic' ),
-					'is_pro'  => true,
-					'default' => true
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-lightbulb-flash-fill',
+					'content' => esc_html__( "Are you looking to enhance the booking system for your apartment? Our Pro package offers a powerful feature that includes custom availability settings and iCal Sync. This integration will streamline your operations and improve the booking experience, giving a significant boost to your apartment business. ", 'tourfic') . ' <a href="https://tourfic.com/" target="_blank"><strong>' . esc_html__( 'Upgrade to our pro package today to take advantage of these fantastic option!', 'tourfic' ) . '</strong></a>',
 				),
-				array(
-					'id'        => '',
-					'type'      => 'aptAvailabilityCal',
-					'label'     => __( 'Availability Calendar', 'tourfic' ),
-					'is_pro'  => true,
-				),
-				array(
-					'id'      => 'ical',
-					'type'    => 'heading',
-					'content' => __( 'iCal Sync', 'tourfic' ),
-				),
-				array(
-					'id'          => '',
-					'type'        => 'ical',
-					'label'       => __( 'iCal URL', 'tourfic' ),
-					'placeholder' => __( 'https://website.com', 'tourfic' ),
-					'button_text' => __( 'Import', 'tourfic' ),
-					'button_class'   => 'apt-ical-import',
-					'is_pro'  => true,
-					'attributes'  => array(
-						'class' => 'ical_url_input',
-					),
-				),
+
 			),
 		),
 		//Room Management
