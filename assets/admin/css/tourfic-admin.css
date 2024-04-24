@@ -1029,6 +1029,11 @@ Steps
     display: flex;
     flex-direction: column;
     gap: 16px; }
+    .tf-setup-step-container .setup-form-group .tf-setup-form-item-wrap {
+      text-align: left; }
+    .tf-setup-step-container .setup-form-group .tf-setup-field-desc {
+      display: block;
+      margin-top: 4px; }
     .tf-setup-step-container .setup-form-group .tf-setup-form-item {
       width: 100%; }
       .tf-setup-step-container .setup-form-group .tf-setup-form-item .tf-setup-form-item-label {

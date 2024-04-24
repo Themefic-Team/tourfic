@@ -521,14 +521,17 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             </div>
 
                             <!--Demo Data Import Section-->
-                            <div class="tf-setup-form-item tf-setup-form-item-inline">
-                                <div class="tf-setup-form-item-label"><label class="" for="tf-hotel-demo-data-import"><?php esc_html_e( 'Import Demo Hotels', 'tourfic' ) ?></label></div>
-                                <div class="tf-setup-form-item-input">
-                                    <label for="tf-hotel-demo-data-import" class="tf-switch-label">
-                                        <input type="checkbox" id="tf-hotel-demo-data-import" name="tf-hotel-demo-data-import" value="1" checked class="tf-switch"/>
-                                        <span class="tf-switch-slider"></span>
-                                    </label>
+                            <div class="tf-setup-form-item-wrap">
+                                <div class="tf-setup-form-item tf-setup-form-item-inline">
+                                    <div class="tf-setup-form-item-label"><label class="" for="tf-hotel-demo-data-import"><?php esc_html_e( 'Import Demo Hotels', 'tourfic' ) ?></label></div>
+                                    <div class="tf-setup-form-item-input">
+                                        <label for="tf-hotel-demo-data-import" class="tf-switch-label">
+                                            <input type="checkbox" id="tf-hotel-demo-data-import" name="tf-hotel-demo-data-import" value="" class="tf-switch"/>
+                                            <span class="tf-switch-slider"></span>
+                                        </label>
+                                    </div>
                                 </div>
+                                <span class="tf-setup-field-desc"><?php echo esc_html__( 'Import demo hotels to add some sample data to your site.', 'tourfic' ) ?></span>
                             </div>
 
                             <!--Hotel Permalink-->
@@ -571,14 +574,17 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             </div>
 
                             <!--Demo Data Import Section-->
-                            <div class="tf-setup-form-item tf-setup-form-item-inline">
-                                <div class="tf-setup-form-item-label"><label class="" for="tf-tour-demo-data-import"><?php esc_html_e( 'Import Demo Tours', 'tourfic' ) ?></label></div>
-                                <div class="tf-setup-form-item-input">
-                                    <label for="tf-tour-demo-data-import" class="tf-switch-label">
-                                        <input type="checkbox" id="tf-tour-demo-data-import" name="tf-tour-demo-data-import" value="1" checked class="tf-switch"/>
-                                        <span class="tf-switch-slider"></span>
-                                    </label>
+                            <div class="tf-setup-form-item-wrap">
+                                <div class="tf-setup-form-item tf-setup-form-item-inline">
+                                    <div class="tf-setup-form-item-label"><label class="" for="tf-tour-demo-data-import"><?php esc_html_e( 'Import Demo Tours', 'tourfic' ) ?></label></div>
+                                    <div class="tf-setup-form-item-input">
+                                        <label for="tf-tour-demo-data-import" class="tf-switch-label">
+                                            <input type="checkbox" id="tf-tour-demo-data-import" name="tf-tour-demo-data-import" value="" class="tf-switch"/>
+                                            <span class="tf-switch-slider"></span>
+                                        </label>
+                                    </div>
                                 </div>
+                                <span class="tf-setup-field-desc"><?php echo esc_html__( 'Import demo tours to add some sample data to your site.', 'tourfic' ) ?></span>
                             </div>
 
                             <!--Tour Permalink-->
@@ -621,14 +627,17 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             </div>
 
                             <!--Demo Data Import Section-->
-                            <div class="tf-setup-form-item tf-setup-form-item-inline">
-                                <div class="tf-setup-form-item-label"><label class="" for="tf-apartment-demo-data-import"><?php esc_html_e( 'Import Demo Apartments', 'tourfic' ) ?></label></div>
-                                <div class="tf-setup-form-item-input">
-                                    <label for="tf-apartment-demo-data-import" class="tf-switch-label">
-                                        <input type="checkbox" id="tf-apartment-demo-data-import" name="tf-apartment-demo-data-import" value="1" checked class="tf-switch"/>
-                                        <span class="tf-switch-slider"></span>
-                                    </label>
+                            <div class="tf-setup-form-item-wrap">
+                                <div class="tf-setup-form-item tf-setup-form-item-inline">
+                                    <div class="tf-setup-form-item-label"><label class="" for="tf-apartment-demo-data-import"><?php esc_html_e( 'Import Demo Apartments', 'tourfic' ) ?></label></div>
+                                    <div class="tf-setup-form-item-input">
+                                        <label for="tf-apartment-demo-data-import" class="tf-switch-label">
+                                            <input type="checkbox" id="tf-apartment-demo-data-import" name="tf-apartment-demo-data-import" value="" class="tf-switch"/>
+                                            <span class="tf-switch-slider"></span>
+                                        </label>
+                                    </div>
                                 </div>
+                                <span class="tf-setup-field-desc"><?php echo esc_html__( 'Import demo apartments to add some sample data to your site.', 'tourfic' ) ?></span>
                             </div>
 
                             <!--Apartment Permalink-->
