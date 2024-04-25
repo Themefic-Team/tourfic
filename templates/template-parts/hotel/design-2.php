@@ -359,7 +359,12 @@
                     ?>
                 </div>
                 <?php } ?>
+            </div>
+            <!-- Hotel Single Widget Hook are - start -->
+            <div class="tf-hotel-single-custom-widget-wrap tf-single-widgets">
+                <?php do_action( "tf_hotel_single_widgets" ); ?>
             </div>       
+            <!-- Hotel Single Widget Hook are - end -->
         </div>        
     </div>        
     <!-- Hotel details End -->
