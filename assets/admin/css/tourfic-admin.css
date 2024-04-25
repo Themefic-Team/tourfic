@@ -2833,17 +2833,22 @@ Steps
   line-height: 1.5; }
 
 .tf-pro-notice .tf-field-notice-inner {
-  background-color: #fff;
-  border: 1.5px solid #003c79; }
+  background-color: #EBEFFF;
+  border: 1.5px solid #295BFF; }
   .tf-pro-notice .tf-field-notice-inner .tf-field-notice-icon {
     font-size: 24px;
-    color: #003c79; }
+    color: #295BFF;
+    margin-right: 8px; }
   .tf-pro-notice .tf-field-notice-inner .tf-field-notice-content {
-    color: #000;
+    color: #000E3D;
+    font-size: 14px;
     line-height: 1.6;
-    align-self: center; }
+    align-self: center;
+    font-weight: 400; }
+    .tf-pro-notice .tf-field-notice-inner .tf-field-notice-content b {
+      font-weight: 600; }
     .tf-pro-notice .tf-field-notice-inner .tf-field-notice-content a {
-      color: #003c79; }
+      color: #295BFF; }
 
 .tf-field-switch .tf-switch-label {
   position: relative;

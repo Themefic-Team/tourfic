@@ -327,7 +327,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'  => 'notice',
 					'class' => 'tf-pro-notice',
 					'notice' => 'info',
-					'icon' => 'ri-megaphone-line',
+					'icon' => 'ri-information-fill',
 					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>per person pricing</b>, <b>external booking</b>, <b>taxable apartment</b>, <b>tax class for Woocommerce</b> in our pro plan, also you can add unlimited additional fees for apartment. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic option!</a>', 'tourfic')),
 				),
 				/*array(
@@ -358,7 +358,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'  => 'notice',
 					'class' => 'tf-pro-notice',
 					'notice' => 'info',
-					'icon' => 'ri-megaphone-line',
+					'icon' => 'ri-information-fill',
 					'content' => wp_kses_post(__( 'Are you looking to enhance the booking system for your apartment? Our pro package offers a powerful feature that includes <strong>custom availability settings</strong> and <strong>iCal sync</strong>. This integration will streamline your operations and improve the booking experience, giving a significant boost to your apartment business. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic option!</a>', 'tourfic' ) ),
 				),
 
