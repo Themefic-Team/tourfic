@@ -2661,10 +2661,12 @@ div#tf-destinationautocomplete-list div:before {
   left: 0;
   right: 0;
   z-index: 9999;
-  background: transparent; }
+  background: transparent;
+  margin: auto;
+  overflow: auto scroll; }
 
 .tf-aq-overlay {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
@@ -2679,14 +2681,13 @@ div#tf-destinationautocomplete-list div:before {
   left: 0;
   right: 0;
   margin: 0 auto;
-  top: 50%;
+  top: 20%;
   width: 100%;
   max-width: 428px;
   background: #fff;
   padding: 48px 40px 32px 40px;
   border-radius: 16px;
-  transform: translateY(-50%);
-  height: auto; }
+  transform: translate(0, 0); }
   @media only screen and (max-width: 640px) {
     .tf-aq-outer {
       width: 90%; } }

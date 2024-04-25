@@ -280,14 +280,14 @@ function tourfic_ask_question() {
 	?>
     <div id="tf-ask-question" style="display: none;">
         <div class="tf-aq-overlay"></div>
-        <div class="tf-aq-outer">
-            <span class="close-aq">
+		<div class="tf-aq-outer">
+			<span class="close-aq">
 				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 					<path d="M15 5L5 15" stroke="#4E667E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 					<path d="M5 5L15 15" stroke="#4E667E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>
 			</span>
-            <div class="tf-aq-inner">
+			<div class="tf-aq-inner">
 				<div class="tf-ask-question-head-content">
 					<div class="ask-question-svg">
 						<svg xmlns="http://www.w3.org/2000/svg" width="82" height="65" viewBox="0 0 82 65" fill="none">
@@ -334,8 +334,8 @@ function tourfic_ask_question() {
 					</div>
 				</form>
 
-            </div>
-        </div>
+			</div>
+		</div>
     </div>
 	<?php
 }
