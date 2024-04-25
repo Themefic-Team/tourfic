@@ -531,7 +531,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                                         </label>
                                     </div>
                                 </div>
-                                <span class="tf-setup-field-desc"><?php echo esc_html__( 'Import demo hotels to add some sample data to your site.', 'tourfic' ) ?></span>
+                                <span class="tf-setup-field-desc"><?php echo esc_html__( 'Enabling this feature will add some sample hotels to your website', 'tourfic' ) ?></span>
                             </div>
 
                             <!--Hotel Permalink-->
@@ -584,7 +584,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                                         </label>
                                     </div>
                                 </div>
-                                <span class="tf-setup-field-desc"><?php echo esc_html__( 'Import demo tours to add some sample data to your site.', 'tourfic' ) ?></span>
+                                <span class="tf-setup-field-desc"><?php echo esc_html__( 'Enabling this feature will add some sample tours to your website', 'tourfic' ) ?></span>
                             </div>
 
                             <!--Tour Permalink-->
@@ -637,7 +637,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                                         </label>
                                     </div>
                                 </div>
-                                <span class="tf-setup-field-desc"><?php echo esc_html__( 'Import demo apartments to add some sample data to your site.', 'tourfic' ) ?></span>
+                                <span class="tf-setup-field-desc"><?php echo esc_html__( 'Enabling this feature will add some sample apartments to your website', 'tourfic' ) ?></span>
                             </div>
 
                             <!--Apartment Permalink-->

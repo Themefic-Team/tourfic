@@ -232,7 +232,7 @@
         font-weight: 600 !important;
         font-size: 24px !important;
         line-height: 32px !important;
-        margin-bottom: 16px;
+        margin: 0 0 16px 0;
         color: #2A3343;
     }
 
@@ -1537,6 +1537,10 @@
             color: $red60;
             font-weight: 500;
         }
+    }
+
+    .tf-btn{
+        height: auto;
     }
 
     .btn-styled{

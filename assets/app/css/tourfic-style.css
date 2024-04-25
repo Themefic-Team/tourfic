@@ -1,3 +1,6 @@
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass/app/css/free/tourfic.scss ***!
+  \*********************************************************************************************************************************************************************************/
 @charset "UTF-8";
 /*
 Button
@@ -5689,7 +5692,7 @@ div#tf-contact-info {
     font-weight: 600 !important;
     font-size: 24px !important;
     line-height: 32px !important;
-    margin-bottom: 16px;
+    margin: 0 0 16px 0;
     color: #2A3343; }
   .tf-apartment .tf-apt-hero-section {
     margin-bottom: 48px; }
@@ -6734,6 +6737,8 @@ div#tf-contact-info {
     #tf-apartment-booking .tf-apartment-form-fields .tf-err-msg {
       color: #f44336;
       font-weight: 500; }
+  #tf-apartment-booking .tf-btn {
+    height: auto; }
   #tf-apartment-booking .btn-styled {
     border-radius: 8px !important;
     background: #2979FF;
