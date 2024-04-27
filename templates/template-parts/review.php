@@ -244,6 +244,12 @@ if ( ! empty( $tf_ratings_for ) ) {
 	// get post id
 	$post_id = $post->ID;
 
+	if( get_post_type($post_id) == "tf_apartment" && $tf_apartment_selected_template == "default"){
+		$btn_class = 'tf-btn-normal btn-primary';
+	} else {
+		$btn_class = 'tf_button tf-submit btn-styled';
+	}
+
 	/**
 	 * Review query
 	 */
@@ -293,7 +299,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 					if ( in_array( 'li', $tf_ratings_for ) && ! tf_user_has_comments() ) {
 						?>
                         <div class="tf-btn">
-                            <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" >
+                            <button class="<?php echo esc_attr($btn_class); ?>" data-fancybox data-src="#tourfic-rating" >
                                 <i class="fas fa-plus"></i> <?php esc_html_e( 'Add Review', 'tourfic' ); ?>
                             </button>
                         </div>
@@ -303,7 +309,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 					if ( in_array( 'lo', $tf_ratings_for ) ) {
 						?>
                         <div class="tf-btn">
-                            <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" >
+                            <button class="<?php echo esc_attr($btn_class); ?>" data-fancybox data-src="#tourfic-rating" >
                                 <i class="fas fa-plus"></i> <?php esc_html_e( 'Add Review', 'tourfic' ) ?>
                             </button>
                         </div>
@@ -404,7 +410,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 			if ( is_array( $tf_ratings_for ) && in_array( 'li', $tf_ratings_for ) && ! tf_user_has_comments() ) {
 				?>
                 <div class="tf-btn">
-                    <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" >
+                    <button class="<?php echo esc_attr($btn_class); ?>" data-fancybox data-src="#tourfic-rating" >
                         <i class="fas fa-plus"></i> <?php esc_html_e( 'Add Review', 'tourfic' ); ?>
                     </button>
                 </div>
@@ -417,7 +423,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 			if ( is_array( $tf_ratings_for ) && in_array( 'lo', $tf_ratings_for ) ) {
 				?>
                 <div class="tf-btn">
-                    <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" >
+                    <button class="<?php echo esc_attr($btn_class); ?>" data-fancybox data-src="#tourfic-rating" >
                         <i class="fas fa-plus"></i> <?php esc_html_e( 'Add Review', 'tourfic' ) ?>
                     </button>
                 </div>

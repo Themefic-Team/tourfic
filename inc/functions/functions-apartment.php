@@ -774,6 +774,9 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$child        = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
 		$infant       = ! empty( $_GET['infant'] ) ? sanitize_text_field( $_GET['infant'] ) : '';
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? $_GET['check-in-out-date'] : '';
+        $check_in_out_arr = explode(" - ", $check_in_out);
+        $check_in = ! empty( $check_in_out_arr[0] ) ? $check_in_out_arr[0] : '';
+        $check_out = ! empty( $check_in_out_arr[1] ) ? $check_in_out_arr[1] : '';
 
 		$apt_disable_dates = [];
 		$tf_apt_enable_dates = [];
@@ -1017,7 +1020,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
         </form>
 		<?php }else{ ?>
         <!-- Start Booking widget -->
-        <form id="tf-apartment-booking" class="tf-apartment-side-booking" method="get" autocomplete="off">
+        <form id="tf-apartment-booking" class="tf-apartment-side-booking tf-apartment-design-one-form" method="get" autocomplete="off">
             <h5><?php echo ! empty( $meta['booking_form_title'] ) ? esc_html( $meta['booking_form_title'] ) : esc_html_e( 'Book your Apartment', 'tourfic' ); ?></h5>
             <div class="tf-apartment-form-header">
 				<?php if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' ) || $tf_booking_type == 1 ) : ?>
@@ -1068,12 +1071,22 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 			<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' ) || $tf_booking_type == 1 ) : ?>
                 <div class="tf-apartment-form-fields">
                     <div class="tf_booking-dates">
-                        <div class="tf-check-in-out-date">
+                        <div class="tf-check-in-date">
                             <label class="tf_label-row">
-                                <span class="tf-label"><?php esc_html_e( 'Check in & out date', 'tourfic' ); ?></span>
-                                <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                       placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?>
+                                <span class="tf-label"><?php esc_html_e( 'Check in', 'tourfic' ); ?></span>
+                                <input type="text" name="check-in-date" id="check-in-date" onkeypress="return false;"
+                                       placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in ) ? 'value="' . esc_attr( $check_in ) . '"' : '' ?>
+                                       required readonly>
+                            </label>
+                        </div>
+                        <div class="tf-check-out-date">
+                            <label class="tf_label-row">
+                                <span class="tf-label"><?php esc_html_e( 'Check out', 'tourfic' ); ?></span>
+                                <input type="text" name="check-out-date" id="check-out-date" onkeypress="return false;"
+                                       placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_out ) ? 'value="' . esc_attr( $check_out ) . '"' : '' ?>
                                        required>
+                                <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
+                                       placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_out ) ? 'value="' . $check_out . '"' : '' ?> required>
                             </label>
                         </div>
                     </div>
@@ -1375,6 +1388,10 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                         }
                     }
 
+                    $(".tf-apartment-design-one-form #check-in-date").on('click', function () {
+                        $(".tf-check-out-date .form-control").click();
+                    });
+
                     const checkinoutdateange = flatpickr("#tf-apartment-booking #check-in-out-date", {
                         enableTime: false,
                         mode: "range",
@@ -1387,11 +1404,13 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                             instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                             bookingCalculation(selectedDates);
+                            dateSetToFields(selectedDates, instance);
                         },
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                             instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                             bookingCalculation(selectedDates);
+                            dateSetToFields(selectedDates, instance);
                         }, 
 						<?php if (!empty($tf_apt_enable_dates) && is_array($tf_apt_enable_dates)) : ?>
 							enable: [ <?php array_walk($tf_apt_enable_dates, function($date) {echo '"'. esc_html( $date ) . '",';}); ?> ],
@@ -1412,6 +1431,17 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                         ],
 						<?php tf_flatpickr_locale(); ?>
                     });
+
+                    function dateSetToFields(selectedDates, instance) {
+                        if (selectedDates.length === 2) {
+                            if (selectedDates[0]) {
+                                $(".tf-apartment-design-one-form #check-in-date").val(selectedDates[0].toLocaleDateString());
+                            }
+                            if (selectedDates[1]) {
+                                $(".tf-apartment-design-one-form #check-out-date").val(selectedDates[1].toLocaleDateString());
+                            }
+                        }
+                    }
 
                     $(document).on('change', '.tf_acrselection #adults, .tf_acrselection #children, .tf_acrselection #infant', function () {
                         if ($('#tf-apartment-booking #check-in-out-date').val() !== '') {
