@@ -881,6 +881,43 @@ span.close-aq {
         grid-template-columns: 1fr;
     }
 }
+.tf-hotel-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    @media #{$max767}{
+        grid-template-columns: 1fr 1fr;
+    }
+    @media #{$max640}{
+        grid-template-columns: 1fr;
+    }
+
+    .slider-item-wrap {
+
+        .tf-slider-content {
+            color: #000; 
+            background: transparent;
+            border: none;
+            backdrop-filter: unset;
+            width: inherit;
+            padding: 0 20px;
+            .tf-slider-desc {
+                h3 {
+                    color: #000;
+                    a {
+                    color: #046bd2;
+                    }
+                    a:hover {
+                        color: #000;
+                    }
+                }
+                .tf-slider-rating-star {
+                    color: #000;
+                
+                }
+            }
+        }
+    }
+}
 
 .post-section-one {
     overflow: hidden;

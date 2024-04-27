@@ -1689,8 +1689,10 @@ function tf_tours_grid_slider( $atts, $content = null ) {
 
 	if ( $style == 'slider' ) {
 		$slider_activate = 'tf-slider-activated';
-	} else {
+	} else if( $style == 'grid' ) {
 		$slider_activate = 'tf-hotel-grid';
+	} else {
+		$slider_activate = 'tf-hotel-grid-2';
 	}
 	$tour_loop = new WP_Query( $args );
 
@@ -1710,22 +1712,41 @@ function tf_tours_grid_slider( $atts, $content = null ) {
 					$post_id          = get_the_ID();
 					$related_comments = get_comments( array( 'post_id' => $post_id ) );
 					?>
-                    <div class="tf-slider-item" style="background-image: url(<?php echo esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ); ?>);">
-                        <div class="tf-slider-content">
-                            <div class="tf-slider-desc">
-                                <h3>
-                                    <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
-                                </h3>
-								<?php if ( $related_comments ) { ?>
-                                    <div class="tf-slider-rating-star">
-                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo esc_html( tf_total_avg_rating( $related_comments ) ); ?></span>
-                                    </div>
-								<?php } ?>
-                                <p><?php echo wp_kses_post( wp_trim_words( get_the_excerpt(), 10 ) ); ?></p>
+					<?php if(!empty( $style ) && "grid-2" == $style ) : ?>
+						<div class="slider-item-wrap">
+							<div class="tf-slider-item" style="background-image: url(<?php echo esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ); ?>);"></div>
+							<div class="tf-slider-content">
+								<div class="tf-slider-desc">
+									<h3>
+										<a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+									</h3>
+									<?php if ( $related_comments ) { ?>
+										<div class="tf-slider-rating-star">
+											<i class="fas fa-star"></i> <span style="color:#000;"><?php echo esc_html( tf_total_avg_rating( $related_comments ) ); ?></span>
+										</div>
+									<?php } ?>
+									<p><?php echo wp_kses_post( wp_trim_words( get_the_excerpt(), 10 ) ); ?></p>
+								</div>
+							</div>
+						</div>
+					<?php else: ?>
+						<div class="tf-slider-item" style="background-image: url(<?php echo esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ); ?>);">
+							<div class="tf-slider-content">
+								<div class="tf-slider-desc">
+									<h3>
+										<a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+									</h3>
+									<?php if ( $related_comments ) { ?>
+										<div class="tf-slider-rating-star">
+											<i class="fas fa-star"></i> <span style="color:#fff;"><?php echo esc_html( tf_total_avg_rating( $related_comments ) ); ?></span>
+										</div>
+									<?php } ?>
+									<p><?php echo wp_kses_post( wp_trim_words( get_the_excerpt(), 10 ) ); ?></p>
 
-                            </div>
-                        </div>
-                    </div>
+								</div>
+							</div>
+						</div>
+					<?php endif; ?>
 				<?php } ?>
             </div>
         </div>
