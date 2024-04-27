@@ -212,11 +212,16 @@
         font-weight: 500;
         font-size: 36px;
         line-height: 40px;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
     }
 
     .tf-map-link {
-        color: $slate60;
+        color: #607085;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: 0.2px;
 
         .more-apartment {
             color: $slate60;
@@ -250,7 +255,7 @@
 
         .tf-apt-hero-gallery {
             @include flexbox();
-            gap: 16px;
+            gap: 24px;
 
             img {
                 object-fit: cover;
@@ -263,10 +268,10 @@
                 @include flex(0 0 100%);
 
                 &.has-right{
-                    @include flex(0 0 calc(70% - 8px));
+                    @include flex(0 0 calc(70% - 12px));
 
                     @media #{$max991} {
-                        @include flex(0 0 calc(50% - 8px));
+                        @include flex(0 0 calc(50% - 12px));
                     }
                 }
 
@@ -280,18 +285,18 @@
             }
 
             .tf-apt-hero-right {
-                @include flex(0 0 calc(30% - 8px));
+                @include flex(0 0 calc(30% - 12px));
                 @include flexbox();
                 @include flex-direction(column);
-                gap: 16px;
+                gap: 24px;
 
                 @media #{$max991} {
-                    @include flex(0 0 calc(50% - 8px));
+                    @include flex(0 0 calc(50% - 12px));
                 }
 
                 .hero-second-image,
                 .hero-third-image{
-                    height: 242px;
+                    height: 238px;
 
                     @media #{$max575} {
                         height: 142px;
@@ -403,7 +408,7 @@
         .tf-apt-highlight {
             @include flex(0 0 calc(100% / 3 - 11px));
             border: 1px solid #ddd;
-            border-radius: 16px;
+            border-radius: 8px;
             padding: 16px;
             min-height: 72px;
             box-sizing: border-box;
@@ -424,12 +429,13 @@
 
                 i {
                     font-size: 24px;
-                    color: $slate80;
+                    line-height: 1;
+                    color: $slate60;
                 }
             }
 
             h4 {
-                color: $slate80;
+                color: $slate60;
                 margin: 0;
                 font-size: 20px !important;
                 font-weight: 500 !important;
@@ -437,7 +443,8 @@
 
             p{
                 color: #828C99;
-                font-size: 16px;
+                font-size: 14px !important;
+                line-height: 22px !important;
                 font-weight: 400;
                 margin: 0;
             }
@@ -544,12 +551,20 @@
                 }
 
                 h3 {
+                    font-style: normal;
+                    font-weight: 400 !important;
+                    line-height: 28px;
+                    letter-spacing: 0.2px;
                     font-size: 18px !important;
                     color: #2A3343;
                     margin: 0;
                 }
 
                 p {
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 20px;
+                    letter-spacing: 0.2px;
                     font-size: 14px !important;
                     color: #8997A9;
                     margin: 0;
@@ -559,7 +574,7 @@
     }
 
     .tf-apartment-amenities-section{
-        margin-bottom: 48px;
+        margin-bottom: 80px;
 
         .tf-apartment-amenities-inner{
             border-radius: 8px;
@@ -571,7 +586,6 @@
             @include flexbox();
             @include flex-wrap(wrap);
             gap: 16px;
-            margin-bottom: 16px;
 
             .tf-apt-amenity{
                 @include flex(0 0 calc(100% / 2 - 11px));
@@ -630,6 +644,15 @@
 
     .apt-description {
         margin-bottom: 48px;
+
+        p{
+            margin: 0 0 20px 0;
+            color: #607085;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 24px !important;
+            letter-spacing: 0.2px;
+        }
     }
 }
 #tf_apt_room_details_qv {
@@ -692,7 +715,7 @@
             font-weight: 600;
             line-height: 1.33;
             color:#607085;
-            margin-bottom: 0;
+            margin: 0;
         }
         .tf-apartment-joined-text {
             font-size: 12px;
@@ -806,13 +829,13 @@
 }
 
 #apartment-map{
-    margin-bottom: 48px;
+    margin-bottom: 80px;
 }
 
 .tf-map-content-wrapper {
     @include flexbox();
     @include flex-wrap(wrap);
-    gap: 32px;
+    gap: 24px;
 
     &.tf-map-content-full{
         .tf-apartment-map{
@@ -824,7 +847,7 @@
     }
 
     .tf-apartment-map {
-        @include flex(0 0 calc(50% - 16px));
+        @include flex(0 0 calc(50% - 12px));
 
         @media #{$max767} {
             @include flex(0 0 100%);
@@ -848,24 +871,29 @@
     }
 
     .about-location {
-        @include flex(0 0 calc(50% - 16px));
+        @include flex(0 0 calc(50% - 52px));
+        padding-left: 40px;
 
         @media #{$max767} {
             @include flex(0 0 100%);
         }
 
         .surroundings_sec_title {
-            font-weight: 600;
-            font-size: 24px;
-            line-height: 32px;
+            font-weight: 600 !important;
+            font-size: 24px !important;
+            line-height: 32px !important;
             color: #2A3343;
-            margin-bottom: 8px;
+            margin: 0 0 8px 0;
         }
 
         .surroundings_subtitle {
             color: #8997A9;
             font-size: 16px;
-            margin-bottom: 30px;
+            margin: 0 0 30px 0;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 24px;
+            letter-spacing: 0.2px;
         }
 
         .tf-apartment-surronding-criteria {
@@ -877,9 +905,11 @@
             @include align-items(center);
             font-size: 18px;
             font-weight: 500;
+            color: #2A3343;
 
             i {
                 margin-right: 8px;
+                color: #607085;
             }
         }
 
@@ -891,17 +921,22 @@
             li {
                 padding: 8px 0 8px 32px;
                 border-bottom: 1px solid $slate5;
-                color: $slate60;
                 @include flexbox();
                 @include align-items(center);
                 @include justify-content(space-between);
+                color: #607085;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 24px;
+                letter-spacing: 0.2px;
             }
         }
     }
 }
 
 .tf-house-rules {
-    margin-bottom: 48px;
+    margin-bottom: 80px;
 
     .tf-house-rules-wrapper {
         @include flexbox();
@@ -931,9 +966,17 @@
                 h6 {
                     margin: 0 0 5px 0;
                     font-weight: 500;
-                    font-size: 18px;
+                    font-size: 18px !important;
                     line-height: 24px;
-                    color: $blue60
+                    color: #2979FF;
+                }
+
+                span{
+                    color: #607085;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 24px;
                 }
 
                 &::before {
@@ -943,6 +986,7 @@
                     top: 0;
                     left: -29px;
                     font-size: 20px;
+                    line-height: 20px;
                     color: $blue60;
                 }
 
@@ -950,9 +994,9 @@
                     content: '';
                     position: absolute;
                     left: -20px;
-                    top: 23px;
+                    top: 17px;
                     width: 2px;
-                    height: 100%;
+                    height: 99%;
                     background: $blue60;
                 }
 
@@ -997,7 +1041,7 @@
 }
 
 .tf-apartment-faq {
-    margin-bottom: 48px;
+    margin-bottom: 24px;
 
     .tf-faq-sec-title {
         margin-bottom: 20px;
@@ -1054,6 +1098,10 @@
                 display: none;
             }
 
+            svg rect{
+                fill: #607085;
+            }
+
             &.active{
                 .tf-faq-plus{
                     display: none;
@@ -1064,6 +1112,16 @@
 
                 h4{
                     color: #2979FF;
+                }
+
+                svg rect{
+                    fill: #607085;
+                }
+            }
+
+            &:hover{
+                svg rect{
+                    fill: #2979FF;
                 }
             }
         }
@@ -1096,7 +1154,7 @@
     text-align: left;
     padding-top: 0;
     padding-bottom: 0;
-    margin-bottom: 48px;
+    margin-bottom: 80px;
 
     @media #{$max767} {
         max-width: 100%;
@@ -1154,18 +1212,22 @@
             justify-content: flex-start;
         }
        
-        h3 {
+        h4 {
             margin: 0;
-            font-size: 20px;
+            font-size: 20px !important;
             color: #2A3343;
-            font-weight: 600;
-            line-height: 32px;
+            font-weight: 600 !important;
+            line-height: 32px !important;
         }
 
         p {
-            font-size: 14px;
             color: #607085;
             margin: 0;
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 24px;
+            letter-spacing: 0.2px;
         }
     }
 
@@ -1216,7 +1278,7 @@
 }
 
 .tf-apartment-review{
-    margin-bottom: 48px;
+    margin-bottom: 80px;
 
     .tf-review-container .tf-total-review{
         margin: 0 0 24px 0;
@@ -1409,7 +1471,7 @@
     padding: 32px;
     margin-bottom: 40px;
 
-    h4 {
+    h5 {
         color: #2A3343;
         font-weight: 500;
         font-size: 18px;
@@ -1427,10 +1489,21 @@
         .tf-apartment-price-per-night {
             margin: 0;
 
-            span:not(.woocommerce-Price-amount, .woocommerce-Price-currencySymbol) {
-                font-size: 16px;
-                font-weight: 600;
+            span.tf-apartment-base-price,
+            span.tf-apartment-base-price span {
                 color: #2A3343;
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 32px;
+            }
+            span{
+                color: #607085;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 24px; /* 150% */
+                letter-spacing: 0.2px;
             }
         }
 
@@ -1475,10 +1548,15 @@
                 padding: 8px 16px;
 
                 .tf-label {
-                    font-size: 12px;
-                    font-weight: 700;
                     text-transform: uppercase;
                     display: inline-block;
+                    color: #2A3343;
+                    text-align: center;
+                    font-size: 10px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 16px; /* 160% */
+                    letter-spacing: 0.2px;
                 }
 
                 .form-control,
@@ -1487,8 +1565,12 @@
                     background-color: transparent;
                     padding: 0;
                     width: 100% !important;
-                    color: $slate60;
+                    color: #607085;
                     font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 24px; /* 150% */
+                    letter-spacing: 0.2px;
 
                     &:focus {
                         outline: none;
@@ -1510,10 +1592,14 @@
             }
 
             .tf-label {
-                font-size: 12px;
-                font-weight: 700;
                 text-transform: uppercase;
                 display: inline-block;
+                color: #2A3343;
+                font-size: 10px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 16px;
+                letter-spacing: 0.2px;
             }
 
             .tf_selectperson-wrap {
@@ -1528,7 +1614,12 @@
                 }
 
                 .tf_input-inner {
+                    color: #607085;
                     font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 24px;
+                    letter-spacing: 0.2px;
                 }
             }
         }

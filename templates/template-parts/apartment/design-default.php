@@ -98,7 +98,7 @@
 					<?php endif; ?>
 
 					<?php
-					if ( tfopt( 'wl-bt-for' ) && in_array( '3', tfopt( 'wl-bt-for' ) ) ) {
+					if ( !empty(tfopt( 'wl-bt-for' )) && tfopt( 'wl-bt-for' ) && in_array( '3', tfopt( 'wl-bt-for' ) ) ) {
 						if ( is_user_logged_in() ) {
 							if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
 								?>
@@ -125,6 +125,16 @@
 								<?php
 							}
 						}
+					} elseif (empty(tfopt( 'wl-bt-for' ))) {
+                        ?>
+                        <a class="tf-wishlist-button" title="<?php esc_html_e( 'Click to toggle wishlist', 'tourfic' ); ?>">
+                            <i class="<?php echo $has_in_wishlist ? 'far tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart"
+                               data-nonce="<?php echo esc_attr( wp_create_nonce( "wishlist-nonce" ) ) ?>"
+                               data-id="<?php echo esc_attr( $post_id ) ?>"
+                               data-type="<?php echo esc_attr( $post_type ) ?>" <?php echo tfopt( 'wl-page' ) ? 'data-page-title="' . esc_attr( get_the_title( tfopt( 'wl-page' ) ) ) . '" data-page-url="' . esc_url( get_permalink( tfopt( 'wl-page' ) ) ) . '"' : ''; ?>></i>
+                            <span><?php esc_html_e( 'Save', 'tourfic' ); ?></span>
+                        </a>
+                        <?php
 					}
 					?>
                 </div>
@@ -269,20 +279,23 @@
 
 					<?php if ( isset( $meta['amenities'] ) && ! empty( tf_data_types( $meta['amenities'] ) ) ) :
 						$fav_amenities = array();
-						foreach ( tf_data_types( $meta['amenities'] ) as $amenity ) {
-							if ( ! isset( $amenity['favorite'] ) || $amenity['favorite'] !== '1' ) {
-								continue;
+						$other_amenities = array();
+						foreach (tf_data_types($meta['amenities']) as $amenity) {
+							if (!isset($amenity['favorite']) || $amenity['favorite'] !== '1') {
+								$other_amenities[] = $amenity;
+							} else {
+								$fav_amenities[] = $amenity;
 							}
-							$fav_amenities[] = $amenity;
 						}
+						$all_amenities = array_merge($fav_amenities, $other_amenities);
 						?>
                         <!-- Start Key Features Section -->
                         <div class="tf-apartment-amenities-section">
                             <h2 class="section-heading"><?php echo ! empty( $meta['amenities_title'] ) ? esc_html( $meta['amenities_title'] ) : ''; ?></h2>
                             <div class="tf-apartment-amenities-inner">
                                 <div class="tf-apartment-amenities">
-									<?php if ( ! empty( $fav_amenities ) ):
-										foreach ( array_slice( $fav_amenities, 0, 10 ) as $amenity ) :
+									<?php if ( ! empty( $all_amenities ) ):
+										foreach ( array_slice( $all_amenities, 0, 10 ) as $amenity ) :
 											$feature = get_term_by( 'id', $amenity['feature'], 'apartment_feature' );
 											$feature_meta = get_term_meta( $amenity['feature'], 'tf_apartment_feature', true );
 											$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
@@ -293,26 +306,8 @@
 											}
 											?>
                                             <div class="tf-apt-amenity">
-												<?php echo ! empty( $feature_icon ) ? "<div class='tf-apt-amenity-icon'>" . wp_kses_post( $feature_icon ) . "</div>" : ""; ?>
+												<?php echo ! empty( $feature_meta['apartment-feature-icon'] ) || !empty($feature_meta['apartment-feature-icon-custom']) ? "<div class='tf-apt-amenity-icon'>" . wp_kses_post( $feature_icon ) . "</div>" : ""; ?>
                                                 <span><?php echo esc_html( $feature->name ); ?></span>
-                                            </div>
-										<?php endforeach; ?>
-									<?php else :
-										foreach ( array_slice( tf_data_types( $meta['amenities'] ), 0, 10 ) as $amenity ) :
-											if ( ! empty( $amenity['feature'] ) ) {
-												$feature      = get_term_by( 'id', $amenity['feature'], 'apartment_feature' );
-												$feature_meta = get_term_meta( $amenity['feature'], 'tf_apartment_feature', true );
-											}
-											$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
-											if ( $f_icon_type == 'icon' ) {
-												$feature_icon = '<i class="' . $feature_meta['apartment-feature-icon'] . '"></i>';
-											} elseif ( $f_icon_type == 'custom' ) {
-												$feature_icon = '<img src="' . esc_url( $feature_meta['apartment-feature-icon-custom'] ) . '" style="width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
-											}
-											?>
-                                            <div class="tf-apt-amenity">
-												<?php echo ! empty( $feature_icon ) ? "<div class='tf-apt-amenity-icon'>" . wp_kses_post( $feature_icon ) . "</div>" : ""; ?>
-                                                <span><?php echo ! empty( $feature->name ) ? esc_html( $feature->name ) : ''; ?></span>
                                             </div>
 										<?php endforeach; ?>
 									<?php endif; ?>
@@ -369,7 +364,7 @@
 																	}
 																	?>
                                                                     <div class="tf-apt-amenity">
-																		<?php echo ! empty( $feature_icon ) ? "<div class='tf-apt-amenity-icon'>" . wp_kses_post( $feature_icon ) . "</div>" : ""; ?>
+																		<?php echo ! empty( $_feature_meta['apartment-feature-icon'] ) || !empty($_feature_meta['apartment-feature-icon-custom']) ? "<div class='tf-apt-amenity-icon'>" . wp_kses_post( $feature_icon ) . "</div>" : ""; ?>
                                                                         <span><?php echo esc_html( $_feature->name ); ?></span>
                                                                     </div>
 																<?php endforeach; ?>
@@ -601,7 +596,7 @@
                         <div class="tf-question-left-inner">
                             <div class="default-enquiry-title-section">
                                 <?php if ( ! empty( $enquiry_section_title ) ) {?>
-                                    <h3><?php echo esc_html( $enquiry_section_title ) ?></h3>
+                                    <h4><?php echo esc_html( $enquiry_section_title ) ?></h4>
                                 <?php } ?>
                             </div>
                             <?php if ( ! empty( $enquiry_section_des ) ) {?>
@@ -611,7 +606,7 @@
                     </div>
 					<?php if ( ! empty( $enquiry_section_button ) ) {?>
                         <div class="tf-btn">
-                            <a href="#" id="tf-ask-question-trigger" class="btn-styled">
+                            <a href="#" id="tf-ask-question-trigger" class="tf-btn-normal btn-primary">
                                 <span><?php echo wp_kses_post( $enquiry_section_button ) ?></span>
                             </a>
                         </div>
@@ -651,9 +646,11 @@
 			),
 		),
 	);
+    $related_args = array_merge( $args, array( 'post__not_in' => array( $post_id ) ) );
 	$related_apartment = new WP_Query( $args );
+	$related_apartment_check = new WP_Query( $related_args );
 
-	if ( $disable_related_sec !== '1' && $related_apartment->have_posts() ) : ?>
+	if ( $disable_related_sec !== '1' && $related_apartment_check->have_posts() ) : ?>
         <div class="tf-related-apartment">
             <div class="tf-container">
                 <h2 class="section-heading"><?php echo ! empty( $meta['related_apartment_title'] ) ? esc_html( $meta['related_apartment_title'] ) : ''; ?></h2>

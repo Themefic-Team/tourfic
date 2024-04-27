@@ -1018,7 +1018,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		<?php }else{ ?>
         <!-- Start Booking widget -->
         <form id="tf-apartment-booking" class="tf-apartment-side-booking" method="get" autocomplete="off">
-            <h4><?php echo ! empty( $meta['booking_form_title'] ) ? esc_html( $meta['booking_form_title'] ) : esc_html_e( 'Book your Apartment', 'tourfic' ); ?></h4>
+            <h5><?php echo ! empty( $meta['booking_form_title'] ) ? esc_html( $meta['booking_form_title'] ) : esc_html_e( 'Book your Apartment', 'tourfic' ); ?></h5>
             <div class="tf-apartment-form-header">
 				<?php if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' ) || $tf_booking_type == 1 ) : ?>
                     <h3 class="tf-apartment-price-per-night">
@@ -1039,16 +1039,16 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 							$lowest_price = wc_price( $apartment_min_price );
 							
 							if ( ! empty( $apartment_min_discount ) ) {
-								echo "<b>" . esc_html__("From ", "tourfic") . "</b>" . "<del>" . esc_html( wp_strip_all_tags(wc_price( $apartment_min_main_price )) ) . "</del>" . " " . wp_kses_post( $lowest_price );
+								echo "<del>" . esc_html( wp_strip_all_tags(wc_price( $apartment_min_main_price )) ) . "</del>" . " " . wp_kses_post( $lowest_price );
 							} else {
-								echo esc_html__("From ", "tourfic") . wp_kses_post(wc_price( $apartment_min_main_price ));	;
+								echo wp_kses_post(wc_price( $apartment_min_main_price ));	;
 							}
 							?>
 						</span>
 						<?php if ( $pricing_type == "per_night") : ?>
-                        	<span><?php esc_html_e( '/per night', 'tourfic' ) ?></span>
+                        	<span><?php esc_html_e( '/ per night', 'tourfic' ) ?></span>
 						<?php else : ?>
-							<span><?php esc_html_e( '/per person', 'tourfic' ) ?></span>
+							<span><?php esc_html_e( '/ per person', 'tourfic' ) ?></span>
 						<?php endif; ?>
 
                     </h3>
@@ -1080,7 +1080,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 
                     <div class="tf_form-row tf-apartment-guest-row">
                         <label class="tf_label-row">
-                            <span class="tf-label"><?php esc_html_e( 'Guests', 'tourfic' ); ?></span>
+                            <span class="tf-label"><?php esc_html_e( 'Guest', 'tourfic' ); ?></span>
                             <div class="tf_form-inner">
                                 <div class="tf_selectperson-wrap">
                                     <div class="tf_input-inner">
@@ -1136,12 +1136,12 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                 <div class="tf-btn">
 					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' ) || $tf_booking_type == 1 ) : ?>
                         <?php if (!empty($apt_reserve_button_text)) : ?>
-							<button class="tf_button tf-submit btn-styled" type="submit"><?php echo esc_html( $apt_reserve_button_text ); ?></button>
+							<button class="tf-btn-normal btn-primary" type="submit"><?php echo esc_html( $apt_reserve_button_text ); ?></button>
 						<?php endif; ?>
 					<?php else: ?>
 						<?php if (!empty($apt_reserve_button_text)) : ?>
 							<a href="<?php echo esc_url( $tf_booking_url ); ?>"
-							class="tf_button tf-submit btn-styled" <?php echo ! empty( $tf_booking_attribute ) ? esc_attr( $tf_booking_attribute ) : ''; ?> target="_blank"><?php echo esc_html( $apt_reserve_button_text ); ?></a>
+							class="tf-btn-normal btn-primary" <?php echo ! empty( $tf_booking_attribute ) ? esc_attr( $tf_booking_attribute ) : ''; ?> target="_blank"><?php echo esc_html( $apt_reserve_button_text ); ?></a>
 						<?php endif; ?>
 					<?php endif; ?>
                 </div>

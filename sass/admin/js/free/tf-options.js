@@ -355,10 +355,21 @@
         * Icon search
         * @author: Foysal
         */
-        $(document).on('change keyup', '.tf-icon-search-input', function () {
+        //debounce
+        const debounce = (func, delay) => {
+            let debounceTimer;
+            return function () {
+                const context = this;
+                const args = arguments;
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => func.apply(context, args), delay);
+            }
+        }
+
+        $(document).on('keyup', '.tf-icon-search-input', debounce(function (e) {
             let searchVal = $(this).val();
             tfIconFilter(searchVal);
-        });
+        }, 500));
 
         const tfIconFilter = (searchVal) => {
             let type = $('.tf-icon-tab-pane.active').data('type');
