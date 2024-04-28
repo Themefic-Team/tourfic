@@ -3491,6 +3491,7 @@ function tf_custom_wp_kses_allow_tags() {
 	$allowed_tags['clipPath'] = array(
 		'd' => true
 	);
+	$allowed_tags['code'] = true;
 
     return $allowed_tags;
 }

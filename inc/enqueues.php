@@ -773,6 +773,19 @@ function tf_dequeue_theplus_script_on_settings_page($screen) {
 					wp_enqueue_script( $rev_script_handle, $rev_slider_script->src, $rev_slider_script->deps, $rev_slider_script->ver, true );
 				}
 			}
+			
+			if ( wp_script_is('wp-color-picker-alpha', 'enqueued') ) {
+
+				$divi_script_handle = 'wp-color-picker-alpha';
+				$divi_slider_script = $wp_scripts->registered[$divi_script_handle];
+
+				wp_dequeue_script($divi_script_handle);
+				
+				if( isset( $divi_slider_script ) ) {
+
+					wp_enqueue_script( $divi_script_handle, $divi_slider_script->src, $divi_slider_script->deps, $divi_slider_script->ver, true );
+				}
+			}
 		}
 	}
 }

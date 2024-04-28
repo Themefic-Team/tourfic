@@ -143,7 +143,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 		),
 		// Information
 		'information'          => array(
-			'title'  => esc_html__( 'Informations', 'tourfic' ),
+			'title'  => esc_html__( 'Information', 'tourfic' ),
 			'icon'   => 'fa-solid fa-circle-info',
 			'fields' => array(
 				array(
@@ -190,7 +190,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'          => 'language',
 					'type'        => 'text',
 					'label'       => __( 'Tour Languages', 'tourfic' ),
-					'subtitle'    => __( 'Include multiple language seperated by comma (,)', 'tourfic' ),
+					'subtitle'    => __( 'Include multiple languages separated by comma (,)', 'tourfic' ),
 					'field_width' => 50,
 				),
 				array(
@@ -546,7 +546,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'       => 'type',
 					'type'     => 'select',
 					'label'    => __( 'Tour Type', 'tourfic' ),
-					'subtitle' => __( 'Continous: The package will be available every month within the mentioned range. Fixed: The Tour package will be available on a fixed date. ', 'tourfic' ),
+					'subtitle' => __( 'Continuous: The package will be available every month within the mentioned range. Fixed: The Tour package will be available on a fixed date. ', 'tourfic' ),
 					'class'    => 'tour-type',
 					'options'  => [
 						'continuous' => __( 'Continuous', 'tourfic' ),
@@ -559,7 +559,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'         => 'custom_avail',
 					'type'       => 'switch',
 					'label'      => __( 'Custom Availability', 'tourfic' ),
-					'subtitle' => __( 'If you need to set custom availablity for this tour, enable this option. ', 'tourfic' ),
+					'subtitle' => __( 'If you need to set custom availability for this tour, enable this option. ', 'tourfic' ),
 					'is_pro'     => true,
 					'dependency' => array( 'type', '==', 'continuous' ),
 					'label_on'   => __( 'Yes', 'tourfic' ),
@@ -931,7 +931,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'    => 'tour-booking-heading',
 					'type'  => 'heading',
 					'label' => 'Booking Settings',
-					'subtitle' => __( 'This section offer the options to customize the booking process for your tours.', 'tourfic' ),
+					'subtitle' => __( 'This section offers the option to customize the booking process for your tours.', 'tourfic' ),
 				),
 				array(
 					'id'      => 'tour-booking-docs',
