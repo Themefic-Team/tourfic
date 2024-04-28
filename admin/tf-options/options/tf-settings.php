@@ -112,7 +112,7 @@ TF_Settings::option( 'tf_settings', array(
 											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design2-hotel.jpg",
 										),
 										'default'  => array(
-											'title' => 'Defult',
+											'title' => 'Default',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-hotel.jpg",
 										),
 									),
@@ -328,7 +328,7 @@ TF_Settings::option( 'tf_settings', array(
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design2.jpg",
 										),
 										'default'  => array(
-											'title' => 'Defult',
+											'title' => 'Default',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-default.jpg",
 										),
 									),
@@ -399,7 +399,7 @@ TF_Settings::option( 'tf_settings', array(
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design2-tour.jpg",
 										),
 										'default'  => array(
-											'title' => 'Defult',
+											'title' => 'Default',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-tour.jpg",
 										),
 									),
@@ -645,7 +645,7 @@ TF_Settings::option( 'tf_settings', array(
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/tour-archive-design-2.jpg",
 										),
 										'default'  => array(
-											'title' => 'Defult',
+											'title' => 'Default',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/tour-archive-default.jpg",
 										),
 									),
@@ -1554,7 +1554,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'notice',
 									'type'    => 'notice',
-									'content' => __( 'Use shortcode <code>[tf_registration_form]</code> to show registration form in post/page/widget.', 'tourfic' ),
+									'content' => wp_kses(__( 'Use shortcode <code>[tf_registration_form]</code> to show registration form in post/page/widget.', 'tourfic' ), tf_custom_wp_kses_allow_tags() ),
 								),
 								array(
 									'id'       => 'email-verify',
@@ -1573,7 +1573,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'notice_shortcode',
 									'type'    => 'notice',
-									'content' => __( 'Use shortcode <code>[tf_login_form]</code> to show login form in post/page/widget.', 'tourfic' ),
+									'content' => wp_kses(__( 'Use shortcode <code>[tf_login_form]</code> to show login form in post/page/widget.', 'tourfic' ), tf_custom_wp_kses_allow_tags() ),
 								),
 								array(
 									'id'         => 'partner_commission',
@@ -1915,7 +1915,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'      => 'global_design_notice',
 					'type'    => 'notice',
 					'style'   => 'info',
-					'content' => __( "To ensure maximum compatiblity with your theme, all Heading (h1-h6), Paragraph & Link's Color-Font Styles are not controlled by Tourfic. Those need to be edited using your Theme's option Panel.", "tourfic" ),
+					'content' => __( "To ensure maximum compatibility with your theme, all Heading (h1-h6), Paragraph & Link's Color-Font Styles are not controlled by Tourfic. Those need to be edited using your Theme's option Panel.", "tourfic" ),
 				),
 				array(
 					'id'       => 'tourfic-design1-global-color',
@@ -3124,7 +3124,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'          => 'wl-page',
 					'type'        => 'select2',
 					'label'       => __( 'Select Wishlist Page', 'tourfic' ),
-					'subtitle' => __( 'Choose a page to serve as the Wihslist Page.', 'tourfic' ),
+					'subtitle' => __( 'Choose a page to serve as the wishlist Page.', 'tourfic' ),
 					'placeholder' => __( 'Select Wishlist Page', 'tourfic' ),
 					'options'     => 'posts',
 					'query_args'  => array(
