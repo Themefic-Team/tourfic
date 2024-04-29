@@ -182,7 +182,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'          => 'language',
 					'type'        => 'text',
 					'label'       => __( 'Tour Languages', 'tourfic' ),
-					'subtitle'    => __( 'Include multiple language seperated by comma (,)', 'tourfic' ),
+					'subtitle'    => __( 'Include multiple languages separated by comma (,)', 'tourfic' ),
 					'field_width' => 50,
 				),
 				array(
@@ -505,7 +505,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'       => 'type',
 					'type'     => 'select',
 					'label'    => __( 'Tour Type', 'tourfic' ),
-					'subtitle' => __( 'Continous: The package will be available every month within the mentioned range. Fixed: The Tour package will be available on a fixed date. ', 'tourfic' ),
+					'subtitle' => __( 'Continuous: The package will be available every month within the mentioned range. Fixed: The Tour package will be available on a fixed date. ', 'tourfic' ),
 					'class'    => 'tour-type',
 					'options'  => [
 						'continuous' => __( 'Continuous', 'tourfic' ),
@@ -513,10 +513,140 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'default'  => 'continuous',
 
 				),
+				array(
+					'id'         => 'custom_avail',
+					'type'       => 'switch',
+					'label'      => __( 'Custom Availability', 'tourfic' ),
+					'subtitle' => __( 'If you need to set custom availability for this tour, enable this option. ', 'tourfic' ),
+					'is_pro'     => true,
+					'dependency' => array( 'type', '==', 'continuous' ),
+					'label_on'   => __( 'Yes', 'tourfic' ),
+					'label_off'  => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'         => 'cont_custom_date',
+					'type'       => 'repeater',
+					'label'      => __( 'Allowed Dates', 'tourfic' ),
+					'is_pro'     => true,
+					'dependency' => array(
+						array( 'type', '==', 'continuous' ),
+						array( 'custom_avail', '==', 'true' ),
+					),
+					'fields'     => array(
+						array(
+							'id'         => '',
+							'type'       => 'date',
+							'label'      => __( 'Date Range', 'tourfic' ),
+							'is_pro'     => true,
+							'format'     => 'Y/m/d',
+							'range'      => true,
+							'label_from' => 'Start Date',
+							'label_to'   => 'End Date',
+							'attributes' => array(
+								'autocomplete' => 'off',
+							),
+						),
+						array(
+							'id'     => '',
+							'type'   => 'number',
+							'label'       => __( 'Minimum Person', 'tourfic' ),
+							'subtitle'    => __( 'Specify the minimum person required to book this tour.','tourfic' ),
+							'is_pro' => true,
+						),
+						array(
+							'id'     => '',
+							'type'   => 'number',
+							'label'       => __( 'Maximum Person', 'tourfic' ),
+							'subtitle'    => __( 'Indicate the maximum number of persons this package can be booked for.','tourfic'), 
+							'is_pro' => true,
+						),
+						array(
+							'id'       => 'pricing',
+							'type'     => 'select',
+							'label'    => __( 'Pricing rule', 'tourfic' ),
+							'subtitle' => __( 'Select your pricing logic', 'tourfic' ),
+							'is_pro'   => true,
+							'class'    => 'pricing',
+							'options'  => [
+								'person' => __( 'Per Person', 'tourfic' ),
+								'group'  => __( 'Per Group', 'tourfic' ),
+							],
+							'default'  => 'person',
+						),
+						array(
+							'id'         => '',
+							'type'       => 'number',
+							'label'      => __( 'Price for Adult', 'tourfic' ),
+							'subtitle'    => __( 'Insert amount only. If you chose "per group" pricing rule, then no need to fill this up.', 'tourfic' ),
+							'is_pro'     => true,
+							'dependency' => array( 'pricing', '==', 'person' ),
+							'attributes' => array(
+								'min' => '0',
+							),
+						),
+						array(
+							'id'         => '',
+							'type'       => 'number',
+							'label'      => __( 'Price for Child', 'tourfic' ),
+							'subtitle'    => __( 'Insert amount only. If you chose "per group" pricing rule, then no need to fill this up.', 'tourfic' ),
+							'is_pro'     => true,
+							'dependency' => array( 'pricing', '==', 'person' ),
+							'attributes' => array(
+								'min' => '0',
+							),
+						),
+						array(
+							'id'         => '',
+							'type'       => 'number',
+							'label'      => __( 'Price for Infant', 'tourfic' ),
+							'subtitle'    => __( 'Insert amount only. If you chose "per group" pricing rule, then no need to fill this up.', 'tourfic' ),
+							'is_pro'     => true,
+							'dependency' => array( 'pricing', '==', 'person' ),
+							'attributes' => array(
+								'min' => '0',
+							),
+						),
+						array(
+							'id'         => '',
+							'type'       => 'number',
+							'dependency' => array( 'pricing', '==', 'group' ),
+							'label'      => __( 'Group Price', 'tourfic' ),
+							'subtitle'    => __( 'Insert amount only. If you chose "per person" pricing rule, then no need to fill this up.', 'tourfic' ),
+							'is_pro'     => true,
+							'attributes' => array(
+								'min' => '0',
+							),
+						),
+						array(
+							'id'     => 'allowed_time',
+							'type'   => 'repeater',
+							'label'  => __( 'Allowed Time', 'tourfic' ),
+							'is_pro' => true,
+							'fields' => array(
+
+								array(
+									'id'       => '',
+									'type'     => 'date',
+									'label'    => __( 'Time', 'tourfic' ),
+									'subtitle' => __( 'Choose the time of day when bookings for this tour are available within the specified date period.', 'tourfic' ),
+									'is_pro'   => true,
+									'settings' => array(
+										'noCalendar' => true,
+										'enableTime' => true,
+										'dateFormat' => "h:i K"
+									),
+								),
+
+
+							),
+						),
+
+					),
+				),
 				/**
 				 * Custom: No
 				 *
-				 * Continuous Avaialbility
+				 * Continuous Availability
 				 */
 				array(
 					'id'          => 'cont_min_people',
@@ -604,7 +734,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'    => 'tour-booking-heading',
 					'type'  => 'heading',
 					'label' => 'Booking Settings',
-					'subtitle' => __( 'This section offer the options to customize the booking process for your tours.', 'tourfic' ),
+					'subtitle' => __( 'This section offers the option to customize the booking process for your tours.', 'tourfic' ),
 				),
 				array(
 					'id'      => 'tour-booking-docs',
