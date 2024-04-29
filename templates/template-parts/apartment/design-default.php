@@ -167,7 +167,7 @@
 								<?php endif; ?>
 								<?php if ( ! empty( $third_image ) ): ?>
                                     <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[2], 'full' ) ); ?>"
-                                       data-fancybox="hotel-gallery" class="hero-third-image">
+                                       data-fancybox="hotel-gallery" class="hero-third-image <?php echo count( $gallery_ids ) > 3 ? 'has-more' : ''; ?>">
 										<?php echo wp_kses_post( $third_image ); ?>
                                     </a>
 								<?php endif; ?>
@@ -401,10 +401,13 @@
                             </div>
                         </div>
                         <div class="host-bottom">
-                            <h4><?php echo esc_html__( "During Your Stay", 'tourfic' ); ?></h4>
-                            <p class="host-desc">
-								<?php echo wp_kses_post( get_the_author_meta( 'description', $post_author_id ) ); ?>
-                            </p>
+                            <?php if(!empty( get_the_author_meta( 'description', $post_author_id ))) : ?>
+                                <h5><?php echo esc_html__( "During Your Stay", 'tourfic' ); ?></h5>
+                                <p class="host-desc">
+                                    <?php echo wp_kses_post( get_the_author_meta( 'description', $post_author_id ) ); ?>
+                                </p>
+                            <?php endif; ?>
+
                             <ul>
 								<?php
 								if ( ! empty( get_the_author_meta( 'language', $post_author_id ) ) ) {
@@ -412,7 +415,7 @@
 								}
 								?>
                             </ul>
-                            <a href="" id="tf-ask-question-trigger" class="tf-apartment-contact-button"><i class="fas fa-phone"></i><?php esc_html_e( 'Contact Host', 'tourfic' ) ?></a>
+                            <a href="" id="tf-ask-question-trigger" class="tf-apartment-contact-button btn-primary"><i class="fas fa-phone"></i><?php esc_html_e( 'Contact Host', 'tourfic' ) ?></a>
                         </div>
                     </div>
                 </div>
