@@ -233,6 +233,20 @@
 }
 
 .tf-apartment {
+
+    .btn-primary{
+        color: #F8F9FB;
+        text-align: center;
+        font-size: 16px !important;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px !important;
+        letter-spacing: 0.5px;
+        padding: 12px 24px;
+        border-radius: 8px;
+        background: #2979FF;
+        box-shadow: 0px 1px 1px 0px rgba(0, 60, 121, 0.16);
+    }
     .section-heading {
         font-weight: 600 !important;
         font-size: 24px !important;
@@ -242,7 +256,7 @@
     }
 
     .tf-apt-hero-section{
-        margin-bottom: 48px;
+        margin-bottom: 40px;
     }
     .tf-apt-hero-wrapper {
         position: relative;
@@ -256,6 +270,10 @@
         .tf-apt-hero-gallery {
             @include flexbox();
             gap: 24px;
+
+            @media #{$max575} {
+                gap: 16px;
+            }
 
             img {
                 object-fit: cover;
@@ -276,7 +294,7 @@
                 }
 
                 .hero-first-image{
-                    height: 500px;
+                    height: 424px;
 
                     @media #{$max575} {
                         height: 300px;
@@ -293,13 +311,32 @@
                 @media #{$max991} {
                     @include flex(0 0 calc(50% - 12px));
                 }
+                @media #{$max575} {
+                    gap: 16px;
+                }
 
                 .hero-second-image,
                 .hero-third-image{
-                    height: 238px;
+                    height: 200px;
 
                     @media #{$max575} {
                         height: 142px;
+                    }
+                }
+
+                .has-more{
+                    position: relative;
+
+                    &::after{
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        height: 100%;
+                        width: 100%;
+                        background: #000;
+                        opacity: .5;
+                        border-radius: 8px;
                     }
                 }
             }
@@ -331,7 +368,7 @@
     .tf-apartment-content-wrapper {
         @include flexbox();
         @include flex-wrap(wrap);
-        gap: 32px;
+        gap: 24px;
 
         @media #{$max991} {
             flex-direction: column-reverse;
@@ -358,9 +395,7 @@
         @include flexbox();
         @include flex-wrap(wrap);
         gap: 16px;
-        padding-bottom: 24px;
-        border-bottom: 1px solid $slate10;
-        margin-bottom: 24px !important;
+        margin-bottom: 48px;
 
         &.slick-dotted{
             padding-bottom: 70px;
@@ -453,29 +488,37 @@
 
     /* Rooms */
     .tf-apartment-rooms {
-        margin-bottom: 48px;
+        margin-bottom: 80px;
+
+        .slick-list{
+            margin: 0 -12px !important;
+        }
 
         .slick-track{
             margin: 0 !important;
         }
 
-        .slick-prev {
-            left: 1px;
-        }
-
         .slick-arrow {
-            display: block;
+            display: inline-block;
             z-index: 999;
-            right: 12px;
+            right: 0;
             top: 80px;
-            bottom: 136px;
+            height: 40px;
+            width: 40px;
+
+            svg{
+                padding: 8px;
+                border-radius: 50%;
+                border: 1px solid #E1E5EA;
+                background: rgba(255, 255, 255, 0.70);
+                box-shadow: 0px 5px 10px 0px rgba(0, 44, 102, 0.20);
+            }
         }
-
-        
-
+        .slick-prev {
+            left: 0;
+        }
         .slick-arrow::before {
-            font-size: 32px;
-            color: rgba(255, 255, 255, 0.70);
+            display: none;
         }
 
         .slick-dotted.slick-slider{
@@ -523,7 +566,7 @@
         }
 
         .tf-apartment-room-item {
-            margin: 0 8px !important;
+            margin: 0 12px !important;
 
             .tf-apartment-room-item-thumb{
                 overflow: hidden;
@@ -578,7 +621,7 @@
 
         .tf-apartment-amenities-inner{
             border-radius: 8px;
-            border: 1px solid var(--Slate-5, #F0F2F4);
+            border: 1px solid #F0F2F4;
             background: var(--Slate-0, #F8F9FB);
             padding: 24px 40px;
         }
@@ -619,6 +662,7 @@
                 font-weight: 500;
                 color: #2A3343;
                 cursor: pointer;
+                text-decoration: none;
             }
         }
     }
@@ -748,7 +792,7 @@
         flex-direction: column;
         gap: 8px;
 
-        h4 {
+        h5 {
             font-size: 18px;
             font-style: normal;
             font-weight: 500;
@@ -796,25 +840,13 @@
 
         }
 
-        .btn-styled {
-            width: auto !important;
-            display: block;
-        }
-
         .tf-apartment-contact-button {
-            display: inline-block;
-            margin-top: 16px;
-            padding: 12px 24px;
+            padding: 11px 24px;
             border-radius: 4px;
-            background-color: #fff;
+            background-color: #fff !important;
+            color: #2979FF !important;
             border: 1px solid #2979FF;
-            text-align: center;
-            font-size: 16px;
-            font-weight: 500;
-            line-height: 1.5;
             text-decoration: none;
-            color: #2979FF;
-            transition: all 0.3s ease-in-out;
 
             i {
                 padding-right: 8px;
@@ -876,6 +908,7 @@
 
         @media #{$max767} {
             @include flex(0 0 100%);
+            padding-left: 0;
         }
 
         .surroundings_sec_title {
@@ -1536,9 +1569,9 @@
 
     .tf-apartment-form-fields {
         background: $blue0;
-        border: 1px solid $slate5;
+        border: 1px solid #F0F2F4;
         border-radius: 8px;
-        margin-bottom: 24px;
+        margin-bottom: 16px;
 
         .tf_booking-dates {
             @include flexbox();
@@ -1547,6 +1580,7 @@
             .tf-check-out-date {
                 width: 50%;
                 padding: 8px 16px;
+                text-align: center;
 
                 .tf-label {
                     text-transform: uppercase;
@@ -1575,6 +1609,7 @@
                 line-height: 24px; /* 150% */
                 letter-spacing: 0.2px;
                 cursor: pointer;
+                text-align: center;
 
                 &:focus {
                     outline: none;
@@ -1594,7 +1629,7 @@
             }
 
             .tf-check-in-date {
-                border-right: 1px solid $slate10;
+                border-right: 1px solid #F0F2F4;
             }
 
             #check-in-out-date {
@@ -1606,7 +1641,7 @@
         }
 
         .tf-apartment-guest-row {
-            border-top: 1px solid $slate10;
+            border-top: 1px solid #F0F2F4;
             padding: 8px 16px;
 
             label {
@@ -1632,7 +1667,8 @@
 
                 .tf_acrselection-wrap {
                     left: 0;
-                    right: auto;
+                    right: 0;
+                    width: auto;
                 }
 
                 .tf_input-inner {
