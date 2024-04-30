@@ -5945,9 +5945,15 @@ div#tf-contact-info {
       left: 0; }
     .tf-apartment .tf-apartment-rooms .slick-arrow::before {
       display: none; }
-    .tf-apartment .tf-apartment-rooms .slick-dotted.slick-slider {
-      margin-bottom: 0;
-      padding-bottom: 40px; }
+    .tf-apartment .tf-apartment-rooms .tf-apartment-default-design-room-slider::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -1px;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(270deg, #FFF -0.06%, rgba(255, 255, 255, 0) 15.54%);
+      border-radius: 8px; }
     .tf-apartment .tf-apartment-rooms .slick-dots {
       bottom: 0; }
       .tf-apartment .tf-apartment-rooms .slick-dots li {
