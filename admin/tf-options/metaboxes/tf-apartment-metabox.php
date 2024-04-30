@@ -134,61 +134,12 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				),
 				//Property Surroundings
 				array(
-					'id'    => 'surroundings_heading',
-					'type'  => 'heading',
-					'label' => esc_html__( 'Property Surroundings', 'tourfic' ),
-				),
-				array(
-					'id'       => 'surroundings_sec_title',
-					'type'     => 'text',
-					'label'    => esc_html__( 'Title of the Section', 'tourfic' ),
-					'is_pro'   => true,
-				),
-				array(
-					'id'       => 'surroundings_subtitle',
-					'type'     => 'text',
-					'label'    => esc_html__( 'Section Description', 'tourfic' ),
-					'is_pro'   => true,
-				),
-				array(
-					'id'     => 'surroundings_places',
-					'type'   => 'repeater',
-					'label'    => esc_html__( 'Add Surrounding Places', 'tourfic' ),
-					'button_title' => esc_html__( 'Add New Criteria & Place', 'tourfic' ),
-					'is_pro' => true,
-					'fields' => array(
-						array(
-							'id'          => 'place_criteria_label',
-							'type'        => 'text',
-							'label'    => esc_html__( 'Place Criteria Heading', 'tourfic' ),
-							'placeholder' => esc_html__( 'Enter place criteria label', 'tourfic' ),
-						),
-						array(
-							'id'    => 'place_criteria_icon',
-							'type'  => 'icon',
-							'label' => esc_html__( 'Criteria Icon', 'tourfic' ),
-						),
-						array(
-							'id'     => 'places',
-							'type'   => 'repeater',
-							'label'  => esc_html__( 'Places', 'tourfic' ),
-							'button_title' => esc_html__( 'Add New Place', 'tourfic' ),
-							'fields' => array(
-								array(
-									'id'          => 'place_name',
-									'type'        => 'text',
-									'label'       => esc_html__( 'Place Name', 'tourfic' ),
-									'placeholder' => esc_html__( 'Enter place name', 'tourfic' ),
-								),
-								array(
-									'id'          => 'place_distance',
-									'type'        => 'text',
-									'label'       => esc_html__( 'Place Distance', 'tourfic' ),
-									'placeholder' => esc_html__( 'Enter place distance', 'tourfic' ),
-								),
-							),
-						)
-					),
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-information-fill',
+					'content' => wp_kses_post(__( 'We\'re offering an additional feature called <b>property surroundings</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of this fantastic option!</a>', 'tourfic' ) ),
 				),
 			),
 		),
