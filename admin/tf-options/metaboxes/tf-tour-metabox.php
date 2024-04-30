@@ -367,7 +367,6 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'class'    => 'pricing',
 					'options'  => [
 						'person' => __( 'Per Person', 'tourfic' ),
-						''       => __( 'Per Group (Pro)', 'tourfic' ),
 					],
 					'default'  => 'person',
 				),
@@ -413,17 +412,6 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						'min' => '0',
 					),
 					'field_width' => '33.33',
-				),
-				array(
-					'id'         => '',
-					'type'       => 'number',
-					'dependency' => array( 'pricing', '==', 'group' ),
-					'label'      => __( 'Price per Group', 'tourfic' ),
-					'subtitle'   => __( 'Insert amount only', 'tourfic' ),
-					'is_pro'     => true,
-					'attributes' => array(
-						'min' => '0',
-					),
 				),
 				array(
 					'id'       => 'discount_type',
@@ -479,7 +467,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'class' => 'tf-pro-notice',
 					'notice' => 'info',
 					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'Are you interested in collecting upfront or partial payments for your tours? Our <b>deposit option</b> allows you to set an upfront payment, either as a <b>percentage</b> or a <b>fixed</b> amount, which travelers can pay at the time of booking. <a href="https://tourfic.com/" target="_blank">Upgrade to our Pro package today to take advantage of this fantastic option!</a>', 'tourfic' ) ),
+					'content' => wp_kses_post(__( 'Are you interested in collecting upfront or partial payments for your tours? Our <b>deposit option</b> allows you to set an upfront payment, either as a <b>percentage</b> or a <b>fixed</b> amount, which travelers can pay at the time of booking. Our pro package also include <b>group pricing</b> for a group of travelers. <a href="https://tourfic.com/" target="_blank">Upgrade to our Pro package today to take advantage of this fantastic option!</a>', 'tourfic' ) ),
 				),
 			),
 		),
