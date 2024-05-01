@@ -713,6 +713,8 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 			$meta            = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
 			$airport_service = $meta['airport_service'] ?? null;
 			$avail_by_date   = ! empty( $room_data['avil_by_date'] ) ? $room_data['avil_by_date'] : '';
+			$tf_room_discount_type = !empty($room_data['discount_hotel_type']) ? $room_data['discount_hotel_type'] : 'none';
+			$tf_room_discount_amount = $tf_room_discount_type != 'none' ? ( !empty($room_data['discount_hotel_price']) ? $room_data['discount_hotel_price'] : 0 ) : 0;
 			if ( $avail_by_date ) {
 				$avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
 			}
@@ -776,6 +778,13 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 				} else {
 					$price_total = $total_price * $room_selected;
 				}
+			}
+
+			// Discount Calculation
+			if($tf_room_discount_type == "percent") {
+				$price_total = !empty($price_total) ? floatval( preg_replace( '/[^\d.]/', '',number_format( (int) $price_total - ( ( (int) $price_total / 100 ) * (int) $tf_room_discount_amount ), 2 ) ) ) : 0;
+			}elseif ( $tf_room_discount_type == 'fixed' ) {
+				$price_total = !empty( $price_total ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $price_total - (int) $tf_room_discount_amount ), 2 ) ) : 0;
 			}
 
 			# Airport Service Fee

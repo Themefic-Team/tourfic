@@ -174,6 +174,14 @@ function tf_hotel_booking_callback() {
 				$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
 				$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - ( ( (int) $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
 			}
+		}else if($hotel_discount_type == "fixed") {
+			if($pricing_by == 1) {
+				$room_price = floatval( preg_replace( '/[^\d.]/', '',number_format( (int) $room_price - (int) $hotel_discount_amount ), 2 ) );
+			}
+			if($pricing_by == 2) {
+				$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - (int) $hotel_discount_amount ), 2 ) );
+				$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - (int) $hotel_discount_amount ), 2 ) );
+			}
 		}
 
 		/**
@@ -222,6 +230,14 @@ function tf_hotel_booking_callback() {
 						if($pricing_by == 2) {
 							$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
 							$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - ( ( (int) $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
+						}
+					} else if($hotel_discount_type == "fixed") {
+						if($pricing_by == 1) {
+							$room_price = floatval( preg_replace( '/[^\d.]/', '',number_format( (int) $room_price - (int) $hotel_discount_amount ), 2 ) );
+						}
+						if($pricing_by == 2) {
+							$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - (int) $hotel_discount_amount ), 2 ) );
+							$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - (int) $hotel_discount_amount ), 2 ) );
 						}
 					}
 
