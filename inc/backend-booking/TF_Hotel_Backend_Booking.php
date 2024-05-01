@@ -221,19 +221,6 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 							'field_width' => 50,
 						),
 						array(
-							'id'          => 'tf_hotel_service_type',
-							'label'       => esc_html__( 'Service Type', 'tourfic' ),
-							'type'        => 'select',
-							'options'     => array(
-								'pickup'  => esc_html__( 'Pickup Service', 'tourfic' ),
-								'dropoff' => esc_html__( 'Drop-off Service', 'tourfic' ),
-								'both'    => esc_html__( 'Pickup & Drop-off Service', 'tourfic' ),
-							),
-							'placeholder' => esc_html__( 'Select Service Type', 'tourfic' ),
-							'field_width' => 50,
-							'is_pro'      => true
-						),
-						array(
 							'id'          => 'tf_available_rooms',
 							'label'       => esc_html__( 'Available Rooms', 'tourfic' ),
 							'type'        => 'select2',
@@ -273,6 +260,14 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 								'min' => '0',
 							),
 							'field_width' => 50,
+						),
+						array(
+							'id'    => 'tf-pro-notice',
+							'type'  => 'notice',
+							'class' => 'tf-pro-notice',
+							'notice' => 'info',
+							'icon' => 'ri-information-fill',
+							'content' => wp_kses_post(__( 'Do you need to add hotel airport services such as pickup, dropoff, or both? Our Pro plan includes the <b>hotel service</b> feature, allowing you to easily add these services with pricing options <b>per person</b>, <b>fixed</b>, or <b>complimentary</b>. Enhance your guest experience by integrating these convenient services seamlessly into your offerings. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of this fantastic option!</a>', 'tourfic') ),
 						),
 					),
 				),

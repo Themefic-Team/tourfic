@@ -2820,7 +2820,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 					<li>
 					<?php
 					if ( ! empty( $feature_icon ) ) {
-						echo esc_attr($feature_icon);
+						echo wp_kses_post( $feature_icon );
 					} ?>
 					<?php echo !empty($features_details->name) ? esc_html($features_details->name) : ''; ?>
 					</li>
