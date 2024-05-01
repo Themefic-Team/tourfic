@@ -249,7 +249,7 @@
                     </button>
                     <?php
                     // Review moderation notice
-                    echo wp_kses_post(tf_pending_review_notice( $post_id ));
+                    echo wp_kses_post(tf_pending_review_notice( $post_id ) ?? '');
                     ?>
                     <?php
                     if ( ! empty( $tf_ratings_for ) ) {

@@ -2011,12 +2011,12 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 						if(selectedDates[0]){
 							const startDate = selectedDates[0];
 							$(".tf-template-3 .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
-							$(".tf-template-3 .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()+1]);
+							$(".tf-template-3 .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
 						}
 						if(selectedDates[1]){
 							const endDate = selectedDates[1];
 							$(".tf-template-3 .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
-							$(".tf-template-3 .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()+1]);
+							$(".tf-template-3 .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
 						}
 					}
 				}
