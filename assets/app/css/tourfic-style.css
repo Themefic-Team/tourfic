@@ -1,3 +1,6 @@
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass/app/css/free/tourfic.scss ***!
+  \*********************************************************************************************************************************************************************************/
 @charset "UTF-8";
 /*
 Button
@@ -11701,9 +11704,10 @@ html {
     width: 100%; }
   .tf-template-3 .tf-itinerary-wrapper .tf-single-itinerary.active .tf-itinerary-title i {
     transform: rotate(180deg); }
-  .tf-template-3 .tf-itinerary-wrapper .tf-itinerary-map {
-    margin-top: 32px;
-    margin-bottom: 48px; }
+
+.tf-template-3 .tf-itinerary-map {
+  margin-top: 32px;
+  margin-bottom: 48px; }
 
 .tf-template-3 .cld-main {
   width: fit-content;
