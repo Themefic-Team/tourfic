@@ -938,11 +938,31 @@ const TFQRSCANER = () => {
         { returnDetailedScanResult: true, preferredCamera : 'user', highlightScanRegion: true, highlightCodeOutline: true }
     );
 
-    QrScanner.listCameras(true).then(cameras => {
-        console.log(cameras)
-    } )
-    qrScanner.setCamera('environment');
 
+    // const backCam = function() {
+    //    return QrScanner.listCameras().then(cameras => {
+    //         if(cameras.length > 0) {
+    //            let backCam = cameras.find(camera => camera.label.includes('facing back'))
+    //            return backCam;
+    //         }
+    //     } )
+    //     return null;
+    // }
+
+    const backCam = function() {
+        return QrScanner.listCameras( async cameras => {
+            console.log(cameras)
+            // if (cameras.length > 0) {
+            //     let backCam = cameras.find(camera => camera.label.includes('facing back'))
+            //     await qrScanner.setCamera( backCam.id ); 
+            // }
+        })
+     }
+
+     backCam()
+
+
+    qrScanner.setCamera();
     qrScanner.start();
     //     checkForCamera();
 
