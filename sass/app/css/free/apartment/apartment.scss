@@ -1584,10 +1584,15 @@
 
         .tf_booking-dates {
             @include flexbox();
+            @include flex-wrap(wrap);
+
+            *{
+                box-sizing: border-box;
+            }
 
             .tf-check-in-date,
             .tf-check-out-date {
-                width: 50%;
+                @include flex(0 0 50%);
                 padding: 8px 16px;
                 text-align: center;
 
@@ -1602,6 +1607,12 @@
                     line-height: 16px; /* 160% */
                     letter-spacing: 0.2px;
                 }
+            }
+
+            .tf-err-msg{
+                @include flex(0 0 100%);
+                text-align: center;
+                font-size: 14px;
             }
 
             .form-control,

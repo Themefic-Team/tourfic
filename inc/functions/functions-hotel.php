@@ -5124,3 +5124,36 @@ if ( ! function_exists( 'tf_hotel_airport_service_title_price' ) ) {
 		return $airport_service_arr;
 	}
 }
+
+/**
+ * Assign taxonomy(hotel_feature) from the single post metabox
+ * to a Tour when updated or published
+ * @return array();
+ * @author Foysal
+ * @since 2.11.25
+ */
+
+add_action( 'wp_after_insert_post', 'tf_hotel_features_assign_taxonomies', 100, 3 );
+function tf_hotel_features_assign_taxonomies( $post_id, $post, $old_status ) {
+	if ( 'tf_hotel' !== $post->post_type ) {
+		return;
+	}
+	$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
+	$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+	if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
+		$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+		}, $rooms );
+		$rooms                = unserialize( $tf_hotel_rooms_value );
+	}
+
+    if ( ! empty( $rooms ) ) {
+        foreach ( $rooms as $room ) {
+            $room_features = ! empty( $room['features'] ) ? $room['features'] : '';
+            if ( ! empty( $room_features ) ) {
+	            $room_features = array_map( 'intval', $room_features );
+                wp_set_object_terms( $post_id, $room_features, 'hotel_feature' );
+            }
+        }
+    }
+}

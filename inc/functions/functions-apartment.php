@@ -1149,12 +1149,12 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                 <div class="tf-btn">
 					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' ) || $tf_booking_type == 1 ) : ?>
                         <?php if (!empty($apt_reserve_button_text)) : ?>
-							<button class="tf-btn-normal btn-primary" type="submit"><?php echo esc_html( $apt_reserve_button_text ); ?></button>
+							<button class="tf-btn-normal btn-primary tf-submit" type="submit"><?php echo esc_html( $apt_reserve_button_text ); ?></button>
 						<?php endif; ?>
 					<?php else: ?>
 						<?php if (!empty($apt_reserve_button_text)) : ?>
 							<a href="<?php echo esc_url( $tf_booking_url ); ?>"
-							class="tf-btn-normal btn-primary" <?php echo ! empty( $tf_booking_attribute ) ? esc_attr( $tf_booking_attribute ) : ''; ?> target="_blank"><?php echo esc_html( $apt_reserve_button_text ); ?></a>
+							class="tf-btn-normal btn-primary tf-submit" <?php echo ! empty( $tf_booking_attribute ) ? esc_attr( $tf_booking_attribute ) : ''; ?> target="_blank"><?php echo esc_html( $apt_reserve_button_text ); ?></a>
 						<?php endif; ?>
 					<?php endif; ?>
                 </div>
@@ -1377,13 +1377,13 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                             if (days < minStay) {
                                 $('.tf-submit').attr('disabled', 'disabled');
                                 $('.tf-submit').addClass('disabled');
-                                $('.tf-check-in-out-date .tf_label-row .tf-err-msg').remove();
+                                $('.tf-check-in-out-date .tf_label-row .tf-err-msg, .tf-apartment-design-one-form .tf_booking-dates .tf-err-msg').remove();
 								<?php /* translators: %s minimum stay */ ?>
-                                $('.tf-check-in-out-date .tf_label-row').append('<span class="tf-err-msg"><?php echo sprintf( esc_html__( 'Minimum stay is %s nights', 'tourfic' ), esc_html( $min_stay ) ); ?></span>');
+                                $('.tf-check-in-out-date .tf_label-row, .tf-apartment-design-one-form .tf_booking-dates').append('<span class="tf-err-msg"><?php echo sprintf( esc_html__( 'Minimum stay is %s nights', 'tourfic' ), esc_html( $min_stay ) ); ?></span>');
                             } else {
                                 $('.tf-submit').removeAttr('disabled');
                                 $('.tf-submit').removeClass('disabled');
-                                $('.tf-check-in-out-date .tf_label-row .tf-err-msg').remove();
+                                $('.tf-check-in-out-date .tf_label-row .tf-err-msg, .tf-apartment-design-one-form .tf_booking-dates .tf-err-msg').remove();
                             }
                         }
                     }

@@ -119,7 +119,7 @@
 
             var tf_room_booking_nonce = $("input[name=tf_room_booking_nonce]").val();
             var post_id = $('input[name=post_id]').val();
-            if ($(this).closest('.room-submit-wrap').find('input[name=room_id]').val()) {
+            /*if ($(this).closest('.room-submit-wrap').find('input[name=room_id]').val()) {
                 var room_id = $(this).closest('.room-submit-wrap').find('input[name=room_id]').val();
             } else {
                  // var unique_id = $("#hotel_roomid").val();
@@ -130,7 +130,9 @@
             } else {
                 var unique_id = $("#hotel_room_uniqueid").val();
                 // var unique_id = $(this).parent().prev().prev().find("input[name=unique_id]").val();
-            }
+            }*/
+            var unique_id = $this.closest('.tf-room').find('input[name=unique_id]').val();
+            var room_id = $this.closest('.tf-room').find('input[name=room_id]').val();
 
             var location = $('input[name=place]').val();
             var adult = $('input[name=adult]').val();

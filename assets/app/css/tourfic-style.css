@@ -1,6 +1,3 @@
-/*!*********************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass/app/css/free/tourfic.scss ***!
-  \*********************************************************************************************************************************************************************************/
 @charset "UTF-8";
 /*
 Button
@@ -6792,10 +6789,17 @@ div#tf-contact-info {
       display: -moz-box;
       display: -ms-flexbox;
       display: -webkit-flex;
-      display: flex; }
+      display: flex;
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
+      #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates * {
+        box-sizing: border-box; }
       #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-date,
       #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-out-date {
-        width: 50%;
+        -webkit-flex: 0 0 50%;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
         padding: 8px 16px;
         text-align: center; }
         #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-date .tf-label,
@@ -6810,6 +6814,12 @@ div#tf-contact-info {
           line-height: 16px;
           /* 160% */
           letter-spacing: 0.2px; }
+      #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-err-msg {
+        -webkit-flex: 0 0 100%;
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        text-align: center;
+        font-size: 14px; }
       #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .form-control,
       #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates #check-in-date,
       #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates #check-out-date {
@@ -10855,7 +10865,8 @@ html {
       height: 53px;
       padding: 15px 32px 16px 16px;
       background: #FDF9F3;
-      width: 100%; }
+      width: 100%;
+      box-sizing: border-box; }
       .tf-template-3 #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-aprtment-check-in-out-date .tf_label_rows {
         display: flex;
         align-items: center;
@@ -10866,7 +10877,8 @@ html {
           padding: 0;
           width: 100% !important;
           color: #607085;
-          font-size: 16px; }
+          font-size: 16px;
+          text-align: left; }
           .tf-template-3 #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-aprtment-check-in-out-date .tf_label_rows input:focus {
             outline: none;
             box-shadow: none; }
@@ -10887,6 +10899,10 @@ html {
             @media only screen and (max-width: 767.98px) {
               .tf-template-3 #tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf_selectperson-wrap .tf-form-title h3.tf-person-info-title {
                 font-size: 20px !important; } }
+        .tf-template-3 #tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf_selectperson-wrap .tf_acrselection {
+          margin-bottom: 24px; }
+          .tf-template-3 #tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf_selectperson-wrap .tf_acrselection:last-child {
+            margin-bottom: 0px; }
   .tf-template-3 #tf-apartment-booking .tf-btn-booking button,
   .tf-template-3 #tf-apartment-booking .tf-btn-booking a {
     border: 1px solid #B58E53;
