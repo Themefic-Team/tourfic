@@ -855,7 +855,6 @@ const TFQRSCANER = () => {
         // After  Successfully Scan QR code
         const afterScanSuccess = function (result) {
             if (result.data) {
-                console.log(result.data)
                 qrScanner.stop();
                 if (tf_pro_params.tour_qr == 2) {
                     jQuery(".tf-scanner-preloader").show();
