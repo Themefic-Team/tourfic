@@ -167,7 +167,7 @@ if ( $comments ) {
 </div>
 <?php
 // Review moderation notice
-echo wp_kses_post(tf_pending_review_notice( $post_id ) ?? '');
+echo wp_kses_post(tf_pending_review_notice( $post_id ) ?? "");
 ?>
 <?php
 if ( ! empty( $tf_ratings_for ) ) {
@@ -234,7 +234,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 		}
 	}
 	// Pending review notice
-	echo wp_kses_post(tf_pending_review_notice( $post_id ) ?? '');
+	echo wp_kses_post(tf_pending_review_notice( $post_id ) ?? "");
 	echo '</div>';
 } 
 }else{
@@ -354,8 +354,8 @@ if ( ! empty( $tf_ratings_for ) ) {
                             <div class="tf-rating-stars">
 								<?php echo wp_kses_post($c_rating); ?>
                             </div>
-                            <?php if( $post_type == 'apartment') { 
-								if( $tf_apartment_selected_template  == "default") { 
+                            <?php if( $post_type == 'apartment') {
+								if( $tf_apartment_selected_template  == "default") {
 									if( strlen($c_content) > 120 ) { ?>
 											<div class="tf-description">
 												<p><?php echo wp_kses_post( tourfic_character_limit_callback($c_content, 120) ) ?></p>
@@ -369,13 +369,13 @@ if ( ! empty( $tf_ratings_for ) ) {
 											</div>
 									<?php
 								}
-							}	
+							}
 							} else { ?>
 								<div class="tf-description"><p><?php echo wp_kses_post($c_content); ?></p></div>
 							<?php } ?>
 							<?php if( $post_type == 'apartment' && $tf_apartment_selected_template  == "default" && strlen($c_content) > 120 ): ?>
 								<div class="tf-apartment-show-more"><?php esc_html_e("Show more", "tourfic") ?></div>
-							
+
 							<?php endif;?>
                         </div>
                     </div>

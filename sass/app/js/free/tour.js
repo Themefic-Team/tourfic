@@ -35,12 +35,13 @@
             jQuery('.tour-extra-single input:checkbox:checked').each(function () {
                 tour_extra_total.push(jQuery(this).val());
 
-                if ($this.find('.tf_quantity-acrselection').hasClass('quantity-active')) {
-                    let qty = $this.find('input[name="extra-quantity"]').val();
+                    if ($this.find('.tf_quantity-acrselection').hasClass('quantity-active')) {
+                        let qty = $this.find('input[name="extra-quantity"]').val();
 
-                    tour_extra_quantity.push(qty)
-                } else {
-                    tour_extra_quantity.push(1)
+                        tour_extra_quantity.push(qty)
+                    } else {
+                        tour_extra_quantity.push(1)
+                    }
                 }
             });
             */
@@ -59,10 +60,10 @@
                        tour_extra_quantity.push(qty)
                    }else{
                     tour_extra_quantity.push(1)
-                   } 
-               }   
+                   }
+               }
            });
-           
+
             formData.append('tour_extra', tour_extra_total);
             formData.append('tour_extra_quantity', tour_extra_quantity);
 

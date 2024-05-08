@@ -60,12 +60,22 @@ function tf_checkinout_details_edit_function() {
 
     global $wpdb;
     $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
+    $tf_woo_order_id = $wpdb->get_row( $wpdb->prepare( "SELECT order_id FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
+
+    $tf_order_uni_id = !empty($tf_woo_order_id) ? get_option("tf_order_uni_" . $tf_woo_order_id->order_id) : "";
 
     // Checkinout Status Update into Database
     if(!empty($tf_order)){
         $wpdb->query(
             $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET checkinout=%s, checkinout_by=%s WHERE id=%s", sanitize_title( $tf_checkinout ), wp_json_encode( $ft_checkinout_by ), sanitize_key($tf_order_id))
         );
+        if(!empty( $tf_order_uni_id )){
+            if($tf_checkinout == "in") {
+                update_option("tf_" . $tf_order_uni_id, "in");
+            } else {
+                update_option("tf_" . $tf_order_uni_id, "");
+            }
+        }
     }
     die();
 }

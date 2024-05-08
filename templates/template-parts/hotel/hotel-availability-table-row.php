@@ -525,8 +525,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                         <div class="tf-deposit-content">
 							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
                                 <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
-                                <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide"
-                                     style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
+                                <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
 							<?php } ?>
 
 							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) && ( $room["deposit_type"] != "none" ) ) { ?>
@@ -827,8 +826,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                         <div class="tf-deposit-content">
 							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
                                 <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
-                                <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide"
-                                     style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
+                                <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
 							<?php } ?>
 
 							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) && ( $room["deposit_type"] != "none" ) ) { ?>
