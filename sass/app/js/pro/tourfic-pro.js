@@ -760,11 +760,11 @@
 
         });
 
-        // QR Code Scan Open
-        $(document).on('click', '.tf_qr_open', function (e) {
-            e.preventDefault();
-            TFQRSCANER();
-        });
+        // // QR Code Scan Open
+        // $(document).on('click', '.tf_qr_open', function (e) {
+        //     e.preventDefault();
+        //     TFQRSCANER();
+        // });
 
         // QR Code Scan Another
         $(document).on('click', '.tf_scan_another', function (e) {
@@ -834,6 +834,9 @@
 })(jQuery);
 
 // QR Code Scan Function
+document.addEventListener('DOMContentLoaded', (event) => {
+    TFQRSCANER();
+})
 
 const TFQRSCANER = () => {
     const video = document.querySelector('#tf-video-preview');
@@ -934,9 +937,10 @@ const TFQRSCANER = () => {
             QrScanner.hasCamera().then(hasCamera => {
                 if (!hasCamera) {
                     alert('No camera found');
+                    jQuery('.camera-warning').show();
+                    jQuery('#tf-video-preview').hide();
                 } else {
                     scanner.start();
-                    document.querySelector('.tf-qr-code-preview').style.display = 'block';
                 }
             });
         }
