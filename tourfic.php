@@ -7,7 +7,7 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.11.25
+ * Version:         2.11.26
  * Tested up to:    6.5
  * WC tested up to: 8.8
  * Requires PHP:    7.4
@@ -55,7 +55,7 @@ define( 'TF_EMAIL_TEMPLATES_PATH', TF_PATH . 'admin/emails/templates/' );
  * @since 1.0
  */
 if ( ! defined( 'TOURFIC' ) ) {
-	define( 'TOURFIC', '2.11.25' );
+	define( 'TOURFIC', '2.11.26' );
 }
 
 // Styles & Scripts

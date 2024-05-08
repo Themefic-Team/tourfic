@@ -760,11 +760,11 @@
 
         });
 
-        // QR Code Scan Open
-        $(document).on('click', '.tf_qr_open', function (e) {
-            e.preventDefault();
-            TFQRSCANER();
-        });
+        // // QR Code Scan Open
+        // $(document).on('click', '.tf_qr_open', function (e) {
+        //     e.preventDefault();
+        //     TFQRSCANER();
+        // });
 
         // QR Code Scan Another
         $(document).on('click', '.tf_scan_another', function (e) {
@@ -834,95 +834,115 @@
 })(jQuery);
 
 // QR Code Scan Function
+document.addEventListener('DOMContentLoaded', (event) => {
+    TFQRSCANER();
+})
+
 const TFQRSCANER = () => {
-    var scanner = new Instascan.Scanner({video: document.getElementById('tf-video-preview'), scanPeriod: 5, mirror: false});
-    scanner.addListener('scan', function (content) {
-        if (tf_pro_params.tour_qr == 2) {
-            jQuery(".tf-scanner-preloader").show();
-            jQuery(".tf_qr_code_number").val(content);
-            var data = {
-                action: 'tf_qr_code_quick_info',
-                _nonce: tf_params.nonce,
-                tf_qr_code: content,
-            };
-            jQuery.ajax({
-                url: tf_params.ajax_url,
-                type: 'post',
-                data: data,
-                success: function (data) {
-                    var response = JSON.parse(data);
-                    if (response.qr_code_result) {
-                        jQuery(".tf-scanner-quick-review").html(response.qr_code_result);
-                        jQuery(".tf-scanner-preloader").hide();
-                        jQuery(".tf-final-submission-form").show();
-                        jQuery(".tf-qr-option").hide();
-                    } else {
-                        jQuery(".tf-scanner-quick-review").html("");
-                        jQuery(".tf-scanner-preloader").hide();
-                        jQuery(".tf-final-error-feedback").show();
-                        jQuery(".tf-qr-option").hide();
-                    }
-                },
-                error: function (data) {
-                    console.log(data);
-                }
-            });
-
-
-        }
-        if (tf_pro_params.tour_qr == 1) {
-            jQuery(".tf-qr-option").hide();
-            jQuery(".tf-scanner-preloader").show();
-            var data = {
-                action: 'tf_qr_code_verification',
-                _nonce: tf_params.nonce,
-                tf_qr_code: content,
-            };
-            jQuery.ajax({
-                url: tf_params.ajax_url,
-                type: 'post',
-                data: data,
-                success: function (data) {
-                    var response = JSON.parse(data);
-                    if (response.qr_code_response == "true") {
-                        jQuery(".tf-final-submission-form").hide();
-                        jQuery(".tf-scanner-preloader").hide();
-                        jQuery(".tf-final-submission-feedback").show();
-                    }
-                    if (response.qr_code_response == "false") {
-                        jQuery(".tf-final-submission-form").hide();
-                        jQuery(".tf-scanner-preloader").hide();
-                        jQuery(".tf-final-error-feedback").show();
-                    }
-                },
-                error: function (data) {
-                    console.log(data);
-                }
-            });
-        }
-        //window.location.href=content;
-    });
-    Instascan.Camera.getCameras().then(function (cameras) {
-        if (cameras.length > 0) {
-            jQuery(".tf-qr-code-preview").show();
-            jQuery(".tf-final-submission-form").hide();
-            jQuery(".tf-final-submission-feedback").hide();
-            jQuery(".tf-final-error-feedback").hide();
-            if (cameras.length == 4) {
-                scanner.start(cameras[2]);
-            } else if (cameras.length == 2) {
-                scanner.start(cameras[1]);
-            } else {
-                scanner.start(cameras[0]);
+    const video = document.querySelector('#tf-video-preview');
+    if(video) {
+        const qrScanner = new QrScanner(
+            video,
+            result => afterScanSuccess(result),
+            { 
+                onDecodeError: error => { },
+                returnDetailedScanResult: true, 
+                highlightScanRegion: true, 
+                highlightCodeOutline: true, 
+                preferredCamera: 'environment'
             }
-
-        } else {
-            console.error('No cameras found.');
-            alert('No cameras found.');
+        );
+    
+        checkCamera(qrScanner);
+    
+        // After  Successfully Scan QR code
+        const afterScanSuccess = function (result) {
+            if (result.data) {
+                qrScanner.stop();
+                if (tf_pro_params.tour_qr == 2) {
+                    jQuery(".tf-scanner-preloader").show();
+                    document.querySelector('.tf_qr_code_number').value = result.data;
+                    var data = {
+                        action: 'tf_qr_code_quick_info',
+                        _nonce: tf_params.nonce,
+                        tf_qr_code: result.data,
+                    };
+                    jQuery.ajax({
+                        url: tf_params.ajax_url,
+                        type: 'post',
+                        data: data,
+                        success: function (data) {
+                            var response = JSON.parse(data);
+                            if (response.qr_code_result) {
+                                jQuery(".tf-scanner-quick-review").html(response.qr_code_result);
+                                jQuery(".tf-scanner-preloader").hide();
+                                jQuery(".tf-final-submission-form").show();
+                                jQuery(".tf-qr-option").hide();
+                            } else {
+                                jQuery(".tf-scanner-quick-review").html("");
+                                jQuery(".tf-scanner-preloader").hide();
+                                jQuery(".tf-final-error-feedback").show();
+                                jQuery(".tf-qr-option").hide();
+                            }
+                        },
+                        error: function (data) {
+                            console.log(data);
+                        }
+                    });
+                }
+                if (tf_pro_params.tour_qr == 1) {
+                    jQuery(".tf-qr-option").hide();
+                    jQuery(".tf-scanner-preloader").show();
+                    var data = {
+                        action: 'tf_qr_code_verification',
+                        _nonce: tf_params.nonce,
+                        tf_qr_code: result.data,
+                    };
+                    jQuery.ajax({
+                        url: tf_params.ajax_url,
+                        type: 'post',
+                        data: data,
+                        success: function (data) {
+                            var response = JSON.parse(data);
+                            if (response.qr_code_response == "true") {
+                                jQuery(".tf-final-submission-form").hide();
+                                jQuery(".tf-scanner-preloader").hide();
+                                jQuery(".tf-final-submission-feedback").show();
+                            }
+                            if (response.qr_code_response == "false") {
+                                jQuery(".tf-final-submission-form").hide();
+                                jQuery(".tf-scanner-preloader").hide();
+                                jQuery(".tf-final-error-feedback").show();
+                            }
+                        },
+                        error: function (data) {
+                            console.log(data);
+                        }
+                    });
+                }
+            }
         }
-    }).catch(function (e) {
-        console.error(e);
-        alert(e);
+    
+        jQuery(".tf_scan_another").on("click", function (e) {
+            e.preventDefault();
+            qrScanner.start();
+        })
 
-    });
+        jQuery(".tf_scan_back").on("click", function (e) {
+            qrScanner.destroy();
+        });
+
+            // Check if device has camera
+        function checkCamera(scanner) {
+            QrScanner.hasCamera().then(hasCamera => {
+                if (!hasCamera) {
+                    alert('No camera found');
+                    jQuery('.camera-warning').show();
+                    jQuery('#tf-video-preview').hide();
+                } else {
+                    scanner.start();
+                }
+            });
+        }
+    }
 }

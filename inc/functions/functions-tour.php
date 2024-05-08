@@ -1971,7 +1971,7 @@ function tf_single_tour_booking_form( $post_id ) {
 							<span class="tf-booking-form-title"><?php esc_html_e("Guests", "tourfic"); ?></span>
 							<div class="tf-booking-guest-and-room-wrap">
 								<span class="tf-guest tf-booking-date">
-									<?php esc_html_e("01", "tourfic"); ?>
+									<?php esc_html_e("00", "tourfic"); ?>
 								</span> 
 								<span class="tf-booking-month">
 									<span><?php esc_html_e("Guest", "tourfic"); ?></span>
@@ -2287,6 +2287,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 
 	// Informations
 	$tour_duration = ! empty( $meta['duration'] ) ? $meta['duration'] : '';
+	$tour_duration_time = ! empty( $meta['duration_time'] ) ? $meta['duration_time'] : '';
 	$group_size    = ! empty( $meta['group_size'] ) ? $meta['group_size'] : '';
 	$features    = ! empty( $meta['features'] ) ? $meta['features'] : '';
 
@@ -2739,8 +2740,11 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 						<i class="ri-team-line"></i> <?php esc_html_e("Max", "tourfic"); ?> <?php echo esc_html($group_size); ?> <?php esc_html_e("people", "tourfic"); ?>
 					</li>
 					<?php } if(!empty($tour_duration)){ ?>
+						<?php
+							$tour_duration_time = $tour_duration > 1 ? $tour_duration_time . 's' : $tour_duration_time;
+						?>
 					<li>
-						<i class="ri-history-fill"></i> <?php echo esc_html($tour_duration); ?> <?php esc_html_e("days", "tourfic"); ?>
+						<i class="ri-history-fill"></i> <?php echo esc_html($tour_duration); ?> <?php esc_html_e($tour_duration_time, "tourfic"); ?>
 					</li>
 					<?php } ?>
 				<?php 
@@ -2762,7 +2766,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 					<li>
 					<?php
 					if ( ! empty( $feature_icon ) ) {
-						echo esc_attr($feature_icon);
+						echo wp_kses($feature_icon, array('i' => array('class' => true),));
 					} ?>
 					<?php echo !empty($features_details->name) ? esc_html($features_details->name) : ''; ?>
 					</li>

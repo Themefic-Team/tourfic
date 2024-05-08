@@ -19,7 +19,6 @@
         margin-bottom: 20px;
     }
     .tf-qr-code-preview{
-        display: none;
         position: relative;
         box-shadow: 0px 13px 30px 0px #e0e8ee;
         padding: 10px;
@@ -186,5 +185,11 @@
     .tf-scanner-section{
         min-width: 100% !important;
         width: 100% !important;
+    }
+
+    .tf-scanner-section .tf-qr-code-preview #tf-video-preview {
+        max-width: 100%;
+        height: 400px;
+        object-fit: cover;
     }
 }

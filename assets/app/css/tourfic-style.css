@@ -4209,6 +4209,10 @@ ul.tf-room-checkbox label {
   border-right: 1px solid #c8e2fc;
 }
 
+.tf-hotel-deposit-hide {
+  display: none;
+}
+
 .tf-room-table .availability-table tbody tr:nth-child(odd) td {
   background: #fff;
 }
@@ -15053,7 +15057,7 @@ html {
   .tf-template-3.tf-tour-single .tf-search-date-wrapper.tf-single-widgets .tf_tours_booking > .tf-field-group,
   .tf-template-3.tf-tour-single .tf-search-date-wrapper.tf-single-widgets .tf_tours_booking > .check-in-time-div,
   .tf-template-3.tf-tour-single .tf-search-date-wrapper.tf-single-widgets .tf-tour-booking-box,
-  .tf-template-3.tf-tour-single .tf-search-date-wrapper.tf-single-widgets .tf_tours_booking > .tf-tours-booking-btn,
+  .tf-template-3.tf-tour-single .tf-search-date-wrapper.tf-single-widgets .tf_tours_booking > .tf-tours-booking-btn .tf-btn,
   .tf-template-3.tf-tour-single .tf-search-date-wrapper.tf-single-widgets .tf-bottom-booking-bar {
     display: none !important;
   }
