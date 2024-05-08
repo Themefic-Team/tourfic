@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.5
-Stable tag: 2.11.25
+Stable tag: 2.11.26
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -322,6 +322,21 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.11.26 - 08 May 2024 =
+
+- Fixed: Tour archive page duration issue
+- Fixed: Tour bottom booking bar guest sync issue
+- Fixed: Tour booking popup not showing template 3
+- Fixed: Hotel single-page date picker issue
+- Fixed: Hotel room price fixed discount issue
+- Fixed: Specific location shortcode issue
+- Fixed: PHP Warning issues
+- Improved: Hotel partial payment price always showing (pro)
+- Improved: Voucher QR code image issue (API changed) (pro)
+- Improved: Tour extra quantity issue (pro)
+- Improved: Scan QR code and Update Booking Status (Pro)
+- Improved: QR Code Tracking (Pro)
+
 = 2.11.25 - 28 April 2024 =
 
 - Improvement: System stability improved
@@ -502,33 +517,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Fixed: Hotel availability calendar pricing issue fixed( Pro )
 - Improved: Booking.com, Travelpayouts full-screen popup add( Pro )
 - Improved: Install and Active WooCommerce using Single Button
-
-= 2.10.13 - 15 December 2023 =
-
-- Improved: Itinerary builder settings
-- Added: Itinerary PDF color settings
-- Fixed: Itinerary Paragraph tag support
-
-= 2.10.12 - 10 December 2023 =
-
-- Updated: Extended Notice( Black Friday )
-- Improvement: System stability Improved
-
-= 2.10.11 - 09 December 2023 =
-
-- Added: External booking added for Apartment(Pro)
-- Added: External listing shortcode added(Pro)
-- Added: Affiliate Addon release(Pro)
-- Fixed: Tour Availability issue fixed
-- Fixed: Location Require Error Message (Tour/Hotel/Apartment)
-- Fixed: Image replace issue on frontend dashboard On Apartment(Pro)
-- Fixed: External booking minor issues fixed for hotels(Pro)
-- Fixed: Import Export Issue
-- Improved: WooCommerce Currency Compatibility
-- Improved: Compatibility Issue with ACF
-- Improved: Pricing Accuracy for Tour/Hotel/Apartment
-- Improved: Per Itinerary Language to Location(Pro)
-- Improved: Booking.com, Travelpayouts full-screen popup add(Pro)
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
