@@ -520,7 +520,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'          => 'cont_max_people',
 					'type'        => 'number',
 					'label'       => __( 'Maximum Person (Required for Search)', 'tourfic' ),
-					'subtitle'    => __( 'Indicate the maximum number of persons this package can be booked for.', 'tourfic' ),
+					'subtitle'    => __( 'Indicate the maximum number of persons this package can be booked for each booking.', 'tourfic' ),
 					'dependency'  => array(
 						array( 'type', '==', 'continuous' ),
 					),

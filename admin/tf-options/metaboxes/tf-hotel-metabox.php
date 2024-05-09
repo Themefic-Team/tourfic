@@ -118,7 +118,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'class' => 'tf-pro-notice',
 					'notice' => 'info',
 					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'We\'re offering an additional booking feature in our pro plan called <b>External Booking</b>. This option provides seamless integration with external booking systems, enhancing your booking capabilities significantly. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of this fantastic option!</a>', 'tourfic' ) ),
+					'content' => wp_kses_post(__( 'We\'re offering some additional features like <b>external booking</b>, <b>taxable hotel</b>, <b>tax class for Woocommerce</b> in our pro plan. The external booking option provides seamless integration with external booking systems, enhancing your booking capabilities significantly. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of this fantastic option!</a>', 'tourfic' ) ),
 				),
 			),
 		),

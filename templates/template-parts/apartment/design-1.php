@@ -295,9 +295,18 @@
                 </div>
                 <a class="tf-all-reviews" href="#tf-hotel-reviews"><?php esc_html_e("See all reviews", "tourfic"); ?></a>
                 <?php } ?>
-                <button class="tf-review-open button">
-                    <?php esc_html_e("Leave your review", "tourfic"); ?>
-                </button>
+                <?php
+                $tf_comment_counts = get_comments( array(
+                    'post_id' => $post_id,
+                    'user_id' => $current_user->ID,
+                    'count'   => true,
+                ) );
+                ?>
+                <?php if( empty($tf_comment_counts) && $tf_comment_counts == 0 ) : ?>
+                    <button class="tf-review-open button">
+                        <?php esc_html_e("Leave your review", "tourfic"); ?>
+                    </button>
+                <?php endif; ?>
                 <?php
                 // Review moderation notice
                 echo wp_kses_post(tf_pending_review_notice( $post_id ) ?? '');

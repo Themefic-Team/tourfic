@@ -38,12 +38,12 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     }
 }
 ?>
-<span class="tf-modify-search-btn">
+<span id="availability" class="tf-modify-search-btn">
     <?php esc_html_e("Modify search", "tourfic"); ?>
 </span>
 <!--Booking form start -->
 <?php if( ($tf_booking_type == 2 && $tf_hide_booking_form !== '1') || $tf_booking_type == 1 || $tf_booking_type == 3) : ?>
-    <div id="availability" class="tf-booking-form-wrapper">
+    <div id="room-availability" class="tf-booking-form-wrapper">
         <?php tf_hotel_sidebar_booking_form(); ?>
     </div>
 <?php endif; ?>

@@ -28,6 +28,26 @@ if ( ! function_exists( 'tf_search_page_default') ) {
 	}
 }
 
+if ( ! function_exists( 'tf_wishlist_page_default') ) {
+	function tf_wishlist_page_default() {
+		$args = array(
+			'post_type'      => 'page',
+			'posts_per_page' => - 1,
+			'post_status' => 'publish',
+		);
+
+		$loop = new WP_Query( $args );
+		if( $loop->have_posts() ) {
+			foreach( $loop->posts as $post ) {
+				if( $post->post_name == 'tf-wishlist') {
+					return $post->ID;
+				}				
+			}
+		}
+		return;
+	}
+}
+
 TF_Settings::option( 'tf_settings', array(
 	'title'    => __( 'Tourfic Settings ', 'tourfic' ),
 	'icon'     => $menu_icon,
@@ -1785,6 +1805,7 @@ TF_Settings::option( 'tf_settings', array(
 					'type'     => 'number',
 					'label'    => __( 'Search Items to show per page', 'tourfic' ),
 					'subtitle' => __( 'Add the total number of hotels/tours/apartments you want to show per page on the Search result.', 'tourfic' ),
+					'default'  => 8,
 				),
 
 				array(
@@ -3153,9 +3174,9 @@ TF_Settings::option( 'tf_settings', array(
 						'posts_per_page' => - 1,
 						'orderby'        => 'post_title',
 						'order'          => 'ASC'
-					)
+					),
+					'default' => tf_wishlist_page_default(),
 				),
-
 			),
 		),
 
