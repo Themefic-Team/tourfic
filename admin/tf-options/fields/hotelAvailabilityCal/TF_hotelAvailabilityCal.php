@@ -76,6 +76,7 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
                             <input type="hidden" name="hotel_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
                             <input type="hidden" name="room_index" value="<?php echo esc_attr( $room_index ); ?>">
                             <span class="tf_room_cal_update button button-primary button-large"><?php echo esc_html__( 'Save Calendar', 'tourfic' ); ?></span>
+                            <button class="tf_room_cal_reset button button-primary button-large" disabled><?php echo esc_html__( 'Reset', 'tourfic' ); ?></button>
                         </div>
 
                     </div>

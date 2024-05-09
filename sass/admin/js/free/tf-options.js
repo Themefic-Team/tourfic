@@ -641,6 +641,8 @@
                     if (event.extendedProps.status) {
                         $("[name='tf_room_status'] option[value=" + event.extendedProps.status + "]", self.roomCalData).prop("selected", true);
                     }
+
+                    $('.tf_room_cal_reset').removeAttr('disabled');
                 },
             };
             this.init = function () {
@@ -758,6 +760,18 @@
                     btn.removeClass('tf-btn-loading');
                 },
             });
+        });
+
+        $(document).on('click', '.tf_room_cal_reset', function (e) {
+            e.preventDefault();
+            let container = $(this).closest('.tf-room-cal-wrap');
+            roomResetForm(container);
+            var room = new roomCal(container[0]);
+            room.init();
+            if (room.fullCalendar) {
+                room.fullCalendar.refetchEvents();
+            }
+            $(this).attr('disabled', 'disabled');
         });
 
         $(document).on('change', '.tf_room_pricing_by', function (e) {
