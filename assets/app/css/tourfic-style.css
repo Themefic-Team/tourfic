@@ -11584,7 +11584,9 @@ html {
       padding: 16px 32px;
       display: flex;
       flex-direction: column;
-      gap: 24px; }
+      gap: 24px;
+      cursor: pointer;
+      user-select: none; }
     .tf-template-3 .tf-itinerary-wrapper .tf-itinerary-wrapper .tf-itinerary-title {
       display: flex;
       justify-content: space-between;
