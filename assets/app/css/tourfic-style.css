@@ -10371,6 +10371,12 @@ html {
 .tf-template-3 .tf-related-tours {
   background-color: #FCF4E8;
   padding: 120px 0px; }
+  @media only screen and (max-width: 767.98px) {
+    .tf-template-3 .tf-related-tours {
+      padding: 32px; } }
+  @media only screen and (max-width: 480px) {
+    .tf-template-3 .tf-related-tours {
+      padding: 16px; } }
   .tf-template-3 .tf-related-tours h2 {
     color: #595349;
     font-size: 32px !important;
