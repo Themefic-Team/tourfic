@@ -1244,8 +1244,8 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'         => 'children_age_limit',
 					'type'       => 'number',
-					'label'      => __( 'Insert your Maximum Age Limit', 'tourfic' ),
-					'subtitle'   => __( 'Numbers Only', 'tourfic' ),
+					'label'      => __( 'Specify Maximum Age Limit', 'tourfic' ),
+					'subtitle'   => __( 'Set the maximum age limit for children', 'tourfic' ),
 					'attributes' => array(
 						'min' => '0',
 					),
