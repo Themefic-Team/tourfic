@@ -764,14 +764,18 @@
 
         $(document).on('click', '.tf_room_cal_reset', function (e) {
             e.preventDefault();
-            let container = $(this).closest('.tf-room-cal-wrap');
-            roomResetForm(container);
-            var room = new roomCal(container[0]);
-            room.init();
-            if (room.fullCalendar) {
-                room.fullCalendar.refetchEvents();
-            }
-            $(this).attr('disabled', 'disabled');
+
+            let btn = $(this);
+            let container = btn.closest('.tf-room-cal-wrap');
+            let containerEl = btn.closest('.tf-room-cal-wrap')[0];
+            let cal = container.find('.tf-room-cal');
+            let data = $('input, select', container.find('.tf-room-cal-field')).serializeArray();
+            let priceBy = container.closest('.tf-single-repeater-room').find('.tf_room_pricing_by').val();
+            let avail_date = container.find('.avail_date');
+            data.push({name: 'action', value: 'tf_reset_hotel_availability'});
+            data.push({name: '_nonce', value: tf_admin_params.tf_nonce});
+            data.push({name: 'price_by', value: priceBy});
+            data.push({name: 'avail_date', value: avail_date.val()});
         });
 
         $(document).on('change', '.tf_room_pricing_by', function (e) {
