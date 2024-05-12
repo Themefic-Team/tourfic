@@ -1086,7 +1086,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                        placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_out ) ? 'value="' . esc_attr( $check_out ) . '"' : '' ?>
                                        required>
                                 <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                       placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_out ) ? 'value="' . $check_out . '"' : '' ?> required>
+                                       placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_out ) ? 'value="' . esc_attr($check_out) . '"' : '' ?> required>
                             </label>
                         </div>
                     </div>

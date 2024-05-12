@@ -11590,13 +11590,13 @@ html {
       padding: 16px 32px;
       display: flex;
       flex-direction: column;
-      gap: 24px;
-      cursor: pointer;
-      user-select: none; }
+      gap: 24px; }
     .tf-template-3 .tf-itinerary-wrapper .tf-itinerary-wrapper .tf-itinerary-title {
       display: flex;
       justify-content: space-between;
-      align-items: center; }
+      align-items: center;
+      cursor: pointer;
+      user-select: none; }
       .tf-template-3 .tf-itinerary-wrapper .tf-itinerary-wrapper .tf-itinerary-title i {
         color: #595349; }
     .tf-template-3 .tf-itinerary-wrapper .tf-itinerary-wrapper .tf-itinerary-title.active i {

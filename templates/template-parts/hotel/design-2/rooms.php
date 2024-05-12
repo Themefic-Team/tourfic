@@ -52,7 +52,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 <!--Available rooms start -->
 <div class="tf-available-rooms-wrapper" id="tf-hotel-rooms">
     <div class="tf-available-rooms-head">
-        <span class=""><?php esc_html_e("Available rooms", "tourfic"); ?></span>
+        <span class=""><?php !empty($meta["room-section-title"]) ?  esc_html_e( $meta["room-section-title"], "tourfic") : ''; ?></span>
         <div class="tf-filter">
             <i class="ri-equalizer-line"></i>
         </div>

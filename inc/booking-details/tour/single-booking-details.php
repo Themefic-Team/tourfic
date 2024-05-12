@@ -383,7 +383,7 @@
                                         <?php } ?>
                                         <h5><?php esc_html_e("Address:", "tourfic"); ?> <b style="color: #002043;"><?php echo esc_html( $location ) ?></b></h5>
                                     </div>
-                                    <img style="border: 1px solid #ccc;" src="//quickchart.io/qr?size=<?php echo esc_attr($width);?>&format=png&text=<?php echo (string) esc_html($uri); ?>" alt="<?php echo esc_attr( $title ); ?>"/>
+                                    <img style="border: 1px solid #ccc;" src="//quickchart.io/qr?size=<?php echo esc_attr($width);?>&format=png&text=<?php echo esc_html( (string) $uri); ?>" alt="<?php echo esc_attr( $title ); ?>"/>
                                 </div>
                                 <div class="tf-voucher-billing-info">
                                     <div class="tf-billing-details">
@@ -750,7 +750,7 @@ if(!empty($tour_ides)){
                     <?php } ?>
                     <h5><?php esc_html_e("Address:", "tourfic"); ?> <b style="color: #002043;"><?php echo esc_html( $location ) ?></b></h5>
                 </div>
-                <img style="border: 1px solid #ccc;" src="//quickchart.io/qr?size=<?php echo esc_attr($width);?>&format=png&text=<?php echo (string) esc_html( $uri ); ?>" alt="<?php echo esc_attr( htmlspecialchars( $title ) ); ?>"/>
+                <img style="border: 1px solid #ccc;" src="//quickchart.io/qr?size=<?php echo esc_attr($width);?>&format=png&text=<?php echo esc_html( (string) $uri ); ?>" alt="<?php echo esc_attr( htmlspecialchars( $title ) ); ?>"/>
             </div>
             <div class="tf-voucher-billing-info">
                 <div class="tf-billing-details">
