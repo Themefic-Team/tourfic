@@ -1114,7 +1114,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'      => 'tour-option-itinerary-notice',
 									'type'    => 'notice',
 									'class'	  => 'tour-option-itinerary-notice',
-									'content' => __('By default, you can create your entire Tour Itinerary using our Default Itinerary editor found in the Single Tour settings. For access to an Itinerary builder with enhanced advanced features, please consider upgrading to our <b>Pro version.</b>', 'tourfic'),
+									'content' => __('By default, you can create your entire Tour Itinerary using our Default Itinerary editor found in the Single Tour settings. For access to an Itinerary builder with enhanced advanced features, please consider upgrading to our <a href="https://tourfic.com/" target="_blank"><b>Pro version.</b></a>', 'tourfic'),
 								),
 							),
 						),

@@ -6,7 +6,7 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ) {
 <?php if ( $itineraries ) { ?>
 <div class="tf-itinerary-wrapper" id="tf-tour-itinerary">
     <div class="section-title">
-        <h2 class="tf-title tf-section-title"><?php esc_html_e("Travel Itinerary", "tourfic"); ?></h2>
+        <h2 class="tf-title tf-section-title"><?php echo !empty($meta['itinerary-section-title']) ? esc_html($meta['itinerary-section-title']) : ''; ?></h2>
     </div>
     <div class="tf-itinerary-wrapper">
 
