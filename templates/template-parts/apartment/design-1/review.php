@@ -1,5 +1,5 @@
 <?php
-if ( $comments ) { ?>
+if ( $comments && $disable_review_sec != 1 ) { ?>
 <!-- apartment reviews Srart -->
 <div class="tf-reviews-wrapper tf-section" id="tf-apartment-reviews">         
     <h2 class="tf-section-title"><?php !empty( $meta['review-section-title'] ) ? esc_html_e( $meta['review-section-title'], "tourfic") : ''; ?></h2>

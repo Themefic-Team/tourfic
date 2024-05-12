@@ -246,6 +246,7 @@
             
             <div class="tf-location tf-single-widgets">
                 <?php
+                if($disable_review_sec != 1) :
                 global $current_user;
                 // Check if user is logged in
                 $is_user_logged_in = $current_user->exists();
@@ -334,6 +335,7 @@
                     <?php tf_review_form(); ?>
                 </div>
                 <?php } } } ?>
+                <?php endif; ?>
 
                 <!-- Enquery Section -->
                 <?php 

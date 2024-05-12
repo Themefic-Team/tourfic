@@ -196,7 +196,7 @@
             <?php endif; ?>
 
             <div id="hotel-map-location" class="tf-location tf-single-widgets">
-                <h2 class="tf-section-title"><?php esc_html_e("Location", "tourfic"); ?></h2>
+                <h2 class="tf-section-title"><?php echo ! empty( $meta['location_title'] ) ? esc_html( $meta['location_title'] ) : ''; ?></h2>
                 <?php if ( !defined( 'TF_PRO' ) ) { ?>
                     <?php
                     if( $address && $tf_openstreet_map!="default" && ( empty($address_latitude) || empty($address_longitude) ) ){ ?>
@@ -244,7 +244,7 @@
 
 
             <div class="tf-location tf-single-widgets">
-                <?php
+                <?php if( $disable_review_sec != 1 ) :
                 global $current_user;
                 // Check if user is logged in
                 $is_user_logged_in = $current_user->exists();
@@ -332,6 +332,7 @@
                     <?php tf_review_form(); ?>
                 </div>
                 <?php } } } ?>
+                <?php endif; ?>
 
                 <!-- Enquery Section -->
                 <?php
@@ -445,8 +446,7 @@ if ( $disable_related_sec !== '1' ) {
             <div class="tf-container">
                 <div class="tf-container-inner">
                     <div class="section-title">
-                        <h2 class="tf-title"><?php esc_html_e( "You may also like", "tourfic" ); ?></h2>
-
+                        <h2 class="tf-title"><?php echo ! empty( $meta['related_apartment_title'] ) ? esc_html( $meta['related_apartment_title'] ) : ''; ?></h2>
                     </div>
                     <div class="tf-design-3-slider-items-wrapper tf-upcomming-tours-list-outter tf-flex tf-flex-gap-24">
                         <?php

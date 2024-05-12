@@ -893,7 +893,7 @@ function tf_room_availability_callback() {
 						$backend_date_ranges = array();
 						foreach ( $avail_date as $single_date_range ) {
 
-                            if(is_array($single_date_range)){
+                            if(is_array($single_date_range) && !empty( $single_date_range["availability"] )){
 							    array_push( $backend_date_ranges, array( strtotime( $single_date_range["availability"]["from"] ), strtotime( $single_date_range["availability"]["to"] ) ) );
                             }
 						}

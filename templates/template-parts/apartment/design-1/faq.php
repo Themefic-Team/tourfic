@@ -4,7 +4,7 @@ if ( $faqs ): ?>
 <!-- apartment Questions Srart -->
 <div class="tf-questions-wrapper tf-section" id="tf-apartment-faq">
     <h2 class="tf-section-title">
-    <?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : esc_html__( "Faq’s", 'tourfic' ); ?>
+    <?php echo ! empty( $meta['faq_title'] ) ? esc_html( $meta['faq_title'] ) : ''; ?>
     </h2>            
     <div class="tf-questions">
         
