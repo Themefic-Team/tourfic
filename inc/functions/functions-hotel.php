@@ -928,7 +928,7 @@ function tf_room_availability_callback() {
 
 								$tf_order_check_in_date  = $order_details->check_in;
 								$tf_order_check_out_date = $order_details->check_out;
-								if ( ! empty( $avail_durationdate ) && ( in_array( $tf_order_check_out_date, $avail_durationdate ) || in_array( $tf_order_check_in_date, $avail_durationdate ) ) ) {
+								if ( ! empty( $avail_durationdate ) && ( in_array( $tf_order_check_out_date, $avail_durationdate ) ) ) {
 									# Total number of room booked
 									$number_orders = $number_orders + $ordered_number_of_room;
 								}
@@ -937,7 +937,7 @@ function tf_room_availability_callback() {
 							} else {
 								$order_check_in_date  = $order_details->check_in;
 								$order_check_out_date = $order_details->check_out;
-								if ( ! empty( $avail_durationdate ) && ( in_array( $order_check_out_date, $avail_durationdate ) || in_array( $order_check_in_date, $avail_durationdate ) ) ) {
+								if ( ! empty( $avail_durationdate ) && ( in_array( $order_check_out_date, $avail_durationdate ) ) ) {
 									# Total number of room booked
 									$number_orders = $number_orders + $ordered_number_of_room;
 								}

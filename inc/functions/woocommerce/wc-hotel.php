@@ -281,9 +281,9 @@ function tf_hotel_booking_callback() {
 					$adult_price = !empty($adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
 					$child_price = !empty($child_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - ( ( (int) $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
 				}
-				$adult_price = $adult_price * $adult;
-				$child_price = $child_price * $child;
-				$total_price = $adult_price + $child_price;
+				$adult_price = (int) $adult_price * (int) $adult;
+				$child_price = (int) $child_price * (int) $child;
+				$total_price = (int) $adult_price + (int) $child_price;
 
 				$tf_room_data['tf_hotel_data']['adult']          = $adult." × ".wp_strip_all_tags(wc_price($adult_price));
 				$tf_room_data['tf_hotel_data']['child']          = $child." × ".wp_strip_all_tags(wc_price($child_price));
