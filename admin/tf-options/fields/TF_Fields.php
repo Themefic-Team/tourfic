@@ -47,7 +47,7 @@ if ( ! class_exists( 'TF_Fields' ) ) {
 
 		//sanitize
 		public function sanitize() {
-			return sanitize_text_field( $this->value );
+			return stripslashes(sanitize_text_field( $this->value ));
 		}
 
 

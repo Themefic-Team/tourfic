@@ -15,6 +15,7 @@
 
     .tf-field-notice-content {
       color: $slate40;
+      align-self: center;
  
       h6 {
         margin: 0;
@@ -62,5 +63,34 @@
       font-size: 16px;
       line-height: 1.5;
     }
+  }
+
+  .tf-pro-notice {
+    .tf-field-notice-inner {
+      background-color: #EBEFFF;
+      border: 1.5px solid #295BFF;
+
+      .tf-field-notice-icon {
+        font-size: 24px;
+        color: #295BFF;
+        margin-right: 8px;
+      }
+
+      .tf-field-notice-content {
+        color: #000E3D;
+        font-size: 14px;
+        line-height: 1.6;
+        align-self: center;
+        font-weight: 400;
+
+        b {
+          font-weight: 600;
+        }
+
+        a {
+          color: #295BFF;
+        }
+      }
+    } 
   }
 // }

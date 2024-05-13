@@ -260,7 +260,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         $room_term = get_term( $feature ); ?>
                                         <li>
                                             <?php echo ! empty( $room_feature_icon ) ? wp_kses_post($room_feature_icon) : ''; ?>
-                                            <?php echo !empty( $room_term->name ) ? esc_html($room_term->name) : ''; ?>
+                                            <?php echo isset( $room_term->name ) && !empty( $room_term->name ) ? esc_html($room_term->name) : ''; ?>
                                         </li>
                                         <?php } $tf_room_fec_key++; } } ?>
                                         <?php

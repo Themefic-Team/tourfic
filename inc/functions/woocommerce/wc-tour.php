@@ -55,12 +55,10 @@ function tf_tours_booking_function() {
 	$tf_confirmation_details = !empty($_POST['booking_confirm']) ? $_POST['booking_confirm'] : "";
 
 	// Booking Type
-	if ( function_exists('is_tf_pro') && is_tf_pro() ){
-		$tf_booking_type = !empty($meta['booking-by']) ? $meta['booking-by'] : 1;
-		$tf_booking_url = !empty($meta['booking-url']) ? esc_url($meta['booking-url']) : '';
-		$tf_booking_query_url = !empty($meta['booking-query']) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
-		$tf_booking_attribute = !empty($meta['booking-attribute']) ? $meta['booking-attribute'] : '';
-	}
+	$tf_booking_type = function_exists('is_tf_pro') && is_tf_pro() ? ( !empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1 ) : 1;
+	$tf_booking_url = function_exists('is_tf_pro') && is_tf_pro() ? ( !empty( $meta['booking-url'] ) ? esc_url($meta['booking-url']) : '' ) : '';
+	$tf_booking_query_url = function_exists('is_tf_pro') && is_tf_pro() ? ( !empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}' ) : '';
+	$tf_booking_attribute = function_exists('is_tf_pro') && is_tf_pro() ? ( !empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '' ) : '';
 
 	/**
 	 * If fixed is selected but pro is not activated
@@ -740,7 +738,7 @@ function tf_tours_booking_function() {
 		$order_details = [
 			'order_by'    => '',
 			'tour_date'   => $tour_date,
-			'tour_time'   => $tour_time_title,
+			'tour_time'   => !empty($tour_time_title) ? $tour_time_title : '',
 			'tour_extra'  => $tour_extra_title,
 			'adult'       => $adults,
 			'child'       => $children,

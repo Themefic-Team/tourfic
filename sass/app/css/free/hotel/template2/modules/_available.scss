@@ -752,6 +752,13 @@
 .tf-related-tours{
     background-color: #FCF4E8;
     padding: 120px 0px;
+
+    @media #{$max767}{
+        padding: 32px;
+    
+    }@media #{$max480}{
+        padding: 16px;
+    }
     h2{
         color: #595349;
         font-size: 32px !important;

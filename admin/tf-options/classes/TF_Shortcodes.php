@@ -32,10 +32,307 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
             <div class="tf-shortcode-generator-section">
                 <div class="tf-shortcode-generators">
 
+                    <!-- Common shortcode Section -->
+                    <div class="tf-shortcode-generator-single">
+                        <div class="tf-shortcode-generator-label shortcode-section-heading">
+                            <h2><?php echo esc_html__('General Shortcodes', 'tourfic'); ?></h2>
+                        </div>
+                    </div>
+
+                    <!--Search form Shortcodes section-->
+                    <div class="tf-shortcode-generator-single">
+                        <div class="tf-shortcode-generator-label">
+                            <div class="tf-labels">
+                                <label><?php echo esc_html__( 'Search Form', 'tourfic' ); ?></label>
+                                <p><?php echo esc_html__( 'Display Search Form', 'tourfic' ); ?></p>
+                            </div>
+                            <div class="tf-shortcode-btn tf-generate-tour">
+                                <button><?php echo esc_html__( 'Generate Shortcode', 'tourfic' ); ?></button>
+                            </div>
+                        </div>
+                        <div class="tf-sg-form-wrapper">
+                            <div class="tf-shortcode-generator-form">
+                                <div class="tf-sg-close"><i class="far fa-times"></i></div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Search Form', 'tourfic' ) ?></h3>
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="tf_search_form"><?php esc_html_e( 'Search form', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Style', 'tourfic' ) ?></h3>
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="style='default'"><?php esc_html_e( 'Default', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Type', 'tourfic' ) ?></h3>
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="type='all'"><?php esc_html_e( 'All', 'tourfic' ); ?></option>
+                                                <option value="type='hotel'"><?php esc_html_e( 'Hotel', 'tourfic' ); ?></option>
+                                                <option value="type='tour'"><?php esc_html_e( 'Tour', 'tourfic' ); ?></option>
+                                                <option value="type='apartment'"><?php esc_html_e( 'Apartment', 'tourfic' ); ?></option>
+                                                <option value="type='booking'"><?php esc_html_e( 'Booking', 'tourfic' ); ?></option>
+                                                <option value="type='tp-hotel'"><?php esc_html_e( 'Travel Payout Hotels', 'tourfic' ); ?></option>
+                                                <option value="type='tp-flight'"><?php esc_html_e( 'Travel Payout Flights', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Fullwidth', 'tourfic' ) ?></h3>
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="fullwidth='true'"><?php esc_html_e( 'Yes', 'tourfic' ); ?></option>
+                                                <option value="fullwidth='false'"><?php esc_html_e( 'No', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Title', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Subtitle', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Classes', 'tourfic' ) ?></h3>
+                                            <input type="text" value="" data-count="classes" placeholder="Input classes with space" class="post-count tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Advanced', 'tourfic' ) ?></h3>
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="advanced='disabled'"><?php esc_html_e( 'Disabled', 'tourfic' ); ?></option>
+                                                <option value="advanced='enabled'"><?php esc_html_e( 'Enabled', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-generate-tour">
+                                            <button class="tf-btn"><?php echo esc_html__( 'Generate', 'tourfic' ); ?></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-copy-item">
+                                    <div class="tf-shortcode-field copy-shortcode">
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <button type="button" class="tf-copy-btn tf-btn">
+                                            <span class="dashicons dashicons-category"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Reviews Shortcodes section-->
+                    <div class="tf-shortcode-generator-single">
+                        <div class="tf-shortcode-generator-label">
+                            <div class="tf-labels">
+                                <label><?php echo esc_html__( 'Reviews', 'tourfic' ); ?></label>
+                                <p><?php echo esc_html__( 'Display reviews', 'tourfic' ); ?></p>
+                            </div>
+                            <div class="tf-shortcode-btn tf-generate-tour">
+                                <button><?php echo esc_html__( 'Generate Shortcode', 'tourfic' ); ?></button>
+                            </div>
+                        </div>
+                        <div class="tf-sg-form-wrapper">
+                            <div class="tf-shortcode-generator-form">
+                                <div class="tf-sg-close"><i class="far fa-times"></i></div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Reviews', 'tourfic' ) ?></h3>
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="tf_reviews"><?php esc_html_e( 'Reviews', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Type', 'tourfic' ) ?></h3>
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="type=tf_hotel"><?php esc_html_e( 'Hotel', 'tourfic' ); ?></option>
+                                                <option value="type=tf_tours"><?php esc_html_e( 'Tours', 'tourfic' ); ?></option>
+                                                <option value="type=tf_apartment"><?php esc_html_e( 'Apartment', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Total Post Number', 'tourfic' ) ?></h3>
+                                            <input type="number" value="10" data-count="number" class="post-count tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Sliders To Show', 'tourfic' ) ?></h3>
+                                            <input type="number" value="3" data-count="count" class="post-count tf-setting-field">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Speed', 'tourfic' ) ?></h3>
+                                            <input type="number" value="200" data-count="speed" class="post-count tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Arrows', 'tourfic' ) ?></h3>
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="arrows='true'"><?php esc_html_e( 'Yes', 'tourfic' ); ?></option>
+                                                <option value="arrows='false'"><?php esc_html_e( 'No', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Dots', 'tourfic' ) ?></h3>
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="dots='true'"><?php esc_html_e( 'Yes', 'tourfic' ); ?></option>
+                                                <option value="dots='false'"><?php esc_html_e( 'No', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Autoplay', 'tourfic' ) ?></h3>
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="autoplay='true'"><?php esc_html_e( 'Yes', 'tourfic' ); ?></option>
+                                                <option value="autoplay='false'"><?php esc_html_e( 'No', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Infinite', 'tourfic' ) ?></h3>
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="infinite='true'"><?php esc_html_e( 'Yes', 'tourfic' ); ?></option>
+                                                <option value="infinite='false'"><?php esc_html_e( 'No', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-generate-tour">
+                                            <button class="tf-btn"><?php echo esc_html__( 'Generate', 'tourfic' ); ?></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-copy-item">
+                                    <div class="tf-shortcode-field copy-shortcode">
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <button type="button" class="tf-copy-btn tf-btn">
+                                            <span class="dashicons dashicons-category"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Recent blog Shortcodes section-->
+                    <div class="tf-shortcode-generator-single">
+                        <div class="tf-shortcode-generator-label">
+                            <div class="tf-labels">
+                                <label><?php echo esc_html__( 'Recent blog', 'tourfic' ); ?></label>
+                                <p><?php echo esc_html__( 'Display Recent Blogs in specific location', 'tourfic' ); ?></p>
+                            </div>
+                            <div class="tf-shortcode-btn tf-generate-tour">
+                                <button><?php echo esc_html__( 'Generate Shortcode', 'tourfic' ); ?></button>
+                            </div>
+                        </div>
+                        <div class="tf-sg-form-wrapper">
+                            <div class="tf-shortcode-generator-form">
+                                <div class="tf-sg-close"><i class="far fa-times"></i></div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Recent Blogs', 'tourfic' ) ?></h3>
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="tf_recent_blog"><?php esc_html_e( 'Recent Blogs', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Blog Count', 'tourfic' ) ?></h3>
+                                            <input type="number" value="5" data-count="count" class="post-count tf-setting-field">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Categories', 'tourfic' ) ?></h3>
+							                <?php
+							                //Dynamic Taxonomy dropdown list
+							                tf_terms_dropdown( 'category', 'cats', 'tf_recent_blog_shortcode', 'tf-setting-field tf-select-field', true );
+							                ?>
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Blog style', 'tourfic' ) ?></h3>
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="style='grid'"><?php esc_html_e( 'Grid', 'tourfic' ); ?></option>
+                                                <option value="style='slider'"><?php esc_html_e( 'Slider', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-generate-tour">
+                                            <button class="tf-btn"><?php echo esc_html__( 'Generate', 'tourfic' ); ?></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-copy-item">
+                                    <div class="tf-shortcode-field copy-shortcode">
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <button type="button" class="tf-copy-btn tf-btn">
+                                            <span class="dashicons dashicons-category"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!--Tours Shortcodes section-->
                     <div class="tf-shortcode-generator-single">
                         <div class="tf-shortcode-generator-label shortcode-section-heading">
-                            <h2>Shortcode for Tours</h2>
+                            <h2><?php echo esc_html__('Shortcode for Tours', 'tourfic'); ?></h2>
                         </div>
                     </div>
                     <div class="tf-shortcode-generator-single">
@@ -306,10 +603,97 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                         </div>
                     </div>
 
+                    <!--External Listing Shortcodes section-->
+                    <div class="tf-shortcode-generator-single">
+                        <div class="tf-shortcode-generator-label">
+                            <div class="tf-labels">
+                                <label><?php echo esc_html__( 'External Listing', 'tourfic' ); ?></label>
+                                <p><?php echo esc_html__( 'Display external listing', 'tourfic' ); ?>
+                            </div>
+                            <div class="tf-shortcode-btn tf-generate-tour">
+                                <button><?php echo esc_html__( 'Generate Shortcode', 'tourfic' ); ?></button>
+                            </div>
+                        </div>
+                        <div class="tf-sg-form-wrapper">
+                            <div class="tf-shortcode-generator-form">
+                                <div class="tf-sg-close"><i class="far fa-times"></i></div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'External Listing', 'tourfic' ) ?></h3>
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="tf_tour_external_listings"><?php esc_html_e( 'External Listing', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Title', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Subtitle', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Choose Locations', 'tourfic' ) ?></h3>
+							                <?php
+							                //Dynamic Taxonomy dropdown list
+							                tf_terms_dropdown( 'tour_destination', 'locations', 'tf_listing_location_shortcode', 'tf-setting-field tf-select-field', true );
+							                ?>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Total Post Number', 'tourfic' ) ?></h3>
+                                            <input type="number" value="5" data-count="count" class="post-count tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Post Style', 'tourfic' ) ?></h3>
+
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="style='grid'"><?php esc_html_e( 'Grid', 'tourfic' ); ?></option>
+                                                <option value="style='slider'"><?php esc_html_e( 'Slider', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-generate-tour">
+                                            <button class="tf-btn"><?php echo esc_html__( 'Generate', 'tourfic' ); ?></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-copy-item">
+                                    <div class="tf-shortcode-field copy-shortcode">
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <button type="button" class="tf-copy-btn tf-btn">
+                                            <span class="dashicons dashicons-category"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!--Hotels Shortcodes section-->
                     <div class="tf-shortcode-generator-single">
                         <div class="tf-shortcode-generator-label shortcode-section-heading">
-                            <h2>Shortcode for Hotels</h2>
+                            <h2><?php echo esc_html__('Shortcode for Hotels', 'tourfic'); ?></h2>
                         </div>
                     </div>
                     <div class="tf-shortcode-generator-single">
@@ -579,11 +963,98 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                             </div>
                         </div>
                     </div>
+
+                    <!--External Listing Shortcodes section-->
+                    <div class="tf-shortcode-generator-single">
+                        <div class="tf-shortcode-generator-label">
+                            <div class="tf-labels">
+                                <label><?php echo esc_html__( 'External Listing', 'tourfic' ); ?></label>
+                                <p><?php echo esc_html__( 'Display external listing', 'tourfic' ); ?>
+                            </div>
+                            <div class="tf-shortcode-btn tf-generate-tour">
+                                <button><?php echo esc_html__( 'Generate Shortcode', 'tourfic' ); ?></button>
+                            </div>
+                        </div>
+                        <div class="tf-sg-form-wrapper">
+                            <div class="tf-shortcode-generator-form">
+                                <div class="tf-sg-close"><i class="far fa-times"></i></div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'External Listing', 'tourfic' ) ?></h3>
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="tf_hotel_external_listings"><?php esc_html_e( 'External Listing', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Title', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Subtitle', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Choose Locations', 'tourfic' ) ?></h3>
+							                <?php
+							                //Dynamic Taxonomy dropdown list
+							                tf_terms_dropdown( 'hotel_location', 'locations', 'tf_listing_location_shortcode', 'tf-setting-field tf-select-field', true );
+							                ?>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Total Post Number', 'tourfic' ) ?></h3>
+                                            <input type="number" value="5" data-count="count" class="post-count tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Post Style', 'tourfic' ) ?></h3>
+
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="style='grid'"><?php esc_html_e( 'Grid', 'tourfic' ); ?></option>
+                                                <option value="style='slider'"><?php esc_html_e( 'Slider', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-generate-tour">
+                                            <button class="tf-btn"><?php echo esc_html__( 'Generate', 'tourfic' ); ?></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-copy-item">
+                                    <div class="tf-shortcode-field copy-shortcode">
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <button type="button" class="tf-copy-btn tf-btn">
+                                            <span class="dashicons dashicons-category"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     
                     <!--Apartments Shortcodes section-->
                     <div class="tf-shortcode-generator-single">
                         <div class="tf-shortcode-generator-label shortcode-section-heading">
-                            <h2>Shortcode for Apartments</h2>
+                            <h2><?php echo esc_html__('Shortcode for Apartments', 'tourfic'); ?></h2>
                         </div>
                     </div>
                     <div class="tf-shortcode-generator-single">
@@ -854,10 +1325,97 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                         </div>
                     </div>
 
+                    <!--External Listing Shortcodes section-->
+                    <div class="tf-shortcode-generator-single">
+                        <div class="tf-shortcode-generator-label">
+                            <div class="tf-labels">
+                                <label><?php echo esc_html__( 'External Listing', 'tourfic' ); ?></label>
+                                <p><?php echo esc_html__( 'Display external listing', 'tourfic' ); ?>
+                            </div>
+                            <div class="tf-shortcode-btn tf-generate-tour">
+                                <button><?php echo esc_html__( 'Generate Shortcode', 'tourfic' ); ?></button>
+                            </div>
+                        </div>
+                        <div class="tf-sg-form-wrapper">
+                            <div class="tf-shortcode-generator-form">
+                                <div class="tf-sg-close"><i class="far fa-times"></i></div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'External Listing', 'tourfic' ) ?></h3>
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="tf_apartment_external_listings"><?php esc_html_e( 'External Listing', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Title', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Subtitle', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Choose Locations', 'tourfic' ) ?></h3>
+							                <?php
+							                //Dynamic Taxonomy dropdown list
+							                tf_terms_dropdown( 'apartment_location', 'locations', 'tf_listing_location_shortcode', 'tf-setting-field tf-select-field', true );
+							                ?>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Total Post Number', 'tourfic' ) ?></h3>
+                                            <input type="number" value="5" data-count="count" class="post-count tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Post Style', 'tourfic' ) ?></h3>
+
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="style='grid'"><?php esc_html_e( 'Grid', 'tourfic' ); ?></option>
+                                                <option value="style='slider'"><?php esc_html_e( 'Slider', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-generate-tour">
+                                            <button class="tf-btn"><?php echo esc_html__( 'Generate', 'tourfic' ); ?></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-copy-item">
+                                    <div class="tf-shortcode-field copy-shortcode">
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <button type="button" class="tf-copy-btn tf-btn">
+                                            <span class="dashicons dashicons-category"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                      <!-- Vendor shortcode Section -->
                      <div class="tf-shortcode-generator-single">
                         <div class="tf-shortcode-generator-label shortcode-section-heading">
-                            <h2>Shortcodes for Vendors</h2>
+                            <h2><?php echo esc_html__('Shortcodes for Vendors', 'tourfic'); ?></h2>
                         </div>
                     </div>
 
@@ -934,402 +1492,6 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
                                         <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_vendor_post]" readonly/>
-                                        <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- common shortcode Section -->
-                    <div class="tf-shortcode-generator-single">
-                        <div class="tf-shortcode-generator-label shortcode-section-heading">
-                            <h2>Other Shortcodes</h2>
-                        </div>
-                    </div>
-
-                    <!--Search form Shortcodes section-->
-                    <div class="tf-shortcode-generator-single">
-                        <div class="tf-shortcode-generator-label">
-                            <div class="tf-labels">
-                                <label><?php echo esc_html__( 'Search Form', 'tourfic' ); ?></label>
-                                <p><?php echo esc_html__( 'Display Search Form', 'tourfic' ); ?></p>
-                            </div>
-                            <div class="tf-shortcode-btn tf-generate-tour">
-                                <button><?php echo esc_html__( 'Generate Shortcode', 'tourfic' ); ?></button>
-                            </div>
-                        </div>
-                        <div class="tf-sg-form-wrapper">
-                            <div class="tf-shortcode-generator-form">
-                                <div class="tf-sg-close"><i class="far fa-times"></i></div>
-                                <div class="tf-sg-row">
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Search Form', 'tourfic' ) ?></h3>
-                                            <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_search_form"><?php esc_html_e( 'Search form', 'tourfic' ); ?></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Style', 'tourfic' ) ?></h3>
-                                            <select class="tf-select-field tf-setting-field">
-                                                <option value="style='default'"><?php esc_html_e( 'Default', 'tourfic' ); ?></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-sg-row">
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Type', 'tourfic' ) ?></h3>
-                                            <select class="tf-select-field tf-setting-field">
-                                                <option value="type='all'"><?php esc_html_e( 'All', 'tourfic' ); ?></option>
-                                                <option value="type='hotel'"><?php esc_html_e( 'Hotel', 'tourfic' ); ?></option>
-                                                <option value="type='tour'"><?php esc_html_e( 'Tour', 'tourfic' ); ?></option>
-                                                <option value="type='apartment'"><?php esc_html_e( 'Apartment', 'tourfic' ); ?></option>
-                                                <option value="type='booking'"><?php esc_html_e( 'Booking', 'tourfic' ); ?></option>
-                                                <option value="type='tp-hotel'"><?php esc_html_e( 'Travel Payout Hotels', 'tourfic' ); ?></option>
-                                                <option value="type='tp-flight'"><?php esc_html_e( 'Travel Payout Flights', 'tourfic' ); ?></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Fullwidth', 'tourfic' ) ?></h3>
-                                            <select class="tf-select-field tf-setting-field">
-                                                <option value="fullwidth='true'"><?php esc_html_e( 'Yes', 'tourfic' ); ?></option>
-                                                <option value="fullwidth='false'"><?php esc_html_e( 'No', 'tourfic' ); ?></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-sg-row">
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Title', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
-                                        </div>
-                                    </div>
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Subtitle', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-sg-row">
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Classes', 'tourfic' ) ?></h3>
-                                            <input type="text" value="" data-count="classes" placeholder="Input classes with space" class="post-count tf-setting-field">
-                                        </div>
-                                    </div>
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Advanced', 'tourfic' ) ?></h3>
-                                            <select class="tf-select-field tf-setting-field">
-                                                <option value="advanced='disabled'"><?php esc_html_e( 'Disabled', 'tourfic' ); ?></option>
-                                                <option value="advanced='enabled'"><?php esc_html_e( 'Enabled', 'tourfic' ); ?></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-sg-row">
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-generate-tour">
-                                            <button class="tf-btn"><?php echo esc_html__( 'Generate', 'tourfic' ); ?></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-copy-item">
-                                    <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
-                                        <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Reviews Shortcodes section-->
-                    <div class="tf-shortcode-generator-single">
-                        <div class="tf-shortcode-generator-label">
-                            <div class="tf-labels">
-                                <label><?php echo esc_html__( 'Reviews', 'tourfic' ); ?></label>
-                                <p><?php echo esc_html__( 'Display reviews', 'tourfic' ); ?></p>
-                            </div>
-                            <div class="tf-shortcode-btn tf-generate-tour">
-                                <button><?php echo esc_html__( 'Generate Shortcode', 'tourfic' ); ?></button>
-                            </div>
-                        </div>
-                        <div class="tf-sg-form-wrapper">
-                            <div class="tf-shortcode-generator-form">
-                                <div class="tf-sg-close"><i class="far fa-times"></i></div>
-                                <div class="tf-sg-row">
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Reviews', 'tourfic' ) ?></h3>
-                                            <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_reviews"><?php esc_html_e( 'Reviews', 'tourfic' ); ?></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Type', 'tourfic' ) ?></h3>
-                                            <select class="tf-select-field tf-setting-field">
-                                                <option value="type=tf_hotel"><?php esc_html_e( 'Hotel', 'tourfic' ); ?></option>
-                                                <option value="type=tf_tours"><?php esc_html_e( 'Tours', 'tourfic' ); ?></option>
-                                                <option value="type=tf_apartment"><?php esc_html_e( 'Apartment', 'tourfic' ); ?></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-sg-row">
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Total Post Number', 'tourfic' ) ?></h3>
-                                            <input type="number" value="10" data-count="number" class="post-count tf-setting-field">
-                                        </div>
-                                    </div>
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Sliders To Show', 'tourfic' ) ?></h3>
-                                            <input type="number" value="3" data-count="count" class="post-count tf-setting-field">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="tf-sg-row">
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Speed', 'tourfic' ) ?></h3>
-                                            <input type="number" value="200" data-count="speed" class="post-count tf-setting-field">
-                                        </div>
-                                    </div>
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Arrows', 'tourfic' ) ?></h3>
-                                            <select class="tf-select-field tf-setting-field">
-                                                <option value="arrows='true'"><?php esc_html_e( 'Yes', 'tourfic' ); ?></option>
-                                                <option value="arrows='false'"><?php esc_html_e( 'No', 'tourfic' ); ?></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-sg-row">
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Dots', 'tourfic' ) ?></h3>
-                                            <select class="tf-select-field tf-setting-field">
-                                                <option value="dots='true'"><?php esc_html_e( 'Yes', 'tourfic' ); ?></option>
-                                                <option value="dots='false'"><?php esc_html_e( 'No', 'tourfic' ); ?></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Autoplay', 'tourfic' ) ?></h3>
-                                            <select class="tf-select-field tf-setting-field">
-                                                <option value="autoplay='true'"><?php esc_html_e( 'Yes', 'tourfic' ); ?></option>
-                                                <option value="autoplay='false'"><?php esc_html_e( 'No', 'tourfic' ); ?></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Infinite', 'tourfic' ) ?></h3>
-                                            <select class="tf-select-field tf-setting-field">
-                                                <option value="infinite='true'"><?php esc_html_e( 'Yes', 'tourfic' ); ?></option>
-                                                <option value="infinite='false'"><?php esc_html_e( 'No', 'tourfic' ); ?></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-sg-row">
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-generate-tour">
-                                            <button class="tf-btn"><?php echo esc_html__( 'Generate', 'tourfic' ); ?></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-copy-item">
-                                    <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
-                                        <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Recent blog Shortcodes section-->
-                    <div class="tf-shortcode-generator-single">
-                        <div class="tf-shortcode-generator-label">
-                            <div class="tf-labels">
-                                <label><?php echo esc_html__( 'Recent blog', 'tourfic' ); ?></label>
-                                <p><?php echo esc_html__( 'Display Recent Blogs in specific location', 'tourfic' ); ?></p>
-                            </div>
-                            <div class="tf-shortcode-btn tf-generate-tour">
-                                <button><?php echo esc_html__( 'Generate Shortcode', 'tourfic' ); ?></button>
-                            </div>
-                        </div>
-                        <div class="tf-sg-form-wrapper">
-                            <div class="tf-shortcode-generator-form">
-                                <div class="tf-sg-close"><i class="far fa-times"></i></div>
-                                <div class="tf-sg-row">
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Recent Blogs', 'tourfic' ) ?></h3>
-                                            <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_recent_blog"><?php esc_html_e( 'Recent Blogs', 'tourfic' ); ?></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Blog Count', 'tourfic' ) ?></h3>
-                                            <input type="number" value="5" data-count="count" class="post-count tf-setting-field">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-sg-row">
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Categories', 'tourfic' ) ?></h3>
-											<?php
-											//Dynamic Taxonomy dropdown list
-											tf_terms_dropdown( 'category', 'cats', 'tf_recent_blog_shortcode', 'tf-setting-field tf-select-field', true );
-											?>
-                                        </div>
-                                    </div>
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Blog style', 'tourfic' ) ?></h3>
-                                            <select class="tf-select-field tf-setting-field">
-                                                <option value="style='grid'"><?php esc_html_e( 'Grid', 'tourfic' ); ?></option>
-                                                <option value="style='slider'"><?php esc_html_e( 'Slider', 'tourfic' ); ?></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-sg-row">
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-generate-tour">
-                                            <button class="tf-btn"><?php echo esc_html__( 'Generate', 'tourfic' ); ?></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-copy-item">
-                                    <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
-                                        <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--External Listing Shortcodes section-->
-                    <div class="tf-shortcode-generator-single">
-                        <div class="tf-shortcode-generator-label">
-                            <div class="tf-labels">
-                                <label><?php echo esc_html__( 'External Listing', 'tourfic' ); ?></label>
-                                <p><?php echo esc_html__( 'External Listing Shortcodes for Hotel/Tour/Apartments', 'tourfic' ); ?></p>
-                            </div>
-                            <div class="tf-shortcode-btn tf-generate-tour">
-                                <button><?php echo esc_html__( 'Generate Shortcode', 'tourfic' ); ?></button>
-                            </div>
-                        </div>
-                        <div class="tf-sg-form-wrapper">
-                            <div class="tf-shortcode-generator-form">
-                                <div class="tf-sg-close"><i class="far fa-times"></i></div>
-                                <div class="tf-sg-row">
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'External Listing', 'tourfic' ) ?></h3>
-                                            <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_external_listings"><?php esc_html_e( 'External Listing', 'tourfic' ); ?></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Title', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="tf-sg-row">
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Subtitle', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
-                                        </div>
-                                    </div>
-                                     <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Choose Locations', 'tourfic' ) ?></h3>
-											<?php
-											//Dynamic Taxonomy dropdown list
-											tf_terms_dropdown( 'hotel_location', 'locations', 'tf_listing_location_shortcode', 'tf-setting-field tf-select-field', true );
-											?>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                 <div class="tf-sg-row">
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Total Post Number', 'tourfic' ) ?></h3>
-                                            <input type="number" value="5" data-count="count" class="post-count tf-setting-field">
-                                        </div>
-                                    </div>
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Post Style', 'tourfic' ) ?></h3>
-
-                                            <select class="tf-select-field tf-setting-field">
-                                                <option value="style='grid'"><?php esc_html_e( 'Grid', 'tourfic' ); ?></option>
-                                                <option value="style='slider'"><?php esc_html_e( 'Slider', 'tourfic' ); ?></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                <div class="tf-sg-row">
-                                   <div class="tf-col-lg-6">
-                                    <div class="tf-sg-field-wrap">
-                                        <h3><?php echo esc_html__( 'Select Type', 'tourfic' ) ?></h3>
-                                        <select class="tf-select-field tf-setting-field" name="type-selector">
-                                            <option value="type=hotel"><?php esc_html_e( 'Hotel', 'tourfic' ); ?></option>
-                                            <option value="type=tours"><?php esc_html_e( 'Tours', 'tourfic' ); ?></option>
-                                            <option value="type=apartment"><?php esc_html_e( 'Apartments', 'tourfic' ); ?></option>
-                                        </select>
-                                    </div>
-                                </div>
-                                </div>
-                                <div class="tf-sg-row">
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-generate-tour">
-                                            <button class="tf-btn"><?php echo esc_html__( 'Generate', 'tourfic' ); ?></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-copy-item">
-                                    <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-category"></span>
                                         </button>

@@ -422,6 +422,8 @@
                 padding: 15px 32px 16px 16px;
                 background: #FDF9F3;
                 width: 100%;
+                box-sizing: border-box;
+
                 .tf_label_rows{
                     display: flex;
                     align-items: center;
@@ -433,6 +435,8 @@
                         width: 100% !important;
                         color: #607085;
                         font-size: 16px;
+                        text-align: left;
+
                         &:focus{
                             outline: none;
                             box-shadow: none;
@@ -458,6 +462,14 @@
                         @media #{$max767}{
                             font-size: 20px !important;
                         }
+                    }
+                }
+
+                .tf_acrselection{
+                    margin-bottom: 24px;
+
+                    &:last-child{
+                        margin-bottom: 0px;
                     }
                 }
             }

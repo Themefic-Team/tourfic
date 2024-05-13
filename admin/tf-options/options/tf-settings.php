@@ -8,6 +8,46 @@ if ( file_exists( TF_ADMIN_PATH . 'tf-options/options/tf-menu-icon.php' ) ) {
 	$menu_icon = 'dashicons-palmtree';
 }
 
+if ( ! function_exists( 'tf_search_page_default') ) {
+	function tf_search_page_default() {
+		$args = array(
+			'post_type'      => 'page',
+			'posts_per_page' => - 1,
+			'post_status' => 'publish',
+		);
+
+		$loop = new WP_Query( $args );
+		if( $loop->have_posts() ) {
+			foreach( $loop->posts as $post ) {
+				if( $post->post_name == 'tf-search') {
+					return $post->ID;
+				}
+			}
+		}
+		return;
+	}
+}
+
+if ( ! function_exists( 'tf_wishlist_page_default') ) {
+	function tf_wishlist_page_default() {
+		$args = array(
+			'post_type'      => 'page',
+			'posts_per_page' => - 1,
+			'post_status' => 'publish',
+		);
+
+		$loop = new WP_Query( $args );
+		if( $loop->have_posts() ) {
+			foreach( $loop->posts as $post ) {
+				if( $post->post_name == 'tf-wishlist') {
+					return $post->ID;
+				}				
+			}
+		}
+		return;
+	}
+}
+
 TF_Settings::option( 'tf_settings', array(
 	'title'    => __( 'Tourfic Settings ', 'tourfic' ),
 	'icon'     => $menu_icon,
@@ -1074,7 +1114,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'      => 'tour-option-itinerary-notice',
 									'type'    => 'notice',
 									'class'	  => 'tour-option-itinerary-notice',
-									'content' => __('By default, you can create your entire Tour Itinerary using our Default Itinerary editor found in the Single Tour settings. For access to an Itinerary builder with enhanced advanced features, please consider upgrading to our <b>Pro version.</b>', 'tourfic'),
+									'content' => __('By default, you can create your entire Tour Itinerary using our Default Itinerary editor found in the Single Tour settings. For access to an Itinerary builder with enhanced advanced features, please consider upgrading to our <a href="https://tourfic.com/" target="_blank"><b>Pro version.</b></a>', 'tourfic'),
 								),
 							),
 						),
@@ -1224,8 +1264,8 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'         => 'children_age_limit',
 					'type'       => 'number',
-					'label'      => __( 'Insert your Maximum Age Limit', 'tourfic' ),
-					'subtitle'   => __( 'Numbers Only', 'tourfic' ),
+					'label'      => __( 'Specify Maximum Age Limit', 'tourfic' ),
+					'subtitle'   => __( 'Set the maximum age limit for children', 'tourfic' ),
 					'attributes' => array(
 						'min' => '0',
 					),
@@ -1756,7 +1796,8 @@ TF_Settings::option( 'tf_settings', array(
 					'query_args'  => array(
 						'post_type'      => 'page',
 						'posts_per_page' => - 1,
-					)
+					),
+					'default'     => tf_search_page_default(),
 				),
 
 				array(
@@ -1764,6 +1805,7 @@ TF_Settings::option( 'tf_settings', array(
 					'type'     => 'number',
 					'label'    => __( 'Search Items to show per page', 'tourfic' ),
 					'subtitle' => __( 'Add the total number of hotels/tours/apartments you want to show per page on the Search result.', 'tourfic' ),
+					'default'  => 8,
 				),
 
 				array(
@@ -3132,9 +3174,9 @@ TF_Settings::option( 'tf_settings', array(
 						'posts_per_page' => - 1,
 						'orderby'        => 'post_title',
 						'order'          => 'ASC'
-					)
+					),
+					'default' => tf_wishlist_page_default(),
 				),
-
 			),
 		),
 
@@ -4329,12 +4371,14 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'tour_settings',
 									'type'    => 'heading',
-									'content' => __( 'Thumbnail Settings in PDF', 'tourfic' ),
+									'label' => __( 'Thumbnail Settings in PDF', 'tourfic' ),
+									'subtitle' => esc_html__( 'These settings will adjust the height and width of the main tour image in the itinerary.', 'tourfic' ),
 								),
 								array(
 									'id'          => '',
 									'type'        => 'number',
 									'label'       => __( 'Image Thumbnail Height', 'tourfic' ),
+									'subtitle' => esc_html__( 'Adjust the height of the tour image in the itinerary. Leave blank to use the image in its full size.', 'tourfic' ),
 									'field_width' => 50,
 									'is_pro'      => true,
 								),
@@ -4342,6 +4386,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'          => '',
 									'type'        => 'number',
 									'label'       => __( 'Image Thumbnail Width', 'tourfic' ),
+									'subtitle' => esc_html__( 'Adjust the width of the tour image in the itinerary. Leave blank to use the image in its full size.', 'tourfic' ),
 									'field_width' => 50,
 									'is_pro'      => true,
 								),

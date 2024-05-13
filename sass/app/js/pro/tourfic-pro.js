@@ -6,9 +6,9 @@
         $(document).on("click", "input[name='make_deposit']", function () {
             let id = $(this).val();
             if ($(this).is(':checked')) {
-                $('.tf-deposit-amount-' + id).show();
+                $('.tf-deposit-amount-' + id).removeClass("tf-hotel-deposit-hide");
             } else {
-                $('.tf-deposit-amount-' + id).hide();
+                $('.tf-deposit-amount-' + id).addClass("tf-hotel-deposit-hide");
             }
         });
 

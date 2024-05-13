@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.5
-Stable tag: 2.11.26
+Stable tag: 2.12.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -322,6 +322,25 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.12.0 - 13 May 2024 =
+
+- Added: Apartments room management added to free
+- Added: TF search form page
+- Added: Sample data added on install
+- Added: Pro feature notice optimized
+- Improved: Search form design improved
+- Improved: Apartment design improved
+- Improved: Ask question popup design improved
+- Improvement: System stability improved
+- Fixed: Escaping issue fixed
+- Fixed: Tour, and hotel pricing issue fixed(Pro)
+- Fixed: Default booking type issue fixed on apartment
+- Fixed: Apartment default featured image issue fixed
+- Fixed: Tour, Hotel External Booking issue fixed(Pro)
+- Fixed: Tour booking sticky form design fixed
+- Fixed: Hotel room inventory issue fixed
+- Fixed: Settings page saving issue
+
 = 2.11.26 - 08 May 2024 =
 
 - Fixed: Tour archive page duration issue
@@ -489,34 +508,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Improved: Added Tour Features to Design( Template - 2 )(Pro)
 - Fixed: Contact Details Responsive( Template - 3 )
 - Fixed: Enquiry Responsive( Template - 3 )
-
-= 2.11.2 - 01 January 2024 =
-
-- Fixed: Performance issue fixed
-
-= 2.11.1 - 30 December 2023 =
-
-- Added: Add quantity-based tour extras and unlimited tour extra(Pro)
-- Added: Settings for Tour Extra Quantity in Tour Metabox > Tour Extra(Pro)
-- Added: Options in Frontend Tour Booking Popup > Tour Extras(Pro)
-
-= 2.11.0 - 27 December 2023 =
-
-- Added: New Template for (Tour and Hotel)
-- Added: Multiple Tags for Hotel/Tour/Apartment
-- Added: Add nearby places in hotels
-- Added: Shortcode Generator for Apartment
-- Added: The first day of Week Dynamic (Frontend)
-- Added: External listing Shortcode added( Pro )
-- Added: Repeated Fixed Tour( Pro )
-- Added: Apartment iCal Added( Pro )
-- Added: Apartment availability calendar
-- Fixed: All date format issues
-- Fixed: Change orders and labels on Shortcode builder
-- Fixed: External booking minor issues fixed( Pro )
-- Fixed: Hotel availability calendar pricing issue fixed( Pro )
-- Improved: Booking.com, Travelpayouts full-screen popup add( Pro )
-- Improved: Install and Active WooCommerce using Single Button
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 

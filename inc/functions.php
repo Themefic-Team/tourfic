@@ -1513,7 +1513,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 		</div>
 		<div class="tf-booking-form-submit">
 			<input type="hidden" name="type" value="<?php echo esc_attr( $post_type ); ?>" class="tf-post-type"/>
-            <button class="tf-btn-normal btn-primary tf-submit"><?php echo esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
+            <button class="tf-btn-normal btn-primary tf-submit"><?php echo esc_html__( 'Check Availability', 'tourfic' ); ?></button>
 		</div>
 
 		<?php if ( $post_type == 'tf_tours' ) { ?>
@@ -3497,3 +3497,40 @@ function tf_custom_wp_kses_allow_tags() {
 
     return $allowed_tags;
 }
+
+// function tf_taxonomy_update_dynamically_callback() {
+// 	//Nonce Verification
+// 	// check_ajax_referer('updates', '_nonce');
+
+// 	$taxonomy = $_POST['taxonomy'] ? sanitize_text_field( $_POST['taxonomy'] ) : '';
+
+// 	$terms = get_terms( array(
+// 		'taxonomy'   => $taxonomy,
+// 		'hide_empty' => false,
+// 	) );
+	
+
+// 	wp_send_json_success( array(
+// 		'value' => $terms
+// 	) );
+// }
+
+// add_action( "wp_ajax_tf_taxonomy_update_dynamically", "tf_taxonomy_update_dynamically_callback" );
+
+add_filter( 'rest_prepare_taxonomy', "tf_remove_metabox_gutenburg", 10, 3 );
+
+function tf_remove_metabox_gutenburg( $response, $taxonomy, $request ) {
+
+	$context = ! empty( $request['context'] ) ? $request['context'] : 'view';
+	
+		if( $context === 'edit' && $taxonomy->meta_box_cb === false ){
+
+			$data_response = $response->get_data();
+
+			$data_response['visibility']['show_ui'] = false;
+
+			$response->set_data( $data_response );
+		}
+
+	return $response;
+};

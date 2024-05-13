@@ -221,19 +221,6 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 							'field_width' => 50,
 						),
 						array(
-							'id'          => 'tf_hotel_service_type',
-							'label'       => esc_html__( 'Service Type', 'tourfic' ),
-							'type'        => 'select',
-							'options'     => array(
-								'pickup'  => esc_html__( 'Pickup Service', 'tourfic' ),
-								'dropoff' => esc_html__( 'Drop-off Service', 'tourfic' ),
-								'both'    => esc_html__( 'Pickup & Drop-off Service', 'tourfic' ),
-							),
-							'placeholder' => esc_html__( 'Select Service Type', 'tourfic' ),
-							'field_width' => 50,
-							'is_pro'      => true
-						),
-						array(
 							'id'          => 'tf_available_rooms',
 							'label'       => esc_html__( 'Available Rooms', 'tourfic' ),
 							'type'        => 'select2',
@@ -273,6 +260,14 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 								'min' => '0',
 							),
 							'field_width' => 50,
+						),
+						array(
+							'id'    => 'tf-pro-notice',
+							'type'  => 'notice',
+							'class' => 'tf-pro-notice',
+							'notice' => 'info',
+							'icon' => 'ri-information-fill',
+							'content' => wp_kses_post(__( 'Do you need to add hotel airport services such as pickup, dropoff, or both? Our Pro plan includes the <b>hotel service</b> feature, allowing you to easily add these services with pricing options <b>per person</b>, <b>fixed</b>, or <b>complimentary</b>. Enhance your guest experience by integrating these convenient services seamlessly into your offerings. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of this fantastic option!</a>', 'tourfic') ),
 						),
 					),
 				),
@@ -718,6 +713,8 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 			$meta            = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
 			$airport_service = $meta['airport_service'] ?? null;
 			$avail_by_date   = ! empty( $room_data['avil_by_date'] ) ? $room_data['avil_by_date'] : '';
+			$tf_room_discount_type = !empty($room_data['discount_hotel_type']) ? $room_data['discount_hotel_type'] : 'none';
+			$tf_room_discount_amount = $tf_room_discount_type != 'none' ? ( !empty($room_data['discount_hotel_price']) ? $room_data['discount_hotel_price'] : 0 ) : 0;
 			if ( $avail_by_date ) {
 				$avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
 			}
@@ -781,6 +778,13 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 				} else {
 					$price_total = $total_price * $room_selected;
 				}
+			}
+
+			// Discount Calculation
+			if($tf_room_discount_type == "percent") {
+				$price_total = !empty($price_total) ? floatval( preg_replace( '/[^\d.]/', '',number_format( (int) $price_total - ( ( (int) $price_total / 100 ) * (int) $tf_room_discount_amount ), 2 ) ) ) : 0;
+			}elseif ( $tf_room_discount_type == 'fixed' ) {
+				$price_total = !empty( $price_total ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $price_total - (int) $tf_room_discount_amount ), 2 ) ) : 0;
 			}
 
 			# Airport Service Fee

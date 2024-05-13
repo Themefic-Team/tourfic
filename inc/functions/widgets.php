@@ -1311,7 +1311,8 @@ class Tourfic_Price_Filter extends WP_Widget {
         ?>
 		<!-- Start Price Range widget -->
 		<?php 
-        if( is_post_type_archive('tf_tours') || is_post_type_archive('tf_hotel') || is_post_type_archive('tf_apartment') || ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) ) ){
+        $tf_query_taxonomy = !empty( get_taxonomy(get_queried_object()->taxonomy ) ) ? get_taxonomy(get_queried_object()->taxonomy)->object_type : '' ;
+        if( is_post_type_archive('tf_tours') || is_post_type_archive('tf_hotel') || is_post_type_archive('tf_apartment') || ( !empty( $tf_query_taxonomy ) ) ){
             extract( $args );
             $title = apply_filters( 'widget_title', $instance['title'] );
             echo wp_kses_post($before_widget);

@@ -1424,13 +1424,13 @@
     bottom: 0;
     left: 0;
     padding: 32px;
-    background-color: #EDF2F7;
-    box-shadow: 0px 0px 24px 5px #e0e8ee;
+    background-color: rgba(255, 255, 255, .9);
+    //box-shadow: 0px 0px 24px 5px #e0e8ee;
     z-index: 9999;
     @include flexbox();
     @include justify-content(center);
     @include align-items(center);
-    gap: 64px;
+    gap: 24px;
     transform-origin: bottom;
     transform: rotateX(90deg);
     transition: all 0.3s ease-in-out;
@@ -1444,7 +1444,8 @@
 
     @media #{$max767} {
         transform: rotateX(0);
-        z-index: 999;
+        z-index: 9999;
+        width: 100%;
     }
     &.active{
         transform: rotateX(0deg);
@@ -1466,7 +1467,7 @@
 
     .tf-bottom-booking-fields{
         @include flexbox();
-        gap: 32px;
+        gap: 24px;
 
         @media #{$max1199} {
             width: 100%;
@@ -1490,11 +1491,12 @@
 
         input.tf-field, select.tf-field {
             border-radius: 8px;
-            border: 1px solid var(--Primary, #003C7A);
+            border: 1px solid #0E3DD8;
             padding: 0 16px;
-            background-color: transparent;
+            background-color: #fff;
             outline: none;
             min-width: 220px;
+            font-size: 16px;
 
             @media #{$max767} {
                 flex-grow: 1;
@@ -1511,7 +1513,7 @@
         line-height: 56px;
         font-size: 24px;
         border-radius: 8px;
-        background-color: #003C7A;
+        background-color: #0E3DD8;
         text-align: center;
         color: #fff;
 
@@ -1536,15 +1538,17 @@
             border-radius: 8px;
             border: 1px solid #003C7A;
             padding: 0 16px;
+            background-color: #fff;
 
             @media #{$max767} {
                 flex-grow: 1;
+                width: 100%;
             }
         }
     }
 
     .tf_acrselection-wrap{
-        left: 0;
+        left: 64px;
         right: auto;
         top: unset;
         bottom: 100%;
@@ -1561,6 +1565,9 @@
 
     .tf-btn-normal {
         padding: 19px 32px;
+        font-size: 14px;
+        font-weight: 700;
+        border-radius: 8px;
 
         @media #{$max767} {
             padding: 12px 24px;

@@ -1,8 +1,8 @@
 <?php
-if ( $comments ) { ?>
+if ( $comments && $disable_review_sec != 1 ) { ?>
 <!-- apartment reviews Srart -->
 <div class="tf-reviews-wrapper tf-section" id="tf-apartment-reviews">         
-    <h2 class="tf-section-title"><?php esc_html_e("Guest reviews", "tourfic"); ?></h2>
+    <h2 class="tf-section-title"><?php !empty( $meta['review-section-title'] ) ? esc_html_e( $meta['review-section-title'], "tourfic") : ''; ?></h2>
     <p><?php esc_html_e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></p>
     <div class="tf-reviews-slider">
         <?php

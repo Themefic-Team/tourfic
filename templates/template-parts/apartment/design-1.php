@@ -1,6 +1,6 @@
 <div class="tf-template-3 tf-hotel-single tf-apartment-single">
 <!--Hero section start -->
-<div class="tf-hero-section-wrap" style="<?php echo !empty(get_the_post_thumbnail_url()) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.40) 0%, rgba(48, 40, 28, 0.40) 100%), url('.esc_url(get_the_post_thumbnail_url()).'), lightgray 0px -268.76px / 100% 249.543% no-repeat;background-size: cover; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
+<div class="tf-hero-section-wrap" style="<?php echo !empty(get_the_post_thumbnail_url()) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.40) 0%, rgba(48, 40, 28, 0.40) 100%), url('.esc_url(get_the_post_thumbnail_url()).'), lightgray 0px -268.76px / 100% 249.543% no-repeat;background-size: cover; background-position: center;' : 'background-color: rgba(48, 40, 28, 0.30); background-image: url('.esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg').');' ?>">
     <div class="tf-container">
         <div class="tf-hero-content">
             <div class="tf-wish-and-share">
@@ -196,7 +196,7 @@
             <?php endif; ?>
 
             <div id="hotel-map-location" class="tf-location tf-single-widgets">
-                <h2 class="tf-section-title"><?php esc_html_e("Location", "tourfic"); ?></h2>
+                <h2 class="tf-section-title"><?php echo ! empty( $meta['location_title'] ) ? esc_html( $meta['location_title'] ) : ''; ?></h2>
                 <?php if ( !defined( 'TF_PRO' ) ) { ?>
                     <?php
                     if( $address && $tf_openstreet_map!="default" && ( empty($address_latitude) || empty($address_longitude) ) ){ ?>
@@ -244,7 +244,7 @@
 
 
             <div class="tf-location tf-single-widgets">
-                <?php
+                <?php if( $disable_review_sec != 1 ) :
                 global $current_user;
                 // Check if user is logged in
                 $is_user_logged_in = $current_user->exists();
@@ -295,9 +295,18 @@
                 </div>
                 <a class="tf-all-reviews" href="#tf-hotel-reviews"><?php esc_html_e("See all reviews", "tourfic"); ?></a>
                 <?php } ?>
-                <button class="tf-review-open button">
-                    <?php esc_html_e("Leave your review", "tourfic"); ?>
-                </button>
+                <?php
+                $tf_comment_counts = get_comments( array(
+                    'post_id' => $post_id,
+                    'user_id' => $current_user->ID,
+                    'count'   => true,
+                ) );
+                ?>
+                <?php if( empty($tf_comment_counts) && $tf_comment_counts == 0 ) : ?>
+                    <button class="tf-review-open button">
+                        <?php esc_html_e("Leave your review", "tourfic"); ?>
+                    </button>
+                <?php endif; ?>
                 <?php
                 // Review moderation notice
                 echo wp_kses_post(tf_pending_review_notice( $post_id ) ?? '');
@@ -323,6 +332,7 @@
                     <?php tf_review_form(); ?>
                 </div>
                 <?php } } } ?>
+                <?php endif; ?>
 
                 <!-- Enquery Section -->
                 <?php
@@ -436,8 +446,7 @@ if ( $disable_related_sec !== '1' ) {
             <div class="tf-container">
                 <div class="tf-container-inner">
                     <div class="section-title">
-                        <h2 class="tf-title"><?php esc_html_e( "You may also like", "tourfic" ); ?></h2>
-
+                        <h2 class="tf-title"><?php echo ! empty( $meta['related_apartment_title'] ) ? esc_html( $meta['related_apartment_title'] ) : ''; ?></h2>
                     </div>
                     <div class="tf-design-3-slider-items-wrapper tf-upcomming-tours-list-outter tf-flex tf-flex-gap-24">
                         <?php
@@ -465,7 +474,7 @@ if ( $disable_related_sec !== '1' ) {
                                                     <?php echo esc_html( tourfic_character_limit_callback(get_the_title($selected_design_post_id), 35) ); ?>
                                                     </a></h2>
                                                     <div class="tf-meta-data-price">
-                                                        <span><?php echo !empty($apartment_min_price["min"]) ? wp_kses_post(wc_price($apartment_min_price["min"])) : '';
+                                                        <span><?php echo !empty($apartment_min_price["min"]) ? wp_kses_post(wc_price($apartment_min_price["min"])) : wp_kses_post(wc_price(0));
                                                         ?></span><span class="pricing_calc_type">/<?php echo esc_html( $pricing_type ); ?></span>
                                                     </div>
                                                 </div>

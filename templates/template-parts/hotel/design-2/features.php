@@ -1,7 +1,7 @@
 <!--Popular Features -->
 <div class="tf-overview-wrapper">
     <div class="tf-overview-popular-facilities">
-        <span class="tf-popular-facilities-title"><?php esc_html_e("Popular facilities", "tourfic"); ?></span>
+        <span class="tf-popular-facilities-title"><?php echo !empty( $meta["facilities-section-title"]) ? esc_html( $meta["facilities-section-title"], "tourfic") : ''; ?></span>
         <ul>
         <?php 
         $favo_facilites_list = [];

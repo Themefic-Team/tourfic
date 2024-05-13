@@ -34,9 +34,9 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			//ajax save options
 			add_action( 'wp_ajax_tf_options_save', array( $this, 'tf_ajax_save_options' ) );
-		}
+        }
 
-		public static function option( $key, $params = array() ) {
+        public static function option( $key, $params = array() ) {
 			return new self( $key, $params );
 		}
 
@@ -670,7 +670,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			}
 
 
-            $ajax_save_class = 'tf-ajax-save';
+            $ajax_save_class = 'tf-ajax-savess';
 
 			if ( ! empty( $this->option_sections ) ) :
 				?>
@@ -761,7 +761,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		 */
 		public function save_options() {
 
-
 			// Check if a nonce is valid.
 			if (  !isset( $_POST['tf_option_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tf_option_nonce'] ) ), 'tf_option_nonce_action' ) ) {
 				return;
@@ -788,7 +787,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				update_option( $this->option_id, $tf_import_option );
 				return;
 			}
-
 
 			if ( ! empty( $option_request ) && ! empty( $this->option_sections ) ) {
 				foreach ( $this->option_sections as $section ) {

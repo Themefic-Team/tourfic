@@ -174,13 +174,13 @@ function tf_hotel_booking_callback() {
 				$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
 				$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - ( ( (int) $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
 			}
-		}  elseif( $hotel_discount_type == "fixed" ) {
+		}else if($hotel_discount_type == "fixed") {
 			if($pricing_by == 1) {
-				$room_price = (int) $room_price - (int) $hotel_discount_amount;
+				$room_price = floatval( preg_replace( '/[^\d.]/', '',number_format( (int) $room_price - (int) $hotel_discount_amount ), 2 ) );
 			}
 			if($pricing_by == 2) {
-				$adult_price = (int) $adult_price - (int) $hotel_discount_amount;
-				$child_price = (int) $child_price - (int) $hotel_discount_amount;
+				$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - (int) $hotel_discount_amount ), 2 ) );
+				$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - (int) $hotel_discount_amount ), 2 ) );
 			}
 		}
 
@@ -231,13 +231,13 @@ function tf_hotel_booking_callback() {
 							$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
 							$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - ( ( (int) $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
 						}
-					} elseif( $hotel_discount_type == "fixed" ) {
+					} else if($hotel_discount_type == "fixed") {
 						if($pricing_by == 1) {
-							$room_price = (int) $room_price - (int) $hotel_discount_amount;
+							$room_price = floatval( preg_replace( '/[^\d.]/', '',number_format( (int) $room_price - (int) $hotel_discount_amount ), 2 ) );
 						}
 						if($pricing_by == 2) {
-							$adult_price = (int) $adult_price - (int) $hotel_discount_amount;
-							$child_price = (int) $child_price - (int) $hotel_discount_amount;
+							$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - (int) $hotel_discount_amount ), 2 ) );
+							$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - (int) $hotel_discount_amount ), 2 ) );
 						}
 					}
 
@@ -281,9 +281,9 @@ function tf_hotel_booking_callback() {
 					$adult_price = !empty($adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
 					$child_price = !empty($child_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - ( ( (int) $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
 				}
-				$adult_price = $adult_price * $adult;
-				$child_price = $child_price * $child;
-				$total_price = $adult_price + $child_price;
+				$adult_price = (int) $adult_price * (int) $adult;
+				$child_price = (int) $child_price * (int) $child;
+				$total_price = (int) $adult_price + (int) $child_price;
 
 				$tf_room_data['tf_hotel_data']['adult']          = $adult." × ".wp_strip_all_tags(wc_price($adult_price));
 				$tf_room_data['tf_hotel_data']['child']          = $child." × ".wp_strip_all_tags(wc_price($child_price));
@@ -469,11 +469,11 @@ function tf_hotel_booking_callback() {
 			}
 		}
 		// Booking Type
-		/*if ( function_exists('is_tf_pro') && is_tf_pro() ){
-			$tf_booking_type = !empty($rooms[$room_id]['booking-by']) ? $rooms[$room_id]['booking-by'] : 1;
-			$tf_booking_url = !empty($rooms[$room_id]['booking-url']) ? esc_url($rooms[$room_id]['booking-url']) : '';
-			$tf_booking_query_url = !empty($rooms[$room_id]['booking-query']) ? $rooms[$room_id]['booking-query'] : 'adult={adult}&child={child}&room={room}';
-			$tf_booking_attribute = !empty($rooms[$room_id]['booking-attribute']) ? $rooms[$room_id]['booking-attribute'] : '';
+		if ( function_exists('is_tf_pro') && is_tf_pro() ){
+			$tf_booking_type = !empty($meta['booking-by']) ? $meta['booking-by'] : 1;
+			$tf_booking_url = !empty($meta['booking-url']) ? esc_url($meta['booking-url']) : '';
+			$tf_booking_query_url = !empty($meta['booking-query']) ? $meta['booking-query'] : 'adult={adult}&child={child}&room={room}';
+			$tf_booking_attribute = !empty($meta['booking-attribute']) ? $meta['booking-attribute'] : '';
 		}
 		if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 			$external_search_info = array(
@@ -493,14 +493,14 @@ function tf_hotel_booking_callback() {
 			$response['product_id']  = $product_id;
 			$response['add_to_cart'] = 'true';
 			$response['redirect_to'] = $tf_booking_url;
-		}else{*/
+		}else{
 		# Add product to cart with the custom cart item data
 		WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_room_data );
 
 		$response['product_id']  = $product_id;
 		$response['add_to_cart'] = 'true';
 		$response['redirect_to'] = wc_get_checkout_url();
-//		}
+		}
 	} else {
 		$response['status'] = 'error';
 	}

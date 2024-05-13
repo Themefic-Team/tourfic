@@ -893,7 +893,7 @@ function tf_room_availability_callback() {
 						$backend_date_ranges = array();
 						foreach ( $avail_date as $single_date_range ) {
 
-                            if(is_array($single_date_range)){
+                            if(is_array($single_date_range) && !empty( $single_date_range["availability"] )){
 							    array_push( $backend_date_ranges, array( strtotime( $single_date_range["availability"]["from"] ), strtotime( $single_date_range["availability"]["to"] ) ) );
                             }
 						}
@@ -928,7 +928,7 @@ function tf_room_availability_callback() {
 
 								$tf_order_check_in_date  = $order_details->check_in;
 								$tf_order_check_out_date = $order_details->check_out;
-								if ( ! empty( $avail_durationdate ) && ( in_array( $tf_order_check_out_date, $avail_durationdate ) || in_array( $tf_order_check_in_date, $avail_durationdate ) ) ) {
+								if ( ! empty( $avail_durationdate ) && ( in_array( $tf_order_check_out_date, $avail_durationdate ) ) ) {
 									# Total number of room booked
 									$number_orders = $number_orders + $ordered_number_of_room;
 								}
@@ -937,7 +937,7 @@ function tf_room_availability_callback() {
 							} else {
 								$order_check_in_date  = $order_details->check_in;
 								$order_check_out_date = $order_details->check_out;
-								if ( ! empty( $avail_durationdate ) && ( in_array( $order_check_out_date, $avail_durationdate ) || in_array( $order_check_in_date, $avail_durationdate ) ) ) {
+								if ( ! empty( $avail_durationdate ) && ( in_array( $order_check_out_date, $avail_durationdate ) ) ) {
 									# Total number of room booked
 									$number_orders = $number_orders + $ordered_number_of_room;
 								}
@@ -1053,8 +1053,8 @@ function tf_room_availability_callback() {
 						$days = $days+1;
 					}
 
-					$price = !empty($room['price_multi_day']) && $room['price_multi_day'] == '1' ? $price_by_date * $days : $price_by_date * $days;
-					$d_price = !empty($room['price_multi_day']) && $room['price_multi_day'] == '1' ? $d_price_by_date * $days : $d_price_by_date * $days;
+					$price = !empty($room['price_multi_day']) && $room['price_multi_day'] == '1' && !empty( $price_by_date ) ? $price_by_date * $days : $price_by_date * $days;
+					$d_price = !empty($room['price_multi_day']) && $room['price_multi_day'] == '1' && !empty( $price_by_date ) ? $d_price_by_date * $days : $d_price_by_date * $days;
 
 					tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price );
 
@@ -1447,8 +1447,10 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                         <div class="tf_form-row">
                             <label class="tf_label-row">
                                 <span class="tf-label"><?php esc_html_e( 'Location', 'tourfic' ); ?>:</span>
-                                <div class="tf_form-inner tf-d-g">
-                                    <i class="fas fa-search"></i>
+                                <div class="tf_form-inner">
+                                    <div class="tf-search-form-field-icon">
+                                        <i class="fas fa-search"></i>
+                                    </div>
 									<?php 
 									if ( (empty($advanced) || !empty($advanced)) && "enabled"!=$advanced ){ ?>
                                     <input type="text" name="place-name" <?php echo $hotel_location_field_required != 1 ? '' : 'required'; ?> id="tf-location" class="" placeholder="<?php esc_html_e( 'Enter Location', 'tourfic' ); ?>" value="">
@@ -1486,7 +1488,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 
                 <div class="tf_selectperson-wrap">
                     <div class="tf_input-inner">
-                        <span class="tf_person-icon">
+                        <span class="tf_person-icon tf-search-form-field-icon">
                             <i class="fas fa-user"></i>
                         </span>
                         <div class="adults-text"><?php echo esc_html__( '1 Adults', 'tourfic' ); ?></div>
@@ -1554,8 +1556,10 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                         <div class="tf_form-row">
                             <label class="tf_label-row">
                                 <span class="tf-label"><?php esc_html_e( 'Check-in & Check-out date', 'tourfic' ); ?></span>
-                                <div class="tf_form-inner tf-d-g">
-                                    <i class="far fa-calendar-alt"></i>
+                                <div class="tf_form-inner">
+                                    <div class="tf-search-form-field-icon">
+                                        <i class="far fa-calendar-alt"></i>
+                                    </div>
                                     <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
                                            placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo tfopt( 'date_hotel_search' ) ? 'required' : ''; ?>>
                                 </div>
@@ -5118,4 +5122,37 @@ if ( ! function_exists( 'tf_hotel_airport_service_title_price' ) ) {
 
 		return $airport_service_arr;
 	}
+}
+
+/**
+ * Assign taxonomy(hotel_feature) from the single post metabox
+ * to a Tour when updated or published
+ * @return array();
+ * @author Foysal
+ * @since 2.11.25
+ */
+
+add_action( 'wp_after_insert_post', 'tf_hotel_features_assign_taxonomies', 100, 3 );
+function tf_hotel_features_assign_taxonomies( $post_id, $post, $old_status ) {
+	if ( 'tf_hotel' !== $post->post_type ) {
+		return;
+	}
+	$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
+	$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+	if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
+		$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+		}, $rooms );
+		$rooms                = unserialize( $tf_hotel_rooms_value );
+	}
+
+    if ( ! empty( $rooms ) ) {
+        foreach ( $rooms as $room ) {
+            $room_features = ! empty( $room['features'] ) ? $room['features'] : '';
+            if ( ! empty( $room_features ) ) {
+	            $room_features = array_map( 'intval', $room_features );
+                wp_set_object_terms( $post_id, $room_features, 'hotel_feature' );
+            }
+        }
+    }
 }

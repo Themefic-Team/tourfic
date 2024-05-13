@@ -39,7 +39,7 @@
         <div class="tf-feature-block">
             <i class="ri-team-line"></i>
             <div class="tf-feature-block-details">
-                <h5><?php echo esc_html__( 'Max people', 'tourfic' ); ?></h5>
+                <h5><?php echo esc_html__( 'Group Size', 'tourfic' ); ?></h5>
                 <p><?php echo esc_html( $group_size ) ?></p>
             </div>
         </div>

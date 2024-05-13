@@ -9,20 +9,50 @@ if(!empty($rooms)){
         }
     }
 }
+
+$tf_booking_type = '1';
+$tf_booking_url = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = '';
+$tf_hide_external_price = "1";
+if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+    $tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+    $tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
+    $tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
+    $tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
+    $tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
+    $tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
+    $tf_hide_external_price = !empty( $meta["booking-by"] ) && $meta["booking-by"] == 2 ? ( !empty( $meta["hide_external_price"] ) ? $meta["hide_external_price"] : true ) : true; 
+}
+if( 2==$tf_booking_type && !empty($tf_booking_url) ){
+    $external_search_info = array(
+        '{adult}'    => !empty($adults) ? $adults : 1,
+        '{child}'    => !empty($children) ? $children : 0,
+        '{infant}'     => !empty($infant) ? $infant : 0,
+        '{booking_date}' => !empty($tour_date) ? $tour_date : '',
+    );
+
+    if(!empty($tf_booking_attribute)){
+        $tf_booking_query_url = str_replace(array_keys($external_search_info), array_values($external_search_info), $tf_booking_query_url);
+        if( !empty($tf_booking_query_url) ){
+            $tf_booking_url = $tf_booking_url.'/?'.$tf_booking_query_url;
+        }
+    }
+}
 ?>
-<span class="tf-modify-search-btn">
+<span id="availability" class="tf-modify-search-btn">
     <?php esc_html_e("Modify search", "tourfic"); ?>
 </span>
 <!--Booking form start -->
-<div id="availability" class="tf-booking-form-wrapper">
-    <?php tf_hotel_sidebar_booking_form(); ?>
-</div>
+<?php if( ($tf_booking_type == 2 && $tf_hide_booking_form !== '1') || $tf_booking_type == 1 || $tf_booking_type == 3) : ?>
+    <div id="room-availability" class="tf-booking-form-wrapper">
+        <?php tf_hotel_sidebar_booking_form(); ?>
+    </div>
+<?php endif; ?>
 <!-- Booking form end -->
 
 <!--Available rooms start -->
 <div class="tf-available-rooms-wrapper" id="tf-hotel-rooms">
     <div class="tf-available-rooms-head">
-        <span class=""><?php esc_html_e("Available rooms", "tourfic"); ?></span>
+        <span class=""><?php !empty($meta["room-section-title"]) ?  esc_html_e( $meta["room-section-title"], "tourfic") : ''; ?></span>
         <div class="tf-filter">
             <i class="ri-equalizer-line"></i>
         </div>
@@ -266,96 +296,98 @@ if(!empty($rooms)){
                         </span>
                     </div>
                     <?php } ?>
-                    <div class="tf-available-room-price">
-                    <?php
-                    if ( $pricing_by == '1' ) {
-                        if(!empty($discount_price ) && $hotel_discount_type != "none") {
-                            ?>
-                            <span class="tf-price">
-                                <span class="discount-price">
-                                    <?php esc_html_e( 'From ', 'tourfic' ); ?><del><?php echo wp_kses_post($price); ?></del>
-                                </span>
-                                <span class="sale-price">
-                                    <?php echo wp_kses_post($discount_price); ?>
-                                    <span class="booking-type">
-                                    <?php 
-                                    if($multi_by_date){
-                                        esc_html_e( '/night', 'tourfic' );
-                                    }else{
-                                        esc_html_e( '/day', 'tourfic' );
-                                    } ?>
-                                    </span>
-                                </span>
-                            </span>
+                    <?php if( $tf_hide_external_price ) : ?>
+                        <div class="tf-available-room-price">
                             <?php
-                        } else {
-                            ?>
-                            <span class="tf-price">
-                                <span class="discount-price">
-                                    <?php esc_html_e( 'From', 'tourfic' ); ?> 
-                                </span>
-                                <span class="sale-price">
-                                    <?php echo wp_kses_post($price); ?>
-                                    <span class="booking-type">
-                                    <?php 
-                                    if($multi_by_date){
-                                        esc_html_e( '/night', 'tourfic' );
-                                    }else{
-                                        esc_html_e( '/day', 'tourfic' );
-                                    } ?>
+                            if ( $pricing_by == '1' ) {
+                                if(!empty($discount_price ) && $hotel_discount_type != "none") {
+                                    ?>
+                                    <span class="tf-price">
+                                        <span class="discount-price">
+                                            <?php esc_html_e( 'From ', 'tourfic' ); ?><del><?php echo wp_kses_post($price); ?></del>
+                                        </span>
+                                        <span class="sale-price">
+                                            <?php echo wp_kses_post($discount_price); ?>
+                                            <span class="booking-type">
+                                            <?php 
+                                            if($multi_by_date){
+                                                esc_html_e( '/night', 'tourfic' );
+                                            }else{
+                                                esc_html_e( '/day', 'tourfic' );
+                                            } ?>
+                                            </span>
+                                        </span>
                                     </span>
-                                </span>
-                            </span>
-                            <?php
-                        }
-                        ?>
-                        <?php
-                    } else {
-                        if( $hotel_discount_type != "none" && !empty($discount_price )) {
-                            ?>
-                            <span class="tf-price">
-                                <span class="discount-price">
-                                    <?php esc_html_e( 'From ', 'tourfic' ); ?><del><?php echo wp_kses_post($price); ?></del>
-                                </span>
-                                <span class="sale-price">
-                                    <?php echo wp_kses_post($discount_price); ?>
-                                    <span class="booking-type">
-                                    <?php 
-                                    if($multi_by_date){
-                                        esc_html_e( '/night', 'tourfic' );
-                                    }else{
-                                        esc_html_e( '/day', 'tourfic' );
-                                    } ?>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <span class="tf-price">
+                                        <span class="discount-price">
+                                            <?php esc_html_e( 'From', 'tourfic' ); ?> 
+                                        </span>
+                                        <span class="sale-price">
+                                            <?php echo wp_kses_post($price); ?>
+                                            <span class="booking-type">
+                                            <?php 
+                                            if($multi_by_date){
+                                                esc_html_e( '/night', 'tourfic' );
+                                            }else{
+                                                esc_html_e( '/day', 'tourfic' );
+                                            } ?>
+                                            </span>
+                                        </span>
                                     </span>
-                                </span>
-                            </span>
-                            <?php
-                        } else {
-                            ?>
-                            <span class="tf-price">
-                                <span class="discount-price">
-                                    <?php esc_html_e( 'From', 'tourfic' ); ?> 
-                                </span>
-                                <span class="sale-price">
-                                    <?php echo wp_kses_post($price) . " "; ?>
-                                    <span class="booking-type">
-                                    <?php 
-                                    if($multi_by_date){
-                                        esc_html_e( '/night', 'tourfic' );
-                                    }else{
-                                        esc_html_e( '/day', 'tourfic' );
-                                    } ?>
+                                    <?php
+                                }
+                                ?>
+                                <?php
+                            } else {
+                                if( $hotel_discount_type != "none" && !empty($discount_price )) {
+                                    ?>
+                                    <span class="tf-price">
+                                        <span class="discount-price">
+                                            <?php esc_html_e( 'From ', 'tourfic' ); ?><del><?php echo wp_kses_post($price); ?></del>
+                                        </span>
+                                        <span class="sale-price">
+                                            <?php echo wp_kses_post($discount_price); ?>
+                                            <span class="booking-type">
+                                            <?php 
+                                            if($multi_by_date){
+                                                esc_html_e( '/night', 'tourfic' );
+                                            }else{
+                                                esc_html_e( '/day', 'tourfic' );
+                                            } ?>
+                                            </span>
+                                        </span>
                                     </span>
-                                </span>
-                            </span>
-                            <?php
-                        }
-                        ?>
-                        <?php
-                    }
-                    ?>
-                    </div>                     
-                    <a href="#availability" class="availability"><?php esc_html_e("Check Availability", "tourfic"); ?></a>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <span class="tf-price">
+                                        <span class="discount-price">
+                                            <?php esc_html_e( 'From', 'tourfic' ); ?> 
+                                        </span>
+                                        <span class="sale-price">
+                                            <?php echo wp_kses_post($price) . " "; ?>
+                                            <span class="booking-type">
+                                            <?php 
+                                            if($multi_by_date){
+                                                esc_html_e( '/night', 'tourfic' );
+                                            }else{
+                                                esc_html_e( '/day', 'tourfic' );
+                                            } ?>
+                                            </span>
+                                        </span>
+                                    </span>
+                                    <?php
+                                }
+                                ?>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                    <?php endif; ?>                 
+                    <a href="<?php echo $tf_booking_type == 2 ? ( !empty( $tf_booking_url ) ? esc_url( $tf_booking_url ) : '' ) : esc_url( '#availability' ) ?>" class="availability"><?php $tf_booking_type == 2 ? ( !empty( $tf_booking_url ) && ( $tf_hide_booking_form == 1 )  ? esc_html_e( 'Book Now', 'tourfic') : esc_html_e("Check Availability", "tourfic") ) :  esc_html_e("Check Availability", "tourfic") ?></a> 
                 </div>
 
             </div>
@@ -419,83 +451,83 @@ if(!empty($rooms)){
                 <div class="tf-available-room-content-left">
                     <div class="room-heading-price">
                         <h2 class="tf-section-title"><?php echo esc_html( $room['title'] ); ?></h2>
-                        
-                        <div class="tf-available-room-price">
-                        
-                        <?php
-                        if ( $pricing_by == '1' ) {
-                            if(!empty($discount_price )) {
-                                ?>
-                                <span class="tf-price">
-                                    <span class="discount-price">
-                                        <?php esc_html_e( 'From', 'tourfic' ); ?><del><?php echo wp_kses_post($price); ?></del>
-                                    </span>
-                                    <span class="sale-price">
-                                        <?php echo wp_kses_post($discount_price); ?>
-                                        <span class="booking-type">
-                                        <?php 
-                                        if($multi_by_date){
-                                            esc_html_e( '/night', 'tourfic' );
-                                        }else{
-                                            esc_html_e( '/day', 'tourfic' );
-                                        } ?>
+                        <?php if( $tf_hide_external_price) : ?>
+                            <div class="tf-available-room-price">
+                                <?php
+                                if ( $pricing_by == '1' ) {
+                                    if(!empty($discount_price )) {
+                                        ?>
+                                        <span class="tf-price">
+                                            <span class="discount-price">
+                                                <?php esc_html_e( 'From', 'tourfic' ); ?><del><?php echo wp_kses_post($price); ?></del>
+                                            </span>
+                                            <span class="sale-price">
+                                                <?php echo wp_kses_post($discount_price); ?>
+                                                <span class="booking-type">
+                                                <?php 
+                                                if($multi_by_date){
+                                                    esc_html_e( '/night', 'tourfic' );
+                                                }else{
+                                                    esc_html_e( '/day', 'tourfic' );
+                                                } ?>
+                                                </span>
+                                            </span>
                                         </span>
-                                    </span>
-                                </span>
-                                <?php
-                            } else if($hotel_discount_type == "none") {
-                                ?>
-                                <span class="tf-price">
-                                    <span class="discount-price">
-                                        <?php esc_html_e( 'From', 'tourfic' ); ?> 
-                                    </span>
-                                    <span class="sale-price">
-                                        <?php echo wp_kses_post($price); ?>
-                                        <span class="booking-type">
-                                        <?php 
-                                        if($multi_by_date){
-                                            esc_html_e( '/night', 'tourfic' );
-                                        }else{
-                                            esc_html_e( '/day', 'tourfic' );
-                                        } ?>
+                                        <?php
+                                    } else if($hotel_discount_type == "none") {
+                                        ?>
+                                        <span class="tf-price">
+                                            <span class="discount-price">
+                                                <?php esc_html_e( 'From', 'tourfic' ); ?> 
+                                            </span>
+                                            <span class="sale-price">
+                                                <?php echo wp_kses_post($price); ?>
+                                                <span class="booking-type">
+                                                <?php 
+                                                if($multi_by_date){
+                                                    esc_html_e( '/night', 'tourfic' );
+                                                }else{
+                                                    esc_html_e( '/day', 'tourfic' );
+                                                } ?>
+                                                </span>
+                                            </span>
                                         </span>
-                                    </span>
-                                </span>
-                                <?php
-                            }
-                            ?>
-                            <?php
-                        } else {
-                            if(!empty($discount_price )) {
+                                        <?php
+                                    }
+                                    ?>
+                                    <?php
+                                } else {
+                                    if(!empty($discount_price )) {
+                                        ?>
+                                        <span class="tf-price">
+                                            <span><del><?php echo wp_kses_post($price); ?></del> <?php echo wp_kses_post($discount_price); ?></span>
+                                            <?php 
+                                            if($multi_by_date){
+                                                esc_html_e( '/night', 'tourfic' );
+                                            }else{
+                                                esc_html_e( '/day', 'tourfic' );
+                                            } ?>
+                                        </span>
+                                        <?php
+                                    } else if($hotel_discount_type == "none") {
+                                        ?>
+                                        <span class="tf-price">
+                                            <span><?php echo wp_kses_post($price); ?></span>
+                                            <?php 
+                                            if($multi_by_date){
+                                                esc_html_e( '/night', 'tourfic' );
+                                            }else{
+                                                esc_html_e( '/day', 'tourfic' );
+                                            } ?>
+                                        </span>
+                                        <?php
+                                    }
+                                    ?>
+                                    <?php
+                                }
                                 ?>
-                                <span class="tf-price">
-                                    <span><del><?php echo wp_kses_post($price); ?></del> <?php echo wp_kses_post($discount_price); ?></span>
-                                    <?php 
-                                    if($multi_by_date){
-                                        esc_html_e( '/night', 'tourfic' );
-                                    }else{
-                                        esc_html_e( '/day', 'tourfic' );
-                                    } ?>
-                                </span>
-                                <?php
-                            } else if($hotel_discount_type == "none") {
-                                ?>
-                                <span class="tf-price">
-                                    <span><?php echo wp_kses_post($price); ?></span>
-                                    <?php 
-                                    if($multi_by_date){
-                                        esc_html_e( '/night', 'tourfic' );
-                                    }else{
-                                        esc_html_e( '/day', 'tourfic' );
-                                    } ?>
-                                </span>
-                                <?php
-                            }
-                            ?>
-                            <?php
-                        }
-                        ?>
-                        </div>
+                            </div>
+                        <?php endif; ?>
                     </div>
                     <ul>
                         <?php if ( $footage ) { ?>

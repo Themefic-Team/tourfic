@@ -109,85 +109,16 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'label'   => esc_html__( 'Booking Type', 'tourfic' ),
 					'options' => array(
 						'1' => esc_html__( 'Default Booking (WooCommerce)', 'tourfic' ),
-						'2' => esc_html__( 'External Booking (Pro)', 'tourfic' ),
 					),
 					'default' => '1',
 				),
 				array(
-					'id'          => '',
-					'type'        => 'text',
-					'label'       => esc_html__( 'External Booking URL', 'tourfic' ),
-					'placeholder' => esc_html__( 'https://website.com', 'tourfic' ),
-					'is_pro'  => true,
-					'dependency'  => array( 'booking-by', '==', '2' ),
-				),
-				array(
-					'id'        => '',
-					'type'      => 'switch',
-					'label'     => esc_html__( 'Hide Booking Form', 'tourfic' ),
-					'subtitle' => esc_html__( 'Enable this option to hide the booking form from the single hotel page.', 'tourfic' ),
-					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
-					'label_off' => esc_html__( 'No', 'tourfic' ),
-					'is_pro'  => true,
-					'dependency' => array( 'booking-by', '==', '2' ),
-				),
-				array(
-					'id'        => '',
-					'type'      => 'switch',
-					'label'     => esc_html__( 'Hide Price', 'tourfic' ),
-					'subtitle' => esc_html__( 'Enable this option to hide the price from the single hotel page.', 'tourfic' ),
-					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
-					'label_off' => esc_html__( 'No', 'tourfic' ),
-					'is_pro'  => true,
-					'dependency' => array( 'booking-by', '==', '2' ),
-				),
-				array(
-					'id'        => '',
-					'type'      => 'switch',
-					'label'     => esc_html__( 'Allow Attribute', 'tourfic' ),
-					'subtitle'  => esc_html__( 'If attribute allow, You can able to add custom Attribute', 'tourfic' ),
-					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
-					'label_off' => esc_html__( 'No', 'tourfic' ),
-					'is_pro'  => true,
-					'dependency'  => array( 'booking-by', '==', '2' ),
-				),
-				array(
-					'id'          => '',
-					'type'        => 'textarea',
-					'label'       => esc_html__( 'Query Attribute', 'tourfic' ),
-					'placeholder' => esc_html__( 'adult={adult}&child={child}&room={room}', 'tourfic' ),
-					'is_pro'  => true,
-					'dependency'  => array( 'booking-by', '==', '2' ),
-				),
-				array(
-					'id'      => 'booking-notice',
-					'type'    => 'notice',
-					'class'   => 'info',
-					'title'   => esc_html__( 'Query Attribute List', 'tourfic' ),
-					'content' => esc_html__( 'You can use the following placeholders in the Query Attribute body:', 'tourfic' ) . '<br><br><strong>{adult} </strong> : To Display Adult Number from Search.<br>
-							<strong>{child} </strong> : To Display Child Number from Search.<br>
-							<strong>{checkin} </strong> : To display the Checkin date from Search.<br>
-							<strong>{checkout} </strong> : To display the Checkout date from Search.<br>
-							<strong>{room} </strong> : To display the room number from Search.<br>',
-					'is_pro'  => true,
-					'dependency'  => array( 'booking-by', '==', '2' ),
-				),
-				array(
-					'id'        => 'is_taxable',
-					'type'      => 'switch',
-					'label'     => esc_html__( 'Taxable', 'tourfic' ),
-					'subtitle' => esc_html__( 'Activate this option to enable tax for this Hotel.', 'tourfic' ),
-					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
-					'label_off' => esc_html__( 'No', 'tourfic' ),
-					'is_pro'  => true
-				),
-				array(
-					'id'      => 'taxable_class',
-					'type'    => 'select',
-					'label'   => esc_html__( 'Tax class', 'tourfic' ),
-					'subtitle'  => esc_html__( 'Select your class, and tax will calculate based on your chosen class. PS: If you activate partial payment option tax will be calculated upon partial amount as woocommerce regulations.', 'tourfic' ),
-					'options' => tf_taxable_option_callback(),
-					'is_pro'  => true
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-information-fill',
+					'content' => wp_kses_post(__( 'We\'re offering some additional features like <b>external booking</b>, <b>taxable hotel</b>, <b>tax class for Woocommerce</b> in our pro plan. The external booking option provides seamless integration with external booking systems, enhancing your booking capabilities significantly. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of this fantastic option!</a>', 'tourfic' ) ),
 				),
 			),
 		),
@@ -212,7 +143,8 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'class'    => 'gmaps',
 					'type'     => 'map',
 					'label'    => esc_html__( 'Dynamic Location Search', 'tourfic' ),
-					'subtitle' => esc_html__( 'Enter the specific address you wish to use for the hotel and select the correct option from the suggested addresses. This will be used to hyperlink address and display the address on the front-end map. Note that the address provided in the previous section is solely for display purposes!', 'tourfic' ),
+					/* translators: %s is the link to the Google Maps API Key settings */
+					'subtitle' => sprintf( wp_kses_post(__( 'Enter the specific address you wish to use for the hotel and select the correct option from the suggested addresses. This will be used to hyperlink address and display the address on the front-end map. <strong>Google Maps is also available for location. Simply set up your <a href="%s" target="_blank">Google Maps API Key</a></strong>', 'tourfic' )), esc_url( admin_url('admin.php?page=tf_settings#tab=map_settings') ) ),
 					'height'   => '250px',
 					'settings' => array(
 						'scrollWheelZoom' => true,
@@ -381,232 +313,12 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/how-it-works/hotel-services/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
-					'id'      => '',
-					'type'    => 'switch',
-					'label'   => __( 'Airport Pickup Service', 'tourfic' ),
-					'subtitle'    => __( 'Activate this feature to provide airport pickup services as an added convenience for your guests.', 'tourfic' ),
-					'default' => true,
-					'is_pro'  => true,
-				),
-				array(
-					'id'         => '',
-					'type'       => 'checkbox',
-					'label'      => __( 'Service Type', 'tourfic' ),
-					'inline'     => true,
-					'options'    => array(
-						'pickup'  => __( 'Pickup (Pro)', 'tourfic' ),
-						'dropoff' => __( 'Drop-off (Pro)', 'tourfic' ),
-						'both'    => __( 'Pickup & Drop-off (Pro)', 'tourfic' ),
-					)
-				),
-				/**
-				 *
-				 * Service Type Pick up
-				 */
-				array(
-					'id'         => '',
-					'type'       => 'tab',
-					'title'      => __( 'Pickup Service', 'tourfic' ),
-					'is_pro'  => true,
-					'tabs'       => array(
-						array(
-							'id'     => 'tab-1',
-							'title'  => __( 'Pickup', 'tourfic' ),
-							'icon'   => 'fa fa-heart',
-							'fields' => array(
-								array(
-									'id'      => 'airport_pickup_price_type',
-									'type'    => 'select',
-									'label'   => __( 'Pickup Pricing Type', 'tourfic' ),
-									'options' => array(
-										'per_person' => __( 'Per Person', 'tourfic' ),
-										'fixed'      => __( 'Fixed Price', 'tourfic' ),
-										'free'       => __( 'Free / Complimentary', 'tourfic' ),
-									),
-									'default' => 'per_person',
-								),
-								array(
-									'id'          => 'airport_service_fee_adult',
-									'type'        => 'number',
-									'dependency'  => array(
-										array( 'airport_pickup_price_type', '==', 'per_person' ),
-									),
-									'label'       => __( 'Adult Price', 'tourfic' ),
-									'subtitle'    => __( 'Price per adult. Insert number only (No currency sign needed).', 'tourfic' ),
-									'attributes'  => array(
-										'min' => '0',
-									),
-									'field_width' => 50,
-								),
-								array(
-									'id'          => 'airport_service_fee_children',
-									'type'        => 'number',
-									'dependency'  => array(
-										array( 'airport_pickup_price_type', '==', 'per_person' ),
-									),
-									'label'       => __( 'Children Price', 'tourfic' ),
-									'subtitle'    => __( 'Price per child. Insert number only (No currency sign needed).', 'tourfic' ),
-									'attributes'  => array(
-										'min' => '0',
-									),
-									'field_width' => 50,
-								),
-
-								array(
-									'id'         => 'airport_service_fee_fixed',
-									'type'       => 'number',
-									'dependency' => array(
-										array( 'airport_pickup_price_type', '==', 'fixed' ),
-									),
-									'label'      => __( 'Fixed Price', 'tourfic' ),
-									'subtitle'   => __( 'Insert number only (No currency sign needed)', 'tourfic' ),
-									'attributes' => array(
-										'min' => '0',
-									),
-								),
-							)
-						)
-					)
-				),
-
-				/**
-				 *
-				 * Service Type Drop Off
-				 */
-				array(
-					'id'         => '',
-					'type'       => 'tab',
-					'title'      => __( 'Drop-off Service', 'tourfic' ),
-					'is_pro'  => true,
-					'tabs'       => array(
-						array(
-							'id'     => 'tab-1',
-							'title'  => __( 'Drop-off', 'tourfic' ),
-							'icon'   => 'fa fa-heart',
-							'fields' => array(
-								array(
-									'id'      => 'airport_pickup_price_type',
-									'type'    => 'select',
-									'label'   => __( 'Drop-off Pricing Type', 'tourfic' ),
-									'options' => array(
-										'per_person' => __( 'Per Person', 'tourfic' ),
-										'fixed'      => __( 'Fixed Price', 'tourfic' ),
-										'free'       => __( 'Free / Complimentary', 'tourfic' ),
-									),
-									'default' => 'per_person',
-								),
-								array(
-									'id'          => 'airport_service_fee_adult',
-									'type'        => 'number',
-									'dependency'  => array(
-										array( 'airport_pickup_price_type', '==', 'per_person' ),
-									),
-									'label'       => __( 'Adult Price', 'tourfic' ),
-									'subtitle'    => __( 'Price per adult. Insert number only (No currency sign needed).', 'tourfic' ),
-									'attributes'  => array(
-										'min' => '0',
-									),
-									'field_width' => 50,
-								),
-								array(
-									'id'          => 'airport_service_fee_children',
-									'type'        => 'number',
-									'dependency'  => array(
-										array( 'airport_pickup_price_type', '==', 'per_person' ),
-									),
-									'label'       => __( 'Children Price', 'tourfic' ),
-									'subtitle'    => __( 'Price per child. Insert number only (No currency sign needed).', 'tourfic' ),
-									'attributes'  => array(
-										'min' => '0',
-									),
-									'field_width' => 50,
-								),
-
-								array(
-									'id'         => 'airport_service_fee_fixed',
-									'type'       => 'number',
-									'dependency' => array(
-										array( 'airport_pickup_price_type', '==', 'fixed' ),
-									),
-									'label'      => __( 'Fixed Price', 'tourfic' ),
-									'subtitle'   => __( 'Insert number only (No currency sign needed)', 'tourfic' ),
-									'attributes' => array(
-										'min' => '0',
-									),
-								),
-							)
-						)
-					)
-				),
-
-				/**
-				 *
-				 * Service Type pickup Pickoff (both)
-				 */
-				array(
-					'id'         => '',
-					'type'       => 'tab',
-					'title'      => __( 'Pickup & Drop-off Service', 'tourfic' ),
-					'is_pro'  => true,
-					'tabs'       => array(
-						array(
-							'id'     => 'tab-1',
-							'title'  => __( 'Pickup & Drop-off', 'tourfic' ),
-							'icon'   => 'fa fa-heart',
-							'fields' => array(
-								array(
-									'id'      => 'airport_pickup_price_type',
-									'type'    => 'select',
-									'label'   => __( 'Pickup & Drop-off Pricing Type', 'tourfic' ),
-									'options' => array(
-										'per_person' => __( 'Per Person', 'tourfic' ),
-										'fixed'      => __( 'Fixed Price', 'tourfic' ),
-										'free'       => __( 'Free / Complimentary', 'tourfic' ),
-									),
-									'default' => 'per_person',
-								),
-								array(
-									'id'          => 'airport_service_fee_adult',
-									'type'        => 'number',
-									'dependency'  => array(
-										array( 'airport_pickup_price_type', '==', 'per_person' ),
-									),
-									'label'       => __( 'Adult Price', 'tourfic' ),
-									'subtitle'    => __( 'Price per adult. Insert number only (No currency sign needed).', 'tourfic' ),
-									'attributes'  => array(
-										'min' => '0',
-									),
-									'field_width' => 50,
-								),
-								array(
-									'id'          => 'airport_service_fee_children',
-									'type'        => 'number',
-									'dependency'  => array(
-										array( 'airport_pickup_price_type', '==', 'per_person' ),
-									),
-									'label'       => __( 'Children Price', 'tourfic' ),
-									'subtitle'    => __( 'Price per child. Insert number only (No currency sign needed).', 'tourfic' ),
-									'attributes'  => array(
-										'min' => '0',
-									),
-									'field_width' => 50,
-								),
-
-								array(
-									'id'         => 'airport_service_fee_fixed',
-									'type'       => 'number',
-									'dependency' => array(
-										array( 'airport_pickup_price_type', '==', 'fixed' ),
-									),
-									'label'      => __( 'Fixed Price', 'tourfic' ),
-									'subtitle'   => __( 'Insert number only (No currency sign needed)', 'tourfic' ),
-									'attributes' => array(
-										'min' => '0',
-									),
-								),
-							)
-						)
-					)
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-information-fill',
+					'content' => wp_kses_post(__( 'Do you need to add hotel airport services such as pickup, dropoff, or both? Our Pro plan includes the <b>hotel service</b> feature, allowing you to easily add these services with pricing options <b>per person</b>, <b>fixed</b>, or <b>complimentary</b>. Enhance your guest experience by integrating these convenient services seamlessly into your offerings. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of this fantastic option!</a>', 'tourfic') ),
 				),
 			),
 		),
@@ -729,18 +441,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'field_width' => 33.33,
 						),
 						array(
-							'id'          => 'children_age_limit',
-							'type'        => 'number',
-							'is_pro'      => true,
-							'label'       => __( 'Child age limit', 'tourfic' ),
-							'subtitle'    => __( 'Maximum age of a children.', 'tourfic' ),
-							'description' => __( 'keep blank if don\'t want to add', 'tourfic' ),
-							'attributes'  => array(
-								'min' => '0',
-							),
-							'field_width' => 50,
-						),
-						array(
 							'id'          => 'footage',
 							'type'        => 'text',
 							'label'       => __( 'Room Footage', 'tourfic' ),
@@ -803,7 +503,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'label'   => __( 'Room Pricing Logic', 'tourfic' ),
 							'options' => array(
 								'1' => __( 'Per Room Basis', 'tourfic' ),
-								'2' => __( 'Per Person Basis (Pro)', 'tourfic' ),
 							),
 							'default' => '1',
 							'attributes'  => array(
@@ -816,23 +515,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'label'      => __( 'Insert Your Price', 'tourfic' ),
 							'subtitle'   => __( 'Enter the per-night rate for the room.', 'tourfic' ),
 							'dependency' => array( 'pricing-by', '==', '1' ),
-						),
-						array(
-							'id'          => '',
-							'type'        => 'text',
-							'label'       => __( 'Price per Adult', 'tourfic' ),
-							'is_pro'      => true,
-							'dependency'  => array( 'pricing-by', '==', '2' ),
-							'field_width' => 50,
-						),
-
-						array(
-							'id'          => '',
-							'type'        => 'text',
-							'label'       => __( 'Price per Children', 'tourfic' ),
-							'is_pro'      => true,
-							'dependency'  => array( 'pricing-by', '==', '2' ),
-							'field_width' => 50,
 						),
 						array(
 							'id'       => 'discount_hotel_type',
@@ -892,55 +574,16 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'label_off' => __( 'No', 'tourfic' ),
 							'default'   => false,
 						),
-						array(
-							'id'      => '',
-							'type'    => 'switch',
-							'label'   => __( 'Enable Availability by Date', 'tourfic' ),
-							'is_pro'  => true,
-							'default' => true,
-							'attributes'  => array(
-								'class' => 'tf_room_availability_by_date',
-							),
-						),
-						array(
-							'id'        => '',
-							'type'      => 'hotelAvailabilityCal',
-							'label'     => __( 'Availability Calendar', 'tourfic' ),
-							'is_pro'  => true,
-							'dependency' => array( 'avil_by_date', '!=', 'false' ),
-						),
-						array(
-							'id'      => 'Deposit',
-							'type'    => 'heading',
-							'content' => __( 'Deposit', 'tourfic' ),
-							'class'   => 'tf-field-class',
-						),
-						array(
-							'id'      => '',
-							'type'    => 'switch',
-							'label'   => __( 'Enable Deposit', 'tourfic' ),
-							'is_pro'  => true,
-							'default' => false,
-						),
-						array(
-							'id'      => 'ical',
-							'type'    => 'heading',
-							'content' => __( 'iCal Sync', 'tourfic' ),
-						),
-						array(
-							'id'          => '',
-							'type'        => 'ical',
-							'label'       => __( 'iCal URL', 'tourfic' ),
-							'placeholder' => __( 'https://website.com', 'tourfic' ),
-							'button_text' => __( 'Import', 'tourfic' ),
-							'button_class'   => 'room-ical-import',
-							'attributes'  => array(
-								'class' => 'ical_url_input',
-							),
-							'is_pro'      => true
-						)
 					),
-				)
+				),
+				array(
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-information-fill',
+					'content' => wp_kses_post(__( 'We\'re offering some extra features in every rooms like <b>child age limit</b>, <b>hotel room custom availability</b>, <b>deposit</b>, <b>ical sync</b> and <b>per person basis pricing</b> in our pro plan. <a href="https://tourfic.com/" target="_blank"> Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
+				),
 			),
 		),
 		// FAQ Details
@@ -1044,34 +687,34 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 
 		// Multiple tags for hotels
 		'hotel_multiple_tags' => array(
-			'title'  => __( 'Labels', 'tourfic' ),
+			'title'  => __( 'Promotional Tags', 'tourfic' ),
 			'icon'   => 'fa fa-list',
 			'fields' => array(
 				array(
 					'id'      => 'tf-hotel-tags-heading',
 					'type'    => 'heading',
-					'label' => __( 'Hotel labels', 'tourfic' ),
+					'label' => __( 'Hotel tags', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
 					'id'           => 'tf-hotel-tags',
 					'type'         => 'repeater',
-					'label'        => __( 'Labels', 'tourfic' ),
-					'subtitle' => __('Add some keywords that highlight your hotel\'s Unique Selling Point (USP). This label will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
-					'button_title' => __( 'Add / Insert New Label', 'tourfic' ),
+					'label'        => __( 'Promotional Tags', 'tourfic' ),
+					'subtitle' => __('Add some keywords that highlight your hotel\'s Unique Selling Point (USP). This tag will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
+					'button_title' => __( 'Add / Insert New Tag', 'tourfic' ),
 					'fields'       => array(
 
 						array(
 							'id'    => 'hotel-tag-title',
 							'type'  => 'text',
-							'label' => __( 'Label Title', 'tourfic' ),
+							'label' => __( 'Tag Title', 'tourfic' ),
 						),
 
 						array(
 							'id'       => 'hotel-tag-color-settings',
 							'type'     => 'color',
-							'label'    => __( 'Label Colors', 'tourfic' ),
-							'subtitle' => __( 'Colors of Label Background and Font', 'tourfic' ),
+							'label'    => __( 'Tag Colors', 'tourfic' ),
+							'subtitle' => __( 'Colors of Tag Background and Font', 'tourfic' ),
 							'multiple' => true,
 							'inline'   => true,
 							'colors'   => array(

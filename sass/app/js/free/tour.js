@@ -31,13 +31,9 @@
             var tour_extra_total = [];
             var tour_extra_quantity = [];
 
-            jQuery('.tour-extra-single').each(function (e) {
-                let $this = jQuery(this);
-
-                if ($this.find('input[name="tf-tour-extra"]').is(':checked')) {
-
-                    let tour_extras = $this.find('input[name="tf-tour-extra"]').val();
-                    tour_extra_total.push(tour_extras);
+            /*
+            jQuery('.tour-extra-single input:checkbox:checked').each(function () {
+                tour_extra_total.push(jQuery(this).val());
 
                     if ($this.find('.tf_quantity-acrselection').hasClass('quantity-active')) {
                         let qty = $this.find('input[name="extra-quantity"]').val();
@@ -48,7 +44,26 @@
                     }
                 }
             });
-            
+            */
+
+            jQuery('.tour-extra-single').each(function(e) {
+                let $this = jQuery(this);
+
+                if($this.find('input[name="tf-tour-extra"]').is(':checked')){
+
+                   let tour_extras = $this.find('input[name="tf-tour-extra"]').val();
+                   tour_extra_total.push(tour_extras);
+
+                   if($this.find('.tf_quantity-acrselection').hasClass('quantity-active')){
+                       let qty = $this.find('input[name="extra-quantity"]').val();
+
+                       tour_extra_quantity.push(qty)
+                   }else{
+                    tour_extra_quantity.push(1)
+                   }
+               }
+           });
+
             formData.append('tour_extra', tour_extra_total);
             formData.append('tour_extra_quantity', tour_extra_quantity);
 

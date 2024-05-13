@@ -50,6 +50,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            cursor: pointer;
+            user-select: none;
             i{
                 color: #595349 ;
             }
@@ -223,10 +225,9 @@
     .tf-single-itinerary.active .tf-itinerary-title i {
         transform: rotate(180deg);
     }
+}
 
-    .tf-itinerary-map{
-        margin-top: 32px;
-        margin-bottom: 48px;
-    }
-
+.tf-itinerary-map{
+    margin-top: 32px;
+    margin-bottom: 48px;
 }

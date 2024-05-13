@@ -13,17 +13,51 @@
 }
 
 .tf-apartment-title {
-    padding-bottom: 20px;
+    padding-bottom: 40px;
 
     .tf-title-wrap{
+        @include align-items(flex-end);
         @media #{$max767} {
             @include flex-direction(column);
+        }
+    }
+
+    .tf-title-left-bottom{
+        @include flexbox();
+        @include align-items(center);
+        gap: 32px;
+        
+        a{
+            text-decoration: none;
+        }
+
+        .tf-single-rating {
+            color: #607085;
+            background-color: transparent;
+            padding: 0;
+            font-size: 12px;
+            @include flexbox();
+            @include align-items(center);
+
+            i {
+                color: $yellow60;
+                font-size: 16px;
+                margin-top: -3px;
+            }
+
+            span {
+                font-size: 14px;
+                font-weight: 500;
+                color: #8997A9;
+                margin: 0 4px;
+            }
         }
     }
 
     .tf-title-right{
         @include flex(0 0 350px);
         @include justify-content(flex-end);
+        gap: 24px;
 
         @media #{$max767} {
             @include flex(0 0 100%);
@@ -34,18 +68,160 @@
         a {
             text-decoration: none;
         }
+
+        .tf-wishlist-button {
+            font-size: 14px;
+            cursor: pointer;
+            line-height: 1;
+            color: #8997A9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            i{
+                font-size: 24px;
+            }
+        }
+
+        .tf-share {
+            position: relative;
+
+            a {
+                line-height: 1;
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+                outline: none;
+                color: #8997A9;
+                gap: 8px;
+            }
+
+            .share-tour-content {
+                display: none;
+                position: absolute;
+                min-width: 100%;
+                top: 100%;
+                transform: translateY(8px);
+                z-index: 99999;
+                left: auto;
+                right: 0;
+
+                .tf-dropdown-content {
+                    margin: 0;
+                    background: #fff;
+                    border-radius: 4px;
+                    overflow: hidden;
+                    min-width: 200px;
+                    z-index: 100;
+                    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 3px -1px rgba(0, 0, 0, 0.2);
+
+                    li {
+                        display: inline-block;
+
+                        a i {
+                            color: #1D75E3;
+                            font-size: 17px;
+                        }
+
+                        &:nth-child(2) a i {
+                            color: #1D9BF0;
+                        }
+
+                        &:nth-child(3) a i {
+                            color: #0A66C2;
+                        }
+
+                        &:nth-child(4) a i {
+                            color: #CC0000;
+                        }
+                    }
+                }
+
+                .tf-dropdown-item-content {
+                    white-space: nowrap;
+                    display: flex;
+                    align-items: center;
+                    column-gap: 5px;
+                }
+
+                .tf-dropdown-item {
+                    border: 0;
+                    margin: 0;
+                    cursor: pointer;
+                    padding: 12px 16px;
+                    white-space: nowrap;
+                    text-decoration: none;
+                    color: #333;
+                    background-color: #fff;
+                    fill: #333;
+                    display: flex;
+                    align-items: center;
+                    font-weight: 400;
+                    font-size: 14px;
+
+                    &:hover {
+                        background-color: #f5f5f5;
+                    }
+                }
+
+                .share-center-copy-form {
+                    display: flex;
+                    align-items: center;
+                    padding: 12px 16px;
+                }
+
+                .share-center-copy-label {
+                    white-space: nowrap;
+                }
+
+                .share-center-copied-message {
+                    display: none;
+                }
+
+                #share_link_button {
+                    white-space: nowrap;
+                    font-size: 13px;
+                    padding: 5px 12px;
+                }
+
+                input#share_link_input {
+                    width: auto !important;
+                    flex-grow: 1;
+                    margin: 0 8px;
+                    background-color: #e6e6e6;
+                    padding: 0;
+                    border: 2px solid rgba(118, 118, 118, 0.3);
+                }
+            }
+
+            .share-center-copy-cta.copied {
+                .share-center-copied-message {
+                    display: inline-block;
+                    font-weight: bold;
+                }
+
+                .share-center-copy-message {
+                    display: none;
+                }
+            }
+        }
     }
     
     h1 {
-        color: $slate80;
+        color: #2A3343;
         font-weight: 500;
         font-size: 36px;
         line-height: 40px;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
     }
 
     .tf-map-link {
-        color: $slate60;
+        color: #607085;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: 0.2px;
 
         .more-apartment {
             color: $slate60;
@@ -53,35 +229,34 @@
         }
     }
 
-    .tf-single-rating {
-        color: $slate60;
-        font-weight: 500;
-        background-color: transparent;
-        padding: 0;
-        @include flexbox();
-
-        i {
-            color: $yellow60;
-            font-size: 16px;
-        }
-
-        span {
-            font-size: 16px;
-        }
-    }
+    
 }
 
 .tf-apartment {
+
+    .btn-primary{
+        color: #F8F9FB;
+        text-align: center;
+        font-size: 16px !important;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px !important;
+        letter-spacing: 0.5px;
+        padding: 12px 24px;
+        border-radius: 8px;
+        background: #2979FF;
+        box-shadow: 0px 1px 1px 0px rgba(0, 60, 121, 0.16);
+    }
     .section-heading {
         font-weight: 600 !important;
         font-size: 24px !important;
         line-height: 32px !important;
-        margin-bottom: 16px;
-        color: $slate80;
+        margin: 0 0 16px 0;
+        color: #2A3343;
     }
 
     .tf-apt-hero-section{
-        margin-bottom: 48px;
+        margin-bottom: 40px;
     }
     .tf-apt-hero-wrapper {
         position: relative;
@@ -94,7 +269,11 @@
 
         .tf-apt-hero-gallery {
             @include flexbox();
-            gap: 16px;
+            gap: 24px;
+
+            @media #{$max575} {
+                gap: 16px;
+            }
 
             img {
                 object-fit: cover;
@@ -107,15 +286,15 @@
                 @include flex(0 0 100%);
 
                 &.has-right{
-                    @include flex(0 0 calc(70% - 8px));
+                    @include flex(0 0 calc(70% - 12px));
 
                     @media #{$max991} {
-                        @include flex(0 0 calc(50% - 8px));
+                        @include flex(0 0 calc(50% - 12px));
                     }
                 }
 
                 .hero-first-image{
-                    height: 500px;
+                    height: 424px;
 
                     @media #{$max575} {
                         height: 300px;
@@ -124,21 +303,40 @@
             }
 
             .tf-apt-hero-right {
-                @include flex(0 0 calc(30% - 8px));
+                @include flex(0 0 calc(30% - 12px));
                 @include flexbox();
                 @include flex-direction(column);
-                gap: 16px;
+                gap: 24px;
 
                 @media #{$max991} {
-                    @include flex(0 0 calc(50% - 8px));
+                    @include flex(0 0 calc(50% - 12px));
+                }
+                @media #{$max575} {
+                    gap: 16px;
                 }
 
                 .hero-second-image,
                 .hero-third-image{
-                    height: 242px;
+                    height: 200px;
 
                     @media #{$max575} {
                         height: 142px;
+                    }
+                }
+
+                .has-more{
+                    position: relative;
+
+                    &::after{
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        height: 100%;
+                        width: 100%;
+                        background: #000;
+                        opacity: .5;
+                        border-radius: 8px;
                     }
                 }
             }
@@ -159,8 +357,9 @@
 
             a.tf_button {
                 max-width: 130px;
-                background: rgba(0, 0, 0, 0.85);
-                border: none;
+                border-radius: 4px !important;
+                border: 1px solid rgba(255, 255, 255, 0.40) !important;
+                background: rgba(255, 255, 255, 0.60) !important;
             }
         }
 
@@ -169,7 +368,7 @@
     .tf-apartment-content-wrapper {
         @include flexbox();
         @include flex-wrap(wrap);
-        gap: 32px;
+        gap: 24px;
 
         @media #{$max991} {
             flex-direction: column-reverse;
@@ -196,15 +395,13 @@
         @include flexbox();
         @include flex-wrap(wrap);
         gap: 16px;
-        padding-bottom: 24px;
-        border-bottom: 1px solid $slate10;
-        margin-bottom: 24px;
+        margin-bottom: 48px;
 
         &.slick-dotted{
-            padding-bottom: 52px;
+            padding-bottom: 70px;
         }
         .slick-dots {
-            bottom: 16px;
+            bottom: 24px;
 
             li {
                 width: 16px;
@@ -246,7 +443,7 @@
         .tf-apt-highlight {
             @include flex(0 0 calc(100% / 3 - 11px));
             border: 1px solid #ddd;
-            border-radius: 16px;
+            border-radius: 8px;
             padding: 16px;
             min-height: 72px;
             box-sizing: border-box;
@@ -267,12 +464,13 @@
 
                 i {
                     font-size: 24px;
-                    color: $slate80;
+                    line-height: 1;
+                    color: $slate60;
                 }
             }
 
             h4 {
-                color: $slate80;
+                color: $slate60;
                 margin: 0;
                 font-size: 20px !important;
                 font-weight: 500 !important;
@@ -280,7 +478,8 @@
 
             p{
                 color: #828C99;
-                font-size: 16px;
+                font-size: 14px !important;
+                line-height: 22px !important;
                 font-weight: 400;
                 margin: 0;
             }
@@ -289,19 +488,51 @@
 
     /* Rooms */
     .tf-apartment-rooms {
-        margin-bottom: 48px;
+        margin-bottom: 80px;
+
+        .slick-list{
+            margin: 0 -12px !important;
+        }
 
         .slick-track{
             margin: 0 !important;
         }
 
         .slick-arrow {
+            display: inline-block;
             z-index: 999;
+            right: 0;
+            top: 80px;
+            height: 40px;
+            width: 40px;
+
+            svg{
+                padding: 8px;
+                border-radius: 50%;
+                border: 1px solid #E1E5EA;
+                background: rgba(255, 255, 255, 0.70);
+                box-shadow: 0px 5px 10px 0px rgba(0, 44, 102, 0.20);
+            }
+        }
+        .slick-prev {
+            left: 0;
+        }
+        .slick-arrow::before {
+            display: none;
         }
 
-        .slick-dotted.slick-slider{
-            margin-bottom: 0;
-            padding-bottom: 40px;
+        .tf-apartment-default-design-room-slider{
+
+            &::after{
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -1px;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(270deg, #FFF -0.06%, rgba(255, 255, 255, 0.00) 15.54%);
+                border-radius: 8px;
+            }
         }
         .slick-dots {
             bottom: 0;
@@ -344,11 +575,12 @@
         }
 
         .tf-apartment-room-item {
-            margin: 0 8px !important;
+            margin: 0 12px !important;
 
             .tf-apartment-room-item-thumb{
                 overflow: hidden;
-                border-radius: 6px 6px 0 0;
+                border-radius: 8px;
+                margin-bottom: 8px;
 
                 img {
                     height: 170px;
@@ -365,20 +597,28 @@
             }
 
             .tf-apartment-room-item-content {
-                padding: 16px;
-                border: 1px solid #ddd;
-                border-top: none;
-                border-radius: 0 0 6px 6px;
+                
+                a{
+                    text-decoration: none;
+                }
 
                 h3 {
+                    font-style: normal;
+                    font-weight: 400 !important;
+                    line-height: 28px;
+                    letter-spacing: 0.2px;
                     font-size: 18px !important;
-                    color: $slate80;
-                    margin: 0 0 8px 0;
+                    color: #2A3343;
+                    margin: 0;
                 }
 
                 p {
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 20px;
+                    letter-spacing: 0.2px;
                     font-size: 14px !important;
-                    color: $slate40;
+                    color: #8997A9;
                     margin: 0;
                 }
             }
@@ -386,19 +626,25 @@
     }
 
     .tf-apartment-amenities-section{
-        margin-bottom: 48px;
+        margin-bottom: 80px;
 
+        .tf-apartment-amenities-inner{
+            border-radius: 8px;
+            border: 1px solid #F0F2F4;
+            background: var(--Slate-0, #F8F9FB);
+            padding: 24px 40px;
+        }
         .tf-apartment-amenities {
             @include flexbox();
             @include flex-wrap(wrap);
             gap: 16px;
-            margin-bottom: 24px;
 
             .tf-apt-amenity{
                 @include flex(0 0 calc(100% / 2 - 11px));
                 @include flexbox();
                 gap: 16px;
                 margin-bottom: 5px;
+                color: #607085;
 
                 .tf-apt-amenity-icon {
                     @include flexbox();
@@ -408,9 +654,24 @@
 
                     i {
                         font-size: 24px;
-                        color: $slate80;
+                        color:#607085;
                     }
                 }
+            }
+        }
+
+        .tf-apartment-amenities-more{
+
+            .tf-modal-btn{
+                @include flexbox();
+                @include align-items(center);
+                @include justify-content(flex-end);
+                gap: 4px;
+                font-size: 14px;
+                font-weight: 500;
+                color: #2A3343;
+                cursor: pointer;
+                text-decoration: none;
             }
         }
     }
@@ -436,6 +697,15 @@
 
     .apt-description {
         margin-bottom: 48px;
+
+        p{
+            margin: 0 0 20px 0;
+            color: #607085;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 24px !important;
+            letter-spacing: 0.2px;
+        }
     }
 }
 #tf_apt_room_details_qv {
@@ -457,133 +727,7 @@
     }
 }
 
-.tf-wishlist-button {
-    font-size: 24px;
-    cursor: pointer;
-    margin: 0 5px 0 0;
-    line-height: 1;
-}
 
-.tf-share {
-    position: relative;
-
-    a {
-        line-height: 1;
-        font-size: 22px;
-        display: block;
-        margin: 0 10px 0 0;
-        outline: none;
-    }
-
-    .share-tour-content {
-        display: none;
-        position: absolute;
-        min-width: 100%;
-        top: 100%;
-        transform: translateY(8px);
-        z-index: 99999;
-        left: auto;
-        right: 0;
-
-        .tf-dropdown-content {
-            margin: 0;
-            background: #fff;
-            border-radius: 4px;
-            overflow: hidden;
-            min-width: 200px;
-            z-index: 100;
-            box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 3px -1px rgba(0, 0, 0, 0.2);
-
-            li {
-                display: inline-block;
-
-                a i {
-                    color: #1D75E3;
-                    font-size: 17px;
-                }
-
-                &:nth-child(2) a i {
-                    color: #1D9BF0;
-                }
-
-                &:nth-child(3) a i {
-                    color: #0A66C2;
-                }
-
-                &:nth-child(4) a i {
-                    color: #CC0000;
-                }
-            }
-        }
-
-        .tf-dropdown-item-content {
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            column-gap: 5px;
-        }
-
-        .tf-dropdown-item {
-            border: 0;
-            margin: 0;
-            cursor: pointer;
-            padding: 12px 16px;
-            white-space: nowrap;
-            text-decoration: none;
-            color: #333;
-            background-color: #fff;
-            fill: #333;
-            display: flex;
-            align-items: center;
-            font-weight: 400;
-            font-size: 14px;
-
-            &:hover {
-                background-color: #f5f5f5;
-            }
-        }
-
-        .share-center-copy-form {
-            display: flex;
-            align-items: center;
-            padding: 12px 16px;
-        }
-
-        .share-center-copy-label {
-            white-space: nowrap;
-        }
-
-        .share-center-copied-message {
-            display: none;
-        }
-
-        #share_link_button {
-            white-space: nowrap;
-            font-size: 13px;
-            padding: 5px 12px;
-        }
-
-        input#share_link_input {
-            width: auto !important;
-            flex-grow: 1;
-            margin: 0 8px;
-            background-color: #e6e6e6;
-            padding: 0;
-            border: 2px solid rgba(118, 118, 118, 0.3);
-        }
-    }
-
-    .share-center-copy-cta.copied {
-        .share-center-copied-message {
-            display: inline-block;
-            font-weight: bold;
-        }
-
-        .share-center-copy-message {
-            display: none;
-        }
-    }
-}
 
 .show-on-map {
     .btn-styled {
@@ -593,28 +737,54 @@
 }
 
 .host-details {
-    background: $blue0;
+    background: #F5F8FF;
     border-radius: 8px;
-    padding: 25px;
+    padding: 24px;
     border: 1px solid $blue5;
     margin-bottom: 25px;
 
     .host-top {
         @include flexbox();
-        gap: 15px;
+        gap: 11px;
+        align-items: center;
+        margin-bottom: 24px;
 
         img {
             width: 80px;
             height: 80px;
             object-fit: cover;
-            border-radius: 50%;
+            border-radius: 40px;
+            border: 1px solid $slate5;
         }
     }
 
     .host-meta {
-        h4, p {
-            margin-bottom: 0;
-            margin-top: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        h4 {
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 1.33;
+            color:#607085;
+            margin: 0;
+        }
+        .tf-apartment-joined-text {
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 16px;
+            letter-spacing: 0.2px;
+            margin: 0;
+            color: #8997A9;
+            @include flexbox();
+
+            span {
+                letter-spacing: 0.2px;
+                padding-left: 8px;
+                font-weight: normal;
+            }
         }
 
         i {
@@ -627,56 +797,86 @@
     }
 
     .host-bottom {
-        p {
+        @include flexbox();
+        flex-direction: column;
+        gap: 8px;
+
+        h5 {
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.33;
+            letter-spacing: 0.5px;
+            color: $slate60;
             margin: 0;
+        }
+        p {
+            color: #8997A9;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 24px;
+            letter-spacing: 0.2px;
+            margin: 0 !important;
         }
 
         ul {
             list-style: none;
             margin: 0;
-            margin-bottom: 25px;
             padding: 0;
 
             li {
+                padding: 8px 0 !important;
+                color: #8997A9;
+
                 span {
                     text-align: right;
-                    font-weight: bold;
                     float: right;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 24px;
+                    letter-spacing: 0.5px;
+                    color: #607085;
                 }
 
-                padding-bottom: 10px;
-
                 &:last-child {
-                    padding-bottom: 0;
+                    margin-bottom: 0px;
                 }
             }
         }
 
         a {
+
+
+        }
+
+        .tf-apartment-contact-button {
+            padding: 11px 24px;
+            border-radius: 4px;
+            background-color: #fff !important;
+            color: #2979FF !important;
+            border: 1px solid #2979FF;
+            text-decoration: none;
+
             i {
                 padding-right: 8px;
             }
-        }
 
-        .btn-styled {
-            width: auto !important;
-            display: block;
+            &:hover{
+                background-color: #2979FF;
+                color: #fff;
+            }
         }
-    }
-
-    .host-desc {
-        padding: 25px 0;
     }
 }
 
 #apartment-map{
-    margin-bottom: 48px;
+    margin-bottom: 80px;
 }
 
 .tf-map-content-wrapper {
     @include flexbox();
     @include flex-wrap(wrap);
-    gap: 32px;
+    gap: 24px;
 
     &.tf-map-content-full{
         .tf-apartment-map{
@@ -688,7 +888,7 @@
     }
 
     .tf-apartment-map {
-        @include flex(0 0 calc(50% - 16px));
+        @include flex(0 0 calc(50% - 12px));
 
         @media #{$max767} {
             @include flex(0 0 100%);
@@ -702,29 +902,40 @@
             margin-bottom: 24px;
         }
 
+        #apartment-location{
+            border-radius: 8px;
+        }
+
         iframe {
             border-radius: 8px;
         }
     }
 
     .about-location {
-        @include flex(0 0 calc(50% - 16px));
+        @include flex(0 0 calc(50% - 52px));
+        padding-left: 40px;
 
         @media #{$max767} {
             @include flex(0 0 100%);
+            padding-left: 0;
         }
 
         .surroundings_sec_title {
-            font-weight: 600;
-            font-size: 24px;
-            line-height: 32px;
-            color: $slate80;
-            margin-bottom: 8px;
+            font-weight: 600 !important;
+            font-size: 24px !important;
+            line-height: 32px !important;
+            color: #2A3343;
+            margin: 0 0 8px 0;
         }
 
         .surroundings_subtitle {
-            color: $slate40;
-            margin-bottom: 30px;
+            color: #8997A9;
+            font-size: 16px;
+            margin: 0 0 30px 0;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 24px;
+            letter-spacing: 0.2px;
         }
 
         .tf-apartment-surronding-criteria {
@@ -736,9 +947,11 @@
             @include align-items(center);
             font-size: 18px;
             font-weight: 500;
+            color: #2A3343;
 
             i {
                 margin-right: 8px;
+                color: #607085;
             }
         }
 
@@ -750,17 +963,22 @@
             li {
                 padding: 8px 0 8px 32px;
                 border-bottom: 1px solid $slate5;
-                color: $slate60;
                 @include flexbox();
                 @include align-items(center);
                 @include justify-content(space-between);
+                color: #607085;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 24px;
+                letter-spacing: 0.2px;
             }
         }
     }
 }
 
 .tf-house-rules {
-    margin-bottom: 48px;
+    margin-bottom: 80px;
 
     .tf-house-rules-wrapper {
         @include flexbox();
@@ -790,9 +1008,17 @@
                 h6 {
                     margin: 0 0 5px 0;
                     font-weight: 500;
-                    font-size: 18px;
+                    font-size: 18px !important;
                     line-height: 24px;
-                    color: $blue60
+                    color: #2979FF;
+                }
+
+                span{
+                    color: #607085;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 24px;
                 }
 
                 &::before {
@@ -802,6 +1028,7 @@
                     top: 0;
                     left: -29px;
                     font-size: 20px;
+                    line-height: 20px;
                     color: $blue60;
                 }
 
@@ -809,9 +1036,9 @@
                     content: '';
                     position: absolute;
                     left: -20px;
-                    top: 23px;
+                    top: 17px;
                     width: 2px;
-                    height: 100%;
+                    height: 99%;
                     background: $blue60;
                 }
 
@@ -856,7 +1083,7 @@
 }
 
 .tf-apartment-faq {
-    margin-bottom: 48px;
+    margin-bottom: 24px;
 
     .tf-faq-sec-title {
         margin-bottom: 20px;
@@ -872,17 +1099,73 @@
     }
 
     .tf-faq-content-wrapper {
-        background: #F5F8FF;
-        padding: 20px 25px;
-        border-radius: 4px;
+        background: #F8F9FB;
         border: 1px solid #F0F2F4;
+        border-radius: 8px;
+        padding: 40px;
+    }
+
+    .tf-faq-items-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-self: stretch;
+        gap: 16px;
     }
 
     #tf-faq-item {
-        border-bottom: 1px solid #dfdfdf;
+        border-radius: 8px;
+        border-bottom: none !important;
+        padding: 8px 0;
+        margin-bottom: 0;
 
-        .tf-faq-title h4{
-            margin: 4px 0;
+        .tf-faq-title{
+            @include flexbox();
+            @include align-items(center);
+            gap: 8px;
+
+            h4{
+                font-size: 16px !important;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 1.5;
+                letter-spacing: 0.5px;
+                margin: 0 !important;
+
+                &:hover{
+                    color: #2979FF;
+                }
+            }
+
+            .tf-faq-minus{
+                display: none;
+            }
+
+            svg rect{
+                fill: #607085;
+            }
+
+            &.active{
+                .tf-faq-plus{
+                    display: none;
+                }
+                .tf-faq-minus{
+                    display: inline-block;
+                }
+
+                h4{
+                    color: #2979FF;
+                }
+
+                svg rect{
+                    fill: #607085;
+                }
+            }
+
+            &:hover{
+                svg rect{
+                    fill: #2979FF;
+                }
+            }
         }
 
         .tf-faq-desc {
@@ -913,7 +1196,7 @@
     text-align: left;
     padding-top: 0;
     padding-bottom: 0;
-    margin-bottom: 48px;
+    margin-bottom: 80px;
 
     @media #{$max767} {
         max-width: 100%;
@@ -935,7 +1218,6 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             padding: 12px 16px;
-            margin-bottom: 8px;
             background-color: #fff;
             color: $slate60;
             font-size: 16px;
@@ -955,29 +1237,39 @@
 }
 
 .apartment-question {
-    .question-left {
+    .tf-question-left {
+        @include flexbox();
+        @include align-items(center);
+        gap: 16px;
+
+        .tf-apartment-question-icon{
+            @include flexbox();
+        }
+        i {
+            align-self: flex-start;
+            font-size: 40px;
+        }
+
         .default-enquiry-title-section {
             justify-content: flex-start;
-
-            i {
-                align-self: flex-start;
-
-                &:before {
-                    font-weight: 900;
-                    padding-right: 7px;
-                    color: #003162;
-                    position: absolute;
-                    font-size: 30px;
-                }
-            }
         }
        
-        h3 {
-            padding-left: 45px;
+        h4 {
+            margin: 0;
+            font-size: 20px !important;
+            color: #2A3343;
+            font-weight: 600 !important;
+            line-height: 32px !important;
         }
 
         p {
-            margin-bottom: 0;
+            color: #607085;
+            margin: 0;
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 24px;
+            letter-spacing: 0.2px;
         }
     }
 
@@ -999,12 +1291,6 @@
         @media #{$max575} {
             width: 100%;
         }
-    }
-}
-
-.question-left {
-    p {
-        padding-left: 45px;
     }
 }
 
@@ -1034,7 +1320,88 @@
 }
 
 .tf-apartment-review{
-    margin-bottom: 48px;
+    margin-bottom: 80px;
+
+    .tf-review-container .tf-total-review{
+        margin: 0 0 24px 0;
+
+        .tf-total-average{
+            div{
+                border-radius: 8px;
+                background-color: #2979FF;
+            }
+            span{
+                color: #8997A9;
+            }
+        }
+    }
+
+    .tf-review-progress-bar {
+        background: #F8F9FB;
+        border-radius: 8px;
+        border: 1px solid #EBF2FF;
+        column-gap: 200px;
+        row-gap: 16px;
+        grid-template-columns: calc(50% - 100px) calc(50% - 100px);
+
+        .tf-single {
+            grid-template-columns: 102px calc(100% - 212px) 30px !important;
+            column-gap: 40px;
+        }
+    }
+
+    .tf-single-review{
+        background-color: transparent;
+        .tf-single-details {
+            background-color: transparent;
+        }
+        .tf-review-details {
+
+            .tf-rating-stars{
+                font-size: 14px;
+            }
+            
+             .tf-apartment-show-more {
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 1.7;
+                letter-spacing: 0.5px;
+                color: #2A3343; 
+                cursor: pointer;
+                user-select: none;
+            }
+            .tf-full-description{
+                margin-top: 8px;
+            }
+        }
+        p {
+            margin: 0 0 8px 0;
+            color: #607085;
+            font-size: 14px;
+        }
+    }
+}
+
+.show-all-review-wrap{
+    padding: 8px 24px;
+    border-radius: 4px;
+    background:#F5F8FF;
+    border: 1px solid #2979FF;
+    width: 200px;
+    margin: auto;
+
+    .tf-apaartment-show-all {
+        color: #2979FF;
+        text-align: center;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.7;
+        letter-spacing: 0.5px;
+        user-select: none;
+        cursor: pointer;
+    }
 }
 
 .tf-related-apartment {
@@ -1095,10 +1462,11 @@
 
         .tf-apartment-item-thumb{
             overflow: hidden;
-            border-radius: 6px 6px 0 0;
+            border-radius: 8px;
+            margin-bottom: 8px;
 
             img {
-                height: 220px;
+                height: 170px;
                 object-fit: cover;
                 width: 100%;
                 transition: all 0.3s ease-in-out;
@@ -1112,20 +1480,19 @@
         }
 
         .tf-related-apartment-content {
-            padding: 16px;
-            border: 1px solid #ddd;
-            border-top: none;
-            border-radius: 0 0 6px 6px;
+            a{
+                text-decoration: none;
+            }
 
             h3 {
                 font-size: 18px !important;
-                color: $slate80;
-                margin: 0 0 8px 0;
+                color: #2A3343;
+                margin: 0;
             }
 
             span {
                 font-size: 14px !important;
-                color: $slate40;
+                color: #8997A9;
                 margin: 0;
             }
         }
@@ -1146,8 +1513,8 @@
     padding: 32px;
     margin-bottom: 40px;
 
-    h4 {
-        color: $slate80;
+    h5 {
+        color: #2A3343;
         font-weight: 500;
         font-size: 18px;
         line-height: 24px;
@@ -1164,16 +1531,21 @@
         .tf-apartment-price-per-night {
             margin: 0;
 
-            .woocommerce-Price-currencySymbol,
-            bdi {
-                font-size: 22px;
-                font-weight: 700;
+            span.tf-apartment-base-price,
+            span.tf-apartment-base-price span {
+                color: #2A3343;
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 32px;
             }
-
-            span:not(.woocommerce-Price-amount, .woocommerce-Price-currencySymbol) {
+            span{
+                color: #607085;
                 font-size: 16px;
+                font-style: normal;
                 font-weight: 400;
-                color: $slate60;
+                line-height: 24px; /* 150% */
+                letter-spacing: 0.2px;
             }
         }
 
@@ -1182,65 +1554,114 @@
         }
 
         .tf-single-rating {
-            color: $slate60;
-            font-weight: 500;
+            color: #8997A9;
             background-color: transparent;
             padding: 0;
+            font-size: 10px;
             @include flexbox();
+            @include align-items(center);
 
             i {
                 color: $yellow60;
                 font-size: 16px;
+                margin-top: -3px;
             }
 
             span {
-                font-size: 16px;
+                font-size: 14px;
+                font-weight: 500;
+                color: #8997A9;
+                margin: 0 4px;
             }
         }
     }
 
     .tf-apartment-form-fields {
         background: $blue0;
-        border: 1px solid $slate5;
+        border: 1px solid #F0F2F4;
         border-radius: 8px;
-        margin-bottom: 24px;
+        margin-bottom: 16px;
 
         .tf_booking-dates {
             @include flexbox();
+            @include flex-wrap(wrap);
 
-            .tf-check-in-out-date {
-                width: 100%;
+            *{
+                box-sizing: border-box;
+            }
+
+            .tf-check-in-date,
+            .tf-check-out-date {
+                @include flex(0 0 50%);
                 padding: 8px 16px;
+                text-align: center;
 
                 .tf-label {
-                    font-size: 12px;
-                    font-weight: 700;
                     text-transform: uppercase;
                     display: inline-block;
+                    color: #2A3343;
+                    text-align: center;
+                    font-size: 10px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 16px; /* 160% */
+                    letter-spacing: 0.2px;
                 }
+            }
 
-                .form-control,
-                #check-in-out-date {
-                    border: none;
-                    background-color: transparent;
-                    padding: 0;
-                    width: 100% !important;
-                    color: $slate60;
-                    font-size: 16px;
+            .tf-err-msg{
+                @include flex(0 0 100%);
+                text-align: center;
+                font-size: 14px;
+            }
 
-                    &:focus {
-                        outline: none;
-                    }
+            .form-control,
+            #check-in-date,
+            #check-out-date {
+                border: none;
+                background-color: transparent;
+                padding: 0;
+                width: 100% !important;
+                color: #607085;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 24px; /* 150% */
+                letter-spacing: 0.2px;
+                cursor: pointer;
+                text-align: center;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            .tf-check-out-date {
+                .tf_label-row{
+                    position: relative;
+                }
+                .form-control{
+                    opacity: 0;
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
                 }
             }
 
             .tf-check-in-date {
-                border-right: 1px solid $slate10;
+                border-right: 1px solid #F0F2F4;
+            }
+
+            #check-in-out-date {
+                width: 100%;
+                opacity: 0;
+                position: absolute;
+                bottom: 0;
             }
         }
 
         .tf-apartment-guest-row {
-            border-top: 1px solid $slate10;
+            border-top: 1px solid #F0F2F4;
             padding: 8px 16px;
 
             label {
@@ -1248,10 +1669,14 @@
             }
 
             .tf-label {
-                font-size: 12px;
-                font-weight: 700;
                 text-transform: uppercase;
                 display: inline-block;
+                color: #2A3343;
+                font-size: 10px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 16px;
+                letter-spacing: 0.2px;
             }
 
             .tf_selectperson-wrap {
@@ -1262,11 +1687,17 @@
 
                 .tf_acrselection-wrap {
                     left: 0;
-                    right: auto;
+                    right: 0;
+                    width: auto;
                 }
 
                 .tf_input-inner {
+                    color: #607085;
                     font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 24px;
+                    letter-spacing: 0.2px;
                 }
             }
         }
@@ -1277,6 +1708,20 @@
         }
     }
 
+    .tf-btn{
+        height: auto;
+    }
+
+    .btn-styled{
+        border-radius: 8px !important;
+        background: #2979FF;
+        padding: 12px 24px;
+        box-shadow: 0px 1px 1px 0px rgba(0, 60, 121, 0.16);
+        font-size: 16px !important;
+        font-weight: 500 !important;
+        line-height: 24px;
+        letter-spacing: 0.5px;
+    }
 
     .tf-apartment-price-list {
         margin: 15px 0 0 !important;

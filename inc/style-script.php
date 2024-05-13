@@ -123,7 +123,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 			#tf-ask-question textarea,
 			.tf-container button,
 			.tf-container input,
-			.tf-container textarea{
+			.tf-container textarea,
+			.tf-featured-badge span,
 			.gm-style .marker-label,
 			.tf-withoutpayment-booking{
 				font-family: "'.$tf_global_font_family.'", sans-serif !important;
@@ -164,7 +165,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-main-wrapper h4,
 			#tour_room_details_qv h4,
 			.tf-container h4,
-			#tf-ask-question h4,
+			#tf-ask-question h3,
 			.tf-container-inner h5,
 			.tf-main-wrapper h5,
 			.tf-container h5,
@@ -235,7 +236,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			$output .= '
 			.tf-container-inner h4,
 			.tf-main-wrapper h4,
-			#tf-ask-question h4,
+			#tf-ask-question h3,
 			#tour_room_details_qv h4,
 			.tf-container h4{
 				font-weight: '.$tf_global_font_weight_h4.' !important;
@@ -315,8 +316,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 				border: 1px solid '.$tf_template1_global_reg.';
 				border-color: '.$tf_template1_global_reg.' !important;
 			}
-			.tf-aq-outer span.close-aq {background: '.$tf_template1_global_reg.' !important;}
-			.tf-aq-field .btn-styled {background: '.$tf_template1_global_reg.' !important;}';
+			.tf-aq-outer span.close-aq svg path {stroke: '.$tf_template1_global_reg.' !important;}
+			.tf-aq-field .tf-ask-question-submit {background: '.$tf_template1_global_reg.' !important;}';
 
 		}
 
@@ -341,7 +342,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-3 .tf-mobile-booking-btn span,
 			.tf-template-3 .tf-modify-search-btn,
 			.tf_template_3_global_layouts #tf-ask-question button,
-			.tf_template_3_global_layouts #tf-ask-question .tf-aq-outer .close-aq,
+			#tf-ask-question .tf-ask-question-submit,
 			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.tf_air_service,
 			.tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf_button_group button:hover{
 				color: '.$tf_primary_color_reg.' !important;
@@ -367,6 +368,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-3 .tf-mobile-booking-btn span:hover,
 			.tf-template-3 .tf-modify-search-btn:hover,
 			.tf_template_3_global_layouts #tf-ask-question button:hover,
+			.#tf-ask-question .tf-ask-question-submit:hover,
 			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.tf_air_service:hover,
 			.tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf_button_group button:hover {
 				color: '.$tf_primary_color_hov.' !important;
@@ -392,7 +394,6 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-3 .tf-mobile-booking-btn,
 			.tf-template-3 .tf-modify-search-btn,
 			.tf_template_3_global_layouts #tf-ask-question button,
-			.tf_template_3_global_layouts #tf-ask-question .tf-aq-outer .close-aq,
 			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.tf_air_service,
 			.tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf_button_group button {
 				background: '.$tf_primary_bg_color_reg.' !important;

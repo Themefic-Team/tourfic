@@ -7,7 +7,7 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.11.26
+ * Version:         2.12.0
  * Tested up to:    6.5
  * WC tested up to: 8.8
  * Requires PHP:    7.4
@@ -55,7 +55,7 @@ define( 'TF_EMAIL_TEMPLATES_PATH', TF_PATH . 'admin/emails/templates/' );
  * @since 1.0
  */
 if ( ! defined( 'TOURFIC' ) ) {
-	define( 'TOURFIC', '2.11.26' );
+	define( 'TOURFIC', '2.12.0' );
 }
 
 // Styles & Scripts
@@ -218,18 +218,17 @@ if ( ! function_exists( 'tfopt' ) ) {
 /**
  * All the requires
  */
-// Classes
-if ( file_exists( TF_INC_PATH . 'classes.php' ) ) {
-	require_once TF_INC_PATH . 'classes.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'classes.php' );
-}
-
 // Functions
 if ( file_exists( TF_INC_PATH . 'functions.php' ) ) {
 	require_once TF_INC_PATH . 'functions.php';
 } else {
 	tf_file_missing( TF_INC_PATH . 'functions.php' );
+}
+// Classes
+if ( file_exists( TF_INC_PATH . 'classes.php' ) ) {
+	require_once TF_INC_PATH . 'classes.php';
+} else {
+	tf_file_missing( TF_INC_PATH . 'classes.php' );
 }
 
 // Admin Functions
