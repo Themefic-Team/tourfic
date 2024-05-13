@@ -8,6 +8,10 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 30px;
+
+    @media #{$max480}{
+        gap: 16px;
+    }
 }
 .tf-hero-top {
     display: flex;

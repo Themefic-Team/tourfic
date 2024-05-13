@@ -2387,7 +2387,7 @@ var frame, gframe;
                 return;
             } 
             // Triger the form submit
-            $(".tf-option-form.tf-ajax-save").submit(); 
+            $(".tf-option-form").submit(); 
         });
 
         // $('#addtag > .submit #submit').click(function (event) {

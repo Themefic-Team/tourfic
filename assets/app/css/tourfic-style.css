@@ -3762,6 +3762,9 @@ span.tf-price .amount {
   flex-direction: column;
   justify-content: space-between;
   gap: 30px; }
+  @media only screen and (max-width: 480px) {
+    .tf-hero-content {
+      gap: 16px; } }
 
 .tf-hero-top {
   display: flex;
@@ -9173,6 +9176,10 @@ html {
         .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share {
           margin-top: 64px;
           padding-right: 16px; } }
+      @media only screen and (max-width: 480px) {
+        .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share {
+          margin-top: 16px;
+          padding-right: 16px; } }
       .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share a.tf-share-toggle,
       .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share a.tf-wishlist {
         margin: 0;
@@ -9257,6 +9264,12 @@ html {
             .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area .tf-head-title h1 {
               font-size: 20px !important;
               margin-bottom: 8px; } }
+          @media only screen and (max-width: 480px) {
+            .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area .tf-head-title h1 {
+              display: -webkit-box;
+              overflow: hidden;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical; } }
         .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area .tf-head-title .tf-title-meta {
           font-size: 24px;
           font-weight: 400;
