@@ -54,8 +54,13 @@ define( 'TF_EMAIL_TEMPLATES_PATH', TF_PATH . 'admin/emails/templates/' );
  *
  * @since 1.0
  */
+
+if ( ! function_exists( 'get_plugin_data' ) ) {
+	require_once ABSPATH . 'wp-admin/includes/plugin.php';
+}
+
 if ( ! defined( 'TOURFIC' ) ) {
-	define( 'TOURFIC', '2.12.0' );
+	define( 'TOURFIC', get_plugin_data( __FILE__ )["Version"] );
 }
 
 // Styles & Scripts

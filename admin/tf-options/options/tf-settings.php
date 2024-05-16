@@ -3764,7 +3764,7 @@ TF_Settings::option( 'tf_settings', array(
 					'label'   => __( 'QR Code Verification', 'tourfic' ),
 					'options' => array(
 						'1' => __( '1 Step', 'tourfic' ),
-						'2' => __( '2 Steps', 'tourfic' ),
+						'2' => __( '2 Step', 'tourfic' ),
 					),
 					'default' => '2',
 					'is_pro'  => true,
