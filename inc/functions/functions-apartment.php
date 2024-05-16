@@ -795,6 +795,32 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 			}
 		}
 
+		$only_booked_dates = is_array($booked_dates) && !empty($booked_dates) ? array_merge( array_column($booked_dates, "check_in") , array_column($booked_dates, "check_out")) : array();
+
+		if( !empty( $booked_dates) && is_array($booked_dates) ) {
+			foreach ($booked_dates as $booked_date) {
+				$booked_date_period[] = new DatePeriod(
+					new DateTime( $booked_date["check_in"] . ' 00:00' ),
+					new DateInterval( 'P1D' ),
+					new DateTime( $booked_date["check_out"] . ' 23:59' )
+				);
+			}
+			foreach ($booked_date_period as $b_date) {
+				foreach ($b_date as $date) {
+					$only_booked_dates[] = $date->format('Y/m/d');
+				}
+			}
+		}
+
+		$only_booked_dates = !empty( $only_booked_dates ) ? array_unique($only_booked_dates) : array();
+		
+
+		if( is_array( $tf_apt_enable_dates ) && !empty( $tf_apt_enable_dates ) ) {
+			$checked_enable_dates = array_filter( $tf_apt_enable_dates, function($date) use($only_booked_dates) {
+				return !in_array($date, $only_booked_dates);
+			});
+		}
+
 		$apartment_min_price = get_apartment_min_max_price( get_the_ID() );
 
 		$tf_apartment_layout_conditions = ! empty( $meta['tf_single_apartment_layout_opt'] ) ? $meta['tf_single_apartment_layout_opt'] : 'global';
@@ -1412,21 +1438,21 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                             bookingCalculation(selectedDates);
                             dateSetToFields(selectedDates, instance);
                         }, 
-						<?php if (!empty($tf_apt_enable_dates) && is_array($tf_apt_enable_dates)) : ?>
-							enable: [ <?php array_walk($tf_apt_enable_dates, function($date) {echo '"'. esc_html( $date ) . '",';}); ?> ],
+						<?php if (!empty($checked_enable_dates) && is_array($checked_enable_dates)) : ?>
+							enable: [ <?php array_walk($checked_enable_dates, function($date) {echo '"'. esc_html( $date ) . '",';}); ?> ],
 						<?php endif; ?>
                         disable: [
 							<?php foreach ( $booked_dates as $booked_date ) : ?>
-                            {
-                                from: "<?php echo esc_html( $booked_date['check_in'] ); ?>",
-                                to: "<?php echo esc_html( $booked_date['check_out'] ); ?>"
-                            },
+								{
+									from: "<?php echo esc_html( $booked_date['check_in'] ); ?>",
+									to: "<?php echo esc_html( $booked_date['check_out'] ); ?>"
+								},
 							<?php endforeach; ?>
 							<?php foreach ( $apt_disable_dates as $apt_disable_date ) : ?>
-                            {
-                                from: "<?php echo esc_html( $apt_disable_date ); ?>",
-                                to: "<?php echo esc_html( $apt_disable_date ); ?>"
-                            },
+								{
+									from: "<?php echo esc_html( $apt_disable_date ); ?>",
+									to: "<?php echo esc_html( $apt_disable_date ); ?>"
+								}
 							<?php endforeach; ?>
                         ],
 						<?php tf_flatpickr_locale(); ?>
