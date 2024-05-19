@@ -20,9 +20,9 @@ class Enqueue {
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_tour_css' ), 99999 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_apartment_css' ), 99999 );
 
-		add_action( 'admin_enqueue_scripts', array( $this, 'tf_options_admin_enqueue_scripts' ),9 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'tf_options_admin_enqueue_scripts' ), 9 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_options_wp_enqueue_scripts' ) );
-		add_action( 'admin_enqueue_scripts', array($this, 'tf_required_taxonomies') );
+		add_action( 'admin_enqueue_scripts', array( $this, 'tf_required_taxonomies' ) );
 	}
 
 	/**
@@ -205,8 +205,8 @@ class Enqueue {
 							$tfhotel_min_maxprices[] = $singleroom['child_price'];
 						}
 						if ( ! empty( $singleroom['avail_date'] ) ) {
-							$avail_date = json_decode($singleroom['avail_date'], true);
-							if(!empty($avail_date) && is_array($avail_date)) {
+							$avail_date = json_decode( $singleroom['avail_date'], true );
+							if ( ! empty( $avail_date ) && is_array( $avail_date ) ) {
 								foreach ( $avail_date as $singleavailroom ) {
 									if ( ! empty( $singleavailroom['price'] ) ) {
 										$tfhotel_min_maxprices[] = $singleavailroom['price'];
@@ -322,51 +322,56 @@ class Enqueue {
 		 * Tour booking form
 		 */
 		global $post;
-		$post_id = ! empty( $post->ID ) ? $post->ID : '';
+		$post_id   = ! empty( $post->ID ) ? $post->ID : '';
 		$post_type = ! empty( $post->post_type ) ? $post->post_type : '';
-		if($post_type == 'tf_tours' && !empty($post_id) && !is_post_type_archive('tf_tours')) {
+		if ( $post_type == 'tf_tours' && ! empty( $post_id ) && ! is_post_type_archive( 'tf_tours' ) ) {
 			$single_tour_form_data = array();
 
-			$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+			$meta                      = get_post_meta( $post_id, 'tf_tours_opt', true );
 			$tf_tour_layout_conditions = ! empty( $meta['tf_single_tour_layout_opt'] ) ? $meta['tf_single_tour_layout_opt'] : 'global';
 			if ( "single" == $tf_tour_layout_conditions ) {
 				$tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'design-1';
 			}
-			$tf_tour_global_template = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['single-tour'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
-			$tf_tour_selected_template = ! empty( $tf_tour_single_template ) ? $tf_tour_single_template : $tf_tour_global_template;
-			$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';
-			$custom_avail = ! empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : '';
-			$tour_date_format_for_users  = !empty(self::tfopt( "tf-date-format-for-users")) ? self::tfopt( "tf-date-format-for-users") : "Y/m/d";
+			$tf_tour_global_template    = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['single-tour'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
+			$tf_tour_selected_template  = ! empty( $tf_tour_single_template ) ? $tf_tour_single_template : $tf_tour_global_template;
+			$tour_type                  = ! empty( $meta['type'] ) ? $meta['type'] : '';
+			$custom_avail               = ! empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : '';
+			$tour_date_format_for_users = ! empty( self::tfopt( "tf-date-format-for-users" ) ) ? self::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 			// Repeated Fixed Tour
-			if(!function_exists('fixed_tour_start_date_changer')) {
-				function fixed_tour_start_date_changer($date, $months) {
-					if( (count($months) > 0) && !empty($date)) {
-						preg_match('/(\d{4})\/(\d{2})\/(\d{2})/', $date, $matches);
+			if ( ! function_exists( 'fixed_tour_start_date_changer' ) ) {
+				function fixed_tour_start_date_changer( $date, $months ) {
+					if ( ( count( $months ) > 0 ) && ! empty( $date ) ) {
+						preg_match( '/(\d{4})\/(\d{2})\/(\d{2})/', $date, $matches );
 
-						foreach($months as $month) {
+						foreach ( $months as $month ) {
 
-							if($month < gmdate('m') && $matches[1] < gmdate('Y')) {
+							if ( $month < gmdate( 'm' ) && $matches[1] < gmdate( 'Y' ) ) {
 								$year = $matches[1] + 1;
 
-							} else $year = $matches[1];
+							} else {
+								$year = $matches[1];
+							}
 
 
-							$day_selected = gmdate('d', strtotime($date));
-							$last_day_of_month = gmdate('t', strtotime(gmdate('Y').'-'.$month.'-01'));
-							$matches[2] = $month;
-							$changed_date = sprintf("%s/%s/%s", $year, $matches[2], $matches[3]);
+							$day_selected      = gmdate( 'd', strtotime( $date ) );
+							$last_day_of_month = gmdate( 't', strtotime( gmdate( 'Y' ) . '-' . $month . '-01' ) );
+							$matches[2]        = $month;
+							$changed_date      = sprintf( "%s/%s/%s", $year, $matches[2], $matches[3] );
 
-							if(($day_selected == "31") && ($last_day_of_month != "31")) {
-								$new_months[] = gmdate('Y/m/d', strtotime($changed_date . ' -1 day'));
+							if ( ( $day_selected == "31" ) && ( $last_day_of_month != "31" ) ) {
+								$new_months[] = gmdate( 'Y/m/d', strtotime( $changed_date . ' -1 day' ) );
 							} else {
 								$new_months[] = $changed_date;
 							}
 						}
 						$new_months[] = $matches[0];
+
 						return $new_months;
 
-					} else return array();
+					} else {
+						return array();
+					}
 				}
 			}
 
@@ -374,23 +379,23 @@ class Enqueue {
 			$disable_same_day = ! empty( $meta['disable_same_day'] ) ? $meta['disable_same_day'] : '';
 			if ( $tour_type == 'fixed' ) {
 				if ( ! empty( $meta['fixed_availability'] ) && gettype( $meta['fixed_availability'] ) == "string" ) {
-					$tf_tour_fixed_avail = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+					$tf_tour_fixed_avail        = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
 						return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
 					}, $meta['fixed_availability'] );
-					$tf_tour_fixed_date  = unserialize( $tf_tour_fixed_avail );
-					$departure_date      = ! empty( $tf_tour_fixed_date['date']['from'] ) ? $tf_tour_fixed_date['date']['from'] : '';
-					$return_date         = ! empty( $tf_tour_fixed_date['date']['to'] ) ? $tf_tour_fixed_date['date']['to'] : '';
-					$min_people          = ! empty( $tf_tour_fixed_date['min_seat'] ) ? $tf_tour_fixed_date['min_seat'] : '';
-					$max_people          = ! empty( $tf_tour_fixed_date['max_seat'] ) ? $tf_tour_fixed_date['max_seat'] : '';
+					$tf_tour_fixed_date         = unserialize( $tf_tour_fixed_avail );
+					$departure_date             = ! empty( $tf_tour_fixed_date['date']['from'] ) ? $tf_tour_fixed_date['date']['from'] : '';
+					$return_date                = ! empty( $tf_tour_fixed_date['date']['to'] ) ? $tf_tour_fixed_date['date']['to'] : '';
+					$min_people                 = ! empty( $tf_tour_fixed_date['min_seat'] ) ? $tf_tour_fixed_date['min_seat'] : '';
+					$max_people                 = ! empty( $tf_tour_fixed_date['max_seat'] ) ? $tf_tour_fixed_date['max_seat'] : '';
 					$repeated_fixed_tour_switch = ! empty( $tf_tour_fixed_date['fixed_availability']["tf-repeat-months-switch"] ) ? $tf_tour_fixed_date['fixed_availability']["tf-repeat-months-switch"] : 0;
-					$tour_repeat_months = !empty($tf_tour_fixed_date['fixed_availability']['tf-repeat-months-checkbox']) ? $tf_tour_fixed_date['fixed_availability']['tf-repeat-months-checkbox'] : array();
+					$tour_repeat_months         = ! empty( $tf_tour_fixed_date['fixed_availability']['tf-repeat-months-checkbox'] ) ? $tf_tour_fixed_date['fixed_availability']['tf-repeat-months-checkbox'] : array();
 				} else {
-					$departure_date = ! empty( $meta['fixed_availability']['date']['from'] ) ? $meta['fixed_availability']['date']['from'] : '';
-					$return_date    = ! empty( $meta['fixed_availability']['date']['to'] ) ? $meta['fixed_availability']['date']['to'] : '';
-					$min_people     = ! empty( $meta['fixed_availability']['min_seat'] ) ? $meta['fixed_availability']['min_seat'] : '';
-					$max_people     = ! empty( $meta['fixed_availability']['max_seat'] ) ? $meta['fixed_availability']['max_seat'] : '';
+					$departure_date             = ! empty( $meta['fixed_availability']['date']['from'] ) ? $meta['fixed_availability']['date']['from'] : '';
+					$return_date                = ! empty( $meta['fixed_availability']['date']['to'] ) ? $meta['fixed_availability']['date']['to'] : '';
+					$min_people                 = ! empty( $meta['fixed_availability']['min_seat'] ) ? $meta['fixed_availability']['min_seat'] : '';
+					$max_people                 = ! empty( $meta['fixed_availability']['max_seat'] ) ? $meta['fixed_availability']['max_seat'] : '';
 					$repeated_fixed_tour_switch = ! empty( $meta['fixed_availability']["tf-repeat-months-switch"] ) ? $meta['fixed_availability']["tf-repeat-months-switch"] : 0;
-					$tour_repeat_months = $repeated_fixed_tour_switch && !empty($meta['fixed_availability']['tf-repeat-months-checkbox']) ? $meta['fixed_availability']['tf-repeat-months-checkbox'] : array();
+					$tour_repeat_months         = $repeated_fixed_tour_switch && ! empty( $meta['fixed_availability']['tf-repeat-months-checkbox'] ) ? $meta['fixed_availability']['tf-repeat-months-checkbox'] : array();
 				}
 
 			} elseif ( $tour_type == 'continuous' ) {
@@ -422,31 +427,32 @@ class Enqueue {
 
 			}
 
-			if( !function_exists( "tf_nearest_default_day" ) ) {
-				function tf_nearest_default_day ($dates) {
-					if(count($dates) > 0 ) {
+			if ( ! function_exists( "tf_nearest_default_day" ) ) {
+				function tf_nearest_default_day( $dates ) {
+					if ( count( $dates ) > 0 ) {
 
-						$today = time();
-						$nearestDate = null;
+						$today              = time();
+						$nearestDate        = null;
 						$smallestDifference = null;
 
-						foreach($dates as $date) {
-							$dateTime = strtotime($date);
-							$difference = abs($today - $dateTime);
+						foreach ( $dates as $date ) {
+							$dateTime   = strtotime( $date );
+							$difference = abs( $today - $dateTime );
 
-							if($dateTime > $today) {
-								if ($smallestDifference === null || $difference < $smallestDifference) {
+							if ( $dateTime > $today ) {
+								if ( $smallestDifference === null || $difference < $smallestDifference ) {
 									$smallestDifference = $difference;
-									$nearestDate = $date;
+									$nearestDate        = $date;
 								}
 							}
 						}
+
 						return $nearestDate;
 					}
 				}
 			}
 
-			$tour_extras          = isset( $meta['tour-extra'] ) ? $meta['tour-extra'] : null;
+			$tour_extras = isset( $meta['tour-extra'] ) ? $meta['tour-extra'] : null;
 
 			if ( ! empty( $tour_extras ) && gettype( $tour_extras ) == "string" ) {
 
@@ -517,80 +523,78 @@ class Enqueue {
 			}
 
 			$single_tour_form_data['tf_tour_selected_template'] = $tf_tour_selected_template;
-			$single_tour_form_data['tour_type'] = $tour_type;
-			$single_tour_form_data['allowed_times'] = wp_json_encode( $allowed_times ?? [] );
-			$single_tour_form_data['custom_avail'] = !empty($custom_avail) ? $custom_avail : false;
-			$single_tour_form_data['cont_custom_date'] = !empty($cont_custom_date) ? $cont_custom_date : '';
+			$single_tour_form_data['tour_type']                 = $tour_type;
+			$single_tour_form_data['allowed_times']             = wp_json_encode( $allowed_times ?? [] );
+			$single_tour_form_data['custom_avail']              = ! empty( $custom_avail ) ? $custom_avail : false;
+			$single_tour_form_data['cont_custom_date']          = ! empty( $cont_custom_date ) ? $cont_custom_date : '';
 //			$single_tour_form_data['flatpickr_locale'] = tf_flatpickr_locale("root");
 			$single_tour_form_data['select_time_text'] = esc_html__( "Select Time", "tourfic" );
-			$single_tour_form_data['date_format'] = esc_html($tour_date_format_for_users);
+			$single_tour_form_data['date_format']      = esc_html( $tour_date_format_for_users );
 //			$single_tour_form_data['flatpickr_locale'] = tf_flatpickr_locale();
-			$single_tour_form_data['disabled_day'] = !empty($disabled_day) ? $disabled_day : '';
-			$single_tour_form_data['disable_range'] = !empty($disable_range) ? $disable_range : '';
-			$single_tour_form_data['disable_specific'] = !empty($disable_specific) ? $disable_specific : '';
+			$single_tour_form_data['disabled_day']     = ! empty( $disabled_day ) ? $disabled_day : '';
+			$single_tour_form_data['disable_range']    = ! empty( $disable_range ) ? $disable_range : '';
+			$single_tour_form_data['disable_specific'] = ! empty( $disable_specific ) ? $disable_specific : '';
 			$single_tour_form_data['disable_same_day'] = $disable_same_day;
 
 			$single_tour_form_data['enable'] = array();
-			if ($tour_type && $tour_type == 'fixed') {
-				if( !empty($departure_date) && !empty($tour_repeat_months) ) {
+			if ( $tour_type && $tour_type == 'fixed' ) {
+				if ( ! empty( $departure_date ) && ! empty( $tour_repeat_months ) ) {
 					$enable_repeat_dates = fixed_tour_start_date_changer( $departure_date, $tour_repeat_months );
 				}
 
-				if(($repeated_fixed_tour_switch == 1) && !empty($enable_repeat_dates) && ($enable_repeat_dates > 0)) {
+				if ( ( $repeated_fixed_tour_switch == 1 ) && ! empty( $enable_repeat_dates ) && ( $enable_repeat_dates > 0 ) ) {
 
-					$single_tour_form_data['defaultDate'] = esc_html(tf_nearest_default_day($enable_repeat_dates));
+					$single_tour_form_data['defaultDate'] = esc_html( tf_nearest_default_day( $enable_repeat_dates ) );
 
-					foreach($enable_repeat_dates as $enable_date) {
-						$single_tour_form_data['enable'][] = esc_html($enable_date);
+					foreach ( $enable_repeat_dates as $enable_date ) {
+						$single_tour_form_data['enable'][] = esc_html( $enable_date );
 					}
 				} else {
-					$single_tour_form_data['defaultDate'] = esc_html($departure_date);
-					$single_tour_form_data['enable'] = array(
-						esc_html($departure_date)
+					$single_tour_form_data['defaultDate'] = esc_html( $departure_date );
+					$single_tour_form_data['enable']      = array(
+						esc_html( $departure_date )
 					);
 				}
-			} elseif ($tour_type && $tour_type == 'continuous'){
-				if ($custom_avail && $custom_avail == true){
+			} elseif ( $tour_type && $tour_type == 'continuous' ) {
+				if ( $custom_avail && $custom_avail == true ) {
 					foreach ( $cont_custom_date as $item ) {
 						$single_tour_form_data['enable'][] = array(
-							'from' => esc_attr($item["date"]["from"]),
-							'to' => esc_attr($item["date"]["to"])
+							'from' => esc_attr( $item["date"]["from"] ),
+							'to'   => esc_attr( $item["date"]["to"] )
 						);
 					}
 				}
-				if ($custom_avail == false) {
-					if ($disabled_day || $disable_range || $disable_specific || $disable_same_day) {
+				if ( $custom_avail == false ) {
+					if ( $disabled_day || $disable_range || $disable_specific || $disable_same_day ) {
 						$single_tour_form_data['disable'] = array();
-						if ($disabled_day) {
+						if ( $disabled_day ) {
 							$single_tour_form_data['disable'][] = "function (date) {
                                     return (date.getDay() === 8";
 							foreach ( $disabled_day as $dis_day ) {
-								$single_tour_form_data['disable'][] = '|| date.getDay() === ' . esc_attr($dis_day);
+								$single_tour_form_data['disable'][] = '|| date.getDay() === ' . esc_attr( $dis_day );
 							}
 							$single_tour_form_data['disable'][] = ");";
 						}
 						if ( $disable_range ) {
 							foreach ( $disable_range as $d_item ) {
 								$single_tour_form_data['disable'][] = array(
-									'from' => esc_attr($d_item["date"]["from"]),
-									'to' => esc_attr($d_item["date"]["to"])
+									'from' => esc_attr( $d_item["date"]["from"] ),
+									'to'   => esc_attr( $d_item["date"]["to"] )
 								);
 							}
 						}
-						if ($disable_same_day) {
+						if ( $disable_same_day ) {
 							$single_tour_form_data['disable'][] = '"today"';
-							if ($disable_specific) {
+							if ( $disable_specific ) {
 								$single_tour_form_data['disable'][] = ",";
 							}
 						}
 						if ( $disable_specific ) {
-							$single_tour_form_data['disable'][] = '"' . esc_attr($disable_specific) . '"';
+							$single_tour_form_data['disable'][] = '"' . esc_attr( $disable_specific ) . '"';
 						}
 					}
 				}
 			}
-
-
 
 
 		}
@@ -638,7 +642,7 @@ class Enqueue {
 				'date_apartment_search'  => tfopt( 'date_apartment_search' ),
 				'tf_apartment_max_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['max'] : 0,
 				'tf_apartment_min_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['min'] : 0,
-				'tour_form_data'  => isset( $single_tour_form_data ) ? $single_tour_form_data : array(),
+				'tour_form_data'         => isset( $single_tour_form_data ) ? $single_tour_form_data : array(),
 			)
 		);
 
@@ -722,60 +726,73 @@ class Enqueue {
 	 *
 	 * @since 2.9.27
 	 */
-	function tf_dequeue_theplus_script_on_settings_page($screen) {
+	function tf_dequeue_theplus_script_on_settings_page( $screen ) {
 
 		// The Plus Addons for Elementor Compatibility
-		if ("toplevel_page_tf_settings"==$screen && wp_script_is('theplus-admin-js-pro', 'enqueued')) {
-			wp_dequeue_script('theplus-admin-js-pro');
-			wp_deregister_script('theplus-admin-js-pro');
+		if ( "toplevel_page_tf_settings" == $screen && wp_script_is( 'theplus-admin-js-pro', 'enqueued' ) ) {
+			wp_dequeue_script( 'theplus-admin-js-pro' );
+			wp_deregister_script( 'theplus-admin-js-pro' );
 		}
 
 		//The Guido theme WP Listings Directory Compatibility
-		if ("toplevel_page_tf_settings"==$screen && wp_script_is('wp-listings-directory-custom-field', 'enqueued')) {
-			wp_dequeue_script('wp-listings-directory-custom-field');
-			wp_deregister_script('wp-listings-directory-custom-field');
+		if ( "toplevel_page_tf_settings" == $screen && wp_script_is( 'wp-listings-directory-custom-field', 'enqueued' ) ) {
+			wp_dequeue_script( 'wp-listings-directory-custom-field' );
+			wp_deregister_script( 'wp-listings-directory-custom-field' );
 		}
 		//The Easy Table of Contents Compatibility
-		if ("toplevel_page_tf_settings"==$screen && wp_script_is('cn_toc_admin_script', 'enqueued')) {
-			wp_dequeue_script('cn_toc_admin_script');
-			wp_deregister_script('cn_toc_admin_script');
+		if ( "toplevel_page_tf_settings" == $screen && wp_script_is( 'cn_toc_admin_script', 'enqueued' ) ) {
+			wp_dequeue_script( 'cn_toc_admin_script' );
+			wp_deregister_script( 'cn_toc_admin_script' );
 		}
 
 		$get_screen = get_current_screen();
 		global $wp_scripts;
 
-		if(!empty($get_screen)) {
+		if ( ! empty( $get_screen ) ) {
 
-			if ($get_screen->base == "post" && ($get_screen->id == "tf_hotel" || $get_screen->id == "tf_apartment" ||  $get_screen->id == "tf_tours") ) {
+			if ( $get_screen->base == "post" && ( $get_screen->id == "tf_hotel" || $get_screen->id == "tf_apartment" || $get_screen->id == "tf_tours" ) ) {
 
-				if (wp_script_is('select2', 'enqueued')) {
+				if ( wp_script_is( 'select2', 'enqueued' ) ) {
 
-					wp_dequeue_script('select2');
-					wp_deregister_script('select2');
+					wp_dequeue_script( 'select2' );
+					wp_deregister_script( 'select2' );
 				}
 
-				if ( wp_script_is('acf-color-picker-alpha', 'enqueued') ) {
+				if ( wp_script_is( 'acf-color-picker-alpha', 'enqueued' ) ) {
 
 					$acf_script_handle = 'acf-color-picker-alpha';
-					$acf_script_data = $wp_scripts->registered[$acf_script_handle];
+					$acf_script_data   = $wp_scripts->registered[ $acf_script_handle ];
 
-					wp_dequeue_script($acf_script_handle);
+					wp_dequeue_script( $acf_script_handle );
 
-					if( isset( $acf_script_data ) ) {
+					if ( isset( $acf_script_data ) ) {
 						wp_enqueue_script( $acf_script_handle, $acf_script_data->src, $acf_script_data->deps, $acf_script_data->ver, true );
 					}
 				}
 
-				if ( wp_script_is('revbuilder-utils', 'enqueued') ) {
+				if ( wp_script_is( 'revbuilder-utils', 'enqueued' ) ) {
 
 					$rev_script_handle = 'revbuilder-utils';
-					$rev_slider_script = $wp_scripts->registered[$rev_script_handle];
+					$rev_slider_script = $wp_scripts->registered[ $rev_script_handle ];
 
-					wp_dequeue_script($rev_script_handle);
+					wp_dequeue_script( $rev_script_handle );
 
-					if( isset( $rev_slider_script ) ) {
+					if ( isset( $rev_slider_script ) ) {
 
 						wp_enqueue_script( $rev_script_handle, $rev_slider_script->src, $rev_slider_script->deps, $rev_slider_script->ver, true );
+					}
+				}
+
+				if ( wp_script_is( 'wp-color-picker-alpha', 'enqueued' ) ) {
+
+					$divi_script_handle = 'wp-color-picker-alpha';
+					$divi_slider_script = $wp_scripts->registered[ $divi_script_handle ];
+
+					wp_dequeue_script( $divi_script_handle );
+
+					if ( isset( $divi_slider_script ) ) {
+
+						wp_enqueue_script( $divi_script_handle, $divi_slider_script->src, $divi_slider_script->deps, $divi_slider_script->ver, true );
 					}
 				}
 			}
@@ -788,7 +805,7 @@ class Enqueue {
 	 */
 	public function tf_options_admin_enqueue_scripts( $screen ) {
 		global $post_type;
-		$tf_options_screens   = array(
+		$tf_options_screens          = array(
 			'toplevel_page_tf_settings',
 			'tourfic-settings_page_tf_get_help',
 			'tourfic-settings_page_tf_license_info',
@@ -806,8 +823,8 @@ class Enqueue {
 			'tf_apartment_page_tf-apartment-backend-booking',
 			'tourfic-settings_page_tf-setup-wizard'
 		);
-		$tf_options_post_type = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_email_templates' );
-		$admin_date_format_for_users  = !empty(self::tfopt( "tf-date-format-for-users")) ? self::tfopt( "tf-date-format-for-users") : "Y/m/d";
+		$tf_options_post_type        = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_email_templates' );
+		$admin_date_format_for_users = ! empty( self::tfopt( "tf-date-format-for-users" ) ) ? self::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		if ( tf_is_woo_active() ) {
 			if ( "tourfic-settings_page_tf_dashboard" == $screen ) {
 				//Order Data Retrive
@@ -955,7 +972,7 @@ class Enqueue {
 			$travelfic_toolkit_active_plugins[] = "travelfic-toolkit";
 		}
 
-		$current_active_theme = !empty(get_option('stylesheet')) ? get_option('stylesheet') : '';
+		$current_active_theme = ! empty( get_option( 'stylesheet' ) ) ? get_option( 'stylesheet' ) : '';
 
 		//Css
 
@@ -976,7 +993,7 @@ class Enqueue {
 		if ( in_array( $screen, $tf_options_screens ) || in_array( $post_type, $tf_options_post_type ) ) {
 
 			//date format
-			$date_format_change  = !empty(self::tfopt( "tf-date-format-for-users")) ? self::tfopt( "tf-date-format-for-users") : "Y/m/d";
+			$date_format_change = ! empty( self::tfopt( "tf-date-format-for-users" ) ) ? self::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 			wp_enqueue_script( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js', array( 'jquery' ), TF_VERSION, true );
 			wp_enqueue_script( 'tf-fullcalender', TF_ASSETS_ADMIN_URL . 'js/lib/fullcalender.min.js', array( 'jquery' ), TF_VERSION, true );
 
@@ -986,8 +1003,8 @@ class Enqueue {
 					'tf_nonce'                         => wp_create_nonce( 'updates' ),
 					'ajax_url'                         => admin_url( 'admin-ajax.php' ),
 					'toolkit_page_url'                 => admin_url( 'admin.php?page=travelfic-template-list' ),
-					'is_travelfic_toolkit_active'	   => $travelfic_toolkit_active_plugins,
-					'current_active_theme'			   => $current_active_theme,
+					'is_travelfic_toolkit_active'      => $travelfic_toolkit_active_plugins,
+					'current_active_theme'             => $current_active_theme,
 					'deleting_old_review_fields'       => esc_html__( 'Deleting old review fields...', 'tourfic' ),
 					'deleting_room_order_ids'          => esc_html__( 'Deleting order ids...', 'tourfic' ),
 					'tour_location_required'           => esc_html__( 'Tour Location is a required field!', 'tourfic' ),
@@ -1002,7 +1019,7 @@ class Enqueue {
 					'activated'                        => esc_html__( 'Activated', 'tourfic' ),
 					'install_failed'                   => esc_html__( 'Install failed', 'tourfic' ),
 					'is_woo_not_active'                => ( ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) || ! is_plugin_active( 'woocommerce/woocommerce.php' ) ),
-					'date_format_change_backend' 	   => $date_format_change,
+					'date_format_change_backend'       => $date_format_change,
 					'i18n'                             => array(
 						'no_services_selected' => esc_html__( 'Please select at least one service.', 'tourfic' ),
 					)

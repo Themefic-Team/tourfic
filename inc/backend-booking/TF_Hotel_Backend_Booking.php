@@ -86,7 +86,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 										$default = isset( $field['default'] ) ? $field['default'] : '';
 										$value   = isset( $tf_option_value[ $field['id'] ] ) ? $tf_option_value[ $field['id'] ] : $default;
 
-										$tf_option = new TF_Options();
+										$tf_option = new \Tourfic\Admin\TF_Options\TF_Options();
 										$tf_option->field( $field, $value, '' );
 
 									endforeach;

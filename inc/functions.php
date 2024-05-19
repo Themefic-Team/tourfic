@@ -160,17 +160,6 @@ if ( file_exists( TF_INC_PATH . 'functions/functions_vat.php' ) ) {
 }
 
 /**
- * Including CSS & JS
- *
- * @since 1.0
- */
-if ( file_exists( TF_INC_PATH . 'enqueues.php' ) ) {
-	require_once TF_INC_PATH . 'enqueues.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'enqueues.php' );
-}
-
-/**
  * Shortcodes
  *
  * @since 1.0

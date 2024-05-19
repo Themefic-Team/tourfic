@@ -54,7 +54,7 @@ if ( ! class_exists( 'TF_text' ) ) {
 									// sanitize Wp Editor Field
 									$value = ( $field['type'] == 'editor' ) ? wp_kses_post($value) : $value;
 
-									$tf_option = new TF_Options();
+									$tf_option = new \Tourfic\Admin\TF_Options\TF_Options();
 									$tf_option->field( $field, $value, $this->settings_id, $parent );
 								}
 								?>
