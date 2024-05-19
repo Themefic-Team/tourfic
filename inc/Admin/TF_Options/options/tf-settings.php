@@ -2,8 +2,8 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-if ( file_exists( TF_ADMIN_PATH . 'tf-options/options/tf-menu-icon.php' ) ) {
-	require_once TF_ADMIN_PATH . 'tf-options/options/tf-menu-icon.php';
+if ( file_exists( TF_ADMIN_PATH . 'TF_Options/options/tf-menu-icon.php' ) ) {
+	require_once TF_ADMIN_PATH . 'TF_Options/options/tf-menu-icon.php';
 } else {
 	$menu_icon = 'dashicons-palmtree';
 }

@@ -1,4 +1,6 @@
 <?php
+namespace Tourfic\Classes;
+
 defined( 'ABSPATH' ) || exit;
 /**
  * Activator Class
@@ -269,5 +271,3 @@ if ( ! class_exists( 'TF_Activator' ) ) {
 		}
 	}
 }
-
-TF_Activator::instance();

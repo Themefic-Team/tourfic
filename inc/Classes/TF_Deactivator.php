@@ -1,4 +1,6 @@
 <?php
+namespace Tourfic\Classes;
+
 defined( 'ABSPATH' ) || exit;
 /**
  * Deactivator Class
@@ -58,5 +60,3 @@ if ( ! class_exists( 'TF_Deactivator' ) ) {
 		}
 	}
 }
-
-TF_Deactivator::instance();

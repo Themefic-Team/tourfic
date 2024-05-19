@@ -9,6 +9,24 @@ if ( ! function_exists( 'tf_is_woo_active' ) ) {
 }
 
 /**
+ * Show admin warning if a required file is missing
+ */
+function tf_file_missing( $files = '' ) {
+
+	if ( is_admin() ) {
+		if ( ! empty( $files ) ) {
+			$class   = 'notice notice-error';
+			$message = '<strong>' . $files . '</strong>' . esc_html__( ' file is missing! It is required to function Tourfic properly!', 'tourfic' );
+
+			printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), wp_kses_post( $message ) );
+		}
+	}
+
+}
+
+add_action( 'admin_notices', 'tf_file_missing' );
+
+/**
  * WC Product Extend
  */
 if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-product-extend.php' ) ) {

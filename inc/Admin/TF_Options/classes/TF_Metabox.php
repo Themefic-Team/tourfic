@@ -57,9 +57,9 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 		public function load_fields() {
 
 			// Fields Class
-			require_once TF_ADMIN_PATH . 'tf-options/fields/TF_Fields.php';
+			require_once TF_ADMIN_PATH . 'TF_Options/fields/TF_Fields.php';
 
-			$fields = glob( TF_ADMIN_PATH . 'tf-options/fields/*/TF_*.php' );
+			$fields = glob( TF_ADMIN_PATH . 'TF_Options/fields/*/TF_*.php' );
 
 			if ( ! empty( $fields ) ) {
 				foreach ( $fields as $field ) {

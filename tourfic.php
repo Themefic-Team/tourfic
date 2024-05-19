@@ -134,18 +134,12 @@ final class Tourfic {
 	 * Include required core files used in admin and on the frontend.
 	 */
 	public function includes() {
-
-//		if ( file_exists( TF_INC_PATH . 'functions.php' ) ) {
-//			require_once TF_INC_PATH . 'functions.php';
-//		} else {
-//			tf_file_missing( TF_INC_PATH . 'functions.php' );
-//		}
 		// Classes
-		// if ( file_exists( TF_INC_PATH . 'classes.php' ) ) {
-		// 	require_once TF_INC_PATH . 'classes.php';
-		// } else {
-		// 	tf_file_missing( TF_INC_PATH . 'classes.php' );
-		// }
+		 if ( file_exists( TF_INC_PATH . 'classes.php' ) ) {
+		 	require_once TF_INC_PATH . 'classes.php';
+		 } else {
+		 	tf_file_missing( TF_INC_PATH . 'classes.php' );
+		 }
 		
 		// Admin Functions
 //		if ( file_exists( TF_ADMIN_PATH . 'inc/functions.php' ) ) {

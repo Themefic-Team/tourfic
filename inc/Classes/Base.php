@@ -13,10 +13,21 @@ class Base {
 	}
 
 	public function init() {
-		 \Tourfic\Classes\Helper::instance();
-		 \Tourfic\Classes\Enqueue::instance();
-//		\Tourfic\Admin\Functions::instance();
-		// \Tourfic\Admin\TF_Options\TF_Options::instance();
+		if ( file_exists( TF_INC_PATH . 'functions.php' ) ) {
+			require_once TF_INC_PATH . 'functions.php';
+		} else {
+			tf_file_missing( TF_INC_PATH . 'functions.php' );
+		}
+
+		\Tourfic\Classes\Helper::instance();
+		\Tourfic\Classes\Enqueue::instance();
+
+		if(is_admin()) {
+			\Tourfic\Classes\TF_Activator::instance();
+			\Tourfic\Classes\TF_Deactivator::instance();
+			\Tourfic\Admin\TF_Setup_Wizard::instance();
+			\Tourfic\Admin\TF_Options\TF_Options::instance();
+		}
 
 		if ( self::tfopt( 'disable-services' ) && in_array( 'hotel', self::tfopt( 'disable-services' ) ) ) {
 		} else {
