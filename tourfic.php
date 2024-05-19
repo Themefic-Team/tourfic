@@ -140,13 +140,7 @@ final class Tourfic {
 		 } else {
 		 	tf_file_missing( TF_INC_PATH . 'classes.php' );
 		 }
-		
-		// Admin Functions
-		if ( file_exists( TF_ADMIN_PATH . 'inc/functions.php' ) ) {
-			require_once TF_ADMIN_PATH . 'inc/functions.php';
-		} else {
-			tf_file_missing( TF_ADMIN_PATH . 'inc/functions.php' );
-		}
+
 		// Admin Functions
 		if ( file_exists( TF_ADMIN_PATH . 'emails/class-tf-handle-emails.php' ) ) {
 			require_once TF_ADMIN_PATH . 'emails/class-tf-handle-emails.php';
