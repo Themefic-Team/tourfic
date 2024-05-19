@@ -4,6 +4,7 @@ namespace Tourfic\Classes;
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Apartment\Pricing as ApartmentPricing;
+use Tourfic\Classes\Helper;
 
 class Enqueue {
 	use \Tourfic\Traits\Singleton;
@@ -21,6 +22,7 @@ class Enqueue {
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_options_admin_enqueue_scripts' ),9 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_options_wp_enqueue_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array($this, 'tf_required_taxonomies') );
 	}
 
 	/**
@@ -1066,6 +1068,122 @@ class Enqueue {
 		wp_enqueue_style( 'tf-fontawesome-5', '//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css', array(), TF_VERSION );
 		wp_enqueue_style( 'tf-fontawesome-6', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css', array(), TF_VERSION );
 		wp_enqueue_style( 'tf-remixicon', '//cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css', array(), TF_VERSION );
+	}
+
+	function tf_required_taxonomies( $hook ) {
+		if ( ! in_array( $hook, array( 'post.php', 'post-new.php' ) ) ) {
+			return;
+		}
+
+		global $post_type;
+
+		$tf_is_gutenberg_active = Helper::tf_is_gutenberg_active();
+
+		$default_post_types = array(
+			'tf_hotel'     => array(
+				'hotel_location' => array(
+					'message' => __( 'Please select a location before publishing this hotel', 'tourfic' )
+				)
+			),
+			'tf_tours'     => array(
+				'tour_destination' => array(
+					'message' => __( 'Please select a destination before publishing this tour', 'tourfic' )
+				)
+			),
+			'tf_apartment' => array(
+				'apartment_location' => array(
+					'message' => __( 'Please select a location before publishing this apartment', 'tourfic' )
+				)
+			)
+		);
+
+		$post_types = apply_filters( 'tf_post_types', $default_post_types );
+
+		if ( ! is_array( $post_types ) ) {
+			return;
+		}
+
+		if ( ! isset( $post_types[ $post_type ] ) ) {
+			return;
+		}
+
+		if ( ! isset( $post_types[ $post_type ] ) || ! is_array( $post_types[ $post_type ] ) || empty( $post_types[ $post_type ] ) ) {
+			if ( is_string( $post_types[ $post_type ] ) ) {
+				$post_types[ $post_type ] = array(
+					'taxonomies' => array(
+						$post_types[ $post_type ]
+					)
+				);
+			} else if ( is_array( $post_types[ $post_type ] ) ) {
+				$post_types[ $post_type ] = array(
+					'taxonomies' => $post_types[ $post_type ]
+				);
+			} else {
+				return;
+			}
+		}
+
+		$post_type_taxonomies = get_object_taxonomies( $post_type );
+
+		foreach ( $post_types[ $post_type ] as $taxonomy => $config ) {
+			if ( is_int( $taxonomy ) && is_string( $config ) ) {
+				unset( $post_types[ $post_type ][ $taxonomy ] );
+				$taxonomy = $config;
+
+				$post_types[ $post_type ][ $taxonomy ] = $config = array();
+			}
+
+			if ( ! taxonomy_exists( $taxonomy ) || ! in_array( $taxonomy, $post_type_taxonomies ) ) {
+				unset( $post_types[ $post_type ][ $taxonomy ] );
+				continue;
+			}
+
+			$taxonomy_object = get_taxonomy( $taxonomy );
+			$taxonomy_labels = get_taxonomy_labels( $taxonomy_object );
+
+			$post_types[ $post_type ][ $taxonomy ]['type'] = $config['type'] = ( is_taxonomy_hierarchical( $taxonomy ) ? 'hierarchical' : 'non-hierarchical' );
+
+			if ( ! isset( $config['message'] ) || $taxonomy === $config ) {
+				$post_type_labels = get_post_type_labels( get_post_type_object( $post_type ) );
+				/* translators: %s taxonomy singular name, translators: %s: post type singular name */
+				$config['message'] = sprintf( __( 'Please choose at least one %1$s before publishing this %2$s.', 'tourfic' ), $taxonomy_labels->singular_name, $post_type_labels->singular_name );
+			}
+
+			$post_types[ $post_type ][ $taxonomy ]['message'] = $config['message'];
+
+			if ( $tf_is_gutenberg_active && ! empty( $taxonomy_object->rest_base ) && $taxonomy !== $taxonomy_object->rest_base ) {
+				$post_types[ $post_type ][ $taxonomy_object->rest_base ] = $post_types[ $post_type ][ $taxonomy ];
+				unset( $post_types[ $post_type ][ $taxonomy ] );
+			}
+		}
+
+		if ( empty( $post_types[ $post_type ] ) ) {
+			return;
+		}
+
+		wp_localize_script( 'tf-admin', 'tf_admin_params', array(
+			'taxonomies'                       => $post_types[ $post_type ],
+			'error'                            => false,
+			'tf_nonce'                         => wp_create_nonce( 'updates' ),
+			'ajax_url'                         => admin_url( 'admin-ajax.php' ),
+			'deleting_old_review_fields'       => __( 'Deleting old review fields...', 'tourfic' ),
+			'deleting_room_order_ids'          => __( 'Deleting order ids...', 'tourfic' ),
+			'tour_location_required'           => __( 'Tour Location is a required field!', 'tourfic' ),
+			'hotel_location_required'          => __( 'Hotel Location is a required field!', 'tourfic' ),
+			'apartment_location_required'      => __( 'Apartment Location is a required field!', 'tourfic' ),
+			'tour_feature_image_required'      => __( 'Tour image is a required!', 'tourfic' ),
+			'hotel_feature_image_required'     => __( 'Hotel image is a required!', 'tourfic' ),
+			'apartment_feature_image_required' => __( 'Apartment image is a required!', 'tourfic' ),
+			'installing'                       => __( 'Installing...', 'tourfic' ),
+			'activating'                       => __( 'Activating...', 'tourfic' ),
+			'installed'                        => __( 'Installed', 'tourfic' ),
+			'activated'                        => __( 'Activated', 'tourfic' ),
+			'install_failed'                   => __( 'Install failed', 'tourfic' ),
+			'i18n'                             => array(
+				'no_services_selected' => __( 'Please select at least one service.', 'tourfic' ),
+			)
+		) );
+
 	}
 
 	function tf_custom_css() {

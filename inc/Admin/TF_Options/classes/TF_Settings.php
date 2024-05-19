@@ -221,7 +221,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			?>
 			<div class="tf-setting-dashboard">
 				<!-- dashboard-header-include -->
-				<?php tf_dashboard_header(); ?>
+				<?php \Tourfic\Classes\Helper::tf_dashboard_header(); ?>
 
 				<div class="tf-setting-preview">
 				<!-- dashboard-banner-section -->
@@ -414,7 +414,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		<div class="tf-setting-dashboard">
 
 			<!-- dashboard-header-include -->
-			<?php tf_dashboard_header(); ?>
+			<?php \Tourfic\Classes\Helper::tf_dashboard_header(); ?>
 
 			<div class="tf-settings-help-center">
 				<div class="tf-help-center-banner">
@@ -590,7 +590,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		<div class="tf-setting-dashboard">
 
 			<!-- dashboard-header-include -->
-			<?php tf_dashboard_header(); ?>
+			<?php \Tourfic\Classes\Helper::tf_dashboard_header(); ?>
 			
 			<div class="tf-setting-license">
 				<div class="tf-setting-license-tabs">
@@ -676,7 +676,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				?>
 				<div class="tf-setting-dashboard">
 				<!-- dashboard-header-include -->
-				<?php tf_dashboard_header(); ?>
+				<?php \Tourfic\Classes\Helper::tf_dashboard_header(); ?>
 
                 <div class="tf-option-wrapper tf-setting-wrapper">
                     <form method="post" action="" class="tf-option-form <?php echo esc_attr($ajax_save_class) ?>" enctype="multipart/form-data">
