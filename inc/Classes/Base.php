@@ -53,7 +53,7 @@ class Base {
 			 \Tourfic\Classes\Apartment\Apartment_CPT::instance();
 		}
 
-
+		\Tourfic\Admin\Emails\TF_Handle_Emails::instance();
 
 
 		// \Tourfic\Admin\Booking_Details\Hotel\Hotel_Booking_Details::instance();
