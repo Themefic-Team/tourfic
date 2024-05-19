@@ -5,10 +5,6 @@ namespace Tourfic\Admin\Backend_Booking;
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
-use DateInterval;
-use DatePeriod;
-use DateTime;
-use WP_Query;
 
 class TF_Apartment_Backend_Booking {
 
@@ -287,7 +283,7 @@ class TF_Apartment_Backend_Booking {
 		$from = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
 		$to   = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
 
-		$loop = new WP_Query( array(
+		$loop = new \WP_Query( array(
 			'post_type'      => 'tf_apartment',
 			'post_status'    => 'publish',
 			'posts_per_page' => - 1,
@@ -295,10 +291,10 @@ class TF_Apartment_Backend_Booking {
 
 		$period = '';
 		if ( ! empty( $from ) && ! empty( $to ) ) {
-			$period = new DatePeriod(
-				new DateTime( $from ),
-				new DateInterval( 'P1D' ),
-				new DateTime( ! empty( $to ) ? $to : '23:59:59' )
+			$period = new \DatePeriod(
+				new \DateTime( $from ),
+				new \DateInterval( 'P1D' ),
+				new \DateTime( ! empty( $to ) ? $to : '23:59:59' )
 			);
 		}
 
@@ -412,10 +408,10 @@ class TF_Apartment_Backend_Booking {
 			$check_out_stt = !empty($check_out) ? strtotime( $check_out ) : 0; 
 			$days = !empty($check_in_stt) && !empty($check_out_stt) ? ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1 : 0;
 
-			$tfperiod = new DatePeriod(
-				new DateTime( $check_in . ' 00:00' ),
-				new DateInterval( 'P1D' ),
-				new DateTime( $check_out . ' 23:59' )
+			$tfperiod = new \DatePeriod(
+				new \DateTime( $check_in . ' 00:00' ),
+				new \DateInterval( 'P1D' ),
+				new \DateTime( $check_out . ' 23:59' )
 			);
 		}
 		return array(

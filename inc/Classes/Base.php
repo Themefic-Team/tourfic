@@ -33,6 +33,11 @@ class Base {
 			\Tourfic\Classes\TF_Deactivator::instance();
 			\Tourfic\Admin\TF_Setup_Wizard::instance();
 			\Tourfic\Admin\TF_Options\TF_Options::instance();
+
+			// Backend Bookings
+			TF_Apartment_Backend_Booking::instance();
+			TF_Hotel_Backend_Booking::instance();
+			TF_Tour_Backend_Booking::instance();
 		}
 
 		if ( self::tfopt( 'disable-services' ) && in_array( 'hotel', self::tfopt( 'disable-services' ) ) ) {
@@ -48,10 +53,8 @@ class Base {
 			 \Tourfic\Classes\Apartment\Apartment_CPT::instance();
 		}
 
-		// Backend Bookings
-		TF_Apartment_Backend_Booking::instance();
-		TF_Hotel_Backend_Booking::instance();
-		TF_Tour_Backend_Booking::instance();
+
+
 
 		// \Tourfic\Admin\Booking_Details\Hotel\Hotel_Booking_Details::instance();
 //		\Tourfic\Admin\Enquiry\Hotel\Hotel_Enquiry::instance();

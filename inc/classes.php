@@ -18,13 +18,3 @@ if ( file_exists( TF_INC_PATH . 'classes/class-promo-notice.php' ) ) {
 } else {
 	tf_file_missing(TF_INC_PATH . 'classes/class-promo-notice.php');
 }
-
-/**
- * TF Demo Importer Class
- * @author Foysal
- */
-if ( file_exists( TF_INC_PATH . 'classes/class-tf-demo-importer.php' ) ) {
-	require_once TF_INC_PATH . 'classes/class-tf-demo-importer.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'classes/class-tf-demo-importer.php' );
-}

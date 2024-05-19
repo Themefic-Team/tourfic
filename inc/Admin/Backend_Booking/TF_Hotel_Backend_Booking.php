@@ -9,11 +9,7 @@ defined( 'ABSPATH' ) || exit;
  * @author Foysal
  */
 
- use Tourfic\Classes\Helper;
- use DateTime;
- use DatePeriod;
- use DateInterval;
- use WP_Query;
+use Tourfic\Classes\Helper;
 
 class TF_Hotel_Backend_Booking {
 
@@ -298,7 +294,7 @@ class TF_Hotel_Backend_Booking {
 		$from = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
 		$to   = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
 
-		$loop = new WP_Query( array(
+		$loop = new \WP_Query( array(
 			'post_type'      => 'tf_hotel',
 			'post_status'    => 'publish',
 			'posts_per_page' => - 1,
@@ -306,10 +302,10 @@ class TF_Hotel_Backend_Booking {
 
 		$period = '';
 		if ( ! empty( $from ) && ! empty( $to ) ) {
-			$period = new DatePeriod(
-				new DateTime( $from ),
-				new DateInterval( 'P1D' ),
-				new DateTime( ! empty( $to ) ? $to : '23:59:59' )
+			$period = new \DatePeriod(
+				new \DateTime( $from ),
+				new \DateInterval( 'P1D' ),
+				new \DateTime( ! empty( $to ) ? $to : '23:59:59' )
 			);
 		}
 
@@ -373,10 +369,10 @@ class TF_Hotel_Backend_Booking {
 
 				if ( $enable ) {
 					// Check availability by date option
-					$period = new DatePeriod(
-						new DateTime( $from . ' 00:00' ),
-						new DateInterval( 'P1D' ),
-						new DateTime( $to . ' 23:59' )
+					$period = new \DatePeriod(
+						new \DateTime( $from . ' 00:00' ),
+						new \DateInterval( 'P1D' ),
+						new \DateTime( $to . ' 23:59' )
 					);
 
 					$avail_durationdate = [];
@@ -745,10 +741,10 @@ class TF_Hotel_Backend_Booking {
 		if ( $avail_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 
 			// Check availability by date option
-			$period = new DatePeriod(
-				new DateTime( $check_in . ' 00:00' ),
-				new DateInterval( 'P1D' ),
-				new DateTime( $check_out . ' 00:00' )
+			$period = new \DatePeriod(
+				new \DateTime( $check_in . ' 00:00' ),
+				new \DateInterval( 'P1D' ),
+				new \DateTime( $check_out . ' 00:00' )
 			);
 
 			$total_price = 0;
