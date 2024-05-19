@@ -112,7 +112,6 @@ final class Tourfic {
 	 * Hook into actions and filters.
 	 */
 	private function init_hooks() {
-
 		// plugin loaded action hook.
 		add_action( 'plugins_loaded', array( $this, 'init_plugin' ) );
 		// Load the text domain for translation.
@@ -136,11 +135,11 @@ final class Tourfic {
 	 */
 	public function includes() {
 
-		if ( file_exists( TF_INC_PATH . 'functions.php' ) ) {
-			require_once TF_INC_PATH . 'functions.php';
-		} else {
-			tf_file_missing( TF_INC_PATH . 'functions.php' );
-		}
+//		if ( file_exists( TF_INC_PATH . 'functions.php' ) ) {
+//			require_once TF_INC_PATH . 'functions.php';
+//		} else {
+//			tf_file_missing( TF_INC_PATH . 'functions.php' );
+//		}
 		// Classes
 		// if ( file_exists( TF_INC_PATH . 'classes.php' ) ) {
 		// 	require_once TF_INC_PATH . 'classes.php';
@@ -149,17 +148,17 @@ final class Tourfic {
 		// }
 		
 		// Admin Functions
-		if ( file_exists( TF_ADMIN_PATH . 'inc/functions.php' ) ) {
-			require_once TF_ADMIN_PATH . 'inc/functions.php';
-		} else {
-			tf_file_missing( TF_ADMIN_PATH . 'inc/functions.php' );
-		}
-		// Admin Functions
-		if ( file_exists( TF_ADMIN_PATH . 'emails/class-tf-handle-emails.php' ) ) {
-			require_once TF_ADMIN_PATH . 'emails/class-tf-handle-emails.php';
-		} else {
-			tf_file_missing( TF_ADMIN_PATH . 'emails/class-tf-handle-emails.php' );
-		}
+//		if ( file_exists( TF_ADMIN_PATH . 'inc/functions.php' ) ) {
+//			require_once TF_ADMIN_PATH . 'inc/functions.php';
+//		} else {
+//			tf_file_missing( TF_ADMIN_PATH . 'inc/functions.php' );
+//		}
+//		// Admin Functions
+//		if ( file_exists( TF_ADMIN_PATH . 'emails/class-tf-handle-emails.php' ) ) {
+//			require_once TF_ADMIN_PATH . 'emails/class-tf-handle-emails.php';
+//		} else {
+//			tf_file_missing( TF_ADMIN_PATH . 'emails/class-tf-handle-emails.php' );
+//		}
 	}
 
 	function tf_load_textdomain() {

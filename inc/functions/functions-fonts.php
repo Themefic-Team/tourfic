@@ -1553,12 +1553,12 @@ if ( ! function_exists( 'tourfic_google_fonts_scriptss' ) ) {
         
         if($tf_global_heading_font_family!="Default"){
             $heading_url = 'https://fonts.googleapis.com/css2?family='. str_replace("_","+",$tf_global_heading_font_family) .':wght@100;200;300;400;500;600;700;800;900&display=swap';
-            wp_enqueue_style( 'tourfic-google-'.$tf_global_heading_font_family, $heading_url, array(), TOURFIC );
+            wp_enqueue_style( 'tourfic-google-'.$tf_global_heading_font_family, $heading_url, array(), TF_VERSION );
         }
         
         if($tf_global_font!="Default"){
             $body_url = 'https://fonts.googleapis.com/css2?family='. str_replace("_","+",$tf_global_font) .':wght@100;200;300;400;500;600;700;800;900&display=swap';
-            wp_enqueue_style( 'tourfic-google-'.$tf_global_font, $body_url, array(), TOURFIC );
+            wp_enqueue_style( 'tourfic-google-'.$tf_global_font, $body_url, array(), TF_VERSION );
         }
     }
 }

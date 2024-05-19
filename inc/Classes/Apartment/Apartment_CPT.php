@@ -1,0 +1,74 @@
+<?php
+
+namespace Tourfic\Classes\Apartment;
+defined( 'ABSPATH' ) || exit;
+
+class Apartment_CPT extends \Tourfic\Classes\Post_Type {
+
+	use \Tourfic\Traits\Singleton;
+	use \Tourfic\Traits\Helper;
+
+	/**
+	 * Initialize custom post type
+	 * @access public
+	 * @return void
+	 */
+	public function __construct() {
+		$apartment_args = array(
+			'name'          => esc_html__('Apartments', 'tourfic' ),
+			'singular_name' => esc_html__('Apartment', 'tourfic' ),
+			'slug'          => 'tf_apartment',
+			'menu_icon'     => 'dashicons-admin-home',
+			'menu_position' => 26.4,
+			'supports'      => apply_filters( 'tf_apartment_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
+			'capability'    => array( 'tf_apartment', 'tf_apartments' ),
+			'rewrite_slug'  => $this->get_apartment_slug(),
+		);
+
+		$tax_args = array(
+			array(
+				'name'          => esc_html__('Locations', 'tourfic' ),
+				'singular_name' => esc_html__('Location', 'tourfic' ),
+				'taxonomy'      => 'apartment_location',
+				'rewrite_slug'  => apply_filters( 'tf_apartment_location_slug', 'apartment-location' ),
+				'capability'  => array(
+					'assign_terms' => 'edit_tf_apartment',
+					'edit_terms'   => 'edit_tf_apartment',
+				),
+			),
+			array(
+				'name'          => esc_html__('Features', 'tourfic' ),
+				'singular_name' => esc_html__('Feature', 'tourfic'),
+				'taxonomy'      => 'apartment_feature',
+				'rewrite_slug'  => apply_filters( 'tf_apartment_feature_slug', 'apartment-feature' ),
+				'capability'  => array(
+					'assign_terms' => 'edit_tf_apartment',
+					'edit_terms'   => 'edit_tf_apartment',
+				),
+			),
+			array(
+				'name'          => esc_html__('Types', 'tourfic' ),
+				'singular_name' => esc_html__('Type', 'tourfic' ),
+				'taxonomy'      => 'apartment_type',
+				'rewrite_slug'  => apply_filters( 'tf_apartment_type_slug', 'apartment-type' ),
+				'capability'  => array(
+					'assign_terms' => 'edit_tf_apartment',
+					'edit_terms'   => 'edit_tf_apartment',
+				),
+			)
+		);
+
+		parent::__construct( $apartment_args, $tax_args );
+
+		add_action( 'init', array( $this, 'tf_post_type_taxonomy_register' ) );
+	}
+
+	private function get_apartment_slug() {
+		$tf_apartment_setting_permalink_slug = ! empty( self::tfopt( 'apartment-permalink-setting' ) ) ? self::tfopt( 'apartment-permalink-setting' ) : "apartments";
+
+		update_option( "apartment_slug", $tf_apartment_setting_permalink_slug );
+
+		return apply_filters( 'tf_apartment_slug', get_option( 'apartment_slug' ) );
+	}
+
+}

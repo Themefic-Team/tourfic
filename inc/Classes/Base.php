@@ -13,22 +13,22 @@ class Base {
 	}
 
 	public function init() {
-		// \Tourfic\Classes\Helper::instance();
-		// \Tourfic\Classes\Enqueue::instance();
+		 \Tourfic\Classes\Helper::instance();
+		 \Tourfic\Classes\Enqueue::instance();
 //		\Tourfic\Admin\Functions::instance();
 		// \Tourfic\Admin\TF_Options\TF_Options::instance();
 
 		if ( self::tfopt( 'disable-services' ) && in_array( 'hotel', self::tfopt( 'disable-services' ) ) ) {
 		} else {
-			// \Tourfic\Classes\Hotel\Hotel_CPT::instance();
+			 \Tourfic\Classes\Hotel\Hotel_CPT::instance();
 		}
 		if ( self::tfopt( 'disable-services' ) && in_array( 'tour', self::tfopt( 'disable-services' ) ) ) {
 		} else {
-			// \Tourfic\Classes\Tour\Tour_CPT::instance();
+			 \Tourfic\Classes\Tour\Tour_CPT::instance();
 		}
 		if ( self::tfopt( 'disable-services' ) && in_array( 'apartment', self::tfopt( 'disable-services' ) ) ) {
 		} else {
-			// \Tourfic\Classes\Apartment\Apartment_CPT::instance();
+			 \Tourfic\Classes\Apartment\Apartment_CPT::instance();
 		}
 
 		// \Tourfic\Admin\Booking_Details\Hotel\Hotel_Booking_Details::instance();

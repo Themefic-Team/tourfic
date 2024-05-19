@@ -174,7 +174,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		<div class="tf-setting-top-bar">
 			<div class="version">
 				<img src="<?php echo esc_url(TF_ASSETS_APP_URL.'images/tourfic-logo.webp'); ?>" alt="logo">
-				<span>v<?php echo esc_attr( TOURFIC ); ?></span>
+				<span>v<?php echo esc_attr( TF_VERSION ); ?></span>
 			</div>
 			<div class="other-document">
 				<svg width="26" height="25" viewBox="0 0 26 25" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: #003c79;background: ;">
