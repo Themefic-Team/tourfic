@@ -1,12 +1,25 @@
 <?php
+
+namespace Tourfic\Admin\Backend_Booking;
+
 defined( 'ABSPATH' ) || exit;
 /**
  * TF Tour Backend Booking
  * @since 2.9.26
  * @author Foysal
  */
+
+ use Tourfic\Classes\Helper;
+ use DateInterval;
+use DatePeriod;
+use DateTime;
+use WP_Query;
+
 if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 	class TF_Tour_Backend_Booking {
+
+		use \Tourfic\Traits\Singleton;
+		use \Tourfic\Traits\Helper;
 
 		private static $instance = null;
 
@@ -66,7 +79,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 			}
 
 			echo '<div class="tf-setting-dashboard">';
-			tf_dashboard_header()
+			Helper::tf_dashboard_header()
 			?>
             <form method="post" action="" class="tf-backend-tour-booking" enctype="multipart/form-data">
                 <h1><?php esc_html_e( 'Add New Tour Booking', 'tourfic' ); ?></h1>
@@ -581,8 +594,8 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 				}
 			}
 
-			if ( ! $response['fieldErrors'] ) {
-				$res              = $this->tf_get_tour_total_price( intval( $field['tf_available_tours'] ), $field['tf_tour_date'], $field['tf_tour_time'], $field['tf_tour_extras'], intval( $field['tf_tour_adults_number'] ), intval( $field['tf_tour_children_number'] ), intval( $field['tf_tour_infants_number'] ) );
+			if ( ! array_key_exists("fieldErrors", $response)  || ! $response['fieldErrors'] ) {
+				$res              = $this->tf_get_tour_total_price( intval( $field['tf_available_tours'] ), $field['tf_tour_date'], $field['tf_tour_time'] ?? '', $field['tf_tour_extras'] ?? '', intval( $field['tf_tour_adults_number'] ), intval( $field['tf_tour_children_number'] ), intval( $field['tf_tour_infants_number'] ) );
 				$billing_details  = array(
 					'billing_first_name' => $field['tf_customer_first_name'],
 					'billing_last_name'  => $field['tf_customer_last_name'],
@@ -607,7 +620,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 					'shipping_postcode'   => $field['tf_customer_zip'],
 					'shipping_country'    => $field['tf_customer_country'],
 					'shipping_phone'      => $field['tf_customer_phone'],
-					'tf_email'      => $field['tf_customer_email'],
+					'tf_email'      	  => $field['tf_customer_email'],
 				);
 
 				if ( $field['tf_tour_date'] ) {
@@ -1200,7 +1213,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 				'response'            => $response,
 				'tf_tour_price'       => $tf_tour_price ? $tf_tour_price + $tour_extra_total : 0,
 				'tf_tour_extra_title' => $tour_extra_title,
-				'tf_tour_time_title'  => $tour_time_title,
+				'tf_tour_time_title'  => !empty( $tour_time_title ) ? $tour_time_title : '',
 				'start_date'          => $start_date,
 				'end_date'            => $end_date,
 				'tour_date'           => $tour_date,

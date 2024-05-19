@@ -3,6 +3,12 @@ namespace Tourfic\Classes;
 
 defined( 'ABSPATH' ) || exit;
 
+use Tourfic\Admin\Backend_Booking\TF_Apartment_Backend_Booking;
+use Tourfic\Admin\Backend_Booking\TF_Hotel_Backend_Booking;
+use Tourfic\Admin\Backend_Booking\TF_Tour_Backend_Booking;
+
+use Tourfic\Admin\Emails\TF_Handle_Emails;
+
 class Base {
 	use \Tourfic\Traits\Singleton;
 	use \Tourfic\Traits\Enquiry;
@@ -41,6 +47,11 @@ class Base {
 		} else {
 			 \Tourfic\Classes\Apartment\Apartment_CPT::instance();
 		}
+
+		// Backend Bookings
+		TF_Apartment_Backend_Booking::instance();
+		TF_Hotel_Backend_Booking::instance();
+		TF_Tour_Backend_Booking::instance();
 
 		// \Tourfic\Admin\Booking_Details\Hotel\Hotel_Booking_Details::instance();
 //		\Tourfic\Admin\Enquiry\Hotel\Hotel_Enquiry::instance();
