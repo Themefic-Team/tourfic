@@ -427,7 +427,6 @@
                         },
                         beforeSend: function () {
                             $('.tf-icon-list').append('<div class="tf-icon-loading">Loading...</div>');
-                            console.log('startIndexxx', startIndex);
                         },
                         success: function (response) {
                             loading = false;
@@ -1627,7 +1626,7 @@ var frame, gframe;
                 };
 
                 $latitude.on('change', function () {
-                    console.log('change')
+
                 })
 
                 function updateLocationField(latitude, longitude) {
