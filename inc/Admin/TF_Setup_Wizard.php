@@ -1168,7 +1168,7 @@ class TF_Setup_Wizard {
 			}
 
 			if ( ! empty( $apartment_demo_data ) && $apartment_demo_data == '1' ) {
-				TF_Demo_Importer::instance()->tf_dummy_apartments_import();
+				\Tourfic\Admin\TF_Demo_Importer::instance()->tf_dummy_apartments_import();
 			}
 		}
 

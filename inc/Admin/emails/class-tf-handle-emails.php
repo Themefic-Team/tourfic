@@ -1,7 +1,5 @@
 <?php
 
-use Appsero\License;
-
 /**
  * Tourfic Handle Emails Class for admin/vendors/customers
  * @author: Abu Hena

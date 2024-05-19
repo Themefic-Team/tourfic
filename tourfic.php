@@ -105,7 +105,7 @@ final class Tourfic {
 		define( 'TF_TEMPLATE_PART_PATH', TF_TEMPLATE_PATH . 'template-parts/' );
 		define( 'TF_OPTIONS_PATH', TF_ADMIN_PATH . 'options/' );
 		define( 'TF_ASSETS_PATH', TF_PATH . 'assets/' );
-		define( 'TF_EMAIL_TEMPLATES_PATH', TF_PATH . 'admin/emails/templates/' );
+		define( 'TF_EMAIL_TEMPLATES_PATH', TF_ADMIN_PATH . 'emails/templates/' );
 	}
 
 	/**
