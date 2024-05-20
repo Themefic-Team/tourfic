@@ -1,13 +1,13 @@
 <?php
 
 namespace Tourfic\Classes\Hotel;
+use \Tourfic\Classes\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
 class Hotel_CPT extends \Tourfic\Classes\Post_Type {
 
 	use \Tourfic\Traits\Singleton;
-	use \Tourfic\Traits\Helper;
 
 	/**
 	 * Initialize custom post type
@@ -65,7 +65,7 @@ class Hotel_CPT extends \Tourfic\Classes\Post_Type {
 	}
 
 	private function get_hotel_slug() {
-		$tf_hotel_setting_permalink_slug = ! empty( self::tfopt( 'hotel-permalink-setting' ) ) ? self::tfopt( 'hotel-permalink-setting' ) : "hotels";
+		$tf_hotel_setting_permalink_slug = ! empty( Helper::tfopt( 'hotel-permalink-setting' ) ) ? Helper::tfopt( 'hotel-permalink-setting' ) : "hotels";
 
 		update_option( "hotel_slug", $tf_hotel_setting_permalink_slug );
 

@@ -1,5 +1,6 @@
 <?php
 defined( 'ABSPATH' ) || exit;
+use \Tourfic\Classes\Helper;
 
 /**
  * Add different booking submenu under each post types
@@ -23,7 +24,7 @@ if ( ! function_exists( 'tf_add_order_submenu' ) ) {
 			add_submenu_page( 'edit.php?post_type=tf_apartment', esc_html__( 'Apartment Booking Details', 'tourfic' ), esc_html__( 'Booking Details', 'tourfic' ), 'edit_tf_apartments', 'tf_apartment_booking', 'tf_apartment_booking_page_callback' );
 		}
 		if ( $current_user_role == 'tf_vendor' ) {
-			if ( ! empty( tf_data_types( Helper::tfopt( 'multi-vendor-setings' ) )['vendor-booking-history'] ) && tf_data_types( Helper::tfopt( 'multi-vendor-setings' ) )['vendor-booking-history'] == '1' ) {
+			if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'multi-vendor-setings' ) )['vendor-booking-history'] ) && Helper::tf_data_types( Helper::tfopt( 'multi-vendor-setings' ) )['vendor-booking-history'] == '1' ) {
 				// Tour booking
 				add_submenu_page( 'edit.php?post_type=tf_tours', esc_html__( 'Tour Booking Details', 'tourfic' ), esc_html__( 'Booking Details', 'tourfic' ), 'edit_tf_tourss', 'tf_tours_booking', 'tf_tour_booking_page_callback' );
 

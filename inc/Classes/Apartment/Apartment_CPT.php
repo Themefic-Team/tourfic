@@ -1,12 +1,12 @@
 <?php
 
 namespace Tourfic\Classes\Apartment;
-defined( 'ABSPATH' ) || exit;
+use \Tourfic\Classes\Helper;
 
+defined( 'ABSPATH' ) || exit;
 class Apartment_CPT extends \Tourfic\Classes\Post_Type {
 
 	use \Tourfic\Traits\Singleton;
-	use \Tourfic\Traits\Helper;
 
 	/**
 	 * Initialize custom post type
@@ -64,7 +64,7 @@ class Apartment_CPT extends \Tourfic\Classes\Post_Type {
 	}
 
 	private function get_apartment_slug() {
-		$tf_apartment_setting_permalink_slug = ! empty( self::tfopt( 'apartment-permalink-setting' ) ) ? self::tfopt( 'apartment-permalink-setting' ) : "apartments";
+		$tf_apartment_setting_permalink_slug = ! empty( Helper::tfopt( 'apartment-permalink-setting' ) ) ? Helper::tfopt( 'apartment-permalink-setting' ) : "apartments";
 
 		update_option( "apartment_slug", $tf_apartment_setting_permalink_slug );
 

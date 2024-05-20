@@ -1,6 +1,7 @@
 <?php
 # don't load directly
 defined( 'ABSPATH' ) || exit;
+use \Tourfic\Classes\Helper;
 
 /**
  * Flushing Rewrite on Tourfic Activation
@@ -540,7 +541,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		if("single"==$tf_apartment_layout_conditions){
 			$tf_apartment_single_template = ! empty( $meta['tf_single_apartment_template'] ) ? $meta['tf_single_apartment_template'] : 'default';
 		}
-		$tf_apartment_global_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] : 'default';
+		$tf_apartment_global_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] : 'default';
 
 		$tf_apartment_selected_check = !empty($tf_apartment_single_template) ? $tf_apartment_single_template : $tf_apartment_global_template;
 
@@ -1231,7 +1232,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 		}
 		$featured        = ! empty( $meta['apartment_as_featured'] ) ? $meta['apartment_as_featured'] : '';
 		$pricing_type    = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
-		$apartment_multiple_tags = !empty($meta['tf-apartment-tags']) ? tf_data_types($meta['tf-apartment-tags']) : [];
+		$apartment_multiple_tags = !empty($meta['tf-apartment-tags']) ? Helper::tf_data_types($meta['tf-apartment-tags']) : [];
 		//Discout Info
 		$apartment_discount_type = !empty($meta["discount_type"]) ? $meta["discount_type"] : "none";
 		$apartment_discount_amount = !empty($meta["discount"]) ? $meta["discount"] : 0;
@@ -1252,7 +1253,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 		), $url );
 
 		$apartment_min_price = get_apartment_min_max_price( get_the_ID() );
-		$tf_apartment_arc_selected_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
+		$tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 		if ( $tf_apartment_arc_selected_template == "design-1" ) {
 		$first_gallery_image = explode(',', $gallery);	
 		?>
@@ -2374,7 +2375,7 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
 		if("single"==$tf_apartment_layout_conditions){
 			$tf_apartment_single_template = ! empty( $meta['tf_single_apartment_template'] ) ? $meta['tf_single_apartment_template'] : 'default';
 		}
-		$tf_apartment_global_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] : 'default';
+		$tf_apartment_global_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] : 'default';
 
 		$tf_apartment_selected_check = !empty($tf_apartment_single_template) ? $tf_apartment_single_template : $tf_apartment_global_template;
 
@@ -2384,7 +2385,7 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
         <div class="tf-hotel-quick-view" style="display: flex">
 			<?php
 
-			foreach ( tf_data_types( $meta['rooms'] ) as $key => $room ) :
+			foreach ( Helper::tf_data_types( $meta['rooms'] ) as $key => $room ) :
 				if ( $key == sanitize_text_field( $_POST['id'] ) ):
 					$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
 					?>
@@ -2564,7 +2565,7 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
         </div>
 		<?php } 
 		if('design-1'==$tf_apartment_selected_template){ 
-			foreach ( tf_data_types( $meta['rooms'] ) as $key => $room ) :
+			foreach ( Helper::tf_data_types( $meta['rooms'] ) as $key => $room ) :
 				if ( $key == sanitize_text_field( $_POST['id'] ) ):
 				$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
 				$tf_room_gallery_ids = !empty($tf_room_gallery) ? explode( ',', $tf_room_gallery ) : '';
@@ -2641,9 +2642,9 @@ if ( ! function_exists( 'tf_apartment_feature_assign_taxonomies' ) ) {
 			return;
 		}
 		$meta = get_post_meta( $post_id, 'tf_apartment_opt', true );
-		if ( isset( $meta['amenities'] ) && ! empty( tf_data_types( $meta['amenities'] ) ) ) {
+		if ( isset( $meta['amenities'] ) && ! empty( Helper::tf_data_types( $meta['amenities'] ) ) ) {
 			$apartment_features = array();
-			foreach ( tf_data_types( $meta['amenities'] ) as $amenity ) {
+			foreach ( Helper::tf_data_types( $meta['amenities'] ) as $amenity ) {
 				$apartment_features[] = intval( $amenity['feature'] );
 			}
 			wp_set_object_terms( $post_id, $apartment_features, 'apartment_feature' );

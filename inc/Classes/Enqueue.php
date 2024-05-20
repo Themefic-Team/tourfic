@@ -4,11 +4,10 @@ namespace Tourfic\Classes;
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Apartment\Pricing as ApartmentPricing;
-use Tourfic\Classes\Helper;
 
 class Enqueue {
 	use \Tourfic\Traits\Singleton;
-	use \Tourfic\Traits\Helper;
+	use \Tourfic\Classes\Helper;
 
 	public function __construct() {
 		add_filter( 'wp_enqueue_scripts', array( $this, 'tf_dequeue_scripts' ), 9999 );
@@ -637,9 +636,9 @@ class Enqueue {
 				'elevvationmode'         => isset( $elevvationmode ) ? $elevvationmode : '',
 				'showitinerarychart'     => isset( $showitinerarychart ) ? $showitinerarychart : '',
 				'showitinerarystatus'    => isset( $showitinerarystatus ) ? $showitinerarystatus : '',
-				'date_hotel_search'      => Helper::tfopt( 'date_hotel_search' ),
-				'date_tour_search'       => Helper::tfopt( 'date_tour_search' ),
-				'date_apartment_search'  => Helper::tfopt( 'date_apartment_search' ),
+				'date_hotel_search'      => self::tfopt( 'date_hotel_search' ),
+				'date_tour_search'       => self::tfopt( 'date_tour_search' ),
+				'date_apartment_search'  => self::tfopt( 'date_apartment_search' ),
 				'tf_apartment_max_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['max'] : 0,
 				'tf_apartment_min_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['min'] : 0,
 				'tour_form_data'         => isset( $single_tour_form_data ) ? $single_tour_form_data : array(),
