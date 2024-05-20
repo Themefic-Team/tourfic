@@ -5,24 +5,6 @@ defined( 'ABSPATH' ) || exit;
 
 trait Helper {
 
-	static function tfopt( $option = '', $default = null ) {
-		$options = get_option( 'tf_settings' );
-
-		return ( isset( $options[ $option ] ) ) ? $options[ $option ] : $default;
-	}
-
-    static function tf_data_types( $var ) {
-		if ( ! empty( $var ) && gettype( $var ) == "string" ) {
-			$tf_serialize_date = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-				return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-			}, $var );
-
-			return unserialize( $tf_serialize_date );
-		} else {
-			return $var;
-		}
-	}
-
 	function tourfic_order_table_data( $query ) {
 		global $wpdb;
 		$query_type          = $query['post_type'];

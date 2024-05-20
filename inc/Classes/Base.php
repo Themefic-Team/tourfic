@@ -6,8 +6,8 @@ defined( 'ABSPATH' ) || exit;
 use Tourfic\Admin\Backend_Booking\TF_Apartment_Backend_Booking;
 use Tourfic\Admin\Backend_Booking\TF_Hotel_Backend_Booking;
 use Tourfic\Admin\Backend_Booking\TF_Tour_Backend_Booking;
-
 use Tourfic\Admin\Emails\TF_Handle_Emails;
+use Tourfic\Classes\Helper;
 
 class Base {
 	use \Tourfic\Traits\Singleton;
@@ -40,15 +40,15 @@ class Base {
 			TF_Tour_Backend_Booking::instance();
 		}
 
-		if ( self::tfopt( 'disable-services' ) && in_array( 'hotel', self::tfopt( 'disable-services' ) ) ) {
+		if ( Helper::tfopt( 'disable-services' ) && in_array( 'hotel', Helper::tfopt( 'disable-services' ) ) ) {
 		} else {
 			 \Tourfic\Classes\Hotel\Hotel_CPT::instance();
 		}
-		if ( self::tfopt( 'disable-services' ) && in_array( 'tour', self::tfopt( 'disable-services' ) ) ) {
+		if ( Helper::tfopt( 'disable-services' ) && in_array( 'tour', Helper::tfopt( 'disable-services' ) ) ) {
 		} else {
 			 \Tourfic\Classes\Tour\Tour_CPT::instance();
 		}
-		if ( self::tfopt( 'disable-services' ) && in_array( 'apartment', self::tfopt( 'disable-services' ) ) ) {
+		if ( Helper::tfopt( 'disable-services' ) && in_array( 'apartment', Helper::tfopt( 'disable-services' ) ) ) {
 		} else {
 			 \Tourfic\Classes\Apartment\Apartment_CPT::instance();
 		}

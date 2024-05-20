@@ -1,12 +1,13 @@
 <?php
 
 namespace Tourfic\Classes\Tour;
+use \Tourfic\Classes\Helper;
+
 defined( 'ABSPATH' ) || exit;
 
 class Tour_CPT extends \Tourfic\Classes\Post_Type {
 
 	use \Tourfic\Traits\Singleton;
-	use \Tourfic\Classes\Helper;
 
 	/**
 	 * Initialize custom post type
@@ -84,7 +85,7 @@ class Tour_CPT extends \Tourfic\Classes\Post_Type {
 	}
 
 	private function get_tour_slug() {
-		$tf_tour_setting_permalink_slug = ! empty( self::tfopt( 'tour-permalink-setting' ) ) ? self::tfopt( 'tour-permalink-setting' ) : "tours";
+		$tf_tour_setting_permalink_slug = ! empty( Helper::tfopt( 'tour-permalink-setting' ) ) ? Helper::tfopt( 'tour-permalink-setting' ) : "tours";
 
 		update_option( "tour_slug", $tf_tour_setting_permalink_slug );
 
