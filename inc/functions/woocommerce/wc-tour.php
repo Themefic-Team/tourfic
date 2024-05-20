@@ -1,5 +1,6 @@
 <?php
 defined( 'ABSPATH' ) || exit;
+use \Tourfic\Classes\Helper;
 
 /**
  * Tour booking ajax function
@@ -625,7 +626,7 @@ function tf_tours_booking_function() {
 
 	if( !empty($tf_booking_type) && 3==$tf_booking_type ){
 
-		$tf_booking_fields = !empty(tfopt( 'book-confirm-field' )) ? tf_data_types(tfopt( 'book-confirm-field' )) : '';
+		$tf_booking_fields = !empty(Helper::tfopt( 'book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'book-confirm-field' )) : '';
 		if(empty($tf_booking_fields)){
 			$billing_details  = array(
 				'billing_first_name' => sanitize_text_field($tf_confirmation_details['tf_first_name']),

@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) || exit;
 class Tour_CPT extends \Tourfic\Classes\Post_Type {
 
 	use \Tourfic\Traits\Singleton;
-	use \Tourfic\Traits\Helper;
+	use \Tourfic\Classes\Helper;
 
 	/**
 	 * Initialize custom post type

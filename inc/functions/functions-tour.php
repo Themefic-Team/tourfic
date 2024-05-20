@@ -1,5 +1,6 @@
 <?php
 defined( 'ABSPATH' ) || exit;
+use \Tourfic\Classes\Helper;
 
 /**
  * Flushing Rewrite on Tourfic Activation
@@ -16,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
 //}
 //
 //register_activation_hook( TF_PATH . 'tourfic.php', 'tf_tours_rewrite_flush' );
-use \Tourfic\Classes\Helper;
+
 /**
  * Get tour destinations
  *
@@ -731,7 +732,7 @@ function tf_single_tour_booking_form( $post_id ) {
 	if ( "single" == $tf_tour_layout_conditions ) {
 		$tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'design-1';
 	}
-	$tf_tour_global_template = ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] ) ? tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
+	$tf_tour_global_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
 
 	$tf_tour_selected_check = ! empty( $tf_tour_single_template ) ? $tf_tour_single_template : $tf_tour_global_template;
 
@@ -922,7 +923,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                         <h4><?php echo esc_html__( "Billing details", "tourfic" ); ?></h4>
                                         <div class="traveller-info billing-details">
 											<?php
-											$confirm_book_fields = ! empty( Helper::tfopt( 'book-confirm-field' ) ) ? tf_data_types( Helper::tfopt( 'book-confirm-field' ) ) : '';
+											$confirm_book_fields = ! empty( Helper::tfopt( 'book-confirm-field' ) ) ? Helper::tf_data_types( Helper::tfopt( 'book-confirm-field' ) ) : '';
 											if ( empty( $confirm_book_fields ) ) {
 												?>
                                                 <div class="traveller-single-info tf-confirm-fields">
@@ -1943,8 +1944,8 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 	$meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
 
 	// Location
-	if( !empty($meta['location']) && tf_data_types($meta['location'])){
-		$location = !empty( tf_data_types($meta['location'])['address'] ) ? tf_data_types($meta['location'])['address'] : '';
+	if( !empty($meta['location']) && Helper::tf_data_types($meta['location'])){
+		$location = !empty( Helper::tf_data_types($meta['location'])['address'] ) ? Helper::tf_data_types($meta['location'])['address'] : '';
     }
 	// Featured
 	$featured = ! empty( $meta['tour_as_featured'] ) ? $meta['tour_as_featured'] : '';
@@ -2181,7 +2182,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
         }
     }
     
-    $tf_tour_arc_selected_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
+    $tf_tour_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
     
     if( $tf_tour_arc_selected_template=="design-1"){
     ?>
@@ -3971,7 +3972,7 @@ function tf_tour_booking_popup_callback() {
 				}
 			}
 		}
-		$traveller_info_fields = ! empty( Helper::tfopt( 'without-payment-field' ) ) ? tf_data_types( Helper::tfopt( 'without-payment-field' ) ) : '';
+		$traveller_info_fields = ! empty( Helper::tfopt( 'without-payment-field' ) ) ? Helper::tf_data_types( Helper::tfopt( 'without-payment-field' ) ) : '';
 
 		$response['traveller_info']    = '';
 		$response['traveller_summery'] = '';

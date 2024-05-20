@@ -1,4 +1,6 @@
 <?php
+use \Tourfic\Classes\Helper;
+
 /**
  * Hotel Locations Shortcode
  */
@@ -562,11 +564,11 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 
 	// Gird or List View
 	if(!empty($_GET['type']) && $_GET['type'] == "tf_hotel"){
-		$tf_defult_views = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] : 'list';
+		$tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] : 'list';
 	}elseif(!empty($_GET['type']) && $_GET['type'] == "tf_tours"){
-		$tf_defult_views = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour_archive_view'] ) ? tf_data_types(tfopt( 'tf-template' ))['tour_archive_view'] : 'list';
+		$tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_view'] : 'list';
 	}else{
-		$tf_defult_views = ! empty( tf_data_types(tfopt( 'tf-template' ))['apartment_archive_view'] ) ? tf_data_types(tfopt( 'tf-template' ))['apartment_archive_view'] : 'list';
+		$tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_view'] : 'list';
 	}
 
 	$paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
@@ -581,10 +583,10 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 		$period = '';
 	}
 
-	$post_per_page = tfopt( 'posts_per_page' ) ? tfopt( 'posts_per_page' ) : 10;
+	$post_per_page = Helper::tfopt( 'posts_per_page' ) ? Helper::tfopt( 'posts_per_page' ) : 10;
 	// Main Query args
 	if ( $post_type == "tf_tours" ) {
-		$tf_expired_tour_showing = ! empty( tfopt( 't-show-expire-tour' ) ) ? tfopt( 't-show-expire-tour' ) : '';
+		$tf_expired_tour_showing = ! empty( Helper::tfopt( 't-show-expire-tour' ) ) ? Helper::tfopt( 't-show-expire-tour' ) : '';
 		if ( ! empty( $tf_expired_tour_showing ) ) {
 			$tf_tour_posts_status = array( 'publish', 'expired' );
 		} else {
@@ -658,9 +660,9 @@ function tf_search_result_shortcode( $atts, $content = null ) {
     <!-- Start Content -->
 	<?php
 	
-	$tf_tour_arc_selected_template  = ! empty( tf_data_types( tfopt( 'tf-template' ) )['tour-archive'] ) ? tf_data_types( tfopt( 'tf-template' ) )['tour-archive'] : 'design-1';
-	$tf_hotel_arc_selected_template = ! empty( tf_data_types( tfopt( 'tf-template' ) )['hotel-archive'] ) ? tf_data_types( tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
-	$tf_apartment_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['apartment-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['apartment-archive'] : 'default';
+	$tf_tour_arc_selected_template  = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] : 'design-1';
+	$tf_hotel_arc_selected_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
+	$tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 
 	if ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-1" ) || ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-1" ) ) {
 		?>
@@ -788,7 +790,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 						if ( empty( $tf_total_filters ) ) {
 							echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 						}
-						$post_per_page = tfopt( 'posts_per_page' ) ? tfopt( 'posts_per_page' ) : 10;
+						$post_per_page = Helper::tfopt( 'posts_per_page' ) ? Helper::tfopt( 'posts_per_page' ) : 10;
 						// Main Query args
 						$filter_args = array(
 							'post_type'      => $post_type,
@@ -1018,7 +1020,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 				if ( empty( $tf_total_filters ) ) {
 					echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 				}
-				$post_per_page = tfopt( 'posts_per_page' ) ? tfopt( 'posts_per_page' ) : 10;
+				$post_per_page = Helper::tfopt( 'posts_per_page' ) ? Helper::tfopt( 'posts_per_page' ) : 10;
 				// Main Query args
 				$filter_args = array(
 					'post_type'      => $post_type,
@@ -1229,7 +1231,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 					if ( empty( $tf_total_filters ) ) {
 						echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 					}
-					$post_per_page = tfopt( 'posts_per_page' ) ? tfopt( 'posts_per_page' ) : 10;
+					$post_per_page = Helper::tfopt( 'posts_per_page' ) ? Helper::tfopt( 'posts_per_page' ) : 10;
 					// Main Query args
 					$filter_args = array(
 						'post_type'      => $post_type,

@@ -1,4 +1,6 @@
-<?php 
+<?php
+use \Tourfic\Classes\Helper;
+
 if ( ! function_exists( 'tourfic_google_fonts_list' ) ) {
 	function tourfic_google_fonts_list(){
         $fonts_array = array (
@@ -1548,8 +1550,8 @@ if ( ! function_exists( 'tourfic_google_fonts_list' ) ) {
 }
 if ( ! function_exists( 'tourfic_google_fonts_scriptss' ) ) {
     function tourfic_google_fonts_scriptss() {
-        $tf_global_font = \Tourfic\Classes\Helper::tfopt('global-body-fonts-family') ? \Tourfic\Classes\Helper::tfopt('global-body-fonts-family') : 'Default';
-        $tf_global_heading_font_family = \Tourfic\Classes\Helper::tfopt('global-heading-fonts-family') ? \Tourfic\Classes\Helper::tfopt('global-heading-fonts-family') : 'Default';
+        $tf_global_font = Helper::tfopt('global-body-fonts-family') ? Helper::tfopt('global-body-fonts-family') : 'Default';
+        $tf_global_heading_font_family = Helper::tfopt('global-heading-fonts-family') ? Helper::tfopt('global-heading-fonts-family') : 'Default';
         
         if($tf_global_heading_font_family!="Default"){
             $heading_url = 'https://fonts.googleapis.com/css2?family='. str_replace("_","+",$tf_global_heading_font_family) .':wght@100;200;300;400;500;600;700;800;900&display=swap';

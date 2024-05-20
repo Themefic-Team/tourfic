@@ -1,10 +1,7 @@
 <?php
 # don't load directly
 defined( 'ABSPATH' ) || exit;
-
-###############################################
-# Functions related to post types, taxonomies #
-###############################################
+use \Tourfic\Classes\Helper;
 
 /**
  * Flushing Rewrite on Tourfic Activation
@@ -484,7 +481,7 @@ function tf_room_availability_callback() {
 	if("single"==$tf_hotel_layout_conditions){
 		$tf_hotel_single_template_check = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
 	}
-	$tf_hotel_global_template_check = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
+	$tf_hotel_global_template_check = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
 
 	$tf_hotel_selected_check = !empty($tf_hotel_single_template_check) ? $tf_hotel_single_template_check : $tf_hotel_global_template_check;
 
@@ -1504,7 +1501,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 	if ( "single" == $tf_hotel_layout_conditions ) {
 		$tf_hotel_single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
 	}
-	$tf_hotel_global_template = ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] ) ? tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] : 'design-1';
+	$tf_hotel_global_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] : 'design-1';
 
 	$tf_hotel_selected_check = ! empty( $tf_hotel_single_template ) ? $tf_hotel_single_template : $tf_hotel_global_template;
 
@@ -1883,8 +1880,8 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
 
 	// Location
-	if( !empty($meta['map']) && tf_data_types($meta['map'])){
-		$address = !empty( tf_data_types($meta['map'])['address'] ) ? tf_data_types($meta['map'])['address'] : '';
+	if( !empty($meta['map']) && Helper::tf_data_types($meta['map'])){
+		$address = !empty( Helper::tf_data_types($meta['map'])['address'] ) ? Helper::tf_data_types($meta['map'])['address'] : '';
     }
 	// Rooms
 	$b_rooms = ! empty( $meta['room'] ) ? $meta['room'] : array();
@@ -2435,7 +2432,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 		}
 	endif;
 
-	$tf_hotel_arc_selected_template = ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] ) ? tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
+	$tf_hotel_arc_selected_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
 	
 	if ( $tf_hotel_arc_selected_template == "design-1" ) {
 		?>
@@ -3377,7 +3374,7 @@ function tf_remove_room_order_ids() {
 	# Get hotel meta
 	$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
 
-	$order_id_retrive = tf_data_types( $meta['room'] );
+	$order_id_retrive = Helper::tf_data_types( $meta['room'] );
 
 	# Set order id field's value to blank
 	$order_id_retrive[ $room_id ]['order_id'] = '';
@@ -3410,7 +3407,7 @@ function tf_hotel_quickview_callback() {
 	if ( "single" == $tf_hotel_layout_conditions ) {
 		$tf_hotel_single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
 	}
-	$tf_hotel_global_template = ! empty( tf_data_types( tfopt( 'tf-template' ) )['single-hotel'] ) ? tf_data_types( tfopt( 'tf-template' ) )['single-hotel'] : 'design-1';
+	$tf_hotel_global_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] : 'design-1';
 
 	$tf_hotel_selected_check = ! empty( $tf_hotel_single_template ) ? $tf_hotel_single_template : $tf_hotel_global_template;
 
@@ -3924,19 +3921,19 @@ if ( ! function_exists( 'tf_hotel_search_ajax_callback' ) ) {
 			'message' => '',
 		];
 
-		if ( tfopt( 'required_location_hotel_search' ) && (! isset( $_POST['place'] ) || empty( $_POST['place'] ) )) {
+		if ( Helper::tfopt( 'required_location_hotel_search' ) && (! isset( $_POST['place'] ) || empty( $_POST['place'] ) )) {
 			$response['message'] = esc_html__( 'Please enter your location', 'tourfic' );
-		} elseif ( tfopt( 'date_hotel_search' ) && ( ! isset( $_POST['check-in-out-date'] ) || empty( $_POST['check-in-out-date'] ) ) ) {
+		} elseif ( Helper::tfopt( 'date_hotel_search' ) && ( ! isset( $_POST['check-in-out-date'] ) || empty( $_POST['check-in-out-date'] ) ) ) {
 			$response['message'] = esc_html__( 'Please select check in and check out date', 'tourfic' );
 		}
 
-		if ( tfopt( 'date_hotel_search' ) ) {
+		if ( Helper::tfopt( 'date_hotel_search' ) ) {
 			if ( ! empty( $_POST['check-in-out-date'] ) ) {
 				$response['query_string'] = str_replace( '&action=tf_hotel_search', '', http_build_query( $_POST ) );
 				$response['status']       = 'success';
 			}
 		} else {
-			if ( ! tfopt( 'required_location_hotel_search' ) || ! empty( $_POST['place'] ) ) {
+			if ( ! Helper::tfopt( 'required_location_hotel_search' ) || ! empty( $_POST['place'] ) ) {
 				$response['query_string'] = str_replace( '&action=tf_hotel_search', '', http_build_query( $_POST ) );
 				$response['status']       = 'success';
 			}
@@ -3951,7 +3948,7 @@ add_action( 'tf_hotel_features_filter', 'tf_hotel_filter_by_features', 10, 1 );
 if (! function_exists ("tf_hotel_filter_by_features") ) {
 	function tf_hotel_filter_by_features( $features ) {
 		//get all the hotel features
-		$feature_filter = ! empty( tfopt( 'feature-filter' ) ) ? tfopt( 'feature-filter' ) : false;
+		$feature_filter = ! empty( Helper::tfopt( 'feature-filter' ) ) ? Helper::tfopt( 'feature-filter' ) : false;
 	
 		if ( ! empty( $features ) && $feature_filter ):
 			?>
@@ -4207,7 +4204,7 @@ if ( ! function_exists( 'tf_hotel_booking_popup_callback' ) ) {
 				}
 			}
 
-			$hotel_guest_info_fields = ! empty( tfopt( 'hotel_guest_info_fields' ) ) ? tf_data_types( tfopt( 'hotel_guest_info_fields' ) ) : '';
+			$hotel_guest_info_fields = ! empty( Helper::tfopt( 'hotel_guest_info_fields' ) ) ? Helper::tf_data_types( Helper::tfopt( 'hotel_guest_info_fields' ) ) : '';
 
 			$response['guest_info']            = '';
 			$response['hotel_booking_summery'] = '';
@@ -4278,7 +4275,7 @@ if ( ! function_exists( 'tf_hotel_booking_popup_callback' ) ) {
 
 				$response['guest_info'] .= '</div>
             </div>';
-				$date_format_for_users  = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+				$date_format_for_users  = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 			}
 
@@ -4348,9 +4345,9 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
 		$room_book_by             = ! empty( $rooms[ $room_index ]['booking-by'] ) ? $rooms[ $room_index ]['booking-by'] : 1;
 		$room_book_url            = ! empty( $rooms[ $room_index ]['booking-url'] ) ? $rooms[ $room_index ]['booking-url'] : '';
 		$airport_service_type     = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $enable_airport_service ) && ! empty( $airport_service_type ) ? $airport_service_type : null;
-		$enable_guest_info_global = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( tfopt( 'enable_guest_info' ) ) ? tfopt( 'enable_guest_info' ) : '1';
+		$enable_guest_info_global = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'enable_guest_info' ) ) ? Helper::tfopt( 'enable_guest_info' ) : '1';
 		$enable_guest_info        = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $rooms[ $room_index ]['enable_guest_info'] ) ? $rooms[ $room_index ]['enable_guest_info'] : $enable_guest_info_global;
-		$hotel_guest_details_text = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( tfopt( 'hotel_guest_details_text' ) ) ? tfopt( 'hotel_guest_details_text' ) : '';
+		$hotel_guest_details_text = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'hotel_guest_details_text' ) ) ? Helper::tfopt( 'hotel_guest_details_text' ) : '';
 		?>
         <!-- Loader Image -->
         <div id="tour_room_details_loader">
@@ -4372,7 +4369,7 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
                 <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/thank-you.gif" alt="Thank You">
                 <h2>
 					<?php
-					$booking_confirmation_msg = ! empty( tfopt( 'booking-confirmation-msg' ) ) ? tfopt( 'booking-confirmation-msg' ) : 'Booked Successfully';
+					$booking_confirmation_msg = ! empty( Helper::tfopt( 'booking-confirmation-msg' ) ) ? Helper::tfopt( 'booking-confirmation-msg' ) : 'Booked Successfully';
 					echo esc_html( $booking_confirmation_msg );
 					?>
                 </h2>
@@ -4418,8 +4415,8 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
 					if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $airport_service_type ) { ?>
                         <div class="tf-booking-content show tf-booking-content-1">
                             <div class="tf-hotel-services-text">
-                                <h3><?php echo esc_html( tfopt( 'hotel_service_popup_title', 'Add Service to your Booking.' ) ); ?></h3>
-                                <p><?php echo esc_html( tfopt( 'hotel_service_popup_subtile', 'Select the services you want to add to your booking.' ) ); ?></p>
+                                <h3><?php echo esc_html( Helper::tfopt( 'hotel_service_popup_title', 'Add Service to your Booking.' ) ); ?></h3>
+                                <p><?php echo esc_html( Helper::tfopt( 'hotel_service_popup_subtile', 'Select the services you want to add to your booking.' ) ); ?></p>
                             </div>
                             <div class="tf-booking-content-service">
 								<?php if ( ! empty( $airport_service_type ) ) { ?>
@@ -4476,7 +4473,7 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
                                     <h4><?php echo esc_html__( "Billing details", "tourfic" ); ?></h4>
                                     <div class="traveller-info billing-details">
 										<?php
-										$confirm_book_fields = ! empty( tfopt( 'book-confirm-field' ) ) ? tf_data_types( tfopt( 'book-confirm-field' ) ) : '';
+										$confirm_book_fields = ! empty( Helper::tfopt( 'book-confirm-field' ) ) ? Helper::tf_data_types( Helper::tfopt( 'book-confirm-field' ) ) : '';
 										if ( empty( $confirm_book_fields ) ) {
 											?>
                                             <div class="traveller-single-info tf-confirm-fields">
@@ -4601,8 +4598,8 @@ if ( ! function_exists( 'tf_hotel_without_booking_popup' ) ) {
 						$tf_deposit_amount              = array(
 							"{amount}" => $meta['deposit_type'] == 'fixed' ? wp_kses_post(wc_price( $meta['deposit_amount'] )) : $meta['deposit_amount'] . '%'
 						);
-						$tf_partial_payment_label       = ! empty( tfopt( "deposit-title" ) ) ? tfopt( "deposit-title" ) : 'Pertial payment of {amount} on total';
-						$tf_partial_payment_description = ! empty( tfopt( "deposit-subtitle" ) ) ? tfopt( "deposit-subtitle" ) : 'You can Partial Payment amount for booking the tour. After booking the tour, you can pay the rest amount after the tour is completed.';
+						$tf_partial_payment_label       = ! empty( Helper::tfopt( "deposit-title" ) ) ? Helper::tfopt( "deposit-title" ) : 'Pertial payment of {amount} on total';
+						$tf_partial_payment_description = ! empty( Helper::tfopt( "deposit-subtitle" ) ) ? Helper::tfopt( "deposit-subtitle" ) : 'You can Partial Payment amount for booking the tour. After booking the tour, you can pay the rest amount after the tour is completed.';
 						?>
                         <div class="tf-diposit-switcher">
                             <label class="switch">
