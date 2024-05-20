@@ -1,5 +1,8 @@
 <?php 
-$total_facilities_cat = ! empty( tf_data_types( tfopt( 'hotel_facilities_cats' ) ) ) ? tf_data_types( tfopt( 'hotel_facilities_cats' ) ) : '';
+
+use \Tourfic\Classes\Helper;
+
+$total_facilities_cat = ! empty( Helper::tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) : '';
 if( !empty($total_facilities_cat) && !empty($meta['hotel-facilities']) ){
 ?>
 

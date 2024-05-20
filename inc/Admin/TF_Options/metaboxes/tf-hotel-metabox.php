@@ -3,13 +3,14 @@
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
+
 $badge_up     = '<div class="tf-csf-badge"><span class="tf-upcoming">' . esc_html__( "Upcoming", "tourfic" ) . '</span></div>';
 $badge_pro    = '<div class="tf-csf-badge"><span class="tf-pro">' . esc_html__( "Pro Feature", "tourfic" ) . '</span></div>';
 $badge_up_pro = '<div class="tf-csf-badge"><span class="tf-upcoming">' . esc_html__( "Upcoming", "tourfic" ) . '</span><span class="tf-pro">' . esc_html__( "Pro Feature", "tourfic" ) . '</span></div>';
 
 if(!function_exists('tf_hotel_facilities_categories')) {
 	function tf_hotel_facilities_categories() {
-		$facilities_cats = ! empty( tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) ) ? tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) : '';
+		$facilities_cats = ! empty( Helper::tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) : '';
 		$all_cats       = [];
 		if ( ! empty( $facilities_cats ) && is_array( $facilities_cats ) ) {
 			foreach ( $facilities_cats as $key => $cat ) {

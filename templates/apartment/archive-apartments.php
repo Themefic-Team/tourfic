@@ -8,10 +8,12 @@
  * @author Foysal
  */
 
+ use \Tourfic\Classes\Helper;
+
 
 get_header();
 
-$tf_apartment_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['apartment-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['apartment-archive'] : 'default';
+$tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 
 if ( tf_is_woo_active() ) {
 	if ( $tf_apartment_arc_selected_template == "design-1" ) {

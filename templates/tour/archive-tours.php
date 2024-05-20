@@ -46,7 +46,7 @@ $loop = new WP_Query( $args );
 $total_posts = $loop->found_posts;
 $tf_total_results = 0;
 
-$tf_tour_arc_selected_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
+$tf_tour_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
 
 if ( tf_is_woo_active() ) {
 	if ( $tf_tour_arc_selected_template == "design-1" ) {

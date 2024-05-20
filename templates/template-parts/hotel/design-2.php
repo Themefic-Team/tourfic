@@ -1,3 +1,7 @@
+<?php
+use \Tourfic\Classes\Helper;
+?>
+
 <div class="tf-template-3 tf-hotel-single">
 <!--Hero section start -->
 <div class="tf-hero-section-wrap" style="<?php echo !empty(get_the_post_thumbnail_url()) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.40) 0%, rgba(48, 40, 28, 0.40) 100%), url('.esc_url(get_the_post_thumbnail_url()).'), lightgray 0px -268.76px / 100% 249.543% no-repeat;background-size: cover; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
@@ -6,18 +10,18 @@
             <div class="tf-wish-and-share">
                 <?php
                 // Wishlist
-                if ( tfopt( 'wl-bt-for' ) && in_array( '2', tfopt( 'wl-bt-for' ) ) ) { 
+                if ( Helper::tfopt( 'wl-bt-for' ) && in_array( '2', Helper::tfopt( 'wl-bt-for' ) ) ) { 
                     if ( is_user_logged_in() ) {
-                    if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
+                    if ( Helper::tfopt( 'wl-for' ) && in_array( 'li', Helper::tfopt( 'wl-for' ) ) ) {
                 ?>
                 <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr('actives') : '' ?>">
-                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_html(get_the_title( tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( tfopt( 'wl-page' ) )) . '"'; } ?>></i>
+                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_html(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"'; } ?>></i>
                 </a>
                 <?php } } else{ 
-                if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {    
+                if ( Helper::tfopt( 'wl-for' ) && in_array( 'lo', Helper::tfopt( 'wl-for' ) ) ) {    
                 ?>
                 <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr('actives') : '' ?>">
-                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_html(get_the_title( tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( tfopt( 'wl-page' ) )) . '"'; } ?>></i>
+                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_html(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"'; } ?>></i>
                 </a>
                 <?php } } } ?>
                 
@@ -160,8 +164,8 @@
 
 
             <?php 
-            if( !empty(tf_data_types(tfopt( 'tf-template' ))['single-hotel-layout-part-1']) ){
-                foreach(tf_data_types(tfopt( 'tf-template' ))['single-hotel-layout-part-1'] as $section){
+            if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1']) ){
+                foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1'] as $section){
                     if( !empty($section['hotel-section-status']) && $section['hotel-section-status']=="1" && !empty($section['hotel-section-slug']) ){
                         include TF_TEMPLATE_PART_PATH . 'hotel/design-2/'.$section['hotel-section-slug'].'.php';
                     }
@@ -252,8 +256,8 @@
                 $is_user_logged_in = $current_user->exists();
                 $post_id           = $post->ID;
                 // Get settings value
-                $tf_ratings_for = tfopt( 'r-for' ) ?? [ 'li', 'lo' ];
-                $tf_settings_base = ! empty ( tfopt( 'r-base' ) ) ? tfopt( 'r-base' ) : 5;
+                $tf_ratings_for = Helper::tfopt( 'r-for' ) ?? [ 'li', 'lo' ];
+                $tf_settings_base = ! empty ( Helper::tfopt( 'r-base' ) ) ? Helper::tfopt( 'r-base' ) : 5;
                 if ( $comments ) {
                     $tf_overall_rate        = [];
                     tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rating );
@@ -287,7 +291,7 @@
                                     <p class="feature-rating"> <?php echo wp_kses_post($value); ?></p>
                                 </div>
                                 <div class="tf-progress-bar">
-                                    <span class="percent-progress" style="width: <?php echo wp_kses_post(tf_average_rating_percent( $value, tfopt( 'r-base' ) )); ?>%"></span>
+                                    <span class="percent-progress" style="width: <?php echo wp_kses_post(tf_average_rating_percent( $value, Helper::tfopt( 'r-base' ) )); ?>%"></span>
                                 </div>
                             </div>
                             <?php } } ?>
@@ -382,8 +386,8 @@
     <!-- Hotel details End -->
     
     <?php 
-    if( !empty(tf_data_types(tfopt( 'tf-template' ))['single-hotel-layout-part-2']) ){
-        foreach(tf_data_types(tfopt( 'tf-template' ))['single-hotel-layout-part-2'] as $section){
+    if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-2']) ){
+        foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-2'] as $section){
             if( !empty($section['hotel-section-status']) && $section['hotel-section-status']=="1" && !empty($section['hotel-section-slug']) ){
                 include TF_TEMPLATE_PART_PATH . 'hotel/design-2/'.$section['hotel-section-slug'].'.php';
             }

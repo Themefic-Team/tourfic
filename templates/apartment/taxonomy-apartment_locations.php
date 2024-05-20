@@ -6,6 +6,8 @@
 
 get_header();
 
+use \Tourfic\Classes\Helper;
+
 if ( !tf_is_woo_active() ) {
     ?>
     <div class="tf-container">
@@ -28,7 +30,7 @@ $max = '8';
 $tf_location_meta      = get_term_meta( $term->term_id, 'tf_apartment_location', true );
 $tf_location_image = ! empty( $tf_location_meta['image'] ) ? $tf_location_meta['image'] : '';
 
-$tf_apartment_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['apartment-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['apartment-archive'] : 'default';
+$tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 if( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template=="design-1" ){
 ?>
 

@@ -2,13 +2,15 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+use Tourfic\Classes\Helper;
+
 /**
  * Get all the meals from glabal settings
  * @author AbuHena
  * @since 1.7.0
  */
 function tf_tour_meals() {
-	$itinerary_options = ! empty( tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) ) ) ? tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) ) : '';
+	$itinerary_options = ! empty( Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) ) : '';
 	$all_meals         = [];
 	if ( ! empty( $itinerary_options['meals'] ) && is_array( $itinerary_options['meals'] ) ) {
 		$meals = $itinerary_options['meals'];

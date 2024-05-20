@@ -4,6 +4,8 @@ namespace Tourfic\Admin\TF_Options;
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+use Tourfic\Classes\Helper;
+
 class TF_Options {
 
 	private static $instance = null;

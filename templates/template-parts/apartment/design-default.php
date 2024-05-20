@@ -1,3 +1,7 @@
+<?php 
+use \Tourfic\Classes\Helper;
+?>
+
 <div class="tf-main-wrapper tf-apartment-wrap tf-apartment">
 	<?php do_action( 'tf_before_container' ); ?>
 
@@ -98,40 +102,40 @@
 					<?php endif; ?>
 
 					<?php
-					if ( !empty(tfopt( 'wl-bt-for' )) && tfopt( 'wl-bt-for' ) && in_array( '3', tfopt( 'wl-bt-for' ) ) ) {
+					if ( !empty(Helper::tfopt( 'wl-bt-for' )) && Helper::tfopt( 'wl-bt-for' ) && in_array( '3', Helper::tfopt( 'wl-bt-for' ) ) ) {
 						if ( is_user_logged_in() ) {
-							if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
+							if ( Helper::tfopt( 'wl-for' ) && in_array( 'li', Helper::tfopt( 'wl-for' ) ) ) {
 								?>
                                 <a class="tf-wishlist-button" title="<?php esc_html_e( 'Click to toggle wishlist', 'tourfic' ); ?>">
                                     <i class="<?php echo $has_in_wishlist ? 'far tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart"
                                        data-nonce="<?php echo esc_attr( wp_create_nonce( "wishlist-nonce" ) ) ?>"
                                        data-id="<?php echo esc_attr( $post_id ) ?>"
-                                       data-type="<?php echo esc_attr( $post_type ) ?>" <?php echo tfopt( 'wl-page' ) ? 'data-page-title="' . esc_attr( get_the_title( tfopt( 'wl-page' ) ) ) . '" data-page-url="' . esc_url( get_permalink( tfopt( 'wl-page' ) ) ) . '"' : ''; ?>></i>
+                                       data-type="<?php echo esc_attr( $post_type ) ?>" <?php echo Helper::tfopt( 'wl-page' ) ? 'data-page-title="' . esc_attr( get_the_title( Helper::tfopt( 'wl-page' ) ) ) . '" data-page-url="' . esc_url( get_permalink( Helper::tfopt( 'wl-page' ) ) ) . '"' : ''; ?>></i>
                                     <span><?php esc_html_e( 'Save', 'tourfic' ); ?></span>
                                 </a>
 								<?php
 							}
 						} else {
-							if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {
+							if ( Helper::tfopt( 'wl-for' ) && in_array( 'lo', Helper::tfopt( 'wl-for' ) ) ) {
 								?>
                                 <a class="tf-wishlist-button"
                                    title="<?php esc_html_e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i
                                             class="<?php echo $has_in_wishlist ? 'far tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart-o"
                                             data-nonce="<?php echo esc_attr( wp_create_nonce( "wishlist-nonce" ) ) ?>"
                                             data-id="<?php echo esc_attr( $post_id ) ?>"
-                                            data-type="<?php echo esc_attr( $post_type ) ?>" <?php if ( tfopt( 'wl-page' ) ) {
-										echo 'data-page-title="' . esc_attr( get_the_title( tfopt( 'wl-page' ) ) ) . '" data-page-url="' . esc_url( get_permalink( tfopt( 'wl-page' ) ) ) . '"';
+                                            data-type="<?php echo esc_attr( $post_type ) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) {
+										echo 'data-page-title="' . esc_attr( get_the_title( Helper::tfopt( 'wl-page' ) ) ) . '" data-page-url="' . esc_url( get_permalink( Helper::tfopt( 'wl-page' ) ) ) . '"';
 									} ?>></i></a>
 								<?php
 							}
 						}
-					} elseif (empty(tfopt( 'wl-bt-for' ))) {
+					} elseif (empty(Helper::tfopt( 'wl-bt-for' ))) {
                         ?>
                         <a class="tf-wishlist-button" title="<?php esc_html_e( 'Click to toggle wishlist', 'tourfic' ); ?>">
                             <i class="<?php echo $has_in_wishlist ? 'far tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart"
                                data-nonce="<?php echo esc_attr( wp_create_nonce( "wishlist-nonce" ) ) ?>"
                                data-id="<?php echo esc_attr( $post_id ) ?>"
-                               data-type="<?php echo esc_attr( $post_type ) ?>" <?php echo tfopt( 'wl-page' ) ? 'data-page-title="' . esc_attr( get_the_title( tfopt( 'wl-page' ) ) ) . '" data-page-url="' . esc_url( get_permalink( tfopt( 'wl-page' ) ) ) . '"' : ''; ?>></i>
+                               data-type="<?php echo esc_attr( $post_type ) ?>" <?php echo Helper::tfopt( 'wl-page' ) ? 'data-page-title="' . esc_attr( get_the_title( Helper::tfopt( 'wl-page' ) ) ) . '" data-page-url="' . esc_url( get_permalink( Helper::tfopt( 'wl-page' ) ) ) . '"' : ''; ?>></i>
                             <span><?php esc_html_e( 'Save', 'tourfic' ); ?></span>
                         </a>
                         <?php
@@ -209,16 +213,16 @@
             <div class="tf-apartment-content-wrapper">
                 <div class="tf-apartment-left">
 
-					<?php if ( isset( $meta['highlights'] ) && ! empty( tf_data_types( $meta['highlights'] ) ) ) : ?>
+					<?php if ( isset( $meta['highlights'] ) && ! empty( Helper::tf_data_types( $meta['highlights'] ) ) ) : ?>
                         <!-- Start highlights Section -->
                         <div class="tf-apt-highlights-wrapper">
 							<?php if ( ! empty( $meta['highlights_title'] ) ): ?>
                                 <h2 class="section-heading"><?php echo esc_html( $meta['highlights_title'] ) ?></h2>
 							<?php endif; ?>
 
-                            <div class="tf-apt-highlights <?php echo count( tf_data_types( $meta['highlights'] ) ) > 3 ? 'tf-apt-highlights-slider' : ''; ?>">
+                            <div class="tf-apt-highlights <?php echo count( Helper::tf_data_types( $meta['highlights'] ) ) > 3 ? 'tf-apt-highlights-slider' : ''; ?>">
 								<?php
-								foreach ( tf_data_types( $meta['highlights'] ) as $highlight ) :
+								foreach ( Helper::tf_data_types( $meta['highlights'] ) as $highlight ) :
 									if ( empty( $highlight['title'] ) ) {
 										continue;
 									}
@@ -240,14 +244,14 @@
 						<?php the_content(); ?>
                     </div>
 
-					<?php if ( isset( $meta['rooms'] ) && ! empty( tf_data_types( $meta['rooms'] ) ) ) : ?>
+					<?php if ( isset( $meta['rooms'] ) && ! empty( Helper::tf_data_types( $meta['rooms'] ) ) ) : ?>
                         <!-- Apartment Rooms -->
                         <div class="tf-apartment-rooms">
 							<?php if ( ! empty( $meta['room_details_title'] ) ): ?>
                                 <h2 class="section-heading"><?php echo esc_html( $meta['room_details_title'] ) ?></h2>
 							<?php endif; ?>
                             <div class="tf-apartment-default-design-room-slider">
-								<?php foreach ( tf_data_types( $meta['rooms'] ) as $key => $room ) : ?>
+								<?php foreach ( Helper::tf_data_types( $meta['rooms'] ) as $key => $room ) : ?>
                                     <div class="tf-apartment-room-item">
                                         <div class="tf-apartment-room-item-thumb">
                                             <a href="#" class="tf-apt-room-qv" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">
@@ -277,10 +281,10 @@
                         </div>
 					<?php endif; ?>
 
-					<?php if ( isset( $meta['amenities'] ) && ! empty( tf_data_types( $meta['amenities'] ) ) ) :
+					<?php if ( isset( $meta['amenities'] ) && ! empty( Helper::tf_data_types( $meta['amenities'] ) ) ) :
 						$fav_amenities = array();
 						$other_amenities = array();
-						foreach (tf_data_types($meta['amenities']) as $amenity) {
+						foreach (Helper::tf_data_types($meta['amenities']) as $amenity) {
 							if (!isset($amenity['favorite']) || $amenity['favorite'] !== '1') {
 								$other_amenities[] = $amenity;
 							} else {
@@ -312,7 +316,7 @@
 										<?php endforeach; ?>
 									<?php endif; ?>
                                 </div>
-								<?php if ( count( tf_data_types( $meta['amenities'] ) ) > 10 ): ?>
+								<?php if ( count( Helper::tf_data_types( $meta['amenities'] ) ) > 10 ): ?>
                                     <div class="tf-apartment-amenities-more">
                                         <a class="tf-modal-btn" data-target="#tf-amenities-modal">
 											<?php esc_html_e( 'All Amenities', 'tourfic' ) ?>
@@ -334,8 +338,8 @@
                                                     <h2 class="section-heading"><?php echo ! empty( $meta['amenities_title'] ) ? esc_html( $meta['amenities_title'] ) : ''; ?></h2>
 													<?php
 													$categories     = [];
-													$amenities_cats = ! empty( tf_data_types( tfopt( 'amenities_cats' ) ) ) ? tf_data_types( tfopt( 'amenities_cats' ) ) : '';
-													foreach ( tf_data_types( $meta['amenities'] ) as $amenity ) {
+													$amenities_cats = ! empty( Helper::tf_data_types( Helper::tfopt( 'amenities_cats' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'amenities_cats' ) ) : '';
+													foreach ( Helper::tf_data_types( $meta['amenities'] ) as $amenity ) {
 														$cat     = $amenity['cat'];
 														$feature = $amenity['feature'];
 
@@ -423,7 +427,7 @@
         </div>
     </div>
 
-	<?php if ( ! empty( $map['address'] ) || isset( $meta['surroundings_places'] ) && ! empty( tf_data_types( $meta['surroundings_places'] ) ) ): ?>
+	<?php if ( ! empty( $map['address'] ) || isset( $meta['surroundings_places'] ) && ! empty( Helper::tf_data_types( $meta['surroundings_places'] ) ) ): ?>
         <div id="apartment-map" class="tf-apartment-map-wrapper">
             <div class="tf-container">
                 <div class="tf-row">
@@ -453,7 +457,7 @@
                             </div>
 						<?php endif; ?>
 
-						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && isset( $meta['surroundings_places'] ) && ! empty( tf_data_types( $meta['surroundings_places'] ) ) ): ?>
+						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && isset( $meta['surroundings_places'] ) && ! empty( Helper::tf_data_types( $meta['surroundings_places'] ) ) ): ?>
                             <div class="about-location">
 								<?php if ( ! empty( $meta['surroundings_sec_title'] ) ): ?>
                                     <h3 class="surroundings_sec_title"><?php echo esc_html( $meta['surroundings_sec_title'] ); ?></h3>
@@ -463,7 +467,7 @@
 								<?php endif; ?>
 
                                 <div class="tf-apartment-surronding-wrapper">
-									<?php foreach ( tf_data_types( $meta['surroundings_places'] ) as $surroundings_place ) : ?>
+									<?php foreach ( Helper::tf_data_types( $meta['surroundings_places'] ) as $surroundings_place ) : ?>
                                         <div class="tf-apartment-surronding-criteria">
                                             <div class="tf-apartment-surronding-criteria-label">
 												<?php if ( ! empty( $surroundings_place['place_criteria_icon'] ) ) { ?>
@@ -472,9 +476,9 @@
 												<?php echo esc_html( $surroundings_place['place_criteria_label'] ); ?>
                                             </div>
 
-											<?php if ( isset( $surroundings_place['places'] ) && ! empty( tf_data_types( $surroundings_place['places'] ) ) ): ?>
+											<?php if ( isset( $surroundings_place['places'] ) && ! empty( Helper::tf_data_types( $surroundings_place['places'] ) ) ): ?>
                                                 <ul class="tf-apartment-surronding-places">
-													<?php foreach ( tf_data_types( $surroundings_place['places'] ) as $place ): ?>
+													<?php foreach ( Helper::tf_data_types( $surroundings_place['places'] ) as $place ): ?>
                                                         <li>
                                                             <span class="tf-place-name"><?php echo esc_html( $place['place_name'] ) ?></span>
                                                             <span class="tf-place-distance"><?php echo esc_html( $place['place_distance'] ) ?></span>
@@ -504,10 +508,10 @@
         </div>
 	<?php endif; ?>
 
-	<?php if ( isset( $meta['house_rules'] ) && ! empty( tf_data_types( $meta['house_rules'] ) ) ):
+	<?php if ( isset( $meta['house_rules'] ) && ! empty( Helper::tf_data_types( $meta['house_rules'] ) ) ):
 		$included_house_rules = array();
 		$not_included_house_rules = array();
-		foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
+		foreach ( Helper::tf_data_types( $meta['house_rules'] ) as $house_rule ) {
 			if ( isset( $house_rule['include'] ) && $house_rule['include'] == '1' ) {
 				$included_house_rules[] = $house_rule;
 			} else {
@@ -543,7 +547,7 @@
         </div>
 	<?php endif; ?>
 
-	<?php if ( isset( $meta['faq'] ) && ! empty( tf_data_types( $meta['faq'] ) ) ): ?>
+	<?php if ( isset( $meta['faq'] ) && ! empty( Helper::tf_data_types( $meta['faq'] ) ) ): ?>
         <!-- FAQ section Start -->
         <div class="tf-faq-wrapper tf-apartment-faq">
             <div class="tf-container">
@@ -554,7 +558,7 @@
 
                 <div class="tf-faq-content-wrapper">
                     <div class="tf-faq-items-wrapper">
-						<?php foreach ( tf_data_types( $meta['faq'] ) as $key => $faq ): ?>
+						<?php foreach ( Helper::tf_data_types( $meta['faq'] ) as $key => $faq ): ?>
                             <div id="tf-faq-item">
                                 <div class="tf-faq-title <?php echo $key === 0 ? esc_attr( 'active' ) : ''; ?>">
                                     <svg class="tf-faq-minus" xmlns="http://www.w3.org/2000/svg" width="19" height="1" viewBox="0 0 19 1" fill="none">

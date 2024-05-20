@@ -15,7 +15,6 @@ use Tourfic\Classes\Helper;
 class TF_Tour_Backend_Booking {
 
 	use \Tourfic\Traits\Singleton;
-	use \Tourfic\Traits\Helper;
 
 	private static $instance = null;
 
@@ -400,7 +399,7 @@ class TF_Tour_Backend_Booking {
 		if ( "single" == $tf_tour_layout_conditions ) {
 			$tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'design-1';
 		}
-		$tf_tour_global_template = ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] ) ? tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
+		$tf_tour_global_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
 
 		$tf_tour_selected_check = ! empty( $tf_tour_single_template ) ? $tf_tour_single_template : $tf_tour_global_template;
 
