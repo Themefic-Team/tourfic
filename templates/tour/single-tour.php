@@ -123,12 +123,12 @@ while ( have_posts() ) : the_post();
 	$disable_share_opt = ! empty( $disable_share_opt ) ? $disable_share_opt : $t_share;
 	
 	// Location
-	if( !empty($meta['location']) && Helper::tf_data_types($meta['location'])){
-		$location = !empty( Helper::tf_data_types($meta['location'])['address'] ) ? Helper::tf_data_types($meta['location'])['address'] : '';
+	if( !empty($meta['location']) && tf_data_types($meta['location'])){
+		$location = !empty( tf_data_types($meta['location'])['address'] ) ? tf_data_types($meta['location'])['address'] : '';
 
-		$location_latitude = !empty( Helper::tf_data_types($meta['location'])['latitude'] ) ? Helper::tf_data_types($meta['location'])['latitude'] : '';
-		$location_longitude = !empty( Helper::tf_data_types($meta['location'])['longitude'] ) ? Helper::tf_data_types($meta['location'])['longitude'] : '';
-		$location_zoom = !empty( Helper::tf_data_types($meta['location'])['zoom'] ) ? Helper::tf_data_types($meta['location'])['zoom'] : '';
+		$location_latitude = !empty( tf_data_types($meta['location'])['latitude'] ) ? tf_data_types($meta['location'])['latitude'] : '';
+		$location_longitude = !empty( tf_data_types($meta['location'])['longitude'] ) ? tf_data_types($meta['location'])['longitude'] : '';
+		$location_zoom = !empty( tf_data_types($meta['location'])['zoom'] ) ? tf_data_types($meta['location'])['zoom'] : '';
 
     }
 	// Gallery
@@ -253,7 +253,7 @@ while ( have_posts() ) : the_post();
 	if("single"==$tf_tour_layout_conditions){
 		$tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'design-1';
 	}
-	$tf_tour_global_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour'] : 'design-1';
+	$tf_tour_global_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour'] : 'design-1';
 	$tf_tour_selected_check = !empty($tf_tour_single_template) ? $tf_tour_single_template : $tf_tour_global_template;
 
 	$tf_tour_selected_template = $tf_tour_selected_check;

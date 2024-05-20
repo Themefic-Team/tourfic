@@ -1,6 +1,6 @@
-<?php if ( isset($meta['amenities']) && ! empty( Helper::tf_data_types( $meta['amenities'] ) ) ) :
+<?php if ( isset($meta['amenities']) && ! empty( tf_data_types( $meta['amenities'] ) ) ) :
 $fav_amenities = array();
-foreach ( Helper::tf_data_types( $meta['amenities'] ) as $amenity ) {
+foreach ( tf_data_types( $meta['amenities'] ) as $amenity ) {
     if ( ! isset( $amenity['favorite'] ) || $amenity['favorite'] !== '1' ) {
         continue;
     }

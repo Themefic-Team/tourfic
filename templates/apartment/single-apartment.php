@@ -50,9 +50,9 @@ while ( have_posts() ) : the_post();
 	/**
 	 * Get global settings value
 	 */
-	$s_share   = ! empty( Helper::Helper::tfopt( 'disable-apartment-share' ) ) ? Helper::Helper::tfopt( 'disable-apartment-share' ) : 0;
-	$s_review  = ! empty( Helper::Helper::tfopt( 'disable-apartment-review' ) ) ? Helper::Helper::tfopt( 'disable-apartment-review' ) : 0;
-	$s_related = ! empty( Helper::Helper::tfopt( 'disable-related-apartment' ) ) ? Helper::Helper::tfopt( 'disable-related-apartment' ) : 0;
+	$s_share   = ! empty( Helper::tfopt( 'disable-apartment-share' ) ) ? Helper::tfopt( 'disable-apartment-share' ) : 0;
+	$s_review  = ! empty( Helper::tfopt( 'disable-apartment-review' ) ) ? Helper::tfopt( 'disable-apartment-review' ) : 0;
+	$s_related = ! empty( Helper::tfopt( 'disable-related-apartment' ) ) ? Helper::tfopt( 'disable-related-apartment' ) : 0;
 
 	/**
 	 * Disable Share and Review section
@@ -109,7 +109,7 @@ while ( have_posts() ) : the_post();
 	if("single"==$tf_apartment_layout_conditions){
 		$tf_apartment_single_template = ! empty( $meta['tf_single_apartment_template'] ) ? $meta['tf_single_apartment_template'] : 'default';
 	}
-	$tf_apartment_global_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] : 'default';
+	$tf_apartment_global_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] : 'default';
 
 	$tf_apartment_selected_check = !empty($tf_apartment_single_template) ? $tf_apartment_single_template : $tf_apartment_global_template;
 

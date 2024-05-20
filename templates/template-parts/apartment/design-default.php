@@ -213,16 +213,16 @@ use \Tourfic\Classes\Helper;
             <div class="tf-apartment-content-wrapper">
                 <div class="tf-apartment-left">
 
-					<?php if ( isset( $meta['highlights'] ) && ! empty( Helper::tf_data_types( $meta['highlights'] ) ) ) : ?>
+					<?php if ( isset( $meta['highlights'] ) && ! empty( tf_data_types( $meta['highlights'] ) ) ) : ?>
                         <!-- Start highlights Section -->
                         <div class="tf-apt-highlights-wrapper">
 							<?php if ( ! empty( $meta['highlights_title'] ) ): ?>
                                 <h2 class="section-heading"><?php echo esc_html( $meta['highlights_title'] ) ?></h2>
 							<?php endif; ?>
 
-                            <div class="tf-apt-highlights <?php echo count( Helper::tf_data_types( $meta['highlights'] ) ) > 3 ? 'tf-apt-highlights-slider' : ''; ?>">
+                            <div class="tf-apt-highlights <?php echo count( tf_data_types( $meta['highlights'] ) ) > 3 ? 'tf-apt-highlights-slider' : ''; ?>">
 								<?php
-								foreach ( Helper::tf_data_types( $meta['highlights'] ) as $highlight ) :
+								foreach ( tf_data_types( $meta['highlights'] ) as $highlight ) :
 									if ( empty( $highlight['title'] ) ) {
 										continue;
 									}
@@ -244,14 +244,14 @@ use \Tourfic\Classes\Helper;
 						<?php the_content(); ?>
                     </div>
 
-					<?php if ( isset( $meta['rooms'] ) && ! empty( Helper::tf_data_types( $meta['rooms'] ) ) ) : ?>
+					<?php if ( isset( $meta['rooms'] ) && ! empty( tf_data_types( $meta['rooms'] ) ) ) : ?>
                         <!-- Apartment Rooms -->
                         <div class="tf-apartment-rooms">
 							<?php if ( ! empty( $meta['room_details_title'] ) ): ?>
                                 <h2 class="section-heading"><?php echo esc_html( $meta['room_details_title'] ) ?></h2>
 							<?php endif; ?>
                             <div class="tf-apartment-default-design-room-slider">
-								<?php foreach ( Helper::tf_data_types( $meta['rooms'] ) as $key => $room ) : ?>
+								<?php foreach ( tf_data_types( $meta['rooms'] ) as $key => $room ) : ?>
                                     <div class="tf-apartment-room-item">
                                         <div class="tf-apartment-room-item-thumb">
                                             <a href="#" class="tf-apt-room-qv" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">
@@ -281,10 +281,10 @@ use \Tourfic\Classes\Helper;
                         </div>
 					<?php endif; ?>
 
-					<?php if ( isset( $meta['amenities'] ) && ! empty( Helper::tf_data_types( $meta['amenities'] ) ) ) :
+					<?php if ( isset( $meta['amenities'] ) && ! empty( tf_data_types( $meta['amenities'] ) ) ) :
 						$fav_amenities = array();
 						$other_amenities = array();
-						foreach (Helper::tf_data_types($meta['amenities']) as $amenity) {
+						foreach (tf_data_types($meta['amenities']) as $amenity) {
 							if (!isset($amenity['favorite']) || $amenity['favorite'] !== '1') {
 								$other_amenities[] = $amenity;
 							} else {
@@ -316,7 +316,7 @@ use \Tourfic\Classes\Helper;
 										<?php endforeach; ?>
 									<?php endif; ?>
                                 </div>
-								<?php if ( count( Helper::tf_data_types( $meta['amenities'] ) ) > 10 ): ?>
+								<?php if ( count( tf_data_types( $meta['amenities'] ) ) > 10 ): ?>
                                     <div class="tf-apartment-amenities-more">
                                         <a class="tf-modal-btn" data-target="#tf-amenities-modal">
 											<?php esc_html_e( 'All Amenities', 'tourfic' ) ?>
@@ -338,8 +338,8 @@ use \Tourfic\Classes\Helper;
                                                     <h2 class="section-heading"><?php echo ! empty( $meta['amenities_title'] ) ? esc_html( $meta['amenities_title'] ) : ''; ?></h2>
 													<?php
 													$categories     = [];
-													$amenities_cats = ! empty( Helper::tf_data_types( Helper::tfopt( 'amenities_cats' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'amenities_cats' ) ) : '';
-													foreach ( Helper::tf_data_types( $meta['amenities'] ) as $amenity ) {
+													$amenities_cats = ! empty( tf_data_types( Helper::tfopt( 'amenities_cats' ) ) ) ? tf_data_types( Helper::tfopt( 'amenities_cats' ) ) : '';
+													foreach ( tf_data_types( $meta['amenities'] ) as $amenity ) {
 														$cat     = $amenity['cat'];
 														$feature = $amenity['feature'];
 
@@ -427,7 +427,7 @@ use \Tourfic\Classes\Helper;
         </div>
     </div>
 
-	<?php if ( ! empty( $map['address'] ) || isset( $meta['surroundings_places'] ) && ! empty( Helper::tf_data_types( $meta['surroundings_places'] ) ) ): ?>
+	<?php if ( ! empty( $map['address'] ) || isset( $meta['surroundings_places'] ) && ! empty( tf_data_types( $meta['surroundings_places'] ) ) ): ?>
         <div id="apartment-map" class="tf-apartment-map-wrapper">
             <div class="tf-container">
                 <div class="tf-row">
@@ -457,7 +457,7 @@ use \Tourfic\Classes\Helper;
                             </div>
 						<?php endif; ?>
 
-						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && isset( $meta['surroundings_places'] ) && ! empty( Helper::tf_data_types( $meta['surroundings_places'] ) ) ): ?>
+						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && isset( $meta['surroundings_places'] ) && ! empty( tf_data_types( $meta['surroundings_places'] ) ) ): ?>
                             <div class="about-location">
 								<?php if ( ! empty( $meta['surroundings_sec_title'] ) ): ?>
                                     <h3 class="surroundings_sec_title"><?php echo esc_html( $meta['surroundings_sec_title'] ); ?></h3>
@@ -467,7 +467,7 @@ use \Tourfic\Classes\Helper;
 								<?php endif; ?>
 
                                 <div class="tf-apartment-surronding-wrapper">
-									<?php foreach ( Helper::tf_data_types( $meta['surroundings_places'] ) as $surroundings_place ) : ?>
+									<?php foreach ( tf_data_types( $meta['surroundings_places'] ) as $surroundings_place ) : ?>
                                         <div class="tf-apartment-surronding-criteria">
                                             <div class="tf-apartment-surronding-criteria-label">
 												<?php if ( ! empty( $surroundings_place['place_criteria_icon'] ) ) { ?>
@@ -476,9 +476,9 @@ use \Tourfic\Classes\Helper;
 												<?php echo esc_html( $surroundings_place['place_criteria_label'] ); ?>
                                             </div>
 
-											<?php if ( isset( $surroundings_place['places'] ) && ! empty( Helper::tf_data_types( $surroundings_place['places'] ) ) ): ?>
+											<?php if ( isset( $surroundings_place['places'] ) && ! empty( tf_data_types( $surroundings_place['places'] ) ) ): ?>
                                                 <ul class="tf-apartment-surronding-places">
-													<?php foreach ( Helper::tf_data_types( $surroundings_place['places'] ) as $place ): ?>
+													<?php foreach ( tf_data_types( $surroundings_place['places'] ) as $place ): ?>
                                                         <li>
                                                             <span class="tf-place-name"><?php echo esc_html( $place['place_name'] ) ?></span>
                                                             <span class="tf-place-distance"><?php echo esc_html( $place['place_distance'] ) ?></span>
@@ -508,10 +508,10 @@ use \Tourfic\Classes\Helper;
         </div>
 	<?php endif; ?>
 
-	<?php if ( isset( $meta['house_rules'] ) && ! empty( Helper::tf_data_types( $meta['house_rules'] ) ) ):
+	<?php if ( isset( $meta['house_rules'] ) && ! empty( tf_data_types( $meta['house_rules'] ) ) ):
 		$included_house_rules = array();
 		$not_included_house_rules = array();
-		foreach ( Helper::tf_data_types( $meta['house_rules'] ) as $house_rule ) {
+		foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
 			if ( isset( $house_rule['include'] ) && $house_rule['include'] == '1' ) {
 				$included_house_rules[] = $house_rule;
 			} else {
@@ -547,7 +547,7 @@ use \Tourfic\Classes\Helper;
         </div>
 	<?php endif; ?>
 
-	<?php if ( isset( $meta['faq'] ) && ! empty( Helper::tf_data_types( $meta['faq'] ) ) ): ?>
+	<?php if ( isset( $meta['faq'] ) && ! empty( tf_data_types( $meta['faq'] ) ) ): ?>
         <!-- FAQ section Start -->
         <div class="tf-faq-wrapper tf-apartment-faq">
             <div class="tf-container">
@@ -558,7 +558,7 @@ use \Tourfic\Classes\Helper;
 
                 <div class="tf-faq-content-wrapper">
                     <div class="tf-faq-items-wrapper">
-						<?php foreach ( Helper::tf_data_types( $meta['faq'] ) as $key => $faq ): ?>
+						<?php foreach ( tf_data_types( $meta['faq'] ) as $key => $faq ): ?>
                             <div id="tf-faq-item">
                                 <div class="tf-faq-title <?php echo $key === 0 ? esc_attr( 'active' ) : ''; ?>">
                                     <svg class="tf-faq-minus" xmlns="http://www.w3.org/2000/svg" width="19" height="1" viewBox="0 0 19 1" fill="none">

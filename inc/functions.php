@@ -91,15 +91,6 @@ if ( tf_is_woo_active() ) {
 }
 
 /**
- * Booking Details Functions
- */
-if ( file_exists( TF_INC_PATH . 'booking-details/booking_details.php' ) ) {
-	require_once TF_INC_PATH . 'booking-details/booking_details.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'booking-details/booking_details.php' );
-}
-
-/**
  * Wishlist Functions
  */
 if ( file_exists( TF_INC_PATH . 'functions/functions-wishlist.php' ) ) {
@@ -126,14 +117,6 @@ if ( file_exists( TF_INC_PATH . 'functions/functions_enquiry.php' ) ) {
 	tf_file_missing( TF_INC_PATH . 'functions/functions_enquiry.php' );
 }
 
-/**
- * Order page Functions
- */
-if ( file_exists( TF_INC_PATH . 'functions/functions_order.php' ) ) {
-	require_once TF_INC_PATH . 'functions/functions_order.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/functions_order.php' );
-}
 /**
  * Include export import function file
  */

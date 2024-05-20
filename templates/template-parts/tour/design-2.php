@@ -169,8 +169,8 @@
                 <div class="tf-details-left">
 
                     <?php 
-                    if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-1']) ){
-                        foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-1'] as $section){
+                    if( !empty(tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-1']) ){
+                        foreach(tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-1'] as $section){
                             if( !empty($section['tour-section-status']) && $section['tour-section-status']=="1" && !empty($section['tour-section-slug']) ){
                                 include TF_TEMPLATE_PART_PATH . 'tour/design-2/'.$section['tour-section-slug'].'.php';
                             }
@@ -366,8 +366,8 @@
             </div>
             <!-- Hotel details End -->
             <?php 
-            if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-2']) ){
-                foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-2'] as $section){
+            if( !empty(tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-2']) ){
+                foreach(tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-2'] as $section){
                     if( !empty($section['tour-section-status']) && $section['tour-section-status']=="1" && !empty($section['tour-section-slug']) ){
                         include TF_TEMPLATE_PART_PATH . 'tour/design-2/'.$section['tour-section-slug'].'.php';
                     }

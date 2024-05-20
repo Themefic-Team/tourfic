@@ -171,8 +171,8 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         <div class="tf-column tf-tour-details-left">
 
 							<?php
-							if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout'] ) ) {
-								foreach ( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout'] as $section ) {
+							if ( ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout'] ) ) {
+								foreach ( tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout'] as $section ) {
 									if ( ! empty( $section['tour-section-status'] ) && $section['tour-section-status'] == "1" && ! empty( $section['tour-section-slug'] ) ) {
 										include TF_TEMPLATE_PART_PATH . 'tour/design-1/' . $section['tour-section-slug'] . '.php';
 									}

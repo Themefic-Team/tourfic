@@ -6,6 +6,9 @@ defined( 'ABSPATH' ) || exit;
 use Tourfic\Admin\Backend_Booking\TF_Apartment_Backend_Booking;
 use Tourfic\Admin\Backend_Booking\TF_Hotel_Backend_Booking;
 use Tourfic\Admin\Backend_Booking\TF_Tour_Backend_Booking;
+use Tourfic\Admin\Booking_Details\Tour\Tour_Booking_Details;
+use Tourfic\Admin\Booking_Details\Hotel\Hotel_Booking_Details;
+use Tourfic\Admin\Booking_Details\Apartment\Apartment_Booking_Details;
 use Tourfic\Admin\Emails\TF_Handle_Emails;
 use Tourfic\Classes\Helper;
 
@@ -38,6 +41,11 @@ class Base {
 			TF_Apartment_Backend_Booking::instance();
 			TF_Hotel_Backend_Booking::instance();
 			TF_Tour_Backend_Booking::instance();
+
+			// Booking Details
+			Tour_Booking_Details::instance();
+			Hotel_Booking_Details::instance();
+			Apartment_Booking_Details::instance();
 		}
 
 		if ( Helper::tfopt( 'disable-services' ) && in_array( 'hotel', Helper::tfopt( 'disable-services' ) ) ) {
