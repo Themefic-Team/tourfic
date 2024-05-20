@@ -394,8 +394,8 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 	}
 
 	$type             = explode( ',', $type );
-	$disable_services = tfopt( 'disable-services' ) ? tfopt( 'disable-services' ) : array();
-	$child_age_limit  = tfopt( 'enable_child_age_limit' ) ? tfopt( 'enable_child_age_limit' ) : '';
+	$disable_services = Helper::tfopt( 'disable-services' ) ? Helper::tfopt( 'disable-services' ) : array();
+	$child_age_limit  = Helper::tfopt( 'enable_child_age_limit' ) ? Helper::tfopt( 'enable_child_age_limit' ) : '';
 	if ( $child_age_limit == '1' ) {
 		$child_age_limit = ' child-age-limited';
 	} else {
@@ -562,7 +562,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 
 	// Gird or List View
 	if(!empty($_GET['type']) && $_GET['type'] == "tf_hotel"){
-		$tf_defult_views = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel_archive_view'] ) ? tf_data_types(tfopt( 'tf-template' ))['hotel_archive_view'] : 'list';
+		$tf_defult_views = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] : 'list';
 	}elseif(!empty($_GET['type']) && $_GET['type'] == "tf_tours"){
 		$tf_defult_views = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour_archive_view'] ) ? tf_data_types(tfopt( 'tf-template' ))['tour_archive_view'] : 'list';
 	}else{

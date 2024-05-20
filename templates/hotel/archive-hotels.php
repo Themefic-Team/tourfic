@@ -11,7 +11,7 @@
 get_header(); 
 
 
-$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
+$tf_hotel_arc_selected_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
 
 if ( tf_is_woo_active() ) {
 	if ( $tf_hotel_arc_selected_template == "design-1" ) {

@@ -44,10 +44,10 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? esc_html( $_GET['check-in-out-date'] ) : '';
 
 		// date format for apartments
-		$date_format_change_apartments = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+		$date_format_change_apartments = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
-		$disable_apartment_child_search  = ! empty( tfopt( 'disable_apartment_child_search' ) ) ? tfopt( 'disable_apartment_child_search' ) : '';
-		$disable_apartment_infant_search  = ! empty( tfopt( 'disable_apartment_infant_search' ) ) ? tfopt( 'disable_apartment_infant_search' ) : '';
+		$disable_apartment_child_search  = ! empty( Helper::tfopt( 'disable_apartment_child_search' ) ) ? Helper::tfopt( 'disable_apartment_child_search' ) : '';
+		$disable_apartment_infant_search  = ! empty( Helper::tfopt( 'disable_apartment_infant_search' ) ) ? Helper::tfopt( 'disable_apartment_infant_search' ) : '';
 		if( !empty($design) && 2==$design ){
 		?>
 		<form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo esc_url( tf_booking_search_action() ); ?>">
@@ -85,7 +85,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 								</div>
 							</label>
 
-							<input type="text" name="check-in-out-date" class="tf-apartment-check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo tfopt( 'date_apartment_search' ) ? 'required' : ''; ?>>
+							<input type="text" name="check-in-out-date" class="tf-apartment-check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo Helper::tfopt( 'date_apartment_search' ) ? 'required' : ''; ?>>
 						</div>
 						
 						<div class="tf_checkin_date tf_apartment_check_in_out_date">
@@ -364,7 +364,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                                         <i class="far fa-calendar-alt"></i>
                                     </div>
                                     <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                           placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo tfopt( 'date_apartment_search' ) ? 'required' : ''; ?>>
+                                           placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo Helper::tfopt( 'date_apartment_search' ) ? 'required' : ''; ?>>
                                 </div>
                             </label>
                         </div>
@@ -485,7 +485,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
 		$apt_availability    = ! empty( $meta['apt_availability'] ) ? $meta['apt_availability'] : '';
 		$booked_dates        = tf_apartment_booked_days( get_the_ID() );
-		$apt_reserve_button_text = !empty(tfopt('apartment_booking_form_button_text')) ? stripslashes(sanitize_text_field(tfopt('apartment_booking_form_button_text'))) : esc_html__("Reserve", 'tourfic');
+		$apt_reserve_button_text = !empty(Helper::tfopt('apartment_booking_form_button_text')) ? stripslashes(sanitize_text_field(Helper::tfopt('apartment_booking_form_button_text'))) : esc_html__("Reserve", 'tourfic');
 
 		$tf_booking_type = '1';
 		$tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = '';
@@ -499,7 +499,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		}
 
 		// date format for apartment
-		$date_format_change_appartments = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+		$date_format_change_appartments = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 			$additional_fees = ! empty( $meta['additional_fees'] ) ? $meta['additional_fees'] : array();
@@ -540,7 +540,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		if("single"==$tf_apartment_layout_conditions){
 			$tf_apartment_single_template = ! empty( $meta['tf_single_apartment_template'] ) ? $meta['tf_single_apartment_template'] : 'default';
 		}
-		$tf_apartment_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-apartment'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-apartment'] : 'default';
+		$tf_apartment_global_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] : 'default';
 
 		$tf_apartment_selected_check = !empty($tf_apartment_single_template) ? $tf_apartment_single_template : $tf_apartment_global_template;
 
@@ -1252,7 +1252,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 		), $url );
 
 		$apartment_min_price = get_apartment_min_max_price( get_the_ID() );
-		$tf_apartment_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['apartment-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['apartment-archive'] : 'default';
+		$tf_apartment_arc_selected_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 		if ( $tf_apartment_arc_selected_template == "design-1" ) {
 		$first_gallery_image = explode(',', $gallery);	
 		?>
@@ -2374,7 +2374,7 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
 		if("single"==$tf_apartment_layout_conditions){
 			$tf_apartment_single_template = ! empty( $meta['tf_single_apartment_template'] ) ? $meta['tf_single_apartment_template'] : 'default';
 		}
-		$tf_apartment_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-apartment'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-apartment'] : 'default';
+		$tf_apartment_global_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] : 'default';
 
 		$tf_apartment_selected_check = !empty($tf_apartment_single_template) ? $tf_apartment_single_template : $tf_apartment_global_template;
 
@@ -2670,12 +2670,12 @@ if ( ! function_exists( 'tf_apartments_search_ajax_callback' ) ) {
 			'message' => '',
 		];
 
-		if ( tfopt( 'date_apartment_search' ) && ( ! isset( $_POST['check-in-out-date'] ) || empty( $_POST['check-in-out-date'] ) ) ) {
+		if ( Helper::tfopt( 'date_apartment_search' ) && ( ! isset( $_POST['check-in-out-date'] ) || empty( $_POST['check-in-out-date'] ) ) ) {
 			$response['message'] = esc_html__( 'Please select a date', 'tourfic' );
 			$response['status'] = 'error';
 		}
 
-		if ( tfopt( 'date_apartment_search' ) ) {
+		if ( Helper::tfopt( 'date_apartment_search' ) ) {
 			if ( ! empty( $_POST['check-in-out-date'] ) ) {
 				$response['query_string'] = str_replace( '&action=tf_apartments_search', '', http_build_query( $_POST ) );
 				$response['status']       = 'success';

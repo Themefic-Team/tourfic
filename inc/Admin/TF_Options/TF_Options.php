@@ -353,7 +353,7 @@ class TF_Options {
 		// Add nonce for security and authentication.
 		check_ajax_referer( 'updates', '_nonce' );
 
-		$date_format         = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+		$date_format         = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		$hotel_id            = isset( $_POST['hotel_id'] ) && ! empty( $_POST['hotel_id'] ) ? sanitize_text_field( $_POST['hotel_id'] ) : '';
 		$new_post            = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? $_POST['new_post'] : '';
 		$room_index          = isset( $_POST['room_index'] ) ? intval( $_POST['room_index'] ) : '';
@@ -548,7 +548,7 @@ class TF_Options {
 		// Add nonce for security and authentication.
 		check_ajax_referer( 'updates', '_nonce' );
 
-		$date_format         = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+		$date_format         = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		$apartment_id        = isset( $_POST['apartment_id'] ) && ! empty( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
 		$new_post            = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? $_POST['new_post'] : '';
 		$check_in            = isset( $_POST['tf_apt_check_in'] ) && ! empty( $_POST['tf_apt_check_in'] ) ? sanitize_text_field( $_POST['tf_apt_check_in'] ) : '';

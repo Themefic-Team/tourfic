@@ -250,7 +250,7 @@
                 <div class="tf-grid-box tf-visitor-grid-box">
                     <?php 
                     $tf_visitors_details = !empty($tf_tour_details->visitor_details) ? json_decode($tf_tour_details->visitor_details) : '';
-                    $traveler_fields = !empty(tfopt('without-payment-field')) ? tf_data_types(tfopt('without-payment-field')) : '';
+                    $traveler_fields = !empty(Helper::tfopt('without-payment-field')) ? tf_data_types(Helper::tfopt('without-payment-field')) : '';
                     if(!empty($tf_visitors_details)){
                         $visitor_count = 1;
                         foreach($tf_visitors_details as $visitor){
@@ -354,19 +354,19 @@
                             $uri = $tour_ides;
                             $title = get_the_title( $tf_order_details->post_id );
                             
-                            $tf_qr_watermark = ! empty( tfopt( 'qr_background' ) ) ? tfopt( 'qr_background' ) : TF_ASSETS_APP_URL.'images/ticket-banner.png';
+                            $tf_qr_watermark = ! empty( Helper::tfopt( 'qr_background' ) ) ? Helper::tfopt( 'qr_background' ) : TF_ASSETS_APP_URL.'images/ticket-banner.png';
                             if(!empty($tour_ides)){
                         ?>
                         <div class="tf-single-box tf-voucher-preview">
                             <div class="tf-visitor-vouchers" style="background-image: url(<?php echo esc_url($tf_qr_watermark); ?>);">
                                 <div class="tf-voucher-header">
                                     <?php
-                                    $tf_qr_logo = ! empty( tfopt( 'qr_logo' ) ) ? tfopt( 'qr_logo' ) : '';
+                                    $tf_qr_logo = ! empty( Helper::tfopt( 'qr_logo' ) ) ? Helper::tfopt( 'qr_logo' ) : '';
                                     if(!empty($tf_qr_logo)){ ?>
                                     <img style="max-width: 140px;" src="<?php echo esc_url($tf_qr_logo); ?>" />
                                     <?php } 
-                                    $tf_ticket_prefix = ! empty( tfopt( "qr-ticket-prefix" ) ) ? tfopt( "qr-ticket-prefix" ).'-' : "";
-                                    $tf_ticket_title = ! empty( tfopt( "qr-ticket-title" ) ) ? tfopt( "qr-ticket-title" ) : "Booking ID";
+                                    $tf_ticket_prefix = ! empty( Helper::tfopt( "qr-ticket-prefix" ) ) ? Helper::tfopt( "qr-ticket-prefix" ).'-' : "";
+                                    $tf_ticket_title = ! empty( Helper::tfopt( "qr-ticket-title" ) ) ? Helper::tfopt( "qr-ticket-title" ) : "Booking ID";
                                     ?>
                                     <div class="title">
                                         <h1><?php echo esc_html( $title ); ?></h1>
@@ -425,7 +425,7 @@
                                 </div>
                                 <div class="tf-voucher-footer-qoute">
                                     <?php
-                                    $tf_ticket_qottation = ! empty( tfopt( "qr-ticket-content" ) ) ? tfopt( "qr-ticket-content" ) : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."; ?>
+                                    $tf_ticket_qottation = ! empty( Helper::tfopt( "qr-ticket-content" ) ) ? Helper::tfopt( "qr-ticket-content" ) : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."; ?>
                                     <p><?php echo esc_html( $tf_ticket_qottation ); ?></p>
                                 </div>
                             </div>
@@ -728,12 +728,12 @@ if(!empty($tour_ides)){
         <div class="tf-visitor-vouchers" style="background-image: url(<?php echo esc_url($tf_qr_watermark); ?>);">
             <div class="tf-voucher-header">
                 <?php
-                $tf_qr_logo = ! empty( tfopt( 'qr_logo' ) ) ? tfopt( 'qr_logo' ) : '';
+                $tf_qr_logo = ! empty( Helper::tfopt( 'qr_logo' ) ) ? Helper::tfopt( 'qr_logo' ) : '';
                 if(!empty($tf_qr_logo)){ ?>
                 <img style="max-width: 140px;" src="<?php echo esc_url($tf_qr_logo); ?>" />
                 <?php } 
-                $tf_ticket_prefix = ! empty( tfopt( "qr-ticket-prefix" ) ) ? tfopt( "qr-ticket-prefix" ).'-' : "";
-                $tf_ticket_title = ! empty( tfopt( "qr-ticket-title" ) ) ? tfopt( "qr-ticket-title" ) : "Booking ID";
+                $tf_ticket_prefix = ! empty( Helper::tfopt( "qr-ticket-prefix" ) ) ? Helper::tfopt( "qr-ticket-prefix" ).'-' : "";
+                $tf_ticket_title = ! empty( Helper::tfopt( "qr-ticket-title" ) ) ? Helper::tfopt( "qr-ticket-title" ) : "Booking ID";
                 ?>
                 <div class="title">
                     <h1><?php echo esc_html( $title ); ?></h1>
@@ -792,7 +792,7 @@ if(!empty($tour_ides)){
             </div>
             <div class="tf-voucher-footer-qoute">
                 <?php
-                $tf_ticket_qottation = ! empty( tfopt( "qr-ticket-content" ) ) ? tfopt( "qr-ticket-content" ) : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."; ?>
+                $tf_ticket_qottation = ! empty( Helper::tfopt( "qr-ticket-content" ) ) ? Helper::tfopt( "qr-ticket-content" ) : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."; ?>
                 <p><?php echo esc_html( $tf_ticket_qottation ); ?></p>
             </div>
         </div>

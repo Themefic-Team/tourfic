@@ -484,7 +484,7 @@ function tf_room_availability_callback() {
 	if("single"==$tf_hotel_layout_conditions){
 		$tf_hotel_single_template_check = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
 	}
-	$tf_hotel_global_template_check = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
+	$tf_hotel_global_template_check = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
 
 	$tf_hotel_selected_check = !empty($tf_hotel_single_template_check) ? $tf_hotel_single_template_check : $tf_hotel_global_template_check;
 
@@ -898,10 +898,10 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? esc_html( $_GET['check-in-out-date'] ) : '';
 
 		// date format for users output
-		$hotel_date_format_for_users = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
-		$hotel_location_field_required = ! empty( tfopt( "required_location_hotel_search" ) ) ? tfopt( "required_location_hotel_search" ) : 0;
+		$hotel_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+		$hotel_location_field_required = ! empty( Helper::tfopt( "required_location_hotel_search" ) ) ? Helper::tfopt( "required_location_hotel_search" ) : 0;
 
-		$disable_hotel_child_search  = ! empty( tfopt( 'disable_hotel_child_search' ) ) ? tfopt( 'disable_hotel_child_search' ) : '';
+		$disable_hotel_child_search  = ! empty( Helper::tfopt( 'disable_hotel_child_search' ) ) ? Helper::tfopt( 'disable_hotel_child_search' ) : '';
 		if( !empty($design) && 2==$design ){
 		?>
 		<form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( tf_booking_search_action() ); ?>">
@@ -940,7 +940,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 								</div>
 							</label>
 							
-							<input type="hidden" name="check-in-out-date" class="tf-check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo tfopt( 'date_hotel_search' ) ? 'required' : ''; ?>>
+							<input type="hidden" name="check-in-out-date" class="tf-check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo Helper::tfopt( 'date_hotel_search' ) ? 'required' : ''; ?>>
 						</div>
 						
 						<div class="tf_checkin_date tf_check_inout_dates tf_hotel_check_in_out_date">
@@ -1080,8 +1080,8 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 								<!-- Children age input field based on children number -->
 								<?php
 
-								$children_age        = tfopt( 'children_age_limit' );
-								$children_age_status = tfopt( 'enable_child_age_limit' );
+								$children_age        = Helper::tfopt( 'children_age_limit' );
+								$children_age_status = Helper::tfopt( 'enable_child_age_limit' );
 								if ( ! empty( $children_age_status ) && $children_age_status == "1" ) {
 									?>
 									<div class="tf-children-age-fields">
@@ -1167,7 +1167,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 		}else{ ?>
         <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( tf_booking_search_action() ); ?>">
             <div class="tf_homepage-booking">
-			<?php if( tfopt( 'hide_hotel_location_search' ) != 1 || tfopt( 'required_location_hotel_search' ) ): ?>
+			<?php if( Helper::tfopt( 'hide_hotel_location_search' ) != 1 || Helper::tfopt( 'required_location_hotel_search' ) ): ?>
 				<div class="tf_destination-wrap">
                     <div class="tf_input-inner">
                         <div class="tf_form-row">
@@ -1237,8 +1237,8 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                                 </div>
                             </div>
 	                        <?php 
-							$children_age        = tfopt( 'children_age_limit' );
-							$children_age_status = tfopt( 'enable_child_age_limit' );
+							$children_age        = Helper::tfopt( 'children_age_limit' );
+							$children_age_status = Helper::tfopt( 'enable_child_age_limit' );
 							if(empty($disable_hotel_child_search)) : ?>
                                 <div class="tf_acrselection">
                                     <div class="acr-label"><?php esc_html_e( 'Children', 'tourfic' ); ?></div>
@@ -1287,7 +1287,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                                         <i class="far fa-calendar-alt"></i>
                                     </div>
                                     <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                           placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo tfopt( 'date_hotel_search' ) ? 'required' : ''; ?>>
+                                           placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo Helper::tfopt( 'date_hotel_search' ) ? 'required' : ''; ?>>
                                 </div>
                             </label>
                         </div>
@@ -1420,7 +1420,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 	$features = ! empty( $_GET['features'] ) ? sanitize_text_field( $_GET['features'] ) : '';
 
 	// date format for users output
-	$hotel_date_format_for_users = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+	$hotel_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 
 	/**
@@ -1504,14 +1504,14 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 	if ( "single" == $tf_hotel_layout_conditions ) {
 		$tf_hotel_single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
 	}
-	$tf_hotel_global_template = ! empty( tf_data_types( tfopt( 'tf-template' ) )['single-hotel'] ) ? tf_data_types( tfopt( 'tf-template' ) )['single-hotel'] : 'design-1';
+	$tf_hotel_global_template = ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] ) ? tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] : 'design-1';
 
 	$tf_hotel_selected_check = ! empty( $tf_hotel_single_template ) ? $tf_hotel_single_template : $tf_hotel_global_template;
 
 	$tf_hotel_selected_template = $tf_hotel_selected_check;
 
-	$tf_hotel_book_avaibality_button_text = !empty(tfopt('hotel_booking_check_button_text')) ? stripslashes(sanitize_text_field(tfopt('hotel_booking_check_button_text'))) : "Booking Availability";
-	$hotel_location_field_required = ! empty( tfopt( "required_location_hotel_search" ) ) ? tfopt( "required_location_hotel_search" ) : 1;
+	$tf_hotel_book_avaibality_button_text = !empty(Helper::tfopt('hotel_booking_check_button_text')) ? stripslashes(sanitize_text_field(Helper::tfopt('hotel_booking_check_button_text'))) : "Booking Availability";
+	$hotel_location_field_required = ! empty( Helper::tfopt( "required_location_hotel_search" ) ) ? Helper::tfopt( "required_location_hotel_search" ) : 1;
 
 	if ( $tf_hotel_selected_template == "design-1" ) {
 		?>
@@ -1901,7 +1901,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	}
 
 	// Archive Page Minimum Price
-	$archive_page_price_settings = ! empty( tfopt( 'hotel_archive_price_minimum_settings' ) ) ? tfopt( 'hotel_archive_price_minimum_settings' ) : 'all';
+	$archive_page_price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings' ) ) ? Helper::tfopt( 'hotel_archive_price_minimum_settings' ) : 'all';
 
 	// Featured
 	$featured = ! empty( $meta['featured'] ) ? $meta['featured'] : '';
@@ -2435,7 +2435,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 		}
 	endif;
 
-	$tf_hotel_arc_selected_template = ! empty( tf_data_types( tfopt( 'tf-template' ) )['hotel-archive'] ) ? tf_data_types( tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
+	$tf_hotel_arc_selected_template = ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] ) ? tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
 	
 	if ( $tf_hotel_arc_selected_template == "design-1" ) {
 		?>

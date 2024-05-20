@@ -48,8 +48,8 @@ while ( have_posts() ) : the_post();
 	/**
 	 * Get global settings value
 	 */
-	$s_share  = ! empty( tfopt( 'h-share' ) ) ? tfopt( 'h-share' ) : 0;
-	$s_review = ! empty( tfopt( 'h-review' ) ) ? tfopt( 'h-review' ) : 0;
+	$s_share  = ! empty( Helper::tfopt( 'h-share' ) ) ? Helper::tfopt( 'h-share' ) : 0;
+	$s_review = ! empty( Helper::tfopt( 'h-review' ) ) ? Helper::tfopt( 'h-review' ) : 0;
 
 	/**
 	 * Disable Share Option
@@ -129,14 +129,14 @@ while ( have_posts() ) : the_post();
 	$share_text = get_the_title();
 	$share_link = get_permalink( $post_id );
 	// Map Type
-	$tf_openstreet_map = ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "default";
+	$tf_openstreet_map = ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : "default";
 
 	// Single Template Style
 	$tf_hotel_layout_conditions = ! empty( $meta['tf_single_hotel_layout_opt'] ) ? $meta['tf_single_hotel_layout_opt'] : 'global';
 	if("single"==$tf_hotel_layout_conditions){
 		$tf_hotel_single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
 	}
-	$tf_hotel_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
+	$tf_hotel_global_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
 
 	$tf_hotel_selected_check = !empty($tf_hotel_single_template) ? $tf_hotel_single_template : $tf_hotel_global_template;
 

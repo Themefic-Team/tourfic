@@ -211,7 +211,7 @@ class TF_Setup_Wizard {
 	 * Service Type
 	 */
 	private function tf_setup_step_two() {
-		$tf_disable_services = ! empty( tfopt( 'disable-services' ) ) ? tfopt( 'disable-services' ) : '';
+		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : '';
 		?>
         <div class="tf-setup-step-container tf-setup-step-2 <?php echo self::$current_step == 'step_2' ? 'active' : ''; ?>" data-step="2">
             <div class="back-to-dashboard">
@@ -371,10 +371,10 @@ class TF_Setup_Wizard {
 	 * General Settings
 	 */
 	private function tf_setup_step_four() {
-		$tf_search_result_page = ! empty( tfopt( 'search-result-page' ) ) ? tfopt( 'search-result-page' ) : '';
-		$tf_search_result      = ! empty( tfopt( 'posts_per_page' ) ) ? tfopt( 'posts_per_page' ) : 10;
-		$tf_wishlist_page      = ! empty( tfopt( 'wl-page' ) ) ? tfopt( 'wl-page' ) : '';
-		$tf_review_autopublish = ! empty( tfopt( 'r-auto-publish' ) ) ? tfopt( 'r-auto-publish' ) : '';
+		$tf_search_result_page = ! empty( Helper::tfopt( 'search-result-page' ) ) ? Helper::tfopt( 'search-result-page' ) : '';
+		$tf_search_result      = ! empty( Helper::tfopt( 'posts_per_page' ) ) ? Helper::tfopt( 'posts_per_page' ) : 10;
+		$tf_wishlist_page      = ! empty( Helper::tfopt( 'wl-page' ) ) ? Helper::tfopt( 'wl-page' ) : '';
+		$tf_review_autopublish = ! empty( Helper::tfopt( 'r-auto-publish' ) ) ? Helper::tfopt( 'r-auto-publish' ) : '';
 		?>
         <div class="tf-setup-step-container tf-setup-step-4 <?php echo self::$current_step == 'step_4' ? 'active' : ''; ?>" data-step="4">
             <div class="back-to-dashboard">
@@ -473,14 +473,14 @@ class TF_Setup_Wizard {
 	 * Hotel, Tour, Apartment Settings
 	 */
 	private function tf_setup_step_five() {
-		$tf_hotel_review     = ! empty( tfopt( 'h-review' ) ) ? tfopt( 'h-review' ) : '';
-		$tf_hotel_share      = ! empty( tfopt( 'h-share' ) ) ? tfopt( 'h-share' ) : '';
+		$tf_hotel_review     = ! empty( Helper::tfopt( 'h-review' ) ) ? Helper::tfopt( 'h-review' ) : '';
+		$tf_hotel_share      = ! empty( Helper::tfopt( 'h-share' ) ) ? Helper::tfopt( 'h-share' ) : '';
 		$tf_hotel_slug       = ! empty( get_option( 'hotel_slug' ) ) ? get_option( 'hotel_slug' ) : 'hotels';
-		$tf_tour_review      = ! empty( tfopt( 't-review' ) ) ? tfopt( 't-review' ) : '';
-		$tf_tour_related     = ! empty( tfopt( 't-related' ) ) ? tfopt( 't-related' ) : '';
+		$tf_tour_review      = ! empty( Helper::tfopt( 't-review' ) ) ? Helper::tfopt( 't-review' ) : '';
+		$tf_tour_related     = ! empty( Helper::tfopt( 't-related' ) ) ? Helper::tfopt( 't-related' ) : '';
 		$tf_tour_slug        = ! empty( get_option( 'tour_slug' ) ) ? get_option( 'tour_slug' ) : 'tours';
-		$tf_apartment_review = ! empty( tfopt( 'disable-apartment-review' ) ) ? tfopt( 'disable-apartment-review' ) : '';
-		$tf_apartment_share  = ! empty( tfopt( 'disable-apartment-share' ) ) ? tfopt( 'disable-apartment-share' ) : '';
+		$tf_apartment_review = ! empty( Helper::tfopt( 'disable-apartment-review' ) ) ? Helper::tfopt( 'disable-apartment-review' ) : '';
+		$tf_apartment_share  = ! empty( Helper::tfopt( 'disable-apartment-share' ) ) ? Helper::tfopt( 'disable-apartment-share' ) : '';
 		$tf_apartment_slug   = ! empty( get_option( 'apartment_slug' ) ) ? get_option( 'apartment_slug' ) : 'apartments';
 		?>
         <div class="tf-setup-step-container tf-setup-step-5 <?php echo self::$current_step == 'step_5' ? 'active' : ''; ?>" data-step="5">
@@ -681,12 +681,12 @@ class TF_Setup_Wizard {
 	 * Template Settings
 	 */
 	private function tf_setup_step_six() {
-		$tf_hotel_single_template      = ! empty( tf_data_types( tfopt( 'tf-template' ) )['single-hotel'] ) ? tf_data_types( tfopt( 'tf-template' ) )['single-hotel'] : 'design-1';
-		$tf_hotel_archive_template     = ! empty( tf_data_types( tfopt( 'tf-template' ) )['hotel-archive'] ) ? tf_data_types( tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
-		$tf_tour_single_template       = ! empty( tf_data_types( tfopt( 'tf-template' ) )['single-tour'] ) ? tf_data_types( tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
-		$tf_tour_archive_template      = ! empty( tf_data_types( tfopt( 'tf-template' ) )['tour-archive'] ) ? tf_data_types( tfopt( 'tf-template' ) )['tour-archive'] : 'design-1';
-		$tf_apartment_single_template  = ! empty( tf_data_types( tfopt( 'tf-template' ) )['single-apartment'] ) ? tf_data_types( tfopt( 'tf-template' ) )['single-apartment'] : 'default';
-		$tf_apartment_archive_template = ! empty( tf_data_types( tfopt( 'tf-template' ) )['apartment-archive'] ) ? tf_data_types( tfopt( 'tf-template' ) )['apartment-archive'] : 'default';
+		$tf_hotel_single_template      = ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] ) ? tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] : 'design-1';
+		$tf_hotel_archive_template     = ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] ) ? tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
+		$tf_tour_single_template       = ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] ) ? tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
+		$tf_tour_archive_template      = ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] ) ? tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] : 'design-1';
+		$tf_apartment_single_template  = ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] ) ? tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] : 'default';
+		$tf_apartment_archive_template = ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment-archive'] ) ? tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment-archive'] : 'default';
 		?>
         <div class="tf-setup-step-container tf-setup-step-6 <?php echo self::$current_step == 'step_6' ? 'active' : ''; ?>" data-step="6">
 
