@@ -6,6 +6,8 @@
  */
 
 
+ use Tourfic\Classes\Helper;
+
 get_header('tourfic');
 
 $meta = get_post_meta( get_the_ID(),'tf_tours_opt',true );
@@ -25,7 +27,7 @@ if( $discount_type == 'percent' ){
 }
 
 
-$tf_expired_tour_showing = ! empty( tfopt( 't-show-expire-tour' ) ) ? tfopt( 't-show-expire-tour' ) : '';
+$tf_expired_tour_showing = ! empty( Helper::tfopt( 't-show-expire-tour' ) ) ? Helper::tfopt( 't-show-expire-tour' ) : '';
 if(!empty($tf_expired_tour_showing )){
 	$tf_tour_posts_status = array('publish','expired');
 }else{
@@ -44,7 +46,7 @@ $loop = new WP_Query( $args );
 $total_posts = $loop->found_posts;
 $tf_total_results = 0;
 
-$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
+$tf_tour_arc_selected_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
 
 if ( tf_is_woo_active() ) {
 	if ( $tf_tour_arc_selected_template == "design-1" ) {

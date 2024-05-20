@@ -2,13 +2,15 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+use Tourfic\Classes\Helper;
+
 /**
  * Search form action url
  */
 function tf_booking_search_action() {
 
 	// get data from global settings else default
-	$search_result_action = ! empty( tfopt( 'search-result-page' ) ) ? get_permalink( tfopt( 'search-result-page' ) ) : home_url( '/search-result/' );
+	$search_result_action = ! empty( Helper::tfopt( 'search-result-page' ) ) ? get_permalink( Helper::tfopt( 'search-result-page' ) ) : home_url( '/search-result/' );
 
 	// can be override by filter
 	return apply_filters( 'tf_booking_search_action', $search_result_action );
@@ -198,7 +200,7 @@ if ( ! function_exists( 'tf_term_count' ) ) {
  */
 function tourfic_booking_set_search_result( $url ) {
 
-	$search_result_page = tfopt( 'search-result-page' );
+	$search_result_page = Helper::tfopt( 'search-result-page' );
 
 	if ( isset( $search_result_page ) ) {
 		$url = get_permalink( $search_result_page );
@@ -385,14 +387,14 @@ function tourfic_ask_question_ajax() {
 	}
 
 	if ( "tf_hotel" == get_post_type( $post_id ) ) {
-		$send_email_to[] = ! empty( tfopt( 'h-enquiry-email' ) ) ? sanitize_email( tfopt( 'h-enquiry-email' ) ) : sanitize_email( get_option( 'admin_email' ) );
+		$send_email_to[] = ! empty( Helper::tfopt( 'h-enquiry-email' ) ) ? sanitize_email( Helper::tfopt( 'h-enquiry-email' ) ) : sanitize_email( get_option( 'admin_email' ) );
 	} elseif ( "tf_apartment" == get_post_type( $post_id ) ) {
 		$send_email_to[] = ! empty( $author_mail ) ? sanitize_email( $author_mail ) : sanitize_email( get_option( 'admin_email' ) );
 	} else {
-		$send_email_to[] = ! empty( tfopt( 't-enquiry-email' ) ) ? sanitize_email( tfopt( 't-enquiry-email' ) ) : sanitize_email( get_option( 'admin_email' ) );
+		$send_email_to[] = ! empty( Helper::tfopt( 't-enquiry-email' ) ) ? sanitize_email( Helper::tfopt( 't-enquiry-email' ) ) : sanitize_email( get_option( 'admin_email' ) );
 	}
 
-	$tf_vendor_email_enable_setting = !empty(tfopt( 'email_template_settings')['enable_vendor_enquiry_email']) ? tfopt( 'email_template_settings')['enable_vendor_enquiry_email'] : 0;
+	$tf_vendor_email_enable_setting = !empty(Helper::tfopt( 'email_template_settings')['enable_vendor_enquiry_email']) ? Helper::tfopt( 'email_template_settings')['enable_vendor_enquiry_email'] : 0;
 
 
 	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( $tf_vendor_email_enable_setting == 1)) {
@@ -530,7 +532,7 @@ if ( ! function_exists( 'tf_flatpickr_locale' ) ) {
 
 		$flatpickr_locale = ! empty( get_locale() ) ? get_locale() : 'en_US';
 		$allowed_locale   = array( 'ar', 'bn_BD', 'de_DE', 'es_ES', 'fr_FR', 'hi_IN', 'it_IT', 'nl_NL', 'ru_RU', 'zh_CN' );
-		$tf_first_day_of_week = !empty(tfopt("tf-week-day-flatpickr")) ? tfopt("tf-week-day-flatpickr") : 0;
+		$tf_first_day_of_week = !empty(Helper::tfopt("tf-week-day-flatpickr")) ? Helper::tfopt("tf-week-day-flatpickr") : 0;
 
 		if ( in_array( $flatpickr_locale, $allowed_locale ) ) {
 

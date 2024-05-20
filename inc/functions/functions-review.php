@@ -2,6 +2,8 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+use \Tourfic\Classes\Helper;
+
 const TF_COMMENT_META  = 'tf_comment_meta';
 const TF_TOTAL_RATINGS = 'tf_total_ratings';
 const TF_BASE_RATE     = 'tf_base_rate';
@@ -213,9 +215,9 @@ function tf_get_review_fields( &$fields, $type = null ) {
 	];
 
 	// If user does not have fields from settings, default fields will be loaded
-	$tfopt_hotels     = ! empty( tf_data_types( tfopt( 'r-hotel' ) ) ) ? tf_data_types( tfopt( 'r-hotel' ) ) : $default_hotels_field;
-	$tfopt_apartments = ! empty( tf_data_types( tfopt( 'r-apartment' ) ) ) ? tf_data_types( tfopt( 'r-apartment' ) ) : $default_apartments_field;
-	$tfopt_tours      = ! empty( tf_data_types( tfopt( 'r-tour' ) ) ) ? tf_data_types( tfopt( 'r-tour' ) ) : $default_tours_field;
+	$tfopt_hotels     = ! empty( tf_data_types( Helper::tfopt( 'r-hotel' ) ) ) ? tf_data_types( Helper::tfopt( 'r-hotel' ) ) : $default_hotels_field;
+	$tfopt_apartments = ! empty( tf_data_types( Helper::tfopt( 'r-apartment' ) ) ) ? tf_data_types( Helper::tfopt( 'r-apartment' ) ) : $default_apartments_field;
+	$tfopt_tours      = ! empty( tf_data_types( Helper::tfopt( 'r-tour' ) ) ) ? tf_data_types( Helper::tfopt( 'r-tour' ) ) : $default_tours_field;
 
 	$fields = 'tf_tours' === $type ? $tfopt_tours : ( 'tf_apartment' === $type ? $tfopt_apartments : $tfopt_hotels );
 	if ( ! empty( $fields ) && gettype( $fields ) == "string" ) {
@@ -241,7 +243,7 @@ function tf_get_review_fields( &$fields, $type = null ) {
 if ( ! function_exists( 'tf_generate_review_meta_fields' ) ) {
 	function tf_generate_review_meta_fields( $fields ) {
 
-		$limit = ! empty( tfopt( 'r-base' ) ) ? tfopt( 'r-base' ) : 5;
+		$limit = ! empty( Helper::tfopt( 'r-base' ) ) ? Helper::tfopt( 'r-base' ) : 5;
 
 		$html = '<div class="tf-rating-wrapper">';
 		foreach ( $fields as $field ) {
@@ -269,7 +271,7 @@ if ( ! function_exists( 'tf_generate_review_meta_fields' ) ) {
 if ( ! function_exists( 'tf_generate_stars' ) ) {
 	function tf_generate_stars( $key ) {
 
-		$limit = ! empty( tfopt( 'r-base' ) ) ? tfopt( 'r-base' ) : 5;
+		$limit = ! empty( Helper::tfopt( 'r-base' ) ) ? Helper::tfopt( 'r-base' ) : 5;
 		$html  = '';
 		foreach ( array_reverse( range( 1, $limit, 1 ) ) as $i ) {
 			$html .= "<input type=\"radio\" id=\"{$key}-{$i}\" name=\"tf_comment_meta[{$key}]\" value=\"{$i}\" required><label for=\"{$key}-{$i}\">{$i}</label>";
@@ -297,7 +299,7 @@ if ( ! function_exists( 'tf_save_rating' ) ) {
 		if ( ( isset( $_POST[ TF_COMMENT_META ] ) ) && ( '' !== $_POST[ TF_COMMENT_META ] ) ) {
 			$tf_comment_meta = $_POST[ TF_COMMENT_META ];
 			add_comment_meta( $comment_id, TF_COMMENT_META, $tf_comment_meta );
-			add_comment_meta( $comment_id, TF_BASE_RATE, tfopt( 'r-base' ) ?? 5 );
+			add_comment_meta( $comment_id, TF_BASE_RATE, Helper::tfopt( 'r-base' ) ?? 5 );
 		}
 	}
 
@@ -389,7 +391,7 @@ function tf_calculate_user_ratings( $comment, &$overall_rating, &$total_rate ) {
  */
 function tf_average_rating_change_on_base( $rating, $base_rate = 5 ) {
 
-	$settings_base = ! empty ( tfopt( 'r-base' ) ) ? tfopt( 'r-base' ) : 5;
+	$settings_base = ! empty ( Helper::tfopt( 'r-base' ) ) ? Helper::tfopt( 'r-base' ) : 5;
 	$base_rate     = ! empty ( $base_rate ) ? $base_rate : 5;
 
 	if ( $settings_base != $base_rate ) {
@@ -418,7 +420,7 @@ function tf_single_rating_change_on_base( $rating, $base_rate = 5 ) {
 		return '';
 	}
 
-	$settings_base = ! empty ( tfopt( 'r-base' ) ) ? tfopt( 'r-base' ) : 5;
+	$settings_base = ! empty ( Helper::tfopt( 'r-base' ) ) ? Helper::tfopt( 'r-base' ) : 5;
 	$base_rate     = ! empty ( $base_rate ) ? $base_rate : 5;
 
 	if ( $settings_base != $base_rate ) {
@@ -480,16 +482,16 @@ function tf_archive_single_rating() {
 		ob_start();
 		?>
 		<?php
-		$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
-		$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
-		$tf_apartment_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['apartment-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['apartment-archive'] : 'default';
+		$tf_tour_arc_selected_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
+		$tf_hotel_arc_selected_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
+		$tf_apartment_arc_selected_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 		
 		if( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-1" ) || ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-1" ) ){
 		?>
 			<div class="tf-reviews tf-flex tf-mt-16 tf-flex-gap-12">
 				<div class="tf-review-items">
 				<?php
-				$settings_base = ! empty ( tfopt( 'r-base' ) ) ? tfopt( 'r-base' ) : 5;
+				$settings_base = ! empty ( Helper::tfopt( 'r-base' ) ) ? Helper::tfopt( 'r-base' ) : 5;
 				$base_rate     = 5;
 				$rating = tf_average_ratings( array_values( $tf_overall_rate ?? [] ) );
 				if ( $settings_base != $base_rate ) {
@@ -550,9 +552,9 @@ function tf_archive_single_rating() {
 		echo wp_kses_post( ob_get_clean() );
 	}else{
 		
-		$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
-		$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
-		$tf_apartment_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['apartment-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['apartment-archive'] : 'default';
+		$tf_tour_arc_selected_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
+		$tf_hotel_arc_selected_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
+		$tf_apartment_arc_selected_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 		
 		if( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-1" ) || ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-1" ) ){
 		?>
@@ -634,7 +636,7 @@ function tf_based_on_text( $number ) {
 function tf_auto_approve_comments( $comment_id ) {
 	$comment                     = [];
 	$comment['comment_ID']       = $comment_id;
-	$comment['comment_approved'] = intval( tfopt( 'r-auto-publish' ) ?? 0 );
+	$comment['comment_approved'] = intval( Helper::tfopt( 'r-auto-publish' ) ?? 0 );
 	wp_update_comment( $comment );
 }
 

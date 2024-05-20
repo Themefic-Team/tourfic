@@ -3619,7 +3619,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'          => 'admin_booking_email_template',
 									'type'        => 'editor',
 									'label'       => __( 'Booking Confrimation Template', 'tourfic' ),
-									'default'     => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ),
+									'default'     => Tourfic\Admin\Emails\TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ),
 									'description' => __( 'This template will be sent to admin', 'tourfic' )
 								),
 							),
@@ -3662,7 +3662,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'          => 'customer_confirm_email_template',
 									'type'        => 'editor',
 									'label'       => __( 'Booking Confirmation Email', 'tourfic' ),
-									'default'     => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'customer' ),
+									'default'     => \Tourfic\Admin\Emails\TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'customer' ),
 									'description' => __( 'This template will be sent to customer after booking is confirmed.', 'tourfic' ),
 								),
 							),

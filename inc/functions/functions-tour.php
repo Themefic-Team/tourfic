@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 //}
 //
 //register_activation_hook( TF_PATH . 'tourfic.php', 'tf_tours_rewrite_flush' );
-use \Tourfic\Traits\Helper;
+use \Tourfic\Classes\Helper;
 /**
  * Get tour destinations
  *
@@ -57,10 +57,10 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 	function tf_tour_search_form_horizontal( $classes, $title, $subtitle, $author, $advanced, $design ) {
 
         // date Format for User Output
-        $tour_date_format_for_users = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
-		$disable_child_search  = ! empty( tfopt( 'disable_child_search' ) ) ? tfopt( 'disable_child_search' ) : '';
-		$disable_infant_search = ! empty( tfopt( 'disable_infant_search' ) ) ? tfopt( 'disable_infant_search' ) : '';
-		$tour_location_field_required = ! empty( tfopt( 'tour_location_field_required' ) ) ? tfopt( 'tour_location_field_required' ) : '';
+        $tour_date_format_for_users = !empty(Helper::tfopt( "tf-date-format-for-users")) ? Helper::tfopt( "tf-date-format-for-users") : "Y/m/d";
+		$disable_child_search  = ! empty( Helper::tfopt( 'disable_child_search' ) ) ? Helper::tfopt( 'disable_child_search' ) : '';
+		$disable_infant_search = ! empty( Helper::tfopt( 'disable_infant_search' ) ) ? Helper::tfopt( 'disable_infant_search' ) : '';
+		$tour_location_field_required = ! empty( Helper::tfopt( 'tour_location_field_required' ) ) ? Helper::tfopt( 'tour_location_field_required' ) : '';
         if( !empty($design) && 2==$design ){
 		?>
 		<form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(tf_booking_search_action()); ?>">
@@ -99,7 +99,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 							</label>
 
 							<input type="text" name="check-in-out-date" class="tf-tour-check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-										placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo tfopt( 'date_tour_search' ) ? 'required' : ''; ?>>
+										placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo Helper::tfopt( 'date_tour_search' ) ? 'required' : ''; ?>>
 						</div>
 						
 						<div class="tf_checkin_date tf_tour_check_in_out_date">
@@ -309,7 +309,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 		<?php }else{ ?>
         <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(tf_booking_search_action()); ?>">
             <div class="tf_homepage-booking">
-				<?php if( tfopt( 'hide_tour_location_search' ) != 1 || tfopt( 'required_location_tour_search' ) ): ?>
+				<?php if( Helper::tfopt( 'hide_tour_location_search' ) != 1 || Helper::tfopt( 'required_location_tour_search' ) ): ?>
 					<div class="tf_destination-wrap">
 						<div class="tf_input-inner">
 							<div class="tf_form-row">
@@ -421,7 +421,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
                                     <i class="far fa-calendar-alt"></i>
                                 </div>
                                 <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                       placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo tfopt( 'date_tour_search' ) ? 'required' : ''; ?>>
+                                       placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo Helper::tfopt( 'date_tour_search' ) ? 'required' : ''; ?>>
                             </div>
                         </label>
                     </div>
@@ -536,7 +536,7 @@ function tf_single_tour_booking_form( $post_id ) {
 	# Get Pricing
 	$tour_price = new Tour_Price( $meta );
 	// Date format for Users Oputput
-	$tour_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+	$tour_date_format_for_users  = !empty(Helper::tfopt( "tf-date-format-for-users")) ? Helper::tfopt( "tf-date-format-for-users") : "Y/m/d";
 
 	// Repeated Fixed Tour
 
@@ -731,13 +731,13 @@ function tf_single_tour_booking_form( $post_id ) {
 	if ( "single" == $tf_tour_layout_conditions ) {
 		$tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'design-1';
 	}
-	$tf_tour_global_template = ! empty( tf_data_types( tfopt( 'tf-template' ) )['single-tour'] ) ? tf_data_types( tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
+	$tf_tour_global_template = ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] ) ? tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
 
 	$tf_tour_selected_check = ! empty( $tf_tour_single_template ) ? $tf_tour_single_template : $tf_tour_global_template;
 
 	$tf_tour_selected_template = $tf_tour_selected_check;
 
-	$tf_tour_book_now_text = !empty(tfopt('tour_booking_form_button_text')) ? stripslashes(sanitize_text_field(tfopt('tour_booking_form_button_text'))) : esc_html__("Book Now", 'tourfic');
+	$tf_tour_book_now_text = !empty(Helper::tfopt('tour_booking_form_button_text')) ? stripslashes(sanitize_text_field(Helper::tfopt('tour_booking_form_button_text'))) : esc_html__("Book Now", 'tourfic');
 
 	if ( ! function_exists( 'partial_payment_tag_replacement' ) ) {
 		function partial_payment_tag_replacement( $text, $arr ) {
@@ -783,7 +783,7 @@ function tf_single_tour_booking_form( $post_id ) {
                     <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/thank-you.gif" alt="Thank You">
                     <h2>
 					<?php
-					$booking_confirmation_msg = !empty(tfopt( 'booking-confirmation-msg' )) ? tfopt( 'booking-confirmation-msg' ) : 'Booked Successfully';
+					$booking_confirmation_msg = !empty(Helper::tfopt( 'booking-confirmation-msg' )) ? Helper::tfopt( 'booking-confirmation-msg' ) : 'Booked Successfully';
 					echo esc_html($booking_confirmation_msg);
 					?>
 					</h2>
@@ -805,7 +805,7 @@ function tf_single_tour_booking_form( $post_id ) {
 									$tour_extras          = unserialize( $tour_extras_unserial );
 
 							    }
-							    $traveller_info_coll_global = function_exists('is_tf_pro') && is_tf_pro() && !empty(tfopt( 'disable_traveller_info' )) ? tfopt( 'disable_traveller_info' ) : '';
+							    $traveller_info_coll_global = function_exists('is_tf_pro') && is_tf_pro() && !empty(Helper::tfopt( 'disable_traveller_info' )) ? Helper::tfopt( 'disable_traveller_info' ) : '';
 
 							    $traveller_info_coll = function_exists('is_tf_pro') && is_tf_pro() && !empty($meta['tour-traveler-info']) ? $meta['tour-traveler-info'] : $traveller_info_coll_global;
 
@@ -844,8 +844,8 @@ function tf_single_tour_booking_form( $post_id ) {
                         <!-- Popup Tour Extra -->
 						<?php
 						// $popup_extra_default_text = "Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural";
-						$tour_popup_extra_text = function_exists('is_tf_pro') && is_tf_pro() && !empty(tfopt( 'tour_popup_extras_text' )) ? tfopt( 'tour_popup_extras_text' ) : '';
-						$traveler_details_text = function_exists('is_tf_pro') && is_tf_pro() && !empty(tfopt( 'tour_traveler_details_text' )) ? tfopt( 'tour_traveler_details_text' ) : '';
+						$tour_popup_extra_text = function_exists('is_tf_pro') && is_tf_pro() && !empty(Helper::tfopt( 'tour_popup_extras_text' )) ? Helper::tfopt( 'tour_popup_extras_text' ) : '';
+						$traveler_details_text = function_exists('is_tf_pro') && is_tf_pro() && !empty(Helper::tfopt( 'tour_traveler_details_text' )) ? Helper::tfopt( 'tour_traveler_details_text' ) : '';
 						if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_extras ) { ?>
                             <div class="tf-booking-content show tf-booking-content-1">
 								<p><?php echo esc_html( $tour_popup_extra_text ); ?></p>
@@ -922,7 +922,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                         <h4><?php echo esc_html__( "Billing details", "tourfic" ); ?></h4>
                                         <div class="traveller-info billing-details">
 											<?php
-											$confirm_book_fields = ! empty( tfopt( 'book-confirm-field' ) ) ? tf_data_types( tfopt( 'book-confirm-field' ) ) : '';
+											$confirm_book_fields = ! empty( Helper::tfopt( 'book-confirm-field' ) ) ? tf_data_types( Helper::tfopt( 'book-confirm-field' ) ) : '';
 											if ( empty( $confirm_book_fields ) ) {
 												?>
                                                 <div class="traveller-single-info tf-confirm-fields">
@@ -1053,8 +1053,8 @@ function tf_single_tour_booking_form( $post_id ) {
 						    $tf_deposit_amount =  array (
 								"{amount}" => $meta['deposit_type'] == 'fixed' ? wp_kses_post(wc_price( $meta['deposit_amount'] )) : $meta['deposit_amount']. '%'
 							);
-							$tf_partial_payment_label = !empty(tfopt("deposit-title")) ? tfopt("deposit-title") : '';
-							$tf_partial_payment_description = !empty(tfopt("deposit-subtitle")) ? tfopt("deposit-subtitle") : '';
+							$tf_partial_payment_label = !empty(Helper::tfopt("deposit-title")) ? Helper::tfopt("deposit-title") : '';
+							$tf_partial_payment_description = !empty(Helper::tfopt("deposit-subtitle")) ? Helper::tfopt("deposit-subtitle") : '';
 						    ?>
                             <div class="tf-diposit-switcher">
                                 <label class="switch">
@@ -1986,7 +1986,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
     $adult_price          = !empty( $meta['adult_price'] ) ? $meta['adult_price'] : false;
     $child_price          = !empty( $meta['child_price'] ) ? $meta['child_price'] : false;
     $infant_price         = !empty( $meta['infant_price'] ) ? $meta['infant_price'] : false;
-    $tour_archive_page_price_settings = !empty(tfopt('tour_archive_price_minimum_settings')) ? tfopt('tour_archive_price_minimum_settings') : 'all';
+    $tour_archive_page_price_settings = !empty(Helper::tfopt('tour_archive_price_minimum_settings')) ? Helper::tfopt('tour_archive_price_minimum_settings') : 'all';
 
 	if ( ! empty( $check_in_out ) ) {
 		list( $tf_form_start, $tf_form_end ) = explode( ' - ', $check_in_out );
@@ -2181,7 +2181,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
         }
     }
     
-    $tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
+    $tf_tour_arc_selected_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
     
     if( $tf_tour_arc_selected_template=="design-1"){
     ?>
@@ -2726,7 +2726,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 					}
 					?>
 					<?php
-                    $hide_price = tfopt( 't-hide-start-price' );
+                    $hide_price = Helper::tfopt( 't-hide-start-price' );
                     if ( isset( $hide_price ) && $hide_price !== '1' && ! empty( $tour_price )) :
 						?>
                         <div class="tf-tour-price">
@@ -3214,19 +3214,19 @@ if ( ! function_exists( 'tf_tour_search_ajax_callback' ) ) {
 			'message' => '',
 		];
 
-		if ( tfopt( 'required_location_tour_search' ) && (! isset( $_POST['place'] ) || empty( $_POST['place'] ) ) ) {
+		if ( Helper::tfopt( 'required_location_tour_search' ) && (! isset( $_POST['place'] ) || empty( $_POST['place'] ) ) ) {
 			$response['message'] = esc_html__( 'Please enter your location', 'tourfic' );
-		} elseif ( tfopt( 'date_tour_search' ) && ( ! isset( $_POST['check-in-out-date'] ) || empty( $_POST['check-in-out-date'] ) ) ) {
+		} elseif ( Helper::tfopt( 'date_tour_search' ) && ( ! isset( $_POST['check-in-out-date'] ) || empty( $_POST['check-in-out-date'] ) ) ) {
 			$response['message'] = esc_html__( 'Please select a date', 'tourfic' );
 		}
 
-		if ( tfopt( 'date_tour_search' ) ) {
+		if ( Helper::tfopt( 'date_tour_search' ) ) {
 			if ( ! empty( $_POST['check-in-out-date'] ) ) {
 				$response['query_string'] = str_replace( '&action=tf_tour_search', '', http_build_query( $_POST ) );
 				$response['status']       = 'success';
 			}
 		} else {
-			if ( ! tfopt( 'required_location_tour_search' ) || ! empty( $_POST['place'] ) ) {
+			if ( ! Helper::tfopt( 'required_location_tour_search' ) || ! empty( $_POST['place'] ) ) {
 				$response['query_string'] = str_replace( '&action=tf_tour_search', '', http_build_query( $_POST ) );
 				$response['status']       = 'success';
 			}
@@ -3971,7 +3971,7 @@ function tf_tour_booking_popup_callback() {
 				}
 			}
 		}
-		$traveller_info_fields = ! empty( tfopt( 'without-payment-field' ) ) ? tf_data_types( tfopt( 'without-payment-field' ) ) : '';
+		$traveller_info_fields = ! empty( Helper::tfopt( 'without-payment-field' ) ) ? tf_data_types( Helper::tfopt( 'without-payment-field' ) ) : '';
 
 		$response['traveller_info']    = '';
 		$response['traveller_summery'] = '';
@@ -4043,7 +4043,7 @@ function tf_tour_booking_popup_callback() {
 
 			$response['traveller_info'] .= '</div>
             </div>';
-			$tour_date_format_for_users = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+			$tour_date_format_for_users = !empty(Helper::tfopt( "tf-date-format-for-users")) ? Helper::tfopt( "tf-date-format-for-users") : "Y/m/d";
 			if ( ! function_exists( 'tf_date_format_user' ) ) {
 				function tf_date_format_user($date, $format) {
 					if(!empty($date) && !empty($format)) {

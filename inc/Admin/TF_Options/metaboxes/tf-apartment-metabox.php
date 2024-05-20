@@ -2,8 +2,10 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+use \Tourfic\Classes\Helper;
+
 function tf_apt_amenities_cats() {
-	$amenities_cats = ! empty( tf_data_types( tfopt( 'amenities_cats' ) ) ) ? tf_data_types( tfopt( 'amenities_cats' ) ) : '';
+	$amenities_cats = ! empty( tf_data_types( Helper::tfopt( 'amenities_cats' ) ) ) ? tf_data_types( Helper::tfopt( 'amenities_cats' ) ) : '';
 	$all_cats       = [];
 	if ( ! empty( $amenities_cats ) && is_array( $amenities_cats ) ) {
 		foreach ( $amenities_cats as $key => $cat ) {

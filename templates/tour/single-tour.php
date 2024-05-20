@@ -3,6 +3,9 @@
  * Template: Signle Tour (Full width)
  */
 // Get header
+
+use \Tourfic\Classes\Helper;
+
 get_header();
 
 if ( !tf_is_woo_active() ) {
@@ -35,8 +38,8 @@ while ( have_posts() ) : the_post();
 	/**
 	 * Get global settings value
 	 */
-	$s_review  = ! empty( tfopt( 't-review' ) ) ? tfopt( 't-review' ) : '';
-	$s_related = ! empty( tfopt( 't-related' ) ) ? tfopt( 't-related' ) : '';
+	$s_review  = ! empty( Helper::tfopt( 't-review' ) ) ? Helper::tfopt( 't-review' ) : '';
+	$s_related = ! empty( Helper::tfopt( 't-related' ) ) ?Helper::tfopt( 't-related' ) : '';
 
 	/**
 	 * Disable Review Section
@@ -67,7 +70,7 @@ while ( have_posts() ) : the_post();
 	}
 
 	// date format for users
-	$tf_tour_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+	$tf_tour_date_format_for_users  = !empty(Helper::tfopt( "tf-date-format-for-users")) ? Helper::tfopt( "tf-date-format-for-users") : "Y/m/d";
 
 
 	if(!function_exists('tf_fixed_tour_start_date_changer')) {
@@ -116,7 +119,7 @@ while ( have_posts() ) : the_post();
 	$share_text = get_the_title();
 	$share_link = get_permalink( $post_id );
 	$disable_share_opt  = ! empty( $meta['t-share'] ) ? $meta['t-share'] : '';
-	$t_share  = ! empty( tfopt( 't-share' ) ) ? tfopt( 't-share' ) : 0;
+	$t_share  = ! empty( Helper::tfopt( 't-share' ) ) ? Helper::tfopt( 't-share' ) : 0;
 	$disable_share_opt = ! empty( $disable_share_opt ) ? $disable_share_opt : $t_share;
 	
 	// Location
@@ -136,8 +139,8 @@ while ( have_posts() ) : the_post();
 	$hero_title = ! empty( $meta['hero_title'] ) ? $meta['hero_title'] : '';
 
 	// Map Type
-	$tf_openstreet_map = ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "default";
-	$tf_google_map_key = !empty( tfopt( 'tf-googlemapapi' ) ) ? tfopt( 'tf-googlemapapi' ) : '';
+	$tf_openstreet_map = ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : "default";
+	$tf_google_map_key = !empty( Helper::tfopt( 'tf-googlemapapi' ) ) ? Helper::tfopt( 'tf-googlemapapi' ) : '';
 
 	// Highlights
 	$highlights = ! empty( $meta['additional_information'] ) ? $meta['additional_information'] : '';
@@ -154,18 +157,18 @@ while ( have_posts() ) : the_post();
 	$phone         = ! empty( $meta['phone'] ) ? $meta['phone'] : '';
 	$fax           = ! empty( $meta['fax'] ) ? $meta['fax'] : '';
 	$website       = ! empty( $meta['website'] ) ? $meta['website'] : '';
-	$itinerary_map = ! empty( tfopt('itinerary_map') ) && function_exists('is_tf_pro') && is_tf_pro() ? tfopt('itinerary_map') : 0;
-	$vendor_contact_info = !empty(tfopt("multi-vendor-setings")["vendor-contact-info"]) ? tfopt("multi-vendor-setings")["vendor-contact-info"] : 0;
+	$itinerary_map = ! empty( Helper::tfopt('itinerary_map') ) && function_exists('is_tf_pro') && is_tf_pro() ? Helper::tfopt('itinerary_map') : 0;
+	$vendor_contact_info = !empty(Helper::tfopt("multi-vendor-setings")["vendor-contact-info"]) ? Helper::tfopt("multi-vendor-setings")["vendor-contact-info"] : 0;
 	$author = !empty(get_userdata( get_post()->post_author )) ? get_userdata( get_post()->post_author) : array();
 
 	if ((is_plugin_active("tourfic-vendor/tourfic-vendor.php"))) {
 
 		if($vendor_contact_info == 1) {
 			if ( in_array( 'tf_vendor', $author->roles ) ) {
-				$email = !empty(tfopt("multi-vendor-setings")["email"]) ? tfopt("multi-vendor-setings")["email"] : "";
-				$phone = !empty(tfopt("multi-vendor-setings")["phone"]) ? tfopt("multi-vendor-setings")["phone"] : "";
-				$fax = !empty(tfopt("multi-vendor-setings")["fax"]) ? tfopt("multi-vendor-setings")["fax"] : "";
-				$website = !empty(tfopt("multi-vendor-setings")["website"]) ? tfopt("multi-vendor-setings")["website"] : "";
+				$email = !empty(Helper::tfopt("multi-vendor-setings")["email"]) ? Helper::tfopt("multi-vendor-setings")["email"] : "";
+				$phone = !empty(Helper::tfopt("multi-vendor-setings")["phone"]) ? Helper::tfopt("multi-vendor-setings")["phone"] : "";
+				$fax = !empty(Helper::tfopt("multi-vendor-setings")["fax"]) ? Helper::tfopt("multi-vendor-setings")["fax"] : "";
+				$website = !empty(Helper::tfopt("multi-vendor-setings")["website"]) ? Helper::tfopt("multi-vendor-setings")["website"] : "";
 			}
 		}
 	}
@@ -250,7 +253,7 @@ while ( have_posts() ) : the_post();
 	if("single"==$tf_tour_layout_conditions){
 		$tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'design-1';
 	}
-	$tf_tour_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-tour'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-tour'] : 'design-1';
+	$tf_tour_global_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour'] : 'design-1';
 	$tf_tour_selected_check = !empty($tf_tour_single_template) ? $tf_tour_single_template : $tf_tour_global_template;
 
 	$tf_tour_selected_template = $tf_tour_selected_check;

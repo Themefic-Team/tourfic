@@ -22,10 +22,10 @@ $payment_details = array(
 
 <div style="padding-left:40px;padding-right:40px;margin: 0 auto;padding-top:30px;border: 1px solid #ddd;font-family: Inter,sans-serif">
 	<h3 class="greeting" style="margin: 0; padding: 0;color:#5a5a5a;font-family: Inter,sans-serif;font-size:24px;">
-	<?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'order_confirmation', $args['send_to'], 'greeting' ) ); ?>
+	<?php echo esc_html( \Tourfic\Admin\Emails\TF_Handle_Emails::get_emails_strings( 'order_confirmation', $args['send_to'], 'greeting' ) ); ?>
 	</h3>
 	<p style="margin: 10px 0;font-family: Inter,sans-serif">
-		<?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'order_confirmation', $args['send_to'], 'greeting_byline' ) ); ?>
+		<?php echo esc_html( \Tourfic\Admin\Emails\TF_Handle_Emails::get_emails_strings( 'order_confirmation', $args['send_to'], 'greeting_byline' ) ); ?>
 	</p>
 	<div class="order-table">
 		{booking_details}                

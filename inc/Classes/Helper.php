@@ -191,4 +191,10 @@ class Helper {
 		<!-- dashboard-top-section -->
 		<?php
 	}
+
+	static function tfopt( $option = '', $default = null ) {
+		$options = get_option( 'tf_settings' );
+
+		return ( isset( $options[ $option ] ) ) ? $options[ $option ] : $default;
+	}
 }

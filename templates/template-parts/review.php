@@ -7,6 +7,8 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+use \Tourfic\Classes\Helper;
+
 /*
  * If the current post is protected by a password and
  * the visitor has not yet entered the password we will
@@ -24,7 +26,7 @@ global $current_user;
 $is_user_logged_in = $current_user->exists();
 $post_id           = $post->ID;
 // Get settings value
-$tf_ratings_for = tfopt( 'r-for' ) ?? [ 'li', 'lo' ];
+$tf_ratings_for = Helper::tfopt( 'r-for' ) ?? [ 'li', 'lo' ];
 
 if( get_post_type($post_id) == 'tf_tours' ){
 
@@ -34,7 +36,7 @@ if( get_post_type($post_id) == 'tf_tours' ){
 	if("single"==$tf_tour_layout_conditions){
     	$tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'design-1';
 	}
-	$tf_tour_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-tour'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-tour'] : 'design-1';
+	$tf_tour_global_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour'] : 'design-1';
 
 	$tf_tour_selected_check = !empty($tf_tour_single_template) ? $tf_tour_single_template : $tf_tour_global_template;
 
@@ -49,7 +51,7 @@ if( get_post_type($post_id) == 'tf_hotel' ){
 	if("single"==$tf_hotel_layout_conditions){
     	$tf_hotel_single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
 	}
-	$tf_hotel_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
+	$tf_hotel_global_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
 
 	$tf_hotel_selected_check = !empty($tf_hotel_single_template) ? $tf_hotel_single_template : $tf_hotel_global_template;
 
@@ -65,7 +67,7 @@ if( get_post_type($post_id) == 'tf_apartment' ){
 	if("single"==$tf_apartment_layout_conditions){
     	$tf_apartment_single_template = ! empty( $meta['tf_single_apartment_template'] ) ? $meta['tf_single_apartment_template'] : 'default';
 	}
-	$tf_apartment_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-apartment'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-apartment'] : 'default';
+	$tf_apartment_global_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] : 'default';
 
 	$tf_apartment_selected_template = !empty($tf_apartment_single_template) ? $tf_apartment_single_template : $tf_apartment_global_template;
 
@@ -102,7 +104,7 @@ if ( $comments ) {
 			?>
 			<div class="tf-progress-item">
 				<div class="tf-progress-bar">
-					<span class="percent-progress" style="width: <?php echo esc_html(tf_average_rating_percent( $value, tfopt( 'r-base' ) )); ?>%"></span>
+					<span class="percent-progress" style="width: <?php echo esc_html(tf_average_rating_percent( $value, Helper::tfopt( 'r-base' ) )); ?>%"></span>
 				</div>
 				<div class="tf-review-feature-label tf-flex tf-flex-space-bttn">
 					<p class="feature-label"><?php echo esc_html( $key ); ?></p>
@@ -280,7 +282,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 				$value                  = tf_average_ratings( $value );
 				$tf_rating_progress_bar .= '<div class="tf-single">';
 				$tf_rating_progress_bar .= '<div class="tf-text">' . $key . '</div>';
-				$tf_rating_progress_bar .= '<div class="tf-p-bar"><div class="percent-progress" data-width="' . tf_average_rating_percent( $value, tfopt( 'r-base' ) ) . '"></div></div>';
+				$tf_rating_progress_bar .= '<div class="tf-p-bar"><div class="percent-progress" data-width="' . tf_average_rating_percent( $value, Helper::tfopt( 'r-base' ) ) . '"></div></div>';
 				$tf_rating_progress_bar .= '<div class="tf-p-b-rating">' . $value . '</div>';
 				$tf_rating_progress_bar .= '</div>';
 
