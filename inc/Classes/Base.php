@@ -28,6 +28,7 @@ class Base {
 			tf_file_missing( TF_INC_PATH . 'functions.php' );
 		}
 
+		\Tourfic\Classes\Migrator::instance();
 		\Tourfic\Classes\Helper::instance();
 		\Tourfic\Classes\Enqueue::instance();
 

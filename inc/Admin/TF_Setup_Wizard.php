@@ -1,10 +1,9 @@
 <?php
 
 namespace Tourfic\Admin;
+use Tourfic\Classes\Helper;
 
 defined( 'ABSPATH' ) || exit;
-
-use Tourfic\Classes\Helper;
 
 /**
  * Setup Wizard Class
@@ -1010,7 +1009,7 @@ class TF_Setup_Wizard {
                 <div class="tf-steps-item-container">
                     <div class="tf-steps-item-icon">
                             <span class="tf-steps-icon">
-                                <?php echo $active_step == 1 ? wp_kses( $active_icon, tf_custom_wp_kses_allow_tags() ) : wp_kses( $finish_icon, tf_custom_wp_kses_allow_tags() ); ?>
+                                <?php echo $active_step == 1 ? wp_kses( $active_icon, Helper::tf_custom_wp_kses_allow_tags() ) : wp_kses( $finish_icon, Helper::tf_custom_wp_kses_allow_tags() ); ?>
                             </span>
                     </div>
                 </div>
@@ -1022,7 +1021,7 @@ class TF_Setup_Wizard {
                     <div class="tf-steps-item-container">
                         <div class="tf-steps-item-icon">
                                 <span class="tf-steps-icon">
-                                    <?php echo $active_step == 2 ? wp_kses( $active_icon, tf_custom_wp_kses_allow_tags() ) : ( $active_step > 2 ? wp_kses( $finish_icon, tf_custom_wp_kses_allow_tags() ) : wp_kses( $inactive_icon, tf_custom_wp_kses_allow_tags() ) ); ?>
+                                    <?php echo $active_step == 2 ? wp_kses( $active_icon, Helper::tf_custom_wp_kses_allow_tags() ) : ( $active_step > 2 ? wp_kses( $finish_icon, Helper::tf_custom_wp_kses_allow_tags() ) : wp_kses( $inactive_icon, Helper::tf_custom_wp_kses_allow_tags() ) ); ?>
                                 </span>
                         </div>
                     </div>
@@ -1033,7 +1032,7 @@ class TF_Setup_Wizard {
                 <div class="tf-steps-item-container">
                     <div class="tf-steps-item-icon">
                             <span class="tf-steps-icon">
-                                <?php echo $active_step == 2 ? wp_kses( $active_icon, tf_custom_wp_kses_allow_tags() ) : ( $active_step > 2 ? wp_kses( $finish_icon, tf_custom_wp_kses_allow_tags() ) : wp_kses( $inactive_icon, tf_custom_wp_kses_allow_tags() ) ); ?>
+                                <?php echo $active_step == 2 ? wp_kses( $active_icon, Helper::tf_custom_wp_kses_allow_tags() ) : ( $active_step > 2 ? wp_kses( $finish_icon, Helper::tf_custom_wp_kses_allow_tags() ) : wp_kses( $inactive_icon, Helper::tf_custom_wp_kses_allow_tags() ) ); ?>
                             </span>
                     </div>
                 </div>
@@ -1042,7 +1041,7 @@ class TF_Setup_Wizard {
                 <div class="tf-steps-item-container">
                     <div class="tf-steps-item-icon">
                             <span class="tf-steps-icon">
-                                <?php echo $active_step == 3 ? wp_kses( $active_icon, tf_custom_wp_kses_allow_tags() ) : ( $active_step > 3 ? wp_kses( $finish_icon, tf_custom_wp_kses_allow_tags() ) : wp_kses( $inactive_icon, tf_custom_wp_kses_allow_tags() ) ); ?>
+                                <?php echo $active_step == 3 ? wp_kses( $active_icon, Helper::tf_custom_wp_kses_allow_tags() ) : ( $active_step > 3 ? wp_kses( $finish_icon, Helper::tf_custom_wp_kses_allow_tags() ) : wp_kses( $inactive_icon, Helper::tf_custom_wp_kses_allow_tags() ) ); ?>
                             </span>
                     </div>
                 </div>
@@ -1052,7 +1051,7 @@ class TF_Setup_Wizard {
                 <div class="tf-steps-item-container">
                     <div class="tf-steps-item-icon">
                             <span class="tf-steps-icon">
-                                <?php echo $active_step == 4 ? wp_kses( $active_icon, tf_custom_wp_kses_allow_tags() ) : ( $active_step > 4 ? wp_kses( $finish_icon, tf_custom_wp_kses_allow_tags() ) : wp_kses( $inactive_icon, tf_custom_wp_kses_allow_tags() ) ); ?>
+                                <?php echo $active_step == 4 ? wp_kses( $active_icon, Helper::tf_custom_wp_kses_allow_tags() ) : ( $active_step > 4 ? wp_kses( $finish_icon, Helper::tf_custom_wp_kses_allow_tags() ) : wp_kses( $inactive_icon, Helper::tf_custom_wp_kses_allow_tags() ) ); ?>
                             </span>
                     </div>
                 </div>
@@ -1062,7 +1061,7 @@ class TF_Setup_Wizard {
                 <div class="tf-steps-item-container">
                     <div class="tf-steps-item-icon">
                             <span class="tf-steps-icon">
-                                <?php echo $active_step == 5 ? wp_kses( $active_icon, tf_custom_wp_kses_allow_tags() ) : ( $active_step > 5 ? wp_kses( $finish_icon, tf_custom_wp_kses_allow_tags() ) : wp_kses( $inactive_icon, tf_custom_wp_kses_allow_tags() ) ); ?>
+                                <?php echo $active_step == 5 ? wp_kses( $active_icon, Helper::tf_custom_wp_kses_allow_tags() ) : ( $active_step > 5 ? wp_kses( $finish_icon, Helper::tf_custom_wp_kses_allow_tags() ) : wp_kses( $inactive_icon, Helper::tf_custom_wp_kses_allow_tags() ) ); ?>
                             </span>
                     </div>
                 </div>

@@ -2,6 +2,8 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+use \Tourfic\Classes\Helper;
+
 if ( file_exists( TF_ADMIN_PATH . 'TF_Options/options/tf-menu-icon.php' ) ) {
 	require_once TF_ADMIN_PATH . 'TF_Options/options/tf-menu-icon.php';
 } else {
@@ -1594,7 +1596,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'notice',
 									'type'    => 'notice',
-									'content' => wp_kses(__( 'Use shortcode <code>[tf_registration_form]</code> to show registration form in post/page/widget.', 'tourfic' ), tf_custom_wp_kses_allow_tags() ),
+									'content' => wp_kses(__( 'Use shortcode <code>[tf_registration_form]</code> to show registration form in post/page/widget.', 'tourfic' ), Helper::tf_custom_wp_kses_allow_tags() ),
 								),
 								array(
 									'id'       => 'email-verify',
@@ -1613,7 +1615,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'notice_shortcode',
 									'type'    => 'notice',
-									'content' => wp_kses(__( 'Use shortcode <code>[tf_login_form]</code> to show login form in post/page/widget.', 'tourfic' ), tf_custom_wp_kses_allow_tags() ),
+									'content' => wp_kses(__( 'Use shortcode <code>[tf_login_form]</code> to show login form in post/page/widget.', 'tourfic' ), Helper::tf_custom_wp_kses_allow_tags() ),
 								),
 								array(
 									'id'         => 'partner_commission',

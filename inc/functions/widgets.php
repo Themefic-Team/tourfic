@@ -2,6 +2,8 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+use \Tourfic\Classes\Helper;
+
 /**
  * Hotel filter by features
  *
@@ -63,7 +65,7 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
                 $default_count = $term->count;
                 $count = $show_count ? '<span>' . tf_term_count( $term->slug, $destination_name, $default_count ) . '</span>' : '';
                 $defult_select =  in_array($fslug, $search_features_query) ? 'checked' : '';
-                echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tf_filters[]' value='{$id}' {$defult_select}/><span class='checkmark'></span> {$name}</label> {$count}</li>", tf_custom_wp_kses_allow_tags() );
+                echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tf_filters[]' value='{$id}' {$defult_select}/><span class='checkmark'></span> {$name}</label> {$count}</li>", Helper::tf_custom_wp_kses_allow_tags() );
             }
             echo "</ul><a href='#' class='see-more btn-link'>" . esc_html__( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a><a href='#' class='see-less btn-link'>" . esc_html__( 'See Less', 'tourfic' ) . "<span class='fa fa-angle-up'></span></a></div>";
 
@@ -213,7 +215,7 @@ class TF_Hotel_Type_Filter extends WP_Widget {
                 $default_count = $term->count;
                 $count = $show_count ? '<span>' . tf_term_count( $term->slug, $destination_name, $default_count ) . '</span>' : '';
                 $defult_select =  in_array($fslug, $search_types_query) ? 'checked' : '';
-                echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tf_hotel_types[]' value='{$id}' {$defult_select}/><span class='checkmark'></span> {$name}</label> {$count}</li>", tf_custom_wp_kses_allow_tags());
+                echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tf_hotel_types[]' value='{$id}' {$defult_select}/><span class='checkmark'></span> {$name}</label> {$count}</li>", Helper::tf_custom_wp_kses_allow_tags());
             }
             echo "</ul><a href='#' class='see-more btn-link'>" . esc_html__( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a><a href='#' class='see-less btn-link'>" . esc_html__( 'See Less', 'tourfic' ) . "<span class='fa fa-angle-up'></span></a></div>";
 
@@ -359,7 +361,7 @@ class TF_Tour_Feature_Filter extends WP_Widget {
                 $default_count = $term->count;
                 $count = $show_count ? '<span>(' . $default_count . ')</span>' : '';
 
-                echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tour_features[]' value='{$id}'/><span class='checkmark'></span> {$name}</label> {$count}</li>", tf_custom_wp_kses_allow_tags());
+                echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tour_features[]' value='{$id}'/><span class='checkmark'></span> {$name}</label> {$count}</li>", Helper::tf_custom_wp_kses_allow_tags());
             }
             echo "</ul><a href='#' class='see-more btn-link'>" . esc_html__( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a><a href='#' class='see-less btn-link'>" . esc_html__( 'See Less', 'tourfic' ) . "<span class='fa fa-angle-up'></span></a></div>";
 
@@ -505,7 +507,7 @@ class TF_Tour_Attraction_Filter extends WP_Widget {
                 $default_count = $term->count;
                 $count = $show_count ? '<span>(' . $default_count . ')</span>' : '';
 
-                echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tf_attractions[]' value='{$id}'/><span class='checkmark'></span> {$name}</label> {$count}</li>", tf_custom_wp_kses_allow_tags() );
+                echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tf_attractions[]' value='{$id}'/><span class='checkmark'></span> {$name}</label> {$count}</li>", Helper::tf_custom_wp_kses_allow_tags() );
             }
             echo "</ul><a href='#' class='see-more btn-link'>" . esc_html__( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a><a href='#' class='see-less btn-link'>" . esc_html__( 'See Less', 'tourfic' ) . "<span class='fa fa-angle-up'></span></a></div>";
 
@@ -647,7 +649,7 @@ class TF_Tour_Activities_Filter extends WP_Widget {
                 $default_count = $term->count;
                 $count = $show_count ? '<span>(' . $default_count . ')</span>' : '';
 
-                echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tf_activities[]' value='{$id}'/><span class='checkmark'></span> {$name}</label> {$count}</li>", tf_custom_wp_kses_allow_tags());
+                echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tf_activities[]' value='{$id}'/><span class='checkmark'></span> {$name}</label> {$count}</li>", Helper::tf_custom_wp_kses_allow_tags());
             }
             echo "</ul><a href='#' class='see-more btn-link'>" . esc_html__( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a><a href='#' class='see-less btn-link'>" . esc_html__( 'See Less', 'tourfic' ) . "<span class='fa fa-angle-up'></span></a></div>";
 
@@ -796,7 +798,7 @@ class TF_Tour_Type_Filter extends WP_Widget {
 				$default_count = $term->count;
 				$count = $show_count ? '<span>(' . $default_count . ')</span>' : '';
 				$defult_select =  in_array($fslug, $search_types_query) ? 'checked' : '';
-				echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tf_tour_types[]' value='{$id}' {$defult_select}/><span class='checkmark'></span> {$name}</label> {$count}</li>", tf_custom_wp_kses_allow_tags() );
+				echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tf_tour_types[]' value='{$id}' {$defult_select}/><span class='checkmark'></span> {$name}</label> {$count}</li>", Helper::tf_custom_wp_kses_allow_tags() );
 			}
 			echo "</ul><a href='#' class='see-more btn-link'>" . esc_html__( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a><a href='#' class='see-less btn-link'>" . esc_html__( 'See Less', 'tourfic' ) . "<span class='fa fa-angle-up'></span></a></div>";
 
@@ -946,7 +948,7 @@ class TF_Apartment_Features_Filter extends WP_Widget {
 				$default_count = $term->count;
 				$count = $show_count ? '<span>' . ( $default_count ) . '</span>' : '';
 				$defult_select =  in_array($fslug, $search_types_query) ? 'checked' : '';
-				echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tf_apartment_features[]' value='{$id}' {$defult_select}/><span class='checkmark'></span> {$name}</label> {$count}</li>", tf_custom_wp_kses_allow_tags() );
+				echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tf_apartment_features[]' value='{$id}' {$defult_select}/><span class='checkmark'></span> {$name}</label> {$count}</li>", Helper::tf_custom_wp_kses_allow_tags() );
 			}
 			echo "</ul><a href='#' class='see-more btn-link'>" . esc_html__( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a><a href='#' class='see-less btn-link'>" . esc_html__( 'See Less', 'tourfic' ) . "<span class='fa fa-angle-up'></span></a></div>";
 
@@ -1095,7 +1097,7 @@ class TF_Apartment_Type_Filter extends WP_Widget {
 				$default_count = $term->count;
 				$count = $show_count ? '<span>' . ( $default_count ) . '</span>' : '';
 				$defult_select =  in_array($fslug, $search_types_query) ? 'checked' : '';
-				echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tf_apartment_types[]' value='{$id}' {$defult_select}/><span class='checkmark'></span> {$name}</label> {$count}</li>", tf_custom_wp_kses_allow_tags() );
+				echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tf_apartment_types[]' value='{$id}' {$defult_select}/><span class='checkmark'></span> {$name}</label> {$count}</li>", Helper::tf_custom_wp_kses_allow_tags() );
 			}
 			echo "</ul><a href='#' class='see-more btn-link'>" . esc_html__( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a><a href='#' class='see-less btn-link'>" . esc_html__( 'See Less', 'tourfic' ) . "<span class='fa fa-angle-up'></span></a></div>";
 
