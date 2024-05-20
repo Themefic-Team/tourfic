@@ -1,3 +1,8 @@
+<?php
+use \Tourfic\Classes\Helper;
+
+?>
+
 <div class="tf-booking-details-preview">
     <div class="tf-details-preview-header">
         <div class="tf-back">
