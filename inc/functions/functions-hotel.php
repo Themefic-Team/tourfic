@@ -849,7 +849,7 @@ function tf_room_availability_callback() {
 
 	if ( ! empty( $rows ) ) {
 
-		echo wp_kses( $rows, tf_custom_wp_kses_allow_tags()) . '</tbody> </table> </div>';
+		echo wp_kses( $rows, Helper::tf_custom_wp_kses_allow_tags()) . '</tbody> </table> </div>';
 
 	} else {
 

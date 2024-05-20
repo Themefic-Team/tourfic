@@ -1,16 +1,13 @@
 <?php
 namespace Tourfic\Admin\Emails;
+use Tourfic\Classes\Helper;
 
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-use Tourfic\Classes\Helper;
-
-
 class TF_Handle_Emails {
 
 	use \Tourfic\Traits\Singleton;
-    // use \Tourfic\Traits\Helper;
 
     //free email settings
     protected static $tf_email_settings;
