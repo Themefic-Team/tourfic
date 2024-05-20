@@ -3,6 +3,8 @@
  * Template: Hotel Location Archive
  */
 
+ use \Tourfic\Classes\Helper;
+
 get_header();
 
 if ( !tf_is_woo_active() ) {
@@ -27,7 +29,7 @@ $max = '8';
 $tf_location_meta      = get_term_meta( $term->term_id, 'tf_hotel_location', true );
 $tf_location_image = ! empty( $tf_location_meta['image'] ) ? $tf_location_meta['image'] : '';
 
-$tf_hotel_arc_selected_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
+$tf_hotel_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
 
 if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
 ?>

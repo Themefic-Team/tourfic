@@ -3,6 +3,8 @@
  * Template: Tour Destination Archive
  */
 
+ use \Tourfic\Classes\Helper;
+
 get_header();
 
 if ( !tf_is_woo_active() ) {
@@ -27,7 +29,7 @@ $max = '2';
 $tf_location_meta      = get_term_meta( $term->term_id, 'tf_tour_destination', true );
 $tf_location_image = ! empty( $tf_location_meta['image'] ) ? $tf_location_meta['image'] : '';
 
-$tf_tour_arc_selected_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
+$tf_tour_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
 
 if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
 ?>

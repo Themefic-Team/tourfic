@@ -3,6 +3,9 @@
  * Template: Single Hotel (Full Width)
  */
 
+
+ use \Tourfic\Classes\Helper;
+
 get_header();
 
 if ( !tf_is_woo_active() ) {
@@ -92,12 +95,12 @@ while ( have_posts() ) : the_post();
 
 	// Location
 
-	if( !empty($meta['map']) && tf_data_types($meta['map'])){
-		$address = !empty( tf_data_types($meta['map'])['address'] ) ? tf_data_types($meta['map'])['address'] : '';
+	if( !empty($meta['map']) && Helper::tf_data_types($meta['map'])){
+		$address = !empty( Helper::tf_data_types($meta['map'])['address'] ) ? Helper::tf_data_types($meta['map'])['address'] : '';
 
-		$address_latitude = !empty( tf_data_types($meta['map'])['latitude'] ) ? tf_data_types($meta['map'])['latitude'] : '';
-		$address_longitude = !empty( tf_data_types($meta['map'])['longitude'] ) ? tf_data_types($meta['map'])['longitude'] : '';
-		$address_zoom = !empty( tf_data_types($meta['map'])['zoom'] ) ? tf_data_types($meta['map'])['zoom'] : '';
+		$address_latitude = !empty( Helper::tf_data_types($meta['map'])['latitude'] ) ? Helper::tf_data_types($meta['map'])['latitude'] : '';
+		$address_longitude = !empty( Helper::tf_data_types($meta['map'])['longitude'] ) ? Helper::tf_data_types($meta['map'])['longitude'] : '';
+		$address_zoom = !empty( Helper::tf_data_types($meta['map'])['zoom'] ) ? Helper::tf_data_types($meta['map'])['zoom'] : '';
 
     }
 
@@ -136,7 +139,7 @@ while ( have_posts() ) : the_post();
 	if("single"==$tf_hotel_layout_conditions){
 		$tf_hotel_single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
 	}
-	$tf_hotel_global_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
+	$tf_hotel_global_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
 
 	$tf_hotel_selected_check = !empty($tf_hotel_single_template) ? $tf_hotel_single_template : $tf_hotel_global_template;
 

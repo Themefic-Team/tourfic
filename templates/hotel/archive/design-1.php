@@ -1,3 +1,7 @@
+<?php
+use \Tourfic\Classes\Helper;
+?>
+
 <div class="tf-archive-page tf-template-global tf-archive-design-1">
     <div class="tf-container">
         <div class="tf-row tf-archive-inner tf-flex">
@@ -17,7 +21,7 @@
 						<span><?php echo ')'; ?> </span>
                     </div>
                     <?php 
-                    $tf_defult_views = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] : 'list';
+                    $tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] : 'list';
                     ?>
                     <div class="tf-search-layout tf-flex tf-flex-gap-12">
                         <div class="tf-icon tf-serach-layout-list tf-list-active tf-grid-list-layout <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" data-id="list-view">
