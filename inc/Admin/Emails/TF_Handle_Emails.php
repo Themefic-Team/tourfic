@@ -4,10 +4,13 @@ namespace Tourfic\Admin\Emails;
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+use Tourfic\Classes\Helper;
+
+
 class TF_Handle_Emails {
 
 	use \Tourfic\Traits\Singleton;
-	use \Tourfic\Traits\Helper;
+    // use \Tourfic\Traits\Helper;
 
     //free email settings
     protected static $tf_email_settings;
@@ -20,8 +23,8 @@ class TF_Handle_Emails {
      * Constructor
      */
     public function __construct() {
-        self::$tf_email_settings = self::tfopt( 'email-settings' ) ? self::tfopt( 'email-settings' ) : array();
-        self::$tf_email_template_settings = !empty( self::tfopt( 'email_template_settings' ) ) ? self::tfopt( 'email_template_settings' ) : array();
+        self::$tf_email_settings = Helper::tfopt( 'email-settings' ) ? Helper::tfopt( 'email-settings' ) : array();
+        self::$tf_email_template_settings = !empty( Helper::tfopt( 'email_template_settings' ) ) ? Helper::tfopt( 'email_template_settings' ) : array();
         
         
         //send mail if Tourfic pro is active
@@ -959,7 +962,7 @@ class TF_Handle_Emails {
             //booking details end
 
             //customer details Start
-            $tf_booking_fields = !empty(self::tfopt( 'book-confirm-field' )) ? self::tf_data_types(self::tfopt( 'book-confirm-field' )) : '';
+            $tf_booking_fields = !empty(self::tfopt( 'book-confirm-field' )) ? self::Helper::tf_data_types(self::tfopt( 'book-confirm-field' )) : '';
             
             $booking_details .= '<table style="width: 100%; max-width: 600px; margin-top: 15px; margin-bottom: 15px; border: none;"><tbody><tr><td style="background-color: #f2f9fe; padding: 20px; float: left;"> <h3 style="font-size: 16px; font-weight: bold; color: #0209af; margin: 0;">Billing address</h3>';
             if(!empty($tf_booking_fields)){
@@ -1203,7 +1206,7 @@ class TF_Handle_Emails {
                 
     
                 //customer details Start
-                $tf_booking_fields = !empty(self::tfopt( 'book-confirm-field' )) ? self::tf_data_types(self::tfopt( 'book-confirm-field' )) : '';
+                $tf_booking_fields = !empty(self::tfopt( 'book-confirm-field' )) ? self::Helper::tf_data_types(self::tfopt( 'book-confirm-field' )) : '';
                 
                 $booking_details .= '<table style="width: 100%; max-width: 600px; margin-top: 15px; margin-bottom: 15px; border: none;"><tbody><tr><td style="background-color: #f2f9fe; padding: 20px; float: left;"> <h3 style="font-size: 16px; font-weight: bold; color: #0209af; margin: 0;">Billing address</h3>';
                 if(!empty($tf_booking_fields)){
@@ -1366,7 +1369,7 @@ class TF_Handle_Emails {
                 
     
                 //customer details Start
-                $tf_booking_fields = !empty(self::tfopt( 'book-confirm-field' )) ? self::tf_data_types(self::tfopt( 'book-confirm-field' )) : '';
+                $tf_booking_fields = !empty(self::tfopt( 'book-confirm-field' )) ? self::Helper::tf_data_types(self::tfopt( 'book-confirm-field' )) : '';
                 
                 $booking_details .= '<table style="width: 100%; max-width: 600px; margin-top: 15px; margin-bottom: 15px; border: none;"><tbody><tr><td style="background-color: #f2f9fe; padding: 20px; float: left;"> <h3 style="font-size: 16px; font-weight: bold; color: #0209af; margin: 0;">Billing address</h3>';
                 if(!empty($tf_booking_fields)){

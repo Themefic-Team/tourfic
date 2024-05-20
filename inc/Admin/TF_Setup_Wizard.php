@@ -4,6 +4,8 @@ namespace Tourfic\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
+use Tourfic\Classes\Helper;
+
 /**
  * Setup Wizard Class
  * @since 2.9.3
@@ -681,12 +683,12 @@ class TF_Setup_Wizard {
 	 * Template Settings
 	 */
 	private function tf_setup_step_six() {
-		$tf_hotel_single_template      = ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] ) ? tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] : 'design-1';
-		$tf_hotel_archive_template     = ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] ) ? tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
-		$tf_tour_single_template       = ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] ) ? tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
-		$tf_tour_archive_template      = ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] ) ? tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] : 'design-1';
-		$tf_apartment_single_template  = ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] ) ? tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] : 'default';
-		$tf_apartment_archive_template = ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment-archive'] ) ? tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment-archive'] : 'default';
+		$tf_hotel_single_template      = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] : 'design-1';
+		$tf_hotel_archive_template     = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
+		$tf_tour_single_template       = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
+		$tf_tour_archive_template      = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] : 'design-1';
+		$tf_apartment_single_template  = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] : 'default';
+		$tf_apartment_archive_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment-archive'] : 'default';
 		?>
         <div class="tf-setup-step-container tf-setup-step-6 <?php echo self::$current_step == 'step_6' ? 'active' : ''; ?>" data-step="6">
 
