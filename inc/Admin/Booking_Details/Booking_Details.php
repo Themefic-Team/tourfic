@@ -502,31 +502,61 @@ Class Booking_Details {
                                 <h3><?php esc_html_e("Other details", "tourfic"); ?></h3>
                                 <div class="tf-single-box">
                                     <table class="table">
-                                        <?php if( "tour" == $tf_order_details->post_type ) { ?>
-                                            <?php if ( !empty($tf_tour_details->tour_date) ) { ?>
-                                                <tr>
-                                                    <th><?php esc_html_e("Tour Date", "tourfic"); ?></th>
-                                                    <td>:</td>
-                                                    <td><?php echo esc_html($tf_tour_details->tour_date); ?></td>
-                                                </tr>
-                                            <?php } ?>
-                                        <?php } else { ?>
-                                            <tr>
-                                                <th><?php esc_html_e("Check In", "tourfic"); ?></th>
-                                                <td>:</td>
-                                                <td><?php echo esc_html($tf_tour_details->check_in); ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th><?php esc_html_e("Check Out", "tourfic"); ?></th>
-                                                <td>:</td>
-                                                <td><?php echo esc_html($tf_tour_details->check_out); ?></td>
-                                            </tr>
-                                        <?php } ?>
+
+                                        <!-- Service Name -->
                                         <tr>
                                             <th><?php esc_html_e("Name", "tourfic"); ?></th>
                                             <td>:</td>
                                             <td><?php echo esc_html( get_the_title( $tf_order_details->post_id ) ); ?></td>
                                         </tr>
+
+                                        <!-- Tour Date -->
+                                        <?php if ( !empty($tf_tour_details->tour_date) ) { ?>
+                                            <tr>
+                                                <th><?php esc_html_e("Tour Date", "tourfic"); ?></th>
+                                                <td>:</td>
+                                                <td><?php echo esc_html($tf_tour_details->tour_date); ?></td>
+                                            </tr>
+                                        <?php } ?>
+
+                                        <!-- Checkin Date -->
+                                        <?php if(!empty($tf_tour_details->check_in)) : ?>
+                                            <tr>
+                                                <th><?php esc_html_e("Checkin", "tourfic"); ?></th>
+                                                <td>:</td>
+                                                <td><?php echo esc_html($tf_tour_details->check_in); ?></td>
+                                            </tr>
+                                        <?php endif; ?>  
+                                        
+                                        <!-- Checkout Date -->
+                                        <?php if(!empty($tf_tour_details->check_out)) : ?>
+                                            <tr>
+                                                <th><?php esc_html_e("Checkout", "tourfic"); ?></th>
+                                                <td>:</td>
+                                                <td><?php echo esc_html($tf_tour_details->check_out); ?></td>
+                                            </tr>
+                                        <?php endif; ?>
+                                        
+                                        <!-- Room Name -->
+                                        <?php if(!empty($tf_tour_details->room_name)) : ?>
+                                            <tr>
+                                                <th><?php esc_html_e("Room Name", "tourfic"); ?></th>
+                                                <td>:</td>
+                                                <td><?php echo esc_html($tf_tour_details->room_name); ?></td>
+                                            </tr>
+                                        <?php endif; ?>
+                                        
+                                        <!-- Room Count -->
+                                        <?php if(!empty($tf_tour_details->room)) : ?>
+                                            <tr>
+                                                <th><?php esc_html_e("Room", "tourfic"); ?></th>
+                                                <td>:</td>
+                                                <td><?php echo esc_html($tf_tour_details->room); ?></td>
+                                            </tr>
+                                        <?php endif; ?>
+
+                                        <!-- Tour Time -->
+
                                         <?php if ( !empty($tf_tour_details->tour_time) ) { ?>
                                         <tr>
                                             <th><?php esc_html_e("Time", "tourfic"); ?></th>
@@ -534,6 +564,8 @@ Class Booking_Details {
                                             <td><?php echo esc_html($tf_tour_details->tour_time); ?></td>
                                         </tr>
                                         <?php } ?>
+
+                                        <!-- Adults Count -->
                                         <?php 
                                         $tf_total_visitor = 0;
                                         $book_adult  = !empty( $tf_tour_details->adult ) ? $tf_tour_details->adult : '';
@@ -577,20 +609,21 @@ Class Booking_Details {
                                         $book_infants  = !empty( $tf_tour_details->infants ) ? $tf_tour_details->infants : '';
                                         if(!empty($book_infants)){
                                             $tf_total_infants = explode( " × ", $book_infants );
-                                        } ?>
-                                        <tr>
-                                            <th><?php esc_html_e("Infant", "tourfic"); ?></th>
-                                            <td>:</td>
-                                            <td>
-                                                <?php if(!empty($tf_total_infants[0])) {
-                                                    echo esc_html($tf_total_infants[0]); 
-                                                    $tf_total_visitor += $tf_total_infants[0];
-                                                }else{
-                                                    echo esc_html(0);
-                                                }
-                                                ?>    
-                                            </td>
-                                        </tr>
+                                            ?>
+                                            <tr>
+                                                <th><?php esc_html_e("Infant", "tourfic"); ?></th>
+                                                <td>:</td>
+                                                <td>
+                                                    <?php if(!empty($tf_total_infants[0])) {
+                                                        echo esc_html($tf_total_infants[0]); 
+                                                        $tf_total_visitor += $tf_total_infants[0];
+                                                    }else{
+                                                        echo esc_html(0);
+                                                    }
+                                                    ?>    
+                                                </td>
+                                            </tr>
+                                       <?php } ?>
 
                                     </table>
                                 </div>
@@ -677,11 +710,11 @@ Class Booking_Details {
                         </div>
                     </div>
 
-                    <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro()){ ?>
+                    <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tf_order_details->post_type == 'tour' ) { ?>
                     <!-- Visitor Details -->
                     <div class="customers-order-date details-box">
                         <h4>
-                            <?php esc_html_e("Visitor details", "tourfic"); ?>
+                            <?php $tf_order_details->post_type == 'tour' ? esc_html_e("Visitor details", "tourfic") : esc_html_e("Guest details", "tourfic"); ?>
                             <div class="others-button visitor_edit">
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -694,7 +727,7 @@ Class Booking_Details {
                         <div class="tf-grid-box tf-visitor-grid-box">
                             <?php 
                             $tf_visitors_details = !empty($tf_tour_details->visitor_details) ? json_decode($tf_tour_details->visitor_details) : '';
-                            $traveler_fields = !empty(Helper::tfopt('without-payment-field')) ? tf_data_types(Helper::tfopt('without-payment-field')) : '';
+                            $traveler_fields = !empty(Helper::tfopt('without-payment-field')) ? Helper::tf_data_types(Helper::tfopt('without-payment-field')) : '';
                             if(!empty($tf_visitors_details)){
                                 $visitor_count = 1;
                                 foreach($tf_visitors_details as $visitor){
@@ -772,8 +805,8 @@ Class Booking_Details {
                                     $tour_ides = !empty($tf_tour_details->unique_id) ? $tf_tour_details->unique_id : '';
                                     // Address
                                     $location = '';
-                                    if( !empty($meta['location']) && tf_data_types($meta['location'])){
-                                        $location = !empty( tf_data_types($meta['location'])['address'] ) ? tf_data_types($meta['location'])['address'] : $location;
+                                    if( !empty($meta['location']) && Helper::tf_data_types($meta['location'])){
+                                        $location = !empty( Helper::tf_data_types($meta['location'])['address'] ) ? Helper::tf_data_types($meta['location'])['address'] : $location;
                                     }
                                     // Tour Date
                                     $tour_date = !empty($tf_tour_details->tour_date) ? $tf_tour_details->tour_date : '';
