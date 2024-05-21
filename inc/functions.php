@@ -177,25 +177,6 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-fonts.php' ) ) {
 	tf_file_missing( TF_INC_PATH . 'functions/functions-fonts.php' );
 }
 
-/**
- * Elementor Widgets
- *
- */
-function tf_add_elelmentor_addon() {
-
-	// Check if Elementor installed and activated
-	if ( ! did_action( 'elementor/loaded' ) ) {
-		return;
-	}
-	// Once we get here, We have passed all validation checks so we can safely include our plugin
-	if ( file_exists( TF_INC_PATH . 'elementor/widget-register.php' ) ) {
-		require_once TF_INC_PATH . 'elementor/widget-register.php';
-	} else {
-		tf_file_missing( TF_INC_PATH . 'elementor/widget-register.php' );
-	}
-
-}
-
 add_action( 'plugins_loaded', 'tf_add_elelmentor_addon' );
 
 /**

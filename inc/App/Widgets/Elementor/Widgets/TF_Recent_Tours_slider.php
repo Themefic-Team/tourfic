@@ -1,12 +1,18 @@
 <?php
+
+namespace Tourfic\App\Widgets\Elementor\Widgets;
+
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Apartment Grid slider by location
- * @author Foysal
+ * Recent Hotel Slider
+ * 
+ * Slick
  */
-class TF_Apartment_Grid_Slider extends \Elementor\Widget_Base {
+class TF_Recent_Tours_slider extends \Elementor\Widget_Base {
+
+	use \Tourfic\Traits\Singleton;
 
 	/**
 	 * Retrieve the widget name.
@@ -16,7 +22,7 @@ class TF_Apartment_Grid_Slider extends \Elementor\Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'apartment-grid-slider';
+		return 'recent-tours-slider';
 	}
 
 	/**
@@ -27,7 +33,7 @@ class TF_Apartment_Grid_Slider extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'Apartments by Location', 'tourfic' );
+		return esc_html__( 'Recent Tours Slider', 'tourfic' );
 	}
 
 	/**
@@ -38,7 +44,7 @@ class TF_Apartment_Grid_Slider extends \Elementor\Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-posts-grid';
+		return 'eicon-carousel';
 	}
 
 	/**
@@ -65,12 +71,12 @@ class TF_Apartment_Grid_Slider extends \Elementor\Widget_Base {
 	 * @access protected
 	 */
 	protected function register_controls() {
-
+        
 		$this->start_controls_section(
 			'content',
 			[
-				'label' => esc_html__( 'Settings', 'tourfic' ),
-				'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
+				'label' => esc_html__( 'Content', 'tourfic' ),
+				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
 
@@ -78,8 +84,8 @@ class TF_Apartment_Grid_Slider extends \Elementor\Widget_Base {
 			'title',
 			[
 				'label' => esc_html__( 'Title', 'tourfic' ),
-				'type'  => \Elementor\Controls_Manager::TEXTAREA,
-				'rows'  => 1,
+				'type' => \Elementor\Controls_Manager::TEXTAREA,
+				'rows' => 1,
 			]
 		);
 
@@ -87,76 +93,63 @@ class TF_Apartment_Grid_Slider extends \Elementor\Widget_Base {
 			'subtitle',
 			[
 				'label' => esc_html__( 'Sub-Title', 'tourfic' ),
-				'type'  => \Elementor\Controls_Manager::TEXTAREA,
-				'rows'  => 2,
-			]
-		);
-
-		//get the location IDs
-		$locations = get_terms( array(
-			'taxonomy' => 'apartment_location',
-			'orderby'    => 'count',
-			'hide_empty' => 0,
-		) );
-
-		$term_ids = [];
-		foreach ( $locations as $location ) {
-			$term_ids[ $location->term_id ] = $location->name;
-		}
-		$this->add_control(
-			'locations',
-			[
-				'label'       => esc_html__( 'Locations', 'tourfic' ),
-				'type'        => \Elementor\Controls_Manager::SELECT2,
-				'options'     => $term_ids,
-				'multiple'    => true,
+				'type' => \Elementor\Controls_Manager::TEXTAREA,
+				'rows' => 2,
 			]
 		);
 
 		$this->add_control(
 			'count',
 			[
-				'label'       => esc_html__( 'Total Apartments', 'tourfic' ),
-				'type'        => \Elementor\Controls_Manager::NUMBER,
-				'min'         => 1,
-				'default'     => 3,
+				'label' => esc_html__( 'Total Tours', 'tourfic' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'description' => esc_html__( 'Number of total tours to show. Min 3. Default to 7', 'tourfic' ),
+				'min' => 3,
+				'step' => 1,
+				'default' => 7,
 			]
 		);
+
 		$this->add_control(
-			'style',
+			'slidestoshow',
 			[
-				'label'       => esc_html__( 'Apartment Layout', 'tourfic' ),
-				'type'        => \Elementor\Controls_Manager::SELECT,
-				'options'     => array(
-					'grid'   => esc_html__( 'Grid', 'tourfic' ),
-					'slider' => esc_html__( 'Slider', 'tourfic' ),
-				),
-				'default'     => 'grid'
+				'label' => esc_html__( 'Slide to Show', 'tourfic' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'description' => esc_html__( 'Number of tours to show on the slider at a time. Min 1. Default to 3', 'tourfic' ),
+				'min' => 1,
+				'step' => 1,
+				'default' => 3,
 			]
 		);
+        
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
 			'style_section',
 			[
 				'label' => esc_html__( 'Style', 'tourfic' ),
-				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
 
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
-				'name'     => 'title_typography',
-				'label'    => esc_html__( 'Title Typography', 'tourfic' ),
+				'name' => 'title_typography',
+				'label' => esc_html__( 'Title Typography', 'tourfic' ),
 				'selector' => '{{WRAPPER}} .tf-widget-slider .tf-heading h2',
 			]
 		);
 		$this->add_control(
 			'title_color',
 			[
-				'label'     => esc_html__( 'Title Color', 'tourfic' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
+				'label' => esc_html__( 'Title Color', 'tourfic' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'scheme' => [
+					'type' => \Elementor\Core\Schemes\Color::get_type(),
+					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
+				],
 				'selectors' => [
 					'{{WRAPPER}} .tf-widget-slider .tf-heading h2' => 'color: {{VALUE}}',
 				],
@@ -173,8 +166,8 @@ class TF_Apartment_Grid_Slider extends \Elementor\Widget_Base {
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
-				'name'     => 'subtitle_typography',
-				'label'    => esc_html__( 'Subtitle Typography', 'tourfic' ),
+				'name' => 'subtitle_typography',
+				'label' => esc_html__( 'Subtitle Typography', 'tourfic' ),
 				'selector' => '{{WRAPPER}} .tf-widget-slider .tf-heading p',
 			]
 		);
@@ -182,8 +175,12 @@ class TF_Apartment_Grid_Slider extends \Elementor\Widget_Base {
 		$this->add_control(
 			'subtitle_color',
 			[
-				'label'     => esc_html__( 'Subtitle Color', 'tourfic' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
+				'label' => esc_html__( 'Subtitle Color', 'tourfic' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'scheme' => [
+					'type' => \Elementor\Core\Schemes\Color::get_type(),
+					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
+				],
 				'selectors' => [
 					'{{WRAPPER}} .tf-widget-slider .tf-heading p' => 'color: {{VALUE}}',
 				],
@@ -191,6 +188,7 @@ class TF_Apartment_Grid_Slider extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
+
 	}
 
 	/**
@@ -201,16 +199,13 @@ class TF_Apartment_Grid_Slider extends \Elementor\Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		$settings  = $this->get_settings_for_display();
-		$title     = $settings['title'];
-		$subtitle  = $settings['subtitle'];
-		$count     = $settings['count'];
-		$style     = $settings['style'];
-		$locations = $settings['locations'];
-		if ( is_array( $locations ) ) {
-			$locations = implode( ',', $locations );
-		}
-		echo do_shortcode( '[tf_apartment title="' . $title . '" subtitle="' . $subtitle . '" locations="' . $locations . '" style="' . $style . '" count="' . $count . '"]' );
+		$settings = $this->get_settings_for_display();
+		$title = $settings['title'];
+		$subtitle = $settings['subtitle'];
+		$count = $settings['count'];
+		$slidestoshow = $settings['slidestoshow'];
+
+        echo do_shortcode('[tf_recent_tour title="' .$title. '" subtitle="' .$subtitle. '" count="' .$count. '" slidestoshow="' .$slidestoshow. '"]');
 
 
 	}

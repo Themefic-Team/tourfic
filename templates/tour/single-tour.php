@@ -5,6 +5,7 @@
 // Get header
 
 use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\Tour\Pricing as Tour_Price;
 
 get_header();
 

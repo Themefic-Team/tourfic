@@ -1,12 +1,18 @@
 <?php
+
+namespace Tourfic\App\Widgets\Elementor\Widgets;
+
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Recent Apartment Slider
- * @author Foysal
+ * Recent Hotel Slider
+ * 
+ * Slick
  */
-class TF_Recent_Apartments_slider extends \Elementor\Widget_Base {
+class TF_Recent_Hotels_slider extends \Elementor\Widget_Base {
+
+	use \Tourfic\Traits\Singleton;
 
 	/**
 	 * Retrieve the widget name.
@@ -16,7 +22,7 @@ class TF_Recent_Apartments_slider extends \Elementor\Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'recent-apartment-slider';
+		return 'tourfic-slider';
 	}
 
 	/**
@@ -27,7 +33,7 @@ class TF_Recent_Apartments_slider extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'Recent Apartments Slider', 'tourfic' );
+		return esc_html__( 'Recent Hotels Slider', 'tourfic' );
 	}
 
 	/**
@@ -95,9 +101,9 @@ class TF_Recent_Apartments_slider extends \Elementor\Widget_Base {
 		$this->add_control(
 			'count',
 			[
-				'label' => esc_html__( 'Total Apartments', 'tourfic' ),
+				'label' => esc_html__( 'Total Hotels', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::NUMBER,
-				'description' => esc_html__( 'Number of total apartments to show. Min 3. Default to 7', 'tourfic' ),
+				'description' => esc_html__( 'Number of total hotels to show. Min 3. Default to 7', 'tourfic' ),
 				'min' => 3,
 				'step' => 1,
 				'default' => 7,
@@ -109,7 +115,7 @@ class TF_Recent_Apartments_slider extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Slide to Show', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::NUMBER,
-				'description' => esc_html__( 'Number of apartments to show on the slider at a time. Min 1. Default to 3', 'tourfic' ),
+				'description' => esc_html__( 'Number of hotels to show on the slider at a time. Min 1. Default to 3', 'tourfic' ),
 				'min' => 1,
 				'step' => 1,
 				'default' => 3,
@@ -140,6 +146,10 @@ class TF_Recent_Apartments_slider extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Title Color', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
+				'scheme' => [
+					'type' => \Elementor\Core\Schemes\Color::get_type(),
+					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
+				],
 				'selectors' => [
 					'{{WRAPPER}} .tf-widget-slider .tf-heading h2' => 'color: {{VALUE}}',
 				],
@@ -167,6 +177,10 @@ class TF_Recent_Apartments_slider extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Subtitle Color', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
+				'scheme' => [
+					'type' => \Elementor\Core\Schemes\Color::get_type(),
+					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
+				],
 				'selectors' => [
 					'{{WRAPPER}} .tf-widget-slider .tf-heading p' => 'color: {{VALUE}}',
 				],
@@ -191,7 +205,9 @@ class TF_Recent_Apartments_slider extends \Elementor\Widget_Base {
 		$count = $settings['count'];
 		$slidestoshow = $settings['slidestoshow'];
 
-        echo do_shortcode('[tf_recent_apartment title="' .$title. '" subtitle="' .$subtitle. '" count="' .$count. '" slidestoshow="' .$slidestoshow. '"]');
+        echo do_shortcode('[tf_recent_hotel title="' .$title. '" subtitle="' .$subtitle. '" count="' .$count. '" slidestoshow="' .$slidestoshow. '"]');
+
+
 	}
 
 

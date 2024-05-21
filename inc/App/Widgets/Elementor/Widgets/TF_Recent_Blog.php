@@ -1,13 +1,18 @@
 <?php
+
+namespace Tourfic\App\Widgets\Elementor\Widgets;
+
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Hotel Tour Grid slider by location
- * @since 2.8.9
+ * Recent Blog
+ * @since 2.9.0
  * @author Abu Hena
  */
-class TF_Hotel_Grid_Slider extends \Elementor\Widget_Base {
+class TF_Recent_Blog extends \Elementor\Widget_Base {
+
+	use \Tourfic\Traits\Singleton;
 
 	/**
 	 * Retrieve the widget name.
@@ -17,7 +22,7 @@ class TF_Hotel_Grid_Slider extends \Elementor\Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'hotel-grid-slider';
+		return 'recent-blog';
 	}
 
 	/**
@@ -28,7 +33,7 @@ class TF_Hotel_Grid_Slider extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'Hotels by Location', 'tourfic' );
+		return esc_html__( 'Recent Blog', 'tourfic' );
 	}
 
 	/**
@@ -94,25 +99,23 @@ class TF_Hotel_Grid_Slider extends \Elementor\Widget_Base {
 		);
 
 		//get the location IDs
-		//function tf_hotel_locations(){
-			$locations = get_terms( array(
-				'taxonomy' => 'hotel_location',
-				'orderby'    => 'count',
-				'hide_empty' => 0,
-			) );
-			
-			$term_ids = [];
-			foreach($locations as $location){
-				$term_ids[$location->term_id]  = $location->name;
-			}
-			//return $term_ids;
-		//}
+		$cats = get_terms( array(
+			'taxonomy' => 'category',
+			'orderby'    => 'count',
+			'hide_empty' => 0,
+		) );
+		
+		$term_ids = [];
+		foreach($cats as $cat){
+			$term_ids[$cat->term_id]  = $cat->name;
+		}
+
 		$this->add_control(
-			'locations',
+			'cats',
 			[
-				'label'       => esc_html__( 'Locations', 'tourfic' ),
+				'label'       => esc_html__( 'Categories', 'tourfic' ),
 				'type'        => \Elementor\Controls_Manager::SELECT2,
-				'description' => esc_html__( 'Choose locations.', 'tourfic' ),
+				'description' => esc_html__( 'Choose category.', 'tourfic' ),
 				'options'     => $term_ids,
 				'multiple' => true,
 			]
@@ -121,28 +124,16 @@ class TF_Hotel_Grid_Slider extends \Elementor\Widget_Base {
 		$this->add_control(
 			'count',
 			[
-				'label'       => esc_html__( 'Total Hotels', 'tourfic' ),
+				'label'       => esc_html__( 'Total Blogs', 'tourfic' ),
 				'type'        => \Elementor\Controls_Manager::NUMBER,
-				'description' => esc_html__( 'Number of total hotel. Min 3.', 'tourfic' ),
+				'description' => esc_html__( 'Number of total blogs. Min 3.', 'tourfic' ),
 				'min'         => 1,
 				'default'     => 3,
 			]
 		);
-		$this->add_control(
-			'style',
-			[
-				'label'       => esc_html__( 'Total Hotels', 'tourfic' ),
-				'type'        => \Elementor\Controls_Manager::SELECT,
-				'description' => esc_html__( 'Hotel layout style', 'tourfic' ),
-				'options'     => array(
-					'grid'   => esc_html__( 'Grid', 'tourfic' ),
-					'slider' => esc_html__( 'Slider', 'tourfic' ),
-				),
-				'default' 	  => 'grid'
-			]
-		);
 		$this->end_controls_section();
-$this->start_controls_section(
+		
+		$this->start_controls_section(
 			'style_section',
 			[
 				'label' => esc_html__( 'Style', 'tourfic' ),
@@ -155,7 +146,7 @@ $this->start_controls_section(
 			[
 				'name' => 'title_typography',
 				'label' => esc_html__( 'Title Typography', 'tourfic' ),
-				'selector' => '{{WRAPPER}} .tf-widget-slider .tf-heading h2',
+				'selector' => '{{WRAPPER}} .tf-recent-blog-wrapper .tf-heading h2',
 			]
 		);
 		$this->add_control(
@@ -168,7 +159,7 @@ $this->start_controls_section(
 					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .tf-widget-slider .tf-heading h2' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tf-recent-blog-wrapper .tf-heading h2' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -185,7 +176,7 @@ $this->start_controls_section(
 			[
 				'name' => 'subtitle_typography',
 				'label' => esc_html__( 'Subtitle Typography', 'tourfic' ),
-				'selector' => '{{WRAPPER}} .tf-widget-slider .tf-heading p',
+				'selector' => '{{WRAPPER}} .tf-recent-blog-wrapper .tf-heading p',
 			]
 		);
 
@@ -199,7 +190,7 @@ $this->start_controls_section(
 					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .tf-widget-slider .tf-heading p' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tf-recent-blog-wrapper .tf-heading p' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -215,16 +206,16 @@ $this->start_controls_section(
 	 * @access protected
 	 */
 	protected function render() {
+
 		$settings = $this->get_settings_for_display();
 		$title = $settings['title'];
 		$subtitle = $settings['subtitle'];
 		$count = $settings['count'];
-		$style = $settings['style'];
-		$locations = $settings['locations'];
-		if(is_array($locations)){
-			$locations = implode(',',$locations);
+		$cats = $settings['cats'];
+		if(is_array($cats)){
+			$cats = implode(',',$cats);
 		}
-        echo do_shortcode('[tf_hotel title="'.$title.'" subtitle="'.$subtitle.'" locations="'.$locations.'" style="'.$style.'" count="' .$count. '"]');
+        echo do_shortcode('[tf_recent_blog title="'.$title.'" subtitle="'.$subtitle.'" cats="'.$cats.'" count="' .$count. '"]');
 
 
 	}

@@ -1,10 +1,14 @@
 <?php
 
+namespace Tourfic\Admin;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class TF_PROMO_NOTICE {
+class TF_Promo_Notice {
+
+    use \Tourfic\Traits\Singleton;
 
     // private $api_url = 'http://tf-api.test/';
     private $api_url = 'https://api.themefic.com/';

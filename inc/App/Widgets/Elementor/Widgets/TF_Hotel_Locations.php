@@ -1,4 +1,6 @@
 <?php
+
+namespace Tourfic\App\Widgets\Elementor\Widgets;
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
@@ -7,6 +9,8 @@ defined( 'ABSPATH' ) || exit;
  *
  */
 class TF_Hotel_Locations extends \Elementor\Widget_Base {
+
+	use \Tourfic\Traits\Singleton;
 
 	/**
 	 * Retrieve the widget name.
