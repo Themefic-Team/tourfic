@@ -95,7 +95,7 @@ Class Booking_Details {
 						'query'     => " $tf_filter_query ORDER BY id DESC"
 					);
 
-					$tf_hotel_booking_result = tourfic_order_table_data( $tf_booking_details_select );
+					$tf_hotel_booking_result = Helper::tourfic_order_table_data( $tf_booking_details_select );
 					$total_rows              = ! empty( count( $tf_hotel_booking_result ) ) ? count( $tf_hotel_booking_result ) : 0;
 					$total_pages             = ceil( $total_rows / $no_of_booking_per_page );
 
@@ -105,7 +105,7 @@ Class Booking_Details {
 						'query'     => " $tf_filter_query ORDER BY id DESC LIMIT $offset, $no_of_booking_per_page"
 					);
 
-					$tf_order_details_result = tourfic_order_table_data( $tf_orders_select );
+					$tf_order_details_result = Helper::tourfic_order_table_data( $tf_orders_select );
 
 				} else {
 					$tf_orders_select        = array(
@@ -113,7 +113,7 @@ Class Booking_Details {
 						'post_type' => $booking_type,
 						'query'     => " $tf_filter_query ORDER BY order_id DESC LIMIT 15"
 					);
-					$tf_order_details_result = $this->tourfic_order_table_data( $tf_orders_select );
+					$tf_order_details_result = Helper::tourfic_order_table_data( $tf_orders_select );
 				}
 			?>
             <div class="wrap tf_booking_details_wrap" style="margin-right: 20px;">

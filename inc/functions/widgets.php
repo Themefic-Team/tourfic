@@ -1590,4 +1590,3 @@ function tourfic_sidebar_widgets_init() {
 
 }
 add_action( 'widgets_init', 'tourfic_sidebar_widgets_init', 100 );
-?>

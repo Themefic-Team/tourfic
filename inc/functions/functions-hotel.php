@@ -634,7 +634,7 @@ function tf_room_availability_callback() {
 						'post_type' => 'hotel',
 						'query' => " AND ostatus = 'completed' AND order_id = ".$order_id
 					);
-					$tf_hotel_book_orders = tourfic_order_table_data($tf_orders_select);
+					$tf_hotel_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
 
 						# Get and Loop Over Order Items
 						foreach ( $tf_hotel_book_orders as $item ) {

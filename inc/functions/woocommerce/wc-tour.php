@@ -149,7 +149,7 @@ function tf_tours_booking_function() {
 				'post_type' => 'tour',
 				'query' => " AND ostatus = 'completed' ORDER BY order_id DESC"
 			);
-			$tf_tour_book_orders = tourfic_order_table_data($tf_orders_select);
+			$tf_tour_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
 
 			$tf_total_adults = 0;
 			$tf_total_childrens = 0;
@@ -216,7 +216,7 @@ function tf_tours_booking_function() {
 				'post_type' => 'tour',
 				'query' => " AND ostatus = 'completed' ORDER BY order_id DESC"
 			);
-			$tf_tour_book_orders = tourfic_order_table_data($tf_orders_select);
+			$tf_tour_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
 
 			$tf_total_adults = 0;
 			$tf_total_childrens = 0;
@@ -434,7 +434,7 @@ function tf_tours_booking_function() {
 					'post_type' => 'tour',
 					'query' => " AND ostatus = 'completed' ORDER BY order_id DESC"
 				);
-				$tf_tour_book_orders = tourfic_order_table_data($tf_orders_select);
+				$tf_tour_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
 
                 $tf_total_adults = 0;
                 $tf_total_childrens = 0;

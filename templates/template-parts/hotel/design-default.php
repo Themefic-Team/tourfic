@@ -218,7 +218,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 									/**
 									 * Hotel video section in the hero
 									 */
-									tf_hotel_gallery_video( $meta );
+									Helper::tf_hotel_gallery_video( $meta );
 									?>
                                 </div>
                             </div>
@@ -241,7 +241,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 									/**
 									 * Hotel video section in the hero
 									 */
-									tf_hotel_gallery_video( $meta );
+									Helper::tf_hotel_gallery_video( $meta );
 									?>
 
                                 </div>

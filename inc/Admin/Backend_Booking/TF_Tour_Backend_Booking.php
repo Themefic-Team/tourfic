@@ -1,16 +1,9 @@
 <?php
 
 namespace Tourfic\Admin\Backend_Booking;
+use Tourfic\Classes\Helper;
 
 defined( 'ABSPATH' ) || exit;
-
-/**
- * TF Tour Backend Booking
- * @since 2.9.26
- * @author Foysal
- */
-
-use Tourfic\Classes\Helper;
 
 class TF_Tour_Backend_Booking {
 
@@ -677,7 +670,7 @@ class TF_Tour_Backend_Booking {
 					'post_type' => 'tour',
 					'query'     => " AND ostatus = 'completed' ORDER BY order_id DESC"
 				);
-				$tf_tour_book_orders = tourfic_order_table_data( $tf_orders_select );
+				$tf_tour_book_orders = Helper::tourfic_order_table_data( $tf_orders_select );
 
 				$tf_total_adults    = 0;
 				$tf_total_childrens = 0;
@@ -744,7 +737,7 @@ class TF_Tour_Backend_Booking {
 					'post_type' => 'tour',
 					'query'     => " AND ostatus = 'completed' ORDER BY order_id DESC"
 				);
-				$tf_tour_book_orders = tourfic_order_table_data( $tf_orders_select );
+				$tf_tour_book_orders = Helper::tourfic_order_table_data( $tf_orders_select );
 
 				$tf_total_adults    = 0;
 				$tf_total_childrens = 0;
@@ -951,7 +944,7 @@ class TF_Tour_Backend_Booking {
 						'post_type' => 'tour',
 						'query'     => " AND ostatus = 'completed' ORDER BY order_id DESC"
 					);
-					$tf_tour_book_orders = tourfic_order_table_data( $tf_orders_select );
+					$tf_tour_book_orders = Helper::tourfic_order_table_data( $tf_orders_select );
 
 					$tf_total_adults    = 0;
 					$tf_total_childrens = 0;

@@ -1,15 +1,9 @@
 <?php
 
 namespace Tourfic\Admin\Backend_Booking;
+use Tourfic\Classes\Helper;
 
 defined( 'ABSPATH' ) || exit;
-/**
- * TF Hotel Backend Booking
- * @since 2.9.26
- * @author Foysal
- */
-
-use Tourfic\Classes\Helper;
 
 class TF_Hotel_Backend_Booking {
 
@@ -495,7 +489,7 @@ class TF_Hotel_Backend_Booking {
 									'post_type' => 'hotel',
 									'query'  => " AND ostatus = 'completed' AND order_id = " . $order_id
 								);
-								$tf_hotel_book_orders = tourfic_order_table_data( $tf_orders_select );
+								$tf_hotel_book_orders = Helper::tourfic_order_table_data( $tf_orders_select );
 
 								# Get and Loop Over Order Items
 								foreach ( $tf_hotel_book_orders as $item ) {

@@ -1,6 +1,7 @@
 <?php
 // don't load directly
 defined( 'ABSPATH' ) || exit;
+use \Tourfic\Classes\Helper;
 
 if ( ! class_exists( 'TF_Shortcodes' ) ) {
 	class TF_Shortcodes {
@@ -296,7 +297,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                             <h3><?php echo esc_html__( 'Categories', 'tourfic' ) ?></h3>
 							                <?php
 							                //Dynamic Taxonomy dropdown list
-							                tf_terms_dropdown( 'category', 'cats', 'tf_recent_blog_shortcode', 'tf-setting-field tf-select-field', true );
+							                Helper::tf_terms_dropdown( 'category', 'cats', 'tf_recent_blog_shortcode', 'tf-setting-field tf-select-field', true );
 							                ?>
                                         </div>
                                     </div>
@@ -370,7 +371,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                             <h3><?php echo esc_html__( 'Tour Destination', 'tourfic' ) ?></h3>
 											<?php
 											//Dynamic Taxonomy dropdown list
-											tf_terms_dropdown( 'tour_destination', 'destinations', 'tf_tour_shortcode','tf-setting-field tf-select-field', true );
+											Helper::tf_terms_dropdown( 'tour_destination', 'destinations', 'tf_tour_shortcode','tf-setting-field tf-select-field', true );
 											?>
                                         </div>
                                     </div>
@@ -476,7 +477,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                             <h3><?php echo esc_html__( 'Choose Destination', 'tourfic' ) ?></h3>
 											<?php
 											//Dynamic Taxonomy dropdown list
-											tf_terms_dropdown( 'tour_destination', 'ids', 'tf_tour_destination_shortcode', 'tf-setting-field tf-select-field', true );
+											Helper::tf_terms_dropdown( 'tour_destination', 'ids', 'tf_tour_destination_shortcode', 'tf-setting-field tf-select-field', true );
 											?>
                                         </div>
                                     </div>
@@ -646,7 +647,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                             <h3><?php echo esc_html__( 'Choose Locations', 'tourfic' ) ?></h3>
 							                <?php
 							                //Dynamic Taxonomy dropdown list
-							                tf_terms_dropdown( 'tour_destination', 'locations', 'tf_listing_location_shortcode', 'tf-setting-field tf-select-field', true );
+							                Helper::tf_terms_dropdown( 'tour_destination', 'locations', 'tf_listing_location_shortcode', 'tf-setting-field tf-select-field', true );
 							                ?>
                                         </div>
                                     </div>
@@ -731,7 +732,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                             <h3><?php echo esc_html__( 'Hotel location', 'tourfic' ) ?></h3>
 											<?php
 											//Dynamic Taxonomy dropdown list
-											tf_terms_dropdown( 'hotel_location', 'locations', 'tf_hotel_shortcode', 'tf-setting-field tf-select-field', true );
+											Helper::tf_terms_dropdown( 'hotel_location', 'locations', 'tf_hotel_shortcode', 'tf-setting-field tf-select-field', true );
 											?>
                                         </div>
                                     </div>
@@ -837,7 +838,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                             <h3><?php echo esc_html__( 'Choose Locations', 'tourfic' ) ?></h3>
 											<?php
 											//Dynamic Taxonomy dropdown list
-											tf_terms_dropdown( 'hotel_location', 'ids', 'tf_hotel_location_shortcode', 'tf-setting-field tf-select-field', true );
+											Helper::tf_terms_dropdown( 'hotel_location', 'ids', 'tf_hotel_location_shortcode', 'tf-setting-field tf-select-field', true );
 											?>
                                         </div>
                                     </div>
@@ -1007,7 +1008,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                             <h3><?php echo esc_html__( 'Choose Locations', 'tourfic' ) ?></h3>
 							                <?php
 							                //Dynamic Taxonomy dropdown list
-							                tf_terms_dropdown( 'hotel_location', 'locations', 'tf_listing_location_shortcode', 'tf-setting-field tf-select-field', true );
+							                Helper::tf_terms_dropdown( 'hotel_location', 'locations', 'tf_listing_location_shortcode', 'tf-setting-field tf-select-field', true );
 							                ?>
                                         </div>
                                     </div>
@@ -1092,7 +1093,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                             <h3><?php echo esc_html__( 'Apartment location', 'tourfic' ) ?></h3>
 											<?php
 											//Dynamic Taxonomy dropdown list
-											tf_terms_dropdown( 'apartment_location', 'locations', 'tf_apartment_shortcode', 'tf-setting-field tf-select-field', true );
+											Helper::tf_terms_dropdown( 'apartment_location', 'locations', 'tf_apartment_shortcode', 'tf-setting-field tf-select-field', true );
 											?>
                                         </div>
                                     </div>
@@ -1198,7 +1199,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                             <h3><?php echo esc_html__( 'Choose Locations', 'tourfic' ) ?></h3>
 											<?php
 											//Dynamic Taxonomy dropdown list
-											tf_terms_dropdown( 'apartment_location', 'ids', 'tf_apartment_location_shortcode', 'tf-setting-field tf-select-field', true );
+											Helper::tf_terms_dropdown( 'apartment_location', 'ids', 'tf_apartment_location_shortcode', 'tf-setting-field tf-select-field', true );
 											?>
                                         </div>
                                     </div>
@@ -1368,7 +1369,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                             <h3><?php echo esc_html__( 'Choose Locations', 'tourfic' ) ?></h3>
 							                <?php
 							                //Dynamic Taxonomy dropdown list
-							                tf_terms_dropdown( 'apartment_location', 'locations', 'tf_listing_location_shortcode', 'tf-setting-field tf-select-field', true );
+							                Helper::tf_terms_dropdown( 'apartment_location', 'locations', 'tf_listing_location_shortcode', 'tf-setting-field tf-select-field', true );
 							                ?>
                                         </div>
                                     </div>
