@@ -1,11 +1,16 @@
 <?php
+
+namespace Tourfic\App\Widgets\Elementor\Widgets;
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Search Form Horizontal
+ * Apartment Grid slider by location
+ * @author Foysal
  */
-class TF_Search_horizontal extends \Elementor\Widget_Base {
+class TF_Apartment_Grid_Slider extends \Elementor\Widget_Base {
+
+	use \Tourfic\Traits\Singleton;
 
 	/**
 	 * Retrieve the widget name.
@@ -15,7 +20,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'tourfic-search';
+		return 'apartment-grid-slider';
 	}
 
 	/**
@@ -26,7 +31,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'Tourfic Search Form (Horizontal)', 'tourfic' );
+		return esc_html__( 'Apartments by Location', 'tourfic' );
 	}
 
 	/**
@@ -37,7 +42,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-site-search';
+		return 'eicon-posts-grid';
 	}
 
 	/**
@@ -56,23 +61,6 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 		return [ 'tourfic' ];
 	}
 
-	public function tf_search_types() {
-		$types = array(
-			'all'       => esc_html__( 'All', 'tourfic' ),
-			'hotel'     => esc_html__( 'Hotel', 'tourfic' ),
-			'tour'      => esc_html__( 'Tour', 'tourfic' ),
-			'apartment' => esc_html__( 'Apartment', 'tourfic' ),
-		);
-
-		if ( function_exists('is_tf_pro') && is_tf_pro() ) {
-			$types['booking']   = esc_html__( 'Booking.com', 'tourfic' );
-			$types['tp-flight'] = esc_html__( 'TravelPayouts Flight', 'tourfic' );
-			$types['tp-hotel']  = esc_html__( 'TravelPayouts Hotel', 'tourfic' );
-		}
-
-		return $types;
-	}
-
 	/**
 	 * Register the widget controls.
 	 *
@@ -82,17 +70,16 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 	 */
 	protected function register_controls() {
 
-
 		$this->start_controls_section(
-			'tf_search_content_section',
+			'content',
 			[
-				'label' => esc_html__( 'Content', 'tourfic' ),
+				'label' => esc_html__( 'Settings', 'tourfic' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
 
 		$this->add_control(
-			'tf_search_title',
+			'title',
 			[
 				'label' => esc_html__( 'Title', 'tourfic' ),
 				'type'  => \Elementor\Controls_Manager::TEXTAREA,
@@ -100,44 +87,61 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 			]
 		);
 
-
 		$this->add_control(
-			'tf_search_subtitle',
+			'subtitle',
 			[
-				'label' => esc_html__( 'Subtitle', 'tourfic' ),
+				'label' => esc_html__( 'Sub-Title', 'tourfic' ),
 				'type'  => \Elementor\Controls_Manager::TEXTAREA,
 				'rows'  => 2,
 			]
 		);
 
+		//get the location IDs
+		$locations = get_terms( array(
+			'taxonomy' => 'apartment_location',
+			'orderby'    => 'count',
+			'hide_empty' => 0,
+		) );
+
+		$term_ids = [];
+		foreach ( $locations as $location ) {
+			$term_ids[ $location->term_id ] = $location->name;
+		}
 		$this->add_control(
-			'type',
+			'locations',
 			[
-				'type'     => \Elementor\Controls_Manager::SELECT2,
-				'label'    => esc_html__( 'Type', 'tourfic' ),
-				'multiple' => true,
-				'options'  => $this->tf_search_types(),
-				'default'  => [ 'all' ],
+				'label'       => esc_html__( 'Locations', 'tourfic' ),
+				'type'        => \Elementor\Controls_Manager::SELECT2,
+				'options'     => $term_ids,
+				'multiple'    => true,
 			]
 		);
 
 		$this->add_control(
-			'full-width',
+			'count',
 			[
-				'label'        => esc_html__( 'Full Width', 'tourfic' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'tourfic' ),
-				'label_off'    => esc_html__( 'No', 'tourfic' ),
-				'return_value' => true,
-				'default'      => false,
+				'label'       => esc_html__( 'Total Apartments', 'tourfic' ),
+				'type'        => \Elementor\Controls_Manager::NUMBER,
+				'min'         => 1,
+				'default'     => 3,
 			]
 		);
-
+		$this->add_control(
+			'style',
+			[
+				'label'       => esc_html__( 'Apartment Layout', 'tourfic' ),
+				'type'        => \Elementor\Controls_Manager::SELECT,
+				'options'     => array(
+					'grid'   => esc_html__( 'Grid', 'tourfic' ),
+					'slider' => esc_html__( 'Slider', 'tourfic' ),
+				),
+				'default'     => 'grid'
+			]
+		);
 		$this->end_controls_section();
 
-
 		$this->start_controls_section(
-			'tf_search_style_section',
+			'style_section',
 			[
 				'label' => esc_html__( 'Style', 'tourfic' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
@@ -149,20 +153,16 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 			[
 				'name'     => 'title_typography',
 				'label'    => esc_html__( 'Title Typography', 'tourfic' ),
-				'selector' => '{{WRAPPER}} .tf_widget-title h2',
+				'selector' => '{{WRAPPER}} .tf-widget-slider .tf-heading h2',
 			]
 		);
 		$this->add_control(
-			'tf_search_title_color',
+			'title_color',
 			[
 				'label'     => esc_html__( 'Title Color', 'tourfic' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
-				'scheme'    => [
-					'type'  => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
 				'selectors' => [
-					'{{WRAPPER}} .tf_widget-title h2' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tf-widget-slider .tf-heading h2' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -179,27 +179,22 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 			[
 				'name'     => 'subtitle_typography',
 				'label'    => esc_html__( 'Subtitle Typography', 'tourfic' ),
-				'selector' => '{{WRAPPER}} .tf_widget-subtitle',
+				'selector' => '{{WRAPPER}} .tf-widget-slider .tf-heading p',
 			]
 		);
 
 		$this->add_control(
-			'tf_search_subtitle_color',
+			'subtitle_color',
 			[
 				'label'     => esc_html__( 'Subtitle Color', 'tourfic' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
-				'scheme'    => [
-					'type'  => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
 				'selectors' => [
-					'{{WRAPPER}} .tf_widget-subtitle' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tf-widget-slider .tf-heading p' => 'color: {{VALUE}}',
 				],
 			]
 		);
 
 		$this->end_controls_section();
-
 	}
 
 	/**
@@ -210,14 +205,17 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		$settings           = $this->get_settings_for_display();
-		$tf_search_title    = $settings['tf_search_title'];
-		$tf_search_subtitle = $settings['tf_search_subtitle'];
-		$type_arr           = ! is_array( $settings['type'] ) ? array( $settings['type'] ) : $settings['type'];
-		$type               = $settings['type'] ? implode( ',', $type_arr ) : implode( ',', [ 'all' ] );
-		$full_width         = $settings['full-width'];
+		$settings  = $this->get_settings_for_display();
+		$title     = $settings['title'];
+		$subtitle  = $settings['subtitle'];
+		$count     = $settings['count'];
+		$style     = $settings['style'];
+		$locations = $settings['locations'];
+		if ( is_array( $locations ) ) {
+			$locations = implode( ',', $locations );
+		}
+		echo do_shortcode( '[tf_apartment title="' . $title . '" subtitle="' . $subtitle . '" locations="' . $locations . '" style="' . $style . '" count="' . $count . '"]' );
 
-		echo do_shortcode( '[tf_search_form title="' . $tf_search_title . '" subtitle="' . $tf_search_subtitle . '" type="' . $type . '" fullwidth="' . $full_width . '"]' );
 
 	}
 

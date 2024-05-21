@@ -9,6 +9,7 @@ use Tourfic\Admin\Backend_Booking\TF_Tour_Backend_Booking;
 use Tourfic\Admin\Booking_Details\Tour\Tour_Booking_Details;
 use Tourfic\Admin\Booking_Details\Hotel\Hotel_Booking_Details;
 use Tourfic\Admin\Booking_Details\Apartment\Apartment_Booking_Details;
+use Tourfic\App\Widgets\TF_Widget_Base;
 use Tourfic\Admin\TF_Promo_Notice;
 use Tourfic\Admin\Emails\TF_Handle_Emails;
 use Tourfic\Classes\Helper;
@@ -52,6 +53,9 @@ class Base {
 			// Promo Notice
 			TF_Promo_Notice::instance();
 		}
+
+		// Tourfic Widgets
+		TF_Widget_Base::instance();
 
 		if ( Helper::tfopt( 'disable-services' ) && in_array( 'hotel', Helper::tfopt( 'disable-services' ) ) ) {
 		} else {

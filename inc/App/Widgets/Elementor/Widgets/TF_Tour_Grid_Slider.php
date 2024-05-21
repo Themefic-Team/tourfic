@@ -1,13 +1,18 @@
 <?php
+
+namespace Tourfic\App\Widgets\Elementor\Widgets;
+
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Recent Blog
- * @since 2.9.0
+ * Tour Grid slider by location
+ * @since 2.8.9
  * @author Abu Hena
  */
-class TF_Recent_Blog extends \Elementor\Widget_Base {
+class TF_Tour_Grid_Slider extends \Elementor\Widget_Base {
+
+	use \Tourfic\Traits\Singleton;
 
 	/**
 	 * Retrieve the widget name.
@@ -17,7 +22,7 @@ class TF_Recent_Blog extends \Elementor\Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'recent-blog';
+		return 'tour-grid-slider';
 	}
 
 	/**
@@ -28,7 +33,7 @@ class TF_Recent_Blog extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'Recent Blog', 'tourfic' );
+		return esc_html__( 'Tours by Destination', 'tourfic' );
 	}
 
 	/**
@@ -94,23 +99,23 @@ class TF_Recent_Blog extends \Elementor\Widget_Base {
 		);
 
 		//get the location IDs
-		$cats = get_terms( array(
-			'taxonomy' => 'category',
+		$destinations = get_terms( array(
+			'taxonomy'   => 'tour_destination',
 			'orderby'    => 'count',
 			'hide_empty' => 0,
 		) );
 		
 		$term_ids = [];
-		foreach($cats as $cat){
-			$term_ids[$cat->term_id]  = $cat->name;
+		foreach($destinations as $destination){
+			$term_ids[$destination->term_id]  = $destination->name;
 		}
 
 		$this->add_control(
-			'cats',
+			'destinations',
 			[
-				'label'       => esc_html__( 'Categories', 'tourfic' ),
+				'label'       => esc_html__( 'Destinations', 'tourfic' ),
 				'type'        => \Elementor\Controls_Manager::SELECT2,
-				'description' => esc_html__( 'Choose category.', 'tourfic' ),
+				'description' => esc_html__( 'Choose destinations.', 'tourfic' ),
 				'options'     => $term_ids,
 				'multiple' => true,
 			]
@@ -119,15 +124,28 @@ class TF_Recent_Blog extends \Elementor\Widget_Base {
 		$this->add_control(
 			'count',
 			[
-				'label'       => esc_html__( 'Total Blogs', 'tourfic' ),
+				'label'       => esc_html__( 'Total Tours', 'tourfic' ),
 				'type'        => \Elementor\Controls_Manager::NUMBER,
-				'description' => esc_html__( 'Number of total blogs. Min 3.', 'tourfic' ),
+				'description' => esc_html__( 'Number of total tours. Min 3.', 'tourfic' ),
 				'min'         => 1,
 				'default'     => 3,
 			]
 		);
+		$this->add_control(
+			'style',
+			[
+				'label'       => esc_html__( 'Total Tours', 'tourfic' ),
+				'type'        => \Elementor\Controls_Manager::SELECT,
+				'description' => esc_html__( 'Tour layout style', 'tourfic' ),
+				'options'     => array(
+					'grid'   => esc_html__( 'Grid', 'tourfic' ),
+					'slider' => esc_html__( 'Slider', 'tourfic' ),
+				),
+				'default' 	  => 'grid'
+			]
+		);
 		$this->end_controls_section();
-		
+
 		$this->start_controls_section(
 			'style_section',
 			[
@@ -141,7 +159,7 @@ class TF_Recent_Blog extends \Elementor\Widget_Base {
 			[
 				'name' => 'title_typography',
 				'label' => esc_html__( 'Title Typography', 'tourfic' ),
-				'selector' => '{{WRAPPER}} .tf-recent-blog-wrapper .tf-heading h2',
+				'selector' => '{{WRAPPER}} .tf-widget-slider .tf-heading h2',
 			]
 		);
 		$this->add_control(
@@ -154,7 +172,7 @@ class TF_Recent_Blog extends \Elementor\Widget_Base {
 					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .tf-recent-blog-wrapper .tf-heading h2' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tf-widget-slider .tf-heading h2' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -171,7 +189,7 @@ class TF_Recent_Blog extends \Elementor\Widget_Base {
 			[
 				'name' => 'subtitle_typography',
 				'label' => esc_html__( 'Subtitle Typography', 'tourfic' ),
-				'selector' => '{{WRAPPER}} .tf-recent-blog-wrapper .tf-heading p',
+				'selector' => '{{WRAPPER}} .tf-widget-slider .tf-heading p',
 			]
 		);
 
@@ -185,7 +203,7 @@ class TF_Recent_Blog extends \Elementor\Widget_Base {
 					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .tf-recent-blog-wrapper .tf-heading p' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tf-widget-slider .tf-heading p' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -201,16 +219,16 @@ class TF_Recent_Blog extends \Elementor\Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-
 		$settings = $this->get_settings_for_display();
 		$title = $settings['title'];
 		$subtitle = $settings['subtitle'];
 		$count = $settings['count'];
-		$cats = $settings['cats'];
-		if(is_array($cats)){
-			$cats = implode(',',$cats);
+		$style = $settings['style'];
+		$destinations = $settings['destinations'];
+		if(is_array($destinations)){
+			$destinations = implode(',',$destinations);
 		}
-        echo do_shortcode('[tf_recent_blog title="'.$title.'" subtitle="'.$subtitle.'" cats="'.$cats.'" count="' .$count. '"]');
+        echo do_shortcode('[tf_tour title="'.$title.'" subtitle="'.$subtitle.'" destinations="'.$destinations.'" style="'.$style.'" count="' .$count. '"]');
 
 
 	}
