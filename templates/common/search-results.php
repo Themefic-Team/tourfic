@@ -3,9 +3,9 @@ use \Tourfic\Classes\Helper;
 
 get_header('tourfic'); 
 
-$tf_tour_arc_selected_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
-$tf_hotel_arc_selected_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
-$tf_apartment_arc_selected_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
+$tf_tour_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
+$tf_hotel_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
+$tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 
 // Check nonce security
 if ( !isset( $_GET['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_GET['_nonce'])), 'tf_ajax_nonce' ) ) {

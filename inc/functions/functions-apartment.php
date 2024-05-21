@@ -1308,7 +1308,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 				<div class="tf-available-room-content-left">
 					<div class="tf-card-heading-info">
 					<div class="tf-section-title-and-location">
-						<a href="<?php echo esc_url( get_the_permalink($post_id) ); ?>"><h2 class="tf-section-title"><?php echo esc_html( tourfic_character_limit_callback( get_the_title($post_id), 55 ) ); ?></h2></a>
+						<a href="<?php echo esc_url( get_the_permalink($post_id) ); ?>"><h2 class="tf-section-title"><?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title($post_id), 55 ) ); ?></h2></a>
 						<?php
 						if ( ! empty( $address ) ) {
 						?>
@@ -1316,7 +1316,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 							<div class="location-icon">
 								<i class="ri-map-pin-line"></i>
 							</div>
-							<span><?php echo esc_html( tourfic_character_limit_callback( esc_html( $address ), 65 ) ); ?></span>
+							<span><?php echo esc_html( Helper::tourfic_character_limit_callback( esc_html( $address ), 65 ) ); ?></span>
 						</div>
 						<?php } ?>
 					</div>
@@ -1437,7 +1437,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 							<?php
 							if ( !empty($address) ) {
 								echo '<div class="tf-map-link">';
-								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . strlen($address) > 75 ? esc_html( tourfic_character_limit_callback($address, 76) ) : esc_html( $address ) . '</span>';
+								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . strlen($address) > 75 ? esc_html( Helper::tourfic_character_limit_callback($address, 76) ) : esc_html( $address ) . '</span>';
 								echo '</div>';
 							}
 							?>

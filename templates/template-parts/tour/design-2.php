@@ -506,7 +506,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                                                 <div class="meta-content">
                                                     <div class="tf-meta-title">
                                                         <h2><a href="<?php the_permalink( $selected_design_post_id ) ?>">
-																<?php echo wp_kses_post( tourfic_character_limit_callback( get_the_title( $selected_design_post_id ), 35 ) ); ?>
+																<?php echo wp_kses_post( Helper::tourfic_character_limit_callback( get_the_title( $selected_design_post_id ), 35 ) ); ?>
                                                             </a></h2>
                                                         <div class="tf-meta-data-price">
                                                             <span>

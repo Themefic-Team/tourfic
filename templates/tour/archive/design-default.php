@@ -9,7 +9,7 @@ use \Tourfic\Classes\Helper;
 	?>
 	<div class="tf-container">
 		<?php 
-		$tf_defult_views = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_view'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_view'] : 'list';
+		$tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_view'] : 'list';
 		?>
 		<div class="search-result-inner">
 			<!-- Start Content -->
@@ -72,7 +72,7 @@ use \Tourfic\Classes\Helper;
 
 			<!-- Start Sidebar -->
 			<div class="tf-search-right">
-				<?php tf_archive_sidebar_search_form('tf_tours'); ?>
+				<?php Helper::tf_archive_sidebar_search_form('tf_tours'); ?>
 			</div>
 			<!-- End Sidebar -->
 		</div>

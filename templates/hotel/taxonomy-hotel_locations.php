@@ -29,7 +29,7 @@ $max = '8';
 $tf_location_meta      = get_term_meta( $term->term_id, 'tf_hotel_location', true );
 $tf_location_image = ! empty( $tf_location_meta['image'] ) ? $tf_location_meta['image'] : '';
 
-$tf_hotel_arc_selected_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
+$tf_hotel_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
 
 if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
 ?>
@@ -40,7 +40,7 @@ if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
 		<?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
 		<!-- SideBar-->
 		<div class="tf-column tf-sidebar tf-archive-right">
-			<?php tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug); ?>
+			<?php Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug); ?>
 		</div>
 		</div>
 	</div>
@@ -74,7 +74,7 @@ if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
                     <!-- Booking form Start -->
                     <div class="tf-archive-search-form tf-booking-form-wrapper">
                         <form action="<?php echo esc_url( tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
-                            <?php tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug); ?>
+                            <?php Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug); ?>
                         </form>
                     </div>
                     <!-- Booking form end --> 
@@ -126,7 +126,7 @@ if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
 			</div>
 
 			<div class="tf-search-right">
-				<?php tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug); ?>
+				<?php Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug); ?>
 			</div>
 
 		</div>

@@ -308,8 +308,8 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                 ?>
 
                 <?php 
-                if( !empty(tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout']) ){
-                    foreach(tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout'] as $section){
+                if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout']) ){
+                    foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout'] as $section){
                         if( !empty($section['hotel-section-status']) && $section['hotel-section-status']=="1" && !empty($section['hotel-section-slug']) ){
                             include TF_TEMPLATE_PART_PATH . 'hotel/design-1/'.$section['hotel-section-slug'].'.php';
                         }

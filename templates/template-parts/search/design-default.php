@@ -1,3 +1,6 @@
+<?php
+use \Tourfic\Classes\Helper;
+?>
 <div class="tf-main-wrapper search-result-wrapper" data-fullwidth="true">
     <?php do_action( 'tf_before_container' ); ?>
 	<div class="tf-container">
@@ -10,7 +13,7 @@
 
 			<!-- Start Sidebar -->
 			<div class="tf-search-right">
-				<?php tf_search_result_sidebar_form( 'archive' ); ?>
+				<?php Helper::tf_search_result_sidebar_form( 'archive' ); ?>
 			</div>
 			<!-- End Sidebar -->
 		</div>

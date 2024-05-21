@@ -36,7 +36,7 @@ if( get_post_type($post_id) == 'tf_tours' ){
 	if("single"==$tf_tour_layout_conditions){
     	$tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'design-1';
 	}
-	$tf_tour_global_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour'] : 'design-1';
+	$tf_tour_global_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour'] : 'design-1';
 
 	$tf_tour_selected_check = !empty($tf_tour_single_template) ? $tf_tour_single_template : $tf_tour_global_template;
 
@@ -51,7 +51,7 @@ if( get_post_type($post_id) == 'tf_hotel' ){
 	if("single"==$tf_hotel_layout_conditions){
     	$tf_hotel_single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
 	}
-	$tf_hotel_global_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
+	$tf_hotel_global_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
 
 	$tf_hotel_selected_check = !empty($tf_hotel_single_template) ? $tf_hotel_single_template : $tf_hotel_global_template;
 
@@ -67,7 +67,7 @@ if( get_post_type($post_id) == 'tf_apartment' ){
 	if("single"==$tf_apartment_layout_conditions){
     	$tf_apartment_single_template = ! empty( $meta['tf_single_apartment_template'] ) ? $meta['tf_single_apartment_template'] : 'default';
 	}
-	$tf_apartment_global_template = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] : 'default';
+	$tf_apartment_global_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] : 'default';
 
 	$tf_apartment_selected_template = !empty($tf_apartment_single_template) ? $tf_apartment_single_template : $tf_apartment_global_template;
 
@@ -360,7 +360,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 								if( $tf_apartment_selected_template  == "default") {
 									if( strlen($c_content) > 120 ) { ?>
 											<div class="tf-description">
-												<p><?php echo wp_kses_post( tourfic_character_limit_callback($c_content, 120) ) ?></p>
+												<p><?php echo wp_kses_post( Helper::tourfic_character_limit_callback($c_content, 120) ) ?></p>
 											</div>
 											<div class="tf-full-description" style="display:none;">
 												<p><?php echo wp_kses_post( $c_content ) ?></p>

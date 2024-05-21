@@ -150,8 +150,8 @@ use \Tourfic\Classes\Helper;
 
 
             <?php
-            if( !empty(tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-1']) ){
-                foreach(tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-1'] as $section){
+            if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-1']) ){
+                foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-1'] as $section){
                     if( !empty($section['aprtment-section-status']) && $section['aprtment-section-status']=="1" && !empty($section['aprtment-section-slug']) ){
                         include TF_TEMPLATE_PART_PATH . 'apartment/design-1/'.$section['aprtment-section-slug'].'.php';
                     }
@@ -174,15 +174,15 @@ use \Tourfic\Classes\Helper;
                 <?php tf_apartment_single_booking_form( $comments, $disable_review_sec ); ?>
             </div>
 
-            <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && isset( $meta['surroundings_places'] ) && ! empty( tf_data_types( $meta['surroundings_places'] ) ) ): ?>
+            <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && isset( $meta['surroundings_places'] ) && ! empty( Helper::tf_data_types( $meta['surroundings_places'] ) ) ): ?>
             <div class="tf-whats-around tf-single-widgets">
                 <?php if ( ! empty( $meta['surroundings_sec_title'] ) ): ?>
                     <h2 class="tf-section-title"><?php echo esc_html( $meta['surroundings_sec_title'] ); ?></h2>
                 <?php endif; ?>
                 <ul>
-                    <?php foreach ( tf_data_types( $meta['surroundings_places'] ) as $surroundings_place ) : ?>
-                    <?php if ( isset( $surroundings_place['places'] ) && ! empty( tf_data_types( $surroundings_place['places'] ) ) ): ?>
-                    <?php foreach ( tf_data_types( $surroundings_place['places'] ) as $place ): ?>
+                    <?php foreach ( Helper::tf_data_types( $meta['surroundings_places'] ) as $surroundings_place ) : ?>
+                    <?php if ( isset( $surroundings_place['places'] ) && ! empty( Helper::tf_data_types( $surroundings_place['places'] ) ) ): ?>
+                    <?php foreach ( Helper::tf_data_types( $surroundings_place['places'] ) as $place ): ?>
                     <li>
                         <span>
                         <?php if(!empty($surroundings_place['place_criteria_icon'])){ ?>
@@ -378,8 +378,8 @@ use \Tourfic\Classes\Helper;
     <!-- Hotel details End -->
 
     <?php
-    if( !empty(tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-2']) ){
-        foreach(tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-2'] as $section){
+    if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-2']) ){
+        foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-2'] as $section){
             if( !empty($section['aprtment-section-status']) && $section['aprtment-section-status']=="1" && !empty($section['aprtment-section-slug']) ){
                 include TF_TEMPLATE_PART_PATH . 'apartment/design-1/'.$section['aprtment-section-slug'].'.php';
             }
@@ -475,7 +475,7 @@ if ( $disable_related_sec !== '1' ) {
                                             <div class="meta-content">
                                                 <div class="tf-meta-title">
                                                     <h2><a href="<?php echo esc_url( get_permalink($selected_design_post_id) ) ?>">
-                                                    <?php echo esc_html( tourfic_character_limit_callback(get_the_title($selected_design_post_id), 35) ); ?>
+                                                    <?php echo esc_html( Helper::tourfic_character_limit_callback(get_the_title($selected_design_post_id), 35) ); ?>
                                                     </a></h2>
                                                     <div class="tf-meta-data-price">
                                                         <span><?php echo !empty($apartment_min_price["min"]) ? wp_kses_post(wc_price($apartment_min_price["min"])) : wp_kses_post(wc_price(0));

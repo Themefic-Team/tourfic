@@ -12,7 +12,7 @@ use \Tourfic\Classes\Helper;
 
 		<div class="search-result-inner">
 			<?php
-			$tf_defult_views = ! empty( tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] ) ? tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] : 'list';
+			$tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] : 'list';
 			?>
 			<!-- Start Content -->
 			<div class="tf-search-left">
@@ -64,7 +64,7 @@ use \Tourfic\Classes\Helper;
 			<div class="tf-search-right">
 				<?php
 				// Location: functions.php
-				tf_archive_sidebar_search_form('tf_hotel');
+				Helper::tf_archive_sidebar_search_form('tf_hotel');
 				?>
 			</div>
 			<!-- End Sidebar -->

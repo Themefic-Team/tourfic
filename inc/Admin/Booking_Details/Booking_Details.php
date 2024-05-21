@@ -1,11 +1,9 @@
 <?php
 
 namespace Tourfic\Admin\Booking_Details;
+use Tourfic\Classes\Helper;
 
 defined( 'ABSPATH' ) || exit;
-
-
-use Tourfic\Classes\Helper;
 
 Class Booking_Details {
     use \Tourfic\Traits\Singleton;

@@ -164,8 +164,8 @@ use \Tourfic\Classes\Helper;
 
 
             <?php 
-            if( !empty(tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1']) ){
-                foreach(tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1'] as $section){
+            if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1']) ){
+                foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1'] as $section){
                     if( !empty($section['hotel-section-status']) && $section['hotel-section-status']=="1" && !empty($section['hotel-section-slug']) ){
                         include TF_TEMPLATE_PART_PATH . 'hotel/design-2/'.$section['hotel-section-slug'].'.php';
                     }
@@ -386,8 +386,8 @@ use \Tourfic\Classes\Helper;
     <!-- Hotel details End -->
     
     <?php 
-    if( !empty(tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-2']) ){
-        foreach(tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-2'] as $section){
+    if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-2']) ){
+        foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-2'] as $section){
             if( !empty($section['hotel-section-status']) && $section['hotel-section-status']=="1" && !empty($section['hotel-section-slug']) ){
                 include TF_TEMPLATE_PART_PATH . 'hotel/design-2/'.$section['hotel-section-slug'].'.php';
             }
