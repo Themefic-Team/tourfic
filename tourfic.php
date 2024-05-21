@@ -82,7 +82,6 @@ final class Tourfic {
 		}
 
 		$this->init_hooks();
-		$this->includes();
 	}
 
 	/**

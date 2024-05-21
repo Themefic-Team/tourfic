@@ -1,6 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\Tour\Pricing as Tour_Price;
 
 /**
  * Flushing Rewrite on Tourfic Activation

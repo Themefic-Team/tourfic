@@ -429,7 +429,7 @@ Class Booking_Details {
         <div class="tf-booking-details-preview">
             <div class="tf-details-preview-header">
                 <div class="tf-back">
-                    <a href="<?php echo esc_url(get_admin_url( null, 'edit.php?post_type=tf_tours&page=tf_tours_booking' )); ?>">
+                    <a href="<?php echo esc_url(get_admin_url( null, 'edit.php?post_type=' . $this->booking_args["post_type"] . '&page=' . $this->booking_args["menu_slug"] )); ?>">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path d="M15 18L9 12L15 6" stroke="#003C79" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
@@ -1390,7 +1390,7 @@ Class Booking_Details {
             $wpdb->query(
                 $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET checkinout=%s, checkinout_by=%s WHERE id=%s", sanitize_title( $tf_checkinout ), wp_json_encode( $ft_checkinout_by ), sanitize_key($tf_order_id))
             );
-            if(!empty( $tf_order_uni_id )){
+            if(!empty( $tf_order_uni_id ) ){
                 if($tf_checkinout == "in") {
                     update_option("tf_" . $tf_order_uni_id, "in");
                 } else {
