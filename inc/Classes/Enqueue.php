@@ -825,7 +825,7 @@ class Enqueue {
 		);
 		$tf_options_post_type        = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_email_templates' );
 		$admin_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
-		if ( tf_is_woo_active() ) {
+		if ( Helper::tf_is_woo_active() ) {
 			if ( "tourfic-settings_page_tf_dashboard" == $screen ) {
 				//Order Data Retrive
 				$tf_old_order_limit = new \WC_Order_Query( array(

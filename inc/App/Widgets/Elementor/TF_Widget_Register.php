@@ -10,8 +10,8 @@ class TF_Widget_Register {
     use \Tourfic\Traits\Singleton;
 
     public function __construct() {
-        add_action( '/elementor/elements/categories_registered', array( $this, 'tf_add_elementor_widget_categories' ) );
-        add_action( '/elementor/widgets/register', array( $this, 'tf_register_widget' ) );
+        add_action( 'elementor/elements/categories_registered', array( $this, 'tf_add_elementor_widget_categories' ) );
+        add_action( 'elementor/widgets/register', array( $this, 'tf_register_widget' ) );
     }
 
     public function tf_add_elementor_widget_categories( $elements_manager ) {

@@ -15,7 +15,7 @@ get_header();
 
 $tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 
-if ( tf_is_woo_active() ) {
+if ( Helper::tf_is_woo_active() ) {
 	if ( $tf_apartment_arc_selected_template == "design-1" ) {
 		include TF_TEMPLATE_PATH . 'apartment/archive/design-1.php';
 	} else {

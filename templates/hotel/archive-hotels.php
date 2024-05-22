@@ -15,7 +15,7 @@ get_header();
 
 $tf_hotel_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
 
-if ( tf_is_woo_active() ) {
+if ( Helper::tf_is_woo_active() ) {
 	if ( $tf_hotel_arc_selected_template == "design-1" ) {
 		include TF_TEMPLATE_PATH . 'hotel/archive/design-1.php';
 	} elseif ( $tf_hotel_arc_selected_template == "design-2" ) {

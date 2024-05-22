@@ -24,7 +24,7 @@ use \Tourfic\Classes\Helper;
  *
  * @include
  */
-if ( tf_is_woo_active() ) {
+if ( Helper::tf_is_woo_active() ) {
 	if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-apartment.php' ) ) {
 		require_once TF_INC_PATH . 'functions/woocommerce/wc-apartment.php';
 	} else {

@@ -54,8 +54,11 @@ class Base {
 			TF_Promo_Notice::instance();
 		}
 
-		// Tourfic Widgets
-		TF_Widget_Base::instance();
+		if ( Helper::tf_is_woo_active() ) {
+			
+			// Tourfic Widgets
+			TF_Widget_Base::instance();
+		}
 
 		if ( Helper::tfopt( 'disable-services' ) && in_array( 'hotel', Helper::tfopt( 'disable-services' ) ) ) {
 		} else {

@@ -2,6 +2,8 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+use \Tourfic\Classes\Helper;
+
 if ( ! class_exists( 'TF_aptAvailabilityCal' ) ) {
 	class TF_aptAvailabilityCal extends TF_Fields {
 
@@ -17,7 +19,7 @@ if ( ! class_exists( 'TF_aptAvailabilityCal' ) ) {
 			}
 			$meta         = get_post_meta( $post->ID, 'tf_apartment_opt', true );
 			$pricing_type = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
-			if ( tf_is_woo_active() ) {
+			if ( Helper::tf_is_woo_active() ) {
 				?>
                 <div class="tf-apt-cal-wrap">
                     <div class='tf-apt-cal'></div>

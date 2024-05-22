@@ -4,12 +4,6 @@ defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
 
-if ( ! function_exists( 'tf_is_woo_active' ) ) {
-	function tf_is_woo_active() {
-		return is_plugin_active( 'woocommerce/woocommerce.php' );
-	}
-}
-
 /**
  * Show admin warning if a required file is missing
  */
@@ -36,7 +30,7 @@ if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-product-extend.php' ) 
 		require_once TF_INC_PATH . 'functions/woocommerce/wc-product-extend.php';
 	}
 
-	if ( tf_is_woo_active() ) {
+	if ( Helper::tf_is_woo_active() ) {
 		add_action( 'init', 'fida' );
 	}
 } else {
@@ -82,7 +76,7 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-tour.php' ) ) {
 /**
  * WooCommerce Common Functions
  */
-if ( tf_is_woo_active() ) {
+if ( Helper::tf_is_woo_active() ) {
 	if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-common.php' ) ) {
 		require_once TF_INC_PATH . 'functions/woocommerce/wc-common.php';
 	} else {
@@ -149,24 +143,11 @@ if ( file_exists( TF_INC_PATH . 'functions/functions_vat.php' ) ) {
  *
  * @since 1.0
  */
-if ( tf_is_woo_active() ) {
+if ( Helper::tf_is_woo_active() ) {
 	if ( file_exists( TF_INC_PATH . 'functions/shortcodes.php' ) ) {
 		require_once TF_INC_PATH . 'functions/shortcodes.php';
 	} else {
 		tf_file_missing( TF_INC_PATH . 'functions/shortcodes.php' );
-	}
-}
-
-/**
- * Widgets
- *
- * @since 1.0
- */
-if ( tf_is_woo_active() ) {
-	if ( file_exists( TF_INC_PATH . 'functions/widgets.php' ) ) {
-		require_once TF_INC_PATH . 'functions/widgets.php';
-	} else {
-		tf_file_missing( TF_INC_PATH . 'functions/widgets.php' );
 	}
 }
 
