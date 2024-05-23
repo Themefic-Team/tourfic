@@ -934,7 +934,7 @@ class Helper {
 			}
 		}
 
-		$loop = new WP_Query( $args );
+		$loop = new \WP_Query( $args );
 
 		//get total posts count
 		$total_posts = $loop->found_posts;
@@ -1008,7 +1008,7 @@ class Helper {
 					'post__in'       => $displayed_results,
 				);
 
-				$result_query  = new WP_Query( $filter_args );
+				$result_query  = new \WP_Query( $filter_args );
 				$result_query2 = $result_query;
 				if ( $result_query->have_posts() ) {
 					while ( $result_query->have_posts() ) {
@@ -2853,5 +2853,9 @@ class Helper {
 			<?php } ?>
 		<?php } ?>
 		<?php
+	}
+
+	static function tf_is_woo_active() {
+		return is_plugin_active( 'woocommerce/woocommerce.php' );
 	}
 }

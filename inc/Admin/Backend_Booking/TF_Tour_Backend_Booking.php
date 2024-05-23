@@ -57,7 +57,7 @@ class TF_Tour_Backend_Booking {
 	 * @since 2.9.26
 	 */
 	public function tf_backend_booking_page() {
-		if ( ! tf_is_woo_active() ) {
+		if ( ! Helper::tf_is_woo_active() ) {
 			?>
             <div class="tf-field-notice-inner tf-notice-danger" style="margin-top: 20px;">
 				<?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>

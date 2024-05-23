@@ -2,6 +2,8 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+use \Tourfic\Classes\Helper;
+
 if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
 	class TF_hotelAvailabilityCal extends TF_Fields {
 
@@ -26,7 +28,7 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
 
 			$room_index = str_replace( array( '[', ']', 'room' ), '', $this->parent_field );
 			$pricing_by = ! empty( $rooms[ $room_index ]['pricing-by'] ) ? $rooms[ $room_index ]['pricing-by'] : '1';
-			if ( tf_is_woo_active() ) {
+			if ( Helper::tf_is_woo_active() ) {
 				?>
                 <div class="tf-room-cal-wrap">
                     <div class='tf-room-cal'></div>

@@ -48,7 +48,7 @@ $tf_total_results = 0;
 
 $tf_tour_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
 
-if ( tf_is_woo_active() ) {
+if ( Helper::tf_is_woo_active() ) {
 	if ( $tf_tour_arc_selected_template == "design-1" ) {
 		include TF_TEMPLATE_PATH . 'tour/archive/design-1.php';
 	} elseif ( $tf_tour_arc_selected_template == "design-2" ) {

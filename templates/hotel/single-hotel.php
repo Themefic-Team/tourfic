@@ -8,7 +8,7 @@
 
 get_header();
 
-if ( !tf_is_woo_active() ) {
+if ( !Helper::tf_is_woo_active() ) {
 	?>
 	<div class="tf-container">
 		<div class="tf-notice tf-notice-danger">
