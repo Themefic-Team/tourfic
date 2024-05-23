@@ -254,6 +254,37 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 				),
 			);
 
+			$tf_tour_time = array(
+				'id'          => 'tf_tour_time',
+				'label'       => __( 'Tour Time', 'tourfic' ),
+				'type'        => 'select',
+				'options'     => array(
+					'10:00 AM' => '10:00 AM',
+				),
+				'placeholder' => __( 'Select Time', 'tourfic' ),
+				'field_width' => 50,
+				'is_pro'      => true,
+			);
+
+			$tf_tour_extras = array(
+				'id'          => 'tf_tour_extras',
+				'label'       => __( 'Tour Extras', 'tourfic' ),
+				'type'        => 'select2',
+				'multiple'    => true,
+				'options'     => 'posts',
+				'attributes'  => array(
+					'disabled' => 'disabled',
+				),
+				'field_width' => 50,
+				'is_pro'      => true,
+			);
+
+			if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+				array_pop( $fields['tf_booking_fields']['fields']);
+				array_push( $fields['tf_booking_fields']['fields'], $tf_tour_time );
+				array_push( $fields['tf_booking_fields']['fields'], $tf_tour_extras );
+			}
+
 			return $fields;
 		}
 
