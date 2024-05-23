@@ -275,14 +275,14 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 
 			$hotel_services_setting = array(
 				'id'          => 'tf_hotel_service_type',
-				'label'       => __( 'Service Type', 'tourfic' ),
+				'label'       => esc_html__( 'Service Type', 'tourfic' ),
 				'type'        => 'select',
 				'options'     => array(
-					'pickup'  => __( 'Pickup Service', 'tourfic' ),
-					'dropoff' => __( 'Drop-off Service', 'tourfic' ),
-					'both'    => __( 'Pickup & Drop-off Service', 'tourfic' ),
+					'pickup'  => esc_html__( 'Pickup Service', 'tourfic' ),
+					'dropoff' => esc_html__( 'Drop-off Service', 'tourfic' ),
+					'both'    => esc_html__( 'Pickup & Drop-off Service', 'tourfic' ),
 				),
-				'placeholder' => __( 'Select Service Type', 'tourfic' ),
+				'placeholder' => esc_html__( 'Select Service Type', 'tourfic' ),
 				'field_width' => 50,
 			);
 

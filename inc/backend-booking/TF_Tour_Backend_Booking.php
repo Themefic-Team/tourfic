@@ -256,19 +256,18 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 
 			$tf_tour_time = array(
 				'id'          => 'tf_tour_time',
-				'label'       => __( 'Tour Time', 'tourfic' ),
+				'label'       => esc_html__( 'Tour Time', 'tourfic' ),
 				'type'        => 'select',
 				'options'     => array(
 					'10:00 AM' => '10:00 AM',
 				),
-				'placeholder' => __( 'Select Time', 'tourfic' ),
+				'placeholder' => esc_html__( 'Select Time', 'tourfic' ),
 				'field_width' => 50,
-				'is_pro'      => true,
 			);
 
 			$tf_tour_extras = array(
 				'id'          => 'tf_tour_extras',
-				'label'       => __( 'Tour Extras', 'tourfic' ),
+				'label'       => esc_html__( 'Tour Extras', 'tourfic' ),
 				'type'        => 'select2',
 				'multiple'    => true,
 				'options'     => 'posts',
@@ -276,7 +275,6 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 					'disabled' => 'disabled',
 				),
 				'field_width' => 50,
-				'is_pro'      => true,
 			);
 
 			if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
