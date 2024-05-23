@@ -10,11 +10,18 @@ class Post_Type {
 	protected $post_args;
 	protected $tax_args;
 
-	public function __construct( $post_args = array(), $tax_args = array() ) {
-		$this->post_args = $post_args;
-		$this->tax_args  = $tax_args;
-
+	public function __construct() {
 		add_action( 'init', array( $this, 'tf_post_type_register' ) );
+	}
+
+	public function set_post_args(array $post_args) {
+		$this->post_args = $post_args;
+		return $this;
+	}
+
+	public function set_tax_args(array $tax_args) {
+		$this->tax_args = $tax_args;
+		return $this;
 	}
 
 	public function tf_post_type_register() {

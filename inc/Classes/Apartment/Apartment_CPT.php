@@ -14,7 +14,9 @@ class Apartment_CPT extends \Tourfic\Classes\Post_Type {
 	 * @return void
 	 */
 	public function __construct() {
-		$apartment_args = array(
+		parent::__construct();
+
+		$this->set_post_args( array(
 			'name'          => esc_html__('Apartments', 'tourfic' ),
 			'singular_name' => esc_html__('Apartment', 'tourfic' ),
 			'slug'          => 'tf_apartment',
@@ -23,9 +25,7 @@ class Apartment_CPT extends \Tourfic\Classes\Post_Type {
 			'supports'      => apply_filters( 'tf_apartment_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
 			'capability'    => array( 'tf_apartment', 'tf_apartments' ),
 			'rewrite_slug'  => $this->get_apartment_slug(),
-		);
-
-		$tax_args = array(
+		))->set_tax_args( array(
 			array(
 				'name'          => esc_html__('Locations', 'tourfic' ),
 				'singular_name' => esc_html__('Location', 'tourfic' ),
@@ -56,10 +56,8 @@ class Apartment_CPT extends \Tourfic\Classes\Post_Type {
 					'edit_terms'   => 'edit_tf_apartment',
 				),
 			)
-		);
-
-		parent::__construct( $apartment_args, $tax_args );
-
+		));
+		
 		add_action( 'init', array( $this, 'tf_post_type_taxonomy_register' ) );
 	}
 
