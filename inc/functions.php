@@ -3534,3 +3534,33 @@ function tf_remove_metabox_gutenburg( $response, $taxonomy, $request ) {
 
 	return $response;
 };
+
+// Custom roles to the author dropdown in gutenberg editor
+if( ! function_exists( "tf_gutenberg_author_dropdown_roles" )) {
+	function tf_gutenberg_author_dropdown_roles($args, $request = null){
+
+		// get all the roles in a website
+		global $wp_roles; 
+		if ( ! isset( $wp_roles ) ) $wp_roles = new WP_Roles();
+
+		$tf_all_roles = is_array( $wp_roles->get_names() ) && !empty( $wp_roles->get_names() ) ? array_keys( $wp_roles->get_names() ) : array('administrator', 'author', 'editor', 'tf_vendor', 'tf_manager');
+
+		// exclude the roles that are not needed
+		$tf_all_roles = array_filter( $tf_all_roles, function( $role ) {
+				return $role !== 'contributor' && $role !== 'subscriber' && $role !== 'customer';
+			} 
+		);
+
+		if( current_user_can( 'edit_posts' ) ) {
+			if (isset($args['who']) && $args['who'] === 'authors') {
+				unset($args['who']);
+				$args['role__in'] = $tf_all_roles;
+			}
+	
+			return $args;
+		}
+		return $args;
+	}
+
+	add_filter('rest_user_query', 'tf_gutenberg_author_dropdown_roles', 10, 2);
+}
