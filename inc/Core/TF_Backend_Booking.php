@@ -121,9 +121,9 @@ use Tourfic\Classes\Helper;
 		add_action( 'admin_menu', array( $this, 'tf_backend_booking_menu' ) );
 		add_action( 'tf_before_'. $this->args["name"] .'_booking_details', array( $this, 'tf_backend_booking_button' ) );
 
-		foreach( $this->actions as $action ) {
-            add_action( $action, [ $this, $action . '_callback' ] );
-        }
+		// foreach( $this->actions as $action ) {
+        //     add_action( $action, [ $this, $action . '_callback' ] );
+        // }
     }
 
 	final function tf_backend_booking_button() { 
@@ -197,6 +197,6 @@ use Tourfic\Classes\Helper;
 
     abstract protected function check_avaibility_callback();
     abstract protected function check_price_callback();
-    abstract protected function booking_callback();
+    abstract protected function backend_booking_callback();
 
 }

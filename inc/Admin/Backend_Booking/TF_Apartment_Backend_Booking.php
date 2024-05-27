@@ -6,6 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
 use \Tourfic\Core\TF_Backend_Booking;
+use \Tourfic\Classes\Apartment\Pricing as ApartmentPricing;
 
 class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 
@@ -27,7 +28,7 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
         // actions
         add_action('wp_ajax_tf_check_available_apartment', array($this, 'wp_ajax_tf_check_available_apartment_callback'));
         add_action('wp_ajax_tf_check_apartment_aditional_fees', array($this, 'wp_ajax_tf_check_apartment_aditional_fees_callback'));
-		add_action( 'wp_ajax_tf_backend_apartment_booking', array( $this, 'booking_callback' ) );
+		add_action( 'wp_ajax_tf_backend_apartment_booking', array( $this, 'backend_booking_callback' ) );
     }
 
     private function get_apartment_meta_options($id, $key = '') {
@@ -168,6 +169,8 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 		$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : 0;
 		$from = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
 		$to   = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
+
+		// $additional_fees = ApartmentPricing::instance()->check_additional_fees($apartment_id)->get_additional_fees();
 
 			// Additional Fees data
 		
@@ -320,7 +323,7 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 
     function check_avaibility_callback(){}
     function check_price_callback(){}
-    function booking_callback(){
+    function backend_booking_callback(){
 		// Add nonce for security and authentication.
 		check_ajax_referer('tf_backend_booking_nonce_action', 'tf_backend_booking_nonce');
 
