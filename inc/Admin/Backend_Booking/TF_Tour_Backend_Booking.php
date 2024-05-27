@@ -595,7 +595,7 @@ class TF_Tour_Backend_Booking {
 				'order_date'       => gmdate( 'Y-m-d H:i:s' ),
 			);
 			if ( ! array_key_exists( 'errors', $res['response'] ) || count( $res['response']['errors'] ) == 0 ) {
-				tf_set_order( $order_data );
+				Helper::tf_set_order( $order_data );
 				$response['success'] = true;
 				$response['message'] = esc_html__( 'Your booking has been successfully submitted.', 'tourfic' );
 			} else {

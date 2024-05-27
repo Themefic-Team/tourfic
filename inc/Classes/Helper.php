@@ -2858,4 +2858,55 @@ class Helper {
 	static function tf_is_woo_active() {
 		return is_plugin_active( 'woocommerce/woocommerce.php' );
 	}
+
+	static function tf_set_order( $order_data ) {
+		global $wpdb;
+		$all_order_ids = $wpdb->get_col( "SELECT order_id FROM {$wpdb->prefix}tf_order_data" );
+		do {
+			$order_id = wp_rand( 10000000, 99999999 );
+		} while ( in_array( $order_id, $all_order_ids ) );
+
+		$defaults = array(
+			'order_id'         => $order_id,
+			'post_id'          => 0,
+			'post_type'        => '',
+			'room_number'      => 0,
+			'check_in'         => '',
+			'check_out'        => '',
+			'billing_details'  => '',
+			'shipping_details' => '',
+			'order_details'    => '',
+			'customer_id'      => 1,
+			'payment_method'   => 'cod',
+			'status'           => 'processing',
+			'order_date'       => gmdate( 'Y-m-d H:i:s' ),
+		);
+
+		$order_data = wp_parse_args( $order_data, $defaults );
+
+		$wpdb->query(
+			$wpdb->prepare(
+				"INSERT INTO {$wpdb->prefix}tf_order_data
+				( order_id, post_id, post_type, room_number, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
+				VALUES ( %d, %d, %s, %d, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
+				array(
+					$order_data['order_id'],
+					sanitize_key( $order_data['post_id'] ),
+					$order_data['post_type'],
+					$order_data['room_number'],
+					$order_data['check_in'],
+					$order_data['check_out'],
+					wp_json_encode( $order_data['billing_details'] ),
+					wp_json_encode( $order_data['shipping_details'] ),
+					wp_json_encode( $order_data['order_details'] ),
+					$order_data['customer_id'],
+					$order_data['payment_method'],
+					$order_data['status'],
+					$order_data['order_date']
+				)
+			)
+		);
+
+		return $order_id;
+	}
 }

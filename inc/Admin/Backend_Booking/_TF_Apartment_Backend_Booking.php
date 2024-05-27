@@ -547,7 +547,7 @@ class TF_Apartment_Backend_Booking {
 				'order_date'       => gmdate( 'Y-m-d H:i:s' ),
 			);
 
-			tf_set_order( $order_data );
+			Helper::tf_set_order( $order_data );
 
 			$response['success'] = true;
 			$response['message'] = esc_html__( 'Your booking has been successfully submitted.', 'tourfic' );

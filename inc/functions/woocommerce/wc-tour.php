@@ -764,7 +764,7 @@ function tf_tours_booking_function() {
 			'order_date'       => gmdate( 'Y-m-d H:i:s' ),
 		);
 		$response['without_payment'] = 'true';
-		$order_id = tf_set_order( $order_data );
+		$order_id = Helper::tf_set_order( $order_data );
 		if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($order_id) ) {
 			do_action( 'tf_offline_payment_booking_confirmation', $order_id, $order_data );
 		}
