@@ -660,6 +660,7 @@ function tf_single_tour_booking_form( $post_id ) {
 	$child_price          = ! empty( $meta['child_price'] ) ? $meta['child_price'] : false;
 	$infant_price         = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : false;
 	$tour_extras          = isset( $meta['tour-extra'] ) ? $meta['tour-extra'] : null;
+	$tf_hide_external_price = true;
 
 	if ( ! empty( $tour_extras ) && gettype( $tour_extras ) == "string" ) {
 
