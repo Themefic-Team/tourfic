@@ -816,6 +816,9 @@ Class Booking_Details {
                                         if(!empty($tour_date_duration[1])){
                                             $tour_out = $tour_date_duration[1];
                                         }
+                                    } else {
+                                        $tour_in = $tf_tour_details->check_in;
+                                        $tour_out = $tf_tour_details->check_out;
                                     }
                                     $tour_duration = !empty($tour_out) && !empty( $tour_in ) ? gmdate('d F, Y', strtotime($tour_in)).' - '. gmdate('d F, Y', strtotime($tour_out)) : gmdate('d F, Y', strtotime($tour_in));
                                     $tour_time = !empty($tf_tour_details->tour_time) ? $tf_tour_details->tour_time : '';
@@ -1382,6 +1385,7 @@ Class Booking_Details {
         global $wpdb;
         $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
         $tf_woo_order_id = $wpdb->get_row( $wpdb->prepare( "SELECT order_id FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
+        $tf_order_post_type = $wpdb->get_row( $wpdb->prepare( "SELECT post_type FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
     
         $tf_order_uni_id = !empty($tf_woo_order_id) ? get_option("tf_order_uni_" . $tf_woo_order_id->order_id) : "";
     
@@ -1390,7 +1394,7 @@ Class Booking_Details {
             $wpdb->query(
                 $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET checkinout=%s, checkinout_by=%s WHERE id=%s", sanitize_title( $tf_checkinout ), wp_json_encode( $ft_checkinout_by ), sanitize_key($tf_order_id))
             );
-            if(!empty( $tf_order_uni_id ) ){
+            if(!empty( $tf_order_uni_id ) && $tf_order_post_type->post_type =='tour' ){
                 if($tf_checkinout == "in") {
                     update_option("tf_" . $tf_order_uni_id, "in");
                 } else {

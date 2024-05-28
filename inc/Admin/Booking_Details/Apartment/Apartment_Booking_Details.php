@@ -23,3 +23,4 @@ class Apartment_Booking_Details extends \Tourfic\Admin\Booking_Details\Booking_D
     }
 
 }
+ 

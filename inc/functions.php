@@ -47,6 +47,15 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-helper.php' ) ) {
 }
 
 /**
+ * Order page Functions
+ */
+if ( file_exists( TF_INC_PATH . 'functions/functions_order.php' ) ) {
+	require_once TF_INC_PATH . 'functions/functions_order.php';
+} else {
+	tf_file_missing( TF_INC_PATH . 'functions/functions_order.php' );
+}
+
+/**
  * Hotel Functions
  */
 if ( file_exists( TF_INC_PATH . 'functions/functions-hotel.php' ) ) {
