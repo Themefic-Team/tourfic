@@ -3521,7 +3521,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'tf-affiliate',
 					'type'     => 'callback',
-					'function' => 'tf_affiliate_callback',
+					'function' => array( '\Tourfic\Classes\Helper', 'tf_affiliate_callback' ),
 				)
 			),
 		),

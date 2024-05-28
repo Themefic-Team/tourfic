@@ -134,11 +134,11 @@ final class Tourfic {
 	 */
 	public function includes() {
 		// Classes
-		 if ( file_exists( TF_INC_PATH . 'classes.php' ) ) {
-		 	require_once TF_INC_PATH . 'classes.php';
-		 } else {
-		 	tf_file_missing( TF_INC_PATH . 'classes.php' );
-		 }
+//		 if ( file_exists( TF_INC_PATH . 'classes.php' ) ) {
+//		 	require_once TF_INC_PATH . 'classes.php';
+//		 } else {
+//		 	tf_file_missing( TF_INC_PATH . 'classes.php' );
+//		 }
 	}
 
 	function tf_load_textdomain() {
