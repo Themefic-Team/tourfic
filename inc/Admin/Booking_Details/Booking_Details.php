@@ -816,6 +816,9 @@ Class Booking_Details {
                                         if(!empty($tour_date_duration[1])){
                                             $tour_out = $tour_date_duration[1];
                                         }
+                                    } else {
+                                        $tour_in = $tf_tour_details->check_in;
+                                        $tour_out = $tf_tour_details->check_out;
                                     }
                                     $tour_duration = !empty($tour_out) && !empty( $tour_in ) ? gmdate('d F, Y', strtotime($tour_in)).' - '. gmdate('d F, Y', strtotime($tour_out)) : gmdate('d F, Y', strtotime($tour_in));
                                     $tour_time = !empty($tf_tour_details->tour_time) ? $tf_tour_details->tour_time : '';

@@ -1,4 +1,7 @@
 <?php 
+
+use \Tourfic\Classes\Helper;
+
 $faqs = !empty($meta['faq']) ? Helper::tf_data_types($meta['faq']) : '';
 if ( $faqs ): ?>
 <!-- apartment Questions Srart -->

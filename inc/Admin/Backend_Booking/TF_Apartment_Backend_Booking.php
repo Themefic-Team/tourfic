@@ -6,7 +6,6 @@ defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
 use \Tourfic\Core\TF_Backend_Booking;
-use \Tourfic\Classes\Apartment\Pricing as ApartmentPricing;
 
 class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 
@@ -26,8 +25,8 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
         $this->set_settings_fields();
 
         // actions
-        add_action('wp_ajax_tf_check_available_apartment', array($this, 'wp_ajax_tf_check_available_apartment_callback'));
-        add_action('wp_ajax_tf_check_apartment_aditional_fees', array($this, 'wp_ajax_tf_check_apartment_aditional_fees_callback'));
+        add_action('wp_ajax_tf_check_available_apartment', array($this, 'check_avaibility_callback'));
+        add_action('wp_ajax_tf_check_apartment_aditional_fees', array($this, 'tf_check_apartment_aditional_fees_callback'));
 		add_action( 'wp_ajax_tf_backend_apartment_booking', array( $this, 'backend_booking_callback' ) );
     }
 
@@ -115,62 +114,13 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
         $this->set_settings( $this->settings );
     }
 
-    public function wp_ajax_tf_check_available_apartment_callback() {
-		// Add nonce for security and authentication.
-		check_ajax_referer('updates', '_nonce');
-
-		$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
-		$from = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
-		$to   = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
-
-		$loop = new \WP_Query( array(
-			'post_type'      => 'tf_apartment',
-			'post_status'    => 'publish',
-			'posts_per_page' => - 1,
-		) );
-
-		$period = '';
-		if ( ! empty( $from ) && ! empty( $to ) ) {
-			$period = new \DatePeriod(
-				new \DateTime( $from ),
-				new \DateInterval( 'P1D' ),
-				new \DateTime( ! empty( $to ) ? $to : '23:59:59' )
-			);
-		}
-
-		$check_in_out = "$from - $to";
-
-		if ( $loop->have_posts() ) {
-			$not_found = [];
-			while ( $loop->have_posts() ) {
-				$loop->the_post();
-				tf_filter_apartment_by_date( $period, $not_found, array( 1, 0, 0, $check_in_out ) );
-			}
-
-			$tf_total_filters = [];
-
-			foreach ( $not_found as $filter_post ) {
-				if ( $filter_post['found'] != 1 ) {
-					$tf_total_filters[ $filter_post['post_id'] ] = get_the_title( $filter_post['post_id'] );
-				}
-			}
-		}
-		wp_reset_postdata();
-
-		wp_send_json_success( array(
-			'apartments' => $tf_total_filters,
-		) );
-	}
-
-    public function wp_ajax_tf_check_apartment_aditional_fees_callback() {
+    public function tf_check_apartment_aditional_fees_callback() {
 		// Add nonce for security and authentication.
 		check_ajax_referer('updates', '_nonce');
 
 		$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : 0;
 		$from = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
 		$to   = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
-
-		// $additional_fees = ApartmentPricing::instance()->check_additional_fees($apartment_id)->get_additional_fees();
 
 			// Additional Fees data
 		
@@ -219,9 +169,6 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 			) );
 		}
 	}
-
-	public function tf_backend_apartment_booking() {}
-
 
 	public function apartment_day_diference_calculation($check_in, $check_out) {
 		if ( !empty($check_in) && !empty($check_out) ) {
@@ -321,8 +268,53 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 		return $apartment_pricing;
 	}
 
-    function check_avaibility_callback(){}
-    function check_price_callback(){}
+    function check_avaibility_callback(){
+		// Add nonce for security and authentication.
+		check_ajax_referer('updates', '_nonce');
+
+		$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
+		$from = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
+		$to   = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
+
+		$loop = new \WP_Query( array(
+			'post_type'      => 'tf_apartment',
+			'post_status'    => 'publish',
+			'posts_per_page' => - 1,
+		) );
+
+		$period = '';
+		if ( ! empty( $from ) && ! empty( $to ) ) {
+			$period = new \DatePeriod(
+				new \DateTime( $from ),
+				new \DateInterval( 'P1D' ),
+				new \DateTime( ! empty( $to ) ? $to : '23:59:59' )
+			);
+		}
+
+		$check_in_out = "$from - $to";
+
+		if ( $loop->have_posts() ) {
+			$not_found = [];
+			while ( $loop->have_posts() ) {
+				$loop->the_post();
+				tf_filter_apartment_by_date( $period, $not_found, array( 1, 0, 0, $check_in_out ) );
+			}
+
+			$tf_total_filters = [];
+
+			foreach ( $not_found as $filter_post ) {
+				if ( $filter_post['found'] != 1 ) {
+					$tf_total_filters[ $filter_post['post_id'] ] = get_the_title( $filter_post['post_id'] );
+				}
+			}
+		}
+		wp_reset_postdata();
+
+		wp_send_json_success( array(
+			'apartments' => $tf_total_filters,
+		) );
+	}
+
     function backend_booking_callback(){
 		// Add nonce for security and authentication.
 		check_ajax_referer('tf_backend_booking_nonce_action', 'tf_backend_booking_nonce');
@@ -343,14 +335,14 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 
 		$required_fields = array(
 			'tf_apartment_booked_by',
-			'tf_apartment_customer_first_name',
-			'tf_apartment_customer_email',
-			'tf_apartment_customer_phone',
-			'tf_apartment_customer_country',
-			'tf_apartment_customer_address',
-			'tf_apartment_customer_city',
-			'tf_apartment_customer_state',
-			'tf_apartment_customer_zip',
+			'tf_customer_first_name',
+			'tf_customer_email',
+			'tf_customer_phone',
+			'tf_customer_country',
+			'tf_customer_address',
+			'tf_customer_city',
+			'tf_customer_state',
+			'tf_customer_zip',
 			'tf_apartment_date',
 			'tf_available_apartments',
 			'tf_apartment_adults_number'
@@ -392,44 +384,44 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 
 		if ( $apt_data['max_adults'] < $adult_count ) {
 			/* translators: %s max adults */
-			$response['fieldErrors']['tf_apartment_adults_number_error'] = sprintf( esc_html__( "You can't book more than %s adults", 'tourfic' ), $apt_data['max_adults']);
+			$response['fieldErrors']['tf_apartment_adults_number_error'] = sprintf( esc_html__( "You can't book more than %s adults", 'tourfic' ), $apt_data['max_adults'] ? $apt_data['max_adults'] : 0);
 		}
 		if ( $apt_data['max_children'] < $child_count ) {
 			/* translators: %s max children */
-			$response['fieldErrors']['tf_apartment_children_number_error'] = sprintf( esc_html__( "You can't book more than %s children", 'tourfic' ), $apt_data['max_children']);
+			$response['fieldErrors']['tf_apartment_children_number_error'] = sprintf( esc_html__( "You can't book more than %s children", 'tourfic' ), $apt_data['max_children'] ? $apt_data['max_children'] : 0);
 		}
 		if ( $apt_data['max_infants'] < $infant_count ) {
 			/* translators: %s max infants */
-			$response['fieldErrors']['tf_apartment_infant_number_error'] = sprintf( esc_html__( "You can't book more than %s infants", 'tourfic' ), $apt_data['max_infants']);
+			$response['fieldErrors']['tf_apartment_infant_number_error'] = sprintf( esc_html__( "You can't book more than %s infants", 'tourfic' ), $apt_data['max_infants'] ? $apt_data['max_infants'] : 0);
 		}
 
 		if ( ! array_key_exists("fieldErrors", $response) || ! $response['fieldErrors'] ) {
 			$total_price = $this->get_total_apartment_price($apt_id, $check_from, $check_to, $adult_count, $child_count, $infant_count, $additional_fees);
 			$billing_details  = array(
-				'billing_first_name' => $field['tf_apartment_customer_first_name'],
-				'billing_last_name'  => $field['tf_apartment_customer_last_name'],
+				'billing_first_name' => $field['tf_customer_first_name'],
+				'billing_last_name'  => $field['tf_customer_last_name'],
 				'billing_company'    => '',
-				'billing_address_1'  => $field['tf_apartment_customer_address'],
-				'billing_address_2'  => $field['tf_apartment_customer_address_2'],
-				'billing_city'       => $field['tf_apartment_customer_city'],
-				'billing_state'      => $field['tf_apartment_customer_state'],
-				'billing_postcode'   => $field['tf_apartment_customer_zip'],
-				'billing_country'    => $field['tf_apartment_customer_country'],
-				'billing_email'      => $field['tf_apartment_customer_email'],
-				'billing_phone'      => $field['tf_apartment_customer_phone'],
+				'billing_address_1'  => $field['tf_customer_address'],
+				'billing_address_2'  => $field['tf_customer_address_2'],
+				'billing_city'       => $field['tf_customer_city'],
+				'billing_state'      => $field['tf_customer_state'],
+				'billing_postcode'   => $field['tf_customer_zip'],
+				'billing_country'    => $field['tf_customer_country'],
+				'billing_email'      => $field['tf_customer_email'],
+				'billing_phone'      => $field['tf_customer_phone'],
 			);
 			$shipping_details = array(
-				'shipping_first_name' => $field['tf_apartment_customer_first_name'],
-				'shipping_last_name'  => $field['tf_apartment_customer_last_name'],
+				'shipping_first_name' => $field['tf_customer_first_name'],
+				'shipping_last_name'  => $field['tf_customer_last_name'],
 				'shipping_company'    => '',
-				'shipping_address_1'  => $field['tf_apartment_customer_address'],
-				'shipping_address_2'  => $field['tf_apartment_customer_address_2'],
-				'shipping_city'       => $field['tf_apartment_customer_city'],
-				'shipping_state'      => $field['tf_apartment_customer_state'],
-				'shipping_postcode'   => $field['tf_apartment_customer_zip'],
-				'shipping_country'    => $field['tf_apartment_customer_country'],
-				'shipping_phone'      => $field['tf_apartment_customer_phone'],
-				'tf_email'      	  => $field['tf_apartment_customer_email'],
+				'shipping_address_1'  => $field['tf_customer_address'],
+				'shipping_address_2'  => $field['tf_customer_address_2'],
+				'shipping_city'       => $field['tf_customer_city'],
+				'shipping_state'      => $field['tf_customer_state'],
+				'shipping_postcode'   => $field['tf_customer_zip'],
+				'shipping_country'    => $field['tf_customer_country'],
+				'shipping_phone'      => $field['tf_customer_phone'],
+				'tf_email'      	  => $field['tf_customer_email'],
 			);
 			$order_details    = [
 				'order_by'             => $field['tf_apartment_booked_by'],
@@ -467,4 +459,6 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 		echo wp_json_encode( $response );
 		die();
 	}
+
+	function check_price_callback() {}
 }

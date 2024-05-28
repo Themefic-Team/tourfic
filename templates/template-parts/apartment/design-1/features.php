@@ -1,4 +1,8 @@
-<?php if ( isset( $meta['highlights'] ) && ! empty( Helper::tf_data_types( $meta['highlights'] ) ) ) :
+<?php 
+
+use \Tourfic\Classes\Helper;
+
+if ( isset( $meta['highlights'] ) && ! empty( Helper::tf_data_types( $meta['highlights'] ) ) ) :
    $tf_highlights_count = count(Helper::tf_data_types( $meta['highlights'] ));
 ?>
 <!--Information Section Start -->

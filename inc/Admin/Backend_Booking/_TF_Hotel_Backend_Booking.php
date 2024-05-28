@@ -1,27 +1,204 @@
 <?php
 
 namespace Tourfic\Admin\Backend_Booking;
+use Tourfic\Classes\Helper;
 
-// do not allow direct access
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
-use \Tourfic\Classes\Helper;
-use \Tourfic\Core\TF_Backend_Booking;
-
-class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
+class TF_Hotel_Backend_Booking {
 
 	use \Tourfic\Traits\Singleton;
 
-	protected array $args = array(
-		'name' => 'hotel',
-        'prefix' => 'tf-hotel',
-        'post_type' => 'tf_hotel',
-        'caps' => 'edit_tf_hotels'
-	);
+	private static $instance = null;
 
-	function set_settings_fields() {
-		$this->settings = array(
-			'tf_booking_fields'	=> array(
+	/**
+	 * Singleton instance
+	 * @since 1.0.0
+	 */
+	public static function instance() {
+		if ( self::$instance == null ) {
+			self::$instance = new self;
+		}
+
+		return self::$instance;
+	}
+
+	public function __construct() {
+		add_action( 'tf_before_hotel_booking_details', array( $this, 'tf_hotel_backend_booking_button' ) );
+		add_action( 'admin_menu', array( $this, 'tf_backend_booking_menu' ) );
+		add_action( 'wp_ajax_tf_check_available_hotel', array( $this, 'tf_check_available_hotel' ) );
+		add_action( 'wp_ajax_tf_check_available_room', array( $this, 'tf_check_available_room' ) );
+		add_action( 'wp_ajax_tf_update_room_fields', array( $this, 'tf_update_room_fields' ) );
+		add_action( 'wp_ajax_tf_backend_hotel_booking', array( $this, 'tf_backend_hotel_booking' ) );
+	}
+
+	function tf_hotel_backend_booking_button() {
+		?>
+		<a href="<?php echo esc_url(admin_url( 'edit.php?post_type=tf_hotel&page=tf-hotel-backend-booking' )); ?>" class="button button-primary tf-booking-btn"><?php esc_html_e( 'Add New Booking', 'tourfic' ); ?></a>
+		<?php
+	}
+
+	/**
+	 * TF Backend Booking Menu
+	 * @since 2.9.26
+	 */
+	public function tf_backend_booking_menu() {
+		add_submenu_page(
+			'edit.php?post_type=tf_hotel',
+			esc_html__( 'Add New Booking', 'tourfic' ),
+			esc_html__( 'Add New Booking', 'tourfic' ),
+			'edit_tf_hotels',
+			'tf-hotel-backend-booking',
+			array( $this, 'tf_backend_booking_page' ),
+		);
+	}
+
+	/**
+	 * TF Backend Booking Page
+	 * @since 2.9.26
+	 */
+	public function tf_backend_booking_page() {
+		if ( !Helper::tf_is_woo_active() ) {
+			?>
+			<div class="tf-field-notice-inner tf-notice-danger" style="margin-top: 20px;">
+				<?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>
+			</div>
+			<?php
+			return;
+		}
+
+		echo '<div class="tf-setting-dashboard">';
+		Helper::tf_dashboard_header()
+		?>
+		<form method="post" action="" class="tf-backend-hotel-booking" enctype="multipart/form-data">
+			<h1><?php esc_html_e( 'Add New Hotel Booking', 'tourfic' ); ?></h1>
+			<?php
+			$tf_backend_booking_form_fields = $this->tf_backend_booking_form_fields();
+			foreach ( $tf_backend_booking_form_fields as $id => $tf_backend_booking_form_field ) : ?>
+				<div class="tf-backend-booking-card-wrap">
+					<h3 class="tf-backend-booking-card-title"><?php echo esc_html( $tf_backend_booking_form_field['title'] ); ?></h3>
+
+					<div class="tf-booking-fields-wrapper">
+						<div class="tf-booking-fields">
+							<?php
+							if ( ! empty( $tf_backend_booking_form_field['fields'] ) ):
+								foreach ( $tf_backend_booking_form_field['fields'] as $field ) :
+
+									$default = isset( $field['default'] ) ? $field['default'] : '';
+									$value   = isset( $tf_option_value[ $field['id'] ] ) ? $tf_option_value[ $field['id'] ] : $default;
+
+									$tf_option = new \Tourfic\Admin\TF_Options\TF_Options();
+									$tf_option->field( $field, $value, '' );
+
+								endforeach;
+							endif; ?>
+						</div>
+					</div>
+				</div>
+			<?php endforeach; ?>
+			<?php wp_nonce_field( 'tf_backend_booking_nonce_action', 'tf_backend_booking_nonce' ); ?>
+
+			<!-- Footer -->
+			<div class="tf-backend-booking-footer">
+				<button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn" id="tf-backend-hotel-book-btn"><?php esc_html_e( 'Book Now', 'tourfic' ); ?></button>
+			</div>
+		</form>
+		<?php
+		echo '</div>';
+	}
+
+	/**
+	 * TF Backend Booking Form Fields
+	 * @since 2.9.26
+	 */
+	public function tf_backend_booking_form_fields() {
+		$current_user = wp_get_current_user();
+		$fields       = array(
+			'tf_booking_customer_fields' => array(
+				'title'  => esc_html__( 'Customer Information', 'tourfic' ),
+				'fields' => array(
+					array(
+						'id'         => 'tf_hotel_booked_by',
+						'label'      => esc_html__( 'Booked By', 'tourfic' ),
+						'type'       => 'text',
+						'default'    => $current_user->display_name ?: $current_user->user_login,
+						'attributes' => array(
+							'readonly' => 'readonly',
+						),
+					),
+					array(
+						'id'          => 'tf_customer_first_name',
+						'label'       => esc_html__( 'First Name', 'tourfic' ),
+						'type'        => 'text',
+						'placeholder' => esc_html__( 'Enter Customer First Name', 'tourfic' ),
+						'field_width' => 50,
+					),
+					array(
+						'id'          => 'tf_customer_last_name',
+						'label'       => esc_html__( 'Last Name', 'tourfic' ),
+						'type'        => 'text',
+						'placeholder' => esc_html__( 'Enter Customer Last Name', 'tourfic' ),
+						'field_width' => 50,
+					),
+					array(
+						'id'          => 'tf_customer_email',
+						'label'       => esc_html__( 'Email', 'tourfic' ),
+						'type'        => 'text',
+						'placeholder' => esc_html__( 'Enter Customer Email', 'tourfic' ),
+						'field_width' => 50,
+					),
+					array(
+						'id'          => 'tf_customer_phone',
+						'label'       => esc_html__( 'Phone', 'tourfic' ),
+						'type'        => 'text',
+						'placeholder' => esc_html__( 'Enter Customer Phone', 'tourfic' ),
+						'field_width' => 50,
+					),
+					array(
+						'id'          => 'tf_customer_country',
+						'label'       => esc_html__( 'Country / Region', 'tourfic' ),
+						'type'        => 'text',
+						'placeholder' => esc_html__( 'Enter Customer Country', 'tourfic' ),
+						'field_width' => 33.33,
+					),
+					array(
+						'id'          => 'tf_customer_address',
+						'label'       => esc_html__( 'Address', 'tourfic' ),
+						'type'        => 'text',
+						'placeholder' => esc_html__( 'Enter Customer Address', 'tourfic' ),
+						'field_width' => 33.33,
+					),
+					array(
+						'id'          => 'tf_customer_address_2',
+						'label'       => esc_html__( 'Address 2', 'tourfic' ),
+						'type'        => 'text',
+						'placeholder' => esc_html__( 'Enter Customer Address 2', 'tourfic' ),
+						'field_width' => 33.33,
+					),
+					array(
+						'id'          => 'tf_customer_city',
+						'label'       => esc_html__( 'Town / City', 'tourfic' ),
+						'type'        => 'text',
+						'placeholder' => esc_html__( 'Enter Customer City', 'tourfic' ),
+						'field_width' => 33,
+					),
+					array(
+						'id'          => 'tf_customer_state',
+						'label'       => esc_html__( 'State', 'tourfic' ),
+						'type'        => 'text',
+						'placeholder' => esc_html__( 'Enter Customer State', 'tourfic' ),
+						'field_width' => 33,
+					),
+					array(
+						'id'          => 'tf_customer_zip',
+						'label'       => esc_html__( 'Postcode / ZIP', 'tourfic' ),
+						'type'        => 'text',
+						'placeholder' => esc_html__( 'Enter Customer Zip', 'tourfic' ),
+						'field_width' => 33,
+					),
+				),
+			),
+			'tf_booking_fields'          => array(
 				'title'  => esc_html__( 'Booking Information', 'tourfic' ),
 				'fields' => array(
 					array(
@@ -97,40 +274,13 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 			),
 		);
 
-		$hotel_services_setting = array(
-			'id'          => 'tf_hotel_service_type',
-			'label'       => esc_html__( 'Service Type', 'tourfic' ),
-			'type'        => 'select',
-			'options'     => array(
-				'pickup'  => esc_html__( 'Pickup Service', 'tourfic' ),
-				'dropoff' => esc_html__( 'Drop-off Service', 'tourfic' ),
-				'both'    => esc_html__( 'Pickup & Drop-off Service', 'tourfic' ),
-			),
-			'placeholder' => esc_html__( 'Select Service Type', 'tourfic' ),
-			'field_width' => 50,
-		);
-
-		if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-			array_pop( $this->settings['tf_booking_fields']['fields']);
-			array_push( $this->settings['tf_booking_fields']['fields'], $hotel_services_setting );
-		}
-
-		$this->set_settings( $this->settings );
+		return $fields;
 	}
 
-	public function __construct(){
-
-		$this->set_settings_fields();
-
-        parent::__construct($this->args);
-
-		// all actions
-		add_action( 'wp_ajax_tf_check_available_hotel', array( $this, 'tf_check_available_hotel' ) );
-		add_action( 'wp_ajax_tf_check_available_room', array( $this, 'tf_check_available_room' ) );
-		add_action( 'wp_ajax_tf_update_room_fields', array( $this, 'tf_update_room_fields' ) );
-		add_action( 'wp_ajax_tf_backend_hotel_booking', array( $this, 'backend_booking_callback' ) );
-	}
-
+	/*
+		* Check available hotel room from date to date
+		* @since 2.9.26
+		*/
 	public function tf_check_available_hotel() {
 		// Add nonce for security and authentication.
 		check_ajax_referer('updates', '_nonce');
@@ -174,6 +324,10 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 		) );
 	}
 
+	/*
+		* Check available hotel room by hotel id
+		* @since 2.9.26
+		*/
 	public function tf_check_available_room() {
 		// Add nonce for security and authentication.
 		check_ajax_referer('updates', '_nonce');
@@ -275,6 +429,10 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 		) );
 	}
 
+	/*
+		* Room adults, children, infants fields update on room change
+		* @since 2.9.26
+		*/
 	public function tf_update_room_fields() {
 		// Add nonce for security and authentication.
 		check_ajax_referer('updates', '_nonce');
@@ -387,7 +545,11 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 		}
 	}
 
-    function backend_booking_callback(){
+	/*
+		* Booking form submit
+		* @since 2.9.26
+		*/
+	public function tf_backend_hotel_booking() {
 		// Add nonce for security and authentication.
 		check_ajax_referer('tf_backend_booking_nonce_action', 'tf_backend_booking_nonce');
 
@@ -448,7 +610,7 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 			$response['fieldErrors']['tf_hotel_children_number_error'] = sprintf(esc_html__( "You can't book more than %s children", 'tourfic' ), $field['tf_hotel_rooms_number'] * $room_data['child']);
 		}
 
-		if ( ! array_key_exists("fieldErrors", $response) || ! $response['fieldErrors'] ) {
+		if ( ! $response['fieldErrors'] ) {
 			$room_price       = $this->tf_get_room_total_price( intval( $field['tf_available_hotels'] ), $room_data, $field['tf_hotel_date']['from'], $field['tf_hotel_date']['to'], intval( $field['tf_hotel_rooms_number'] ), intval( $field['tf_hotel_adults_number'] ), intval( $field['tf_hotel_children_number'] ), $field['tf_hotel_service_type'] );
 			$billing_details  = array(
 				'billing_first_name' => $field['tf_customer_first_name'],
@@ -516,6 +678,10 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 		die();
 	}
 
+	/*
+		* Room data from room and hotel id
+		* @since 2.9.26
+		*/
 	public function tf_get_room_data( $hotel_id, $room_id ) {
 
 		if ( $hotel_id && $room_id ) {
@@ -540,6 +706,10 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 
 	}
 
+	/*
+		* Calculate room total price
+		* @since 2.9.26
+		*/
 	public function tf_get_room_total_price( $hotel_id, $room_data, $check_in, $check_out, $room_selected, $adult, $child, $service_type ) {
 		$meta            = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
 		$airport_service = $meta['airport_service'] ?? null;
@@ -782,7 +952,4 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 			'air_service_info'  => $air_service_info,
 		);
 	}
-
-	function check_avaibility_callback(){}
-    function check_price_callback(){}
 }

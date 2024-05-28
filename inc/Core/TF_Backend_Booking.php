@@ -34,70 +34,70 @@ use Tourfic\Classes\Helper;
 						),
 					),
 					array(
-						'id'          => $this->args["post_type"] . '_customer_first_name',
+						'id'          => 'tf_customer_first_name',
 						'label'       => esc_html__( 'First Name', 'tourfic' ),
 						'type'        => 'text',
 						'placeholder' => esc_html__( 'Enter Customer First Name', 'tourfic' ),
 						'field_width' => 50,
 					),
 					array(
-						'id'          => $this->args["post_type"] . '_customer_last_name',
+						'id'          => 'tf_customer_last_name',
 						'label'       => esc_html__( 'Last Name', 'tourfic' ),
 						'type'        => 'text',
 						'placeholder' => esc_html__( 'Enter Customer Last Name', 'tourfic' ),
 						'field_width' => 50,
 					),
 					array(
-						'id'          => $this->args["post_type"] . '_customer_email',
+						'id'          => 'tf_customer_email',
 						'label'       => esc_html__( 'Email', 'tourfic' ),
 						'type'        => 'text',
 						'placeholder' => esc_html__( 'Enter Customer Email', 'tourfic' ),
 						'field_width' => 50,
 					),
 					array(
-						'id'          => $this->args["post_type"] . '_customer_phone',
+						'id'          => 'tf_customer_phone',
 						'label'       => esc_html__( 'Phone', 'tourfic' ),
 						'type'        => 'text',
 						'placeholder' => esc_html__( 'Enter Customer Phone', 'tourfic' ),
 						'field_width' => 50,
 					),
 					array(
-						'id'          => $this->args["post_type"] . '_customer_country',
+						'id'          => 'tf_customer_country',
 						'label'       => esc_html__( 'Country / Region', 'tourfic' ),
 						'type'        => 'text',
 						'placeholder' => esc_html__( 'Enter Customer Country', 'tourfic' ),
 						'field_width' => 33.33,
 					),
 					array(
-						'id'          => $this->args["post_type"] . '_customer_address',
+						'id'          => 'tf_customer_address',
 						'label'       => esc_html__( 'Address', 'tourfic' ),
 						'type'        => 'text',
 						'placeholder' => esc_html__( 'Enter Customer Address', 'tourfic' ),
 						'field_width' => 33.33,
 					),
 					array(
-						'id'          => $this->args["post_type"] . '_customer_address_2',
+						'id'          => 'tf_customer_address_2',
 						'label'       => esc_html__( 'Address 2', 'tourfic' ),
 						'type'        => 'text',
 						'placeholder' => esc_html__( 'Enter Customer Address 2', 'tourfic' ),
 						'field_width' => 33.33,
 					),
 					array(
-						'id'          => $this->args["post_type"] . '_customer_city',
+						'id'          => 'tf_customer_city',
 						'label'       => esc_html__( 'Town / City', 'tourfic' ),
 						'type'        => 'text',
 						'placeholder' => esc_html__( 'Enter Customer City', 'tourfic' ),
 						'field_width' => 33,
 					),
 					array(
-						'id'          => $this->args["post_type"] . '_customer_state',
+						'id'          => 'tf_customer_state',
 						'label'       => esc_html__( 'State', 'tourfic' ),
 						'type'        => 'text',
 						'placeholder' => esc_html__( 'Enter Customer State', 'tourfic' ),
 						'field_width' => 33,
 					),
 					array(
-						'id'          => $this->args["post_type"] . '_customer_zip',
+						'id'          => 'tf_customer_zip',
 						'label'       => esc_html__( 'Postcode / ZIP', 'tourfic' ),
 						'type'        => 'text',
 						'placeholder' => esc_html__( 'Enter Customer Zip', 'tourfic' ),
@@ -157,9 +157,10 @@ use Tourfic\Classes\Helper;
 		echo '<div class="tf-setting-dashboard">';
 			Helper::tf_dashboard_header();
 			$booking_form_class = 'tf-backend-' . $this->args["name"] . '-booking';
+			$booking_form_title = 'Add New ' . ucfirst($this->args["name"]) . ' Booking';
 			?>
 			<form method="post" action="" class=<?php echo esc_attr($booking_form_class); ?> enctype="multipart/form-data">
-				<h1><?php esc_html_e( 'Add New Apartment Booking', 'tourfic' ); ?></h1>
+				<h1><?php esc_html_e( $booking_form_title, 'tourfic' ); ?></h1>
 				<?php
 				$tf_backend_booking_form_fields = $this->settings;
 				foreach ( $tf_backend_booking_form_fields as $id => $tf_backend_booking_form_field ) : ?>
