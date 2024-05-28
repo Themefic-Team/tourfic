@@ -374,7 +374,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		}
 
 		$required_fields = array(
-			'tf_tour_booked_by',
+			'tf_tours_booked_by',
 			'tf_customer_first_name',
 			'tf_customer_email',
 			'tf_customer_phone',
