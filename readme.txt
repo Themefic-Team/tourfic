@@ -328,6 +328,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Improved: Featured post limit for vendors
 - Improved: Disable Post Types for vendor dashboard
 - Improved: Dashboard link updated for customers upon login
+- Fixed minor bugs and improved stability
 
 = 2.12.1 - 16 May 2024 =
 
