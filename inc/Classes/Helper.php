@@ -569,7 +569,7 @@ class Helper {
 		$month_dates  = cal_days_in_month( CAL_GREGORIAN, $search_month, $search_year );
 
 		//Order Data Retrive
-		$tf_old_order_limit = new WC_Order_Query( array(
+		$tf_old_order_limit = new \WC_Order_Query( array(
 			'limit'   => - 1,
 			'orderby' => 'date',
 			'order'   => 'ASC',
