@@ -9,7 +9,7 @@ $post_type_config = array(
 			'menu_position' => 26.2,
 			'supports'      => apply_filters( 'tf_hotel_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
 			'capability'    => array( 'tf_hotel', 'tf_hotels' ),
-			'rewrite_slug'  => (new \Tourfic\Classes\Hotel\Hotel_CPT())->get_hotel_slug(),
+			//'rewrite_slug'  => (new \Tourfic\Classes\Hotel\Hotel_CPT())->get_hotel_slug(),
 		)
 	),
 );
