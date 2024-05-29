@@ -1,30 +1,202 @@
 <?php
 
 namespace Tourfic\Admin\Backend_Booking;
+use Tourfic\Classes\Helper;
 
-// don't call the file directly
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
-use \Tourfic\Classes\Helper;
-use \Tourfic\Core\TF_Backend_Booking;
-
-class TF_Tour_Backend_Booking extends TF_Backend_Booking {
+class TF_Tour_Backend_Booking {
 
 	use \Tourfic\Traits\Singleton;
 
-	protected array $args = array(
-		'name' => 'tour',
-        'prefix' => 'tf-tour',
-        'post_type' => 'tf_tours',
-        'caps' => 'edit_tf_tourss',
-	);
+	private static $instance = null;
 
-	// TODO: Need to change the Booked by field name tf_tour_booked_by to tf_tours_booked_by in js
+	/**
+	 * Singleton instance
+	 * @since 1.0.0
+	 */
+	public static function instance() {
+		if ( self::$instance == null ) {
+			self::$instance = new self;
+		}
 
-	function set_settings_fields() {
-		$this->settings = array(
+		return self::$instance;
+	}
+
+	public function __construct() {
+		add_action( 'tf_before_tour_booking_details', array( $this, 'tf_tour_backend_booking_button' ) );
+		add_action( 'admin_menu', array( $this, 'tf_backend_booking_menu' ) );
+//			add_action( 'wp_ajax_tf_check_available_tour', array( $this, 'tf_check_available_tour' ) );
+		add_action( 'wp_ajax_tf_tour_date_time_update', array( $this, 'tf_tour_date_time_update' ) );
+		add_action( 'wp_ajax_tf_backend_tour_booking', array( $this, 'tf_backend_tour_booking' ) );
+	}
+
+	function tf_tour_backend_booking_button() {
+		?>
+        <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=tf_tours&page=tf-tour-backend-booking' ) ); ?>" class="button button-primary tf-booking-btn"><?php esc_html_e( 'Add New Booking', 'tourfic' ); ?></a>
+		<?php
+	}
+
+	/**
+	 * TF Backend Booking Menu
+	 * @since 2.9.26
+	 */
+	public function tf_backend_booking_menu() {
+		add_submenu_page(
+			'edit.php?post_type=tf_tours',
+			esc_html__( 'Add New Booking', 'tourfic' ),
+			esc_html__( 'Add New Booking', 'tourfic' ),
+			'edit_tf_tourss',
+			'tf-tour-backend-booking',
+			array( $this, 'tf_backend_booking_page' ),
+		);
+	}
+
+	/**
+	 * TF Backend Booking Page
+	 * @since 2.9.26
+	 */
+	public function tf_backend_booking_page() {
+		if ( ! Helper::tf_is_woo_active() ) {
+			?>
+            <div class="tf-field-notice-inner tf-notice-danger" style="margin-top: 20px;">
+				<?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>
+            </div>
+			<?php
+			return;
+		}
+
+		echo '<div class="tf-setting-dashboard">';
+		Helper::tf_dashboard_header()
+		?>
+        <form method="post" action="" class="tf-backend-tour-booking" enctype="multipart/form-data">
+            <h1><?php esc_html_e( 'Add New Tour Booking', 'tourfic' ); ?></h1>
+			<?php
+			$tf_backend_booking_form_fields = $this->tf_backend_booking_form_fields();
+			foreach ( $tf_backend_booking_form_fields as $id => $tf_backend_booking_form_field ) : ?>
+                <div class="tf-backend-booking-card-wrap">
+                    <h3 class="tf-backend-booking-card-title"><?php echo esc_html( $tf_backend_booking_form_field['title'] ); ?></h3>
+
+                    <div class="tf-booking-fields-wrapper">
+                        <div class="tf-booking-fields">
+							<?php
+							if ( ! empty( $tf_backend_booking_form_field['fields'] ) ):
+								foreach ( $tf_backend_booking_form_field['fields'] as $field ) :
+
+									$default = isset( $field['default'] ) ? $field['default'] : '';
+									$value   = isset( $tf_option_value[ $field['id'] ] ) ? $tf_option_value[ $field['id'] ] : $default;
+
+									$tf_option = new \Tourfic\Admin\TF_Options\TF_Options();
+									$tf_option->field( $field, $value, '' );
+
+								endforeach;
+							endif; ?>
+                        </div>
+                    </div>
+                </div>
+			<?php endforeach; ?>
+			<?php wp_nonce_field( 'tf_backend_booking_nonce_action', 'tf_backend_booking_nonce' ); ?>
+
+            <!-- Footer -->
+            <div class="tf-backend-booking-footer">
+                <button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn" id="tf-backend-tour-book-btn"><?php esc_html_e( 'Book Now', 'tourfic' ); ?></button>
+            </div>
+        </form>
+		<?php
+		echo '</div>';
+	}
+
+	/**
+	 * TF Backend Booking Form Fields
+	 * @since 2.9.26
+	 */
+	public function tf_backend_booking_form_fields() {
+		$current_user = wp_get_current_user();
+		$fields       = array(
+			'tf_booking_customer_fields' => array(
+				'title'  => esc_html__( 'Customer Information', 'tourfic' ),
+				'fields' => array(
+					array(
+						'id'         => 'tf_tour_booked_by',
+						'label'      => esc_html__( 'Booked By', 'tourfic' ),
+						'type'       => 'text',
+						'default'    => $current_user->display_name ?: $current_user->user_login,
+						'attributes' => array(
+							'readonly' => 'readonly',
+						),
+					),
+					array(
+						'id'          => 'tf_customer_first_name',
+						'label'       => esc_html__( 'First Name', 'tourfic' ),
+						'type'        => 'text',
+						'placeholder' => esc_html__( 'Enter Customer First Name', 'tourfic' ),
+						'field_width' => 50,
+					),
+					array(
+						'id'          => 'tf_customer_last_name',
+						'label'       => esc_html__( 'Last Name', 'tourfic' ),
+						'type'        => 'text',
+						'placeholder' => esc_html__( 'Enter Customer Last Name', 'tourfic' ),
+						'field_width' => 50,
+					),
+					array(
+						'id'          => 'tf_customer_email',
+						'label'       => esc_html__( 'Email', 'tourfic' ),
+						'type'        => 'text',
+						'placeholder' => esc_html__( 'Enter Customer Email', 'tourfic' ),
+						'field_width' => 50,
+					),
+					array(
+						'id'          => 'tf_customer_phone',
+						'label'       => esc_html__( 'Phone', 'tourfic' ),
+						'type'        => 'text',
+						'placeholder' => esc_html__( 'Enter Customer Phone', 'tourfic' ),
+						'field_width' => 50,
+					),
+					array(
+						'id'          => 'tf_customer_country',
+						'label'       => esc_html__( 'Country / Region', 'tourfic' ),
+						'type'        => 'text',
+						'placeholder' => esc_html__( 'Enter Customer Country', 'tourfic' ),
+						'field_width' => 33.33,
+					),
+					array(
+						'id'          => 'tf_customer_address',
+						'label'       => esc_html__( 'Address', 'tourfic' ),
+						'type'        => 'text',
+						'placeholder' => esc_html__( 'Enter Customer Address', 'tourfic' ),
+						'field_width' => 33.33,
+					),
+					array(
+						'id'          => 'tf_customer_address_2',
+						'label'       => esc_html__( 'Address 2', 'tourfic' ),
+						'type'        => 'text',
+						'placeholder' => esc_html__( 'Enter Customer Address 2', 'tourfic' ),
+						'field_width' => 33.33,
+					),
+					array(
+						'id'          => 'tf_customer_city',
+						'label'       => esc_html__( 'Town / City', 'tourfic' ),
+						'type'        => 'text',
+						'placeholder' => esc_html__( 'Enter Customer City', 'tourfic' ),
+						'field_width' => 33,
+					),
+					array(
+						'id'          => 'tf_customer_state',
+						'label'       => esc_html__( 'State', 'tourfic' ),
+						'type'        => 'text',
+						'placeholder' => esc_html__( 'Enter Customer State', 'tourfic' ),
+						'field_width' => 33,
+					),
+					array(
+						'id'          => 'tf_customer_zip',
+						'label'       => esc_html__( 'Postcode / ZIP', 'tourfic' ),
+						'type'        => 'text',
+						'placeholder' => esc_html__( 'Enter Customer Zip', 'tourfic' ),
+						'field_width' => 33,
+					),
+				),
+			),
 			'tf_booking_fields'          => array(
 				'title'  => esc_html__( 'Booking Information', 'tourfic' ),
 				'fields' => array(
@@ -83,48 +255,13 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			),
 		);
 
-		$tf_tour_time = array(
-			'id'          => 'tf_tour_time',
-			'label'       => esc_html__( 'Tour Time', 'tourfic' ),
-			'type'        => 'select',
-			'options'     => array(
-				'10:00 AM' => '10:00 AM',
-			),
-			'placeholder' => esc_html__( 'Select Time', 'tourfic' ),
-			'field_width' => 50,
-		);
-
-		$tf_tour_extras = array(
-			'id'          => 'tf_tour_extras',
-			'label'       => esc_html__( 'Tour Extras', 'tourfic' ),
-			'type'        => 'select2',
-			'multiple'    => true,
-			'options'     => 'posts',
-			'attributes'  => array(
-				'disabled' => 'disabled',
-			),
-			'field_width' => 50,
-		);
-
-		if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-			array_pop( $this->settings['tf_booking_fields']['fields']);
-			array_push( $this->settings['tf_booking_fields']['fields'], $tf_tour_time );
-			array_push( $this->settings['tf_booking_fields']['fields'], $tf_tour_extras );
-		}
-
-
-		$this->set_settings( $this->settings);
+		return $fields;
 	}
 
-	public function __construct() {
-		$this->set_settings_fields();
-
-		parent::__construct($this->args);
-
-		add_action( 'wp_ajax_tf_tour_date_time_update', array( $this, 'tf_tour_date_time_update' ) );
-		add_action( 'wp_ajax_tf_backend_tour_booking', array( $this, 'backend_booking_callback' ) );
-	}
-
+	/*
+	 * Tour time and extra fields update
+	 * @since 2.9.26
+	 */
 	public function tf_tour_date_time_update() {
 		// Add nonce for security and authentication.
 		check_ajax_referer( 'updates', '_nonce' );
@@ -360,7 +497,11 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		wp_die();
 	}
 
-    function backend_booking_callback(){
+	/*
+	 * Booking form submit
+	 * @since 2.9.26
+	 */
+	public function tf_backend_tour_booking() {
 		// Add nonce for security and authentication.
 		check_ajax_referer( 'tf_backend_booking_nonce_action', 'tf_backend_booking_nonce' );
 
@@ -374,7 +515,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		}
 
 		$required_fields = array(
-			'tf_tours_booked_by',
+			'tf_tour_booked_by',
 			'tf_customer_first_name',
 			'tf_customer_email',
 			'tf_customer_phone',
@@ -466,6 +607,10 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		die();
 	}
 
+	/*
+	 * Calculate tour total price
+	 * @since 2.9.26
+	 */
 	public function tf_get_tour_total_price( $post_id, $tour_date, $tour_time, $tours_extra, $adults, $children, $infant ) {
 		$response = array();
 
@@ -1016,7 +1161,4 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			'tour_date'           => $tour_date,
 		);
 	}
-
-	function check_avaibility_callback(){}
-    function check_price_callback(){}
 }
