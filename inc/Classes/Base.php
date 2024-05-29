@@ -33,10 +33,10 @@ class Base {
 		\Tourfic\Classes\Migrator::instance();
 		\Tourfic\Classes\Helper::instance();
 		\Tourfic\Classes\Enqueue::instance();
+		\Tourfic\Classes\TF_Activator::instance();
+		\Tourfic\Classes\TF_Deactivator::instance();
 
 		if(is_admin()) {
-			\Tourfic\Classes\TF_Activator::instance();
-			\Tourfic\Classes\TF_Deactivator::instance();
 			\Tourfic\Admin\TF_Setup_Wizard::instance();
 			\Tourfic\Admin\TF_Options\TF_Options::instance();
 
