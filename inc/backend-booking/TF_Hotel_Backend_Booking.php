@@ -273,6 +273,24 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 				),
 			);
 
+			$hotel_services_setting = array(
+				'id'          => 'tf_hotel_service_type',
+				'label'       => esc_html__( 'Service Type', 'tourfic' ),
+				'type'        => 'select',
+				'options'     => array(
+					'pickup'  => esc_html__( 'Pickup Service', 'tourfic' ),
+					'dropoff' => esc_html__( 'Drop-off Service', 'tourfic' ),
+					'both'    => esc_html__( 'Pickup & Drop-off Service', 'tourfic' ),
+				),
+				'placeholder' => esc_html__( 'Select Service Type', 'tourfic' ),
+				'field_width' => 50,
+			);
+
+			if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+				array_pop( $fields['tf_booking_fields']['fields']);
+				array_push( $fields['tf_booking_fields']['fields'], $hotel_services_setting );
+			}
+
 			return $fields;
 		}
 

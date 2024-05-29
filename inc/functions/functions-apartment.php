@@ -763,7 +763,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$date_format_change_appartments = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-			$additional_fees = ! empty( $meta['additional_fees'] ) ? $meta['additional_fees'] : array();
+			$additional_fees = ! empty( $meta['additional_fees'] ) ? tf_data_types( $meta['additional_fees'] ) : array();
 		} else {
 			$additional_fee_label = ! empty( $meta['additional_fee_label'] ) ? $meta['additional_fee_label'] : '';
 			$additional_fee       = ! empty( $meta['additional_fee'] ) ? $meta['additional_fee'] : 0;
@@ -1452,7 +1452,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 								{
 									from: "<?php echo esc_html( $apt_disable_date ); ?>",
 									to: "<?php echo esc_html( $apt_disable_date ); ?>"
-								}
+								},
 							<?php endforeach; ?>
                         ],
 						<?php tf_flatpickr_locale(); ?>
