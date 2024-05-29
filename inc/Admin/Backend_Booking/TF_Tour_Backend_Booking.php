@@ -43,6 +43,8 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 						'id'    => 'tf_tour_date',
 						'label' => esc_html__( 'Date', 'tourfic' ),
 						'type'  => 'date',
+						'minDate' => 'today',
+						'format'  => 'Y/m/d',
 					),
 					array(
 						'id'          => 'tf_tour_adults_number',
