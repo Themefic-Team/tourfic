@@ -621,12 +621,12 @@
 
             });
         }
-        $(document).on('click', '.tf-hotel-booking-popup-btn', function (e) {
-            e.preventDefault();
-            var $this = $(this);
+        // $(document).on('click', '.tf-hotel-booking-popup-btn', function (e) {
+        //     e.preventDefault();
+        //     var $this = $(this);
 
-            hotelPopupBooking($this);
-        });
+        //     hotelPopupBooking($this);
+        // });
 
 
         /*$(document).on("change", "[name='tf_airport_service']", function (e) {

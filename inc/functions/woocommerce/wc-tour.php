@@ -1363,7 +1363,12 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 			$visitor_details = $item->get_meta( '_visitor_details', true );
 
 			if ( $tour_date ) {
-				list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
+				if( str_contains($tour_date, " - ") ){
+					list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
+				} else {
+					$tour_in = $tour_date;
+					$tour_out = '';
+				}
 			}
 
 			$iteminfo = [
