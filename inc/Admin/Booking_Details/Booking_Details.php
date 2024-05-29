@@ -111,7 +111,7 @@ Class Booking_Details {
 					$tf_orders_select        = array(
 						'select'    => "*",
 						'post_type' => $booking_type,
-						'query'     => " $tf_filter_query ORDER BY order_id DESC LIMIT 15"
+						'query'     => " $tf_filter_query ORDER BY id DESC LIMIT 15"
 					);
 					$tf_order_details_result = Helper::tourfic_order_table_data( $tf_orders_select );
 				}
@@ -1035,6 +1035,8 @@ Class Booking_Details {
                                 <path d="M5 7.5L10 12.5L15 7.5" stroke="#F0F0F1" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </label>
+                            <input type="hidden" id="tf_email_order_id" value="<?php echo !empty($_GET['order_id']) ? esc_html( $_GET['order_id'] ) : ''; ?>">
+                            <input type="hidden" class="tf_single_order_id" name="order_id" value="<?php echo esc_attr($tf_order_details->id); ?>">
                             <ul>
                                 <li class="checkin" data-value="in"><?php esc_html_e("Checked in", "tourfic"); ?></li>
                                 <li class="checkout" data-value="out"><?php esc_html_e("Checked Out", "tourfic"); ?></li>
