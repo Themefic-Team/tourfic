@@ -34,9 +34,11 @@ if ( ! function_exists( 'get_tour_destinations' ) ) {
 			'hide_empty' => true,
 		) );
 
-		foreach ( $destination_terms as $destination_term ) {
-			$destinations[ $destination_term->slug ] = $destination_term->name;
-		}
+        if(!empty($destination_terms)) {
+	        foreach ( $destination_terms as $destination_term ) {
+		        $destinations[ $destination_term->slug ] = $destination_term->name;
+	        }
+        }
 
 		return $destinations;
 
@@ -2421,7 +2423,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 						<?php
 						$tour_duration_time = $tour_duration > 1 ? $tour_duration_time . 's' : $tour_duration_time;
 						?>
-						<i class="ri-history-fill"></i> <?php echo esc_html($tour_duration); ?> <?php esc_html_e($tour_duration_time, "tourfic"); ?>
+						<i class="ri-history-fill"></i> <?php echo esc_html($tour_duration); ?> <?php echo esc_html($tour_duration_time); ?>
 					</li>
 					<?php } ?>
 				<?php 
