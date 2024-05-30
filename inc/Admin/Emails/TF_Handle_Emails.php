@@ -959,7 +959,7 @@ class TF_Handle_Emails {
             //booking details end
 
             //customer details Start
-            $tf_booking_fields = !empty(self::tfopt( 'book-confirm-field' )) ? self::Helper::tf_data_types(self::tfopt( 'book-confirm-field' )) : '';
+            $tf_booking_fields = !empty(Helper::tfopt( 'book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'book-confirm-field' )) : '';
             
             $booking_details .= '<table style="width: 100%; max-width: 600px; margin-top: 15px; margin-bottom: 15px; border: none;"><tbody><tr><td style="background-color: #f2f9fe; padding: 20px; float: left;"> <h3 style="font-size: 16px; font-weight: bold; color: #0209af; margin: 0;">Billing address</h3>';
             if(!empty($tf_booking_fields)){
@@ -1203,7 +1203,7 @@ class TF_Handle_Emails {
                 
     
                 //customer details Start
-                $tf_booking_fields = !empty(self::tfopt( 'book-confirm-field' )) ? self::Helper::tf_data_types(self::tfopt( 'book-confirm-field' )) : '';
+                $tf_booking_fields = !empty(Helper::tfopt( 'book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'book-confirm-field' )) : '';
                 
                 $booking_details .= '<table style="width: 100%; max-width: 600px; margin-top: 15px; margin-bottom: 15px; border: none;"><tbody><tr><td style="background-color: #f2f9fe; padding: 20px; float: left;"> <h3 style="font-size: 16px; font-weight: bold; color: #0209af; margin: 0;">Billing address</h3>';
                 if(!empty($tf_booking_fields)){
@@ -1366,7 +1366,7 @@ class TF_Handle_Emails {
                 
     
                 //customer details Start
-                $tf_booking_fields = !empty(self::tfopt( 'book-confirm-field' )) ? self::Helper::tf_data_types(self::tfopt( 'book-confirm-field' )) : '';
+                $tf_booking_fields = !empty(Helper::tfopt( 'book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'book-confirm-field' )) : '';
                 
                 $booking_details .= '<table style="width: 100%; max-width: 600px; margin-top: 15px; margin-bottom: 15px; border: none;"><tbody><tr><td style="background-color: #f2f9fe; padding: 20px; float: left;"> <h3 style="font-size: 16px; font-weight: bold; color: #0209af; margin: 0;">Billing address</h3>';
                 if(!empty($tf_booking_fields)){
