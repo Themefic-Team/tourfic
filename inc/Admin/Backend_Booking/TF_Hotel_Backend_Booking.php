@@ -49,6 +49,7 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 						'label'       => esc_html__( 'Available Rooms', 'tourfic' ),
 						'type'        => 'select2',
 						'options'     => 'posts',
+						'placeholder' => esc_html__( 'Please choose the hotel first', 'tourfic' ),
 						'attributes'  => array(
 							'disabled' => 'disabled',
 						),

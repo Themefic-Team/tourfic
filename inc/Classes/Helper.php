@@ -12,6 +12,7 @@ class Helper {
 		add_action( 'admin_footer', array( $this, 'tf_admin_footer' ) );
 
 		add_filter( 'rest_prepare_taxonomy', array( $this, 'tf_remove_metabox_gutenburg' ), 10, 3 );
+		add_filter('rest_user_query', array( $this, 'tf_gutenberg_author_dropdown_roles' ), 10, 2);
 		add_action( "wp_ajax_tf_shortcode_type_to_location", array( $this, 'tf_shortcode_type_to_location_callback' ) );
 		add_action( 'wp_ajax_tf_affiliate_active', array( $this, 'tf_affiliate_active_callback' ) );
 		add_action( 'wp_ajax_tf_affiliate_install', array( $this, 'tf_affiliate_install_callback' ) );
@@ -2908,5 +2909,30 @@ class Helper {
 		);
 
 		return $order_id;
+	}
+
+	function tf_gutenberg_author_dropdown_roles($args, $request = null){
+
+		// get all the roles in a website
+		global $wp_roles; 
+		if ( ! isset( $wp_roles ) ) $wp_roles = new \WP_Roles();
+
+		$tf_all_roles = is_array( $wp_roles->get_names() ) && !empty( $wp_roles->get_names() ) ? array_keys( $wp_roles->get_names() ) : array('administrator', 'author', 'editor', 'tf_vendor', 'tf_manager');
+
+		// exclude the roles that are not needed
+		$tf_all_roles = array_filter( $tf_all_roles, function( $role ) {
+				return $role !== 'contributor' && $role !== 'subscriber' && $role !== 'customer';
+			} 
+		);
+
+		if( current_user_can( 'edit_posts' ) ) {
+			if (isset($args['who']) && $args['who'] === 'authors') {
+				unset($args['who']);
+				$args['role__in'] = $tf_all_roles;
+			}
+	
+			return $args;
+		}
+		return $args;
 	}
 }

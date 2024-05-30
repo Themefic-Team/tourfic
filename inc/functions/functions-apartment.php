@@ -486,7 +486,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
 		$apt_availability    = ! empty( $meta['apt_availability'] ) ? $meta['apt_availability'] : '';
 		$booked_dates        = tf_apartment_booked_days( get_the_ID() );
-		$apt_reserve_button_text = !empty(Helper::tfopt('apartment_booking_form_button_text')) ? stripslashes(sanitize_text_field(Helper::tfopt('apartment_booking_form_button_text'))) : esc_html__("Reserve", 'tourfic');
+		$apt_reserve_button_text = !empty(tfopt('apartment_booking_form_button_text')) ? stripslashes(sanitize_text_field(tfopt('apartment_booking_form_button_text'))) : esc_html__("Reserve", 'tourfic');
 
 		$tf_booking_type = '1';
 		$tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = '';
@@ -500,10 +500,10 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		}
 
 		// date format for apartment
-		$date_format_change_appartments = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+		$date_format_change_appartments = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-			$additional_fees = ! empty( $meta['additional_fees'] ) ? $meta['additional_fees'] : array();
+			$additional_fees = ! empty( $meta['additional_fees'] ) ? Helper::tf_data_types( $meta['additional_fees'] ) : array();
 		} else {
 			$additional_fee_label = ! empty( $meta['additional_fee_label'] ) ? $meta['additional_fee_label'] : '';
 			$additional_fee       = ! empty( $meta['additional_fee'] ) ? $meta['additional_fee'] : 0;
@@ -535,13 +535,39 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 			}
 		}
 
+		$only_booked_dates = is_array($booked_dates) && !empty($booked_dates) ? array_merge( array_column($booked_dates, "check_in") , array_column($booked_dates, "check_out")) : array();
+
+		if( !empty( $booked_dates) && is_array($booked_dates) ) {
+			foreach ($booked_dates as $booked_date) {
+				$booked_date_period[] = new DatePeriod(
+					new DateTime( $booked_date["check_in"] . ' 00:00' ),
+					new DateInterval( 'P1D' ),
+					new DateTime( $booked_date["check_out"] . ' 23:59' )
+				);
+			}
+			foreach ($booked_date_period as $b_date) {
+				foreach ($b_date as $date) {
+					$only_booked_dates[] = $date->format('Y/m/d');
+				}
+			}
+		}
+
+		$only_booked_dates = !empty( $only_booked_dates ) ? array_unique($only_booked_dates) : array();
+		
+
+		if( is_array( $tf_apt_enable_dates ) && !empty( $tf_apt_enable_dates ) ) {
+			$checked_enable_dates = array_filter( $tf_apt_enable_dates, function($date) use($only_booked_dates) {
+				return !in_array($date, $only_booked_dates);
+			});
+		}
+
 		$apartment_min_price = get_apartment_min_max_price( get_the_ID() );
 
 		$tf_apartment_layout_conditions = ! empty( $meta['tf_single_apartment_layout_opt'] ) ? $meta['tf_single_apartment_layout_opt'] : 'global';
 		if("single"==$tf_apartment_layout_conditions){
 			$tf_apartment_single_template = ! empty( $meta['tf_single_apartment_template'] ) ? $meta['tf_single_apartment_template'] : 'default';
 		}
-		$tf_apartment_global_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] : 'default';
+		$tf_apartment_global_template = ! empty( Helper::tf_data_types(tfopt( 'tf-template' ))['single-apartment'] ) ? Helper::tf_data_types(tfopt( 'tf-template' ))['single-apartment'] : 'default';
 
 		$tf_apartment_selected_check = !empty($tf_apartment_single_template) ? $tf_apartment_single_template : $tf_apartment_global_template;
 
@@ -1152,21 +1178,21 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                             bookingCalculation(selectedDates);
                             dateSetToFields(selectedDates, instance);
                         }, 
-						<?php if (!empty($tf_apt_enable_dates) && is_array($tf_apt_enable_dates)) : ?>
-							enable: [ <?php array_walk($tf_apt_enable_dates, function($date) {echo '"'. esc_html( $date ) . '",';}); ?> ],
+						<?php if (!empty($checked_enable_dates) && is_array($checked_enable_dates)) : ?>
+							enable: [ <?php array_walk($checked_enable_dates, function($date) {echo '"'. esc_html( $date ) . '",';}); ?> ],
 						<?php endif; ?>
                         disable: [
 							<?php foreach ( $booked_dates as $booked_date ) : ?>
-                            {
-                                from: "<?php echo esc_html( $booked_date['check_in'] ); ?>",
-                                to: "<?php echo esc_html( $booked_date['check_out'] ); ?>"
-                            },
+								{
+									from: "<?php echo esc_html( $booked_date['check_in'] ); ?>",
+									to: "<?php echo esc_html( $booked_date['check_out'] ); ?>"
+								},
 							<?php endforeach; ?>
 							<?php foreach ( $apt_disable_dates as $apt_disable_date ) : ?>
-                            {
-                                from: "<?php echo esc_html( $apt_disable_date ); ?>",
-                                to: "<?php echo esc_html( $apt_disable_date ); ?>"
-                            },
+								{
+									from: "<?php echo esc_html( $apt_disable_date ); ?>",
+									to: "<?php echo esc_html( $apt_disable_date ); ?>"
+								},
 							<?php endforeach; ?>
                         ],
 						<?php tf_flatpickr_locale(); ?>

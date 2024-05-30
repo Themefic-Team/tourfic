@@ -49,13 +49,15 @@ if ( ! class_exists( 'TF_select2' ) ) {
 			$parent_class = ( isset( $this->field['select2'] ) ) ? 'tf-select2' : $parent_class ;
 
 			echo '<select name="' . esc_attr($field_name) . '" id="' . esc_attr($tf_select2_unique_id) . '" class=" tf-select-two '.esc_attr($parent_class).' " data-placeholder="' . esc_attr( $placeholder ) . '" ' . esc_attr($multiple) . ' '. wp_kses_post($this->field_attributes()) .'>';
-			foreach ( $args['options'] as $key => $value ) {
-				if(!empty($this->field['multiple']) && is_array( $this->value ) && in_array( $key, $this->value )){
-					$selected = 'selected';
-				} else {
-					$selected = selected( $this->value, $key, false );
+			if( is_array( $args['options'] )) {
+				foreach ( $args['options'] as $key => $value ) {
+					if(!empty($this->field['multiple']) && is_array( $this->value ) && in_array( $key, $this->value )){
+						$selected = 'selected';
+					} else {
+						$selected = selected( $this->value, $key, false );
+					}
+					echo '<option value="' . esc_attr( $key ) . '" ' . esc_attr($selected) . '>' . esc_html( $value ) . '</option>';
 				}
-				echo '<option value="' . esc_attr( $key ) . '" ' . esc_attr($selected) . '>' . esc_html( $value ) . '</option>';
 			}
 			echo '</select>';
 		}

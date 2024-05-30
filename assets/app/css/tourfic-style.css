@@ -6608,6 +6608,9 @@ div#tf-contact-info {
     column-gap: 200px;
     row-gap: 16px;
     grid-template-columns: calc(50% - 100px) calc(50% - 100px); }
+    @media only screen and (max-width: 767.98px) {
+      .tf-apartment-review .tf-review-progress-bar {
+        grid-template-columns: 1fr; } }
     .tf-apartment-review .tf-review-progress-bar .tf-single {
       grid-template-columns: 102px calc(100% - 212px) 30px !important;
       column-gap: 40px; }
