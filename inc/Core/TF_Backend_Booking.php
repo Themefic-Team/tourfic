@@ -160,7 +160,7 @@ use Tourfic\Classes\Helper;
 			$booking_form_title = 'Add New ' . ucfirst($this->args["name"]) . ' Booking';
 			?>
 			<form method="post" action="" class=<?php echo esc_attr($booking_form_class); ?> enctype="multipart/form-data">
-				<h1><?php esc_html_e( $booking_form_title, 'tourfic' ); ?></h1>
+				<h1><?php echo esc_html( $booking_form_title ); ?></h1>
 				<?php
 				$tf_backend_booking_form_fields = $this->settings;
 				foreach ( $tf_backend_booking_form_fields as $id => $tf_backend_booking_form_field ) : ?>
@@ -189,7 +189,7 @@ use Tourfic\Classes\Helper;
 
 				<!-- Footer -->
 				<div class="tf-backend-booking-footer">
-					<button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn" id="tf-backend-<?php esc_html_e( $this->args["name"]); ?>-book-btn"><?php esc_html_e( 'Book Now', 'tourfic' ); ?></button>
+					<button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn" id="tf-backend-<?php echo esc_html( $this->args["name"]); ?>-book-btn"><?php esc_html_e( 'Book Now', 'tourfic' ); ?></button>
 				</div>
 			</form>
 		<?php

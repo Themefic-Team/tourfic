@@ -121,7 +121,7 @@ Class Booking_Details {
                     <img src="<?php echo TF_ASSETS_URL; ?>app/images/loader.gif" alt="Loader">
                 </div>
                 <div class="tf_booking_wrap_header">
-                    <h1 class="wp-heading-inline"><?php _e( $this->booking_args['booking_title'] . ' Booking Details', 'tourfic' ); ?></h1>
+                    <h1 class="wp-heading-inline"><?php echo esc_html( $this->booking_args['booking_title'] ); ?> <?php esc_html_e( "Booking Details", "tourfic" ); ?></h1>
                     <div class="tf_header_wrap_button">
                         <?php
                         /**
@@ -230,7 +230,7 @@ Class Booking_Details {
 						}
 						?>
                         <select class="tf-tour-filter-options <?php echo esc_attr( $tf_postwise_filter_class ); ?>">
-                            <option value=""><?php _e( $this->booking_args['booking_title'] . " name", "tourfic" ); ?></option>
+                            <option value=""><?php echo esc_html( $this->booking_args['booking_title'] ); ?> <?php _e( "name", "tourfic" ); ?></option>
 							<?php
 							$tf_posts_list       = array(
 								'posts_per_page' => - 1,
@@ -276,7 +276,7 @@ Class Booking_Details {
 						<?php _e( "ID", "tourfic" ); ?>
                     </th>
                     <th id="odetails">
-						<?php _e( $this->booking_args["booking_title"] . " name", "tourfic" ); ?>
+						<?php echo esc_html($this->booking_args["booking_title"]) ?><?php _e( " name", "tourfic" ); ?>
                     </th>
                     <th id="cdetails">
 						<?php _e( "Customer details", "tourfic" ); ?>
