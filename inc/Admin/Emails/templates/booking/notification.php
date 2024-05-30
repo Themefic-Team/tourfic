@@ -6,6 +6,8 @@
  * @since 4.3.0
  */
 
+ use Tourfic\Admin\Emails\TF_Handle_Emails;
+
 $billing_details = array(
 	'{fullname}'        => esc_html__( 'Name', 'tourfic' ),
 	'{user_email}'      => esc_html__( 'Email', 'tourfic' ),
