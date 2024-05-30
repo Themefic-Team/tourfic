@@ -1461,7 +1461,7 @@ function tf_single_tour_booking_form( $post_id ) {
 									if( $tf_hide_external_price ) : ?>
 										<div class="acr-adult-price">
 											<?php if( $pricing_rule == 'person' && ( !empty($tour_price->wc_sale_adult) || !empty($tour_price->wc_adult) ) ){
-												echo !empty($tour_price->wc_sale_adult) ? '<del>'. esc_html(strip_tags($tour_price->wc_adult)) . '</del>' . " " . wp_kses_post($tour_price->wc_sale_adult) : wp_kses_post($tour_price->wc_adult);
+												echo !empty($tour_price->wc_sale_adult) ? '<del>'. esc_html(wp_strip_all_tags($tour_price->wc_adult)) . '</del>' . " " . wp_kses_post($tour_price->wc_sale_adult) : wp_kses_post($tour_price->wc_adult);
 											} ?>
 										</div>
 									<?php endif; ?>
@@ -1505,7 +1505,7 @@ function tf_single_tour_booking_form( $post_id ) {
 									<?php if( $tf_hide_external_price ) : ?>
 										<div class="acr-child-price">
 											<?php if( $pricing_rule == 'person' && ( !empty($tour_price->wc_sale_child) || !empty($tour_price->wc_child) ) ){
-												echo !empty($tour_price->wc_sale_child) ? '<del>'. esc_html(strip_tags($tour_price->wc_child)) . '</del>' . " " . wp_kses_post($tour_price->wc_sale_child) : wp_kses_post($tour_price->wc_child);
+												echo !empty($tour_price->wc_sale_child) ? '<del>'. esc_html(wp_strip_all_tags($tour_price->wc_child)) . '</del>' . " " . wp_kses_post($tour_price->wc_sale_child) : wp_kses_post($tour_price->wc_child);
 											} ?>
 										</div>
 									<?php endif; ?>
@@ -1548,7 +1548,7 @@ function tf_single_tour_booking_form( $post_id ) {
 									<?php if( $tf_hide_external_price ) : ?>
 										<div class="acr-infant-price">
 											<?php if( $pricing_rule == 'person' && ( !empty($tour_price->wc_sale_infant) || !empty($tour_price->wc_infant) ) ){
-												echo !empty($tour_price->wc_sale_infant) ? '<del>'. esc_html(strip_tags($tour_price->wc_infant)) . '</del>' . " " . wp_kses_post($tour_price->wc_sale_infant) :  wp_kses_post($tour_price->wc_infant);
+												echo !empty($tour_price->wc_sale_infant) ? '<del>'. esc_html(wp_strip_all_tags($tour_price->wc_infant)) . '</del>' . " " . wp_kses_post($tour_price->wc_sale_infant) :  wp_kses_post($tour_price->wc_infant);
 											} ?>
 										</div>
 									<?php endif; ?>

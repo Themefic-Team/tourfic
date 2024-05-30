@@ -132,14 +132,15 @@ class Helper {
 	}
 
 	static function get_terms_dropdown( $taxonomy, $args = array() ) {
-		$defaults = array(
+		$defaults         = array(
 			'hide_empty' => false,
 			'orderby'    => 'name',
 			'order'      => 'ASC',
 		);
-		$args     = wp_parse_args( $args, $defaults );
+		$args             = wp_parse_args( $args, $defaults );
+		$args['taxonomy'] = $taxonomy;
 
-		$terms = get_terms( $taxonomy, $args );
+		$terms = get_terms( $args );
 
 		$term_dropdown = array();
 		if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
