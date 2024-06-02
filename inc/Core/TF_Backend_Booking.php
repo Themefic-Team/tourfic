@@ -4,24 +4,24 @@ namespace Tourfic\Core;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 use Tourfic\Classes\Helper;
 
- abstract class TF_Backend_Booking {
+abstract class TF_Backend_Booking {
 
-    protected array $actions = [];
-    protected array $args;
-    protected array $settings;
+	protected array $actions = [];
+	protected array $args;
+	protected array $settings;
 	protected float $price;
 
-    private array $booking_customers_fields;
+	private array $booking_customers_fields;
 
-    final function set_customers_fields() {
-        $current_user = wp_get_current_user();
-        $this->booking_customers_fields = array (
-            'tf_booking_customer_fields' => array(
+	final function set_customers_fields() {
+		$current_user                   = wp_get_current_user();
+		$this->booking_customers_fields = array(
+			'tf_booking_customer_fields' => array(
 				'title'  => esc_html__( 'Customer Information', 'tourfic' ),
 				'fields' => array(
 					array(
@@ -105,31 +105,31 @@ use Tourfic\Classes\Helper;
 					),
 				),
 			),
-        );
-    }
+		);
+	}
 
-    protected function set_settings(array $settings) {
+	protected function set_settings( array $settings ) {
 		$this->set_customers_fields();
-        $this->settings = array_merge($this->booking_customers_fields, $settings);
-    }
+		$this->settings = array_merge( $this->booking_customers_fields, $settings );
+	}
 
-    public function __construct( array $args ) {
+	public function __construct( array $args ) {
 		// backend booking arguments
 		$this->args = $args;
 
 		// Add actions
 		add_action( 'admin_menu', array( $this, 'tf_backend_booking_menu' ) );
-		add_action( 'tf_before_'. $this->args["name"] .'_booking_details', array( $this, 'tf_backend_booking_button' ) );
+		add_action( 'tf_before_' . $this->args["name"] . '_booking_details', array( $this, 'tf_backend_booking_button' ) );
 
 		// foreach( $this->actions as $action ) {
-        //     add_action( $action, [ $this, $action . '_callback' ] );
-        // }
-    }
+		//     add_action( $action, [ $this, $action . '_callback' ] );
+		// }
+	}
 
-	final function tf_backend_booking_button() { 
-		$edit_url = admin_url( 'edit.php?post_type='. $this->args["post_type"] .'&page='. $this->args["prefix"] .'-backend-booking' );
+	final function tf_backend_booking_button() {
+		$edit_url = admin_url( 'edit.php?post_type=' . $this->args["post_type"] . '&page=' . $this->args["prefix"] . '-backend-booking' );
 		?>
-			<a href="<?php echo esc_url($edit_url); ?>" class="button button-primary tf-booking-btn"><?php esc_html_e( 'Add New Booking', 'tourfic' ); ?></a>
+        <a href="<?php echo esc_url( $edit_url ); ?>" class="button button-primary tf-booking-btn"><?php esc_html_e( 'Add New Booking', 'tourfic' ); ?></a>
 		<?php
 	}
 
@@ -145,59 +145,61 @@ use Tourfic\Classes\Helper;
 	}
 
 	final function tf_backend_booking_page() {
-		if ( !Helper::tf_is_woo_active() ) {
+		if ( ! Helper::tf_is_woo_active() ) {
 			?>
-			<div class="tf-field-notice-inner tf-notice-danger" style="margin-top: 20px;">
+            <div class="tf-field-notice-inner tf-notice-danger" style="margin-top: 20px;">
 				<?php esc_html_e( 'Please install and activate WooCommerce plugin to use this feature.', 'tourfic' ); ?>
-			</div>
+            </div>
 			<?php
 			return;
 		}
 
 		echo '<div class="tf-setting-dashboard">';
-			Helper::tf_dashboard_header();
-			$booking_form_class = 'tf-backend-' . $this->args["name"] . '-booking';
-			$booking_form_title = 'Add New ' . ucfirst($this->args["name"]) . ' Booking';
-			?>
-			<form method="post" action="" class=<?php echo esc_attr($booking_form_class); ?> enctype="multipart/form-data">
-				<h1><?php echo esc_html( $booking_form_title ); ?></h1>
-				<?php
-				$tf_backend_booking_form_fields = $this->settings;
-				foreach ( $tf_backend_booking_form_fields as $id => $tf_backend_booking_form_field ) : ?>
-					<div class="tf-backend-booking-card-wrap">
-						<h3 class="tf-backend-booking-card-title"><?php echo esc_html( $tf_backend_booking_form_field['title'] ); ?></h3>
+		Helper::tf_dashboard_header();
+		$booking_form_class = 'tf-backend-' . $this->args["name"] . '-booking';
+		$booking_form_title = 'Add New ' . ucfirst( $this->args["name"] ) . ' Booking';
+		?>
+        <form method="post" action="" class=<?php echo esc_attr( $booking_form_class ); ?> enctype="multipart/form-data">
+            <h1><?php echo esc_html( $booking_form_title ); ?></h1>
+			<?php
+			$tf_backend_booking_form_fields = $this->settings;
+			foreach ( $tf_backend_booking_form_fields as $id => $tf_backend_booking_form_field ) : ?>
+                <div class="tf-backend-booking-card-wrap">
+                    <h3 class="tf-backend-booking-card-title"><?php echo esc_html( $tf_backend_booking_form_field['title'] ); ?></h3>
 
-						<div class="tf-booking-fields-wrapper">
-							<div class="tf-booking-fields">
-								<?php
-								if ( ! empty( $tf_backend_booking_form_field['fields'] ) ):
-									foreach ( $tf_backend_booking_form_field['fields'] as $field ) :
+                    <div class="tf-booking-fields-wrapper">
+                        <div class="tf-booking-fields">
+							<?php
+							if ( ! empty( $tf_backend_booking_form_field['fields'] ) ):
+								foreach ( $tf_backend_booking_form_field['fields'] as $field ) :
 
-										$default = isset( $field['default'] ) ? $field['default'] : '';
-										$value   = isset( $tf_option_value[ $field['id'] ] ) ? $tf_option_value[ $field['id'] ] : $default;
+									$default = isset( $field['default'] ) ? $field['default'] : '';
+									$value   = isset( $tf_option_value[ $field['id'] ] ) ? $tf_option_value[ $field['id'] ] : $default;
 
-										$tf_option = new \Tourfic\Admin\TF_Options\TF_Options();
-										$tf_option->field( $field, $value, '' );
+									$tf_option = new \Tourfic\Admin\TF_Options\TF_Options();
+									$tf_option->field( $field, $value, '' );
 
-									endforeach;
-								endif; ?>
-							</div>
-						</div>
-					</div>
-				<?php endforeach; ?>
-				<?php wp_nonce_field( 'tf_backend_booking_nonce_action', 'tf_backend_booking_nonce' ); ?>
+								endforeach;
+							endif; ?>
+                        </div>
+                    </div>
+                </div>
+			<?php endforeach; ?>
+			<?php wp_nonce_field( 'tf_backend_booking_nonce_action', 'tf_backend_booking_nonce' ); ?>
 
-				<!-- Footer -->
-				<div class="tf-backend-booking-footer">
-					<button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn" id="tf-backend-<?php echo esc_html( $this->args["name"]); ?>-book-btn"><?php esc_html_e( 'Book Now', 'tourfic' ); ?></button>
-				</div>
-			</form>
+            <!-- Footer -->
+            <div class="tf-backend-booking-footer">
+                <button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn" id="tf-backend-<?php echo esc_html( $this->args["name"] ); ?>-book-btn"><?php esc_html_e( 'Book Now', 'tourfic' ); ?></button>
+            </div>
+        </form>
 		<?php
 		echo '</div>';
 	}
 
-    abstract protected function check_avaibility_callback();
-    abstract protected function check_price_callback();
-    abstract protected function backend_booking_callback();
+	abstract protected function check_avaibility_callback();
+
+	abstract protected function check_price_callback();
+
+	abstract protected function backend_booking_callback();
 
 }
