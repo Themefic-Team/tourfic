@@ -1,18 +1,19 @@
 <?php
 
-namespace Tourfic\App\Widgets;
+namespace Tourfic\App\Widgets\TF_Widgets;
 
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
-use \Tourfic\Classes\Helper;
+use Tourfic\Classes\Helper;
 
 /**
- * Tour filter by features
+ * Hotel filter by type
  *
- * Works only for Tour
+ * Works only for hotel
+ * @author Foysal
  */
-class TF_Tour_Feature_Filter extends \WP_Widget {
+class Hotel_Type_Filter extends \WP_Widget {
 
     use \Tourfic\Traits\Singleton;
 
@@ -22,9 +23,9 @@ class TF_Tour_Feature_Filter extends \WP_Widget {
     public function __construct() {
 
         parent::__construct(
-            'tf_tour_feature_filter', // Base ID
-            esc_html__( 'Tourfic - Tours Filters by Feature', 'tourfic' ),
-            array( 'description' => esc_html__( 'Filter search result by tour feature', 'tourfic' ) ) // Args
+            'tf_hotel_type_filter', // Base ID
+            esc_html__( 'Tourfic - Hotels Filters by Type', 'tourfic' ),
+            array( 'description' => esc_html__( 'Filter search result by hotel type', 'tourfic' ) ) // Args
         );
     }
 
@@ -38,10 +39,10 @@ class TF_Tour_Feature_Filter extends \WP_Widget {
      */
     public function widget( $args, $instance ) {
 
-        //check if is Tours
+        //check if is Hotel
         $posttype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
 
-        if ( $posttype == 'tf_tours' ) {
+        if ( $posttype == 'tf_hotel' ) {
             extract( $args );
             $title = apply_filters( 'widget_title', $instance['title'] );
 
@@ -55,20 +56,23 @@ class TF_Tour_Feature_Filter extends \WP_Widget {
 
             $taxonomy = array(
                 'hide_empty' => $hide_empty,
-                'taxonomy'   => 'tour_features',
+                'taxonomy'   => 'hotel_type',
                 'include'    => $terms,
             );
 
             $get_terms = get_terms( $taxonomy );
 
+            $destination_name = !empty( $_GET['destination'] ) ? $_GET['destination'] : '';
+            $search_types_query = !empty($_GET['types']) ? $_GET['types'] : array();
             echo "<div class='tf-filter'><ul>";
             foreach ( $get_terms as $key => $term ) {
                 $id = $term->term_id;
                 $name = $term->name;
+                $fslug = $term->slug;
                 $default_count = $term->count;
-                $count = $show_count ? '<span>(' . $default_count . ')</span>' : '';
-
-                echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tour_features[]' value='{$id}'/><span class='checkmark'></span> {$name}</label> {$count}</li>", Helper::tf_custom_wp_kses_allow_tags());
+                $count = $show_count ? '<span>' . tf_term_count( $term->slug, $destination_name, $default_count ) . '</span>' : '';
+                $defult_select =  in_array($fslug, $search_types_query) ? 'checked' : '';
+                echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tf_hotel_types[]' value='{$id}' {$defult_select}/><span class='checkmark'></span> {$name}</label> {$count}</li>", Helper::tf_custom_wp_kses_allow_tags());
             }
             echo "</ul><a href='#' class='see-more btn-link'>" . esc_html__( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a><a href='#' class='see-less btn-link'>" . esc_html__( 'See Less', 'tourfic' ) . "<span class='fa fa-angle-up'></span></a></div>";
 
@@ -85,7 +89,7 @@ class TF_Tour_Feature_Filter extends \WP_Widget {
      */
     public function form( $instance ) {
 
-        $title = isset( $instance['title'] ) ? $instance['title'] : esc_html__( 'Feature Filters', 'tourfic' );
+        $title = isset( $instance['title'] ) ? $instance['title'] : esc_html__( 'Popular Types', 'tourfic' );
         $terms = isset( $instance['terms']) && is_array( $instance['terms'] ) ? implode( ',', $instance['terms'] ) : 'all';
         $show_count = isset( $instance['show_count'] ) ? $instance['show_count'] : '';
         $hide_empty = isset( $instance['hide_empty'] ) ? $instance['hide_empty'] : '';
@@ -101,13 +105,13 @@ class TF_Tour_Feature_Filter extends \WP_Widget {
             <br>
             <?php
             wp_dropdown_categories( array(
-                'taxonomy'     => 'tour_features',
+                'taxonomy'     => 'hotel_type',
                 'hierarchical' => false,
                 'name'       => $this->get_field_name( 'terms' ),
                 'id'         => $this->get_field_id( 'terms' ),
                 'selected'   => $terms, // e.x 86,110,786
                 'multiple'   => true,
-                'class'      => 'widefat tf-select2', // tf-select2
+                'class'      => 'widefat tf-select2',
                 'show_count' => true
             ) );
         ?>

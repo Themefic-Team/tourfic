@@ -1,6 +1,6 @@
 <?php
 
-namespace Tourfic\App\Widgets;
+namespace Tourfic\App\Widgets\TF_Widgets;
 
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
@@ -12,7 +12,7 @@ use \Tourfic\Classes\Helper;
  *
  * Works only for hotel
  */
-class TF_Hotel_Feature_Filter extends \WP_Widget {
+class Hotel_Feature_Filter extends \WP_Widget {
 
     use \Tourfic\Traits\Singleton;
 

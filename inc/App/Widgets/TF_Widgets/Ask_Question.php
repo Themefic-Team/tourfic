@@ -1,6 +1,6 @@
 <?php
 
-namespace Tourfic\App\Widgets;
+namespace Tourfic\App\Widgets\TF_Widgets;
 
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 /**
  * Ask Question
  */
-class Tourfic_Ask_Question extends \WP_Widget {
+class Ask_Question extends \WP_Widget {
 
     use \Tourfic\Traits\Singleton;
 

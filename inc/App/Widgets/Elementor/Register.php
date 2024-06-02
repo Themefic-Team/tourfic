@@ -5,7 +5,7 @@ namespace Tourfic\App\Widgets\Elementor;
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-class TF_Widget_Register {
+class Register {
 
     use \Tourfic\Traits\Singleton;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tourfic\App\Widgets;
+namespace Tourfic\App\Widgets\TF_Widgets;
 
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
@@ -13,7 +13,7 @@ use Tourfic\Classes\Helper;
  * Works only for tour
  * @author Foysal
  */
-class TF_Tour_Type_Filter extends \WP_Widget {
+class Tour_Type_Filter extends \WP_Widget {
 
 	use \Tourfic\Traits\Singleton;
 	/**
