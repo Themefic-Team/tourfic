@@ -156,9 +156,18 @@ abstract class TF_Backend_Booking {
 
 		echo '<div class="tf-setting-dashboard">';
 		Helper::tf_dashboard_header();
-		$booking_form_class = 'tf-backend-' . $this->args["name"] . '-booking';
-		$booking_form_title = 'Add New ' . ucfirst( $this->args["name"] ) . ' Booking';
+		$booking_form_class = sprintf( esc_html('tf-backend-%s-booking'), $this->args["name"] );
+		$booking_form_title = sprintf( esc_html__( 'Add New %s Booking', 'tourfic' ), ucfirst( $this->args["name"] ) );
+
+		// Filters to change booking form title and class
+		$booking_form_title = apply_filters('tf_' . $this->args["name"] . '_backend_booking_form_title', $booking_form_title);
+		$booking_form_class = apply_filters('tf_' . $this->args["name"] . '_backend_booking_form_class', $booking_form_class);
+
+		// before form action hook
+		do_action( 'tf_before_' . $this->args["name"] . '_backend_booking_form');
+
 		?>
+		
         <form method="post" action="" class=<?php echo esc_attr( $booking_form_class ); ?> enctype="multipart/form-data">
             <h1><?php echo esc_html( $booking_form_title ); ?></h1>
 			<?php
@@ -192,6 +201,11 @@ abstract class TF_Backend_Booking {
                 <button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn" id="tf-backend-<?php echo esc_html( $this->args["name"] ); ?>-book-btn"><?php esc_html_e( 'Book Now', 'tourfic' ); ?></button>
             </div>
         </form>
+		<?php 
+		// after form action hook
+		do_action( 'tf_after_' . $this->args["name"] . '_backend_booking_form');
+		
+		?>
 		<?php
 		echo '</div>';
 	}
