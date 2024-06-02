@@ -4,12 +4,14 @@ namespace Tourfic\App\Shortcodes;
 
 defined( 'ABSPATH' ) || exit;
 
-class Hotel_Locations {
+class Hotel_Locations extends \Tourfic\Core\Shortcodes {
 
 	use \Tourfic\Traits\Singleton;
 
+    protected $shortcode = 'hotel_locations';
+
 	public function __construct() {
-		add_shortcode( 'hotel_locations', [ $this, 'render' ] );
+		parent::__construct();
 		// Old compatibility
 		add_shortcode( 'tourfic_destinations', [ $this, 'render' ] );
 	}

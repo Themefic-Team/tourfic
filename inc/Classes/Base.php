@@ -21,6 +21,7 @@ class Base {
 
 	public function __construct() {
 		$this->init();
+		$this->load_shortcodes();
 	}
 
 	public function init() {
@@ -76,14 +77,29 @@ class Base {
 		\Tourfic\Admin\Emails\TF_Handle_Emails::instance();
 
 
-		// \Tourfic\Admin\Booking_Details\Hotel\Hotel_Booking_Details::instance();
-//		\Tourfic\Admin\Enquiry\Hotel\Hotel_Enquiry::instance();
-//		\Tourfic\Admin\Booking_Details\Tour\Tour_Booking_Details::instance();
-//		\Tourfic\Admin\Booking_Details\Apartment\Apartment_Booking_Details::instance();
 	}
 
-	function init_hooks() {
-//		add_action( 'admin_menu', array( $this, 'tf_add_enquiry_submenu' ) );
+	function load_shortcodes() {
+		\Tourfic\App\Shortcodes\Hotels::instance();
+		\Tourfic\App\Shortcodes\Hotel_Locations::instance();
+		\Tourfic\App\Shortcodes\Recent_Hotel::instance();
+		\Tourfic\App\Shortcodes\Hotel_External_Listings::instance();
+
+		\Tourfic\App\Shortcodes\Tours::instance();
+		\Tourfic\App\Shortcodes\Tour_Destinations::instance();
+		\Tourfic\App\Shortcodes\Recent_Tour::instance();
+		\Tourfic\App\Shortcodes\Tour_External_Listings::instance();
+
+		\Tourfic\App\Shortcodes\Apartments::instance();
+		\Tourfic\App\Shortcodes\Apartment_Locations::instance();
+		\Tourfic\App\Shortcodes\Recent_Apartment::instance();
+		\Tourfic\App\Shortcodes\Apartment_External_Listings::instance();
+
+		\Tourfic\App\Shortcodes\Recent_Blog::instance();
+		\Tourfic\App\Shortcodes\Reviews::instance();
+		\Tourfic\App\Shortcodes\Search_Form::instance();
+		\Tourfic\App\Shortcodes\Search_Result::instance();
+		\Tourfic\App\Shortcodes\Vendor_Post::instance();
 	}
 }
 

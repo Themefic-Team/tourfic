@@ -2,10 +2,7 @@
 
 namespace Tourfic\Core;
 
-// Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
 
