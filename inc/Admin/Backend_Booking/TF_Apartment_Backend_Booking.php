@@ -30,20 +30,6 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 		add_action( 'wp_ajax_tf_backend_apartment_booking', array( $this, 'backend_booking_callback' ) );
 	}
 
-	private function get_apartment_meta_options( $id, $key = '' ) {
-		if ( empty( $id ) || $id == null || $id == "undefined" || $id == 0 ) {
-			return;
-		}
-
-		$meta = get_post_meta( $id, 'tf_apartment_opt', true );
-
-		if ( ! empty( $key ) ) {
-			return $meta[ $key ];
-		} else {
-			return $meta;
-		}
-	}
-
 	function set_settings_fields() {
 		$this->settings = array(
 			'tf_booking_fields' => array(
@@ -119,13 +105,11 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 		check_ajax_referer( 'updates', '_nonce' );
 
 		$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : 0;
+		$meta = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
 		$from         = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
 		$to           = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
 
-		// Additional Fees data
-		if ( $apartment_id != 0 ) {
-			$additional_fees = ! empty( $this->get_apartment_meta_options( $apartment_id, "additional_fees" ) ) ? $this->get_apartment_meta_options( $apartment_id, "additional_fees" ) : array();
-		}
+		$additional_fees = ! empty( $meta["additional_fees"] ) ? $meta["additional_fees"] : array();
 
 		$all_fees = [];
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $additional_fees ) ) {
@@ -140,9 +124,9 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 				}
 			}
 		} else {
-			$additional_fee_label  = ! empty( $this->get_apartment_meta_options( $apartment_id ) ["additional_fee_label"] ) ? $this->get_apartment_meta_options( $apartment_id, "additional_fee_label" ) : '';
-			$additional_fee_amount = ! empty( $this->get_apartment_meta_options( $apartment_id )["additional_fee"] ) ? $this->get_apartment_meta_options( $apartment_id, "additional_fee" ) : 0;
-			$additional_fee_type   = ! empty( $this->get_apartment_meta_options( $apartment_id )["fee_type"] ) ? $this->get_apartment_meta_options( $apartment_id, "fee_type" ) : '';
+			$additional_fee_label  = ! empty( $meta["additional_fee_label"] ) ? $meta["additional_fee_label"] : '';
+			$additional_fee_amount = ! empty( $meta["additional_fee"] ) ? $meta["additional_fee"] : 0;
+			$additional_fee_type   = ! empty( $meta["fee_type"] ) ? $meta["fee_type"] : '';
 
 			if ( $additional_fee_amount != 0 ) {
 				$all_fees[] = array(
@@ -196,15 +180,18 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 		$day_diff     = ! empty( $this->apartment_day_diference_calculation( $check_in, $check_out ) ) ? $this->apartment_day_diference_calculation( $check_in, $check_out ) : 0;
 
 		if ( ! empty( $id ) ) {
-			$availability_switch    = ! empty( $this->get_apartment_meta_options( $id, "enable_availability" ) ) ? $this->get_apartment_meta_options( $id, "enable_availability" ) : '';
-			$apt_availability       = ! empty( $this->get_apartment_meta_options( $id, "apt_availability" ) ) ? $this->get_apartment_meta_options( $id, "apt_availability" ) : '';
-			$apartment_price_type   = ! empty( $this->get_apartment_meta_options( $id, "pricing_type" ) ) ? $this->get_apartment_meta_options( $id, "pricing_type" ) : 'per_night';
-			$apartment_price        = ! empty( $this->get_apartment_meta_options( $id, 'price_per_night' ) ) ? $this->get_apartment_meta_options( $id, 'price_per_night' ) : 0;
-			$apartment_adult_price  = ! empty( $this->get_apartment_meta_options( $id, 'adult_price' ) ) ? $this->get_apartment_meta_options( $id, 'adult_price' ) : 0;
-			$apartment_child_price  = ! empty( $this->get_apartment_meta_options( $id, 'child_price' ) ) ? $this->get_apartment_meta_options( $id, 'child_price' ) : 0;
-			$apartment_infant_price = ! empty( $this->get_apartment_meta_options( $id, 'infant_price' ) ) ? $this->get_apartment_meta_options( $id, 'infant_price' ) : 0;
-			$discount_type          = ! empty( $this->get_apartment_meta_options( $id, 'discount_type' ) ) ? $this->get_apartment_meta_options( $id, 'discount_type' ) : 'none';
-			$discount_amount        = ! empty( $this->get_apartment_meta_options( $id, 'discount' ) ) && $discount_type != 'none' ? $this->get_apartment_meta_options( $id, 'discount' ) : 0;
+
+			$meta = get_post_meta( $id, 'tf_apartment_opt', true );
+
+			$availability_switch    = ! empty( $meta["enable_availability"] ) ? $meta["enable_availability"] : '';
+			$apt_availability       = ! empty( $meta["apt_availability"] ) ? $meta["apt_availability"] : '';
+			$apartment_price_type   = ! empty( $meta["pricing_type"] ) ? $meta["pricing_type"] : 'per_night';
+			$apartment_price        = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
+			$apartment_adult_price  = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
+			$apartment_child_price  = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
+			$apartment_infant_price = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
+			$discount_type          = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : 'none';
+			$discount_amount        = ! empty( $meta['discount'] ) && $discount_type != 'none' ? $meta['discount'] : 0;
 		}
 
 		$apartment_pricing = 0;
@@ -369,7 +356,7 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 		$infant_count = ! empty( $field['tf_apartment_infant_number'] ) ? intval( $field['tf_apartment_infant_number'] ) : 0;
 		$check_from   = ! empty( $field['tf_apartment_date']['from'] ) ? $field['tf_apartment_date']['from'] : '';
 		$check_to     = ! empty( $field['tf_apartment_date']['to'] ) ? $field['tf_apartment_date']['to'] : '';
-		$apt_data     = $this->get_apartment_meta_options( intval( $apt_id ) );
+		$apt_data     = get_post_meta( $apt_id, 'tf_apartment_opt', true );
 
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 			$additional_fees = ! empty( $apt_data['additional_fees'] ) ? $apt_data['additional_fees'] : array();

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tourfic\App\Widgets;
+namespace Tourfic\App\Widgets\TF_Widgets;
 
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
@@ -13,7 +13,7 @@ use Tourfic\Classes\Helper;
  * Works only for apartment
  * @author Foysal
  */
-class TF_Apartment_Features_Filter extends \WP_Widget {
+class Apartment_Features_Filter extends \WP_Widget {
 
 	use \Tourfic\Traits\Singleton;
 

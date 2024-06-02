@@ -1,6 +1,6 @@
 <?php
 
-namespace Tourfic\App\Widgets;
+namespace Tourfic\App\Widgets\TF_Widgets;
 
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
@@ -8,11 +8,11 @@ defined('ABSPATH') || exit;
 use Tourfic\Classes\Helper;
 
 /**
- * Tour filter by activities
+ * Tour filter by attraction
  * Works only for Tour
  * @author Abu Hena
  */
-class TF_Tour_Activities_Filter extends \WP_Widget {
+class Tour_Attraction_Filter extends \WP_Widget {
 
     use \Tourfic\Traits\Singleton;
 
@@ -22,9 +22,9 @@ class TF_Tour_Activities_Filter extends \WP_Widget {
     public function __construct() {
 
         parent::__construct(
-            'tf_activities_filter', // Base ID
-            esc_html__( 'Tourfic - Tour Filter By Activities', 'tourfic' ),
-            array( 'description' => esc_html__( 'Filter search result by tour activities', 'tourfic' ) ) // Args
+            'tf_attraction_filter', // Base ID
+            esc_html__( 'Tourfic - Tour Filter By Attraction', 'tourfic' ),
+            array( 'description' => esc_html__( 'Filter search result by tour attraction', 'tourfic' ) ) // Args
         );
     }
 
@@ -56,7 +56,7 @@ class TF_Tour_Activities_Filter extends \WP_Widget {
 
             $taxonomy = array(
                 'hide_empty' => $hide_empty,
-                'taxonomy'   => 'tour_activities',
+                'taxonomy'   => 'tour_attraction',
                 'include'    => $terms,
             );
 
@@ -69,7 +69,7 @@ class TF_Tour_Activities_Filter extends \WP_Widget {
                 $default_count = $term->count;
                 $count = $show_count ? '<span>(' . $default_count . ')</span>' : '';
 
-                echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tf_activities[]' value='{$id}'/><span class='checkmark'></span> {$name}</label> {$count}</li>", Helper::tf_custom_wp_kses_allow_tags());
+                echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tf_attractions[]' value='{$id}'/><span class='checkmark'></span> {$name}</label> {$count}</li>", Helper::tf_custom_wp_kses_allow_tags() );
             }
             echo "</ul><a href='#' class='see-more btn-link'>" . esc_html__( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a><a href='#' class='see-less btn-link'>" . esc_html__( 'See Less', 'tourfic' ) . "<span class='fa fa-angle-up'></span></a></div>";
 
@@ -85,9 +85,8 @@ class TF_Tour_Activities_Filter extends \WP_Widget {
      * @param array $instance Previously saved values from database.
      */
     public function form( $instance ) {
-        $title = isset( $instance['title'] ) ? $instance['title'] : esc_html__( 'Popular Activities', 'tourfic' );
+        $title = isset( $instance['title'] ) ? $instance['title'] : esc_html__( 'Popular Filters', 'tourfic' );
         $terms = isset( $instance['terms']) && is_array( $instance['terms'] ) ? implode( ',', $instance['terms'] ) : 'all';
-
         $show_count = isset( $instance['show_count'] ) ? $instance['show_count'] : '';
         $hide_empty = isset( $instance['hide_empty'] ) ? $instance['hide_empty'] : '';
 
@@ -101,19 +100,19 @@ class TF_Tour_Activities_Filter extends \WP_Widget {
             <label for="<?php echo esc_attr($this->get_field_id( 'terms' )); ?>"><?php esc_html_e( 'Select Terms:', 'tourfic' )?></label>
             <br>
             <?php
-                wp_dropdown_categories( array(
-                    'taxonomy'     => array( 'tour_activities' ),
-                    'hierarchical' => false,
-                    'name'         => $this->get_field_name( 'terms' ),
-                    'id'           => $this->get_field_id( 'terms' ),
-                    'selected'     => $terms, // e.x 86,110,786
-                    'multiple'     => true,
-                    'class'        => 'widefat tf-select2',
-                    'show_count'   => true
-                ) );
-            ?>
+            wp_dropdown_categories( array(
+                'taxonomy'     => array( 'tour_attraction' ),
+                'hierarchical' => false,
+                'name'         => $this->get_field_name( 'terms' ),
+                'id'           => $this->get_field_id( 'terms' ),
+                'selected'     => $terms,  // e.x 86,110,786
+                'class'        => 'widefat tf-select2',
+                'show_count'   => true,
+                'multiple' => true
+            ) );
+        ?>
             <br>
-            <span><?php echo esc_html__( 'Leave this field empty if you want to show all terms.', 'tourfic' ); ?></span>
+            <span>Leave this field empty if you want to show all terms.</span>
         </p>
         <p class="tf-widget-field">
             <label for="<?php echo esc_attr($this->get_field_id( 'show_count' )); ?>"><?php esc_html_e( 'Show Count:', 'tourfic' )?></label>
@@ -128,12 +127,7 @@ class TF_Tour_Activities_Filter extends \WP_Widget {
                 font-weight: 600;
             }
         </style>
-        <script>
-            jQuery('#<?php echo esc_attr($this->get_field_id( 'terms' )); ?>').select2({
-                width: '100%'
-            });
-            jQuery(document).trigger('tf_select2');
-        </script>
+        
     <?php
     }
 
@@ -155,4 +149,5 @@ class TF_Tour_Activities_Filter extends \WP_Widget {
 
         return $instance;
     }
+
 }

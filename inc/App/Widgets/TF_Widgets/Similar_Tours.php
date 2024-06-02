@@ -1,6 +1,6 @@
 <?php
 
-namespace Tourfic\App\Widgets;
+namespace Tourfic\App\Widgets\TF_Widgets;
 
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 /**
  * Similar Tours
  */
-class Tourfic_Similar_Tours extends \WP_Widget {
+class Similar_Tours extends \WP_Widget {
 
     use \Tourfic\Traits\Singleton;
 
