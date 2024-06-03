@@ -8,7 +8,6 @@ use Tourfic\Classes\Helper;
 
 class Enqueue {
 	use \Tourfic\Traits\Singleton;
-	use \Tourfic\Traits\Helper;
 
 	public function __construct() {
 		add_filter( 'wp_enqueue_scripts', array( $this, 'tf_dequeue_scripts' ), 9999 );

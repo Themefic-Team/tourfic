@@ -5,7 +5,6 @@ defined( 'ABSPATH' ) || exit;
 
 class Helper {
 	use \Tourfic\Traits\Singleton;
-	use \Tourfic\Traits\Helper;
 
 	public function __construct() {
 		add_filter( 'body_class', array( $this, 'tf_templates_body_class' ) );

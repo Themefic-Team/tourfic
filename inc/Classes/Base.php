@@ -16,8 +16,6 @@ use Tourfic\Classes\Helper;
 
 class Base {
 	use \Tourfic\Traits\Singleton;
-	use \Tourfic\Traits\Enquiry;
-	use \Tourfic\Traits\Helper;
 
 	public function __construct() {
 		$this->init();
@@ -50,6 +48,9 @@ class Base {
 			Tour_Booking_Details::instance();
 			Hotel_Booking_Details::instance();
 			Apartment_Booking_Details::instance();
+
+			//Enquiry
+			\Tourfic\Admin\Enquiry\Hotel_Enquiry::instance();
 
 			// Promo Notice
 			TF_Promo_Notice::instance();
