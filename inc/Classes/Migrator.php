@@ -5,7 +5,6 @@ defined( 'ABSPATH' ) || exit;
 
 class Migrator {
 	use \Tourfic\Traits\Singleton;
-	use \Tourfic\Traits\Helper;
 
 	public function __construct() {
 		add_action( 'init', array( $this, 'tf_permalink_settings_migration' ) );

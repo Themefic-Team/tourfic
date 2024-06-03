@@ -7,7 +7,6 @@ defined( 'ABSPATH' ) || exit;
 
 Class Booking_Details {
     use \Tourfic\Traits\Singleton;
-    use \Tourfic\Traits\Helper;
 
     protected array $booking_args;
 

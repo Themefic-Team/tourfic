@@ -2,9 +2,7 @@
 
 namespace Tourfic\Admin;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 class TF_Promo_Notice {
 
