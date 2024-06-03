@@ -7,10 +7,11 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+use Tourfic\Classes\Helper;
+
 abstract class TF_Booking_Details {
 
     use \Tourfic\Traits\Singleton;
-    use \Tourfic\Traits\Helper;
 
     protected array $booking_args;
 
@@ -649,19 +650,8 @@ abstract class TF_Booking_Details {
                                             <td>:</td>
                                             <td>
                                             <?php 
-                                                if ( ! function_exists( 'tf_get_payment_method_full_name' ) ) {
-                                                    function tf_get_payment_method_full_name( $sort_name ) {
-                                                        $payment_gateways = \WC_Payment_Gateways::instance()->get_available_payment_gateways();
-                                        
-                                                        if ( isset( $payment_gateways[ $sort_name ] ) ) {
-                                                            return $payment_gateways[ $sort_name ]->title;
-                                                        } else {
-                                                            return 'Offline Payment';
-                                                        }
-                                                    }
-                                                }
                                                 $sort_name = $tf_order_details->payment_method;
-                                                echo esc_html(tf_get_payment_method_full_name( $sort_name ));
+                                                echo esc_html($this->tf_get_payment_method_full_name( $sort_name ));
                                             ?>
                                             </td>
                                         </tr>
@@ -1444,6 +1434,16 @@ abstract class TF_Booking_Details {
             }
         }
         die();
+    }
+
+    function tf_get_payment_method_full_name( $sort_name ) {
+        $payment_gateways = \WC_Payment_Gateways::instance()->get_available_payment_gateways();
+
+        if ( isset( $payment_gateways[ $sort_name ] ) ) {
+            return $payment_gateways[ $sort_name ]->title;
+        } else {
+            return 'Offline Payment';
+        }
     }
 
 }
