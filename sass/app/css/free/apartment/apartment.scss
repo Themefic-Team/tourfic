@@ -1344,6 +1344,10 @@
         row-gap: 16px;
         grid-template-columns: calc(50% - 100px) calc(50% - 100px);
 
+        @media #{$max767} {
+            grid-template-columns: 1fr;
+        }
+
         .tf-single {
             grid-template-columns: 102px calc(100% - 212px) 30px !important;
             column-gap: 40px;

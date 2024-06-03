@@ -2,7 +2,7 @@
 if ( $comments && $disable_review_sec != 1 ) { ?>
     <!-- Hotel reviews Srart -->
     <div class="tf-reviews-wrapper tf-section" id="tf-tour-reviews">
-        <h2 class="tf-section-title"><?php !empty( $meta['review-section-title'] ) ? esc_html_e( $meta['review-section-title'], "tourfic" ) : ''; ?></h2>
+        <h2 class="tf-section-title"><?php echo !empty( $meta['review-section-title'] ) ? esc_html( $meta['review-section-title'] ) : ''; ?></h2>
         <p><?php esc_html_e( "Total", "tourfic" ); ?> <?php tf_based_on_text( count( $comments ) ); ?></p>
         <div class="tf-reviews-slider">
 			<?php
@@ -29,7 +29,7 @@ if ( $comments && $disable_review_sec != 1 ) { ?>
                     <div class="tf-reviews-text">
                         <span class="tf-review-rating"><?php echo wp_kses_post( $c_rating ); ?></span>
                         <span class="tf-reviews-meta"><?php echo esc_html( $c_author_name ); ?>, <?php echo wp_kses_post( gmdate( "F Y", strtotime( $c_date ) ) ); ?></span>
-                        <p><?php echo wp_kses_post( tourfic_character_limit_callback( $c_content, 180 ) ); ?></p>
+                        <p><?php echo wp_kses_post( \Tourfic\Classes\Helper::tourfic_character_limit_callback( $c_content, 180 ) ); ?></p>
                     </div>
                 </div>
 			<?php } ?>

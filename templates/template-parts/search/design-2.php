@@ -1,15 +1,17 @@
 <div class="tf-template-3">
 <?php 
+
+use \Tourfic\Classes\Helper;
 // Check nonce security
 if ( ! isset( $_GET['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_GET['_nonce'])), 'tf_ajax_nonce' ) ) {
 	return;
 }
 if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
-	$tf_search_result_banner = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] : '';
+	$tf_search_result_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] : '';
 }elseif( !empty($_GET['type']) && $_GET['type']=="tf_hotel" ){
-	$tf_search_result_banner = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] : '';
+	$tf_search_result_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] : '';
 }else{
-    $tf_search_result_banner = ! empty( tf_data_types(tfopt( 'tf-template' ))['apartment_archive_design_1_bannar'] ) ?  tf_data_types(tfopt( 'tf-template' ))['apartment_archive_design_1_bannar'] : '';
+    $tf_search_result_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_1_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_1_bannar'] : '';
 }
 ?>
     <!--Hero section start -->
@@ -55,7 +57,7 @@ if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
                     <!-- Booking form Start -->
                     <div class="tf-archive-search-form tf-booking-form-wrapper">
                         <form action="<?php echo esc_url(tf_booking_search_action()); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
-                            <?php tf_search_result_sidebar_form( 'archive' ); ?>
+                            <?php Helper::tf_search_result_sidebar_form( 'archive' ); ?>
                         </form>
                     </div>
                     <!-- Booking form end -->        

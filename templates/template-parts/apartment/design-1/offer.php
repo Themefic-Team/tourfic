@@ -1,6 +1,10 @@
-<?php if ( isset($meta['amenities']) && ! empty( tf_data_types( $meta['amenities'] ) ) ) :
+<?php 
+
+use \Tourfic\Classes\Helper;
+
+if ( isset($meta['amenities']) && ! empty( Helper::tf_data_types( $meta['amenities'] ) ) ) :
 $fav_amenities = array();
-foreach ( tf_data_types( $meta['amenities'] ) as $amenity ) {
+foreach ( Helper::tf_data_types( $meta['amenities'] ) as $amenity ) {
     if ( ! isset( $amenity['favorite'] ) || $amenity['favorite'] !== '1' ) {
         continue;
     }

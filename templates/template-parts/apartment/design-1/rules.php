@@ -1,7 +1,11 @@
-<?php if ( isset( $meta['house_rules'] ) && ! empty( tf_data_types( $meta['house_rules'] ) ) ):
+<?php 
+
+use \Tourfic\Classes\Helper;
+
+if ( isset( $meta['house_rules'] ) && ! empty( Helper::tf_data_types( $meta['house_rules'] ) ) ):
 $included_house_rules = array();
 $not_included_house_rules = array();
-foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
+foreach ( Helper::tf_data_types( $meta['house_rules'] ) as $house_rule ) {
     if ( isset( $house_rule['include'] ) && $house_rule['include'] == '1' ) {
         $included_house_rules[] = $house_rule;
     } else {

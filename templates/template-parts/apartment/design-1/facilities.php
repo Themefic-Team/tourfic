@@ -1,5 +1,8 @@
 <?php
-$total_facilities_cat = ! empty( tf_data_types( tfopt( 'amenities_cats' ) ) ) ? tf_data_types( tfopt( 'amenities_cats' ) ) : '';
+
+use \Tourfic\Classes\Helper;
+
+$total_facilities_cat = ! empty( Helper::tf_data_types( Helper::tfopt( 'amenities_cats' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'amenities_cats' ) ) : '';
 if ( ! empty( $total_facilities_cat ) && ! empty( $meta['amenities'] ) ) {
 	?>
     <!-- apartment facilities Srart -->

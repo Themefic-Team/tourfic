@@ -1,9 +1,13 @@
-<?php if ( isset( $meta['rooms'] ) && ! empty( tf_data_types( $meta['rooms'] ) ) ) : ?>
+<?php 
+
+use \Tourfic\Classes\Helper;
+
+if ( isset( $meta['rooms'] ) && ! empty( Helper::tf_data_types( $meta['rooms'] ) ) ) : ?>
 <div class="tf-apartment-rooms-section" id="tf-apartment-rooms">
     <div class="tf-apartment-room-details">
     <h4><?php echo esc_html( $meta['room_details_title'] ) ?></h4>
     <div class="tf-apartment-room-slider">
-    <?php foreach ( tf_data_types( $meta['rooms'] ) as $key => $room ) : ?>
+    <?php foreach ( Helper::tf_data_types( $meta['rooms'] ) as $key => $room ) : ?>
         <div class="tf-apartment-room-item">
             <div class="tf-apartment-room-item-thumb">
                 <a href="#" class="tf-apt-room-qv-desgin-1" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">

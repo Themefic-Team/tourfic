@@ -1,7 +1,9 @@
 <div class="tf-template-3">
 
     <?php 
-    $tf_tour_arc_banner = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] : '';
+    use \Tourfic\Classes\Helper;
+    
+    $tf_tour_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] : '';
     ?>  
     <!--Hero section start -->
     <div class="tf-hero-section-wrap" style="<?php echo !empty($tf_tour_arc_banner) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.40) 0%, rgba(48, 40, 28, 0.40) 100%), url('.esc_url($tf_tour_arc_banner).'), lightgray 0px -268.76px / 100% 249.543% no-repeat;background-size: cover; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
@@ -33,7 +35,7 @@
                     <!-- Booking form Start -->
                     <div class="tf-archive-search-form tf-booking-form-wrapper">
                         <form action="<?php echo esc_url(tf_booking_search_action()); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
-                            <?php tf_archive_sidebar_search_form('tf_tours'); ?>
+                            <?php Helper::tf_archive_sidebar_search_form('tf_tours'); ?>
                         </form>
                     </div>
                     <!-- Booking form end -->

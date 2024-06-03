@@ -1,5 +1,6 @@
 <?php
 defined( 'ABSPATH' ) || exit;
+use \Tourfic\Classes\Helper;
 
 /**
  * Tour booking ajax function
@@ -148,7 +149,7 @@ function tf_tours_booking_function() {
 				'post_type' => 'tour',
 				'query' => " AND ostatus = 'completed' ORDER BY order_id DESC"
 			);
-			$tf_tour_book_orders = tourfic_order_table_data($tf_orders_select);
+			$tf_tour_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
 
 			$tf_total_adults = 0;
 			$tf_total_childrens = 0;
@@ -215,7 +216,7 @@ function tf_tours_booking_function() {
 				'post_type' => 'tour',
 				'query' => " AND ostatus = 'completed' ORDER BY order_id DESC"
 			);
-			$tf_tour_book_orders = tourfic_order_table_data($tf_orders_select);
+			$tf_tour_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
 
 			$tf_total_adults = 0;
 			$tf_total_childrens = 0;
@@ -433,7 +434,7 @@ function tf_tours_booking_function() {
 					'post_type' => 'tour',
 					'query' => " AND ostatus = 'completed' ORDER BY order_id DESC"
 				);
-				$tf_tour_book_orders = tourfic_order_table_data($tf_orders_select);
+				$tf_tour_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
 
                 $tf_total_adults = 0;
                 $tf_total_childrens = 0;
@@ -625,7 +626,7 @@ function tf_tours_booking_function() {
 
 	if( !empty($tf_booking_type) && 3==$tf_booking_type ){
 
-		$tf_booking_fields = !empty(tfopt( 'book-confirm-field' )) ? tf_data_types(tfopt( 'book-confirm-field' )) : '';
+		$tf_booking_fields = !empty(Helper::tfopt( 'book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'book-confirm-field' )) : '';
 		if(empty($tf_booking_fields)){
 			$billing_details  = array(
 				'billing_first_name' => sanitize_text_field($tf_confirmation_details['tf_first_name']),
@@ -763,7 +764,7 @@ function tf_tours_booking_function() {
 			'order_date'       => gmdate( 'Y-m-d H:i:s' ),
 		);
 		$response['without_payment'] = 'true';
-		$order_id = tf_set_order( $order_data );
+		$order_id = Helper::tf_set_order( $order_data );
 		if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($order_id) ) {
 			do_action( 'tf_offline_payment_booking_confirmation', $order_id, $order_data );
 		}
@@ -1362,7 +1363,12 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 			$visitor_details = $item->get_meta( '_visitor_details', true );
 
 			if ( $tour_date ) {
-				list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
+				if( str_contains($tour_date, " - ") ){
+					list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
+				} else {
+					$tour_in = $tour_date;
+					$tour_out = '';
+				}
 			}
 
 			$iteminfo = [
