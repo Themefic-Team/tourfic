@@ -468,7 +468,7 @@ abstract Class Booking_Details {
                     <!-- Booking Details -->
                     <div class="customers-order-date details-box">
                         <h4>
-                            <?php esc_html_e("Booking details", "tourfic"); ?>
+                            <?php apply_filters( 'tf_' . $this->booking_args["booking_type"] . 'booking_details_customer_section_title_change',  esc_html_e("Booking details", "tourfic") ); ?>
                         </h4>
                         <div class="tf-grid-box tf-customer-details-boxs">
                             <?php
@@ -631,7 +631,7 @@ abstract Class Booking_Details {
                     <!-- Pricing Details -->
                     <div class="customers-order-date details-box">
                         <h4>
-                            <?php esc_html_e("Pricing details", "tourfic"); ?>
+                            <?php esc_html_e(apply_filters( 'tf_' . $this->booking_args["booking_type"] . 'booking_details_pricing_section_title_change',  "Pricing details"), "tourfic" ); ?>
                         </h4>
                         <div class="tf-grid-box tf-pricing-grid-box">
 
@@ -702,7 +702,6 @@ abstract Class Booking_Details {
                                     </table>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 
@@ -710,7 +709,7 @@ abstract Class Booking_Details {
                     <!-- Visitor Details -->
                     <div class="customers-order-date details-box">
                         <h4>
-                            <?php $tf_order_details->post_type == 'tour' ? esc_html_e("Visitor details", "tourfic") : esc_html_e("Guest details", "tourfic"); ?>
+                            <?php apply_filters( 'tf_' . $this->booking_args["booking_type"] . 'booking_details_visitor_section_title_change',  $tf_order_details->post_type == 'tour' ? esc_html_e("Visitor details", "tourfic") : esc_html_e("Guest details", "tourfic") ); ?>
                             <div class="others-button visitor_edit">
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -773,7 +772,11 @@ abstract Class Booking_Details {
                             
                         </div>
                     </div>
+
                     <?php } ?>
+
+                    <!-- Check in out status -->
+                    <?php $this->check_in_out_status( $tf_order_details ); ?>
                     
                     <!-- Voucher details -->
                     <?php 
@@ -1012,6 +1015,7 @@ abstract Class Booking_Details {
 
     abstract function voucher_details ($tf_tour_details, $tf_order_details, $tf_billing_details);
     abstract function voucher_quick_view( $tf_tour_details, $tf_order_details, $tf_billing_details );
+    abstract function check_in_out_status( $tf_order_details );
     // Pagination Function
 
     function tf_booking_details_pagination($page){
