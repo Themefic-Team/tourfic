@@ -33,7 +33,7 @@ class Recent_Apartment extends \Tourfic\Core\Shortcodes {
 
 		ob_start();
 
-		$apartment_loop = new WP_Query( $args );
+		$apartment_loop = new \WP_Query( $args );
 
 		// Generate an Unique ID
 		$thisid = uniqid( 'tfpopular_' );

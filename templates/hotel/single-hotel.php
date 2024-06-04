@@ -3,8 +3,8 @@
  * Template: Single Hotel (Full Width)
  */
 
-
- use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\Helper;
+use \Tourfic\App\Wishlist;
 
 get_header();
 
@@ -71,7 +71,7 @@ while ( have_posts() ) : the_post();
 
 	// Wishlist
 	$post_type       = str_replace( 'tf_', '', get_post_type() );
-	$has_in_wishlist = tf_has_item_in_wishlist( $post_id );
+	$has_in_wishlist = Wishlist::tf_has_item_in_wishlist( $post_id );
 
 	/**
 	 * Get locations

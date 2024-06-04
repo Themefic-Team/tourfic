@@ -35,7 +35,7 @@ class Recent_Tour extends \Tourfic\Core\Shortcodes {
 
 		ob_start();
 
-		$tour_loop = new WP_Query( $args );
+		$tour_loop = new \WP_Query( $args );
 
 		// Generate an Unique ID
 		$thisid = uniqid( 'tfpopular_' );

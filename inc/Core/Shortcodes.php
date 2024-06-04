@@ -38,7 +38,7 @@ abstract class Shortcodes {
 			);
 		}
 
-		$post_loop = new WP_Query( $args );
+		$post_loop = new \WP_Query( $args );
 		$post_ids = [];
 		if ( $post_loop->have_posts() ) :
 			while ( $post_loop->have_posts() ) :

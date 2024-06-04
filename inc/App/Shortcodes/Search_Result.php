@@ -73,10 +73,10 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 		$paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 		$checkInOutDate = ! empty( $_GET['check-in-out-date'] ) ? explode( ' - ', $_GET['check-in-out-date'] ) : '';
 		if ( ! empty( $checkInOutDate ) ) {
-			$period = new DatePeriod(
-				new DateTime( $checkInOutDate[0] ),
-				new DateInterval( 'P1D' ),
-				new DateTime( ! empty( $checkInOutDate[1] ) ? $checkInOutDate[1] : $checkInOutDate[0] . '23:59' )
+			$period = new \DatePeriod(
+				new \DateTime( $checkInOutDate[0] ),
+				new \DateInterval( 'P1D' ),
+				new \DateTime( ! empty( $checkInOutDate[1] ) ? $checkInOutDate[1] : $checkInOutDate[0] . '23:59' )
 			);
 		} else {
 			$period = '';
@@ -106,7 +106,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 			);
 		}
 
-		$taxonomy_query = new WP_Term_Query( array(
+		$taxonomy_query = new \WP_Term_Query( array(
 			'taxonomy'   => $taxonomy,
 			'orderby'    => 'name',
 			'order'      => 'ASC',
@@ -153,7 +153,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 			);
 		}
 
-		$loop        = new WP_Query( $args );
+		$loop        = new \WP_Query( $args );
 		$total_posts = $loop->found_posts;
 		ob_start(); ?>
 		<!-- Start Content -->
@@ -312,7 +312,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 								);
 
 
-								$result_query = new WP_Query( $filter_args );
+								$result_query = new \WP_Query( $filter_args );
 								if ( $result_query->have_posts() ) {
 									// Feature Posts
 									while ( $result_query->have_posts() ) {
@@ -541,7 +541,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 								'post__in'       => $displayed_results,
 							);
 
-							$result_query = new WP_Query( $filter_args );
+							$result_query = new \WP_Query( $filter_args );
 							if ( $result_query->have_posts() ) {
 								// Feature Posts
 								while ( $result_query->have_posts() ) {
@@ -751,7 +751,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 							);
 
 
-							$result_query = new WP_Query( $filter_args );
+							$result_query = new \WP_Query( $filter_args );
 							if ( $result_query->have_posts() ) {
 								// Feature Posts
 								while ( $result_query->have_posts() ) {
