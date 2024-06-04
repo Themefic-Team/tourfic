@@ -16,6 +16,7 @@ use Tourfic\Classes\Helper;
 
 class Base {
 	use \Tourfic\Traits\Singleton;
+	use \Tourfic\Traits\Database;
 
 	public function __construct() {
 		$this->init();
@@ -23,6 +24,8 @@ class Base {
 	}
 
 	public function init() {
+		add_action( 'admin_init', array($this, 'create_enquiry_database_table') );
+
 		if ( file_exists( TF_INC_PATH . 'functions.php' ) ) {
 			require_once TF_INC_PATH . 'functions.php';
 		} else {
@@ -51,6 +54,8 @@ class Base {
 
 			//Enquiry
 			\Tourfic\Admin\Enquiry\Hotel_Enquiry::instance();
+			\Tourfic\Admin\Enquiry\Tour_Enquiry::instance();
+			\Tourfic\Admin\Enquiry\Apartment_Enquiry::instance();
 
 			// Promo Notice
 			TF_Promo_Notice::instance();

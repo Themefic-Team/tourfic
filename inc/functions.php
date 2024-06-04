@@ -112,15 +112,6 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-review.php' ) ) {
 }
 
 /**
- * inquiry Functions
- */
-if ( file_exists( TF_INC_PATH . 'functions/functions_enquiry.php' ) ) {
-	require_once TF_INC_PATH . 'functions/functions_enquiry.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/functions_enquiry.php' );
-}
-
-/**
  * Include export import function file
  */
 if( file_exists( TF_INC_PATH . 'functions/functions-settings-import-export.php' ) ){
