@@ -3,6 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\TF_Review;
 
 const TF_COMMENT_META  = 'tf_comment_meta';
 const TF_TOTAL_RATINGS = 'tf_total_ratings';
@@ -531,7 +532,7 @@ function tf_archive_single_rating() {
 				</div>
 				<div class="tf-avarage-review">
 				<?php echo wp_kses_post( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
-				 (<?php tf_based_on_text( count( $comments ) ); ?>)
+				 (<?php TF_Review::tf_based_on_text( count( $comments ) ); ?>)
 				</div>
 			</div>
 		<?php } elseif( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-2" ) || ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-2" ) || ( "tf_apartment"==$tf_current_post && $tf_apartment_arc_selected_template=="design-1" ) ){ ?>
@@ -545,7 +546,7 @@ function tf_archive_single_rating() {
 						<?php echo wp_kses_post( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
 					</span>
 				</div>
-				<h6><?php tf_based_on_text( count( $comments ) ); ?></h6>
+				<h6><?php TF_Review::tf_based_on_text( count( $comments ) ); ?></h6>
 			</div>
 		<?php
 		}

@@ -1,6 +1,7 @@
 <?php
 
 use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\TF_Review;
 
 $tf_booking_type = '1';
 $tf_hide_booking_form = '';
@@ -177,7 +178,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                     <?php
                                     if($comments){ ?>
                                     <a href="#tf-review" class="tf-single-rating">
-                                        <span><?php echo wp_kses_post(tf_total_avg_rating( $comments )); ?></span> (<?php tf_based_on_text( count( $comments ) ); ?>)
+                                        <span><?php echo wp_kses_post( TF_Review::tf_total_avg_rating( $comments )); ?></span> (<?php TF_Review::tf_based_on_text( count( $comments ) ); ?>)
                                     </a>
                                     <?php }else{ ?>
                                         <a href="#tf-review" class="tf-single-rating">

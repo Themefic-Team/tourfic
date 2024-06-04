@@ -1,5 +1,6 @@
 <?php
 use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\TF_Review;
 ?>
 
 <div class="tf-template-3 tf-hotel-single tf-apartment-single">
@@ -258,8 +259,8 @@ use \Tourfic\Classes\Helper;
                 $tf_settings_base = ! empty ( Helper::tfopt( 'r-base' ) ) ? Helper::tfopt( 'r-base' ) : 5;
                 if ( $comments ) {
                     $tf_overall_rate        = [];
-                    tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rating );
-                    tf_get_review_fields( $fields );
+                    TF_Review::tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rating );
+                    TF_Review::tf_get_review_fields( $fields );
                 ?>
                 <h2 class="tf-section-title"><?php esc_html_e("Overall reviews", "tourfic"); ?></h2>
                 <div class="tf-review-data-inner">
@@ -270,7 +271,7 @@ use \Tourfic\Classes\Helper;
                             </span>/ <?php echo esc_html( $tf_settings_base ); ?></span>
                         </div>
                         <div class="tf-review-all-info">
-                            <p><?php esc_html_e("Excellent", "tourfic"); ?> <span><?php esc_html_e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></span></p>
+                            <p><?php esc_html_e("Excellent", "tourfic"); ?> <span><?php esc_html_e("Total", "tourfic"); ?> <?php TF_Review::tf_based_on_text( count( $comments ) ); ?></span></p>
                         </div>
                     </div>
                     <div class="tf-review-data-features">

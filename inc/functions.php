@@ -96,11 +96,11 @@ if ( Helper::tf_is_woo_active() ) {
 /**
  * Review Functions
  */
-if ( file_exists( TF_INC_PATH . 'functions/functions-review.php' ) ) {
-	require_once TF_INC_PATH . 'functions/functions-review.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/functions-review.php' );
-}
+// if ( file_exists( TF_INC_PATH . 'functions/functions-review.php' ) ) {
+// 	require_once TF_INC_PATH . 'functions/functions-review.php';
+// } else {
+// 	tf_file_missing( TF_INC_PATH . 'functions/functions-review.php' );
+// }
 
 /**
  * Include export import function file

@@ -2,6 +2,7 @@
 # don't load directly
 defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\TF_Review;
 
 /**
  * Flushing Rewrite on Tourfic Activation
@@ -827,7 +828,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                         <a href="#tf-review">
                             <div class="tf-single-rating">
                                 <i class="fas fa-star"></i> <span><?php echo esc_html( tf_total_avg_rating( $comments ) ); ?></span>
-                                (<?php tf_based_on_text( count( $comments ) ); ?>)
+                                (<?php TF_Review::tf_based_on_text( count( $comments ) ); ?>)
                             </div>
                         </a>
                     </div>
@@ -2376,7 +2377,7 @@ if ( ! function_exists( 'tf_apartment_host_rating' ) ) {
                 <div class="tf-host-rating">
 					<?php echo esc_html( tf_average_ratings( array_values( $total_comment_rating ?? [] ) ) ); ?>
                 </div>
-                <h6>(<?php tf_based_on_text( $comment_count ); ?>)</h6>
+                <h6>(<?php TF_Review::tf_based_on_text( $comment_count ); ?>)</h6>
             </div>
 
 			<?php

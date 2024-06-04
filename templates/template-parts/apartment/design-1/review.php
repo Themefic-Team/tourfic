@@ -1,9 +1,12 @@
 <?php
+
+use Tourfic\Classes\TF_Review;
+
 if ( $comments && $disable_review_sec != 1 ) { ?>
 <!-- apartment reviews Srart -->
 <div class="tf-reviews-wrapper tf-section" id="tf-apartment-reviews">         
     <h2 class="tf-section-title"><?php echo !empty( $meta['review-section-title'] ) ? esc_html( $meta['review-section-title']) : ''; ?></h2>
-    <p><?php esc_html_e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></p>
+    <p><?php esc_html_e("Total", "tourfic"); ?> <?php TF_Review::tf_based_on_text( count( $comments ) ); ?></p>
     <div class="tf-reviews-slider">
         <?php
         foreach ( $comments as $comment ) {
@@ -14,7 +17,7 @@ if ( $comments && $disable_review_sec != 1 ) { ?>
             $tf_overall_rate = tf_average_ratings( $tf_comment_meta );
         }
         $base_rate = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
-        $c_rating  = tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
+        $c_rating  = TF_Review::tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
 
         // Comment details
         $c_avatar      = get_avatar( $comment, '56' );
