@@ -15,6 +15,19 @@ abstract class TF_Backend_Booking {
 
 	private array $booking_customers_fields;
 
+	public function __construct( array $args ) {
+		// backend booking arguments
+		$this->args = $args;
+
+		// Add actions
+		add_action( 'admin_menu', array( $this, 'tf_backend_booking_menu' ) );
+		add_action( 'tf_before_' . $this->args["name"] . '_booking_details', array( $this, 'tf_backend_booking_button' ) );
+
+		// foreach( $this->actions as $action ) {
+		//     add_action( $action, [ $this, $action . '_callback' ] );
+		// }
+	}
+
 	final function set_customers_fields() {
 		$current_user                   = wp_get_current_user();
 		$this->booking_customers_fields = array(
@@ -108,19 +121,6 @@ abstract class TF_Backend_Booking {
 	protected function set_settings( array $settings ) {
 		$this->set_customers_fields();
 		$this->settings = array_merge( $this->booking_customers_fields, $settings );
-	}
-
-	public function __construct( array $args ) {
-		// backend booking arguments
-		$this->args = $args;
-
-		// Add actions
-		add_action( 'admin_menu', array( $this, 'tf_backend_booking_menu' ) );
-		add_action( 'tf_before_' . $this->args["name"] . '_booking_details', array( $this, 'tf_backend_booking_button' ) );
-
-		// foreach( $this->actions as $action ) {
-		//     add_action( $action, [ $this, $action . '_callback' ] );
-		// }
 	}
 
 	final function tf_backend_booking_button() {

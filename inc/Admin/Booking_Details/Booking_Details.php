@@ -467,9 +467,7 @@ abstract Class Booking_Details {
                     
                     <!-- Booking Details -->
                     <div class="customers-order-date details-box">
-                        <h4>
-                            <?php esc_html_e("Booking details", "tourfic"); ?>
-                        </h4>
+                        <h4><?php esc_html_e("Booking details", "tourfic"); ?></h4>
                         <div class="tf-grid-box tf-customer-details-boxs">
                             <?php
                             $tf_billing_details = json_decode($tf_order_details->billing_details);
@@ -776,9 +774,7 @@ abstract Class Booking_Details {
                     <?php } ?>
                     
                     <!-- Voucher details -->
-                    <?php 
-                    $this->voucher_details( $tf_tour_details, $tf_order_details, $tf_billing_details );
-                    ?>
+                    <?php $this->voucher_details( $tf_tour_details, $tf_order_details, $tf_billing_details ); ?>
 
                 </div>
                 <div class="tf-booking-actions">
