@@ -44,7 +44,7 @@ class Recent_Blog extends \Tourfic\Core\Shortcodes {
 				)
 			);
 		}
-		$loop = new WP_Query( $args );
+		$loop = new \WP_Query( $args );
 
 		ob_start();
 

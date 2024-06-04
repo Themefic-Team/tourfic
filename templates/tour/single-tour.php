@@ -6,6 +6,7 @@
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Tour\Pricing as Tour_Price;
+use \Tourfic\App\Wishlist;
 
 get_header();
 
@@ -59,7 +60,7 @@ while ( have_posts() ) : the_post();
 
 	// Wishlist
 	$post_type       = substr( get_post_type(), 3, - 1 );
-	$has_in_wishlist = tf_has_item_in_wishlist( $post_id );
+	$has_in_wishlist = Wishlist::tf_has_item_in_wishlist( $post_id );
 
 	// tour type meta
 	$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';

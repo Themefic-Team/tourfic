@@ -34,7 +34,7 @@ class Vendor_Post extends \Tourfic\Core\Shortcodes {
 			'author'         => sanitize_key( $vendor_id ),
 		);
 
-		$tf_vendors_posts = new WP_Query( $args );
+		$tf_vendors_posts = new \WP_Query( $args );
 		if ( $tf_vendors_posts->have_posts() ) :
 			?>
 			<div class="tf-widget-slider recent-tour-slider">

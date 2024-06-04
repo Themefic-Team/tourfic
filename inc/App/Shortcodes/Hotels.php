@@ -51,7 +51,7 @@ class Hotels extends \Tourfic\Core\Shortcodes {
 		} else {
 			$slider_activate = 'tf-hotel-grid';
 		}
-		$hotel_loop = new WP_Query( $args );
+		$hotel_loop = new \WP_Query( $args );
 
 		?>
 		<?php if ( $hotel_loop->have_posts() ) : ?>

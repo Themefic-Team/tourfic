@@ -50,7 +50,7 @@ class Tours extends \Tourfic\Core\Shortcodes {
 		} else {
 			$slider_activate = 'tf-hotel-grid';
 		}
-		$tour_loop = new WP_Query( $args );
+		$tour_loop = new \WP_Query( $args );
 
 		?>
 		<?php if ( $tour_loop->have_posts() ) : ?>

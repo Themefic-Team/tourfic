@@ -42,7 +42,7 @@ class Hotel_External_Listings extends \Tourfic\Core\Shortcodes {
 		} else {
 			$slider_activate = 'tf-hotel-grid';
 		}
-		$post_loop = new WP_Query( $args );
+		$post_loop = new \WP_Query( $args );
 		?>
 		<?php if ( $post_loop->have_posts() ) : ?>
             <div class="tf-widget-slider recent-hotel-slider">

@@ -81,7 +81,7 @@ class Base {
 		}
 
 		\Tourfic\Admin\Emails\TF_Handle_Emails::instance();
-
+		\Tourfic\App\Wishlist::instance();
 
 	}
 
@@ -103,6 +103,7 @@ class Base {
 
 		\Tourfic\App\Shortcodes\Recent_Blog::instance();
 		\Tourfic\App\Shortcodes\Reviews::instance();
+		\Tourfic\App\Shortcodes\Wishlist::instance();
 		\Tourfic\App\Shortcodes\Search_Form::instance();
 		\Tourfic\App\Shortcodes\Search_Result::instance();
 		\Tourfic\App\Shortcodes\Vendor_Post::instance();
