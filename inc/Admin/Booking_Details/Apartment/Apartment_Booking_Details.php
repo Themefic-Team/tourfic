@@ -2,7 +2,7 @@
 namespace Tourfic\Admin\Booking_Details\Apartment;
 defined( 'ABSPATH' ) || exit;
 
-class Apartment_Booking_Details extends \Tourfic\Admin\Booking_Details\Booking_Details
+class Apartment_Booking_Details extends \Tourfic\Core\TF_Booking_Details
 {
     use \Tourfic\Traits\Singleton;
 

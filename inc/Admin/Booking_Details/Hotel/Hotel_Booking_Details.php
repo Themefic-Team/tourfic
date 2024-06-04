@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
 
-class Hotel_Booking_Details extends \Tourfic\Admin\Booking_Details\Booking_Details {
+class Hotel_Booking_Details extends \Tourfic\Core\TF_Booking_Details {
 	use \Tourfic\Traits\Singleton;
 
 	public function __construct() {
