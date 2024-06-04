@@ -22,5 +22,8 @@ class Apartment_Booking_Details extends \Tourfic\Admin\Booking_Details\Booking_D
 
     }
 
+    function voucher_details( $tf_tour_details, $tf_order_details, $tf_billing_details ) {}
+    function voucher_quick_view( $tour_ides, $tf_order_details, $tf_billing_details ) {}
+
 }
  
