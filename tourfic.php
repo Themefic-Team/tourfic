@@ -88,6 +88,7 @@ final class Tourfic {
 	 * Define Tourfic Constants.
 	 */
 	private function define_constants() {
+		define( 'TOURFIC', self::VERSION );
 		define( 'TF_VERSION', self::VERSION );
 		define( 'TF_MINIMUM_PHP_VERSION', self::MINIMUM_PHP_VERSION );
 		define( 'TF_MINIMUM_WC_VERSION', self::MINIMUM_WC_VERSION );
