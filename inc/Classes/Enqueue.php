@@ -13,6 +13,7 @@ class Enqueue {
 	public function __construct() {
 		add_filter( 'wp_enqueue_scripts', array( $this, 'tf_dequeue_scripts' ), 9999 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_enqueue_scripts' ) );
+		// add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'tf_enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_enqueue_admin_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_dequeue_theplus_script_on_settings_page' ), 9999 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_custom_css' ), 99999 );
@@ -1519,7 +1520,6 @@ class Enqueue {
 				border: 1px solid ' . $tf_template1_global_reg . ';
 				border-color: ' . $tf_template1_global_reg . ' !important;
 			}
-			.tf-aq-outer span.close-aq {background: ' . $tf_template1_global_reg . ' !important;}
 			.tf-aq-field .btn-styled {background: ' . $tf_template1_global_reg . ' !important;}';
 
 		}
