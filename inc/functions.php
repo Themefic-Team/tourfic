@@ -332,3 +332,151 @@ if(!function_exists('tf_set_order')){
 		return $order_id;
 	}
 }
+
+if(!function_exists('tf_custom_wp_kses_allow_tags')){
+	function tf_custom_wp_kses_allow_tags() {
+		// Allow all HTML tags and attributes
+		$allowed_tags = wp_kses_allowed_html( 'post' );
+
+		// Add form-related tags to the allowed tags
+		$allowed_tags['form'] = array(
+			'action'  => true,
+			'method'  => true,
+			'enctype' => true,
+			'class'   => true,
+			'id'      => true,
+		);
+
+		$allowed_tags['input'] = array(
+			'type'        => true,
+			'name'        => true,
+			'value'       => true,
+			'placeholder' => true,
+			'class'       => true,
+			'id'          => true,
+		);
+
+		$allowed_tags['select'] = array(
+			'name'     => true,
+			'class'    => true,
+			'id'       => true,
+			'data-*'   => true,
+			'multiple' => true
+		);
+
+		$allowed_tags['option'] = array(
+			'value' => true,
+			'class' => true,
+			'id'    => true,
+		);
+
+		$allowed_tags['textarea'] = array(
+			'name'  => true,
+			'rows'  => true,
+			'cols'  => true,
+			'class' => true,
+			'id'    => true,
+		);
+
+		$allowed_tags['button'] = array(
+			'type'  => true,
+			'name'  => true,
+			'class' => true,
+			'id'    => true,
+		);
+
+		$allowed_tags['label'] = array(
+			'for'   => true,
+			'class' => true,
+			'id'    => true,
+		);
+
+		$allowed_tags['fieldset'] = array(
+			'name'  => true,
+			'class' => true,
+			'id'    => true,
+		);
+
+		$allowed_tags['legend'] = array(
+			'name'  => true,
+			'class' => true,
+			'id'    => true,
+		);
+
+		$allowed_tags['optgroup'] = array(
+			'label' => true,
+			'class' => true,
+			'id'    => true,
+		);
+
+		$allowed_tags['script'] = array(
+			'src'   => true,
+			'type'  => true,
+			'class' => true,
+			'id'    => true,
+		);
+
+		$allowed_tags["svg"] = array(
+			'class'           => true,
+			'aria-hidden'     => true,
+			'aria-labelledby' => true,
+			'role'            => true,
+			'xmlns'           => true,
+			'width'           => true,
+			'height'          => true,
+			'viewbox'         => true,
+			'fill'            => true,
+		);
+
+		$allowed_tags['g']        = array( 'fill' => true, "clip-path" => true );
+		$allowed_tags['title']    = array( 'title' => true );
+		$allowed_tags['rect']     = array( 'x' => true, 'y' => true, 'width' => true, 'height' => true, 'fill' => true );
+		$allowed_tags['path']     = array(
+			'd'               => true,
+			'fill'            => true,
+			'stroke'          => true,
+			'stroke-width'    => true,
+			'stroke-linecap'  => true,
+			"stroke-linejoin" => true,
+		);
+		$allowed_tags['polygon']  = array(
+			'points'       => true,
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+		);
+		$allowed_tags['circle']   = array(
+			'cx'           => true,
+			'cy'           => true,
+			'r'            => true,
+			'fill'         => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+		);
+		$allowed_tags['line']     = array(
+			'x1'           => true,
+			'y1'           => true,
+			'x2'           => true,
+			'y2'           => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+		);
+		$allowed_tags['text']     = array(
+			'x'           => true,
+			'y'           => true,
+			'fill'        => true,
+			'font-size'   => true,
+			'font-family' => true,
+			'text-anchor' => true,
+		);
+		$allowed_tags['defs']     = array(
+			'd' => true
+		);
+		$allowed_tags['clipPath'] = array(
+			'd' => true
+		);
+		$allowed_tags['code']     = true;
+
+		return $allowed_tags;
+	}
+}
