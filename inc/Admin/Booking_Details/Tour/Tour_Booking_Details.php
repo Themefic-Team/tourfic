@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
 
-class Tour_Booking_Details extends \Tourfic\Admin\Booking_Details\Booking_Details
+class Tour_Booking_Details extends \Tourfic\Core\TF_Booking_Details
 {
     use \Tourfic\Traits\Singleton;
 
@@ -164,60 +164,8 @@ class Tour_Booking_Details extends \Tourfic\Admin\Booking_Details\Booking_Detail
                         </div>
                         <?php } ?>
                     </div>
-                    <?php } ?>
-                    <div class="tf-grid-single">
-                        <h3><?php esc_html_e("Others information", "tourfic"); ?></h3>
-                        <div class="tf-single-box tf-checkin-by">
-                            <table class="table" cellpadding="0" callspacing="0">
-                                <tr>
-                                    <th><?php esc_html_e("Checked status", "tourfic"); ?></th>
-                                    <td>:</td>
-                                    <td>
-                                        <?php 
-                                            if( !empty($tf_order_details->checkinout) ){
-                                                if( "in"==$tf_order_details->checkinout ){
-                                                    esc_html_e("Checked in", "tourfic");
-                                                }elseif( "out"==$tf_order_details->checkinout ){
-                                                    esc_html_e("Checked Out", "tourfic");
-                                                }elseif( "not"==$tf_order_details->checkinout ){
-                                                    esc_html_e("Not checked in", "tourfic");
-                                                }
-                                            }else{
-                                                esc_html_e("Not checked in", "tourfic");
-                                            }
-                                        ?>
-                                    </td>
-                                </tr>
-                                <?php 
-                                $tf_checkinout_by = !empty($tf_order_details->checkinout_by) ? json_decode($tf_order_details->checkinout_by) : '';
-                                ?>
-                                <tr>
-                                    <th><?php esc_html_e("Checked in by", "tourfic"); ?></th>
-                                    <td>:</td>
-                                    <td>
-                                        <?php
-                                        if(!empty($tf_checkinout_by->userid)){
-                                            $tf_checkin_by = get_user_by('id', $tf_checkinout_by->userid);
-                                            echo !empty($tf_checkin_by->display_name) ? esc_html($tf_checkin_by->display_name) : "";
-                                        }
-                                        ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th><?php esc_html_e("Checked Time", "tourfic"); ?></th>
-                                    <td>:</td>
-                                    <td>
-                                        <?php
-                                        if(!empty($tf_checkinout_by->time)){
-                                            echo !empty($tf_checkinout_by->time) ? esc_html($tf_checkinout_by->time) : "";
-                                        }
-                                        ?>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
 
+                    <?php } ?>
                 </div>
             </div>
         <?php
@@ -348,6 +296,67 @@ class Tour_Booking_Details extends \Tourfic\Admin\Booking_Details\Booking_Detail
                         <?php
                         $tf_ticket_qottation = ! empty( Helper::tfopt( "qr-ticket-content" ) ) ? Helper::tfopt( "qr-ticket-content" ) : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."; ?>
                         <p><?php echo esc_html( $tf_ticket_qottation ); ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+    }
+
+    function check_in_out_status( $tf_order_details) {
+        ?>
+        <div class="customers-order-date details-box">
+            <div class="tf-grid-box">
+                <div class="tf-grid-single">
+                    <h4><?php esc_html_e("Others information", "tourfic"); ?></h4>
+                    <div class="tf-single-box tf-checkin-by">
+                        <table class="table" cellpadding="0" callspacing="0">
+                            <tr>
+                                <th><?php esc_html_e("Checked status", "tourfic"); ?></th>
+                                <td>:</td>
+                                <td>
+                                    <?php 
+                                        if( !empty($tf_order_details->checkinout) ){
+                                            if( "in"==$tf_order_details->checkinout ){
+                                                esc_html_e("Checked in", "tourfic");
+                                            }elseif( "out"==$tf_order_details->checkinout ){
+                                                esc_html_e("Checked Out", "tourfic");
+                                            }elseif( "not"==$tf_order_details->checkinout ){
+                                                esc_html_e("Not checked in", "tourfic");
+                                            }
+                                        }else{
+                                            esc_html_e("Not checked in", "tourfic");
+                                        }
+                                    ?>
+                                </td>
+                            </tr>
+                            <?php 
+                            $tf_checkinout_by = !empty($tf_order_details->checkinout_by) ? json_decode($tf_order_details->checkinout_by) : '';
+                            ?>
+                            <tr>
+                                <th><?php esc_html_e("Checked in by", "tourfic"); ?></th>
+                                <td>:</td>
+                                <td>
+                                    <?php
+                                    if(!empty($tf_checkinout_by->userid)){
+                                        $tf_checkin_by = get_user_by('id', $tf_checkinout_by->userid);
+                                        echo !empty($tf_checkin_by->display_name) ? esc_html($tf_checkin_by->display_name) : "";
+                                    }
+                                    ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php esc_html_e("Checked Time", "tourfic"); ?></th>
+                                <td>:</td>
+                                <td>
+                                    <?php
+                                    if(!empty($tf_checkinout_by->time)){
+                                        echo !empty($tf_checkinout_by->time) ? esc_html($tf_checkinout_by->time) : "";
+                                    }
+                                    ?>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
