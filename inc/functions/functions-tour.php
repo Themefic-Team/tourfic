@@ -1,6 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
+use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Tour\Pricing as Tour_Price;
 
 /**
@@ -2261,7 +2262,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
                 <h2><a href="<?php echo esc_url($url); ?>"><?php the_title();?></a></h2>
             </div>
             
-            <?php tf_archive_single_rating();?>
+            <?php TF_Review::tf_archive_single_rating();?>
             
             <div class="tf-details tf-mt-16">
                 <p><?php echo wp_kses_post(substr(wp_strip_all_tags(get_the_content()), 0, 100). '...'); ?></p>
@@ -2349,7 +2350,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 				
 			</div>  
 			<div class="tf-available-ratings">
-				<?php tf_archive_single_rating(); ?>
+				<?php TF_Review::tf_archive_single_rating(); ?>
 				<i class="fa-solid fa-star"></i>
 			</div>  
 		</div>
@@ -2548,7 +2549,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 							}
 							?>
                         </div>
-						<?php tf_archive_single_rating(); ?>
+						<?php TF_Review::tf_archive_single_rating(); ?>
                     </div>
                     <div class="tf-tour-desc">
                         <p><?php echo wp_kses_post(substr( wp_strip_all_tags( get_the_content() ), 0, 160 ) . '...'); ?></p>

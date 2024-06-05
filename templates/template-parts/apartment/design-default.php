@@ -1,6 +1,6 @@
 <?php 
 use \Tourfic\Classes\Helper;
-use \Tourfic\Classes\TF_Review;
+use \Tourfic\App\TF_Review;
 ?>
 
 <div class="tf-main-wrapper tf-apartment-wrap tf-apartment">

@@ -82,7 +82,7 @@ class Base {
 
 		\Tourfic\Admin\Emails\TF_Handle_Emails::instance();
 		\Tourfic\App\Wishlist::instance();
-		\Tourfic\Classes\TF_Review::instance();
+		\Tourfic\App\TF_Review::instance();
 
 	}
 

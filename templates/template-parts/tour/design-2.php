@@ -1,7 +1,7 @@
 <?php
 
 use \Tourfic\Classes\Helper;
-use \Tourfic\Classes\TF_Review;
+use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Tour\Pricing as Tour_Price;
 
 $tf_booking_type = '1';
@@ -333,13 +333,11 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 							if ( ! empty( $tf_ratings_for ) ) {
 								if ( $is_user_logged_in ) {
 									if ( in_array( 'li', $tf_ratings_for ) && ! TF_Review::tf_user_has_comments() ) {
-
-										// TODO: Change reviews from TF_Reviews
 										?>
                                         <div class="tf-review-form-wrapper" action="">
                                             <h3><?php esc_html_e( "Leave your review", "tourfic" ); ?></h3>
                                             <p><?php esc_html_e( "Your email address will not be published. Required fields are marked.", "tourfic" ); ?></p>
-											<?php tf_review_form(); ?>
+											<?php TF_Review::tf_review_form(); ?>
                                         </div>
 										<?php
 									}
@@ -349,7 +347,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                                         <div class="tf-review-form-wrapper" action="">
                                             <h3><?php esc_html_e( "Leave your review", "tourfic" ); ?></h3>
                                             <p><?php esc_html_e( "Your email address will not be published. Required fields are marked.", "tourfic" ); ?></p>
-											<?php tf_review_form(); ?>
+											<?php TF_Review::tf_review_form(); ?>
                                         </div>
 									<?php }
 								}

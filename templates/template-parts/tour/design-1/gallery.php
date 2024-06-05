@@ -1,4 +1,4 @@
-<?php use \Tourfic\Classes\TF_Review;  ?>
+<?php use \Tourfic\App\TF_Review;  ?>
 
 <!-- Tour Gallery Section -->
 <div class="tf-hero-gallery tf-mb-30 tf-template-section">

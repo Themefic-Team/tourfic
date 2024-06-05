@@ -2,7 +2,7 @@
 # don't load directly
 defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
-use \Tourfic\Classes\TF_Review;
+use \Tourfic\App\TF_Review;
 
 /**
  * Flushing Rewrite on Tourfic Activation
@@ -827,7 +827,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                     <div class="tf-top-review">
                         <a href="#tf-review">
                             <div class="tf-single-rating">
-                                <i class="fas fa-star"></i> <span><?php echo esc_html( tf_total_avg_rating( $comments ) ); ?></span>
+                                <i class="fas fa-star"></i> <span><?php echo esc_html( TF_Review::tf_total_avg_rating( $comments ) ); ?></span>
                                 (<?php TF_Review::tf_based_on_text( count( $comments ) ); ?>)
                             </div>
                         </a>
@@ -1327,7 +1327,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 					?>
 				</div>  
 				<div class="tf-available-ratings">
-					<?php tf_archive_single_rating(); ?>
+					<?php TF_Review::tf_archive_single_rating(); ?>
 					<i class="fa-solid fa-star"></i>
 				</div>  
 			</div>
@@ -1469,7 +1469,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 							}
 							?>
                         </div>
-						<?php tf_archive_single_rating(); ?>
+						<?php TF_Review::tf_archive_single_rating(); ?>
                     </div>
 
                     <div class="sr_rooms_table_block">
@@ -2364,7 +2364,7 @@ if ( ! function_exists( 'tf_apartment_host_rating' ) ) {
 		$comment_count        = 0;
 		foreach ( $comments_array as $comments ) {
 			if ( ! empty( $comments ) ) {
-				$total_comment_rating[] = tf_total_avg_rating( $comments );
+				$total_comment_rating[] = TF_Review::tf_total_avg_rating( $comments );
 			}
 			$comment_count += count( $comments );
 		}
@@ -2375,7 +2375,7 @@ if ( ! function_exists( 'tf_apartment_host_rating' ) ) {
             <div class="tf-host-rating-wrapper">
                 <i class="fas fa-star"></i>
                 <div class="tf-host-rating">
-					<?php echo esc_html( tf_average_ratings( array_values( $total_comment_rating ?? [] ) ) ); ?>
+					<?php echo esc_html( TF_Review::tf_average_ratings( array_values( $total_comment_rating ?? [] ) ) ); ?>
                 </div>
                 <h6>(<?php TF_Review::tf_based_on_text( $comment_count ); ?>)</h6>
             </div>

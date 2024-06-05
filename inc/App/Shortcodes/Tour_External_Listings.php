@@ -4,6 +4,8 @@ namespace Tourfic\App\Shortcodes;
 
 defined( 'ABSPATH' ) || exit;
 
+use \Tourfic\App\TF_Review;
+
 class Tour_External_Listings extends \Tourfic\Core\Shortcodes {
 
 	use \Tourfic\Traits\Singleton;
@@ -90,7 +92,7 @@ class Tour_External_Listings extends \Tourfic\Core\Shortcodes {
                                         <h3><a href="<?php echo esc_url($tf_booking_url) ?>" target="_blank"><?php the_title() ?></a></h3>
 										<?php if ( $post_comments ) { ?>
                                             <div class="tf-slider-rating-star">
-                                                <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo esc_html( tf_total_avg_rating( $post_comments ) ); ?></span>
+                                                <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo esc_html( TF_Review::tf_total_avg_rating( $post_comments ) ); ?></span>
                                             </div>
 										<?php } ?>
                                         <p><?php echo wp_kses_post( wp_trim_words( get_the_content(), 10 ) ); ?></p>

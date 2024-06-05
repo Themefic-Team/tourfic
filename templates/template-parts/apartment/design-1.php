@@ -1,6 +1,6 @@
 <?php
 use \Tourfic\Classes\Helper;
-use \Tourfic\Classes\TF_Review;
+use \Tourfic\App\TF_Review;
 ?>
 
 <div class="tf-template-3 tf-hotel-single tf-apartment-single">
@@ -282,7 +282,7 @@ use \Tourfic\Classes\TF_Review;
                         if ( empty( $value ) || ! in_array( $key, $fields ) ) {
                             continue;
                         }
-                        $value = tf_average_ratings( $value );
+                        $value = TF_Review::tf_average_ratings( $value );
                         ?>
                             <div class="tf-progress-item">
                                 <div class="tf-review-feature-label">
@@ -290,7 +290,7 @@ use \Tourfic\Classes\TF_Review;
                                     <p class="feature-rating"> <?php echo esc_html( $value ); ?></p>
                                 </div>
                                 <div class="tf-progress-bar">
-                                    <span class="percent-progress" style="width: <?php echo esc_html( tf_average_rating_percent( $value, Helper::tfopt( 'r-base' ) ) ); ?>%"></span>
+                                    <span class="percent-progress" style="width: <?php echo esc_html( TF_Review::tf_average_rating_percent( $value, Helper::tfopt( 'r-base' ) ) ); ?>%"></span>
                                 </div>
                             </div>
                             <?php } } ?>
@@ -314,17 +314,17 @@ use \Tourfic\Classes\TF_Review;
                 <?php endif; ?>
                 <?php
                 // Review moderation notice
-                echo wp_kses_post(tf_pending_review_notice( $post_id ) ?? '');
+                echo wp_kses_post(TF_Review::tf_pending_review_notice( $post_id ) ?? '');
                 ?>
                 <?php
                 if ( ! empty( $tf_ratings_for ) ) {
                     if ( $is_user_logged_in ) {
-                    if ( in_array( 'li', $tf_ratings_for ) && ! tf_user_has_comments() ) {
+                    if ( in_array( 'li', $tf_ratings_for ) && ! TF_Review::tf_user_has_comments() ) {
                     ?>
                 <div class="tf-review-form-wrapper" action="">
                     <h3><?php esc_html_e("Leave your review", "tourfic"); ?></h3>
                     <p><?php esc_html_e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
-                    <?php tf_review_form(); ?>
+                    <?php TF_Review::tf_review_form(); ?>
                 </div>
                 <?php
 		            }
@@ -334,7 +334,7 @@ use \Tourfic\Classes\TF_Review;
                 <div class="tf-review-form-wrapper" action="">
                     <h3><?php esc_html_e("Leave your review", "tourfic"); ?></h3>
                     <p><?php esc_html_e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
-                    <?php tf_review_form(); ?>
+                    <?php TF_Review::tf_review_form(); ?>
                 </div>
                 <?php } } } ?>
                 <?php endif; ?>

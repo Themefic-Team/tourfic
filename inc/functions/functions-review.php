@@ -3,7 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
-use \Tourfic\Classes\TF_Review;
+use \Tourfic\App\TF_Review;
 
 const TF_COMMENT_META  = 'tf_comment_meta';
 const TF_TOTAL_RATINGS = 'tf_total_ratings';
@@ -80,7 +80,7 @@ add_action( 'wp_enqueue_scripts', 'tf_review_script', 99999 );
 if ( ! function_exists( 'tf_review_form' ) ) {
 	function tf_review_form() {
 
-		tf_get_review_fields( $fields );
+		TF_Review::tf_get_review_fields( $fields );
 
 		//Declare Vars
 		$comment_send      = esc_html__( 'Submit', 'tourfic' );

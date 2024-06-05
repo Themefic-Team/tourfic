@@ -1,7 +1,7 @@
 <?php
 
 use \Tourfic\Classes\Helper;
-use \Tourfic\Classes\TF_Review;
+use \Tourfic\App\TF_Review;
 
 $tf_booking_type = '1';
 $tf_hide_booking_form = '';

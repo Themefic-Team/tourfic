@@ -4,7 +4,7 @@ namespace Tourfic\App\Shortcodes;
 
 defined( 'ABSPATH' ) || exit;
 
-use \Tourfic\Classes\TF_Review;
+use \Tourfic\App\TF_Review;
 
 class Apartment_External_Listings extends \Tourfic\Core\Shortcodes {
 
