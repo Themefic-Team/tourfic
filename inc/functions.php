@@ -94,24 +94,6 @@ if ( Helper::tf_is_woo_active() ) {
 }
 
 /**
- * Include export import function file
- */
-if( file_exists( TF_INC_PATH . 'functions/functions-settings-import-export.php' ) ){
-	require_once TF_INC_PATH . 'functions/functions-settings-import-export.php';
-}else{
-	tf_file_missing( TF_INC_PATH . 'functions/functions-settings-import-export.php' );
-}
-
-/**
- * Include Post Duplicator function file
- */
-if( file_exists( TF_INC_PATH . 'functions/functions_duplicator.php' ) ){
-	require_once TF_INC_PATH . 'functions/functions_duplicator.php';
-}else{
-	tf_file_missing( TF_INC_PATH . 'functions/functions_duplicator.php' );
-}
-
-/**
  * Include Functions Vat
  */
 if ( file_exists( TF_INC_PATH . 'functions/functions_vat.php' ) ) {

@@ -1,5 +1,5 @@
 <?php
-namespace Tourfic\Admin\Booking_Details\Tour;
+namespace Tourfic\Admin\Booking_Details;
 
 defined( 'ABSPATH' ) || exit;
 

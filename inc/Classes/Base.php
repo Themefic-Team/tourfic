@@ -6,13 +6,11 @@ defined( 'ABSPATH' ) || exit;
 use Tourfic\Admin\Backend_Booking\TF_Apartment_Backend_Booking;
 use Tourfic\Admin\Backend_Booking\TF_Hotel_Backend_Booking;
 use Tourfic\Admin\Backend_Booking\TF_Tour_Backend_Booking;
-use Tourfic\Admin\Booking_Details\Tour\Tour_Booking_Details;
-use Tourfic\Admin\Booking_Details\Hotel\Hotel_Booking_Details;
-use Tourfic\Admin\Booking_Details\Apartment\Apartment_Booking_Details;
-use Tourfic\App\Widgets\TF_Widget_Base;
+use Tourfic\Admin\Booking_Details\Apartment_Booking_Details;
+use Tourfic\Admin\Booking_Details\Hotel_Booking_Details;
+use Tourfic\Admin\Booking_Details\Tour_Booking_Details;
 use Tourfic\Admin\TF_Promo_Notice;
-use Tourfic\Admin\Emails\TF_Handle_Emails;
-use Tourfic\Classes\Helper;
+use Tourfic\App\Widgets\TF_Widget_Base;
 
 class Base {
 	use \Tourfic\Traits\Singleton;
@@ -35,8 +33,8 @@ class Base {
 		\Tourfic\Classes\Migrator::instance();
 		\Tourfic\Classes\Helper::instance();
 		\Tourfic\Classes\Enqueue::instance();
-		\Tourfic\Classes\TF_Activator::instance();
-		\Tourfic\Classes\TF_Deactivator::instance();
+		\Tourfic\Classes\Activator::instance();
+		\Tourfic\Classes\Deactivator::instance();
 
 		if(is_admin()) {
 			\Tourfic\Admin\TF_Setup_Wizard::instance();
@@ -59,6 +57,7 @@ class Base {
 
 			// Promo Notice
 			TF_Promo_Notice::instance();
+			\Tourfic\Admin\TF_Duplicator::instance();
 		}
 
 		if ( Helper::tf_is_woo_active() ) {
