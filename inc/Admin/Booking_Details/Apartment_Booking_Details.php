@@ -1,33 +1,30 @@
 <?php
-
-namespace Tourfic\Admin\Booking_Details\Hotel;
+namespace Tourfic\Admin\Booking_Details;
 defined( 'ABSPATH' ) || exit;
 
-use Tourfic\Classes\Helper;
+class Apartment_Booking_Details extends \Tourfic\Core\TF_Booking_Details
+{
+    use \Tourfic\Traits\Singleton;
 
-class Hotel_Booking_Details extends \Tourfic\Core\TF_Booking_Details {
-	use \Tourfic\Traits\Singleton;
+    public function __construct()
+    {
 
-	public function __construct() {
+        $booking_args = array(
+            'post_type' => 'tf_apartment',
+            'menu_title' => esc_html__('Apartment Booking Details', 'tourfic'),
+            'menu_slug' => 'tf_apartment_booking',
+            'capability' => 'edit_tf_apartments',
+			'booking_type' => 'apartment',
+            'booking_title' => esc_html__('Apartment', 'tourfic'),
+        );
 
-		$booking_args = array(
-			'post_type'     => 'tf_hotel',
-			'menu_title'    => __('Hotel Booking Details', 'tourfic'),
-			'menu_slug'     => 'tf_hotel_booking',
-			'capability'    => 'edit_tf_hotels',
-			'booking_type'  => 'hotel',
-			'booking_title' => 'Hotel'
-		);
+        parent::__construct($booking_args);
 
-		parent::__construct( $booking_args );
+    }
 
-	}
-
-
-	function voucher_details( $tf_order_details, $tf_tour_details, $tf_billing_details ){}
-	function voucher_quick_view( $tour_ides, $tf_order_details, $tf_billing_details ) {}
-	
-	function check_in_out_status( $tf_order_details) {
+    function voucher_details( $tf_tour_details, $tf_order_details, $tf_billing_details ) {}
+    function voucher_quick_view( $tour_ides, $tf_order_details, $tf_billing_details ) {}
+    function check_in_out_status( $tf_order_details) {
         ?>
         <div class="customers-order-date details-box">
             <div class="tf-grid-box">
@@ -89,3 +86,8 @@ class Hotel_Booking_Details extends \Tourfic\Core\TF_Booking_Details {
     }
 
 }
+
+add_filter("tf_apartment_booking_details_pricing_section_title_change", function() {
+    return esc_html__("Apartment details", "tourfic");
+});
+ 
