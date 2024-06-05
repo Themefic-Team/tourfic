@@ -486,7 +486,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
 		$apt_availability    = ! empty( $meta['apt_availability'] ) ? $meta['apt_availability'] : '';
 		$booked_dates        = tf_apartment_booked_days( get_the_ID() );
-		$apt_reserve_button_text = !empty(tfopt('apartment_booking_form_button_text')) ? stripslashes(sanitize_text_field(tfopt('apartment_booking_form_button_text'))) : esc_html__("Reserve", 'tourfic');
+		$apt_reserve_button_text = !empty(Helper::tfopt('apartment_booking_form_button_text')) ? stripslashes(sanitize_text_field(Helper::tfopt('apartment_booking_form_button_text'))) : esc_html__("Reserve", 'tourfic');
 
 		$tf_booking_type = '1';
 		$tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = '';
@@ -500,7 +500,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		}
 
 		// date format for apartment
-		$date_format_change_appartments = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+		$date_format_change_appartments = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 			$additional_fees = ! empty( $meta['additional_fees'] ) ? Helper::tf_data_types( $meta['additional_fees'] ) : array();

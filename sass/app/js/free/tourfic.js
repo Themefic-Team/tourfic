@@ -2042,6 +2042,20 @@
             $('span.tf-room').html(room);
         })
 
+        $(document).ready(function() {
+            if ($('input#infant').length){
+                var guest = Number( $('input#adults').val() ? $('input#adults').val() : 0 ) + Number( $('input#children').val() ? $('input#children').val() : 0 ) + Number( $('input#infant').val() ? $('input#infant').val() : 0 ) ;
+            }else{
+                var guest = Number( $('input#adults').val() ? $('input#adults').val() : 0 ) + Number( $('input#children').val() ? $('input#children').val() : 0 );
+            }
+
+            if (guest.toString().length < 2) {
+                guest = '0' + guest;
+            }
+            
+            $('span.tf-guest').html(guest);
+        })
+
         $(document).mouseup(function(e)
         {
             var container = $(".tf-template-3 .tf_acrselection-wrap");

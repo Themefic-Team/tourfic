@@ -20,7 +20,7 @@ class Tourfic_Price_Filter extends \WP_Widget {
 
         parent::__construct(
             'tf_price_filters', // Base ID
-            esc_html__( 'Tourfic - Hotel & Tour Price Range Filter', 'tourfic' ), // Name
+            esc_html__( 'Tourfic - Hotel, Tour & Apartment Price Range Filter', 'tourfic' ), // Name
             array( 'description' => esc_html__( 'Show Price Range slider on Archive/Search Result page.', 'tourfic' ) ) // Args
         );
     }
