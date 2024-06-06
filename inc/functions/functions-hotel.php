@@ -4866,28 +4866,16 @@ function tf_hotel_features_assign_taxonomies( $post_id, $post, $old_status ) {
 		$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
 			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
 		}, $rooms );
-		$rooms = unserialize( $tf_hotel_rooms_value );
+		$rooms                = unserialize( $tf_hotel_rooms_value );
 	}
-
-	// Initialize an array to store all feature IDs
-	$all_features = array();
 
 	if ( ! empty( $rooms ) ) {
 		foreach ( $rooms as $room ) {
 			$room_features = ! empty( $room['features'] ) ? $room['features'] : '';
 			if ( ! empty( $room_features ) ) {
 				$room_features = array_map( 'intval', $room_features );
-				$all_features = array_merge( $all_features, $room_features );
+				wp_set_object_terms( $post_id, $room_features, 'hotel_feature' );
 			}
 		}
 	}
-
-	// Get manually selected terms
-	$manual_terms = wp_get_object_terms( $post_id, 'hotel_feature', array( 'fields' => 'ids' ) );
-
-	// Merge both arrays and remove duplicates
-	$all_features = array_unique( array_merge( $all_features, $manual_terms ) );
-
-	// Set the combined terms
-	wp_set_object_terms( $post_id, $all_features, 'hotel_feature' );
 }

@@ -2667,28 +2667,16 @@ if ( ! function_exists( 'tf_apartment_feature_assign_taxonomies' ) ) {
 		if ( 'tf_apartment' !== $post->post_type ) {
 			return;
 		}
-
 		$meta = get_post_meta( $post_id, 'tf_apartment_opt', true );
-		$apartment_features = array();
-
-		// Get terms from metadata
 		if ( isset( $meta['amenities'] ) && ! empty( Helper::tf_data_types( $meta['amenities'] ) ) ) {
+			$apartment_features = array();
 			foreach ( Helper::tf_data_types( $meta['amenities'] ) as $amenity ) {
 				$apartment_features[] = intval( $amenity['feature'] );
 			}
+			wp_set_object_terms( $post_id, $apartment_features, 'apartment_feature' );
 		}
-
-		// Get manually selected terms
-		$manual_terms = wp_get_object_terms( $post_id, 'apartment_feature', array( 'fields' => 'ids' ) );
-
-		// Merge both arrays and remove duplicates
-		$all_features = array_unique( array_merge( $apartment_features, $manual_terms ) );
-
-		// Set the combined terms
-		wp_set_object_terms( $post_id, $all_features, 'apartment_feature' );
 	}
 }
-
 
 
 /*

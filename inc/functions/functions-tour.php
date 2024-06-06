@@ -3355,22 +3355,12 @@ function tf_tour_features_assign_taxonomies( $post_id, $post, $old_status ) {
 	if ( 'tf_tours' !== $post->post_type ) {
 		return;
 	}
-
 	$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
-	$features = array();
-
 	if ( ! empty( $meta['features'] ) && is_array( $meta['features'] ) ) {
 		$features = array_map( 'intval', $meta['features'] );
+		wp_set_object_terms( $post_id, $features, 'tour_features' );
 	}
 
-	// Get manually selected terms
-	$manual_terms = wp_get_object_terms( $post_id, 'tour_features', array( 'fields' => 'ids' ) );
-
-	// Merge both arrays and remove duplicates
-	$all_features = array_unique( array_merge( $features, $manual_terms ) );
-
-	// Set the combined terms
-	wp_set_object_terms( $post_id, $all_features, 'tour_features' );
 }
 
 /**
