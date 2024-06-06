@@ -681,8 +681,12 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
         }
 
         $tours = new WP_Query( $args );
+
+        $all_tour_ids = array_filter( wp_list_pluck( $tours->posts, 'ID' ), function($id) use ($current_post_id) {
+			return $id != $current_post_id[0];
+		});
+
         if ( $tours->have_posts() ) {
-	        if(!in_array(get_the_ID(), $current_post_id)):
             ?>
             <div class="tf-suggestion-wrapper gray-wrap sp-50">
                 <div class="tf-container">
@@ -703,6 +707,8 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                             while ( $tours->have_posts() ) {
                                 $tours->the_post();
 
+                                if( is_array( $all_tour_ids ) && in_array(get_the_ID(), $all_tour_ids) ):
+
                                     $selected_post_id       = get_the_ID();
                                     $destinations           = get_the_terms( $selected_post_id, 'tour_destination' );
                                     $first_destination_name = $destinations[0]->name;
@@ -717,7 +723,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         <div class="tf-slider-content">
                                             <div class="tf-slider-desc">
                                                 <h3>
-                                                    <a href="<?php the_permalink($selected_post_id) ?>"><?php echo esc_html(get_the_title($selected_post_id)) ?></a>
+                                                    <a href="<?php the_permalink($selected_post_id) ?>"><?php echo wp_kses_post( Helper::tourfic_character_limit_callback( html_entity_decode(get_the_title( $selected_design_post_id )), 35 ) ); ?></a>
                                                     <span><?php echo esc_html($first_destination_name); ?></span>
                                                 </h3>
                                             </div>
@@ -725,12 +731,13 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                 <div class="tf-suggestion-price">
                                         <span>
                                         <?php if ( $pricing_rule == 'group' ) {
-                                            echo wp_kses_post($tour_price->wc_sale_group) ?? $tour_price->wc_group;
+                                            echo !empty( $tour_price->wc_sale_group ) ? wp_kses_post($tour_price->wc_sale_group) : wp_kses_post($tour_price->wc_group);
                                         } else if ( $pricing_rule == 'person' ) {
                                             if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
-                                                echo wp_kses_post($tour_price->wc_sale_adult) ?? $tour_price->wc_adult;
+                                                echo !empty($tour_price->wc_sale_adult) ? wp_kses_post($tour_price->wc_sale_adult) : wp_kses_post($tour_price->wc_adult);
                                             } else if ( ! $disable_child && ! empty( $tour_price->child ) ) {
-                                                echo wp_kses_post($tour_price->wc_sale_child) ?? $tour_price->wc_child;
+                                                echo !empty( $tour_price->wc_sale_child ) ? wp_kses_post($tour_price->wc_sale_child) : wp_kses_post($tour_price->wc_child);
+
                                             }
                                         }
                                         ?>
@@ -748,12 +755,12 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                             </div>
                                         </div>
                                     </div>
+                                <?php endif; ?>
                             <?php } ?>
                         </div>
                     </div>
                 </div>
             </div>
-        <?php endif; ?>
         <?php }
         wp_reset_postdata();
         ?>
