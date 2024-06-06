@@ -528,10 +528,10 @@ class Enqueue {
 			$single_tour_form_data['allowed_times']             = wp_json_encode( $allowed_times ?? [] );
 			$single_tour_form_data['custom_avail']              = ! empty( $custom_avail ) ? $custom_avail : false;
 			$single_tour_form_data['cont_custom_date']          = ! empty( $cont_custom_date ) ? $cont_custom_date : '';
-//			$single_tour_form_data['flatpickr_locale'] = tf_flatpickr_locale("root");
+			$single_tour_form_data['first_day_of_week'] = !empty(Helper::tfopt("tf-week-day-flatpickr")) ? Helper::tfopt("tf-week-day-flatpickr") : 0;
 			$single_tour_form_data['select_time_text'] = esc_html__( "Select Time", "tourfic" );
 			$single_tour_form_data['date_format']      = esc_html( $tour_date_format_for_users );
-//			$single_tour_form_data['flatpickr_locale'] = tf_flatpickr_locale();
+			$single_tour_form_data['flatpickr_locale'] = ! empty( get_locale() ) ? get_locale() : 'en_US';
 			$single_tour_form_data['disabled_day']     = ! empty( $disabled_day ) ? $disabled_day : '';
 			$single_tour_form_data['disable_range']    = ! empty( $disable_range ) ? $disable_range : '';
 			$single_tour_form_data['disable_specific'] = ! empty( $disable_specific ) ? $disable_specific : '';
