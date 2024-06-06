@@ -1,6 +1,53 @@
 (function ($, win) {
     $(document).ready(function () {
 
+
+        function tf_flatpickr_locale() {
+            let locale = tf_params.tour_form_data.flatpickr_locale;
+            let allowed_locales = ['ar', 'bn_BD', 'de_DE', 'es_ES', 'fr_FR', 'hi_IN', 'it_IT', 'nl_NL', 'ru_RU', 'zh_CN' ];
+
+            if( jQuery.inArray(locale, allowed_locales) !== -1 ) {
+                
+                switch (locale) {
+                    case "bn_BD":
+                        locale = 'bn';
+                        break;
+                    case "de_DE":
+                        locale = 'de';
+                        break;
+                    case "es_ES":
+                        locale = 'es';
+                        break;
+                    case "fr_FR":
+                        locale = 'fr';
+                        break;
+                    case "hi_IN":
+                        locale = 'hi';
+                        break;
+                    case "it_IT":
+                        locale = 'it';
+                        break;
+                    case "nl_NL":
+                        locale = 'nl';
+                        break;
+                    case "ru_RU":
+                        locale = 'ru';
+                        break;
+                    case "zh_CN":
+                        locale = 'zh';
+                        break;
+                }
+            } else {
+                locale = 'default';
+            }
+
+            return locale;
+        }
+
+        // let locale_zone = tf_flatpickr_locale();
+
+        window.flatpickr.l10ns[tf_flatpickr_locale()].firstDayOfWeek = tf_params.tour_form_data.first_day_of_week;
+
         // Create an instance of Notyf
         const notyf = new Notyf({
             ripple: true,
@@ -565,9 +612,7 @@
             dateFormat: "Y/m/d",
             altInput: true,
             altFormat: tf_params.tour_form_data.date_format,
-            // locale: {
-            //     firstDayOfWeek: first_day_of_week,
-            // },
+            locale: tf_flatpickr_locale(),
             
             onReady: function (selectedDates, dateStr, instance) {
                 instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -662,6 +707,7 @@
         }
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'design-2') {
+            tf_params.tour_form_data.first_day_of_week
             $(".tours-check-in-out").flatpickr(tour_date_options);
 
             function dateSetToFields(selectedDates, instance) {
@@ -709,7 +755,7 @@
         }
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'default') {
-
+            tf_params.tour_form_data.first_day_of_week
             $("#check-in-out-date").flatpickr(tour_date_options);
         }
 
