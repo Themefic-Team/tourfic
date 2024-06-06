@@ -200,7 +200,7 @@ class TF_Recent_Apartments_slider extends \Elementor\Widget_Base {
 
 		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
 			<script>
-				jQuery('.tf-slider-items-wrapper').slick({
+				jQuery('.recent-apartment-slider .tf-slider-items-wrapper').slick({
 					dots: true,
 					arrows: false,
 					infinite: true,
