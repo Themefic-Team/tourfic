@@ -3,6 +3,8 @@
 namespace Tourfic\Classes;
 defined( 'ABSPATH' ) || exit;
 
+use \Tourfic\Admin\Emails\TF_Handle_Emails;
+
 class Helper {
 	use \Tourfic\Traits\Singleton;
 	use \Tourfic\Traits\Helper;
