@@ -139,13 +139,15 @@ class Post_Type {
 				'back_to_items'              => sprintf( esc_html__( 'Back to %s', 'tourfic' ), strtolower( $tax_args['singular_name'] ) ),
 			);
 			$tax_labels = apply_filters( 'tf_' . $tax_args['taxonomy'] . '_labels', $tax_labels );
+			
+			$hidden_taxonomies = array( 'Features' );
 
 			$tf_tax_args = array(
 				'labels'                => $tax_labels,
 				'public'                => true,
 				'publicly_queryable'    => true,
 				'hierarchical'          => true,
-				'show_ui'               => true,
+				'show_ui'               => !in_array( $tax_args['name'], $hidden_taxonomies ) ? true : false,
 				'show_in_menu'          => true,
 				'show_in_nav_menus'     => true,
 				'query_var'             => true,

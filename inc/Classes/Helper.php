@@ -92,6 +92,7 @@ class Helper {
 			$tf_hotel_selected_check = ! empty( $tf_hotel_single_template ) ? $tf_hotel_single_template : $tf_hotel_global_template;
 			if ( 'design-2' == $tf_hotel_selected_check ) {
 				$classes[] = 'tf_template_3_global_layouts';
+				$classes[] = 'tf_template_3_single_hotel';
 			}
 		}
 
