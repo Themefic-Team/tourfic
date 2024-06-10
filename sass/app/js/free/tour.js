@@ -613,6 +613,7 @@
             altInput: true,
             altFormat: tf_params.tour_form_data.date_format,
             locale: tf_flatpickr_locale(),
+            disable: tf_params.tour_form_data.disable_specific,
             
             onReady: function (selectedDates, dateStr, instance) {
                 instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -678,12 +679,13 @@
                     }
                     if (tf_params.tour_form_data.disable_same_day) {
                         tour_date_options.disable.push("today");
-                        if (tf_params.tour_form_data.disable_specific) {
-                            var disable_specific_string = tf_params.tour_form_data.disable_specific.split(", ");
-                            disable_specific_string.forEach(function(date) {
-                                tour_date_options.disable.push(date);
-                            });
-                        }
+                    }
+                    
+                    if (tf_params.tour_form_data.disable_specific) {
+                        var disable_specific_string = tf_params.tour_form_data.disable_specific.split(", ");
+                        disable_specific_string.forEach(function(date) {
+                            tour_date_options.disable.push(date);
+                        });
                     }
                 }
             }

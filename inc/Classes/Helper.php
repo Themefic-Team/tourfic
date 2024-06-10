@@ -74,6 +74,7 @@ class Helper {
 		if ( is_post_type_archive( 'tf_hotel' ) || is_tax( 'hotel_location' ) ) {
 			if ( 'design-2' == $tf_hotel_arc_selected_template ) {
 				$classes[] = 'tf_template_3_global_layouts';
+				$classes[] = 'tf_template_3_hotel_archive';
 			}
 		}
 

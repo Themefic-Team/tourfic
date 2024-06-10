@@ -264,7 +264,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                                                     if ( !empty($meta['type'] ) && $meta['type'] === 'continuous' ) {
                                                         $custom_availability = !empty($meta['custom_avail']) ? $meta['custom_avail'] : false;
-                                                        if ($custom_availability) {
+                                                        if ($custom_availability && is_array($meta['cont_custom_date'])) {
                                                             foreach ( $meta['cont_custom_date'] as $repval ) {
 
                                                                 if( $custom_pricing_by_rule  && $custom_pricing_by_rule == 'group' ){

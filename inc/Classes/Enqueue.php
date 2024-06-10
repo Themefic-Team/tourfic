@@ -558,11 +558,13 @@ class Enqueue {
 				}
 			} elseif ( $tour_type && $tour_type == 'continuous' ) {
 				if ( $custom_avail && $custom_avail == true ) {
-					foreach ( $cont_custom_date as $item ) {
-						$single_tour_form_data['enable'][] = array(
-							'from' => esc_attr( $item["date"]["from"] ),
-							'to'   => esc_attr( $item["date"]["to"] )
-						);
+					if( is_array($cont_custom_date)) {
+						foreach ( $cont_custom_date as $item ) {
+							$single_tour_form_data['enable'][] = array(
+								'from' => esc_attr( $item["date"]["from"] ),
+								'to'   => esc_attr( $item["date"]["to"] )
+							);
+						}
 					}
 				}
 				if ( $custom_avail == false ) {

@@ -833,7 +833,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'        => 't-enquiry-section',
 					'type'      => 'switch',
-					'label'     => __( 'Enable Tour Enquiry Form Option', 'tourfic' ),
+					'label'     => __( 'Enable Tour Enquiry', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => true
