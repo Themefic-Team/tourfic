@@ -45,6 +45,8 @@ if ( ! class_exists( 'TF_text' ) ) {
 											if ( isset( $data[ $field['id'] ] ) ) {
 
 												$value = ( isset( $field['id'] ) ) ? $data[ $field['id'] ] : '';
+
+												$value = ($field['type'] == 'text' || $field['type'] == 'textarea') ? stripslashes($value) : $value;
 											} else {
 												$value = '';
 											}

@@ -98,9 +98,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 											$value = sanitize_title(str_replace(' ', '_', strtolower($value)));
 										}
 
-                                        if($re_field['type'] == 'text'){
-                                            $value = stripslashes($value);
-                                        }
+										$value = ($re_field['type'] == 'text' || $re_field['type'] == 'textarea') ? stripslashes($value) : $value;
 
 										$tf_option = new \Tourfic\Admin\TF_Options\TF_Options();
 										$tf_option->field( $re_field, $value, $this->settings_id, $parent_field);
