@@ -341,7 +341,7 @@ function tf_recent_tour_shortcode( $atts, $content = null ) {
 					$post_id          = get_the_ID();
 					$related_comments = get_comments( array( 'post_id' => $post_id ) );
 					?>
-                    <div class="tf-slider-item" style="background-image: url(<?php echo esc_attr( get_the_post_thumbnail_url( $post_id, 'full' ) ); ?>);">
+                    <div class="tf-slider-item" style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>)">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
                                 <h3>
@@ -908,14 +908,16 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 								}
 							}
 							$total_pages = ceil( $total_filtered_results / $post_per_page );
-							echo "<div class='tf_posts_navigation tf_posts_page_navigation'>";
-							echo wp_kses_post(
-								paginate_links( array(
-									'total'   => $total_pages,
-									'current' => $current_page
-								) )
-							);
-							echo "</div>";
+							if( $total_pages > 1) {
+								echo "<div class='tf_posts_navigation tf_posts_page_navigation'>";
+								echo wp_kses_post(
+									paginate_links( array(
+										'total'   => $total_pages,
+										'current' => $current_page
+									) )
+								);
+								echo "</div>";
+							}
 						}
 
 					} else {
@@ -1347,14 +1349,16 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 							}
 						}
 						$total_pages = ceil( $total_filtered_results / $post_per_page );
-						echo "<div class='tf_posts_navigation tf_posts_page_navigation'>";
-						echo wp_kses_post(
-							paginate_links( array(
-								'total'   => $total_pages,
-								'current' => $current_page,
-							) )
-						);
-						echo "</div>";
+						IF( $total_pages > 1 ) {
+							echo "<div class='tf_posts_navigation tf_posts_page_navigation'>";
+							echo wp_kses_post(
+								paginate_links( array(
+									'total'   => $total_pages,
+									'current' => $current_page,
+								) )
+							);
+							echo "</div>";
+						}
 					}
 
 				} else {
@@ -1712,7 +1716,7 @@ function tf_tours_grid_slider( $atts, $content = null ) {
 					$post_id          = get_the_ID();
 					$related_comments = get_comments( array( 'post_id' => $post_id ) );
 					?>
-                    <div class="tf-slider-item" style="background-image: url(<?php echo esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ); ?>);">
+                    <div class="tf-slider-item" style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>)">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
                                 <h3>
@@ -1917,7 +1921,7 @@ function tf_apartments_grid_slider( $atts, $content = null ) {
 					$post_id       = get_the_ID();
 					$post_comments = get_comments( array( 'post_id' => $post_id ) );
 					?>
-                    <div class="tf-slider-item" style="background-image: url(<?php echo esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ); ?>);">
+                    <div class="tf-slider-item" style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>)">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
                                 <h3>
@@ -1994,7 +1998,7 @@ function tf_recent_apartment_shortcode( $atts, $content = null ) {
 					$meta                       = get_post_meta( $post_id, 'tf_apartment_opt', true );
 
 					?>
-                    <div class="tf-slider-item" style="background-image: url(<?php echo esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ); ?>);">
+                    <div class="tf-slider-item" style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>)">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
                                 <h3>
@@ -2234,7 +2238,7 @@ function tf_hotel_external_listings_shortcode( $atts, $content = null ) {
                     <div class="tf-slider-item" style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>);">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
-                                <h3><a href="<?php echo esc_url($tf_booking_url) ?>" target="_blank"><?php the_title() ?></a></h3>
+                                <h3><a href="<?php the_permalink() ?>" target="_blank"><?php the_title() ?></a></h3>
 								<?php if ( $post_comments ) { ?>
                                     <div class="tf-slider-rating-star">
                                         <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo esc_html( tf_total_avg_rating( $post_comments ) ); ?></span>
@@ -2347,7 +2351,7 @@ function tf_tour_external_listings_shortcode( $atts, $content = null ) {
                         <div class="tf-slider-item" style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>);">
                             <div class="tf-slider-content">
                                 <div class="tf-slider-desc">
-                                    <h3><a href="<?php echo esc_url($tf_booking_url) ?>" target="_blank"><?php the_title() ?></a></h3>
+                                    <h3><a href="<?php the_permalink() ?>" target="_blank"><?php the_title() ?></a></h3>
 									<?php if ( $post_comments ) { ?>
                                         <div class="tf-slider-rating-star">
                                             <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo esc_html( tf_total_avg_rating( $post_comments ) ); ?></span>
@@ -2431,7 +2435,7 @@ function tf_apartment_external_listings_shortcode( $atts, $content = null ) {
 					$post_loop->the_post();
 					$post_id       = get_the_ID();
 					$post_comments = get_comments( array( 'post_id' => $post_id ) );
-                    $meta  = get_post_meta( $post_id, 'tf_apartments_opt', true );
+                    $meta  = get_post_meta( $post_id, 'tf_apartment_opt', true );
 
 					if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 						$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
@@ -2460,7 +2464,7 @@ function tf_apartment_external_listings_shortcode( $atts, $content = null ) {
                         <div class="tf-slider-item" style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>);">
                             <div class="tf-slider-content">
                                 <div class="tf-slider-desc">
-                                    <h3><a href="<?php echo esc_url($tf_booking_url) ?>" target="_blank"><?php the_title() ?></a></h3>
+                                    <h3><a href="<?php the_permalink() ?>" target="_blank"><?php the_title() ?></a></h3>
 									<?php if ( $post_comments ) { ?>
                                         <div class="tf-slider-rating-star">
                                             <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo esc_html( tf_total_avg_rating( $post_comments ) ); ?></span>

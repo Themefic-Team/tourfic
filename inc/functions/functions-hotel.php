@@ -1702,6 +1702,12 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 	<script>
 		(function ($) {
 			$(document).ready(function () {
+				var selectedTemplate = '<?php esc_html_e($tf_hotel_selected_template); ?>';
+				var month = 1;
+
+			if( $(window).width() >= 1240 ){
+				month = 2;
+			}
 
 				// flatpickr locale first day of Week
 				<?php tf_flatpickr_locale("root"); ?>
@@ -1714,6 +1720,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 					mode: "range",
 					dateFormat: "Y/m/d",
 					minDate: "today",
+					showMonths: selectedTemplate == "design-2" ? month : 1,
 
 					// flatpickr locale
 					<?php tf_flatpickr_locale(); ?>

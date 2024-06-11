@@ -723,7 +723,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         <div class="tf-slider-content">
                                             <div class="tf-slider-desc">
                                                 <h3>
-                                                    <a href="<?php the_permalink($selected_post_id) ?>"><?php echo wp_kses_post( Helper::tourfic_character_limit_callback( html_entity_decode(get_the_title( $selected_design_post_id )), 35 ) ); ?></a>
+                                                    <a href="<?php the_permalink($selected_post_id) ?>"><?php echo wp_kses_post( Helper::tourfic_character_limit_callback( html_entity_decode(get_the_title( $selected_post_id )), 35 ) ); ?></a>
                                                     <span><?php echo esc_html($first_destination_name); ?></span>
                                                 </h3>
                                             </div>
