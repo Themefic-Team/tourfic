@@ -613,7 +613,6 @@
             altInput: true,
             altFormat: tf_params.tour_form_data.date_format,
             locale: tf_flatpickr_locale(),
-            disable: tf_params.tour_form_data.disable_specific,
             
             onReady: function (selectedDates, dateStr, instance) {
                 instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -650,6 +649,7 @@
         if(tf_params.tour_form_data.tour_type == 'continuous'){
             tour_date_options.minDate = "today";
             tour_date_options.disableMobile = "true";
+
             if (custom_avail == true) {
                 tour_date_options.enable = tf_params.tour_form_data.cont_custom_date.map((v) => {
                     return {
@@ -658,6 +658,7 @@
                     }
                 });
             }
+
             if (custom_avail == false) {
                 if (tf_params.tour_form_data.disabled_day || tf_params.tour_form_data.disable_range || tf_params.tour_form_data.disable_specific || tf_params.tour_form_data.disable_same_day) {
                     tour_date_options.disable = [];
@@ -690,6 +691,9 @@
                 }
             }
         }
+        
+        // remove empty attributes from tour_date_options object
+        // tour_date_options = Object.fromEntries(Object.entries(tour_date_options).filter(([_, v]) => v != '' ));
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'design-1') {
             $(".tours-check-in-out").flatpickr(tour_date_options);
@@ -709,7 +713,6 @@
         }
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'design-2') {
-            tf_params.tour_form_data.first_day_of_week
             $(".tours-check-in-out").flatpickr(tour_date_options);
 
             function dateSetToFields(selectedDates, instance) {
@@ -757,7 +760,6 @@
         }
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'default') {
-            tf_params.tour_form_data.first_day_of_week
             $("#check-in-out-date").flatpickr(tour_date_options);
         }
 

@@ -310,7 +310,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                                         </div>
                                     </div>
                                 </div>
-                                <a class="tf-all-reviews" href="#"><?php esc_html_e( "See all reviews", "tourfic" ); ?></a>
+                                <a class="tf-all-reviews" href="#tf-tour-reviews"><?php esc_html_e( "See all reviews", "tourfic" ); ?></a>
 							<?php } ?>
 							<?php
 							$tf_comment_counts = get_comments( array(
