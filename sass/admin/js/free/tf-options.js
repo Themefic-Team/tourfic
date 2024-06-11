@@ -2332,10 +2332,8 @@ var frame, gframe;
     $(document).ready(function () {
         // $('.tf-import-btn').on('click', function (event) {
         //     event.preventDefault();
-
         //     // Get the import URL from the button's href attribute
         //     var importUrl = $(this).attr('href');
-
         //     // Get the import data from the textarea
         //     var importData = $('textarea[name="tf_import_option"]').val().trim();
         //     if (importData == '') {
@@ -2349,7 +2347,6 @@ var frame, gframe;
         //         if (!confirm(tf_options.tf_export_import_msg.import_confirm)) {
         //             return;
         //         }
-
         //         $.ajax({
         //             url: importUrl,
         //             method: 'POST',
@@ -2389,66 +2386,54 @@ var frame, gframe;
             $(".tf-option-form").submit(); 
         });
 
-        // $('#addtag > .submit #submit').click(function (event) {
-
-        //     data = {
-        //         action: 'tf_taxonomy_update_dynamically',
-        //         taxonomy : $("input[name='taxonomy']").val(),
-        //     }
-           
-        //     $.ajax({
-        //         url: tf_options.ajax_url,
-        //         method: 'POST',
-        //         data: data,
-        //         success: function (response) {
-        //             console.log(response);
-        //         },
-        //         error: function (response) {
-        //             console.log(response);
-        //         },
-        //     });
-        // });
-    });
-
-    /*
-        $(document).on("ajaxSuccess", function (event, xhr, settings) {
-
-            console.log(settings)
-            
-
-            data = {
-                action: 'tf_taxonomy_update_dynamically',
-                taxonomy : $("input[name='taxonomy']").val(),
-            }
-          
-        })
-
-    */
-
-    //export the data in txt file
-    jQuery(document).ready(function ($) {
-        $('.tf-export-btn').on('click', function (event) {
+        $(document).on('click', '.tf-export-btn', function (event) {
             event.preventDefault();
 
-            // Get the textarea value
-            var textareaValue = $('textarea[name="tf_export_option"]').val();
+            $.ajax({
+                url: tf_options.ajax_url,
+                method: 'POST',
+                data: {
+                    action: 'tf_export_data',
+                    nonce: tf_admin_params.tf_nonce,
+                },
+                beforeSend: function () {
+                    $('.tf-export-btn').html('Exporting...');
+                    $('.tf-export-btn').attr('disabled', 'disabled');
+                },
+                success: function (response) {
+                    let obj = JSON.parse(response);
 
-            // Create a blob with the textarea value
-            var blob = new Blob([textareaValue], {type: 'text/plain'});
+                    if (obj.status === 'success') {
+                        // Create a blob with the response value
+                        var blob = new Blob([obj.data], {type: 'text/plain'});
 
-            // Create a temporary URL for the blob
-            var url = window.URL.createObjectURL(blob);
+                        // Create a temporary URL for the blob
+                        var url = window.URL.createObjectURL(blob);
 
-            // Create a temporary link element
-            var link = document.createElement('a');
-            link.href = url;
-            link.download = 'tf-settings-export.json';
+                        // Create a temporary link element
+                        var link = document.createElement('a');
+                        link.href = url;
+                        link.download = 'tf-settings-export.json';
 
-            // Programmatically click the link to initiate the file download
-            link.click();
+                        // Programmatically click the link to initiate the file download
+                        link.click();
 
-            // Clean up the temporary URL
-            window.URL.revokeObjectURL(url);
+                        // Clean up the temporary URL
+                        window.URL.revokeObjectURL(url);
+                    } else {
+                        alert('Something went wrong!');
+                    }
+                    $('.tf-export-btn').html('Export');
+                    $('.tf-export-btn').removeAttr('disabled');
+                },
+                error: function (response) {
+                    console.log(response);
+                    $('.tf-export-btn').html('Export');
+                    $('.tf-export-btn').removeAttr('disabled');
+                }
+            });
+
+
         });
     });
 

@@ -36,6 +36,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			//ajax save options
 			add_action( 'wp_ajax_tf_options_save', array( $this, 'tf_ajax_save_options' ) );
+
+            add_action( 'wp_ajax_tf_export_data', array( $this, 'tf_export_data' ) );
         }
 
         public static function option( $key, $params = array() ) {
@@ -672,7 +674,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			}
 
 
-            $ajax_save_class = 'tf-ajax-savess';
+            $ajax_save_class = 'tf-ajax-save';
 
 			if ( ! empty( $this->option_sections ) ) :
 				?>
@@ -938,6 +940,22 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 	        parse_str( $url_parts['query'], $query_string );
 
             return $query_string;
+        }
+
+        function tf_export_data(){
+            $response = array(
+                'status' => 'error',
+                'message' => 'Something went wrong!'
+            );
+	        $current_settings = get_option( $this->option_id );
+	        $response['data'] = isset($current_settings) && !empty($current_settings) ? wp_json_encode($current_settings) : '';
+
+            if(!empty($response['data'])){
+                $response['status'] = 'success';
+                $response['message'] = 'Data exported successfully!';
+            }
+            echo wp_json_encode($response);
+            die();
         }
 	}
 }
