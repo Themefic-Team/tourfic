@@ -289,9 +289,14 @@
             let form = $(this),
                 submitBtn = form.find('.tf-submit'),
                 formData = new FormData(form[0]);
-
+            
             formData.append('action', 'tf_hotel_search');
             formData.append('_nonce', tf_params.nonce);
+
+            if (formData.get('from') == null || formData.get('to') == null) {
+                formData.append('from', tf_params.tf_hotel_min_price);
+                formData.append('to', tf_params.tf_hotel_max_price);
+            }
 
             $.ajax({
                 url: tf_params.ajax_url,
