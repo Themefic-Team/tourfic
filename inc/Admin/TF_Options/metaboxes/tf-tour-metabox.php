@@ -1000,6 +1000,14 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => false
 				),
+				array(
+					'id'          => 'require_adult_child_booking',
+					'type'        => 'switch',
+					'label'       => __( 'Adult Required for Child Booking', 'tourfic' ),
+					'subtitle'       => __( 'By enabling this option, an adult will be required when booking a child. By default, an adult is required for infant bookings.', 'tourfic' ),
+					'field_width' => '50%',
+					'default' => 0
+				),
 
 				array(
 					'id'      => 'tour-booking-section',

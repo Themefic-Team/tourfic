@@ -798,6 +798,20 @@ class Enqueue {
 						wp_enqueue_script( $divi_script_handle, $divi_slider_script->src, $divi_slider_script->deps, $divi_slider_script->ver, true );
 					}
 				}
+				
+				if ( wp_script_is( 'cn_toc_admin_script', 'enqueued' ) ) {
+
+					$easy_toc_script_handle = 'cn_toc_admin_script';
+					$easy_toc_slider_script = $wp_scripts->registered[ $easy_toc_script_handle ];
+
+					wp_dequeue_script( $easy_toc_script_handle );
+					wp_deregister_script( $easy_toc_script_handle );
+
+					if ( isset( $easy_toc_slider_script ) ) {
+
+						wp_enqueue_script( $easy_toc_script_handle, $easy_toc_slider_script->src, $easy_toc_slider_script->deps, $easy_toc_slider_script->ver, true );
+					}
+				}
 			}
 		}
 	}
