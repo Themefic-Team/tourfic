@@ -3885,8 +3885,10 @@ function tf_tour_booking_popup_callback() {
 		}
 		if ( $infant > 0 && ! empty( $infant_price ) && ! $adults ) {
 			$response['errors'][] = esc_html__( 'Infant without adults is not allowed!', 'tourfic' );
-		} else if ( $adult_required_chield && $children > 0 && !empty( $children_price ) ) {
-			$response['errors'][] = esc_html__( 'Child without adults is not allowed!', 'tourfic' );
+		} 
+		
+		if ( $adult_required_chield && $children > 0 && !empty( $children_price ) && empty( $adults ) ) {
+			$response['errors'][] = esc_html__( 'An adult is required for child booking!', 'tourfic' );
 		}
 
 	} else if ( ( ! empty( $custom_avail ) && $custom_avail == true ) || $pricing_rule == 'group' ) {
