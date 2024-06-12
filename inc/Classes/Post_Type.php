@@ -156,7 +156,7 @@ class Post_Type {
 				'public'                => true,
 				'publicly_queryable'    => true,
 				'hierarchical'          => true,
-				'show_ui'               => !empty( $hidden_taxonomies ) && !in_array( $tax_args['name'], $hidden_taxonomies ) ? true : false,
+				'show_ui'               => true,
 				'show_in_menu'          => true,
 				'show_in_nav_menus'     => true,
 				'query_var'             => true,
@@ -167,6 +167,7 @@ class Post_Type {
 				'rest_controller_class' => 'WP_REST_Terms_Controller',
 				'show_in_quick_edit'    => true,
 				'capabilities'          => $tax_args['capability'],
+				"meta_box_cb"			=> !empty( $hidden_taxonomies ) && !in_array( $tax_args['name'], $hidden_taxonomies ) ? true : false,
 			);
 			$tf_tax_args = apply_filters( 'tf_' . $tax_args['taxonomy'] . '_args', $tf_tax_args );
 
