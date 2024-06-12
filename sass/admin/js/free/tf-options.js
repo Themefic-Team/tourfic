@@ -2394,7 +2394,7 @@ var frame, gframe;
                 method: 'POST',
                 data: {
                     action: 'tf_export_data',
-                    nonce: tf_admin_params.tf_nonce,
+                    _nonce: tf_admin_params.tf_nonce,
                 },
                 beforeSend: function () {
                     $('.tf-export-btn').html('Exporting...');
