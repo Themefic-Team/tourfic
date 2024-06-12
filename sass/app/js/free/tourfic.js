@@ -15,7 +15,7 @@
         /**
          * Scroll to Review Section
          */
-        $(".tf-top-review a").click(function () {
+        $(".tf-top-review a").on("click", function () {
             $('html, body').animate({
                 scrollTop: $("#tf-review").offset().top - 32
             }, 1000);
@@ -24,7 +24,7 @@
         /**
          * Scroll to Map Section
          */
-        $(".tf-map-link a").click(function () {
+        $(".tf-map-link a").on("click", function () {
             $('html, body').animate({
                 scrollTop: $("#tour-map").offset().top - 32
             }, 1000);
@@ -62,7 +62,7 @@
                     if($('.tf_booking-dates .tf_label-row').length === 1){
                         $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
                     }else{
-                        $("#check-in-out-date").click();
+                        $("#check-in-out-date").trigger("click");
                     }
                 }
                 return;
@@ -74,7 +74,7 @@
                     if($('.tf_booking-dates .tf_label-row').length === 1){
                         $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
                     }else{
-                        $("#check-in-out-date").click();
+                        $("#check-in-out-date").trigger("click");
                     }
                 }
                 return;
@@ -86,7 +86,7 @@
                     if($('.tf_booking-dates .tf_label-row').length === 1){
                         $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
                     }else{
-                        $("#check-in-out-date").click();
+                        $("#check-in-out-date").trigger("click");
                     }
                 }
                 return;
@@ -371,7 +371,7 @@
             });
         };
 
-        $(window).load(function () {
+        $(window).on("load", function () {
             // Trigger Animation
             jQuery('[data-width]').each(function () {
                 var $this = jQuery(this);
@@ -412,14 +412,14 @@
          * Share buttons
          */
         // Toggle share buttons
-        $('.share-toggle[data-toggle="true"]').click(function (e) {
+        $('.share-toggle[data-toggle="true"]').on("click", function (e) {
             e.preventDefault();
             var target = $(this).attr('href');
             $(target).slideToggle('fast');
         });
 
         // Copy button
-        $('button#share_link_button').click(function () {
+        $('button#share_link_button').on("click", function () {
 
             $(this).addClass('copied');
             setTimeout(function () {
@@ -845,7 +845,7 @@
                     e.preventDefault();
                     if (currentFocus > -1) {
                         /*and simulate a click on the "active" item:*/
-                        if (x) x[currentFocus].click();
+                        if (x) x[currentFocus].trigger("click");
                     }
                 }
             });
@@ -1251,17 +1251,17 @@
 
         // Hotel and Tour Advance Search form
 
-        $(".tf_selectdate-wrap.tf_more_info_selections .tf_input-inner").click(function () {
+        $(".tf_selectdate-wrap.tf_more_info_selections .tf_input-inner").on("click", function () {
             $('.tf-more-info').toggleClass('show');
         });
-        $(document).click(function (event) {
+        $(document).on("click", function (event) {
             if (!$(event.target).closest(".tf_selectdate-wrap.tf_more_info_selections .tf_input-inner, .tf-more-info").length) {
                 $('.tf-more-info').removeClass('show');
             }
         });
 
         // FAQ Accordion
-        $('.tf-faq-title').click(function () {
+        $('.tf-faq-title').on("click", function () {
             var $this = $(this);
             if (!$this.hasClass("active")) {
                 $(".tf-faq-desc").slideUp(400);
@@ -1277,7 +1277,7 @@
         * New Template FAQ Accordion
         * @author: Jahid
         */
-        $('.tf-faq-collaps').click(function () {
+        $('.tf-faq-collaps').on("click", function () {
             var $this = $(this);
             if (!$this.hasClass("active")) {
                 $(".tf-faq-content").slideUp(400);
@@ -1836,7 +1836,7 @@
             $('.tf-modal').removeClass('tf-modal-show');
             $('body').removeClass('tf-modal-open');
         });
-        $(document).click(function (event) {
+        $(document).on("click", function (event) {
             if (!$(event.target).closest(".tf-modal-content,.tf-modal-btn").length) {
                 $("body").removeClass("tf-modal-open");
                 $(".tf-modal").removeClass("tf-modal-show");
@@ -1907,24 +1907,24 @@
         });
 
         // Design 2 Toggle share buttons
-        $('.tf-template-3 .tf-share-toggle').click(function (e) {
+        $('.tf-template-3 .tf-share-toggle').on("click", function (e) {
             e.preventDefault();
             $('.tf-share-toggle').toggleClass('actives');
             $('.tf-off-canvas-share').toggleClass('show');
         });
 
         // Design 2 Wishlist buttons
-        $('.tf-template-3 .add-wishlist').click(function (e) {
+        $('.tf-template-3 .add-wishlist').on("click", function (e) {
             e.preventDefault();
             $(this).parents().find('.tf-wishlist-box').addClass('actives');
         });
-        $('.tf-template-3 .remove-wishlist').click(function (e) {
+        $('.tf-template-3 .remove-wishlist').on("click", function (e) {
             e.preventDefault();
             $(this).parents().find('.tf-wishlist-box').removeClass('actives');
         });
 
         // Copy button
-        $('a#share_link_button').click(function (e) {
+        $('a#share_link_button').on("click", function (e) {
             e.preventDefault();
             $(this).addClass('copied');
             setTimeout(function () {
@@ -1960,7 +1960,7 @@
               ]
         });
 
-        $(".tf-template-3 .tf-question").click(function(){
+        $(".tf-template-3 .tf-question").on("click", function(){
             var $this = $(this);
             if (!$this.hasClass("tf-active")) {
                 $(this).siblings().removeClass("tf-active");
@@ -1972,7 +1972,7 @@
             $(this).find('.tf-question-desc').slideToggle();
         });
 
-        $(".tf-template-3 .tf-hero-hotel.tf-popup-buttons").click(function(e){
+        $(".tf-template-3 .tf-hero-hotel.tf-popup-buttons").on("click", function(e){
             e.preventDefault();
             $("#tour_room_details_loader").show();
             setTimeout(function() {
@@ -2056,7 +2056,7 @@
             $('span.tf-guest').html(guest);
         })
 
-        $(document).mouseup(function(e)
+        $(document).on("mouseup", function(e)
         {
             var container = $(".tf-template-3 .tf_acrselection-wrap");
             if (!container.is(e.target) && container.has(e.target).length === 0)
@@ -2064,11 +2064,11 @@
                 $(".tf-template-3 .tf-booking-form-guest-and-room .tf_acrselection-wrap").removeClass("tf-show");
             }
         });
-        $(".tf-template-3 .tf-booking-form-guest-and-room").click(function(){
+        $(".tf-template-3 .tf-booking-form-guest-and-room").on("click", function(){
             $(".tf-template-3 .tf-booking-form-guest-and-room .tf_acrselection-wrap").addClass("tf-show");
         });
 
-        $(".tf-template-3 .tf-review-open.button").click(function(){
+        $(".tf-template-3 .tf-review-open.button").on("click", function(){
             $(".tf-template-3 .tf-sitebar-widgets .tf-review-form-wrapper").toggleClass("tf-review-show");
         });
 

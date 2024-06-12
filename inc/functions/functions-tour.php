@@ -266,8 +266,8 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 					// flatpickr locale first day of Week
 					<?php tf_flatpickr_locale("root"); ?>
 
-					$(".tf_tour_check_in_out_date").click(function(){
-						$(".tf-tour-check-in-out-date").click();
+					$(".tf_tour_check_in_out_date").on("click", function(){
+						$(".tf-tour-check-in-out-date").trigger( "click" );
 					});
 					$(".tf-tour-check-in-out-date").flatpickr({
 						enableTime: false,

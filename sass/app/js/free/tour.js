@@ -396,7 +396,7 @@
                     e.preventDefault();
                     if (currentFocus > -1) {
                         /*and simulate a click on the "active" item:*/
-                        if (x) x[currentFocus].click();
+                        if (x) x[currentFocus].trigger("click");;
                     }
                 }
             });
@@ -443,7 +443,7 @@
         * New Template Itinerary Accordion
         * @author: Jahid
         */
-        $('.tf-itinerary-title').click(function () {
+        $('.tf-itinerary-title').on("click", function () {
             var $this = $(this);
             if (!$this.hasClass("active")) {
                 $(".tf-itinerary-content-box").slideUp(400);
@@ -459,7 +459,7 @@
         * New Template Tour Extra
         * @author: Jahid
         */
-        $('.tf-form-title.tf-tour-extra').click(function () {
+        $('.tf-form-title.tf-tour-extra').on("click", function () {
             var $this = $(this);
             if (!$this.hasClass("active")) {
                 $(".tf-tour-extra-box").slideUp(400);
@@ -470,7 +470,7 @@
         });
 
         // Itinerary Accordion
-        $('.tf-accordion-head').click(function () {
+        $('.tf-accordion-head').on("click", function () {
             $(this).toggleClass('active');
             $(this).parent().find('.arrow').toggleClass('arrow-animate');
             $(this).parent().find('.tf-accordion-content').slideToggle();
@@ -509,7 +509,7 @@
 
         // Tour Destination
 
-        $('#tf-tour-location-adv').click(function (e) {
+        $('#tf-tour-location-adv').on("click", function (e) {
             var location = $(this).val();
             if (location) {
                 $(".tf-tour-results").removeClass('tf-destination-show');
@@ -517,11 +517,11 @@
                 $(".tf-tour-results").addClass('tf-destination-show');
             }
         });
-        $('#tf-tour-location-adv').keyup(function (e) {
+        $('#tf-tour-location-adv').on("keyup", function (e) {
             var location = $(this).val();
             $("#tf-tour-place").val(location);
         });
-        $('#tf-destination').keyup(function (e) {
+        $('#tf-destination').on("keyup", function (e) {
             var tf_location = $(this).val();
             $("#tf-search-tour").val(tf_location);
         });
@@ -530,7 +530,7 @@
                 $(".tf-tour-results").removeClass('tf-destination-show');
             }
         });
-        $('#ui-id-2 li').click(function (e) {
+        $('#ui-id-2 li').on("click", function (e) {
             var dest_name = $(this).attr("data-name");
             var dest_slug = $(this).attr("data-slug");
             $(".tf-tour-preview-place").val(dest_name);
@@ -548,7 +548,7 @@
         /**
          * Single tour sticky booking bar position fixed
          */
-        $(window).scroll(function () {
+        $(window).on("scroll", function () {
             var sticky = $('.tf-tour-booking-wrap'),
                 scroll = $(window).scrollTop();
 
@@ -561,7 +561,7 @@
          * @author Foysal
          */
         if ($('.tf-tour-booking-box').length > 0) {
-            $(window).scroll(function () {
+            $(window).on("scroll", function () {
                 let bookingBox = $('.tf-tour-booking-box');
                 let bottomBar = $('.tf-bottom-booking-bar');
                 let boxOffset = bookingBox.offset().top + bookingBox.outerHeight();

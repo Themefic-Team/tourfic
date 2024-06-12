@@ -1954,8 +1954,8 @@ class Helper {
                             // flatpickr locale first day of Week
 							<?php tf_flatpickr_locale( "root" ); ?>
 
-                            $(".tf-template-3 .tf-booking-date-wrap").click(function () {
-                                $("#check-in-out-date").click();
+                            $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
+                                $("#check-in-out-date").trigger( "click" );
                             });
                             $("#check-in-out-date").flatpickr({
                                 enableTime: false,
@@ -2013,8 +2013,8 @@ class Helper {
                             // flatpickr locale
 							<?php tf_flatpickr_locale( "root" ); ?>
 
-                            $(".tf-template-3 .tf-booking-date-wrap").click(function () {
-                                $("#check-in-out-date").click();
+                            $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
+                                $("#check-in-out-date").trigger( "click" );
                             });
                             $("#check-in-out-date").flatpickr({
                                 enableTime: false,
@@ -2604,9 +2604,9 @@ class Helper {
                             // flatpickr locale first day of Week
 							<?php tf_flatpickr_locale( "root" ); ?>
 
-                            $(".tf-template-3 .tf-booking-date-wrap").click(function () {
+                            $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
 
-                                $("#check-in-out-date").click();
+                                $("#check-in-out-date").trigger("click");
                             });
                             $("#check-in-out-date").flatpickr({
                                 enableTime: false,
@@ -2662,9 +2662,9 @@ class Helper {
                             // flatpickr locale first day of Week
 							<?php tf_flatpickr_locale( "root" ); ?>
 
-                            $(".tf-template-3 .tf-booking-date-wrap").click(function () {
+                            $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
 
-                                $("#check-in-out-date").click();
+                                $("#check-in-out-date").trigger("click");
                             });
                             $("#check-in-out-date").flatpickr({
                                 enableTime: false,
