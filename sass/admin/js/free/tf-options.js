@@ -460,16 +460,16 @@
                     data.append('file[]', fontsfile[i]);
                 }
             }
-            // get tf_import_option from data  
+            // get tf_import_option from data
             let tf_import_option =  false
             if (typeof data.get('tf_import_option') !== "undefined" && data.get('tf_import_option').trim() != '') {
-            
+
                 //  confirm data before send
                 if (!confirm(tf_options.tf_export_import_msg.import_confirm)) {
                     return;
                 }
-                
-                tf_import_option = true; 
+
+                tf_import_option = true;
             }
             data.append('action', 'tf_options_save');
 
@@ -503,7 +503,21 @@
                     }
                 },
                 error: function (error) {
-                    console.log(error);
+                    submitBtn.removeClass('tf-btn-loading');
+                    console.log(error['responseText']);
+                    //if error msg contain max_input_vars then show a proper msg
+                    if(error['responseText'].includes('max_input_vars')) {
+                        notyf.error({
+                            message: tf_admin_params.max_input_vars_notice,
+                            duration: 15000,
+                            dismissible: true
+                        });
+                    } else {
+                        notyf.error({
+                            message: error['responseText'],
+                            duration: 6000
+                        });
+                    }
                 }
             });
         });
@@ -2394,7 +2408,7 @@ var frame, gframe;
                 method: 'POST',
                 data: {
                     action: 'tf_export_data',
-                    nonce: tf_admin_params.tf_nonce,
+                    _nonce: tf_admin_params.tf_nonce,
                 },
                 beforeSend: function () {
                     $('.tf-export-btn').html('Exporting...');
