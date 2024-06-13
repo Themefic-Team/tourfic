@@ -2506,40 +2506,48 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                     <h2><a href="<?php echo esc_url( $url ); ?>"><?php the_title(); ?></a></h2>
                 </div>
 				<?php tf_archive_single_rating(); ?>
-				<?php if ( $features ) { ?>
+
+				<!-- Hotel T2 Archive Feature Start -->
+
+				<?php if ( $meta['hotel-facilities'] ) : ?>
                     <div class="tf-archive-features tf-mt-16">
                         <ul>
-							<?php foreach ( $features as $tfkey => $feature ) {
-								$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
-								if ( ! empty( $feature_meta ) ) {
-									$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
-								}
-								if ( ! empty( $f_icon_type ) && $f_icon_type == 'fa' ) {
-									$feature_icon = ! empty( $feature_meta['icon-fa'] ) ? '<i class="' . $feature_meta['icon-fa'] . '"></i>' : '';
-								} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'c' ) {
-									$feature_icon = ! empty( $feature_meta['icon-c'] ) ? '<img src="' . $feature_meta['icon-c'] . '" style="min-width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />' : '';
-								}
-								if ( $tfkey < 4 ) {
-									?>
-                                    <li class="tf-feature-lists">
-										<?php
-										if ( ! empty( $feature_icon ) ) {
-											echo wp_kses_post( $feature_icon );
-										} ?>
-										<?php echo esc_html( $feature->name ); ?>
-                                    </li>
-								<?php }
-							} ?>
 							<?php
-							if ( ! empty( $features ) ) {
-								if ( count( $features ) > 4 ) {
-									echo '<span>More....</span>';
+							$favourite_features = array();
+							foreach ( $meta['hotel-facilities'] as $facility ) {
+								if ( $facility["favorite"] ) {
+									$favourite_features[] = $facility["facilities-feature"];
 								}
 							}
-							?>
-                        </ul>
-                    </div>
-				<?php } ?>
+							if(!empty($favourite_features) && is_array($favourite_features)) {
+								foreach($favourite_features as $feature_key => $feature) {
+									$feature_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
+									$feature_name = get_term( $feature );
+									$f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+
+									if ( $f_icon_type == 'fa' && !empty($feature_meta['icon-fa']) ) {
+										$feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
+									} elseif ( $f_icon_type == 'c' && !empty($feature_meta['icon-c']) ) {
+										$feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
+									} ?>
+
+									<?php if ( $feature_key <= 4 ) { ?>
+										<li class="tf-feature-lists">
+											<?php
+											if ( ! empty( $feature_icon ) ) {
+												echo wp_kses_post( $feature_icon );
+											} ?>
+											<?php echo esc_html( $feature_name->name ); ?>
+										</li>
+									<?php } ?>
+								<?php } ?>
+							<?php } ?>
+						</ul>
+						
+					</div>
+				<?php endif; ?>
+
+				<!-- Hotel T2 Archive Feature End -->
 
                 <div class="tf-details tf-mt-16">
                     <p><?php echo wp_kses_post( substr( wp_strip_all_tags( get_the_content() ), 0, 100 )  ). '...'; ?></p>

@@ -192,7 +192,7 @@ final class Tourfic {
 							.always(function () {
 								current.removeClass('install-now updated-message').addClass('activate-now button-primary').text('Activating...');
 								current.unbind(e);
-								current[0].trigger( "click" );
+								current[0].click();
 							});
 					});
 				</script>
