@@ -266,8 +266,8 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 					// flatpickr locale first day of Week
 					<?php tf_flatpickr_locale("root"); ?>
 
-					$(".tf_tour_check_in_out_date").click(function(){
-						$(".tf-tour-check-in-out-date").click();
+					$(".tf_tour_check_in_out_date").on("click", function(){
+						$(".tf-tour-check-in-out-date").trigger( "click" );
 					});
 					$(".tf-tour-check-in-out-date").flatpickr({
 						enableTime: false,
@@ -3801,6 +3801,7 @@ function tf_tour_booking_popup_callback() {
 	$today_stt                 = new DateTime( gmdate( 'Y-m-d', strtotime( gmdate( 'Y-m-d' ) ) ) );
 	$tour_date_stt             = new DateTime( gmdate( 'Y-m-d', strtotime( $start_date ) ) );
 	$day_difference            = $today_stt->diff( $tour_date_stt )->days;
+	$adult_required_chield = !empty( $meta["require_adult_child_booking"] ) ? $meta["require_adult_child_booking"] : 0;
 
 
 	if ( $day_difference < $min_days_before_book ) {
@@ -3884,6 +3885,10 @@ function tf_tour_booking_popup_callback() {
 		}
 		if ( $infant > 0 && ! empty( $infant_price ) && ! $adults ) {
 			$response['errors'][] = esc_html__( 'Infant without adults is not allowed!', 'tourfic' );
+		} 
+		
+		if ( $adult_required_chield && $children > 0 && !empty( $children_price ) && empty( $adults ) ) {
+			$response['errors'][] = esc_html__( 'An adult is required for children booking!', 'tourfic' );
 		}
 
 	} else if ( ( ! empty( $custom_avail ) && $custom_avail == true ) || $pricing_rule == 'group' ) {

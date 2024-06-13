@@ -387,7 +387,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                             ?>
                         </div>
                     <?php endif; ?>                 
-                    <a href="<?php echo $tf_booking_type == 2 ? ( !empty( $tf_booking_url ) ? esc_url( $tf_booking_url ) : '' ) : esc_url( '#availability' ) ?>" class="availability"><?php $tf_booking_type == 2 ? ( !empty( $tf_booking_url ) && ( $tf_hide_booking_form == 1 )  ? esc_html_e( 'Book Now', 'tourfic') : esc_html_e("Check Availability", "tourfic") ) :  esc_html_e("Check Availability", "tourfic") ?></a> 
+                    <a href="<?php echo $tf_booking_type == 2 ? ( !empty( $tf_booking_url ) ? esc_url( $tf_booking_url ) : '' ) : esc_url( '#room-availability' ) ?>" class="availability"><?php $tf_booking_type == 2 ? ( !empty( $tf_booking_url ) && ( $tf_hide_booking_form == 1 )  ? esc_html_e( 'Book Now', 'tourfic') : esc_html_e("Check Availability", "tourfic") ) :  esc_html_e("Check Availability", "tourfic") ?></a> 
                 </div>
 
             </div>
@@ -582,7 +582,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                 </div>
                 <div class="tf-available-room-content-right">
                                       
-                    <a href="#availability" class="availability"><?php esc_html_e("Check Availability", "tourfic"); ?></a>
+                    <a href="#room-availability" class="availability"><?php esc_html_e("Check Availability", "tourfic"); ?></a>
                 </div>
 
             </div>

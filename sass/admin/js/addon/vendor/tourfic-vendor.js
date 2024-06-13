@@ -6,7 +6,7 @@
         * Multivendor Bulk Action
         */
 
-        $('.vendor-actions input#submit').click(function () {
+        $('.vendor-actions input#submit').on("click", function () {
             var balkaction = $('#tf_vendor_bulk').find(":selected").val();
             var vendorlist = $('input[name="vendor_id"]:checked').serializeArray();
             if (balkaction !== "" && vendorlist.length > 0) {
@@ -31,7 +31,7 @@
         * Author @Jahid, @Foysal
         * Vendor Status
         */
-        $('.vendor-status-switcher').click(function () {
+        $('.vendor-status-switcher').on("click", function () {
             let status = $(this).is(':checked') ? 'enabled' : 'disabled';
             var vendorid = $(this).val();
             $("#tf-report-loader").addClass('show');

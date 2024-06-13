@@ -242,8 +242,8 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 					// flatpickr locale first day of Week
 					<?php tf_flatpickr_locale("root"); ?>
 
-					$(".tf_apartment_check_in_out_date").click(function(){
-						$(".tf-apartment-check-in-out-date").click();
+					$(".tf_apartment_check_in_out_date").on("click", function(){
+						$(".tf-apartment-check-in-out-date").ctrigger("click");
 					});
 					$(".tf-apartment-check-in-out-date").flatpickr({
 						enableTime: false,
@@ -1155,7 +1155,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                     }
 
                     $(".tf-apartment-design-one-form #check-in-date").on('click', function () {
-                        $(".tf-check-out-date .form-control").click();
+                        $(".tf-check-out-date .form-control").trigger( "click" );
                     });
 
                     const checkinoutdateange = flatpickr("#tf-apartment-booking #check-in-out-date", {

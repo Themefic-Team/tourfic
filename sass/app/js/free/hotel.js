@@ -26,7 +26,7 @@
                     if($('.tf_booking-dates .tf_label-row').length === 1){
                         $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required"><b>' + tf_params.field_required + '</b></span>');
                     }else{
-                        $(".tf-check-in-out-date").click();
+                        $(".tf-check-in-out-date").ctrigger("click");
                     }
                 }
                 return;
@@ -264,7 +264,7 @@
         /**
          * Scroll to room reserve table
          */
-        $(".reserve-button a").click(function () {
+        $(".reserve-button a").on("click", function () {
             $('html, body').animate({
                 scrollTop: $("#rooms").offset().top - 32
             }, 1000);
@@ -289,9 +289,14 @@
             let form = $(this),
                 submitBtn = form.find('.tf-submit'),
                 formData = new FormData(form[0]);
-
+            
             formData.append('action', 'tf_hotel_search');
             formData.append('_nonce', tf_params.nonce);
+
+            if (formData.get('from') == null || formData.get('to') == null) {
+                formData.append('from', tf_params.tf_hotel_min_price);
+                formData.append('to', tf_params.tf_hotel_max_price);
+            }
 
             $.ajax({
                 url: tf_params.ajax_url,
@@ -427,7 +432,7 @@
                     e.preventDefault();
                     if (currentFocus > -1) {
                         /*and simulate a click on the "active" item:*/
-                        if (x) x[currentFocus].click();
+                        if (x) x[currentFocus].trigger("click");
                     }
                 }
             });
@@ -472,7 +477,7 @@
 
         // Hotel Location
 
-        $('#tf-destination-adv').click(function (e) {
+        $('#tf-destination-adv').on("click", function (e) {
             var location = $(this).val();
             if (location) {
                 $(".tf-hotel-locations").removeClass('tf-locations-show');
@@ -480,11 +485,11 @@
                 $(".tf-hotel-locations").addClass('tf-locations-show');
             }
         });
-        $('#tf-destination-adv').keyup(function (e) {
+        $('#tf-destination-adv').on("keyup", function (e) {
             var location = $(this).val();
             $("#tf-place-destination").val(location);
         });
-        $('#tf-location').keyup(function (e) {
+        $('#tf-location').on("keyup", function (e) {
             var tf_location = $(this).val();
             $("#tf-search-hotel").val(tf_location);
         });
@@ -493,7 +498,7 @@
                 $(".tf-hotel-locations").removeClass('tf-locations-show');
             }
         });
-        $('#ui-id-1 li').click(function (e) {
+        $('#ui-id-1 li').on("click", function (e) {
             var dest_name = $(this).attr("data-name");
             var dest_slug = $(this).attr("data-slug");
             $(".tf-preview-destination").val(dest_name);

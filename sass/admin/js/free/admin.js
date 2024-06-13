@@ -153,7 +153,7 @@
                 .always(function () {
                     current.removeClass('install-now updated-message').addClass('activate-now button-primary').text(tf_admin_params.activating);
                     current.unbind(e);
-                    current[0].click();
+                    current[0].trigger("click");
                 });
         });
 
@@ -198,7 +198,7 @@
         * Tour Booking Status
         */
 
-        $('.tf-ticket-status').click(function () {
+        $('.tf-ticket-status').on("click", function () {
             if ($(this).is(':checked')) {
                 var order_unique_id = $(this).val();
                 $("#tf-booking-status-loader").addClass('show');

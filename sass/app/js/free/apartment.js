@@ -121,7 +121,7 @@
                     e.preventDefault();
                     if (currentFocus > -1) {
                         /*and simulate a click on the "active" item:*/
-                        if (x) x[currentFocus].click();
+                        if (x) x[currentFocus].trigger("click");
                     }
                 }
             });
@@ -241,6 +241,11 @@
 
             formData.append('action', 'tf_apartments_search');
             formData.append('_nonce', tf_params.nonce);
+
+            if (formData.get('from') == null || formData.get('to') == null) {
+                formData.append('from', tf_params.tf_apartment_min_price);
+                formData.append('to', tf_params.tf_apartment_max_price);
+            }
 
             $.ajax({
                 url: tf_params.ajax_url,

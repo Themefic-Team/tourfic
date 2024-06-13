@@ -176,10 +176,10 @@
                 };
                 // Installing Function
                 jQuery.post(tf_admin_params.ajax_url, data, function (response) {
-                    $('.tf-setup-travelfic-theme-active').click();
+                    $('.tf-setup-travelfic-theme-active').trigger("click");
                 })
             }else{
-                $('.tf-setup-travelfic-toolkit-btn').click();
+                $('.tf-setup-travelfic-toolkit-btn').trigger("click");
             }
             
         });
@@ -205,7 +205,7 @@
                 },
                 success: function(response) {
                     if ($.inArray("travelfic-toolkit", travelfic_toolkit_active_plugins) !== -1) {
-                        $('.tf-setup-travelfic-toolkit-btn').click();
+                        $('.tf-setup-travelfic-toolkit-btn').trigger("click");
                     }else{
                         window.location.replace(tf_admin_params.toolkit_page_url);
                     }
@@ -235,7 +235,7 @@
                 };
                 // Installing Function
                 jQuery.post(tf_admin_params.ajax_url, data, function (response) {
-                    $('.tf-setup-travelfic-toolkit-active').click();
+                    $('.tf-setup-travelfic-toolkit-active').trigger("click");
                 })
             }else{
                 window.location.replace(tf_admin_params.toolkit_page_url);
@@ -291,7 +291,7 @@
                 },
                 success: function(response) {
                     btn.text(tf_admin_params.activating);
-                    $('.tf-active-woo-btn').click();
+                    $('.tf-active-woo-btn').trigger("click");
                 },
                 error: function(error) {
                     console.log(error);
@@ -323,7 +323,7 @@
                     notyf.success(response.data);
 
                     setTimeout(function(){
-                        btn.closest('.tf-setup-step-layout').find('.tf-setup-next-btn').click();
+                        btn.closest('.tf-setup-step-layout').find('.tf-setup-next-btn').trigger("click");
                     }, 500);
 
                     btn.removeClass('tf-btn-loading');

@@ -33,7 +33,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 						}
 					 	if(is_array($data)):
 							foreach ( $data as $key => $value ) :
-								$tf_repater_default_value = stripslashes(reset($value));
+								$tf_repater_default_value = !is_array( $value ) ? stripslashes(reset($value)) : '';
 								if($this->field['id']=="room"){
 									$tf_repater_default_value = $value['title'];
 								}

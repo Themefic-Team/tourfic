@@ -1116,8 +1116,8 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 						// flatpickr locale first day of Week
 						<?php tf_flatpickr_locale("root"); ?>
 
-					$(".tf_check_inout_dates").click(function(){
-						$(".tf-check-in-out-date").click();
+					$(".tf_check_inout_dates").on("click", function(){
+						$(".tf-check-in-out-date").trigger( "click" );
 					});
 					$(".tf-check-in-out-date").flatpickr({
 						enableTime: false,
@@ -1712,8 +1712,8 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 				// flatpickr locale first day of Week
 				<?php tf_flatpickr_locale("root"); ?>
 				
-				$(".tf-template-3 .tf-booking-date-wrap").click(function(){
-					$(".tf-check-in-out-date").click();
+				$(".tf-template-3 .tf-booking-date-wrap").on("click", function(){
+					$(".tf-check-in-out-date").trigger( "click" );
 				});
 				$(".tf-check-in-out-date").flatpickr({
 					enableTime: false,

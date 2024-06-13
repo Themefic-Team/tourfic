@@ -32,7 +32,7 @@
             .always(function() {
                 current.removeClass('install-now updated-message').addClass('activate-now button-primary').text(tf_pro_params.activating);
                 current.unbind(e);
-                current[0].click();
+                current[0].trigger("click");
             });
         });
 
@@ -119,7 +119,7 @@
                     link.download      = 'Tours_' + generated_date + '.csv';
                     link.style.display = 'none';
                 document.body.appendChild(link);
-                link.click();
+                link.trigger("click");
                 //clean up
                 document.body.removeChild(link);
                 $('.tf-export-tours-btn').html('Export');
@@ -151,7 +151,7 @@
                     link.download      = 'Hotels_' + generated_date + '.csv';
                     link.style.display = 'none';
                 document.body.appendChild(link);
-                link.click();
+                link.trigger("click");
                 //clean up
                 document.body.removeChild(link);
                 $('.tf-export-hotels-btn').html('Export');
@@ -184,7 +184,7 @@
                     link.download      = 'Apartments_' + generated_date + '.csv';
                     link.style.display = 'none';
                 document.body.appendChild(link);
-                link.click();
+                link.trigger("click");
                 //clean up
                 document.body.removeChild(link);
                 $('.tf-export-apartments-btn').html('Export');

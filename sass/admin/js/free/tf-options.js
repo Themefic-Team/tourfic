@@ -408,7 +408,7 @@
             let iconListBottom = 0;
             let searchVal = $('.tf-icon-search-input').val();
 
-            iconList.scroll(function () {
+            iconList.on("scroll", function () {
                 let type = $('.tf-icon-tab-pane.active').data('type');
                 let max = $('.tf-icon-tab-pane.active').data('max');
                 iconListBottom = iconList[0].scrollHeight - iconList.height();
@@ -1610,7 +1610,7 @@ var frame, gframe;
 
 
         // Texonomy submit event
-        $('#addtag > .submit #submit').click(function () {
+        $('#addtag > .submit #submit').on("click", function () {
             $(".tf-fieldset-media-preview").html("");
         });
 
@@ -1762,13 +1762,13 @@ var frame, gframe;
             });
         }
 
-        $('.tf-mobile-tabs').click(function (e) {
+        $('.tf-mobile-tabs').on("click", function (e) {
             e.preventDefault();
             $(".tf-admin-tab").toggleClass('active');
         });
 
 
-        $('.tf-faq-title').click(function () {
+        $('.tf-faq-title').on("click", function () {
             var $this = $(this);
             if (!$this.hasClass("active")) {
                 $(".tf-faq-desc").slideUp(400);
@@ -2267,7 +2267,7 @@ var frame, gframe;
         var $this = $(this);
         $this.parents('.tf-shortcode-generator-single').find('.tf-sg-form-wrapper').fadeIn();
 
-        $this.parents('.tf-shortcode-generator-single').mouseup(function (e) {
+        $this.parents('.tf-shortcode-generator-single').on("mouseup", function (e) {
             var container = $(this).find(".tf-shortcode-generator-form");
             var container_parent = container.parent(".tf-sg-form-wrapper");
             if (!container.is(e.target) && container.has(e.target).length === 0) {
@@ -2430,7 +2430,7 @@ var frame, gframe;
                         link.download = 'tf-settings-export.json';
 
                         // Programmatically click the link to initiate the file download
-                        link.click();
+                        link.trigger("click");
 
                         // Clean up the temporary URL
                         window.URL.revokeObjectURL(url);
