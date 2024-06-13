@@ -673,7 +673,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				$tf_option_value = array();
 			}
 
-
             $ajax_save_class = 'tf-ajax-save';
 
 			if ( ! empty( $this->option_sections ) ) :
@@ -755,8 +754,26 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						<?php wp_nonce_field( 'tf_option_nonce_action', 'tf_option_nonce' ); ?>
                     </form>
                 </div>
+
+                <div class="tf-field-notice-inner tf-notice-danger" style="margin-top: 20px; margin-right: 20px;">
+                    <div class="tf-field-notice-content">
+                        <?php /* translators: %s: strong tag */ ?>
+						<?php echo sprintf( esc_html__( 'WARNING: If you are having trouble saving your settings, please increase the %s "PHP Max Input Vars" %s value to save all settings. Contact your hosting provider for help on this matter. Otherwise, you will not be able to save all settings.', 'tourfic' ), '<strong>', '</strong>' ); ?>
+                    </div>
+                </div>
 			<?php
 			endif;
+		}
+
+		function count_input_vars($array) {
+			$count = 0;
+			foreach ($array as $key => $value) {
+				$count++;
+				if (is_array($value)) {
+					$count += $this->count_input_vars($value);
+				}
+			}
+			return $count;
 		}
 
 		/**
