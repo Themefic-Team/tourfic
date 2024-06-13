@@ -2543,8 +2543,14 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 								<?php } ?>
 							<?php } ?>
 						</ul>
-						
 					</div>
+					<?php
+						if ( ! empty( $$meta['hotel-facilities'] ) ) {
+							if ( count( $$meta['hotel-facilities'] ) > 4 ) {
+								echo '<span>More....</span>';
+							}
+						}
+					?>
 				<?php endif; ?>
 
 				<!-- Hotel T2 Archive Feature End -->
