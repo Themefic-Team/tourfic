@@ -330,50 +330,30 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 						<?php the_content(); ?>
                     </div>
                     <!-- Start features -->
-					<?php if ( $meta['hotel-facilities'] && count( $meta['hotel-facilities'] ) > 0 ) { ?>
+					<?php if ( $features && count( $features ) > 0 ) { ?>
                         <div class="tf_features">
-							<?php if ( ! empty( $meta['popular-section-title'] ) ): ?>
-                                <h3 class="section-heading"><?php echo esc_html( $meta['popular-section-title'] ); ?></h3>
-							<?php endif; ?>
+                            <?php if( !empty( $meta['popular-section-title'] ) ): ?>
+                                <h3 class="section-heading"><?php echo esc_html($meta['popular-section-title']); ?></h3>
+                            <?php endif; ?>
+                            
                             <div class="tf-feature-list">
-								<?php 
-                                $favourite_features = array();
-                                foreach ( $meta['hotel-facilities'] as $facility ) {
-                                    if ( $facility["favorite"] ) {
-                                        $favourite_features[$facility['facilities-feature']] = $facility["facilities-feature"];
-                                    }
-                                }
-                                if(!empty($favourite_features) && is_array($favourite_features)) : 
-                                    foreach($favourite_features as $feature) {
-                                        $feature_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
-                                        $feature_name = get_term( $feature );
-                                        $f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+                                <?php foreach ( $features as $feature ) {
+                                    $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
+                                    $f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+                                    if ( $f_icon_type == 'fa' ) {
+                                        $feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
+                                    } elseif ( $f_icon_type == 'c' ) {
+                                        $feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
+                                    } ?>
 
-                                        if ( $f_icon_type == 'fa' && !empty($feature_meta['icon-fa']) ) {
-                                            $feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
-                                        } elseif ( $f_icon_type == 'c' && !empty($feature_meta['icon-c']) ) {
-                                            $feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
-                                        } ?>
-                                        <div class="single-feature-box">
-                                            <?php echo ! empty( $feature_meta ) && ! empty( $feature_icon ) ? wp_kses_post( $feature_icon ) : ''; ?>
-                                            <span class="feature-list-title"><?php echo esc_html( $feature_name->name ); ?></span>
-                                        </div>
-                                   <?php } ?>
-                               <?php endif; ?>
-                                
-                               <?php
-                                foreach ( $features as $feature ) {
-									$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
-									$f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
-									if ( $f_icon_type == 'fa' ) {
-										$feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
-									} elseif ( $f_icon_type == 'c' ) {
-										$feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
-									} ?>
-								<?php } ?>
+                                    <div class="single-feature-box">
+                                    <?php echo !empty($feature_meta) && !empty($feature_icon) ? wp_kses_post($feature_icon) : ''; ?>
+                                        <span class="feature-list-title"><?php echo esc_html($feature->name); ?></span>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
-					<?php } ?>
+                    <?php } ?>
                     <!-- End features -->
                 </div>
                 <div class="hero-right">
