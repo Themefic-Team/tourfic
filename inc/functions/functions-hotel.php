@@ -2507,9 +2507,8 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                 </div>
 				<?php tf_archive_single_rating(); ?>
 
-				<!-- Hotel T2 Archive Feature Start -->
-
-				<?php if ( $meta['hotel-facilities'] ) : ?>
+				<!-- Hotel Template 2 Archive Feature Start -->
+				<?php if ( !empty($meta['hotel-facilities']) ) : ?>
                     <div class="tf-archive-features tf-mt-16">
                         <ul>
 							<?php
@@ -2531,29 +2530,25 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 										$feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
 									} ?>
 
-									<?php if ( $feature_key <= 4 ) { ?>
+									<?php if ( $feature_key < 4 ) { ?>
 										<li class="tf-feature-lists">
 											<?php
-											if ( ! empty( $feature_icon ) ) {
+											if ( ! empty( $feature_icon ) && !empty($feature_meta['icon-fa']) ) {
 												echo wp_kses_post( $feature_icon );
 											} ?>
 											<?php echo esc_html( $feature_name->name ); ?>
 										</li>
 									<?php } ?>
 								<?php } ?>
-							<?php } ?>
-						</ul>
-					</div>
-					<?php
-						if ( ! empty( $$meta['hotel-facilities'] ) ) {
-							if ( count( $$meta['hotel-facilities'] ) > 4 ) {
+							<?php } 
+							if ( sizeof( $favourite_features ) > 4 ) {
 								echo '<span>More....</span>';
 							}
-						}
-					?>
+							?>
+						</ul>
+					</div>
 				<?php endif; ?>
-
-				<!-- Hotel T2 Archive Feature End -->
+				<!-- Hotel Template 2 Archive Feature End -->
 
                 <div class="tf-details tf-mt-16">
                     <p><?php echo wp_kses_post( substr( wp_strip_all_tags( get_the_content() ), 0, 100 )  ). '...'; ?></p>
@@ -2704,33 +2699,46 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 					</div>
 				</div>
 				</div>
-				<?php if ( $features ) { ?>
-				<ul class="features">
-				<?php foreach ( $features as $tfkey => $feature ) {
-				$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
-				if ( ! empty( $feature_meta ) ) {
-					$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
-				}
-				if ( ! empty( $f_icon_type ) && $f_icon_type == 'fa' ) {
-					$feature_icon = ! empty( $feature_meta['icon-fa'] ) ? '<i class="' . $feature_meta['icon-fa'] . '"></i>' : '';
-				} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'c' ) {
-					$feature_icon = ! empty( $feature_meta['icon-c'] ) ? '<img src="' . $feature_meta['icon-c'] . '" style="min-width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />' : '';
-				}
-				if ( $tfkey < 5 ) {
-				?>
-					<li>
-					<?php
-					if ( ! empty( $feature_icon ) ) {
-						echo wp_kses_post( $feature_icon );
-					} ?>
-					<?php echo esc_html( $feature->name ); ?>
-					</li>
-				<?php } } ?>
-				<?php if(count($features)>5){ ?>
-					<li><a href="<?php echo esc_url( $url ); ?>"><?php esc_html_e("View More", "tourfic"); ?></a></li>
-				<?php } ?>
-				</ul>
-				<?php } ?>
+				<!-- Hotel Template 3 Archive Feature Start -->
+				<?php if ( !empty($meta['hotel-facilities']) ) : ?>
+					<ul class="features">
+						<?php
+						$favourite_features = array();
+						foreach ( $meta['hotel-facilities'] as $facility ) {
+							if ( $facility["favorite"] ) {
+								$favourite_features[] = $facility["facilities-feature"];
+							}
+						}
+						if(!empty($favourite_features) && is_array($favourite_features)) {
+							foreach($favourite_features as $feature_key => $feature) {
+								$feature_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
+								$feature_name = get_term( $feature );
+								$f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+
+								if ( ! empty( $f_icon_type ) && $f_icon_type == 'fa' ) {
+									$feature_icon = ! empty( $feature_meta['icon-fa'] ) ? '<i class="' . $feature_meta['icon-fa'] . '"></i>' : '';
+								} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'c' ) {
+									$feature_icon = ! empty( $feature_meta['icon-c'] ) ? '<img src="' . $feature_meta['icon-c'] . '" style="min-width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />' : '';
+								} 
+
+								if ( $feature_key < 5 ) { ?>
+									<li>
+										<?php
+										if ( ! empty( $feature_icon ) && !empty($feature_meta['icon-fa']) ) {
+											echo wp_kses_post( $feature_icon );
+										} ?>
+										<?php echo esc_html( $feature_name->name ); ?>
+									</li>
+								<?php } ?>
+							<?php } ?>
+						<?php } 
+						if ( sizeof( $favourite_features ) > 5 ) {
+							?><li><a href="<?php echo esc_url( $url ); ?>"><?php esc_html_e("View More", "tourfic"); ?></a></li><?php
+						}
+						?>
+					</ul>
+				<?php endif; ?>
+				<!-- Hotel Template 3 Archive Feature End -->
 			</div>
 			<div class="tf-available-room-content-right">
 				<div class="tf-card-pricing-heading">
@@ -2844,36 +2852,47 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                                 <div class="roomNameInner">
                                     <div class="room_link">
                                         <div class="roomrow_flex">
-											<?php if ( $features ) { ?>
-                                                <div class="roomName_flex">
+											<!-- Hotel Template 1 Archive Feature Start -->
+											<?php if ( !empty($meta['hotel-facilities']) ) : ?>
+												<div class="roomName_flex">
                                                     <ul class="tf-archive-desc">
-														<?php foreach ( $features as $feature ) {
-															$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
-															if ( ! empty( $feature_meta ) ) {
-																$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+														<?php
+														$favourite_features = array();
+														foreach ( $meta['hotel-facilities'] as $facility ) {
+															if ( $facility["favorite"] ) {
+																$favourite_features[] = $facility["facilities-feature"];
 															}
-															if ( ! empty( $f_icon_type ) && $f_icon_type == 'fa' ) {
-																$feature_icon = ! empty( $feature_meta['icon-fa'] ) ? '<i class="' . $feature_meta['icon-fa'] . '"></i>' : '<i class="fas fa-bread-slice"></i>';
-															} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'c' ) {
-																$feature_icon = ! empty( $feature_meta['icon-c'] ) ? '<img src="' . $feature_meta['icon-c'] . '" style="min-width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />' : '<i class="fas fa-bread-slice"></i>';
-															} else {
-																$feature_icon = '<i class="fas fa-bread-slice"></i>';
-															}
-															?>
-                                                            <li class="tf-tooltip">
-																<?php
-																if ( ! empty( $feature_icon ) ) {
-																	echo wp_kses_post( $feature_icon );
+														}
+														if(!empty($favourite_features) && is_array($favourite_features)) {
+															foreach($favourite_features as $feature_key => $feature) {
+																$feature_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
+																$feature_name = get_term( $feature );
+																$f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+
+																if ( ! empty( $f_icon_type ) && $f_icon_type == 'fa' ) {
+																	$feature_icon = ! empty( $feature_meta['icon-fa'] ) ? '<i class="' . $feature_meta['icon-fa'] . '"></i>' : '';
+																} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'c' ) {
+																	$feature_icon = ! empty( $feature_meta['icon-c'] ) ? '<img src="' . $feature_meta['icon-c'] . '" style="min-width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />' : '';
+																} else {
+																	$feature_icon = '<i class="fas fa-bread-slice"></i>';
 																} ?>
-                                                                <div class="tf-top">
-																	<?php echo esc_html( $feature->name ); ?>
-                                                                    <i class="tool-i"></i>
-                                                                </div>
-                                                            </li>
+																<li class="tf-tooltip">
+																	<?php
+																	if ( ! empty( $feature_icon ) ) {
+																		echo wp_kses_post( $feature_icon );
+																	} ?>
+																	<div class="tf-top">
+																		<?php echo esc_html( $feature_name->name ); ?>
+																		<i class="tool-i"></i>
+																	</div>
+																</li>
+															<?php } ?>
 														<?php } ?>
-                                                    </ul>
-                                                </div>
-											<?php } ?>
+													</ul>
+												</div>
+											<?php endif; ?>
+											<!-- Hotel Template 1 Archive Feature End -->
+											
                                             <div class="roomPrice roomPrice_flex sr_discount" style="<?php echo empty( $features ) ? 'text-align:left' : ''; ?>">
                                                 <div class="availability-btn-area">
                                                     <a href="<?php echo esc_url( $url ); ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
