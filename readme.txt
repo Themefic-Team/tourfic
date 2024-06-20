@@ -329,6 +329,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 -Fixed: Settings Saving Issue fixed
 -Fixed: Hotel/Apartment Feature Sidebar Issue Fixed
 -Fixed: The ical Sync Issue fixed
+-Compatible with WordPress 6.5.4
 
 = 2.12.2 - 29 May 2024 =
 
