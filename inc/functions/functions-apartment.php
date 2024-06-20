@@ -1198,13 +1198,17 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 						<?php tf_flatpickr_locale(); ?>
                     });
 
+					// Need to change the date format
                     function dateSetToFields(selectedDates, instance) {
-                        if (selectedDates.length === 2) {
-                            if (selectedDates[0]) {
-                                $(".tf-apartment-design-one-form #check-in-date").val(selectedDates[0].toLocaleDateString());
+						
+						var dates = instance.altInput.value.split(' - ');
+
+                        if (dates.length === 2) {
+                            if (dates[0]) {
+                                $(".tf-apartment-design-one-form #check-in-date").val(dates[0]);
                             }
-                            if (selectedDates[1]) {
-                                $(".tf-apartment-design-one-form #check-out-date").val(selectedDates[1].toLocaleDateString());
+                            if (dates[1]) {
+                                $(".tf-apartment-design-one-form #check-out-date").val(dates[1]);
                             }
                         }
                     }
