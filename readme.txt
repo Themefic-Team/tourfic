@@ -324,12 +324,15 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 = 2.12.3 - 20 June 2024 =
 
--Improvement: File structure update
--Fixed: Minor Bugs fixed
--Fixed: Settings Saving Issue fixed
--Fixed: Hotel/Apartment Feature Sidebar Issue Fixed
--Fixed: The ical Sync Issue fixed
--Compatible with WordPress 6.5.4
+- Fixed: Settings Saving issue fixed
+- Fixed: Hotel/Apartment Feature Sidebar issue 
+- Fixed: The iCal Sync issue fixed
+- Fixed: Minor Bugs fixed
+- Fixed: Vendor commission calculation issue
+- Fixed: Tour,hotel, apartment feature update issue
+- Improvement: Optimized code and file structure 
+- Improvement: System stability improved
+- Compatible with WordPress 6.5.4
 
 = 2.12.2 - 29 May 2024 =
 
