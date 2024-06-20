@@ -654,7 +654,7 @@ class Enqueue {
 		 */
 		// Get single tour meta data
 		global $post;
-		if ( ! is_404() && ! empty( $post ) ) {
+		if ( ! is_404() && ! empty( $post ) && is_single() ) {
 			$meta = ! empty( get_post_meta( $post->ID, 'tf_tours_opt', true ) ) ? get_post_meta( $post->ID, 'tf_tours_opt', true ) : '';
 		}
 		$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';

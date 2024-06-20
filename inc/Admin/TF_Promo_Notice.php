@@ -192,17 +192,17 @@ class TF_Promo_Notice {
     public function tf_black_friday_2023_hotel_tour_docs() {
         $tf_hotel_friday_sidbar_notice = get_option( 'tf_hotel_friday_sidbar_notice' );  
 		if ( $tf_hotel_friday_sidbar_notice == 1  || time() >  $tf_hotel_friday_sidbar_notice ) {
-			add_meta_box( 'tfhotel_black_friday_docs', esc_html( ' ', 'tourfic' ), array($this, 'tf_black_friday_2023_callback_hotel'), 'tf_hotel', 'side', 'high' );
+			add_meta_box( 'tfhotel_black_friday_docs', '', array($this, 'tf_black_friday_2023_callback_hotel'), 'tf_hotel', 'side', 'high' );
 		}
 
         $tf_tour_friday_sidbar_notice = get_option( 'tf_tour_friday_sidbar_notice' );  
 		if ( $tf_tour_friday_sidbar_notice == 1  || time() >  $tf_tour_friday_sidbar_notice ) { 
-			add_meta_box( 'tftour_black_friday_docs', esc_html( ' ', 'tourfic' ), array($this, 'tf_black_friday_2023_callback_tour'), 'tf_tours', 'side', 'high' );
+			add_meta_box( 'tftour_black_friday_docs', '', array($this, 'tf_black_friday_2023_callback_tour'), 'tf_tours', 'side', 'high' );
 		}
 
         $tf_apartment_friday_sidbar_notice = get_option( 'tf_apartment_friday_sidbar_notice' );  
 		if ( $tf_apartment_friday_sidbar_notice == 1  || time() >  $tf_apartment_friday_sidbar_notice ) {  
-			add_meta_box( 'tfapartment_black_friday_docs', esc_html( ' ', 'tourfic' ), array($this, 'tf_black_friday_2023_callback_apartment'), 'tf_apartment', 'side', 'high' );
+			add_meta_box( 'tfapartment_black_friday_docs', '', array($this, 'tf_black_friday_2023_callback_apartment'), 'tf_apartment', 'side', 'high' );
 		}
 	}
 
