@@ -102,13 +102,6 @@ if ( file_exists( TF_INC_PATH . 'functions/functions_vat.php' ) ) {
     tf_file_missing( TF_INC_PATH . 'functions/functions_vat.php' );
 }
 
-# Google Fonts
-if ( file_exists( TF_INC_PATH . 'functions/functions-fonts.php' ) ) {
-	require_once TF_INC_PATH . 'functions/functions-fonts.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/functions-fonts.php' );
-}
-
 add_action( 'plugins_loaded', 'tf_add_elelmentor_addon' );
 
 /**

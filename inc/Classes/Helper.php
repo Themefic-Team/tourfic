@@ -7,6 +7,7 @@ use \Tourfic\Admin\Emails\TF_Handle_Emails;
 
 class Helper {
 	use \Tourfic\Traits\Singleton;
+	use \Tourfic\Traits\TF_Fonts;
 
 	public function __construct() {
 		add_filter( 'body_class', array( $this, 'tf_templates_body_class' ) );
