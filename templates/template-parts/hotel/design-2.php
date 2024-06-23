@@ -143,21 +143,36 @@ use \Tourfic\Classes\Helper;
                     <li><a class="tf-hashlink" href="#tf-hotel-overview">
                         <?php esc_html_e("Overview", "tourfic"); ?>
                     </a></li>
-                    <li><a href="#tf-hotel-rooms">
-                        <?php esc_html_e("Rooms", "tourfic"); ?>
-                    </a></li>
-                    <li><a href="#tf-hotel-facilities">
-                        <?php esc_html_e("Facilities", "tourfic"); ?>
-                    </a></li>
-                    <li><a href="#tf-hotel-reviews">
-                        <?php esc_html_e("Reviews", "tourfic"); ?>
-                    </a></li>
-                    <li><a href="#tf-hotel-faq">
-                        <?php esc_html_e("FAQ's", "tourfic"); ?>
-                    </a></li>
-                    <li><a href="#tf-hotel-policies">
-                        <?php esc_html_e("Policies", "tourfic"); ?>
-                    </a></li>
+
+                   <?php if( !empty($meta['room']))  : ?>
+                        <li><a href="#tf-hotel-rooms">
+                            <?php esc_html_e("Rooms", "tourfic"); ?>
+                        </a></li>
+                    <?php endif; ?>
+
+                    <?php if( !empty( $meta["hotel-facilities"] )) : ?>
+                        <li><a href="#tf-hotel-facilities">
+                            <?php esc_html_e("Facilities", "tourfic"); ?>
+                        </a></li>
+                    <?php endif; ?>
+
+                    <?php if( !empty( $comments )) : ?>
+                        <li><a href="#tf-hotel-reviews">
+                            <?php esc_html_e("Reviews", "tourfic"); ?>
+                        </a></li>
+                    <?php endif; ?>
+
+                    <?php if( !empty( $meta["faq"] )) : ?>
+                        <li><a href="#tf-hotel-faq">
+                            <?php esc_html_e("FAQ's", "tourfic"); ?>
+                        </a></li>
+                    <?php endif; ?>
+
+                    <?php if( !empty( $meta["tc"] )): ?>
+                        <li><a href="#tf-hotel-policies">
+                            <?php esc_html_e("Policies", "tourfic"); ?>
+                        </a></li>
+                    <?php endif; ?>
                 </ul>
             </div>
             <!-- menu section End -->

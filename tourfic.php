@@ -7,11 +7,11 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.12.0
+ * Version:         2.12.4
  * Tested up to:    6.5
- * WC tested up to: 8.8
+ * WC tested up to: 9.0
  * Requires PHP:    7.4
- * Elementor tested up to: 3.21
+ * Elementor tested up to: 3.22
  */
 
 // don't load directly
@@ -24,7 +24,7 @@ final class Tourfic {
 	 *
 	 * @var string
 	 */
-	const VERSION = '2.12.0';
+	const VERSION = '2.12.4';
 
 	/**
 	 * Minimum PHP version required.
@@ -88,6 +88,7 @@ final class Tourfic {
 	 * Define Tourfic Constants.
 	 */
 	private function define_constants() {
+		define( 'TOURFIC', self::VERSION );
 		define( 'TF_VERSION', self::VERSION );
 		define( 'TF_MINIMUM_PHP_VERSION', self::MINIMUM_PHP_VERSION );
 		define( 'TF_MINIMUM_WC_VERSION', self::MINIMUM_WC_VERSION );

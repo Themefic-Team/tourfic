@@ -916,7 +916,7 @@ abstract Class TF_Booking_Details {
                     <?php 
                     for($traveller_in = 1; $traveller_in <= $tf_total_visitor; $traveller_in++){ ?>
                         <div class="tf-single-tour-traveller tf-single-travel">
-                            <h4><?php echo esc_html( 'Traveler '.$traveller_in, 'tourfic' ); ?></h4>
+                            <h4><?php echo esc_html__( 'Traveler ', 'tourfic' ) . esc_html($traveller_in) ?></h4>
                             <div class="traveller-info">
                             <?php
                             if(empty($traveler_fields)){ ?>

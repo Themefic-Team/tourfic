@@ -408,7 +408,7 @@
             let iconListBottom = 0;
             let searchVal = $('.tf-icon-search-input').val();
 
-            iconList.scroll(function () {
+            iconList.on("scroll", function () {
                 let type = $('.tf-icon-tab-pane.active').data('type');
                 let max = $('.tf-icon-tab-pane.active').data('max');
                 iconListBottom = iconList[0].scrollHeight - iconList.height();
@@ -460,16 +460,16 @@
                     data.append('file[]', fontsfile[i]);
                 }
             }
-            // get tf_import_option from data  
+            // get tf_import_option from data
             let tf_import_option =  false
             if (typeof data.get('tf_import_option') !== "undefined" && data.get('tf_import_option').trim() != '') {
-            
+
                 //  confirm data before send
                 if (!confirm(tf_options.tf_export_import_msg.import_confirm)) {
                     return;
                 }
-                
-                tf_import_option = true; 
+
+                tf_import_option = true;
             }
             data.append('action', 'tf_options_save');
 
@@ -503,7 +503,21 @@
                     }
                 },
                 error: function (error) {
-                    console.log(error);
+                    submitBtn.removeClass('tf-btn-loading');
+                    console.log(error['responseText']);
+                    //if error msg contain max_input_vars then show a proper msg
+                    if(error['responseText'].includes('max_input_vars')) {
+                        notyf.error({
+                            message: tf_admin_params.max_input_vars_notice,
+                            duration: 15000,
+                            dismissible: true
+                        });
+                    } else {
+                        notyf.error({
+                            message: error['responseText'],
+                            duration: 6000
+                        });
+                    }
                 }
             });
         });
@@ -1596,7 +1610,7 @@ var frame, gframe;
 
 
         // Texonomy submit event
-        $('#addtag > .submit #submit').click(function () {
+        $('#addtag > .submit #submit').on("click", function () {
             $(".tf-fieldset-media-preview").html("");
         });
 
@@ -1748,13 +1762,13 @@ var frame, gframe;
             });
         }
 
-        $('.tf-mobile-tabs').click(function (e) {
+        $('.tf-mobile-tabs').on("click", function (e) {
             e.preventDefault();
             $(".tf-admin-tab").toggleClass('active');
         });
 
 
-        $('.tf-faq-title').click(function () {
+        $('.tf-faq-title').on("click", function () {
             var $this = $(this);
             if (!$this.hasClass("active")) {
                 $(".tf-faq-desc").slideUp(400);
@@ -2253,7 +2267,7 @@ var frame, gframe;
         var $this = $(this);
         $this.parents('.tf-shortcode-generator-single').find('.tf-sg-form-wrapper').fadeIn();
 
-        $this.parents('.tf-shortcode-generator-single').mouseup(function (e) {
+        $this.parents('.tf-shortcode-generator-single').on("mouseup", function (e) {
             var container = $(this).find(".tf-shortcode-generator-form");
             var container_parent = container.parent(".tf-sg-form-wrapper");
             if (!container.is(e.target) && container.has(e.target).length === 0) {
@@ -2332,10 +2346,8 @@ var frame, gframe;
     $(document).ready(function () {
         // $('.tf-import-btn').on('click', function (event) {
         //     event.preventDefault();
-
         //     // Get the import URL from the button's href attribute
         //     var importUrl = $(this).attr('href');
-
         //     // Get the import data from the textarea
         //     var importData = $('textarea[name="tf_import_option"]').val().trim();
         //     if (importData == '') {
@@ -2349,7 +2361,6 @@ var frame, gframe;
         //         if (!confirm(tf_options.tf_export_import_msg.import_confirm)) {
         //             return;
         //         }
-
         //         $.ajax({
         //             url: importUrl,
         //             method: 'POST',
@@ -2389,66 +2400,54 @@ var frame, gframe;
             $(".tf-option-form").submit(); 
         });
 
-        // $('#addtag > .submit #submit').click(function (event) {
-
-        //     data = {
-        //         action: 'tf_taxonomy_update_dynamically',
-        //         taxonomy : $("input[name='taxonomy']").val(),
-        //     }
-           
-        //     $.ajax({
-        //         url: tf_options.ajax_url,
-        //         method: 'POST',
-        //         data: data,
-        //         success: function (response) {
-        //             console.log(response);
-        //         },
-        //         error: function (response) {
-        //             console.log(response);
-        //         },
-        //     });
-        // });
-    });
-
-    /*
-        $(document).on("ajaxSuccess", function (event, xhr, settings) {
-
-            console.log(settings)
-            
-
-            data = {
-                action: 'tf_taxonomy_update_dynamically',
-                taxonomy : $("input[name='taxonomy']").val(),
-            }
-          
-        })
-
-    */
-
-    //export the data in txt file
-    jQuery(document).ready(function ($) {
-        $('.tf-export-btn').on('click', function (event) {
+        $(document).on('click', '.tf-export-btn', function (event) {
             event.preventDefault();
 
-            // Get the textarea value
-            var textareaValue = $('textarea[name="tf_export_option"]').val();
+            $.ajax({
+                url: tf_options.ajax_url,
+                method: 'POST',
+                data: {
+                    action: 'tf_export_data',
+                    _nonce: tf_admin_params.tf_nonce,
+                },
+                beforeSend: function () {
+                    $('.tf-export-btn').html('Exporting...');
+                    $('.tf-export-btn').attr('disabled', 'disabled');
+                },
+                success: function (response) {
+                    let obj = JSON.parse(response);
 
-            // Create a blob with the textarea value
-            var blob = new Blob([textareaValue], {type: 'text/plain'});
+                    if (obj.status === 'success') {
+                        // Create a blob with the response value
+                        var blob = new Blob([obj.data], {type: 'text/plain'});
 
-            // Create a temporary URL for the blob
-            var url = window.URL.createObjectURL(blob);
+                        // Create a temporary URL for the blob
+                        var url = window.URL.createObjectURL(blob);
 
-            // Create a temporary link element
-            var link = document.createElement('a');
-            link.href = url;
-            link.download = 'tf-settings-export.json';
+                        // Create a temporary link element
+                        var link = document.createElement('a');
+                        link.href = url;
+                        link.download = 'tf-settings-export.json';
 
-            // Programmatically click the link to initiate the file download
-            link.click();
+                        // Programmatically click the link to initiate the file download
+                        link.trigger("click");
 
-            // Clean up the temporary URL
-            window.URL.revokeObjectURL(url);
+                        // Clean up the temporary URL
+                        window.URL.revokeObjectURL(url);
+                    } else {
+                        alert('Something went wrong!');
+                    }
+                    $('.tf-export-btn').html('Export');
+                    $('.tf-export-btn').removeAttr('disabled');
+                },
+                error: function (response) {
+                    console.log(response);
+                    $('.tf-export-btn').html('Export');
+                    $('.tf-export-btn').removeAttr('disabled');
+                }
+            });
+
+
         });
     });
 

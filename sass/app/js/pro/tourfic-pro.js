@@ -239,7 +239,7 @@
             $('.tf-modal').removeClass('tf-modal-show');
             $('body').removeClass('tf-modal-open');
         });
-        $(document).click(function (event) {
+        $(document).on("click", function (event) {
             if (!$(event.target).closest(".tf-modal-content,.tf-modal-btn").length) {
                 $("body").removeClass("tf-modal-open");
                 $(".tf-modal").removeClass("tf-modal-show");
@@ -476,7 +476,7 @@
 
 
         //Tour Expand/Close
-        $('#itinerary-switcher').click(function () {
+        $('#itinerary-switcher').on("click", function () {
             if ($(this).is(':checked')) {
                 $(".tf-ininerary-content").show();
                 $('.arrow').addClass('arrow-animate');

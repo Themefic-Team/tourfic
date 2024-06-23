@@ -242,8 +242,8 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 					// flatpickr locale first day of Week
 					<?php tf_flatpickr_locale("root"); ?>
 
-					$(".tf_apartment_check_in_out_date").click(function(){
-						$(".tf-apartment-check-in-out-date").click();
+					$(".tf_apartment_check_in_out_date").on("click", function(){
+						$(".tf-apartment-check-in-out-date").ctrigger("click");
 					});
 					$(".tf-apartment-check-in-out-date").flatpickr({
 						enableTime: false,
@@ -486,7 +486,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
 		$apt_availability    = ! empty( $meta['apt_availability'] ) ? $meta['apt_availability'] : '';
 		$booked_dates        = tf_apartment_booked_days( get_the_ID() );
-		$apt_reserve_button_text = !empty(tfopt('apartment_booking_form_button_text')) ? stripslashes(sanitize_text_field(tfopt('apartment_booking_form_button_text'))) : esc_html__("Reserve", 'tourfic');
+		$apt_reserve_button_text = !empty(Helper::tfopt('apartment_booking_form_button_text')) ? stripslashes(sanitize_text_field(Helper::tfopt('apartment_booking_form_button_text'))) : esc_html__("Reserve", 'tourfic');
 
 		$tf_booking_type = '1';
 		$tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = '';
@@ -500,7 +500,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		}
 
 		// date format for apartment
-		$date_format_change_appartments = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+		$date_format_change_appartments = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 			$additional_fees = ! empty( $meta['additional_fees'] ) ? Helper::tf_data_types( $meta['additional_fees'] ) : array();
@@ -567,7 +567,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		if("single"==$tf_apartment_layout_conditions){
 			$tf_apartment_single_template = ! empty( $meta['tf_single_apartment_template'] ) ? $meta['tf_single_apartment_template'] : 'default';
 		}
-		$tf_apartment_global_template = ! empty( Helper::tf_data_types(tfopt( 'tf-template' ))['single-apartment'] ) ? Helper::tf_data_types(tfopt( 'tf-template' ))['single-apartment'] : 'default';
+		$tf_apartment_global_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-apartment'] : 'default';
 
 		$tf_apartment_selected_check = !empty($tf_apartment_single_template) ? $tf_apartment_single_template : $tf_apartment_global_template;
 
@@ -1155,7 +1155,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                     }
 
                     $(".tf-apartment-design-one-form #check-in-date").on('click', function () {
-                        $(".tf-check-out-date .form-control").click();
+                        $(".tf-check-out-date .form-control").trigger( "click" );
                     });
 
                     const checkinoutdateange = flatpickr("#tf-apartment-booking #check-in-out-date", {
@@ -1198,13 +1198,17 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 						<?php tf_flatpickr_locale(); ?>
                     });
 
+					// Need to change the date format
                     function dateSetToFields(selectedDates, instance) {
-                        if (selectedDates.length === 2) {
-                            if (selectedDates[0]) {
-                                $(".tf-apartment-design-one-form #check-in-date").val(selectedDates[0].toLocaleDateString());
+						
+						var dates = instance.altInput.value.split(' - ');
+
+                        if (dates.length === 2) {
+                            if (dates[0]) {
+                                $(".tf-apartment-design-one-form #check-in-date").val(dates[0]);
                             }
-                            if (selectedDates[1]) {
-                                $(".tf-apartment-design-one-form #check-out-date").val(selectedDates[1].toLocaleDateString());
+                            if (dates[1]) {
+                                $(".tf-apartment-design-one-form #check-out-date").val(dates[1]);
                             }
                         }
                     }
@@ -2655,7 +2659,7 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
 }
 
 /**
- * Assign taxonomy(tour_type) from the single post metabox
+ * Assign taxonomy(apartment_feature) from the single post metabox
  * to a Tour when updated or published
  * @return array();
  * @author Foysal

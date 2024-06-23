@@ -1,6 +1,53 @@
 (function ($, win) {
     $(document).ready(function () {
 
+
+        function tf_flatpickr_locale() {
+            let locale = tf_params.tour_form_data.flatpickr_locale;
+            let allowed_locales = ['ar', 'bn_BD', 'de_DE', 'es_ES', 'fr_FR', 'hi_IN', 'it_IT', 'nl_NL', 'ru_RU', 'zh_CN' ];
+
+            if( jQuery.inArray(locale, allowed_locales) !== -1 ) {
+                
+                switch (locale) {
+                    case "bn_BD":
+                        locale = 'bn';
+                        break;
+                    case "de_DE":
+                        locale = 'de';
+                        break;
+                    case "es_ES":
+                        locale = 'es';
+                        break;
+                    case "fr_FR":
+                        locale = 'fr';
+                        break;
+                    case "hi_IN":
+                        locale = 'hi';
+                        break;
+                    case "it_IT":
+                        locale = 'it';
+                        break;
+                    case "nl_NL":
+                        locale = 'nl';
+                        break;
+                    case "ru_RU":
+                        locale = 'ru';
+                        break;
+                    case "zh_CN":
+                        locale = 'zh';
+                        break;
+                }
+            } else {
+                locale = 'default';
+            }
+
+            return locale;
+        }
+
+        // let locale_zone = tf_flatpickr_locale();
+
+        window.flatpickr.l10ns[tf_flatpickr_locale()].firstDayOfWeek = tf_params.tour_form_data.first_day_of_week;
+
         // Create an instance of Notyf
         const notyf = new Notyf({
             ripple: true,
@@ -209,6 +256,11 @@
             formData.append('action', 'tf_tour_search');
             formData.append('_nonce', tf_params.nonce);
 
+            if (formData.get('from') == null || formData.get('to') == null) {
+                formData.append('from', tf_params.tf_tour_min_price);
+                formData.append('to', tf_params.tf_tour_max_price);
+            }
+
             $.ajax({
                 url: tf_params.ajax_url,
                 type: 'POST',
@@ -344,7 +396,7 @@
                     e.preventDefault();
                     if (currentFocus > -1) {
                         /*and simulate a click on the "active" item:*/
-                        if (x) x[currentFocus].click();
+                        if (x) x[currentFocus].trigger("click");;
                     }
                 }
             });
@@ -391,7 +443,7 @@
         * New Template Itinerary Accordion
         * @author: Jahid
         */
-        $('.tf-itinerary-title').click(function () {
+        $('.tf-itinerary-title').on("click", function () {
             var $this = $(this);
             if (!$this.hasClass("active")) {
                 $(".tf-itinerary-content-box").slideUp(400);
@@ -407,7 +459,7 @@
         * New Template Tour Extra
         * @author: Jahid
         */
-        $('.tf-form-title.tf-tour-extra').click(function () {
+        $('.tf-form-title.tf-tour-extra').on("click", function () {
             var $this = $(this);
             if (!$this.hasClass("active")) {
                 $(".tf-tour-extra-box").slideUp(400);
@@ -418,7 +470,7 @@
         });
 
         // Itinerary Accordion
-        $('.tf-accordion-head').click(function () {
+        $('.tf-accordion-head').on("click", function () {
             $(this).toggleClass('active');
             $(this).parent().find('.arrow').toggleClass('arrow-animate');
             $(this).parent().find('.tf-accordion-content').slideToggle();
@@ -457,7 +509,7 @@
 
         // Tour Destination
 
-        $('#tf-tour-location-adv').click(function (e) {
+        $('#tf-tour-location-adv').on("click", function (e) {
             var location = $(this).val();
             if (location) {
                 $(".tf-tour-results").removeClass('tf-destination-show');
@@ -465,11 +517,11 @@
                 $(".tf-tour-results").addClass('tf-destination-show');
             }
         });
-        $('#tf-tour-location-adv').keyup(function (e) {
+        $('#tf-tour-location-adv').on("keyup", function (e) {
             var location = $(this).val();
             $("#tf-tour-place").val(location);
         });
-        $('#tf-destination').keyup(function (e) {
+        $('#tf-destination').on("keyup", function (e) {
             var tf_location = $(this).val();
             $("#tf-search-tour").val(tf_location);
         });
@@ -478,7 +530,7 @@
                 $(".tf-tour-results").removeClass('tf-destination-show');
             }
         });
-        $('#ui-id-2 li').click(function (e) {
+        $('#ui-id-2 li').on("click", function (e) {
             var dest_name = $(this).attr("data-name");
             var dest_slug = $(this).attr("data-slug");
             $(".tf-tour-preview-place").val(dest_name);
@@ -496,7 +548,7 @@
         /**
          * Single tour sticky booking bar position fixed
          */
-        $(window).scroll(function () {
+        $(window).on("scroll", function () {
             var sticky = $('.tf-tour-booking-wrap'),
                 scroll = $(window).scrollTop();
 
@@ -509,7 +561,7 @@
          * @author Foysal
          */
         if ($('.tf-tour-booking-box').length > 0) {
-            $(window).scroll(function () {
+            $(window).on("scroll", function () {
                 let bookingBox = $('.tf-tour-booking-box');
                 let bottomBar = $('.tf-bottom-booking-bar');
                 let boxOffset = bookingBox.offset().top + bookingBox.outerHeight();
@@ -565,9 +617,7 @@
             dateFormat: "Y/m/d",
             altInput: true,
             altFormat: tf_params.tour_form_data.date_format,
-            // locale: {
-            //     firstDayOfWeek: first_day_of_week,
-            // },
+            locale: tf_flatpickr_locale(),
             
             onReady: function (selectedDates, dateStr, instance) {
                 instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -604,6 +654,7 @@
         if(tf_params.tour_form_data.tour_type == 'continuous'){
             tour_date_options.minDate = "today";
             tour_date_options.disableMobile = "true";
+
             if (custom_avail == true) {
                 tour_date_options.enable = tf_params.tour_form_data.cont_custom_date.map((v) => {
                     return {
@@ -612,6 +663,7 @@
                     }
                 });
             }
+
             if (custom_avail == false) {
                 if (tf_params.tour_form_data.disabled_day || tf_params.tour_form_data.disable_range || tf_params.tour_form_data.disable_specific || tf_params.tour_form_data.disable_same_day) {
                     tour_date_options.disable = [];
@@ -633,16 +685,20 @@
                     }
                     if (tf_params.tour_form_data.disable_same_day) {
                         tour_date_options.disable.push("today");
-                        if (tf_params.tour_form_data.disable_specific) {
-                            var disable_specific_string = tf_params.tour_form_data.disable_specific.split(", ");
-                            disable_specific_string.forEach(function(date) {
-                                tour_date_options.disable.push(date);
-                            });
-                        }
+                    }
+                    
+                    if (tf_params.tour_form_data.disable_specific) {
+                        var disable_specific_string = tf_params.tour_form_data.disable_specific.split(", ");
+                        disable_specific_string.forEach(function(date) {
+                            tour_date_options.disable.push(date);
+                        });
                     }
                 }
             }
         }
+        
+        // remove empty attributes from tour_date_options object
+        // tour_date_options = Object.fromEntries(Object.entries(tour_date_options).filter(([_, v]) => v != '' ));
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'design-1') {
             $(".tours-check-in-out").flatpickr(tour_date_options);
@@ -709,7 +765,6 @@
         }
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'default') {
-
             $("#check-in-out-date").flatpickr(tour_date_options);
         }
 

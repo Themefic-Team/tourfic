@@ -264,7 +264,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                                                     if ( !empty($meta['type'] ) && $meta['type'] === 'continuous' ) {
                                                         $custom_availability = !empty($meta['custom_avail']) ? $meta['custom_avail'] : false;
-                                                        if ($custom_availability) {
+                                                        if ($custom_availability && is_array($meta['cont_custom_date'])) {
                                                             foreach ( $meta['cont_custom_date'] as $repval ) {
 
                                                                 if( $custom_pricing_by_rule  && $custom_pricing_by_rule == 'group' ){
@@ -646,8 +646,12 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
             }
 
 			$tours = new WP_Query( $args );
+
+            $all_tour_ids = array_filter( wp_list_pluck( $tours->posts, 'ID' ), function($id) use ($current_post_id) {
+                return $id != $current_post_id[0];
+            });
+
 			if ( $tours->have_posts() ) {
-				if(!in_array(get_the_ID(), $current_post_id)):
 				?>
                     <!-- Tourfic upcomming tours tours -->
                     <div class="upcomming-tours">
@@ -664,56 +668,61 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                     <?php
                                     while ( $tours->have_posts() ) {
                                         $tours->the_post();
+                                        if( is_array($all_tour_ids) && in_array(get_the_ID(), $all_tour_ids) ):
+                                            $selected_design_post_id = get_the_ID();
+                                            $destinations           = get_the_terms( $selected_design_post_id, 'tour_destination' );
 
-                                        $selected_design_post_id = get_the_ID();
-                                        $destinations           = get_the_terms( $selected_design_post_id, 'tour_destination' );
+                                            $first_destination_name = $destinations[0]->name;
+                                            $related_comments       = get_comments( array( 'post_id' => $selected_design_post_id ) );
+                                            $meta                   = get_post_meta( $selected_design_post_id, 'tf_tours_opt', true );
+                                            $pricing_rule           = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
+                                            $disable_adult          = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
+                                            $disable_child          = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
+                                            $tour_price             = new Tour_Price( $meta );
 
-                                        $first_destination_name = $destinations[0]->name;
-                                        $related_comments       = get_comments( array( 'post_id' => $selected_design_post_id ) );
-                                        $meta                   = get_post_meta( $selected_design_post_id, 'tf_tours_opt', true );
-                                        $pricing_rule           = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
-                                        $disable_adult          = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
-                                        $disable_child          = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
-                                        $tour_price             = new Tour_Price( $meta );
-                                        ?>
-                                        <div class="tf-slider-item tf-post-box-lists">
-                                            <div class="tf-post-single-box">
-                                                <div class="tf-image-data">
-                                                    <img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) ) ? esc_url(get_the_post_thumbnail_url( $selected_design_post_id, 'full' )) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>"
-                                                        alt="">
-                                                    <div class="tf-meta-data-price">
-                                                        <?php esc_html_e( "From", "tourfic" ); ?>
-                                                        <span>
-                                            <?php if ( $pricing_rule == 'group' ) {
-                                                echo wp_kses_post($tour_price->wc_sale_group) ?? $tour_price->wc_group;
-                                            } else if ( $pricing_rule == 'person' ) {
-                                                if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
-                                                    echo wp_kses_post($tour_price->wc_sale_adult) ?? $tour_price->wc_adult;
-                                                } else if ( ! $disable_child && ! empty( $tour_price->child ) ) {
-                                                    echo wp_kses_post($tour_price->wc_sale_child) ?? $tour_price->wc_child;
-
-                                                }
-                                            }
+                                            // echo "<pre>";
+                                            // print_r($tour_price);
+                                            // echo "</pre>";
+                                            // die(); // added by - Sunvi
                                             ?>
-                                            </span>
+                                            <div class="tf-slider-item tf-post-box-lists">
+                                                <div class="tf-post-single-box">
+                                                    <div class="tf-image-data">
+                                                        <img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) ) ? esc_url(get_the_post_thumbnail_url( $selected_design_post_id, 'full' )) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>"
+                                                            alt="">
+                                                        <div class="tf-meta-data-price">
+                                                            <?php esc_html_e( "From", "tourfic" ); ?>
+                                                            <span>
+                                                <?php if ( $pricing_rule == 'group' ) {
+                                                    echo !empty( $tour_price->wc_sale_group ) ? wp_kses_post($tour_price->wc_sale_group) : wp_kses_post($tour_price->wc_group);
+                                                } else if ( $pricing_rule == 'person' ) {
+                                                    if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
+                                                        echo !empty($tour_price->wc_sale_adult) ? wp_kses_post($tour_price->wc_sale_adult) : wp_kses_post($tour_price->wc_adult);
+                                                    } else if ( ! $disable_child && ! empty( $tour_price->child ) ) {
+                                                        echo !empty( $tour_price->wc_sale_child ) ? wp_kses_post($tour_price->wc_sale_child) : wp_kses_post($tour_price->wc_child);
+
+                                                    }
+                                                }
+                                                ?>
+                                                </span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="tf-meta-info tf-mt-30">
-                                                    <div class="tf-meta-location">
-                                                        <i class="fa-solid fa-location-dot"></i> <?php echo esc_html($first_destination_name); ?>
-                                                    </div>
-                                                    <div class="tf-meta-title">
-                                                        <h2><a href="<?php the_permalink($selected_design_post_id) ?>"><?php the_title($selected_design_post_id) ?></a></h2>
+                                                    <div class="tf-meta-info tf-mt-30">
+                                                        <div class="tf-meta-location">
+                                                            <i class="fa-solid fa-location-dot"></i> <?php echo esc_html($first_destination_name); ?>
+                                                        </div>
+                                                        <div class="tf-meta-title">
+                                                            <h2><a href="<?php the_permalink($selected_design_post_id) ?>"><?php echo wp_kses_post( Helper::tourfic_character_limit_callback( html_entity_decode(get_the_title( $selected_design_post_id )), 35 ) ); ?></a></h2>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <?php endif; ?>
                                     <?php } ?>
                                 </div>
                             </div>
                         </div>
                     </div>
-                <?php endif; ?>
 			<?php }
 			wp_reset_postdata();
 			?>

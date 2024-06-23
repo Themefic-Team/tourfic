@@ -833,7 +833,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'        => 't-enquiry-section',
 					'type'      => 'switch',
-					'label'     => __( 'Enable Tour Enquiry Form Option', 'tourfic' ),
+					'label'     => __( 'Enable Tour Enquiry', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => true
@@ -999,6 +999,14 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => false
+				),
+				array(
+					'id'          => 'require_adult_child_booking',
+					'type'        => 'switch',
+					'label'       => __( 'Adult Required for Child Booking', 'tourfic' ),
+					'subtitle'       => __( 'By enabling this option, an adult will be required when booking a child. By default, an adult is required for infant bookings.', 'tourfic' ),
+					'field_width' => '50%',
+					'default' => 0
 				),
 
 				array(

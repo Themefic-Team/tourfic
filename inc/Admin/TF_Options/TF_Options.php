@@ -375,17 +375,17 @@ class TF_Options {
 			] );
 		}
 
-		if ( $date_format == 'Y.m.d' || $date_format == 'd.m.Y' ) {
+		/*if ( $date_format == 'Y.m.d' || $date_format == 'd.m.Y' ) {
 			$check_in  = gmdate( "Y-m-d", strtotime( str_replace( ".", "-", $check_in ) ) );
 			$check_out = gmdate( "Y-m-d", strtotime( str_replace( ".", "-", $check_out ) ) );
 		}
 		if ( $date_format == 'd/m/Y' ) {
 			$check_in  = gmdate( "Y-m-d", strtotime( str_replace( "/", "-", $check_in ) ) );
 			$check_out = gmdate( "Y-m-d", strtotime( str_replace( "/", "-", $check_out ) ) );
-		}
+		}*/
 
-		$check_in  = strtotime( $check_in );
-		$check_out = strtotime( $check_out );
+		$check_in  = strtotime( $this->tf_convert_date_format( $check_in, $date_format ) );
+		$check_out = strtotime( $this->tf_convert_date_format( $check_out, $date_format ) );
 		if ( $check_in > $check_out ) {
 			wp_send_json_error( [
 				'status'  => false,
@@ -570,17 +570,17 @@ class TF_Options {
 			] );
 		}
 
-		if ( $date_format == 'Y.m.d' || $date_format == 'd.m.Y' ) {
+		/*if ( $date_format == 'Y.m.d' || $date_format == 'd.m.Y' ) {
 			$check_in  = gmdate( "Y-m-d", strtotime( str_replace( ".", "-", $check_in ) ) );
 			$check_out = gmdate( "Y-m-d", strtotime( str_replace( ".", "-", $check_out ) ) );
 		}
 		if ( $date_format == 'd/m/Y' ) {
 			$check_in  = gmdate( "Y-m-d", strtotime( str_replace( "/", "-", $check_in ) ) );
 			$check_out = gmdate( "Y-m-d", strtotime( str_replace( "/", "-", $check_out ) ) );
-		}
+		}*/
 
-		$check_in  = strtotime( $check_in );
-		$check_out = strtotime( $check_out );
+		$check_in  = strtotime( $this->tf_convert_date_format( $check_in, $date_format ) );
+		$check_out = strtotime( $this->tf_convert_date_format( $check_out, $date_format ) );
 		if ( $check_in > $check_out ) {
 			wp_send_json_error( [
 				'status'  => false,
@@ -729,4 +729,14 @@ class TF_Options {
 		}
 	}
 
+
+	function tf_convert_date_format($date, $currentFormat) {
+		$dateTime = \DateTime::createFromFormat($currentFormat, $date);
+
+		if ($dateTime === false) {
+			return false;
+		}
+
+		return $dateTime->format('Y/m/d');
+	}
 }

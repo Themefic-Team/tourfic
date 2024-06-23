@@ -13,12 +13,12 @@
         });
 
         // Select Form
-        $('.tf-filter-selection').click(function() {
+        $('.tf-filter-selection').on("click", function() {
             $(this).toggleClass('active');
         });
 
         // Form Selection
-        $('.tf-filter-selection ul li').click(function() {
+        $('.tf-filter-selection ul li').on("click", function() {
             let $this = $(this).closest('.tf-filter-selection');
             // let selected_value = $(this).attr('data-id');
             let selected_label = $(this).text();
@@ -135,7 +135,7 @@
          *
          * tf_checkinout_details_edit
          */
-        $('.tf-order-checkinout-status ul li').click(function() {
+        $('.tf-order-checkinout-status ul li').on("click", function() {
             
             let selected_value = $(this).attr('data-value');
             let order_id = $('.tf_single_order_id').val();
@@ -170,7 +170,7 @@
          *
          * tf_order_status_edit
          */
-        $('.tf-order-ostatus ul li').click(function() {
+        $('.tf-order-ostatus ul li').on("click", function() {
             
             let selected_value = $(this).attr('data-value');
             let order_id = $('.tf_single_order_id').val();
@@ -205,7 +205,7 @@
          *
          * tf_order_status_email_resend
          */
-        $('.tf-order-email-resend ul li').click(function() {
+        $('.tf-order-email-resend ul li').on("click", function() {
             
             let selected_value = $(this).attr('data-value');
             let order_id = $('#tf_email_order_id').val();
@@ -258,7 +258,7 @@
 
         // Filter Checkbox Selected
 
-        $("#cb #cb-select-all-1").click(function() {
+        $("#cb #cb-select-all-1").on("click", function() {
             $('input[name="order_id[]"]').each(function() {
                 $(this).prop("checked", !$(this).prop("checked"));
             });
@@ -269,7 +269,7 @@
          *
          * tf_order_bulk_action_edit
          */
-        $('.tf-order-status-filter-btn').click(function() {
+        $('.tf-order-status-filter-btn').on("click", function() {
             
             let order_list = [];
             let bulk_action = $('.tf-filter-bulk-option').val();

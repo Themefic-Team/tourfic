@@ -6,7 +6,7 @@ use \Tourfic\Classes\Helper;
 
 if ( ! class_exists( 'TF_Settings' ) ) {
 	class TF_Settings {
-		
+
 		public $option_id = null;
 		public $option_title = null;
 		public $option_icon = null;
@@ -36,6 +36,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			//ajax save options
 			add_action( 'wp_ajax_tf_options_save', array( $this, 'tf_ajax_save_options' ) );
+
+            add_action( 'wp_ajax_tf_export_data', array( $this, 'tf_export_data' ) );
         }
 
         public static function option( $key, $params = array() ) {
@@ -261,7 +263,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								</h3>
 							</div>
 						</div>
-						
+
 						<div class="tf-single-performance-grid">
 							<div class="tf-single-performance-icon">
 							<img src="<?php echo esc_url(TF_ASSETS_APP_URL.'images/tf-tours.png'); ?>" alt="total Tours">
@@ -343,7 +345,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="tf-setting-performace-section">
 					<div id="tf-report-loader">
 						<img src="<?php echo esc_url(TF_ASSETS_APP_URL.'images/loader.gif'); ?>" alt="Loader">
@@ -403,7 +405,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 				</div>
 			</div>
-            
+
 			<?php
 		}
 
@@ -429,7 +431,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						<img src="<?php echo esc_url(TF_ASSETS_APP_URL); ?>images/setup_wizard.png" alt="setup wizard">
 					</div>
 				</div>
- 
+
                 <div class="tf-help-center-banner">
                     <div class="tf-help-center-content">
                         <h2><?php esc_html_e("Help Center","tourfic"); ?></h2>
@@ -455,7 +457,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<span><?php esc_html_e("Contact Us","tourfic"); ?></span>
 						</a>
 					</div>
-					
+
 					<div class="tf-single-support">
 						<a href="https://themefic.com/tourfic/" target="_blank">
 							<img src="<?php echo esc_url(TF_ASSETS_APP_URL); ?>images/tf-comment.png" alt="Document">
@@ -463,7 +465,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<span><?php esc_html_e("Chat Now","tourfic"); ?></span>
 						</a>
 					</div>
-					
+
 					<div class="tf-single-support">
 						<a href="https://www.youtube.com/playlist?list=PLY0rtvOwg0ylCl7NTwNHUPq-eY1qwUH_N" target="_blank">
 							<img src="<?php echo esc_url(TF_ASSETS_APP_URL); ?>images/tf-tutorial.png" alt="Document">
@@ -593,7 +595,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			<!-- dashboard-header-include -->
 			<?php \Tourfic\Classes\Helper::tf_dashboard_header(); ?>
-			
+
 			<div class="tf-setting-license">
 				<div class="tf-setting-license-tabs">
 					<ul>
@@ -611,10 +613,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<div class="tf-field tf-field-callback" style="width: 100%;">
 								<div class="tf-fieldset"></div>
 							</div>
-							<?php 
+							<?php
 							$licenseKey = ! empty( tfliopt( 'license-key' ) ) ? tfliopt( 'license-key' ) : '';
 							$liceEmail  = ! empty( tfliopt( 'license-email' ) ) ? tfliopt( 'license-email' ) : '';
-							
+
 							if ( TourficProBase::CheckWPPlugin( $licenseKey, $liceEmail, $licenseMessage, $responseObj, TF_PRO_PATH . 'tourfic-pro.php' ) ) {
 								tf_license_info();
 							} else {
@@ -671,8 +673,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				$tf_option_value = array();
 			}
 
-
-            $ajax_save_class = 'tf-ajax-savess';
+            $ajax_save_class = 'tf-ajax-save';
 
 			if ( ! empty( $this->option_sections ) ) :
 				?>
@@ -691,14 +692,14 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 									$parent_tab_key = ! empty( $section['fields'] ) ? $key : array_key_first( $section['sub_section'] );
 									?>
                                     <div class="tf-admin-tab-item<?php echo ! empty( $section['sub_section'] ) ? ' tf-has-submenu' : '' ?>">
-									
+
                                         <a href="#<?php echo esc_attr( $parent_tab_key ); ?>"
                                            class="tf-tablinks <?php echo esc_attr($section_count == 0 ? 'active' : ''); ?>"
                                            data-tab="<?php echo esc_attr( $parent_tab_key ) ?>">
 											<?php echo ! empty( $section['icon'] ) ? '<span class="tf-sec-icon"><i class="' . esc_attr( $section['icon'] ) . '"></i></span>' : ''; ?>
 											<?php echo esc_html($section['title']); ?>
                                         </a>
-										
+
 										<?php if ( ! empty( $section['sub_section'] ) ): ?>
                                             <ul class="tf-submenu">
 												<?php foreach ( $section['sub_section'] as $sub_key => $sub ): ?>
@@ -731,13 +732,13 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 										<?php
 										if ( ! empty( $section['fields'] ) ):
 											foreach ( $section['fields'] as $field ) :
-	
+
 												$default = isset( $field['default'] ) ? $field['default'] : '';
 												$value   = isset( $tf_option_value[ $field['id'] ] ) ? $tf_option_value[ $field['id'] ] : $default;
 
 												$tf_option = new \Tourfic\Admin\TF_Options\TF_Options();
 												$tf_option->field( $field, $value, $this->option_id );
-												
+
 											endforeach;
 										endif; ?>
 
@@ -753,8 +754,26 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						<?php wp_nonce_field( 'tf_option_nonce_action', 'tf_option_nonce' ); ?>
                     </form>
                 </div>
+
+                <div class="tf-field-notice-inner tf-notice-danger" style="margin-top: 20px; margin-right: 20px;">
+                    <div class="tf-field-notice-content">
+                        <?php /* translators: %s: strong tag */ ?>
+						<?php echo sprintf( esc_html__( 'WARNING: If you are having trouble saving your settings, please increase the %s "PHP Max Input Vars" %s value to save all settings. Contact your hosting provider for help on this matter. Otherwise, you will not be able to save all settings.', 'tourfic' ), '<strong>', '</strong>' ); ?>
+                    </div>
+                </div>
 			<?php
 			endif;
+		}
+
+		function count_input_vars($array) {
+			$count = 0;
+			foreach ($array as $key => $value) {
+				$count++;
+				if (is_array($value)) {
+					$count += $this->count_input_vars($value);
+				}
+			}
+			return $count;
 		}
 
 		/**
@@ -938,6 +957,25 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 	        parse_str( $url_parts['query'], $query_string );
 
             return $query_string;
+        }
+
+        function tf_export_data(){
+	        // Add nonce for security and authentication.
+	        check_ajax_referer( 'updates', '_nonce' );
+
+            $response = array(
+                'status' => 'error',
+                'message' => 'Something went wrong!'
+            );
+	        $current_settings = get_option( $this->option_id );
+	        $response['data'] = isset($current_settings) && !empty($current_settings) ? wp_json_encode($current_settings) : '';
+
+            if(!empty($response['data'])){
+                $response['status'] = 'success';
+                $response['message'] = 'Data exported successfully!';
+            }
+            echo wp_json_encode($response);
+            die();
         }
 	}
 }

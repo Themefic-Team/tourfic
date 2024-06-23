@@ -20,7 +20,7 @@ class Price_Filter extends \WP_Widget {
 
         parent::__construct(
             'tf_price_filters', // Base ID
-            esc_html__( 'Tourfic - Hotel & Tour Price Range Filter', 'tourfic' ), // Name
+            esc_html__( 'Tourfic - Hotel, Tour & Apartment Price Range Filter', 'tourfic' ), // Name
             array( 'description' => esc_html__( 'Show Price Range slider on Archive/Search Result page.', 'tourfic' ) ) // Args
         );
     }
@@ -92,7 +92,7 @@ class Price_Filter extends \WP_Widget {
             }
         }else{
             extract( $args );
-            $title = apply_filters( 'widget_title', $instance['title'] );
+            $title = !empty($instance['title']) ? apply_filters( 'widget_title', $instance['title'] ) : '';
             echo wp_kses_post($before_widget);
             if( !empty($_GET['type']) && $_GET['type']=="tf_tours" && !empty($_GET['from']) && !empty($_GET['to'] ) ){
             ?>

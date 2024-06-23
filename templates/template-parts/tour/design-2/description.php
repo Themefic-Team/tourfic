@@ -1,21 +1,34 @@
 <!-- menu section Start -->
+
 <div class="tf-details-menu">
     <ul>
         <li><a class="tf-hashlink" href="#tf-tour-overview">
             <?php esc_html_e("Overview", "tourfic"); ?>
         </a></li>
-        <li><a href="#tf-tour-itinerary">
-            <?php esc_html_e("Tour Plan", "tourfic"); ?>
-        </a></li>
-        <li><a href="#tf-tour-faq">
-            <?php esc_html_e("FAQ's", "tourfic"); ?>
-        </a></li>
-        <li><a href="#tf-tour-policies">
-            <?php esc_html_e("Policies", "tourfic"); ?>
-        </a></li>
-        <li><a href="#tf-tour-reviews">
-            <?php esc_html_e("Reviews", "tourfic"); ?>
-        </a></li>
+
+        <?php if( !empty( $meta["itinerary"] )) : ?>
+            <li><a href="#tf-tour-itinerary">
+                <?php esc_html_e("Tour Plan", "tourfic"); ?>
+            </a></li>
+        <?php endif; ?>
+
+        <?php if( !empty( $meta["faqs"] )) : ?>
+            <li><a href="#tf-tour-faq">
+                <?php esc_html_e("FAQ's", "tourfic"); ?>
+            </a></li>
+        <?php endif; ?>
+
+        <?php if(!empty( $meta["terms_conditions"] ) ) : ?>
+            <li><a href="#tf-tour-policies">
+                <?php esc_html_e("Policies", "tourfic"); ?>
+            </a></li>
+        <?php endif; ?>
+
+        <?php if(!empty($comments)) : ?>
+            <li><a href="#tf-tour-reviews">
+                <?php esc_html_e("Reviews", "tourfic"); ?>
+            </a></li>
+        <?php endif; ?>
     </ul>
 </div>
 <!-- menu section End -->

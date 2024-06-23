@@ -139,6 +139,17 @@ class Post_Type {
 				'back_to_items'              => sprintf( esc_html__( 'Back to %s', 'tourfic' ), strtolower( $tax_args['singular_name'] ) ),
 			);
 			$tax_labels = apply_filters( 'tf_' . $tax_args['taxonomy'] . '_labels', $tax_labels );
+			
+			$hidden_taxonomies = array( );
+			
+			if( !empty( $this->post_args['name'] ) && $this->post_args['name'] == 'Apartments' ) {
+				$hidden_taxonomies = array( 'Features' );
+			}
+			else if( !empty( $this->post_args['name'] ) && $this->post_args['name'] == 'Tours' ) {
+				$hidden_taxonomies = array( 'Features', "Types" );
+			} else {
+				$hidden_taxonomies = array( 'Features' );
+			}
 
 			$tf_tax_args = array(
 				'labels'                => $tax_labels,
@@ -158,6 +169,10 @@ class Post_Type {
 				'capabilities'          => $tax_args['capability'],
 			);
 			$tf_tax_args = apply_filters( 'tf_' . $tax_args['taxonomy'] . '_args', $tf_tax_args );
+
+			if(!empty( $hidden_taxonomies ) && in_array( $tax_args['name'], $hidden_taxonomies )) {
+				$tf_tax_args['meta_box_cb'] = false;
+			}
 
 			register_taxonomy( $tax_args['taxonomy'], $this->post_args['slug'], $tf_tax_args );
 		}

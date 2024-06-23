@@ -33,7 +33,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 						}
 					 	if(is_array($data)):
 							foreach ( $data as $key => $value ) :
-								$tf_repater_default_value = reset($value);
+								$tf_repater_default_value = !is_array( $value ) ? stripslashes(reset($value)) : '';
 								if($this->field['id']=="room"){
 									$tf_repater_default_value = $value['title'];
 								}
@@ -97,6 +97,8 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 											//remove special characters, replace space with underscore and convert to lowercase
 											$value = sanitize_title(str_replace(' ', '_', strtolower($value)));
 										}
+
+										$value = ($re_field['type'] == 'text' || $re_field['type'] == 'textarea') ? stripslashes($value) : $value;
 
 										$tf_option = new \Tourfic\Admin\TF_Options\TF_Options();
 										$tf_option->field( $re_field, $value, $this->settings_id, $parent_field);

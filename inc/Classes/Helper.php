@@ -3,6 +3,8 @@
 namespace Tourfic\Classes;
 defined( 'ABSPATH' ) || exit;
 
+use \Tourfic\Admin\Emails\TF_Handle_Emails;
+
 class Helper {
 	use \Tourfic\Traits\Singleton;
 
@@ -71,6 +73,7 @@ class Helper {
 		if ( is_post_type_archive( 'tf_hotel' ) || is_tax( 'hotel_location' ) ) {
 			if ( 'design-2' == $tf_hotel_arc_selected_template ) {
 				$classes[] = 'tf_template_3_global_layouts';
+				$classes[] = 'tf_template_3_hotel_archive';
 			}
 		}
 
@@ -89,6 +92,7 @@ class Helper {
 			$tf_hotel_selected_check = ! empty( $tf_hotel_single_template ) ? $tf_hotel_single_template : $tf_hotel_global_template;
 			if ( 'design-2' == $tf_hotel_selected_check ) {
 				$classes[] = 'tf_template_3_global_layouts';
+				$classes[] = 'tf_template_3_single_hotel';
 			}
 		}
 
@@ -1653,13 +1657,6 @@ class Helper {
                         </div>
                     </div>
 
-                    <div class="tf-field-group tf-mt-8">
-                        <i class="fa-solid fa-calendar-days"></i>
-                        <input type="text" class="tf-field time" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                               placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" required value="<?php echo esc_attr( $date ) ?>">
-                    </div>
-
-
 					<?php if ( $post_type == 'tf_hotel' ) { ?>
                         <div class="tf-field-group tf-mt-16 tf_acrselection">
                             <div class="tf-field tf-flex">
@@ -1675,6 +1672,12 @@ class Helper {
                             </div>
                         </div>
 					<?php } ?>
+
+					<div class="tf-field-group tf-mt-8">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <input type="text" class="tf-field time" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
+                               placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" required value="<?php echo esc_attr( $date ) ?>">
+                    </div>
 
                     <div class="tf-booking-bttns tf-mt-30">
 						<?php
@@ -1950,8 +1953,8 @@ class Helper {
                             // flatpickr locale first day of Week
 							<?php tf_flatpickr_locale( "root" ); ?>
 
-                            $(".tf-template-3 .tf-booking-date-wrap").click(function () {
-                                $("#check-in-out-date").click();
+                            $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
+                                $("#check-in-out-date").trigger( "click" );
                             });
                             $("#check-in-out-date").flatpickr({
                                 enableTime: false,
@@ -2009,8 +2012,8 @@ class Helper {
                             // flatpickr locale
 							<?php tf_flatpickr_locale( "root" ); ?>
 
-                            $(".tf-template-3 .tf-booking-date-wrap").click(function () {
-                                $("#check-in-out-date").click();
+                            $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
+                                $("#check-in-out-date").trigger( "click" );
                             });
                             $("#check-in-out-date").flatpickr({
                                 enableTime: false,
@@ -2042,12 +2045,12 @@ class Helper {
                                     if (selectedDates[0]) {
                                         const startDate = selectedDates[0];
                                         $(".tf-template-3 .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
-                                        $(".tf-template-3 .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth() + 1]);
+                                        $(".tf-template-3 .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                     }
                                     if (selectedDates[1]) {
                                         const endDate = selectedDates[1];
                                         $(".tf-template-3 .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
-                                        $(".tf-template-3 .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth() + 1]);
+                                        $(".tf-template-3 .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                     }
                                 }
                             }
@@ -2600,9 +2603,9 @@ class Helper {
                             // flatpickr locale first day of Week
 							<?php tf_flatpickr_locale( "root" ); ?>
 
-                            $(".tf-template-3 .tf-booking-date-wrap").click(function () {
+                            $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
 
-                                $("#check-in-out-date").click();
+                                $("#check-in-out-date").trigger("click");
                             });
                             $("#check-in-out-date").flatpickr({
                                 enableTime: false,
@@ -2658,9 +2661,9 @@ class Helper {
                             // flatpickr locale first day of Week
 							<?php tf_flatpickr_locale( "root" ); ?>
 
-                            $(".tf-template-3 .tf-booking-date-wrap").click(function () {
+                            $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
 
-                                $("#check-in-out-date").click();
+                                $("#check-in-out-date").trigger("click");
                             });
                             $("#check-in-out-date").flatpickr({
                                 enableTime: false,

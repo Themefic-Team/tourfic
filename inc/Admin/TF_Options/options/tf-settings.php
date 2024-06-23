@@ -10,24 +10,24 @@ if ( file_exists( TF_ADMIN_PATH . 'TF_Options/options/tf-menu-icon.php' ) ) {
 	$menu_icon = 'dashicons-palmtree';
 }
 
-if ( ! function_exists( 'tf_search_page_default') ) {
-	function tf_search_page_default() {
-		$args = array(
-			'post_type'      => 'page',
-			'posts_per_page' => - 1,
-			'post_status' => 'publish',
-		);
+if ( !function_exists( 'tf_search_page_default' ) ) {
+    function tf_search_page_default() {
+        $args = array(
+            'post_type'      => 'page',
+            'posts_per_page' => -1,
+            'post_status'    => 'publish',
+        );
 
-		$loop = new WP_Query( $args );
-		if( $loop->have_posts() ) {
-			foreach( $loop->posts as $post ) {
-				if( $post->post_name == 'tf-search') {
-					return $post->ID;
-				}
-			}
-		}
-		return;
-	}
+        $loop = new WP_Query( $args );
+        if ( $loop->have_posts() ) {
+            foreach ( $loop->posts as $post ) {
+                if ( $post->post_name == 'tf-search' ) {
+                    return $post->ID;
+                }
+            }
+        }
+        return;
+    }
 }
 
 if ( ! function_exists( 'tf_wishlist_page_default') ) {
@@ -1799,7 +1799,7 @@ TF_Settings::option( 'tf_settings', array(
 						'post_type'      => 'page',
 						'posts_per_page' => - 1,
 					),
-					'default'     => tf_search_page_default(),
+					'default'     => !empty( get_option( 'tf_search_page_id	' ) ) ? get_option( 'tf_search_page_id	' ) : tf_search_page_default(),
 				),
 
 				array(
@@ -3177,7 +3177,7 @@ TF_Settings::option( 'tf_settings', array(
 						'orderby'        => 'post_title',
 						'order'          => 'ASC'
 					),
-					'default' => tf_wishlist_page_default(),
+					'default' => !empty( get_option('tf_wishlist_page_id') ) ? get_option('tf_wishlist_page_id') : tf_wishlist_page_default(),
 				),
 			),
 		),

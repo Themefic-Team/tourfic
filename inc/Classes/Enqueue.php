@@ -12,6 +12,7 @@ class Enqueue {
 	public function __construct() {
 		add_filter( 'wp_enqueue_scripts', array( $this, 'tf_dequeue_scripts' ), 9999 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_enqueue_scripts' ) );
+		// add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'tf_enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_enqueue_admin_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_dequeue_theplus_script_on_settings_page' ), 9999 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_custom_css' ), 99999 );
@@ -526,10 +527,10 @@ class Enqueue {
 			$single_tour_form_data['allowed_times']             = wp_json_encode( $allowed_times ?? [] );
 			$single_tour_form_data['custom_avail']              = ! empty( $custom_avail ) ? $custom_avail : false;
 			$single_tour_form_data['cont_custom_date']          = ! empty( $cont_custom_date ) ? $cont_custom_date : '';
-//			$single_tour_form_data['flatpickr_locale'] = tf_flatpickr_locale("root");
+			$single_tour_form_data['first_day_of_week'] = !empty(Helper::tfopt("tf-week-day-flatpickr")) ? Helper::tfopt("tf-week-day-flatpickr") : 0;
 			$single_tour_form_data['select_time_text'] = esc_html__( "Select Time", "tourfic" );
 			$single_tour_form_data['date_format']      = esc_html( $tour_date_format_for_users );
-//			$single_tour_form_data['flatpickr_locale'] = tf_flatpickr_locale();
+			$single_tour_form_data['flatpickr_locale'] = ! empty( get_locale() ) ? get_locale() : 'en_US';
 			$single_tour_form_data['disabled_day']     = ! empty( $disabled_day ) ? $disabled_day : '';
 			$single_tour_form_data['disable_range']    = ! empty( $disable_range ) ? $disable_range : '';
 			$single_tour_form_data['disable_specific'] = ! empty( $disable_specific ) ? $disable_specific : '';
@@ -556,11 +557,13 @@ class Enqueue {
 				}
 			} elseif ( $tour_type && $tour_type == 'continuous' ) {
 				if ( $custom_avail && $custom_avail == true ) {
-					foreach ( $cont_custom_date as $item ) {
-						$single_tour_form_data['enable'][] = array(
-							'from' => esc_attr( $item["date"]["from"] ),
-							'to'   => esc_attr( $item["date"]["to"] )
-						);
+					if( is_array($cont_custom_date)) {
+						foreach ( $cont_custom_date as $item ) {
+							$single_tour_form_data['enable'][] = array(
+								'from' => esc_attr( $item["date"]["from"] ),
+								'to'   => esc_attr( $item["date"]["to"] )
+							);
+						}
 					}
 				}
 				if ( $custom_avail == false ) {
@@ -650,7 +653,7 @@ class Enqueue {
 		 */
 		// Get single tour meta data
 		global $post;
-		if ( ! is_404() && ! empty( $post ) ) {
+		if ( ! is_404() && ! empty( $post ) && is_single() ) {
 			$meta = ! empty( get_post_meta( $post->ID, 'tf_tours_opt', true ) ) ? get_post_meta( $post->ID, 'tf_tours_opt', true ) : '';
 		}
 		$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';
@@ -792,6 +795,20 @@ class Enqueue {
 					if ( isset( $divi_slider_script ) ) {
 
 						wp_enqueue_script( $divi_script_handle, $divi_slider_script->src, $divi_slider_script->deps, $divi_slider_script->ver, true );
+					}
+				}
+				
+				if ( wp_script_is( 'cn_toc_admin_script', 'enqueued' ) ) {
+
+					$easy_toc_script_handle = 'cn_toc_admin_script';
+					$easy_toc_slider_script = $wp_scripts->registered[ $easy_toc_script_handle ];
+
+					wp_dequeue_script( $easy_toc_script_handle );
+					wp_deregister_script( $easy_toc_script_handle );
+
+					if ( isset( $easy_toc_slider_script ) ) {
+
+						wp_enqueue_script( $easy_toc_script_handle, $easy_toc_slider_script->src, $easy_toc_slider_script->deps, $easy_toc_slider_script->ver, true );
 					}
 				}
 			}
@@ -1017,6 +1034,8 @@ class Enqueue {
 					'installed'                        => esc_html__( 'Installed', 'tourfic' ),
 					'activated'                        => esc_html__( 'Activated', 'tourfic' ),
 					'install_failed'                   => esc_html__( 'Install failed', 'tourfic' ),
+					/* translators: %s: strong tag */
+					'max_input_vars_notice'            => sprintf( esc_html__( 'WARNING: If you are having trouble saving your settings, please increase the %s "PHP Max Input Vars" %s value to save all settings.', 'tourfic' ), '<strong>', '</strong>' ),
 					'is_woo_not_active'                => ( ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) || ! is_plugin_active( 'woocommerce/woocommerce.php' ) ),
 					'date_format_change_backend'       => $date_format_change,
 					'i18n'                             => array(
@@ -1518,7 +1537,6 @@ class Enqueue {
 				border: 1px solid ' . $tf_template1_global_reg . ';
 				border-color: ' . $tf_template1_global_reg . ' !important;
 			}
-			.tf-aq-outer span.close-aq {background: ' . $tf_template1_global_reg . ' !important;}
 			.tf-aq-field .btn-styled {background: ' . $tf_template1_global_reg . ' !important;}';
 
 		}

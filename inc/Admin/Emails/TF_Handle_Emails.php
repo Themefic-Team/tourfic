@@ -909,8 +909,8 @@ class TF_Handle_Emails {
         if( is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) ) :
  
             //get customer email
-            $order_billing_email    = $order_data['shipping_details']['tf_email'];
-            $order_items    = $order_data['order_details'];
+            $order_billing_email    = !empty($order_data['shipping_details']['tf_email']) ? $order_data['shipping_details']['tf_email'] : '';
+            $order_items    = !empty($order_data['order_details']) ? $order_data['order_details'] : '';
             $booking_details = '<div style="padding-left: 40px; padding-right: 40px; margin: 0 auto; padding-top: 30px; border: 1px solid #ddd;">
             <h3 class="greeting" style="margin: 0; padding: 0; color: #5a5a5a; font-family: Work Sans,sans-serif; font-size: 24px;">Dear,</h3>
             <p style="margin: 10px 0;">A new booking has been made on your website. Booking details are listed below.</p>';

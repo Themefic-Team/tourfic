@@ -19,6 +19,23 @@ html {
     padding-right: 32px !important;
   }
 }
+
+.tf_template_3_single_hotel .flatpickr-calendar {
+  @media #{$max1650}{
+    left: 100px !important;
+  }
+}
+
+.tf_template_3_hotel_archive .flatpickr-calendar {
+  @media #{$max1650}{
+    left: 325px !important;
+  }
+  
+  @media #{$max1024}{
+    left: 170px !important;
+  }
+}
+
 @import './modules/common';
 
 .tf-template-3 {

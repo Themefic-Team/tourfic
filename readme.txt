@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.5
-Stable tag: 2.12.0
+Stable tag: 2.12.4
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -322,6 +322,37 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.12.4 - 22 June 2024 =
+
+- Fixed: Classic editor metabox bug
+- Fixed: Hotel per person fixed discount bug
+
+= 2.12.3 - 20 June 2024 =
+
+- Fixed: Settings Saving issue fixed
+- Fixed: Hotel/Apartment Feature Sidebar issue 
+- Fixed: The iCal Sync issue fixed
+- Fixed: Minor Bugs fixed
+- Fixed: Vendor commission calculation issue
+- Fixed: Tour,hotel, apartment feature update issue
+- Improvement: Optimized code and file structure 
+- Improvement: System stability improved
+- Compatible with WordPress 6.5.4
+
+= 2.12.2 - 29 May 2024 =
+
+- Improved: Author selection in the Gutenberg editor
+- Improved: Featured post limit for vendors
+- Improved: Disable Post Types for vendor dashboard
+- Improved: Dashboard link updated for customers upon login
+- Fixed minor bugs and improved stability
+
+= 2.12.1 - 16 May 2024 =
+
+- Improved: Apartment Inventory Management
+- Improved: Titles and Subtitles of Option Panel
+- Fixed: Apartment Mobile Responsiveness of Design 1
+
 = 2.12.0 - 13 May 2024 =
 
 - Added: Apartments room management added to free
@@ -488,26 +519,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Fixed: Search page sidebar issue
 - Compatibility: Compatible with ACF Plugin(Colour picker)
 - Improved: Template design, and Updated style
-
-= 2.11.4 - 14 January 2024 =
-
-- Added: Hide documentation link option in multi-vendor settings (pro)
-- Improved: Itinerary chart added in template 1 and 2 (pro)
-- Improved: Enhanced color settings for the frontend.
-- Fixed: Gallery popup close button issue
-- Fixed: Itinerary altitude negative value issue (pro)
-- Fixed: Single settings removed from single template settings for vendor (pro)
-- Fixed: Custom settings removed from Itinerary download settings for the vendor (pro)
-- Fixed: Black screen issue fixed in vendor profile edit (pro)
-- Fixed: Booking.com and travelpayouts search issue (pro)
-
-= 2.11.3 - 03 January 2024 =
-
-- Improved: New Template Added to Setup Wizard
-- Improved: Added Icon Color Settings( Template - 3 )
-- Improved: Added Tour Features to Design( Template - 2 )(Pro)
-- Fixed: Contact Details Responsive( Template - 3 )
-- Fixed: Enquiry Responsive( Template - 3 )
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 

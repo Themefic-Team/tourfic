@@ -129,21 +129,36 @@ use \Tourfic\Classes\Helper;
                     <li><a class="tf-hashlink" href="#tf-apartment-overview">
                         <?php esc_html_e("Overview", "tourfic"); ?>
                     </a></li>
-                    <li><a href="#tf-apartment-rooms">
-                        <?php esc_html_e("Rooms", "tourfic"); ?>
-                    </a></li>
-                    <li><a href="#tf-apartment-rules">
-                        <?php esc_html_e("House Rules", "tourfic"); ?>
-                    </a></li>
-                    <li><a href="#tf-apartment-faq">
-                        <?php esc_html_e("FAQ's", "tourfic"); ?>
-                    </a></li>
-                    <li><a href="#tf-apartment-reviews">
-                        <?php esc_html_e("Reviews", "tourfic"); ?>
-                    </a></li>
-                    <li><a href="#tf-apartment-policies">
-                        <?php esc_html_e("Policies", "tourfic"); ?>
-                    </a></li>
+
+                    <?php if( !empty( $meta["rooms"])) : ?>
+                        <li><a href="#tf-apartment-rooms">
+                            <?php esc_html_e("Rooms", "tourfic"); ?>
+                        </a></li>
+                    <?php endif; ?>
+
+                    <?php if( !empty( $meta["house_rules"])) : ?>
+                        <li><a href="#tf-apartment-rules">
+                            <?php esc_html_e("House Rules", "tourfic"); ?>
+                        </a></li>
+                    <?php endif; ?>
+
+                    <?php if(!empty( $meta["faq"])) : ?>
+                        <li><a href="#tf-apartment-faq">
+                            <?php esc_html_e("FAQ's", "tourfic"); ?>
+                        </a></li>
+                    <?php endif; ?>
+
+                    <?php if( !empty($comments) ) : ?>
+                        <li><a href="#tf-apartment-reviews">
+                            <?php esc_html_e("Reviews", "tourfic"); ?>
+                        </a></li>
+                    <?php endif; ?>
+
+                    <?php if( !empty( $meta["terms_and_conditions"]) ) : ?>
+                        <li><a href="#tf-apartment-policies">
+                            <?php esc_html_e("Policies", "tourfic"); ?>
+                        </a></li>
+                    <?php endif; ?>
                 </ul>
             </div>
             <!-- menu section End -->
@@ -297,7 +312,7 @@ use \Tourfic\Classes\Helper;
                         </div>
                     </div>
                 </div>
-                <a class="tf-all-reviews" href="#tf-hotel-reviews"><?php esc_html_e("See all reviews", "tourfic"); ?></a>
+                <a class="tf-all-reviews" href="#tf-apartment-reviews"><?php esc_html_e("See all reviews", "tourfic"); ?></a>
                 <?php } ?>
                 <?php
                 $tf_comment_counts = get_comments( array(
