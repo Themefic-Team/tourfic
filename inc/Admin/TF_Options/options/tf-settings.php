@@ -3,6 +3,8 @@
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
+use \Tourfic\App\TF_Review;
+
 
 if ( file_exists( TF_ADMIN_PATH . 'TF_Options/options/tf-menu-icon.php' ) ) {
 	require_once TF_ADMIN_PATH . 'TF_Options/options/tf-menu-icon.php';
@@ -3400,12 +3402,12 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'tf_delete_old_review_fields_button',
 					'type'     => 'callback',
-					'function' => 'tf_delete_old_review_fields_button',
+					'function' => array( '\Tourfic\App\TF_Review', 'tf_delete_old_review_fields_button'),
 				),
 				array(
 					'id'       => 'tf_delete_old_complete_review_button',
 					'type'     => 'callback',
-					'function' => 'tf_delete_old_complete_review_button',
+					'function' => array( '\Tourfic\App\TF_Review', 'tf_delete_old_complete_review_button' ),
 				),
 
 			),

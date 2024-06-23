@@ -1,3 +1,5 @@
+<?php use \Tourfic\App\TF_Review;  ?>
+
 <!-- Tour Gallery Section -->
 <div class="tf-hero-gallery tf-mb-30 tf-template-section">
 <div class="tf-gallery-featured">
@@ -30,7 +32,7 @@
         <?php
         if($comments){ ?>
         <a href="#tf-review" class="tf-single-rating">
-            <span><?php echo wp_kses_post(tf_total_avg_rating( $comments )); ?></span> (<?php tf_based_on_text( count( $comments ) ); ?>)
+            <span><?php echo wp_kses_post(TF_Review::tf_total_avg_rating( $comments )); ?></span> (<?php TF_Review::tf_based_on_text( count( $comments ) ); ?>)
         </a>
         <?php }else{ ?>
             <a href="#tf-review" class="tf-single-rating">

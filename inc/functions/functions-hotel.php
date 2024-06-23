@@ -2,6 +2,7 @@
 # don't load directly
 defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
+use \Tourfic\App\TF_Review;
 
 /**
  * Flushing Rewrite on Tourfic Activation
@@ -2504,9 +2505,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                 <div class="tf-title tf-mt-16">
                     <h2><a href="<?php echo esc_url( $url ); ?>"><?php the_title(); ?></a></h2>
                 </div>
-				<?php tf_archive_single_rating(); ?>
-
-				<!-- Hotel Template 2 Archive Feature Start -->
+				<?php TF_Review::tf_archive_single_rating(); ?>
 				<?php if ( $features ) { ?>
                     <div class="tf-archive-features tf-mt-16">
                         <ul>
@@ -2632,7 +2631,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 				?>
 			</div>  
 			<div class="tf-available-ratings">
-				<?php tf_archive_single_rating(); ?>
+				<?php TF_Review::tf_archive_single_rating(); ?>
 				<i class="fa-solid fa-star"></i>
 			</div>  
 		</div>
@@ -2820,7 +2819,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 							}
 							?>
                         </div>
-						<?php tf_archive_single_rating(); ?>
+						<?php TF_Review::tf_archive_single_rating(); ?>
                     </div>
 
                     <div class="sr_rooms_table_block">
@@ -2834,7 +2833,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                                 <div class="roomNameInner">
                                     <div class="room_link">
                                         <div class="roomrow_flex">
-											
+
 											<!-- Hotel Template 1 Archive Feature Start -->
 											<?php if ( $features ) {?>
                                                 <div class="roomName_flex">
@@ -2867,7 +2866,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                                                 </div>
 											<?php }?>
 											<!-- Hotel Template 1 Archive Feature End -->
-											
+
                                             <div class="roomPrice roomPrice_flex sr_discount" style="<?php echo empty( $features ) ? 'text-align:left' : ''; ?>">
                                                 <div class="availability-btn-area">
                                                     <a href="<?php echo esc_url( $url ); ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>

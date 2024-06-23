@@ -1,6 +1,7 @@
 <?php
 
 use \Tourfic\Classes\Helper;
+use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Tour\Pricing as Tour_Price;
 
 $tf_booking_type = '1';
@@ -39,7 +40,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         <?php if ( $comments && ! $disable_review_sec == '1' ) { ?>
                             <a href="#tf-review">
                                 <div class="tf-single-rating">
-                                    <i class="fas fa-star"></i> <span><?php echo wp_kses_post(tf_total_avg_rating( $comments )); ?></span> (<?php tf_based_on_text( count( $comments ) ); ?>)
+                                    <i class="fas fa-star"></i> <span><?php echo wp_kses_post(TF_Review::tf_total_avg_rating( $comments )); ?></span> (<?php TF_Review::tf_based_on_text( count( $comments ) ); ?>)
                                 </div>
                             </a>
                         <?php } ?>
@@ -747,7 +748,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                 if ( $related_comments ) {
                                                     ?>
                                                     <div class="tf-slider-rating-star">
-                                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo wp_kses_post(tf_total_avg_rating( $related_comments )); ?></span>
+                                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo wp_kses_post( TF_Review::tf_total_avg_rating( $related_comments )); ?></span>
                                                     </div>
                                                     <?php
                                                 }

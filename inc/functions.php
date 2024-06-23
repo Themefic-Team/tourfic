@@ -94,15 +94,6 @@ if ( Helper::tf_is_woo_active() ) {
 }
 
 /**
- * Review Functions
- */
-if ( file_exists( TF_INC_PATH . 'functions/functions-review.php' ) ) {
-	require_once TF_INC_PATH . 'functions/functions-review.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/functions-review.php' );
-}
-
-/**
  * Include Functions Vat
  */
 if ( file_exists( TF_INC_PATH . 'functions/functions_vat.php' ) ) {
