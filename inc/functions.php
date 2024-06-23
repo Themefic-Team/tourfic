@@ -93,15 +93,6 @@ if ( Helper::tf_is_woo_active() ) {
 	}
 }
 
-/**
- * Include Functions Vat
- */
-if ( file_exists( TF_INC_PATH . 'functions/functions_vat.php' ) ) {
-    require_once TF_INC_PATH . 'functions/functions_vat.php';
-} else {
-    tf_file_missing( TF_INC_PATH . 'functions/functions_vat.php' );
-}
-
 add_action( 'plugins_loaded', 'tf_add_elelmentor_addon' );
 
 /**
