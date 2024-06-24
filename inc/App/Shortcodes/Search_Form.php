@@ -46,7 +46,13 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 		ob_start();
 		?>
 
-		<?php tourfic_fullwidth_container_start( $fullwidth ); ?>
+		<?php if ( $fullwidth == "true" ) : ?>
+            <!-- Start Fullwidth Wrap -->
+            <div class="tf_tf_booking-widget-wrap" data-fullwidth="true">
+            <div class="tf_custom-container">
+            <div class="tf_custom-inner">
+
+		<?php endif; ?>
 		<div id="tf-booking-search-tabs" class="<?php echo 2==$design ? esc_attr('tf-shortcode-design-2-tab') : ''; ?>">
 
 			<?php if ( $title ): ?>
@@ -140,7 +146,12 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 			</div>
 
 		</div>
-		<?php tourfic_fullwidth_container_end( $fullwidth );
+		<?php if ( $fullwidth == "true" ) : ?>
+            </div>
+            </div>
+            </div>
+            <!-- Close Fullwidth Wrap -->
+		<?php endif;
 
 		return ob_get_clean();
 	}

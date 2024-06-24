@@ -23,36 +23,12 @@ function tf_file_missing( $files = '' ) {
 add_action( 'admin_notices', 'tf_file_missing' );
 
 /**
- * WC Product Extend
- */
-if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-product-extend.php' ) ) {
-	function fida() {
-		require_once TF_INC_PATH . 'functions/woocommerce/wc-product-extend.php';
-	}
-
-	if ( Helper::tf_is_woo_active() ) {
-		add_action( 'init', 'fida' );
-	}
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-product-extend.php' );
-}
-
-/**
  * Helper Functions
  */
 if ( file_exists( TF_INC_PATH . 'functions/functions-helper.php' ) ) {
 	require_once TF_INC_PATH . 'functions/functions-helper.php';
 } else {
 	tf_file_missing( TF_INC_PATH . 'functions/functions-helper.php' );
-}
-
-/**
- * Order page Functions
- */
-if ( file_exists( TF_INC_PATH . 'functions/functions_order.php' ) ) {
-	require_once TF_INC_PATH . 'functions/functions_order.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/functions_order.php' );
 }
 
 /**
@@ -80,17 +56,6 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-tour.php' ) ) {
 	require_once TF_INC_PATH . 'functions/functions-tour.php';
 } else {
 	tf_file_missing( TF_INC_PATH . 'functions/functions-tour.php' );
-}
-
-/**
- * WooCommerce Common Functions
- */
-if ( Helper::tf_is_woo_active() ) {
-	if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-common.php' ) ) {
-		require_once TF_INC_PATH . 'functions/woocommerce/wc-common.php';
-	} else {
-		tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-common.php' );
-	}
 }
 
 add_action( 'plugins_loaded', 'tf_add_elelmentor_addon' );

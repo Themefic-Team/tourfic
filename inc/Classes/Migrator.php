@@ -628,7 +628,7 @@ class Migrator {
 	function tf_admin_order_data_migration(){
 		if ( empty( get_option( 'tf_old_order_data_migrate' ) ) ) {
 
-			$tf_old_order_limit = new WC_Order_Query( array (
+			$tf_old_order_limit = new \WC_Order_Query( array (
 				'limit' => -1,
 				'orderby' => 'date',
 				'order' => 'ASC',
