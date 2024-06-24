@@ -58,6 +58,9 @@ class Base {
 			// Promo Notice
 			TF_Promo_Notice::instance();
 			\Tourfic\Admin\TF_Duplicator::instance();
+
+			// Admin Notices
+			\Tourfic\Admin\Notice_Update::instance();
 		}
 
 		if ( Helper::tf_is_woo_active() ) {
