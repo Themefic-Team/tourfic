@@ -23,6 +23,10 @@ class Base {
 
 	public function init() {
 		add_action( 'admin_init', array($this, 'create_enquiry_database_table') );
+		add_action('admin_init', array($this, 'tf_order_table_create'));
+		add_action( 'admin_init', array($this, 'tf_admin_table_alter_order_data') );
+
+		\Tourfic\Classes\Woocommerce\Woocommerce::instance();
 
 		if ( file_exists( TF_INC_PATH . 'functions.php' ) ) {
 			require_once TF_INC_PATH . 'functions.php';
