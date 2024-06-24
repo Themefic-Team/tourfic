@@ -14,7 +14,7 @@ class Helper {
 		add_action( 'admin_footer', array( $this, 'tf_admin_footer' ) );
 
 		add_filter( 'rest_prepare_taxonomy', array( $this, 'tf_remove_metabox_gutenburg' ), 10, 3 );
-		add_filter('rest_user_query', array( $this, 'tf_gutenberg_author_dropdown_roles' ), 10, 2);
+		add_filter( 'rest_user_query', array( $this, 'tf_gutenberg_author_dropdown_roles' ), 10, 2 );
 		add_action( "wp_ajax_tf_shortcode_type_to_location", array( $this, 'tf_shortcode_type_to_location_callback' ) );
 		add_action( 'wp_ajax_tf_affiliate_active', array( $this, 'tf_affiliate_active_callback' ) );
 		add_action( 'wp_ajax_tf_affiliate_install', array( $this, 'tf_affiliate_install_callback' ) );
@@ -34,6 +34,8 @@ class Helper {
 		
 		is_admin() ? add_filter( 'plugin_action_links_' . 'tourfic/tourfic.php', array( $this, 'tf_plugin_action_links' ) ) : '';
 		is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) && function_exists( 'is_tf_pro' ) && !is_tf_pro() ? add_filter( 'plugin_action_links_' . 'tourfic-pro/tourfic-pro.php', array( $this, 'tf_pro_plugin_licence_action_links' ) ) : '';
+		add_action( 'admin_menu', array($this, 'tf_documentation_page_integration'), 999 );
+		add_action( 'add_meta_boxes', array($this, 'tf_hotel_tour_docs') );
 	}
 
 	static function tfopt( $option = '', $default = null ) {
@@ -1677,7 +1679,7 @@ class Helper {
                         </div>
 					<?php } ?>
 
-					<div class="tf-field-group tf-mt-8">
+                    <div class="tf-field-group tf-mt-8">
                         <i class="fa-solid fa-calendar-days"></i>
                         <input type="text" class="tf-field time" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
                                placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" required value="<?php echo esc_attr( $date ) ?>">
@@ -1958,7 +1960,7 @@ class Helper {
 							<?php tf_flatpickr_locale( "root" ); ?>
 
                             $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
-                                $("#check-in-out-date").trigger( "click" );
+                                $("#check-in-out-date").trigger("click");
                             });
                             $("#check-in-out-date").flatpickr({
                                 enableTime: false,
@@ -2017,7 +2019,7 @@ class Helper {
 							<?php tf_flatpickr_locale( "root" ); ?>
 
                             $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
-                                $("#check-in-out-date").trigger( "click" );
+                                $("#check-in-out-date").trigger("click");
                             });
                             $("#check-in-out-date").flatpickr({
                                 enableTime: false,
@@ -2918,28 +2920,31 @@ class Helper {
 		return $order_id;
 	}
 
-	function tf_gutenberg_author_dropdown_roles($args, $request = null){
+	function tf_gutenberg_author_dropdown_roles( $args, $request = null ) {
 
 		// get all the roles in a website
-		global $wp_roles; 
-		if ( ! isset( $wp_roles ) ) $wp_roles = new \WP_Roles();
+		global $wp_roles;
+		if ( ! isset( $wp_roles ) ) {
+			$wp_roles = new \WP_Roles();
+		}
 
-		$tf_all_roles = is_array( $wp_roles->get_names() ) && !empty( $wp_roles->get_names() ) ? array_keys( $wp_roles->get_names() ) : array('administrator', 'author', 'editor', 'tf_vendor', 'tf_manager');
+		$tf_all_roles = is_array( $wp_roles->get_names() ) && ! empty( $wp_roles->get_names() ) ? array_keys( $wp_roles->get_names() ) : array( 'administrator', 'author', 'editor', 'tf_vendor', 'tf_manager' );
 
 		// exclude the roles that are not needed
-		$tf_all_roles = array_filter( $tf_all_roles, function( $role ) {
-				return $role !== 'contributor' && $role !== 'subscriber' && $role !== 'customer';
-			} 
+		$tf_all_roles = array_filter( $tf_all_roles, function ( $role ) {
+			return $role !== 'contributor' && $role !== 'subscriber' && $role !== 'customer';
+		}
 		);
 
-		if( current_user_can( 'edit_posts' ) ) {
-			if (isset($args['who']) && $args['who'] === 'authors') {
-				unset($args['who']);
+		if ( current_user_can( 'edit_posts' ) ) {
+			if ( isset( $args['who'] ) && $args['who'] === 'authors' ) {
+				unset( $args['who'] );
 				$args['role__in'] = $tf_all_roles;
 			}
-	
+
 			return $args;
 		}
+
 		return $args;
 	}
 
@@ -2970,4 +2975,117 @@ class Helper {
 	
 		return array_merge( $links, $active_licence_link );
 	}
+
+	/**
+	 * Go to Documentation Menu Item
+	 */
+	function tf_documentation_page_integration() {
+		global $submenu;
+		$doc_url = sanitize_url( 'https://themefic.com/docs/tourfic/' );
+
+		$submenu['edit.php?post_type=tf_hotel'][]     = array(
+			sprintf( '<span class="tf-go-docs" style=color:#ffba00;">%s</span>', esc_html__( 'Go to Documentation', 'tourfic' ) ),
+			'edit_tf_hotels',
+			$doc_url
+		);
+		$submenu['edit.php?post_type=tf_apartment'][] = array(
+			sprintf( '<span class="tf-go-docs" style=color:#ffba00;">%s</span>', esc_html__( 'Go to Documentation', 'tourfic' ) ),
+			'edit_tf_apartments',
+			$doc_url
+		);
+		$submenu['edit.php?post_type=tf_tours'][]     = array(
+			sprintf( '<span class="tf-go-docs" style=color:#ffba00;">%s</span>', esc_html__( 'Go to Documentation', 'tourfic' ) ),
+			'edit_tf_tourss',
+			$doc_url
+		);
+
+	}
+
+	/**
+	 * Go to Documentaion Metabox
+	 */
+	function tf_hotel_tour_docs() {
+		add_meta_box( 'tfhotel_docs', esc_html__( 'Tourfic Documentation', 'tourfic' ), array($this, 'tf_hotel_docs_callback'), 'tf_hotel', 'side', 'high' );
+		add_meta_box( 'tfapartment_docs', esc_html__( 'Tourfic Documantation', 'tourfic' ), array($this, 'tf_apartment_docs_callback'), 'tf_apartment', 'side', 'high' );
+		add_meta_box( 'tftour_docs', esc_html__( 'Tourfic Documentation', 'tourfic' ), array($this, 'tf_tour_docs_callback'), 'tf_tours', 'side', 'high' );
+
+		add_filter( 'get_user_option_meta-box-order_tf_tours', array($this, 'tour_metabox_order') );
+		add_filter( 'get_user_option_meta-box-order_tf_apartment', array($this, 'apartment_metabox_order') );
+		add_filter( 'get_user_option_meta-box-order_tf_hotel', array($this, 'hotel_metabox_order') );
+	}
+
+	function tf_hotel_docs_callback() {
+		$tfhoteldocumentation = sanitize_url( 'https://themefic.com/docs/tourfic/how-it-works/add-new-hotel/' );
+		?>
+        <div class="tf_docs_preview">
+            <a href="<?php echo esc_url( $tfhoteldocumentation ); ?>" target="_blank">
+                <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
+            </a>
+        </div>
+		<?php
+	}
+
+	function tf_apartment_docs_callback() {
+		global $wp_meta_boxes;
+		$tf_apartment_documentation = sanitize_url( 'https://themefic.com/docs/tourfic/add-new-apartment/locations-types-and-featured-image/' );
+		?>
+        <div class="tf_docs_preview">
+            <a href="<?php echo esc_url( $tf_apartment_documentation ); ?>" target="_blank">
+                <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
+            </a>
+        </div>
+		<?php
+	}
+
+	function tf_tour_docs_callback() {
+		$tf_tour_documentation = sanitize_url( 'https://themefic.com/docs/tourfic/tours/tourfic-hotel-general-settings/' );
+		?>
+        <div class="tf_docs_preview">
+            <a href="<?php echo esc_url( $tf_tour_documentation); ?>" target="_blank">
+                <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
+            </a>
+        </div>
+		<?php
+	}
+
+	function apartment_metabox_order( $order ) {
+		return array(
+			'side' => join(
+				",",
+				array (
+					'submitdiv',
+					'tfapartment_docs',
+					'tfapartment_black_friday_docs'
+				)
+			),
+		);
+	}
+
+	function tour_metabox_order( $order ) {
+		return array(
+			'side' => join(
+				",",
+				array(
+					'submitdiv',
+					'tftour_docs',
+					'tftour_black_friday_docs'
+				)
+			),
+		);
+	}
+
+	function hotel_metabox_order( $order ) {
+		return array(
+			'side' => join(
+				",",
+				array(
+					'submitdiv',
+					'tfhotel_docs',
+					'tfhotel_black_friday_docs'
+				)
+			),
+		);
+	}
+
+
 }
