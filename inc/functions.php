@@ -60,17 +60,6 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-tour.php' ) ) {
 
 add_action( 'plugins_loaded', 'tf_add_elelmentor_addon' );
 
-/**
- * Notice
- *
- * Update
- */
-if ( file_exists( TF_INC_PATH . 'functions/functions-notice_update.php' ) ) {
-	require_once TF_INC_PATH . 'functions/functions-notice_update.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/functions-notice_update.php' );
-}
-
 
 /*
  * Temporary functions

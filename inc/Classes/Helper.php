@@ -31,6 +31,11 @@ class Helper {
 		add_filter( 'template_include', array( $this, 'tourfic_archive_page_template' ) );
 		add_filter( 'single_template', array( $this, 'tf_single_page_template' ) );
 		add_filter( 'after_setup_theme', array( $this, 'tf_image_sizes' ) );
+
+		is_admin() ? add_filter( 'plugin_action_links_' . 'tourfic/tourfic.php', array( $this, 'tf_plugin_action_links' ) ) : '';
+		is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) && function_exists( 'is_tf_pro' ) && !is_tf_pro() ? add_filter( 'plugin_action_links_' . 'tourfic-pro/tourfic-pro.php', array( $this, 'tf_pro_plugin_licence_action_links' ) ) : '';
+		add_action( 'admin_menu', array($this, 'tf_documentation_page_integration'), 999 );
+		add_action( 'add_meta_boxes', array($this, 'tf_hotel_tour_docs') );
 		add_action( 'admin_menu', array( $this, 'tf_documentation_page_integration' ), 999 );
 		add_action( 'add_meta_boxes', array( $this, 'tf_hotel_tour_docs' ) );
 		add_action( 'show_user_profile', array( $this, 'tf_extra_user_profile_fields' ) );
@@ -2951,6 +2956,34 @@ class Helper {
 		}
 
 		return $args;
+	}
+
+	//  Plugin Page Action Links for Tourfic
+	function tf_plugin_action_links( $links ) {
+
+		$settings_link = array(
+			'<a href="admin.php?page=tf_dashboard">' . esc_html__( 'Settings', 'tourfic' ) . '</a>',
+		);
+
+		if ( !is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) ) {
+			$gopro_link = array(
+				'<a href="https://tourfic.com/go/upgrade" target="_blank" style="color:#cc0000;font-weight: bold;text-shadow: 0px 1px 1px hsl(0deg 0% 0% / 28%);">' . esc_html__( 'GO PRO', 'tourfic' ) . '</a>',
+			);
+
+			return array_merge( $settings_link, $links, $gopro_link );
+		} else {
+			return array_merge( $settings_link, $links );
+		}
+	}
+
+	//  Plugin Page Action Links for Tourfic Pro
+	function tf_pro_plugin_licence_action_links( $links ) {
+
+		$active_licence_link = array(
+			'<a href="'.admin_url().'admin.php?page=tf_license_info" style="color:#cc0000;font-weight: bold;text-shadow: 0px 1px 1px hsl(0deg 0% 0% / 28%);">' . esc_html__( 'Activate the Licence', 'tourfic' ) . '</a>',
+		);
+
+		return array_merge( $links, $active_licence_link );
 	}
 
 	/**
