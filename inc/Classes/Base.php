@@ -70,14 +70,13 @@ class Base {
 		}
 
 		if ( Helper::tf_is_woo_active() ) {
-			
-			// Tourfic Widgets
 			TF_Widget_Base::instance();
 		}
 
 		if ( Helper::tfopt( 'disable-services' ) && in_array( 'hotel', Helper::tfopt( 'disable-services' ) ) ) {
 		} else {
 			 \Tourfic\Classes\Hotel\Hotel_CPT::instance();
+			 \Tourfic\Classes\Hotel\Pricing::instance();
 		}
 		if ( Helper::tfopt( 'disable-services' ) && in_array( 'tour', Helper::tfopt( 'disable-services' ) ) ) {
 		} else {

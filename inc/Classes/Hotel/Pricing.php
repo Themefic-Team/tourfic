@@ -140,13 +140,10 @@ class Pricing {
 			}
 
 			if ( "pickup" == $_POST['service_type'] ) {
-				$airport_pickup_price = ! empty( $meta['airport_pickup_price'] ) ? $meta['airport_pickup_price'] : '';
-				if ( ! empty( $airport_pickup_price ) && gettype( $airport_pickup_price ) == "string" ) {
-					$tf_hotel_airport_pickup_price_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-						return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-					}, $airport_pickup_price );
-					$airport_pickup_price                = unserialize( $tf_hotel_airport_pickup_price_value );
-				}
+				//$this->calculate_service_fee('airport_pickup_price', $meta, $price_total, $deposit, $deposit_amount);
+
+				$airport_pickup_price = ! empty( $meta['airport_pickup_price'] ) ? Helper::tf_data_types($meta['airport_pickup_price']) : '';
+
 				if ( "per_person" == $airport_pickup_price['airport_pickup_price_type'] ) {
 					$service_adult_fee = ! empty( $airport_pickup_price['airport_service_fee_adult'] ) ? $airport_pickup_price['airport_service_fee_adult'] : 0;
 					$service_child_fee = ! empty( $airport_pickup_price['airport_service_fee_children'] ) ? $airport_pickup_price['airport_service_fee_children'] : 0;
@@ -216,13 +213,8 @@ class Pricing {
 				}
 			}
 			if ( "dropoff" == $_POST['service_type'] ) {
-				$airport_dropoff_price = ! empty( $meta['airport_dropoff_price'] ) ? $meta['airport_dropoff_price'] : '';
-				if ( ! empty( $airport_dropoff_price ) && gettype( $airport_dropoff_price ) == "string" ) {
-					$tf_hotel_airport_dropoff_price_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-						return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-					}, $airport_dropoff_price );
-					$airport_dropoff_price                = unserialize( $tf_hotel_airport_dropoff_price_value );
-				}
+				$airport_dropoff_price = ! empty( $meta['airport_dropoff_price'] ) ? Helper::tf_data_types($meta['airport_dropoff_price']) : '';
+
 				if ( "per_person" == $airport_dropoff_price['airport_pickup_price_type'] ) {
 					$service_adult_fee = ! empty( $airport_dropoff_price['airport_service_fee_adult'] ) ? $airport_dropoff_price['airport_service_fee_adult'] : 0;
 					$service_child_fee = ! empty( $airport_dropoff_price['airport_service_fee_children'] ) ? $airport_dropoff_price['airport_service_fee_children'] : 0;
@@ -283,13 +275,8 @@ class Pricing {
 				}
 			}
 			if ( "both" == $_POST['service_type'] ) {
-				$airport_pickup_dropoff_price = ! empty( $meta['airport_pickup_dropoff_price'] ) ? $meta['airport_pickup_dropoff_price'] : '';
-				if ( ! empty( $airport_pickup_dropoff_price ) && gettype( $airport_pickup_dropoff_price ) == "string" ) {
-					$tf_hotel_airport_pickup_dropoff_price_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-						return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-					}, $airport_pickup_dropoff_price );
-					$airport_pickup_dropoff_price                = unserialize( $tf_hotel_airport_pickup_dropoff_price_value );
-				}
+				$airport_pickup_dropoff_price = ! empty( $meta['airport_pickup_dropoff_price'] ) ? Helper::tf_data_types($meta['airport_pickup_dropoff_price']) : '';
+
 				if ( "per_person" == $airport_pickup_dropoff_price['airport_pickup_price_type'] ) {
 					$service_adult_fee = ! empty( $airport_pickup_dropoff_price['airport_service_fee_adult'] ) ? $airport_pickup_dropoff_price['airport_service_fee_adult'] : 0;
 					$service_child_fee = ! empty( $airport_pickup_dropoff_price['airport_service_fee_children'] ) ? $airport_pickup_dropoff_price['airport_service_fee_children'] : 0;
@@ -366,5 +353,22 @@ class Pricing {
 		}
 
 		return $day_difference;
+	}
+
+	private function calculate_service_fee($service_key, $meta, &$price_total, $deposit, &$deposit_amount, $is_round_trip = false) {
+		$price = !empty($meta[$service_key]) ? $meta[$service_key] : '';
+		if (empty($price)) return;
+
+		if ($is_round_trip) {
+			$price_total += ($price * 2);
+			if ($deposit == "true") {
+				$deposit_amount += ($price * 2);
+			}
+		} else {
+			$price_total += $price;
+			if ($deposit == "true") {
+				$deposit_amount += $price;
+			}
+		}
 	}
 }
