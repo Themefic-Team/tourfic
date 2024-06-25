@@ -127,7 +127,19 @@ final class Tourfic {
 		// autoloader
 		require_once TF_PATH . 'autoloader.php';
 
-		\Tourfic\Classes\Base::instance();
+		if( class_exists("\Tourfic\Classes\Base")) {
+			\Tourfic\Classes\Base::instance();
+		}else {
+			add_action( 'admin_notices', function() {
+				?>
+				<div class="notice notice-error">
+					<p><?php esc_html_e( 'Update Unsuccessful, Please Delete and Re-install the Tourfic Plugin.', 'tourfic' ); ?></p>
+				</div>
+				<?php
+			} );
+
+			return;
+		}
 	}
 
 	/**
