@@ -31,8 +31,16 @@ class Helper {
 		add_filter( 'template_include', array( $this, 'tourfic_archive_page_template' ) );
 		add_filter( 'single_template', array( $this, 'tf_single_page_template' ) );
 		add_filter( 'after_setup_theme', array( $this, 'tf_image_sizes' ) );
-		add_action( 'admin_menu', array($this, 'tf_documentation_page_integration'), 999 );
-		add_action( 'add_meta_boxes', array($this, 'tf_hotel_tour_docs') );
+		add_action( 'admin_menu', array( $this, 'tf_documentation_page_integration' ), 999 );
+		add_action( 'add_meta_boxes', array( $this, 'tf_hotel_tour_docs' ) );
+		add_action( 'show_user_profile', array( $this, 'tf_extra_user_profile_fields' ) );
+		add_action( 'edit_user_profile', array( $this, 'tf_extra_user_profile_fields' ) );
+		add_action( 'personal_options_update', array( $this, 'tf_save_extra_user_profile_fields' ) );
+		add_action( 'edit_user_profile_update', array( $this, 'tf_save_extra_user_profile_fields' ) );
+
+		add_action( 'admin_menu', array( $this, 'tourfic_admin_menu_seperator' ) );
+		add_filter( 'menu_order', array( $this, 'tourfic_admin_menu_order_change' ) );
+		add_filter( 'custom_menu_order', '__return_true' );
 	}
 
 	static function tfopt( $option = '', $default = null ) {
@@ -2974,13 +2982,13 @@ class Helper {
 	 * Go to Documentaion Metabox
 	 */
 	function tf_hotel_tour_docs() {
-		add_meta_box( 'tfhotel_docs', esc_html__( 'Tourfic Documentation', 'tourfic' ), array($this, 'tf_hotel_docs_callback'), 'tf_hotel', 'side', 'high' );
-		add_meta_box( 'tfapartment_docs', esc_html__( 'Tourfic Documantation', 'tourfic' ), array($this, 'tf_apartment_docs_callback'), 'tf_apartment', 'side', 'high' );
-		add_meta_box( 'tftour_docs', esc_html__( 'Tourfic Documentation', 'tourfic' ), array($this, 'tf_tour_docs_callback'), 'tf_tours', 'side', 'high' );
+		add_meta_box( 'tfhotel_docs', esc_html__( 'Tourfic Documentation', 'tourfic' ), array( $this, 'tf_hotel_docs_callback' ), 'tf_hotel', 'side', 'high' );
+		add_meta_box( 'tfapartment_docs', esc_html__( 'Tourfic Documantation', 'tourfic' ), array( $this, 'tf_apartment_docs_callback' ), 'tf_apartment', 'side', 'high' );
+		add_meta_box( 'tftour_docs', esc_html__( 'Tourfic Documentation', 'tourfic' ), array( $this, 'tf_tour_docs_callback' ), 'tf_tours', 'side', 'high' );
 
-		add_filter( 'get_user_option_meta-box-order_tf_tours', array($this, 'tour_metabox_order') );
-		add_filter( 'get_user_option_meta-box-order_tf_apartment', array($this, 'apartment_metabox_order') );
-		add_filter( 'get_user_option_meta-box-order_tf_hotel', array($this, 'hotel_metabox_order') );
+		add_filter( 'get_user_option_meta-box-order_tf_tours', array( $this, 'tour_metabox_order' ) );
+		add_filter( 'get_user_option_meta-box-order_tf_apartment', array( $this, 'apartment_metabox_order' ) );
+		add_filter( 'get_user_option_meta-box-order_tf_hotel', array( $this, 'hotel_metabox_order' ) );
 	}
 
 	function tf_hotel_docs_callback() {
@@ -2988,7 +2996,7 @@ class Helper {
 		?>
         <div class="tf_docs_preview">
             <a href="<?php echo esc_url( $tfhoteldocumentation ); ?>" target="_blank">
-                <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
+                <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL . 'images/banner-cta.png' ); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
             </a>
         </div>
 		<?php
@@ -3000,7 +3008,7 @@ class Helper {
 		?>
         <div class="tf_docs_preview">
             <a href="<?php echo esc_url( $tf_apartment_documentation ); ?>" target="_blank">
-                <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
+                <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL . 'images/banner-cta.png' ); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
             </a>
         </div>
 		<?php
@@ -3010,8 +3018,8 @@ class Helper {
 		$tf_tour_documentation = sanitize_url( 'https://themefic.com/docs/tourfic/tours/tourfic-hotel-general-settings/' );
 		?>
         <div class="tf_docs_preview">
-            <a href="<?php echo esc_url( $tf_tour_documentation); ?>" target="_blank">
-                <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . 'images/banner-cta.png'); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
+            <a href="<?php echo esc_url( $tf_tour_documentation ); ?>" target="_blank">
+                <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL . 'images/banner-cta.png' ); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
             </a>
         </div>
 		<?php
@@ -3021,7 +3029,7 @@ class Helper {
 		return array(
 			'side' => join(
 				",",
-				array (
+				array(
 					'submitdiv',
 					'tfapartment_docs',
 					'tfapartment_black_friday_docs'
@@ -3054,5 +3062,110 @@ class Helper {
 				)
 			),
 		);
+	}
+
+	/*
+     * User extra fields
+     * @author Foysal
+     */
+	function tf_extra_user_profile_fields( $user ) { ?>
+        <h3><?php esc_html_e( 'Tourfic Extra profile information', 'tourfic' ); ?></h3>
+
+        <table class="form-table">
+            <tr>
+                <th><label for="language"><?php esc_html_e( 'Language', 'tourfic' ); ?></label></th>
+                <td>
+                    <input type="text" name="language" id="language"
+                           value="<?php echo esc_attr( get_the_author_meta( 'language', $user->ID ) ); ?>"
+                           class="regular-text"/><br/>
+                    <span class="description"><?php esc_html_e( "Please enter your languages. Example: Bangla, English, Hindi" ); ?></span>
+                </td>
+            </tr>
+        </table>
+	<?php }
+
+	/*
+     * Save user extra fields
+     * @author Foysal
+     */
+	function tf_save_extra_user_profile_fields( $user_id ) {
+		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), 'update-user_' . $user_id ) ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'edit_user', $user_id ) ) {
+			return false;
+		}
+		update_user_meta( $user_id, 'language', $_POST['language'] );
+	}
+
+	function tourfic_admin_menu_seperator() {
+
+		global $menu;
+
+		$menu[] = array( '', 'read', 'separator-tourfic', '', 'wp-menu-separator tourfic' );
+		$menu[] = array( '', 'read', 'separator-tourfic2', '', 'wp-menu-separator tourfic' );
+	}
+
+	function tourfic_admin_menu_order_change( $menu_order ) {
+
+		if ( ! empty( $menu_order ) && $menu_order != null ) {
+			$tourfic_menu_order = array();
+
+			$tourfic_separator  = array_search( 'separator-tourfic', $menu_order, true );
+			$tourfic_separator2 = array_search( 'separator-tourfic2', $menu_order, true );
+			$tourfic_tours      = array_search( 'edit.php?post_type=tf_tours', $menu_order, true );
+			$tourfic_hotel      = array_search( 'edit.php?post_type=tf_hotel', $menu_order, true );
+			$tourfic_apt        = array_search( 'edit.php?post_type=tf_apartment', $menu_order, true );
+			$tourfic_emails     = array_search( 'edit.php?post_type=tf_email_templates', $menu_order, true );
+			$tourfic_vendor     = array_search( 'tf-multi-vendor', $menu_order, true );
+
+			// // remove previous orders
+			unset( $menu_order[ $tourfic_separator ] );
+			unset( $menu_order[ $tourfic_separator2 ] );
+
+			if ( ! empty( $tourfic_apt ) ) {
+				unset( $menu_order[ $tourfic_apt ] );
+			}
+
+			if ( ! empty( $tourfic_tours ) ) {
+				unset( $menu_order[ $tourfic_tours ] );
+			}
+
+			if ( ! empty( $tourfic_hotel ) ) {
+				unset( $menu_order[ $tourfic_hotel ] );
+			}
+
+			if ( ! empty( $tourfic_vendor ) ) {
+				unset( $menu_order[ $tourfic_vendor ] );
+			}
+
+			if ( ! empty( $tourfic_emails ) ) {
+				unset( $menu_order[ $tourfic_emails ] );
+			}
+
+			foreach ( $menu_order as $index => $item ) {
+
+				if ( 'tf_settings' === $item ) {
+					$tourfic_menu_order[] = 'separator-tourfic';
+					$tourfic_menu_order[] = $item;
+					$tourfic_menu_order[] = 'edit.php?post_type=tf_tours';
+					$tourfic_menu_order[] = 'edit.php?post_type=tf_hotel';
+					$tourfic_menu_order[] = 'edit.php?post_type=tf_apartment';
+					$tourfic_menu_order[] = 'tf-multi-vendor';
+					$tourfic_menu_order[] = 'edit.php?post_type=tf_email_templates';
+					$tourfic_menu_order[] = 'separator-tourfic2';
+
+				} elseif ( ! in_array( $item, array( 'separator-tourfic' ), true ) ) {
+					$tourfic_menu_order[] = $item;
+				}
+			}
+
+			return $tourfic_menu_order;
+
+		} else {
+
+			return;
+		}
 	}
 }

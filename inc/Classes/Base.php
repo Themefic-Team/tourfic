@@ -42,6 +42,11 @@ class Base {
 		\Tourfic\Classes\Activator::instance();
 		\Tourfic\Classes\Deactivator::instance();
 
+		//Enquiry
+		\Tourfic\Admin\Enquiry\Hotel_Enquiry::instance();
+		\Tourfic\Admin\Enquiry\Tour_Enquiry::instance();
+		\Tourfic\Admin\Enquiry\Apartment_Enquiry::instance();
+
 		if(is_admin()) {
 			\Tourfic\Admin\TF_Setup_Wizard::instance();
 			\Tourfic\Admin\TF_Options\TF_Options::instance();
@@ -55,11 +60,6 @@ class Base {
 			Tour_Booking_Details::instance();
 			Hotel_Booking_Details::instance();
 			Apartment_Booking_Details::instance();
-
-			//Enquiry
-			\Tourfic\Admin\Enquiry\Hotel_Enquiry::instance();
-			\Tourfic\Admin\Enquiry\Tour_Enquiry::instance();
-			\Tourfic\Admin\Enquiry\Apartment_Enquiry::instance();
 
 			// Promo Notice
 			TF_Promo_Notice::instance();
