@@ -2430,7 +2430,7 @@ var frame, gframe;
                         link.download = 'tf-settings-export.json';
 
                         // Programmatically click the link to initiate the file download
-                        link.trigger("click");
+                        link.click();
 
                         // Clean up the temporary URL
                         window.URL.revokeObjectURL(url);
