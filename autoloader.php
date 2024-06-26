@@ -13,8 +13,18 @@ function tourfic_autoloader( $class ) {
 	$main_class_name = substr( $class, strlen( $namespace ) );
 	$class_file      = TF_INC_PATH . str_replace( '\\', '/', $main_class_name ) . '.php';
 
-	// if the file exists, require it
+	// Attempt to load the class file with original case
 	if ( file_exists( $class_file ) ) {
 		require_once $class_file;
+		return;
+	}
+
+	// Attempt to load the class file with lowercase
+	$main_class_name = strpos( $main_class_name, 'Classes' ) !== false ? str_replace( 'Classes', 'classes', $main_class_name ) : $main_class_name;
+	$class_file_lowercase = TF_INC_PATH . str_replace( '\\', '/', $main_class_name ) . '.php';
+
+	if ( file_exists( $class_file_lowercase ) ) {
+		require_once $class_file_lowercase;
+		return;
 	}
 }
