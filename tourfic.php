@@ -117,7 +117,7 @@ final class Tourfic {
 		// Load the text domain for translation.
 		add_action( 'plugins_loaded', array( $this, 'tf_load_textdomain' ) );
 		//Compatibility with custom order tables for the WooCommerce plugin
-		add_action( 'before_woocommerce_init', array($this, 'tf_woocommerce_compatibility') );
+		add_action( 'before_woocommerce_init', array( $this, 'tf_woocommerce_compatibility' ) );
 	}
 
 	/**
@@ -127,14 +127,14 @@ final class Tourfic {
 		// autoloader
 		require_once TF_PATH . 'autoloader.php';
 
-		if( class_exists("\Tourfic\Classes\Base")) {
+		if ( class_exists( "\Tourfic\Classes\Base" ) ) {
 			\Tourfic\Classes\Base::instance();
-		}else {
-			add_action( 'admin_notices', function() {
+		} else {
+			add_action( 'admin_notices', function () {
 				?>
-				<div class="notice notice-error">
-					<p><?php esc_html_e( 'Update Unsuccessful, Please Delete and Re-install the Tourfic Plugin.', 'tourfic' ); ?></p>
-				</div>
+                <div class="notice notice-error">
+                    <p><?php esc_html_e( 'Tourfic Plugin is not Working Properly because the Required Files are Missing. Please Reinstall the Plugin.', 'tourfic' ); ?></p>
+                </div>
 				<?php
 			} );
 
@@ -160,7 +160,7 @@ final class Tourfic {
 		load_textdomain( 'tourfic', WP_LANG_DIR . '/tourfic/tourfic-' . $locale . '.mo' );
 		// Then check for a language file in /wp-content/plugins/tourfic/lang/ (this will be overriden by any file already loaded)
 		load_plugin_textdomain( 'tourfic', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
-	
+
 	}
 
 	/**
@@ -172,68 +172,69 @@ final class Tourfic {
 		if ( current_user_can( 'activate_plugins' ) ) {
 			if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) && ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) {
 				?>
-				<div id="message" class="error">
+                <div id="message" class="error">
 					<?php /* translators: %1$s: WooCommerce plugin url start, %2$s: WooCommerce plugin url end */ ?>
-					<p><?php printf( esc_html__( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
-					<p><a id="tf_wooinstall" class="install-now button" data-plugin-slug="woocommerce"><?php esc_html_e( 'Install Now', 'tourfic' ); ?></a></p>
-				</div>
-	
-				<script>
-					jQuery(document).on('click', '#tf_wooinstall', function (e) {
-						e.preventDefault();
-						var current = jQuery(this);
-						var plugin_slug = current.attr("data-plugin-slug");
-						var ajax_url= '<?php echo esc_url( admin_url( 'admin-ajax.php' ) )?>';
-	
-						current.addClass('updating-message').text('Installing...');
-	
-						var data = {
-							action: 'tf_ajax_install_plugin',
-							_ajax_nonce: '<?php echo esc_html( wp_create_nonce( 'updates' ) ); ?>',
-							slug: plugin_slug,
-						};
-	
-						jQuery.post(ajax_url, data, function (response) {
-							current.removeClass('updating-message');
-							current.addClass('updated-message').text('Installing...');
-							current.attr("href", response.data.activateUrl);
-						})
-							.fail(function () {
-								current.removeClass('updating-message').text('Install Failed');
-							})
-							.always(function () {
-								current.removeClass('install-now updated-message').addClass('activate-now button-primary').text('Activating...');
-								current.unbind(e);
-								current[0].click();
-							});
-					});
-				</script>
-	
+                    <p><?php printf( esc_html__( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
+                    <p><a id="tf_wooinstall" class="install-now button" data-plugin-slug="woocommerce"><?php esc_html_e( 'Install Now', 'tourfic' ); ?></a></p>
+                </div>
+
+                <script>
+                    jQuery(document).on('click', '#tf_wooinstall', function (e) {
+                        e.preventDefault();
+                        var current = jQuery(this);
+                        var plugin_slug = current.attr("data-plugin-slug");
+                        var ajax_url = '<?php echo esc_url( admin_url( 'admin-ajax.php' ) )?>';
+
+                        current.addClass('updating-message').text('Installing...');
+
+                        var data = {
+                            action: 'tf_ajax_install_plugin',
+                            _ajax_nonce: '<?php echo esc_html( wp_create_nonce( 'updates' ) ); ?>',
+                            slug: plugin_slug,
+                        };
+
+                        jQuery.post(ajax_url, data, function (response) {
+                            current.removeClass('updating-message');
+                            current.addClass('updated-message').text('Installing...');
+                            current.attr("href", response.data.activateUrl);
+                        })
+                            .fail(function () {
+                                current.removeClass('updating-message').text('Install Failed');
+                            })
+                            .always(function () {
+                                current.removeClass('install-now updated-message').addClass('activate-now button-primary').text('Activating...');
+                                current.unbind(e);
+                                current[0].click();
+                            });
+                    });
+                </script>
+
 				<?php
 			} elseif ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) && file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) {
 				?>
-	
-				<div id="message" class="error">
+
+                <div id="message" class="error">
 					<?php /* translators: %1$s: WooCommerce plugin url start, %2$s: WooCommerce plugin url end */ ?>
-					<p><?php printf( esc_html__( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
-					<p><a href="<?php echo esc_url( get_admin_url() ); ?>plugins.php?_wpnonce=<?php echo esc_attr( wp_create_nonce( 'activate-plugin_woocommerce/woocommerce.php' ) ); ?>&action=activate&plugin=woocommerce/woocommerce.php"
-						  class="button activate-now button-primary"><?php esc_html_e( 'Activate', 'tourfic' ); ?></a></p>
-				</div>
+                    <p><?php printf( esc_html__( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
+                    <p>
+                        <a href="<?php echo esc_url( get_admin_url() ); ?>plugins.php?_wpnonce=<?php echo esc_attr( wp_create_nonce( 'activate-plugin_woocommerce/woocommerce.php' ) ); ?>&action=activate&plugin=woocommerce/woocommerce.php"
+                           class="button activate-now button-primary"><?php esc_html_e( 'Activate', 'tourfic' ); ?></a></p>
+                </div>
 				<?php
 			} elseif ( version_compare( get_option( 'woocommerce_db_version' ), '2.5', '<' ) ) {
 				?>
-	
-				<div id="message" class="error">
+
+                <div id="message" class="error">
 					<?php /* translators: %1$s: strong tag start, %2$s: strong tag end, %3$s: plugin url start, %4$s: plugin url end */ ?>
-					<p><?php printf( esc_html__( '%1$sTourfic is inactive.%2$s This plugin requires WooCommerce 2.5 or newer. Please %3$supdate WooCommerce to version 2.5 or newer%4$s', 'tourfic' ), '<strong>', '</strong>', '<a href="' . esc_url( admin_url( 'plugins.php' ) ) . '">', '&nbsp;&raquo;</a>' ); ?></p>
-				</div>
-	
+                    <p><?php printf( esc_html__( '%1$sTourfic is inactive.%2$s This plugin requires WooCommerce 2.5 or newer. Please %3$supdate WooCommerce to version 2.5 or newer%4$s', 'tourfic' ), '<strong>', '</strong>', '<a href="' . esc_url( admin_url( 'plugins.php' ) ) . '">', '&nbsp;&raquo;</a>' ); ?></p>
+                </div>
+
 				<?php
 			}
 		}
 	}
 
-	function tf_woocommerce_compatibility () {
+	function tf_woocommerce_compatibility() {
 		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
 			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
 		}
