@@ -3,6 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
+use \Tourfic\Classes\Apartment\Pricing;
 
 /**
  * Flushing Rewrite on Tourfic Activation
@@ -2338,6 +2339,11 @@ if ( ! function_exists( 'get_apartment_min_max_price' ) ) {
 		);
 	}
 }
+
+// echo "<pre>";
+// print_r(Pricing::instance()->get_total_price( 641 ));
+// echo "</pre>";
+// die(); // added by - Sunvi
 
 /**
  * Apartment host rating
