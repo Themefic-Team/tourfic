@@ -133,7 +133,7 @@ final class Tourfic {
 			add_action( 'admin_notices', function () {
 				?>
                 <div class="notice notice-error">
-                    <p><?php esc_html_e( 'Something Went Wrong. Please Reinstall the Tourfic Plugin ', 'tourfic' ); ?></p>
+                    <p><?php esc_html_e( 'Something went Wrong. Please Reinstall the Tourfic Plugin ', 'tourfic' ); ?></p>
                 </div>
 				<?php
 			} );
