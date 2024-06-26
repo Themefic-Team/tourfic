@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.5
-Stable tag: 2.12.4
+Stable tag: 2.12.5
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -322,6 +322,11 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.12.5 - 26 June 2024 =
+
+- Improvement: System stability improved
+- Fixed: Minor Bugs fixed
+
 = 2.12.4 - 22 June 2024 =
 
 - Fixed: Classic editor metabox bug
@@ -334,7 +339,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Fixed: The iCal Sync issue fixed
 - Fixed: Minor Bugs fixed
 - Fixed: Vendor commission calculation issue
-- Fixed: Tour,hotel, apartment feature update issue
+- Fixed: Tour, hotel, and apartment feature update issue
 - Improvement: Optimized code and file structure 
 - Improvement: System stability improved
 - Compatible with WordPress 6.5.4
