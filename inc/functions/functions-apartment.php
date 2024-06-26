@@ -2341,7 +2341,7 @@ if ( ! function_exists( 'get_apartment_min_max_price' ) ) {
 }
 
 // echo "<pre>";
-// print_r(Pricing::instance()->get_total_price( 641 ));
+// print_r( Pricing::instance()->set_dates('2024/06/26', '2024/07/01')->set_persons(1, 1, 1)->get_total_price( 641 ) );
 // echo "</pre>";
 // die(); // added by - Sunvi
 
