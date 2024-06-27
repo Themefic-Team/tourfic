@@ -6,6 +6,9 @@ defined( 'ABSPATH' ) || exit;
 
 class Pricing {
 
+	protected $date;
+	protected $persons;
+
     public $group;
     public $wc_group;
     public $sale_group;
@@ -323,6 +326,32 @@ class Pricing {
         $this->wc_sale_infant = $wc_sale_infant_price ?? null;
     
     }
+
+	/*
+	 * Set date
+	 */
+	function set_date($date) {
+		$this->date = $date;
+		return $this;
+	}
+
+	/*
+	 * Set persons
+	 */
+	function set_persons(array $persons) {
+		$this->persons = $persons;
+		return $this;
+	}
+
+	# Get date
+	function date() {
+		return $this->date;
+	}
+
+	# Get persons
+	function persons() {
+		return $this->persons;
+	}
 
     # Group regular price
     function group() {
