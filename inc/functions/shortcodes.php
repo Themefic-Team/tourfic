@@ -1458,9 +1458,9 @@ function tf_reviews_shortcode( $atts, $content = null ) {
          */
         jQuery('document').ready(function ($) {
 
-            $(".tf-reviews-slider").each(function () {
+            $(".tf-single-review.tf-reviews-slider").each(function () {
                 var $this = $(this);
-                $this.slick({
+                $this.not('.slick-initialized').slick({
                     dots: <?php echo wp_json_encode( filter_var( $dots, FILTER_VALIDATE_BOOLEAN ) ); ?>,
                     arrows: <?php echo wp_json_encode( filter_var( $arrows, FILTER_VALIDATE_BOOLEAN ) ); ?>,
                     slidesToShow: <?php echo (int) absint( $count ); ?>,

@@ -174,7 +174,7 @@ class TF_Reviews_Slider extends \Elementor\Widget_Base {
 		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
 
 		<script>
-			jQuery('.tf-review-items-wrapper').slick({
+			jQuery('.tf-reviews-slider').slick({
             dots: true,
             arrows: false,
             infinite: true,
