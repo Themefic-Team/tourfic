@@ -6,6 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
 use \Tourfic\Core\TF_Backend_Booking;
+use \Tourfic\Classes\Apartment\Pricing as APT_Price;
 
 class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 
@@ -368,6 +369,12 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 			);
 		}
 
+		if( !empty( $apt_data["enable_availability"]) && $apt_data["enable_availability"] == 1 ) {
+			$total_price = $this->get_total_apartment_price( $apt_id, $check_from, $check_to, $adult_count, $child_count, $infant_count, $additional_fees );
+		} else {
+			$total_price = APT_Price::instance()->set_dates( $check_from, $check_to)->set_persons( $adult_count, $child_count, $infant_count )->set_total_price( $apt_id )->get_total_price();
+		}
+
 
 		if ( $apt_data['max_adults'] < $adult_count ) {
 			/* translators: %s max adults */
@@ -383,7 +390,7 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 		}
 
 		if ( ! array_key_exists( "fieldErrors", $response ) || ! $response['fieldErrors'] ) {
-			$total_price      = $this->get_total_apartment_price( $apt_id, $check_from, $check_to, $adult_count, $child_count, $infant_count, $additional_fees );
+			
 			$billing_details  = array(
 				'billing_first_name' => $field['tf_customer_first_name'],
 				'billing_last_name'  => $field['tf_customer_last_name'],
