@@ -7,16 +7,26 @@ class Pricing {
 
 	use \Tourfic\Traits\Singleton;
 
-	public function __construct() {
-
-	}
-
+	
 	protected float $total_price = 0; // float
 	protected $all_fees;
 	protected $days;
 	protected $period;
 	protected array $persons;
 	protected $apt_price;
+	protected $adult_price;
+	protected $adult_discount_price;
+	protected $child_price;
+	protected $child_discount_price;
+	protected $infant_price;
+	protected $infant_discount_price;
+	protected $meta;
+	protected $id;
+
+	public function __construct() {
+
+	}
+	
 
 	// all price will be calculate here
 	function set_total_price( $apt_id ) {
@@ -51,6 +61,7 @@ class Pricing {
 	public function set_apartment_price( $apt_id ) {
 		$meta = get_post_meta( $apt_id, 'tf_apartment_opt', true );
 		$pricing_type = !empty($meta["pricing_type"]) ? $meta["pricing_type"] : 'per_night';
+		$discount_arr = $this->get_discount( $apt_id );
 		$adult_price = !empty($meta["adult_price"]) ? $meta["adult_price"] : 0;
 		$child_price = !empty($meta["child_price"]) ? $meta["child_price"] : 0;
 		$infant_price = !empty($meta["infant_price"]) ? $meta["infant_price"] : 0;
@@ -58,15 +69,33 @@ class Pricing {
 
 		// Total person calculation
 		$persons = !empty($this->persons) ? $this->persons : array();
+		$adult_count = !empty($persons['adult']) ? $persons['adult'] : 0;
+		$child_count = !empty($persons['child']) ? $persons['child'] : 0;
+		$infant_count = !empty($persons['infant']) ? $persons['infant'] : 0;
 		$days = !empty($this->days) ? $this->days : 0;
 
 
 		if( $pricing_type == 'per_night' ) {
 			$this->apt_price += $per_night_price * $days;
 		} else if( $pricing_type == 'per_person' ) {
-			$this->apt_price += !empty( $persons) ? (( $adult_price * $persons['adult'] ) + ( $child_price * $persons['child'] ) + ( $infant_price * $persons['infant'] )) * $days : 0;
+			$this->adult_price = $adult_price * $adult_count;
+			$this->child_price = $child_price * $child_count;
+			$this->infant_price = $infant_price * $infant_count;
+
+			$this->apt_price += ($this->adult_price + $this->child_price + $this->infant_price) * $days;
 		}
 
+		if( !empty($discount_arr) ) {
+			if($discount_arr['discount_type'] == 'fixed') {
+				$this->adult_discount_price = $this->adult_price - $discount_arr['discount_amount'];
+				$this->child_discount_price = $this->child_price - $discount_arr['discount_amount'];
+				$this->infant_discount_price = $this->infant_price - $discount_arr['discount_amount'];
+			} else if($discount_arr['discount_type'] == 'percent') {
+				$this->adult_discount_price = $this->adult_price - (( $this->adult_price * $discount_arr['discount_amount'] ) / 100);
+				$this->child_discount_price = $this->child_price - (( $this->child_price * $discount_arr['discount_amount'] ) / 100);
+				$this->infant_discount_price = $this->infant_price - (( $this->infant_price * $discount_arr['discount_amount'] ) / 100);
+			}
+		}
 
 		return $this;
 		
@@ -169,6 +198,26 @@ class Pricing {
 
 	function get_total_price_html() {
 		return !empty($this->total_price) ? wc_price( $this->total_price ) : wc_price( 0 );
+	}
+
+	function get_adult_price() {
+		return !empty($this->adult_price) ? $this->adult_price : 0;
+	}
+	
+	function get_adult_sale_price() {
+		return !empty($this->adult_discount_price) ? $this->adult_discount_price : 0;
+	}
+	function get_child_price() {
+		return !empty($this->child_price) ? $this->child_price : 0;
+	}
+	function get_child_sale_price() {
+		return !empty($this->child_discount_price) ? $this->child_discount_price : 0;
+	}
+	function get_infant_price() {
+		return !empty($this->infant_price) ? $this->infant_price : 0;
+	}
+	function get_infant_sale_price() {
+		return !empty($this->infant_discount_price) ? $this->infant_discount_price : 0;
 	}
 
 	function get_apartment_min_max_price( $post_id = null ) {

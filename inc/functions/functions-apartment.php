@@ -2340,9 +2340,11 @@ if ( ! function_exists( 'get_apartment_min_max_price' ) ) {
 	}
 }
 
+$meta = get_post_meta( 641, 'tf_apartment_opt', true );
+
 // echo "<pre>";
-// // print_r( Pricing::instance()->set_dates('2024/06/27', '2024/07/01')->set_persons(1, 1, 1)->get_total_price( 641 ) );
-// print_r( Pricing::instance()->set_dates('2024/06/27', '2024/07/01')->set_persons(1, 1, 1)->set_total_price( 641 )->get_total_price());
+// print_r( Pricing::instance()->set_persons(1, 1, 1)->set_apartment_price( 641 )->get_adult_sale_price() );
+// // print_r( Pricing::instance()->get_meta());
 // echo "</pre>";
 // die(); // added by - Sunvi
 
