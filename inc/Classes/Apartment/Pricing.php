@@ -11,20 +11,25 @@ class Pricing {
 
 	}
 
-	protected int $total_price = 500;
+	protected float $total_price = 0; // float
 	protected $all_fees;
 	protected $days;
 	protected $period;
-	protected $persons;
+	protected array $persons;
+	protected $apt_price;
 
 	// all price will be calculate here
-	function get_total_price( $apt_id ) {
-		$total_days = $this->days;
+	function set_total_price( $apt_id ) {
+		$apartment_price = $this->set_apartment_price( $apt_id )->get_apartment_price();
 		$additional_fees = $this->set_additional_fees( $apt_id )->get_fees();
 		$discount_arr = $this->get_discount( $apt_id );
-		$total_adult = 1;
-		$child_adult = 1;
-		$total_infant = 1;
+
+		// need to call the set_dates function before this
+		$total_days = !empty( $this->days) ? $this->days : 0;
+
+		if( !empty($apartment_price ) ) {
+			$this->total_price += $apartment_price;
+		}
 
 		$total_person = $this->persons;
 
@@ -40,24 +45,63 @@ class Pricing {
 			$this->total_price += $additional_fees;
 		}
 
-		return $this->total_price;
+		return $this;
+	}
+
+	public function set_apartment_price( $apt_id ) {
+		$meta = get_post_meta( $apt_id, 'tf_apartment_opt', true );
+		$pricing_type = !empty($meta["pricing_type"]) ? $meta["pricing_type"] : 'per_night';
+		$adult_price = !empty($meta["adult_price"]) ? $meta["adult_price"] : 0;
+		$child_price = !empty($meta["child_price"]) ? $meta["child_price"] : 0;
+		$infant_price = !empty($meta["infant_price"]) ? $meta["infant_price"] : 0;
+		$per_night_price = !empty($meta["price_per_night"]) ? $meta["price_per_night"] : 0;
+
+		// Total person calculation
+		$persons = !empty($this->persons) ? $this->persons : array();
+		$days = !empty($this->days) ? $this->days : 0;
+
+
+		if( $pricing_type == 'per_night' ) {
+			$this->apt_price += $per_night_price * $days;
+		} else if( $pricing_type == 'per_person' ) {
+			$this->apt_price += !empty( $persons) ? (( $adult_price * $persons['adult'] ) + ( $child_price * $persons['child'] ) + ( $infant_price * $persons['infant'] )) * $days : 0;
+		}
+
+
+		return $this;
+		
 	}
 
 	function set_additional_fees($apt_id) {
 		$meta = get_post_meta( $apt_id, 'tf_apartment_opt', true );
 		$total_days = $this->days;
-		$total_person = $this->persons;
+		$total_person = !empty( $this->persons ) ? array_sum( $this->persons ) : 0;
 		$additional_fees = !empty( $meta["additional_fees"] ) ? $meta["additional_fees"] : array();
+		
+		// if free version
+		$additional_fee = ! empty( $meta["additional_fee"] ) ? $meta["additional_fee"] : 0;
+		$additional_fee_type   = ! empty( $meta["fee_type"] ) ? $meta["fee_type"] : '';
 
-		if( count($additional_fees) > 0 ) {
-			foreach($additional_fees as $fee) {
-				if($fee['fee_type'] == 'per_night') {
-					$this->all_fees += $fee['additional_fee'] * $total_days;
-				} else if($fee['fee_type'] == 'per_person') {
-					$this->all_fees += $fee['additional_fee'] * $total_person;
-				} else {
-					$this->all_fees += $fee['additional_fee'];
+
+		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+			if( count($additional_fees) > 0 ) {
+				foreach($additional_fees as $fee) {
+					if($fee['fee_type'] == 'per_night') {
+						$this->all_fees += $fee['additional_fee'] * $total_days;
+					} else if($fee['fee_type'] == 'per_person') {
+						$this->all_fees += $fee['additional_fee'] * $total_person;
+					} else {
+						$this->all_fees += $fee['additional_fee'];
+					}
 				}
+			}
+		} else {
+			if($additional_fee_type == 'per_night') {
+				$this->all_fees += $additional_fee * $total_days;
+			} else if($additional_fee_type == 'per_person') {
+				$this->all_fees += $additional_fee * $total_person;
+			} else {
+				$this->all_fees += $additional_fee;
 			}
 		}
 
@@ -83,13 +127,21 @@ class Pricing {
 	}
 
 	public function set_persons($adult, $child, $infant) {
-		$this->persons = (int) $adult + (int) $child + (int) $infant;
+		$this->persons = array(
+			'adult' => !empty($adult) ? $adult : 0,
+			'child' => !empty($child) ? $child : 0,
+			'infant' => !empty($infant) ? $infant : 0,
+		);
 
 		return $this;
 	}
 
 	function get_fees() {
 		return !empty($this->all_fees) ? $this->all_fees : 0;
+	}
+
+	public function get_persons() {
+		return !empty($this->persons) ? $this->persons : array();
 	}
 
 	function get_discount($apt_id) {
@@ -105,6 +157,18 @@ class Pricing {
 	
 	function get_days() {
 		return !empty($this->days) ? $this->days : 0;
+	}
+
+	function get_apartment_price() {
+		return !empty($this->apt_price) ? $this->apt_price : 0;
+	}
+
+	function get_total_price() {
+		return !empty($this->total_price) ? $this->total_price : 0;
+	}
+
+	function get_total_price_html() {
+		return !empty($this->total_price) ? wc_price( $this->total_price ) : wc_price( 0 );
 	}
 
 	function get_apartment_min_max_price( $post_id = null ) {
