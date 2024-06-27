@@ -2,7 +2,7 @@
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
-use \Tourfic\Classes\Tour\Pricing as Tour_Price;
+use \Tourfic\Classes\Tour\Tour_Price;
 
 $tf_booking_type = '1';
 $tf_booking_url = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = '';
