@@ -2,49 +2,13 @@
 defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
-use \Tourfic\Classes\Tour\Pricing as Tour_Price;
+use \Tourfic\Classes\Tour\Tour_Price;
+use \Tourfic\Classes\Tour\Pricing;
 
-/**
- * Flushing Rewrite on Tourfic Activation
- *
- * tf_tours post type
- * tour_destination taxonomy
- */
-//function tf_tours_rewrite_flush() {
-//
-//	register_tf_tours_post_type();
-//	tf_tours_taxonomies_register();
-//	flush_rewrite_rules();
-//
-//}
-//
-//register_activation_hook( TF_PATH . 'tourfic.php', 'tf_tours_rewrite_flush' );
-
-/**
- * Get tour destinations
- *
- * {taxonomy-tour_destination}
- */
-if ( ! function_exists( 'get_tour_destinations' ) ) {
-	function get_tour_destinations() {
-
-		$destinations = array();
-
-		$destination_terms = get_terms( array(
-			'taxonomy'   => 'tour_destination',
-			'hide_empty' => true,
-		) );
-
-        if(!empty($destination_terms)) {
-	        foreach ( $destination_terms as $destination_term ) {
-		        $destinations[ $destination_term->slug ] = $destination_term->name;
-	        }
-        }
-
-		return $destinations;
-
-	}
-}
+// echo "<pre>";
+// print_r( Pricing::instance(29)->set_date('2024/06/27')->set_persons([1, 1, 1]) );
+// echo "</pre>";
+// die(); // added by - Sunvi
 
 #################################
 # All the forms                 #

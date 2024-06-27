@@ -5,7 +5,7 @@
 // Get header
 
 use \Tourfic\Classes\Helper;
-use \Tourfic\Classes\Tour\Pricing as Tour_Price;
+use \Tourfic\Classes\Tour\Tour_Price;
 use \Tourfic\App\Wishlist;
 
 get_header();
