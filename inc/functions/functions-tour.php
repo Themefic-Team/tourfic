@@ -5,11 +5,6 @@ use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Tour\Tour_Price;
 use \Tourfic\Classes\Tour\Pricing;
 
-// echo "<pre>";
-// print_r( Pricing::instance(29)->set_date('2024/06/27')->set_persons([1, 1, 1]) );
-// echo "</pre>";
-// die(); // added by - Sunvi
-
 #################################
 # All the forms                 #
 # Search form, booking form     #
