@@ -4800,7 +4800,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'    => 'hotel_popup_heading',
 					'type'  => 'heading',
 					'label' => __( 'Settings for Popup', 'tourfic' ),
-					'subtitle'   => __( 'The popup will appear when you enable the deposit option or the airport pickup service.', 'tourfic' ),
+					'subtitle'   => __( 'The popup will appear when you enable the airport pickup service.', 'tourfic' ),
 				),
 				array(
 					'id'      => 'hotel-option-notice-three',
