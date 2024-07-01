@@ -4,6 +4,8 @@ namespace Tourfic\App\Shortcodes;
 
 defined( 'ABSPATH' ) || exit;
 
+use Tourfic\Classes\Helper;
+
 class Tour_Destinations extends \Tourfic\Core\Shortcodes {
 
 	use \Tourfic\Traits\Singleton;
@@ -37,6 +39,13 @@ class Tour_Destinations extends \Tourfic\Core\Shortcodes {
 			'include'      => $ids,
 		) );
 
+		$tf_expired_tour_showing = ! empty( Helper::tfopt( 't-show-expire-tour' ) ) ? Helper::tfopt( 't-show-expire-tour' ) : '';
+		if(!empty($tf_expired_tour_showing )){
+			$tf_tour_posts_status = array('publish','expired');
+		}else{
+			$tf_tour_posts_status = array('publish');
+		}
+
 		shuffle( $destinations );
 		ob_start();
 
@@ -50,6 +59,17 @@ class Tour_Destinations extends \Tourfic\Core\Shortcodes {
 						$image_url = ! empty( $meta['image'] ) ? $meta['image'] : esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg');
 						$term_link = get_term_link( $term );
 
+						$taxonomy_query = new \WP_Query( array(
+							'post_status' => $tf_tour_posts_status,
+							'tax_query' => array(
+								array(
+									'taxonomy' => 'tour_destination',
+									'field' => 'id',
+									'terms' => $term->term_id,
+								),
+							),
+						) );
+
 						if ( is_wp_error( $term_link ) ) {
 							continue;
 						} ?>
@@ -60,7 +80,7 @@ class Tour_Destinations extends \Tourfic\Core\Shortcodes {
 									<div class="recomended_place_info_header">
 										<h3><?php echo esc_html( $term->name ); ?></h3>
 										<?php /* translators: %s Tour Count */ ?>
-										<p><?php printf( esc_html( _n( '%s tour', '%s tours', $term->count, 'tourfic' ) ), esc_html( $term->count ) ); ?></p>
+										<p><?php printf( esc_html( _n( '%s tour', '%s tours', !empty( $taxonomy_query ) ? $taxonomy_query->post_count : 0, 'tourfic' ) ), esc_html( !empty( $taxonomy_query ) ? $taxonomy_query->post_count : 0 ) ); ?></p>
 									</div>
 								</div>
 							</a>
