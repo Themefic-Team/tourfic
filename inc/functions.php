@@ -360,3 +360,15 @@ if(!function_exists('tf_custom_wp_kses_allow_tags')){
 		return $allowed_tags;
 	}
 }
+
+if(!function_exists('tf_convert_date_format')) {
+	function tf_convert_date_format( $date, $currentFormat ) {
+		$dateTime = DateTime::createFromFormat( $currentFormat, $date );
+
+		if ( $dateTime === false ) {
+			return false;
+		}
+
+		return $dateTime->format( 'Y/m/d' );
+	}
+}
