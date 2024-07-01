@@ -105,17 +105,6 @@ while ( have_posts() ) : the_post();
 			} else return array();
 		}
 	}
-	if(!function_exists('tf_tour_date_format_changer')) {
-		function tf_tour_date_format_changer($date, $format) {
-			if(!empty($date) && !empty($format)) {
-				$date = new DateTime($date);
-				$formattedDate = $date->format($format);
-
-				return $formattedDate;
-
-			} else return;
-		}
-	}
 
 	//Social Share
 	$share_text = get_the_title();
