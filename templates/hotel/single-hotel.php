@@ -118,6 +118,12 @@ while ( have_posts() ) : the_post();
 		}, $rooms );
 		$rooms                = unserialize( $tf_hotel_rooms_value );
 	}
+
+
+	// Hotel facilitiles
+	$hotel_facilities = ! empty( $meta['hotel-facilities'] ) ? $meta['hotel-facilities'] : '';
+	$hotel_facilities_categories = ! empty( Helper::tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) : '';
+
 	// FAQ
 	$faqs = ! empty( $meta['faq'] ) ? $meta['faq'] : '';
 	if ( ! empty( $faqs ) && gettype( $faqs ) == "string" ) {

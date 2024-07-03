@@ -55,7 +55,7 @@ class Migrator {
 	function tf_template_3_migrate_data() {
 
 		// Hotel & Tour
-		if ( empty( get_option( 'tf_template_3_migrate_data' ) ) ) {
+		if ( empty( get_option( 'tf_template_3_migrate_data' ) ) || ( !empty( get_option( 'tf_template_3_migrate_data' ) ) &&  get_option( 'tf_template_3_migrate_data' ) < 2 ) ) {
 
 			$options = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
 
@@ -73,6 +73,11 @@ class Migrator {
 				array(
 					"hotel-section"        => "Room",
 					"hotel-section-slug"   => "rooms",
+					"hotel-section-status" => "1"
+				),
+				array(
+					"hotel-section"        => "Facilities",
+					"hotel-section-slug"   => "facilities",
 					"hotel-section-status" => "1"
 				),
 				array(
@@ -241,7 +246,7 @@ class Migrator {
 			update_option( 'tf_settings', $options );
 			wp_cache_flush();
 			flush_rewrite_rules( true );
-			update_option( 'tf_template_3_migrate_data', 1 );
+			update_option( 'tf_template_3_migrate_data', 2 );
 
 		}
 
