@@ -3672,6 +3672,9 @@ span.tf-price .amount {
   display: none; }
 
 /********************** HOTEL FACILITIES - START **********************/
+.tf-main-wrapper .tf-container h2 {
+  margin-top: 0px; }
+
 .tf-main-wrapper .tf-hotel-facilities-section .active {
   display: none; }
 

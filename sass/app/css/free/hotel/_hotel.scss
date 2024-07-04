@@ -584,6 +584,9 @@ span.tf-price .amount {
 
 /********************** HOTEL FACILITIES - START **********************/
 .tf-main-wrapper {
+    .tf-container h2 {
+        margin-top: 0px;
+    }
     .tf-hotel-facilities-section {
         .active {
             display: none;
