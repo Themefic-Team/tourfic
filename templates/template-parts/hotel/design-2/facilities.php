@@ -8,7 +8,7 @@ if( !empty($total_facilities_cat) && !empty($meta['hotel-facilities']) ){
 
 <!-- Hotel facilities Srart -->
 <div class="tf-facilities-wrapper" id="tf-hotel-facilities">
-    <h2 class="tf-section-title"><?php echo !empty($meta['facilities-section-title']) ? esc_html($meta['facilities-section-title']) : esc_html("Property facilities"); ?></h2>          
+    <h2 class="tf-section-title"><?php echo !empty($meta['facilities-section-title']) ? esc_html__($meta['facilities-section-title'], "tourfic") : esc_html("Property facilities", "tourfic"); ?></h2>          
     <div class="tf-facilities">
         <?php 
         $facilites_list = [];

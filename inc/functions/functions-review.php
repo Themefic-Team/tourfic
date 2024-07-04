@@ -607,7 +607,7 @@ function tf_total_avg_rating( $comments ) {
 		}
 	}
 
-	return tf_average_ratings( $total_rate );
+	return !empty( $total_rate ) && isset( $total_rate ) ? tf_average_ratings( $total_rate ) : '0';
 
 }
 
