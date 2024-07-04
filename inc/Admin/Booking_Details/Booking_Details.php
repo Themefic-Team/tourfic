@@ -731,7 +731,7 @@ Class Booking_Details {
                                 foreach($tf_visitors_details as $visitor){
                             ?>
                             <div class="tf-grid-single">
-                                <h3><?php echo esc_html("Visitor ".$visitor_count, "tourfic"); ?></h3>
+                                <h3><?php echo esc_html__("Visitor ".$visitor_count, "tourfic"); ?></h3>
                                 <div class="tf-single-box">
                                     <table class="table" cellpadding="0" callspacing="0">
                                         <?php 
