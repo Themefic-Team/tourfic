@@ -20,7 +20,7 @@ class Hotel_Enquiry extends \Tourfic\Core\Enquiry {
 	public function tf_enquiry_page_callback() {
 		?>
         <div class="wrap" style="margin-right: 20px;">
-            <h1 class="wp-heading-inline"><?php echo apply_filters( 'tf_hotel_enquiry_page_heading', esc_html__( 'Hotel Enquiry Details', 'tourfic' ) ); ?></h1>
+            <h1 class="wp-heading-inline"><?php echo esc_html( apply_filters( 'tf_hotel_enquiry_page_heading', __( 'Hotel Enquiry Details', 'tourfic' ) ) ); ?></h1>
 			<?php
 			do_action( 'tf_before_enquiry_details' ); //old hook
 			do_action( 'tf_before_hotel_enquiry_details' );

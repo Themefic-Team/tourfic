@@ -11,7 +11,9 @@ if( !empty( $hotel_facilities_categories ) && !empty( $hotel_facilities ) ){
     <div class="tf-hotel-facilities-section tf-mb-50 tf-template-section">
         <div class="tf-hotel-facilities-container">
             <div class="tf-hotel-facilities-title-area active">
-                <h2 class="tf-title tf-section-title" ><?php echo !empty($meta['facilities-section-title']) ? esc_html__($meta['facilities-section-title'], 'tourfic') : ''; ?></h2>
+                <h2 class="tf-title tf-section-title" >
+                    <?php echo !empty($meta['facilities-section-title']) ? esc_html($meta['facilities-section-title']) : ''; ?>
+                </h2>
                 <i class="ri-arrow-down-s-line hotel-facilities-icon-down"></i>
                 <i class="ri-arrow-up-s-line hotel-facilities-icon-up"></i>
             </div>
@@ -30,7 +32,7 @@ if( !empty( $hotel_facilities_categories ) && !empty( $hotel_facilities ) ){
                             ?>
                             <div class="hotel-facility-item">
                                 <div class="hotel-single-facility-title">
-                                    <?php echo !empty($hotel_facilities_categories[$key]['hotel_facilities_cat_name']) ? esc_html__($hotel_facilities_categories[$key]['hotel_facilities_cat_name'], 'tourfic') : ''; ?>
+                                    <?php echo !empty($hotel_facilities_categories[$key]['hotel_facilities_cat_name']) ? esc_html( $hotel_facilities_categories[$key]['hotel_facilities_cat_name']) : ''; ?>
                                 </div>
                                 <ul>
                                     <?php 
@@ -52,7 +54,7 @@ if( !empty( $hotel_facilities_categories ) && !empty( $hotel_facilities ) ){
                                                 ?>
                                                 <li>
                                                 <span><?php echo !empty($feature_meta) && !empty($feature_icon) ? wp_kses_post($feature_icon) : ''; ?></span> 
-                                                <?php echo esc_html__($features_details->name, "tourfic"); ?>
+                                                <?php echo esc_html($features_details->name); ?>
                                                 </li>
                                             <?php } ?>
                                         <?php } ?>
