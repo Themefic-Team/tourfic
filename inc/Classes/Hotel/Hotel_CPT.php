@@ -2,11 +2,11 @@
 
 namespace Tourfic\Classes\Hotel;
 
-use \Tourfic\Classes\Helper;
+use Tourfic\Classes\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
-class Hotel_CPT extends \Tourfic\Classes\Post_Type {
+class Hotel_CPT extends \Tourfic\Core\Post_Type {
 
 	use \Tourfic\Traits\Singleton;
 

@@ -3231,7 +3231,6 @@ TF_Settings::option( 'tf_settings', array(
 					'default' => "apartments",
 					'placeholder' => ! empty(get_option("apartment_slug")) ? get_option("apartment_slug") : "apartments",
 				),
-
 			),
 		),
 		/**

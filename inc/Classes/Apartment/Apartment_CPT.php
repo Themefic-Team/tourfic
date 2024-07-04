@@ -1,10 +1,10 @@
 <?php
 
 namespace Tourfic\Classes\Apartment;
-use \Tourfic\Classes\Helper;
+use Tourfic\Classes\Helper;
 
 defined( 'ABSPATH' ) || exit;
-class Apartment_CPT extends \Tourfic\Classes\Post_Type {
+class Apartment_CPT extends \Tourfic\Core\Post_Type {
 
 	use \Tourfic\Traits\Singleton;
 

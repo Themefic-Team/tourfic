@@ -14,20 +14,12 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
 		public function render() {
 			global $post;
 			$post_type = get_post_type( $post->ID );
-			if ( $post_type !== 'tf_hotel' ) {
+			if ( $post_type !== 'tf_room' ) {
 				return;
 			}
-			$meta  = get_post_meta( $post->ID, 'tf_hotels_opt', true );
-			$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-			if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
-				$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-					return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-				}, $rooms );
-				$rooms                = unserialize( $tf_hotel_rooms_value );
-			}
+			$meta  = get_post_meta( $post->ID, 'tf_rooms_opt', true );
 
-			$room_index = str_replace( array( '[', ']', 'room' ), '', $this->parent_field );
-			$pricing_by = ! empty( $rooms[ $room_index ]['pricing-by'] ) ? $rooms[ $room_index ]['pricing-by'] : '1';
+			$pricing_by = ! empty( $meta['pricing-by'] ) ? $meta['pricing-by'] : '1';
 			if ( Helper::tf_is_woo_active() ) {
 				?>
                 <div class="tf-room-cal-wrap">
@@ -75,7 +67,7 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
 
                         <div style="width: 100%">
                             <input type="hidden" name="new_post" value="<?php echo $this->value ? 'false' : 'true'; ?>">
-                            <input type="hidden" name="hotel_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
+                            <input type="hidden" name="room_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
                             <input type="hidden" name="room_index" value="<?php echo esc_attr( $room_index ); ?>">
                             <span class="tf_room_cal_update button button-primary button-large"><?php echo esc_html__( 'Save Calendar', 'tourfic' ); ?></span>
                         </div>

@@ -1194,7 +1194,7 @@ class Helper {
 	 */
 	function tf_admin_role_caps() {
 
-		if ( get_option( 'tf_admin_caps' ) < 2 ) {
+		if ( get_option( 'tf_admin_caps' ) < 4 ) {
 			$admin_role  = get_role( 'administrator' );
 			$editor_role = get_role( 'editor' );
 
@@ -1215,6 +1215,21 @@ class Helper {
 				'edit_private_tf_hotels',
 				'edit_published_tf_hotels',
 				'create_tf_hotels',
+				// Rooms
+				'edit_tf_room',
+				'read_tf_room',
+				'delete_tf_room',
+				'edit_tf_rooms',
+				'edit_others_tf_rooms',
+				'publish_tf_rooms',
+				'read_private_tf_rooms',
+				'delete_tf_rooms',
+				'delete_private_tf_rooms',
+				'delete_published_tf_rooms',
+				'delete_others_tf_rooms',
+				'edit_private_tf_rooms',
+				'edit_published_tf_rooms',
+				'create_tf_rooms',
 				// Apartment
 				'edit_tf_apartment',
 				'read_tf_apartment',
@@ -1252,7 +1267,7 @@ class Helper {
 				$editor_role->add_cap( $cap );
 			}
 
-			update_option( 'tf_admin_caps', 2 );
+			update_option( 'tf_admin_caps', 4 );
 		}
 	}
 

@@ -2,11 +2,11 @@
 
 namespace Tourfic\Classes\Tour;
 
-use \Tourfic\Classes\Helper;
+use Tourfic\Classes\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
-class Tour_CPT extends \Tourfic\Classes\Post_Type {
+class Tour_CPT extends \Tourfic\Core\Post_Type {
 
 	use \Tourfic\Traits\Singleton;
 

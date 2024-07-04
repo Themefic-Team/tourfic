@@ -11,6 +11,7 @@ use Tourfic\Admin\Booking_Details\Hotel_Booking_Details;
 use Tourfic\Admin\Booking_Details\Tour_Booking_Details;
 use Tourfic\Admin\TF_Promo_Notice;
 use Tourfic\App\Widgets\TF_Widget_Base;
+use Tourfic\Classes\Room\Room_CPT;
 
 class Base {
 	use \Tourfic\Traits\Singleton;
@@ -76,6 +77,7 @@ class Base {
 		if ( Helper::tfopt( 'disable-services' ) && in_array( 'hotel', Helper::tfopt( 'disable-services' ) ) ) {
 		} else {
 			 \Tourfic\Classes\Hotel\Hotel_CPT::instance();
+			 \Tourfic\Classes\Room\Room_CPT::instance();
 			 \Tourfic\Classes\Hotel\Pricing::instance();
 		}
 		if ( Helper::tfopt( 'disable-services' ) && in_array( 'tour', Helper::tfopt( 'disable-services' ) ) ) {
