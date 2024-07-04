@@ -8741,7 +8741,7 @@ div#tf-contact-info {
   .tf-hotel-design-1 .tf-hotel-facilities-section .tf-hotel-facilities-container {
     padding: 32px;
     border-radius: 6px;
-    background: #FFF;
+    background: #fff;
     box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32); }
     .tf-hotel-design-1 .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-title-area {
       display: flex;
@@ -8773,7 +8773,8 @@ div#tf-contact-info {
           flex-wrap: wrap;
           vertical-align: baseline;
           gap: 16px;
-          margin: 0px; }
+          margin: 0px;
+          padding: 0px; }
           @media only screen and (max-width: 767.98px) {
             .tf-hotel-design-1 .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-content-area .hotel-facility-item ul {
               flex-direction: column; } }
