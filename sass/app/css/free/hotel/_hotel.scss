@@ -581,6 +581,95 @@ span.tf-price .amount {
 #tf-hotel-services.tf-hotel-services-wrap{
     display: none;
 }
+
+/********************** HOTEL FACILITIES - START **********************/
+.tf-main-wrapper {
+    .tf-hotel-facilities-section {
+        .active {
+            display: none;
+        }
+        .tf-hotel-facilities-container {
+            padding: 32px;
+            border-radius: 6px;
+            background: #fff;
+            box-shadow: 0px 0px 24px 5px #E0E8EE;
+    
+            .tf-hotel-facilities-title-area {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                cursor: pointer;
+
+                .section-heading {
+                    margin-bottom: 0;
+                }
+    
+                .tf-section-title {
+                    margin-bottom: 0px;
+                }
+    
+                i {
+                    font-size: 32px;
+                    color: #0E3DD8;
+                }
+                
+                .hotel-facilities-icon-down {
+                    display: none;
+                }
+            }
+    
+            .tf-hotel-facilities-content-area {
+                margin-top: 24px;
+                .hotel-facility-item {
+                    margin-bottom: 24px;
+                    .hotel-single-facility-title {
+                        color: #060D1C;
+                        font-family: inherit;
+                        font-size: 20px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: normal;
+                        margin-bottom: 16px;
+                    }
+    
+                    ul {
+                        display: flex;
+                        list-style: none;
+                        flex-wrap: wrap;
+                        vertical-align: baseline;
+                        gap: 16px;
+                        margin: 0px;
+                        padding: 0px;
+    
+                        @media #{$tfmax767} {
+                            flex-direction: column;
+                        }
+    
+                        li {
+                            display: flex;
+                            color: #686E7A;
+                            font-family: inherit;
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 125%;
+                            vertical-align: baseline;
+    
+                            span {
+                                margin-right: 8px;
+    
+                                @media #{$tfmax767} {
+                                    min-width: 16px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/********************** HOTEL FACILITIES - END  **********************/
 /********************** RESPONSIVE **********************/
 @media only screen and (min-width: 951px) {
     .popupmap-for-mobile {

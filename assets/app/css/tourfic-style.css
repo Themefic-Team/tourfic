@@ -3671,6 +3671,68 @@ span.tf-price .amount {
 #tf-hotel-services.tf-hotel-services-wrap {
   display: none; }
 
+/********************** HOTEL FACILITIES - START **********************/
+.tf-main-wrapper .tf-hotel-facilities-section .active {
+  display: none; }
+
+.tf-main-wrapper .tf-hotel-facilities-section .tf-hotel-facilities-container {
+  padding: 32px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0px 0px 24px 5px #E0E8EE; }
+  .tf-main-wrapper .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-title-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer; }
+    .tf-main-wrapper .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-title-area .section-heading {
+      margin-bottom: 0; }
+    .tf-main-wrapper .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-title-area .tf-section-title {
+      margin-bottom: 0px; }
+    .tf-main-wrapper .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-title-area i {
+      font-size: 32px;
+      color: #0E3DD8; }
+    .tf-main-wrapper .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-title-area .hotel-facilities-icon-down {
+      display: none; }
+  .tf-main-wrapper .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-content-area {
+    margin-top: 24px; }
+    .tf-main-wrapper .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-content-area .hotel-facility-item {
+      margin-bottom: 24px; }
+      .tf-main-wrapper .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-content-area .hotel-facility-item .hotel-single-facility-title {
+        color: #060D1C;
+        font-family: inherit;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-bottom: 16px; }
+      .tf-main-wrapper .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-content-area .hotel-facility-item ul {
+        display: flex;
+        list-style: none;
+        flex-wrap: wrap;
+        vertical-align: baseline;
+        gap: 16px;
+        margin: 0px;
+        padding: 0px; }
+        @media only screen and (max-width: 767.98px) {
+          .tf-main-wrapper .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-content-area .hotel-facility-item ul {
+            flex-direction: column; } }
+        .tf-main-wrapper .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-content-area .hotel-facility-item ul li {
+          display: flex;
+          color: #686E7A;
+          font-family: inherit;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 125%;
+          vertical-align: baseline; }
+          .tf-main-wrapper .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-content-area .hotel-facility-item ul li span {
+            margin-right: 8px; }
+            @media only screen and (max-width: 767.98px) {
+              .tf-main-wrapper .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-content-area .hotel-facility-item ul li span {
+                min-width: 16px; } }
+
+/********************** HOTEL FACILITIES - END  **********************/
 /********************** RESPONSIVE **********************/
 @media only screen and (min-width: 951px) {
   .popupmap-for-mobile {
@@ -8742,7 +8804,7 @@ div#tf-contact-info {
     padding: 32px;
     border-radius: 6px;
     background: #fff;
-    box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32); }
+    box-shadow: 0px 0px 24px 5px #E0E8EE; }
     .tf-hotel-design-1 .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-title-area {
       display: flex;
       justify-content: space-between;
