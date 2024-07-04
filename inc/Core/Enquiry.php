@@ -4,6 +4,8 @@ namespace Tourfic\Core;
 
 defined( 'ABSPATH' ) || exit;
 
+use Tourfic\Classes\Helper;
+
 abstract class Enquiry {
 
 	public function __construct() {
