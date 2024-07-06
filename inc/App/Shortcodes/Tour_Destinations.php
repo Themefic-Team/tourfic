@@ -46,7 +46,7 @@ class Tour_Destinations extends \Tourfic\Core\Shortcodes {
 			$tf_tour_posts_status = array('publish');
 		}
 
-		shuffle( $destinations );
+//		shuffle( $destinations );
 		ob_start();
 
 		if ( $destinations ) { ?>

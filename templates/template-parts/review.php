@@ -328,7 +328,7 @@ if ( ! empty( $tf_ratings_for ) ) {
             </div>
 		<?php } ?>
 
-        <div class="tf-single-review">
+        <div class="tf-single-review <?php echo esc_attr(get_post_type($post_id)) ?>">
 			<?php
 			if ( $comments ) {
 				foreach ( $comments as $comment ) {

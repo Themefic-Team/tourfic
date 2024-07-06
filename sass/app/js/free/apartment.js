@@ -584,14 +584,14 @@
             }
         });
         
-        $('.tf-single-details').each(function (index, val) {
+        $('.tf-single-review.tf_apartment .tf-single-details').each(function (index, val) {
             if (index > 1) {
                 $(this).hide();
             }
         });
 
         $(".tf-apaartment-show-all").on('click', function (e) { 
-            $('.tf-single-details').each(function (index, val) {
+            $('.tf-single-review.tf_apartment .tf-single-details').each(function (index, val) {
                 $(val).show();
             });
         });
