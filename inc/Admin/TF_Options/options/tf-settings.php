@@ -219,6 +219,11 @@ TF_Settings::option( 'tf_settings', array(
 											'hotel-section-status' => true,
 										),
 										array(
+											"hotel-section"        => __( "Facilities", "tourfic" ),
+											"hotel-section-slug"   => __( "facilities", "tourfic" ),
+											"hotel-section-status" => "1"
+										),
+										array(
 											'hotel-section'        => __( 'FAQ', 'tourfic' ),
 											'hotel-section-slug'   => __( 'faq', 'tourfic' ),
 											'hotel-section-status' => true,

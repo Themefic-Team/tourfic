@@ -758,7 +758,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                 <div class="tf-field-notice-inner tf-notice-danger" style="margin-top: 20px; margin-right: 20px;">
                     <div class="tf-field-notice-content">
                         <?php /* translators: %s: strong tag */ ?>
-						<?php echo sprintf( esc_html__( 'Note: If you are having trouble saving your settings, please increase the %s "PHP Max Input Vars" %s value to save all settings. Contact your hosting provider for help on this matter. Otherwise, you will not be able to save all settings.', 'tourfic' ), '<strong>', '</strong>' ); ?>
+						<?php echo sprintf( esc_html__( 'Note: If you are having trouble saving your settings, please increase the %1$s "PHP Max Input Vars" %2$s value to save all settings. Contact your hosting provider for help on this matter. Otherwise, you will not be able to save all settings.', 'tourfic' ), '<strong>', '</strong>' ); ?>
                     </div>
                 </div>
 			<?php

@@ -1307,7 +1307,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 	<script>
 		(function ($) {
 			$(document).ready(function () {
-				var selectedTemplate = '<?php esc_html_e($tf_hotel_selected_template); ?>';
+				var selectedTemplate = '<?php echo esc_html($tf_hotel_selected_template); ?>';
 				var month = 1;
 
 			if( $(window).width() >= 1240 ){
