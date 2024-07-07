@@ -318,24 +318,26 @@ add_filter( 'allow_empty_comment', '__return_true' );
  *
  * @return float
  */
-function tf_average_ratings( $ratings = [] ) {
+if(!function_exists('tf_average_ratings')){
+	function tf_average_ratings( $ratings = [] ) {
 
-	if ( ! $ratings ) {
-		return 0;
-	}
-
-	// No sub collection of ratings
-	if ( count( $ratings ) == count( $ratings, COUNT_RECURSIVE ) ) {
-		$average = array_sum( $ratings ) / count( $ratings );
-	} else {
-		$average = 0;
-		foreach ( $ratings as $rating ) {
-			$average += array_sum( $rating ) / count( $rating );
+		if ( ! $ratings ) {
+			return 0;
 		}
-		$average = $average / count( $ratings );
-	}
 
-	return sprintf( '%.1f', $average );
+		// No sub collection of ratings
+		if ( count( $ratings ) == count( $ratings, COUNT_RECURSIVE ) ) {
+			$average = array_sum( $ratings ) / count( $ratings );
+		} else {
+			$average = 0;
+			foreach ( $ratings as $rating ) {
+				$average += array_sum( $rating ) / count( $rating );
+			}
+			$average = $average / count( $ratings );
+		}
+
+		return sprintf( '%.1f', $average );
+	}
 }
 
 /**
@@ -346,13 +348,15 @@ function tf_average_ratings( $ratings = [] ) {
  *
  * @return string
  */
-function tf_average_rating_percent( $rating = 0, $total = 5 ) {
-	if ( empty( $total ) ) {
-		$total = 5;
-	}
-	$percent = ( $rating * 100 ) / $total;
+if(!function_exists('tf_average_rating_percent')){
+	function tf_average_rating_percent( $rating = 0, $total = 5 ) {
+		if ( empty( $total ) ) {
+			$total = 5;
+		}
+		$percent = ( $rating * 100 ) / $total;
 
-	return sprintf( "%.2f", $percent );
+		return sprintf( "%.2f", $percent );
+	}
 }
 
 /**
@@ -389,20 +393,22 @@ function tf_calculate_user_ratings( $comment, &$overall_rating, &$total_rate ) {
  * Format rating accordion to settings
  *
  */
-function tf_average_rating_change_on_base( $rating, $base_rate = 5 ) {
+if(!function_exists('tf_average_rating_change_on_base')){
+	function tf_average_rating_change_on_base( $rating, $base_rate = 5 ) {
 
-	$settings_base = ! empty ( Helper::tfopt( 'r-base' ) ) ? Helper::tfopt( 'r-base' ) : 5;
-	$base_rate     = ! empty ( $base_rate ) ? $base_rate : 5;
+		$settings_base = ! empty ( Helper::tfopt( 'r-base' ) ) ? Helper::tfopt( 'r-base' ) : 5;
+		$base_rate     = ! empty ( $base_rate ) ? $base_rate : 5;
 
-	if ( $settings_base != $base_rate ) {
-		if ( $settings_base > 5 ) {
-			$rating = $rating * 2;
-		} else {
-			$rating = $rating / 2;
+		if ( $settings_base != $base_rate ) {
+			if ( $settings_base > 5 ) {
+				$rating = $rating * 2;
+			} else {
+				$rating = $rating / 2;
+			}
 		}
-	}
 
-	return $rating;
+		return $rating;
+	}
 }
 
 /**
@@ -596,19 +602,21 @@ function tf_calculate_comments_rating( $comments, &$tf_overall_rate, &$total_rat
 /**
  * Total Average Rating
  */
-function tf_total_avg_rating( $comments ) {
+if(!function_exists('tf_total_avg_rating')){
+	function tf_total_avg_rating( $comments ) {
 
-	foreach ( $comments as $comment ) {
-		$tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
-		$tf_base_rate    = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+		foreach ( $comments as $comment ) {
+			$tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+			$tf_base_rate    = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
 
-		if ( $tf_comment_meta ) {
-			$total_rate[] = tf_average_rating_change_on_base( tf_average_ratings( $tf_comment_meta ), $tf_base_rate );
+			if ( $tf_comment_meta ) {
+				$total_rate[] = tf_average_rating_change_on_base( tf_average_ratings( $tf_comment_meta ), $tf_base_rate );
+			}
 		}
+
+		return !empty( $total_rate ) && isset( $total_rate ) ? tf_average_ratings( $total_rate ) : '0';
+
 	}
-
-	return !empty( $total_rate ) && isset( $total_rate ) ? tf_average_ratings( $total_rate ) : '0';
-
 }
 
 /**
@@ -616,16 +624,18 @@ function tf_total_avg_rating( $comments ) {
  *
  * @param int $number comment number
  */
-function tf_based_on_text( $number ) {
-	$comments_title = apply_filters(
-		'tf_comment_form_title',
-		sprintf( // WPCS: XSS OK.
-		/* translators: 1: number of comments */
-			esc_html( _nx( '%1$s review', '%1$s reviews', $number, 'comments title', 'tourfic' ) ),
-			number_format_i18n( $number )
-		)
-	);
-	echo esc_html( $comments_title );
+if(!function_exists('tf_based_on_text')){
+	function tf_based_on_text( $number ) {
+		$comments_title = apply_filters(
+			'tf_comment_form_title',
+			sprintf( // WPCS: XSS OK.
+			/* translators: 1: number of comments */
+				esc_html( _nx( '%1$s review', '%1$s reviews', $number, 'comments title', 'tourfic' ) ),
+				number_format_i18n( $number )
+			)
+		);
+		echo esc_html( $comments_title );
+	}
 }
 
 /**
