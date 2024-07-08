@@ -89,7 +89,7 @@ if ( $comments ) {
 		</div>
 		<div class="tf-review-all-info">
 			<ul class="tf-list">
-				<li><i class="fa-solid fa-circle-check"></i><?php esc_html_e("From", "tourfic"); ?> <?php TF_Review::tf_based_on_text( count( $comments ) ); ?></li>
+				<li><i class="fa-solid fa-circle-check"></i><?php esc_html_e("From ", "tourfic"); ?> <?php TF_Review::tf_based_on_text( count( $comments ) ); ?></li>
 			</ul>
 		</div>
 	</div>
