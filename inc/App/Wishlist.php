@@ -35,30 +35,23 @@ class Wishlist {
 					'post_id'   => $_POST['post'],
 				];
 
-				$user_id = get_current_user_id();
-				// try to find some `wishlist_item` user meta
-				$previous_wishlist_item = get_user_meta( $user_id, 'wishlist_item', false );
+				if (is_user_logged_in()) {
+					// Save wishlist for logged-in users
+					$user_id                = get_current_user_id();
+					$previous_wishlist_item = get_user_meta( $user_id, 'wishlist_item', false );
 
-				/**
-				 * First, the condition for when no wishlist_item user meta data exists
-				 **/
-				if ( empty( $previous_wishlist_item ) ) {
-					add_user_meta( $user_id, 'wishlist_item', $data );
+					if ( empty( $previous_wishlist_item ) ) {
+						add_user_meta( $user_id, 'wishlist_item', $data );
+					} else {
+						$post_id = array_search( $data['post_id'], array_column( $previous_wishlist_item, 'post_id' ) );
+						if ( ! empty( $previous_wishlist_item ) && false === $post_id ) {
+							add_user_meta( $user_id, 'wishlist_item', $data );
+						} else {
+							update_user_meta( $user_id, 'wishlist_item', $data, $previous_wishlist_item[ $post_id ] );
+						}
+					}
+					wp_send_json_success( esc_html__( "Item added to wishlist", 'tourfic' ) );
 				}
-
-				/**
-				 * Second, the condition for when some wishlist_item user_meta data already exists
-				 **/
-				// search recursively through records returned from get_user_meta for the record you want to replace, as identified by `post_id` - credit: http://php.net/manual/en/function.array-search.php#116635
-				$post_id = array_search( $data['post_id'], array_column( $previous_wishlist_item, 'post_id' ) );
-				if ( ! empty( $previous_wishlist_item ) && false === $post_id ) {
-					// add if the wp_usermeta meta_key[wishlist_item] => meta_value[ $parameters[ $post_id ] ] pair does not exist
-					add_user_meta( $user_id, 'wishlist_item', $data );
-				} else {
-					// update if the wp_usermeta meta_key[wishlist_item] => meta_value[ $parameters[ $post_id ] ] pair already exists
-					update_user_meta( $user_id, 'wishlist_item', $data, $previous_wishlist_item[ $post_id ] );
-				}
-				wp_send_json_success( esc_html__( "Item added to wishlist", 'tourfic' ) );
 			}
 		}
 	}

@@ -33,6 +33,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 						}
 					 	if(is_array($data)):
 							foreach ( $data as $key => $value ) :
+                                var_dump($value);
 								$tf_repater_default_value = !is_array( $value ) ? stripslashes(reset($value)) : '';
 								if($this->field['id']=="room"){
 									$tf_repater_default_value = $value['title'];
@@ -43,6 +44,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 								if ( $this->field['id'] == "hotel-facilities" ) {
 									$tf_repater_default_value = esc_html__( 'Hotel Facility', 'tourfic' );
 								}
+                                var_dump($tf_repater_default_value);
 							?>
                             <div class="tf-single-repeater tf-single-repeater-<?php echo esc_attr($this->field['id']);?>">
 							<input type="hidden" name="tf_parent_field" value="<?php echo esc_attr($this->parent_field); ?>">

@@ -1041,7 +1041,8 @@ class Enqueue {
 					'date_format_change_backend'       => $date_format_change,
 					'i18n'                             => array(
 						'no_services_selected' => esc_html__( 'Please select at least one service.', 'tourfic' ),
-					)
+					),
+					'is_pro'                           => function_exists( 'is_tf_pro' ) && is_tf_pro(),
 				)
 			);
 			wp_enqueue_script( 'Chart-js', '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js', array( 'jquery' ), '2.6.0', true );
