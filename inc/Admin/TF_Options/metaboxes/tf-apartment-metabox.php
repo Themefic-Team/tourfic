@@ -346,6 +346,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'         => 'repeater',
 					'button_title' => esc_html__( 'Add New', 'tourfic' ),
 					'label'        => esc_html__( 'Create your apartment rooms ', 'tourfic' ),
+					'field_title'  => 'title',
 					'fields'       => array(
 						array(
 							'id'    => 'title',
@@ -473,6 +474,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'         => 'repeater',
 					'button_title' => __( 'Add New', 'tourfic' ),
 					'label'        => __( 'Add Highlights', 'tourfic' ),
+					'field_title'  => 'title',
 					'fields'       => array(
 						array(
 							'id'    => 'title',
@@ -560,6 +562,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'         => 'repeater',
 					'button_title' => __( 'Add New', 'tourfic' ),
 					'label'        => __( 'Add House Rules', 'tourfic' ),
+					'field_title'  => 'title',
 					'fields'       => array(
 						array(
 							'id'    => 'title',
@@ -623,6 +626,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'button_title' => __( 'Add New FAQ', 'tourfic' ),
 					'label'        => __( 'Add Your Questions', 'tourfic' ),
 					'subtitle'        => __( 'Click the button below to add Frequently Asked Questions (FAQs) for your apartment. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each FAQ using the icons on the right side.', 'tourfic' ),
+					'field_title'  => 'title',
 					'fields'       => array(
 						array(
 							'id'    => 'title',
@@ -726,6 +730,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label'        => __( 'Promotional Tags', 'tourfic' ),
 					'subtitle' => __('Add some keywords that highlight your apartment\'s Unique Selling Point (USP). This tag will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
 					'button_title' => __( 'Add / Insert New Tag', 'tourfic' ),
+					'field_title'  => 'apartment-tag-title',
 					'fields'       => array(
 						array(
 							'id'    => 'apartment-tag-title',

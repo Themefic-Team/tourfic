@@ -554,6 +554,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'dependency'   => array(
 						array( 'type', '==', 'continuous' ),
 					),
+					'field_title'  => 'date',
 					'fields'       => array(
 
 						array(
@@ -653,6 +654,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'label'        => __( 'Items Included', 'tourfic' ),
 					'subtitle'     => __( 'Add all the items/features included in this tour package.', 'tourfic' ),
 					'button_title' => __( 'Add New Include', 'tourfic' ),
+					'field_title'  => 'inc',
 					'fields'       => array(
 						array(
 							'id'    => 'inc',
@@ -673,6 +675,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'label'        => __( 'Items Excluded', 'tourfic' ),
 					'subtitle'        => __( 'List all the items/features excluded in this tour package.', 'tourfic' ),
 					'button_title' => __( 'Add New Exclude', 'tourfic' ),
+					'field_title'  => 'exc',
 					'fields'       => array(
 						array(
 							'id'    => 'exc',
@@ -726,6 +729,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'type'         => 'repeater',
 					'button_title' => __( 'Add New Itinerary', 'tourfic' ),
 					'label'        => __( 'Create your Travel Itinerary', 'tourfic' ),
+					'field_title'  => 'title',
 					'fields'       => array(
 						array(
 							'id'          => 'time',
@@ -804,6 +808,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'label'        => __( 'Add Your Questions', 'tourfic' ),
 					'subtitle' 	   => __( 'Click the button below to add Frequently Asked Questions (FAQs) for your tour. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each FAQ using the icons on the right side.', 'tourfic' ),
 					'button_title' => __( 'Add New FAQ', 'tourfic' ),
+					'field_title'  => 'title',
 					'fields'       => array(
 						array(
 							'id'    => 'title',
@@ -887,6 +892,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'label'        => __( 'Promotional Tags', 'tourfic' ),
 					'subtitle' => __('Add some keywords that highlight your tour\'s Unique Selling Point (USP). This tag will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
 					'button_title' => __( 'Add / Insert New Tag', 'tourfic' ),
+					'field_title'  => 'tour-tag-title',
 					'fields'       => array(
 
 						array(

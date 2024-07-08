@@ -16,6 +16,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 		}
 		public function render() {
             $label = ( ! empty( $this->field['label'] ) ) ? $this->field['label'] : '';
+            $field_title = ( ! empty( $this->field['field_title'] ) ) ? $this->field['field_title'] : $label;
 			?>
             <div id="tf-repeater-1" class="tf-repeater <?php echo esc_attr($this->field['id']);?>">
                 <div class="tf-repeater-wrap tf-repeater-wrap-<?php echo esc_attr($this->field['id']);?>">
@@ -33,18 +34,6 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 						}
 					 	if(is_array($data)):
 							foreach ( $data as $key => $value ) :
-                                var_dump($value);
-								$tf_repater_default_value = !is_array( $value ) ? stripslashes(reset($value)) : '';
-								if($this->field['id']=="room"){
-									$tf_repater_default_value = $value['title'];
-								}
-                                if($this->field['id']=="amenities"){
-                                    $tf_repater_default_value = esc_html__('Amenity', 'tourfic');
-                                }
-								if ( $this->field['id'] == "hotel-facilities" ) {
-									$tf_repater_default_value = esc_html__( 'Hotel Facility', 'tourfic' );
-								}
-                                var_dump($tf_repater_default_value);
 							?>
                             <div class="tf-single-repeater tf-single-repeater-<?php echo esc_attr($this->field['id']);?>">
 							<input type="hidden" name="tf_parent_field" value="<?php echo esc_attr($this->parent_field); ?>">
@@ -54,7 +43,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 									<span class="tf-repeater-icon tf-repeater-icon-collapse">
 										<i class="fa-solid fa-angle-down"></i>
 									</span>
-									<span class="tf-repeater-title"><?php echo !empty($tf_repater_default_value) && gettype($tf_repater_default_value)=="string" ? esc_html($tf_repater_default_value) : esc_html($label) ?>  </span>
+									<span class="tf-repeater-title"><?php echo !empty($value[$field_title]) ? esc_html($value[$field_title]) : esc_html($label) ?>  </span>
 									<div class="tf-repeater-icon-absulate">
 										<span class="tf-repeater-icon tf-repeater-icon-move">
 											<i class="fa-solid fa-up-down-left-right"></i>

@@ -176,6 +176,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'      => __( 'Single Hotel Template Sections', 'tourfic' ),
 									'subtitle'   => __( 'You can change the order of sections by dragging and dropping them.', 'tourfic' ),
 									'dependency' => array( 'single-hotel', '==', 'design-1' ),
+									'field_title'=> 'hotel-section',
 									'fields'     => array(
 										array(
 											'id'         => 'hotel-section',
@@ -254,6 +255,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'      => __( 'Single Hotel Template Sections Part 1', 'tourfic' ),
 									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-hotel', '==', 'design-2' ),
+									'field_title'=> 'hotel-section',
 									'fields'     => array(
 										array(
 											'id'         => 'hotel-section',
@@ -306,6 +308,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'      => __( 'Single Hotel Template Sections Part 2', 'tourfic' ),
 									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-hotel', '==', 'design-2' ),
+									'field_title'=> 'hotel-section',
 									'fields'     => array(
 										array(
 											'id'         => 'hotel-section',
@@ -468,6 +471,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'      => __( 'Single Tour Template Sections', 'tourfic' ),
 									'subtitle'   => __( 'You can change the order of sections by dragging and dropping them.', 'tourfic' ),
 									'dependency' => array( 'single-tour', '==', 'design-1' ),
+									'field_title'=> 'tour-section',
 									'fields'     => array(
 										array(
 											'id'         => 'tour-section',
@@ -566,6 +570,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'      => __( 'Single Tour Template Sections Part 1', 'tourfic' ),
 									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-tour', '==', 'design-2' ),
+									'field_title'=> 'tour-section',
 									'fields'     => array(
 										array(
 											'id'         => 'tour-section',
@@ -628,6 +633,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'      => __( 'Single Tour Template Sections Part 2', 'tourfic' ),
 									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-tour', '==', 'design-2' ),
+									'field_title'=> 'tour-section',
 									'fields'     => array(
 										array(
 											'id'         => 'tour-section',
@@ -782,6 +788,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'      => __( 'Single Aprtment Template Sections Part 1', 'tourfic' ),
 									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-apartment', '==', 'design-1' ),
+									'field_title'=> 'aprtment-section',
 									'fields'     => array(
 										array(
 											'id'         => 'aprtment-section',
@@ -849,6 +856,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'      => __( 'Single Aprtment Template Sections Part 2', 'tourfic' ),
 									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-apartment', '==', 'design-1' ),
+									'field_title'=> 'aprtment-section',
 									'fields'     => array(
 										array(
 											'id'         => 'aprtment-section',
@@ -1219,6 +1227,7 @@ TF_Settings::option( 'tf_settings', array(
 					'type'         => 'repeater',
 					'label'        => __( 'Facilities Categories', 'tourfic' ),
 					'button_title' => __( 'Add New', 'tourfic' ),
+					'field_title'  => 'hotel_facilities_cat_name',
 					'fields'       => array(
 						array(
 							'id'    => 'hotel_facilities_cat_name',
@@ -1311,6 +1320,7 @@ TF_Settings::option( 'tf_settings', array(
 					'type'         => 'repeater',
 					'label'        => __( 'Amenities Categories', 'tourfic' ),
 					'button_title' => __( 'Add New', 'tourfic' ),
+					'field_title'  => 'amenities_cat_name',
 					'fields'       => array(
 						array(
 							'id'    => 'amenities_cat_name',
@@ -3013,6 +3023,7 @@ TF_Settings::option( 'tf_settings', array(
 											'dependency'   => array(
 												array( 'reg-fields-type', '==', 'radio' ),
 											),
+											'field_title'  => 'option-label',
 											'fields'       => array(
 												array(
 													'label' => __( 'Field Label', 'tourfic' ),
@@ -3034,6 +3045,7 @@ TF_Settings::option( 'tf_settings', array(
 											'dependency'   => array(
 												array( 'reg-fields-type', '==', 'select' ),
 											),
+											'field_title'  => 'option-label',
 											'fields'       => array(
 												array(
 													'label' => __( 'Field Label', 'tourfic' ),
@@ -3055,6 +3067,7 @@ TF_Settings::option( 'tf_settings', array(
 											'dependency'   => array(
 												array( 'reg-fields-type', '==', 'checkbox' ),
 											),
+											'field_title'  => 'option-label',
 											'fields'       => array(
 												array(
 													'label' => __( 'Field Label', 'tourfic' ),
@@ -3303,6 +3316,7 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'     => __( 'Design customer review fields for hotels. Custom fields are permitted.', 'tourfic' ),
 					'max'      => '6',
 					'drag_only'   => true,
+					'field_title'  => 'r-field-type',
 					'fields'   => array(
 						array(
 							'id'    => 'r-field-type',
@@ -3340,6 +3354,7 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'     => __( 'Design customer review fields for tours. Custom fields are permitted.', 'tourfic' ),
 					'max'      => '6',
 					'drag_only'   => true,
+					'field_title'  => 'r-field-type',
 					'fields'   => array(
 
 						array(
@@ -3373,6 +3388,7 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle' => __( 'Design customer review fields for apartments. Custom fields are permitted.', 'tourfic' ),
 					'max'      => '6',
 					'drag_only'   => true,
+					'field_title'  => 'r-field-type',
 					'fields'   => array(
 						array(
 							'id'    => 'r-field-type',
@@ -4623,13 +4639,14 @@ TF_Settings::option( 'tf_settings', array(
 					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#Without_payment_Book" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
-					'id'           => 'book-confirm-field',
+					'id'           => '',
 					'class'        => 'disable-sortable',
 					'type'         => 'repeater',
 					'button_title' => __( 'Add New', 'tourfic' ),
 					'label'        => __( 'Fields for Booking Confirmation', 'tourfic' ),
 					'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
 					'is_pro'       => true,
+					'field_title'  => 'reg-field-label',
 					'fields'       => array(
 						array(
 							'id'    => 'reg-field-label',
@@ -4666,6 +4683,7 @@ TF_Settings::option( 'tf_settings', array(
 							'dependency'   => array(
 								array( 'reg-fields-type', '==', 'radio' ),
 							),
+							'field_title'  => 'option-label',
 							'fields'       => array(
 								array(
 									'label' => __( 'Field Label', 'tourfic' ),
@@ -4687,6 +4705,7 @@ TF_Settings::option( 'tf_settings', array(
 							'dependency'   => array(
 								array( 'reg-fields-type', '==', 'select' ),
 							),
+							'field_title'  => 'option-label',
 							'fields'       => array(
 								array(
 									'label' => __( 'Field Label', 'tourfic' ),
@@ -4708,6 +4727,7 @@ TF_Settings::option( 'tf_settings', array(
 							'dependency'   => array(
 								array( 'reg-fields-type', '==', 'checkbox' ),
 							),
+							'field_title'  => 'option-label',
 							'fields'       => array(
 								array(
 									'label' => __( 'Field Label', 'tourfic' ),

@@ -183,6 +183,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'label'        => esc_html__( 'Insert / Create your hotel Place', 'tourfic' ),
 					'button_title' => esc_html__( 'Add New Place', 'tourfic' ),
 					'class'        => 'tf-field-class',
+					'field_title'  => 'place-title',
 					'fields'       => array(
 						array(
 							'id'          => 'place-title',
@@ -355,6 +356,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'button_title' => __( 'Add New Room', 'tourfic' ),
 					'class'        => 'room-repeater',
 					'max'          => 5,
+					'field_title'  => 'title',
 					'fields'       => array(
 						array(
 							'id'          => 'unique_id',
@@ -619,6 +621,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'label'        => __( 'Add Your Questions', 'tourfic' ),
 					'subtitle'    => __( 'Click the button below to add Frequently Asked Questions (FAQs) for your hotel. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each FAQ using the icons on the right side.', 'tourfic' ),
 					'button_title' => __( 'Add New FAQ', 'tourfic' ),
+					'field_title'  => 'title',
 					'fields'       => array(
 
 						array(
@@ -705,6 +708,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'label'        => __( 'Promotional Tags', 'tourfic' ),
 					'subtitle' => __('Add some keywords that highlight your hotel\'s Unique Selling Point (USP). This tag will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
 					'button_title' => __( 'Add / Insert New Tag', 'tourfic' ),
+					'field_title'  => 'hotel-tag-title',
 					'fields'       => array(
 
 						array(
