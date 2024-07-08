@@ -286,7 +286,7 @@ use \Tourfic\App\TF_Review;
                             </span>/ <?php echo esc_html( $tf_settings_base ); ?></span>
                         </div>
                         <div class="tf-review-all-info">
-                            <p><?php esc_html_e("Excellent", "tourfic"); ?> <span><?php esc_html_e("Total", "tourfic"); ?> <?php TF_Review::tf_based_on_text( count( $comments ) ); ?></span></p>
+                            <p><?php esc_html_e("Excellent", "tourfic"); ?> <span><?php esc_html_e("Total ", "tourfic"); ?> <?php TF_Review::tf_based_on_text( count( $comments ) ); ?></span></p>
                         </div>
                     </div>
                     <div class="tf-review-data-features">
