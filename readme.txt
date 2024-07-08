@@ -322,7 +322,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.12.7 - 04 July 2024 =
+= 2.12.7 - 08 July 2024 =
 
 - Improvement: System stability improved
 - Fixed: escaping and text-domain issue
