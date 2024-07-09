@@ -23,8 +23,13 @@ class Helper {
 		add_action( 'wp_ajax_nopriv_tf_checkout_cart_item_remove', array( $this, 'tf_checkout_cart_item_remove' ) );
 		add_filter( 'woocommerce_cart_item_subtotal', array( $this, 'tf_remove_icon_add_to_order_item' ), 10, 3 );
 		add_action( 'wp_ajax_tf_month_reports', array( $this, 'tf_month_chart_filter_callback' ) );
-		add_action( 'wp_ajax_nopriv_tf_trigger_filter', array( $this, 'tf_search_result_ajax_sidebar' ) );
-		add_action( 'wp_ajax_tf_trigger_filter', array( $this, 'tf_search_result_ajax_sidebar' ) );
+		add_action( 'wp_ajax_nopriv_tf_trigger_tax_filter', array( $this, 'tf_trigger_tax_filter_callback' ) );
+		add_action( 'wp_ajax_tf_trigger_tax_filter', array( $this, 'tf_trigger_tax_filter_callback' ) );
+
+		// tax filter
+		add_action( 'wp_ajax_nopriv_tf_trigger_filter', array( $this, 'tf_tax_result_ajax_sidebar' ) );
+		add_action( 'wp_ajax_tf_trigger_filter', array( $this, 'tf_tax_result_ajax_sidebar' ) );
+
 		add_action( 'admin_init', array( $this, 'tf_admin_role_caps' ), 999 );
 		add_filter( 'template_include', array( $this, 'taxonomy_template' ) );
 		add_filter( 'comments_template', array( $this, 'load_comment_template' ) );
@@ -1182,6 +1187,20 @@ class Helper {
 		echo "<span hidden=hidden class='tf-posts-count'>";
 		echo ! empty( $tf_total_results ) ? esc_html( $tf_total_results ) : 0;
 		echo "</span>";
+		wp_reset_postdata();
+
+		die();
+	}
+
+	function tf_trigger_tax_filter_callback() {
+
+		// Check nonce security
+		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tf_ajax_nonce' ) ) {
+			return;
+		}
+
+		echo($_POST["term_ids"]);
+
 		wp_reset_postdata();
 
 		die();

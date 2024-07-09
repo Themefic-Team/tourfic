@@ -193,6 +193,68 @@
             });
         };
 
+        const taxFilter = function() {
+            let term_ids = termIdsByFeildName("tf_filters").split(",");
+            let tax_name = $('#tf_widget_texonomy_name').val();
+
+            let formData = new FormData();
+            formData.append('action', 'tf_trigger_tax_filter');
+            formData.append('term_ids', term_ids);
+            formData.append('tax_name', tax_name);
+            formData.append('_nonce', tf_params.nonce);
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (data) {
+                    $('.archive_ajax_result').block({
+                        message: null,
+                        overlayCSS: {
+                            background: "#fff",
+                            opacity: .5
+                        }
+                    });
+                    $('#tf_ajax_searchresult_loader').show();
+                },
+                complete: function (data) {
+                    $('.archive_ajax_result').unblock();
+                    $('#tf_ajax_searchresult_loader').hide();
+
+                    // total posts 0 if not found by @hena
+                    if ($('.tf-nothing-found')[0]) {
+                        $('.tf_posts_navigation').hide();
+                        var foundPosts = $('.tf-nothing-found').data('post-count');
+                        $('.tf-total-results').find('span').html(foundPosts);
+                    } else {
+                        $('.tf_posts_navigation').show();
+                        var postsCount = $('.tf-posts-count').html();
+                        $('.tf-total-results').find('span').html(postsCount);
+                    }
+
+                },
+                success: function (data, e) {
+                    $('.archive_ajax_result').unblock();
+                    $('#tf_ajax_searchresult_loader').hide();
+                    $('.archive_ajax_result').html(data);
+                    // Filter Popup Removed
+                    if ($('.tf-details-right').length > 0) {
+                        $('.tf-details-right').removeClass('tf-filter-show');
+                    }
+                    // @KK show notice in every success request
+                    notyf.success(tf_params.ajax_result_success);
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+            console.log(tax_name);
+            
+        };
+
         // Search Result Ajax page number
         function tf_page_pagination_number(element) {
             element.find('span').remove();
@@ -324,7 +386,7 @@
             if($(".filter-reset-btn").length>0){
                 $(".filter-reset-btn").show();
             }
-            makeFilter();
+            taxFilter();
         })
 
         // Archive Page Filter
