@@ -359,12 +359,25 @@ class TF_Review {
 		$limit = ! empty( Helper::tfopt( 'r-base' ) ) ? Helper::tfopt( 'r-base' ) : 5;
 
 		$html = '<div class="tf-rating-wrapper">';
-		foreach ( $fields as $field ) {
+        $counts = array_count_values($fields);
+        $usage = [];
+		foreach ( $fields as $key => $field ) {
 			if ( empty( $field ) ) {
 				continue;
 			}
 			$html .= '<div class="tf-form-single-rating">';
 			$html .= sprintf( '<label for="rating">%s</label>', $field );
+
+            if ($counts[$field] > 1) {
+                if (isset($usage[$field])) {
+                    $usage[$field]++;
+                } else {
+                    $usage[$field] = 1;
+                }
+                // Append an index to make it unique
+                $field = $field . '_' . $usage[$field];
+            }
+
 			$html .= sprintf( '<div class="ratings-container star' . $limit . '">%s </div>', self::tf_generate_stars( $field ) );
 			$html .= '</div>';
 		}
