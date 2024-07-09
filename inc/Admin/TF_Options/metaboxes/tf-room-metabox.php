@@ -39,16 +39,6 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 						'posts_per_page' => - 1,
 					)
 				),
-				array(
-                    'id'          => 'unique_id',
-                    'class'       => 'unique-id',
-                    'type'        => 'text',
-                    'label'       => __( 'Unique ID', 'tourfic' ),
-                    'attributes'  => array(
-                        'readonly' => 'readonly',
-                    ),
-                    'placeholder' => __( '', 'tourfic' ),
-                ),
                 array(
                     'id'          => 'order_id',
                     'class'       => 'tf-order_id',
@@ -83,20 +73,6 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'type'    => 'heading',
                     'content' => __( 'Details', 'tourfic' ),
                     'class'   => 'tf-field-class',
-                ),
-                array(
-                    'id'          => 'title',
-                    'type'        => 'text',
-                    'subtitle'    => __( 'e.g. Superior Queen Room with Two Queen Beds', 'tourfic' ),
-                    'label'       => __( 'Room Title', 'tourfic' ),
-                    'field_width' => 100,
-                ),
-                array(
-                    'id'       => 'room_preview_img',
-                    'type'     => 'image',
-                    'label'    => __( 'Room Image Thumbnail', 'tourfic' ),
-                    'subtitle' => __( 'Upload Thumbnail Image for this room', 'tourfic' ),
-                    'library'  => 'image',
                 ),
                 array(
                     'id'       => 'gallery',

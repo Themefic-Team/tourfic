@@ -813,7 +813,7 @@ class Migrator {
 	 */
 	public function tf_hotel_room_migrate(){
 		$tf_room_data_migration = !empty(get_option( 'tf_room_data_migration' )) ? get_option( 'tf_room_data_migration' ) : 0;
-		if ( $tf_room_data_migration < 1 ) {
+		if ( $tf_room_data_migration < 4 ) {
 			$this->regenerate_room_meta();
 			update_option( 'tf_room_data_migration', $tf_room_data_migration+1 );
 		}
@@ -867,6 +867,14 @@ class Migrator {
 
 					$room_post_id = wp_insert_post( $post_data );
 					update_post_meta( $room_post_id, 'tf_room_opt', $room );
+
+					//insert thumbnail if has 'room_preview_img' key which return url
+					if(!empty($room['room_preview_img'])){
+						$attachment_id = attachment_url_to_postid( $room['room_preview_img'] );
+						if(!empty($attachment_id)){
+							set_post_thumbnail( $room_post_id, $attachment_id );
+						}
+					}
 
 					// Room Id add to the Hotelwise
 //					$hotel_room_meta = !empty(get_post_meta( $post_id, 'tf_search_hotel_room_id', true )) ? get_post_meta( $post_id, 'tf_search_hotel_room_id', true ) : [];
