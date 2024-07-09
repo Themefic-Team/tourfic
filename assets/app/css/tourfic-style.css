@@ -2099,7 +2099,7 @@ button.tf-tablinks:focus {
   border: none; }
   .tf_booking-widget.default-form .tf_form-inner {
     padding: 0;
-    display: flex;
+    display: flex !important;
     align-items: center; }
   .tf_booking-widget.default-form .tf-label {
     display: none; }
@@ -2188,6 +2188,8 @@ button.tf-tablinks:focus {
   height: 55px;
   margin: 24px 0 16px;
   background: #fff; }
+  .tf_homepage-booking .tf_selectperson-wrap .tf_person-icon {
+    margin-right: 8px; }
 
 .tf_destination-wrap {
   border-left: 0;
