@@ -8,8 +8,8 @@ class Pricing {
 	use \Tourfic\Traits\Singleton;
 
 	public function __construct() {
-		add_action( 'wp_ajax_tf_hotel_airport_service_price', 'tf_hotel_airport_service_callback' );
-		add_action( 'wp_ajax_nopriv_tf_hotel_airport_service_price', 'tf_hotel_airport_service_callback' );
+		add_action( 'wp_ajax_tf_hotel_airport_service_price', array( $this, 'tf_hotel_airport_service_callback') );
+		add_action( 'wp_ajax_nopriv_tf_hotel_airport_service_price', array( $this, 'tf_hotel_airport_service_callback' ) );
 
 	}
 
