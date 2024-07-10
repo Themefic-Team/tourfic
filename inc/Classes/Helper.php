@@ -1431,6 +1431,10 @@ class Helper {
 
 				if ( $post_type == 'tf_hotel' ) {
 					tf_hotel_archive_single_item();
+				} else if ( $post_type == 'tf_tours' ) {
+					tf_tour_archive_single_item();
+				} else {
+					tf_apartment_archive_single_item();
 				}
 			}
 
@@ -1439,7 +1443,7 @@ class Helper {
 				echo "<div class='tf_tax_posts_ajax_navigation tf_posts_ajax_navigation'>";
 				echo wp_kses_post(
 					paginate_links( array(
-						'base' => get_pagenum_link(1),
+						'base' => get_pagenum_link(1) . '%_%',
                         'format' => '?paged=%#%',
 						'total'   => $total_pages,
 						'current' => $current_page
