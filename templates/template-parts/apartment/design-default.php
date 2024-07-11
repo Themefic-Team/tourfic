@@ -1,5 +1,6 @@
 <?php 
 use \Tourfic\Classes\Helper;
+use \Tourfic\App\TF_Review;
 ?>
 
 <div class="tf-main-wrapper tf-apartment-wrap tf-apartment">
@@ -21,8 +22,8 @@ use \Tourfic\Classes\Helper;
                                 <a href="#tf-review">
                                     <div class="tf-single-rating">
                                         <i class="fas fa-star"></i>
-                                        <span><?php echo wp_kses_post( tf_total_avg_rating( $comments ) ); ?></span>
-                                        (<?php tf_based_on_text( count( $comments ) ); ?>)
+                                        <span><?php echo wp_kses_post( TF_Review::tf_total_avg_rating( $comments ) ); ?></span>
+                                        (<?php TF_Review::tf_based_on_text( count( $comments ) ); ?>)
                                     </div>
                                 </a>
                             </div>

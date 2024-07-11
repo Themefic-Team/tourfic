@@ -16,9 +16,9 @@ trait Singleton {
 	/**
 	 * @return static
 	 */
-	public static function instance() {
+	public static function instance(...$args) {
 		if(!self::$instance) {
-			self::$instance = new self();
+			self::$instance = new self(...$args);
 		}
 
 		return self::$instance;

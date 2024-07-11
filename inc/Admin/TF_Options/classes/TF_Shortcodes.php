@@ -200,7 +200,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Speed', 'tourfic' ) ?></h3>
-                                            <input type="number" value="200" data-count="speed" class="post-count tf-setting-field">
+                                            <input type="number" value="2000" data-count="speed" class="post-count tf-setting-field">
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
@@ -301,15 +301,15 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
 							                ?>
                                         </div>
                                     </div>
-                                    <div class="tf-col-lg-6">
+                                    <!--<div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Blog style', 'tourfic' ) ?></h3>
+                                            <h3><?php /*echo esc_html__( 'Blog style', 'tourfic' ) */?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="style='grid'"><?php esc_html_e( 'Grid', 'tourfic' ); ?></option>
-                                                <option value="style='slider'"><?php esc_html_e( 'Slider', 'tourfic' ); ?></option>
+                                                <option value="style='grid'"><?php /*esc_html_e( 'Grid', 'tourfic' ); */?></option>
+                                                <option value="style='slider'"><?php /*esc_html_e( 'Slider', 'tourfic' ); */?></option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
@@ -449,7 +449,6 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                                 <option value="orderby='title'"><?php esc_html_e( 'Title', 'tourfic' ); ?></option>
                                                 <option value="orderby='date'"><?php esc_html_e( 'Date', 'tourfic' ); ?></option>
                                                 <option value="orderby='ID'"><?php esc_html_e( 'ID', 'tourfic' ); ?></option>
-                                                <option value="orderby='rand'"><?php esc_html_e( 'Rand', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -810,7 +809,6 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                                 <option value="orderby='title'"><?php esc_html_e( 'Title', 'tourfic' ); ?></option>
                                                 <option value="orderby='date'"><?php esc_html_e( 'Date', 'tourfic' ); ?></option>
                                                 <option value="orderby='ID'"><?php esc_html_e( 'ID', 'tourfic' ); ?></option>
-                                                <option value="orderby='rand'"><?php esc_html_e( 'Rand', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -1171,7 +1169,6 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                                 <option value="orderby='title'"><?php esc_html_e( 'Title', 'tourfic' ); ?></option>
                                                 <option value="orderby='date'"><?php esc_html_e( 'Date', 'tourfic' ); ?></option>
                                                 <option value="orderby='ID'"><?php esc_html_e( 'ID', 'tourfic' ); ?></option>
-                                                <option value="orderby='rand'"><?php esc_html_e( 'Rand', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>

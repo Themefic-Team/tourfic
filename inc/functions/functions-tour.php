@@ -1,49 +1,9 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
-use \Tourfic\Classes\Tour\Pricing as Tour_Price;
-
-/**
- * Flushing Rewrite on Tourfic Activation
- *
- * tf_tours post type
- * tour_destination taxonomy
- */
-//function tf_tours_rewrite_flush() {
-//
-//	register_tf_tours_post_type();
-//	tf_tours_taxonomies_register();
-//	flush_rewrite_rules();
-//
-//}
-//
-//register_activation_hook( TF_PATH . 'tourfic.php', 'tf_tours_rewrite_flush' );
-
-/**
- * Get tour destinations
- *
- * {taxonomy-tour_destination}
- */
-if ( ! function_exists( 'get_tour_destinations' ) ) {
-	function get_tour_destinations() {
-
-		$destinations = array();
-
-		$destination_terms = get_terms( array(
-			'taxonomy'   => 'tour_destination',
-			'hide_empty' => true,
-		) );
-
-        if(!empty($destination_terms)) {
-	        foreach ( $destination_terms as $destination_term ) {
-		        $destinations[ $destination_term->slug ] = $destination_term->name;
-	        }
-        }
-
-		return $destinations;
-
-	}
-}
+use \Tourfic\App\TF_Review;
+use \Tourfic\Classes\Tour\Tour_Price;
+use \Tourfic\Classes\Tour\Pricing;
 
 #################################
 # All the forms                 #
@@ -2261,7 +2221,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
                 <h2><a href="<?php echo esc_url($url); ?>"><?php the_title();?></a></h2>
             </div>
             
-            <?php tf_archive_single_rating();?>
+            <?php TF_Review::tf_archive_single_rating();?>
             
             <div class="tf-details tf-mt-16">
                 <p><?php echo wp_kses_post(substr(wp_strip_all_tags(get_the_content()), 0, 100). '...'); ?></p>
@@ -2349,7 +2309,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 				
 			</div>  
 			<div class="tf-available-ratings">
-				<?php tf_archive_single_rating(); ?>
+				<?php TF_Review::tf_archive_single_rating(); ?>
 				<i class="fa-solid fa-star"></i>
 			</div>  
 		</div>
@@ -2548,7 +2508,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 							}
 							?>
                         </div>
-						<?php tf_archive_single_rating(); ?>
+						<?php TF_Review::tf_archive_single_rating(); ?>
                     </div>
                     <div class="tf-tour-desc">
                         <p><?php echo wp_kses_post(substr( wp_strip_all_tags( get_the_content() ), 0, 160 ) . '...'); ?></p>

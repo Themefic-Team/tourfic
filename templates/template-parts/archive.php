@@ -6,6 +6,14 @@ use \Tourfic\Classes\Helper;
 
 $paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 $post_per_page = Helper::tfopt('posts_per_page') ? Helper::tfopt('posts_per_page') : 10;
+$tf_expired_tour_showing = ! empty( Helper::tfopt( 't-show-expire-tour' ) ) ? Helper::tfopt( 't-show-expire-tour' ) : '';
+
+if(!empty($tf_expired_tour_showing )){
+	$tf_tour_posts_status = array('publish','expired');
+}else{
+	$tf_tour_posts_status = array('publish');
+}
+
 $args = array(
     'post_type' => $post_type,
     'orderby'   => 'date',
@@ -17,7 +25,7 @@ $args = array(
             'terms'    => $taxonomy_slug,
         )
     ),
-    'post_status'    => 'publish',
+    'post_status'    => $tf_tour_posts_status,
     'paged'          => $paged,
     //'posts_per_page' => $post_per_page
 );
@@ -115,9 +123,9 @@ if( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ) 
         <div class="archive_ajax_result tf-item-cards tf-flex <?php echo $tf_defult_views=="list" ? esc_attr('tf-layout-list') : esc_attr('tf-layout-grid'); ?>">
 
         <?php
-        if ( have_posts() ) {
-            while ( have_posts() ) {
-                the_post();
+        if ( $loop->have_posts() ) {
+            while ( $loop->have_posts() ) {
+                $loop->the_post(); 
                 if( $post_type == 'tf_hotel' ){
                     tf_hotel_archive_single_item();
                 } elseif( $post_type == 'tf_tours' ) {
@@ -164,9 +172,10 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
         <!--Available rooms start -->
         <div class="tf-archive-available-rooms tf-available-rooms archive_ajax_result">
             <?php
-            if ( have_posts() ) {
-                while ( have_posts() ) {
-                    the_post();
+            if ( $loop->have_posts() ) {
+                while ( $loop->have_posts() ) {
+                    $loop->the_post(); 
+
                     if( $post_type == 'tf_hotel' ){
                         tf_hotel_archive_single_item();
                     } elseif( $post_type == 'tf_tours' ) {

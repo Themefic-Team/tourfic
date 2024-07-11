@@ -8,11 +8,11 @@ use Tourfic\Classes\Helper;
 
 class Enqueue {
 	use \Tourfic\Traits\Singleton;
-	use \Tourfic\Traits\Helper;
 
 	public function __construct() {
 		add_filter( 'wp_enqueue_scripts', array( $this, 'tf_dequeue_scripts' ), 9999 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_enqueue_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'tourfic_google_fonts_scriptss' ), 9999999 );
 		// add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'tf_enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_enqueue_admin_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_dequeue_theplus_script_on_settings_page' ), 9999 );
@@ -1036,12 +1036,13 @@ class Enqueue {
 					'activated'                        => esc_html__( 'Activated', 'tourfic' ),
 					'install_failed'                   => esc_html__( 'Install failed', 'tourfic' ),
 					/* translators: %s: strong tag */
-					'max_input_vars_notice'            => sprintf( esc_html__( 'WARNING: If you are having trouble saving your settings, please increase the %s "PHP Max Input Vars" %s value to save all settings.', 'tourfic' ), '<strong>', '</strong>' ),
+					'max_input_vars_notice'            => sprintf( esc_html__( 'WARNING: If you are having trouble saving your settings, please increase the %1$s "PHP Max Input Vars" %2$s value to save all settings.', 'tourfic' ), '<strong>', '</strong>' ),
 					'is_woo_not_active'                => ( ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) || ! is_plugin_active( 'woocommerce/woocommerce.php' ) ),
 					'date_format_change_backend'       => $date_format_change,
 					'i18n'                             => array(
 						'no_services_selected' => esc_html__( 'Please select at least one service.', 'tourfic' ),
-					)
+					),
+					'is_pro'                           => function_exists( 'is_tf_pro' ) && is_tf_pro(),
 				)
 			);
 			wp_enqueue_script( 'Chart-js', '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js', array( 'jquery' ), '2.6.0', true );
@@ -1344,7 +1345,7 @@ class Enqueue {
 			#tf-ask-question textarea,
 			.tf-container button,
 			.tf-container input,
-			.tf-container textarea{
+			.tf-container textarea,
 			.gm-style .marker-label,
 			.tf-withoutpayment-booking{
 				font-family: "' . $tf_global_font_family . '", sans-serif !important;
@@ -2271,5 +2272,20 @@ class Enqueue {
 		}
 
 		wp_add_inline_style( 'tf-app-style', apply_filters( 'tf_apartment_css', $output ) );
+	}
+
+	function tourfic_google_fonts_scriptss() {
+		$tf_global_font = Helper::tfopt('global-body-fonts-family') ? Helper::tfopt('global-body-fonts-family') : 'Default';
+		$tf_global_heading_font_family = Helper::tfopt('global-heading-fonts-family') ? Helper::tfopt('global-heading-fonts-family') : 'Default';
+		
+		if($tf_global_heading_font_family!="Default"){
+			$heading_url = 'https://fonts.googleapis.com/css2?family='. str_replace("_","+",$tf_global_heading_font_family) .':wght@100;200;300;400;500;600;700;800;900&display=swap';
+			wp_enqueue_style( 'tourfic-google-'.$tf_global_heading_font_family, $heading_url, array(), TF_VERSION );
+		}
+		
+		if($tf_global_font!="Default"){
+			$body_url = 'https://fonts.googleapis.com/css2?family='. str_replace("_","+",$tf_global_font) .':wght@100;200;300;400;500;600;700;800;900&display=swap';
+			wp_enqueue_style( 'tourfic-google-'.$tf_global_font, $body_url, array(), TF_VERSION );
+		}
 	}
 }

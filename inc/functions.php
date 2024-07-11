@@ -23,36 +23,12 @@ function tf_file_missing( $files = '' ) {
 add_action( 'admin_notices', 'tf_file_missing' );
 
 /**
- * WC Product Extend
- */
-if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-product-extend.php' ) ) {
-	function fida() {
-		require_once TF_INC_PATH . 'functions/woocommerce/wc-product-extend.php';
-	}
-
-	if ( Helper::tf_is_woo_active() ) {
-		add_action( 'init', 'fida' );
-	}
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-product-extend.php' );
-}
-
-/**
  * Helper Functions
  */
 if ( file_exists( TF_INC_PATH . 'functions/functions-helper.php' ) ) {
 	require_once TF_INC_PATH . 'functions/functions-helper.php';
 } else {
 	tf_file_missing( TF_INC_PATH . 'functions/functions-helper.php' );
-}
-
-/**
- * Order page Functions
- */
-if ( file_exists( TF_INC_PATH . 'functions/functions_order.php' ) ) {
-	require_once TF_INC_PATH . 'functions/functions_order.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/functions_order.php' );
 }
 
 /**
@@ -82,103 +58,7 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-tour.php' ) ) {
 	tf_file_missing( TF_INC_PATH . 'functions/functions-tour.php' );
 }
 
-/**
- * WooCommerce Common Functions
- */
-if ( Helper::tf_is_woo_active() ) {
-	if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-common.php' ) ) {
-		require_once TF_INC_PATH . 'functions/woocommerce/wc-common.php';
-	} else {
-		tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-common.php' );
-	}
-}
-
-/**
- * Wishlist Functions
- */
-if ( file_exists( TF_INC_PATH . 'functions/functions-wishlist.php' ) ) {
-	require_once TF_INC_PATH . 'functions/functions-wishlist.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/functions-wishlist.php' );
-}
-
-/**
- * Review Functions
- */
-if ( file_exists( TF_INC_PATH . 'functions/functions-review.php' ) ) {
-	require_once TF_INC_PATH . 'functions/functions-review.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/functions-review.php' );
-}
-
-/**
- * inquiry Functions
- */
-if ( file_exists( TF_INC_PATH . 'functions/functions_enquiry.php' ) ) {
-	require_once TF_INC_PATH . 'functions/functions_enquiry.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/functions_enquiry.php' );
-}
-
-/**
- * Include export import function file
- */
-if( file_exists( TF_INC_PATH . 'functions/functions-settings-import-export.php' ) ){
-	require_once TF_INC_PATH . 'functions/functions-settings-import-export.php';
-}else{
-	tf_file_missing( TF_INC_PATH . 'functions/functions-settings-import-export.php' );
-}
-
-/**
- * Include Post Duplicator function file
- */
-if( file_exists( TF_INC_PATH . 'functions/functions_duplicator.php' ) ){
-	require_once TF_INC_PATH . 'functions/functions_duplicator.php';
-}else{
-	tf_file_missing( TF_INC_PATH . 'functions/functions_duplicator.php' );
-}
-
-/**
- * Include Functions Vat
- */
-if ( file_exists( TF_INC_PATH . 'functions/functions_vat.php' ) ) {
-    require_once TF_INC_PATH . 'functions/functions_vat.php';
-} else {
-    tf_file_missing( TF_INC_PATH . 'functions/functions_vat.php' );
-}
-
-/**
- * Shortcodes
- *
- * @since 1.0
- */
-if ( Helper::tf_is_woo_active() ) {
-	if ( file_exists( TF_INC_PATH . 'functions/shortcodes.php' ) ) {
-		require_once TF_INC_PATH . 'functions/shortcodes.php';
-	} else {
-		tf_file_missing( TF_INC_PATH . 'functions/shortcodes.php' );
-	}
-}
-
-# Google Fonts
-if ( file_exists( TF_INC_PATH . 'functions/functions-fonts.php' ) ) {
-	require_once TF_INC_PATH . 'functions/functions-fonts.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/functions-fonts.php' );
-}
-
 add_action( 'plugins_loaded', 'tf_add_elelmentor_addon' );
-
-/**
- * Notice
- *
- * Update
- */
-if ( file_exists( TF_INC_PATH . 'functions/functions-notice_update.php' ) ) {
-	require_once TF_INC_PATH . 'functions/functions-notice_update.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/functions-notice_update.php' );
-}
 
 
 /*
@@ -252,6 +132,33 @@ if(!function_exists('tourfic_order_table_data')){
 		$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s $query_where", $query_type ), ARRAY_A );
 
 		return $tf_tour_book_orders;
+	}
+}
+
+if ( ! function_exists( 'tourfic_get_user_order_table_data' ) ) {
+	function tourfic_get_user_order_table_data( $query ) {
+		global $wpdb;
+		$query_select   = $query['select'];
+		$query_type     = $query['post_type'];
+		$query_customer = $query['customer_id']; // Change from 'author' to 'customer_id'
+		$query_limit    = $query['limit'];
+
+		// Adjust the query to use customer_id instead of post_author
+		if ( ! is_array( $query_type ) ) {
+			$vendor_query = $wpdb->prepare(
+				"SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s AND customer_id = %d ORDER BY order_id DESC $query_limit",
+				$query_type, $query_customer
+			);
+		} else {
+			$vendor_query = $wpdb->prepare(
+				"SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type IN (" . implode( ',', array_fill( 0, count( $query_type ), '%s' ) ) . ") AND customer_id = %d ORDER BY order_id DESC $query_limit",
+				array_merge( $query_type, array( $query_customer ) ) // Add customer_id to the array
+			);
+		}
+
+		$orders_result = $wpdb->get_results( $vendor_query, ARRAY_A );
+
+		return $orders_result;
 	}
 }
 
@@ -478,5 +385,29 @@ if(!function_exists('tf_custom_wp_kses_allow_tags')){
 		$allowed_tags['code']     = true;
 
 		return $allowed_tags;
+	}
+}
+
+if(!function_exists('tf_convert_date_format')) {
+	function tf_convert_date_format( $date, $currentFormat ) {
+		$dateTime = DateTime::createFromFormat( $currentFormat, $date );
+
+		if ( $dateTime === false ) {
+			return false;
+		}
+
+		return $dateTime->format( 'Y/m/d' );
+	}
+}
+
+if(!function_exists('tf_tour_date_format_changer')) {
+	function tf_tour_date_format_changer($date, $format) {
+		if(!empty($date) && !empty($format)) {
+			$date = new DateTime($date);
+			$formattedDate = $date->format($format);
+
+			return $formattedDate;
+
+		} else return;
 	}
 }

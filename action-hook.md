@@ -38,7 +38,7 @@
 * tf_tour_type_labels - `not found`
 * tour_type_args - **file:** `functions-tour.php`
 * tf_tour_type_slug - **file:** `Tour_CPT.php`
-* tf_tour_css - **file:** `Enqueue.php` 
+* tf_tour_css - **file:** `Enqueue.php`
 
 #### Apartment
 * tf_apartment_supports - **file:** `Apartment_CPT.php`
@@ -56,6 +56,34 @@
 * tf_apartment_type_slug - **file:** `Apartment_CPT.php`
 * tf_apartment_css - **file:** `Enqueue.php` 
 
+#### Backend Booking
+* tf_{*}_backend_booking_form_title - **file:** `TF_Backend_Booking.php` - **dynamic:** `tour/hotel/apartment`
+* tf_{*}_backend_booking_form_class - **file:** `TF_Backend_Booking.php` - **dynamic:** `tour/hotel/apartment`
+
+#### Enquiry
+* tf_hotel_enquiry_page_title - **file:** `Hotel_Enquiry.php`
+* tf_hotel_enquiry_menu_title - **file:** `Hotel_Enquiry.php`
+* tf_hotel_enquiry_page_heading - **file:** `Hotel_Enquiry.php`
+* tf_tour_enquiry_page_title - **file:** `Tour_Enquiry.php`
+* tf_tour_enquiry_menu_title - **file:** `Tour_Enquiry.php`
+* tf_tour_enquiry_page_heading - **file:** `Tour_Enquiry.php`
+* tf_apartment_enquiry_page_title - **file:** `Apartment_Enquiry.php`
+* tf_apartment_enquiry_menu_title - **file:** `Apartment_Enquiry.php`
+* tf_apartment_enquiry_page_heading - **file:** `Apartment_Enquiry.php`
 
 
 ### Action hook
+
+#### Backend Booking
+* tf_before_{*}_backend_booking_form - **file:** `TF_Backend_Booking.php` - **dynamic:** `tour/hotel/apartment`
+* tf_after_{*}_backend_booking_form - **file:** `TF_Backend_Booking.php` - **dynamic:** `tour/hotel/apartment`
+
+#### Enquiry
+* tf_before_enquiry_details - **file:** `Hotel_Enquiry.php, Tour_Enquiry.php, Apartment_Enquiry.php`
+* tf_before_hotel_enquiry_details - **file:** `Hotel_Enquiry.php`
+* tf_after_hotel_enquiry_details - **file:** `Hotel_Enquiry.php`
+* tf_before_tour_enquiry_details - **file:** `Tour_Enquiry.php`
+* tf_after_tour_enquiry_details - **file:** `Tour_Enquiry.php`
+* tf_before_apartment_enquiry_details - **file:** `Apartment_Enquiry.php`
+* tf_after_apartment_enquiry_details - **file:** `Apartment_Enquiry.php`
+

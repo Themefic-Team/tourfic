@@ -646,9 +646,11 @@
             e.preventDefault();
 
             let btn = $(this);
+            let wishlistItems = getWish();
             let form = $(this).closest('#tf-register');
             let formData = new FormData(form[0]);
             formData.append('action', 'tf_registration');
+            formData.append('wishlist', JSON.stringify(wishlistItems));
             let requiredFields = ['tf_user', 'tf_email', 'tf_pass', 'tf_pass_confirm'];
             let extra_register_fields = form.find('[name=extra_register_fields]').val();
             let vendor_reg = form.find('[name=vendor_reg]').val();
@@ -711,13 +713,21 @@
                         form.find('textarea').closest('.tf-reg-field').find('small.text-danger').remove();
                     }
                     if (obj.redirect_url) {
-                        window.location.href = obj.redirect_url;
+                        //window.location.href = obj.redirect_url;
                     }
                     btn.removeClass('tf-btn-loading');
                 },
             });
 
         });
+
+        /* get wishlist from localstorage  */
+        const wishKey = 'wishlist_item';
+        const getWish = () => {
+            let userLists = localStorage.getItem(wishKey);
+            // if list is null then init list else make array from json string
+            return (userLists === null) ? [] : JSON.parse(userLists);
+        }
 
         /**
          * Resend email verification url

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tourfic\Classes\Hotel;
+namespace Tourfic\Classes\Apartment;
 class Availability {
 
 }

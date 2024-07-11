@@ -5,7 +5,8 @@ namespace Tourfic\App\Widgets;
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-use Tourfic\App\Widgets\Elementor\TF_Widget_Register;
+use Tourfic\App\Widgets\Elementor\Register;
+use Tourfic\App\Widgets\TF_Widgets;
 
 class TF_Widget_Base {
 
@@ -24,7 +25,7 @@ class TF_Widget_Base {
         }
 
         // Include Widget files
-        TF_Widget_Register::instance();
+        Register::instance();
     }
 
     /**
@@ -54,22 +55,20 @@ class TF_Widget_Base {
 
         // Register Custom Widgets
         $custom_widgets = array(
-            Tourfic_Ask_Question::instance(),
-            Tourfic_Similar_Tours::instance(),
-            TF_Hotel_Feature_Filter::instance(),
-            TF_Hotel_Type_Filter::instance(),
-            TF_Tour_Feature_Filter::instance(),
-            TF_Tour_Attraction_Filter::instance(),
-            TF_Tour_Activities_Filter::instance(),
-            TF_Tour_Type_Filter::instance(),
-            TF_Apartment_Features_Filter::instance(),
-            TF_Apartment_Type_Filter::instance(),
-            Tourfic_Price_Filter::instance()
+            TF_Widgets\Ask_Question::instance(),
+            TF_Widgets\Similar_Tours::instance(),
+            TF_Widgets\Hotel_Feature_Filter::instance(),
+            TF_Widgets\Hotel_Type_Filter::instance(),
+            TF_Widgets\Tour_Feature_Filter::instance(),
+            TF_Widgets\Tour_Attraction_Filter::instance(),
+            TF_Widgets\Tour_Activities_Filter::instance(),
+            TF_Widgets\Tour_Type_Filter::instance(),
+            TF_Widgets\Apartment_Features_Filter::instance(),
+            TF_Widgets\Apartment_Type_Filter::instance(),
+            TF_Widgets\Price_Filter::instance()
         );
         foreach ( $custom_widgets as $key => $widget ) {
             register_widget( $widget );
         }
-
     }
-
 }

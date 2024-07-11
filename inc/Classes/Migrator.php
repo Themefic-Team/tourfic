@@ -3,15 +3,19 @@
 namespace Tourfic\Classes;
 defined( 'ABSPATH' ) || exit;
 
+use \Tourfic\Classes\Helper;
+
 class Migrator {
 	use \Tourfic\Traits\Singleton;
-	use \Tourfic\Traits\Helper;
 
 	public function __construct() {
 		add_action( 'init', array( $this, 'tf_permalink_settings_migration' ) );
 		add_action( 'init', array( $this, 'tf_template_3_migrate_data' ) );
 		add_action( 'init', array( $this, 'tf_migrate_option_data' ) );
 		add_action( 'init', array( $this, 'tf_migrate_data' ) );
+		if ( Helper::tf_is_woo_active() ) {
+			add_action('admin_init', array($this, 'tf_admin_order_data_migration'));
+		}
 	}
 
 	function tf_permalink_settings_migration() {
@@ -51,7 +55,7 @@ class Migrator {
 	function tf_template_3_migrate_data() {
 
 		// Hotel & Tour
-		if ( empty( get_option( 'tf_template_3_migrate_data' ) ) ) {
+		if ( empty( get_option( 'tf_template_3_migrate_data' ) ) || ( !empty( get_option( 'tf_template_3_migrate_data' ) ) &&  get_option( 'tf_template_3_migrate_data' ) < 2 ) ) {
 
 			$options = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
 
@@ -69,6 +73,11 @@ class Migrator {
 				array(
 					"hotel-section"        => "Room",
 					"hotel-section-slug"   => "rooms",
+					"hotel-section-status" => "1"
+				),
+				array(
+					"hotel-section"        => "Facilities",
+					"hotel-section-slug"   => "facilities",
 					"hotel-section-status" => "1"
 				),
 				array(
@@ -237,7 +246,7 @@ class Migrator {
 			update_option( 'tf_settings', $options );
 			wp_cache_flush();
 			flush_rewrite_rules( true );
-			update_option( 'tf_template_3_migrate_data', 1 );
+			update_option( 'tf_template_3_migrate_data', 2 );
 
 		}
 
@@ -381,11 +390,15 @@ class Migrator {
 
 			foreach ( $hotel_locations as $hotel_location ) {
 
-				$old_locations_meta = get_term_meta(
-					$hotel_location->term_id,
-					'category-image-id',
-					true
-				);
+				$old_locations_meta = '';
+				if (!is_array($hotel_location)) {
+					$old_locations_meta = get_term_meta(
+						$hotel_location->term_id,
+						'category-image-id',
+						true
+					);
+				}
+				
 				$new_meta           = [
 					"image" => [
 						"url"         => wp_get_attachment_url( $old_locations_meta ),
@@ -399,11 +412,13 @@ class Migrator {
 					]
 				];
 				// If the meta field for the term does not exist, it will be added.
-				update_term_meta(
-					$hotel_location->term_id,
-					"hotel_location",
-					$new_meta
-				);
+				if ( !is_array( $hotel_location ) ) {
+					update_term_meta(
+						$hotel_location->term_id,
+						"hotel_location",
+						$new_meta
+					);
+				}
 			}
 
 			/** Tour Destinations Image Fix */
@@ -413,27 +428,30 @@ class Migrator {
 			] );
 
 			foreach ( $tour_destinations as $tour_destination ) {
-				$old_term_metadata = get_term_meta( $tour_destination->term_id, 'tour_destination_meta', true )['tour_destination_meta'] ?? null;
-				if ( ! empty( $old_term_metadata ) ) {
-					$image_id = attachment_url_to_postid( $old_term_metadata );
-					$new_meta = [
-						"image" => [
-							"url"         => wp_get_attachment_url( $image_id ),
-							"id"          => $image_id,
-							"width"       => "1920",
-							"height"      => "1080",
-							"thumbnail"   => wp_get_attachment_thumb_url( $image_id ),
-							"alt"         => "",
-							"title"       => "",
-							"description" => ""
-						]
-					];
-					// If the meta field for the term does not exist, it will be added.
-					update_term_meta(
-						$tour_destination->term_id,
-						"tour_destination",
-						$new_meta
-					);
+				if( !is_array($tour_destination)) {
+					$old_term_metadata = get_term_meta( $tour_destination->term_id, 'tour_destination_meta', true )['tour_destination_meta'] ?? null;
+
+					if ( ! empty( $old_term_metadata ) ) {
+						$image_id = attachment_url_to_postid( $old_term_metadata );
+						$new_meta = [
+							"image" => [
+								"url"         => wp_get_attachment_url( $image_id ),
+								"id"          => $image_id,
+								"width"       => "1920",
+								"height"      => "1080",
+								"thumbnail"   => wp_get_attachment_thumb_url( $image_id ),
+								"alt"         => "",
+								"title"       => "",
+								"description" => ""
+							]
+						];
+						// If the meta field for the term does not exist, it will be added.
+						update_term_meta(
+							$tour_destination->term_id,
+							"tour_destination",
+							$new_meta
+						);
+					}
 				}
 			}
 
@@ -495,7 +513,10 @@ class Migrator {
 
 
 			foreach ( $tour_destinations as $tour_destination ) {
-				$old_term_metadata = get_term_meta( $tour_destination->term_id, 'tour_destination', true );
+				$old_term_metadata = '';
+				if (!is_array($tour_destination)) {
+					$old_term_metadata = get_term_meta( $tour_destination->term_id, 'tour_destination', true );
+				}
 
 				if ( ! empty( $old_term_metadata ) ) {
 					if ( isset( $old_term_metadata['image'] ) && is_array( $old_term_metadata['image'] ) ) {
@@ -538,7 +559,10 @@ class Migrator {
 
 
 			foreach ( $hotel_location as $_hotel_location ) {
-				$old_term_metadata = get_term_meta( $_hotel_location->term_id, 'hotel_location', true );
+				$old_term_metadata = '';
+				if (!is_array($tour_destination)) {
+					$old_term_metadata = get_term_meta( $_hotel_location->term_id, 'hotel_location', true );
+				}
 				if ( ! empty( $old_term_metadata ) ) {
 					if ( isset( $old_term_metadata['image'] ) && is_array( $old_term_metadata['image'] ) ) {
 						$old_term_metadata['image'] = $old_term_metadata['image']['url'];
@@ -561,7 +585,10 @@ class Migrator {
 
 
 			foreach ( $hotel_feature as $_hotel_feature ) {
-				$old_term_metadata = get_term_meta( $_hotel_feature->term_id, 'hotel_feature', true );
+				$old_term_metadata = '';
+				if (!is_array($tour_destination)) {
+					$old_term_metadata = get_term_meta( $_hotel_feature->term_id, 'hotel_feature', true );
+				}
 				if ( ! empty( $old_term_metadata ) ) {
 					if ( isset( $old_term_metadata['icon-c'] ) && is_array( $old_term_metadata['icon-c'] ) ) {
 						$old_term_metadata['icon-c'] = $old_term_metadata['icon-c']['url'];
@@ -619,5 +646,186 @@ class Migrator {
 		}
 
 
+	}
+
+	function tf_admin_order_data_migration(){
+		if ( empty( get_option( 'tf_old_order_data_migrate' ) ) ) {
+
+			$tf_old_order_limit = new \WC_Order_Query( array (
+				'limit' => -1,
+				'orderby' => 'date',
+				'order' => 'ASC',
+				'return' => 'ids',
+			) );
+			$order = $tf_old_order_limit->get_orders();
+
+			foreach ( $order as $item_id => $item ) {
+				$itemmeta = wc_get_order( $item);
+				if ( is_a( $itemmeta, 'WC_Order_Refund' ) ) {
+					$itemmeta = wc_get_order( $itemmeta->get_parent_id() );
+				}
+				$tf_ordering_date =  $itemmeta->get_date_created();
+
+				//Order Data Insert
+				$billinginfo = [
+					'billing_first_name' => !empty($itemmeta->get_billing_first_name()) ? $itemmeta->get_billing_first_name() : '',
+					'billing_last_name' => !empty($itemmeta->get_billing_last_name()) ? $itemmeta->get_billing_last_name() : '',
+					'billing_company' => !empty($itemmeta->get_billing_company()) ? $itemmeta->get_billing_company() : '',
+					'billing_address_1' => !empty($itemmeta->get_billing_address_1()) ? $itemmeta->get_billing_address_1() : '',
+					'billing_address_2' => !empty($itemmeta->get_billing_address_2()) ? $itemmeta->get_billing_address_2() : '',
+					'billing_city' => !empty($itemmeta->get_billing_city()) ? $itemmeta->get_billing_city() : '',
+					'billing_state' => !empty($itemmeta->get_billing_state()) ? $itemmeta->get_billing_state() : '',
+					'billing_postcode' => !empty($itemmeta->get_billing_postcode()) ? $itemmeta->get_billing_postcode() : '',
+					'billing_country' => !empty($itemmeta->get_billing_country()) ? $itemmeta->get_billing_country() : '',
+					'billing_email' => !empty($itemmeta->get_billing_email()) ? $itemmeta->get_billing_email() : '',
+					'billing_phone' => !empty($itemmeta->get_billing_phone()) ? $itemmeta->get_billing_phone() : ''
+				];
+
+				$shippinginfo = [
+					'shipping_first_name' => !empty($itemmeta->get_shipping_first_name()) ? $itemmeta->get_shipping_first_name() : '',
+					'shipping_last_name' => !empty($itemmeta->get_shipping_last_name()) ? $itemmeta->get_shipping_last_name() : '',
+					'shipping_company' => !empty($itemmeta->get_shipping_company()) ? $itemmeta->get_shipping_company() : '',
+					'shipping_address_1' => !empty($itemmeta->get_shipping_address_1()) ? $itemmeta->get_shipping_address_1() : '',
+					'shipping_address_2' => !empty($itemmeta->get_shipping_address_2()) ? $itemmeta->get_shipping_address_2() : '',
+					'shipping_city' => !empty($itemmeta->get_shipping_city()) ? $itemmeta->get_shipping_city() : '',
+					'shipping_state' => !empty($itemmeta->get_shipping_state()) ? $itemmeta->get_shipping_state() : '',
+					'shipping_postcode' => !empty($itemmeta->get_shipping_postcode()) ? $itemmeta->get_shipping_postcode() : '',
+					'shipping_country' => !empty($itemmeta->get_shipping_country()) ? $itemmeta->get_shipping_country() : '',
+					'shipping_phone' => !empty($itemmeta->get_shipping_phone()) ? $itemmeta->get_shipping_phone() : ''
+				];
+
+				foreach ( $itemmeta->get_items() as $item_key => $item_values ) {
+					$order_type   = wc_get_order_item_meta( $item_key, '_order_type', true );
+					if("hotel"==$order_type){
+						$post_id   = wc_get_order_item_meta( $item_key, '_post_id', true );
+						$unique_id = wc_get_order_item_meta( $item_key, '_unique_id', true );
+						$room_selected = wc_get_order_item_meta( $item_key, 'number_room_booked', true );
+						$check_in = wc_get_order_item_meta( $item_key, 'check_in', true );
+						$check_out = wc_get_order_item_meta( $item_key, 'check_out', true );
+						$price = $itemmeta->get_subtotal();
+						$due = wc_get_order_item_meta( $item_key, 'due', true );
+						$room_name = wc_get_order_item_meta( $item_key, 'room_name', true );
+						$adult = wc_get_order_item_meta( $item_key, 'adult', true );
+						$child = wc_get_order_item_meta( $item_key, 'child', true );
+						$children_ages = wc_get_order_item_meta( $item_key, 'Children Ages', true );
+						$airport_service_type = wc_get_order_item_meta( $item_key, 'Airport Service', true );
+						$airport_service_fee = wc_get_order_item_meta( $item_key, 'Airport Service Fee', true );
+
+						$iteminfo = [
+							'room' => $room_selected,
+							'room_unique_id' => $unique_id,
+							'check_in' => $check_in,
+							'check_out' => $check_out,
+							'room_name' => $room_name,
+							'adult' => $adult,
+							'child' => $child,
+							'children_ages' => $children_ages,
+							'airport_service_type' => $airport_service_type,
+							'airport_service_fee' => $airport_service_fee,
+							'total_price' => $price,
+							'due_price' => $due,
+						];
+
+						$iteminfo_keys = array_keys($iteminfo);
+						$iteminfo_keys = array_map('sanitize_key', $iteminfo_keys);
+
+						$iteminfo_values = array_values($iteminfo);
+						$iteminfo_values = array_map('sanitize_text_field', $iteminfo_values);
+
+						$iteminfo = array_combine($iteminfo_keys, $iteminfo_values);
+
+						global $wpdb;
+						$wpdb->query(
+							$wpdb->prepare(
+								"INSERT INTO {$wpdb->prefix}tf_order_data
+						( order_id, post_id, post_type, room_number, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
+						VALUES ( %d, %d, %s, %d, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
+								array(
+									$item,
+									sanitize_key( $post_id ),
+									$order_type,
+									$room_selected,
+									$check_in,
+									$check_out,
+									wp_json_encode($billinginfo),
+									wp_json_encode($shippinginfo),
+									wp_json_encode($iteminfo),
+									$itemmeta->get_customer_id(),
+									$itemmeta->get_payment_method(),
+									$itemmeta->get_status(),
+									$tf_ordering_date->date('Y-m-d H:i:s')
+								)
+							)
+						);
+					}
+					if("tour"==$order_type){
+						$post_id   = wc_get_order_item_meta( $item_key, '_tour_id', true );
+						$tour_date = wc_get_order_item_meta( $item_key, 'Tour Date', true );
+						$tour_time = wc_get_order_item_meta( $item_key, 'Tour Time', true );
+						$price = $itemmeta->get_subtotal();
+						$due = wc_get_order_item_meta( $item_key, 'Due', true );
+						$tour_extra = wc_get_order_item_meta( $item_key, 'Tour Extra', true );
+						$adult = wc_get_order_item_meta( $item_key, 'Adults', true );
+						$child = wc_get_order_item_meta( $item_key, 'Children', true );
+						$infants = wc_get_order_item_meta( $item_key, 'Infants', true );
+						$datatype_check = preg_match("/-/", $tour_date);
+						if ( !empty($tour_date) && !empty($datatype_check) ) {
+							list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
+						}
+						if ( !empty($tour_date) && empty($datatype_check) ) {
+							$tour_in = gmdate( "Y-m-d", strtotime( $tour_date ) );
+							$tour_out = "0000-00-00";
+						}
+
+
+						$iteminfo = [
+							'tour_date' => $tour_date,
+							'tour_time' => $tour_time,
+							'tour_extra' => $tour_extra,
+							'adult' => $adult,
+							'child' => $child,
+							'infants' => $infants,
+							'total_price' => $price,
+							'due_price' => $due,
+						];
+
+						$iteminfo_keys = array_keys($iteminfo);
+						$iteminfo_keys = array_map('sanitize_key', $iteminfo_keys);
+
+						$iteminfo_values = array_values($iteminfo);
+						$iteminfo_values = array_map('sanitize_text_field', $iteminfo_values);
+
+						$iteminfo = array_combine($iteminfo_keys, $iteminfo_values);
+
+						global $wpdb;
+						$wpdb->query(
+							$wpdb->prepare(
+								"INSERT INTO {$wpdb->prefix}tf_order_data
+						( order_id, post_id, post_type, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
+						VALUES ( %d, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
+								array(
+									$item,
+									sanitize_key( $post_id ),
+									$order_type,
+									gmdate( "Y-m-d", strtotime( $tour_in ) ),
+									gmdate( "Y-m-d", strtotime( $tour_out ) ),
+									wp_json_encode($billinginfo),
+									wp_json_encode($shippinginfo),
+									wp_json_encode($iteminfo),
+									$itemmeta->get_customer_id(),
+									$itemmeta->get_payment_method(),
+									$itemmeta->get_status(),
+									$tf_ordering_date->date('Y-m-d H:i:s')
+								)
+							)
+						);
+					}
+				}
+
+			}
+			wp_cache_flush();
+			flush_rewrite_rules( true );
+			update_option( 'tf_old_order_data_migrate', 1 );
+		}
 	}
 }

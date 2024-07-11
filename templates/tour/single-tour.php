@@ -5,7 +5,8 @@
 // Get header
 
 use \Tourfic\Classes\Helper;
-use \Tourfic\Classes\Tour\Pricing as Tour_Price;
+use \Tourfic\Classes\Tour\Tour_Price;
+use \Tourfic\App\Wishlist;
 
 get_header();
 
@@ -59,7 +60,7 @@ while ( have_posts() ) : the_post();
 
 	// Wishlist
 	$post_type       = substr( get_post_type(), 3, - 1 );
-	$has_in_wishlist = tf_has_item_in_wishlist( $post_id );
+	$has_in_wishlist = Wishlist::tf_has_item_in_wishlist( $post_id );
 
 	// tour type meta
 	$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';
@@ -102,17 +103,6 @@ while ( have_posts() ) : the_post();
 				return $new_months;
 
 			} else return array();
-		}
-	}
-	if(!function_exists('tf_tour_date_format_changer')) {
-		function tf_tour_date_format_changer($date, $format) {
-			if(!empty($date) && !empty($format)) {
-				$date = new DateTime($date);
-				$formattedDate = $date->format($format);
-
-				return $formattedDate;
-
-			} else return;
 		}
 	}
 

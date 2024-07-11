@@ -3,8 +3,8 @@
  * Template: Single Hotel (Full Width)
  */
 
-
- use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\Helper;
+use \Tourfic\App\Wishlist;
 
 get_header();
 
@@ -71,7 +71,7 @@ while ( have_posts() ) : the_post();
 
 	// Wishlist
 	$post_type       = str_replace( 'tf_', '', get_post_type() );
-	$has_in_wishlist = tf_has_item_in_wishlist( $post_id );
+	$has_in_wishlist = Wishlist::tf_has_item_in_wishlist( $post_id );
 
 	/**
 	 * Get locations
@@ -118,6 +118,12 @@ while ( have_posts() ) : the_post();
 		}, $rooms );
 		$rooms                = unserialize( $tf_hotel_rooms_value );
 	}
+
+
+	// Hotel facilitiles
+	$hotel_facilities = ! empty( $meta['hotel-facilities'] ) ? $meta['hotel-facilities'] : '';
+	$hotel_facilities_categories = ! empty( Helper::tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) : '';
+
 	// FAQ
 	$faqs = ! empty( $meta['faq'] ) ? $meta['faq'] : '';
 	if ( ! empty( $faqs ) && gettype( $faqs ) == "string" ) {
