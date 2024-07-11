@@ -281,8 +281,6 @@
             let posttype = $('.tf-post-type').val();
             var page = page;
 
-            console.log(page)
-
             let formData = new FormData();
             formData.append('action', 'tf_trigger_tax_filter');
             formData.append('term_ids', term_ids);
