@@ -342,14 +342,14 @@
         }
 
         // Search Result Ajax pagination
-        $(document).on('click', '.tf_posts_navigation.tf_posts_ajax_navigation a.page-numbers', function (e) {
+        $(document).on('click', '.tf_search_ajax_pagination a.page-numbers', function (e) {
             e.preventDefault();
             page = tf_page_pagination_number($(this).clone());
             paginationMakeFilter(page);
         }); 
         
         // Search Result Ajax pagination
-        $(document).on('click', '.tf_tax_posts_ajax_navigation a.page-numbers', function (e) {
+        $(document).on('click', 'tf_tax_posts_navigation a.page-numbers', function (e) {
             e.preventDefault();
             page = tf_page_pagination_number($(this).clone());
             taxFilterPagination(page);

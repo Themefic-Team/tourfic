@@ -1168,7 +1168,7 @@ class Helper {
 				}
 				$total_pages = ceil( $total_filtered_results / $post_per_page );
 				if ( $total_pages > 1 ) {
-					echo "<div class='tf_posts_navigation tf_posts_ajax_navigation'>";
+					echo "<div class='tf_posts_navigation tf_posts_ajax_navigation tf_search_ajax_pagination'>";
 					echo wp_kses_post(
 						paginate_links( array(
 							'total'   => $total_pages,
@@ -1438,20 +1438,26 @@ class Helper {
 				}
 			}
 
+			global $wp_rewrite;
+
+			$base = trailingslashit( get_post_type_archive_link( $post_type ) ) . "{$wp_rewrite->pagination_base}/%#%/";
+
 			$total_pages = ceil( $total_posts / $post_per_page );
 			if ( $total_pages > 1 ) {
-				echo "<div class='tf_tax_posts_ajax_navigation tf_posts_ajax_navigation'>";
+				echo "<div class='tf_posts_navigation tf_posts_ajax_navigation tf_tax_posts_navigation'>";
 				echo wp_kses_post(
 					paginate_links( array(
-						'base' => get_pagenum_link(1) . '%_%',
-                        'format' => '?paged=%#%',
-						'total'   => $total_pages,
-						'current' => $current_page
+						'base' => $base,
+						'total'   => $loop->max_num_pages,
+						'current' => max( $current_page, get_query_var( 'paged' ) ),
+						'prev_next' => true,
 					) )
 				);
 				echo "</div>";
 			}
 		}
+
+		global $wp_rewrite;
 
 		if($total_posts == 0){
 			echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
@@ -1463,6 +1469,12 @@ class Helper {
 		wp_reset_postdata();
 
 		die();
+	}
+
+	function get_current_url() {
+		$protocol = is_ssl() ? 'https://' : 'http://';
+	
+		return ( $protocol ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 	}
 
 	/**

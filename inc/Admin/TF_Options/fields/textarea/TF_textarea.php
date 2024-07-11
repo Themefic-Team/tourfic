@@ -2,6 +2,8 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+use \Tourfic\Classes\Helper;
+
 if ( ! class_exists( 'TF_textarea' ) ) {
 	class TF_textarea extends TF_Fields {
 
@@ -10,9 +12,24 @@ if ( ! class_exists( 'TF_textarea' ) ) {
 		}
 
 		public function render() {
+
 			$placeholder = ( ! empty( $this->field['placeholder'] ) ) ? 'placeholder="' . $this->field['placeholder'] . '"' : '';
-			echo '<textarea name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '"' . wp_kses_post($placeholder) . ' '. wp_kses_post($this->field_attributes()) .'>' . esc_html($this->value) . '</textarea>';
+
+			if( $this->field['id'] == "booking-code" ) {
+				echo '<textarea name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '"' . wp_kses_post($placeholder) . ' '. wp_kses_post($this->field_attributes()) .'>' . wp_kses( $this->value, Helper::tf_custom_wp_kses_allow_tags() ) . '</textarea>';
+			} else {
+				echo '<textarea name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '"' . wp_kses_post($placeholder) . ' '. wp_kses_post($this->field_attributes()) .'>' . esc_html($this->value) . '</textarea>';
+			}
 		}
 
+		public function sanitize() {
+			if( $this->field['id'] == "booking-code" ) {
+				return $this->value;
+
+				// TODO: Need to sanitize the booking code
+			}else {
+				return wp_kses_post( $this->value );
+			}
+		}
 	}
 }
