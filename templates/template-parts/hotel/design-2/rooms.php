@@ -197,7 +197,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
             <div class="tf-available-room-gallery">
                 <?php 
                 $tour_room_details_gall = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
-                $room_preview_img = ! empty( $room['room_preview_img'] ) ? $room['room_preview_img'] : '';
+                $room_preview_img = get_the_post_thumbnail_url($room_id, 'full');
                 if(!empty($room_preview_img)){ ?>                     
                     <div class="tf-room-gallery <?php echo empty($tour_room_details_gall) ? esc_attr('tf-no-room-gallery') : ''; ?>">
                         <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php esc_html_e("Room Image","tourfic"); ?>">
@@ -401,7 +401,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
             <div class="tf-available-room-gallery <?php echo empty($tour_room_details_gall) ? esc_attr('tf-no-room-gallery') : ''; ?>">
                 <?php 
                 $tour_room_details_gall = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
-                $room_preview_img = ! empty( $room['room_preview_img'] ) ? $room['room_preview_img'] : '';
+                $room_preview_img = get_the_post_thumbnail_url($room_id, 'full');
                 if(!empty($room_preview_img)){ ?>                     
                     <div class="tf-room-image">
                         <?php 

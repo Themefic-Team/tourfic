@@ -26,7 +26,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
             <td class="description">
                 <div class="tf-room-description-box tf-flex">
 					<?php
-					$room_preview_img       = ! empty( $room['room_preview_img'] ) ? $room['room_preview_img'] : '';
+					$room_preview_img       = get_the_post_thumbnail_url($room_id, 'full');
 					$tour_room_details_gall = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
 					if ( $tour_room_details_gall ) {
 						$tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
@@ -307,7 +307,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 				if ( $tour_room_details_gall ) {
 					$tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
 				}
-				$room_preview_img = ! empty( $room['room_preview_img'] ) ? $room['room_preview_img'] : '';
+				$room_preview_img = get_the_post_thumbnail_url($room_id, 'full');
 				if ( ! empty( $room_preview_img ) ) { ?>
                     <div class="tf-room-gallery">
                         <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php esc_html_e( "Room Image", "tourfic" ); ?>">
@@ -602,7 +602,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 				if ( $tour_room_details_gall ) {
 					$tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
 				}
-				$room_preview_img = ! empty( $room['room_preview_img'] ) ? $room['room_preview_img'] : '';
+				$room_preview_img = get_the_post_thumbnail_url($room_id, 'full');
 				if ( ! empty( $room_preview_img ) ) { ?>
                     <div class="tf-room-image">
 						<?php

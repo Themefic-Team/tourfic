@@ -198,7 +198,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                 ?>
 
                                 <?php
-                                $room_preview_img = ! empty( $room['room_preview_img'] ) ? $room['room_preview_img'] : '';
+                                $room_preview_img = get_the_post_thumbnail_url($room_id, 'full');
                                 if(!empty($room_preview_img)){ ?>
                                 <div class="tf-room-preview-img">
                                     <?php
