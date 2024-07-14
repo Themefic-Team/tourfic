@@ -480,7 +480,8 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 
 		//getting only selected features for rooms
 		$rm_features = [];
-		foreach ( $rooms as $key => $room ) {
+		foreach ( $rooms as $_room ) {
+			$room = get_post_meta($_room->ID, 'tf_room_opt', true);
 			//merge for each room's selected features
 			if ( ! empty( $room['features'] ) ) {
 				$rm_features = array_unique( array_merge( $rm_features, $room['features'] ) );
@@ -513,7 +514,8 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                             </thead>
                             <tbody>
                             <!-- Start Single Room -->
-							<?php foreach ( $rooms as $key => $room ) {
+							<?php foreach ( $rooms as $key => $_room ) {
+								$room = get_post_meta($_room->ID, 'tf_room_opt', true);
 								$enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
 								if ( $enable == '1' ) {
 									$footage         = ! empty( $room['footage'] ) ? $room['footage'] : '';
@@ -655,19 +657,17 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 														?>
                                                         <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr( $room['unique_id'] . $key ) : '' ?>"
                                                                data-hotel="<?php echo esc_attr( $post_id ); ?>" style="text-decoration: underline;">
-																<?php echo esc_html( $room['title'] ); ?>
+																<?php echo esc_html( get_the_title($_room->ID) ); ?>
                                                             </a></h3>
 
                                                         <div id="tour_room_details_qv" class="">
 
                                                         </div>
 													<?php } else{ ?>
-                                                    <h3><?php echo esc_html( $room['title'] ); ?><h3>
-															<?php
-															}
-															?>
+                                                    <h3><?php echo esc_html( $_room->ID ); ?><h3>
+                                                            <?php } ?>
                                                 </div>
-                                                <div class="bed-facilities"><p><?php echo wp_kses_post( $room['description'] ); ?></p></div>
+                                                <div class="bed-facilities"><p><?php echo wp_kses_post( get_post_field('post_content', $_room->ID) ); ?></p></div>
                                             </div>
 
 											<?php if ( $footage ) { ?>

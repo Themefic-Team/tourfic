@@ -111,13 +111,7 @@ while ( have_posts() ) : the_post();
 	}
 	$video = ! empty( $meta['video'] ) ? $meta['video'] : '';
 	// Room Details
-	$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-	if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
-		$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-		}, $rooms );
-		$rooms                = unserialize( $tf_hotel_rooms_value );
-	}
+	$rooms = \Tourfic\Classes\Room\Room::get_hotel_rooms( $post_id );
 	// FAQ
 	$faqs = ! empty( $meta['faq'] ) ? $meta['faq'] : '';
 	if ( ! empty( $faqs ) && gettype( $faqs ) == "string" ) {

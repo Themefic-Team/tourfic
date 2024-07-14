@@ -2,7 +2,8 @@
 
 //getting only selected features for rooms
 $rm_features = [];
-foreach ( $rooms as $key => $room ) {
+foreach ( $rooms as $_room ) {
+	$room = get_post_meta($_room->ID, 'tf_room_opt', true);
     //merge for each room's selected features
     if(!empty($room['features'])){
         $rm_features = array_unique(array_merge( $rm_features, $room['features'])) ;
@@ -55,7 +56,9 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
             </thead>
             <tbody>
             <!-- Start Single Room -->
-            <?php foreach ( $rooms as $key => $room ) {
+            <?php foreach ( $rooms as $_room ) {
+	            $room_id = $_room->ID;
+	            $room = get_post_meta($room_id, 'tf_room_opt', true);
                 $enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
                 if ( $enable == '1' ) {
                     $footage      = ! empty( $room['footage'] ) ? $room['footage'] : '';
@@ -201,7 +204,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                     <?php
                                     if ( $tour_room_details_gall ){
                                     ?>
-                                    <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr($room['unique_id'] . $key) : '' ?>" data-hotel="<?php echo esc_attr($post_id); ?>">
+                                    <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr($room['unique_id'] . $room_id) : '' ?>" data-hotel="<?php echo esc_attr($post_id); ?>">
                                         <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php esc_html_e("Room Image","tourfic"); ?>">
                                         <!-- <span><?php //esc_html_e("Best Offer", "tourfic"); ?></span> -->
                                     </a>
@@ -219,18 +222,18 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                             if ( $tour_room_details_gall ){
                                             ?>
                                             <h3>
-                                                <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr($room['unique_id'] . $key) : '' ?>"
-                                                data-hotel="<?php echo esc_attr($post_id); ?>"><?php echo esc_html( $room['title'] ); ?></a>
+                                                <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr($room['unique_id'] . $room_id) : '' ?>"
+                                                data-hotel="<?php echo esc_attr($post_id); ?>"><?php echo esc_html( get_the_title($room_id) ); ?></a>
                                             </h3>
                                             <?php
                                             }else{ ?>
-                                            <h3><?php echo esc_html( $room['title'] ); ?></h3>
+                                            <h3><?php echo esc_html( get_the_title($room_id) ); ?></h3>
                                             <?php } ?>
                                         </div>
-                                        <?php if(!empty($room['description'])) : ?>
+                                        <?php if(!empty(get_post_field('post_content', $room_id))) : ?>
                                             <div class="bed-facilities">
                                                 <p>
-                                                    <?php echo wp_kses_post(substr(wp_strip_all_tags($room['description']), 0, 120). '...'); ?>
+                                                    <?php echo wp_kses_post(substr(wp_strip_all_tags(get_post_field('post_content', $room_id)), 0, 120). '...'); ?>
                                                 </p>
                                             </div>
                                         <?php endif; ?>
@@ -275,7 +278,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                     <?php
                                     if ( $tour_room_details_gall ){
                                         ?>
-                                        <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr($room['unique_id'] . $key) : '' ?>"
+                                        <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr($room['unique_id'] . $room_id) : '' ?>"
                                                 data-hotel="<?php echo esc_attr($post_id); ?>" style="text-decoration: underline;">
                                                 <?php esc_html_e("Room Photos & Details","tourfic"); ?>
                                             </a>

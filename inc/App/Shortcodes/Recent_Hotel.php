@@ -5,6 +5,7 @@ namespace Tourfic\App\Shortcodes;
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\App\TF_Review;
+use Tourfic\Classes\Room\Room;
 
 class Recent_Hotel extends \Tourfic\Core\Shortcodes {
 
@@ -61,19 +62,12 @@ class Recent_Hotel extends \Tourfic\Core\Shortcodes {
 						$hotel_loop->the_post();
 						$post_id                = get_the_ID();
 						$related_comments_hotel = get_comments( array( 'post_id' => $post_id ) );
-						$meta                   = get_post_meta( $post_id, 'tf_hotels_opt', true );
-						$rooms                  = ! empty( $meta['room'] ) ? $meta['room'] : '';
-						if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
-							$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-								return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-							}, $rooms );
-							$rooms                = unserialize( $tf_hotel_rooms_value );
-						}
+						$rooms                  = Room::get_hotel_rooms( $post_id);
 						//get and store all the prices for each room
 						$room_price = [];
 						if ( ! empty( $rooms ) ) {
-							foreach ( $rooms as $room ) {
-
+							foreach ( $rooms as $_room ) {
+								$room = get_post_meta($_room->ID, 'tf_room_opt', true);
 								$pricing_by = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : 1;
 								if ( $pricing_by == 1 ) {
 									if ( ! empty( $room['price'] ) ) {

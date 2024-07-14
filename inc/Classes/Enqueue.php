@@ -5,6 +5,7 @@ defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Apartment\Pricing as ApartmentPricing;
 use Tourfic\Classes\Helper;
+use Tourfic\Classes\Room\Room;
 
 class Enqueue {
 	use \Tourfic\Traits\Singleton;
@@ -187,15 +188,10 @@ class Enqueue {
 			while ( $tfhotel_min_max_query->have_posts() ) : $tfhotel_min_max_query->the_post();
 
 				$meta  = get_post_meta( get_the_ID(), 'tf_hotels_opt', true );
-				$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-				if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
-					$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-						return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-					}, $rooms );
-					$rooms                = unserialize( $tf_hotel_rooms_value );
-				}
+				$rooms = Room::get_hotel_rooms( get_the_ID() );
 				if ( ! empty( $rooms ) ) {
-					foreach ( $rooms as $singleroom ) {
+					foreach ( $rooms as $_room ) {
+						$singleroom = get_post_meta($_room->ID, 'tf_room_opt', true);
 						if ( ! empty( $singleroom['price'] ) ) {
 							$tfhotel_min_maxprices[] = $singleroom['price'];
 						}

@@ -5,6 +5,7 @@ namespace Tourfic\Admin\TF_Options;
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
+use Tourfic\Classes\Room\Room;
 
 class TF_Options {
 
@@ -480,17 +481,11 @@ class TF_Options {
      */
 	function tf_update_room_avail_date_price( $post_id, $post ) {
 		if ( $post->post_type == 'tf_hotel' ) {
-			$meta  = get_post_meta( $post_id, 'tf_hotels_opt', true );
-			$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-			if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
-				$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-					return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-				}, $rooms );
-				$rooms                = unserialize( $tf_hotel_rooms_value );
-			}
+			$rooms = Room::get_hotel_rooms( $post_id);
 
 			if ( ! empty( $rooms ) ) {
-				foreach ( $rooms as $roomIndex => $room ) {
+				foreach ( $rooms as $_room ) {
+					$room = get_post_meta($_room->ID, 'tf_room_opt', true);
 					$pricing_by   = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
 					$price        = ! empty( $room['price'] ) ? $room['price'] : '';
 					$adult_price  = ! empty( $room['adult_price'] ) ? $room['adult_price'] : '';
@@ -516,7 +511,7 @@ class TF_Options {
 							}, $hotel_avail_data );
 						}
 
-						$meta['room'][ $roomIndex ]['avail_date'] = wp_json_encode( $hotel_avail_data );
+						$room['avail_date'] = wp_json_encode( $hotel_avail_data );
 					} elseif ( $avil_by_date === '1' && empty( $room['avail_date'] ) ) {
 						//add next 5 years availability
 						$hotel_avail_data = [];
@@ -534,11 +529,12 @@ class TF_Options {
 							$hotel_avail_data[ $tf_room_date ] = $tf_room_data;
 						}
 
-						$meta['room'][ $roomIndex ]['avail_date'] = wp_json_encode( $hotel_avail_data );
+						$room['avail_date'] = wp_json_encode( $hotel_avail_data );
 					}
+					update_post_meta( $_room->ID, 'tf_room_opt', $room );
 				}
 			}
-			update_post_meta( $post_id, 'tf_hotels_opt', $meta );
+
 		}
 	}
 

@@ -56,16 +56,16 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                     <h3>
                                         <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr( $room['unique_id'] . $room_id ) : '' ?>"
                                            data-hotel="<?php echo esc_attr( $form_post_id ); ?>"
-                                           style="text-decoration: none;"><?php echo esc_html( $room['title'] ); ?></a>
+                                           style="text-decoration: none;"><?php echo esc_html( get_the_title($room_id) ); ?></a>
                                     </h3>
 									<?php
 								} else { ?>
-                                    <h3><?php echo esc_html( $room['title'] ); ?></h3>
+                                    <h3><?php echo esc_html( get_the_title($room_id) ); ?></h3>
 								<?php } ?>
                             </div>
-							<?php if ( ! empty( $room['description'] ) ): ?>
+							<?php if ( ! empty( get_post_field('post_content', $room_id) ) ): ?>
                                 <div class="bed-facilities">
-                                    <p><?php echo wp_kses_post( substr( wp_strip_all_tags( $room['description'] ), 0, 120 ) . '...' ); ?> </p>
+                                    <p><?php echo wp_kses_post( substr( wp_strip_all_tags( get_post_field('post_content', $room_id) ), 0, 120 ) . '...' ); ?> </p>
                                 </div>
 							<?php endif; ?>
                         </div>
@@ -354,7 +354,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
             </div>
             <div class="tf-available-room-content">
                 <div class="tf-available-room-content-left">
-                    <h2 class="tf-section-title"><?php echo esc_html( $room['title'] ); ?></h2>
+                    <h2 class="tf-section-title"><?php echo esc_html( get_the_title($room_id) ); ?></h2>
                     <ul>
 						<?php if ( $footage ) { ?>
                             <li><i class="ri-pencil-ruler-2-line"></i> <?php echo esc_html( $footage ); ?><?php esc_html_e( 'sft', 'tourfic' ); ?></li>
@@ -660,7 +660,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
             <div class="tf-available-room-content">
                 <div class="tf-available-room-content-left">
                     <div class="room-heading-price">
-                        <h2 class="tf-section-title"><?php echo esc_html( $room['title'] ); ?></h2>
+                        <h2 class="tf-section-title"><?php echo esc_html( get_the_title($room_id) ); ?></h2>
                         <div class="tf-available-room-price">
 
 							<?php
@@ -913,20 +913,20 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 							?>
                             <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr( $room['unique_id'] . $room_id ) : '' ?>"
                                    data-hotel="<?php echo esc_attr( $form_post_id ); ?>" style="text-decoration: underline;">
-									<?php echo esc_html( $room['title'] ); ?>
+									<?php echo esc_html( get_the_title($room_id) ); ?>
                                 </a></h3>
 
                             <div id="tour_room_details_qv" class="">
 
                             </div>
 						<?php } else { ?>
-                            <h3><?php echo esc_html( $room['title'] ); ?></h3>
+                            <h3><?php echo esc_html( get_the_title($room_id) ); ?></h3>
 							<?php
 						}
 						?>
                     </div>
-					<?php if ( ! empty( $room['description'] ) ): ?>
-                        <div class="bed-facilities"><p><?php echo wp_kses_post( $room['description'] ); ?></p></div>
+					<?php if ( ! empty( get_post_field('post_content', $room_id) ) ): ?>
+                        <div class="bed-facilities"><p><?php echo wp_kses_post( get_post_field('post_content', $room_id) ); ?></p></div>
 					<?php endif; ?>
                 </div>
 

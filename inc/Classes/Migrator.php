@@ -813,7 +813,7 @@ class Migrator {
 	 */
 	public function tf_hotel_room_migrate(){
 		$tf_room_data_migration = !empty(get_option( 'tf_room_data_migration' )) ? get_option( 'tf_room_data_migration' ) : 0;
-		if ( $tf_room_data_migration < 4 ) {
+		if ( $tf_room_data_migration < 1 ) {
 			$this->regenerate_room_meta();
 			update_option( 'tf_room_data_migration', $tf_room_data_migration+1 );
 		}
@@ -891,6 +891,5 @@ class Migrator {
 
 			}
 		}
-		wp_reset_query();
 	}
 }

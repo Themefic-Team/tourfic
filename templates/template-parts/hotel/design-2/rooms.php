@@ -2,7 +2,8 @@
 //getting only selected features for rooms
 $rm_features = [];
 if(!empty($rooms)){
-    foreach ( $rooms as $key => $room ) {
+    foreach ( $rooms as $_room ) {
+	    $room = get_post_meta($_room->ID, 'tf_room_opt', true);
         //merge for each room's selected features
         if(!empty($room['features'])){
             $rm_features = array_unique(array_merge( $rm_features, $room['features'])) ;
@@ -67,7 +68,9 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
         </div>
     </div>
     <?php if ( $rooms ) : ?>
-    <?php foreach ( $rooms as $room_id => $room ) {
+    <?php foreach ( $rooms as $_room ) {
+        $room_id = $_room->ID;
+        $room = get_post_meta($_room->ID, 'tf_room_opt', true);
     $enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
     if ( $enable == '1' ) {
         $footage      = ! empty( $room['footage'] ) ? $room['footage'] : '';
@@ -235,7 +238,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
             </div>
             <div class="tf-available-room-content">
                 <div class="tf-available-room-content-left">
-                    <h2 class="tf-section-title"><?php echo esc_html( $room['title'] ); ?></h2>
+                    <h2 class="tf-section-title"><?php echo esc_html( get_the_title($room_id) ); ?></h2>
                     <ul>
                         <?php if ( $footage ) { ?>
                             <li><i class="ri-pencil-ruler-2-line"></i> <?php echo esc_html($footage); ?><?php esc_html_e( 'sft', 'tourfic' ); ?></li>
@@ -450,7 +453,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
             <div class="tf-available-room-content">
                 <div class="tf-available-room-content-left">
                     <div class="room-heading-price">
-                        <h2 class="tf-section-title"><?php echo esc_html( $room['title'] ); ?></h2>
+                        <h2 class="tf-section-title"><?php echo esc_html( get_the_title($room_id) ); ?></h2>
                         <?php if( $tf_hide_external_price) : ?>
                             <div class="tf-available-room-price">
                                 <?php

@@ -13,19 +13,10 @@ if ( ! class_exists( 'TF_ical' ) ) {
 			global $post;
 			$post_type = get_post_type( $post->ID );
 			$room_index = $pricing_type = '';
-			if ( $post_type === 'tf_hotel' ) {
+			if ( $post_type === 'tf_room' ) {
 
-				$meta  = get_post_meta( $post->ID, 'tf_hotels_opt', true );
-				$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-				if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
-					$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-						return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-					}, $rooms );
-					$rooms                = unserialize( $tf_hotel_rooms_value );
-				}
-
-				$room_index = str_replace( array( '[', ']', 'room' ), '', $this->parent_field );
-				$pricing_type = ! empty( $rooms[ $room_index ]['pricing-by'] ) ? $rooms[ $room_index ]['pricing-by'] : '1';
+				$room = get_post_meta($post->ID, 'tf_room_opt', true);
+				$pricing_type = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '1';
 			} elseif ( $post_type === 'tf_apartment' ) {
 				$meta  = get_post_meta( $post->ID, 'tf_apartment_opt', true );
 				$pricing_type = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';

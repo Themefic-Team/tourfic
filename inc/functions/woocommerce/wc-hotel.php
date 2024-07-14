@@ -1,5 +1,6 @@
 <?php
 defined( 'ABSPATH' ) || exit;
+use Tourfic\Classes\Room\Room;
 
 /**
  * Hotel booking ajax function
@@ -8,15 +9,6 @@ defined( 'ABSPATH' ) || exit;
  */
 add_action( 'wp_ajax_tf_hotel_booking', 'tf_hotel_booking_callback' );
 add_action( 'wp_ajax_nopriv_tf_hotel_booking', 'tf_hotel_booking_callback' );
-
-/**
- * Handles AJAX for Booking
- *
- * @return void
- * @throws Exception
- * @since 2.2.0
- */
-
 
 function tf_hotel_booking_callback() {
 
@@ -72,20 +64,14 @@ function tf_hotel_booking_callback() {
 	$product_id    = get_post_meta( $post_id, 'product_id', true );
 	$post_author   = get_post_field( 'post_author', $post_id );
 	$meta          = get_post_meta( $post_id, 'tf_hotels_opt', true );
-	$rooms         = ! empty( $meta['room'] ) ? $meta['room'] : '';
-	if( !empty($rooms) && gettype($rooms)=="string" ){
-		$tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
-			return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
-		}, $rooms );
-		$rooms = unserialize( $tf_hotel_rooms_value );
-	}
-	$avail_by_date = ! empty( $rooms[ $room_id ]['avil_by_date'] ) && $rooms[ $room_id ]['avil_by_date'];
+	$room_meta     = get_post_meta( $room_id, 'tf_room_opt', true );
+	$avail_by_date = ! empty( $room_meta['avil_by_date'] ) && $room_meta['avil_by_date'];
 	if ( $avail_by_date ) {
-		$avail_date = ! empty( $rooms[ $room_id ]['avail_date'] ) ? json_decode($rooms[ $room_id ]['avail_date'], true) : [];
+		$avail_date = ! empty( $room_meta['avail_date'] ) ? json_decode($room_meta['avail_date'], true) : [];
 	}
-	$room_name       = $rooms[ $room_id ]['title'];
-	$pricing_by      = $rooms[ $room_id ]['pricing-by'];
-	$price_multi_day = ! empty( $rooms[ $room_id ]['price_multi_day'] ) ? $rooms[ $room_id ]['price_multi_day'] : false;
+	$room_name       = get_the_title( $room_id );
+	$pricing_by      = $room_meta['pricing-by'];
+	$price_multi_day = ! empty( $room_meta['price_multi_day'] ) ? $room_meta['price_multi_day'] : false;
 
 	# Calculate night number
 	if(!$price_multi_day){
@@ -102,42 +88,28 @@ function tf_hotel_booking_callback() {
 		}
 	}
 
-	$room_stay_requirements = array( );
-	foreach($rooms as $key => $room) {
-		$room_stay_requirements[] = array (
-			"uid" => !empty($room["unique_id"]) ? $room["unique_id"] : '',
-			'min_stay' => !empty( $room["minimum_stay_requirement"]) ?  $room["minimum_stay_requirement"] : 0,
-			"max_stay" => !empty($room["maximum_stay_requirement"]) ? $room["maximum_stay_requirement"] : 0
-		);
-	}
+	$min_stay = !empty( $room["minimum_stay_requirement"]) ?  $room["minimum_stay_requirement"] : 0;
+	$max_stay = !empty($room["maximum_stay_requirement"]) ? $room["maximum_stay_requirement"] : 0;
 
-	foreach($room_stay_requirements as $min_max_days) {
-		$room_uid = isset( $_POST['unique_id'] ) ? sanitize_text_field( $_POST['unique_id'] ) : null;
-
-		if($day_difference < $min_max_days["min_stay"] && $min_max_days["min_stay"] > 0) {
-			if($min_max_days["uid"] == $room_uid ){
-				if( $min_max_days["max_stay"] == 0) {
-					/* translators: %1$s Minimum Stay Requirement */
-					$response['errors'][] = sprintf(esc_html__( 'Your Stay Requirement is Minimum %1$s Days', 'tourfic' ), $min_max_days['min_stay']);
-				} else {
-					/* translators: %1$s Minimum Stay Requirement, %2$s Maximum Stay Requirement */
-					$response['errors'][] = sprintf(esc_html__( 'Your Stay Requirement is Minimum %1$s Days to Maximum %2$s', 'tourfic' ),
-						$min_max_days['min_stay'],
-						$min_max_days['max_stay']
-					);
-				}
-			}
-		} else if ($day_difference > $min_max_days["max_stay"] && $min_max_days["max_stay"] > 0) {
-
-			if ($min_max_days["uid"] == $room_uid ){
-				/* translators: %1$s Maximum Stay Requirement */
-				$response['errors'][] = sprintf(esc_html__( 'Your Maximum Stay Requirement is %1$s Days', 'tourfic' ), $min_max_days['max_stay']);
-			}
+	if($day_difference < $min_stay && $min_stay > 0) {
+		if( $max_stay == 0) {
+			/* translators: %1$s Minimum Stay Requirement */
+			$response['errors'][] = sprintf(esc_html__( 'Your Stay Requirement is Minimum %1$s Days', 'tourfic' ), $min_stay);
+		} else {
+			/* translators: %1$s Minimum Stay Requirement, %2$s Maximum Stay Requirement */
+			$response['errors'][] = sprintf(esc_html__( 'Your Stay Requirement is Minimum %1$s Days to Maximum %2$s', 'tourfic' ),
+				$min_stay,
+				$max_stay
+			);
 		}
+	} else if ($day_difference > $max_stay && $max_stay > 0) {
+		/* translators: %1$s Maximum Stay Requirement */
+		$response['errors'][] = sprintf(esc_html__( 'Your Maximum Stay Requirement is %1$s Days', 'tourfic' ), $max_stay);
 	}
+
 	// Hotel Room Discount Data
-	$hotel_discount_type = !empty($rooms[$room_id]["discount_hotel_type"]) ? $rooms[$room_id]["discount_hotel_type"] : "none";
-	$hotel_discount_amount = !empty($rooms[$room_id]["discount_hotel_price"]) ? $rooms[$room_id]["discount_hotel_price"] : 0;
+	$hotel_discount_type = !empty($room_meta["discount_hotel_type"]) ? $room_meta["discount_hotel_type"] : "none";
+	$hotel_discount_amount = !empty($room_meta["discount_hotel_price"]) ? $room_meta["discount_hotel_price"] : 0;
 
 	/**
 	 * If no errors then process
@@ -161,9 +133,9 @@ function tf_hotel_booking_callback() {
 
 		// Discount Calculation and Checking
 
-		$adult_price = !empty($rooms[$room_id]['adult_price']) ? $rooms[$room_id]['adult_price'] : 0;
-		$child_price = !empty($rooms[$room_id]['child_price']) ? $rooms[$room_id]['child_price'] : 0;
-		$room_price = !empty($rooms[$room_id]['price']) ? $rooms[$room_id]['price'] : '';
+		$adult_price = !empty($room_meta['adult_price']) ? $room_meta['adult_price'] : 0;
+		$child_price = !empty($room_meta['child_price']) ? $room_meta['child_price'] : 0;
+		$room_price = !empty($room_meta['price']) ? $room_meta['price'] : '';
 
 
 		if($hotel_discount_type == "percent") {
@@ -219,9 +191,9 @@ function tf_hotel_booking_callback() {
 				} ) );
 
 				if ( is_iterable( $available_rooms ) && count( $available_rooms ) >= 1 ) {
-					$room_price  = ! empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $rooms[ $room_id ]['price'];
-					$adult_price = ! empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $rooms[ $room_id ]['adult_price'];
-					$child_price = ! empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $rooms[ $room_id ]['child_price'];
+					$room_price  = ! empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $room_meta['price'];
+					$adult_price = ! empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $room_meta['adult_price'];
+					$child_price = ! empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $room_meta['child_price'];
 
 					if($hotel_discount_type == "percent") {
 						if($pricing_by == 1) {
@@ -262,7 +234,7 @@ function tf_hotel_booking_callback() {
 
 			if ( $pricing_by == '1' ) {
 
-				$total_price = $rooms[$room_id]['price'];
+				$total_price = $room_meta['price'];
 
 				if($hotel_discount_type == "percent") {
 					$total_price = !empty($total_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $total_price - ( ( (int) $total_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
@@ -274,8 +246,8 @@ function tf_hotel_booking_callback() {
 				$tf_room_data['tf_hotel_data']['child']                  = $child;
 				$tf_room_data['tf_hotel_data']['children_ages']          = $children_ages;
 			} elseif ( $pricing_by == '2' ) {
-				$adult_price = $rooms[$room_id]['adult_price'];
-				$child_price = $rooms[$room_id]['child_price'];
+				$adult_price = $room_meta['adult_price'];
+				$child_price = $room_meta['child_price'];
 
 				if ($hotel_discount_type == "percent") {
 					$adult_price = !empty($adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
@@ -460,7 +432,7 @@ function tf_hotel_booking_callback() {
 		# check for deposit
 		if ( $deposit == "true" ) {
 
-			tf_get_deposit_amount( $rooms[ $room_id ], $price_total, $deposit_amount, $has_deposit );
+			tf_get_deposit_amount( $room_meta, $price_total, $deposit_amount, $has_deposit );
 			if ( function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) {
 				$tf_room_data['tf_hotel_data']['price_total'] = $deposit_amount;
 				if ( ! empty( $airport_service ) ) {
@@ -765,22 +737,14 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 
 		$order_type = $item->get_meta( '_order_type', true );
 		if("hotel"==$order_type){
-			$post_id   = $item->get_meta( '_post_id', true ); // Hotel id
-			$unique_id = $item->get_meta( '_unique_id', true ); // Unique id of rooms
-			$meta      = get_post_meta( $post_id, 'tf_hotels_opt', true ); // Hotel meta
-			$rooms     = ! empty( $meta['room'] ) ? $meta['room'] : '';
-			if( !empty($rooms) && gettype($rooms)=="string" ){
-				$tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
-					return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
-				}, $rooms );
-				$rooms = unserialize( $tf_hotel_rooms_value );
-			}
-			$new_rooms = [];
+			$post_id   = $item->get_meta( '_post_id', true );
+			$unique_id = $item->get_meta( '_unique_id', true );
+			$meta      = get_post_meta( $post_id, 'tf_hotels_opt', true );
+			$rooms     = Room::get_hotel_rooms( $post_id );
 
-			# Get and Loop Over Room Meta
 			if ( ! empty( $rooms ) ) {
-				foreach ( $rooms as $room ) {
-
+				foreach ( $rooms as $_room ) {
+					$room = get_post_meta($_room->ID, 'tf_room_opt', true);
 					# Check if order is for this room
 					if ( $room['unique_id'] == $unique_id ) {
 
@@ -791,17 +755,10 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 
 						# set old + new data to the oder_id meta
 						$room['order_id'] = $old_order_id;
+						update_post_meta( $_room->ID, 'tf_room_opt', $room );
 					}
-
-					# Set whole room array
-					$new_rooms[] = $room;
 				}
 			}
-
-			# Set whole room array to the room meta
-			$meta['room'] = $new_rooms;
-			# Update hotel post meta with array values
-			update_post_meta( $post_id, 'tf_hotels_opt', $meta );
 		}
 
 		// Hotel Item Data Insert
@@ -994,22 +951,15 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 
 		$order_type = $item->get_meta( '_order_type', true );
 		if("hotel"==$order_type){
-			$post_id   = $item->get_meta( '_post_id', true ); // Hotel id
-			$unique_id = $item->get_meta( '_unique_id', true ); // Unique id of rooms
-			$meta      = get_post_meta( $post_id, 'tf_hotels_opt', true ); // Hotel meta
-			$rooms     = ! empty( $meta['room'] ) ? $meta['room'] : '';
-			if( !empty($rooms) && gettype($rooms)=="string" ){
-				$tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
-					return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
-				}, $rooms );
-				$rooms = unserialize( $tf_hotel_rooms_value );
-			}
-			$new_rooms = [];
+			$post_id   = $item->get_meta( '_post_id', true );
+			$unique_id = $item->get_meta( '_unique_id', true );
+			$meta      = get_post_meta( $post_id, 'tf_hotels_opt', true );
+			$rooms     = Room::get_hotel_rooms( $post_id );
 
 			# Get and Loop Over Room Meta
 			if ( ! empty( $rooms ) ) {
-				foreach ( $rooms as $room ) {
-
+				foreach ( $rooms as $_room ) {
+					$room = get_post_meta($_room->ID, 'tf_room_opt', true);
 					# Check if order is for this room
 					if ( $room['unique_id'] == $unique_id ) {
 
@@ -1020,17 +970,10 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 
 						# set old + new data to the oder_id meta
 						$room['order_id'] = $old_order_id;
+						update_post_meta( $_room->ID, 'tf_room_opt', $room );
 					}
-
-					# Set whole room array
-					$new_rooms[] = $room;
 				}
 			}
-
-			# Set whole room array to the room meta
-			$meta['room'] = $new_rooms;
-			# Update hotel post meta with array values
-			update_post_meta( $post_id, 'tf_hotels_opt', $meta );
 		}
 
 		// Hotel Item Data Insert

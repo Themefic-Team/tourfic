@@ -11,7 +11,6 @@ use Tourfic\Admin\Booking_Details\Hotel_Booking_Details;
 use Tourfic\Admin\Booking_Details\Tour_Booking_Details;
 use Tourfic\Admin\TF_Promo_Notice;
 use Tourfic\App\Widgets\TF_Widget_Base;
-use Tourfic\Classes\Room\Room_CPT;
 
 class Base {
 	use \Tourfic\Traits\Singleton;
