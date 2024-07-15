@@ -2,6 +2,7 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+use PHP_CodeSniffer\Util\Help;
 use \Tourfic\Classes\Helper;
 
 if ( ! class_exists( 'TF_textarea' ) ) {
@@ -24,12 +25,24 @@ if ( ! class_exists( 'TF_textarea' ) ) {
 
 		public function sanitize() {
 			if( $this->field['id'] == "booking-code" ) {
+				// return wp_kses( $this->value, Helper::tf_custom_wp_kses_allow_tags() );
 				return $this->value;
 
-				// TODO: Need to sanitize the booking code
+				
 			}else {
 				return wp_kses_post( $this->value );
 			}
+		}
+
+		private function tf_kses_allowed_tags() {
+			$allowed_tags = wp_kses_allowed_html( 'post' );
+			$allowed_tags['script'] = array(
+				'src'   => true,
+				'type'  => true,
+				'class' => true,
+				'id'    => true,
+			);
+			$allowed_tags['style'] = true;
 		}
 	}
 }

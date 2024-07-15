@@ -350,6 +350,29 @@ class Helper {
 			'type'  => true,
 			'class' => true,
 			'id'    => true,
+			'async' => true,
+			'defer' => true,
+		);
+		$allowed_tags['button'] = array(
+			'class' => true,
+			'id'    => true,
+			'disabled' => true,
+			'data-*' => true,
+			
+		);
+		$allowed_tags['style'] = array(
+			'class' => true,
+			'id'    => true,
+		);
+		
+		$allowed_tags['iframe'] = array(
+			'class' => true,
+			'id'    => true,
+			'allowfullscreen' => true,
+			'frameborder' => true,
+			'src' => true,
+			'style' => true,
+			'scrolling' => true,
 		);
 
 		$allowed_tags["svg"] = array(

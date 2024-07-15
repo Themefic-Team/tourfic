@@ -492,7 +492,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$apt_reserve_button_text = !empty(Helper::tfopt('apartment_booking_form_button_text')) ? stripslashes(sanitize_text_field(Helper::tfopt('apartment_booking_form_button_text'))) : esc_html__("Reserve", 'tourfic');
 
 		$tf_booking_type = '1';
-		$tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = $tf_ext_booking_type = '';
+		$tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = $tf_ext_booking_type = $tf_booking_code = '';
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 			$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 			$tf_ext_booking_type = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : 1;
@@ -577,172 +577,162 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$tf_apartment_selected_check = !empty($tf_apartment_single_template) ? $tf_apartment_single_template : $tf_apartment_global_template;
 
 		$tf_apartment_selected_template = $tf_apartment_selected_check;
+
 		if($tf_apartment_selected_template=="design-1"){
 		?>
 		<form id="tf-apartment-booking" class="tf-apartment-side-booking" method="get" autocomplete="off">
             
             <div class="tf-apartment-form-header">
-				<?php if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' ) || $tf_booking_type == 1 ) : ?>
-					<?php if( $tf_booking_type == 2 && $tf_ext_booking_type == 2 && empty( $tf_booking_code ) ) : ?>
-						<h3 class="tf-apartment-price-per-night">
-							<span class="tf-apartment-base-price">
-							<?php
-								//get the lowest price from all available room price
-								$apartment_min_main_price = $apartment_min_price["min"];
-								if ( ! empty( $discount_type ) && ! empty( $apartment_min_price["min"]  ) && ! empty( $discount ) ) {
-									if ( $discount_type == "percent" ) {
-										$apartment_min_discount = ( $apartment_min_price["min"] * (int) $discount ) / 100;
-										$apartment_min_price    = $apartment_min_price["min"] - $apartment_min_discount;
-									}
-									if ( $discount_type == "fixed" ) {
-										$apartment_min_discount = $discount;
-										$apartment_min_price    = $apartment_min_price["min"] - (int) $apartment_min_discount;
-									}
+				<?php if ( $tf_booking_type == 2 && $tf_hide_price !== '1' && ( $tf_ext_booking_type == 2 ) || $tf_booking_type == 1 ): ?>
+					<h3 class="tf-apartment-price-per-night">
+						<span class="tf-apartment-base-price">
+						<?php
+							//get the lowest price from all available room price
+							$apartment_min_main_price = $apartment_min_price["min"];
+							if ( ! empty( $discount_type ) && ! empty( $apartment_min_price["min"]  ) && ! empty( $discount ) ) {
+								if ( $discount_type == "percent" ) {
+									$apartment_min_discount = ( $apartment_min_price["min"] * (int) $discount ) / 100;
+									$apartment_min_price    = $apartment_min_price["min"] - $apartment_min_discount;
 								}
-								$lowest_price = wc_price( $apartment_min_price );
-								
-								if ( ! empty( $apartment_min_discount ) ) {
-									echo "<b>" . esc_html__("From ", "tourfic") . "</b>" . "<del>" . esc_html( wp_strip_all_tags(wc_price( $apartment_min_main_price )) ) . "</del>" . " " . wp_kses_post( $lowest_price );
-								} else {
-									echo esc_html__("From ", "tourfic") . wp_kses_post(wc_price( $apartment_min_main_price ));	;
+								if ( $discount_type == "fixed" ) {
+									$apartment_min_discount = $discount;
+									$apartment_min_price    = $apartment_min_price["min"] - (int) $apartment_min_discount;
 								}
-								?>
-							</span>
-							<?php if ( $pricing_type == "per_night") : ?>
-								<span class="per-pricing-type"><?php esc_html_e( '/per night', 'tourfic' ) ?></span>
-							<?php else : ?>
-								<span class="per-pricing-type"><?php esc_html_e( '/per person', 'tourfic' ) ?></span>
-							<?php endif; ?>
-						</h3>
-					<?php endif; ?>
+							}
+							$lowest_price = wc_price( $apartment_min_price );
+							
+							if ( ! empty( $apartment_min_discount ) ) {
+								echo "<b>" . esc_html__("From ", "tourfic") . "</b>" . "<del>" . esc_html( wp_strip_all_tags(wc_price( $apartment_min_main_price )) ) . "</del>" . " " . wp_kses_post( $lowest_price );
+							} else {
+								echo esc_html__("From ", "tourfic") . wp_kses_post(wc_price( $apartment_min_main_price ));	;
+							}
+							?>
+						</span>
+						<?php if ( $pricing_type == "per_night") : ?>
+							<span class="per-pricing-type"><?php esc_html_e( '/per night', 'tourfic' ) ?></span>
+						<?php else : ?>
+							<span class="per-pricing-type"><?php esc_html_e( '/per person', 'tourfic' ) ?></span>
+						<?php endif; ?>
+					</h3>
 				<?php endif; ?>
             </div>
 
-			<?php
-			// echo "<pre>";
-			// print_r(( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' ));
-			// echo "</pre>";
-			// die(); // added by - Sunvi
-			?>
-
-			<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form == '1' ) || $tf_booking_type == 1 ): ?>
-				<?php if( $tf_booking_type == 2 && $tf_ext_booking_type == 2 && empty( $tf_booking_code ) ) : ?>
+			<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form == '1' || ( $tf_ext_booking_type == 2 && empty( $tf_booking_code ) ) ) || $tf_booking_type == 1 ): ?>
 				
-					<h2 class="tf-section-title"><?php esc_html_e("Available Date", "tourfic"); ?></h2>
-					<div class="tf-apartment-form-fields">
-						<div class="tf_booking-dates tf-check-in-out-date">
-							<div class="tf-aprtment-check-in-out-date">
-								<label class="tf_label_rows">
-									<i class="fa-sharp fa-solid fa-calendar-days"></i>
-									<input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Choose date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?> required>
-								</label>
-							</div>
-							<div class="tf_label-row"></div>
+				<h2 class="tf-section-title"><?php esc_html_e("Available Date", "tourfic"); ?></h2>
+				<div class="tf-apartment-form-fields">
+					<div class="tf_booking-dates tf-check-in-out-date">
+						<div class="tf-aprtment-check-in-out-date">
+							<label class="tf_label_rows">
+								<i class="fa-sharp fa-solid fa-calendar-days"></i>
+								<input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Choose date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?> required>
+							</label>
 						</div>
+						<div class="tf_label-row"></div>
+					</div>
 
-						<div class="tf_form-row tf-apartment-guest-row">
-							<label class="tf_label-row">
-								<div class="tf_form-inner">
-									<div class="tf_selectperson-wrap">
-									<div class="tf-form-title">
-										<h3 class="tf-person-info-title"><?php esc_html_e( 'Person Info', 'tourfic' ); ?></h3>
+					<div class="tf_form-row tf-apartment-guest-row">
+						<label class="tf_label-row">
+							<div class="tf_form-inner">
+								<div class="tf_selectperson-wrap">
+								<div class="tf-form-title">
+									<h3 class="tf-person-info-title"><?php esc_html_e( 'Person Info', 'tourfic' ); ?></h3>
+								</div>
+									<div class="tf_acrselection">
+										<div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
+										<div class="acr-select">
+											<div class="acr-dec">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13094)">
+													<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13094">
+													<rect width="20" height="20" fill="white"/>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
+											<input type="tel" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? esc_attr( $adults ) : '1' ?>" readonly/>
+											<div class="acr-inc">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13100)">
+													<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13100">
+													<rect width="20" height="20" fill="white"/>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
+										</div>
 									</div>
-										<div class="tf_acrselection">
-											<div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
-											<div class="acr-select">
-												<div class="acr-dec">
-													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-													<g clip-path="url(#clip0_3229_13094)">
-														<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
-													</g>
-													<defs>
-														<clipPath id="clip0_3229_13094">
-														<rect width="20" height="20" fill="white"/>
-														</clipPath>
-													</defs>
-													</svg>
-												</div>
-												<input type="tel" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? esc_attr( $adults ) : '1' ?>" readonly/>
-												<div class="acr-inc">
-													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-													<g clip-path="url(#clip0_3229_13100)">
-														<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
-													</g>
-													<defs>
-														<clipPath id="clip0_3229_13100">
-														<rect width="20" height="20" fill="white"/>
-														</clipPath>
-													</defs>
-													</svg>
-												</div>
+									<div class="tf_acrselection">
+										<div class="acr-label"><?php esc_html_e( 'Children', 'tourfic' ); ?></div>
+										<div class="acr-select">
+											<div class="acr-dec">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13094)">
+													<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13094">
+													<rect width="20" height="20" fill="white"/>
+													</clipPath>
+												</defs>
+												</svg>
+											</div>
+											<input type="tel" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? esc_attr( $child ) : '0' ?>" readonly/>
+											<div class="acr-inc">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13100)">
+													<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13100">
+													<rect width="20" height="20" fill="white"/>
+													</clipPath>
+												</defs>
+												</svg>
 											</div>
 										</div>
-										<div class="tf_acrselection">
-											<div class="acr-label"><?php esc_html_e( 'Children', 'tourfic' ); ?></div>
-											<div class="acr-select">
-												<div class="acr-dec">
-													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-													<g clip-path="url(#clip0_3229_13094)">
-														<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
-													</g>
-													<defs>
-														<clipPath id="clip0_3229_13094">
-														<rect width="20" height="20" fill="white"/>
-														</clipPath>
-													</defs>
-													</svg>
-												</div>
-												<input type="tel" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? esc_attr( $child ) : '0' ?>" readonly/>
-												<div class="acr-inc">
-													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-													<g clip-path="url(#clip0_3229_13100)">
-														<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
-													</g>
-													<defs>
-														<clipPath id="clip0_3229_13100">
-														<rect width="20" height="20" fill="white"/>
-														</clipPath>
-													</defs>
-													</svg>
-												</div>
+									</div>
+									<div class="tf_acrselection">
+										<div class="acr-label"><?php esc_html_e( 'Infant', 'tourfic' ); ?></div>
+										<div class="acr-select">
+											<div class="acr-dec">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13094)">
+													<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13094">
+													<rect width="20" height="20" fill="white"/>
+													</clipPath>
+												</defs>
+												</svg>
 											</div>
-										</div>
-										<div class="tf_acrselection">
-											<div class="acr-label"><?php esc_html_e( 'Infant', 'tourfic' ); ?></div>
-											<div class="acr-select">
-												<div class="acr-dec">
-													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-													<g clip-path="url(#clip0_3229_13094)">
-														<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
-													</g>
-													<defs>
-														<clipPath id="clip0_3229_13094">
-														<rect width="20" height="20" fill="white"/>
-														</clipPath>
-													</defs>
-													</svg>
-												</div>
-												<input type="tel" name="infant" id="infant" min="0" value="<?php echo ! empty( $infant ) ? esc_attr( $infant ) : '0' ?>" readonly/>
-												<div class="acr-inc">
-													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-													<g clip-path="url(#clip0_3229_13100)">
-														<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
-													</g>
-													<defs>
-														<clipPath id="clip0_3229_13100">
-														<rect width="20" height="20" fill="white"/>
-														</clipPath>
-													</defs>
-													</svg>
-												</div>
+											<input type="tel" name="infant" id="infant" min="0" value="<?php echo ! empty( $infant ) ? esc_attr( $infant ) : '0' ?>" readonly/>
+											<div class="acr-inc">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+												<g clip-path="url(#clip0_3229_13100)">
+													<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_3229_13100">
+													<rect width="20" height="20" fill="white"/>
+													</clipPath>
+												</defs>
+												</svg>
 											</div>
 										</div>
 									</div>
 								</div>
-							</label>
-						</div>
+							</div>
+						</label>
 					</div>
-				<?php endif; ?>
+				</div>
 			<?php endif; ?>
 
             <div class="tf_form-row">
@@ -751,13 +741,11 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                 <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
 
                 <div class="tf-btn-booking">
-					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' ) || $tf_booking_type == 1 ) : ?>
-						<?php if( $tf_booking_type == 2 && $tf_ext_booking_type == 2 && empty( $tf_booking_code ) ) : ?>
+					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 ) : ?>
 							<?php if (!empty($apt_reserve_button_text)) : ?>
 								<button class="tf_button tf-submit" type="submit"><?php echo esc_html( $apt_reserve_button_text ); ?></button>
-							<?php endif; ?>
 						<?php endif; ?>
-					<?php else: ?>
+					<?php elseif( $tf_booking_type == 2 && $tf_hide_booking_form == 1 ): ?>
 						<?php if (!empty($apt_reserve_button_text)) : ?>
 							<a href="<?php echo esc_url( $tf_booking_url ); ?>"
 							class="tf_button tf-submit" <?php echo ! empty( $tf_booking_attribute ) ? esc_attr( $tf_booking_attribute ) : ''; ?> target="_blank"><?php echo esc_html($apt_reserve_button_text ); ?></a>
@@ -765,8 +753,8 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 					<?php endif; ?>
                 </div>
 
-				<?php if(!empty( $tf_booking_code )) : ?>
-					<?php echo $tf_booking_code; ?>
+				<?php if(!empty( $tf_booking_code ) && $tf_booking_type == 2 && $tf_ext_booking_type == 2 ) : ?>
+					<?php echo wp_kses( $tf_booking_code, Helper::tf_custom_wp_kses_allow_tags()); ?>
 				<?php endif; ?>
             </div>
 
@@ -810,7 +798,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
         <form id="tf-apartment-booking" class="tf-apartment-side-booking tf-apartment-design-one-form" method="get" autocomplete="off">
             <h5><?php echo ! empty( $meta['booking_form_title'] ) ? esc_html( $meta['booking_form_title'] ) : esc_html_e( 'Book your Apartment', 'tourfic' ); ?></h5>
             <div class="tf-apartment-form-header">
-				<?php if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' ) || $tf_booking_type == 1 ) : ?>
+				<?php if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 ) : ?>
                     <h3 class="tf-apartment-price-per-night">
                         <span class="tf-apartment-base-price">
 						<?php
@@ -855,7 +843,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 				<?php endif; ?>
             </div>
 
-			<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' ) || $tf_booking_type == 1 ) : ?>
+			<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 ) : ?>
                 <div class="tf-apartment-form-fields">
                     <div class="tf_booking-dates">
                         <div class="tf-check-in-date">
@@ -934,17 +922,22 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                 <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
 
                 <div class="tf-btn">
-					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' ) || $tf_booking_type == 1 ) : ?>
+					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 ) : ?>
                         <?php if (!empty($apt_reserve_button_text)) : ?>
 							<button class="tf-btn-normal btn-primary tf-submit" type="submit"><?php echo esc_html( $apt_reserve_button_text ); ?></button>
 						<?php endif; ?>
-					<?php else: ?>
+					<?php elseif( $tf_booking_type == 2 && $tf_hide_booking_form == 1 ): ?>
 						<?php if (!empty($apt_reserve_button_text)) : ?>
 							<a href="<?php echo esc_url( $tf_booking_url ); ?>"
 							class="tf-btn-normal btn-primary tf-submit" <?php echo ! empty( $tf_booking_attribute ) ? esc_attr( $tf_booking_attribute ) : ''; ?> target="_blank"><?php echo esc_html( $apt_reserve_button_text ); ?></a>
 						<?php endif; ?>
 					<?php endif; ?>
                 </div>
+
+				<?php if(!empty( $tf_booking_code ) && $tf_booking_type == 2 && $tf_ext_booking_type == 2 ) : ?>
+					<?php echo wp_kses( $tf_booking_code, Helper::tf_custom_wp_kses_allow_tags()); ?>
+				<?php endif; ?>
+
             </div>
 
             <ul class="tf-apartment-price-list" style="display: none">
