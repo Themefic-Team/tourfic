@@ -372,7 +372,10 @@ class Helper {
 			'frameborder' => true,
 			'src' => true,
 			'style' => true,
-			'scrolling' => true,
+			'width' => true,
+			'height' => true,
+			'title' => true,
+			'allow' => true,
 		);
 
 		$allowed_tags["svg"] = array(
@@ -1245,8 +1248,7 @@ class Helper {
 		$args = array(
 			'post_type'      => $post_type,
 			'post_status'    => 'publish',
-			'posts_per_page' => $post_per_page,
-			'paged'          => $current_page,
+			'posts_per_page' => -1
 		);
 
 		if ( $filters ) {
@@ -1461,23 +1463,23 @@ class Helper {
 				}
 			}
 
-			global $wp_rewrite;
+			// global $wp_rewrite;
 
-			$base = trailingslashit( get_post_type_archive_link( $post_type ) ) . "{$wp_rewrite->pagination_base}/%#%/";
+			// $base = trailingslashit( get_post_type_archive_link( $post_type ) ) . "{$wp_rewrite->pagination_base}/%#%/";
 
-			$total_pages = ceil( $total_posts / $post_per_page );
-			if ( $total_pages > 1 ) {
-				echo "<div class='tf_posts_navigation tf_posts_ajax_navigation tf_tax_posts_navigation'>";
-				echo wp_kses_post(
-					paginate_links( array(
-						'base' => $base,
-						'total'   => $loop->max_num_pages,
-						'current' => max( $current_page, get_query_var( 'paged' ) ),
-						'prev_next' => true,
-					) )
-				);
-				echo "</div>";
-			}
+			// $total_pages = ceil( $total_posts / $post_per_page );
+			// if ( $total_pages > 1 ) {
+			// 	echo "<div class='tf_posts_navigation tf_posts_ajax_navigation tf_tax_posts_navigation'>";
+			// 	echo wp_kses_post(
+			// 		paginate_links( array(
+			// 			'base' => $base,
+			// 			'total'   => $loop->max_num_pages,
+			// 			'current' => max( $current_page, get_query_var( 'paged' ) ),
+			// 			'prev_next' => true,
+			// 		) )
+			// 	);
+			// 	echo "</div>";
+			// }
 		}
 
 		global $wp_rewrite;
