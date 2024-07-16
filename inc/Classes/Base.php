@@ -86,6 +86,10 @@ class Base {
 		} else {
 			 \Tourfic\Classes\Apartment\Apartment_CPT::instance();
 		}
+		if ( Helper::tfopt( 'disable-services' ) && in_array( 'carrentals', Helper::tfopt( 'disable-services' ) ) ) {
+		} else {
+			 \Tourfic\Classes\Car_Rental\Car_Rental_CPT::instance();
+		}
 
 		\Tourfic\Admin\Emails\TF_Handle_Emails::instance();
 		\Tourfic\App\Wishlist::instance();

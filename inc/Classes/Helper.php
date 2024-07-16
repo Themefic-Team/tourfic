@@ -1194,7 +1194,7 @@ class Helper {
 	 */
 	function tf_admin_role_caps() {
 
-		if ( get_option( 'tf_admin_caps' ) < 2 ) {
+		if ( get_option( 'tf_admin_caps' ) < 3 ) {
 			$admin_role  = get_role( 'administrator' );
 			$editor_role = get_role( 'editor' );
 
@@ -1245,6 +1245,22 @@ class Helper {
 				'edit_private_tf_tourss',
 				'edit_published_tf_tourss',
 				'create_tf_tourss',
+
+				// Car
+				'edit_tf_carrental',
+				'read_tf_carrental',
+				'delete_tf_carrental',
+				'edit_tf_carrentals',
+				'edit_others_tf_carrentals',
+				'publish_tf_carrentals',
+				'read_private_tf_carrentals',
+				'delete_tf_carrentals',
+				'delete_private_tf_carrentals',
+				'delete_published_tf_carrentals',
+				'delete_others_tf_carrentals',
+				'edit_private_tf_carrentals',
+				'edit_published_tf_carrentals',
+				'create_tf_carrentals',
 			);
 
 			foreach ( $caps as $cap ) {
@@ -1252,7 +1268,7 @@ class Helper {
 				$editor_role->add_cap( $cap );
 			}
 
-			update_option( 'tf_admin_caps', 2 );
+			update_option( 'tf_admin_caps', 3 );
 		}
 	}
 
@@ -3150,6 +3166,7 @@ class Helper {
 			$tourfic_tours      = array_search( 'edit.php?post_type=tf_tours', $menu_order, true );
 			$tourfic_hotel      = array_search( 'edit.php?post_type=tf_hotel', $menu_order, true );
 			$tourfic_apt        = array_search( 'edit.php?post_type=tf_apartment', $menu_order, true );
+			$tourfic_car        = array_search( 'edit.php?post_type=tf_carrental', $menu_order, true );
 			$tourfic_emails     = array_search( 'edit.php?post_type=tf_email_templates', $menu_order, true );
 			$tourfic_vendor     = array_search( 'tf-multi-vendor', $menu_order, true );
 
@@ -3169,6 +3186,10 @@ class Helper {
 				unset( $menu_order[ $tourfic_hotel ] );
 			}
 
+			if ( ! empty( $tourfic_car ) ) {
+				unset( $menu_order[ $tourfic_car ] );
+			}
+
 			if ( ! empty( $tourfic_vendor ) ) {
 				unset( $menu_order[ $tourfic_vendor ] );
 			}
@@ -3185,6 +3206,7 @@ class Helper {
 					$tourfic_menu_order[] = 'edit.php?post_type=tf_tours';
 					$tourfic_menu_order[] = 'edit.php?post_type=tf_hotel';
 					$tourfic_menu_order[] = 'edit.php?post_type=tf_apartment';
+					$tourfic_menu_order[] = 'edit.php?post_type=tf_carrental';
 					$tourfic_menu_order[] = 'tf-multi-vendor';
 					$tourfic_menu_order[] = 'edit.php?post_type=tf_email_templates';
 					$tourfic_menu_order[] = 'separator-tourfic2';
