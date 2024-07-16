@@ -206,6 +206,19 @@
                                 }
                             }
                         }
+                        td.options{
+                            ul{
+                                list-style: none;
+                                margin-left: 0;
+                                margin-bottom: 0;
+                                li{
+                                    margin-bottom: 4px;
+                                    .room-extra-icon{
+                                        margin-right: 5px;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

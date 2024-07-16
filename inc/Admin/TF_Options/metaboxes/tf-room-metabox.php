@@ -156,7 +156,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 		),
 
         'room_stay_requirement'     => array(
-			'title'  => __( 'Stay Requirements', 'tourfic' ),
+			'title'  => __( 'Booking', 'tourfic' ),
 			'icon'   => 'fa-solid fa-bed',
 			'fields' => array(
                 array(
@@ -201,8 +201,9 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'type'    => 'select',
                     'label'   => __( 'Room Pricing Logic', 'tourfic' ),
                     'options' => array(
-                        '1' => __( 'Per Room Basis', 'tourfic' ),
-                        '2' => __( 'Per Person Basis (Pro)', 'tourfic' ),
+                        '1' => __( 'Room Basis', 'tourfic' ),
+                        '2' => __( 'Person Basis (Pro)', 'tourfic' ),
+                        '3' => __( 'Option Basis (Pro)', 'tourfic' ),
                     ),
                     'default' => '1',
                     'attributes'  => array(

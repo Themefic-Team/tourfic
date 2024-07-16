@@ -3553,9 +3553,9 @@ ul.tf-room-checkbox label {
 .tf-hotel-deposit-hide {
   display: none; }
 
-.tf-room-table .availability-table tbody tr:nth-child(odd) td {
-  background: #fff; }
-
+/*.tf-room-table .availability-table tbody tr:nth-child(odd) td {
+    background: #fff;
+}*/
 .hotel-room-wrap {
   width: 100%;
   overflow-x: auto; }
@@ -3578,6 +3578,15 @@ ul.tf-room-checkbox label {
 
 .availability-table td.description h3 a {
   text-decoration: underline !important; }
+
+.availability-table td.options ul {
+  list-style: none;
+  margin-left: 0;
+  margin-bottom: 0; }
+  .availability-table td.options ul li {
+    margin-bottom: 4px; }
+    .availability-table td.options ul li .room-extra-icon {
+      margin-right: 5px; }
 
 .room-features h4,
 .pax h4 {
@@ -8694,6 +8703,14 @@ div#tf-contact-info {
       color: #0E3DD8; }
     .tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table > tbody tr td.reserve .room-selection-wrap select {
       border: 1px solid #ddd; }
+    .tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table > tbody tr td.options ul {
+      list-style: none;
+      margin-left: 0;
+      margin-bottom: 0; }
+      .tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table > tbody tr td.options ul li {
+        margin-bottom: 4px; }
+        .tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table > tbody tr td.options ul li .room-extra-icon {
+          margin-right: 5px; }
   .tf-hotel-design-1 .tf-hotel-single-features ul {
     margin: 0;
     padding: 0; }

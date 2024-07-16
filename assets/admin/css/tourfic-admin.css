@@ -382,10 +382,10 @@ Fontawesome
   line-height: 13px;
   background: #b30000; }
 
-.room-repeater .unique-id {
+#tf_room_opt .unique-id {
   display: none; }
 
-.room-repeater .tf-order_id {
+#tf_room_opt .tf-order_id {
   display: none; }
 
 .tf-section-name-hidden {

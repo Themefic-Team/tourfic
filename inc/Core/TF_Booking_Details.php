@@ -541,6 +541,14 @@ abstract Class TF_Booking_Details {
                                                 <td><?php echo esc_html($tf_tour_details->room_name); ?></td>
                                             </tr>
                                         <?php endif; ?>
+
+	                                    <?php if ( !empty($tf_tour_details->option) ) { ?>
+                                            <tr>
+                                                <th><?php _e("Option", "tourfic"); ?></th>
+                                                <td>:</td>
+                                                <td><?php echo esc_html($tf_tour_details->option); ?></td>
+                                            </tr>
+	                                    <?php } ?>
                                         
                                         <!-- Room Count -->
                                         <?php if(!empty($tf_tour_details->room)) : ?>

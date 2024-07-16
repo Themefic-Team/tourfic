@@ -121,6 +121,7 @@
             var post_id = $('input[name=post_id]').val();
             var unique_id = $this.closest('.tf-room').find('input[name=unique_id]').val();
             var room_id = $this.closest('.tf-room').find('input[name=room_id]').val();
+            var option_id = $this.closest('.tf-room').find('input[name=option_id]').val();
 
             var location = $('input[name=place]').val();
             var adult = $('input[name=adult]').val();
@@ -143,6 +144,7 @@
                 post_id: post_id,
                 room_id: room_id,
                 unique_id: unique_id,
+                option_id: option_id,
                 location: location,
                 adult: adult,
                 child: child,
