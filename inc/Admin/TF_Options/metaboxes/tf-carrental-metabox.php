@@ -596,5 +596,38 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 			),
 		),
 
+		// Terms & Conditions
+		'terms_and_conditions' => array(
+			'title'  => __( 'Terms & Conditions', 'tourfic' ),
+			'icon'   => 'fa-regular fa-square-check',
+			'fields' => array(
+				array(
+					'id'    => 'carrental-tnc-heading',
+					'type'  => 'heading',
+					'label' => 'Terms & Conditions Section',
+					'subtitle' => __( 'Include your set of regulations and guidelines that customers must agree to in order to use the service provided in your car package. ', 'tourfic' ),
+				),
+				array(
+					'id'      => 'carrental-tnc-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-terms-conditions/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'    => 'carrental-section-title',
+					'type'  => 'text',
+					'label' => __( 'Title of the Section', 'tourfic' ),
+					'subtitle' => __( 'This text will appear as the heading of the T&C section on the frontend.', 'tourfic' ),
+					'default' => __( "Tour Terms & Conditions", 'tourfic' ),
+				),
+				array(
+					'id'    => 'terms_conditions',
+					'type'  => 'editor',
+					'label' => __( 'Terms & Conditions of this car', 'tourfic' ),
+					'subtitle' => __( "Enter your car's terms and conditions in the text editor provided below.", 'tourfic' ),
+				),
+			),
+		),
+
 	),
 ) );
