@@ -253,6 +253,47 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'subtitle'       => __( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
 					'field_width' => '50',
 				),
+				array(
+					'id'    => 'carrental-driverinfo-heading',
+					'type'  => 'heading',
+					'label' => 'Driver Details Section',
+					'subtitle' => __( 'How can potential or existing customers reach out for more details about your car? Please share your Driver Details here.', 'tourfic' ),
+				),
+				array(
+					'id'          => 'driver_name',
+					'type'        => 'text',
+					'label'       => __( 'Name', 'tourfic' ),
+					'subtitle'       => __( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
+					'field_width' => '50',
+				),
+				array(
+					'id'          => 'driver_email',
+					'type'        => 'text',
+					'label'       => __( 'Email address', 'tourfic' ),
+					'subtitle'       => __( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
+					'field_width' => '50',
+				),
+				array(
+					'id'          => 'driver_phone',
+					'type'        => 'text',
+					'label'       => __( 'Phone Number', 'tourfic' ),
+					'subtitle'       => __( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
+					'field_width' => '50',
+				),
+				array(
+					'id'          => 'driver_address',
+					'type'        => 'text',
+					'label'       => __( 'Address', 'tourfic' ),
+					'subtitle'       => __( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
+					'field_width' => '50',
+				),
+				array(
+					'id'      => 'driver_image',
+					'type'    => 'image',
+					'label'   => __( 'Driver Photo', 'tourfic' ),
+					'subtitle'    => __( 'Please upload the driver photo to be displayed in the Contact Section.', 'tourfic' ),
+					'library' => 'image',
+				),
 			),
 		),
 
@@ -357,6 +398,60 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					),
 					'field_width' => 50
 				),
+			),
+		),
+
+		// Car Extra
+		'car_extra'         => array(
+			'title'  => __( 'Car Extra', 'tourfic' ),
+			'icon'   => 'fa-solid fa-address-book',
+			'fields' => array(
+				array(
+					'id'    => 'carrental-extra-heading',
+					'type'  => 'heading',
+					'label' => 'Car Extra Section',
+					'subtitle' => __( 'How can potential or existing customers reach out for more details about your car? Please share your contact information here.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'carrental-extra-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-contact-info/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'           => 'extras',
+					'type'         => 'repeater',
+					'button_title' => __( 'Add New Extra', 'tourfic' ),
+					'label'        => __( 'Add Your Extras', 'tourfic' ),
+					'subtitle'        => __( 'Click the button below to add Extras for your Car. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each Badge using the icons on the right side.', 'tourfic' ),
+					'field_title'  => 'title',
+					'fields'       => array(
+						array(
+							'id'    => 'title',
+							'type'  => 'text',
+							'label' => __( 'Title', 'tourfic' ),
+						),
+						array(
+							'id'    => 'max_number',
+							'type'  => 'number',
+							'label' => __( 'Max of number', 'tourfic' ),
+						),
+						array(
+							'id'    => 'price',
+							'type'  => 'number',
+							'label' => __( 'Price', 'tourfic' ),
+						),
+                        array(
+							'id'       => 'price_type',
+							'type'     => 'select',
+							'label'    => __( 'Price type', 'tourfic' ),
+							'options'  => array(
+								'time' => __( 'By Time', 'tourfic' ),
+								'fixed'   => __( 'Fixed', 'tourfic' ),
+							)
+						),
+					),
+				)
 			),
 		),
 
