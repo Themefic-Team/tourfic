@@ -189,21 +189,38 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'type'     => 'switch',
 					'label'    => esc_html__( 'Pay at Pick-up', 'tourfic' ),
 					'subtitle' => esc_html__( 'Pay at Pick-up', 'tourfic' ),
-                    'field_width' => 33.33,
+				),
+				array(
+					'id'       => 'fuel_included',
+					'type'     => 'switch',
+					'label'    => esc_html__( 'Fuel Included', 'tourfic' ),
+					'subtitle' => esc_html__( 'Fuel Included', 'tourfic' ),
+				),
+				array(
+					'id'       => 'driver_included',
+					'type'     => 'switch',
+					'label'    => esc_html__( 'Driver included', 'tourfic' ),
+					'subtitle' => esc_html__( 'Driver included', 'tourfic' ),
 				),
                 array(
 					'id'       => 'unlimited_mileage',
 					'type'     => 'switch',
 					'label'    => esc_html__( 'Unlimited Mileage', 'tourfic' ),
 					'subtitle' => esc_html__( 'Unlimited Mileage', 'tourfic' ),
-                    'field_width' => 33.33,
+				),
+				array(
+					'id'    => 'mileage',
+					'type'  => 'text',
+					'label' => __( 'Mileage', 'tourfic' ),
+					'dependency'  => [
+						array( 'unlimited_mileage', '==', 'false' )
+					],
 				),
                 array(
 					'id'       => 'shuttle_car',
 					'type'     => 'switch',
 					'label'    => esc_html__( 'Shuttle to Car', 'tourfic' ),
-					'subtitle' => esc_html__( 'Shuttle to Car', 'tourfic' ),
-                    'field_width' => 33.33,
+					'subtitle' => esc_html__( 'Shuttle to Car', 'tourfic' )
 				)
 			),
 		),
