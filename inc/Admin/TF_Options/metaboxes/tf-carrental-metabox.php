@@ -335,6 +335,35 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'field_width' => '50',
 				),
 				array(
+					'id'           => 'prices',
+					'type'         => 'repeater',
+					'button_title' => __( 'Add New Price', 'tourfic' ),
+					'label'        => __( 'Price by Number of Day/Hour', 'tourfic' ),
+					'field_title'  => 'title',
+					'fields'       => array(
+						array(
+							'id'    => 'title',
+							'type'  => 'text',
+							'label' => __( 'Title', 'tourfic' ),
+						),
+						array(
+							'id'    => 'from_day',
+							'type'  => 'number',
+							'label' => __( 'From (day/hour)', 'tourfic' ),
+						),
+						array(
+							'id'    => 'to_day',
+							'type'  => 'number',
+							'label' => __( 'To (day/hour)', 'tourfic' ),
+						),
+						array(
+							'id'    => 'price',
+							'type'  => 'number',
+							'label' => __( 'Price', 'tourfic' ),
+						)
+					),
+				),
+				array(
 					'id'       => 'discount_type',
 					'type'     => 'select',
 					'label'    => __( 'Discount Type', 'tourfic' ),
@@ -404,7 +433,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 		// Car Extra
 		'car_extra'         => array(
 			'title'  => __( 'Car Extra', 'tourfic' ),
-			'icon'   => 'fa-solid fa-address-book',
+			'icon'   => 'fa-solid fa-route',
 			'fields' => array(
 				array(
 					'id'    => 'carrental-extra-heading',
