@@ -177,7 +177,7 @@ $total_room_option_count = 0;
                             }
                             $discount_price = ($hotel_discount_type != "none" && $hotel_discount_amount != 0) ? wc_price($discount_price) : 0;
                             $price = wc_price( $price );
-                        } else {
+                        } elseif ( $pricing_by == '2' ) {
                             $price =! empty( $room['adult_price'] ) ? $room['adult_price'] : 0;
                             $discount_price = 0;
 

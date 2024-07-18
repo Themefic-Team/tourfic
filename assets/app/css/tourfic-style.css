@@ -9952,6 +9952,41 @@ html {
           z-index: -1; }
       .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-gallery .tf-room-gallery.tf-no-room-gallery {
         height: 390px; }
+    .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-contents {
+      width: calc(100% - 230px); }
+      @media only screen and (max-width: 991.98px) {
+        .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-contents {
+          width: 100%; } }
+      .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-contents .tf-section-title {
+        margin-bottom: 0;
+        color: #595349;
+        padding: 24px 24px 0; }
+      .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-contents h4 {
+        margin-bottom: 16px; }
+      .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-contents .tf-room-info-list {
+        margin-bottom: 24px !important; }
+      .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-contents .tf-option-list {
+        margin-bottom: 24px !important;
+        display: flex !important;
+        flex-direction: column;
+        gap: 12px 5px; }
+      .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-contents .tf-available-room-content {
+        width: 100% !important;
+        padding-bottom: 0; }
+        .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-contents .tf-available-room-content:last-child .tf-room-options-content-inner {
+          border-bottom: none; }
+      .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-contents .tf-room-options-content-inner {
+        border-bottom: 1px solid #99948D;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 24px; }
+        @media only screen and (max-width: 991.98px) {
+          .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-contents .tf-room-options-content-inner {
+            display: block; } }
     .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content {
       width: calc(100% - 230px);
       display: flex;
