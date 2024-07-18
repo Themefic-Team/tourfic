@@ -81,6 +81,7 @@ TF_Settings::option( 'tf_settings', array(
 						'hotel'     => __( 'Hotel', 'tourfic' ),
 						'tour'      => __( 'Tour', 'tourfic' ),
 						'apartment' => __( 'Apartment', 'tourfic' ),
+						'carrentals' => __( 'Car Rental', 'tourfic' ),
 					),
 				),
 				array(
