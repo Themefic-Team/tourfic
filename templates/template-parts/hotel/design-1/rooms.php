@@ -9,6 +9,7 @@ foreach ( $rooms as $key => $room ) {
     }
 }
 
+$tf_booking_url = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = $tf_ext_booking_type = $tf_ext_booking_code = '';
 if ( function_exists('is_tf_pro') && is_tf_pro() ){
     $tf_booking_type = !empty($meta['booking-by']) ? $meta['booking-by'] : 1;
     $tf_booking_url = !empty($meta['booking-url']) ? esc_url($meta['booking-url']) : '';
@@ -16,6 +17,8 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ){
     $tf_booking_attribute = !empty($meta['booking-attribute']) ? $meta['booking-attribute'] : '';
 	$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
 	$tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
+    $tf_ext_booking_type = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : '1';
+    $tf_ext_booking_code = !empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
 }
 if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     $external_search_info = array(
@@ -370,8 +373,12 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         }
                             }
                             ?>
-                            <?php if( $tf_booking_type == 2 && !empty($tf_booking_url)): ?>
+                            <?php if( $tf_booking_type == 2 && !empty($tf_booking_url) && $tf_ext_booking_type == 1 ): ?>
                                 <a href="<?php echo esc_url($tf_booking_url); ?>" class="tf-btn-normal btn-secondary" target="_blank">
+                                    <?php esc_html_e( 'Book Now', 'tourfic' ); ?>
+                                </a>
+                            <?php elseif( $tf_booking_type == 2 && $tf_ext_booking_type == 2 && !empty( $tf_ext_booking_code ) ): ?>
+                                <a href="<?php echo esc_url("#tf-external-booking-embaded-form"); ?>" class="tf-btn-normal btn-secondary" target="_blank">
                                     <?php esc_html_e( 'Book Now', 'tourfic' ); ?>
                                 </a>
                             <?php else: ?>

@@ -4,7 +4,7 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
 
 $tf_booking_type = '1';
-$tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = '';
+$tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = $tf_ext_booking_type = $tf_ext_booking_code = '';
 if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 	$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 	$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
@@ -12,6 +12,8 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 	$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
 	$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
 	$tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
+    $tf_ext_booking_type = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : '1';
+    $tf_ext_booking_code = !empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
 }
 if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 	$external_search_info = array(
@@ -428,11 +430,16 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                             </div>
                         </div>
 					<?php } ?>
-					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' ) || $tf_booking_type == 1 ) : ?>
+					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 ) : ?>
                         <div class="hero-booking">
 							<?php tf_hotel_sidebar_booking_form(); ?>
                         </div>
 					<?php endif; ?>
+                    <?php if( $tf_booking_type == 2 && $tf_ext_booking_type == 2 && !empty( $tf_ext_booking_code )) : ?>
+                        <div id="tf-external-booking-embaded-form" class="hero-booking">
+                            <?php echo wp_kses( $tf_ext_booking_code, Helper::tf_custom_wp_kses_allow_tags() ) ?>
+                        </div>
+                    <?php endif; ?>
 					<?php
 					$places_section_title = ! empty( $meta["section-title"] ) ? $meta["section-title"] : "What's around?";
 					$places_meta          = ! empty( $meta["nearby-places"] ) ? $meta["nearby-places"] : array();
@@ -819,6 +826,10 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                                             <div class="tf-btn">
 												<?php if ( $tf_booking_type == 2 && ! empty( $tf_booking_url ) ): ?>
                                                     <a href="<?php echo esc_url( $tf_booking_url ); ?>" class="btn-styled tf-sml-btn" target="_blank">
+														<?php esc_html_e( 'Book Now', 'tourfic' ); ?>
+                                                    </a>
+												<?php elseif( $tf_booking_type == 2 && $tf_ext_booking_type == 2 && !empty( $tf_ext_booking_code ) ): ?>
+                                                    <a href="<?php echo esc_url( "#tf-external-booking-embaded-form" ); ?>" class="btn-styled tf-sml-btn" target="_blank">
 														<?php esc_html_e( 'Book Now', 'tourfic' ); ?>
                                                     </a>
 												<?php else: ?>
