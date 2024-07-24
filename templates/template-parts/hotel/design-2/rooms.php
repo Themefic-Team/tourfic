@@ -47,13 +47,13 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     <?php esc_html_e("Modify search", "tourfic"); ?>
 </span>
 <!--Booking form start -->
-<?php if( ($tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_code == 1 ) || $tf_booking_type == 1 || $tf_booking_type == 3) : ?>
+<?php if( ($tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 || $tf_booking_type == 3) : ?>
     <div id="room-availability" class="tf-booking-form-wrapper">
         <?php tf_hotel_sidebar_booking_form(); ?>
     </div>
 <?php endif; ?>
-<?php if( $tf_booking_type == 2 && $tf_ext_booking_code == 2 && !empty($tf_ext_booking_code )): ?>
-    <div id="room-availability" class="tf-booking-form-wrapper">
+<?php if( $tf_booking_type == 2 && $tf_ext_booking_type == 2 && !empty($tf_ext_booking_code )): ?>
+    <div id="tf-external-booking-embaded-form" class="tf-booking-form-wrapper">
         <?php echo wp_kses( $tf_ext_booking_code, Helper::tf_custom_wp_kses_allow_tags() ); ?>
     </div>
 <?php endif; ?>
@@ -397,7 +397,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                             ?>
                         </div>
                     <?php endif; ?>                 
-                    <a href="<?php echo $tf_booking_type == 2 ? ( !empty( $tf_booking_url ) ? esc_url( $tf_booking_url ) : '' ) : esc_url( '#room-availability' ) ?>" class="availability"><?php $tf_booking_type == 2 ? ( !empty( $tf_booking_url ) && ( $tf_hide_booking_form == 1 )  ? esc_html_e( 'Book Now', 'tourfic') : esc_html_e("Check Availability", "tourfic") ) :  esc_html_e("Check Availability", "tourfic") ?></a>
+                    <a href="<?php echo $tf_booking_type == 2 ? ( !empty( $tf_booking_url ) && $tf_ext_booking_type == 1 ? esc_url( $tf_booking_url ) : ( $tf_ext_booking_type == 2 && !empty( $tf_ext_booking_code) ? esc_url("#tf-external-booking-embaded-form") : '' ) ) : esc_url( '#room-availability' ) ?>" class="availability"><?php $tf_booking_type == 2 ? ( !empty( $tf_booking_url ) && ( $tf_hide_booking_form == 1 && $tf_ext_booking_type == 1 ) ? esc_html_e( 'Book Now', 'tourfic') : ($tf_ext_booking_type == 2 && !empty( $tf_ext_booking_code ) ? esc_html_e("Book Now", "tourfic") : esc_html_e("Check Availability", "tourfic") ) ) :  esc_html_e("Check Availability", "tourfic") ?></a>
                      <!--TODO: Need to add external booking code Book now Button  -->
                 </div>
 

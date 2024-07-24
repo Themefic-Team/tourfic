@@ -824,7 +824,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 										<?php endif; ?>
                                         <td class="reserve tf-t-c">
                                             <div class="tf-btn">
-												<?php if ( $tf_booking_type == 2 && ! empty( $tf_booking_url ) ): ?>
+												<?php if ( $tf_booking_type == 2 && ! empty( $tf_booking_url ) && $tf_ext_booking_type == 1 ): ?>
                                                     <a href="<?php echo esc_url( $tf_booking_url ); ?>" class="btn-styled tf-sml-btn" target="_blank">
 														<?php esc_html_e( 'Book Now', 'tourfic' ); ?>
                                                     </a>
