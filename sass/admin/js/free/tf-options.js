@@ -1250,8 +1250,6 @@
 
             // Booking Confirmation repeater Hidden field
             TF_Booking_Confirmation();
-
-            tfHotelCalendar();
         });
 
         // Repeater Delete Value
@@ -1434,8 +1432,6 @@
 
             // Dependency value
             TF_dependency();
-
-            tfHotelCalendar();
         });
 
         // Repeater show hide
@@ -1448,8 +1444,6 @@
             } else {
                 $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + ' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-up"></i>');
             }
-
-            tfHotelCalendar();
         });
 
         // Repeater Drag and  show
@@ -1485,6 +1479,7 @@
             $this.parent().parent().find('.tf-tab-item-content[data-tab-id = ' + tab_id + ']').addClass('show');
 
             tfApartmentCalendar();
+            tfHotelCalendar();
         });
 
     });
