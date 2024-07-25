@@ -356,7 +356,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                 ),
                 array(
                     'id'        => '',
-                    'type'      => 'roomAvailabilityCal',
+                    'type'      => 'room_availability',
                     'label'     => __( 'Availability Calendar', 'tourfic' ),
                     'is_pro'  => true,
                     'dependency' => array( 'avil_by_date', '!=', 'false' ),

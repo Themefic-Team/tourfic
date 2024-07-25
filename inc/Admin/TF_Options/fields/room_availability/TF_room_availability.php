@@ -4,8 +4,8 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 
-if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
-	class TF_hotelAvailabilityCal extends TF_Fields {
+if ( ! class_exists( 'TF_room_availability' ) ) {
+	class TF_room_availability extends TF_Fields {
 
 		public function __construct( $field, $value = '', $settings_id = '', $parent_field = '' ) {
 			parent::__construct( $field, $value, $settings_id, $parent_field );
@@ -17,7 +17,7 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
 			if ( $post_type !== 'tf_room' ) {
 				return;
 			}
-			$meta  = get_post_meta( $post->ID, 'tf_rooms_opt', true );
+			$meta  = get_post_meta( $post->ID, 'tf_room_opt', true );
 
 			$pricing_by = ! empty( $meta['pricing-by'] ) ? $meta['pricing-by'] : '1';
 			if ( Helper::tf_is_woo_active() ) {
@@ -68,7 +68,6 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
                         <div style="width: 100%">
                             <input type="hidden" name="new_post" value="<?php echo $this->value ? 'false' : 'true'; ?>">
                             <input type="hidden" name="room_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
-                            <input type="hidden" name="room_index" value="<?php echo esc_attr( $room_index ); ?>">
                             <span class="tf_room_cal_update button button-primary button-large"><?php echo esc_html__( 'Save Calendar', 'tourfic' ); ?></span>
                         </div>
 
