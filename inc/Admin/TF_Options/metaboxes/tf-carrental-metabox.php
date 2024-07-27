@@ -339,17 +339,16 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'attributes'  => array(
 						'min' => '0',
 					),
-					'field_width' => '50',
 				),
-                array(
-					'id'          => 'car_numbers',
-					'type'        => 'number',
-					'label'       => __( 'Number of car for rent', 'tourfic' ),
-					'subtitle'    => __( 'Number of car for rent', 'tourfic' ),
-					'attributes'  => array(
-						'min' => '0',
+				array(
+					'id'       => 'pricing_type',
+					'type'     => 'select',
+					'label'    => __( 'Pricing Type', 'tourfic' ),
+					'options'  => array(
+						'day_hour' => __( 'Day/Hour', 'tourfic' ),
+						'date'   => __( 'Price By Date', 'tourfic' ),
 					),
-					'field_width' => '50',
+					'default'  => 'day_hour',
 				),
 				array(
 					'id'           => 'prices',
@@ -357,6 +356,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'button_title' => __( 'Add New Price', 'tourfic' ),
 					'label'        => __( 'Price by Number of Day/Hour', 'tourfic' ),
 					'field_title'  => 'title',
+					'dependency' => array(
+						array( 'pricing_type', '==', 'day_hour' ),
+					),
 					'fields'       => array(
 						array(
 							'id'    => 'title',
@@ -364,14 +366,53 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 							'label' => __( 'Title', 'tourfic' ),
 						),
 						array(
+							'id'       => 'type',
+							'type'     => 'select',
+							'label'    => __( 'Type', 'tourfic' ),
+							'options'  => array(
+								'day' => __( 'Day', 'tourfic' ),
+								'hour'   => __( 'Hour', 'tourfic' ),
+							),
+							'default'  => 'day',
+						),
+						array(
 							'id'    => 'from_day',
 							'type'  => 'number',
-							'label' => __( 'From (day/hour)', 'tourfic' ),
+							'label' => __( 'From', 'tourfic' ),
 						),
 						array(
 							'id'    => 'to_day',
 							'type'  => 'number',
-							'label' => __( 'To (day/hour)', 'tourfic' ),
+							'label' => __( 'To', 'tourfic' ),
+						),
+						array(
+							'id'    => 'price',
+							'type'  => 'number',
+							'label' => __( 'Price', 'tourfic' ),
+						)
+					),
+				),
+				array(
+					'id'           => 'prices',
+					'type'         => 'repeater',
+					'button_title' => __( 'Add New Price', 'tourfic' ),
+					'label'        => __( 'Price by date', 'tourfic' ),
+					'field_title'  => 'title',
+					'dependency' => array(
+						array( 'pricing_type', '==', 'date' ),
+					),
+					'fields'       => array(
+						array(
+							'id'         => 'date',
+							'type'       => 'date',
+							'format'     => 'Y/m/d',
+							'range'      => true,
+							'label_from' => 'Start Date',
+							'label_to'   => 'End Date',
+							'multiple'   => true,
+							'attributes' => array(
+								'autocomplete' => 'off',
+							),
 						),
 						array(
 							'id'    => 'price',
@@ -402,6 +443,20 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					),
 					'dependency' => array(
 						array( 'discount_type', '!=', 'none' ),
+					),
+				),
+				array(
+					'id'      => 'car_availability',
+					'type'    => 'heading',
+					'content' => __( 'Availability', 'tourfic' ),
+				),
+				array(
+					'id'          => 'car_numbers',
+					'type'        => 'number',
+					'label'       => __( 'Number of car for rent', 'tourfic' ),
+					'subtitle'    => __( 'Number of car for rent', 'tourfic' ),
+					'attributes'  => array(
+						'min' => '0',
 					),
 				),
 				array(
