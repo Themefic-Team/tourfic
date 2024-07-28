@@ -40,7 +40,7 @@ class Room_CPT extends \Tourfic\Core\Post_Type {
 		unset( $columns['date'] );
 		unset( $columns['author'] );
 		unset( $columns['comments'] );
-		$columns["hotel_id"] = "Hotel";
+		$columns["hotel_id"] = esc_html__('Hotel', 'tourfic');
 		$columns['author']   = $author;
 		$columns['comments'] = $comments;
 		$columns['date']     = $date;
