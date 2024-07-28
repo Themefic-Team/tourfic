@@ -357,7 +357,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'default'  => 'day_hour',
 				),
 				array(
-					'id'           => 'prices',
+					'id'           => 'day_prices',
 					'type'         => 'repeater',
 					'button_title' => __( 'Add New Price', 'tourfic' ),
 					'label'        => __( 'Price by Number of Day/Hour', 'tourfic' ),
@@ -399,7 +399,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					),
 				),
 				array(
-					'id'           => 'prices',
+					'id'           => 'date_prices',
 					'type'         => 'repeater',
 					'button_title' => __( 'Add New Price', 'tourfic' ),
 					'label'        => __( 'Price by date', 'tourfic' ),
