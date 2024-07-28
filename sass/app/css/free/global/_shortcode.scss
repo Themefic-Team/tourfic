@@ -178,7 +178,7 @@ button.tf-tablinks {
     border: none;
     .tf_form-inner {
         padding: 0;
-        display: flex;
+        display: flex !important;
         align-items: center;
     }
     .tf-label {
@@ -278,6 +278,12 @@ button.tf-tablinks {
     height: 55px;
     margin: 24px 0 16px;
     background: #fff;
+
+    .tf_selectperson-wrap {
+        .tf_person-icon {
+            margin-right: 8px;
+        }
+    }
 }
 .tf_destination-wrap {
     border-left: 0;

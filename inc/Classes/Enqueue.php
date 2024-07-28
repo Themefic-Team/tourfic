@@ -1404,7 +1404,7 @@ class Enqueue {
 			#tf-ask-question textarea,
 			.tf-container button,
 			.tf-container input,
-			.tf-container textarea{
+			.tf-container textarea,
 			.gm-style .marker-label,
 			.tf-withoutpayment-booking{
 				font-family: "' . $tf_global_font_family . '", sans-serif !important;
