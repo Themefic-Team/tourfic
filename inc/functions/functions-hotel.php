@@ -338,7 +338,10 @@ function tf_room_availability_callback() {
 					}
 
 					$d_price = !empty($d_price_by_date) ? $d_price_by_date * $days : 0;
-					$price = !empty($price_by_date) ? $price_by_date * $days : 0;
+					
+					if( !$avil_by_date && count( $available_rooms ) == 0 ) {
+						$price = !empty($price_by_date) ? $price_by_date * $days : 0;
+					}
 
 					// Check if date is provided and within date range
 					if ( ! in_array( 0, $has_room ) ) {
