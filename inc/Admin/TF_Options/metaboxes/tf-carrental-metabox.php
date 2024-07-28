@@ -298,11 +298,17 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'field_width' => '50',
 				),
 				array(
+					'id'          => 'driver_age',
+					'type'        => 'number',
+					'label'       => __( 'Age', 'tourfic' ),
+					'subtitle'       => __( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
+					'field_width' => '50',
+				),
+				array(
 					'id'          => 'driver_address',
 					'type'        => 'text',
 					'label'       => __( 'Address', 'tourfic' ),
 					'subtitle'       => __( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
-					'field_width' => '50',
 				),
 				array(
 					'id'      => 'driver_image',
