@@ -19,8 +19,8 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 				array(
 					'id'    => 'hotel-room-heading',
 					'type'  => 'heading',
-					'label' => 'Create & Manage Your Hotel Rooms',
-					'subtitle' => __( 'In this section, you are provided with the tools to create and manage your hotel room offerings. ', 'tourfic' ),
+					'label' => 'General Settings',
+					'subtitle' => __( 'These are some common settings specific to this Room', 'tourfic' ),
 				),
 				array(
 					'id'      => 'notice',
@@ -38,6 +38,17 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 						'post_type'      => 'tf_hotel',
 						'posts_per_page' => - 1,
 					)
+				),
+				array(
+					'id'          => 'unique_id',
+					'class'       => 'unique-id',
+					'type'        => 'text',
+					'label'       => __( 'Unique ID', 'tourfic' ),
+					'attributes'  => array(
+						'readonly' => 'readonly',
+					),
+					'placeholder' => __( '', 'tourfic' ),
+					'default'     => uniqid(),
 				),
                 array(
                     'id'          => 'order_id',

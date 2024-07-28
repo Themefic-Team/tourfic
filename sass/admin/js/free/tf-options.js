@@ -38,6 +38,7 @@
             }
 
             tfApartmentCalendar()
+            tfHotelCalendar()
         });
 
         /*
@@ -596,11 +597,10 @@
                         dataType: "json",
                         type: "POST",
                         data: {
-                            action: "tf_get_hotel_availability",
+                            action: "tf_get_hotel_room_availability",
                             _nonce: tf_admin_params.tf_nonce,
                             new_post: $(self.container).find('[name="new_post"]').val(),
-                            hotel_id: $(self.container).find('[name="hotel_id"]').val(),
-                            room_index: $(self.container).find('[name="room_index"]').val(),
+                            room_id: $(self.container).find('[name="room_id"]').val(),
                             avail_date: $(self.container).find('.avail_date').val(),
                         },
                         beforeSend: function () {
@@ -638,7 +638,7 @@
                         endTime = startTime;
                     }
                     setRoomCheckInOut(startTime, endTime, self.roomCalData);
-                    let priceBy = $(self.container).closest('.tf-single-repeater-room').find('.tf_room_pricing_by').val();
+                    let priceBy = $('.tf_room_pricing_by').val();
                     if (priceBy === '1') {
                         if (typeof event.extendedProps.price != 'undefined') {
                             $("[name='tf_room_price']", self.roomCalData).val(event.extendedProps.price);
@@ -722,9 +722,9 @@
             let containerEl = btn.closest('.tf-room-cal-wrap')[0];
             let cal = container.find('.tf-room-cal');
             let data = $('input, select', container.find('.tf-room-cal-field')).serializeArray();
-            let priceBy = container.closest('.tf-single-repeater-room').find('.tf_room_pricing_by').val();
+            let priceBy = $('.tf_room_pricing_by').val();
             let avail_date = container.find('.avail_date');
-            data.push({name: 'action', value: 'tf_add_hotel_availability'});
+            data.push({name: 'action', value: 'tf_add_hotel_room_availability'});
             data.push({name: '_nonce', value: tf_admin_params.tf_nonce});
             data.push({name: 'price_by', value: priceBy});
             data.push({name: 'avail_date', value: avail_date.val()});
@@ -774,15 +774,14 @@
         });
 
         $(document).on('change', '.tf_room_pricing_by', function (e) {
-            let room = $(this).closest('.tf-single-repeater-room');
             let pricing_by = $(this).val();
 
             if (pricing_by === '1') {
-                room.find('.tf-price-by-room').show();
-                room.find('.tf-price-by-person').hide();
+                $('.tf-price-by-room').show();
+                $('.tf-price-by-person').hide();
             } else if (pricing_by === '2') {
-                room.find('.tf-price-by-person').show();
-                room.find('.tf-price-by-room').hide();
+                $('.tf-price-by-person').show();
+                $('.tf-price-by-room').hide();
             }
         });
 
@@ -1118,11 +1117,6 @@
             // Repeater Count Add Value
             add_value.find(':input[name="tf_repeater_count"]').val(count);
 
-            // Repeater Room Unique ID
-            var room_uniqueid = add_value.find('.unique-id input');
-            if (typeof room_uniqueid !== "undefined") {
-                add_value.find('.unique-id input').val(new Date().valueOf() + count);
-            }
             let repeatDateField = add_value.find('.tf-field-date');
             if (repeatDateField.length > 0) {
                 repeatDateField.find('input').each(function () {
@@ -1284,12 +1278,6 @@
             if (max != '' && count >= max) {
                 $this_parent.append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You have reached limit in free version. Please subscribe to Pro for unlimited access</div>');
                 return false;
-            }
-
-            // Repeater Room Unique ID
-            var room_uniqueid = clone_value.find('.unique-id input');
-            if (typeof room_uniqueid !== "undefined") {
-                clone_value.find('.unique-id input').val(new Date().valueOf() + count);
             }
 
             let repeatDateField = clone_value.find('.tf-field-date');
@@ -1478,8 +1466,8 @@
             $this.addClass('show');
             $this.parent().parent().find('.tf-tab-item-content[data-tab-id = ' + tab_id + ']').addClass('show');
 
-            tfApartmentCalendar();
             tfHotelCalendar();
+            tfApartmentCalendar();
         });
 
     });

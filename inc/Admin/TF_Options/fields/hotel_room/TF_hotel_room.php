@@ -34,6 +34,7 @@ if ( ! class_exists( 'TF_hotel_room' ) ) {
                         </div>
 					<?php endforeach;
 				endif; ?>
+                <a href="<?php echo esc_url(admin_url('post-new.php?post_type=tf_room')); ?>" target="_blank" class="tf-admin-btn tf-btn-secondary"><?php echo esc_html__('Add new room', 'tourfic') ?></a>
             </div>
 			<?php
 		}
