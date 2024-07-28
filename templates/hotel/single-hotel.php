@@ -112,6 +112,11 @@ while ( have_posts() ) : the_post();
 	$video = ! empty( $meta['video'] ) ? $meta['video'] : '';
 	// Room Details
 	$rooms = \Tourfic\Classes\Room\Room::get_hotel_rooms( $post_id );
+
+	// Hotel facilitiles
+	$hotel_facilities = ! empty( $meta['hotel-facilities'] ) ? $meta['hotel-facilities'] : '';
+	$hotel_facilities_categories = ! empty( Helper::tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) : '';
+
 	// FAQ
 	$faqs = ! empty( $meta['faq'] ) ? $meta['faq'] : '';
 	if ( ! empty( $faqs ) && gettype( $faqs ) == "string" ) {

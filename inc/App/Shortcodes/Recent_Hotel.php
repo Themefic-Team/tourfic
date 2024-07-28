@@ -57,7 +57,7 @@ class Recent_Hotel extends \Tourfic\Core\Shortcodes {
 					?>
 				</div>
 
-				<div class="tf-slider-items-wrapper">
+				<div class="tf-slider-items-wrapper" data-slick='{"slidesToShow": <?php echo esc_attr( $slidestoshow ); ?>}'>
 					<?php while ( $hotel_loop->have_posts() ) {
 						$hotel_loop->the_post();
 						$post_id                = get_the_ID();

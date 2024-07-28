@@ -89,7 +89,7 @@ if ( $comments ) {
 		</div>
 		<div class="tf-review-all-info">
 			<ul class="tf-list">
-				<li><i class="fa-solid fa-circle-check"></i><?php esc_html_e("From", "tourfic"); ?> <?php TF_Review::tf_based_on_text( count( $comments ) ); ?></li>
+				<li><i class="fa-solid fa-circle-check"></i><?php esc_html_e("From ", "tourfic"); ?> <?php TF_Review::tf_based_on_text( count( $comments ) ); ?></li>
 			</ul>
 		</div>
 	</div>
@@ -328,7 +328,7 @@ if ( ! empty( $tf_ratings_for ) ) {
             </div>
 		<?php } ?>
 
-        <div class="tf-single-review">
+        <div class="tf-single-review <?php echo esc_attr(get_post_type($post_id)) ?>">
 			<?php
 			if ( $comments ) {
 				foreach ( $comments as $comment ) {

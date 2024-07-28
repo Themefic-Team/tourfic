@@ -56,7 +56,7 @@ class Migrator {
 	function tf_template_3_migrate_data() {
 
 		// Hotel & Tour
-		if ( empty( get_option( 'tf_template_3_migrate_data' ) ) ) {
+		if ( empty( get_option( 'tf_template_3_migrate_data' ) ) || ( !empty( get_option( 'tf_template_3_migrate_data' ) ) &&  get_option( 'tf_template_3_migrate_data' ) < 2 ) ) {
 
 			$options = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
 
@@ -74,6 +74,11 @@ class Migrator {
 				array(
 					"hotel-section"        => "Room",
 					"hotel-section-slug"   => "rooms",
+					"hotel-section-status" => "1"
+				),
+				array(
+					"hotel-section"        => "Facilities",
+					"hotel-section-slug"   => "facilities",
 					"hotel-section-status" => "1"
 				),
 				array(
@@ -242,7 +247,7 @@ class Migrator {
 			update_option( 'tf_settings', $options );
 			wp_cache_flush();
 			flush_rewrite_rules( true );
-			update_option( 'tf_template_3_migrate_data', 1 );
+			update_option( 'tf_template_3_migrate_data', 2 );
 
 		}
 
@@ -386,11 +391,15 @@ class Migrator {
 
 			foreach ( $hotel_locations as $hotel_location ) {
 
-				$old_locations_meta = get_term_meta(
-					$hotel_location->term_id,
-					'category-image-id',
-					true
-				);
+				$old_locations_meta = '';
+				if (!is_array($hotel_location)) {
+					$old_locations_meta = get_term_meta(
+						$hotel_location->term_id,
+						'category-image-id',
+						true
+					);
+				}
+				
 				$new_meta           = [
 					"image" => [
 						"url"         => wp_get_attachment_url( $old_locations_meta ),
@@ -404,11 +413,13 @@ class Migrator {
 					]
 				];
 				// If the meta field for the term does not exist, it will be added.
-				update_term_meta(
-					$hotel_location->term_id,
-					"hotel_location",
-					$new_meta
-				);
+				if ( !is_array( $hotel_location ) ) {
+					update_term_meta(
+						$hotel_location->term_id,
+						"hotel_location",
+						$new_meta
+					);
+				}
 			}
 
 			/** Tour Destinations Image Fix */
@@ -418,27 +429,30 @@ class Migrator {
 			] );
 
 			foreach ( $tour_destinations as $tour_destination ) {
-				$old_term_metadata = get_term_meta( $tour_destination->term_id, 'tour_destination_meta', true )['tour_destination_meta'] ?? null;
-				if ( ! empty( $old_term_metadata ) ) {
-					$image_id = attachment_url_to_postid( $old_term_metadata );
-					$new_meta = [
-						"image" => [
-							"url"         => wp_get_attachment_url( $image_id ),
-							"id"          => $image_id,
-							"width"       => "1920",
-							"height"      => "1080",
-							"thumbnail"   => wp_get_attachment_thumb_url( $image_id ),
-							"alt"         => "",
-							"title"       => "",
-							"description" => ""
-						]
-					];
-					// If the meta field for the term does not exist, it will be added.
-					update_term_meta(
-						$tour_destination->term_id,
-						"tour_destination",
-						$new_meta
-					);
+				if( !is_array($tour_destination)) {
+					$old_term_metadata = get_term_meta( $tour_destination->term_id, 'tour_destination_meta', true )['tour_destination_meta'] ?? null;
+
+					if ( ! empty( $old_term_metadata ) ) {
+						$image_id = attachment_url_to_postid( $old_term_metadata );
+						$new_meta = [
+							"image" => [
+								"url"         => wp_get_attachment_url( $image_id ),
+								"id"          => $image_id,
+								"width"       => "1920",
+								"height"      => "1080",
+								"thumbnail"   => wp_get_attachment_thumb_url( $image_id ),
+								"alt"         => "",
+								"title"       => "",
+								"description" => ""
+							]
+						];
+						// If the meta field for the term does not exist, it will be added.
+						update_term_meta(
+							$tour_destination->term_id,
+							"tour_destination",
+							$new_meta
+						);
+					}
 				}
 			}
 
@@ -500,7 +514,10 @@ class Migrator {
 
 
 			foreach ( $tour_destinations as $tour_destination ) {
-				$old_term_metadata = get_term_meta( $tour_destination->term_id, 'tour_destination', true );
+				$old_term_metadata = '';
+				if (!is_array($tour_destination)) {
+					$old_term_metadata = get_term_meta( $tour_destination->term_id, 'tour_destination', true );
+				}
 
 				if ( ! empty( $old_term_metadata ) ) {
 					if ( isset( $old_term_metadata['image'] ) && is_array( $old_term_metadata['image'] ) ) {
@@ -543,7 +560,10 @@ class Migrator {
 
 
 			foreach ( $hotel_location as $_hotel_location ) {
-				$old_term_metadata = get_term_meta( $_hotel_location->term_id, 'hotel_location', true );
+				$old_term_metadata = '';
+				if (!is_array($tour_destination)) {
+					$old_term_metadata = get_term_meta( $_hotel_location->term_id, 'hotel_location', true );
+				}
 				if ( ! empty( $old_term_metadata ) ) {
 					if ( isset( $old_term_metadata['image'] ) && is_array( $old_term_metadata['image'] ) ) {
 						$old_term_metadata['image'] = $old_term_metadata['image']['url'];
@@ -566,7 +586,10 @@ class Migrator {
 
 
 			foreach ( $hotel_feature as $_hotel_feature ) {
-				$old_term_metadata = get_term_meta( $_hotel_feature->term_id, 'hotel_feature', true );
+				$old_term_metadata = '';
+				if (!is_array($tour_destination)) {
+					$old_term_metadata = get_term_meta( $_hotel_feature->term_id, 'hotel_feature', true );
+				}
 				if ( ! empty( $old_term_metadata ) ) {
 					if ( isset( $old_term_metadata['icon-c'] ) && is_array( $old_term_metadata['icon-c'] ) ) {
 						$old_term_metadata['icon-c'] = $old_term_metadata['icon-c']['url'];

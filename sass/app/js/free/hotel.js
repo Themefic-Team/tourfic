@@ -619,6 +619,21 @@
 
             hotelPopupBooking($this);
         });*/
+
+        // Design 1 - hotel Facilities
+        $('.tf-hotel-facilities-title-area').on("click", function () {
+            var $this = $(this);
+            if (!$this.hasClass("active")) {
+                $(".tf-hotel-facilities-content-area").slideUp(400);
+                $(".tf-hotel-facilities-title-area").removeClass("active");
+                $('.hotel-facilities-icon-down').removeClass("active");
+            }
+            $this.toggleClass("active");
+            $(this).closest('.tf-hotel-facilities-content-area').toggleClass('active');
+            $(this).find('.hotel-facilities-icon-down').toggle();
+            $(this).find('.hotel-facilities-icon-up').toggleClass('active');
+            $this.next().slideToggle();
+        });
     });
 
 })(jQuery, window);

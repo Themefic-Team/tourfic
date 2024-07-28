@@ -199,7 +199,7 @@ use \Tourfic\App\TF_Review;
         <div class="tf-details-right tf-sitebar-widgets">
             <?php if( !empty($meta['nearby-places']) ){ ?>
             <div class="tf-whats-around tf-single-widgets">
-                <h2 class="tf-section-title"><?php echo !empty($meta['section-title']) ? esc_html($meta['section-title']) : esc_html("What’s around?"); ?></h2>
+                <h2 class="tf-section-title"><?php echo !empty($meta['section-title']) ? esc_html($meta['section-title']) : esc_html__("What’s around?", 'tourfic'); ?></h2>
                 <ul>
                     <?php foreach($meta['nearby-places'] as $place){ ?>
                     <li>
@@ -288,7 +288,7 @@ use \Tourfic\App\TF_Review;
                             </span>/ <?php echo wp_kses_post($tf_settings_base); ?></span>
                         </div>
                         <div class="tf-review-all-info">
-                            <p><?php esc_html_e("Excellent", "tourfic"); ?> <span><?php esc_html_e("Total", "tourfic"); ?> <?php TF_Review::tf_based_on_text( count( $comments ) ); ?></span></p>
+                            <p><?php esc_html_e("Excellent", "tourfic"); ?> <span><?php esc_html_e("Total ", "tourfic"); ?> <?php TF_Review::tf_based_on_text( count( $comments ) ); ?></span></p>
                         </div>
                     </div>
                     <div class="tf-review-data-features">

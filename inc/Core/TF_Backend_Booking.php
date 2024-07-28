@@ -154,6 +154,7 @@ abstract class TF_Backend_Booking {
 		echo '<div class="tf-setting-dashboard">';
 		Helper::tf_dashboard_header();
 		$booking_form_class = sprintf( esc_html('tf-backend-%s-booking'), $this->args["name"] );
+		/* translators: %s Service Name. */
 		$booking_form_title = sprintf( esc_html__( 'Add New %s Booking', 'tourfic' ), ucfirst( $this->args["name"] ) );
 
 		// Filters to change booking form title and class

@@ -2230,8 +2230,6 @@ Steps
           font-size: 14px;
           line-height: 16px;
           appearance: none; }
-          .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-setting-field:hover {
-            color: #2271b1; }
           .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-setting-field:active {
             border-color: #8c8f94;
             box-shadow: none; }

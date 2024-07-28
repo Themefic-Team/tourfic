@@ -639,7 +639,7 @@ abstract Class TF_Booking_Details {
                     <!-- Pricing Details -->
                     <div class="customers-order-date details-box">
                         <h4>
-                            <?php esc_html_e(apply_filters( 'tf_' . $this->booking_args["booking_type"] . 'booking_details_pricing_section_title_change',  "Pricing details"), "tourfic" ); ?>
+                            <?php echo esc_html( apply_filters( 'tf_' . $this->booking_args["booking_type"] . 'booking_details_pricing_section_title_change',  __( "Pricing details",  "tourfic"  ))); ?>
                         </h4>
                         <div class="tf-grid-box tf-pricing-grid-box">
 
@@ -736,7 +736,8 @@ abstract Class TF_Booking_Details {
                                 foreach($tf_visitors_details as $visitor){
                             ?>
                             <div class="tf-grid-single">
-                                <h3><?php echo esc_html("Visitor ".$visitor_count, "tourfic"); ?></h3>
+                                <?php /* translators: %s Visitor. */ ?>
+                                <h3><?php echo sprintf( esc_html__("Visitor %s", "tourfic"), $visitor_count ); ?></h3>
                                 <div class="tf-single-box">
                                     <table class="table" cellpadding="0" callspacing="0">
                                         <?php 

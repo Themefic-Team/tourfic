@@ -33,6 +33,7 @@
     }
     .tf-tour-booking-box{
         margin-bottom: 25px;
+        box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
     }
     .tf-hotel-location-map{
         #hotel-location{
@@ -86,11 +87,12 @@
             }
             .tf-availability-table{
                 background-color: #fff;
-                box-shadow: 0px 13px 30px #E0E8EE;
+                box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
                 border-radius: 5px;
                 margin-bottom: 0px;
                 border-collapse: collapse;
                 width: 100%;
+                border-left: none !important;
                 &>thead{
                     background-color: $color-theme;
                     tr{
@@ -112,6 +114,7 @@
                         td{
                             border: 1px solid #ddd;
                             padding: 8px;
+                            border-right: none;
                             .tf-room-preview-img{
                                 width: 170px;
                                 margin-right: 20px;
@@ -184,6 +187,7 @@
                             padding-left: 30px;
                             padding-top: 30px;
                             padding-bottom: 30px;
+                            border-left: 0px;
                             @media #{$tfmax767}{
                                 width: auto;
                             }
@@ -236,7 +240,7 @@
                 padding: 10px;
                 text-transform: capitalize;
                 margin: 5px 5px 5px 0px;
-                box-shadow: 0px 0px 24px 5px #E0E8EE;
+                box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
                 font-size: 15px;
                 i{
                     margin-right: 8px;
@@ -263,17 +267,98 @@
                 padding: 10px;
                 text-transform: capitalize;
                 margin: 5px 5px 5px 0px;
-                box-shadow: 0px 0px 24px 5px #E0E8EE;
+                box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
                 font-size: 15px;
-                i{
-                    margin-right: 8px;
-                }
+                    i{
+                        margin-right: 8px;
+                    }
             }
             @media #{$tfmax767}{
                 grid-template-columns: 100%;
             }
             @media #{$tfmax991}{
                 grid-template-columns: repeat(3, 33%);
+            }
+        }
+    }
+
+    .tf-hotel-facilities-section {
+        .active {
+            display: none;
+        }
+        .tf-hotel-facilities-container {
+            padding: 32px;
+            border-radius: 6px;
+            background: #fff;
+            box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
+
+            .tf-hotel-facilities-title-area {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                cursor: pointer;
+
+                .tf-section-title {
+                    margin-bottom: 0px;
+                }
+
+                i {
+                    font-size: 32px;
+                    color: #0E3DD8;
+                }
+                
+                .hotel-facilities-icon-down {
+                    display: none;
+                }
+            }
+
+            .tf-hotel-facilities-content-area {
+                margin-top: 24px;
+                .hotel-facility-item {
+                    margin-bottom: 24px;
+                    .hotel-single-facility-title {
+                        color: #060D1C;
+                        font-family: inherit;
+                        font-size: 20px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: normal;
+                        margin-bottom: 16px;
+                    }
+
+                    ul {
+                        display: flex;
+                        list-style: none;
+                        flex-wrap: wrap;
+                        vertical-align: baseline;
+                        gap: 16px;
+                        margin: 0px;
+                        padding: 0px;
+
+                        @media #{$tfmax767} {
+                            flex-direction: column;
+                        }
+
+                        li {
+                            display: flex;
+                            color: #686E7A;
+                            font-family: inherit;
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 125%;
+                            vertical-align: baseline;
+
+                            span {
+                                margin-right: 8px;
+
+                                @media #{$tfmax767} {
+                                    min-width: 16px;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -288,7 +373,7 @@
             }
             .tf-ask-enquiry{
                 background-color: #fff;
-                box-shadow: 0px 0px 24px 5px #E0E8EE;
+                box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
                 padding: 30px;
                 h3{
                     font-size: 25px;
@@ -307,7 +392,7 @@
                     .tf-faq-single-inner{
                         margin: 0px 0px 30px 0px;
                         background: #FFFFFF;
-                        box-shadow: 0px 0px 24px 5px #E0E8EE;
+                        box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
                         transition: .3s all ease;
                         &:hover{
                             background: #F6F7FB;
@@ -341,7 +426,7 @@
                 flex-basis: 30%;
                 margin-right: 30px;
                 background-color: #fff;
-                box-shadow: 0px 0px 24px 5px #E0E8EE;
+                box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
                 padding: 30px;
                 @media #{$tfmax991}{
                     flex-basis: 28%;
@@ -393,7 +478,7 @@
             .tf-review-data-features {
                 flex-basis: 68%;
                 background-color: #fff;
-                box-shadow: 0px 0px 24px 5px #E0E8EE;
+                box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
                 padding: 30px;
 
                 @media #{$tfmax767}{

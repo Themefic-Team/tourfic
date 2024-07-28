@@ -23,8 +23,13 @@ class Helper {
 		add_action( 'wp_ajax_nopriv_tf_checkout_cart_item_remove', array( $this, 'tf_checkout_cart_item_remove' ) );
 		add_filter( 'woocommerce_cart_item_subtotal', array( $this, 'tf_remove_icon_add_to_order_item' ), 10, 3 );
 		add_action( 'wp_ajax_tf_month_reports', array( $this, 'tf_month_chart_filter_callback' ) );
+		add_action( 'wp_ajax_nopriv_tf_trigger_tax_filter', array( $this, 'tf_trigger_tax_filter_callback' ) );
+		add_action( 'wp_ajax_tf_trigger_tax_filter', array( $this, 'tf_trigger_tax_filter_callback' ) );
+
+		// tax filter
 		add_action( 'wp_ajax_nopriv_tf_trigger_filter', array( $this, 'tf_search_result_ajax_sidebar' ) );
 		add_action( 'wp_ajax_tf_trigger_filter', array( $this, 'tf_search_result_ajax_sidebar' ) );
+
 		add_action( 'admin_init', array( $this, 'tf_admin_role_caps' ), 999 );
 		add_filter( 'template_include', array( $this, 'taxonomy_template' ) );
 		add_filter( 'comments_template', array( $this, 'load_comment_template' ) );
@@ -345,6 +350,32 @@ class Helper {
 			'type'  => true,
 			'class' => true,
 			'id'    => true,
+			'async' => true,
+			'defer' => true,
+		);
+		$allowed_tags['button'] = array(
+			'class' => true,
+			'id'    => true,
+			'disabled' => true,
+			'data-*' => true,
+			
+		);
+		$allowed_tags['style'] = array(
+			'class' => true,
+			'id'    => true,
+		);
+		
+		$allowed_tags['iframe'] = array(
+			'class' => true,
+			'id'    => true,
+			'allowfullscreen' => true,
+			'frameborder' => true,
+			'src' => true,
+			'style' => true,
+			'width' => true,
+			'height' => true,
+			'title' => true,
+			'allow' => true,
 		);
 
 		$allowed_tags["svg"] = array(
@@ -1163,7 +1194,7 @@ class Helper {
 				}
 				$total_pages = ceil( $total_filtered_results / $post_per_page );
 				if ( $total_pages > 1 ) {
-					echo "<div class='tf_posts_navigation tf_posts_ajax_navigation'>";
+					echo "<div class='tf_posts_navigation tf_posts_ajax_navigation tf_search_ajax_pagination'>";
 					echo wp_kses_post(
 						paginate_links( array(
 							'total'   => $total_pages,
@@ -1185,6 +1216,290 @@ class Helper {
 		wp_reset_postdata();
 
 		die();
+	}
+
+	function tf_trigger_tax_filter_callback() {
+
+		// Check nonce security
+		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tf_ajax_nonce' ) ) {
+			return;
+		}
+
+		$tax_name = !empty( $_POST['tax_name'] ) ? sanitize_text_field( $_POST['tax_name'] ) : '';
+		$term_ids = !empty( $_POST['term_ids'] ) ? explode( ',', sanitize_text_field( $_POST['term_ids'] ) ) : '';
+		$post_type = !empty( $_POST['post_type'] ) ? sanitize_text_field( $_POST['post_type'] ) : 'tf_hotel';
+		$post_per_page = self::tfopt( 'posts_per_page' ) ? self::tfopt( 'posts_per_page' ) : 10;
+		$relation        = self::tfopt( 'search_relation', 'AND' );
+		$filter_relation = self::tfopt( 'filter_relation', 'OR' );
+		$current_page = !empty( $_POST["page"] ) ? sanitize_text_field( $_POST["page"] ) : 1;
+		$filters               = !empty( $_POST['filters'] ) ? explode( ',', sanitize_text_field( $_POST['filters'] ) ) : null;
+		$features              = !empty( $_POST['features'] ) ? explode( ',', sanitize_text_field( $_POST['features'] ) ) : null;
+		$tf_hotel_types        = !empty( $_POST['tf_hotel_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_hotel_types'] ) ) : null;
+		$tour_features         = !empty( $_POST['tour_features'] ) ? explode( ',', sanitize_text_field( $_POST['tour_features'] ) ) : null;
+		$attractions           = !empty( $_POST['attractions'] ) ? explode( ',', sanitize_text_field( $_POST['attractions'] ) ) : null;
+		$activities            = !empty( $_POST['activities'] ) ? explode( ',', sanitize_text_field( $_POST['activities'] ) ) : null;
+		$tf_tour_types         = !empty( $_POST['tf_tour_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_tour_types'] ) ) : null;
+		$tf_apartment_features = !empty( $_POST['tf_apartment_features'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_features'] ) ) : null;
+		$tf_apartment_types    = !empty( $_POST['tf_apartment_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_types'] ) ) : null;
+		$place_taxonomy  = $post_type == 'tf_tours' ? 'tour_destination' : ( $post_type == 'tf_apartment' ? 'apartment_location' : 'hotel_location' );
+		$filter_taxonomy = $post_type == 'tf_tours' ? 'null' : 'hotel_feature';
+
+		
+		$args = array(
+			'post_type'      => $post_type,
+			'post_status'    => 'publish',
+			'posts_per_page' => -1
+		);
+
+		if ( $filters ) {
+			$args['tax_query']['relation'] = $relation;
+
+			if ( $filter_relation == "OR" ) {
+				$args['tax_query'][] = array(
+					'taxonomy' => $filter_taxonomy,
+					'terms'    => $filters,
+				);
+			} else {
+				$args['tax_query']['tf_filters']['relation'] = 'AND';
+
+				foreach ( $filters as $key => $term_id ) {
+					$args['tax_query']['tf_filters'][] = array(
+						'taxonomy' => $filter_taxonomy,
+						'terms'    => array( $term_id ),
+					);
+				}
+			}
+		}
+
+		//Query for the features filter of hotel
+		if ( $features ) {
+			$args['tax_query']['relation'] = $relation;
+
+			if ( $filter_relation == "OR" ) {
+				$args['tax_query'][] = array(
+					'taxonomy' => 'tf_feature',
+					'terms'    => $features,
+				);
+			} else {
+				$args['tax_query']['tf_feature']['relation'] = 'AND';
+
+				foreach ( $filters as $key => $term_id ) {
+					$args['tax_query']['tf_feature'][] = array(
+						'taxonomy' => 'tf_feature',
+						'terms'    => array( $term_id ),
+					);
+				}
+			}
+		}
+
+		//Query for the types filter of hotel
+		if ( $tf_hotel_types ) {
+
+			$args['tax_query']['relation'] = $relation;
+
+			if ( $filter_relation == "OR" ) {
+				$args['tax_query'][] = array(
+					'taxonomy' => 'hotel_type',
+					'terms'    => $tf_hotel_types,
+				);
+			} else {
+				$args['tax_query']['hotel_type']['relation'] = 'AND';
+
+				foreach ( $tf_hotel_types as $key => $term_id ) {
+					$args['tax_query']['hotel_type'][] = array(
+						'taxonomy' => 'hotel_type',
+						'terms'    => array( $term_id ),
+					);
+				}
+			}
+		}
+
+		//Query for the features filter of Tour
+		if ( $tour_features ) {
+			$args['tax_query']['relation'] = $relation;
+
+			if ( $filter_relation == "OR" ) {
+				$args['tax_query'][] = array(
+					'taxonomy' => 'tour_features',
+					'terms'    => $tour_features,
+				);
+			} else {
+				$args['tax_query']['tour_features']['relation'] = 'AND';
+
+				foreach ( $tour_features as $key => $term_id ) {
+					$args['tax_query']['tour_features'][] = array(
+						'taxonomy' => 'tour_features',
+						'terms'    => array( $term_id ),
+					);
+				}
+
+			}
+
+		}
+
+		//Query for the attractions filter of tours
+		if ( $attractions ) {
+			$args['tax_query']['relation'] = $relation;
+
+			if ( $filter_relation == "OR" ) {
+				$args['tax_query'][] = array(
+					'taxonomy' => 'tour_attraction',
+					'terms'    => $attractions,
+				);
+			} else {
+				$args['tax_query']['tour_attraction']['relation'] = 'AND';
+
+				foreach ( $attractions as $key => $term_id ) {
+					$args['tax_query']['tour_attraction'][] = array(
+						'taxonomy' => 'tour_attraction',
+						'terms'    => array( $term_id ),
+					);
+				}
+
+			}
+
+		}
+
+		//Query for the activities filter of tours
+		if ( $activities ) {
+			$args['tax_query']['relation'] = $relation;
+
+			if ( $filter_relation == "OR" ) {
+				$args['tax_query'][] = array(
+					'taxonomy' => 'tour_activities',
+					'terms'    => $activities,
+				);
+			} else {
+				$args['tax_query']['tour_activities']['relation'] = 'AND';
+
+				foreach ( $activities as $key => $term_id ) {
+					$args['tax_query']['tour_activities'][] = array(
+						'taxonomy' => 'tour_activities',
+						'terms'    => array( $term_id ),
+					);
+				}
+
+			}
+
+		}
+
+		//Query for the types filter of tours
+		if ( $tf_tour_types ) {
+			$args['tax_query']['relation'] = $relation;
+
+			if ( $filter_relation == "OR" ) {
+				$args['tax_query'][] = array(
+					'taxonomy' => 'tour_type',
+					'terms'    => $tf_tour_types,
+				);
+			} else {
+				$args['tax_query']['tour_type']['relation'] = 'AND';
+
+				foreach ( $tf_tour_types as $key => $term_id ) {
+					$args['tax_query']['tour_type'][] = array(
+						'taxonomy' => 'tour_type',
+						'terms'    => array( $term_id ),
+					);
+				}
+			}
+		}
+
+		//Query for the features filter of apartments
+		if ( $tf_apartment_features ) {
+			$args['tax_query']['relation'] = $relation;
+
+			if ( $filter_relation == "OR" ) {
+				$args['tax_query'][] = array(
+					'taxonomy' => 'apartment_feature',
+					'terms'    => $tf_apartment_features,
+				);
+			} else {
+				$args['tax_query']['apartment_feature']['relation'] = 'AND';
+
+				foreach ( $tf_apartment_features as $key => $term_id ) {
+					$args['tax_query']['apartment_feature'][] = array(
+						'taxonomy' => 'apartment_feature',
+						'terms'    => array( $term_id ),
+					);
+				}
+			}
+		}
+
+		//Query for the types filter of apartments
+		if ( $tf_apartment_types ) {
+			$args['tax_query']['relation'] = $relation;
+
+			if ( $filter_relation == "OR" ) {
+				$args['tax_query'][] = array(
+					'taxonomy' => 'apartment_type',
+					'terms'    => $tf_apartment_types,
+				);
+			} else {
+				$args['tax_query']['apartment_type']['relation'] = 'AND';
+
+				foreach ( $tf_apartment_types as $key => $term_id ) {
+					$args['tax_query']['apartment_type'][] = array(
+						'taxonomy' => 'apartment_type',
+						'terms'    => array( $term_id ),
+					);
+				}
+			}
+		}
+
+		$loop = new \WP_Query( $args );
+
+		$total_posts = $loop->found_posts;
+		if ( $loop->have_posts() ) {
+			while ( $loop->have_posts() ) {
+
+				$loop->the_post();
+
+				if ( $post_type == 'tf_hotel' ) {
+					tf_hotel_archive_single_item();
+				} else if ( $post_type == 'tf_tours' ) {
+					tf_tour_archive_single_item();
+				} else {
+					tf_apartment_archive_single_item();
+				}
+			}
+
+			// global $wp_rewrite;
+
+			// $base = trailingslashit( get_post_type_archive_link( $post_type ) ) . "{$wp_rewrite->pagination_base}/%#%/";
+
+			// $total_pages = ceil( $total_posts / $post_per_page );
+			// if ( $total_pages > 1 ) {
+			// 	echo "<div class='tf_posts_navigation tf_posts_ajax_navigation tf_tax_posts_navigation'>";
+			// 	echo wp_kses_post(
+			// 		paginate_links( array(
+			// 			'base' => $base,
+			// 			'total'   => $loop->max_num_pages,
+			// 			'current' => max( $current_page, get_query_var( 'paged' ) ),
+			// 			'prev_next' => true,
+			// 		) )
+			// 	);
+			// 	echo "</div>";
+			// }
+		}
+
+		global $wp_rewrite;
+
+		if($total_posts == 0){
+			echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
+		}
+
+		echo "<span hidden=hidden class='tf-posts-count'>";
+		echo ! empty( $total_posts ) ? esc_html( $total_posts ) : 0;
+		echo "</span>";
+		wp_reset_postdata();
+
+		die();
+	}
+
+	function get_current_url() {
+		$protocol = is_ssl() ? 'https://' : 'http://';
+	
+		return ( $protocol ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 	}
 
 	/**

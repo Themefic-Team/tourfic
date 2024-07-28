@@ -16,10 +16,10 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 		extract(
 			shortcode_atts(
 				array(
-					'style'     => 'default', //recomended, populer
+					'style'     => 'default',
 					'type'      => 'all',
-					'title'     => '',  //title populer section
-					'subtitle'  => '',   // Sub title populer section
+					'title'     => '',
+					'subtitle'  => '',
 					'classes'   => '',
 					'fullwidth' => '',
 					'advanced'  => '',
@@ -31,7 +31,7 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 		);
 
 		if ( $style == 'default' ) {
-			$classes = " default-form ";
+			$classes .= " default-form ";
 		}
 
 		$type             = explode( ',', $type );
@@ -53,7 +53,7 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
             <div class="tf_custom-inner">
 
 		<?php endif; ?>
-		<div id="tf-booking-search-tabs" class="<?php echo 2==$design ? esc_attr('tf-shortcode-design-2-tab') : ''; ?>">
+		<div id="tf-booking-search-tabs" class="<?php echo esc_attr($classes) ?> <?php echo 2==$design ? esc_attr('tf-shortcode-design-2-tab') : ''; ?>">
 
 			<?php if ( $title ): ?>
 				<div class="tf_widget-title"><h2><?php echo esc_html( $title ); ?></h2></div>

@@ -4,7 +4,7 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
 
 $tf_booking_type = '1';
-$tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = '';
+$tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = $tf_ext_booking_type = $tf_ext_booking_code = '';
 if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 	$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 	$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
@@ -12,6 +12,8 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 	$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
 	$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
 	$tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
+    $tf_ext_booking_type = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : '1';
+    $tf_ext_booking_code = !empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
 }
 if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 	$external_search_info = array(
@@ -430,11 +432,16 @@ $total_room_option_count = 0;
                             </div>
                         </div>
 					<?php } ?>
-					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' ) || $tf_booking_type == 1 ) : ?>
+					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 ) : ?>
                         <div class="hero-booking">
 							<?php tf_hotel_sidebar_booking_form(); ?>
                         </div>
 					<?php endif; ?>
+                    <?php if( $tf_booking_type == 2 && $tf_ext_booking_type == 2 && !empty( $tf_ext_booking_code )) : ?>
+                        <div id="tf-external-booking-embaded-form" class="hero-booking">
+                            <?php echo wp_kses( $tf_ext_booking_code, Helper::tf_custom_wp_kses_allow_tags() ) ?>
+                        </div>
+                    <?php endif; ?>
 					<?php
 					$places_section_title = ! empty( $meta["section-title"] ) ? $meta["section-title"] : "What's around?";
 					$places_meta          = ! empty( $meta["nearby-places"] ) ? $meta["nearby-places"] : array();
@@ -987,8 +994,12 @@ $total_room_option_count = 0;
 									<?php endif; ?>
                                         <td class="reserve tf-t-c">
                                             <div class="tf-btn">
-												<?php if ( $tf_booking_type == 2 && ! empty( $tf_booking_url ) ): ?>
+												<?php if ( $tf_booking_type == 2 && ! empty( $tf_booking_url ) && $tf_ext_booking_type == 1 ): ?>
                                                     <a href="<?php echo esc_url( $tf_booking_url ); ?>" class="btn-styled tf-sml-btn" target="_blank">
+														<?php esc_html_e( 'Book Now', 'tourfic' ); ?>
+                                                    </a>
+												<?php elseif( $tf_booking_type == 2 && $tf_ext_booking_type == 2 && !empty( $tf_ext_booking_code ) ): ?>
+                                                    <a href="<?php echo esc_url( "#tf-external-booking-embaded-form" ); ?>" class="btn-styled tf-sml-btn" target="_blank">
 														<?php esc_html_e( 'Book Now', 'tourfic' ); ?>
                                                     </a>
 												<?php else: ?>
@@ -1011,6 +1022,75 @@ $total_room_option_count = 0;
         </div>
         <!-- End Room Section -->
 	<?php endif; ?>
+
+    <!-- Start Facilities -->
+     <?php 
+     if( !empty( $hotel_facilities_categories ) && !empty( $hotel_facilities ) ){
+        ?>
+        <div class="tf-hotel-facilities-section tf-template-section">
+            <div class="tf-container">
+            <div class="tf-hotel-facilities-container">
+                <div class="tf-hotel-facilities-title-area active">
+                    <h2 class="section-heading" ><?php echo !empty($meta['facilities-section-title']) ? esc_html($meta['facilities-section-title']) : ''; ?></h2>
+                    <i class="ri-arrow-down-s-line hotel-facilities-icon-down"></i>
+                    <i class="ri-arrow-up-s-line hotel-facilities-icon-up"></i>
+                </div>
+                <div class="tf-hotel-facilities-content-area">
+                    <?php 
+                        $facilities_list = [];
+                        if( !empty($meta['hotel-facilities']) ){
+                            foreach( $meta['hotel-facilities'] as $facility ){
+                                $facilities_list [$facility['facilities-category']] = $facility['facilities-category'];
+                            }
+                        }
+    
+                        if (!empty($facilities_list)) {
+                            foreach($facilities_list as $key => $single_feature ) {
+                                $f_icon_single  = ! empty( $hotel_facilities_categories[$key]['hotel_facilities_cat_icon'] ) ? esc_attr($hotel_facilities_categories[$key]['hotel_facilities_cat_icon']) : '';
+                                ?>
+                                <div class="hotel-facility-item">
+                                    <div class="hotel-single-facility-title">
+                                        <?php echo !empty($hotel_facilities_categories[$key]['hotel_facilities_cat_name']) ? esc_html($hotel_facilities_categories[$key]['hotel_facilities_cat_name']) : ''; ?>
+                                    </div>
+                                    <ul>
+                                        <?php 
+                                        foreach( $hotel_facilities as $facility ) :
+                                            if( $facility['facilities-category'] == $key ) {
+                                                $features_details = !empty( $facility['facilities-feature'] ) ? get_term( $facility['facilities-feature'] ) : '';
+                                                $feature_meta = get_term_meta( $facility['facilities-feature'], 'tf_hotel_feature', true );
+    
+                                                $f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+                                                if ( $f_icon_type == 'fa' && !empty($feature_meta['icon-fa']) ) {
+                                                    $feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
+                                                } else if ( $f_icon_type == 'c' && !empty($feature_meta['icon-c']) ) {
+                                                    $feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
+                                                } else {
+                                                    $feature_icon = '<i class="ri-check-line"></i>';
+                                                }
+    
+                                                if(!empty($features_details->name)) {
+                                                    ?>
+                                                    <li>
+                                                    <span><?php echo !empty($feature_meta) && !empty($feature_icon) ? wp_kses_post($feature_icon) : ''; ?></span> 
+                                                    <?php echo esc_html($features_details->name); ?>
+                                                    </li>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                                <?php
+                            }
+                        }
+                    ?>
+                </div>
+            </div>
+            </div>
+        </div>
+        <?php
+    }
+    ?>
+     <!-- End Facilities -->
 
     <!-- FAQ section Start -->
 	<?php if ( $faqs ): ?>

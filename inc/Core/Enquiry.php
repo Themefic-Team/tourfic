@@ -4,6 +4,8 @@ namespace Tourfic\Core;
 
 defined( 'ABSPATH' ) || exit;
 
+use Tourfic\Classes\Helper;
+
 abstract class Enquiry {
 
 	public function __construct() {
@@ -196,7 +198,7 @@ abstract class Enquiry {
 						$question,
 						sanitize_key( $tf_post_author_id ),
 						$tf_user_roles[0],
-						gmdate( 'Y-m-d H:i:s' )
+						current_time('mysql')
 					)
 				)
 			);

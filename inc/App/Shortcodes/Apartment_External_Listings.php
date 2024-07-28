@@ -60,7 +60,7 @@ class Apartment_External_Listings extends \Tourfic\Core\Shortcodes {
 						$post_loop->the_post();
 						$post_id       = get_the_ID();
 						$post_comments = get_comments( array( 'post_id' => $post_id ) );
-						$meta  = get_post_meta( $post_id, 'tf_apartments_opt', true );
+						$meta  = get_post_meta( $post_id, 'tf_apartment_opt', true );
 
 						if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 							$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
@@ -89,7 +89,7 @@ class Apartment_External_Listings extends \Tourfic\Core\Shortcodes {
 							<div class="tf-slider-item" style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>);">
 								<div class="tf-slider-content">
 									<div class="tf-slider-desc">
-										<h3><a href="<?php echo esc_url($tf_booking_url) ?>" target="_blank"><?php the_title() ?></a></h3>
+										<h3><a href="<?php esc_url(the_permalink()) ?>" target="_blank"><?php the_title() ?></a></h3>
 										<?php if ( $post_comments ) { ?>
 											<div class="tf-slider-rating-star">
 												<i class="fas fa-star"></i> <span style="color:#fff;"><?php echo esc_html( TF_Review::tf_total_avg_rating( $post_comments ) ); ?></span>

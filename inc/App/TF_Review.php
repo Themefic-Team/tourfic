@@ -93,10 +93,18 @@ class TF_Review {
     function tf_save_rating( $comment_id, $comment_approved, $commentdata ) {
 		// Get the post ID from the comment data
         $post_id = $commentdata['comment_post_ID'];
-		// Check nonce security
-		if ( ! isset( $_POST['_wp_unfiltered_html_comment'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_wp_unfiltered_html_comment'])), 'unfiltered-html-comment_' . $post_id ) ) {
-			return;
-		}
+
+        global $current_user;
+        $is_user_logged_in = $current_user->exists();
+        
+        if ( $is_user_logged_in ) {
+
+            if ( ! isset( $_POST['_wp_unfiltered_html_comment'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_wp_unfiltered_html_comment'])), 'unfiltered-html-comment_' . $post_id ) ) {
+                return;
+            }
+
+        }
+
 		if ( ( isset( $_POST[ TF_COMMENT_META ] ) ) && ( '' !== $_POST[ TF_COMMENT_META ] ) ) {
 			$tf_comment_meta = $_POST[ TF_COMMENT_META ];
 			add_comment_meta( $comment_id, TF_COMMENT_META, $tf_comment_meta );
@@ -351,12 +359,25 @@ class TF_Review {
 		$limit = ! empty( Helper::tfopt( 'r-base' ) ) ? Helper::tfopt( 'r-base' ) : 5;
 
 		$html = '<div class="tf-rating-wrapper">';
-		foreach ( $fields as $field ) {
+        $counts = array_count_values($fields);
+        $usage = [];
+		foreach ( $fields as $key => $field ) {
 			if ( empty( $field ) ) {
 				continue;
 			}
 			$html .= '<div class="tf-form-single-rating">';
 			$html .= sprintf( '<label for="rating">%s</label>', $field );
+
+            if ($counts[$field] > 1) {
+                if (isset($usage[$field])) {
+                    $usage[$field]++;
+                } else {
+                    $usage[$field] = 1;
+                }
+                // Append an index to make it unique
+                $field = $field . '_' . $usage[$field];
+            }
+
 			$html .= sprintf( '<div class="ratings-container star' . $limit . '">%s </div>', self::tf_generate_stars( $field ) );
 			$html .= '</div>';
 		}
