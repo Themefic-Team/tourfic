@@ -796,7 +796,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 							//get the lowest price from all available room price
 							$apartment_min_main_price = $apartment_min_price["min"];
 							$apt_disocunt_price = Apt_Pricing::instance()->calculate_discount( get_the_ID(), $apartment_min_price["min"] );
-
+							
 							$lowest_price = wc_price( $apt_disocunt_price );
 							
 							if ( ! empty( $apt_disocunt_price ) && $apt_disocunt_price != $apartment_min_main_price ) {
