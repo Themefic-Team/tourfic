@@ -3479,6 +3479,7 @@ class Helper {
 			$tourfic_separator2 = array_search( 'separator-tourfic2', $menu_order, true );
 			$tourfic_tours      = array_search( 'edit.php?post_type=tf_tours', $menu_order, true );
 			$tourfic_hotel      = array_search( 'edit.php?post_type=tf_hotel', $menu_order, true );
+			$tourfic_hotel_room = array_search( 'edit.php?post_type=tf_room', $menu_order, true );
 			$tourfic_apt        = array_search( 'edit.php?post_type=tf_apartment', $menu_order, true );
 			$tourfic_emails     = array_search( 'edit.php?post_type=tf_email_templates', $menu_order, true );
 			$tourfic_vendor     = array_search( 'tf-multi-vendor', $menu_order, true );
@@ -3498,6 +3499,10 @@ class Helper {
 			if ( ! empty( $tourfic_hotel ) ) {
 				unset( $menu_order[ $tourfic_hotel ] );
 			}
+			
+			if ( ! empty( $tourfic_hotel_room ) && !empty( $tourfic_hotel ) ) {
+				unset( $menu_order[ $tourfic_hotel_room ] );
+			}
 
 			if ( ! empty( $tourfic_vendor ) ) {
 				unset( $menu_order[ $tourfic_vendor ] );
@@ -3514,6 +3519,7 @@ class Helper {
 					$tourfic_menu_order[] = $item;
 					$tourfic_menu_order[] = 'edit.php?post_type=tf_tours';
 					$tourfic_menu_order[] = 'edit.php?post_type=tf_hotel';
+					$tourfic_menu_order[] = 'edit.php?post_type=tf_room';
 					$tourfic_menu_order[] = 'edit.php?post_type=tf_apartment';
 					$tourfic_menu_order[] = 'tf-multi-vendor';
 					$tourfic_menu_order[] = 'edit.php?post_type=tf_email_templates';
