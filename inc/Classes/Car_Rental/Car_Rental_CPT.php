@@ -27,10 +27,10 @@ class Car_Rental_CPT extends \Tourfic\Classes\Post_Type {
 			'rewrite_slug'  => $this->get_carrental_slug(),
 		))->set_tax_args( array(
 			array(
-				'name'          => esc_html__('Model', 'tourfic' ),
-				'singular_name' => esc_html__('Model', 'tourfic' ),
-				'taxonomy'      => 'carrental_model',
-				'rewrite_slug'  => apply_filters( 'tf_carrental_model_slug', 'carrental-model' ),
+				'name'          => esc_html__('Brand', 'tourfic' ),
+				'singular_name' => esc_html__('Brand', 'tourfic' ),
+				'taxonomy'      => 'carrental_brand',
+				'rewrite_slug'  => apply_filters( 'tf_carrental_brand_slug', 'carrental-brand' ),
 				'capability'  => array(
 					'assign_terms' => 'edit_tf_carrental',
 					'edit_terms'   => 'edit_tf_carrental',
@@ -47,10 +47,10 @@ class Car_Rental_CPT extends \Tourfic\Classes\Post_Type {
 				),
 			),
 			array(
-				'name'          => esc_html__('Type', 'tourfic' ),
-				'singular_name' => esc_html__('Type', 'tourfic' ),
-				'taxonomy'      => 'carrental_type',
-				'rewrite_slug'  => apply_filters( 'tf_carrental_type_slug', 'carrental-type' ),
+				'name'          => esc_html__('Category', 'tourfic' ),
+				'singular_name' => esc_html__('Category', 'tourfic' ),
+				'taxonomy'      => 'carrental_category',
+				'rewrite_slug'  => apply_filters( 'tf_carrental_category_slug', 'carrental-category' ),
 				'capability'  => array(
 					'assign_terms' => 'edit_tf_carrental',
 					'edit_terms'   => 'edit_tf_carrental',
