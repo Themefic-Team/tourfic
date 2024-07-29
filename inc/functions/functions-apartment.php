@@ -3,7 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
-use \Tourfic\Classes\Apartment\Pricing;
+use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
 
 /**
  * Flushing Rewrite on Tourfic Activation
@@ -566,7 +566,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 			});
 		}
 
-		$apartment_min_price = get_apartment_min_max_price( get_the_ID() );
+		$apartment_min_price = Apt_Pricing::instance()->get_min_max_price( get_the_ID() );
 
 		$tf_apartment_layout_conditions = ! empty( $meta['tf_single_apartment_layout_opt'] ) ? $meta['tf_single_apartment_layout_opt'] : 'global';
 		if("single"==$tf_apartment_layout_conditions){
@@ -589,19 +589,10 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 						<?php
 							//get the lowest price from all available room price
 							$apartment_min_main_price = $apartment_min_price["min"];
-							if ( ! empty( $discount_type ) && ! empty( $apartment_min_price["min"]  ) && ! empty( $discount ) ) {
-								if ( $discount_type == "percent" ) {
-									$apartment_min_discount = ( $apartment_min_price["min"] * (int) $discount ) / 100;
-									$apartment_min_price    = $apartment_min_price["min"] - $apartment_min_discount;
-								}
-								if ( $discount_type == "fixed" ) {
-									$apartment_min_discount = $discount;
-									$apartment_min_price    = $apartment_min_price["min"] - (int) $apartment_min_discount;
-								}
-							}
+							$apt_disocunt_price = Apt_Pricing::instance()->calculate_discount( get_the_ID(), $apartment_min_price["min"] );
 							$lowest_price = wc_price( $apartment_min_price );
 							
-							if ( ! empty( $apartment_min_discount ) ) {
+							if ( $apt_disocunt_price != $apartment_min_main_price ) {
 								echo "<b>" . esc_html__("From ", "tourfic") . "</b>" . "<del>" . esc_html( wp_strip_all_tags(wc_price( $apartment_min_main_price )) ) . "</del>" . " " . wp_kses_post( $lowest_price );
 							} else {
 								echo esc_html__("From ", "tourfic") . wp_kses_post(wc_price( $apartment_min_main_price ));	;
@@ -804,19 +795,11 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 						<?php
 							//get the lowest price from all available room price
 							$apartment_min_main_price = $apartment_min_price["min"];
-							if ( ! empty( $discount_type ) && ! empty( $apartment_min_price["min"]  ) && ! empty( $discount ) ) {
-								if ( $discount_type == "percent" ) {
-									$apartment_min_discount = ( $apartment_min_price["min"] * (int) $discount ) / 100;
-									$apartment_min_price    = $apartment_min_price["min"] - $apartment_min_discount;
-								}
-								if ( $discount_type == "fixed" ) {
-									$apartment_min_discount = $discount;
-									$apartment_min_price    = $apartment_min_price["min"] - (int) $apartment_min_discount;
-								}
-							}
-							$lowest_price = wc_price( $apartment_min_price );
+							$apt_disocunt_price = Apt_Pricing::instance()->calculate_discount( get_the_ID(), $apartment_min_price["min"] );
+
+							$lowest_price = wc_price( $apt_disocunt_price );
 							
-							if ( ! empty( $apartment_min_discount ) ) {
+							if ( ! empty( $apt_disocunt_price ) && $apt_disocunt_price != $apartment_min_main_price ) {
 								echo "<del>" . esc_html( wp_strip_all_tags(wc_price( $apartment_min_main_price )) ) . "</del>" . " " . wp_kses_post( $lowest_price );
 							} else {
 								echo wp_kses_post(wc_price( $apartment_min_main_price ));	;
