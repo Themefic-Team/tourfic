@@ -61,7 +61,7 @@ if ( ! class_exists( 'TF_select2' ) ) {
 			}
 			echo '</select>';
 			if(!empty($args['query_args'])){
-				echo '<span class="tf-add-category"><i class="fa-solid fa-plus"></i></span>';
+				echo '<span class="tf-add-category" data-value=""><i class="fa-solid fa-plus"></i></span>';
 			}
 
 			echo '</div>';

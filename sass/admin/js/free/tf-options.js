@@ -2484,7 +2484,13 @@ var frame, gframe;
                     parentCategory: parentCategory
                 },
                 success: function (response) {
-                
+                    var data = JSON.parse(response);
+                    console.log(data.insert_category);
+                    if (data.insert_category) {
+                        var newOption = new Option(data.insert_category.title, data.insert_category.id, true, true);
+                        $('#tf_tours_opt_features_').append(newOption).trigger('change');
+                    }
+                    $('#tf-popup-box').hide();
                 }
             });
 

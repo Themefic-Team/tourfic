@@ -649,9 +649,10 @@ class Helper {
 		check_ajax_referer( 'updates', '_nonce' );
 
 		$categoryName = sanitize_title( $_POST['categoryName'] );
-		$categoryTitle = sanitize_title( $_POST['categoryTitle'] );
+		$categoryTitle = sanitize_text_field( $_POST['categoryTitle'] );
 		$parentCategory = sanitize_key( $_POST['parentCategory'] );
 
+		$response = [];
 		if ( !empty($categoryName) && !empty($categoryTitle) ) {
             // Insert the term
             $term = wp_insert_term(
@@ -662,8 +663,14 @@ class Helper {
 					'parent' => !empty($parentCategory) ? intval($parentCategory) : ''
                 )
             );
-		}
+			$insert_Date = array(
+				'id' => $term['term_id'],
+				'title' => get_term_field('name', $term['term_id'], $categoryName)
+			);
 
+			$response ['insert_category'] = $insert_Date;
+		}
+		echo wp_json_encode( $response );
 		die();
 	}
 
