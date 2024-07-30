@@ -60,6 +60,39 @@ if ( ! class_exists( 'TF_select2' ) ) {
 				}
 			}
 			echo '</select>';
+
+			if(!empty($args['query_args'])){
+				echo '<span class="tf-add-category"><i class="fa-solid fa-plus"></i></span>';
+
+				echo '<div class="tf-popup-box">
+					<div class="tf-add-category-box">
+					<div class="tf-add-category-box-header">
+						<h3>Add New Category</h3>
+						<span class="tf-add-category-box-close">
+							<i class="fa-solid fa-xmark"></i>
+						</span>
+					</div>
+
+					<div class="tf-add-category-box-content">
+						<div class="tf-single-category-box">
+							<label>Name</label>
+							<input type="text" id="category_name">
+						</div>
+
+						<div class="tf-single-category-box">
+							<label>Name</label>
+							<select type="text" id="category_name">
+								<option value="1">
+									Hello World
+								</option>
+							</select>
+						</div>
+
+						<button class="tf-category-button">Add</button>
+					</div>
+				</div>
+				</div>';
+			}
 		}
 
 		//sanitize
