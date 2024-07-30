@@ -48,7 +48,7 @@ if ( ! class_exists( 'TF_select2' ) ) {
 			$parent_class = ( ! empty( $this->parent_field ) ) ? 'tf-select2-parent' : 'tf-select2';
 			$parent_class = ( isset( $this->field['select2'] ) ) ? 'tf-select2' : $parent_class ;
 
-			echo '<select name="' . esc_attr($field_name) . '" id="' . esc_attr($tf_select2_unique_id) . '" class=" tf-select-two '.esc_attr($parent_class).' " data-placeholder="' . esc_attr( $placeholder ) . '" ' . esc_attr($multiple) . ' '. wp_kses_post($this->field_attributes()) .'>';
+			echo '<div class="tf-select-box-option"><select name="' . esc_attr($field_name) . '" id="' . esc_attr($tf_select2_unique_id) . '" class=" tf-select-two '.esc_attr($parent_class).' " data-placeholder="' . esc_attr( $placeholder ) . '" ' . esc_attr($multiple) . ' '. wp_kses_post($this->field_attributes()) .'>';
 			if( is_array( $args['options'] )) {
 				foreach ( $args['options'] as $key => $value ) {
 					if(!empty($this->field['multiple']) && is_array( $this->value ) && in_array( $key, $this->value )){
@@ -60,11 +60,13 @@ if ( ! class_exists( 'TF_select2' ) ) {
 				}
 			}
 			echo '</select>';
-
 			if(!empty($args['query_args'])){
 				echo '<span class="tf-add-category"><i class="fa-solid fa-plus"></i></span>';
+			}
 
-				echo '<div class="tf-popup-box">
+			echo '</div>';
+			if(!empty($args['query_args'])){
+				echo '<div id="tf-popup-box">
 					<div class="tf-add-category-box">
 					<div class="tf-add-category-box-header">
 						<h3>Add New Category</h3>
@@ -73,19 +75,25 @@ if ( ! class_exists( 'TF_select2' ) ) {
 						</span>
 					</div>
 
+					<input type="hidden" id="category_name" value="'.$args['query_args']['taxonomy'].'">
+
 					<div class="tf-add-category-box-content">
 						<div class="tf-single-category-box">
 							<label>Name</label>
-							<input type="text" id="category_name">
+							<input type="text" id="category_title">
 						</div>
 
 						<div class="tf-single-category-box">
-							<label>Name</label>
-							<select type="text" id="category_name">
-								<option value="1">
-									Hello World
-								</option>
-							</select>
+							<label>Parent</label>
+							<select id="parent_category">
+							<option value="">--Select--</option>';
+								
+							// Loop through the query_args to populate the select options
+							foreach($args['options'] as $value => $label){
+								echo '<option value="'. htmlspecialchars($value) .'">'. htmlspecialchars($label) .'</option>';
+							}
+
+						echo '</select>
 						</div>
 
 						<button class="tf-category-button">Add</button>

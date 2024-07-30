@@ -58,8 +58,25 @@
   .select2-container--default .select2-selection--single .select2-selection__arrow {
     height: 48px;
   }
+  .tf-select-box-option {
+    display: flex;
+    gap: 8px;
+    .tf-add-category{
+      i{
+        height: 25px;
+        width: 25px;
+        border-radius: 50%;
+        border: 1px solid #ddd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 11px;
+        cursor: pointer;
+      }
+    }
+  }
 
-  .tf-popup-box{
+  #tf-popup-box{
     position: fixed;
     z-index: 900000;
     top: 0;
@@ -70,6 +87,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    display: none;
     &::before{
       position: absolute;
       height: 100%;
@@ -78,8 +96,8 @@
       top: 0;
       content: "";
       background-color: rgba(0,0,0,.2);
-
     }
+
     .tf-add-category-box{
       display: inline-block;
       z-index: 1;

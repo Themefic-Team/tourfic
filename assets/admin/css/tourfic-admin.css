@@ -2496,7 +2496,21 @@ Steps
 .tf-field-select2 .select2-container--default .select2-selection--single .select2-selection__arrow {
   height: 48px; }
 
-.tf-field-select2 .tf-popup-box {
+.tf-field-select2 .tf-select-box-option {
+  display: flex;
+  gap: 8px; }
+  .tf-field-select2 .tf-select-box-option .tf-add-category i {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 11px;
+    cursor: pointer; }
+
+.tf-field-select2 #tf-popup-box {
   position: fixed;
   z-index: 900000;
   top: 0;
@@ -2506,8 +2520,9 @@ Steps
   text-align: center;
   display: flex;
   align-items: center;
-  justify-content: center; }
-  .tf-field-select2 .tf-popup-box::before {
+  justify-content: center;
+  display: none; }
+  .tf-field-select2 #tf-popup-box::before {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -2515,7 +2530,7 @@ Steps
     top: 0;
     content: "";
     background-color: rgba(0, 0, 0, 0.2); }
-  .tf-field-select2 .tf-popup-box .tf-add-category-box {
+  .tf-field-select2 #tf-popup-box .tf-add-category-box {
     display: inline-block;
     z-index: 1;
     min-width: 300px;
@@ -2525,19 +2540,19 @@ Steps
     text-align: left;
     background: #ffffff;
     position: relative; }
-    .tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-header {
+    .tf-field-select2 #tf-popup-box .tf-add-category-box .tf-add-category-box-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid #ccd0d4;
       margin: 0;
       padding: 15px; }
-      .tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-header h3 {
+      .tf-field-select2 #tf-popup-box .tf-add-category-box .tf-add-category-box-header h3 {
         font-size: 14px;
         line-height: 1em;
         margin: 0;
         padding: 0; }
-      .tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-header .tf-add-category-box-close {
+      .tf-field-select2 #tf-popup-box .tf-add-category-box .tf-add-category-box-header .tf-add-category-box-close {
         background: #b4b9be;
         height: 25px;
         width: 25px;
@@ -2546,26 +2561,26 @@ Steps
         align-items: center;
         justify-content: center;
         cursor: pointer; }
-        .tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-header .tf-add-category-box-close i {
+        .tf-field-select2 #tf-popup-box .tf-add-category-box .tf-add-category-box-header .tf-add-category-box-close i {
           color: #fff; }
-    .tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-content {
+    .tf-field-select2 #tf-popup-box .tf-add-category-box .tf-add-category-box-content {
       padding: 15px; }
-      .tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-content .tf-single-category-box {
+      .tf-field-select2 #tf-popup-box .tf-add-category-box .tf-add-category-box-content .tf-single-category-box {
         margin-bottom: 15px; }
-        .tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-content .tf-single-category-box label {
+        .tf-field-select2 #tf-popup-box .tf-add-category-box .tf-add-category-box-content .tf-single-category-box label {
           display: block;
           margin-bottom: 10px; }
-        .tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-content .tf-single-category-box input {
+        .tf-field-select2 #tf-popup-box .tf-add-category-box .tf-add-category-box-content .tf-single-category-box input {
           width: 100%;
           height: 35px;
           border: 1px solid #ddd;
           border-radius: 5px; }
-        .tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-content .tf-single-category-box select {
+        .tf-field-select2 #tf-popup-box .tf-add-category-box .tf-add-category-box-content .tf-single-category-box select {
           width: 100%;
           height: 35px;
           border: 1px solid #ddd;
           border-radius: 5px; }
-      .tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-content .tf-category-button {
+      .tf-field-select2 #tf-popup-box .tf-add-category-box .tf-add-category-box-content .tf-category-button {
         text-transform: capitalize;
         background-color: #003c79;
         border-color: #003c79;

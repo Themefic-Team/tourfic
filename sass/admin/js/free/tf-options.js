@@ -2449,6 +2449,47 @@ var frame, gframe;
 
 
         });
+
+        // Select 2 add new category
+        $(document).on('click', '.tf-add-category i', function (event) { 
+            event.preventDefault();
+            $this = $(this);
+            parentDiv = $this.closest('.tf-fieldset');
+            parentDiv.children('#tf-popup-box').css('display', 'flex');
+        });
+
+        // Close Popup
+        $(document).on('click', '.tf-add-category-box-close', function (event) { 
+            event.preventDefault();
+            $('#tf-popup-box').hide();
+        });
+
+        // Create Category
+        $(document).on('click', '.tf-category-button', function (event) { 
+            event.preventDefault();
+            $this = $(this);
+            parentDiv = $this.closest('.tf-add-category-box');
+            let categoryName = parentDiv.find('#category_name').val();
+            let categoryTitle = parentDiv.find('#category_title').val();
+            let parentCategory = parentDiv.find('#parent_category').val();
+
+            $.ajax({
+                url: tf_options.ajax_url,
+                method: 'POST',
+                data: {
+                    action: 'tf_insert_category_data',
+                    _nonce: tf_admin_params.tf_nonce,
+                    categoryName: categoryName,
+                    categoryTitle: categoryTitle,
+                    parentCategory: parentCategory
+                },
+                success: function (response) {
+                
+                }
+            });
+
+        });
+
     });
 
 })(jQuery);

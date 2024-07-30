@@ -25,6 +25,8 @@ class Helper {
 		add_action( 'wp_ajax_tf_month_reports', array( $this, 'tf_month_chart_filter_callback' ) );
 		add_action( 'wp_ajax_nopriv_tf_trigger_filter', array( $this, 'tf_search_result_ajax_sidebar' ) );
 		add_action( 'wp_ajax_tf_trigger_filter', array( $this, 'tf_search_result_ajax_sidebar' ) );
+		add_action( 'wp_ajax_tf_insert_category_data', array( $this, 'tf_insert_category_data_callback' ) );
+
 		add_action( 'admin_init', array( $this, 'tf_admin_role_caps' ), 999 );
 		add_filter( 'template_include', array( $this, 'taxonomy_template' ) );
 		add_filter( 'comments_template', array( $this, 'load_comment_template' ) );
@@ -636,6 +638,35 @@ class Helper {
 
 		die();
 	}
+
+	/**
+	 * Insert Category Data
+	 *
+	 * @author Jahid
+	 */
+	function tf_insert_category_data_callback() {
+		//Verify Nonce
+		check_ajax_referer( 'updates', '_nonce' );
+
+		$categoryName = sanitize_title( $_POST['categoryName'] );
+		$categoryTitle = sanitize_title( $_POST['categoryTitle'] );
+		$parentCategory = sanitize_key( $_POST['parentCategory'] );
+
+		if ( !empty($categoryName) && !empty($categoryTitle) ) {
+            // Insert the term
+            $term = wp_insert_term(
+                $categoryTitle,   // The term
+                $categoryName, // The taxonomy
+                array(
+                    'slug'   => sanitize_title($categoryTitle),
+					'parent' => !empty($parentCategory) ? intval($parentCategory) : ''
+                )
+            );
+		}
+
+		die();
+	}
+
 
 	/**
 	 * Search Result Sidebar check availability
