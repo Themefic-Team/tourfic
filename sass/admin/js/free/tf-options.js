@@ -2472,6 +2472,7 @@ var frame, gframe;
             let categoryName = parentDiv.find('#category_name').val();
             let categoryTitle = parentDiv.find('#category_title').val();
             let parentCategory = parentDiv.find('#parent_category').val();
+            let categorySelect = parentDiv.find('#category_select_field_name').val();
 
             $.ajax({
                 url: tf_options.ajax_url,
@@ -2487,10 +2488,17 @@ var frame, gframe;
                     var data = JSON.parse(response);
                     console.log(data.insert_category);
                     if (data.insert_category) {
+                        // Store to List and Selected
                         var newOption = new Option(data.insert_category.title, data.insert_category.id, true, true);
-                        $('#tf_tours_opt_features_').append(newOption).trigger('change');
+                        $('#'+categorySelect).append(newOption).trigger('change');
+
+                        // Store to Popup List
+                        var newPopuOption = new Option(data.insert_category.title, data.insert_category.id, false, false);
+                        parentDiv.find('#parent_category').append(newPopuOption).trigger('change');
                     }
                     $('#tf-popup-box').hide();
+                    parentDiv.find('#category_title').val('');
+                    parentDiv.find('#parent_category').val('');
                 }
             });
 

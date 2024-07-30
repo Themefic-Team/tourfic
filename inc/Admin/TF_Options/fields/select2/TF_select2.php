@@ -76,6 +76,8 @@ if ( ! class_exists( 'TF_select2' ) ) {
 					</div>
 
 					<input type="hidden" id="category_name" value="'.$args['query_args']['taxonomy'].'">
+					<input type="hidden" id="category_select_field_name" value="'. esc_attr($tf_select2_unique_id) .'">
+
 
 					<div class="tf-add-category-box-content">
 						<div class="tf-single-category-box">
