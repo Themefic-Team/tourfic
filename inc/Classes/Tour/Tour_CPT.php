@@ -22,7 +22,7 @@ class Tour_CPT extends \Tourfic\Classes\Post_Type {
 			'name'          => esc_html__( 'Tours', 'tourfic' ),
 			'singular_name' => esc_html__( 'Tour', 'tourfic' ),
 			'slug'          => 'tf_tours',
-			'menu_icon'     => 'dashicons-location-alt',
+			'menu_icon'     => TF_ASSETS_ADMIN_URL . 'images/icons/Tours.svg',
 			'menu_position' => 26.3,
 			'supports'      => apply_filters( 'tf_tours_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
 			'capability'    => array( 'tf_tours', 'tf_tourss' ),
