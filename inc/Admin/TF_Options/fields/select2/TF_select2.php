@@ -60,12 +60,12 @@ if ( ! class_exists( 'TF_select2' ) ) {
 				}
 			}
 			echo '</select>';
-			if(!empty($args['query_args'])){
+			if(!empty($args['query_args']) && $args['inline_add_new']){
 				echo '<span class="tf-add-category" data-value=""><i class="fa-solid fa-plus"></i></span>';
 			}
-
 			echo '</div>';
-			if(!empty($args['query_args'])){
+			
+			if(!empty($args['query_args']) && $args['inline_add_new']){
 				echo '<div id="tf-popup-box">
 					<div class="tf-add-category-box">
 					<div class="tf-add-category-box-header">

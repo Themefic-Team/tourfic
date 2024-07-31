@@ -257,6 +257,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						'hide_empty' => false,
 					),
 					'default'    => 'none',
+					'inline_add_new' => true
 				),
 				array(
 					'id'    => 'tf-pro-notice',

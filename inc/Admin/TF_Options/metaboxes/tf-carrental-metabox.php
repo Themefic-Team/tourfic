@@ -176,6 +176,19 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					],
 					'field_width' => 50
 				),
+				array(
+					'id'         => 'brands',
+					'type'       => 'select2',
+					'multiple'   => true,
+					'label'      => __( 'Select Brands', 'tourfic' ),
+					'options'    => 'terms',
+					'query_args' => array(
+						'taxonomy'   => 'carrental_brand',
+						'hide_empty' => false,
+					),
+					'default'    => 'none',
+					'inline_add_new' => true
+				),
                 array(
 					'id'       => 'pay_pickup',
 					'type'     => 'switch',
