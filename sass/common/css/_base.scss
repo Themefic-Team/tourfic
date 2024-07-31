@@ -203,8 +203,14 @@ table.tf-table {
 .tf-flex-space-bttn{
     justify-content: space-between;
 }
+.tf-flex-justify-center{
+    justify-content: center;
+}
 .tf-flex-align-center{
     align-items: center;
+}
+.tf-flex-direction-column{
+    flex-direction: column;
 }
 .tf-flex-align-top{
     align-items: flex-start;

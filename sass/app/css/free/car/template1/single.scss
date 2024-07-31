@@ -1,0 +1,42 @@
+.tf-single-car-section{
+    .tf-single-car-details-warper{
+        padding: 32px 0;
+        .tf-car-details-column{
+            width: calc(100% - 480px);
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            .tf-details-menu{
+                ul{
+                    li{
+                        display: inline-block;
+                        a{
+                            text-decoration: none;
+                            color: #27333F;
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 150%; /* 24px */
+                            padding: 0 8px 8px 8px;
+                            display: inline-block;
+                        }
+                        &.active{
+                            a{
+                                color: #0866C4;
+                                border-bottom: 2px solid #0866C4;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .tf-short-description{
+                color: #566676;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 150%; /* 24px */
+            }
+        }
+    }
+}

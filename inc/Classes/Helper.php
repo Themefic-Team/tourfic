@@ -1486,6 +1486,23 @@ class Helper {
 			}
 		}
 
+		/**
+		 * Car Single
+		 *
+		 * single-car.php
+		 */
+		if ( $post->post_type == 'tf_carrental' ) {
+
+			$theme_files     = array( 'tourfic/car/single-car.php' );
+			$exists_in_theme = locate_template( $theme_files, false );
+
+			if ( $exists_in_theme ) {
+				return $exists_in_theme;
+			} else {
+				return TF_TEMPLATE_PATH . "car/single-car.php";
+			}
+		}
+
 		return $single_template;
 	}
 

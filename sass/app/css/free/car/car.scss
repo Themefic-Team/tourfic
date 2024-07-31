@@ -1,0 +1,39 @@
+.tf-single-car-section{
+    .tf-car-template-container{
+        max-width: 1140px;
+        margin: 0 auto;
+    }
+    .tf-single-car-banner{
+        background: #B8C5D2;
+        height: 350px;
+        .tf-banner-content{
+            height: 100%;
+            h1{
+                color: #FFF;
+                text-align: center;
+                font-size: 38px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 120%; /* 45.6px */
+            }
+            .breadcrumb{
+                ul{
+                    li{
+                        color: #FFF;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 150%; /* 24px */
+                        display: inline-block;
+                        a{
+                            text-decoration: none;
+                            color: #FFF;
+                            font-size: 16px;
+                            font-weight: 400;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
