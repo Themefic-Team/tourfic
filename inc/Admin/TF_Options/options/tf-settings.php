@@ -9,7 +9,7 @@ use \Tourfic\App\TF_Review;
 if ( file_exists( TF_ADMIN_PATH . 'TF_Options/options/tf-menu-icon.php' ) ) {
 	require_once TF_ADMIN_PATH . 'TF_Options/options/tf-menu-icon.php';
 } else {
-	$menu_icon = TF_ASSETS_ADMIN_URL . 'images/icons/tourfic-settings.svg';
+	// $menu_icon = TF_ASSETS_ADMIN_URL . 'images/icons/tourfic-settings.svg';
 }
 
 if ( !function_exists( 'tf_search_page_default' ) ) {
@@ -54,7 +54,7 @@ if ( ! function_exists( 'tf_wishlist_page_default') ) {
 
 TF_Settings::option( 'tf_settings', array(
 	'title'    => __( 'Tourfic Settings ', 'tourfic' ),
-	'icon'     => TF_ASSETS_ADMIN_URL . 'images/icons/tourfic-settings.svg',
+	'icon'     => $menu_icon,
 	'position' => 26,
 	'sections' => array(
 		'general'               => array(
