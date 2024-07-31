@@ -48,6 +48,7 @@ class Helper {
 		add_action( 'admin_menu', array( $this, 'tourfic_admin_menu_seperator' ) );
 		add_filter( 'menu_order', array( $this, 'tourfic_admin_menu_order_change' ) );
 		add_filter( 'custom_menu_order', '__return_true' );
+		add_action( 'admin_menu', array( $this, 'tf_car_texonomy_sidebar_metabox' ) );
 	}
 
 	static function tfopt( $option = '', $default = null ) {
@@ -672,6 +673,16 @@ class Helper {
 		}
 		echo wp_json_encode( $response );
 		die();
+	}
+
+	/**
+	 * Car Sidebar Texonomy Removed
+	 *
+	 * @author Jahid
+	 */
+
+	function tf_car_texonomy_sidebar_metabox() {
+		remove_meta_box('carrental_branddiv', 'tf_carrental', 'side');
 	}
 
 
