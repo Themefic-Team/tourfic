@@ -1004,6 +1004,7 @@ class Enqueue {
 			wp_enqueue_style( 'tf-remixicon', '//cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css', array(), TF_VERSION );
 			wp_enqueue_style( 'tf-select2', '//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css', array(), TF_VERSION );
 			wp_enqueue_style( 'tf-flatpickr', '//cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css', array(), TF_VERSION );
+			wp_enqueue_style( 'wp-color-picker' );
 		}
 
 		//Js
@@ -1062,10 +1063,8 @@ class Enqueue {
 			}
 			wp_enqueue_media();
 			wp_enqueue_editor();
+			wp_enqueue_script( 'wp-color-picker' );
 		}
-
-		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_script( 'wp-color-picker' );
 
 		$tf_google_map = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : "false";
 		wp_localize_script( 'tf-admin', 'tf_options', array(
