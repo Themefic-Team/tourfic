@@ -324,9 +324,11 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 = 2.12.10 - 01 August 2024 =
 
-- Improvement: Tourfic Menu Icons Updated
+- Improvement: Tourfic menu icons updated
 - Improvement: Availability pricing issue
-- Improvement: Compatible with UACF7 and BEAF plugins
+- Compatible with UACF7 and BEAF plugins
+- Compatible with Elementor 3.23.3
+- Compatible with WooCommerce 9.1.4
 
 = 2.12.9 - 17 July 2024 =
 
