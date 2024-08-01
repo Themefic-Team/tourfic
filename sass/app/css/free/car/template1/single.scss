@@ -89,6 +89,65 @@
                     }
                 }
             }
+            .tf-car-specification{
+                width: 100%;
+                ul{
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                    gap: 16px;
+                    li{
+                        color: #566676;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 150%; /* 24px */
+                        width: calc(50% - 8px);
+                        border-bottom: 1px solid #DFE6ED;
+                        span.label{
+                            color: #27333F;
+                            padding: 8px 16px;
+                        }
+                        span.value{
+                            padding: 8px 16px;
+                        }
+                    }
+                }
+            }
+
+            .tf-car-faq-section{
+                width: 100%;
+                .tf-faq-col{
+                    margin-bottom: 16px;
+                    &:last-child{
+                        margin-bottom: 0px;
+                    }
+                    .tf-faq-head{
+                        border-radius: 8px;
+                        background: #FFF;
+                        padding: 8px 16px;
+                        cursor: pointer;
+                        span{
+                            color:#27333F;
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 150%; /* 24px */
+                            i{
+                                color: #566676;
+                            }
+                        }
+                    }
+                    .tf-question-desc{
+                        color:#27333F;
+                        font-size: 15px;
+                        padding: 8px 16px;
+                        display: none;
+                    }
+                }
+            }
         }
     }
 }

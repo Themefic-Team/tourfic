@@ -94,10 +94,97 @@ get_header();
                             </svg>
                                 Most popular fuel policy
                             </li>
+                            <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 5L5.83332 14.1667L1.66666 10M18.3333 8.33333L12.0833 14.5833L10.8333 13.3333" stroke="#566676" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                                Most popular fuel policy
+                            </li>
+                            <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 5L5.83332 14.1667L1.66666 10M18.3333 8.33333L12.0833 14.5833L10.8333 13.3333" stroke="#566676" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                                Most popular fuel policy
+                            </li>
                             
                         </ul>
                     </div>
 
+                    <div class="tf-car-specification">
+                        <h3><?php esc_html_e("Specification", "tourfic"); ?></h3>
+
+                        <ul>
+                            <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
+                                <span class="label">Make</span>
+                                <span class="value">Hundai</span>
+                            </li>
+                            <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
+                                <span class="label">Engine(CM3)</span>
+                                <span class="value">1500</span>
+                            </li>
+                            <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
+                                <span class="label">Make</span>
+                                <span class="value">Hundai</span>
+                            </li>
+                            <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
+                                <span class="label">Engine(CM3)</span>
+                                <span class="value">1500</span>
+                            </li>
+                            <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
+                                <span class="label">Make</span>
+                                <span class="value">Hundai</span>
+                            </li>
+                            <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
+                                <span class="label">Engine(CM3)</span>
+                                <span class="value">1500</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="tf-car-location">
+                        <h3><?php esc_html_e("Location", "tourfic"); ?></h3>
+                    </div>
+
+
+                    <div class="tf-car-faq-section">
+                        <h3><?php esc_html_e("FAQ’s", "tourfic"); ?></h3>
+
+                        <div class="tf-faq-col">
+                            <div class="tf-faq-head">
+                                <span class="tf-flex tf-flex-space-bttn tf-flex-align-center">
+                                How long does it take to recharge a Volt?
+                                <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </div>
+                            <div class="tf-question-desc">
+                                The car rental company will have the car filled with fuel for you and you have to return the car with a full tank. The car rental company will charge you for every missing quarter of a tank and a refueling fee might apply. A fuel deposit might be required, which will be refunded at the end of the rental if the car is returned with a full tank of fuel.
+                            </div>
+                        </div>
+
+                        <div class="tf-faq-col">
+                            <div class="tf-faq-head">
+                                <span class="tf-flex tf-flex-space-bttn tf-flex-align-center">
+                                How long does it take to recharge a Volt?
+                                <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </div>
+                            <div class="tf-question-desc">
+                                The car rental company will have the car filled with fuel for you and you have to return the car with a full tank. The car rental company will charge you for every missing quarter of a tank and a refueling fee might apply. A fuel deposit might be required, which will be refunded at the end of the rental if the car is returned with a full tank of fuel.
+                            </div>
+                        </div>
+                        <div class="tf-faq-col">
+                            <div class="tf-faq-head">
+                                <span class="tf-flex tf-flex-space-bttn tf-flex-align-center">
+                                How long does it take to recharge a Volt?
+                                <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </div>
+                            <div class="tf-question-desc">
+                                The car rental company will have the car filled with fuel for you and you have to return the car with a full tank. The car rental company will charge you for every missing quarter of a tank and a refueling fee might apply. A fuel deposit might be required, which will be refunded at the end of the rental if the car is returned with a full tank of fuel.
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
 
                 <div class="tf-car-booking-form">
