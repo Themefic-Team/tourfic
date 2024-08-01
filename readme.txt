@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.6
-Stable tag: 2.12.9
+Stable tag: 2.12.10
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -321,6 +321,12 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.12.10 - 01 August 2024 =
+
+- Improvement: Tourfic Menu Icons Updated
+- Improvement: Availability pricing issue
+- Improvement: Compatible with UACF7 and BEAF plugins
 
 = 2.12.9 - 17 July 2024 =
 
