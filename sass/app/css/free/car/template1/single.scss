@@ -1,6 +1,8 @@
 .tf-single-car-section{
     .tf-single-car-details-warper{
         padding: 32px 0;
+        display: flex;
+        gap: 40px;
         .tf-car-details-column{
             width: calc(100% - 480px);
             display: flex;
@@ -206,6 +208,35 @@
                         font-size: 15px;
                         padding: 8px 16px;
                         display: none;
+                    }
+                }
+            }
+        }
+
+        .tf-car-booking-form{
+            width: 440px;
+
+            .tf-driver-details{
+                border-radius: 16px;
+                background: #E6F2FE;
+                padding: 24px;
+                .tf-driver-details-header{
+                    h3{
+                        color: #27333F;
+                        font-size: 21px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 150%; /* 31.5px */
+                    }
+                    span{
+                        color: #288FF6;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 150%; /* 24px */
+                        i{
+                            color: #288FF6;
+                        }
                     }
                 }
             }

@@ -240,7 +240,14 @@ get_header();
                 </div>
 
                 <div class="tf-car-booking-form">
-
+                    <div class="tf-driver-details">
+                        <div class="tf-driver-details-header tf-flex tf-flex-space-bttn tf-flex-align-center">
+                            <h3>Driver details</h3>
+                            <span>
+                            <i class="ri-shield-check-line"></i> Verified
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
