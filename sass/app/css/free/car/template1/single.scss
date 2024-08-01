@@ -15,6 +15,30 @@
                 line-height: 150%; /* 31.5px */
                 margin-bottom: 16px;
             }
+
+            .tf-car-hero-gallery{
+                width: 100%;
+                .tf-featured-car{
+                    border-radius: 16px;
+                    img{
+                        border-radius: 16px;
+                        height: 338px;
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                }
+                .tf-gallery{
+                    margin-top: 15px;
+                    a{
+                        width: 25%;
+                        img{
+                            border-radius: 8px;
+                        }
+                    }
+                }
+            }
+
+
             .tf-details-menu{
                 ul{
                     li{
@@ -117,6 +141,17 @@
                 }
             }
 
+            .tf-car-location{
+                width: 100%;
+                .tf-car-location-map{
+                    border-radius: 8px;
+                    background: #EEF2F6;
+                    height: 260px;
+                    width: 100%;
+                }
+            }
+
+
             .tf-car-faq-section{
                 width: 100%;
                 .tf-faq-col{
@@ -146,6 +181,47 @@
                         padding: 8px 16px;
                         display: none;
                     }
+                }
+            }
+        }
+    }
+    .tf-car-conditions-section{
+        padding-bottom: 100px;
+        h3{
+            color: #27333F;
+            font-size: 21px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%; /* 31.5px */
+            margin-bottom: 16px;
+        }
+        table{
+            border-left: 1px solid #DFE6ED;
+            border-top: 1px solid #DFE6ED;
+            margin: 0px;
+            tr{
+                th{
+                    color: #27333F;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 150%; /* 24px */
+                    border-right: 1px solid #DFE6ED;
+                    border-bottom: 1px solid #DFE6ED;
+                    padding: 16px;
+                    vertical-align: baseline;
+                    text-align: left;
+                    width: 210px;
+                }
+                td{
+                    color: #566676;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 150%; /* 24px */
+                    border-right: 1px solid #DFE6ED;
+                    border-bottom: 1px solid #DFE6ED;
+                    padding: 16px 40px;
                 }
             }
         }

@@ -26,6 +26,27 @@ get_header();
             <div class="tf-single-car-details-warper">
                 <div class="tf-car-details-column">
 
+                    <div class="tf-car-hero-gallery">
+                        <div class="tf-featured-car">
+                            <img src="<?php echo esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>" alt="<?php esc_html_e( 'Car Image', 'tourfic' ); ?>">
+                        </div>
+
+                        <div class="tf-gallery tf-flex tf-flex-gap-16">
+                            <a href="#" id="tour-gallery" data-fancybox="tour-gallery">
+                                <img src="<?php echo esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>">
+                            </a>
+                            <a href="#" id="tour-gallery" data-fancybox="tour-gallery">
+                                <img src="<?php echo esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>">
+                            </a>
+                            <a href="#" id="tour-gallery" data-fancybox="tour-gallery">
+                                <img src="<?php echo esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>">
+                            </a>
+                            <a class="tf-gallery-more" href="#" id="tour-gallery" data-fancybox="tour-gallery">
+                                <img src="<?php echo esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>">
+                            </a>
+                        </div>
+                    </div>
+
                     <div class="tf-details-menu">
                         <ul>
                             <li class="active">
@@ -106,6 +127,24 @@ get_header();
                             </svg>
                                 Most popular fuel policy
                             </li>
+                            <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 5L5.83332 14.1667L1.66666 10M18.3333 8.33333L12.0833 14.5833L10.8333 13.3333" stroke="#566676" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                                Most popular fuel policy
+                            </li>
+                            <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 5L5.83332 14.1667L1.66666 10M18.3333 8.33333L12.0833 14.5833L10.8333 13.3333" stroke="#566676" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                                Most popular fuel policy
+                            </li>
+                            <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 5L5.83332 14.1667L1.66666 10M18.3333 8.33333L12.0833 14.5833L10.8333 13.3333" stroke="#566676" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                                Most popular fuel policy
+                            </li>
                             
                         </ul>
                     </div>
@@ -143,6 +182,10 @@ get_header();
 
                     <div class="tf-car-location">
                         <h3><?php esc_html_e("Location", "tourfic"); ?></h3>
+
+                        <div class="tf-car-location-map">
+
+                        </div>
                     </div>
 
 
@@ -190,6 +233,20 @@ get_header();
                 <div class="tf-car-booking-form">
 
                 </div>
+            </div>
+
+            <div class="tf-car-conditions-section">
+                <h3><?php esc_html_e("Terms & Conditions", "tourfic"); ?></h3>
+                <table>
+                    <tr>
+                        <th>Fuel Policy</th>
+                        <td>The car rental company will have the car filled with fuel for you and you have to return the car with a full tank. The car rental company will charge you for every missing quarter of a tank and a refueling fee might apply. A fuel deposit might be required, which will be refunded at the end of the rental if the car is returned with a full tank of fuel.</td>
+                    </tr>
+                    <tr>
+                        <th>Driver requirements</th>
+                        <td>Rentals originating in British Columbia may only be driven in the provinces of British Columbia and Alberta and the state of Washington.</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

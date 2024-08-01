@@ -13051,6 +13051,21 @@ html {
       line-height: 150%;
       /* 31.5px */
       margin-bottom: 16px; }
+    .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery {
+      width: 100%; }
+      .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car {
+        border-radius: 16px; }
+        .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car img {
+          border-radius: 16px;
+          height: 338px;
+          width: 100%;
+          object-fit: cover; }
+      .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery {
+        margin-top: 15px; }
+        .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a {
+          width: 25%; }
+          .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a img {
+            border-radius: 8px; }
     .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-details-menu ul li {
       display: inline-block; }
       .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-details-menu ul li a {
@@ -13132,6 +13147,13 @@ html {
             padding: 8px 16px; }
           .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-specification ul li span.value {
             padding: 8px 16px; }
+    .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-location {
+      width: 100%; }
+      .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-location .tf-car-location-map {
+        border-radius: 8px;
+        background: #EEF2F6;
+        height: 260px;
+        width: 100%; }
     .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-faq-section {
       width: 100%; }
       .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-faq-section .tf-faq-col {
@@ -13157,6 +13179,44 @@ html {
           font-size: 15px;
           padding: 8px 16px;
           display: none; }
+
+.tf-single-car-section .tf-car-conditions-section {
+  padding-bottom: 100px; }
+  .tf-single-car-section .tf-car-conditions-section h3 {
+    color: #27333F;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    /* 31.5px */
+    margin-bottom: 16px; }
+  .tf-single-car-section .tf-car-conditions-section table {
+    border-left: 1px solid #DFE6ED;
+    border-top: 1px solid #DFE6ED;
+    margin: 0px; }
+    .tf-single-car-section .tf-car-conditions-section table tr th {
+      color: #27333F;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
+      /* 24px */
+      border-right: 1px solid #DFE6ED;
+      border-bottom: 1px solid #DFE6ED;
+      padding: 16px;
+      vertical-align: baseline;
+      text-align: left;
+      width: 210px; }
+    .tf-single-car-section .tf-car-conditions-section table tr td {
+      color: #566676;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
+      /* 24px */
+      border-right: 1px solid #DFE6ED;
+      border-bottom: 1px solid #DFE6ED;
+      padding: 16px 40px; }
 
 
 /*# sourceMappingURL=tourfic-style.css.map*/
