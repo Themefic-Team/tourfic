@@ -149,10 +149,10 @@ button.tf-order-remove {
   }
 }
 #adminmenu {
-  .toplevel_page_tourfic {
+  .toplevel_page_tf_settings, .menu-icon-tf_tours, .menu-icon-tf_hotel, .menu-icon-tf_apartment, .toplevel_page_tf-multi-vendor, .menu-icon-tf_email_templates {
     .dashicons-before {
-      &:before {
-        color: #8bc34a;
+      img{
+        opacity: 1;
       }
     }
   }
