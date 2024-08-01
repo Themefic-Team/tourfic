@@ -71,6 +71,33 @@ get_header();
                         It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
                     </div>
 
+                    <div class="tf-car-info">
+                        <h3><?php esc_html_e("Car info", "tourfic"); ?></h3>
+
+                        <ul>
+                            <li class="tf-flex tf-flex-align-center tf-flex-gap-6"><i class="ri-speed-up-fill"></i>20 KM</li>
+                            <li class="tf-flex tf-flex-align-center tf-flex-gap-6"><i class="ri-speed-up-fill"></i>20 KM</li>
+                            <li class="tf-flex tf-flex-align-center tf-flex-gap-6"><i class="ri-speed-up-fill"></i>20 KM</li>
+                            <li class="tf-flex tf-flex-align-center tf-flex-gap-6"><i class="ri-speed-up-fill"></i>20 KM</li>
+                            <li class="tf-flex tf-flex-align-center tf-flex-gap-6"><i class="ri-speed-up-fill"></i>20 KM</li>
+                            <li class="tf-flex tf-flex-align-center tf-flex-gap-6"><i class="ri-speed-up-fill"></i>20 KM</li>
+                        </ul>
+                    </div>
+
+                    <div class="tf-car-benefits">
+                        <h3><?php esc_html_e("Benefits", "tourfic"); ?></h3>
+
+                        <ul>
+                            <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 5L5.83332 14.1667L1.66666 10M18.3333 8.33333L12.0833 14.5833L10.8333 13.3333" stroke="#566676" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                                Most popular fuel policy
+                            </li>
+                            
+                        </ul>
+                    </div>
+
                 </div>
 
                 <div class="tf-car-booking-form">

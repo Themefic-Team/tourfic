@@ -6,6 +6,15 @@
             display: flex;
             gap: 32px;
             flex-wrap: wrap;
+
+            h3{
+                color: #27333F;
+                font-size: 21px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 150%; /* 31.5px */
+                margin-bottom: 16px;
+            }
             .tf-details-menu{
                 ul{
                     li{
@@ -36,6 +45,49 @@
                 font-style: normal;
                 font-weight: 400;
                 line-height: 150%; /* 24px */
+            }
+
+            .tf-car-info{
+                width: 100%;
+                ul{
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                    gap: 16px 8px;
+                    li{
+                        color: #566676;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 150%; /* 24px */
+                        width: calc(25% - 8px);
+                        i{
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+
+            .tf-car-benefits{
+                width: 100%;
+                ul{
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                    gap: 16px 8px;
+                    li{
+                        color: #566676;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 150%; /* 24px */
+                        width: calc(50% - 8px);
+                    }
+                }
             }
         }
     }
