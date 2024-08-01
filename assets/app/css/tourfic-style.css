@@ -13054,12 +13054,35 @@ html {
     .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery {
       width: 100%; }
       .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car {
+        position: relative;
         border-radius: 16px; }
         .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car img {
           border-radius: 16px;
           height: 338px;
           width: 100%;
           object-fit: cover; }
+        .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews {
+          position: absolute;
+          top: 16px;
+          left: 16px; }
+          .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews a {
+            text-decoration: none;
+            border-radius: 8px;
+            background: #F8FAFC;
+            color: #566676;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%;
+            /* 24px */ }
+            .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews a span {
+              color: #566676;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 400; }
+              .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews a span i {
+                color: #FFBF0F;
+                font-size: 18px; }
       .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery {
         margin-top: 15px; }
         .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a {

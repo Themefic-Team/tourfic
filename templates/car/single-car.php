@@ -29,6 +29,15 @@ get_header();
                     <div class="tf-car-hero-gallery">
                         <div class="tf-featured-car">
                             <img src="<?php echo esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>" alt="<?php esc_html_e( 'Car Image', 'tourfic' ); ?>">
+
+                            <div class="tf-featured-reviews">
+                                <a href="#tf-review" class="tf-single-rating">
+                                    <span>
+                                        <?php esc_html_e( "5.0", "tourfic" ) ?>
+                                        <i class="fa-solid fa-star"></i>
+                                    </span> (<?php esc_html_e( "1 Trips", "tourfic" ) ?>)
+                                </a>
+                            </div>
                         </div>
 
                         <div class="tf-gallery tf-flex tf-flex-gap-16">
