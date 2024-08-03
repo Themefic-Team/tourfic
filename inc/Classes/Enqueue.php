@@ -1006,9 +1006,10 @@ class Enqueue {
 
 		//Css
 
-		wp_enqueue_style( 'tf-admin', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin.min.css', '', TF_VERSION );
+		//Color-Picker Css
 		if ( in_array( $screen, $tf_options_screens ) || in_array( $post_type, $tf_options_post_type ) ) {
-			
+			wp_enqueue_style( 'tf-admin', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin.min.css', '', TF_VERSION );
+
 			if( $swal_cdn ) {
 				wp_enqueue_style( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css', '', TF_VERSION );
 				wp_enqueue_script( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js', array( 'jquery' ), TF_VERSION, true );
@@ -1016,7 +1017,7 @@ class Enqueue {
 				wp_enqueue_style( 'tf-admin-sweet-alert', TF_ASSETS_APP_URL . 'libs/swal/sweetalert2.min.css', '', TF_VERSION );
 				wp_enqueue_script( 'tf-admin-sweet-alert', TF_ASSETS_APP_URL . 'libs/swal/sweetalert2.min.js', array( 'jquery' ), TF_VERSION, true );
 			}
-			
+
 			if( $fa_cdn ) {
 				wp_enqueue_style( 'tf-fontawesome-4', '//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css', array(), TF_VERSION );
 				wp_enqueue_style( 'tf-fontawesome-5', '//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css', array(), TF_VERSION );
@@ -1040,7 +1041,7 @@ class Enqueue {
 				wp_enqueue_style( 'tf-select2', TF_ASSETS_APP_URL . 'libs/select2/select2.min.css', array(), TF_VERSION );
 				wp_enqueue_script( 'tf-select2', TF_ASSETS_APP_URL . 'libs/select2/select2.min.js', array( 'jquery' ), TF_VERSION, true );
 			}
-			
+
 			if( $flatpickr_cdn ) {
 				wp_enqueue_style( 'tf-flatpickr', '//cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css', array(), TF_VERSION );
 			} else {
@@ -1055,7 +1056,7 @@ class Enqueue {
 
 			//date format
 			$date_format_change = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
-			
+
 			wp_enqueue_script( 'tf-fullcalender', TF_ASSETS_ADMIN_URL . 'js/lib/fullcalender.min.js', array( 'jquery' ), TF_VERSION, true );
 
 			wp_enqueue_script( 'tf-admin', TF_ASSETS_ADMIN_URL . 'js/tourfic-admin-scripts.min.js', array( 'jquery', 'wp-data', 'wp-editor', 'wp-edit-post' ), TF_VERSION, true );
@@ -1121,6 +1122,8 @@ class Enqueue {
 			}
 			wp_enqueue_media();
 			wp_enqueue_editor();
+
+			wp_dequeue_script('wp-color-picker');
 			wp_enqueue_script( 'wp-color-picker' );
 		}
 
