@@ -11,7 +11,7 @@
  * Tested up to:    6.6
  * WC tested up to: 9.1
  * Requires PHP:    7.4
- * Elementor tested up to: 3.22
+ * Elementor tested up to: 3.23
  */
 
 // don't load directly
