@@ -209,11 +209,17 @@ table.tf-table {
 .tf-flex-align-center{
     align-items: center;
 }
+.tf-flex-align-baseline{
+    align-items: baseline;
+}
 .tf-flex-direction-column{
     flex-direction: column;
 }
 .tf-flex-align-top{
     align-items: flex-start;
+}
+.tf-flex-gap-4{
+    gap: 4px;
 }
 .tf-flex-gap-6{
     gap: 6px;

@@ -241,6 +241,95 @@ get_header();
 
                 <div class="tf-car-booking-form">
 
+                    <div class="tf-price-header">
+                        <h2>Total: <del>$120</del> $145</h2>
+                        <p>Without taxes</p>
+                    </div>
+
+                    <div class="tf-date-select-box">
+
+                        <div class="tf-date-single-select tf-flex tf-flex-gap-8">
+                            <div class="tf-select-date">
+                                <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
+                                    <i class="ri-map-pin-line"></i>
+                                    <div class="info-select">
+                                        <h5>Pick-up</h5>
+                                        <input type="text" placeholder="Pick Up Location">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tf-select-date">
+                                <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
+                                    <i class="ri-map-pin-line"></i>
+                                    <div class="info-select">
+                                        <h5>Drop-off</h5>
+                                        <input type="text" placeholder="Drop Off Location">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tf-date-single-select tf-flex tf-flex-gap-8">
+                            <div class="tf-select-date">
+                                <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
+                                    <i class="ri-calendar-2-line"></i>
+                                    <div class="info-select">
+                                        <h5>Pick-up date</h5>
+                                        <input type="text" placeholder="Pick Up Date">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tf-select-date">
+                                <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
+                                    <i class="ri-time-line"></i>
+                                    <div class="info-select">
+                                        <h5>Time</h5>
+                                        <select name="" id="">
+                                            <option value="">Select Time</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tf-date-single-select tf-flex tf-flex-gap-8">
+                            <div class="tf-select-date">
+                                <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
+                                    <i class="ri-calendar-2-line"></i>
+                                    <div class="info-select">
+                                        <h5>Drop-off date</h5>
+                                        <input type="text" placeholder="Drop Off Date">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tf-select-date">
+                                <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
+                                    <i class="ri-time-line"></i>
+                                    <div class="info-select">
+                                        <h5>Time</h5>
+                                        <select name="" id="">
+                                            <option value="">Select Time</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tf-form-submit-btn">
+                            <button class="tf-flex tf-flex-align-center tf-flex-justify-center">
+                                Continue
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        
+
+                    </div>
+
                     <div class="tf-add-extra-section">
                         <h3>
                             Add extras

@@ -3080,11 +3080,17 @@ table.tf-table {
 .tf-flex-align-center {
   align-items: center; }
 
+.tf-flex-align-baseline {
+  align-items: baseline; }
+
 .tf-flex-direction-column {
   flex-direction: column; }
 
 .tf-flex-align-top {
   align-items: flex-start; }
+
+.tf-flex-gap-4 {
+  gap: 4px; }
 
 .tf-flex-gap-6 {
   gap: 6px; }
@@ -13206,6 +13212,91 @@ html {
           display: none; }
   .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form {
     width: 440px; }
+    .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-price-header h2 {
+      color: #27333F;
+      font-size: 28px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 120%;
+      /* 33.6px */
+      margin-bottom: 8px; }
+      .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-price-header h2 del {
+        color: #566676;
+        text-decoration-line: strikethrough; }
+    .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-price-header p {
+      color: #566676;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
+      /* 24px */
+      margin: 0; }
+    .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box {
+      border-radius: 16px;
+      background: #EEF2F6;
+      padding: 8px 8px 16px 8px;
+      margin-bottom: 32px; }
+      .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select {
+        border-radius: 8px;
+        background: #FFF;
+        padding: 16px;
+        margin-bottom: 8px; }
+        .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select:last-child {
+          margin-bottom: 0px; }
+        .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date {
+          width: 50%; }
+          .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date:first-child {
+            border-right: 1px solid #DFE6ED; }
+          .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date i {
+            color: #566676; }
+          .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select {
+            width: 100%; }
+            .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select h5 {
+              color: #27333F;
+              font-size: 12px !important;
+              font-style: normal !important;
+              font-weight: 400 !important;
+              line-height: 120% !important;
+              /* 14.4px */
+              margin-bottom: 8px; }
+            .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input {
+              min-width: auto;
+              width: 100% !important;
+              color: #27333F;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 150%;
+              /* 24px */
+              border: 0px solid !important; }
+              .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input:focus {
+                outline: none;
+                box-shadow: none; }
+              .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input::placeholder {
+                color: #27333F; }
+            .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select select {
+              min-width: auto;
+              width: 100% !important;
+              color: #27333F;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 150%;
+              /* 24px */
+              border: 0px solid !important;
+              background-color: transparent; }
+      .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-form-submit-btn button {
+        padding: 16px 32px;
+        border-radius: 8px;
+        background: #0866C4;
+        color: #FFF;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 150%;
+        /* 24px */
+        cursor: pointer;
+        width: 100%; }
     .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section {
       border-radius: 16px;
       background: #E6F2FE;
