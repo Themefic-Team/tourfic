@@ -216,6 +216,87 @@
         .tf-car-booking-form{
             width: 440px;
 
+            .tf-add-extra-section{
+                border-radius: 16px;
+                background: #E6F2FE;
+                padding: 24px;
+                margin-bottom: 32px;
+                h3{
+                    color: #27333F;
+                    font-size: 21px !important;
+                    font-style: normal !important;
+                    font-weight: 400 !important;
+                    line-height: 150% !important; /* 31.5px */
+                    margin-bottom: 16px;
+                }
+                .tf-car-extra-infos{
+                    .tf-car-single-extra{
+                        padding: 12px 16px 16px 16px;
+                        border-radius: 8px;
+                        background: #F8FAFC;
+                        .tf-extra-title{
+                            h4{
+                                color: #27333F;
+                                font-size: 16px !important;
+                                font-style: normal !important;
+                                font-weight: 400 !important;
+                                line-height: 150% !important; /* 24px */
+                            }
+                            .acr-select{
+                                border-radius: 8px;
+                                background: #E6F2FE;
+                                padding: 4px 8px;
+                                width: auto;
+                                display: inline-flex;
+                                gap: 10px;
+                                .acr-dec,
+                                .acr-inc{
+                                    color: #0866C4;
+                                    border: 0px solid;
+                                    background-color: transparent;
+                                    width: auto;
+                                    height: auto;
+                                    padding: 0;
+                                }
+                                input{
+                                    color: #566676;
+                                    font-size: 16px;
+                                    width: 18px !important;
+                                }
+                            }
+                        }
+                        .tf-extra-price{
+                            h4{
+                                color: #27333F;
+                                font-size: 21px !important;
+                                font-style: normal !important;
+                                font-weight: 400 !important;
+                                line-height: 150%; /* 24px */
+                                margin-bottom: 8px;
+                                small{
+                                    display: block;
+                                    font-size: 16px !important;
+                                }
+                            }
+                        }
+
+                    }
+                    .tf-extra-apply-btn{
+                        text-align: right;
+                        button{
+                            padding: 12px 32px;
+                            border-radius: 16px;
+                            background: #EEF2F6;
+                            color:#0866C4;
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 700;
+                            line-height: 150%; /* 24px */
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
             .tf-driver-details{
                 border-radius: 16px;
                 background: #E6F2FE;

@@ -240,6 +240,77 @@ get_header();
                 </div>
 
                 <div class="tf-car-booking-form">
+
+                    <div class="tf-add-extra-section">
+                        <h3>
+                            Add extras
+                        </h3>
+
+                        <div class="tf-car-extra-infos tf-flex tf-flex-direction-column tf-flex-gap-16">
+
+                            <div class="tf-car-single-extra tf-flex tf-flex-space-bttn tf-flex-align-center">
+
+                                <div class="tf-extra-title">
+                                    <h4>Need additional driver
+                                    <i class="ri-information-line"></i>
+                                    </h4>
+                                    <div class="acr-select">
+                                        <div class="acr-dec">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M4.16663 10H15.8333" stroke="#0866C4" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                        <input type="number" name="adults" id="adults" value="0">
+                                        <div class="acr-inc">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M4.16663 9.99996H15.8333M9.99996 4.16663V15.8333" stroke="#0866C4" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-extra-price">
+                                    <h4>$25
+                                        <small>each/rental</small>
+                                    </h4>
+                                </div>
+
+                            </div>
+
+                            <div class="tf-car-single-extra tf-flex tf-flex-space-bttn tf-flex-align-center">
+
+                                <div class="tf-extra-title">
+                                    <h4>Need additional driver
+                                    <i class="ri-information-line"></i>
+                                    </h4>
+                                    <div class="acr-select">
+                                        <div class="acr-dec">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M4.16663 10H15.8333" stroke="#0866C4" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                        <input type="number" name="adults" id="adults" value="0">
+                                        <div class="acr-inc">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M4.16663 9.99996H15.8333M9.99996 4.16663V15.8333" stroke="#0866C4" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-extra-price">
+                                    <h4>$25
+                                        <small>each/rental</small>
+                                    </h4>
+                                </div>
+
+                            </div>
+
+                            <div class="tf-extra-apply-btn">
+                                <button>Apply</button>
+                            </div>
+
+                        </div>
+                    </div>
+
                     <div class="tf-driver-details tf-flex tf-flex-direction-column tf-flex-gap-16">
                         <div class="tf-driver-details-header tf-flex tf-flex-space-bttn tf-flex-align-center">
                             <h3>Driver details</h3>
