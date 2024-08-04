@@ -3794,20 +3794,15 @@ if ( ! function_exists( 'tf_hotel_airport_service_title_price' ) ) {
 
 add_action( 'wp_after_insert_post', 'tf_hotel_features_assign_taxonomies', 100, 3 );
 function tf_hotel_features_assign_taxonomies( $post_id, $post, $old_status ) {
-	if ( 'tf_hotel' !== $post->post_type ) {
+	if ( 'tf_room' !== $post->post_type ) {
 		return;
 	}
-	$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
-	$rooms = Room::get_hotel_rooms( $post_id );
 
-	if ( ! empty( $rooms ) ) {
-		foreach ( $rooms as $_room ) {
-			$room = get_post_meta($_room->ID, 'tf_room_opt', true);
-			$room_features = ! empty( $room['features'] ) ? $room['features'] : '';
-			if ( ! empty( $room_features ) ) {
-				$room_features = array_map( 'intval', $room_features );
-				wp_set_object_terms( $post_id, $room_features, 'hotel_feature' );
-			}
-		}
-	}
+    $room = get_post_meta($post_id, 'tf_room_opt', true);
+    $room_hotel = ! empty( $room['tf_hotel'] ) ? $room['tf_hotel'] : '';
+    $room_features = ! empty( $room['features'] ) ? $room['features'] : '';
+    if ( ! empty( $room_features ) ) {
+        $room_features = array_map( 'intval', $room_features );
+        wp_set_object_terms( $room_hotel, $room_features, 'hotel_feature' );
+    }
 }
