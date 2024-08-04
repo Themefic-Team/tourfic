@@ -240,12 +240,39 @@ get_header();
                 </div>
 
                 <div class="tf-car-booking-form">
-                    <div class="tf-driver-details">
+                    <div class="tf-driver-details tf-flex tf-flex-direction-column tf-flex-gap-16">
                         <div class="tf-driver-details-header tf-flex tf-flex-space-bttn tf-flex-align-center">
                             <h3>Driver details</h3>
                             <span>
                             <i class="ri-shield-check-line"></i> Verified
                             </span>
+                        </div>
+                        <div class="tf-driver-photo tf-flex tf-flex-gap-16">
+                            <img src="<?php echo esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>">
+                            <div class="tf-driver-info">
+                                <h4>Eusuf Abdullah</h4>
+                                <p>Joined May 2024</p>
+                            </div>
+                        </div>
+                        <div class="tf-driver-contact-info">
+                            <ul class="tf-flex tf-flex-direction-column tf-flex-gap-16">
+                                <li class="tf-flex tf-flex-gap-8">
+                                    <i class="ri-mail-line"></i>
+                                    eusufabdullah@gmail.com
+                                </li>
+                                <li class="tf-flex tf-flex-gap-8">
+                                    <i class="ri-mail-line"></i>
+                                    +33 469 968 4796
+                                </li>
+                                <li class="tf-flex tf-flex-gap-8">
+                                    <i class="ri-mail-line"></i>
+                                    Age 32 years
+                                </li>
+                                <li class="tf-flex tf-flex-gap-8">
+                                    <i class="ri-mail-line"></i>
+                                    2118 Thornridge Cir. Syracuse, Connecticut 35624
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
