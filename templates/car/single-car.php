@@ -241,7 +241,7 @@ get_header();
 
                 <div class="tf-car-booking-form">
 
-                    <div class="tf-price-header">
+                    <div class="tf-price-header tf-mb-30">
                         <h2>Total: <del>$120</del> $145</h2>
                         <p>Without taxes</p>
                     </div>
@@ -325,9 +325,10 @@ get_header();
                                 </svg>
                             </button>
                         </div>
-
+                        <div class="tf-instraction-btn tf-mt-16">
+                            <a href="#">Pick-up and Drop-off instructions</a>
+                        </div>
                         
-
                     </div>
 
                     <div class="tf-add-extra-section">
