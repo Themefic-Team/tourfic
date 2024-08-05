@@ -1423,6 +1423,16 @@ class Helper {
 			}
 		}
 
+		if ( is_post_type_archive( 'tf_carrental' ) ) {
+			$theme_files     = array( 'tourfic/car/archive-cars.php' );
+			$exists_in_theme = locate_template( $theme_files, false );
+			if ( $exists_in_theme ) {
+				return $exists_in_theme;
+			} else {
+				return TF_TEMPLATE_PATH . 'car/archive-cars.php';
+			}
+		}
+
 		return $template;
 	}
 
