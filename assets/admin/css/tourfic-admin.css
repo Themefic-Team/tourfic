@@ -453,8 +453,8 @@ button.tf-order-remove {
 .notice-warning .tf-major-update-warning__icon {
   fill: #f56e28; }
 
-#adminmenu .toplevel_page_tourfic .dashicons-before:before {
-  color: #8bc34a; }
+#adminmenu .toplevel_page_tf_settings .dashicons-before img, #adminmenu .menu-icon-tf_tours .dashicons-before img, #adminmenu .menu-icon-tf_hotel .dashicons-before img, #adminmenu .menu-icon-tf_apartment .dashicons-before img, #adminmenu .toplevel_page_tf-multi-vendor .dashicons-before img, #adminmenu .menu-icon-tf_email_templates .dashicons-before img {
+  opacity: 1; }
 
 #adminmenu .menu-icon-tf_hotel .dashicons-before:before {
   color: #03a9f4; }

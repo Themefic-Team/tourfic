@@ -279,6 +279,25 @@ function tf_room_availability_callback() {
 
 				if ( $avil_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() && $pricing_by !== '3' ) {
 
+					if(!$multi_by_date_ck){
+						if ( $tf_startdate && $tf_enddate ) {
+							// Check availability by date option
+							$period = new DatePeriod(
+								new DateTime( $tf_startdate . ' 00:00' ),
+								new DateInterval( 'P1D' ),
+								new DateTime( $tf_enddate . ' 23:59' )
+							);
+						}
+					}else{
+						if ( $tf_startdate && $tf_enddate ) {
+							$period = new DatePeriod(
+								new DateTime( $tf_startdate . ' 00:00' ),
+								new DateInterval( 'P1D' ),
+								new DateTime( $tf_enddate . ' 00:00' )
+							);
+						}
+					}
+
 					// split date range
 					$check_in  = strtotime( $form_start . ' 00:00' );
 					$check_out = strtotime( $form_end . ' 00:00' );
@@ -336,9 +355,6 @@ function tf_room_availability_callback() {
 					if(!$multi_by_date_ck){
 						$days = $days+1;
 					}
-
-					$d_price = !empty($d_price_by_date) ? $d_price_by_date * $days : 0;
-					$price = !empty($price_by_date) ? $price_by_date * $days : 0;
 
 					// Check if date is provided and within date range
 					if ( ! in_array( 0, $has_room ) ) {
@@ -3778,20 +3794,15 @@ if ( ! function_exists( 'tf_hotel_airport_service_title_price' ) ) {
 
 add_action( 'wp_after_insert_post', 'tf_hotel_features_assign_taxonomies', 100, 3 );
 function tf_hotel_features_assign_taxonomies( $post_id, $post, $old_status ) {
-	if ( 'tf_hotel' !== $post->post_type ) {
+	if ( 'tf_room' !== $post->post_type ) {
 		return;
 	}
-	$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
-	$rooms = Room::get_hotel_rooms( $post_id );
 
-	if ( ! empty( $rooms ) ) {
-		foreach ( $rooms as $_room ) {
-			$room = get_post_meta($_room->ID, 'tf_room_opt', true);
-			$room_features = ! empty( $room['features'] ) ? $room['features'] : '';
-			if ( ! empty( $room_features ) ) {
-				$room_features = array_map( 'intval', $room_features );
-				wp_set_object_terms( $post_id, $room_features, 'hotel_feature' );
-			}
-		}
-	}
+    $room = get_post_meta($post_id, 'tf_room_opt', true);
+    $room_hotel = ! empty( $room['tf_hotel'] ) ? $room['tf_hotel'] : '';
+    $room_features = ! empty( $room['features'] ) ? $room['features'] : '';
+    if ( ! empty( $room_features ) ) {
+        $room_features = array_map( 'intval', $room_features );
+        wp_set_object_terms( $room_hotel, $room_features, 'hotel_feature' );
+    }
 }

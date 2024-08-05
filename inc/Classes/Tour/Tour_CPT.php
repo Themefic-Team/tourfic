@@ -2,7 +2,8 @@
 
 namespace Tourfic\Classes\Tour;
 
-use Tourfic\Classes\Helper;
+use \Tourfic\Classes\Helper;
+use \Tourfic\Admin\Menu_Icon;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -22,7 +23,7 @@ class Tour_CPT extends \Tourfic\Core\Post_Type {
 			'name'          => esc_html__( 'Tours', 'tourfic' ),
 			'singular_name' => esc_html__( 'Tour', 'tourfic' ),
 			'slug'          => 'tf_tours',
-			'menu_icon'     => 'dashicons-location-alt',
+			'menu_icon'     => Menu_Icon::$tour_icon,
 			'menu_position' => 26.3,
 			'supports'      => apply_filters( 'tf_tours_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
 			'capability'    => array( 'tf_tours', 'tf_tourss' ),

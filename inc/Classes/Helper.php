@@ -51,6 +51,9 @@ class Helper {
 		add_action( 'admin_menu', array( $this, 'tourfic_admin_menu_seperator' ) );
 		add_filter( 'menu_order', array( $this, 'tourfic_admin_menu_order_change' ) );
 		add_filter( 'custom_menu_order', '__return_true' );
+
+		// Add dashboard link to admin menu bar
+		add_action( 'admin_bar_menu', array( $this, 'tf_admin_bar_dashboard_link' ), 31  );
 	}
 
 	static function tfopt( $option = '', $default = null ) {
@@ -3479,6 +3482,7 @@ class Helper {
 			$tourfic_separator2 = array_search( 'separator-tourfic2', $menu_order, true );
 			$tourfic_tours      = array_search( 'edit.php?post_type=tf_tours', $menu_order, true );
 			$tourfic_hotel      = array_search( 'edit.php?post_type=tf_hotel', $menu_order, true );
+			$tourfic_hotel_room = array_search( 'edit.php?post_type=tf_room', $menu_order, true );
 			$tourfic_apt        = array_search( 'edit.php?post_type=tf_apartment', $menu_order, true );
 			$tourfic_emails     = array_search( 'edit.php?post_type=tf_email_templates', $menu_order, true );
 			$tourfic_vendor     = array_search( 'tf-multi-vendor', $menu_order, true );
@@ -3498,6 +3502,10 @@ class Helper {
 			if ( ! empty( $tourfic_hotel ) ) {
 				unset( $menu_order[ $tourfic_hotel ] );
 			}
+			
+			if ( ! empty( $tourfic_hotel_room ) && !empty( $tourfic_hotel ) ) {
+				unset( $menu_order[ $tourfic_hotel_room ] );
+			}
 
 			if ( ! empty( $tourfic_vendor ) ) {
 				unset( $menu_order[ $tourfic_vendor ] );
@@ -3514,6 +3522,7 @@ class Helper {
 					$tourfic_menu_order[] = $item;
 					$tourfic_menu_order[] = 'edit.php?post_type=tf_tours';
 					$tourfic_menu_order[] = 'edit.php?post_type=tf_hotel';
+					$tourfic_menu_order[] = 'edit.php?post_type=tf_room';
 					$tourfic_menu_order[] = 'edit.php?post_type=tf_apartment';
 					$tourfic_menu_order[] = 'tf-multi-vendor';
 					$tourfic_menu_order[] = 'edit.php?post_type=tf_email_templates';
@@ -3525,6 +3534,34 @@ class Helper {
 			}
 
 			return $tourfic_menu_order;
+
+		} else {
+
+			return;
+		}
+	}
+
+	public function tf_admin_bar_dashboard_link( $wp_admin_bar ) {
+
+		if ( ! is_admin() || ! is_admin_bar_showing() ) {
+            return;
+        }
+
+		if ( ! is_user_member_of_blog() && ! is_super_admin() ) {
+            return;
+        }
+
+		if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+			$tf_dashboard_page_link = !empty( get_option( 'tf_dashboard_page_id' ) ) ? get_permalink( get_option( 'tf_dashboard_page_id' ) )  : get_home_url();
+
+			$wp_admin_bar->add_node(
+				array(
+					'parent' => 'site-name',
+					'id'     => 'view-vendor-dashboard-link',
+					'title'  => __( 'Visit Vendor Dashboard', 'tourfic' ),
+					'href'   => $tf_dashboard_page_link,
+				)
+			);
 
 		} else {
 
