@@ -1,5 +1,5 @@
 .tf-archive-car-section{
-    background-color: #F8FAFC;
+    background-color: #EEF2F6;
     .tf-archive-car-banner{
         background: #B8C5D2;
         height: 350px;
@@ -18,27 +18,51 @@
 
     .tf-archive-car-details-warper{
         padding: 56px 0px;
-        .tf-car-details-column{
-            .tf-car-archive-result{
-                .tf-total-result-bar{
-                    text-align: right;
-                    span{
-                        color: #27333F;
-                        font-size: 16px;
-                        font-style: normal;
-                        font-weight: 400;
-                        line-height: 150%; /* 24px */
+        .tf-archive-header{
+            .tf-archive-view{
+                ul{
+                    li{
+                        height: 52px;
+                        width: 52px;
+                        line-height: 52px;
+                        display: flex;
+                        border-radius: 8px;
+                        background: #F5FAFF;
+                        align-items: center;
+                        justify-content: center;
+                        i{
+                            color: #27333F;
+                        }
                     }
                 }
+            }
+            .tf-total-result-bar{
+                text-align: right;
+                span{
+                    color: #27333F;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 150%; /* 24px */
+                }
+            }
+        }
+        .tf-car-details-column{
+            .tf-car-archive-result{
+                width: calc(100% - 390px);
 
                 .tf-car-result{
+                    flex-wrap: wrap;
                     .tf-single-car-view{
                         border-radius: 16px;
                         background: #FFF;
+                        width: calc(50% - 16px);
                         .tf-car-image{
                             img{
                                 border-radius: 16px;
                                 height: 200px;
+                                width: 100%;
+                                object-fit: cover;
                             }
                         }
                         .tf-car-details{
@@ -49,6 +73,49 @@
                                 font-style: normal !important;
                                 font-weight: 700 !important;
                                 line-height: 150% !important; /* 31.5px */
+                            }
+                            ul{
+                                list-style: none;
+                                flex-wrap: wrap;
+                                gap: 16px;
+                                li{
+                                    color: #566676;
+                                    font-size: 16px;
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    line-height: 150%; /* 24px */
+                                    width: calc(33% - 16px);
+                                }
+                            }
+                            .tf-booking-btn{
+                                .tf-price-info{
+                                    h3{
+                                        color: #27333F;
+                                        font-size: 28px !important;
+                                        font-style: normal !important;
+                                        font-weight: 600 !important;
+                                        line-height: 120%; /* 33.6px */
+                                        small{
+                                            color: #566676;
+                                            font-size: 16px !important;
+                                            font-style: normal;
+                                            font-weight: 400;
+                                            line-height: 150%; /* 24px */
+                                        }
+                                    }
+                                }
+                                button{
+                                    border-radius: 8px;
+                                    border: 1px solid #0866C4;
+                                    padding: 12px 32px;
+                                    color: #0866C4;
+                                    font-size: 16px;
+                                    font-style: normal;
+                                    font-weight: 700;
+                                    line-height: 150%; /* 24px */
+                                    background-color: #fff;
+                                    cursor: pointer;
+                                }
                             }
                         }
                     }
