@@ -3,6 +3,7 @@
 namespace Tourfic\Classes\Room;
 
 use Tourfic\Classes\Helper;
+use Tourfic\Admin\Menu_Icon;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -22,7 +23,7 @@ class Room_CPT extends \Tourfic\Core\Post_Type {
 			'name'          => esc_html__( 'Rooms', 'tourfic' ),
 			'singular_name' => esc_html__( 'Room', 'tourfic' ),
 			'slug'          => 'tf_room',
-			'menu_icon'     => 'dashicons-admin-multisite',
+			'menu_icon'     => Menu_Icon::$room_icon,
 			'menu_position' => 26.3,
 			'supports'      => apply_filters( 'tf_room_supports', array( 'title', 'editor', 'thumbnail', 'author' ) ),
 			'capability'    => array( 'tf_room', 'tf_rooms' ),
