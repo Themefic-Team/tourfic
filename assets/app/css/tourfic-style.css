@@ -13709,6 +13709,32 @@ html {
               /* 24px */
               background-color: #fff;
               cursor: pointer; }
+        .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view {
+          width: 100%;
+          display: flex; }
+          .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image {
+            width: 280px;
+            height: 200px; }
+            .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image img {
+              width: 100%;
+              height: 200px; }
+          .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details {
+            width: calc(100% - 280px);
+            display: flex;
+            padding: 24px;
+            justify-content: space-between; }
+            .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content {
+              width: calc(100% - 196px); }
+              .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content h3 {
+                margin-bottom: 16px; }
+              .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul {
+                margin: 0; }
+                .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul li {
+                  width: calc(50% - 16px); }
+            .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn {
+              flex-direction: column; }
+              .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn button {
+                margin-top: auto; }
 
 
 /*# sourceMappingURL=tourfic-style.css.map*/

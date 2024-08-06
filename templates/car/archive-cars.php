@@ -116,15 +116,17 @@ get_header();
                                     </div>
                                 </div>
                                 <div class="tf-car-details">
-                                    <h3 class="tf-mb-24">Hundai 354 2024</h3>
-                                    <ul class="tf-flex tf-mb-24">
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                    </ul>
+                                    <div class="tf-car-content">
+                                        <h3 class="tf-mb-24">Hundai 354 2024</h3>
+                                        <ul class="tf-flex tf-mb-24">
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                        </ul>
+                                    </div>
                                     <div class="tf-booking-btn tf-flex tf-flex-space-bttn">
                                         <div class="tf-price-info">
                                             <h3>$250 <small>/ Day</small></h3>
@@ -138,15 +140,47 @@ get_header();
                                     <img src="<?php echo esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>">
                                 </div>
                                 <div class="tf-car-details">
-                                    <h3 class="tf-mb-24">Hundai 354 2024</h3>
-                                    <ul class="tf-flex tf-mb-24">
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                    </ul>
+                                <div class="tf-car-content">
+                                        <h3 class="tf-mb-24">Hundai 354 2024</h3>
+                                        <ul class="tf-flex tf-mb-24">
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                        </ul>
+                                    </div>
+                                    <div class="tf-booking-btn tf-flex tf-flex-space-bttn">
+                                        <div class="tf-price-info">
+                                            <h3>$250 <small>/ Day</small></h3>
+                                        </div>
+                                        <button>Book now</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="tf-car-result list-view tf-flex tf-flex-gap-32">
+
+                            <div class="tf-single-car-view">
+                                <div class="tf-car-image">
+                                    <img src="<?php echo esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>">
+                                </div>
+                                <div class="tf-car-details">
+                                <div class="tf-car-content">
+                                        <h3 class="tf-mb-24">Hundai 354 2024</h3>
+                                        <ul class="tf-flex tf-mb-24">
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                        </ul>
+                                    </div>
                                     <div class="tf-booking-btn tf-flex tf-flex-space-bttn">
                                         <div class="tf-price-info">
                                             <h3>$250 <small>/ Day</small></h3>
@@ -160,37 +194,17 @@ get_header();
                                     <img src="<?php echo esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>">
                                 </div>
                                 <div class="tf-car-details">
-                                    <h3 class="tf-mb-24">Hundai 354 2024</h3>
-                                    <ul class="tf-flex tf-mb-24">
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                    </ul>
-                                    <div class="tf-booking-btn tf-flex tf-flex-space-bttn">
-                                        <div class="tf-price-info">
-                                            <h3>$250 <small>/ Day</small></h3>
-                                        </div>
-                                        <button>Book now</button>
+                                <div class="tf-car-content">
+                                        <h3 class="tf-mb-24">Hundai 354 2024</h3>
+                                        <ul class="tf-flex tf-mb-24">
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                            <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
+                                        </ul>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="tf-single-car-view">
-                                <div class="tf-car-image">
-                                    <img src="<?php echo esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>">
-                                </div>
-                                <div class="tf-car-details">
-                                    <h3 class="tf-mb-24">Hundai 354 2024</h3>
-                                    <ul class="tf-flex tf-mb-24">
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                        <li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-speed-up-fill"></i>20 KM</li>
-                                    </ul>
                                     <div class="tf-booking-btn tf-flex tf-flex-space-bttn">
                                         <div class="tf-price-info">
                                             <h3>$250 <small>/ Day</small></h3>
@@ -201,6 +215,7 @@ get_header();
                             </div>
 
                         </div>
+
                     </div>
 
                 </div>
