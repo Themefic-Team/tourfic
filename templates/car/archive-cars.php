@@ -23,7 +23,7 @@ get_header();
                 <div class="tf-archive-header tf-flex tf-flex-space-bttn tf-flex-align-center tf-mb-30">
                     <div class="tf-archive-view">
                         <ul class="tf-flex tf-flex-gap-16">
-                            <li><i class="ri-layout-grid-line"></i></li>
+                            <li class="active"><i class="ri-layout-grid-line"></i></li>
                             <li><i class="ri-list-check"></i></li>
                         </ul>
                     </div>
@@ -31,7 +31,42 @@ get_header();
                         <span>Showing 8 of 15 Results</span>
                     </div>
                 </div>
-                <div class="tf-car-details-column">
+                <div class="tf-car-details-column tf-flex tf-flex-gap-32">
+                    
+                    <div class="tf-car-archive-sidebar">
+                        <div class="tf-sidebar-header tf-flex tf-flex-space-bttn tf-flex-align-center">
+                            <h4>Filter</h4>
+                            <button>Reset</button>
+                        </div>
+
+                        <div class="tf-category-widget">
+                            <div class="tf-category-heading">
+                                <h3>Car type</h3>
+                            </div>
+                            <div class="tf-category-lists">
+                                <ul>
+                                    <li>
+                                        <label>Sports coupe
+                                            <input type="checkbox" checked>
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>Sports coupe
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>Sports coupe
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="tf-car-archive-result">
                         

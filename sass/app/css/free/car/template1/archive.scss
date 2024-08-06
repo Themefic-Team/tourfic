@@ -30,8 +30,15 @@
                         background: #F5FAFF;
                         align-items: center;
                         justify-content: center;
+                        cursor: pointer;
                         i{
                             color: #27333F;
+                        }
+                        &.active{
+                            background-color: #0866C4;
+                            i{
+                                color: #FFFFFF;
+                            }
                         }
                     }
                 }
@@ -48,6 +55,110 @@
             }
         }
         .tf-car-details-column{
+            .tf-car-archive-sidebar{
+                width: 358px;
+                border-radius: 16px;
+                background: #E6F2FE;
+                padding: 32px;
+                .tf-sidebar-header{
+                    h4{
+                        color: #27333F;
+                        font-size: 16px !important;
+                        font-style: normal;
+                        font-weight: 400 !important;
+                        line-height: 150%; /* 24px */
+                    }
+                    button{
+                        color: #27333F;
+                        font-size: 16px !important;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 150%; /* 24px */
+                        background-color: transparent;
+                        padding: 0px;
+                        border: 0px solid;
+                    }
+                }
+                .tf-category-widget{
+                    .tf-category-heading{
+                        h3{
+                            color: #27333F;
+                            font-size: 16px !important;
+                            font-style: normal !important;
+                            font-weight: 400 !important;
+                            line-height: 150%; /* 24px */
+                            margin-bottom: 16px;
+                        }
+                    }
+                    .tf-category-lists{
+                        ul{
+                            margin: 0;
+                            padding: 0;
+                            list-style: none;
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 8px;
+                            li{
+                                width: 100%;
+                                label{
+                                    color: #566676;
+                                    font-size: 16px;
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    line-height: 150%; /* 24px */
+                                    display: block;
+                                    position: relative;
+                                    padding-left: 35px;
+                                    margin-bottom: 0px;
+                                    cursor: pointer;
+                                    -webkit-user-select: none;
+                                    -moz-user-select: none;
+                                    -ms-user-select: none;
+                                    user-select: none;
+                                    
+                                    input{
+                                        position: absolute;
+                                        opacity: 0;
+                                        cursor: pointer;
+                                        height: 0;
+                                        width: 0;
+                                    }
+                                    input:checked ~ .checkmark:after {
+                                        display: block;
+                                    }
+                                    input:checked ~ .checkmark{
+                                        background-color: #F8FAFC;
+                                    }
+                                    .checkmark {
+                                        position: absolute;
+                                        top: 0;
+                                        left: 0;
+                                        height: 20px;
+                                        width: 20px;
+                                        border: 2px solid #566676;
+                                        background-color: transparent;
+                                        border-radius: 5px;
+                                        &::after{
+                                            content: "";
+                                            position: absolute;
+                                            display: none;
+                                            left: 5px;
+                                            top: 2px;
+                                            width: 7px;
+                                            height: 10px;
+                                            border: solid #566676;
+                                            border-width: 0 3px 3px 0;
+                                            -webkit-transform: rotate(45deg);
+                                            -ms-transform: rotate(45deg);
+                                            transform: rotate(45deg);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             .tf-car-archive-result{
                 width: calc(100% - 390px);
 
