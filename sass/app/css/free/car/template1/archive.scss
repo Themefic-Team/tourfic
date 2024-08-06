@@ -61,6 +61,7 @@
                 background: #E6F2FE;
                 padding: 32px;
                 .tf-sidebar-header{
+                    margin-bottom: 32px;
                     h4{
                         color: #27333F;
                         font-size: 16px !important;
@@ -80,6 +81,10 @@
                     }
                 }
                 .tf-category-widget{
+                    margin-bottom: 32px;
+                    &:last-child{
+                        margin-bottom: 0px;
+                    }
                     .tf-category-heading{
                         h3{
                             color: #27333F;
@@ -169,11 +174,56 @@
                         background: #FFF;
                         width: calc(50% - 16px);
                         .tf-car-image{
+                            position: relative;
                             img{
                                 border-radius: 16px;
                                 height: 200px;
                                 width: 100%;
                                 object-fit: cover;
+                            }
+                            .tf-other-infos{
+                                position: absolute;
+                                left: 0;
+                                top: 0;
+                                right: 0;
+                                bottom: 0;
+                                padding: 16px;
+                                .tf-reviews-box{
+                                    span{
+                                        border-radius: 8px;
+                                        background: rgba(255, 255, 255, 0.24);
+                                        backdrop-filter: blur(32px);
+                                        display: inline-block;
+                                        padding: 0 8px;
+                                        color: #27333F;
+                                        font-size: 16px;
+                                        font-style: normal;
+                                        font-weight: 400;
+                                        line-height: 150%; /* 24px */
+                                        i{
+                                            color: #FFBF0F;
+                                        }
+                                    }
+                                }
+                                .tf-tags-box{
+                                    ul{
+                                        margin: 0;
+                                        padding: 0;
+                                        list-style: none;
+                                        li{
+                                            border-radius: 8px;
+                                            background: #FFBF0F;
+                                            backdrop-filter: blur(32px);
+                                            padding: 4px 8px;
+                                            color: #382900;
+                                            font-size: 16px;
+                                            font-style: normal;
+                                            font-weight: 400;
+                                            line-height: 150%; /* 24px */
+                                            text-align: center;
+                                        }
+                                    }
+                                }
                             }
                         }
                         .tf-car-details{

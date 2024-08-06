@@ -66,6 +66,35 @@ get_header();
                                 </ul>
                             </div>
                         </div>
+
+                        <div class="tf-category-widget">
+                            <div class="tf-category-heading">
+                                <h3>Car type</h3>
+                            </div>
+                            <div class="tf-category-lists">
+                                <ul>
+                                    <li>
+                                        <label>Sports coupe
+                                            <input type="checkbox" checked>
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>Sports coupe
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>Sports coupe
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="tf-car-archive-result">
@@ -75,6 +104,16 @@ get_header();
                             <div class="tf-single-car-view">
                                 <div class="tf-car-image">
                                     <img src="<?php echo esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>">
+                                    <div class="tf-other-infos tf-flex tf-flex-gap-64">
+                                        <div class="tf-reviews-box">
+                                            <span>5.0 <i class="fa-solid fa-star"></i> (7 trips)</span>
+                                        </div>
+                                        <div class="tf-tags-box">
+                                            <ul>
+                                                <li>Driver included</li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="tf-car-details">
                                     <h3 class="tf-mb-24">Hundai 354 2024</h3>
