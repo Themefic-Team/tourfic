@@ -589,10 +589,10 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 						<?php
 							//get the lowest price from all available room price
 							$apartment_min_main_price = $apartment_min_price["min"];
-							$apt_disocunt_price = Apt_Pricing::instance()->calculate_discount( get_the_ID(), $apartment_min_price["min"] );
+							$apartment_min_price = Apt_Pricing::instance()->calculate_discount( get_the_ID(), $apartment_min_price["min"] );
 							$lowest_price = wc_price( $apartment_min_price );
 							
-							if ( $apt_disocunt_price != $apartment_min_main_price ) {
+							if ( $apartment_min_price != $apartment_min_main_price ) {
 								echo "<b>" . esc_html__("From ", "tourfic") . "</b>" . "<del>" . esc_html( wp_strip_all_tags(wc_price( $apartment_min_main_price )) ) . "</del>" . " " . wp_kses_post( $lowest_price );
 							} else {
 								echo esc_html__("From ", "tourfic") . wp_kses_post(wc_price( $apartment_min_main_price ));	;
@@ -1279,7 +1279,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 			'check-in-out-date' => $check_in_out,
 		), $url );
 
-		$apartment_min_price = get_apartment_min_max_price( get_the_ID() );
+		$apartment_min_price = Apt_pricing::instance()->get_min_max_price( get_the_ID() );
 		$tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 		if ( $tf_apartment_arc_selected_template == "design-1" ) {
 		$first_gallery_image = explode(',', $gallery);	
