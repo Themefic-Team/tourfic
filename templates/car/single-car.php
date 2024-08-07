@@ -246,6 +246,36 @@ get_header();
                         <p>Without taxes</p>
                     </div>
 
+                    <div class="tf-extra-added-info">
+                        <div class="tf-extra-added-box tf-flex tf-flex-gap-16 tf-flex-direction-column">
+                            <h3>Extras added</h3>
+                            <div class="tf-single-added-extra tf-flex tf-flex-align-center tf-flex-space-bttn">
+                                <h4>Need additional driver</h4>
+                                <div class="qty-price tf-flex">
+                                    <i class="ri-close-line"></i> 
+                                    <span class="qty">1</span> 
+                                    <span class="price">$50</span>
+                                    <span class="delete">
+                                        <i class="ri-delete-bin-line"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="tf-single-added-extra tf-flex tf-flex-align-center tf-flex-space-bttn">
+                                <h4>Need additional driver lorem ipsum doller set amet</h4>
+                                <div class="qty-price tf-flex">
+                                    <i class="ri-close-line"></i> 
+                                    <span class="qty">1</span> 
+                                    <span class="price">$50</span>
+                                    <span class="delete">
+                                        <i class="ri-delete-bin-line"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
                     <div class="tf-date-select-box">
 
                         <div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn">
