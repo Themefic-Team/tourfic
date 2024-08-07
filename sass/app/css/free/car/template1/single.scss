@@ -3,12 +3,26 @@
         padding: 32px 0;
         display: flex;
         gap: 40px;
+        @media #{$tfmax991}{
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        @media #{$max767}{
+            flex-wrap: wrap;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
         .tf-car-details-column{
             width: calc(100% - 480px);
             display: flex;
             gap: 32px;
             flex-wrap: wrap;
-
+            @media #{$tfmax991}{
+                width: calc(100% - 360px);
+            }
+            @media #{$max767}{
+                width: 100%;
+            }
             h3{
                 color: #27333F;
                 font-size: 21px;
@@ -58,7 +72,7 @@
                 .tf-gallery{
                     margin-top: 15px;
                     a{
-                        width: 25%;
+                        width: calc(25% - 12px);
                         img{
                             border-radius: 8px;
                         }
@@ -118,6 +132,9 @@
                         i{
                             font-size: 20px;
                         }
+                        @media #{$max575}{
+                            width: calc(50% - 8px);
+                        }
                     }
                 }
             }
@@ -138,6 +155,9 @@
                         font-weight: 400;
                         line-height: 150%; /* 24px */
                         width: calc(50% - 8px);
+                        @media #{$max575}{
+                            width: 100%;
+                        }
                     }
                 }
             }
@@ -164,6 +184,10 @@
                         }
                         span.value{
                             padding: 8px 16px;
+                        }
+                        @media #{$max575}{
+                            width: 100%;
+                            justify-content: space-between;
                         }
                     }
                 }
@@ -198,6 +222,8 @@
                             font-style: normal;
                             font-weight: 400;
                             line-height: 150%; /* 24px */
+                            gap: 8px;
+                            flex-wrap: nowrap;
                             i{
                                 color: #566676;
                             }
@@ -215,7 +241,12 @@
 
         .tf-car-booking-form{
             width: 440px;
-
+            @media #{$tfmax991}{
+                width: 400px;
+            }
+            @media #{$max767}{
+                width: 100%;
+            }
             .tf-price-header{
                 h2{
                     color: #27333F;
@@ -253,7 +284,7 @@
                         margin-bottom: 0px;
                     }
                     .tf-select-date{
-                        width: 50%;
+                        width: calc(50% - 8px);
                         &:first-child{
                             border-right: 1px solid #DFE6ED;
                         }
@@ -484,6 +515,14 @@
     }
     .tf-car-conditions-section{
         padding-bottom: 100px;
+        @media #{$tfmax991}{
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        @media #{$max767}{
+            padding-left: 15px;
+            padding-right: 15px;
+        }
         h3{
             color: #27333F;
             font-size: 21px;

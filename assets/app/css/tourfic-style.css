@@ -13056,11 +13056,26 @@ html {
   padding: 32px 0;
   display: flex;
   gap: 40px; }
+  @media only screen and (min-width: 767.99px) and (max-width: 991px) {
+    .tf-single-car-section .tf-single-car-details-warper {
+      padding-left: 15px;
+      padding-right: 15px; } }
+  @media only screen and (max-width: 767.98px) {
+    .tf-single-car-section .tf-single-car-details-warper {
+      flex-wrap: wrap;
+      padding-left: 15px;
+      padding-right: 15px; } }
   .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column {
     width: calc(100% - 480px);
     display: flex;
     gap: 32px;
     flex-wrap: wrap; }
+    @media only screen and (min-width: 767.99px) and (max-width: 991px) {
+      .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column {
+        width: calc(100% - 360px); } }
+    @media only screen and (max-width: 767.98px) {
+      .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column {
+        width: 100%; } }
     .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column h3 {
       color: #27333F;
       font-size: 21px;
@@ -13104,7 +13119,7 @@ html {
       .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery {
         margin-top: 15px; }
         .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a {
-          width: 25%; }
+          width: calc(25% - 12px); }
           .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a img {
             border-radius: 8px; }
     .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-details-menu ul li {
@@ -13148,6 +13163,9 @@ html {
           width: calc(25% - 8px); }
           .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul li i {
             font-size: 20px; }
+          @media only screen and (max-width: 575.98px) {
+            .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul li {
+              width: calc(50% - 8px); } }
     .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-benefits {
       width: 100%; }
       .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-benefits ul {
@@ -13165,6 +13183,9 @@ html {
           line-height: 150%;
           /* 24px */
           width: calc(50% - 8px); }
+          @media only screen and (max-width: 575.98px) {
+            .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-benefits ul li {
+              width: 100%; } }
     .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-specification {
       width: 100%; }
       .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-specification ul {
@@ -13188,6 +13209,10 @@ html {
             padding: 8px 16px; }
           .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-specification ul li span.value {
             padding: 8px 16px; }
+          @media only screen and (max-width: 575.98px) {
+            .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-specification ul li {
+              width: 100%;
+              justify-content: space-between; } }
     .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-location {
       width: 100%; }
       .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-location .tf-car-location-map {
@@ -13212,7 +13237,9 @@ html {
             font-style: normal;
             font-weight: 400;
             line-height: 150%;
-            /* 24px */ }
+            /* 24px */
+            gap: 8px;
+            flex-wrap: nowrap; }
             .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-faq-section .tf-faq-col .tf-faq-head span i {
               color: #566676; }
         .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-faq-section .tf-faq-col .tf-question-desc {
@@ -13222,6 +13249,12 @@ html {
           display: none; }
   .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form {
     width: 440px; }
+    @media only screen and (min-width: 767.99px) and (max-width: 991px) {
+      .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form {
+        width: 400px; } }
+    @media only screen and (max-width: 767.98px) {
+      .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form {
+        width: 100%; } }
     .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-price-header h2 {
       color: #27333F;
       font-size: 28px;
@@ -13254,7 +13287,7 @@ html {
         .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select:last-child {
           margin-bottom: 0px; }
         .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date {
-          width: 50%; }
+          width: calc(50% - 8px); }
           .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date:first-child {
             border-right: 1px solid #DFE6ED; }
           .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date i {
@@ -13439,6 +13472,14 @@ html {
 
 .tf-single-car-section .tf-car-conditions-section {
   padding-bottom: 100px; }
+  @media only screen and (min-width: 767.99px) and (max-width: 991px) {
+    .tf-single-car-section .tf-car-conditions-section {
+      padding-left: 15px;
+      padding-right: 15px; } }
+  @media only screen and (max-width: 767.98px) {
+    .tf-single-car-section .tf-car-conditions-section {
+      padding-left: 15px;
+      padding-right: 15px; } }
   .tf-single-car-section .tf-car-conditions-section h3 {
     color: #27333F;
     font-size: 21px;

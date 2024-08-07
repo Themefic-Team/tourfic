@@ -248,7 +248,7 @@ get_header();
 
                     <div class="tf-date-select-box">
 
-                        <div class="tf-date-single-select tf-flex tf-flex-gap-8">
+                        <div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn">
                             <div class="tf-select-date">
                                 <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
                                     <i class="ri-map-pin-line"></i>
@@ -270,7 +270,7 @@ get_header();
                             </div>
                         </div>
 
-                        <div class="tf-date-single-select tf-flex tf-flex-gap-8">
+                        <div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn">
                             <div class="tf-select-date">
                                 <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
                                     <i class="ri-calendar-2-line"></i>
@@ -294,7 +294,7 @@ get_header();
                             </div>
                         </div>
 
-                        <div class="tf-date-single-select tf-flex tf-flex-gap-8">
+                        <div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn">
                             <div class="tf-select-date">
                                 <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
                                     <i class="ri-calendar-2-line"></i>
