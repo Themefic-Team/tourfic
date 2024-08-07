@@ -835,10 +835,9 @@ class Migrator {
 	 * Hotel room migrate
 	 */
 	public function tf_hotel_room_migrate(){
-		$tf_room_data_migration = !empty(get_option( 'tf_room_data_migration' )) ? get_option( 'tf_room_data_migration' ) : 0;
-		if ( $tf_room_data_migration < 1 ) {
+		if ( empty( get_option( 'tf_room_data_migration' ) ) ) {
 			$this->regenerate_room_meta();
-			update_option( 'tf_room_data_migration', $tf_room_data_migration+1 );
+			update_option( 'tf_room_data_migration', 1 );
 		}
 	}
 

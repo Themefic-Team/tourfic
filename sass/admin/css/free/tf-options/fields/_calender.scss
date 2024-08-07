@@ -32,6 +32,12 @@
     border-color: #003c79;
 }
 
+.tf-single-option{
+    @include flexbox();
+    gap: 10px;
+    width: 100%;
+}
+
 .tf-content-loading {
     position: relative;
 
