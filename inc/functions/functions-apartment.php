@@ -566,7 +566,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 			});
 		}
 
-		$apartment_min_price = Apt_Pricing::instance()->get_min_max_price( get_the_ID() );
+		$apartment_min_price = Apt_Pricing::instance( get_the_ID() )->get_min_max_price();
 
 		$tf_apartment_layout_conditions = ! empty( $meta['tf_single_apartment_layout_opt'] ) ? $meta['tf_single_apartment_layout_opt'] : 'global';
 		if("single"==$tf_apartment_layout_conditions){
@@ -589,7 +589,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 						<?php
 							//get the lowest price from all available room price
 							$apartment_min_main_price = $apartment_min_price["min"];
-							$apartment_min_price = Apt_Pricing::instance()->calculate_discount( get_the_ID(), $apartment_min_price["min"] );
+							$apartment_min_price = Apt_Pricing::instance( get_the_ID() )->calculate_discount( $apartment_min_price["min"] );
 							$lowest_price = wc_price( $apartment_min_price );
 							
 							if ( $apartment_min_price != $apartment_min_main_price ) {
@@ -795,7 +795,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 						<?php
 							//get the lowest price from all available room price
 							$apartment_min_main_price = $apartment_min_price["min"];
-							$apt_disocunt_price = Apt_Pricing::instance()->calculate_discount( get_the_ID(), $apartment_min_price["min"] );
+							$apt_disocunt_price = Apt_Pricing::instance( get_the_ID() )->calculate_discount( $apartment_min_price["min"] );
 							
 							$lowest_price = wc_price( $apt_disocunt_price );
 							
@@ -1279,10 +1279,10 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 			'check-in-out-date' => $check_in_out,
 		), $url );
 
-		$apartment_min_price = Apt_pricing::instance()->get_min_max_price( get_the_ID() );
+		$apartment_min_price = Apt_pricing::instance( get_the_ID() )->get_min_max_price();
 		$tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 		if ( $tf_apartment_arc_selected_template == "design-1" ) {
-		$first_gallery_image = explode(',', $gallery);	
+		$first_gallery_image = explode(',', $gallery);	f
 		?>
 		<div class="tf-available-room">
 			<div class="tf-available-room-gallery">                       
