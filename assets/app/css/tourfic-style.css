@@ -13533,6 +13533,10 @@ html {
         /* 45.6px */ }
   .tf-archive-car-section .tf-archive-car-details-warper {
     padding: 56px 0px; }
+    @media only screen and (max-width: 1024px) {
+      .tf-archive-car-section .tf-archive-car-details-warper {
+        padding-left: 15px;
+        padding-right: 15px; } }
     .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-header .tf-archive-view ul li {
       height: 52px;
       width: 52px;
@@ -13566,6 +13570,9 @@ html {
       @media only screen and (max-width: 1024px) {
         .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar {
           width: 280px; } }
+      @media only screen and (max-width: 767.98px) {
+        .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar {
+          width: 100%; } }
       .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header {
         margin-bottom: 32px; }
         .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header h4 {
@@ -13659,6 +13666,9 @@ html {
       @media only screen and (max-width: 1024px) {
         .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result {
           width: calc(100% - 322px); } }
+      @media only screen and (max-width: 767.98px) {
+        .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result {
+          width: 100%; } }
       .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result {
         flex-wrap: wrap; }
         .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result .tf-single-car-view {

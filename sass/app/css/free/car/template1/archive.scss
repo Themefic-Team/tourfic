@@ -18,6 +18,10 @@
 
     .tf-archive-car-details-warper{
         padding: 56px 0px;
+        @media #{$max1024}{
+            padding-left: 15px;
+            padding-right: 15px;
+        }
         .tf-archive-header{
             .tf-archive-view{
                 ul{
@@ -63,6 +67,10 @@
                 @media #{$max1024}{
                     width: 280px;
                 }
+                @media #{$max767}{
+                    width: 100%;
+                }
+                
                 .tf-sidebar-header{
                     margin-bottom: 32px;
                     h4{
@@ -171,6 +179,9 @@
                 width: calc(100% - 390px);
                 @media #{$max1024}{
                     width: calc(100% - 322px);
+                }
+                @media #{$max767}{
+                    width: 100%;
                 }
                 .tf-car-result{
                     flex-wrap: wrap;
