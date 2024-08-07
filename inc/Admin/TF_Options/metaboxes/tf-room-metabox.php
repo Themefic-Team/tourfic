@@ -32,7 +32,8 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 					'id'          => 'tf_hotel',
 					'type'        => 'select2',
 					'placeholder' => __( 'Select a Hotel', 'tourfic' ),
-					'label'       => __( 'Select Hotel', 'tourfic' ),
+					'label'       => __( 'Select Hotel (Required)', 'tourfic' ),
+					'subtitle'    => __( 'Select the hotel where this room will be added', 'tourfic' ),
 					'options'     => 'posts',
 					'query_args'  => array(
 						'post_type'      => 'tf_hotel',

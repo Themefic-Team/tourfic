@@ -3498,6 +3498,15 @@ a.tf-import-btn, a.tf-export-btn {
   background-color: #003c79;
   border-color: #003c79; }
 
+.tf-single-option {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  gap: 10px;
+  width: 100%; }
+
 .tf-content-loading {
   position: relative; }
   .tf-content-loading::before {
