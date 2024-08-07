@@ -779,9 +779,15 @@
             if (pricing_by === '1') {
                 $('.tf-price-by-room').show();
                 $('.tf-price-by-person').hide();
+                $('.tf-room-cal-field .tf-single-option').hide();
             } else if (pricing_by === '2') {
                 $('.tf-price-by-person').show();
                 $('.tf-price-by-room').hide();
+                $('.tf-room-cal-field .tf-single-option').hide();
+            } else if(pricing_by === '3') {
+                $('.tf-price-by-room').hide();
+                $('.tf-price-by-person').hide();
+                $('.tf-room-cal-field .tf-single-option').show();
             }
         });
 
