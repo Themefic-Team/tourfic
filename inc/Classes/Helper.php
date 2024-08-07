@@ -3520,11 +3520,11 @@ class Helper {
 				if ( 'tf_settings' === $item ) {
 					$tourfic_menu_order[] = 'separator-tourfic';
 					$tourfic_menu_order[] = $item;
+					$tourfic_menu_order[] = 'tf-multi-vendor';
 					$tourfic_menu_order[] = 'edit.php?post_type=tf_tours';
 					$tourfic_menu_order[] = 'edit.php?post_type=tf_hotel';
 					$tourfic_menu_order[] = 'edit.php?post_type=tf_room';
 					$tourfic_menu_order[] = 'edit.php?post_type=tf_apartment';
-					$tourfic_menu_order[] = 'tf-multi-vendor';
 					$tourfic_menu_order[] = 'edit.php?post_type=tf_email_templates';
 					$tourfic_menu_order[] = 'separator-tourfic2';
 
