@@ -791,6 +791,46 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 			),
 		),
 
+		// FAQ
+		'faq' => array(
+			'title'  => __( 'FAQ Section', 'tourfic' ),
+			'icon'   => 'fa-solid fa-clipboard-question',
+			'fields' => array(
+				array(
+					'id'    => 'carrental-faq-heading',
+					'type'  => 'heading',
+					'label' => 'FAQ Section',
+					'subtitle' => __( 'This section is designed to help users find answers to common questions.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'carrental-faq-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/faq-terms/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'           => 'faq',
+					'type'         => 'repeater',
+					'button_title' => __( 'Add New Faq', 'tourfic' ),
+					'label'        => __( 'Add Your Faqs', 'tourfic' ),
+					'subtitle'        => __( 'Click the button below to add Faqs for your Car. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each Faq using the icons on the right side.', 'tourfic' ),
+					'field_title'  => 'title',
+					'fields'       => array(
+						array(
+							'id'    => 'title',
+							'type'  => 'text',
+							'label' => __( 'Title', 'tourfic' ),
+						),
+						array(
+							'id'    => 'description',
+							'type'  => 'editor',
+							'label' => __( 'Description ', 'tourfic' ),
+						),
+					),
+				)
+			),
+		),
+
 		// Terms & Conditions
 		'terms_and_conditions' => array(
 			'title'  => __( 'Terms & Conditions', 'tourfic' ),
@@ -816,11 +856,25 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'default' => __( "Tour Terms & Conditions", 'tourfic' ),
 				),
 				array(
-					'id'    => 'terms_conditions',
-					'type'  => 'editor',
-					'label' => __( 'Terms & Conditions of this car', 'tourfic' ),
-					'subtitle' => __( "Enter your car's terms and conditions in the text editor provided below.", 'tourfic' ),
-				),
+					'id'           => 'terms_conditions',
+					'type'         => 'repeater',
+					'button_title' => __( 'Add New Terms Condition', 'tourfic' ),
+					'label'        => __( 'Add Your Terms Conditions', 'tourfic' ),
+					'subtitle'        => __( 'Click the button below to add Terms Conditions for your Car. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each Badge using the icons on the right side.', 'tourfic' ),
+					'field_title'  => 'title',
+					'fields'       => array(
+						array(
+							'id'    => 'title',
+							'type'  => 'text',
+							'label' => __( 'Title', 'tourfic' ),
+						),
+						array(
+							'id'    => 'content',
+							'type'  => 'textarea',
+							'label' => __( 'Content', 'tourfic' ),
+						)
+					),
+				)
 			),
 		),
 
