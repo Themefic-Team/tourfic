@@ -7,10 +7,30 @@ use Tourfic\Classes\Helper;
 class Pricing {
 	use \Tourfic\Traits\Singleton;
 
-	public function __construct() {
+	//private static $instance;
+	protected $post_id;
+	protected $meta;
+	protected $date;
+	protected $time;
+	protected $persons;
+
+	/**
+	 * @return static
+	 */
+	/*public static function instance() {
+		if(!self::$instance) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}*/
+
+	public function __construct($post_id) {
+		$this->post_id = $post_id;
+		$this->meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
+
 		add_action( 'wp_ajax_tf_hotel_airport_service_price', array( $this, 'tf_hotel_airport_service_callback') );
 		add_action( 'wp_ajax_nopriv_tf_hotel_airport_service_price', array( $this, 'tf_hotel_airport_service_callback' ) );
-
 	}
 
 	function tf_hotel_airport_service_callback() {

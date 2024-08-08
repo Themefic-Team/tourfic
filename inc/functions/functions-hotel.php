@@ -5,15 +5,6 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Room\Room;
 
-
-#################################
-# Air port Service          #
-#################################
-
-
-
-
-
 #################################
 # Ajax functions                #
 #################################
