@@ -24,6 +24,9 @@ class Pricing {
 	protected $infant_discount_price;
 	protected $meta;
 	protected $apt_id;
+	protected $availability_price;
+	protected $checkin;
+	protected $checkout;
 
 	public function __construct($apt_id) {
 		$this->apt_id = $apt_id;
@@ -104,6 +107,18 @@ class Pricing {
 		
 	}
 
+	function get_availability() {
+		$persons = $this->persons;
+		$adult = !empty( $this->persons["adult"]) ? $this->persons["adult"] : 0;
+		$child = !empty( $this->persons["child"]) ? $this->persons["child"] : 0;
+		$infant = !empty( $this->persons["infant"]) ? $this->persons["infant"] : 0;
+		$availability_price = Availability::instance($this->apt_id)->set_dates($this->checkin, $this->checkout)->set_persons( $adult, $child, $infant)->get_total_price();
+		$availability_price+= $this->set_dates($this->checkin, $this->checkout)->set_persons( $adult, $child, $infant )->set_additional_fees()->get_fees();
+
+		return $availability_price;
+	}
+
+
 	function set_additional_fees() {
 		$meta = $this->meta;
 		$total_days = $this->days;
@@ -154,6 +169,8 @@ class Pricing {
 		}
 		$this->days = !empty($days) ? $days : 0;
 		$this->period = !empty($tfperiod) ? $tfperiod : 0;
+		$this->checkin = !empty( $check_in ) ? $check_in : '';
+		$this->checkout = !empty( $check_out ) ? $check_out : '';
 
 		return $this;
 	}
@@ -267,8 +284,6 @@ class Pricing {
 		}
 
 		$min_max_price = array_filter($min_max_price);
-
-		wp_reset_query();
 
 		return array(
 			'min' => ! empty( $min_max_price ) ? min( $min_max_price ) : 0,

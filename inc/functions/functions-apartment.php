@@ -4,6 +4,7 @@ defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
+use \Tourfic\Classes\Apartment\Availability as Apt_Availability;
 
 /**
  * Flushing Rewrite on Tourfic Activation
@@ -565,6 +566,13 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 				return !in_array($date, $only_booked_dates);
 			});
 		}
+
+		// echo '<pre>';
+		// // print_r(Apt_Availability::instance( get_the_ID() )->set_dates("2024/08/08", "2024/08/12")->set_persons(1, 1, 1)->get_total_price());
+		// print_r(Apt_Pricing::instance( get_the_ID() )->set_dates("2024/08/08", "2024/08/12")->set_persons(1, 1, 1)->get_availability());
+		// echo '</pre>';
+		// die(); // Sunvi
+
 
 		$apartment_min_price = Apt_Pricing::instance( get_the_ID() )->get_min_max_price();
 
