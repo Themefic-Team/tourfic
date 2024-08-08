@@ -67,6 +67,7 @@ class Base {
 
 			// Admin Notices
 			\Tourfic\Admin\Notice_Update::instance();
+			\Tourfic\Admin\Notice\Room_Notice::instance();
 		}
 
 		if ( Helper::tf_is_woo_active() ) {
