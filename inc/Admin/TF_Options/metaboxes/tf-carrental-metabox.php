@@ -135,13 +135,6 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'attributes'  => array( 'min' => 0 )
 				),
 				array(
-					'id'          => 'door',
-					'type'        => 'number',
-					'label'       => __( 'No. Door', 'tourfic' ),
-					'subtitle'    => __( 'No. Door', 'tourfic' ),
-					'attributes'  => array( 'min' => 0 )
-				),
-				array(
 					'id'       => 'auto_transmission',
 					'type'     => 'switch',
 					'label'    => esc_html__( 'Auto Transmission', 'tourfic' ),
@@ -156,7 +149,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'       => 'mileage_type',
 					'type'     => 'select',
-					'label'    => __( 'Type', 'tourfic' ),
+					'label'    => __( 'Unit Type', 'tourfic' ),
 					'options'  => array(
 						'km' => __( 'Kilometer', 'tourfic' ),
 						'miles'   => __( 'Miles', 'tourfic' ),
@@ -334,6 +327,56 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 						),
                         array(
                             'id'       => 'info_icon',
+                            'type'     => 'icon',
+                            'label'    => __( 'Icon', 'tourfic' ),
+                            'subtitle' => __( 'Choose icon', 'tourfic' ),
+                        )
+					),
+				)
+			),
+		),
+		
+		// Additional Info
+		'additional_info' => array(
+			'title'  => __( 'Additional Info', 'tourfic' ),
+			'icon'   => 'fa-solid fa-clipboard-question',
+			'fields' => array(
+				array(
+					'id'    => 'carrental-add-info-heading',
+					'type'  => 'heading',
+					'label' => 'Benefits',
+					'subtitle' => __( 'This section is designed to help users find answers to common questions.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'carrental-add-info-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/faq-terms/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'       => 'benefits_section',
+					'type'     => 'switch',
+					'label'    => esc_html__( 'Do you want to show Benefits in the frontend?', 'tourfic' ),
+					'subtitle' => esc_html__( 'Do you want to show Benefits in the frontend?', 'tourfic' )
+				),
+				array(
+					'id'           => 'benefits',
+					'type'         => 'repeater',
+					'button_title' => __( 'Add New Benefits', 'tourfic' ),
+					'label'        => __( 'Add Your Benefits', 'tourfic' ),
+					'subtitle'        => __( 'Click the button below to add Benefits for your Car. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each Benefits using the icons on the right side.', 'tourfic' ),
+					'field_title'  => 'title',
+					'dependency'  => [
+						array( 'benefits_section', '==', 'true' )
+					],
+					'fields'       => array(
+						array(
+							'id'    => 'title',
+							'type'  => 'text',
+							'label' => __( 'Title', 'tourfic' ),
+						),
+                        array(
+                            'id'       => 'icon',
                             'type'     => 'icon',
                             'label'    => __( 'Icon', 'tourfic' ),
                             'subtitle' => __( 'Choose icon', 'tourfic' ),
