@@ -13579,131 +13579,135 @@ html {
         padding-left: 15px;
         padding-right: 15px; } }
     .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box {
-      border-radius: 16px;
-      background: #E6F2FE;
-      box-shadow: 0px 24px 60px 0px rgba(0, 15, 63, 0.16);
+      border-radius: 24px;
+      background: #EEF2F6;
+      padding: 8px;
       position: relative;
       top: -60px; }
-      .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-date-select-box {
-        padding: 8px; }
-        .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-date-select-box .tf-date-single-select {
-          border-radius: 8px;
-          background: #FFF;
-          padding: 16px;
-          width: 33.33%; }
-          .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date {
-            width: calc(50% - 8px); }
-            .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date:first-child {
-              border-right: 1px solid #DFE6ED; }
-            .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date i {
-              color: #566676; }
-            .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select {
-              width: 100%; }
-              .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select h5 {
-                color: #27333F;
-                font-size: 12px !important;
-                font-style: normal !important;
-                font-weight: 400 !important;
-                line-height: 120% !important;
-                /* 14.4px */
-                margin-bottom: 8px; }
-              .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input {
-                min-width: auto;
-                width: 100% !important;
-                color: #27333F;
-                font-size: 16px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: 150%;
-                /* 24px */
-                border: 0px solid !important; }
-                .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input:focus {
-                  outline: none;
-                  box-shadow: none; }
-                .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input::placeholder {
-                  color: #27333F; }
-              .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select select {
-                min-width: auto;
-                width: 100% !important;
-                color: #27333F;
-                font-size: 16px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: 150%;
-                /* 24px */
-                border: 0px solid !important;
-                background-color: transparent; }
-      .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-driver-location-box {
-        padding: 8px; }
-        .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-driver-location-box .tf-driver-location ul {
-          margin: 0;
-          padding: 0;
-          list-style: none;
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0px 32px; }
-          .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-driver-location-box .tf-driver-location ul li label {
-            color: #566676;
+      .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper {
+        border-radius: 16px;
+        background: #E6F2FE;
+        box-shadow: 0px 24px 60px 0px rgba(0, 15, 63, 0.16); }
+        .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-date-select-box {
+          padding: 8px; }
+          .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select {
+            border-radius: 8px;
+            background: #FFF;
+            padding: 16px;
+            width: 33.33%; }
+            .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date {
+              width: calc(50% - 8px); }
+              .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date:first-child {
+                border-right: 1px solid #DFE6ED; }
+              .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date i {
+                color: #566676; }
+              .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select {
+                width: 100%; }
+                .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select h5 {
+                  color: #27333F;
+                  font-size: 12px !important;
+                  font-style: normal !important;
+                  font-weight: 400 !important;
+                  line-height: 120% !important;
+                  /* 14.4px */
+                  margin-bottom: 8px; }
+                .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input {
+                  min-width: auto;
+                  width: 100% !important;
+                  color: #27333F;
+                  font-size: 16px;
+                  font-style: normal;
+                  font-weight: 400;
+                  line-height: 150%;
+                  /* 24px */
+                  border: 0px solid !important; }
+                  .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input:focus {
+                    outline: none;
+                    box-shadow: none; }
+                  .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input::placeholder {
+                    color: #27333F; }
+                .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select select {
+                  min-width: auto;
+                  width: 100% !important;
+                  color: #27333F;
+                  font-size: 16px;
+                  font-style: normal;
+                  font-weight: 400;
+                  line-height: 150%;
+                  /* 24px */
+                  border: 0px solid !important;
+                  background-color: transparent; }
+        .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-driver-location-box {
+          padding: 8px; }
+          .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0px 32px; }
+            .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label {
+              color: #566676;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 150%;
+              /* 24px */
+              display: block;
+              position: relative;
+              padding-left: 35px;
+              margin-bottom: 0px;
+              cursor: pointer;
+              -webkit-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
+              user-select: none; }
+              .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 0;
+                width: 0; }
+              .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .checkmark:after {
+                display: block; }
+              .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .checkmark {
+                background-color: #F8FAFC; }
+              .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label .checkmark {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 20px;
+                width: 20px;
+                border: 2px solid #566676;
+                background-color: transparent;
+                border-radius: 5px; }
+                .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label .checkmark::after {
+                  content: "";
+                  position: absolute;
+                  display: none;
+                  left: 5px;
+                  top: 2px;
+                  width: 7px;
+                  height: 10px;
+                  border: solid #566676;
+                  border-width: 0 3px 3px 0;
+                  -webkit-transform: rotate(45deg);
+                  -ms-transform: rotate(45deg);
+                  transform: rotate(45deg); }
+          .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-driver-location-box .tf-submit-button button {
+            border-radius: 8px;
+            background: #0866C4;
+            padding: 16px 50px;
+            color: #FFF;
             font-size: 16px;
             font-style: normal;
-            font-weight: 400;
+            font-weight: 700;
             line-height: 150%;
             /* 24px */
-            display: block;
-            position: relative;
-            padding-left: 35px;
-            margin-bottom: 0px;
-            cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none; }
-            .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-driver-location-box .tf-driver-location ul li label input {
-              position: absolute;
-              opacity: 0;
-              cursor: pointer;
-              height: 0;
-              width: 0; }
-            .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .checkmark:after {
-              display: block; }
-            .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .checkmark {
-              background-color: #F8FAFC; }
-            .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-driver-location-box .tf-driver-location ul li label .checkmark {
-              position: absolute;
-              top: 0;
-              left: 0;
-              height: 20px;
-              width: 20px;
-              border: 2px solid #566676;
-              background-color: transparent;
-              border-radius: 5px; }
-              .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-driver-location-box .tf-driver-location ul li label .checkmark::after {
-                content: "";
-                position: absolute;
-                display: none;
-                left: 5px;
-                top: 2px;
-                width: 7px;
-                height: 10px;
-                border: solid #566676;
-                border-width: 0 3px 3px 0;
-                -webkit-transform: rotate(45deg);
-                -ms-transform: rotate(45deg);
-                transform: rotate(45deg); }
-        .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-driver-location-box .tf-submit-button button {
-          border-radius: 8px;
-          background: #0866C4;
-          padding: 16px 50px;
-          color: #FFF;
-          font-size: 16px;
-          font-style: normal;
-          font-weight: 700;
-          line-height: 150%;
-          /* 24px */
-          border: 0px solid;
-          cursor: pointer; }
-          .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-driver-location-box .tf-submit-button button i {
-            margin-left: 8px; }
+            border: 0px solid;
+            cursor: pointer; }
+            .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-driver-location-box .tf-submit-button button i {
+              margin-left: 8px; }
     .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-header .tf-archive-view ul li {
       height: 52px;
       width: 52px;

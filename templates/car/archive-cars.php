@@ -22,99 +22,101 @@ get_header();
             <div class="tf-archive-car-details-warper">
 
                 <div class="tf-archive-search-box">
+                    <div class="tf-archive-search-box-wrapper">
+                        <div class="tf-date-select-box tf-flex tf-flex-gap-8">
+                            <div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn">
+                                <div class="tf-select-date">
+                                    <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
+                                        <i class="ri-map-pin-line"></i>
+                                        <div class="info-select">
+                                            <h5>Pick-up</h5>
+                                            <input type="text" placeholder="Pick Up Location">
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <div class="tf-date-select-box tf-flex tf-flex-gap-8">
-                        <div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn">
-                            <div class="tf-select-date">
-                                <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
-                                    <i class="ri-map-pin-line"></i>
-                                    <div class="info-select">
-                                        <h5>Pick-up</h5>
-                                        <input type="text" placeholder="Pick Up Location">
+                                <div class="tf-select-date">
+                                    <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
+                                        <i class="ri-map-pin-line"></i>
+                                        <div class="info-select">
+                                            <h5>Drop-off</h5>
+                                            <input type="text" placeholder="Drop Off Location">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="tf-select-date">
-                                <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
-                                    <i class="ri-map-pin-line"></i>
-                                    <div class="info-select">
-                                        <h5>Drop-off</h5>
-                                        <input type="text" placeholder="Drop Off Location">
+                            <div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn">
+                                <div class="tf-select-date">
+                                    <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
+                                        <i class="ri-calendar-2-line"></i>
+                                        <div class="info-select">
+                                            <h5>Pick-up date</h5>
+                                            <input type="text" placeholder="Pick Up Date">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tf-select-date">
+                                    <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
+                                        <i class="ri-time-line"></i>
+                                        <div class="info-select">
+                                            <h5>Time</h5>
+                                            <select name="" id="">
+                                                <option value="">Select Time</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn">
+                                <div class="tf-select-date">
+                                    <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
+                                        <i class="ri-calendar-2-line"></i>
+                                        <div class="info-select">
+                                            <h5>Drop-off date</h5>
+                                            <input type="text" placeholder="Drop Off Date">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tf-select-date">
+                                    <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
+                                        <i class="ri-time-line"></i>
+                                        <div class="info-select">
+                                            <h5>Time</h5>
+                                            <select name="" id="">
+                                                <option value="">Select Time</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn">
-                            <div class="tf-select-date">
-                                <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
-                                    <i class="ri-calendar-2-line"></i>
-                                    <div class="info-select">
-                                        <h5>Pick-up date</h5>
-                                        <input type="text" placeholder="Pick Up Date">
-                                    </div>
-                                </div>
+                        <div class="tf-driver-location-box tf-flex tf-flex-space-bttn tf-flex-align-center">
+                            <div class="tf-driver-location">
+                                <ul>
+                                    <li>
+                                        <label>Return in the same location
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>Age of driver 18-40?
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                </ul>
                             </div>
-
-                            <div class="tf-select-date">
-                                <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
-                                    <i class="ri-time-line"></i>
-                                    <div class="info-select">
-                                        <h5>Time</h5>
-                                        <select name="" id="">
-                                            <option value="">Select Time</option>
-                                        </select>
-                                    </div>
-                                </div>
+                            <div class="tf-submit-button">
+                                <button>Search <i class="ri-search-line"></i></button>
                             </div>
                         </div>
 
-                        <div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn">
-                            <div class="tf-select-date">
-                                <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
-                                    <i class="ri-calendar-2-line"></i>
-                                    <div class="info-select">
-                                        <h5>Drop-off date</h5>
-                                        <input type="text" placeholder="Drop Off Date">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="tf-select-date">
-                                <div class="tf-flex tf-flex-gap-4 tf-flex-align-baseline">
-                                    <i class="ri-time-line"></i>
-                                    <div class="info-select">
-                                        <h5>Time</h5>
-                                        <select name="" id="">
-                                            <option value="">Select Time</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tf-driver-location-box tf-flex tf-flex-space-bttn tf-flex-align-center">
-                        <div class="tf-driver-location">
-                            <ul>
-                                <li>
-                                    <label>Return in the same location
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>Age of driver 18-40?
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="tf-submit-button">
-                            <button>Search <i class="ri-search-line"></i></button>
-                        </div>
                     </div>
                 </div>
 
