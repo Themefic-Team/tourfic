@@ -127,7 +127,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'    => 'tf-template',
 					'type'  => 'tab',
-					'label' => 'Hotel, Tour & Apartment Template',
+					'label' => 'Hotel, Tour, Apartment & Car Template',
 					'tabs'  => array(
 						array(
 							'id'     => 'hotel_template',
@@ -953,6 +953,164 @@ TF_Settings::option( 'tf_settings', array(
 								),
 								array(
 									'id'      => 'apartment_archive_notice',
+									'type'    => 'notice',
+									'content' => __( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
+								),
+							),
+						),
+						array(
+							'id'     => 'car_template',
+							'title'  => __( 'Car', 'tourfic' ),
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'      => 'car-title',
+									'type'    => 'heading',
+									'content' => __( 'Car Single Page', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'       => 'single-car',
+									'type'     => 'imageselect',
+									'label'    => __( 'Select Single Car Template', 'tourfic' ),
+									'subtitle'   => __( 'You have the option to override this from the settings specific to each individual apartment page.', 'tourfic' ),
+									'multiple' => true,
+									'inline'   => true,
+									'options'  => array(
+										'design-1' => array(
+											'title' => 'Design 1',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design1-apartment.jpg",
+										),
+									),
+									'default'  => 'design-1',
+								),
+								array(
+									'id'      => 'car_single_design_1_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Inter" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'single-car', '==', 'design-1' ),
+								),
+								array(
+									'id'         => 'single-car-design-1',
+									'class'      => 'disable-sortable',
+									'type'       => 'repeater',
+									'drag_only'  => true,
+									'label'      => __( 'Single Car Template Sections Part 1', 'tourfic' ),
+									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'dependency' => array( 'single-car', '==', 'design-1' ),
+									'field_title'=> 'car-section',
+									'fields'     => array(
+										array(
+											'id'         => 'car-section',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Name', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'         => 'car-section-slug',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Slug', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'       => 'car-section-status',
+											'type'     => 'switch',
+											'label'    => __( 'Section Status', 'tourfic' ),
+											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
+										),
+									),
+									'default'    => array(
+										array(
+											'car-section'        => __( 'Description', 'tourfic' ),
+											'car-section-slug'   => __( 'description', 'tourfic' ),
+											'car-section-status' => true,
+										),
+										array(
+											'car-section'        => __( 'Car info ', 'tourfic' ),
+											'car-section-slug'   => __( 'car-info', 'tourfic' ),
+											'car-section-status' => true,
+										),
+										array(
+											'car-section'        => __( 'Benefits', 'tourfic' ),
+											'car-section-slug'   => __( 'benefits', 'tourfic' ),
+											'car-section-status' => true,
+										),
+										array(
+											'car-section'        => __( 'Include/Exclude', 'tourfic' ),
+											'car-section-slug'   => __( 'inc-exc', 'tourfic' ),
+											'car-section-status' => true,
+										),
+										array(
+											'car-section'        => __( 'Location', 'tourfic' ),
+											'car-section-slug'   => __( 'location', 'tourfic' ),
+											'car-section-status' => true,
+										),
+										array(
+											'car-section'        => __( 'Reviews', 'tourfic' ),
+											'car-section-slug'   => __( 'reviews', 'tourfic' ),
+											'car-section-status' => true,
+										),
+										array(
+											'car-section'        => __( 'FAQs', 'tourfic' ),
+											'car-section-slug'   => __( 'faq', 'tourfic' ),
+											'car-section-status' => true,
+										)
+									)
+								),
+								
+								array(
+									'id'      => 'car-title',
+									'type'    => 'heading',
+									'content' => __( 'Car Archive & Search Result Page', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'       => 'car-archive',
+									'type'     => 'imageselect',
+									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
+									'multiple' => true,
+									'inline'   => true,
+									'options'  => array(
+										'design-1' => array(
+											'title' => 'Design 1',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/tour-archive-design-2.jpg",
+										),
+									),
+									'default'  => 'design-1',
+								),
+								array(
+									'id'      => 'car_archive_design_1_bannar',
+									'type'    => 'image',
+									'label'    => __( 'Archive & Search Result Banner Image', 'tourfic' ),
+									'subtitle' => __( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
+									'library' => 'image',
+									'dependency' => array( 'car-archive', '==', 'design-1' ),
+								),
+								array(
+									'id'         => 'car_archive_view',
+									'type'       => 'select',
+									'label'      => __( 'Archive Layout', 'tourfic' ),
+									'options'    => array(
+										'list' => __( 'List', 'tourfic' ),
+										'grid' => __( 'Grid', 'tourfic' ),
+									),
+									'default'    => 'List',
+									'dependency' => array( 'car-archive', '!=', 'design-1' ),
+								),
+								array(
+									'id'      => 'car_design_1_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'car-archive', '==', 'design-1' ),
+								),
+								array(
+									'id'      => 'car_archive_notice',
 									'type'    => 'notice',
 									'content' => __( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
 								),
