@@ -21,7 +21,6 @@ class Availability {
 	function __construct( $apt_id ){
 		$this->apt_id = $apt_id;
 		$this->meta = get_post_meta( $this->apt_id, 'tf_apartment_opt', true );
-
 	}
 
 	public function set_dates($check_in, $check_out) {

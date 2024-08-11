@@ -5,6 +5,7 @@ defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Apartment\Pricing as ApartmentPricing;
 use Tourfic\Classes\Helper;
+use Tourfic\Classes\Hotel\Pricing as HotelPricing;
 use Tourfic\Classes\Room\Room;
 
 class Enqueue {
@@ -179,74 +180,7 @@ class Enqueue {
 		/**
 		 * Hotel Min and Max Price
 		 */
-
-		$tfhotel_min_max       = array(
-			'posts_per_page' => - 1,
-			'post_type'      => 'tf_hotel',
-			'post_status'    => 'publish'
-		);
-		$tfhotel_min_max_query = new \WP_Query( $tfhotel_min_max );
-		$tfhotel_min_maxprices = array();
-
-		if ( $tfhotel_min_max_query->have_posts() ):
-			while ( $tfhotel_min_max_query->have_posts() ) : $tfhotel_min_max_query->the_post();
-
-				$meta  = get_post_meta( get_the_ID(), 'tf_hotels_opt', true );
-				$rooms = Room::get_hotel_rooms( get_the_ID() );
-				if ( ! empty( $rooms ) ) {
-					foreach ( $rooms as $_room ) {
-						$singleroom = get_post_meta($_room->ID, 'tf_room_opt', true);
-						if ( ! empty( $singleroom['price'] ) ) {
-							$tfhotel_min_maxprices[] = $singleroom['price'];
-						}
-						if ( ! empty( $singleroom['adult_price'] ) ) {
-							$tfhotel_min_maxprices[] = $singleroom['adult_price'];
-						}
-						if ( ! empty( $singleroom['child_price'] ) ) {
-							$tfhotel_min_maxprices[] = $singleroom['child_price'];
-						}
-						if ( ! empty( $singleroom['avail_date'] ) ) {
-							$avail_date = json_decode( $singleroom['avail_date'], true );
-							if ( ! empty( $avail_date ) && is_array( $avail_date ) ) {
-								foreach ( $avail_date as $singleavailroom ) {
-									if ( ! empty( $singleavailroom['price'] ) ) {
-										$tfhotel_min_maxprices[] = $singleavailroom['price'];
-									}
-									if ( ! empty( $singleavailroom['adult_price'] ) ) {
-										$tfhotel_min_maxprices[] = $singleavailroom['adult_price'];
-									}
-									if ( ! empty( $singleavailroom['child_price'] ) ) {
-										$tfhotel_min_maxprices[] = $singleavailroom['child_price'];
-									}
-								}
-							}
-						}
-					}
-				}
-
-			endwhile;
-
-		endif;
-		wp_reset_query();
-		if ( ! empty( $tfhotel_min_maxprices ) && count( $tfhotel_min_maxprices ) > 1 ) {
-			$hotel_max_price_val = max( $tfhotel_min_maxprices );
-			$hotel_min_price_val = min( $tfhotel_min_maxprices );
-			if ( $hotel_max_price_val == $hotel_min_price_val ) {
-				$hotel_max_price = max( $tfhotel_min_maxprices );
-				$hotel_min_price = 1;
-			} else {
-				$hotel_max_price = max( $tfhotel_min_maxprices );
-				$hotel_min_price = min( $tfhotel_min_maxprices );
-			}
-		}
-		if ( ! empty( $tfhotel_min_maxprices ) && count( $tfhotel_min_maxprices ) == 1 ) {
-			$hotel_max_price = max( $tfhotel_min_maxprices );
-			$hotel_min_price = 1;
-		}
-		if ( empty( $tfhotel_min_maxprices ) ) {
-			$hotel_max_price = 0;
-			$hotel_min_price = 0;
-		}
+		$hotel_min_max_price = HotelPricing::get_min_max_price_from_all_hotel();
 
 		/**
 		 * Tour Min and Max Price
@@ -628,8 +562,8 @@ class Enqueue {
 				'room'                   => esc_html__( 'Room', 'tourfic' ),
 				'sending_ques'           => esc_html__( 'Sending your question...', 'tourfic' ),
 				'no_found'               => esc_html__( 'Not Found', 'tourfic' ),
-				'tf_hotel_max_price'     => isset( $hotel_max_price ) ? $hotel_max_price : '',
-				'tf_hotel_min_price'     => isset( $hotel_min_price ) ? $hotel_min_price : '',
+				'tf_hotel_max_price'     => isset( $hotel_min_max_price ) ? $hotel_min_max_price['max'] : 0,
+				'tf_hotel_min_price'     => isset( $hotel_min_max_price ) ? $hotel_min_max_price['min'] : 0,
 				'tf_tour_max_price'      => isset( $tour_max_price ) ? $tour_max_price : '',
 				'tf_tour_min_price'      => isset( $tour_min_price ) ? $tour_min_price : '',
 				'itinerarayday'          => isset( $itinerarayday ) ? $itinerarayday : '',

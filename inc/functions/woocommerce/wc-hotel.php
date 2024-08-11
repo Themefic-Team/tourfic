@@ -2,6 +2,7 @@
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Room\Room;
+use Tourfic\Classes\Hotel\Pricing;
 
 /**
  * Hotel booking ajax function
@@ -136,12 +137,12 @@ function tf_hotel_booking_callback() {
 
 		// Discount Calculation and Checking
 
-		$adult_price = ! empty( $room_meta['adult_price'] ) ? $room_meta['adult_price'] : 0;
-		$child_price = ! empty( $room_meta['child_price'] ) ? $room_meta['child_price'] : 0;
-		$room_price  = ! empty( $room_meta['price'] ) ? $room_meta['price'] : '';
+//		$adult_price = ! empty( $room_meta['adult_price'] ) ? $room_meta['adult_price'] : 0;
+//		$child_price = ! empty( $room_meta['child_price'] ) ? $room_meta['child_price'] : 0;
+//		$room_price  = ! empty( $room_meta['price'] ) ? $room_meta['price'] : '';
 
 
-		if ( $hotel_discount_type == "percent" ) {
+		/*if ( $hotel_discount_type == "percent" ) {
 			if ( $pricing_by == 1 ) {
 				$room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $room_price - ( ( (int) $room_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
 			}
@@ -157,7 +158,7 @@ function tf_hotel_booking_callback() {
 				$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - (int) $hotel_discount_amount ), 2 ) );
 				$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - (int) $hotel_discount_amount ), 2 ) );
 			}
-		}
+		}*/
 
 		/**
 		 * Calculate Pricing

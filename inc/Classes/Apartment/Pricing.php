@@ -67,7 +67,7 @@ class Pricing {
 	public function set_apartment_price( ) {
 		$meta = $this->meta;
 		$pricing_type = !empty($meta["pricing_type"]) ? $meta["pricing_type"] : 'per_night';
-		$discount_arr = $this->get_discount( $apt_id );
+		$discount_arr = $this->get_discount();
 		$adult_price = !empty($meta["adult_price"]) ? $meta["adult_price"] : 0;
 		$child_price = !empty($meta["child_price"]) ? $meta["child_price"] : 0;
 		$infant_price = !empty($meta["infant_price"]) ? $meta["infant_price"] : 0;
