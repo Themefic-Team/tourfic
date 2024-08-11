@@ -382,7 +382,79 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
                             'subtitle' => __( 'Choose icon', 'tourfic' ),
                         )
 					),
-				)
+				),
+				array(
+					'id'    => 'car-inc-heading',
+					'type'  => 'heading',
+					'label' => 'Include & Exclude Section',
+					'subtitle' => __( 'Each car includes certain items, while others are not part of the package. Clearly define these inclusions and exclusions to prevent any misunderstandings during your car.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'car-inc-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-include-exclude/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'       => 'inc_exc_section',
+					'type'     => 'switch',
+					'label'    => esc_html__( 'Do you want to show Include and Exclude in the frontend?', 'tourfic' ),
+					'subtitle' => esc_html__( 'Do you want to show Include and Exclude in the frontend?', 'tourfic' )
+				),
+				array(
+					'id'           => 'inc',
+					'type'         => 'repeater',
+					'label'        => __( 'Items Included', 'tourfic' ),
+					'subtitle'     => __( 'Add all the items/features included in this car package.', 'tourfic' ),
+					'button_title' => __( 'Add New Include', 'tourfic' ),
+					'field_title'  => 'inc',
+					'dependency'  => [
+						array( 'inc_exc_section', '==', 'true' )
+					],
+					'fields'       => array(
+						array(
+							'id'    => 'inc',
+							'type'  => 'text',
+							'label' => __( 'Insert your item', 'tourfic' ),
+						),
+					),
+				),
+				array(
+					'id'       => 'inc_icon',
+					'type'     => 'icon',
+					'label'    => __( 'Icon for Included Item', 'tourfic' ),
+					'subtitle' => __( 'Choose icon', 'tourfic' ),
+					'dependency'  => [
+						array( 'inc_exc_section', '==', 'true' )
+					],
+				),
+				array(
+					'id'           => 'exc',
+					'type'         => 'repeater',
+					'label'        => __( 'Items Excluded', 'tourfic' ),
+					'subtitle'        => __( 'List all the items/features excluded in this car package.', 'tourfic' ),
+					'button_title' => __( 'Add New Exclude', 'tourfic' ),
+					'field_title'  => 'exc',
+					'fields'       => array(
+						array(
+							'id'    => 'exc',
+							'type'  => 'text',
+							'label' => __( 'Insert your item', 'tourfic' ),
+						),
+					),
+					'dependency'  => [
+						array( 'inc_exc_section', '==', 'true' )
+					],
+				),
+				array(
+					'id'       => 'exc_icon',
+					'type'     => 'icon',
+					'label'    => __( 'Icon for Excluded item', 'tourfic' ),
+					'subtitle' => __( 'Choose icon', 'tourfic' ),
+					'dependency'  => [
+						array( 'inc_exc_section', '==', 'true' )
+					],
+				),
 			),
 		),
 
