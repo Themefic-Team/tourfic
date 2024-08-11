@@ -569,7 +569,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 
 		// echo '<pre>';
 		// // print_r(Apt_Availability::instance( get_the_ID() )->set_dates("2024/08/08", "2024/08/12")->set_persons(1, 1, 1)->get_total_price());
-		// print_r(Apt_Pricing::instance( get_the_ID() )->set_dates("2024/08/08", "2024/08/12")->set_persons(1, 1, 1)->get_availability());
+		// print_r(Apt_Pricing::instance( get_the_ID() )->set_dates("2024/08/09", "2024/08/12")->set_persons(1, 1, 1)->get_availability());
 		// echo '</pre>';
 		// die(); // Sunvi
 
@@ -1290,7 +1290,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 		$apartment_min_price = Apt_pricing::instance( get_the_ID() )->get_min_max_price();
 		$tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 		if ( $tf_apartment_arc_selected_template == "design-1" ) {
-		$first_gallery_image = explode(',', $gallery);	f
+		$first_gallery_image = explode(',', $gallery);
 		?>
 		<div class="tf-available-room">
 			<div class="tf-available-room-gallery">                       

@@ -64,7 +64,7 @@ class Pricing {
 		return $this;
 	}
 
-	public function set_apartment_price( ) {
+	public function set_apartment_price() {
 		$meta = $this->meta;
 		$pricing_type = !empty($meta["pricing_type"]) ? $meta["pricing_type"] : 'per_night';
 		$discount_arr = $this->get_discount();
@@ -108,12 +108,11 @@ class Pricing {
 	}
 
 	function get_availability() {
-		$persons = $this->persons;
 		$adult = !empty( $this->persons["adult"]) ? $this->persons["adult"] : 0;
 		$child = !empty( $this->persons["child"]) ? $this->persons["child"] : 0;
 		$infant = !empty( $this->persons["infant"]) ? $this->persons["infant"] : 0;
 		$availability_price = Availability::instance($this->apt_id)->set_dates($this->checkin, $this->checkout)->set_persons( $adult, $child, $infant)->get_total_price();
-		$availability_price+= $this->set_dates($this->checkin, $this->checkout)->set_persons( $adult, $child, $infant )->set_additional_fees()->get_fees();
+		// $availability_price+= $this->set_dates($this->checkin, $this->checkout)->set_persons( $adult, $child, $infant )->set_additional_fees()->get_fees();
 
 		return $availability_price;
 	}

@@ -370,9 +370,10 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 		}
 
 		if( !empty( $apt_data["enable_availability"]) && $apt_data["enable_availability"] == 1 ) {
-			$total_price = $this->get_total_apartment_price( $apt_id, $check_from, $check_to, $adult_count, $child_count, $infant_count, $additional_fees );
+			// $total_price = $this->get_total_apartment_price( $apt_id, $check_from, $check_to, $adult_count, $child_count, $infant_count, $additional_fees );
+			$total_price = APT_Price::instance( $apt_id )->set_dates( $check_from, $check_to)->set_persons( $adult_count, $child_count, $infant_count )->get_availability();
 		} else {
-			$total_price = APT_Price::instance()->set_dates( $check_from, $check_to)->set_persons( $adult_count, $child_count, $infant_count )->set_total_price( $apt_id )->get_total_price();
+			$total_price = APT_Price::instance( $apt_id )->set_dates( $check_from, $check_to)->set_persons( $adult_count, $child_count, $infant_count )->set_total_price()->get_total_price();
 		}
 
 

@@ -69,8 +69,6 @@ class Availability {
 			if ( ! empty( $apt_availability ) && is_array( $apt_availability ) ) {
 				foreach ( $apt_availability as $key => $single_avail ) {
 
-					$this->is_available = true;
-
 					$date_stt = strtotime($key);
 
 					if( $date_stt >= $check_in_stt && $date_stt <= $check_out_stt && $single_avail['status'] === 'available' ) {
