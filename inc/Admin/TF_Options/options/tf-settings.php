@@ -81,7 +81,7 @@ TF_Settings::option( 'tf_settings', array(
 						'hotel'     => __( 'Hotel', 'tourfic' ),
 						'tour'      => __( 'Tour', 'tourfic' ),
 						'apartment' => __( 'Apartment', 'tourfic' ),
-						'carrentals' => __( 'Car Rental', 'tourfic' ),
+						'carrentals' => __( 'Car', 'tourfic' ),
 					),
 				),
 				array(
@@ -1371,6 +1371,67 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
+
+		//Car Options
+		'car_option'      => array(
+			'title'  => __( 'Car Options', 'tourfic' ),
+			'icon'   => 'fa-solid fa-car',
+			'fields' => array(),
+		),
+		'car_single_page' => array(
+			'title'  => __( 'Single Page', 'tourfic' ),
+			'parent' => 'car_option',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'    => 'label_off_heading',
+					'type'  => 'heading',
+					'label' => __( 'Single Car Settings', 'tourfic' ),
+					'subtitle'   => __( 'These options can be overridden from Single Car Settings.', 'tourfic' ),
+				),
+
+				array(
+					'id'      => 'apartment-option-notice',
+					'type'    => 'notice',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/apartment-options/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+				),
+
+				array(
+					'id'        => 'disable-car-review',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Review Section', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
+
+				array(
+					'id'        => 'disable-car-share',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Share Option', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
+
+				array(
+					'id'        => 'disable-related-car',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Related Section', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
+				array(
+					'id'       => 'car_booking_form_button_text',
+					'type'     => 'text',
+					'label'    => __( 'Change Booking Form Button Text', 'tourfic' ),
+					'subtitle'  => __( 'With this option, you can change the text of the booking form button on the single car pages.', 'tourfic' ),
+					'default'    => __('Reserve', 'tourfic'),
+				),
+			),
+		),
+
 		//Frontend Dashboard
 		'frontend_dashboard'    => array(
 			'title'  => __( 'Frontend Dashboard', 'tourfic' ),
@@ -1944,6 +2005,35 @@ TF_Settings::option( 'tf_settings', array(
 					'type'      => 'switch',
 					'label'     => __( 'Disable Infant in Apartment Search', 'tourfic' ),
 					'subtitle'  => __( 'Turn on this setting to hide the infant option from the search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'       => 'car_search_heading',
+					'type'     => 'heading',
+					'label'    => __( 'Car Search', 'tourfic' ),
+				),
+				array(
+					'id'        => 'pick_drop_car_search',
+					'type'      => 'switch',
+					'label'     => __( 'Pickup & Dropoff Location Required in Car Search', 'tourfic' ),
+					'subtitle'  => __( 'Activate this feature to enable users to pick their pickup and dropoff Location for searching.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'        => 'disable_car_pickup_date',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Pickup Date in Car Search', 'tourfic' ),
+					'subtitle'  => __( 'Turn on this setting to hide the Pickup Date option from the search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'        => 'disable_car_dropoff_date',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Dropoff Date in Car Search', 'tourfic' ),
+					'subtitle'  => __( 'Turn on this setting to hide the Dropoff Date option from the search form.', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 				)

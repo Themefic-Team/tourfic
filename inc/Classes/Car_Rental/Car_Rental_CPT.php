@@ -37,10 +37,10 @@ class Car_Rental_CPT extends \Tourfic\Classes\Post_Type {
 				),
 			),
 			array(
-				'name'          => esc_html__('Features', 'tourfic' ),
-				'singular_name' => esc_html__('Features', 'tourfic' ),
-				'taxonomy'      => 'carrental_features',
-				'rewrite_slug'  => apply_filters( 'tf_carrental_features_slug', 'carrental-features' ),
+				'name'          => esc_html__('Fuel Type', 'tourfic' ),
+				'singular_name' => esc_html__('Fuel Type', 'tourfic' ),
+				'taxonomy'      => 'carrental_fuel_type',
+				'rewrite_slug'  => apply_filters( 'tf_carrental_fuel_type_slug', 'carrental-features' ),
 				'capability'  => array(
 					'assign_terms' => 'edit_tf_carrental',
 					'edit_terms'   => 'edit_tf_carrental',

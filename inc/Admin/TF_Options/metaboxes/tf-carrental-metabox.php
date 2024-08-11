@@ -549,7 +549,13 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'subtitle'       => __( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
 					'field_width' => '50',
 				),
-				
+				array(
+					'id'      => 'owner_image',
+					'type'    => 'image',
+					'label'   => __( 'Owner Photo', 'tourfic' ),
+					'subtitle'    => __( 'Please upload the Owner photo to be displayed in the Contact Section.', 'tourfic' ),
+					'library' => 'image',
+				),
 			),
 		),
 
