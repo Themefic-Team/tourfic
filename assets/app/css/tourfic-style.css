@@ -13144,6 +13144,14 @@ html {
       font-weight: 400;
       line-height: 150%;
       /* 24px */ }
+      .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-short-description p {
+        color: #566676;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 150% !important;
+        /* 24px */
+        margin: 0; }
     .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info {
       width: 100%; }
       .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul {

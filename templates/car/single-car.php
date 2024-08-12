@@ -114,6 +114,11 @@ while ( have_posts() ) : the_post();
 	$hotel_facilities = ! empty( $meta['hotel-facilities'] ) ? $meta['hotel-facilities'] : '';
 	$hotel_facilities_categories = ! empty( Helper::tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) : '';
 
+	// Car Info 
+	$passengers = ! empty( $meta['passengers'] ) ? $meta['passengers'] : '';
+	$baggage = ! empty( $meta['baggage'] ) ? $meta['baggage'] : '';
+	$car_custom_info = ! empty( $meta['car_custom_info'] ) ? $meta['car_custom_info'] : '';
+
 	// Benefits 
 	$benefits_status = ! empty( $meta['benefits_section'] ) ? $meta['benefits_section'] : '';
 	$benefits = ! empty( $meta['benefits'] ) ? $meta['benefits'] : '';
