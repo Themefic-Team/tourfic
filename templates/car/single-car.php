@@ -104,36 +104,26 @@ while ( have_posts() ) : the_post();
 
     }
 
-	// Hotel Detail
-	$gallery = ! empty( $meta['gallery'] ) ? $meta['gallery'] : '';
+	// Car Detail
+	$gallery = ! empty( $meta['car_gallery'] ) ? $meta['car_gallery'] : '';
 	if ( $gallery ) {
 		$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
 	}
-	$video = ! empty( $meta['video'] ) ? $meta['video'] : '';
-	// Room Details
-	$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-	if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
-		$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-		}, $rooms );
-		$rooms                = unserialize( $tf_hotel_rooms_value );
-	}
-
 
 	// Hotel facilitiles
 	$hotel_facilities = ! empty( $meta['hotel-facilities'] ) ? $meta['hotel-facilities'] : '';
 	$hotel_facilities_categories = ! empty( Helper::tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) : '';
 
+	// Benefits 
+	$benefits_status = ! empty( $meta['benefits_section'] ) ? $meta['benefits_section'] : '';
+	$benefits = ! empty( $meta['benefits'] ) ? $meta['benefits'] : '';
+
 	// FAQ
 	$faqs = ! empty( $meta['faq'] ) ? $meta['faq'] : '';
-	if ( ! empty( $faqs ) && gettype( $faqs ) == "string" ) {
-		$tf_hotel_faqs_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-		}, $faqs );
-		$faqs                = unserialize( $tf_hotel_faqs_value );
-	}
+
 	// Terms & condition
-	$tc = ! empty( $meta['tc'] ) ? $meta['tc'] : '';
+	$tc_title = ! empty( $meta['car-tc-section-title'] ) ? $meta['car-tc-section-title'] : '';
+	$tc = ! empty( $meta['terms_conditions'] ) ? $meta['terms_conditions'] : '';
 
 	$share_text = get_the_title();
 	$share_link = get_permalink( $post_id );

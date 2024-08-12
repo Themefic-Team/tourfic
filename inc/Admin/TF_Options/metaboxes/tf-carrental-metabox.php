@@ -15,18 +15,18 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 			'icon'   => 'fa-solid fa-cog',
 			'fields' => array(
 				array(
-					'id'    => 'carrental-General-heading',
+					'id'    => 'car-General-heading',
 					'type'  => 'heading',
 					'label' => 'General Information',
 				),
 				array(
-					'id'    => 'carrental_gallery',
+					'id'    => 'car_gallery',
 					'type'  => 'gallery',
 					'label' => esc_html__( 'Car Gallery', 'tourfic' ),
 					'subtitle' => esc_html__( 'Add multiple images to craft a captivating gallery for your car, giving potential customers a visual car.', 'tourfic' ),
 				),
                 array(
-					'id'       => 'tf_single_carrental_layout_opt',
+					'id'       => 'tf_single_car_layout_opt',
 					'type'     => 'select',
 					'label'    => esc_html__( 'Single Car Template Settings', 'tourfic' ),
 					'subtitle' => esc_html__( 'You can keep the Global Template settings or choose a different layout for this car.', 'tourfic' ),
@@ -37,7 +37,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'default'  => 'global',
 				),
                 array(
-					'id'       => 'tf_single_tour_template',
+					'id'       => 'tf_single_car_template',
 					'type'     => 'imageselect',
 					'label'    => esc_html__( 'Single Car Page Layout', 'tourfic' ),
 					'multiple' 		=> true,
@@ -50,17 +50,17 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					),
 					'default'   	=> 'design-1',
 					'dependency'  => [
-						array( 'tf_single_carrental_layout_opt', '==', 'single' )
+						array( 'tf_single_car_layout_opt', '==', 'single' )
 					],
 				),
 				array(
-					'id'    => 'carrental-location-heading',
+					'id'    => 'car-location-heading',
 					'type'  => 'heading',
 					'label' => 'Location Settings',
 					'subtitle' => esc_html__( 'The location of an car is a crucial element for every car. Set your car locations in this section.', 'tourfic' ),
 				),
 				array(
-					'id'      => 'carrental-location-docs',
+					'id'      => 'car-location-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
 					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/location-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
@@ -70,7 +70,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'type'     => 'text',
 					'label'    => esc_html__( 'Title of this Section', 'tourfic' ),
 					'subtitle' => esc_html__( 'This text will appear as the heading of the Location section on the frontend.', 'tourfic' ),
-					'default'  => esc_html__( 'Where you’ll be', 'tourfic' ),
+					'default'  => esc_html__( 'Location', 'tourfic' ),
 				),
 				array(
 					'id'       => 'map',
@@ -102,19 +102,19 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 			'icon'   => 'fa-solid fa-calendar-check',
 			'fields' => array(
 				array(
-					'id'    => 'carrental-car-details-heading',
+					'id'    => 'car-car-details-heading',
 					'type'  => 'heading',
 					'label' => 'Car Details',
 					'subtitle' => esc_html__( 'This section offer the options to customize the booking process for this car.', 'tourfic' ),
 				),
 				array(
-					'id'      => 'carrental-booking-docs',
+					'id'      => 'car-booking-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
 					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/booking-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
                 array(
-					'id'       => 'carrental_as_featured',
+					'id'       => 'car_as_featured',
 					'type'     => 'switch',
 					'label'    => esc_html__( 'Set car as featured', 'tourfic' ),
 					'subtitle' => esc_html__( 'This car will be featured at the top of both the search results and the car archive page.', 'tourfic' ),
@@ -176,7 +176,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'label'      => __( 'Select Brands', 'tourfic' ),
 					'options'    => 'terms',
 					'query_args' => array(
-						'taxonomy'   => 'carrental_brand',
+						'taxonomy'   => 'car_brand',
 						'hide_empty' => false,
 					),
 					'default'    => 'none',
@@ -230,7 +230,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'subtitle' => esc_html__( 'Driver included', 'tourfic' ),
 				),
                 array(
-					'id'    => 'carrental-driverinfo-heading',
+					'id'    => 'car-driverinfo-heading',
 					'type'  => 'heading',
 					'label' => 'Driver Details Section',
 					'subtitle' => __( 'How can potential or existing customers reach out for more details about your car? Please share your Driver Details here.', 'tourfic' ),
@@ -239,7 +239,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					],
 				),
 				array(
-					'id'       => 'carrental_driverinfo_section',
+					'id'       => 'car_driverinfo_section',
 					'type'     => 'switch',
 					'label'    => esc_html__( 'Do you want to show driver information in the frontend?', 'tourfic' ),
 					'subtitle' => esc_html__( 'Do you want to show driver information in the frontend?', 'tourfic' ),
@@ -307,13 +307,13 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					],
 				),
 				array(
-					'id'    => 'carrental-custom-info-heading',
+					'id'    => 'car-custom-info-heading',
 					'type'  => 'heading',
 					'label' => 'Add Custom Informations',
 					'subtitle' => esc_html__( 'This section offer the options to customize the booking process for this car.', 'tourfic' ),
 				),
 				array(
-					'id'           => 'carrental_custom_info',
+					'id'           => 'car_custom_info',
 					'type'         => 'repeater',
 					'button_title' => __( 'Add New Custom Info', 'tourfic' ),
 					'label'        => __( 'Add Your Custom Infos', 'tourfic' ),
@@ -342,13 +342,13 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 			'icon'   => 'fa-solid fa-clipboard-question',
 			'fields' => array(
 				array(
-					'id'    => 'carrental-add-info-heading',
+					'id'    => 'car-add-info-heading',
 					'type'  => 'heading',
 					'label' => 'Benefits',
 					'subtitle' => __( 'This section is designed to help users find answers to common questions.', 'tourfic' ),
 				),
 				array(
-					'id'      => 'carrental-add-info-docs',
+					'id'      => 'car-add-info-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
 					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/faq-terms/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
@@ -518,13 +518,13 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 			'icon'   => 'fa-solid fa-clipboard-question',
 			'fields' => array(
 				array(
-					'id'    => 'carrental-faq-heading',
+					'id'    => 'car-faq-heading',
 					'type'  => 'heading',
 					'label' => 'Badge Section',
 					'subtitle' => __( 'This section is designed to help users find answers to common questions.', 'tourfic' ),
 				),
 				array(
-					'id'      => 'carrental-faq-docs',
+					'id'      => 'car-faq-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
 					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/faq-terms/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
@@ -564,13 +564,13 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 			'icon'   => 'fa-solid fa-address-book',
 			'fields' => array(
 				array(
-					'id'    => 'carrental-continfo-heading',
+					'id'    => 'car-continfo-heading',
 					'type'  => 'heading',
 					'label' => 'Contact Info Section',
 					'subtitle' => __( 'How can potential or existing customers reach out for more details about your car? Please share your contact information here.', 'tourfic' ),
 				),
 				array(
-					'id'      => 'carrental-continfo-docs',
+					'id'      => 'car-continfo-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
 					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-contact-info/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
@@ -619,13 +619,13 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 			'icon'   => 'fa-solid fa-money-check',
 			'fields' => array(
 				array(
-					'id'    => 'carrental-pricing-heading',
+					'id'    => 'car-pricing-heading',
 					'type'  => 'heading',
 					'label' => 'Car Pricing Settings',
 					'subtitle' => __( 'The pricing of a car package plays a crucial role. Make sure you set it correctly.', 'tourfic' ),
 				),
 				array(
-					'id'      => 'carrental-pricing-docs',
+					'id'      => 'car-pricing-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
 					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tourfic-price-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
@@ -806,13 +806,13 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 			'icon'   => 'fa-solid fa-route',
 			'fields' => array(
 				array(
-					'id'    => 'carrental-extra-heading',
+					'id'    => 'car-extra-heading',
 					'type'  => 'heading',
 					'label' => 'Car Extra Section',
 					'subtitle' => __( 'How can potential or existing customers reach out for more details about your car? Please share your contact information here.', 'tourfic' ),
 				),
 				array(
-					'id'      => 'carrental-extra-docs',
+					'id'      => 'car-extra-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
 					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-contact-info/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
@@ -972,13 +972,13 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 			'icon'   => 'fa-solid fa-clipboard-question',
 			'fields' => array(
 				array(
-					'id'    => 'carrental-faq-heading',
+					'id'    => 'car-faq-heading',
 					'type'  => 'heading',
 					'label' => 'FAQ Section',
 					'subtitle' => __( 'This section is designed to help users find answers to common questions.', 'tourfic' ),
 				),
 				array(
-					'id'      => 'carrental-faq-docs',
+					'id'      => 'car-faq-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
 					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/faq-terms/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
@@ -1012,19 +1012,19 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 			'icon'   => 'fa-regular fa-square-check',
 			'fields' => array(
 				array(
-					'id'    => 'carrental-tnc-heading',
+					'id'    => 'car-tnc-heading',
 					'type'  => 'heading',
 					'label' => 'Terms & Conditions Section',
 					'subtitle' => __( 'Include your set of regulations and guidelines that customers must agree to in order to use the service provided in your car package. ', 'tourfic' ),
 				),
 				array(
-					'id'      => 'carrental-tnc-docs',
+					'id'      => 'car-tnc-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
 					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-terms-conditions/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
-					'id'    => 'carrental-section-title',
+					'id'    => 'car-tc-section-title',
 					'type'  => 'text',
 					'label' => __( 'Title of the Section', 'tourfic' ),
 					'subtitle' => __( 'This text will appear as the heading of the T&C section on the frontend.', 'tourfic' ),
@@ -1045,7 +1045,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 						),
 						array(
 							'id'    => 'content',
-							'type'  => 'textarea',
+							'type'  => 'editor',
 							'label' => __( 'Content', 'tourfic' ),
 						)
 					),

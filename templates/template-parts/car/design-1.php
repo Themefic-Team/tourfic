@@ -1,9 +1,6 @@
 <?php
-/**
- * Template: Single Car (Full Width)
- */
 
-get_header();
+use \Tourfic\Classes\Helper;
 ?>
 
 <div class="tf-single-car-section">
@@ -97,8 +94,23 @@ get_header();
                         </ul>
                     </div>
 
-
-
+                    <?php
+                    if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-car-layout'] ) ) {
+                        foreach ( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-car-layout'] as $section ) {
+                            if ( ! empty( $section['car-section-status'] ) && $section['car-section-status'] == "1" && ! empty( $section['car-section-slug'] ) ) {
+                                include TF_TEMPLATE_PART_PATH . 'car/design-1/' . $section['car-section-slug'] . '.php';
+                            }
+                        }
+                    } else {
+                        include TF_TEMPLATE_PART_PATH . 'car/design-1/description.php';
+                        include TF_TEMPLATE_PART_PATH . 'car/design-1/car-info.php';
+                        include TF_TEMPLATE_PART_PATH . 'car/design-1/benefits.php';
+                        include TF_TEMPLATE_PART_PATH . 'car/design-1/inc-exc.php';
+                        include TF_TEMPLATE_PART_PATH . 'car/design-1/location.php';
+                        include TF_TEMPLATE_PART_PATH . 'car/design-1/reviews.php';
+                        include TF_TEMPLATE_PART_PATH . 'car/design-1/faq.php';
+                    }
+                    ?>
 
                 </div>
 
@@ -442,23 +454,23 @@ get_header();
                     </div>
                 </div>
             </div>
-
+            <?php 
+            if(!empty($tc)){ ?>
             <div class="tf-car-conditions-section">
-                <h3><?php esc_html_e("Terms & Conditions", "tourfic"); ?></h3>
+                <?php if(!empty($tc_title)){ ?>
+                <h3><?php echo esc_html($tc_title); ?></h3>
+                <?php } ?>
                 <table>
+                    <?php 
+                    foreach($tc as $singletc){ ?>
                     <tr>
-                        <th>Fuel Policy</th>
-                        <td>The car rental company will have the car filled with fuel for you and you have to return the car with a full tank. The car rental company will charge you for every missing quarter of a tank and a refueling fee might apply. A fuel deposit might be required, which will be refunded at the end of the rental if the car is returned with a full tank of fuel.</td>
+                        <th><?php echo !empty($singletc['title']) ? esc_html($singletc['title']) : ''; ?></th>
+                        <td><?php echo !empty($singletc['content']) ? wp_kses_post($singletc['content']) : ''; ?></td>
                     </tr>
-                    <tr>
-                        <th>Driver requirements</th>
-                        <td>Rentals originating in British Columbia may only be driven in the provinces of British Columbia and Alberta and the state of Washington.</td>
-                    </tr>
+                    <?php } ?>
                 </table>
             </div>
+            <?php } ?>
         </div>
     </div>
 </div>
-
-<?php
-get_footer();
