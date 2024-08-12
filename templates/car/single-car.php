@@ -118,6 +118,13 @@ while ( have_posts() ) : the_post();
 	$benefits_status = ! empty( $meta['benefits_section'] ) ? $meta['benefits_section'] : '';
 	$benefits = ! empty( $meta['benefits'] ) ? $meta['benefits'] : '';
 
+	// Include Exclude 
+	$inc_exc_status = ! empty( $meta['inc_exc_section'] ) ? $meta['inc_exc_section'] : '';
+	$includes = ! empty( $meta['inc'] ) ? $meta['inc'] : '';
+	$include_icon = ! empty( $meta['inc_icon'] ) ? $meta['inc_icon'] : '';
+	$excludes = ! empty( $meta['exc'] ) ? $meta['exc'] : '';
+	$exclude_icon = ! empty( $meta['exc_icon'] ) ? $meta['exc_icon'] : '';
+
 	// FAQ
 	$faqs = ! empty( $meta['faq'] ) ? $meta['faq'] : '';
 

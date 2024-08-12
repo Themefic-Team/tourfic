@@ -407,13 +407,13 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'label'        => __( 'Items Included', 'tourfic' ),
 					'subtitle'     => __( 'Add all the items/features included in this car package.', 'tourfic' ),
 					'button_title' => __( 'Add New Include', 'tourfic' ),
-					'field_title'  => 'inc',
+					'field_title'  => 'title',
 					'dependency'  => [
 						array( 'inc_exc_section', '==', 'true' )
 					],
 					'fields'       => array(
 						array(
-							'id'    => 'inc',
+							'id'    => 'title',
 							'type'  => 'text',
 							'label' => __( 'Insert your item', 'tourfic' ),
 						),
@@ -434,10 +434,10 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'label'        => __( 'Items Excluded', 'tourfic' ),
 					'subtitle'        => __( 'List all the items/features excluded in this car package.', 'tourfic' ),
 					'button_title' => __( 'Add New Exclude', 'tourfic' ),
-					'field_title'  => 'exc',
+					'field_title'  => 'title',
 					'fields'       => array(
 						array(
-							'id'    => 'exc',
+							'id'    => 'title',
 							'type'  => 'text',
 							'label' => __( 'Insert your item', 'tourfic' ),
 						),

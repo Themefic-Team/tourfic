@@ -5,7 +5,7 @@
     <ul>
         <?php foreach($benefits as $singlebenefit){ ?>
         <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
-        <i class="<?php echo !empty($singlebenefit['icon']) ? esc_attr($singlebenefit['icon']) : ''; ?>"></i>
+        <i class="<?php echo !empty($singlebenefit['icon']) ? esc_attr($singlebenefit['icon']) : 'ri-check-double-line'; ?>"></i>
         <?php echo !empty($singlebenefit['title']) ? esc_html($singlebenefit['title']) : ''; ?>
         </li>
         <?php } ?>
