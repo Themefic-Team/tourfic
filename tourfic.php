@@ -24,6 +24,7 @@ final class Tourfic {
 	 *
 	 * @var string
 	 */
+
 	const VERSION = '2.13.0';
 
 	/**
