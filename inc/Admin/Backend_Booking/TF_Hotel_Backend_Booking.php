@@ -6,6 +6,7 @@ namespace Tourfic\Admin\Backend_Booking;
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 use \Tourfic\Classes\Helper;
+use Tourfic\Classes\Room\Room;
 use \Tourfic\Core\TF_Backend_Booking;
 
 class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
@@ -193,18 +194,13 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 		 * Backend data
 		 */
 		$meta  = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
-		$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-		if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
-			$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-				return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-			}, $rooms );
-			$rooms  = unserialize( $tf_hotel_rooms_value );
-		}
+		$rooms = Room::get_hotel_rooms( $hotel_id);
 
 		$room_array = array();
 
 		if ( ! empty( $rooms ) ) {
-			foreach ( $rooms as $room_id => $room ) {
+			foreach ( $rooms as $_room ) {
+				$room = get_post_meta($_room->ID, 'tf_room_opt', true);
 				// Check if room is enabled
 				$enable = ! empty( $room['enable'] ) && boolval( $room['enable'] );
 
@@ -240,11 +236,11 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 							} ) );
 
 							if ( is_iterable( $available_rooms ) && count( $available_rooms ) >= 1 ) {
-								$room_array[ $room['unique_id'] ] = $room['title'];
+								$room_array[ $room['unique_id'] ] = get_the_title($_room->ID);
 							}
 						}
 					} else {
-						$room_array[ $room['unique_id'] ] = $room['title'];
+						$room_array[ $room['unique_id'] ] = get_the_title($_room->ID);
 					}
 				}
 			}
@@ -291,16 +287,11 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 		if ( ! empty( $hotel_id ) && ! empty( $room_id ) ) {
 
 			$meta  = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
-			$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-			if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
-				$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-					return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-				}, $rooms );
-				$rooms                = unserialize( $tf_hotel_rooms_value );
-			}
+			$rooms = Room::get_hotel_rooms( $hotel_id);
 
 			if ( ! empty( $rooms ) ) {
-				foreach ( $rooms as $room ) {
+				foreach ( $rooms as $_room ) {
+					$room = get_post_meta($_room->ID, 'tf_room_opt', true);
 					if ( $room['unique_id'] == $room_id ) {
 
 						$avil_by_date = ! empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : false;
@@ -522,16 +513,11 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 		if ( $hotel_id && $room_id ) {
 			$meta = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
 
-			$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-			if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
-				$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-					return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-				}, $rooms );
-				$rooms                = unserialize( $tf_hotel_rooms_value );
-			}
+			$rooms = Room::get_hotel_rooms( $hotel_id);
 
 			if ( ! empty( $rooms ) ) {
-				foreach ( $rooms as $room ) {
+				foreach ( $rooms as $_room ) {
+					$room = get_post_meta($_room->ID, 'tf_room_opt', true);
 					if ( $room['unique_id'] == $room_id ) {
 						return $room;
 					}
