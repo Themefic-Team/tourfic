@@ -135,6 +135,8 @@ while ( have_posts() ) : the_post();
 	$driver_address = ! empty( $meta['driver_address'] ) ? $meta['driver_address'] : '';
 	$driver_image = ! empty( $meta['driver_image'] ) ? $meta['driver_image'] : '';
 
+	// Car Extras
+	$car_extras = ! empty( $meta['extras'] ) ? $meta['extras'] : '';
 
 	// FAQ
 	$faqs = ! empty( $meta['faq'] ) ? $meta['faq'] : '';

@@ -831,6 +831,11 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 							'label' => __( 'Title', 'tourfic' ),
 						),
 						array(
+							'id'    => 'content',
+							'type'  => 'textarea',
+							'label' => __( 'Content', 'tourfic' ),
+						),
+						array(
 							'id'    => 'max_number',
 							'type'  => 'number',
 							'label' => __( 'Max of number', 'tourfic' ),
