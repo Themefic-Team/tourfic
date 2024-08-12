@@ -23,7 +23,7 @@ use \Tourfic\Classes\Helper;
                     </div>
                     <div class="tf-car-hero-gallery">
                         <div class="tf-featured-car">
-                            <img src="<?php echo esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>" alt="<?php esc_html_e( 'Car Image', 'tourfic' ); ?>">
+                            <img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>" alt="<?php esc_html_e( 'Car Image', 'tourfic' ); ?>">
 
                             <div class="tf-featured-reviews">
                                 <a href="#tf-review" class="tf-single-rating">
@@ -36,18 +36,16 @@ use \Tourfic\Classes\Helper;
                         </div>
 
                         <div class="tf-gallery tf-flex tf-flex-gap-16">
-                            <a href="#" id="tour-gallery" data-fancybox="tour-gallery">
-                                <img src="<?php echo esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>">
+                        <?php 
+                        $gallery_count = 1;
+                            if ( ! empty( $gallery_ids ) ) {
+                            foreach ( $gallery_ids as $key => $gallery_item_id ) {
+                            $image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+                        ?>
+                            <a class="<?php echo $gallery_count==5 ? esc_attr( 'tf-gallery-more' ) : ''; ?> " href="<?php echo esc_url($image_url); ?>" id="tour-gallery" data-fancybox="tour-gallery">
+                                <img src="<?php echo esc_url($image_url); ?>">
                             </a>
-                            <a href="#" id="tour-gallery" data-fancybox="tour-gallery">
-                                <img src="<?php echo esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>">
-                            </a>
-                            <a href="#" id="tour-gallery" data-fancybox="tour-gallery">
-                                <img src="<?php echo esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>">
-                            </a>
-                            <a class="tf-gallery-more" href="#" id="tour-gallery" data-fancybox="tour-gallery">
-                                <img src="<?php echo esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>">
-                            </a>
+                        <?php $gallery_count++; } } ?>
                         </div>
                     </div>
 
