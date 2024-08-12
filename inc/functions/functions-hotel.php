@@ -1701,17 +1701,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                 </div>
                 <div class="tf-post-footer tf-flex tf-flex-align-center tf-flex-space-bttn tf-mt-16">
                     <div class="tf-pricing">
-						<?php
-						$min_max_price = Pricing::instance( $post_id )->get_min_max_price();
-
-						if ( ! empty( $min_max_price ) ):
-							echo esc_html__( "From ", "tourfic" );
-							echo " " . wp_kses_post( wc_price( $min_max_price['min']['sale_price'] ) ) . " ";
-							if ( $min_max_price['min']['regular_price'] != $min_max_price['min']['sale_price'] ) {
-								echo "<del>" . wp_kses_post( wc_price( $min_max_price['min']['regular_price'] ) ) . "<del>";
-							}
-						endif;
-						?>
+	                    <?php echo Pricing::instance( $post_id )->get_min_price_html(); ?>
                     </div>
                     <div class="tf-booking-bttns">
                         <a class="tf-btn-normal btn-secondary" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
@@ -1804,19 +1794,9 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                                 </div>
 							<?php } ?>
                             <div class="tf-available-room-price">
-						<span class="tf-price-from">
-						<?php
-						$min_max_price = Pricing::instance( $post_id )->get_min_max_price();
-
-						if ( ! empty( $min_max_price ) ):
-							echo esc_html__( "From ", "tourfic" );
-							echo " " . wp_kses_post( wc_price( $min_max_price['min']['sale_price'] ) ) . " ";
-							if ( $min_max_price['min']['regular_price'] != $min_max_price['min']['sale_price'] ) {
-								echo "<del>" . wp_kses_post( wc_price( $min_max_price['min']['regular_price'] ) ) . "<del>";
-							}
-						endif;
-						?>
-						</span>
+                                <span class="tf-price-from">
+                                <?php echo Pricing::instance( $post_id )->get_min_price_html(); ?>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -1861,19 +1841,9 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                             </div>
 						<?php } ?>
                         <div class="tf-available-room-price">
-					<span class="tf-price-from">
-					<?php
-					$min_max_price = Pricing::instance( $post_id )->get_min_max_price();
-					if ( ! empty( $min_max_price ) ):
-						echo esc_html__( "From ", "tourfic" );
-						if ( $min_max_price['min']['regular_price'] != $min_max_price['min']['sale_price'] ) {
-							echo "<del>" . wp_kses_post( wp_strip_all_tags( wc_price( $min_max_price['min']['regular_price'] ) ) ) . "</del>" . " " . "<span>" . wp_kses_post( wc_price( $min_max_price['min']['sale_price'] ) ) . "</span>";
-						} else {
-							echo wp_kses_post( wc_price( $min_max_price['min']['sale_price'] ) ) . " ";
-						}
-					endif;
-					?>
-					</span>
+                            <span class="tf-price-from">
+                            <?php echo Pricing::instance( $post_id )->get_min_price_html(); ?>
+                            </span>
                         </div>
                     </div>
                     <a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php esc_html_e( "See details", "tourfic" ); ?></a>
@@ -1987,14 +1957,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                                                 <!-- Show minimum price @author - Hena -->
                                                 <div class="tf-room-price-area">
                                                     <div class="tf-room-price">
-														<?php
-														$min_max_price = Pricing::instance( $post_id )->get_min_max_price();
-														echo esc_html__( "From ", "tourfic" );
-														echo " " . wp_kses_post( wc_price( $min_max_price['min']['sale_price'] ) ) . " ";
-														if ( $min_max_price['min']['regular_price'] != $min_max_price['min']['sale_price'] ) {
-															echo "<del>" . wp_kses_post( wc_price( $min_max_price['min']['regular_price'] ) ) . "<del>";
-														}
-														?>
+														<?php echo Pricing::instance( $post_id )->get_min_price_html(); ?>
                                                     </div>
                                                 </div>
                                             </div>

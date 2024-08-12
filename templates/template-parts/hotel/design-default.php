@@ -2,6 +2,7 @@
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
+use \Tourfic\Classes\Hotel\Pricing;
 
 $tf_booking_type = '1';
 $tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = $tf_ext_booking_type = $tf_ext_booking_code = '';
@@ -544,117 +545,6 @@ $total_room_option_count = 0;
 									$hotel_discount_type   = ! empty( $room["discount_hotel_type"] ) ? $room["discount_hotel_type"] : "none";
 									$hotel_discount_amount = ! empty( $room["discount_hotel_price"] ) ? $room["discount_hotel_price"] : 0;
 
-									if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $avil_by_date == '1' && $pricing_by !== '3') {
-										$avail_date = ! empty( $room['avail_date'] ) ? json_decode( $room['avail_date'], true ) : [];
-										if ( $pricing_by == '1' ) {
-											$prices          = array();
-											$discount_prices = array();
-
-											foreach ( $avail_date as $date => $data ) {
-												if ( $data['status'] == 'available' ) {
-													$prices[] = ! empty( $data['price'] ) ? $data['price'] : 0;
-
-													if ( $hotel_discount_type == "percent" ) {
-														$discount_prices[] = ! empty( $data['price'] ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $data['price'] - ( ( (int) $data['price'] / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-													} else if ( $hotel_discount_type == "fixed" ) {
-														$discount_prices[] = ! empty( $data['price'] ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $data['price'] - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-													}
-												}
-											}
-										} else {
-											$prices          = array();
-											$discount_prices = array();
-
-											foreach ( $avail_date as $date => $data ) {
-												if ( $data['status'] == 'available' ) {
-													$prices[] = ! empty( $data['adult_price'] ) ? $data['adult_price'] : 0;
-
-													if ( $hotel_discount_type == "percent" ) {
-														$discount_prices[] = ! empty( $data['adult_price'] ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $data['adult_price'] - ( ( (int) $data['adult_price'] / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-													} else if ( $hotel_discount_type == "fixed" ) {
-														$discount_prices[] = ! empty( $data['adult_price'] ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $data['adult_price'] - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-													}
-												}
-											}
-										}
-										if ( ! empty( $prices ) ) {
-											$range_price          = [];
-											$discount_range_price = array();
-											foreach ( $prices as $single ) {
-												if ( ! empty( $single ) ) {
-													$range_price[] = $single;
-												}
-											}
-											foreach ( $discount_prices as $discount_single ) {
-												if ( ! empty( $discount_single ) ) {
-													$discount_range_price[] = $discount_single;
-												}
-											}
-
-											if ( sizeof( $range_price ) > 1 ) {
-
-												$discount_price = ! empty( $discount_prices ) ? ( min( $discount_prices ) != max( $discount_prices ) ? wc_format_price_range( min( $discount_prices ), max( $discount_prices ) ) : wc_price( min( $discount_prices ) ) ) : 0;
-												$price          = $prices ? ( min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices ), max( $prices ) ) : wc_price( min( $prices ) ) ) : wc_price( 0 );
-
-
-											} else {
-												$price          = ! empty( $range_price[0] ) ? $range_price[0] : 0;
-												$discount_price = ! empty( $discount_range_price[0] ) ? $discount_range_price[0] : '';
-
-												$price          = wc_price( $price );
-												$discount_price = wc_price( $discount_price );
-											}
-										} else {
-											if ( $pricing_by == '1' ) {
-												$price          = ! empty( $room['price'] ) ? $room['price'] : 0;
-												$discount_price = 0;
-												if ( $hotel_discount_type == "percent" ) {
-													$discount_price = ! empty( $price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $price - ( ( (int) $price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-												} else if ( $hotel_discount_type == "fixed" ) {
-													$discount_price = ! empty( $price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-												}
-												$price          = wc_price( $price );
-												$discount_price = wc_price( $discount_price );
-
-											} else {
-												$price          = ! empty( $room['adult_price'] ) ? $room['adult_price'] : 0;
-												$discount_price = 0;
-
-												if ( $hotel_discount_type == "percent" ) {
-													$discount_price = ! empty( $price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $price - ( ( (int) $price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-												} else if ( $hotel_discount_type == "fixed" ) {
-													$discount_price = ! empty( $price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-												}
-												$price          = wc_price( $price );
-												$discount_price = wc_price( $discount_price );
-											}
-										}
-									} else {
-										if ( $pricing_by == '1' ) {
-											$price          = ! empty( $room['price'] ) ? $room['price'] : 0;
-											$discount_price = 0;
-
-											if ( $hotel_discount_type == "percent" ) {
-												$discount_price = ! empty( $price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $price - ( ( (int) $price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-											}
-											if ( $hotel_discount_type == "fixed" ) {
-												$discount_price = ! empty( $price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-											}
-											$discount_price = ( $hotel_discount_type != "none" && $hotel_discount_amount != 0 ) ? wc_price( $discount_price ) : 0;
-											$price          = wc_price( $price );
-										} else {
-											$price          = ! empty( $room['adult_price'] ) ? $room['adult_price'] : 0;
-											$discount_price = 0;
-
-											if ( $hotel_discount_type == "percent" ) {
-												$discount_price = ! empty( $price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $price - ( ( (int) $price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-											} else if ( $hotel_discount_type == "fixed" ) {
-												$discount_price = ! empty( $price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $price - (int) $hotel_discount_amount ), 2 ) ) : 0;
-											}
-											$discount_price = wc_price( $discount_price );
-											$price          = wc_price( $price );
-										}
-									}
 									?>
                                     <tr>
                                         <td class="description" rowspan="<?php echo $room_options ? count( $room_options ) : 1; ?>">
@@ -745,18 +635,16 @@ $total_room_option_count = 0;
 											<?php } ?>
                                         </td>
 									<?php
-									if ( $room_options ):
+									if ( $pricing_by == '3' && !empty($room_options) ):
 										foreach ( $room_options as $room_option_key => $room_option ):
-											if ( $pricing_by == '3' ) {
-												$option_price_type = ! empty( $room_option['option_pricing_type'] ) ? $room_option['option_pricing_type'] : 'per_room';
-												$discount_price    = 0;
+                                            $option_price_type = ! empty( $room_option['option_pricing_type'] ) ? $room_option['option_pricing_type'] : 'per_room';
+                                            $discount_price    = 0;
 
-												if ( $option_price_type == 'per_room' ) {
-													$option_price = ! empty( $room_option['option_price'] ) ? floatval( $room_option['option_price'] ) : 0;
-												} elseif ( $option_price_type == 'per_person' ) {
-													$option_price = ! empty( $room_option['option_adult_price'] ) ? floatval( $room_option['option_adult_price'] ) : 0;
-												}
-											}
+                                            if ( $option_price_type == 'per_room' ) {
+                                                $option_price = ! empty( $room_option['option_price'] ) ? floatval( $room_option['option_price'] ) : 0;
+                                            } elseif ( $option_price_type == 'per_person' ) {
+                                                $option_price = ! empty( $room_option['option_adult_price'] ) ? floatval( $room_option['option_adult_price'] ) : 0;
+                                            }
 											?>
                                             <td class="options">
                                                 <ul>
@@ -822,71 +710,33 @@ $total_room_option_count = 0;
 												<?php } ?>
                                             </td>
 											<?php if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' ) || $tf_booking_type == 1 ) : ?>
-                                            <td class="pricing">
-                                                <div class="tf-price-column">
-													<?php
-													if ( $pricing_by == '1' ) {
-														if ( ! empty( $discount_price ) ) {
-															?>
-                                                            <span class="tf-price"><del><?php echo $price; ?></del> <?php echo $discount_price ?></span>
-															<?php
-														} else if ( $hotel_discount_type == "none" || empty( $hotel_discount_amount ) ) {
-															?>
-                                                            <span class="tf-price"><?php echo $price ?></span>
-															<?php
-														} ?>
+                                                <td class="pricing">
+                                                    <div class="tf-price-column">
+                                                        <?php
+                                                        $discount_price = Pricing::apply_discount( $option_price, $hotel_discount_type, $hotel_discount_amount );
 
-                                                        <div class="price-per-night">
-															<?php echo $multi_by_date ? __( 'per night', 'tourfic' ) : __( 'per day', 'tourfic' ); ?>
-                                                        </div>
-														<?php
-													} elseif ( $pricing_by == '2' ) {
-														if ( ! empty( $discount_price ) ) {
-															?>
-                                                            <span class="tf-price"><del><?php echo $price; ?></del> <?php echo $discount_price ?></span>
-															<?php
-															$discount_price = "";
-														} else if ( $hotel_discount_type == "none" || empty( $d_price ) ) {
-															?>
-                                                            <span class="tf-price"><?php echo $price ?></span>
-															<?php
-														} ?>
-                                                        <div class="price-per-night">
-															<?php echo $multi_by_date ? __( 'per person/night', 'tourfic' ) : __( 'per person/day', 'tourfic' ); ?>
-                                                        </div>
-														<?php
-													} elseif ( $pricing_by == '3' ) {
-														if ( $hotel_discount_type == "percent" ) {
-															$discount_price = ! empty( $option_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $option_price - ( ( (int) $option_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-														} else if ( $hotel_discount_type == "fixed" ) {
-															$discount_price = ! empty( $option_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $option_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-														}
-
-														if ( ! empty( $discount_price ) && $hotel_discount_type != "none" && ! empty( $hotel_discount_type ) ) {
-															?>
+                                                        if ( ! empty( $discount_price ) && $hotel_discount_type != "none" && ! empty( $hotel_discount_type ) ) {
+                                                            ?>
                                                             <span class="tf-price"><del><?php echo wc_price( $option_price ); ?></del> <?php echo wc_price( $discount_price ); ?></span>
-															<?php
-														} else if ( $hotel_discount_type == "none" ) {
-															?>
+                                                            <?php
+                                                        } else if ( $hotel_discount_type == "none" ) {
+                                                            ?>
                                                             <span class="tf-price"><?php echo wc_price( $option_price ); ?></span>
-															<?php
-														}
-														?>
+                                                            <?php
+                                                        }
+                                                        ?>
                                                         <div class="price-per-night">
-															<?php
-															if ( $option_price_type == 'per_room' ) {
-																echo $multi_by_date ? __( 'per room/night', 'tourfic' ) : __( 'per room/day', 'tourfic' );
-															} elseif ( $option_price_type == 'per_person' ) {
-																echo $multi_by_date ? __( 'per person/night', 'tourfic' ) : __( 'per person/day', 'tourfic' );
-															}
-															?>
+                                                            <?php
+                                                            if ( $option_price_type == 'per_room' ) {
+                                                                echo $multi_by_date ? __( 'per room/night', 'tourfic' ) : __( 'per room/day', 'tourfic' );
+                                                            } elseif ( $option_price_type == 'per_person' ) {
+                                                                echo $multi_by_date ? __( 'per person/night', 'tourfic' ) : __( 'per person/day', 'tourfic' );
+                                                            }
+                                                            ?>
                                                         </div>
-														<?php
-													}
-													?>
-                                                </div>
-                                            </td>
-										<?php endif; ?>
+                                                    </div>
+                                                </td>
+                                            <?php endif; ?>
                                             <td class="reserve tf-t-c">
                                                 <div class="tf-btn">
 													<?php if ( $tf_booking_type == 2 && ! empty( $tf_booking_url ) ): ?>
@@ -946,49 +796,7 @@ $total_room_option_count = 0;
 										<?php if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' ) || $tf_booking_type == 1 ) : ?>
                                         <td class="pricing">
                                             <div class="tf-price-column">
-												<?php
-												if ( $pricing_by == '1' ) {
-													if ( ! empty( $discount_price ) ) {
-														?>
-                                                        <span class="tf-price"><del><?php echo $price; ?></del> <?php echo $discount_price ?></span>
-														<?php
-													} else if ( $hotel_discount_type == "none" || empty( $hotel_discount_amount ) ) {
-														?>
-                                                        <span class="tf-price"><?php echo $price ?></span>
-														<?php
-													} ?>
-
-                                                    <div class="price-per-night">
-														<?php
-														if ( $multi_by_date ) {
-															esc_html_e( 'per night', 'tourfic' );
-														} else {
-															esc_html_e( 'per day', 'tourfic' );
-														} ?>
-                                                    </div>
-													<?php
-												} else {
-													if ( ! empty( $discount_price ) ) {
-														?>
-                                                        <span class="tf-price"><del><?php echo $price; ?></del> <?php echo $discount_price ?></span>
-														<?php
-														$discount_price = "";
-													} else if ( $hotel_discount_type == "none" || empty( $d_price ) ) {
-														?>
-                                                        <span class="tf-price"><?php echo $price ?></span>
-														<?php
-													} ?>
-                                                    <div class="price-per-night">
-														<?php
-														if ( $multi_by_date ) {
-															esc_html_e( 'per person/night', 'tourfic' );
-														} else {
-															esc_html_e( 'per person/day', 'tourfic' );
-														} ?>
-                                                    </div>
-													<?php
-												}
-												?>
+												<?php Pricing::instance(get_the_ID(), $_room->ID)->get_per_price_html(); ?>
                                             </div>
                                         </td>
 									<?php endif; ?>

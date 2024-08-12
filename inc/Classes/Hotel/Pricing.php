@@ -105,6 +105,19 @@ class Pricing {
 		return $price;
 	}
 
+	static function apply_discount( $price, $discount_type, $discount_amount ) {
+		if ( $discount_type == 'fixed' ) {
+			$price = $price - $discount_amount;
+		} else if ( $discount_type == 'percent' ) {
+			$price = $price - ( $price * $discount_amount ) / 100;
+		}
+
+		return $price;
+	}
+
+	/*
+	 * Get min and max price
+	 */
 	function get_min_max_price() {
 		$room_price = [];
 		$rooms      = Room::get_hotel_rooms( $this->post_id );
@@ -114,7 +127,7 @@ class Pricing {
 				$pricing_by    = $room_meta['pricing-by'] ?? 1;
 				$avail_by_date = $room_meta['avil_by_date'] ?? 1;
 
-				if ( $avail_by_date == "1" ) {
+				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $avail_by_date == "1" ) {
 					$avail_date = json_decode( $room_meta['avail_date'], true );
 					if ( ! empty( $avail_date ) && is_array( $avail_date ) ) {
 						foreach ( $avail_date as $singleavailroom ) {
@@ -220,6 +233,117 @@ class Pricing {
 				'sale_price'    => ! empty( $room_price ) ? max( array_column( $room_price, 'sale_price' ) ) : 0,
 			)
 		);
+	}
+
+	/*
+	 * Get min price html
+	 */
+	function get_min_price_html() {
+		$min_max_price = $this->get_min_max_price();
+		$regular_price = $min_max_price['min']['regular_price'];
+		$sale_price    = $min_max_price['min']['sale_price'];
+
+		$price_html = '';
+		if ( ! empty( $min_max_price ) ) {
+            $price_html .= esc_html__( "From ", "tourfic" );
+            if ( $regular_price != $sale_price ) {
+                $price_html .= wc_format_sale_price( $regular_price, $sale_price );
+            } else {
+                $price_html .= wp_kses_post( wc_price( $sale_price ) ) . " ";
+            }
+		}
+
+		return $price_html;
+	}
+
+	/*
+	 * Get per person / per room price
+	 */
+	function get_per_price() {
+		$room_meta     = $this->room_meta;
+		$avail_by_date = $room_meta['avil_by_date'] ?? 1;
+		$pricing_by    = $room_meta['pricing-by'] ?? 1;
+
+		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $avail_by_date == '1' && $pricing_by !== '3' ) {
+			$prices          = array();
+			$discount_prices = array();
+
+			$avail_date = ! empty( $room_meta['avail_date'] ) ? json_decode( $room_meta['avail_date'], true ) : [];
+			foreach ( $avail_date as $date => $data ) {
+				if ( $data['status'] == 'available' ) {
+					if ( $pricing_by == '1' ) {
+						$prices[]          = ! empty( $data['price'] ) ? $data['price'] : 0;
+						$discount_prices[] = $this->calculate_discount( $data['price'], $this->room_id );
+					} else {
+						$prices[]          = ! empty( $data['adult_price'] ) ? $data['adult_price'] : 0;
+						$discount_prices[] = $this->calculate_discount( $data['adult_price'], $this->room_id );
+					}
+				}
+			}
+
+			if ( ! empty( $prices ) ) {
+				if ( sizeof( $prices ) > 1 ) {
+					$discount_price = ! empty( $discount_prices ) ? ( min( $discount_prices ) != max( $discount_prices ) ? wc_format_price_range( min( $discount_prices ), max( $discount_prices ) ) : wc_price( min( $discount_prices ) ) ) : 0;
+					$price          = $prices ? ( min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices ), max( $prices ) ) : wc_price( min( $prices ) ) ) : wc_price( 0 );
+				} else {
+					$price          = ! empty( $prices[0] ) ? wc_price( $prices[0] ) : 0;
+					$discount_price = ! empty( $discount_prices[0] ) ? wc_price( $discount_prices[0] ) : '';
+				}
+			} else {
+				if ( $pricing_by == '1' ) {
+					$price = ! empty( $room_meta['price'] ) ? $room_meta['price'] : 0;
+				} else {
+					$price = ! empty( $room['adult_price'] ) ? $room['adult_price'] : 0;
+				}
+				$discount_price = $this->calculate_discount( $price, $this->room_id );
+				$price          = wc_price( $price );
+				$discount_price = wc_price( $discount_price );
+			}
+		} else {
+			if ( $pricing_by == '1' ) {
+				$price = ! empty( $room_meta['price'] ) ? $room_meta['price'] : 0;
+			} elseif ( $pricing_by == '2' ) {
+				$price = ! empty( $room_meta['adult_price'] ) ? $room_meta['adult_price'] : 0;
+			}
+			$discount_price = $this->calculate_discount( $price, $this->room_id );
+			$price          = wc_price( $price );
+			$discount_price = wc_price( $discount_price );
+		}
+
+		return array(
+			'price'          => $price,
+			'discount_price' => $discount_price
+		);
+	}
+
+	/*
+	 * Get per person / per room price html
+	 */
+	function get_per_price_html() {
+		$room_meta      = $this->room_meta;
+		$price_arr      = $this->get_per_price();
+		$price          = $price_arr['price'];
+		$discount_price = $price_arr['discount_price'];
+
+		$pricing_by          = $room_meta['pricing-by'] ?? 1;
+		$multi_by_date       = $room_meta['price_multi_day'] ?? 0;
+		$hotel_discount_type = $room_meta['discount_hotel_type'] ?? 'none';
+
+		if ( ! empty( $discount_price ) && $hotel_discount_type != "none" && ! empty( $hotel_discount_type ) ) {
+			echo '<span class="tf-price"><del>' . $price . '</del> ' . $discount_price . '</span>';
+		} else if ( $hotel_discount_type == "none" ) {
+			echo '<span class="tf-price">' . $price . '</span>';
+		}
+		?>
+        <div class="price-per-night">
+			<?php
+			if ( $multi_by_date ) {
+				echo $pricing_by == 1 ? esc_html__( 'per night', 'tourfic' ) : esc_html__( 'per person/night', 'tourfic' );
+			} else {
+				echo $pricing_by == 1 ? esc_html__( 'per day', 'tourfic' ) : esc_html__( 'per person/day', 'tourfic' );
+			} ?>
+        </div>
+		<?php
 	}
 
 	function get_hotel_price() {

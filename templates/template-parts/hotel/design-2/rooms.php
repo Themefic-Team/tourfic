@@ -1,6 +1,7 @@
 <?php
 
 use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\Hotel\Pricing;
 
 //getting only selected features for rooms
 $rm_features = [];
@@ -263,16 +264,14 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 							echo '<div class="tf-available-room-contents">';
 							echo '<h2 class="tf-section-title">' . esc_html( get_the_title( $room_id ) ) . '</h2>';
 							foreach ( $room_options as $room_option_key => $room_option ):
-								if ( $pricing_by == '3' ) {
-									$option_price_type = ! empty( $room_option['option_pricing_type'] ) ? $room_option['option_pricing_type'] : 'per_room';
-									$discount_price    = 0;
+                                $option_price_type = ! empty( $room_option['option_pricing_type'] ) ? $room_option['option_pricing_type'] : 'per_room';
+                                $discount_price    = 0;
 
-									if ( $option_price_type == 'per_room' ) {
-										$option_price = ! empty( $room_option['option_price'] ) ? floatval( $room_option['option_price'] ) : 0;
-									} elseif ( $option_price_type == 'per_person' ) {
-										$option_price = ! empty( $room_option['option_adult_price'] ) ? floatval( $room_option['option_adult_price'] ) : 0;
-									}
-								}
+                                if ( $option_price_type == 'per_room' ) {
+                                    $option_price = ! empty( $room_option['option_price'] ) ? floatval( $room_option['option_price'] ) : 0;
+                                } elseif ( $option_price_type == 'per_person' ) {
+                                    $option_price = ! empty( $room_option['option_adult_price'] ) ? floatval( $room_option['option_adult_price'] ) : 0;
+                                }
 								?>
                                 <div class="tf-available-room-content tf-room-options-content">
                                     <div class="tf-room-options-content-inner">
@@ -375,50 +374,26 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                                                 <div class="tf-available-room-price">
 													<?php
 													if ( $hotel_discount_type != "none" ) {
-														if ( $hotel_discount_type == "percent" ) {
-															$discount_price = ! empty( $option_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $option_price - ( ( (int) $option_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-														} else if ( $hotel_discount_type == "fixed" ) {
-															$discount_price = ! empty( $option_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $option_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-														}
-														?>
-                                                        <span class="tf-price">
-                                                            <span class="discount-price">
-                                                                <?php esc_html_e( 'From ', 'tourfic' ); ?><del><?php echo wp_kses_post( wc_price( $option_price ) ); ?></del>
-                                                            </span>
-                                                            <span class="sale-price">
-                                                                <?php echo wp_kses_post( wc_price( $discount_price ) ); ?>
-                                                                <span class="booking-type">
-                                                                <?php
-                                                                if ( $multi_by_date ) {
-	                                                                esc_html_e( '/night', 'tourfic' );
-                                                                } else {
-	                                                                esc_html_e( '/day', 'tourfic' );
-                                                                } ?>
-                                                                </span>
-                                                            </span>
-                                                        </span>
-														<?php
-													} else {
-														?>
-                                                        <span class="tf-price">
-                                                            <span class="discount-price">
-                                                                <?php esc_html_e( 'From', 'tourfic' ); ?>
-                                                            </span>
-                                                            <span class="sale-price">
-                                                                <?php echo wp_kses_post( wc_price( $option_price ) ) . " "; ?>
-                                                                <span class="booking-type">
-                                                                <?php
-                                                                if ( $multi_by_date ) {
-	                                                                esc_html_e( '/night', 'tourfic' );
-                                                                } else {
-	                                                                esc_html_e( '/day', 'tourfic' );
-                                                                } ?>
-                                                                </span>
-                                                            </span>
-                                                        </span>
-														<?php
+														$discount_price = Pricing::apply_discount( $option_price, $hotel_discount_type, $hotel_discount_amount );
 													}
-													?>
+                                                    ?>
+                                                    <span class="tf-price">
+                                                        <span class="discount-price">
+                                                            <?php esc_html_e( 'From ', 'tourfic' ); ?>
+                                                            <?php echo $hotel_discount_type != "none" ? '<del>'. wp_kses_post( wc_price( $option_price ) ) .'</del>' : ''; ?>
+                                                        </span>
+                                                        <span class="sale-price">
+                                                            <?php echo wp_kses_post( wc_price( $hotel_discount_type != "none" ? $discount_price : $option_price ) ); ?>
+                                                            <span class="booking-type">
+                                                            <?php
+                                                            if ( $multi_by_date ) {
+                                                                esc_html_e( '/night', 'tourfic' );
+                                                            } else {
+                                                                esc_html_e( '/day', 'tourfic' );
+                                                            } ?>
+                                                            </span>
+                                                        </span>
+                                                    </span>
                                                 </div>
 											<?php endif; ?>
                                             <a href="<?php echo $tf_booking_type == 2 ? ( ! empty( $tf_booking_url ) ? esc_url( $tf_booking_url ) : '' ) : esc_url( '#room-availability' ) ?>"
@@ -494,9 +469,9 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 									<?php
 									if ( ! empty( $hotel_discount_type ) && ! empty( $hotel_discount_amount ) && ( "percent" == $hotel_discount_type || "fixed" == $hotel_discount_type ) ) { ?>
                                         <div class="tf-available-room-off">
-                                                <span>
-                                                    <?php echo ( "percent" == $hotel_discount_type ) ? esc_html( $hotel_discount_amount ) . '% off' : wp_kses_post( wc_price( $hotel_discount_amount ) . ' off' ); ?>
-                                                </span>
+                                            <span>
+                                                <?php echo ( "percent" == $hotel_discount_type ) ? esc_html( $hotel_discount_amount ) . '% off' : wp_kses_post( wc_price( $hotel_discount_amount ) . ' off' ); ?>
+                                            </span>
                                         </div>
 									<?php } ?>
 									<?php if ( $tf_hide_external_price ) : ?>
