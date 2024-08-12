@@ -382,10 +382,10 @@ Fontawesome
   line-height: 13px;
   background: #b30000; }
 
-.room-repeater .unique-id {
+#tf_room_opt .unique-id {
   display: none; }
 
-.room-repeater .tf-order_id {
+#tf_room_opt .tf-order_id {
   display: none; }
 
 .tf-section-name-hidden {
@@ -3498,6 +3498,15 @@ a.tf-import-btn, a.tf-export-btn {
   background-color: #003c79;
   border-color: #003c79; }
 
+.tf-single-option {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  gap: 10px;
+  width: 100%; }
+
 .tf-content-loading {
   position: relative; }
   .tf-content-loading::before {
@@ -3529,6 +3538,21 @@ a.tf-import-btn, a.tf-export-btn {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
+
+.tf-hotel-room .tf-single-room {
+  display: flex;
+  padding: 12px 24px;
+  background: #D8E6FF;
+  position: relative;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  margin-bottom: 16px; }
+  .tf-hotel-room .tf-single-room .tf-room-title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px; }
 
 .tf-backend-tour-booking h1,
 .tf-backend-hotel-booking h1 {

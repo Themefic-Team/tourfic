@@ -5,6 +5,7 @@ namespace Tourfic\Admin\TF_Options;
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
+use Tourfic\Classes\Room\Room;
 
 class TF_Options {
 
@@ -38,8 +39,8 @@ class TF_Options {
 		add_action( 'wp_ajax_tf_load_more_icons', array( $this, 'tf_load_more_icons' ) );
 		add_action( 'wp_ajax_tf_icon_search', array( $this, 'tf_icon_search' ) );
 
-		add_action( 'wp_ajax_tf_add_hotel_availability', array( $this, 'tf_add_hotel_availability' ) );
-		add_action( 'wp_ajax_tf_get_hotel_availability', array( $this, 'tf_get_hotel_availability' ) );
+		add_action( 'wp_ajax_tf_add_hotel_room_availability', array( $this, 'tf_add_hotel_room_availability' ) );
+		add_action( 'wp_ajax_tf_get_hotel_room_availability', array( $this, 'tf_get_hotel_room_availability' ) );
 		add_action( 'save_post', array( $this, 'tf_update_room_avail_date_price' ), 9999, 2 );
 		add_action( 'wp_ajax_tf_add_apartment_availability', array( $this, 'tf_add_apartment_availability' ) );
 		add_action( 'wp_ajax_tf_get_apartment_availability', array( $this, 'tf_get_apartment_availability' ) );
@@ -348,17 +349,16 @@ class TF_Options {
 	}
 
 	/**
-	 * Hotel availability calendar update
+	 * Room availability calendar update
 	 * @author Foysal
 	 */
-	function tf_add_hotel_availability() {
+	function tf_add_hotel_room_availability() {
 		// Add nonce for security and authentication.
 		check_ajax_referer( 'updates', '_nonce' );
 
 		$date_format         = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
-		$hotel_id            = isset( $_POST['hotel_id'] ) && ! empty( $_POST['hotel_id'] ) ? sanitize_text_field( $_POST['hotel_id'] ) : '';
+		$room_id             = isset( $_POST['room_id'] ) && ! empty( $_POST['room_id'] ) ? sanitize_text_field( $_POST['room_id'] ) : '';
 		$new_post            = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? $_POST['new_post'] : '';
-		$room_index          = isset( $_POST['room_index'] ) ? intval( $_POST['room_index'] ) : '';
 		$check_in            = isset( $_POST['tf_room_check_in'] ) && ! empty( $_POST['tf_room_check_in'] ) ? sanitize_text_field( $_POST['tf_room_check_in'] ) : '';
 		$check_out           = isset( $_POST['tf_room_check_out'] ) && ! empty( $_POST['tf_room_check_out'] ) ? sanitize_text_field( $_POST['tf_room_check_out'] ) : '';
 		$status              = isset( $_POST['tf_room_status'] ) && ! empty( $_POST['tf_room_status'] ) ? sanitize_text_field( $_POST['tf_room_status'] ) : '';
@@ -374,15 +374,6 @@ class TF_Options {
 				'message' => __( 'Please select check in and check out date.', 'tourfic' )
 			] );
 		}
-
-		/*if ( $date_format == 'Y.m.d' || $date_format == 'd.m.Y' ) {
-			$check_in  = gmdate( "Y-m-d", strtotime( str_replace( ".", "-", $check_in ) ) );
-			$check_out = gmdate( "Y-m-d", strtotime( str_replace( ".", "-", $check_out ) ) );
-		}
-		if ( $date_format == 'd/m/Y' ) {
-			$check_in  = gmdate( "Y-m-d", strtotime( str_replace( "/", "-", $check_in ) ) );
-			$check_out = gmdate( "Y-m-d", strtotime( str_replace( "/", "-", $check_out ) ) );
-		}*/
 
 		$check_in  = strtotime( $this->tf_convert_date_format( $check_in, $date_format ) );
 		$check_out = strtotime( $this->tf_convert_date_format( $check_out, $date_format ) );
@@ -408,14 +399,14 @@ class TF_Options {
 			$room_avail_data[ $tf_room_date ] = $tf_room_data;
 		}
 
-		$hotel_avail_data = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
+		$room_meta = get_post_meta( $room_id, 'tf_room_opt', true );
 		if ( $new_post != 'true' ) {
-			$avail_date = json_decode( $hotel_avail_data['room'][ $room_index ]['avail_date'], true );
+			$avail_date = json_decode( $room_meta['avail_date'], true );
 			if ( isset( $avail_date ) && ! empty( $avail_date ) ) {
 				$room_avail_data = array_merge( $avail_date, $room_avail_data );
 			}
-			$hotel_avail_data['room'][ $room_index ]['avail_date'] = wp_json_encode( $room_avail_data );
-			update_post_meta( $hotel_id, 'tf_hotels_opt', $hotel_avail_data );
+			$room_meta['avail_date'] = wp_json_encode( $room_avail_data );
+			update_post_meta( $room_id, 'tf_room_opt', $room_meta );
 		} else {
 			$avail_date = json_decode( stripslashes( $avail_date ), true );
 			if ( isset( $avail_date ) && ! empty( $avail_date ) ) {
@@ -433,21 +424,20 @@ class TF_Options {
 	}
 
 	/*
-     * Get hotel availability calendar
+     * Get room availability calendar
      * @author Foysal
      */
-	function tf_get_hotel_availability() {
+	function tf_get_hotel_room_availability() {
 		// Add nonce for security and authentication.
 		check_ajax_referer( 'updates', '_nonce' );
 
 		$new_post   = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
-		$hotel_id   = isset( $_POST['hotel_id'] ) && ! empty( $_POST['hotel_id'] ) ? sanitize_text_field( $_POST['hotel_id'] ) : '';
-		$room_index = isset( $_POST['room_index'] ) ? intval( $_POST['room_index'] ) : '';
+		$room_id    = isset( $_POST['room_id'] ) && ! empty( $_POST['room_id'] ) ? sanitize_text_field( $_POST['room_id'] ) : '';
 		$avail_date = isset( $_POST['avail_date'] ) && ! empty( $_POST['avail_date'] ) ? sanitize_text_field( $_POST['avail_date'] ) : '';
 
 		if ( $new_post != 'true' ) {
-			$hotel_avail_data = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
-			$room_avail_data  = isset( $hotel_avail_data['room'][ $room_index ]['avail_date'] ) && ! empty( $hotel_avail_data['room'][ $room_index ]['avail_date'] ) ? json_decode( $hotel_avail_data['room'][ $room_index ]['avail_date'], true ) : [];
+			$room_meta       = get_post_meta( $room_id, 'tf_room_opt', true );
+			$room_avail_data = isset( $room_meta['avail_date'] ) && ! empty( $room_meta['avail_date'] ) ? json_decode( $room_meta['avail_date'], true ) : [];
 		} else {
 			$room_avail_data = json_decode( stripslashes( $avail_date ), true );
 		}
@@ -457,7 +447,6 @@ class TF_Options {
 			$room_avail_data = array_map( function ( $item ) {
 				$item['start'] = gmdate( 'Y-m-d', strtotime( $item['check_in'] ) );
 				$item['title'] = $item['price_by'] == '1' ? __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
-//				$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) . '<br>' . __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
 
 				if ( $item['status'] == 'unavailable' ) {
 					$item['display'] = 'background';
@@ -475,70 +464,59 @@ class TF_Options {
 	}
 
 	/*
-     * Update hotel room avail_date price based on pricing type
+     * Update room avail_date price based on pricing type
      * @auther Foysal
      */
 	function tf_update_room_avail_date_price( $post_id, $post ) {
-		if ( $post->post_type == 'tf_hotel' ) {
-			$meta  = get_post_meta( $post_id, 'tf_hotels_opt', true );
-			$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-			if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
-				$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-					return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-				}, $rooms );
-				$rooms                = unserialize( $tf_hotel_rooms_value );
-			}
+		if ( $post->post_type == 'tf_room' ) {
 
-			if ( ! empty( $rooms ) ) {
-				foreach ( $rooms as $roomIndex => $room ) {
-					$pricing_by   = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
-					$price        = ! empty( $room['price'] ) ? $room['price'] : '';
-					$adult_price  = ! empty( $room['adult_price'] ) ? $room['adult_price'] : '';
-					$child_price  = ! empty( $room['child_price'] ) ? $room['child_price'] : '';
-					$avil_by_date = ! empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : '';
+			$room         = get_post_meta( $post_id, 'tf_room_opt', true );
+			$pricing_by   = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
+			$price        = ! empty( $room['price'] ) ? $room['price'] : '';
+			$adult_price  = ! empty( $room['adult_price'] ) ? $room['adult_price'] : '';
+			$child_price  = ! empty( $room['child_price'] ) ? $room['child_price'] : '';
+			$avil_by_date = ! empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : '';
 
-					if ( $avil_by_date === '1' && ! empty( $room['avail_date'] ) ) {
-						$hotel_avail_data = json_decode( $room['avail_date'], true );
+			if ( $avil_by_date === '1' && ! empty( $room['avail_date'] ) ) {
+				$room_avail_data = json_decode( $room['avail_date'], true );
 
-						if ( isset( $hotel_avail_data ) && ! empty( $hotel_avail_data ) ) {
+				if ( isset( $room_avail_data ) && ! empty( $room_avail_data ) ) {
 
-							$hotel_avail_data = array_map( function ( $item ) use ( $pricing_by, $price, $adult_price, $child_price ) {
+					$room_avail_data = array_map( function ( $item ) use ( $pricing_by, $price, $adult_price, $child_price ) {
 
-								if ( $pricing_by == '1' ) {
-									$item['price'] = ! isset( $item['price'] ) ? $price : $item['price'];
-								} else {
-									$item['adult_price'] = ! isset( $item['adult_price'] ) ? $adult_price : $item['adult_price'];
-									$item['child_price'] = ! isset( $item['child_price'] ) ? $child_price : $item['child_price'];
-								}
-								$item['price_by'] = $pricing_by;
-
-								return $item;
-							}, $hotel_avail_data );
+						if ( $pricing_by == '1' ) {
+							$item['price'] = ! isset( $item['price'] ) ? $price : $item['price'];
+						} else {
+							$item['adult_price'] = ! isset( $item['adult_price'] ) ? $adult_price : $item['adult_price'];
+							$item['child_price'] = ! isset( $item['child_price'] ) ? $child_price : $item['child_price'];
 						}
+						$item['price_by'] = $pricing_by;
 
-						$meta['room'][ $roomIndex ]['avail_date'] = wp_json_encode( $hotel_avail_data );
-					} elseif ( $avil_by_date === '1' && empty( $room['avail_date'] ) ) {
-						//add next 5 years availability
-						$hotel_avail_data = [];
-						for ( $i = 0; $i <= 1825; $i ++ ) {
-							$tf_room_date                      = gmdate( 'Y/m/d', strtotime( "+$i day" ) );
-							$tf_room_data                      = [
-								'check_in'    => $tf_room_date,
-								'check_out'   => $tf_room_date,
-								'price_by'    => $pricing_by,
-								'price'       => $price,
-								'adult_price' => $adult_price,
-								'child_price' => $child_price,
-								'status'      => 'available'
-							];
-							$hotel_avail_data[ $tf_room_date ] = $tf_room_data;
-						}
-
-						$meta['room'][ $roomIndex ]['avail_date'] = wp_json_encode( $hotel_avail_data );
-					}
+						return $item;
+					}, $room_avail_data );
 				}
+
+				$room['avail_date'] = wp_json_encode( $room_avail_data );
+			} elseif ( $avil_by_date === '1' && empty( $room['avail_date'] ) ) {
+				//add next 5 years availability
+				$room_avail_data = [];
+				for ( $i = 0; $i <= 1825; $i ++ ) {
+					$tf_room_date                      = gmdate( 'Y/m/d', strtotime( "+$i day" ) );
+					$tf_room_data                      = [
+						'check_in'    => $tf_room_date,
+						'check_out'   => $tf_room_date,
+						'price_by'    => $pricing_by,
+						'price'       => $price,
+						'adult_price' => $adult_price,
+						'child_price' => $child_price,
+						'status'      => 'available'
+					];
+					$room_avail_data[ $tf_room_date ] = $tf_room_data;
+				}
+
+				$room['avail_date'] = wp_json_encode( $room_avail_data );
 			}
-			update_post_meta( $post_id, 'tf_hotels_opt', $meta );
+			update_post_meta( $post_id, 'tf_room_opt', $room );
 		}
 	}
 
@@ -730,13 +708,13 @@ class TF_Options {
 	}
 
 
-	function tf_convert_date_format($date, $currentFormat) {
-		$dateTime = \DateTime::createFromFormat($currentFormat, $date);
+	function tf_convert_date_format( $date, $currentFormat ) {
+		$dateTime = \DateTime::createFromFormat( $currentFormat, $date );
 
-		if ($dateTime === false) {
+		if ( $dateTime === false ) {
 			return false;
 		}
 
-		return $dateTime->format('Y/m/d');
+		return $dateTime->format( 'Y/m/d' );
 	}
 }

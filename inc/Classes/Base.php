@@ -77,6 +77,7 @@ class Base {
 		if ( Helper::tfopt( 'disable-services' ) && in_array( 'hotel', Helper::tfopt( 'disable-services' ) ) ) {
 		} else {
 			 \Tourfic\Classes\Hotel\Hotel_CPT::instance();
+			 \Tourfic\Classes\Room\Room_CPT::instance();
 			 \Tourfic\Classes\Hotel\Pricing::instance();
 		}
 		if ( Helper::tfopt( 'disable-services' ) && in_array( 'tour', Helper::tfopt( 'disable-services' ) ) ) {

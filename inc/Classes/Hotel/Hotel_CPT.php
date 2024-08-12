@@ -2,12 +2,13 @@
 
 namespace Tourfic\Classes\Hotel;
 
-use \Tourfic\Classes\Helper;
+use Tourfic\Classes\Helper;
+use Tourfic\Classes\Room\Room;
 use \Tourfic\Admin\Menu_Icon;
 
 defined( 'ABSPATH' ) || exit;
 
-class Hotel_CPT extends \Tourfic\Classes\Post_Type {
+class Hotel_CPT extends \Tourfic\Core\Post_Type {
 
 	use \Tourfic\Traits\Singleton;
 
@@ -62,6 +63,9 @@ class Hotel_CPT extends \Tourfic\Classes\Post_Type {
 		) );
 
 		add_action( 'init', array( $this, 'tf_post_type_taxonomy_register' ) );
+
+		add_filter( 'manage_edit-tf_hotel_columns', array( $this, 'tf_hotel_list_column' ) );
+		add_action( 'manage_tf_hotel_posts_custom_column', array( $this, 'tf_hotel_list_column_value' ), 10, 2 );
 	}
 
 	private function get_hotel_slug() {
@@ -72,4 +76,33 @@ class Hotel_CPT extends \Tourfic\Classes\Post_Type {
 		return apply_filters( 'tf_hotel_slug', get_option( "hotel_slug" ) );
 	}
 
+	function tf_hotel_list_column( $columns ) {
+		$date   = $columns['date'];
+		$author = $columns['author'];
+		$comments = $columns['comments'];
+		unset( $columns['date'] );
+		unset( $columns['author'] );
+		unset( $columns['comments'] );
+		$columns["rooms"] = esc_html__('Rooms', 'tourfic');
+		$columns['author']   = $author;
+		$columns['comments'] = $comments;
+		$columns['date']     = $date;
+
+		return $columns;
+	}
+
+	function tf_hotel_list_column_value( $colname, $post_id ) {
+
+		if ( $colname == 'rooms' ) {
+			$rooms       = Room::get_hotel_rooms($post_id);
+			if(!empty($rooms)){
+				echo '<ul style="margin: 0">';
+				foreach ($rooms as $room) {
+					echo '<li><a href="' . admin_url() . 'post.php?post=' . $room->ID . '&action=edit" target="_blank">' . $room->post_title . '</a></li>';
+				}
+				echo '</ul>';
+			}
+		}
+
+	}
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Tourfic\Classes;
+namespace Tourfic\Core;
 
 defined( 'ABSPATH' ) || exit;
 
-class Post_Type {
+abstract class Post_Type {
 	use \Tourfic\Traits\Singleton;
 
 	protected $post_args;

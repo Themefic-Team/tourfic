@@ -3249,7 +3249,6 @@ TF_Settings::option( 'tf_settings', array(
 					'default' => "apartments",
 					'placeholder' => ! empty(get_option("apartment_slug")) ? get_option("apartment_slug") : "apartments",
 				),
-
 			),
 		),
 		/**
@@ -3522,8 +3521,55 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'Disabled', 'tourfic' ),
 					'width'     => 100,
 				),
-
-
+				array(
+					'id'        => 'select2_cdn',
+					'type'      => 'switch',
+					'label'     => __( 'Select2 CDN', 'tourfic' ),
+					'subtitle'  => __( 'Enable/disable Cloudflare CDN for Select2', 'tourfic' ),
+					'label_on'  => __( 'Enabled', 'tourfic' ),
+					'label_off' => __( 'Disabled', 'tourfic' ),
+					'width'     => 100,
+				),
+				
+				array(
+					'id'        => 'remix_cdn',
+					'type'      => 'switch',
+					'label'     => __( 'Remix Icon CDN', 'tourfic' ),
+					'subtitle'  => __( 'Enable/disable Cloudflare CDN for Remix Icon', 'tourfic' ),
+					'label_on'  => __( 'Enabled', 'tourfic' ),
+					'label_off' => __( 'Disabled', 'tourfic' ),
+					'width'     => 100,
+				),
+				
+				array(
+					'id'        => 'leaflet_cdn',
+					'type'      => 'switch',
+					'label'     => __( 'Leaflet CDN', 'tourfic' ),
+					'subtitle'  => __( 'Enable/disable Cloudflare CDN for Leaflet', 'tourfic' ),
+					'label_on'  => __( 'Enabled', 'tourfic' ),
+					'label_off' => __( 'Disabled', 'tourfic' ),
+					'width'     => 100,
+				),
+				
+				array(
+					'id'        => 'swal_cdn',
+					'type'      => 'switch',
+					'label'     => __( 'Sweet Alart CDN', 'tourfic' ),
+					'subtitle'  => __( 'Enable/disable Cloudflare CDN for Sweet Alart', 'tourfic' ),
+					'label_on'  => __( 'Enabled', 'tourfic' ),
+					'label_off' => __( 'Disabled', 'tourfic' ),
+					'width'     => 100,
+				),
+				
+				array(
+					'id'        => 'chart_cdn',
+					'type'      => 'switch',
+					'label'     => __( 'Chart Js CDN', 'tourfic' ),
+					'subtitle'  => __( 'Enable/disable Cloudflare CDN for Chart Js', 'tourfic' ),
+					'label_on'  => __( 'Enabled', 'tourfic' ),
+					'label_off' => __( 'Disabled', 'tourfic' ),
+					'width'     => 100,
+				),
 			),
 		),
 

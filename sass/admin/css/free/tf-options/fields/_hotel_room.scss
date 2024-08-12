@@ -1,0 +1,19 @@
+.tf-hotel-room{
+    .tf-single-room{
+        display: flex;
+        padding: 12px 24px;
+        background: #D8E6FF;
+        position: relative;
+        border-radius: 5px;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 16px;
+        margin-bottom: 16px;
+
+        .tf-room-title {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 24px;
+        }
+    }
+}
