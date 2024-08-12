@@ -110,10 +110,6 @@ while ( have_posts() ) : the_post();
 		$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
 	}
 
-	// Hotel facilitiles
-	$hotel_facilities = ! empty( $meta['hotel-facilities'] ) ? $meta['hotel-facilities'] : '';
-	$hotel_facilities_categories = ! empty( Helper::tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) : '';
-
 	// Car Info 
 	$passengers = ! empty( $meta['passengers'] ) ? $meta['passengers'] : '';
 	$baggage = ! empty( $meta['baggage'] ) ? $meta['baggage'] : '';
@@ -129,6 +125,16 @@ while ( have_posts() ) : the_post();
 	$include_icon = ! empty( $meta['inc_icon'] ) ? $meta['inc_icon'] : '';
 	$excludes = ! empty( $meta['exc'] ) ? $meta['exc'] : '';
 	$exclude_icon = ! empty( $meta['exc_icon'] ) ? $meta['exc_icon'] : '';
+
+	// Driver Info 
+	$car_driverinfo_status = ! empty( $meta['car_driverinfo_section'] ) ? $meta['car_driverinfo_section'] : '';
+	$driver_name = ! empty( $meta['driver_name'] ) ? $meta['driver_name'] : '';
+	$driver_email = ! empty( $meta['driver_email'] ) ? $meta['driver_email'] : '';
+	$driver_phone = ! empty( $meta['driver_phone'] ) ? $meta['driver_phone'] : '';
+	$driver_age = ! empty( $meta['driver_age'] ) ? $meta['driver_age'] : '';
+	$driver_address = ! empty( $meta['driver_address'] ) ? $meta['driver_address'] : '';
+	$driver_image = ! empty( $meta['driver_image'] ) ? $meta['driver_image'] : '';
+
 
 	// FAQ
 	$faqs = ! empty( $meta['faq'] ) ? $meta['faq'] : '';

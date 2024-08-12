@@ -417,6 +417,7 @@ use \Tourfic\Classes\Helper;
                         </div>
                     </div>
 
+                    <?php if(!empty($car_driverinfo_status)){ ?>
                     <div class="tf-driver-details tf-flex tf-flex-direction-column tf-flex-gap-16">
                         <div class="tf-driver-details-header tf-flex tf-flex-space-bttn tf-flex-align-center">
                             <h3>Driver details</h3>
@@ -425,33 +426,47 @@ use \Tourfic\Classes\Helper;
                             </span>
                         </div>
                         <div class="tf-driver-photo tf-flex tf-flex-gap-16">
-                            <img src="<?php echo esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>">
+                            <?php if(!empty($driver_image)){ ?>
+                            <img src="<?php echo esc_url($driver_image); ?>">
+                            <?php } ?>
                             <div class="tf-driver-info">
-                                <h4>Eusuf Abdullah</h4>
+                                <?php if(!empty($driver_name)){ ?>
+                                <h4><?php echo esc_attr($driver_name); ?></h4>
+                                <?php } ?>
                                 <p>Joined May 2024</p>
                             </div>
                         </div>
                         <div class="tf-driver-contact-info">
                             <ul class="tf-flex tf-flex-direction-column tf-flex-gap-16">
+                                <?php if(!empty($driver_email)){ ?>
                                 <li class="tf-flex tf-flex-gap-8">
                                     <i class="ri-mail-line"></i>
-                                    eusufabdullah@gmail.com
+                                    <?php echo esc_attr($driver_email); ?>
                                 </li>
+                                <?php } ?>
+                                <?php if(!empty($driver_phone)){ ?>
                                 <li class="tf-flex tf-flex-gap-8">
-                                    <i class="ri-mail-line"></i>
-                                    +33 469 968 4796
+                                    <i class="ri-phone-line"></i>
+                                    <?php echo esc_attr($driver_phone); ?>
                                 </li>
+                                <?php } ?>
+                                <?php if(!empty($driver_age)){ ?>
                                 <li class="tf-flex tf-flex-gap-8">
-                                    <i class="ri-mail-line"></i>
-                                    Age 32 years
+                                    <i class="ri-user-line"></i>
+                                    <?php esc_html_e("Age", "tourfic"); ?> <?php echo esc_attr($driver_age); ?> <?php esc_html_e("Years", "tourfic"); ?>
                                 </li>
+                                <?php } ?>
+                                <?php if(!empty($driver_address)){ ?>
                                 <li class="tf-flex tf-flex-gap-8">
-                                    <i class="ri-mail-line"></i>
-                                    2118 Thornridge Cir. Syracuse, Connecticut 35624
+                                    <i class="ri-map-pin-user-line"></i>
+                                    <?php echo esc_attr($driver_address); ?>
                                 </li>
+                                <?php } ?>
                             </ul>
                         </div>
                     </div>
+                    <?php } ?>
+
                 </div>
             </div>
             <?php 
