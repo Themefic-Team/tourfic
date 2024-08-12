@@ -13084,6 +13084,26 @@ html {
       line-height: 150%;
       /* 31.5px */
       margin-bottom: 16px; }
+    .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-title h1 {
+      color: #27333F;
+      font-size: 28px !important;
+      font-style: normal;
+      font-weight: 600 !important;
+      line-height: 120%;
+      /* 33.6px */ }
+    .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-title .breadcrumb ul li {
+      color: #27333F;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
+      /* 24px */
+      display: inline-block; }
+      .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-title .breadcrumb ul li a {
+        text-decoration: none;
+        color: #27333F;
+        font-size: 16px;
+        font-weight: 400; }
     .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery {
       width: 100%; }
       .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car {

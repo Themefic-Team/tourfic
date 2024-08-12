@@ -176,7 +176,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'label'      => __( 'Select Brands', 'tourfic' ),
 					'options'    => 'terms',
 					'query_args' => array(
-						'taxonomy'   => 'car_brand',
+						'taxonomy'   => 'carrental_brand',
 						'hide_empty' => false,
 					),
 					'default'    => 'none',

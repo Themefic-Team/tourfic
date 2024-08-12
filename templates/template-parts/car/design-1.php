@@ -4,25 +4,23 @@ use \Tourfic\Classes\Helper;
 ?>
 
 <div class="tf-single-car-section">
-    <div class="tf-single-car-banner">
-        <div class="tf-banner-content tf-flex tf-flex-align-center tf-flex-justify-center tf-flex-direction-column">
-            <h1>Hundai 354 2024</h1>
-            <div class="breadcrumb">
-                <ul>
-                    <li><a href="">Home</a></li>
-                    <li>/</li>
-                    <li><a href="">Car</a></li>
-                    <li>/</li>
-                    <li>Hundai 354 2024</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    
     <div class="tf-car-template-container">
         <div class="tf-container-inner">
             <div class="tf-single-car-details-warper">
                 <div class="tf-car-details-column">
-
+                    <div class="tf-car-title">
+                        <h1><?php the_title(); ?></h1>
+                        <div class="breadcrumb">
+                            <ul>
+                                <li><a href="<?php echo site_url(); ?>">Home</a></li>
+                                <li>/</li>
+                                <li><a href="<?php echo site_url(); ?>">Car</a></li>
+                                <li>/</li>
+                                <li><?php the_title(); ?></li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="tf-car-hero-gallery">
                         <div class="tf-featured-car">
                             <img src="<?php echo esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>" alt="<?php esc_html_e( 'Car Image', 'tourfic' ); ?>">
