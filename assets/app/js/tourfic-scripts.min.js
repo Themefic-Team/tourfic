@@ -19,6 +19,16 @@ eval("(function ($, win) {\r\n    $(document).ready(function () {\r\n\r\n       
 
 /***/ }),
 
+/***/ "./sass/app/js/free/car.js":
+/*!*********************************!*\
+  !*** ./sass/app/js/free/car.js ***!
+  \*********************************/
+/***/ (() => {
+
+eval("(function ($, win) {\r\n    $(document).ready(function () {\r\n        // FAQ Accordion\r\n        $('.tf-faq-head').on(\"click\", function () {\r\n            var $this = $(this);\r\n            if (!$this.hasClass(\"active\")) {\r\n                $(\".tf-question-desc\").slideUp(400);\r\n                $(\".tf-faq-head\").removeClass(\"active\");\r\n                $('.tf-faq-col').removeClass('active');\r\n            }\r\n            $this.toggleClass(\"active\");\r\n            $this.next().slideToggle();\r\n            $(this).closest('.tf-faq-col').toggleClass('active');\r\n        });\r\n    });\r\n\r\n})(jQuery, window);\n\n//# sourceURL=webpack://tourfic/./sass/app/js/free/car.js?");
+
+/***/ }),
+
 /***/ "./sass/app/js/free/hotel.js":
 /*!***********************************!*\
   !*** ./sass/app/js/free/hotel.js ***!
@@ -56,6 +66,7 @@ eval("(function ($, win) {\r\n    $(document).ready(function () {\r\n\r\n       
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	__webpack_modules__["./sass/app/js/free/apartment.js"]();
+/******/ 	__webpack_modules__["./sass/app/js/free/car.js"]();
 /******/ 	__webpack_modules__["./sass/app/js/free/hotel.js"]();
 /******/ 	__webpack_modules__["./sass/app/js/free/tour.js"]();
 /******/ 	var __webpack_exports__ = {};

@@ -14,7 +14,7 @@
         <?php } ?>
         <?php if(!empty($singlefaq['description'])){ ?>
         <div class="tf-question-desc">
-            <?php wp_kses_post($singlefaq['description']); ?>
+            <?php echo wp_kses_post($singlefaq['description']); ?>
         </div>
         <?php } ?>
     </div>
