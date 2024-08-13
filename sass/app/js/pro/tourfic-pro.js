@@ -560,10 +560,11 @@
         /**
          * Ajax login
          */
-        $(document).on('click', '#tf-login .tf-submit', function (e) {
+        $(document).on('submit', '#tf-login', function (e) {
+        // $(document).on('click', '#tf-login .tf-submit', function (e) {
             e.preventDefault();
 
-            let btn = $(this);
+            let btn = $('.tf-submit');
             let form = $(this).closest('#tf-login');
             let formData = new FormData(form[0]);
             formData.append('action', 'tf_login');
