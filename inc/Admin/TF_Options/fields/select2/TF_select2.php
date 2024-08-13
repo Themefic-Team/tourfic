@@ -48,7 +48,9 @@ if ( ! class_exists( 'TF_select2' ) ) {
 			$parent_class = ( ! empty( $this->parent_field ) ) ? 'tf-select2-parent' : 'tf-select2';
 			$parent_class = ( isset( $this->field['select2'] ) ) ? 'tf-select2' : $parent_class ;
 
-			echo '<div class="tf-select-box-option"><select name="' . esc_attr($field_name) . '" id="' . esc_attr($tf_select2_unique_id) . '" class=" tf-select-two '.esc_attr($parent_class).' " data-placeholder="' . esc_attr( $placeholder ) . '" ' . esc_attr($multiple) . ' '. wp_kses_post($this->field_attributes()) .'>';
+			$inline_delete = !empty($args['inline_delete']) ? 'yes' : 'no';
+
+			echo '<div class="tf-select-box-option"><select name="' . esc_attr($field_name) . '" id="' . esc_attr($tf_select2_unique_id) . '" class=" tf-select-two '.esc_attr($parent_class).' " data-delete="' . esc_attr( $inline_delete ) . '" data-placeholder="' . esc_attr( $placeholder ) . '" ' . esc_attr($multiple) . ' '. wp_kses_post($this->field_attributes()) .'>';
 			if( is_array( $args['options'] )) {
 				foreach ( $args['options'] as $key => $value ) {
 					if(!empty($this->field['multiple']) && is_array( $this->value ) && in_array( $key, $this->value )){

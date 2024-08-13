@@ -529,18 +529,81 @@
         const tfSelect2Int = select2Selector => {
             let $this = select2Selector,
                 id = $this.attr('id'),
-                placeholder = $this.data('placeholder');
+                placeholder = $this.data('placeholder'),
+                deleteData = $this.data('delete');
 
-            $('#' + id + '').select2({
-                placeholder: placeholder,
-                allowClear: true,
-            });
+            if(deleteData === 'yes'){
+                $('#' + id + '').select2({
+                    placeholder: placeholder,
+                    allowClear: true,
+                    templateResult: TfFormatOption
+                });
+            }else{
+                $('#' + id + '').select2({
+                    placeholder: placeholder,
+                    allowClear: true
+                });
+            }
+            
         }
 
         $('select.tf-select2').each(function () {
             var $this = $(this);
             tfSelect2Int($this);
         });
+
+        function TfFormatOption(option) {
+            if (!option.id) {
+              return option.text;
+            }
+
+           var $option = $(
+              '<span style="display: flex; justify-content: space-between;">' + option.text + '<span class="tf-remove-button" data-id="' + option.id + '">Remove</span></span>'
+            );
+    
+            return $option;
+        }
+        $(document).on('select2:selecting', '.tf-select2', function (e) {
+
+            if (e.params.args.originalEvent.target.className === 'tf-remove-button') {
+                e.stopPropagation();
+                e.preventDefault();
+
+                let $this = $(this);
+                let parentDiv = $this.closest('.tf-fieldset');
+                let categoryName = parentDiv.find('#category_name').val();
+                let categorySelect = parentDiv.find('#category_select_field_name').val();
+                var termId=$(e.params.args.originalEvent.target).data("id");
+
+                $.ajax({
+                    url: tf_options.ajax_url,
+                    method: 'POST',
+                    data: {
+                        action: 'tf_delete_category_data',
+                        _nonce: tf_admin_params.tf_nonce,
+                        term_id: termId,
+                        categoryName: categoryName
+                    },
+                    success: function (response) {
+                        var data = JSON.parse(response);
+                        if (data.success) {
+                            // Remove the option and trigger the change event
+                            let $selectField = $('#' + categorySelect);
+
+                            // Remove the option from Select2
+                            $selectField.find('option[value="' + termId + '"]').remove();
+
+                            // Close the Select2 dropdown
+                            $selectField.select2('close');
+
+                        } else {
+                            
+                        }
+                    }
+                });
+            }
+        });
+
 
         $('select.tf-shortcode-select2').each(function(e) {
             let $this = $(this);

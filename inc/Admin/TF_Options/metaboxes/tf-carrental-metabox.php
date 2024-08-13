@@ -180,7 +180,8 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 						'hide_empty' => false,
 					),
 					'default'    => 'none',
-					'inline_add_new' => true
+					'inline_add_new' => true,
+					'inline_delete' => true
 				),
                 array(
 					'id'       => 'pay_pickup',

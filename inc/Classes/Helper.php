@@ -26,6 +26,7 @@ class Helper {
 		add_action( 'wp_ajax_nopriv_tf_trigger_filter', array( $this, 'tf_search_result_ajax_sidebar' ) );
 		add_action( 'wp_ajax_tf_trigger_filter', array( $this, 'tf_search_result_ajax_sidebar' ) );
 		add_action( 'wp_ajax_tf_insert_category_data', array( $this, 'tf_insert_category_data_callback' ) );
+		add_action( 'wp_ajax_tf_delete_category_data', array( $this, 'tf_delete_category_data_callback' ) );
 
 		add_action( 'admin_init', array( $this, 'tf_admin_role_caps' ), 999 );
 		add_filter( 'template_include', array( $this, 'taxonomy_template' ) );
@@ -672,7 +673,37 @@ class Helper {
 			$response ['insert_category'] = $insert_Date;
 		}
 		echo wp_json_encode( $response );
-		die();
+		wp_die();
+	}
+
+	/**
+	 * Delete Category Data
+	 *
+	 * @author Jahid
+	 */
+	function tf_delete_category_data_callback() {
+		//Verify Nonce
+		check_ajax_referer( 'updates', '_nonce' );
+
+		$categoryName = sanitize_title( $_POST['categoryName'] );
+		$term_id = intval($_POST['term_id']);
+
+		$response = [];
+
+		if (!empty($term_id)) {
+			$result = wp_delete_term($term_id, $categoryName); // Replace 'category' with your taxonomy if it's different
+
+			if (!is_wp_error($result)) {
+				$response['success'] = true;
+			} else {
+				$response['error'] = $result->get_error_message();
+			}
+		} else {
+			$response['error'] = 'Invalid term ID.';
+		}
+
+		echo wp_json_encode($response);
+		wp_die();
 	}
 
 	/**
