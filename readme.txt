@@ -322,7 +322,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.13.0 - 12 August 2024 =
+= 2.13.0 - 13 August 2024 =
 
 - Improvement: Revamped hotel room feature.
 - Improvement: Hotel room post type.
