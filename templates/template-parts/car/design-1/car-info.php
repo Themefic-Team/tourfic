@@ -1,4 +1,4 @@
-<div class="tf-car-info">
+<div class="tf-car-info" id="tf-car-info">
     <h3><?php esc_html_e("Car info", "tourfic"); ?></h3>
 
     <ul>

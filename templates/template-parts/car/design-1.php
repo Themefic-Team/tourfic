@@ -52,37 +52,37 @@ use \Tourfic\Classes\Helper;
                     <div class="tf-details-menu">
                         <ul>
                             <li class="active">
-                                <a class="tf-hashlink" href="#tf-tour-overview">
+                                <a class="tf-hashlink" href="#tf-description">
                                     <?php esc_html_e("Description", "tourfic"); ?>
                                 </a>
                             </li>
                             <li>
-                                <a class="tf-hashlink" href="#tf-tour-overview">
+                                <a class="tf-hashlink" href="#tf-car-info">
                                     <?php esc_html_e("Car info", "tourfic"); ?>
                                 </a>
                             </li>
                             <li>
-                                <a class="tf-hashlink" href="#tf-tour-overview">
+                                <a class="tf-hashlink" href="#tf-benefits">
                                     <?php esc_html_e("Benefits", "tourfic"); ?>
                                 </a>
                             </li>
                             <li>
-                                <a class="tf-hashlink" href="#tf-tour-overview">
-                                    <?php esc_html_e("Specification", "tourfic"); ?>
+                                <a class="tf-hashlink" href="#tf-inc-exc">
+                                    <?php esc_html_e("Include/Excluce", "tourfic"); ?>
                                 </a>
                             </li>
                             <li>
-                                <a class="tf-hashlink" href="#tf-tour-overview">
+                                <a class="tf-hashlink" href="#tf-location">
                                     <?php esc_html_e("Location", "tourfic"); ?>
                                 </a>
                             </li>
                             <li>
-                                <a class="tf-hashlink" href="#tf-tour-overview">
+                                <a class="tf-hashlink" href="#tf-reviews">
                                     <?php esc_html_e("Reviews", "tourfic"); ?>
                                 </a>
                             </li>
                             <li>
-                                <a class="tf-hashlink" href="#tf-tour-overview">
+                                <a class="tf-hashlink" href="#tf-faq">
                                     <?php esc_html_e("FAQ's", "tourfic"); ?>
                                 </a>
                             </li>

@@ -1,5 +1,5 @@
 <?php if(!empty($faqs)){ ?>
-<div class="tf-car-faq-section">
+<div class="tf-car-faq-section" id="tf-faq">
     <h3><?php esc_html_e("FAQ’s", "tourfic"); ?></h3>
 
     <?php foreach($faqs as $singlefaq){ ?>

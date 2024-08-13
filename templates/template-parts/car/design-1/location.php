@@ -1,4 +1,4 @@
-<div class="tf-car-location">
+<div class="tf-car-location" id="tf-location">
     <h3><?php esc_html_e("Location", "tourfic"); ?></h3>
 
     <div class="tf-car-location-map">

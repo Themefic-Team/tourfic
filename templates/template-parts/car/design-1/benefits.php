@@ -1,5 +1,5 @@
 <?php if(!empty($benefits_status)){ ?>
-<div class="tf-car-benefits">
+<div class="tf-car-benefits" id="tf-benefits">
     <h3><?php esc_html_e("Benefits", "tourfic"); ?></h3>
 
     <ul>
