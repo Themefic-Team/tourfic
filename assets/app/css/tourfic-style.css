@@ -13139,9 +13139,38 @@ html {
       .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery {
         margin-top: 15px; }
         .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a {
-          width: calc(25% - 12px); }
+          width: calc(25% - 12px);
+          display: none;
+          height: 122px; }
           .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a img {
-            border-radius: 8px; }
+            border-radius: 8px;
+            object-fit: cover;
+            height: 100%;
+            width: 100%; }
+          .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a.tf-gallery-more {
+            position: relative; }
+            .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a.tf-gallery-more::before {
+              border-radius: 8px;
+              content: "View More → ";
+              position: absolute;
+              color: #fff;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              width: 100%;
+              z-index: 1;
+              background: #0000009c;
+              font-size: 16px; }
+              @media only screen and (max-width: 767.98px) {
+                .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a.tf-gallery-more::before {
+                  text-align: center;
+                  font-size: 12px; } }
+          .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a:nth-child(1), .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a:nth-child(2), .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a:nth-child(3), .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a:nth-child(4) {
+            display: block; }
     .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-details-menu ul li {
       display: inline-block; }
       .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-details-menu ul li a {

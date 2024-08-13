@@ -42,7 +42,7 @@ use \Tourfic\Classes\Helper;
                             foreach ( $gallery_ids as $key => $gallery_item_id ) {
                             $image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
                         ?>
-                            <a class="<?php echo $gallery_count==5 ? esc_attr( 'tf-gallery-more' ) : ''; ?> " href="<?php echo esc_url($image_url); ?>" id="tour-gallery" data-fancybox="tour-gallery">
+                            <a class="<?php echo $gallery_count==4 ? esc_attr( 'tf-gallery-more' ) : ''; ?> " href="<?php echo esc_url($image_url); ?>" id="tour-gallery" data-fancybox="tour-gallery">
                                 <img src="<?php echo esc_url($image_url); ?>">
                             </a>
                         <?php $gallery_count++; } } ?>

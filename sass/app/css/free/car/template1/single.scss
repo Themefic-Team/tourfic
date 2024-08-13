@@ -101,10 +101,46 @@
                     margin-top: 15px;
                     a{
                         width: calc(25% - 12px);
+                        display: none;
+                        height: 122px;
                         img{
                             border-radius: 8px;
+                            object-fit: cover;
+                            height: 100%;
+                            width: 100%;
                         }
-                    }
+                        &.tf-gallery-more {
+                            position: relative;
+                
+                            &::before{
+                                border-radius: 8px;
+                                content: "View More → ";
+                                position: absolute;
+                                color: #fff;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                top: 0;
+                                bottom: 0;
+                                left: 0;
+                                right: 0;
+                                width: 100%;
+                                z-index: 1;
+                                background: #0000009c;
+                                font-size: $font-size-normal;
+                                @media #{$tfmax767}{
+                                    text-align: center;
+                                    font-size: $font-size-xs;
+                                }
+                            }
+                        }
+                        &:nth-child(1),
+                        &:nth-child(2),
+                        &:nth-child(3),
+                        &:nth-child(4){
+                            display: block;
+                        }
+                    }   
                 }
             }
 
