@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 use \Tourfic\Classes\Helper;
 use Tourfic\Classes\Room\Room;
 use \Tourfic\Core\TF_Backend_Booking;
+use \Tourfic\Classes\Hotel\Hotel;
 
 class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 
@@ -159,7 +160,7 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 			$not_found = [];
 			while ( $loop->have_posts() ) {
 				$loop->the_post();
-				tf_filter_hotel_by_date( $period, $not_found, array( 1, 1, 1, '' ) );
+				Hotel::tf_filter_hotel_by_date( $period, $not_found, array( 1, 1, 1, '' ) );
 			}
 
 			$tf_total_filters = [];

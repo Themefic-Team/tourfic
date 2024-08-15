@@ -1,7 +1,12 @@
 <?php
 
 namespace Tourfic\Classes\Hotel;
-class Availability extends \Tourfic\Classes\Hotel\Pricing {
+
+defined( 'ABSPATH' ) || exit;
+
+use \Tourfic\Classes\Hotel\Pricing;
+
+class Availability extends Pricing {
 
 
 }

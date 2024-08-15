@@ -32,15 +32,6 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-helper.php' ) ) {
 }
 
 /**
- * Hotel Functions
- */
-if ( file_exists( TF_INC_PATH . 'functions/functions-hotel.php' ) ) {
-	require_once TF_INC_PATH . 'functions/functions-hotel.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/functions-hotel.php' );
-}
-
-/**
  * Apartment Functions
  */
 if ( file_exists( TF_INC_PATH . 'functions/functions-apartment.php' ) ) {
@@ -410,4 +401,10 @@ if(!function_exists('tf_tour_date_format_changer')) {
 
 		} else return;
 	}
+}
+
+/**
+ * Remove room order ids
+ */
+function tf_remove_order_ids_from_room() {
 }

@@ -1,5 +1,6 @@
 <?php
 use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\Hotel\Hotel;
 ?>
 
 <div class="tf-archive-page tf-template-global tf-archive-design-1">
@@ -91,14 +92,14 @@ use \Tourfic\Classes\Helper;
 							the_post();
 							$hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
 							if ( !empty( $hotel_meta[ "featured" ] ) && $hotel_meta[ "featured" ] == 1 ) {
-								tf_hotel_archive_single_item();
+								Hotel::tf_hotel_archive_single_item();
 							}
 						}
 						while ( have_posts() ) {
 							the_post();
 							$hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
 							if ( empty($hotel_meta[ "featured" ]) ) {
-								tf_hotel_archive_single_item();
+								Hotel::tf_hotel_archive_single_item();
 							}
 						}
 					} else {
