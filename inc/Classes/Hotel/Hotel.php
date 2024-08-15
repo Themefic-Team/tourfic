@@ -3,6 +3,7 @@
 namespace Tourfic\Classes\Hotel;
 
 use Tourfic\Classes\Helper;
+use \Tourfic\Classes\Hotel\Pricing;
 use Tourfic\Classes\Room\Room;
 use Tourfic\App\TF_Review;
 
@@ -49,7 +50,7 @@ class Hotel {
 		/**
 		 * Form data
 		 */
-		$form_post_id      = ! empty( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
+		$hotel_id      = ! empty( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
 		$form_adult        = ! empty( $_POST['adult'] ) ? sanitize_text_field( $_POST['adult'] ) : 0;
 		$form_child        = ! empty( $_POST['child'] ) ? sanitize_text_field( $_POST['child'] ) : 0;
 		$children_ages     = ! empty( $_POST['children_ages'] ) ? sanitize_text_field( $_POST['children_ages'] ) : '';
@@ -74,9 +75,9 @@ class Hotel {
 		/**
 		 * Backend data
 		 */
-		$meta  = get_post_meta( $form_post_id, 'tf_hotels_opt', true );
-		$rooms = Room::get_hotel_rooms( $form_post_id );
-		$locations           = get_the_terms( $form_post_id, 'hotel_location' );
+		$meta  = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
+		$rooms = Room::get_hotel_rooms( $hotel_id );
+		$locations           = get_the_terms( $hotel_id, 'hotel_location' );
 		$first_location_name = ! empty( $locations ) ? $locations[0]->name : '';
 		$room_book_by        = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 		$room_book_url       = ! empty( $meta['booking-url'] ) ? $meta['booking-url'] : '';
@@ -166,20 +167,10 @@ class Hotel {
 					$d_room_child_price = 0;
 
 					if($pricing_by == 1) {
-						if($hotel_discount_type == "percent") {
-							$d_room_price = !empty($room_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $room_price - ( ( (int) $room_price / 100 ) * (int) (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-						}else if($hotel_discount_type == "fixed") {
-							$d_room_price = !empty($room_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $room_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-						}
-						$d_price = $d_room_price;
+                        $d_price = Pricing::instance($hotel_id, $room_id)->calculate_discount($room_price);
 					} elseif($pricing_by == 2) {
-						if($hotel_discount_type == "percent") {
-							$d_room_adult_price = !empty($room_adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $room_adult_price - ( ( (int) $room_adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-							$d_room_child_price = !empty($room_child_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $room_child_price - ( ( (int) $room_child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-						}else if($hotel_discount_type == "fixed") {
-							$room_adult_price = !empty($room_adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $room_adult_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-							$room_child_price = !empty($room_child_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $room_child_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-						}
+                        $d_room_adult_price = Pricing::instance($hotel_id, $room_id)->calculate_discount($room_adult_price);
+                        $d_room_child_price = Pricing::instance($hotel_id, $room_id)->calculate_discount($room_child_price);
 						$d_price = $d_room_adult_price + $d_room_child_price;
 					}
 
@@ -346,19 +337,10 @@ class Hotel {
 								$has_room[]      = 1;
 
 								if($pricing_by == 1) {
-									if($hotel_discount_type == "percent") {
-										$d_room_price = !empty($room_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $room_price - ( ( (int) $room_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-									}else if($hotel_discount_type == "fixed") {
-										$d_room_price = !empty($room_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $room_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-									}
+                                    $d_room_price = Pricing::instance($hotel_id, $room_id)->calculate_discount($room_price);
 								} else {
-									if($hotel_discount_type == "percent") {
-										$d_adult_price = !empty($adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-										$d_child_price = !empty($child_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - ( ( (int) $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-									}else if($hotel_discount_type == "fixed") {
-										$d_adult_price = !empty($adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $adult_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-										$d_child_price = !empty($adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $child_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-									}
+                                    $d_adult_price = Pricing::instance($hotel_id, $room_id)->calculate_discount($adult_price);
+                                    $d_child_price = Pricing::instance($hotel_id, $room_id)->calculate_discount($child_price);
 								}
 								$d_price_by_date = $pricing_by == '1' ? $d_room_price : ( ( $d_adult_price * $form_adult ) + ( $d_child_price * $form_child ) );
 								$d_price += $d_price_by_date;
@@ -954,6 +936,7 @@ class Hotel {
 		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tf_ajax_nonce' ) ) {
 			return;
 		}
+        $hotel_id = !empty($_POST['id']) ? sanitize_key( $_POST['id'] ) : '';
 		$meta            = get_post_meta( sanitize_key( $_POST['id'] ), 'tf_hotels_opt', true );
 		$airport_service = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 
@@ -1010,6 +993,9 @@ class Hotel {
 						$room_price  = ! empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $room_meta['price'];
 						$adult_price = ! empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $room_meta['adult_price'];
 						$child_price = ! empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $room_meta['child_price'];
+						$room_price  = Pricing::instance($hotel_id, $room_id)->calculate_discount($adult_price);
+						$adult_price = Pricing::instance($hotel_id, $room_id)->calculate_discount($adult_price);
+						$child_price = Pricing::instance($hotel_id, $room_id)->calculate_discount($child_price);
 
 						if ( $hotel_discount_type == "percent" ) {
 							$room_price  = ! empty( $room_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $room_price - ( ( (int) $room_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
