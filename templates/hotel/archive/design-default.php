@@ -54,7 +54,7 @@ use \Tourfic\Classes\Hotel\Hotel;
 					?>
 					
 					<div class="tf_posts_navigation">
-						<?php tourfic_posts_navigation(); ?>
+						<?php Helper::tourfic_posts_navigation(); ?>
 					</div>
 				</div>
 

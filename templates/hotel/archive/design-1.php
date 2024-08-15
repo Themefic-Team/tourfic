@@ -108,7 +108,7 @@ use \Tourfic\Classes\Hotel\Hotel;
 					?>
 
                         <div class="tf-pagination-bar">
-                            <?php tourfic_posts_navigation(); ?>
+                            <?php Helper::tourfic_posts_navigation(); ?>
                         </div>
                     </div>
                 </div>

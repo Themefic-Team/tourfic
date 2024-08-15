@@ -373,7 +373,7 @@ class Hotel {
 
 						// Check if date is provided and within date range
 						if ( ! in_array( 0, $has_room ) ) {
-							tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price);
+							Helper::tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price);
 							if ( $form_adult <= $adult_number ) {
 								if ( !empty($form_child) ){
 									if($form_child <= $child_number ) {
@@ -427,7 +427,7 @@ class Hotel {
 						$price = !empty($room['price_multi_day']) && $room['price_multi_day'] == '1' && !empty( $price_by_date ) ? $price_by_date * $days : $price_by_date * $days;
 						$d_price = !empty($room['price_multi_day']) && $room['price_multi_day'] == '1' && !empty( $price_by_date ) ? $d_price_by_date * $days : $d_price_by_date * $days;
 
-						tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price );
+						Helper::tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price );
 
 						/**
 						 * filter hotel room with features
@@ -1069,7 +1069,7 @@ class Hotel {
 			}
 
 			if ( $deposit == "true" ) {
-				tf_get_deposit_amount( $room_meta, $price_total, $deposit_amount, $has_deposit );
+				Helper::tf_get_deposit_amount( $room_meta, $price_total, $deposit_amount, $has_deposit );
 				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) {
 					$deposit_amount;
 				}
@@ -1311,7 +1311,7 @@ class Hotel {
 		if ( ! empty( $design ) && 2 == $design ) {
 			?>
             <form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2 <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off"
-                  action="<?php echo esc_url( tf_booking_search_action() ); ?>">
+                  action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
                 <div class="tf_hotel_searching">
                     <div class="tf_form_innerbody">
                         <div class="tf_form_fields">
@@ -1527,7 +1527,7 @@ class Hotel {
                     $(document).ready(function () {
 
                         // flatpickr locale first day of Week
-						<?php tf_flatpickr_locale( "root" ); ?>
+						<?php Helper::tf_flatpickr_locale( "root" ); ?>
 
                         $(".tf_check_inout_dates").on("click", function () {
                             $(".tf-check-in-out-date").trigger("click");
@@ -1539,7 +1539,7 @@ class Hotel {
                             minDate: "today",
 
                             // flatpickr locale
-							<?php tf_flatpickr_locale(); ?>
+							<?php Helper::tf_flatpickr_locale(); ?>
 
                             onReady: function (selectedDates, dateStr, instance) {
                                 instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -1575,7 +1575,7 @@ class Hotel {
             </script>
 			<?php
 		} else { ?>
-            <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( tf_booking_search_action() ); ?>">
+            <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
                 <div class="tf_homepage-booking">
 					<?php if ( Helper::tfopt( 'hide_hotel_location_search' ) != 1 || Helper::tfopt( 'required_location_hotel_search' ) ): ?>
                         <div class="tf_destination-wrap">
@@ -1782,7 +1782,7 @@ class Hotel {
                     $(document).ready(function () {
 
                         // flatpickr First Day of Week
-						<?php tf_flatpickr_locale( 'root' ); ?>
+						<?php Helper::tf_flatpickr_locale( 'root' ); ?>
 
                         $("#tf_hotel_aval_check #check-in-out-date").flatpickr({
                             enableTime: false,
@@ -1793,7 +1793,7 @@ class Hotel {
                             minDate: "today",
 
                             // flatpickr locale
-							<?php tf_flatpickr_locale(); ?>
+							<?php Helper::tf_flatpickr_locale(); ?>
 
                             onReady: function (selectedDates, dateStr, instance) {
                                 instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -2121,7 +2121,7 @@ class Hotel {
                         }
 
                         // flatpickr locale first day of Week
-						<?php tf_flatpickr_locale( "root" ); ?>
+						<?php Helper::tf_flatpickr_locale( "root" ); ?>
 
                         $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
                             $(".tf-check-in-out-date").trigger("click");
@@ -2134,7 +2134,7 @@ class Hotel {
                             showMonths: selectedTemplate == "design-2" ? month : 1,
 
                             // flatpickr locale
-							<?php tf_flatpickr_locale(); ?>
+							<?php Helper::tf_flatpickr_locale(); ?>
 
                             onReady: function (selectedDates, dateStr, instance) {
                                 instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -2250,7 +2250,7 @@ class Hotel {
                 $(document).ready(function () {
 
                     // First Day of Week
-					<?php tf_flatpickr_locale( "root" ); ?>
+					<?php Helper::tf_flatpickr_locale( "root" ); ?>
 
                     const checkinoutdateange = flatpickr(".tf-hotel-booking-sidebar #check-in-out-date", {
                         enableTime: false,
@@ -2270,7 +2270,7 @@ class Hotel {
                         defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
 						<?php
 						// Flatpickr locale for translation
-						tf_flatpickr_locale();
+						Helper::tf_flatpickr_locale();
 						?>
                     });
 
@@ -3283,5 +3283,44 @@ class Hotel {
 		}
 
 		return $day_difference;
+	}
+
+	static function tf_term_count( $filter, $destination, $default_count ) {
+
+		if ( $destination == '' ) {
+			return $default_count;
+		}
+
+		$term_count = array();
+
+		$args = array(
+			'post_type'      => 'tf_hotel',
+			'post_status'    => 'publish',
+			'posts_per_page' => - 1,
+			'tax_query'      => array(
+				'relation' => 'AND',
+				array(
+					'taxonomy' => 'hotel_location',
+					'field'    => 'slug',
+					'terms'    => $destination
+				)
+			)
+		);
+
+		$loop = new WP_Query( $args );
+
+		if ( $loop->have_posts() ) :
+			while ( $loop->have_posts() ) : $loop->the_post();
+
+				if ( has_term( $filter, 'tf_filters', get_the_ID() ) == true ) {
+					$term_count[] = 'true';
+				}
+
+			endwhile;
+		endif;
+
+		return count( $term_count );
+
+		wp_reset_postdata();
 	}
 }

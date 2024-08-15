@@ -27,7 +27,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 		$tour_location_field_required = ! empty( Helper::tfopt( 'tour_location_field_required' ) ) ? Helper::tfopt( 'tour_location_field_required' ) : '';
         if( !empty($design) && 2==$design ){
 		?>
-		<form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(tf_booking_search_action()); ?>">
+		<form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
 			<div class="tf_hotel_searching">
 				<div class="tf_form_innerbody">
 					<div class="tf_form_fields">
@@ -224,7 +224,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 				$(document).ready(function () {
 
 					// flatpickr locale first day of Week
-					<?php tf_flatpickr_locale("root"); ?>
+					<?php Helper::tf_flatpickr_locale("root"); ?>
 
 					$(".tf_tour_check_in_out_date").on("click", function(){
 						$(".tf-tour-check-in-out-date").trigger( "click" );
@@ -236,7 +236,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 						minDate: "today",
 
 						// flatpickr locale
-						<?php tf_flatpickr_locale(); ?>
+						<?php Helper::tf_flatpickr_locale(); ?>
 						
 						onReady: function (selectedDates, dateStr, instance) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -271,7 +271,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 			})(jQuery);
 		</script>
 		<?php }else{ ?>
-        <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(tf_booking_search_action()); ?>">
+        <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
             <div class="tf_homepage-booking">
 				<?php if( Helper::tfopt( 'hide_tour_location_search' ) != 1 || Helper::tfopt( 'required_location_tour_search' ) ): ?>
 					<div class="tf_destination-wrap">
@@ -444,7 +444,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
                 $(document).ready(function () {
 
 					// flatpickr first day of Week
-					<?php tf_flatpickr_locale('root'); ?>
+					<?php Helper::tf_flatpickr_locale('root'); ?>
 
 					$("#tf_tour_aval_check #check-in-out-date").flatpickr({
 						enableTime: false,
@@ -455,7 +455,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 						minDate: "today",
 						
 						// flatpickr locale
-						<?php tf_flatpickr_locale(); ?>
+						<?php Helper::tf_flatpickr_locale(); ?>
 
 						onReady: function(selectedDates, dateStr, instance) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');

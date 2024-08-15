@@ -1715,4 +1715,46 @@ trait Action_Helper {
 			return;
 		}
 	}
+
+	function tourfic_booking_set_search_result( $url ) {
+
+		$search_result_page = self::tfopt( 'search-result-page' );
+
+		if ( isset( $search_result_page ) ) {
+			$url = get_permalink( $search_result_page );
+		}
+
+		return $url;
+
+	}
+
+	function tourfic_wp_dropdown_cats_multiple( $output, $r ) {
+		if ( isset( $r['multiple'] ) && $r['multiple'] ) {
+			$output = preg_replace( '/^<select/i', '<select multiple', $output );
+			$output = str_replace( "name='{$r['name']}'", "name='{$r['name']}[]'", $output );
+			//if( is_array($r['selected']) ):
+			foreach ( array_map( 'trim', explode( ",", $r['selected'] ) ) as $value ) {
+				$output = str_replace( "value=\"{$value}\"", "value=\"{$value}\" selected", $output );
+			}
+			//endif;
+		}
+
+		return $output;
+	}
+
+	function tf_tours_excerpt_more( $more ) {
+
+		if ( 'tf_tours' === get_post_type() ) {
+			return '...';
+		}
+
+	}
+
+	function tourfic_notice_wrapper() {
+		?>
+			<div class="tf-container">
+				<div class="tf-notice-wrapper"></div>
+			</div>
+		<?php
+	}
 }
