@@ -2,6 +2,7 @@
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Hotel\Pricing;
+use \Tourfic\Classes\Hotel\Hotel;
 
 //getting only selected features for rooms
 $rm_features = [];
@@ -51,7 +52,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 <!--Booking form start -->
 <?php if( ($tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 || $tf_booking_type == 3) : ?>
     <div id="room-availability" class="tf-booking-form-wrapper">
-        <?php tf_hotel_sidebar_booking_form(); ?>
+        <?php Hotel::tf_hotel_sidebar_booking_form(); ?>
     </div>
 <?php endif; ?>
 <?php if( $tf_booking_type == 2 && $tf_ext_booking_type == 2 && !empty($tf_ext_booking_code )): ?>

@@ -5,6 +5,7 @@ namespace Tourfic\App\Shortcodes;
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
+use Tourfic\Classes\Hotel\Hotel;
 use Tourfic\Classes\Apartment\Apartment;
 
 class Search_Form extends \Tourfic\Core\Shortcodes {
@@ -112,7 +113,7 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 					?>
 					<div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent <?php echo esc_attr( $child_age_limit ); ?>">
 						<?php
-						tf_hotel_search_form_horizontal( $classes, $title, $subtitle, $author, $advanced, $design );
+						Hotel::tf_hotel_search_form_horizontal( $classes, $title, $subtitle, $author, $advanced, $design );
 						?>
 					</div>
 					<?php

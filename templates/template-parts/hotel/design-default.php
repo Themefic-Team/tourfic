@@ -3,6 +3,7 @@
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Hotel\Pricing;
+use \Tourfic\Classes\Hotel\Hotel;
 
 $tf_booking_type = '1';
 $tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = $tf_ext_booking_type = $tf_ext_booking_code = '';
@@ -435,7 +436,7 @@ $total_room_option_count = 0;
 					<?php } ?>
 					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 ) : ?>
                         <div class="hero-booking">
-							<?php tf_hotel_sidebar_booking_form(); ?>
+							<?php Hotel::tf_hotel_sidebar_booking_form(); ?>
                         </div>
 					<?php endif; ?>
                     <?php if( $tf_booking_type == 2 && $tf_ext_booking_type == 2 && !empty( $tf_ext_booking_code )) : ?>

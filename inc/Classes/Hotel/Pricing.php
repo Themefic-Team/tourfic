@@ -2,6 +2,8 @@
 
 namespace Tourfic\Classes\Hotel;
 
+defined( 'ABSPATH' ) || exit;
+
 use Tourfic\Classes\Helper;
 use Tourfic\Classes\Room\Room;
 
@@ -23,7 +25,7 @@ class Pricing {
 		return new self( $post_id, $room_id );
 	}
 
-	public function __construct( $post_id, $room_id ) {
+	public function __construct( $post_id = '', $room_id = '' ) {
 		$this->post_id   = $post_id;
 		$this->room_id   = $room_id;
 		$this->meta      = get_post_meta( $post_id, 'tf_hotels_opt', true );
