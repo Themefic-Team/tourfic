@@ -37,6 +37,9 @@ class Helper {
 		add_filter( 'template_include', array( $this, 'tourfic_archive_page_template' ) );
 		add_filter( 'single_template', array( $this, 'tf_single_page_template' ) );
 		add_filter( 'after_setup_theme', array( $this, 'tf_image_sizes' ) );
+        add_filter( 'tf_booking_search_action', array( $this, 'tourfic_booking_set_search_result') );
+        add_filter( 'wp_dropdown_cats', array( $this, 'tourfic_wp_dropdown_cats_multiple' ), 10, 2 );
+        add_filter( 'excerpt_more', array( $this, 'tf_tours_excerpt_more' ) );
 
 		is_admin() ? add_filter( 'plugin_action_links_' . 'tourfic/tourfic.php', array( $this, 'tf_plugin_action_links' ) ) : '';
 		is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) && function_exists( 'is_tf_pro' ) && !is_tf_pro() ? add_filter( 'plugin_action_links_' . 'tourfic-pro/tourfic-pro.php', array( $this, 'tf_pro_plugin_licence_action_links' ) ) : '';
@@ -55,6 +58,7 @@ class Helper {
 
 		// Add dashboard link to admin menu bar
 		add_action( 'admin_bar_menu', array( $this, 'tf_admin_bar_dashboard_link' ), 31  );
+        add_action( 'tf_before_container', array( $this, 'tourfic_notice_wrapper' ), 10 );
 	}
 
 	static function tfopt( $option = '', $default = null ) {
@@ -541,7 +545,7 @@ class Helper {
 			?>
             <div class="tf-box-wrapper tf-box tf-mrbottom-30">
                 <form class="widget tf-hotel-side-booking" method="get" autocomplete="off"
-                      action="<?php echo esc_url( tf_booking_search_action() ); ?>" id="tf-widget-booking-search">
+                      action="<?php echo esc_url( self::tf_booking_search_action() ); ?>" id="tf-widget-booking-search">
 
                     <div class="tf-field-group tf-destination-box" <?php echo ( $post_type == 'tf_hotel' && self::tfopt( "hide_hotel_location_search" ) == 1 & self::tfopt( "required_location_hotel_search" ) != 1 ) || ( $post_type == 'tf_tours' && self::tfopt( "hide_tour_location_search" ) == 1 && self::tfopt( "required_location_tour_search" ) != 1 ) ? 'style="display:none"' : '' ?>>
                         <i class="fa-solid fa-location-dot"></i>
@@ -884,7 +888,7 @@ class Helper {
                     (function ($) {
                         $(document).ready(function () {
                             // flatpickr locale first day of Week
-							<?php tf_flatpickr_locale( "root" ); ?>
+							<?php self::tf_flatpickr_locale( "root" ); ?>
 
                             $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
                                 $("#check-in-out-date").trigger("click");
@@ -896,7 +900,7 @@ class Helper {
                                 minDate: "today",
 
                                 // flatpickr locale
-								<?php tf_flatpickr_locale(); ?>
+								<?php self::tf_flatpickr_locale(); ?>
 
                                 onReady: function (selectedDates, dateStr, instance) {
                                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -943,7 +947,7 @@ class Helper {
                         $(document).ready(function () {
 
                             // flatpickr locale
-							<?php tf_flatpickr_locale( "root" ); ?>
+							<?php self::tf_flatpickr_locale( "root" ); ?>
 
                             $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
                                 $("#check-in-out-date").trigger("click");
@@ -955,7 +959,7 @@ class Helper {
                                 minDate: "today",
 
                                 // flatpickr locale
-								<?php tf_flatpickr_locale(); ?>
+								<?php self::tf_flatpickr_locale(); ?>
 
 
                                 onReady: function (selectedDates, dateStr, instance) {
@@ -995,7 +999,7 @@ class Helper {
 		<?php } else { ?>
             <!-- Start Booking widget -->
             <form class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
-                  action="<?php echo esc_url( tf_booking_search_action() ); ?>" id="tf-widget-booking-search">
+                  action="<?php echo esc_url( self::tf_booking_search_action() ); ?>" id="tf-widget-booking-search">
 
                 <div class="tf_form-row">
                     <label class="tf_label-row">
@@ -1144,7 +1148,7 @@ class Helper {
                     $(document).ready(function () {
 
                         // flatpickr locale first day of Week
-						<?php tf_flatpickr_locale( "root" ); ?>
+						<?php self::tf_flatpickr_locale( "root" ); ?>
 
                         $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
                             enableTime: false,
@@ -1155,7 +1159,7 @@ class Helper {
                             dateFormat: "Y/m/d",
 
                             // flatpickr locale
-							<?php tf_flatpickr_locale(); ?>
+							<?php self::tf_flatpickr_locale(); ?>
 
                             onReady: function (selectedDates, dateStr, instance) {
                                 instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -1203,7 +1207,7 @@ class Helper {
 		if ( ( is_post_type_archive( 'tf_hotel' ) && $tf_hotel_arc_selected_template == "design-1" ) || ( is_post_type_archive( 'tf_tours' ) && $tf_tour_arc_selected_template == "design-1" ) || ( $post_type == 'tf_hotel' && $tf_hotel_arc_selected_template == "design-1" ) || ( $post_type == 'tf_tours' && $tf_tour_arc_selected_template == "design-1" ) ) {
 			?>
             <div class="tf-box-wrapper tf-box tf-mrbottom-30">
-                <form action="<?php echo esc_url( tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking">
+                <form action="<?php echo esc_url( self::tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking">
                     <div class="tf-field-group tf-destination-box" <?php echo ( $post_type == 'tf_hotel' && self::tfopt( "hide_hotel_location_search" ) == 1 && self::tfopt( "required_location_hotel_search" ) != 1 ) || ( $post_type == 'tf_tours' && self::tfopt( "hide_tour_location_search" ) == 1 && self::tfopt( "required_location_tour_search" ) != 1 ) ? 'style="display:none"' : '' ?>>
                         <i class="fa-solid fa-location-dot"></i>
 
@@ -1282,7 +1286,7 @@ class Helper {
             <script>
                 (function ($) {
                     $(document).ready(function () {
-						<?php tf_flatpickr_locale( 'root' ); ?>
+						<?php self::tf_flatpickr_locale( 'root' ); ?>
 
                         $(document).on("focus", ".tf-hotel-side-booking #check-in-out-date", function (e) {
                             let calander = flatpickr(this, {
@@ -1294,7 +1298,7 @@ class Helper {
                                 altFormat: '<?php echo esc_html( $date_format_for_users ); ?>',
 
                                 // flatpickr locale
-								<?php tf_flatpickr_locale(); ?>
+								<?php self::tf_flatpickr_locale(); ?>
 
                                 onChange: function (selectedDates, dateStr, instance) {
                                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -1534,7 +1538,7 @@ class Helper {
                     (function ($) {
                         $(document).ready(function () {
                             // flatpickr locale first day of Week
-							<?php tf_flatpickr_locale( "root" ); ?>
+							<?php self::tf_flatpickr_locale( "root" ); ?>
 
                             $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
 
@@ -1547,7 +1551,7 @@ class Helper {
                                 minDate: "today",
 
                                 // flatpickr locale
-								<?php tf_flatpickr_locale(); ?>
+								<?php self::tf_flatpickr_locale(); ?>
 
                                 onReady: function (selectedDates, dateStr, instance) {
                                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -1592,7 +1596,7 @@ class Helper {
                     (function ($) {
                         $(document).ready(function () {
                             // flatpickr locale first day of Week
-							<?php tf_flatpickr_locale( "root" ); ?>
+							<?php self::tf_flatpickr_locale( "root" ); ?>
 
                             $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
 
@@ -1605,7 +1609,7 @@ class Helper {
                                 minDate: "today",
 
                                 // flatpickr locale
-								<?php tf_flatpickr_locale(); ?>
+								<?php self::tf_flatpickr_locale(); ?>
 
                                 onReady: function (selectedDates, dateStr, instance) {
                                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -1647,7 +1651,7 @@ class Helper {
 
 		<?php } else { ?>
             <form class="tf_archive_search_result tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
-                  action="<?php echo esc_url( tf_booking_search_action() ); ?>">
+                  action="<?php echo esc_url( self::tf_booking_search_action() ); ?>">
 
                 <div class="tf_form-row">
                     <label class="tf_label-row">
@@ -1759,7 +1763,7 @@ class Helper {
             <script>
                 (function ($) {
                     $(document).ready(function () {
-						<?php tf_flatpickr_locale( 'root' ); ?>
+						<?php self::tf_flatpickr_locale( 'root' ); ?>
 
                         $(document).on("focus", ".tf-hotel-side-booking #check-in-out-date", function (e) {
                             let calander = flatpickr(this, {
@@ -1771,7 +1775,7 @@ class Helper {
                                 altFormat: '<?php echo esc_html( $date_format_for_users ); ?>',
 
                                 // flatpickr locale
-								<?php tf_flatpickr_locale(); ?>
+								<?php self::tf_flatpickr_locale(); ?>
 
                                 onChange: function (selectedDates, dateStr, instance) {
                                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -1845,5 +1849,125 @@ class Helper {
 		);
 
 		return $order_id;
+	}
+
+    static function tf_booking_search_action() {
+
+        // get data from global settings else default
+        $search_result_action = !empty( Helper::tfopt( 'search-result-page' ) ) ? get_permalink( Helper::tfopt( 'search-result-page' ) ) : home_url( '/search-result/' );
+
+        // can be override by filter
+        return apply_filters( 'tf_booking_search_action', $search_result_action );
+
+    }
+
+    static function tourfic_posts_navigation( $wp_query = '' ) {
+        if ( empty( $wp_query ) ) {
+            global $wp_query;
+        }
+        $max_num_pages = $wp_query->max_num_pages;
+        $paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
+        if ( $max_num_pages > 1 ) {
+            echo "<div id='tf_posts_navigation_bar'>";
+            echo wp_kses_post(
+                paginate_links( array(
+                    'current'   => $paged,
+                    'total'     => $max_num_pages,
+                    'mid_size'  => 2,
+                    'prev_next' => true,
+                ) )
+            );
+            echo "</div>";
+        }
+    }
+
+    static function tf_flatpickr_locale( $placement = 0 ) {
+
+		$flatpickr_locale     = ! empty( get_locale() ) ? get_locale() : 'en_US';
+		$allowed_locale       = array( 'ar', 'bn_BD', 'de_DE', 'es_ES', 'fr_FR', 'hi_IN', 'it_IT', 'nl_NL', 'ru_RU', 'zh_CN' );
+		$tf_first_day_of_week = ! empty( self::tfopt( "tf-week-day-flatpickr" ) ) ? self::tfopt( "tf-week-day-flatpickr" ) : 0;
+
+		if ( in_array( $flatpickr_locale, $allowed_locale ) ) {
+
+			switch ( $flatpickr_locale ) {
+				case "bn_BD":
+					$flatpickr_locale = 'bn';
+					break;
+				case "de_DE":
+					$flatpickr_locale = 'de';
+					break;
+				case "es_ES":
+					$flatpickr_locale = 'es';
+					break;
+				case "fr_FR":
+					$flatpickr_locale = 'fr';
+					break;
+				case "hi_IN":
+					$flatpickr_locale = 'hi';
+					break;
+				case "it_IT":
+					$flatpickr_locale = 'it';
+					break;
+				case "nl_NL":
+					$flatpickr_locale = 'nl';
+					break;
+				case "ru_RU":
+					$flatpickr_locale = 'ru';
+					break;
+				case "zh_CN":
+					$flatpickr_locale = 'zh';
+					break;
+			}
+		} else {
+			$flatpickr_locale = 'default';
+		}
+
+		if ( ! empty( $placement ) && ! empty( $flatpickr_locale ) && $placement == "root" ) {
+
+			echo esc_html( <<<EOD
+				window.flatpickr.l10ns.$flatpickr_locale.firstDayOfWeek = $tf_first_day_of_week;
+			EOD
+			);
+
+		} else {
+			echo 'locale: "' . esc_html( $flatpickr_locale ) . '",';
+		}
+	}
+
+    static function tf_get_deposit_amount( $room, $price, &$deposit_amount, &$has_deposit, $discount = 0 ) {
+		$deposit_amount = null;
+		if ( $discount > 0 ) {
+			$price = $discount;
+		}
+		$has_deposit = ! empty( $room['allow_deposit'] ) && $room['allow_deposit'] == true;
+		if ( $has_deposit == true ) {
+			if ( $room['deposit_type'] == 'percent' ) {
+				$deposit_amount = $price * ( intval( $room['deposit_amount'] ) / 100 );
+			} else {
+				$deposit_amount = $room['deposit_amount'];
+			}
+		}
+	}
+
+    static function tf_array_flatten( $array, $depth = INF ) {
+
+		$result = [];
+
+		foreach ( $array as $item ) {
+			if ( ! is_array( $item ) ) {
+				$result[] = $item;
+			} else {
+				$values = $depth === 1
+					? array_values( $item )
+					: tf_array_flatten( $item, $depth - 1 );
+
+				foreach ( $values as $value ) {
+					$result[] = $value;
+				}
+			}
+		}
+
+		return $result;
+
 	}
 }

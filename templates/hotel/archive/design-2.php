@@ -36,7 +36,7 @@
                     </span>
                     <!-- Booking form Start -->
                     <div class="tf-archive-search-form tf-booking-form-wrapper">
-                        <form action="<?php echo esc_url( tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
+                        <form action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
                             <?php Helper::tf_archive_sidebar_search_form('tf_hotel'); ?>
                         </form>
                     </div>
@@ -82,9 +82,9 @@
                             }
                             ?>
                             <?php 
-                            if(tourfic_posts_navigation()){ ?>
+                            if(Helper::tourfic_posts_navigation()){ ?>
                             <div class="tf-pagination-bar">
-                                <?php tourfic_posts_navigation(); ?>
+                                <?php Helper::tourfic_posts_navigation(); ?>
                             </div>
                             <?php } ?>
                         </div>

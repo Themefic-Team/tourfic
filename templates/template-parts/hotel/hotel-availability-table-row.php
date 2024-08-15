@@ -167,7 +167,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 					$price   = $price_by_date * $days;
 					$d_price = $d_price_by_date * $days;
 
-					tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price );
+					Helper::tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price );
 				}
 				?>
                 <td class="options">
@@ -1305,7 +1305,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 					$price   = $price_by_date * $days;
 					$d_price = $d_price_by_date * $days;
 
-					tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price );
+					Helper::tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price );
 				}
 				?>
                 <td class="options">

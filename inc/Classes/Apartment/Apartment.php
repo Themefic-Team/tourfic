@@ -352,7 +352,7 @@ class Apartment {
 		$disable_apartment_infant_search  = ! empty( Helper::tfopt( 'disable_apartment_infant_search' ) ) ? Helper::tfopt( 'disable_apartment_infant_search' ) : '';
 		if( !empty($design) && 2==$design ){
 		?>
-		<form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo esc_url( tf_booking_search_action() ); ?>">
+		<form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
 			<div class="tf_hotel_searching">
 				<div class="tf_form_innerbody">
 					<div class="tf_form_fields">
@@ -541,7 +541,7 @@ class Apartment {
 				$(document).ready(function () {
 
 					// flatpickr locale first day of Week
-					<?php tf_flatpickr_locale("root"); ?>
+					<?php Helper::tf_flatpickr_locale("root"); ?>
 
 					$(".tf_apartment_check_in_out_date").on("click", function(){
 						$(".tf-apartment-check-in-out-date").ctrigger("click");
@@ -553,7 +553,7 @@ class Apartment {
 						minDate: "today",
 
 						// flatpickr locale
-						<?php tf_flatpickr_locale(); ?>
+						<?php Helper::tf_flatpickr_locale(); ?>
 						
 						onReady: function (selectedDates, dateStr, instance) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -588,7 +588,7 @@ class Apartment {
 			})(jQuery);
 		</script>
 		<?php } else{ ?>
-        <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo esc_url( tf_booking_search_action() ); ?>">
+        <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
             <div class="tf_homepage-booking">
                 <div class="tf_destination-wrap">
                     <div class="tf_input-inner">
@@ -1264,7 +1264,7 @@ class Apartment {
                 $(document).ready(function () {
 
 					// First Day of Week
-					<?php tf_flatpickr_locale("root"); ?>
+					<?php Helper::tf_flatpickr_locale("root"); ?>
 
                     let minStay = <?php echo esc_js( $min_stay ) ?>;
 
@@ -1492,7 +1492,7 @@ class Apartment {
 								},
 							<?php endforeach; ?>
                         ],
-						<?php tf_flatpickr_locale(); ?>
+						<?php Helper::tf_flatpickr_locale(); ?>
                     });
 
 					// Need to change the date format

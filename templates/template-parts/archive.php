@@ -139,7 +139,7 @@ if( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ) 
         }
         ?>
             <div class="tf-pagination-bar">
-                <?php tourfic_posts_navigation(); ?>
+                <?php Helper::tourfic_posts_navigation(); ?>
             </div>
         </div>
     </div>
@@ -191,7 +191,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
             }
             ?>
             <div class="tf-pagination-bar">
-                <?php tourfic_posts_navigation(); ?>
+                <?php Helper::tourfic_posts_navigation(); ?>
             </div>
         </div>
         <!-- Available rooms end -->
@@ -237,7 +237,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
         ?>
     </div>
     <div class="tf_posts_navigation">
-        <?php tourfic_posts_navigation(); ?>
+        <?php Helper::tourfic_posts_navigation(); ?>
     </div>
 </div>
 

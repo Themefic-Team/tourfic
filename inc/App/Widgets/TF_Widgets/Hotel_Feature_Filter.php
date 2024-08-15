@@ -6,6 +6,7 @@ namespace Tourfic\App\Widgets\TF_Widgets;
 defined('ABSPATH') || exit;
 
 use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\Hotel\Hotel;
 
 /**
  * Hotel filter by features
@@ -70,7 +71,7 @@ class Hotel_Feature_Filter extends \WP_Widget {
                 $fslug = $term->slug;
                 $default_count = $term->count;
                 $tax_name = $term->taxonomy;
-                $count = $show_count ? '<span>' . tf_term_count( $term->slug, $destination_name, $default_count ) . '</span>' : '';
+                $count = $show_count ? '<span>' . Hotel::tf_term_count( $term->slug, $destination_name, $default_count ) . '</span>' : '';
                 $defult_select =  in_array($fslug, $search_features_query) ? 'checked' : '';
                 echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='tf_filters[]' value='{$id}' {$defult_select}/><input type='hidden' name='tf_widget_texonomy_name' id='tf_widget_texonomy_name' value='{$tax_name}'/><span class='checkmark'></span> {$name}</label> {$count}</li>", Helper::tf_custom_wp_kses_allow_tags() );
             }

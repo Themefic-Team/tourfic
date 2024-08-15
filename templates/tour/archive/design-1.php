@@ -118,7 +118,7 @@ use \Tourfic\Classes\Helper;
 					    <?php echo esc_html($tf_total_results); ?>
 					</span>
                         <div class="tf-pagination-bar">
-                            <?php tourfic_posts_navigation(); ?>
+                            <?php Helper::tourfic_posts_navigation(); ?>
                         </div>
                     </div>
                 </div>

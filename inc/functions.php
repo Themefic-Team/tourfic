@@ -22,15 +22,6 @@ function tf_file_missing( $files = '' ) {
 
 add_action( 'admin_notices', 'tf_file_missing' );
 
-/**
- * Helper Functions
- */
-if ( file_exists( TF_INC_PATH . 'functions/functions-helper.php' ) ) {
-	require_once TF_INC_PATH . 'functions/functions-helper.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/functions-helper.php' );
-}
-
 
 /**
  * Tour Functions

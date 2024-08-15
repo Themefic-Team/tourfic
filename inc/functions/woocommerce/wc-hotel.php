@@ -3,6 +3,7 @@ defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Room\Room;
 use Tourfic\Classes\Hotel\Pricing;
+use Tourfic\Classes\Helper;
 
 /**
  * Hotel booking ajax function
@@ -487,7 +488,7 @@ function tf_hotel_booking_callback() {
 		# check for deposit
 		if ( $deposit == "true" ) {
 
-			tf_get_deposit_amount( $room_meta, $price_total, $deposit_amount, $has_deposit );
+			Helper::tf_get_deposit_amount( $room_meta, $price_total, $deposit_amount, $has_deposit );
 			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) {
 				$tf_room_data['tf_hotel_data']['price_total'] = $deposit_amount;
 				if ( ! empty( $airport_service ) ) {
