@@ -5,6 +5,7 @@ namespace Tourfic\App\Shortcodes;
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\Apartment\Apartment;
 
 class Search_Result extends \Tourfic\Core\Shortcodes {
 
@@ -350,12 +351,12 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 											$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
 											if ( ! empty( $data ) ) {
 												if ( isset( $data[4] ) && isset( $data[5] ) ) {
-													if( $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item( $data );
+													if( $apartment_meta["apartment_as_featured"] ) Apartment::tf_apartment_archive_single_item( $data );
 												} else {
-													if( $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item( $data );
+													if( $apartment_meta["apartment_as_featured"] ) Apartment::tf_apartment_archive_single_item( $data );
 												}
 											} else {
-												if( $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item();
+												if( $apartment_meta["apartment_as_featured"] ) Apartment::tf_apartment_archive_single_item();
 											}
 										}
 
@@ -395,12 +396,12 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 											$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
 											if ( ! empty( $data ) ) {
 												if ( isset( $data[4] ) && isset( $data[5] ) ) {
-													if( ! $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item( $data );
+													if( ! $apartment_meta["apartment_as_featured"] ) Apartment::tf_apartment_archive_single_item( $data );
 												} else {
-													if( ! $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item( $data );
+													if( ! $apartment_meta["apartment_as_featured"] ) Apartment::tf_apartment_archive_single_item( $data );
 												}
 											} else {
-												if( ! $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item();
+												if( ! $apartment_meta["apartment_as_featured"] ) Apartment::tf_apartment_archive_single_item();
 											}
 										}
 
@@ -501,9 +502,9 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 								}
 							}else {
 								if ( empty( $check_in_out ) ) {
-									tf_filter_apartment_without_date( $period, $not_found, $data );
+									Apartment::tf_filter_apartment_without_date( $period, $not_found, $data );
 								} else {
-									tf_filter_apartment_by_date( $period, $not_found, $data );
+									Apartment::tf_filter_apartment_by_date( $period, $not_found, $data );
 								}
 							}
 
@@ -579,12 +580,12 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
 										if ( ! empty( $data ) ) {
 											if ( isset( $data[4] ) && isset( $data[5] ) ) {
-												if( $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item( $data );
+												if( $apartment_meta["apartment_as_featured"] ) Apartment::tf_apartment_archive_single_item( $data );
 											} else {
-												if( $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item( $data );
+												if( $apartment_meta["apartment_as_featured"] ) Apartment::tf_apartment_archive_single_item( $data );
 											}
 										} else {
-											if( $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item();
+											if( $apartment_meta["apartment_as_featured"] ) Apartment::tf_apartment_archive_single_item();
 										}
 									}
 
@@ -624,12 +625,12 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
 										if ( ! empty( $data ) ) {
 											if ( isset( $data[4] ) && isset( $data[5] ) ) {
-												if( ! $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item( $data );
+												if( ! $apartment_meta["apartment_as_featured"] ) Apartment::tf_apartment_archive_single_item( $data );
 											} else {
-												if( ! $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item( $data );
+												if( ! $apartment_meta["apartment_as_featured"] ) Apartment::tf_apartment_archive_single_item( $data );
 											}
 										} else {
-											if( ! $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item();
+											if( ! $apartment_meta["apartment_as_featured"] ) Apartment::tf_apartment_archive_single_item();
 										}
 									}
 
@@ -712,9 +713,9 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 								}
 							} else {
 								if ( empty( $check_in_out ) ) {
-									tf_filter_apartment_without_date( $period, $not_found, $data );
+									Apartment::tf_filter_apartment_without_date( $period, $not_found, $data );
 								} else {
-									tf_filter_apartment_by_date( $period, $not_found, $data );
+									Apartment::tf_filter_apartment_by_date( $period, $not_found, $data );
 								}
 							}
 
@@ -789,12 +790,12 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
 										if ( ! empty( $data ) ) {
 											if ( isset( $data[4] ) && isset( $data[5] ) ) {
-												if( $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item( $data );
+												if( $apartment_meta["apartment_as_featured"] ) Apartment::tf_apartment_archive_single_item( $data );
 											} else {
-												if( $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item( $data );
+												if( $apartment_meta["apartment_as_featured"] ) Apartment::tf_apartment_archive_single_item( $data );
 											}
 										} else {
-											if( $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item();
+											if( $apartment_meta["apartment_as_featured"] ) Apartment::tf_apartment_archive_single_item();
 										}
 									}
 
@@ -834,12 +835,12 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
 										if ( ! empty( $data ) ) {
 											if ( isset( $data[4] ) && isset( $data[5] ) ) {
-												if( ! $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item( $data );
+												if( ! $apartment_meta["apartment_as_featured"] ) Apartment::tf_apartment_archive_single_item( $data );
 											} else {
-												if( ! $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item( $data );
+												if( ! $apartment_meta["apartment_as_featured"] ) Apartment::tf_apartment_archive_single_item( $data );
 											}
 										} else {
-											if( ! $apartment_meta["apartment_as_featured"] ) tf_apartment_archive_single_item();
+											if( ! $apartment_meta["apartment_as_featured"] ) Apartment::tf_apartment_archive_single_item();
 										}
 									}
 

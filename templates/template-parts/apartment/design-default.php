@@ -1,6 +1,7 @@
 <?php 
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
+use \Tourfic\Classes\Apartment\Apartment;
 ?>
 
 <div class="tf-main-wrapper tf-apartment-wrap tf-apartment">
@@ -389,7 +390,7 @@ use \Tourfic\App\TF_Review;
                 <!-- Host details -->
                 <div class="tf-apartment-right">
                     <div class="apartment-booking-form">
-						<?php tf_apartment_single_booking_form( $comments, $disable_review_sec ); ?>
+						<?php Apartment::tf_apartment_single_booking_form( $comments, $disable_review_sec ); ?>
                     </div>
 					<?php
 					$post_author_id = get_post_field( 'post_author', get_the_ID() );
@@ -401,7 +402,7 @@ use \Tourfic\App\TF_Review;
                             <div class="host-meta">
 								<?php echo sprintf( '<h4>%s %s</h4>', esc_html__( 'Hosted by', 'tourfic' ), esc_html( $author_info->display_name ) ); ?>
 								<?php echo sprintf( '<span class="tf-apartment-joined-text">%s <span>:</span> <span>%s</span></span>', esc_html__( 'Joined', 'tourfic' ), wp_kses_post( gmdate( 'F Y', strtotime( $author_info->user_registered ) ) ) ); ?>
-								<?php tf_apartment_host_rating( $post_author_id ) ?>
+								<?php Apartment::tf_apartment_host_rating( $post_author_id ) ?>
 
                             </div>
                         </div>

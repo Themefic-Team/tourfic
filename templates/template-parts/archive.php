@@ -3,6 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\Apartment\Apartment;
 
 $paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 $post_per_page = Helper::tfopt('posts_per_page') ? Helper::tfopt('posts_per_page') : 10;
@@ -181,7 +182,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
                     } elseif( $post_type == 'tf_tours' ) {
                         tf_tour_archive_single_item();
                     } elseif( $post_type == 'tf_apartment' ) {
-                        tf_apartment_archive_single_item();
+                        Apartment::tf_apartment_archive_single_item();
                     }
                 }
             } else {
@@ -225,7 +226,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
                 } elseif( $post_type == 'tf_tours' ) {
                     tf_tour_archive_single_item();
                 } elseif( $post_type == 'tf_apartment' ) {
-                    tf_apartment_archive_single_item();
+                    Apartment::tf_apartment_archive_single_item();
                 }
                     
             }           

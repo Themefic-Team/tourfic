@@ -85,7 +85,7 @@ class Base {
 		}
 		if ( Helper::tfopt( 'disable-services' ) && in_array( 'apartment', Helper::tfopt( 'disable-services' ) ) ) {
 		} else {
-			 \Tourfic\Classes\Apartment\Apartment_CPT::instance();
+			 \Tourfic\Classes\Apartment\Apartment::instance();
 		}
 
 		\Tourfic\Admin\Emails\TF_Handle_Emails::instance();

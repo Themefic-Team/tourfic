@@ -41,15 +41,6 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-hotel.php' ) ) {
 }
 
 /**
- * Apartment Functions
- */
-if ( file_exists( TF_INC_PATH . 'functions/functions-apartment.php' ) ) {
-	require_once TF_INC_PATH . 'functions/functions-apartment.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/functions-apartment.php' );
-}
-
-/**
  * Tour Functions
  */
 if ( file_exists( TF_INC_PATH . 'functions/functions-tour.php' ) ) {

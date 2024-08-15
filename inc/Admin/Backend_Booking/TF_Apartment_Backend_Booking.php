@@ -7,6 +7,7 @@ defined( 'ABSPATH' ) || exit;
 use Tourfic\Classes\Helper;
 use \Tourfic\Core\TF_Backend_Booking;
 use \Tourfic\Classes\Apartment\Pricing as APT_Price;
+use \Tourfic\Classes\Apartment\Apartment;
 
 class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 
@@ -285,7 +286,7 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 			$not_found = [];
 			while ( $loop->have_posts() ) {
 				$loop->the_post();
-				tf_filter_apartment_by_date( $period, $not_found, array( 1, 0, 0, $check_in_out ) );
+				Apartment::tf_filter_apartment_by_date( $period, $not_found, array( 1, 0, 0, $check_in_out ) );
 			}
 
 			$tf_total_filters = [];

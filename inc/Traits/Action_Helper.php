@@ -3,6 +3,8 @@ namespace Tourfic\Traits;
 
 defined( 'ABSPATH' ) || exit;
 
+use \Tourfic\Classes\Apartment\Apartment;
+
 trait Action_Helper {
 	
 	/**
@@ -879,9 +881,9 @@ trait Action_Helper {
 					}
 				} else {
 					if ( empty( $check_in_out ) ) {
-						tf_filter_apartment_without_date( $period, $not_found, $data );
+						Apartment::tf_filter_apartment_without_date( $period, $not_found, $data );
 					} else {
-						tf_filter_apartment_by_date( $period, $not_found, $data );
+						Apartment::tf_filter_apartment_by_date( $period, $not_found, $data );
 					}
 				}
 			}
@@ -961,16 +963,16 @@ trait Action_Helper {
 							if ( ! empty( $data ) ) {
 								if ( isset( $data[4] ) && isset( $data[5] ) ) {
 									if ( $apartment_meta["apartment_as_featured"] ) {
-										tf_apartment_archive_single_item( $data );
+										Apartment::tf_apartment_archive_single_item( $data );
 									}
 								} else {
 									if ( $apartment_meta["apartment_as_featured"] ) {
-										tf_apartment_archive_single_item( $data );
+										Apartment::tf_apartment_archive_single_item( $data );
 									}
 								}
 							} else {
 								if ( $apartment_meta["apartment_as_featured"] ) {
-									tf_apartment_archive_single_item();
+									Apartment::tf_apartment_archive_single_item();
 								}
 							}
 						}
@@ -1026,16 +1028,16 @@ trait Action_Helper {
 							if ( ! empty( $data ) ) {
 								if ( isset( $data[4] ) && isset( $data[5] ) ) {
 									if ( ! $apartment_meta["apartment_as_featured"] ) {
-										tf_apartment_archive_single_item( $data );
+										Apartment::tf_apartment_archive_single_item( $data );
 									}
 								} else {
 									if ( ! $apartment_meta["apartment_as_featured"] ) {
-										tf_apartment_archive_single_item( $data );
+										Apartment::tf_apartment_archive_single_item( $data );
 									}
 								}
 							} else {
 								if ( ! $apartment_meta["apartment_as_featured"] ) {
-									tf_apartment_archive_single_item();
+									Apartment::tf_apartment_archive_single_item();
 								}
 							}
 						}
@@ -1309,7 +1311,7 @@ trait Action_Helper {
 				} else if ( $post_type == 'tf_tours' ) {
 					tf_tour_archive_single_item();
 				} else {
-					tf_apartment_archive_single_item();
+					Apartment::tf_apartment_archive_single_item();
 				}
 			}
 		}

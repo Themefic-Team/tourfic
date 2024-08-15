@@ -5,6 +5,7 @@ namespace Tourfic\App\Shortcodes;
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
+use Tourfic\Classes\Apartment\Apartment;
 
 class Search_Form extends \Tourfic\Core\Shortcodes {
 
@@ -131,10 +132,10 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 						<?php
 						if ( $advanced == "enabled" ) {
 							$advanced_opt = true;
-							tf_apartment_search_form_horizontal( $classes, $title, $subtitle, $advanced_opt, $design );
+							Apartment::tf_apartment_search_form_horizontal( $classes, $title, $subtitle, $advanced_opt, $design );
 						} else {
 							$advanced_opt = false;
-							tf_apartment_search_form_horizontal( $classes, $title, $subtitle, $advanced_opt, $design );
+							Apartment::tf_apartment_search_form_horizontal( $classes, $title, $subtitle, $advanced_opt, $design );
 						}
 						?>
 					</div>

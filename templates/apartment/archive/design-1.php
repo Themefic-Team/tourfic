@@ -2,6 +2,7 @@
 
     <?php
     use \Tourfic\Classes\Helper; 
+    use \Tourfic\Classes\Apartment\Apartment; 
     
     $tf_hotel_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_1_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_1_bannar'] : '';
     ?>
@@ -66,14 +67,14 @@
                                     the_post();
                                     $apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
                                     if ( !empty($apartment_meta[ "apartment_as_featured" ] )) {
-                                        tf_apartment_archive_single_item();
+                                        Apartment::tf_apartment_archive_single_item();
                                     }
                                 } 
                                 while ( have_posts() ) {
                                     the_post();
                                     $apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
                                     if ( empty($apartment_meta[ "apartment_as_featured" ] )) {
-                                        tf_apartment_archive_single_item();
+                                        Apartment::tf_apartment_archive_single_item();
                                     }
                                 }
                             } else {
