@@ -16,6 +16,15 @@ class Apartment {
 	use \Tourfic\Traits\Singleton;
 
 	public function __construct() {
+
+		if ( Helper::tf_is_woo_active() ) {
+			if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-apartment.php' ) ) {
+				require_once TF_INC_PATH . 'functions/woocommerce/wc-apartment.php';
+			} else {
+				tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-apartment.php' );
+			}
+		}
+
 		add_action( 'wp_ajax_tf_apt_room_details_qv', array( $this, 'tf_apartment_room_quick_view' ) );
 		add_action( 'wp_ajax_nopriv_tf_apt_room_details_qv', array( $this, 'tf_apartment_room_quick_view' ) );
 		add_action( 'wp_after_insert_post', array( $this, 'tf_apartment_feature_assign_taxonomies' ), 100, 3 );
