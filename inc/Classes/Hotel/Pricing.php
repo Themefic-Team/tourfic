@@ -125,6 +125,7 @@ class Pricing {
 		$rooms      = Room::get_hotel_rooms( $this->post_id );
 		if ( ! empty( $rooms ) ) {
 			foreach ( $rooms as $room ) {
+				$this->room_id = $room->ID;
 				$room_meta     = get_post_meta( $room->ID, 'tf_room_opt', true );
 				$pricing_by    = $room_meta['pricing-by'] ?? 1;
 				$avail_by_date = $room_meta['avil_by_date'] ?? 1;
