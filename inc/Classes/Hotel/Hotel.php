@@ -21,6 +21,10 @@ class Hotel {
 			}
 		}
 
+        $hotel_price = Pricing::instance(26, 35, '1703067301412_0')->set_dates('2024/08/20', '2024/08/29')->set_persons(2,1)->set_room_number(2)->get_total_price();
+        $hotel_price2 = Pricing::instance(26, 35, '1703067301412_1')->set_dates('2024/08/20', '2024/08/29')->set_persons(2,1)->set_room_number(2)->get_total_price();
+//        var_dump($hotel_price2);
+
 		add_action( 'wp_ajax_tf_room_availability', array($this, 'tf_room_availability_callback') );
 		add_action( 'wp_ajax_nopriv_tf_room_availability', array($this, 'tf_room_availability_callback') );
 		add_action( 'wp_ajax_tf_hotel_airport_service_price', array( $this, 'tf_hotel_airport_service_callback' ) );
@@ -515,26 +519,25 @@ class Hotel {
 			[ $adults, $child, $room, $check_in_out ] = $data;
 		}
 
-		// Get hotel meta options
-		$meta = get_post_meta( get_the_ID(), 'tf_hotels_opt', true );
-
 		// Get hotel Room meta options
-		$filters_rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-		if ( ! empty( $filters_rooms ) && gettype( $filters_rooms ) == "string" ) {
-			$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-				return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-			}, $filters_rooms );
-			$filters_rooms        = unserialize( $tf_hotel_rooms_value );
+		$rooms = Room::get_hotel_rooms(get_the_ID());
+
+		//all rooms meta
+		$rooms_meta = [];
+		if(!empty($rooms)){
+			foreach ( $rooms as $single_room ) {
+				$rooms_meta[$single_room->ID] = get_post_meta($single_room->ID, 'tf_room_opt', true );
+			}
 		}
 
 		// Remove disabled rooms
-		if ( ! empty( $meta['room'] ) ):
-			$meta = array_filter( $meta['room'], function ( $value ) {
+		if ( ! empty( $rooms_meta['room'] ) ):
+			$rooms_meta = array_filter( $rooms_meta['room'], function ( $value ) {
 				return ! empty( $value ) && ! empty( $value['enable'] ) ? $value['enable'] : '' != '0';
 			} );
 		endif;
 		// If no room return
-		if ( empty( $meta ) ) {
+		if ( empty( $rooms_meta ) ) {
 			return;
 		}
 
@@ -545,7 +548,7 @@ class Hotel {
 		 * Adult Number Validation
 		 */
 
-		$back_adults   = array_column( $meta, 'adult' );
+		$back_adults   = array_column( $rooms_meta, 'adult' );
 		$adult_counter = 0;
 		foreach ( $back_adults as $back_adult ) {
 			if ( ! empty( $back_adult ) && $back_adult >= $adults ) {
@@ -558,7 +561,7 @@ class Hotel {
 		/**
 		 * Child Number Validation
 		 */
-		$back_childs   = array_column( $meta, 'child' );
+		$back_childs   = array_column( $rooms_meta, 'child' );
 		$child_counter = 0;
 		foreach ( $back_childs as $back_child ) {
 			if ( ! empty( $back_child ) && $back_child >= $child ) {
@@ -571,7 +574,7 @@ class Hotel {
 		/**
 		 * Room Number Validation
 		 */
-		$back_rooms   = array_column( $meta, 'num-room' );
+		$back_rooms   = array_column( $rooms_meta, 'num-room' );
 		$room_counter = 0;
 		foreach ( $back_rooms as $back_room ) {
 			if ( ! empty( $back_room ) && $back_room >= $room ) {
@@ -585,7 +588,7 @@ class Hotel {
 		if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && ! empty( $room_result ) && $room_counter > 0 ) {
 
 			// Check custom date range status of room
-			$avil_by_date = array_column( $meta, 'avil_by_date' );
+			$avil_by_date = array_column( $rooms_meta, 'avil_by_date' );
 
 			// Check if any room available without custom date range
 			if ( in_array( 0, $avil_by_date ) || empty( $avil_by_date ) ) {
@@ -596,7 +599,7 @@ class Hotel {
 				// If all the room has custom date range then filter the rooms by date
 
 				// Get custom date range repeater
-				$dates = array_column( $meta, 'avail_date' );
+				$dates = array_column( $rooms_meta, 'avail_date' );
 				// If no date range return
 				if ( empty( $dates ) ) {
 					return;
@@ -607,44 +610,45 @@ class Hotel {
 				// Check if any date range match with search form date range and set them on array
 				if ( ! empty( $period ) ) {
 					foreach ( $period as $datekey => $date ) {
-						if ( 0 == $datekey ) {
+						if(0==$datekey){
 							$tf_check_in_date = $date->format( 'Y/m/d' );
 						}
-						$searching_period[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
+						$searching_period[$date->format( 'Y/m/d' )] = $date->format( 'Y/m/d' );
 					}
 				}
 
 				// Initial available dates array
-				$availability_dates     = [];
+				$availability_dates = [];
 				$tf_check_in_date_price = [];
 				// Run loop through custom date range repeater and filter out only the dates
 				foreach ( $dates as $date ) {
 					if ( ! empty( $date ) && gettype( $date ) == "string" ) {
-						$date = json_decode( $date, true );
-						foreach ( $date as $sdate ) {
-							if ( $tf_check_in_date == $sdate['check_in'] ) {
-								$tf_check_in_date_price['price']       = $sdate['price'];
+						$date                 = json_decode( $date, true );
+						foreach($date as $sdate){
+							if($tf_check_in_date==$sdate['check_in']){
+								$tf_check_in_date_price['price'] = $sdate['price'];
 								$tf_check_in_date_price['adult_price'] = $sdate['adult_price'];
 								$tf_check_in_date_price['child_price'] = $sdate['child_price'];
 							}
-							$availability_dates[ $sdate['check_in'] ] = $sdate['check_in'];
+							$availability_dates[$sdate['check_in']] = $sdate['check_in'];
 						}
 					}
 				}
 
-				$tf_common_dates = array_intersect( $availability_dates, $searching_period );
+				$tf_common_dates = array_intersect($availability_dates, $searching_period);
 
 				//Initial matching date array
 				$show_hotel = [];
 
-				if ( count( $tf_common_dates ) === count( $searching_period ) ) {
+				if (count($tf_common_dates) === count($searching_period)) {
 					$show_hotel[] = 1;
 				}
 
 				// If any date range matches show hotel
-				if ( ! empty( $show_hotel ) && ! in_array( 0, $show_hotel ) ) {
-					if ( ! empty( $filters_rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
-						foreach ( $filters_rooms as $room ) {
+				if ( !empty($show_hotel) && ! in_array( 0, $show_hotel ) ) {
+					if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+						foreach ( $rooms as $_room ) {
+							$room = get_post_meta($_room->ID, 'tf_room_opt', true);
 							if ( ! empty( $tf_check_in_date_price['adult_price'] ) ) {
 								if ( $startprice <= $tf_check_in_date_price['adult_price'] && $tf_check_in_date_price['adult_price'] <= $endprice ) {
 									$has_hotel = true;
@@ -673,7 +677,7 @@ class Hotel {
 		if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && $child_counter == 0 && ! empty( $room_result ) && $room_counter > 0 ) {
 
 			// Check custom date range status of room
-			$avil_by_date = array_column( $meta, 'avil_by_date' );
+			$avil_by_date = array_column( $rooms_meta, 'avil_by_date' );
 
 			// Check if any room available without custom date range
 			if ( in_array( 0, $avil_by_date ) || empty( $avil_by_date ) ) {
@@ -684,7 +688,7 @@ class Hotel {
 				// If all the room has custom date range then filter the rooms by date
 
 				// Get custom date range repeater
-				$dates = array_column( $meta, 'avail_date' );
+				$dates = array_column( $rooms_meta, 'avail_date' );
 
 				// If no date range return
 				if ( empty( $dates ) ) {
@@ -696,44 +700,45 @@ class Hotel {
 				// Check if any date range match with search form date range and set them on array
 				if ( ! empty( $period ) ) {
 					foreach ( $period as $datekey => $date ) {
-						if ( 0 == $datekey ) {
+						if(0==$datekey){
 							$tf_check_in_date = $date->format( 'Y/m/d' );
 						}
-						$searching_period[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
+						$searching_period[$date->format( 'Y/m/d' )] = $date->format( 'Y/m/d' );
 					}
 				}
 
 				// Initial available dates array
-				$availability_dates     = [];
+				$availability_dates = [];
 				$tf_check_in_date_price = [];
 				// Run loop through custom date range repeater and filter out only the dates
 				foreach ( $dates as $date ) {
 					if ( ! empty( $date ) && gettype( $date ) == "string" ) {
-						$date = json_decode( $date, true );
-						foreach ( $date as $sdate ) {
-							if ( $tf_check_in_date == $sdate['check_in'] ) {
-								$tf_check_in_date_price['price']       = $sdate['price'];
+						$date                 = json_decode( $date, true );
+						foreach($date as $sdate){
+							if($tf_check_in_date==$sdate['check_in']){
+								$tf_check_in_date_price['price'] = $sdate['price'];
 								$tf_check_in_date_price['adult_price'] = $sdate['adult_price'];
 								$tf_check_in_date_price['child_price'] = $sdate['child_price'];
 							}
-							$availability_dates[ $sdate['check_in'] ] = $sdate['check_in'];
+							$availability_dates[$sdate['check_in']] = $sdate['check_in'];
 						}
 					}
 				}
 
-				$tf_common_dates = array_intersect( $availability_dates, $searching_period );
+				$tf_common_dates = array_intersect($availability_dates, $searching_period);
 
 				//Initial matching date array
 				$show_hotel = [];
 
-				if ( count( $tf_common_dates ) === count( $searching_period ) ) {
+				if (count($tf_common_dates) === count($searching_period)) {
 					$show_hotel[] = 1;
 				}
 
 				// If any date range matches show hotel
 				if ( ! in_array( 0, $show_hotel ) ) {
-					if ( ! empty( $filters_rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
-						foreach ( $filters_rooms as $room ) {
+					if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+						foreach ( $rooms as $_room ) {
+							$room = get_post_meta($_room->ID, 'tf_room_opt', true);
 							if ( ! empty( $tf_check_in_date_price['adult_price'] ) ) {
 								if ( $startprice <= $tf_check_in_date_price['adult_price'] && $tf_check_in_date_price['adult_price'] <= $endprice ) {
 									$has_hotel = true;
@@ -801,22 +806,24 @@ class Hotel {
 		$meta = get_post_meta( get_the_ID(), 'tf_hotels_opt', true );
 
 		// Get hotel Room meta options
-		$filters_rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-		if ( ! empty( $filters_rooms ) && gettype( $filters_rooms ) == "string" ) {
-			$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-				return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-			}, $filters_rooms );
-			$filters_rooms        = unserialize( $tf_hotel_rooms_value );
+		$rooms = Room::get_hotel_rooms(get_the_ID());
+
+		//all rooms meta
+		$rooms_meta = [];
+		if(!empty($rooms)){
+			foreach ( $rooms as $room ) {
+				$rooms_meta[$room->ID] = get_post_meta($room->ID, 'tf_room_opt', true );
+			}
 		}
 
 		// Remove disabled rooms
-		if ( ! empty( $meta['room'] ) ):
-			$meta = array_filter( $meta['room'], function ( $value ) {
+		if ( ! empty( $rooms_meta['room'] ) ):
+			$rooms_meta = array_filter( $rooms_meta['room'], function ( $value ) {
 				return ! empty( $value ) && ! empty( $value['enable'] ) ? $value['enable'] : '' != '0';
 			} );
 		endif;
 		// If no room return
-		if ( empty( $meta ) ) {
+		if ( empty( $rooms_meta ) ) {
 			return;
 		}
 
@@ -826,7 +833,7 @@ class Hotel {
 		/**
 		 * Adult Number Validation
 		 */
-		$back_adults   = array_column( $meta, 'adult' );
+		$back_adults   = array_column( $rooms_meta, 'adult' );
 		$adult_counter = 0;
 		foreach ( $back_adults as $back_adult ) {
 			if ( ! empty( $back_adult ) && $back_adult >= $adults ) {
@@ -839,7 +846,7 @@ class Hotel {
 		/**
 		 * Child Number Validation
 		 */
-		$back_childs   = array_column( $meta, 'child' );
+		$back_childs   = array_column( $rooms_meta, 'child' );
 		$child_counter = 0;
 		foreach ( $back_childs as $back_child ) {
 			if ( ! empty( $back_child ) && $back_child >= $child ) {
@@ -852,7 +859,7 @@ class Hotel {
 		/**
 		 * Room Number Validation
 		 */
-		$back_rooms   = array_column( $meta, 'num-room' );
+		$back_rooms   = array_column( $rooms_meta, 'num-room' );
 		$room_counter = 0;
 		foreach ( $back_rooms as $back_room ) {
 			if ( ! empty( $back_room ) && $back_room >= $room ) {
@@ -865,8 +872,9 @@ class Hotel {
 		// If adult and child number validation is true proceed
 		if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && ! empty( $room_result ) && $room_counter > 0 ) {
 
-			if ( ! empty( $filters_rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
-				foreach ( $filters_rooms as $room ) {
+			if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+				foreach ( $rooms as $_room ) {
+					$room = get_post_meta($_room->ID, 'tf_room_opt', true);
 					if ( ! empty( $room['adult_price'] ) ) {
 						if ( $startprice <= $room['adult_price'] && $room['adult_price'] <= $endprice ) {
 							$has_hotel = true;
@@ -889,8 +897,9 @@ class Hotel {
 
 		}
 		if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && ! empty( $room_result ) && $room_counter > 0 ) {
-			if ( ! empty( $filters_rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
-				foreach ( $filters_rooms as $room ) {
+			if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+				foreach ( $rooms as $_room ) {
+					$room = get_post_meta($_room->ID, 'tf_room_opt', true);
 					if ( ! empty( $room['adult_price'] ) ) {
 						if ( $startprice <= $room['adult_price'] && $room['adult_price'] <= $endprice ) {
 							$has_hotel = true;
@@ -1040,8 +1049,6 @@ class Hotel {
 			}
 
 			if ( "pickup" == $_POST['service_type'] ) {
-				//$this->calculate_service_fee('airport_pickup_price', $meta, $price_total, $deposit, $deposit_amount);
-
 				$airport_pickup_price = ! empty( $meta['airport_pickup_price'] ) ? Helper::tf_data_types( $meta['airport_pickup_price'] ) : '';
 
 				if ( "per_person" == $airport_pickup_price['airport_pickup_price_type'] ) {
