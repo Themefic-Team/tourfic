@@ -62,6 +62,7 @@ class Availability {
 		$enable_availability = !empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
 		$pricing_type = !empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
 		$total_price = 0;
+		$prices = array();
 		
 		if ( $enable_availability === '1' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 			$apt_availability = ! empty( $meta['apt_availability'] ) ? json_decode( $meta['apt_availability'], true ) : [];
@@ -71,12 +72,14 @@ class Availability {
 
 					$date_stt = strtotime($key);
 
-					if( $date_stt >= $check_in_stt && $date_stt <= $check_out_stt && $single_avail['status'] === 'available' ) {
+					if( $date_stt > $check_in_stt && $date_stt <= $check_out_stt && $single_avail['status'] === 'available' ) {
 
 						if ( $pricing_type === 'per_night' ) {
+							// $prices[] = $date_stt > $check_in_stt && $date_stt < $check_out_stt;
+
 						$total_price += ! empty( $single_avail['price'] ) ? intval( $single_avail['price'] ) : 0;
 						} else {
-							$total_price += !empty( $this->persons ) ? ( ( $single_avail['adult_price'] * $this->persons['adult'] ) + ( $single_avail['child_price'] * $this->persons["child"] ) + ( $single_avail['infant_price'] * $this->persons["infant"] ) ) : 0;
+							$total_price += !empty( $this->persons ) ? ( ( (int) $single_avail['adult_price'] * (int) $this->persons['adult'] ) + ( (int) $single_avail['child_price'] * (int) $this->persons["child"] ) + ( (int) $single_avail['infant_price'] * (int) $this->persons["infant"] ) ) : 0;
 						}
 					}
 				}

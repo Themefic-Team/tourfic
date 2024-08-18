@@ -111,10 +111,20 @@ class Pricing {
 		$adult = !empty( $this->persons["adult"]) ? $this->persons["adult"] : 0;
 		$child = !empty( $this->persons["child"]) ? $this->persons["child"] : 0;
 		$infant = !empty( $this->persons["infant"]) ? $this->persons["infant"] : 0;
-		$availability_price = Availability::instance($this->apt_id)->set_dates($this->checkin, $this->checkout)->set_persons( $adult, $child, $infant)->get_total_price();
-		// $availability_price+= $this->set_dates($this->checkin, $this->checkout)->set_persons( $adult, $child, $infant )->set_additional_fees()->get_fees();
+		$discount_type = !empty( $this->meta["discount_type"]) ? $this->meta["discount_type"] : 'none';
 
-		return $availability_price;
+		// get total availability price
+		$price = Availability::instance($this->apt_id)->set_dates($this->checkin, $this->checkout)->set_persons( $adult, $child, $infant)->get_total_price();
+		
+		// discount calculation
+		if ( $discount_type != 'none' ) {
+			$price = $this->calculate_discount( $price );
+		}
+
+		// additional fees calculation
+		$price+= $this->set_dates($this->checkin, $this->checkout)->set_persons( $adult, $child, $infant )->set_additional_fees()->get_fees();
+
+		return $price;
 	}
 
 
