@@ -1,6 +1,8 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
+use Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
+
 /**
  * Apartment booking ajax function
  * @author Foysal
@@ -57,7 +59,7 @@ function tf_apartment_booking_callback() {
 	# Calculate nights
 	if ( ! empty( $check_in_out_date ) ) {
 		$check_in_out  = explode( ' - ', $check_in_out_date );
-		$check_in_stt  = strtotime( $check_in_out[0] . ' +1 day' );
+		$check_in_stt  = strtotime( $check_in_out[0]);
 		$check_in      = gmdate( 'Y-m-d', $check_in_stt );
 		$check_out_stt = !empty($check_in_out) && is_array($check_in_out) ? strtotime( $check_in_out[1] ) : '';
 		$check_out     = gmdate( 'Y-m-d', $check_out_stt );
@@ -108,54 +110,9 @@ function tf_apartment_booking_callback() {
 		$total_price = 0;
 		if ( $days > 0 ) {
 			if ( $enable_availability === '1' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-				$apt_availability = ! empty( $meta['apt_availability'] ) ? json_decode( $meta['apt_availability'], true ) : [];
-
-				if ( ! empty( $apt_availability ) && is_array( $apt_availability ) ) {
-					foreach ( $apt_availability as $key => $single_avail ) {
-						$_date_str = strtotime( $key );
-
-						if ( $_date_str >= $check_in_stt && $_date_str <= $check_out_stt ) {
-							if ( $pricing_type === 'per_night' ) {
-								$total_price += $single_avail['price'];
-							} else {
-								$total_price += ( ( $single_avail['adult_price'] * $adults ) + ( $single_avail['child_price'] * $children ) + ( $single_avail['infant_price'] * $infant ) );
-							}
-						}
-					}
-				}
-
+				$total_price += Apt_Pricing::instance( $post_id )->set_dates( $check_in, $check_out )->set_persons( $adults, $children, $infant )->get_availability();
 			} else {
-				if ( $pricing_type == 'per_night' ) {
-					$total_price = $price_per_night * $days;
-				} else {
-					$total_price = ( ( $adult_price * $adults ) + ( $child_price * $children ) + ( $infant_price * $infant ) ) * $days;
-				}
-			}
-
-			if ( $discount_type == 'percent' ) {
-				$total_price = $total_price - ( $total_price * ( $discount / 100 ) );
-			} elseif ( $discount_type == 'fixed' ) {
-				$total_price = $total_price - $discount;
-			}
-
-			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $total_price > 0) {
-				foreach ( $additional_fees as $key => $item ) {
-					if ( $item['fee_type'] == 'per_night' ) {
-						$total_price += $item['additional_fee'] * $days;
-					} elseif ( $item['fee_type'] == 'per_person' ) {
-						$total_price += $item['additional_fee'] * ( $adults + $children + $infant );
-					} else {
-						$total_price += $item['additional_fee'];
-					}
-				}
-			} else {
-				if ( $fee_type == 'per_night' ) {
-					$total_price += $additional_fee * $days;
-				} elseif ( $fee_type == 'per_person' ) {
-					$total_price += $additional_fee * ( $adults + $children + $infant );
-				} else {
-					$total_price += $additional_fee;
-				}
+				$total_price = Apt_Pricing::instance( $post_id )->set_dates( $check_in, $check_out )->set_persons( $adults, $children, $infant )->set_total_price()->get_total_price();
 			}
 
 			$tf_apartment_data['tf_apartment_data']['pricing_type'] = $pricing_type;

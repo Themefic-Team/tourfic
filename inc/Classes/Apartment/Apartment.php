@@ -860,8 +860,8 @@ class Apartment {
 		}
 
 		// echo '<pre>';
-		// // print_r(Apt_Availability::instance( get_the_ID() )->set_dates("2024/08/08", "2024/08/12")->set_persons(1, 1, 1)->get_total_price());
-		// print_r(Apt_Pricing::instance( get_the_ID() )->set_dates("2024/08/09", "2024/08/12")->set_persons(1, 1, 1)->get_availability());
+		// // print_r(Apt_Pricing::instance( get_the_ID() )->set_dates("2024/08/19", "2024/08/22")->set_persons(1, 1, 1)->get_total_price());
+		// print_r(Apt_Pricing::instance( get_the_ID() )->set_dates("2024/08/19", "2024/08/22")->set_persons(1, 0, 0)->get_availability());
 		// echo '</pre>';
 		// die(); // Sunvi
 
@@ -895,7 +895,7 @@ class Apartment {
 							if ( $apartment_min_price != $apartment_min_main_price ) {
 								echo "<b>" . esc_html__("From ", "tourfic") . "</b>" . "<del>" . esc_html( wp_strip_all_tags(wc_price( $apartment_min_main_price )) ) . "</del>" . " " . wp_kses_post( $lowest_price );
 							} else {
-								echo esc_html__("From ", "tourfic") . wp_kses_post(wc_price( $apartment_min_main_price ));	;
+								echo esc_html__("From ", "tourfic") . wp_kses_post(wc_price( $apartment_min_main_price ));
 							}
 							?>
 						</span>
