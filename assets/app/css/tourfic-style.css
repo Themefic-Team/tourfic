@@ -16632,6 +16632,7 @@ html {
   font-weight: 400;
   line-height: 150%; /* 24px */
   border: 0px solid !important;
+  padding: 0;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input:focus {
   outline: none;
@@ -16650,6 +16651,7 @@ html {
   line-height: 150%; /* 24px */
   border: 0px solid !important;
   background-color: transparent;
+  padding: 0;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-form-submit-btn button {
   padding: 16px 32px;
@@ -16699,6 +16701,7 @@ html {
   font-style: normal !important;
   font-weight: 400 !important;
   line-height: 150% !important; /* 24px */
+  margin-bottom: 8px;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select {
   border-radius: 8px;
@@ -16707,6 +16710,7 @@ html {
   width: auto;
   display: inline-flex;
   gap: 10px;
+  height: 32px;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select .acr-dec,
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select .acr-inc {
@@ -16733,6 +16737,7 @@ html {
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-price h4 small {
   display: block;
   font-size: 16px !important;
+  color: #566676;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-extra-apply-btn {
   text-align: right;

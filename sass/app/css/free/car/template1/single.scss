@@ -634,6 +634,7 @@
                                 font-weight: 400;
                                 line-height: 150%; /* 24px */
                                 border: 0px solid !important;
+                                padding: 0;
                                 &:focus{
                                     outline: none;
                                     box-shadow: none;
@@ -652,6 +653,7 @@
                                 line-height: 150%; /* 24px */
                                 border: 0px solid !important;
                                 background-color: transparent;
+                                padding: 0;
                             }
                         }
                     }
@@ -709,6 +711,7 @@
                                 font-style: normal !important;
                                 font-weight: 400 !important;
                                 line-height: 150% !important; /* 24px */
+                                margin-bottom: 8px;
                             }
                             .acr-select{
                                 border-radius: 8px;
@@ -717,6 +720,7 @@
                                 width: auto;
                                 display: inline-flex;
                                 gap: 10px;
+                                height: 32px;
                                 .acr-dec,
                                 .acr-inc{
                                     color: #0866C4;
@@ -744,6 +748,7 @@
                                 small{
                                     display: block;
                                     font-size: 16px !important;
+                                    color: #566676;
                                 }
                             }
                         }
