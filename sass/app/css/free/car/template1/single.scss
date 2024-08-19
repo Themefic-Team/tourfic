@@ -671,6 +671,7 @@
                         line-height: 150%; /* 24px */
                         cursor: pointer;
                         width: 100%;
+                        border: 0px solid;
                     }
                 }
                 .tf-instraction-btn{
@@ -766,6 +767,7 @@
                             font-weight: 700;
                             line-height: 150%; /* 24px */
                             cursor: pointer;
+                            border: 1px solid #0866C4;
                         }
                     }
                 }
@@ -824,7 +826,8 @@
                 }
                 .tf-driver-contact-info{
                     ul{
-
+                        padding: 0;
+                        margin: 0;
                         li{
                             i{
                                 font-size: 20px;

@@ -16664,6 +16664,7 @@ html {
   line-height: 150%; /* 24px */
   cursor: pointer;
   width: 100%;
+  border: 0px solid;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-instraction-btn {
   text-align: center;
@@ -16752,6 +16753,7 @@ html {
   font-weight: 700;
   line-height: 150%; /* 24px */
   cursor: pointer;
+  border: 1px solid #0866C4;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details {
   border-radius: 16px;
@@ -16799,6 +16801,10 @@ html {
   font-style: normal !important;
   font-weight: 400 !important;
   line-height: 150% !important; /* 24px */
+  margin: 0;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details .tf-driver-contact-info ul {
+  padding: 0;
   margin: 0;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details .tf-driver-contact-info ul li {
