@@ -62,7 +62,7 @@ class Car_Rental_CPT extends \Tourfic\Classes\Post_Type {
 	}
 
 	private function get_carrental_slug() {
-		$tf_carrental_setting_permalink_slug = ! empty( Helper::tfopt( 'carrental-permalink-setting' ) ) ? Helper::tfopt( 'carrental-permalink-setting' ) : "carrental";
+		$tf_carrental_setting_permalink_slug = ! empty( Helper::tfopt( 'carrental-permalink-setting' ) ) ? Helper::tfopt( 'carrental-permalink-setting' ) : "cars";
 
 		update_option( "carrental_slug", $tf_carrental_setting_permalink_slug );
 

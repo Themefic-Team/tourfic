@@ -16001,9 +16001,6 @@ html {
   margin: 0 auto;
 }
 
-.tf-single-car-section {
-  background-color: #F8FAFC;
-}
 .tf-single-car-section .tf-single-car-banner {
   background: #B8C5D2;
   height: 350px;
@@ -16861,9 +16858,6 @@ html {
   padding: 16px 40px;
 }
 
-.tf-archive-car-section {
-  background-color: #EEF2F6;
-}
 .tf-archive-car-section .tf-archive-car-banner {
   background: #B8C5D2;
   height: 350px;
@@ -17035,6 +17029,9 @@ html {
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-driver-location-box .tf-submit-button button i {
   margin-left: 8px;
+}
+.tf-archive-car-section .tf-archive-car-details-warper .tf-archive-header .tf-archive-view ul {
+  margin-left: 0px;
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-header .tf-archive-view ul li {
   height: 52px;
@@ -17270,6 +17267,10 @@ html {
   list-style: none;
   flex-wrap: wrap;
   gap: 16px;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li {
   color: #566676;

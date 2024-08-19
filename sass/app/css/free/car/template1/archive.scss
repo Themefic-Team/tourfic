@@ -1,5 +1,4 @@
 .tf-archive-car-section{
-    background-color: #EEF2F6;
     .tf-archive-car-banner{
         background: #B8C5D2;
         height: 350px;
@@ -188,6 +187,7 @@
         .tf-archive-header{
             .tf-archive-view{
                 ul{
+                    margin-left: 0px;
                     li{
                         height: 52px;
                         width: 52px;
@@ -422,6 +422,10 @@
                                 list-style: none;
                                 flex-wrap: wrap;
                                 gap: 16px;
+                                margin-top: 0;
+                                margin-left: 0;
+                                margin-right: 0;
+                                padding: 0;
                                 li{
                                     color: #566676;
                                     font-size: 16px;
