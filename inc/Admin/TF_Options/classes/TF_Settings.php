@@ -36,6 +36,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			//ajax save options
 			add_action( 'wp_ajax_tf_options_save', array( $this, 'tf_ajax_save_options' ) );
+			add_action( 'wp_ajax_tf_options_reset', array( $this, 'tf_ajax_reset_options' ) );
 
             add_action( 'wp_ajax_tf_export_data', array( $this, 'tf_export_data' ) );
         }
@@ -675,6 +676,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
             $ajax_save_class = 'tf-ajax-save';
 
+			
+
 			if ( ! empty( $this->option_sections ) ) :
 				?>
 				<div class="tf-setting-dashboard">
@@ -682,6 +685,23 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				<?php \Tourfic\Classes\Helper::tf_dashboard_header(); ?>
 
                 <div class="tf-option-wrapper tf-setting-wrapper">
+
+					<!-- Settings Header -->
+					<div class="tourfic-settings-header">
+						<div class="settings-header-left">
+							<h2 class="tf-setting-title"><?php echo esc_html__( "Tourfic Settings", "tourfic" ); ?></h2>
+							<div class="tf-setting-search">
+								<i class="fa-solid fa-search"></i>
+								<input aria-label="Search" type="text" placeholder="Start typing to find options..." class="ui-autocomplete-input" autocomplete="off">
+							</div>
+						</div>
+						<div class="settings-header-right">
+							<div class="tf-setting-save-btn">
+								<button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn">Save</button>
+								<button type="submit" class="tf-admin-btn tf-btn-secondary tf-reset-btn">Reset All</button>
+							</div>
+						</div>
+					</div>
                     <form method="post" action="" class="tf-option-form <?php echo esc_attr($ajax_save_class) ?>" enctype="multipart/form-data">
                         <!-- Body -->
                         <div class="tf-option">
@@ -929,6 +949,30 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					];
 
 				}
+
+			}
+
+			echo wp_json_encode( $response );
+			wp_die();
+		}
+
+		// TODO: Need to furnish the Reset Settings
+
+		public function tf_ajax_reset_options() {
+			$response    = [
+				'status'  => 'error',
+				'message' => __( 'Something went wrong!', 'tourfic' ),
+			];
+
+
+			if( isset( $_POST['tf_option_nonce'] ) || wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_option_nonce'])), 'tf_option_nonce_action' ) ) {
+
+				!empty( get_option( 'tf_settings' ) ) ? update_option( 'tf_settings', '' ) : '';
+
+				$response = [
+					'status'  => 'success',
+					'message' => __( 'Options Reset successfully!', 'tourfic' ),
+				];
 
 			}
 

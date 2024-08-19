@@ -565,6 +565,67 @@
     background-color: #fff;
     border-radius: 10px;
 
+    .tourfic-settings-header {
+        padding: 20px 20px 20px 20px; 
+        border-bottom: 3px solid #003c79; 
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        border-radius: 10px 10px 0px 0px;
+        position: sticky;
+        top: 0;
+        z-index: 9999;
+
+        .settings-header-left {
+            min-width: 40%;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+
+            .tf-setting-title {
+                font-size: 24px;
+            }
+
+            .tf-setting-search {
+                min-width: 50%;
+                display: flex;
+                align-items: center;
+                padding-left: 12px;
+                border: 1px solid #c4cbd4;
+                background-color: #f5f8ff;
+                gap: 8px;
+                border-radius: 4px;
+                color: #363e4a;
+
+                i {
+                    font-size: 16px
+                }
+
+                input {
+                    min-width: calc(100% - 22px);
+                    padding: 12px 12px 12px 0px;
+                    border: none;
+                    background-color: transparent;
+                    height: 48px;
+                    font-size: 16px;
+
+                    &:focus {
+                        outline: none;
+                        box-shadow: none;
+                    }
+                }
+
+            }
+        }
+
+        .tf-setting-save-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    }
+
     .tf-option-form {
         padding: 30px 30px 30px 0px;
 
