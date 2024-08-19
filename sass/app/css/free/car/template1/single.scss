@@ -42,6 +42,8 @@
                 }
                 .breadcrumb{
                     ul{
+                        margin: 0;
+                        padding: 0;
                         li{
                             color: #27333F;
                             font-size: 16px;
@@ -147,6 +149,8 @@
 
             .tf-details-menu{
                 ul{
+                    margin: 0;
+                    padding: 0;
                     li{
                         display: inline-block;
                         a{
@@ -247,6 +251,8 @@
                             margin-bottom: 16px;
                         }
                         ul{
+                            margin: 0;
+                            padding: 0;
                             li{
                                 border-radius: 6px;
                                 background: radial-gradient(50% 50% at 50% 50%, #F5FAFF 0%, #E9F4FF 100%);
