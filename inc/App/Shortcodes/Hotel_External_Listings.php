@@ -5,6 +5,7 @@ namespace Tourfic\App\Shortcodes;
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\App\TF_Review;
+use \Tourfic\Classes\Hotel\Pricing;
 
 class Hotel_External_Listings extends \Tourfic\Core\Shortcodes {
 
@@ -89,24 +90,16 @@ class Hotel_External_Listings extends \Tourfic\Core\Shortcodes {
                             <div class="tf-slider-item" style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>);">
                                 <div class="tf-slider-content">
                                     <div class="tf-slider-desc">
-                                        <h3><a href="<?php esc_url(the_permalink()) ?>" target="_blank"><?php the_title() ?></a></h3>
+                                        <h3><a href="<?php echo esc_url(get_the_permalink($post_id)) ?>" target="_blank"><?php the_title() ?></a></h3>
 										<?php if ( $post_comments ) { ?>
                                             <div class="tf-slider-rating-star">
                                                 <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo esc_html( TF_Review::tf_total_avg_rating( $post_comments ) ); ?></span>
                                             </div>
 										<?php } ?>
                                         <p><?php echo wp_kses_post( wp_trim_words( get_the_content(), 10 ) ); ?></p>
-										<?php if ( ! empty( $rooms ) ): ?>
-                                            <div class="tf-recent-room-price">
-												<?php
-												if ( ! empty( $room_price ) ) {
-													//get the lowest price from all available room price
-													$lowest_price = wc_price( min( $room_price ) );
-													echo esc_html__( "From ", "tourfic" ) . wp_kses_post( $lowest_price );
-												}
-												?>
-                                            </div>
-										<?php endif; ?>
+                                        <div class="tf-recent-room-price">
+                                            <?php echo Pricing::instance( $post_id )->get_min_price_html(); ?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -6,6 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
 use Tourfic\Classes\Room\Room;
+use Tourfic\Classes\Hotel\Availability;
 
 class Pricing {
 
@@ -29,7 +30,7 @@ class Pricing {
 	public function __construct( $post_id = '', $room_id = '', $option_id = '' ) {
 		$this->post_id   = $post_id;
 		$this->room_id   = $room_id;
-		$this->option_id   = $option_id;
+		$this->option_id = $option_id;
 		$this->meta      = get_post_meta( $post_id, 'tf_hotels_opt', true );
 		$this->room_meta = get_post_meta( $room_id, 'tf_room_opt', true );
 	}
@@ -100,9 +101,9 @@ class Pricing {
 
 		if ( ! empty( $discount_arr ) ) {
 			if ( $discount_arr['discount_type'] == 'fixed' ) {
-				$price = $price - $discount_arr['discount_amount'];
+				$price = (int) $price - (int) $discount_arr['discount_amount'];
 			} else if ( $discount_arr['discount_type'] == 'percent' ) {
-				$price = $price - ( $price * $discount_arr['discount_amount'] ) / 100;
+				$price = (int) $price - ( (int) $price * (int) $discount_arr['discount_amount'] ) / 100;
 			}
 		}
 
@@ -351,86 +352,64 @@ class Pricing {
 		<?php
 	}
 
-	function get_hotel_price() {
-		$meta      = $this->meta;
-		$room_meta = $this->room_meta;
-
-		$pricing_by = ! empty( $room_meta['pricing-by'] ) ? $room_meta['pricing-by'] : '1';
+	function get_service_price( $service_type = '' ) {
+		$meta            = $this->meta;
+		$airport_service = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 
 		// Total person calculation
 		$persons     = ! empty( $this->persons ) ? $this->persons : array();
 		$adult_count = ! empty( $persons['adult'] ) ? $persons['adult'] : 0;
 		$child_count = ! empty( $persons['child'] ) ? $persons['child'] : 0;
-		$days        = ! empty( $this->days ) ? $this->days : 0;
 
-		if ( $pricing_by == '1' ) {
+		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $airport_service == 1 ) {
+			if ( "pickup" == $service_type ) {
+				$airport_pickup_price = ! empty( $meta['airport_pickup_price'] ) ? Helper::tf_data_types( $meta['airport_pickup_price'] ) : '';
 
-			$total_price = $room_meta['price'];
-			$total_price = $this->calculate_discount( $total_price );
-		} elseif ( $pricing_by == '2' ) {
-			$adult_price = $room_meta['adult_price'];
-			$child_price = $room_meta['child_price'];
-
-			$adult_price = (int) $adult_price * (int) $adult_count;
-			$child_price = (int) $child_price * (int) $child_count;
-			$total_price = (int) $adult_price + (int) $child_price;
-			$total_price = $this->calculate_discount( $total_price );
-		} elseif ( $pricing_by == '3' ) {
-			$room_options = ! empty( $room_meta['room-options'] ) ? $room_meta['room-options'] : [];
-
-			if ( ! empty( $room_options ) ) {
-				foreach ( $room_options as $room_option_key => $room_option ) {
-					$_option_id = $unique_id . '_' . $room_option_key;
-					if ( $_option_id == $option_id ) {
-						$option_price_type = ! empty( $room_option['option_pricing_type'] ) ? $room_option['option_pricing_type'] : 'per_room';
-						if ( $option_price_type == 'per_room' ) {
-							$total_price = ! empty( $room_option['option_price'] ) ? floatval( $room_option['option_price'] ) : 0;
-						} elseif ( $option_price_type == 'per_person' ) {
-							$option_adult_price = ! empty( $room_option['option_adult_price'] ) ? floatval( $room_option['option_adult_price'] ) : 0;
-							$option_child_price = ! empty( $room_option['option_child_price'] ) ? floatval( $room_option['option_child_price'] ) : 0;
-							$total_price        = ( $option_adult_price * $adult_count ) + ( $option_child_price * $child_count );
-						}
-
-						if ( ! empty( $room_option['room-facilities'] ) ) {
-							foreach ( $room_option['room-facilities'] as $room_facility ) {
-								$facility_price_switch = ! empty( $room_facility['room_facilities_price_switch'] ) ? $room_facility['room_facilities_price_switch'] : '0';
-								$facility_price        = ! empty( $room_facility['room_facilities_price'] ) ? floatval( $room_facility['room_facilities_price'] ) : 0;
-								$facility_type         = ! empty( $room_facility['room_facilities_price_type'] ) ? $room_facility['room_facilities_price_type'] : 'per_person';
-
-								if ( $facility_price_switch == '1' ) {
-									switch ( $facility_type ) {
-										case 'per_person':
-											$total_price += ( $facility_price * $adult_count ) + ( $facility_price * $child_count );
-											break;
-										case 'per_night':
-											$total_price += $facility_price * $days;
-											break;
-										case 'per_stay':
-											$total_price += $facility_price;
-											break;
-									}
-								}
-							}
-						}
-
-						$total_price = $this->calculate_discount( $total_price );
-					}
+				if ( "per_person" == $airport_pickup_price['airport_pickup_price_type'] ) {
+					$service_adult_fee   = ! empty( $airport_pickup_price['airport_service_fee_adult'] ) ? $airport_pickup_price['airport_service_fee_adult'] : 0;
+					$service_child_fee   = ! empty( $airport_pickup_price['airport_service_fee_children'] ) ? $airport_pickup_price['airport_service_fee_children'] : 0;
+					$service_total_price = ( $adult_count * $service_adult_fee ) + ( $child_count * $service_child_fee );
 				}
+				if ( "fixed" == $airport_pickup_price['airport_pickup_price_type'] ) {
+					$service_total_price = ! empty( $airport_pickup_price['airport_service_fee_fixed'] ) ? $airport_pickup_price['airport_service_fee_fixed'] : 0;
+				}
+			}
+			if ( "dropoff" == $service_type ) {
+				$airport_pickup_price = ! empty( $meta['airport_dropoff_price'] ) ? Helper::tf_data_types( $meta['airport_dropoff_price'] ) : '';
+
+				if ( "per_person" == $airport_pickup_price['airport_pickup_price_type'] ) {
+					$service_adult_fee   = ! empty( $airport_pickup_price['airport_service_fee_adult'] ) ? $airport_pickup_price['airport_service_fee_adult'] : 0;
+					$service_child_fee   = ! empty( $airport_pickup_price['airport_service_fee_children'] ) ? $airport_pickup_price['airport_service_fee_children'] : 0;
+					$service_total_price = ( $adult_count * $service_adult_fee ) + ( $child_count * $service_child_fee );
+				}
+				if ( "fixed" == $airport_pickup_price['airport_pickup_price_type'] ) {
+					$service_total_price = ! empty( $airport_pickup_price['airport_service_fee_fixed'] ) ? $airport_pickup_price['airport_service_fee_fixed'] : 0;
+				}
+			}
+			if ( "both" == $service_type ) {
+				$airport_pickup_price = ! empty( $meta['airport_pickup_dropoff_price'] ) ? Helper::tf_data_types( $meta['airport_pickup_dropoff_price'] ) : '';
+
+				if ( "per_person" == $airport_pickup_price['airport_pickup_price_type'] ) {
+					$service_adult_fee   = ! empty( $airport_pickup_price['airport_service_fee_adult'] ) ? $airport_pickup_price['airport_service_fee_adult'] : 0;
+					$service_child_fee   = ! empty( $airport_pickup_price['airport_service_fee_children'] ) ? $airport_pickup_price['airport_service_fee_children'] : 0;
+					$service_total_price = ( $adult_count * $service_adult_fee ) + ( $child_count * $service_child_fee );
+				}
+				if ( "fixed" == $airport_pickup_price['airport_pickup_price_type'] ) {
+					$service_total_price = ! empty( $airport_pickup_price['airport_service_fee_fixed'] ) ? $airport_pickup_price['airport_service_fee_fixed'] : 0;
+				}
+
 			}
 		}
 
-		return $total_price;
+		return $service_total_price;
 	}
 
 	function get_total_price() {
-		$meta      = $this->meta;
 		$room_meta = $this->room_meta;
-		$period = $this->period;
+		$period    = $this->period;
 
 		$pricing_by    = $room_meta['pricing-by'] ?? 1;
 		$avail_by_date = $room_meta['avil_by_date'] ?? 1;
-		$price_multi_day       = $room_meta['price_multi_day'] ?? 0;
-		$hotel_discount_type = $room_meta['discount_hotel_type'] ?? 'none';
 
 		// Total person calculation
 		$persons     = ! empty( $this->persons ) ? $this->persons : array();
@@ -440,45 +419,7 @@ class Pricing {
 
 		if ( $avail_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() && $pricing_by !== '3' ) {
 
-			$total_price = 0;
-			foreach ( $period as $date ) {
-
-				$available_rooms = array_values( array_filter( $avail_date, function ( $date_availability ) use ( $date ) {
-					$date_availability_from = strtotime( $date_availability['check_in'] . ' 00:00' );
-					$date_availability_to   = strtotime( $date_availability['check_out'] . ' 23:59' );
-
-					return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
-				} ) );
-
-				if ( is_iterable( $available_rooms ) && count( $available_rooms ) >= 1 ) {
-					$room_price  = ! empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $room_meta['price'];
-					$adult_price = ! empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $room_meta['adult_price'];
-					$child_price = ! empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $room_meta['child_price'];
-
-					if ( $hotel_discount_type == "percent" ) {
-						if ( $pricing_by == 1 ) {
-							$room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $room_price - ( ( (int) $room_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
-						}
-						if ( $pricing_by == 2 ) {
-							$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
-							$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - ( ( (int) $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
-						}
-					} else if ( $hotel_discount_type == "fixed" ) {
-						if ( $pricing_by == 1 ) {
-							$room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $room_price - (int) $hotel_discount_amount ), 2 ) );
-						}
-						if ( $pricing_by == 2 ) {
-							$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - (int) $hotel_discount_amount ), 2 ) );
-							$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - (int) $hotel_discount_amount ), 2 ) );
-						}
-					}
-
-					$total_price += $pricing_by == '1' ? $room_price : ( ( $adult_price * $adult_count ) + ( $child_price * $child_count ) );
-				};
-
-			}
-
-			$price_total = $total_price * $room_selected;
+			$total_price = Availability::instance( $this->post_id, $this->room_id, $this->option_id )->set_dates( $this->checkin, $this->checkout )->set_persons( $adult_count, $child_count )->set_room_number( $this->room_number )->get_availability_total_price();
 
 		} else {
 
@@ -493,7 +434,7 @@ class Pricing {
 				$total_price = (int) $adult_price + (int) $child_price;
 			} elseif ( $pricing_by == '3' ) {
 				$room_options = ! empty( $room_meta['room-options'] ) ? $room_meta['room-options'] : [];
-				$unique_id = !empty($room_meta['unique_id'] ) ? $room_meta['unique_id'] : '';
+				$unique_id    = ! empty( $room_meta['unique_id'] ) ? $room_meta['unique_id'] : '';
 
 				if ( ! empty( $room_options ) ) {
 					foreach ( $room_options as $room_option_key => $room_option ) {
@@ -529,6 +470,8 @@ class Pricing {
 									}
 								}
 							}
+
+							$option_title = $room_option['option_title'];
 						}
 					}
 				}
@@ -539,81 +482,12 @@ class Pricing {
 
 		}
 
-		# Airport Service Fee
-		/*if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tf_room_data['tf_hotel_data']['air_serivice_avail'] ) && 1 == $tf_room_data['tf_hotel_data']['air_serivice_avail'] ) {
-			if ( "pickup" == $airport_service ) {
-				$airport_pickup_price = ! empty( $meta['airport_pickup_price'] ) ? $meta['airport_pickup_price'] : '';
-				if ( ! empty( $airport_pickup_price ) && gettype( $airport_pickup_price ) == "string" ) {
-					$tf_hotel_airport_pickup_price_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-						return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-					}, $airport_pickup_price );
-					$airport_pickup_price                = unserialize( $tf_hotel_airport_pickup_price_value );
-				}
-				$tf_room_data['tf_hotel_data']['price_type'] = $airport_pickup_price['airport_pickup_price_type'];
-				if ( "per_person" == $tf_room_data['tf_hotel_data']['price_type'] ) {
-					$service_adult_fee           = ! empty( $airport_pickup_price['airport_service_fee_adult'] ) ? $airport_pickup_price['airport_service_fee_adult'] : 0;
-					$service_child_fee           = ! empty( $airport_pickup_price['airport_service_fee_children'] ) ? $airport_pickup_price['airport_service_fee_children'] : 0;
-					$airport_service_price_total = ( $adult * $service_adult_fee ) + ( $child * $service_child_fee );
-				}
-				if ( "fixed" == $tf_room_data['tf_hotel_data']['price_type'] ) {
-					$airport_service_price_total                        = ! empty( $airport_pickup_price['airport_service_fee_fixed'] ) ? $airport_pickup_price['airport_service_fee_fixed'] : 0;
-				}
-			}
-			if ( "dropoff" == $airport_service ) {
-				$airport_pickup_price = ! empty( $meta['airport_dropoff_price'] ) ? $meta['airport_dropoff_price'] : '';
-				if ( ! empty( $airport_pickup_price ) && gettype( $airport_pickup_price ) == "string" ) {
-					$tf_hotel_airport_pickup_price_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-						return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-					}, $airport_pickup_price );
-					$airport_pickup_price                = unserialize( $tf_hotel_airport_pickup_price_value );
-				}
-				$tf_room_data['tf_hotel_data']['price_type'] = $airport_pickup_price['airport_pickup_price_type'];
-				if ( "per_person" == $tf_room_data['tf_hotel_data']['price_type'] ) {
-					$service_adult_fee           = ! empty( $airport_pickup_price['airport_service_fee_adult'] ) ? $airport_pickup_price['airport_service_fee_adult'] : 0;
-					$service_child_fee           = ! empty( $airport_pickup_price['airport_service_fee_children'] ) ? $airport_pickup_price['airport_service_fee_children'] : 0;
-					$airport_service_price_total = ( $adult_count * $service_adult_fee ) + ( $child_count * $service_child_fee );
-				}
-				if ( "fixed" == $tf_room_data['tf_hotel_data']['price_type'] ) {
-					$airport_service_price_total                        = ! empty( $airport_pickup_price['airport_service_fee_fixed'] ) ? $airport_pickup_price['airport_service_fee_fixed'] : 0;
-				}
-			}
-			if ( "both" == $airport_service ) {
-				$airport_pickup_price = ! empty( $meta['airport_pickup_dropoff_price'] ) ? $meta['airport_pickup_dropoff_price'] : '';
-				if ( ! empty( $airport_pickup_price ) && gettype( $airport_pickup_price ) == "string" ) {
-					$tf_hotel_airport_pickup_price_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-						return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-					}, $airport_pickup_price );
-					$airport_pickup_price                = unserialize( $tf_hotel_airport_pickup_price_value );
-				}
-				$tf_room_data['tf_hotel_data']['price_type'] = $airport_pickup_price['airport_pickup_price_type'];
-				if ( "per_person" == $tf_room_data['tf_hotel_data']['price_type'] ) {
-					$service_adult_fee           = ! empty( $airport_pickup_price['airport_service_fee_adult'] ) ? $airport_pickup_price['airport_service_fee_adult'] : 0;
-					$service_child_fee           = ! empty( $airport_pickup_price['airport_service_fee_children'] ) ? $airport_pickup_price['airport_service_fee_children'] : 0;
-					$airport_service_price_total = ( $adult * $service_adult_fee ) + ( $child * $service_child_fee );
-				}
-				if ( "fixed" == $tf_room_data['tf_hotel_data']['price_type'] ) {
-					$airport_service_price_total                        = ! empty( $airport_pickup_price['airport_service_fee_fixed'] ) ? $airport_pickup_price['airport_service_fee_fixed'] : 0;
-				}
-
-			}
-		}*/
-
-		# check for deposit
-		/*if ( $deposit == "true" ) {
-
-			Helper::tf_get_deposit_amount( $room_meta, $price_total, $deposit_amount, $has_deposit );
-			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) {
-				$tf_room_data['tf_hotel_data']['price_total'] = $deposit_amount;
-				if ( ! empty( $airport_service ) ) {
-					$tf_room_data['tf_hotel_data']['due'] = ( $price_total + $airport_service_price_total ) - $deposit_amount;
-				} else {
-					$tf_room_data['tf_hotel_data']['due'] = $price_total - $deposit_amount;
-				}
-
-			}
-		}*/
-
-        return $total_price;
+		return array(
+			'total_price' => $total_price,
+            'adult_price' => $adult_price ?? 0,
+            'child_price' => $child_price ?? 0,
+            'option_title' => $option_title ?? '',
+		);
 	}
 
 	static function get_min_max_price_from_all_hotel() {

@@ -107,10 +107,9 @@ function tf_apartment_booking_callback() {
 		$tf_apartment_data['tf_apartment_data']['infant']            = $infant;
 
 		// Calculate price
-		$total_price = 0;
 		if ( $days > 0 ) {
 			if ( $enable_availability === '1' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-				$total_price += Apt_Pricing::instance( $post_id )->set_dates( $check_in, $check_out )->set_persons( $adults, $children, $infant )->get_availability();
+				$total_price = Apt_Pricing::instance( $post_id )->set_dates( $check_in, $check_out )->set_persons( $adults, $children, $infant )->get_availability();
 			} else {
 				$total_price = Apt_Pricing::instance( $post_id )->set_dates( $check_in, $check_out )->set_persons( $adults, $children, $infant )->set_total_price()->get_total_price();
 			}

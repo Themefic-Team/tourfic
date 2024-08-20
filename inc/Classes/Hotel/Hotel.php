@@ -21,10 +21,6 @@ class Hotel {
 			}
 		}
 
-        $hotel_price = Pricing::instance(26, 35, '1703067301412_0')->set_dates('2024/08/20', '2024/08/29')->set_persons(2,1)->set_room_number(2)->get_total_price();
-        $hotel_price2 = Pricing::instance(26, 35, '1703067301412_1')->set_dates('2024/08/20', '2024/08/29')->set_persons(2,1)->set_room_number(2)->get_total_price();
-//        var_dump($hotel_price2);
-
 		add_action( 'wp_ajax_tf_room_availability', array($this, 'tf_room_availability_callback') );
 		add_action( 'wp_ajax_nopriv_tf_room_availability', array($this, 'tf_room_availability_callback') );
 		add_action( 'wp_ajax_tf_hotel_airport_service_price', array( $this, 'tf_hotel_airport_service_callback' ) );
@@ -952,6 +948,7 @@ class Hotel {
 		if ( 1 == $airport_service ) {
 
 			$room_id       = isset( $_POST['roomid'] ) ? intval( sanitize_text_field( $_POST['roomid'] ) ) : null;
+			$option_id       = isset( $_POST['option_id'] ) ? intval( sanitize_text_field( $_POST['option_id'] ) ) : null;
 			$adult         = isset( $_POST['hoteladult'] ) ? intval( sanitize_text_field( $_POST['hoteladult'] ) ) : '0';
 			$child         = isset( $_POST['hotelchildren'] ) ? intval( sanitize_text_field( $_POST['hotelchildren'] ) ) : '0';
 			$room_selected = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : '0';
@@ -963,83 +960,11 @@ class Hotel {
 			$day_difference = self::calculate_days( $check_in, $check_out );
 
 			$room_meta = get_post_meta( $room_id, 'tf_room_opt', true );
-
-			$avail_by_date = ! empty( $room_meta['avil_by_date'] ) && $room_meta['avil_by_date'];
-			if ( $avail_by_date ) {
-				$avail_date = ! empty( $room_meta['avail_date'] ) ? json_decode( $room_meta['avail_date'], true ) : [];
-			}
-
-			$pricing_by      = $room_meta['pricing-by'];
-			$price_multi_day = ! empty( $room_meta['price_multi_day'] ) ? $room_meta['price_multi_day'] : false;
-
-			// Hotel Discout Data
-			$hotel_discount_type   = ! empty( $room_meta["discount_hotel_type"] ) ? $room_meta["discount_hotel_type"] : "none";
-			$hotel_discount_amount = ! empty( $room_meta["discount_hotel_price"] ) ? $room_meta["discount_hotel_price"] : 0;
-
-			/**
+            /**
 			 * Calculate Pricing
 			 */
-			if ( $avail_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-
-				// Check availability by date option
-				$period = new \DatePeriod(
-					new \DateTime( $check_in . ' 00:00' ),
-					new \DateInterval( 'P1D' ),
-					new \DateTime( $check_out . ' 00:00' )
-				);
-
-				$total_price = 0;
-				foreach ( $period as $date ) {
-
-					$available_rooms = array_values( array_filter( $avail_date, function ( $date_availability ) use ( $date ) {
-						$date_availability_from = strtotime( $date_availability['check_in'] . ' 00:00' );
-						$date_availability_to   = strtotime( $date_availability['check_out'] . ' 23:59' );
-
-						return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
-					} ) );
-
-					if ( is_iterable( $available_rooms ) && count( $available_rooms ) >= 1 ) {
-						$room_price  = ! empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $room_meta['price'];
-						$adult_price = ! empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $room_meta['adult_price'];
-						$child_price = ! empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $room_meta['child_price'];
-
-                        $room_price  = Pricing::instance($hotel_id, $room_id)->calculate_discount($room_price);
-						$adult_price = Pricing::instance($hotel_id, $room_id)->calculate_discount($adult_price);
-						$child_price = Pricing::instance($hotel_id, $room_id)->calculate_discount($child_price);
-
-						$total_price += $pricing_by == '1' ? $room_price : ( ( $adult_price * $adult ) + ( $child_price * $child ) );
-					};
-
-				}
-
-				$price_total = $total_price * $room_selected;
-
-			} else {
-
-				if ( $pricing_by == '1' ) {
-					$only_room_price = ! empty( $room_meta['price'] ) ? $room_meta['price'] : 0;
-					$total_price = Pricing::instance($hotel_id, $room_id)->calculate_discount($only_room_price);
-
-				} elseif ( $pricing_by == '2' ) {
-					$adult_price = ! empty( $room_meta['adult_price'] ) ? $room_meta['adult_price'] : 0;
-					$child_price = ! empty( $room_meta['child_price'] ) ? $room_meta['child_price'] : 0;
-
-                    $adult_price = Pricing::instance($hotel_id, $room_id)->calculate_discount($adult_price);
-                    $child_price = Pricing::instance($hotel_id, $room_id)->calculate_discount($child_price);
-
-					$adult_price = $adult_price * $adult;
-					$child_price = $child_price * $child;
-					$total_price = $adult_price + $child_price;
-				}
-
-				# Multiply pricing by night number
-				if ( ! empty( $day_difference ) && $price_multi_day == true ) {
-					$price_total = $total_price * $room_selected * $day_difference;
-				} else {
-					$price_total = $total_price * ( $room_selected * $day_difference + 1 );
-				}
-
-			}
+			$price_total = Pricing::instance($hotel_id, $room_id, $option_id)->set_dates($check_in, $check_out)->set_persons($adult, $child)->set_room_number($room_selected)->get_total_price();
+			$price_total = !empty($price_total['total_price']) ? $price_total['total_price'] : 0;
 
 			if ( $deposit == "true" ) {
 				Helper::tf_get_deposit_amount( $room_meta, $price_total, $deposit_amount, $has_deposit );
