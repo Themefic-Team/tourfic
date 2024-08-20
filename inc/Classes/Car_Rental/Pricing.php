@@ -16,6 +16,8 @@ class Pricing {
         
 		$initial_pricing = !empty($meta["car_rent"]) ? $meta["car_rent"] : 0;
 		$pricing_type = !empty($meta["pricing_type"]) ? $meta["pricing_type"] : 'day_hour';
+		$discount_type = !empty($meta["discount_type"]) ? $meta["discount_type"] : 'none';
+		$discount_price = !empty($meta["discount_price"]) ? $meta["discount_price"] : '';
 
         // if('day_hour'==$pricing_type){
         //     $pricing = !empty($meta["day_prices"]) ? $meta["day_prices"] : '';
@@ -67,11 +69,35 @@ class Pricing {
                     $pickupDate = strtotime("+1 day", $pickupDate);
                 }
 
-                $all_prices['regular_price'] = $totalPrice;
+                if('fixed'==$discount_type && !empty($discount_price)){
+                    $all_prices['sale_price'] = $totalPrice - $discount_price;
+                }
+                if('percent'==$discount_type && !empty($discount_price)){
+                    $discount_price = ($totalPrice * $discount_price)/100;
+                    $all_prices['sale_price'] = $totalPrice - $discount_price;
+                }
 
+                if(empty($all_prices['sale_price'])){
+                    $all_prices['sale_price'] = $totalPrice;
+                }else{
+                    $all_prices['regular_price'] = $totalPrice;
+                }
+                
             }
         }else{
-            $all_prices['regular_price'] = $initial_pricing;
+            if('fixed'==$discount_type && !empty($discount_price)){
+                $all_prices['sale_price'] = $initial_pricing - $discount_price;
+            }
+            if('percent'==$discount_type && !empty($discount_price)){
+                $discount_price = ($initial_pricing * $discount_price)/100;
+                $all_prices['sale_price'] = $initial_pricing - $discount_price;
+            }
+
+            if(empty($all_prices['sale_price'])){
+                $all_prices['sale_price'] = $initial_pricing;
+            }else{
+                $all_prices['regular_price'] = $initial_pricing;
+            }
         }
 
         return $all_prices;
