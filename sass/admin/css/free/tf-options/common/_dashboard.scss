@@ -564,6 +564,7 @@
     margin: 30px 20px 30px 0px;
     background-color: #fff;
     border-radius: 10px;
+    scroll-margin-top: 100px;
 
     .tourfic-settings-header {
         padding: 20px 20px 20px 20px; 
@@ -574,8 +575,9 @@
         background-color: #fff;
         border-radius: 10px 10px 0px 0px;
         position: sticky;
-        top: 0;
+        top: 3%;
         z-index: 9999;
+        overflow: hidden;
 
         .settings-header-left {
             min-width: 40%;
@@ -585,6 +587,7 @@
 
             .tf-setting-title {
                 font-size: 24px;
+                margin: 0px;
             }
 
             .tf-setting-search {
@@ -623,6 +626,16 @@
             display: flex;
             align-items: center;
             gap: 8px;
+
+            .tf-reset-btn {
+                background-color: #f44336;
+                border-color: #f44336;
+
+                &:hover {
+                    background-color: #bc362d;
+                    border-color: #bc362d;
+                }
+            }
         }
     }
 

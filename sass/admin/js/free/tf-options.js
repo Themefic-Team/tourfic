@@ -457,6 +457,11 @@
 
         })
 
+        $('.tf-setting-dashboard').on('scroll', function () {
+            let $this = $(this)
+            $('.tourfic-settings-header').css('padding', '10px 20px');
+        });
+
         $(document).on('click', '.tf-setting-save-btn .tf-reset-btn', function (e) {
 
             $.ajax({

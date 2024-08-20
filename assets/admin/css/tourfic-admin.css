@@ -1917,7 +1917,8 @@ Steps
   max-width: 100%;
   margin: 30px 20px 30px 0px;
   background-color: #fff;
-  border-radius: 10px; }
+  border-radius: 10px;
+  scroll-margin-top: 100px; }
   .tf-setting-wrapper .tourfic-settings-header {
     padding: 20px 20px 20px 20px;
     border-bottom: 3px solid #003c79;
@@ -1927,15 +1928,17 @@ Steps
     background-color: #fff;
     border-radius: 10px 10px 0px 0px;
     position: sticky;
-    top: 0;
-    z-index: 9999; }
+    top: 3%;
+    z-index: 9999;
+    overflow: hidden; }
     .tf-setting-wrapper .tourfic-settings-header .settings-header-left {
       min-width: 40%;
       display: flex;
       align-items: center;
       gap: 16px; }
       .tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-title {
-        font-size: 24px; }
+        font-size: 24px;
+        margin: 0px; }
       .tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search {
         min-width: 50%;
         display: flex;
@@ -1962,6 +1965,12 @@ Steps
       display: flex;
       align-items: center;
       gap: 8px; }
+      .tf-setting-wrapper .tourfic-settings-header .tf-setting-save-btn .tf-reset-btn {
+        background-color: #f44336;
+        border-color: #f44336; }
+        .tf-setting-wrapper .tourfic-settings-header .tf-setting-save-btn .tf-reset-btn:hover {
+          background-color: #bc362d;
+          border-color: #bc362d; }
   .tf-setting-wrapper .tf-option-form {
     padding: 30px 30px 30px 0px; }
     .tf-setting-wrapper .tf-option-form .tf-option {
