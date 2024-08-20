@@ -12,17 +12,68 @@ class Pricing {
 	}
 
     // all price will be calculate here
-	function set_total_price( $car_id ) {
-        $meta = get_post_meta( $apt_id, 'tf_carrental_opt', true );
-		$initial_pricing = !empty($meta["car_rent"]) ? $meta["car_rent"] : '';
+	static function set_total_price( $meta, $tf_pickup_date='', $tf_dropoff_date='' ) {
+        
+		$initial_pricing = !empty($meta["car_rent"]) ? $meta["car_rent"] : 0;
 		$pricing_type = !empty($meta["pricing_type"]) ? $meta["pricing_type"] : 'day_hour';
 
-        if('day_hour'==$pricing_type){
-            $pricing = !empty($meta["day_prices"]) ? $meta["day_prices"] : '';
+        // if('day_hour'==$pricing_type){
+        //     $pricing = !empty($meta["day_prices"]) ? $meta["day_prices"] : '';
+        // }
+
+        if(!empty($tf_pickup_date) && !empty($tf_pickup_date)){
+            if('date'==$pricing_type){
+                $pricing = !empty($meta["date_prices"]) ? $meta["date_prices"] : '';
+
+                $all_prices = [];
+                $result = array();
+                foreach ($pricing as $entry) {
+                    $startDate = strtotime($entry['date']['from']);
+                    $endDate = strtotime($entry['date']['to']);
+                    $price = $entry['price'];
+
+                    while ($startDate <= $endDate) {  // Adjusted to include the end date
+                        $dateKey = date("Y/m/d", $startDate);
+
+                        // Check if the date is already in the result array
+                        if (isset($result[$dateKey])) {
+                            
+                        } else {
+                            $result[$dateKey] = $price;
+                        }
+                        $startDate = strtotime("+1 day", $startDate);
+                    }
+                }
+
+                // Convert the dates to timestamps
+                $pickupDate = strtotime($tf_pickup_date);
+                $dropoffDate = strtotime($tf_dropoff_date);
+
+                // Initialize total price
+                $totalPrice = 0;
+
+                // Loop through each day in the range
+                while ($pickupDate <= $dropoffDate) {
+                    $currentDate = date("Y/m/d", $pickupDate);
+                    
+                    // Check if the date exists in the $result array
+                    if (isset($result[$currentDate])) {
+                        $totalPrice += $result[$currentDate];
+                    } else {
+                        $totalPrice += $initial_pricing;
+                    }
+
+                    // Move to the next day
+                    $pickupDate = strtotime("+1 day", $pickupDate);
+                }
+
+                $all_prices['regular_price'] = $totalPrice;
+
+            }
+        }else{
+            $all_prices['regular_price'] = $initial_pricing;
         }
 
-        if('date'==$pricing_type){
-            $pricing = !empty($meta["date_prices"]) ? $meta["date_prices"] : '';
-        }
+        return $all_prices;
     }
 }

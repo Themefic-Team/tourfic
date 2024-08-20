@@ -1,6 +1,7 @@
 <?php
 
 use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\Car_Rental\Pricing;
 ?>
 
 <div class="tf-single-car-section">
@@ -113,7 +114,13 @@ use \Tourfic\Classes\Helper;
                 <div class="tf-car-booking-form">
 
                     <div class="tf-price-header tf-mb-30">
-                        <h2>Total: <del>$120</del> $145</h2>
+                        <?php
+                        $tf_pickup_date = !empty($_GET['pickup']) ? $_GET['pickup'] : '2024/08/23';
+                        $tf_dropoff_date = !empty($_GET['dropoff']) ? $_GET['dropoff'] : '2024/08/27';
+                        $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date); ?>
+                        <h2>Total: 
+                        <?php if(!empty($total_prices['sale_price'])){ ?><del><?php echo wc_price($total_prices['sale_price']); ?></del>  <?php } ?>
+                        <?php echo $total_prices['regular_price'] ? wc_price($total_prices['regular_price']) : '' ?></h2>
                         <p>Without taxes</p>
                     </div>
 
