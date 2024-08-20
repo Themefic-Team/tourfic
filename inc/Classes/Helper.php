@@ -54,6 +54,9 @@ class Helper {
 
 		// Add dashboard link to admin menu bar
 		add_action( 'admin_bar_menu', array( $this, 'tf_admin_bar_dashboard_link' ), 31  );
+
+		// redirect non admin user
+		add_action( 'admin_init', array( $this, 'redirect_non_admin_users' ), 9 );
 	}
 
 	static function tfopt( $option = '', $default = null ) {
@@ -3566,6 +3569,22 @@ class Helper {
 		} else {
 
 			return;
+		}
+	}
+
+	function redirect_non_admin_users() {
+		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+
+			$user = wp_get_current_user();
+
+			if( in_array( 'tf_vendor', (array) $user->roles ) || in_array( 'tf_manager', (array) $user->roles ) || in_array( 'customer', (array) $user->roles ) ) {
+				$tf_dashboard_page_link = !empty( get_option( 'tf_dashboard_page_id' ) ) ? get_permalink( get_option( 'tf_dashboard_page_id' ) )  : get_home_url();
+				wp_redirect( $tf_dashboard_page_link );
+				exit;
+			} else if( in_array( 'administrator', (array) $user->roles ) || in_array( 'editor', (array) $user->roles ) ) {
+				return;
+			}
+			
 		}
 	}
 }
