@@ -205,6 +205,9 @@
                         font-weight: 400;
                         line-height: 150%; /* 24px */
                         width: calc(25% - 8px);
+                        border-radius: 8px;
+                        border: 1px solid #DFE6ED;
+                        padding: 8px;
                         i{
                             font-size: 20px;
                         }

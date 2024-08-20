@@ -25,7 +25,7 @@ eval("(function ($, win) {\n    $(document).ready(function () {\n\n        // Cr
   \*********************************/
 /***/ (() => {
 
-eval("(function ($, win) {\n    $(document).ready(function () {\n        // FAQ Accordion\n        $('.tf-faq-head').on(\"click\", function () {\n            var $this = $(this);\n            if (!$this.hasClass(\"active\")) {\n                $(\".tf-question-desc\").slideUp(400);\n                $(\".tf-faq-head\").removeClass(\"active\");\n                $('.tf-faq-col').removeClass('active');\n            }\n            $this.toggleClass(\"active\");\n            $this.next().slideToggle();\n            $(this).closest('.tf-faq-col').toggleClass('active');\n        });\n    });\n\n})(jQuery, window);\n\n//# sourceURL=webpack://tourfic/./sass/app/js/free/car.js?");
+eval("(function ($, win) {\n    $(document).ready(function () {\n        // FAQ Accordion\n        $('.tf-faq-head').on(\"click\", function () {\n            var $this = $(this);\n            if (!$this.hasClass(\"active\")) {\n                $(\".tf-question-desc\").slideUp(400);\n                $(\".tf-faq-head\").removeClass(\"active\");\n                $('.tf-faq-col').removeClass('active');\n            }\n            $this.toggleClass(\"active\");\n            $this.next().slideToggle();\n            $(this).closest('.tf-faq-col').toggleClass('active');\n        });\n\n        // Tabs Section\n        $('.tf-details-menu ul li').on(\"click\", function () {\n            var $this = $(this);\n            $('.tf-details-menu ul li').removeClass('active');\n            $this.addClass(\"active\");\n        });\n    });\n\n})(jQuery, window);\n\n//# sourceURL=webpack://tourfic/./sass/app/js/free/car.js?");
 
 /***/ }),
 

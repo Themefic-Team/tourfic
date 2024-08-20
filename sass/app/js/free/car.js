@@ -12,6 +12,13 @@
             $this.next().slideToggle();
             $(this).closest('.tf-faq-col').toggleClass('active');
         });
+
+        // Tabs Section
+        $('.tf-details-menu ul li').on("click", function () {
+            var $this = $(this);
+            $('.tf-details-menu ul li').removeClass('active');
+            $this.addClass("active");
+        });
     });
 
 })(jQuery, window);
