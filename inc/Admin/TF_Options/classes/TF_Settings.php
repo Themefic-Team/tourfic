@@ -829,6 +829,13 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				return;
 			}
 
+			// echo "<pre>";
+			// print_r( $this->option_sections[""]);
+			// echo "</pre>";
+			// die(); // added by - Sunvi
+
+			// TODO: Need to work with settings filter and search
+
 			if ( ! empty( $option_request ) && ! empty( $this->option_sections ) ) {
 				foreach ( $this->option_sections as $section ) {
 					if ( ! empty( $section['fields'] ) ) {
@@ -956,7 +963,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			wp_die();
 		}
 
-		// TODO: Need to furnish the Reset Settings
 
 		public function tf_ajax_reset_options() {
 			$response    = [
