@@ -450,6 +450,37 @@
         * Options ajax save
         * @author: Foysal
         */
+
+        $(document).on("click", '.tf-setting-save-btn .tf-submit-btn', function (e) {
+            e.preventDefault();
+            $('.tf-option-form.tf-ajax-save').submit();
+
+        })
+
+        $(document).on('click', '.tf-setting-save-btn .tf-reset-btn', function (e) {
+
+            $.ajax({
+                url: tf_options.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'tf_options_reset',
+                    tf_option_nonce: tf_admin_params.tf_nonce,
+                },
+                beforeSend: function () {
+                    $('.tf-setting-save-btn .tf-reset-btn').addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    let data = JSON.parse(response)
+                    $('.tf-setting-save-btn .tf-reset-btn').removeClass('tf-btn-loading');
+                    notyf.success(data.message);
+                    
+                },
+            }).done(function () {
+                window.location.reload();
+            });
+
+        });
+
         $(document).on('submit', '.tf-option-form.tf-ajax-save', function (e) {
             e.preventDefault();
             let $this = $(this),
@@ -485,6 +516,7 @@
                         $this.find('.tf-import-btn').addClass('tf-btn-loading');
                     }
                     submitBtn.addClass('tf-btn-loading');
+                    $('.tf-setting-save-btn .tf-submit-btn').addClass('tf-btn-loading');
                 },
                 success: function (response) {
                     let obj = JSON.parse(response);
@@ -499,6 +531,7 @@
                         notyf.error(obj.message);
                     }
                     submitBtn.removeClass('tf-btn-loading');
+                    $(".tf-setting-save-btn .tf-submit-btn").removeClass('tf-btn-loading');
                     if(tf_import_option == true ){
                         $this.find('.tf-import-btn').removeClass('tf-btn-loading');
                     }
