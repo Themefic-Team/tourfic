@@ -2591,14 +2591,14 @@ Steps
 
 .tf-setting-wrapper .tourfic-settings-header {
   padding: 20px 20px 20px 20px;
-  border-bottom: 3px solid #003c79;
+  border-bottom: 1px solid #003c79;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
   border-radius: 10px 10px 0px 0px;
   position: sticky;
-  top: 3%;
+  top: 32px;
   z-index: 9999;
   overflow: hidden;
 }
@@ -2611,8 +2611,8 @@ Steps
 }
 
 .tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-title {
-  font-size: 24px;
-  margin: 0px;
+  font-size: 18px;
+  margin: 0;
 }
 
 .tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search {
@@ -2633,10 +2633,10 @@ Steps
 
 .tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search input {
   min-width: calc(100% - 22px);
-  padding: 12px 12px 12px 0px;
+  padding: 8px 12px 8px 0px;
   border: none;
   background-color: transparent;
-  height: 48px;
+  height: 42px;
   font-size: 16px;
 }
 

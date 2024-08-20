@@ -692,13 +692,13 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<h2 class="tf-setting-title"><?php echo esc_html__( "Tourfic Settings", "tourfic" ); ?></h2>
 							<div class="tf-setting-search">
 								<i class="fa-solid fa-search"></i>
-								<input aria-label="Search" type="text" placeholder="Start typing to find options..." class="ui-autocomplete-input" autocomplete="off">
+								<input aria-label="Search" type="text" placeholder="<?php echo esc_attr__( "Search Options", "tourfic" ); ?>" class="ui-autocomplete-input" autocomplete="off">
 							</div>
 						</div>
 						<div class="settings-header-right">
 							<div class="tf-setting-save-btn">
-								<button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn">Save</button>
-								<button type="submit" class="tf-admin-btn tf-btn-secondary tf-reset-btn">Reset All</button>
+								<button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn"><?php echo esc_html__( "Save", "tourfic" ); ?></button>
+								<button type="submit" class="tf-admin-btn tf-btn-secondary tf-reset-btn"><?php echo esc_html__( "Reset", "tourfic" ); ?></button>
 							</div>
 						</div>
 					</div>
