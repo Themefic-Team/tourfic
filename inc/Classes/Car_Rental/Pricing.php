@@ -102,4 +102,15 @@ class Pricing {
 
         return $all_prices;
     }
+
+    // taxable car or not
+	static function is_taxable( $meta ) {
+        $is_taxable = !empty($meta["is_taxable"]) ? $meta["is_taxable"] : '';
+        $taxable_class = !empty($meta["taxable_class"]) ? $meta["taxable_class"] : '';
+        if($is_taxable && !empty($taxable_class)){
+            return  esc_html_e("With Taxes", "tourfic");
+        }else{
+            return  esc_html_e("Without Taxes", "tourfic");
+        }
+    }
 }

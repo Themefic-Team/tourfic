@@ -2,6 +2,7 @@
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Car_Rental\Pricing;
+use \Tourfic\App\TF_Review;
 ?>
 
 <div class="tf-single-car-section">
@@ -29,7 +30,13 @@ use \Tourfic\Classes\Car_Rental\Pricing;
                             <div class="tf-featured-reviews">
                                 <a href="#tf-review" class="tf-single-rating">
                                     <span>
-                                        <?php esc_html_e( "5.0", "tourfic" ) ?>
+                                        <?php 
+                                        if($comments){
+                                        echo wp_kses_post( TF_Review::tf_total_avg_rating( $comments )); 
+                                        }else{ 
+                                        ?>
+                                        0.0
+                                        <?php } ?>
                                         <i class="fa-solid fa-star"></i>
                                     </span> (<?php esc_html_e( "1 Trips", "tourfic" ) ?>)
                                 </a>
@@ -118,10 +125,10 @@ use \Tourfic\Classes\Car_Rental\Pricing;
                         $tf_pickup_date = !empty($_GET['pickup']) ? $_GET['pickup'] : '2024/08/23';
                         $tf_dropoff_date = !empty($_GET['dropoff']) ? $_GET['dropoff'] : '2024/08/27';
                         $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date); ?>
-                        <h2>Total: 
+                        <h2><?php esc_html_e("Total:", "tourfic"); ?> 
                         <?php if(!empty($total_prices['regular_price'])){ ?><del><?php echo wc_price($total_prices['regular_price']); ?></del>  <?php } ?>
                         <?php echo $total_prices['sale_price'] ? wc_price($total_prices['sale_price']) : '' ?></h2>
-                        <p>Without taxes</p>
+                        <p><?php echo Pricing::is_taxable($meta); ?></p>
                     </div>
 
                     <div class="tf-extra-added-info">
