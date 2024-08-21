@@ -30,6 +30,7 @@
                 font-weight: 400;
                 line-height: 150%; /* 31.5px */
                 margin-bottom: 16px;
+                margin-top: 0px;
             }
 
             .tf-car-title{
@@ -171,6 +172,11 @@
                         }
                     }
                 }
+            }
+            .tf-template-part{
+                border-radius: 16px;
+                background: #F5FAFF;
+                padding: 8px 16px 16px 16px;
             }
 
             .tf-short-description{
@@ -414,7 +420,7 @@
                             font-size: 16px !important;
                             font-style: normal !important;
                             font-weight: 400 !important;
-                            line-height: 150%; /* 24px */
+                            line-height: 150% !important; /* 24px */
                             margin: 0;
                             width: calc(100% - 148px);
                         }
@@ -614,18 +620,22 @@
                             border-right: 1px solid #DFE6ED;
                         }
                         
-                        i{
-                            color: #566676;
+                        .icon{
+                            svg{
+
+                            }
                         }
                         
                         .info-select{
                             width: 100%;
+                            position: relative;
                             h5{
                                 color: #27333F;
                                 font-size: 12px !important;
                                 font-style: normal !important;
                                 font-weight: 400 !important;
                                 line-height: 120% !important; /* 14.4px */
+                                margin-top: 0px;
                                 margin-bottom: 8px;
                             }
                             input{
@@ -644,6 +654,7 @@
                                 }
                                 &::placeholder{
                                     color: #27333F;
+                                    opacity: 1;
                                 }
                             }
                             select{
@@ -657,6 +668,25 @@
                                 border: 0px solid !important;
                                 background-color: transparent;
                                 padding: 0;
+                            }
+                            .autocomplete-items{
+                                position: absolute;
+                                border: 1px solid #d4d4d4;
+                                border-bottom: none;
+                                z-index: 99;
+                                top: 100%;
+                                left: 0;
+                                right: 0;
+                                >div{
+                                    padding: 10px;
+                                    cursor: pointer;
+                                    background-color: #fff;
+                                    border-bottom: 1px solid #d4d4d4;
+                                    color: #444;
+                                    border-left: 1px solid #d4d4d4;
+                                    border-right: 1px solid #d4d4d4;
+                                    text-transform: capitalize;
+                                }
                             }
                         }
                     }

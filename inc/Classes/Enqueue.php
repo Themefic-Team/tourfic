@@ -615,6 +615,7 @@ class Enqueue {
 				'locations'              => Helper::get_terms_dropdown('hotel_location'),
 				'apartment_locations'    => Helper::get_terms_dropdown('apartment_location'),
 				'tour_destinations'      => Helper::get_terms_dropdown('tour_destination'),
+				'car_locations'      	 => Helper::get_terms_dropdown('carrental_location'),
 				'ajax_result_success'    => esc_html__( 'Refreshed Successfully!', 'tourfic' ),
 				'wishlist_add'           => esc_html__( 'Adding to wishlist...', 'tourfic' ),
 				'wishlist_added'         => esc_html__( 'Item added to wishlist.', 'tourfic' ),

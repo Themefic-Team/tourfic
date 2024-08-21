@@ -27,6 +27,16 @@ class Car_Rental_CPT extends \Tourfic\Classes\Post_Type {
 			'rewrite_slug'  => $this->get_carrental_slug(),
 		))->set_tax_args( array(
 			array(
+				'name'          => esc_html__('Locations', 'tourfic' ),
+				'singular_name' => esc_html__('Location', 'tourfic' ),
+				'taxonomy'      => 'carrental_location',
+				'rewrite_slug'  => apply_filters( 'tf_carrental_location_slug', 'carrental-location' ),
+				'capability'  => array(
+					'assign_terms' => 'edit_tf_carrental',
+					'edit_terms'   => 'edit_tf_carrental',
+				),
+			),
+			array(
 				'name'          => esc_html__('Brand', 'tourfic' ),
 				'singular_name' => esc_html__('Brand', 'tourfic' ),
 				'taxonomy'      => 'carrental_brand',
