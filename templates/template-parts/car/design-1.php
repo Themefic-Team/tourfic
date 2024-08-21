@@ -220,9 +220,7 @@ use \Tourfic\App\TF_Review;
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Time", "tourfic"); ?></h5>
-                                        <select name="" id="">
-                                            <option value="">Select Time</option>
-                                        </select>
+                                        <input type="text" placeholder="Pick Up Time" class="tf_pickup_time">
                                     </div>
                                 </div>
                             </div>
@@ -252,9 +250,7 @@ use \Tourfic\App\TF_Review;
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Time", "tourfic"); ?></h5>
-                                        <select name="" id="">
-                                            <option value="">Select Time</option>
-                                        </select>
+                                        <input type="text" placeholder="Drop Off Time" class="tf_dropoff_time">
                                     </div>
                                 </div>
                             </div>
@@ -313,6 +309,43 @@ use \Tourfic\App\TF_Review;
                                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                                 }
                             });
+
+                            // Initialize the pickup time picker
+                            var pickupTimeFlatpickr = $(".tf_pickup_time").flatpickr({
+                                enableTime: true,
+                                noCalendar: true,
+                                dateFormat: "H:i",
+
+                                // flatpickr locale
+                                <?php tf_flatpickr_locale(); ?>
+
+                                onReady: function (selectedDates, dateStr, instance) {
+                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                },
+                                onChange: function (selectedDates, dateStr, instance) {
+                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                    // Update minDate for the dropoff date picker
+                                    dropoffTimeFlatpickr.set("minTime", dateStr);
+                                }
+                            });
+
+                            var dropoffTimeFlatpickr = $(".tf_dropoff_time").flatpickr({
+                                enableTime: true,
+                                noCalendar: true,
+                                dateFormat: "H:i",
+                                // flatpickr locale
+                                <?php tf_flatpickr_locale(); ?>
+
+                                onReady: function (selectedDates, dateStr, instance) {
+                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                },
+                                onChange: function (selectedDates, dateStr, instance) {
+                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                    // Update minDate for the dropoff date picker
+                                    dropoffFlatpickr.set("minDate", dateStr);
+                                }
+                            });
+
                         });
                     })(jQuery);
 
