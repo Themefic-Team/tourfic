@@ -431,13 +431,16 @@ class TF_Options {
 		// Add nonce for security and authentication.
 		check_ajax_referer( 'updates', '_nonce' );
 
-		$new_post   = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
-		$room_id    = isset( $_POST['room_id'] ) && ! empty( $_POST['room_id'] ) ? sanitize_text_field( $_POST['room_id'] ) : '';
-		$avail_date = isset( $_POST['avail_date'] ) && ! empty( $_POST['avail_date'] ) ? sanitize_text_field( $_POST['avail_date'] ) : '';
+		$room_options_count = 0;
+		$new_post           = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
+		$room_id            = isset( $_POST['room_id'] ) && ! empty( $_POST['room_id'] ) ? sanitize_text_field( $_POST['room_id'] ) : '';
+		$avail_date         = isset( $_POST['avail_date'] ) && ! empty( $_POST['avail_date'] ) ? sanitize_text_field( $_POST['avail_date'] ) : '';
+		$option_arr         = isset( $_POST['option_arr'] ) && ! empty( $_POST['option_arr'] ) ? $_POST['option_arr'] : [];
 
 		if ( $new_post != 'true' ) {
-			$room_meta       = get_post_meta( $room_id, 'tf_room_opt', true );
-			$room_avail_data = isset( $room_meta['avail_date'] ) && ! empty( $room_meta['avail_date'] ) ? json_decode( $room_meta['avail_date'], true ) : [];
+			$room_meta          = get_post_meta( $room_id, 'tf_room_opt', true );
+			$room_avail_data    = isset( $room_meta['avail_date'] ) && ! empty( $room_meta['avail_date'] ) ? json_decode( $room_meta['avail_date'], true ) : [];
+			$room_options_count = ! empty( $room_meta['room-options'] ) ? count( $room_meta['room-options'] ) : 0;
 		} else {
 			$room_avail_data = json_decode( stripslashes( $avail_date ), true );
 		}
@@ -459,7 +462,52 @@ class TF_Options {
 			$room_avail_data = [];
 		}
 
-		echo wp_json_encode( $room_avail_data );
+		$options_html = '';
+
+		foreach ( $option_arr as $key => $item ) {
+			ob_start();
+			?>
+            <div class="tf-single-option">
+                <div class="tf-field-switch">
+                    <label for="tf_room_option_<?php echo esc_attr( $item['index'] ); ?>" class="tf-field-label"><?php echo esc_html( $item['title'] ); ?></label>
+                    <div class="tf-fieldset">
+                        <label for="tf_room_option_<?php echo esc_attr( $item['index'] ); ?>" class="tf-switch-label" style="width: 80px">
+                            <input type="checkbox" id="tf_room_option_<?php echo esc_attr( $item['index'] ); ?>" name="tf_room_option_<?php echo esc_attr( $item['index'] ); ?>" value="1" class="tf-switch"
+                                   checked="checked">
+                            <span class="tf-switch-slider">
+                                <span class="tf-switch-on"><?php echo esc_html__( 'Enable', 'tourfic' ) ?></span>
+                                <span class="tf-switch-off"><?php echo esc_html__( 'Disable', 'tourfic' ) ?></span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="tf-field-text tf_option_pricing_type_room" style="display: <?php echo $item['type'] == 'per_room' ? 'block' : 'none' ?>; width: calc(100% - 90px)">
+                    <label class="tf-field-label"><?php echo esc_html__( 'Room Price', 'tourfic' ); ?></label>
+                    <div class="tf-fieldset">
+                        <input type="number" min="0" name="tf_option_room_price" placeholder="<?php echo esc_attr__( 'Room Price', 'tourfic' ); ?>">
+                    </div>
+                </div>
+                <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $item['type'] == 'per_person' ? 'block' : 'none' ?>; width: calc((100% - 80px)/2 - -5px)">
+                    <label class="tf-field-label"><?php echo esc_html__( 'Adult Price', 'tourfic' ); ?></label>
+                    <div class="tf-fieldset">
+                        <input type="number" min="0" name="tf_option_adult_price" placeholder="<?php echo esc_attr__( 'Adult Price', 'tourfic' ); ?>">
+                    </div>
+                </div>
+                <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $item['type'] == 'per_person' ? 'block' : 'none' ?>; width: calc((100% - 80px)/2 - -5px)">
+                    <label class="tf-field-label"><?php echo esc_html__( 'Child Price', 'tourfic' ); ?></label>
+                    <div class="tf-fieldset">
+                        <input type="number" min="0" name="tf_option_child_price" placeholder="<?php echo esc_attr__( 'Child Price', 'tourfic' ); ?>">
+                    </div>
+                </div>
+            </div>
+			<?php
+			$options_html .= ob_get_clean();
+		}
+
+		echo wp_json_encode( array(
+			'avail_data'   => $room_avail_data,
+			'options_html' => $options_html,
+		) );
 		die();
 	}
 
@@ -501,8 +549,8 @@ class TF_Options {
 				//add next 5 years availability
 				$room_avail_data = [];
 				for ( $i = 0; $i <= 1825; $i ++ ) {
-					$tf_room_date                      = gmdate( 'Y/m/d', strtotime( "+$i day" ) );
-					$tf_room_data                      = [
+					$tf_room_date                     = gmdate( 'Y/m/d', strtotime( "+$i day" ) );
+					$tf_room_data                     = [
 						'check_in'    => $tf_room_date,
 						'check_out'   => $tf_room_date,
 						'price_by'    => $pricing_by,

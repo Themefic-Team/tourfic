@@ -60,10 +60,11 @@ if ( ! class_exists( 'TF_room_availability' ) ) {
 
 						<?php if ( $pricing_by == '3' ) {
 							if ( ! empty( $room_options ) ) {
+                                echo '<div class="tf-single-options">';
 								foreach ( $room_options as $key => $room_option ) {
 									$option_pricing_type = ! empty( $room_option['option_pricing_type'] ) ? $room_option['option_pricing_type'] : 'per_room';
 									?>
-                                    <div class="tf-single-optionss" style="display: none">
+                                    <div class="tf-single-option">
                                         <div class="tf-field-switch">
                                             <label for="tf_room_option_<?php echo esc_attr( $key ); ?>" class="tf-field-label"><?php echo esc_html( $room_option['option_title'] ); ?></label>
                                             <div class="tf-fieldset">
@@ -71,8 +72,8 @@ if ( ! class_exists( 'TF_room_availability' ) ) {
                                                     <input type="checkbox" id="tf_room_option_<?php echo esc_attr( $key ); ?>" name="tf_room_option_<?php echo esc_attr( $key ); ?>" value="1" class="tf-switch"
                                                            checked="checked">
                                                     <span class="tf-switch-slider">
-                                                        <span class="tf-switch-on">Enable</span>
-                                                        <span class="tf-switch-off">Disable</span>
+                                                        <span class="tf-switch-on"><?php echo esc_html__('Enable', 'tourfic') ?></span>
+                                                        <span class="tf-switch-off"><?php echo esc_html__('Disable', 'tourfic') ?></span>
                                                     </span>
                                                 </label>
                                             </div>
@@ -80,25 +81,25 @@ if ( ! class_exists( 'TF_room_availability' ) ) {
                                         <div class="tf-field-text tf_option_pricing_type_room" style="display: <?php echo $option_pricing_type == 'per_room' ? 'block' : 'none' ?>; width: calc(100% - 90px)">
                                             <label class="tf-field-label"><?php echo esc_html__( 'Room Price', 'tourfic' ); ?></label>
                                             <div class="tf-fieldset">
-                                                <input type="number" min="0" name="tf_option_room_price" placeholder="<?php echo esc_html__( 'Room Price', 'tourfic' ); ?>">
+                                                <input type="number" min="0" name="tf_option_room_price" placeholder="<?php echo esc_attr__( 'Room Price', 'tourfic' ); ?>">
                                             </div>
                                         </div>
                                         <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $option_pricing_type == 'per_person' ? 'block' : 'none' ?>; width: calc((100% - 80px)/2 - -5px)">
                                             <label class="tf-field-label"><?php echo esc_html__( 'Adult Price', 'tourfic' ); ?></label>
                                             <div class="tf-fieldset">
-                                                <input type="number" min="0" name="tf_option_adult_price" placeholder="<?php echo esc_html__( 'Adult Price', 'tourfic' ); ?>">
+                                                <input type="number" min="0" name="tf_option_adult_price" placeholder="<?php echo esc_attr__( 'Adult Price', 'tourfic' ); ?>">
                                             </div>
                                         </div>
-
                                         <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $option_pricing_type == 'per_person' ? 'block' : 'none' ?>; width: calc((100% - 80px)/2 - -5px)">
                                             <label class="tf-field-label"><?php echo esc_html__( 'Child Price', 'tourfic' ); ?></label>
                                             <div class="tf-fieldset">
-                                                <input type="number" min="0" name="tf_option_child_price" placeholder="<?php echo esc_html__( 'Child Price', 'tourfic' ); ?>">
+                                                <input type="number" min="0" name="tf_option_child_price" placeholder="<?php echo esc_attr__( 'Child Price', 'tourfic' ); ?>">
                                             </div>
                                         </div>
                                     </div>
 									<?php
 								}
+                                echo '</div>';
 							}
 						} ?>
 

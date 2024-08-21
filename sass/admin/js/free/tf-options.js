@@ -79,6 +79,8 @@
                 let slug = e.hash.replace('#tab=', '');
                 return tabId === slug || parentTabId === slug;
             }).parent().addClass("current").siblings().removeClass("current")
+
+            roomOptionsArr();
         });
 
         /*
@@ -590,6 +592,29 @@
         })
 
         /*
+        * Room options count
+        */
+        function roomOptionsArr(){
+            var optionsArr = [];
+            $('.tf-repeater-wrap-room-options .tf-single-repeater-room-options').each(function(index){
+                let optionType = $('[name="tf_room_opt[room-options]['+index+'][option_pricing_type]"]').val();
+                let optionTitle = $('[name="tf_room_opt[room-options]['+index+'][option_title]"]').val();
+
+                // Add the option title, option type, and index to the options array
+                optionsArr[index] = {
+                    index: index,
+                    title: optionTitle,
+                    type: optionType
+                };
+            })
+            return optionsArr;
+        }
+
+        $(window).on('load', function () {
+            roomOptionsArr();
+        });
+
+        /*
         * Room Availability Calendar
         * @since 2.10.2
         * @auther: Foysal
@@ -625,6 +650,7 @@
                     }
                 },
                 events: function ({start, end, startStr, endStr, timeZone}, successCallback, failureCallback) {
+                    console.log(roomOptionsArr())
                     $.ajax({
                         url: tf_options.ajax_url,
                         dataType: "json",
@@ -635,15 +661,19 @@
                             new_post: $(self.container).find('[name="new_post"]').val(),
                             room_id: $(self.container).find('[name="room_id"]').val(),
                             avail_date: $(self.container).find('.avail_date').val(),
+                            option_arr: roomOptionsArr(),
                         },
                         beforeSend: function () {
                             $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
                             $(self.calendar).addClass('tf-content-loading');
                         },
                         success: function (doc) {
+                            console.log('doc', doc)
                             if (typeof doc == "object") {
-                                successCallback(doc);
+                                successCallback(doc?.avail_data);
                             }
+
+                            $('.tf-single-options').html(doc?.options_html);
 
                             $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
                             $(self.calendar).removeClass('tf-content-loading');
