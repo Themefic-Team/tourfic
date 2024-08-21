@@ -135,28 +135,32 @@ use \Tourfic\App\TF_Review;
                     <div class="tf-extra-added-info">
                         <div class="tf-extra-added-box tf-flex tf-flex-gap-16 tf-flex-direction-column">
                             <h3>Extras added</h3>
-                            <div class="tf-single-added-extra tf-flex tf-flex-align-center tf-flex-space-bttn">
-                                <h4>Need additional driver</h4>
-                                <div class="qty-price tf-flex">
-                                    <i class="ri-close-line"></i> 
-                                    <span class="qty">1</span> 
-                                    <span class="price">$50</span>
-                                    <span class="delete">
-                                        <i class="ri-delete-bin-line"></i>
-                                    </span>
+
+                            <div class="tf-added-extra tf-flex tf-flex-gap-16 tf-flex-direction-column">
+                                <div class="tf-single-added-extra tf-flex tf-flex-align-center tf-flex-space-bttn">
+                                    <h4>Need additional driver</h4>
+                                    <div class="qty-price tf-flex">
+                                        <i class="ri-close-line"></i> 
+                                        <span class="qty">1</span> 
+                                        <span class="price">$50</span>
+                                        <span class="delete">
+                                            <i class="ri-delete-bin-line"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="tf-single-added-extra tf-flex tf-flex-align-center tf-flex-space-bttn">
+                                    <h4>Need additional driver</h4>
+                                    <div class="qty-price tf-flex">
+                                        <i class="ri-close-line"></i> 
+                                        <span class="qty">1</span> 
+                                        <span class="price">$50</span>
+                                        <span class="delete">
+                                            <i class="ri-delete-bin-line"></i>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="tf-single-added-extra tf-flex tf-flex-align-center tf-flex-space-bttn">
-                                <h4>Need additional driver lorem ipsum doller set amet</h4>
-                                <div class="qty-price tf-flex">
-                                    <i class="ri-close-line"></i> 
-                                    <span class="qty">1</span> 
-                                    <span class="price">$50</span>
-                                    <span class="delete">
-                                        <i class="ri-delete-bin-line"></i>
-                                    </span>
-                                </div>
-                            </div>
+                            
 
                         </div>
                     </div>
@@ -470,9 +474,9 @@ use \Tourfic\App\TF_Review;
                             <?php esc_html_e( "Add extras", "tourfic" ) ?>
                         </h3>
 
-                        <div class="tf-car-extra-infos tf-flex tf-flex-direction-column tf-flex-gap-16">
+                        <form class="tf-car-extra-infos tf-flex tf-flex-direction-column tf-flex-gap-16">
 
-                        <?php foreach($car_extras as $extra){ ?>
+                        <?php foreach($car_extras as $key => $extra){ ?>
                             <div class="tf-car-single-extra tf-flex tf-flex-space-bttn tf-flex-align-center">
 
                                 <div class="tf-extra-title">
@@ -481,13 +485,14 @@ use \Tourfic\App\TF_Review;
                                     <i class="ri-information-line"></i>
                                     </h4>
                                     <?php } ?>
+                                    <input type="hidden" value="<?php echo esc_attr($key); ?>" name="extra_key[]">
                                     <div class="acr-select">
                                         <div class="acr-dec">
                                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M4.16663 10H15.8333" stroke="#0866C4" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>
                                         </div>
-                                        <input type="number" name="adults" id="adults" value="0">
+                                        <input type="number" name="qty[]" id="adults" value="0">
                                         <div class="acr-inc">
                                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M4.16663 9.99996H15.8333M9.99996 4.16663V15.8333" stroke="#0866C4" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
@@ -505,10 +510,10 @@ use \Tourfic\App\TF_Review;
                         <?php } ?>
 
                             <div class="tf-extra-apply-btn">
-                                <button>Apply</button>
+                                <button type="submit">Apply</button>
                             </div>
 
-                        </div>
+                        </form>
                     </div>
                     <?php } ?>
 

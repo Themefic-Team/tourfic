@@ -16037,7 +16037,7 @@ html {
 .tf-single-car-section .tf-single-car-details-warper {
   padding: 32px 0;
   display: flex;
-  gap: 40px;
+  gap: 32px;
 }
 @media only screen and (min-width: 767.99px) and (max-width: 991px) {
   .tf-single-car-section .tf-single-car-details-warper {
@@ -16053,7 +16053,7 @@ html {
   }
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column {
-  width: calc(100% - 480px);
+  width: calc(100% - 472px);
   display: flex;
   gap: 32px;
   flex-wrap: wrap;
@@ -16757,6 +16757,7 @@ html {
   color: #566676;
   font-size: 16px;
   width: 18px !important;
+  cursor: not-allowed;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-price h4 {
   color: #27333F;

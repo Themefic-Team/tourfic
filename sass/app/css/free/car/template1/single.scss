@@ -2,7 +2,7 @@
     .tf-single-car-details-warper{
         padding: 32px 0;
         display: flex;
-        gap: 40px;
+        gap: 32px;
         @media #{$tfmax991}{
             padding-left: 15px;
             padding-right: 15px;
@@ -13,7 +13,7 @@
             padding-right: 15px;
         }
         .tf-car-details-column{
-            width: calc(100% - 480px);
+            width: calc(100% - 472px);
             display: flex;
             gap: 32px;
             flex-wrap: wrap;
@@ -768,6 +768,7 @@
                                     color: #566676;
                                     font-size: 16px;
                                     width: 18px !important;
+                                    cursor: not-allowed;
                                 }
                             }
                         }

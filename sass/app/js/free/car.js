@@ -185,6 +185,15 @@
             tourfic_car_autocomplete(car_dropoff_input, car_locations);
         }
 
+        /*
+        * Add Extra
+        * @author Jahid
+        */
+        $(document).on('submit', '.tf-car-extra-infos', function (e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+
+        });
     });
 
 })(jQuery, window);
