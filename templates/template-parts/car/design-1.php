@@ -173,7 +173,7 @@ use \Tourfic\App\TF_Review;
                                         </svg>
                                     </div>
                                     <div class="info-select">
-                                        <h5>Pick-up</h5>
+                                        <h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
                                         <input type="text" placeholder="Pick Up Location" id="tf_pickup_location">
                                         <input type="hidden" id="tf_pickup_location_id">
                                     </div>
@@ -188,7 +188,7 @@ use \Tourfic\App\TF_Review;
                                         </svg>
                                     </div>
                                     <div class="info-select">
-                                        <h5>Drop-off</h5>
+                                        <h5><?php esc_html_e("Drop-off", "tourfic"); ?></h5>
                                         <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location">
                                         <input type="hidden" id="tf_dropoff_location_id">
                                     </div>
@@ -205,8 +205,8 @@ use \Tourfic\App\TF_Review;
                                         </svg>
                                     </div>
                                     <div class="info-select">
-                                        <h5>Pick-up date</h5>
-                                        <input type="text" placeholder="Pick Up Date">
+                                        <h5><?php esc_html_e("Pick-up date", "tourfic"); ?></h5>
+                                        <input type="text" placeholder="Pick Up Date" class="tf_pickup_date">
                                     </div>
                                 </div>
                             </div>
@@ -219,7 +219,7 @@ use \Tourfic\App\TF_Review;
                                         </svg>
                                     </div>
                                     <div class="info-select">
-                                        <h5>Time</h5>
+                                        <h5><?php esc_html_e("Time", "tourfic"); ?></h5>
                                         <select name="" id="">
                                             <option value="">Select Time</option>
                                         </select>
@@ -237,8 +237,8 @@ use \Tourfic\App\TF_Review;
                                         </svg>
                                     </div>
                                     <div class="info-select">
-                                        <h5>Drop-off date</h5>
-                                        <input type="text" placeholder="Drop Off Date">
+                                        <h5><?php esc_html_e("Drop-off date", "tourfic"); ?></h5>
+                                        <input type="text" placeholder="Drop Off Date" class="tf_dropoff_date">
                                     </div>
                                 </div>
                             </div>
@@ -251,7 +251,7 @@ use \Tourfic\App\TF_Review;
                                         </svg>
                                     </div>
                                     <div class="info-select">
-                                        <h5>Time</h5>
+                                        <h5><?php esc_html_e("Time", "tourfic"); ?></h5>
                                         <select name="" id="">
                                             <option value="">Select Time</option>
                                         </select>
@@ -270,6 +270,53 @@ use \Tourfic\App\TF_Review;
                         <div class="tf-instraction-btn tf-mt-16">
                             <a href="#">Pick-up and Drop-off instructions</a>
                         </div>
+
+                        <script>
+                        (function ($) {
+                        $(document).ready(function () {
+
+                            // flatpickr locale first day of Week
+                            <?php tf_flatpickr_locale("root"); ?>
+
+                            // Initialize the pickup date picker
+                            var pickupFlatpickr = $(".tf_pickup_date").flatpickr({
+                                enableTime: false,
+                                dateFormat: "Y/m/d",
+                                minDate: "today",
+
+                                // flatpickr locale
+                                <?php tf_flatpickr_locale(); ?>
+
+                                onReady: function (selectedDates, dateStr, instance) {
+                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                },
+                                onChange: function (selectedDates, dateStr, instance) {
+                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                    // Update minDate for the dropoff date picker
+                                    dropoffFlatpickr.set("minDate", dateStr);
+                                }
+                            });
+
+                            // Initialize the dropoff date picker
+                            var dropoffFlatpickr = $(".tf_dropoff_date").flatpickr({
+                                enableTime: false,
+                                dateFormat: "Y/m/d",
+                                minDate: "today",
+
+                                // flatpickr locale
+                                <?php tf_flatpickr_locale(); ?>
+
+                                onReady: function (selectedDates, dateStr, instance) {
+                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                },
+                                onChange: function (selectedDates, dateStr, instance) {
+                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                }
+                            });
+                        });
+                    })(jQuery);
+
+                    </script>
                         
                     </div>
 
