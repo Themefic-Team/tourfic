@@ -16431,6 +16431,7 @@ html {
   background: #EEF2F6;
   padding: 16px 24px 24px 24px;
   margin-bottom: 32px;
+  display: none;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-extra-added-info .tf-extra-added-box h3 {
   color: #27333F;
@@ -16438,6 +16439,7 @@ html {
   font-style: normal !important;
   font-weight: 400 !important;
   line-height: 150%; /* 31.5px */
+  margin: 0;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-extra-added-info .tf-extra-added-box .tf-single-added-extra {
   border-radius: 8px;
@@ -16471,6 +16473,7 @@ html {
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-extra-added-info .tf-extra-added-box .tf-single-added-extra .qty-price span.delete {
   margin-left: 40px;
+  cursor: pointer;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-car-booking-popup {
   position: fixed;

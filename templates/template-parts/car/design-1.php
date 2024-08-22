@@ -135,33 +135,9 @@ use \Tourfic\App\TF_Review;
                     <div class="tf-extra-added-info">
                         <div class="tf-extra-added-box tf-flex tf-flex-gap-16 tf-flex-direction-column">
                             <h3>Extras added</h3>
-
                             <div class="tf-added-extra tf-flex tf-flex-gap-16 tf-flex-direction-column">
-                                <div class="tf-single-added-extra tf-flex tf-flex-align-center tf-flex-space-bttn">
-                                    <h4>Need additional driver</h4>
-                                    <div class="qty-price tf-flex">
-                                        <i class="ri-close-line"></i> 
-                                        <span class="qty">1</span> 
-                                        <span class="price">$50</span>
-                                        <span class="delete">
-                                            <i class="ri-delete-bin-line"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="tf-single-added-extra tf-flex tf-flex-align-center tf-flex-space-bttn">
-                                    <h4>Need additional driver</h4>
-                                    <div class="qty-price tf-flex">
-                                        <i class="ri-close-line"></i> 
-                                        <span class="qty">1</span> 
-                                        <span class="price">$50</span>
-                                        <span class="delete">
-                                            <i class="ri-delete-bin-line"></i>
-                                        </span>
-                                    </div>
-                                </div>
+                                
                             </div>
-                            
-
                         </div>
                     </div>
 
@@ -508,9 +484,10 @@ use \Tourfic\App\TF_Review;
 
                             </div>
                         <?php } ?>
+                        <input type="hidden" value="<?php echo esc_attr($post_id); ?>" name="post_id">
 
                             <div class="tf-extra-apply-btn">
-                                <button type="submit">Apply</button>
+                                <button type="submit" class="tf-extra-submit"><?php esc_html_e("Apply", "tourfic"); ?></button>
                             </div>
 
                         </form>

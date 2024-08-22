@@ -191,9 +191,43 @@
         */
         $(document).on('submit', '.tf-car-extra-infos', function (e) {
             e.preventDefault();
+            let form = $(this);
             const formData = new FormData(e.target);
+            submitBtn = form.find('.tf-extra-submit'),
+            formData.append('action', 'tf_extra_add_to_booking');
+            formData.append('_nonce', tf_params.nonce);
+
+        
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                beforeSend: function () {
+                    form.css({'opacity': '0.5', 'pointer-events': 'none'});
+                    submitBtn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    form.css({'opacity': '1', 'pointer-events': 'all'});
+                    submitBtn.removeClass('tf-btn-loading');
+                    $('.tf-added-extra').html(response);
+                    $('.tf-extra-added-info').show();
+                }
+            });
 
         });
+
+        $(document).on('click', '.tf-single-added-extra .delete', function (e) {
+            e.preventDefault();
+            let $this = $(this);
+            $this.closest('.tf-single-added-extra').remove();
+            var count = $('.tf-added-extra .tf-single-added-extra').length;
+            if(count==0){
+                $('.tf-extra-added-info').hide();
+            }
+        });
+
     });
 
 })(jQuery, window);

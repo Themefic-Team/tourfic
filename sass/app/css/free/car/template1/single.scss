@@ -402,6 +402,7 @@
                 background: #EEF2F6;
                 padding: 16px 24px 24px 24px;
                 margin-bottom: 32px;
+                display: none;
                 .tf-extra-added-box{
                     h3{
                         color: #27333F;
@@ -409,6 +410,7 @@
                         font-style: normal !important;
                         font-weight: 400 !important;
                         line-height: 150%; /* 31.5px */
+                        margin: 0;
                     }
                     .tf-single-added-extra{
                         border-radius: 8px;
@@ -440,6 +442,7 @@
                             }
                             span.delete{
                                 margin-left: 40px;
+                                cursor: pointer;
                             }
                         }
                     }

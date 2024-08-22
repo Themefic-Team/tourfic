@@ -58,6 +58,15 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-tour.php' ) ) {
 	tf_file_missing( TF_INC_PATH . 'functions/functions-tour.php' );
 }
 
+/**
+ * Car Functions
+ */
+if ( file_exists( TF_INC_PATH . 'functions/functions-car.php' ) ) {
+	require_once TF_INC_PATH . 'functions/functions-car.php';
+} else {
+	tf_file_missing( TF_INC_PATH . 'functions/functions-car.php' );
+}
+
 add_action( 'plugins_loaded', 'tf_add_elelmentor_addon' );
 
 
