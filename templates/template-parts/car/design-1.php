@@ -362,7 +362,7 @@ use \Tourfic\App\TF_Review;
                                         <li>Booking</li>
                                     </ul>
                                 </div>
-
+                                <?php if(!empty($car_protection_section_status)){ ?>
                                 <div class="tf-protection-content tf-flex tf-flex-gap-24 tf-flex-direction-column">
                                     <?php if(!empty($car_protection_content)){ 
                                     echo wp_kses_post($car_protection_content);
@@ -427,14 +427,46 @@ use \Tourfic\App\TF_Review;
                                         </table>
                                     </div>
                                 </div>
+                                <?php } ?>
 
+                                <div class="tf-booking-form-fields">
+                                    <div class="tf-form-fields tf-flex tf-flex-gap-24 tf-flex-w">
+                                        <div class="tf-single-field">
+                                            <label for="">Name</label>
+                                            <input type="text" placeholder="Name">
+                                        </div>
+                                        <div class="tf-single-field">
+                                            <label for="">Name</label>
+                                            <input type="text" placeholder="Name">
+                                        </div>
+                                        <div class="tf-single-field">
+                                            <label for="">Name</label>
+                                            <input type="text" placeholder="Name">
+                                        </div>
+                                        <div class="tf-single-field">
+                                            <label for="">Name</label>
+                                            <input type="text" placeholder="Name">
+                                        </div>
+                                        <div class="tf-single-field">
+                                            <label for="">Name</label>
+                                            <input type="text" placeholder="Name">
+                                        </div>
+                                    </div>
+
+                                    <div class="tf-booking-submission">
+                                        <button>
+                                            <?php esc_html_e("Continue to Pay", "tourfic"); ?>
+                                            <i class="ri-arrow-right-s-line"></i>
+                                        </button>
+                                    </div>
+                                </div>
                                 <div class="tf-booking-bar tf-flex tf-flex-gap-24">
                                     <button class="without-charge">
-                                        Book without protection
+                                        <?php esc_html_e("Book without protection", "tourfic"); ?>
                                         <i class="ri-arrow-right-s-line"></i>
                                     </button>
                                     <button class="with-charge">
-                                        Book with protection
+                                        <?php esc_html_e("Book with protection", "tourfic"); ?>
                                         <i class="ri-arrow-right-s-line"></i>
                                     </button>
                                 </div>
