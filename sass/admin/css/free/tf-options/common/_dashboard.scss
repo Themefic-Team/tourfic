@@ -559,6 +559,10 @@
     }
 }
 
+.tf-swal-settings-reset-alert #swal2-title {
+    line-height: 1.2;
+}
+
 .tf-setting-wrapper {
     max-width: 100%;
     margin: 30px 20px 30px 0px;
@@ -576,7 +580,7 @@
         border-radius: 10px 10px 0px 0px;
         position: sticky;
         top: 32px;
-        z-index: 9999;
+        z-index: 999;
         overflow: hidden;
 
         .settings-header-left {

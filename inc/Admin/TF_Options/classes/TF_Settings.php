@@ -973,12 +973,20 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			if( isset( $_POST['tf_option_nonce'] ) || wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_option_nonce'])), 'tf_option_nonce_action' ) ) {
 
-				!empty( get_option( 'tf_settings' ) ) ? update_option( 'tf_settings', '' ) : '';
+				!empty( get_option( 'tf_settings' ) ) ?  : '';
 
-				$response = [
-					'status'  => 'success',
-					'message' => __( 'Options Reset successfully!', 'tourfic' ),
-				];
+				if( !empty( get_option( 'tf_settings' ) ) ) {
+					update_option( 'tf_settings', '' );
+					$response = [
+						'status'  => 'success',
+						'message' => __( 'Options Reset successfully!', 'tourfic' ),
+					];
+				} else {
+					$response    = [
+						'status'  => 'error',
+						'message' => __( 'Settings are fresh, nothing to reset.', 'tourfic' ),
+					];
+				}
 
 			}
 
