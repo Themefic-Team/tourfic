@@ -461,6 +461,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                display: none;
                 .tf-booking-popup-warp{
                     border-radius: 16px;
                     background: #FFF;
@@ -476,7 +477,7 @@
                             margin: 0;
                         }
                         .tf-close-popup{
-                            
+                            cursor: pointer;
                         }
                     }
 
@@ -524,6 +525,8 @@
                         }
 
                         .tf-protection-content{
+                            max-height: 260px;
+                            overflow: auto;
                             p{
                                 color: #27333F;
                                 font-size: 16px;
@@ -743,6 +746,11 @@
                     
                 }
                 .tf-form-submit-btn{
+                    .error-notice{
+                        text-align: center;
+                        color: red;
+                        margin-bottom: 10px;
+                    }
                     button{
                         padding: 16px 32px;
                         border-radius: 8px;

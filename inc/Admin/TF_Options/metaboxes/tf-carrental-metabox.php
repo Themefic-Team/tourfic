@@ -475,6 +475,14 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'subtitle' => esc_html__( 'Do you want to show Booking Protection in the frontend?', 'tourfic' )
 				),
 				array(
+					'id'    => 'protection_content',
+					'type'  => 'editor',
+					'label' => __( 'Protection Content', 'tourfic' ),
+					'dependency'  => [
+						array( 'protection_section', '==', 'true' )
+					],
+				),
+				array(
 					'id'           => 'protections',
 					'type'         => 'repeater',
 					'label'        => __( 'Items Protection', 'tourfic' ),

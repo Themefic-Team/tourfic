@@ -228,6 +228,32 @@
             }
         });
 
+        $(document).on('click', '.tf-booking-popup-header .tf-close-popup', function (e) {
+            e.preventDefault();
+            $('.tf-car-booking-popup').hide();
+        });
+
+        /*
+        * Car Booking Popup
+        * @author Jahid
+        */
+        $(document).on('click', '.tf-car-booking', function (e) {
+            e.preventDefault();
+            var pickup = $('#tf_pickup_location').val();
+            let dropoff = $('#tf_dropoff_location').val();
+            let pickup_date = $('.tf_pickup_date').val();
+            let dropoff_date = $('.tf_dropoff_date').val();
+            let pickup_time = $('.tf_pickup_time').val();
+            let dropoff_time = $('.tf_dropoff_time').val();
+
+            if( !pickup || !dropoff || !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
+                $('.error-notice').text('Fill up the all fields');
+            }else{
+                $('.error-notice').hide();
+                $('.tf-car-booking-popup').css('display', 'flex');
+            }
+        });
+
     });
 
 })(jQuery, window);

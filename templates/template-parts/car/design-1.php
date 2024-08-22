@@ -236,8 +236,9 @@ use \Tourfic\App\TF_Review;
                             </div>
                         </div>
                         <div class="tf-form-submit-btn">
-                            <button class="tf-flex tf-flex-align-center tf-flex-justify-center">
-                                Continue
+                            <div class="error-notice"></div>
+                            <button class="tf-flex tf-flex-align-center tf-flex-justify-center tf-car-booking">
+                                <?php esc_html_e("Continue", "tourfic"); ?>
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
@@ -363,18 +364,20 @@ use \Tourfic\App\TF_Review;
                                 </div>
 
                                 <div class="tf-protection-content tf-flex tf-flex-gap-24 tf-flex-direction-column">
-                                    <p>At the counter, the car hire company will block a deposit amount on your credit card. You could lose your whole deposit if the car is damaged or stolen, but as long as you have our Full Protection, Rentalcover.com will refund you! (The protection price you see includes all applicable taxes and fees).
-                                    </p>
+                                    <?php if(!empty($car_protection_content)){ 
+                                    echo wp_kses_post($car_protection_content);
+                                    } ?>
 
                                     <div class="tf-protection-featured">
                                         <table>
                                             <tr>
-                                                <td>What is covered</td>
+                                                <td width="50%">What is covered</td>
                                                 <td align="center">No protection</td>
                                                 <td align="center">With protection</td>
                                             </tr>
 
                                             <?php 
+                                            $total_protection_amount = 0;
                                             if(!empty($car_protections)){
                                                 foreach($car_protections as $protection){ ?>
                                                 <tr>
@@ -399,7 +402,11 @@ use \Tourfic\App\TF_Review;
                                                         <?php } ?>
                                                     </td>
                                                     <td align="center">
-                                                        <?php if(!empty($protection['include'])){ ?>
+                                                        <?php if(!empty($protection['include'])){ 
+                                                        if(!empty($protection['price'])){
+                                                            $total_protection_amount += $protection['price'];
+                                                        }   
+                                                        ?>
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M18.3334 9.2333V9.99997C18.3324 11.797 17.7505 13.5455 16.6745 14.9848C15.5986 16.4241 14.0862 17.477 12.3629 17.9866C10.6396 18.4961 8.7978 18.4349 7.11214 17.8121C5.42648 17.1894 3.98729 16.0384 3.00922 14.5309C2.03114 13.0233 1.56657 11.24 1.68481 9.4469C1.80305 7.65377 2.49775 5.94691 3.66531 4.58086C4.83288 3.21482 6.41074 2.26279 8.16357 1.86676C9.91641 1.47073 11.7503 1.65192 13.3918 2.3833M7.50009 9.16664L10.0001 11.6666L18.3334 3.3333" stroke="#27BE69" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                                                         </svg>
@@ -411,9 +418,9 @@ use \Tourfic\App\TF_Review;
 
                                             <tfoot>
                                                 <tr>
-                                                    <th>Charge:</th>
-                                                    <th>$000</th>
-                                                    <th>$700</th>
+                                                    <th width="50%" align="right"><?php esc_html_e("Charge", "tourfic"); ?>:</th>
+                                                    <th align="center"><?php echo wc_price(0.00); ?></th>
+                                                    <th align="center"><?php echo wc_price($total_protection_amount); ?></th>
                                                 </tr>
                                             </tfoot>
 
