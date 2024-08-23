@@ -473,7 +473,7 @@
             if($(".filter-reset-btn").length>0){
                 $(".filter-reset-btn").show();
             }
-            taxFilter();
+            makeFilter();
         })
 
         // Archive Page Filter
