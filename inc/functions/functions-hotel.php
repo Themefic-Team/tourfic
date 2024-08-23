@@ -2640,7 +2640,33 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 		// Check if any room available without custom date range
 		if ( in_array( 0, $avil_by_date ) || empty( $avil_by_date ) ) {
 
-			$has_hotel = true; // Show that hotel
+			if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+				foreach ( $rooms as $_room ) {
+					$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
+					
+					if('2'==$room['pricing-by']){
+						if ( ! empty( $room['adult_price'] ) ) {
+							if ( $startprice <= $room['adult_price'] && $room['adult_price'] <= $endprice ) {
+								$has_hotel = true;
+							}
+						}
+						if ( ! empty( $room['child_price'] ) ) {
+							if ( $startprice <= $room['child_price'] && $room['child_price'] <= $endprice ) {
+								$has_hotel = true;
+							}
+						}
+					}
+					if('1'==$room['pricing-by']){
+						if ( ! empty( $room['price'] ) ) {
+							if ( $startprice <= $room['price'] && $room['price'] <= $endprice ) {
+								$has_hotel = true;
+							}
+						}
+					}
+				}
+			}else{
+				$has_hotel = true; // Show that hotel
+			}
 
 		} else {
 			// If all the room has custom date range then filter the rooms by date
@@ -2729,7 +2755,33 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 		// Check if any room available without custom date range
 		if ( in_array( 0, $avil_by_date ) || empty( $avil_by_date ) ) {
 
-			$has_hotel = true; // Show that hotel
+			if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+				foreach ( $rooms as $_room ) {
+					$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
+					
+					if('2'==$room['pricing-by']){
+						if ( ! empty( $room['adult_price'] ) ) {
+							if ( $startprice <= $room['adult_price'] && $room['adult_price'] <= $endprice ) {
+								$has_hotel = true;
+							}
+						}
+						if ( ! empty( $room['child_price'] ) ) {
+							if ( $startprice <= $room['child_price'] && $room['child_price'] <= $endprice ) {
+								$has_hotel = true;
+							}
+						}
+					}
+					if('1'==$room['pricing-by']){
+						if ( ! empty( $room['price'] ) ) {
+							if ( $startprice <= $room['price'] && $room['price'] <= $endprice ) {
+								$has_hotel = true;
+							}
+						}
+					}
+				}
+			}else{
+				$has_hotel = true; // Show that hotel
+			}
 
 		} else {
 			// If all the room has custom date range then filter the rooms by date
