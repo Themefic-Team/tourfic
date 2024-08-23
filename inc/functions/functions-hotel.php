@@ -5,15 +5,6 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Room\Room;
 
-
-#################################
-# Air port Service          #
-#################################
-
-
-
-
-
 #################################
 # Ajax functions                #
 #################################
@@ -2550,7 +2541,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
  * Filter hotels on search result page by checkin checkout dates set by backend
  *
  *
- * @param DatePeriod $period collection of dates by user input;
+ * @param \DatePeriod $period collection of dates by user input;
  * @param array $not_found collection of hotels exists
  * @param array $data user input for sidebar form
  *
@@ -2566,26 +2557,27 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 		[ $adults, $child, $room, $check_in_out ] = $data;
 	}
 
-	// Get hotel meta options
-	$meta = get_post_meta( get_the_ID(), 'tf_hotels_opt', true );
-
 	// Get hotel Room meta options
-	$filters_rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-	if ( ! empty( $filters_rooms ) && gettype( $filters_rooms ) == "string" ) {
-		$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-		}, $filters_rooms );
-		$filters_rooms        = unserialize( $tf_hotel_rooms_value );
+	$rooms = Room::get_hotel_rooms( get_the_ID() );
+
+	//all rooms meta
+	$rooms_meta = [];
+	if ( ! empty( $rooms ) ) {
+		foreach ( $rooms as $single_room ) {
+			$rooms_meta[ $single_room->ID ] = get_post_meta( $single_room->ID, 'tf_room_opt', true );
+		}
 	}
 
 	// Remove disabled rooms
-	if ( ! empty( $meta['room'] ) ):
-		$meta = array_filter( $meta['room'], function ( $value ) {
-			return ! empty( $value ) && ! empty( $value['enable'] ) ? $value['enable'] : '' != '0';
+
+	if ( ! empty( $rooms_meta ) ):
+		$rooms_meta = array_filter( $rooms_meta, function ( $value ) {
+			return ! empty( $value ) && empty( $value['enable'] ) ? $value['enable'] : '' != '0';
 		} );
 	endif;
+
 	// If no room return
-	if ( empty( $meta ) ) {
+	if ( empty( $rooms_meta ) ) {
 		return;
 	}
 
@@ -2595,8 +2587,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 	/**
 	 * Adult Number Validation
 	 */
-
-	$back_adults   = array_column( $meta, 'adult' );
+	$back_adults   = array_column( $rooms_meta, 'adult' );
 	$adult_counter = 0;
 	foreach ( $back_adults as $back_adult ) {
 		if ( ! empty( $back_adult ) && $back_adult >= $adults ) {
@@ -2609,7 +2600,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 	/**
 	 * Child Number Validation
 	 */
-	$back_childs   = array_column( $meta, 'child' );
+	$back_childs   = array_column( $rooms_meta, 'child' );
 	$child_counter = 0;
 	foreach ( $back_childs as $back_child ) {
 		if ( ! empty( $back_child ) && $back_child >= $child ) {
@@ -2622,7 +2613,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 	/**
 	 * Room Number Validation
 	 */
-	$back_rooms   = array_column( $meta, 'num-room' );
+	$back_rooms   = array_column( $rooms_meta, 'num-room' );
 	$room_counter = 0;
 	foreach ( $back_rooms as $back_room ) {
 		if ( ! empty( $back_room ) && $back_room >= $room ) {
@@ -2636,18 +2627,44 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 	if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && ! empty( $room_result ) && $room_counter > 0 ) {
 
 		// Check custom date range status of room
-		$avil_by_date = array_column( $meta, 'avil_by_date' );
+		$avil_by_date = array_column( $rooms_meta, 'avil_by_date' );
 
 		// Check if any room available without custom date range
-		if ( in_array( 0, $avil_by_date ) || empty( $avil_by_date ) ) {
+		if ( in_array( 0, $avil_by_date ) || empty( $avil_by_date ) || empty( $avil_by_date[0] ) ) {
 
-			$has_hotel = true; // Show that hotel
+			if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+				foreach ( $rooms as $_room ) {
+					$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
+					
+					if('2'==$room['pricing-by']){
+						if ( ! empty( $room['adult_price'] ) ) {
+							if ( $startprice <= $room['adult_price'] && $room['adult_price'] <= $endprice ) {
+								$has_hotel = true;
+							}
+						}
+						if ( ! empty( $room['child_price'] ) ) {
+							if ( $startprice <= $room['child_price'] && $room['child_price'] <= $endprice ) {
+								$has_hotel = true;
+							}
+						}
+					}
+					if('1'==$room['pricing-by']){
+						if ( ! empty( $room['price'] ) ) {
+							if ( $startprice <= $room['price'] && $room['price'] <= $endprice ) {
+								$has_hotel = true;
+							}
+						}
+					}
+				}
+			}else{
+				$has_hotel = true; // Show that hotel
+			}
 
 		} else {
 			// If all the room has custom date range then filter the rooms by date
 
 			// Get custom date range repeater
-			$dates = array_column( $meta, 'avail_date' );
+			$dates = array_column( $rooms_meta, 'avail_date' );
 			// If no date range return
 			if ( empty( $dates ) ) {
 				return;
@@ -2658,44 +2675,45 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 			// Check if any date range match with search form date range and set them on array
 			if ( ! empty( $period ) ) {
 				foreach ( $period as $datekey => $date ) {
-					if(0==$datekey){
+					if ( 0 == $datekey ) {
 						$tf_check_in_date = $date->format( 'Y/m/d' );
 					}
-					$searching_period[$date->format( 'Y/m/d' )] = $date->format( 'Y/m/d' );
+					$searching_period[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
 				}
 			}
 
 			// Initial available dates array
-			$availability_dates = [];
+			$availability_dates     = [];
 			$tf_check_in_date_price = [];
 			// Run loop through custom date range repeater and filter out only the dates
 			foreach ( $dates as $date ) {
 				if ( ! empty( $date ) && gettype( $date ) == "string" ) {
-					$date                 = json_decode( $date, true );
-					foreach($date as $sdate){
-						if($tf_check_in_date==$sdate['check_in']){
-							$tf_check_in_date_price['price'] = $sdate['price'];
+					$date = json_decode( $date, true );
+					foreach ( $date as $sdate ) {
+						if ( $tf_check_in_date == $sdate['check_in'] ) {
+							$tf_check_in_date_price['price']       = $sdate['price'];
 							$tf_check_in_date_price['adult_price'] = $sdate['adult_price'];
 							$tf_check_in_date_price['child_price'] = $sdate['child_price'];
 						}
-						$availability_dates[$sdate['check_in']] = $sdate['check_in'];
+						$availability_dates[ $sdate['check_in'] ] = $sdate['check_in'];
 					}
 				}
 			}
 
-			$tf_common_dates = array_intersect($availability_dates, $searching_period);
+			$tf_common_dates = array_intersect( $availability_dates, $searching_period );
 
 			//Initial matching date array
 			$show_hotel = [];
 
-			if (count($tf_common_dates) === count($searching_period)) {
+			if ( count( $tf_common_dates ) === count( $searching_period ) ) {
 				$show_hotel[] = 1;
 			}
 
 			// If any date range matches show hotel
-			if ( !empty($show_hotel) && ! in_array( 0, $show_hotel ) ) {
-				if ( ! empty( $filters_rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
-					foreach ( $filters_rooms as $room ) {
+			if ( ! empty( $show_hotel ) && ! in_array( 0, $show_hotel ) ) {
+				if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+					foreach ( $rooms as $_room ) {
+						$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
 						if ( ! empty( $tf_check_in_date_price['adult_price'] ) ) {
 							if ( $startprice <= $tf_check_in_date_price['adult_price'] && $tf_check_in_date_price['adult_price'] <= $endprice ) {
 								$has_hotel = true;
@@ -2724,18 +2742,44 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 	if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && $child_counter == 0 && ! empty( $room_result ) && $room_counter > 0 ) {
 
 		// Check custom date range status of room
-		$avil_by_date = array_column( $meta, 'avil_by_date' );
+		$avil_by_date = array_column( $rooms_meta, 'avil_by_date' );
 
 		// Check if any room available without custom date range
-		if ( in_array( 0, $avil_by_date ) || empty( $avil_by_date ) ) {
+		if ( in_array( 0, $avil_by_date ) || empty( $avil_by_date ) || empty( $avil_by_date[0] ) ) {
 
-			$has_hotel = true; // Show that hotel
+			if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+				foreach ( $rooms as $_room ) {
+					$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
+					
+					if('2'==$room['pricing-by']){
+						if ( ! empty( $room['adult_price'] ) ) {
+							if ( $startprice <= $room['adult_price'] && $room['adult_price'] <= $endprice ) {
+								$has_hotel = true;
+							}
+						}
+						if ( ! empty( $room['child_price'] ) ) {
+							if ( $startprice <= $room['child_price'] && $room['child_price'] <= $endprice ) {
+								$has_hotel = true;
+							}
+						}
+					}
+					if('1'==$room['pricing-by']){
+						if ( ! empty( $room['price'] ) ) {
+							if ( $startprice <= $room['price'] && $room['price'] <= $endprice ) {
+								$has_hotel = true;
+							}
+						}
+					}
+				}
+			}else{
+				$has_hotel = true; // Show that hotel
+			}
 
 		} else {
 			// If all the room has custom date range then filter the rooms by date
 
 			// Get custom date range repeater
-			$dates = array_column( $meta, 'avail_date' );
+			$dates = array_column( $rooms_meta, 'avail_date' );
 
 			// If no date range return
 			if ( empty( $dates ) ) {
@@ -2747,44 +2791,45 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 			// Check if any date range match with search form date range and set them on array
 			if ( ! empty( $period ) ) {
 				foreach ( $period as $datekey => $date ) {
-					if(0==$datekey){
+					if ( 0 == $datekey ) {
 						$tf_check_in_date = $date->format( 'Y/m/d' );
 					}
-					$searching_period[$date->format( 'Y/m/d' )] = $date->format( 'Y/m/d' );
+					$searching_period[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
 				}
 			}
 
 			// Initial available dates array
-			$availability_dates = [];
+			$availability_dates     = [];
 			$tf_check_in_date_price = [];
 			// Run loop through custom date range repeater and filter out only the dates
 			foreach ( $dates as $date ) {
 				if ( ! empty( $date ) && gettype( $date ) == "string" ) {
-					$date                 = json_decode( $date, true );
-					foreach($date as $sdate){
-						if($tf_check_in_date==$sdate['check_in']){
-							$tf_check_in_date_price['price'] = $sdate['price'];
+					$date = json_decode( $date, true );
+					foreach ( $date as $sdate ) {
+						if ( $tf_check_in_date == $sdate['check_in'] ) {
+							$tf_check_in_date_price['price']       = $sdate['price'];
 							$tf_check_in_date_price['adult_price'] = $sdate['adult_price'];
 							$tf_check_in_date_price['child_price'] = $sdate['child_price'];
 						}
-						$availability_dates[$sdate['check_in']] = $sdate['check_in'];
+						$availability_dates[ $sdate['check_in'] ] = $sdate['check_in'];
 					}
 				}
 			}
 
-			$tf_common_dates = array_intersect($availability_dates, $searching_period);
+			$tf_common_dates = array_intersect( $availability_dates, $searching_period );
 
 			//Initial matching date array
 			$show_hotel = [];
 
-			if (count($tf_common_dates) === count($searching_period)) {
+			if ( count( $tf_common_dates ) === count( $searching_period ) ) {
 				$show_hotel[] = 1;
 			}
 
 			// If any date range matches show hotel
 			if ( ! in_array( 0, $show_hotel ) ) {
-				if ( ! empty( $filters_rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
-					foreach ( $filters_rooms as $room ) {
+				if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+					foreach ( $rooms as $_room ) {
+						$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
 						if ( ! empty( $tf_check_in_date_price['adult_price'] ) ) {
 							if ( $startprice <= $tf_check_in_date_price['adult_price'] && $tf_check_in_date_price['adult_price'] <= $endprice ) {
 								$has_hotel = true;
@@ -2832,7 +2877,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
  * Filter hotels on search result page without checkin checkout dates
  *
  *
- * @param DatePeriod $period collection of dates by user input;
+ * @param \DatePeriod $period collection of dates by user input;
  * @param array $not_found collection of hotels exists
  * @param array $data user input for sidebar form
  *
@@ -2852,22 +2897,25 @@ function tf_filter_hotel_without_date( $period, array &$not_found, array $data =
 	$meta = get_post_meta( get_the_ID(), 'tf_hotels_opt', true );
 
 	// Get hotel Room meta options
-	$filters_rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-	if ( ! empty( $filters_rooms ) && gettype( $filters_rooms ) == "string" ) {
-		$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-		}, $filters_rooms );
-		$filters_rooms        = unserialize( $tf_hotel_rooms_value );
+	$rooms = Room::get_hotel_rooms( get_the_ID() );
+
+	//all rooms meta
+	$rooms_meta = [];
+	if ( ! empty( $rooms ) ) {
+		foreach ( $rooms as $room ) {
+			$rooms_meta[ $room->ID ] = get_post_meta( $room->ID, 'tf_room_opt', true );
+		}
 	}
 
 	// Remove disabled rooms
-	if ( ! empty( $meta['room'] ) ):
-		$meta = array_filter( $meta['room'], function ( $value ) {
-			return ! empty( $value ) && ! empty( $value['enable'] ) ? $value['enable'] : '' != '0';
+	if ( ! empty( $rooms_meta ) ):
+		$rooms_meta = array_filter( $rooms_meta, function ( $value ) {
+			return ! empty( $value ) && empty( $value['enable'] ) ? $value['enable'] : '' != '0';
 		} );
 	endif;
+
 	// If no room return
-	if ( empty( $meta ) ) {
+	if ( empty( $rooms_meta ) ) {
 		return;
 	}
 
@@ -2877,7 +2925,7 @@ function tf_filter_hotel_without_date( $period, array &$not_found, array $data =
 	/**
 	 * Adult Number Validation
 	 */
-	$back_adults   = array_column( $meta, 'adult' );
+	$back_adults   = array_column( $rooms_meta, 'adult' );
 	$adult_counter = 0;
 	foreach ( $back_adults as $back_adult ) {
 		if ( ! empty( $back_adult ) && $back_adult >= $adults ) {
@@ -2890,7 +2938,7 @@ function tf_filter_hotel_without_date( $period, array &$not_found, array $data =
 	/**
 	 * Child Number Validation
 	 */
-	$back_childs   = array_column( $meta, 'child' );
+	$back_childs   = array_column( $rooms_meta, 'child' );
 	$child_counter = 0;
 	foreach ( $back_childs as $back_child ) {
 		if ( ! empty( $back_child ) && $back_child >= $child ) {
@@ -2903,7 +2951,7 @@ function tf_filter_hotel_without_date( $period, array &$not_found, array $data =
 	/**
 	 * Room Number Validation
 	 */
-	$back_rooms   = array_column( $meta, 'num-room' );
+	$back_rooms   = array_column( $rooms_meta, 'num-room' );
 	$room_counter = 0;
 	foreach ( $back_rooms as $back_room ) {
 		if ( ! empty( $back_room ) && $back_room >= $room ) {
@@ -2916,8 +2964,9 @@ function tf_filter_hotel_without_date( $period, array &$not_found, array $data =
 	// If adult and child number validation is true proceed
 	if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && ! empty( $room_result ) && $room_counter > 0 ) {
 
-		if ( ! empty( $filters_rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
-			foreach ( $filters_rooms as $room ) {
+		if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+			foreach ( $rooms as $_room ) {
+				$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
 				if ( ! empty( $room['adult_price'] ) ) {
 					if ( $startprice <= $room['adult_price'] && $room['adult_price'] <= $endprice ) {
 						$has_hotel = true;
@@ -2940,8 +2989,9 @@ function tf_filter_hotel_without_date( $period, array &$not_found, array $data =
 
 	}
 	if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && ! empty( $room_result ) && $room_counter > 0 ) {
-		if ( ! empty( $filters_rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
-			foreach ( $filters_rooms as $room ) {
+		if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+			foreach ( $rooms as $_room ) {
+				$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
 				if ( ! empty( $room['adult_price'] ) ) {
 					if ( $startprice <= $room['adult_price'] && $room['adult_price'] <= $endprice ) {
 						$has_hotel = true;
@@ -3061,108 +3111,109 @@ function tf_hotel_quickview_callback() {
 		<?php
 		foreach ( $rooms as $_room ) :
 			$room = get_post_meta($_room->ID, 'tf_room_opt', true);
+			$room_preview_img = get_the_post_thumbnail_url( $_room->ID, 'full' );
 			$enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
 			if ( $enable == '1' && $room['unique_id'] . $_room->ID == $_POST['uniqid_id'] ) :
 				$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
 				$child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
 				?>
-                <div class="tf-hotel-details-qc-gallelry" style="width: 545px;">
-					<?php
-					if ( $tf_room_gallery ) {
-						$tf_room_gallery_ids = explode( ',', $tf_room_gallery );
-					}
-
-					?>
-
-                    <div class="tf-details-qc-slider tf-details-qc-slider-single">
-						<?php
-						if ( ! empty( $tf_room_gallery_ids ) ) {
-							foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
-								?>
-                                <div class="tf-details-qcs">
-									<?php
-									$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
-									echo '<img src="' . esc_url( $image_url ) . '" alt="">';
-									?>
-                                </div>
-							<?php }
-						} ?>
-                    </div>
-                    <div class="tf-details-qc-slider tf-details-qc-slider-nav">
-						<?php
-						if ( ! empty( $tf_room_gallery_ids ) ) {
-							foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
-								?>
-                                <div class="tf-details-qcs">
-									<?php
-									$image_url = wp_get_attachment_url( $gallery_item_id, 'thumbnail' );
-									echo '<img src="' . esc_url( $image_url ) . '" alt="">';
-									?>
-                                </div>
-							<?php }
-						} ?>
-                    </div>
-
-                    <script>
-                        jQuery('.tf-details-qc-slider-single').slick({
-                            slidesToShow: 1,
-                            slidesToScroll: 1,
-                            arrows: <?php echo $tf_hotel_selected_template == "design-1" ? "false" : "true" ?>,
-                            fade: false,
-                            adaptiveHeight: true,
-                            infinite: true,
-                            useTransform: true,
-                            speed: 400,
-                            cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
-                        });
-
-                        jQuery('.tf-details-qc-slider-nav')
-                            .on('init', function (event, slick) {
-                                jQuery('.tf-details-qc-slider-nav .slick-slide.slick-current').addClass('is-active');
-                            })
-                            .slick({
-                                slidesToShow: 7,
-                                slidesToScroll: 7,
-                                dots: false,
-                                focusOnSelect: false,
-                                infinite: false,
-                                responsive: [{
-                                    breakpoint: 1024,
-                                    settings: {
-                                        slidesToShow: 5,
-                                        slidesToScroll: 5,
-                                    }
-                                }, {
-                                    breakpoint: 640,
-                                    settings: {
-                                        slidesToShow: 4,
-                                        slidesToScroll: 4,
-                                    }
-                                }, {
-                                    breakpoint: 420,
-                                    settings: {
-                                        slidesToShow: 3,
-                                        slidesToScroll: 3,
-                                    }
-                                }]
+                <?php if ( !empty($tf_room_gallery) && !empty($room_preview_img) ) : ?>
+                    <div class="tf-hotel-details-qc-gallelry" style="width: 545px;">
+                        <?php
+                        if ( !empty($tf_room_gallery) ) :
+                            $tf_room_gallery_ids = explode( ',', $tf_room_gallery );
+                        ?>
+                        <div class="tf-details-qc-slider tf-details-qc-slider-single">
+                            <?php
+                            if ( ! empty( $tf_room_gallery_ids ) ) {
+                                foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
+                                    ?>
+                                    <div class="tf-details-qcs">
+                                        <?php
+                                        $image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+                                        echo '<img src="' . esc_url( $image_url ) . '" alt="">';
+                                        ?>
+                                    </div>
+                                <?php }
+                            } ?>
+                        </div>
+                        <div class="tf-details-qc-slider tf-details-qc-slider-nav">
+                            <?php
+                            if ( ! empty( $tf_room_gallery_ids ) ) {
+                                foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
+                                    ?>
+                                    <div class="tf-details-qcs">
+                                        <?php
+                                        $image_url = wp_get_attachment_url( $gallery_item_id, 'thumbnail' );
+                                        echo '<img src="' . esc_url( $image_url ) . '" alt="">';
+                                        ?>
+                                    </div>
+                                <?php }
+                            } ?>
+                        </div>
+                        <script>
+                            jQuery('.tf-details-qc-slider-single').slick({
+                                slidesToShow: 1,
+                                slidesToScroll: 1,
+                                arrows: <?php echo $tf_hotel_selected_template == "design-1" ? "false" : "true" ?>,
+                                fade: false,
+                                adaptiveHeight: true,
+                                infinite: true,
+                                useTransform: true,
+                                speed: 400,
+                                cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
                             });
 
-                        jQuery('.tf-details-qc-slider-single').on('afterChange', function (event, slick, currentSlide) {
-                            jQuery('.tf-details-qc-slider-nav').slick('slickGoTo', currentSlide);
-                            var currrentNavSlideElem = '.tf-details-qc-slider-nav .slick-slide[data-slick-index="' + currentSlide + '"]';
-                            jQuery('.tf-details-qc-slider-nav .slick-slide.is-active').removeClass('is-active');
-                            jQuery(currrentNavSlideElem).addClass('is-active');
-                        });
+                            jQuery('.tf-details-qc-slider-nav')
+                                .on('init', function (event, slick) {
+                                    jQuery('.tf-details-qc-slider-nav .slick-slide.slick-current').addClass('is-active');
+                                })
+                                .slick({
+                                    slidesToShow: 7,
+                                    slidesToScroll: 7,
+                                    dots: false,
+                                    focusOnSelect: false,
+                                    infinite: false,
+                                    responsive: [{
+                                        breakpoint: 1024,
+                                        settings: {
+                                            slidesToShow: 5,
+                                            slidesToScroll: 5,
+                                        }
+                                    }, {
+                                        breakpoint: 640,
+                                        settings: {
+                                            slidesToShow: 4,
+                                            slidesToScroll: 4,
+                                        }
+                                    }, {
+                                        breakpoint: 420,
+                                        settings: {
+                                            slidesToShow: 3,
+                                            slidesToScroll: 3,
+                                        }
+                                    }]
+                                });
 
-                        jQuery('.tf-details-qc-slider-nav').on('click', '.slick-slide', function (event) {
-                            event.preventDefault();
-                            var goToSingleSlide = jQuery(this).data('slick-index');
+                            jQuery('.tf-details-qc-slider-single').on('afterChange', function (event, slick, currentSlide) {
+                                jQuery('.tf-details-qc-slider-nav').slick('slickGoTo', currentSlide);
+                                var currrentNavSlideElem = '.tf-details-qc-slider-nav .slick-slide[data-slick-index="' + currentSlide + '"]';
+                                jQuery('.tf-details-qc-slider-nav .slick-slide.is-active').removeClass('is-active');
+                                jQuery(currrentNavSlideElem).addClass('is-active');
+                            });
 
-                            jQuery('.tf-details-qc-slider-single').slick('slickGoTo', goToSingleSlide);
-                        });
-                    </script>
+                            jQuery('.tf-details-qc-slider-nav').on('click', '.slick-slide', function (event) {
+                                event.preventDefault();
+                                var goToSingleSlide = jQuery(this).data('slick-index');
 
-                </div>
+                                jQuery('.tf-details-qc-slider-single').slick('slickGoTo', goToSingleSlide);
+                            });
+                        </script>
+                        <?php else: ?>
+                        <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php esc_html_e( "Room Image", "tourfic" ); ?>">
+                        <?php endif;?>
+                    </div>
+                <?php endif; ?>
                 <div class="tf-hotel-details-info" style="width:440px; padding-left: 35px;max-height: 470px;padding-top: 25px; overflow-y: scroll;">
 					<?php
 					$footage      = ! empty( $room['footage'] ) ? $room['footage'] : '';
@@ -3792,7 +3843,7 @@ if ( ! function_exists( 'tf_hotel_airport_service_title_price' ) ) {
  * @since 2.11.25
  */
 
-add_action( 'wp_after_insert_post', 'tf_hotel_features_assign_taxonomies', 100, 3 );
+//add_action( 'wp_after_insert_post', 'tf_hotel_features_assign_taxonomies', 100, 3 );
 function tf_hotel_features_assign_taxonomies( $post_id, $post, $old_status ) {
 	if ( 'tf_room' !== $post->post_type ) {
 		return;

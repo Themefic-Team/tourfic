@@ -38,9 +38,12 @@ class Helper {
 		add_filter( 'after_setup_theme', array( $this, 'tf_image_sizes' ) );
 
 		is_admin() ? add_filter( 'plugin_action_links_' . 'tourfic/tourfic.php', array( $this, 'tf_plugin_action_links' ) ) : '';
-		is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) && function_exists( 'is_tf_pro' ) && !is_tf_pro() ? add_filter( 'plugin_action_links_' . 'tourfic-pro/tourfic-pro.php', array( $this, 'tf_pro_plugin_licence_action_links' ) ) : '';
-		add_action( 'admin_menu', array($this, 'tf_documentation_page_integration'), 999 );
-		add_action( 'add_meta_boxes', array($this, 'tf_hotel_tour_docs') );
+		is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) && function_exists( 'is_tf_pro' ) && ! is_tf_pro() ? add_filter( 'plugin_action_links_' . 'tourfic-pro/tourfic-pro.php', array(
+			$this,
+			'tf_pro_plugin_licence_action_links'
+		) ) : '';
+		add_action( 'admin_menu', array( $this, 'tf_documentation_page_integration' ), 999 );
+		add_action( 'add_meta_boxes', array( $this, 'tf_hotel_tour_docs' ) );
 		add_action( 'admin_menu', array( $this, 'tf_documentation_page_integration' ), 999 );
 		add_action( 'add_meta_boxes', array( $this, 'tf_hotel_tour_docs' ) );
 		add_action( 'show_user_profile', array( $this, 'tf_extra_user_profile_fields' ) );
@@ -53,7 +56,10 @@ class Helper {
 		add_filter( 'custom_menu_order', '__return_true' );
 
 		// Add dashboard link to admin menu bar
-		add_action( 'admin_bar_menu', array( $this, 'tf_admin_bar_dashboard_link' ), 31  );
+		add_action( 'admin_bar_menu', array( $this, 'tf_admin_bar_dashboard_link' ), 31 );
+
+		// redirect non admin user
+		add_action( 'admin_init', array( $this, 'redirect_non_admin_users' ), 9 );
 	}
 
 	static function tfopt( $option = '', $default = null ) {
@@ -273,7 +279,7 @@ class Helper {
 		return $response;
 	}
 
-	static function tf_custom_wp_kses_allow_tags() {
+	public static function tf_custom_wp_kses_allow_tags() {
 		// Allow all HTML tags and attributes
 		$allowed_tags = wp_kses_allowed_html( 'post' );
 
@@ -284,6 +290,7 @@ class Helper {
 			'enctype' => true,
 			'class'   => true,
 			'id'      => true,
+			'data-*'  => true,
 		);
 
 		$allowed_tags['input'] = array(
@@ -293,6 +300,8 @@ class Helper {
 			'placeholder' => true,
 			'class'       => true,
 			'id'          => true,
+			'checked'     => true,
+			'data-*'      => true,
 		);
 
 		$allowed_tags['select'] = array(
@@ -300,34 +309,30 @@ class Helper {
 			'class'    => true,
 			'id'       => true,
 			'data-*'   => true,
-			'multiple' => true
+			'multiple' => true,
 		);
 
 		$allowed_tags['option'] = array(
-			'value' => true,
-			'class' => true,
-			'id'    => true,
+			'value'  => true,
+			'class'  => true,
+			'id'     => true,
+			'data-*' => true,
 		);
 
 		$allowed_tags['textarea'] = array(
-			'name'  => true,
-			'rows'  => true,
-			'cols'  => true,
-			'class' => true,
-			'id'    => true,
-		);
-
-		$allowed_tags['button'] = array(
-			'type'  => true,
-			'name'  => true,
-			'class' => true,
-			'id'    => true,
+			'name'   => true,
+			'rows'   => true,
+			'cols'   => true,
+			'class'  => true,
+			'id'     => true,
+			'data-*' => true,
 		);
 
 		$allowed_tags['label'] = array(
-			'for'   => true,
-			'class' => true,
-			'id'    => true,
+			'for'    => true,
+			'class'  => true,
+			'id'     => true,
+			'data-*' => true,
 		);
 
 		$allowed_tags['fieldset'] = array(
@@ -357,28 +362,29 @@ class Helper {
 			'defer' => true,
 		);
 		$allowed_tags['button'] = array(
-			'class' => true,
-			'id'    => true,
+			'class'    => true,
+			'id'       => true,
 			'disabled' => true,
-			'data-*' => true,
-			
+			'data-*'   => true,
+
 		);
-		$allowed_tags['style'] = array(
+		$allowed_tags['style']  = array(
 			'class' => true,
 			'id'    => true,
 		);
-		
+
 		$allowed_tags['iframe'] = array(
-			'class' => true,
-			'id'    => true,
+			'class'           => true,
+			'id'              => true,
 			'allowfullscreen' => true,
-			'frameborder' => true,
-			'src' => true,
-			'style' => true,
-			'width' => true,
-			'height' => true,
-			'title' => true,
-			'allow' => true,
+			'frameborder'     => true,
+			'src'             => true,
+			'style'           => true,
+			'width'           => true,
+			'height'          => true,
+			'title'           => true,
+			'allow'           => true,
+			'data-*'          => true,
 		);
 
 		$allowed_tags["svg"] = array(
@@ -391,6 +397,7 @@ class Helper {
 			'height'          => true,
 			'viewbox'         => true,
 			'fill'            => true,
+			'data-*'          => true,
 		);
 
 		$allowed_tags['g']        = array( 'fill' => true, "clip-path" => true );
@@ -1228,30 +1235,30 @@ class Helper {
 			return;
 		}
 
-		$tax_name = !empty( $_POST['tax_name'] ) ? sanitize_text_field( $_POST['tax_name'] ) : '';
-		$term_ids = !empty( $_POST['term_ids'] ) ? explode( ',', sanitize_text_field( $_POST['term_ids'] ) ) : '';
-		$post_type = !empty( $_POST['post_type'] ) ? sanitize_text_field( $_POST['post_type'] ) : 'tf_hotel';
-		$post_per_page = self::tfopt( 'posts_per_page' ) ? self::tfopt( 'posts_per_page' ) : 10;
-		$relation        = self::tfopt( 'search_relation', 'AND' );
-		$filter_relation = self::tfopt( 'filter_relation', 'OR' );
-		$current_page = !empty( $_POST["page"] ) ? sanitize_text_field( $_POST["page"] ) : 1;
-		$filters               = !empty( $_POST['filters'] ) ? explode( ',', sanitize_text_field( $_POST['filters'] ) ) : null;
-		$features              = !empty( $_POST['features'] ) ? explode( ',', sanitize_text_field( $_POST['features'] ) ) : null;
-		$tf_hotel_types        = !empty( $_POST['tf_hotel_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_hotel_types'] ) ) : null;
-		$tour_features         = !empty( $_POST['tour_features'] ) ? explode( ',', sanitize_text_field( $_POST['tour_features'] ) ) : null;
-		$attractions           = !empty( $_POST['attractions'] ) ? explode( ',', sanitize_text_field( $_POST['attractions'] ) ) : null;
-		$activities            = !empty( $_POST['activities'] ) ? explode( ',', sanitize_text_field( $_POST['activities'] ) ) : null;
-		$tf_tour_types         = !empty( $_POST['tf_tour_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_tour_types'] ) ) : null;
-		$tf_apartment_features = !empty( $_POST['tf_apartment_features'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_features'] ) ) : null;
-		$tf_apartment_types    = !empty( $_POST['tf_apartment_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_types'] ) ) : null;
-		$place_taxonomy  = $post_type == 'tf_tours' ? 'tour_destination' : ( $post_type == 'tf_apartment' ? 'apartment_location' : 'hotel_location' );
-		$filter_taxonomy = $post_type == 'tf_tours' ? 'null' : 'hotel_feature';
+		$tax_name              = ! empty( $_POST['tax_name'] ) ? sanitize_text_field( $_POST['tax_name'] ) : '';
+		$term_ids              = ! empty( $_POST['term_ids'] ) ? explode( ',', sanitize_text_field( $_POST['term_ids'] ) ) : '';
+		$post_type             = ! empty( $_POST['post_type'] ) ? sanitize_text_field( $_POST['post_type'] ) : 'tf_hotel';
+		$post_per_page         = self::tfopt( 'posts_per_page' ) ? self::tfopt( 'posts_per_page' ) : 10;
+		$relation              = self::tfopt( 'search_relation', 'AND' );
+		$filter_relation       = self::tfopt( 'filter_relation', 'OR' );
+		$current_page          = ! empty( $_POST["page"] ) ? sanitize_text_field( $_POST["page"] ) : 1;
+		$filters               = ! empty( $_POST['filters'] ) ? explode( ',', sanitize_text_field( $_POST['filters'] ) ) : null;
+		$features              = ! empty( $_POST['features'] ) ? explode( ',', sanitize_text_field( $_POST['features'] ) ) : null;
+		$tf_hotel_types        = ! empty( $_POST['tf_hotel_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_hotel_types'] ) ) : null;
+		$tour_features         = ! empty( $_POST['tour_features'] ) ? explode( ',', sanitize_text_field( $_POST['tour_features'] ) ) : null;
+		$attractions           = ! empty( $_POST['attractions'] ) ? explode( ',', sanitize_text_field( $_POST['attractions'] ) ) : null;
+		$activities            = ! empty( $_POST['activities'] ) ? explode( ',', sanitize_text_field( $_POST['activities'] ) ) : null;
+		$tf_tour_types         = ! empty( $_POST['tf_tour_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_tour_types'] ) ) : null;
+		$tf_apartment_features = ! empty( $_POST['tf_apartment_features'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_features'] ) ) : null;
+		$tf_apartment_types    = ! empty( $_POST['tf_apartment_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_types'] ) ) : null;
+		$place_taxonomy        = $post_type == 'tf_tours' ? 'tour_destination' : ( $post_type == 'tf_apartment' ? 'apartment_location' : 'hotel_location' );
+		$filter_taxonomy       = $post_type == 'tf_tours' ? 'null' : 'hotel_feature';
 
-		
+
 		$args = array(
 			'post_type'      => $post_type,
 			'post_status'    => 'publish',
-			'posts_per_page' => -1
+			'posts_per_page' => - 1
 		);
 
 		if ( $filters ) {
@@ -1487,7 +1494,7 @@ class Helper {
 
 		global $wp_rewrite;
 
-		if($total_posts == 0){
+		if ( $total_posts == 0 ) {
 			echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 		}
 
@@ -1501,7 +1508,7 @@ class Helper {
 
 	function get_current_url() {
 		$protocol = is_ssl() ? 'https://' : 'http://';
-	
+
 		return ( $protocol ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 	}
 
@@ -1992,6 +1999,10 @@ class Helper {
                         </div>
                     </div>
 
+	                <?php if ( ( $post_type == 'tf_hotel' && empty( $disable_hotel_child_search ) ) ||
+	                           ($post_type == 'tf_tours' && empty( $disable_child_search )) ||
+	                           ( $post_type == 'tf_apartment' && empty( $disable_apartment_child_search ) )
+	                ) { ?>
                     <div class="tf-field-group tf-mt-16 tf_acrselection">
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
@@ -2005,6 +2016,7 @@ class Helper {
                             </div>
                         </div>
                     </div>
+	                <?php } ?>
 
 					<?php if ( $post_type == 'tf_hotel' ) { ?>
                         <div class="tf-field-group tf-mt-16 tf_acrselection">
@@ -2070,7 +2082,9 @@ class Helper {
                 </div>
 			<?php } ?>
 
-		<?php } elseif ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-2" ) || ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-2" ) || ( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template == "design-1" ) ) { ?>
+		<?php } elseif ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-2" ) ||
+                         ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-2" ) ||
+                         ( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template == "design-1" ) ) { ?>
             <div class="tf-booking-form-fields <?php echo $post_type == 'tf_tours' ? esc_attr( 'tf-tour-archive-block' ) : ''; ?>">
                 <div class="tf-booking-form-location" <?php echo ( $post_type == 'tf_hotel' && self::tfopt( "hide_hotel_location_search" ) == 1 && self::tfopt( "required_location_hotel_search" ) != 1 ) || ( $post_type == 'tf_tours' && self::tfopt( "hide_tour_location_search" ) == 1 && self::tfopt( "required_location_tour_search" ) != 1 ) ? 'style="display:none"' : '' ?>>
                     <span class="tf-booking-form-title"><?php esc_html_e( "Location", "tourfic" ); ?></span>
@@ -2222,6 +2236,10 @@ class Helper {
                                     </div>
                                 </div>
                             </div>
+                            <?php if ( ( $post_type == 'tf_hotel' && empty( $disable_hotel_child_search ) ) ||
+                            ($post_type == 'tf_tours' && empty( $disable_child_search )) ||
+                            ( $post_type == 'tf_apartment' && empty( $disable_apartment_child_search ) )
+                            ) { ?>
                             <div class="tf_acrselection">
                                 <div class="acr-label"><?php esc_html_e( "Children", "tourfic" ); ?></div>
                                 <div class="acr-select">
@@ -2252,6 +2270,7 @@ class Helper {
                                     </div>
                                 </div>
                             </div>
+                            <?php } ?>
 							<?php if ( $post_type == 'tf_hotel' ) { ?>
                                 <div class="tf_acrselection">
                                     <div class="acr-label"><?php esc_html_e( "Rooms", "tourfic" ); ?></div>
@@ -2616,7 +2635,18 @@ class Helper {
 		$hotel_location_field_required      = ! empty( self::tfopt( "required_location_hotel_search" ) ) ? self::tfopt( "required_location_hotel_search" ) : 0;
 		$tour_location_field_required       = ! empty( self::tfopt( "required_location_tour_search" ) ) ? self::tfopt( "required_location_tour_search" ) : 0;
 
-		if ( ( is_post_type_archive( 'tf_hotel' ) && $tf_hotel_arc_selected_template == "design-1" ) || ( is_post_type_archive( 'tf_tours' ) && $tf_tour_arc_selected_template == "design-1" ) || ( $post_type == 'tf_hotel' && $tf_hotel_arc_selected_template == "design-1" ) || ( $post_type == 'tf_tours' && $tf_tour_arc_selected_template == "design-1" ) ) {
+		$hotel_location_field_required = ! empty( self::tfopt( "required_location_hotel_search" ) ) ? self::tfopt( "required_location_hotel_search" ) : 0;
+		$tour_location_field_required  = ! empty( self::tfopt( "required_location_tour_search" ) ) ? self::tfopt( "required_location_tour_search" ) : 0;
+		$disable_child_search            = ! empty( self::tfopt( 'disable_child_search' ) ) ? self::tfopt( 'disable_child_search' ) : '';
+		$disable_infant_search           = ! empty( self::tfopt( 'disable_infant_search' ) ) ? self::tfopt( 'disable_infant_search' ) : '';
+		$disable_hotel_child_search      = ! empty( self::tfopt( 'disable_hotel_child_search' ) ) ? self::tfopt( 'disable_hotel_child_search' ) : '';
+		$disable_apartment_child_search  = ! empty( self::tfopt( 'disable_apartment_child_search' ) ) ? self::tfopt( 'disable_apartment_child_search' ) : '';
+		$disable_apartment_infant_search = ! empty( self::tfopt( 'disable_apartment_infant_search' ) ) ? self::tfopt( 'disable_apartment_infant_search' ) : '';
+
+		if ( ( is_post_type_archive( 'tf_hotel' ) && $tf_hotel_arc_selected_template == "design-1" ) ||
+             ( is_post_type_archive( 'tf_tours' ) && $tf_tour_arc_selected_template == "design-1" ) ||
+             ( $post_type == 'tf_hotel' && $tf_hotel_arc_selected_template == "design-1" ) ||
+             ( $post_type == 'tf_tours' && $tf_tour_arc_selected_template == "design-1" ) ) {
 			?>
             <div class="tf-box-wrapper tf-box tf-mrbottom-30">
                 <form action="<?php echo esc_url( tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking">
@@ -2649,7 +2679,9 @@ class Helper {
                             </div>
                         </div>
                     </div>
-
+	                <?php if ( ( $post_type == 'tf_hotel' && empty( $disable_hotel_child_search ) ) ||
+	                           ($post_type == 'tf_tours' && empty( $disable_child_search ))
+	                ) { ?>
                     <div class="tf-field-group tf-mt-16 tf_acrselection">
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
@@ -2663,6 +2695,7 @@ class Helper {
                             </div>
                         </div>
                     </div>
+                    <?php } ?>
 
 					<?php if ( $post_type !== 'tf_tours' ) { ?>
 
@@ -2732,7 +2765,13 @@ class Helper {
 			<?php } ?>
 
 			<?php
-		} elseif ( ( is_post_type_archive( 'tf_hotel' ) && $tf_hotel_arc_selected_template == "design-2" ) || ( is_post_type_archive( 'tf_tours' ) && $tf_tour_arc_selected_template == "design-2" ) || ( is_post_type_archive( 'tf_apartment' ) && $tf_apartment_arc_selected_template == "design-1" ) || ( $post_type == 'tf_hotel' && $tf_hotel_arc_selected_template == "design-2" ) || ( $post_type == 'tf_tours' && $tf_tour_arc_selected_template == "design-2" ) || ( $post_type == 'tf_apartment' && $tf_apartment_arc_selected_template == "design-1" ) ) { ?>
+		} elseif ( ( is_post_type_archive( 'tf_hotel' ) && $tf_hotel_arc_selected_template == "design-2" ) ||
+                   ( is_post_type_archive( 'tf_tours' ) && $tf_tour_arc_selected_template == "design-2" ) ||
+                   ( is_post_type_archive( 'tf_apartment' ) && $tf_apartment_arc_selected_template == "design-1" ) ||
+                   ( $post_type == 'tf_hotel' && $tf_hotel_arc_selected_template == "design-2" ) ||
+                   ( $post_type == 'tf_tours' && $tf_tour_arc_selected_template == "design-2" ) ||
+                   ( $post_type == 'tf_apartment' && $tf_apartment_arc_selected_template == "design-1" )
+        ) { ?>
             <div class="tf-booking-form-fields <?php echo $post_type == 'tf_tours' ? esc_attr( 'tf-tour-archive-block' ) : ''; ?>">
                 <div class="tf-booking-form-location" <?php echo ( $post_type == 'tf_hotel' && self::tfopt( "hide_hotel_location_search" ) == 1 && self::tfopt( "required_location_hotel_search" ) != 1 ) || ( $post_type == 'tf_tours' && self::tfopt( "hide_tour_location_search" ) == 1 && self::tfopt( "required_location_tour_search" ) != 1 ) ? 'style="display:none"' : '' ?>>
                     <span class="tf-booking-form-title"><?php esc_html_e( "Location", "tourfic" ); ?></span>
@@ -2874,6 +2913,10 @@ class Helper {
                                     </div>
                                 </div>
                             </div>
+	                        <?php if ( ( $post_type == 'tf_hotel' && empty( $disable_hotel_child_search ) ) ||
+	                                   ($post_type == 'tf_tours' && empty( $disable_child_search )) ||
+	                                   ( $post_type == 'tf_apartment' && empty( $disable_apartment_child_search ) )
+	                        ) { ?>
                             <div class="tf_acrselection">
                                 <div class="acr-label"><?php esc_html_e( "Children", "tourfic" ); ?></div>
                                 <div class="acr-select">
@@ -2904,6 +2947,7 @@ class Helper {
                                     </div>
                                 </div>
                             </div>
+                            <?php } ?>
 							<?php if ( $post_type == 'tf_hotel' ) { ?>
                                 <div class="tf_acrselection">
                                     <div class="acr-label"><?php esc_html_e( "Rooms", "tourfic" ); ?></div>
@@ -3102,6 +3146,10 @@ class Helper {
                     </label>
                 </div>
 
+	            <?php if ( ( $post_type == 'tf_hotel' && empty( $disable_hotel_child_search ) ) ||
+	                       ($post_type == 'tf_tours' && empty( $disable_child_search )) ||
+	                       ( $post_type == 'tf_apartment' && empty( $disable_apartment_child_search ) )
+	            ) { ?>
                 <div class="tf_form-row">
                     <label class="tf_label-row">
                         <div class="tf_form-inner">
@@ -3117,6 +3165,7 @@ class Helper {
                         </div>
                     </label>
                 </div>
+                <?php } ?>
 
 				<?php if ( $post_type == 'tf_apartment' ): ?>
                     <div class="tf_form-row">
@@ -3298,7 +3347,7 @@ class Helper {
 			'<a href="admin.php?page=tf_dashboard">' . esc_html__( 'Settings', 'tourfic' ) . '</a>',
 		);
 
-		if ( !is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) ) {
+		if ( ! is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) ) {
 			$gopro_link = array(
 				'<a href="https://tourfic.com/go/upgrade" target="_blank" style="color:#cc0000;font-weight: bold;text-shadow: 0px 1px 1px hsl(0deg 0% 0% / 28%);">' . esc_html__( 'GO PRO', 'tourfic' ) . '</a>',
 			);
@@ -3313,7 +3362,7 @@ class Helper {
 	function tf_pro_plugin_licence_action_links( $links ) {
 
 		$active_licence_link = array(
-			'<a href="'.admin_url().'admin.php?page=tf_license_info" style="color:#cc0000;font-weight: bold;text-shadow: 0px 1px 1px hsl(0deg 0% 0% / 28%);">' . esc_html__( 'Activate the Licence', 'tourfic' ) . '</a>',
+			'<a href="' . admin_url() . 'admin.php?page=tf_license_info" style="color:#cc0000;font-weight: bold;text-shadow: 0px 1px 1px hsl(0deg 0% 0% / 28%);">' . esc_html__( 'Activate the Licence', 'tourfic' ) . '</a>',
 		);
 
 		return array_merge( $links, $active_licence_link );
@@ -3502,8 +3551,8 @@ class Helper {
 			if ( ! empty( $tourfic_hotel ) ) {
 				unset( $menu_order[ $tourfic_hotel ] );
 			}
-			
-			if ( ! empty( $tourfic_hotel_room ) && !empty( $tourfic_hotel ) ) {
+
+			if ( ! empty( $tourfic_hotel_room ) && ! empty( $tourfic_hotel ) ) {
 				unset( $menu_order[ $tourfic_hotel_room ] );
 			}
 
@@ -3544,15 +3593,15 @@ class Helper {
 	public function tf_admin_bar_dashboard_link( $wp_admin_bar ) {
 
 		if ( ! is_admin() || ! is_admin_bar_showing() ) {
-            return;
-        }
+			return;
+		}
 
 		if ( ! is_user_member_of_blog() && ! is_super_admin() ) {
-            return;
-        }
+			return;
+		}
 
-		if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-			$tf_dashboard_page_link = !empty( get_option( 'tf_dashboard_page_id' ) ) ? get_permalink( get_option( 'tf_dashboard_page_id' ) )  : get_home_url();
+		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+			$tf_dashboard_page_link = ! empty( get_option( 'tf_dashboard_page_id' ) ) ? get_permalink( get_option( 'tf_dashboard_page_id' ) ) : get_home_url();
 
 			$wp_admin_bar->add_node(
 				array(
@@ -3566,6 +3615,22 @@ class Helper {
 		} else {
 
 			return;
+		}
+	}
+
+	function redirect_non_admin_users() {
+		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+
+			$user = wp_get_current_user();
+
+			if ( in_array( 'tf_vendor', (array) $user->roles ) || in_array( 'tf_manager', (array) $user->roles ) || in_array( 'customer', (array) $user->roles ) ) {
+				$tf_dashboard_page_link = ! empty( get_option( 'tf_dashboard_page_id' ) ) ? get_permalink( get_option( 'tf_dashboard_page_id' ) ) : get_home_url();
+				wp_redirect( $tf_dashboard_page_link );
+				exit;
+			} else if ( in_array( 'administrator', (array) $user->roles ) || in_array( 'editor', (array) $user->roles ) ) {
+				return;
+			}
+
 		}
 	}
 }

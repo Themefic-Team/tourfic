@@ -8614,6 +8614,15 @@ div#tf-contact-info {
         display: none;
         text-decoration: none; }
 
+@media only screen and (max-width: 767.98px) {
+  .tf-archive-design-1 .tf-archive-inner {
+    gap: 40px; }
+  .tf-archive-design-1 .tf-sidebar {
+    order: 1;
+    margin-top: 40px; }
+  .tf-archive-design-1 .tf-page-content {
+    order: 2; } }
+
 .tf-hotel-design-1 {
   background: inherit; }
   .tf-hotel-design-1 .tf-single-head .more-hotel {

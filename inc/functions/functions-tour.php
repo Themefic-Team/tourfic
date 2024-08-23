@@ -1094,7 +1094,7 @@ function tf_single_tour_booking_form( $post_id ) {
 	}
 	ob_start();
 	if ( $tf_tour_selected_template == "design-1" ) {
-		if(( $tf_booking_type == 2 && $tf_hide_booking_form !== 1 && $tf_ext_booking_type !== '2') || $tf_booking_type == 1) : ?>
+		if(( $tf_booking_type == 2 && $tf_hide_booking_form !== 1 && $tf_ext_booking_type !== '2') || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
 			<form class="tf_tours_booking">
 				<div class="tf-field-group tf-mt-8">
 					<i class="fa-sharp fa-solid fa-calendar-days"></i>
@@ -1227,7 +1227,7 @@ function tf_single_tour_booking_form( $post_id ) {
 					<?php endif; ?>
 					<?php 
 					if( tf_booking_popup( $post_id ) ){
-						echo wp_kses_post(tf_booking_popup( $post_id )); 
+						echo wp_kses(tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags());
 					}
 					?>
 				</div>
@@ -1389,7 +1389,6 @@ function tf_single_tour_booking_form( $post_id ) {
 							<a href="#" class="tf-btn-normal btn-primary tf-booking-mobile-btn"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
 						</div>
 					<?php endif; ?>
-						<?php //echo wp_kses_post(tf_booking_popup( $post_id )); ?>
 					</div>
 				</div>
 
@@ -1402,7 +1401,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
         
 	<?php } elseif ( $tf_tour_selected_template == "design-2" ) { ?>
-		<?php if( ( $tf_booking_type == 2 && $tf_hide_booking_form !== 1 && $tf_ext_booking_type !== '2') || $tf_booking_type == 1 ) : ?>
+		<?php if( ( $tf_booking_type == 2 && $tf_hide_booking_form !== 1 && $tf_ext_booking_type !== '2') || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
 				<form class="tf_tours_booking">
 					<div class="tf-field-group tf-mt-8 tf-field-calander">
 						<i class="fa-sharp fa-solid fa-calendar-days"></i>
@@ -1563,7 +1562,7 @@ function tf_single_tour_booking_form( $post_id ) {
 						<?php endif; ?>
 						<?php
 						if( tf_booking_popup( $post_id ) ){
-							echo wp_kses_post(tf_booking_popup( $post_id ));
+							echo wp_kses(tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags());
 						}
 						?>
 					</div>
@@ -1726,7 +1725,6 @@ function tf_single_tour_booking_form( $post_id ) {
 								<a href="#" class="tf-btn-normal btn-primary tf-booking-mobile-btn"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
 							</div>
 							<?php endif; ?>
-							<?php //echo wp_kses_post(tf_booking_popup( $post_id )); ?>
 						</div>
 					</div>
 
@@ -1750,7 +1748,7 @@ function tf_single_tour_booking_form( $post_id ) {
 		<?php endif; ?>
 	<?php } else{ ?>
         <div class="tf-tour-booking-wrap">
-			<?php  if(( $tf_booking_type == 2 && $tf_hide_booking_form !== 1 && $tf_ext_booking_type !== '2') || $tf_booking_type == 1) : ?>
+			<?php  if(( $tf_booking_type == 2 && $tf_hide_booking_form !== 1 && $tf_ext_booking_type !== '2') || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
 				<form class="tf_tours_booking">
 					<div class="tf_selectperson-wrap">
 						<div class="tf_input-inner">
@@ -1899,7 +1897,7 @@ function tf_single_tour_booking_form( $post_id ) {
 					</div>
 					<?php 
 					if( tf_booking_popup( $post_id ) ){
-						echo wp_kses_post(tf_booking_popup( $post_id )); 
+						echo wp_kses(tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags());
 					}
 					?>
 				</form>
