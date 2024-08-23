@@ -5,15 +5,6 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Room\Room;
 
-
-#################################
-# Air port Service          #
-#################################
-
-
-
-
-
 #################################
 # Ajax functions                #
 #################################
@@ -2578,11 +2569,13 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 	}
 
 	// Remove disabled rooms
-	if ( ! empty( $rooms_meta['room'] ) ):
-		$rooms_meta = array_filter( $rooms_meta['room'], function ( $value ) {
-			return ! empty( $value ) && ! empty( $value['enable'] ) ? $value['enable'] : '' != '0';
+
+	if ( ! empty( $rooms_meta ) ):
+		$rooms_meta = array_filter( $rooms_meta, function ( $value ) {
+			return ! empty( $value ) && empty( $value['enable'] ) ? $value['enable'] : '' != '0';
 		} );
 	endif;
+
 	// If no room return
 	if ( empty( $rooms_meta ) ) {
 		return;
@@ -2594,7 +2587,6 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 	/**
 	 * Adult Number Validation
 	 */
-
 	$back_adults   = array_column( $rooms_meta, 'adult' );
 	$adult_counter = 0;
 	foreach ( $back_adults as $back_adult ) {
@@ -2638,7 +2630,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 		$avil_by_date = array_column( $rooms_meta, 'avil_by_date' );
 
 		// Check if any room available without custom date range
-		if ( in_array( 0, $avil_by_date ) || empty( $avil_by_date ) ) {
+		if ( in_array( 0, $avil_by_date ) || empty( $avil_by_date ) || empty( $avil_by_date[0] ) ) {
 
 			if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 				foreach ( $rooms as $_room ) {
@@ -2753,7 +2745,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 		$avil_by_date = array_column( $rooms_meta, 'avil_by_date' );
 
 		// Check if any room available without custom date range
-		if ( in_array( 0, $avil_by_date ) || empty( $avil_by_date ) ) {
+		if ( in_array( 0, $avil_by_date ) || empty( $avil_by_date ) || empty( $avil_by_date[0] ) ) {
 
 			if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 				foreach ( $rooms as $_room ) {
@@ -2916,11 +2908,12 @@ function tf_filter_hotel_without_date( $period, array &$not_found, array $data =
 	}
 
 	// Remove disabled rooms
-	if ( ! empty( $rooms_meta['room'] ) ):
-		$rooms_meta = array_filter( $rooms_meta['room'], function ( $value ) {
-			return ! empty( $value ) && ! empty( $value['enable'] ) ? $value['enable'] : '' != '0';
+	if ( ! empty( $rooms_meta ) ):
+		$rooms_meta = array_filter( $rooms_meta, function ( $value ) {
+			return ! empty( $value ) && empty( $value['enable'] ) ? $value['enable'] : '' != '0';
 		} );
 	endif;
+
 	// If no room return
 	if ( empty( $rooms_meta ) ) {
 		return;
@@ -3850,7 +3843,7 @@ if ( ! function_exists( 'tf_hotel_airport_service_title_price' ) ) {
  * @since 2.11.25
  */
 
-add_action( 'wp_after_insert_post', 'tf_hotel_features_assign_taxonomies', 100, 3 );
+//add_action( 'wp_after_insert_post', 'tf_hotel_features_assign_taxonomies', 100, 3 );
 function tf_hotel_features_assign_taxonomies( $post_id, $post, $old_status ) {
 	if ( 'tf_room' !== $post->post_type ) {
 		return;

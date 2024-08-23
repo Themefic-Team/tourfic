@@ -71,8 +71,13 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'label_off' => __( 'Disabled', 'tourfic' ),
                     'width'     => 100,
                     'default'   => true,
-                )
-
+                ),
+				array(
+					'id'       => 'gallery',
+					'type'     => 'gallery',
+					'label'    => __( 'Single Room Gallery', 'tourfic' ),
+					'subtitle' => __( 'Upload all the images specific to this room.', 'tourfic' ),
+				),
 			),
 		),
 
@@ -85,12 +90,6 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'type'    => 'heading',
                     'content' => __( 'Details', 'tourfic' ),
                     'class'   => 'tf-field-class',
-                ),
-                array(
-                    'id'       => 'gallery',
-                    'type'     => 'gallery',
-                    'label'    => __( 'Single Room Gallery', 'tourfic' ),
-                    'subtitle' => __( 'Upload all the images specific to this room.', 'tourfic' ),
                 ),
                 array(
                     'id'          => 'bed',
@@ -157,12 +156,6 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                         'hide_empty' => false,
                     ),
                     'field_width' => 100,
-                ),
-                array(
-                    'id'    => 'description',
-                    'type'  => 'editor',
-                    'label' => __( 'Room Description', 'tourfic' ),
-                    'subtitle'    => __( 'Add description specific for this room.', 'tourfic' ),
                 ),
 			),
 		),
