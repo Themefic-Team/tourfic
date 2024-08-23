@@ -279,7 +279,7 @@ class Helper {
 		return $response;
 	}
 
-	static function tf_custom_wp_kses_allow_tags() {
+	public static function tf_custom_wp_kses_allow_tags() {
 		// Allow all HTML tags and attributes
 		$allowed_tags = wp_kses_allowed_html( 'post' );
 
@@ -300,6 +300,7 @@ class Helper {
 			'placeholder' => true,
 			'class'       => true,
 			'id'          => true,
+			'checked'     => true,
 			'data-*'      => true,
 		);
 

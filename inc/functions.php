@@ -262,6 +262,7 @@ if(!function_exists('tf_custom_wp_kses_allow_tags')){
 			'placeholder' => true,
 			'class'       => true,
 			'id'          => true,
+			'checked'     => true,
 			'data-*'      => true,
 		);
 
