@@ -1227,7 +1227,7 @@ function tf_single_tour_booking_form( $post_id ) {
 					<?php endif; ?>
 					<?php 
 					if( tf_booking_popup( $post_id ) ){
-						echo wp_kses_post(tf_booking_popup( $post_id )); 
+						echo wp_kses(tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags());
 					}
 					?>
 				</div>
@@ -1389,7 +1389,6 @@ function tf_single_tour_booking_form( $post_id ) {
 							<a href="#" class="tf-btn-normal btn-primary tf-booking-mobile-btn"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
 						</div>
 					<?php endif; ?>
-						<?php //echo wp_kses_post(tf_booking_popup( $post_id )); ?>
 					</div>
 				</div>
 
@@ -1563,7 +1562,7 @@ function tf_single_tour_booking_form( $post_id ) {
 						<?php endif; ?>
 						<?php
 						if( tf_booking_popup( $post_id ) ){
-							echo wp_kses_post(tf_booking_popup( $post_id ));
+							echo wp_kses(tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags());
 						}
 						?>
 					</div>
@@ -1726,7 +1725,6 @@ function tf_single_tour_booking_form( $post_id ) {
 								<a href="#" class="tf-btn-normal btn-primary tf-booking-mobile-btn"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
 							</div>
 							<?php endif; ?>
-							<?php //echo wp_kses_post(tf_booking_popup( $post_id )); ?>
 						</div>
 					</div>
 
@@ -1899,7 +1897,7 @@ function tf_single_tour_booking_form( $post_id ) {
 					</div>
 					<?php 
 					if( tf_booking_popup( $post_id ) ){
-						echo wp_kses_post(tf_booking_popup( $post_id )); 
+						echo wp_kses(tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags());
 					}
 					?>
 				</form>

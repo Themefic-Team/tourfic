@@ -141,7 +141,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'id'          => 'footage',
                     'type'        => 'text',
                     'label'       => __( 'Room Footage', 'tourfic' ),
-                    'subtitle'    => __( 'Specify Room Size (in sqft).', 'tourfic' ),
+                    'subtitle'    => __( 'Specify Room Size', 'tourfic' ),
                     'field_width' => 50,
                 ),
                 array(
