@@ -3118,108 +3118,109 @@ function tf_hotel_quickview_callback() {
 		<?php
 		foreach ( $rooms as $_room ) :
 			$room = get_post_meta($_room->ID, 'tf_room_opt', true);
+			$room_preview_img = get_the_post_thumbnail_url( $_room->ID, 'full' );
 			$enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
 			if ( $enable == '1' && $room['unique_id'] . $_room->ID == $_POST['uniqid_id'] ) :
 				$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
 				$child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
 				?>
-                <div class="tf-hotel-details-qc-gallelry" style="width: 545px;">
-					<?php
-					if ( $tf_room_gallery ) {
-						$tf_room_gallery_ids = explode( ',', $tf_room_gallery );
-					}
-
-					?>
-
-                    <div class="tf-details-qc-slider tf-details-qc-slider-single">
-						<?php
-						if ( ! empty( $tf_room_gallery_ids ) ) {
-							foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
-								?>
-                                <div class="tf-details-qcs">
-									<?php
-									$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
-									echo '<img src="' . esc_url( $image_url ) . '" alt="">';
-									?>
-                                </div>
-							<?php }
-						} ?>
-                    </div>
-                    <div class="tf-details-qc-slider tf-details-qc-slider-nav">
-						<?php
-						if ( ! empty( $tf_room_gallery_ids ) ) {
-							foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
-								?>
-                                <div class="tf-details-qcs">
-									<?php
-									$image_url = wp_get_attachment_url( $gallery_item_id, 'thumbnail' );
-									echo '<img src="' . esc_url( $image_url ) . '" alt="">';
-									?>
-                                </div>
-							<?php }
-						} ?>
-                    </div>
-
-                    <script>
-                        jQuery('.tf-details-qc-slider-single').slick({
-                            slidesToShow: 1,
-                            slidesToScroll: 1,
-                            arrows: <?php echo $tf_hotel_selected_template == "design-1" ? "false" : "true" ?>,
-                            fade: false,
-                            adaptiveHeight: true,
-                            infinite: true,
-                            useTransform: true,
-                            speed: 400,
-                            cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
-                        });
-
-                        jQuery('.tf-details-qc-slider-nav')
-                            .on('init', function (event, slick) {
-                                jQuery('.tf-details-qc-slider-nav .slick-slide.slick-current').addClass('is-active');
-                            })
-                            .slick({
-                                slidesToShow: 7,
-                                slidesToScroll: 7,
-                                dots: false,
-                                focusOnSelect: false,
-                                infinite: false,
-                                responsive: [{
-                                    breakpoint: 1024,
-                                    settings: {
-                                        slidesToShow: 5,
-                                        slidesToScroll: 5,
-                                    }
-                                }, {
-                                    breakpoint: 640,
-                                    settings: {
-                                        slidesToShow: 4,
-                                        slidesToScroll: 4,
-                                    }
-                                }, {
-                                    breakpoint: 420,
-                                    settings: {
-                                        slidesToShow: 3,
-                                        slidesToScroll: 3,
-                                    }
-                                }]
+                <?php if ( !empty($tf_room_gallery) && !empty($room_preview_img) ) : ?>
+                    <div class="tf-hotel-details-qc-gallelry" style="width: 545px;">
+                        <?php
+                        if ( !empty($tf_room_gallery) ) :
+                            $tf_room_gallery_ids = explode( ',', $tf_room_gallery );
+                        ?>
+                        <div class="tf-details-qc-slider tf-details-qc-slider-single">
+                            <?php
+                            if ( ! empty( $tf_room_gallery_ids ) ) {
+                                foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
+                                    ?>
+                                    <div class="tf-details-qcs">
+                                        <?php
+                                        $image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+                                        echo '<img src="' . esc_url( $image_url ) . '" alt="">';
+                                        ?>
+                                    </div>
+                                <?php }
+                            } ?>
+                        </div>
+                        <div class="tf-details-qc-slider tf-details-qc-slider-nav">
+                            <?php
+                            if ( ! empty( $tf_room_gallery_ids ) ) {
+                                foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
+                                    ?>
+                                    <div class="tf-details-qcs">
+                                        <?php
+                                        $image_url = wp_get_attachment_url( $gallery_item_id, 'thumbnail' );
+                                        echo '<img src="' . esc_url( $image_url ) . '" alt="">';
+                                        ?>
+                                    </div>
+                                <?php }
+                            } ?>
+                        </div>
+                        <script>
+                            jQuery('.tf-details-qc-slider-single').slick({
+                                slidesToShow: 1,
+                                slidesToScroll: 1,
+                                arrows: <?php echo $tf_hotel_selected_template == "design-1" ? "false" : "true" ?>,
+                                fade: false,
+                                adaptiveHeight: true,
+                                infinite: true,
+                                useTransform: true,
+                                speed: 400,
+                                cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
                             });
 
-                        jQuery('.tf-details-qc-slider-single').on('afterChange', function (event, slick, currentSlide) {
-                            jQuery('.tf-details-qc-slider-nav').slick('slickGoTo', currentSlide);
-                            var currrentNavSlideElem = '.tf-details-qc-slider-nav .slick-slide[data-slick-index="' + currentSlide + '"]';
-                            jQuery('.tf-details-qc-slider-nav .slick-slide.is-active').removeClass('is-active');
-                            jQuery(currrentNavSlideElem).addClass('is-active');
-                        });
+                            jQuery('.tf-details-qc-slider-nav')
+                                .on('init', function (event, slick) {
+                                    jQuery('.tf-details-qc-slider-nav .slick-slide.slick-current').addClass('is-active');
+                                })
+                                .slick({
+                                    slidesToShow: 7,
+                                    slidesToScroll: 7,
+                                    dots: false,
+                                    focusOnSelect: false,
+                                    infinite: false,
+                                    responsive: [{
+                                        breakpoint: 1024,
+                                        settings: {
+                                            slidesToShow: 5,
+                                            slidesToScroll: 5,
+                                        }
+                                    }, {
+                                        breakpoint: 640,
+                                        settings: {
+                                            slidesToShow: 4,
+                                            slidesToScroll: 4,
+                                        }
+                                    }, {
+                                        breakpoint: 420,
+                                        settings: {
+                                            slidesToShow: 3,
+                                            slidesToScroll: 3,
+                                        }
+                                    }]
+                                });
 
-                        jQuery('.tf-details-qc-slider-nav').on('click', '.slick-slide', function (event) {
-                            event.preventDefault();
-                            var goToSingleSlide = jQuery(this).data('slick-index');
+                            jQuery('.tf-details-qc-slider-single').on('afterChange', function (event, slick, currentSlide) {
+                                jQuery('.tf-details-qc-slider-nav').slick('slickGoTo', currentSlide);
+                                var currrentNavSlideElem = '.tf-details-qc-slider-nav .slick-slide[data-slick-index="' + currentSlide + '"]';
+                                jQuery('.tf-details-qc-slider-nav .slick-slide.is-active').removeClass('is-active');
+                                jQuery(currrentNavSlideElem).addClass('is-active');
+                            });
 
-                            jQuery('.tf-details-qc-slider-single').slick('slickGoTo', goToSingleSlide);
-                        });
-                    </script>
+                            jQuery('.tf-details-qc-slider-nav').on('click', '.slick-slide', function (event) {
+                                event.preventDefault();
+                                var goToSingleSlide = jQuery(this).data('slick-index');
 
-                </div>
+                                jQuery('.tf-details-qc-slider-single').slick('slickGoTo', goToSingleSlide);
+                            });
+                        </script>
+                        <?php else: ?>
+                        <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php esc_html_e( "Room Image", "tourfic" ); ?>">
+                        <?php endif;?>
+                    </div>
+                <?php endif; ?>
                 <div class="tf-hotel-details-info" style="width:440px; padding-left: 35px;max-height: 470px;padding-top: 25px; overflow-y: scroll;">
 					<?php
 					$footage      = ! empty( $room['footage'] ) ? $room['footage'] : '';
