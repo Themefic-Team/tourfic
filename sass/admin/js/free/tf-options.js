@@ -650,7 +650,6 @@
                     }
                 },
                 events: function ({start, end, startStr, endStr, timeZone}, successCallback, failureCallback) {
-                    console.log(roomOptionsArr())
                     $.ajax({
                         url: tf_options.ajax_url,
                         dataType: "json",
@@ -668,7 +667,6 @@
                             $(self.calendar).addClass('tf-content-loading');
                         },
                         success: function (doc) {
-                            console.log('doc', doc)
                             if (typeof doc == "object") {
                                 successCallback(doc?.avail_data);
                             }
@@ -706,12 +704,22 @@
                         if (typeof event.extendedProps.price != 'undefined') {
                             $("[name='tf_room_price']", self.roomCalData).val(event.extendedProps.price);
                         }
-                    } else {
+                    } else if(priceBy === '2'){
                         if (typeof event.extendedProps.adult_price != 'undefined') {
                             $("[name='tf_room_adult_price']", self.roomCalData).val(event.extendedProps.adult_price);
                         }
                         if (typeof event.extendedProps.child_price != 'undefined') {
                             $("[name='tf_room_child_price']", self.roomCalData).val(event.extendedProps.child_price);
+                        }
+                    } else {
+                        if(event.extendedProps.options_count != 0) {
+                            for (var i = 0; i <= event.extendedProps.options_count - 1; i++) {
+                                $("[name='tf_room_option_" + i + "']", self.roomCalData).prop('checked', event.extendedProps["tf_room_option_" + i] == 1);
+
+                                $("[name='tf_option_room_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_room_price_" + i]);
+                                $("[name='tf_option_adult_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_adult_price_" + i]);
+                                $("[name='tf_option_child_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_child_price_" + i]);
+                            }
                         }
                     }
                     if (event.extendedProps.status) {
@@ -791,6 +799,7 @@
             data.push({name: '_nonce', value: tf_admin_params.tf_nonce});
             data.push({name: 'price_by', value: priceBy});
             data.push({name: 'avail_date', value: avail_date.val()});
+            data.push({name: 'options_count', value: roomOptionsArr().length});
 
             $.ajax({
                 url: tf_options.ajax_url,

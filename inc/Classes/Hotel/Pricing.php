@@ -157,6 +157,20 @@ class Pricing {
 												"regular_price" => $adult_price,
 												"sale_price"    => $discount_adult_price
 											];
+										} else {
+											$options_count = $singleavailroom['options_count'] ?? 0;
+											for ( $i = 0; $i <= $options_count - 1; $i ++ ) {
+												if ( $singleavailroom[ 'tf_room_option_' . $i ] == '1' && $singleavailroom[ 'tf_option_pricing_type_' . $i ] == 'per_room' ) {
+													$option_price = $singleavailroom[ 'tf_option_room_price_' . $i ] ?? 0;
+												} else if ( $singleavailroom[ 'tf_room_option_' . $i ] == '1' && $singleavailroom[ 'tf_option_pricing_type_' . $i ] == 'per_person' ) {
+													$option_price = $singleavailroom[ 'tf_option_adult_price_' . $i ] ?? 0;
+												}
+												$discount_option_price = $this->calculate_discount( $option_price );
+												$room_price[] = [
+													"regular_price" => $option_price,
+													"sale_price"    => $discount_option_price
+												];
+											}
 										}
 									}
 								}
@@ -177,6 +191,20 @@ class Pricing {
 										"regular_price" => $adult_price,
 										"sale_price"    => $discount_adult_price
 									];
+								} else {
+									$options_count = $singleavailroom['options_count'] ?? 0;
+									for ( $i = 0; $i <= $options_count - 1; $i ++ ) {
+										if ( $singleavailroom[ 'tf_room_option_' . $i ] == '1' && $singleavailroom[ 'tf_option_pricing_type_' . $i ] == 'per_room' ) {
+											$option_price = $singleavailroom[ 'tf_option_room_price_' . $i ] ?? 0;
+										} else if ( $singleavailroom[ 'tf_room_option_' . $i ] == '1' && $singleavailroom[ 'tf_option_pricing_type_' . $i ] == 'per_person' ) {
+											$option_price = $singleavailroom[ 'tf_option_adult_price_' . $i ] ?? 0;
+										}
+										$discount_option_price = $this->calculate_discount( $option_price );
+										$room_price[] = [
+											"regular_price" => $option_price,
+											"sale_price"    => $discount_option_price
+										];
+									}
 								}
 							}
 						}
@@ -270,7 +298,7 @@ class Pricing {
 		$avail_by_date = $room_meta['avil_by_date'] ?? 1;
 		$pricing_by    = $room_meta['pricing-by'] ?? 1;
 
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $avail_by_date == '1' && $pricing_by !== '3' ) {
+		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $avail_by_date == '1' ) {
 			$prices          = array();
 			$discount_prices = array();
 
@@ -280,10 +308,21 @@ class Pricing {
 					if ( $pricing_by == '1' ) {
 						$prices[]          = ! empty( $data['price'] ) ? $data['price'] : 0;
 						$discount_prices[] = $this->calculate_discount( $data['price'] );
-					} else {
+					} else if($pricing_by == '2'){
 						$prices[]          = ! empty( $data['adult_price'] ) ? $data['adult_price'] : 0;
 						$discount_prices[] = $this->calculate_discount( $data['adult_price'] );
-					}
+					} else {
+						$options_count = $data['options_count'] ?? 0;
+						for ( $i = 0; $i <= $options_count - 1; $i ++ ) {
+							if ( $data[ 'tf_room_option_' . $i ] == '1' && $data[ 'tf_option_pricing_type_' . $i ] == 'per_room' ) {
+								$option_price = $data[ 'tf_option_room_price_' . $i ] ?? 0;
+							} else if ( $data[ 'tf_room_option_' . $i ] == '1' && $data[ 'tf_option_pricing_type_' . $i ] == 'per_person' ) {
+								$option_price = $data[ 'tf_option_adult_price_' . $i ] ?? 0;
+							}
+							$prices[] = $option_price;
+							$discount_prices[] = $this->calculate_discount( $option_price );
+						}
+                    }
 				}
 			}
 
@@ -298,9 +337,24 @@ class Pricing {
 			} else {
 				if ( $pricing_by == '1' ) {
 					$price = ! empty( $room_meta['price'] ) ? $room_meta['price'] : 0;
-				} else {
+				} elseif ( $pricing_by == '2' ) {
 					$price = ! empty( $room['adult_price'] ) ? $room['adult_price'] : 0;
-				}
+				} elseif ( $pricing_by == '3' ) {
+                    $room_options = ! empty( $room_meta['room-options'] ) ? $room_meta['room-options'] : [];
+
+                    $option_prices = [];
+                    if ( ! empty( $room_options ) ) {
+                        foreach ( $room_options as $room_option ) {
+                            $option_price_type = ! empty( $room_option['option_pricing_type'] ) ? $room_option['option_pricing_type'] : 'per_room';
+                            if ( $option_price_type == 'per_room' ) {
+                                $option_prices[] = ! empty( $room_option['option_price'] ) ? floatval( $room_option['option_price'] ) : 0;
+                            } elseif ( $option_price_type == 'per_person' ) {
+                                $option_prices[] = ! empty( $room_option['option_adult_price'] ) ? floatval( $room_option['option_adult_price'] ) : 0;
+                            }
+                        }
+                    }
+                    $price = min($option_prices);
+                }
 				$discount_price = $this->calculate_discount( $price );
 				$price          = wc_price( $price );
 				$discount_price = wc_price( $discount_price );
@@ -310,6 +364,21 @@ class Pricing {
 				$price = ! empty( $room_meta['price'] ) ? $room_meta['price'] : 0;
 			} elseif ( $pricing_by == '2' ) {
 				$price = ! empty( $room_meta['adult_price'] ) ? $room_meta['adult_price'] : 0;
+			} elseif ( $pricing_by == '3' ) {
+				$room_options = ! empty( $room_meta['room-options'] ) ? $room_meta['room-options'] : [];
+
+                $option_prices = [];
+				if ( ! empty( $room_options ) ) {
+					foreach ( $room_options as $room_option ) {
+						$option_price_type = ! empty( $room_option['option_pricing_type'] ) ? $room_option['option_pricing_type'] : 'per_room';
+						if ( $option_price_type == 'per_room' ) {
+							$option_prices[] = ! empty( $room_option['option_price'] ) ? floatval( $room_option['option_price'] ) : 0;
+						} elseif ( $option_price_type == 'per_person' ) {
+							$option_prices[] = ! empty( $room_option['option_adult_price'] ) ? floatval( $room_option['option_adult_price'] ) : 0;
+						}
+					}
+				}
+				$price = min($option_prices);
 			}
 			$discount_price = $this->calculate_discount( $price );
 			$price          = wc_price( $price );
@@ -417,7 +486,7 @@ class Pricing {
 		$child_count = ! empty( $persons['child'] ) ? $persons['child'] : 0;
 		$days        = ! empty( $this->days ) ? $this->days : 0;
 
-		if ( $avail_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() && $pricing_by !== '3' ) {
+		if ( $avail_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 
 			$total_price = Availability::instance( $this->post_id, $this->room_id, $this->option_id )->set_dates( $this->checkin, $this->checkout )->set_persons( $adult_count, $child_count )->set_room_number( $this->room_number )->get_availability_total_price();
 
@@ -483,10 +552,10 @@ class Pricing {
 		}
 
 		return array(
-			'total_price' => $total_price,
-            'adult_price' => $adult_price ?? 0,
-            'child_price' => $child_price ?? 0,
-            'option_title' => $option_title ?? '',
+			'total_price'  => $total_price,
+			'adult_price'  => $adult_price ?? 0,
+			'child_price'  => $child_price ?? 0,
+			'option_title' => $option_title ?? '',
 		);
 	}
 
@@ -505,6 +574,8 @@ class Pricing {
 				if ( ! empty( $rooms ) ) {
 					foreach ( $rooms as $_room ) {
 						$room_meta = get_post_meta( $_room->ID, 'tf_room_opt', true );
+						$avail_by_date = $room_meta['avil_by_date'] ?? 1;
+
 						if ( ! empty( $room_meta['price'] ) ) {
 							$min_max_price[] = $room_meta['price'];
 						}
@@ -514,7 +585,7 @@ class Pricing {
 						if ( ! empty( $room_meta['child_price'] ) ) {
 							$min_max_price[] = $room_meta['child_price'];
 						}
-						if ( ! empty( $room_meta['avail_date'] ) ) {
+						if ( $avail_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $room_meta['avail_date'] ) ) {
 							$avail_date = json_decode( $room_meta['avail_date'], true );
 							if ( ! empty( $avail_date ) && is_array( $avail_date ) ) {
 								foreach ( $avail_date as $singleavailroom ) {
