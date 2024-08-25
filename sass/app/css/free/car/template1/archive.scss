@@ -494,6 +494,17 @@
                                     width: 100%;
                                     height: 200px;
                                 }
+                                .tf-other-infos{
+                                    display: flow-root;
+                                    .tf-tags-box{
+                                        margin-top: 8px;
+                                        ul{
+                                            li{
+                                                display: inline-block;
+                                            }
+                                        }
+                                    }
+                                }
                             }
                             .tf-car-details{
                                 width: calc(100% - 280px);
