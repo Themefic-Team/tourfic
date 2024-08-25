@@ -17076,6 +17076,7 @@ html {
   font-weight: 400 !important;
   line-height: 120% !important; /* 14.4px */
   margin-bottom: 8px;
+  margin-top: 0px;
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input {
   min-width: auto;
@@ -17185,7 +17186,8 @@ html {
   margin-left: 8px;
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-header .tf-archive-view ul {
-  margin-left: 0px;
+  margin: 0px;
+  padding: 0;
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-header .tf-archive-view ul li {
   height: 52px;
@@ -17416,6 +17418,7 @@ html {
   font-style: normal !important;
   font-weight: 700 !important;
   line-height: 150% !important; /* 31.5px */
+  margin-top: 0px;
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul {
   list-style: none;
@@ -17445,6 +17448,7 @@ html {
   font-style: normal !important;
   font-weight: 600 !important;
   line-height: 120%; /* 33.6px */
+  margin: 0;
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small {
   color: #566676;

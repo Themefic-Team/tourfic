@@ -257,6 +257,26 @@
             }
         });
 
+        /*
+        * Car Archive View
+        * @author Jahid
+        */
+         $(document).on('click', '.tf-archive-header .tf-archive-view ul li', function (e) {
+            $('.tf-archive-header .tf-archive-view ul li').removeClass('active');
+            let $this = $(this);
+            $this.addClass('active');
+            let view = $this.attr('data-view');
+   
+            if(view=='grid'){
+                console.log(view);
+                $('.tf-car-details-column .tf-car-archive-result .tf-car-result').removeClass('list-view');
+                $('.tf-car-details-column .tf-car-archive-result .tf-car-result').addClass('grid-view');
+            }else{
+                $('.tf-car-details-column .tf-car-archive-result .tf-car-result').addClass('list-view');
+                $('.tf-car-details-column .tf-car-archive-result .tf-car-result').removeClass('grid-view');
+            }
+         });
+
     });
 
 })(jQuery, window);

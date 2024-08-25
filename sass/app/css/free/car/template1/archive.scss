@@ -60,6 +60,7 @@
                                     font-weight: 400 !important;
                                     line-height: 120% !important; /* 14.4px */
                                     margin-bottom: 8px;
+                                    margin-top: 0px;
                                 }
                                 input{
                                     min-width: auto;
@@ -187,7 +188,8 @@
         .tf-archive-header{
             .tf-archive-view{
                 ul{
-                    margin-left: 0px;
+                    margin: 0px;
+                    padding: 0;
                     li{
                         height: 52px;
                         width: 52px;
@@ -417,6 +419,7 @@
                                 font-style: normal !important;
                                 font-weight: 700 !important;
                                 line-height: 150% !important; /* 31.5px */
+                                margin-top: 0px;
                             }
                             ul{
                                 list-style: none;
@@ -446,6 +449,7 @@
                                         font-style: normal !important;
                                         font-weight: 600 !important;
                                         line-height: 120%; /* 33.6px */
+                                        margin: 0;
                                         small{
                                             color: #566676;
                                             font-size: 16px !important;
