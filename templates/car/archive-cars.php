@@ -33,8 +33,9 @@ get_header();
                                             </svg>
                                         </div>
                                         <div class="info-select">
-                                            <h5>Pick-up</h5>
-                                            <input type="text" placeholder="Pick Up Location">
+                                            <h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
+                                            <input type="text" placeholder="Pick Up Location" id="tf_pickup_location">
+                                            <input type="hidden" id="tf_pickup_location_id">
                                         </div>
                                     </div>
                                 </div>
@@ -47,8 +48,9 @@ get_header();
                                             </svg>
                                         </div>
                                         <div class="info-select">
-                                            <h5>Drop-off</h5>
-                                            <input type="text" placeholder="Drop Off Location">
+                                            <h5><?php esc_html_e("Drop-off", "tourfic"); ?></h5>
+                                            <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location">
+                                            <input type="hidden" id="tf_dropoff_location_id">
                                         </div>
                                     </div>
                                 </div>

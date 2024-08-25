@@ -53,6 +53,7 @@
                             
                             .info-select{
                                 width: 100%;
+                                position: relative;
                                 h5{
                                     color: #27333F;
                                     font-size: 12px !important;
@@ -89,6 +90,27 @@
                                     line-height: 150%; /* 24px */
                                     border: 0px solid !important;
                                     background-color: transparent;
+                                }
+                                .autocomplete-items{
+                                    position: absolute;
+                                    border: 1px solid #d4d4d4;
+                                    border-bottom: none;
+                                    z-index: 99;
+                                    top: 100%;
+                                    left: 0;
+                                    right: 0;
+                                    max-height: 200px;
+                                    overflow: auto;
+                                    >div{
+                                        padding: 10px;
+                                        cursor: pointer;
+                                        background-color: #fff;
+                                        border-bottom: 1px solid #d4d4d4;
+                                        color: #444;
+                                        border-left: 1px solid #d4d4d4;
+                                        border-right: 1px solid #d4d4d4;
+                                        text-transform: capitalize;
+                                    }
                                 }
                             }
                         }
