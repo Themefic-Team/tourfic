@@ -46,6 +46,8 @@ foreach($_POST['qty'] as $key => $singleqty){
 					<span class="qty"><?php echo $singleqty; ?></span> 
 					<span class="price"><?php echo !empty($single_extra_info['price']) ? wc_price($single_extra_info['price']*$singleqty) : ''; ?></span>
 					<span class="delete">
+						<input type="hidden" value="<?php echo esc_attr($key); ?>" name="selected_extra[]" />
+						<input type="hidden" value="<?php echo esc_attr($singleqty); ?>" name="selected_qty[]" />
 						<i class="ri-delete-bin-line"></i>
 					</span>
 				</div>

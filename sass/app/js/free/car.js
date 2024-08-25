@@ -212,7 +212,9 @@
                     form.css({'opacity': '1', 'pointer-events': 'all'});
                     submitBtn.removeClass('tf-btn-loading');
                     $('.tf-added-extra').html(response);
-                    $('.tf-extra-added-info').show();
+                    if(response){
+                        $('.tf-extra-added-info').show();
+                    }
                 }
             });
 
@@ -239,6 +241,7 @@
         */
         $(document).on('click', '.tf-car-booking', function (e) {
             e.preventDefault();
+            $('.tf-car-booking-popup').css('display', 'flex');
             var pickup = $('#tf_pickup_location').val();
             let dropoff = $('#tf_dropoff_location').val();
             let pickup_date = $('.tf_pickup_date').val();
