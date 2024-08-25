@@ -506,6 +506,38 @@
 
         });
 
+        $(document).find("#tf-settings-header-search-filed").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            if( value.length > 3 ) {
+                $.ajax({
+                    url: tf_options.ajax_url,
+                    type: 'POST',
+                    data: {
+                        action: 'tf_search_settings_autocomplete',
+                        tf_option_nonce: tf_admin_params.tf_nonce,
+                        search: value,
+                    },
+                    success: function (response) {
+                        let data = JSON.parse(response)
+                        if (data.status === 'success') {
+                            $.each( data.message, function( key, obj ) {
+                                if( obj.field_title && obj.field_title.toLowerCase().indexOf(value) > -1 ) {
+                                    console.log(obj.path + ' > ' + obj.field_title);
+                                } else {
+                                    console.log("No result found");
+                                }
+                            });
+                        } else {
+                            console.log("Try again later");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error);
+                    }
+                }) 
+            }
+        });
+
         $(document).on('submit', '.tf-option-form.tf-ajax-save', function (e) {
             e.preventDefault();
             let $this = $(this),

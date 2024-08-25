@@ -37,6 +37,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			//ajax save options
 			add_action( 'wp_ajax_tf_options_save', array( $this, 'tf_ajax_save_options' ) );
 			add_action( 'wp_ajax_tf_options_reset', array( $this, 'tf_ajax_reset_options' ) );
+			add_action( 'wp_ajax_tf_search_settings_autocomplete', array( $this, 'tf_search_settings_autocomplete_callback' ) );
 
             add_action( 'wp_ajax_tf_export_data', array( $this, 'tf_export_data' ) );
         }
@@ -692,7 +693,9 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<h2 class="tf-setting-title"><?php echo esc_html__( "Tourfic Settings", "tourfic" ); ?></h2>
 							<div class="tf-setting-search">
 								<i class="fa-solid fa-search"></i>
-								<input aria-label="Search" type="text" placeholder="<?php echo esc_attr__( "Search Options", "tourfic" ); ?>" class="ui-autocomplete-input" autocomplete="off">
+								<div class="search-inpurt">
+									<input aria-label="Search" id="tf-settings-header-search-filed" type="text" placeholder="<?php echo esc_attr__( "Search Options", "tourfic" ); ?>" class="ui-autocomplete-input" autocomplete="off">
+								</div>
 							</div>
 						</div>
 						<div class="settings-header-right">
@@ -988,9 +991,65 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					];
 				}
 
+			} else {
+				$response    = [
+					'status'  => 'error',
+					'message' => __( 'Something went wrong!', 'tourfic' ),
+				];
 			}
 
 			echo wp_json_encode( $response );
+			wp_die();
+		}
+
+		public function tf_search_settings_autocomplete_callback() {
+			if( isset( $_POST['tf_option_nonce'] ) || wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_option_nonce'])), 'tf_option_nonce_action' ) ) {
+				$all_settings = $this->option_sections;
+				$fields = [];
+				$path = '';
+
+				foreach ( $all_settings as $section => $data ) {
+
+					$parent = $parent_title = '';
+					$icon = $data['icon'];
+					if( isset( $data["parent"] )) {
+						$parent = $data["parent"];
+						$parent = !empty($parent) ? $all_settings[$parent] : '';
+						$parent_title = !empty($parent) ? $parent['title'] : '';
+						$icon = !empty($parent) ? $parent['icon'] : $data['icon'];
+					}
+
+					!empty( $parent_title ) ? $path = $parent_title . ' > ' . $data['title'] : $path = $data['title'];
+
+					if ( ! empty( $data['fields'] ) ) {
+						foreach ( $data['fields'] as $field ) {
+
+							$fields[] = array(
+								'parent' => $parent_title,
+								'field_title' => !empty( $field["label"] ) ? $field["label"] : ( !empty( $field['title'] ) ? $field['title'] : ( !empty( $field['heading'] ) ?  !empty( $field['heading'] ) : ''  )),
+								'section' => $data['title'],
+								'icon' => $icon,
+								'path' => $path,
+								'id' => $field['id'],
+							);
+						}
+					}
+				}
+
+				$response = [
+					'status'  => 'success',
+					'message' => $fields,
+				];
+				
+			} else {
+				$response = [
+					'status'  => 'error',
+					'message' => __( 'Something went wrong!', 'tourfic' ),
+				];
+			}
+
+			echo wp_json_encode( $response );
+			wp_reset_postdata();
 			wp_die();
 		}
 
