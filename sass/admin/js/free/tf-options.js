@@ -521,20 +521,16 @@
                         let data = JSON.parse(response)
                         if (data.status === 'success') {
                             $.each( data.message, function( key, obj ) {
-                                if( obj.field_title && obj.field_title.toLowerCase().indexOf(value) > -1 ) {
+                                if( obj.field_title.toLowerCase().indexOf(value) > -1 ) {
                                     console.log(obj.path + ' > ' + obj.field_title);
-                                } else {
-                                    console.log("No result found");
                                 }
                             });
                         } else {
-                            console.log("Try again later");
+                            console.log("Something went wrong!");
                         }
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(error);
                     }
-                }) 
+                })
+                
             }
         });
 

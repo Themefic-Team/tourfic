@@ -832,13 +832,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				return;
 			}
 
-			// echo "<pre>";
-			// print_r( $this->option_sections[""]);
-			// echo "</pre>";
-			// die(); // added by - Sunvi
-
-			// TODO: Need to work with settings filter and search
-
 			if ( ! empty( $option_request ) && ! empty( $this->option_sections ) ) {
 				foreach ( $this->option_sections as $section ) {
 					if ( ! empty( $section['fields'] ) ) {
@@ -1049,7 +1042,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			}
 
 			echo wp_json_encode( $response );
-			wp_reset_postdata();
 			wp_die();
 		}
 
