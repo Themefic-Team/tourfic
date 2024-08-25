@@ -461,26 +461,77 @@
 
         $(document).on('click', '.tf-setting-save-btn .tf-reset-btn', function (e) {
 
-            $.ajax({
-                url: tf_options.ajax_url,
-                type: 'POST',
-                data: {
-                    action: 'tf_options_reset',
-                    tf_option_nonce: tf_admin_params.tf_nonce,
-                },
-                beforeSend: function () {
-                    $('.tf-setting-save-btn .tf-reset-btn').addClass('tf-btn-loading');
-                },
-                success: function (response) {
-                    let data = JSON.parse(response)
-                    $('.tf-setting-save-btn .tf-reset-btn').removeClass('tf-btn-loading');
-                    notyf.success(data.message);
-                    
-                },
-            }).done(function () {
-                window.location.reload();
-            });
+            Swal.fire({
+                title: tf_options.swal_reset_title_text,
+                text: tf_options.swal_reset_other_text,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: tf_options.swal_reset_btn_text,
+                customClass: "tf-swal-settings-reset-alert",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: tf_options.ajax_url,
+                        type: 'POST',
+                        data: {
+                            action: 'tf_options_reset',
+                            tf_option_nonce: tf_admin_params.tf_nonce,
+                        },
+                        beforeSend: function () {
+                            $('.tf-setting-save-btn .tf-reset-btn').addClass('tf-btn-loading');
+                        },
+                        success: function (response) {
 
+                            let data = JSON.parse(response)
+                            
+                            if (data.status === 'success') {
+                                notyf.success(data.message);
+                                window.location.reload();
+                            } else {
+                                notyf.error(data.message);
+                            }
+                            
+                            $('.tf-setting-save-btn .tf-reset-btn').removeClass('tf-btn-loading');
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    }).done(function () {
+                        // window.location.reload();
+                    });
+                }
+              });
+
+        });
+
+        $(document).find("#tf-settings-header-search-filed").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            if( value.length > 3 ) {
+                $.ajax({
+                    url: tf_options.ajax_url,
+                    type: 'POST',
+                    data: {
+                        action: 'tf_search_settings_autocomplete',
+                        tf_option_nonce: tf_admin_params.tf_nonce,
+                        search: value,
+                    },
+                    success: function (response) {
+                        let data = JSON.parse(response)
+                        if (data.status === 'success') {
+                            $.each( data.message, function( key, obj ) {
+                                if( obj.field_title.toLowerCase().indexOf(value) > -1 ) {
+                                    console.log(obj.path + ' > ' + obj.field_title);
+                                }
+                            });
+                        } else {
+                            console.log("Something went wrong!");
+                        }
+                    }
+                })
+                
+            }
         });
 
         $(document).on('submit', '.tf-option-form.tf-ajax-save', function (e) {
