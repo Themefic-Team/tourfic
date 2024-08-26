@@ -322,8 +322,29 @@
                 beforeSend: function () {
                     $this.addClass('tf-btn-loading');
                 },
-                success: function (response) {
-                    
+                success: function (data) {
+                    $this.unblock();
+
+                    var response = JSON.parse(data);
+
+                    if (response.status == 'error') {
+
+                        if (response.errors) {
+                            response.errors.forEach(function (text) {
+                                notyf.error(text);
+                            });
+                        }
+
+                        return false;
+                    } else {
+
+                        if (response.redirect_to) {
+                            window.location.replace(response.redirect_to);
+                        } else {
+                            jQuery(document.body).trigger('added_to_cart');
+                        }
+
+                    }
                 }
             });
 

@@ -13,6 +13,7 @@ class Woocommerce {
 		add_action( 'publish_tf_apartment', array($this, 'tf_add_price_field_to_post'), 10, 2 );
 		add_action( 'publish_tf_hotel', array($this, 'tf_add_price_field_to_post'), 10, 2 );
 		add_action( 'publish_tf_tours', array($this, 'tf_add_price_field_to_post'), 10, 2 );
+		add_action( 'publish_tf_carrental', array($this, 'tf_add_price_field_to_post'), 10, 2 );
 
 		add_action( 'woocommerce_checkout_update_order_meta', array($this, 'tf_add_order_type_order_meta') );
 		add_filter( 'woocommerce_order_data_store_cpt_get_orders_query', array($this, 'tf_custom_query_var_get_orders'), 10, 2 );
@@ -46,6 +47,8 @@ class Woocommerce {
 				update_post_meta( $order_id, '_order_type', 'hotel' );
 			} elseif ( wc_get_order_item_meta( $item_key, '_order_type', true ) == 'apartment' ) {
 				update_post_meta( $order_id, '_order_type', 'apartment' );
+			} elseif ( wc_get_order_item_meta( $item_key, '_order_type', true ) == 'car' ) {
+				update_post_meta( $order_id, '_order_type', 'car' );
 			}
 
 			// Assign _post_author meta in line order meta
