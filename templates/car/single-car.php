@@ -135,6 +135,9 @@ while ( have_posts() ) : the_post();
 	$driver_address = ! empty( $meta['driver_address'] ) ? $meta['driver_address'] : '';
 	$driver_image = ! empty( $meta['driver_image'] ) ? $meta['driver_image'] : '';
 
+	// Booking
+	$car_booking_by = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : '1';
+	
 	// Protection
 	$car_protection_section_status = ! empty( $meta['protection_section'] ) ? $meta['protection_section'] : '';
 	$car_protection_content = ! empty( $meta['protection_content'] ) ? $meta['protection_content'] : '';

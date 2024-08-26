@@ -456,68 +456,6 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 						array( 'inc_exc_section', '==', 'true' )
 					],
 				),
-				array(
-					'id'    => 'car-protection-heading',
-					'type'  => 'heading',
-					'label' => 'Booking Protection Section',
-					'subtitle' => __( 'Each car includes certain items, while others are not part of the package. Clearly define these inclusions and exclusions to prevent any misunderstandings during your car.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'car-protection-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-include-exclude/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				array(
-					'id'       => 'protection_section',
-					'type'     => 'switch',
-					'label'    => esc_html__( 'Do you want to show Booking Protection in the frontend?', 'tourfic' ),
-					'subtitle' => esc_html__( 'Do you want to show Booking Protection in the frontend?', 'tourfic' )
-				),
-				array(
-					'id'    => 'protection_content',
-					'type'  => 'editor',
-					'label' => __( 'Protection Content', 'tourfic' ),
-					'dependency'  => [
-						array( 'protection_section', '==', 'true' )
-					],
-				),
-				array(
-					'id'           => 'protections',
-					'type'         => 'repeater',
-					'label'        => __( 'Items Protection', 'tourfic' ),
-					'subtitle'        => __( 'List all the items/features Protection in this car package.', 'tourfic' ),
-					'button_title' => __( 'Add New Protection', 'tourfic' ),
-					'field_title'  => 'title',
-					'dependency'  => [
-						array( 'protection_section', '==', 'true' )
-					],
-					'fields'       => array(
-						array(
-							'id'    => 'title',
-							'type'  => 'text',
-							'label' => __( 'Insert your Title', 'tourfic' ),
-						),
-						array(
-							'id'    => 'content',
-							'type'  => 'textarea',
-							'label' => __( 'Insert your Content', 'tourfic' ),
-						),
-						array(
-							'id'       => 'include',
-							'type'     => 'switch',
-							'label'    => esc_html__( 'Include?', 'tourfic' ),
-						),
-						array(
-							'id'    => 'price',
-							'type'  => 'number',
-							'label' => __( 'Insert your Price', 'tourfic' ),
-							'dependency'  => [
-								array( 'include', '==', 'true' )
-							],
-						),
-					),
-				),
 			),
 		),
 
@@ -640,6 +578,16 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tourfic-price-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
+					'id'       => 'price_by',
+					'type'     => 'select',
+					'label'    => __( 'Type of Pricing', 'tourfic' ),
+					'options'  => array(
+						'day' => __( 'Day', 'tourfic' ),
+						'hour'   => __( 'Hour', 'tourfic' ),
+					),
+					'default'  => 'day',
+				),
+				array(
 					'id'          => 'car_rent',
 					'type'        => 'number',
 					'label'       => __( 'Pricing for Car Rent', 'tourfic' ),
@@ -651,7 +599,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'       => 'pricing_type',
 					'type'     => 'select',
-					'label'    => __( 'Pricing Type', 'tourfic' ),
+					'label'    => __( 'Custom price for Car Rent', 'tourfic' ),
 					'options'  => array(
 						'day_hour' => __( 'Day/Hour', 'tourfic' ),
 						'date'   => __( 'Price By Date', 'tourfic' ),
@@ -873,6 +821,68 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 			'title'  => esc_html__( 'Booking', 'tourfic' ),
 			'icon'   => 'fa-solid fa-person-walking-luggage',
 			'fields' => array(
+				array(
+					'id'    => 'car-protection-heading',
+					'type'  => 'heading',
+					'label' => 'Booking Protection Section',
+					'subtitle' => __( 'Each car includes certain items, while others are not part of the package. Clearly define these inclusions and exclusions to prevent any misunderstandings during your car.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'car-protection-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-include-exclude/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'       => 'protection_section',
+					'type'     => 'switch',
+					'label'    => esc_html__( 'Do you want to show Booking Protection in the frontend?', 'tourfic' ),
+					'subtitle' => esc_html__( 'Do you want to show Booking Protection in the frontend?', 'tourfic' )
+				),
+				array(
+					'id'    => 'protection_content',
+					'type'  => 'editor',
+					'label' => __( 'Protection Content', 'tourfic' ),
+					'dependency'  => [
+						array( 'protection_section', '==', 'true' )
+					],
+				),
+				array(
+					'id'           => 'protections',
+					'type'         => 'repeater',
+					'label'        => __( 'Items Protection', 'tourfic' ),
+					'subtitle'        => __( 'List all the items/features Protection in this car package.', 'tourfic' ),
+					'button_title' => __( 'Add New Protection', 'tourfic' ),
+					'field_title'  => 'title',
+					'dependency'  => [
+						array( 'protection_section', '==', 'true' )
+					],
+					'fields'       => array(
+						array(
+							'id'    => 'title',
+							'type'  => 'text',
+							'label' => __( 'Insert your Title', 'tourfic' ),
+						),
+						array(
+							'id'    => 'content',
+							'type'  => 'textarea',
+							'label' => __( 'Insert your Content', 'tourfic' ),
+						),
+						array(
+							'id'       => 'include',
+							'type'     => 'switch',
+							'label'    => esc_html__( 'Include?', 'tourfic' ),
+						),
+						array(
+							'id'    => 'price',
+							'type'  => 'number',
+							'label' => __( 'Insert your Price', 'tourfic' ),
+							'dependency'  => [
+								array( 'include', '==', 'true' )
+							],
+						),
+					),
+				),
 				array(
 					'id'    => 'tour-booking-heading',
 					'type'  => 'heading',

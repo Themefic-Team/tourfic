@@ -125,7 +125,9 @@ use \Tourfic\App\TF_Review;
                         <?php
                         $tf_pickup_date = !empty($_GET['pickup']) ? $_GET['pickup'] : '';
                         $tf_dropoff_date = !empty($_GET['dropoff']) ? $_GET['dropoff'] : '';
-                        $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date); ?>
+                        $tf_pickup_time = !empty($_GET['pickup_time']) ? $_GET['pickup_time'] : '';
+                        $tf_dropoff_time = !empty($_GET['dropoff_time']) ? $_GET['dropoff_time'] : '';
+                        $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time); ?>
                         <h2><?php esc_html_e("Total:", "tourfic"); ?> 
                         <?php if(!empty($total_prices['regular_price'])){ ?><del><?php echo wc_price($total_prices['regular_price']); ?></del>  <?php } ?>
                         <?php echo $total_prices['sale_price'] ? wc_price($total_prices['sale_price']) : '' ?></h2>
@@ -237,7 +239,7 @@ use \Tourfic\App\TF_Review;
                         </div>
                         <div class="tf-form-submit-btn">
                             <div class="error-notice"></div>
-                            <button class="tf-flex tf-flex-align-center tf-flex-justify-center tf-car-booking">
+                            <button class="tf-flex tf-flex-align-center tf-flex-justify-center <?php echo (empty($car_protection_section_status) || empty($car_protections)) && '3'!=$car_booking_by ? esc_attr('booking-process tf-final-step') : esc_attr('tf-car-booking'); ?>">
                                 <?php esc_html_e("Continue", "tourfic"); ?>
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -358,11 +360,15 @@ use \Tourfic\App\TF_Review;
 
                                 <div class="tf-booking-tabs">
                                     <ul>
-                                        <li class="active">Protections</li>
-                                        <li>Booking</li>
+                                        <?php if(!empty($car_protection_section_status) && !empty($car_protections)){ ?>
+                                            <li class="protection active"><?php esc_html_e("Protections", "tourfic"); ?></li>
+                                        <?php } ?>
+                                        <?php if($car_booking_by=='3'){ ?>
+                                        <li class="booking <?php echo empty($car_protection_section_status) ? esc_attr('active') : ''; ?>"><?php esc_html_e("Booking", "tourfic"); ?></li>
+                                        <?php } ?>
                                     </ul>
                                 </div>
-                                <?php if(!empty($car_protection_section_status)){ ?>
+                                <?php if(!empty($car_protection_section_status) && !empty($car_protections)){ ?>
                                 <div class="tf-protection-content tf-flex tf-flex-gap-24 tf-flex-direction-column">
                                     <?php if(!empty($car_protection_content)){ 
                                     echo wp_kses_post($car_protection_content);
@@ -371,9 +377,9 @@ use \Tourfic\App\TF_Review;
                                     <div class="tf-protection-featured">
                                         <table>
                                             <tr>
-                                                <td width="50%">What is covered</td>
-                                                <td align="center">No protection</td>
-                                                <td align="center">With protection</td>
+                                                <td width="50%"><?php esc_html_e("What is covered", "tourfic"); ?></td>
+                                                <td align="center"><?php esc_html_e("No protection", "tourfic"); ?></td>
+                                                <td align="center"><?php esc_html_e("With protection", "tourfic"); ?></td>
                                             </tr>
 
                                             <?php 
@@ -427,8 +433,21 @@ use \Tourfic\App\TF_Review;
                                         </table>
                                     </div>
                                 </div>
-                                <?php } ?>
 
+                                <div class="tf-booking-bar tf-flex tf-flex-gap-24">
+                                    <input type="hidden" id="protection_value" />
+                                    <button data-charge="no" class="without-charge <?php echo '3'==$car_booking_by ? esc_attr('booking-next') : esc_attr('booking-process'); ?>">
+                                        <?php esc_html_e("Book without protection", "tourfic"); ?>
+                                        <i class="ri-arrow-right-s-line"></i>
+                                    </button>
+                                    <button data-charge="yes" class="with-charge <?php echo '3'==$car_booking_by ? esc_attr('booking-next') : esc_attr('booking-process'); ?>">
+                                        <?php esc_html_e("Book with protection", "tourfic"); ?>
+                                        <i class="ri-arrow-right-s-line"></i>
+                                    </button>
+                                </div>
+
+                                <?php } ?>
+                                
                                 <div class="tf-booking-form-fields">
                                     <div class="tf-form-fields tf-flex tf-flex-gap-24 tf-flex-w">
                                         <div class="tf-single-field">
@@ -454,22 +473,13 @@ use \Tourfic\App\TF_Review;
                                     </div>
 
                                     <div class="tf-booking-submission">
-                                        <button>
+                                        <button class="booking-process">
                                             <?php esc_html_e("Continue to Pay", "tourfic"); ?>
                                             <i class="ri-arrow-right-s-line"></i>
                                         </button>
                                     </div>
                                 </div>
-                                <div class="tf-booking-bar tf-flex tf-flex-gap-24">
-                                    <button class="without-charge">
-                                        <?php esc_html_e("Book without protection", "tourfic"); ?>
-                                        <i class="ri-arrow-right-s-line"></i>
-                                    </button>
-                                    <button class="with-charge">
-                                        <?php esc_html_e("Book with protection", "tourfic"); ?>
-                                        <i class="ri-arrow-right-s-line"></i>
-                                    </button>
-                                </div>
+                                
 
                             </div>
 

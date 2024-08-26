@@ -257,6 +257,75 @@
             }
         });
 
+        $(document).on('click', '.booking-next', function (e) {
+            let $this = $(this);
+            $('.tf-booking-tabs ul li').removeClass('active');
+            $('.tf-booking-tabs ul li.booking').addClass('active');
+
+            $('.tf-protection-content').hide();
+            $('.tf-booking-bar').hide();
+
+            $('.tf-booking-form-fields').show();
+
+            $('#protection_value').val($this.attr('data-charge'));
+        });
+
+        /*
+        * Car Booking
+        * @author Jahid
+        */
+
+        $(document).on('click', '.booking-process', function (e) {
+            let $this = $(this);
+            if($this.hasClass('tf-final-step')){
+                var pickup = $('#tf_pickup_location').val();
+                let dropoff = $('#tf_dropoff_location').val();
+                let pickup_date = $('.tf_pickup_date').val();
+                let dropoff_date = $('.tf_dropoff_date').val();
+                let pickup_time = $('.tf_pickup_time').val();
+                let dropoff_time = $('.tf_dropoff_time').val();
+
+                if( !pickup || !dropoff || !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
+                    $('.error-notice').text('Fill up the all fields');
+                    return;
+                }
+            }
+
+            var pickup = $('#tf_pickup_location').val();
+            let dropoff = $('#tf_dropoff_location').val();
+            let pickup_date = $('.tf_pickup_date').val();
+            let dropoff_date = $('.tf_dropoff_date').val();
+            let pickup_time = $('.tf_pickup_time').val();
+            let dropoff_time = $('.tf_dropoff_time').val();
+
+            var data = {
+                action: 'tf_car_booking',
+                car_booking_nonce: tf_params.nonce,
+                post_id: post_id,
+                pickup: pickup,
+                dropoff: dropoff,
+                pickup_date: pickup_date,
+                dropoff_date: dropoff_date,
+                pickup_time: pickup_time,
+                dropoff_time: dropoff_time
+            };
+
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    form.css({'opacity': '0.5', 'pointer-events': 'none'});
+                    $this.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    
+                }
+            });
+
+        });
+
+
         /*
         * Car Archive View
         * @author Jahid
@@ -275,7 +344,7 @@
                 $('.tf-car-details-column .tf-car-archive-result .tf-car-result').addClass('list-view');
                 $('.tf-car-details-column .tf-car-archive-result .tf-car-result').removeClass('grid-view');
             }
-         });
+        });
 
     });
 
