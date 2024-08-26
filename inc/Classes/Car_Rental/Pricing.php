@@ -28,7 +28,7 @@ class Pricing {
 
             $all_prices = [];
             $result = array();
-            foreach ($pricing as $entry) {
+            foreach ($date_pricing as $entry) {
                 $startDate = strtotime($entry['date']['from']);
                 $endDate = strtotime($entry['date']['to']);
                 $price = $entry['price'];
@@ -85,60 +85,78 @@ class Pricing {
         }
         elseif( !empty($tf_pickup_date) && !empty($tf_dropoff_date) && 'day_hour'==$pricing_type && !empty($day_pricing) ){
 
+            // Combine date and time
+            $pickup_datetime = new \DateTime("$tf_pickup_date $tf_pickup_time");
+            $dropoff_datetime = new \DateTime("$tf_dropoff_date $tf_dropoff_time");
+
+            // Calculate the difference
+            $interval = $pickup_datetime->diff($dropoff_datetime);
+
+            // Convert the difference to total hours
+            $total_hours = ($interval->days * 24) + $interval->h + ($interval->i / 60);
+            
             $all_prices = [];
             $result = array();
-            foreach ($pricing as $entry) {
-                $startDate = strtotime($entry['date']['from']);
-                $endDate = strtotime($entry['date']['to']);
+            foreach ($day_pricing as $entry) {
+                $day_type = $entry['type'];
+                $startDay = $entry['from_day'];
+                $endDay = $entry['to_day'];
                 $price = $entry['price'];
 
-                while ($startDate <= $endDate) {  // Adjusted to include the end date
-                    $dateKey = date("Y/m/d", $startDate);
-
-                    // Check if the date is already in the result array
-                    if (isset($result[$dateKey])) {
-                        
-                    } else {
-                        $result[$dateKey] = $price;
+                if('hour'==$day_type){
+                    $total_multiply = $total_hours;
+                }
+                if('day'==$day_type){
+                    // Get total days
+                    $total_days = $interval->days;
+                    
+                    // If there are leftover hours that count as a partial day
+                    if ($interval->h > 0 || $interval->i > 0) {
+                        $total_days += 1;  // Add an extra day for any remaining hours
                     }
-                    $startDate = strtotime("+1 day", $startDate);
+                    $total_multiply = $total_days;
+                }
+                if( $startDay <= $total_multiply  && $endDay >= $total_multiply ){
+                    $result['price'] = $price;
+                    $result['total_multiply'] = $total_multiply;
+                    break;
                 }
             }
-
-            // Convert the dates to timestamps
-            $pickupDate = strtotime($tf_pickup_date);
-            $dropoffDate = strtotime($tf_dropoff_date);
-
-            // Initialize total price
-            $totalPrice = 0;
-
-            // Loop through each day in the range
-            while ($pickupDate <= $dropoffDate) {
-                $currentDate = date("Y/m/d", $pickupDate);
-                
-                // Check if the date exists in the $result array
-                if (isset($result[$currentDate])) {
-                    $totalPrice += $result[$currentDate];
-                } else {
-                    $totalPrice += $initial_pricing;
+            
+            if(!empty($result)){
+                $totalPrice = $result['price'] ? $result['price'] : 0;
+                $total_multiply = $result['total_multiply'] ? $result['total_multiply'] : 1;
+            }else{
+                $totalPrice = $initial_pricing;
+                if('hour'==$pricing_by){
+                    $total_multiply = $total_hours;
                 }
-
-                // Move to the next day
-                $pickupDate = strtotime("+1 day", $pickupDate);
+                if('day'==$pricing_by){
+                    
+                    // Get total days
+                    $total_days = $interval->days;
+                    
+                    // If there are leftover hours that count as a partial day
+                    if ($interval->h > 0 || $interval->i > 0) {
+                        $total_days += 1;  // Add an extra day for any remaining hours
+                    }
+                    $total_multiply = $total_days;
+                    
+                }
             }
 
             if('fixed'==$discount_type && !empty($discount_price)){
-                $all_prices['sale_price'] = $totalPrice - $discount_price;
+                $all_prices['sale_price'] = ($totalPrice * $total_multiply) - ($discount_price * $total_multiply);
             }
             if('percent'==$discount_type && !empty($discount_price)){
                 $discount_price = ($totalPrice * $discount_price)/100;
-                $all_prices['sale_price'] = $totalPrice - $discount_price;
+                $all_prices['sale_price'] = ($totalPrice * $total_multiply) - ($discount_price * $total_multiply);
             }
 
             if(empty($all_prices['sale_price'])){
-                $all_prices['sale_price'] = $totalPrice;
+                $all_prices['sale_price'] = $totalPrice * $total_multiply;
             }else{
-                $all_prices['regular_price'] = $totalPrice;
+                $all_prices['regular_price'] = $totalPrice * $total_multiply;
             }
 
         }else{
