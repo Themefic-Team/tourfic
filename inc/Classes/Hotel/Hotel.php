@@ -527,11 +527,13 @@ class Hotel {
 		}
 
 		// Remove disabled rooms
-		if ( ! empty( $rooms_meta['room'] ) ):
-			$rooms_meta = array_filter( $rooms_meta['room'], function ( $value ) {
-				return ! empty( $value ) && ! empty( $value['enable'] ) ? $value['enable'] : '' != '0';
+
+		if ( ! empty( $rooms_meta ) ):
+			$rooms_meta = array_filter( $rooms_meta, function ( $value ) {
+				return ! empty( $value ) && empty( $value['enable'] ) ? $value['enable'] : '' != '0';
 			} );
 		endif;
+
 		// If no room return
 		if ( empty( $rooms_meta ) ) {
 			return;
@@ -543,7 +545,6 @@ class Hotel {
 		/**
 		 * Adult Number Validation
 		 */
-
 		$back_adults   = array_column( $rooms_meta, 'adult' );
 		$adult_counter = 0;
 		foreach ( $back_adults as $back_adult ) {
@@ -587,9 +588,35 @@ class Hotel {
 			$avil_by_date = array_column( $rooms_meta, 'avil_by_date' );
 
 			// Check if any room available without custom date range
-			if ( in_array( 0, $avil_by_date ) || empty( $avil_by_date ) ) {
+			if ( in_array( 0, $avil_by_date ) || empty( $avil_by_date ) || empty( $avil_by_date[0] ) ) {
 
-				$has_hotel = true; // Show that hotel
+				if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+					foreach ( $rooms as $_room ) {
+						$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
+
+						if('2'==$room['pricing-by']){
+							if ( ! empty( $room['adult_price'] ) ) {
+								if ( $startprice <= $room['adult_price'] && $room['adult_price'] <= $endprice ) {
+									$has_hotel = true;
+								}
+							}
+							if ( ! empty( $room['child_price'] ) ) {
+								if ( $startprice <= $room['child_price'] && $room['child_price'] <= $endprice ) {
+									$has_hotel = true;
+								}
+							}
+						}
+						if('1'==$room['pricing-by']){
+							if ( ! empty( $room['price'] ) ) {
+								if ( $startprice <= $room['price'] && $room['price'] <= $endprice ) {
+									$has_hotel = true;
+								}
+							}
+						}
+					}
+				}else{
+					$has_hotel = true; // Show that hotel
+				}
 
 			} else {
 				// If all the room has custom date range then filter the rooms by date
@@ -676,9 +703,35 @@ class Hotel {
 			$avil_by_date = array_column( $rooms_meta, 'avil_by_date' );
 
 			// Check if any room available without custom date range
-			if ( in_array( 0, $avil_by_date ) || empty( $avil_by_date ) ) {
+			if ( in_array( 0, $avil_by_date ) || empty( $avil_by_date ) || empty( $avil_by_date[0] ) ) {
 
-				$has_hotel = true; // Show that hotel
+				if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+					foreach ( $rooms as $_room ) {
+						$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
+
+						if('2'==$room['pricing-by']){
+							if ( ! empty( $room['adult_price'] ) ) {
+								if ( $startprice <= $room['adult_price'] && $room['adult_price'] <= $endprice ) {
+									$has_hotel = true;
+								}
+							}
+							if ( ! empty( $room['child_price'] ) ) {
+								if ( $startprice <= $room['child_price'] && $room['child_price'] <= $endprice ) {
+									$has_hotel = true;
+								}
+							}
+						}
+						if('1'==$room['pricing-by']){
+							if ( ! empty( $room['price'] ) ) {
+								if ( $startprice <= $room['price'] && $room['price'] <= $endprice ) {
+									$has_hotel = true;
+								}
+							}
+						}
+					}
+				}else{
+					$has_hotel = true; // Show that hotel
+				}
 
 			} else {
 				// If all the room has custom date range then filter the rooms by date
@@ -813,11 +866,12 @@ class Hotel {
 		}
 
 		// Remove disabled rooms
-		if ( ! empty( $rooms_meta['room'] ) ):
-			$rooms_meta = array_filter( $rooms_meta['room'], function ( $value ) {
-				return ! empty( $value ) && ! empty( $value['enable'] ) ? $value['enable'] : '' != '0';
+		if ( ! empty( $rooms_meta ) ):
+			$rooms_meta = array_filter( $rooms_meta, function ( $value ) {
+				return ! empty( $value ) && empty( $value['enable'] ) ? $value['enable'] : '' != '0';
 			} );
 		endif;
+
 		// If no room return
 		if ( empty( $rooms_meta ) ) {
 			return;

@@ -29,6 +29,7 @@ class Room {
 				$hotel_rooms[] = $room;
 			}
 		}
+		wp_reset_postdata();
 
 		return $hotel_rooms;
 

@@ -25,7 +25,7 @@ abstract class TF_Notice {
     }
 
     function tf_disable_critical_update_admin_notice() {
-        update_option( 'tf_dismiss_210', 1 );
+        update_option( 'tf_dismiss_211', 1 );
         wp_die();
     }
 
