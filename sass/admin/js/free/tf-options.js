@@ -508,7 +508,9 @@
 
         $(document).find("#tf-settings-header-search-filed").on("keyup", function () {
             var value = $(this).val().toLowerCase();
-            if( value.length > 3 ) {
+            let div = document.createElement('div');
+            div.classList.add('tf-search-results');
+            if( value.length >= 3 ) {
                 $.ajax({
                     url: tf_options.ajax_url,
                     type: 'POST',
@@ -519,18 +521,42 @@
                     },
                     success: function (response) {
                         let data = JSON.parse(response)
+                        let resultDiv = document.createElement('ul');
                         if (data.status === 'success') {
                             $.each( data.message, function( key, obj ) {
                                 if( obj.field_title.toLowerCase().indexOf(value) > -1 ) {
-                                    console.log(obj.path + ' > ' + obj.field_title);
+                                    let textDiv = document.createElement('li');
+                                    let titleDiv = document.createElement('div');
+                                    titleDiv.classList.add('tf-search-result-title');
+
+                                    let icon = document.createElement('i');
+                                    let title = document.createElement('p');
+                                    let path = document.createElement('span');
+                                    title.innerHTML = obj.field_title;
+                                    path.innerHTML = obj.path;
+                                    icon.classList.add(...obj.icon.split(' '));
+                                    resultDiv.classList.add('tf-search-result');
+                                    textDiv.append(icon);
+                                    titleDiv.append(title);
+                                    titleDiv.append(path);
+                                    textDiv.append(titleDiv);
+                                    resultDiv.append(textDiv);
+                                }
+                                if( $('.tf-search-results').length || value < 3 ) {
+                                    $('.tf-search-results').remove();
+                                } else {
+                                    div.append(resultDiv);
                                 }
                             });
+                            $(".tf-setting-search").append(div);
                         } else {
                             console.log("Something went wrong!");
                         }
                     }
                 })
                 
+            } else {
+                $("tf-search-results").remove();
             }
         });
 
