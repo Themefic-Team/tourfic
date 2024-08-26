@@ -291,23 +291,28 @@
                 }
             }
 
+            $('.error-notice').hide();
+
             var pickup = $('#tf_pickup_location').val();
             let dropoff = $('#tf_dropoff_location').val();
             let pickup_date = $('.tf_pickup_date').val();
             let dropoff_date = $('.tf_dropoff_date').val();
             let pickup_time = $('.tf_pickup_time').val();
             let dropoff_time = $('.tf_dropoff_time').val();
+            let post_id = $('#post_id').val();
+            let protection = $('#protection_value').val();
 
             var data = {
                 action: 'tf_car_booking',
-                car_booking_nonce: tf_params.nonce,
+                _nonce: tf_params.nonce,
                 post_id: post_id,
                 pickup: pickup,
                 dropoff: dropoff,
                 pickup_date: pickup_date,
                 dropoff_date: dropoff_date,
                 pickup_time: pickup_time,
-                dropoff_time: dropoff_time
+                dropoff_time: dropoff_time,
+                protection: protection,
             };
 
             $.ajax({
@@ -315,7 +320,6 @@
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
-                    form.css({'opacity': '0.5', 'pointer-events': 'none'});
                     $this.addClass('tf-btn-loading');
                 },
                 success: function (response) {

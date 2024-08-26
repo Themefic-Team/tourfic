@@ -233,6 +233,7 @@ use \Tourfic\App\TF_Review;
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Time", "tourfic"); ?></h5>
                                         <input type="text" placeholder="Drop Off Time" class="tf_dropoff_time">
+                                        <input type="hidden" value="<?php echo esc_attr($post_id); ?>" id="post_id">
                                     </div>
                                 </div>
                             </div>
