@@ -693,10 +693,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<h2 class="tf-setting-title"><?php echo esc_html__( "Tourfic Settings", "tourfic" ); ?></h2>
 							<div class="tf-setting-search">
 								<i class="fa-solid fa-search"></i>
-								<div class="search-inpurt">
+								<div class="search-input">
 									<input aria-label="Search" id="tf-settings-header-search-filed" type="text" placeholder="<?php echo esc_attr__( "Search Options", "tourfic" ); ?>" class="ui-autocomplete-input" autocomplete="off">
 								</div>
 							</div>
+							
 						</div>
 						<div class="settings-header-right">
 							<div class="tf-setting-save-btn">
@@ -705,6 +706,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							</div>
 						</div>
 					</div>
+					<!-- Search Results Container -->
                     <form method="post" action="" class="tf-option-form <?php echo esc_attr($ajax_save_class) ?>" enctype="multipart/form-data">
                         <!-- Body -->
                         <div class="tf-option">

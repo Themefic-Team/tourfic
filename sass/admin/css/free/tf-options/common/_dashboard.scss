@@ -581,7 +581,6 @@
         position: sticky;
         top: 32px;
         z-index: 999;
-        overflow: hidden;
 
         .settings-header-left {
             min-width: 40%;
@@ -595,7 +594,7 @@
             }
 
             .tf-setting-search {
-                min-width: 50%;
+                min-width: 55%;
                 display: flex;
                 align-items: center;
                 padding-left: 12px;
@@ -609,17 +608,82 @@
                     font-size: 16px
                 }
 
+                .search-input {
+                    min-width: 100%;
+                }
+
                 input {
                     min-width: calc(100% - 22px);
                     padding: 8px 12px 8px 0px;
                     border: none;
+                    position: relative;
                     background-color: transparent;
                     height: 42px;
                     font-size: 16px;
+                    z-index: 999;
 
                     &:focus {
                         outline: none;
                         box-shadow: none;
+                    }
+                }
+
+                .tf-search-results {
+                    position: absolute;
+                    top: 75%;
+                    left: 164px;
+                    right: 0;
+                    width: 379px;
+                    background-color: #fff;
+                    box-sizing: border-box;
+                    padding: 8px 4px 8px 8px;
+                    border-radius: 4px;
+                    min-height: 80px;
+                    max-height: 300px;
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                    scrollbar-width: thin;
+                    border: 1px solid #ddd;
+
+                    ul {
+                        margin: 0;
+                        padding: 0;
+                        list-style: none;
+
+                        li {
+                            border-bottom: 1px solid #f0f0f0;
+                            display: flex;
+                            padding: 5px 10px 5px 10px;
+                            align-items: center;
+                            gap: 12px;
+                            cursor: pointer;
+                            border-radius: 4px;
+
+                            .tf-search-result-title {
+                                line-height: 1.8;
+                            }
+
+                            i {
+                                font-size: 24px !important;
+                                color: #001f3e;
+                            }
+
+                            p {
+                                margin: 0;
+                                font-size: 14px;
+                                font-weight: 600;
+                            }
+
+                            span {
+                                font-size: 12px;
+                                color: #777;
+                            }
+
+                            &:hover{
+                                background-color: #ddd;
+                            }
+                        }
+                        
                     }
                 }
 
