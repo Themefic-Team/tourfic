@@ -286,8 +286,6 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 		$room_id  = isset( $_POST['room_id'] ) ? $_POST['room_id'] : '';
 
 		if ( ! empty( $hotel_id ) && ! empty( $room_id ) ) {
-
-			$meta  = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
 			$rooms = Room::get_hotel_rooms( $hotel_id);
 
 			if ( ! empty( $rooms ) ) {
