@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.6
-Stable tag: 2.12.10
+Stable tag: 2.13.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -322,6 +322,23 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.13.1 - 24 August 2024 =
+
+- Improvement: Improved hotel search feature
+- Improvement: Archive page filters
+- Improvement: Google map translation
+- Improvement: Changed login URL
+
+= 2.13.0 - 13 August 2024 =
+
+- Improvement: Revamped hotel room feature.
+- Improvement: Hotel room post type.
+- System stability improved.
+
+= 2.12.11 - 08 August 2024 =
+
+- Update Notice: We are preparing to release version 2.13.0 soon, with Improved hotel room features and several enhancements. As a precautionary measure, we recommend taking a backup before proceeding with the update.
+
 = 2.12.10 - 02 August 2024 =
 
 - Improvement: Tourfic menu icons updated
@@ -531,37 +548,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Fixed: PHP Deprecated issue
 - Fixed: Hotel, Tour, Apartment Booking Details Issue
 - Updated: Popup Design style
-
-= 2.11.9 - 04 February 2024 =
-
-- Compatibility: Compatible With Elementor(3.19.0)
-- Updated: Vulnerability(XSS) issue
-- Fixed: Minor Bugs
-
-= 2.11.8 - 01 February 2024 =
-
-- Fixed: Booking Details export issue
-- Fixed: Vulnerability issue
-- Fixed: Template 3 Layout issue
-- Improvement: Removed Unused CSS/JS
-
-= 2.11.7 - 28 January 2024 =
-
-- Fixed: Search filter issue
-- Fixed: Availability by date issue
-- Improvement: System stability Improved
-
-= 2.11.6 - 23 January 2024 =
-
-- Compatibility: Compatible With Slider Revolution 
-- Improved: Apartment Single Page Price Calculation
-- Added: Tour Features Pro to Free
-
-= 2.11.5 - 20 January 2024 =
-
-- Fixed: Search page sidebar issue
-- Compatibility: Compatible with ACF Plugin(Colour picker)
-- Improved: Template design, and Updated style
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 

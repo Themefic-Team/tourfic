@@ -226,6 +226,7 @@ if(!function_exists('tf_custom_wp_kses_allow_tags')){
 			'enctype' => true,
 			'class'   => true,
 			'id'      => true,
+			'data-*'  => true,
 		);
 
 		$allowed_tags['input'] = array(
@@ -235,6 +236,8 @@ if(!function_exists('tf_custom_wp_kses_allow_tags')){
 			'placeholder' => true,
 			'class'       => true,
 			'id'          => true,
+			'checked'     => true,
+			'data-*'      => true,
 		);
 
 		$allowed_tags['select'] = array(
@@ -242,34 +245,30 @@ if(!function_exists('tf_custom_wp_kses_allow_tags')){
 			'class'    => true,
 			'id'       => true,
 			'data-*'   => true,
-			'multiple' => true
+			'multiple' => true,
 		);
 
 		$allowed_tags['option'] = array(
-			'value' => true,
-			'class' => true,
-			'id'    => true,
+			'value'  => true,
+			'class'  => true,
+			'id'     => true,
+			'data-*' => true,
 		);
 
 		$allowed_tags['textarea'] = array(
-			'name'  => true,
-			'rows'  => true,
-			'cols'  => true,
-			'class' => true,
-			'id'    => true,
-		);
-
-		$allowed_tags['button'] = array(
-			'type'  => true,
-			'name'  => true,
-			'class' => true,
-			'id'    => true,
+			'name'   => true,
+			'rows'   => true,
+			'cols'   => true,
+			'class'  => true,
+			'id'     => true,
+			'data-*' => true,
 		);
 
 		$allowed_tags['label'] = array(
-			'for'   => true,
-			'class' => true,
-			'id'    => true,
+			'for'    => true,
+			'class'  => true,
+			'id'     => true,
+			'data-*' => true,
 		);
 
 		$allowed_tags['fieldset'] = array(
@@ -295,6 +294,33 @@ if(!function_exists('tf_custom_wp_kses_allow_tags')){
 			'type'  => true,
 			'class' => true,
 			'id'    => true,
+			'async' => true,
+			'defer' => true,
+		);
+		$allowed_tags['button'] = array(
+			'class'    => true,
+			'id'       => true,
+			'disabled' => true,
+			'data-*'   => true,
+
+		);
+		$allowed_tags['style']  = array(
+			'class' => true,
+			'id'    => true,
+		);
+
+		$allowed_tags['iframe'] = array(
+			'class'           => true,
+			'id'              => true,
+			'allowfullscreen' => true,
+			'frameborder'     => true,
+			'src'             => true,
+			'style'           => true,
+			'width'           => true,
+			'height'          => true,
+			'title'           => true,
+			'allow'           => true,
+			'data-*'          => true,
 		);
 
 		$allowed_tags["svg"] = array(
@@ -307,6 +333,7 @@ if(!function_exists('tf_custom_wp_kses_allow_tags')){
 			'height'          => true,
 			'viewbox'         => true,
 			'fill'            => true,
+			'data-*'          => true,
 		);
 
 		$allowed_tags['g']        = array( 'fill' => true, "clip-path" => true );
