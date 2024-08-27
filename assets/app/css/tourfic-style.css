@@ -16657,7 +16657,8 @@ html {
   line-height: 120%; /* 14.4px */
   margin-bottom: 8px;
 }
-.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field input[type=text] {
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field input[type=text],
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field input[type=email] {
   border-radius: 8px;
   border: 1px solid #C0CCD8;
   padding: 8px 16px;
@@ -16668,6 +16669,34 @@ html {
   font-weight: 400;
   line-height: 150%; /* 24px */
   width: 100%;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field input[type=date] {
+  border-radius: 8px;
+  border: 1px solid #C0CCD8;
+  padding: 0px 16px;
+  height: 40px;
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 24px */
+  width: 100%;
+  text-transform: uppercase;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field select {
+  border-radius: 8px;
+  border: 1px solid #C0CCD8;
+  padding: 0px 16px;
+  height: 40px;
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 24px */
+  width: 100%;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field .error-text.error-visible {
+  color: red;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-booking-submission {
   margin-top: 24px;

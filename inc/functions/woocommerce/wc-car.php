@@ -40,6 +40,9 @@ function tf_car_booking_callback() {
 	$extra_ids  = isset( $_POST['extra_ids'] ) ? $_POST['extra_ids'] : '';
 	$extra_qty  = isset( $_POST['extra_qty'] ) ? $_POST['extra_qty'] : '';
 
+	// Booking Confirmation Details
+	$tf_confirmation_details = !empty($_POST['travellerData']) ? $_POST['travellerData'] : "";
+
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 
 	// Booking
@@ -82,6 +85,117 @@ function tf_car_booking_callback() {
 	
 	if( !empty($car_booking_by) && '3'==$car_booking_by ){
 
+		$tf_booking_fields = !empty(Helper::tfopt( 'book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'book-confirm-field' )) : '';
+		if(empty($tf_booking_fields)){
+			$billing_details  = array(
+				'billing_first_name' => sanitize_text_field($tf_confirmation_details['tf_first_name']),
+				'billing_last_name'  => sanitize_text_field($tf_confirmation_details['tf_last_name']),
+				'billing_company'    => '',
+				'billing_address_1'  => sanitize_text_field($tf_confirmation_details['tf_street_address']),
+				'billing_address_2'  => "",
+				'billing_city'       => sanitize_text_field($tf_confirmation_details['tf_town_city']),
+				'billing_state'      => sanitize_text_field($tf_confirmation_details['tf_state_country']),
+				'billing_postcode'   => sanitize_text_field($tf_confirmation_details['tf_postcode']),
+				'billing_country'    => sanitize_text_field($tf_confirmation_details['tf_country']),
+				'billing_email'      => sanitize_email($tf_confirmation_details['tf_email']),
+				'billing_phone'      => sanitize_text_field($tf_confirmation_details['tf_phone']),
+			);
+			$shipping_details = array(
+				'tf_first_name' => sanitize_text_field($tf_confirmation_details['tf_first_name']),
+				'tf_last_name'  => sanitize_text_field($tf_confirmation_details['tf_last_name']),
+				'shipping_company'    => '',
+				'tf_street_address'  => sanitize_text_field($tf_confirmation_details['tf_street_address']),
+				'shipping_address_2'  => "",
+				'tf_town_city'       => sanitize_text_field($tf_confirmation_details['tf_town_city']),
+				'tf_state_country'      => sanitize_text_field($tf_confirmation_details['tf_state_country']),
+				'tf_postcode'   => sanitize_text_field($tf_confirmation_details['tf_postcode']),
+				'tf_country'    => sanitize_text_field($tf_confirmation_details['tf_country']),
+				'tf_phone'      => sanitize_text_field($tf_confirmation_details['tf_phone']),
+				'tf_email'      => sanitize_email($tf_confirmation_details['tf_email']),
+			);
+		}else{
+			$billing_details = [];
+			$shipping_details = [];
+			
+			if(!empty($tf_confirmation_details)){
+				foreach( $tf_confirmation_details as $key => $details ){
+					if("tf_first_name"==$key){
+						$billing_details['billing_first_name'] = sanitize_text_field($details);
+						$shipping_details[$key] = sanitize_text_field($details);
+					}else if("tf_last_name"==$key){
+						$billing_details['billing_last_name'] = sanitize_text_field($details);
+						$shipping_details[$key] = sanitize_text_field($details);
+					}else if("tf_street_address"==$key){
+						$billing_details['billing_address_1'] = sanitize_text_field($details);
+						$shipping_details[$key] = sanitize_text_field($details);
+					}else if("tf_town_city"==$key){
+						$billing_details['billing_city'] = sanitize_text_field($details);
+						$shipping_details[$key] = sanitize_text_field($details);
+					}else if("tf_state_country"==$key){
+						$billing_details['billing_state'] = sanitize_text_field($details);
+						$shipping_details[$key] = sanitize_text_field($details);
+					}else if("tf_postcode"==$key){
+						$billing_details['billing_postcode'] = sanitize_text_field($details);
+						$shipping_details[$key] = sanitize_text_field($details);
+					}else if("tf_country"==$key){
+						$billing_details['billing_country'] = sanitize_text_field($details);
+						$shipping_details[$key] = sanitize_text_field($details);
+					}else if("tf_email"==$key){
+						$billing_details['billing_email'] = sanitize_email($details);
+						$shipping_details[$key] = sanitize_email($details);
+					}else if("tf_phone"==$key){
+						$billing_details['billing_phone'] = sanitize_text_field($details);
+						$shipping_details[$key] = sanitize_text_field($details);
+					}else{
+						$billing_details[$key] = $details;
+						$shipping_details[$key] = $details;
+					}
+				}
+			}
+		}
+
+		if ( is_user_logged_in() ) {
+			$current_user = wp_get_current_user();
+			// get user id
+			$tf_offline_user_id = $current_user->ID;
+		} else {
+			$tf_offline_user_id = 1;
+		}
+
+		$order_details = [
+			'order_by'    => '',
+			'pickup_location'   => $pickup,
+			'pickup_date'   => $tf_pickup_date,
+			'pickup_time'   => $tf_pickup_time,
+			'dropoff_location'   => $dropoff,
+			'dropoff_date'   => $tf_dropoff_date,
+			'dropoff_time'   => $tf_dropoff_time,
+			'extra' => !empty($tf_cars_data['tf_car_data']['extras']) ? $tf_cars_data['tf_car_data']['extras'] : '',
+			'protection' => !empty($tf_cars_data['tf_car_data']['protection']) ? $tf_cars_data['tf_car_data']['protection'] : '',
+			'total_price' => $total_prices
+		];
+
+		$order_data = array(
+			'post_id'          => $post_id,
+			'post_type'        => 'car',
+			'room_number'      => null,
+			'check_in'         => $tf_pickup_date,
+			'check_out'        => $tf_dropoff_date,
+			'billing_details'  => $billing_details,
+			'shipping_details' => $shipping_details,
+			'order_details'    => $order_details,
+			'payment_method'   => 'offline',
+			'customer_id'	   => $tf_offline_user_id,
+			'status'           => 'completed',
+			'order_date'       => gmdate( 'Y-m-d H:i:s' ),
+		);
+		$response['without_payment'] = 'true';
+		$order_id = Helper::tf_set_order( $order_data );
+		
+		if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($order_id) ) {
+			do_action( 'tf_offline_payment_booking_confirmation', $order_id, $order_data );
+		}
+
 	}else{
 		if( '2'==$car_booking_by && !empty($tf_booking_url) ){
 			$external_search_info = array(
@@ -107,6 +221,7 @@ function tf_car_booking_callback() {
 			$response['add_to_cart'] = 'true';
 			$response['redirect_to'] = wc_get_checkout_url();
 		}
+		$response['without_payment'] = 'false';
 	}
 
 	// Json Response

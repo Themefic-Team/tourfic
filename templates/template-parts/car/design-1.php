@@ -460,30 +460,73 @@ use \Tourfic\App\TF_Review;
                                 
                                 <div class="tf-booking-form-fields">
                                     <div class="tf-form-fields tf-flex tf-flex-gap-24 tf-flex-w">
+                                        <?php 
+                                        $traveller_info_fields = ! empty( Helper::tfopt( 'book-confirm-field' ) ) ? Helper::tf_data_types( Helper::tfopt( 'book-confirm-field' ) ) : '';
+                                        if(empty($traveller_info_fields)){
+                                        ?>
                                         <div class="tf-single-field">
-                                            <label for="">Name</label>
-                                            <input type="text" placeholder="Name">
+                                            <label for="tf_first_name"><?php esc_html_e("First Name", "tourfic"); ?></label>
+                                            <input type="text" placeholder="First Name" id="tf_first_name" name="traveller['tf_first_name]" data-required="1">
+                                            <div class="error-text" data-error-for="tf_first_name"></div>
                                         </div>
                                         <div class="tf-single-field">
-                                            <label for="">Name</label>
-                                            <input type="text" placeholder="Name">
+                                            <label for="tf_last_name"><?php esc_html_e("Last Name", "tourfic"); ?></label>
+                                            <input type="text" placeholder="Name" id="tf_last_name" name="traveller['tf_last_name]" data-required="1">
+                                            <div class="error-text" data-error-for="tf_last_name"></div>
                                         </div>
                                         <div class="tf-single-field">
-                                            <label for="">Name</label>
-                                            <input type="text" placeholder="Name">
+                                            <label for="tf_email"><?php esc_html_e("Email", "tourfic"); ?></label>
+                                            <input type="text" placeholder="Email" id="tf_email" name="traveller['tf_email]" data-required="1">
+                                            <div class="error-text" data-error-for="tf_email"></div>
                                         </div>
-                                        <div class="tf-single-field">
-                                            <label for="">Name</label>
-                                            <input type="text" placeholder="Name">
-                                        </div>
-                                        <div class="tf-single-field">
-                                            <label for="">Name</label>
-                                            <input type="text" placeholder="Name">
-                                        </div>
+                                        <?php }else{ 
+                                            foreach ( $traveller_info_fields as $field ) {
+                                                if ( "text" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] || "date" == $field['reg-fields-type'] ) {
+                                                    $reg_field_required = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : '';
+                                                    ?>
+                                                    <div class="tf-single-field">
+                                                        <label for="<?php echo esc_attr($field['reg-field-name']); ?>"><?php echo esc_html($field['reg-field-label']); ?></label>
+                                                        <input type="<?php echo esc_attr($field['reg-fields-type']); ?>" name="traveller[<?php echo esc_attr($field['reg-field-name']); ?>]" data-required="<?php echo esc_attr($reg_field_required); ?>" id="<?php echo esc_attr($field['reg-field-name']); ?>" />
+                                                        <div class="error-text" data-error-for="<?php echo esc_attr($field['reg-field-name']); ?>"></div>
+                                                    </div>
+                                               <?php } if ( "select" == $field['reg-fields-type'] && ! empty( $field['reg-options'] ) ) { ?>
+                                                    <div class="tf-single-field">
+                                                        <label for="<?php echo esc_attr($field['reg-field-name']); ?>"><?php echo esc_html($field['reg-field-label']); ?></label>
+                                                        <select name="traveller[<?php echo esc_attr($field['reg-field-name']); ?>]" data-required="<?php echo esc_attr($reg_field_required); ?>" id="<?php echo esc_attr($field['reg-field-name']); ?>" >
+                                                        <?php 
+                                                        foreach ( $field['reg-options'] as $sfield ) {
+                                                            if ( ! empty( $sfield['option-label'] ) && ! empty( $sfield['option-value'] ) ) { ?>
+                                                            <option value="<?php echo esc_attr($sfield['option-value']); ?>"><?php echo esc_html($sfield['option-label']); ?></option>';
+                                                            <?php
+                                                            }
+                                                        }
+                                                        ?>
+                                                        </select>
+                                                        <div class="error-text" data-error-for="<?php echo esc_attr($field['reg-field-name']); ?>"></div>
+                                                    </div>
+                                                <?php } if ( ( "checkbox" == $field['reg-fields-type'] || "radio" == $field['reg-fields-type'] ) && ! empty( $field['reg-options'] ) ) { ?>
+
+                                                    <div class="tf-single-field">
+                                                        <label for="<?php echo esc_attr($field['reg-field-name']); ?>"><?php echo esc_html($field['reg-field-label']); ?></label>
+                                                        <?php 
+                                                        foreach ( $field['reg-options'] as $sfield ) {
+                                                            if ( ! empty( $sfield['option-label'] ) && ! empty( $sfield['option-value'] ) ) { ?>
+                                                                <div class="tf-single-checkbox">
+                                                                <input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="traveller[<?php echo esc_attr($field['reg-field-name']); ?>][]" id="<?php echo esc_attr($sfield['option-value']); ?>" value="<?php echo esc_attr($sfield['option-value']); ?>" data-required="<?php echo esc_attr($field['reg-field-required']); ?>" />
+                                                                <label for="<?php echo esc_attr($sfield['option-value']); ?>"><?php echo esc_html( $sfield['option-label'] ); ?></label></div>
+                                                           <?php }
+                                                        }
+                                                        ?>
+                                                        <div class="error-text" data-error-for="<?php echo esc_attr($field['reg-field-name']); ?>"></div>
+                                                    </div>
+
+                                                <?php } ?>
+
+                                        <?php }} ?>
                                     </div>
 
                                     <div class="tf-booking-submission">
-                                        <button class="booking-process">
+                                        <button class="booking-process tf-offline-booking">
                                             <?php esc_html_e("Continue to Pay", "tourfic"); ?>
                                             <i class="ri-arrow-right-s-line"></i>
                                         </button>
