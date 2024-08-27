@@ -218,4 +218,38 @@ class Pricing {
             return  esc_html_e("Without Taxes", "tourfic");
         }
     }
+
+    // Return Tour Extras Price
+    static function set_extra_price($meta, $extra_ids="", $extra_qty=""){
+
+        $car_extra = !empty($meta['extras']) ? $meta['extras'] : '';
+        $prices = 0;
+        $extra_title = [];
+        foreach($extra_qty as $key => $singleqty){
+            if(!empty($singleqty)){
+                $single_extra_info = !empty($car_extra[$key]) ? $car_extra[$key] : '';
+                if(!empty($single_extra_info)){ 
+                    $prices += $single_extra_info['price']*$singleqty;
+                    $extra_title[] = $single_extra_info['title'];
+                }
+            }
+        }
+        $extras = array(
+         'title' => implode(", ",$extra_title),
+         'price' => $prices
+        );
+
+        return $extras;
+    }
+
+    static function set_protection_price($meta){
+        $car_protections = ! empty( $meta['protections'] ) ? $meta['protections'] : '';
+        $prices = 0;
+        foreach($car_protections as $protection){
+            if(!empty($protection['include']) && !empty($protection['price'])){ 
+                $prices += $protection['price'];
+            }
+        }
+        return $prices;
+    }
 }

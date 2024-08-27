@@ -277,6 +277,15 @@
 
         $(document).on('click', '.booking-process', function (e) {
             let $this = $(this);
+            let extra_ids = $("input[name='selected_extra[]']").map(function() {
+                return $(this).val();
+            }).get();
+
+            let extra_qty = $("input[name='selected_qty[]']").map(function() {
+                return $(this).val();
+            }).get();
+
+    
             if($this.hasClass('tf-final-step')){
                 var pickup = $('#tf_pickup_location').val();
                 let dropoff = $('#tf_dropoff_location').val();
@@ -313,6 +322,8 @@
                 pickup_time: pickup_time,
                 dropoff_time: dropoff_time,
                 protection: protection,
+                extra_ids: extra_ids,
+                extra_qty: extra_qty
             };
 
             $.ajax({

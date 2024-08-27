@@ -36,6 +36,9 @@ function tf_car_booking_callback() {
 	$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? sanitize_text_field( $_POST['dropoff_date'] ) : '';
 	$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( $_POST['pickup_time'] ) : '';
 	$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( $_POST['dropoff_time'] ) : '';
+	$tf_protection  = isset( $_POST['protection'] ) ? sanitize_text_field( $_POST['protection'] ) : '';
+	$extra_ids  = isset( $_POST['extra_ids'] ) ? $_POST['extra_ids'] : '';
+	$extra_qty  = isset( $_POST['extra_qty'] ) ? $_POST['extra_qty'] : '';
 
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 
@@ -43,12 +46,24 @@ function tf_car_booking_callback() {
 	$car_booking_by = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : '1';
 
 	$product_id    = get_post_meta( $post_id, 'product_id', true );
-	$total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
-
+	$get_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+	
+	$total_prices = $get_prices['sale_price'] ? $get_prices['sale_price'] : 0;
 
 	$response      = array();
 	$tf_cars_data = array();
 
+	if(!empty($extra_ids)){
+		$total_extra = Pricing::set_extra_price($meta, $extra_ids, $extra_qty);
+		$total_prices = $total_prices + $total_extra['price'];
+		$tf_cars_data['tf_car_data']['extras'] = $total_extra['title'];
+	}
+
+	if(!empty('yes'==$tf_protection)){
+		$total_protection_prices = Pricing::set_protection_price($meta);
+		$total_prices = $total_prices + $total_protection_prices;
+		$tf_cars_data['tf_car_data']['protection']         = 'Included';
+	}
 
 	$tf_cars_data['tf_car_data']['order_type']         = 'car';
 	$tf_cars_data['tf_car_data']['post_id']            = $post_id;
@@ -60,7 +75,7 @@ function tf_car_booking_callback() {
 	$tf_cars_data['tf_car_data']['tf_dropoff_date']    = $tf_dropoff_date;
 	$tf_cars_data['tf_car_data']['tf_pickup_time']     = $tf_pickup_time;
 	$tf_cars_data['tf_car_data']['tf_dropoff_time']    = $tf_dropoff_time;
-	$tf_cars_data['tf_car_data']['price_total']    	   = $total_prices['sale_price'];
+	$tf_cars_data['tf_car_data']['price_total']    	   = $total_prices;
 	
 	if('1'==$car_booking_by){
 		WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_cars_data );
@@ -125,6 +140,18 @@ function car_display_cart_item_custom_meta_data( $item_data, $cart_item ) {
 		$item_data[] = array(
 			'key'   => esc_html__( 'Drop Off Date', 'tourfic' ),
 			'value' => $cart_item['tf_car_data']['tf_dropoff_date'].' - '. $cart_item['tf_car_data']['tf_dropoff_time'],
+		);
+	}
+	if ( isset( $cart_item['tf_car_data']['extras'] ) ) {
+		$item_data[] = array(
+			'key'   => esc_html__( 'Extra', 'tourfic' ),
+			'value' => $cart_item['tf_car_data']['extras'],
+		);
+	}
+	if ( isset( $cart_item['tf_car_data']['protection'] ) ) {
+		$item_data[] = array(
+			'key'   => esc_html__( 'Car Protection', 'tourfic' ),
+			'value' => $cart_item['tf_car_data']['protection'],
 		);
 	}
 
