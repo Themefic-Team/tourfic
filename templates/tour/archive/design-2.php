@@ -2,6 +2,7 @@
 
     <?php 
     use \Tourfic\Classes\Helper;
+    use Tourfic\Classes\Tour\Tour;
     
     $tf_tour_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] : '';
     ?>  
@@ -67,7 +68,7 @@
                                     $tour_meta = get_post_meta( get_the_ID() , 'tf_tours_opt', true );
                                     
                                     if(!empty($tour_meta["tour_as_featured"])) {
-                                        tf_tour_archive_single_item();
+                                        Tour::tf_tour_archive_single_item();
                                         $featured_post_id[] = get_the_ID(); 
                                     }
 
@@ -81,7 +82,7 @@
                                     $tour_meta = get_post_meta( get_the_ID() , 'tf_tours_opt', true );
                                     
                                     if( empty($tour_meta["tour_as_featured"]) ) {
-                                        tf_tour_archive_single_item();
+                                        Tour::tf_tour_archive_single_item();
                                     }
                                 }
                             } else {

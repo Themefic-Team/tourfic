@@ -80,7 +80,7 @@ class Base {
 		}
 		if ( Helper::tfopt( 'disable-services' ) && in_array( 'tour', Helper::tfopt( 'disable-services' ) ) ) {
 		} else {
-			 \Tourfic\Classes\Tour\Tour_CPT::instance();
+			 \Tourfic\Classes\Tour\Tour::instance();
 		}
 		if ( Helper::tfopt( 'disable-services' ) && in_array( 'apartment', Helper::tfopt( 'disable-services' ) ) ) {
 		} else {

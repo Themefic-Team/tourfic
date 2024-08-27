@@ -121,9 +121,7 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 				if ( ! in_array( 'tour', $disable_services ) && Helper::tf_is_search_form_tab_type( 'tour', $type ) ) {
 					?>
 					<div id="tf-tour-booking-form" class="tf-tabcontent" <?php echo Helper::tf_is_search_form_single_tab( $type ) ? 'style="display:block"' : '' ?><?php echo esc_attr( $child_age_limit ); ?>>
-						<?php
-						tf_tour_search_form_horizontal( $classes, $title, $subtitle, $author, $advanced, $design );
-						?>
+						<?php \Tourfic\Classes\Tour\Tour::tf_tour_search_form_horizontal( $classes, $title, $subtitle, $author, $advanced, $design ); ?>
 					</div>
 					<?php
 				}
