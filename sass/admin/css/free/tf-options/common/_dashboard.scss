@@ -636,7 +636,6 @@
                     width: 379px;
                     background-color: #fff;
                     box-sizing: border-box;
-                    padding: 8px 4px 8px 8px;
                     border-radius: 4px;
                     min-height: 80px;
                     max-height: 300px;
@@ -644,11 +643,17 @@
                     overflow-x: hidden;
                     scrollbar-width: thin;
                     border: 1px solid #ddd;
+                    transition: all 0.5s ease;
 
                     ul {
                         margin: 0;
                         padding: 0;
                         list-style: none;
+
+                        a {
+                            text-decoration: none;
+                            color: #000;
+                        }
 
                         li {
                             border-bottom: 1px solid #f0f0f0;
@@ -658,14 +663,15 @@
                             gap: 12px;
                             cursor: pointer;
                             border-radius: 4px;
+                            margin: 0;
 
                             .tf-search-result-title {
-                                line-height: 1.8;
+                                line-height: 1.4;
                             }
 
                             i {
-                                font-size: 24px !important;
-                                color: #001f3e;
+                                font-size: 20px !important;
+                                color: #8997a9;
                             }
 
                             p {
@@ -680,6 +686,9 @@
                             }
 
                             &:hover{
+                                background-color: #f0f2f4;
+                            }
+                            &:active{
                                 background-color: #f0f2f4;
                             }
                         }
