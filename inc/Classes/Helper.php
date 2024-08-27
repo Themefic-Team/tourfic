@@ -3623,14 +3623,13 @@ class Helper {
 
 			$user = wp_get_current_user();
 
-			if ( in_array( 'tf_vendor', (array) $user->roles ) || in_array( 'tf_manager', (array) $user->roles ) || in_array( 'customer', (array) $user->roles ) ) {
+			if ( ! defined( 'DOING_AJAX' ) && (in_array( 'tf_vendor', (array) $user->roles ) || in_array( 'tf_manager', (array) $user->roles ) || in_array( 'customer', (array) $user->roles )) ) {
 				$tf_dashboard_page_link = ! empty( get_option( 'tf_dashboard_page_id' ) ) ? get_permalink( get_option( 'tf_dashboard_page_id' ) ) : get_home_url();
 				wp_redirect( $tf_dashboard_page_link );
 				exit;
-			} else if ( in_array( 'administrator', (array) $user->roles ) || in_array( 'editor', (array) $user->roles ) ) {
+			} else {
 				return;
 			}
-
 		}
 	}
 }
