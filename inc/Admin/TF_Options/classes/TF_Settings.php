@@ -999,7 +999,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 		public function tf_search_settings_autocomplete_callback() {
 			if( isset( $_POST['tf_option_nonce'] ) || wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_option_nonce'])), 'tf_option_nonce_action' ) ) {
-				$all_settings = $this->option_sections;
+				$all_settings = $this->pre_tabs;
 				$fields = [];
 				$path = '';
 
@@ -1007,26 +1007,90 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 					$parent = $parent_title = '';
 					$icon = $data['icon'];
-					if( isset( $data["parent"] )) {
-						$parent = $data["parent"];
-						$parent = !empty($parent) ? $all_settings[$parent] : '';
-						$parent_title = !empty($parent) ? $parent['title'] : '';
-						$icon = !empty($parent) ? $parent['icon'] : $data['icon'];
-					}
 
-					!empty( $parent_title ) ? $path = $parent_title . ' > ' . $data['title'] : $path = $data['title'];
+					if( !empty( $data["fields"]) ) {
+						$path = $data['title'];
+						foreach ( $data["fields"] as $field ) {
 
-					if ( ! empty( $data['fields'] ) ) {
-						foreach ( $data['fields'] as $field ) {
+							if ( !empty( $field['tabs'] )) {
+								foreach( $field['tabs'] as $key => $tab) {
+									
+									if ( !empty( $tab['fields'] )) {
+										foreach ( $tab['fields'] as $tab_field ) {
+											$fields[] = array(
+												'parent' => $parent_title,
+												'parent_id' => $section,
+												'field_title' => !empty( $tab_field["label"] ) ? $tab_field["label"] : ( !empty( $tab_field['title'] ) ? $tab_field['title'] : ( !empty( $tab_field['heading'] ) ?  !empty( $tab_field['heading'] ) : ''  )),
+												'section' => $tab['title'],
+												'icon' => $icon,
+												'path' => $path,
+												'id' => $tab_field['id'],
+											);
+										}
+									}
+
+								}
+							}
 
 							$fields[] = array(
 								'parent' => $parent_title,
+								'parent_id' => $section,
 								'field_title' => !empty( $field["label"] ) ? $field["label"] : ( !empty( $field['title'] ) ? $field['title'] : ( !empty( $field['heading'] ) ?  !empty( $field['heading'] ) : ''  )),
 								'section' => $data['title'],
 								'icon' => $icon,
 								'path' => $path,
 								'id' => $field['id'],
 							);
+						}
+					}
+
+					if( !empty( $data["sub_section"])) {
+						foreach ( $data["sub_section"] as $key => $sub_section ) {
+
+							$parent_id = $key;
+
+							if( isset( $sub_section["parent"] )) {
+								$parent = $sub_section["parent"];
+								$parent = !empty($parent) ? $all_settings[$parent] : '';
+								$parent_title = !empty($parent) ? $parent['title'] : '';
+								$icon = !empty($parent) ? $parent['icon'] : $data['icon'];
+							}
+
+							!empty( $parent_title ) ? $path = $parent_title . ' > ' . $sub_section['title'] : $path = $sub_section[$key]['title'];
+							if ( !empty( $sub_section["fields"])) {
+
+								foreach ( $sub_section["fields"] as $field ) {
+
+									if ( !empty( $field['tabs'] )) {
+										foreach( $field['tabs'] as $key => $tab) {
+											
+											if ( !empty( $tab['fields'] )) {
+												foreach ( $tab['fields'] as $tab_field ) {
+													$fields[] = array(
+														'parent' => $parent_title,
+														'parent_id' => $parent_id,
+														'field_title' => !empty( $tab_field["label"] ) ? $tab_field["label"] : ( !empty( $tab_field['title'] ) ? $tab_field['title'] : ( !empty( $tab_field['heading'] ) ?  !empty( $tab_field['heading'] ) : ''  )),
+														'section' => $tab['title'],
+														'icon' => $icon,
+														'path' => $path,
+														'id' => $tab_field['id'],
+													);
+												}
+											}
+		
+										}
+									}
+									$fields[] = array(
+										'parent' => $parent_title,
+										'parent_id' => $parent_id,
+										'field_title' => !empty( $field["label"] ) ? $field["label"] : ( !empty( $field['title'] ) ? $field['title'] : ( !empty( $field['heading'] ) ?  !empty( $field['heading'] ) : ''  )),
+										'section' => $data['title'],
+										'icon' => $icon,
+										'path' => $path,
+										'id' => $field['id'],
+									);
+								}
+							} 
 						}
 					}
 				}
