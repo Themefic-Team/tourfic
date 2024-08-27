@@ -651,11 +651,6 @@
                         list-style: none;
 
                         a {
-                            text-decoration: none;
-                            color: #000;
-                        }
-
-                        li {
                             border-bottom: 1px solid #f0f0f0;
                             display: flex;
                             padding: 5px 10px 5px 10px;
@@ -664,6 +659,12 @@
                             cursor: pointer;
                             border-radius: 4px;
                             margin: 0;
+                            text-decoration: none;
+                            color: #000;
+
+                            &:focus {
+                                box-shadow: none;
+                            }
 
                             .tf-search-result-title {
                                 line-height: 1.4;

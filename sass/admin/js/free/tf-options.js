@@ -538,13 +538,14 @@
                                         path.innerHTML = obj.path;
                                         icon.classList.add(...obj.icon.split(' '));
                                         resultDiv.classList.add('tf-search-result');
-                                        textDiv.append(icon);
                                         textDiv.setAttribute('data-id', obj.id);
+                                        textDiv.setAttribute('data-tab-id', obj.tab_id);
+                                        link.append(icon);
                                         titleDiv.append(title);
                                         titleDiv.append(path);
-                                        textDiv.append(titleDiv);
-                                        link.append(textDiv);
-                                        resultDiv.append(link);
+                                        link.append(titleDiv);
+                                        textDiv.append(link);
+                                        resultDiv.append(textDiv);
                                     } else {
                                         
                                     }
@@ -583,6 +584,10 @@
         $(document).on('click', '.tf-search-result li', function (e) {
             let id = $(this).data('id');
             let selector = `label[for='tf_settings\\[${id}\\]']`;
+            let tabId = $(this).closest('li').data('tab-id');
+            if( tabId ) {
+                $('.tf-tab-item[data-tab-id="'+tabId+'"]').trigger('click');
+            }
             $('html, body').animate({
                 scrollTop: $(document).find(selector).closest('.tf-field').offset().top
             }, 100);

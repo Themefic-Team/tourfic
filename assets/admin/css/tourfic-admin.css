@@ -2679,11 +2679,6 @@ Steps
 }
 
 .tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results ul a {
-  text-decoration: none;
-  color: #000;
-}
-
-.tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results ul li {
   border-bottom: 1px solid #f0f0f0;
   display: flex;
   padding: 5px 10px 5px 10px;
@@ -2692,33 +2687,39 @@ Steps
   cursor: pointer;
   border-radius: 4px;
   margin: 0;
+  text-decoration: none;
+  color: #000;
 }
 
-.tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results ul li .tf-search-result-title {
+.tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results ul a:focus {
+  box-shadow: none;
+}
+
+.tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results ul a .tf-search-result-title {
   line-height: 1.4;
 }
 
-.tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results ul li i {
+.tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results ul a i {
   font-size: 20px !important;
   color: #8997a9;
 }
 
-.tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results ul li p {
+.tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results ul a p {
   margin: 0;
   font-size: 14px;
   font-weight: 600;
 }
 
-.tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results ul li span {
+.tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results ul a span {
   font-size: 12px;
   color: #777;
 }
 
-.tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results ul li:hover {
+.tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results ul a:hover {
   background-color: #f0f2f4;
 }
 
-.tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results ul li:active {
+.tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results ul a:active {
   background-color: #f0f2f4;
 }
 

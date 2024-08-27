@@ -1020,6 +1020,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 											$fields[] = array(
 												'parent' => $parent_title,
 												'parent_id' => $section,
+												'tab_id' => $tab['id'] ? $tab['id'] : '',
 												'field_title' => !empty( $tab_field["label"] ) ? $tab_field["label"] : ( !empty( $tab_field['title'] ) ? $tab_field['title'] : ( !empty( $tab_field['heading'] ) ?  !empty( $tab_field['heading'] ) : ''  )),
 												'section' => $tab['title'],
 												'icon' => $icon,
@@ -1069,6 +1070,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 													$fields[] = array(
 														'parent' => $parent_title,
 														'parent_id' => $parent_id,
+														'tab_id' => $tab['id'] ? $tab['id'] : '',
 														'field_title' => !empty( $tab_field["label"] ) ? $tab_field["label"] : ( !empty( $tab_field['title'] ) ? $tab_field['title'] : ( !empty( $tab_field['heading'] ) ?  !empty( $tab_field['heading'] ) : ''  )),
 														'section' => $tab['title'],
 														'icon' => $icon,
