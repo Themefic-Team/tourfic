@@ -6,6 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 use Tourfic\Classes\Hotel\Hotel;
+use Tourfic\Classes\Tour\Tour;
 use \Tourfic\Classes\Apartment\Apartment;
 
 class Search_Result extends \Tourfic\Core\Shortcodes {
@@ -273,9 +274,9 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 											$total_posts --;
 											continue;
 										}
-										tf_filter_tour_by_without_date( $period, $total_posts, $not_found, $data );
+										Tour::tf_filter_tour_by_without_date( $period, $total_posts, $not_found, $data );
 									} else {
-										tf_filter_tour_by_date( $period, $total_posts, $not_found, $data );
+										Tour::tf_filter_tour_by_date( $period, $total_posts, $not_found, $data );
 									}
 								}
 
@@ -340,13 +341,13 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 											if ( ! empty( $data ) ) {
 												if ( isset( $data[3] ) && isset( $data[4] ) ) {
 													[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
-													if( $tour_meta["tour_as_featured"] ) tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
+													if( $tour_meta["tour_as_featured"] ) Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
 												} else {
 													[ $adults, $child, $check_in_out ] = $data;
-													if( $tour_meta["tour_as_featured"] ) tf_tour_archive_single_item( $adults, $child, $check_in_out );
+													if( $tour_meta["tour_as_featured"] ) Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out );
 												}
 											} else {
-												if( $tour_meta["tour_as_featured"] ) tf_tour_archive_single_item();
+												if( $tour_meta["tour_as_featured"] ) Tour::tf_tour_archive_single_item();
 											}
 										} else {
 											$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
@@ -385,13 +386,13 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 											if ( ! empty( $data ) ) {
 												if ( isset( $data[3] ) && isset( $data[4] ) ) {
 													[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
-													if( ! $tour_meta["tour_as_featured"] ) tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
+													if( ! $tour_meta["tour_as_featured"] ) Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
 												} else {
 													[ $adults, $child, $check_in_out ] = $data;
-													if( ! $tour_meta["tour_as_featured"] ) tf_tour_archive_single_item( $adults, $child, $check_in_out );
+													if( ! $tour_meta["tour_as_featured"] ) Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out );
 												}
 											} else {
-												if( ! $tour_meta["tour_as_featured"] )	tf_tour_archive_single_item();
+												if( ! $tour_meta["tour_as_featured"] )	Tour::tf_tour_archive_single_item();
 											}
 										} else {
 											$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
@@ -497,9 +498,9 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										$total_posts --;
 										continue;
 									}
-									tf_filter_tour_by_without_date( $period, $total_posts, $not_found, $data );
+									Tour::tf_filter_tour_by_without_date( $period, $total_posts, $not_found, $data );
 								} else {
-									tf_filter_tour_by_date( $period, $total_posts, $not_found, $data );
+									Tour::tf_filter_tour_by_date( $period, $total_posts, $not_found, $data );
 								}
 							}else {
 								if ( empty( $check_in_out ) ) {
@@ -569,13 +570,13 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										if ( ! empty( $data ) ) {
 											if ( isset( $data[3] ) && isset( $data[4] ) ) {
 												[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
-												if( $tour_meta["tour_as_featured"] ) tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
+												if( $tour_meta["tour_as_featured"] ) Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
 											} else {
 												[ $adults, $child, $check_in_out ] = $data;
-												if( $tour_meta["tour_as_featured"] ) tf_tour_archive_single_item( $adults, $child, $check_in_out );
+												if( $tour_meta["tour_as_featured"] ) Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out );
 											}
 										} else {
-											if( $tour_meta["tour_as_featured"] ) tf_tour_archive_single_item();
+											if( $tour_meta["tour_as_featured"] ) Tour::tf_tour_archive_single_item();
 										}
 									} else {
 										$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
@@ -614,13 +615,13 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										if ( ! empty( $data ) ) {
 											if ( isset( $data[3] ) && isset( $data[4] ) ) {
 												[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
-												if( ! $tour_meta["tour_as_featured"] ) tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
+												if( ! $tour_meta["tour_as_featured"] ) Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
 											} else {
 												[ $adults, $child, $check_in_out ] = $data;
-												if( ! $tour_meta["tour_as_featured"] ) tf_tour_archive_single_item( $adults, $child, $check_in_out );
+												if( ! $tour_meta["tour_as_featured"] ) Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out );
 											}
 										} else {
-											if( ! $tour_meta["tour_as_featured"] )	tf_tour_archive_single_item();
+											if( ! $tour_meta["tour_as_featured"] )	Tour::tf_tour_archive_single_item();
 										}
 									} else {
 										$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
@@ -708,9 +709,9 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										$total_posts --;
 										continue;
 									}
-									tf_filter_tour_by_without_date( $period, $total_posts, $not_found, $data );
+									Tour::tf_filter_tour_by_without_date( $period, $total_posts, $not_found, $data );
 								} else {
-									tf_filter_tour_by_date( $period, $total_posts, $not_found, $data );
+									Tour::tf_filter_tour_by_date( $period, $total_posts, $not_found, $data );
 								}
 							} else {
 								if ( empty( $check_in_out ) ) {
@@ -779,13 +780,13 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										if ( ! empty( $data ) ) {
 											if ( isset( $data[3] ) && isset( $data[4] ) ) {
 												[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
-												if( $tour_meta["tour_as_featured"] ) tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
+												if( $tour_meta["tour_as_featured"] ) Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
 											} else {
 												[ $adults, $child, $check_in_out ] = $data;
-												if( $tour_meta["tour_as_featured"] ) tf_tour_archive_single_item( $adults, $child, $check_in_out );
+												if( $tour_meta["tour_as_featured"] ) Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out );
 											}
 										} else {
-											if( $tour_meta["tour_as_featured"] ) tf_tour_archive_single_item();
+											if( $tour_meta["tour_as_featured"] ) Tour::tf_tour_archive_single_item();
 										}
 									} else {
 										$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
@@ -824,13 +825,13 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										if ( ! empty( $data ) ) {
 											if ( isset( $data[3] ) && isset( $data[4] ) ) {
 												[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
-												if( ! $tour_meta["tour_as_featured"] ) tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
+												if( ! $tour_meta["tour_as_featured"] ) Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
 											} else {
 												[ $adults, $child, $check_in_out ] = $data;
-												if( ! $tour_meta["tour_as_featured"] ) tf_tour_archive_single_item( $adults, $child, $check_in_out );
+												if( ! $tour_meta["tour_as_featured"] ) Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out );
 											}
 										} else {
-											if( ! $tour_meta["tour_as_featured"] )	tf_tour_archive_single_item();
+											if( ! $tour_meta["tour_as_featured"] )	Tour::tf_tour_archive_single_item();
 										}
 									} else {
 										$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );

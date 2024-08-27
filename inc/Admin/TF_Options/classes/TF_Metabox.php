@@ -17,28 +17,6 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			$this->metabox_post_type = $params['post_type'];
 			$this->metabox_sections  = ! empty( $params['sections'] ) ? apply_filters( $key . '_sections', $params['sections'] ) : array();
 
-			// Pro plugin section merge
-            /*static $post_types = array();
-			static $metaboxes = array();
-			if ( in_array( $params['post_type'], $post_types ) ) {
-				$metabox_sections       = $metaboxes[ $key ]['sections'];
-				$this->metabox_sections = array_merge( $metabox_sections, $params['sections'] );
-
-				tf_var_dump( $this->metabox_sections );
-			} else {
-				$this->metabox_id        = $key;
-				$this->metabox_post_type = $params['post_type'];
-				$this->metabox_sections  = $params['sections'];
-
-				if ( ! in_array( $this->metabox_post_type, $post_types ) ) {
-					$post_types[] = $this->metabox_post_type;
-				}
-
-				if ( ! in_array( $this->metabox_id, $metaboxes ) ) {
-					$metaboxes[ $this->metabox_id ]['sections'] = $this->metabox_sections;
-				}
-			}*/
-
 			add_action( 'add_meta_boxes', array( $this, 'tf_meta_box' ) );
 			add_action( 'save_post', array( $this, 'save_metabox' ), 10, 2 );
 
@@ -115,7 +93,8 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 							<?php echo ! empty( $section['icon'] ) ? '<span class="tf-sec-icon"><i class="' . esc_attr( $section['icon'] ) . '"></i></span>' : ''; ?>
 							<?php echo esc_html( $section['title'] ); ?>
                         </a>
-						<?php $section_count ++; endforeach; ?>
+						<?php $section_count ++;
+                    endforeach; ?>
                 </div>
 
                 <div class="tf-tab-wrapper">

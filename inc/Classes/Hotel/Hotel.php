@@ -2,6 +2,8 @@
 
 namespace Tourfic\Classes\Hotel;
 
+defined( 'ABSPATH' ) || exit;
+
 use Tourfic\Classes\Helper;
 use \Tourfic\Classes\Hotel\Pricing;
 use Tourfic\Classes\Room\Room;

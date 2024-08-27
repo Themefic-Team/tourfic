@@ -1,6 +1,9 @@
 <?php
 
-namespace Tourfic\Classes\Hotel;
+namespace Tourfic\Classes\Tour;
+
+defined( 'ABSPATH' ) || exit;
+
 class Availability {
 
 }

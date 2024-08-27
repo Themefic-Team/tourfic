@@ -3,6 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
+use Tourfic\Classes\Tour\Tour;
 use \Tourfic\Classes\Hotel\Hotel;
 use \Tourfic\Classes\Apartment\Apartment;
 
@@ -131,7 +132,7 @@ if( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ) 
                 if( $post_type == 'tf_hotel' ){
 	                Hotel::tf_hotel_archive_single_item();
                 } elseif( $post_type == 'tf_tours' ) {
-                    tf_tour_archive_single_item();
+                    Tour::tf_tour_archive_single_item();
                 }
             }
         } else {
@@ -181,7 +182,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
                     if( $post_type == 'tf_hotel' ){
 	                    Hotel::tf_hotel_archive_single_item();
                     } elseif( $post_type == 'tf_tours' ) {
-                        tf_tour_archive_single_item();
+                        Tour::tf_tour_archive_single_item();
                     } elseif( $post_type == 'tf_apartment' ) {
                         Apartment::tf_apartment_archive_single_item();
                     }
@@ -225,7 +226,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
                 if( $post_type == 'tf_hotel' ){
 	                Hotel::tf_hotel_archive_single_item();
                 } elseif( $post_type == 'tf_tours' ) {
-                    tf_tour_archive_single_item();
+                    Tour::tf_tour_archive_single_item();
                 } elseif( $post_type == 'tf_apartment' ) {
                     Apartment::tf_apartment_archive_single_item();
                 }

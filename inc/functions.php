@@ -21,17 +21,6 @@ function tf_file_missing( $files = '' ) {
 }
 
 add_action( 'admin_notices', 'tf_file_missing' );
-
-
-/**
- * Tour Functions
- */
-if ( file_exists( TF_INC_PATH . 'functions/functions-tour.php' ) ) {
-	require_once TF_INC_PATH . 'functions/functions-tour.php';
-} else {
-	tf_file_missing( TF_INC_PATH . 'functions/functions-tour.php' );
-}
-
 add_action( 'plugins_loaded', 'tf_add_elelmentor_addon' );
 
 
@@ -417,4 +406,14 @@ if(!function_exists('tf_tour_date_format_changer')) {
  * Remove room order ids
  */
 function tf_remove_order_ids_from_room() {
+	echo '
+    <div class="csf-title">
+        <h4>' . __( "Reset Room Availability", "tourfic" ) . '</h4>
+        <div class="csf-subtitle-text">' . __( "Remove order ids linked with this room.<br><b style='color: red;'>Be aware! It is irreversible!</b>", "tourfic" ) . '</div>
+    </div>
+    <div class="csf-fieldset">
+        <button type="button" class="button button-large tf-order-remove remove-order-ids">' . __( "Reset", "tourfic" ) . '</button>
+    </div>
+    <div class="clear"></div>
+    ';
 }

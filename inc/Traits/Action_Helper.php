@@ -5,6 +5,7 @@ use Tourfic\Classes\Hotel\Hotel;
 
 defined( 'ABSPATH' ) || exit;
 
+use Tourfic\Classes\Tour\Tour;
 use \Tourfic\Classes\Apartment\Apartment;
 
 trait Action_Helper {
@@ -877,9 +878,9 @@ trait Action_Helper {
 							$total_posts --;
 							continue;
 						}
-						tf_filter_tour_by_without_date( $period, $total_posts, $not_found, $data );
+						Tour::tf_filter_tour_by_without_date( $period, $total_posts, $not_found, $data );
 					} else {
-						tf_filter_tour_by_date( $period, $total_posts, $not_found, $data );
+						Tour::tf_filter_tour_by_date( $period, $total_posts, $not_found, $data );
 					}
 				} else {
 					if ( empty( $check_in_out ) ) {
@@ -946,18 +947,18 @@ trait Action_Helper {
 								if ( isset( $data[3] ) && isset( $data[4] ) ) {
 									[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
 									if ( $tour_meta["tour_as_featured"] ) {
-										tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
+										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
 									}
 								} else {
 									[ $adults, $child, $check_in_out ] = $data;
 
 									if ( $tour_meta["tour_as_featured"] ) {
-										tf_tour_archive_single_item( $adults, $child, $check_in_out );
+										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out );
 									}
 								}
 							} else {
 								if ( $tour_meta["tour_as_featured"] ) {
-									tf_tour_archive_single_item();
+									Tour::tf_tour_archive_single_item();
 								}
 							}
 						} else {
@@ -1012,17 +1013,17 @@ trait Action_Helper {
 								if ( isset( $data[3] ) && isset( $data[4] ) ) {
 									[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
 									if ( ! $tour_meta["tour_as_featured"] ) {
-										tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
+										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
 									}
 								} else {
 									[ $adults, $child, $check_in_out ] = $data;
 									if ( ! $tour_meta["tour_as_featured"] ) {
-										tf_tour_archive_single_item( $adults, $child, $check_in_out );
+										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out );
 									}
 								}
 							} else {
 								if ( ! $tour_meta["tour_as_featured"] ) {
-									tf_tour_archive_single_item();
+									Tour::tf_tour_archive_single_item();
 								}
 							}
 						} else {
@@ -1311,7 +1312,7 @@ trait Action_Helper {
 				if ( $post_type == 'tf_hotel' ) {
 					Hotel::tf_hotel_archive_single_item();
 				} else if ( $post_type == 'tf_tours' ) {
-					tf_tour_archive_single_item();
+					Tour::tf_tour_archive_single_item();
 				} else {
 					Apartment::tf_apartment_archive_single_item();
 				}
