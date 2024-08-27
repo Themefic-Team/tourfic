@@ -44,6 +44,9 @@ function tf_car_booking_callback() {
 
 	// Booking
 	$car_booking_by = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : '1';
+	$tf_booking_url = !empty( $meta['booking-url'] ) ? esc_url($meta['booking-url']) : '';
+	$tf_booking_query_url = !empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'pickup={pickup}&dropoff={dropoff}&pickup_date={pickup_date}&dropoff_date={dropoff_date}';
+	$tf_booking_attribute = !empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
 
 	$product_id    = get_post_meta( $post_id, 'product_id', true );
 	$get_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
@@ -77,12 +80,33 @@ function tf_car_booking_callback() {
 	$tf_cars_data['tf_car_data']['tf_dropoff_time']    = $tf_dropoff_time;
 	$tf_cars_data['tf_car_data']['price_total']    	   = $total_prices;
 	
-	if('1'==$car_booking_by){
-		WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_cars_data );
+	if( !empty($car_booking_by) && '3'==$car_booking_by ){
 
-		$response['product_id']  = $product_id;
-		$response['add_to_cart'] = 'true';
-		$response['redirect_to'] = wc_get_checkout_url();
+	}else{
+		if( '2'==$car_booking_by && !empty($tf_booking_url) ){
+			$external_search_info = array(
+				'{pickup}'    => $pickup,
+				'{dropoff}'    => $dropoff,
+				'{pickup_date}' => $tf_pickup_date,
+				'{dropoff_date}'     => $tf_dropoff_date
+			);
+			if(!empty($tf_booking_attribute)){
+				$tf_booking_query_url = str_replace(array_keys($external_search_info), array_values($external_search_info), $tf_booking_query_url);
+				if( !empty($tf_booking_query_url) ){
+					$tf_booking_url = $tf_booking_url.'/?'.$tf_booking_query_url;
+				}
+			}
+
+			$response['product_id']  = $product_id;
+			$response['add_to_cart'] = 'true';
+			$response['redirect_to'] = $tf_booking_url;
+		}else{
+			WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_cars_data );
+
+			$response['product_id']  = $product_id;
+			$response['add_to_cart'] = 'true';
+			$response['redirect_to'] = wc_get_checkout_url();
+		}
 	}
 
 	// Json Response
@@ -105,7 +129,6 @@ function tf_car_set_order_price( $cart ) {
 	}
 
 	foreach ( $cart->get_cart() as $cart_item ) {
-
 		if ( isset( $cart_item['tf_car_data']['price_total'] ) ) {
 			$cart_item['data']->set_price( $cart_item['tf_car_data']['price_total'] );
 		}
@@ -160,3 +183,68 @@ function car_display_cart_item_custom_meta_data( $item_data, $cart_item ) {
 }
 
 add_filter( 'woocommerce_get_item_data', 'car_display_cart_item_custom_meta_data', 10, 2 );
+
+
+/**
+ * Show custom data in order details
+ */
+function tf_car_custom_order_data( $item, $cart_item_key, $values, $order ) {
+
+	// Assigning data into variables
+	$order_type = !empty($values['tf_car_data']['order_type']) ? $values['tf_car_data']['order_type'] : '';
+	$post_author = !empty($values['tf_car_data']['post_author']) ? $values['tf_car_data']['post_author'] : '';
+	$post_id = !empty($values['tf_car_data']['post_id']) ? $values['tf_car_data']['post_id'] : '';
+	$pickup = !empty($values['tf_car_data']['pickup']) ? $values['tf_car_data']['pickup'] : '';
+	$dropoff = !empty($values['tf_car_data']['dropoff']) ? $values['tf_car_data']['dropoff'] : '';
+	$tf_pickup_date = !empty($values['tf_car_data']['tf_pickup_date']) ? $values['tf_car_data']['tf_pickup_date'] : '';
+	$tf_dropoff_date = !empty($values['tf_car_data']['tf_dropoff_date']) ? $values['tf_car_data']['tf_dropoff_date'] : '';
+	$tf_pickup_time = !empty($values['tf_car_data']['tf_pickup_time']) ? $values['tf_car_data']['tf_pickup_time'] : '';
+	$tf_dropoff_time = !empty($values['tf_car_data']['tf_dropoff_time']) ? $values['tf_car_data']['tf_dropoff_time'] : '';
+	$extras = !empty($values['tf_car_data']['extras']) ? $values['tf_car_data']['extras'] : '';
+	$protection = !empty($values['tf_car_data']['protection']) ? $values['tf_car_data']['protection'] : '';
+	/**
+	 * Show data in order meta & email
+	 *
+	 */
+	if ( $order_type ) {
+		$item->update_meta_data( '_order_type', $order_type );
+	}
+
+	if ( $post_author ) {
+		$item->update_meta_data( '_post_author', $post_author );
+	}
+
+	if ( $post_id ) {
+		$item->update_meta_data( '_post_id', $post_id );
+	}
+
+	if ( $pickup ) {
+		$item->update_meta_data( 'Pick Up Location', $pickup );
+	}
+	if ( $tf_pickup_date ) {
+		$item->update_meta_data( 'Pick Up Date', $tf_pickup_date );
+	}
+	if ( $tf_pickup_time ) {
+		$item->update_meta_data( 'Pick Up Time', $tf_pickup_time );
+	}
+
+	if ( $dropoff ) {
+		$item->update_meta_data( 'Drop Off Location', $dropoff );
+	}
+	if ( $tf_dropoff_date ) {
+		$item->update_meta_data( 'Drop Off Date', $tf_dropoff_date );
+	}
+	if ( $tf_dropoff_time ) {
+		$item->update_meta_data( 'Drop Off Time', $tf_dropoff_time );
+	}
+	if ( $extras ) {
+		$item->update_meta_data( 'Extra', $extras );
+	}
+
+	if ( $protection ) {
+		$item->update_meta_data( 'Protection', $protection );
+	}
+
+}
+
+add_action( 'woocommerce_checkout_create_order_line_item', 'tf_car_custom_order_data', 10, 4 );

@@ -241,7 +241,6 @@
         */
         $(document).on('click', '.tf-car-booking', function (e) {
             e.preventDefault();
-            $('.tf-car-booking-popup').css('display', 'flex');
             var pickup = $('#tf_pickup_location').val();
             let dropoff = $('#tf_dropoff_location').val();
             let pickup_date = $('.tf_pickup_date').val();
@@ -277,6 +276,9 @@
 
         $(document).on('click', '.booking-process', function (e) {
             let $this = $(this);
+            if($this.attr('data-charge')){
+                $('#protection_value').val($this.attr('data-charge'));
+            }
             let extra_ids = $("input[name='selected_extra[]']").map(function() {
                 return $(this).val();
             }).get();

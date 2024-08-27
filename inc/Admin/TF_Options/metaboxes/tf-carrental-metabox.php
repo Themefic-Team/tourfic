@@ -915,26 +915,26 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'dependency'  => array( 'booking-by', '==', '2' ),
 					'placeholder' => esc_html__( 'https://website.com', 'tourfic' )
 				),
-				array(
-					'id'        => 'hide_booking_form',
-					'type'      => 'switch',
-					'label'     => esc_html__( 'Hide Booking Form', 'tourfic' ),
-					'subtitle' => esc_html__( 'Enable this option to hide the booking form from the single tour page.', 'tourfic' ),
-					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
-					'label_off' => esc_html__( 'No', 'tourfic' ),
-					'default'   => false,
-					'dependency' => array( 'booking-by', '==', '2' ),
-				),
-				array(
-					'id'        => 'hide_price',
-					'type'      => 'switch',
-					'label'     => esc_html__( 'Hide Price', 'tourfic' ),
-					'subtitle' => esc_html__( 'Enable this option to hide the price from the single tour page.', 'tourfic' ),
-					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
-					'label_off' => esc_html__( 'No', 'tourfic' ),
-					'default'   => false,
-					'dependency' => array( 'booking-by', '==', '2' ),
-				),
+				// array(
+				// 	'id'        => 'hide_booking_form',
+				// 	'type'      => 'switch',
+				// 	'label'     => esc_html__( 'Hide Booking Form', 'tourfic' ),
+				// 	'subtitle' => esc_html__( 'Enable this option to hide the booking form from the single tour page.', 'tourfic' ),
+				// 	'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+				// 	'label_off' => esc_html__( 'No', 'tourfic' ),
+				// 	'default'   => false,
+				// 	'dependency' => array( 'booking-by', '==', '2' ),
+				// ),
+				// array(
+				// 	'id'        => 'hide_price',
+				// 	'type'      => 'switch',
+				// 	'label'     => esc_html__( 'Hide Price', 'tourfic' ),
+				// 	'subtitle' => esc_html__( 'Enable this option to hide the price from the single tour page.', 'tourfic' ),
+				// 	'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+				// 	'label_off' => esc_html__( 'No', 'tourfic' ),
+				// 	'default'   => false,
+				// 	'dependency' => array( 'booking-by', '==', '2' ),
+				// ),
 				array(
 					'id'        => 'booking-attribute',
 					'type'      => 'switch',
@@ -952,18 +952,18 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 						array( 'booking-by', '==', '2' ),
 						array( 'booking-attribute', '==', '1' )
 					),
-					'default'     => 'adult={adult}&child={child}&infant={infant}',
-					'placeholder' => esc_html__( 'adult={adult}&child={child}&infant={infant}', 'tourfic' )
+					'default'     => 'pickup={pickup}&dropoff={dropoff}&pickup_date={pickup_date}&dropoff_date={dropoff_date}',
+					'placeholder' => esc_html__( 'pickup={pickup}&dropoff={dropoff}&pickup_date={pickup_date}&dropoff_date={dropoff_date}', 'tourfic' )
 				),
 				array(
 					'id'      => 'booking-notice',
 					'type'    => 'notice',
 					'class'   => 'info',
 					'title'   => esc_html__( 'Query Attribute List', 'tourfic' ),
-					'content' => esc_html__( 'You can use the following placeholders in the Query Attribute body:', 'tourfic' ) . '<br><br><strong>{adult} </strong> : To Display Adult Number from Search.<br>
-					<strong>{child} </strong> : To Display Child Number from Search.<br>
-					<strong>{booking_date} </strong> : To display the Booking date from Search.<br>
-					<strong>{infant} </strong> : To display the infant number from Search.<br>',
+					'content' => esc_html__( 'You can use the following placeholders in the Query Attribute body:', 'tourfic' ) . '<br><br><strong>{pickup} </strong> : To Display Pickup Location from Search.<br>
+					<strong>{dropoff} </strong> : To Display Dropoff Location from Search.<br>
+					<strong>{pickup_date} </strong> : To display the Pickup Date from Search.<br>
+					<strong>{dropoff_date} </strong> : To display the Dropoff Date from Search.<br>',
 					'dependency'  => array(
 						array( 'booking-by', '==', '2' ),
 						array( 'booking-attribute', '==', '1' )

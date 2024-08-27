@@ -240,12 +240,21 @@ use \Tourfic\App\TF_Review;
                         </div>
                         <div class="tf-form-submit-btn">
                             <div class="error-notice"></div>
+                            <?php if('2'==$car_booking_by){ ?>
+                                <button class="tf-flex tf-flex-align-center tf-flex-justify-center booking-process tf-final-step">
+                                    <?php esc_html_e("Continue", "tourfic"); ?>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            <?php }else{ ?>
                             <button class="tf-flex tf-flex-align-center tf-flex-justify-center <?php echo (empty($car_protection_section_status) || empty($car_protections)) && '3'!=$car_booking_by ? esc_attr('booking-process tf-final-step') : esc_attr('tf-car-booking'); ?>">
                                 <?php esc_html_e("Continue", "tourfic"); ?>
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </button>
+                            <?php } ?>
                         </div>
                         <div class="tf-instraction-btn tf-mt-16">
                             <a href="#">Pick-up and Drop-off instructions</a>
