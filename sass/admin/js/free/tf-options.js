@@ -524,11 +524,12 @@
                         let resultDiv = document.createElement('ul');
                         if (data.status === 'success') {
                             $.each( data.message, function( key, obj ) {
-                                if( obj.field_title.toLowerCase().indexOf(value) > -1 ) {
+                                if( obj.field_title.toLowerCase().indexOf(value) != -1 ) {
                                     let textDiv = document.createElement('li');
                                     let titleDiv = document.createElement('div');
                                     titleDiv.classList.add('tf-search-result-title');
-
+                                    let link = document.createElement('a');
+                                    link.href = `#tab=${obj.parent_id}`;
                                     let icon = document.createElement('i');
                                     let title = document.createElement('p');
                                     let path = document.createElement('span');
@@ -540,7 +541,10 @@
                                     titleDiv.append(title);
                                     titleDiv.append(path);
                                     textDiv.append(titleDiv);
-                                    resultDiv.append(textDiv);
+                                    link.append(textDiv);
+                                    resultDiv.append(link);
+                                } else {
+                                    
                                 }
                                 if( $('.tf-search-results').length || value < 3 ) {
                                     $('.tf-search-results').remove();
