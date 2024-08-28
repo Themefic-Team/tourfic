@@ -241,7 +241,6 @@
         */
         $(document).on('click', '.tf-car-booking', function (e) {
             e.preventDefault();
-            $('.tf-car-booking-popup').css('display', 'flex');
             var pickup = $('#tf_pickup_location').val();
             let dropoff = $('#tf_dropoff_location').val();
             let pickup_date = $('.tf_pickup_date').val();
@@ -250,6 +249,7 @@
             let dropoff_time = $('.tf_dropoff_time').val();
 
             if( !pickup || !dropoff || !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
+                $('.error-notice').show();
                 $('.error-notice').text('Fill up the all fields');
             }else{
                 $('.error-notice').hide();
@@ -313,7 +313,7 @@
                 });
             });
             if (hasErrors.includes(true)) {
-                return false;
+                return true;
             }
         }
 
@@ -333,8 +333,10 @@
             var travellerData = {};
             if($this.hasClass('tf-offline-booking')){
                 let booking = $(this).closest('.tf-booking-form-fields');
-                BookingVallidation(booking);
-
+                let Validation_response = BookingVallidation(booking);
+                if(Validation_response){
+                    return;
+                }
                 // Text, email, date inputs
                 $("input[name^='traveller[']").each(function() {
                     var name = $(this).attr('name');
@@ -366,6 +368,7 @@
                 let dropoff_time = $('.tf_dropoff_time').val();
 
                 if( !pickup || !dropoff || !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
+                    $('.error-notice').show();
                     $('.error-notice').text('Fill up the all fields');
                     return;
                 }
@@ -430,6 +433,25 @@
                         }
                     }else{
                         $('.tf-car-booking-popup').hide();
+                        $this.removeClass('tf-btn-loading');
+                        $('#tf_pickup_location').val('');
+                        $('#tf_dropoff_location').val('');
+                        $('.tf_pickup_date').val('');
+                        $('.tf_dropoff_date').val('');
+                        $('.tf_pickup_time').val('');
+                        $('.tf_dropoff_time').val('');
+                        if($('.tf-protection-content')){
+                            $('.tf-protection-content').show();
+                            $('.tf-booking-bar').show();
+                            $('.tf-booking-form-fields').hide();
+
+                            $('.tf-booking-tabs ul li').removeClass('active');
+                            $('.tf-booking-tabs ul li.protection').addClass('active');
+                        }else{
+                            $('.tf-booking-form-fields').show();
+                            $('.tf-booking-tabs ul li').removeClass('active');
+                            $('.tf-booking-tabs ul li.booking').addClass('active');
+                        }
                     }
                 }
             });

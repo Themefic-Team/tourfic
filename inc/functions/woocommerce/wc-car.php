@@ -2,6 +2,7 @@
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Car_Rental\Pricing;
+use \Tourfic\Classes\Helper;
 
 /**
  * car booking ajax function
@@ -44,6 +45,7 @@ function tf_car_booking_callback() {
 	$tf_confirmation_details = !empty($_POST['travellerData']) ? $_POST['travellerData'] : "";
 
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
+	$post_author   = get_post_field( 'post_author', $post_id );
 
 	// Booking
 	$car_booking_by = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : '1';
