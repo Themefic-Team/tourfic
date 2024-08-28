@@ -429,6 +429,10 @@
                                             font-weight: 400;
                                             line-height: 150%; /* 24px */
                                             text-align: center;
+                                            margin-bottom: 8px;
+                                            &:last-child{
+                                                margin-bottom: 0px;
+                                            }
                                         }
                                     }
                                 }

@@ -78,6 +78,8 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 	$passengers = ! empty( $meta['passengers'] ) ? $meta['passengers'] : '';
 	$baggage = ! empty( $meta['baggage'] ) ? $meta['baggage'] : '';
 	$car_custom_info = ! empty( $meta['car_custom_info'] ) ? $meta['car_custom_info'] : '';
+	// Badge
+	$badges = ! empty( $meta['badge'] ) ? $meta['badge'] : '';
 ?>
 <div class="tf-single-car-view">
 	<div class="tf-car-image">
@@ -91,10 +93,17 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 		<div class="tf-other-infos tf-flex tf-flex-gap-64">
 			<div class="tf-reviews-box">
 				<span>5.0 <i class="fa-solid fa-star"></i> (7 trips)</span>
+				<?php TF_Review::tf_archive_single_rating(); ?>
 			</div>
 			<div class="tf-tags-box">
 				<ul>
-					<li>Driver included</li>
+					<?php
+					if(!empty($badges)){
+					foreach($badges as $badge){ 
+					if(!empty($badge['title'])){
+					?>
+					<li><?php echo esc_html($badge['title']); ?></li>
+					<?php }}} ?>
 				</ul>
 			</div>
 		</div>
@@ -128,7 +137,12 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 				<h3><?php echo $total_prices['sale_price'] ? wc_price($total_prices['sale_price']) : '' ?> <small>/ Day</small></h3>
 			</div>
 			<?php if(!empty($pickup_date) && !empty($dropoff_date)){ ?>
-			<button>Book now</button>
+				<input type="hidden" value="<?php echo esc_attr($pickup_date); ?>" id="pickup_date">
+				<input type="hidden" value="<?php echo esc_attr($dropoff_date); ?>" id="dropoff_date">
+				<input type="hidden" value="<?php echo esc_attr($pickup_time); ?>" id="pickup_time">
+				<input type="hidden" value="<?php echo esc_attr($dropoff_time); ?>" id="dropoff_time">
+				<input type="hidden" value="<?php echo esc_attr($post_id); ?>" id="post_id">
+			<button><?php esc_html_e("Book now", "tourfic"); ?></button>
 			<?php }else{ ?>
 				<a class="view-more" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e("Details", "tourfic"); ?></a>
 			<?php } ?>

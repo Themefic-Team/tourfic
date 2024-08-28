@@ -17462,6 +17462,10 @@ html {
   font-weight: 400;
   line-height: 150%; /* 24px */
   text-align: center;
+  margin-bottom: 8px;
+}
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li:last-child {
+  margin-bottom: 0px;
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details {
   padding: 24px 16px 16px 16px;
