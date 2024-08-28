@@ -72,6 +72,7 @@
                                     font-weight: 400;
                                     line-height: 150%; /* 24px */
                                     border: 0px solid !important;
+                                    padding-left: 0px;
                                     &:focus{
                                         outline: none;
                                         box-shadow: none;
@@ -435,13 +436,16 @@
                         }
                         .tf-car-details{
                             padding: 24px 16px 16px 16px;
-                            h3{
-                                color:#27333F;
-                                font-size: 21px !important;
-                                font-style: normal !important;
-                                font-weight: 700 !important;
-                                line-height: 150% !important; /* 31.5px */
-                                margin-top: 0px;
+                            a{
+                                text-decoration: none;
+                                h3{
+                                    color:#27333F;
+                                    font-size: 21px !important;
+                                    font-style: normal !important;
+                                    font-weight: 700 !important;
+                                    line-height: 150% !important; /* 31.5px */
+                                    margin-top: 0px;
+                                }
                             }
                             ul{
                                 list-style: none;
@@ -464,6 +468,7 @@
                                 }
                             }
                             .tf-booking-btn{
+                                align-items: center;
                                 .tf-price-info{
                                     h3{
                                         color: #27333F;
@@ -481,7 +486,8 @@
                                         }
                                     }
                                 }
-                                button{
+                                button,
+                                a.view-more{
                                     border-radius: 8px;
                                     border: 1px solid #0866C4;
                                     padding: 12px 32px;
@@ -492,6 +498,7 @@
                                     line-height: 150%; /* 24px */
                                     background-color: #fff;
                                     cursor: pointer;
+                                    text-decoration: none;
                                 }
                             }
                         }

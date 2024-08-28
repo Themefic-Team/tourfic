@@ -59,3 +59,82 @@ foreach($_POST['qty'] as $key => $singleqty){
 
 wp_die();
 }
+
+function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = '', $dropoff_date = '', $pickup_time = '', $dropoff_time = ''){
+	$post_id = get_the_ID();
+	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
+	// Single link
+	$url = get_the_permalink();
+	$url = add_query_arg( array(
+		'pickup'           => $pickup,
+		'dropoff'          => $dropoff,
+		'pickup_date'      => $pickup_date,
+		'dropoff_date'     => $dropoff_date,
+		'pickup_time' 	   => $pickup_time,
+		'dropoff_time'     => $dropoff_time
+	), $url );
+
+	// Car Info 
+	$passengers = ! empty( $meta['passengers'] ) ? $meta['passengers'] : '';
+	$baggage = ! empty( $meta['baggage'] ) ? $meta['baggage'] : '';
+	$car_custom_info = ! empty( $meta['car_custom_info'] ) ? $meta['car_custom_info'] : '';
+?>
+<div class="tf-single-car-view">
+	<div class="tf-car-image">
+		<?php
+		if ( has_post_thumbnail() ) {
+			the_post_thumbnail( 'full' );
+		} else {
+			echo '<img src="' . esc_url(TF_ASSETS_APP_URL) . "images/feature-default.jpg" . '">';
+		}
+		?>
+		<div class="tf-other-infos tf-flex tf-flex-gap-64">
+			<div class="tf-reviews-box">
+				<span>5.0 <i class="fa-solid fa-star"></i> (7 trips)</span>
+			</div>
+			<div class="tf-tags-box">
+				<ul>
+					<li>Driver included</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="tf-car-details">
+		<div class="tf-car-content">
+			<a href="<?php echo esc_url( $url ); ?>"><h3 class="tf-mb-24"><?php the_title(); ?></h3></a>
+			<ul class="tf-flex tf-mb-24">
+				<?php if(!empty($passengers)){ ?>
+				<li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="fa-solid fa-wheelchair"></i><?php echo esc_attr($passengers); ?></li>
+				<?php } ?>
+        		<?php if(!empty($baggage)){ ?>
+				<li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-briefcase-line"></i></i><?php echo esc_attr($baggage); ?></li>
+				<?php } ?>
+				<?php if(!empty($car_custom_info)){
+            	foreach($car_custom_info as $info){ ?>
+				<li class="tf-flex tf-flex-gap-8 tf-flex-align-center">
+					<?php if(!empty($info['info_icon'])){ ?>
+						<i class="<?php echo esc_attr($info['info_icon']); ?>"></i>
+					<?php } ?>
+					<?php echo !empty($info['title']) ? esc_html($info['title']) : ''; ?>
+				</li>
+				<?php }} ?>
+			</ul>
+		</div>
+		<div class="tf-booking-btn tf-flex tf-flex-space-bttn">
+			<div class="tf-price-info">
+				<?php
+				$total_prices = Pricing::set_total_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time);
+				?>
+				<h3><?php echo $total_prices['sale_price'] ? wc_price($total_prices['sale_price']) : '' ?> <small>/ Day</small></h3>
+			</div>
+			<?php if(!empty($pickup_date) && !empty($dropoff_date)){ ?>
+			<button>Book now</button>
+			<?php }else{ ?>
+				<a class="view-more" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e("Details", "tourfic"); ?></a>
+			<?php } ?>
+		</div>
+	</div>
+</div>
+
+<?php
+}
