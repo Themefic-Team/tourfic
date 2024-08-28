@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.6
-Stable tag: 2.13.1
+Stable tag: 2.13.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -321,6 +321,12 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.13.2 - 27 August 2024 =
+
+- Improvement: QR Code Verification
+- Improvement: QR Code Permission for Manager
+- Improvement: QR Code Permission for Vendor
 
 = 2.13.1 - 24 August 2024 =
 
