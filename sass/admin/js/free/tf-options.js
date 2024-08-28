@@ -522,6 +522,7 @@
                         },
                         success: function (response) {
                             let data = JSON.parse(response)
+                            let notfound = 0;
                             let resultDiv = document.createElement('ul');
                             if (data.status === 'success') {
                                 $.each( data.message, function( key, obj ) {
@@ -547,7 +548,7 @@
                                         textDiv.append(link);
                                         resultDiv.append(textDiv);
                                     } else {
-                                        
+                                        notfound = 1;
                                     }
                                     if( $('.tf-search-results').length || value < 3 ) {
                                         $('.tf-search-results').remove();
@@ -555,6 +556,13 @@
                                         div.append(resultDiv);
                                     }
                                 });
+
+                                if( notfound == 1 ) {
+                                    let not_found = document.createElement("p");
+                                    not_found.classList.add('tf-search-not-found');
+                                    not_found.innerHTML = tf_admin_params.setting_search_no_result;
+                                    resultDiv.append(not_found);
+                                }
                                 $(".tf-setting-search").append(div);
                             } else {
                                 console.log("Something went wrong!");
