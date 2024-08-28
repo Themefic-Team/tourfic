@@ -1070,7 +1070,7 @@ class Enqueue {
 			'tf_chart_enable'      => isset( $tf_chart_enable ) ? $tf_chart_enable : '',
 			'tf_admin_date_format' => $admin_date_format_for_users,
 			'swal_reset_title_text'			   => esc_html__( 'Are you sure you want to reset all settings?', 'tourfic' ),
-			'swal_reset_other_text'			   => esc_html__( 'You won\'t be able to revert this!', 'tourfic' ),
+			'swal_reset_other_text'			   => esc_html__( 'You won\'t be able to retrive this settings, again!', 'tourfic' ),
 			'swal_reset_btn_text'			   => esc_html__( 'Confirm', 'tourfic' ),
 			'tf_export_import_msg' => array(
 				'imported'       => esc_html__( 'Imported successfully!', 'tourfic' ),
