@@ -60,7 +60,7 @@ class Helper {
 		add_filter( 'custom_menu_order', '__return_true' );
 
 		// Add dashboard link to admin menu bar
-		add_action( 'admin_bar_menu', array( $this, 'tf_admin_bar_dashboard_link' ), 31 );
+		add_action( 'admin_bar_menu', array( $this, 'tf_admin_bar_dashboard_link' ), 999 );
 
 		// redirect non admin user
 		add_action( 'admin_init', array( $this, 'redirect_non_admin_users' ), 9 );
