@@ -637,7 +637,7 @@
                     background-color: #fff;
                     box-sizing: border-box;
                     border-radius: 4px;
-                    min-height: 80px;
+                    min-height: 60px;
                     max-height: 300px;
                     overflow-y: auto;
                     overflow-x: hidden;
@@ -645,17 +645,18 @@
                     border: 1px solid #ddd;
                     transition: all 0.5s ease;
 
+                    .tf-search-not-found {
+                        text-align: center;
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+
                     ul {
                         margin: 0;
                         padding: 0;
                         list-style: none;
 
                         a {
-                            text-decoration: none;
-                            color: #000;
-                        }
-
-                        li {
                             border-bottom: 1px solid #f0f0f0;
                             display: flex;
                             padding: 5px 10px 5px 10px;
@@ -664,6 +665,12 @@
                             cursor: pointer;
                             border-radius: 4px;
                             margin: 0;
+                            text-decoration: none;
+                            color: #000;
+
+                            &:focus {
+                                box-shadow: none;
+                            }
 
                             .tf-search-result-title {
                                 line-height: 1.4;
