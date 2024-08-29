@@ -19,8 +19,8 @@ if(!empty($tf_expired_tour_showing )){
 
 $args = array(
     'post_type' => $post_type,
-    'orderby'   => 'date',
-    'order'     => 'DESC',
+    'orderby'   => apply_filters( 'tf_archive_post_orderby', 'date' ),
+    'order'     => apply_filters( 'tf_archive_post_order', 'DESC' ),
     'tax_query' => array(
         array (
             'taxonomy' => $taxonomy,
