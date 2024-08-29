@@ -56,7 +56,7 @@ class Helper {
 		add_filter( 'custom_menu_order', '__return_true' );
 
 		// Add dashboard link to admin menu bar
-		add_action( 'admin_bar_menu', array( $this, 'tf_admin_bar_dashboard_link' ), 31 );
+		add_action( 'admin_bar_menu', array( $this, 'tf_admin_bar_dashboard_link' ), 999 );
 
 		// redirect non admin user
 		add_action( 'admin_init', array( $this, 'redirect_non_admin_users' ), 9 );
@@ -456,6 +456,12 @@ class Helper {
 		//Nonce Verification
 		check_ajax_referer( 'updates', '_nonce' );
 
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
+
 		$term_name = $_POST['termName'] ? sanitize_text_field( $_POST['termName'] ) : 'tf_hotel';
 
 		$terms = get_terms( array(
@@ -625,6 +631,12 @@ class Helper {
 	function tf_month_chart_filter_callback() {
 		//Verify Nonce
 		check_ajax_referer( 'updates', '_nonce' );
+
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
 
 		$search_month = sanitize_key( $_POST['month'] );
 		$search_year  = sanitize_key( $_POST['year'] );
@@ -3606,7 +3618,7 @@ class Helper {
 			$wp_admin_bar->add_node(
 				array(
 					'parent' => 'site-name',
-					'id'     => 'view-vendor-dashboard-link',
+					'id'     => 'view-tourfic-vendor-dashboard',
 					'title'  => __( 'Visit Vendor Dashboard', 'tourfic' ),
 					'href'   => $tf_dashboard_page_link,
 				)
