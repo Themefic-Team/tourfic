@@ -290,6 +290,12 @@ class TF_Options {
 		// Add nonce for security and authentication.
 		check_ajax_referer( 'updates', '_nonce' );
 
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
+
 		$start_index = isset( $_POST['start_index'] ) ? intval( $_POST['start_index'] ) : 0;
 		$type        = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : 'all';
 		$search      = isset( $_POST['search'] ) ? sanitize_text_field( $_POST['search'] ) : '';
