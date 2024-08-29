@@ -27,7 +27,7 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 		$tour_location_field_required = ! empty( Helper::tfopt( 'tour_location_field_required' ) ) ? Helper::tfopt( 'tour_location_field_required' ) : '';
         if( !empty($design) && 2==$design ){
 		?>
-		<form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(tf_booking_search_action()); ?>">
+		<form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(tf_booking_search_action()); ?>">
 			<div class="tf_hotel_searching">
 				<div class="tf_form_innerbody">
 					<div class="tf_form_fields">

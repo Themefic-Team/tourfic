@@ -1603,7 +1603,7 @@
             },
             initialSelectedValues: {
                 from: parseInt(tf_params.tf_hotel_min_price),
-                to: parseInt(tf_params.tf_hotel_max_price) / 2
+                to: parseInt(tf_params.tf_hotel_max_price)
             },
             grid: false,
             theme: "dark",
@@ -1622,7 +1622,7 @@
             },
             initialSelectedValues: {
                 from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt(tf_params.tf_hotel_min_price),
-                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_hotel_max_price) / 2
+                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_hotel_max_price)
             },
             grid: false,
             theme: "dark",
@@ -1646,7 +1646,7 @@
             },
             initialSelectedValues: {
                 from: parseInt(tf_params.tf_tour_min_price),
-                to: parseInt(tf_params.tf_tour_max_price) / 2
+                to: parseInt(tf_params.tf_tour_max_price)
             },
             grid: false,
             theme: "dark",
@@ -1664,7 +1664,7 @@
             },
             initialSelectedValues: {
                 from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt(tf_params.tf_tour_min_price),
-                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_tour_max_price) / 2
+                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_tour_max_price)
             },
             grid: false,
             theme: "dark",
@@ -1688,7 +1688,7 @@
             },
             initialSelectedValues: {
                 from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt(tf_params.tf_apartment_min_price),
-                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_apartment_max_price) / 2
+                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_apartment_max_price)
             },
             grid: false,
             theme: "dark",
