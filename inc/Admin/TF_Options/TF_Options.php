@@ -370,7 +370,10 @@ class TF_Options {
 
 		// Check if the current user has the required capability.
 		if (!current_user_can('manage_options')) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'You do not have permission to access this resource.', 'tourfic' )
+			] );
 			return;
 		}
 
@@ -554,7 +557,10 @@ class TF_Options {
 
 		// Check if the current user has the required capability.
 		if (!current_user_can('manage_options')) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'You do not have permission to access this resource.', 'tourfic' )
+			] );
 			return;
 		}
 

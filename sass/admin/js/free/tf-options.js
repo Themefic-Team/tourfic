@@ -389,8 +389,12 @@
                     iconList.html('<div class="tf-icon-loading">Loading...</div>');
                 },
                 success: function (response) {
-                    iconList.html(response.data.html);
-                    $('.tf-icon-tab-pane.active').attr('data-max', response.data.count);
+                    if(!response.success){
+                        notyf.error(response.data)
+                    } else {
+                        iconList.html(response.data.html);
+                        $('.tf-icon-tab-pane.active').attr('data-max', response.data.count);
+                    }
                 },
                 error: function (xhr, status, error) {
                     console.error(error);
@@ -430,10 +434,16 @@
                             $('.tf-icon-list').append('<div class="tf-icon-loading">Loading...</div>');
                         },
                         success: function (response) {
-                            loading = false;
-                            $('#tf-icon-tab-'+type+' .tf-icon-list').append(response.data);
-                            $('.tf-icon-loading').remove();
-                            startIndex += 100;
+                            if(!response.success){
+                                $('.tf-icon-loading').remove();
+                                notyf.error(response.data)
+                            } else {
+                                loading = false;
+                                $('#tf-icon-tab-'+type+' .tf-icon-list').append(response.data);
+                                $('.tf-icon-loading').remove();
+                                startIndex += 100;
+                            }
+
                         },
                         error: function (xhr, status, error) {
                             loading = false;
@@ -609,7 +619,11 @@
                         },
                         success: function (doc) {
                             if (typeof doc == "object") {
-                                successCallback(doc);
+                                if(!doc.success){
+                                    notyf.error(doc.data)
+                                } else {
+                                    successCallback(doc);
+                                }
                             }
 
                             $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
@@ -861,7 +875,11 @@
                         },
                         success: function (doc) {
                             if (typeof doc == "object") {
-                                successCallback(doc);
+                                if(!doc.success){
+                                    notyf.error(doc.data)
+                                } else {
+                                    successCallback(doc);
+                                }
                             }
 
                             $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
@@ -2089,50 +2107,55 @@ var frame, gframe;
                         year: yearTarget,
                     },
                     success: function (data) {
-                        var response = JSON.parse(data);
-                        var ctx = document.getElementById('tf_months'); // node
-                        var ctx = document.getElementById('tf_months').getContext('2d'); // 2d context
-                        var ctx = $('#tf_months'); // jQuery instance
-                        var ctx = 'tf_months'; // element id
+                        if(!data.success){
+                            $("#tf-report-loader").removeClass('show');
+                            notyf.error(data.data)
+                        } else {
+                            var response = JSON.parse(data);
+                            var ctx = document.getElementById('tf_months'); // node
+                            var ctx = document.getElementById('tf_months').getContext('2d'); // 2d context
+                            var ctx = $('#tf_months'); // jQuery instance
+                            var ctx = 'tf_months'; // element id
 
-                        var chart = new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: response.months_day_number,
-                                // Information about the dataset
-                                datasets: [{
-                                    label: "Completed Booking",
-                                    borderColor: '#003C79',
-                                    tension: 0.1,
-                                    data: response.tf_complete_orders,
-                                    fill: false
-                                },
-                                    {
-                                        label: "Cancelled Booking",
-                                        borderColor: 'red',
+                            var chart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: response.months_day_number,
+                                    // Information about the dataset
+                                    datasets: [{
+                                        label: "Completed Booking",
+                                        borderColor: '#003C79',
                                         tension: 0.1,
-                                        data: response.tf_cancel_orders,
+                                        data: response.tf_complete_orders,
                                         fill: false
+                                    },
+                                        {
+                                            label: "Cancelled Booking",
+                                            borderColor: 'red',
+                                            tension: 0.1,
+                                            data: response.tf_cancel_orders,
+                                            fill: false
+                                        }
+                                    ]
+                                },
+
+                                // Configuration options
+                                options: {
+                                    layout: {
+                                        padding: 10,
+                                    },
+                                    legend: {
+                                        display: true
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: response.tf_search_month
                                     }
-                                ]
-                            },
-
-                            // Configuration options
-                            options: {
-                                layout: {
-                                    padding: 10,
-                                },
-                                legend: {
-                                    display: true
-                                },
-                                title: {
-                                    display: true,
-                                    text: response.tf_search_month
                                 }
-                            }
 
-                        });
-                        $("#tf-report-loader").removeClass('show');
+                            });
+                            $("#tf-report-loader").removeClass('show');
+                        }
                     }
                 })
             }
@@ -2424,7 +2447,7 @@ var frame, gframe;
                         // Clean up the temporary URL
                         window.URL.revokeObjectURL(url);
                     } else {
-                        alert('Something went wrong!');
+                        notyf.error(obj.message);
                     }
                     $('.tf-export-btn').html('Export');
                     $('.tf-export-btn').removeAttr('disabled');

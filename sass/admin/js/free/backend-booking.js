@@ -36,16 +36,20 @@
                         $('#tf-backend-hotel-book-btn').attr('disabled', 'disabled');
                     },
                     success: function (response) {
-                        var select2 = $('[name="tf_available_hotels"]');
-                        select2.empty();
-                        select2.append('<option value="">' + tf_admin_params.select_hotel + '</option>');
-                        $.each(response.data.hotels, function (key, value) {
-                            select2.append('<option value="' + key + '">' + value + '</option>');
-                        });
-                        select2.select2();
-                        //select the first option
-                        select2.val(select2.find('option:eq(1)').val()).trigger('change');
-                        $('#tf-backend-hotel-book-btn').removeAttr('disabled');
+                        if(!response.success){
+                            notyf.error(response.data)
+                        } else {
+                            var select2 = $('[name="tf_available_hotels"]');
+                            select2.empty();
+                            select2.append('<option value="">' + tf_admin_params.select_hotel + '</option>');
+                            $.each(response.data.hotels, function (key, value) {
+                                select2.append('<option value="' + key + '">' + value + '</option>');
+                            });
+                            select2.select2();
+                            //select the first option
+                            select2.val(select2.find('option:eq(1)').val()).trigger('change');
+                            $('#tf-backend-hotel-book-btn').removeAttr('disabled');
+                        }
                     },
                     error: function (response) {
                         console.log(response);
@@ -83,26 +87,30 @@
                         $('#tf-backend-hotel-book-btn').attr('disabled', 'disabled');
                     },
                     success: function (response) {
-                        var select2 = $('[name="tf_available_rooms"]');
-                        var serviceSelect = $('[name="tf_hotel_service_type"]');
+                        if(!response.success){
+                            notyf.error(response.data)
+                        } else {
+                            var select2 = $('[name="tf_available_rooms"]');
+                            var serviceSelect = $('[name="tf_hotel_service_type"]');
 
-                        select2.removeAttr('disabled');
-                        select2.empty();
-                        select2.append('<option value="">' + tf_admin_params.select_room + '</option>');
-                        $.each(response.data.rooms, function (key, value) {
-                            select2.append('<option value="' + key + '">' + value + '</option>');
-                        });
-                        select2.select2();
-                        //auto select the first option
-                        select2.val(select2.find('option:eq(1)').val()).trigger('change');
+                            select2.removeAttr('disabled');
+                            select2.empty();
+                            select2.append('<option value="">' + tf_admin_params.select_room + '</option>');
+                            $.each(response.data.rooms, function (key, value) {
+                                select2.append('<option value="' + key + '">' + value + '</option>');
+                            });
+                            select2.select2();
+                            //auto select the first option
+                            select2.val(select2.find('option:eq(1)').val()).trigger('change');
 
-                        //service type select
-                        serviceSelect.empty();
-                        $.each(response.data.services, function (key, value) {
-                            serviceSelect.append('<option value="' + key + '">' + value + '</option>');
-                        });
+                            //service type select
+                            serviceSelect.empty();
+                            $.each(response.data.services, function (key, value) {
+                                serviceSelect.append('<option value="' + key + '">' + value + '</option>');
+                            });
 
-                        $('#tf-backend-hotel-book-btn').removeAttr('disabled');
+                            $('#tf-backend-hotel-book-btn').removeAttr('disabled');
+                        }
                     },
                     error: function (response) {
                         console.log(response);
@@ -138,20 +146,24 @@
                         $('#tf-backend-hotel-book-btn').attr('disabled', 'disabled');
                     },
                     success: function (response) {
-                        var select = $('[name="tf_hotel_rooms_number"]');
-                        select.empty();
-                        for (var i = 1; i <= response.data.rooms; i++) {
-                            if (i === 1) {
-                                select.append('<option value="' + i + '" selected>' + i + ' Room</option>');
-                            } else {
-                                select.append('<option value="' + i + '">' + i + ' Rooms</option>');
+                        if(!response.success){
+                            notyf.error(response.data)
+                        } else {
+                            var select = $('[name="tf_hotel_rooms_number"]');
+                            select.empty();
+                            for (var i = 1; i <= response.data.rooms; i++) {
+                                if (i === 1) {
+                                    select.append('<option value="' + i + '" selected>' + i + ' Room</option>');
+                                } else {
+                                    select.append('<option value="' + i + '">' + i + ' Rooms</option>');
+                                }
                             }
+
+                            $('[name="tf_hotel_adults_number"]').val(response.data.adults).attr('max', response.data.adults * response.data.rooms);
+                            $('[name="tf_hotel_children_number"]').val(response.data.children).attr('max', response.data.children * response.data.rooms);
+
+                            $('#tf-backend-hotel-book-btn').removeAttr('disabled');
                         }
-
-                        $('[name="tf_hotel_adults_number"]').val(response.data.adults).attr('max', response.data.adults * response.data.rooms);
-                        $('[name="tf_hotel_children_number"]').val(response.data.children).attr('max', response.data.children * response.data.rooms);
-
-                        $('#tf-backend-hotel-book-btn').removeAttr('disabled');
                     },
                     error: function (response) {
                         console.log(response);
@@ -315,100 +327,104 @@
                         $('#tf-backend-hotel-book-btn').attr('disabled', 'disabled');
                     },
                     success: function (response) {
-                        const obj = JSON.parse(response);
+                        if(!response.success){
+                            notyf.error(response.data)
+                        } else {
+                            const obj = JSON.parse(response);
 
-                        if (obj.custom_avail !== '1') {
-                            populateTimeSelect(obj.allowed_times)
-                        }
-
-                        let flatpickerObj = {
-                            enableTime: false,
-                            // altInput: true,
-                            // altFormat: tf_admin_params.date_format_change_backend,
-                            dateFormat: "Y/m/d",
-                        };
-                        if (obj.tour_type === 'fixed') {
-                            flatpickerObj.mode = "range";
-                            flatpickerObj.defaultDate = [obj.departure_date, obj.return_date];
-                            flatpickerObj.enable = [
-                                {
-                                    from: obj.departure_date,
-                                    to: obj.return_date
-                                }
-                            ];
-                            flatpickerObj.onReady = function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                            };
-                        } else if (obj.tour_type === 'continuous') {
-                            flatpickerObj.minDate = "today";
-                            flatpickerObj.disableMobile = "true";
-                            if (obj.custom_avail === '1') {
-                                flatpickerObj.enable = [];
-                                if (obj.cont_custom_date) {
-                                    for (const item of obj.cont_custom_date) {
-                                        flatpickerObj.enable.push({
-                                            from: item.date.from,
-                                            to: item.date.to
-                                        });
-                                    }
-                                }
-                            }
                             if (obj.custom_avail !== '1') {
-                                if (obj.disabled_day || obj.disable_range || obj.disable_specific) {
-                                    flatpickerObj.disable = [];
-                                    if (obj.disabled_day) {
-                                        flatpickerObj.disable.push(function (date) {
-                                            return (date.getDay() === 8 || obj.disabled_day.includes(date.getDay().toString()));
-                                        });
+                                populateTimeSelect(obj.allowed_times)
+                            }
+
+                            let flatpickerObj = {
+                                enableTime: false,
+                                // altInput: true,
+                                // altFormat: tf_admin_params.date_format_change_backend,
+                                dateFormat: "Y/m/d",
+                            };
+                            if (obj.tour_type === 'fixed') {
+                                flatpickerObj.mode = "range";
+                                flatpickerObj.defaultDate = [obj.departure_date, obj.return_date];
+                                flatpickerObj.enable = [
+                                    {
+                                        from: obj.departure_date,
+                                        to: obj.return_date
                                     }
-                                    if (obj.disable_range) {
-                                        for (const d_item of obj.disable_range) {
-                                            flatpickerObj.disable.push({
-                                                from: d_item.date.from,
-                                                to: d_item.date.to
+                                ];
+                                flatpickerObj.onReady = function (selectedDates, dateStr, instance) {
+                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                };
+                            } else if (obj.tour_type === 'continuous') {
+                                flatpickerObj.minDate = "today";
+                                flatpickerObj.disableMobile = "true";
+                                if (obj.custom_avail === '1') {
+                                    flatpickerObj.enable = [];
+                                    if (obj.cont_custom_date) {
+                                        for (const item of obj.cont_custom_date) {
+                                            flatpickerObj.enable.push({
+                                                from: item.date.from,
+                                                to: item.date.to
                                             });
                                         }
                                     }
-                                    if (obj.disable_specific2) {
-                                        for (const d_item of obj.disable_specific2) {
-                                            flatpickerObj.disable.push(d_item);
+                                }
+                                if (obj.custom_avail !== '1') {
+                                    if (obj.disabled_day || obj.disable_range || obj.disable_specific) {
+                                        flatpickerObj.disable = [];
+                                        if (obj.disabled_day) {
+                                            flatpickerObj.disable.push(function (date) {
+                                                return (date.getDay() === 8 || obj.disabled_day.includes(date.getDay().toString()));
+                                            });
+                                        }
+                                        if (obj.disable_range) {
+                                            for (const d_item of obj.disable_range) {
+                                                flatpickerObj.disable.push({
+                                                    from: d_item.date.from,
+                                                    to: d_item.date.to
+                                                });
+                                            }
+                                        }
+                                        if (obj.disable_specific2) {
+                                            for (const d_item of obj.disable_specific2) {
+                                                flatpickerObj.disable.push(d_item);
+                                            }
                                         }
                                     }
                                 }
                             }
-                        }
 
-                        flatpickerObj.onChange = function (selectedDates, dateStr, instance) {
-                            if (obj.custom_avail === '1') {
-                                let times = obj.allowed_times.filter((v) => {
-                                    let date_str = Date.parse(dateStr);
-                                    let start_date = Date.parse(v.date.from);
-                                    let end_date = Date.parse(v.date.to);
-                                    return start_date <= date_str && end_date >= date_str;
-                                });
-                                times = times.length > 0 && times[0].times ? times[0].times : null;
-                                populateTimeSelect(times);
+                            flatpickerObj.onChange = function (selectedDates, dateStr, instance) {
+                                if (obj.custom_avail === '1') {
+                                    let times = obj.allowed_times.filter((v) => {
+                                        let date_str = Date.parse(dateStr);
+                                        let start_date = Date.parse(v.date.from);
+                                        let end_date = Date.parse(v.date.to);
+                                        return start_date <= date_str && end_date >= date_str;
+                                    });
+                                    times = times.length > 0 && times[0].times ? times[0].times : null;
+                                    populateTimeSelect(times);
+                                }
+                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                             }
-                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+
+                            $("[name='tf_tour_date']").flatpickr(flatpickerObj);
+
+                            if (obj.tour_extras_array.length > 0) {
+                                let extras = $('[name="tf_tour_extras[]"]');
+                                extras.removeAttr('disabled');
+                                extras.empty();
+                                $.each(obj.tour_extras_array, function (key, value) {
+                                    extras.append('<option value="' + key + '">' + value + '</option>');
+                                });
+                                extras.select2();
+                            } else {
+                                let extras = $('[name="tf_tour_extras[]"]');
+                                extras.empty();
+                                extras.attr('disabled', 'disabled');
+                            }
+
+                            $('#tf-backend-hotel-book-btn').removeAttr('disabled');
                         }
-
-                        $("[name='tf_tour_date']").flatpickr(flatpickerObj);
-
-                        if (obj.tour_extras_array.length > 0) {
-                            let extras = $('[name="tf_tour_extras[]"]');
-                            extras.removeAttr('disabled');
-                            extras.empty();
-                            $.each(obj.tour_extras_array, function (key, value) {
-                                extras.append('<option value="' + key + '">' + value + '</option>');
-                            });
-                            extras.select2();
-                        } else {
-                            let extras = $('[name="tf_tour_extras[]"]');
-                            extras.empty();
-                            extras.attr('disabled', 'disabled');
-                        }
-
-                        $('#tf-backend-hotel-book-btn').removeAttr('disabled');
                     }
                 });
             }
@@ -528,17 +544,21 @@
                         $('#tf-backend-apartment-book-btn').attr('disabled', 'disabled');
                     },
                     success: function (response) {
-                        var select2 = $('[name="tf_available_apartments"]');
-                        select2.empty();
-                        select2.append('<option value="">' + 'Select Apartment' + '</option>');
-                        $.each(response.data.apartments, function (key, value) {
-                            select2.append('<option value="' + key + '">' + value + '</option>');
-                        });
-                        // select2.select2();
+                        if(!response.success){
+                            notyf.error(response.data)
+                        } else {
+                            var select2 = $('[name="tf_available_apartments"]');
+                            select2.empty();
+                            select2.append('<option value="">' + 'Select Apartment' + '</option>');
+                            $.each(response.data.apartments, function (key, value) {
+                                select2.append('<option value="' + key + '">' + value + '</option>');
+                            });
+                            // select2.select2();
 
-                        //select the first option
-                        select2.val(select2.find('option:eq(1)').val()).trigger('change');
-                        $('#tf-backend-apartment-book-btn').removeAttr('disabled');
+                            //select the first option
+                            select2.val(select2.find('option:eq(1)').val()).trigger('change');
+                            $('#tf-backend-apartment-book-btn').removeAttr('disabled');
+                        }
                     },
                     error: function (response) {
                         console.log(response);
@@ -574,24 +594,28 @@
                         $('#tf-backend-apartment-book-btn').attr('disabled', 'disabled');
                     },
                     success: function (response) {
-                        var serviceSelect = $('[name="tf_apartment_additional_fees"]');
-
-                        serviceSelect.select2({ multiple: true });
-
-                        //Additional fees auto selection
-                        serviceSelect.empty();
-
-                        if (response.data.additional_fees.length > 0) {
-                            $.each(response.data.additional_fees, function (key, value) {
-                                serviceSelect.append('<option value="' + key + '">' + value.label + ' - ' + value.price + '</option>');
-                            });
+                        if(!response.success){
+                            notyf.error(response.data)
                         } else {
-                            serviceSelect.append('<option value="' + 1 + '">' + 'There are no additional fees' + '</option>');
+                            var serviceSelect = $('[name="tf_apartment_additional_fees"]');
+
+                            serviceSelect.select2({multiple: true});
+
+                            //Additional fees auto selection
+                            serviceSelect.empty();
+
+                            if (response.data.additional_fees.length > 0) {
+                                $.each(response.data.additional_fees, function (key, value) {
+                                    serviceSelect.append('<option value="' + key + '">' + value.label + ' - ' + value.price + '</option>');
+                                });
+                            } else {
+                                serviceSelect.append('<option value="' + 1 + '">' + 'There are no additional fees' + '</option>');
+                            }
+
+                            serviceSelect.find('option').prop('selected', true).trigger('change');
+
+                            $('#tf-backend-apartment-book-btn').removeAttr('disabled');
                         }
-
-                        serviceSelect.find('option').prop('selected', true).trigger('change');
-
-                        $('#tf-backend-apartment-book-btn').removeAttr('disabled');
                     },
                     error: function (response) {
                         console.log(response);
