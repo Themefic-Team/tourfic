@@ -57,6 +57,8 @@
                                 <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
                             </div>
                         </div>
+
+                        <?php do_action("tf_apartment_archive_card_items_before"); ?>
                         
                         <!--Available rooms start -->
                         <div class="tf-archive-available-rooms tf-available-rooms archive_ajax_result">
@@ -67,14 +69,14 @@
                                     the_post();
                                     $apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
                                     if ( !empty($apartment_meta[ "apartment_as_featured" ] )) {
-                                        Apartment::tf_apartment_archive_single_item();
+                                        echo apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item());
                                     }
                                 } 
                                 while ( have_posts() ) {
                                     the_post();
                                     $apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
                                     if ( empty($apartment_meta[ "apartment_as_featured" ] )) {
-                                        Apartment::tf_apartment_archive_single_item();
+                                        echo apply_filters("tf_apartment_archive_single_card_design_one", Apartment::tf_apartment_archive_single_item());
                                     }
                                 }
                             } else {
@@ -89,6 +91,8 @@
                             <?php } ?>
                         </div>
                         <!-- Available rooms end -->
+
+                        <?php do_action("tf_apartment_archive_card_items_after"); ?>
 
                     </div>
                     <!-- Available rooms end -->

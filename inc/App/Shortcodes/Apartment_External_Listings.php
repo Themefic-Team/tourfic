@@ -44,7 +44,7 @@ class Apartment_External_Listings extends \Tourfic\Core\Shortcodes {
 		} else {
 			$slider_activate = 'tf-hotel-grid';
 		}
-		$post_loop = new \WP_Query( $args );
+		$post_loop = new \WP_Query( apply_filters( "tf_apartment_external_booking_shortcode_args", $args) );
 		?>
 		<?php if ( $post_loop->have_posts() ) : ?>
 			<div class="tf-widget-slider recent-hotel-slider">

@@ -1085,6 +1085,8 @@ class Apartment {
 			<?php wp_nonce_field( 'tf_apartment_booking', 'tf_apartment_nonce' ); ?>
         </form>
 		<?php }else{ ?>
+
+		<?php do_action("tf_apartment_before_single_booking_form"); ?>
         <!-- Start Booking widget -->
         <form id="tf-apartment-booking" class="tf-apartment-side-booking tf-apartment-design-one-form" method="get" autocomplete="off">
             <h5><?php echo ! empty( $meta['booking_form_title'] ) ? esc_html( $meta['booking_form_title'] ) : esc_html_e( 'Book your Apartment', 'tourfic' ); ?></h5>
@@ -1258,6 +1260,9 @@ class Apartment {
 
 			<?php wp_nonce_field( 'tf_apartment_booking', 'tf_apartment_nonce' ); ?>
         </form>
+
+		<?php do_action("tf_apartment_after_single_booking_form"); ?>
+
 		<?php } ?>
         <script>
             (function ($) {

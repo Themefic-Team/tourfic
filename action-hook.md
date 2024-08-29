@@ -55,6 +55,16 @@
 * tf_apartment_type_args - **file:** `functions-apartment.php`
 * tf_apartment_type_slug - **file:** `Apartment_CPT.php`
 * tf_apartment_css - **file:** `Enqueue.php` 
+* tf_apartment_external_booking_shortcode_args - **file:** `Apartment_External_Booking.php` 
+* tf_apartment_shortcode_query_args - **file:** `Apartment_External_Booking.php` 
+* tf_apartment_archive_card_items_before - **file:** `Apartment/Archive/Design-default.php` 
+* tf_apartment_archive_card_items_after - **file:** `Apartment/Archive/Design-default.php` 
+* tf_apartment_before_single_booking_form - **file:** `Apartment.php` 
+* tf_apartment_after_single_booking_form - **file:** `Apartment.php` 
+* tf_apartment_after_single_booking_form - **file:** `Apartment.php` 
+* tf_apartment_archive_single_featured_card_design_one - **file:** `Apartment/Archive/Design-1.php`
+* tf_apartment_archive_single_card_design_one - **file:** `Apartment/Archive/Design-1.php`
+
 
 #### Backend Booking
 * tf_{*}_backend_booking_form_title - **file:** `TF_Backend_Booking.php` - **dynamic:** `tour/hotel/apartment`
