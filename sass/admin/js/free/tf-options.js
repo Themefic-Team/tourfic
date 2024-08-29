@@ -619,7 +619,7 @@
                         },
                         success: function (doc) {
                             if (typeof doc == "object") {
-                                successCallback(doc.data);
+                                successCallback(doc);
                             }
 
                             $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
