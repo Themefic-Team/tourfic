@@ -963,6 +963,12 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 	        // Add nonce for security and authentication.
 	        check_ajax_referer( 'updates', '_nonce' );
 
+	        // Check if the current user has the required capability.
+	        if (!current_user_can('manage_options')) {
+		        wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+		        return;
+	        }
+
             $response = array(
                 'status' => 'error',
                 'message' => 'Something went wrong!'

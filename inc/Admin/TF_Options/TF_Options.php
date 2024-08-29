@@ -290,6 +290,12 @@ class TF_Options {
 		// Add nonce for security and authentication.
 		check_ajax_referer( 'updates', '_nonce' );
 
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
+
 		$start_index = isset( $_POST['start_index'] ) ? intval( $_POST['start_index'] ) : 0;
 		$type        = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : 'all';
 		$search      = isset( $_POST['search'] ) ? sanitize_text_field( $_POST['search'] ) : '';
@@ -320,6 +326,12 @@ class TF_Options {
 	function tf_icon_search() {
 		// Add nonce for security and authentication.
 		check_ajax_referer( 'updates', '_nonce' );
+
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
 
 		$search_text = isset( $_POST['search'] ) ? sanitize_text_field( $_POST['search'] ) : '';
 		$type        = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : 'all';
@@ -355,6 +367,12 @@ class TF_Options {
 	function tf_add_hotel_room_availability() {
 		// Add nonce for security and authentication.
 		check_ajax_referer( 'updates', '_nonce' );
+
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
 
 		$date_format         = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		$room_id             = isset( $_POST['room_id'] ) && ! empty( $_POST['room_id'] ) ? sanitize_text_field( $_POST['room_id'] ) : '';
@@ -430,6 +448,12 @@ class TF_Options {
 	function tf_get_hotel_room_availability() {
 		// Add nonce for security and authentication.
 		check_ajax_referer( 'updates', '_nonce' );
+
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
 
 		$new_post   = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
 		$room_id    = isset( $_POST['room_id'] ) && ! empty( $_POST['room_id'] ) ? sanitize_text_field( $_POST['room_id'] ) : '';
@@ -528,6 +552,12 @@ class TF_Options {
 		// Add nonce for security and authentication.
 		check_ajax_referer( 'updates', '_nonce' );
 
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
+
 		$date_format         = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		$apartment_id        = isset( $_POST['apartment_id'] ) && ! empty( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
 		$new_post            = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? $_POST['new_post'] : '';
@@ -613,6 +643,12 @@ class TF_Options {
 	function tf_get_apartment_availability() {
 		// Add nonce for security and authentication.
 		check_ajax_referer( 'updates', '_nonce' );
+
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
 
 		$new_post         = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
 		$apartment_id     = isset( $_POST['apartment_id'] ) && ! empty( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';

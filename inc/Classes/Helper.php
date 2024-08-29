@@ -456,6 +456,12 @@ class Helper {
 		//Nonce Verification
 		check_ajax_referer( 'updates', '_nonce' );
 
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
+
 		$term_name = $_POST['termName'] ? sanitize_text_field( $_POST['termName'] ) : 'tf_hotel';
 
 		$terms = get_terms( array(
@@ -625,6 +631,12 @@ class Helper {
 	function tf_month_chart_filter_callback() {
 		//Verify Nonce
 		check_ajax_referer( 'updates', '_nonce' );
+
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
 
 		$search_month = sanitize_key( $_POST['month'] );
 		$search_year  = sanitize_key( $_POST['year'] );

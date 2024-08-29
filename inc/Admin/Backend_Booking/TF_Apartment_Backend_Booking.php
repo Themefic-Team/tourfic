@@ -105,6 +105,12 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 		// Add nonce for security and authentication.
 		check_ajax_referer( 'updates', '_nonce' );
 
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
+
 		$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : 0;
 		$meta = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
 		$from         = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
@@ -259,6 +265,12 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 	function check_avaibility_callback() {
 		// Add nonce for security and authentication.
 		check_ajax_referer( 'updates', '_nonce' );
+
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
 
 		$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
 		$from         = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
