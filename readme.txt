@@ -324,10 +324,11 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 = 2.13.3 - 29 August 2024 =
 
-- Improvement: Nonce Validation and escaping
+- Improvement: Nonce Validation and security 
+- Improvement: QR Code page added to the dashboard
 - Improvement: Search issue for price range
 - Improvement: System stability improved
-- Improvement: QR Code page added to the dashboard
+- Improvement: Email template link verification(Pro)
 
 = 2.13.2 - 27 August 2024 =
 
