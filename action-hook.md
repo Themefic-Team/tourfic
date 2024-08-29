@@ -61,6 +61,15 @@
 * tf_{*}_backend_booking_form_class - **file:** `TF_Backend_Booking.php` - **dynamic:** `tour/hotel/apartment`
 * tf_{*}_backend_booking_form_card - **file:** `TF_Backend_Booking.php` - **dynamic:** `tour/hotel/apartment`
 
+#### Booking Details
+* {*}_booking_details_main_title - **file:** `TF_Booking_Details.php` - **dynamic:** `tf_tour/tf_hotel/tf_apartment`
+
+#### Single Booking Details
+* {*}_single_booking_details_after_title_text - **file:** `TF_Booking_Details.php` - **dynamic:** `tf_tour/tf_hotel/tf_apartment`
+* tf_{*}_booking_details_customer_section_title_change - **file:** `TF_Booking_Details.php` - **dynamic:** `tour/hotel/apartment`
+
+
+
 #### Enquiry
 * tf_hotel_enquiry_page_title - **file:** `Hotel_Enquiry.php`
 * tf_hotel_enquiry_menu_title - **file:** `Hotel_Enquiry.php`
@@ -91,6 +100,19 @@
 * tf_before_{*}_backend_booking_form - **file:** `TF_Backend_Booking.php` - **dynamic:** `tour/hotel/apartment`
 * tf_before_{*}_each_backend_booking_form_card - **file:** `TF_Backend_Booking.php` - **dynamic:** `tour/hotel/apartment`
 * tf_after_{*}_backend_booking_form - **file:** `TF_Backend_Booking.php` - **dynamic:** `tour/hotel/apartment`
+
+#### Booking Details
+* tf_before_hotel_booking_details - **file:** `TF_Booking_Details.php`
+* tf_before_tour_booking_details - **file:** `TF_Booking_Details.php`
+* tf_before_apartment_booking_details - **file:** `TF_Booking_Details.php`
+* {*}_before_booking_order_table - **file:** `TF_Booking_Details.php` - **dynamic:** `tf_tour/tf_hotel/tf_apartment`
+* {*}_after_booking_order_table - **file:** `TF_Booking_Details.php` - **dynamic:** `tf_tour/tf_hotel/tf_apartment`
+
+#### Single Booking Details
+* {*}_single_booking_details_after_title_text - **file:** `TF_Backend_Booking.php` - **dynamic:** `tf_tour/tf_hotel/tf_apartment`
+* tf_{*}_single_booking_details_card_first - **file:** `TF_Backend_Booking.php` - **dynamic:** `tour/hotel/apartment`
+* tf_{*}_single_booking_details_card_first - **file:** `TF_Backend_Booking.php` - **dynamic:** `tour/hotel/apartment`
+
 
 #### Enquiry
 * tf_before_enquiry_details - **file:** `Hotel_Enquiry.php, Tour_Enquiry.php, Apartment_Enquiry.php`
