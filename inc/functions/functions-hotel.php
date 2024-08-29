@@ -1509,13 +1509,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 		$address = !empty( Helper::tf_data_types($meta['map'])['address'] ) ? Helper::tf_data_types($meta['map'])['address'] : '';
     }
 	// Rooms
-	$b_rooms = ! empty( $meta['room'] ) ? $meta['room'] : array();
-	if( !empty($b_rooms) && gettype($b_rooms)=="string" ){
-        $tf_hotel_b_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
-            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
-        }, $b_rooms );
-        $b_rooms = unserialize( $tf_hotel_b_rooms_value );
-    }
+	$b_rooms = \Tourfic\Classes\Room\Room::get_hotel_rooms( $post_id );
 	// Gallery Image
 	$gallery = ! empty( $meta['gallery'] ) ? $meta['gallery'] : '';
 	if ( $gallery ) {
@@ -1597,7 +1591,8 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	$tf_lowestAmount = 0;
 	$tf_lowestAmount_items = null;
 	if ( ! empty( $b_rooms ) ):
-		foreach ( $b_rooms as $rkey => $b_room ) {
+		foreach ( $b_rooms as $rkey => $_b_room ) {
+			$b_room = get_post_meta($_b_room->ID, 'tf_room_opt', true);
 
 			//hotel room discount data
 			$hotel_discount_type = !empty($b_room["discount_hotel_type"]) ? $b_room["discount_hotel_type"] : "none";

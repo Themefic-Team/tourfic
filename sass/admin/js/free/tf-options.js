@@ -619,11 +619,7 @@
                         },
                         success: function (doc) {
                             if (typeof doc == "object") {
-                                if(!doc.success){
-                                    notyf.error(doc.data)
-                                } else {
-                                    successCallback(doc);
-                                }
+                                successCallback(doc);
                             }
 
                             $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
@@ -875,11 +871,7 @@
                         },
                         success: function (doc) {
                             if (typeof doc == "object") {
-                                if(!doc.success){
-                                    notyf.error(doc.data)
-                                } else {
-                                    successCallback(doc);
-                                }
+                                successCallback(doc);
                             }
 
                             $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
