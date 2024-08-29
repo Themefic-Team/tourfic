@@ -17520,6 +17520,7 @@ html {
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 24px */
+  text-transform: capitalize;
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more {

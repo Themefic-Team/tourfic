@@ -134,7 +134,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 				<?php
 				$total_prices = Pricing::set_total_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time);
 				?>
-				<h3><?php echo $total_prices['sale_price'] ? wc_price($total_prices['sale_price']) : '' ?> <small>/ Day</small></h3>
+				<h3><?php echo $total_prices['sale_price'] ? wc_price($total_prices['sale_price']) : '' ?> <small>/ <?php echo esc_html($total_prices['type']); ?></small></h3>
 			</div>
 			<?php if(!empty($pickup_date) && !empty($dropoff_date)){ ?>
 				<input type="hidden" value="<?php echo esc_attr($pickup_date); ?>" id="pickup_date">
@@ -142,7 +142,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 				<input type="hidden" value="<?php echo esc_attr($pickup_time); ?>" id="pickup_time">
 				<input type="hidden" value="<?php echo esc_attr($dropoff_time); ?>" id="dropoff_time">
 				<input type="hidden" value="<?php echo esc_attr($post_id); ?>" id="post_id">
-			<button><?php esc_html_e("Book now", "tourfic"); ?></button>
+				<button class="quick-booking"><?php esc_html_e("Book now", "tourfic"); ?></button>
 			<?php }else{ ?>
 				<a class="view-more" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e("Details", "tourfic"); ?></a>
 			<?php } ?>

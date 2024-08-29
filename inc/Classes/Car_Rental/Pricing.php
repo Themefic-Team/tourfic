@@ -17,6 +17,8 @@ class Pricing {
 		$pricing_by = !empty($meta["price_by"]) ? $meta["price_by"] : 'day';
 		$initial_pricing = !empty($meta["car_rent"]) ? $meta["car_rent"] : 0;
 
+        $price_type = $pricing_by;
+
 		$pricing_type = !empty($meta["pricing_type"]) ? $meta["pricing_type"] : 'day_hour';
 		$discount_type = !empty($meta["discount_type"]) ? $meta["discount_type"] : 'none';
 		$discount_price = !empty($meta["discount_price"]) ? $meta["discount_price"] : '';
@@ -103,6 +105,8 @@ class Pricing {
                 $endDay = $entry['to_day'];
                 $price = $entry['price'];
 
+                $price_type = $day_type;
+
                 if('hour'==$day_type){
                     $total_multiply = $total_hours;
                 }
@@ -160,6 +164,7 @@ class Pricing {
             }
 
         }else{
+            $all_prices = [];
             if(!empty($tf_pickup_date) && !empty($tf_dropoff_date)){
                 // Combine date and time
                 $pickup_datetime = new \DateTime("$tf_pickup_date $tf_pickup_time");
@@ -204,6 +209,8 @@ class Pricing {
                 $all_prices['regular_price'] = $initial_pricing * $total_multiply;
             }
         }
+
+        $all_prices['type'] = $price_type;
 
         return $all_prices;
     }
