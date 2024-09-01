@@ -1144,6 +1144,15 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                 'status' => 'error',
                 'message' => 'Something went wrong!'
             );
+
+	        // Check if the current user has the required capability.
+	        if (!current_user_can('manage_options')) {
+		        $response['status'] = 'error';
+		        $response['message'] = __('You do not have permission to access this resource.', 'tourfic');
+		        echo wp_json_encode($response);
+                die();
+	        }
+
 	        $current_settings = get_option( $this->option_id );
 	        $response['data'] = isset($current_settings) && !empty($current_settings) ? wp_json_encode($current_settings) : '';
 

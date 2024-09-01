@@ -1626,9 +1626,9 @@ class Apartment {
 					?>
 				</div>  
 				<div class="tf-available-ratings">
-					<?php TF_Review::tf_archive_single_rating(); ?>
+					<?php TF_Review::tf_archive_single_rating($post_id); ?>
 					<i class="fa-solid fa-star"></i>
-				</div>  
+				</div>
 			</div>
 			<div class="tf-available-room-content">
 				<div class="tf-available-room-content-left">
@@ -1768,7 +1768,7 @@ class Apartment {
 							}
 							?>
                         </div>
-						<?php TF_Review::tf_archive_single_rating(); ?>
+						<?php TF_Review::tf_archive_single_rating($post_id); ?>
                     </div>
 
                     <div class="sr_rooms_table_block">
