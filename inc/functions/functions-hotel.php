@@ -2708,7 +2708,6 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 			if ( ! empty( $show_hotel ) && ! in_array( 0, $show_hotel ) ) {
 				if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 					foreach ( $rooms as $_room ) {
-						$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
 						if ( ! empty( $tf_check_in_date_price['adult_price'] ) ) {
 							if ( $startprice <= $tf_check_in_date_price['adult_price'] && $tf_check_in_date_price['adult_price'] <= $endprice ) {
 								$has_hotel = true;
@@ -2824,7 +2823,6 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 			if ( ! in_array( 0, $show_hotel ) ) {
 				if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 					foreach ( $rooms as $_room ) {
-						$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
 						if ( ! empty( $tf_check_in_date_price['adult_price'] ) ) {
 							if ( $startprice <= $tf_check_in_date_price['adult_price'] && $tf_check_in_date_price['adult_price'] <= $endprice ) {
 								$has_hotel = true;
@@ -3838,7 +3836,7 @@ if ( ! function_exists( 'tf_hotel_airport_service_title_price' ) ) {
  * @since 2.11.25
  */
 
-//add_action( 'wp_after_insert_post', 'tf_hotel_features_assign_taxonomies', 100, 3 );
+add_action( 'wp_after_insert_post', 'tf_hotel_features_assign_taxonomies', 100, 3 );
 function tf_hotel_features_assign_taxonomies( $post_id, $post, $old_status ) {
 	if ( 'tf_room' !== $post->post_type ) {
 		return;
@@ -3850,5 +3848,7 @@ function tf_hotel_features_assign_taxonomies( $post_id, $post, $old_status ) {
     if ( ! empty( $room_features ) ) {
         $room_features = array_map( 'intval', $room_features );
         wp_set_object_terms( $room_hotel, $room_features, 'hotel_feature' );
+    } else {
+	    wp_set_object_terms( $room_hotel, [], 'hotel_feature' );
     }
 }
