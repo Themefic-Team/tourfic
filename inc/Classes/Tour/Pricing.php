@@ -58,9 +58,9 @@ class Pricing {
 	}
 
 	function get_discount() {
-		$room_meta       = get_post_meta( $this->room_id, 'tf_room_opt', true );
-		$discount_type   = ! empty( $room_meta["discount_hotel_type"] ) ? $room_meta["discount_hotel_type"] : "none";
-		$discount_amount = ( $discount_type == 'fixed' || $discount_type == 'percent' ) && ! empty( $room_meta["discount_hotel_price"] ) ? $room_meta["discount_hotel_price"] : 0;
+		$meta       = $this->meta;
+		$discount_type    = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
+		$discount_amount = ( $discount_type == 'fixed' || $discount_type == 'percent' ) && ! empty( $meta["discount_price"] ) ? $meta["discount_price"] : 0;
 
 		return array(
 			'discount_type'   => $discount_type,
@@ -108,12 +108,6 @@ class Pricing {
 		$disable_adult_price  = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
 		$disable_child_price  = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
 		$disable_infant_price = ! empty( $meta['disable_infant_price'] ) ? $meta['disable_infant_price'] : false;
-
-		// Booking Type
-		$tf_booking_type      = function_exists( 'is_tf_pro' ) && is_tf_pro() ? ( ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1 ) : 1;
-		$tf_booking_url       = function_exists( 'is_tf_pro' ) && is_tf_pro() ? ( ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '' ) : '';
-		$tf_booking_query_url = function_exists( 'is_tf_pro' ) && is_tf_pro() ? ( ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}' ) : '';
-		$tf_booking_attribute = function_exists( 'is_tf_pro' ) && is_tf_pro() ? ( ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '' ) : '';
 
 		if ( $tour_type == 'fixed' ) {
 
@@ -215,18 +209,6 @@ class Pricing {
 		}
 
 		$tour_extra_title = ! empty( $tour_extra_title_arr ) ? implode( ",", $tour_extra_title_arr ) : '';
-
-
-		/**
-		 * Check errors
-		 *
-		 */
-		/* Minimum days to book before departure */
-		$min_days_before_book = ! empty( $meta['min_days_before_book'] ) ? $meta['min_days_before_book'] : '0';
-		$today_stt                 = new \DateTime( gmdate( 'Y-m-d', strtotime( gmdate( 'Y-m-d' ) ) ) );
-		$tour_date_stt             = new \DateTime( gmdate( 'Y-m-d', strtotime( $start_date ) ) );
-		$adult_required_chield     = ! empty( $meta["require_adult_child_booking"] ) ? $meta["require_adult_child_booking"] : 0;
-
 
 		/**
 		 * Price by date range
@@ -341,38 +323,7 @@ class Pricing {
 					$tf_tours_data['tf_tours_data']['price'] = $deposit_amount;
 				}
 
-				if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
-					$external_search_info = array(
-						'{adult}'        => $adults,
-						'{child}'        => $children,
-						'{booking_date}' => $tour_date,
-						'{infant}'       => $infant
-					);
-					if ( ! empty( $tf_booking_attribute ) ) {
-						$tf_booking_query_url = str_replace( array_keys( $external_search_info ), array_values( $external_search_info ), $tf_booking_query_url );
-						if ( ! empty( $tf_booking_query_url ) ) {
-							$tf_booking_url = $tf_booking_url . '/?' . $tf_booking_query_url;
-						}
-					}
-
-					$response['product_id']  = $product_id;
-					$response['add_to_cart'] = 'true';
-					$response['redirect_to'] = $tf_booking_url;
-				} else {
-					// Add product to cart with the custom cart item data
-					WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_tours_data );
-
-					$response['product_id']  = $product_id;
-					$response['add_to_cart'] = 'true';
-					$response['redirect_to'] = wc_get_checkout_url();
-				}
-
-			} else {
-				# Show errors
-				$response['status'] = 'error';
-
 			}
-			$response['without_payment'] = 'false';
 		}
 	}
 }
