@@ -58,8 +58,8 @@ class Pricing {
 	}
 
 	function get_discount() {
-		$meta       = $this->meta;
-		$discount_type    = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
+		$meta            = $this->meta;
+		$discount_type   = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
 		$discount_amount = ( $discount_type == 'fixed' || $discount_type == 'percent' ) && ! empty( $meta["discount_price"] ) ? $meta["discount_price"] : 0;
 
 		return array(
@@ -109,26 +109,30 @@ class Pricing {
 		$disable_child_price  = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
 		$disable_infant_price = ! empty( $meta['disable_infant_price'] ) ? $meta['disable_infant_price'] : false;
 
+		// Tour date
+		$tour_date = $this->date;
+		$tour_time = $this->time;
+
 		if ( $tour_type == 'fixed' ) {
 
 			if ( ! empty( $meta['fixed_availability'] ) && gettype( $meta['fixed_availability'] ) == "string" ) {
-				$tf_tour_fixed_avail   = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+				$tf_tour_fixed_avail = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
 					return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
 				}, $meta['fixed_availability'] );
-				$tf_tour_fixed_date    = unserialize( $tf_tour_fixed_avail );
-				$start_date            = ! empty( $tf_tour_fixed_date['date']['from'] ) ? $tf_tour_fixed_date['date']['from'] : '';
-				$end_date              = ! empty( $tf_tour_fixed_date['date']['to'] ) ? $tf_tour_fixed_date['date']['to'] : '';
+				$tf_tour_fixed_date  = unserialize( $tf_tour_fixed_avail );
+				$start_date          = ! empty( $tf_tour_fixed_date['date']['from'] ) ? $tf_tour_fixed_date['date']['from'] : '';
+				$end_date            = ! empty( $tf_tour_fixed_date['date']['to'] ) ? $tf_tour_fixed_date['date']['to'] : '';
 			} else {
-				$start_date            = ! empty( $meta['fixed_availability']['date']['from'] ) ? $meta['fixed_availability']['date']['from'] : '';
-				$end_date              = ! empty( $meta['fixed_availability']['date']['to'] ) ? $meta['fixed_availability']['date']['to'] : '';
+				$start_date = ! empty( $meta['fixed_availability']['date']['from'] ) ? $meta['fixed_availability']['date']['from'] : '';
+				$end_date   = ! empty( $meta['fixed_availability']['date']['to'] ) ? $meta['fixed_availability']['date']['to'] : '';
 			}
 
 			if ( ! function_exists( "selected_day_diff" ) ) {
 				function selected_day_diff( $start_date, $end_date ) {
 					if ( ! empty( $start_date ) && ! empty( $end_date ) ) {
 
-						$start_date = new \DateTime( $start_date );
-						$end_date   = new \DateTime( $end_date );
+						$start_date = new DateTime( $start_date );
+						$end_date   = new DateTime( $end_date );
 						$interval   = $start_date->diff( $end_date );
 
 						return $interval->days;
@@ -144,7 +148,7 @@ class Pricing {
 
 						} else {
 
-							$start_date  = new \DateTime( $start_date );
+							$start_date  = new DateTime( $start_date );
 							$new_end_day = $start_date->modify( "+ $difference day" );
 
 							return $new_end_day->format( 'Y/m/d' );
@@ -170,45 +174,13 @@ class Pricing {
 			$custom_avail = ! empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : false;
 
 			if ( $custom_avail == true ) {
-				$pricing_rule     = $meta['custom_pricing_by'];
+				$pricing_rule = $meta['custom_pricing_by'];
 			}
-
 		}
 
 		if ( $tour_type == 'continuous' ) {
 			$start_date = $end_date = $tour_date;
 		}
-
-		// Tour extra
-		$tour_extra_total     = 0;
-		$tour_extra_title_arr = [];
-
-		$tour_extra_meta = ! empty( $meta['tour-extra'] ) ? $meta['tour-extra'] : '';
-		if ( ! empty( $tour_extra_meta ) ) {
-			$tours_extra         = explode( ',', $_POST['tour_extra'] );
-			$tour_extra_quantity = explode( ',', $_POST["tour_extra_quantity"] );
-			foreach ( $tours_extra as $extra_key => $extra ) {
-				$tour_extra_pricetype = ! empty( $tour_extra_meta[ $extra ]['price_type'] ) ? $tour_extra_meta[ $extra ]['price_type'] : 'fixed';
-				if ( $tour_extra_pricetype == "fixed" ) {
-					if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
-						$tour_extra_total       += $tour_extra_meta[ $extra ]['price'];
-						$tour_extra_title_arr[] = $tour_extra_meta[ $extra ]['title'] . " (Fixed: " . wc_price( $tour_extra_meta[ $extra ]['price'] ) . ")";
-					}
-				} else if ( $tour_extra_pricetype == "quantity" ) {
-					if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
-						$tour_extra_total       += $tour_extra_meta[ $extra ]['price'] * $tour_extra_quantity[ $extra_key ];
-						$tour_extra_title_arr[] = $tour_extra_meta[ $extra ]['title'] . " (Per Unit: " . wc_price( $tour_extra_meta[ $extra ]['price'] ) . '*' . $tour_extra_quantity[ $extra_key ] . "=" . wc_price( $tour_extra_meta[ $extra ]['price'] * $tour_extra_quantity[ $extra_key ] ) . ")";
-					}
-				} else {
-					if ( ! empty( $tour_extra_meta[ $extra ]['price'] ) && ! empty( $tour_extra_meta[ $extra ]['title'] ) ) {
-						$tour_extra_total       += ( $tour_extra_meta[ $extra ]['price'] * $total_people );
-						$tour_extra_title_arr[] = $tour_extra_meta[ $extra ]['title'] . " (Per Person: " . wc_price( $tour_extra_meta[ $extra ]['price'] ) . '*' . $total_people . "=" . wc_price( $tour_extra_meta[ $extra ]['price'] * $total_people ) . ")";
-					}
-				}
-			}
-		}
-
-		$tour_extra_title = ! empty( $tour_extra_title_arr ) ? implode( ",", $tour_extra_title_arr ) : '';
 
 		/**
 		 * Price by date range
@@ -246,84 +218,16 @@ class Pricing {
 			$infant_price   = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
 		}
 
-		/**
-		 * If no errors then process
-		 *
-		 * Store custom data in array
-		 * Add to cart with custom data
-		 */
-		if ( ! empty( $tf_booking_type ) && 3 == $tf_booking_type ) {
+		$adult_price    = $this->calculate_discount( $adult_price );
+		$children_price = $this->calculate_discount( $children_price );
+		$infant_price   = $this->calculate_discount( $infant_price );
+		$group_price    = $this->calculate_discount( $group_price );
 
-			// Price Calculation
-
-			$discount_type    = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
-			$discounted_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
-
-			# Calculate discounted price
-			if ( $discount_type == 'percent' ) {
-
-				$adult_price    = floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * $discounted_price ), 2 ) ) );
-				$children_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $children_price - ( ( $children_price / 100 ) * $discounted_price ), 2 ) ) );
-				$infant_price   = floatval( preg_replace( '/[^\d.]/', '', number_format( $infant_price - ( ( $infant_price / 100 ) * $discounted_price ), 2 ) ) );
-				$group_price    = floatval( preg_replace( '/[^\d.]/', '', number_format( $group_price - ( ( $group_price / 100 ) * $discounted_price ), 2 ) ) );
-
-			} elseif ( $discount_type == 'fixed' ) {
-
-				$adult_price    = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $adult_price - $discounted_price ), 2 ) ) );
-				$children_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $children_price - $discounted_price ), 2 ) ) );
-				$infant_price   = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $infant_price - $discounted_price ), 2 ) ) );
-				$group_price    = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $group_price - $discounted_price ), 2 ) ) );
-
-			}
-
-			# Set pricing based on pricing rule
-			if ( $pricing_rule == 'group' ) {
-				$without_payment_price = $group_price;
-			} else {
-				$without_payment_price = ( $adult_price * $adult_count ) + ( $child_count * $children_price ) + ( $infant_count * $infant_price );
-			}
-
-			$order_details = [
-				'order_by'        => '',
-				'tour_date'       => $tour_date,
-				'tour_time'       => ! empty( $tour_time_title ) ? $tour_time_title : '',
-				'tour_extra'      => $tour_extra_title,
-				'adult'           => $adults,
-				'child'           => $children,
-				'infants'         => $infant,
-				'total_price'     => $without_payment_price,
-				'due_price'       => wc_price( $without_payment_price ),
-				'visitor_details' => wp_json_encode( $tf_visitor_details )
-			];
-
+		# Set pricing based on pricing rule
+		if ( $pricing_rule == 'group' ) {
+			$total_price     = $group_price;
 		} else {
-			if ( ! array_key_exists( 'errors', $response ) || count( $response['errors'] ) == 0 ) {
-
-				# Discount informations
-				$discount_type    = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
-				$discounted_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
-
-				# Calculate discounted price
-				if ( $discount_type == 'percent' ) {
-					$adult_price    = floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * $discounted_price ), 2 ) ) );
-					$children_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $children_price - ( ( $children_price / 100 ) * $discounted_price ), 2 ) ) );
-					$infant_price   = floatval( preg_replace( '/[^\d.]/', '', number_format( $infant_price - ( ( $infant_price / 100 ) * $discounted_price ), 2 ) ) );
-					$group_price    = floatval( preg_replace( '/[^\d.]/', '', number_format( $group_price - ( ( $group_price / 100 ) * $discounted_price ), 2 ) ) );
-				} elseif ( $discount_type == 'fixed' ) {
-					$adult_price    = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $adult_price - $discounted_price ), 2 ) ) );
-					$children_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $children_price - $discounted_price ), 2 ) ) );
-					$infant_price   = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $infant_price - $discounted_price ), 2 ) ) );
-					$group_price    = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $group_price - $discounted_price ), 2 ) ) );
-				}
-
-				# Deposit information
-				Helper::tf_get_deposit_amount( $meta, $tf_tours_data['tf_tours_data']['price'], $deposit_amount, $has_deposit );
-				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && $make_deposit == true ) {
-					$tf_tours_data['tf_tours_data']['due']   = $tf_tours_data['tf_tours_data']['price'] - $deposit_amount;
-					$tf_tours_data['tf_tours_data']['price'] = $deposit_amount;
-				}
-
-			}
+			$total_price     = ( $adult_price * $adult_count ) + ( $child_count * $children_price ) + ( $infant_count * $infant_price );
 		}
 	}
 }

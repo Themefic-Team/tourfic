@@ -611,8 +611,8 @@ function tf_tours_booking_function() {
 		} 
 
 		if ( $adult_required_chield && $children > 0 && !empty( $children_price ) && empty( $adults ) ) {
-    $response['errors'][] = esc_html__( 'An adult is required for children booking!', 'tourfic' );
-}
+		    $response['errors'][] = esc_html__( 'An adult is required for children booking!', 'tourfic' );
+		}
 
 	} else if ( ( ! empty( $custom_avail ) && $custom_avail == true ) || $pricing_rule == 'group' ) {
 
