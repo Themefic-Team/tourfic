@@ -453,10 +453,10 @@ class TF_Options {
 		check_ajax_referer( 'updates', '_nonce' );
 
 		// Check if the current user has the required capability.
-//		if (!current_user_can('manage_options')) {
-//			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
-//			return;
-//		}
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
 
 		$new_post   = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
 		$room_id    = isset( $_POST['room_id'] ) && ! empty( $_POST['room_id'] ) ? sanitize_text_field( $_POST['room_id'] ) : '';

@@ -1344,9 +1344,9 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 					?>
 				</div>  
 				<div class="tf-available-ratings">
-					<?php TF_Review::tf_archive_single_rating(); ?>
+					<?php TF_Review::tf_archive_single_rating($post_id); ?>
 					<i class="fa-solid fa-star"></i>
-				</div>  
+				</div> 
 			</div>
 			<div class="tf-available-room-content">
 				<div class="tf-available-room-content-left">
@@ -1486,7 +1486,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 							}
 							?>
                         </div>
-						<?php TF_Review::tf_archive_single_rating(); ?>
+						<?php TF_Review::tf_archive_single_rating($post_id); ?>
                     </div>
 
                     <div class="sr_rooms_table_block">
