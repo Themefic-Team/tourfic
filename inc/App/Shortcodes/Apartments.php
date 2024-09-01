@@ -62,7 +62,7 @@ class Apartments extends \Tourfic\Core\Shortcodes {
 		} else {
 			$slider_activate = 'tf-hotel-grid';
 		}
-		$apartment_loop = new \WP_Query( $args );
+		$apartment_loop = new \WP_Query( apply_filters("tf_apartment_shortcode_query_args", $args) );
 		?>
 		<?php if ( $apartment_loop->have_posts() ) : ?>
 			<div class="tf-widget-slider recent-apartment-slider">
