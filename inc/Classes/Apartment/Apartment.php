@@ -858,14 +858,7 @@ class Apartment {
 				return !in_array($date, $only_booked_dates);
 			});
 		}
-
-		// echo '<pre>';
-		// // print_r(Apt_Pricing::instance( get_the_ID() )->set_dates("2024/08/19", "2024/08/22")->set_persons(1, 1, 1)->get_total_price());
-		// print_r(Apt_Pricing::instance( get_the_ID() )->set_dates("2024/08/19", "2024/08/22")->set_persons(1, 0, 0)->get_availability());
-		// echo '</pre>';
-		// die(); // Sunvi
-
-
+		
 		$apartment_min_price = Apt_Pricing::instance( get_the_ID() )->get_min_max_price();
 
 		$tf_apartment_layout_conditions = ! empty( $meta['tf_single_apartment_layout_opt'] ) ? $meta['tf_single_apartment_layout_opt'] : 'global';
