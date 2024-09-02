@@ -2889,25 +2889,25 @@ div#tf-destinationautocomplete-list div:before {
   color: #FFCD3D;
 }
 
-.recent-hotel-slider a {
+.recent-hotel-slider a, .recent-apartment-slider a {
   text-decoration: none !important;
 }
 
-.recent-hotel-slider h3 {
+.recent-hotel-slider h3, .recent-apartment-slider h3 {
   margin-bottom: 0 !important;
 }
 
-.recent-hotel-slider p {
+.recent-hotel-slider p, .recent-apartment-slider p {
   margin-top: 7px;
   margin-bottom: 0 !important;
 }
 
-.recent-hotel-slider .tf-slider-rating-star {
+.recent-hotel-slider .tf-slider-rating-star, .recent-apartment-slider .tf-slider-rating-star {
   margin-top: 7px;
   margin-bottom: 0 !important;
 }
 
-.recent-hotel-slider .tf-slider-rating-star i {
+.recent-hotel-slider .tf-slider-rating-star i, .recent-apartment-slider .tf-slider-rating-star i {
   color: #FFCD3D;
 }
 
