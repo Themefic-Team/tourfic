@@ -3256,7 +3256,7 @@ class Tour {
 			'post_status'    => 'publish',
 			'posts_per_page' => - 1,
 		);
-		$tour_loop = new WP_Query( $args );
+		$tour_loop = new \WP_Query( $args );
 		while ( $tour_loop->have_posts() ) : $tour_loop->the_post();
 			$post_id = get_the_ID();
 			$meta    = get_post_meta( $post_id, 'tf_tours_opt', true );
@@ -3763,8 +3763,8 @@ class Tour {
 		$min_days_before_book = ! empty( $meta['min_days_before_book'] ) ? $meta['min_days_before_book'] : '0';
 		/* translators: %s: minimum days to book before departure */
 		$min_days_before_book_text = sprintf( _n( '%s day', '%s days', $min_days_before_book, 'tourfic' ), $min_days_before_book );
-		$today_stt                 = new DateTime( gmdate( 'Y-m-d', strtotime( gmdate( 'Y-m-d' ) ) ) );
-		$tour_date_stt             = new DateTime( gmdate( 'Y-m-d', strtotime( $start_date ) ) );
+		$today_stt                 = new \DateTime( gmdate( 'Y-m-d', strtotime( gmdate( 'Y-m-d' ) ) ) );
+		$tour_date_stt             = new \DateTime( gmdate( 'Y-m-d', strtotime( $start_date ) ) );
 		$day_difference            = $today_stt->diff( $tour_date_stt )->days;
 		$adult_required_chield     = ! empty( $meta["require_adult_child_booking"] ) ? $meta["require_adult_child_booking"] : 0;
 
