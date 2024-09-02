@@ -131,8 +131,8 @@ class Pricing {
 				function selected_day_diff( $start_date, $end_date ) {
 					if ( ! empty( $start_date ) && ! empty( $end_date ) ) {
 
-						$start_date = new DateTime( $start_date );
-						$end_date   = new DateTime( $end_date );
+						$start_date = new \DateTime( $start_date );
+						$end_date   = new \DateTime( $end_date );
 						$interval   = $start_date->diff( $end_date );
 
 						return $interval->days;
@@ -148,7 +148,7 @@ class Pricing {
 
 						} else {
 
-							$start_date  = new DateTime( $start_date );
+							$start_date  = new \DateTime( $start_date );
 							$new_end_day = $start_date->modify( "+ $difference day" );
 
 							return $new_end_day->format( 'Y/m/d' );
@@ -229,5 +229,79 @@ class Pricing {
 		} else {
 			$total_price     = ( $adult_price * $adult_count ) + ( $child_count * $children_price ) + ( $infant_count * $infant_price );
 		}
+
+		return $total_price;
+	}
+
+	static function get_min_max_price_from_all_tour(){
+		$tf_tour_args = array(
+			'posts_per_page' => - 1,
+			'post_type'      => 'tf_tours',
+			'post_status'    => 'publish'
+		);
+
+		$tftours_min_max_query = new \WP_Query( $tf_tour_args );
+		$tftours_min_maxprices = array();
+
+		if ( $tftours_min_max_query->have_posts() ):
+			while ( $tftours_min_max_query->have_posts() ) : $tftours_min_max_query->the_post();
+
+				$meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
+				if ( ! empty( $meta['adult_price'] ) ) {
+					$tftours_min_maxprices[] = $meta['adult_price'];
+				}
+				if ( ! empty( $meta['child_price'] ) ) {
+					$tftours_min_maxprices[] = $meta['child_price'];
+				}
+				if ( ! empty( $meta['infant_price'] ) ) {
+					$tftours_min_maxprices[] = $meta['infant_price'];
+				}
+				if ( ! empty( $meta['group_price'] ) ) {
+					$tftours_min_maxprices[] = $meta['group_price'];
+				}
+				if ( ! empty( $meta['cont_custom_date'] ) ) {
+					foreach ( $meta['cont_custom_date'] as $minmax ) {
+						if ( ! empty( $minmax['adult_price'] ) ) {
+							$tftours_min_maxprices[] = $minmax['adult_price'];
+						}
+						if ( ! empty( $minmax['child_price'] ) ) {
+							$tftours_min_maxprices[] = $minmax['child_price'];
+						}
+						if ( ! empty( $minmax['infant_price'] ) ) {
+							$tftours_min_maxprices[] = $minmax['infant_price'];
+						}
+						if ( ! empty( $minmax['group_price'] ) ) {
+							$tftours_min_maxprices[] = $minmax['group_price'];
+						}
+					}
+				}
+			endwhile;
+
+		endif;
+		wp_reset_query();
+		if ( ! empty( $tftours_min_maxprices ) && count( $tftours_min_maxprices ) > 1 ) {
+			$tour_max_price_val = max( $tftours_min_maxprices );
+			$tour_min_price_val = min( $tftours_min_maxprices );
+			if ( $tour_max_price_val == $tour_min_price_val ) {
+				$tour_max_price = max( $tftours_min_maxprices );
+				$tour_min_price = 1;
+			} else {
+				$tour_max_price = max( $tftours_min_maxprices );
+				$tour_min_price = min( $tftours_min_maxprices );
+			}
+		}
+		if ( ! empty( $tftours_min_maxprices ) && count( $tftours_min_maxprices ) == 1 ) {
+			$tour_max_price = max( $tftours_min_maxprices );
+			$tour_min_price = 1;
+		}
+		if ( empty( $tftours_min_maxprices ) ) {
+			$tour_max_price = 0;
+			$tour_min_price = 0;
+		}
+
+		return array(
+			'min' => $tour_min_price,
+			'max' => $tour_max_price,
+		);
 	}
 }
