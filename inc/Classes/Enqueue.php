@@ -7,6 +7,7 @@ use Tourfic\Classes\Apartment\Pricing as ApartmentPricing;
 use Tourfic\Classes\Helper;
 use Tourfic\Classes\Hotel\Pricing as HotelPricing;
 use Tourfic\Classes\Tour\Pricing as TourPricing;
+use Tourfic\Classes\Tour\Tour;
 use Tourfic\Classes\Room\Room;
 
 class Enqueue {
@@ -213,43 +214,6 @@ class Enqueue {
 			$custom_avail               = ! empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : '';
 			$tour_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
-			// Repeated Fixed Tour
-			if ( ! function_exists( 'fixed_tour_start_date_changer' ) ) {
-				function fixed_tour_start_date_changer( $date, $months ) {
-					if ( ( count( $months ) > 0 ) && ! empty( $date ) ) {
-						preg_match( '/(\d{4})\/(\d{2})\/(\d{2})/', $date, $matches );
-
-						foreach ( $months as $month ) {
-
-							if ( $month < gmdate( 'm' ) && $matches[1] < gmdate( 'Y' ) ) {
-								$year = $matches[1] + 1;
-
-							} else {
-								$year = $matches[1];
-							}
-
-
-							$day_selected      = gmdate( 'd', strtotime( $date ) );
-							$last_day_of_month = gmdate( 't', strtotime( gmdate( 'Y' ) . '-' . $month . '-01' ) );
-							$matches[2]        = $month;
-							$changed_date      = sprintf( "%s/%s/%s", $year, $matches[2], $matches[3] );
-
-							if ( ( $day_selected == "31" ) && ( $last_day_of_month != "31" ) ) {
-								$new_months[] = gmdate( 'Y/m/d', strtotime( $changed_date . ' -1 day' ) );
-							} else {
-								$new_months[] = $changed_date;
-							}
-						}
-						$new_months[] = $matches[0];
-
-						return $new_months;
-
-					} else {
-						return array();
-					}
-				}
-			}
-
 			// Same Day Booking
 			$disable_same_day = ! empty( $meta['disable_same_day'] ) ? $meta['disable_same_day'] : '';
 			if ( $tour_type == 'fixed' ) {
@@ -300,31 +264,6 @@ class Enqueue {
 
 				}
 
-			}
-
-			if ( ! function_exists( "tf_nearest_default_day" ) ) {
-				function tf_nearest_default_day( $dates ) {
-					if ( count( $dates ) > 0 ) {
-
-						$today              = time();
-						$nearestDate        = null;
-						$smallestDifference = null;
-
-						foreach ( $dates as $date ) {
-							$dateTime   = strtotime( $date );
-							$difference = abs( $today - $dateTime );
-
-							if ( $dateTime > $today ) {
-								if ( $smallestDifference === null || $difference < $smallestDifference ) {
-									$smallestDifference = $difference;
-									$nearestDate        = $date;
-								}
-							}
-						}
-
-						return $nearestDate;
-					}
-				}
 			}
 
 			$tour_extras = isset( $meta['tour-extra'] ) ? $meta['tour-extra'] : null;
@@ -414,12 +353,12 @@ class Enqueue {
 			$single_tour_form_data['enable'] = array();
 			if ( $tour_type && $tour_type == 'fixed' ) {
 				if ( ! empty( $departure_date ) && ! empty( $tour_repeat_months ) ) {
-					$enable_repeat_dates = fixed_tour_start_date_changer( $departure_date, $tour_repeat_months );
+					$enable_repeat_dates = Tour::fixed_tour_start_date_changer( $departure_date, $tour_repeat_months );
 				}
 
 				if ( ( $repeated_fixed_tour_switch == 1 ) && ! empty( $enable_repeat_dates ) && ( $enable_repeat_dates > 0 ) ) {
 
-					$single_tour_form_data['defaultDate'] = esc_html( tf_nearest_default_day( $enable_repeat_dates ) );
+					$single_tour_form_data['defaultDate'] = esc_html( Tour::tf_nearest_default_day( $enable_repeat_dates ) );
 
 					foreach ( $enable_repeat_dates as $enable_date ) {
 						$single_tour_form_data['enable'][] = esc_html( $enable_date );
