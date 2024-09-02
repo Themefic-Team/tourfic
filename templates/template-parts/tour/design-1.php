@@ -680,11 +680,6 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                             $disable_adult          = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
                                             $disable_child          = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
                                             $tour_price             = new Tour_Price( $meta );
-
-                                            // echo "<pre>";
-                                            // print_r($tour_price);
-                                            // echo "</pre>";
-                                            // die(); // added by - Sunvi
                                             ?>
                                             <div class="tf-slider-item tf-post-box-lists">
                                                 <div class="tf-post-single-box">

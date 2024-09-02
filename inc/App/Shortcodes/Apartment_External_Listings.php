@@ -96,17 +96,6 @@ class Apartment_External_Listings extends \Tourfic\Core\Shortcodes {
 											</div>
 										<?php } ?>
 										<p><?php echo wp_kses_post( wp_trim_words( get_the_content(), 10 ) ); ?></p>
-										<?php if ( ! empty( $rooms ) ): ?>
-											<div class="tf-recent-room-price">
-												<?php
-												if ( ! empty( $room_price ) ) {
-													//get the lowest price from all available room price
-													$lowest_price = wc_price( min( $room_price ) );
-													echo esc_html__( "From ", "tourfic" ) . wp_kses_post( $lowest_price );
-												}
-												?>
-											</div>
-										<?php endif; ?>
 									</div>
 								</div>
 							</div>
