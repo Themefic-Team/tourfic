@@ -334,7 +334,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 							$tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tour_hotel_service_avail ) && ! empty( $tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
 								?>
-                                <a class="tf_air_service tf-btn-normal btn-secondary" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'I\'ll reserve', 'tourfic' ); ?></a>
+                                <a class="tf_air_service tf-btn-normal btn-secondary tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'I\'ll reserve', 'tourfic' ); ?></a>
 
 
                                 <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-hotel-service-design-1 tf-room" data-id="<?php echo esc_attr( $room_id ) ?>">
@@ -515,7 +515,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						$tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
 						if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tour_hotel_service_avail ) && ! empty( $tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
 							?>
-                            <a class="tf_air_service tf-btn-normal btn-secondary" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'I\'ll reserve', 'tourfic' ); ?></a>
+                            <a class="tf_air_service tf-btn-normal btn-secondary tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'I\'ll reserve', 'tourfic' ); ?></a>
 
 
                             <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-hotel-service-design-1 tf-room" data-id="<?php echo esc_attr( $room_id ) ?>">
@@ -820,7 +820,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 							?>
                             <input type="hidden" id="hotel_room_depo" value="false">
                             <div class="roomselectissue"></div>
-                            <a class="tf_air_service" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'Continue', 'tourfic' ); ?></a>
+                            <a class="tf_air_service tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'Continue', 'tourfic' ); ?></a>
 
                             <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-hotel-service-design-1 tf-room" data-id="<?php echo esc_attr( $room_id ) ?>">
                                 <div class="tf-hotel-services">
@@ -1122,7 +1122,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 							?>
                             <input type="hidden" id="hotel_room_depo" value="false">
                             <div class="roomselectissue"></div>
-                            <a class="tf_air_service" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'Continue', 'tourfic' ); ?></a>
+                            <a class="tf_air_service tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'Continue', 'tourfic' ); ?></a>
 
                             <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-hotel-service-design-1 tf-room" data-id="<?php echo esc_attr( $room_id ) ?>">
                                 <div class="tf-hotel-services">
@@ -1477,7 +1477,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tour_hotel_service_avail ) && ! empty( $tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
 								?>
-                                <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></a>
+                                <a class="tf_air_service tf-sml-btn btn-styled tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></a>
 
                                 <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-room" data-id="<?php echo esc_attr( $room_id ) ?>">
                                     <div class="tf-hotel-services">
@@ -1660,7 +1660,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 
 						if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tour_hotel_service_avail ) && ! empty( $tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
 							?>
-                            <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></a>
+                            <a class="tf_air_service tf-sml-btn btn-styled tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></a>
 
                             <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-room" data-id="<?php echo esc_attr( $room_id ) ?>">
                                 <div class="tf-hotel-services">

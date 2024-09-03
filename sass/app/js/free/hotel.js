@@ -606,19 +606,21 @@
 
             });
         }
-        // $(document).on('click', '.tf-hotel-booking-popup-btn', function (e) {
-        //     e.preventDefault();
-        //     var $this = $(this);
+        $(document).on('click', '.tf-hotel-booking-popup-btn', function (e) {
+            e.preventDefault();
+            var $this = $(this);
 
-        //     hotelPopupBooking($this);
-        // });
+            console.log("Hello World")
+
+            hotelPopupBooking($this);
+        });
 
 
-        /*$(document).on("change", "[name='tf_airport_service']", function (e) {
+        $(document).on("change", "[name='tf_airport_service']", function (e) {
             var $this = $(this);
 
             hotelPopupBooking($this);
-        });*/
+        });
 
         // Design 1 - hotel Facilities
         $('.tf-hotel-facilities-title-area').on("click", function () {

@@ -20,4 +20,20 @@ abstract class Without_Payment_Booking {
      * 6. Booking Confirmation
      */
 
+     /**
+      * Arguments = post_type (tf_hotel, tf_apartment), 
+      */
+
+    protected array $args = array();
+
+    public function __construct( array $args ) {
+        $this->args = $args;
+
+        // Add actions
+        add_action("wp_ajax_" . $this->args["post_type"]. '_booking_popup', array( $this, $this->args["post_type"] . '_booking_popup_callback' ) );
+        add_action("wp_ajax_nopriv_" . $this->args["post_type"]. '_booking_popup', array( $this, $this->args["post_type"] . '_booking_popup_callback' ) );
+
+
+    }
+
 }
