@@ -127,6 +127,7 @@ abstract class Enquiry {
 		$name     = isset( $_POST['your-name'] ) ? sanitize_text_field( $_POST['your-name'] ) : null;
 		$email    = isset( $_POST['your-email'] ) ? sanitize_email( $_POST['your-email'] ) : null;
 		$question = isset( $_POST['your-question'] ) ? sanitize_text_field( $_POST['your-question'] ) : null;
+		$from = "From: " . get_option( 'blogname' ) . " <" . get_option( 'admin_email' ) . ">\r\n";
 
 		$post_id    = isset( $_POST['post_id'] ) ? intval( $_POST['post_id'] ) : null;
 		$post_title = get_the_title( $post_id );
@@ -175,7 +176,20 @@ abstract class Enquiry {
 
 		$subject     = esc_html__( 'Someone asked question on: ', 'tourfic' ) . esc_html( $post_title );
 		$message     = "{$question}";
-		$headers[]   = 'Reply-To: ' . $name . ' <' . $email . '>';
+		$headers[]   = 'Content-Type: text/html; charset=UTF-8';
+		$headers[]   = $from;
+
+		$user_permission = Helper::tf_data_types( tfopt( 'tf_user_permission' ) );
+		$vendor_access = isset( $user_permission['vendor_can_manage'] ) ? $user_permission['vendor_can_manage'] : array();
+		$manager_access = isset( $user_permission['manager_can_manage'] ) ? $user_permission['manager_can_manage'] : array();
+
+
+		if ( ( !empty( $vendor_access ) && ! in_array( 'enquiry_email', $vendor_access )) || ( !empty( $manager_access ) && ! in_array( 'enquiry_email', $manager_access ) ) ) {
+			$headers[] = 'Reply-To: ' . get_option( 'blogname' ) . ' <' . get_option( 'admin_email' ) . '>';
+		} else {
+			$headers[] = 'Reply-To: ' . $name . ' <' . $email . '>';
+		}
+
 		$attachments = array();
 
 
