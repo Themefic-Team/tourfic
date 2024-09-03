@@ -504,6 +504,13 @@
                                     background-color: #fff;
                                     cursor: pointer;
                                     text-decoration: none;
+                                    transition: .3s all ease;
+                                    
+                                    &:hover{
+                                        border: 1px solid #0866C4;
+                                        background: #0866C4;
+                                        color: #fff;
+                                    }
                                 }
                             }
                         }

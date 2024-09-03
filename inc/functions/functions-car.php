@@ -91,10 +91,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 		}
 		?>
 		<div class="tf-other-infos tf-flex tf-flex-gap-64">
-			<div class="tf-reviews-box">
-				<span>5.0 <i class="fa-solid fa-star"></i> (7 trips)</span>
-				<?php TF_Review::tf_archive_single_rating(); ?>
-			</div>
+			<?php TF_Review::tf_archive_single_rating(); ?>
 			<div class="tf-tags-box">
 				<ul>
 					<?php
