@@ -180,7 +180,7 @@ function tf_car_availability_response($car_meta, $pickup='', $dropoff='', $tf_pi
 				return false;
 			}
 		}
+	}else{
+		return true;
 	}
-
-	wp_die();
 }

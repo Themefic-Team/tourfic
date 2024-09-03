@@ -1289,6 +1289,8 @@ class Helper {
 		$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( $_POST['pickup_time'] ) : '';
 		$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( $_POST['dropoff_time'] ) : '';
 		
+		$filters               = ( $_POST['filters'] ) ? explode( ',', sanitize_text_field( $_POST['filters'] ) ) : null;
+		
 		
 		$args = array(
 			'post_type'      => 'tf_carrental',
@@ -1305,6 +1307,26 @@ class Helper {
 					'terms'    => sanitize_title( $pickup, '' ),
 				),
 			);
+		}
+
+		if ( $filters ) {
+			$args['tax_query']['relation'] = $relation;
+
+			if ( $filter_relation == "OR" ) {
+				$args['tax_query'][] = array(
+					'taxonomy' => $filter_taxonomy,
+					'terms'    => $filters,
+				);
+			} else {
+				$args['tax_query']['tf_filters']['relation'] = 'AND';
+
+				foreach ( $filters as $key => $term_id ) {
+					$args['tax_query']['tf_filters'][] = array(
+						'taxonomy' => $filter_taxonomy,
+						'terms'    => array( $term_id ),
+					);
+				}
+			}
 		}
 	   
 		$loop = new \WP_Query( $args );
