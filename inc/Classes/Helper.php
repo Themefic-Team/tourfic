@@ -63,7 +63,7 @@ class Helper {
 		add_action( 'admin_bar_menu', array( $this, 'tf_admin_bar_dashboard_link' ), 999 );
 
 		// redirect non admin user
-		add_action( 'admin_init', array( $this, 'redirect_non_admin_users' ), 9 );
+		// add_action( 'admin_init', array( $this, 'redirect_non_admin_users' ), 9 );
         add_action( 'tf_before_container', array( $this, 'tourfic_notice_wrapper' ), 10 );
 	}
 
@@ -2036,18 +2036,18 @@ class Helper {
 
 	}
 
-	function redirect_non_admin_users() {
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+	// function redirect_non_admin_users() {
+	// 	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 
-			$user = wp_get_current_user();
+	// 		$user = wp_get_current_user();
 
-			if ( ! defined( 'DOING_AJAX' ) && (in_array( 'tf_vendor', (array) $user->roles ) || in_array( 'tf_manager', (array) $user->roles ) || in_array( 'customer', (array) $user->roles )) ) {
-				$tf_dashboard_page_link = ! empty( get_option( 'tf_dashboard_page_id' ) ) ? get_permalink( get_option( 'tf_dashboard_page_id' ) ) : get_home_url();
-				wp_redirect( $tf_dashboard_page_link );
-				exit;
-			} else {
-				return;
-			}
-		}
-	}
+	// 		if ( ! defined( 'DOING_AJAX' ) && (in_array( 'tf_vendor', (array) $user->roles ) || in_array( 'tf_manager', (array) $user->roles ) || in_array( 'customer', (array) $user->roles )) ) {
+	// 			$tf_dashboard_page_link = ! empty( get_option( 'tf_dashboard_page_id' ) ) ? get_permalink( get_option( 'tf_dashboard_page_id' ) ) : get_home_url();
+	// 			wp_redirect( $tf_dashboard_page_link );
+	// 			exit;
+	// 		} else {
+	// 			return;
+	// 		}
+	// 	}
+	// }
 }
