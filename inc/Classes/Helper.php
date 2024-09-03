@@ -27,6 +27,9 @@ class Helper {
 		add_action( 'wp_ajax_tf_trigger_filter', array( $this, 'tf_search_result_ajax_sidebar' ) );
 		add_action( 'wp_ajax_tf_insert_category_data', array( $this, 'tf_insert_category_data_callback' ) );
 		add_action( 'wp_ajax_tf_delete_category_data', array( $this, 'tf_delete_category_data_callback' ) );
+		add_action( 'wp_ajax_nopriv_tf_car_filters', array( $this,'tf_car_filters_callback' ));
+		add_action( 'wp_ajax_tf_car_filters', array( $this,'tf_car_filters_callback' ));
+
 
 		add_action( 'admin_init', array( $this, 'tf_admin_role_caps' ), 999 );
 		add_filter( 'template_include', array( $this, 'taxonomy_template' ) );
@@ -1265,6 +1268,63 @@ class Helper {
 		wp_reset_postdata();
 
 		die();
+	}
+
+	/**
+	 * Car Search Result Sidebar check availability
+	 *
+	 * Ajax function
+	*/
+
+	function tf_car_filters_callback() {
+		// Check nonce security
+		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
+		   return;
+		}
+	   
+		$pickup   = isset( $_POST['pickup'] ) ? sanitize_text_field( $_POST['pickup'] ) : '';
+		$dropoff = isset( $_POST['dropoff'] ) ? sanitize_text_field( $_POST['dropoff'] ) : '';
+		$tf_pickup_date  = isset( $_POST['pickup_date'] ) ? sanitize_text_field( $_POST['pickup_date'] ) : '';
+		$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? sanitize_text_field( $_POST['dropoff_date'] ) : '';
+		$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( $_POST['pickup_time'] ) : '';
+		$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( $_POST['dropoff_time'] ) : '';
+		
+		
+		$args = array(
+			'post_type'      => 'tf_carrental',
+			'post_status'    => 'publish',
+			'posts_per_page' => - 1
+		);
+
+		if(!empty($pickup)){
+			$args['tax_query'] = array(
+				'relation' => 'AND',
+				array(
+					'taxonomy' => 'carrental_location',
+					'field'    => 'slug',
+					'terms'    => sanitize_title( $pickup, '' ),
+				),
+			);
+		}
+	   
+		$loop = new \WP_Query( $args );
+
+		//get total posts count
+		$total_posts = $loop->found_posts;
+		if ( $loop->have_posts() ) {
+			$not_found = [];
+			while ( $loop->have_posts() ) {
+				$loop->the_post();
+				$car_meta = get_post_meta( get_the_ID() , 'tf_carrental_opt', true );
+				$res = tf_car_availability_response($car_meta, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+
+				var_dump($res); exit();
+				tf_car_archive_single_item();
+			}
+		}
+	   
+		wp_die();
+	   
 	}
 
 	/**

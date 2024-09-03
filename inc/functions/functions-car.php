@@ -157,24 +157,30 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
  * @include
  */
 
- add_action( 'wp_ajax_nopriv_tf_car_filters', 'tf_car_filters_callback' );
- add_action( 'wp_ajax_tf_car_filters', 'tf_car_filters_callback' );
- function tf_car_filters_callback() {
- // Check nonce security
- if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
-	return;
- }
+function tf_car_availability_response($car_meta, $pickup='', $dropoff='', $tf_pickup_date='', $tf_dropoff_date='', $tf_pickup_time='', $tf_dropoff_time='') {
 
- $pickup   = isset( $_POST['pickup'] ) ? sanitize_text_field( $_POST['pickup'] ) : '';
- $dropoff = isset( $_POST['dropoff'] ) ? sanitize_text_field( $_POST['dropoff'] ) : '';
- $tf_pickup_date  = isset( $_POST['pickup_date'] ) ? sanitize_text_field( $_POST['pickup_date'] ) : '';
- $tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? sanitize_text_field( $_POST['dropoff_date'] ) : '';
- $tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( $_POST['pickup_time'] ) : '';
- $tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( $_POST['dropoff_time'] ) : '';
- 
- var_dump($_POST); exit();
+	$pricing_type = !empty($car_meta["pricing_type"]) ? $car_meta["pricing_type"] : 'day_hour';
 
+	$pickup   = isset( $_POST['pickup'] ) ? sanitize_text_field( $_POST['pickup'] ) : '';
+	$dropoff = isset( $_POST['dropoff'] ) ? sanitize_text_field( $_POST['dropoff'] ) : '';
+	$tf_pickup_date  = isset( $_POST['pickup_date'] ) ? sanitize_text_field( $_POST['pickup_date'] ) : '';
+	$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? sanitize_text_field( $_POST['dropoff_date'] ) : '';
+	$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( $_POST['pickup_time'] ) : '';
+	$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( $_POST['dropoff_time'] ) : '';
 
- wp_die();
+	$date_pricing = !empty($meta["date_prices"]) ? $meta["date_prices"] : '';
+	if( !empty($tf_pickup_date) && !empty($tf_dropoff_date) && 'date'==$pricing_type && !empty($date_pricing) ){
+		foreach ($date_pricing as $entry) {
+			$startDate = strtotime($entry['date']['from']);
+			$endDate = strtotime($entry['date']['to']);
+			if($startDate==strtotime($tf_pickup_date) && $endDate==strtotime($tf_dropoff_date)){
+				return true;
+				break;
+			}else{
+				return false;
+			}
+		}
+	}
 
+	wp_die();
 }
