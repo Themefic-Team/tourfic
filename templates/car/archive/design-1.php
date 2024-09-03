@@ -5,7 +5,7 @@ $tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' )
 <div class="tf-archive-car-section">
     <div class="tf-archive-car-banner">
         <div class="tf-banner-content tf-flex tf-flex-align-center tf-flex-justify-center tf-flex-direction-column">
-            <h1>Search results</h1>
+            <h1><?php esc_html_e("Search results", "tourfic"); ?></h1>
         </div>
     </div>
 
@@ -113,21 +113,21 @@ $tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' )
                             <div class="tf-driver-location">
                                 <ul>
                                     <li>
-                                        <label>Return in the same location
-                                            <input type="checkbox">
+                                        <label><?php esc_html_e("Return in the same location", "tourfic"); ?>
+                                            <input type="checkbox" name="same_location">
                                             <span class="checkmark"></span>
                                         </label>
                                     </li>
                                     <li>
-                                        <label>Age of driver 18-40?
-                                            <input type="checkbox">
+                                        <label><?php esc_html_e("Age of driver 18-40?", "tourfic"); ?>
+                                            <input type="checkbox" name="driver_age">
                                             <span class="checkmark"></span>
                                         </label>
                                     </li>
                                 </ul>
                             </div>
                             <div class="tf-submit-button">
-                                <button>Search <i class="ri-search-line"></i></button>
+                                <button class="tf-filter-cars"><?php esc_html_e("Search", "tourfic"); ?> <i class="ri-search-line"></i></button>
                             </div>
 
                             <script>

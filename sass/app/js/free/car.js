@@ -479,6 +479,71 @@
             }
         });
 
+        /*
+        * Car Archive Filter
+        * @author Jahid
+        */
+
+        $(document).on('click', '.tf-filter-cars', function (e) {
+            let $this = $(this);
+            let same_location = $('input[name="same_location"]:checked').val();
+            let driver_age = $('input[name="driver_age"]:checked').val();
+            var pickup = $('#tf_pickup_location').val();
+            let dropoff = $('#tf_dropoff_location').val();
+            let pickup_date = $('.tf_pickup_date').val();
+            let dropoff_date = $('.tf_dropoff_date').val();
+            let pickup_time = $('.tf_pickup_time').val();
+            let dropoff_time = $('.tf_dropoff_time').val();
+            var pickup_slug = $('#tf_pickup_location_id').val();
+            let dropoff_slug = $('#tf_dropoff_location_id').val();
+
+            var data = {
+                action: 'tf_car_filters',
+                _nonce: tf_params.nonce,
+                pickup: pickup_slug,
+                dropoff: dropoff_slug,
+                pickup_date: pickup_date,
+                dropoff_date: dropoff_date,
+                pickup_time: pickup_time,
+                dropoff_time: dropoff_time,
+                same_location: same_location,
+                driver_age: driver_age,
+            };
+
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    $this.addClass('tf-btn-loading');
+                },
+                success: function (data) {
+                    $this.unblock();
+
+                    var response = JSON.parse(data);
+                    if (response.without_payment == 'false') {
+                        if (response.status == 'error') {
+
+                            if (response.errors) {
+                                response.errors.forEach(function (text) {
+                                    notyf.error(text);
+                                });
+                            }
+
+                            return false;
+                        } else {
+
+                            
+
+                        }
+                    }else{
+                        
+                    }
+                }
+            });
+
+        });
+
     });
 
 })(jQuery, window);
