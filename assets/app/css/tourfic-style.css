@@ -19959,7 +19959,7 @@ html {
 }
 
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li {
-  width: calc(33% - 8px);
+  width: calc(33% -5px);
 }
 
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li label {
@@ -19975,14 +19975,12 @@ html {
   /* 24px */
   padding: 4px 8px;
   text-align: center;
+  z-index: 0;
 }
 
-.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li label .checkmark {
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
-  background: #FFF;
-  display: none;
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li.active label {
+  background: #0866C4;
+  color: #fff;
 }
 
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result {
