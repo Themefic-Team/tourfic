@@ -83,7 +83,7 @@ class Hotel {
         $first_location_name = ! empty( $locations ) ? $locations[0]->name : '';
         $room_book_by        = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
         $room_book_url       = ! empty( $meta['booking-url'] ) ? $meta['booking-url'] : '';
-        $total_room_option_count = 0;
+        $total_room_option_count = Room::get_room_options_count($rooms);
 
         // start table
         ob_start();
@@ -286,7 +286,7 @@ class Hotel {
 
                     }
 
-                    if ( $avil_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+                    if ( $avil_by_date == '1' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 
                         if(!$multi_by_date_ck){
                             if ( $tf_startdate && $tf_enddate ) {
@@ -367,7 +367,7 @@ class Hotel {
 
                         // Check if date is provided and within date range
                         if ( ! in_array( 0, $has_room ) ) {
-                            tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price);
+                            Helper::tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price);
                             if ( $form_adult <= $adult_number ) {
                                 if ( !empty($form_child) ){
                                     if($form_child <= $child_number ) {
@@ -388,7 +388,7 @@ class Hotel {
 
                         }
                     } else {
-
+                        $d_price_by_date = 0;
                         if ( $pricing_by == '1' ) {
                             if($hotel_discount_type == "percent" || $hotel_discount_type == "fixed") {
                                 $d_price_by_date = $d_room_price;

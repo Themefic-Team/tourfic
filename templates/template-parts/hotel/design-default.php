@@ -33,7 +33,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 	}
 }
 
-$total_room_option_count = 0;
+$total_room_option_count = Tourfic\Classes\Room\Room::get_room_options_count($rooms);
 ?>
 <div class="tf-main-wrapper">
 	<?php do_action( 'tf_before_container' ); ?>
@@ -342,7 +342,7 @@ $total_room_option_count = 0;
                             <?php if( !empty( $meta['popular-section-title'] ) ): ?>
                                 <h3 class="section-heading"><?php echo esc_html($meta['popular-section-title']); ?></h3>
                             <?php endif; ?>
-                            
+
                             <div class="tf-feature-list">
                                 <?php foreach ( $features as $feature ) {
                                     $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
@@ -516,7 +516,9 @@ $total_room_option_count = 0;
                             <thead>
                             <tr>
                                 <th class="description"><?php esc_html_e( 'Room Details', 'tourfic' ); ?></th>
-                                <th class="options"><?php esc_html_e( 'Options', 'tourfic' ); ?></th>
+	                            <?php if ( $total_room_option_count > 0 ) : ?>
+                                    <th class="options"><?php esc_html_e( 'Options', 'tourfic' ); ?></th>
+                                <?php endif; ?>
                                 <th class="pax"><?php esc_html_e( 'Pax', 'tourfic' ); ?></th>
 								<?php if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' ) || $tf_booking_type == 1 ) : ?>
                                     <th class="pricing"><?php esc_html_e( 'Price', 'tourfic' ); ?></th>
@@ -540,7 +542,6 @@ $total_room_option_count = 0;
 									$multi_by_date   = ! empty( $room['price_multi_day'] ) ?  $room['price_multi_day'] : false;
 									$child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
 									$room_options    = ! empty( $room['room-options'] ) ? $room['room-options'] : [];
-									$total_room_option_count += count( $room_options );
 
 									// Hotel Room Discount Data
 									$hotel_discount_type   = ! empty( $room["discount_hotel_type"] ) ? $room["discount_hotel_type"] : "none";
@@ -833,7 +834,7 @@ $total_room_option_count = 0;
 	<?php endif; ?>
 
     <!-- Start Facilities -->
-     <?php 
+     <?php
      if( !empty( $hotel_facilities_categories ) && !empty( $hotel_facilities ) ){
         ?>
         <div class="tf-hotel-facilities-section tf-template-section">
@@ -845,14 +846,14 @@ $total_room_option_count = 0;
                     <i class="ri-arrow-up-s-line hotel-facilities-icon-up"></i>
                 </div>
                 <div class="tf-hotel-facilities-content-area">
-                    <?php 
+                    <?php
                         $facilities_list = [];
                         if( !empty($meta['hotel-facilities']) ){
                             foreach( $meta['hotel-facilities'] as $facility ){
                                 $facilities_list [$facility['facilities-category']] = $facility['facilities-category'];
                             }
                         }
-    
+
                         if (!empty($facilities_list)) {
                             foreach($facilities_list as $key => $single_feature ) {
                                 $f_icon_single  = ! empty( $hotel_facilities_categories[$key]['hotel_facilities_cat_icon'] ) ? esc_attr($hotel_facilities_categories[$key]['hotel_facilities_cat_icon']) : '';
@@ -862,12 +863,12 @@ $total_room_option_count = 0;
                                         <?php echo !empty($hotel_facilities_categories[$key]['hotel_facilities_cat_name']) ? esc_html($hotel_facilities_categories[$key]['hotel_facilities_cat_name']) : ''; ?>
                                     </div>
                                     <ul>
-                                        <?php 
+                                        <?php
                                         foreach( $hotel_facilities as $facility ) :
                                             if( $facility['facilities-category'] == $key ) {
                                                 $features_details = !empty( $facility['facilities-feature'] ) ? get_term( $facility['facilities-feature'] ) : '';
                                                 $feature_meta = get_term_meta( $facility['facilities-feature'], 'tf_hotel_feature', true );
-    
+
                                                 $f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
                                                 if ( $f_icon_type == 'fa' && !empty($feature_meta['icon-fa']) ) {
                                                     $feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
@@ -876,11 +877,11 @@ $total_room_option_count = 0;
                                                 } else {
                                                     $feature_icon = '<i class="ri-check-line"></i>';
                                                 }
-    
+
                                                 if(!empty($features_details->name)) {
                                                     ?>
                                                     <li>
-                                                    <span><?php echo !empty($feature_meta) && !empty($feature_icon) ? wp_kses_post($feature_icon) : ''; ?></span> 
+                                                    <span><?php echo !empty($feature_meta) && !empty($feature_icon) ? wp_kses_post($feature_icon) : ''; ?></span>
                                                     <?php echo esc_html($features_details->name); ?>
                                                     </li>
                                                 <?php } ?>
