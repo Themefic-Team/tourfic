@@ -320,6 +320,11 @@ class Enqueue {
 		$tf_apartment_min_max_price = get_apartment_min_max_price();
 
 		/**
+		 * Cars Min and Max Price
+		 */
+		$tf_car_min_max_price = get_cars_min_max_price();
+
+		/**
 		 * Tour booking form
 		 */
 		global $post;
@@ -647,6 +652,8 @@ class Enqueue {
 				'tf_apartment_max_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['max'] : 0,
 				'tf_apartment_min_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['min'] : 0,
 				'tour_form_data'         => isset( $single_tour_form_data ) ? $single_tour_form_data : array(),
+				'tf_car_max_price' => isset( $tf_car_min_max_price ) ? $tf_car_min_max_price['max'] : 0,
+				'tf_car_min_price' => isset( $tf_car_min_max_price ) ? $tf_car_min_max_price['min'] : 0,
 			)
 		);
 

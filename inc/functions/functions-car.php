@@ -184,3 +184,73 @@ function tf_car_availability_response($car_meta, $pickup='', $dropoff='', $tf_pi
 		return true;
 	}
 }
+
+/**
+ * Car Min Max Price 
+ *
+ * @include
+ */
+if ( ! function_exists( 'get_cars_min_max_price' ) ) {
+	function get_cars_min_max_price(){
+		$tf_car_min_max = array(
+			'posts_per_page' => - 1,
+			'post_type'      => 'tf_carrental',
+			'post_status'    => 'publish'
+		);
+
+		$tf_car_min_max_query = new \WP_Query( $tf_car_min_max );
+		$tf_car_min_maxprices = array();
+
+		if ( $tf_car_min_max_query->have_posts() ):
+			while ( $tf_car_min_max_query->have_posts() ) : $tf_car_min_max_query->the_post();
+
+				$meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
+				if ( ! empty( $meta['car_rent'] ) ) {
+					$tf_car_min_maxprices[] = $meta['car_rent'];
+				}
+
+				if ( ! empty( $meta['date_prices'] ) ) {
+					foreach ( $meta['date_prices'] as $minmax ) {
+						if ( ! empty( $minmax['price'] ) ) {
+							$tf_car_min_maxprices[] = $minmax['price'];
+						}
+					}
+				}
+				
+				if ( ! empty( $meta['day_prices'] ) ) {
+					foreach ( $meta['day_prices'] as $minmax ) {
+						if ( ! empty( $minmax['price'] ) ) {
+							$tf_car_min_maxprices[] = $minmax['price'];
+						}
+					}
+				}
+			endwhile;
+
+		endif;
+		wp_reset_query();
+		if ( ! empty( $tf_car_min_maxprices ) && count( $tf_car_min_maxprices ) > 1 ) {
+			$car_max_price_val = max( $tf_car_min_maxprices );
+			$car_min_price_val = min( $tf_car_min_maxprices );
+			if ( $car_max_price_val == $car_min_price_val ) {
+				$car_max_price = max( $tf_car_min_maxprices );
+				$car_min_price = 1;
+			} else {
+				$car_max_price = max( $tf_car_min_maxprices );
+				$car_min_price = min( $tf_car_min_maxprices );
+			}
+		}
+		if ( ! empty( $tf_car_min_maxprices ) && count( $tf_car_min_maxprices ) == 1 ) {
+			$car_max_price = max( $tf_car_min_maxprices );
+			$car_min_price = 1;
+		}
+		if ( empty( $tf_car_min_maxprices ) ) {
+			$car_max_price = 0;
+			$car_min_price = 0;
+		}
+
+		return array(
+			'min' => $car_min_price,
+			'max' => $car_max_price,
+		);
+	}
+}

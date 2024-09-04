@@ -1551,6 +1551,30 @@
             $('.tf-apartment-result-price-range').alRangeSlider(tf_apartment_search_range);
         }
 
+        /**
+         * Car Min and Max Range Filtering
+         * @author Jahid
+        */
+        let tf_car_search_range = {
+            range: {
+                min: parseInt(tf_params.tf_car_min_price),
+                max: parseInt(tf_params.tf_car_max_price),
+                step: 1
+            },
+            initialSelectedValues: {
+                from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt(tf_params.tf_car_min_price),
+                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_car_max_price)
+            },
+            grid: false,
+            theme: "dark",
+            onFinish: function () {
+                makeFilter();
+            }
+        };
+        if (tf_params.tf_car_min_price != 0 && tf_params.tf_car_max_price != 0) {
+            $('.tf-car-result-price-range').alRangeSlider(tf_car_search_range);
+        }
+
         /*
         * Without Payment Booking
         * @since 2.9.26
