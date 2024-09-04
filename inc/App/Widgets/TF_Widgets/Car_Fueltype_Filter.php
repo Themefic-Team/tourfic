@@ -12,7 +12,7 @@ use \Tourfic\Classes\Helper;
  *
  * Works only for Tour
  */
-class Car_Category_Filter extends \WP_Widget {
+class Car_Fueltype_Filter extends \WP_Widget {
 
     use \Tourfic\Traits\Singleton;
 
@@ -22,9 +22,9 @@ class Car_Category_Filter extends \WP_Widget {
     public function __construct() {
 
         parent::__construct(
-            'tf_car_category_filter', // Base ID
-            esc_html__( 'Tourfic - Car Filters by Category', 'tourfic' ),
-            array( 'description' => esc_html__( 'Filter search result by car category', 'tourfic' ) ) // Args
+            'tf_car_fueltype_filter', // Base ID
+            esc_html__( 'Tourfic - Car Filters by Fuel Type', 'tourfic' ),
+            array( 'description' => esc_html__( 'Filter search result by car Fuel type', 'tourfic' ) ) // Args
         );
     }
 
@@ -55,7 +55,7 @@ class Car_Category_Filter extends \WP_Widget {
 
             $taxonomy = array(
                 'hide_empty' => $hide_empty,
-                'taxonomy'   => 'carrental_category',
+                'taxonomy'   => 'carrental_fuel_type',
                 'include'    => $terms,
             );
 
@@ -68,7 +68,7 @@ class Car_Category_Filter extends \WP_Widget {
                 $default_count = $term->count;
                 $count = $show_count ? '<span>(' . $default_count . ')</span>' : '';
 
-                echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='car_category[]' value='{$id}'/><span class='checkmark'></span> {$name}</label> {$count}</li>", Helper::tf_custom_wp_kses_allow_tags());
+                echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='car_fueltype[]' value='{$id}'/><span class='checkmark'></span> {$name}</label> {$count}</li>", Helper::tf_custom_wp_kses_allow_tags());
             }
             echo "</ul><a href='#' class='see-more btn-link'>" . esc_html__( 'See more', 'tourfic' ) . "</a><a href='#' class='see-less btn-link'>" . esc_html__( 'See Less', 'tourfic' ) . "</a></div>";
 
@@ -85,7 +85,7 @@ class Car_Category_Filter extends \WP_Widget {
      */
     public function form( $instance ) {
 
-        $title = isset( $instance['title'] ) ? $instance['title'] : esc_html__( 'Car category', 'tourfic' );
+        $title = isset( $instance['title'] ) ? $instance['title'] : esc_html__( 'Fuel type', 'tourfic' );
         $terms = isset( $instance['terms']) && is_array( $instance['terms'] ) ? implode( ',', $instance['terms'] ) : 'all';
         $show_count = isset( $instance['show_count'] ) ? $instance['show_count'] : '';
         $hide_empty = isset( $instance['hide_empty'] ) ? $instance['hide_empty'] : '';
@@ -101,7 +101,7 @@ class Car_Category_Filter extends \WP_Widget {
             <br>
             <?php
             wp_dropdown_categories( array(
-                'taxonomy'     => 'carrental_category',
+                'taxonomy'     => 'carrental_fuel_type',
                 'hierarchical' => false,
                 'name'       => $this->get_field_name( 'terms' ),
                 'id'         => $this->get_field_id( 'terms' ),
