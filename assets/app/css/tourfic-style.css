@@ -11191,8 +11191,30 @@ div#tf-contact-info {
   }
 }
 
+@media only screen and (max-width: 480px) {
+  .tf-archive-head {
+    gap: 12px;
+  }
+}
+
 .tf-archive-head .tf-search-result {
   color: #060D1C;
+}
+
+.tf-archive-head .tf-search-layout .tf-sorting-selection-warper select {
+  height: 100%;
+  border-radius: 5px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 14px 36px 14px 14px;
+  background-position: calc(100% - 12px) 50%;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  box-sizing: border-box;
+  border: none;
 }
 
 .tf-archive-head .tf-icon {

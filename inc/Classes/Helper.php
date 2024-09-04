@@ -30,6 +30,10 @@ class Helper {
 		// tax filter
 		add_action( 'wp_ajax_nopriv_tf_trigger_filter', array( $this, 'tf_search_result_ajax_sidebar' ) );
 		add_action( 'wp_ajax_tf_trigger_filter', array( $this, 'tf_search_result_ajax_sidebar' ) );
+        
+        // tax filter
+		add_action( 'wp_ajax_nopriv_tf_archive_ordering_filter', array( $this, 'tf_archive_ordering_filter_callback' ) );
+		add_action( 'wp_ajax_tf_archive_ordering_filter', array( $this, 'tf_archive_ordering_filter_callback' ) );
 
 		add_action( 'admin_init', array( $this, 'tf_admin_role_caps' ), 999 );
 		add_filter( 'template_include', array( $this, 'taxonomy_template' ) );
@@ -66,7 +70,7 @@ class Helper {
 		// add_action( 'admin_init', array( $this, 'redirect_non_admin_users' ), 9 );
         add_action( 'tf_before_container', array( $this, 'tourfic_notice_wrapper' ), 10 );
 	}
-
+    
 	static function tfopt( $option = '', $default = null ) {
 		$options = get_option( 'tf_settings' );
 

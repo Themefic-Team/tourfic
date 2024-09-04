@@ -490,6 +490,89 @@
             $(".filter-reset-btn").hide();
         });
 
+        $(".tf-archive-ordering").on('change', 'select.tf-orderby', function (e) {
+            $(this).closest('form').trigger('submit');
+        });
+
+        $(".tf-archive-ordering").on('submit', function (e) {
+            e.preventDefault();
+            let form = $(this);
+            let adults = $('#adults').val();
+            let children = $('#children').val();
+            let checked = $('#check-in-out-date').val()
+            let checkedArr = checked.split(' - ');
+            let checkin = checkedArr[0];
+            let checkout = checkedArr[1];
+
+            let formData = new FormData(form[0]);
+            formData.append('action', 'tf_archive_ordering_filter');
+            formData.append('_nonce', tf_params.nonce);
+            if($("#tf-place").val()) {
+                formData.append('destination', $("#tf-place").val());
+            }
+
+            if( adults > 1 ) {
+                formData.append('adults', adults);
+            }
+            
+            if( children > 0 ) {
+                formData.append('children', children);
+            }
+
+            let filters = termIdsByFeildName('tf_filters');
+            let tfHotelTypes = termIdsByFeildName('tf_hotel_types');
+            let features = termIdsByFeildName('tf_features');
+            let tour_features = termIdsByFeildName('tour_features');
+            let attractions = termIdsByFeildName('tf_attractions');
+            let activities = termIdsByFeildName('tf_activities');
+            let tfTourTypes = termIdsByFeildName('tf_tour_types');
+            let tfApartmentFeatures = termIdsByFeildName('tf_apartment_features');
+            let tfApartmentTypes = termIdsByFeildName('tf_apartment_types');
+
+
+
+            formData.append('checkin', checkin);
+            formData.append('checkout', checkout);
+            formData.append('filters', filters);
+            formData.append('tf_hotel_types', tfHotelTypes);
+            formData.append('features', features);
+            formData.append('tour_features', tour_features);
+            formData.append('attractions', attractions);
+            formData.append('activities', activities);
+            formData.append('tf_tour_types', tfTourTypes);
+            formData.append('tf_apartment_features', tfApartmentFeatures);
+            formData.append('tf_apartment_types', tfApartmentTypes);
+            formData.append('checked', checked);
+
+
+
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                beforeSend: function (data) {
+                    $('.archive_ajax_result').block({
+                        message: null,
+                        overlayCSS: {
+                            background: "#fff",
+                            opacity: .5
+                        }
+                    });
+                },
+                success: function (response) {
+                    $('.archive_ajax_result').unblock();
+                    $('.archive_ajax_result').html(response);
+                    
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+
+        });
+
         /*
         * Get term ids by field name
         * @auther Foysal
