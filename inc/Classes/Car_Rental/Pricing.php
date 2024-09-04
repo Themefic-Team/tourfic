@@ -259,4 +259,22 @@ class Pricing {
         }
         return $prices;
     }
+
+    static function get_total_trips($post_id){
+        global $wpdb;
+
+        $total_completed_trip = $wpdb->get_results( 
+            $wpdb->prepare( 
+                "SELECT id FROM {$wpdb->prefix}tf_order_data WHERE post_id = %s AND ostatus = %s", 
+                $post_id, 
+                'completed' 
+            ), 
+            ARRAY_A 
+        );
+
+        // Get the number of rows
+        $number_of_rows = count($total_completed_trip);
+        return $number_of_rows;
+    }
+
 }

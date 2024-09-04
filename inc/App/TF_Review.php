@@ -5,6 +5,7 @@ namespace Tourfic\App;
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
+use \Tourfic\Classes\Car_Rental\Pricing;
 
 class TF_Review {
 
@@ -580,7 +581,7 @@ class TF_Review {
             <?php } elseif( ( "tf_carrental"==$tf_current_post && $tf_car_arc_selected_template=="design-1" ) ){ ?>
                 <div class="tf-reviews-box">
                     <span>
-                        <?php echo wp_kses_post( self::tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?> <i class="fa-solid fa-star"></i> (7 trips)</span>
+                        <?php echo wp_kses_post( self::tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?> <i class="fa-solid fa-star"></i> (<?php echo Pricing::get_total_trips(get_the_ID()); ?> <?php esc_html_e( "Trips", "tourfic" ) ?>)</span>
                 </div>
             <?php }else{ ?>
                 <div class="tf-archive-rating-wrapper">
@@ -618,7 +619,7 @@ class TF_Review {
                 </span>
             <?php } elseif( ( "tf_carrental"==$tf_current_post && $tf_car_arc_selected_template=="design-1" ) ){ ?>
                 <div class="tf-reviews-box">
-                    <span>0.0 <i class="fa-solid fa-star"></i> (7 trips)</span>
+                    <span>0.0 <i class="fa-solid fa-star"></i> (<?php echo Pricing::get_total_trips(get_the_ID()); ?> <?php esc_html_e( "Trips", "tourfic" ) ?>)</span>
                 </div>
             <?php }
         }

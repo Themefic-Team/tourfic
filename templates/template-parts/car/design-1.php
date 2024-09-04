@@ -38,7 +38,7 @@ use \Tourfic\App\TF_Review;
                                         0.0
                                         <?php } ?>
                                         <i class="fa-solid fa-star"></i>
-                                    </span> (<?php esc_html_e( "1 Trips", "tourfic" ) ?>)
+                                    </span> (<?php echo Pricing::get_total_trips($post_id); ?> <?php esc_html_e( "Trips", "tourfic" ) ?>)
                                 </a>
                             </div>
                         </div>
