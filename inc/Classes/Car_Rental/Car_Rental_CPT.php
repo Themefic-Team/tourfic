@@ -65,6 +65,16 @@ class Car_Rental_CPT extends \Tourfic\Classes\Post_Type {
 					'assign_terms' => 'edit_tf_carrental',
 					'edit_terms'   => 'edit_tf_carrental',
 				),
+			),
+			array(
+				'name'          => esc_html__('Make Year', 'tourfic' ),
+				'singular_name' => esc_html__('Make Year', 'tourfic' ),
+				'taxonomy'      => 'carrental_engine_year',
+				'rewrite_slug'  => apply_filters( 'tf_carrental_engine_year_slug', 'carrental-category' ),
+				'capability'  => array(
+					'assign_terms' => 'edit_tf_carrental',
+					'edit_terms'   => 'edit_tf_carrental',
+				),
 			)
 		));
 		
