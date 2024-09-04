@@ -1294,8 +1294,12 @@ class Helper {
 			$dropoff = $pickup;
 		}
 		
-		$filters               = ( $_POST['filters'] ) ? explode( ',', sanitize_text_field( $_POST['filters'] ) ) : null;
+		$category = ( $_POST['category'] ) ? explode( ',', sanitize_text_field( $_POST['category'] ) ) : null;
+		$fuel_type = ( $_POST['fuel_type'] ) ? explode( ',', sanitize_text_field( $_POST['fuel_type'] ) ) : null;
+		$engine_year = ( $_POST['engine_year'] ) ? explode( ',', sanitize_text_field( $_POST['engine_year'] ) ) : null;
 		
+		$relation        = self::tfopt( 'search_relation', 'AND' );
+		$filter_relation = self::tfopt( 'filter_relation', 'OR' );
 		
 		$args = array(
 			'post_type'      => 'tf_carrental',
@@ -1314,20 +1318,57 @@ class Helper {
 			);
 		}
 
-		if ( $filters ) {
+		if ( $category ) {
 			$args['tax_query']['relation'] = $relation;
-
 			if ( $filter_relation == "OR" ) {
 				$args['tax_query'][] = array(
-					'taxonomy' => $filter_taxonomy,
-					'terms'    => $filters,
+					'taxonomy' => 'carrental_category',
+					'terms'    => $category,
 				);
 			} else {
-				$args['tax_query']['tf_filters']['relation'] = 'AND';
+				$args['tax_query']['tf_category']['relation'] = 'AND';
 
-				foreach ( $filters as $key => $term_id ) {
-					$args['tax_query']['tf_filters'][] = array(
-						'taxonomy' => $filter_taxonomy,
+				foreach ( $category as $key => $term_id ) {
+					$args['tax_query']['tf_category'][] = array(
+						'taxonomy' => 'carrental_category',
+						'terms'    => array( $term_id ),
+					);
+				}
+			}
+		}
+
+		if ( $fuel_type ) {
+			$args['tax_query']['relation'] = $relation;
+			if ( $filter_relation == "OR" ) {
+				$args['tax_query'][] = array(
+					'taxonomy' => 'carrental_fuel_type',
+					'terms'    => $fuel_type,
+				);
+			} else {
+				$args['tax_query']['tf_fuel_type']['relation'] = 'AND';
+
+				foreach ( $fuel_type as $key => $term_id ) {
+					$args['tax_query']['tf_fuel_type'][] = array(
+						'taxonomy' => 'carrental_fuel_type',
+						'terms'    => array( $term_id ),
+					);
+				}
+			}
+		}
+
+		if ( $engine_year ) {
+			$args['tax_query']['relation'] = $relation;
+			if ( $filter_relation == "OR" ) {
+				$args['tax_query'][] = array(
+					'taxonomy' => 'carrental_engine_year',
+					'terms'    => $engine_year,
+				);
+			} else {
+				$args['tax_query']['tf_engine_year']['relation'] = 'AND';
+
+				foreach ( $engine_year as $key => $term_id ) {
+					$args['tax_query']['tf_engine_year'][] = array(
+						'taxonomy' => 'carrental_engine_year',
 						'terms'    => array( $term_id ),
 					);
 				}
@@ -1345,7 +1386,7 @@ class Helper {
 				$car_meta = get_post_meta( get_the_ID() , 'tf_carrental_opt', true );
 				$res = tf_car_availability_response($car_meta, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
 
-				var_dump($res); exit();
+				// var_dump($res); exit();
 				tf_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
 			}
 		}

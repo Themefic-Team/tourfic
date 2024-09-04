@@ -484,7 +484,7 @@
         * @author Jahid
         */
 
-        $(document).on('click', '.tf-filter-cars', function (e) {
+        const makecarFilter = () => {
             let $this = $(this);
             let same_location = $('input[name="same_location"]:checked').val();
             let driver_age = $('input[name="driver_age"]:checked').val();
@@ -494,8 +494,18 @@
             let dropoff_date = $('.tf_dropoff_date').val();
             let pickup_time = $('.tf_pickup_time').val();
             let dropoff_time = $('.tf_dropoff_time').val();
-            var pickup_slug = $('#tf_pickup_location_id').val();
+            let pickup_slug = $('#tf_pickup_location_id').val();
             let dropoff_slug = $('#tf_dropoff_location_id').val();
+
+            let startprice = $('.widget_tf_price_filters input[name="from"]').val();
+            let endprice = $('.widget_tf_price_filters input[name="to"]').val();
+
+            let min_seat = $('.widget_tf_seat_filters input[name="from"]').val();
+            let max_seat = $('.widget_tf_seat_filters input[name="to"]').val();
+
+            let category = termIdsByFeildName('car_category');
+            let fuel_type = termIdsByFeildName('car_fueltype');
+            let engine_year = termIdsByFeildName('car_engine_year');
 
             var data = {
                 action: 'tf_car_filters',
@@ -508,6 +518,13 @@
                 dropoff_time: dropoff_time,
                 same_location: same_location,
                 driver_age: driver_age,
+                category: category,
+                fuel_type: fuel_type,
+                engine_year: engine_year,
+                startprice: startprice,
+                endprice: endprice,
+                min_seat: min_seat,
+                max_seat: max_seat
             };
 
             $.ajax({
@@ -541,7 +558,32 @@
                     }
                 }
             });
+        }
 
+        /*
+        * Get term ids by field name
+        * @auther Foysal
+        */
+        const termIdsByFeildName = (fieldName) => {
+            let termIds = [];
+            $(`[name*=${fieldName}]`).each(function () {
+                if ($(this).is(':checked')) {
+                    termIds.push($(this).val());
+                }
+            });
+            return termIds.join();
+        }
+        
+        $(document).on('change', '[name*=car_category],[name*=car_fueltype],[name*=car_engine_year]', function () {
+            if($(".filter-reset-btn").length>0){
+                $(".filter-reset-btn").show();
+            }
+            makecarFilter();
+        });
+
+
+        $(document).on('click', '.tf-filter-cars', function (e) {
+            makecarFilter();
         });
 
     });

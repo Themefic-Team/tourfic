@@ -19959,7 +19959,7 @@ html {
 }
 
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li {
-  width: calc(33% -5px);
+  width: calc(33% - 5px);
 }
 
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li label {
