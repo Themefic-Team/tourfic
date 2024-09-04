@@ -38,7 +38,7 @@ class Car_Category_Filter extends \WP_Widget {
      */
     public function widget( $args, $instance ) {
 
-        //check if is Tours
+        //check if is Car
         $posttype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
 
         if ( $posttype == 'tf_carrental' ) {
