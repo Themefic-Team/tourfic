@@ -19942,6 +19942,18 @@ html {
   height: 24px;
 }
 
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_seat_filters .al-range-slider__knob::before {
+  content: "\f6c0";
+  position: absolute;
+  font-family: "FontAwesome";
+  color: #0866C4;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result {
   width: calc(100% - 390px);
 }

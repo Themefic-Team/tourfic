@@ -654,6 +654,8 @@ class Enqueue {
 				'tour_form_data'         => isset( $single_tour_form_data ) ? $single_tour_form_data : array(),
 				'tf_car_max_price' => isset( $tf_car_min_max_price ) ? $tf_car_min_max_price['max'] : 0,
 				'tf_car_min_price' => isset( $tf_car_min_max_price ) ? $tf_car_min_max_price['min'] : 0,
+				'tf_car_min_seat' =>  1,
+				'tf_car_max_seat' =>  20,
 			)
 		);
 

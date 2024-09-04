@@ -410,6 +410,21 @@
                         width: 24px;
                         height: 24px;
                     }
+                    &.widget_tf_seat_filters{
+                        .al-range-slider__knob{
+                            &::before{
+                                content: "\f6c0";
+                                position: absolute;
+                                font-family: "FontAwesome";
+                                color: #0866C4;
+                                height: 100%;
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            }
+                        }
+                    }
                 }
             }
             .tf-car-archive-result{
