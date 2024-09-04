@@ -233,65 +233,13 @@ $tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' )
                     
                     <div class="tf-car-archive-sidebar">
                         <div class="tf-sidebar-header tf-flex tf-flex-space-bttn tf-flex-align-center">
-                            <h4>Filter</h4>
-                            <button>Reset</button>
+                            <h4><?php esc_html_e("Filter", "tourfic") ?></h4>
+                            <button><?php esc_html_e("Reset", "tourfic"); ?></button>
                         </div>
-
-                        <div class="tf-category-widget">
-                            <div class="tf-category-heading">
-                                <h3>Car type</h3>
-                            </div>
-                            <div class="tf-category-lists">
-                                <ul>
-                                    <li>
-                                        <label>Sports coupe
-                                            <input type="checkbox" checked>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>Sports coupe
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>Sports coupe
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="tf-category-widget">
-                            <div class="tf-category-heading">
-                                <h3>Car type</h3>
-                            </div>
-                            <div class="tf-category-lists">
-                                <ul>
-                                    <li>
-                                        <label>Sports coupe
-                                            <input type="checkbox" checked>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>Sports coupe
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>Sports coupe
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        
+                        <?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
+                            <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
+                        <?php } ?>
 
                     </div>
 
