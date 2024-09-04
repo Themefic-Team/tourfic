@@ -1297,7 +1297,12 @@ class Helper {
 		$category = ( $_POST['category'] ) ? explode( ',', sanitize_text_field( $_POST['category'] ) ) : null;
 		$fuel_type = ( $_POST['fuel_type'] ) ? explode( ',', sanitize_text_field( $_POST['fuel_type'] ) ) : null;
 		$engine_year = ( $_POST['engine_year'] ) ? explode( ',', sanitize_text_field( $_POST['engine_year'] ) ) : null;
-		
+
+		$tf_startprice  = isset( $_POST['startprice'] ) ? sanitize_text_field( $_POST['startprice'] ) : '';
+		$tf_endprice  = isset( $_POST['endprice'] ) ? sanitize_text_field( $_POST['endprice'] ) : '';
+		$tf_min_seat  = isset( $_POST['min_seat'] ) ? sanitize_text_field( $_POST['min_seat'] ) : '';
+		$tf_max_seat  = isset( $_POST['max_seat'] ) ? sanitize_text_field( $_POST['max_seat'] ) : '';
+
 		$relation        = self::tfopt( 'search_relation', 'AND' );
 		$filter_relation = self::tfopt( 'filter_relation', 'OR' );
 		
@@ -1384,7 +1389,7 @@ class Helper {
 			while ( $loop->have_posts() ) {
 				$loop->the_post();
 				$car_meta = get_post_meta( get_the_ID() , 'tf_carrental_opt', true );
-				$res = tf_car_availability_response($car_meta, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+				$res = tf_car_availability_response($car_meta, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $tf_startprice, $tf_endprice, $tf_min_seat, $tf_max_seat);
 
 				// var_dump($res); exit();
 				tf_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
