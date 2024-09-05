@@ -535,27 +535,7 @@
                     $this.addClass('tf-btn-loading');
                 },
                 success: function (data) {
-                    $this.unblock();
-
-                    var response = JSON.parse(data);
-                    if (response.without_payment == 'false') {
-                        if (response.status == 'error') {
-
-                            if (response.errors) {
-                                response.errors.forEach(function (text) {
-                                    notyf.error(text);
-                                });
-                            }
-
-                            return false;
-                        } else {
-
-                            
-
-                        }
-                    }else{
-                        
-                    }
+                    $('.tf-car-result').html(data);
                 }
             });
         }
@@ -585,6 +565,55 @@
         $(document).on('click', '.tf-filter-cars', function (e) {
             makecarFilter();
         });
+
+        /**
+         * Car Min and Max Range Filtering
+         * @author Jahid
+        */
+        var tf_search_page_params = new window.URLSearchParams(window.location.search);
+        let tf_car_search_range = {
+            range: {
+                min: parseInt(tf_params.tf_car_min_price),
+                max: parseInt(tf_params.tf_car_max_price),
+                step: 1
+            },
+            initialSelectedValues: {
+                from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt(tf_params.tf_car_min_price),
+                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_car_max_price)
+            },
+            grid: false,
+            theme: "dark",
+            onFinish: function () {
+                makecarFilter();
+            }
+        };
+        if (tf_params.tf_car_min_price != 0 && tf_params.tf_car_max_price != 0) {
+            $('.tf-car-result-price-range').alRangeSlider(tf_car_search_range);
+        }
+
+        /**
+         * Car Seat Range Filtering
+         * @author Jahid
+        */
+        let tf_car_search_seat_range = {
+            range: {
+                min: parseInt(tf_params.tf_car_min_seat),
+                max: parseInt(tf_params.tf_car_max_seat),
+                step: 1
+            },
+            initialSelectedValues: {
+                from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt(tf_params.tf_car_min_seat),
+                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_car_max_seat)
+            },
+            grid: false,
+            theme: "dark",
+            onFinish: function () {
+                makecarFilter();
+            }
+        };
+        if (tf_params.tf_car_min_seat != 0 && tf_params.tf_car_max_seat != 0) {
+            $('.tf-car-result-seat-range').alRangeSlider(tf_car_search_seat_range);
+        }
 
     });
 

@@ -1326,7 +1326,7 @@ class Helper {
 		if(!empty($tf_min_seat) && !empty($tf_max_seat)){
 			$args['meta_query'] = array(
 				array(
-					'key' => 'tf_search_baggage',
+					'key' => 'tf_search_passengers',
 					'value'    => [$tf_min_seat, $tf_max_seat],
 					'compare'    => 'BETWEEN',
 					'type' => 'DECIMAL(10,3)'
@@ -1415,15 +1415,15 @@ class Helper {
 			while ( $loop->have_posts() ) {
 				$loop->the_post();
 				$car_meta = get_post_meta( get_the_ID() , 'tf_carrental_opt', true );
-				$res = tf_car_availability_response($car_meta, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $tf_startprice, $tf_endprice, $tf_min_seat, $tf_max_seat);
-
-				// var_dump($res); exit();
-				tf_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+				$availability_res = tf_car_availability_response($car_meta, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $tf_startprice, $tf_endprice);
+				if($availability_res){
+					tf_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+				}
 			}
 		}
 	   
 		wp_die();
-	   
+
 	}
 
 	/**

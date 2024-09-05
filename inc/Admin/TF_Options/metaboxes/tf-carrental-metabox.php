@@ -125,15 +125,15 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'type'        => 'number',
 					'label'       => esc_html__( 'No. Passengers', 'tourfic' ),
 					'subtitle'    => esc_html__( 'No. Passengers', 'tourfic' ),
-					'attributes'  => array( 'min' => 1 )
+					'attributes'  => array( 'min' => 1 ),
+					'is_search_able' => true
 				),
 				array(
 					'id'          => 'baggage',
 					'type'        => 'number',
 					'label'       => esc_html__( 'Baggage', 'tourfic' ),
 					'subtitle'    => esc_html__( 'Baggage', 'tourfic' ),
-					'attributes'  => array( 'min' => 0 ),
-					'is_search_able' => true
+					'attributes'  => array( 'min' => 0 )
 				),
 				array(
 					'id'       => 'auto_transmission',
