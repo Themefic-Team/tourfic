@@ -2376,23 +2376,17 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'  => __( 'Activate this feature to enable users to pick their pickup and dropoff Location for searching.', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => true
 				),
 				array(
-					'id'        => 'disable_car_pickup_date',
+					'id'        => 'pick_drop_date_car_search',
 					'type'      => 'switch',
-					'label'     => __( 'Disable Pickup Date in Car Search', 'tourfic' ),
-					'subtitle'  => __( 'Turn on this setting to hide the Pickup Date option from the search form.', 'tourfic' ),
+					'label'     => __( 'Pickup & Dropoff Date Required in Car Search', 'tourfic' ),
+					'subtitle'  => __( 'Activate this feature to enable users to pick their pickup and dropoff Date for searching.', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => true
 				),
-				array(
-					'id'        => 'disable_car_dropoff_date',
-					'type'      => 'switch',
-					'label'     => __( 'Disable Dropoff Date in Car Search', 'tourfic' ),
-					'subtitle'  => __( 'Turn on this setting to hide the Dropoff Date option from the search form.', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-				)
 			),
 		),
 		// Design Options

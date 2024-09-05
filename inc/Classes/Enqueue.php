@@ -649,6 +649,8 @@ class Enqueue {
 				'date_hotel_search'      => Helper::tfopt( 'date_hotel_search' ),
 				'date_tour_search'       => Helper::tfopt( 'date_tour_search' ),
 				'date_apartment_search'  => Helper::tfopt( 'date_apartment_search' ),
+				'location_car_search'  => Helper::tfopt( 'pick_drop_car_search' ),
+				'date_car_search'  => Helper::tfopt( 'pick_drop_date_car_search' ),
 				'tf_apartment_max_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['max'] : 0,
 				'tf_apartment_min_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['min'] : 0,
 				'tour_form_data'         => isset( $single_tour_form_data ) ? $single_tour_form_data : array(),
