@@ -155,6 +155,10 @@ TF_Settings::option( 'tf_settings', array(
 											'title'			=> 'Design 2',
 											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design2-hotel.jpg",
 										),
+										'design-3' => array(
+											'title' => 'Design 3',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design3-hotel.jpg",
+										),
 										'default'  => array(
 											'title' => 'Default',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-hotel.jpg",
@@ -378,6 +382,10 @@ TF_Settings::option( 'tf_settings', array(
 										'design-2' => array(
 											'title' => 'Design 2',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design2.jpg",
+										),
+										'design-3' => array(
+											'title' => 'Design 3',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design3.jpg",
 										),
 										'default'  => array(
 											'title' => 'Default',

@@ -180,6 +180,15 @@ class Enqueue {
 		}
 
 		/**
+		 * Google Map
+		 */
+//		$tf_map_api_key = ! empty( tfopt( 'tf-googlemapapi' ) ) ? tfopt( 'tf-googlemapapi' ) : '';
+//		wp_enqueue_script( 'googleapis', 'https://maps.googleapis.com/maps/api/js?key=' . $tf_map_api_key . '&sensor=false&amp;libraries=places', array(), TOURFIC, true );
+//		wp_enqueue_script( 'markerclusterer', TF_ASSETS_URL . 'app/libs/markerclusterer.min.js', array(), TOURFIC, true );
+//		wp_enqueue_script('map-marker-label', TF_ASSETS_URL . 'app/libs/markerwithlabel.js', array(), TOURFIC, true);
+
+
+		/**
 		 * Hotel Min and Max Price
 		 */
 		$hotel_min_max_price = HotelPricing::get_min_max_price_from_all_hotel();
