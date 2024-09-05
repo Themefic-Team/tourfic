@@ -485,7 +485,7 @@
         */
 
         const makecarFilter = () => {
-            let $this = $(this);
+            
             let same_location = $('input[name="same_location"]:checked').val();
             let driver_age = $('input[name="driver_age"]:checked').val();
             var pickup = $('#tf_pickup_location').val();
@@ -532,10 +532,14 @@
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
-                    $this.addClass('tf-btn-loading');
                 },
                 success: function (data) {
-                    $('.tf-car-result').html(data);
+                    if(data){
+                        $('.tf-car-result').html(data);
+                    }else{
+                        $('.tf-car-result').html('No Car Founds!');
+                    }
+                    $('.tf-filter-cars').removeClass('tf-btn-loading');
                 }
             });
         }
@@ -555,14 +559,21 @@
         }
         
         $(document).on('change', '[name*=car_category],[name*=car_fueltype],[name*=car_engine_year]', function () {
-            if($(".filter-reset-btn").length>0){
-                $(".filter-reset-btn").show();
+            if($(".tf-filter-reset-btn").length>0){
+                $(".tf-filter-reset-btn").show();
             }
             makecarFilter();
         });
 
 
         $(document).on('click', '.tf-filter-cars', function (e) {
+            let $this = $(this);
+            $this.addClass('tf-btn-loading');
+
+            if($(".tf-filter-reset-btn").length>0){
+                $(".tf-filter-reset-btn").show();
+            }
+
             makecarFilter();
         });
 
@@ -584,6 +595,9 @@
             grid: false,
             theme: "dark",
             onFinish: function () {
+                if($(".tf-filter-reset-btn").length>0){
+                    $(".tf-filter-reset-btn").show();
+                }
                 makecarFilter();
             }
         };
@@ -608,6 +622,9 @@
             grid: false,
             theme: "dark",
             onFinish: function () {
+                if($(".tf-filter-reset-btn").length>0){
+                    $(".tf-filter-reset-btn").show();
+                }
                 makecarFilter();
             }
         };

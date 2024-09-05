@@ -19791,6 +19791,8 @@ html {
   background-color: transparent;
   padding: 0px;
   border: 0px solid;
+  cursor: pointer;
+  display: none;
 }
 
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget {
