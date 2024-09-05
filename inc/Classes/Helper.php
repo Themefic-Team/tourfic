@@ -1323,6 +1323,32 @@ class Helper {
 			);
 		}
 
+		if(!empty($tf_min_seat) && !empty($tf_max_seat)){
+			$args['meta_query'] = array(
+				array(
+					'key' => 'tf_search_baggage',
+					'value'    => [$tf_min_seat, $tf_max_seat],
+					'compare'    => 'BETWEEN',
+					'type' => 'DECIMAL(10,3)'
+				),
+			);
+		}
+
+		if(!empty($tf_startprice) && !empty($tf_endprice)){
+			$args['meta_query'] = array(
+				array(
+					'key' => 'tf_search_car_rent',
+					'value'    => [$tf_startprice, $tf_endprice],
+					'compare'    => 'BETWEEN',
+					'type' => 'DECIMAL(10,3)'
+				),
+			);
+		}
+
+		if (count($args['meta_query']) > 1) {
+			$args['meta_query']['relation'] = 'AND';
+		}
+
 		if ( $category ) {
 			$args['tax_query']['relation'] = $relation;
 			if ( $filter_relation == "OR" ) {

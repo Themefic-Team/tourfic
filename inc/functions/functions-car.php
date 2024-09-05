@@ -162,20 +162,51 @@ function tf_car_availability_response($car_meta, $pickup='', $dropoff='', $tf_pi
 	$pricing_type = !empty($car_meta["pricing_type"]) ? $car_meta["pricing_type"] : 'day_hour';
 
 	$date_pricing = !empty($meta["date_prices"]) ? $meta["date_prices"] : '';
+	$day_pricing = !empty($meta["day_prices"]) ? $meta["day_prices"] : '';
+
 	if( !empty($tf_pickup_date) && !empty($tf_dropoff_date) && 'date'==$pricing_type && !empty($date_pricing) ){
-		foreach ($date_pricing as $entry) {
-			$startDate = strtotime($entry['date']['from']);
-			$endDate = strtotime($entry['date']['to']);
-			if($startDate==strtotime($tf_pickup_date) && $endDate==strtotime($tf_dropoff_date)){
+
+		if ( ! empty( $tf_startprice ) && ! empty( $tf_endprice ) ) {
+
+			foreach ($date_pricing as $entry) {
+				$startDate = strtotime($entry['date']['from']);
+				$endDate = strtotime($entry['date']['to']);
+				if($startDate==strtotime($tf_pickup_date) && $endDate==strtotime($tf_dropoff_date)){
+
+					if($tf_startprice <= $entry['price'] && $entry['price'] <= $tf_endprice){
+						return true;
+					}else{
+						return false;
+					}
+					break;
+
+				}else{
+					return false;
+				}
+			}
+
+		}else{
+			return true;
+		}
+
+	} else if( !empty($tf_pickup_date) && !empty($tf_dropoff_date) && 'day_hour'==$pricing_type && !empty($day_pricing) ){
+
+		if ( ! empty( $tf_startprice ) && ! empty( $tf_endprice ) ) {
+
+			if($tf_startprice <= $entry['price'] && $entry['price'] <= $tf_endprice){
 				return true;
-				break;
 			}else{
 				return false;
 			}
+
+		}else{
+			return true;
 		}
+
 	}else{
 		return true;
 	}
+
 }
 
 /**

@@ -132,7 +132,8 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'type'        => 'number',
 					'label'       => esc_html__( 'Baggage', 'tourfic' ),
 					'subtitle'    => esc_html__( 'Baggage', 'tourfic' ),
-					'attributes'  => array( 'min' => 0 )
+					'attributes'  => array( 'min' => 0 ),
+					'is_search_able' => true
 				),
 				array(
 					'id'       => 'auto_transmission',
@@ -595,6 +596,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'attributes'  => array(
 						'min' => '0',
 					),
+					'is_search_able' => true
 				),
 				array(
 					'id'       => 'pricing_type',
