@@ -119,7 +119,9 @@ class Hotel {
         <thead>
         <tr>
             <th class="description"><?php esc_html_e( 'Room Details', 'tourfic' ); ?></th>
-            <th class="options"><?php esc_html_e( 'Options', 'tourfic' ); ?></th>
+            <?php if ( $total_room_option_count > 0 ) : ?>
+                <th class="options"><?php esc_html_e( 'Options', 'tourfic' ); ?></th>
+            <?php endif; ?>
             <th class="pax"><?php esc_html_e( 'Pax', 'tourfic' ); ?></th>
             <th class="pricing"><?php esc_html_e( 'Price', 'tourfic' ); ?></th>
             <th class="reserve"><?php esc_html_e( 'Select Rooms', 'tourfic' ); ?></th>
