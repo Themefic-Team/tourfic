@@ -1078,12 +1078,10 @@ trait Action_Helper {
 		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tf_ajax_nonce' ) ) {
 			return;
 		}
-        if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tf_ajax_nonce' ) ) {
-			return;
-		}
 		/**
 		 * Get form data
 		 */
+		$ordering_type = ! empty( $_POST['tf-orderby'] ) ? sanitize_text_field( $_POST['tf-orderby'] ) : 'default';
 		$adults = ! empty( $_POST['adults'] ) ? sanitize_text_field( $_POST['adults'] ) : '';
 		$child  = ! empty( $_POST['children'] ) ? sanitize_text_field( $_POST['children'] ) : '';
 		$infant = ! empty( $_POST['infant'] ) && $_POST['infant'] != "undefined" ? sanitize_text_field( $_POST['infant'] ) : '';
@@ -1386,9 +1384,24 @@ trait Action_Helper {
 				}
 			}
 		}
+		global $wpdb;
 
 		$loop = new \WP_Query( $args );
+		$post_ids = $post_ids = wp_list_pluck( $loop->posts, 'ID' );
+		$order_and_id = [];
+		foreach ( $post_ids as $post_id ) {
+			$order_count = $wpdb->get_var($wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}tf_order_data WHERE post_id = %s ", $post_id ));
+			$order_and_id[$post_id] = $order_count;
+		}
+		arsort($order_and_id);
+		$post_ids = array_keys($order_and_id);
 
+		$loop = new \WP_Query( array(
+			'post_type'      => $posttype,
+			'post__in'       => $post_ids,
+			'posts_per_page' => -1,
+		) );
+		
 		//get total posts count
 		$total_posts = $loop->found_posts;
 		if ( $loop->have_posts() ) {
@@ -1454,15 +1467,27 @@ trait Action_Helper {
 			$current_page           = ! empty( $_POST['page'] ) ? absint( $_POST['page'] ) : 1;
 			$offset                 = ( $current_page - 1 ) * $post_per_page;
 			$displayed_results      = array_slice( $tf_total_filters, $offset, $post_per_page );
+
+			$sort_results = [];
+			foreach ( $displayed_results as $post_id ) {
+				$order_count = $wpdb->get_var($wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}tf_order_data WHERE post_id = %s ", $post_id ));
+				$sort_results[$post_id] = $order_count;
+			}
+			arsort($sort_results);
+			$displayed_results = array_keys($sort_results);
+
 			if ( ! empty( $displayed_results ) ) {
 				$filter_args = array(
 					'post_type'      => $posttype,
 					'posts_per_page' => $post_per_page,
+					'orderby' 		=> array( 'post__in' => 'ASC' ),
 					'post__in'       => $displayed_results,
 				);
 
 				$result_query  = new \WP_Query( $filter_args );
+
 				$result_query2 = $result_query;
+				$order_count = 0;
 				if ( $result_query->have_posts() ) {
 					while ( $result_query->have_posts() ) {
 						$result_query->the_post();
@@ -1489,23 +1514,48 @@ trait Action_Helper {
 							}
 						} elseif ( $posttype == 'tf_tours' ) {
 							$tour_meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
+							$orders = $wpdb->get_var($wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}tf_order_data WHERE post_id = %s ", get_the_ID()));
+							echo "<pre>";
+							print_r($orders);
+							echo "</pre>";
+							// die(); // added by - Sunvi
+
+							if( $ordering_type == 'order') {
+								if( $orders > $order_count ) {
+									$order_count = $orders;
+									if ( ! empty( $data ) ) {
+										if ( isset( $data[3] ) && isset( $data[4] ) ) {
+											[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
+											if ( $tour_meta["tour_as_featured"] ) {
+												Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
+											}
+										} else {
+											[ $adults, $child, $check_in_out ] = $data;
+
+											if ( $tour_meta["tour_as_featured"] ) {
+												Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out );
+											}
+										}
+									} else {
+										if ( $tour_meta["tour_as_featured"] ) {
+											Tour::tf_tour_archive_single_item();
+										}
+									}
+									
+								}
+							}
+							
 							if ( ! empty( $data ) ) {
 								if ( isset( $data[3] ) && isset( $data[4] ) ) {
 									[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
-									if ( $tour_meta["tour_as_featured"] ) {
 										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
-									}
 								} else {
 									[ $adults, $child, $check_in_out ] = $data;
-
-									if ( $tour_meta["tour_as_featured"] ) {
-										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out );
-									}
+										
+									Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out );
 								}
 							} else {
-								if ( $tour_meta["tour_as_featured"] ) {
-									Tour::tf_tour_archive_single_item();
-								}
+								Tour::tf_tour_archive_single_item();
 							}
 						} else {
 							$apartment_meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
@@ -1521,71 +1571,6 @@ trait Action_Helper {
 								}
 							} else {
 								if ( $apartment_meta["apartment_as_featured"] ) {
-									Apartment::tf_apartment_archive_single_item();
-								}
-							}
-						}
-
-					}
-
-					while ( $result_query2->have_posts() ) {
-						$result_query2->the_post();
-
-						if ( $posttype == 'tf_hotel' ) {
-							$hotel_meta = get_post_meta( get_the_ID(), 'tf_hotels_opt', true );
-
-							if ( ! empty( $data ) ) {
-								if ( isset( $data[4] ) && isset( $data[5] ) ) {
-									[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
-
-									if ( ! $hotel_meta["featured"] ) {
-										Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
-									}
-								} else {
-									[ $adults, $child, $room, $check_in_out ] = $data;
-
-									if ( ! $hotel_meta["featured"] ) {
-										Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
-									}
-								}
-							} else {
-								if ( ! $hotel_meta["featured"] ) {
-									Hotel::tf_hotel_archive_single_item();
-								}
-							}
-						} elseif ( $posttype == 'tf_tours' ) {
-							$tour_meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
-							if ( ! empty( $data ) ) {
-								if ( isset( $data[3] ) && isset( $data[4] ) ) {
-									[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
-									if ( ! $tour_meta["tour_as_featured"] ) {
-										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
-									}
-								} else {
-									[ $adults, $child, $check_in_out ] = $data;
-									if ( ! $tour_meta["tour_as_featured"] ) {
-										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out );
-									}
-								}
-							} else {
-								if ( ! $tour_meta["tour_as_featured"] ) {
-									Tour::tf_tour_archive_single_item();
-								}
-							}
-						} else {
-							$apartment_meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
-							if ( ! empty( $data ) ) {
-								if ( isset( $data[4] ) && isset( $data[5] ) ) {
-									if ( ! $apartment_meta["apartment_as_featured"] ) {
-										Apartment::tf_apartment_archive_single_item( $data );
-									}
-								} else {
-									if ( ! $apartment_meta["apartment_as_featured"] ) {
-										Apartment::tf_apartment_archive_single_item( $data );
-									}
-								}
-							} else {
-								if ( ! $apartment_meta["apartment_as_featured"] ) {
 									Apartment::tf_apartment_archive_single_item();
 								}
 							}

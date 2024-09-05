@@ -101,6 +101,7 @@
             let tfTourTypes = termIdsByFeildName('tf_tour_types');
             let tfApartmentFeatures = termIdsByFeildName('tf_apartment_features');
             let tfApartmentTypes = termIdsByFeildName('tf_apartment_types');
+            let tf_ordering = $('#tf-orderby').find(":selected").val();
 
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
@@ -123,6 +124,8 @@
             formData.append('tf_apartment_features', tfApartmentFeatures);
             formData.append('tf_apartment_types', tfApartmentTypes);
             formData.append('checked', checked);
+            formData.append("tf_ordering", tf_ordering);
+
             if (startprice) {
                 formData.append('startprice', startprice);
             }
@@ -366,6 +369,8 @@
             var startprice = $('.widget_tf_price_filters input[name="from"]').val();
             var endprice = $('.widget_tf_price_filters input[name="to"]').val();
             var tf_author = $('#tf_author').val();
+
+
             // split date range into dates
             var checkedArr = checked.split(' - ');
             var checkin = checkedArr[0];
@@ -403,6 +408,7 @@
             formData.append('tf_apartment_features', tfApartmentFeatures);
             formData.append('tf_apartment_types', tfApartmentTypes);
             formData.append('checked', checked);
+
             if (startprice) {
                 formData.append('startprice', startprice);
             }
@@ -495,6 +501,7 @@
         });
 
         $(".tf-archive-ordering").on('submit', function (e) {
+
             e.preventDefault();
             let form = $(this);
             let adults = $('#adults').val();
@@ -511,9 +518,7 @@
                 formData.append('destination', $("#tf-place").val());
             }
 
-            if( adults > 1 ) {
-                formData.append('adults', adults);
-            }
+            formData.append('adults', adults);
             
             if( children > 0 ) {
                 formData.append('children', children);
