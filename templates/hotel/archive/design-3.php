@@ -602,7 +602,7 @@
 									$lng = $map['longitude'];
 									ob_start();
 									?>
-                                    <div class="tf-map-item" data-price="<?php echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                    <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
                                         <div class="tf-map-item-thumb">
                                             <a href="<?php echo get_the_permalink(); ?>">
 												<?php
@@ -666,13 +666,13 @@
 										'content' => base64_encode( $infoWindowtext )
 									];
 								}
-								tf_hotel_archive_single_item();
+								Hotel::tf_hotel_archive_single_item();
 							}
 							wp_reset_query();
 							?>
                             <div id="map-datas" style="display: none"><?php echo array_filter( $locations ) ? json_encode( array_values( $locations ) ) : []; ?></div>
                             <div class="tf-pagination-bar">
-								<?php tourfic_posts_navigation(); ?>
+								<?php Helper::tourfic_posts_navigation(); ?>
                             </div>
                         </div>
                         <!-- Available rooms end -->

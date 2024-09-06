@@ -1929,7 +1929,7 @@ class Helper {
                     (function ($) {
                         $(document).ready(function () {
                             // flatpickr locale first day of Week
-							<?php tf_flatpickr_locale( "root" ); ?>
+							<?php self::tf_flatpickr_locale( "root" ); ?>
 
                             $(".tf-template-3 .tf-booking-date-wrap").click(function () {
 
@@ -1942,7 +1942,7 @@ class Helper {
                                 minDate: "today",
 
                                 // flatpickr locale
-								<?php tf_flatpickr_locale(); ?>
+								<?php self::tf_flatpickr_locale(); ?>
 
                                 onReady: function (selectedDates, dateStr, instance) {
                                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -1987,7 +1987,7 @@ class Helper {
                         (function ($) {
                             $(document).ready(function () {
                                 // flatpickr locale first day of Week
-                                <?php tf_flatpickr_locale( "root" ); ?>
+                                <?php self::tf_flatpickr_locale( "root" ); ?>
 
                                 $(".tf-hotel-template-4 #tf-check-in").on('click', function () {
                                     $("#check-in-out-date").click();
@@ -2000,7 +2000,7 @@ class Helper {
                                     minDate: "today",
 
                                     // flatpickr locale
-                                    <?php tf_flatpickr_locale(); ?>
+                                    <?php self::tf_flatpickr_locale(); ?>
 
                                     onReady: function (selectedDates, dateStr, instance) {
                                         instance.element.value = dateStr.replace(/[a-z]+/g, '-');

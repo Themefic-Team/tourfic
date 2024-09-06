@@ -2316,9 +2316,9 @@
             }
         });
 
-        $('.tf-archive-hotel-type').select2({
-            allowClear: true,
-        });
+        // $('.tf-archive-hotel-type').select2({
+        //     allowClear: true,
+        // });
 
         // GOOGLE MAP INITIALIZE
         var mapLocations = $('#map-datas').html();
