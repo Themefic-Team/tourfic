@@ -485,6 +485,41 @@
         */
 
         const makecarFilter = () => {
+            if(tf_params.location_car_search){
+                if ($.trim($('#tf_pickup_location').val()) == '' && $.trim($('#tf_dropoff_location').val()) == '') {
+                    if ($('#tf-required').length === 0) {
+                        if($('.tf-driver-location').length === 1){
+                            $('.tf-driver-location').append('<span id="tf-required" class="required"><b>Select Pickup & Dropoff Location</b></span>');
+                        }else{
+                            $("#tf_pickup_location").trigger("click");
+                        }
+                    }
+                    $('.tf-filter-cars').removeClass('tf-btn-loading');
+                    return;
+                } else {
+                    if ($('#tf-required').length === 1) {
+                        $('.tf-driver-location .required').remove();
+                    }
+                }
+            }
+
+            if(tf_params.date_car_search){
+                if ($.trim($('.tf_pickup_date').val()) == '' && $.trim($('.tf_dropoff_date').val()) == '') {
+                    if ($('#tf-required').length === 0) {
+                        if($('.tf-driver-location').length === 1){
+                            $('.tf-driver-location').append('<span id="tf-required" class="required"><b>Select Pickup & Dropoff Date</b></span>');
+                        }else{
+                            $(".tf_pickup_date").trigger("click");
+                        }
+                    }
+                    $('.tf-filter-cars').removeClass('tf-btn-loading');
+                    return;
+                } else {
+                    if ($('#tf-required').length === 1) {
+                        $('.tf-driver-location .required').remove();
+                    }
+                }
+            }
             
             let same_location = $('input[name="same_location"]:checked').val();
             let driver_age = $('input[name="driver_age"]:checked').val();

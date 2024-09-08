@@ -185,6 +185,9 @@
                                 }
                             }
                         }
+                        span#tf-required{
+                            color: red;
+                        }
                     }
                     .tf-submit-button{
                         button{
@@ -324,6 +327,9 @@
                                 margin: 0;
                                 padding: 0;
                                 display: flow-root;
+                                &.hidden{
+                                    display: none;
+                                }
                                 label{
                                     color: #566676;
                                     font-size: 16px;

@@ -1405,6 +1405,45 @@
 
         });
 
+        $('.tf-category-lists').each(function () {
+
+            var len = $(this).find('ul').children().length;
+            $(this).find('.see-more').hide();
+            if (len > 4) {
+                $(this).find('.see-more').show();
+            }
+            //hide items if crossed showing limit
+            $(this).find('.filter-item').filter(function (index) {
+                return index > 3;
+            }).addClass("hidden");
+
+        });
+        /* see more checkbox filter started */
+
+        $('.tf-category-lists a.see-more').on('click', function (e) {
+            var $this = $(this);
+            e.preventDefault();
+            $this.parent('.tf-category-lists').find('.filter-item').filter(function (index) {
+                return index > 3;
+            }).removeClass("hidden");
+            $this.hide();
+
+            $this.parent('.tf-category-lists').find('.see-less').show();
+        });
+
+        /* see less checkbox filter started */
+
+        $('.tf-category-lists a.see-less').on('click', function (e) {
+            var $this = $(this);
+            e.preventDefault();
+            $this.parent('.tf-category-lists').find('.filter-item').filter(function (index) {
+                return index > 3;
+            }).addClass("hidden");
+            $this.hide();
+            $this.parent('.tf-category-lists').find('.see-more').show();
+        });
+
+
         /* see more checkbox filter end */
 
         //active checkbox bg
