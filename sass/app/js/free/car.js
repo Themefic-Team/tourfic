@@ -458,6 +458,70 @@
 
         });
 
+        /*
+        * Car Quick Booking
+        * @author Jahid
+        */
+
+        $(document).on('click', '.quick-booking', function (e) {
+            let $this = $(this);
+
+            var pickup = $('#tf_pickup_location').val();
+            let dropoff = $('#tf_dropoff_location').val();
+            let pickup_date = $this.closest('.tf-booking-btn').find('#pickup_date').val();
+            let dropoff_date = $this.closest('.tf-booking-btn').find('#dropoff_date').val();
+            let pickup_time = $this.closest('.tf-booking-btn').find('#pickup_time').val();
+            let dropoff_time = $this.closest('.tf-booking-btn').find('#dropoff_time').val();
+            let post_id = $this.closest('.tf-booking-btn').find('#post_id').val();
+
+            var data = {
+                action: 'tf_car_booking',
+                _nonce: tf_params.nonce,
+                post_id: post_id,
+                pickup: pickup,
+                dropoff: dropoff,
+                pickup_date: pickup_date,
+                dropoff_date: dropoff_date,
+                pickup_time: pickup_time,
+                dropoff_time: dropoff_time
+            };
+
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    $this.addClass('tf-btn-loading');
+                },
+                success: function (data) {
+                    $this.unblock();
+
+                    var response = JSON.parse(data);
+                    if (response.without_payment == 'false') {
+                        if (response.status == 'error') {
+
+                            if (response.errors) {
+                                response.errors.forEach(function (text) {
+                                    notyf.error(text);
+                                });
+                            }
+
+                            return false;
+                        } else {
+
+                            if (response.redirect_to) {
+                                window.location.replace(response.redirect_to);
+                            } else {
+                                jQuery(document.body).trigger('added_to_cart');
+                            }
+
+                        }
+                    }
+                }
+            });
+
+        });
+
 
         /*
         * Car Archive View
