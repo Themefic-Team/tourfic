@@ -300,7 +300,7 @@ class Pricing {
 		);
 	}
 
-	public static function get_all_price() {
+	public static function get_min_max_price_from_all_apartment() {
 		$min_max_price = array();
 		
 		$apt_args = array(
@@ -342,9 +342,25 @@ class Pricing {
 
 		wp_reset_query();
 
+		if ( ! empty( $min_max_price ) && count( $min_max_price ) > 1 ) {
+			$max_price = max( $min_max_price );
+			$min_price = min( $min_max_price );
+			if ( $max_price == $min_price ) {
+				$min_price = 1;
+			}
+		}
+		if ( ! empty( $min_max_price ) && count( $min_max_price ) == 1 ) {
+			$max_price = max( $min_max_price );
+			$min_price = 1;
+		}
+		if ( empty( $min_max_price ) ) {
+			$max_price = 0;
+			$min_price = 0;
+		}
+
 		return array(
-			'min' => ! empty( $min_max_price ) ? min( $min_max_price ) : 0,
-			'max' => ! empty( $min_max_price ) ? max( $min_max_price ) : 0,
+			'max' => $max_price,
+			'min' => $min_price,
 		);
 	}
 
