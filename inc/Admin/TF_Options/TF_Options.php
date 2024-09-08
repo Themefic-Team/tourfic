@@ -498,7 +498,7 @@ class TF_Options {
 					$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] );
 				} elseif ( $item['price_by'] == '2' ) {
 					$item['title'] = __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
-				} else {
+				} elseif ( $item['price_by'] == '3' ) {
 					$item['title'] = '';
 					if ( ! empty( $item['options_count'] ) ) {
 						for ( $i = 0; $i <= $item['options_count'] - 1; $i ++ ) {
