@@ -16360,6 +16360,97 @@ html {
   height: 260px;
   width: 100%;
 }
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-form-wrapper p {
+  margin: 0 0 20px 0;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-form-container {
+  min-width: auto;
+  background: transparent !important;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-form-container .tf-rating-wrapper {
+  margin-bottom: 20px;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-form-container .tf-review-submit input[type=submit] {
+  padding: 16px 32px !important;
+  border-radius: 8px !important;
+  background: #0866c4 !important;
+  color: #fff !important;
+  font-size: 16px !important;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  cursor: pointer;
+  border: 0px solid !important;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-data {
+  margin-bottom: 32px;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-data .tf-review-data-average .avg-review {
+  color: #27333F;
+  font-size: 38px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%; /* 45.6px */
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-data .tf-review-data-average .avg-review i {
+  font-size: 20px;
+  color: #FFBF0F;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-data .tf-review-data-average .tf-review-all-info p {
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 24px */
+  margin: 0;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-data-features .tf-percent-progress {
+  display: flex;
+  gap: 16px 32px;
+  flex-wrap: wrap;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-data-features .tf-progress-bar {
+  height: 5px;
+  background: #C0CCD8;
+  border-radius: 32px;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-data-features .tf-progress-item {
+  width: calc(50% - 16px);
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-data-features .tf-progress-item {
+    width: 100%;
+  }
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-data-features .tf-progress-bar {
+  position: relative;
+  margin-bottom: 8px;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-data-features .tf-progress-bar .percent-progress {
+  position: absolute;
+  background: #0866C4;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  border-radius: 7px;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-data-features .tf-review-feature-label {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-data-features .tf-review-feature-label p {
+  margin: 0;
+  color: #27333F;
+  font-size: 12px !important;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 14.4px */
+  text-transform: capitalize;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-data-features .tf-review-feature-label p.feature-rating {
+  font-weight: 700;
+}
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-faq-section {
   width: 100%;
 }

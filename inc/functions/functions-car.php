@@ -241,11 +241,16 @@ if ( ! function_exists( 'get_cars_min_max_price' ) ) {
 
 		$tf_car_min_max_query = new \WP_Query( $tf_car_min_max );
 		$tf_car_min_maxprices = array();
-
+		$tf_car_min_max_seat = array();
 		if ( $tf_car_min_max_query->have_posts() ):
 			while ( $tf_car_min_max_query->have_posts() ) : $tf_car_min_max_query->the_post();
 
 				$meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
+				
+				if ( ! empty( $meta['passengers'] ) ) {
+					$tf_car_min_max_seat[] = $meta['passengers'];
+				}
+
 				if ( ! empty( $meta['car_rent'] ) ) {
 					$tf_car_min_maxprices[] = $meta['car_rent'];
 				}
@@ -289,9 +294,31 @@ if ( ! function_exists( 'get_cars_min_max_price' ) ) {
 			$car_min_price = 0;
 		}
 
+		if ( ! empty( $tf_car_min_max_seat ) && count( $tf_car_min_max_seat ) > 1 ) {
+			$car_max_seat_val = max( $tf_car_min_max_seat );
+			$car_min_seat_val = min( $tf_car_min_max_seat );
+			if ( $car_max_seat_val == $car_min_seat_val ) {
+				$car_max_seat = max( $tf_car_min_max_seat );
+				$car_min_seat = 1;
+			} else {
+				$car_max_seat = max( $tf_car_min_max_seat );
+				$car_min_seat = min( $tf_car_min_max_seat );
+			}
+		}
+		if ( ! empty( $tf_car_min_max_seat ) && count( $tf_car_min_max_seat ) == 1 ) {
+			$car_max_seat = max( $tf_car_min_max_seat );
+			$car_min_seat = 1;
+		}
+		if ( empty( $tf_car_min_max_seat ) ) {
+			$car_max_seat = 0;
+			$car_min_seat = 0;
+		}
+
 		return array(
 			'min' => $car_min_price,
 			'max' => $car_max_price,
+			'min_seat' => $car_min_seat,
+			'max_seat' => $car_max_seat
 		);
 	}
 }

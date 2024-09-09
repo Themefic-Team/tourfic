@@ -321,6 +321,28 @@ class TF_Review {
                 'r-field-type' => esc_html__( 'Location', 'tourfic' ),
             ),
         ];
+
+        $default_cars_field = [
+            array(
+                'r-field-type' => esc_html__( 'Staff', 'tourfic' ),
+            ),
+            array(
+                'r-field-type' => esc_html__( 'Facilities', 'tourfic' ),
+            ),
+            array(
+                'r-field-type' => esc_html__( 'Cleanliness', 'tourfic' ),
+            ),
+            array(
+                'r-field-type' => esc_html__( 'Comfort', 'tourfic' ),
+            ),
+            array(
+                'r-field-type' => esc_html__( 'Value for money', 'tourfic' ),
+            ),
+            array(
+                'r-field-type' => esc_html__( 'Location', 'tourfic' ),
+            ),
+        ];
+
         $default_tours_field      = [
             array(
                 'r-field-type' => esc_html__( 'Guide', 'tourfic' ),
@@ -340,8 +362,12 @@ class TF_Review {
         $tfopt_hotels     = ! empty( Helper::tf_data_types( Helper::tfopt( 'r-hotel' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'r-hotel' ) ) : $default_hotels_field;
         $tfopt_apartments = ! empty( Helper::tf_data_types( Helper::tfopt( 'r-apartment' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'r-apartment' ) ) : $default_apartments_field;
         $tfopt_tours      = ! empty( Helper::tf_data_types( Helper::tfopt( 'r-tour' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'r-tour' ) ) : $default_tours_field;
+        $tfopt_cars      = ! empty( Helper::tf_data_types( Helper::tfopt( 'r-car' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'r-car' ) ) : $default_cars_field;
     
         $fields = 'tf_tours' === $type ? $tfopt_tours : ( 'tf_apartment' === $type ? $tfopt_apartments : $tfopt_hotels );
+        if('tf_carrental' === $type){
+            $fields = $tfopt_cars;
+        }
         if ( ! empty( $fields ) && gettype( $fields ) == "string" ) {
             $tf_hotel_fields_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
                 return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';

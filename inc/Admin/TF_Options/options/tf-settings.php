@@ -3860,6 +3860,46 @@ TF_Settings::option( 'tf_settings', array(
 					)
 				),
 
+				array(
+					'id'       => 'r-car',
+					'class'    => 'disable-sortable',
+					'type'     => 'repeater',
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'label'        => __( 'Review Fields for Cars', 'tourfic' ),
+					'subtitle'     => __( 'Design customer review fields for cars. Custom fields are permitted.', 'tourfic' ),
+					'max'      => '6',
+					'drag_only'   => true,
+					'field_title'  => 'r-field-type',
+					'fields'   => array(
+						array(
+							'id'    => 'r-field-type',
+							'type'  => 'text',
+							'label' => __( 'Review for', 'tourfic' ),
+						),
+
+					),
+					'default'  => array(
+						array(
+							'r-field-type' => __( 'Staff', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Facilities', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Cleanliness', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Comfort', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Value for money', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Location', 'tourfic' ),
+						),
+					)
+				),
+
 
 				array(
 					'id'       => 'tf_delete_old_review_fields_button',
