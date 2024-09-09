@@ -127,7 +127,7 @@ $tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' )
                                 </ul>
                             </div>
                             <div class="tf-submit-button">
-                                <input type="hidden" id="tf_post_type" value="<?php echo esc_attr("tf_carrental"); ?>">
+                                <input type="hidden" class="tf-post-type" value="<?php echo esc_attr("tf_carrental"); ?>">
                                 <button class="tf-filter-cars"><?php esc_html_e("Search", "tourfic"); ?> <i class="ri-search-line"></i></button>
                             </div>
 
@@ -256,7 +256,7 @@ $tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' )
 
                     <div class="tf-car-archive-result">
                         
-                        <div class="tf-car-result tf-flex tf-flex-gap-32 <?php echo $tf_defult_views=="list" ? esc_attr('list-view') : esc_attr('grid-view'); ?>">
+                        <div class="tf-car-result archive_ajax_result tf-flex tf-flex-gap-32 <?php echo $tf_defult_views=="list" ? esc_attr('list-view') : esc_attr('grid-view'); ?>">
                             
                             <?php
                             if ( have_posts() ) {

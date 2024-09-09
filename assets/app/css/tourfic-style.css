@@ -17729,5 +17729,17 @@ html {
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn button {
   margin-top: auto;
 }
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result .tf_posts_navigation {
+  width: 100%;
+}
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers {
+  background: #0866c4;
+  color: #fff;
+  border-radius: 8px;
+}
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current {
+  background: #e6f2fe;
+  color: #566676;
+}
 
 /*# sourceMappingURL=tourfic-style.css.map*/

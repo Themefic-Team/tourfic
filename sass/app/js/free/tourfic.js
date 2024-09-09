@@ -40,8 +40,9 @@
 
         var filter_xhr;
         // Creating a function for reuse this filter in any where we needs.
-        const makeFilter = () => {
+        const makeFilter = (page=1) => {
             var dest = $('#tf-place').val();
+            var page = page;
             var adults = $('#adults').val();
             var room = $('#room').val();
             var children = $('#children').val();
@@ -51,7 +52,7 @@
             var endprice = $('.widget_tf_price_filters input[name="to"]').val();
             var tf_author = $('#tf_author').val();
             // split date range into dates
-            var checkedArr = checked.split(' - ');
+            var checkedArr = checked ? checked.split(' - ') : '';
             var checkin = checkedArr[0];
             var checkout = checkedArr[1];
             var posttype = $('.tf-post-type').val();
@@ -102,10 +103,25 @@
             let tfApartmentFeatures = termIdsByFeildName('tf_apartment_features');
             let tfApartmentTypes = termIdsByFeildName('tf_apartment_types');
 
+            let category = termIdsByFeildName('car_category');
+            let fuel_type = termIdsByFeildName('car_fueltype');
+            let engine_year = termIdsByFeildName('car_engine_year');
+            let min_seat = $('.widget_tf_seat_filters input[name="from"]').val();
+            let max_seat = $('.widget_tf_seat_filters input[name="to"]').val();
+            let same_location = $('input[name="same_location"]:checked').val();
+            let driver_age = $('input[name="driver_age"]:checked').val();
+            let pickup_date = $('.tf_pickup_date').val();
+            let dropoff_date = $('.tf_dropoff_date').val();
+            let pickup_time = $('.tf_pickup_time').val();
+            let dropoff_time = $('.tf_dropoff_time').val();
+            let pickup_slug = $('#tf_pickup_location_id').val();
+            let dropoff_slug = $('#tf_dropoff_location_id').val();
+
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
             formData.append('_nonce', tf_params.nonce);
             formData.append('type', posttype);
+            formData.append('page', page);
             formData.append('dest', dest);
             formData.append('adults', adults);
             formData.append('room', room);
@@ -123,6 +139,19 @@
             formData.append('tf_apartment_features', tfApartmentFeatures);
             formData.append('tf_apartment_types', tfApartmentTypes);
             formData.append('checked', checked);
+            formData.append('category', category);
+            formData.append('fuel_type', fuel_type);
+            formData.append('engine_year', engine_year);
+            formData.append('pickup', pickup_slug);
+            formData.append('dropoff', dropoff_slug);
+            formData.append('pickup_date', pickup_date);
+            formData.append('dropoff_date', dropoff_date);
+            formData.append('pickup_time', pickup_time);
+            formData.append('dropoff_time', dropoff_time);
+            formData.append('same_location', same_location);
+            formData.append('driver_age', driver_age);
+            formData.append('dropoff_time', dropoff_time);
+
             if (startprice) {
                 formData.append('startprice', startprice);
             }
@@ -132,6 +161,14 @@
             if (tf_author) {
                 formData.append('tf_author', tf_author);
             }
+
+            if (min_seat) {
+                formData.append('min_seat', min_seat);
+            }
+            if (max_seat) {
+                formData.append('max_seat', max_seat);
+            }
+
             // abort previous request
             if (filter_xhr && filter_xhr.readyState != 4) {
                 filter_xhr.abort();
@@ -203,124 +240,15 @@
         $(document).on('click', '.tf_posts_ajax_navigation a.page-numbers', function (e) {
             e.preventDefault();
             page = tf_page_pagination_number($(this).clone());
-            paginationMakeFilter(page);
+            makeFilter(page);
         });
-
-        // Creating a function for reuse this filter in any where we needs.
-        const paginationMakeFilter = (page) => {
-            var dest = $('#tf-place').val();
-            var page = page;
-            var adults = $('#adults').val();
-            var room = $('#room').val();
-            var children = $('#children').val();
-            var checked = $('#check-in-out-date').val();
-            var startprice = $('.widget_tf_price_filters input[name="from"]').val();
-            var endprice = $('.widget_tf_price_filters input[name="to"]').val();
-            var tf_author = $('#tf_author').val();
-            // split date range into dates
-            var checkedArr = checked.split(' - ');
-            var checkin = checkedArr[0];
-            var checkout = checkedArr[1];
-            var posttype = $('.tf-post-type').val();
-
-            let filters = termIdsByFeildName('tf_filters');
-            let tfHotelTypes = termIdsByFeildName('tf_hotel_types');
-            let features = termIdsByFeildName('tf_features');
-            let tour_features = termIdsByFeildName('tour_features');
-            let attractions = termIdsByFeildName('tf_attractions');
-            let activities = termIdsByFeildName('tf_activities');
-            let tfTourTypes = termIdsByFeildName('tf_tour_types');
-            let tfApartmentFeatures = termIdsByFeildName('tf_apartment_features');
-            let tfApartmentTypes = termIdsByFeildName('tf_apartment_types');
-
-            var formData = new FormData();
-            formData.append('action', 'tf_trigger_filter');
-            formData.append('_nonce', tf_params.nonce);
-            formData.append('type', posttype);
-            formData.append('page', page);
-            formData.append('dest', dest);
-            formData.append('adults', adults);
-            formData.append('room', room);
-            formData.append('children', children);
-            formData.append('checkin', checkin);
-            formData.append('checkout', checkout);
-            formData.append('filters', filters);
-            formData.append('tf_hotel_types', tfHotelTypes);
-            formData.append('features', features);
-            formData.append('tour_features', tour_features);
-            formData.append('attractions', attractions);
-            formData.append('activities', activities);
-            formData.append('tf_tour_types', tfTourTypes);
-            formData.append('tf_apartment_features', tfApartmentFeatures);
-            formData.append('tf_apartment_types', tfApartmentTypes);
-            formData.append('checked', checked);
-            if (startprice) {
-                formData.append('startprice', startprice);
-            }
-            if (endprice) {
-                formData.append('endprice', endprice);
-            }
-            if (tf_author) {
-                formData.append('tf_author', tf_author);
-            }
-            // abort previous request
-            if (filter_xhr && filter_xhr.readyState != 4) {
-                filter_xhr.abort();
-            }
-
-            filter_xhr = $.ajax({
-                type: 'post',
-                url: tf_params.ajax_url,
-                data: formData,
-                processData: false,
-                contentType: false,
-                beforeSend: function (data) {
-                    $('.archive_ajax_result').block({
-                        message: null,
-                        overlayCSS: {
-                            background: "#fff",
-                            opacity: .5
-                        }
-                    });
-
-                    if ($.trim(checkin) !== '') {
-                        $('.tf_booking-dates .tf_label-row').find('#tf-required').remove();
-                    }
-                },
-                complete: function (data) {
-                    $('.archive_ajax_result').unblock();
-
-                    // total posts 0 if not found by @hena
-                    if ($('.tf-nothing-found')[0]) {
-                        $('.tf_posts_navigation').hide();
-                        var foundPosts = $('.tf-nothing-found').data('post-count');
-                        $('.tf-total-results').find('span').html(foundPosts);
-                    } else {
-                        $('.tf_posts_navigation').show();
-                        var postsCount = $('.tf-posts-count').html();
-                        $('.tf-total-results').find('span').html(postsCount);
-                    }
-
-                },
-                success: function (data, e) {
-                    $('.archive_ajax_result').unblock();
-                    $('.archive_ajax_result').html(data);
-                    // @KK show notice in every success request
-                    notyf.success(tf_params.ajax_result_success);
-                },
-                error: function (data) {
-                    console.log(data);
-                },
-
-            });
-        };
 
         // Look for submission and change on filter widgets
         $(document).on('submit', '#tf-widget-booking-search', function (e) {
             e.preventDefault();
             makeFilter()
         });
-        $(document).on('change', '[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types]', function () {
+        $(document).on('change', '[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types], [name*=car_category],[name*=car_fueltype],[name*=car_engine_year]', function () {
             if($(".filter-reset-btn").length>0){
                 $(".filter-reset-btn").show();
             }
@@ -336,9 +264,60 @@
         // Archive Page Filter Reset
         $(document).on('click', '.filter-reset-btn', function (e) {
             e.preventDefault();
-            $('[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types]').prop('checked', false);
+            $('[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types], [name*=car_category],[name*=car_fueltype],[name*=car_engine_year]').prop('checked', false);
             makeFilter();
             $(".filter-reset-btn").hide();
+        });
+
+        /*
+        * Car Archive Filter
+        * @author Jahid
+        */
+        $(document).on('click', '.tf-filter-cars', function (e) {
+            let $this = $(this);
+            $this.addClass('tf-btn-loading');
+
+            if(tf_params.location_car_search){
+                if ($.trim($('#tf_pickup_location').val()) == '' && $.trim($('#tf_dropoff_location').val()) == '') {
+                    if ($('#tf-required').length === 0) {
+                        if($('.tf-driver-location').length === 1){
+                            $('.tf-driver-location').append('<span id="tf-required" class="required"><b>Select Pickup & Dropoff Location</b></span>');
+                        }else{
+                            $("#tf_pickup_location").trigger("click");
+                        }
+                    }
+                    $('.tf-filter-cars').removeClass('tf-btn-loading');
+                    return;
+                } else {
+                    if ($('#tf-required').length === 1) {
+                        $('.tf-driver-location .required').remove();
+                    }
+                }
+            }
+
+            if(tf_params.date_car_search){
+                if ($.trim($('.tf_pickup_date').val()) == '' && $.trim($('.tf_dropoff_date').val()) == '') {
+                    if ($('#tf-required').length === 0) {
+                        if($('.tf-driver-location').length === 1){
+                            $('.tf-driver-location').append('<span id="tf-required" class="required"><b>Select Pickup & Dropoff Date</b></span>');
+                        }else{
+                            $(".tf_pickup_date").trigger("click");
+                        }
+                    }
+                    $('.tf-filter-cars').removeClass('tf-btn-loading');
+                    return;
+                } else {
+                    if ($('#tf-required').length === 1) {
+                        $('.tf-driver-location .required').remove();
+                    }
+                }
+            }
+
+            if($(".tf-filter-reset-btn").length>0){
+                $(".tf-filter-reset-btn").show();
+            }
+
+            makeFilter();
         });
 
         /*
@@ -1588,6 +1567,60 @@
         };
         if (tf_params.tf_apartment_min_price != 0 && tf_params.tf_apartment_max_price != 0) {
             $('.tf-apartment-result-price-range').alRangeSlider(tf_apartment_search_range);
+        }
+
+        /**
+         * Car Min and Max Range Filtering
+         * @author Jahid
+        */
+        let tf_car_search_range = {
+            range: {
+                min: parseInt(tf_params.tf_car_min_price),
+                max: parseInt(tf_params.tf_car_max_price),
+                step: 1
+            },
+            initialSelectedValues: {
+                from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt(tf_params.tf_car_min_price),
+                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_car_max_price)
+            },
+            grid: false,
+            theme: "dark",
+            onFinish: function () {
+                if($(".tf-filter-reset-btn").length>0){
+                    $(".tf-filter-reset-btn").show();
+                }
+                makeFilter();
+            }
+        };
+        if (tf_params.tf_car_min_price != 0 && tf_params.tf_car_max_price != 0) {
+            $('.tf-car-result-price-range').alRangeSlider(tf_car_search_range);
+        }
+
+        /**
+         * Car Seat Range Filtering
+         * @author Jahid
+        */
+        let tf_car_search_seat_range = {
+            range: {
+                min: parseInt(tf_params.tf_car_min_seat),
+                max: parseInt(tf_params.tf_car_max_seat),
+                step: 1
+            },
+            initialSelectedValues: {
+                from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt(tf_params.tf_car_min_seat),
+                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_car_max_seat)
+            },
+            grid: false,
+            theme: "dark",
+            onFinish: function () {
+                if($(".tf-filter-reset-btn").length>0){
+                    $(".tf-filter-reset-btn").show();
+                }
+                makeFilter();
+            }
+        };
+        if (tf_params.tf_car_min_seat != 0 && tf_params.tf_car_max_seat != 0) {
+            $('.tf-car-result-seat-range').alRangeSlider(tf_car_search_seat_range);
         }
 
         /*

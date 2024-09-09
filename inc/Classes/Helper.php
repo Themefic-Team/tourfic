@@ -740,7 +740,7 @@ class Helper {
 		$infant = ! empty( $_POST['infant'] ) && $_POST['infant'] != "undefined" ? sanitize_text_field( $_POST['infant'] ) : '';
 
 		$room         = ! empty( $_POST['room'] ) ? sanitize_text_field( $_POST['room'] ) : '';
-		$check_in_out = ! empty( $_POST['checked'] ) ? sanitize_text_field( $_POST['checked'] ) : '';
+		$check_in_out = ! empty( $_POST['checked'] ) && 'undefined'!=$_POST['checked'] ? sanitize_text_field( $_POST['checked'] ) : '';
 
 		$relation        = self::tfopt( 'search_relation', 'AND' );
 		$filter_relation = self::tfopt( 'filter_relation', 'OR' );
@@ -854,7 +854,7 @@ class Helper {
 			);
 		}
 
-		if ( $search ) {
+		if ( $search && 'undefined'!=$search ) {
 
 			$args['tax_query'] = array(
 				'relation' => 'AND',

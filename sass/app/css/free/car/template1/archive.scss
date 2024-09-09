@@ -696,6 +696,19 @@
                             }
                         }
                     }
+
+                    .tf_posts_navigation{
+                        width: 100%;
+                        .page-numbers{
+                            background: #0866c4;
+                            color: #fff;
+                            border-radius: 8px;
+                        }
+                        .page-numbers.current{
+                            background: #e6f2fe;
+                            color: #566676;
+                        }
+                    }
                 }
             }
         }
