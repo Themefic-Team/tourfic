@@ -240,6 +240,8 @@
             }
             .tf-total-result-bar{
                 text-align: right;
+                display: flex;
+                gap: 2px;
                 span{
                     color: #27333F;
                     font-size: 16px;

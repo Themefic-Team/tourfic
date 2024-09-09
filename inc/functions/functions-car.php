@@ -157,8 +157,9 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
  * @include
  */
 
-function tf_car_availability_response($car_meta, $pickup='', $dropoff='', $tf_pickup_date='', $tf_dropoff_date='', $tf_pickup_time='', $tf_dropoff_time='', $tf_startprice='', $tf_endprice='') {
+function tf_car_availability_response($car_meta, $pickup='', $dropoff='', $tf_pickup_date='', $tf_dropoff_date='', $tf_pickup_time='', $tf_dropoff_time='', $tf_startprice='', $tf_endprice='', array &$not_found) {
 
+	$has_car = false;
 	$pricing_type = !empty($car_meta["pricing_type"]) ? $car_meta["pricing_type"] : 'day_hour';
 
 	$date_pricing = !empty($meta["date_prices"]) ? $meta["date_prices"] : '';
@@ -174,19 +175,19 @@ function tf_car_availability_response($car_meta, $pickup='', $dropoff='', $tf_pi
 				if($startDate==strtotime($tf_pickup_date) && $endDate==strtotime($tf_dropoff_date)){
 
 					if($tf_startprice <= $entry['price'] && $entry['price'] <= $tf_endprice){
-						return true;
+						$has_car = true;
 					}else{
-						return false;
+						$has_car = false;
 					}
 					break;
 
 				}else{
-					return false;
+					$has_car = false;
 				}
 			}
 
 		}else{
-			return true;
+			$has_car = true;
 		}
 
 	} else if( !empty($tf_pickup_date) && !empty($tf_dropoff_date) && 'day_hour'==$pricing_type && !empty($day_pricing) ){
@@ -194,17 +195,33 @@ function tf_car_availability_response($car_meta, $pickup='', $dropoff='', $tf_pi
 		if ( ! empty( $tf_startprice ) && ! empty( $tf_endprice ) ) {
 
 			if($tf_startprice <= $entry['price'] && $entry['price'] <= $tf_endprice){
-				return true;
+				$has_car = true;
 			}else{
-				return false;
+				$has_car = false;
 			}
 
 		}else{
-			return true;
+			$has_car = true;
 		}
 
 	}else{
-		return true;
+		$has_car = true;
+	}
+
+	// Conditional hotel showing
+	if ( $has_car ) {
+
+		$not_found[] = array(
+			'post_id' => get_the_ID(),
+			'found'   => 0,
+		);
+
+	} else {
+
+		$not_found[] = array(
+			'post_id' => get_the_ID(),
+			'found'   => 1,
+		);
 	}
 
 }

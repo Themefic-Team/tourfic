@@ -127,6 +127,7 @@ $tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' )
                                 </ul>
                             </div>
                             <div class="tf-submit-button">
+                                <input type="hidden" id="tf_post_type" value="<?php echo esc_attr("tf_carrental"); ?>">
                                 <button class="tf-filter-cars"><?php esc_html_e("Search", "tourfic"); ?> <i class="ri-search-line"></i></button>
                             </div>
 
@@ -225,8 +226,18 @@ $tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' )
                             <li class="<?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" data-view="list"><i class="ri-list-check"></i></li>
                         </ul>
                     </div>
+                    <?php 
+                    $post_count = $GLOBALS['wp_query']->post_count;
+                    ?>
                     <div class="tf-total-result-bar">
-                        <span>Showing 8 of 15 Results</span>
+                        <span>
+                            <?php echo esc_html__( 'Total Results ', 'tourfic' ); ?>
+                        </span>
+                        <span><?php echo ' ('; ?> </span>
+						<div class="tf-total-results">
+							<span><?php echo esc_html( $post_count ); ?> </span>
+						</div>
+						<span><?php echo ')'; ?> </span>
                     </div>
                 </div>
                 <div class="tf-car-details-column tf-flex tf-flex-gap-32">

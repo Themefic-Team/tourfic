@@ -549,6 +549,95 @@
         */
 
         const makecarFilter = () => {
+        
+            let same_location = $('input[name="same_location"]:checked').val();
+            let driver_age = $('input[name="driver_age"]:checked').val();
+            var pickup = $('#tf_pickup_location').val();
+            let dropoff = $('#tf_dropoff_location').val();
+            let pickup_date = $('.tf_pickup_date').val();
+            let dropoff_date = $('.tf_dropoff_date').val();
+            let pickup_time = $('.tf_pickup_time').val();
+            let dropoff_time = $('.tf_dropoff_time').val();
+            let pickup_slug = $('#tf_pickup_location_id').val();
+            let dropoff_slug = $('#tf_dropoff_location_id').val();
+            let post_type = $('#tf_post_type').val();
+
+            let startprice = $('.widget_tf_price_filters input[name="from"]').val();
+            let endprice = $('.widget_tf_price_filters input[name="to"]').val();
+
+            let min_seat = $('.widget_tf_seat_filters input[name="from"]').val();
+            let max_seat = $('.widget_tf_seat_filters input[name="to"]').val();
+
+            let category = termIdsByFeildName('car_category');
+            let fuel_type = termIdsByFeildName('car_fueltype');
+            let engine_year = termIdsByFeildName('car_engine_year');
+
+            var data = {
+                action: 'tf_trigger_filter',
+                _nonce: tf_params.nonce,
+                pickup: pickup_slug,
+                dropoff: dropoff_slug,
+                pickup_date: pickup_date,
+                dropoff_date: dropoff_date,
+                pickup_time: pickup_time,
+                dropoff_time: dropoff_time,
+                same_location: same_location,
+                driver_age: driver_age,
+                category: category,
+                fuel_type: fuel_type,
+                engine_year: engine_year,
+                startprice: startprice,
+                endprice: endprice,
+                min_seat: min_seat,
+                max_seat: max_seat,
+                type: post_type
+            };
+
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                },
+                success: function (data) {
+                    if(data){
+                        $('.tf-car-result').html(data);
+                    }else{
+                        $('.tf-car-result').html('No Car Founds!');
+                    }
+                    var postsCount = $('.tf-posts-count').html();
+                    $('.tf-total-results').find('span').html(postsCount);
+                    $('.tf-filter-cars').removeClass('tf-btn-loading');
+                }
+            });
+        }
+
+        /*
+        * Get term ids by field name
+        * @auther Foysal
+        */
+        const termIdsByFeildName = (fieldName) => {
+            let termIds = [];
+            $(`[name*=${fieldName}]`).each(function () {
+                if ($(this).is(':checked')) {
+                    termIds.push($(this).val());
+                }
+            });
+            return termIds.join();
+        }
+        
+        $(document).on('change', '[name*=car_category],[name*=car_fueltype],[name*=car_engine_year]', function () {
+            if($(".tf-filter-reset-btn").length>0){
+                $(".tf-filter-reset-btn").show();
+            }
+            makecarFilter();
+        });
+
+
+        $(document).on('click', '.tf-filter-cars', function (e) {
+            let $this = $(this);
+            $this.addClass('tf-btn-loading');
+
             if(tf_params.location_car_search){
                 if ($.trim($('#tf_pickup_location').val()) == '' && $.trim($('#tf_dropoff_location').val()) == '') {
                     if ($('#tf-required').length === 0) {
@@ -584,90 +673,6 @@
                     }
                 }
             }
-            
-            let same_location = $('input[name="same_location"]:checked').val();
-            let driver_age = $('input[name="driver_age"]:checked').val();
-            var pickup = $('#tf_pickup_location').val();
-            let dropoff = $('#tf_dropoff_location').val();
-            let pickup_date = $('.tf_pickup_date').val();
-            let dropoff_date = $('.tf_dropoff_date').val();
-            let pickup_time = $('.tf_pickup_time').val();
-            let dropoff_time = $('.tf_dropoff_time').val();
-            let pickup_slug = $('#tf_pickup_location_id').val();
-            let dropoff_slug = $('#tf_dropoff_location_id').val();
-
-            let startprice = $('.widget_tf_price_filters input[name="from"]').val();
-            let endprice = $('.widget_tf_price_filters input[name="to"]').val();
-
-            let min_seat = $('.widget_tf_seat_filters input[name="from"]').val();
-            let max_seat = $('.widget_tf_seat_filters input[name="to"]').val();
-
-            let category = termIdsByFeildName('car_category');
-            let fuel_type = termIdsByFeildName('car_fueltype');
-            let engine_year = termIdsByFeildName('car_engine_year');
-
-            var data = {
-                action: 'tf_car_filters',
-                _nonce: tf_params.nonce,
-                pickup: pickup_slug,
-                dropoff: dropoff_slug,
-                pickup_date: pickup_date,
-                dropoff_date: dropoff_date,
-                pickup_time: pickup_time,
-                dropoff_time: dropoff_time,
-                same_location: same_location,
-                driver_age: driver_age,
-                category: category,
-                fuel_type: fuel_type,
-                engine_year: engine_year,
-                startprice: startprice,
-                endprice: endprice,
-                min_seat: min_seat,
-                max_seat: max_seat
-            };
-
-            $.ajax({
-                url: tf_params.ajax_url,
-                type: 'POST',
-                data: data,
-                beforeSend: function () {
-                },
-                success: function (data) {
-                    if(data){
-                        $('.tf-car-result').html(data);
-                    }else{
-                        $('.tf-car-result').html('No Car Founds!');
-                    }
-                    $('.tf-filter-cars').removeClass('tf-btn-loading');
-                }
-            });
-        }
-
-        /*
-        * Get term ids by field name
-        * @auther Foysal
-        */
-        const termIdsByFeildName = (fieldName) => {
-            let termIds = [];
-            $(`[name*=${fieldName}]`).each(function () {
-                if ($(this).is(':checked')) {
-                    termIds.push($(this).val());
-                }
-            });
-            return termIds.join();
-        }
-        
-        $(document).on('change', '[name*=car_category],[name*=car_fueltype],[name*=car_engine_year]', function () {
-            if($(".tf-filter-reset-btn").length>0){
-                $(".tf-filter-reset-btn").show();
-            }
-            makecarFilter();
-        });
-
-
-        $(document).on('click', '.tf-filter-cars', function (e) {
-            let $this = $(this);
-            $this.addClass('tf-btn-loading');
 
             if($(".tf-filter-reset-btn").length>0){
                 $(".tf-filter-reset-btn").show();

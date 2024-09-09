@@ -17268,6 +17268,8 @@ html {
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-header .tf-total-result-bar {
   text-align: right;
+  display: flex;
+  gap: 2px;
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-header .tf-total-result-bar span {
   color: #27333F;
