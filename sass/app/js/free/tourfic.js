@@ -217,6 +217,9 @@
                     $('#tf_ajax_searchresult_loader').hide();
                     $('.archive_ajax_result').html(data);
                     // Filter Popup Removed
+                    if($('.tf-filter-cars')){
+                        $('.tf-filter-cars').removeClass('tf-btn-loading');
+                    }
                     if ($('.tf-details-right').length > 0) {
                         $('.tf-details-right').removeClass('tf-filter-show');
                     }
@@ -313,8 +316,8 @@
                 }
             }
 
-            if($(".tf-filter-reset-btn").length>0){
-                $(".tf-filter-reset-btn").show();
+            if($(".filter-reset-btn").length>0){
+                $(".filter-reset-btn").show();
             }
 
             makeFilter();
