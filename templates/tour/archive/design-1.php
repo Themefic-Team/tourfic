@@ -100,10 +100,6 @@ use Tourfic\Classes\Tour\Tour;
                     <div class="archive_ajax_result tf-item-cards tf-flex <?php echo $tf_defult_views=="list" ? esc_attr('tf-layout-list') : esc_attr('tf-layout-grid'); ?> ">
 
                     <?php
-                    echo "<pre>";
-                    print_r($_GET);
-                    echo "</pre>";
-                    // die(); // added by - Sunvi
                     $loop2 = $loop;
                     if ( $loop->have_posts() ) {          
                         while ( $loop->have_posts() ) {

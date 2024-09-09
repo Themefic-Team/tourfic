@@ -24,16 +24,11 @@ class Helper {
 		add_action( 'wp_ajax_nopriv_tf_checkout_cart_item_remove', array( $this, 'tf_checkout_cart_item_remove' ) );
 		add_filter( 'woocommerce_cart_item_subtotal', array( $this, 'tf_remove_icon_add_to_order_item' ), 10, 3 );
 		add_action( 'wp_ajax_tf_month_reports', array( $this, 'tf_month_chart_filter_callback' ) );
-		add_action( 'wp_ajax_nopriv_tf_trigger_tax_filter', array( $this, 'tf_trigger_tax_filter_callback' ) );
-		add_action( 'wp_ajax_tf_trigger_tax_filter', array( $this, 'tf_trigger_tax_filter_callback' ) );
 
 		// tax filter
 		add_action( 'wp_ajax_nopriv_tf_trigger_filter', array( $this, 'tf_search_result_ajax_sidebar' ) );
 		add_action( 'wp_ajax_tf_trigger_filter', array( $this, 'tf_search_result_ajax_sidebar' ) );
-        
-        // tax filter
-		add_action( 'wp_ajax_nopriv_tf_archive_ordering_filter', array( $this, 'tf_archive_ordering_filter_callback' ) );
-		add_action( 'wp_ajax_tf_archive_ordering_filter', array( $this, 'tf_archive_ordering_filter_callback' ) );
+    
 
 		add_action( 'admin_init', array( $this, 'tf_admin_role_caps' ), 999 );
 		add_filter( 'template_include', array( $this, 'taxonomy_template' ) );
