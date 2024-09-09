@@ -62,6 +62,36 @@ TF_Review::tf_get_review_fields( $fields );
         </div>
     </div>
 </div>
+<div class="tf-clients-reviews">
+    <?php
+    foreach ( $comments as $comment ) {
+        // Get rating details
+        $tf_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
+        if ( $tf_overall_rate == false ) {
+            $tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+            $tf_overall_rate = TF_Review::tf_average_ratings( $tf_comment_meta );
+        }
+        $base_rate = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+        $c_rating  = TF_Review::tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
+
+        // Comment details
+        $c_avatar      = get_avatar( $comment, '56' );
+        $c_author_name = $comment->comment_author;
+        $c_date        = $comment->comment_date;
+        $c_content     = $comment->comment_content;
+        ?>
+        <div class="tf-reviews-item tf-flex tf-flex-gap-16">
+            <div class="tf-reviews-avater">
+                <?php echo wp_kses_post( $c_avatar ); ?>
+            </div>
+            <div class="tf-reviews-text">
+                <span class="tf-review-rating"><?php echo wp_kses_post( $c_rating ); ?></span>
+                <span class="tf-reviews-meta"><?php echo esc_html( $c_author_name ); ?> <span class="tf-reviews-time">| <?php echo wp_kses_post( gmdate( "F Y", strtotime( $c_date ) ) ); ?></span></span>
+                <p><?php echo wp_kses_post( \Tourfic\Classes\Helper::tourfic_character_limit_callback( $c_content, 180 ) ); ?></p>
+            </div>
+        </div>
+    <?php } ?>
+</div>
 <?php } ?>
 <?php
 // Review moderation notice

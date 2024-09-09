@@ -16451,6 +16451,49 @@ html {
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-data-features .tf-review-feature-label p.feature-rating {
   font-weight: 700;
 }
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-clients-reviews {
+  margin-top: 32px;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-avater img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text .tf-review-rating {
+  font-size: 0;
+  color: #FFBF0F;
+  display: flex;
+  margin-bottom: 8px;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text .tf-review-rating > div {
+  display: flex;
+  gap: 8px;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text .tf-review-rating > div i {
+  font-size: initial;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text .tf-reviews-meta {
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700 !important;
+  line-height: 150%; /* 24px */
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text .tf-reviews-meta span {
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400 !important;
+  line-height: 150%; /* 24px */
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text p {
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 24px */
+  margin: 15px 0 0 0;
+}
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-faq-section {
   width: 100%;
 }
