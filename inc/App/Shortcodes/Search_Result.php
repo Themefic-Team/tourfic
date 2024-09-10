@@ -230,6 +230,19 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 								</svg>
 							</div>
 						</div>
+						<div class="tf-sorting-selection-warper">
+                            <form class="tf-archive-ordering" method="get">
+                                <select class="tf-orderby" name="tf-orderby" id="tf-orderby">
+                                    <option value="default">Default Sorting</option>
+                                    <option value="enquiry">Sort By Recommended</option>
+                                    <option value="order">Sort By Popularity</option>
+                                    <option value="rating">Sort By Average Rating</option>
+                                    <option value="latest">Sort By Latest</option>
+                                    <option value="price-high">Sort By Price: High to Low</option>
+                                    <option value="price-low">Sort By Price: Low to High</option>
+                                </select>
+                            </form>
+                        </div>
 					</div>
 				</div>
 				<!-- Loader Image -->

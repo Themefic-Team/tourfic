@@ -37,7 +37,8 @@
             font-weight: inherit;
             color: inherit;
             box-sizing: border-box;
-            border: none;
+            border: 1px solid #e0e8ee;
+            background-color: #fff;
         }
     }
 }
@@ -45,6 +46,7 @@
 .tf-icon {
     background-color: #fff;
     border-radius: 5px;
+    border: 1px solid #e0e8ee;
 
     &:hover {
     cursor: pointer;

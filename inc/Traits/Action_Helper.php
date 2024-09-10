@@ -913,7 +913,7 @@ trait Action_Helper {
 			$total_filtered_results = count( $tf_total_filters );
 			$current_page           = ! empty( $_POST['page'] ) ? absint( $_POST['page'] ) : 1;
 			$offset                 = ( $current_page - 1 ) * $post_per_page;
-			$displayed_results      = array_slice( $tf_total_filters, $offset, $post_per_page );
+			$displayed_results      =  array_slice( $tf_total_filters, $offset, $post_per_page );
 			$sorting_data = $this->tf_get_sorting_data( $ordering_type, $displayed_results, $posttype );
 
 			$displayed_results = !empty( $sorting_data ) ? $sorting_data : $displayed_results;
@@ -932,7 +932,7 @@ trait Action_Helper {
 					$filter_args['orderby'] = 'ID';
 					$filter_args['order'] = 'DESC';
 				}else if ( $ordering_type == 'price-low') {
-					$filter_args['orderby'] = array( 'post__in' => 'DES' );
+					$filter_args['orderby'] = array( 'post__in' => 'DESC' );
 				}
 
 				$result_query  = new \WP_Query( $filter_args );
@@ -1098,10 +1098,9 @@ trait Action_Helper {
 	 * TODO: Hotel Template 1, 2, 3 and Search Result Check
 	 * TODO: Hotel Sorting Without Date
 	 */
-	public function tf_get_sorting_data($ordering_type, $results, $post_type) {
+	private function tf_get_sorting_data($ordering_type, $results, $post_type) {
         global $wpdb;
         $sort_results = [];
-		$price = [];
         foreach ( $results as $post_id ) {
 			$comments = $ratings = '';
             if( $ordering_type == 'order') {
@@ -1149,7 +1148,7 @@ trait Action_Helper {
                 
             }
         }
-		
+
         arsort($sort_results);
 
         return $ordering_type !== "default" ? array_keys($sort_results) : $results;
