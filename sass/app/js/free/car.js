@@ -1,5 +1,18 @@
 (function ($, win) {
     $(document).ready(function () {
+
+        // Create an instance of Notyf
+        const notyf = new Notyf({
+            ripple: true,
+            duration: 3000,
+            dismissable: true,
+            position: {
+                x: 'right',
+                y: 'bottom',
+            },
+        });
+
+        
         // FAQ Accordion
         $('.tf-faq-head').on("click", function () {
             var $this = $(this);
@@ -456,6 +469,50 @@
                 }
             });
 
+        });
+
+        /*
+        * Hotel Search submit
+        * @since 2.9.7
+        * @author Foysal
+        */
+        $(document).on('submit', '#tf_car_booking', function (e) {
+            e.preventDefault();
+            let form = $(this),
+                submitBtn = form.find('.tf-submit'),
+                formData = new FormData(form[0]);
+            
+            formData.append('action', 'tf_car_search');
+            formData.append('_nonce', tf_params.nonce);
+
+            if (formData.get('from') == null || formData.get('to') == null) {
+                formData.append('from', tf_params.tf_car_min_price);
+                formData.append('to', tf_params.tf_car_max_price);
+            }
+
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                beforeSend: function () {
+                    form.css({'opacity': '0.5', 'pointer-events': 'none'});
+                    submitBtn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    let obj = JSON.parse(response);
+                    form.css({'opacity': '1', 'pointer-events': 'all'});
+                    submitBtn.removeClass('tf-btn-loading');
+                    if (obj.status === 'error') {
+                        notyf.error(obj.message);
+                    }
+                    if (obj.status === 'success') {
+                        //location redirect to form action url with query string
+                        location.href = form.attr('action') + '?' + obj.query_string;
+                    }
+                }
+            });
         });
 
         /*

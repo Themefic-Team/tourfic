@@ -2616,6 +2616,10 @@ button.tf-tablinks:focus {
   margin-right: 5px;
 }
 
+#tf_car_booking .tf_destination-wrap {
+  width: auto;
+}
+
 div#tf-locationautocomplete-list div:before {
   content: "\f3c5";
   font-weight: 900;

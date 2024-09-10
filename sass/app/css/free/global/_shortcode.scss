@@ -301,6 +301,11 @@ button.tf-tablinks {
         }
     }
 }
+#tf_car_booking{
+    .tf_destination-wrap {
+        width: auto;
+    }
+}
 div#tf-locationautocomplete-list {
     div {
         &:before {

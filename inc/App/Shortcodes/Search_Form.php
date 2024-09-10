@@ -78,6 +78,10 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 					<button class="tf-tablinks btn-styled" data-form-id="tf-apartment-booking-form"><?php esc_html_e( 'Apartment', 'tourfic' ); ?></button>
 				<?php endif ?>
 
+				<?php if ( ! in_array( 'carrentals', $disable_services ) && Helper::tf_is_search_form_tab_type( 'carrentals', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
+					<button class="tf-tablinks btn-styled" data-form-id="tf-car-booking-form"><?php esc_html_e( 'Car', 'tourfic' ); ?></button>
+				<?php endif ?>
+
 				<?php do_action( 'tf_after_booking_form_tab', $type ) ?>
 			</div>
 
@@ -95,6 +99,10 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 						<?php endif ?>
 						<?php if ( ! in_array( 'apartment', $disable_services ) && Helper::tf_is_search_form_tab_type( 'apartment', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
 							<option value="tf-apartment-booking-form"><?php esc_html_e( 'Apartment', 'tourfic' ); ?></option>
+						<?php endif ?>
+
+						<?php if ( ! in_array( 'carrentals', $disable_services ) && Helper::tf_is_search_form_tab_type( 'carrentals', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
+							<option value="tf-car-booking-form"><?php esc_html_e( 'Car', 'tourfic' ); ?></option>
 						<?php endif ?>
 
 						<?php do_action( 'tf_after_booking_form_mobile_tab', $type ) ?>
@@ -136,6 +144,16 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 							$advanced_opt = false;
 							tf_apartment_search_form_horizontal( $classes, $title, $subtitle, $advanced_opt, $design );
 						}
+						?>
+					</div>
+					<?php
+				}
+
+				if ( ! in_array( 'carrentals', $disable_services ) && Helper::tf_is_search_form_tab_type( 'carrentals', $type ) ) {
+					?>
+					<div id="tf-car-booking-form" class="tf-tabcontent" <?php echo Helper::tf_is_search_form_single_tab( $type ) ? 'style="display:block"' : '' ?>>
+						<?php
+							tf_car_search_form_horizontal( $classes, $title, $subtitle, $advanced_opt, $design );
 						?>
 					</div>
 					<?php
