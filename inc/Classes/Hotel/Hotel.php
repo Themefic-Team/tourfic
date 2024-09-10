@@ -862,8 +862,8 @@ class Hotel {
 		//all rooms meta
 		$rooms_meta = [];
 		if ( ! empty( $rooms ) ) {
-			foreach ( $rooms as $room ) {
-				$rooms_meta[ $room->ID ] = get_post_meta( $room->ID, 'tf_room_opt', true );
+			foreach ( $rooms as $_room ) {
+				$rooms_meta[ $_room->ID ] = get_post_meta( $_room->ID, 'tf_room_opt', true );
 			}
 		}
 
