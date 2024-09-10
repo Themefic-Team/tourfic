@@ -1108,8 +1108,8 @@ TF_Settings::option( 'tf_settings', array(
 										'list' => __( 'List', 'tourfic' ),
 										'grid' => __( 'Grid', 'tourfic' ),
 									),
-									'default'    => 'List',
-									'dependency' => array( 'car-archive', '!=', 'design-1' ),
+									'default'    => 'grid',
+									'dependency' => array( 'car-archive', '==', 'design-1' ),
 								),
 								array(
 									'id'      => 'car_design_1_fonts_notice',
