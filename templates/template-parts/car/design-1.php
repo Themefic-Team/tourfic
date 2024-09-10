@@ -123,8 +123,8 @@ use \Tourfic\App\TF_Review;
 
                     <div class="tf-price-header tf-mb-30">
                         <?php
-                        $tf_pickup_date = !empty($_GET['pickup']) ? $_GET['pickup'] : '';
-                        $tf_dropoff_date = !empty($_GET['dropoff']) ? $_GET['dropoff'] : '';
+                        $tf_pickup_date = !empty($_GET['pickup_date']) ? $_GET['pickup_date'] : '';
+                        $tf_dropoff_date = !empty($_GET['dropoff_date']) ? $_GET['dropoff_date'] : '';
                         $tf_pickup_time = !empty($_GET['pickup_time']) ? $_GET['pickup_time'] : '';
                         $tf_dropoff_time = !empty($_GET['dropoff_time']) ? $_GET['dropoff_time'] : '';
                         $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time); ?>
