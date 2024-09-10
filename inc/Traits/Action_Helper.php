@@ -9,6 +9,8 @@ use Tourfic\Classes\Tour\Tour;
 use \Tourfic\Classes\Apartment\Apartment;
 use \Tourfic\App\TF_Review;
 use Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
+use Tourfic\Classes\Tour\Pricing as Tour_Pricing;
+use Tourfic\Classes\Hotel\Pricing as Hotel_Pricing;
 
 trait Action_Helper {
 	
@@ -1089,9 +1091,15 @@ trait Action_Helper {
 		die();
 	}
 
+	/**
+	 * TODO: Tour Template 1, 2, 3 and Search Result Check
+	 * TODO: Hotel Template 1, 2, 3 and Search Result Check
+	 * TODO: Hotel Sorting Without Date
+	 */
 	public function tf_get_sorting_data($ordering_type, $results, $post_type) {
         global $wpdb;
         $sort_results = [];
+		$price = [];
         foreach ( $results as $post_id ) {
 			$comments = $ratings = '';
             if( $ordering_type == 'order') {
@@ -1104,20 +1112,42 @@ trait Action_Helper {
                 $comments        = get_comments( [ 'post_id' => $post_id, 'status' => 'approve' ] );
                 $ratings = TF_Review::tf_total_avg_rating( $comments );
                 $sort_results[$post_id] = $ratings;
-            }else if ($ordering_type = 'price-high') {
+            }else if ($ordering_type == 'price-high') {
                 if($post_type == 'tf_apartment') {
 					$min_max_price = Apt_Pricing::instance($post_id)->get_min_max_price();
 					$sort_results[$post_id] = $min_max_price['max'];
 				}
+
+				if( $post_type == 'tf_tours' ) {
+					$min_max_price = Tour_Pricing::instance($post_id)->get_min_max_price();
+					$sort_results[$post_id] = $min_max_price['max'];
+				}
+				
+				if( $post_type == 'tf_hotel' ) {
+					$min_max_price = Hotel_Pricing::instance($post_id)->get_min_max_price();
+					$sort_results[$post_id] = $min_max_price['max']["regular_price"];
+				}
                 
-            }else if ($ordering_type = 'price-low') {
+            }else if ($ordering_type == 'price-low') {
+
                 if($post_type == 'tf_apartment') {
 					$min_max_price = Apt_Pricing::instance($post_id)->get_min_max_price();
 					$sort_results[$post_id] = $min_max_price['min'];
 				}
+				
+				if( $post_type == 'tf_tours' ) {
+					$min_max_price = Tour_Pricing::instance($post_id)->get_min_max_price();
+					$sort_results[$post_id] = $min_max_price['min'];
+				}
+
+				if( $post_type == 'tf_hotel' ) {
+					$min_max_price = Hotel_Pricing::instance($post_id)->get_min_max_price();
+					$sort_results[$post_id] = $min_max_price['min']["regular_price"];
+				}
                 
             }
         }
+		
         arsort($sort_results);
 
         return $ordering_type !== "default" ? array_keys($sort_results) : $results;
