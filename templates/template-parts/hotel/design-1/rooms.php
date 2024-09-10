@@ -39,7 +39,7 @@ if ( $rooms ) :
 		}
 	}
 
-	$total_room_option_count = 0;
+	$total_room_option_count = Tourfic\Classes\Room\Room::get_room_options_count($rooms);
 	?>
 
     <div class="tf-rooms-sections tf-mb-50 tf-template-section">
@@ -78,7 +78,6 @@ if ( $rooms ) :
 						$multi_by_date           = ! empty( $room['price_multi_day'] ) ? ! empty( $room['price_multi_day'] ) : false;
 						$child_age_limit         = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
 						$room_options            = ! empty( $room['room-options'] ) ? $room['room-options'] : [];
-						$total_room_option_count += count( $room_options );
 
 						// Hotel Room Discount Data
 						$hotel_discount_type   = ! empty( $room["discount_hotel_type"] ) ? $room["discount_hotel_type"] : "none";

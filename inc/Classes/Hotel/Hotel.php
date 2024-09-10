@@ -44,6 +44,472 @@ class Hotel {
 	 */
 	function tf_room_availability_callback() {
 
+        // Check nonce security
+        if ( ! isset( $_POST['tf_room_avail_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_room_avail_nonce'])), 'check_room_avail_nonce' ) ) {
+            return;
+        }
+
+        /**
+         * Form data
+         */
+        $hotel_id          = ! empty( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
+        $form_adult        = ! empty( $_POST['adult'] ) ? sanitize_text_field( $_POST['adult'] ) : 0;
+        $form_child        = ! empty( $_POST['child'] ) ? sanitize_text_field( $_POST['child'] ) : 0;
+        $children_ages     = ! empty( $_POST['children_ages'] ) ? sanitize_text_field( $_POST['children_ages'] ) : '';
+        $form_check_in_out = ! empty( $_POST['check_in_out'] ) ? sanitize_text_field( $_POST['check_in_out'] ) : '';
+
+
+        $form_total_person = $form_adult + $form_child;
+        if ( $form_check_in_out ) {
+            list( $form_start, $form_end ) = explode( ' - ', $form_check_in_out );
+        }
+
+        // Custom avail
+        $tf_startdate = $form_start;
+        $tf_enddate   = $form_end;
+
+        if ( empty( $form_end ) ) {
+            $form_end   = gmdate( 'Y/m/d', strtotime( $form_start . " + 1 day" ) );
+            $tf_enddate = gmdate( 'Y/m/d', strtotime( $form_start . " + 1 day" ) );
+        }
+        $form_check_in = $form_start;
+        $form_start    = gmdate( 'Y/m/d', strtotime( $form_start . ' +1 day' ) );
+        /**
+         * Backend data
+         */
+        $meta  = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
+        $rooms = Room::get_hotel_rooms( $hotel_id );
+        $locations           = get_the_terms( $hotel_id, 'hotel_location' );
+        $first_location_name = ! empty( $locations ) ? $locations[0]->name : '';
+        $room_book_by        = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+        $room_book_url       = ! empty( $meta['booking-url'] ) ? $meta['booking-url'] : '';
+        $total_room_option_count = Room::get_room_options_count($rooms);
+
+        // start table
+        ob_start();
+        ?>
+        <div class="tf-room-table hotel-room-wrap">
+        <div id="tour_room_details_loader">
+            <div id="tour-room-details-loader-img">
+                <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
+            </div>
+        </div>
+        <?php
+        // Single Template Style
+        $tf_hotel_layout_conditions = ! empty( $meta['tf_single_hotel_layout_opt'] ) ? $meta['tf_single_hotel_layout_opt'] : 'global';
+        if("single"==$tf_hotel_layout_conditions){
+            $tf_hotel_single_template_check = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
+        }
+        $tf_hotel_global_template_check = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
+
+        $tf_hotel_selected_check = !empty($tf_hotel_single_template_check) ? $tf_hotel_single_template_check : $tf_hotel_global_template_check;
+
+        $tf_hotel_selected_template_check = $tf_hotel_selected_check;
+
+        if( $tf_hotel_selected_template_check == "design-1" ){
+        ?>
+        <table class="tf-availability-table" cellpadding="0" cellspacing="0">
+        <thead>
+            <tr>
+                <th class="description" colspan="4"><?php esc_html_e( 'Room Details', 'tourfic' ); ?></th>
+            </tr>
+        </thead>
+        <?php } elseif($tf_hotel_selected_template_check == "default"){ ?>
+        <table class="availability-table" cellpadding="0" cellspacing="0">
+        <thead>
+        <tr>
+            <th class="description"><?php esc_html_e( 'Room Details', 'tourfic' ); ?></th>
+            <?php if ( $total_room_option_count > 0 ) : ?>
+                <th class="options"><?php esc_html_e( 'Options', 'tourfic' ); ?></th>
+            <?php endif; ?>
+            <th class="pax"><?php esc_html_e( 'Pax', 'tourfic' ); ?></th>
+            <th class="pricing"><?php esc_html_e( 'Price', 'tourfic' ); ?></th>
+            <th class="reserve"><?php esc_html_e( 'Select Rooms', 'tourfic' ); ?></th>
+        </tr>
+        </thead>
+        <?php } ?>
+        <tbody>
+        <?php
+        echo wp_kses_post( ob_get_clean() );
+        $error    = $rows = null;
+        $has_room = false;
+
+        // generate table rows
+        if ( ! empty( $rooms ) ) {
+            ob_start();
+            foreach ( $rooms as $_room ) {
+                $room_id = $_room->ID;
+                $room = get_post_meta($room_id, 'tf_room_opt', true);
+                // Check if room is enabled
+                $enable = ! empty( $room['enable'] ) && boolval( $room['enable'] );
+
+                if ( $enable ) {
+
+                    /*
+                    * Backend room options
+                    */
+                    $footage          = ! empty( $room['footage'] ) ? $room['footage'] : 0;
+                    $bed              = ! empty( $room['bed'] ) ? $room['bed'] : 0;
+                    $adult_number     = ! empty( $room['adult'] ) ? $room['adult'] : 0;
+                    $child_number     = ! empty( $room['child'] ) ? $room['child'] : 0;
+                    $pricing_by       = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
+                    $multi_by_date_ck = ! empty( $room['price_multi_day'] ) ? ! empty( $room['price_multi_day'] ) : false;
+                    $child_age_limit  = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
+                    $room_price       = ! empty( $room['price'] ) ? $room['price'] : 0;
+                    $room_adult_price = ! empty( $room['adult_price'] ) ? $room['adult_price'] : 0;
+                    $room_child_price = ! empty( $room['child_price'] ) ? $room['child_price'] : 0;
+                    $total_person     = $adult_number + $child_number;
+                    $price 			  = $pricing_by == '1' ? $room_price : $room_adult_price + $room_child_price;
+                    $room_options     = ! empty( $room['room-options'] ) ? $room['room-options'] : [];
+                    $form_check_out   = $form_end;
+
+                    // Hotel Room Discount Data
+                    $hotel_discount_type = !empty($room["discount_hotel_type"]) ? $room["discount_hotel_type"] : "none";
+                    $hotel_discount_amount = !empty($room["discount_hotel_price"]) ? $room["discount_hotel_price"] : 0;
+                    $d_room_price = 0;
+                    $d_room_adult_price = 0;
+                    $d_room_child_price = 0;
+
+                    if($pricing_by == 1) {
+                        $d_room_price = Pricing::instance($hotel_id, $room_id)->calculate_discount($room_price);
+                        $d_price = $d_room_price;
+                    } elseif($pricing_by == 2) {
+                        $d_room_adult_price = Pricing::instance($hotel_id, $room_id)->calculate_discount($room_adult_price);
+                        $d_room_child_price = Pricing::instance($hotel_id, $room_id)->calculate_discount($room_child_price);
+                        $d_price = $d_room_adult_price + $d_room_child_price;
+                    }
+
+                    // Check availability by date option
+                    $period = new \DatePeriod(
+                        new \DateTime( $form_start . ' 00:00' ),
+                        new \DateInterval( 'P1D' ),
+                        new \DateTime( $form_end . ' 23:59' )
+                    );
+
+                    $days = iterator_count( $period );
+
+                    // Check availability by date option
+
+                    $tfperiod = new \DatePeriod(
+                        new \DateTime( $tf_startdate . ' 00:00' ),
+                        new \DateInterval( 'P1D' ),
+                        new \DateTime( $tf_enddate . ' 23:59' )
+                    );
+
+                    $avail_durationdate = [];
+                    $is_first = true;
+                    foreach ( $tfperiod as $date ) {
+                        if($multi_by_date_ck){
+                            if ($is_first) {
+                                $is_first = false;
+                                continue;
+                            }
+                        }
+                        $avail_durationdate[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
+                    }
+
+                    /**
+                     * Set room availability
+                     */
+                    $unique_id          = ! empty( $room['unique_id'] ) ? $room['unique_id'] : '';
+                    $order_ids          = ! empty( $room['order_id'] ) ? $room['order_id'] : '';
+                    $num_room_available = ! empty( $room['num-room'] ) ? $room['num-room'] : '1';
+                    $reduce_num_room    = ! empty( $room['reduce_num_room'] ) ? $room['reduce_num_room'] : false;
+                    $number_orders      = '0';
+                    $avil_by_date       = ! empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : false;      // Room Available by date enabled or  not ?
+                    if ( $avil_by_date ) {
+                        $avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
+                    }
+
+                    if ( ! empty( $order_ids ) && $reduce_num_room == true ) {
+
+                        # Get backend available date range as an array
+                        if ( !empty( $avil_by_date ) ) {
+
+                            $order_date_ranges = array();
+
+                            $backend_date_ranges = array();
+                            foreach ( $avail_date as $single_date_range ) {
+
+                                if(is_array($single_date_range) && !empty( $single_date_range["availability"] )){
+                                    array_push( $backend_date_ranges, array( strtotime( $single_date_range["availability"]["from"] ), strtotime( $single_date_range["availability"]["to"] ) ) );
+                                }
+                            }
+                        }
+
+                        # Convert order ids to array
+                        $order_ids = explode( ',', $order_ids );
+
+                        # Run foreach loop through oder ids
+                        foreach ( $order_ids as $order_id ) {
+
+                        # Get Only the completed orders
+                        $tf_orders_select = array(
+                            'select' => "post_id,order_details",
+                            'post_type' => 'hotel',
+                            'query' => " AND ostatus = 'completed' AND order_id = ".$order_id
+                        );
+                        $tf_hotel_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
+
+                            # Get and Loop Over Order Items
+                            foreach ( $tf_hotel_book_orders as $item ) {
+                                $order_details = json_decode($item['order_details']);
+                                /**
+                                 * Order item data
+                                 */
+                                $ordered_number_of_room = !empty($order_details->room) ? $order_details->room : 0;
+
+                                if ( $avil_by_date ) {
+
+                                    $order_check_in_date  = strtotime( $order_details->check_in );
+                                    $order_check_out_date = strtotime( $order_details->check_out );
+
+                                    $tf_order_check_in_date  = $order_details->check_in;
+                                    $tf_order_check_out_date = $order_details->check_out;
+                                    if ( ! empty( $avail_durationdate ) && ( in_array( $tf_order_check_out_date, $avail_durationdate ) ) ) {
+                                        # Total number of room booked
+                                        $number_orders = $number_orders + $ordered_number_of_room;
+                                    }
+                                    array_push( $order_date_ranges, array( $order_check_in_date, $order_check_out_date ) );
+
+                                } else {
+                                    $order_check_in_date  = $order_details->check_in;
+                                    $order_check_out_date = $order_details->check_out;
+                                    if ( ! empty( $avail_durationdate ) && ( in_array( $order_check_out_date, $avail_durationdate ) ) ) {
+                                        # Total number of room booked
+                                        $number_orders = $number_orders + $ordered_number_of_room;
+                                    }
+                                }
+                            }
+                        }
+                        # Calculate available room number after order
+                        $num_room_available = $num_room_available - $number_orders; // Calculate
+                        $num_room_available = max( $num_room_available, 0 ); // If negetive value make that 0
+
+                    }
+
+                    if ( $avil_by_date == '1' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+
+                        if(!$multi_by_date_ck){
+                            if ( $tf_startdate && $tf_enddate ) {
+                                // Check availability by date option
+                                $period = new \DatePeriod(
+                                    new \DateTime( $tf_startdate . ' 00:00' ),
+                                    new \DateInterval( 'P1D' ),
+                                    new \DateTime( $tf_enddate . ' 23:59' )
+                                );
+                            }
+                        }else{
+                            if ( $tf_startdate && $tf_enddate ) {
+                                $period = new \DatePeriod(
+                                    new \DateTime( $tf_startdate . ' 00:00' ),
+                                    new \DateInterval( 'P1D' ),
+                                    new \DateTime( $tf_enddate . ' 00:00' )
+                                );
+                            }
+                        }
+
+                        // split date range
+                        $check_in  = strtotime( $form_start . ' 00:00' );
+                        $check_out = strtotime( $form_end . ' 00:00' );
+                        $price     = 0;
+                        $d_price   = 0;
+                        $has_room  = [];
+
+                        // extract price from available room options
+                        foreach ( $period as $date ) {
+
+                            $available_rooms = array_values( array_filter( $avail_date, function ( $date_availability ) use ( $date ) {
+                                if( $date_availability['status'] == 'available' ){
+                                    $date_availability_from = strtotime( $date_availability['check_in'] . ' 00:00' );
+                                    $date_availability_to   = strtotime( $date_availability['check_out'] . ' 23:59' );
+
+                                    return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
+                                } else {
+                                    return false;
+                                }
+                            } ) );
+
+                            if ( is_iterable( $available_rooms ) && count( $available_rooms ) >= 1 ) {
+
+                                $room_price      = ! empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $room_price;
+                                $adult_price     = ! empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $room_adult_price;
+                                $child_price     = ! empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $room['child_price'];
+                                $price_by_date   = $pricing_by == '1' ? $room_price : ( ( (int) $adult_price * (int) $form_adult ) + ( (int) $child_price * (int) $form_child ) );
+                                $d_price_by_date = 0;
+                                $price 			+= $price_by_date;
+                                $number_of_rooms = ! empty( $available_rooms[0]['num-room'] ) ? $available_rooms[0]['num-room'] : $room['num-room'];
+                                $has_room[]      = 1;
+
+                                if($pricing_by == 1) {
+                                    if($hotel_discount_type == "percent") {
+                                        $d_room_price = !empty($room_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $room_price - ( ( (int) $room_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
+                                    }else if($hotel_discount_type == "fixed") {
+                                        $d_room_price = !empty($room_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $room_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
+                                    }
+                                } else {
+                                    if($hotel_discount_type == "percent") {
+                                        $d_adult_price = !empty($adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
+                                        $d_child_price = !empty($child_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - ( ( (int) $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
+                                    }else if($hotel_discount_type == "fixed") {
+                                        $d_adult_price = !empty($adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $adult_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
+                                        $d_child_price = !empty($adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $child_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
+                                    }
+                                }
+                                $d_price_by_date = $pricing_by == '1' ? $d_room_price : ( ( $d_adult_price * $form_adult ) + ( $d_child_price * $form_child ) );
+                                $d_price += $d_price_by_date;
+
+                            } else {
+                                $has_room[] = 0;
+                            }
+                        }
+                        if(!$multi_by_date_ck){
+                            $days = $days+1;
+                        }
+
+                        // Check if date is provided and within date range
+                        if ( ! in_array( 0, $has_room ) ) {
+                            Helper::tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price);
+                            if ( $form_adult <= $adult_number ) {
+                                if ( !empty($form_child) ){
+                                    if($form_child <= $child_number ) {
+                                        include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
+                                    }
+                                }else{
+                                    include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
+                                }
+
+                            } else {
+
+                                $error = esc_html__( 'No Room Available! Total person number exceeds!', 'tourfic' );
+                            }
+
+                        } else {
+
+                            $error = esc_html__( 'No Room Available within this Date Range!', 'tourfic' );
+
+                        }
+                    } else {
+                        $d_price_by_date = 0;
+                        if ( $pricing_by == '1' ) {
+                            if($hotel_discount_type == "percent" || $hotel_discount_type == "fixed") {
+                                $d_price_by_date = $d_room_price;
+                            }
+                            $price_by_date = $room_price;
+                        } elseif($pricing_by == '2') {
+                            if($hotel_discount_type == "percent" || $hotel_discount_type == "fixed") {
+                                $d_price_by_date = ( ( $d_room_adult_price * $form_adult ) + ( $d_room_child_price * $form_child ) );
+                            }
+                            $price_by_date = ( ( $room_adult_price * $form_adult ) + ( $room_child_price * $form_child ) );
+                        } elseif($pricing_by == '3') {
+                            foreach ( $room_options as $room_option_key => $room_option ){
+                                $option_price_type = ! empty( $room_option['option_pricing_type'] ) ? $room_option['option_pricing_type'] : 'per_room';
+
+                                if ( $option_price_type == 'per_room' ) {
+                                    $price_by_date = ! empty( $room_option['option_price'] ) ? floatval( $room_option['option_price'] ) : 0;
+                                } elseif ( $option_price_type == 'per_person' ) {
+                                    $option_adult_price = ! empty( $room_option['option_adult_price'] ) ? floatval( $room_option['option_adult_price'] ) : 0;
+                                    $option_child_price = ! empty( $room_option['option_child_price'] ) ? floatval( $room_option['option_child_price'] ) : 0;
+
+                                    $price_by_date = ( ( $option_adult_price * $form_adult ) + ( $option_child_price * $form_child ) );
+                                }
+                            }
+                        }
+
+                        if(!$multi_by_date_ck){
+                            $days = $days+1;
+                        }
+
+                        $price = !empty($room['price_multi_day']) && $room['price_multi_day'] == '1' && !empty( $price_by_date ) ? $price_by_date * $days : $price_by_date * $days;
+                        $d_price = !empty($room['price_multi_day']) && $room['price_multi_day'] == '1' && !empty( $price_by_date ) ? $d_price_by_date * $days : $d_price_by_date * $days;
+
+                        Helper::tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price );
+
+                        /**
+                         * filter hotel room with features
+                         * @return array
+                         * @since 1.6.9
+                         * @author Abu Hena
+                         */
+                        $filtered_features = ! empty( $_POST['features'] ) ? $_POST['features'] : array();
+                        $room_features     = ! empty( $room['features'] ) ? $room['features'] : '';
+                        if ( ! empty( $room_features ) && is_array( $room_features ) ) {
+                            $feature_result = array_intersect( $filtered_features, $room_features );
+                        }
+
+                        if ( ! empty( $filtered_features ) ) {
+                            if ( $feature_result ) {
+                                if ( $form_adult <= $adult_number ) {
+                                    if ( !empty($form_child) ){
+                                        if($form_child <= $child_number ) {
+                                            include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
+                                        }
+                                    }else{
+                                        include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
+                                    }
+
+                                } else {
+
+                                    $error = esc_html__( 'No Room Available! Total person number exceeds!', 'tourfic' );
+
+                                }
+                            } else {
+                                $error = esc_html__( 'No Room Available!', 'tourfic' );
+                            }
+                            /* feature filter ended here */
+
+                        } else {
+                            if ( $form_adult <= $adult_number ) {
+                                if ( !empty($form_child) ){
+                                    if($form_child <= $child_number ) {
+                                        include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
+                                    }
+                                }else{
+                                    include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
+                                }
+
+                            } else {
+
+                                $error = esc_html__( 'No Room Available! Total person number exceeds!', 'tourfic' );
+
+                            }
+                        }
+                    }
+
+                } else {
+
+                    $error = esc_html__( 'No Room Available!', 'tourfic' );
+
+                }
+            }
+
+            $rows .= ob_get_clean();
+
+        } else {
+
+            $error = esc_html__( 'No Room Available!', 'tourfic' );
+
+        }
+
+        if ( ! empty( $rows ) ) {
+
+            echo wp_kses( $rows, Helper::tf_custom_wp_kses_allow_tags()) . '</tbody> </table> </div>';
+
+        } else {
+
+            echo '<tr><td colspan="4" style="text-align:center;font-weight:bold;">' . esc_html( $error ) . '</td></tr>';
+            ?>
+            </tbody>
+            </table>
+            </div>
+            <?php
+
+        }
+
+        wp_die();
+    }
+	function tf_room_availability_callback_old() {
+
 		// Check nonce security
 		if ( ! isset( $_POST['tf_room_avail_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_room_avail_nonce'])), 'check_room_avail_nonce' ) ) {
 			return;
