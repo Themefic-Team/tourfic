@@ -84,18 +84,18 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 
 	// Fuel Type
 	$fuel_type_terms = wp_get_post_terms($post_id, 'carrental_fuel_type');
-	$fuel_types = [];
+	$fuel_types = '';
 	if (!is_wp_error($fuel_type_terms) && !empty($fuel_type_terms)) {
 		foreach ($fuel_type_terms as $term) {
-			$fuel_types[] = $term->name;
+			$fuel_types = $term->name;
 		}
 	}
 	// Engine Year
 	$engine_year_terms = wp_get_post_terms($post_id, 'carrental_engine_year');
-	$engine_years = [];
+	$engine_years = '';
 	if (!is_wp_error($engine_year_terms) && !empty($engine_year_terms)) {
 		foreach ($engine_year_terms as $term) {
-			$engine_years[] = $term->name;
+			$engine_years = $term->name;
 		}
 	}
 
@@ -145,11 +145,11 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 				</li>
 
 				<?php if(!empty($fuel_types)){ ?>
-					<li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-gas-station-line"></i><?php echo implode(", ",$fuel_types); ?></li>
+					<li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-gas-station-line"></i><?php echo esc_html($fuel_types); ?></li>
 				<?php } ?>
 
 				<?php if(!empty($engine_years)){ ?>
-					<li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-car-line"></i><?php echo implode(", ",$engine_years); ?></li>
+					<li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-car-line"></i><?php echo esc_html($engine_years); ?></li>
 				<?php } ?>
 
 				<li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-sound-module-fill"></i>
@@ -157,7 +157,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 				</li>
 
 				<?php if(!empty($passengers)){ ?>
-				<li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="fa-solid fa-wheelchair"></i><?php echo esc_attr($passengers); ?> <?php esc_html_e("Persons", "tourfic"); ?></li>
+				<li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="fa-solid fa-wheelchair"></i><?php echo esc_attr($passengers); ?> <?php esc_html_e("Person", "tourfic"); ?></li>
 				<?php } ?>
 
         		<?php if(!empty($baggage)){ ?>
