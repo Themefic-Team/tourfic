@@ -5,6 +5,7 @@ namespace Tourfic\App\Shortcodes;
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\Car_Rental\Availability;
 
 class Search_Result extends \Tourfic\Core\Shortcodes {
 
@@ -747,8 +748,11 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 								$loop->the_post();
 	
 								if ( $post_type == 'tf_carrental' ) {
-									$car_meta = get_post_meta( get_the_ID() , 'tf_carrental_opt', true );
-									tf_car_availability_response($car_meta, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $startprice, $endprice, $not_found);
+									$car_meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
+									$car_inventory = Availability::tf_car_inventory(get_the_ID(), $car_meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+									if($car_inventory){
+										tf_car_availability_response($car_meta, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $startprice, $endprice, $not_found);
+									}
 								}
 							}
 

@@ -4,6 +4,7 @@ namespace Tourfic\Classes;
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Admin\Emails\TF_Handle_Emails;
+use \Tourfic\Classes\Car_Rental\Availability;
 
 class Helper {
 	use \Tourfic\Traits\Singleton;
@@ -1206,7 +1207,11 @@ class Helper {
 					}
 				} elseif ( $posttype == 'tf_carrental' ) {
 					$car_meta = get_post_meta( get_the_ID() , 'tf_carrental_opt', true );
-					tf_car_availability_response($car_meta, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $tf_startprice, $tf_endprice, $not_found);
+
+					$car_inventory = Availability::tf_car_inventory(get_the_ID(), $car_meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+					if($car_inventory){
+						tf_car_availability_response($car_meta, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $tf_startprice, $tf_endprice, $not_found);
+					}
 				}else{
 
 				}

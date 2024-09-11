@@ -38,6 +38,8 @@ class Availability {
                 }else{
                     return false;
                 }
+            }else{
+                return true;
             }
         }else{
             return true;
