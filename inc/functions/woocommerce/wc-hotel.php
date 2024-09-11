@@ -92,8 +92,8 @@ function tf_hotel_booking_callback() {
 		}
 	}
 
-	$min_stay = ! empty( $room["minimum_stay_requirement"] ) ? $room["minimum_stay_requirement"] : 0;
-	$max_stay = ! empty( $room["maximum_stay_requirement"] ) ? $room["maximum_stay_requirement"] : 0;
+	$min_stay = ! empty( $room_meta["minimum_stay_requirement"] ) ? $room_meta["minimum_stay_requirement"] : 0;
+	$max_stay = ! empty( $room_meta["maximum_stay_requirement"] ) ? $room_meta["maximum_stay_requirement"] : 0;
 
 	if ( $day_difference < $min_stay && $min_stay > 0 ) {
 		if ( $max_stay == 0 ) {
@@ -101,7 +101,7 @@ function tf_hotel_booking_callback() {
 			$response['errors'][] = sprintf( esc_html__( 'Your Stay Requirement is Minimum %1$s Days', 'tourfic' ), $min_stay );
 		} else {
 			/* translators: %1$s Minimum Stay Requirement, %2$s Maximum Stay Requirement */
-			$response['errors'][] = sprintf( esc_html__( 'Your Stay Requirement is Minimum %1$s Days to Maximum %2$s', 'tourfic' ),
+			$response['errors'][] = sprintf( esc_html__( 'Your Stay Requirement is Minimum %1$s Days to Maximum %2$s Days', 'tourfic' ),
 				$min_stay,
 				$max_stay
 			);
