@@ -254,20 +254,75 @@
         */
         $(document).on('click', '.tf-car-booking', function (e) {
             e.preventDefault();
+            $this = $(this);
+            $('.tf-booking-content-wraper').html("");
             var pickup = $('#tf_pickup_location').val();
             let dropoff = $('#tf_dropoff_location').val();
             let pickup_date = $('.tf_pickup_date').val();
             let dropoff_date = $('.tf_dropoff_date').val();
             let pickup_time = $('.tf_pickup_time').val();
             let dropoff_time = $('.tf_dropoff_time').val();
+            let post_id = $('#post_id').val();
 
             if( !pickup || !dropoff || !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
                 $('.error-notice').show();
                 $('.error-notice').text('Fill up the all fields');
-            }else{
-                $('.error-notice').hide();
-                $('.tf-car-booking-popup').css('display', 'flex');
+                return;
             }
+
+            var data = {
+                action: 'tf_car_booking_pupup',
+                _nonce: tf_params.nonce,
+                post_id: post_id
+            };
+
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    $this.addClass('tf-btn-loading');
+                },
+                success: function (data) {
+                    $('.tf-booking-content-wraper').html(data);
+                    $('.error-notice').hide();
+                    $('.tf-car-booking-popup').css('display', 'flex');
+                    $this.removeClass('tf-btn-loading');
+                }
+            });
+
+        });
+
+        /*
+        * Car Archive Booking Popup
+        * @author Jahid
+        */
+        $(document).on('click', '.tf-car-quick-booking', function (e) {
+            e.preventDefault();
+            $this = $(this);
+            $('.tf-booking-content-wraper').html("");
+            let post_id = $this.closest('.tf-booking-btn').find('#post_id').val();
+
+            var data = {
+                action: 'tf_car_booking_pupup',
+                _nonce: tf_params.nonce,
+                post_id: post_id
+            };
+
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    $this.addClass('tf-btn-loading');
+                },
+                success: function (data) {
+                    $this.closest('.tf-booking-btn').find('.tf-booking-content-wraper').html(data);
+                    $this.closest('.tf-booking-btn').find('.tf-car-booking-popup').css('display', 'flex');
+                    $this.removeClass('tf-btn-loading');
+                }
+            });
+
         });
 
         $(document).on('click', '.booking-next', function (e) {
@@ -330,7 +385,7 @@
             }
         }
 
-        $(document).on('click', '.booking-process', function (e) {
+        $(document).on('click', '.tf-car-booking-form .booking-process', function (e) {
             let $this = $(this);
             if($this.attr('data-charge')){
                 $('#protection_value').val($this.attr('data-charge'));
@@ -603,6 +658,116 @@
 
         });
 
+        $(document).on('click', '.tf-booking-btn .booking-process', function (e) {
+            let $this = $(this);
+            if($this.attr('data-charge')){
+                $('#protection_value').val($this.attr('data-charge'));
+            }
+
+
+            var travellerData = {};
+            if($this.hasClass('tf-offline-booking')){
+                let booking = $(this).closest('.tf-booking-form-fields');
+                let Validation_response = BookingVallidation(booking);
+                if(Validation_response){
+                    return;
+                }
+                // Text, email, date inputs
+                $("input[name^='traveller[']").each(function() {
+                    var name = $(this).attr('name');
+                    travellerData[name] = $(this).val();
+                });
+
+                // Select dropdowns
+                $("select[name^='traveller[']").each(function() {
+                    var name = $(this).attr('name');
+                    travellerData[name] = $(this).val();
+                });
+
+                // Checkbox and Radio buttons
+                $("input[type='checkbox'][name^='traveller[']:checked, input[type='radio'][name^='traveller[']:checked").each(function() {
+                    var name = $(this).attr('name');
+                    if (!travellerData[name]) {
+                        travellerData[name] = [];
+                    }
+                    travellerData[name].push($(this).val());
+                });
+            }
+    
+            var pickup = $('#tf_pickup_location').val();
+            let dropoff = $('#tf_dropoff_location').val();
+            let pickup_date = $this.closest('.tf-booking-btn').find('#pickup_date').val();
+            let dropoff_date = $this.closest('.tf-booking-btn').find('#dropoff_date').val();
+            let pickup_time = $this.closest('.tf-booking-btn').find('#pickup_time').val();
+            let dropoff_time = $this.closest('.tf-booking-btn').find('#dropoff_time').val();
+            let post_id = $this.closest('.tf-booking-btn').find('#post_id').val();
+            let protection = $this.closest('.tf-booking-btn').find('#protection_value').val();
+
+            var data = {
+                action: 'tf_car_booking',
+                _nonce: tf_params.nonce,
+                post_id: post_id,
+                pickup: pickup,
+                dropoff: dropoff,
+                pickup_date: pickup_date,
+                dropoff_date: dropoff_date,
+                pickup_time: pickup_time,
+                dropoff_time: dropoff_time,
+                protection: protection,
+                travellerData: travellerData
+            };
+            
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    $this.addClass('tf-btn-loading');
+                },
+                success: function (data) {
+                    $this.unblock();
+
+                    var response = JSON.parse(data);
+                    if (response.status == 'error') {
+
+                        if (response.errors) {
+                            response.errors.forEach(function (text) {
+                                notyf.error(text);
+                            });
+                        }
+
+                        $('.tf-car-booking-popup').hide();
+                        $this.removeClass('tf-btn-loading');
+                        return false;
+                    } else {
+                        if (response.without_payment == 'false') {
+                            if (response.status == 'error') {
+
+                                if (response.errors) {
+                                    response.errors.forEach(function (text) {
+                                        notyf.error(text);
+                                    });
+                                }
+
+                                return false;
+                            } else {
+
+                                if (response.redirect_to) {
+                                    window.location.replace(response.redirect_to);
+                                } else {
+                                    jQuery(document.body).trigger('added_to_cart');
+                                }
+
+                            }
+                        }else{
+                            $('.tf-car-booking-popup').hide();
+                            $this.removeClass('tf-btn-loading');
+                        }
+                    }
+                }
+            });
+
+        });
 
         /*
         * Car Archive View
