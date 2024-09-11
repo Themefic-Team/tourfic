@@ -34,6 +34,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 }
 
 $total_room_option_count = Tourfic\Classes\Room\Room::get_room_options_count($rooms);
+$price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings' ) ) ? Helper::tfopt( 'hotel_archive_price_minimum_settings' ) : 'all';
 ?>
 <div class="tf-main-wrapper">
 	<?php do_action( 'tf_before_container' ); ?>
@@ -532,6 +533,7 @@ $total_room_option_count = Tourfic\Classes\Room\Room::get_room_options_count($ro
 								$room = get_post_meta($_room->ID, 'tf_room_opt', true);
 								$enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
 								if ( $enable == '1' ) {
+									$unique_id         = ! empty( $room['unique_id'] ) ? $room['unique_id'] : '';
 									$footage         = ! empty( $room['footage'] ) ? $room['footage'] : '';
 									$bed             = ! empty( $room['bed'] ) ? $room['bed'] : '';
 									$adult_number    = ! empty( $room['adult'] ) ? $room['adult'] : '0';
@@ -639,36 +641,11 @@ $total_room_option_count = Tourfic\Classes\Room\Room::get_room_options_count($ro
 									<?php
 									if ( $pricing_by == '3' && !empty($room_options) ):
 										foreach ( $room_options as $room_option_key => $room_option ):
-                                            $option_price_type = ! empty( $room_option['option_pricing_type'] ) ? $room_option['option_pricing_type'] : 'per_room';
-                                            $discount_price    = 0;
-
-                                            if ( $option_price_type == 'per_room' ) {
-                                                $option_price = ! empty( $room_option['option_price'] ) ? floatval( $room_option['option_price'] ) : 0;
-                                            } elseif ( $option_price_type == 'per_person' ) {
-                                                $option_price = ! empty( $room_option['option_adult_price'] ) ? floatval( $room_option['option_adult_price'] ) : 0;
-                                            }
 											?>
                                             <td class="options">
                                                 <ul>
 													<?php if ( ! empty( $room_option['room-facilities'] ) ) :
 														foreach ( $room_option['room-facilities'] as $room_facility ) :
-															$facility_price_switch = ! empty( $room_facility['room_facilities_price_switch'] ) ? $room_facility['room_facilities_price_switch'] : '0';
-															$facility_price = ! empty( $room_facility['room_facilities_price'] ) ? floatval( $room_facility['room_facilities_price'] ) : 0;
-															$facility_type = ! empty( $room_facility['room_facilities_price_type'] ) ? $room_facility['room_facilities_price_type'] : 'per_person';
-
-															if ( $facility_price_switch == '1' ) {
-																switch ( $facility_type ) {
-																	case 'per_person':
-																		$option_price += $facility_price * $total_person;
-																		break;
-																	case 'per_night':
-																		$option_price += $facility_price;
-																		break;
-																	case 'per_stay':
-																		$option_price += $facility_price;
-																		break;
-																}
-															}
 															?>
                                                             <li>
                                                                 <span class="room-extra-icon"><i class="<?php echo esc_attr( $room_facility['room_facilities_icon'] ); ?>"></i></span>
@@ -682,8 +659,10 @@ $total_room_option_count = Tourfic\Classes\Room\Room::get_room_options_count($ro
 												<?php if ( $adult_number ) { ?>
                                                     <div class="tf-tooltip tf-d-b">
                                                         <div class="room-detail-icon">
-                                                <span class="room-icon-wrap"><i class="fas fa-male"></i><i
-                                                            class="fas fa-female"></i></span>
+                                                            <span class="room-icon-wrap">
+                                                                <i class="fas fa-male"></i>
+                                                                <i class="fas fa-female"></i>
+                                                            </span>
                                                             <span class="icon-text tf-d-b">x<?php echo $adult_number; ?></span>
                                                         </div>
                                                         <div class="tf-top">
@@ -714,28 +693,7 @@ $total_room_option_count = Tourfic\Classes\Room\Room::get_room_options_count($ro
 											<?php if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' ) || $tf_booking_type == 1 ) : ?>
                                                 <td class="pricing">
                                                     <div class="tf-price-column">
-                                                        <?php
-                                                        $discount_price = Pricing::apply_discount( $option_price, $hotel_discount_type, $hotel_discount_amount );
-
-                                                        if ( ! empty( $discount_price ) && $hotel_discount_type != "none" && ! empty( $hotel_discount_type ) ) {
-                                                            ?>
-                                                            <span class="tf-price"><del><?php echo wc_price( $option_price ); ?></del> <?php echo wc_price( $discount_price ); ?></span>
-                                                            <?php
-                                                        } else if ( $hotel_discount_type == "none" ) {
-                                                            ?>
-                                                            <span class="tf-price"><?php echo wc_price( $option_price ); ?></span>
-                                                            <?php
-                                                        }
-                                                        ?>
-                                                        <div class="price-per-night">
-                                                            <?php
-                                                            if ( $option_price_type == 'per_room' ) {
-                                                                echo $multi_by_date ? __( 'per room/night', 'tourfic' ) : __( 'per room/day', 'tourfic' );
-                                                            } elseif ( $option_price_type == 'per_person' ) {
-                                                                echo $multi_by_date ? __( 'per person/night', 'tourfic' ) : __( 'per person/day', 'tourfic' );
-                                                            }
-                                                            ?>
-                                                        </div>
+	                                                    <?php Pricing::instance(get_the_ID(), $_room->ID)->get_per_price_html($room_option_key); ?>
                                                     </div>
                                                 </td>
                                             <?php endif; ?>

@@ -566,7 +566,7 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	}
 
 	if ( $option ) {
-		$item->update_meta_data( 'Option', $option );
+		$item->update_meta_data( 'option', $option );
 	}
 
 	if ( $room_selected && $room_selected > 0 ) {
@@ -732,7 +732,7 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 			$price                = $item->get_subtotal();
 			$due                  = $item->get_meta( 'due', true );
 			$room_name            = $item->get_meta( 'room_name', true );
-			$option               = $item->get_meta( 'Option', true );
+			$option               = $item->get_meta( 'option', true );
 			$adult                = $item->get_meta( 'adult', true );
 			$child                = $item->get_meta( 'child', true );
 			$children_ages        = $item->get_meta( 'Children Ages', true );
@@ -952,6 +952,7 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 			$price                = $item->get_subtotal();
 			$due                  = $item->get_meta( 'due', true );
 			$room_name            = $item->get_meta( 'room_name', true );
+			$option               = $item->get_meta( 'option', true );
 			$adult                = $item->get_meta( 'adult', true );
 			$child                = $item->get_meta( 'child', true );
 			$children_ages        = $item->get_meta( 'Children Ages', true );
@@ -964,6 +965,7 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 				'check_in'             => $check_in,
 				'check_out'            => $check_out,
 				'room_name'            => $room_name,
+				'option'               => $option,
 				'adult'                => $adult,
 				'child'                => $child,
 				'children_ages'        => $children_ages,
@@ -979,6 +981,7 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 				'check_in'             => $check_in,
 				'check_out'            => $check_out,
 				'room_name'            => $room_name,
+				'option'               => $option,
 				'adult'                => $adult,
 				'child'                => $child,
 				'children_ages'        => $children_ages,

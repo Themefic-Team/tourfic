@@ -69,6 +69,8 @@ class Availability extends Pricing {
 
 							$total_price += ($adult_price * $adult_count ) + ( $child_price * $child_count );
 						}
+
+						//$option_title = $room_option['option_title'];
 					}
 				}
 			};
