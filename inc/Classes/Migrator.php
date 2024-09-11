@@ -315,6 +315,8 @@ class Migrator {
 		// Car
 		if ( empty( get_option( 'tf_template_1_car_migrate_data' ) ) ) {
 
+			$options = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
+
 			if(empty($options["tf-template"]["single-car"])){
 				$options["tf-template"]["single-car"] = 'design-1';
 			}
