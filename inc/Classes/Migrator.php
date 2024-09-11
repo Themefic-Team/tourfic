@@ -311,6 +311,62 @@ class Migrator {
 			update_option( 'tf_template_2_apartment_migrate_data', 1 );
 
 		}
+
+		// Car
+		if ( empty( get_option( 'tf_template_1_car_migrate_data' ) ) ) {
+
+			if(empty($options["tf-template"]["single-car"])){
+				$options["tf-template"]["single-car"] = 'design-1';
+			}
+			if(empty($options["tf-template"]["single-car-layout"])){
+				$options["tf-template"]["single-car-layout"] = array(
+					array(
+						"car-section"        => "Description",
+						"car-section-slug"   => "description",
+						"car-section-status" => "1"
+					),
+					array(
+						"car-section"        => "Car info",
+						"car-section-slug"   => "car-info",
+						"car-section-status" => "1"
+					),
+					array(
+						"car-section"        => "Benefits",
+						"car-section-slug"   => "benefits",
+						"car-section-status" => "1"
+					),
+					array(
+						"car-section"        => "Include/Exclude",
+						"car-section-slug"   => "inc-exc",
+						"car-section-status" => "1"
+					),
+					array(
+						"car-section"        => "Location",
+						"car-section-slug"   => "location",
+						"car-section-status" => "1"
+					),
+					array(
+						"car-section"        => "Reviews",
+						"car-section-slug"   => "reviews",
+						"car-section-status" => "1"
+					),
+					array(
+						"car-section"        => "FAQs",
+						"car-section-slug"   => "faq",
+						"car-section-status" => "1"
+					)
+				);
+			}
+			if(empty($options["tf-template"]["car-archive"])){
+				$options["tf-template"]["car-archive"] = 'design-1';
+			}
+
+			update_option( 'tf_settings', $options );
+			wp_cache_flush();
+			flush_rewrite_rules( true );
+			update_option( 'tf_template_1_car_migrate_data', 1 );
+		}
+
 	}
 
 	/**

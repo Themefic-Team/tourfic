@@ -991,15 +991,15 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'car_single_design_1_fonts_notice',
 									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Inter" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Inter Sans" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
 									'dependency' => array( 'single-car', '==', 'design-1' ),
 								),
 								array(
-									'id'         => 'single-car-design-1',
+									'id'         => 'single-car-layout',
 									'class'      => 'disable-sortable',
 									'type'       => 'repeater',
 									'drag_only'  => true,
-									'label'      => __( 'Single Car Template Sections Part 1', 'tourfic' ),
+									'label'      => __( 'Single Car Template Sections', 'tourfic' ),
 									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-car', '==', 'design-1' ),
 									'field_title'=> 'car-section',
@@ -1036,7 +1036,7 @@ TF_Settings::option( 'tf_settings', array(
 											'car-section-status' => true,
 										),
 										array(
-											'car-section'        => __( 'Car info ', 'tourfic' ),
+											'car-section'        => __( 'Car info', 'tourfic' ),
 											'car-section-slug'   => __( 'car-info', 'tourfic' ),
 											'car-section-status' => true,
 										),
@@ -1114,7 +1114,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'car_design_1_fonts_notice',
 									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Inter Sans" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
 									'dependency' => array( 'car-archive', '==', 'design-1' ),
 								),
 								array(
