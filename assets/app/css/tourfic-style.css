@@ -14585,8 +14585,11 @@ html {
   border-radius: 0px;
   font-size: 16px;
   background-size: 16px;
-  -moz-appearance: none;
-  -webkit-appearance: none;
+  appearance: auto;
+}
+
+.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering #tf-orderby:focus-visible {
+  outline: none;
 }
 
 @media only screen and (max-width: 991.98px) {

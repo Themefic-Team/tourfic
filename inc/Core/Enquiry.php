@@ -33,6 +33,46 @@ abstract class Enquiry {
 		$enquiry_results->display();
 	}
 
+	
+	Public function enquiry_table_data( $post_type = '', $post_id = '' ) {
+
+		/**
+		 * TODO: array structure - id, post_title, post_type, uname, uemail, description,  submit_time
+		 * if post id passed then show only that post enquiry
+		 * if post type passed then show all enquiry of that post type
+		 * if nothing passed then show all enquiry
+		 */
+
+		 global $wpdb;
+		 $query = "SELECT * FROM {$wpdb->prefix}tf_enquiry_data ";
+		 $enquiry_data = array();
+ 
+		 if( !empty($post_type) ) {
+			$query .= sprintf('WHERE post_type = "%s"', $post_type);
+		 } else if( !empty($post_id) ) {
+			$query.= sprintf('WHERE post_id = %d', $post_id);
+		 }
+
+		 $results = $wpdb->get_results( $wpdb->prepare( $query ), ARRAY_A );
+
+		 if( !empty($results) ) {
+			foreach( $results as $result ) {
+				$enquiry_data[] = array(
+					'id' => $result['id'],
+					'post_title' => get_the_title($result['post_id']),
+					'post_type' => $result['post_type'],
+					'uname' => $result['uname'],
+					'uemail' => $result['uemail'],
+					'description' => $result['udescription'],
+					'submit_time' => $result['created_at']
+				);
+			}
+		 }
+
+		return $enquiry_data;
+
+	}
+
 	function tourfic_ask_question() {
 		?>
 		<div id="tf-ask-question" style="display: none;">
