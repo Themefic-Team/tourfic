@@ -156,8 +156,8 @@ use \Tourfic\App\TF_Review;
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Pick Up Location" id="tf_pickup_location">
-                                        <input type="hidden" id="tf_pickup_location_id">
+                                        <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo $_GET['pickup'] ? esc_html($_GET['pickup']) : '' ?>" />
+                                        <input type="hidden" id="tf_pickup_location_id" value="<?php echo $_GET['pickup'] ? esc_html($_GET['pickup']) : '' ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -171,8 +171,8 @@ use \Tourfic\App\TF_Review;
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Drop-off", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location">
-                                        <input type="hidden" id="tf_dropoff_location_id">
+                                        <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo $_GET['dropoff'] ? esc_html($_GET['dropoff']) : '' ?>" />
+                                        <input type="hidden" id="tf_dropoff_location_id" value="<?php echo $_GET['pickup'] ? esc_html($_GET['pickup']) : '' ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -188,7 +188,7 @@ use \Tourfic\App\TF_Review;
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Pick-up date", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Pick Up Date" class="tf_pickup_date">
+                                        <input type="text" placeholder="Pick Up Date" class="tf_pickup_date" value="<?php echo $_GET['pickup_date'] ? esc_html($_GET['pickup_date']) : '' ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -202,7 +202,7 @@ use \Tourfic\App\TF_Review;
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Time", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Pick Up Time" class="tf_pickup_time">
+                                        <input type="text" placeholder="Pick Up Time" class="tf_pickup_time" value="<?php echo $_GET['pickup_time'] ? esc_html($_GET['pickup_time']) : '' ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -218,7 +218,7 @@ use \Tourfic\App\TF_Review;
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Drop-off date", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Drop Off Date" class="tf_dropoff_date">
+                                        <input type="text" placeholder="Drop Off Date" class="tf_dropoff_date" value="<?php echo $_GET['dropoff_date'] ? esc_html($_GET['dropoff_date']) : '' ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -232,8 +232,8 @@ use \Tourfic\App\TF_Review;
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Time", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Drop Off Time" class="tf_dropoff_time">
-                                        <input type="hidden" value="<?php echo esc_attr($post_id); ?>" id="post_id">
+                                        <input type="text" placeholder="Drop Off Time" class="tf_dropoff_time" value="<?php echo $_GET['dropoff_time'] ? esc_html($_GET['dropoff_time']) : '' ?>" />
+                                        <input type="hidden" value="<?php echo esc_attr($post_id); ?>" id="post_id" />
                                     </div>
                                 </div>
                             </div>

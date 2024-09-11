@@ -425,34 +425,16 @@
                     $this.unblock();
 
                     var response = JSON.parse(data);
-                    if (response.without_payment == 'false') {
-                        if (response.status == 'error') {
+                    if (response.status == 'error') {
 
-                            if (response.errors) {
-                                response.errors.forEach(function (text) {
-                                    notyf.error(text);
-                                });
-                            }
-
-                            return false;
-                        } else {
-
-                            if (response.redirect_to) {
-                                window.location.replace(response.redirect_to);
-                            } else {
-                                jQuery(document.body).trigger('added_to_cart');
-                            }
-
+                        if (response.errors) {
+                            response.errors.forEach(function (text) {
+                                notyf.error(text);
+                            });
                         }
-                    }else{
+
                         $('.tf-car-booking-popup').hide();
                         $this.removeClass('tf-btn-loading');
-                        $('#tf_pickup_location').val('');
-                        $('#tf_dropoff_location').val('');
-                        $('.tf_pickup_date').val('');
-                        $('.tf_dropoff_date').val('');
-                        $('.tf_pickup_time').val('');
-                        $('.tf_dropoff_time').val('');
                         if($('.tf-protection-content')){
                             $('.tf-protection-content').show();
                             $('.tf-booking-bar').show();
@@ -465,6 +447,49 @@
                             $('.tf-booking-tabs ul li').removeClass('active');
                             $('.tf-booking-tabs ul li.booking').addClass('active');
                         }
+                        return false;
+                    } else {
+                        if (response.without_payment == 'false') {
+                            if (response.status == 'error') {
+
+                                if (response.errors) {
+                                    response.errors.forEach(function (text) {
+                                        notyf.error(text);
+                                    });
+                                }
+
+                                return false;
+                            } else {
+
+                                if (response.redirect_to) {
+                                    window.location.replace(response.redirect_to);
+                                } else {
+                                    jQuery(document.body).trigger('added_to_cart');
+                                }
+
+                            }
+                        }else{
+                            $('.tf-car-booking-popup').hide();
+                            $this.removeClass('tf-btn-loading');
+                            $('#tf_pickup_location').val('');
+                            $('#tf_dropoff_location').val('');
+                            $('.tf_pickup_date').val('');
+                            $('.tf_dropoff_date').val('');
+                            $('.tf_pickup_time').val('');
+                            $('.tf_dropoff_time').val('');
+                            if($('.tf-protection-content')){
+                                $('.tf-protection-content').show();
+                                $('.tf-booking-bar').show();
+                                $('.tf-booking-form-fields').hide();
+
+                                $('.tf-booking-tabs ul li').removeClass('active');
+                                $('.tf-booking-tabs ul li.protection').addClass('active');
+                            }else{
+                                $('.tf-booking-form-fields').show();
+                                $('.tf-booking-tabs ul li').removeClass('active');
+                                $('.tf-booking-tabs ul li.booking').addClass('active');
+                            }
+                        }
                     }
                 }
             });
@@ -472,9 +497,8 @@
         });
 
         /*
-        * Hotel Search submit
-        * @since 2.9.7
-        * @author Foysal
+        * Car Search submit
+        * @author Jahid
         */
         $(document).on('submit', '#tf_car_booking', function (e) {
             e.preventDefault();
