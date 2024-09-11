@@ -77,7 +77,28 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 	// Car Info 
 	$passengers = ! empty( $meta['passengers'] ) ? $meta['passengers'] : '';
 	$baggage = ! empty( $meta['baggage'] ) ? $meta['baggage'] : '';
-	$car_custom_info = ! empty( $meta['car_custom_info'] ) ? $meta['car_custom_info'] : '';
+	$unlimited_mileage = ! empty( $meta['unlimited_mileage'] ) ? $meta['unlimited_mileage'] : 0;
+	$mileage_type = ! empty( $meta['mileage_type'] ) ? $meta['mileage_type'] : 'Km';
+	$total_mileage = ! empty( $meta['mileage'] ) ? $meta['mileage'] : '';
+	$auto_transmission = ! empty( $meta['auto_transmission'] ) ? $meta['auto_transmission'] : '';
+
+	// Fuel Type
+	$fuel_type_terms = wp_get_post_terms($post_id, 'carrental_fuel_type');
+	$fuel_types = [];
+	if (!is_wp_error($fuel_type_terms) && !empty($fuel_type_terms)) {
+		foreach ($fuel_type_terms as $term) {
+			$fuel_types[] = $term->name;
+		}
+	}
+	// Engine Year
+	$engine_year_terms = wp_get_post_terms($post_id, 'carrental_engine_year');
+	$engine_years = [];
+	if (!is_wp_error($engine_year_terms) && !empty($engine_year_terms)) {
+		foreach ($engine_year_terms as $term) {
+			$engine_years[] = $term->name;
+		}
+	}
+
 	// Badge
 	$badges = ! empty( $meta['badge'] ) ? $meta['badge'] : '';
 ?>
@@ -109,21 +130,32 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 		<div class="tf-car-content">
 			<a href="<?php echo esc_url( $url ); ?>"><h3 class="tf-mb-24"><?php the_title(); ?></h3></a>
 			<ul class="tf-flex tf-mb-24">
-				<?php if(!empty($passengers)){ ?>
-				<li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="fa-solid fa-wheelchair"></i><?php echo esc_attr($passengers); ?></li>
-				<?php } ?>
-        		<?php if(!empty($baggage)){ ?>
-				<li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-briefcase-line"></i></i><?php echo esc_attr($baggage); ?></li>
-				<?php } ?>
-				<?php if(!empty($car_custom_info)){
-            	foreach($car_custom_info as $info){ ?>
+			
 				<li class="tf-flex tf-flex-gap-8 tf-flex-align-center">
-					<?php if(!empty($info['info_icon'])){ ?>
-						<i class="<?php echo esc_attr($info['info_icon']); ?>"></i>
-					<?php } ?>
-					<?php echo !empty($info['title']) ? esc_html($info['title']) : ''; ?>
+					<i class="ri-speed-up-line"></i>
+					<?php echo $unlimited_mileage ? esc_html_e("Unlimited", "tourfic") : $total_mileage.' '.$mileage_type; ?>
 				</li>
-				<?php }} ?>
+
+				<?php if(!empty($fuel_types)){ ?>
+					<li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-gas-station-line"></i><?php echo implode(", ",$fuel_types); ?></li>
+				<?php } ?>
+
+				<?php if(!empty($engine_years)){ ?>
+					<li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-car-line"></i><?php echo implode(", ",$engine_years); ?></li>
+				<?php } ?>
+
+				<li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-sound-module-fill"></i>
+				<?php echo $auto_transmission ? esc_html_e("Auto", "tourfic") : esc_html_e("Manual", "tourfic"); ?>
+				</li>
+
+				<?php if(!empty($passengers)){ ?>
+				<li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="fa-solid fa-wheelchair"></i><?php echo esc_attr($passengers); ?> <?php esc_html_e("Persons", "tourfic"); ?></li>
+				<?php } ?>
+
+        		<?php if(!empty($baggage)){ ?>
+				<li class="tf-flex tf-flex-gap-8 tf-flex-align-center"><i class="ri-briefcase-line"></i><?php echo esc_attr($baggage); ?> <?php esc_html_e("Bags", "tourfic"); ?></li>
+				<?php } ?>
+
 			</ul>
 		</div>
 		<div class="tf-booking-btn tf-flex tf-flex-space-bttn">
