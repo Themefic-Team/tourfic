@@ -8,19 +8,19 @@ use \Tourfic\Classes\Hotel\Pricing;
 
 class Availability extends Pricing {
 
-	function __construct(  ) {
+	function __construct() {
 		parent::__construct();
 	}
 
-	function is_available(){
+	function is_available() {
 
 	}
 
-	function get_availability_total_price(  ) {
-		$room_meta = $this->room_meta;
-		$period    = $this->period;
-		$pricing_by          = $room_meta['pricing-by'] ?? 1;
-		$avail_by_date       = $room_meta['avil_by_date'] ?? 1;
+	function get_availability_total_price() {
+		$room_meta     = $this->room_meta;
+		$period        = $this->period;
+		$pricing_by    = $room_meta['pricing-by'] ?? 1;
+		$avail_by_date = $room_meta['avil_by_date'] ?? 1;
 
 		// Total person calculation
 		$persons     = ! empty( $this->persons ) ? $this->persons : array();
@@ -49,12 +49,12 @@ class Availability extends Pricing {
 				$adult_price = $this->calculate_discount( $adult_price );
 				$child_price = $this->calculate_discount( $child_price );
 
-				if($pricing_by == '1'){
+				if ( $pricing_by == '1' ) {
 					$total_price += $room_price;
-				} elseif($pricing_by == '2'){
-					$total_price += ($adult_price * $adult_count ) + ( $child_price * $child_count );
-				} elseif($pricing_by == '3'){
-					$data = $available_rooms[0];
+				} elseif ( $pricing_by == '2' ) {
+					$total_price += ( $adult_price * $adult_count ) + ( $child_price * $child_count );
+				} elseif ( $pricing_by == '3' ) {
+					$data          = $available_rooms[0];
 					$options_count = $data['options_count'] ?? 0;
 					for ( $i = 0; $i <= $options_count - 1; $i ++ ) {
 						if ( $data[ 'tf_room_option_' . $i ] == '1' && $data[ 'tf_option_pricing_type_' . $i ] == 'per_room' ) {
@@ -67,7 +67,7 @@ class Availability extends Pricing {
 							$adult_price = $this->calculate_discount( $adult_price );
 							$child_price = $this->calculate_discount( $child_price );
 
-							$total_price += ($adult_price * $adult_count ) + ( $child_price * $child_count );
+							$total_price += ( $adult_price * $adult_count ) + ( $child_price * $child_count );
 						}
 
 						//$option_title = $room_option['option_title'];

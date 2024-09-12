@@ -135,28 +135,104 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 			foreach ( $room_options as $room_option_key => $room_option ):
                 $option_price_type = ! empty( $room_option['option_pricing_type'] ) ? $room_option['option_pricing_type'] : 'per_room';
 
-				if ( $option_price_type === 'per_room' ) {
-					$option_price = $price_by_date = ! empty( $room_option['option_price'] ) ? floatval( $room_option['option_price'] ) : 0;
-				} elseif ( $option_price_type === 'per_person' ) {
-					$option_adult_price = ! empty( $room_option['option_adult_price'] ) ? floatval( $room_option['option_adult_price'] ) : 0;
-					$option_child_price = ! empty( $room_option['option_child_price'] ) ? floatval( $room_option['option_child_price'] ) : 0;
+				if ( $avil_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+					if(!$multi_by_date_ck){
+						if ( $tf_startdate && $tf_enddate ) {
+							// Check availability by date option
+							$period = new \DatePeriod(
+								new \DateTime( $tf_startdate . ' 00:00' ),
+								new \DateInterval( 'P1D' ),
+								new \DateTime( $tf_enddate . ' 23:59' )
+							);
+						}
+					}else{
+						if ( $tf_startdate && $tf_enddate ) {
+							$period = new \DatePeriod(
+								new \DateTime( $tf_startdate . ' 00:00' ),
+								new \DateInterval( 'P1D' ),
+								new \DateTime( $tf_enddate . ' 00:00' )
+							);
+						}
+					}
 
-					$price_by_date = ( ( $option_adult_price * $form_adult ) + ( $option_child_price * $form_child ) );
+					// split date range
+					$check_in  = strtotime( $form_start . ' 00:00' );
+					$check_out = strtotime( $form_end . ' 00:00' );
+					$price = $price_by_date = $d_price = $d_price_by_date = 0;
+					$has_option  = [];
+
+					// extract price from available room options
+					foreach ( $period as $date ) {
+
+						$available_rooms = array_values( array_filter( $avail_date, function ( $date_availability ) use ( $date ) {
+							if( $date_availability['status'] == 'available' ){
+								$date_availability_from = strtotime( $date_availability['check_in'] . ' 00:00' );
+								$date_availability_to   = strtotime( $date_availability['check_out'] . ' 23:59' );
+
+								return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
+							} else {
+								return false;
+							}
+						} ) );
+
+						if ( is_iterable( $available_rooms ) && count( $available_rooms ) >= 1 ) {
+
+							$d_price_by_date = 0;
+                            $data          = $available_rooms[0];
+                            $options_count = $data['options_count'] ?? 0;
+
+                            if($data[ 'tf_room_option_' . $room_option_key ] == ''){
+	                            $has_option[] = 0;
+                            }
+
+                            if ( $data[ 'tf_room_option_' . $room_option_key ] == '1' && $data[ 'tf_option_pricing_type_' . $room_option_key ] == 'per_room' ) {
+	                            $room_price = $price_by_date = ! empty( $data[ 'tf_option_room_price_' . $room_option_key ] ) ? $data[ 'tf_option_room_price_' . $room_option_key ] : 0;
+
+                                $d_room_price = $d_price_by_date = !empty($room_price) ? Pricing::apply_discount($room_price, $hotel_discount_type, $hotel_discount_amount) : 0;
+	                            $d_price += $d_room_price;
+	                            $has_option[] = 1;
+                            } else if ( $data[ 'tf_room_option_' . $room_option_key ] == '1' && $data[ 'tf_option_pricing_type_' . $room_option_key ] == 'per_person' ) {
+                                $adult_price = ! empty( $data[ 'tf_option_adult_price_' . $room_option_key ] ) ? $data[ 'tf_option_adult_price_' . $room_option_key ] : 0;
+                                $child_price = ! empty( $data[ 'tf_option_child_price_' . $room_option_key ] ) ? $data[ 'tf_option_child_price_' . $room_option_key ] : 0;
+                                $price_by_date = ( $adult_price * $form_adult ) + ( $child_price * $form_child );
+
+	                            $d_adult_price = !empty($adult_price) ? Pricing::apply_discount($adult_price, $hotel_discount_type, $hotel_discount_amount) : 0;
+	                            $d_child_price = !empty($child_price) ? Pricing::apply_discount($child_price, $hotel_discount_type, $hotel_discount_amount) : 0;
+	                            $d_price_by_date = ( $d_adult_price * $form_adult ) + ( $d_child_price * $form_child );
+                                $d_price += $d_price_by_date;
+	                            $has_option[] = 1;
+                            }
+							$price 			+= $price_by_date;
+						} else {
+							$has_option[] = 0;
+						}
+					}
+
+				} else{
+					if ( $option_price_type === 'per_room' ) {
+						$option_price = $price_by_date = ! empty( $room_option['option_price'] ) ? floatval( $room_option['option_price'] ) : 0;
+					} elseif ( $option_price_type === 'per_person' ) {
+						$option_adult_price = ! empty( $room_option['option_adult_price'] ) ? floatval( $room_option['option_adult_price'] ) : 0;
+						$option_child_price = ! empty( $room_option['option_child_price'] ) ? floatval( $room_option['option_child_price'] ) : 0;
+
+						$price_by_date = ( ( $option_adult_price * $form_adult ) + ( $option_child_price * $form_child ) );
+					}
+
+					if ( $option_price_type == 'per_room' ) {
+						$d_room_price = $d_price_by_date = Pricing::apply_discount( $option_price, $hotel_discount_type, $hotel_discount_amount );
+					} elseif ( $option_price_type == 'per_person' ) {
+						$d_room_adult_price = Pricing::apply_discount( $option_adult_price, $hotel_discount_type, $hotel_discount_amount );
+						$d_room_child_price = Pricing::apply_discount( $option_child_price, $hotel_discount_type, $hotel_discount_amount );
+
+						$d_price_by_date = ( ( $d_room_adult_price * $form_adult ) + ( $d_room_child_price * $form_child ) );
+					}
+
+					$price   = $price_by_date * $days;
+					$d_price = $d_price_by_date * $days;
 				}
-
-				if ( $option_price_type == 'per_room' ) {
-					$d_room_price = $d_price_by_date = Pricing::apply_discount($option_price, $hotel_discount_type, $hotel_discount_amount);
-				} elseif ( $option_price_type == 'per_person' ) {
-					$d_room_adult_price = Pricing::apply_discount($option_adult_price, $hotel_discount_type, $hotel_discount_amount);
-					$d_room_child_price = Pricing::apply_discount($option_child_price, $hotel_discount_type, $hotel_discount_amount);
-
-					$d_price_by_date = ( ( $d_room_adult_price * $form_adult ) + ( $d_room_child_price * $form_child ) );
-				}
-
-                $price   = $price_by_date * $days;
-                $d_price = $d_price_by_date * $days;
 
                 Helper::tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price );
+				if ( ! in_array( 0, $has_option ) ) {
 				?>
                 <td class="options">
                     <ul>
@@ -215,11 +291,12 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 							?>
                             <span class="tf-price"><del><?php echo wp_kses_post( wc_price( $price ) ); ?></del> <?php echo wp_kses_post( wc_price( $d_price ) ); ?></span>
 							<?php
-							$d_price = "";
+							$price = $d_price = "";
 						} else if ( $hotel_discount_type == "none" || empty( $d_price ) ) {
 							?>
                             <span class="tf-price"><?php echo wp_kses_post( wc_price( $price ) ); ?></span>
 							<?php
+							$price = '';
 						}
 						if ( $pricing_by == '1' ) { ?>
                             <div class="price-per-night">
@@ -346,6 +423,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                     </form>
                 </td>
                 </tr>
+					<?php } ?>
 
 				<?php if ( $room_option_key < count( $room_options ) - 1 ) : ?>
                 <tr>

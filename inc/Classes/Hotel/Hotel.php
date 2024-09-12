@@ -342,19 +342,10 @@ class Hotel {
                                 $has_room[]      = 1;
 
                                 if($pricing_by == 1) {
-                                    if($hotel_discount_type == "percent") {
-                                        $d_room_price = !empty($room_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $room_price - ( ( (int) $room_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-                                    }else if($hotel_discount_type == "fixed") {
-                                        $d_room_price = !empty($room_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $room_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-                                    }
+                                    $d_room_price = !empty($room_price) ? Pricing::apply_discount($room_price, $hotel_discount_type, $hotel_discount_amount) : 0;
                                 } elseif($pricing_by == 2) {
-                                    if($hotel_discount_type == "percent") {
-                                        $d_adult_price = !empty($adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-                                        $d_child_price = !empty($child_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - ( ( (int) $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-                                    }else if($hotel_discount_type == "fixed") {
-                                        $d_adult_price = !empty($adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $adult_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-                                        $d_child_price = !empty($adult_price) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $child_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-                                    }
+                                    $d_adult_price = !empty($adult_price) ? Pricing::apply_discount($adult_price, $hotel_discount_type, $hotel_discount_amount) : 0;
+                                    $d_child_price = !empty($child_price) ? Pricing::apply_discount($child_price, $hotel_discount_type, $hotel_discount_amount) : 0;
                                 }
                                 $d_price_by_date = $pricing_by == '1' ? $d_room_price : ( ( $d_adult_price * $form_adult ) + ( $d_child_price * $form_child ) );
                                 $d_price += $d_price_by_date;
