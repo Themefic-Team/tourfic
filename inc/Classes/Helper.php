@@ -3013,8 +3013,8 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
-									<input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo $_GET['pickup-name'] ? esc_html($_GET['pickup-name']) : '' ?>" />
-									<input type="hidden" id="tf_pickup_location_id" value="<?php echo $_GET['pickup'] ? esc_html($_GET['pickup']) : '' ?>" />
+									<input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup-name']) ? esc_html($_GET['pickup-name']) : '' ?>" />
+									<input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html($_GET['pickup']) : '' ?>" />
 								</div>
 							</div>
 						</div>
@@ -3028,8 +3028,8 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php esc_html_e("Drop-off", "tourfic"); ?></h5>
-									<input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo $_GET['dropoff-name'] ? esc_html($_GET['dropoff-name']) : '' ?>" />
-									<input type="hidden" id="tf_dropoff_location_id" value="<?php echo $_GET['dropoff'] ? esc_html($_GET['dropoff']) : '' ?>" />
+									<input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff-name']) ? esc_html($_GET['dropoff-name']) : '' ?>" />
+									<input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['dropoff']) ? esc_html($_GET['dropoff']) : '' ?>" />
 								</div>
 							</div>
 						</div>
@@ -3045,7 +3045,7 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php esc_html_e("Pick-up date", "tourfic"); ?></h5>
-									<input type="text" placeholder="Pick Up Date" class="tf_pickup_date" value="<?php echo $_GET['pickup-date'] ? esc_html($_GET['pickup-date']) : '' ?>" />
+									<input type="text" placeholder="Pick Up Date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup-date']) ? esc_html($_GET['pickup-date']) : '' ?>" />
 								</div>
 							</div>
 						</div>
@@ -3059,7 +3059,7 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php esc_html_e("Time", "tourfic"); ?></h5>
-									<input type="text" placeholder="Pick Up Time" class="tf_pickup_time" value="<?php echo $_GET['pickup-time'] ? esc_html($_GET['pickup-time']) : '' ?>" />
+									<input type="text" placeholder="Pick Up Time" class="tf_pickup_time" value="<?php echo !empty($_GET['pickup-time']) ? esc_html($_GET['pickup-time']) : '' ?>" />
 								</div>
 							</div>
 						</div>
@@ -3075,7 +3075,7 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php esc_html_e("Drop-off date", "tourfic"); ?></h5>
-									<input type="text" placeholder="Drop Off Date" class="tf_dropoff_date" value="<?php echo $_GET['dropoff-date'] ? esc_html($_GET['dropoff-date']) : '' ?>" />
+									<input type="text" placeholder="Drop Off Date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff-date']) ? esc_html($_GET['dropoff-date']) : '' ?>" />
 								</div>
 							</div>
 						</div>
@@ -3089,7 +3089,7 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php esc_html_e("Time", "tourfic"); ?></h5>
-									<input type="text" placeholder="Drop Off Time" class="tf_dropoff_time" value="<?php echo $_GET['dropoff-time'] ? esc_html($_GET['dropoff-time']) : '' ?>" />
+									<input type="text" placeholder="Drop Off Time" class="tf_dropoff_time" value="<?php echo !empty($_GET['dropoff-time']) ? esc_html($_GET['dropoff-time']) : '' ?>" />
 								</div>
 							</div>
 						</div>
