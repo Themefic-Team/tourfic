@@ -183,17 +183,16 @@ class Hotel {
                     $period = new \DatePeriod(
                         new \DateTime( $form_start . ' 00:00' ),
                         new \DateInterval( 'P1D' ),
-                        new \DateTime( $form_end . ' 23:59' )
+                        (new \DateTime( $tf_enddate . ' 00:00' ))->modify('-1 day')
                     );
 
                     $days = iterator_count( $period );
 
                     // Check availability by date option
-
                     $tfperiod = new \DatePeriod(
                         new \DateTime( $tf_startdate . ' 00:00' ),
                         new \DateInterval( 'P1D' ),
-                        new \DateTime( $tf_enddate . ' 23:59' )
+                        (new \DateTime( $tf_enddate . ' 00:00' ))->modify('-1 day')
                     );
 
                     $avail_durationdate = [];
