@@ -1085,7 +1085,7 @@ class Helper {
 			);
 		}
 
-		if(!empty($tf_startprice) && !empty($tf_endprice)){
+		if(!empty($tf_startprice) && !empty($tf_endprice) && $posttype == 'tf_carrental'){
 			$args['meta_query'] = array(
 				array(
 					'key' => 'tf_search_car_rent',
