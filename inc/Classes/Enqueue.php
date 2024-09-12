@@ -201,7 +201,7 @@ class Enqueue {
 		/*
 		 * Apartment Min and Max Price
 		 */
-		$tf_apartment_min_max_price = ApartmentPricing::get_all_price();
+		$tf_apartment_min_max_price = ApartmentPricing::get_min_max_price_from_all_apartment();
 
 		/**
 		 * Tour booking form

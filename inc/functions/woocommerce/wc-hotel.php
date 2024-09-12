@@ -92,8 +92,8 @@ function tf_hotel_booking_callback() {
 		}
 	}
 
-	$min_stay = ! empty( $room["minimum_stay_requirement"] ) ? $room["minimum_stay_requirement"] : 0;
-	$max_stay = ! empty( $room["maximum_stay_requirement"] ) ? $room["maximum_stay_requirement"] : 0;
+	$min_stay = ! empty( $room_meta["minimum_stay_requirement"] ) ? $room_meta["minimum_stay_requirement"] : 0;
+	$max_stay = ! empty( $room_meta["maximum_stay_requirement"] ) ? $room_meta["maximum_stay_requirement"] : 0;
 
 	if ( $day_difference < $min_stay && $min_stay > 0 ) {
 		if ( $max_stay == 0 ) {
@@ -101,7 +101,7 @@ function tf_hotel_booking_callback() {
 			$response['errors'][] = sprintf( esc_html__( 'Your Stay Requirement is Minimum %1$s Days', 'tourfic' ), $min_stay );
 		} else {
 			/* translators: %1$s Minimum Stay Requirement, %2$s Maximum Stay Requirement */
-			$response['errors'][] = sprintf( esc_html__( 'Your Stay Requirement is Minimum %1$s Days to Maximum %2$s', 'tourfic' ),
+			$response['errors'][] = sprintf( esc_html__( 'Your Stay Requirement is Minimum %1$s Days to Maximum %2$s Days', 'tourfic' ),
 				$min_stay,
 				$max_stay
 			);
@@ -110,10 +110,6 @@ function tf_hotel_booking_callback() {
 		/* translators: %1$s Maximum Stay Requirement */
 		$response['errors'][] = sprintf( esc_html__( 'Your Maximum Stay Requirement is %1$s Days', 'tourfic' ), $max_stay );
 	}
-
-	// Hotel Room Discount Data
-	$hotel_discount_type   = ! empty( $room_meta["discount_hotel_type"] ) ? $room_meta["discount_hotel_type"] : "none";
-	$hotel_discount_amount = ! empty( $room_meta["discount_hotel_price"] ) ? $room_meta["discount_hotel_price"] : 0;
 
 	/**
 	 * If no errors then process
@@ -566,7 +562,7 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	}
 
 	if ( $option ) {
-		$item->update_meta_data( 'Option', $option );
+		$item->update_meta_data( 'option', $option );
 	}
 
 	if ( $room_selected && $room_selected > 0 ) {
@@ -732,7 +728,7 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 			$price                = $item->get_subtotal();
 			$due                  = $item->get_meta( 'due', true );
 			$room_name            = $item->get_meta( 'room_name', true );
-			$option               = $item->get_meta( 'Option', true );
+			$option               = $item->get_meta( 'option', true );
 			$adult                = $item->get_meta( 'adult', true );
 			$child                = $item->get_meta( 'child', true );
 			$children_ages        = $item->get_meta( 'Children Ages', true );
@@ -952,6 +948,7 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 			$price                = $item->get_subtotal();
 			$due                  = $item->get_meta( 'due', true );
 			$room_name            = $item->get_meta( 'room_name', true );
+			$option               = $item->get_meta( 'option', true );
 			$adult                = $item->get_meta( 'adult', true );
 			$child                = $item->get_meta( 'child', true );
 			$children_ages        = $item->get_meta( 'Children Ages', true );
@@ -964,6 +961,7 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 				'check_in'             => $check_in,
 				'check_out'            => $check_out,
 				'room_name'            => $room_name,
+				'option'               => $option,
 				'adult'                => $adult,
 				'child'                => $child,
 				'children_ages'        => $children_ages,
@@ -979,6 +977,7 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 				'check_in'             => $check_in,
 				'check_out'            => $check_out,
 				'room_name'            => $room_name,
+				'option'               => $option,
 				'adult'                => $adult,
 				'child'                => $child,
 				'children_ages'        => $children_ages,
