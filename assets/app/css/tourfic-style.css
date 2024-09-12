@@ -16295,6 +16295,9 @@ html {
   font-weight: 400;
 }
 
+.tf-single-car-section {
+  margin: 0 auto;
+}
 .tf-single-car-section .tf-single-car-details-warper {
   padding: 32px 0;
   display: flex;
@@ -17179,6 +17182,9 @@ html {
   padding: 16px 40px;
 }
 
+.tf-archive-car-section {
+  margin: 0 auto;
+}
 .tf-archive-car-section .tf-archive-car-banner {
   background: #B8C5D2;
   height: 350px;
