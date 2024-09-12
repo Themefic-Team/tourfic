@@ -41,6 +41,20 @@
             });
         }
         
+        if ( $('.tf-filter-bulk-option-enquiry').length > 0 ) {
+            $('.tf-filter-bulk-option-enquiry').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Bulk Action",
+                minimumResultsForSearch: -1,
+            });
+        }
+        if ( $('.tf-filter-hotel-name').length > 0 ) {
+            $('.tf-filter-hotel-name').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Hotel Name",
+            });
+        }
+        
         // Tour Post Section
         if( $('.tf-post-id-filter-options').length > 0 ) {
             $('.tf-post-id-filter-options').select2({

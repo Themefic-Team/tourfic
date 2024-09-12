@@ -33,24 +33,172 @@ abstract class Enquiry {
 		$enquiry_results->display();
 	}
 
-	
-	Public function enquiry_table_data( $post_type = '', $post_id = '' ) {
 
-		/**
-		 * TODO: array structure - id, post_title, post_type, uname, uemail, description,  submit_time
-		 * if post id passed then show only that post enquiry
-		 * if post type passed then show all enquiry of that post type
-		 * if nothing passed then show all enquiry
-		 */
+	public function enquiry_header_filter_options( array $args) {
+		?>
+			<div class="tf-booking-header-filter">
+				<div class="tf-left-search-filter">
+					<div class="tf-bulk-action-form">
+						<div class="tf-filter-options">
+							<div class="tf-order-status-filter">
+								<select class="tf-tour-filter-options tf-filter-bulk-option tf-filter-bulk-option-enquiry">
+									<option value=""><?php esc_html_e( "Bulk action", "tourfic" ); ?></option>
+									<option value="trash"><?php esc_html_e( "Trash", "tourfic" ); ?></option>
+									<option value="mark-as-read"><?php esc_html_e( "Mark as Read", "tourfic" ); ?></option>
+								</select>
+							</div>
+						</div>
+						<button class="tf-order-status-filter-btn">
+							<?php esc_html_e( "Apply", "tourfic" ); ?>
+						</button>
+						<div class="tf-filter-options">
+							<div class="tf-order-status-filter-reset-btn">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<mask id="mask0_265_944" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+										<rect width="24" height="24" fill="#D9D9D9"/>
+									</mask>
+									<g mask="url(#mask0_265_944)">
+										<path d="M11 20.95C8.98333 20.7 7.3125 19.8208 5.9875 18.3125C4.6625 16.8042 4 15.0333 4 13C4 11.9 4.21667 10.8458 4.65 9.8375C5.08333 8.82917 5.7 7.95 6.5 7.2L7.925 8.625C7.29167 9.19167 6.8125 9.85 6.4875 10.6C6.1625 11.35 6 12.15 6 13C6 14.4667 6.46667 15.7625 7.4 16.8875C8.33333 18.0125 9.53333 18.7 11 18.95V20.95ZM13 20.95V18.95C14.45 18.6833 15.6458 17.9917 16.5875 16.875C17.5292 15.7583 18 14.4667 18 13C18 11.3333 17.4167 9.91667 16.25 8.75C15.0833 7.58333 13.6667 7 12 7H11.925L13.025 8.1L11.625 9.5L8.125 6L11.625 2.5L13.025 3.9L11.925 5H12C14.2333 5 16.125 5.775 17.675 7.325C19.225 8.875 20 10.7667 20 13C20 15.0167 19.3375 16.7792 18.0125 18.2875C16.6875 19.7958 15.0167 20.6833 13 20.95Z" fill="#1D2327"/>
+									</g>
+								</svg>
+								<h3 class="tf-enquiry-reset-button-text"><?php esc_html_e("Reset", 'tourfic'); ?></h3>
+							</div>
+						</div>
+						<div class="tf-filter-options">
+							<div class="tf-order-status-filter">
+								<select class="tf-tour-filter-options tf-filter-hotel-name">
+									<?php $hotel_enquiry_title = esc_html__( sprintf( "%s Enquiry Details", $args['name'] ), 'tourfic' ); ?>
+									<option value=""><?php esc_html($hotel_enquiry_title); ?></option>
+									<?php
+									$tf_posts_list       = array(
+										'posts_per_page' => - 1,
+										'post_type'      => $args['post_type'],
+										'post_status'    => 'publish'
+									);
+									$tf_posts_list_query = new \WP_Query( $tf_posts_list );
+									if ( $tf_posts_list_query->have_posts() ):
+										while ( $tf_posts_list_query->have_posts() ) : $tf_posts_list_query->the_post();
+											?>
+											<option value="<?php echo esc_attr(get_the_ID()); ?>" <?php echo ! empty( $_GET['post'] ) && get_the_ID() == $_GET['post'] ? esc_attr( 'selected' ) : ''; ?>><?php echo esc_html(get_the_title()); ?></option>
+										<?php
+										endwhile;
+									endif;
+									wp_reset_query();
+									?>
+
+								</select>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<form class="tf-right-search-filter">
+					<input type="number" value="" placeholder="<?php esc_html_e("Search by " . $args["name"] . " ID") ?>" id="tf-searching-key">
+					<button class="tf-search-by-id" type="submit">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+							<path d="M17.5 17.5L14.5834 14.5833M16.6667 9.58333C16.6667 13.4954 13.4954 16.6667 9.58333 16.6667C5.67132 16.6667 2.5 13.4954 2.5 9.58333C2.5 5.67132 5.67132 2.5 9.58333 2.5C13.4954 2.5 16.6667 5.67132 16.6667 9.58333Z" stroke="#87888B" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+				</form>
+			</div>
+		<?php 
+	}
+
+	public function enquiry_details_list(array $data) {
+		?>
+		<div class="<?php echo apply_filters( $data["post_type"] . '_booking_oder_table_class', "tf-order-table-responsive") ?>">
+            <table class="wp-list-table table" cellpadding="0" cellspacing="0">
+                <thead>
+					<tr>
+						<td id="cb">
+							<div class="tf-checkbox-listing">
+								<input id="cb-select-all-1" type="checkbox">
+							</div>
+						</td>
+						<th id="order_id">
+							<?php esc_html_e( "Name", "tourfic" ); ?>
+						</th>
+						<th id="uemail">
+							<?php esc_html_e( "Email", "tourfic" ); ?>
+						</th>
+						<th id="cdetails">
+							<?php $data[0]["post_type"] == "tf_tours" ? esc_html_e("Tour Name", "tourfic") : ( $data[0]["post_type"] == 'tf_hotel' ? esc_html_e('Hotel Name', 'tourfic') : esc_html_e('Apartment Name', 'tourfic') ); ?>
+						</th>
+						<th id="check_status">
+							<?php esc_html_e( "Message", "tourfic" ); ?>
+						</th>
+						<th id="ostatus">
+							<?php esc_html_e( "Date and Time", "tourfic" ); ?>
+						</th>
+						<th id="action">
+							<?php esc_html_e( "Action", "tourfic" ); ?>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php
+				$tf_key = 1;
+				foreach ( $data as $enquiry ) { ?>
+                    <tr>
+                        <th class="check-column">
+                            <div class="tf-checkbox-listing">
+                                <input type="checkbox" name="order_id[]" value="<?php echo esc_html( $enquiry['id'] ); ?>">
+                            </div>
+                        </th>
+                        <td>
+							<?php echo esc_html($enquiry["uname"]); ?>
+                        </td>
+                        <td>
+							<?php echo esc_html($enquiry["uemail"]); ?>
+                        </td>
+                        <td>
+							<?php echo esc_html($enquiry["post_title"]); ?>
+                        </td>
+                        <td>
+							<?php echo esc_html( $enquiry['description'] ); ?>
+                        </td>
+						<td>
+							<?php echo esc_html( $enquiry['submit_time'] ); ?>
+                        </td>
+                        
+                        <td>
+							<?php
+							$actions_details = '<a href="' . admin_url() . 'edit.php?post_type=' . $this->booking_args['post_type'] . '&amp;page=' . $this->booking_args['menu_slug'] . '&amp;order_id=' . $tf_order['order_id'] . '&amp;book_id=' . $tf_order['id'] . '&amp;action=preview" class="tf_booking_details_view"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M7.82924 16.1427L8.31628 17.238C8.46106 17.5641 8.69734 17.8412 8.99647 18.0356C9.29559 18.23 9.6447 18.3335 10.0015 18.3334C10.3582 18.3335 10.7073 18.23 11.0065 18.0356C11.3056 17.8412 11.5419 17.5641 11.6866 17.238L12.1737 16.1427C12.3471 15.754 12.6387 15.43 13.007 15.2167C13.3777 15.0029 13.8065 14.9119 14.232 14.9566L15.4237 15.0834C15.7784 15.1209 16.1364 15.0547 16.4543 14.8929C16.7721 14.731 17.0362 14.4803 17.2144 14.1714C17.3929 13.8626 17.4779 13.5086 17.4592 13.1525C17.4405 12.7963 17.3188 12.4532 17.1089 12.1649L16.4033 11.1955C16.1521 10.8477 16.0178 10.4291 16.02 10.0001C16.0199 9.57224 16.1554 9.15537 16.407 8.80934L17.1126 7.8399C17.3225 7.55154 17.4442 7.20847 17.4629 6.85231C17.4816 6.49615 17.3966 6.1422 17.2181 5.83341C17.0399 5.52444 16.7758 5.27382 16.458 5.11194C16.1401 4.95005 15.7821 4.88386 15.4274 4.92138L14.2357 5.04823C13.8102 5.09292 13.3814 5.00185 13.0107 4.78804C12.6417 4.57362 12.35 4.24788 12.1774 3.85749L11.6866 2.76212C11.5419 2.43606 11.3056 2.15901 11.0065 1.96458C10.7073 1.77015 10.3582 1.66669 10.0015 1.66675C9.6447 1.66669 9.29559 1.77015 8.99647 1.96458C8.69734 2.15901 8.46106 2.43606 8.31628 2.76212L7.82924 3.85749C7.65668 4.24788 7.36497 4.57362 6.99591 4.78804C6.62526 5.00185 6.19647 5.09292 5.77091 5.04823L4.57554 4.92138C4.22081 4.88386 3.86282 4.95005 3.54497 5.11194C3.22711 5.27382 2.96305 5.52444 2.7848 5.83341C2.60632 6.1422 2.52128 6.49615 2.54002 6.85231C2.55876 7.20847 2.68046 7.55154 2.89035 7.8399L3.59591 8.80934C3.84753 9.15537 3.98302 9.57224 3.98295 10.0001C3.98302 10.4279 3.84753 10.8448 3.59591 11.1908L2.89035 12.1603C2.68046 12.4486 2.55876 12.7917 2.54002 13.1479C2.52128 13.504 2.60632 13.858 2.7848 14.1667C2.96323 14.4756 3.22732 14.726 3.54513 14.8879C3.86294 15.0498 4.22084 15.1161 4.57554 15.0788L5.76721 14.9519C6.19276 14.9072 6.62155 14.9983 6.99221 15.2121C7.36265 15.4259 7.65571 15.7517 7.82924 16.1427Z" stroke="#1D2327" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9.99998 12.5001C11.3807 12.5001 12.5 11.3808 12.5 10.0001C12.5 8.61937 11.3807 7.50008 9.99998 7.50008C8.61926 7.50008 7.49998 8.61937 7.49998 10.0001C7.49998 11.3808 8.61926 12.5001 9.99998 12.5001Z" stroke="#1D2327" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg></a>';
+							echo wp_kses($actions_details, Helper::tf_custom_wp_kses_allow_tags());
+							?>
+                        </td>
+                    </tr>
+					<?php
+					if ( ! defined( 'TF_PRO' ) && $tf_key == 15 ) { ?>
+                        <tr class="pro-row" style="text-align: center; background-color: #ededf8">
+                            <td colspan="8" style="text-align: center;">
+                                <a href="https://tourfic.com/" target="_blank">
+                                    <h3 class="tf-admin-btn tf-btn-secondary" style="color:#fff;margin: 15px 0;"><?php esc_html_e( 'Upgrade to Pro Version to See More', 'tourfic' ); ?></h3>
+                                </a>
+                            </td>
+                        </tr>
+					<?php }
+					$tf_key ++;
+				} ?>
+                </tbody>
+			</table>
+		</div>
+		<?php
+	}
+	
+	public function enquiry_table_data( $post_type = '', $post_id = '' ) {
 
 		 global $wpdb;
-		 $query = "SELECT * FROM {$wpdb->prefix}tf_enquiry_data ";
+		 $query = "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE ";
 		 $enquiry_data = array();
  
 		 if( !empty($post_type) ) {
-			$query .= sprintf('WHERE post_type = "%s"', $post_type);
+			$query .= sprintf(' post_type = "%s"', $post_type);
 		 } else if( !empty($post_id) ) {
-			$query.= sprintf('WHERE post_id = %d', $post_id);
+			$query.= sprintf(' post_id = %d', $post_id);
 		 }
 
 		 $results = $wpdb->get_results( $wpdb->prepare( $query ), ARRAY_A );

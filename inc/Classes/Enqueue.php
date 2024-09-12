@@ -646,6 +646,7 @@ class Enqueue {
 			'tourfic-vendor_page_tf_vendor_commissions',
 			'tourfic-vendor_page_tf_vendor_withdraw',
 			'tf_hotel_page_tf-hotel-backend-booking',
+			'tf_hotel_page_tf_hotel_enquiry',
 			'tf_tours_page_tf-tour-backend-booking',
 			'tf_tours_page_tf_tours_booking',
 			'tf_hotel_page_tf_hotel_booking',
