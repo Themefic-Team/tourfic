@@ -102,7 +102,7 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 						<?php endif ?>
 
 						<?php if ( ! in_array( 'carrentals', $disable_services ) && Helper::tf_is_search_form_tab_type( 'carrentals', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
-							<option value="tf-car-booking-form"><?php esc_html_e( 'Car', 'tourfic' ); ?></option>
+							<option value="tf-car-booking-form"><?php esc_html_e( apply_filters("tf_car_search_form_tab_button_text", 'Car') , 'tourfic' ); ?></option>
 						<?php endif ?>
 
 						<?php do_action( 'tf_after_booking_form_mobile_tab', $type ) ?>
