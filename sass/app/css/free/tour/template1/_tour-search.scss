@@ -561,3 +561,18 @@ i {
         }
     }
 }
+
+.tf-archive-design-1{
+    @media #{$max767} {
+        .tf-archive-inner{
+            gap: 40px;
+        }
+        .tf-sidebar {
+            order: 1;
+            margin-top: 40px;
+        }
+        .tf-page-content {
+            order: 2;
+        }
+    }
+}

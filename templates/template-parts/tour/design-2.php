@@ -2,6 +2,7 @@
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
+use \Tourfic\Classes\Tour\Tour;
 use \Tourfic\Classes\Tour\Tour_Price;
 
 $tf_booking_type = '1';
@@ -213,7 +214,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
                         <div class="tf-search-date-wrapper tf-single-widgets">
                             <h2 class="tf-section-title"><?php echo ! empty( $meta["booking-section-title"] ) ? esc_html( $meta["booking-section-title"] ) : ''; ?></h2>
-							<?php echo wp_kses( tf_single_tour_booking_form( $post->ID ), Helper::tf_custom_wp_kses_allow_tags() ); ?>
+							<?php echo wp_kses( Tour::tf_single_tour_booking_form( $post->ID ), Helper::tf_custom_wp_kses_allow_tags() ); ?>
                         </div>
 					<?php endif; ?>
 

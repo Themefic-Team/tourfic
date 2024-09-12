@@ -265,7 +265,7 @@ use \Tourfic\App\TF_Review;
                         $(document).ready(function () {
 
                             // flatpickr locale first day of Week
-                            <?php tf_flatpickr_locale("root"); ?>
+                            <?php Helper::tf_flatpickr_locale( "root" ); ?>
 
                             // Initialize the pickup date picker
                             var pickupFlatpickr = $(".tf_pickup_date").flatpickr({
@@ -274,7 +274,7 @@ use \Tourfic\App\TF_Review;
                                 minDate: "today",
 
                                 // flatpickr locale
-                                <?php tf_flatpickr_locale(); ?>
+                                <?php Helper::tf_flatpickr_locale(); ?>
 
                                 onReady: function (selectedDates, dateStr, instance) {
                                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -293,7 +293,7 @@ use \Tourfic\App\TF_Review;
                                 minDate: "today",
 
                                 // flatpickr locale
-                                <?php tf_flatpickr_locale(); ?>
+                                <?php Helper::tf_flatpickr_locale(); ?>
 
                                 onReady: function (selectedDates, dateStr, instance) {
                                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -310,7 +310,7 @@ use \Tourfic\App\TF_Review;
                                 dateFormat: "H:i",
 
                                 // flatpickr locale
-                                <?php tf_flatpickr_locale(); ?>
+                                <?php Helper::tf_flatpickr_locale(); ?>
 
                                 onReady: function (selectedDates, dateStr, instance) {
                                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -327,7 +327,7 @@ use \Tourfic\App\TF_Review;
                                 noCalendar: true,
                                 dateFormat: "H:i",
                                 // flatpickr locale
-                                <?php tf_flatpickr_locale(); ?>
+                                <?php Helper::tf_flatpickr_locale(); ?>
 
                                 onReady: function (selectedDates, dateStr, instance) {
                                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');

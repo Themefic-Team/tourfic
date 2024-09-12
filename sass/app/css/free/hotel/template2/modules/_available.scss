@@ -158,11 +158,58 @@
                 height: 390px;
             }
         }
+        .tf-available-room-contents{
+            width: calc(100% - 230px);
+
+            @media #{$max991} {
+                width: 100%;
+            }
+
+            .tf-section-title {
+                margin-bottom: 0;
+                color: #595349;
+                padding: 24px 24px 0;
+            }
+
+            h4{
+                margin-bottom: 16px;
+            }
+
+            .tf-room-info-list{
+                margin-bottom: 24px !important;
+            }
+            .tf-option-list{
+                margin-bottom: 24px !important;
+                display: flex !important;
+                flex-direction: column;
+                gap: 12px 5px;
+            }
+
+            .tf-available-room-content {
+                width: 100% !important;
+                padding-bottom: 0;
+
+                &:last-child .tf-room-options-content-inner{
+                    border-bottom: none;
+                }
+            }
+            .tf-room-options-content-inner{
+                border-bottom: 1px solid #99948D;
+                @include flexbox();
+                justify-content: space-between;
+                padding-bottom: 24px;
+
+                @media #{$max991} {
+                    display: block;
+                }
+            }
+        }
         .tf-available-room-content {
             width: calc(100% - 230px);
             display: flex;
             justify-content: space-between;
             padding: 24px;
+
             .tf-available-room-content-left {
                 width: 395px;
                 display: flex;

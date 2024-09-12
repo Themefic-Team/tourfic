@@ -3,6 +3,7 @@
 	<?php
 
 	use \Tourfic\Classes\Helper;
+	use \Tourfic\Classes\Apartment\Apartment;
 
 
     $post_count = $GLOBALS['wp_query']->post_count;
@@ -30,6 +31,7 @@
 		                <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
 		            </div>
 		        </div>
+				<?php do_action("tf_apartment_archive_card_items_before"); ?>
 				<div class="archive_ajax_result <?php echo $tf_defult_views=="grid" ? esc_attr('tours-grid') : '' ?>">
 					<?php
 					if ( have_posts() ) {
@@ -37,14 +39,14 @@
 							the_post();
 							$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
 							if (!empty($apartment_meta[ "apartment_as_featured" ])) {
-								tf_apartment_archive_single_item();
+								Apartment::tf_apartment_archive_single_item();
 							}
 						}
 						while ( have_posts() ) {
 							the_post();
 							$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
 							if ( empty($apartment_meta[ "apartment_as_featured" ])) {
-								tf_apartment_archive_single_item();
+								Apartment::tf_apartment_archive_single_item();
 							}
 						}
 					} else {
@@ -52,13 +54,16 @@
 					}
 					?>
 				</div>
+				<?php do_action("tf_apartment_archive_card_items_after"); ?>
+				
 				<div class="tf_posts_navigation">
-					<?php tourfic_posts_navigation(); ?>
+					<?php Helper::tourfic_posts_navigation(); ?>
 				</div>
 
 			</div>
 			<!-- End Content -->
 
+			
 			<!-- Start Sidebar -->
 			<div class="tf-search-right">
 				<?php

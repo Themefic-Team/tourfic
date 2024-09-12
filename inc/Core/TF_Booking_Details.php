@@ -119,7 +119,10 @@ abstract Class TF_Booking_Details {
                     <img src="<?php echo esc_url(TF_ASSETS_URL); ?>app/images/loader.gif" alt="Loader">
                 </div>
                 <div class="tf_booking_wrap_header">
-                    <h1 class="wp-heading-inline"><?php echo esc_html( $this->booking_args['booking_title'] ); ?> <?php esc_html_e( "Booking Details", "tourfic" ); ?></h1>
+                    <?php 
+                    $heading_title = sprintf(" %s %s", $this->booking_args['booking_title'], "Booking Details" );
+                    ?>
+                    <h1 class="wp-heading-inline"><?php esc_html_e(apply_filters( $this->booking_args["post_type"] . '_booking_details_main_title', $heading_title), 'tourfic'); ?></h1>
                     <div class="tf_header_wrap_button">
                         <?php
                         /**
@@ -261,7 +264,9 @@ abstract Class TF_Booking_Details {
             </form>
         </div>
 
-        <div class="tf-order-table-responsive">
+        <?php do_action( $this->booking_args["post_type"] . '_before_booking_order_table'); ?>
+
+        <div class="<?php echo apply_filters( $this->booking_args["post_type"] . '_booking_oder_table_class', "tf-order-table-responsive") ?>">
             <table class="wp-list-table table" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>
@@ -415,6 +420,8 @@ abstract Class TF_Booking_Details {
             </table>
         </div>
 
+        <?php do_action( $this->booking_args["post_type"] . '_after_booking_order_table'); ?>
+
         <div class="tf-preloader-box">
             <div class="tf-loader-preview">
                 <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="Loader">
@@ -449,21 +456,25 @@ abstract Class TF_Booking_Details {
                         <li><?php esc_html_e("Booking created", "tourfic"); ?>: <?php echo esc_html(gmdate('F d, Y',strtotime($tf_order_details->order_date))); ?></li>
                         <li>|</li>
                         <li><?php esc_html_e("Booking by", "tourfic"); ?>: <span style="text-transform: capitalize;">
-                        <?php 
-                            $tf_booking_by = get_user_by('id', $tf_order_details->customer_id);
-                            if("offline"==$tf_order_details->payment_method && empty($tf_booking_by)){
-                                echo "Administrator";
-                            }else{
-                                echo !empty($tf_booking_by->roles[0]) ? esc_html($tf_booking_by->roles[0]) : 'Administrator';
-                            }
-                        ?>
-                        </span>
+                            <?php 
+                                $tf_booking_by = get_user_by('id', $tf_order_details->customer_id);
+                                if("offline"==$tf_order_details->payment_method && empty($tf_booking_by)){
+                                    echo "Administrator";
+                                }else{
+                                    echo !empty($tf_booking_by->roles[0]) ? esc_html($tf_booking_by->roles[0]) : 'Administrator';
+                                }
+                            ?>
+                            </span>
                         </li>
+                        <?php do_action($this->booking_args["post_type"] . '_single_booking_details_after_title_text'); ?>
                     </ul>
                 </div>
             </div>
             <div class="tf-booking-details-preview-box">
                 <div class="tf-booking-details">
+
+
+                <?php do_action( 'tf_' . $this->booking_args["booking_type"] . '_single_booking_details_card_first'); ?>
                     
                     <!-- Booking Details -->
                     <div class="customers-order-date details-box">
@@ -489,8 +500,7 @@ abstract Class TF_Booking_Details {
                                     </table>
                                 </div>
                             </div>
-                            <?php } ?>
-                            <?php
+                            <?php } 
                             
                             $tf_tour_details = json_decode($tf_order_details->order_details);
                             if(!empty( $tf_tour_details )){ ?>
@@ -541,6 +551,14 @@ abstract Class TF_Booking_Details {
                                                 <td><?php echo esc_html($tf_tour_details->room_name); ?></td>
                                             </tr>
                                         <?php endif; ?>
+
+	                                    <?php if ( !empty($tf_tour_details->option) ) { ?>
+                                            <tr>
+                                                <th><?php _e("Option", "tourfic"); ?></th>
+                                                <td>:</td>
+                                                <td><?php echo esc_html($tf_tour_details->option); ?></td>
+                                            </tr>
+	                                    <?php } ?>
                                         
                                         <!-- Room Count -->
                                         <?php if(!empty($tf_tour_details->room)) : ?>

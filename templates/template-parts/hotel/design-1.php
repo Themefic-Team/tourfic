@@ -2,12 +2,17 @@
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
+use \Tourfic\Classes\Hotel\Hotel;
 
 $tf_booking_type = '1';
 $tf_hide_booking_form = '';
+$tf_ext_booking_type = '';
+$tf_ext_booking_code = '';
 if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 	$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 	$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
+	$tf_ext_booking_type = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : '1';
+    $tf_ext_booking_code = !empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
 }
 ?>
 <div class="tf-single-page tf-template-global tf-hotel-design-1">
@@ -203,9 +208,14 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 
                         <!-- SIdebar Tour single -->
                         <div class="tf-column tf-tour-details-right">
-	                        <?php if(($tf_booking_type == 2 && $tf_hide_booking_form !== '1') || $tf_booking_type == 1) :?>
+	                        <?php if(($tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1) || $tf_booking_type == 1) :?>
                                 <div class="tf-tour-booking-box tf-box">
-                                    <?php tf_hotel_sidebar_booking_form(); ?>
+                                    <?php Hotel::tf_hotel_sidebar_booking_form(); ?>
+                                </div>
+                            <?php endif; ?>
+                            <?php if( !empty($tf_ext_booking_code) && $tf_ext_booking_type == 2 ) : ?>
+                                <div id="tf-external-booking-embaded-form" class="tf-tour-booking-box tf-box">
+                                    <?php echo wp_kses( $tf_ext_booking_code, Helper::tf_custom_wp_kses_allow_tags()); ?>
                                 </div>
                             <?php endif; ?>
                             <div class="tf-hotel-location-map">

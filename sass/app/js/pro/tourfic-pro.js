@@ -27,11 +27,13 @@
             var room = $("#hotel_room_number").val();
             var check_in_date = $("input[name=check_in_date]").val();
             var check_out_date = $("input[name=check_out_date]").val();
+            var option_id = $("input[name=option_id]").val();
             var data = {
                 action: 'tf_hotel_airport_service_price',
                 _nonce: tf_params.nonce,
                 service_type: service_type,
                 roomid: roomid,
+                option_id: option_id,
                 id: hotelid,
                 hoteladult: hoteladult,
                 hotelchildren: hotelchildren,

@@ -2,9 +2,10 @@
 
 namespace Tourfic\Classes\Apartment;
 use \Tourfic\Classes\Helper;
+use \Tourfic\Admin\Menu_Icon;
 
 defined( 'ABSPATH' ) || exit;
-class Apartment_CPT extends \Tourfic\Classes\Post_Type {
+class Apartment_CPT extends \Tourfic\Core\Post_Type {
 
 	use \Tourfic\Traits\Singleton;
 
@@ -20,7 +21,7 @@ class Apartment_CPT extends \Tourfic\Classes\Post_Type {
 			'name'          => esc_html__('Apartments', 'tourfic' ),
 			'singular_name' => esc_html__('Apartment', 'tourfic' ),
 			'slug'          => 'tf_apartment',
-			'menu_icon'     => 'dashicons-admin-home',
+			'menu_icon'     => Menu_Icon::$apt_icon,
 			'menu_position' => 26.4,
 			'supports'      => apply_filters( 'tf_apartment_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
 			'capability'    => array( 'tf_apartment', 'tf_apartments' ),

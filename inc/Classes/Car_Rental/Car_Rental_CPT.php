@@ -4,7 +4,7 @@ namespace Tourfic\Classes\Car_Rental;
 use \Tourfic\Classes\Helper;
 
 defined( 'ABSPATH' ) || exit;
-class Car_Rental_CPT extends \Tourfic\Classes\Post_Type {
+class Car_Rental_CPT extends \Tourfic\Core\Post_Type {
 
 	use \Tourfic\Traits\Singleton;
 

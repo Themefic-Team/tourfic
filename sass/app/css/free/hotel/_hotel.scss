@@ -429,9 +429,9 @@ ul.tf-room-checkbox label{
     display: none;
 }
 
-.tf-room-table .availability-table tbody tr:nth-child(odd) td {
+/*.tf-room-table .availability-table tbody tr:nth-child(odd) td {
     background: #fff;
-}
+}*/
 
 .hotel-room-wrap {
     width: 100%;
@@ -459,6 +459,20 @@ ul.tf-room-checkbox label{
 
 .availability-table td.description h3 a {
     text-decoration: underline !important;
+}
+
+.availability-table td.options{
+    ul{
+        list-style: none;
+        margin-left: 0;
+        margin-bottom: 0;
+        li{
+            margin-bottom: 4px;
+            .room-extra-icon{
+                margin-right: 5px;
+            }
+        }
+    }
 }
 
 .room-features h4,

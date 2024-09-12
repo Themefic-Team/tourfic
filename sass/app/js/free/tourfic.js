@@ -233,6 +233,148 @@
             });
         };
 
+        const taxFilter = function() {
+            let term_ids = termIdsByFeildName("tf_filters").split(",");
+            let tax_name = $('#tf_widget_texonomy_name').val();
+            let posttype = $('.tf-post-type').val();
+            let filters = termIdsByFeildName('tf_filters');
+            let tfHotelTypes = termIdsByFeildName('tf_hotel_types');
+            let features = termIdsByFeildName('tf_features');
+            let tour_features = termIdsByFeildName('tour_features');
+            let attractions = termIdsByFeildName('tf_attractions');
+            let activities = termIdsByFeildName('tf_activities');
+            let tfTourTypes = termIdsByFeildName('tf_tour_types');
+            let tfApartmentFeatures = termIdsByFeildName('tf_apartment_features');
+            let tfApartmentTypes = termIdsByFeildName('tf_apartment_types');
+
+            let formData = new FormData();
+            formData.append('action', 'tf_trigger_tax_filter');
+            formData.append('term_ids', term_ids);
+            formData.append('tax_name', tax_name);
+            formData.append('post_type', posttype);
+            formData.append('filters', filters);
+            formData.append('features', features);
+            formData.append('tf_hotel_types', tfHotelTypes);
+            formData.append('tour_features', tour_features);
+            formData.append('attractions', attractions);
+            formData.append('activities', activities);
+            formData.append('tf_tour_types', tfTourTypes);
+            formData.append('tf_apartment_features', tfApartmentFeatures);
+            formData.append('tf_apartment_types', tfApartmentTypes);
+
+            formData.append('_nonce', tf_params.nonce);
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (data) {
+                    $('.archive_ajax_result').block({
+                        message: null,
+                        overlayCSS: {
+                            background: "#fff",
+                            opacity: .5
+                        }
+                    });
+                    $('#tf_ajax_searchresult_loader').show();
+                },
+                complete: function (data) {
+                    $('.archive_ajax_result').unblock();
+                    $('#tf_ajax_searchresult_loader').hide();
+
+                    // total posts 0 if not found by @hena
+                    if ($('.tf-nothing-found')[0]) {
+                        $('.tf_posts_navigation').hide();
+                        var foundPosts = $('.tf-nothing-found').data('post-count');
+                        $('.tf-total-results').find('span').html(foundPosts);
+                    } else {
+                        $('.tf_posts_navigation').show();
+                        var postsCount = $('.tf-posts-count').html();
+                        $('.tf-total-results').find('span').html(postsCount);
+                    }
+
+                },
+                success: function (data, e) {
+                    $('.archive_ajax_result').unblock();
+                    $('#tf_ajax_searchresult_loader').hide();
+                    $('.archive_ajax_result').html(data);
+                    // Filter Popup Removed
+                    if ($('.tf-details-right').length > 0) {
+                        $('.tf-details-right').removeClass('tf-filter-show');
+                    }
+                    // @KK show notice in every success request
+                    notyf.success(tf_params.ajax_result_success);
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+            
+        };
+        
+        const taxFilterPagination = function(page) {
+            let term_ids = termIdsByFeildName("tf_filters").split(",");
+            let tax_name = $('#tf_widget_texonomy_name').val();
+            let posttype = $('.tf-post-type').val();
+            var page = page;
+
+            let formData = new FormData();
+            formData.append('action', 'tf_trigger_tax_filter');
+            formData.append('term_ids', term_ids);
+            formData.append('tax_name', tax_name);
+            formData.append('post_type', posttype);
+            formData.append('page', parseInt(page));
+            formData.append('_nonce', tf_params.nonce);
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (data) {
+                    $('.archive_ajax_result').block({
+                        message: null,
+                        overlayCSS: {
+                            background: "#fff",
+                            opacity: .5
+                        }
+                    });
+                    $('#tf_ajax_searchresult_loader').show();
+                },
+                complete: function (data) {
+                    $('.archive_ajax_result').unblock();
+                    $('#tf_ajax_searchresult_loader').hide();
+
+                    // total posts 0 if not found by @hena
+                    if ($('.tf-nothing-found')[0]) {
+                        $('.tf_posts_navigation').hide();
+                        var foundPosts = $('.tf-nothing-found').data('post-count');
+                        $('.tf-total-results').find('span').html(foundPosts);
+                    } else {
+                        $('.tf_posts_navigation').show();
+                        var postsCount = $('.tf-posts-count').html();
+                        $('.tf-total-results').find('span').html(postsCount);
+                    }
+
+                },
+                success: function (data, e) {
+                    $('.archive_ajax_result').unblock();
+                    $('.archive_ajax_result').html(data);
+                    // @KK show notice in every success request
+                    notyf.success(tf_params.ajax_result_success);
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+            
+        };
+
         // Search Result Ajax page number
         function tf_page_pagination_number(element) {
             element.find('span').remove();
@@ -240,10 +382,18 @@
         }
 
         // Search Result Ajax pagination
-        $(document).on('click', '.tf_posts_ajax_navigation a.page-numbers', function (e) {
+        $(document).on('click', '.tf_search_ajax_pagination a.page-numbers', function (e) {
             e.preventDefault();
             page = tf_page_pagination_number($(this).clone());
             makeFilter(page);
+        }); 
+        
+        
+        // Search Result Ajax pagination
+        $(document).on('click', 'tf_tax_posts_navigation a.page-numbers', function (e) {
+            e.preventDefault();
+            page = tf_page_pagination_number($(this).clone());
+            taxFilterPagination(page);
         });
 
         // Look for submission and change on filter widgets
@@ -1475,7 +1625,7 @@
             },
             initialSelectedValues: {
                 from: parseInt(tf_params.tf_hotel_min_price),
-                to: parseInt(tf_params.tf_hotel_max_price) / 2
+                to: parseInt(tf_params.tf_hotel_max_price)
             },
             grid: false,
             theme: "dark",
@@ -1494,7 +1644,7 @@
             },
             initialSelectedValues: {
                 from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt(tf_params.tf_hotel_min_price),
-                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_hotel_max_price) / 2
+                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_hotel_max_price)
             },
             grid: false,
             theme: "dark",
@@ -1518,7 +1668,7 @@
             },
             initialSelectedValues: {
                 from: parseInt(tf_params.tf_tour_min_price),
-                to: parseInt(tf_params.tf_tour_max_price) / 2
+                to: parseInt(tf_params.tf_tour_max_price)
             },
             grid: false,
             theme: "dark",
@@ -1536,7 +1686,7 @@
             },
             initialSelectedValues: {
                 from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt(tf_params.tf_tour_min_price),
-                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_tour_max_price) / 2
+                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_tour_max_price)
             },
             grid: false,
             theme: "dark",
@@ -1560,7 +1710,7 @@
             },
             initialSelectedValues: {
                 from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt(tf_params.tf_apartment_min_price),
-                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_apartment_max_price) / 2
+                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_apartment_max_price)
             },
             grid: false,
             theme: "dark",

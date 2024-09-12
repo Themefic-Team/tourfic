@@ -2,6 +2,7 @@
 <div class="tf-car-benefits" id="tf-benefits">
     <h3><?php esc_html_e("Benefits", "tourfic"); ?></h3>
 
+    <?php if(!empty($benefits)){ ?>
     <ul>
         <?php foreach($benefits as $singlebenefit){ ?>
         <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
@@ -10,5 +11,6 @@
         </li>
         <?php } ?>
     </ul>
+    <?php } ?>
 </div>
 <?php } ?>

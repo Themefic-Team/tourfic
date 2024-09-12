@@ -52,7 +52,7 @@
                 opacity: 0;
                 visibility: hidden;
                 transition: all 0.2s ease;
-                z-index: 99;
+                z-index: 9999;
 
                 &:after {
                     content: "";
@@ -559,11 +559,169 @@
     }
 }
 
+.tf-swal-settings-reset-alert #swal2-title {
+    line-height: 1.2;
+}
+
 .tf-setting-wrapper {
     max-width: 100%;
     margin: 30px 20px 30px 0px;
     background-color: #fff;
     border-radius: 10px;
+    scroll-margin-top: 100px;
+
+    .tourfic-settings-header {
+        padding: 20px 20px 20px 20px;
+        border-bottom: 1px solid #003c79;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        border-radius: 10px 10px 0px 0px;
+        position: sticky;
+        top: 32px;
+        z-index: 999;
+
+        .settings-header-left {
+            min-width: 40%;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+
+            .tf-setting-title {
+                font-size: 18px;
+                margin: 0;
+            }
+
+            .tf-setting-search {
+                min-width: 55%;
+                display: flex;
+                align-items: center;
+                padding-left: 12px;
+                border: 1px solid #c4cbd4;
+                background-color: #f5f8ff;
+                gap: 8px;
+                border-radius: 4px;
+                color: #363e4a;
+
+                i {
+                    font-size: 16px
+                }
+
+                .search-input {
+                    min-width: 100%;
+                }
+
+                input {
+                    min-width: calc(100% - 22px);
+                    padding: 8px 12px 8px 0px;
+                    border: none;
+                    position: relative;
+                    background-color: transparent;
+                    height: 42px;
+                    font-size: 16px;
+                    z-index: 999;
+
+                    &:focus {
+                        outline: none;
+                        box-shadow: none;
+                    }
+                }
+
+                .tf-search-results {
+                    position: absolute;
+                    top: 75%;
+                    left: 164px;
+                    right: 0;
+                    width: 379px;
+                    background-color: #fff;
+                    box-sizing: border-box;
+                    border-radius: 4px;
+                    min-height: 60px;
+                    max-height: 300px;
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                    scrollbar-width: thin;
+                    border: 1px solid #ddd;
+                    transition: all 0.5s ease;
+
+                    .tf-search-not-found {
+                        text-align: center;
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+
+                    ul {
+                        margin: 0;
+                        padding: 0;
+                        list-style: none;
+
+                        a {
+                            border-bottom: 1px solid #f0f0f0;
+                            display: flex;
+                            padding: 5px 10px 5px 10px;
+                            align-items: center;
+                            gap: 12px;
+                            cursor: pointer;
+                            border-radius: 4px;
+                            margin: 0;
+                            text-decoration: none;
+                            color: #000;
+
+                            &:focus {
+                                box-shadow: none;
+                            }
+
+                            .tf-search-result-title {
+                                line-height: 1.4;
+                            }
+
+                            i {
+                                font-size: 20px !important;
+                                color: #8997a9;
+                            }
+
+                            p {
+                                margin: 0;
+                                font-size: 14px;
+                                font-weight: 600;
+                            }
+
+                            span {
+                                font-size: 12px;
+                                color: #777;
+                            }
+
+                            &:hover{
+                                background-color: #f0f2f4;
+                            }
+                            &:active{
+                                background-color: #f0f2f4;
+                            }
+                        }
+                        
+                    }
+                }
+
+            }
+        }
+
+        .tf-setting-save-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .tf-reset-btn {
+                background-color: #f44336;
+                border-color: #f44336;
+
+                &:hover {
+                    background-color: #bc362d;
+                    border-color: #bc362d;
+                }
+            }
+        }
+    }
 
     .tf-option-form {
         padding: 30px 30px 30px 0px;

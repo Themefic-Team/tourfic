@@ -7,6 +7,7 @@ defined( 'ABSPATH' ) || exit;
 use Tourfic\Classes\Helper;
 use \Tourfic\Core\TF_Backend_Booking;
 use \Tourfic\Classes\Apartment\Pricing as APT_Price;
+use \Tourfic\Classes\Apartment\Apartment;
 
 class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 
@@ -104,6 +105,12 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 	public function tf_check_apartment_aditional_fees_callback() {
 		// Add nonce for security and authentication.
 		check_ajax_referer( 'updates', '_nonce' );
+
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
 
 		$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : 0;
 		$meta = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
@@ -260,6 +267,12 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 		// Add nonce for security and authentication.
 		check_ajax_referer( 'updates', '_nonce' );
 
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
+
 		$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
 		$from         = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
 		$to           = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
@@ -285,7 +298,7 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 			$not_found = [];
 			while ( $loop->have_posts() ) {
 				$loop->the_post();
-				tf_filter_apartment_by_date( $period, $not_found, array( 1, 0, 0, $check_in_out ) );
+				Apartment::tf_filter_apartment_by_date( $period, $not_found, array( 1, 0, 0, $check_in_out ) );
 			}
 
 			$tf_total_filters = [];
@@ -370,9 +383,10 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 		}
 
 		if( !empty( $apt_data["enable_availability"]) && $apt_data["enable_availability"] == 1 ) {
-			$total_price = $this->get_total_apartment_price( $apt_id, $check_from, $check_to, $adult_count, $child_count, $infant_count, $additional_fees );
+			// $total_price = $this->get_total_apartment_price( $apt_id, $check_from, $check_to, $adult_count, $child_count, $infant_count, $additional_fees );
+			$total_price = APT_Price::instance( $apt_id )->set_dates( $check_from, $check_to)->set_persons( $adult_count, $child_count, $infant_count )->get_availability();
 		} else {
-			$total_price = APT_Price::instance()->set_dates( $check_from, $check_to)->set_persons( $adult_count, $child_count, $infant_count )->set_total_price( $apt_id )->get_total_price();
+			$total_price = APT_Price::instance( $apt_id )->set_dates( $check_from, $check_to)->set_persons( $adult_count, $child_count, $infant_count )->set_total_price()->get_total_price();
 		}
 
 

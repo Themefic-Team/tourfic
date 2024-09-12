@@ -810,7 +810,7 @@ class TF_Setup_Wizard {
                                     <li>
                                         <label class="tf-image-checkbox">
                                             <input type="radio" name="tf_single_tour"
-                                                   value="design-1" <?php echo ! empty( $tf_tour_single_template ) && $tf_tour_single_template == "design-2" ? esc_attr( 'checked' ) : ''; ?> >
+                                                   value="design-2" <?php echo ! empty( $tf_tour_single_template ) && $tf_tour_single_template == "design-2" ? esc_attr( 'checked' ) : ''; ?> >
                                             <div class="select-image-box">
                                                 <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL ); ?>images/template/design2-tour.jpg" alt="Design 2">
                                             </div>

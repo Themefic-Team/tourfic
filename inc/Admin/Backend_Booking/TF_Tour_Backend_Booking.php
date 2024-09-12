@@ -131,6 +131,12 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		// Add nonce for security and authentication.
 		check_ajax_referer( 'updates', '_nonce' );
 
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
+
 		$tour_id      = isset( $_POST['tour_id'] ) ? sanitize_text_field( $_POST['tour_id'] ) : '';
 		$meta         = get_post_meta( $tour_id, 'tf_tours_opt', true );
 		$tour_type    = ! empty( $meta['type'] ) ? $meta['type'] : '';

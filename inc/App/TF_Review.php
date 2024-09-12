@@ -537,10 +537,10 @@ class TF_Review {
         return '<div>' . $icons . '</div>' . $rating;
     }
 
-    public static function tf_archive_single_rating() {
+    public static function tf_archive_single_rating( $post_id = null ) {
 
-        $comments        = get_comments( [ 'post_id' => get_the_ID(), 'status' => 'approve' ] );
-        $tf_current_post = get_post_type();
+        $comments        = get_comments( [ 'post_id' => !empty($post_id) ? $post_id : get_the_ID(), 'status' => 'approve' ] );
+        $tf_current_post =  !empty($post_id) ? get_post_type( $post_id ) : get_post_type();
         $tf_overall_rate = [];
         self::tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rate );
         if ( $comments ) {
