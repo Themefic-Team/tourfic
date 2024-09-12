@@ -111,10 +111,6 @@ function tf_hotel_booking_callback() {
 		$response['errors'][] = sprintf( esc_html__( 'Your Maximum Stay Requirement is %1$s Days', 'tourfic' ), $max_stay );
 	}
 
-	// Hotel Room Discount Data
-	$hotel_discount_type   = ! empty( $room_meta["discount_hotel_type"] ) ? $room_meta["discount_hotel_type"] : "none";
-	$hotel_discount_amount = ! empty( $room_meta["discount_hotel_price"] ) ? $room_meta["discount_hotel_price"] : 0;
-
 	/**
 	 * If no errors then process
 	 */
