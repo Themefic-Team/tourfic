@@ -179,7 +179,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 			);
 		}
 
-		if(!empty($startprice) && !empty($endprice)){
+		if(!empty($startprice) && !empty($endprice) && $post_type == 'tf_carrental'){
 			$args['meta_query'] = array(
 				array(
 					'key' => 'tf_search_car_rent',

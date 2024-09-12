@@ -1063,7 +1063,7 @@ class Helper {
 		}
 
 		// Car Data Filter Start
-		if(!empty($pickup)){
+		if(!empty($pickup) && "undefined"!=$pickup){
 			$args['tax_query'] = array(
 				'relation' => 'AND',
 				array(
