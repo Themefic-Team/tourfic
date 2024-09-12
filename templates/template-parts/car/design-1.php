@@ -118,7 +118,7 @@ use \Tourfic\App\TF_Review;
                     </div>
 
                 </div>
-
+                <?php do_action("tf_car_before_single_booking_form"); ?>
                 <div class="tf-car-booking-form">
 
                     <div class="tf-price-header tf-mb-30">
@@ -136,7 +136,7 @@ use \Tourfic\App\TF_Review;
 
                     <div class="tf-extra-added-info">
                         <div class="tf-extra-added-box tf-flex tf-flex-gap-16 tf-flex-direction-column">
-                            <h3>Extras added</h3>
+                            <h3><?php esc_html_e("Extras added", "tourfic"); ?></h3>
                             <div class="tf-added-extra tf-flex tf-flex-gap-16 tf-flex-direction-column">
                                 
                             </div>
@@ -242,14 +242,14 @@ use \Tourfic\App\TF_Review;
                             <div class="error-notice"></div>
                             <?php if('2'==$car_booking_by){ ?>
                                 <button class="tf-flex tf-flex-align-center tf-flex-justify-center booking-process tf-final-step">
-                                    <?php esc_html_e("Continue", "tourfic"); ?>
+                                    <?php esc_html_e( apply_filters("tf_car_booking_form_submit_button_text", 'Continue' ), 'tourfic' ); ?>
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </button>
                             <?php }else{ ?>
                             <button class="tf-flex tf-flex-align-center tf-flex-justify-center <?php echo (empty($car_protection_section_status) || empty($car_protections)) && '3'!=$car_booking_by ? esc_attr('booking-process tf-final-step') : esc_attr('tf-car-booking'); ?>">
-                                <?php esc_html_e("Continue", "tourfic"); ?>
+                                <?php esc_html_e( apply_filters("tf_car_booking_form_submit_button_text", 'Continue' ), 'tourfic' ); ?>
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
@@ -466,6 +466,7 @@ use \Tourfic\App\TF_Review;
                     <?php } ?>
 
                 </div>
+                <?php do_action("tf_car_after_single_booking_form"); ?>
             </div>
             <?php 
             if(!empty($tc)){ ?>

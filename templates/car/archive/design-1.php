@@ -54,7 +54,7 @@ $tf_car_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template'
                     </div>
 
                     <div class="tf-car-archive-result">
-                        
+                        <?php do_action("tf_car_archive_card_items_before"); ?>
                         <div class="tf-car-result archive_ajax_result tf-flex tf-flex-gap-32 <?php echo $tf_defult_views=="list" ? esc_attr('list-view') : esc_attr('grid-view'); ?>">
                             
                             <?php
@@ -79,6 +79,7 @@ $tf_car_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template'
                             ?>
 
                         </div>
+                        <?php do_action("tf_car_archive_card_items_after"); ?>
 
                     </div>
 

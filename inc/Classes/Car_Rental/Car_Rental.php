@@ -150,7 +150,7 @@ class Car_Rental {
 
                 <div class="tf_submit-wrap">
                     <input type="hidden" name="type" value="tf_carrental" class="tf-post-type"/>
-                    <button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
+                    <button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e( apply_filters("tf_car_search_form_submit_button_text", 'Search' ), 'tourfic' ); ?></button>
                 </div>
 
             </div>
