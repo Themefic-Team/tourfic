@@ -183,7 +183,7 @@ class Hotel {
                     $period = new \DatePeriod(
                         new \DateTime( $form_start . ' 00:00' ),
                         new \DateInterval( 'P1D' ),
-                        (new \DateTime( $tf_enddate . ' 00:00' ))->modify('-1 day')
+                        new \DateTime( $tf_enddate . ' 23:59' )
                     );
 
                     $days = iterator_count( $period );
