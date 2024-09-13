@@ -1749,8 +1749,8 @@ class Helper {
                             </div>
                             <div class="tf-search-field-content">
                                 <span class="tf-search-field-label"><?php _e( "Check in", "tourfic" ); ?></span>
-                                <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;"
-                                       placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" required value="" readonly>
+                                <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" required value="" readonly>
+                                <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" required value="">
                             </div>
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
@@ -1766,7 +1766,6 @@ class Helper {
                             <div class="tf-search-field-content">
                                 <span class="tf-search-field-label"><?php _e( "Check out", "tourfic" ); ?></span>
                                 <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" required value="">
-                                <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" required value="">
                             </div>
                         </div>
                     </div>
@@ -1989,7 +1988,7 @@ class Helper {
                                 // flatpickr locale first day of Week
                                 <?php self::tf_flatpickr_locale( "root" ); ?>
 
-                                $(".tf-hotel-template-4 #tf-check-in").on('click', function () {
+                                $(".tf-hotel-template-4 #tf-check-out").on('click', function () {
                                     $("#check-in-out-date").click();
                                 });
 
@@ -1998,6 +1997,9 @@ class Helper {
                                     mode: "range",
                                     dateFormat: "Y/m/d",
                                     minDate: "today",
+                                    altInput: true,
+                                    altFormat: '<?php echo esc_html( $date_format_for_users ); ?>',
+                                    showMonths: $(window).width() >= 1240 ? 2 : 1,
 
                                     // flatpickr locale
                                     <?php self::tf_flatpickr_locale(); ?>
@@ -2008,6 +2010,7 @@ class Helper {
                                     },
                                     onChange: function (selectedDates, dateStr, instance) {
                                         instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                        instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                                         dateSetToFields(selectedDates, instance);
                                     },
                                     <?php if(! empty( $check_in_out )){ ?>

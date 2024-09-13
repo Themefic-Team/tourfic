@@ -79,7 +79,7 @@ $t4-main-color: #060D1C;
             .tf-search-field-label {
                 color: $t4-orange-1000;
                 font-size: 16px;
-                line-height: 1;
+                line-height: 12px;
             }
 
             .tf-search-input {
@@ -89,6 +89,7 @@ $t4-main-color: #060D1C;
                 width: 90px;
                 color: $t4-paragraph;
                 font-size: 12px;
+                height: 14px;
                 outline: none;
             }
 
