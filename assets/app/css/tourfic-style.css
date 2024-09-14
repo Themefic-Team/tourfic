@@ -18505,11 +18505,7 @@ html {
   }
 }
 
-.tf-hotel-template-4 .tf-search-fields #tf-check-in {
-  cursor: pointer;
-}
-
-.tf-hotel-template-4 .tf-hotel-side-booking #check-in-out-date {
+.tf-hotel-template-4 .tf-search-field-checkin .tf-search-input.form-control {
   min-width: 100px;
   width: 100px;
   opacity: 0;

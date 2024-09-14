@@ -117,13 +117,9 @@ $t4-main-color: #060D1C;
                 display: none;
             }
         }
-
-        #tf-check-in {
-            cursor: pointer;
-        }
     }
 
-    .tf-hotel-side-booking #check-in-out-date {
+    .tf-search-field-checkin .tf-search-input.form-control {
         min-width: 100px;
         width: 100px;
         opacity: 0;

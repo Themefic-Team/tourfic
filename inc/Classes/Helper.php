@@ -1989,7 +1989,8 @@ class Helper {
                                 <?php self::tf_flatpickr_locale( "root" ); ?>
 
                                 $(".tf-hotel-template-4 #tf-check-out").on('click', function () {
-                                    $("#check-in-out-date").click();
+                                    $(".tf-hotel-template-4 #tf-check-in").click();
+                                    console.log('cgg')
                                 });
 
                                 $("#check-in-out-date").flatpickr({
