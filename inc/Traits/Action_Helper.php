@@ -545,6 +545,22 @@ trait Action_Helper {
 				'edit_private_tf_tourss',
 				'edit_published_tf_tourss',
 				'create_tf_tourss',
+
+				// Car
+				'edit_tf_carrental',
+				'read_tf_carrental',
+				'delete_tf_carrental',
+				'edit_tf_carrentals',
+				'edit_others_tf_carrentals',
+				'publish_tf_carrentals',
+				'read_private_tf_carrentals',
+				'delete_tf_carrentals',
+				'delete_private_tf_carrentals',
+				'delete_published_tf_carrentals',
+				'delete_others_tf_carrentals',
+				'edit_private_tf_carrentals',
+				'edit_published_tf_carrentals',
+				'create_tf_carrentals',
 			);
 
 			foreach ( $caps as $cap ) {
