@@ -91,7 +91,7 @@ class Car_Rental {
                                 <span class="tf-label"><?php esc_html_e( 'Pickup date', 'tourfic' ); ?>:</span>
                                 <div class="tf_form-inner">
                                     <div class="tf-search-form-field-icon">
-                                        <i class="fas fa-search"></i>
+                                        <i class="fa-solid fa-calendar-days"></i>
                                     </div>
                                     <input type="text" name="pickup-date" class="tf_pickup_date" placeholder="<?php esc_html_e( 'Enter Pickup date', 'tourfic' ); ?>" value="">
                                 </div>
@@ -107,7 +107,7 @@ class Car_Rental {
                                 <span class="tf-label"><?php esc_html_e( 'Pickup time', 'tourfic' ); ?>:</span>
                                 <div class="tf_form-inner">
                                     <div class="tf-search-form-field-icon">
-                                        <i class="fas fa-search"></i>
+                                        <i class="fa-regular fa-clock"></i>
                                     </div>
                                     <input type="text" name="pickup-time" class="tf_pickup_time" placeholder="<?php esc_html_e( 'Enter Pickup Time', 'tourfic' ); ?>" value="">
                                 </div>
@@ -123,7 +123,7 @@ class Car_Rental {
                                 <span class="tf-label"><?php esc_html_e( 'Dropoff date', 'tourfic' ); ?>:</span>
                                 <div class="tf_form-inner">
                                     <div class="tf-search-form-field-icon">
-                                        <i class="fas fa-search"></i>
+                                        <i class="fa-solid fa-calendar-days"></i>
                                     </div>
                                     <input type="text" name="dropoff-date" class="tf_dropoff_date" placeholder="<?php esc_html_e( 'Enter Dropoff date', 'tourfic' ); ?>" value="">
                                 </div>
@@ -139,7 +139,7 @@ class Car_Rental {
                                 <span class="tf-label"><?php esc_html_e( 'Dropoff time', 'tourfic' ); ?>:</span>
                                 <div class="tf_form-inner">
                                     <div class="tf-search-form-field-icon">
-                                        <i class="fas fa-search"></i>
+                                        <i class="fa-regular fa-clock"></i>
                                     </div>
                                     <input type="text" name="dropoff-time" class="tf_dropoff_time" placeholder="<?php esc_html_e( 'Enter Dropoff Time', 'tourfic' ); ?>" value="">
                                 </div>
