@@ -16849,6 +16849,9 @@ html {
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-faq-section .tf-faq-col:last-child {
   margin-bottom: 0px;
 }
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-faq-section .tf-faq-col.active .tf-faq-head span i {
+  transform: rotate(180deg);
+}
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-faq-section .tf-faq-col .tf-faq-head {
   border-radius: 8px;
   background: #FFF;

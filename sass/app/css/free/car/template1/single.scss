@@ -495,6 +495,15 @@
                     &:last-child{
                         margin-bottom: 0px;
                     }
+                    &.active{
+                       .tf-faq-head{
+                        span{
+                            i{
+                                transform: rotate(180deg);
+                            }
+                        }
+                       } 
+                    }
                     .tf-faq-head{
                         border-radius: 8px;
                         background: #FFF;
