@@ -18494,6 +18494,10 @@ html {
   }
 }
 
+.tf-hotel-template-4 .tf-search-fields #tf-check-out {
+  cursor: pointer;
+}
+
 .tf-hotel-template-4 .tf-search-fields .tf-search-field-divider {
   background-color: #fff;
   width: 1px;
