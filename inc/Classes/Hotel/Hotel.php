@@ -2603,7 +2603,7 @@ class Hotel {
                     </div>
                     <div class="tf-post-footer tf-flex tf-flex-align-center tf-flex-space-bttn tf-mt-16">
                         <div class="tf-pricing">
-							<?php echo Pricing::instance( $post_id )->get_min_price_html(); ?>
+							<?php echo Pricing::instance( $post_id )->get_min_price_html($period); ?>
                         </div>
                         <div class="tf-booking-bttns">
                             <a class="tf-btn-normal btn-secondary" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
@@ -2697,7 +2697,7 @@ class Hotel {
 								<?php } ?>
                                 <div class="tf-available-room-price">
                                 <span class="tf-price-from">
-                                <?php echo Pricing::instance( $post_id )->get_min_price_html(); ?>
+                                <?php echo Pricing::instance( $post_id )->get_min_price_html($period); ?>
                                 </span>
                                 </div>
                             </div>
@@ -2744,7 +2744,7 @@ class Hotel {
 							<?php } ?>
                             <div class="tf-available-room-price">
                             <span class="tf-price-from">
-                            <?php echo Pricing::instance( $post_id )->get_min_price_html(); ?>
+                            <?php echo Pricing::instance( $post_id )->get_min_price_html($period); ?>
                             </span>
                             </div>
                         </div>
@@ -2859,7 +2859,7 @@ class Hotel {
                                                     <!-- Show minimum price @author - Hena -->
                                                     <div class="tf-room-price-area">
                                                         <div class="tf-room-price">
-															<?php echo Pricing::instance( $post_id )->get_min_price_html(); ?>
+															<?php echo Pricing::instance( $post_id )->get_min_price_html($period); ?>
                                                         </div>
                                                     </div>
                                                 </div>
