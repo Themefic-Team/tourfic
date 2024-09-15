@@ -2497,6 +2497,10 @@ class Hotel {
 
 		$tf_hotel_arc_selected_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
 
+        $min_price_arr = Pricing::instance($post_id)->get_min_price($period);
+		$tf_lowestAmount = !empty($min_price_arr['tf_lowestAmount']) ? $min_price_arr['tf_lowestAmount'] : 0;
+		$tf_lowestAmount_items = !empty($min_price_arr['tf_lowestAmount_items']) ? $min_price_arr['tf_lowestAmount_items'] : [];
+
 		if ( $tf_hotel_arc_selected_template == "design-1" ) {
 			?>
             <div class="tf-item-card tf-flex tf-item-hotel">
@@ -2688,11 +2692,11 @@ class Hotel {
 								<?php } ?>
                             </div>
                             <div class="tf-mobile tf-pricing-info">
-								<?php if ( ! empty( $discount_amount ) ) { ?>
+								<?php if ( ! empty( $tf_lowestAmount_items ) ) { ?>
                                     <div class="tf-available-room-off">
-							<span>
-								<?php echo esc_html( min( $discount_amount ) ); ?>% <?php esc_html_e( "Off ", "tourfic" ); ?>
-							</span>
+                                        <span>
+                                            <?php echo $tf_lowestAmount_items['type'] == "percent" ? esc_html( $tf_lowestAmount ) . '%' : wp_kses_post( wc_price( $tf_lowestAmount ) ) ?><?php esc_html_e( "Off ", "tourfic" ); ?>
+                                        </span>
                                     </div>
 								<?php } ?>
                                 <div class="tf-available-room-price">
@@ -2737,9 +2741,9 @@ class Hotel {
 							<?php
 							if ( ! empty( $tf_lowestAmount_items ) ) { ?>
                                 <div class="tf-available-room-off">
-						<span>
-							<?php echo $tf_lowestAmount_items['type'] == "percent" ? esc_html( $tf_lowestAmount ) . '%' : wp_kses_post( wc_price( $tf_lowestAmount ) ) ?><?php esc_html_e( "Off ", "tourfic" ); ?>
-						</span>
+                                    <span>
+                                        <?php echo $tf_lowestAmount_items['type'] == "percent" ? esc_html( $tf_lowestAmount ) . '%' : wp_kses_post( wc_price( $tf_lowestAmount ) ) ?><?php esc_html_e( "Off ", "tourfic" ); ?>
+                                    </span>
                                 </div>
 							<?php } ?>
                             <div class="tf-available-room-price">

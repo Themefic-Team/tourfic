@@ -402,7 +402,6 @@ class Pricing {
 
 				    if ( ! empty( $avail_date ) ) {
 					    foreach ( $avail_date as $repval ) {
-                            //Helper::tf_var_dump($period);
 						    if ( ! empty( $period ) ) {
 							    foreach ( $period as $date ) {
 								    $singleavailroom_date = date( 'Y-m-d', $date->getTimestamp() );
