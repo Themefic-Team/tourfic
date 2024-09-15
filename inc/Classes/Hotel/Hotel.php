@@ -2819,7 +2819,8 @@ class Hotel {
                     <div class="tf-archive-hotel-content-right">
                         <div class="tf-archive-hotel-price">
 							<?php
-							echo Pricing::instance( $post_id )->get_min_price_html();
+							//echo Pricing::instance( $post_id )->get_min_price_html();
+                            Pricing::instance( $post_id )->get_min();
 							?>
                         </div>
                         <a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php _e( "View Details", "tourfic" ); ?></a>
