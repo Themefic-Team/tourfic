@@ -325,8 +325,8 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						<?php } ?>
 
 						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                            <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
-                            <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
+                            <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
+                            <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
 						<?php } ?>
                     </div>
                     <form class="tf-room">
@@ -346,8 +346,8 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) && ( $room["deposit_type"] != "none" ) ) { ?>
 
                                 <div class="room-deposit-wrap">
-                                    <input type="checkbox" id="tf-make-deposit<?php echo esc_attr( $room_id ) ?>" name="make_deposit" value="<?php echo esc_attr( $room_id ) ?>">
-                                    <label for="tf-make-deposit<?php echo esc_attr( $room_id ) ?>"><?php esc_html_e( "I'll make a Partial Payment", "tourfic" ) ?></label><br>
+                                    <input type="checkbox" id="tf-make-deposit<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?>" name="make_deposit" value="<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?>">
+                                    <label for="tf-make-deposit<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?>"><?php esc_html_e( "I'll make a Partial Payment", "tourfic" ) ?></label><br>
                                 </div>
 							<?php } ?>
 
@@ -912,16 +912,16 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                             <div class="room-submit-wrap">
                                 <div class="tf-deposit-content">
                                     <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                                        <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
-                                        <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide"
+                                        <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
+                                        <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?> tf-hotel-deposit-hide"
                                              style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
                                     <?php } ?>
 
                                     <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) && ( $room["deposit_type"] != "none" ) ) { ?>
 
                                         <div class="room-deposit-wrap">
-                                            <input type="checkbox" id="tf-make-deposit<?php echo esc_attr( $room_id ) ?>" name="make_deposit" value="<?php echo esc_attr( $room_id ) ?>">
-                                            <label for="tf-make-deposit<?php echo esc_attr( $room_id ) ?>"><?php esc_html_e( "I'll make a Partial Payment", "tourfic" ) ?></label><br>
+                                            <input type="checkbox" id="tf-make-deposit<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?>" name="make_deposit" value="<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?>">
+                                            <label for="tf-make-deposit<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?>"><?php esc_html_e( "I'll make a Partial Payment", "tourfic" ) ?></label><br>
                                         </div>
                                     <?php } ?>
                                 </div>
@@ -1245,9 +1245,9 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						<?php
 						if ( ! empty( $hotel_discount_type ) && ! empty( $hotel_discount_amount ) && ( "percent" == $hotel_discount_type || "fixed" == $hotel_discount_type ) ) { ?>
                             <div class="tf-available-room-off">
-                    <span>
-                        <?php echo ( "percent" == $hotel_discount_type ) ? esc_html( $hotel_discount_amount ) . '% off' : wp_kses_post( wc_price( $hotel_discount_amount ) ) . 'off'; ?>
-                    </span>
+                                <span>
+                                    <?php echo ( "percent" == $hotel_discount_type ) ? esc_html( $hotel_discount_amount ) . '% off' : wp_kses_post( wc_price( $hotel_discount_amount ) ) . 'off'; ?>
+                                </span>
                             </div>
 						<?php } ?>
                         <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php esc_html_e( "Room Image", "tourfic" ); ?>">
@@ -1808,8 +1808,8 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                         </div>
 
 						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                            <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
-                            <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
+                            <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
+                            <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
 						<?php } ?>
                     </div>
                 </td>
@@ -1831,8 +1831,8 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
 
                                 <div class="room-deposit-wrap">
-                                    <input type="checkbox" id="tf-make-deposit<?php echo esc_attr( $room_id ) ?>" name="make_deposit" value="<?php echo esc_attr( $room_id ) ?>">
-                                    <label for="tf-make-deposit<?php echo esc_attr( $room_id ) ?>"><?php esc_html_e( "I'll make a Partial Payment", "tourfic" ) ?></label><br>
+                                    <input type="checkbox" id="tf-make-deposit<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?>" name="make_deposit" value="<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?>">
+                                    <label for="tf-make-deposit<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?>"><?php esc_html_e( "I'll make a Partial Payment", "tourfic" ) ?></label><br>
                                 </div>
 							<?php } ?>
 
