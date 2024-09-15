@@ -169,6 +169,9 @@ abstract Class TF_Booking_Details {
 
     function tf_booking_details_list( $booking_type, $tf_order_details_result ) {
 		?>
+        <div class="tf-booking-calendar">
+            
+        </div>
         <div class="tf-booking-header-filter">
             <div class="tf-left-search-filter">
                 <div class="tf-bulk-action-form">

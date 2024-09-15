@@ -58,6 +58,334 @@
         }
     }
 
+    // Booking Calendar
+    .tf-booking-calendar{
+        border-radius: 16px;
+        background: #FFF;
+        padding: 24px;
+        padding-top: 30px;
+        position: relative;
+
+        .fc-header-toolbar{
+            .fc-toolbar-chunk{
+                &:nth-child(1){
+                    >div{
+                        display: flex;
+                        align-items: center;
+                        gap: 28px;
+                        justify-content: center;
+                        button{
+                            height: 24px;
+                            width: 24px;
+                            border-radius: 8px;
+                            border: 0.2px solid #E3CFD7;
+                            background: #FFF;
+                            padding: 0;
+                            &:focus{
+                                box-shadow: none;
+                                outline: none;
+                            }
+                            span{
+                                margin: 0px !important;
+                                height: 100%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                width: 100%;
+                                &::before{
+                                    color: #003c79;
+                                    border-color: #003c79;
+                                    border-radius: 8px;
+                                    font-size: 20px;
+                                }
+                            }
+                        }
+                    }
+                }
+                &:nth-child(2){
+                    text-align: center;
+                    >div{
+                        display: flex;
+                        align-items: center;
+                        gap: 28px;
+                        justify-content: center;
+                        h2{
+                            color: #1d2327 !important;
+                            font-size: 22px;
+                            font-style: normal;
+                            font-weight: 400 !important;
+                            line-height: 112%;
+                            margin: 0 !important;
+                        }
+                    }
+                }
+                &:nth-child(3){
+                    .fc-button-group{
+                        border-radius: 24px;
+                        border: 1px solid #F6EEF2;
+                        background: #FFF;
+                        padding: 4px;
+                        display: flex;
+                        gap: 8px;
+                        button{
+                            background: #FFF;
+                            color: #8F707D;
+                            font-size: 15px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 24px; /* 160% */
+                            border: 0px solid;
+                            padding: 8px 12px;
+                            border-radius: 24px;
+                            text-transform: capitalize;
+                            &:focus{
+                                box-shadow: none;
+                                outline: none;
+                            }
+                            &.fc-button-active{
+                                background: #F6EEF2;
+                                color: #003c79;
+                                position: relative;
+                                padding-left: 27px;
+                                &::before{
+                                    position: absolute;
+                                    content: "";
+                                    left: 12px;
+                                    height: 7px;
+                                    width: 7px;
+                                    background: #003c79;
+                                    border-radius: 50%;
+                                    top: 50%;
+                                    margin-top: -3.5px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+
+        table{
+            border: 0px solid;
+            .fc-scrollgrid-section-header{
+                .fc-scroller-harness{
+                    .fc-scroller{
+                        overflow: hidden !important;
+                    }
+                }
+                th{
+                    border: 0px solid;
+                    .fc-col-header{
+                        tr{
+                            th{
+                                border: 0px solid;
+                                a{
+                                    color: #765664;
+                                    font-size: 15px;
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    line-height: 24px; /* 160% */
+                                    padding: 8px;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            }
+            .fc-scrollgrid-section-body{
+                > td{
+                    border: 0px solid;
+                }
+                table{
+                    tr{
+                        td{
+                            border: 1px solid #F6EEF2;
+                            padding: 8px;
+                            // height: 150px;
+                            background-color: transparent;
+                            .fc-daygrid-day-top{
+                                a{
+                                    color: #211319;
+                                    font-size: 15px;
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    line-height: 24px; /* 160% */
+                                }
+                            }
+                            .fc-daygrid-day-events{
+                                .fc-daygrid-event-harness{
+                                    margin-bottom: 8px;
+                                    &:last-child{
+                                        margin-bottom: 0px;
+                                    }
+                                    a{
+                                        border: 0px solid;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        font-size: 13px;
+                                        font-style: normal;
+                                        font-weight: 600;
+                                        line-height: 20px; /* 153.846% */
+                                        padding: 0;
+                                        background: transparent;
+                                        b{
+                                            padding: 6px 8px;
+                                            color: #002AB3;
+                                            width: 100%;
+                                            border-left: 1px solid #002AB3;
+                                            background: #EBEFFF;
+                                            border-radius: 8px;
+                                            display: block;
+                                            line-height: 15px;
+                                            cursor: pointer;
+                                        }
+                                        b.confirmed{
+                                            color: #17723F;
+                                            border-left: 1px solid #17723F;
+                                            background: #E6FAEE;
+                                        }
+                                    }
+                
+                                    .tfhb-calendar-popup{
+                                        cursor: pointer;
+                                    }
+                                }
+                            }
+                            .fc-daygrid-day-bottom{
+                                a.fc-more-link{
+                                    border-radius: 16px;
+                                    border: 1px solid #F62881;
+                                    background: #FAF5F7;
+                                    overflow: hidden;
+                                    color: #F62881;
+                                    text-overflow: ellipsis;
+                                    font-size: 13px;
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    line-height: 20px; /* 153.846% */
+                                    padding: 6px 8px;
+                                }
+                            }
+                        }
+                        td.fc-day-other{
+                            .fc-daygrid-day-top{
+                                opacity: 1;
+                                a{
+                                    color: #E3CFD7;
+                                }
+                            }
+                        }
+                    }
+                }
+                .fc-timegrid-body{
+                    .fc-timegrid-cols{
+                       table{
+                        tbody{
+                            tr{
+                                td{
+                                    .fc-timegrid-col-events{
+                                        .fc-timegrid-event-harness{
+                                            width: 100% !important;
+
+                                            &:last-child{
+                                                margin-bottom: 0px;
+                                            }
+                                            a{
+                                                border: 0px solid;
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;
+                                                font-size: 13px;
+                                                font-style: normal;
+                                                font-weight: 600;
+                                                line-height: 20px; /* 153.846% */
+                                                padding: 0;
+                                                background: transparent;
+                                                b{
+                                                    padding: 6px 8px;
+                                                    color: #002AB3;
+                                                    width: 100%;
+                                                    border-left: 1px solid #002AB3;
+                                                    background: #EBEFFF;
+                                                    border-radius: 8px;
+                                                    display: block;
+                                                    line-height: 15px;
+                                                    cursor: pointer;
+                                                }
+                                                b.confirmed{
+                                                    color: #17723F;
+                                                    border-left: 1px solid #17723F;
+                                                    background: #E6FAEE;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                       } 
+                    }
+                }
+            }
+        }
+
+        .fc-theme-standard .fc-popover{
+
+            .fc-popover-body {
+                .fc-daygrid-event-harness{
+                    margin-bottom: 8px;
+                    &:last-child{
+                        margin-bottom: 0px;
+                    }
+                    a{
+                        border: 0px solid;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        font-size: 13px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 20px; /* 153.846% */
+                        padding: 0;
+                        background: transparent;
+                        b{
+                            padding: 6px 8px;
+                            color: #002AB3;
+                            width: 100%;
+                            border-left: 1px solid #002AB3;
+                            background: #EBEFFF;
+                            border-radius: 8px;
+                            display: block;
+                            line-height: 15px;
+                            cursor: pointer;
+                        }
+                        b.confirmed{
+                            color: #17723F;
+                            border-left: 1px solid #17723F;
+                            background: #E6FAEE;
+                        }
+                    }
+                }
+            }
+
+        }
+        .fc-dayGridMonth-view{
+            .fc-scrollgrid-section-body{
+                table{
+                    tr{
+                        td{
+                            height: 150px;
+                            .fc-daygrid-day-events{
+                                left: 8px;
+                                right: 8px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     .tf-booking-header-filter{
         display: flex;
         justify-content: space-between;

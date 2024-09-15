@@ -424,7 +424,35 @@
                 window.location.href = updatedUrl;
             }
         });
-        
+
     });
 
 })(jQuery);
+
+// Booking Calendar
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.tf-booking-calendar').forEach(function(el) {
+        var calendar = new FullCalendar.Calendar(el, {
+            initialView: 'dayGridMonth',  // Month view
+            headerToolbar: {
+                left: 'prev,next',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            events: [
+                {
+                    title: 'Event 1',
+                    start: '2024-09-01T16:00:00',  // Event with a specific time
+                },
+                {
+                    title: 'Event 2',
+                    start: '2024-09-07',            // All-day event starting on Sep 7
+                    end: '2024-09-11',              // End date exclusive, so set to Sep 11 to include Sep 10
+                    allDay: true                    // Specify this is an all-day event
+                }
+            ]
+        });
+        calendar.render(); // Render the calendar on the element
+    });
+});

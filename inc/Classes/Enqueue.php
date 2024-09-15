@@ -997,6 +997,24 @@ class Enqueue {
 			}
 		}
 
+		//Booking Data retrive
+		$tf_orders_select        = array(
+			'select'    => "id, post_id, check_in, check_out, ostatus",
+			'post_type' => 'tour',
+			'query'     => " ORDER BY id DESC"
+		);
+		$tf_tour_order_result = Helper::tourfic_order_table_data( $tf_orders_select );
+		$tf_tours_orders = [];
+		if(!empty($tf_tour_order_result)){
+			foreach($tf_tour_order_result as $order){
+				$tf_tours_orders[] = array(
+					'title' => get_the_title($order['post_id']),
+					'start' => '29-09-2024',
+				);
+			}
+		}
+		
+
 		$travelfic_toolkit_active_plugins = [];
 		if ( ! is_plugin_active( 'travelfic-toolkit/travelfic-toolkit.php' ) ) {
 			$travelfic_toolkit_active_plugins[] = "travelfic-toolkit";
@@ -1004,7 +1022,6 @@ class Enqueue {
 
 		$current_active_theme = ! empty( get_option( 'stylesheet' ) ) ? get_option( 'stylesheet' ) : '';
 
-		//Css
 
 		//Color-Picker Css
 		if ( in_array( $screen, $tf_options_screens ) || in_array( $post_type, $tf_options_post_type ) ) {
@@ -1138,7 +1155,8 @@ class Enqueue {
 				'imported'       => esc_html__( 'Imported successfully!', 'tourfic' ),
 				'import_confirm' => esc_html__( 'Are you sure you want to import this data?', 'tourfic' ),
 				'import_empty'   => esc_html__( 'Import Data cannot be empty!', 'tourfic' ),
-			)
+			),
+			'tf_tours_orders' => $tf_tours_orders
 		) );
 	}
 
