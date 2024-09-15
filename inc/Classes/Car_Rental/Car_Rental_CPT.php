@@ -82,11 +82,11 @@ class Car_Rental_CPT extends \Tourfic\Core\Post_Type {
 	}
 
 	private function get_carrental_slug() {
-		$tf_carrental_setting_permalink_slug = ! empty( Helper::tfopt( 'carrental-permalink-setting' ) ) ? Helper::tfopt( 'carrental-permalink-setting' ) : "cars";
+		$tf_carrental_setting_permalink_slug = ! empty( Helper::tfopt( 'car-permalink-setting' ) ) ? Helper::tfopt( 'car-permalink-setting' ) : "cars";
 
-		update_option( "carrental_slug", $tf_carrental_setting_permalink_slug );
+		update_option( "car_slug", $tf_carrental_setting_permalink_slug );
 
-		return apply_filters( 'tf_carrental_slug', get_option( 'carrental_slug' ) );
+		return apply_filters( 'tf_car_slug', get_option( 'car_slug' ) );
 	}
 
 }

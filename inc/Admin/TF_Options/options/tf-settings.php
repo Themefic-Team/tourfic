@@ -3690,6 +3690,14 @@ TF_Settings::option( 'tf_settings', array(
 					'default' => "apartments",
 					'placeholder' => ! empty(get_option("apartment_slug")) ? get_option("apartment_slug") : "apartments",
 				),
+				array(
+					'id'       => 'car-permalink-setting',
+					'type'     => 'text',
+					'label'    => __( 'Car Permalink', 'tourfic' ),
+					'subtitle' => __( 'Enter a permalink for your car archive page.', 'tourfic' ),
+					'default' => "cars",
+					'placeholder' => ! empty(get_option("car_slug")) ? get_option("car_slug") : "cars",
+				),
 			),
 		),
 		/**
