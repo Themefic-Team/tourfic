@@ -867,11 +867,15 @@ class Pricing {
 			foreach ( $avail_date as $date => $data ) {
 				if ( $current_date < strtotime( $data['check_in'] ) && $data['status'] == 'available' ) {
 					if ( $pricing_by == '1' ) {
-						$prices[]          = ! empty( $data['price'] ) ? $data['price'] : 0;
-						$discount_prices[] = $this->calculate_discount( $data['price'] );
+						if(!empty($data['price'])) {
+							$prices[]          = ! empty( $data['price'] ) ? $data['price'] : 0;
+							$discount_prices[] = $this->calculate_discount( $data['price'] );
+						}
 					} else if ( $pricing_by == '2' ) {
-						$prices[]          = ! empty( $data['adult_price'] ) ? $data['adult_price'] : 0;
-						$discount_prices[] = $this->calculate_discount( $data['adult_price'] );
+						if(!empty($data['adult_price'])) {
+							$prices[]          = ! empty( $data['adult_price'] ) ? $data['adult_price'] : 0;
+							$discount_prices[] = $this->calculate_discount( $data['adult_price'] );
+						}
 					} else {
 						$options_count = $data['options_count'] ?? 0;
 						if ( $option_key == '' ) {
@@ -881,8 +885,10 @@ class Pricing {
 								} else if ( $data[ 'tf_room_option_' . $i ] == '1' && $data[ 'tf_option_pricing_type_' . $i ] == 'per_person' ) {
 									$option_price = $data[ 'tf_option_adult_price_' . $i ] ?? 0;
 								}
-								$prices[]          = $option_price;
-								$discount_prices[] = $this->calculate_discount( $option_price );
+								if(!empty($option_price)) {
+									$prices[]          = $option_price;
+									$discount_prices[] = $this->calculate_discount( $option_price );
+								}
 							}
 						} else {
 							if ( $data[ 'tf_room_option_' . $option_key ] == '1' && $data[ 'tf_option_pricing_type_' . $option_key ] == 'per_room' ) {
@@ -890,8 +896,11 @@ class Pricing {
 							} else if ( $data[ 'tf_room_option_' . $option_key ] == '1' && $data[ 'tf_option_pricing_type_' . $option_key ] == 'per_person' ) {
 								$option_price = $data[ 'tf_option_adult_price_' . $option_key ] ?? 0;
 							}
-							$prices[]          = $option_price;
-							$discount_prices[] = $this->calculate_discount( $option_price );
+                            if(!empty($option_price)){
+	                            $prices[]          = $option_price;
+	                            $discount_prices[] = $this->calculate_discount( $option_price );
+                            }
+
 						}
 					}
 				}
