@@ -251,7 +251,9 @@ $t4-main-color: #060D1C;
         .btn-primary {
             border-radius: 4px;
             background: $t4-primary !important;
-            box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
+            box-shadow: 0 4px 30px 0 rgba(255, 237, 225, 0.40);
+            font-size: 16px !important;
+            padding: 13px 24px;
 
             @media #{$max1024} {
                 width: 100%;
@@ -691,7 +693,7 @@ $t4-main-color: #060D1C;
     }
 
     .tf-archive-filter {
-        margin-bottom: 24px;
+        //margin-bottom: 24px;
 
         label input:checked ~ .checkmark{
             background-color: $t4-primary !important;

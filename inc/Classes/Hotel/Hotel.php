@@ -183,7 +183,7 @@ class Hotel {
                     $period = new \DatePeriod(
                         new \DateTime( $form_start . ' 00:00' ),
                         new \DateInterval( 'P1D' ),
-                        (new \DateTime( $tf_enddate . ' 00:00' ))->modify('-1 day')
+                        new \DateTime( $tf_enddate . ' 23:59' )
                     );
 
                     $days = iterator_count( $period );
@@ -2497,6 +2497,10 @@ class Hotel {
 
 		$tf_hotel_arc_selected_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
 
+        $min_price_arr = Pricing::instance($post_id)->get_min_price($period);
+		$min_discount_type = !empty($min_price_arr['min_discount_type']) ? $min_price_arr['min_discount_type'] : 'none';
+		$min_discount_amount = !empty($min_price_arr['min_discount_amount']) ? $min_price_arr['min_discount_amount'] : 0;
+
 		if ( $tf_hotel_arc_selected_template == "design-1" ) {
 			?>
             <div class="tf-item-card tf-flex tf-item-hotel">
@@ -2603,7 +2607,7 @@ class Hotel {
                     </div>
                     <div class="tf-post-footer tf-flex tf-flex-align-center tf-flex-space-bttn tf-mt-16">
                         <div class="tf-pricing">
-							<?php echo Pricing::instance( $post_id )->get_min_price_html(); ?>
+							<?php echo Pricing::instance( $post_id )->get_min_price_html($period); ?>
                         </div>
                         <div class="tf-booking-bttns">
                             <a class="tf-btn-normal btn-secondary" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
@@ -2688,16 +2692,16 @@ class Hotel {
 								<?php } ?>
                             </div>
                             <div class="tf-mobile tf-pricing-info">
-								<?php if ( ! empty( $discount_amount ) ) { ?>
+								<?php if ( ! empty( $min_discount_amount ) ) { ?>
                                     <div class="tf-available-room-off">
                                         <span>
-                                            <?php echo esc_html( min( $discount_amount ) ); ?>% <?php esc_html_e( "Off ", "tourfic" ); ?>
+                                            <?php echo $min_discount_type == "percent" ? esc_html( $min_discount_amount ) . '%' : wp_kses_post( wc_price( $min_discount_amount ) ) ?><?php esc_html_e( "Off ", "tourfic" ); ?>
                                         </span>
                                     </div>
 								<?php } ?>
                                 <div class="tf-available-room-price">
                                 <span class="tf-price-from">
-                                <?php echo Pricing::instance( $post_id )->get_min_price_html(); ?>
+                                <?php echo Pricing::instance( $post_id )->get_min_price_html($period); ?>
                                 </span>
                                 </div>
                             </div>
@@ -2735,16 +2739,16 @@ class Hotel {
                     <div class="tf-available-room-content-right">
                         <div class="tf-card-pricing-heading">
 							<?php
-							if ( ! empty( $tf_lowestAmount_items ) ) { ?>
+							if ( ! empty( $min_discount_amount ) ) { ?>
                                 <div class="tf-available-room-off">
                                     <span>
-                                        <?php echo $tf_lowestAmount_items['type'] == "percent" ? esc_html( $tf_lowestAmount ) . '%' : wp_kses_post( wc_price( $tf_lowestAmount ) ) ?><?php esc_html_e( "Off ", "tourfic" ); ?>
+                                        <?php echo $min_discount_type == "percent" ? esc_html( $min_discount_amount ) . '%' : wp_kses_post( wc_price( $min_discount_amount ) ) ?><?php esc_html_e( "Off ", "tourfic" ); ?>
                                     </span>
                                 </div>
 							<?php } ?>
                             <div class="tf-available-room-price">
                             <span class="tf-price-from">
-                            <?php echo Pricing::instance( $post_id )->get_min_price_html(); ?>
+                            <?php echo Pricing::instance( $post_id )->get_min_price_html($period); ?>
                             </span>
                             </div>
                         </div>
@@ -2766,9 +2770,9 @@ class Hotel {
                     </a>
 
 					<?php
-					if ( ! empty( $tf_lowestAmount_items ) ) : ?>
+					if ( ! empty( $min_discount_amount ) ) : ?>
                         <div class="tf-archive-hotel-discount">
-							<?php echo $tf_lowestAmount_items['type'] == "percent" ? $tf_lowestAmount . '%' : wc_price( $tf_lowestAmount ) ?><?php _e( " Off", "tourfic" ); ?>
+							<?php echo $min_discount_type == "percent" ? $min_discount_amount . '%' : wc_price( $min_discount_amount ) ?><?php _e( " Off", "tourfic" ); ?>
                         </div>
 					<?php endif; ?>
                 </div>
@@ -2818,10 +2822,7 @@ class Hotel {
                     </div>
                     <div class="tf-archive-hotel-content-right">
                         <div class="tf-archive-hotel-price">
-							<?php
-							//echo Pricing::instance( $post_id )->get_min_price_html();
-                            Pricing::instance( $post_id )->get_min();
-							?>
+							<?php echo Pricing::instance( $post_id )->get_min_price_html(); ?>
                         </div>
                         <a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php _e( "View Details", "tourfic" ); ?></a>
                     </div>
@@ -2934,7 +2935,7 @@ class Hotel {
                                                     <!-- Show minimum price @author - Hena -->
                                                     <div class="tf-room-price-area">
                                                         <div class="tf-room-price">
-															<?php echo Pricing::instance( $post_id )->get_min_price_html(); ?>
+															<?php echo Pricing::instance( $post_id )->get_min_price_html($period); ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -3506,7 +3507,7 @@ class Hotel {
 			)
 		);
 
-		$loop = new WP_Query( $args );
+		$loop = new \WP_Query( $args );
 
 		if ( $loop->have_posts() ) :
 			while ( $loop->have_posts() ) : $loop->the_post();

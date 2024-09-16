@@ -2,6 +2,7 @@
 
     <div class="tf-content-wrapper">
 		<?php
+
 		use \Tourfic\Classes\Helper;
 		use \Tourfic\Classes\Hotel\Hotel;
 
@@ -11,7 +12,7 @@
 
         <div class="tf-archive-search-form tf-booking-form-wrapper">
             <div class="tf-container">
-                <form action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
+                <form action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
 					<?php Helper::tf_archive_sidebar_search_form( 'tf_hotel' ); ?>
                 </form>
             </div>
@@ -23,37 +24,11 @@
                     <!--Available rooms start -->
                     <div class="tf-archive-hotels-wrapper">
                         <div class="tf-archive-filter">
-							<?php
-							$hotel_types = get_terms( array(
-								'hide_empty' => true,
-								'taxonomy'   => 'hotel_type',
-							) );
-							?>
-                            <!--<div class="tf-archive-filter-item">
-                                <select name="tf-hotel-type" class="tf-archive-hotel-type" multiple data-placeholder="<?php /*_e( "Select Hotel Type", "tourfic" ); */ ?>">
-									<?php
-							/*									$destination_name   = ! empty( $_GET['destination'] ) ? $_GET['destination'] : '';
-																$search_types_query = ! empty( $_GET['types'] ) ? $_GET['types'] : array();
-																foreach ( $hotel_types as $key => $term ) {
-																	$id            = $term->term_id;
-																	$name          = $term->name;
-																	$fslug         = $term->slug;
-																	$default_count = $term->count;
-																	$count         = '<span>' . tf_term_count( $term->slug, $destination_name, $default_count ) . '</span>';
-																	$defult_select = in_array( $fslug, $search_types_query ) ? 'selected' : '';
-																	echo "<option value='{$fslug}' {$defult_select}>{$name} {$count}</option>";
-																}
-																*/ ?>
-                                </select>
-                            </div>
-                            <div class="tf-archive-filter-item">
-                                <button class="tf-archive-filter-btn"><?php /*_e( "All Filter", "tourfic" ); */ ?></button>
-                            </div>-->
                             <div class="tf-archive-filter-sidebar">
                                 <div class="tf-filter-wrapper">
                                     <div class="tf-filter-title">
-                                        <h4 class="tf-section-title"><?php _e( "Filter", "tourfic" ); ?></h4>
-                                        <button class="filter-reset-btn"><?php _e( "Reset", "tourfic" ); ?></button>
+                                        <h4 class="tf-section-title"><?php echo esc_html__( "Filter", "tourfic" ); ?></h4>
+                                        <button class="filter-reset-btn"><?php echo esc_html__( "Reset", "tourfic" ); ?></button>
                                     </div>
 									<?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
                                         <div id="tf__booking_sidebar">
@@ -689,7 +664,7 @@
                             <div class="st-icheck-item">
                                 <label for="st-move-map" class="c-grey">
                                     <input type="checkbox" name="movemap" id="st-move-map" value="1">
-				                    <?php /*echo esc_html__('Search as I move the map', 'traveler'); */?>
+				                    <?php /*echo esc_html__('Search as I move the map', 'traveler'); */ ?>
                                     <span class="checkmark fcheckbox"></span>
                                 </label>
                             </div>

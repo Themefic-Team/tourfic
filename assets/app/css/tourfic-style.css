@@ -18647,7 +18647,9 @@ html {
 .tf-hotel-template-4 .tf-booking-form-submit .btn-primary {
   border-radius: 4px;
   background: #FF6B00 !important;
-  box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.4);
+  box-shadow: 0 4px 30px 0 rgba(255, 237, 225, 0.4);
+  font-size: 16px !important;
+  padding: 13px 24px;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -19177,10 +19179,6 @@ html {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-}
-
-.tf-hotel-template-4 .tf-archive-filter {
-  margin-bottom: 24px;
 }
 
 .tf-hotel-template-4 .tf-archive-filter label input:checked ~ .checkmark {

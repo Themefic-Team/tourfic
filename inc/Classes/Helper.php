@@ -1990,7 +1990,6 @@ class Helper {
 
                                 $(".tf-hotel-template-4 #tf-check-out").on('click', function () {
                                     $(".tf-search-input.form-control").click();
-                                    console.log('cgg')
                                 });
 
                                 $("#check-in-out-date").flatpickr({
