@@ -122,6 +122,7 @@
                 .tf-driver-location-box{
                     padding: 8px;
                     .tf-driver-location{
+                        padding-left: 8px;
                         ul{
                             margin: 0;
                             padding: 0;
@@ -161,7 +162,7 @@
                                     }
                                     .checkmark {
                                         position: absolute;
-                                        top: 0;
+                                        top: 2px;
                                         left: 0;
                                         height: 20px;
                                         width: 20px;
@@ -202,6 +203,10 @@
                             line-height: 150%; /* 24px */
                             border: 0px solid;
                             cursor: pointer;
+                            transition: .3s all ease;
+                            &:hover{
+                                background: #094C90;
+                            }
                             i{
                                 margin-left: 8px;
                             }

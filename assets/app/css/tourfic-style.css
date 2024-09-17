@@ -1,6 +1,3 @@
-/*!*********************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass/app/css/free/tourfic.scss ***!
-  \*********************************************************************************************************************************************************************************/
 @charset "UTF-8";
 /*
 Button
@@ -17208,6 +17205,11 @@ html {
   line-height: 150%; /* 24px */
   cursor: pointer;
   border: 1px solid #0866C4;
+  transition: 0.3s all ease;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-extra-apply-btn button:hover {
+  background: #0866C4;
+  color: #fff;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details {
   border-radius: 16px;
@@ -17446,6 +17448,9 @@ html {
 .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-driver-location-box {
   padding: 8px;
 }
+.tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location {
+  padding-left: 8px;
+}
 .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul {
   margin: 0;
   padding: 0;
@@ -17485,7 +17490,7 @@ html {
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label .checkmark {
   position: absolute;
-  top: 0;
+  top: 2px;
   left: 0;
   height: 20px;
   width: 20px;
@@ -17521,6 +17526,10 @@ html {
   line-height: 150%; /* 24px */
   border: 0px solid;
   cursor: pointer;
+  transition: 0.3s all ease;
+}
+.tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-driver-location-box .tf-submit-button button:hover {
+  background: #094C90;
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-driver-location-box .tf-submit-button button i {
   margin-left: 8px;
