@@ -1,5 +1,75 @@
 .tf-single-car-section{
     margin: 0 auto;
+
+    .tf-single-booking-bar{
+        background: #FFF;
+        box-shadow: 0px 48px 64px 0px rgba(2, 12, 21, 0.05);
+        padding: 16px 0px;
+        position: sticky;
+        left: 0;
+        top: 0;
+        z-index: 99;
+        display: none;
+        .tf-top-bar-booking{
+            .tf-price-header{
+                h2{
+                    color: #27333F;
+                    font-size: 21px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 150%; /* 31.5px */
+                    margin: 0;
+                }
+                p{
+                    color: #566676;
+                    margin: 0;
+                }
+            }
+            button{
+                padding: 16px 32px;
+                border-radius: 8px;
+                background: #0866c4;
+                color: #fff;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 150%;
+                cursor: pointer;
+                border: 0px solid;
+                transition: .3s all ease;
+                &:hover{
+                    background: #094c90;
+                }
+            }
+        }
+    }
+
+    .tf-details-menu{
+        ul{
+            margin: 0;
+            padding: 0;
+            li{
+                display: inline-block;
+                a{
+                    text-decoration: none;
+                    color: #27333F;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 150%; /* 24px */
+                    padding: 0 8px 8px 8px;
+                    display: inline-block;
+                }
+                &.active{
+                    a{
+                        color: #0866C4;
+                        border-bottom: 2px solid #0866C4;
+                    }
+                }
+            }
+        }
+    }
+
     .tf-single-car-details-warper{
         padding: 32px 0;
         display: flex;
@@ -145,33 +215,6 @@
                             display: block;
                         }
                     }   
-                }
-            }
-
-
-            .tf-details-menu{
-                ul{
-                    margin: 0;
-                    padding: 0;
-                    li{
-                        display: inline-block;
-                        a{
-                            text-decoration: none;
-                            color: #27333F;
-                            font-size: 16px;
-                            font-style: normal;
-                            font-weight: 400;
-                            line-height: 150%; /* 24px */
-                            padding: 0 8px 8px 8px;
-                            display: inline-block;
-                        }
-                        &.active{
-                            a{
-                                color: #0866C4;
-                                border-bottom: 2px solid #0866C4;
-                            }
-                        }
-                    }
                 }
             }
 

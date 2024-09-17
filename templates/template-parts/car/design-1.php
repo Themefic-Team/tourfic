@@ -4,8 +4,73 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Car_Rental\Pricing;
 use \Tourfic\App\TF_Review;
 ?>
-
+<?php
+$tf_pickup_date = !empty($_GET['pickup_date']) ? $_GET['pickup_date'] : '';
+$tf_dropoff_date = !empty($_GET['dropoff_date']) ? $_GET['dropoff_date'] : '';
+$tf_pickup_time = !empty($_GET['pickup_time']) ? $_GET['pickup_time'] : '';
+$tf_dropoff_time = !empty($_GET['dropoff_time']) ? $_GET['dropoff_time'] : '';
+$total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time); 
+?>
 <div class="tf-single-car-section">
+    <div class="tf-single-booking-bar">
+        <div class="tf-car-template-container">
+            <div class="tf-top-booking-bar tf-flex tf-flex-space-bttn tf-flex-align-center">
+                <div class="tf-details-menu">
+                    <ul>
+                        <li class="active">
+                            <a class="tf-hashlink" href="#tf-description">
+                                <?php esc_html_e("Description", "tourfic"); ?>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tf-hashlink" href="#tf-car-info">
+                                <?php esc_html_e("Car info", "tourfic"); ?>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tf-hashlink" href="#tf-benefits">
+                                <?php esc_html_e("Benefits", "tourfic"); ?>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tf-hashlink" href="#tf-inc-exc">
+                                <?php esc_html_e("Include/Excluce", "tourfic"); ?>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tf-hashlink" href="#tf-location">
+                                <?php esc_html_e("Location", "tourfic"); ?>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tf-hashlink" href="#tf-reviews">
+                                <?php esc_html_e("Reviews", "tourfic"); ?>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tf-hashlink" href="#tf-faq">
+                                <?php esc_html_e("FAQ's", "tourfic"); ?>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="tf-top-bar-booking tf-flex tf-flex-gap-32">
+                    <div class="tf-price-header">
+                        <h2><?php esc_html_e("Total:", "tourfic"); ?> 
+                        <?php echo $total_prices['sale_price'] ? wc_price($total_prices['sale_price']) : '' ?></h2>
+                        <p><?php echo Pricing::is_taxable($meta); ?></p>
+                    </div>
+                    <button class="tf-flex tf-flex-align-center tf-flex-justify-center tf-flex-gap-8">
+                        <?php esc_html_e( apply_filters("tf_car_booking_form_submit_button_text", 'Continue' ), 'tourfic' ); ?>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <div class="tf-car-template-container">
         <div class="tf-container-inner">
@@ -122,12 +187,6 @@ use \Tourfic\App\TF_Review;
                 <div class="tf-car-booking-form">
 
                     <div class="tf-price-header tf-mb-30">
-                        <?php
-                        $tf_pickup_date = !empty($_GET['pickup_date']) ? $_GET['pickup_date'] : '';
-                        $tf_dropoff_date = !empty($_GET['dropoff_date']) ? $_GET['dropoff_date'] : '';
-                        $tf_pickup_time = !empty($_GET['pickup_time']) ? $_GET['pickup_time'] : '';
-                        $tf_dropoff_time = !empty($_GET['dropoff_time']) ? $_GET['dropoff_time'] : '';
-                        $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time); ?>
                         <h2><?php esc_html_e("Total:", "tourfic"); ?> 
                         <?php if(!empty($total_prices['regular_price'])){ ?><del><?php echo wc_price($total_prices['regular_price']); ?></del>  <?php } ?>
                         <?php echo $total_prices['sale_price'] ? wc_price($total_prices['sale_price']) : '' ?></h2>
