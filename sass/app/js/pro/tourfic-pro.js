@@ -71,7 +71,7 @@
                 $("#hotel_room_uniqueid").val(unique_id);
                 $("#hotel_room_depo").val(hotel_deposit);
                 $.fancybox.open({
-                    src: '#tf-hotel-services',
+                    src: $(this).closest('.tf-room').find('.tf-hotel-services-wrap'),
                     type: 'inline',
                     afterClose: function () {
                         $('#airport-service option:first').prop('selected', true);
