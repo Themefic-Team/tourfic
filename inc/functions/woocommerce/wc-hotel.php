@@ -139,25 +139,6 @@ function tf_hotel_booking_callback() {
 		/**
 		 * Calculate Pricing
 		 */
-		/*$price_arr    = Pricing::instance( $post_id, $room_id, $option_id )->set_dates( $check_in, $check_out )->set_persons( $adult, $child )->set_room_number( $room_selected )->get_total_price();
-		$price_total  = ! empty( $price_arr['total_price'] ) ? $price_arr['total_price'] : 0;
-		$adult_price  = ! empty( $price_arr['adult_price'] ) ? $price_arr['adult_price'] : 0;
-		$child_price  = ! empty( $price_arr['child_price'] ) ? $price_arr['child_price'] : 0;
-		$option_title = ! empty( $price_arr['option_title'] ) ? $price_arr['option_title'] : '';
-
-		if ( $pricing_by == '1' ) {
-			$tf_room_data['tf_hotel_data']['adult']         = $adult;
-			$tf_room_data['tf_hotel_data']['child']         = $child;
-			$tf_room_data['tf_hotel_data']['children_ages'] = $children_ages;
-		} elseif ( $pricing_by == '2' ) {
-			$tf_room_data['tf_hotel_data']['adult'] = $adult . " × " . wp_strip_all_tags( wc_price( $adult_price ) );
-			$tf_room_data['tf_hotel_data']['child'] = $child . " × " . wp_strip_all_tags( wc_price( $child_price ) );
-		} elseif ( $pricing_by == '3' ) {
-			$tf_room_data['tf_hotel_data']['option'] = $option_title;
-			$tf_room_data['tf_hotel_data']['adult']  = $adult;
-			$tf_room_data['tf_hotel_data']['child']  = $child;
-		}*/
-
 		if ( $avail_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 
 			if ( ! $price_multi_day ) {

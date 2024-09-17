@@ -19,7 +19,7 @@
 
             $("#tour_room_details_loader").show();
             var service_type = $(this).val();
-            var roomid = $('#hotel_roomid').val();
+            var roomid = $(this).closest('.fancybox-slide').find('input[name=room_id]').val();
             var hotelid = $("#hotel-post-id").val();
             var hoteladult = $("#adults").val();
             var hotelchildren = $("#children").val();
@@ -27,7 +27,7 @@
             var room = $("#hotel_room_number").val();
             var check_in_date = $("input[name=check_in_date]").val();
             var check_out_date = $("input[name=check_out_date]").val();
-            var option_id = $("input[name=option_id]").val();
+            var option_id = $(this).closest('.fancybox-slide').find("input[name=option_id]").val();
             var data = {
                 action: 'tf_hotel_airport_service_price',
                 _nonce: tf_params.nonce,

@@ -1176,7 +1176,7 @@ class Hotel {
 		if ( 1 == $airport_service ) {
 
 			$room_id       = isset( $_POST['roomid'] ) ? intval( sanitize_text_field( $_POST['roomid'] ) ) : null;
-			$option_id     = isset( $_POST['option_id'] ) ? intval( sanitize_text_field( $_POST['option_id'] ) ) : null;
+			$option_id     = isset( $_POST['option_id'] ) ? sanitize_text_field( $_POST['option_id'] ) : null;
 			$adult         = isset( $_POST['hoteladult'] ) ? intval( sanitize_text_field( $_POST['hoteladult'] ) ) : '0';
 			$child         = isset( $_POST['hotelchildren'] ) ? intval( sanitize_text_field( $_POST['hotelchildren'] ) ) : '0';
 			$room_selected = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : '0';
@@ -1203,9 +1203,6 @@ class Hotel {
             /**
 			 * Calculate Pricing
 			 */
-			//$price_total = Pricing::instance( $hotel_id, $room_id, $option_id )->set_dates( $check_in, $check_out )->set_persons( $adult, $child )->set_room_number( $room_selected )->get_total_price();
-			//$price_total = ! empty( $price_total['total_price'] ) ? $price_total['total_price'] : 0;
-
 			if ( $avail_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 
 				// Check availability by date option
@@ -1310,6 +1307,7 @@ class Hotel {
 					if ( ! empty( $room_options ) ) {
 						foreach ( $room_options as $room_option_key => $room_option ) {
 							$_option_id = $unique_id . '_' . $room_option_key;
+
 							if ( $_option_id == $option_id ) {
 								$option_price_type = ! empty( $room_option['option_pricing_type'] ) ? $room_option['option_pricing_type'] : 'per_room';
 								if ( $option_price_type == 'per_room' ) {
@@ -1327,6 +1325,8 @@ class Hotel {
 						}
 					}
 				}
+
+
 
 				# Multiply pricing by night number
 				if ( ! empty( $day_difference ) && $price_multi_day == true ) {
