@@ -44,7 +44,7 @@ class Apartment_External_Listings extends \Tourfic\Core\Shortcodes {
 		} else {
 			$slider_activate = 'tf-hotel-grid';
 		}
-		$post_loop = new \WP_Query( $args );
+		$post_loop = new \WP_Query( apply_filters( "tf_apartment_external_booking_shortcode_args", $args) );
 		?>
 		<?php if ( $post_loop->have_posts() ) : ?>
 			<div class="tf-widget-slider recent-hotel-slider">
@@ -96,17 +96,6 @@ class Apartment_External_Listings extends \Tourfic\Core\Shortcodes {
 											</div>
 										<?php } ?>
 										<p><?php echo wp_kses_post( wp_trim_words( get_the_content(), 10 ) ); ?></p>
-										<?php if ( ! empty( $rooms ) ): ?>
-											<div class="tf-recent-room-price">
-												<?php
-												if ( ! empty( $room_price ) ) {
-													//get the lowest price from all available room price
-													$lowest_price = wc_price( min( $room_price ) );
-													echo esc_html__( "From ", "tourfic" ) . wp_kses_post( $lowest_price );
-												}
-												?>
-											</div>
-										<?php endif; ?>
 									</div>
 								</div>
 							</div>

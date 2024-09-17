@@ -1,6 +1,8 @@
 <?php
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
+use \Tourfic\Classes\Apartment\Apartment;
+use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
 ?>
 
 <div class="tf-template-3 tf-hotel-single tf-apartment-single">
@@ -187,7 +189,7 @@ use \Tourfic\App\TF_Review;
         </div>
         <div class="tf-details-right tf-sitebar-widgets">
             <div class="tf-search-date-wrapper tf-single-widgets">
-                <?php tf_apartment_single_booking_form( $comments, $disable_review_sec ); ?>
+                <?php Apartment::tf_apartment_single_booking_form( $comments, $disable_review_sec ); ?>
             </div>
 
             <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && isset( $meta['surroundings_places'] ) && ! empty( Helper::tf_data_types( $meta['surroundings_places'] ) ) ): ?>
@@ -477,7 +479,7 @@ if ( $disable_related_sec !== '1' ) {
                             $destinations           = get_the_terms( $selected_design_post_id, 'apartment_location' );
                             $first_destination_name = $destinations[0]->name;
                             $meta                   = get_post_meta( $selected_design_post_id, 'tf_apartment_opt', true );
-                            $apartment_min_price = get_apartment_min_max_price( $selected_design_post_id );
+                            $apartment_min_price = Apt_Pricing::instance( $selected_design_post_id )->get_min_max_price();
 
                             $pricing_type = ! empty( $meta['pricing_type'] ) && "per_person" == $meta['pricing_type'] ? esc_html__("Person", "tourfic") : esc_html__("Night", "tourfic");
                             if(!in_array($selected_design_post_id, array($post_id))){

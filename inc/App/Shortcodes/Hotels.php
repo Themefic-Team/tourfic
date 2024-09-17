@@ -6,6 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\App\TF_Review;
 use Tourfic\Classes\Room\Room;
+use \Tourfic\Classes\Hotel\Pricing;
 
 class Hotels extends \Tourfic\Core\Shortcodes {
 
@@ -71,50 +72,6 @@ class Hotels extends \Tourfic\Core\Shortcodes {
 						$hotel_loop->the_post();
 						$post_id                = get_the_ID();
 						$related_comments_hotel = get_comments( array( 'post_id' => $post_id ) );
-						$rooms                  = Room::get_hotel_rooms( $post_id);
-						//get and store all the prices for each room
-						$room_price = [];
-						if ( $rooms ) {
-							foreach ( $rooms as $_room ) {
-								$room = get_post_meta($_room->ID, 'tf_room_opt', true);
-								$pricing_by = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : 1;
-								if ( $pricing_by == 1 ) {
-									if ( ! empty( $room['price'] ) ) {
-										$room_price[] = $room['price'];
-									}
-									if ( ! empty( $room['avil_by_date'] ) && $room['avil_by_date'] == "1" ) {
-										if ( ! empty( $room['avail_date'] ) ) {
-											$avail_dates = json_decode($room['avail_date'], true);
-											foreach ( $avail_dates as $repval ) {
-												if ( ! empty( $repval['price'] ) ) {
-													$room_price[] = $repval['price'];
-												}
-											}
-										}
-									}
-								} else if ( $pricing_by == 2 ) {
-									if ( ! empty( $room['adult_price'] ) ) {
-										$room_price[] = $room['adult_price'];
-									}
-									if ( ! empty( $room['child_price'] ) ) {
-										$room_price[] = $room['child_price'];
-									}
-									if ( ! empty( $room['avil_by_date'] ) && $room['avil_by_date'] == "1" ) {
-										if ( ! empty( $room['avail_date'] ) ) {
-											$avail_dates = json_decode($room['avail_date'], true);
-											foreach ( $avail_dates as $repval ) {
-												if ( ! empty( $repval['adult_price'] ) ) {
-													$room_price[] = $repval['adult_price'];
-												}
-												if ( ! empty( $repval['child_price'] ) ) {
-													$room_price[] = $repval['child_price'];
-												}
-											}
-										}
-									}
-								}
-							}
-						}
 						?>
 						<div class="tf-slider-item"
 						     style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>);">
@@ -129,17 +86,9 @@ class Hotels extends \Tourfic\Core\Shortcodes {
 										</div>
 									<?php } ?>
 									<p><?php echo wp_kses_post( wp_trim_words( get_the_content(), 10 ) ); ?></p>
-									<?php if ( ! empty( $rooms ) ): ?>
-										<div class="tf-recent-room-price">
-											<?php
-											if ( ! empty( $room_price ) ) {
-												//get the lowest price from all available room price
-												$lowest_price = wc_price( min( $room_price ) );
-												echo esc_html__( "From ", "tourfic" ) . wp_kses_post( $lowest_price );
-											}
-											?>
-										</div>
-									<?php endif; ?>
+                                    <div class="tf-recent-room-price">
+                                        <?php echo Pricing::instance( $post_id )->get_min_price_html(); ?>
+                                    </div>
 								</div>
 							</div>
 						</div>

@@ -75,17 +75,16 @@ class Base {
 
 		if ( Helper::tfopt( 'disable-services' ) && in_array( 'hotel', Helper::tfopt( 'disable-services' ) ) ) {
 		} else {
-			 \Tourfic\Classes\Hotel\Hotel_CPT::instance();
-			 \Tourfic\Classes\Room\Room_CPT::instance();
-			 \Tourfic\Classes\Hotel\Pricing::instance();
+			\Tourfic\Classes\Hotel\Hotel::instance();
+			\Tourfic\Classes\Room\Room::instance();
 		}
 		if ( Helper::tfopt( 'disable-services' ) && in_array( 'tour', Helper::tfopt( 'disable-services' ) ) ) {
 		} else {
-			 \Tourfic\Classes\Tour\Tour_CPT::instance();
+			 \Tourfic\Classes\Tour\Tour::instance();
 		}
 		if ( Helper::tfopt( 'disable-services' ) && in_array( 'apartment', Helper::tfopt( 'disable-services' ) ) ) {
 		} else {
-			 \Tourfic\Classes\Apartment\Apartment_CPT::instance();
+			 \Tourfic\Classes\Apartment\Apartment::instance();
 		}
 
 		\Tourfic\Admin\Emails\TF_Handle_Emails::instance();

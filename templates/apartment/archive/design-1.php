@@ -2,6 +2,7 @@
 
     <?php
     use \Tourfic\Classes\Helper; 
+    use \Tourfic\Classes\Apartment\Apartment; 
     
     $tf_hotel_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_1_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_1_bannar'] : '';
     ?>
@@ -35,7 +36,7 @@
                     </span>
                     <!-- Booking form Start -->
                     <div class="tf-archive-search-form tf-booking-form-wrapper">
-                        <form action="<?php echo esc_url( tf_booking_search_action()); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
+                        <form action="<?php echo esc_url( Helper::tf_booking_search_action()); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
                             <?php Helper::tf_archive_sidebar_search_form('tf_apartment'); ?>
                         </form>
                     </div>
@@ -56,6 +57,8 @@
                                 <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
                             </div>
                         </div>
+
+                        <?php do_action("tf_apartment_archive_card_items_before"); ?>
                         
                         <!--Available rooms start -->
                         <div class="tf-archive-available-rooms tf-available-rooms archive_ajax_result">
@@ -66,14 +69,14 @@
                                     the_post();
                                     $apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
                                     if ( !empty($apartment_meta[ "apartment_as_featured" ] )) {
-                                        tf_apartment_archive_single_item();
+                                        echo apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item());
                                     }
                                 } 
                                 while ( have_posts() ) {
                                     the_post();
                                     $apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
                                     if ( empty($apartment_meta[ "apartment_as_featured" ] )) {
-                                        tf_apartment_archive_single_item();
+                                        echo apply_filters("tf_apartment_archive_single_card_design_one", Apartment::tf_apartment_archive_single_item());
                                     }
                                 }
                             } else {
@@ -81,13 +84,15 @@
                             }
                             ?>
                             <?php 
-                            if(tourfic_posts_navigation()){ ?>
+                            if(Helper::tourfic_posts_navigation()){ ?>
                             <div class="tf-pagination-bar">
-                                <?php tourfic_posts_navigation(); ?>
+                                <?php Helper::tourfic_posts_navigation(); ?>
                             </div>
                             <?php } ?>
                         </div>
                         <!-- Available rooms end -->
+
+                        <?php do_action("tf_apartment_archive_card_items_after"); ?>
 
                     </div>
                     <!-- Available rooms end -->

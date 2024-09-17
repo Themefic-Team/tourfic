@@ -36,6 +36,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			//ajax save options
 			add_action( 'wp_ajax_tf_options_save', array( $this, 'tf_ajax_save_options' ) );
+			add_action( 'wp_ajax_tf_options_reset', array( $this, 'tf_ajax_reset_options' ) );
+			add_action( 'wp_ajax_tf_search_settings_autocomplete', array( $this, 'tf_search_settings_autocomplete_callback' ) );
 
             add_action( 'wp_ajax_tf_export_data', array( $this, 'tf_export_data' ) );
         }
@@ -675,6 +677,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
             $ajax_save_class = 'tf-ajax-save';
 
+			
+
 			if ( ! empty( $this->option_sections ) ) :
 				?>
 				<div class="tf-setting-dashboard">
@@ -682,6 +686,27 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				<?php \Tourfic\Classes\Helper::tf_dashboard_header(); ?>
 
                 <div class="tf-option-wrapper tf-setting-wrapper">
+
+					<!-- Settings Header -->
+					<div class="tourfic-settings-header">
+						<div class="settings-header-left">
+							<h2 class="tf-setting-title"><?php echo esc_html__( "Tourfic Settings", "tourfic" ); ?></h2>
+							<div class="tf-setting-search">
+								<i class="fa-solid fa-search"></i>
+								<div class="search-input">
+									<input aria-label="Search" id="tf-settings-header-search-filed" type="text" placeholder="<?php echo esc_attr__( "Search Options", "tourfic" ); ?>" class="ui-autocomplete-input" autocomplete="off">
+								</div>
+							</div>
+							
+						</div>
+						<div class="settings-header-right">
+							<div class="tf-setting-save-btn">
+								<button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn"><?php echo esc_html__( "Save", "tourfic" ); ?></button>
+								<button type="submit" class="tf-admin-btn tf-btn-secondary tf-reset-btn"><?php echo esc_html__( "Reset", "tourfic" ); ?></button>
+							</div>
+						</div>
+					</div>
+					<!-- Search Results Container -->
                     <form method="post" action="" class="tf-option-form <?php echo esc_attr($ajax_save_class) ?>" enctype="multipart/form-data">
                         <!-- Body -->
                         <div class="tf-option">
@@ -930,6 +955,158 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 				}
 
+			}
+
+			echo wp_json_encode( $response );
+			wp_die();
+		}
+
+
+		public function tf_ajax_reset_options() {
+			$response    = [
+				'status'  => 'error',
+				'message' => __( 'Something went wrong!', 'tourfic' ),
+			];
+
+
+			if( isset( $_POST['tf_option_nonce'] ) || wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_option_nonce'])), 'tf_option_nonce_action' ) ) {
+
+				!empty( get_option( 'tf_settings' ) ) ?  : '';
+
+				if( !empty( get_option( 'tf_settings' ) ) ) {
+					update_option( 'tf_settings', '' );
+					$response = [
+						'status'  => 'success',
+						'message' => __( 'Options Reset successfully!', 'tourfic' ),
+					];
+				} else {
+					$response    = [
+						'status'  => 'error',
+						'message' => __( 'Settings are fresh, nothing to reset.', 'tourfic' ),
+					];
+				}
+
+			} else {
+				$response    = [
+					'status'  => 'error',
+					'message' => __( 'Something went wrong!', 'tourfic' ),
+				];
+			}
+
+			echo wp_json_encode( $response );
+			wp_die();
+		}
+
+		public function tf_search_settings_autocomplete_callback() {
+			if( isset( $_POST['tf_option_nonce'] ) || wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_option_nonce'])), 'tf_option_nonce_action' ) ) {
+				$all_settings = $this->pre_tabs;
+				$fields = [];
+				$path = '';
+
+				foreach ( $all_settings as $section => $data ) {
+
+					$parent = $parent_title = '';
+					$icon = $data['icon'];
+
+					if( !empty( $data["fields"]) ) {
+						$path = $data['title'];
+						foreach ( $data["fields"] as $field ) {
+
+							if ( !empty( $field['tabs'] )) {
+								foreach( $field['tabs'] as $key => $tab) {
+									
+									if ( !empty( $tab['fields'] )) {
+										foreach ( $tab['fields'] as $tab_field ) {
+											$fields[] = array(
+												'parent' => $parent_title,
+												'parent_id' => $section,
+												'tab_id' => $tab['id'] ? $tab['id'] : '',
+												'field_title' => !empty( $tab_field["label"] ) ? $tab_field["label"] : ( !empty( $tab_field['title'] ) ? $tab_field['title'] : ( !empty( $tab_field['heading'] ) ?  !empty( $tab_field['heading'] ) : ''  )),
+												'section' => $tab['title'],
+												'icon' => $icon,
+												'path' => $path,
+												'id' => $tab_field['id'],
+											);
+										}
+									}
+
+								}
+							}
+
+							$fields[] = array(
+								'parent' => $parent_title,
+								'parent_id' => $section,
+								'field_title' => !empty( $field["label"] ) ? $field["label"] : ( !empty( $field['title'] ) ? $field['title'] : ( !empty( $field['heading'] ) ?  !empty( $field['heading'] ) : ''  )),
+								'section' => $data['title'],
+								'icon' => $icon,
+								'path' => $path,
+								'id' => $field['id'],
+							);
+						}
+					}
+
+					if( !empty( $data["sub_section"])) {
+						foreach ( $data["sub_section"] as $key => $sub_section ) {
+
+							$parent_id = $key;
+
+							if( isset( $sub_section["parent"] )) {
+								$parent = $sub_section["parent"];
+								$parent = !empty($parent) ? $all_settings[$parent] : '';
+								$parent_title = !empty($parent) ? $parent['title'] : '';
+								$icon = !empty($parent) ? $parent['icon'] : $data['icon'];
+							}
+
+							!empty( $parent_title ) ? $path = $parent_title . ' > ' . $sub_section['title'] : $path = $sub_section[$key]['title'];
+							if ( !empty( $sub_section["fields"])) {
+
+								foreach ( $sub_section["fields"] as $field ) {
+
+									if ( !empty( $field['tabs'] )) {
+										foreach( $field['tabs'] as $key => $tab) {
+											
+											if ( !empty( $tab['fields'] )) {
+												foreach ( $tab['fields'] as $tab_field ) {
+													$fields[] = array(
+														'parent' => $parent_title,
+														'parent_id' => $parent_id,
+														'tab_id' => $tab['id'] ? $tab['id'] : '',
+														'field_title' => !empty( $tab_field["label"] ) ? $tab_field["label"] : ( !empty( $tab_field['title'] ) ? $tab_field['title'] : ( !empty( $tab_field['heading'] ) ?  !empty( $tab_field['heading'] ) : ''  )),
+														'section' => $tab['title'],
+														'icon' => $icon,
+														'path' => $path,
+														'id' => $tab_field['id'],
+													);
+												}
+											}
+		
+										}
+									}
+									$fields[] = array(
+										'parent' => $parent_title,
+										'parent_id' => $parent_id,
+										'field_title' => !empty( $field["label"] ) ? $field["label"] : ( !empty( $field['title'] ) ? $field['title'] : ( !empty( $field['heading'] ) ?  !empty( $field['heading'] ) : ''  )),
+										'section' => $data['title'],
+										'icon' => $icon,
+										'path' => $path,
+										'id' => $field['id'],
+									);
+								}
+							} 
+						}
+					}
+				}
+
+				$response = [
+					'status'  => 'success',
+					'message' => $fields,
+				];
+				
+			} else {
+				$response = [
+					'status'  => 'error',
+					'message' => __( 'Something went wrong!', 'tourfic' ),
+				];
 			}
 
 			echo wp_json_encode( $response );

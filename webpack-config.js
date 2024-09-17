@@ -148,7 +148,7 @@ const StyleConfig = {
                         options: {
                             sourceMap: true,
                             sassOptions: {
-                                outputStyle: "extended",
+                                outputStyle: "expanded",
                               },
                         },
                     },         

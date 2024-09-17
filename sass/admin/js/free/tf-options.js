@@ -79,6 +79,8 @@
                 let slug = e.hash.replace('#tab=', '');
                 return tabId === slug || parentTabId === slug;
             }).parent().addClass("current").siblings().removeClass("current")
+
+            roomOptionsArr();
         });
 
         /*
@@ -460,6 +462,156 @@
         * Options ajax save
         * @author: Foysal
         */
+
+        $(document).on("click", '.tf-setting-save-btn .tf-submit-btn', function (e) {
+            e.preventDefault();
+            $('.tf-option-form.tf-ajax-save').submit();
+
+        })
+
+        $(document).on('click', '.tf-setting-save-btn .tf-reset-btn', function (e) {
+
+            Swal.fire({
+                title: tf_options.swal_reset_title_text,
+                text: tf_options.swal_reset_other_text,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: tf_options.swal_reset_btn_text,
+                customClass: "tf-swal-settings-reset-alert",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: tf_options.ajax_url,
+                        type: 'POST',
+                        data: {
+                            action: 'tf_options_reset',
+                            tf_option_nonce: tf_admin_params.tf_nonce,
+                        },
+                        beforeSend: function () {
+                            $('.tf-setting-save-btn .tf-reset-btn').addClass('tf-btn-loading');
+                        },
+                        success: function (response) {
+
+                            let data = JSON.parse(response)
+                            
+                            if (data.status === 'success') {
+                                notyf.success(data.message);
+                                window.location.reload();
+                            } else {
+                                notyf.error(data.message);
+                            }
+                            
+                            $('.tf-setting-save-btn .tf-reset-btn').removeClass('tf-btn-loading');
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    }).done(function () {
+                        // window.location.reload();
+                    });
+                }
+              });
+
+        });
+
+        $(document).find("#tf-settings-header-search-filed").on("keyup", debounce(
+            function () {
+                var value = $(this).val().toLowerCase();
+                let div = document.createElement('div');
+                div.classList.add('tf-search-results');
+                if( value.length >= 3 ) {
+                    $.ajax({
+                        url: tf_options.ajax_url,
+                        type: 'POST',
+                        data: {
+                            action: 'tf_search_settings_autocomplete',
+                            tf_option_nonce: tf_admin_params.tf_nonce,
+                            search: value,
+                        },
+                        success: function (response) {
+                            let data = JSON.parse(response)
+                            let notfound = 0;
+                            let resultDiv = document.createElement('ul');
+                            if (data.status === 'success') {
+                                $.each( data.message, function( key, obj ) {
+                                    if( obj.field_title.toLowerCase().indexOf(value) != -1 ) {
+                                        let textDiv = document.createElement('li');
+                                        let titleDiv = document.createElement('div');
+                                        titleDiv.classList.add('tf-search-result-title');
+                                        let link = document.createElement('a');
+                                        link.href = `#tab=${obj.parent_id}`;
+                                        let icon = document.createElement('i');
+                                        let title = document.createElement('p');
+                                        let path = document.createElement('span');
+                                        title.innerHTML = obj.field_title;
+                                        path.innerHTML = obj.path;
+                                        icon.classList.add(...obj.icon.split(' '));
+                                        resultDiv.classList.add('tf-search-result');
+                                        textDiv.setAttribute('data-id', obj.id);
+                                        textDiv.setAttribute('data-tab-id', obj.tab_id);
+                                        link.append(icon);
+                                        titleDiv.append(title);
+                                        titleDiv.append(path);
+                                        link.append(titleDiv);
+                                        textDiv.append(link);
+                                        resultDiv.append(textDiv);
+                                    } else {
+                                        notfound = 1;
+                                    }
+                                    if( $('.tf-search-results').length || value < 3 ) {
+                                        $('.tf-search-results').remove();
+                                    } else {
+                                        div.append(resultDiv);
+                                    }
+                                });
+
+                                if( notfound == 1 ) {
+                                    let not_found = document.createElement("p");
+                                    not_found.classList.add('tf-search-not-found');
+                                    not_found.innerHTML = tf_admin_params.setting_search_no_result;
+                                    resultDiv.append(not_found);
+                                }
+                                $(".tf-setting-search").append(div);
+                            } else {
+                                console.log("Something went wrong!");
+                            }
+                        }
+                    })
+                    
+                } else {
+                    $(".tf-search-results").hide();
+                }
+            }, 700 
+        ));
+
+        $(document).on('click', function (e) {
+            if( e.target.id !== 'tf-settings-header-search-filed' && $('.tf-search-results').length ) {
+                $('.tf-search-results').hide();
+            }
+        });
+
+
+        $("#tf-settings-header-search-filed").on('focus', function (e) {
+            if( $('.tf-search-results').length ) {
+                $('.tf-search-results').show();
+            }
+        });
+
+        $(document).on('click', '.tf-search-result li', function (e) {
+            let id = $(this).data('id');
+            let selector = `label[for='tf_settings\\[${id}\\]']`;
+            let tabId = $(this).closest('li').data('tab-id');
+            if( tabId ) {
+                $('.tf-tab-item[data-tab-id="'+tabId+'"]').trigger('click');
+            }
+            $('html, body').animate({
+                scrollTop: $(document).find(selector).closest('.tf-field').offset().top
+            }, 100);
+        
+        });
+
         $(document).on('submit', '.tf-option-form.tf-ajax-save', function (e) {
             e.preventDefault();
             let $this = $(this),
@@ -495,6 +647,7 @@
                         $this.find('.tf-import-btn').addClass('tf-btn-loading');
                     }
                     submitBtn.addClass('tf-btn-loading');
+                    $('.tf-setting-save-btn .tf-submit-btn').addClass('tf-btn-loading');
                 },
                 success: function (response) {
                     let obj = JSON.parse(response);
@@ -509,6 +662,7 @@
                         notyf.error(obj.message);
                     }
                     submitBtn.removeClass('tf-btn-loading');
+                    $(".tf-setting-save-btn .tf-submit-btn").removeClass('tf-btn-loading');
                     if(tf_import_option == true ){
                         $this.find('.tf-import-btn').removeClass('tf-btn-loading');
                     }
@@ -567,6 +721,29 @@
         })
 
         /*
+        * Room options count
+        */
+        function roomOptionsArr(){
+            var optionsArr = [];
+            $('.tf-repeater-wrap-room-options .tf-single-repeater-room-options').each(function(index){
+                let optionType = $('[name="tf_room_opt[room-options]['+index+'][option_pricing_type]"]').val();
+                let optionTitle = $('[name="tf_room_opt[room-options]['+index+'][option_title]"]').val();
+
+                // Add the option title, option type, and index to the options array
+                optionsArr[index] = {
+                    index: index,
+                    title: optionTitle,
+                    type: optionType
+                };
+            })
+            return optionsArr;
+        }
+
+        $(window).on('load', function () {
+            roomOptionsArr();
+        });
+
+        /*
         * Room Availability Calendar
         * @since 2.10.2
         * @auther: Foysal
@@ -612,6 +789,7 @@
                             new_post: $(self.container).find('[name="new_post"]').val(),
                             room_id: $(self.container).find('[name="room_id"]').val(),
                             avail_date: $(self.container).find('.avail_date').val(),
+                            option_arr: roomOptionsArr(),
                         },
                         beforeSend: function () {
                             $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
@@ -619,8 +797,10 @@
                         },
                         success: function (doc) {
                             if (typeof doc == "object") {
-                                successCallback(doc);
+                                successCallback(doc?.avail_data);
                             }
+
+                            $('.tf-single-options').html(doc?.options_html);
 
                             $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
                             $(self.calendar).removeClass('tf-content-loading');
@@ -653,12 +833,22 @@
                         if (typeof event.extendedProps.price != 'undefined') {
                             $("[name='tf_room_price']", self.roomCalData).val(event.extendedProps.price);
                         }
-                    } else {
+                    } else if(priceBy === '2'){
                         if (typeof event.extendedProps.adult_price != 'undefined') {
                             $("[name='tf_room_adult_price']", self.roomCalData).val(event.extendedProps.adult_price);
                         }
                         if (typeof event.extendedProps.child_price != 'undefined') {
                             $("[name='tf_room_child_price']", self.roomCalData).val(event.extendedProps.child_price);
+                        }
+                    } else {
+                        if(event.extendedProps.options_count != 0) {
+                            for (var i = 0; i <= event.extendedProps.options_count - 1; i++) {
+                                $("[name='tf_room_option_" + i + "']", self.roomCalData).prop('checked', event.extendedProps["tf_room_option_" + i] == 1);
+
+                                $("[name='tf_option_room_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_room_price_" + i]);
+                                $("[name='tf_option_adult_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_adult_price_" + i]);
+                                $("[name='tf_option_child_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_child_price_" + i]);
+                            }
                         }
                     }
                     if (event.extendedProps.status) {
@@ -738,6 +928,7 @@
             data.push({name: '_nonce', value: tf_admin_params.tf_nonce});
             data.push({name: 'price_by', value: priceBy});
             data.push({name: 'avail_date', value: avail_date.val()});
+            data.push({name: 'options_count', value: roomOptionsArr().length});
 
             $.ajax({
                 url: tf_options.ajax_url,
