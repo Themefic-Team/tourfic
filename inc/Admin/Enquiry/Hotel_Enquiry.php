@@ -38,6 +38,7 @@ class Hotel_Enquiry extends \Tourfic\Core\Enquiry {
                 $this->enquiry_header_filter_options($filter_options); 
                 
                 $enquiry_data = $this->enquiry_table_data('tf_hotel');
+                $this->tf_single_enquiry_details();
                 $this->enquiry_details_list($enquiry_data);
                 ?>
             </div>

@@ -21,6 +21,7 @@ trait Database {
         udescription text,
         author_id bigint(20) NOT NULL,
         author_roles varchar(255),
+		enquiry_status varchar(255) NOT NULL DEFAULT 'read',
         created_at datetime NOT NULL,
         PRIMARY KEY  (id)
     ) $charset_collate;";

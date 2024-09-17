@@ -18,6 +18,7 @@ class Migrator {
 		}
 		add_action( 'admin_init', array( $this, 'tf_hotel_room_migrate' ) );
 //		add_action( 'admin_init', array( $this, 'tf_search_keys_migrate' ) );
+		add_action( 'admin_init', array( $this, 'tf_migrate_tf_enquiry_data' ) );
 	}
 
 	function tf_permalink_settings_migration() {
@@ -1068,6 +1069,28 @@ class Migrator {
 				}
 			}
 			wp_reset_query();
+		}
+	}
+
+	/**
+	 * Migrate enquiry data
+	 */
+
+	public function tf_migrate_tf_enquiry_data() {
+		if ( empty( get_option( 'tf_enquiry_data_migration' ) ) ) {
+			$this->add_enquiry_new_columns();
+			update_option( 'tf_enquiry_data_migration', 1 );
+		}
+	}
+
+	private function add_enquiry_new_columns() {
+		global $wpdb;
+		$enquiry_table = $wpdb->prefix . 'tf_enquiry_data';
+
+		$data = $wpdb->get_row( "SELECT * FROM $enquiry_table" );
+
+		if ( ! isset( $data->enquiry_status ) ) {
+			$wpdb->query( "ALTER TABLE $enquiry_table ADD COLUMN `enquiry_status` VARCHAR(255) NOT NULL DEFAULT 'read' AFTER `author_roles`" );
 		}
 	}
 }

@@ -1,0 +1,86 @@
+.tf-enquiry-table {
+    .tf-enquiry-unread th, .tf-enquiry-unread td {
+        background-color: #EDF2F7 !important;
+        border-bottom: 1px solid #F0F2F4 !important;
+        color: #1D2327 !important;
+        font-family: inherit !important;
+        font-size: 16px !important;
+        font-style: normal !important;
+        font-weight: 700 !important;
+
+        .tf-checkbox-listing {
+            background-color: #EDF2F7 !important;
+        }
+
+    }
+    #cb {
+        width: 15%;
+        padding: 12px 24px;
+    }
+    #uemail {
+        width: 20%;
+        padding: 12px 24px;
+    }
+    #post_name {
+        width: 20%;
+        padding: 12px 24px;
+    }
+    #description {
+        width: 30%;
+        padding: 12px 24px;
+    }
+    #massage-date-time {
+        width: 15%;
+        padding: 12px 24px;
+    }
+    thead tr {
+        .tf-checkbox-listing {
+            gap: 12px;
+            margin: 12px 24px;
+        }
+    }
+
+    tbody tr {
+        .check-column {
+            .table-name-column {
+                display: inline-flex;
+                align-items: center;
+                gap: 12px; 
+                
+                .tf-checkbox-listing {
+                    width: 18px !important;
+                    justify-content: unset !important;
+                    justify-self: flex-start !important;
+                }
+            }
+        }
+
+        .time-n-date {
+            .email-time-date {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                gap: 4px;
+
+                .email-date {
+                    color: #1D2327;
+                    font-family: inherit;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 1.12;
+                }
+
+                .email-time {
+                    color: #666D74;
+                    font-family: inherit;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1.12;
+                }
+            }
+        }
+    }
+}
