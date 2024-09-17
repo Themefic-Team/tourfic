@@ -443,13 +443,8 @@ document.addEventListener('DOMContentLoaded', function() {
             events: [
                 {
                     title: 'Event 1',
-                    start: '2024-09-01T16:00:00',  // Event with a specific time
-                },
-                {
-                    title: 'Event 2',
-                    start: '2024-09-07',            // All-day event starting on Sep 7
-                    end: '2024-09-11',              // End date exclusive, so set to Sep 11 to include Sep 10
-                    allDay: true                    // Specify this is an all-day event
+                    start: '2024-09-19T16:00:00',  // Event with a specific time
+                    end: '2024-09-19T16:00:00',  // Event with a specific time
                 }
             ]
         });
