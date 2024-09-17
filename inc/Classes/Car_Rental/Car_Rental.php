@@ -12,19 +12,6 @@ class Car_Rental {
 
 	public function __construct() {
 
-        /**
-         * WooCommerce Car Functions
-         *
-         * @include
-         */
-        if ( Helper::tf_is_woo_active() ) {
-            if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-car.php' ) ) {
-                require_once TF_INC_PATH . 'functions/woocommerce/wc-car.php';
-            } else {
-                tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-car.php' );
-            }
-        }
-
     }
 
 
