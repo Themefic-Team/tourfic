@@ -30,10 +30,12 @@ foreach($_POST['qty'] as $key => $singleqty){
 		if(!empty($single_extra_info)){ ?>
 			<div class="tf-single-added-extra tf-flex tf-flex-align-center tf-flex-space-bttn">
 				<h4><?php echo !empty($single_extra_info['title']) ? esc_html($single_extra_info['title']) : ''; ?></h4>
-				<div class="qty-price tf-flex">
-					<i class="ri-close-line"></i> 
-					<span class="qty"><?php echo $singleqty; ?></span> 
-					<span class="price"><?php echo !empty($single_extra_info['price']) ? wc_price($single_extra_info['price']*$singleqty) : ''; ?></span>
+				<div class="qty-price tf-flex tf-flex-space-bttn">
+					<div class="line-sum tf-flex">
+						<i class="ri-close-line"></i> 
+						<span class="qty"><?php echo $singleqty; ?></span> 
+						<span class="price"><?php echo !empty($single_extra_info['price']) ? wc_price($single_extra_info['price']*$singleqty) : ''; ?></span>
+						</div>
 					<span class="delete">
 						<input type="hidden" value="<?php echo esc_attr($key); ?>" name="selected_extra[]" />
 						<input type="hidden" value="<?php echo esc_attr($singleqty); ?>" name="selected_qty[]" />

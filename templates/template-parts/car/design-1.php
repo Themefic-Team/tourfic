@@ -38,7 +38,7 @@ use \Tourfic\App\TF_Review;
                                         0.0
                                         <?php } ?>
                                         <i class="fa-solid fa-star"></i>
-                                    </span> (<?php echo Pricing::get_total_trips($post_id); ?> <?php esc_html_e( "Trips", "tourfic" ) ?>)
+                                    </span> (<?php echo Pricing::get_total_trips($post_id); ?> <?php esc_html_e( "trips", "tourfic" ) ?>)
                                 </a>
                             </div>
                         </div>
@@ -241,14 +241,14 @@ use \Tourfic\App\TF_Review;
                         <div class="tf-form-submit-btn">
                             <div class="error-notice"></div>
                             <?php if('2'==$car_booking_by){ ?>
-                                <button class="tf-flex tf-flex-align-center tf-flex-justify-center booking-process tf-final-step">
+                                <button class="tf-flex tf-flex-align-center tf-flex-justify-center booking-process tf-final-step tf-flex-gap-8">
                                     <?php esc_html_e( apply_filters("tf_car_booking_form_submit_button_text", 'Continue' ), 'tourfic' ); ?>
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </button>
                             <?php }else{ ?>
-                            <button class="tf-flex tf-flex-align-center tf-flex-justify-center <?php echo (empty($car_protection_section_status) || empty($car_protections)) && '3'!=$car_booking_by ? esc_attr('booking-process tf-final-step') : esc_attr('tf-car-booking'); ?>">
+                            <button class="tf-flex tf-flex-align-center tf-flex-justify-center tf-flex-gap-8 <?php echo (empty($car_protection_section_status) || empty($car_protections)) && '3'!=$car_booking_by ? esc_attr('booking-process tf-final-step') : esc_attr('tf-car-booking'); ?>">
                                 <?php esc_html_e( apply_filters("tf_car_booking_form_submit_button_text", 'Continue' ), 'tourfic' ); ?>
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -379,7 +379,14 @@ use \Tourfic\App\TF_Review;
                                 <div class="tf-extra-title">
                                     <?php if(!empty($extra['title'])){ ?>
                                     <h4><?php echo esc_html($extra['title']); ?>
-                                    <i class="ri-information-line"></i>
+                                        <?php if(!empty($extra['title'])){ ?>
+                                        <span class="tf-info-tooltip">
+                                            <i class="ri-information-line"></i>
+                                            <div class="tf-info-tooltip-content">
+                                                <p><?php echo esc_html($extra['content']); ?></p>
+                                            </div>
+                                        </span>
+                                        <?php } ?>
                                     </h4>
                                     <?php } ?>
                                     <input type="hidden" value="<?php echo esc_attr($key); ?>" name="extra_key[]">
