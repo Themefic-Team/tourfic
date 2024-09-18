@@ -6,6 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 class TF_Promo_Notice {
 
+    
     use \Tourfic\Traits\Singleton;
 
     // private $api_url = 'http://tf-api.test/';
@@ -15,11 +16,36 @@ class TF_Promo_Notice {
     private $tf_promo_option = false; 
     private $error_message = ''; 
 
-    private $months = ['January', 'June', 'November', 'December']; 
+    private $promo_side_data = array();
+
+    private $months = [
+        'January',  
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+    ];
     private $plugins_existes = ['ins', 'uacf7', 'beaf', 'ebef'];
 
-    public function __construct() { 
-        if(in_array(gmdate('F'), $this->months) && !function_exists('is_tf_pro') ){
+    public function __construct() {  
+        if(in_array(gmdate('F'), $this->months) && !function_exists('is_tf_pro') ){ 
+ 
+            $tf_promo__schudle_start_from = !empty(get_option( 'tf_promo__schudle_start_from' )) ? get_option( 'tf_promo__schudle_start_from' ) : 0;
+
+            if($tf_promo__schudle_start_from == 0){
+                // delete option
+                delete_option('bafg_promo__schudle_option');
+
+            }elseif($tf_promo__schudle_start_from  != 0 && $tf_promo__schudle_start_from > time()){
+                return;
+            }  
              
             add_filter('cron_schedules', array($this, 'tf_custom_cron_interval'));
         
@@ -36,17 +62,34 @@ class TF_Promo_Notice {
 
             $tf_existes = get_option( 'tf_promo_notice_exists' );
              
+            $dashboard_banner = isset($this->tf_promo_option['dashboard_banner']) ? $this->tf_promo_option['dashboard_banner'] : '';
+
             // Admin Notice 
-            if( ! in_array($tf_existes, $this->plugins_existes) && is_array($this->tf_promo_option) && strtotime($this->tf_promo_option['end_date']) > time() && strtotime($this->tf_promo_option['start_date']) < time()){
-           
-                add_action( 'admin_notices', array( $this, 'tf_black_friday_2023_admin_notice' ) );
-                add_action( 'wp_ajax_tf_black_friday_notice_dismiss_callback', array($this, 'tf_black_friday_notice_dismiss_callback') );
+            if( ! in_array($tf_existes, $this->plugins_existes) && is_array($dashboard_banner) && strtotime($dashboard_banner['end_date']) > time() && strtotime($dashboard_banner['start_date']) < time() && $dashboard_banner['enable_status'] == true){
+                add_action( 'admin_notices', array( $this, 'tf_promo_dashboard_admin_notice' ) );
+                add_action( 'wp_ajax_tf_promo_dashboard_admin_notice_dismiss_callback', array($this, 'tf_promo_dashboard_admin_notice_dismiss_callback') );
             }
             
             // side Notice 
-            if(is_array($this->tf_promo_option) && strtotime($this->tf_promo_option['end_date']) > time() && strtotime($this->tf_promo_option['start_date']) < time()){ 
-                add_action( 'add_meta_boxes', array( $this,  'tf_black_friday_2023_hotel_tour_docs' ) );
-                add_action( 'wp_ajax_tf_black_friday_notice_dismiss_custom_post_meta_callback', array($this, 'tf_black_friday_notice_dismiss_custom_post_meta_callback') );
+            $service_banner = isset($this->tf_promo_option['service_banner']) ? $this->tf_promo_option['service_banner'] : array();
+            $promo_banner = isset($this->tf_promo_option['promo_banner']) ? $this->tf_promo_option['promo_banner'] : array();
+
+            $current_day = date('l'); 
+            if(isset($service_banner['enable_status']) && $service_banner['enable_status'] == true && in_array($current_day, $service_banner['display_days'])){ 
+             
+                $start_date = isset($service_banner['start_date']) ? $service_banner['start_date'] : '';
+                $end_date = isset($service_banner['end_date']) ? $service_banner['end_date'] : '';
+                $enable_side = isset($service_banner['enable_status']) ? $service_banner['enable_status'] : false;
+            }else{  
+                $start_date = isset($promo_banner['start_date']) ? $promo_banner['start_date'] : '';
+                $end_date = isset($promo_banner['end_date']) ? $promo_banner['end_date'] : '';
+                $enable_side = isset($promo_banner['enable_status']) ? $promo_banner['enable_status'] : false;
+            } 
+
+
+            if(is_array($this->tf_promo_option) && strtotime($end_date) > time() && strtotime($start_date) < time()  && $enable_side == true){ 
+                add_action( 'add_meta_boxes', array( $this,  'tf_promo_notice_hotel_tour_docs' ) );
+                add_action( 'wp_ajax_tf_promo_notice_custom_post_meta_callback', array($this, 'tf_promo_notice_custom_post_meta_callback') );
             } 
 
 
@@ -77,12 +120,18 @@ class TF_Promo_Notice {
             $this->responsed = json_decode($data, true); 
 
             $tf_promo__schudle_option = get_option( 'tf_promo__schudle_option' ); 
-            if(isset($ins_promo__schudle_option['notice_name']) || $tf_promo__schudle_option['notice_name'] != $this->responsed['notice_name']){ 
-                // Unset the cookie variable in the current script
+            if(isset($ins_promo__schudle_option['notice_name']) && $tf_promo__schudle_option['notice_name'] != $this->responsed['notice_name']){ 
+                // Unset the cookie variable in the current script 
+
                 update_option( 'tf_dismiss_admin_notice', 1);
-                update_option( 'tf_hotel_friday_sidbar_notice', 1); 
-                update_option( 'tf_tour_friday_sidbar_notice', 1); 
-                update_option( 'tf_apartment_friday_sidbar_notice', 1); 
+                update_option( 'tf_hotel_promo_sidebar_notice', 1); 
+                update_option( 'tf_tour_promo_sidebar_notice', 1); 
+                update_option( 'tf_apartment_promo_sidebar_notice', 1); 
+                update_option( 'tf_room_promo_sidebar_notice', 1); 
+
+                update_option( 'tf_promo__schudle_start_from', time() + 43200);
+            }elseif(empty($bafg_promo__schudle_option)){
+                update_option( 'tf_promo__schudle_start_from', time() + 43200);
             }
             update_option( 'tf_promo__schudle_option', $this->responsed);
             
@@ -110,10 +159,11 @@ class TF_Promo_Notice {
      * Black Friday Deals 2023
      */
     
-    public function tf_black_friday_2023_admin_notice(){ 
+    public function tf_promo_dashboard_admin_notice(){ 
         
-        $image_url = isset($this->tf_promo_option['dasboard_url']) ? esc_url($this->tf_promo_option['dasboard_url']) : '';
-        $deal_link = isset($this->tf_promo_option['promo_url']) ? esc_url($this->tf_promo_option['promo_url']) : ''; 
+        $dashboard_banner = isset($this->tf_promo_option['dashboard_banner']) ? $this->tf_promo_option['dashboard_banner'] : '';
+        $image_url = isset($dashboard_banner['banner_url']) ? esc_url($dashboard_banner['banner_url']) : '';
+        $deal_link = isset($dashboard_banner['redirect_url']) ? esc_url($dashboard_banner['redirect_url']) : ''; 
 
         $tf_dismiss_admin_notice = get_option( 'tf_dismiss_admin_notice' );
         $get_current_screen = get_current_screen();  
@@ -153,7 +203,7 @@ class TF_Promo_Notice {
                     $(document).on('click', '.tf_black_friday_notice_dismiss', function( event ) {
                         jQuery('.tf_black_friday_20222_admin_notice').css('display', 'none')
                         data = {
-                            action : 'tf_black_friday_notice_dismiss_callback',
+                            action : 'tf_promo_dashboard_admin_notice_dismiss_callback',
                         };
 
                         $.ajax({
@@ -175,7 +225,7 @@ class TF_Promo_Notice {
     } 
 
 
-    public function tf_black_friday_notice_dismiss_callback() {  
+    public function tf_promo_dashboard_admin_notice_dismiss_callback() {  
 
         $tf_promo_option = get_option( 'tf_promo__schudle_option' );
         $restart = isset($tf_promo_option['dasboard_restart']) && $tf_promo_option['dasboard_restart'] != false ? $tf_promo_option['dasboard_restart'] : false; 
@@ -187,65 +237,89 @@ class TF_Promo_Notice {
 		wp_die();
 	}
 
-    public function tf_black_friday_2023_hotel_tour_docs() {
-        $tf_hotel_friday_sidbar_notice = get_option( 'tf_hotel_friday_sidbar_notice' );  
-		if ( $tf_hotel_friday_sidbar_notice == 1  || time() >  $tf_hotel_friday_sidbar_notice ) {
-			add_meta_box( 'tfhotel_black_friday_docs', '', array($this, 'tf_black_friday_2023_callback_hotel'), 'tf_hotel', 'side', 'high' );
+    public function tf_promo_notice_hotel_tour_docs() {
+        $tf_hotel_promo_sidebar_notice = get_option( 'tf_hotel_promo_sidebar_notice' );  
+         
+		if ( $tf_hotel_promo_sidebar_notice == 1  || time() >  $tf_hotel_promo_sidebar_notice ) { 
+			add_meta_box( 'tfhotel_promo_notice_docs', ' ', array($this, 'tf_promo_notice_callback_hotel'), 'tf_hotel', 'side', priority: 'high' );
 		}
 
-        $tf_tour_friday_sidbar_notice = get_option( 'tf_tour_friday_sidbar_notice' );  
-		if ( $tf_tour_friday_sidbar_notice == 1  || time() >  $tf_tour_friday_sidbar_notice ) { 
-			add_meta_box( 'tftour_black_friday_docs', '', array($this, 'tf_black_friday_2023_callback_tour'), 'tf_tours', 'side', 'high' );
+        $tf_tour_promo_sidebar_notice = get_option( 'tf_tour_promo_sidebar_notice' );  
+		if ( $tf_tour_promo_sidebar_notice == 1  || time() >  $tf_tour_promo_sidebar_notice ) { 
+			add_meta_box( 'tftour_promo_notice_docs', ' ', array($this, 'tf_promo_notice_callback_tour'), 'tf_tours', 'side', 'high' );
 		}
 
-        $tf_apartment_friday_sidbar_notice = get_option( 'tf_apartment_friday_sidbar_notice' );  
-		if ( $tf_apartment_friday_sidbar_notice == 1  || time() >  $tf_apartment_friday_sidbar_notice ) {  
-			add_meta_box( 'tfapartment_black_friday_docs', '', array($this, 'tf_black_friday_2023_callback_apartment'), 'tf_apartment', 'side', 'high' );
+        $tf_apartment_promo_sidebar_notice = get_option( 'tf_apartment_promo_sidebar_notice' );  
+		if ( $tf_apartment_promo_sidebar_notice == 1  || time() >  $tf_apartment_promo_sidebar_notice ) {  
+			add_meta_box( 'tfapartment_promo_notice_docs', ' ', array($this, 'tf_promo_notice_callback_apartment'), 'tf_apartment', 'side', 'high' );
+		}
+
+        $tf_room_promo_sidebar_notice = get_option( 'tf_room_promo_sidebar_notice' );  
+		if ( $tf_room_promo_sidebar_notice == 1  || time() >  $tf_room_promo_sidebar_notice ) {  
+			add_meta_box( 'tfroom_promo_notice_docs', ' ', array($this, 'tf_promo_notice_callback_room'), 'tf_room', 'side', 'high' );
 		}
 	}
 
-    public function tf_black_friday_2023_callback_hotel() {
-        $image_url = isset($this->tf_promo_option['side_url']) ? esc_url($this->tf_promo_option['side_url']) : '';
-        $deal_link = isset($this->tf_promo_option['promo_url']) ? esc_url($this->tf_promo_option['promo_url']) : '';
+    public function set_promo_side_data(){
+        $service_banner = isset($this->tf_promo_option['service_banner']) ? $this->tf_promo_option['service_banner'] : array();
+        $promo_banner = isset($this->tf_promo_option['promo_banner']) ? $this->tf_promo_option['promo_banner'] : array();
+
+        $current_day = date('l'); 
+        if($service_banner['enable_status'] == true && in_array($current_day, $service_banner['display_days'])){ 
+           
+            $this->promo_side_data['image_url'] = esc_url($service_banner['banner_url']);
+            $this->promo_side_data['deal_link'] = esc_url($service_banner['redirect_url']);  
+            $this->promo_side_data['dismiss_status']  = $service_banner['dismiss_status'];
+        }else{
+            $this->promo_side_data['image_url']= esc_url($promo_banner['banner_url']);
+            $this->promo_side_data['deal_link'] = esc_url($promo_banner['redirect_url']); 
+            $this->promo_side_data['dismiss_status']  = $promo_banner['dismiss_status'];  
+        }  
+    }
+
+    public function tf_promo_notice_callback_hotel() {
+        $this->set_promo_side_data();
+
+        
 		?>
         <style>
-			#tfhotel_black_friday_docs{
+			#tfhotel_promo_notice_docs{
 				border: 0px solid;
 				box-shadow: none;
 				background: transparent;
 			}
-            .back_friday_2023_preview a:focus {
+            .tf_promo_notice_side_preview a:focus {
                 box-shadow: none;
             }
 
-            .back_friday_2023_preview a {
+            .tf_promo_notice_side_preview a {
                 display: inline-block;
             }
 
-            #tfhotel_black_friday_docs .inside {
+            #tfhotel_promo_notice_docs .inside {
                 padding: 0;
                 margin-top: 0;
             }
 
-            #tfhotel_black_friday_docs .postbox-header {
+            #tfhotel_promo_notice_docs .postbox-header {
                 display: none;
                 visibility: hidden;
             }
         </style>
-        <div class="back_friday_2023_preview" style="text-align: center; overflow: hidden;">
-            <a href="<?php echo esc_attr($deal_link); ?>" target="_blank" >
-                <img  style="width: 100%;" src="<?php echo esc_attr($image_url); ?>" alt="">
+        <div class="tf_promo_notice_side_preview" style="text-align: center; overflow: hidden;">
+            <a href="<?php echo esc_attr($this->promo_side_data['deal_link']); ?>" target="_blank" >
+                <img  style="width: 100%;" src="<?php echo esc_attr($this->promo_side_data['image_url']); ?>" alt="">
             </a>  
-            <?php if( isset($this->tf_promo_option['side_dismiss']) && $this->tf_promo_option['side_dismiss'] == true): ?>
-                <button type="button" class="notice-dismiss ins_friday_notice_dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
+            <?php if( isset($this->promo_side_data['dismiss_status']) && $this->promo_side_data['dismiss_status'] == true): ?>
+                <button type="button" class="notice-dismiss tf_promo_notice_dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
             <?php  endif; ?>
           
 			<script>
                 jQuery(document).ready(function($) {
-                    $(document).on('click', '.tf_hotel_friday_notice_dismiss', function( event ) { 
-                        jQuery('.back_friday_2023_preview').css('display', 'none');
+                    $(document).on('click', '.tf_promo_notice_dismiss', function( event ) {  
+                        jQuery('.tf_promo_notice_side_preview').css('display', 'none');
                         data = {
-                            action : 'tf_black_friday_notice_dismiss_custom_post_meta_callback',
+                            action : 'tf_promo_notice_custom_post_meta_callback',
                             post_type : 'tf_hotel',
                         };
 
@@ -266,49 +340,48 @@ class TF_Promo_Notice {
 		<?php
 	}
 
-	public function tf_black_friday_2023_callback_tour() {
-        $image_url = isset($this->tf_promo_option['side_url']) ? esc_url($this->tf_promo_option['side_url']) : '';
-        $deal_link = isset($this->tf_promo_option['promo_url']) ? esc_url($this->tf_promo_option['promo_url']) : '';
+	public function tf_promo_notice_callback_tour() { 
+        $this->set_promo_side_data(); 
 		?>
         <style>
-			#tftour_black_friday_docs{
+			#tftour_promo_notice_docs{
 				border: 0px solid;
 				box-shadow: none;
 				background: transparent;
 			}
-            .back_friday_2023_preview a:focus {
+            .tf_promo_notice_side_preview a:focus {
                 box-shadow: none;
             }
 
-            .back_friday_2023_preview a {
+            .tf_promo_notice_side_preview a {
                 display: inline-block;
             }
 
-            #tftour_black_friday_docs .inside {
+            #tftour_promo_notice_docs .inside {
                 padding: 0;
                 margin-top: 0;
             }
 
-            #tftour_black_friday_docs .postbox-header {
+            #tftour_promo_notice_docs .postbox-header {
                 display: none;
                 visibility: hidden;
             }
         </style>
-        <div class="back_friday_2023_preview" style="text-align: center; overflow: hidden;">
-            <a href="<?php echo esc_attr($deal_link); ?>" target="_blank" >
-                <img  style="width: 100%;" src="<?php echo esc_attr($image_url); ?>" alt="">
+        <div class="tf_promo_notice_side_preview" style="text-align: center; overflow: hidden;">
+            <a href="<?php echo esc_attr($this->promo_side_data['deal_link']); ?>" target="_blank" >
+                <img  style="width: 100%;" src="<?php echo esc_attr($this->promo_side_data['image_url']); ?>" alt="">
             </a>  
-            <?php if( isset($this->tf_promo_option['side_dismiss']) && $this->tf_promo_option['side_dismiss'] == true): ?>
-                <button type="button" class="notice-dismiss ins_friday_notice_dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
+            <?php if( isset($this->promo_side_data['dismiss_status']) && $this->promo_side_data['dismiss_status']== true): ?>
+                <button type="button" class="notice-dismiss tf_promo_notice_dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
             <?php  endif; ?>
         </div>
 
 		<script>
 		jQuery(document).ready(function($) {
-			$(document).on('click', '.tf_tour_friday_notice_dismiss', function( event ) { 
-				jQuery('.back_friday_2023_preview').css('display', 'none')
+			$(document).on('click', '.tf_promo_notice_dismiss', function( event ) { 
+				jQuery('.tf_promo_notice_side_preview').css('display', 'none')
                 data = {
-                    action : 'tf_black_friday_notice_dismiss_custom_post_meta_callback',
+                    action : 'tf_promo_notice_custom_post_meta_callback',
                     post_type : 'tf_tour',
                 };
 
@@ -326,49 +399,48 @@ class TF_Promo_Notice {
 		</script>
 		<?php
 	}
-	public function tf_black_friday_2023_callback_apartment() {
-        $image_url = isset($this->tf_promo_option['side_url']) ? esc_url($this->tf_promo_option['side_url']) : '';
-        $deal_link = isset($this->tf_promo_option['promo_url']) ? esc_url($this->tf_promo_option['promo_url']) : ''; 
+	public function tf_promo_notice_callback_apartment() {
+        $this->set_promo_side_data();
 		?>
         <style>
-			#tfapartment_black_friday_docs{
+			#tfapartment_promo_notice_docs{
 				border: 0px solid;
 				box-shadow: none;
 				background: transparent;
 			}
-            .back_friday_2023_preview a:focus {
+            .tf_promo_notice_side_preview a:focus {
                 box-shadow: none;
             }
 
-            .back_friday_2023_preview a {
+            .tf_promo_notice_side_preview a {
                 display: inline-block;
             }
 
-            #tfapartment_black_friday_docs .inside {
+            #tfapartment_promo_notice_docs .inside {
                 padding: 0;
                 margin-top: 0;
             }
 
-            #tfapartment_black_friday_docs .postbox-header {
+            #tfapartment_promo_notice_docs .postbox-header {
                 display: none;
                 visibility: hidden;
             }
         </style>
-        <div class="back_friday_2023_preview" style="text-align: center; overflow: hidden;">
-            <a href="<?php echo esc_attr($deal_link); ?>" target="_blank" >
-                <img  style="width: 100%;" src="<?php echo esc_attr($image_url); ?>" alt="">
+        <div class="tf_promo_notice_side_preview" style="text-align: center; overflow: hidden;">
+            <a href="<?php echo esc_attr($this->promo_side_data['deal_link']); ?>" target="_blank" >
+                <img  style="width: 100%;" src="<?php echo esc_attr($this->promo_side_data['image_url']); ?>" alt="">
             </a>  
-            <?php if( isset($this->tf_promo_option['side_dismiss']) && $this->tf_promo_option['side_dismiss'] == true): ?>
-                <button type="button" class="notice-dismiss ins_friday_notice_dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
+            <?php if( isset($this->promo_side_data['dismiss_status']) && $this->promo_side_data['dismiss_status'] == true): ?>
+                <button type="button" class="notice-dismiss tf_promo_notice_dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
             <?php  endif; ?>
         </div>
 
 		<script>
 		jQuery(document).ready(function($) {
-			$(document).on('click', '.tf_apartment_friday_notice_dismiss', function( event ) { 
-				jQuery('.back_friday_2023_preview').css('display', 'none');
+			$(document).on('click', '.tf_promo_notice_dismiss', function( event ) { 
+				jQuery('.tf_promo_notice_side_preview').css('display', 'none');
                 data = {
-                    action : 'tf_black_friday_notice_dismiss_custom_post_meta_callback',
+                    action : 'tf_promo_notice_custom_post_meta_callback',
                     post_type : 'tf_apartment',
                 };
 
@@ -386,29 +458,86 @@ class TF_Promo_Notice {
 		</script>
 		<?php
 	}
+	public function tf_promo_notice_callback_room() {
+        $this->set_promo_side_data();
+		?>
+        <style>
+			#tfroom_promo_notice_docs{
+				border: 0px solid;
+				box-shadow: none;
+				background: transparent;
+			}
+            .tf_promo_notice_side_preview a:focus {
+                box-shadow: none;
+            }
 
-    public  function tf_black_friday_notice_dismiss_custom_post_meta_callback() {   
+            .tf_promo_notice_side_preview a {
+                display: inline-block;
+            }
+
+            #tfroom_promo_notice_docs .inside {
+                padding: 0;
+                margin-top: 0;
+            }
+
+            #tfroom_promo_notice_docs .postbox-header {
+                display: none;
+                visibility: hidden;
+            }
+        </style>
+        <div class="tf_promo_notice_side_preview" style="text-align: center; overflow: hidden;">
+            <a href="<?php echo esc_attr($this->promo_side_data['deal_link']); ?>" target="_blank" >
+                <img  style="width: 100%;" src="<?php echo esc_attr($this->promo_side_data['image_url']); ?>" alt="">
+            </a>  
+            <?php if( isset($this->promo_side_data['dismiss_status']) && $this->promo_side_data['dismiss_status'] == true): ?>
+                <button type="button" class="notice-dismiss tf_promo_notice_dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
+            <?php  endif; ?>
+        </div>
+
+		<script>
+		jQuery(document).ready(function($) {
+			$(document).on('click', '.tf_promo_notice_dismiss', function( event ) { 
+				jQuery('.tf_promo_notice_side_preview').css('display', 'none');
+                data = {
+                    action : 'tf_promo_notice_custom_post_meta_callback',
+                    post_type : 'tf_room',
+                };
+
+                $.ajax({
+                    url: ajaxurl,
+                    type: 'post',
+                    data: data,
+                    success: function (data) { ;
+                    },
+                    error: function (data) { 
+                    }
+                });
+			});
+		});
+		</script>
+		<?php
+	}
+
+    public  function tf_promo_notice_custom_post_meta_callback() {   
          
-        if(isset($_REQUEST['post_type']) && $_REQUEST['post_type'] == 'tf_hotel'){
-            $tf_promo_option = get_option( 'tf_promo__schudle_option' );
-            $start_date = isset($tf_promo_option['start_date']) ? strtotime($tf_promo_option['start_date']) : time();
-            $restart = isset($tf_promo_option['side_restart']) && $tf_promo_option['side_restart'] != false ? $tf_promo_option['side_restart'] : 5;
-            update_option( 'tf_hotel_friday_sidbar_notice', time() + (86400 * $restart) );  
+        $tf_promo_option = get_option( 'tf_promo__schudle_option' );
+        $start_date = isset($tf_promo_option['start_date']) ? strtotime($tf_promo_option['start_date']) : time();
+        $restart = isset($tf_promo_option['side_restart']) && $tf_promo_option['side_restart'] != false ? $tf_promo_option['side_restart'] : 5;
+        if(isset($_REQUEST['post_type']) && $_REQUEST['post_type'] == 'tf_hotel'){ 
+            update_option( 'tf_hotel_promo_sidebar_notice', time() + (86400 * $restart) );  
         }
 
-        if(isset($_REQUEST['post_type']) && $_REQUEST['post_type'] == 'tf_tour'){
-            $tf_promo_option = get_option( 'tf_promo__schudle_option' );
-            $start_date = isset($tf_promo_option['start_date']) ? strtotime($tf_promo_option['start_date']) : time();
-            $restart = isset($tf_promo_option['side_restart']) && $tf_promo_option['side_restart'] != false ? $tf_promo_option['side_restart'] : 5;
-            update_option( 'tf_tour_friday_sidbar_notice', time() + (86400 * $restart) );  
+        if(isset($_REQUEST['post_type']) && $_REQUEST['post_type'] == 'tf_tour'){ 
+            update_option( 'tf_tour_promo_sidebar_notice', time() + (86400 * $restart) );  
         }
         
 
-        if(isset($_REQUEST['post_type']) && $_REQUEST['post_type'] == 'tf_apartment'){
-            $tf_promo_option = get_option( 'tf_promo__schudle_option' );
-            $start_date = isset($tf_promo_option['start_date']) ? strtotime($tf_promo_option['start_date']) : time();
-            $restart = isset($tf_promo_option['side_restart']) && $tf_promo_option['side_restart'] != false ? $tf_promo_option['side_restart'] : 5;
-            update_option( 'tf_apartment_friday_sidbar_notice', time() + (86400 * $restart) );  
+        if(isset($_REQUEST['post_type']) && $_REQUEST['post_type'] == 'tf_apartment'){ 
+            update_option( 'tf_apartment_promo_sidebar_notice', time() + (86400 * $restart) );  
+        }
+
+        if(isset($_REQUEST['post_type']) && $_REQUEST['post_type'] == 'tf_room'){ 
+            update_option( 'tf_room_promo_sidebar_notice', time() + (86400 * $restart) );  
         }
         
         wp_die();
@@ -418,12 +547,13 @@ class TF_Promo_Notice {
         wp_clear_scheduled_hook('tf_promo__schudle'); 
 
         delete_option('tf_promo__schudle_option');
-        delete_option('tf_hotel_friday_sidbar_notice');
-        delete_option('tf_tour_friday_sidbar_notice');
-        delete_option('tf_apartment_friday_sidbar_notice');
+        delete_option('tf_hotel_promo_sidebar_notice');
+        delete_option('tf_tour_promo_sidebar_notice');
+        delete_option('tf_apartment_promo_sidebar_notice');
+        delete_option('tf_room_promo_sidebar_notice');
+        delete_option('tf_promo__schudle_start_from');
         delete_option('tf_promo_notice_exists');
     }
  
 }
-
-new TF_PROMO_NOTICE();
+ 
