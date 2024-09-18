@@ -6389,5 +6389,108 @@ a.tf-import-btn, a.tf-export-btn {
   line-height: 1.12;
 }
 
+.tf-enquiry-single-header-details {
+  padding: 16px 24px;
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.tf-enquiry-single-header-details img {
+  height: 100%;
+  width: 32px;
+  object-fit: contain;
+  padding: 3.2px;
+}
+
+.tf-enquiry-single-header-details h1 {
+  font-family: inherit;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.33;
+}
+
+.tf-enquiry-single-back-button {
+  padding: 8px 20px 8px 16px;
+  background-color: #fff;
+  width: 60px;
+  font-size: 15px;
+  color: #2C273F;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.tf-enquiry-single-back-button a {
+  color: #2C273F;
+  text-decoration: none;
+}
+
+.tf-enquiry-single-back-button a:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.tf-enquiry-single-details-wrapper .tf-enquiry-details {
+  background-color: #fff;
+  padding: 16px 24px 24px 24px;
+  width: 50%;
+  border-radius: 8px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-enquiry-details h2 {
+  font-family: inherit;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  margin: 0px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-enquiry-details-single-heading {
+  padding-bottom: 16px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content {
+  display: flex;
+  gap: 24px;
+  padding-top: 24px;
+  flex-direction: column;
+}
+
+.tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-name, .tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-email, .tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-message {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-name .tf-single-enquiry-details-label, .tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-email .tf-single-enquiry-details-label, .tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-message .tf-single-enquiry-details-label {
+  color: #5D5676;
+  font-family: inherit;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-name .tf-single-enquiry-details-value, .tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-email .tf-single-enquiry-details-value, .tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-message .tf-single-enquiry-details-value {
+  font-family: inherit;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-name .tf-single-enquiry-details-value i, .tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-email .tf-single-enquiry-details-value i, .tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-message .tf-single-enquiry-details-value i {
+  margin-left: 16px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
 
 /*# sourceMappingURL=tourfic-admin.css.map*/

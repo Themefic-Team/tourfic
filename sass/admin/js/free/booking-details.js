@@ -52,6 +52,7 @@
             $('.tf-filter-hotel-name').select2({
                 dropdownCssClass: 'tf-booking-filter-modal',
                 placeholder: "Hotel Name",
+                allowClear: true
             });
         }
         

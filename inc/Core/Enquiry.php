@@ -13,6 +13,8 @@ abstract class Enquiry {
 		add_action( 'wp_footer', array($this, 'tourfic_ask_question') );
 		add_action( 'wp_ajax_tf_ask_question', array($this, 'tourfic_ask_question_ajax') );
 		add_action( 'wp_ajax_nopriv_tf_ask_question', array($this, 'tourfic_ask_question_ajax') );
+		add_action( 'wp_ajax_tf_enquiry_bulk_action', array($this, 'tf_enquiry_bulk_action_callback') );
+		add_action( 'wp_ajax_tf_enquiry_filter_post', array($this, 'tf_enquiry_filter_post_callback') );
 	}
 
 	abstract public function add_submenu();
@@ -37,6 +39,7 @@ abstract class Enquiry {
 	public function enquiry_header_filter_options( array $args) {
 		?>
 			<div class="tf-booking-header-filter">
+				<input class="enquiry-post-type" type="hidden" value="<?php echo esc_attr( $args["post_type"]) ?>">
 				<div class="tf-left-search-filter">
 					<div class="tf-bulk-action-form">
 						<div class="tf-filter-options">
@@ -66,7 +69,7 @@ abstract class Enquiry {
 						</div>
 						<div class="tf-filter-options">
 							<div class="tf-order-status-filter">
-								<select class="tf-tour-filter-options tf-filter-hotel-name">
+								<select class="tf-tour-filter-options tf-filter-hotel-name tf-enquiry-filter-<?php esc_html_e( !empty($args['name']) ? strtolower($args['name']) : ''); ?>-name">
 									<?php $hotel_enquiry_title = esc_html__( sprintf( "%s Enquiry Details", $args['name'] ), 'tourfic' ); ?>
 									<option value=""><?php esc_html($hotel_enquiry_title); ?></option>
 									<?php
@@ -106,6 +109,8 @@ abstract class Enquiry {
 
 	public function enquiry_details_list(array $data) {
 
+		$post_type = $data[0]["post_type"];
+
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 
 			if ( isset( $_GET['paged'] ) ) {
@@ -115,10 +120,10 @@ abstract class Enquiry {
 			}
 
 			$no_of_booking_per_page = 20;
-			$offset                 = ( $paged - 1 ) * $no_of_booking_per_page;
+			$offset = ( $paged - 1 ) * $no_of_booking_per_page;
 		}
 		?>
-		<div class="<?php echo apply_filters( $data["post_type"] . '_booking_oder_table_class', "tf-order-table-responsive") ?> tf-enquiry-table">
+		<div class="<?php echo apply_filters( $post_type . '_booking_oder_table_class', "tf-order-table-responsive") ?> tf-enquiry-table">
             <table class="wp-list-table table" cellpadding="0" cellspacing="0">
                 <thead>
 					<tr>
@@ -148,63 +153,72 @@ abstract class Enquiry {
 				<tbody>
 				<?php
 				$tf_key = 1;
-				foreach ( $data as $enquiry ) { ?>
-				<?php 
-				$tr_unread_class = $enquiry["status"] == 'unread' ? 'tf-enquiry-unread' : '';
-				
-				?>
-                    <tr class="<?php echo esc_attr($tr_unread_class); ?>">
-                        <th class="check-column">
-                            <div class="table-name-column">
-								<div class="tf-checkbox-listing">
-									<input type="checkbox" name="order_id[]" value="<?php echo esc_html( $enquiry['id'] ); ?>">
+				if( !empty( $data )) :
+					foreach ( $data as $enquiry ) { ?>
+						<?php 
+							$tr_unread_class = $enquiry["status"] == 'unread' ? 'tf-enquiry-unread' : '';
+						
+						?>
+						<tr class="<?php echo esc_attr($tr_unread_class); ?>">
+							<th class="check-column">
+								<div class="table-name-column">
+									<div class="tf-checkbox-listing">
+										<input id="tf-enquiry-name-checkbox" type="checkbox" name="order_id[]" value="<?php echo esc_html( $enquiry['id'] ); ?>">
+									</div>
+									<?php echo $enquiry["uname"] ? esc_html($enquiry["uname"]) : ''; ?>
 								</div>
-								<?php echo $enquiry["uname"] ? esc_html($enquiry["uname"]) : ''; ?>
-							</div>
-                        </th>
-                        <td>
-							<?php echo $enquiry["uemail"] ? esc_html($enquiry["uemail"]): ''; ?>
-                        </td>
-                        <td>
-							<?php echo $enquiry["post_title"] ? esc_html($enquiry["post_title"]) : ''; ?>
-                        </td>
-                        <td>
-							<?php echo $enquiry["description"] ? (esc_html( strlen( $enquiry["description"] ) > 100 ? esc_html( Helper::tourfic_character_limit_callback( $enquiry["description"], 100 ) ) : esc_html( $enquiry["description"] ) )) : ''; ?>
-                        </td>
-						<td class="time-n-date">
-							<?php 
-							$date_format = !empty(Helper::tfopt("tf-date-format-for-users")) ? Helper::tfopt("tf-date-format-for-users") : get_option('date_format');
-							list($date, $time) = explode(" ", $enquiry["submit_time"]);
-							$formateed_time = date( get_option('time_format'), strtotime($time));
-							$formateed_date = date( $date_format, strtotime($date));
-							?>
-							<div class="email-time-date">
-								<span class="email-date"><?php echo $formateed_date ? esc_html( $formateed_date ) : ''; ?></span>
-								<span class="email-time"><?php echo $formateed_time ? esc_html( $formateed_time ) : ''; ?></span>
-							</div>
-                        </td>
-                        
-                        <td>
-							<?php
-							$actions_details = '<a href="' . admin_url() . 'edit.php?post_type=' . $enquiry["post_type"] . '&amp;page=' . $enquiry["post_type"] . '_enquiry' . '&amp;enquiry_id=' . $enquiry["id"] . '&amp;action=preview" class="tf_booking_details_view"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M2.42012 12.7132C2.28394 12.4975 2.21584 12.3897 2.17772 12.2234C2.14909 12.0985 2.14909 11.9015 2.17772 11.7766C2.21584 11.6103 2.28394 11.5025 2.42012 11.2868C3.54553 9.50484 6.8954 5 12.0004 5C17.1054 5 20.4553 9.50484 21.5807 11.2868C21.7169 11.5025 21.785 11.6103 21.8231 11.7766C21.8517 11.9015 21.8517 12.0985 21.8231 12.2234C21.785 12.3897 21.7169 12.4975 21.5807 12.7132C20.4553 14.4952 17.1054 19 12.0004 19C6.8954 19 3.54553 14.4952 2.42012 12.7132Z" stroke="#1D2327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M12.0004 15C13.6573 15 15.0004 13.6569 15.0004 12C15.0004 10.3431 13.6573 9 12.0004 9C10.3435 9 9.0004 10.3431 9.0004 12C9.0004 13.6569 10.3435 15 12.0004 15Z" stroke="#1D2327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg></a>';
-							echo wp_kses($actions_details, Helper::tf_custom_wp_kses_allow_tags());
-							?>
-                        </td>
-                    </tr>
-					<?php if ( ! defined( 'TF_PRO' ) && $tf_key == 15 ) { ?>
-                        <tr class="pro-row" style="text-align: center; background-color: #ededf8">
-                            <td colspan="8" style="text-align: center;">
-                                <a href="https://tourfic.com/" target="_blank">
-                                    <h3 class="tf-admin-btn tf-btn-secondary" style="color:#fff;margin: 15px 0;"><?php esc_html_e( 'Upgrade to Pro Version to See More', 'tourfic' ); ?></h3>
-                                </a>
-                            </td>
-                        </tr>
-					<?php break;}
-					$tf_key ++;
-				} ?>
+							</th>
+							<td>
+								<?php echo $enquiry["uemail"] ? esc_html($enquiry["uemail"]): ''; ?>
+							</td>
+							<td>
+								<?php echo $enquiry["post_title"] ? esc_html($enquiry["post_title"]) : ''; ?>
+							</td>
+							<td>
+								<?php echo $enquiry["description"] ? (esc_html( strlen( $enquiry["description"] ) > 100 ? esc_html( Helper::tourfic_character_limit_callback( $enquiry["description"], 100 ) ) : esc_html( $enquiry["description"] ) )) : ''; ?>
+							</td>
+							<td class="time-n-date">
+								<?php 
+								$date_format = !empty(Helper::tfopt("tf-date-format-for-users")) ? Helper::tfopt("tf-date-format-for-users") : get_option('date_format');
+								list($date, $time) = explode(" ", $enquiry["submit_time"]);
+								$formateed_time = date( get_option('time_format'), strtotime($time));
+								$formateed_date = date( $date_format, strtotime($date));
+								?>
+								<div class="email-time-date">
+									<span class="email-date"><?php echo $formateed_date ? esc_html( $formateed_date ) : ''; ?></span>
+									<span class="email-time"><?php echo $formateed_time ? esc_html( $formateed_time ) : ''; ?></span>
+								</div>
+							</td>
+							
+							<td>
+								<?php
+								$actions_details = '<a href="' . admin_url() . 'edit.php?post_type=' . $enquiry["post_type"] . '&amp;page=' . $enquiry["post_type"] . '_enquiry' . '&amp;enquiry_id=' . $enquiry["id"] . '&amp;action=preview" class="tf_booking_details_view"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<path d="M2.42012 12.7132C2.28394 12.4975 2.21584 12.3897 2.17772 12.2234C2.14909 12.0985 2.14909 11.9015 2.17772 11.7766C2.21584 11.6103 2.28394 11.5025 2.42012 11.2868C3.54553 9.50484 6.8954 5 12.0004 5C17.1054 5 20.4553 9.50484 21.5807 11.2868C21.7169 11.5025 21.785 11.6103 21.8231 11.7766C21.8517 11.9015 21.8517 12.0985 21.8231 12.2234C21.785 12.3897 21.7169 12.4975 21.5807 12.7132C20.4553 14.4952 17.1054 19 12.0004 19C6.8954 19 3.54553 14.4952 2.42012 12.7132Z" stroke="#1D2327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M12.0004 15C13.6573 15 15.0004 13.6569 15.0004 12C15.0004 10.3431 13.6573 9 12.0004 9C10.3435 9 9.0004 10.3431 9.0004 12C9.0004 13.6569 10.3435 15 12.0004 15Z" stroke="#1D2327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg></a>';
+								echo wp_kses($actions_details, Helper::tf_custom_wp_kses_allow_tags());
+								?>
+							</td>
+						</tr>
+						<?php if ( ! defined( 'TF_PRO' ) && $tf_key == 15 ) { ?>
+							<tr class="pro-row" style="text-align: center; background-color: #ededf8">
+								<td colspan="8" style="text-align: center;">
+									<a href="https://tourfic.com/" target="_blank">
+										<h3 class="tf-admin-btn tf-btn-secondary" style="color:#fff;margin: 15px 0;"><?php esc_html_e( 'Upgrade to Pro Version to See More', 'tourfic' ); ?></h3>
+									</a>
+								</td>
+							</tr>
+						<?php break;}
+						$tf_key ++;
+					} ?>
+				<?php else: ?>
+					<tr class="no-result-found" style="text-align: center">
+						<td colspan="8" style="text-align: center;">
+							<h3 style="margin: 15px 0;"><?php esc_html_e( 'No Enquiry Found', 'tourfic' ); ?></h3>
+						</td>
+					</tr>
+				<?php endif; ?>
+				
                 </tbody>
 				<tfoot>
 					<tr>
@@ -247,8 +261,57 @@ abstract class Enquiry {
 		</div>
 		<?php 
 	}
+
+	public function single_enquiry_details($data) {
+		?>
+		<div class="wrap tf_booking_details_wrap tf-enquiry-details-wrap" style="margin-right: 20px;">
+			<!-- Header Wrap - Start -->
+			<div class="tf_booking_wrap_header">
+				<div class="tf-enquiry-single-header-details">
+					<div class="tf-single-enquiry-header-logo">
+						<img src="<?php echo esc_url( esc_url(TF_ASSETS_APP_URL.'images/tourfic-logo-icon-blue.png') ); ?>" alt="<?php esc_html_e( get_the_title($data["post_id"])) ?>">
+					</div>
+					<h1> <?php esc_html_e( get_the_title($data["post_id"])) ?></h1>
+				</div>
+			</div>
+			<!-- Header Wrap - End -->
+			 <!-- Back Button - Start -->
+			<div class="tf-enquiry-single-back-button">
+				<i class="ri-arrow-left-line"></i>
+				<a href="<?php echo esc_url(admin_url('edit.php?post_type=' . $data["post_type"] . '&page=' . $data["post_type"] . '_enquiry')); ?>" class="tf-enquiry-back-btn"><?php esc_html_e('Back', 'tourfic'); ?></a>
+			</div>
+			<!-- Back Button - End -->
+			<!-- Enquiry Details - Start -->
+			 <div class="tf-enquiry-single-details-wrapper">
+				<div class="tf-enquiry-details">
+					<div class="tf-enquiry-details-single-heading">
+						<h2><?php esc_html_e('Details', 'tourfic'); ?></h2>
+					</div>
+					<div class="tf-single-enquiry-details-content">
+						<div class="tf-single-enquiry-details-name">
+							<span class="tf-single-enquiry-details-label"> <?php esc_html_e("Name", 'tourfic') ?></span>
+							<span class="tf-single-enquiry-details-value"> <?php echo esc_html($data["uname"]); ?><i class="ri-file-copy-line"></i></span>
+							<input type="hidden" class="tf-enquiry-copy-text" value="<?php echo esc_html($data["uname"]); ?>">
+						</div>
+						<div class="tf-single-enquiry-details-email">
+							<span class="tf-single-enquiry-details-label"> <?php esc_html_e("Email", 'tourfic') ?></span>
+							<span class="tf-single-enquiry-details-value"> <?php echo esc_html($data["uemail"]); ?><i class="ri-file-copy-line"></i></span>
+							<input type="hidden" class="tf-enquiry-copy-email" value="<?php echo esc_html($data["uemail"]); ?>">
+						</div>
+						<div class="tf-single-enquiry-details-message">
+							<span class="tf-single-enquiry-details-label"> <?php esc_html_e("Message", 'tourfic') ?></span>
+							<span class="tf-single-enquiry-details-value"> <?php echo esc_html($data["udescription"]); ?></span>
+						</div>
+					</div>
+				</div>
+				<div class="tf-enquiry-single-log-detaui"></div>
+			 </div>
+		</div>
+
+		<?php
+	}
 	
-	public function enquiry_table_data( $post_type = '', $post_id = '', $offset = 0, $per_page = 0 ) {
+	public function enquiry_table_data( $post_type = '', $post_id = '', $offset = 0, $per_page = 0, $status = '' ) {
 
 		 global $wpdb;
 		 $query = "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE ";
@@ -256,8 +319,14 @@ abstract class Enquiry {
  
 		 if( !empty($post_type) ) {
 			$query .= sprintf(' post_type = "%s"', $post_type);
-		 } else if( !empty($post_id) ) {
-			$query.= sprintf(' post_id = %d', $post_id);
+		 }
+
+		if(!empty($post_type) && !empty($post_id) ) {
+			$query .= ' AND';
+		}
+		 
+		if( !empty($post_id) ) {
+			$query.= sprintf(' post_id = %d', $post_id );
 		 }
 
 		 $query .= " ORDER BY id DESC";
@@ -493,6 +562,71 @@ abstract class Enquiry {
 		echo wp_json_encode( $response );
 
 		die();
+	}
+
+	function tf_enquiry_bulk_action_callback() {
+		$response = array();
+
+		if ( ! check_ajax_referer('updates', '_ajax_nonce') ) {
+			$response['status'] = 'error';
+			$response['msg']    = esc_html__( 'Security error! Reload the page and try again.', 'tourfic' );
+			echo wp_json_encode( $response );
+			wp_die();
+		}
+
+		$enquiry_ids = isset( $_POST['selected_items'] ) ? $_POST['selected_items'] : array();
+		$bulk_action = isset( $_POST['bulk_action'] ) ? $_POST['bulk_action'] : '';
+
+		if ( empty( $enquiry_ids ) ) {
+			$response['status'] = 'error';
+			$response['msg']    = esc_html__( 'No enquiry selected!', 'tourfic' );
+			echo wp_json_encode( $response );
+			wp_die();
+		}
+
+		if ( empty( $bulk_action ) ) {
+			$response['status'] = 'error';
+			$response['msg']    = esc_html__( 'Select an action first!', 'tourfic' );
+			echo wp_json_encode( $response );
+			wp_die();
+		}
+
+		global $wpdb;
+
+		if ( 'trash' == $bulk_action ) {
+			foreach ( $enquiry_ids as $enquiry_id ) {
+				$wpdb->query(
+					$wpdb->prepare(
+						"DELETE FROM {$wpdb->prefix}tf_enquiry_data WHERE id=%d",
+						$enquiry_id
+					)
+				);
+			}
+		} else if( 'mark-as-read' == $bulk_action ) {
+			foreach ( $enquiry_ids as $enquiry_id ) {
+				$wpdb->query(
+					$wpdb->prepare(
+						"UPDATE {$wpdb->prefix}tf_enquiry_data SET enquiry_status=%s WHERE id=%d",
+						'read',
+						$enquiry_id
+					)
+				);
+			}
+		}
+	}
+
+	function tf_enquiry_filter_post_callback() {
+
+		$post_id = isset( $_POST['post_id'] ) ? $_POST['post_id'] : '';
+		$post_type = isset( $_POST['post_type'] ) ? $_POST['post_type'] : '';
+
+		$enquiry_data = $this->enquiry_table_data( $post_type, $post_id );
+
+		$this->enquiry_details_list( $enquiry_data );
+
+		wp_reset_postdata();
+
+		wp_die();
 	}
 
 }
