@@ -73,10 +73,10 @@
                     _ajax_nonce: tf_admin_params.tf_nonce
                 },
                 beforeSend: function() {
-                    $this.addClass("loading");
+                    $("#tf-enquiry-status-loader").addClass("show");
                 },
-                success: function(response) {
-
+                success: function (response) {
+                    $("#tf-enquiry-status-loader").removeClass("show");
                     if( response.status == "error" ) {
                         $(".tf-enquiry-details-wrap").append(response.msg);
                     } else {
