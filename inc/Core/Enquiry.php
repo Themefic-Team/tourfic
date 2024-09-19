@@ -303,11 +303,11 @@ abstract class Enquiry {
 						<div class="tf-single-enquiry-details-content">
 							<div class="tf-single-enquiry-details-name">
 								<span class="tf-single-enquiry-details-label"> <?php esc_html_e("Name", 'tourfic') ?></span>
-								<span class="tf-single-enquiry-details-value" data-enquiry-uname="<?php echo esc_html($data["uname"]); ?>"> <?php echo esc_html($data["uname"]); ?><i class="ri-file-copy-line tf-single-enquiry-copy-btn"></i></span>
+								<span class="tf-single-enquiry-details-value" data-enquiry-copy-text="<?php echo esc_html($data["uname"]); ?>"> <?php echo esc_html($data["uname"]); ?><i class="ri-file-copy-line tf-single-enquiry-copy-btn"></i></span>
 							</div>
 							<div class="tf-single-enquiry-details-email">
 								<span class="tf-single-enquiry-details-label"> <?php esc_html_e("Email", 'tourfic') ?></span>
-								<span class="tf-single-enquiry-details-value"> <?php echo esc_html($data["uemail"]); ?><i class="ri-file-copy-line"></i></span>
+								<span class="tf-single-enquiry-details-value" data-enquiry-copy-text="<?php echo esc_html($data["uemail"]); ?>"> <?php echo esc_html($data["uemail"]); ?><i class="ri-file-copy-line tf-single-enquiry-copy-btn"></i></span>
 							</div>
 							<div class="tf-single-enquiry-details-message">
 								<span class="tf-single-enquiry-details-label"> <?php esc_html_e("Message", 'tourfic') ?></span>
@@ -374,9 +374,8 @@ abstract class Enquiry {
 											</clipPath>
 										</defs>
 									</svg>
-									<span class="tf-single-enquiry-log-details-single-value"> <?php echo esc_html($server_data["ip_address"]); ?> </span>
-									<input type="hidden" class="tf-enquiry-copy-ip" value="<?php echo esc_attr($server_data["ip_address"]); ?>">
-									<span class="tf-single-enquiry-log-details-single-copy"> <i class="ri-file-copy-line"></i></span>
+									<span class="tf-single-enquiry-log-details-single-value" data-enquiry-copy-text="<?php echo esc_attr($server_data["ip_address"]); ?>"> <?php echo esc_html($server_data["ip_address"]); ?> </span>
+									<span class="tf-single-enquiry-log-details-single-copy"> <i class="ri-file-copy-line tf-single-enquiry-copy-btn"></i></span>
 								</div>
 							
 								<div class="tf-single-enquiry-log-details-single"> <!-- Single Log Details Browser - Start -->
@@ -401,7 +400,7 @@ abstract class Enquiry {
 									</svg>
 									<span class="tf-single-enquiry-log-details-single-value"> <?php echo esc_html($server_data["os_name"]); ?> </span>
 								</div>
-							<? endif; ?>
+							<?php endif; ?>	
 							<div class="tf-single-enquiry-log-details-single"> <!-- Single Log Details Date - Start -->
 								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 									<path d="M15.8333 3.33331H4.16667C3.24619 3.33331 2.5 4.07951 2.5 4.99998V16.6666C2.5 17.5871 3.24619 18.3333 4.16667 18.3333H15.8333C16.7538 18.3333 17.5 17.5871 17.5 16.6666V4.99998C17.5 4.07951 16.7538 3.33331 15.8333 3.33331Z" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

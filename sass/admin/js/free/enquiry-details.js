@@ -83,7 +83,6 @@
                         $(".tf-enquiry-table").remove();
                         $(".tf-enquiry-details-wrap").append(response);
                     }
-                    console.log(response);
                 }
             });
         });
@@ -133,19 +132,20 @@
             });
         })
 
-        $(document).on("click", ".tf-single-enquiry-copy-btn", function(e) {
-            let copy_text = $(".tf-single-enquiry-details-value").data("enquiry-uname");
+        $(document).on("click", ".tf-single-enquiry-copy-btn", function (e) {
+            let $this = $(this),
+                copy_text = $this.closest(".tf-single-enquiry-details-value").data("enquiry-copy-text"),
+                $temp = $("<input>"),
+                copy_ip_addr = $(this).parent().parent().find(".tf-single-enquiry-log-details-single-value").data("enquiry-copy-text");
+            
+            copy_text = copy_text ? copy_text : copy_ip_addr;
 
-            let $temp = $("<input>");
             $("body").append($temp);
             $temp.val(copy_text).select();
             document.execCommand("copy");
             $temp.remove();
-            
             notyf.success("Copied to clipboard");
-
         });
-
     });
 
 })(jQuery);
