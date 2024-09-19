@@ -2783,10 +2783,10 @@ class Hotel {
                                 <div class="location-icon">
                                     <i class="ri-map-pin-fill"></i>
                                 </div>
-                                <span><?php echo tourfic_character_limit_callback( esc_html( $address ), 40 ); ?></span>
+                                <span><?php echo Helper::tourfic_character_limit_callback( esc_html( $address ), 40 ); ?></span>
                             </div>
 						<?php endif; ?>
-                        <h4 class="tf-section-title"><a href="<?php echo esc_url( $url ); ?>"><?php echo tourfic_character_limit_callback( get_the_title(), 55 ); ?></a></h4>
+                        <h4 class="tf-section-title"><a href="<?php echo esc_url( $url ); ?>"><?php echo Helper::tourfic_character_limit_callback( get_the_title(), 55 ); ?></a></h4>
 						<?php if ( $features ) { ?>
                             <ul class="features">
 								<?php foreach ( array_slice( $features, 0, 3 ) as $tfkey => $feature ) :
@@ -3522,5 +3522,27 @@ class Hotel {
 		return count( $term_count );
 
 		wp_reset_postdata();
+	}
+
+	static function template( $type = 'archive', $post_id = '' ) {
+		$hotel_template = '';
+		$post_id        = ! empty( $post_id ) ? $post_id : '';
+
+		if ( $type == 'archive' ) {
+			$hotel_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
+		} elseif ( $type == 'single' && $post_id ) {
+			$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
+
+			$layout_conditions = ! empty( $meta['tf_single_hotel_layout_opt'] ) ? $meta['tf_single_hotel_layout_opt'] : 'global';
+			if ( "single" == $layout_conditions ) {
+				$single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
+			}
+			$global_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] : 'design-1';
+			$hotel_template  = ! empty( $single_template ) ? $single_template : $global_template;
+		} elseif ( $type == 'single' ) {
+			$hotel_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] : 'design-1';
+		}
+
+		return $hotel_template;
 	}
 }

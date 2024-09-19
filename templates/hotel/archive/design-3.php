@@ -5,6 +5,7 @@
 
 		use \Tourfic\Classes\Helper;
 		use \Tourfic\Classes\Hotel\Hotel;
+		use \Tourfic\Classes\Hotel\Pricing;
 
 		do_action( 'tf_before_container' );
 		$post_count = $GLOBALS['wp_query']->post_count;
@@ -20,6 +21,13 @@
 
 		<?php if ( have_posts() ) : ?>
             <div class="tf-archive-details">
+                <!-- Loader Image -->
+                <div id="tf_ajax_searchresult_loader">
+                    <div id="tf-searchresult-loader-img">
+                        <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
+                    </div>
+                </div>
+
                 <div class="tf-details-left">
                     <!--Available rooms start -->
                     <div class="tf-archive-hotels-wrapper">
@@ -41,7 +49,7 @@
                         <div class="tf-archive-top">
                             <h5 class="tf-total-results"><?php _e( "Found", "tourfic" ); ?>
                                 <span><?php echo $post_count; ?></span> <?php _e( "of", "tourfic" ); ?> <?php echo $GLOBALS['wp_query']->found_posts; ?> <?php _e( "Hotels", "tourfic" ); ?></h5>
-							<?php $tf_defult_views = ! empty( tf_data_types( tfopt( 'tf-template' ) )['hotel_archive_view'] ) ? tf_data_types( tfopt( 'tf-template' ) )['hotel_archive_view'] : 'list'; ?>
+							<?php $tf_defult_views = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel_archive_view'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel_archive_view'] : 'list'; ?>
                             <ul class="tf-archive-view">
                                 <li class="tf-archive-filter-btn">
                                     <i class="ri-equalizer-line"></i>
@@ -72,13 +80,6 @@
                             </ul>
                         </div>
 
-                        <!-- Loader Image -->
-                        <div id="tour_room_details_loader">
-                            <div id="tour-room-details-loader-img">
-                                <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
-                            </div>
-                        </div>
-
                         <!--Available rooms start -->
                         <div class="tf-archive-hotels archive_ajax_result <?php echo $tf_defult_views == "list" ? esc_attr( 'tf-layout-list' ) : esc_attr( 'tf-layout-grid' ); ?>">
 
@@ -87,492 +88,28 @@
 							$locations = [];
 							while ( have_posts() ) {
 								the_post();
-								$count ++;
 
 								$meta = get_post_meta( get_the_ID(), 'tf_hotels_opt', true );
-								$map  = ! empty( $meta['map'] ) ? tf_data_types( $meta['map'] ) : '';
-
-								// Archive Page Minimum Price
-								$archive_page_price_settings = ! empty( tfopt( 'hotel_archive_price_minimum_settings' ) ) ? tfopt( 'hotel_archive_price_minimum_settings' ) : 'all';
-
-								// Rooms
-								$b_rooms = ! empty( $meta['room'] ) ? $meta['room'] : array();
-								if ( ! empty( $b_rooms ) && gettype( $b_rooms ) == "string" ) {
-									$tf_hotel_b_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-										return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-									}, $b_rooms );
-									$b_rooms                = unserialize( $tf_hotel_b_rooms_value );
+								if ( ! $meta["featured"] ) {
+									continue;
 								}
 
-								/**
-								 * Calculate and get the minimum price
-								 * @author - Hena
-								 */
-								$room_price            = [];
-								$tf_lowestAmount       = 0;
-								$tf_lowestAmount_items = null;
-								if ( ! empty( $b_rooms ) ):
-									foreach ( $b_rooms as $rkey => $b_room ) {
+								$count ++;
+								$map  = ! empty( $meta['map'] ) ? Helper::tf_data_types( $meta['map'] ) : '';
 
-										//hotel room discount data
-										$hotel_discount_type   = ! empty( $b_room["discount_hotel_type"] ) ? $b_room["discount_hotel_type"] : "none";
-										$hotel_discount_amount = ! empty( $b_room["discount_hotel_price"] ) ? $b_room["discount_hotel_price"] : 0;
-										if ( $hotel_discount_type != "none" && ! empty( $hotel_discount_amount ) ) {
-											$tf_lowestAmount_items['amount'] = $hotel_discount_amount;
-											$tf_lowestAmount_items['type']   = $hotel_discount_type;
+								$min_price_arr = Pricing::instance(get_the_ID())->get_min_price();
+								$min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;
+								$min_regular_price = !empty($min_price_arr['min_regular_price']) ? $min_price_arr['min_regular_price'] : 0;
+								$min_discount_type = !empty($min_price_arr['min_discount_type']) ? $min_price_arr['min_discount_type'] : 'none';
+								$min_discount_amount = !empty($min_price_arr['min_discount_amount']) ? $min_price_arr['min_discount_amount'] : 0;
 
-											$tf_lowestAmount = intval( $hotel_discount_amount ); // Convert the amount to an integer for comparison
-											if ( $hotel_discount_amount < $tf_lowestAmount ) {
-												$tf_lowestAmount                 = $hotel_discount_amount;
-												$tf_lowestAmount_items['amount'] = $hotel_discount_amount;
-												$tf_lowestAmount_items['type']   = $hotel_discount_type;
-											}
-										}
+								if ( $min_regular_price != 0 ) {
+									$price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
+								} else {
+									$price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
+								}
 
-
-										//room price
-										$pricing_by = ! empty( $b_room['pricing-by'] ) ? $b_room['pricing-by'] : 1;
-										if ( $pricing_by == 1 ) {
-											if ( empty( $check_in_out ) ) {
-												if ( ! empty( $b_room['price'] ) ) {
-													$b_room_price = $b_room['price'];
-
-													$dicount_b_room_price = 0;
-
-													if ( $hotel_discount_type == "percent" ) {
-														$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $b_room_price - ( ( (int) $b_room_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
-													} else if ( $hotel_discount_type == "fixed" ) {
-														$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $b_room_price - (int) $hotel_discount_amount ), 2 ) ) );
-													}
-													if ( $dicount_b_room_price != 0 ) {
-														$room_price[] = array(
-															"regular_price" => $b_room['price'],
-															"sale_price"    => $dicount_b_room_price,
-														);
-													} else {
-														$room_price[] = array(
-															"sale_price" => $b_room['price']
-														);
-													}
-												}
-											} else {
-												if ( ! empty( $b_room['avil_by_date'] ) && $b_room['avil_by_date'] == "1" ) {
-													$avail_date = json_decode( $b_room['avail_date'], true );
-
-													if ( ! empty( $avail_date ) ) {
-														foreach ( $avail_date as $repval ) {
-															//Initial matching date array
-															$show_hotel = [];
-															// Check if any date range match with search form date range and set them on array
-															if ( ! empty( $period ) ) {
-																foreach ( $period as $date ) {
-																	$show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $repval['check_in'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $repval['check_out'] ) );
-																}
-															}
-															if ( ! in_array( 0, $show_hotel ) ) {
-																if ( ! empty( $repval['price'] ) ) {
-																	$repval_price         = $repval['price'];
-																	$dicount_b_room_price = 0;
-
-																	if ( $hotel_discount_type == "percent" ) {
-																		$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $repval_price - ( ( (int) $repval_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
-																	} else if ( $hotel_discount_type == "fixed" ) {
-																		$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $repval_price - (int) $hotel_discount_amount ), 2 ) ) );
-																	}
-																	if ( $dicount_b_room_price != 0 ) {
-																		$room_price[] = array(
-																			"regular_price" => $repval['price'],
-																			"sale_price"    => $dicount_b_room_price
-																		);
-																	} else {
-																		$room_price[] = array(
-																			"sale_price" => $repval['price'],
-																		);
-																	}
-																}
-															} else {
-																if ( ! empty( $repval['price'] ) ) {
-																	$repval_price         = $repval['price'];
-																	$dicount_b_room_price = 0;
-
-																	if ( $hotel_discount_type == "percent" ) {
-																		$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $repval_price - ( ( (int) $repval_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
-																	} else if ( $hotel_discount_type == "fixed" ) {
-																		$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $repval_price - (int) $hotel_discount_amount ), 2 ) ) );
-																	}
-
-																	if ( $dicount_b_room_price != 0 ) {
-																		$room_price[] = array(
-																			"regular_price" => $repval['price'],
-																			"sale_price"    => $dicount_b_room_price
-																		);
-																	} else {
-																		$room_price[] = array(
-																			"sale_price" => $repval['price'],
-																		);
-																	}
-																}
-															}
-														}
-													} else {
-														$b_room_price         = $b_room['price'];
-														$room_price[]         = $b_room_price;
-														$dicount_b_room_price = 0;
-														if ( $hotel_discount_type == "percent" ) {
-															$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $b_room_price - ( ( $b_room_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
-														} else if ( $hotel_discount_type == "fixed" ) {
-															$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $b_room_price - $hotel_discount_amount ), 2 ) ) );
-														}
-														if ( $dicount_b_room_price != 0 ) {
-															$room_price[] = $dicount_b_room_price;
-														}
-													}
-												} else {
-													if ( ! empty( $b_room['price'] ) ) {
-														$b_room_price = $b_room['price'];
-
-														$dicount_b_room_price = 0;
-
-														if ( $hotel_discount_type == "percent" ) {
-															$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $b_room_price - ( ( (int) $b_room_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
-														} else if ( $hotel_discount_type == "fixed" ) {
-															$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $b_room_price - (int) $hotel_discount_amount ), 2 ) ) );
-														}
-														if ( $dicount_b_room_price != 0 ) {
-															$room_price[] = array(
-																"regular_price" => $b_room['price'],
-																"sale_price"    => $dicount_b_room_price
-															);
-														} else {
-															$room_price[] = array(
-																"sale_price" => $b_room['price'],
-															);
-														}
-													}
-												}
-
-											}
-										} else if ( $pricing_by == 2 ) {
-											if ( empty( $check_in_out ) ) {
-												$adult_price         = ! empty( $b_room['adult_price'] ) ? $b_room['adult_price'] : 0;
-												$child_price         = ! empty( $b_room['child_price'] ) ? $b_room['child_price'] : 0;
-												$dicount_adult_price = 0;
-												$dicount_child_price = 0;
-												// discount calculation - start
-												if ( $hotel_discount_type == "percent" ) {
-													$dicount_adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
-													$dicount_child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - ( ( (int) $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
-												} else if ( $hotel_discount_type == "fixed" ) {
-													$dicount_adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $adult_price - (int) $hotel_discount_amount ), 2 ) ) );
-													$dicount_child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $child_price - (int) $hotel_discount_amount ), 2 ) ) );
-												}
-
-												if ( $archive_page_price_settings == "all" ) {
-													if ( ! empty( $b_room['adult_price'] ) ) {
-
-														if ( $dicount_adult_price != 0 ) {
-															$room_price[] = $room_price[] = array(
-																"regular_price" => $b_room['adult_price'],
-																"sale_price"    => $dicount_adult_price
-															);
-														} else {
-															$room_price[] = array(
-																"sale_price" => $b_room['adult_price'],
-															);
-														}
-													}
-													if ( ! empty( $b_room['child_price'] ) ) {
-
-														if ( $dicount_child_price != 0 ) {
-															$room_price[] = array(
-																"regular_price" => $b_room['child_price'],
-																"sale_price"    => $dicount_child_price
-															);
-														} else {
-															$room_price[] = array(
-																"sale_price" => $b_room['child_price'],
-															);
-														}
-													}
-												}
-												if ( $archive_page_price_settings == "adult" ) {
-													if ( ! empty( $b_room['adult_price'] ) ) {
-
-														if ( $dicount_adult_price != 0 ) {
-															$room_price[] = array(
-																"regular_price" => $b_room['adult_price'],
-																"sale_price"    => $dicount_adult_price
-															);
-														} else {
-															$room_price[] = array(
-																"sale_price" => $b_room['adult_price'],
-															);
-														}
-													}
-												}
-												if ( $archive_page_price_settings == "child" ) {
-													if ( ! empty( $b_room['child_price'] ) ) {
-
-														if ( $dicount_child_price != 0 ) {
-															$room_price[] = array(
-																"regular_price" => $b_room['child_price'],
-																"sale_price"    => $dicount_child_price
-															);
-														} else {
-															$room_price[] = array(
-																"sale_price" => $b_room['child_price'],
-															);
-														}
-													}
-												}
-											} else {
-												if ( ! empty( $b_room['avil_by_date'] ) && $b_room['avil_by_date'] == "1" ) {
-													$avail_date = json_decode( $b_room['avail_date'], true );
-													if ( ! empty( $avail_date ) ) {
-														foreach ( $avail_date as $repval ) {
-															//Initial matching date array
-															$show_hotel = [];
-															// Check if any date range match with search form date range and set them on array
-															if ( ! empty( $period ) ) {
-																foreach ( $period as $date ) {
-																	$show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $repval['check_in'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $repval['check_out'] ) );
-																}
-															}
-															if ( ! in_array( 0, $show_hotel ) ) {
-
-																// discount calculation - start
-																$adult_price         = $repval['adult_price'];
-																$child_price         = $repval['child_price'];
-																$dicount_adult_price = 0;
-																$dicount_child_price = 0;
-
-																if ( $hotel_discount_type == "percent" ) {
-																	// if ( ! empty( $dicount_adult_price ) && ! empty( $dicount_child_price ) ) {
-																	$dicount_adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
-																	$dicount_child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - ( ( (int) $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
-																	// }
-																} else if ( $hotel_discount_type == "fixed" ) {
-																	// if ( ! empty( $dicount_adult_price ) && ! empty( $dicount_child_price ) ) {
-																	$dicount_adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $adult_price - (int) $hotel_discount_amount ), 2 ) ) );
-																	$dicount_child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $child_price - (int) $hotel_discount_amount ), 2 ) ) );
-																	// }
-																}
-																// end
-																if ( $archive_page_price_settings == "all" ) {
-																	if ( ! empty( $repval['adult_price'] ) ) {
-
-																		if ( $dicount_adult_price != 0 ) {
-																			$room_price[] = array(
-																				"regular_price" => $repval['adult_price'],
-																				"sale_price"    => $dicount_adult_price
-																			);
-																		} else {
-																			$room_price[] = array(
-																				"sale_price" => $repval['adult_price'],
-																			);
-																		}
-																	}
-																	if ( ! empty( $repval['child_price'] ) ) {
-
-																		if ( $dicount_child_price != 0 ) {
-																			$room_price[] = array(
-																				"regular_price" => $repval['child_price'],
-																				"sale_price"    => $dicount_child_price
-																			);
-																		} else {
-																			$room_price[] = array(
-																				"sale_price" => $repval['child_price'],
-																			);
-																		}
-																	}
-																}
-																if ( $archive_page_price_settings == "adult" ) {
-																	if ( ! empty( $repval['adult_price'] ) ) {
-
-																		if ( $dicount_adult_price != 0 ) {
-																			$room_price[] = array(
-																				"regular_price" => $repval['adult_price'],
-																				"sale_price"    => $dicount_adult_price
-																			);
-																		} else {
-																			$room_price[] = array(
-																				"sale_price" => $repval['adult_price'],
-																			);
-																		}
-																	}
-																}
-																if ( $archive_page_price_settings == "child" ) {
-																	if ( ! empty( $repval['child_price'] ) ) {
-
-																		if ( $dicount_child_price != 0 ) {
-																			$room_price[] = array(
-																				"regular_price" => $repval['child_price'],
-																				"sale_price"    => $dicount_child_price
-																			);
-																		} else {
-																			$room_price[] = array(
-																				"sale_price" => $repval['child_price'],
-																			);
-																		}
-																	}
-																}
-															} else {
-																// discount calculation - start
-																$adult_price         = $repval['adult_price'];
-																$child_price         = $repval['child_price'];
-																$dicount_adult_price = 0;
-																$dicount_child_price = 0;
-
-																if ( $hotel_discount_type == "percent" ) {
-																	$dicount_adult_price = ! empty( $adult_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-																	$dicount_child_price = ! empty( $child_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - ( ( (int) $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-																} else if ( $hotel_discount_type == "fixed" ) {
-																	$dicount_adult_price = ! empty( $adult_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $adult_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-																	$dicount_child_price = ! empty( $child_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $child_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-																}
-																// end
-																if ( $archive_page_price_settings == "all" ) {
-																	if ( ! empty( $repval['adult_price'] ) ) {
-
-																		if ( $dicount_adult_price != 0 ) {
-																			$room_price[] = array(
-																				"regular_price" => $repval['adult_price'],
-																				"sale_price"    => $dicount_adult_price
-																			);
-																		} else {
-																			$room_price[] = array(
-																				"sale_price" => $repval['adult_price'],
-																			);
-																		}
-																	}
-																	if ( ! empty( $repval['child_price'] ) ) {
-
-																		if ( $dicount_child_price != 0 ) {
-																			$room_price[] = array(
-																				"regular_price" => $repval['child_price'],
-																				"sale_price"    => $dicount_child_price
-																			);
-																		} else {
-																			$room_price[] = array(
-																				"sale_price" => $repval['child_price'],
-																			);
-																		}
-																	}
-																}
-																if ( $archive_page_price_settings == "adult" ) {
-																	if ( ! empty( $repval['adult_price'] ) ) {
-
-																		if ( $dicount_adult_price != 0 ) {
-																			$room_price[] = array(
-																				"regular_price" => $repval['adult_price'],
-																				"sale_price"    => $dicount_adult_price
-																			);
-																		} else {
-																			$room_price[] = array(
-																				"sale_price" => $repval['adult_price'],
-																			);
-																		}
-																	}
-																}
-																if ( $archive_page_price_settings == "child" ) {
-																	if ( $repval['child_price'] ) {
-
-																		if ( $dicount_child_price != 0 ) {
-																			$room_price[] = array(
-																				"regular_price" => $repval['child_price'],
-																				"sale_price"    => $dicount_child_price
-																			);
-																		} else {
-																			$room_price[] = array(
-																				"sale_price" => $repval['child_price'],
-																			);
-																		}
-																	}
-																}
-															}
-														}
-													}
-
-												} else {
-
-													$adult_price         = ! empty( $b_room['adult_price'] ) ? $b_room['adult_price'] : '';
-													$child_price         = ! empty( $b_room['child_price'] ) ? $b_room['child_price'] : '';
-													$dicount_adult_price = 0;
-													$dicount_child_price = 0;
-													// discount calculation - start
-													if ( $hotel_discount_type == "percent" ) {
-														$dicount_adult_price = ! empty( $adult_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-														$dicount_child_price = ! empty( $child_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - ( ( (int) $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-													} else if ( $hotel_discount_type == "fixed" ) {
-														$dicount_adult_price = ! empty( $adult_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $adult_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-														$dicount_child_price = ! empty( $child_price ) ? floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $child_price - (int) $hotel_discount_amount ), 2 ) ) ) : 0;
-													}
-
-													if ( $archive_page_price_settings == "all" ) {
-														if ( ! empty( $b_room['adult_price'] ) ) {
-
-															if ( $dicount_adult_price != 0 ) {
-																$room_price[] = array(
-																	"regular_price" => $b_room['adult_price'],
-																	"sale_price"    => $dicount_adult_price
-																);
-															} else {
-																$room_price[] = array(
-																	"sale_price" => $b_room['adult_price'],
-																);
-															}
-														}
-														if ( ! empty( $b_room['child_price'] ) ) {
-
-															if ( $dicount_child_price != 0 ) {
-																$room_price[] = array(
-																	"regular_price" => $b_room['child_price'],
-																	"sale_price"    => $dicount_child_price
-																);
-															} else {
-																$room_price[] = array(
-																	"sale_price" => $b_room['child_price'],
-																);
-															}
-														}
-													}
-													if ( $archive_page_price_settings == "adult" ) {
-														if ( ! empty( $b_room['adult_price'] ) ) {
-
-															if ( $dicount_adult_price != 0 ) {
-																$room_price[] = array(
-																	"regular_price" => $b_room['adult_price'],
-																	"sale_price"    => $dicount_adult_price
-																);
-															} else {
-																$room_price[] = array(
-																	"sale_price" => $b_room['adult_price'],
-																);
-															}
-														}
-													}
-													if ( $archive_page_price_settings == "child" ) {
-														if ( ! empty( $b_room['child_price'] ) ) {
-
-															if ( $dicount_child_price != 0 ) {
-																$room_price[] = array(
-																	"regular_price" => $b_room['child_price'],
-																	"sale_price"    => $dicount_child_price
-																);
-															} else {
-																$room_price[] = array(
-																	"sale_price" => $b_room['child_price'],
-																);
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								endif;
-
-								if ( ! empty( $map ) ) {
+                                if ( ! empty( $map ) ) {
 									$lat = $map['latitude'];
 									$lng = $map['longitude'];
 									ob_start();
@@ -590,42 +127,16 @@
                                             </a>
 
 											<?php
-											if ( ! empty( $tf_lowestAmount_items ) ) : ?>
+											if ( ! empty( $min_discount_amount ) ) : ?>
                                                 <div class="tf-map-item-discount">
-													<?php echo $tf_lowestAmount_items['type'] == "percent" ? $tf_lowestAmount . '%' : wc_price( $tf_lowestAmount ) ?><?php _e( " Off", "tourfic" ); ?>
+													<?php echo $min_discount_type == "percent" ? $min_discount_amount . '%' : wc_price( $min_discount_amount ) ?><?php _e( " Off", "tourfic" ); ?>
                                                 </div>
 											<?php endif; ?>
                                         </div>
                                         <div class="tf-map-item-content">
                                             <h4><a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></h4>
                                             <div class="tf-map-item-price">
-												<?php
-												$room_price     = array_filter( $room_price );
-												$min_sale_price = ! empty( $room_price ) ? min( array_column( $room_price, 'sale_price' ) ) : 0;
-
-												if ( ! empty( $room_price ) ):
-													$min_regular_price = 0;
-
-													array_walk( $room_price, function ( $value ) use ( $min_sale_price, &$min_regular_price ) {
-														if ( is_array( $value ) && count( $value ) > 0 ) {
-															if ( array_key_exists( "regular_price", $value ) ) {
-																if ( $value["sale_price"] == $min_sale_price ) {
-																	$min_regular_price = $value["regular_price"];
-																}
-															}
-														}
-													} );
-													echo __( "From ", "tourfic" );
-													//get the lowest price from all available room price
-													$lowest_sale_price = wc_price( $min_sale_price );
-													if ( $min_regular_price != 0 ) {
-														$lowest_regular_price = strip_tags( wc_price( $min_regular_price ) );
-														echo "<del>" . $lowest_regular_price . "</del>" . " " . "<span>" . $lowest_sale_price . "</span>";
-													} else {
-														echo " $lowest_sale_price" . " ";
-													}
-												endif;
-												?>
+												<?php echo Pricing::instance(get_the_ID())->get_min_price_html(); ?>
                                             </div>
 											<?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
                                         </div>
@@ -637,7 +148,75 @@
 										'id'      => get_the_ID(),
 										'lat'     => (float) $lat,
 										'lng'     => (float) $lng,
-										'price'   => base64_encode( wc_price( $min_sale_price ) ),
+										'price'   => base64_encode( $price_html ),
+										'content' => base64_encode( $infoWindowtext )
+									];
+								}
+								Hotel::tf_hotel_archive_single_item();
+							}
+							while ( have_posts() ) {
+								the_post();
+
+								$meta = get_post_meta( get_the_ID(), 'tf_hotels_opt', true );
+								if ( $meta["featured"] ) {
+									continue;
+								}
+
+								$count ++;
+								$map  = ! empty( $meta['map'] ) ? Helper::tf_data_types( $meta['map'] ) : '';
+
+								$min_price_arr = Pricing::instance(get_the_ID())->get_min_price();
+								$min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;
+								$min_regular_price = !empty($min_price_arr['min_regular_price']) ? $min_price_arr['min_regular_price'] : 0;
+								$min_discount_type = !empty($min_price_arr['min_discount_type']) ? $min_price_arr['min_discount_type'] : 'none';
+								$min_discount_amount = !empty($min_price_arr['min_discount_amount']) ? $min_price_arr['min_discount_amount'] : 0;
+
+								if ( $min_regular_price != 0 ) {
+									$price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
+								} else {
+									$price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
+								}
+
+                                if ( ! empty( $map ) ) {
+									$lat = $map['latitude'];
+									$lng = $map['longitude'];
+									ob_start();
+									?>
+                                    <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                        <div class="tf-map-item-thumb">
+                                            <a href="<?php echo get_the_permalink(); ?>">
+												<?php
+												if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
+													the_post_thumbnail( 'full' );
+												} else {
+													echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+												}
+												?>
+                                            </a>
+
+											<?php
+											if ( ! empty( $min_discount_amount ) ) : ?>
+                                                <div class="tf-map-item-discount">
+													<?php echo $min_discount_type == "percent" ? $min_discount_amount . '%' : wc_price( $min_discount_amount ) ?><?php _e( " Off", "tourfic" ); ?>
+                                                </div>
+											<?php endif; ?>
+                                        </div>
+                                        <div class="tf-map-item-content">
+                                            <h4><a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></h4>
+                                            <div class="tf-map-item-price">
+												<?php echo Pricing::instance(get_the_ID())->get_min_price_html(); ?>
+                                            </div>
+											<?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
+                                        </div>
+                                    </div>
+									<?php
+									$infoWindowtext = ob_get_clean();
+
+									$locations[ $count ] = [
+										'id'      => get_the_ID(),
+										'lat'     => (float) $lat,
+										'lng'     => (float) $lng,
+										'price'   => base64_encode( $price_html ),
 										'content' => base64_encode( $infoWindowtext )
 									];
 								}
@@ -664,7 +243,7 @@
                             <div class="st-icheck-item">
                                 <label for="st-move-map" class="c-grey">
                                     <input type="checkbox" name="movemap" id="st-move-map" value="1">
-				                    <?php /*echo esc_html__('Search as I move the map', 'traveler'); */ ?>
+				                    <?php /*echo esc_html__('Search as I move the map', 'traveler'); */?>
                                     <span class="checkmark fcheckbox"></span>
                                 </label>
                             </div>
@@ -675,7 +254,7 @@
                 </div>
             </div>
 		<?php else: ?>
-            <div class="tf-nothing-found" data-post-count="0"><?php _e( "No Hotels Found!", "tourfic" ); ?></div>
+            <div class="tf-nothing-found" data-post-count="0"><?php echo esc_html__( "No Hotels Found!", "tourfic" ); ?></div>
 		<?php endif; ?>
     </div>
     <!--Content section end -->

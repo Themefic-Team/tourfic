@@ -18285,74 +18285,14 @@ html {
   font-family: Ubuntu, sans-serif;
   /* Search form */
   /* Hotel details */
-  /*.select2-container {
-        width: 100% !important;
-
-        .select2-selection {
-            width: 100%;
-            border: 0.5px solid $t4-orange-light;
-            background: #fff;
-            box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
-            border-radius: 4px;
-            color: $t4-paragraph;
-        }
-
-        //
-        //    .select2-selection__choice {
-        //        background-color: $slate10;
-        //        border: none;
-        //        margin-left: 4px;
-        //        margin-top: 0;
-        //        padding: 4px 20px 4px 4px !important;
-        //        color: $slate80;
-        //
-        //        &:first-child{
-        //            margin-left: 0;
-        //        }
-        //    }
-        //    .select2-selection__choice__remove {
-        //        border-right: none;
-        //        border-top-left-radius: 0;
-        //        border-bottom-left-radius: 0;
-        //        color: $slate80;
-        //        font-size: 16px;
-        //        padding: 0;
-        //        position: absolute;
-        //        left: auto;
-        //        top: 2px;
-        //        right: 4px;
-        //    }
-        //
-        //    .select2-selection__clear {
-        //        margin-top: 0;
-        //    }
-        //}
-        .select2-search--inline .select2-search__field {
-            margin-top: 0;
-            margin-left: 5px;
-            padding: 4px 0 0 0;
-            max-width: 100%;
-            resize: none;
-            height: 30px;
-            vertical-align: middle;
-            font-family: sans-serif;
-            overflow: hidden;
-            word-break: keep-all;
-        }
-
-        &.select2-container--focus .select2-selection--multiple {
-            border: 0.5px solid $t4-orange-light;
-            outline: 0;
-        }
-    }
-
-    .select2-container--default .select2-selection--single .select2-selection__arrow {
-        height: 48px;
-    }*/
 }
 
 .tf-hotel-template-4 * {
   box-sizing: border-box;
+}
+
+.tf-hotel-template-4 ins {
+  background-color: transparent;
 }
 
 .tf-hotel-template-4 .tf-archive-search-form {
@@ -18361,6 +18301,7 @@ html {
   background-image: url(../images/hotel-form-bg.png);
   background-repeat: no-repeat;
   background-position: center center;
+  border-bottom: 0.5px solid #F5E9E0;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -18665,13 +18606,13 @@ html {
   display: -webkit-flex;
   display: flex;
   background: #FEF9F6;
+  position: relative;
 }
 
 .tf-hotel-template-4 .tf-archive-details .tf-details-left {
   width: 787px;
   padding: 24px 16px 24px 32px;
   gap: 24px;
-  border-top: 0.5px solid #F5E9E0;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -18691,7 +18632,7 @@ html {
 }
 
 .tf-hotel-template-4 .tf-archive-details .tf-details-right .tf-hotel-archive-map-wrap {
-  height: 890px;
+  height: 885px;
   width: 100%;
 }
 
@@ -18711,18 +18652,9 @@ html {
   overflow: visible !important;
 }
 
-.tf-hotel-template-4 .tf-archive-details .tf-details-right .gm-style .gm-ui-hover-effect {
-  opacity: 1;
-  background: #fff !important;
-  border-radius: 100%;
-  height: 24px !important;
-  width: 24px !important;
-  text-align: center !important;
-  padding: 0 !important;
-}
-
-.tf-hotel-template-4 .tf-archive-details .tf-details-right .gm-style .gm-ui-hover-effect > span {
-  margin: 0 0 0 5px !important;
+.tf-hotel-template-4 .tf-archive-details .tf-details-right .gm-style .gm-style-iw-chr,
+.tf-hotel-template-4 .tf-archive-details .tf-details-right .gm-style .gm-style-iw-ch {
+  display: none !important;
 }
 
 .tf-hotel-template-4 .tf-archive-details .tf-details-right .tf-map-item .tf-map-item-thumb {
@@ -18811,7 +18743,8 @@ html {
 
 .tf-hotel-template-4 .tf-archive-details .tf-details-right .tf-map-item .tf-map-item-content .tf-reviews .tf-avarage-review {
   line-height: 20px;
-  color: #6E655E;
+  color: #060D1C;
+  font-weight: 400;
 }
 
 .tf-hotel-template-4 .tf-archive-details .tf-details-right .tf_map_price .tf_price_inner {
@@ -18974,8 +18907,9 @@ html {
 }
 
 .tf-hotel-template-4 .tf-archive-details .tf-archive-hotel .tf-archive-hotel-thumb img {
-  height: 100%;
   width: 100%;
+  height: 100%;
+  min-height: 172px;
   object-fit: cover;
   border-radius: 4px;
 }
@@ -19026,6 +18960,8 @@ html {
   display: flex;
   gap: 8px;
   color: #6E655E;
+  font-size: 16px;
+  line-height: 20px;
 }
 
 .tf-hotel-template-4 .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title {
@@ -19181,6 +19117,31 @@ html {
   align-items: center;
 }
 
+.tf-hotel-template-4 .tf-archive-details #tf_ajax_searchresult_loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+  display: none;
+}
+
+.tf-hotel-template-4 .tf-archive-details #tf_ajax_searchresult_loader #tf-searchresult-loader-img {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.tf-hotel-template-4 .tf-archive-details #tf_ajax_searchresult_loader #tf-searchresult-loader-img img {
+  width: 120px;
+}
+
 .tf-hotel-template-4 .tf-archive-filter label input:checked ~ .checkmark {
   background-color: #FF6B00 !important;
   border-color: #FF6B00 !important;
@@ -19189,12 +19150,12 @@ html {
 .tf-hotel-template-4 .tf-archive-filter .tf-archive-filter-sidebar {
   position: fixed;
   top: 0;
-  left: -450px;
-  width: 448px;
+  left: -320px;
+  width: 300px;
   height: 100vh;
   background-color: #fff;
   box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.1);
-  padding: 32px 24px;
+  padding: 16px;
   z-index: 9999;
   -webkit-transition: all 0.25s ease-in-out;
   -moz-transition: all 0.25s ease-in-out;
@@ -19214,14 +19175,16 @@ html {
   display: flex;
   -webkit-justify-content: space-between;
   justify-content: space-between;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
 .tf-hotel-template-4 .tf-archive-filter .tf-filter-title .tf-section-title {
   margin: 0;
   padding: 0;
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 500;
+  color: #060D1C;
+  line-height: 24px;
 }
 
 .tf-hotel-template-4 .tf-archive-filter .tf-filter-title button {
@@ -19229,8 +19192,9 @@ html {
   padding: 0;
   border: none;
   color: #FF6B00;
+  font-size: 16px;
   font-weight: 700;
-  line-height: 175%;
+  line-height: 28px;
   background-color: transparent;
   letter-spacing: 0.15px;
   cursor: pointer;
@@ -19298,6 +19262,7 @@ html {
 .tf-hotel-template-4 .tf-archive-filter #tf__booking_sidebar {
   max-height: calc(100vh - 100px);
   overflow-y: auto;
+  overflow-x: hidden;
   scrollbar-width: thin;
 }
 
@@ -19306,13 +19271,13 @@ html {
 }
 
 .tf-hotel-template-4 .tf-archive-filter #tf__booking_sidebar::-webkit-scrollbar-thumb {
-  background-color: #6E655E;
+  background-color: red;
   border-radius: 32px;
 }
 
 .tf-hotel-template-4 .tf-archive-filter #tf__booking_sidebar::-webkit-scrollbar-track {
   border-radius: 32px;
-  background: rgba(6, 13, 28, 0.2);
+  background: greenyellow;
 }
 
 .tf-hotel-template-4 .tf-archive-filter #tf__booking_sidebar .widget {
@@ -19466,6 +19431,10 @@ html {
 .tf-hotel-template-4 .tf_posts_navigation.tf_posts_page_navigation .page-numbers.current {
   background: #0E3DD8 !important;
   color: #fff !important;
+}
+
+.admin-bar .tf-hotel-template-4 .tf-archive-filter .tf-archive-filter-sidebar {
+  top: 32px;
 }
 
 .tf-hotel-template-4.tf-hotel-single {

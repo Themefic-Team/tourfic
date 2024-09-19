@@ -15,6 +15,10 @@ $t4-main-color: #060D1C;
         box-sizing: border-box;
     }
 
+    ins{
+        background-color: transparent;
+    }
+
     /* Search form */
     .tf-archive-search-form {
         padding: 64px 0;
@@ -22,6 +26,7 @@ $t4-main-color: #060D1C;
         background-image: url(../images/hotel-form-bg.png);
         background-repeat: no-repeat;
         background-position: center center;
+        border-bottom: 0.5px solid $t4-orange-200;
 
         @media #{$max1024} {
             padding: 16px 0;
@@ -265,12 +270,12 @@ $t4-main-color: #060D1C;
     .tf-archive-details {
         @include flexbox();
         background: $t4-orange-background;
+        position: relative;
 
         .tf-details-left {
             width: 787px;
             padding: 24px 16px 24px 32px;
             gap: 24px;
-            border-top: 0.5px solid $t4-orange-200;
 
             @media #{$max1024} {
                 width: 620px;
@@ -285,7 +290,7 @@ $t4-main-color: #060D1C;
             }
 
             .tf-hotel-archive-map-wrap {
-                height: 890px;
+                height: 885px;
                 width: 100%;
             }
 
@@ -305,19 +310,9 @@ $t4-main-color: #060D1C;
                 .gm-style-iw-d {
                     overflow: visible !important;
                 }
-
-                .gm-ui-hover-effect {
-                    opacity: 1;
-                    background: #fff !important;
-                    border-radius: 100%;
-                    height: 24px !important;
-                    width: 24px !important;
-                    text-align: center !important;
-                    padding: 0 !important;
-
-                    & > span {
-                        margin: 0 0 0 5px !important;
-                    }
+                .gm-style-iw-chr,
+                .gm-style-iw-ch{
+                    display: none !important;
                 }
             }
 
@@ -394,7 +389,8 @@ $t4-main-color: #060D1C;
 
                         .tf-avarage-review {
                             line-height: 20px;
-                            color: $t4-paragraph;
+                            color: $t4-main-color;
+                            font-weight: 400;
                         }
                     }
                 }
@@ -531,8 +527,9 @@ $t4-main-color: #060D1C;
                 position: relative;
 
                 img {
-                    height: 100%;
                     width: 100%;
+                    height: 100%;
+                    min-height: 172px;
                     object-fit: cover;
                     border-radius: 4px;
                 }
@@ -567,6 +564,8 @@ $t4-main-color: #060D1C;
                         @include flexbox();
                         gap: 8px;
                         color: $t4-paragraph;
+                        font-size: 16px;
+                        line-height: 20px;
                     }
 
                     .tf-section-title {
@@ -690,6 +689,26 @@ $t4-main-color: #060D1C;
                 }
             }
         }
+
+        #tf_ajax_searchresult_loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 999;
+            display: none;
+
+            #tf-searchresult-loader-img {
+                @include flexbox();
+                @include justify-content(center);
+                margin-top: 100px;
+
+                img {
+                    width: 120px;
+                }
+            }
+        }
     }
 
     .tf-archive-filter {
@@ -703,12 +722,12 @@ $t4-main-color: #060D1C;
         .tf-archive-filter-sidebar {
             position: fixed;
             top: 0;
-            left: -450px;
-            width: 448px;
+            left: -320px;
+            width: 300px;
             height: 100vh;
             background-color: #fff;
             box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
-            padding: 32px 24px;
+            padding: 16px;
             z-index: 9999;
             @include transition();
 
@@ -720,13 +739,15 @@ $t4-main-color: #060D1C;
         .tf-filter-title {
             @include flexbox();
             @include justify-content(space-between);
-            margin-bottom: 32px;
+            margin-bottom: 24px;
 
             .tf-section-title {
                 margin: 0;
                 padding: 0;
-                font-size: 24px;
+                font-size: 16px;
                 font-weight: 500;
+                color: $t4-main-color;
+                line-height: 24px;
             }
 
             button {
@@ -734,8 +755,9 @@ $t4-main-color: #060D1C;
                 padding: 0;
                 border: none;
                 color: $t4-primary;
+                font-size: 16px;
                 font-weight: 700;
-                line-height: 175%;
+                line-height: 28px;
                 background-color: transparent;
                 letter-spacing: 0.15px;
                 cursor: pointer;
@@ -809,6 +831,7 @@ $t4-main-color: #060D1C;
         #tf__booking_sidebar {
             max-height: calc(100vh - 100px);
             overflow-y: auto;
+            overflow-x: hidden;
             scrollbar-width: thin;
 
             &::-webkit-scrollbar {
@@ -816,13 +839,13 @@ $t4-main-color: #060D1C;
             }
 
             &::-webkit-scrollbar-thumb {
-                background-color: $t4-paragraph;
+                background-color: red;
                 border-radius: 32px;
             }
 
             &::-webkit-scrollbar-track {
                 border-radius: 32px;
-                background: rgba(6, 13, 28, 0.20);
+                background: greenyellow;
             }
 
             .widget {
@@ -971,69 +994,8 @@ $t4-main-color: #060D1C;
             color: #fff !important;
         }
     }
+}
 
-    /*.select2-container {
-        width: 100% !important;
-
-        .select2-selection {
-            width: 100%;
-            border: 0.5px solid $t4-orange-light;
-            background: #fff;
-            box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
-            border-radius: 4px;
-            color: $t4-paragraph;
-        }
-
-        //
-        //    .select2-selection__choice {
-        //        background-color: $slate10;
-        //        border: none;
-        //        margin-left: 4px;
-        //        margin-top: 0;
-        //        padding: 4px 20px 4px 4px !important;
-        //        color: $slate80;
-        //
-        //        &:first-child{
-        //            margin-left: 0;
-        //        }
-        //    }
-        //    .select2-selection__choice__remove {
-        //        border-right: none;
-        //        border-top-left-radius: 0;
-        //        border-bottom-left-radius: 0;
-        //        color: $slate80;
-        //        font-size: 16px;
-        //        padding: 0;
-        //        position: absolute;
-        //        left: auto;
-        //        top: 2px;
-        //        right: 4px;
-        //    }
-        //
-        //    .select2-selection__clear {
-        //        margin-top: 0;
-        //    }
-        //}
-        .select2-search--inline .select2-search__field {
-            margin-top: 0;
-            margin-left: 5px;
-            padding: 4px 0 0 0;
-            max-width: 100%;
-            resize: none;
-            height: 30px;
-            vertical-align: middle;
-            font-family: sans-serif;
-            overflow: hidden;
-            word-break: keep-all;
-        }
-
-        &.select2-container--focus .select2-selection--multiple {
-            border: 0.5px solid $t4-orange-light;
-            outline: 0;
-        }
-    }
-
-    .select2-container--default .select2-selection--single .select2-selection__arrow {
-        height: 48px;
-    }*/
+.admin-bar .tf-hotel-template-4 .tf-archive-filter .tf-archive-filter-sidebar{
+    top: 32px;
 }
