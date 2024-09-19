@@ -62,6 +62,11 @@ function tf_car_booking_callback() {
 	$response      = array();
 	$tf_cars_data = array();
 
+	// Deposit
+	$car_allow_deposit = ! empty( $meta['allow_deposit'] ) ? $meta['allow_deposit'] : '';
+	$car_deposit_type = ! empty( $meta['deposit_type'] ) ? $meta['deposit_type'] : 'none';
+	$car_deposit_amount = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : 0;
+
 	$car_inventory = Availability::tf_car_inventory($post_id, $meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
 	// Check Inventory
 	if ( ! $car_inventory ) {
@@ -95,6 +100,20 @@ function tf_car_booking_callback() {
 		$tf_cars_data['tf_car_data']['tf_pickup_time']     = $tf_pickup_time;
 		$tf_cars_data['tf_car_data']['tf_dropoff_time']    = $tf_dropoff_time;
 		$tf_cars_data['tf_car_data']['price_total']    	   = $total_prices;
+
+		# Deposit information
+		if ( !empty($car_allow_deposit) && 'none'!=$car_deposit_type ) {
+			if( !empty($car_deposit_amount) ){
+				if ( 'percent'==$car_deposit_type ) {
+					$deposit_amount = ($tf_cars_data['tf_car_data']['price_total'] * $car_deposit_amount)/100;
+				}
+				if ( 'fixed'==$car_deposit_type ) {
+					$deposit_amount = $car_deposit_amount;
+				}
+				$tf_cars_data['tf_car_data']['due']   = $tf_cars_data['tf_car_data']['price_total'] - $deposit_amount;
+				$tf_cars_data['tf_car_data']['price_total'] = $deposit_amount;
+			}
+		}
 		
 		if( !empty($car_booking_by) && '3'==$car_booking_by ){
 
@@ -308,6 +327,12 @@ function car_display_cart_item_custom_meta_data( $item_data, $cart_item ) {
 			'value' => $cart_item['tf_car_data']['protection'],
 		);
 	}
+	if ( isset( $cart_item['tf_car_data']['due'] ) ) {
+		$item_data[] = array(
+			'key'   => esc_html__( 'Due', 'tourfic' ),
+			'value' => wc_price($cart_item['tf_car_data']['due']),
+		);
+	}
 
 	return $item_data;
 
@@ -333,6 +358,7 @@ function tf_car_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	$tf_dropoff_time = !empty($values['tf_car_data']['tf_dropoff_time']) ? $values['tf_car_data']['tf_dropoff_time'] : '';
 	$extras = !empty($values['tf_car_data']['extras']) ? $values['tf_car_data']['extras'] : '';
 	$protection = !empty($values['tf_car_data']['protection']) ? $values['tf_car_data']['protection'] : '';
+	$due = !empty($values['tf_car_data']['due']) ? wc_price($values['tf_car_data']['due']) : '';
 	/**
 	 * Show data in order meta & email
 	 *
@@ -374,6 +400,10 @@ function tf_car_custom_order_data( $item, $cart_item_key, $values, $order ) {
 
 	if ( $protection ) {
 		$item->update_meta_data( 'Protection', $protection );
+	}
+
+	if ( $due ) {
+		$item->update_meta_data( 'Due', $due );
 	}
 
 }
