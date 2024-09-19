@@ -789,6 +789,33 @@
             }
         });
 
+        // Booking Bar Show
+        $(window).scroll(function() {
+            // Check the position of the target div
+            var targetOffset = $('.tf-date-select-box').offset().top;
+            var targetHeight = $('.tf-date-select-box').outerHeight(); // Get the full height of the div including padding
+            var targetBottom = targetOffset + targetHeight;
+
+            var scrollPosition = $(window).scrollTop();
+    
+            // If the user has scrolled past the target div, show the other div
+            if (scrollPosition > targetBottom) {
+                $('.tf-single-booking-bar').fadeIn(); // You can change this to show() or add animations
+            } else {
+                $('.tf-single-booking-bar').fadeOut();
+            }
+        });
+
+        // Back to Booking Form
+        $(document).on('click', '.tf-back-to-booking', function (e) {
+            e.preventDefault(); // Prevent any default action (optional if button is a link)
+            $('.tf-single-booking-bar').fadeOut();
+            // Scroll to the .tf-date-select-box div
+            $('html, body').animate({
+                scrollTop: $('.tf-date-select-box').offset().top
+            }); // 800 is the duration of the scroll animation in milliseconds (adjust as needed)
+        });        
+
     });
 
 })(jQuery, window);

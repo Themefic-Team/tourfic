@@ -1,3 +1,6 @@
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass/app/css/free/tourfic.scss ***!
+  \*********************************************************************************************************************************************************************************/
 @charset "UTF-8";
 /*
 Button
@@ -16387,8 +16390,24 @@ html {
   position: sticky;
   left: 0;
   top: 0;
-  z-index: 99;
-  display: none;
+  z-index: 9999;
+}
+@media only screen and (max-width: 991.98px) {
+  .tf-single-car-section .tf-single-booking-bar {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+@media only screen and (max-width: 991.98px) {
+  .tf-single-car-section .tf-single-booking-bar .tf-top-booking-bar {
+    gap: 16px;
+  }
+}
+@media only screen and (max-width: 991.98px) {
+  .tf-single-car-section .tf-single-booking-bar .tf-top-bar-booking {
+    justify-content: space-between;
+    width: 100%;
+  }
 }
 .tf-single-car-section .tf-single-booking-bar .tf-top-bar-booking .tf-price-header h2 {
   color: #27333F;
@@ -16887,7 +16906,7 @@ html {
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-faq-section .tf-faq-col .tf-faq-head {
   border-radius: 8px;
-  background: #FFF;
+  background: #F8FAFC;
   padding: 8px 16px;
   cursor: pointer;
 }
@@ -17611,7 +17630,7 @@ html {
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar {
   width: 358px;
   border-radius: 16px;
-  background: #E6F2FE;
+  background: #F5FAFF;
   padding: 32px;
 }
 @media only screen and (max-width: 1024px) {
@@ -17831,7 +17850,7 @@ html {
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result .tf-single-car-view {
   border-radius: 16px;
-  background: #FFF;
+  background: #F8FAFC;
   width: calc(50% - 16px);
 }
 @media only screen and (max-width: 991.98px) {

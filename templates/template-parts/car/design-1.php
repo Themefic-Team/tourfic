@@ -61,7 +61,7 @@ $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_dat
                         <?php echo $total_prices['sale_price'] ? wc_price($total_prices['sale_price']) : '' ?></h2>
                         <p><?php echo Pricing::is_taxable($meta); ?></p>
                     </div>
-                    <button class="tf-flex tf-flex-align-center tf-flex-justify-center tf-flex-gap-8">
+                    <button class="tf-flex tf-flex-align-center tf-flex-justify-center tf-flex-gap-8 tf-back-to-booking">
                         <?php esc_html_e( apply_filters("tf_car_booking_form_submit_button_text", 'Continue' ), 'tourfic' ); ?>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

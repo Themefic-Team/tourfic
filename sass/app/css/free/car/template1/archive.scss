@@ -261,7 +261,7 @@
             .tf-car-archive-sidebar{
                 width: 358px;
                 border-radius: 16px;
-                background: #E6F2FE;
+                background: #F5FAFF;
                 padding: 32px;
                 @media #{$max1024}{
                     width: 280px;
@@ -486,7 +486,7 @@
                     flex-wrap: wrap;
                     .tf-single-car-view{
                         border-radius: 16px;
-                        background: #FFF;
+                        background: #F8FAFC;
                         width: calc(50% - 16px);
                         @media #{$max991}{
                             width: 100%;

@@ -8,9 +8,22 @@
         position: sticky;
         left: 0;
         top: 0;
-        z-index: 99;
-        display: none;
+        z-index: 9999;
+        // display: none;
+        @media #{$max991}{
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+        .tf-top-booking-bar{
+            @media #{$max991}{
+                gap: 16px;
+            }
+        }
         .tf-top-bar-booking{
+            @media #{$max991}{
+                justify-content: space-between;
+                width: 100%;
+            }
             .tf-price-header{
                 h2{
                     color: #27333F;
@@ -544,7 +557,7 @@
                     }
                     .tf-faq-head{
                         border-radius: 8px;
-                        background: #FFF;
+                        background: #F8FAFC;
                         padding: 8px 16px;
                         cursor: pointer;
                         span{
