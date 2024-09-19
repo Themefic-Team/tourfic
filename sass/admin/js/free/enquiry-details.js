@@ -88,6 +88,64 @@
             });
         });
 
+        $("#tf-single-enquiry-reply-form").on('submit', function(e) {
+            e.preventDefault();
+
+            let $this = $(this);
+            let reply_mail = $this.find(".tf-enquiry-reply-email").val();
+            let reply_message = $this.find(".tf-enquiry-reply-textarea").val();
+            let userName = $this.find(".tf-enquiry-reply-name").val();
+            let subject = $this.find(".tf-enquiry-reply-subject").val();
+            let post_id = $this.find(".tf-enquiry-reply-post-id").val();
+            let enquiry_id = $this.find(".tf-enquiry-reply-id").val();
+
+
+            $.ajax({
+                url: tf_admin_params.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'tf_enquiry_reply_email',
+                    reply_mail: reply_mail,
+                    reply_message: reply_message,
+                    user_name: userName,
+                    subject: subject,
+                    post_id: post_id,
+                    enquiry_id: enquiry_id,
+                    _ajax_nonce: tf_admin_params.tf_nonce
+                },
+                beforeSend: function() {
+                    $("#tf-enquiry-status-loader").addClass("show");
+                },
+                success: function(response) {
+                    $("#tf-enquiry-status-loader").removeClass("show");
+
+                    let data = JSON.parse(response);
+                    
+                    if(data.status == "success") {
+                        notyf.success(data.msg);
+                    } else if (data.status == "error") {
+                        notyf.error(data.msg);
+                    }
+                },
+                error: function(data) {
+                    console.log(data);
+                },
+            });
+        })
+
+        $(document).on("click", ".tf-single-enquiry-copy-btn", function(e) {
+            let copy_text = $(".tf-single-enquiry-details-value").data("enquiry-uname");
+
+            let $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val(copy_text).select();
+            document.execCommand("copy");
+            $temp.remove();
+            
+            notyf.success("Copied to clipboard");
+
+        });
+
     });
 
 })(jQuery);

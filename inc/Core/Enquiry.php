@@ -4,6 +4,7 @@ namespace Tourfic\Core;
 
 defined( 'ABSPATH' ) || exit;
 
+use PHP_CodeSniffer\Reports\Json;
 use Tourfic\Classes\Helper;
 
 abstract class Enquiry {
@@ -15,6 +16,7 @@ abstract class Enquiry {
 		add_action( 'wp_ajax_nopriv_tf_ask_question', array($this, 'tourfic_ask_question_ajax') );
 		add_action( 'wp_ajax_tf_enquiry_bulk_action', array($this, 'tf_enquiry_bulk_action_callback') );
 		add_action( 'wp_ajax_tf_enquiry_filter_post', array($this, 'tf_enquiry_filter_post_callback') );
+		add_action( 'wp_ajax_tf_enquiry_reply_email', array($this, 'tf_enquiry_reply_email_callback') );
 	}
 
 	abstract public function add_submenu();
@@ -263,15 +265,25 @@ abstract class Enquiry {
 	}
 
 	public function single_enquiry_details($data) {
+
+		$server_data = !empty( $data["server_data"] ) ? json_decode($data["server_data"], true) : array();
+
+		list($date, $time) = explode(" ", $data["created_at"]);
+		$formateed_date = date( "M d, Y", strtotime($date));
+		$formateed_time = date( "h:i:s A", strtotime($time));
+
 		?>
 		<div class="wrap tf_booking_details_wrap tf-enquiry-details-wrap" style="margin-right: 20px;">
+		<div id="tf-enquiry-status-loader">
+			<img src="<?php echo esc_url(TF_ASSETS_URL); ?>app/images/loader.gif" alt="Loader">
+		</div>
 			<!-- Header Wrap - Start -->
 			<div class="tf_booking_wrap_header">
 				<div class="tf-enquiry-single-header-details">
 					<div class="tf-single-enquiry-header-logo">
 						<img src="<?php echo esc_url( esc_url(TF_ASSETS_APP_URL.'images/tourfic-logo-icon-blue.png') ); ?>" alt="<?php esc_html_e( get_the_title($data["post_id"])) ?>">
 					</div>
-					<h1> <?php esc_html_e( get_the_title($data["post_id"])) ?></h1>
+					<h1> <?php esc_html_e( get_the_title($data["post_id"])) . esc_html_e(" / ID #") . esc_html_e($data["id"]) ?></h1>
 				</div>
 			</div>
 			<!-- Header Wrap - End -->
@@ -282,30 +294,147 @@ abstract class Enquiry {
 			</div>
 			<!-- Back Button - End -->
 			<!-- Enquiry Details - Start -->
-			 <div class="tf-enquiry-single-details-wrapper">
-				<div class="tf-enquiry-details">
-					<div class="tf-enquiry-details-single-heading">
-						<h2><?php esc_html_e('Details', 'tourfic'); ?></h2>
+			<div class="tf-enquiry-single-details-wrapper"> <!-- Enquiry Details Main Wrapper - Start -->
+				<div class="tf-single-enquiry-left"> <!-- Enquiry Details Left - Start -->
+					<div class="tf-enquiry-details"> <!-- Enquiry mail Details Wrapper - Start -->
+						<div class="tf-enquiry-details-single-heading">
+							<h2><?php esc_html_e('Details', 'tourfic'); ?></h2>
+						</div>
+						<div class="tf-single-enquiry-details-content">
+							<div class="tf-single-enquiry-details-name">
+								<span class="tf-single-enquiry-details-label"> <?php esc_html_e("Name", 'tourfic') ?></span>
+								<span class="tf-single-enquiry-details-value" data-enquiry-uname="<?php echo esc_html($data["uname"]); ?>"> <?php echo esc_html($data["uname"]); ?><i class="ri-file-copy-line tf-single-enquiry-copy-btn"></i></span>
+							</div>
+							<div class="tf-single-enquiry-details-email">
+								<span class="tf-single-enquiry-details-label"> <?php esc_html_e("Email", 'tourfic') ?></span>
+								<span class="tf-single-enquiry-details-value"> <?php echo esc_html($data["uemail"]); ?><i class="ri-file-copy-line"></i></span>
+							</div>
+							<div class="tf-single-enquiry-details-message">
+								<span class="tf-single-enquiry-details-label"> <?php esc_html_e("Message", 'tourfic') ?></span>
+								<span class="tf-single-enquiry-details-value"> <?php echo esc_html($data["udescription"]); ?></span>
+							</div>
+						</div>
+					</div> <!-- Enquiry mail Details Wrapper - End -->
+					<div class="tf-single-enquiry-reply-mail-button">
+						<span> <?php esc_html_e( "Reply to Email", 'tourfic') ?> </span>
+						<i class="ri-mail-line"></i>
 					</div>
-					<div class="tf-single-enquiry-details-content">
-						<div class="tf-single-enquiry-details-name">
-							<span class="tf-single-enquiry-details-label"> <?php esc_html_e("Name", 'tourfic') ?></span>
-							<span class="tf-single-enquiry-details-value"> <?php echo esc_html($data["uname"]); ?><i class="ri-file-copy-line"></i></span>
-							<input type="hidden" class="tf-enquiry-copy-text" value="<?php echo esc_html($data["uname"]); ?>">
+					<div class="tf-enquiry-details tf-single-enquiry-reply-wrapper"> <!-- Enquiry mail Reply Wrapper - Start -->
+						<div class="tf-enquiry-details-single-heading">
+							<h2><?php esc_html_e('To:', 'tourfic') ; ?> <span class="tf-single-enquiry-reply-mail"> <?php esc_html_e( $data["uemail"]); ?> </span></h2>
 						</div>
-						<div class="tf-single-enquiry-details-email">
-							<span class="tf-single-enquiry-details-label"> <?php esc_html_e("Email", 'tourfic') ?></span>
-							<span class="tf-single-enquiry-details-value"> <?php echo esc_html($data["uemail"]); ?><i class="ri-file-copy-line"></i></span>
-							<input type="hidden" class="tf-enquiry-copy-email" value="<?php echo esc_html($data["uemail"]); ?>">
+						<div class="tf-single-enquiry-details-content">
+							<form id="tf-single-enquiry-reply-form" method="post" action>
+								<textarea class="tf-enquiry-reply-textarea" placeholder="<?php esc_html_e('Write a message...', 'tourfic') ?>"></textarea>
+								<input type="hidden" class="tf-enquiry-reply-email" value="<?php echo esc_html($data["uemail"]); ?>">
+								<input type="hidden" class="tf-enquiry-reply-name" value="<?php echo esc_html($data["uname"]); ?>">
+								<input type="hidden" class="tf-enquiry-reply-id" value="<?php echo esc_html($data["id"]); ?>">
+								<input type="hidden" class="tf-enquiry-reply-post-id" value="<?php echo esc_html($data["post_id"]); ?>">
+								<button class="tf-enquiry-reply-button" type="submit"> 
+									<?php esc_html_e('Send', 'tourfic') ?>
+									<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<g clip-path="url(#clip0_2455_191)">
+											<path d="M18.3333 1.66667L12.5 18.3333L9.16662 10.8333L1.66663 7.5L18.3333 1.66667Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+											<path d="M18.3333 1.66667L9.16663 10.8333" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+										</g>
+										<defs>
+											<clipPath id="clip0_2455_191">
+												<rect width="20" height="20" fill="white"></rect>
+											</clipPath>
+										</defs>
+									</svg>
+								</button>
+							</form>
 						</div>
-						<div class="tf-single-enquiry-details-message">
-							<span class="tf-single-enquiry-details-label"> <?php esc_html_e("Message", 'tourfic') ?></span>
-							<span class="tf-single-enquiry-details-value"> <?php echo esc_html($data["udescription"]); ?></span>
+					</div> <!-- Enquiry mail Reply Wrapper - End -->
+				</div> <!-- Enquiry Details Left - End -->
+				<div class="tf-single-enquiry-right"> <!-- Enquiry Details Right - Start -->
+					<div class="tf-enquiry-single-log-details">
+						<div class="tf-singe-enquiry-log-details-heading">
+							<h2> <?php esc_html_e("Log Details #", 'tourfic') . esc_html_e($data["id"]); ?> </h2>
+							<div class="enquiry-details-status">
+								<svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
+									<circle cx="3" cy="3" r="3" fill="#27BE69"/>
+								</svg> 
+								<div class="enquiry-status-value"> <?php esc_html_e("Read", 'tourfic') ?> </div>
+							</div>
+						</div>
+						<div class="tf-single-enquiry-log-details-content">
+							<?php if( !empty( $server_data )): ?>
+								<div class="tf-single-enquiry-log-details-single"> <!-- Single Log Details IP - Start -->
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+										<g clip-path="url(#clip0_660_8611)">
+											<path d="M15 6.66669C15 10.4167 10 14.1667 10 14.1667C10 14.1667 5 10.4167 5 6.66669C5 5.3406 5.52678 4.06883 6.46447 3.13115C7.40215 2.19347 8.67392 1.66669 10 1.66669C11.3261 1.66669 12.5979 2.19347 13.5355 3.13115C14.4732 4.06883 15 5.3406 15 6.66669Z" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											<path d="M10 8.33333C10.9205 8.33333 11.6667 7.58714 11.6667 6.66667C11.6667 5.74619 10.9205 5 10 5C9.07957 5 8.33337 5.74619 8.33337 6.66667C8.33337 7.58714 9.07957 8.33333 10 8.33333Z" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											<path d="M7.36246 11.6667H4.16663C3.99707 11.6759 3.83438 11.7367 3.70035 11.841C3.56631 11.9452 3.46732 12.088 3.41663 12.25L1.74996 17.25C1.66663 17.3334 1.66663 17.4167 1.66663 17.5C1.66663 18 1.99996 18.3334 2.49996 18.3334H17.5C18 18.3334 18.3333 18 18.3333 17.5C18.3333 17.4167 18.3333 17.3334 18.25 17.25L16.5833 12.25C16.5326 12.088 16.4336 11.9452 16.2996 11.841C16.1655 11.7367 16.0028 11.6759 15.8333 11.6667H12.6375" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+										</g>
+										<defs>
+											<clipPath id="clip0_660_8611">
+												<rect width="20" height="20" fill="white"/>
+											</clipPath>
+										</defs>
+									</svg>
+									<span class="tf-single-enquiry-log-details-single-value"> <?php echo esc_html($server_data["ip_address"]); ?> </span>
+									<input type="hidden" class="tf-enquiry-copy-ip" value="<?php echo esc_attr($server_data["ip_address"]); ?>">
+									<span class="tf-single-enquiry-log-details-single-copy"> <i class="ri-file-copy-line"></i></span>
+								</div>
+							
+								<div class="tf-single-enquiry-log-details-single"> <!-- Single Log Details Browser - Start -->
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+										<g clip-path="url(#clip0_660_8615)">
+											<path d="M9.99996 18.3334C14.6023 18.3334 18.3333 14.6024 18.3333 10C18.3333 5.39765 14.6023 1.66669 9.99996 1.66669C5.39759 1.66669 1.66663 5.39765 1.66663 10C1.66663 14.6024 5.39759 18.3334 9.99996 18.3334Z" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											<path d="M9.99996 1.66669C7.86015 3.91348 6.66663 6.8973 6.66663 10C6.66663 13.1027 7.86015 16.0866 9.99996 18.3334C12.1398 16.0866 13.3333 13.1027 13.3333 10C13.3333 6.8973 12.1398 3.91348 9.99996 1.66669Z" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											<path d="M1.66663 10H18.3333" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+										</g>
+										<defs>
+											<clipPath id="clip0_660_8615">
+											<rect width="20" height="20" fill="white"/>
+											</clipPath>
+										</defs>
+									</svg>
+									<span class="tf-single-enquiry-log-details-single-value"> <?php echo esc_html__($server_data["browser_name"], 'tourfic'); ?> </span>
+								</div>
+								<div class="tf-single-enquiry-log-details-single"> <!-- Single Log Details Device - Start -->
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+										<path d="M15 1.66669H5.00004C4.07957 1.66669 3.33337 2.41288 3.33337 3.33335V16.6667C3.33337 17.5872 4.07957 18.3334 5.00004 18.3334H15C15.9205 18.3334 16.6667 17.5872 16.6667 16.6667V3.33335C16.6667 2.41288 15.9205 1.66669 15 1.66669Z" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+										<path d="M10 15H10.0083" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									</svg>
+									<span class="tf-single-enquiry-log-details-single-value"> <?php echo esc_html($server_data["os_name"]); ?> </span>
+								</div>
+							<? endif; ?>
+							<div class="tf-single-enquiry-log-details-single"> <!-- Single Log Details Date - Start -->
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<path d="M15.8333 3.33331H4.16667C3.24619 3.33331 2.5 4.07951 2.5 4.99998V16.6666C2.5 17.5871 3.24619 18.3333 4.16667 18.3333H15.8333C16.7538 18.3333 17.5 17.5871 17.5 16.6666V4.99998C17.5 4.07951 16.7538 3.33331 15.8333 3.33331Z" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M13.3334 1.66669V5.00002" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M6.66663 1.66669V5.00002" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M2.5 8.33331H17.5" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M6.66663 11.6667H6.67663" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M10 11.6667H10.01" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M13.3334 11.6667H13.3434" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M6.66663 15H6.67663" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M10 15H10.01" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M13.3334 15H13.3434" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+								<span class="tf-single-enquiry-log-details-single-value"> <?php echo esc_html($formateed_date); ?> </span>
+							</div>
+							<div class="tf-single-enquiry-log-details-single"> <!-- Single Log Details Time - Start -->
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<g clip-path="url(#clip0_660_8624)">
+										<path d="M9.99996 18.3334C14.6023 18.3334 18.3333 14.6024 18.3333 10C18.3333 5.39765 14.6023 1.66669 9.99996 1.66669C5.39759 1.66669 1.66663 5.39765 1.66663 10C1.66663 14.6024 5.39759 18.3334 9.99996 18.3334Z" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+										<path d="M10 5V10L13.3333 11.6667" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									</g>
+									<defs>
+										<clipPath id="clip0_660_8624">
+										<rect width="20" height="20" fill="white"/>
+										</clipPath>
+									</defs>
+								</svg>
+								<span class="tf-single-enquiry-log-details-single-value"> <?php echo esc_html( $formateed_time ); ?> </span>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="tf-enquiry-single-log-detaui"></div>
-			 </div>
+			 </div> <!-- Enquiry Details Main Wrapper - End -->
 		</div>
 
 		<?php
@@ -361,6 +490,7 @@ abstract class Enquiry {
 		$enquiry_id = !empty($_GET['enquiry_id']) ? $_GET['enquiry_id'] : '';
 
 		if( !empty($enquiry_id)) {
+			
 			$wpdb->query(
 				$wpdb->prepare("UPDATE {$wpdb->prefix}tf_enquiry_data SET enquiry_status=%s, WHERE id=%d", 'read', $enquiry_id)
 			);
@@ -469,6 +599,21 @@ abstract class Enquiry {
 		$post_id    = isset( $_POST['post_id'] ) ? intval( $_POST['post_id'] ) : null;
 		$post_title = get_the_title( $post_id );
 
+		// Server Details
+		$user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : '';
+		$browser_name = $this->tf_get_browser_name( $user_agent );
+		$os_name = php_uname( 's' );
+		$ip_address = isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '';
+
+		$server_details = array(
+			'browser_name' => $browser_name,
+			'os_name'      => $os_name,
+			'ip_address'   => $ip_address,
+			'time'		=> date_i18n( 'Y-m-d H:i:s', current_time( 'timestamp' ) )
+		);
+
+
+
 		//post author mail
 		$author_id   = get_post_field( 'post_author', $post_id );
 		$author_mail = get_the_author_meta( 'user_email', $author_id );
@@ -539,8 +684,8 @@ abstract class Enquiry {
 			$wpdb->query(
 				$wpdb->prepare(
 					"INSERT INTO {$wpdb->prefix}tf_enquiry_data
-			( post_id, post_type, uname, uemail, udescription, author_id, author_roles, enquiry_status, created_at )
-			VALUES ( %d, %s, %s, %s, %s, %d, %s, %s, %s )",
+			( post_id, post_type, uname, uemail, udescription, author_id, author_roles, enquiry_status, server_data, created_at )
+			VALUES ( %d, %s, %s, %s, %s, %d, %s, %s, %s, %s )",
 					array(
 						sanitize_key( $post_id ),
 						get_post_type( $post_id ),
@@ -550,6 +695,7 @@ abstract class Enquiry {
 						sanitize_key( $tf_post_author_id ),
 						$tf_user_roles[0],
 						'unread',
+						json_encode( $server_details ),
 						current_time('mysql')
 					)
 				)
@@ -626,6 +772,69 @@ abstract class Enquiry {
 
 		wp_reset_postdata();
 
+		wp_die();
+	}
+
+	function tf_get_browser_name( $user_agent ) {
+		if ( preg_match( '/MSIE/i', $user_agent ) && ! preg_match( '/Opera/i', $user_agent ) ) {
+			return 'Internet Explorer';
+		} elseif ( preg_match( '/Firefox/i', $user_agent ) ) {
+			return 'Firefox';
+		} elseif ( preg_match( '/Chrome/i', $user_agent ) ) {
+			return 'Chrome';
+		} elseif ( preg_match( '/Safari/i', $user_agent ) ) {
+			return 'Safari';
+		} elseif ( preg_match( '/Opera/i', $user_agent ) ) {
+			return 'Opera';
+		} elseif ( preg_match( '/Netscape/i', $user_agent ) ) {
+			return 'Netscape';
+		}
+		return 'Unknown';
+	}
+
+	function tf_enquiry_reply_email_callback() {
+
+		$response = array();
+
+		check_ajax_referer('updates', '_ajax_nonce');
+
+		$reply_mail = isset( $_POST['reply_mail'] ) ? sanitize_text_field( $_POST['reply_mail'] ) : '';
+		$reply_message = isset( $_POST['reply_message'] ) ? sanitize_textarea_field( $_POST['reply_message'] ) : '';
+		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
+		$enquiry_id = isset( $_POST['enquiry_id'] ) ? sanitize_text_field( $_POST['enquiry_id'] ) : '';
+		$reply_user = isset( $_POST['user_name'] ) ? sanitize_text_field( $_POST['user_name'] ) : '';
+
+		if( empty( $reply_message ) ) {
+			$response['status'] = 'error';
+			$response['msg']    = esc_html__( 'Reply Message is Required!', 'tourfic' );
+
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			$response['status'] = 'error';
+			$response['msg']    = esc_html__( 'You do not have permission to perform this action.', 'tourfic' );
+		}
+
+		if( !empty( $reply_mail ) ) {
+			$to = $reply_mail;
+			$from = "From: " . get_option( 'blogname' ) . " <" . get_option( 'admin_email' ) . ">\r\n";
+			$subject = esc_html__("Re: Response to Your Enquiry About ", 'tourfic') . esc_html( get_the_title( $post_id ) );
+
+			$send_mail = wp_mail( $to, $subject, $reply_message, $from );
+			$submit_time = date_i18n( 'Y-m-d H:i:s', current_time( 'timestamp' ) );
+
+			if ( $send_mail ) {
+				$response['status'] = 'success';
+				$response['msg']    = esc_html__( 'Email sent successfully!', 'tourfic' );
+			} else {
+				$response['status'] = 'error';
+				$response['msg']    = esc_html__( 'Error sending email. Check your server configurations', 'tourfic' );
+			}
+
+		}
+
+
+		echo wp_json_encode( $response );
 		wp_die();
 	}
 

@@ -1092,5 +1092,8 @@ class Migrator {
 		if ( ! isset( $data->enquiry_status ) ) {
 			$wpdb->query( "ALTER TABLE $enquiry_table ADD COLUMN `enquiry_status` VARCHAR(255) NOT NULL DEFAULT 'read' AFTER `author_roles`" );
 		}
+		if ( ! isset( $data->server_data ) ) {
+			$wpdb->query( "ALTER TABLE $enquiry_table ADD COLUMN `server_data` VARCHAR(255) NOT NULL DEFAULT '' AFTER `enquiry_status`" );
+		}
 	}
 }

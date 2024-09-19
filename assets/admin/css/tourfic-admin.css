@@ -367,7 +367,7 @@ Fontawesome
   transform: translateX(26px);
 }
 
-#tf-booking-status-loader {
+#tf-booking-status-loader, #tf-enquiry-status-loader {
   position: fixed;
   height: 100%;
   width: 100%;
@@ -381,11 +381,15 @@ Fontawesome
   visibility: hidden;
 }
 
-#tf-booking-status-loader img {
+#tf-booking-status-loader img, #tf-enquiry-status-loader img {
   width: 120px;
 }
 
-#tf-booking-status-loader.show {
+#tf-enquiry-status-loader {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+#tf-booking-status-loader.show, #tf-enquiry-status-loader.show {
   visibility: visible;
   opacity: 1;
 }
@@ -6436,14 +6440,25 @@ a.tf-import-btn, a.tf-export-btn {
   box-shadow: none;
 }
 
-.tf-enquiry-single-details-wrapper .tf-enquiry-details {
+.tf-enquiry-single-details-wrapper {
+  display: flex;
+  gap: 24px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 60%;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details {
   background-color: #fff;
   padding: 16px 24px 24px 24px;
-  width: 50%;
   border-radius: 8px;
 }
 
-.tf-enquiry-single-details-wrapper .tf-enquiry-details h2 {
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details h2 {
   font-family: inherit;
   font-size: 17px;
   font-style: normal;
@@ -6452,24 +6467,24 @@ a.tf-import-btn, a.tf-export-btn {
   margin: 0px;
 }
 
-.tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-enquiry-details-single-heading {
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-enquiry-details-single-heading {
   padding-bottom: 16px;
 }
 
-.tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content {
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content {
   display: flex;
   gap: 24px;
   padding-top: 24px;
   flex-direction: column;
 }
 
-.tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-name, .tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-email, .tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-message {
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-name, .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-email, .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-message {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-name .tf-single-enquiry-details-label, .tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-email .tf-single-enquiry-details-label, .tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-message .tf-single-enquiry-details-label {
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-name .tf-single-enquiry-details-label, .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-email .tf-single-enquiry-details-label, .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-message .tf-single-enquiry-details-label {
   color: #5D5676;
   font-family: inherit;
   font-size: 13px;
@@ -6478,7 +6493,7 @@ a.tf-import-btn, a.tf-export-btn {
   line-height: 1.5;
 }
 
-.tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-name .tf-single-enquiry-details-value, .tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-email .tf-single-enquiry-details-value, .tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-message .tf-single-enquiry-details-value {
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-name .tf-single-enquiry-details-value, .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-email .tf-single-enquiry-details-value, .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-message .tf-single-enquiry-details-value {
   font-family: inherit;
   font-size: 15px;
   font-style: normal;
@@ -6486,8 +6501,145 @@ a.tf-import-btn, a.tf-export-btn {
   line-height: 1.6;
 }
 
-.tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-name .tf-single-enquiry-details-value i, .tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-email .tf-single-enquiry-details-value i, .tf-enquiry-single-details-wrapper .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-message .tf-single-enquiry-details-value i {
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-name .tf-single-enquiry-details-value i, .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-email .tf-single-enquiry-details-value i, .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-message .tf-single-enquiry-details-value i {
   margin-left: 16px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-mail-button {
+  padding: 8px 20px;
+  background: #771AF9;
+  border-radius: 8px;
+  align-self: self-end;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-mail-button span {
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.6;
+  margin-right: 8px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-mail-button i {
+  font-size: 16px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-enquiry-details-single-heading .tf-single-enquiry-reply-mail {
+  color: #2C273F;
+  font-family: inherit;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left #tf-single-enquiry-reply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left #tf-single-enquiry-reply-form textarea {
+  height: 100px;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #E2DFED;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left #tf-single-enquiry-reply-form textarea::placeholder {
+  color: #77708F;
+  font-family: inherit;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left #tf-single-enquiry-reply-form button {
+  align-self: flex-end;
+  width: 120px;
+  padding: 8px 20px;
+  background: #771AF9;
+  color: #fff;
+  font-family: inherit;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-color: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-right {
+  width: 40%;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-right .tf-enquiry-single-log-details {
+  background-color: #fff;
+  padding: 16px 24px 24px 24px;
+  border-radius: 8px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-right .tf-enquiry-single-log-details .tf-singe-enquiry-log-details-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-right .tf-enquiry-single-log-details .tf-singe-enquiry-log-details-heading h2 {
+  font-family: inherit;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  margin: 0px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-right .tf-enquiry-single-log-details .tf-singe-enquiry-log-details-heading .enquiry-details-status {
+  padding: 4px 12px;
+  background-color: #D0F5E1;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #21A159;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-right .tf-enquiry-single-log-details .tf-single-enquiry-log-details-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-right .tf-enquiry-single-log-details .tf-single-enquiry-log-details-content .tf-single-enquiry-log-details-single {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--UI-800, #2C273F);
+  font-family: inherit;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-right .tf-enquiry-single-log-details .tf-single-enquiry-log-details-content .tf-single-enquiry-log-details-single i {
+  margin-left: 8px;
   cursor: pointer;
   font-size: 16px;
 }
