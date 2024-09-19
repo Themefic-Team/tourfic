@@ -130,7 +130,12 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 					foreach($badges as $key => $badge){ 
 					if(!empty($badge['title']) && $key < 4){
 					?>
-					<li><?php echo esc_html($badge['title']); ?></li>
+					<li>
+						<?php if(!empty($badge['badge_icon'])){ ?>
+						<i class="<?php echo esc_attr($badge['badge_icon']); ?>"></i>
+						<?php } ?>
+						<?php echo esc_html($badge['title']); ?>
+					</li>
 					<?php }}} ?>
 				</ul>
 			</div>

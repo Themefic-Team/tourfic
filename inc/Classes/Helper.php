@@ -475,6 +475,71 @@ class Helper {
 		return $template;
 	}
 
+    /**
+	 * Insert Category Data
+	 *
+	 * @author Jahid
+	 */
+	function tf_insert_category_data_callback() {
+		//Verify Nonce
+		check_ajax_referer( 'updates', '_nonce' );
+
+		$categoryName = sanitize_title( $_POST['categoryName'] );
+		$categoryTitle = sanitize_text_field( $_POST['categoryTitle'] );
+		$parentCategory = sanitize_key( $_POST['parentCategory'] );
+
+		$response = [];
+		if ( !empty($categoryName) && !empty($categoryTitle) ) {
+            // Insert the term
+            $term = wp_insert_term(
+                $categoryTitle,   // The term
+                $categoryName, // The taxonomy
+                array(
+                    'slug'   => sanitize_title($categoryTitle),
+					'parent' => !empty($parentCategory) ? intval($parentCategory) : ''
+                )
+            );
+			$insert_Date = array(
+				'id' => $term['term_id'],
+				'title' => get_term_field('name', $term['term_id'], $categoryName)
+			);
+
+			$response ['insert_category'] = $insert_Date;
+		}
+		echo wp_json_encode( $response );
+		wp_die();
+	}
+
+	/**
+	 * Delete Category Data
+	 *
+	 * @author Jahid
+	 */
+	function tf_delete_category_data_callback() {
+		//Verify Nonce
+		check_ajax_referer( 'updates', '_nonce' );
+
+		$categoryName = sanitize_title( $_POST['categoryName'] );
+		$term_id = intval($_POST['term_id']);
+
+		$response = [];
+
+		if (!empty($term_id)) {
+			$result = wp_delete_term($term_id, $categoryName); // Replace 'category' with your taxonomy if it's different
+
+			if (!is_wp_error($result)) {
+				$response['success'] = true;
+			} else {
+				$response['error'] = $result->get_error_message();
+			}
+		} else {
+			$response['error'] = 'Invalid term ID.';
+		}
+
+		echo wp_json_encode($response);
+		wp_die();
+	}
+
 	/*
      * Retrive Orders Data
      *
