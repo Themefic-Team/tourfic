@@ -431,25 +431,46 @@
             $this.addClass('tf-btn-loading');
 
             if(tf_params.location_car_search){
-                if ($.trim($('#tf_pickup_location').val()) == '' && $.trim($('#tf_dropoff_location').val()) == '') {
-                    if ($('#tf-required').length === 0) {
-                        if($('.tf-driver-location').length === 1){
-                            $('.tf-driver-location').append('<span id="tf-required" class="required"><b>Select Pickup & Dropoff Location</b></span>');
-                        }else{
-                            $("#tf_pickup_location").trigger("click");
+                let same_location = $('input[name="same_location"]:checked').val();
+                if('on'==same_location){
+                    if ($.trim($('#tf_pickup_location').val()) == '') {
+                        if ($('#tf-required').length === 0) {
+                            if($('.tf-driver-location').length === 1){
+                                $('.tf-driver-location').append('<span id="tf-required" class="required"><b>Select Pickup & Dropoff Location</b></span>');
+                            }else{
+                                $("#tf_pickup_location").trigger("click");
+                            }
+                        }
+                        $('.tf-filter-cars').removeClass('tf-btn-loading');
+                        return;
+                    } else {
+                        if ($('#tf-required').length === 1) {
+                            $('.tf-driver-location .required').remove();
                         }
                     }
-                    $('.tf-filter-cars').removeClass('tf-btn-loading');
-                    return;
-                } else {
-                    if ($('#tf-required').length === 1) {
-                        $('.tf-driver-location .required').remove();
+                }else{
+                    if ($.trim($('#tf_pickup_location').val()) == '' || $.trim($('#tf_dropoff_location').val()) == '') {
+                        if ($('#tf-required').length === 0) {
+                            if($('.tf-driver-location').length === 1){
+                                $('.tf-driver-location').append('<span id="tf-required" class="required"><b>Select Pickup & Dropoff Location</b></span>');
+                            }else{
+                                $("#tf_pickup_location").trigger("click");
+                            }
+                        }
+                        $('.tf-filter-cars').removeClass('tf-btn-loading');
+                        return;
+                    } else {
+                        if ($('#tf-required').length === 1) {
+                            $('.tf-driver-location .required').remove();
+                        }
                     }
                 }
+                
+                
             }
 
             if(tf_params.date_car_search){
-                if ($.trim($('.tf_pickup_date').val()) == '' && $.trim($('.tf_dropoff_date').val()) == '') {
+                if ($.trim($('.tf_pickup_date').val()) == '' || $.trim($('.tf_dropoff_date').val()) == '') {
                     if ($('#tf-required').length === 0) {
                         if($('.tf-driver-location').length === 1){
                             $('.tf-driver-location').append('<span id="tf-required" class="required"><b>Select Pickup & Dropoff Date</b></span>');
@@ -472,6 +493,20 @@
 
             makeFilter();
         });
+
+        /*
+        * Same Location Checkbox
+        * @author Jahid
+        */
+        $(document).on('click', '.tf-driver-location [name="same_location"]', function (e) {
+            // Check if the checkbox is checked
+            if ($(this).is(':checked')) {
+                $('.tf-pick-drop-location').addClass('active');
+            } else {
+                $('.tf-pick-drop-location').removeClass('active');
+            }
+        });
+        
 
         /*
         * Get term ids by field name

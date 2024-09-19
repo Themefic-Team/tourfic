@@ -116,13 +116,24 @@
                                 }
                             }
                         }
+                        &.tf-pick-drop-location.active{
+                            .tf-select-date{
+                                width: 100%;
+                                &:first-child{
+                                    border-right: 0px solid #DFE6ED;
+                                }
+                                &:last-child{
+                                    display: none;
+                                }
+                            }
+                        }
                         
                     }
                 }
                 .tf-driver-location-box{
                     padding: 8px;
                     .tf-driver-location{
-                        padding-left: 8px;
+                        padding-left: 16px;
                         ul{
                             margin: 0;
                             padding: 0;
