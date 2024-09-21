@@ -34,18 +34,18 @@ class TF_Promo_Notice {
     ];
     private $plugins_existes = ['ins', 'uacf7', 'beaf', 'ebef'];
 
-    public function __construct() {  
+    public function __construct() {   
         if(in_array(gmdate('F'), $this->months) && !function_exists('is_tf_pro') ){ 
  
             $tf_promo__schudle_start_from = !empty(get_option( 'tf_promo__schudle_start_from' )) ? get_option( 'tf_promo__schudle_start_from' ) : 0;
-
+       
             if($tf_promo__schudle_start_from == 0){
                 // delete option
-                delete_option('bafg_promo__schudle_option');
-
+                delete_option('tf_promo__schudle_option');
             }elseif($tf_promo__schudle_start_from  != 0 && $tf_promo__schudle_start_from > time()){
                 return;
-            }  
+            }   
+           
              
             add_filter('cron_schedules', array($this, 'tf_custom_cron_interval'));
         
@@ -164,7 +164,7 @@ class TF_Promo_Notice {
         $dashboard_banner = isset($this->tf_promo_option['dashboard_banner']) ? $this->tf_promo_option['dashboard_banner'] : '';
         $image_url = isset($dashboard_banner['banner_url']) ? esc_url($dashboard_banner['banner_url']) : '';
         $deal_link = isset($dashboard_banner['redirect_url']) ? esc_url($dashboard_banner['redirect_url']) : ''; 
-
+        print_r($dashboard_banner);
         $tf_dismiss_admin_notice = get_option( 'tf_dismiss_admin_notice' );
         $get_current_screen = get_current_screen();  
         if(($tf_dismiss_admin_notice == 1  || time() >  $tf_dismiss_admin_notice ) && $get_current_screen->base == 'dashboard'   ){ 
@@ -194,7 +194,7 @@ class TF_Promo_Notice {
                 <a href="<?php echo esc_attr( $deal_link ); ?>" style="display: block; line-height: 0;" target="_blank" >
                     <img  style="width: 100%;" src="<?php echo esc_attr($image_url) ?>" alt="">
                 </a> 
-                <?php if( isset($this->tf_promo_option['dasboard_dismiss']) && $this->tf_promo_option['dasboard_dismiss'] == true): ?>
+                <?php if( isset($dashboard_banner['dismiss_status']) && $dashboard_banner['dismiss_status'] == true): ?>
                 <button type="button" class="notice-dismiss tf_black_friday_notice_dismiss"><span class="screen-reader-text"><?php echo esc_html__('Dismiss this notice.', 'ultimate-addons-cf7' ) ?></span></button>
                 <?php  endif; ?>
             </div>
