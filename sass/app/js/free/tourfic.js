@@ -2045,6 +2045,7 @@
                 url: tf_params.ajax_url,
                 data: data,
                 success: function (response) {
+                    console.log('response', response)
                     $("#tour_room_details_qv").html(response);
 
                     $("#tour_room_details_loader").hide();
@@ -2189,13 +2190,13 @@
         });
 
         // Full Description Showing
-        $('.tf-template-3 span.tf-see-description').on('click', function () {
+        $('.tf-template-3 span.tf-see-description, .tf-hotel-template-4 span.tf-see-description').on('click', function () {
             $('.tf-short-description').slideUp();
             $('.tf-full-description').slideDown();
         });
 
         // See Less Description Showing
-        $('.tf-template-3 span.tf-see-less-description').on('click', function () {
+        $('.tf-template-3 span.tf-see-less-description, .tf-hotel-template-4 span.tf-see-less-description').on('click', function () {
             $('.tf-full-description').slideUp();
             $('.tf-short-description').slideDown();
         });
@@ -2344,9 +2345,44 @@
             }
         });
 
-        // $('.tf-archive-hotel-type').select2({
-        //     allowClear: true,
-        // });
+        /**
+         * Hotel single room gallery modal
+         */
+        $(document).on('click', '.tf-room-modal-btn', function (e) {
+            e.preventDefault();
+            $("#tour_room_details_loader").show();
+            var post_id = $(this).attr("data-hotel");
+            var uniqid_id = $(this).attr("data-uniqid");
+            var data = {
+                action: 'tf_tour_details_qv',
+                _nonce: tf_params.nonce,
+                post_id: post_id,
+                uniqid_id: uniqid_id
+            };
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: data,
+                success: function (response) {
+                    $(".tf-room-modal .tf-modal-body").html(response);
+                    $(".tf-room-modal").addClass("tf-modal-show");
+                    $('body').addClass('tf-modal-open');
+                    $("#tour_room_details_loader").hide();
+                }
+
+            });
+        });
+
+
+
+
+
+
+
+
+
+
 
         // GOOGLE MAP INITIALIZE
         var mapLocations = $('#map-datas').html();
@@ -2498,20 +2534,6 @@
                 makeFilter([sw.lat(), sw.lng(), ne.lat(), ne.lng()]);
 
             }, 500);
-        }
-
-        function getMapDistance(map) {
-            var bounds = map.getBounds();
-            var center = bounds.getCenter();
-            var ne = bounds.getNorthEast();
-            var r = 3963.0;
-            var lat1 = center.lat() / 57.2958;
-            var lon1 = center.lng() / 57.2958;
-            var lat2 = ne.lat() / 57.2958;
-            var lon2 = ne.lng() / 57.2958;
-            var dis = r * Math.acos(Math.sin(lat1) * Math.sin(lat2) +
-                Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1));
-            return dis;
         }
     });
 

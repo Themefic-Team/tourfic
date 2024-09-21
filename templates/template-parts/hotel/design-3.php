@@ -3,7 +3,7 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
 ?>
 
-<div class="tf-hotel-template-4 tf-hotel-single">
+<div class="tf-hotel-template-4 tf-template-global tf-hotel-single">
     <div class="tf-title-area tf-hotel-title">
         <div class="tf-container">
             <div class="tf-title-wrap">
@@ -17,10 +17,9 @@ use \Tourfic\App\TF_Review;
                 <div class="tf-title-right tf-wish-and-share">
 					<?php
 					// Wishlist
-					if ( Helper::tfopt( 'wl-bt-for' ) && in_array( '2', Helper::tfopt( 'wl-bt-for' ) ) ) {
+					if ( $disable_wishlist_sec != 1 ) {
 						if ( is_user_logged_in() ) {
-							if ( Helper::tfopt( 'wl-for' ) && in_array( 'li', Helper::tfopt( 'wl-for' ) ) ) {
-								?>
+							if ( Helper::tfopt( 'wl-for' ) && in_array( 'li', Helper::tfopt( 'wl-for' ) ) ) { ?>
                                 <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr( 'actives' ) : '' ?>">
                                     <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
                                        data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) {
@@ -29,8 +28,7 @@ use \Tourfic\App\TF_Review;
                                 </a>
 							<?php }
 						} else {
-							if ( Helper::tfopt( 'wl-for' ) && in_array( 'lo', Helper::tfopt( 'wl-for' ) ) ) {
-								?>
+							if ( Helper::tfopt( 'wl-for' ) && in_array( 'lo', Helper::tfopt( 'wl-for' ) ) ) { ?>
                                 <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr( 'actives' ) : '' ?>">
                                     <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
                                        data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) {
@@ -38,8 +36,10 @@ use \Tourfic\App\TF_Review;
 									} ?>></i>
                                 </a>
 							<?php }
-						}
-					} ?>
+						} ?>
+						<?php
+					}
+					?>
 
                     <!-- Share Section -->
 					<?php if ( ! $disable_share_opt == '1' ) { ?>
@@ -93,17 +93,19 @@ use \Tourfic\App\TF_Review;
     <div class="tf-hotel-hero-section">
         <div class="tf-container">
             <div class="tf-hotel-hero-wrapper">
-                <div class="tf-hotel-thumb">
+                <div class="tf-hotel-thumb <?php echo empty( $gallery_ids ) ? esc_attr('without-gallery') : '' ?>">
 					<?php
 					if ( has_post_thumbnail() ) {
 						the_post_thumbnail( 'tf_apartment_single_thumb' );
-					}
+					} else {
+						echo '<img src="'. esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg') .'" alt="hotel-thumb"/>';
+                    }
 					?>
                     <div class="featured-meta-gallery-videos">
                         <div class="featured-column tf-gallery-box">
 							<?php if ( ! empty( $gallery_ids ) ) { ?>
                                 <a id="featured-gallery" href="#" class="tf-tour-gallery">
-                                    <i class="fa-solid fa-camera-retro"></i><?php echo __( "Gallery", "tourfic" ); ?>
+                                    <i class="fa-solid fa-camera-retro"></i><?php echo esc_html__( "Gallery", "tourfic" ); ?>
                                 </a>
 							<?php } ?>
                         </div>
@@ -151,12 +153,12 @@ use \Tourfic\App\TF_Review;
                     <!-- menu section Start -->
                     <div class="tf-details-menu">
                         <ul>
-                            <li><a class="tf-hashlink" href="#tf-hotel-description"><?php _e( "Description", "tourfic" ); ?></a></li>
-                            <li><a href="#tf-hotel-rooms"><?php _e( "Rooms", "tourfic" ); ?></a></li>
-                            <li><a href="#tf-hotel-facilities"><?php _e( "Amenities", "tourfic" ); ?></a></li>
-                            <li><a href="#tf-hotel-faq"><?php _e( "FAQ", "tourfic" ); ?></a></li>
-                            <li><a href="#tf-hotel-reviews"><?php _e( "Reviews", "tourfic" ); ?></a></li>
-                            <li><a href="#tf-hotel-policies"><?php _e( "Policies", "tourfic" ); ?></a></li>
+                            <li><a class="tf-hashlink" href="#tf-hotel-description"><?php echo esc_html__( "Description", "tourfic" ); ?></a></li>
+                            <li><a href="#tf-hotel-rooms"><?php echo esc_html__( "Rooms", "tourfic" ); ?></a></li>
+                            <li><a href="#tf-hotel-facilities"><?php echo esc_html__( "Amenities", "tourfic" ); ?></a></li>
+                            <li><a href="#tf-hotel-faq"><?php echo esc_html__( "FAQ", "tourfic" ); ?></a></li>
+                            <li><a href="#tf-hotel-reviews"><?php echo esc_html__( "Reviews", "tourfic" ); ?></a></li>
+                            <li><a href="#tf-hotel-policies"><?php echo esc_html__( "Policies", "tourfic" ); ?></a></li>
                         </ul>
                     </div>
                     <!-- menu section End -->
@@ -367,36 +369,6 @@ use \Tourfic\App\TF_Review;
                 </div>
             </div>
             <!-- Hotel details End -->
-
-	        <?php
-	        if ( ! empty( $gallery_ids ) ) {
-		        ?>
-                <!-- Hotel PopUp Starts -->
-                <div class="tf-popup-wrapper tf-hotel-popup">
-                    <div class="tf-popup-inner">
-
-                        <div class="tf-popup-body">
-					        <?php
-					        if ( ! empty( $gallery_ids ) ) {
-						        foreach ( $gallery_ids as $key => $gallery_item_id ) {
-							        $image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
-							        ?>
-                                    <img src="<?php echo esc_url($image_url); ?>" alt="" class="tf-popup-image">
-						        <?php } } ?>
-                        </div>
-                        <div class="tf-popup-close">
-                            <i class="fa-solid fa-xmark"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- Hotel PopUp end -->
-	        <?php } ?>
-
-            <!-- Room PopUp Starts -->
-            <div class="tf-popup-wrapper tf-room-popup">
-
-            </div>
-            <!-- Room PopUp end -->
         </div>
     </div>
     <!--Content section end -->

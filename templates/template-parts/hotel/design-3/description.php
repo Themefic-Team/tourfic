@@ -1,10 +1,10 @@
 <div class="tf-hotel-desc-section tf-template-section">
-    <h3 class="tf-section-title"><?php _e( 'Description', 'tourfic' ); ?></h3>
+    <h3 class="tf-section-title"><?php echo esc_html__( 'Description', 'tourfic' ); ?></h3>
     <div class="tf-hotel-description">
         <div class="tf-short-description">
 			<?php
 			if ( strlen( get_the_content() ) > 300 ) {
-				echo strip_tags( tourfic_character_limit_callback( get_the_content(), 300 ) ) . '<span class="tf-see-description">See more</span>';
+				echo strip_tags( tourfic_character_limit_callback( get_the_content(), 300 ) ) . '<span class="tf-see-description">'. esc_html__('See more', 'tourfic') .'</span>';
 			} else {
 				the_content();
 			}
@@ -12,7 +12,7 @@
         </div>
         <div class="tf-full-description">
 			<?php
-			echo get_the_content() . '<span class="tf-see-less-description"> See less</span>';
+			echo wp_kses_post(get_the_content()) . '<span class="tf-see-less-description">'. esc_html__('See less', 'tourfic') .'</span>';
 			?>
         </div>
     </div>

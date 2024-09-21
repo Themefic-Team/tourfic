@@ -3342,6 +3342,220 @@ class Hotel {
 				endif;
 			endforeach;
 		}
+		if ( $tf_hotel_selected_template == "design-3" ) {
+            foreach ( $rooms as $key => $_room ) :
+                $room = get_post_meta( $_room->ID, 'tf_room_opt', true );
+                $enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
+                if ( $enable == '1' && $room['unique_id'] . $_room->ID == $_POST['uniqid_id'] ) :
+                    $tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
+	                $tf_room_gallery_ids = !empty($tf_room_gallery) ? explode( ',', $tf_room_gallery ) : '';
+	                $child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
+	                $footage      = ! empty( $room['footage'] ) ? $room['footage'] : '';
+	                $bed          = ! empty( $room['bed'] ) ? $room['bed'] : '';
+	                $adult_number = ! empty( $room['adult'] ) ? $room['adult'] : '0';
+	                $child_number = ! empty( $room['child'] ) ? $room['child'] : '0';
+	                $num_room     = ! empty( $room['num-room'] ) ? $room['num-room'] : '0';
+                    ?>
+                    <div class="tf-room-modal-inner">
+                        <div class="tf-room-modal-gallery">
+                            <div class="tf-room-gallery-slider">
+                                <?php
+                                if ( ! empty( $tf_room_gallery_ids ) ) {
+                                    foreach ( $tf_room_gallery_ids as $gallery_item_id ) {
+                                        $image_url = wp_get_attachment_url( $gallery_item_id );
+                                        echo '<img src="' . esc_url( $image_url ) . '" class="tf-room-modal-gallery-thumb" alt="room-gallery">';
+                                    }
+                                } ?>
+                            </div>
+                            <div class="tf-room-gallery-slider-nav">
+                                <?php
+                                if ( ! empty( $tf_room_gallery_ids ) ) {
+                                    foreach ( $tf_room_gallery_ids as $gallery_item_id ) {
+                                        $image_url = wp_get_attachment_url( $gallery_item_id, 'thumbnail' );
+                                        echo '<img src="' . $image_url . '" class="tf-room-modal-gallery-nav" alt="room-gallery-nav">';
+                                    }
+                                } ?>
+                            </div>
+
+                            <script>
+                                const template4RoomSlider = jQuery('.tf-room-gallery-slider');
+                                const template4RoomSliderNav = jQuery('.tf-room-gallery-slider-nav');
+
+                                template4RoomSlider.slick({
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1,
+                                    arrows: false,
+                                    fade: false,
+                                    adaptiveHeight: true,
+                                    infinite: true,
+                                    useTransform: true,
+                                    speed: 400,
+                                    cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
+                                });
+
+                                template4RoomSliderNav
+                                    .on('init', function (event, slick) {
+                                        jQuery('.tf-room-gallery-slider-nav .slick-slide.slick-current').addClass('is-active');
+                                    })
+                                    .slick({
+                                        slidesToShow: 5,
+                                        slidesToScroll: 5,
+                                        dots: false,
+                                        focusOnSelect: false,
+                                        infinite: false,
+                                        centerMode: false,
+                                        responsive: [{
+                                            breakpoint: 1024,
+                                            settings: {
+                                                slidesToShow: 4,
+                                                slidesToScroll: 4,
+                                            }
+                                        }, {
+                                            breakpoint: 640,
+                                            settings: {
+                                                slidesToShow: 3,
+                                                slidesToScroll: 3,
+                                            }
+                                        }, {
+                                            breakpoint: 420,
+                                            settings: {
+                                                slidesToShow: 2,
+                                                slidesToScroll: 2,
+                                            }
+                                        }]
+                                    });
+
+                                template4RoomSlider.on('afterChange', function (event, slick, currentSlide) {
+                                    template4RoomSliderNav.slick('slickGoTo', currentSlide);
+                                    var currrentNavSlideElem = '.tf-room-gallery-slider-nav .slick-slide[data-slick-index="' + currentSlide + '"]';
+                                    jQuery('.tf-room-gallery-slider-nav .slick-slide.is-active').removeClass('is-active');
+                                    jQuery(currrentNavSlideElem).addClass('is-active');
+                                });
+
+                                template4RoomSliderNav.on('click', '.slick-slide', function (event) {
+                                    event.preventDefault();
+                                    var goToSingleSlide = jQuery(this).data('slick-index');
+
+                                    template4RoomSlider.slick('slickGoTo', goToSingleSlide);
+                                });
+                            </script>
+                        </div>
+                        <div class="tf-room-modal-details">
+                            <h2 class="tf-room-title"><?php echo esc_html( get_the_title( $_room->ID ) ); ?></h2>
+                            <div class="tf-room-modal-desc"><?php echo wp_kses_post( get_post_field( 'post_content', $_room->ID ) ); ?></div>
+
+                            <div class="tf-room-modal-features">
+		                        <?php if ( $num_room ) { ?>
+                                    <div class="tf-tooltip tf-d-ib">
+                                        <div class="room-detail-icon">
+                                            <span class="room-icon-wrap"><i class="fas fa-person-booth"></i></span>
+                                            <span class="icon-text tf-d-b"><?php echo esc_html( $num_room ); ?></span>
+                                        </div>
+                                        <div class="tf-top">
+					                        <?php esc_html_e( 'Number of Room', 'tourfic' ); ?>
+                                            <i class="tool-i"></i>
+                                        </div>
+                                    </div>
+		                        <?php }
+		                        if ( $footage ) { ?>
+                                    <div class="tf-tooltip tf-d-ib">
+                                        <div class="room-detail-icon">
+                                            <span class="room-icon-wrap"><i class="ri-pencil-ruler-2-line"></i></span>
+                                            <span class="icon-text tf-d-b"><?php echo esc_html( $footage ); ?><?php esc_html_e( 'sft', 'tourfic' ); ?></span>
+                                        </div>
+                                        <div class="tf-top">
+					                        <?php esc_html_e( 'Room Footage', 'tourfic' ); ?>
+                                            <i class="tool-i"></i>
+                                        </div>
+                                    </div>
+		                        <?php }
+		                        if ( $bed ) { ?>
+                                    <div class="tf-tooltip tf-d-ib">
+                                        <div class="room-detail-icon">
+                                            <span class="room-icon-wrap"><i class="ri-hotel-bed-line"></i></i></span>
+                                            <span class="icon-text tf-d-b">x<?php echo esc_html( $bed ); ?></span>
+                                        </div>
+                                        <div class="tf-top">
+					                        <?php esc_html_e( 'Number of Beds', 'tourfic' ); ?>
+                                            <i class="tool-i"></i>
+                                        </div>
+                                    </div>
+		                        <?php } ?>
+                            </div>
+                            <div class="pax">
+                                <h4><?php esc_html_e( 'Pax', 'tourfic' ); ?></h4>
+                                <?php if ( $adult_number ) { ?>
+                                    <div class="tf-tooltip tf-d-ib">
+                                        <div class="room-detail-icon">
+                                            <span class="room-icon-wrap"><i class="fas fa-male"></i><i class="fas fa-female"></i></span>
+                                            <span class="icon-text tf-d-b">x<?php echo esc_html( $adult_number ); ?></span>
+                                        </div>
+                                        <div class="tf-top">
+                                            <?php esc_html_e( 'Number of Adults', 'tourfic' ); ?>
+                                            <i class="tool-i"></i>
+                                        </div>
+                                    </div>
+
+                                <?php }
+                                if ( $child_number ) { ?>
+                                    <div class="tf-tooltip tf-d-ib">
+                                        <div class="room-detail-icon">
+                                            <span class="room-icon-wrap"><i class="ri-user-smile-line"></i></span>
+                                            <span class="icon-text tf-d-b">x<?php echo esc_html( $child_number ); ?></span>
+                                        </div>
+                                        <div class="tf-top">
+                                            <?php
+                                            if ( ! empty( $child_age_limit ) ) {
+                                                /* translators: %s Child Age Limit */
+                                                printf( esc_html__( 'Children Age Limit %s Years', 'tourfic' ), esc_html( $child_age_limit ) );
+                                            } else {
+                                                esc_html_e( 'Number of Children', 'tourfic' );
+                                            }
+                                            ?>
+                                            <i class="tool-i"></i>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            </div>
+
+	                        <?php if ( ! empty( $room['features'] ) ) { ?>
+                                <div class="room-features">
+                                    <h4><?php esc_html_e( 'Amenities', 'tourfic' ); ?></h4>
+                                    <ul class="room-feature-list" style="margin: 0;">
+
+				                        <?php foreach ( $room['features'] as $feature ) {
+
+					                        $room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
+					                        if ( ! empty( $room_f_meta ) ) {
+						                        $room_icon_type = ! empty( $room_f_meta['icon-type'] ) ? $room_f_meta['icon-type'] : '';
+					                        }
+					                        if ( ! empty( $room_icon_type ) && $room_icon_type == 'fa' ) {
+						                        $room_feature_icon = ! empty( $room_f_meta['icon-fa'] ) ? '<i class="' . $room_f_meta['icon-fa'] . '"></i>' : '<i class="fas fa-bread-slice"></i>';
+					                        } elseif ( ! empty( $room_icon_type ) && $room_icon_type == 'c' ) {
+						                        $room_feature_icon = ! empty( $room_f_meta['icon-c'] ) ? '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />' : '<i class="fas fa-bread-slice"></i>';
+					                        } else {
+						                        $room_feature_icon = '<i class="fas fa-bread-slice"></i>';
+					                        }
+
+					                        $room_term = get_term( $feature ); ?>
+                                            <li class="tf-tooltip tf-d-ib">
+						                        <?php echo ! empty( $room_feature_icon ) ? wp_kses_post( $room_feature_icon ) : ''; ?>
+                                                <div class="tf-top">
+							                        <?php echo esc_html( $room_term->name ); ?>
+                                                    <i class="tool-i"></i>
+                                                </div>
+                                            </li>
+				                        <?php } ?>
+                                    </ul>
+                                </div>
+	                        <?php } ?>
+                        </div>
+                    </div>
+                <?php
+                endif;
+            endforeach;
+		}
+
 		wp_die();
 	}
 
