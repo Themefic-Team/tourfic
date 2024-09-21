@@ -1095,5 +1095,8 @@ class Migrator {
 		if ( ! isset( $data->server_data ) ) {
 			$wpdb->query( "ALTER TABLE $enquiry_table ADD COLUMN `server_data` VARCHAR(255) NOT NULL DEFAULT '' AFTER `enquiry_status`" );
 		}
+		if ( ! isset( $data->reply_data ) ) {
+			$wpdb->query( "ALTER TABLE $enquiry_table ADD COLUMN `reply_data` LONGTEXT NOT NULL DEFAULT '' AFTER `server_data`" );
+		}
 	}
 }

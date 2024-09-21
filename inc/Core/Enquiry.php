@@ -271,6 +271,7 @@ abstract class Enquiry {
 		list($date, $time) = explode(" ", $data["created_at"]);
 		$formateed_date = date( "M d, Y", strtotime($date));
 		$formateed_time = date( "h:i:s A", strtotime($time));
+		$reply_data = !empty( $data["reply_data"] ) ? json_decode($data["reply_data"], true) : array();
 
 		?>
 		<div class="wrap tf_booking_details_wrap tf-enquiry-details-wrap" style="margin-right: 20px;">
@@ -315,10 +316,12 @@ abstract class Enquiry {
 							</div>
 						</div>
 					</div> <!-- Enquiry mail Details Wrapper - End -->
-					<div class="tf-single-enquiry-reply-mail-button">
-						<span> <?php esc_html_e( "Reply to Email", 'tourfic') ?> </span>
-						<i class="ri-mail-line"></i>
-					</div>
+					<?php if( count($reply_data) == 0 ): ?>
+						<div class="tf-single-enquiry-reply-mail-button">
+							<span> <?php esc_html_e( "Reply to Email", 'tourfic') ?> </span>
+							<i class="ri-mail-line"></i>
+						</div>
+					<?php endif; ?>
 					<div class="tf-enquiry-details tf-single-enquiry-reply-wrapper"> <!-- Enquiry mail Reply Wrapper - Start -->
 						<div class="tf-enquiry-details-single-heading">
 							<h2><?php esc_html_e('To:', 'tourfic') ; ?> <span class="tf-single-enquiry-reply-mail"> <?php esc_html_e( $data["uemail"]); ?> </span></h2>
@@ -794,6 +797,9 @@ abstract class Enquiry {
 	function tf_enquiry_reply_email_callback() {
 
 		$response = array();
+		global $wpdb;
+		$reply_data = $wpdb->get_results( "SELECT reply_data FROM {$wpdb->prefix}tf_enquiry_data WHERE id= " . $_POST['enquiry_id'] );
+		$reply_data = json_decode( $reply_data[0]->reply_data, true );
 
 		check_ajax_referer('updates', '_ajax_nonce');
 
@@ -821,6 +827,22 @@ abstract class Enquiry {
 
 			$send_mail = wp_mail( $to, $subject, $reply_message, $from );
 			$submit_time = date_i18n( 'Y-m-d H:i:s', current_time( 'timestamp' ) );
+
+			$reply_data[] = array(
+				'reply_user' => $reply_user,
+				'reply_mail' => $reply_mail,
+				'reply_message' => $reply_message,
+				'submit_time' => $submit_time
+			);
+			
+			$wpdb->query(
+				$wpdb->prepare(
+					"UPDATE {$wpdb->prefix}tf_enquiry_data SET enquiry_status=%s, reply_data=%s WHERE id=%d",
+					'replied',
+					json_encode( $reply_data ),
+					$enquiry_id
+				)
+			);
 
 			if ( $send_mail ) {
 				$response['status'] = 'success';
