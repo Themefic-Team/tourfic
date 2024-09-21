@@ -322,7 +322,8 @@ abstract class Enquiry {
 							<i class="ri-mail-line"></i>
 						</div>
 					<?php endif; ?>
-					<div class="tf-enquiry-details tf-single-enquiry-reply-wrapper"> <!-- Enquiry mail Reply Wrapper - Start -->
+					<?php $display = count($reply_data) > 0 ? '' : 'display:none;' ?>
+					<div class="tf-enquiry-details tf-single-enquiry-reply-wrapper" style="<?php echo esc_attr($display); ?>"> <!-- Enquiry mail Reply Wrapper - Start -->
 						<div class="tf-enquiry-details-single-heading">
 							<h2><?php esc_html_e('To:', 'tourfic') ; ?> <span class="tf-single-enquiry-reply-mail"> <?php esc_html_e( $data["uemail"]); ?> </span></h2>
 						</div>

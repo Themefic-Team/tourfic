@@ -146,6 +146,10 @@
             $temp.remove();
             notyf.success("Copied to clipboard");
         });
+
+        $(document).on("click", '.tf-single-enquiry-reply-mail-button', function (e) { 
+            $(".tf-single-enquiry-reply-wrapper").show();
+        });
     });
 
 })(jQuery);
