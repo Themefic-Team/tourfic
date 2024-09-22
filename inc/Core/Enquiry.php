@@ -290,8 +290,7 @@ abstract class Enquiry {
 			<!-- Header Wrap - End -->
 			 <!-- Back Button - Start -->
 			<div class="tf-enquiry-single-back-button">
-				<i class="ri-arrow-left-line"></i>
-				<a href="<?php echo esc_url(admin_url('edit.php?post_type=' . $data["post_type"] . '&page=' . $data["post_type"] . '_enquiry')); ?>" class="tf-enquiry-back-btn"><?php esc_html_e('Back', 'tourfic'); ?></a>
+				<a href="<?php echo esc_url(admin_url('edit.php?post_type=' . $data["post_type"] . '&page=' . $data["post_type"] . '_enquiry')); ?>" class="tf-enquiry-back-btn"><i class="ri-arrow-left-line"></i><?php esc_html_e('Back', 'tourfic'); ?></a>
 			</div>
 			<!-- Back Button - End -->
 			<!-- Enquiry Details - Start -->
@@ -327,8 +326,42 @@ abstract class Enquiry {
 						<div class="tf-enquiry-details-single-heading">
 							<h2><?php esc_html_e('To:', 'tourfic') ; ?> <span class="tf-single-enquiry-reply-mail"> <?php esc_html_e( $data["uemail"]); ?> </span></h2>
 						</div>
+						<div class="tf-single-enquiry-accordion">
+							<?php if( !empty($reply_data) && is_array($reply_data)): ?>
+								<?php foreach($reply_data as $key => $reply): ?>
+									<div class="tf-single-enquiry-accordion-item">
+										<input type="hidden" class="tf-single-enquiry-accordion-id" value="<?php echo esc_attr($key) ?>">
+										<div class="tf-single-enquiry-accordion-head">
+											<div class="tf-single-enquiry-accordion-head-left">
+												<i class="ri-reply-all-line"></i>
+												<?php esc_html_e("You", 'tourfic') ?>
+												<span class="tf-single-accordion-dash"><?php esc_html_e('―', 'tourfic') ?></span>
+												<span class="tf-single-accordion-subject">
+												<?php echo $reply["reply_message"] ? ( esc_html( strlen( $reply["reply_message"] ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( $reply["reply_message"], 75 ), 'tourfic' ) : esc_html__( $reply["reply_message"] ), 'tourfic' )) : ''; ?>
+												</span>
+											</div>
+											<div class="tf-single-enquiry-accordion-head-right">
+												<?php esc_html_e($reply["submit_time"]) ?>
+											</div>
+										</div>
+										<div id="tf-single-enquiry-accordion-<?php echo esc_attr($key) ?> tf-single-enquiry-collapse">
+											<div class="tf-single-accordion-body">
+												<?php echo wp_kses_post($reply["reply_message"]) ?>
+											</div>
+										</div>
+										<hr>
+									</div>
+								<?php endforeach; ?>
+							<?php endif; ?>
+						</div>
 						<div class="tf-single-enquiry-details-content">
-							<form id="tf-single-enquiry-reply-form" method="post" action>
+							<?php if( count($reply_data) > 0 ): ?>
+								<div class="tf-single-enquiry-reply-another-mail-button">
+									<span> <?php esc_html_e( "Send Another Mail", 'tourfic') ?> </span>
+									<i class="ri-mail-line"></i>
+								</div>
+							<?php endif; ?>
+							<form id="tf-single-enquiry-reply-form" method="post" style="<?php echo count($reply_data) > 0 ? 'display:none;' : '' ?>" action>
 								<textarea class="tf-enquiry-reply-textarea" placeholder="<?php esc_html_e('Write a message...', 'tourfic') ?>"></textarea>
 								<input type="hidden" class="tf-enquiry-reply-email" value="<?php echo esc_html($data["uemail"]); ?>">
 								<input type="hidden" class="tf-enquiry-reply-name" value="<?php echo esc_html($data["uname"]); ?>">
@@ -359,8 +392,9 @@ abstract class Enquiry {
 							<div class="enquiry-details-status">
 								<svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
 									<circle cx="3" cy="3" r="3" fill="#27BE69"/>
-								</svg> 
-								<div class="enquiry-status-value"> <?php esc_html_e("Read", 'tourfic') ?> </div>
+								</svg>
+
+								<div class="enquiry-status-value"> <?php !empty( $data["enquiry_status"] ) ? esc_html_e(ucfirst( $data["enquiry_status"] ), 'tourfic') : '' ?> </div>
 							</div>
 						</div>
 						<div class="tf-single-enquiry-log-details-content">
@@ -805,7 +839,7 @@ abstract class Enquiry {
 		check_ajax_referer('updates', '_ajax_nonce');
 
 		$reply_mail = isset( $_POST['reply_mail'] ) ? sanitize_text_field( $_POST['reply_mail'] ) : '';
-		$reply_message = isset( $_POST['reply_message'] ) ? sanitize_textarea_field( $_POST['reply_message'] ) : '';
+		$reply_message = isset( $_POST['reply_message'] ) ? wp_kses_post( $_POST['reply_message'] ) : '';
 		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
 		$enquiry_id = isset( $_POST['enquiry_id'] ) ? sanitize_text_field( $_POST['enquiry_id'] ) : '';
 		$reply_user = isset( $_POST['user_name'] ) ? sanitize_text_field( $_POST['user_name'] ) : '';
@@ -821,7 +855,7 @@ abstract class Enquiry {
 			$response['msg']    = esc_html__( 'You do not have permission to perform this action.', 'tourfic' );
 		}
 
-		if( !empty( $reply_mail ) ) {
+		if( !empty( $reply_mail ) && !empty( $reply_message ) ) {
 			$to = $reply_mail;
 			$from = "From: " . get_option( 'blogname' ) . " <" . get_option( 'admin_email' ) . ">\r\n";
 			$subject = esc_html__("Re: Response to Your Enquiry About ", 'tourfic') . esc_html( get_the_title( $post_id ) );

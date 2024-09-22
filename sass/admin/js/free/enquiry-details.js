@@ -46,9 +46,6 @@
                     $this.removeClass("loading");
                     if(data.status == "success") {
                         notyf.success(data.msg);
-                        setTimeout(function() {
-                            location.reload();
-                        }, 2000);
                     } else if (data.status == "error") {
                         notyf.error(data.msg);
                     }
@@ -126,6 +123,9 @@
                         notyf.error(data.msg);
                     }
                 },
+                complete() {
+                    window.location.reload();
+                },
                 error: function(data) {
                     console.log(data);
                 },
@@ -148,7 +148,21 @@
         });
 
         $(document).on("click", '.tf-single-enquiry-reply-mail-button', function (e) { 
-            $(".tf-single-enquiry-reply-wrapper").show();
+            $(".tf-single-enquiry-reply-wrapper").slideDown();
+            $(this).hide();
+        });
+
+        $('.tf-single-enquiry-reply-another-mail-button').on('click', function(e) {
+            $('#tf-single-enquiry-reply-form').slideDown();
+            $(this).hide();
+        });
+
+        $(".tf-single-enquiry-accordion-item.is-active").children(".tf-single-accordion-body").slideDown();
+
+        $(".tf-single-enquiry-accordion-item").on("click", function() {
+            $(this).siblings(".tf-single-enquiry-accordion-item").removeClass("is-active").find(".tf-single-accordion-body").slideUp();
+            $(this).toggleClass("is-active").find(".tf-single-accordion-body").slideToggle("ease-out");
+
         });
     });
 

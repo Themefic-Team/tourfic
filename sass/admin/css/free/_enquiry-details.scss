@@ -91,7 +91,7 @@
     width: 100%;
     display: flex;
     gap: 16px;
-    margin-bottom: 24px;
+    margin: -10px -20px 24px -20px;
 
     img {
         height: 100%;
@@ -123,6 +123,10 @@
    a {
     color: #2C273F;
     text-decoration: none;
+
+    i {
+        margin-right: 8px;
+    }
 
     &:focus {
         outline: none;
@@ -191,17 +195,53 @@
                         }
                     }
                 }
+
+                .tf-single-enquiry-reply-another-mail-button {
+                    padding: 8px 20px;
+                    background-color: #003c79;
+                    border-color: #003c79;
+                    border-radius: 8px;
+                    align-self: self-end;
+                    color: #fff;
+                    font-size: 15px;
+                    cursor: pointer;
+        
+                    &:hover {
+                        background-color: #001f3e;
+                        border-color: #001f3e;
+                        color: #fff;
+                    }
+        
+                    span {
+                        font-family: inherit;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 1.6;
+                        margin-right: 8px;
+                    }
+        
+                    i {
+                        font-size: 16px;
+                    }
+                }
             }
         }
 
         .tf-single-enquiry-reply-mail-button {
             padding: 8px 20px;
-            background: #771AF9;
+            background-color: #003c79;
+            border-color: #003c79;
             border-radius: 8px;
             align-self: self-end;
             color: #fff;
             font-size: 15px;
             cursor: pointer;
+
+            &:hover {
+                background-color: #001f3e;
+                border-color: #001f3e;
+                color: #fff;
+            }
 
             span {
                 font-family: inherit;
@@ -226,6 +266,64 @@
                     font-style: normal;
                     font-weight: 400;
                     line-height: 150%;
+                }
+            }
+
+            .tf-single-enquiry-accordion {
+                margin-top: 24px;
+
+                .tf-single-enquiry-accordion-item {
+                    cursor: pointer;
+                    user-select: none;
+                    .tf-single-enquiry-accordion-head {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        .tf-single-enquiry-accordion-head-left {
+                            font-family: inherit;
+                            font-size: 15px;
+                            font-style: normal;
+                            font-weight: 600;
+                            line-height: 1.6;
+                            color: #2C273F;
+                            i {
+                                margin-right: 8px;
+                            }
+                            .tf-single-accordion-dash {
+                                margin-left: 16px;
+                                margin-right: 16px;
+                            }
+                            .tf-single-accordion-subject {
+                                color: #5D5676;
+                            }
+                        }
+
+                        .tf-single-enquiry-accordion-head-right {
+                            color: #9089A9;
+                            font-family: inherit;
+                            font-size: 13px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 20px;
+                        }
+                    }
+                    
+                    .tf-single-accordion-body {
+                        margin-top: 16px;
+                        color: #5D5676;
+                        font-family: Inter;
+                        font-size: 15px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 1.6;
+                        display: none;
+                    }
+                }
+
+                hr {
+                    margin-top: 24px;
+                    margin-bottom: 24px;
                 }
             }
         }
@@ -253,9 +351,9 @@
 
             button {
                 align-self: flex-end;
-                width: 120px;
                 padding: 8px 20px;
-                background: #771AF9;
+                background-color: #003c79;
+                border-color: #003c79;
                 color: #fff;
                 font-family: inherit;
                 font-size: 15px;
@@ -270,6 +368,11 @@
                 border-radius: 8px;
                 cursor: pointer;
 
+                &:hover {
+                    background-color: #001f3e;
+                    border-color: #001f3e;
+                    color: #fff;
+                }
             }
         }
     }

@@ -48,10 +48,25 @@
                 minimumResultsForSearch: -1,
             });
         }
-        if ( $('.tf-filter-hotel-name').length > 0 ) {
-            $('.tf-filter-hotel-name').select2({
+        if ( $('.tf-enquiry-filter-hotel-name').length > 0 ) {
+            $('.tf-enquiry-filter-hotel-name').select2({
                 dropdownCssClass: 'tf-booking-filter-modal',
                 placeholder: "Hotel Name",
+                allowClear: true
+            });
+        }
+        
+        if ( $('.tf-enquiry-filter-apartment-name').length > 0 ) {
+            $('.tf-enquiry-filter-apartment-name').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Apartment Name",
+                allowClear: true
+            });
+        }
+        if ( $('.tf-enquiry-filter-tour-name ').length > 0 ) {
+            $('.tf-enquiry-filter-tour-name').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Tours Name",
                 allowClear: true
             });
         }

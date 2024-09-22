@@ -6399,7 +6399,7 @@ a.tf-import-btn, a.tf-export-btn {
   width: 100%;
   display: flex;
   gap: 16px;
-  margin-bottom: 24px;
+  margin: -10px -20px 24px -20px;
 }
 
 .tf-enquiry-single-header-details img {
@@ -6433,6 +6433,10 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-enquiry-single-back-button a {
   color: #2C273F;
   text-decoration: none;
+}
+
+.tf-enquiry-single-back-button a i {
+  margin-right: 8px;
 }
 
 .tf-enquiry-single-back-button a:focus {
@@ -6507,14 +6511,50 @@ a.tf-import-btn, a.tf-export-btn {
   font-size: 16px;
 }
 
-.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-mail-button {
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-reply-another-mail-button {
   padding: 8px 20px;
-  background: #771AF9;
+  background-color: #003c79;
+  border-color: #003c79;
   border-radius: 8px;
   align-self: self-end;
   color: #fff;
   font-size: 15px;
   cursor: pointer;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-reply-another-mail-button:hover {
+  background-color: #001f3e;
+  border-color: #001f3e;
+  color: #fff;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-reply-another-mail-button span {
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.6;
+  margin-right: 8px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-reply-another-mail-button i {
+  font-size: 16px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-mail-button {
+  padding: 8px 20px;
+  background-color: #003c79;
+  border-color: #003c79;
+  border-radius: 8px;
+  align-self: self-end;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-mail-button:hover {
+  background-color: #001f3e;
+  border-color: #001f3e;
+  color: #fff;
 }
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-mail-button span {
@@ -6536,6 +6576,68 @@ a.tf-import-btn, a.tf-export-btn {
   font-style: normal;
   font-weight: 400;
   line-height: 150%;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion {
+  margin-top: 24px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item {
+  cursor: pointer;
+  user-select: none;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item .tf-single-enquiry-accordion-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item .tf-single-enquiry-accordion-head .tf-single-enquiry-accordion-head-left {
+  font-family: inherit;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #2C273F;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item .tf-single-enquiry-accordion-head .tf-single-enquiry-accordion-head-left i {
+  margin-right: 8px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item .tf-single-enquiry-accordion-head .tf-single-enquiry-accordion-head-left .tf-single-accordion-dash {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item .tf-single-enquiry-accordion-head .tf-single-enquiry-accordion-head-left .tf-single-accordion-subject {
+  color: #5D5676;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item .tf-single-enquiry-accordion-head .tf-single-enquiry-accordion-head-right {
+  color: #9089A9;
+  font-family: inherit;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item .tf-single-accordion-body {
+  margin-top: 16px;
+  color: #5D5676;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.6;
+  display: none;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion hr {
+  margin-top: 24px;
+  margin-bottom: 24px;
 }
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left #tf-single-enquiry-reply-form {
@@ -6562,9 +6664,9 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left #tf-single-enquiry-reply-form button {
   align-self: flex-end;
-  width: 120px;
   padding: 8px 20px;
-  background: #771AF9;
+  background-color: #003c79;
+  border-color: #003c79;
   color: #fff;
   font-family: inherit;
   font-size: 15px;
@@ -6578,6 +6680,12 @@ a.tf-import-btn, a.tf-export-btn {
   border-color: transparent;
   border-radius: 8px;
   cursor: pointer;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left #tf-single-enquiry-reply-form button:hover {
+  background-color: #001f3e;
+  border-color: #001f3e;
+  color: #fff;
 }
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-right {

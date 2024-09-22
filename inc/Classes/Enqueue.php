@@ -648,10 +648,12 @@ class Enqueue {
 			'tf_hotel_page_tf-hotel-backend-booking',
 			'tf_hotel_page_tf_hotel_enquiry',
 			'tf_tours_page_tf-tour-backend-booking',
+			'tf_tours_page_tf_tours_enquiry',
 			'tf_tours_page_tf_tours_booking',
 			'tf_hotel_page_tf_hotel_booking',
 			'tf_apartment_page_tf_apartment_booking',
 			'tf_apartment_page_tf-apartment-backend-booking',
+			'tf_apartment_page_tf_apartment_enquiry',
 			'tourfic-settings_page_tf-setup-wizard'
 		);
 		$tf_options_post_type        = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_email_templates', 'tf_room' );
