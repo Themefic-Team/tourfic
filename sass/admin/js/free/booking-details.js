@@ -466,7 +466,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
-      editable: true,
+      editable: false,
       selectable: true,
       dayMaxEvents: 3,
       headerToolbar: {
