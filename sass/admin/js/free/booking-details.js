@@ -464,7 +464,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }else{
 
     }
-    console.log(eventsSource);
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
       editable: true,
