@@ -1008,7 +1008,7 @@ class Enqueue {
 		if(!empty($tf_tour_order_result)){
 			foreach($tf_tour_order_result as $order){
 				$tf_tours_orders[] = array(
-					'title' => get_the_title($order['post_id']),
+					'title' => html_entity_decode(get_the_title($order['post_id'])),
 					'start' => $order['check_in'],
 					'end' => $order['check_out'],
 				);
@@ -1026,7 +1026,7 @@ class Enqueue {
 		if(!empty($tf_hotel_order_result)){
 			foreach($tf_hotel_order_result as $order){
 				$tf_hotels_orders[] = array(
-					'title' => get_the_title($order['post_id']),
+					'title' => html_entity_decode(get_the_title($order['post_id'])),
 					'start' => $order['check_in'],
 					'end' => $order['check_out'],
 				);
@@ -1044,7 +1044,7 @@ class Enqueue {
 		if(!empty($tf_apartment_order_result)){
 			foreach($tf_apartment_order_result as $order){
 				$tf_apartments_orders[] = array(
-					'title' => get_the_title($order['post_id']),
+					'title' => html_entity_decode(get_the_title($order['post_id'])),
 					'start' => $order['check_in'],
 					'end' => $order['check_out'],
 				);
