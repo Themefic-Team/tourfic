@@ -121,6 +121,16 @@ abstract Class TF_Booking_Details {
                 <div class="tf_booking_wrap_header">
                     <h1 class="wp-heading-inline"><?php echo esc_html( $this->booking_args['booking_title'] ); ?> <?php esc_html_e( "Booking Details", "tourfic" ); ?></h1>
                     <div class="tf_header_wrap_button">
+                        <div class="tf_booking_views_button">
+                            <ul>
+                                <li class="active" data-view="<?php echo esc_attr("calendar"); ?>">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </li>
+                                <li data-view="<?php echo esc_attr("list"); ?>">
+                                    <i class="fa-solid fa-list"></i>
+                                </li>
+                            </ul>
+                        </div>
                         <?php
                         /**
                          * Before Hotel booking details table hook
@@ -169,7 +179,7 @@ abstract Class TF_Booking_Details {
 
     function tf_booking_details_list( $booking_type, $tf_order_details_result ) {
 		?>
-        <div class="tf-booking-calendar">
+        <div id="tf-booking-calendar">
             
         </div>
         <div class="tf-booking-header-filter">

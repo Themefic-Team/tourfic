@@ -17,6 +17,40 @@
         }
 
         .tf_header_wrap_button{
+            display: flex;
+            gap: 16px;
+            .tf_booking_views_button{
+                border-radius: 8px;
+                border: 1px solid #EEF6F0;
+                background: #FFF;
+                padding: 4px 8px;
+                float: left;
+                height: 46px;
+                box-sizing: border-box;
+                ul{
+                    margin: 0;
+                    padding: 0;
+                    display: flex;
+                    gap: 8px;
+                    li{
+                        height: 36px;
+                        width: 36px;
+                        margin: 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        i{
+                            font-size: 15px;
+                        }
+                        &.active{
+                            color: #f0f0f1;
+                            background-color: #004e9d;
+                            border-radius: 4px;
+                        }
+                    }
+                }
+            }
             a.tf-booking-export-btn{
                 padding: 10px 32px;
                 border-radius: 8px;
@@ -48,7 +82,6 @@
                 font-weight: 600;
                 line-height: 24px; /* 150% */
                 color: #F0F0F1;
-                margin-left: 15px;
                 transition: .3s all ease;
                 &:hover{
                     color: #f0f0f1;
@@ -59,12 +92,13 @@
     }
 
     // Booking Calendar
-    .tf-booking-calendar{
+    #tf-booking-calendar{
         border-radius: 16px;
         background: #FFF;
         padding: 24px;
         padding-top: 30px;
         position: relative;
+        margin-top: 32px;
 
         .fc-header-toolbar{
             .fc-toolbar-chunk{
@@ -75,15 +109,25 @@
                         gap: 28px;
                         justify-content: center;
                         button{
-                            height: 24px;
-                            width: 24px;
+                            height: 40px;
+                            width: 40px;
                             border-radius: 8px;
                             border: 0.2px solid #E3CFD7;
                             background: #FFF;
                             padding: 0;
+                            transition: .3s all ease;
                             &:focus{
                                 box-shadow: none;
                                 outline: none;
+                            }
+                            &:hover{
+                                background-color: #003c79;
+                                border-color: #003c79;
+                                span{
+                                    &::before{
+                                        color: #fff;
+                                    }
+                                }
                             }
                             span{
                                 margin: 0px !important;
@@ -97,6 +141,7 @@
                                     border-color: #003c79;
                                     border-radius: 8px;
                                     font-size: 20px;
+                                    transition: .3s all ease;
                                 }
                             }
                         }
@@ -203,7 +248,6 @@
                         td{
                             border: 1px solid #F6EEF2;
                             padding: 8px;
-                            // height: 150px;
                             background-color: transparent;
                             .fc-daygrid-day-top{
                                 a{
@@ -228,29 +272,20 @@
                                         font-style: normal;
                                         font-weight: 600;
                                         line-height: 20px; /* 153.846% */
-                                        padding: 0;
-                                        background: transparent;
-                                        b{
-                                            padding: 6px 8px;
-                                            color: #002AB3;
-                                            width: 100%;
-                                            border-left: 1px solid #002AB3;
-                                            background: #EBEFFF;
-                                            border-radius: 8px;
-                                            display: block;
-                                            line-height: 15px;
-                                            cursor: pointer;
-                                        }
-                                        b.confirmed{
-                                            color: #17723F;
-                                            border-left: 1px solid #17723F;
-                                            background: #E6FAEE;
-                                        }
-                                    }
-                
-                                    .tfhb-calendar-popup{
+                                        padding: 6px 8px;
+                                        color: #002AB3;
+                                        width: 100%;
+                                        border-left: 1px solid #002AB3;
+                                        background: #EBEFFF;
+                                        border-radius: 8px;
+                                        display: block;
+                                        line-height: 15px;
                                         cursor: pointer;
+                                        .fc-event-title{
+                                            color: #002AB3;
+                                        }
                                     }
+            
                                 }
                             }
                             .fc-daygrid-day-bottom{
@@ -387,7 +422,7 @@
     }
 
     .tf-booking-header-filter{
-        display: flex;
+        display: none;
         justify-content: space-between;
         margin: 32px 0px;
         @media #{$max1199}{
@@ -539,6 +574,7 @@
     .tf-order-table-responsive{
         width: 100%;
         overflow: auto;
+        display: none;
         .wp-list-table{
             border-radius: 12px;
             background: #EDEDF8;

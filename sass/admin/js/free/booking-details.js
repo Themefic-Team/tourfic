@@ -425,29 +425,57 @@
             }
         });
 
+        // Booking View Change
+
+        $(".tf_booking_views_button ul li").on("click", function() {
+            $(".tf_booking_views_button ul li").removeClass('active');
+            let $this =  $(this);
+            let view = $this.attr('data-view');
+            $this.addClass('active');
+            if('calendar'==view){
+                $('.tf-booking-header-filter').hide();
+                $('.tf-order-table-responsive').hide();
+                $('#tf-booking-calendar').show();
+            }
+            if('list'==view){
+                $('#tf-booking-calendar').hide();
+                $('.tf-booking-header-filter').css('display','flex');
+                $('.tf-order-table-responsive').show();
+            }
+        });
+
     });
 
 })(jQuery);
 
 // Booking Calendar
-
 document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.tf-booking-calendar').forEach(function(el) {
-        var calendar = new FullCalendar.Calendar(el, {
-            initialView: 'dayGridMonth',  // Month view
-            headerToolbar: {
-                left: 'prev,next',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            },
-            events: [
-                {
-                    title: 'Event 1',
-                    start: '2024-09-19T16:00:00',  // Event with a specific time
-                    end: '2024-09-19T16:00:00',  // Event with a specific time
-                }
-            ]
-        });
-        calendar.render(); // Render the calendar on the element
+    var calendarEl = document.getElementById('tf-booking-calendar');
+    var currentPageUrl = window.location.href;
+
+    // Set the events based on the page URL
+    var eventsSource;
+    if (currentPageUrl.includes('post_type=tf_tours&page=tf_tours_booking')) {
+        eventsSource = tf_options.tf_tours_orders;
+    } else if (currentPageUrl.includes('post_type=tf_hotel&page=tf_hotel_booking')) {
+        eventsSource = tf_options.tf_hotels_orders;
+    } else if (currentPageUrl.includes('post_type=tf_apartment&page=tf_apartment_booking')) {
+        eventsSource = tf_options.tf_apartments_orders;
+    }else{
+
+    }
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      editable: true,
+      selectable: true,
+      dayMaxEvents: true,
+      headerToolbar: {
+        left: 'prev,next',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    },
+    events: eventsSource
     });
+
+    calendar.render();
 });
