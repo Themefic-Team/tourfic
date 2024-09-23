@@ -5010,12 +5010,16 @@ a.tf-import-btn, a.tf-export-btn {
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   text-decoration: none;
 }
 .tf-booking-details-preview .tf-details-preview-header .tf-back a svg {
   margin-right: 8px;
+}
+.tf-booking-details-preview .tf-details-preview-header .tf-back a:focus {
+  box-shadow: none;
+  outline: none;
 }
 .tf-booking-details-preview .tf-details-preview-header .tf-title h2 {
   color: #1D2327;
