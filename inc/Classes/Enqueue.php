@@ -662,6 +662,7 @@ class Enqueue {
 			'tf_tours_page_tf_tours_booking',
 			'tf_hotel_page_tf_hotel_booking',
 			'tf_apartment_page_tf_apartment_booking',
+			'tf_carrental_page_tf_carrental_booking',
 			'tf_apartment_page_tf-apartment-backend-booking',
 			'tourfic-settings_page_tf-setup-wizard'
 		);

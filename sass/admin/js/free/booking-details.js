@@ -67,6 +67,15 @@
                 allowClear: true
             });
         }
+
+        // Car Post Section
+        if ( $('.tf-car-id-filter-options').length > 0 ) {
+            $('.tf-car-id-filter-options').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Car Name",
+                allowClear: true
+            });
+        }
         
 
         // Checked Section

@@ -9,6 +9,7 @@ use Tourfic\Admin\Backend_Booking\TF_Tour_Backend_Booking;
 use Tourfic\Admin\Booking_Details\Apartment_Booking_Details;
 use Tourfic\Admin\Booking_Details\Hotel_Booking_Details;
 use Tourfic\Admin\Booking_Details\Tour_Booking_Details;
+use Tourfic\Admin\Booking_Details\Car_Booking_Details;
 use Tourfic\Admin\TF_Promo_Notice;
 use Tourfic\App\Widgets\TF_Widget_Base;
 
@@ -60,6 +61,7 @@ class Base {
 			Tour_Booking_Details::instance();
 			Hotel_Booking_Details::instance();
 			Apartment_Booking_Details::instance();
+			Car_Booking_Details::instance();
 
 			// Promo Notice
 			TF_Promo_Notice::instance();

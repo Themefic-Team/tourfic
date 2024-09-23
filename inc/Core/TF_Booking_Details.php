@@ -226,6 +226,8 @@ abstract Class TF_Booking_Details {
 							$tf_postwise_filter_class = 'tf-post-id-filter-options';
 						} elseif ( "tf_apartment" == $this->booking_args['post_type'] ) {
 							$tf_postwise_filter_class = 'tf-apartment-id-filter-options';
+						} elseif ( "tf_carrental" == $this->booking_args['post_type'] ) {
+							$tf_postwise_filter_class = 'tf-car-id-filter-options';
 						} else {
 							$tf_postwise_filter_class = '';
 						}
