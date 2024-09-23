@@ -186,7 +186,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 					} else {
 						include TF_TEMPLATE_PART_PATH . 'hotel/design-3/description.php';
 						include TF_TEMPLATE_PART_PATH . 'hotel/design-3/rooms.php';
-						include TF_TEMPLATE_PART_PATH . 'hotel/design-3/features.php';
+						include TF_TEMPLATE_PART_PATH . 'hotel/design-3/facilities.php';
 						include TF_TEMPLATE_PART_PATH . 'hotel/design-3/faq.php';
 						include TF_TEMPLATE_PART_PATH . 'hotel/design-3/review.php';
 						include TF_TEMPLATE_PART_PATH . 'hotel/design-3/trams-condition.php';

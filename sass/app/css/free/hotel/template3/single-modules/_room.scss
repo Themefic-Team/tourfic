@@ -51,27 +51,26 @@
 
     .tf-room-filter {
         display: none !important;
+        padding: 0 24px 24px;
 
-        h4 {
-            font-weight: 600 !important;
+        h5{
+            margin-bottom: 16px;
         }
 
         ul {
             margin: 0;
             padding: 0;
+            @include flexbox();
+            @include flex-wrap(wrap);
+            gap: 8px;
 
             li {
                 margin: 0px;
                 padding-left: 0px;
-                font-size: 16px;
-                font-style: normal;
+                font-size: 14px;
                 font-weight: 400;
-                line-height: 130%;
-                color: #99948D;
-                margin-right: 10px;
-                @media #{$max1024}{
-                    font-size: 12px !important;
-                }
+                line-height: 16px;
+                color: $t4-paragraph;
 
                 label {
                     padding-left: 25px;
@@ -79,27 +78,28 @@
                     margin-left: 0px;
 
                     .checkmark {
-                        border-radius: 4px;
-                        border: 1px solid #917242;
-                        background: #FDF9F3;
+                        border-radius: 3px;
+                        border: 1px solid $t4-orange-200;
+                        background: #fff;
                         height: 16px;
                         width: 16px;
 
                         &:hover {
-                            border-color: #B58E53;
+                            border-color: $t4-primary;
                         }
 
                         &::after {
                             top: 1px;
                             left: 4px;
-                            border-color: rgb(145, 114, 66);
+                            border-color: #fff;
+                            border-width: 0 2px 2px 0;
                         }
                     }
                 }
 
                 label input:checked ~ .checkmark {
-                    background-color: transparent !important;
-                    border-color: rgb(145, 114, 66);
+                    background-color: $t4-primary !important;
+                    border-color: $t4-primary;
                 }
             }
         }
@@ -225,6 +225,8 @@
 
                 &:last-child{
                     border-bottom: none;
+                    padding-bottom: 0;
+                    margin-bottom: 0;
                 }
             }
         }

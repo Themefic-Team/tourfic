@@ -26,7 +26,7 @@
                     if($('.tf_booking-dates .tf_label-row').length === 1){
                         $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required"><b>' + tf_params.field_required + '</b></span>');
                     }else{
-                        $(".tf-check-in-out-date").ctrigger("click");
+                        $(".tf-check-in-out-date").trigger("click");
                     }
                 }
                 return;

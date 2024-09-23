@@ -2174,7 +2174,7 @@
         });
 
         //Room Filter Showing
-        $('.tf-template-3 .tf-available-rooms-head .tf-filter').on('click', function () {
+        $('.tf-template-3 .tf-available-rooms-head .tf-filter, .tf-hotel-template-4 .tf-available-rooms-head .tf-filter').on('click', function () {
             $('.tf-room-filter').toggleClass('tf-filter-show');
         });
 
@@ -2374,6 +2374,20 @@
             });
         });
 
+        // Template 4 hotel faq toggle
+        $('.tf-hotel-faq-title-area').on("click", function () {
+            var $this = $(this);
+            if (!$this.hasClass("active")) {
+                $(".tf-hotel-faqs").slideUp(400);
+                $(".tf-hotel-faq-title-area").removeClass("active");
+                $('.hotel-faq-icon-down').removeClass("active");
+            }
+            $this.toggleClass("active");
+            $(this).closest('.tf-hotel-faqs').toggleClass('active');
+            $(this).find('.hotel-faq-icon-down').toggle();
+            $(this).find('.hotel-faq-icon-up').toggleClass('active');
+            $this.next().slideToggle();
+        });
 
 
 
