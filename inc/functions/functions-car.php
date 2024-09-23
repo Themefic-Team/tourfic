@@ -551,7 +551,7 @@ function tf_car_booking_pupup_callback() {
 
 	<?php } ?>
 	
-	<div class="tf-booking-form-fields">
+	<div class="tf-booking-form-fields" style="<?php echo $car_booking_by=='3' && empty($car_protection_section_status) ? esc_attr('display: block') : ''; ?>">
 		<div class="tf-form-fields tf-flex tf-flex-gap-24 tf-flex-w">
 			<?php 
 			$traveller_info_fields = ! empty( Helper::tfopt( 'book-confirm-field' ) ) ? Helper::tf_data_types( Helper::tfopt( 'book-confirm-field' ) ) : '';

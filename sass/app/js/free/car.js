@@ -407,24 +407,25 @@
                 }
                 // Text, email, date inputs
                 $("input[name^='traveller[']").each(function() {
-                    var name = $(this).attr('name');
+                    var name = $(this).attr('name').replace(/^traveller\[(.*)\]$/, '$1'); // Remove 'traveller_' prefix
                     travellerData[name] = $(this).val();
                 });
 
                 // Select dropdowns
                 $("select[name^='traveller[']").each(function() {
-                    var name = $(this).attr('name');
+                    var name = $(this).attr('name').replace(/^traveller\[(.*)\]$/, '$1'); // Remove 'traveller_' prefix
                     travellerData[name] = $(this).val();
                 });
 
                 // Checkbox and Radio buttons
                 $("input[type='checkbox'][name^='traveller[']:checked, input[type='radio'][name^='traveller[']:checked").each(function() {
-                    var name = $(this).attr('name');
+                    var name = $(this).attr('name').replace(/^traveller\[(.*)\]$/, '$1'); // Remove 'traveller_' prefix
                     if (!travellerData[name]) {
                         travellerData[name] = [];
                     }
                     travellerData[name].push($(this).val());
                 });
+
             }
     
             if($this.hasClass('tf-final-step')){
