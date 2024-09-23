@@ -1,6 +1,19 @@
 <?php
+
 use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\Hotel\Hotel;
 use \Tourfic\App\TF_Review;
+
+$tf_booking_type      = '1';
+$tf_hide_booking_form = '';
+$tf_ext_booking_type  = '';
+$tf_ext_booking_code  = '';
+if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+	$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+	$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
+	$tf_ext_booking_type  = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : '1';
+	$tf_ext_booking_code  = ! empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
+}
 ?>
 
 <div class="tf-hotel-template-4 tf-template-global tf-hotel-single">
@@ -93,13 +106,13 @@ use \Tourfic\App\TF_Review;
     <div class="tf-hotel-hero-section">
         <div class="tf-container">
             <div class="tf-hotel-hero-wrapper">
-                <div class="tf-hotel-thumb <?php echo empty( $gallery_ids ) ? esc_attr('without-gallery') : '' ?>">
+                <div class="tf-hotel-thumb <?php echo empty( $gallery_ids ) ? esc_attr( 'without-gallery' ) : '' ?>">
 					<?php
 					if ( has_post_thumbnail() ) {
 						the_post_thumbnail( 'tf_apartment_single_thumb' );
 					} else {
-						echo '<img src="'. esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg') .'" alt="hotel-thumb"/>';
-                    }
+						echo '<img src="' . esc_url( TF_ASSETS_APP_URL . '/images/feature-default.jpg' ) . '" alt="hotel-thumb"/>';
+					}
 					?>
                     <div class="featured-meta-gallery-videos">
                         <div class="featured-column tf-gallery-box">
@@ -163,173 +176,125 @@ use \Tourfic\App\TF_Review;
                     </div>
                     <!-- menu section End -->
 
-	                <?php
-	                if( !empty(tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-3']) ){
-		                foreach(tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-3'] as $section){
-			                if( !empty($section['hotel-section-status']) && $section['hotel-section-status']=="1" && !empty($section['hotel-section-slug']) ){
-				                include TF_TEMPLATE_PART_PATH . 'hotel/design-3/'.$section['hotel-section-slug'].'.php';
-			                }
-		                }
-	                }else{
-		                include TF_TEMPLATE_PART_PATH . 'hotel/design-3/description.php';
-		                include TF_TEMPLATE_PART_PATH . 'hotel/design-3/rooms.php';
-		                include TF_TEMPLATE_PART_PATH . 'hotel/design-3/features.php';
-		                include TF_TEMPLATE_PART_PATH . 'hotel/design-3/faq.php';
-		                include TF_TEMPLATE_PART_PATH . 'hotel/design-3/review.php';
-		                include TF_TEMPLATE_PART_PATH . 'hotel/design-3/trams-condition.php';
-	                }
-	                ?>
-                </div>
-                <div class="tf-details-right tf-sitebar-widgets">
-					<?php if ( ! empty( $meta['nearby-places'] ) ) { ?>
-                        <div class="tf-whats-around tf-single-widgets">
-                            <h2 class="tf-section-title"><?php echo ! empty( $meta['section-title'] ) ? esc_html( $meta['section-title'] ) : esc_html( "What’s around?" ); ?></h2>
-                            <ul>
-								<?php foreach ( $meta['nearby-places'] as $place ) { ?>
-                                    <li>
-                                        <span>
-                                            <?php if ( ! empty( $place['place-icon'] ) ) { ?>
-                                                <i class="<?php echo esc_attr( $place['place-icon'] ); ?>"></i>
-                                            <?php } ?>
-                                            <?php echo ! empty( $place['place-title'] ) ? esc_html( $place['place-title'] ) : ''; ?>
-                                        </span>
-                                        <span><?php echo ! empty( $place['place-dist'] ) ? esc_html( $place['place-dist'] ) : ''; ?></span>
-                                    </li>
-								<?php } ?>
-                            </ul>
-                        </div>
-					<?php } ?>
-
-                    <div id="hotel-map-location" class="tf-location tf-single-widgets">
-                        <h2 class="tf-section-title"><?php _e( "Location", "tourfic" ); ?></h2>
-						<?php if ( ! defined( 'TF_PRO' ) ) { ?>
-							<?php
-						if ( $address && $tf_openstreet_map != "default" && ( empty( $address_latitude ) || empty( $address_longitude ) ) ) { ?>
-                            <iframe src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-						<?php } elseif ( $address && $tf_openstreet_map == "default" && ! empty( $address_latitude ) && ! empty( $address_longitude ) ) {
-						?>
-                            <div id="hotel-location" style="height: 250px"></div>
-                            <script>
-                                const map = L.map('hotel-location').setView([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], <?php echo $address_zoom; ?>);
-
-                                const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                    maxZoom: 20,
-                                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                                }).addTo(map);
-
-                                const marker = L.marker([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], {alt: '<?php echo $address; ?>'}).addTo(map)
-                                    .bindPopup('<?php echo $address; ?>');
-                            </script>
-						<?php }else{ ?>
-                            <iframe src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-						<?php } ?>
-						<?php }else{ ?>
-						<?php
-						if ( $address && $tf_openstreet_map != "default" && ( empty( $address_latitude ) || empty( $address_longitude ) ) ){ ?>
-                            <iframe src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-						<?php } elseif ( $address && $tf_openstreet_map == "default" && ! empty( $address_latitude ) && ! empty( $address_longitude ) ) {
-						?>
-                            <div id="hotel-location" style="height: 250px"></div>
-                            <script>
-                                const map = L.map('hotel-location').setView([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], <?php echo $address_zoom; ?>);
-
-                                const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                    maxZoom: 20,
-                                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                                }).addTo(map);
-
-                                const marker = L.marker([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], {alt: '<?php echo $address; ?>'}).addTo(map)
-                                    .bindPopup('<?php echo $address; ?>');
-                            </script>
-						<?php }else{ ?>
-                            <iframe src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-						<?php } ?>
-						<?php } ?>
-                    </div>
-
-                    <div class="tf-location tf-single-widgets">
-						<?php
-						global $current_user;
-						// Check if user is logged in
-						$is_user_logged_in = $current_user->exists();
-						$post_id           = $post->ID;
-						// Get settings value
-						$tf_ratings_for   = Helper::tfopt( 'r-for' ) ?? [ 'li', 'lo' ];
-						$tf_settings_base = ! empty ( Helper::tfopt( 'r-base' ) ) ? Helper::tfopt( 'r-base' ) : 5;
-						if ( $comments ) {
-							$tf_overall_rate = [];
-							TF_Review::tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rating );
-							TF_Review::tf_get_review_fields( $fields );
-							?>
-                            <h2 class="tf-section-title"><?php _e( "Overall reviews", "tourfic" ); ?></h2>
-                            <div class="tf-review-data-inner">
-                                <div class="tf-review-data">
-                                    <div class="tf-review-data-average">
-                                        <h2><span>
-                                <?php _e( sprintf( '%.1f', $total_rating ) ); ?>
-                            </span>/<?php echo $tf_settings_base; ?></h2>
-                                    </div>
-                                    <div class="tf-review-all-info">
-                                        <p><?php _e( "Excellent", "tourfic" ); ?> <span><?php _e( "Total", "tourfic" ); ?><?php TF_Review::tf_based_on_text( count( $comments ) ); ?></span></p>
-                                    </div>
-                                </div>
-                                <div class="tf-review-data-features">
-                                    <div class="tf-percent-progress">
-										<?php
-										if ( $tf_overall_rate ) {
-											foreach ( $tf_overall_rate as $key => $value ) {
-												if ( empty( $value ) || ! in_array( $key, $fields ) ) {
-													continue;
-												}
-												$value = TF_Review::tf_average_ratings( $value );
-												?>
-                                                <div class="tf-progress-item">
-                                                    <div class="tf-review-feature-label">
-                                                        <p class="feature-label"><?php esc_html_e( $key, "tourfic" ); ?></p>
-                                                        <p class="feature-rating"> <?php echo $value; ?></p>
-                                                    </div>
-                                                    <div class="tf-progress-bar">
-                                                        <span class="percent-progress" style="width: <?php echo TF_Review::tf_average_rating_percent( $value, Helper::tfopt( 'r-base' ) ); ?>%"></span>
-                                                    </div>
-                                                </div>
-											<?php }
-										} ?>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <a class="tf-all-reviews" href="#tf-hotel-reviews"><?php _e( "See all reviews", "tourfic" ); ?></a>
-						<?php } ?>
-                        <button class="tf-review-open button">
-							<?php _e( "Leave your review", "tourfic" ); ?>
-                        </button>
-						<?php
-						// Review moderation notice
-						echo wp_kses_post( TF_Review::tf_pending_review_notice( $post_id ) ?? '');
-						?>
-						<?php
-						if ( ! empty( $tf_ratings_for ) ) {
-							if ( $is_user_logged_in ) {
-								if ( in_array( 'li', $tf_ratings_for ) && ! TF_Review::tf_user_has_comments() ) {
-									?>
-                                    <div class="tf-review-form-wrapper" action="">
-                                        <h3><?php _e( "Leave your review", "tourfic" ); ?></h3>
-                                        <p><?php _e( "Your email address will not be published. Required fields are marked.", "tourfic" ); ?></p>
-										<?php TF_Review::tf_review_form(); ?>
-                                    </div>
-									<?php
-								}
-							} else {
-								if ( in_array( 'lo', $tf_ratings_for ) ) {
-									?>
-                                    <div class="tf-review-form-wrapper" action="">
-                                        <h3><?php _e( "Leave your review", "tourfic" ); ?></h3>
-                                        <p><?php _e( "Your email address will not be published. Required fields are marked.", "tourfic" ); ?></p>
-										<?php TF_Review::tf_review_form(); ?>
-                                    </div>
-								<?php }
+					<?php
+					if ( ! empty( tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel-layout-3'] ) ) {
+						foreach ( tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel-layout-3'] as $section ) {
+							if ( ! empty( $section['hotel-section-status'] ) && $section['hotel-section-status'] == "1" && ! empty( $section['hotel-section-slug'] ) ) {
+								include TF_TEMPLATE_PART_PATH . 'hotel/design-3/' . $section['hotel-section-slug'] . '.php';
 							}
-						} ?>
+						}
+					} else {
+						include TF_TEMPLATE_PART_PATH . 'hotel/design-3/description.php';
+						include TF_TEMPLATE_PART_PATH . 'hotel/design-3/rooms.php';
+						include TF_TEMPLATE_PART_PATH . 'hotel/design-3/features.php';
+						include TF_TEMPLATE_PART_PATH . 'hotel/design-3/faq.php';
+						include TF_TEMPLATE_PART_PATH . 'hotel/design-3/review.php';
+						include TF_TEMPLATE_PART_PATH . 'hotel/design-3/trams-condition.php';
+					}
+					?>
+                </div>
+                <div class="tf-details-right">
+                    <div class="tf-sidebar-widgets">
+						<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 ) : ?>
+                            <div class="tf-hotel-availability-form">
+								<?php Hotel::tf_hotel_sidebar_booking_form(); ?>
+                            </div>
+						<?php endif; ?>
+						<?php if ( ! empty( $tf_ext_booking_code ) && $tf_ext_booking_type == 2 ) : ?>
+                            <div id="tf-external-booking-embaded-form" class="tf-hotel-availability-form">
+								<?php echo wp_kses( $tf_ext_booking_code, Helper::tf_custom_wp_kses_allow_tags() ); ?>
+                            </div>
+						<?php endif; ?>
+
+                        <div id="hotel-map-location" class="tf-location tf-single-widgets">
+							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) : ?>
+
+								<?php if ( $address && $tf_openstreet_map != "default" && ( empty( $address_latitude ) || empty( $address_longitude ) ) ): ?>
+                                <iframe src="https://maps.google.com/maps?q=<?php echo esc_html( $address ); ?>&output=embed" width="100%" height="299" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+							<?php elseif ( $address && $tf_openstreet_map == "default" && ! empty( $address_latitude ) && ! empty( $address_longitude ) ): ?>
+                                <div id="hotel-location" style="height: 299px;"></div>
+                                <script>
+                                    const map = L.map('hotel-location').setView([<?php echo esc_html( $address_latitude ); ?>, <?php echo esc_html( $address_longitude ); ?>], <?php echo esc_html( $address_zoom ); ?>);
+
+                                    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                        maxZoom: 15,
+                                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                                    }).addTo(map);
+
+                                    const svgIcon = L.divIcon({
+                                        html: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="45" viewBox="0 0 32 45" fill="none">
+                         <ellipse cx="16" cy="42.5" rx="11" ry="2.5" fill="#DABEA9"/>
+                         <path d="M14 41.0171C9.66667 35.6849 0 22.9696 0 15.7506C0 7.05494 7.08333 0 16 0C24.8333 0 32 7.05494 32 15.7506C32 22.9696 22.25 35.6849 17.9167 41.0171C16.9167 42.2476 15 42.2476 14 41.0171ZM16 21.0008C18.9167 21.0008 21.3333 18.7038 21.3333 15.7506C21.3333 12.8794 18.9167 10.5004 16 10.5004C13 10.5004 10.6667 12.8794 10.6667 15.7506C10.6667 18.7038 13 21.0008 16 21.0008Z" fill="#FF6B00"/>
+                       </svg>`,
+                                        className: '',
+                                        iconSize: [32, 45],
+                                        iconAnchor: [16, 45],
+                                        popupAnchor: [0, -45]
+                                    });
+
+                                    L.marker([<?php echo esc_html( $address_latitude ); ?>, <?php echo esc_html( $address_longitude ); ?>], {icon: svgIcon})
+                                        .addTo(map)
+                                        .bindPopup('<?php echo esc_html( $address ); ?>');
+                                </script>
+							<?php else: ?>
+                                <iframe src="https://maps.google.com/maps?q=<?php echo esc_html( $address ); ?>&output=embed" width="100%" height="299" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+							<?php endif; ?>
+
+							<?php else: ?>
+
+							<?php if ( $address && $tf_openstreet_map != "default" && ( empty( $address_latitude ) || empty( $address_longitude ) ) ): ?>
+                                <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address ); ?>&output=embed" width="100%" height="299" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+							<?php elseif ( $address && $tf_openstreet_map == "default" && ! empty( $address_latitude ) && ! empty( $address_longitude ) ): ?>
+                                <div id="hotel-location" style="height: 299px;"></div>
+                                <script>
+                                    const map = L.map('hotel-location').setView([<?php echo esc_html( $address_latitude ); ?>, <?php echo esc_html( $address_longitude ); ?>], <?php echo esc_html( $address_zoom ); ?>);
+
+                                    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                        maxZoom: 15,
+                                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                                    }).addTo(map);
+
+                                    const svgIcon = L.divIcon({
+                                        html: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="45" viewBox="0 0 32 45" fill="none">
+                         <ellipse cx="16" cy="42.5" rx="11" ry="2.5" fill="#DABEA9"/>
+                         <path d="M14 41.0171C9.66667 35.6849 0 22.9696 0 15.7506C0 7.05494 7.08333 0 16 0C24.8333 0 32 7.05494 32 15.7506C32 22.9696 22.25 35.6849 17.9167 41.0171C16.9167 42.2476 15 42.2476 14 41.0171ZM16 21.0008C18.9167 21.0008 21.3333 18.7038 21.3333 15.7506C21.3333 12.8794 18.9167 10.5004 16 10.5004C13 10.5004 10.6667 12.8794 10.6667 15.7506C10.6667 18.7038 13 21.0008 16 21.0008Z" fill="#FF6B00"/>
+                       </svg>`,
+                                        className: '',
+                                        iconSize: [32, 45],
+                                        iconAnchor: [16, 45],
+                                        popupAnchor: [0, -45]
+                                    });
+
+                                    L.marker([<?php echo esc_html( $address_latitude ); ?>, <?php echo esc_html( $address_longitude ); ?>], {icon: svgIcon})
+                                        .addTo(map)
+                                        .bindPopup('<?php echo esc_html( $address ); ?>');
+                                </script>
+							<?php else: ?>
+                                <iframe src="https://maps.google.com/maps?q=<?php echo esc_html( $address ); ?>&output=embed" width="100%" height="299" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+							<?php endif; ?>
+
+							<?php endif; ?>
+
+							<?php if ( ! empty( $meta['nearby-places'] ) ) { ?>
+                                <div class="tf-whats-around">
+                                    <span class="tf-whats-around-title"><?php echo ! empty( $meta['section-title'] ) ? esc_html( $meta['section-title'] ) : esc_html( "What’s around?" ); ?></span>
+                                    <ul>
+										<?php foreach ( $meta['nearby-places'] as $place ) { ?>
+                                            <li>
+                                                <span>
+                                                    <?php if ( ! empty( $place['place-icon'] ) ) { ?>
+                                                        <i class="<?php echo esc_attr( $place['place-icon'] ); ?>"></i>
+                                                    <?php } ?>
+	                                                <?php echo ! empty( $place['place-title'] ) ? esc_html( $place['place-title'] ) : ''; ?>
+                                                </span>
+                                                <span><?php echo ! empty( $place['place-dist'] ) ? esc_html( $place['place-dist'] ) : ''; ?></span>
+                                            </li>
+										<?php } ?>
+                                    </ul>
+                                </div>
+							<?php } ?>
+                        </div>
+
 
                         <!-- Enquery Section -->
 						<?php
@@ -341,34 +306,43 @@ use \Tourfic\App\TF_Review;
 						if ( ! empty( $tf_enquiry_section_status ) && ( ! empty( $tf_enquiry_section_icon ) || ! empty( $tf_enquiry_section_title ) || ! empty( $enquery_button_text ) ) ) {
 							?>
                             <div class="tf-send-inquiry tf-single-widgets">
-								<?php
-								if ( ! empty( $tf_enquiry_section_icon ) ) {
-									?>
-                                    <i class="<?php echo $tf_enquiry_section_icon; ?>" aria-hidden="true"></i>
-									<?php
-								}
-								if ( ! empty( $tf_enquiry_section_title ) ) {
-									?>
-                                    <h3><?php echo $tf_enquiry_section_title; ?></h3>
-									<?php
-								}
-								if ( ! empty( $tf_enquiry_section_cont ) ) {
-									?>
-                                    <p><?php echo $tf_enquiry_section_cont; ?></p>
-									<?php
-								}
-								if ( ! empty( $tf_enquiry_section_button ) ) {
-									?>
-                                    <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-send-inquiry-btn"><span><?php echo $tf_enquiry_section_button; ?></span></a></div>
-									<?php
-								}
-								?>
+								<?php if ( ! empty( $tf_enquiry_section_icon ) ) { ?>
+                                    <div class="tf-enquiry-icon-wrap">
+                                        <i class="<?php echo wp_kses_post( $tf_enquiry_section_icon ); ?>" aria-hidden="true"></i>
+                                    </div>
+								<?php }
+								if ( ! empty( $tf_enquiry_section_title ) ) { ?>
+                                    <h5><?php echo wp_kses_post( $tf_enquiry_section_title ); ?></h5>
+								<?php }
+								if ( ! empty( $tf_enquiry_section_cont ) ) { ?>
+                                    <p><?php echo wp_kses_post( $tf_enquiry_section_cont ); ?></p>
+								<?php }
+								if ( ! empty( $tf_enquiry_section_button ) ) { ?>
+                                    <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-send-inquiry-btn"><span><?php echo esc_html( $tf_enquiry_section_button ); ?></span></a></div>
+								<?php } ?>
                             </div>
 						<?php } ?>
+
+                        <div class="tf-hotel-single-custom-widget-wrap">
+							<?php do_action( "tf_hotel_single_widgets" ); ?>
+                        </div>
                     </div>
                 </div>
             </div>
             <!-- Hotel details End -->
+
+            <!-- Hotel room modal start -->
+            <div class="tf-modal tf-room-modal">
+                <div class="tf-modal-dialog">
+                    <div class="tf-modal-content">
+                        <div class="tf-modal-header">
+                            <a data-dismiss="modal" class="tf-modal-close">&#10005;</a>
+                        </div>
+                        <div class="row tf-modal-body"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Hotel room modal end -->
         </div>
     </div>
     <!--Content section end -->
