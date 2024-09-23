@@ -84,7 +84,7 @@ abstract Class TF_Booking_Details {
 						$paged = 1;
 					}
 
-					$no_of_booking_per_page = 20;
+					$no_of_booking_per_page = 10;
 					$offset                 = ( $paged - 1 ) * $no_of_booking_per_page;
 
 					$tf_booking_details_select = array(

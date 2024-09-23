@@ -70,6 +70,14 @@
                 allowClear: true
             });
         }
+        if ( $('.tf-filter-mail-option-enquiry').length > 0 ) {
+            $('.tf-filter-mail-option-enquiry').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Filters",
+                allowClear: true,
+                minimumResultsForSearch: -1,
+            });
+        }
         
         // Tour Post Section
         if( $('.tf-post-id-filter-options').length > 0 ) {

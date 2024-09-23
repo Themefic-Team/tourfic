@@ -59,6 +59,7 @@
             let $this = $(this);
             let post_id = $this.val() ? $this.val() : '';
             let post_type = $(".enquiry-post-type").val();
+            let filter = $(".tf-filter-mail-option-enquiry ").val();
 
             $.ajax({
                 url: tf_admin_params.ajax_url,
@@ -66,6 +67,44 @@
                 data: {
                     action: 'tf_enquiry_filter_post',
                     post_id: post_id,
+                    post_type: post_type,
+                    filter: filter,
+                    _ajax_nonce: tf_admin_params.tf_nonce
+                },
+                beforeSend: function() {
+                    $("#tf-enquiry-status-loader").addClass("show");
+                },
+                success: function (response) {
+                    $("#tf-enquiry-status-loader").removeClass("show");
+                    if( response.status == "error" ) {
+                        $(".tf-enquiry-details-wrap").append(response.msg);
+                    } else {
+                        $(".tf-enquiry-table").remove();
+                        $(".tf-enquiry-details-wrap").append(response);
+                    }
+                }
+            });
+        });
+
+        $(".tf-order-status-filter-reset-btn").on('click', function() {
+            $(".tf-filter-bulk-option-enquiry").val('').trigger('change');
+            $(".tf-filter-hotel-name").val("").trigger('change');
+            $(".tf-filter-mail-option-enquiry").val( "").trigger('change');
+        });
+
+        $(".tf-filter-mail-option-enquiry").on('change', function() {
+            let $this = $(this);
+            let filter = $this.val() ? $this.val() : '';
+            let post_id = $(".tf-filter-hotel-name ").val()
+            let post_type = $(".enquiry-post-type").val();
+
+            $.ajax({
+                url: tf_admin_params.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'tf_enquiry_filter_mail',
+                    filter: filter,
+                    post_id : post_id,
                     post_type: post_type,
                     _ajax_nonce: tf_admin_params.tf_nonce
                 },
@@ -130,6 +169,23 @@
                     console.log(data);
                 },
             });
+        })
+
+        $(document).on("submit", 'form.tf-enquiry-right-search-filter', function(e) {
+            e.preventDefault();
+
+            let post_id = $("#tf-searching-enquiry-key").val();
+            let select_option = $(".tf-filter-hotel-name option");
+            var values = $.map(select_option ,function(option) {
+                return option.value;
+              }); 
+
+            if( $.inArray(post_id, values) !== -1 ) {
+                $('.tf-filter-hotel-name').val(post_id).trigger('change');
+            } else {
+                notyf.error(tf_admin_params.no_data_found_with_id);
+            }
+            
         })
 
         $(document).on("click", ".tf-single-enquiry-copy-btn", function (e) {

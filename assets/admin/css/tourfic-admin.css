@@ -5218,14 +5218,17 @@ a.tf-import-btn, a.tf-export-btn {
   padding: 10px 20px;
 }
 
-.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-order-status-filter-reset-btn {
+.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-order-status-filter-reset-btn-wrapper {
+  margin-right: 16px;
+}
+
+.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-order-status-filter-reset-btn-wrapper .tf-order-status-filter-reset-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   cursor: pointer;
   user-select: none;
-  margin-right: 16px;
 }
 
 .tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-enquiry-reset-button-text {
@@ -5237,7 +5240,7 @@ a.tf-import-btn, a.tf-export-btn {
   text-decoration: none;
 }
 
-.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter {
+.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter, .tf_booking_details_wrap .tf-booking-header-filter .tf-enquiry-right-search-filter {
   border-radius: 8px;
   border: 1px solid #87888B;
   background: #FFF;
@@ -5248,19 +5251,19 @@ a.tf-import-btn, a.tf-export-btn {
 }
 
 @media only screen and (max-width: 1199.98px) {
-  .tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter {
+  .tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter, .tf_booking_details_wrap .tf-booking-header-filter .tf-enquiry-right-search-filter {
     display: inline-flex;
     margin-top: 16px;
   }
 }
 
 @media only screen and (max-width: 991.98px) {
-  .tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter {
+  .tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter, .tf_booking_details_wrap .tf-booking-header-filter .tf-enquiry-right-search-filter {
     display: flex;
   }
 }
 
-.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter input {
+.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter input, .tf_booking_details_wrap .tf-booking-header-filter .tf-enquiry-right-search-filter input {
   width: 100%;
   border: 0px solid;
   color: #87888B;
@@ -5274,17 +5277,17 @@ a.tf-import-btn, a.tf-export-btn {
   -moz-appearance: textfield;
 }
 
-.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter input:focus {
+.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter input:focus, .tf_booking_details_wrap .tf-booking-header-filter .tf-enquiry-right-search-filter input:focus {
   outline: none;
   box-shadow: none;
 }
 
-.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter input::-webkit-outer-spin-button, .tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter input::-webkit-inner-spin-button {
+.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter input::-webkit-outer-spin-button, .tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter input::-webkit-inner-spin-button, .tf_booking_details_wrap .tf-booking-header-filter .tf-enquiry-right-search-filter input::-webkit-outer-spin-button, .tf_booking_details_wrap .tf-booking-header-filter .tf-enquiry-right-search-filter input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter button {
+.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter button, .tf_booking_details_wrap .tf-booking-header-filter .tf-enquiry-right-search-filter button {
   cursor: pointer;
   background-color: transparent;
   border: 0px solid;
@@ -6302,15 +6305,6 @@ a.tf-import-btn, a.tf-export-btn {
   max-width: 100%;
 }
 
-.tf-enquiry-details-wrap .tf-booking-header-filter .tf-right-search-filter {
-  width: 28%;
-  flex-direction: row-reverse;
-}
-
-.tf-enquiry-details-wrap .tf-booking-header-filter .tf-right-search-filter button {
-  padding: 0px;
-}
-
 .tf-enquiry-table .tf-enquiry-unread th, .tf-enquiry-table .tf-enquiry-unread td {
   background-color: #EDF2F7 !important;
   border-bottom: 1px solid #F0F2F4 !important;
@@ -6750,6 +6744,25 @@ a.tf-import-btn, a.tf-export-btn {
   margin-left: 8px;
   cursor: pointer;
   font-size: 16px;
+}
+
+.tf-enquiry-details-wrap .tf-booking-header-filter .tf-right-search-filter, .tf-enquiry-details-wrap .tf-booking-header-filter .tf-enquiry-right-search-filter {
+  width: 24%;
+  flex-direction: row-reverse;
+}
+
+.tf-enquiry-details-wrap .tf-booking-header-filter .tf-right-search-filter button, .tf-enquiry-details-wrap .tf-booking-header-filter .tf-enquiry-right-search-filter button {
+  padding: 0px;
+}
+
+@media only screen and (max-width: 991.98px) {
+  .tf-enquiry-details-wrap .tf-booking-header-filter .tf-bulk-action-form {
+    width: 100%;
+    gap: 12px;
+  }
+  .tf-enquiry-details-wrap .tf-booking-header-filter .tf-right-search-filter {
+    width: unset;
+  }
 }
 
 
