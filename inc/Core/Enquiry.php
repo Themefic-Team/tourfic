@@ -397,7 +397,7 @@ abstract class Enquiry {
 										'textarea_name' => 'my_custom_textarea_name',
 										'textarea_rows' => 20,
 										'media_buttons' => false,
-										'wpautop' => false,
+										'wpautop' => true,
 										'teeny' => true,  
 									);
 
