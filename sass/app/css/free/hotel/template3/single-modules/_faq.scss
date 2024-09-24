@@ -1,4 +1,4 @@
-/* Facilities */
+/* Faq */
 .tf-hotel-faqs-section {
     padding: 24px;
     border-radius: 4px;
@@ -16,17 +16,6 @@
             font-weight: 500;
             line-height: 21px;
             margin-bottom: 0;
-        }
-
-        i {
-            font-size: 32px;
-            color: $t4-primary;
-            margin-right: -8px;
-        }
-
-        .hotel-faq-icon-up.active,
-        .hotel-faq-icon-down {
-            display: none;
         }
     }
 

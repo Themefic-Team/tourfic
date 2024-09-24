@@ -1,8 +1,11 @@
 <?php if ( $tc ) { ?>
-<!-- Tourfic Hotel Terms and conditions -->
-<div class="tf-toc-wrapper tf-mb-50 tf-template-section">
-    <div class="tf-section-head">
-        <h2 class="tf-title tf-section-title"><?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : ''; ?></h2>
+<div class="tf-toc-wrapper tf-template-section" id="tf-hotel-policies">
+    <div class="tf-hotel-toc-title-area tf-section-toggle-icon active">
+        <h5 class="tf-section-title" ><?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : ''; ?></h5>
+        <i class="ri-arrow-down-s-line tf-toggle-icon-down"></i>
+        <i class="ri-arrow-up-s-line tf-toggle-icon-up"></i>
+    </div>
+    <div class="tf-hotel-toc tf-section-toggle">
         <?php echo wpautop( $tc ); ?>
     </div>
 </div>

@@ -358,7 +358,7 @@ class TF_Review {
 
 		$limit = ! empty( Helper::tfopt( 'r-base' ) ) ? Helper::tfopt( 'r-base' ) : 5;
 
-		$html = '<div class="tf-rating-wrapper">';
+		$html = '<div class="tf-rating-wrapper tf-star-base-'.$limit.'">';
         $counts = array_count_values($fields);
         $usage = [];
 		foreach ( $fields as $key => $field ) {
@@ -507,7 +507,7 @@ class TF_Review {
             $icons .= '<i class="fas fa-star-half-alt"></i>';
         }
     
-        return '<div>' . $icons . '</div>' . $rating;
+        return '<div>' . $icons . '</div><span>' . $rating .'</span>';
     }
 
     public static function tf_archive_single_rating( $post_id = null ) {

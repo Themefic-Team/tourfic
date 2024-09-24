@@ -35,6 +35,7 @@ class Hotel {
 		add_action( 'wp_ajax_nopriv_tf_hotel_search', array( $this, 'tf_hotel_search_ajax_callback' ) );
 		add_action( 'tf_hotel_features_filter', array( $this, 'tf_hotel_filter_by_features' ), 10, 1 );
 		add_action( 'wp_after_insert_post', array( $this, 'tf_hotel_features_assign_taxonomies' ), 100, 3 );
+		//add_filter( 'comment_form_fields', array($this, 'tf_move_comment_field') );
 	}
 
 	/**
@@ -3836,5 +3837,16 @@ class Hotel {
 		}
 
 		return $hotel_template;
+	}
+
+	function tf_move_comment_field( $fields ) {
+        global $post;
+		$post_id           = $post->ID;
+        if(get_post_type( $post_id ) == "tf_hotel" && self::template('single', $post_id) == 'design-3') {
+	        $comment_field = $fields['comment'];
+	        unset( $fields['comment'] );
+	        $fields['comment'] = $comment_field;
+        }
+		return $fields;
 	}
 }

@@ -2374,19 +2374,17 @@
             });
         });
 
-        // Template 4 hotel faq toggle
-        $('.tf-hotel-faq-title-area').on("click", function () {
+        // Template 4 section toggle
+        $('.tf-section-toggle-icon').on("click", function () {
             var $this = $(this);
+            var parent = $this.closest('.tf-template-section');
             if (!$this.hasClass("active")) {
-                $(".tf-hotel-faqs").slideUp(400);
-                $(".tf-hotel-faq-title-area").removeClass("active");
-                $('.hotel-faq-icon-down').removeClass("active");
+                parent.find(".tf-section-toggle").slideUp(500);
+                $this.removeClass("active");
+                parent.find('.tf-toggle-icon-down').removeClass("active");
             }
             $this.toggleClass("active");
-            $(this).closest('.tf-hotel-faqs').toggleClass('active');
-            $(this).find('.hotel-faq-icon-down').toggle();
-            $(this).find('.hotel-faq-icon-up').toggleClass('active');
-            $this.next().slideToggle();
+            parent.find(".tf-section-toggle").slideToggle();
         });
 
 

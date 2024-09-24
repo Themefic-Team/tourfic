@@ -7,12 +7,12 @@ if( !empty( $hotel_facilities_categories ) && !empty( $hotel_facilities ) ){
 	?>
     <div class="tf-hotel-facilities-section tf-template-section" id="tf-hotel-facilities">
         <div class="tf-hotel-facilities-container">
-            <div class="tf-hotel-facilities-title-area active">
+            <div class="tf-hotel-facilities-title tf-section-toggle-icon active">
                 <h5 class="tf-title tf-section-title" ><?php echo !empty($meta['facilities-section-title']) ? esc_html($meta['facilities-section-title']) : ''; ?></h5>
-                <i class="ri-arrow-down-s-line hotel-facilities-icon-down"></i>
-                <i class="ri-arrow-up-s-line hotel-facilities-icon-up"></i>
+                <i class="ri-arrow-down-s-line tf-toggle-icon-down"></i>
+                <i class="ri-arrow-up-s-line tf-toggle-icon-up"></i>
             </div>
-            <div class="tf-hotel-facilities-content-area">
+            <div class="tf-hotel-facilities-content-area tf-section-toggle">
 				<?php
 				$facilities_list = [];
 				if( !empty($meta['hotel-facilities']) ){

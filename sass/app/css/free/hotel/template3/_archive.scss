@@ -3,6 +3,7 @@ $t4-orange-background: #FEF9F6;
 $t4-orange-light: #FFEDE1;
 $t4-orange-100: #FBF4EF;
 $t4-orange-200: #F5E9E0;
+$t4-orange-500: #BF7540;
 $t4-yellow: #FFC700;
 $t4-paragraph: #6E655E;
 $t4-orange-1000: #1A0B00;
@@ -596,6 +597,9 @@ $t4-main-color: #060D1C;
                         li {
                             color: $t4-paragraph;
                             line-height: 20px;
+                            @include flexbox();
+                            @include align-items(center);
+                            gap: 8px;
                         }
                     }
 

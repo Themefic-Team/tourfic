@@ -8,7 +8,7 @@
         border-radius: 4px;
         background: $t4-orange-100;
 
-        .tf-hotel-facilities-title-area {
+        .tf-hotel-facilities-title {
             @include flexbox();
             @include justify-content(space-between);
             align-items: center;
@@ -20,16 +20,6 @@
                 font-weight: 500;
                 line-height: 21px;
                 margin-bottom: 0;
-            }
-
-            i {
-                font-size: 32px;
-                color: $t4-primary;
-                margin-right: -8px;
-            }
-
-            .hotel-facilities-icon-down {
-                display: none;
             }
         }
 
