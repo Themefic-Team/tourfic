@@ -482,11 +482,11 @@ $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_dat
                     <?php } ?>
 
                     <?php if(!empty($car_driverinfo_status)){ ?>
-                    <div class="tf-driver-details tf-flex tf-flex-direction-column tf-flex-gap-16">
+                    <div class="tf-driver-details tf-flex tf-flex-direction-column tf-flex-gap-16 tf-mb-30">
                         <div class="tf-driver-details-header tf-flex tf-flex-space-bttn tf-flex-align-center">
-                            <h3>Driver details</h3>
+                            <h3><?php esc_html_e("Driver details", "tourfic"); ?></h3>
                             <span>
-                            <i class="ri-shield-check-line"></i> Verified
+                            <i class="ri-shield-check-line"></i> <?php esc_html_e("Verified", "tourfic"); ?>
                             </span>
                         </div>
                         <div class="tf-driver-photo tf-flex tf-flex-gap-16">
@@ -497,36 +497,113 @@ $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_dat
                                 <?php if(!empty($driver_name)){ ?>
                                 <h4><?php echo esc_attr($driver_name); ?></h4>
                                 <?php } ?>
-                                <p>Joined May 2024</p>
+                                <?php if(!empty($driver_age)){ ?>
+                                   <p> <?php esc_html_e("Age", "tourfic"); ?> <?php echo esc_attr($driver_age); ?> <?php esc_html_e("Years", "tourfic"); ?>
+                                    </p>
+                                <?php } ?>
+
+                                <div class="tf-driver-contact-info">
+                                    <ul class="tf-flex tf-flex-gap-16">
+                                        <?php if(!empty($driver_email)){ ?>
+                                        <li>
+                                            <a href="">
+                                                <i class="ri-mail-line"></i>
+                                                <div class="tf-tooltip-info">
+                                                    <p><?php echo esc_attr($driver_email); ?></p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <?php } ?>
+                                        <?php if(!empty($driver_phone)){ ?>
+                                        <li>
+                                            <a href="">
+                                                <i class="ri-phone-line"></i>
+                                                <div class="tf-tooltip-info">
+                                                    <p><?php echo esc_attr($driver_phone); ?></p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <?php } ?>
+                                        <?php if(!empty($driver_address)){ ?>
+                                        <li>
+                                            <a href="">
+                                                <i class="ri-map-pin-user-line"></i>
+                                                <div class="tf-tooltip-info">
+                                                    <p><?php echo esc_attr($driver_address); ?></p>
+                                                </div>
+                                            </a>
+
+                                        </li>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                        <div class="tf-driver-contact-info">
-                            <ul class="tf-flex tf-flex-direction-column tf-flex-gap-16">
-                                <?php if(!empty($driver_email)){ ?>
-                                <li class="tf-flex tf-flex-gap-8">
-                                    <i class="ri-mail-line"></i>
-                                    <?php echo esc_attr($driver_email); ?>
-                                </li>
+                    </div>
+                    <?php } ?>
+
+                    <?php if(!empty($car_information_section_status)){ ?>
+                    <div class="tf-driver-details tf-flex tf-flex-direction-column tf-flex-gap-16">
+                        <div class="tf-driver-details-header tf-flex tf-flex-space-bttn tf-flex-align-center">
+                            <h3><?php esc_html_e("Host Information", "tourfic"); ?></h3>
+                            <span>
+                            <i class="ri-shield-check-line"></i> <?php esc_html_e("Verified", "tourfic"); ?>
+                            </span>
+                        </div>
+                        <div class="tf-driver-photo tf-flex tf-flex-gap-16">
+                            <?php if(!empty($car_owner_owner_image)){ ?>
+                            <img src="<?php echo esc_url($car_owner_owner_image); ?>">
+                            <?php } ?>
+                            <div class="tf-driver-info">
+                                <?php if(!empty($car_owner_name)){ ?>
+                                <h4><?php echo esc_attr($car_owner_name); ?></h4>
                                 <?php } ?>
-                                <?php if(!empty($driver_phone)){ ?>
-                                <li class="tf-flex tf-flex-gap-8">
-                                    <i class="ri-phone-line"></i>
-                                    <?php echo esc_attr($driver_phone); ?>
-                                </li>
-                                <?php } ?>
-                                <?php if(!empty($driver_age)){ ?>
-                                <li class="tf-flex tf-flex-gap-8">
-                                    <i class="ri-user-line"></i>
-                                    <?php esc_html_e("Age", "tourfic"); ?> <?php echo esc_attr($driver_age); ?> <?php esc_html_e("Years", "tourfic"); ?>
-                                </li>
-                                <?php } ?>
-                                <?php if(!empty($driver_address)){ ?>
-                                <li class="tf-flex tf-flex-gap-8">
-                                    <i class="ri-map-pin-user-line"></i>
-                                    <?php echo esc_attr($driver_address); ?>
-                                </li>
-                                <?php } ?>
-                            </ul>
+
+                                <div class="tf-driver-contact-info">
+                                    <ul class="tf-flex tf-flex-gap-16">
+                                        <?php if(!empty($car_owner_email)){ ?>
+                                        <li>
+                                            <a href="">
+                                                <i class="ri-mail-line"></i>
+                                                <div class="tf-tooltip-info">
+                                                    <p><?php echo esc_attr($car_owner_email); ?></p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <?php } ?>
+                                        <?php if(!empty($car_owner_phone)){ ?>
+                                        <li>
+                                            <a href="">
+                                                <i class="ri-phone-line"></i>
+                                                <div class="tf-tooltip-info">
+                                                    <p><?php echo esc_attr($car_owner_phone); ?></p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <?php } ?>
+                                        <?php if(!empty($car_owner_fax)){ ?>
+                                        <li>
+                                            <a href="">
+                                                <i class="fa-solid fa-fax"></i>
+                                                <div class="tf-tooltip-info">
+                                                    <p><?php echo esc_attr($car_owner_fax); ?></p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <?php } ?>
+                                        <?php if(!empty($car_owner_website)){ ?>
+                                        <li>
+                                            <a href="">
+                                                <i class="ri-link"></i>
+                                                <div class="tf-tooltip-info">
+                                                    <p><?php echo esc_attr($car_owner_website); ?></p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <?php } ?>

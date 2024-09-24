@@ -143,6 +143,15 @@ while ( have_posts() ) : the_post();
 	$car_protection_content = ! empty( $meta['protection_content'] ) ? $meta['protection_content'] : '';
 	$car_protections = ! empty( $meta['protections'] ) ? $meta['protections'] : '';
 
+	// Information
+	$car_information_section_status = ! empty( $meta['information_section'] ) ? $meta['information_section'] : '';
+	$car_owner_name = ! empty( $meta['owner_name'] ) ? $meta['owner_name'] : '';
+	$car_owner_email = ! empty( $meta['email'] ) ? $meta['email'] : '';
+	$car_owner_phone = ! empty( $meta['phone'] ) ? $meta['phone'] : '';
+	$car_owner_website = ! empty( $meta['website'] ) ? $meta['website'] : '';
+	$car_owner_fax = ! empty( $meta['fax'] ) ? $meta['fax'] : '';
+	$car_owner_owner_image = ! empty( $meta['owner_image'] ) ? $meta['owner_image'] : '';
+
 	// Car Extras
 	$car_extras = ! empty( $meta['extras'] ) ? $meta['extras'] : '';
 

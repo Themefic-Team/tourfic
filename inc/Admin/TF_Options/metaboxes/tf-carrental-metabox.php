@@ -524,11 +524,30 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-contact-info/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
+					'id'       => 'information_section',
+					'type'     => 'switch',
+					'label'    => esc_html__( 'Do you want to show Contact information in the frontend?', 'tourfic' ),
+					'subtitle' => esc_html__( 'Do you want to show Contact information in the frontend?', 'tourfic' )
+				),
+				array(
+					'id'          => 'owner_name',
+					'type'        => 'text',
+					'label'       => __( 'Name', 'tourfic' ),
+					'subtitle'       => __( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
+					'field_width' => '50',
+					'dependency'  => [
+						array( 'information_section', '==', 'true' )
+					],
+				),
+				array(
 					'id'          => 'email',
 					'type'        => 'text',
 					'label'       => __( 'Email address', 'tourfic' ),
 					'subtitle'       => __( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
 					'field_width' => '50',
+					'dependency'  => [
+						array( 'information_section', '==', 'true' )
+					],
 				),
 				array(
 					'id'          => 'phone',
@@ -536,6 +555,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'label'       => __( 'Phone Number', 'tourfic' ),
 					'subtitle'       => __( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
 					'field_width' => '50',
+					'dependency'  => [
+						array( 'information_section', '==', 'true' )
+					],
 				),
 				array(
 					'id'          => 'website',
@@ -543,6 +565,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'label'       => __( 'Website Url', 'tourfic' ),
 					'subtitle'       => __( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
 					'field_width' => '50',
+					'dependency'  => [
+						array( 'information_section', '==', 'true' )
+					],
 				),
 				array(
 					'id'          => 'fax',
@@ -550,6 +575,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'label'       => __( 'Fax Number', 'tourfic' ),
 					'subtitle'       => __( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
 					'field_width' => '50',
+					'dependency'  => [
+						array( 'information_section', '==', 'true' )
+					],
 				),
 				array(
 					'id'      => 'owner_image',
@@ -557,6 +585,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'label'   => __( 'Owner Photo', 'tourfic' ),
 					'subtitle'    => __( 'Please upload the Owner photo to be displayed in the Contact Section.', 'tourfic' ),
 					'library' => 'image',
+					'dependency'  => [
+						array( 'information_section', '==', 'true' )
+					],
 				),
 			),
 		),
