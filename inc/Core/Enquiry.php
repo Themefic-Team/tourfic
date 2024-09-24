@@ -887,8 +887,13 @@ abstract class Enquiry {
 			$to = $reply_mail;
 			$from = "From: " . get_option( 'blogname' ) . " <" . get_option( 'admin_email' ) . ">\r\n";
 			$subject = esc_html__("Re: Response to Your Enquiry About ", 'tourfic') . esc_html( get_the_title( $post_id ) );
+			$headers = array('Content-Type: text/html; charset=UTF-8');
+			$headers[] = $from;
 
-			$send_mail = wp_mail( $to, $subject, $reply_message, $from );
+			$reply_to_email = "ping@msunvi.com";
+			$headers[] = 'Reply-To: ' . $reply_to_email;
+
+			$send_mail = wp_mail( $to, $subject, $reply_message, $headers );
 			$submit_time = date_i18n( 'Y-m-d H:i:s', current_time( 'timestamp' ) );
 
 			$reply_data[] = array(
