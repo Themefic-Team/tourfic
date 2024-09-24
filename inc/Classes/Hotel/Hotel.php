@@ -2299,14 +2299,16 @@ class Hotel {
 
 				<?php wp_nonce_field( 'check_room_avail_nonce', 'tf_room_avail_nonce' ); ?>
                 <div class="tf_booking-dates">
-                    <div class="tf_form-inner tf-field-group">
-                        <svg class="tf-hotel-booking-form-icon" width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M3.0625 0.75C3.28125 0.75 3.5 0.96875 3.5 1.1875V2.5H8.75V1.1875C8.75 0.96875 8.94141 0.75 9.1875 0.75C9.40625 0.75 9.625 0.96875 9.625 1.1875V2.5H10.5C11.457 2.5 12.25 3.29297 12.25 4.25V13C12.25 13.9844 11.457 14.75 10.5 14.75H1.75C0.765625 14.75 0 13.9844 0 13V4.25C0 3.29297 0.765625 2.5 1.75 2.5H2.625V1.1875C2.625 0.96875 2.81641 0.75 3.0625 0.75ZM11.375 6H8.53125V7.96875H11.375V6ZM11.375 8.84375H8.53125V11.0312H11.375V8.84375ZM11.375 11.9062H8.53125V13.875H10.5C10.9648 13.875 11.375 13.4922 11.375 13V11.9062ZM7.65625 11.0312V8.84375H4.59375V11.0312H7.65625ZM4.59375 13.875H7.65625V11.9062H4.59375V13.875ZM3.71875 11.0312V8.84375H0.875V11.0312H3.71875ZM0.875 11.9062V13C0.875 13.4922 1.25781 13.875 1.75 13.875H3.71875V11.9062H0.875ZM0.875 7.96875H3.71875V6H0.875V7.96875ZM4.59375 7.96875H7.65625V6H4.59375V7.96875ZM10.5 3.375H1.75C1.25781 3.375 0.875 3.78516 0.875 4.25V5.125H11.375V4.25C11.375 3.78516 10.9648 3.375 10.5 3.375Z" fill="#6E655E"/>
-                        </svg>
-                        <input type="text" name="check-in-out-date" id="check-in-out-date" class="tf-field tf-check-in-out-date" onkeypress="return false;"
-                               placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?> required
-                               style="width: 100% !important;">
-                    </div>
+                    <label class="tf_label-row">
+                        <div class="tf_form-inner tf-field-group">
+                            <svg class="tf-hotel-booking-form-icon" width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.0625 0.75C3.28125 0.75 3.5 0.96875 3.5 1.1875V2.5H8.75V1.1875C8.75 0.96875 8.94141 0.75 9.1875 0.75C9.40625 0.75 9.625 0.96875 9.625 1.1875V2.5H10.5C11.457 2.5 12.25 3.29297 12.25 4.25V13C12.25 13.9844 11.457 14.75 10.5 14.75H1.75C0.765625 14.75 0 13.9844 0 13V4.25C0 3.29297 0.765625 2.5 1.75 2.5H2.625V1.1875C2.625 0.96875 2.81641 0.75 3.0625 0.75ZM11.375 6H8.53125V7.96875H11.375V6ZM11.375 8.84375H8.53125V11.0312H11.375V8.84375ZM11.375 11.9062H8.53125V13.875H10.5C10.9648 13.875 11.375 13.4922 11.375 13V11.9062ZM7.65625 11.0312V8.84375H4.59375V11.0312H7.65625ZM4.59375 13.875H7.65625V11.9062H4.59375V13.875ZM3.71875 11.0312V8.84375H0.875V11.0312H3.71875ZM0.875 11.9062V13C0.875 13.4922 1.25781 13.875 1.75 13.875H3.71875V11.9062H0.875ZM0.875 7.96875H3.71875V6H0.875V7.96875ZM4.59375 7.96875H7.65625V6H4.59375V7.96875ZM10.5 3.375H1.75C1.25781 3.375 0.875 3.78516 0.875 4.25V5.125H11.375V4.25C11.375 3.78516 10.9648 3.375 10.5 3.375Z" fill="#6E655E"/>
+                            </svg>
+                            <input type="text" name="check-in-out-date" id="check-in-out-date" class="tf-field tf-check-in-out-date" onkeypress="return false;"
+                                   placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?> required
+                                   style="width: 100% !important;">
+                        </div>
+                    </label>
                 </div>
                 <div class="tf-booking-person">
                     <div class="tf-field-group tf_acrselection">
@@ -2365,6 +2367,7 @@ class Hotel {
                     <input type="hidden" name="children_ages" value="<?php echo esc_attr( $children_ages ); ?>"/>
                     <div class="tf-btn">
                         <button class="tf-btn-normal btn-primary tf-submit" type="submit"><?php echo esc_html( $tf_hotel_book_avaibality_button_text ); ?></button>
+                        <span class="tf-hotel-error-msg"><?php echo esc_html__('Please select check in and check out date', 'tourfic') ?></span>
                     </div>
                 </div>
 

@@ -1799,6 +1799,9 @@ trait Action_Helper {
 				$classes[] = 'tf_template_3_global_layouts';
 				$classes[] = 'tf_template_3_single_hotel';
 			}
+			if ( 'design-3' == $tf_hotel_selected_check ) {
+				$classes[] = 'tf_template_4_single_hotel';
+			}
 		}
 
 		if ( is_singular( 'tf_tours' ) ) {
@@ -1811,6 +1814,9 @@ trait Action_Helper {
 			if ( 'design-2' == $tf_tour_selected_check ) {
 				$classes[] = 'tf_template_3_global_layouts';
 			}
+            if ( 'design-3' == $tf_tour_selected_check ) {
+				$classes[] = 'tf_template_4_single_tour';
+			}
 		}
 
 		if ( is_singular( 'tf_apartment' ) ) {
@@ -1822,6 +1828,9 @@ trait Action_Helper {
 			$tf_apartment_selected_check = ! empty( $tf_apartment_single_template ) ? $tf_apartment_single_template : $tf_apartment_global_template;
 			if ( 'design-1' == $tf_apartment_selected_check ) {
 				$classes[] = 'tf_template_3_global_layouts';
+			}
+			if ( 'design-3' == $tf_apartment_selected_check ) {
+				$classes[] = 'tf_template_4_single_apartment';
 			}
 		}
 

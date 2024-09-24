@@ -37,6 +37,10 @@
         }
     }
 
+    .tf-date-required .tf-field{
+        border-color: red !important;
+    }
+
     .tf_acrselection-child{
         margin-bottom: 0;
     }
@@ -80,14 +84,23 @@
         }
     }
 
-    .tf-btn-normal.btn-primary{
+    .tf-hotel-error-msg{
+        display: none;
+        margin-top: 8px;
+        color: red;
+    }
+
+    .tf-btn{
         margin-top: 24px;
+    }
+    .tf-btn-normal.btn-primary{
+        margin-top: 0;
         padding: 16px;
         border-radius: 6px;
         background-color: $t4-primary !important;
 
         &:hover {
-            background-color: $t4-paragraph !important;
+            background-color: $t4-orange-500 !important;
         }
     }
 }

@@ -296,12 +296,12 @@
                 @include flex-direction(column);
                 @include justify-content(space-between);
                 width: calc(100% - 311px);
+                gap: 24px;
 
                 .tf-available-room-price {
                     @include flexbox();
                     @include flex-direction(column);
                     gap: 4px;
-                    margin-bottom: 24px;
 
                     .tf-price {
                         .woocommerce-Price-amount{
@@ -329,31 +329,26 @@
                 }
 
                 .tf-available-room-select {
-                    color: #595349;
+                    color: $t4-paragraph;
                     font-size: 16px;
-                    display: flex;
-                    width: fit-content;
-                    margin-bottom: 26px;
-                    gap: 8px;
-                    align-items: center;
-                    margin-top: auto;
+
+                    span{
+                        margin-bottom: 8px;
+                        display: inline-block;
+                    }
 
                     select {
-                        height: 37px;
-                        width: 70px;
-                        padding: 8px 20px 8px 13px;
+                        height: 36px;
+                        width: 100%;
+                        padding: 6px 20px 6px 13px;
                         background-size: 10px;
                         background-position: 80% 49%;
-                        text-align: center;
-                        background-color: #FAEEDC;
-                        border: none;
+                        border: 1px solid $t4-orange-200 !important;
+                        background: #fff !important;
+                        color: $t4-paragraph !important;
                         cursor: pointer;
-                        font-weight: 700;
-                        // option:hover,
-                        // option:checked{
-                        //     accent-color: #B58E53 !important;
-                        //     background: #B58E53 !important;
-                        // }
+                        outline: none;
+                        border-radius: 4px;
                     }
                 }
             }
@@ -413,21 +408,19 @@
             }
 
             .tf-deposit-content {
-                text-align: right;
+                .room-deposit-wrap {
+                    margin-top: 0;
+                }
 
                 label {
                     font-size: 12px;
                 }
 
                 input[type=checkbox] {
-                    background: #B58E53;
-                    border-color: #B58E53;
-                    accent-color: #B58E53;
+                    background: $t4-orange-500;
+                    border-color: $t4-orange-500;
+                    accent-color: $t4-orange-500;
                 }
-            }
-
-            .roomselectissue {
-                text-align: right !important;
             }
 
             button,
@@ -448,7 +441,7 @@
                 transition: .3s all ease-in-out;
 
                 &:hover {
-                    background-color: $t4-paragraph;
+                    background-color: $t4-orange-500;
                 }
             }
         }

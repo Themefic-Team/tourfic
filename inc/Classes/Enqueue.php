@@ -481,6 +481,7 @@ class Enqueue {
 				'tf_apartment_min_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['min'] : 0,
 				'tour_form_data'         => isset( $single_tour_form_data ) ? $single_tour_form_data : array(),
 				'hotel_archive_template' => Hotel::template(),
+				'hotel_single_template' => $post_type == 'tf_hotel' ? Hotel::template('single', $post_id) : '',
 			)
 		);
 

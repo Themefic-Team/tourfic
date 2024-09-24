@@ -348,7 +348,7 @@ $t4-main-color: #060D1C;
                         display: inline-block;
                         border-color: transparent;
 
-                        &.tf-hashlink {
+                        &.active {
                             border-color: $t4-primary;
                         }
                     }
@@ -391,6 +391,144 @@ $t4-main-color: #060D1C;
     @import './single-modules/trams-condition';
     @import './single-modules/map';
     @import './single-modules/enquiry';
+}
+
+.tf_template_4_single_hotel{
+    font-family: Ubuntu, sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+
+    #tf-ask-question{
+        .tf-aq-outer{
+            background: #FDF9F3;
+            border-radius: 0px;
+            h4{
+                color: #595349;
+                text-align: center;
+                font-size: 32px !important;
+                font-style: normal;
+                font-weight: 700 !important;
+                line-height: 120%;
+                margin-bottom: 32px;
+            }
+        }
+        .tf-aq-field{
+            input{
+                border: 1px solid #595349;
+                box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+                color: #C1BFBB;
+                background-color: #fdf9f3;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 130%; /* 20.8px */
+                height: 45px;
+                padding: 12px 14px;;
+                border-radius: 0px;
+                &::placeholder{
+                    color: #C1BFBB;
+                }
+            }
+            textarea{
+                border: 1px solid #595349;
+                box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+                background-color: #fdf9f3;
+                color: #C1BFBB;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 130%; /* 20.8px */
+                padding: 12px 14px;
+                border-radius: 0px;
+                &::placeholder{
+                    color: #C1BFBB;
+                }
+            }
+        }
+        // .tf-aq-outer .close-aq{
+        //     background: #B58E53 !important;
+        // }
+        button{
+            background: #b58e53 !important;
+            border-color: #b58e53 !important;
+            border-radius: 0px !important;
+            padding: 12px 32px !important;
+            color: #fdf9f3 !important;
+            font-size: 16px !important;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 150% !important;
+            transition: .3s all ease;
+            &::after{
+                position: static !important;
+            }
+            &:hover{
+                background: #917242 !important;
+            }
+        }
+    }
+
+    #tf-hotel-services{
+        .tf-hotel-services{
+            background: $t4-orange-100;
+            border-radius: 4px;
+            gap: 24px;
+
+            .tf-hotel-services-text{
+                h3 {
+                    color: $t4-orange-1000;
+                    font-weight: 500;
+                    font-size: 18px;
+                    line-height: 21px;
+                    letter-spacing: 0;
+                    margin-bottom: 8px;
+                }
+                p{
+                    color: $t4-paragraph;
+                    margin-top: 0;
+                }
+            }
+            .tf-hotel-service{
+                label{
+                    color: $t4-orange-1000;
+                    font-size: 16px;
+                    font-weight: 500;
+                    margin-bottom: 8px;
+                    display: inline-block;
+                }
+                select{
+                    border: 1px solid $t4-orange-200;
+                    background: #fff;
+                    padding: 15px 16px;
+                    color: $t4-paragraph;
+                    font-size: 14px;
+                    line-height: 16px;
+                    height: 48px;
+
+                    &:focus{
+                        outline: none;
+                        border: none;
+                    }
+                }
+            }
+
+            .tf_button_group{
+                button{
+                    padding: 16px;
+                    border-radius: 6px;
+                    background-color: $t4-primary !important;
+                    border-color: $t4-primary !important;
+                    color: #fff !important;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: $t4-orange-500 !important;
+                        border-color: $t4-orange-500 !important;
+                    }
+                }
+            }
+        }
+    }
 }
 
 .admin-bar .tf-hotel-template-4.tf-hotel-single .tf-details .tf-details-right .tf-sidebar-widgets,

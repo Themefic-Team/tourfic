@@ -2387,13 +2387,37 @@
             parent.find(".tf-section-toggle").slideToggle();
         });
 
+        function onePageNav( switchName ) {
+            const navSwitch = $(switchName);
+            const deductHeight = 60;
+            let navArr = [];
 
+            navSwitch.each(function(i){
+                let navSwitchHref = $(this).attr('href');
+                let tgtOff = $(navSwitchHref).offset().top - deductHeight;
+                navArr.push([]);
+                navArr[i].switch = $(this);
+                navArr[i].tgtOff = tgtOff;
+            });
 
-
-
-
-
-
+            $(window).scroll(function () {
+                for( let i = 0; i < navArr.length; i++ ){
+                    let scroll = $(window).scrollTop();
+                    let tgtKey = navArr[i];
+                    let tgtSwitch = tgtKey.switch;
+                    let tgtOff = tgtKey.tgtOff;
+                    if ( scroll >= tgtOff ) {
+                        navSwitch.removeClass('active');
+                        tgtSwitch.addClass('active');
+                    } else {
+                        tgtSwitch.removeClass('active');
+                    }
+                }
+            });
+        }
+        $(window).on('load resize',function(){
+            onePageNav('.tf-details-menu-item');
+        });
 
 
         // GOOGLE MAP INITIALIZE

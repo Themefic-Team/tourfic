@@ -166,12 +166,22 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                     <!-- menu section Start -->
                     <div class="tf-details-menu">
                         <ul>
-                            <li><a class="tf-hashlink" href="#tf-hotel-description"><?php echo esc_html__( "Description", "tourfic" ); ?></a></li>
-                            <li><a href="#tf-hotel-rooms"><?php echo esc_html__( "Rooms", "tourfic" ); ?></a></li>
-                            <li><a href="#tf-hotel-facilities"><?php echo esc_html__( "Amenities", "tourfic" ); ?></a></li>
-                            <li><a href="#tf-hotel-faq"><?php echo esc_html__( "FAQ", "tourfic" ); ?></a></li>
-                            <li><a href="#tf-hotel-reviews"><?php echo esc_html__( "Reviews", "tourfic" ); ?></a></li>
-                            <li><a href="#tf-hotel-policies"><?php echo esc_html__( "Policies", "tourfic" ); ?></a></li>
+                            <li><a class="tf-details-menu-item" href="#tf-hotel-description"><?php echo esc_html__( "Description", "tourfic" ); ?></a></li>
+							<?php if ( ! empty( $rooms ) ): ?>
+                                <li><a class="tf-details-menu-item" href="#tf-hotel-rooms"><?php echo esc_html__( "Rooms", "tourfic" ); ?></a></li>
+							<?php endif; ?>
+							<?php if ( ! empty( $hotel_facilities_categories ) && ! empty( $hotel_facilities ) ): ?>
+                                <li><a class="tf-details-menu-item" href="#tf-hotel-facilities"><?php echo esc_html__( "Amenities", "tourfic" ); ?></a></li>
+							<?php endif; ?>
+							<?php if ( ! empty( $faqs ) ): ?>
+                                <li><a class="tf-details-menu-item" href="#tf-hotel-faq"><?php echo esc_html__( "FAQ", "tourfic" ); ?></a></li>
+							<?php endif; ?>
+							<?php if ( ! $disable_review_sec == 1 ): ?>
+                                <li><a class="tf-details-menu-item" href="#tf-hotel-reviews"><?php echo esc_html__( "Reviews", "tourfic" ); ?></a></li>
+							<?php endif; ?>
+							<?php if ( ! empty( $tc ) ): ?>
+                                <li><a class="tf-details-menu-item" href="#tf-hotel-policies"><?php echo esc_html__( "Policies", "tourfic" ); ?></a></li>
+							<?php endif; ?>
                         </ul>
                     </div>
                     <!-- menu section End -->

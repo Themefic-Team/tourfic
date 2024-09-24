@@ -24,7 +24,12 @@
 
                 if ($('#tf-required').length === 0) {
                     if($('.tf_booking-dates .tf_label-row').length === 1){
-                        $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required"><b>' + tf_params.field_required + '</b></span>');
+                        if(tf_params.hotel_single_template == 'design-3'){
+                            $('.tf_booking-dates .tf_label-row').addClass('tf-date-required');
+                            $('.tf-hotel-error-msg').show();
+                        } else {
+                            $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required"><b>' + tf_params.field_required + '</b></span>');
+                        }
                     }else{
                         $(".tf-check-in-out-date").trigger("click");
                     }
@@ -32,7 +37,12 @@
                 return;
             } else {
                 if ($('#tf-required').length === 1) {
-                    $('.tf_booking-dates .tf_label-row .required').html('');
+                    if(tf_params.hotel_single_template == 'design-3'){
+                        $('.tf_booking-dates .tf_label-row').removeClass('tf-date-required');
+                        $('.tf-hotel-error-msg').hide();
+                    } else {
+                        $('.tf_booking-dates .tf_label-row .required').html('');
+                    }
                 }
             }
             //get the checked values of features
@@ -87,6 +97,18 @@
                 }
             });
         }
+
+        $(document).on('change', 'input[name=check-in-out-date]', function () {
+            if(tf_params.hotel_single_template == 'design-3'){
+                if($.trim($('input[name=check-in-out-date]').val()) !== '') {
+                    $('.tf_booking-dates .tf_label-row').removeClass('tf-date-required');
+                    $('.tf-hotel-error-msg').hide();
+                } else {
+                    $('.tf_booking-dates .tf_label-row').addClass('tf-date-required');
+                    $('.tf-hotel-error-msg').show();
+                }
+            }
+        });
 
         $(document).on('click', '#tf-single-hotel-avail .tf-submit', function (e) {
             e.preventDefault();
@@ -190,11 +212,11 @@
                         return false;
                     } else {
 
-                        if (response.redirect_to) {
-                            window.location.replace(response.redirect_to);
-                        } else {
-                            jQuery(document.body).trigger('added_to_cart');
-                        }
+                        // if (response.redirect_to) {
+                        //     window.location.replace(response.redirect_to);
+                        // } else {
+                        //     jQuery(document.body).trigger('added_to_cart');
+                        // }
 
                     }
                 },
