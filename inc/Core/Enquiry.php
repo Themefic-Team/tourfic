@@ -401,7 +401,7 @@ abstract class Enquiry {
 										'teeny' => true,  
 									);
 
-									wp_editor($content, $editor_id, $settings);
+									wp_editor('', $editor_id, $settings);
 								?>
 
 								<input type="hidden" class="tf-enquiry-reply-email" value="<?php echo esc_html($data["uemail"]); ?>">
