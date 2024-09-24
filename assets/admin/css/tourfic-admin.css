@@ -6621,7 +6621,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item .tf-single-accordion-body {
   margin-top: 16px;
   color: #5D5676;
-  font-family: Inter;
+  font-family: inherit;
   font-size: 15px;
   font-style: normal;
   font-weight: 400;
@@ -6656,7 +6656,7 @@ a.tf-import-btn, a.tf-export-btn {
   line-height: 1.6;
 }
 
-.tf-enquiry-single-details-wrapper .tf-single-enquiry-left #tf-single-enquiry-reply-form button {
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left #tf-single-enquiry-reply-form .tf-enquiry-reply-button {
   align-self: flex-end;
   padding: 8px 20px;
   background-color: #003c79;
@@ -6676,7 +6676,7 @@ a.tf-import-btn, a.tf-export-btn {
   cursor: pointer;
 }
 
-.tf-enquiry-single-details-wrapper .tf-single-enquiry-left #tf-single-enquiry-reply-form button:hover {
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left #tf-single-enquiry-reply-form .tf-enquiry-reply-button:hover {
   background-color: #001f3e;
   border-color: #001f3e;
   color: #fff;
@@ -6755,13 +6755,25 @@ a.tf-import-btn, a.tf-export-btn {
   padding: 0px;
 }
 
+.tf-enquiry-details-wrap p:first-child {
+  margin-top: 0px;
+}
+
+.tf-enquiry-details-wrap .tf-single-accordion-body p:last-child {
+  margin-bottom: 0px;
+}
+
+#tf-enquiry-reply-editor_ifr, #tf-enquiry-reply-editor {
+  height: 200px !important;
+}
+
 @media only screen and (max-width: 991.98px) {
   .tf-enquiry-details-wrap .tf-booking-header-filter .tf-bulk-action-form {
     width: 100%;
     gap: 12px;
   }
   .tf-enquiry-details-wrap .tf-booking-header-filter .tf-right-search-filter {
-    width: unset;
+    width: 200px;
   }
 }
 

@@ -128,12 +128,11 @@
 
             let $this = $(this);
             let reply_mail = $this.find(".tf-enquiry-reply-email").val();
-            let reply_message = $this.find(".tf-enquiry-reply-textarea").val();
+            let reply_message = tinyMCE.activeEditor && tinyMCE.activeEditor.getContent() ? tinyMCE.activeEditor.getContent() : $("#tf-enquiry-reply-editor").val();
             let userName = $this.find(".tf-enquiry-reply-name").val();
             let subject = $this.find(".tf-enquiry-reply-subject").val();
             let post_id = $this.find(".tf-enquiry-reply-post-id").val();
             let enquiry_id = $this.find(".tf-enquiry-reply-id").val();
-
 
             $.ajax({
                 url: tf_admin_params.ajax_url,
@@ -158,12 +157,10 @@
                     
                     if(data.status == "success") {
                         notyf.success(data.msg);
+                        window.location.reload();
                     } else if (data.status == "error") {
                         notyf.error(data.msg);
                     }
-                },
-                complete() {
-                    window.location.reload();
                 },
                 error: function(data) {
                     console.log(data);

@@ -366,14 +366,14 @@ abstract class Enquiry {
 												<?php esc_html_e("You", 'tourfic') ?>
 												<span class="tf-single-accordion-dash"><?php esc_html_e('―', 'tourfic') ?></span>
 												<span class="tf-single-accordion-subject">
-												<?php echo $reply["reply_message"] ? ( esc_html( strlen( $reply["reply_message"] ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( $reply["reply_message"], 75 ), 'tourfic' ) : esc_html__( $reply["reply_message"] ), 'tourfic' )) : ''; ?>
+												<?php echo $reply["reply_message"] ? ( wp_kses_post( strlen( strip_tags( $reply["reply_message"] ) ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message"] ), 75 ) , 'tourfic' ) : esc_html__( strip_tags( $reply["reply_message"] ) ), 'tourfic' )) : ''; ?>
 												</span>
 											</div>
 											<div class="tf-single-enquiry-accordion-head-right">
-												<?php esc_html_e($reply["submit_time"]) ?>
+												<?php esc_html_e( date( "M d, Y h:i:s A", strtotime($reply["submit_time"])) ); ?>
 											</div>
 										</div>
-										<div id="tf-single-enquiry-accordion-<?php echo esc_attr($key) ?> tf-single-enquiry-collapse">
+										<div id="tf-single-enquiry-accordion-<?php echo esc_attr($key) ?>" class="tf-single-enquiry-collapse">
 											<div class="tf-single-accordion-body">
 												<?php echo wp_kses_post($reply["reply_message"]) ?>
 											</div>
@@ -391,7 +391,19 @@ abstract class Enquiry {
 								</div>
 							<?php endif; ?>
 							<form id="tf-single-enquiry-reply-form" method="post" style="<?php echo count($reply_data) > 0 ? 'display:none;' : '' ?>" action>
-								<textarea class="tf-enquiry-reply-textarea" placeholder="<?php esc_html_e('Write a message...', 'tourfic') ?>"></textarea>
+								<?php 
+									$editor_id = 'tf-enquiry-reply-editor';
+									$settings = array(
+										'textarea_name' => 'my_custom_textarea_name',
+										'textarea_rows' => 20,
+										'media_buttons' => false,
+										'wpautop' => false,
+										'teeny' => true,  
+									);
+
+									wp_editor($content, $editor_id, $settings);
+								?>
+
 								<input type="hidden" class="tf-enquiry-reply-email" value="<?php echo esc_html($data["uemail"]); ?>">
 								<input type="hidden" class="tf-enquiry-reply-name" value="<?php echo esc_html($data["uname"]); ?>">
 								<input type="hidden" class="tf-enquiry-reply-id" value="<?php echo esc_html($data["id"]); ?>">
@@ -504,6 +516,35 @@ abstract class Enquiry {
 		</div>
 
 		<?php
+	}
+
+	function time_elapsed_string($datetime, $full = false) {
+		$now = new \DateTime;
+		$ago = new \DateTime($datetime);
+		$diff = $now->diff($ago);
+	
+		$diff->w = floor($diff->d / 7);
+		$diff->d -= $diff->w * 7;
+	
+		$string = array(
+			'y' => 'year',
+			'm' => 'month',
+			'w' => 'week',
+			'd' => 'day',
+			'h' => 'hour',
+			'i' => 'minute',
+			's' => 'second',
+		);
+		foreach ($string as $k => &$v) {
+			if ($diff->$k) {
+				$v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+			} else {
+				unset($string[$k]);
+			}
+		}
+	
+		if (!$full) $string = array_slice($string, 0, 1);
+		return $string ? implode(', ', $string) . ' ago' : 'just now';
 	}
 	
 	public function enquiry_table_data( $post_type = '', $post_id = '', $status = '', $offset = 0, $per_page = 0 ) {
