@@ -166,6 +166,7 @@ TF_Settings::option( 'tf_settings', array(
 									),
 									'default'  => 'design-1',
 								),
+								//design 1
 								array(
 									'id'      => 'hotel_design_1_fonts_notice',
 									'type'    => 'notice',
@@ -245,6 +246,7 @@ TF_Settings::option( 'tf_settings', array(
 										),
 									)
 								),
+								//design 2
 								array(
 									'id'      => 'hotel_design_2_fonts_notice',
 									'type'    => 'notice',
@@ -353,6 +355,81 @@ TF_Settings::option( 'tf_settings', array(
 										array(
 											'hotel-section'        => __( 'FAQ', 'tourfic' ),
 											'hotel-section-slug'   => __( 'faq', 'tourfic' ),
+											'hotel-section-status' => true,
+										),
+										array(
+											'hotel-section'        => __( 'Terms & Conditions', 'tourfic' ),
+											'hotel-section-slug'   => __( 'trams-condition', 'tourfic' ),
+											'hotel-section-status' => true,
+										),
+									)
+								),
+								//design 3
+								array(
+									'id'      => 'hotel_design_3_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Ubuntu" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'single-hotel', '==', 'design-3' ),
+								),
+								array(
+									'id'         => 'single-hotel-layout-3',
+									'class'      => 'disable-sortable',
+									'type'       => 'repeater',
+									'drag_only'  => true,
+									'label'      => __( 'Single Hotel Template Sections', 'tourfic' ),
+									'subtitle'   => __( 'You can change the order of sections by dragging and dropping them.', 'tourfic' ),
+									'dependency' => array( 'single-hotel', '==', 'design-3' ),
+									'field_title'=> 'hotel-section',
+									'fields'     => array(
+										array(
+											'id'         => 'hotel-section',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Name', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'         => 'hotel-section-slug',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Slug', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'       => 'hotel-section-status',
+											'type'     => 'switch',
+											'label'    => __( 'Section Status', 'tourfic' ),
+											'subtitle' => __( 'Enable/disable this section.', 'tourfic' ),
+										),
+									),
+									'default'    => array(
+										array(
+											'hotel-section'        => __( 'Description', 'tourfic' ),
+											'hotel-section-slug'   => __( 'description', 'tourfic' ),
+											'hotel-section-status' => true,
+										),
+										array(
+											'hotel-section'        => __( 'Room', 'tourfic' ),
+											'hotel-section-slug'   => __( 'rooms', 'tourfic' ),
+											'hotel-section-status' => true,
+										),
+										array(
+											"hotel-section"        => __( "Facilities", "tourfic" ),
+											"hotel-section-slug"   => __( "facilities", "tourfic" ),
+											"hotel-section-status" => true,
+										),
+										array(
+											'hotel-section'        => __( 'FAQ', 'tourfic' ),
+											'hotel-section-slug'   => __( 'faq', 'tourfic' ),
+											'hotel-section-status' => true,
+										),
+										array(
+											'hotel-section'        => __( 'Review', 'tourfic' ),
+											'hotel-section-slug'   => __( 'review', 'tourfic' ),
 											'hotel-section-status' => true,
 										),
 										array(

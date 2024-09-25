@@ -1,4 +1,4 @@
-<div class="tf-hotel-desc-section tf-template-section">
+<div class="tf-hotel-desc-section tf-template-section" id="tf-hotel-description">
     <h3 class="tf-section-title"><?php echo esc_html__( 'Description', 'tourfic' ); ?></h3>
     <div class="tf-hotel-description">
         <div class="tf-short-description">

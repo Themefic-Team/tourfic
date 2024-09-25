@@ -482,6 +482,7 @@ class Enqueue {
 				'tour_form_data'         => isset( $single_tour_form_data ) ? $single_tour_form_data : array(),
 				'hotel_archive_template' => Hotel::template(),
 				'hotel_single_template' => $post_type == 'tf_hotel' ? Hotel::template('single', $post_id) : '',
+				'tf_hotel_date_required_msg' => esc_html__('Please select check in and check out date', 'tourfic'),
 			)
 		);
 
