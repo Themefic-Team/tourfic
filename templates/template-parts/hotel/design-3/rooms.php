@@ -51,7 +51,10 @@ $feature_filter = ! empty( Helper::tfopt( 'feature-filter' ) ) ? Helper::tfopt( 
 <!--Available rooms start -->
 <div class="tf-room-section tf-template-section" id="tf-hotel-rooms">
     <div class="tf-available-rooms-head">
-        <h3 class="tf-section-title"><?php echo sprintf( esc_html__( 'Total %s Room Types', 'tourfic' ), count( $rooms ) ) ?></h3>
+        <h3 class="tf-section-title">
+            <?php //echo sprintf( esc_html__( 'Total %s Room Types', 'tourfic' ), count( $rooms ) ) ?>
+            <?php echo ! empty( $meta["room-section-title"] ) ? esc_html( $meta["room-section-title"] ) : ''; ?>
+        </h3>
 
         <?php if ( ! empty( $rm_features ) && $feature_filter ): ?>
             <span class="tf-filter"><i class="ri-equalizer-line"></i></span>
