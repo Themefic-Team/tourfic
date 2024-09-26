@@ -826,9 +826,13 @@
 
         // Instructions showing
         $(document).on('click', '.tf-instraction-showing', function (e) {
-            
             $('.tf-car-instraction-popup').css('display', 'flex');
         });   
+
+        $(document).on('click', '.tf-instraction-popup-header .tf-close-popup', function (e) {
+            e.preventDefault();
+            $('.tf-car-instraction-popup').hide();
+        });
 
     });
 
