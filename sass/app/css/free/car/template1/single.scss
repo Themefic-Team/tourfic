@@ -910,6 +910,22 @@
                         &:hover{
                             background: #094C90;
                         }
+                        &.tf-partial-button{
+                            border: 1px solid #0866C4;
+                            background: transparent;
+                            color: #0866C4;
+                            transition: .3s all ease;
+                            &:hover{
+                                border: 1px solid #0866C4;
+                                background: #0866C4;
+                                color: #fff;
+                                svg{
+                                    path{
+                                        stroke: #fff;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
                 .tf-instraction-btn{

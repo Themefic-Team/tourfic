@@ -153,6 +153,11 @@ while ( have_posts() ) : the_post();
 	// Car Extras
 	$car_extras = ! empty( $meta['extras'] ) ? $meta['extras'] : '';
 
+	// Car Deposit
+	$car_allow_deposit = ! empty( $meta['allow_deposit'] ) ? $meta['allow_deposit'] : '';
+	$car_deposit_type = ! empty( $meta['deposit_type'] ) ? $meta['deposit_type'] : 'none';
+	$car_deposit_amount = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : '';
+
 	// FAQ
 	$faqs = ! empty( $meta['faq'] ) ? $meta['faq'] : '';
 

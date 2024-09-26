@@ -17278,6 +17278,20 @@ html {
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-form-submit-btn button:hover {
   background: #094C90;
 }
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-form-submit-btn button.tf-partial-button {
+  border: 1px solid #0866C4;
+  background: transparent;
+  color: #0866C4;
+  transition: 0.3s all ease;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-form-submit-btn button.tf-partial-button:hover {
+  border: 1px solid #0866C4;
+  background: #0866C4;
+  color: #fff;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-form-submit-btn button.tf-partial-button:hover svg path {
+  stroke: #fff;
+}
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-instraction-btn {
   text-align: center;
 }
