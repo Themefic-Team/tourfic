@@ -217,6 +217,19 @@
             $(this).toggleClass("is-active").find(".tf-single-accordion-body").slideToggle("ease-out");
 
         });
+
+        $(".tf-enquiry-single-row").on("click", function(e) {
+
+            let currentURL = window.location.href;
+            let id = $(".tf-enquiry-id", this).val();
+
+            if( $(e.target)[0].className == 'check-column' || $(e.target)[0].className == 'tf-enquiry-name-checkbox'|| $(e.target)[0].className == 'table-name-column' ) {
+                return;
+            }
+
+            let updatedUrl = currentURL + "&enquiry_id=" + id + "&action=preview";
+            window.location.href = updatedUrl;
+        });
     });
 
 })(jQuery);

@@ -6349,19 +6349,19 @@ a.tf-import-btn, a.tf-export-btn {
   margin: 12px 24px;
 }
 
-.tf-enquiry-table tbody tr .check-column .table-name-column {
+.tf-enquiry-table tbody .tf-enquiry-single-row .check-column .table-name-column {
   display: inline-flex;
   align-items: center;
   gap: 12px;
 }
 
-.tf-enquiry-table tbody tr .check-column .table-name-column .tf-checkbox-listing {
+.tf-enquiry-table tbody .tf-enquiry-single-row .check-column .table-name-column .tf-checkbox-listing {
   width: 18px !important;
   justify-content: unset !important;
   justify-self: flex-start !important;
 }
 
-.tf-enquiry-table tbody tr .time-n-date .email-time-date {
+.tf-enquiry-table tbody .tf-enquiry-single-row .time-n-date .email-time-date {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -6369,7 +6369,7 @@ a.tf-import-btn, a.tf-export-btn {
   gap: 4px;
 }
 
-.tf-enquiry-table tbody tr .time-n-date .email-time-date .email-date {
+.tf-enquiry-table tbody .tf-enquiry-single-row .time-n-date .email-time-date .email-date {
   color: #1D2327;
   font-family: inherit;
   font-size: 16px;
@@ -6378,7 +6378,7 @@ a.tf-import-btn, a.tf-export-btn {
   line-height: 1.12;
 }
 
-.tf-enquiry-table tbody tr .time-n-date .email-time-date .email-time {
+.tf-enquiry-table tbody .tf-enquiry-single-row .time-n-date .email-time-date .email-time {
   color: #666D74;
   font-family: inherit;
   font-size: 16px;

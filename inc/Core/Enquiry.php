@@ -172,11 +172,12 @@ abstract class Enquiry {
 							$tr_unread_class = $enquiry["status"] == 'unread' ? 'tf-enquiry-unread' : '';
 						
 						?>
-						<tr class="<?php echo esc_attr($tr_unread_class); ?>">
+						<tr class="<?php echo esc_attr($tr_unread_class); ?> tf-enquiry-single-row">
+							<input type="hidden" class="tf-enquiry-id" value="<?php echo esc_html($enquiry["id"]); ?>">
 							<th class="check-column">
 								<div class="table-name-column">
 									<div class="tf-checkbox-listing">
-										<input id="tf-enquiry-name-checkbox" type="checkbox" name="order_id[]" value="<?php echo esc_html( $enquiry['id'] ); ?>">
+										<input id="tf-enquiry-name-checkbox" class="tf-enquiry-name-checkbox" type="checkbox" name="order_id[]" value="<?php echo esc_html( $enquiry['id'] ); ?>">
 									</div>
 									<?php echo $enquiry["uname"] ? esc_html($enquiry["uname"]) : ''; ?>
 								</div>
