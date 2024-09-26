@@ -183,6 +183,132 @@
                             }
                         }
                     }
+                    .tf-wish-and-share {
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                        gap: 16px;
+                        position: absolute;
+                        right: 16px;
+                        top: 16px;
+                        @media #{$max1024}{
+                            margin-top: 90px;
+                        }
+                        @media #{$max767}{
+                            margin-top: 64px;
+                            padding-right: 16px;
+                        } 
+                        @media #{$max480}{
+                            margin-top: 16px;
+                            padding-right: 16px;
+                        }
+                        
+                        a.tf-share-toggle,
+                        a.tf-wishlist {
+                            margin: 0;
+                            padding: 0;
+                            height: 32px;
+                            width: 32px;
+                            border-radius: 100px;
+                            text-align: center;
+                            line-height: 32px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: #27333F;
+                            cursor: pointer;
+                            font-size: 24px;
+                            text-decoration: none;
+                        }
+                        
+                        .tf-off-canvas-share-box{
+                            display: inline-flex;
+                            align-items: center;
+                            .share-car-content{
+                                display: none;
+                                margin: 0;
+                                padding: 0;
+                                align-items: center;
+                                list-style: none;
+                                &.show{
+                                    display: block;
+                                }
+                                @media #{$max640}{
+                                    left: auto !important;
+                                    right: 0px;
+                                }
+                                @media #{$max480}{
+                                    left: 0 !important;
+                                    right: auto !important;
+                                }
+                                .tf-dropdown-share-content{
+                                    background: #FFFFFF;
+                                    border-radius: 8px;
+                                    padding: 16px 10px;
+                                    width: 280px;
+                                    text-align: center;
+                                    box-shadow: 0px 13px 30px 0px #e0e8ee;
+                                    position: absolute;
+                                    min-width: 100%;
+                                    top: 100%;
+                                    transform: translateY(8px);
+                                    z-index: 9999;
+                                    left: auto;
+                                    right: 0;
+                                    h4{
+                                        font-size: 14px !important;
+                                        color: $color-theme;
+                                        font-weight: 600;
+                                        margin-bottom: 10px;
+                                        display: block;
+                                    }
+                                    ul{
+                                        margin: 0;
+                                        padding: 0;
+                                        list-style: none;
+                                        li{
+                                            display: inline-block;
+                                            a{
+                                                display: inline-block;
+                                                padding: 10px 9px;
+                                                margin: 0;
+                                                i{
+                                                    font-size: 22px;
+                                                }
+                                                color: #0866c4;
+                                                &:hover{
+                                                    background: transparent !important;
+                                                }
+                                            }
+                                            button{
+                                                padding: 10px 8px !important;
+                                                background-color: transparent !important;
+                                                border: 0px solid;
+                                                font-size: 22px !important;
+                                                cursor: pointer;
+                                                color: #0866c4;
+                                                box-shadow: none;
+                                                span{
+                                                    color: #0866c4;
+                                                }
+                                                .share-center-copied-message {
+                                                    display: none;
+                                                }
+                                            }
+                                            
+                                            input{
+                                                @media #{$max640}{
+                                                    display: contents !important;
+                                                }
+                                                padding: 0;
+                                                width: 0;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
                 .tf-gallery{
                     margin-top: 15px;
@@ -788,13 +914,13 @@
                 }
                 .tf-instraction-btn{
                     text-align: center;
-                    a{
-                        text-decoration: none;
+                    span{
                         color: #0866C4;
                         font-size: 16px;
                         font-style: normal;
                         font-weight: 400;
                         line-height: 150%; /* 24px */
+                        margin: 0;
                     }
                 }
             }

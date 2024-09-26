@@ -106,6 +106,95 @@ $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_dat
                                     </span> (<?php echo Pricing::get_total_trips($post_id); ?> <?php esc_html_e( "trips", "tourfic" ) ?>)
                                 </a>
                             </div>
+                            
+                            <div class="tf-wish-and-share">
+                            <?php
+                            // Wishlist
+                            if ( Helper::tfopt( 'wl-bt-for' ) && in_array( '2', Helper::tfopt( 'wl-bt-for' ) ) ) { 
+                                if ( is_user_logged_in() ) {
+                                if ( Helper::tfopt( 'wl-for' ) && in_array( 'li', Helper::tfopt( 'wl-for' ) ) ) {
+                            ?>
+                            <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr('actives') : '' ?>">
+                                <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_html(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"'; } ?>></i>
+                            </a>
+                            <?php } } else{ 
+                            if ( Helper::tfopt( 'wl-for' ) && in_array( 'lo', Helper::tfopt( 'wl-for' ) ) ) {    
+                            ?>
+                            <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr('actives') : '' ?>">
+                                <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_html(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"'; } ?>></i>
+                            </a>
+                            <?php } } } ?>
+                            
+                            <!-- Share Section -->
+                            <?php 
+                            if ( ! $disable_share_opt == '1' ) { ?>
+                            <div class="tf-share tf-off-canvas-share-box">
+                                
+                                <a href="#dropdown-share-center" class="tf-share-toggle tf-icon tf-social-box"
+                                data-toggle="true">
+                                    <i class="ri-share-line"></i>
+                                </a>
+                                <div id="dropdown-share-center" class="share-car-content">
+                                    <div class="tf-dropdown-share-content">
+                                        <h4><?php esc_html_e("Share with friends", "tourfic"); ?></h4>
+                                        <ul>
+                                            <li>
+                                                <a href="http://www.facebook.com/share.php?u=<?php echo esc_url( $share_link ); ?>"
+                                                class="tf-dropdown-item" target="_blank">
+                                            <span class="tf-dropdown-item-content">
+                                                <i class="fab fa-facebook"></i>
+                                            </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="http://twitter.com/share?text=<?php echo esc_attr( $share_text ); ?>&url=<?php echo esc_url( $share_link ); ?>"
+                                                class="tf-dropdown-item" target="_blank">
+                                            <span class="tf-dropdown-item-content">
+                                                <i class="fab fa-twitter-square"></i>
+                                            </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.linkedin.com/cws/share?url=<?php echo esc_url( $share_link ); ?>"
+                                                class="tf-dropdown-item" target="_blank">
+                                            <span class="tf-dropdown-item-content">
+                                                <i class="fab fa-linkedin"></i>
+                                            </span>
+                                                </a>
+                                            </li>
+                                            <?php $share_image_link = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' ); ?>
+                                            <li>
+                                                <a href="http://pinterest.com/pin/create/button/?url=<?php echo esc_url( $share_link ); ?>&media=<?php echo esc_url( get_the_post_thumbnail_url() ); ?>&description=<?php echo esc_attr( $share_text ); ?>"
+                                                class="tf-dropdown-item" target="_blank">
+                                            <span class="tf-dropdown-item-content">
+                                                <i class="fab fa-pinterest"></i>
+                                            </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <div title="<?php esc_attr_e( 'Share this link', 'tourfic' ); ?>"
+                                                    aria-controls="share_link_button">
+                                                    <button id="share_link_button" class="tf_button share-center-copy-cta" tabindex="0"
+                                                            role="button">
+                                                        <i class="fa fa-link" aria-hidden="true"></i>
+                                                        
+                                                        <span class="tf-button-text share-center-copied-message"><?php esc_html_e( 'Link Copied!', 'tourfic' ); ?></span>
+                                                    </button>
+                                                    <input type="text" id="share_link_input"
+                                                        class="share-center-url share-center-url-input"
+                                                        value="<?php echo esc_attr( $share_link ); ?>" readonly style="opacity: 0; width: 0px !important;margin: 0px">
+                                                    
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php } ?>
+                            <!-- End Share Section -->
+                            
+                        </div>
+
                         </div>
 
                         <div class="tf-gallery tf-flex tf-flex-gap-16">
@@ -316,7 +405,25 @@ $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_dat
                             <?php } ?>
                         </div>
                         <div class="tf-instraction-btn tf-mt-16">
-                            <a href="#">Pick-up and Drop-off instructions</a>
+                            <span class="tf-instraction-showing"><?php esc_html_e("Instructions", "tourfic"); ?></span>
+                            
+                            <div class="tf-car-instraction-popup">
+                                <div class="tf-instraction-popup-warp">
+
+                                    <div class="tf-instraction-popup-header tf-flex tf-flex-align-center tf-flex-space-bttn">
+                                        <div class="tf-close-popup">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M15 5L5 15M5 5L15 15" stroke="#566676" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+
+                                    <div class="tf-instraction-content-wraper">
+                                        <?php echo $car_instructions_content; ?>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
 
                         <script>
@@ -506,7 +613,7 @@ $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_dat
                                     <ul class="tf-flex tf-flex-gap-16">
                                         <?php if(!empty($driver_email)){ ?>
                                         <li>
-                                            <a href="">
+                                            <a href="mailto: <?php echo esc_attr($driver_email); ?>">
                                                 <i class="ri-mail-line"></i>
                                                 <div class="tf-tooltip-info">
                                                     <p><?php echo esc_attr($driver_email); ?></p>
@@ -516,7 +623,7 @@ $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_dat
                                         <?php } ?>
                                         <?php if(!empty($driver_phone)){ ?>
                                         <li>
-                                            <a href="">
+                                            <a href="tel: <?php echo esc_attr($driver_phone); ?>">
                                                 <i class="ri-phone-line"></i>
                                                 <div class="tf-tooltip-info">
                                                     <p><?php echo esc_attr($driver_phone); ?></p>
@@ -526,7 +633,7 @@ $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_dat
                                         <?php } ?>
                                         <?php if(!empty($driver_address)){ ?>
                                         <li>
-                                            <a href="">
+                                            <a href="https://maps.google.com/maps?q=<?php echo esc_html($driver_address); ?>" target="_blank">
                                                 <i class="ri-map-pin-user-line"></i>
                                                 <div class="tf-tooltip-info">
                                                     <p><?php echo esc_attr($driver_address); ?></p>
@@ -563,7 +670,7 @@ $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_dat
                                     <ul class="tf-flex tf-flex-gap-16">
                                         <?php if(!empty($car_owner_email)){ ?>
                                         <li>
-                                            <a href="">
+                                            <a href="mailto: <?php echo esc_attr($car_owner_email); ?>">
                                                 <i class="ri-mail-line"></i>
                                                 <div class="tf-tooltip-info">
                                                     <p><?php echo esc_attr($car_owner_email); ?></p>
@@ -573,7 +680,7 @@ $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_dat
                                         <?php } ?>
                                         <?php if(!empty($car_owner_phone)){ ?>
                                         <li>
-                                            <a href="">
+                                            <a href="tel: <?php echo esc_attr($car_owner_phone); ?>">
                                                 <i class="ri-phone-line"></i>
                                                 <div class="tf-tooltip-info">
                                                     <p><?php echo esc_attr($car_owner_phone); ?></p>
@@ -583,7 +690,7 @@ $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_dat
                                         <?php } ?>
                                         <?php if(!empty($car_owner_fax)){ ?>
                                         <li>
-                                            <a href="">
+                                            <a href="tel: <?php echo esc_attr($car_owner_fax); ?>">
                                                 <i class="fa-solid fa-fax"></i>
                                                 <div class="tf-tooltip-info">
                                                     <p><?php echo esc_attr($car_owner_fax); ?></p>
@@ -593,10 +700,10 @@ $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_dat
                                         <?php } ?>
                                         <?php if(!empty($car_owner_website)){ ?>
                                         <li>
-                                            <a href="">
+                                            <a href="<?php echo esc_url($car_owner_website); ?>">
                                                 <i class="ri-link"></i>
                                                 <div class="tf-tooltip-info">
-                                                    <p><?php echo esc_attr($car_owner_website); ?></p>
+                                                    <p><?php echo esc_url($car_owner_website); ?></p>
                                                 </div>
                                             </a>
                                         </li>

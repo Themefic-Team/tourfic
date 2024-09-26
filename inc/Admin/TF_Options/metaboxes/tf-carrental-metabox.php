@@ -917,6 +917,32 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					),
 				),
 				array(
+					'id'    => 'car-instructions-heading',
+					'type'  => 'heading',
+					'label' => 'Booking Instructions Section',
+					'subtitle' => __( 'Each car includes certain items, while others are not part of the package. Clearly define these inclusions and exclusions to prevent any misunderstandings during your car.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'car-protection-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-include-exclude/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'       => 'instructions_section',
+					'type'     => 'switch',
+					'label'    => esc_html__( 'Do you want to show Booking instructions in the frontend?', 'tourfic' ),
+					'subtitle' => esc_html__( 'Do you want to show Booking instructions in the frontend?', 'tourfic' )
+				),
+				array(
+					'id'    => 'instructions_content',
+					'type'  => 'editor',
+					'label' => __( 'Instructions Content', 'tourfic' ),
+					'dependency'  => [
+						array( 'instructions_section', '==', 'true' )
+					],
+				),
+				array(
 					'id'    => 'tour-booking-heading',
 					'type'  => 'heading',
 					'label' => 'Booking Settings',
@@ -1106,6 +1132,42 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 							'label' => __( 'Content', 'tourfic' ),
 						)
 					),
+				)
+			),
+		),
+
+		// Settings
+		'settings'             => array(
+			'title'  => __( 'Settings', 'tourfic' ),
+			'icon'   => 'fa-solid fa-viruses',
+			'fields' => array(
+				array(
+					'id'    => 'settings_headding',
+					'type'  => 'heading',
+					'label' =>  __('Other Settings', 'tourfic' ),
+					'subtitle' => __( 'These are some additional settings specific to this Car Package. Note that some of these settings may override the global settings. ', 'tourfic' ),
+				),
+				array(
+					'id'      => 'tour-setting-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'        => 'c-share',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Share Option', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
+				array(
+					'id'        => 'c-wishlist',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Wishlist Option', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
 				)
 			),
 		),

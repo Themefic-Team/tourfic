@@ -817,6 +817,19 @@
             }); // 800 is the duration of the scroll animation in milliseconds (adjust as needed)
         });        
 
+        // Social Share
+        $('.tf-single-car-section .tf-share-toggle').on("click", function (e) {
+            e.preventDefault();
+            $('.tf-share-toggle').toggleClass('actives');
+            $('.share-car-content').toggleClass('show');
+        });
+
+        // Instructions showing
+        $(document).on('click', '.tf-instraction-showing', function (e) {
+            
+            $('.tf-car-instraction-popup').css('display', 'flex');
+        });   
+
     });
 
 })(jQuery, window);

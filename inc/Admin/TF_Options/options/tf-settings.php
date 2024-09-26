@@ -1563,27 +1563,9 @@ TF_Settings::option( 'tf_settings', array(
 				),
 
 				array(
-					'id'        => 'disable-car-review',
-					'type'      => 'switch',
-					'label'     => __( 'Disable Review Section', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => false
-				),
-
-				array(
 					'id'        => 'disable-car-share',
 					'type'      => 'switch',
 					'label'     => __( 'Disable Share Option', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => false
-				),
-
-				array(
-					'id'        => 'disable-related-car',
-					'type'      => 'switch',
-					'label'     => __( 'Disable Related Section', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => false

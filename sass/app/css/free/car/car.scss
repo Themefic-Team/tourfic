@@ -281,6 +281,36 @@
             }
         }
     }
+
+    .tf-car-instraction-popup{
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 999;
+        background-color: rgba(0,0,0,.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: none;
+        .tf-instraction-popup-warp{
+            border-radius: 16px;
+            background: #FFF;
+            padding: 16px 24px;
+            width: 850px;
+            .tf-instraction-popup-header{
+                justify-content: end;
+                .tf-close-popup{
+                    cursor: pointer;
+                }
+            }
+
+            .tf-instraction-content-wraper{
+
+            }
+        }
+    }
 }
 .tf-single-car-section{
     

@@ -44,25 +44,19 @@ while ( have_posts() ) : the_post();
 	 */
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 
-	$disable_share_opt    = ! empty( $meta['h-share'] ) ? $meta['h-share'] : '';
-	$disable_review_sec   = ! empty( $meta['h-review'] ) ? $meta['h-review'] : '';
-	$disable_wishlist_sec = ! empty( $meta['h-wishlist'] ) ? $meta['h-wishlist'] : 0;
+	$disable_share_opt    = ! empty( $meta['c-share'] ) ? $meta['c-share'] : '';
+	$disable_wishlist_sec = ! empty( $meta['c-wishlist'] ) ? $meta['c-wishlist'] : 0;
 
 	/**
 	 * Get global settings value
 	 */
-	$s_share  = ! empty( Helper::tfopt( 'h-share' ) ) ? Helper::tfopt( 'h-share' ) : 0;
-	$s_review = ! empty( Helper::tfopt( 'h-review' ) ) ? Helper::tfopt( 'h-review' ) : 0;
+	$s_share  = ! empty( Helper::tfopt( 'disable-car-share' ) ) ? Helper::tfopt( 'disable-car-share' ) : 0;
 
 	/**
 	 * Disable Share Option
 	 */
 	$disable_share_opt = ! empty( $disable_share_opt ) ? $disable_share_opt : $s_share;
 
-	/**
-	 * Disable Review Section
-	 */
-	$disable_review_sec = ! empty( $disable_review_sec ) ? $disable_review_sec : $s_review;
 
 	/**
 	 * Assign all values to variables
@@ -142,6 +136,10 @@ while ( have_posts() ) : the_post();
 	$car_protection_section_status = ! empty( $meta['protection_section'] ) ? $meta['protection_section'] : '';
 	$car_protection_content = ! empty( $meta['protection_content'] ) ? $meta['protection_content'] : '';
 	$car_protections = ! empty( $meta['protections'] ) ? $meta['protections'] : '';
+
+	//instructions
+	$car_instructions_section_status = ! empty( $meta['instructions_section'] ) ? $meta['instructions_section'] : '';
+	$car_instructions_content = ! empty( $meta['instructions_content'] ) ? $meta['instructions_content'] : '';
 
 	// Information
 	$car_information_section_status = ! empty( $meta['information_section'] ) ? $meta['information_section'] : '';
