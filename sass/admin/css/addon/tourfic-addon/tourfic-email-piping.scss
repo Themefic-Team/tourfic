@@ -1,3 +1,45 @@
 //global css
 @import '../../../../common/css/variable';
 @import '../../../../common/css/mixin';
+
+
+
+.tfep-connection-setting-footer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 0px 12px 0px;
+
+    #tfep-test-connection {
+        background-color: #003c79;
+        border-color: #003c79;
+        border: 1px solid #003c79;
+        color: #fff;
+        font-weight: 600;
+        font-family: inherit;
+        padding: 5px 12px;
+        border-radius: 4px;
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #001f3e;
+            border-color: #001f3e;
+            color: #fff;
+        }
+    }
+
+    .tfep-connection-result {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .tfep-connection-result.connection-success {
+        color: #00a000;
+    }
+    
+    .tfep-connection-result.connection-failed {
+        color: #f44336;
+    }
+}

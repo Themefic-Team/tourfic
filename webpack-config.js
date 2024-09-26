@@ -42,7 +42,7 @@ const adminScss = glob.sync('./sass/admin/css/free/tourfic-admin.scss');
 const proAdminScss = glob.sync('./sass/admin/css/pro/tourfic-pro-admin.scss');
 const addonAdminScss = glob.sync('./sass/admin/css/addon/tourfic-addon/tourfic-vendor.scss'); 
 const addonAppScss = glob.sync('./sass/app/css/addon/tourfic-vendor.scss'); 
-const tfepAdminScss = glob.sync('./sass/app/css/addon/tourfic-vendor.scss'); 
+const tfepAdminScss = glob.sync('./sass/admin/css/addon/tourfic-addon/tourfic-email-piping.scss'); 
 const tfepAppScss = glob.sync('./sass/app/css/addon/tourfic-email-piping.scss'); 
 
 StyleEntryPoints['tourfic/assets/app/css/tourfic-style'] = appScss;
