@@ -164,7 +164,7 @@ class TF_Promo_Notice {
         $dashboard_banner = isset($this->tf_promo_option['dashboard_banner']) ? $this->tf_promo_option['dashboard_banner'] : '';
         $image_url = isset($dashboard_banner['banner_url']) ? esc_url($dashboard_banner['banner_url']) : '';
         $deal_link = isset($dashboard_banner['redirect_url']) ? esc_url($dashboard_banner['redirect_url']) : ''; 
-        print_r($dashboard_banner);
+        
         $tf_dismiss_admin_notice = get_option( 'tf_dismiss_admin_notice' );
         $get_current_screen = get_current_screen();  
         if(($tf_dismiss_admin_notice == 1  || time() >  $tf_dismiss_admin_notice ) && $get_current_screen->base == 'dashboard'   ){ 
