@@ -130,7 +130,7 @@ class TF_Promo_Notice {
                 update_option( 'tf_room_promo_sidebar_notice', 1); 
 
                 update_option( 'tf_promo__schudle_start_from', time() + 43200);
-            }elseif(empty($bafg_promo__schudle_option)){
+            }elseif(empty($tf_promo__schudle_option)){
                 update_option( 'tf_promo__schudle_start_from', time() + 43200);
             }
             update_option( 'tf_promo__schudle_option', $this->responsed);
