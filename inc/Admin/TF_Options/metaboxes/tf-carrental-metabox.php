@@ -1046,6 +1046,88 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 						array( 'is_taxable', '==', '1' )
 					),
 				),
+				array(
+					'id'    => 'car-cancellation-heading',
+					'type'  => 'heading',
+					'label' => 'Booking Cancellation Section',
+					'subtitle' => __( 'Each car includes certain items, while others are not part of the package. Clearly define these inclusions and exclusions to prevent any misunderstandings during your car.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'car-cancellation-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-include-exclude/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'       => 'cancellation_section',
+					'type'     => 'switch',
+					'label'    => esc_html__( 'Do you want to show Booking cancellation in the frontend?', 'tourfic' ),
+					'subtitle' => esc_html__( 'Do you want to show Booking cancellation in the frontend?', 'tourfic' )
+				),
+				array(
+					'id'           => 'calcellation_policy',
+					'type'         => 'repeater',
+					'label'        => __( 'Items Cancellation', 'tourfic' ),
+					'subtitle'        => __( 'List all the items/features Cancellation in this car package.', 'tourfic' ),
+					'button_title' => __( 'Add New Cancellation', 'tourfic' ),
+					'field_title'  => 'title',
+					'dependency'  => [
+						array( 'cancellation_section', '==', 'true' )
+					],
+					'fields'       => array(
+						array(
+							'id'      => 'cancellation-type',
+							'type'    => 'select',
+							'label'   => esc_html__( 'Cancellation Type', 'tourfic' ),
+							'subtitle'  => esc_html__( 'Choose the type of cancellation you would like to implement for this car.', 'tourfic' ),
+							'options' => array(
+								'free' => esc_html__( 'Free', 'tourfic' ),
+								'paid' => esc_html__( 'Paid', 'tourfic' ),
+							),
+							'default' => 'free'
+						),
+						array(
+							'id'    => 'refund_amount',
+							'type'  => 'number',
+							'label' => __( 'Refund Amount', 'tourfic' ),
+							'dependency'  => array(
+								array( 'cancellation-type', '==', 'paid' )
+							),
+							'field_width' => 50
+						),
+						array(
+							'id'      => 'refund_amount_type',
+							'type'    => 'select',
+							'label'   => esc_html__( 'Refund Type', 'tourfic' ),
+							'options' => array(
+								'percent' => esc_html__( 'Percent', 'tourfic' ),
+								'fixed' => esc_html__( 'Fixed', 'tourfic' ),
+							),
+							'default' => 'percent',
+							'dependency'  => array(
+								array( 'cancellation-type', '==', 'paid' )
+							),
+							'field_width' => 50
+						),
+						array(
+							'id'    => 'before_cancel_time',
+							'type'  => 'number',
+							'label' => __( 'Before Cancel Day/Hour', 'tourfic' ),
+							'field_width' => 50
+						),
+						array(
+							'id'      => 'cancellation-times',
+							'type'    => 'select',
+							'label'   => esc_html__( 'Type', 'tourfic' ),
+							'options' => array(
+								'hour' => esc_html__( 'Hour', 'tourfic' ),
+								'day' => esc_html__( 'Day', 'tourfic' ),
+							),
+							'default' => 'day',
+							'field_width' => 50
+						),
+					),
+				),
 			),
 		),
 
