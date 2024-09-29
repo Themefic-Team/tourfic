@@ -434,6 +434,34 @@ if ( ! function_exists( 'tf_car_search_ajax_callback' ) ) {
  * @author Jahid
  */
 
+function tf_getBestRefundPolicy($cancellations) {
+    $bestPolicy = null;
+    
+    foreach ($cancellations as $cancellation) {
+        // Check if it's a free cancellation
+        if ($cancellation['cancellation_type'] === 'free') {
+            // If we don't have a policy yet, or if this free cancellation has a longer time before cancellation
+            if (!$bestPolicy || $cancellation['before_cancel_time'] > $bestPolicy['before_cancel_time']) {
+                $bestPolicy = $cancellation;
+            }
+        }
+    }
+
+    // If no free cancellation was found, choose the best paid one
+    if (!$bestPolicy) {
+        foreach ($cancellations as $cancellation) {
+            if ($cancellation['cancellation_type'] === 'paid') {
+                // If we don't have a policy yet, or if this one has a higher refund amount
+                if (!$bestPolicy || $cancellation['refund_amount'] > $bestPolicy['refund_amount']) {
+                    $bestPolicy = $cancellation;
+                }
+            }
+        }
+    }
+
+    return $bestPolicy;
+}
+
 add_action( 'wp_ajax_nopriv_tf_car_booking_pupup', 'tf_car_booking_pupup_callback' );
 add_action( 'wp_ajax_tf_car_booking_pupup', 'tf_car_booking_pupup_callback' );
 function tf_car_booking_pupup_callback() {
@@ -452,14 +480,57 @@ function tf_car_booking_pupup_callback() {
 	$car_protection_section_status = ! empty( $meta['protection_section'] ) ? $meta['protection_section'] : '';
 	$car_protection_content = ! empty( $meta['protection_content'] ) ? $meta['protection_content'] : '';
 	$car_protections = ! empty( $meta['protections'] ) ? $meta['protections'] : '';
+	$car_calcellation_policy = ! empty( $meta['calcellation_policy'] ) ? $meta['calcellation_policy'] : '';
+
+	$pickup_date = ! empty( $_POST['pickup_date'] ) ? $_POST['pickup_date'] : '';
+	$pickup_time = ! empty( $_POST['pickup_time'] ) ? $_POST['pickup_time'] : '';
+
+	$bestRefundPolicy = tf_getBestRefundPolicy($car_calcellation_policy);
+
+	$today = new DateTime(); // Current date and time
+	$less_current_day = false;
+
+	// Combine pickup date and time into a single string and convert it to a DateTime object
+	$pickupDateTime = DateTime::createFromFormat('Y/m/d H:i', $pickup_date . ' ' . $pickup_time);
+
+	// Extract the "before_cancel_time" and "cancellation-times" (hours, days, etc.)
+	$beforeCancelTime = (int) $bestRefundPolicy['before_cancel_time'];
+	$cancelTimeUnit = $bestRefundPolicy['cancellation-times']; // Could be 'hour', 'day', etc.
+
+	// Adjust the pickup date and time based on the policy
+	switch ($cancelTimeUnit) {
+		case 'hour':
+			$pickupDateTime->modify("-{$beforeCancelTime} hours");
+			break;
+		case 'day':
+			$pickupDateTime->modify("-{$beforeCancelTime} days");
+			break;
+		// Add other cases as necessary (e.g., weeks, minutes, etc.)
+	}
+
+	// Compare calculated before date with the current day
+	if ($pickupDateTime < $today) {
+		// If the calculated cancellation time is before today, adjust it to the current date and time
+		// $pickupDateTime = $today;
+		$less_current_day = true;
+	}
+
+	// Get the final "before" date and time (ensured to not be before today)
+	$beforeDate = $pickupDateTime->format('Y/m/d');
+	$beforeTime = $pickupDateTime->format('H:i');
+
  	?>
+	<?php if(!$less_current_day){ ?>
 	<div class="tf-cancellation-notice">
 		<span class="tf-flex tf-flex-align-center tf-flex-gap-16">
 			<i class="ri-information-line"></i>
-			<b>Free cancellation</b>
-			Full refund if you cancel your plan anytime before pick-up
+			<?php if('free'==$bestRefundPolicy['cancellation_type']){ ?> <b><?php esc_html_e("Free cancellation", "tourfic"); ?></b> <?php }else{ ?>
+			<?php echo 'paid'==$bestRefundPolicy['cancellation_type'] && 'percent'==$bestRefundPolicy['refund_amount_type'] ? '<b>'.$bestRefundPolicy['refund_amount'].' % deduction</b>' : '<b>'.wc_price($bestRefundPolicy['refund_amount']).' deduction</b>'; ?>
+			<?php } ?>
+			<?php esc_html_e("before", "tourfic"); ?> <?php echo $beforeDate.' '.$beforeTime; ?>
 		</span>
 	</div>
+	<?php } ?>
 
 	<div class="tf-booking-tabs">
 		<ul>

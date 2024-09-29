@@ -1076,7 +1076,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					],
 					'fields'       => array(
 						array(
-							'id'      => 'cancellation-type',
+							'id'      => 'cancellation_type',
 							'type'    => 'select',
 							'label'   => esc_html__( 'Cancellation Type', 'tourfic' ),
 							'subtitle'  => esc_html__( 'Choose the type of cancellation you would like to implement for this car.', 'tourfic' ),
@@ -1091,7 +1091,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 							'type'  => 'number',
 							'label' => __( 'Refund Amount', 'tourfic' ),
 							'dependency'  => array(
-								array( 'cancellation-type', '==', 'paid' )
+								array( 'cancellation_type', '==', 'paid' )
 							),
 							'field_width' => 50
 						),
@@ -1105,7 +1105,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 							),
 							'default' => 'percent',
 							'dependency'  => array(
-								array( 'cancellation-type', '==', 'paid' )
+								array( 'cancellation_type', '==', 'paid' )
 							),
 							'field_width' => 50
 						),

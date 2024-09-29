@@ -277,7 +277,9 @@
             var data = {
                 action: 'tf_car_booking_pupup',
                 _nonce: tf_params.nonce,
-                post_id: post_id
+                post_id: post_id,
+                pickup_date: pickup_date,
+                pickup_time: pickup_time
             };
 
             $.ajax({

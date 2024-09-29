@@ -16112,6 +16112,7 @@ html {
   font-weight: 700 !important;
   line-height: 150%; /* 31.5px */
   margin: 0;
+  margin-bottom: 24px;
 }
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-popup-header .tf-close-popup {
   cursor: pointer;
@@ -16120,7 +16121,7 @@ html {
   border-radius: 8px;
   background: #FFF8E5;
   padding: 16px;
-  margin: 24px 0px;
+  margin-bottom: 24px;
 }
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-cancellation-notice span {
   color: #6B4F00;
