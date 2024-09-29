@@ -41,6 +41,7 @@ function tf_car_booking_callback() {
 	$tf_protection  = isset( $_POST['protection'] ) ? sanitize_text_field( $_POST['protection'] ) : '';
 	$extra_ids  = isset( $_POST['extra_ids'] ) ? $_POST['extra_ids'] : '';
 	$extra_qty  = isset( $_POST['extra_qty'] ) ? $_POST['extra_qty'] : '';
+	$partial_payment  = isset( $_POST['partial_payment'] ) ? $_POST['partial_payment'] : 'no';
 
 	// Booking Confirmation Details
 	$tf_confirmation_details = !empty($_POST['travellerData']) ? $_POST['travellerData'] : "";
@@ -102,7 +103,7 @@ function tf_car_booking_callback() {
 		$tf_cars_data['tf_car_data']['price_total']    	   = $total_prices;
 
 		# Deposit information
-		if ( !empty($car_allow_deposit) && 'none'!=$car_deposit_type ) {
+		if ( !empty($car_allow_deposit) && 'none'!=$car_deposit_type && 'yes'==$partial_payment) {
 			if( !empty($car_deposit_amount) ){
 				if ( 'percent'==$car_deposit_type ) {
 					$deposit_amount = ($tf_cars_data['tf_car_data']['price_total'] * $car_deposit_amount)/100;

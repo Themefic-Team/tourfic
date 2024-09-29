@@ -603,7 +603,8 @@ $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_dat
 
                             </div>
                         <?php } ?>
-                        <input type="hidden" value="<?php echo esc_attr($post_id); ?>" name="post_id">
+                            <input type="hidden" value="<?php echo esc_attr($post_id); ?>" name="post_id">
+                            <input type="hidden" id="tf_partial_payment" value="no">
 
                             <div class="tf-extra-apply-btn">
                                 <button type="submit" class="tf-extra-submit"><?php esc_html_e("Apply", "tourfic"); ?></button>

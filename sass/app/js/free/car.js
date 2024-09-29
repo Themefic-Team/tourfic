@@ -270,6 +270,10 @@
                 return;
             }
 
+            if($this.attr('data-partial')){
+                $('#tf_partial_payment').val($this.attr('data-partial'));
+            }
+
             var data = {
                 action: 'tf_car_booking_pupup',
                 _nonce: tf_params.nonce,
@@ -453,6 +457,7 @@
             let dropoff_time = $('.tf_dropoff_time').val();
             let post_id = $('#post_id').val();
             let protection = $('#protection_value').val();
+            let partial_payment = $('#tf_partial_payment').val();
 
             var data = {
                 action: 'tf_car_booking',
@@ -465,6 +470,7 @@
                 pickup_time: pickup_time,
                 dropoff_time: dropoff_time,
                 protection: protection,
+                partial_payment: partial_payment,
                 extra_ids: extra_ids,
                 extra_qty: extra_qty,
                 travellerData: travellerData
@@ -675,19 +681,19 @@
                 }
                 // Text, email, date inputs
                 $("input[name^='traveller[']").each(function() {
-                    var name = $(this).attr('name');
+                    var name = $(this).attr('name').replace(/^traveller\[(.*)\]$/, '$1'); // Remove 'traveller_' prefix
                     travellerData[name] = $(this).val();
                 });
 
                 // Select dropdowns
                 $("select[name^='traveller[']").each(function() {
-                    var name = $(this).attr('name');
+                    var name = $(this).attr('name').replace(/^traveller\[(.*)\]$/, '$1'); // Remove 'traveller_' prefix
                     travellerData[name] = $(this).val();
                 });
 
                 // Checkbox and Radio buttons
                 $("input[type='checkbox'][name^='traveller[']:checked, input[type='radio'][name^='traveller[']:checked").each(function() {
-                    var name = $(this).attr('name');
+                    var name = $(this).attr('name').replace(/^traveller\[(.*)\]$/, '$1'); // Remove 'traveller_' prefix
                     if (!travellerData[name]) {
                         travellerData[name] = [];
                     }
@@ -697,6 +703,7 @@
     
             var pickup = $('#tf_pickup_location').val();
             let dropoff = $('#tf_dropoff_location').val();
+            let partial_payment = $('#tf_partial_payment').val();
             let pickup_date = $this.closest('.tf-booking-btn').find('#pickup_date').val();
             let dropoff_date = $this.closest('.tf-booking-btn').find('#dropoff_date').val();
             let pickup_time = $this.closest('.tf-booking-btn').find('#pickup_time').val();
@@ -715,6 +722,7 @@
                 pickup_time: pickup_time,
                 dropoff_time: dropoff_time,
                 protection: protection,
+                partial_payment: partial_payment,
                 travellerData: travellerData
             };
             
