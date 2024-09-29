@@ -275,7 +275,8 @@ class Hotel {
 
                                 } else {
                                     $order_check_in_date  = $order_details->check_in;
-                                    $order_check_out_date = $order_details->check_out;
+//                                    $order_check_out_date = $order_details->check_out;
+                                    $order_check_out_date = (new \DateTime( $order_details->check_out ))->modify('-1 day')->format('Y/m/d');
                                     if ( ! empty( $avail_durationdate ) && ( in_array( $order_check_out_date, $avail_durationdate ) ) ) {
                                         # Total number of room booked
                                         $number_orders = $number_orders + $ordered_number_of_room;
