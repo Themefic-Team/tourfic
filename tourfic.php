@@ -251,4 +251,3 @@ function tf_active_template_settings_callback() {
 
 //Register activation hook
 register_activation_hook( __FILE__, 'tf_active_template_settings_callback' );
-
