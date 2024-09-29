@@ -1731,9 +1731,9 @@ class Helper {
                         </svg>
                     </div>
                     <label for="tf-search-location" class="tf-search-field-content">
-                        <span class="tf-search-field-label"><?php _e( "Location", "tourfic" ); ?></span>
+                        <span class="tf-search-field-label"><?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Location', 'tourfic' ) : esc_html__( 'Destination', 'tourfic' ); ?></span>
 
-                        <input type="text" required="" id="<?php echo $place; ?>" class="tf-search-input" placeholder="<?php echo $place_text; ?>" value="<?php echo ! empty( $taxonomy_name ) ? $taxonomy_name : ''; ?>">
+                        <input type="text" required="" id="<?php echo $place; ?>" class="tf-search-input" placeholder="<?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Where are you going?', 'tourfic' ); ?>" value="<?php echo ! empty( $taxonomy_name ) ? $taxonomy_name : ''; ?>">
                         <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? $taxonomy_slug : ''; ?>"/>
                     </label>
                 </div>
@@ -1772,11 +1772,18 @@ class Helper {
 				<?php } ?>
 
 				<?php if ( $post_type == 'tf_tours' ) { ?>
-                    <div class="tf-booking-form-checkin">
-                        <span class="tf-search-field-label"><?php _e( "Date", "tourfic" ); ?></span>
-                        <div class="tf-tour-searching-date-block">
-                            <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                   placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required>
+                    <div class="tf-search-field-checkinout">
+                        <div class="tf-search-field">
+                            <div class="tf-search-field-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+                                    <path d="M14.668 2.99992H18.0013C18.4616 2.99992 18.8346 3.37302 18.8346 3.83325V17.1666C18.8346 17.6268 18.4616 17.9999 18.0013 17.9999H3.0013C2.54107 17.9999 2.16797 17.6268 2.16797 17.1666V3.83325C2.16797 3.37302 2.54107 2.99992 3.0013 2.99992H6.33464V1.33325H8.0013V2.99992H13.0013V1.33325H14.668V2.99992ZM3.83464 7.99992V16.3333H17.168V7.99992H3.83464ZM5.5013 9.66658H7.16797V11.3333H5.5013V9.66658ZM5.5013 12.9999H7.16797V14.6666H5.5013V12.9999ZM8.83464 9.66658H15.5013V11.3333H8.83464V9.66658ZM8.83464 12.9999H13.0013V14.6666H8.83464V12.9999Z"
+                                          fill="#6E655E"/>
+                                </svg>
+                            </div>
+                            <div class="tf-search-field-content">
+                                <span class="tf-search-field-label"><?php _e( "Select Date", "tourfic" ); ?></span>
+                                <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required>
+                            </div>
                         </div>
                     </div>
 				<?php } ?>
@@ -1808,14 +1815,11 @@ class Helper {
                             </div>
 
                             <div class="tf-search-field-content">
-                                <span class="tf-search-field-label"><?php _e( "Guests", "tourfic" ); ?></span>
-                                <span class="tf-guest tf-booking-date">
-                                <?php _e( "01", "tourfic" ); ?>
-                            </span>
-                                <span class="tf-booking-month">
-							<span><?php _e( "guest", "tourfic" ); ?></span>
-
-						</span>
+                                <span class="tf-search-field-label"><?php _e( "Persons", "tourfic" ); ?></span>
+                                <div class="tf-archive-guest-info">
+                                    <span class="tf-adult"><?php _e( "1", "tourfic" ); ?></span> <?php _e( "adult, ", "tourfic" ); ?>
+                                    <span class="tf-children"><?php _e( "0", "tourfic" ); ?></span> <?php _e( "children", "tourfic" ); ?>
+                                </div>
                             </div>
                         </div>
 					<?php } ?>
@@ -1923,7 +1927,7 @@ class Helper {
                 <button class="tf-btn-normal btn-primary tf-submit"><?php esc_html_e( 'Search Now', 'tourfic' ); ?></button>
             </div>
 
-			<?php if ( $post_type == 'tf_tours' ) : ?>
+			<?php if ( $post_type == 'tf_toursss' ) : ?>
                 <script>
                     (function ($) {
                         $(document).ready(function () {
@@ -1981,7 +1985,7 @@ class Helper {
                 </script>
 			<?php endif; ?>
 
-            <?php if ( $post_type == 'tf_hotel' ) : ?>
+            <?php if ( $post_type == 'tf_hotel' || $post_type == 'tf_tours' ) : ?>
                     <script>
                         (function ($) {
                             $(document).ready(function () {
@@ -2380,5 +2384,19 @@ class Helper {
 		echo '<pre>';
 		var_dump( $var );
 		echo '</pre>';
+	}
+
+    /*
+     * Post edit link
+     * @author Foysal
+     */
+	static function edit_link( $post_id ) {
+		if ( current_user_can( 'administrator' ) && current_user_can( 'manage_options' ) ) {
+			$edit_link = get_edit_post_link( $post_id );
+
+			if ( $edit_link ) {
+				return '<a href="' . esc_url( $edit_link ) . '" target="_blank" class="tf-edit-link">' . esc_html__( 'Edit', 'tourfic' ) . '</a>';
+			}
+		}
 	}
 }

@@ -2225,6 +2225,8 @@
                 var guest = Number($('input#adults').val() ? $('input#adults').val() : 0) + Number($('input#children').val() ? $('input#children').val() : 0) + Number($('input#infant').val() ? $('input#infant').val() : 0);
             } else {
                 var guest = Number($('input#adults').val() ? $('input#adults').val() : 0) + Number($('input#children').val() ? $('input#children').val() : 0);
+                var adult = Number($('input#adults').val() ? $('input#adults').val() : 0);
+                var children = Number($('input#children').val() ? $('input#children').val() : 0);
             }
 
             if (guest.toString().length < 2) {
@@ -2232,6 +2234,8 @@
             }
 
             $('span.tf-guest').html(guest);
+            $('span.tf-adult').html(adult);
+            $('span.tf-children').html(children);
         })
 
         $(document).on("mouseup", function (e) {
@@ -2292,11 +2296,15 @@
                 var guest = Number($('input#adults').val()) + Number($('input#children').val()) + Number($('input#infant').val());
             } else {
                 var guest = Number($('input#adults').val()) + Number($('input#children').val());
+                var adult = Number($('input#adults').val());
+                var children = Number($('input#children').val());
             }
             if (guest.toString().length < 2) {
                 guest = '0' + guest;
             }
             $('span.tf-guest').html(guest);
+            $('span.tf-adult').html(adult);
+            $('span.tf-children').html(children);
             var room = Number($('input#room').val());
             if (room.toString().length < 2) {
                 room = '0' + room;

@@ -33,8 +33,13 @@ $t4-main-color: #060D1C;
             padding: 16px 0;
         }
 
-        .tf-booking-form {
+        .tf-container{
             @include flexbox();
+            @include justify-content(center);
+        }
+
+        .tf-booking-form {
+            display: inline-flex;
             @include justify-content(center);
             border-radius: 8px;
             border: 0.5px solid $t4-orange-light;
@@ -583,6 +588,13 @@ $t4-main-color: #060D1C;
                             &:hover {
                                 color: $t4-primary;
                             }
+                        }
+                        
+                        .tf-edit-link{
+                            font-size: 14px;
+                            color: $t4-primary;
+                            text-decoration: underline;
+                            margin-left: 6px;
                         }
                     }
 

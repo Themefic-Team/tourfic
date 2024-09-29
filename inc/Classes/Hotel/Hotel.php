@@ -3007,7 +3007,12 @@ class Hotel {
                                 <span><?php echo Helper::tourfic_character_limit_callback( esc_html( $address ), 40 ); ?></span>
                             </div>
 						<?php endif; ?>
-                        <h4 class="tf-section-title"><a href="<?php echo esc_url( $url ); ?>"><?php echo Helper::tourfic_character_limit_callback( get_the_title(), 55 ); ?></a></h4>
+                        <h4 class="tf-section-title">
+                            <a href="<?php echo esc_url( $url ); ?>">
+                                <?php echo Helper::tourfic_character_limit_callback( get_the_title(), 55 ); ?>
+                            </a>
+                            <?php echo wp_kses_post(Helper::edit_link(get_the_ID())) ?>
+                        </h4>
 						<?php if ( $features ) { ?>
                             <ul class="features">
 								<?php foreach ( array_slice( $features, 0, 3 ) as $tfkey => $feature ) :
