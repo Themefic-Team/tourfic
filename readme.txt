@@ -322,7 +322,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.13.7 - 29 September 2024 =
+= 2.13.7 - 30 September 2024 =
 
 - Added: Banner info updated
 - Fixed: Hotel inventory issue
