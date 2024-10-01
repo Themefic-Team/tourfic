@@ -18,7 +18,8 @@ if ( Helper::tf_is_woo_active() ) {
 	} elseif ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_tours" && $tf_tour_arc_selected_template == "design-2" ) || ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_hotel" && $tf_hotel_arc_selected_template == "design-2" ) || ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_apartment" && $tf_apartment_arc_selected_template == "design-1" ) ) {
 		include TF_TEMPLATE_PART_PATH . 'search/design-2.php';
 	}  elseif ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_tours" && $tf_tour_arc_selected_template == "design-3" ) ||
-                ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_hotel" && $tf_hotel_arc_selected_template == "design-3" )
+                ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_hotel" && $tf_hotel_arc_selected_template == "design-3" ) ||
+	            ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_apartment" && $tf_apartment_arc_selected_template == "design-2" )
     ) {
 		include TF_TEMPLATE_PART_PATH . 'search/design-3.php';
 	} else {

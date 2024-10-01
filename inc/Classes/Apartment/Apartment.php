@@ -1571,7 +1571,6 @@ class Apartment {
 			'check-in-out-date' => $check_in_out,
 		), $url );
 
-		$apartment_min_price = Apt_pricing::instance( get_the_ID() )->get_min_max_price();
 		$tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 		if ( $tf_apartment_arc_selected_template == "design-1" ) {
 		$first_gallery_image = explode(',', $gallery);
@@ -1640,21 +1639,16 @@ class Apartment {
 						<?php } ?>
 					</div>
 					<div class="tf-mobile tf-pricing-info">
-						<?php if ( ! empty( $discount_amount ) ){ ?>
+						<?php if ( ! empty( $apartment_discount_amount ) ){ ?>
 							<div class="tf-available-room-off">
 								<span>
-									<?php echo esc_html( min( $discount_amount ) ); ?>% <?php esc_html_e( "Off ", "tourfic" ); ?>
+									<?php echo $apartment_discount_type == "percent" ? $apartment_discount_amount . '%' : wc_price( $apartment_discount_amount ) ?><?php _e( " Off", "tourfic" ); ?>
 								</span>
 							</div>
 						<?php } ?>
 						<div class="tf-available-room-price">
 							<span class="tf-price-from">
-							<?php
-							if(!empty($apartment_min_price['min'])){
-								echo esc_html__( "From ", "tourfic" );
-								echo wp_kses_post(wc_price( $apartment_min_price['min'] ));	;
-							}
-							?>
+							<?php echo Pricing::instance(get_the_ID())->get_min_price_html(); ?>
 							</span>
 						</div>
 					</div>
@@ -1699,12 +1693,7 @@ class Apartment {
 					<?php } ?>
 					<div class="tf-available-room-price">
 						<span class="tf-price-from">
-						<?php
-							if(!empty($apartment_min_price['min'])){
-								echo esc_html__( "From ", "tourfic" );
-								echo wp_kses_post(wc_price( $apartment_min_price['min'] ));	;
-							}
-						?>
+						    <?php echo Pricing::instance(get_the_ID())->get_min_price_html(); ?>
 						</span>
 					</div>
 					</div>              
@@ -1712,6 +1701,83 @@ class Apartment {
 				</div>
 			</div>
 		</div>
+        <?php } elseif ( $tf_apartment_arc_selected_template == "design-2" ) { ?>
+            <div class="tf-archive-hotel" data-id="<?php echo get_the_ID(); ?>">
+                <div class="tf-archive-hotel-thumb">
+                    <a href="<?php echo esc_url( $url ); ?>">
+						<?php
+						if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
+							the_post_thumbnail( 'full' );
+						} else {
+							echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+						}
+						?>
+                    </a>
+
+					<?php
+					if ( ! empty( $apartment_discount_amount ) ) : ?>
+                        <div class="tf-archive-hotel-discount">
+							<?php echo $apartment_discount_type == "percent" ? $apartment_discount_amount . '%' : wc_price( $apartment_discount_amount ) ?><?php _e( " Off", "tourfic" ); ?>
+                        </div>
+					<?php endif; ?>
+                </div>
+                <div class="tf-archive-hotel-content">
+                    <div class="tf-archive-hotel-content-left">
+						<?php if ( ! empty( $address ) ) : ?>
+                            <div class="tf-title-location">
+                                <div class="location-icon">
+                                    <i class="ri-map-pin-fill"></i>
+                                </div>
+                                <span><?php echo Helper::tourfic_character_limit_callback( esc_html( $address ), 40 ); ?></span>
+                            </div>
+						<?php endif; ?>
+                        <h4 class="tf-section-title">
+                            <a href="<?php echo esc_url( $url ); ?>">
+								<?php echo Helper::tourfic_character_limit_callback( get_the_title(), 55 ); ?>
+                            </a>
+							<?php echo wp_kses_post(Helper::edit_link(get_the_ID())) ?>
+                        </h4>
+						<?php if ( $features ) { ?>
+                            <ul class="features">
+								<?php foreach ( array_slice( $features, 0, 3 ) as $tfkey => $feature ) :
+									$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_apartment_feature', true );
+									if ( ! empty( $feature_meta ) ) {
+										$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+									}
+									if ( ! empty( $f_icon_type ) && $f_icon_type == 'icon' ) {
+										$feature_icon = ! empty( $feature_meta['apartment-feature-icon'] ) ? '<i class="' . esc_attr( $feature_meta['apartment-feature-icon'] ) . '"></i>' : '';
+									} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'custom' ) {
+										$feature_icon = ! empty( $feature_meta['apartment-feature-icon-custom'] ) ? '<img src="' . esc_url( $feature_meta['apartment-feature-icon-custom'] ) . '" style="min-width: ' . esc_attr( $feature_meta['apartment-feature-icon-dimension'] ) . 'px; height: ' . esc_attr( $feature_meta['apartment-feature-icon-dimension'] ) . 'px;" />' : '';
+									}
+
+									echo '<li>';
+									if ( ! empty( $feature_icon ) ) {
+										echo wp_kses_post( $feature_icon );
+									}
+									echo esc_html( $feature->name );
+									//add comma after each feature except last one, if only 1/2 exists then don't add comma to last one
+									if ( count( $features ) > 1 && $tfkey != count( $features ) - 1 ) {
+										echo ',';
+									}
+									echo '</li>';
+
+								endforeach;
+								?>
+								<?php if ( count( $features ) > 3 ) { ?>
+                                    <li><a href="<?php echo esc_url( $url ); ?>"><?php _e( "View More", "tourfic" ); ?></a></li>
+								<?php } ?>
+                            </ul>
+						<?php } ?>
+						<?php TF_Review::tf_archive_single_rating(); ?>
+                    </div>
+                    <div class="tf-archive-hotel-content-right">
+                        <div class="tf-archive-hotel-price">
+							<?php echo Pricing::instance( $post_id )->get_min_price_html(); ?>
+                        </div>
+                        <a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php _e( "View Details", "tourfic" ); ?></a>
+                    </div>
+                </div>
+            </div>
 		<?php }else{ ?>
         <div class="single-tour-wrap <?php echo $featured ? esc_attr( 'tf-featured' ) : '' ?>">
             <div class="single-tour-inner">

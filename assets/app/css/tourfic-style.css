@@ -1,6 +1,3 @@
-/*!*********************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass/app/css/free/tourfic.scss ***!
-  \*********************************************************************************************************************************************************************************/
 @charset "UTF-8";
 /*
 Button
@@ -20579,6 +20576,7 @@ html {
   bottom: 0;
 }
 
+.tf-hotel-template-4 #tf-apartment-locationautocomplete-list,
 .tf-hotel-template-4 #tf-locationautocomplete-list,
 .tf-hotel-template-4 #tf-destinationautocomplete-list {
   position: absolute;
@@ -20596,22 +20594,26 @@ html {
   padding: 8px;
 }
 
+.tf-hotel-template-4 #tf-apartment-locationautocomplete-list::-webkit-scrollbar,
 .tf-hotel-template-4 #tf-locationautocomplete-list::-webkit-scrollbar,
 .tf-hotel-template-4 #tf-destinationautocomplete-list::-webkit-scrollbar {
   width: 5px;
 }
 
+.tf-hotel-template-4 #tf-apartment-locationautocomplete-list::-webkit-scrollbar-thumb,
 .tf-hotel-template-4 #tf-locationautocomplete-list::-webkit-scrollbar-thumb,
 .tf-hotel-template-4 #tf-destinationautocomplete-list::-webkit-scrollbar-thumb {
   background-color: #aaa;
   border-radius: 4px;
 }
 
+.tf-hotel-template-4 #tf-apartment-locationautocomplete-list::-webkit-scrollbar-track,
 .tf-hotel-template-4 #tf-locationautocomplete-list::-webkit-scrollbar-track,
 .tf-hotel-template-4 #tf-destinationautocomplete-list::-webkit-scrollbar-track {
   background-color: #eee;
 }
 
+.tf-hotel-template-4 #tf-apartment-locationautocomplete-list div,
 .tf-hotel-template-4 #tf-locationautocomplete-list div,
 .tf-hotel-template-4 #tf-destinationautocomplete-list div {
   padding: 10px;
@@ -20623,16 +20625,19 @@ html {
   transition: .3s all ease;
 }
 
+.tf-hotel-template-4 #tf-apartment-locationautocomplete-list div:last-child,
 .tf-hotel-template-4 #tf-locationautocomplete-list div:last-child,
 .tf-hotel-template-4 #tf-destinationautocomplete-list div:last-child {
   margin-bottom: 0px;
 }
 
+.tf-hotel-template-4 #tf-apartment-locationautocomplete-list div:hover,
 .tf-hotel-template-4 #tf-locationautocomplete-list div:hover,
 .tf-hotel-template-4 #tf-destinationautocomplete-list div:hover {
   background: #FFEDE1;
 }
 
+.tf-hotel-template-4 #tf-apartment-locationautocomplete-list div::before,
 .tf-hotel-template-4 #tf-locationautocomplete-list div::before,
 .tf-hotel-template-4 #tf-destinationautocomplete-list div::before {
   display: none;

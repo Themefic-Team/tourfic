@@ -302,7 +302,7 @@ class Pricing {
 		$min_max_price = $this->get_min_price( $period );
 		$regular_price = $min_max_price['min_regular_price'];
 		$sale_price    = $min_max_price['min_sale_price'];
-		$min_discount  = $min_max_price['min_min_discount'];
+		$min_discount  = $min_max_price['min_discount'];
 
 		$price_html = '';
 		if ( ! empty( $min_max_price ) ) {

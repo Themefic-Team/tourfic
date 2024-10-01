@@ -155,10 +155,10 @@ TF_Settings::option( 'tf_settings', array(
 											'title'			=> 'Design 2',
 											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design2-hotel.jpg",
 										),
-										'design-3' => array(
-											'title' => 'Design 3',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design3-hotel.jpg",
-										),
+//										'design-3' => array(
+//											'title' => 'Design 3',
+//											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design3-hotel.jpg",
+//										),
 										'default'  => array(
 											'title' => 'Default',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-hotel.jpg",
@@ -365,7 +365,7 @@ TF_Settings::option( 'tf_settings', array(
 									)
 								),
 								//design 3
-								array(
+								/*array(
 									'id'      => 'hotel_design_3_fonts_notice',
 									'type'    => 'notice',
 									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Ubuntu" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
@@ -438,7 +438,7 @@ TF_Settings::option( 'tf_settings', array(
 											'hotel-section-status' => true,
 										),
 									)
-								),
+								),*/
 								array(
 									'id'      => 'hotel-title',
 									'type'    => 'heading',
@@ -541,10 +541,10 @@ TF_Settings::option( 'tf_settings', array(
 											'title' => 'Design 2',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design2-tour.jpg",
 										),
-										'design-3' => array(
-											'title' => 'Design 3',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design3-tour.jpg",
-										),
+//										'design-3' => array(
+//											'title' => 'Design 3',
+//											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design3-tour.jpg",
+//										),
 										'default'  => array(
 											'title' => 'Default',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-tour.jpg",
@@ -776,7 +776,7 @@ TF_Settings::option( 'tf_settings', array(
 									)
 								),
 								//design 3
-								array(
+								/*array(
 									'id'      => 'tour_design_3_fonts_notice',
 									'type'    => 'notice',
 									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Ubuntu" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
@@ -874,7 +874,7 @@ TF_Settings::option( 'tf_settings', array(
 											'tour-section-status' => true,
 										),
 									)
-								),
+								),*/
 								array(
 									'id'      => 'tour-title',
 									'type'    => 'heading',
@@ -1129,6 +1129,10 @@ TF_Settings::option( 'tf_settings', array(
 											'title' => 'Design 1',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/tour-archive-design-2.jpg",
 										),
+										'design-2' => array(
+											'title' => 'Design 2',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design3.jpg",
+										),
 									),
 									'default'  => 'default',
 								),
@@ -1156,6 +1160,12 @@ TF_Settings::option( 'tf_settings', array(
 									'type'    => 'notice',
 									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
 									'dependency' => array( 'apartment-archive', '==', 'design-1' ),
+								),
+								array(
+									'id'      => 'apartment_design_2_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Ubuntu" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'apartment-archive', '==', 'design-2' ),
 								),
 								array(
 									'id'      => 'apartment_archive_notice',

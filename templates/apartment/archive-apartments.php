@@ -18,6 +18,8 @@ $tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfo
 if ( Helper::tf_is_woo_active() ) {
 	if ( $tf_apartment_arc_selected_template == "design-1" ) {
 		include TF_TEMPLATE_PATH . 'apartment/archive/design-1.php';
+	} elseif( $tf_apartment_arc_selected_template == "design-2" ){
+		include TF_TEMPLATE_PATH . 'apartment/archive/design-2.php';
 	} else {
 		include TF_TEMPLATE_PATH . 'apartment/archive/design-default.php';
 	}

@@ -1,31 +1,31 @@
-<?php
+<div class="tf-hotel-template-4 tf-apartment-template-4">
 
-use \Tourfic\Classes\Helper;
-use Tourfic\Classes\Tour\Tour;
-use Tourfic\Classes\Tour\Pricing;
-
-$post_count = $GLOBALS['wp_query']->post_count;
-
-?>
-
-<div class="tf-hotel-template-4 tf-tour-template-4">
     <div class="tf-content-wrapper">
-		<?php do_action( 'tf_before_container' ); ?>
+
+		<?php
+
+		use \Tourfic\Classes\Helper;
+		use \Tourfic\Classes\Apartment\Apartment;
+		use \Tourfic\Classes\Apartment\Pricing;
+
+		do_action( 'tf_before_container' );
+		$post_count = $GLOBALS['wp_query']->post_count;
+		?>
 
         <div class="tf-archive-search-form tf-booking-form-wrapper">
             <div class="tf-container">
                 <form action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
-					<?php Helper::tf_archive_sidebar_search_form( 'tf_tours' ); ?>
+				    <?php Helper::tf_archive_sidebar_search_form( 'tf_apartment' ); ?>
                 </form>
             </div>
         </div>
 
-		<?php if ( have_posts() ) : ?>
+	    <?php if ( have_posts() ) : ?>
             <div class="tf-archive-details">
                 <!-- Loader Image -->
                 <div id="tf_ajax_searchresult_loader">
                     <div id="tf-searchresult-loader-img">
-                        <img src="<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/loader.gif" alt="">
+                        <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
                     </div>
                 </div>
 
@@ -39,18 +39,18 @@ $post_count = $GLOBALS['wp_query']->post_count;
                                         <h4 class="tf-section-title"><?php echo esc_html__( "Filter", "tourfic" ); ?></h4>
                                         <button class="filter-reset-btn"><?php echo esc_html__( "Reset", "tourfic" ); ?></button>
                                     </div>
-									<?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
+								    <?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
                                         <div id="tf__booking_sidebar">
-											<?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
+										    <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
                                         </div>
-									<?php } ?>
+								    <?php } ?>
                                 </div>
                             </div>
                         </div>
                         <div class="tf-archive-top">
                             <h5 class="tf-total-results"><?php _e( "Found", "tourfic" ); ?>
-                                <span><?php echo $post_count; ?></span> <?php _e( "of", "tourfic" ); ?> <?php echo $GLOBALS['wp_query']->found_posts; ?> <?php _e( "Tours", "tourfic" ); ?></h5>
-							<?php $tf_defult_views = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour_archive_view'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour_archive_view'] : 'list'; ?>
+                                <span><?php echo $post_count; ?></span> <?php _e( "of", "tourfic" ); ?> <?php echo $GLOBALS['wp_query']->found_posts; ?> <?php _e( "Apartments", "tourfic" ); ?></h5>
+						    <?php $tf_defult_views = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment_archive_view'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment_archive_view'] : 'list'; ?>
                             <ul class="tf-archive-view">
                                 <li class="tf-archive-filter-btn">
                                     <i class="ri-equalizer-line"></i>
@@ -84,150 +84,150 @@ $post_count = $GLOBALS['wp_query']->post_count;
                         <!--Available rooms start -->
                         <div class="tf-archive-hotels archive_ajax_result <?php echo $tf_defult_views == "list" ? esc_attr( 'tf-layout-list' ) : esc_attr( 'tf-layout-grid' ); ?>">
 
-							<?php
-							$count     = 0;
-							$locations = [];
-							while ( have_posts() ) {
-								the_post();
+						    <?php
+						    $count     = 0;
+						    $locations = [];
+						    while ( have_posts() ) {
+							    the_post();
 
-								$meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
-								if ( ! $meta["tour_as_featured"] ) {
-									continue;
-								}
+							    $meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
+							    if ( ! $meta["apartment_as_featured"] ) {
+								    continue;
+							    }
 
-								$count ++;
-								$map            = ! empty( $meta['location'] ) ? Helper::tf_data_types( $meta['location'] ) : '';
-								$discount_type  = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
-								$discount_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
+							    $count ++;
+							    $map  = ! empty( $meta['map'] ) ? Helper::tf_data_types( $meta['map'] ) : '';
+							    $discount_type  = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
+							    $discount_price = ! empty( $meta['discount'] ) ? $meta['discount'] : '';
 
-								$min_price_arr     = Pricing::instance( get_the_ID() )->get_min_price();
-								$min_sale_price    = ! empty( $min_price_arr['min_sale_price'] ) ? $min_price_arr['min_sale_price'] : 0;
-								$min_regular_price = ! empty( $min_price_arr['min_regular_price'] ) ? $min_price_arr['min_regular_price'] : 0;
-								$min_discount      = ! empty( $min_price_arr['min_discount'] ) ? $min_price_arr['min_discount'] : 0;
+							    $min_price_arr = Pricing::instance(get_the_ID())->get_min_price();
+							    $min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;
+							    $min_regular_price = !empty($min_price_arr['min_regular_price']) ? $min_price_arr['min_regular_price'] : 0;
 
-								if ( ! empty( $min_discount ) ) {
-									$price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
-								} else {
-									$price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
-								}
+							    if ( $min_regular_price != 0 ) {
+								    $price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
+							    } else {
+								    $price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
+							    }
 
-								if ( ! empty( $map ) ) {
-									$lat = $map['latitude'];
-									$lng = $map['longitude'];
-									ob_start();
-									?>
+							    if ( ! empty( $map ) ) {
+								    $lat = $map['latitude'];
+								    $lng = $map['longitude'];
+								    ob_start();
+								    ?>
                                     <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
                                         <div class="tf-map-item-thumb">
                                             <a href="<?php echo get_the_permalink(); ?>">
-												<?php
-												if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
-													the_post_thumbnail( 'full' );
-												} else {
-													echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
-												}
-												?>
+											    <?php
+											    if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
+												    the_post_thumbnail( 'full' );
+											    } else {
+												    echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+											    }
+											    ?>
                                             </a>
 
-											<?php if ( $discount_type !== 'none' && ! empty( $discount_price ) ) : ?>
+										    <?php
+										    if ( ! empty( $discount_price ) ) : ?>
                                                 <div class="tf-map-item-discount">
-													<?php echo $discount_type == "percent" ? $discount_price . '%' : wc_price( $discount_price ) ?><?php _e( " Off", "tourfic" ); ?>
+												    <?php echo $discount_type == "percent" ? $discount_price . '%' : wc_price( $discount_price ) ?><?php _e( " Off", "tourfic" ); ?>
                                                 </div>
-											<?php endif; ?>
+										    <?php endif; ?>
                                         </div>
                                         <div class="tf-map-item-content">
                                             <h4><a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></h4>
                                             <div class="tf-map-item-price">
-												<?php echo Pricing::instance( get_the_ID() )->get_min_price_html(); ?>
+											    <?php echo Pricing::instance(get_the_ID())->get_min_price_html(); ?>
                                             </div>
-											<?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
+										    <?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
                                         </div>
                                     </div>
-									<?php
-									$infoWindowtext = ob_get_clean();
+								    <?php
+								    $infoWindowtext = ob_get_clean();
 
-									$locations[ $count ] = [
-										'id'      => get_the_ID(),
-										'lat'     => (float) $lat,
-										'lng'     => (float) $lng,
-										'price'   => base64_encode( $price_html ),
-										'content' => base64_encode( $infoWindowtext )
-									];
-								}
-								Tour::tf_tour_archive_single_item();
-							}
-							while ( have_posts() ) {
-								the_post();
+								    $locations[ $count ] = [
+									    'id'      => get_the_ID(),
+									    'lat'     => (float) $lat,
+									    'lng'     => (float) $lng,
+									    'price'   => base64_encode( $price_html ),
+									    'content' => base64_encode( $infoWindowtext )
+								    ];
+							    }
+							    echo apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item());
+						    }
+						    while ( have_posts() ) {
+							    the_post();
 
-								$meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
-								if ( $meta["tour_as_featured"] ) {
-									continue;
-								}
+							    $meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
+							    if ( $meta["apartment_as_featured"] ) {
+								    continue;
+							    }
 
-								$count ++;
-								$map            = ! empty( $meta['location'] ) ? Helper::tf_data_types( $meta['location'] ) : '';
-								$discount_type  = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
-								$discount_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
+							    $count ++;
+							    $map  = ! empty( $meta['map'] ) ? Helper::tf_data_types( $meta['map'] ) : '';
+							    $discount_type  = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
+							    $discount_price = ! empty( $meta['discount'] ) ? $meta['discount'] : '';
 
-								$min_price_arr     = Pricing::instance( get_the_ID() )->get_min_price();
-								$min_sale_price    = ! empty( $min_price_arr['min_sale_price'] ) ? $min_price_arr['min_sale_price'] : 0;
-								$min_regular_price = ! empty( $min_price_arr['min_regular_price'] ) ? $min_price_arr['min_regular_price'] : 0;
-								$min_discount      = ! empty( $min_price_arr['min_discount'] ) ? $min_price_arr['min_discount'] : 0;
+							    $min_price_arr = Pricing::instance(get_the_ID())->get_min_price();
+							    $min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;
+							    $min_regular_price = !empty($min_price_arr['min_regular_price']) ? $min_price_arr['min_regular_price'] : 0;
 
-								if ( ! empty( $min_discount ) ) {
-									$price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
-								} else {
-									$price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
-								}
+							    if ( $min_regular_price != 0 ) {
+								    $price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
+							    } else {
+								    $price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
+							    }
 
-								if ( ! empty( $map ) ) {
-									$lat = $map['latitude'];
-									$lng = $map['longitude'];
-									ob_start();
-									?>
+							    if ( ! empty( $map ) ) {
+								    $lat = $map['latitude'];
+								    $lng = $map['longitude'];
+								    ob_start();
+								    ?>
                                     <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
                                         <div class="tf-map-item-thumb">
                                             <a href="<?php echo get_the_permalink(); ?>">
-												<?php
-												if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
-													the_post_thumbnail( 'full' );
-												} else {
-													echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
-												}
-												?>
+											    <?php
+											    if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
+												    the_post_thumbnail( 'full' );
+											    } else {
+												    echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+											    }
+											    ?>
                                             </a>
 
-											<?php if ( $discount_type !== 'none' && ! empty( $discount_price ) ) : ?>
+										    <?php
+										    if ( ! empty( $discount_price ) ) : ?>
                                                 <div class="tf-map-item-discount">
-													<?php echo $discount_type == "percent" ? $discount_price . '%' : wc_price( $discount_price ) ?><?php _e( " Off", "tourfic" ); ?>
+												    <?php echo $discount_type == "percent" ? $discount_price . '%' : wc_price( $discount_price ) ?><?php _e( " Off", "tourfic" ); ?>
                                                 </div>
-											<?php endif; ?>
+										    <?php endif; ?>
                                         </div>
                                         <div class="tf-map-item-content">
                                             <h4><a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></h4>
                                             <div class="tf-map-item-price">
-												<?php echo Pricing::instance( get_the_ID() )->get_min_price_html(); ?>
+											    <?php echo Pricing::instance(get_the_ID())->get_min_price_html(); ?>
                                             </div>
-											<?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
+										    <?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
                                         </div>
                                     </div>
-									<?php
-									$infoWindowtext = ob_get_clean();
+								    <?php
+								    $infoWindowtext = ob_get_clean();
 
-									$locations[ $count ] = [
-										'id'      => get_the_ID(),
-										'lat'     => (float) $lat,
-										'lng'     => (float) $lng,
-										'price'   => base64_encode( $price_html ),
-										'content' => base64_encode( $infoWindowtext )
-									];
-								}
-								Tour::tf_tour_archive_single_item();
-							}
-							wp_reset_query();
-							?>
+								    $locations[ $count ] = [
+									    'id'      => get_the_ID(),
+									    'lat'     => (float) $lat,
+									    'lng'     => (float) $lng,
+									    'price'   => base64_encode( $price_html ),
+									    'content' => base64_encode( $infoWindowtext )
+								    ];
+							    }
+							    echo apply_filters("tf_apartment_archive_single_card_design_one", Apartment::tf_apartment_archive_single_item());
+						    }
+						    wp_reset_query();
+						    ?>
                             <div id="map-datas" style="display: none"><?php echo array_filter( $locations ) ? json_encode( array_values( $locations ) ) : []; ?></div>
                             <div class="tf-pagination-bar">
-								<?php Helper::tourfic_posts_navigation(); ?>
+							    <?php Helper::tourfic_posts_navigation(); ?>
                             </div>
                         </div>
                         <!-- Available rooms end -->
@@ -238,26 +238,24 @@ $post_count = $GLOBALS['wp_query']->post_count;
                 <div class="tf-details-right tf-archive-right">
                     <div id="map-marker" data-marker="<?php echo TF_ASSETS_URL . 'app/images/cluster-marker.png'; ?>"></div>
                     <div class="tf-hotel-archive-map-wrap">
+                        <!--<div class="toggle-map" id="st-toggle-map"><span class="stt-icon stt-icon-arrow-left"></span></div>
+                        <div class="close-map-new" id="st-close-map"><span class="stt-icon stt-icon-close"></span></div>
+                        <div class="search-move-map">
+                            <div class="st-icheck-item">
+                                <label for="st-move-map" class="c-grey">
+                                    <input type="checkbox" name="movemap" id="st-move-map" value="1">
+				                    <?php /*echo esc_html__('Search as I move the map', 'traveler'); */?>
+                                    <span class="checkmark fcheckbox"></span>
+                                </label>
+                            </div>
+                            <input type="hidden" name="st-map-coordinate" value="" id="st-map-coordinate"/>
+                        </div>-->
                         <div id="tf-hotel-archive-map"></div>
                     </div>
                 </div>
             </div>
-		<?php else: ?>
-            <div class="tf-nothing-found" data-post-count="0"><?php echo esc_html__( "No Tours Found!", "tourfic" ); ?></div>
-		<?php endif; ?>
+	    <?php else: ?>
+            <div class="tf-nothing-found" data-post-count="0"><?php echo esc_html__( "No Hotels Found!", "tourfic" ); ?></div>
+	    <?php endif; ?>
     </div>
-
-    <!-- Hotel PopUp Starts -->
-    <div class="tf-popup-wrapper tf-hotel-popup">
-        <div class="tf-popup-inner">
-            <div class="tf-popup-body">
-
-            </div>
-            <div class="tf-popup-close">
-                <i class="fa-solid fa-xmark"></i>
-            </div>
-        </div>
-    </div>
-    <!-- Hotel PopUp end -->
-
 </div>
