@@ -10,6 +10,7 @@ $tf_dropoff_date = !empty($_GET['dropoff_date']) ? $_GET['dropoff_date'] : '';
 $tf_pickup_time = !empty($_GET['pickup_time']) ? $_GET['pickup_time'] : '';
 $tf_dropoff_time = !empty($_GET['dropoff_time']) ? $_GET['dropoff_time'] : '';
 $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time); 
+$tf_cars_slug = get_option('car_slug');
 ?>
 <div class="tf-single-car-section">
     <div class="tf-single-booking-bar">
@@ -82,7 +83,7 @@ $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_dat
                             <ul>
                                 <li><a href="<?php echo site_url(); ?>"><?php esc_html_e( "Home", "tourfic" ) ?></a></li>
                                 <li>/</li>
-                                <li><a href="<?php echo site_url(); ?>"><?php esc_html_e( "Car", "tourfic" ) ?></a></li>
+                                <li><a href="<?php echo site_url(); ?>/<?php echo esc_attr($tf_cars_slug); ?>"><?php esc_html_e( "Cars", "tourfic" ) ?></a></li>
                                 <li>/</li>
                                 <li><?php the_title(); ?></li>
                             </ul>
@@ -678,10 +679,7 @@ $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_dat
                     <?php if(!empty($car_information_section_status)){ ?>
                     <div class="tf-driver-details tf-flex tf-flex-direction-column tf-flex-gap-16">
                         <div class="tf-driver-details-header tf-flex tf-flex-space-bttn tf-flex-align-center">
-                            <h3><?php esc_html_e("Host Information", "tourfic"); ?></h3>
-                            <span>
-                            <i class="ri-shield-check-line"></i> <?php esc_html_e("Verified", "tourfic"); ?>
-                            </span>
+                            <h3><?php esc_html_e("Owner Information", "tourfic"); ?></h3>
                         </div>
                         <div class="tf-driver-photo tf-flex tf-flex-gap-16">
                             <?php if(!empty($car_owner_owner_image)){ ?>

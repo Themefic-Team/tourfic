@@ -24,6 +24,12 @@
             <?php echo $auto_transmission ? esc_html_e("Auto", "tourfic") : esc_html_e("Manual", "tourfic"); ?>
         </li>
         
+        <li class="tf-flex tf-flex-align-center tf-flex-gap-6"><i class="ri-gas-station-line"></i><?php echo $fuel_included ? esc_html_e('Fuel Included') : esc_html_e('Fuel not Include'); ?></li>
+        
+        <?php if(!empty($shuttle_car)){ ?>
+        <li class="tf-flex tf-flex-align-center tf-flex-gap-6"><i class="fa-solid fa-van-shuttle"></i><?php echo 'paid'==$shuttle_car_fee_type && !empty($shuttle_car_fee) ? esc_html_e('Fee:'). wc_price($shuttle_car_fee) : esc_html_e('Fee: Free'); ?></li>
+        <?php } ?>
+
         <?php if(!empty($car_custom_info)){
             foreach($car_custom_info as $info){ ?>
             <li class="tf-flex tf-flex-align-center tf-flex-gap-6">

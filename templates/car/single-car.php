@@ -112,6 +112,10 @@ while ( have_posts() ) : the_post();
 	$mileage_type = ! empty( $meta['mileage_type'] ) ? $meta['mileage_type'] : 'Km';
 	$total_mileage = ! empty( $meta['mileage'] ) ? $meta['mileage'] : '';
 	$auto_transmission = ! empty( $meta['auto_transmission'] ) ? $meta['auto_transmission'] : '';
+	$fuel_included = ! empty( $meta['fuel_included'] ) ? $meta['fuel_included'] : '';
+	$shuttle_car = ! empty( $meta['shuttle_car'] ) ? $meta['shuttle_car'] : '';
+	$shuttle_car_fee_type = ! empty( $meta['shuttle_car_fee_type'] ) ? $meta['shuttle_car_fee_type'] : 'free';
+	$shuttle_car_fee = ! empty( $meta['shuttle_car_fee'] ) ? $meta['shuttle_car_fee'] : '';
 
 	// Fuel Type
 	$fuel_type_terms = wp_get_post_terms($post_id, 'carrental_fuel_type');
@@ -129,7 +133,7 @@ while ( have_posts() ) : the_post();
 			$engine_years = $term->name;
 		}
 	}
-	
+
 	// Benefits 
 	$benefits_status = ! empty( $meta['benefits_section'] ) ? $meta['benefits_section'] : '';
 	$benefits = ! empty( $meta['benefits'] ) ? $meta['benefits'] : '';

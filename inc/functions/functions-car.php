@@ -847,11 +847,11 @@ function tf_customer_refund_request_callback(){
 				$price = $item->get_subtotal();
 	
 				if(!empty($bestRefundPolicy) && 'paid'==$bestRefundPolicy['cancellation_type']){
-					if( !empty($bestRefundPolicy['refund_amount']) && 'percent'==$bestRefundPolicy['cancellation_type'] ){
+					if( !empty($bestRefundPolicy['refund_amount']) && 'percent'==$bestRefundPolicy['refund_amount_type'] ){
 						$deduction_amount = $price * $bestRefundPolicy['refund_amount'] / 100;
 						$price = $price - $deduction_amount;
 					}
-					if( !empty($bestRefundPolicy['refund_amount']) && 'fixed'==$bestRefundPolicy['cancellation_type'] ){
+					if( !empty($bestRefundPolicy['refund_amount']) && 'fixed'==$bestRefundPolicy['refund_amount_type'] ){
 						$deduction_amount = $bestRefundPolicy['refund_amount'];
 						$price = $price - $deduction_amount;
 					}
