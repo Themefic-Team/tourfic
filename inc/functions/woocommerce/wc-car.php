@@ -410,3 +410,381 @@ function tf_car_custom_order_data( $item, $cart_item_key, $values, $order ) {
 }
 
 add_action( 'woocommerce_checkout_create_order_line_item', 'tf_car_custom_order_data', 10, 4 );
+
+
+/**
+ *
+ * runs during WooCommerce checkout process
+ *
+ * @author Jahid
+ */
+function tf_add_car_data_checkout_order_processed( $order_id, $posted_data, $order ) {
+
+	$tf_integration_order_data   = array(
+		'order_id' => $order_id
+	);
+
+	$tf_integration_order_status = [];
+	# Get and Loop Over Order Line Items
+	foreach ( $order->get_items() as $item_id => $item ) {
+
+		$order_type = $item->get_meta( '_order_type', true );
+
+		if ( "car" == $order_type ) {
+			$post_id = $item->get_meta( '_post_id', true ); // Car id
+
+			//Tax Calculation
+			$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
+			$tax_labels = array();
+			if( function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($meta['is_taxable'])){
+				$single_price = $item->get_subtotal();
+				$finding_location = array(
+					'country' => !empty($order->get_billing_country()) ? $order->get_billing_country() : '',
+					'state' => !empty($order->get_billing_state()) ? $order->get_billing_state() : '',
+					'postcode' => !empty($order->get_billing_postcode()) ? $order->get_billing_postcode() : '',
+					'city' => !empty($order->get_billing_city()) ? $order->get_billing_city() : '',
+					'tax_class' => !empty($meta['taxable_class']) && "standard"!=$meta['taxable_class'] ? $meta['taxable_class'] : ''
+				);
+	
+				$tax_rate = WC_Tax::find_rates( $finding_location );
+				if(!empty($tax_rate)){
+					foreach($tax_rate as $rate){
+						$tf_vat =  (float)$single_price * $rate['rate'] / 100;
+						$tax_labels [] = array(
+							'label' => $rate['label'],
+							'price' => $tf_vat
+						);
+					}
+					
+				}
+			}
+		
+			$fee_sums = array();
+			// Sum the prices for each label
+			foreach ( $tax_labels as $fee ) {
+				$label = $fee["label"];
+				$price = $fee["price"];
+				if ( isset( $fee_sums[ $label ] ) ) {
+					$fee_sums[ $label ] += $price;
+				} else {
+					$fee_sums[ $label ] = $price;
+				}
+			}
+
+			//Order Data Insert 
+			$billinginfo = [
+				'billing_first_name' => $order->get_billing_first_name(),
+				'billing_last_name'  => $order->get_billing_last_name(),
+				'billing_company'    => $order->get_billing_company(),
+				'billing_address_1'  => $order->get_billing_address_1(),
+				'billing_address_2'  => $order->get_billing_address_2(),
+				'billing_city'       => $order->get_billing_city(),
+				'billing_state'      => $order->get_billing_state(),
+				'billing_postcode'   => $order->get_billing_postcode(),
+				'billing_country'    => $order->get_billing_country(),
+				'billing_email'      => $order->get_billing_email(),
+				'billing_phone'      => $order->get_billing_phone()
+			];
+
+			$shippinginfo = [
+				'shipping_first_name' => $order->get_shipping_first_name(),
+				'shipping_last_name'  => $order->get_shipping_last_name(),
+				'shipping_company'    => $order->get_shipping_company(),
+				'shipping_address_1'  => $order->get_shipping_address_1(),
+				'shipping_address_2'  => $order->get_shipping_address_2(),
+				'shipping_city'       => $order->get_shipping_city(),
+				'shipping_state'      => $order->get_shipping_state(),
+				'shipping_postcode'   => $order->get_shipping_postcode(),
+				'shipping_country'    => $order->get_shipping_country(),
+				'shipping_phone'      => $order->get_shipping_phone()
+			];
+		}
+
+		// Car Item Data Insert 
+		if ( "car" == $order_type ) {
+			$price = $item->get_subtotal();
+			$pickup = $item->get_meta( 'Pick Up Location', true );
+			$tf_pickup_date = $item->get_meta( 'Pick Up Date', true );
+			$tf_pickup_time = $item->get_meta( 'Pick Up Time', true );
+			$dropoff = $item->get_meta( 'Drop Off Location', true );
+			$tf_dropoff_date = $item->get_meta( 'Drop Off Date', true );
+			$tf_dropoff_time = $item->get_meta( 'Drop Off Time', true );
+			$tf_protection = $item->get_meta( 'Protection', true );
+			$tf_extra = $item->get_meta( 'Extra', true );
+			$tf_due = $item->get_meta( 'Due', true );
+
+			$iteminfo = [
+				'pickup_location'   => $pickup,
+				'pickup_date'   => $tf_pickup_date,
+				'pickup_time'   => $tf_pickup_time,
+				'dropoff_location'   => $dropoff,
+				'dropoff_date'   => $tf_dropoff_date,
+				'dropoff_time'   => $tf_dropoff_time,
+				'extra' => !empty($tf_extra) ? $tf_extra : '',
+				'protection' => !empty($tf_protection) ? $tf_protection : '',
+				'due' => !empty($tf_due) ? $tf_due : '',
+				'total_price' => $price,
+				'tax_info' => wp_json_encode($fee_sums)
+			];
+
+			$tf_integration_order_data[] = [
+				'pickup_location'   => $pickup,
+				'pickup_date'   => $tf_pickup_date,
+				'pickup_time'   => $tf_pickup_time,
+				'dropoff_location'   => $dropoff,
+				'dropoff_date'   => $tf_dropoff_date,
+				'dropoff_time'   => $tf_dropoff_time,
+				'extra' => !empty($tf_extra) ? $tf_extra : '',
+				'protection' => !empty($tf_protection) ? $tf_protection : '',
+				'due' => !empty($tf_due) ? $tf_due : '',
+				'total_price' => $price,
+				'customer_id'    => $order->get_customer_id(),
+				'payment_method' => $order->get_payment_method(),
+				'order_status'   => $order->get_status(),
+				'order_date'     => gmdate( 'Y-m-d H:i:s' )
+			];
+
+			$tf_integration_order_status = [
+				'customer_id'    => $order->get_customer_id(),
+				'payment_method' => $order->get_payment_method(),
+				'order_status'   => $order->get_status(),
+				'order_date'     => gmdate( 'Y-m-d H:i:s' )
+			];
+
+			$iteminfo_keys = array_keys( $iteminfo );
+			$iteminfo_keys = array_map( 'sanitize_key', $iteminfo_keys );
+
+			$iteminfo_values = array_values( $iteminfo );
+			$iteminfo_values = array_map( 'sanitize_text_field', $iteminfo_values );
+
+			$iteminfo = array_combine( $iteminfo_keys, $iteminfo_values );
+
+
+			global $wpdb;
+			$wpdb->query(
+				$wpdb->prepare(
+					"INSERT INTO {$wpdb->prefix}tf_order_data
+				( order_id, post_id, post_type, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
+				VALUES ( %d, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
+					array(
+						$order_id,
+						sanitize_key( $post_id ),
+						$order_type,
+						$tf_pickup_date,
+						$tf_dropoff_date,
+						wp_json_encode( $billinginfo ),
+						wp_json_encode( $shippinginfo ),
+						wp_json_encode( $iteminfo ),
+						$order->get_customer_id(),
+						$order->get_payment_method(),
+						$order->get_status(),
+						gmdate( 'Y-m-d H:i:s' )
+					)
+				)
+			);
+		}
+
+	}
+
+	/**
+	 * New Order Pabbly Integration
+	 * @author Jahid
+	 */
+
+	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tf_integration_order_status ) ) {
+		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
+		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
+	}
+}
+
+add_action( 'woocommerce_checkout_order_processed', 'tf_add_car_data_checkout_order_processed', 10, 4 );
+
+/**
+ *
+ * runs during WooCommerce checkout process for block checkout
+ *
+ * @author Jahid
+ */
+
+function tf_add_car_data_checkout_order_processed_block_checkout( $order ) {
+
+	$order_id = $order->get_id();
+
+	$tf_integration_order_data   = array(
+		'order_id' => $order_id
+	);
+
+	$tf_integration_order_status = [];
+	# Get and Loop Over Order Line Items
+	foreach ( $order->get_items() as $item_id => $item ) {
+
+		$order_type = $item->get_meta( '_order_type', true );
+
+		if ( "car" == $order_type ) {
+			$post_id = $item->get_meta( '_post_id', true ); // Car id
+
+			//Tax Calculation
+			$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
+			$tax_labels = array();
+			if( function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($meta['is_taxable'])){
+				$single_price = $item->get_subtotal();
+				$finding_location = array(
+					'country' => !empty($order->get_billing_country()) ? $order->get_billing_country() : '',
+					'state' => !empty($order->get_billing_state()) ? $order->get_billing_state() : '',
+					'postcode' => !empty($order->get_billing_postcode()) ? $order->get_billing_postcode() : '',
+					'city' => !empty($order->get_billing_city()) ? $order->get_billing_city() : '',
+					'tax_class' => !empty($meta['taxable_class']) && "standard"!=$meta['taxable_class'] ? $meta['taxable_class'] : ''
+				);
+	
+				$tax_rate = WC_Tax::find_rates( $finding_location );
+				if(!empty($tax_rate)){
+					foreach($tax_rate as $rate){
+						$tf_vat =  (float)$single_price * $rate['rate'] / 100;
+						$tax_labels [] = array(
+							'label' => $rate['label'],
+							'price' => $tf_vat
+						);
+					}
+					
+				}
+			}
+		
+			$fee_sums = array();
+			// Sum the prices for each label
+			foreach ( $tax_labels as $fee ) {
+				$label = $fee["label"];
+				$price = $fee["price"];
+				if ( isset( $fee_sums[ $label ] ) ) {
+					$fee_sums[ $label ] += $price;
+				} else {
+					$fee_sums[ $label ] = $price;
+				}
+			}
+
+			//Order Data Insert 
+			$billinginfo = [
+				'billing_first_name' => $order->get_billing_first_name(),
+				'billing_last_name'  => $order->get_billing_last_name(),
+				'billing_company'    => $order->get_billing_company(),
+				'billing_address_1'  => $order->get_billing_address_1(),
+				'billing_address_2'  => $order->get_billing_address_2(),
+				'billing_city'       => $order->get_billing_city(),
+				'billing_state'      => $order->get_billing_state(),
+				'billing_postcode'   => $order->get_billing_postcode(),
+				'billing_country'    => $order->get_billing_country(),
+				'billing_email'      => $order->get_billing_email(),
+				'billing_phone'      => $order->get_billing_phone()
+			];
+
+			$shippinginfo = [
+				'shipping_first_name' => $order->get_shipping_first_name(),
+				'shipping_last_name'  => $order->get_shipping_last_name(),
+				'shipping_company'    => $order->get_shipping_company(),
+				'shipping_address_1'  => $order->get_shipping_address_1(),
+				'shipping_address_2'  => $order->get_shipping_address_2(),
+				'shipping_city'       => $order->get_shipping_city(),
+				'shipping_state'      => $order->get_shipping_state(),
+				'shipping_postcode'   => $order->get_shipping_postcode(),
+				'shipping_country'    => $order->get_shipping_country(),
+				'shipping_phone'      => $order->get_shipping_phone()
+			];
+		}
+
+		// Car Item Data Insert 
+		if ( "car" == $order_type ) {
+			$price = $item->get_subtotal();
+			$pickup = $item->get_meta( 'Pick Up Location', true );
+			$tf_pickup_date = $item->get_meta( 'Pick Up Date', true );
+			$tf_pickup_time = $item->get_meta( 'Pick Up Time', true );
+			$dropoff = $item->get_meta( 'Drop Off Location', true );
+			$tf_dropoff_date = $item->get_meta( 'Drop Off Date', true );
+			$tf_dropoff_time = $item->get_meta( 'Drop Off Time', true );
+			$tf_protection = $item->get_meta( 'Protection', true );
+			$tf_extra = $item->get_meta( 'Extra', true );
+			$tf_due = $item->get_meta( 'Due', true );
+
+			$iteminfo = [
+				'pickup_location'   => $pickup,
+				'pickup_date'   => $tf_pickup_date,
+				'pickup_time'   => $tf_pickup_time,
+				'dropoff_location'   => $dropoff,
+				'dropoff_date'   => $tf_dropoff_date,
+				'dropoff_time'   => $tf_dropoff_time,
+				'extra' => !empty($tf_extra) ? $tf_extra : '',
+				'protection' => !empty($tf_protection) ? $tf_protection : '',
+				'due' => !empty($tf_due) ? $tf_due : '',
+				'total_price' => $price,
+				'tax_info' => wp_json_encode($fee_sums)
+			];
+
+			$tf_integration_order_data[] = [
+				'pickup_location'   => $pickup,
+				'pickup_date'   => $tf_pickup_date,
+				'pickup_time'   => $tf_pickup_time,
+				'dropoff_location'   => $dropoff,
+				'dropoff_date'   => $tf_dropoff_date,
+				'dropoff_time'   => $tf_dropoff_time,
+				'extra' => !empty($tf_extra) ? $tf_extra : '',
+				'protection' => !empty($tf_protection) ? $tf_protection : '',
+				'due' => !empty($tf_due) ? $tf_due : '',
+				'total_price' => $price,
+				'customer_id'    => $order->get_customer_id(),
+				'payment_method' => $order->get_payment_method(),
+				'order_status'   => $order->get_status(),
+				'order_date'     => gmdate( 'Y-m-d H:i:s' )
+			];
+
+			$tf_integration_order_status = [
+				'customer_id'    => $order->get_customer_id(),
+				'payment_method' => $order->get_payment_method(),
+				'order_status'   => $order->get_status(),
+				'order_date'     => gmdate( 'Y-m-d H:i:s' )
+			];
+
+			$iteminfo_keys = array_keys( $iteminfo );
+			$iteminfo_keys = array_map( 'sanitize_key', $iteminfo_keys );
+
+			$iteminfo_values = array_values( $iteminfo );
+			$iteminfo_values = array_map( 'sanitize_text_field', $iteminfo_values );
+
+			$iteminfo = array_combine( $iteminfo_keys, $iteminfo_values );
+
+
+			global $wpdb;
+			$wpdb->query(
+				$wpdb->prepare(
+					"INSERT INTO {$wpdb->prefix}tf_order_data
+				( order_id, post_id, post_type, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
+				VALUES ( %d, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
+					array(
+						$order_id,
+						sanitize_key( $post_id ),
+						$order_type,
+						$tf_pickup_date,
+						$tf_dropoff_date,
+						wp_json_encode( $billinginfo ),
+						wp_json_encode( $shippinginfo ),
+						wp_json_encode( $iteminfo ),
+						$order->get_customer_id(),
+						$order->get_payment_method(),
+						$order->get_status(),
+						gmdate( 'Y-m-d H:i:s' )
+					)
+				)
+			);
+		}
+
+	}
+
+	/**
+	 * New Order Pabbly Integration
+	 * @author Jahid
+	 */
+
+	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tf_integration_order_status ) ) {
+		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
+		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
+	}
+}
+
+add_action( 'woocommerce_store_api_checkout_order_processed', 'tf_add_car_data_checkout_order_processed_block_checkout', 10, 4 );
