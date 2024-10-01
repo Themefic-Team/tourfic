@@ -629,84 +629,12 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'is_search_able' => true
 				),
 				array(
-					'id'       => 'pricing_type',
-					'type'     => 'select',
-					'label'    => __( 'Custom price for Car Rent', 'tourfic' ),
-					'options'  => array(
-						'day_hour' => __( 'Day/Hour', 'tourfic' ),
-						'date'   => __( 'Price By Date', 'tourfic' ),
-					),
-					'default'  => 'day_hour',
-				),
-				array(
-					'id'           => 'day_prices',
-					'type'         => 'repeater',
-					'button_title' => __( 'Add New Price', 'tourfic' ),
-					'label'        => __( 'Price by Number of Day/Hour', 'tourfic' ),
-					'field_title'  => 'title',
-					'dependency' => array(
-						array( 'pricing_type', '==', 'day_hour' ),
-					),
-					'fields'       => array(
-						array(
-							'id'    => 'title',
-							'type'  => 'text',
-							'label' => __( 'Title', 'tourfic' ),
-						),
-						array(
-							'id'       => 'type',
-							'type'     => 'select',
-							'label'    => __( 'Type', 'tourfic' ),
-							'options'  => array(
-								'day' => __( 'Day', 'tourfic' ),
-								'hour'   => __( 'Hour', 'tourfic' ),
-							),
-							'default'  => 'day',
-						),
-						array(
-							'id'    => 'from_day',
-							'type'  => 'number',
-							'label' => __( 'From', 'tourfic' ),
-						),
-						array(
-							'id'    => 'to_day',
-							'type'  => 'number',
-							'label' => __( 'To', 'tourfic' ),
-						),
-						array(
-							'id'    => 'price',
-							'type'  => 'number',
-							'label' => __( 'Price', 'tourfic' ),
-						)
-					),
-				),
-				array(
-					'id'           => 'date_prices',
-					'type'         => 'repeater',
-					'button_title' => __( 'Add New Price', 'tourfic' ),
-					'label'        => __( 'Price by date', 'tourfic' ),
-					'dependency' => array(
-						array( 'pricing_type', '==', 'date' ),
-					),
-					'fields'       => array(
-						array(
-							'id'         => 'date',
-							'type'       => 'date',
-							'format'     => 'Y/m/d',
-							'range'      => true,
-							'label_from' => 'Start Date',
-							'label_to'   => 'End Date',
-							'multiple'   => true,
-							'attributes' => array(
-								'autocomplete' => 'off',
-							),
-						),
-						array(
-							'id'    => 'price',
-							'type'  => 'number',
-							'label' => __( 'Price', 'tourfic' ),
-						)
-					),
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-information-fill',
+					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>custom availability</b>, <b>custom package</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
 				),
 				array(
 					'id'       => 'discount_type',
@@ -751,41 +679,14 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'type'    => 'heading',
 					'content' => __( 'Deposit', 'tourfic' ),
 				),
-
 				array(
-					'id'      => 'allow_deposit',
-					'type'    => 'switch',
-					'label'   => esc_html__( 'Enable Deposit', 'tourfic' ),
-					'default' => false,
-				),
-				array(
-					'id'          => 'deposit_type',
-					'type'        => 'select',
-					'label'       => esc_html__( 'Deposit Type', 'tourfic' ),
-					'subtitle'    => esc_html__( 'Select deposit type: Percentage or Fixed', 'tourfic' ),
-					'options'     => array(
-						'none'    => esc_html__( 'None', 'tourfic' ),
-						'percent' => esc_html__( 'Percent', 'tourfic' ),
-						'fixed'   => esc_html__( 'Fixed', 'tourfic' ),
-					),
-					'default'     => 'none',
-					'dependency'  => array( 'allow_deposit', '!=', 'false' ),
-					'field_width' => 50
-				),
-				array(
-					'id'          => 'deposit_amount',
-					'type'        => 'number',
-					'label'       => esc_html__( 'Deposit Price', 'tourfic' ),
-					'subtitle'    => esc_html__( 'Insert amount only', 'tourfic' ),
-					'attributes'  => array(
-						'min' => '0',
-					),
-					'dependency'  => array(
-						array( 'deposit_type', '!=', 'none' ),
-						array( 'allow_deposit', '!=', 'false' ),
-					),
-					'field_width' => 50
-				),
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-information-fill',
+					'content' => wp_kses_post(__( 'Are you interested in collecting upfront or partial payments for your cars? Our <b>deposit option</b> allows you to set an upfront payment, either as a <b>percentage</b> or a <b>fixed</b> amount, which travelers can pay at the time of booking. <a href="https://tourfic.com/" target="_blank">Upgrade to our Pro package today to take advantage of this fantastic option!</a>', 'tourfic' ) ),
+				)
 			),
 		),
 
@@ -801,45 +702,13 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'subtitle' => __( 'How can potential or existing customers reach out for more details about your car? Please share your contact information here.', 'tourfic' ),
 				),
 				array(
-					'id'      => 'car-extra-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-contact-info/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-information-fill',
+					'content' => wp_kses_post(__( 'Are you interested in enriching your car offerings with exciting services? With our Pro package, you can easily add exciting activities such as paragliding, along with meals and hotel accommodations, through our <b>Car Extra Services</b>. This feature allows you to customize and expand your services as much as you want, providing a better experience for your customers. <a href="https://tourfic.com/" target="_blank">Upgrade to our Pro package today to take advantage of these fantastic options!</a>', 'tourfic' ) ),
 				),
-				array(
-					'id'           => 'extras',
-					'type'         => 'repeater',
-					'button_title' => __( 'Add New Extra', 'tourfic' ),
-					'label'        => __( 'Add Your Extras', 'tourfic' ),
-					'subtitle'        => __( 'Click the button below to add Extras for your Car. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each Badge using the icons on the right side.', 'tourfic' ),
-					'field_title'  => 'title',
-					'fields'       => array(
-						array(
-							'id'    => 'title',
-							'type'  => 'text',
-							'label' => __( 'Title', 'tourfic' ),
-						),
-						array(
-							'id'    => 'content',
-							'type'  => 'textarea',
-							'label' => __( 'Content', 'tourfic' ),
-						),
-						array(
-							'id'    => 'price',
-							'type'  => 'number',
-							'label' => __( 'Price', 'tourfic' ),
-						),
-                        array(
-							'id'       => 'price_type',
-							'type'     => 'select',
-							'label'    => __( 'Price type', 'tourfic' ),
-							'options'  => array(
-								'time' => __( 'By Time', 'tourfic' ),
-								'fixed'   => __( 'Fixed', 'tourfic' ),
-							)
-						),
-					),
-				)
 			),
 		),
 
@@ -937,74 +806,12 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'subtitle' => __( 'Each car includes certain items, while others are not part of the package. Clearly define these inclusions and exclusions to prevent any misunderstandings during your car.', 'tourfic' ),
 				),
 				array(
-					'id'       => 'cancellation_section',
-					'type'     => 'switch',
-					'label'    => esc_html__( 'Do you want to show Booking cancellation in the frontend?', 'tourfic' ),
-					'subtitle' => esc_html__( 'Do you want to show Booking cancellation in the frontend?', 'tourfic' )
-				),
-				array(
-					'id'           => 'calcellation_policy',
-					'type'         => 'repeater',
-					'label'        => __( 'Items Cancellation', 'tourfic' ),
-					'subtitle'        => __( 'List all the items/features Cancellation in this car package.', 'tourfic' ),
-					'button_title' => __( 'Add New Cancellation', 'tourfic' ),
-					'field_title'  => 'title',
-					'dependency'  => [
-						array( 'cancellation_section', '==', 'true' )
-					],
-					'fields'       => array(
-						array(
-							'id'      => 'cancellation_type',
-							'type'    => 'select',
-							'label'   => esc_html__( 'Cancellation Type', 'tourfic' ),
-							'subtitle'  => esc_html__( 'Choose the type of cancellation you would like to implement for this car.', 'tourfic' ),
-							'options' => array(
-								'free' => esc_html__( 'Free', 'tourfic' ),
-								'paid' => esc_html__( 'Paid', 'tourfic' ),
-							),
-							'default' => 'free'
-						),
-						array(
-							'id'    => 'refund_amount',
-							'type'  => 'number',
-							'label' => __( 'Refund Amount', 'tourfic' ),
-							'dependency'  => array(
-								array( 'cancellation_type', '==', 'paid' )
-							),
-							'field_width' => 50
-						),
-						array(
-							'id'      => 'refund_amount_type',
-							'type'    => 'select',
-							'label'   => esc_html__( 'Refund Type', 'tourfic' ),
-							'options' => array(
-								'percent' => esc_html__( 'Percent', 'tourfic' ),
-								'fixed' => esc_html__( 'Fixed', 'tourfic' ),
-							),
-							'default' => 'percent',
-							'dependency'  => array(
-								array( 'cancellation_type', '==', 'paid' )
-							),
-							'field_width' => 50
-						),
-						array(
-							'id'    => 'before_cancel_time',
-							'type'  => 'number',
-							'label' => __( 'Before Cancel Day/Hour', 'tourfic' ),
-							'field_width' => 50
-						),
-						array(
-							'id'      => 'cancellation-times',
-							'type'    => 'select',
-							'label'   => esc_html__( 'Type', 'tourfic' ),
-							'options' => array(
-								'hour' => esc_html__( 'Hour', 'tourfic' ),
-								'day' => esc_html__( 'Day', 'tourfic' ),
-							),
-							'default' => 'day',
-							'field_width' => 50
-						),
-					),
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-information-fill',
+					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>booking cancellation</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
 				),
 			),
 		),
@@ -1034,70 +841,17 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'subtitle'  => esc_html__( 'Choose the type of booking you would like to implement for this tour.', 'tourfic' ),
 					'options' => array(
 						'1' => esc_html__( 'Default Booking (WooCommerce)', 'tourfic' ),
-						'2' => esc_html__( 'External Booking', 'tourfic' ),
-						'3' => esc_html__( 'Booking Without Payment', 'tourfic' ),
 					),
 					'default' => '1'
 				),
 				array(
-					'id'          => 'booking-url',
-					'type'        => 'text',
-					'label'       => esc_html__( 'External Booking URL', 'tourfic' ),
-					'dependency'  => array( 'booking-by', '==', '2' ),
-					'placeholder' => esc_html__( 'https://website.com', 'tourfic' )
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-information-fill',
+					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>minimum days for booking</b>, <b>enable traveler info</b>, <b>external booking</b>, <b>booking without payment</b>, <b>taxable car</b>, <b>tax class for Woocommerce</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' ) ),
 				),
-				array(
-					'id'        => 'booking-attribute',
-					'type'      => 'switch',
-					'label'     => esc_html__( 'Allow Attribute', 'tourfic' ),
-					'subtitle'  => esc_html__( 'If attribute allow, You can able to add custom Attribute', 'tourfic' ),
-					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
-					'label_off' => esc_html__( 'No', 'tourfic' ),
-					'dependency'  => array( 'booking-by', '==', '2' ),
-				),
-				array(
-					'id'          => 'booking-query',
-					'type'        => 'textarea',
-					'label'       => esc_html__( 'Query Attribute', 'tourfic' ),
-					'dependency'  => array(
-						array( 'booking-by', '==', '2' ),
-						array( 'booking-attribute', '==', '1' )
-					),
-					'default'     => 'pickup={pickup}&dropoff={dropoff}&pickup_date={pickup_date}&dropoff_date={dropoff_date}',
-					'placeholder' => esc_html__( 'pickup={pickup}&dropoff={dropoff}&pickup_date={pickup_date}&dropoff_date={dropoff_date}', 'tourfic' )
-				),
-				array(
-					'id'      => 'booking-notice',
-					'type'    => 'notice',
-					'class'   => 'info',
-					'title'   => esc_html__( 'Query Attribute List', 'tourfic' ),
-					'content' => esc_html__( 'You can use the following placeholders in the Query Attribute body:', 'tourfic' ) . '<br><br><strong>{pickup} </strong> : To Display Pickup Location from Search.<br>
-					<strong>{dropoff} </strong> : To Display Dropoff Location from Search.<br>
-					<strong>{pickup_date} </strong> : To display the Pickup Date from Search.<br>
-					<strong>{dropoff_date} </strong> : To display the Dropoff Date from Search.<br>',
-					'dependency'  => array(
-						array( 'booking-by', '==', '2' ),
-						array( 'booking-attribute', '==', '1' )
-					),
-				),
-				array(
-					'id'        => 'is_taxable',
-					'type'      => 'switch',
-					'label'     => esc_html__( 'Taxable', 'tourfic' ),
-					'subtitle' => esc_html__( 'Activate this option to enable tax for this tour.', 'tourfic' ),
-					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
-					'label_off' => esc_html__( 'No', 'tourfic' ),
-				),
-				array(
-					'id'      => 'taxable_class',
-					'type'    => 'select',
-					'label'   => esc_html__( 'Tax class', 'tourfic' ),
-					'subtitle'  => esc_html__( 'Select your class, and tax will calculate based on your chosen class. PS: If you activate partial payment option tax will be calculated upon partial amount as woocommerce regulations.', 'tourfic' ),
-					'options' => function_exists( 'tf_taxable_option_callback' ) ? tf_taxable_option_callback() : [''],
-					'dependency'  => array(
-						array( 'is_taxable', '==', '1' )
-					),
-				)
 			),
 		),
 
