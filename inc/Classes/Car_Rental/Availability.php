@@ -14,10 +14,10 @@ class Availability {
                 'post_type' => 'car',
                 'query' => " AND ostatus = 'completed' AND post_id = ".$post_id
             );
-            $tf_hotel_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
-            if(!empty($tf_hotel_book_orders)){
+            $tf_car_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
+            if(!empty($tf_car_book_orders)){
                 $total_booking = 0;
-                foreach($tf_hotel_book_orders as $order){
+                foreach($tf_car_book_orders as $order){
                     $order_details = json_decode($order['order_details'], true);
                     $order_pickup_date  = strtotime( $order_details['pickup_date'] );
                     $order_dropoff_date = strtotime( $order_details['dropoff_date'] );

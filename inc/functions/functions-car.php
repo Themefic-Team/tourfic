@@ -480,7 +480,7 @@ function tf_car_booking_pupup_callback() {
 	$car_protection_section_status = ! empty( $meta['protection_section'] ) ? $meta['protection_section'] : '';
 	$car_protection_content = ! empty( $meta['protection_content'] ) ? $meta['protection_content'] : '';
 	$car_protections = ! empty( $meta['protections'] ) ? $meta['protections'] : '';
-	$car_calcellation_policy = ! empty( $meta['calcellation_policy'] ) ? $meta['calcellation_policy'] : '';
+	$car_calcellation_policy = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['calcellation_policy'] ) ? $meta['calcellation_policy'] : '';
 
 	$pickup_date = ! empty( $_POST['pickup_date'] ) ? $_POST['pickup_date'] : '';
 	$pickup_time = ! empty( $_POST['pickup_time'] ) ? $_POST['pickup_time'] : '';
@@ -520,7 +520,7 @@ function tf_car_booking_pupup_callback() {
 	$beforeTime = $pickupDateTime->format('H:i');
 
  	?>
-	<?php if(!$less_current_day){ ?>
+	<?php if(function_exists( 'is_tf_pro' ) && is_tf_pro() && !$less_current_day){ ?>
 	<div class="tf-cancellation-notice">
 		<span class="tf-flex tf-flex-align-center tf-flex-gap-16">
 			<i class="ri-information-line"></i>
@@ -537,7 +537,7 @@ function tf_car_booking_pupup_callback() {
 			<?php if(!empty($car_protection_section_status) && !empty($car_protections)){ ?>
 				<li class="protection active"><?php esc_html_e("Protections", "tourfic"); ?></li>
 			<?php } ?>
-			<?php if($car_booking_by=='3'){ ?>
+			<?php if(function_exists( 'is_tf_pro' ) && is_tf_pro() && $car_booking_by=='3'){ ?>
 			<li class="booking <?php echo empty($car_protection_section_status) ? esc_attr('active') : ''; ?>"><?php esc_html_e("Booking", "tourfic"); ?></li>
 			<?php } ?>
 		</ul>
@@ -610,11 +610,11 @@ function tf_car_booking_pupup_callback() {
 
 	<div class="tf-booking-bar tf-flex tf-flex-gap-24">
 		<input type="hidden" id="protection_value" />
-		<button data-charge="no" class="without-charge <?php echo '3'==$car_booking_by ? esc_attr('booking-next') : esc_attr('booking-process'); ?>">
+		<button data-charge="no" class="without-charge <?php echo function_exists( 'is_tf_pro' ) && is_tf_pro() && '3'==$car_booking_by ? esc_attr('booking-next') : esc_attr('booking-process'); ?>">
 			<?php esc_html_e("Book without protection", "tourfic"); ?>
 			<i class="ri-arrow-right-s-line"></i>
 		</button>
-		<button data-charge="yes" class="with-charge <?php echo '3'==$car_booking_by ? esc_attr('booking-next') : esc_attr('booking-process'); ?>">
+		<button data-charge="yes" class="with-charge <?php echo function_exists( 'is_tf_pro' ) && is_tf_pro() && '3'==$car_booking_by ? esc_attr('booking-next') : esc_attr('booking-process'); ?>">
 			<?php esc_html_e("Book with protection", "tourfic"); ?>
 			<i class="ri-arrow-right-s-line"></i>
 		</button>
@@ -622,7 +622,7 @@ function tf_car_booking_pupup_callback() {
 
 	<?php } ?>
 	
-	<div class="tf-booking-form-fields" style="<?php echo $car_booking_by=='3' && empty($car_protection_section_status) ? esc_attr('display: block') : ''; ?>">
+	<div class="tf-booking-form-fields" style="<?php echo function_exists( 'is_tf_pro' ) && is_tf_pro() && $car_booking_by=='3' && empty($car_protection_section_status) ? esc_attr('display: block') : ''; ?>">
 		<div class="tf-form-fields tf-flex tf-flex-gap-24 tf-flex-w">
 			<?php 
 			$traveller_info_fields = ! empty( Helper::tfopt( 'book-confirm-field' ) ) ? Helper::tf_data_types( Helper::tfopt( 'book-confirm-field' ) ) : '';

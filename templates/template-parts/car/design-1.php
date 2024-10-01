@@ -283,6 +283,7 @@ $tf_cars_slug = get_option('car_slug');
                         <p><?php echo Pricing::is_taxable($meta); ?></p>
                     </div>
 
+                    <?php if(function_exists( 'is_tf_pro' ) && is_tf_pro()){ ?>
                     <div class="tf-extra-added-info">
                         <div class="tf-extra-added-box tf-flex tf-flex-gap-16 tf-flex-direction-column">
                             <h3><?php esc_html_e("Extras added", "tourfic"); ?></h3>
@@ -291,6 +292,7 @@ $tf_cars_slug = get_option('car_slug');
                             </div>
                         </div>
                     </div>
+                    <?php } ?>
 
 
                     <div class="tf-date-select-box">
@@ -396,7 +398,7 @@ $tf_cars_slug = get_option('car_slug');
                             if($car_deposit_type=='percent'){
                                 $due_amount = ($total_prices['sale_price'] * $car_deposit_amount)/100;
                             }
-                            if('2'==$car_booking_by){ ?>
+                            if( function_exists( 'is_tf_pro' ) && is_tf_pro() && '2'==$car_booking_by ){ ?>
                                 <button class="tf-flex tf-flex-align-center tf-flex-justify-center booking-process tf-final-step tf-flex-gap-8">
                                     <?php esc_html_e( apply_filters("tf_car_booking_form_submit_button_text", 'Continue' ), 'tourfic' ); ?>
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -404,7 +406,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </svg>
                                 </button>
                             <?php }else{ ?>
-                                <?php if( !empty($car_allow_deposit) && $car_deposit_type!='none' && !empty($car_deposit_amount) ){  ?>
+                                <?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($car_allow_deposit) && $car_deposit_type!='none' && !empty($car_deposit_amount) ){  ?>
                                     <div class="tf-partial-payment-button tf-flex tf-flex-direction-column tf-flex-gap-16">
                                         <button class="tf-flex tf-flex-align-center tf-partial-button tf-flex-justify-center tf-flex-gap-8 <?php echo (empty($car_protection_section_status) || empty($car_protections)) && '3'!=$car_booking_by ? esc_attr('booking-process tf-final-step') : esc_attr('tf-car-booking'); ?>" data-partial="<?php echo esc_attr('yes'); ?>">
                                             <?php esc_html_e( 'Part Pay', 'tourfic' ); ?> <?php echo wc_price($due_amount); ?>
@@ -557,63 +559,7 @@ $tf_cars_slug = get_option('car_slug');
                         </div>
                     </div>
 
-                    <?php if(!empty($car_extras)){ ?>
-                    <div class="tf-add-extra-section">
-                        <h3>
-                            <?php esc_html_e( "Add extras", "tourfic" ) ?>
-                        </h3>
-
-                        <form class="tf-car-extra-infos tf-flex tf-flex-direction-column tf-flex-gap-16">
-
-                        <?php foreach($car_extras as $key => $extra){ ?>
-                            <div class="tf-car-single-extra tf-flex tf-flex-space-bttn tf-flex-align-center">
-
-                                <div class="tf-extra-title">
-                                    <?php if(!empty($extra['title'])){ ?>
-                                    <h4><?php echo esc_html($extra['title']); ?>
-                                        <?php if(!empty($extra['title'])){ ?>
-                                        <span class="tf-info-tooltip">
-                                            <i class="ri-information-line"></i>
-                                            <div class="tf-info-tooltip-content">
-                                                <p><?php echo esc_html($extra['content']); ?></p>
-                                            </div>
-                                        </span>
-                                        <?php } ?>
-                                    </h4>
-                                    <?php } ?>
-                                    <input type="hidden" value="<?php echo esc_attr($key); ?>" name="extra_key[]">
-                                    <div class="acr-select">
-                                        <div class="acr-dec">
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M4.16663 10H15.8333" stroke="#0866C4" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </div>
-                                        <input type="number" name="qty[]" id="adults" value="0">
-                                        <div class="acr-inc">
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M4.16663 9.99996H15.8333M9.99996 4.16663V15.8333" stroke="#0866C4" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-extra-price">
-                                    <h4><?php echo wc_price($extra['price']); ?>
-                                        <small>each/<?php echo esc_html($extra['price_type']); ?></small>
-                                    </h4>
-                                </div>
-
-                            </div>
-                        <?php } ?>
-                            <input type="hidden" value="<?php echo esc_attr($post_id); ?>" name="post_id">
-                            <input type="hidden" id="tf_partial_payment" value="no">
-
-                            <div class="tf-extra-apply-btn">
-                                <button type="submit" class="tf-extra-submit"><?php esc_html_e("Apply", "tourfic"); ?></button>
-                            </div>
-
-                        </form>
-                    </div>
-                    <?php } ?>
+                    <?php do_action( 'tf_car_extras', $car_extras, $post_id ); ?>
 
                     <?php if(!empty($car_driverinfo_status)){ ?>
                     <div class="tf-driver-details tf-flex tf-flex-direction-column tf-flex-gap-16 tf-mb-30">

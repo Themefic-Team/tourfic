@@ -103,7 +103,7 @@ function tf_car_booking_callback() {
 		$tf_cars_data['tf_car_data']['price_total']    	   = $total_prices;
 
 		# Deposit information
-		if ( !empty($car_allow_deposit) && 'none'!=$car_deposit_type && 'yes'==$partial_payment) {
+		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($car_allow_deposit) && 'none'!=$car_deposit_type && 'yes'==$partial_payment) {
 			if( !empty($car_deposit_amount) ){
 				if ( 'percent'==$car_deposit_type ) {
 					$deposit_amount = ($tf_cars_data['tf_car_data']['price_total'] * $car_deposit_amount)/100;
@@ -116,7 +116,7 @@ function tf_car_booking_callback() {
 			}
 		}
 		
-		if( !empty($car_booking_by) && '3'==$car_booking_by ){
+		if( function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($car_booking_by) && '3'==$car_booking_by ){
 
 			$tf_booking_fields = !empty(Helper::tfopt( 'book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'book-confirm-field' )) : '';
 			if(empty($tf_booking_fields)){
@@ -230,7 +230,7 @@ function tf_car_booking_callback() {
 			}
 
 		}else{
-			if( '2'==$car_booking_by && !empty($tf_booking_url) ){
+			if( function_exists( 'is_tf_pro' ) && is_tf_pro() && '2'==$car_booking_by && !empty($tf_booking_url) ){
 				$external_search_info = array(
 					'{pickup}'    => $pickup,
 					'{dropoff}'    => $dropoff,
