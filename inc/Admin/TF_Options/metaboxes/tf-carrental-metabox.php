@@ -126,14 +126,16 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'label'       => esc_html__( 'No. Passengers', 'tourfic' ),
 					'subtitle'    => esc_html__( 'No. Passengers', 'tourfic' ),
 					'attributes'  => array( 'min' => 1 ),
-					'is_search_able' => true
+					'is_search_able' => true,
+					'field_width' => 50
 				),
 				array(
 					'id'          => 'baggage',
 					'type'        => 'number',
 					'label'       => esc_html__( 'Baggage', 'tourfic' ),
 					'subtitle'    => esc_html__( 'Baggage', 'tourfic' ),
-					'attributes'  => array( 'min' => 0 )
+					'attributes'  => array( 'min' => 0 ),
+					'field_width' => 50
 				),
 				array(
 					'id'       => 'auto_transmission',
@@ -189,18 +191,21 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'type'     => 'switch',
 					'label'    => esc_html__( 'Pay at Pick-up', 'tourfic' ),
 					'subtitle' => esc_html__( 'Pay at Pick-up', 'tourfic' ),
+					'field_width' => 33
 				),
 				array(
 					'id'       => 'fuel_included',
 					'type'     => 'switch',
 					'label'    => esc_html__( 'Fuel Included', 'tourfic' ),
 					'subtitle' => esc_html__( 'Fuel Included', 'tourfic' ),
+					'field_width' => 33
 				),
 				array(
 					'id'       => 'shuttle_car',
 					'type'     => 'switch',
 					'label'    => esc_html__( 'Shuttle to Car', 'tourfic' ),
-					'subtitle' => esc_html__( 'Shuttle to Car', 'tourfic' )
+					'subtitle' => esc_html__( 'Shuttle to Car', 'tourfic' ),
+					'field_width' => 33
 				),
 				array(
 					'id'       => 'shuttle_car_fee_type',
@@ -390,12 +395,6 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'type'  => 'heading',
 					'label' => 'Include & Exclude Section',
 					'subtitle' => __( 'Each car includes certain items, while others are not part of the package. Clearly define these inclusions and exclusions to prevent any misunderstandings during your car.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'car-inc-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-include-exclude/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'       => 'inc_exc_section',
@@ -826,11 +825,6 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 							'label' => __( 'Content', 'tourfic' ),
 						),
 						array(
-							'id'    => 'max_number',
-							'type'  => 'number',
-							'label' => __( 'Max of number', 'tourfic' ),
-						),
-						array(
 							'id'    => 'price',
 							'type'  => 'number',
 							'label' => __( 'Price', 'tourfic' ),
@@ -849,9 +843,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 			),
 		),
 
-        // // Booking
-		'booking'              => array(
-			'title'  => esc_html__( 'Booking', 'tourfic' ),
+		// Protection & Cancellation
+		'protection_cancellation'              => array(
+			'title'  => esc_html__( 'Protection & Cancellation', 'tourfic' ),
 			'icon'   => 'fa-solid fa-person-walking-luggage',
 			'fields' => array(
 				array(
@@ -923,12 +917,6 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'subtitle' => __( 'Each car includes certain items, while others are not part of the package. Clearly define these inclusions and exclusions to prevent any misunderstandings during your car.', 'tourfic' ),
 				),
 				array(
-					'id'      => 'car-protection-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-include-exclude/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				array(
 					'id'       => 'instructions_section',
 					'type'     => 'switch',
 					'label'    => esc_html__( 'Do you want to show Booking instructions in the frontend?', 'tourfic' ),
@@ -943,120 +931,10 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					],
 				),
 				array(
-					'id'    => 'tour-booking-heading',
-					'type'  => 'heading',
-					'label' => 'Booking Settings',
-					'subtitle' => esc_html__( 'This section offer the options to customize the booking process for your tours.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'tour-booking-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/booking/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				
-				array(
-					'id'      => 'booking-by',
-					'type'    => 'select',
-					'label'   => esc_html__( 'Booking Type', 'tourfic' ),
-					'subtitle'  => esc_html__( 'Choose the type of booking you would like to implement for this tour.', 'tourfic' ),
-					'options' => array(
-						'1' => esc_html__( 'Default Booking (WooCommerce)', 'tourfic' ),
-						'2' => esc_html__( 'External Booking', 'tourfic' ),
-						'3' => esc_html__( 'Booking Without Payment', 'tourfic' ),
-					),
-					'default' => '1'
-				),
-				array(
-					'id'          => 'booking-url',
-					'type'        => 'text',
-					'label'       => esc_html__( 'External Booking URL', 'tourfic' ),
-					'dependency'  => array( 'booking-by', '==', '2' ),
-					'placeholder' => esc_html__( 'https://website.com', 'tourfic' )
-				),
-				// array(
-				// 	'id'        => 'hide_booking_form',
-				// 	'type'      => 'switch',
-				// 	'label'     => esc_html__( 'Hide Booking Form', 'tourfic' ),
-				// 	'subtitle' => esc_html__( 'Enable this option to hide the booking form from the single tour page.', 'tourfic' ),
-				// 	'label_on'  => esc_html__( 'Yes', 'tourfic' ),
-				// 	'label_off' => esc_html__( 'No', 'tourfic' ),
-				// 	'default'   => false,
-				// 	'dependency' => array( 'booking-by', '==', '2' ),
-				// ),
-				// array(
-				// 	'id'        => 'hide_price',
-				// 	'type'      => 'switch',
-				// 	'label'     => esc_html__( 'Hide Price', 'tourfic' ),
-				// 	'subtitle' => esc_html__( 'Enable this option to hide the price from the single tour page.', 'tourfic' ),
-				// 	'label_on'  => esc_html__( 'Yes', 'tourfic' ),
-				// 	'label_off' => esc_html__( 'No', 'tourfic' ),
-				// 	'default'   => false,
-				// 	'dependency' => array( 'booking-by', '==', '2' ),
-				// ),
-				array(
-					'id'        => 'booking-attribute',
-					'type'      => 'switch',
-					'label'     => esc_html__( 'Allow Attribute', 'tourfic' ),
-					'subtitle'  => esc_html__( 'If attribute allow, You can able to add custom Attribute', 'tourfic' ),
-					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
-					'label_off' => esc_html__( 'No', 'tourfic' ),
-					'dependency'  => array( 'booking-by', '==', '2' ),
-				),
-				array(
-					'id'          => 'booking-query',
-					'type'        => 'textarea',
-					'label'       => esc_html__( 'Query Attribute', 'tourfic' ),
-					'dependency'  => array(
-						array( 'booking-by', '==', '2' ),
-						array( 'booking-attribute', '==', '1' )
-					),
-					'default'     => 'pickup={pickup}&dropoff={dropoff}&pickup_date={pickup_date}&dropoff_date={dropoff_date}',
-					'placeholder' => esc_html__( 'pickup={pickup}&dropoff={dropoff}&pickup_date={pickup_date}&dropoff_date={dropoff_date}', 'tourfic' )
-				),
-				array(
-					'id'      => 'booking-notice',
-					'type'    => 'notice',
-					'class'   => 'info',
-					'title'   => esc_html__( 'Query Attribute List', 'tourfic' ),
-					'content' => esc_html__( 'You can use the following placeholders in the Query Attribute body:', 'tourfic' ) . '<br><br><strong>{pickup} </strong> : To Display Pickup Location from Search.<br>
-					<strong>{dropoff} </strong> : To Display Dropoff Location from Search.<br>
-					<strong>{pickup_date} </strong> : To display the Pickup Date from Search.<br>
-					<strong>{dropoff_date} </strong> : To display the Dropoff Date from Search.<br>',
-					'dependency'  => array(
-						array( 'booking-by', '==', '2' ),
-						array( 'booking-attribute', '==', '1' )
-					),
-				),
-				array(
-					'id'        => 'is_taxable',
-					'type'      => 'switch',
-					'label'     => esc_html__( 'Taxable', 'tourfic' ),
-					'subtitle' => esc_html__( 'Activate this option to enable tax for this tour.', 'tourfic' ),
-					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
-					'label_off' => esc_html__( 'No', 'tourfic' ),
-				),
-				array(
-					'id'      => 'taxable_class',
-					'type'    => 'select',
-					'label'   => esc_html__( 'Tax class', 'tourfic' ),
-					'subtitle'  => esc_html__( 'Select your class, and tax will calculate based on your chosen class. PS: If you activate partial payment option tax will be calculated upon partial amount as woocommerce regulations.', 'tourfic' ),
-					'options' => function_exists( 'tf_taxable_option_callback' ) ? tf_taxable_option_callback() : [''],
-					'dependency'  => array(
-						array( 'is_taxable', '==', '1' )
-					),
-				),
-				array(
 					'id'    => 'car-cancellation-heading',
 					'type'  => 'heading',
 					'label' => 'Booking Cancellation Section',
 					'subtitle' => __( 'Each car includes certain items, while others are not part of the package. Clearly define these inclusions and exclusions to prevent any misunderstandings during your car.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'car-cancellation-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-include-exclude/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'       => 'cancellation_section',
@@ -1128,6 +1006,98 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 						),
 					),
 				),
+			),
+		),
+
+        // Booking
+		'booking'              => array(
+			'title'  => esc_html__( 'Booking', 'tourfic' ),
+			'icon'   => 'fa-solid fa-person-walking-luggage',
+			'fields' => array(
+				array(
+					'id'    => 'tour-booking-heading',
+					'type'  => 'heading',
+					'label' => 'Booking Settings',
+					'subtitle' => esc_html__( 'This section offer the options to customize the booking process for your tours.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'tour-booking-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/booking/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				
+				array(
+					'id'      => 'booking-by',
+					'type'    => 'select',
+					'label'   => esc_html__( 'Booking Type', 'tourfic' ),
+					'subtitle'  => esc_html__( 'Choose the type of booking you would like to implement for this tour.', 'tourfic' ),
+					'options' => array(
+						'1' => esc_html__( 'Default Booking (WooCommerce)', 'tourfic' ),
+						'2' => esc_html__( 'External Booking', 'tourfic' ),
+						'3' => esc_html__( 'Booking Without Payment', 'tourfic' ),
+					),
+					'default' => '1'
+				),
+				array(
+					'id'          => 'booking-url',
+					'type'        => 'text',
+					'label'       => esc_html__( 'External Booking URL', 'tourfic' ),
+					'dependency'  => array( 'booking-by', '==', '2' ),
+					'placeholder' => esc_html__( 'https://website.com', 'tourfic' )
+				),
+				array(
+					'id'        => 'booking-attribute',
+					'type'      => 'switch',
+					'label'     => esc_html__( 'Allow Attribute', 'tourfic' ),
+					'subtitle'  => esc_html__( 'If attribute allow, You can able to add custom Attribute', 'tourfic' ),
+					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+					'label_off' => esc_html__( 'No', 'tourfic' ),
+					'dependency'  => array( 'booking-by', '==', '2' ),
+				),
+				array(
+					'id'          => 'booking-query',
+					'type'        => 'textarea',
+					'label'       => esc_html__( 'Query Attribute', 'tourfic' ),
+					'dependency'  => array(
+						array( 'booking-by', '==', '2' ),
+						array( 'booking-attribute', '==', '1' )
+					),
+					'default'     => 'pickup={pickup}&dropoff={dropoff}&pickup_date={pickup_date}&dropoff_date={dropoff_date}',
+					'placeholder' => esc_html__( 'pickup={pickup}&dropoff={dropoff}&pickup_date={pickup_date}&dropoff_date={dropoff_date}', 'tourfic' )
+				),
+				array(
+					'id'      => 'booking-notice',
+					'type'    => 'notice',
+					'class'   => 'info',
+					'title'   => esc_html__( 'Query Attribute List', 'tourfic' ),
+					'content' => esc_html__( 'You can use the following placeholders in the Query Attribute body:', 'tourfic' ) . '<br><br><strong>{pickup} </strong> : To Display Pickup Location from Search.<br>
+					<strong>{dropoff} </strong> : To Display Dropoff Location from Search.<br>
+					<strong>{pickup_date} </strong> : To display the Pickup Date from Search.<br>
+					<strong>{dropoff_date} </strong> : To display the Dropoff Date from Search.<br>',
+					'dependency'  => array(
+						array( 'booking-by', '==', '2' ),
+						array( 'booking-attribute', '==', '1' )
+					),
+				),
+				array(
+					'id'        => 'is_taxable',
+					'type'      => 'switch',
+					'label'     => esc_html__( 'Taxable', 'tourfic' ),
+					'subtitle' => esc_html__( 'Activate this option to enable tax for this tour.', 'tourfic' ),
+					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+					'label_off' => esc_html__( 'No', 'tourfic' ),
+				),
+				array(
+					'id'      => 'taxable_class',
+					'type'    => 'select',
+					'label'   => esc_html__( 'Tax class', 'tourfic' ),
+					'subtitle'  => esc_html__( 'Select your class, and tax will calculate based on your chosen class. PS: If you activate partial payment option tax will be calculated upon partial amount as woocommerce regulations.', 'tourfic' ),
+					'options' => function_exists( 'tf_taxable_option_callback' ) ? tf_taxable_option_callback() : [''],
+					'dependency'  => array(
+						array( 'is_taxable', '==', '1' )
+					),
+				)
 			),
 		),
 

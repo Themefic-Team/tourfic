@@ -108,7 +108,28 @@ while ( have_posts() ) : the_post();
 	$passengers = ! empty( $meta['passengers'] ) ? $meta['passengers'] : '';
 	$baggage = ! empty( $meta['baggage'] ) ? $meta['baggage'] : '';
 	$car_custom_info = ! empty( $meta['car_custom_info'] ) ? $meta['car_custom_info'] : '';
+	$unlimited_mileage = ! empty( $meta['unlimited_mileage'] ) ? $meta['unlimited_mileage'] : 0;
+	$mileage_type = ! empty( $meta['mileage_type'] ) ? $meta['mileage_type'] : 'Km';
+	$total_mileage = ! empty( $meta['mileage'] ) ? $meta['mileage'] : '';
+	$auto_transmission = ! empty( $meta['auto_transmission'] ) ? $meta['auto_transmission'] : '';
 
+	// Fuel Type
+	$fuel_type_terms = wp_get_post_terms($post_id, 'carrental_fuel_type');
+	$fuel_types = '';
+	if (!is_wp_error($fuel_type_terms) && !empty($fuel_type_terms)) {
+		foreach ($fuel_type_terms as $term) {
+			$fuel_types = $term->name;
+		}
+	}
+	// Engine Year
+	$engine_year_terms = wp_get_post_terms($post_id, 'carrental_engine_year');
+	$engine_years = '';
+	if (!is_wp_error($engine_year_terms) && !empty($engine_year_terms)) {
+		foreach ($engine_year_terms as $term) {
+			$engine_years = $term->name;
+		}
+	}
+	
 	// Benefits 
 	$benefits_status = ! empty( $meta['benefits_section'] ) ? $meta['benefits_section'] : '';
 	$benefits = ! empty( $meta['benefits'] ) ? $meta['benefits'] : '';
