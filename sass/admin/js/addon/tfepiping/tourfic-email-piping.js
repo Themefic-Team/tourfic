@@ -40,7 +40,7 @@
                         
                         if(response.status == "success") {
                            $(".tfep-connection-result").addClass("connection-success").html(response.message);
-                        } else {
+                        } else if( response.status == "error") {
                             $(".tfep-connection-result").addClass("connection-failed").html(response.message);
                         }
                     }
