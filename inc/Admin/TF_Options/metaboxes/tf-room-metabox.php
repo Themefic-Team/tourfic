@@ -188,6 +188,19 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'subtitle'    => __( 'Indicate the maximum number of nights a guest can book this room for.', 'tourfic' ),
                     'field_width' => 50,
                 ),
+                array(
+					'id'    => 'rom-cancellation-heading',
+					'type'  => 'heading',
+					'label' => 'Booking Cancellation Section',
+				),
+				array(
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-information-fill',
+					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>booking cancellation</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
+				),
 			),
 		),
 
