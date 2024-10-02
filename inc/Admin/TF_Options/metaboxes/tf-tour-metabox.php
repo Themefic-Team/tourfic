@@ -630,6 +630,20 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'icon' => 'ri-information-fill',
 					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>minimum days for booking</b>, <b>enable traveler info</b>, <b>external booking</b>, <b>booking without payment</b>, <b>taxable tour</b>, <b>tax class for Woocommerce</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' ) ),
 				),
+
+				array(
+					'id'    => 'tour-cancellation-heading',
+					'type'  => 'heading',
+					'label' => 'Booking Cancellation Section',
+				),
+				array(
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-information-fill',
+					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>booking cancellation</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
+				),
 			),
 		),
 		// // Exclude/Include
