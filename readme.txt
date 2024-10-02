@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.6
-Stable tag: 2.13.4
+Stable tag: 2.13.7
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -322,6 +322,25 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.13.7 - 30 September 2024 =
+
+- Added: Banner info updated
+- Fixed: Hotel inventory issue
+- Fixed: leaflet map marker issue
+
+= 2.13.6 - 25 September 2024 =
+
+- Added: Tour's info updated
+- System stability improved
+
+= 2.13.5 - 17 September 2024 =
+
+- Added: Tourfic settings search and reset option added
+- Improvement: Hotel, Tour, Apartment pricing and availability revamp
+- Fixed: Hotel disabled date booking issue fixed
+- Fixed: Discount label issue fixed on hotel archive
+- Fixed: Room selection issue fixed on hotel service
+
 = 2.13.4 - 01 September 2024 =
 
 - Improvement: Search improved for hotel
@@ -543,25 +562,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 - Fixed: Archive Pagination issue
 - Fixed: Archive Tour Search issue
-
-= 2.11.11 - 25 February 2024 =
-
-- Added: Gutenberg Compatibility with tourfic
-- Added: Apartment New Template
-- Added: Apartment Export and Import (Pro)
-- Added: Tax Feature for Hotel, Tour and Apartment (Pro)
-- Added: Apartment Backend Booking 
-- Added: New Date format (MM/DD/YYYY)
-- Improved: Quick setup
-- Improved: Organized free and pro option panel
-- Improved: Tour itinerary map for Google Maps(Pro)
-- Improved: Permalink Settings
-- Improved: Tour/Hotel/Apartment featured posts
-- Improved: Hotel location optional on search
-- Fixed: PHP Deprecated issue
-- Fixed: Hotel, Tour, Apartment Booking Details Issue
-- Fixed: Vendor Enquiry Mail Setting (Pro)
-- Updated: Popup Design style
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
