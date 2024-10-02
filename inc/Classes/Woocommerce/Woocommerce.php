@@ -20,8 +20,8 @@ class Woocommerce {
 		add_filter( 'woocommerce_order_item_display_meta_key', array($this, 'tf_change_meta_key_title'), 20, 3 );
 		add_filter( 'woocommerce_hidden_order_itemmeta', array($this, 'tf_hide_order_meta') );
 
-		add_action( 'woocommerce_order_status_changed', array($this, 'tf_order_status_changed', 10, 4 ));
-		add_action( 'woocommerce_saved_order_items', array($this, 'tf_woocommerce_before_save_order_items', 10, 2 ));
+		add_action( 'woocommerce_order_status_changed', array($this, 'tf_order_status_changed'), 10, 4);
+		add_action( 'woocommerce_saved_order_items', array($this, 'tf_woocommerce_before_save_order_items'), 10, 2);
 	}
 
 	function tf_woocommerce_data_stores( $stores ) {

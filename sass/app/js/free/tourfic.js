@@ -2361,47 +2361,6 @@
             });
         });
 
-        // tf customer refund
-        $(document).on('click', '.tf_refund_request', function (e) {
-            e.preventDefault();
-            let $this = $(this);
-            let href = $this.attr('href');  // Get the URL from the href attribute
-
-            // Create a URL object to easily extract query parameters
-            let url = new URL(href);
-            let order = url.searchParams.get("order");         // Get the 'order' parameter
-            let orderType = url.searchParams.get("order-type");
-
-            var data = {
-                action: 'tf_customer_refund_request',
-                _nonce: tf_params.nonce,
-                order: order,
-                orderType: orderType
-            };
-
-            $.ajax({
-                url: tf_params.ajax_url,
-                type: 'POST',
-                data: data,
-                beforeSend: function () {
-                    $this.addClass('tf-btn-loading');
-                },
-                success: function (data) {
-                    $this.unblock();
-
-                    var response = JSON.parse(data);
-                    if (response.status == 'error') {
-
-                    } else {
-                        if (response.redirect_to) {
-                            window.location.replace(response.redirect_to);
-                        }
-                    }
-                }
-            });
-
-        });
-
     });
 
     /*

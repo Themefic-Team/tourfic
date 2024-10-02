@@ -838,9 +838,99 @@
             }
         }) 
         $(document).on("mouseleave", '#itn-infowindow', function(e) {
-            
             $(".itinerary-map-popup-img-icons").addClass("popup-arrow-active")
-        })
+        });
+
+        /*
+        * Car Add Extra
+        * @author Jahid
+        */
+        $(document).on('submit', '.tf-car-extra-infos', function (e) {
+            e.preventDefault();
+            let form = $(this);
+            const formData = new FormData(e.target);
+            submitBtn = form.find('.tf-extra-submit'),
+            formData.append('action', 'tf_extra_add_to_booking');
+            formData.append('_nonce', tf_params.nonce);
+
+        
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                beforeSend: function () {
+                    form.css({'opacity': '0.5', 'pointer-events': 'none'});
+                    submitBtn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    form.css({'opacity': '1', 'pointer-events': 'all'});
+                    submitBtn.removeClass('tf-btn-loading');
+                    $('.tf-added-extra').html(response);
+                    if(response){
+                        $('.tf-extra-added-info').show();
+                    }
+                }
+            });
+
+        });
+
+        /*
+        * Car Delete Extra
+        * @author Jahid
+        */
+        $(document).on('click', '.tf-single-added-extra .delete', function (e) {
+            e.preventDefault();
+            let $this = $(this);
+            $this.closest('.tf-single-added-extra').remove();
+            var count = $('.tf-added-extra .tf-single-added-extra').length;
+            if(count==0){
+                $('.tf-extra-added-info').hide();
+            }
+        });
+
+        // tf customer refund from profile
+        $(document).on('click', '.tf_refund_request', function (e) {
+            e.preventDefault();
+            let $this = $(this);
+            let href = $this.attr('href');  // Get the URL from the href attribute
+
+            // Create a URL object to easily extract query parameters
+            let url = new URL(href);
+            let order = url.searchParams.get("order");         // Get the 'order' parameter
+            let orderType = url.searchParams.get("order-type");
+
+            var data = {
+                action: 'tf_customer_refund_request',
+                _nonce: tf_params.nonce,
+                order: order,
+                orderType: orderType
+            };
+
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    $this.addClass('tf-btn-loading');
+                },
+                success: function (data) {
+                    $this.unblock();
+
+                    var response = JSON.parse(data);
+                    if (response.status == 'error') {
+
+                    } else {
+                        if (response.redirect_to) {
+                            window.location.replace(response.redirect_to);
+                        }
+                    }
+                }
+            });
+
+        });
+
     });
 
 })(jQuery);
