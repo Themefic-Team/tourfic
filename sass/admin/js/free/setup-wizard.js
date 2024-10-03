@@ -224,9 +224,11 @@
        
         $(document).on('click', '.tf-setup-travelfic-toolkit-btn', function (e) {
             e.preventDefault();
+            var $this = $(this);
             if ($.inArray("travelfic-toolkit", travelfic_toolkit_active_plugins) !== -1) {
                 let plugin_slug = $(this).attr('data-install');
-                $('.tf-setup-travelfic-theme-btn').text("Toolkit Installing...");
+                $this.text("Toolkit Activate...");
+                $this.addClass('tf-btn-loading');
 
                 var data = {
                     action: "tf_travelfic_toolkit_installing",
