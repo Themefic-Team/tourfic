@@ -296,12 +296,17 @@ abstract class Enquiry {
 
 	public function single_enquiry_details($data) {
 
+		global $wpdb, $current_user;
+
 		$server_data = !empty( $data["server_data"] ) ? json_decode($data["server_data"], true) : array();
 
 		list($date, $time) = explode(" ", $data["created_at"]);
 		$formateed_date = date( "M d, Y", strtotime($date));
 		$formateed_time = date( "h:i:s A", strtotime($time));
 		$reply_data = !empty( $data["reply_data"] ) ? json_decode($data["reply_data"], true) : array();
+		$reply_user = isset( $_POST['user_name'] ) ? sanitize_text_field( $_POST['user_name'] ) : '';
+		$current_user = wp_get_current_user();
+		$_SESSION["WP"]["userId"] = $current_user->ID;
 
 		?>
 		<div class="wrap tf_booking_details_wrap tf-enquiry-details-wrap" style="margin-right: 20px;">
@@ -363,8 +368,13 @@ abstract class Enquiry {
 										<input type="hidden" class="tf-single-enquiry-accordion-id" value="<?php echo esc_attr($key) ?>">
 										<div class="tf-single-enquiry-accordion-head">
 											<div class="tf-single-enquiry-accordion-head-left">
-												<i class="ri-reply-all-line"></i>
-												<?php esc_html_e("You", 'tourfic') ?>
+												<?php if( !empty( $reply["type"]) && "response" == $reply["type"]) : ?>
+													<i class="ri-reply-all-line tf-enquiry-response-user"></i>
+													<?php !empty( $reply["reply_user"]) ? $reply["reply_user"] : esc_html__("User", "tourfic"); ?>
+												<?php else: ?>
+													<i class="ri-reply-all-line tf-enquiry-response-user"></i>
+													<?php esc_html_e("You", 'tourfic') ?>
+												<?php endif; ?>
 												<span class="tf-single-accordion-dash"><?php esc_html_e('―', 'tourfic') ?></span>
 												<span class="tf-single-accordion-subject">
 												<?php echo $reply["reply_message"] ? ( wp_kses_post( strlen( strip_tags( $reply["reply_message"] ) ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message"] ), 75 ) , 'tourfic' ) : esc_html__( strip_tags( $reply["reply_message"] ) ), 'tourfic' )) : ''; ?>
@@ -409,6 +419,8 @@ abstract class Enquiry {
 								<input type="hidden" class="tf-enquiry-reply-name" value="<?php echo esc_html($data["uname"]); ?>">
 								<input type="hidden" class="tf-enquiry-reply-id" value="<?php echo esc_html($data["id"]); ?>">
 								<input type="hidden" class="tf-enquiry-reply-post-id" value="<?php echo esc_html($data["post_id"]); ?>">
+								<input type="hidden" name="tf-enquiry-reply-post-userID" value="<?php echo $_SESSION['WP']['userId']; ?>" />
+
 								<button class="tf-enquiry-reply-button" type="submit"> 
 									<?php esc_html_e('Send', 'tourfic') ?>
 									<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -903,6 +915,7 @@ abstract class Enquiry {
 
 		$response = array();
 		global $wpdb;
+		global $current_user;
 		$reply_data = $wpdb->get_results( "SELECT reply_data FROM {$wpdb->prefix}tf_enquiry_data WHERE id= " . $_POST['enquiry_id'] );
 		$reply_data = json_decode( $reply_data[0]->reply_data, true );
 
@@ -912,7 +925,6 @@ abstract class Enquiry {
 		$reply_message = isset( $_POST['reply_message'] ) ? wp_kses_post( $_POST['reply_message'] ) : '';
 		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
 		$enquiry_id = isset( $_POST['enquiry_id'] ) ? sanitize_text_field( $_POST['enquiry_id'] ) : '';
-		$reply_user = isset( $_POST['user_name'] ) ? sanitize_text_field( $_POST['user_name'] ) : '';
 
 		if( empty( $reply_message ) ) {
 			$response['status'] = 'error';

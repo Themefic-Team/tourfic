@@ -6600,6 +6600,11 @@ a.tf-import-btn, a.tf-export-btn {
   margin-right: 8px;
 }
 
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item .tf-single-enquiry-accordion-head .tf-single-enquiry-accordion-head-left .tf-enquiry-response-user {
+  display: inline-block;
+  transform: scale(-1, -1);
+}
+
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item .tf-single-enquiry-accordion-head .tf-single-enquiry-accordion-head-left .tf-single-accordion-dash {
   margin-left: 16px;
   margin-right: 16px;
