@@ -885,18 +885,6 @@ class Migrator {
 							set_post_thumbnail( $room_post_id, $attachment_id );
 						}
 					}
-
-					// Room Id add to the Hotelwise
-//					$hotel_room_meta = !empty(get_post_meta( $post_id, 'tf_search_hotel_room_id', true )) ? get_post_meta( $post_id, 'tf_search_hotel_room_id', true ) : [];
-//					$hotel_room_meta[$room_post_id] = $room_post_id;
-//					update_post_meta( $post_id, 'tf_search_hotel_room_id', $hotel_room_meta );
-//
-//					if(!empty($searchable_keys)){
-//						foreach($searchable_keys as $search){
-//							$fields_values = !empty($room[$search]) ? $room[$search] : "";
-//							update_post_meta( $room_post_id, 'tf_search_'.$search, $fields_values );
-//						}
-//					}
 				}
 
 			}

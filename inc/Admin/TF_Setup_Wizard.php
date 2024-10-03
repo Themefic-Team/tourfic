@@ -270,14 +270,28 @@ class TF_Setup_Wizard {
                 </ul>
                 <div class="tf-setup-action-btn-wrapper">
                     <div class="tf-setup-action-btn-next">
-                        <button type="button" class="tf-setup-skip-btn tf-link-skip-btn"><?php esc_html_e( 'Skip', 'tourfic' ) ?></button>
-                        <button type="button" class="tf-setup-next-btn tf-quick-setup-btn">
-                            <span><?php esc_html_e( 'Next', 'tourfic' ) ?></span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M5 12H19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M12 5L19 12L12 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
+                        <?php
+                        $tf_current_active_theme = !empty(get_option('stylesheet')) ? get_option('stylesheet') : 'No'; 
+
+                        if ( $tf_current_active_theme != 'travelfic' && $tf_current_active_theme != 'travelfic-child' && $tf_current_active_theme != 'ultimate-hotel-booking' && $tf_current_active_theme != 'ultimate-hotel-booking-child' ) {
+                        ?>
+                            <button type="button" class="tf-setup-skip-btn tf-link-skip-btn"><?php esc_html_e( 'Skip', 'tourfic' ) ?></button>
+                            <button type="button" class="tf-setup-next-btn tf-quick-setup-btn">
+                                <span><?php esc_html_e( 'Next', 'tourfic' ) ?></span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M5 12H19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M12 5L19 12L12 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        <?php }else{ ?>
+                            <button type="button" class="tf-quick-setup-btn tf-setup-travelfic-toolkit-btn" data-install="travelfic-toolkit">
+                                <span><?php esc_html_e( 'Template Library', 'tourfic' ) ?></span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M5 12H19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M12 5L19 12L12 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        <?php } ?>
                     </div>
                 </div>
             </section>
@@ -1142,6 +1156,8 @@ class TF_Setup_Wizard {
 
 			if ( ! empty( $hotel_demo_data ) && $hotel_demo_data == '1' ) {
 				TF_Demo_Importer::instance()->tf_dummy_hotels_import();
+				$migrator = new \Tourfic\Classes\Migrator();
+				$migrator->regenerate_room_meta();
 			}
 		}
 
