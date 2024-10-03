@@ -1142,6 +1142,8 @@ class TF_Setup_Wizard {
 
 			if ( ! empty( $hotel_demo_data ) && $hotel_demo_data == '1' ) {
 				TF_Demo_Importer::instance()->tf_dummy_hotels_import();
+				$migrator = new \Tourfic\Classes\Migrator();
+				$migrator->regenerate_room_meta();
 			}
 		}
 
