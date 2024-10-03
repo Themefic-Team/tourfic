@@ -370,9 +370,9 @@ abstract class Enquiry {
 											<div class="tf-single-enquiry-accordion-head-left">
 												<?php if( !empty( $reply["type"]) && "response" == $reply["type"]) : ?>
 													<i class="ri-reply-all-line tf-enquiry-response-user"></i>
-													<?php !empty( $reply["reply_user"]) ? $reply["reply_user"] : esc_html__("User", "tourfic"); ?>
+													<?php echo !empty( $reply["reply_user"]) ? $reply["reply_user"] : esc_html__("User", "tourfic"); ?>
 												<?php else: ?>
-													<i class="ri-reply-all-line tf-enquiry-response-user"></i>
+													<i class="ri-reply-all-line"></i>
 													<?php esc_html_e("You", 'tourfic') ?>
 												<?php endif; ?>
 												<span class="tf-single-accordion-dash"><?php esc_html_e('―', 'tourfic') ?></span>
