@@ -344,6 +344,7 @@ class TF_Setup_Wizard {
                 </div>
                 <p class="tf-setup-step-desc"><?php esc_html_e( "Travelfic is a WordPress theme created by us to improve your site’s frontend. While Tourfic manages your backend and booking, Travelfic ensures your travel site looks great and operates smoothly. ", "tourfic" ) ?>
                     <a href="https://wordpress.org/themes/travelfic/" target="_blank"><?php esc_html_e( "Know more about Travelfic", "tourfic" ); ?></a></p>
+                <h4 class="tf-select-title"><?php esc_html_e("Select theme from our library", "tourfic"); ?></h4>    
 
                 <div class="setup-theme-style">
                     <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL ) . 'images/themes.png' ?>" alt="<?php esc_attr_e( 'Travelfic Theme', 'tourfic' ) ?>">

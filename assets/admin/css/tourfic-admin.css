@@ -1064,6 +1064,15 @@ Steps
   line-height: 24px;
   margin: 0 0 2px 0px;
 }
+.tf-setup-step-container .tf-select-title {
+  color: #27333f;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
+  margin: 0px 0px 10px 0px;
+}
 .tf-setup-step-container .tf-setup-step-desc {
   color: #566676;
   font-family: Inter;
