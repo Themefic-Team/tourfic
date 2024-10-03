@@ -284,21 +284,40 @@ $t4-main-color: #060D1C;
             padding: 24px 16px 24px 32px;
             gap: 24px;
 
+            @media #{$max1440} {
+                width: 50%;
+                height: 100vh;
+            }
+
             @media #{$max1024} {
-                width: 620px;
+                width: 100%;
+                height: auto;
             }
         }
 
         .tf-details-right {
             width: calc(100% - 787px);
 
+            @media #{$max1440} {
+                width: 50%;
+            }
+
             @media #{$max1024} {
-                width: calc(100% - 620px);
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
             }
 
             .tf-hotel-archive-map-wrap {
                 height: 885px;
                 width: 100%;
+
+                @media #{$max1440} {
+                    height: 100vh;
+                }
             }
 
             #tf-hotel-archive-map {
@@ -424,6 +443,32 @@ $t4-main-color: #060D1C;
             }
         }
 
+        .tf-mobile-map-btn,
+        .tf-mobile-list-btn{
+            display: none;
+        }
+
+        @media #{$max1024} {
+            .tf-mobile-map-btn,
+            .tf-mobile-list-btn{
+                @include flexbox();
+                @include align-items(center);
+                gap: 8px;
+                padding: 8px;
+                border-radius: 4px;
+                background-color: $t4-primary;
+                color: #fff;
+                text-decoration: none;
+            }
+
+            .tf-mobile-list-btn{
+                position: fixed;
+                right: 16px;
+                top: 16px;
+                z-index: 99;
+            }
+        }
+
         .tf-archive-top {
             @include flexbox();
             @include align-items(center);
@@ -434,6 +479,10 @@ $t4-main-color: #060D1C;
                 margin-bottom: 0;
                 font-size: 16px;
                 font-weight: 500;
+
+                @media #{$max1024} {
+                    display: none;
+                }
             }
 
             .tf-archive-view {
@@ -505,6 +554,14 @@ $t4-main-color: #060D1C;
             gap: 24px;
             max-height: 728px;
             overflow-y: auto;
+
+            @media #{$max1440} {
+                max-height: calc(100vh - 96px);
+            }
+
+            @media #{$max1024} {
+                max-height: inherit;
+            }
 
             &::-webkit-scrollbar {
                 width: 4px;
@@ -673,6 +730,10 @@ $t4-main-color: #060D1C;
             .tf-archive-hotel {
                 display: block;
                 flex-basis: calc(50% - 12px);
+                
+                @media #{$max575} {
+                    flex-basis: 100%;
+                }
 
                 .tf-archive-hotel-thumb {
                     min-width: 100%;

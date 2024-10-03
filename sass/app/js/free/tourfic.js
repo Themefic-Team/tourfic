@@ -2493,6 +2493,18 @@
             }
         });
 
+        /*
+        * Map toggle btn for mobile
+        */
+        $(document).on('click', '.tf-hotel-template-4 .tf-mobile-map-btn', function (e) {
+            e.preventDefault();
+            $('.tf-hotel-template-4 .tf-details-right').css('display', 'block');
+        });
+        $(document).on('click', '.tf-hotel-template-4 .tf-mobile-list-btn', function (e) {
+            e.preventDefault();
+            $('.tf-hotel-template-4 .tf-details-right').css('display', 'none');
+        });
+
         // GOOGLE MAP INIT
         function googleMapInit(mapLocations, mapLat = 23.8697847, mapLng = 90.4219536) {
             let zoomInitialized = false;
