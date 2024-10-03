@@ -8,6 +8,7 @@ use \Tourfic\Classes\Helper;
 use Tourfic\Classes\Hotel\Hotel;
 use \Tourfic\Classes\Hotel\Pricing as hotelPricing;
 use \Tourfic\Classes\Tour\Pricing as tourPricing;
+use \Tourfic\Classes\Apartment\Pricing as apartmentPricing;
 use Tourfic\Classes\Tour\Tour;
 use \Tourfic\Classes\Apartment\Apartment;
 
@@ -961,6 +962,69 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 									}
 								} else {
 									$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
+									if ( ! $apartment_meta["apartment_as_featured"] ) {
+										continue;
+									}
+
+									$count ++;
+									$map  = ! empty( $apartment_meta['map'] ) ? Helper::tf_data_types( $apartment_meta['map'] ) : '';
+									$discount_type  = ! empty( $apartment_meta['discount_type'] ) ? $apartment_meta['discount_type'] : '';
+									$discount_price = ! empty( $apartment_meta['discount'] ) ? $apartment_meta['discount'] : '';
+
+									$min_price_arr = apartmentPricing::instance(get_the_ID())->get_min_price();
+									$min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;
+									$min_regular_price = !empty($min_price_arr['min_regular_price']) ? $min_price_arr['min_regular_price'] : 0;
+
+									if ( $min_regular_price != 0 ) {
+										$price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
+									} else {
+										$price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
+									}
+
+									if ( ! empty( $map ) ) {
+										$lat = $map['latitude'];
+										$lng = $map['longitude'];
+										ob_start();
+										?>
+                                        <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                            <div class="tf-map-item-thumb">
+                                                <a href="<?php echo get_the_permalink(); ?>">
+													<?php
+													if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
+														the_post_thumbnail( 'full' );
+													} else {
+														echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+													}
+													?>
+                                                </a>
+
+												<?php
+												if ( ! empty( $discount_price ) ) : ?>
+                                                    <div class="tf-map-item-discount">
+														<?php echo $discount_type == "percent" ? $discount_price . '%' : wc_price( $discount_price ) ?><?php _e( " Off", "tourfic" ); ?>
+                                                    </div>
+												<?php endif; ?>
+                                            </div>
+                                            <div class="tf-map-item-content">
+                                                <h4><a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></h4>
+                                                <div class="tf-map-item-price">
+													<?php echo apartmentPricing::instance(get_the_ID())->get_min_price_html(); ?>
+                                                </div>
+												<?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
+                                            </div>
+                                        </div>
+										<?php
+										$infoWindowtext = ob_get_clean();
+
+										$locations[ $count ] = [
+											'id'      => get_the_ID(),
+											'lat'     => (float) $lat,
+											'lng'     => (float) $lng,
+											'price'   => base64_encode( $price_html ),
+											'content' => base64_encode( $infoWindowtext )
+										];
+									}
+
 									if ( ! empty( $data ) ) {
 										if ( isset( $data[4] ) && isset( $data[5] ) ) {
 											if( $apartment_meta["apartment_as_featured"] ) Apartment::tf_apartment_archive_single_item( $data );
@@ -1131,6 +1195,70 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 									}
 								} else {
 									$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
+
+									if ( $apartment_meta["apartment_as_featured"] ) {
+										continue;
+									}
+
+									$count ++;
+									$map  = ! empty( $apartment_meta['map'] ) ? Helper::tf_data_types( $apartment_meta['map'] ) : '';
+									$discount_type  = ! empty( $apartment_meta['discount_type'] ) ? $apartment_meta['discount_type'] : '';
+									$discount_price = ! empty( $apartment_meta['discount'] ) ? $apartment_meta['discount'] : '';
+
+									$min_price_arr = apartmentPricing::instance(get_the_ID())->get_min_price();
+									$min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;
+									$min_regular_price = !empty($min_price_arr['min_regular_price']) ? $min_price_arr['min_regular_price'] : 0;
+
+									if ( $min_regular_price != 0 ) {
+										$price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
+									} else {
+										$price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
+									}
+
+									if ( ! empty( $map ) ) {
+										$lat = $map['latitude'];
+										$lng = $map['longitude'];
+										ob_start();
+										?>
+                                        <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                            <div class="tf-map-item-thumb">
+                                                <a href="<?php echo get_the_permalink(); ?>">
+													<?php
+													if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
+														the_post_thumbnail( 'full' );
+													} else {
+														echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+													}
+													?>
+                                                </a>
+
+												<?php
+												if ( ! empty( $discount_price ) ) : ?>
+                                                    <div class="tf-map-item-discount">
+														<?php echo $discount_type == "percent" ? $discount_price . '%' : wc_price( $discount_price ) ?><?php _e( " Off", "tourfic" ); ?>
+                                                    </div>
+												<?php endif; ?>
+                                            </div>
+                                            <div class="tf-map-item-content">
+                                                <h4><a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></h4>
+                                                <div class="tf-map-item-price">
+													<?php echo apartmentPricing::instance(get_the_ID())->get_min_price_html(); ?>
+                                                </div>
+												<?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
+                                            </div>
+                                        </div>
+										<?php
+										$infoWindowtext = ob_get_clean();
+
+										$locations[ $count ] = [
+											'id'      => get_the_ID(),
+											'lat'     => (float) $lat,
+											'lng'     => (float) $lng,
+											'price'   => base64_encode( $price_html ),
+											'content' => base64_encode( $infoWindowtext )
+										];
+									}
+
 									if ( ! empty( $data ) ) {
 										if ( isset( $data[4] ) && isset( $data[5] ) ) {
 											if( ! $apartment_meta["apartment_as_featured"] ) Apartment::tf_apartment_archive_single_item( $data );

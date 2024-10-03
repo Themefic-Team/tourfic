@@ -4194,4 +4194,26 @@ class Tour {
 		    return;
 	    }
     }
+
+	static function template( $type = 'archive', $post_id = '' ) {
+		$tour_template = '';
+		$post_id        = ! empty( $post_id ) ? $post_id : '';
+
+		if ( $type == 'archive' ) {
+			$tour_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] : 'design-1';
+		} elseif ( $type == 'single' && $post_id ) {
+			$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+
+			$layout_conditions = ! empty( $meta['tf_single_tour_layout_opt'] ) ? $meta['tf_single_tour_layout_opt'] : 'global';
+			if ( "single" == $layout_conditions ) {
+				$single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'design-1';
+			}
+			$global_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
+			$tour_template  = ! empty( $single_template ) ? $single_template : $global_template;
+		} elseif ( $type == 'single' ) {
+			$tour_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
+		}
+
+		return $tour_template;
+	}
 }

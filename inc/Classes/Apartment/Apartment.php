@@ -2637,4 +2637,26 @@ class Apartment {
 		}
 	}
 
+	static function template( $type = 'archive', $post_id = '' ) {
+		$apartment_template = '';
+		$post_id        = ! empty( $post_id ) ? $post_id : '';
+
+		if ( $type == 'archive' ) {
+			$apartment_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment-archive'] : 'design-1';
+		} elseif ( $type == 'single' && $post_id ) {
+			$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+
+			$layout_conditions = ! empty( $meta['tf_single_apartment_layout_opt'] ) ? $meta['tf_single_apartment_layout_opt'] : 'global';
+			if ( "single" == $layout_conditions ) {
+				$single_template = ! empty( $meta['tf_single_apartment_template'] ) ? $meta['tf_single_apartment_template'] : 'design-1';
+			}
+			$global_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] : 'design-1';
+			$apartment_template  = ! empty( $single_template ) ? $single_template : $global_template;
+		} elseif ( $type == 'single' ) {
+			$apartment_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] : 'design-1';
+		}
+
+		return $apartment_template;
+	}
+
 }

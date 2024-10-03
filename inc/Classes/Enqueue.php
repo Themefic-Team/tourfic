@@ -3,6 +3,7 @@
 namespace Tourfic\Classes;
 defined( 'ABSPATH' ) || exit;
 
+use Tourfic\Classes\Apartment\Apartment;
 use Tourfic\Classes\Apartment\Pricing as ApartmentPricing;
 use Tourfic\Classes\Helper;
 use Tourfic\Classes\Hotel\Hotel;
@@ -482,7 +483,12 @@ class Enqueue {
 				'tour_form_data'         => isset( $single_tour_form_data ) ? $single_tour_form_data : array(),
 				'hotel_archive_template' => Hotel::template(),
 				'hotel_single_template' => $post_type == 'tf_hotel' ? Hotel::template('single', $post_id) : '',
+				'tour_archive_template' => Tour::template(),
+				'tour_single_template' => $post_type == 'tf_tours' ? Tour::template('single', $post_id) : '',
+				'apartment_archive_template' => Apartment::template(),
+				'apartment_single_template' => $post_type == 'tf_apartment' ? Apartment::template('single', $post_id) : '',
 				'tf_hotel_date_required_msg' => esc_html__('Please select check in and check out date', 'tourfic'),
+				'tf_tour_date_required_msg' => esc_html__('Please select a date', 'tourfic'),
 			)
 		);
 

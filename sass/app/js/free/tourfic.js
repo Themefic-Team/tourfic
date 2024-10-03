@@ -71,8 +71,10 @@
             }
 
             if ($.trim(checkin) === '' && tf_params.date_tour_search && posttype === 'tf_tours') {
-
                 if ($('#tf-required').length === 0) {
+                    if(tf_params.tour_archive_template == 'design-3') {
+                        notyf.error(tf_params.tf_tour_date_required_msg);
+                    }
                     if ($('.tf_booking-dates .tf_label-row').length === 1) {
                         $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
                     } else {
@@ -83,8 +85,10 @@
             }
 
             if ($.trim(checkin) === '' && tf_params.date_apartment_search && posttype === 'tf_apartment') {
-
                 if ($('#tf-required').length === 0) {
+                    if(tf_params.apartment_archive_template == 'design-2') {
+                        notyf.error(tf_params.tf_hotel_date_required_msg);
+                    }
                     if ($('.tf_booking-dates .tf_label-row').length === 1) {
                         $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
                     } else {
@@ -159,7 +163,7 @@
                             opacity: .5
                         }
                     });
-                    if(tf_params.hotel_archive_template === 'design-3') {
+                    if(tf_params.hotel_archive_template === 'design-3' || tf_params.tour_archive_template === 'design-3' || tf_params.apartment_archive_template === 'design-2') {
                         $('#tf-hotel-archive-map').block({
                             message: null,
                             overlayCSS: {
@@ -176,7 +180,7 @@
                 complete: function (data) {
                     $('.archive_ajax_result').unblock();
                     $('#tf_ajax_searchresult_loader').hide();
-                    if(tf_params.hotel_archive_template === 'design-3') {
+                    if(tf_params.hotel_archive_template === 'design-3' || tf_params.tour_archive_template === 'design-3' || tf_params.apartment_archive_template === 'design-2') {
                         $('#tf-hotel-archive-map').unblock();
                     }
 
@@ -200,7 +204,7 @@
                         $('.tf-details-right').removeClass('tf-filter-show');
                     }
 
-                    if(tf_params.hotel_archive_template === 'design-3') {
+                    if(tf_params.hotel_archive_template === 'design-3' || tf_params.tour_archive_template === 'design-3' || tf_params.apartment_archive_template === 'design-2') {
                         $('#tf-hotel-archive-map').unblock();
 
                         // GOOGLE MAP INITIALIZE
@@ -498,7 +502,8 @@
             e.preventDefault();
             makeFilter()
         });
-        $(document).on('change', '[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types]', function () {
+
+        $(document).on('change', '.widget_tf_price_filters input[name="from"], .widget_tf_price_filters input[name="to"], [name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types]', function () {
             if ($(".filter-reset-btn").length > 0) {
                 $(".filter-reset-btn").show();
             }
@@ -514,6 +519,8 @@
         // Archive Page Filter Reset
         $(document).on('click', '.filter-reset-btn', function (e) {
             e.preventDefault();
+            // $('.widget_tf_price_filters input[name="from"]').val();
+            // $('.widget_tf_price_filters input[name="to"]').val();
             $('[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types]').prop('checked', false);
             makeFilter();
             $(".filter-reset-btn").hide();
@@ -2340,7 +2347,37 @@
                 hotelContainer.addClass('tf-layout-list');
                 hotelContainer.removeClass('tf-layout-grid');
             }
+            adjustPadding();
         });
+
+        /*
+        * Template 4 hotel, tour, apartment archive scrollbar
+        */
+        function adjustPadding() {
+            var hotelsContainer = $('.tf-hotel-template-4 .tf-archive-hotels');
+
+            if (hotelsContainer[0].scrollHeight > hotelsContainer.height()) {
+                hotelsContainer.css('padding-right', '16px');
+            } else {
+                hotelsContainer.css('padding-right', '0px');
+            }
+        }
+
+        adjustPadding();
+        $(window).on('resize', adjustPadding);
+
+        function adjustSidebarPadding() {
+            var sidebar = $('.tf-hotel-template-4 #tf__booking_sidebar');
+
+            if (sidebar[0].scrollHeight > sidebar.height()) {
+                sidebar.css('padding-right', '16px');
+            } else {
+                sidebar.css('padding-right', '0px');
+            }
+        }
+
+        adjustSidebarPadding();
+        $(window).on('resize', adjustSidebarPadding);
 
         /*
         * Filter btn
@@ -2463,18 +2500,18 @@
             var zoomLvl = 15;
             var centerLvl = new google.maps.LatLng(mapLat, mapLng);
 
-            if (!mapLocations || mapLocations === "[]") {
-                // Initialize the map with no events or markers when no locations are provided
-                var emptyMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
-                    zoom: zoomLvl,
-                    center: centerLvl,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP,
-                    styles: [
-                        {elementType: 'labels.text.fill', stylers: [{color: '#44348F'}]},
-                    ]
-                });
-                return; // Exit the function early if no locations are provided
-            }
+            // if (!mapLocations || mapLocations === "[]") {
+            //     // Initialize the map with no events or markers when no locations are provided
+            //     var emptyMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
+            //         zoom: zoomLvl,
+            //         center: centerLvl,
+            //         mapTypeId: google.maps.MapTypeId.ROADMAP,
+            //         styles: [
+            //             {elementType: 'labels.text.fill', stylers: [{color: '#44348F'}]},
+            //         ]
+            //     });
+            //     return; // Exit the function early if no locations are provided
+            // }
 
             var locations = JSON.parse(mapLocations);
 

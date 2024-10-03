@@ -230,10 +230,8 @@ $post_count = $GLOBALS['wp_query']->post_count;
 								<?php Helper::tourfic_posts_navigation(); ?>
                             </div>
                         </div>
-                        <!-- Available rooms end -->
 
                     </div>
-                    <!-- Available rooms end -->
                 </div>
                 <div class="tf-details-right tf-archive-right">
                     <div id="map-marker" data-marker="<?php echo TF_ASSETS_URL . 'app/images/cluster-marker.png'; ?>"></div>
@@ -246,18 +244,4 @@ $post_count = $GLOBALS['wp_query']->post_count;
             <div class="tf-nothing-found" data-post-count="0"><?php echo esc_html__( "No Tours Found!", "tourfic" ); ?></div>
 		<?php endif; ?>
     </div>
-
-    <!-- Hotel PopUp Starts -->
-    <div class="tf-popup-wrapper tf-hotel-popup">
-        <div class="tf-popup-inner">
-            <div class="tf-popup-body">
-
-            </div>
-            <div class="tf-popup-close">
-                <i class="fa-solid fa-xmark"></i>
-            </div>
-        </div>
-    </div>
-    <!-- Hotel PopUp end -->
-
 </div>
