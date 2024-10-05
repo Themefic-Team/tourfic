@@ -2516,7 +2516,7 @@ class Tour {
                 </div>
             </div>
 			<?php
-		} elseif ( $tf_tour_arc_selected_template == "design-3" ) {
+		} elseif ( $tf_tour_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) {
 			$first_gallery_image = explode( ',', $gallery );
 			?>
             <div class="tf-archive-hotel" data-id="<?php echo get_the_ID(); ?>">

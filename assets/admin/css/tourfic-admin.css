@@ -1,4 +1,10 @@
+/*!*****************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass/admin/css/free/tourfic-admin.scss ***!
+  \*****************************************************************************************************************************************************************************************/
 @import url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap);
+/*!*********************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass/admin/css/free/tourfic-admin.scss (1) ***!
+  \*********************************************************************************************************************************************************************************************/
 /*
 Button
 */
@@ -4843,6 +4849,29 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-image-radio-group li .tf-image-checkbox > input:checked + img {
   border-color: #607085 !important;
   border-radius: 5px;
+}
+
+.tf-image-radio-group li.tf-pro-item {
+  position: relative;
+}
+
+.tf-image-radio-group li.tf-pro-item span {
+  position: absolute;
+  top: -1px;
+  right: -2px;
+  background-color: #295BFF;
+  padding: 3px 10px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 13px;
+  border-radius: 3px;
+  z-index: 9;
+}
+
+.tf-image-radio-group li.tf-pro-item img {
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 .tf-apt-cal-wrap .fc-view-harness,
