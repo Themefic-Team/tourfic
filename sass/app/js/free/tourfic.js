@@ -2509,16 +2509,18 @@
             $('.tf-hotel-template-4 .tf-details-right').css('display', 'none');
         });
 
-        var zoomLvl = 8;
+        var zoomLvl = 5;
+        var zoomChangeEnabled = false;
         var centerLvl = new google.maps.LatLng(23.8697847, 90.4219536);
+        var mapChanged = false;
 
         // GOOGLE MAP INIT
         function googleMapInit(mapLocations, mapLat = 23.8697847, mapLng = 90.4219536) {
-            let zoomInitialized = false;
+            var hotelMap;
 
             if (!mapLocations || mapLocations === "[]") {
                 // Initialize the map with no events or markers when no locations are provided
-                var hotelMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
+                hotelMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
                     zoom: zoomLvl,
                     center: centerLvl,
                     mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -2530,7 +2532,7 @@
 
             var locations = JSON.parse(mapLocations);
 
-            var hotelMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
+            hotelMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
                 zoom: zoomLvl,
                 center: new google.maps.LatLng(mapLat, mapLng),
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -2544,6 +2546,7 @@
             });
 
             var markers = [];
+            var bounds = new google.maps.LatLngBounds();
             locations.map(function (location, i) {
                 var marker = new MarkerWithLabel({
                     position: new google.maps.LatLng(location['lat'], location['lng']),
@@ -2556,6 +2559,7 @@
                 });
 
                 markers.push(marker);
+                bounds.extend(marker.position);
 
                 // Show the infowindow on hover
                 google.maps.event.addListener(marker, 'mouseover', function () {
@@ -2578,38 +2582,39 @@
             google.maps.event.addListener(hotelMap, "dragend", function () {
                 zoomLvl = hotelMap.getZoom();
                 centerLvl = hotelMap.getCenter();
+                mapChanged = true;
 
-                console.log('dragend', zoomLvl, 'centerLvl', centerLvl.lat(), centerLvl.lng())
+                //console.log('dragend', zoomLvl, 'centerLvl', centerLvl.lat(), centerLvl.lng())
                 filterVisibleHotels(hotelMap, markers, locations);
             });
 
-            // Add event listener for zoom changes
+
+            zoomChangeEnabled = false;
             google.maps.event.addListener(hotelMap, "zoom_changed", function () {
-                setTimeout(function () {
+                if (zoomChangeEnabled) {
                     zoomLvl = hotelMap.getZoom();
                     centerLvl = hotelMap.getCenter();
+                    mapChanged = true;
 
-                    console.log('zoom_changed', zoomLvl, 'centerLvl', centerLvl.lat(), centerLvl.lng())
-                    if (zoomInitialized) {
-                        filterVisibleHotels(hotelMap, markers, locations);
-                    }
-                }, 1000);
+                    //console.log('zoom_changed', zoomLvl, 'centerLvl', centerLvl.lat(), centerLvl.lng())
+                    filterVisibleHotels(hotelMap, markers, locations);
+                }
             });
 
-
-            // Fit map bounds to show all markers initially or use default zoom if only one marker
-            var bounds = new google.maps.LatLngBounds();
-            markers.map(function (marker) {
-                bounds.extend(marker.position);
-            });
             var listener = google.maps.event.addListener(hotelMap, "idle", function() {
-                console.log('bounds', zoomLvl, 'centerLvl', centerLvl.lat(), centerLvl.lng())
+                hotelMap.fitBounds(bounds);
+                if (!mapChanged) {
+                    centerLvl = bounds.getCenter();
+                    hotelMap.setCenter(centerLvl);
+                } else {
+                    hotelMap.setZoom(zoomLvl);
+                    hotelMap.setCenter({lat: centerLvl.lat(), lng: centerLvl.lng()});
 
-                hotelMap.setZoom(zoomLvl);
-                hotelMap.setCenter({lat: centerLvl.lat(), lng: centerLvl.lng()});
-                google.maps.event.removeListener(listener);
+                    zoomChangeEnabled = true;
+                    google.maps.event.removeListener(listener);
+                }
+                //console.log('bounds', zoomLvl, 'centerLvl', centerLvl.lat(), centerLvl.lng())
             });
-            hotelMap.fitBounds(bounds);
         }
 
         function filterVisibleHotels(map, markers, locations) {
