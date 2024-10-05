@@ -2363,8 +2363,10 @@
             }
         }
 
-        adjustPadding();
-        $(window).on('resize', adjustPadding);
+        if($('.tf-hotel-template-4 .tf-archive-hotels').length > 1) {
+            adjustPadding();
+            $(window).on('resize', adjustPadding);
+        }
 
         function adjustSidebarPadding() {
             var sidebar = $('.tf-hotel-template-4 #tf__booking_sidebar');
@@ -2376,8 +2378,10 @@
             }
         }
 
-        adjustSidebarPadding();
-        $(window).on('resize', adjustSidebarPadding);
+        if($('.tf-hotel-template-4 #tf__booking_sidebar').length > 1) {
+            adjustSidebarPadding();
+            $(window).on('resize', adjustSidebarPadding);
+        }
 
         /*
         * Filter btn
@@ -2512,18 +2516,18 @@
             var zoomLvl = 15;
             var centerLvl = new google.maps.LatLng(mapLat, mapLng);
 
-            // if (!mapLocations || mapLocations === "[]") {
-            //     // Initialize the map with no events or markers when no locations are provided
-            //     var emptyMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
-            //         zoom: zoomLvl,
-            //         center: centerLvl,
-            //         mapTypeId: google.maps.MapTypeId.ROADMAP,
-            //         styles: [
-            //             {elementType: 'labels.text.fill', stylers: [{color: '#44348F'}]},
-            //         ]
-            //     });
-            //     return; // Exit the function early if no locations are provided
-            // }
+            if (!mapLocations || mapLocations === "[]") {
+                // Initialize the map with no events or markers when no locations are provided
+                var emptyMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
+                    zoom: zoomLvl,
+                    center: centerLvl,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    styles: [
+                        {elementType: 'labels.text.fill', stylers: [{color: '#44348F'}]},
+                    ]
+                });
+                return; // Exit the function early if no locations are provided
+            }
 
             var locations = JSON.parse(mapLocations);
 

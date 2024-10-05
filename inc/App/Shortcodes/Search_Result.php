@@ -784,6 +784,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 						}
 					}
 					if ( empty( $tf_total_filters ) ) {
+                        echo '<div id="map-datas" style="display: none">'. json_encode([]) .'</div>';
 						echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 					}
 					$post_per_page = Helper::tfopt( 'posts_per_page' ) ? Helper::tfopt( 'posts_per_page' ) : 10;
@@ -1299,6 +1300,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 					}
 
 				} else {
+                    echo '<div id="map-datas" style="display: none">'. json_encode([]) .'</div>';
 					echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 				}
 				echo "<span hidden=hidden class='tf-posts-count'>";
