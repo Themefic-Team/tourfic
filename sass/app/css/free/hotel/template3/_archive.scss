@@ -297,6 +297,7 @@ $t4-main-color: #060D1C;
 
         .tf-details-right {
             width: calc(100% - 787px);
+            overflow: hidden;
 
             @media #{$max1440} {
                 width: 50%;

@@ -947,6 +947,7 @@ class TF_Setup_Wizard {
                                             </div>
                                         </label>
                                     </li>
+                                    <?php if(function_exists( 'is_tf_pro' ) && is_tf_pro()): ?>
                                     <li>
                                         <label class="tf-image-checkbox">
                                             <input type="radio" name="tf_apartment_archive"
@@ -956,6 +957,7 @@ class TF_Setup_Wizard {
                                             </div>
                                         </label>
                                     </li>
+                                    <?php endif; ?>
                                 </ul>
                             </div>
                         </div>
