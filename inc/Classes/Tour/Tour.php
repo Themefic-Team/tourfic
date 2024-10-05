@@ -2432,12 +2432,9 @@ class Tour {
 							<?php }
 							if ( ! empty( $tour_duration ) ) { ?>
 								<?php
-								$tour_duration_time = $tour_duration > 1 ? $tour_duration_time . 's' : $tour_duration_time;
+									$tour_duration_time = $tour_duration > 1 ? $tour_duration_time . 's' : $tour_duration_time;
 								?>
                                 <li>
-									<?php
-									$tour_duration_time = $tour_duration > 1 ? $tour_duration_time . 's' : $tour_duration_time;
-									?>
                                     <i class="ri-history-fill"></i> <?php echo esc_html( $tour_duration ); ?> <?php echo esc_html( $tour_duration_time ); ?>
                                 </li>
 							<?php } ?>

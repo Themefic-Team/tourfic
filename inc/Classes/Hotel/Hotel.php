@@ -193,7 +193,7 @@ class Hotel {
                     $tfperiod = new \DatePeriod(
                         new \DateTime( $tf_startdate . ' 00:00' ),
                         new \DateInterval( 'P1D' ),
-                        (new \DateTime( $tf_enddate . ' 00:00' ))->modify('-1 day')
+                        (new \DateTime( $tf_enddate . ' 23:59' ))->modify('-1 day')
                     );
 
                     $avail_durationdate = [];
@@ -265,7 +265,9 @@ class Hotel {
                                     $order_check_out_date = strtotime( $order_details->check_out );
 
                                     $tf_order_check_in_date  = $order_details->check_in;
-                                    $tf_order_check_out_date = $order_details->check_out;
+//                                    $tf_order_check_out_date = $order_details->check_out;
+                                    $tf_order_check_out_date = (new \DateTime( $order_details->check_out ))->modify('-1 day')->format('Y/m/d');
+
                                     if ( ! empty( $avail_durationdate ) && ( in_array( $tf_order_check_out_date, $avail_durationdate ) ) ) {
                                         # Total number of room booked
                                         $number_orders = $number_orders + $ordered_number_of_room;
@@ -274,7 +276,8 @@ class Hotel {
 
                                 } else {
                                     $order_check_in_date  = $order_details->check_in;
-                                    $order_check_out_date = $order_details->check_out;
+//                                    $order_check_out_date = $order_details->check_out;
+                                    $order_check_out_date = (new \DateTime( $order_details->check_out ))->modify('-1 day')->format('Y/m/d');
                                     if ( ! empty( $avail_durationdate ) && ( in_array( $order_check_out_date, $avail_durationdate ) ) ) {
                                         # Total number of room booked
                                         $number_orders = $number_orders + $ordered_number_of_room;
