@@ -2510,25 +2510,22 @@
         });
 
         var zoomLvl = 8;
+        var centerLvl = new google.maps.LatLng(23.8697847, 90.4219536);
 
         // GOOGLE MAP INIT
         function googleMapInit(mapLocations, mapLat = 23.8697847, mapLng = 90.4219536) {
             let zoomInitialized = false;
-            // Store initial map center and zoom
-
-            var centerLvl = new google.maps.LatLng(mapLat, mapLng);
 
             if (!mapLocations || mapLocations === "[]") {
                 // Initialize the map with no events or markers when no locations are provided
-                var emptyMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
+                var hotelMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
                     zoom: zoomLvl,
-                    center: new google.maps.LatLng(mapLat, mapLng),
+                    center: centerLvl,
                     mapTypeId: google.maps.MapTypeId.ROADMAP,
                     styles: [
                         {elementType: 'labels.text.fill', stylers: [{color: '#44348F'}]},
                     ]
                 });
-                return; // Exit the function early if no locations are provided
             }
 
             var locations = JSON.parse(mapLocations);
@@ -2609,7 +2606,7 @@
                 console.log('bounds', zoomLvl, 'centerLvl', centerLvl.lat(), centerLvl.lng())
 
                 hotelMap.setZoom(zoomLvl);
-                // hotelMap.setCenter({lat: centerLvl.lat(), lng: centerLvl.lng()});
+                hotelMap.setCenter({lat: centerLvl.lat(), lng: centerLvl.lng()});
                 google.maps.event.removeListener(listener);
             });
             hotelMap.fitBounds(bounds);
