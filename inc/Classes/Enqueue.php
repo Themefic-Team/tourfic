@@ -68,17 +68,31 @@ class Enqueue {
 		$min_css          = ! empty( Helper::tfopt( 'css_min' ) ) ? '.min' : '';
 		$min_js           = ! empty( Helper::tfopt( 'js_min' ) ) ? '.min' : '';
 
+		/*
+		 * Ubuntu font load for hotel, tour, apartment template 3
+		 */
 		global $post;
 		$post_id   = ! empty( $post->ID ) ? $post->ID : '';
 		$post_type = ! empty( $post->post_type ) ? $post->post_type : '';
-		if ( $post_type == 'tf_hotel' && ! empty( $post_id ) || is_post_type_archive( 'tf_hotel' ) ) {
-			$archive_template  = Hotel::template('archive');
-			$single_template  = Hotel::template('single');
+		if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
+			if ( $post_type == 'tf_hotel' && ! empty( $post_id ) || is_post_type_archive( 'tf_hotel' ) ||
+			     $post_type == 'tf_tours' && ! empty( $post_id ) || is_post_type_archive( 'tf_tours' ) ||
+			     $post_type == 'tf_apartment' && ! empty( $post_id ) || is_post_type_archive( 'tf_apartment' )) {
+				$hotel_archive  = Hotel::template('archive');
+				$hotel_single  = Hotel::template('single');
+				$tour_archive  = Tour::template('archive');
+				$tour_single  = Tour::template('single');
+				$apartment_archive  = Apartment::template('archive');
+				$apartment_single  = Apartment::template('single');
 
-			if($archive_template == 'design-3' || $single_template == 'design-3') {
-				wp_enqueue_style( 'tf-template-4-font', '//fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap', null, TF_VERSION );
+				if($hotel_archive == 'design-3' || $hotel_single == 'design-3' ||
+				   $tour_archive == 'design-3' || $tour_single == 'design-3' ||
+				   $apartment_archive == 'design-2' || $apartment_single == 'design-2') {
+					wp_enqueue_style( 'tf-template-4-font', '//fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap', null, TF_VERSION );
+				}
 			}
 		}
+
 		//Updated CSS
 		wp_enqueue_style( 'tf-app-style', TF_ASSETS_URL . 'app/css/tourfic-style' . $min_css . '.css', null, TF_VERSION );
 		if ( get_post_type() == 'tf_tours' ) {

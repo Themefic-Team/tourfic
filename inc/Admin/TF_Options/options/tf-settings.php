@@ -463,6 +463,7 @@ TF_Settings::option( 'tf_settings', array(
 										'design-3' => array(
 											'title' => 'Design 3',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design3.jpg",
+											'is_pro'=> true,
 										),
 										'default'  => array(
 											'title' => 'Default',
@@ -899,6 +900,7 @@ TF_Settings::option( 'tf_settings', array(
 										'design-3' => array(
 											'title' => 'Design 3',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design3.jpg",
+											'is_pro'=> true,
 										),
 										'default'  => array(
 											'title' => 'Default',
@@ -1132,6 +1134,7 @@ TF_Settings::option( 'tf_settings', array(
 										'design-2' => array(
 											'title' => 'Design 2',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design3.jpg",
+											'is_pro'=> true,
 										),
 									),
 									'default'  => 'default',

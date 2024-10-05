@@ -2437,7 +2437,7 @@ class Hotel {
                 })(jQuery);
             </script>
 
-		<?php } elseif($tf_hotel_selected_template == "design-3") { ?>
+		<?php } elseif($tf_hotel_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) { ?>
             <form id="tf-single-hotel-avail" class="tf-hotel-booking-sidebar tf-booking-form" method="get" autocomplete="off">
 
 				<?php wp_nonce_field( 'check_room_avail_nonce', 'tf_room_avail_nonce' ); ?>
@@ -2977,7 +2977,7 @@ class Hotel {
                     </div>
                 </div>
             </div>
-        <?php } elseif ( $tf_hotel_arc_selected_template == "design-3" ) { ?>
+        <?php } elseif ( $tf_hotel_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) { ?>
             <div class="tf-archive-hotel" data-id="<?php echo get_the_ID(); ?>">
                 <div class="tf-archive-hotel-thumb">
                     <a href="<?php echo esc_url( $url ); ?>">
@@ -3568,7 +3568,7 @@ class Hotel {
 				endif;
 			endforeach;
 		}
-		if ( $tf_hotel_selected_template == "design-3" ) {
+		if ( $tf_hotel_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) {
 			foreach ( $rooms as $key => $_room ) :
 				$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
 				$enable                  = ! empty( $room['enable'] ) ? $room['enable'] : '';

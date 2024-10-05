@@ -1032,9 +1032,9 @@ class Helper {
                     })(jQuery);
                 </script>
 			<?php } ?>
-		<?php } elseif ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-3" ) ||
-		                 ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-3" ) ||
-		                 ( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template == "design-2" ) ) { ?>
+		<?php } elseif ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
+		                 ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
+		                 ( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template == "design-2" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ) { ?>
             <div class="tf-search-fields <?php echo $post_type == 'tf_tours' ? esc_attr( 'tf-tour-archive-block' ) : ''; ?>">
                 <div class="tf-search-field">
                     <div class="tf-search-field-icon">
@@ -1993,12 +1993,12 @@ class Helper {
 			<?php } ?>
 
         <?php } elseif (
-            ( is_post_type_archive( 'tf_hotel' ) && $tf_hotel_arc_selected_template == "design-3" ) ||
-            ( is_post_type_archive( 'tf_tours' ) && $tf_tour_arc_selected_template == "design-3" ) ||
-            ( is_post_type_archive( 'tf_apartment' ) && $tf_apartment_arc_selected_template == "design-2" ) ||
-            ( $post_type == 'tf_hotel' && $tf_hotel_arc_selected_template == "design-3" ) ||
-            ( $post_type == 'tf_tours' && $tf_tour_arc_selected_template == "design-3" ) ||
-            ( $post_type == 'tf_apartment' && $tf_apartment_arc_selected_template == "design-2" )
+            ( is_post_type_archive( 'tf_hotel' ) && $tf_hotel_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
+            ( is_post_type_archive( 'tf_tours' ) && $tf_tour_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
+            ( is_post_type_archive( 'tf_apartment' ) && $tf_apartment_arc_selected_template == "design-2" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
+            ( $post_type == 'tf_hotel' && $tf_hotel_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
+            ( $post_type == 'tf_tours' && $tf_tour_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
+            ( $post_type == 'tf_apartment' && $tf_apartment_arc_selected_template == "design-2" && function_exists( 'is_tf_pro' ) && is_tf_pro())
         ){ ?>
             <div class="tf-search-fields <?php echo $post_type == 'tf_tours' ? esc_attr( 'tf-tour-archive-block' ) : ''; ?>">
                 <div class="tf-search-field">
