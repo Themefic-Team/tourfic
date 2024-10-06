@@ -163,7 +163,7 @@
                             opacity: .5
                         }
                     });
-                    if(tf_params.hotel_archive_template === 'design-3' || tf_params.tour_archive_template === 'design-3' || tf_params.apartment_archive_template === 'design-2') {
+                    if($('#tf-hotel-archive-map').length) {
                         $('#tf-hotel-archive-map').block({
                             message: null,
                             overlayCSS: {
@@ -180,7 +180,7 @@
                 complete: function (data) {
                     $('.archive_ajax_result').unblock();
                     $('#tf_ajax_searchresult_loader').hide();
-                    if(tf_params.hotel_archive_template === 'design-3' || tf_params.tour_archive_template === 'design-3' || tf_params.apartment_archive_template === 'design-2') {
+                    if($('#tf-hotel-archive-map').length) {
                         $('#tf-hotel-archive-map').unblock();
                     }
 
@@ -204,7 +204,7 @@
                         $('.tf-details-right').removeClass('tf-filter-show');
                     }
 
-                    if(tf_params.hotel_archive_template === 'design-3' || tf_params.tour_archive_template === 'design-3' || tf_params.apartment_archive_template === 'design-2') {
+                    if($('#tf-hotel-archive-map').length) {
                         $('#tf-hotel-archive-map').unblock();
 
                         // GOOGLE MAP INITIALIZE
@@ -2026,9 +2026,11 @@
             $('body').removeClass('tf-modal-open');
         });
         $(document).on("click", function (event) {
-            if (!$(event.target).closest(".tf-modal-content,.tf-modal-btn").length) {
-                $("body").removeClass("tf-modal-open");
-                $(".tf-modal").removeClass("tf-modal-show");
+            if(!$('.tf-map-modal').length) {
+                if (!$(event.target).closest(".tf-modal-content,.tf-modal-btn").length) {
+                    $("body").removeClass("tf-modal-open");
+                    $(".tf-modal").removeClass("tf-modal-show");
+                }
             }
         });
 
@@ -2053,7 +2055,6 @@
                 url: tf_params.ajax_url,
                 data: data,
                 success: function (response) {
-                    console.log('response', response)
                     $("#tour_room_details_qv").html(response);
 
                     $("#tour_room_details_loader").hide();
@@ -2354,7 +2355,7 @@
         * Template 4 hotel, tour, apartment archive scrollbar
         */
         function adjustPadding() {
-            var hotelsContainer = $('.tf-hotel-template-4 .tf-archive-hotels');
+            var hotelsContainer = $('.tf-hotel-template-4 .tf-archive-hotels, .tf-archive-details-fancy .tf-archive-hotels');
 
             if (hotelsContainer[0].scrollHeight > hotelsContainer.height()) {
                 hotelsContainer.css('padding-right', '16px');
@@ -2363,7 +2364,7 @@
             }
         }
 
-        if($('.tf-hotel-template-4 .tf-archive-hotels').length > 1) {
+        if($('.tf-hotel-template-4 .tf-archive-hotels').length) {
             adjustPadding();
             $(window).on('resize', adjustPadding);
         }
@@ -2378,7 +2379,7 @@
             }
         }
 
-        if($('.tf-hotel-template-4 #tf__booking_sidebar').length > 1) {
+        if($('.tf-hotel-template-4 #tf__booking_sidebar').length) {
             adjustSidebarPadding();
             $(window).on('resize', adjustSidebarPadding);
         }
@@ -2386,12 +2387,12 @@
         /*
         * Filter btn
         */
-        $(document).on('click', '.tf-hotel-template-4 .tf-archive-filter-btn', function () {
-            $('.tf-hotel-template-4 .tf-archive-filter-sidebar').toggleClass('tf-show');
+        $(document).on('click', '.tf-archive-filter-btn', function () {
+            $('.tf-archive-filter-sidebar').toggleClass('tf-show');
         });
         $(document).click(function (event) {
-            if (!$(event.target).closest(".tf-hotel-template-4 .tf-archive-filter-sidebar,.tf-hotel-template-4 .tf-archive-filter-btn").length) {
-                $(".tf-hotel-template-4 .tf-archive-filter-sidebar").removeClass("tf-show");
+            if (!$(event.target).closest(".tf-archive-filter-sidebar, .tf-archive-filter-btn").length) {
+                $('.tf-archive-filter-sidebar').removeClass("tf-show");
             }
         });
 
@@ -2509,6 +2510,65 @@
             $('.tf-hotel-template-4 .tf-details-right').css('display', 'none');
         });
 
+        /*
+        * Map Popup
+        * */
+        $(document).on('click', '.tf-map-modal-btn', function (e) {
+            e.preventDefault();
+
+            //template 4
+            if ($(".tf-archive-filter-sidebar").length > 0) {
+                $(".tf-archive-filter-sidebar").removeClass('tf-show');
+            }
+
+
+            $.fancybox.open({
+                src: '.tf-archive-details-wrap',
+                type: 'inline',
+                touch: false,
+                afterClose: function () {
+                    $('.tf_template_4_hotel_archive .tf-archive-details-wrap, .tf_template_4_tour_archive .tf-archive-details-wrap, .tf_template_4_apartment_archive .tf-archive-details-wrap').css('display', 'block');
+                },
+                afterShow: function(instance, current) {
+                    // Add a class to the parent fancybox container
+                    instance.$refs.container.addClass('tf-archive-details-fancy');
+
+                    if($('.tf-archive-details-wrap .tf-archive-hotels').length) {
+                        adjustPadding();
+                        $(window).on('resize', adjustPadding);
+                    }
+                }
+            });
+
+
+
+            /*$("#tour_room_details_loader").show();
+            var post_id = $(this).attr("data-hotel");
+            var uniqid_id = $(this).attr("data-uniqid");
+            var data = {
+                action: 'tf_tour_details_qv',
+                _nonce: tf_params.nonce,
+                post_id: post_id,
+                uniqid_id: uniqid_id
+            };
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: data,
+                success: function (response) {
+                    $("#tour_room_details_qv").html(response);
+
+                    $("#tour_room_details_loader").hide();
+                    $.fancybox.open({
+                        src: '#tour_room_details_qv',
+                        type: 'inline',
+                    });
+                }
+
+            });*/
+        });
+
         var zoomLvl = 5;
         var zoomChangeEnabled = false;
         var centerLvl = new google.maps.LatLng(23.8697847, 90.4219536);
@@ -2526,7 +2586,8 @@
                     mapTypeId: google.maps.MapTypeId.ROADMAP,
                     styles: [
                         {elementType: 'labels.text.fill', stylers: [{color: '#44348F'}]},
-                    ]
+                    ],
+                    fullscreenControl: false
                 });
             }
 
@@ -2538,7 +2599,8 @@
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 styles: [
                     {elementType: 'labels.text.fill', stylers: [{color: '#44348F'}]},
-                ]
+                ],
+                fullscreenControl: false
             });
 
             var infowindow = new google.maps.InfoWindow({

@@ -1151,7 +1151,7 @@ trait Action_Helper {
 								continue;
 							}
 
-							if ( Apartment::template( 'archive' ) == 'design-2' && function_exists( 'is_tf_pro' ) && is_tf_pro()) {
+							if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) {
 								$count ++;
 								$map  = ! empty( $apartment_meta['map'] ) ? Helper::tf_data_types( $apartment_meta['map'] ) : '';
 								$discount_type  = ! empty( $apartment_meta['discount_type'] ) ? $apartment_meta['discount_type'] : '';
@@ -1425,7 +1425,7 @@ trait Action_Helper {
 								continue;
 							}
 
-							if ( Apartment::template( 'archive' ) == 'design-2' && function_exists( 'is_tf_pro' ) && is_tf_pro()) {
+							if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) {
 								$count ++;
 								$map  = ! empty( $apartment_meta['map'] ) ? Helper::tf_data_types( $apartment_meta['map'] ) : '';
 								$discount_type  = ! empty( $apartment_meta['discount_type'] ) ? $apartment_meta['discount_type'] : '';
@@ -2094,6 +2094,9 @@ trait Action_Helper {
 			if ( 'design-2' == $tf_tour_arc_selected_template ) {
 				$classes[] = 'tf_template_3_global_layouts';
 			}
+            if ( 'design-3' == $tf_tour_arc_selected_template ) {
+				$classes[] = 'tf_template_4_tour_archive';
+			}
 		}
 
 		if ( is_post_type_archive( 'tf_hotel' ) || is_tax( 'hotel_location' ) ) {
@@ -2101,11 +2104,17 @@ trait Action_Helper {
 				$classes[] = 'tf_template_3_global_layouts';
 				$classes[] = 'tf_template_3_hotel_archive';
 			}
+            if ( 'design-3' == $tf_hotel_arc_selected_template ) {
+                $classes[] = 'tf_template_4_hotel_archive';
+            }
 		}
 
 		if ( is_post_type_archive( 'tf_apartment' ) || is_tax( 'apartment_location' ) ) {
 			if ( 'design-1' == $tf_apartment_arc_selected_template ) {
 				$classes[] = 'tf_template_3_global_layouts';
+			}
+            if ( 'design-2' == $tf_apartment_arc_selected_template ) {
+				$classes[] = 'tf_template_4_apartment_archive';
 			}
 		}
 

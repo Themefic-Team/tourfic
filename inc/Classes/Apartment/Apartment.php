@@ -1878,10 +1878,7 @@ class Apartment {
                                                 <!-- Show minimum price @author - Hena -->
                                                 <div class="tf-room-price-area">
                                                     <div class="tf-room-price">
-                                                        <h6 class="tf-apartment-price-per-night">
-                                                            <span class="tf-apartment-base-price"><?php echo wp_kses_post(wc_price( $apartment_min_price['min'] ));	 ?></span>
-                                                            <span><?php echo $pricing_type === 'per_night' ? esc_html__( '/per night', 'tourfic' ) : esc_html__( '/per person', 'tourfic' ) ?></span>
-                                                        </h6>
+                                                        <?php echo Pricing::instance( $post_id )->get_min_price_html(); ?>
                                                     </div>
                                                 </div>
                                             </div>

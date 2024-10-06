@@ -65,7 +65,8 @@ class TF_Widget_Base {
             TF_Widgets\Tour_Type_Filter::instance(),
             TF_Widgets\Apartment_Features_Filter::instance(),
             TF_Widgets\Apartment_Type_Filter::instance(),
-            TF_Widgets\Price_Filter::instance()
+            TF_Widgets\Price_Filter::instance(),
+            TF_Widgets\Map_Filter::instance(),
         );
         foreach ( $custom_widgets as $key => $widget ) {
             register_widget( $widget );
