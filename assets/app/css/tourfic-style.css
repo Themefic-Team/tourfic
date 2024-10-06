@@ -22322,11 +22322,6 @@ html {
   display: none;
 }
 
-body.tf-modal-open .tf-modal.tf-map-modal {
-  overflow-y: hidden;
-  height: 100vh;
-}
-
 .tf-map-popup-wrap {
   display: none;
 }
@@ -22371,6 +22366,7 @@ body.tf-modal-open .tf-modal.tf-map-modal {
   /* Hotel details */
 }
 
+.fancybox-container .tf_widget.widget_tf_map_filters,
 .fancybox-container .tf-archive-details .tf-archive-top .tf-archive-view li.tf-archive-view-item {
   display: none;
 }
@@ -22385,56 +22381,28 @@ body.tf-modal-open .tf-modal.tf-map-modal {
 }
 
 .fancybox-container .tf-archive-details .tf-details-left {
-  width: 787px;
+  width: 40%;
   padding: 24px 16px 24px 32px;
   gap: 24px;
-}
-
-@media only screen and (max-width: 1440px) {
-  .fancybox-container .tf-archive-details .tf-details-left {
-    width: 50%;
-    height: 100vh;
-  }
+  height: 100vh;
 }
 
 @media only screen and (max-width: 1024px) {
   .fancybox-container .tf-archive-details .tf-details-left {
+    display: none;
     width: 100%;
-    height: auto;
+    height: 100vh;
   }
 }
 
 .fancybox-container .tf-archive-details .tf-details-right {
-  width: calc(100% - 787px);
+  width: 60%;
   overflow: hidden;
 }
 
-@media only screen and (max-width: 1440px) {
-  .fancybox-container .tf-archive-details .tf-details-right {
-    width: 50%;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .fancybox-container .tf-archive-details .tf-details-right {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-  }
-}
-
 .fancybox-container .tf-archive-details .tf-details-right .tf-hotel-archive-map-wrap {
-  height: 885px;
   width: 100%;
-}
-
-@media only screen and (max-width: 1440px) {
-  .fancybox-container .tf-archive-details .tf-details-right .tf-hotel-archive-map-wrap {
-    height: 100vh;
-  }
+  height: 100vh;
 }
 
 .fancybox-container .tf-archive-details .tf-details-right #tf-hotel-archive-map {
@@ -22574,11 +22542,6 @@ body.tf-modal-open .tf-modal.tf-map-modal {
 .fancybox-container .tf-archive-details .tf-details-right .tf_map_price .tf_price_inner.active {
   background: #0E3DD8;
   color: #fff;
-}
-
-.fancybox-container .tf-archive-details .tf-mobile-map-btn,
-.fancybox-container .tf-archive-details .tf-mobile-list-btn {
-  display: none;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -23194,8 +23157,13 @@ body.tf-modal-open .tf-modal.tf-map-modal {
   text-decoration: none;
 }
 
+.admin-bar .fancybox-container .tf-archive-details .tf-details-left,
 .admin-bar .fancybox-container .tf-archive-details .tf-details-right .tf-hotel-archive-map-wrap {
   height: calc(100vh - 32px);
+}
+
+.admin-bar .tf-archive-details-fancy .tf-archive-details .tf-archive-hotels {
+  max-height: calc(100vh - 128px);
 }
 
 .admin-bar .tf-archive-details-fancy .fancybox-slide {

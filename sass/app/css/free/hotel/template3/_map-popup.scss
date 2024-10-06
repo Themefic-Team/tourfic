@@ -9,319 +9,116 @@ $t4-paragraph: #6E655E;
 $t4-orange-1000: #1A0B00;
 $t4-main-color: #060D1C;
 
-.tf-hotel-template-4,
-.tf_template_4_hotel_archive,
-.tf_template_4_tour_archive,
-.tf_template_4_apartment_archive {
-    font-family: Ubuntu, sans-serif;
+/* map widget */
+.tf-map-preview{
+    position: relative;
 
-    * {
-        box-sizing: border-box;
+    img{
+        width: 100%;
+        border-radius: 8px;
     }
 
-    ins{
-        background-color: transparent;
-    }
-
-    /* Search form */
-    .tf-archive-search-form {
-        padding: 64px 0;
-        background-color: $t4-orange-background;
-        background-image: url(../images/hotel-form-bg.png);
-        background-repeat: no-repeat;
-        background-position: center center;
-        border-bottom: 0.5px solid $t4-orange-200;
-
-        @media #{$max1024} {
-            padding: 16px 0;
-        }
-
-        .tf-container{
-            @include flexbox();
-            @include justify-content(center);
-        }
-
-        .tf-booking-form {
-            display: inline-flex;
-            @include justify-content(center);
-            border-radius: 8px;
-            border: 0.5px solid $t4-orange-light;
-            background-color: $t4-orange-200;
-            padding: 24px 48px;
-            max-width: 1050px;
-            margin: 0 auto;
-
-            @media #{$max1024} {
-                padding: 16px;
-                gap: 16px;
-                @include flex-direction(column);
-            }
-        }
-    }
-
-    .tf-search-fields {
+    .tf-map-preview-content{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        @include translate(-50%, -50%);
         @include flexbox();
-        gap: 48px;
-
-        @media #{$max1024} {
-            @include flex-direction(column);
-            gap: 8px;
-        }
-
-        .tf-search-field {
-            @include flexbox();
-            @include align-items(center);
-            gap: 8px;
-
-            @media #{$max1024} {
-                padding: 16px;
-                border-radius: 4px;
-                background: $t4-orange-100;
-            }
-
-            .tf-search-field-icon {
-                @include flexbox();
-            }
-
-            .tf-search-field-content {
-                @include flexbox();
-                @include flex-direction(column);
-                gap: 8px;
-                position: relative;
-            }
-
-            .tf-search-field-label {
-                color: $t4-orange-1000;
-                font-size: 16px;
-                line-height: 12px;
-            }
-
-            .tf-search-input {
-                background: transparent;
-                padding: 0;
-                border: none;
-                width: 90px;
-                color: $t4-paragraph;
-                font-size: 12px;
-                height: 14px;
-                outline: none;
-            }
-
-            .tf-archive-guest-info {
-                font-size: 12px;
-            }
-        }
-
-        .tf-search-field-checkinout {
-            @include flexbox();
-            @include align-items(center);
-            gap: 24px;
-
-            @media #{$max1024} {
-                border-radius: 4px;
-                background: $t4-orange-100;
-            }
-        }
-
-        #tf-check-out{
-            cursor: pointer;
-        }
-
-        .tf-search-field-divider {
-            background-color: #fff;
-            width: 1px;
-
-            @media #{$max1024} {
-                display: none;
-            }
-        }
+        @include flex-direction(column);
+        @include align-items(center);
+        gap: 20px;
     }
 
-    .tf-search-field-checkin .tf-search-input.form-control {
-        min-width: 100px;
-        width: 100px;
-        opacity: 0;
-        position: absolute;
-        bottom: 0;
-    }
+    .btn-styled{
+        font-size: 13px !important;
+        font-weight: 500;
+        background-color: #0E3DD8 !important;
+        border: 1px solid #0E3DD8 !important;
+        padding: 10px 20px !important;
+        border-radius: 3px !important;
+        box-shadow: 0px 5px 15px 0px rgba(9, 50, 183, 0.38);
+        @include transition();
 
-    #tf-apartment-locationautocomplete-list,
-    #tf-locationautocomplete-list,
-    #tf-destinationautocomplete-list {
-        position: absolute;
-        left: 0;
-        top: 100%;
-        margin-top: 10px;
-        width: 250px;
-        background: $t4-orange-background;
-        box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
-        z-index: 999;
-        max-height: 200px;
-        overflow: auto;
-        scrollbar-width: thin;
-        scrollbar-color: #aaa #eee;
-        padding: 8px;
-
-        &::-webkit-scrollbar {
-            width: 5px;
+        &:hover{
+            background-color: #0E3DD8 !important;
+            border: 1px solid #0E3DD8 !important;
         }
 
-        &::-webkit-scrollbar-thumb {
-            background-color: #aaa;
-            border-radius: 4px;
-        }
-
-        &::-webkit-scrollbar-track {
-            background-color: #eee;
-        }
-
-        div {
-            padding: 10px;
-            cursor: pointer;
-            background-color: #fff;
-            margin-bottom: 4px;
-            color: $t4-paragraph;
-            display: block;
-            transition: .3s all ease;
-
-            &:last-child {
-                margin-bottom: 0px;
-            }
-
-            &:hover {
-                background: $t4-orange-light;
-            }
-
-            &::before {
-                display: none;
-            }
+        &::after{
+            display: none;
         }
     }
+}
 
-    .tf-search-guest-and-room {
-        position: relative;
+.tf-map-popup-wrap{
+    display: none;
+}
+
+.tf-archive-details-fancy{
+    .fancybox-button {
+        height: 32px;
+        width: 32px;
+        border-radius: 50%;
+        background-color: #fff;
+        text-align: center;
+        line-height: 32px;
         cursor: pointer;
-    }
+        position: absolute;
+        top: 10px !important;
+        right: 10px !important;
+        padding: 5px !important;
+        opacity: 1 !important;
+        z-index: 99;
+        text-decoration: none;
 
-    .tf_acrselection-wrap {
-        display: unset;
-        top: 80%;
-        opacity: 0;
-        visibility: hidden;
-        transition: 0.3s;
-        background: $t4-orange-light;
-        box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.10);
-
-        .acr-label {
-            color: $t4-paragraph;
-            font-weight: 600;
-            line-height: 130%;
-        }
-
-        .acr-select {
-            text-align: right;
-            width: 96px;
-
-            input[type=tel] {
-                width: 34px !important;
-                height: 48px;
-                border: 1px solid !important;
-                font-size: 16px;
-                font-style: normal;
-                font-weight: 600;
-                color: $t4-paragraph !important;
-                text-align: center;
-                padding-left: 0px !important;
-                padding-right: 0px !important;
-                border-radius: 20px;
-                background: #FCF4E8 !important;
-            }
-
-            .acr-dec,
-            .acr-inc {
-                background: transparent;
-                border: none;
-                font-size: 31px;
-                font-weight: 400;
-                color: $t4-paragraph;
-                padding: 0;
-            }
+        &:hover {
+            @include rotate(0);
+            background-color: #0E3DD8;
+            color: #fff;
         }
     }
 
-    .tf_acrselection-wrap.tf-show {
-        visibility: visible;
-        opacity: 1;
-        top: 116%;
-        display: block !important;
+    .fancybox-content{
+        padding: 0;
+        height: 100%;
+        width: 100%;
     }
+    .fancybox-slide {
+        padding: 0 !important;
+    }
+}
 
-    .tf-booking-form-submit {
-        margin-left: 48px;
-
-        @media #{$max1024} {
-            margin-left: 0;
-        }
-
-        .btn-primary {
-            border-radius: 4px;
-            background: $t4-primary !important;
-            box-shadow: 0 4px 30px 0 rgba(255, 237, 225, 0.40);
-            font-size: 16px !important;
-            padding: 13px 24px;
-
-            @media #{$max1024} {
-                width: 100%;
-            }
-        }
+.fancybox-container{
+    .tf_widget.widget_tf_map_filters,
+    .tf-archive-details .tf-archive-top .tf-archive-view li.tf-archive-view-item{
+        display: none;
     }
 
     /* Hotel details */
     .tf-archive-details {
         @include flexbox();
-        background: $t4-orange-background;
         position: relative;
 
         .tf-details-left {
-            width: 787px;
+            width: 40%;
             padding: 24px 16px 24px 32px;
             gap: 24px;
-
-            @media #{$max1440} {
-                width: 50%;
-                height: 100vh;
-            }
+            height: 100vh;
 
             @media #{$max1024} {
+                display: none;
                 width: 100%;
-                height: auto;
+                height: 100vh;
             }
         }
 
         .tf-details-right {
-            width: calc(100% - 787px);
+            width: 60%;
             overflow: hidden;
 
-            @media #{$max1440} {
-                width: 50%;
-            }
-
-            @media #{$max1024} {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
+            .tf-hotel-archive-map-wrap {
                 width: 100%;
                 height: 100vh;
-            }
-
-            .tf-hotel-archive-map-wrap {
-                height: 885px;
-                width: 100%;
-
-                @media #{$max1440} {
-                    height: 100vh;
-                }
             }
 
             #tf-hotel-archive-map {
@@ -454,11 +251,6 @@ $t4-main-color: #060D1C;
             }
         }
 
-        .tf-mobile-map-btn,
-        .tf-mobile-list-btn{
-            display: none;
-        }
-
         @media #{$max1024} {
             .tf-mobile-map-btn,
             .tf-mobile-list-btn{
@@ -500,30 +292,7 @@ $t4-main-color: #060D1C;
                 @include flexbox();
                 list-style: none;
                 gap: 16px;
-
-                li.tf-archive-view-item {
-                    width: 32px;
-                    height: 32px;
-                    line-height: 36px;
-                    border-radius: 8px;
-                    background-color: #fff;
-                    text-align: center;
-                    cursor: pointer;
-                    @include transition();
-
-                    &:hover {
-                        background: #FEF9F6;
-                        box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
-                    }
-
-                    &.active {
-                        background-color: $t4-orange-light;
-
-                        svg path {
-                            stroke: $t4-primary;
-                        }
-                    }
-                }
+                margin: 0;
 
                 li.tf-archive-filter-btn {
                     padding: 0 16px;
@@ -537,6 +306,8 @@ $t4-main-color: #060D1C;
                     text-align: center;
                     cursor: pointer;
                     @include transition();
+                    border: 0.5px solid $t4-orange-light;
+                    box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
 
                     i {
                         margin-right: 8px;
@@ -565,6 +336,10 @@ $t4-main-color: #060D1C;
             gap: 24px;
             max-height: 728px;
             overflow-y: auto;
+
+            .single-tour-inner{
+                margin: 0 !important;
+            }
 
             @media #{$max1440} {
                 max-height: calc(100vh - 96px);
@@ -656,7 +431,7 @@ $t4-main-color: #060D1C;
                                 color: $t4-primary;
                             }
                         }
-                        
+
                         .tf-edit-link{
                             font-size: 14px;
                             color: $t4-primary;
@@ -731,49 +506,6 @@ $t4-main-color: #060D1C;
                         background-color: $t4-orange-light;
                         padding: 8px 24px;
                         text-align: center;
-                    }
-                }
-            }
-        }
-
-        .tf-archive-hotels.tf-layout-grid {
-            @include flex-direction(row);
-            flex-wrap: wrap;
-
-            .tf-archive-hotel {
-                display: block;
-                flex-basis: calc(50% - 12px);
-                
-                @media #{$max575} {
-                    flex-basis: 100%;
-                }
-
-                .tf-archive-hotel-thumb {
-                    min-width: 100%;
-                    max-width: 100%;
-                    height: 165px;
-                }
-
-                .tf-archive-hotel-content {
-                    width: 100%;
-                    display: block;
-
-                    .tf-archive-hotel-content-left {
-                        width: 100%;
-
-                        .tf-reviews {
-                            @include flex-direction(row);
-                        }
-                    }
-
-                    .tf-archive-hotel-content-right {
-                        margin-top: 8px;
-                        @include flex-direction(row);
-                        width: 100%;
-
-                        .tf-archive-hotel-price {
-                            @include align-items(center);
-                        }
                     }
                 }
             }
@@ -1040,60 +772,21 @@ $t4-main-color: #060D1C;
             }
         }
     }
-
-    .tf-pagination-bar{
-        display: block;
-        width: 100%;
-
-        @media #{$max767}{
-            margin-bottom: 30px;
-        }
-
-        .tf_posts_navigation,#tf_posts_navigation_bar{
-            width: 100%;
-
-            .page-numbers {
-                font-size: 14px;
-                color: $t4-paragraph;
-                text-decoration: none;
-                padding: 12px 12px;
-                min-width: 40px;
-                line-height: 16px;
-                border-radius: 5px;
-                text-align: center;
-                background: transparent;
-                display: inline-block;
-            }
-            .page-numbers.current{
-                background: $t4-primary;
-                color: #fff !important;
-            }
-        }
-    }
-    .tf_posts_navigation.tf_posts_ajax_navigation,
-    .tf_posts_navigation.tf_posts_page_navigation{
-        margin-top: 40px;
-        width: 100%;
-        .page-numbers {
-            font-size: 14px;
-            color: $color-primary !important;
-            text-decoration: none;
-            padding: 12px 18px;
-            background: #fff !important;
-            box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
-            border-radius: 5px;
-            display: inline-block;
-        }
-        .page-numbers.current{
-            background: $color-theme !important;
-            color: #fff !important;
-        }
-    }
+}
+.admin-bar .fancybox-container .tf-archive-details .tf-details-left,
+.admin-bar .fancybox-container .tf-archive-details .tf-details-right .tf-hotel-archive-map-wrap{
+    height: calc(100vh - 32px);
+}
+.admin-bar .tf-archive-details-fancy .tf-archive-details .tf-archive-hotels {
+    max-height: calc(100vh - 128px);
+}
+.admin-bar .tf-archive-details-fancy .fancybox-slide{
+    top: 32px;
+    height: calc(100vh - 32px);
 }
 
-.admin-bar .tf-hotel-template-4 .tf-archive-filter .tf-archive-filter-sidebar,
-.admin-bar.tf_template_4_hotel_archive .tf-archive-filter .tf-archive-filter-sidebar,
-.admin-bar.tf_template_4_tour_archive .tf-archive-filter .tf-archive-filter-sidebar,
-.admin-bar.tf_template_4_apartment_archive .tf-archive-filter .tf-archive-filter-sidebar{
-    top: 32px;
+.tf_widget.widget_tf_map_filters {
+    border: none;
+    background: transparent;
+    border-radius: 0;
 }
