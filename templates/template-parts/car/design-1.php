@@ -130,7 +130,7 @@ $tf_cars_slug = get_option('car_slug');
                             if ( ! $disable_share_opt == '1' ) { ?>
                             <div class="tf-share tf-off-canvas-share-box">
                                 
-                                <a href="#dropdown-share-center" class="tf-share-toggle tf-icon tf-social-box"
+                                <a href="#" class="tf-share-toggle tf-icon tf-social-box"
                                 data-toggle="true">
                                     <i class="ri-share-line"></i>
                                 </a>
