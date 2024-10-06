@@ -2273,13 +2273,13 @@
         });
 
         // Full Description Showing
-        $('.tf-template-3 span.tf-see-description').on('click', function() {
+        $('.tf-template-3 span.tf-see-description, .tf-single-car-section span.tf-see-description').on('click', function() {
             $('.tf-short-description').slideUp();
             $('.tf-full-description').slideDown();
         });
 
         // See Less Description Showing
-        $('.tf-template-3 span.tf-see-less-description').on('click', function() {
+        $('.tf-template-3 span.tf-see-less-description, .tf-single-car-section span.tf-see-less-description').on('click', function() {
             $('.tf-full-description').slideUp();
             $('.tf-short-description').slideDown();
         });

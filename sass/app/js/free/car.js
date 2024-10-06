@@ -29,8 +29,10 @@
         // Tabs Section
         $('.tf-details-menu ul li').on("click", function () {
             var $this = $(this);
+            $currentmenu = $this.attr('data-menu');
             $('.tf-details-menu ul li').removeClass('active');
-            $this.addClass("active");
+
+            $('.tf-details-menu ul li[data-menu="' + $currentmenu + '"]').addClass('active');
         });
 
         // Car Location Autocomplete

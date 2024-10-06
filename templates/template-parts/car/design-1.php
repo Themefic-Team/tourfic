@@ -18,42 +18,41 @@ $tf_cars_slug = get_option('car_slug');
             <div class="tf-top-booking-bar tf-flex tf-flex-space-bttn tf-flex-align-center">
                 <div class="tf-details-menu">
                     <ul>
-                        <li class="active">
+                        <li class="active" data-menu="<?php echo esc_attr('tf-description'); ?>">
                             <a class="tf-hashlink" href="#tf-description">
                                 <?php esc_html_e("Description", "tourfic"); ?>
                             </a>
                         </li>
-                        <li>
+                        <li data-menu="<?php echo esc_attr('tf-car-info'); ?>">
                             <a class="tf-hashlink" href="#tf-car-info">
                                 <?php esc_html_e("Car info", "tourfic"); ?>
                             </a>
                         </li>
-                        <li>
+                        <li data-menu="<?php echo esc_attr('tf-benefits'); ?>">
                             <a class="tf-hashlink" href="#tf-benefits">
                                 <?php esc_html_e("Benefits", "tourfic"); ?>
                             </a>
                         </li>
-                        <li>
+                        <li data-menu="<?php echo esc_attr('tf-inc-exc'); ?>">
                             <a class="tf-hashlink" href="#tf-inc-exc">
                                 <?php esc_html_e("Include/Excluce", "tourfic"); ?>
                             </a>
                         </li>
-                        <li>
+                        <li data-menu="<?php echo esc_attr('tf-location'); ?>">
                             <a class="tf-hashlink" href="#tf-location">
                                 <?php esc_html_e("Location", "tourfic"); ?>
                             </a>
                         </li>
-                        <li>
+                        <li data-menu="<?php echo esc_attr('tf-reviews'); ?>">
                             <a class="tf-hashlink" href="#tf-reviews">
                                 <?php esc_html_e("Reviews", "tourfic"); ?>
                             </a>
                         </li>
-                        <li>
+                        <li data-menu="<?php echo esc_attr('tf-faq'); ?>">
                             <a class="tf-hashlink" href="#tf-faq">
                                 <?php esc_html_e("FAQ's", "tourfic"); ?>
                             </a>
                         </li>
-
                     </ul>
                 </div>
                 <div class="tf-top-bar-booking tf-flex tf-flex-gap-32">
@@ -214,42 +213,41 @@ $tf_cars_slug = get_option('car_slug');
 
                     <div class="tf-details-menu">
                         <ul>
-                            <li class="active">
+                            <li class="active" data-menu="<?php echo esc_attr('tf-description'); ?>">
                                 <a class="tf-hashlink" href="#tf-description">
                                     <?php esc_html_e("Description", "tourfic"); ?>
                                 </a>
                             </li>
-                            <li>
+                            <li data-menu="<?php echo esc_attr('tf-car-info'); ?>">
                                 <a class="tf-hashlink" href="#tf-car-info">
                                     <?php esc_html_e("Car info", "tourfic"); ?>
                                 </a>
                             </li>
-                            <li>
+                            <li data-menu="<?php echo esc_attr('tf-benefits'); ?>">
                                 <a class="tf-hashlink" href="#tf-benefits">
                                     <?php esc_html_e("Benefits", "tourfic"); ?>
                                 </a>
                             </li>
-                            <li>
+                            <li data-menu="<?php echo esc_attr('tf-inc-exc'); ?>">
                                 <a class="tf-hashlink" href="#tf-inc-exc">
                                     <?php esc_html_e("Include/Excluce", "tourfic"); ?>
                                 </a>
                             </li>
-                            <li>
+                            <li data-menu="<?php echo esc_attr('tf-location'); ?>">
                                 <a class="tf-hashlink" href="#tf-location">
                                     <?php esc_html_e("Location", "tourfic"); ?>
                                 </a>
                             </li>
-                            <li>
+                            <li data-menu="<?php echo esc_attr('tf-reviews'); ?>">
                                 <a class="tf-hashlink" href="#tf-reviews">
                                     <?php esc_html_e("Reviews", "tourfic"); ?>
                                 </a>
                             </li>
-                            <li>
+                            <li data-menu="<?php echo esc_attr('tf-faq'); ?>">
                                 <a class="tf-hashlink" href="#tf-faq">
                                     <?php esc_html_e("FAQ's", "tourfic"); ?>
                                 </a>
                             </li>
-
                         </ul>
                     </div>
                     <div class="tf-template-part tf-flex tf-flex-gap-32 tf-flex-direction-column">

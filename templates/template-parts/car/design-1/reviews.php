@@ -16,7 +16,7 @@ $tf_comment_counts = get_comments( array(
 ) );
 
 ?>
-<div class="tf-review-section">
+<div class="tf-review-section" id="tf-reviews">
 <?php if ( $comments ) {
 $tf_overall_rate = [];
 TF_Review::tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rating );

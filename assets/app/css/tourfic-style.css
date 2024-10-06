@@ -16765,20 +16765,32 @@ html {
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a:nth-child(1), .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a:nth-child(2), .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a:nth-child(3), .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a:nth-child(4) {
   display: block;
 }
-.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-short-description {
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-short-description,
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-full-description {
   color: #566676;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 24px */
 }
-.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-short-description p {
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-short-description p,
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-full-description p {
   color: #566676;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 150% !important; /* 24px */
   margin: 0;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-short-description span.tf-see-description,
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-short-description span.tf-see-less-description,
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-full-description span.tf-see-description,
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-full-description span.tf-see-less-description {
+  color: #27333F;
+  cursor: pointer;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-full-description {
+  display: none;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info {
   width: 100%;

@@ -357,7 +357,8 @@
                 }
             }
 
-            .tf-short-description{
+            .tf-short-description,
+            .tf-full-description{
                 color: #566676;
                 font-size: 16px;
                 font-style: normal;
@@ -370,7 +371,16 @@
                     font-weight: 400;
                     line-height: 150% !important; /* 24px */
                     margin: 0;
+                    
                 }
+                span.tf-see-description,
+                span.tf-see-less-description{
+                    color: #27333F;
+                    cursor: pointer;
+                }
+            }
+            .tf-full-description{
+                display: none;
             }
 
             .tf-car-info{
