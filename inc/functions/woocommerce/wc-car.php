@@ -38,7 +38,7 @@ function tf_car_booking_callback() {
 	$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? sanitize_text_field( $_POST['dropoff_date'] ) : '';
 	$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( $_POST['pickup_time'] ) : '';
 	$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( $_POST['dropoff_time'] ) : '';
-	$tf_protection  = isset( $_POST['protection'] ) ? sanitize_text_field( $_POST['protection'] ) : '';
+	$tf_protection  = isset( $_POST['protection'] ) ? $_POST['protection'] : '';
 	$extra_ids  = isset( $_POST['extra_ids'] ) ? $_POST['extra_ids'] : '';
 	$extra_qty  = isset( $_POST['extra_qty'] ) ? $_POST['extra_qty'] : '';
 	$partial_payment  = isset( $_POST['partial_payment'] ) ? $_POST['partial_payment'] : 'no';
@@ -80,10 +80,14 @@ function tf_car_booking_callback() {
 		$tf_cars_data['tf_car_data']['extras'] = $total_extra['title'];
 	}
 
-	if(!empty('yes'==$tf_protection)){
-		$total_protection_prices = Pricing::set_protection_price($meta);
-		$total_prices = $total_prices + $total_protection_prices;
-		$tf_cars_data['tf_car_data']['protection']         = 'Included';
+	if(!empty($tf_protection)){
+		$total_protection_prices = Pricing::set_protection_price($meta, $tf_protection);
+		if(!empty($total_protection_prices['price'])){
+			$total_prices = $total_prices + $total_protection_prices['price'];
+		}
+		if(!empty($total_protection_prices['title'])){
+			$tf_cars_data['tf_car_data']['protection'] = $total_protection_prices['title'];
+		}
 	}
 
 	/**

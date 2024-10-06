@@ -118,6 +118,57 @@
                                     font-weight: 700;
                                     line-height: 150%; /* 24px */
                                     padding: 0 0 16px 0px;
+                                    .tf-protection-select{
+                                        label{
+                                            color: #566676;
+                                            font-size: 16px;
+                                            font-style: normal;
+                                            font-weight: 400;
+                                            line-height: 150%; /* 24px */
+                                            position: relative;
+                                            margin-bottom: 0px;
+                                            margin-right: 20px;
+                                            cursor: pointer;
+                                            
+                                            input{
+                                                position: absolute;
+                                                opacity: 0;
+                                                cursor: pointer;
+                                                height: 0;
+                                                width: 0;
+                                            }
+                                            input:checked ~ .checkmark:after {
+                                                display: block;
+                                            }
+                                            input:checked ~ .checkmark{
+                                                background-color: #F8FAFC;
+                                            }
+                                            .checkmark {
+                                                position: absolute;
+                                                top: 2px;
+                                                left: 0;
+                                                height: 15px;
+                                                width: 15px;
+                                                border: 2px solid #566676;
+                                                background-color: transparent;
+                                                border-radius: 5px;
+                                                &::after{
+                                                    content: "";
+                                                    position: absolute;
+                                                    display: none;
+                                                    left: 3px;
+                                                    top: 1px;
+                                                    width: 5px;
+                                                    height: 8px;
+                                                    border: solid #566676;
+                                                    border-width: 0 3px 3px 0;
+                                                    -webkit-transform: rotate(45deg);
+                                                    -ms-transform: rotate(45deg);
+                                                    transform: rotate(45deg);
+                                                }
+                                            }
+                                        }
+                                    }
                                     .tf-info-tooltip{
                                         position: relative;
                                         margin-left: 5px;

@@ -559,10 +559,16 @@ function tf_car_booking_pupup_callback() {
 				<?php 
 				$total_protection_amount = 0;
 				if(!empty($car_protections)){
-					foreach($car_protections as $protection){ ?>
+					foreach($car_protections as $pkey => $protection){ ?>
 					<tr>
 						<th>
 							<div class="tf-flex">
+								<div class="tf-protection-select">
+									<label>
+										<input type="checkbox" name="protections[]" value="<?php echo esc_attr($pkey); ?>">
+										<span class="checkmark"></span>
+									</label>
+								</div>
 								<?php echo !empty($protection['title']) ? esc_html($protection['title']) : ''; ?>
 								<?php if(!empty($protection['content'])){ ?>
 								<div class="tf-info-tooltip">
@@ -609,12 +615,7 @@ function tf_car_booking_pupup_callback() {
 	</div>
 
 	<div class="tf-booking-bar tf-flex tf-flex-gap-24">
-		<input type="hidden" id="protection_value" />
-		<button data-charge="no" class="without-charge <?php echo function_exists( 'is_tf_pro' ) && is_tf_pro() && '3'==$car_booking_by ? esc_attr('booking-next') : esc_attr('booking-process'); ?>">
-			<?php esc_html_e("Book without protection", "tourfic"); ?>
-			<i class="ri-arrow-right-s-line"></i>
-		</button>
-		<button data-charge="yes" class="with-charge <?php echo function_exists( 'is_tf_pro' ) && is_tf_pro() && '3'==$car_booking_by ? esc_attr('booking-next') : esc_attr('booking-process'); ?>">
+		<button class="with-charge <?php echo function_exists( 'is_tf_pro' ) && is_tf_pro() && '3'==$car_booking_by ? esc_attr('booking-next') : esc_attr('booking-process'); ?>">
 			<?php esc_html_e("Book with protection", "tourfic"); ?>
 			<i class="ri-arrow-right-s-line"></i>
 		</button>

@@ -249,15 +249,24 @@ class Pricing {
         return $extras;
     }
 
-    static function set_protection_price($meta){
+    static function set_protection_price($meta, $tf_protection){
         $car_protections = ! empty( $meta['protections'] ) ? $meta['protections'] : '';
+        $selected_protection_title = [];
         $prices = 0;
-        foreach($car_protections as $protection){
-            if(!empty($protection['include']) && !empty($protection['price'])){ 
-                $prices += $protection['price'];
+        foreach($tf_protection as $protection){
+            $tf_single_protection = $car_protections[$protection];
+
+            if($tf_single_protection['title']){
+                $selected_protection_title[] = $tf_single_protection['title'];
+            }
+            if(!empty($tf_single_protection['include']) && !empty($tf_single_protection['price'])){ 
+                $prices += $tf_single_protection['price'];
             }
         }
-        return $prices;
+        return $protections = array(
+            'title' => implode(", ", $selected_protection_title),
+            'price' => $prices
+        );
     }
 
     static function get_total_trips($post_id){

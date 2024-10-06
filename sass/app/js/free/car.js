@@ -298,7 +298,6 @@
 
             $('.tf-booking-form-fields').show();
 
-            $('#protection_value').val($this.attr('data-charge'));
         });
 
         /*
@@ -350,9 +349,7 @@
 
         $(document).on('click', '.tf-car-booking-form .booking-process', function (e) {
             let $this = $(this);
-            if($this.attr('data-charge')){
-                $('#protection_value').val($this.attr('data-charge'));
-            }
+            
             let extra_ids = $("input[name='selected_extra[]']").map(function() {
                 return $(this).val();
             }).get();
@@ -415,7 +412,10 @@
             let pickup_time = $('.tf_pickup_time').val();
             let dropoff_time = $('.tf_dropoff_time').val();
             let post_id = $('#post_id').val();
-            let protection = $('#protection_value').val();
+            var protection = $('input[name="protections[]"]:checked').map(function() {
+                return $(this).val();  // Get the value of each checked checkbox
+            }).get();
+
             let partial_payment = $('#tf_partial_payment').val();
 
             var data = {
@@ -626,10 +626,6 @@
 
         $(document).on('click', '.tf-booking-btn .booking-process', function (e) {
             let $this = $(this);
-            if($this.attr('data-charge')){
-                $('#protection_value').val($this.attr('data-charge'));
-            }
-
 
             var travellerData = {};
             if($this.hasClass('tf-offline-booking')){
@@ -668,7 +664,10 @@
             let pickup_time = $this.closest('.tf-booking-btn').find('#pickup_time').val();
             let dropoff_time = $this.closest('.tf-booking-btn').find('#dropoff_time').val();
             let post_id = $this.closest('.tf-booking-btn').find('#post_id').val();
-            let protection = $this.closest('.tf-booking-btn').find('#protection_value').val();
+
+            var protection = $('input[name="protections[]"]:checked').map(function() {
+                return $(this).val();  // Get the value of each checked checkbox
+            }).get();
 
             var data = {
                 action: 'tf_car_booking',
