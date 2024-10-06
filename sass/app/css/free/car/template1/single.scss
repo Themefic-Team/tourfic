@@ -58,9 +58,23 @@
     }
 
     .tf-details-menu{
+        position: relative;
+        &::before{
+            background: linear-gradient(90deg, rgba(217, 217, 217, 0.00) 0%, #F8FAFC 100%);
+            position: absolute;
+            content: "";
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 92px;
+            z-index: -1;
+        }
         ul{
             margin: 0;
             padding: 0;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
             li{
                 display: inline-block;
                 a{
@@ -356,7 +370,9 @@
                     }   
                 }
             }
-
+            .tf-details-menu{
+                width: 100%;
+            }
             .tf-short-description,
             .tf-full-description{
                 color: #566676;

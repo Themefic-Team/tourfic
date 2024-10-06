@@ -16460,9 +16460,25 @@ html {
 .tf-single-car-section .tf-single-booking-bar .tf-top-bar-booking button:hover {
   background: #094c90;
 }
+.tf-single-car-section .tf-details-menu {
+  position: relative;
+}
+.tf-single-car-section .tf-details-menu::before {
+  background: linear-gradient(90deg, rgba(217, 217, 217, 0) 0%, #F8FAFC 100%);
+  position: absolute;
+  content: "";
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 92px;
+  z-index: -1;
+}
 .tf-single-car-section .tf-details-menu ul {
   margin: 0;
   padding: 0;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 .tf-single-car-section .tf-details-menu ul li {
   display: inline-block;
@@ -16764,6 +16780,9 @@ html {
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a:nth-child(1), .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a:nth-child(2), .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a:nth-child(3), .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a:nth-child(4) {
   display: block;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-details-menu {
+  width: 100%;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-short-description,
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-full-description {
