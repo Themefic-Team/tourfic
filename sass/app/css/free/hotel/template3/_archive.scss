@@ -918,6 +918,9 @@ $t4-main-color: #060D1C;
             }
         }
 
+        #tf_map_popup_sidebar{
+            display: none;
+        }
         #tf__booking_sidebar {
             max-height: calc(100vh - 100px);
             overflow-y: auto;

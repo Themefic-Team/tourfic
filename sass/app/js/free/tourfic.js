@@ -2373,7 +2373,7 @@
         }
 
         function adjustSidebarPadding() {
-            var sidebar = $('.tf-hotel-template-4 #tf__booking_sidebar');
+            var sidebar = $('.tf-hotel-template-4 #tf__booking_sidebar, #tf_map_popup_sidebar');
 
             if (sidebar[0].scrollHeight > sidebar.height()) {
                 sidebar.css('padding-right', '16px');
@@ -2524,11 +2524,6 @@
                 $(".tf-archive-filter-sidebar").removeClass('tf-show');
             }
 
-            if($('.tf-search-right #tf__booking_sidebar').length){
-                var defaultSidebar = $('.tf-search-right #tf__booking_sidebar').html();
-            }
-
-
             $.fancybox.open({
                 src: '.tf-archive-details-wrap',
                 type: 'inline',
@@ -2540,13 +2535,14 @@
                     // Add a class to the parent fancybox container
                     instance.$refs.container.addClass('tf-archive-details-fancy');
 
-                    if($('.tf-archive-filter-sidebar #tf__booking_sidebar').length){
-                        $('.tf-archive-filter-sidebar #tf__booking_sidebar').html(defaultSidebar);
-                    }
-
                     if($('.tf-archive-details-wrap .tf-archive-hotels').length) {
                         adjustPadding();
                         $(window).on('resize', adjustPadding);
+                    }
+
+                    if($('#tf_map_popup_sidebar').length) {
+                        adjustSidebarPadding();
+                        $(window).on('resize', adjustSidebarPadding);
                     }
                 }
             });

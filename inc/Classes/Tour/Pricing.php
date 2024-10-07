@@ -277,7 +277,8 @@ class Pricing {
 		$tf_tour_full_price     = min( $tour_price );
 		$tf_tour_discount_type  = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
 		$tf_tour_discount_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
-		if ( ! empty( $tf_tour_discount_type ) && ! empty( $tf_tour_min_price ) && ! empty( $tf_tour_discount_price ) ) {
+        $tf_tour_min_discount = 0;
+        if ( ! empty( $tf_tour_discount_type ) && ! empty( $tf_tour_min_price ) && ! empty( $tf_tour_discount_price ) ) {
 			if ( $tf_tour_discount_type == "percent" ) {
 				$tf_tour_min_discount = ( $tf_tour_min_price * $tf_tour_discount_price ) / 100;
 				$tf_tour_min_price    = $tf_tour_min_price - $tf_tour_min_discount;

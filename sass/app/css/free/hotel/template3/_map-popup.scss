@@ -89,7 +89,6 @@ $t4-main-color: #060D1C;
 }
 
 .fancybox-container{
-    .tf_widget.widget_tf_map_filters,
     .tf-archive-details .tf-archive-top .tf-archive-view li.tf-archive-view-item{
         display: none;
     }
@@ -107,14 +106,21 @@ $t4-main-color: #060D1C;
 
             @media #{$max1024} {
                 display: none;
-                width: 100%;
-                height: 100vh;
             }
         }
 
         .tf-details-right {
             width: 60%;
             overflow: hidden;
+
+            @media #{$max1024} {
+                width: 100%;
+                display: block;
+            }
+
+            .tf-mobile-list-btn{
+                display: none;
+            }
 
             .tf-hotel-archive-map-wrap {
                 width: 100%;
@@ -638,6 +644,10 @@ $t4-main-color: #060D1C;
         }
 
         #tf__booking_sidebar {
+            display: none;
+        }
+        #tf_map_popup_sidebar {
+            display: block;
             max-height: calc(100vh - 100px);
             overflow-y: auto;
             overflow-x: hidden;
@@ -769,6 +779,7 @@ $t4-main-color: #060D1C;
             width: 130px;
             min-height: 130px;
         }
+        .tf-tour-desc,
         .tf-archive-shortdesc{
             display: none;
         }
@@ -793,6 +804,9 @@ $t4-main-color: #060D1C;
             font: 600 12px / 1 'Lato', sans-serif;
             font-size: 12px;
         }
+        .roomName_flex{
+            display: none;
+        }
     }
 
     /* Template - Design 1 */
@@ -805,6 +819,9 @@ $t4-main-color: #060D1C;
                     height:100%;
                     width: 100%;
                     object-fit: cover;
+                }
+                .tf-features-box .tf-discount {
+                    display: none;
                 }
             }
             .tf-item-details {
@@ -851,26 +868,7 @@ $t4-main-color: #060D1C;
                 }
 
                 &.tf-popup-buttons {
-                    background-size: cover;
-                    background-position: center;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    position: relative;
-                    z-index: 1;
-                    img {
-                        height: 30px;
-                        width: 30px;
-                    }
-                    &:after {
-                        position: absolute;
-                        content: "";
-                        height: 100%;
-                        width: 100%;
-                        background: #000;
-                        opacity: .5;
-                        z-index: -1;
-                    }
+                    display: none;
                 }
             }
             .tf-room-gallery.tf-no-room-gallery{

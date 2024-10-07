@@ -66,6 +66,11 @@
                                                     <?php dynamic_sidebar('tf_search_result'); ?>
                                                 </div>
                                             <?php } ?>
+                                            <?php if (is_active_sidebar('tf_map_popup_sidebar')) { ?>
+                                                <div id="tf_map_popup_sidebar">
+                                                    <?php dynamic_sidebar('tf_map_popup_sidebar'); ?>
+                                                </div>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div>

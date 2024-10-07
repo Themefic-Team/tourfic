@@ -42,55 +42,69 @@ class Map_Filter extends \WP_Widget {
      */
     public function widget($args, $instance) {
 
+        $tax_post_type = '';
+        if (is_tax()) {
+            $taxonomy = get_queried_object();
+
+            if ($taxonomy && !is_wp_error($taxonomy)) {
+                $taxonomy_name = $taxonomy->taxonomy;
+
+                // Retrieve the taxonomy object
+                $taxonomy_obj = get_taxonomy($taxonomy_name);
+
+                // Get the post types associated with the taxonomy
+                if (!empty($taxonomy_obj->object_type)) {
+                    $tax_post_type = $taxonomy_obj->object_type[0];
+                }
+            }
+        }
+
         $tf_query_taxonomy = !empty(get_taxonomy(get_queried_object())) ? get_taxonomy(get_queried_object()->taxonomy)->object_type : '';
         if (is_post_type_archive('tf_tours') ||
             is_post_type_archive('tf_hotel') ||
             is_post_type_archive('tf_apartment') ||
-            (!empty($tf_query_taxonomy))) {
+            (!empty($tax_post_type))) {
             extract($args);
-            $title = apply_filters('widget_title', $instance['title']);
+            $button_title = !empty($instance['title']) ? apply_filters('tf_map_button_title', $instance['title']) : esc_html__('Show on Map', 'tourfic');
             echo wp_kses_post($before_widget);
             if (is_post_type_archive('tf_hotel')) {
-                $this->widget_html('tf_hotel');
+                $this->widget_html('tf_hotel', $button_title);
             }
             if (is_post_type_archive('tf_tours')) {
-                $this->widget_html('tf_tours');
+                $this->widget_html('tf_tours', $button_title);
             }
             if (is_post_type_archive('tf_apartment')) {
-                $this->widget_html('tf_apartment');
+                $this->widget_html('tf_apartment', $button_title);
             }
             if (!is_post_type_archive('tf_hotel') &&
                 !is_post_type_archive('tf_tours') &&
                 !is_post_type_archive('tf_apartment') &&
-                (!empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) &&
-                    get_taxonomy(get_queried_object()->taxonomy)->object_type[0] == "tf_hotel")) {
-                $this->widget_html(get_taxonomy(get_queried_object()->taxonomy)->object_type[0]);
+                (!empty($tax_post_type) && $tax_post_type == "tf_hotel")) {
+                $this->widget_html('tf_hotel', $button_title);
             }
             if (!is_post_type_archive('tf_hotel') &&
                 !is_post_type_archive('tf_tours') &&
                 !is_post_type_archive('tf_apartment') &&
-                (!empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) &&
-                    get_taxonomy(get_queried_object()->taxonomy)->object_type[0] == "tf_tours")) {
-                $this->widget_html(get_taxonomy(get_queried_object()->taxonomy)->object_type[0]);
+                (!empty($tax_post_type) && $tax_post_type == "tf_tours")) {
+                $this->widget_html('tf_tours', $button_title);
             }
             if (!is_post_type_archive('tf_hotel') &&
                 !is_post_type_archive('tf_tours') &&
                 !is_post_type_archive('tf_apartment') &&
-                (!empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) &&
-                    get_taxonomy(get_queried_object()->taxonomy)->object_type[0] == "tf_apartment")) {
-                $this->widget_html(get_taxonomy(get_queried_object()->taxonomy)->object_type[0]);
+                (!empty($tax_post_type) && $tax_post_type == "tf_apartment")) {
+                $this->widget_html('tf_apartment', $button_title);
             }
         } else {
             extract($args);
             echo wp_kses_post($before_widget);
             if (!empty($_GET['type']) && $_GET['type'] == "tf_tours" && !empty($_GET['from']) && !empty($_GET['to'])) {
-                $this->widget_html($_GET['type']);
+                $this->widget_html($_GET['type'], $button_title);
             }
             if (!empty($_GET['type']) && $_GET['type'] == "tf_hotel" && !empty($_GET['from']) && !empty($_GET['to'])) {
-                $this->widget_html($_GET['type']);
+                $this->widget_html($_GET['type'], $button_title);
             }
             if (!empty($_GET['type']) && $_GET['type'] == "tf_apartment" && !empty($_GET['from']) && !empty($_GET['to'])) {
-                $this->widget_html($_GET['type']);
+                $this->widget_html($_GET['type'], $button_title);
             }
         } ?>
         <!-- End Price Range widget -->
@@ -99,10 +113,10 @@ class Map_Filter extends \WP_Widget {
         echo wp_kses_post($after_widget);
     }
 
-    function widget_html($post_type = 'tf_hotel') {
+    function widget_html($post_type = 'tf_hotel', $button_title) {
         $tf_map_settings = !empty(Helper::tfopt('google-page-option')) ? Helper::tfopt('google-page-option') : "default";
         $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googlemapapi') : '';
-        $post_per_page = Helper::tfopt( 'posts_per_page' ) ? Helper::tfopt( 'posts_per_page' ) : 10;
+        $post_per_page = get_option( 'posts_per_page' );
         $paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 
         $args = array(
@@ -112,7 +126,6 @@ class Map_Filter extends \WP_Widget {
             'paged'          => $paged,
         );
         $loop        = new \WP_Query( $args );
-        $total_posts = $loop->found_posts;
 
         if ( !$loop->have_posts() ) {
             return;
@@ -157,14 +170,14 @@ class Map_Filter extends \WP_Widget {
                                 <ellipse cx="16" cy="42.5" rx="11" ry="2.5" fill="#141F43" fill-opacity="0.25"/>
                                 <path d="M14 41.0171C9.66667 35.6849 0 22.9696 0 15.7506C0 7.05494 7.08333 0 16 0C24.8333 0 32 7.05494 32 15.7506C32 22.9696 22.25 35.6849 17.9167 41.0171C16.9167 42.2476 15 42.2476 14 41.0171ZM16 21.0008C18.9167 21.0008 21.3333 18.7038 21.3333 15.7506C21.3333 12.8794 18.9167 10.5004 16 10.5004C13 10.5004 10.6667 12.8794 10.6667 15.7506C10.6667 18.7038 13 21.0008 16 21.0008Z" fill="#0E3DD8"/>
                             </svg>
-                            <span class="btn-styled tf-map-modal-btn"><?php esc_html_e('Show on Map', 'tourfic'); ?></span>
+                            <span class="btn-styled tf-map-modal-btn"><?php echo esc_html($button_title); ?></span>
                         </div>
                     </div>
 
                     <?php
-                    if ( (is_post_type_archive('tf_hotel') && Hotel::template( 'archive' ) !== 'design-3') ||
-                        (is_post_type_archive('tf_tours') && Tour::template( 'archive' ) !== 'design-3') ||
-                        (is_post_type_archive('tf_apartment') && Apartment::template( 'archive' ) !== 'design-2') ) : ?>
+                    if ( ($post_type == 'tf_hotel' && Hotel::template( 'archive' ) !== 'design-3') ||
+                        ($post_type == 'tf_tours' && Tour::template( 'archive' ) !== 'design-3') ||
+                        ($post_type == 'tf_apartment' && Apartment::template( 'archive' ) !== 'design-2') ) : ?>
                         <div class="tf-archive-details-wrap tf-map-popup-wrap">
                             <div class="tf-archive-details ">
                                 <!-- Loader Image -->
@@ -182,9 +195,9 @@ class Map_Filter extends \WP_Widget {
                                                         <h4 class="tf-section-title"><?php echo esc_html__("Filter", "tourfic"); ?></h4>
                                                         <button class="filter-reset-btn"><?php echo esc_html__("Reset", "tourfic"); ?></button>
                                                     </div>
-                                                    <?php if (is_active_sidebar('tf_archive_booking_sidebar')) { ?>
-                                                        <div id="tf__booking_sidebar">
-                                                            <?php //dynamic_sidebar('tf_archive_booking_sidebar'); ?>
+                                                    <?php if (is_active_sidebar('tf_map_popup_sidebar')) { ?>
+                                                        <div id="tf_map_popup_sidebar">
+                                                            <?php dynamic_sidebar('tf_map_popup_sidebar'); ?>
                                                         </div>
                                                     <?php } ?>
                                                 </div>
@@ -665,10 +678,10 @@ class Map_Filter extends \WP_Widget {
      */
     public function form($instance) {
 
-        $title = isset($instance['title']) ? $instance['title'] : esc_html__('Price Range Filter', 'tourfic');
+        $title = isset($instance['title']) ? $instance['title'] : esc_html__('Show on Map', 'tourfic');
         ?>
         <p class="tf-widget-field">
-            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php esc_html_e('Title:', 'tourfic'); ?></label>
+            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php esc_html_e('Button Title:', 'tourfic'); ?></label>
             <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>" name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text" value="<?php echo esc_attr($title); ?>"/>
         </p>
     <?php }
