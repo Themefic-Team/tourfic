@@ -140,6 +140,7 @@
             }
             if(mapCoordinates.length === 4){
                 formData.append('mapCoordinates', mapCoordinates.join(','));
+                formData.append('mapFilter', true);
             }
             // abort previous request
             if (filter_xhr && filter_xhr.readyState != 4) {

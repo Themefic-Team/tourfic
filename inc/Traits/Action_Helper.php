@@ -595,6 +595,7 @@ trait Action_Helper {
 		$endprice   = ! empty( $_POST['endprice'] ) ? $_POST['endprice'] : '';
 
         //Map Template only
+        $mapFilter = !empty($_POST['mapFilter']) ? sanitize_text_field($_POST['mapFilter']) : false;
         $mapCoordinates = !empty($_POST['mapCoordinates']) ? explode(',', sanitize_text_field($_POST['mapCoordinates'])) : [];
 		if (!empty($mapCoordinates) && count($mapCoordinates) === 4) {
 			list($minLat, $minLng, $maxLat, $maxLng) = $mapCoordinates;
@@ -1519,17 +1520,22 @@ trait Action_Helper {
 				} else {
 					echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 				}
-				$total_pages = ceil( $total_filtered_results / $post_per_page );
-				if ( $total_pages > 1 ) {
-					echo "<div class='tf_posts_navigation tf_posts_ajax_navigation tf_search_ajax_pagination'>";
-					echo wp_kses_post(
-						paginate_links( array(
-							'total'   => $total_pages,
-							'current' => $current_page
-						) )
-					);
-					echo "</div>";
-				}
+                if($mapFilter == false) {
+                    $total_pages = ceil($total_filtered_results / $post_per_page);
+                } else {
+                    $total_pages = ceil($count / $post_per_page);
+                }
+                if ($total_pages > 1) {
+                    echo "<div class='tf_posts_navigation tf_posts_ajax_navigation tf_search_ajax_pagination'>";
+                    echo wp_kses_post(
+                        paginate_links(array(
+                            'total' => $total_pages,
+                            'current' => $current_page
+                        ))
+                    );
+                    echo "</div>";
+                }
+
 			}
 		} else {
 
