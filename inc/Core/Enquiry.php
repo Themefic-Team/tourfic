@@ -308,6 +308,11 @@ abstract class Enquiry {
 		$current_user = wp_get_current_user();
 		$_SESSION["WP"]["userId"] = $current_user->ID;
 
+		echo "<pre>";
+		print_r(self::tf_vendor_default_enquiry_mail("", $data["post_id"]));
+		echo "</pre>";
+		die(); // added by - Sunvi
+
 		?>
 		<div class="wrap tf_booking_details_wrap tf-enquiry-details-wrap" style="margin-right: 20px;">
 		<div id="tf-enquiry-status-loader">
@@ -1001,6 +1006,31 @@ abstract class Enquiry {
 		wp_die();
 
 		wp_die();
+	}
+
+	static function tf_vendor_default_enquiry_mail( $vendor_mail, $post_id ) {
+		// 1. Mail will be deliver from Admin
+		// 2. Subject will be "Enquiry for your product"
+		// 3. Reply to will be the user email
+		// 4: Mail will be sent to the vendor email
+
+		// $author_name = get_the_author_meta('display_name', get_post_field('post_author', $post_id));
+		// $post_name = get_the_title( $post_id );
+		// $post_type = get_post_type( $post_id ) == "tf_tours" ? esc_html__("Tour", 'tourfic') : ( get_post_type( $post_id ) == "tf_hotel" ? esc_html__( "Hotel", 'tourfic') : esc_html__( "Apartment", 'tourfic') );
+		// $subject = esc_html__( "New Enquiry for your ", 'tourfic' ) . $post_type . " - " . $post_name;
+		// $mail_body = "Hello $author_name, <br>";
+		// $mail_body .= "A new enquiry has been added to your dashboard. <br>";
+		// $mail_body .= "Please check your dashboard for more details. <br>" ;
+		
+		// return $mail_body;
+		?>
+		<div style="width:100%">
+			<div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px;">
+				<h2 style="color: #333; font-size: 20px; font-weight: 600; margin-bottom: 20px;">New Enquiry for your product</h2>
+				<p style="color: #333; font-size: 16px; line-height: 1.5;">Hello, <br> A new enquiry has been added to your dashboard. <br> Please check your dashboard for more details.</p>
+			</div>
+		</div>
+		<?php
 	}
 
 }
