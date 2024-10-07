@@ -2581,14 +2581,10 @@
         var centerLvl = new google.maps.LatLng(23.8697847, 90.4219536);
         var mapChanged = false;
 
-        // GOOGLE MAP INIT
         function googleMapInit(mapLocations, mapLat = 23.8697847, mapLng = 90.4219536) {
             var hotelMap;
 
-            //console.log(mapLocations)
-
             if (!mapLocations || mapLocations === "[]") {
-                // Initialize the map with no events or markers when no locations are provided
                 hotelMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
                     zoom: zoomLvl,
                     minZoom: 3,
@@ -2677,17 +2673,16 @@
             });
 
             var listener = google.maps.event.addListener(hotelMap, "idle", function() {
-                hotelMap.fitBounds(bounds);
                 if (!mapChanged) {
+                    hotelMap.fitBounds(bounds);
                     centerLvl = bounds.getCenter();
                     hotelMap.setCenter(centerLvl);
                 } else {
                     hotelMap.setZoom(zoomLvl);
                     hotelMap.setCenter({lat: centerLvl.lat(), lng: centerLvl.lng()});
-
-                    zoomChangeEnabled = true;
                     google.maps.event.removeListener(listener);
                 }
+                zoomChangeEnabled = true;
                 //console.log('bounds', zoomLvl, 'centerLvl', centerLvl.lat(), centerLvl.lng())
             });
         }
