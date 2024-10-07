@@ -124,10 +124,10 @@ abstract Class TF_Booking_Details {
                     <div class="tf_header_wrap_button">
                         <div class="tf_booking_views_button">
                             <ul>
-                                <li class="active" data-view="<?php echo esc_attr("calendar"); ?>">
+                                <li class="<?php echo empty($_GET['nonce']) ? esc_attr('active') : '' ?>" data-view="<?php echo esc_attr("calendar"); ?>">
                                     <i class="fa-solid fa-calendar-days"></i>
                                 </li>
-                                <li data-view="<?php echo esc_attr("list"); ?>">
+                                <li class="<?php echo !empty($_GET['nonce']) ? esc_attr('active') : '' ?>" data-view="<?php echo esc_attr("list"); ?>">
                                     <i class="fa-solid fa-list"></i>
                                 </li>
                             </ul>
@@ -183,14 +183,14 @@ abstract Class TF_Booking_Details {
         <div class="tf-booking-calendar-popup-box">
             <div class="tf-calendar-popup-box">
                 
-
             </div>
         </div>
 
-        <div id="tf-booking-calendar">
+        <div id="tf-booking-calendar" style="<?php echo !empty($_GET['nonce']) ? esc_attr('display: none') : '' ?>">
             
         </div>
-        <div class="tf-booking-header-filter">
+
+        <div class="tf-booking-header-filter" style="<?php echo !empty($_GET['nonce']) ? esc_attr('display: flex') : '' ?>">
             <div class="tf-left-search-filter">
                 <div class="tf-bulk-action-form">
                     <div class="tf-filter-options">
@@ -282,7 +282,7 @@ abstract Class TF_Booking_Details {
             </form>
         </div>
 
-        <div class="tf-order-table-responsive">
+        <div class="tf-order-table-responsive" style="<?php echo !empty($_GET['nonce']) ? esc_attr('display: block') : '' ?>">
             <table class="wp-list-table table" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>

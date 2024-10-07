@@ -1031,7 +1031,8 @@ class Enqueue {
 					'title' => '#'.$order['order_id'].' '.html_entity_decode(get_the_title($order['post_id'])),
 					'start' => $order['check_in'],
 					'end' => $order['check_out'],
-					'url' => admin_url() . 'edit.php?post_type=tf_hotel&page=tf_hotel_booking&order_id=' . $order['order_id'] . '&book_id=' . $order['id'] . '&action=preview'
+					'id' => $order['id'],
+					'status' => $order['ostatus']
 				);
 			}
 		}
@@ -1050,7 +1051,8 @@ class Enqueue {
 					'title' => '#'.$order['order_id'].' '.html_entity_decode(get_the_title($order['post_id'])),
 					'start' => $order['check_in'],
 					'end' => $order['check_out'],
-					'url' => admin_url() . 'edit.php?post_type=tf_apartment&page=tf_apartment_booking&order_id=' . $order['order_id'] . '&book_id=' . $order['id'] . '&action=preview'
+					'id' => $order['id'],
+					'status' => $order['ostatus']
 				);
 			}
 		}
