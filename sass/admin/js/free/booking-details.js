@@ -444,6 +444,42 @@
             }
         });
 
+        // Booking Details Popup close
+        $(document).on('click', '.tf-booking-calendar-popup-box .tf-popup-header .tf-close', function (e) {
+            $(".tf-booking-calendar-popup-box").hide();
+        });
+
+        // Booking Details Popup
+        $(document).on('click', '.tf-booking-single-popup', function (e) {
+            e.preventDefault();
+            let $this = $(this);
+            $('.tf-calendar-popup-box').html('');
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: 'tf_booking_details_popup',
+                    id: $this.attr('data-id'),
+                    _ajax_nonce: tf_admin_params.tf_nonce
+                },
+                beforeSend: function (data) {
+                    $('.tf-preloader-box').show();
+                },
+                complete: function (data) {
+                    
+                },
+                success: function (data) {
+                    $('.tf-calendar-popup-box').html(data);
+                    $('.tf-preloader-box').hide();
+                    $('.tf-booking-calendar-popup-box').css('display', 'flex');
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+        });
+
     });
 
 })(jQuery);
@@ -474,7 +510,16 @@ document.addEventListener('DOMContentLoaded', function() {
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
-    events: eventsSource
+    events: eventsSource,
+    eventContent: function(info) {
+        var customEl = document.createElement('div');
+        customEl.classList.add('tf-booking-single-popup');
+        customEl.setAttribute('data-id', info.event.id);
+        customEl.innerHTML = `
+            <span>${info.event.title}</span>
+        `;
+        return { domNodes: [customEl] };
+    }
     });
 
     calendar.render();

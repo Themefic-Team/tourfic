@@ -91,6 +91,79 @@
         }
     }
 
+    // Booking Details Popup
+    .tf-booking-calendar-popup-box{
+        position: fixed;
+        background-color: rgba(0, 0 ,0 , .3);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: none;
+        .tf-calendar-popup-box{
+            border-radius: 8px;
+            background: #FFF;
+            box-shadow: 0px 8px 30px 0px rgba(16, 40, 20, 0.10);
+            padding: 16px 24px;
+            width: 750px;
+            .tf-popup-header{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 24px;
+                h3{
+                    color: #151615;
+                    font-size: 17px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 150%; /* 25.5px */
+                    margin: 0;
+                }
+                .tf-close{
+                    cursor: pointer;
+                }
+            }
+            .tf-popup-content{
+                display: flex;
+                gap: 24px;
+                flex-direction: column;
+                .tf-content-single-box{
+                    border-radius: 8px;
+                    background: #F3F6F4;
+                    padding: 16px 24px 24px 24px;
+                    h4{
+                        color: #141915;
+                        font-size: 15px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 24px; /* 160% */
+                        margin: 0 0 8px 0;
+                    }
+                    .tf-content-box{
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 8px;
+                        .tf-single-content{
+                            width: calc(33% - 3px);
+                            h5{
+                                margin: 0 0 5px 0;
+                                font-size: 14px;
+                                text-transform: capitalize;
+                            }
+                            p{
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     // Booking Calendar
     #tf-booking-calendar{
         border-radius: 16px;
@@ -272,17 +345,20 @@
                                         font-style: normal;
                                         font-weight: 600;
                                         line-height: 20px; /* 153.846% */
-                                        padding: 6px 8px;
                                         color: #002AB3;
                                         width: 100%;
-                                        border-left: 1px solid #002AB3;
-                                        background: #EBEFFF;
-                                        border-radius: 8px;
                                         display: block;
                                         line-height: 15px;
+                                        background: transparent;
                                         cursor: pointer;
-                                        .fc-event-title{
-                                            color: #002AB3;
+                                        .tf-booking-single-popup{
+                                            padding: 6px 8px;
+                                            border-left: 1px solid #002AB3;
+                                            background: #EBEFFF;
+                                            border-radius: 8px;
+                                            span{
+                                                color: #002AB3;
+                                            }
                                         }
                                     }
             
