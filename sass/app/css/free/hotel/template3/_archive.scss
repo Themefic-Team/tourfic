@@ -531,7 +531,7 @@ $t4-main-color: #060D1C;
                     font-size: 14px;
                     font-weight: 500;
                     height: 32px;
-                    line-height: 34px;
+                    line-height: 32px;
                     border-radius: 4px;
                     background-color: #fff;
                     text-align: center;
@@ -1049,7 +1049,8 @@ $t4-main-color: #060D1C;
             margin-bottom: 30px;
         }
 
-        .tf_posts_navigation,#tf_posts_navigation_bar{
+        .tf_posts_navigation,
+        #tf_posts_navigation_bar{
             width: 100%;
 
             .page-numbers {
@@ -1072,20 +1073,22 @@ $t4-main-color: #060D1C;
     }
     .tf_posts_navigation.tf_posts_ajax_navigation,
     .tf_posts_navigation.tf_posts_page_navigation{
-        margin-top: 40px;
         width: 100%;
+
         .page-numbers {
             font-size: 14px;
-            color: $color-primary !important;
+            color: $t4-paragraph;
             text-decoration: none;
-            padding: 12px 18px;
-            background: #fff !important;
-            box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
+            padding: 12px 12px;
+            min-width: 40px;
+            line-height: 16px;
             border-radius: 5px;
+            text-align: center;
+            background: transparent;
             display: inline-block;
         }
         .page-numbers.current{
-            background: $color-theme !important;
+            background: $t4-primary;
             color: #fff !important;
         }
     }

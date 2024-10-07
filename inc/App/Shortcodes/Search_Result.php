@@ -683,7 +683,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
             ?>
             <div class="tf-archive-top">
                 <h5 class="tf-total-results"><?php _e( "Found", "tourfic" ); ?>
-                    <span><?php echo $total_posts; ?></span>
+                    <span class="tf-map-item-count"><?php echo $total_posts; ?></span>
                     <?php echo esc_html($found_post_label)?>
                 </h5>
                 <a href="" class="tf-mobile-map-btn">

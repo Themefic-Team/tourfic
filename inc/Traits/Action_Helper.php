@@ -971,7 +971,7 @@ trait Action_Helper {
                                 continue;
 							}
 
-							if ( Hotel::template( 'archive' ) == 'design-3' && function_exists( 'is_tf_pro' ) && is_tf_pro()) {
+							if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) {
 								$count ++;
 								$map                 = ! empty( $hotel_meta['map'] ) ? Helper::tf_data_types( $hotel_meta['map'] ) : '';
 								$min_price_arr       = hotelPricing::instance( get_the_ID() )->get_min_price();
@@ -992,7 +992,7 @@ trait Action_Helper {
 
 									// Filter based on the map coordinates provided in the POST request
 									if (!empty($mapCoordinates) && ($lat < $minLat || $lat > $maxLat || $lng < $minLng || $lng > $maxLng)) {
-										$tf_total_results = $tf_total_results - 1;
+                                        $count--;
                                         continue;
 									}
 									ob_start();
@@ -1060,7 +1060,7 @@ trait Action_Helper {
                                 continue;
 							}
 
-							if ( Tour::template( 'archive' ) == 'design-3' && function_exists( 'is_tf_pro' ) && is_tf_pro()) {
+							if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) {
                                 $count ++;
                                 $map            = ! empty( $tour_meta['location'] ) ? Helper::tf_data_types( $tour_meta['location'] ) : '';
                                 $discount_type  = ! empty( $tour_meta['discount_type'] ) ? $tour_meta['discount_type'] : '';
@@ -1083,7 +1083,7 @@ trait Action_Helper {
 
 	                                // Filter based on the map coordinates provided in the POST request
 	                                if (!empty($mapCoordinates) && ($lat < $minLat || $lat > $maxLat || $lng < $minLng || $lng > $maxLng)) {
-		                                $tf_total_results = $tf_total_results - 1;
+                                        $count--;
 		                                continue;
 	                                }
                                     ob_start();
@@ -1173,7 +1173,7 @@ trait Action_Helper {
 
 									// Filter based on the map coordinates provided in the POST request
 									if (!empty($mapCoordinates) && ($lat < $minLat || $lat > $maxLat || $lng < $minLng || $lng > $maxLng)) {
-										$tf_total_results = $tf_total_results - 1;
+                                        $count--;
 										continue;
 									}
 									ob_start();
@@ -1244,7 +1244,7 @@ trait Action_Helper {
 							if ( $hotel_meta["featured"] ) {
 								continue;
 							}
-							if ( Hotel::template( 'archive' ) == 'design-3' && function_exists( 'is_tf_pro' ) && is_tf_pro()) {
+							if (function_exists( 'is_tf_pro' ) && is_tf_pro()) {
 								$count ++;
 								$map                 = ! empty( $hotel_meta['map'] ) ? Helper::tf_data_types( $hotel_meta['map'] ) : '';
 								$min_price_arr       = hotelPricing::instance( get_the_ID() )->get_min_price();
@@ -1265,7 +1265,7 @@ trait Action_Helper {
 
 									// Filter based on the map coordinates provided in the POST request
 									if (!empty($mapCoordinates) && ($lat < $minLat || $lat > $maxLat || $lng < $minLng || $lng > $maxLng)) {
-										$tf_total_results = $tf_total_results - 1;
+                                        $count--;
                                         continue;
 									}
 
@@ -1336,7 +1336,7 @@ trait Action_Helper {
 								continue;
 							}
 
-							if ( Tour::template( 'archive' ) == 'design-3' && function_exists( 'is_tf_pro' ) && is_tf_pro()) {
+							if (function_exists( 'is_tf_pro' ) && is_tf_pro()) {
 								$count ++;
 								$map            = ! empty( $tour_meta['location'] ) ? Helper::tf_data_types( $tour_meta['location'] ) : '';
 								$discount_type  = ! empty( $tour_meta['discount_type'] ) ? $tour_meta['discount_type'] : '';
@@ -1359,7 +1359,7 @@ trait Action_Helper {
 
 									// Filter based on the map coordinates provided in the POST request
 									if (!empty($mapCoordinates) && ($lat < $minLat || $lat > $maxLat || $lng < $minLng || $lng > $maxLng)) {
-										$tf_total_results = $tf_total_results - 1;
+                                        $count--;
 										continue;
 									}
 									ob_start();
@@ -1447,7 +1447,7 @@ trait Action_Helper {
 
 									// Filter based on the map coordinates provided in the POST request
 									if (!empty($mapCoordinates) && ($lat < $minLat || $lat > $maxLat || $lng < $minLng || $lng > $maxLng)) {
-										$tf_total_results = $tf_total_results - 1;
+                                        $count--;
 										continue;
 									}
 									ob_start();
@@ -1510,6 +1510,7 @@ trait Action_Helper {
 						}
 
 					}
+
 					if ( Hotel::template( 'archive' ) == 'design-3' || Tour::template( 'archive' ) == 'design-3' || Apartment::template( 'archive' ) == 'design-2' ) {
 						?>
                         <div id="map-datas" style="display: none"><?php echo array_filter( $locations ) ? json_encode( array_values( $locations ) ) : json_encode([]); ?></div>
@@ -1538,6 +1539,9 @@ trait Action_Helper {
 
 		echo "<span hidden=hidden class='tf-posts-count'>";
 		echo ! empty( $tf_total_results ) ? esc_html( $tf_total_results ) : 0;
+		echo "</span>";
+		echo "<span hidden=hidden class='tf-map-posts-count'>";
+		echo ! empty( $count ) ? esc_html( $count ) : 0;
 		echo "</span>";
 		wp_reset_postdata();
 

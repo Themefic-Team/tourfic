@@ -192,7 +192,9 @@
                     } else {
                         $('.tf_posts_navigation').show();
                         var postsCount = $('.tf-posts-count').html();
+                        var mapPostsCount = $('.tf-map-posts-count').html();
                         $('.tf-total-results').find('span').html(postsCount);
+                        $('.tf-total-results').find('span.tf-map-item-count').html(mapPostsCount);
                     }
                 },
                 success: function (data, e) {
@@ -2355,7 +2357,7 @@
         * Template 4 hotel, tour, apartment archive scrollbar
         */
         function adjustPadding() {
-            var hotelsContainer = $('.tf-hotel-template-4 .tf-archive-hotels, .tf-archive-details-fancy .tf-archive-hotels');
+            var hotelsContainer = $('.tf-hotel-template-4 .tf-archive-hotels, .tf-archive-details-wrap .tf-archive-hotels');
 
             if (hotelsContainer[0].scrollHeight > hotelsContainer.height()) {
                 hotelsContainer.css('padding-right', '16px');
@@ -2521,6 +2523,10 @@
                 $(".tf-archive-filter-sidebar").removeClass('tf-show');
             }
 
+            if($('.tf-search-right #tf__booking_sidebar').length){
+                var defaultSidebar = $('.tf-search-right #tf__booking_sidebar').html();
+            }
+
 
             $.fancybox.open({
                 src: '.tf-archive-details-wrap',
@@ -2532,6 +2538,10 @@
                 afterShow: function(instance, current) {
                     // Add a class to the parent fancybox container
                     instance.$refs.container.addClass('tf-archive-details-fancy');
+
+                    if($('.tf-archive-filter-sidebar #tf__booking_sidebar').length){
+                        $('.tf-archive-filter-sidebar #tf__booking_sidebar').html(defaultSidebar);
+                    }
 
                     if($('.tf-archive-details-wrap .tf-archive-hotels').length) {
                         adjustPadding();
@@ -2578,10 +2588,14 @@
         function googleMapInit(mapLocations, mapLat = 23.8697847, mapLng = 90.4219536) {
             var hotelMap;
 
+            //console.log(mapLocations)
+
             if (!mapLocations || mapLocations === "[]") {
                 // Initialize the map with no events or markers when no locations are provided
                 hotelMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
                     zoom: zoomLvl,
+                    minZoom: 3,
+                    maxZoom: 18,
                     center: centerLvl,
                     mapTypeId: google.maps.MapTypeId.ROADMAP,
                     styles: [
@@ -2595,6 +2609,8 @@
 
             hotelMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
                 zoom: zoomLvl,
+                minZoom: 3,
+                maxZoom: 18,
                 center: new google.maps.LatLng(mapLat, mapLng),
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 styles: [
