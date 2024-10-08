@@ -171,7 +171,6 @@
         padding: 24px;
         padding-top: 30px;
         position: relative;
-        margin-top: 32px;
 
         .fc-header-toolbar{
             .fc-toolbar-chunk{
@@ -497,7 +496,8 @@
         }
     }
 
-    .tf-booking-header-filter{
+    .tf-booking-header-filter,
+    .tf-calendar-booking-header-filter{
         display: none;
         justify-content: space-between;
         margin: 32px 0px;
@@ -646,6 +646,9 @@
                 border: 0px solid;
             }
         }
+    }
+    .tf-calendar-booking-header-filter{
+        display: flex;
     }
     .tf-order-table-responsive{
         width: 100%;
