@@ -1058,7 +1058,7 @@ abstract class Enquiry {
 				<p>Hello <b><?php echo esc_html__( $author_name, 'tourfic' ) ?></b></p>
 				<?php if( $type = 'new'): ?>
 					<p>A new enquiry has been added to your dashboard <?php echo !empty($name) ? 'by ' . $name : '' ?></p>
-				<?php elseif( $type == "reply "): ?>
+				<?php elseif( $type == "reply"): ?>
 					<p>A new response has been added to #<?php echo esc_html($last_id) ?> <?php echo !empty($name) ? ' by ' . $name : '' ?></p>
 				<?php endif; ?>
 				<?php if( !empty( $body )): ?>
