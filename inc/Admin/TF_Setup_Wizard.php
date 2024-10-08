@@ -387,12 +387,8 @@ class TF_Setup_Wizard {
                             </svg>
                         </button>
 
-                        <button type="button" class="tf-setup-travelfic-theme-active" data-install="travelfic" style="display: none;">
+                        <button type="button" class="tf-setup-travelfic-theme-active" style="display: none;">
                             <span><?php esc_html_e( 'Travelfic Active', 'tourfic' ) ?></span>
-                        </button>
-
-                        <button type="button" class="tf-setup-travelfic-theme-active" data-install="ultimate-hotel-booking" style="display: none;">
-                            <span><?php esc_html_e( 'Ultimate Hotel Booking Active', 'tourfic' ) ?></span>
                         </button>
 
                         <button type="button" class="tf-setup-travelfic-toolkit-btn" data-install="travelfic-toolkit" style="display: none;">
