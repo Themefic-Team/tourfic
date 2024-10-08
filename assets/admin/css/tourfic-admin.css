@@ -687,6 +687,7 @@ body.tourfic-settings_page_tf-setup-wizard {
 
 .tf-theme-activation-btn {
   min-width: 267px;
+  justify-content: center;
 }
 
 .tf-settings-finish-btn {
@@ -1026,6 +1027,44 @@ Steps
   font-weight: 600;
   line-height: 24px;
 }
+.tf-setup-step-container .tf-template-selection {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+}
+.tf-setup-step-container .tf-template-selection .tf-single-theme label {
+  position: relative;
+  display: block;
+}
+.tf-setup-step-container .tf-template-selection .tf-single-theme label .checked-svg {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  display: none;
+}
+.tf-setup-step-container .tf-template-selection .tf-single-theme label input {
+  display: none;
+}
+.tf-setup-step-container .tf-template-selection .tf-single-theme label input:checked + img {
+  border: 1px solid #003C79;
+}
+.tf-setup-step-container .tf-template-selection .tf-single-theme label input:checked ~ .checked-svg {
+  display: block;
+}
+.tf-setup-step-container .tf-template-selection .tf-single-theme label h4 {
+  color: #27333F;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 153.846% */
+  margin: 0;
+  margin-top: 8px;
+}
+.tf-setup-step-container .tf-template-selection .tf-single-theme label img {
+  box-shadow: 0px 10px 20px 0px rgba(0, 36, 72, 0.04), 0px 10px 16px 0px rgba(0, 36, 72, 0.04);
+  border-radius: 12px;
+  border: 1px solid transparent;
+}
 .tf-setup-step-container .tf-setup-step-layout {
   padding: 56px 96px;
   border-radius: 16px;
@@ -1063,6 +1102,15 @@ Steps
   font-weight: 400;
   line-height: 24px;
   margin: 0 0 2px 0px;
+}
+.tf-setup-step-container .tf-select-title {
+  color: #27333f;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
+  margin: 0px 0px 24px 0px;
 }
 .tf-setup-step-container .tf-setup-step-desc {
   color: #566676;
