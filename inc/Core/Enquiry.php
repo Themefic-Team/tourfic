@@ -9,6 +9,8 @@ use Tourfic\Classes\Helper;
 
 abstract class Enquiry {
 
+	private int $last_id = 0;
+
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'add_submenu' ) );
 		add_action( 'wp_footer', array($this, 'tourfic_ask_question') );
@@ -103,8 +105,10 @@ abstract class Enquiry {
 							<select class="tf-tour-filter-options tf-filter-mail-option-enquiry">
 									<option value=""><?php esc_html_e( "Filters", "tourfic" ); ?></option>
 									<option value="unread"><?php esc_html_e( "Unread", "tourfic" ); ?></option>
-									<option value="not-replied"><?php esc_html_e( "Not Replied", "tourfic" ); ?></option>
 									<option value="replied"><?php esc_html_e( "Replied", "tourfic" ); ?></option>
+									<option value="responded"><?php esc_html_e( "Responded", "tourfic" ); ?></option>
+									<option value="not-replied"><?php esc_html_e( "Not Replied", "tourfic" ); ?></option>
+									<option value="not-responded"><?php esc_html_e( "Not Responded", "tourfic" ); ?></option>
 								</select>
 							</div>
 						</div>
@@ -169,7 +173,7 @@ abstract class Enquiry {
 				if( !empty( $data )) :
 					foreach ( $data as $enquiry ) { ?>
 						<?php 
-							$tr_unread_class = $enquiry["status"] == 'unread' ? 'tf-enquiry-unread' : '';
+							$tr_unread_class = $enquiry["status"] == 'unread' ? 'tf-enquiry-unread' : ( $enquiry["status"] == 'responded' ? 'tf-enquiry-responded' : '' );
 						
 						?>
 						<tr class="<?php echo esc_attr($tr_unread_class); ?> tf-enquiry-single-row">
@@ -307,11 +311,6 @@ abstract class Enquiry {
 		$reply_user = isset( $_POST['user_name'] ) ? sanitize_text_field( $_POST['user_name'] ) : '';
 		$current_user = wp_get_current_user();
 		$_SESSION["WP"]["userId"] = $current_user->ID;
-
-		echo "<pre>";
-		print_r(self::tf_vendor_default_enquiry_mail("", $data["post_id"]));
-		echo "</pre>";
-		die(); // added by - Sunvi
 
 		?>
 		<div class="wrap tf_booking_details_wrap tf-enquiry-details-wrap" style="margin-right: 20px;">
@@ -591,6 +590,8 @@ abstract class Enquiry {
 
 			if( $status == 'not-replied') {
 				$query.= sprintf(' enquiry_status != "%s"', 'replied' );
+			} elseif( $status == 'not-responded') {
+				$query.= sprintf(' enquiry_status != "%s"', 'responded' );
 			} else {
 				$query.= sprintf(' enquiry_status = "%s"', $status );
 			}
@@ -799,6 +800,7 @@ abstract class Enquiry {
 
 
 		if ( wp_mail( $send_email_to, $subject, $message, $headers, $attachments ) ) {
+			
 			$response['status'] = 'sent';
 			$response['msg']    = esc_html__( 'Your question has been sent!', 'tourfic' );
 
@@ -807,8 +809,8 @@ abstract class Enquiry {
 			$wpdb->query(
 				$wpdb->prepare(
 					"INSERT INTO {$wpdb->prefix}tf_enquiry_data
-			( post_id, post_type, uname, uemail, udescription, author_id, author_roles, enquiry_status, server_data, created_at )
-			VALUES ( %d, %s, %s, %s, %s, %d, %s, %s, %s, %s )",
+				( post_id, post_type, uname, uemail, udescription, author_id, author_roles, enquiry_status, server_data, created_at )
+				VALUES ( %d, %s, %s, %s, %s, %d, %s, %s, %s, %s )",
 					array(
 						sanitize_key( $post_id ),
 						get_post_type( $post_id ),
@@ -823,9 +825,20 @@ abstract class Enquiry {
 					)
 				)
 			);
+			$this->last_id = $wpdb->insert_id;
 		} else {
 			$response['status'] = 'error';
 			$response['msg']    = esc_html__( 'Message sent failed!', 'tourfic' );
+		}
+
+		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tf_vendor_email_enable_setting != 1 ) {
+			if ( in_array( "tf_vendor", $tf_user_roles ) ) {
+				if( self::tf_vendor_default_enquiry_mail( $author_mail, $post_id, $name, $question, $this->last_id ) ) {
+				} else {
+					$response['status'] = 'error';
+					$response['msg']    = esc_html__( 'Message sent failed!', 'tourfic' );
+				}
+			}
 		}
 
 		echo wp_json_encode( $response );
@@ -931,6 +944,15 @@ abstract class Enquiry {
 		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
 		$enquiry_id = isset( $_POST['enquiry_id'] ) ? sanitize_text_field( $_POST['enquiry_id'] ) : '';
 
+		// author data
+		$author_id   = get_post_field( 'post_author', $post_id );
+		$author_mail = get_the_author_meta( 'user_email', $author_id );
+
+		// Post data
+		$tf_post_author_id = get_post_field( 'post_author', $post_id );
+		$tf_user_meta      = get_userdata( $tf_post_author_id );
+		$tf_user_roles     = $tf_user_meta->roles;
+
 		if( empty( $reply_message ) ) {
 			$response['status'] = 'error';
 			$response['msg']    = esc_html__( 'Reply Message is Required!', 'tourfic' );
@@ -955,6 +977,7 @@ abstract class Enquiry {
 			$headers[] = 'x-tourfic-uid: ' . $header_uid;
 
 			$send_mail = wp_mail( $to, $subject, $reply_message, $headers );
+			
 			$submit_time = date_i18n( 'Y-m-d H:i:s', current_time( 'timestamp' ) );
 
 			$reply_data[] = array(
@@ -1008,29 +1031,51 @@ abstract class Enquiry {
 		wp_die();
 	}
 
-	static function tf_vendor_default_enquiry_mail( $vendor_mail, $post_id ) {
-		// 1. Mail will be deliver from Admin
-		// 2. Subject will be "Enquiry for your product"
-		// 3. Reply to will be the user email
-		// 4: Mail will be sent to the vendor email
+	static function tf_vendor_default_enquiry_mail( $vendor_mail, $post_id, $name, $body, $last_id, $type = "new" ) {
 
-		// $author_name = get_the_author_meta('display_name', get_post_field('post_author', $post_id));
-		// $post_name = get_the_title( $post_id );
-		// $post_type = get_post_type( $post_id ) == "tf_tours" ? esc_html__("Tour", 'tourfic') : ( get_post_type( $post_id ) == "tf_hotel" ? esc_html__( "Hotel", 'tourfic') : esc_html__( "Apartment", 'tourfic') );
-		// $subject = esc_html__( "New Enquiry for your ", 'tourfic' ) . $post_type . " - " . $post_name;
-		// $mail_body = "Hello $author_name, <br>";
-		// $mail_body .= "A new enquiry has been added to your dashboard. <br>";
-		// $mail_body .= "Please check your dashboard for more details. <br>" ;
-		
-		// return $mail_body;
+		$author_name = get_the_author_meta('display_name', get_post_field('post_author', $post_id));
+		$post_name = get_the_title( $post_id );
+		$post_type = get_post_type( $post_id ) == "tf_tours" ? esc_html__("Tour", 'tourfic') : ( get_post_type( $post_id ) == "tf_hotel" ? esc_html__( "Hotel", 'tourfic') : esc_html__( "Apartment", 'tourfic') );
+		$subject = "";
+
+		if( $type == "new" ) {
+			$subject .= sprintf( esc_html__( "New Enquiry #%1s: Someone Asked Question about your %2s - %3s  ", 'tourfic' ), $last_id, $post_type, $post_name );
+		} elseif( $type == "reply" ) {
+			$subject .= sprintf( esc_html__( "New Response #%1s: A New Response is Added to Enquiry Details", 'tourfic' ), $last_id );
+		}
+
+		$from = "From: " . get_option( 'blogname' ) . " <" . get_option( 'admin_email' ) . ">\r\n";
+		$headers[] = 'Content-Type: text/html; charset=UTF-8';
+		$headers[] = $from;
+		$headers[] = 'Reply-To: no-reply@' . parse_url( site_url() )["host"];
+		$dashboard_link = get_option("tf_dashboard_page_id") ? get_permalink(get_option("tf_dashboard_page_id")) : site_url('my-account/');
+		$email_content = '';
+
+
+		ob_start();
 		?>
-		<div style="width:100%">
-			<div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px;">
-				<h2 style="color: #333; font-size: 20px; font-weight: 600; margin-bottom: 20px;">New Enquiry for your product</h2>
-				<p style="color: #333; font-size: 16px; line-height: 1.5;">Hello, <br> A new enquiry has been added to your dashboard. <br> Please check your dashboard for more details.</p>
+			<div style="width:100%">
+				<p>Hello <b><?php echo esc_html__( $author_name, 'tourfic' ) ?></b></p>
+				<?php if( $type = 'new'): ?>
+					<p>A new enquiry has been added to your dashboard <?php echo !empty($name) ? 'by ' . $name : '' ?></p>
+				<?php elseif( $type == "reply "): ?>
+					<p>A new response has been added to #<?php echo esc_html($last_id) ?> <?php echo !empty($name) ? ' by ' . $name : '' ?></p>
+				<?php endif; ?>
+				<?php if( !empty( $body )): ?>
+					<h4>Enquiry Body</h4>
+					<p><?php echo wp_kses_post( $body ) ?></p>
+				<?php endif; ?>
+				<p>Click here to go to the enquiry page: <b><a href="<?php echo esc_url( $dashboard_link . "#/" . strtolower($post_type) . '-' . 'enquiries' . '/' . $last_id)  ?>">View Enquiry</a></b></p>
 			</div>
-		</div>
+			<div style="width:100%">
+				<p>Reply the enquiry using dashboard reply form</p>
+			</div>
 		<?php
+		$email_content = ob_get_clean();
+
+		
+
+		return wp_mail( $vendor_mail, $subject, $email_content, $headers );
 	}
 
 }
