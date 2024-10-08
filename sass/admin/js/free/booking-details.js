@@ -435,7 +435,12 @@
             if('calendar'==view){
                 $('.tf-booking-header-filter').hide();
                 $('.tf-order-table-responsive').hide();
+                $('#tf-booking-calendar').css('padding', '24px').css('margin-top', '32px');
                 $('#tf-booking-calendar').show();
+                
+                // Re-render the calendar
+                initializeCalendar();
+                
             }
             if('list'==view){
                 $('#tf-booking-calendar').hide();
@@ -485,7 +490,7 @@
 })(jQuery);
 
 // Booking Calendar
-document.addEventListener('DOMContentLoaded', function() {
+function initializeCalendar() {
     var calendarEl = document.getElementById('tf-booking-calendar');
     var currentPageUrl = window.location.href;
 
@@ -497,30 +502,39 @@ document.addEventListener('DOMContentLoaded', function() {
         eventsSource = tf_options.tf_hotels_orders;
     } else if (currentPageUrl.includes('post_type=tf_apartment&page=tf_apartment_booking')) {
         eventsSource = tf_options.tf_apartments_orders;
-    }else{
-
+    } else {
+        eventsSource = []; // Fallback option if none of the conditions match
     }
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
-      editable: false,
-      selectable: true,
-      dayMaxEvents: 3,
-      headerToolbar: {
-        left: 'prev,next',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay'
-    },
-    events: eventsSource,
-    eventContent: function(info) {
-        var customEl = document.createElement('div');
-        customEl.classList.add('tf-booking-single-popup');
-        customEl.setAttribute('data-id', info.event.id);
-        customEl.innerHTML = `
-            <span>${info.event.title}</span>
-        `;
-        return { domNodes: [customEl] };
-    }
+        editable: false,
+        selectable: true,
+        dayMaxEvents: 3,
+        headerToolbar: {
+            left: 'prev,next',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        events: eventsSource,
+        eventContent: function(info) {
+            var customEl = document.createElement('div');
+            customEl.classList.add('tf-booking-single-popup');
+            customEl.setAttribute('data-id', info.event.id);
+            customEl.innerHTML = `<span>${info.event.title}</span>`;
+            return { domNodes: [customEl] };
+        }
     });
 
     calendar.render();
+}
+
+// Initialize the calendar when the DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    var tfcalendarEl = document.getElementById('tf-booking-calendar');
+    if (tfcalendarEl.dataset.set) {
+        initializeCalendar();
+        tfcalendarEl.style.display = 'none';
+    }else{
+        initializeCalendar();
+    }
 });

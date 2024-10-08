@@ -186,9 +186,7 @@ abstract Class TF_Booking_Details {
             </div>
         </div>
 
-        <div id="tf-booking-calendar" style="<?php echo !empty($_GET['nonce']) ? esc_attr('display: none') : '' ?>">
-            
-        </div>
+        <div id="tf-booking-calendar" data-set="<?php echo !empty($_GET['nonce']) ? esc_attr('yes') : '' ?>" style="<?php echo !empty($_GET['nonce']) ? esc_attr('padding: 0; margin: 0;') : '' ?>"></div>
 
         <div class="tf-booking-header-filter" style="<?php echo !empty($_GET['nonce']) ? esc_attr('display: flex') : '' ?>">
             <div class="tf-left-search-filter">
