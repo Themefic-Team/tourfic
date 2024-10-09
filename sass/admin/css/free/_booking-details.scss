@@ -69,7 +69,8 @@
                     background-color: #003C79;
                 }
             }            
-            a.tf-booking-btn{
+            a.tf-booking-btn,
+            .tf-google-sync-button button{
                 padding: 10px 32px;
                 border-radius: 8px;
                 border: 1px solid #003C79;
@@ -83,6 +84,7 @@
                 line-height: 24px; /* 150% */
                 color: #F0F0F1;
                 transition: .3s all ease;
+                cursor: pointer;
                 &:hover{
                     color: #f0f0f1;
                     background-color: #004E9D;
