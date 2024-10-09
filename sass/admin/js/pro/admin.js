@@ -320,6 +320,34 @@
 
     });
 
+    /**
+         * Woocommerce Order Sync to Google Calendar
+         */
+    $(document).on('click', '.tf-google-calendar-sync', function (e) {
+        e.preventDefault();
+        let btn = $(this);
+
+        $.ajax({
+            url: tf_pro_params.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'tf_google_calendar_sync',
+                _nonce: tf_pro_params.nonce,
+            },
+            processData: false,
+            contentType: false,
+            beforeSend: function (response) {
+                btn.addClass('tf-btn-loading');
+            },
+            success: function (response) {
+                const obj = JSON.parse(response);
+                
+                btn.removeClass('tf-btn-loading');
+            },
+        });
+
+    });
+
     let urlParams = new URLSearchParams(window.location.search);
     let mapping   = urlParams.get('step');
     if( mapping == 'tour_mapping' ){
