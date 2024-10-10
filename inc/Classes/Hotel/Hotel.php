@@ -279,25 +279,58 @@ class Hotel {
                                 $ordered_number_of_room = !empty($order_details->room) ? $order_details->room : 0;
 
                                 if ( $avil_by_date ) {
-
-                                    $order_check_in_date  = strtotime( $order_details->check_in );
-                                    $order_check_out_date = strtotime( $order_details->check_out );
-
-                                    $tf_order_check_in_date  = $order_details->check_in;
-                                   	$tf_order_check_out_date = $order_details->check_out;
-                                    if ( ! empty( $avail_durationdate ) && ( in_array( $tf_order_check_out_date, $avail_durationdate ) ) ) {
-                                        # Total number of room booked
-                                        $number_orders = $number_orders + $ordered_number_of_room;
-                                    }
+                                    $order_check_in_date  = strtotime($order_details->check_in);
+									$order_check_out_date = strtotime($order_details->check_out);
+                                    // if ( ! empty( $avail_durationdate ) && ( in_array( $order_check_out_date, $avail_durationdate ) ) ) {
+                                    //     # Total number of room booked
+                                    //     $number_orders = $number_orders + $ordered_number_of_room;
+                                    // }
+									if (!empty($avail_durationdate)) {
+										foreach ($avail_durationdate as $available_date) {
+											$available_timestamp = strtotime($available_date);
+										
+											// Reduce room availability 
+											if($multi_by_date_ck){
+												if (($order_check_in_date) < $available_timestamp && $order_check_out_date >= $available_timestamp) {
+													$number_orders += $ordered_number_of_room;
+													break;
+												}
+											} else {
+												if (($order_check_in_date) <= $available_timestamp && $order_check_out_date >= $available_timestamp) {
+													$number_orders += $ordered_number_of_room;
+													break;
+												}
+											}
+										}
+									}
+									
                                     array_push( $order_date_ranges, array( $order_check_in_date, $order_check_out_date ) );
 
                                 } else {
-                                    $order_check_in_date  = $order_details->check_in;
-                                   	$order_check_out_date = $order_details->check_out;
-                                    if ( ! empty( $avail_durationdate ) && ( in_array( $order_check_out_date, $avail_durationdate ) ) ) {
-                                        # Total number of room booked
-                                        $number_orders = $number_orders + $ordered_number_of_room;
-                                    }
+                                    $order_check_in_date  = strtotime($order_details->check_in);
+									$order_check_out_date = strtotime($order_details->check_out);
+                                    // if ( ! empty( $avail_durationdate ) && ( in_array( $order_check_out_date, $avail_durationdate ) ) ) {
+                                    //     # Total number of room booked
+                                    //     $number_orders = $number_orders + $ordered_number_of_room;
+                                    // }
+									if (!empty($avail_durationdate)) {
+										foreach ($avail_durationdate as $available_date) {
+											$available_timestamp = strtotime($available_date);
+											
+											// Reduce room availability
+											if($multi_by_date_ck){
+												if (($order_check_in_date) < $available_timestamp && $order_check_out_date >= $available_timestamp) {
+													$number_orders += $ordered_number_of_room;
+													break;
+												}
+											} else {
+												if (($order_check_in_date) <= $available_timestamp && $order_check_out_date >= $available_timestamp) {
+													$number_orders += $ordered_number_of_room;
+													break;
+												}
+											}
+										}
+									}								
                                 }
                             }
                         }

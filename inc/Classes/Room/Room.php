@@ -59,24 +59,15 @@ class Room {
 		if ( ! isset( $_POST['_ajax_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_ajax_nonce'] ) ), 'updates' ) ) {
 			return;
 		}
-
-		# Get order id field's name
-		$meta_field = isset( $_POST['meta_field'] ) ? sanitize_text_field( $_POST['meta_field'] ) : '';
-		# Trim room id from order id name
-		$room_id = trim( $meta_field, "tf_hotels_opt[room][][order_id]" );
 		# Get post id
-		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
+		$room_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
 		# Get hotel meta
-		$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
-
-		$order_id_retrive = Helper::tf_data_types( $meta['room'] );
+		$meta = get_post_meta( $room_id, 'tf_room_opt', true );
 
 		# Set order id field's value to blank
-		$order_id_retrive[ $room_id ]['order_id'] = '';
-
-		$meta['room'] = $order_id_retrive;
+		$meta['order_id'] = '';
 		# Update whole hotel meta
-		update_post_meta( $post_id, 'tf_hotels_opt', $meta );
+		update_post_meta( $room_id, 'tf_room_opt', $meta );
 
 		# Send success message
 		wp_send_json_success( array(
