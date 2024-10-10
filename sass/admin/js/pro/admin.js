@@ -332,16 +332,13 @@
             type: 'POST',
             data: {
                 action: 'tf_google_calendar_sync',
-                _nonce: tf_pro_params.nonce,
+                _nonce: tf_pro_params.tf_pro_nonce,
             },
-            processData: false,
-            contentType: false,
             beforeSend: function (response) {
                 btn.addClass('tf-btn-loading');
             },
             success: function (response) {
                 const obj = JSON.parse(response);
-                
                 btn.removeClass('tf-btn-loading');
             },
         });
