@@ -260,22 +260,19 @@ class Hotel {
                         $order_ids = explode( ',', $order_ids );
 
                         # Run foreach loop through oder ids
-                        foreach ( $order_ids as $order_id ) {
+                        /* foreach ( $order_ids as $order_id ) {
 
-                        # Get Only the completed orders
-                        $tf_orders_select = array(
-                            'select' => "post_id,order_details",
-                            'post_type' => 'hotel',
-                            'query' => " AND ostatus = 'completed' AND order_id = ".$order_id
-                        );
-                        $tf_hotel_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
+							# Get Only the completed orders
+							$tf_orders_select = array(
+								'select' => "post_id,order_details",
+								'post_type' => 'hotel',
+								'query' => " AND ostatus = 'completed' AND order_id = ".$order_id
+							);
+							$tf_hotel_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
 
                             # Get and Loop Over Order Items
                             foreach ( $tf_hotel_book_orders as $item ) {
                                 $order_details = json_decode($item['order_details']);
-                                /**
-                                 * Order item data
-                                 */
                                 $ordered_number_of_room = !empty($order_details->room) ? $order_details->room : 0;
 
                                 if ( $avil_by_date ) {
@@ -334,10 +331,57 @@ class Hotel {
                                 }
                             }
                         }
+
                         # Calculate available room number after order
                         $num_room_available = $num_room_available - $number_orders; // Calculate
-                        $num_room_available = max( $num_room_available, 0 ); // If negetive value make that 0
+                        $num_room_available = max( $num_room_available, 0 ); // If negetive value make that 0 */
 
+						$room_bookings_per_day = array();
+
+						foreach ($avail_durationdate as $available_date) {
+							$available_timestamp = strtotime($available_date);
+
+							$room_booked_today = 0;
+
+							foreach ($order_ids as $order_id) {
+
+								# Get completed orders
+								$tf_orders_select = array(
+									'select' => "post_id,order_details",
+									'post_type' => 'hotel',
+									'query' => " AND ostatus = 'completed' AND order_id = ".$order_id
+								);
+								$tf_hotel_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
+
+								foreach ($tf_hotel_book_orders as $item) {
+									$order_details = json_decode($item['order_details']);
+									$order_check_in_date  = strtotime($order_details->check_in);
+									$order_check_out_date = strtotime($order_details->check_out);
+									$ordered_number_of_room = !empty($order_details->room) ? $order_details->room : 0;
+
+									# Check if the order's date range overlaps with the current available date
+									if($multi_by_date_ck){
+										if ($order_check_in_date < $available_timestamp && $order_check_out_date >= $available_timestamp) {
+											$room_booked_today += $ordered_number_of_room;
+										}
+									} else {
+										if ($order_check_in_date <= $available_timestamp && $order_check_out_date >= $available_timestamp) {
+											$room_booked_today += $ordered_number_of_room;
+										}
+									}
+								}
+							}
+
+							# Track room availability for this specific date
+							$room_bookings_per_day[$available_date] = $room_booked_today;
+						}
+
+						# Find the maximum number of rooms booked on any day within the date range
+						$number_orders = max($room_bookings_per_day);
+
+						# Calculate available rooms
+						$num_room_available = $num_room_available - $number_orders;
+						$num_room_available = max($num_room_available, 0);
                     }
 
                     if ( $avil_by_date == '1' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
