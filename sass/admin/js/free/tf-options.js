@@ -1313,6 +1313,8 @@
             var count = $this_parent.find('.tf-repeater-wrap-' + id + ' .tf-single-repeater-' + id + '').length;
             var parent_field = add_value.find(':input[name="tf_parent_field"]').val();
             var current_field = add_value.find(':input[name="tf_current_field"]').val();
+            var maxIndex = parseInt($(this).closest('.tf-repeater').attr("data-max-index")) + 1;
+            $(this).closest('.tf-repeater').attr("data-max-index", maxIndex);
 
             $this_parent.find('.tf-repeater-wrap .tf-field-notice-inner').remove();
             // Chacked maximum repeater
@@ -1322,7 +1324,7 @@
             }
 
             // Repeater Count Add Value
-            add_value.find(':input[name="tf_repeater_count"]').val(count);
+            add_value.find(':input[name="tf_repeater_count"]').val(maxIndex);
 
             let repeatDateField = add_value.find('.tf-field-date');
             if (repeatDateField.length > 0) {
@@ -1357,12 +1359,12 @@
             if (parent_field == '') {
                 // Update  repeater name And id
                 add_value.find(':input').each(function () {
-                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
-                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
+                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
+                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
                 });
                 var update_paren = add_value.find('.tf-repeater input[name="tf_parent_field"]').val();
                 if (typeof update_paren !== "undefined") {
-                    var update_paren = update_paren.replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
+                    var update_paren = update_paren.replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
                 }
                 add_value.find('.tf-repeater input[name="tf_parent_field"]').val(update_paren);
 
@@ -1370,15 +1372,15 @@
                 // Update  repeater name And id
                 var update_paren = add_value.find(':input[name="tf_parent_field"]').val();
                 add_value.find(':input').each(function () {
-                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
-                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
+                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
+                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
                 });
             }
             // Update Repeaterr label
             add_value.find('label').each(function () {
                 var for_value = $(this).attr("for");
                 if (typeof for_value !== "undefined") {
-                    for_value = for_value.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
+                    for_value = for_value.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
                     $(this).attr("for", for_value);
                 }
             });
@@ -1386,7 +1388,7 @@
             add_value.find('.tf-icon-select').each(function (index) {
                 var icon_id = $(this).attr("id");
                 if (typeof icon_id !== "undefined") {
-                    icon_id = icon_id + index + count;
+                    icon_id = icon_id + index + maxIndex;
                     $(this).attr("id", icon_id)
 
                 }
@@ -1395,7 +1397,7 @@
             add_value.find('[data-depend-id]').each(function () {
                 var data_depend_id = $(this).attr("data-depend-id");
                 if (typeof data_depend_id !== "undefined") {
-                    data_depend_id = data_depend_id.replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
+                    data_depend_id = data_depend_id.replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
                     $(this).attr("data-depend-id", data_depend_id);
                 }
             });
@@ -1403,7 +1405,7 @@
             add_value.find('[data-controller]').each(function () {
                 var data_controller = $(this).attr("data-controller");
                 if (typeof data_controller !== "undefined") {
-                    data_controller = data_controller.replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
+                    data_controller = data_controller.replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
                     $(this).attr("data-controller", data_controller);
                 }
             });
@@ -1440,7 +1442,7 @@
 
             // replace new Select 2
             add_value.find('select.tf-select2-parent').each(function () {
-                this.id = this.id.replace('' + current_field + '__00', '' + current_field + '__' + count + '');
+                this.id = this.id.replace('' + current_field + '__00', '' + current_field + '__' + maxIndex + '');
                 var parent_repeater_id = $(this).attr('id');
                 var $this = $(this);
                 tfSelect2Int($this);
@@ -1479,6 +1481,8 @@
             var current_field = clone_value.find('input[name="tf_current_field"]').val();
             var repeater_count = clone_value.find('input[name="tf_repeater_count"]').val();
             var count = $this_parent.find('.tf-single-repeater-' + current_field + '').length;
+            var maxIndex = parseInt($(this).closest('.tf-repeater').attr("data-max-index")) + 1;
+            $(this).closest('.tf-repeater').attr("data-max-index", maxIndex);
 
             $this_parent.find('.tf-field-notice-inner').remove();
             // Chacked maximum repeater
@@ -1521,13 +1525,13 @@
                 // Replace input id and name
                 clone_value.find(':input').each(function () {
                     if ($(this).closest('.tf-single-repeater-clone').length == 0) {
-                        this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
-                        this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                        this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
+                        this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
                     }
                 });
                 var update_paren = clone_value.find('.tf-repeater input[name="tf_parent_field"]').val();
                 if (typeof update_paren !== "undefined") {
-                    var update_paren = update_paren.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                    var update_paren = update_paren.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
                 }
                 clone_value.find('.tf-repeater input[name="tf_parent_field"]').val(update_paren);
 
@@ -1535,15 +1539,15 @@
                 // Replace input id and name
                 clone_value.find(':input').each(function () {
                     if ($(this).closest('.tf-single-repeater-clone').length == 0) {
-                        this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
-                        this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                        this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
+                        this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
                     }
                 });
             }
             clone_value.find('label').each(function () {
                 var for_value = $(this).attr("for");
                 if (typeof for_value !== "undefined") {
-                    for_value = for_value.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                    for_value = for_value.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
                     var for_value = $(this).attr("for", for_value);
                 }
             });
@@ -1551,7 +1555,7 @@
             clone_value.find('.tf-icon-select').each(function (index) {
                 var icon_id = $(this).attr("id");
                 if (typeof icon_id !== "undefined") {
-                    icon_id = icon_id + index + count;
+                    icon_id = icon_id + index + maxIndex;
                     $(this).attr("id", icon_id)
 
                 }
@@ -1560,7 +1564,7 @@
             clone_value.find('[data-depend-id]').each(function () {
                 var data_depend_id = $(this).attr("data-depend-id");
                 if (typeof data_depend_id !== "undefined") {
-                    data_depend_id = data_depend_id.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                    data_depend_id = data_depend_id.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
                     $(this).attr("data-depend-id", data_depend_id);
                 }
             });
@@ -1568,12 +1572,12 @@
             clone_value.find('[data-controller]').each(function () {
                 var data_controller = $(this).attr("data-controller");
                 if (typeof data_controller !== "undefined") {
-                    data_controller = data_controller.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                    data_controller = data_controller.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
                     $(this).attr("data-controller", data_controller);
                 }
             });
             // Replace Data repeter Count id ID
-            clone_value.find('input[name="tf_repeater_count"]').val(count)
+            clone_value.find('input[name="tf_repeater_count"]').val(maxIndex)
 
             // Replace Old editor
             clone_value.find('.wp-editor-wrap').each(function () {
@@ -1620,7 +1624,7 @@
 
             // Clone Select 2
             clone_value.find('select.tf-select2-parent, select.tf-select2').each(function () {
-                this.id = this.id.replace('' + current_field + '__' + repeater_count, '' + current_field + '__' + count + '');
+                this.id = this.id.replace('' + current_field + '__' + repeater_count, '' + current_field + '__' + maxIndex + '');
                 var $this = $(this);
                 tfSelect2Int($this);
             });
