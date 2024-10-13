@@ -524,7 +524,9 @@ class TF_Review {
             $tf_hotel_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
             $tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
             
-            if( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-1" ) || ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-1" || $tf_hotel_arc_selected_template=="design-3" ) ){
+            if( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-1" || $tf_tour_arc_selected_template=="design-3") || 
+            ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-1" || $tf_hotel_arc_selected_template=="design-3" ) ||
+            ( "tf_apartment"==$tf_current_post && $tf_apartment_arc_selected_template=="design-2" )){
             ?>
                 <div class="tf-reviews tf-flex tf-mt-16 tf-flex-gap-12">
                     <div class="tf-review-items">
@@ -572,7 +574,9 @@ class TF_Review {
                      (<?php self::tf_based_on_text( count( $comments ) ); ?>)
                     </div>
                 </div>
-            <?php } elseif( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-2" ) || ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-2" ) || ( "tf_apartment"==$tf_current_post && $tf_apartment_arc_selected_template=="design-1" ) ){ ?>
+            <?php } elseif( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-2" ) || 
+            ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-2" ) || 
+            ( "tf_apartment"==$tf_current_post && $tf_apartment_arc_selected_template=="design-1" ) ){ ?>
                 <span class="tf-available-rating-number">
                     <?php echo wp_kses_post( self::tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
                 </span>
@@ -594,13 +598,25 @@ class TF_Review {
             $tf_hotel_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
             $tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
             
-            if( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-1" ) || ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-1" ) ){
+            if( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-1" || $tf_tour_arc_selected_template=="design-3") || 
+            ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-1" || $tf_hotel_arc_selected_template=="design-3" ) ||
+            ( "tf_apartment"==$tf_current_post && $tf_apartment_arc_selected_template=="design-2" )){
             ?>
             <div class="tf-reviews tf-flex tf-mt-16 tf-flex-gap-12">
                 <div class="tf-review-items">
-                    <i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
                 </div>
                 <div class="tf-avarage-review">
+                    <?php 
+                    if( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-3") || 
+                    ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-3" ) ||
+                    ( "tf_apartment"==$tf_current_post && $tf_apartment_arc_selected_template=="design-2" )){ ?>
+                        <span class="tf-no-review-count"><?php echo esc_html__(" 0.0", "tourfic"); ?></span>
+                    <?php } ?>
                     <?php esc_html_e(" (No Review)", "tourfic"); ?>
                 </div>
             </div>

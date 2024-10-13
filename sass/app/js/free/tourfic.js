@@ -2633,15 +2633,15 @@
                 bounds.extend(marker.position);
 
                 // Show the infowindow on hover
-                google.maps.event.addListener(marker, 'mouseover', function () {
+                google.maps.event.addListener(marker, 'click', function () {
                     infowindow.setContent(window.atob(location['content']));
                     infowindow.open(hotelMap, marker);
                 });
 
                 // Hide the infowindow on mouse leave
-                google.maps.event.addListener(marker, 'mouseout', function () {
-                    infowindow.close();
-                });
+                // google.maps.event.addListener(marker, 'mouseout', function () {
+                //     infowindow.close();
+                // });
             });
 
             // Add a marker clusterer to manage the markers.

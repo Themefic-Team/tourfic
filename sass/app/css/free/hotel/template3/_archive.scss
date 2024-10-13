@@ -4,6 +4,7 @@ $t4-orange-light: #FFEDE1;
 $t4-orange-100: #FBF4EF;
 $t4-orange-200: #F5E9E0;
 $t4-orange-500: #BF7540;
+$t4-orange-hover: #C15100;
 $t4-yellow: #FFC700;
 $t4-paragraph: #6E655E;
 $t4-orange-1000: #1A0B00;
@@ -152,41 +153,39 @@ $t4-main-color: #060D1C;
         left: 0;
         top: 100%;
         margin-top: 10px;
-        width: 250px;
-        background: $t4-orange-background;
-        box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
+        min-width: 200px;
         z-index: 999;
         max-height: 200px;
         overflow: auto;
-        scrollbar-width: thin;
-        scrollbar-color: #aaa #eee;
-        padding: 8px;
+        padding: 4px;
+        border-radius: 4px;
+        background: #FEF9F6;
+        box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
 
         &::-webkit-scrollbar {
-            width: 5px;
+            width: 4px;
         }
 
         &::-webkit-scrollbar-thumb {
-            background-color: #aaa;
-            border-radius: 4px;
+            background-color: $t4-paragraph;
+            border-radius: 32px;
         }
 
         &::-webkit-scrollbar-track {
-            background-color: #eee;
+            border-radius: 32px;
+            background: rgba(6, 13, 28, 0.20);
         }
 
         div {
-            padding: 10px;
+            padding: 4px 16px;
             cursor: pointer;
-            background-color: #fff;
-            margin-bottom: 4px;
-            color: $t4-paragraph;
+            color: $t4-orange-1000;
             display: block;
-            transition: .3s all ease;
-
-            &:last-child {
-                margin-bottom: 0px;
-            }
+            transition: .3s all ease;    
+            font-weight: 400;
+            line-height: 175%; /* 28px */
+            letter-spacing: 0.15px;
+            border-radius: 4px;
 
             &:hover {
                 background: $t4-orange-light;
@@ -207,34 +206,50 @@ $t4-main-color: #060D1C;
         display: unset;
         top: 80%;
         opacity: 0;
+        margin-top: 0;
         visibility: hidden;
         transition: 0.3s;
-        background: $t4-orange-light;
+        border-radius: 8px;
+        padding: 16px;
+        background: #FEF9F6;
         box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.10);
 
+        .tf_acrselection-inner{
+            @include flexbox();
+            @include flex-direction(column);
+            gap: 16px;
+
+            .tf_acrselection{
+                margin-bottom: 0;
+            }
+        }
+
         .acr-label {
-            color: $t4-paragraph;
-            font-weight: 600;
-            line-height: 130%;
+            color: $t4-orange-1000;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 175%;
+            letter-spacing: 0.15px;
         }
 
         .acr-select {
             text-align: right;
-            width: 96px;
+            width: 106px;
+            gap: 16px;
 
             input[type=tel] {
                 width: 34px !important;
                 height: 48px;
-                border: 1px solid !important;
                 font-size: 16px;
                 font-style: normal;
                 font-weight: 600;
-                color: $t4-paragraph !important;
+                color: $t4-orange-1000 !important;
                 text-align: center;
                 padding-left: 0px !important;
                 padding-right: 0px !important;
-                border-radius: 20px;
-                background: #FCF4E8 !important;
+                border-radius: 4px;
+                border: 0.2px solid $t4-paragraph !important;
+                background: $t4-orange-light !important;
             }
 
             .acr-dec,
@@ -243,8 +258,15 @@ $t4-main-color: #060D1C;
                 border: none;
                 font-size: 31px;
                 font-weight: 400;
-                color: $t4-paragraph;
+                color: $t4-primary;
                 padding: 0;
+                min-width: auto;
+                width: auto;
+
+                svg rect,
+                svg path{
+                    fill: $t4-primary;
+                }
             }
         }
     }
@@ -272,6 +294,10 @@ $t4-main-color: #060D1C;
 
             @media #{$max1024} {
                 width: 100%;
+            }
+
+            &:hover{
+                background: $t4-orange-hover !important;
             }
         }
     }
@@ -330,7 +356,7 @@ $t4-main-color: #060D1C;
 
             .gm-style {
                 .gm-style-iw-c {
-                    border-radius: 4px;
+                    border-radius: 4px !important;
                     padding: 0;
                     -webkit-box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
                     box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
@@ -428,6 +454,10 @@ $t4-main-color: #060D1C;
                             line-height: 20px;
                             color: $t4-main-color;
                             font-weight: 400;
+
+                            .tf-no-review-count{
+                                color: $t4-orange-1000;
+                            }
                         }
                     }
                 }
@@ -593,6 +623,16 @@ $t4-main-color: #060D1C;
             border-radius: 4px;
             background-color: $t4-orange-100;
             @include flexbox();
+            @include transition();
+
+            &:hover{
+                background: #fff;
+                box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
+
+                .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title a{
+                    color: $t4-primary;
+                }
+            }
 
             .tf-archive-hotel-thumb {
                 min-width: 160px;
@@ -696,6 +736,10 @@ $t4-main-color: #060D1C;
                         .tf-avarage-review {
                             line-height: 20px;
                             color: $t4-paragraph;
+
+                            .tf-no-review-count{
+                                color: $t4-orange-1000;
+                            }
                         }
                     }
                 }
@@ -731,6 +775,12 @@ $t4-main-color: #060D1C;
                         background-color: $t4-orange-light;
                         padding: 8px 24px;
                         text-align: center;
+                        @include transition();
+
+                        &:hover{
+                            background-color: $t4-primary;
+                            color: #fff;
+                        }
                     }
                 }
             }
@@ -741,8 +791,8 @@ $t4-main-color: #060D1C;
             flex-wrap: wrap;
 
             .tf-archive-hotel {
-                display: block;
                 flex-basis: calc(50% - 12px);
+                @include flex-direction(column);
                 
                 @media #{$max575} {
                     flex-basis: 100%;
@@ -756,7 +806,8 @@ $t4-main-color: #060D1C;
 
                 .tf-archive-hotel-content {
                     width: 100%;
-                    display: block;
+                    height: 100%;
+                    @include flex-direction(column);
 
                     .tf-archive-hotel-content-left {
                         width: 100%;

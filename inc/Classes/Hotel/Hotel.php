@@ -3007,7 +3007,7 @@ class Hotel {
                                 <div class="location-icon">
                                     <i class="ri-map-pin-fill"></i>
                                 </div>
-                                <span><?php echo Helper::tourfic_character_limit_callback( esc_html( $address ), 40 ); ?></span>
+                                <span><?php echo Helper::tourfic_character_limit_callback( esc_html( $address ), 25 ); ?></span>
                             </div>
 						<?php endif; ?>
                         <h4 class="tf-section-title">
@@ -3035,16 +3035,13 @@ class Hotel {
 									}
 									echo esc_html( $feature->name );
 									//add comma after each feature except last one, if only 1/2 exists then don't add comma to last one
-									if ( count( $features ) > 1 && $tfkey != count( $features ) - 1 ) {
+									if ( count( $features ) > 1 && $tfkey != count( array_slice( $features, 0, 3 ) ) - 1 ) {
 										echo ',';
 									}
 									echo '</li>';
 
 								endforeach;
 								?>
-								<?php if ( count( $features ) > 3 ) { ?>
-                                    <li><a href="<?php echo esc_url( $url ); ?>"><?php _e( "View More", "tourfic" ); ?></a></li>
-								<?php } ?>
                             </ul>
 						<?php } ?>
 						<?php TF_Review::tf_archive_single_rating(); ?>

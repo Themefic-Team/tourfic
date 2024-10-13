@@ -133,7 +133,7 @@ $t4-main-color: #060D1C;
 
             .gm-style {
                 .gm-style-iw-c {
-                    border-radius: 4px;
+                    border-radius: 4px !important;
                     padding: 0;
                     -webkit-box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
                     box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
@@ -374,6 +374,16 @@ $t4-main-color: #060D1C;
             border-radius: 4px;
             background-color: $t4-orange-100;
             @include flexbox();
+            @include transition();
+
+            &:hover{
+                background: #fff;
+                box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
+
+                .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title a{
+                    color: $t4-primary;
+                }
+            }
 
             .tf-archive-hotel-thumb {
                 min-width: 160px;
@@ -499,6 +509,12 @@ $t4-main-color: #060D1C;
                         background-color: $t4-orange-light;
                         padding: 8px 24px;
                         text-align: center;
+                        @include transition();
+
+                        &:hover{
+                            background-color: $t4-primary;
+                            color: #fff;
+                        }
                     }
                 }
             }
