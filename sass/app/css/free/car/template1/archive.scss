@@ -3,6 +3,8 @@
     .tf-archive-car-banner{
         background: #B8C5D2;
         height: 350px;
+        margin: 24px 24px 0 24px;
+        border-radius: 16px;
         .tf-banner-content{
             height: 100%;
             h1{
@@ -95,23 +97,28 @@
                                 }
                                 .autocomplete-items{
                                     position: absolute;
-                                    border: 1px solid #d4d4d4;
-                                    border-bottom: none;
                                     z-index: 99;
                                     top: 100%;
                                     left: 0;
-                                    right: 0;
+                                    width: 190px;
                                     max-height: 200px;
                                     overflow: auto;
+                                    border-radius: 4px;
+                                    background: #EEF2F6;
+                                    padding: 2px;
+
                                     >div{
-                                        padding: 10px;
+                                        padding: 8px;
                                         cursor: pointer;
-                                        background-color: #fff;
-                                        border-bottom: 1px solid #d4d4d4;
-                                        color: #444;
-                                        border-left: 1px solid #d4d4d4;
-                                        border-right: 1px solid #d4d4d4;
+                                        border-radius: 4px;
+                                        background: #FFF;
                                         text-transform: capitalize;
+                                        color: #27333F;
+                                        font-size: 16px;
+                                        margin-bottom: 2px;
+                                        &:last-child{
+                                            margin-bottom: 0px;
+                                        }
                                     }
                                 }
                             }
@@ -518,6 +525,7 @@
                                 bottom: 0;
                                 padding: 16px;
                                 justify-content: space-between;
+                                gap: 8px;
                                 .tf-reviews-box{
                                     span{
                                         border-radius: 8px;
@@ -536,6 +544,7 @@
                                     }
                                 }
                                 .tf-tags-box{
+                                    max-width: 155px;
                                     ul{
                                         margin: 0;
                                         padding: 0;
@@ -660,6 +669,7 @@
                                     display: flow-root;
                                     .tf-tags-box{
                                         margin-top: 8px;
+                                        max-width: none;
                                         ul{
                                             li{
                                                 display: inline-block;

@@ -16190,6 +16190,9 @@ html {
   line-height: 150%; /* 24px */
   padding: 0 0 16px 0px;
 }
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td span {
+  font-weight: 600;
+}
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th {
   color: #27333F;
   border: 0px solid;
@@ -16634,12 +16637,13 @@ html {
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews a {
   text-decoration: none;
   border-radius: 8px;
-  background: #F8FAFC;
   color: #27333F;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 24px */
+  background: rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(32px);
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews a span {
   color: #27333F;
@@ -16998,6 +17002,9 @@ html {
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-form-wrapper p {
   margin: 0 0 20px 0;
 }
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-submit {
+  margin-top: 16px;
+}
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-review-section .tf-review-form-container {
   min-width: auto;
   background: transparent !important;
@@ -17317,29 +17324,38 @@ html {
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items {
   position: absolute;
-  border: 1px solid #d4d4d4;
-  border-bottom: none;
   z-index: 99;
   top: 100%;
   left: 0;
   right: 0;
+  width: 190px;
   max-height: 200px;
   overflow: auto;
+  border-radius: 4px;
+  background: #EEF2F6;
+  padding: 2px;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items > div {
-  padding: 10px;
+  padding: 8px;
   cursor: pointer;
-  background-color: #fff;
-  border-bottom: 1px solid #d4d4d4;
-  color: #444;
-  border-left: 1px solid #d4d4d4;
-  border-right: 1px solid #d4d4d4;
+  border-radius: 4px;
+  background: #FFF;
   text-transform: capitalize;
+  color: #27333F;
+  font-size: 16px;
+  margin-bottom: 2px;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items > div:last-child {
+  margin-bottom: 0px;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-form-submit-btn {
+  padding-top: 8px;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-form-submit-btn .error-notice {
   text-align: center;
   color: red;
   margin-bottom: 10px;
+  display: none;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-form-submit-btn button {
   padding: 16px 32px;
@@ -17660,6 +17676,7 @@ html {
   border-left: 1px solid #DFE6ED;
   border-top: 1px solid #DFE6ED;
   margin: 0px;
+  border-radius: 16px;
 }
 .tf-single-car-section .tf-car-conditions-section table tr th {
   color: #27333F;
@@ -17684,6 +17701,15 @@ html {
   border-bottom: 1px solid #DFE6ED;
   padding: 16px 40px;
 }
+.tf-single-car-section .tf-car-conditions-section table tr:first-child td {
+  border-radius: 0 16px 0 0;
+}
+.tf-single-car-section .tf-car-conditions-section table tr:last-child th {
+  border-radius: 0 0 0 16px;
+}
+.tf-single-car-section .tf-car-conditions-section table tr:last-child td {
+  border-radius: 0 0 16px 0;
+}
 
 .tf-archive-car-section {
   margin: 0 auto;
@@ -17691,6 +17717,8 @@ html {
 .tf-archive-car-section .tf-archive-car-banner {
   background: #B8C5D2;
   height: 350px;
+  margin: 24px 24px 0 24px;
+  border-radius: 16px;
 }
 .tf-archive-car-section .tf-archive-car-banner .tf-banner-content {
   height: 100%;
@@ -17786,24 +17814,28 @@ html {
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items {
   position: absolute;
-  border: 1px solid #d4d4d4;
-  border-bottom: none;
   z-index: 99;
   top: 100%;
   left: 0;
-  right: 0;
+  width: 190px;
   max-height: 200px;
   overflow: auto;
+  border-radius: 4px;
+  background: #EEF2F6;
+  padding: 2px;
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items > div {
-  padding: 10px;
+  padding: 8px;
   cursor: pointer;
-  background-color: #fff;
-  border-bottom: 1px solid #d4d4d4;
-  color: #444;
-  border-left: 1px solid #d4d4d4;
-  border-right: 1px solid #d4d4d4;
+  border-radius: 4px;
+  background: #FFF;
   text-transform: capitalize;
+  color: #27333F;
+  font-size: 16px;
+  margin-bottom: 2px;
+}
+.tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items > div:last-child {
+  margin-bottom: 0px;
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select.tf-pick-drop-location.active .tf-select-date {
   width: 100%;
@@ -18187,6 +18219,7 @@ html {
   bottom: 0;
   padding: 16px;
   justify-content: space-between;
+  gap: 8px;
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span {
   border-radius: 8px;
@@ -18202,6 +18235,9 @@ html {
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span i {
   color: #FFBF0F;
+}
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box {
+  max-width: 155px;
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul {
   margin: 0;
@@ -18331,6 +18367,7 @@ html {
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box {
   margin-top: 8px;
+  max-width: none;
 }
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li {
   display: inline-block;

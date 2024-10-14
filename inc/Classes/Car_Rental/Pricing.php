@@ -259,7 +259,7 @@ class Pricing {
             if($tf_single_protection['title']){
                 $selected_protection_title[] = $tf_single_protection['title'];
             }
-            if(!empty($tf_single_protection['include']) && !empty($tf_single_protection['price'])){ 
+            if(!empty($tf_single_protection['price'])){ 
                 $prices += $tf_single_protection['price'];
             }
         }

@@ -431,7 +431,7 @@ $tf_cars_slug = get_option('car_slug');
                             <?php } ?>
                         </div>
                         <div class="tf-instraction-btn tf-mt-16">
-                            <span class="tf-instraction-showing"><?php esc_html_e("Instructions", "tourfic"); ?></span>
+                            <span class="tf-instraction-showing"><?php esc_html_e("Pick-up and Drop-off instructions", "tourfic"); ?></span>
                             
                             <div class="tf-car-instraction-popup">
                                 <div class="tf-instraction-popup-warp">

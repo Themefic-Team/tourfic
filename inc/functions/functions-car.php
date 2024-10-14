@@ -121,7 +121,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 			echo '<img src="' . esc_url(TF_ASSETS_APP_URL) . "images/feature-default.jpg" . '">';
 		}
 		?>
-		<div class="tf-other-infos tf-flex tf-flex-gap-64">
+		<div class="tf-other-infos tf-flex">
 			<?php TF_Review::tf_archive_single_rating(); ?>
 			<div class="tf-tags-box">
 				<ul>
@@ -552,7 +552,7 @@ function tf_car_booking_pupup_callback() {
 			<table>
 				<tr>
 					<td width="50%"><?php esc_html_e("What is covered", "tourfic"); ?></td>
-					<td align="center"><?php esc_html_e("No protection", "tourfic"); ?></td>
+					<td align="center"></td>
 					<td align="center"><?php esc_html_e("With protection", "tourfic"); ?></td>
 				</tr>
 
@@ -581,22 +581,18 @@ function tf_car_booking_pupup_callback() {
 							</div>
 						</th>
 						<td align="center">
-							<?php if(empty($protection['include'])){ ?>
-							<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M12.5001 7.49996L7.50008 12.5M7.50008 7.49996L12.5001 12.5M18.3334 9.99996C18.3334 14.6023 14.6025 18.3333 10.0001 18.3333C5.39771 18.3333 1.66675 14.6023 1.66675 9.99996C1.66675 5.39759 5.39771 1.66663 10.0001 1.66663C14.6025 1.66663 18.3334 5.39759 18.3334 9.99996Z" stroke="#566676" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-							<?php } ?>
+							
 						</td>
 						<td align="center">
-							<?php if(!empty($protection['include'])){ 
+							<?php 
 							if(!empty($protection['price'])){
 								$total_protection_amount += $protection['price'];
-							}   
+								echo wc_price($protection['price']);
+							}else{
+								echo wc_price(0.0);
+							}
 							?>
-							<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M18.3334 9.2333V9.99997C18.3324 11.797 17.7505 13.5455 16.6745 14.9848C15.5986 16.4241 14.0862 17.477 12.3629 17.9866C10.6396 18.4961 8.7978 18.4349 7.11214 17.8121C5.42648 17.1894 3.98729 16.0384 3.00922 14.5309C2.03114 13.0233 1.56657 11.24 1.68481 9.4469C1.80305 7.65377 2.49775 5.94691 3.66531 4.58086C4.83288 3.21482 6.41074 2.26279 8.16357 1.86676C9.91641 1.47073 11.7503 1.65192 13.3918 2.3833M7.50009 9.16664L10.0001 11.6666L18.3334 3.3333" stroke="#27BE69" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-							<?php } ?>
+							
 						</td>
 					</tr>
 				<?php } } ?>
@@ -604,8 +600,8 @@ function tf_car_booking_pupup_callback() {
 
 				<tfoot>
 					<tr>
-						<th width="50%" align="right"><?php esc_html_e("Charge", "tourfic"); ?>:</th>
-						<th align="center"><?php echo wc_price(0.00); ?></th>
+						<th width="50%" align="right"></th>
+						<th align="center"><?php esc_html_e("Total", "tourfic"); ?>:</th>
 						<th align="center"><?php echo wc_price($total_protection_amount); ?></th>
 					</tr>
 				</tfoot>
@@ -616,7 +612,7 @@ function tf_car_booking_pupup_callback() {
 
 	<div class="tf-booking-bar tf-flex tf-flex-gap-24">
 		<button class="with-charge <?php echo function_exists( 'is_tf_pro' ) && is_tf_pro() && '3'==$car_booking_by ? esc_attr('booking-next') : esc_attr('booking-process'); ?>">
-			<?php esc_html_e("Book with protection", "tourfic"); ?>
+			<?php esc_html_e("Next", "tourfic"); ?>
 			<i class="ri-arrow-right-s-line"></i>
 		</button>
 	</div>

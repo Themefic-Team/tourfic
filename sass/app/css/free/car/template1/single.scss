@@ -179,12 +179,13 @@
                         a{
                             text-decoration: none;
                             border-radius: 8px;
-                            background: #F8FAFC;
                             color: #27333F;
                             font-size: 16px;
                             font-style: normal;
                             font-weight: 400;
                             line-height: 150%; /* 24px */
+                            background: rgba(255, 255, 255, 0.24);
+                            backdrop-filter: blur(32px);
                             span{
                                 color: #27333F;
                                 font-size: 16px;
@@ -541,6 +542,9 @@
                         margin: 0 0 20px 0;
                     }
                 }
+                .tf-review-submit{
+                    margin-top: 16px;
+                }
                 .tf-review-form-container{
                     min-width: auto;
                     background:  transparent !important;
@@ -891,23 +895,29 @@
                             }
                             .autocomplete-items{
                                 position: absolute;
-                                border: 1px solid #d4d4d4;
-                                border-bottom: none;
                                 z-index: 99;
                                 top: 100%;
                                 left: 0;
                                 right: 0;
+                                width: 190px;
                                 max-height: 200px;
                                 overflow: auto;
+                                border-radius: 4px;
+                                background: #EEF2F6;
+                                padding: 2px;
+
                                 >div{
-                                    padding: 10px;
+                                    padding: 8px;
                                     cursor: pointer;
-                                    background-color: #fff;
-                                    border-bottom: 1px solid #d4d4d4;
-                                    color: #444;
-                                    border-left: 1px solid #d4d4d4;
-                                    border-right: 1px solid #d4d4d4;
+                                    border-radius: 4px;
+                                    background: #FFF;
                                     text-transform: capitalize;
+                                    color: #27333F;
+                                    font-size: 16px;
+                                    margin-bottom: 2px;
+                                    &:last-child{
+                                        margin-bottom: 0px;
+                                    }
                                 }
                             }
                         }
@@ -915,10 +925,12 @@
                     
                 }
                 .tf-form-submit-btn{
+                    padding-top: 8px;
                     .error-notice{
                         text-align: center;
                         color: red;
                         margin-bottom: 10px;
+                        display: none;
                     }
                     button{
                         padding: 16px 32px;
@@ -1259,6 +1271,7 @@
             border-left: 1px solid #DFE6ED;
             border-top: 1px solid #DFE6ED;
             margin: 0px;
+            border-radius: 16px;
             tr{
                 th{
                     color: #27333F;
@@ -1282,6 +1295,19 @@
                     border-right: 1px solid #DFE6ED;
                     border-bottom: 1px solid #DFE6ED;
                     padding: 16px 40px;
+                }
+                &:first-child{
+                    td{
+                        border-radius: 0 16px 0 0;
+                    }
+                }
+                &:last-child{
+                    th{
+                        border-radius: 0 0 0 16px;
+                    }
+                    td{
+                        border-radius: 0 0 16px 0;
+                    }
                 }
             }
         }
