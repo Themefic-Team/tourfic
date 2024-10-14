@@ -371,14 +371,28 @@
             padding: 16px 24px;
             width: 850px;
             .tf-instraction-popup-header{
-                justify-content: end;
+                margin-bottom: 24px;
+                h3{
+                    color: #27333F;
+                    font-size: 21px !important;
+                    font-style: normal !important;
+                    font-weight: 700 !important;
+                    line-height: 150% !important;
+                    margin: 0;
+                }
                 .tf-close-popup{
                     cursor: pointer;
                 }
             }
-
             .tf-instraction-content-wraper{
-
+                text-align: left;
+                p{
+                    color: #27333F;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 150%; /* 24px */
+                }
             }
         }
     }

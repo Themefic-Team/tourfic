@@ -16433,11 +16433,30 @@ html {
   width: 850px;
 }
 .tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header {
-  justify-content: end;
+  margin-bottom: 24px;
+}
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header h3 {
+  color: #27333F;
+  font-size: 21px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: 150% !important;
+  margin: 0;
 }
 .tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header .tf-close-popup {
   cursor: pointer;
 }
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper {
+  text-align: left;
+}
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper p {
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 24px */
+}
+
 .tf-single-car-section .tf-single-car-banner {
   background: #B8C5D2;
   height: 350px;
