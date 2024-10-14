@@ -375,6 +375,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
 
                                                 $locations[ $count ] = [
                                                     'id'      => get_the_ID(),
+                                                    'url'	  => get_the_permalink(),
                                                     'lat'     => (float) $lat,
                                                     'lng'     => (float) $lng,
                                                     'price'   => base64_encode( $price_html ),
@@ -441,6 +442,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
 
                                                 $locations[ $count ] = [
                                                     'id'      => get_the_ID(),
+                                                    'url'	  => get_the_permalink(),
                                                     'lat'     => (float) $lat,
                                                     'lng'     => (float) $lng,
                                                     'price'   => base64_encode( $price_html ),
@@ -507,6 +509,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
 
                                                 $locations[$count] = [
                                                     'id' => get_the_ID(),
+                                                    'url'	  => get_the_permalink(),
                                                     'lat' => (float)$lat,
                                                     'lng' => (float)$lng,
                                                     'price' => base64_encode($price_html),
@@ -577,6 +580,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
 
                                                 $locations[ $count ] = [
                                                     'id'      => get_the_ID(),
+                                                    'url'	  => get_the_permalink(),
                                                     'lat'     => (float) $lat,
                                                     'lng'     => (float) $lng,
                                                     'price'   => base64_encode( $price_html ),
@@ -643,6 +647,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
 
                                                 $locations[ $count ] = [
                                                     'id'      => get_the_ID(),
+                                                    'url'	  => get_the_permalink(),
                                                     'lat'     => (float) $lat,
                                                     'lng'     => (float) $lng,
                                                     'price'   => base64_encode( $price_html ),
@@ -709,6 +714,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
 
                                                 $locations[$count] = [
                                                     'id' => get_the_ID(),
+                                                    'url'	  => get_the_permalink(),
                                                     'lat' => (float)$lat,
                                                     'lng' => (float)$lng,
                                                     'price' => base64_encode($price_html),

@@ -164,8 +164,9 @@
                             opacity: .5
                         }
                     });
-                    if($('#tf-hotel-archive-map').length) {
-                        $('#tf-hotel-archive-map').block({
+                    //map template
+                    if($('.tf-archive-details-wrap').length) {
+                        $('.tf-archive-details-wrap').block({
                             message: null,
                             overlayCSS: {
                                 background: "#fff",
@@ -181,8 +182,9 @@
                 complete: function (data) {
                     $('.archive_ajax_result').unblock();
                     $('#tf_ajax_searchresult_loader').hide();
-                    if($('#tf-hotel-archive-map').length) {
-                        $('#tf-hotel-archive-map').unblock();
+                    //map template
+                    if($('.tf-archive-details-wrap').length) {
+                        $('.tf-archive-details-wrap').unblock();
                     }
 
                     // total posts 0 if not found by @hena
@@ -206,9 +208,11 @@
                     if ($('.tf-details-right').length > 0) {
                         $('.tf-details-right').removeClass('tf-filter-show');
                     }
-
+                    //map template
+                    if($('.tf-archive-details-wrap').length) {
+                        $('.tf-archive-details-wrap').unblock();
+                    }
                     if($('#tf-hotel-archive-map').length) {
-                        $('#tf-hotel-archive-map').unblock();
 
                         // GOOGLE MAP INITIALIZE
                         var mapLocations = $('#map-datas').html();
@@ -2633,15 +2637,19 @@
                 bounds.extend(marker.position);
 
                 // Show the infowindow on hover
-                google.maps.event.addListener(marker, 'click', function () {
+                google.maps.event.addListener(marker, 'mouseover', function () {
                     infowindow.setContent(window.atob(location['content']));
                     infowindow.open(hotelMap, marker);
                 });
 
+                google.maps.event.addListener(marker, 'click', function () {
+                    window.open(location?.url, '_blank')
+                });
+
                 // Hide the infowindow on mouse leave
-                // google.maps.event.addListener(marker, 'mouseout', function () {
-                //     infowindow.close();
-                // });
+                google.maps.event.addListener(marker, 'mouseout', function () {
+                    infowindow.close();
+                });
             });
 
             // Add a marker clusterer to manage the markers.

@@ -20946,6 +20946,13 @@ html {
   background: #C15100 !important;
 }
 
+.tf-hotel-template-4 .tf-archive-details-wrap,
+.tf_template_4_hotel_archive .tf-archive-details-wrap,
+.tf_template_4_tour_archive .tf-archive-details-wrap,
+.tf_template_4_apartment_archive .tf-archive-details-wrap {
+  position: relative;
+}
+
 .tf-hotel-template-4 .tf-archive-details,
 .tf_template_4_hotel_archive .tf-archive-details,
 .tf_template_4_tour_archive .tf-archive-details,
@@ -22476,6 +22483,10 @@ html {
 
 .fancybox-container .tf-archive-details .tf-archive-top .tf-archive-view li.tf-archive-view-item {
   display: none;
+}
+
+.fancybox-container .tf-archive-details-wrap {
+  position: relative;
 }
 
 .fancybox-container .tf-archive-details {

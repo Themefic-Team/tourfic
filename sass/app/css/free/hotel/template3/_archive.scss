@@ -303,6 +303,10 @@ $t4-main-color: #060D1C;
     }
 
     /* Hotel details */
+    .tf-archive-details-wrap{
+        position: relative;
+    }
+    
     .tf-archive-details {
         @include flexbox();
         background: $t4-orange-background;

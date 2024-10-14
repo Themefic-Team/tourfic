@@ -93,6 +93,10 @@ $t4-main-color: #060D1C;
         display: none;
     }
 
+    .tf-archive-details-wrap{
+        position: relative;
+    }
+
     /* Hotel details */
     .tf-archive-details {
         @include flexbox();
