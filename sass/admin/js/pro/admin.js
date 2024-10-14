@@ -339,7 +339,6 @@
                 btn.addClass('tf-btn-loading');
             },
             success: function (response) {
-                const obj = JSON.parse(response);
                 btn.removeClass('tf-btn-loading');
             },
         });
