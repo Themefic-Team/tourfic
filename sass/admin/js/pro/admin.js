@@ -321,8 +321,8 @@
     });
 
     /**
-         * Woocommerce Order Sync to Google Calendar
-         */
+     * Woocommerce Order Sync to Google Calendar
+     */
     $(document).on('click', '.tf-google-calendar-sync', function (e) {
         e.preventDefault();
         let btn = $(this);
@@ -332,6 +332,7 @@
             type: 'POST',
             data: {
                 action: 'tf_google_calendar_sync',
+                type: $(this).attr('data-bookingtype'),
                 _nonce: tf_pro_params.tf_pro_nonce,
             },
             beforeSend: function (response) {

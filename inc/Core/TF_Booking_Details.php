@@ -124,7 +124,7 @@ abstract Class TF_Booking_Details {
                     <h1 class="wp-heading-inline"><?php echo esc_html( $this->booking_args['booking_title'] ); ?> <?php esc_html_e( "Booking Details", "tourfic" ); ?></h1>
                     <div class="tf_header_wrap_button">
                         <div class="tf-google-sync-button">
-                            <button class="tf-google-calendar-sync"><?php esc_html_e("Google Sync", "tourfic"); ?></button>
+                            <button class="tf-google-calendar-sync" data-bookingtype="<?php echo esc_attr($this->booking_args["booking_type"]); ?>"><?php esc_html_e("Google Sync", "tourfic"); ?></button>
                         </div>
                         <div class="tf_booking_views_button">
                             <ul>

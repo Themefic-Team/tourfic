@@ -1351,7 +1351,7 @@ function tf_order_status_changed( $order_id, $old_status, $new_status, $order ) 
 		}
 	}
 
-	$calendar_data = apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, array(), $order->get_items() );
+	apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, array(), $order->get_items() );
 
 	/**
 	 * New Order Pabbly Integration
