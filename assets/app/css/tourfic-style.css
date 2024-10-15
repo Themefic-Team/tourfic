@@ -16412,6 +16412,10 @@ html {
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-bar button.with-charge {
   background-color: #0866C4 !important;
   color: #FFF !important;
+  transition: 0.3s all ease;
+}
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-bar button.with-charge:hover {
+  background: #094c90 !important;
 }
 .tf-car-template-container .tf-car-instraction-popup {
   position: fixed;

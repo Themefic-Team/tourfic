@@ -347,6 +347,10 @@
                     button.with-charge{
                         background-color: #0866C4 !important;
                         color: #FFF !important;
+                        transition: .3s all ease;
+                        &:hover{
+                            background: #094c90 !important;
+                        }
                     }
                 }
             }
