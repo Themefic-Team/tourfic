@@ -4,7 +4,6 @@ namespace Tourfic\Core;
 
 defined( 'ABSPATH' ) || exit;
 
-use PHP_CodeSniffer\Reports\Json;
 use Tourfic\Classes\Helper;
 
 abstract class Enquiry {
@@ -16,6 +15,7 @@ abstract class Enquiry {
 		add_action( 'wp_footer', array($this, 'tourfic_ask_question') );
 		add_action( 'wp_ajax_tf_ask_question', array($this, 'tourfic_ask_question_ajax') );
 		add_action( 'wp_ajax_nopriv_tf_ask_question', array($this, 'tourfic_ask_question_ajax') );
+
 		add_action( 'wp_ajax_tf_enquiry_bulk_action', array($this, 'tf_enquiry_bulk_action_callback') );
 		add_action( 'wp_ajax_tf_enquiry_filter_post', array($this, 'tf_enquiry_filter_post_callback') );
 		add_action( 'wp_ajax_tf_enquiry_reply_email', array($this, 'tf_enquiry_reply_email_callback') );
@@ -23,22 +23,6 @@ abstract class Enquiry {
 	}
 
 	abstract public function add_submenu();
-
-	function enquiry_table($post_type = 'tf_hotel'){
-		global $wpdb;
-		$current_user = wp_get_current_user();
-		$current_user_role = $current_user->roles[0];
-
-		if ( $current_user_role == 'administrator' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-			$enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE post_type = %s ORDER BY id DESC", $post_type ), ARRAY_A );
-		} elseif ( $current_user_role == 'administrator' ) {
-			$enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE post_type = %s ORDER BY id DESC LIMIT 15", $post_type ), ARRAY_A );
-		}
-
-		$enquiry_results = new \Tourfic\Admin\TF_List_Table( $enquiry_result );
-		$enquiry_results->prepare_items();
-		$enquiry_results->display();
-	}
 
 
 	public function enquiry_header_filter_options( array $args) {
@@ -311,6 +295,7 @@ abstract class Enquiry {
 		$reply_user = isset( $_POST['user_name'] ) ? sanitize_text_field( $_POST['user_name'] ) : '';
 		$current_user = wp_get_current_user();
 		$_SESSION["WP"]["userId"] = $current_user->ID;
+		$email_body_setting = !empty( self::tfopt("tf-email-piping")["email_body_type"] ) ? self::tfopt("tf-email-piping")["email_body_type"] : 'text';
 
 		?>
 		<div class="wrap tf_booking_details_wrap tf-enquiry-details-wrap" style="margin-right: 20px;">
@@ -381,7 +366,11 @@ abstract class Enquiry {
 												<?php endif; ?>
 												<span class="tf-single-accordion-dash"><?php esc_html_e('―', 'tourfic') ?></span>
 												<span class="tf-single-accordion-subject">
-												<?php echo $reply["reply_message"] ? ( wp_kses_post( strlen( strip_tags( $reply["reply_message"] ) ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message"] ), 75 ) , 'tourfic' ) : esc_html__( strip_tags( $reply["reply_message"] ) ), 'tourfic' )) : ''; ?>
+													<?php if( $email_body_setting == 'html'): ?>
+														<?php echo $reply["reply_message_html"] ? ( wp_kses_post( strlen( strip_tags( $reply["reply_message_html"] ) ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message_html"] ), 75 ) , 'tourfic' ) : esc_html__( strip_tags( $reply["reply_message_html"] ) ), 'tourfic' )) : ''; ?>
+													<?php elseif( $email_body_setting == 'text'): ?>
+														<?php echo $reply["reply_message_text"] ? ( wp_kses_post( strlen( $reply["reply_message_text"] ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( $reply["reply_message_text"], 75 ) , 'tourfic' ) : esc_html__( $reply["reply_message_text"] ) , 'tourfic' )) : ''; ?>
+													<?php endif; ?>
 												</span>
 											</div>
 											<div class="tf-single-enquiry-accordion-head-right">
@@ -390,7 +379,13 @@ abstract class Enquiry {
 										</div>
 										<div id="tf-single-enquiry-accordion-<?php echo esc_attr($key) ?>" class="tf-single-enquiry-collapse">
 											<div class="tf-single-accordion-body">
-												<?php echo wp_kses_post($reply["reply_message"]) ?>
+												<?php
+													if( $email_body_setting == 'html' ) {
+														echo wp_kses_post($reply["reply_message_html"]);
+													} else if( $email_body_setting == 'text' ) {
+														echo wp_kses_post(wpautop($reply["reply_message_text"]));
+													}
+												?>
 											</div>
 										</div>
 										<hr>
@@ -912,23 +907,6 @@ abstract class Enquiry {
 		wp_die();
 	}
 
-	function tf_get_browser_name( $user_agent ) {
-		if ( preg_match( '/MSIE/i', $user_agent ) && ! preg_match( '/Opera/i', $user_agent ) ) {
-			return 'Internet Explorer';
-		} elseif ( preg_match( '/Firefox/i', $user_agent ) ) {
-			return 'Firefox';
-		} elseif ( preg_match( '/Chrome/i', $user_agent ) ) {
-			return 'Chrome';
-		} elseif ( preg_match( '/Safari/i', $user_agent ) ) {
-			return 'Safari';
-		} elseif ( preg_match( '/Opera/i', $user_agent ) ) {
-			return 'Opera';
-		} elseif ( preg_match( '/Netscape/i', $user_agent ) ) {
-			return 'Netscape';
-		}
-		return 'Unknown';
-	}
-
 	function tf_enquiry_reply_email_callback() {
 
 		$response = array();
@@ -942,7 +920,27 @@ abstract class Enquiry {
 		$reply_mail = isset( $_POST['reply_mail'] ) ? sanitize_text_field( $_POST['reply_mail'] ) : '';
 		$reply_message = isset( $_POST['reply_message'] ) ? wp_kses_post( $_POST['reply_message'] ) : '';
 		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
+		$post_type = !empty( $post_id ) ? get_post_type( $post_id ) : '';
 		$enquiry_id = isset( $_POST['enquiry_id'] ) ? sanitize_text_field( $_POST['enquiry_id'] ) : '';
+
+		$connection_type = !empty( Helper::tfopt("tf-email-piping")["connection_type"]) ? Helper::tfopt("tf-email-piping")["connection_type"] : 'imap';
+		$connection_mail = $enquiry_mail_setting = '';
+		if( $connection_type == 'imap' ) {
+			$connection_mail = !empty( Helper::tfopt("tf-email-piping")["imap-email-address"]) ? Helper::tfopt("tf-email-piping")["imap-email-address"] : '';
+		} elseif( $connection_type == 'gmail' ) {
+			$connection_mail = !empty( Helper::tfopt("tf-email-piping")["gmail-address"]) ? Helper::tfopt("tf-email-piping")["gmail-address"] : '';
+		}
+
+		if( $post_type == 'tf_hotel') {
+			$enquiry_mail_setting = !empty( Helper::tfopt("h-enquiry-email") ) ? Helper::tfopt("h-enquiry-email") : '';
+		} elseif( $post_type == 'tf_tours') {
+			$enquiry_mail_setting = !empty( Helper::tfopt("t-enquiry-email") ) ? Helper::tfopt("t-enquiry-email") : '';
+		} elseif( $post_type == 'tf_apartment') {
+			$enquiry_mail_setting = !empty( Helper::tfopt("a-enquiry-email") ) ? Helper::tfopt("a-enquiry-email") : '';
+		}
+
+		$reply_to_email = !empty( $connection_mail ) ? $connection_mail : ( !empty( $enquiry_mail_setting ) ? $enquiry_mail_setting : get_option( 'admin_email' ) );
+		$replay_data_last_index = !empty( $reply_data ) ? count( $reply_data ) - 1 : 0;
 
 		// author data
 		$author_id   = get_post_field( 'post_author', $post_id );
@@ -971,10 +969,16 @@ abstract class Enquiry {
 			$header_uid = rand( 10000000, 99999999 );
 			$headers = array('Content-Type: text/html; charset=UTF-8');
 			$headers[] = $from;
-
-			$reply_to_email = "ping@msunvi.com";
 			$headers[] = 'Reply-To: ' . $reply_to_email;
 			$headers[] = 'x-tourfic-uid: ' . $header_uid;
+
+			if( !empty( $reply_data[$replay_data_last_index]["message_id"] ) ) {
+				$headers[] = 'In-Reply-To: ' . $reply_data[$replay_data_last_index]["message_id"];
+			}
+
+			if( !empty( $reply_data[$replay_data_last_index]["reference"] ) ) {
+				$headers[] = 'References: ' . $reply_data[$replay_data_last_index]["reference"];
+			}
 
 			$send_mail = wp_mail( $to, $subject, $reply_message, $headers );
 			
@@ -1073,9 +1077,24 @@ abstract class Enquiry {
 		<?php
 		$email_content = ob_get_clean();
 
-		
-
 		return wp_mail( $vendor_mail, $subject, $email_content, $headers );
+	}
+	
+	function tf_get_browser_name( $user_agent ) {
+		if ( preg_match( '/MSIE/i', $user_agent ) && ! preg_match( '/Opera/i', $user_agent ) ) {
+			return 'Internet Explorer';
+		} elseif ( preg_match( '/Firefox/i', $user_agent ) ) {
+			return 'Firefox';
+		} elseif ( preg_match( '/Chrome/i', $user_agent ) ) {
+			return 'Chrome';
+		} elseif ( preg_match( '/Safari/i', $user_agent ) ) {
+			return 'Safari';
+		} elseif ( preg_match( '/Opera/i', $user_agent ) ) {
+			return 'Opera';
+		} elseif ( preg_match( '/Netscape/i', $user_agent ) ) {
+			return 'Netscape';
+		}
+		return 'Unknown';
 	}
 
 }
