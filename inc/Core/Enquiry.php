@@ -965,7 +965,7 @@ abstract class Enquiry {
 		if( !empty( $reply_mail ) && !empty( $reply_message ) ) {
 			$to = $reply_mail;
 			$from = "From: " . get_option( 'blogname' ) . " <" . get_option( 'admin_email' ) . ">\r\n";
-			$subject = esc_html__("Response to Your Enquiry About ", 'tourfic') . esc_html( get_the_title( $post_id ) ) . " - " . esc_html("#".$enquiry_id);
+			$subject = esc_html__("Re: Response to Your Enquiry About ", 'tourfic') . esc_html( get_the_title( $post_id ) ) . " - " . esc_html("#".$enquiry_id);
 			$header_uid = rand( 10000000, 99999999 );
 			$headers = array('Content-Type: text/html; charset=UTF-8');
 			$headers[] = $from;
@@ -976,8 +976,8 @@ abstract class Enquiry {
 				$headers[] = 'In-Reply-To: ' . $reply_data[$replay_data_last_index]["message_id"];
 			}
 
-			if( !empty( $reply_data[$replay_data_last_index]["reference"] ) ) {
-				$headers[] = 'References: ' . $reply_data[$replay_data_last_index]["reference"];
+			if( !empty( $reply_data[$replay_data_last_index]["references"] ) ) {
+				$headers[] = 'References: ' . $reply_data[$replay_data_last_index]["references"];
 			}
 
 			$send_mail = wp_mail( $to, $subject, $reply_message, $headers );
