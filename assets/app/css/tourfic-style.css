@@ -16683,6 +16683,11 @@ html {
   width: 100%;
   object-fit: cover;
 }
+@media only screen and (max-width: 480px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car img {
+    height: 240px;
+  }
+}
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews {
   position: absolute;
   top: 16px;
@@ -16717,23 +16722,6 @@ html {
   position: absolute;
   right: 16px;
   top: 16px;
-}
-@media only screen and (max-width: 1024px) {
-  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share {
-    margin-top: 90px;
-  }
-}
-@media only screen and (max-width: 767.98px) {
-  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share {
-    margin-top: 64px;
-    padding-right: 16px;
-  }
-}
-@media only screen and (max-width: 480px) {
-  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share {
-    margin-top: 16px;
-    padding-right: 16px;
-  }
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share a.tf-share-toggle,
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share a.tf-wishlist {
@@ -16851,6 +16839,11 @@ html {
   width: calc(25% - 12px);
   display: none;
   height: 122px;
+}
+@media only screen and (max-width: 480px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a {
+    height: 90px;
+  }
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a img {
   border-radius: 8px;

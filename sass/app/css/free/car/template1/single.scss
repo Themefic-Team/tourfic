@@ -171,6 +171,9 @@
                         height: 338px;
                         width: 100%;
                         object-fit: cover;
+                        @media #{$max480}{
+                            height: 240px;
+                        }
                     }
                     .tf-featured-reviews{
                         position: absolute;
@@ -206,17 +209,6 @@
                         position: absolute;
                         right: 16px;
                         top: 16px;
-                        @media #{$max1024}{
-                            margin-top: 90px;
-                        }
-                        @media #{$max767}{
-                            margin-top: 64px;
-                            padding-right: 16px;
-                        } 
-                        @media #{$max480}{
-                            margin-top: 16px;
-                            padding-right: 16px;
-                        }
                         
                         a.tf-share-toggle,
                         a.tf-wishlist {
@@ -331,6 +323,9 @@
                         width: calc(25% - 12px);
                         display: none;
                         height: 122px;
+                        @media #{$max480}{
+                            height: 90px;
+                        }
                         img{
                             border-radius: 8px;
                             object-fit: cover;
