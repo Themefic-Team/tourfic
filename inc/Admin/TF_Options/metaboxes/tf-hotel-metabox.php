@@ -355,6 +355,19 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'label'        => __( 'Manage your hotel rooms', 'tourfic' ),
 				),
 				array(
+					'id'          => 'tf_rooms',
+					'type'        => 'select2',
+					'placeholder' => __( 'Select Rooms', 'tourfic' ),
+					'options'     => 'posts',
+					'multiple'   => true,
+					'query_args'  => array(
+						'post_type'      => 'tf_room',
+						'posts_per_page' => - 1,
+					),
+					'inline_add_new' => true,
+					'inline_delete' => true
+				),
+				array(
 					'id'    => 'tf-pro-notice',
 					'type'  => 'notice',
 					'class' => 'tf-pro-notice',

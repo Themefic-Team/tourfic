@@ -34,7 +34,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 					$data = $this->value;
 				}
 				
-				$max_index = is_array($data) ? max(array_keys($data)) : 0;
+				$max_index = ! empty($data) && is_array($data) ? max(array_keys($data)) : 0;
 			}
 			?>
             <div id="tf-repeater-1" class="tf-repeater <?php echo esc_attr($this->field['id']);?>" data-max-index="<?php echo esc_attr($max_index); ?>">
