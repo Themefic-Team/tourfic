@@ -3572,7 +3572,7 @@ Steps
 .tf-field-select2 .tf-popup-box .tf-add-category-box {
   display: inline-block;
   z-index: 1;
-  min-width: 300px;
+  min-width: 400px;
   min-height: 160px;
   border-color: #aaaaaa;
   box-shadow: 0 5px 30px -5px rgba(0, 0, 0, 0.25);
@@ -3637,6 +3637,12 @@ Steps
   height: 35px;
   border: 1px solid #ddd;
   border-radius: 5px;
+}
+
+.tf-field-select2 .tf-popup-box .tf-add-category-box .tf-admin-btn.tf-btn-secondary {
+  padding: 5px 25px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
 }
 
 .tf-field.tf-field-select2 .tf-fieldset span.select2:nth-child(3) {

@@ -912,10 +912,12 @@ class Migrator {
 					$meta    = get_post_meta( $post_id, 'tf_hotels_opt', true );
 	
 					$rooms = Room::get_hotel_rooms( $post_id );
-					$room_ids = array_column($rooms, 'ID');
-					$meta['tf_rooms'] = $room_ids;
+					if(!empty($rooms)){
+						$room_ids = array_column($rooms, 'ID');
+						$meta['tf_rooms'] = $room_ids;
 
-					update_post_meta($post_id, 'tf_hotels_opt', $meta);
+						update_post_meta($post_id, 'tf_hotels_opt', $meta);
+					}
 				}
 			}
 

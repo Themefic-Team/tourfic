@@ -33,9 +33,6 @@ if ( ! class_exists( 'TF_select2' ) ) {
 			if(!empty($args['query_args']) && $args['options'] == 'posts'){
 				$posts = get_posts($args['query_args']);
 				$args['options'] = array();
-				if(!empty($placeholder)){
-					$args['options'][] = $placeholder;
-				}
 				foreach($posts as $post){
 					$args['options'][$post->ID] = (empty($post->post_title)) ? 'No title ('.$post->ID.')' : $post->post_title;
 				}
@@ -59,14 +56,19 @@ if ( ! class_exists( 'TF_select2' ) ) {
 			echo '<div class="tf-select-box-option"><select name="' . esc_attr($field_name) . '" id="' . esc_attr($tf_select2_unique_id) . '" class=" tf-select-two '.esc_attr($parent_class).' " data-delete="' . esc_attr( $inline_delete ) . '" data-placeholder="' . esc_attr( $placeholder ) . '" ' . esc_attr($multiple) . ' '. wp_kses_post($this->field_attributes()) .'>';
 			if( is_array( $args['options'] )) {
 				foreach ( $args['options'] as $key => $value ) {
+					$data_edit = $disable = '';
 					if(!empty($this->field['multiple']) && is_array( $this->value ) && in_array( $key, $this->value )){
 						$selected = 'selected';
 					} else {
 						$selected = selected( $this->value, $key, false );
 					}
+					if($this->field['options'] == 'posts' && $this->field['id'] == 'tf_hotel' && $placeholder){
+						echo '<option value="">' . esc_html( $placeholder ) . '</option>';
+					}
 					if($this->field['options'] == 'posts' && $this->field['id'] == 'tf_rooms'){
+						$hotel_id = get_the_ID();
 						$room_meta = get_post_meta($key, 'tf_room_opt', true);
-						if(! empty( $room_meta['tf_hotel'] )){
+						if(! empty( $room_meta['tf_hotel'] ) && $room_meta['tf_hotel'] != $hotel_id){
 							$disable = 'disabled';
 						}
 						$data_edit = 'data-edit-url='. esc_url( get_edit_post_link( $key ) ). '';
@@ -75,13 +77,13 @@ if ( ! class_exists( 'TF_select2' ) ) {
 				}
 			}
 			echo '</select>';
-			if(!empty($args['query_args']) && $args['inline_add_new']){
+			if(!empty($args['query_args']) && isset($args['inline_add_new']) && $args['inline_add_new']){
 				echo '<span class="tf-add-category" data-value=""><i class="fa-solid fa-plus"></i></span>';
 			}
 			echo '</div>';
 			
 			//category popup
-			if(!empty($args['query_args']) && $this->field['options'] == 'terms' && $args['inline_add_new']){
+			if(!empty($args['query_args']) && $this->field['options'] == 'terms' && isset($args['inline_add_new']) && $args['inline_add_new']){
 				echo '<div class="tf-popup-box">
 					<div class="tf-add-category-box">
 					<div class="tf-add-category-box-header">
@@ -121,7 +123,7 @@ if ( ! class_exists( 'TF_select2' ) ) {
 			}
 
 			//post popup
-			if(!empty($args['query_args']) && $this->field['options'] == 'posts' && $args['inline_add_new']){
+			if(!empty($args['query_args']) && $this->field['options'] == 'posts' && isset($args['inline_add_new']) && $args['inline_add_new']){
 				$post_type_key = !empty($args['query_args']['post_type']) ? $args['query_args']['post_type'] : '';
 				if(!empty($post_type_key)){
 					$post_type_object = get_post_type_object($post_type_key);
@@ -144,10 +146,10 @@ if ( ! class_exists( 'TF_select2' ) ) {
 						<div class="tf-add-category-box-content">
 							<div class="tf-single-category-box">
 								<label><?php echo esc_html('Title', 'tourfic'); ?></label>
-								<input type="text" class="post_title">
+								<input type="text" class="post_title" placeholder="<?php echo esc_attr__('Add title', 'tourfic'); ?>">
 							</div>
 
-							<button class="tf-admin-btn tf-btn-secondary tf-add-new-post-button">Add</button>
+							<button class="tf-admin-btn tf-btn-secondary tf-add-new-post-button"><?php echo esc_html__('Add New', 'tourfic'); ?></button>
 						</div>
 					</div>
 				</div>

@@ -35,6 +35,7 @@ class Hotel {
 		add_action( 'wp_ajax_nopriv_tf_hotel_search', array( $this, 'tf_hotel_search_ajax_callback' ) );
 		add_action( 'tf_hotel_features_filter', array( $this, 'tf_hotel_filter_by_features' ), 10, 1 );
 		add_action( 'wp_after_insert_post', array( $this, 'tf_hotel_features_assign_taxonomies' ), 100, 3 );
+		add_action( 'wp_after_insert_post', array( $this, 'tf_room_assign_to_hotel' ), 100, 3 );
 	}
 
 	/**
@@ -3623,8 +3624,7 @@ class Hotel {
 	}
 
 	/**
-	 * Assign taxonomy(hotel_feature) from the single post metabox
-	 * to a Tour when updated or published
+	 * Assign taxonomy(hotel_feature) from the single post metabox when a hour updated or published
 	 * @return array();
 	 * @author Foysal
 	 * @since 2.11.25
@@ -3640,6 +3640,42 @@ class Hotel {
 		if ( ! empty( $room_features ) ) {
 			$room_features = array_map( 'intval', $room_features );
 			wp_set_object_terms( $room_hotel, $room_features, 'hotel_feature' );
+		}
+	}
+
+	/**
+	 * Assign room to a hotel when updated or published
+	 * @return array();
+	 * @author Foysal
+	 * @since 2.11.25
+	 */
+	function tf_room_assign_to_hotel( $post_id, $post, $old_status ) {
+		if ( 'tf_hotel' !== $post->post_type ) {
+			return;
+		}
+
+		$hotel_meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
+		$rooms    	= ! empty( $hotel_meta['tf_rooms'] ) ? $hotel_meta['tf_rooms'] : [];
+		$assigned_rooms = Room::get_hotel_rooms( $post_id );
+		$assigned_room_ids = array_column($assigned_rooms, 'ID');
+		$removed_rooms = array_diff($assigned_room_ids, $rooms);
+		
+		if(!empty($rooms)){
+			foreach($rooms as $room_id){
+				$room_meta   = get_post_meta( intval($room_id), 'tf_room_opt', true );
+				$room_meta = is_array($room_meta) ? $room_meta : [];
+				$room_meta['tf_hotel'] = $post_id;
+
+				update_post_meta($room_id, 'tf_room_opt', $room_meta);
+			}
+			foreach($removed_rooms as $room_id){
+				$room_meta   = get_post_meta( $room_id, 'tf_room_opt', true );
+				if($post_id == $room_meta['tf_hotel']){
+					$room_meta['tf_hotel'] = '';
+				}
+
+				update_post_meta($room_id, 'tf_room_opt', $room_meta);
+			}
 		}
 	}
 
