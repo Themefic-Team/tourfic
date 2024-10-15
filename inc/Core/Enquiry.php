@@ -295,7 +295,7 @@ abstract class Enquiry {
 		$reply_user = isset( $_POST['user_name'] ) ? sanitize_text_field( $_POST['user_name'] ) : '';
 		$current_user = wp_get_current_user();
 		$_SESSION["WP"]["userId"] = $current_user->ID;
-		$email_body_setting = !empty( self::tfopt("tf-email-piping")["email_body_type"] ) ? self::tfopt("tf-email-piping")["email_body_type"] : 'text';
+		$email_body_setting = !empty( Helper::tfopt("tf-email-piping")["email_body_type"] ) ? Helper::tfopt("tf-email-piping")["email_body_type"] : 'text';
 
 		?>
 		<div class="wrap tf_booking_details_wrap tf-enquiry-details-wrap" style="margin-right: 20px;">
@@ -367,9 +367,9 @@ abstract class Enquiry {
 												<span class="tf-single-accordion-dash"><?php esc_html_e('―', 'tourfic') ?></span>
 												<span class="tf-single-accordion-subject">
 													<?php if( $email_body_setting == 'html'): ?>
-														<?php echo $reply["reply_message_html"] ? ( wp_kses_post( strlen( strip_tags( $reply["reply_message_html"] ) ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message_html"] ), 75 ) , 'tourfic' ) : esc_html__( strip_tags( $reply["reply_message_html"] ) ), 'tourfic' )) : ''; ?>
+														<?php echo $reply["reply_message_html"] ? ( wp_kses_post( strlen( strip_tags( $reply["reply_message_html"] ) ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message_html"] ), 75 ) , 'tourfic' ) : esc_html__( strip_tags( $reply["reply_message_html"] ) ), 'tourfic' )) : esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message"] ), 75 ), "tourfic"); ?>
 													<?php elseif( $email_body_setting == 'text'): ?>
-														<?php echo $reply["reply_message_text"] ? ( wp_kses_post( strlen( $reply["reply_message_text"] ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( $reply["reply_message_text"], 75 ) , 'tourfic' ) : esc_html__( $reply["reply_message_text"] ) , 'tourfic' )) : ''; ?>
+														<?php echo $reply["reply_message_text"] ? ( wp_kses_post( strlen( $reply["reply_message_text"] ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( $reply["reply_message_text"], 75 ) , 'tourfic' ) : esc_html__( $reply["reply_message_text"] ) , 'tourfic' )) :  esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message"] ), 75 ), "tourfic"); ?>
 													<?php endif; ?>
 												</span>
 											</div>
@@ -381,9 +381,9 @@ abstract class Enquiry {
 											<div class="tf-single-accordion-body">
 												<?php
 													if( $email_body_setting == 'html' ) {
-														echo wp_kses_post($reply["reply_message_html"]);
+														echo !empty($reply["reply_message_html"]) ? wp_kses_post($reply["reply_message_html"]) : $reply["reply_message"];
 													} else if( $email_body_setting == 'text' ) {
-														echo wp_kses_post(wpautop($reply["reply_message_text"]));
+														echo !empty($reply["reply_message_text"]) ? wp_kses_post(wpautop($reply["reply_message_text"])) : $reply["reply_message"];
 													}
 												?>
 											</div>
