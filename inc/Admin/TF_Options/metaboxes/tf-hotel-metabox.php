@@ -349,14 +349,15 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'label' => __( 'Section Title', 'tourfic' ),
 					'default' => __( "Available Rooms", 'tourfic' ),
 				),
-				array(
-					'id'           => 'room',
-					'type'         => 'hotel_room',
-					'label'        => __( 'Manage your hotel rooms', 'tourfic' ),
-				),
+				// array(
+				// 	'id'           => 'room',
+				// 	'type'         => 'hotel_room',
+				// 	'label'        => __( 'Manage your hotel rooms', 'tourfic' ),
+				// ),
 				array(
 					'id'          => 'tf_rooms',
 					'type'        => 'select2',
+					'label'        => __( 'Manage your hotel rooms', 'tourfic' ),
 					'placeholder' => __( 'Select Rooms', 'tourfic' ),
 					'options'     => 'posts',
 					'multiple'   => true,

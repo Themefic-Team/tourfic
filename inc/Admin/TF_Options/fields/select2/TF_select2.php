@@ -1,5 +1,8 @@
 <?php
 // don't load directly
+
+use Mpdf\Tag\Em;
+
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'TF_select2' ) ) {
@@ -30,6 +33,9 @@ if ( ! class_exists( 'TF_select2' ) ) {
 			if(!empty($args['query_args']) && $args['options'] == 'posts'){
 				$posts = get_posts($args['query_args']);
 				$args['options'] = array();
+				if(!empty($placeholder)){
+					$args['options'][] = $placeholder;
+				}
 				foreach($posts as $post){
 					$args['options'][$post->ID] = (empty($post->post_title)) ? 'No title ('.$post->ID.')' : $post->post_title;
 				}
@@ -59,9 +65,13 @@ if ( ! class_exists( 'TF_select2' ) ) {
 						$selected = selected( $this->value, $key, false );
 					}
 					if($this->field['options'] == 'posts' && $this->field['id'] == 'tf_rooms'){
-						$data_edit = 'data-edit-url="'. get_edit_post_link( $key ). '"';
+						$room_meta = get_post_meta($key, 'tf_room_opt', true);
+						if(! empty( $room_meta['tf_hotel'] )){
+							$disable = 'disabled';
+						}
+						$data_edit = 'data-edit-url='. esc_url( get_edit_post_link( $key ) ). '';
 					}
-					echo '<option value="' . esc_attr( $key ) . '" ' . esc_attr($selected) . ' '.esc_attr($data_edit).'>' . esc_html( $value ) . '</option>';
+					echo '<option value="' . esc_attr( $key ) . '" ' . esc_attr($selected) . ' '.esc_attr($data_edit).' '.esc_attr($disable).'>' . esc_html( $value ) . '</option>';
 				}
 			}
 			echo '</select>';
