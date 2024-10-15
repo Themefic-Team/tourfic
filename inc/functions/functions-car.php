@@ -698,3 +698,8 @@ function tf_car_booking_pupup_callback() {
 <?php
 	wp_die();
 }
+
+add_action("admin_init", "tf_remove_sidebar_category_meta_box");
+function tf_remove_sidebar_category_meta_box() {
+	remove_meta_box( 'carrental_branddiv', array( 'tf_carrental' ), 'normal' );
+}
