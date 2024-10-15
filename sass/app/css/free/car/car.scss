@@ -325,6 +325,10 @@
                             font-weight: 700;
                             line-height: 150%; /* 24px */
                             cursor: pointer;
+                            transition: .3s all ease;
+                            &:hover{
+                                background: #094c90 !important;
+                            }
                         }
                     }
                 }

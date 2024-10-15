@@ -16392,6 +16392,10 @@ html {
   font-weight: 700;
   line-height: 150%; /* 24px */
   cursor: pointer;
+  transition: 0.3s all ease;
+}
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-booking-submission button:hover {
+  background: #094c90 !important;
 }
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-bar {
   margin-top: 24px;
