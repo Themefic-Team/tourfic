@@ -326,7 +326,7 @@
                         @media #{$max480}{
                             height: 90px;
                         }
-                        
+
                         img{
                             border-radius: 8px;
                             object-fit: cover;
@@ -900,6 +900,7 @@
                                 overflow: auto;
                                 border-radius: 4px;
                                 background: #EEF2F6;
+                                box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.20);
                                 padding: 2px;
 
                                 scrollbar-width: thin;
@@ -927,8 +928,12 @@
                                     color: #27333F;
                                     font-size: 16px;
                                     margin-bottom: 2px;
+                                    transition: .3s all ease;
                                     &:last-child{
                                         margin-bottom: 0px;
+                                    }
+                                    &:hover{
+                                        background-color: #F8FAFC;
                                     }
                                 }
                             }
