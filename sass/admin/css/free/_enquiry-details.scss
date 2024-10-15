@@ -281,12 +281,12 @@
                 margin-top: 24px;
 
                 .tf-single-enquiry-accordion-item {
-                    cursor: pointer;
-                    user-select: none;
                     .tf-single-enquiry-accordion-head {
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
+                        cursor: pointer;
+                        user-select: none;
 
                         .tf-single-enquiry-accordion-head-left {
                             font-family: inherit;

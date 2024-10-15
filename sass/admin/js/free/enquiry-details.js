@@ -212,9 +212,10 @@
 
         $(".tf-single-enquiry-accordion-item.is-active").children(".tf-single-accordion-body").slideDown();
 
-        $(".tf-single-enquiry-accordion-item").on("click", function() {
-            $(this).siblings(".tf-single-enquiry-accordion-item").removeClass("is-active").find(".tf-single-accordion-body").slideUp();
-            $(this).toggleClass("is-active").find(".tf-single-accordion-body").slideToggle("ease-out");
+        $(".tf-single-enquiry-accordion-head").on("click", function() {
+            let $this = $(this).parent();
+            $this.siblings(".tf-single-enquiry-accordion-item").removeClass("is-active").find(".tf-single-accordion-body").slideUp();
+            $this.toggleClass("is-active").find(".tf-single-accordion-body").slideToggle("ease-out");
 
         });
 
