@@ -20,9 +20,87 @@ abstract class Enquiry {
 		add_action( 'wp_ajax_tf_enquiry_filter_post', array($this, 'tf_enquiry_filter_post_callback') );
 		add_action( 'wp_ajax_tf_enquiry_reply_email', array($this, 'tf_enquiry_reply_email_callback') );
 		add_action( 'wp_ajax_tf_enquiry_filter_mail', array($this, 'tf_enquiry_filter_mail_callback') );
-	}
+
+		add_filter( 'cron_schedules', array($this, 'tf_enquiry_response_schedule') );
+		add_action( 'init', array($this, 'tf_enquiry_response_schedule_event') );
+		add_action( 'tf_enquiry_response_schedule', array($this, 'tf_enquiry_response_schedule_callback') );
+}
 
 	abstract public function add_submenu();
+
+	function tf_enquiry_response_schedule( $schedules ) {
+		$interval = 60;
+
+		$schedules['tf_enquiry_response_schedule'] = array(
+            'interval' => $interval,
+            'display' => esc_attr__( 'Tourfic Response Scheduler', 'tourfic' )
+        );
+
+		return $schedules;
+
+	}
+
+	function tf_enquiry_response_schedule_event() {
+		if ( ! wp_next_scheduled( 'tf_enquiry_response_schedule' ) ) {
+            wp_schedule_event( time(), 'tf_enquiry_response_schedule', 'tf_enquiry_response_schedule' );
+        }
+	}
+
+	function tf_enquiry_response_schedule_callback() {
+
+		if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		} else {
+			self::tfep_enquiry_update_response_unschedule();
+		}
+
+
+		if( empty( get_option("tfep_enquiry_update_response") )) {
+			return;
+		}
+
+		global $wpdb;
+
+		$response_data = get_option("tfep_enquiry_update_response");
+
+		$enquiry_id = $response_data["enquiry_id"];
+		$enquiry_details = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data where id= $enquiry_id", ARRAY_A );
+		$enquiry_details = !empty($enquiry_details) ? $enquiry_details[0] : array();
+
+		if( $enquiry_details["author_roles"] != "tf_vendor" ) {
+			return;
+		}
+
+		if( $enquiry_details["enquiry_status"] == "unread" && $enquiry_details["enquiry_status"] == "read" ) {
+			return;
+		}
+
+		if( empty( $enquiry_details["reply_data"] ) ) {
+			return;
+		}
+
+		$reply_data = json_decode( $enquiry_details["reply_data"], true );
+
+		$last_reply = end($reply_data);
+
+		$vendor_mail = get_the_author_meta("user_email", $enquiry_details["author_id"]);
+		$post_id = $enquiry_details["post_id"];
+		$name = $last_reply["name"];
+		$body = $last_reply["reply_message"];
+
+		if( $response_data["notified"] == "false") {
+			$reply_to_vendor = self::tf_vendor_default_enquiry_mail($vendor_mail, $post_id, $name, $body, $enquiry_id, 'reply');
+			if( $reply_to_vendor ) {
+				update_option("tfep_enquiry_update_response", '');
+			}
+		}
+	}
+
+	public static function tfep_enquiry_update_response_unschedule() {
+        $timestamp = wp_next_scheduled( 'tf_enquiry_response_schedule' );
+        if( $timestamp ) {
+            wp_unschedule_event( $timestamp, 'tf_enquiry_response_schedule' );
+        }
+    }
 
 
 	public function enquiry_header_filter_options( array $args) {
@@ -1069,7 +1147,7 @@ abstract class Enquiry {
 		wp_die();
 	}
 
-	static function tf_vendor_default_enquiry_mail( $vendor_mail, $post_id, $name, $body, $last_id, $type = "new" ) {
+	static function tf_vendor_default_enquiry_mail( $vendor_mail, $post_id, $name, $body, $last_id = '', $type = "new" ) {
 
 		$author_name = get_the_author_meta('display_name', get_post_field('post_author', $post_id));
 		$post_name = get_the_title( $post_id );
