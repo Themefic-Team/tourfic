@@ -6395,6 +6395,27 @@ a.tf-import-btn, a.tf-export-btn {
   line-height: 1.12;
 }
 
+.tf-enquiry-table .pro-notice-row {
+  border-top: none;
+}
+
+.tf-enquiry-table .pro-notice-row .tf-pro-notice {
+  padding: 0px 0px;
+}
+
+.tf-enquiry-table .pro-notice-row .tf-pro-notice .tf-fieldset {
+  margin-top: 0px;
+}
+
+.tf-enquiry-table .pro-notice-row .tf-pro-notice .tf-field-notice-inner {
+  justify-content: center;
+}
+
+.tf-enquiry-table .pro-notice-row .tf-pro-notice .tf-field-notice-inner a {
+  text-decoration: underline;
+  color: #295BFF;
+}
+
 .tf-enquiry-single-header-details {
   padding: 16px 24px;
   background-color: #fff;

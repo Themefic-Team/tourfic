@@ -89,10 +89,12 @@ abstract class Enquiry {
 							<select class="tf-tour-filter-options tf-filter-mail-option-enquiry">
 									<option value=""><?php esc_html_e( "Filters", "tourfic" ); ?></option>
 									<option value="unread"><?php esc_html_e( "Unread", "tourfic" ); ?></option>
-									<option value="replied"><?php esc_html_e( "Replied", "tourfic" ); ?></option>
-									<option value="responded"><?php esc_html_e( "Responded", "tourfic" ); ?></option>
-									<option value="not-replied"><?php esc_html_e( "Not Replied", "tourfic" ); ?></option>
-									<option value="not-responded"><?php esc_html_e( "Not Responded", "tourfic" ); ?></option>
+									<?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
+										<option value="replied"><?php esc_html_e( "Replied", "tourfic" ); ?></option>
+										<option value="responded"><?php esc_html_e( "Responded", "tourfic" ); ?></option>
+										<option value="not-replied"><?php esc_html_e( "Not Replied", "tourfic" ); ?></option>
+										<option value="not-responded"><?php esc_html_e( "Not Responded", "tourfic" ); ?></option>
+									<?php endif; ?>
 								</select>
 							</div>
 						</div>
@@ -208,6 +210,22 @@ abstract class Enquiry {
 									<a href="https://tourfic.com/" target="_blank">
 										<h3 class="tf-admin-btn tf-btn-secondary" style="color:#fff;margin: 15px 0;"><?php esc_html_e( 'Upgrade to Pro Version to See More', 'tourfic' ); ?></h3>
 									</a>
+								</td>
+							</tr>
+							<tr class="pro-row pro-notice-row" style="text-align: center; background-color: #ededf8">
+								<td colspan="8" style="text-align: center;">
+									<div class="tf-field tf-field-notice tf-pro-notice " style="width:100%;">
+										<div class="tf-fieldset">
+											<div class="tf-field-notice-inner tf-notice-info">
+												<div class="tf-field-notice-icon">
+													<i class="ri-information-fill"></i>
+												</div>
+												<div class="tf-field-notice-content has-content">
+												<?php echo wp_kses_post(sprintf(__("We're offering some extra filter features like %1s replied %2s, %1s not replied %2s, %1s not responded %2s, and %1s not responded %2s in our pro plan.", 'tourfic'), '<b>', '</b>', '<b>', '</b>', '<b>', '</b>', '<b>', '</b>')) ?> <a href="https://themefic.com/tourfic/pricing" target="_blank"> <?php echo esc_html__("Upgrade to our pro package today to take advantage of these fantastic options!", 'tourfic') ?></a>                
+												</div>
+											</div>
+										</div>
+									</div>
 								</td>
 							</tr>
 						<?php break;}
@@ -339,104 +357,119 @@ abstract class Enquiry {
 							</div>
 						</div>
 					</div> <!-- Enquiry mail Details Wrapper - End -->
-					<?php if( count($reply_data) == 0 ): ?>
-						<div class="tf-single-enquiry-reply-mail-button">
-							<span> <?php esc_html_e( "Reply to Email", 'tourfic') ?> </span>
-							<i class="ri-mail-line"></i>
-						</div>
-					<?php endif; ?>
-					<?php $display = count($reply_data) > 0 ? '' : 'display:none;' ?>
-					<div class="tf-enquiry-details tf-single-enquiry-reply-wrapper" style="<?php echo esc_attr($display); ?>"> <!-- Enquiry mail Reply Wrapper - Start -->
-						<div class="tf-enquiry-details-single-heading">
-							<h2><?php esc_html_e('To:', 'tourfic') ; ?> <span class="tf-single-enquiry-reply-mail"> <?php esc_html_e( $data["uemail"]); ?> </span></h2>
-						</div>
-						<div class="tf-single-enquiry-accordion">
-							<?php if( !empty($reply_data) && is_array($reply_data)): ?>
-								<?php foreach($reply_data as $key => $reply): ?>
-									<div class="tf-single-enquiry-accordion-item">
-										<input type="hidden" class="tf-single-enquiry-accordion-id" value="<?php echo esc_attr($key) ?>">
-										<div class="tf-single-enquiry-accordion-head">
-											<div class="tf-single-enquiry-accordion-head-left">
-												<?php if( !empty( $reply["type"]) && "response" == $reply["type"]) : ?>
-													<i class="ri-reply-all-line tf-enquiry-response-user"></i>
-													<?php echo !empty( $reply["reply_user"]) ? $reply["reply_user"] : esc_html__("User", "tourfic"); ?>
-												<?php else: ?>
-													<i class="ri-reply-all-line"></i>
-													<?php esc_html_e("You", 'tourfic') ?>
-												<?php endif; ?>
-												<span class="tf-single-accordion-dash"><?php esc_html_e('―', 'tourfic') ?></span>
-												<span class="tf-single-accordion-subject">
-													<?php if( $email_body_setting == 'html'): ?>
-														<?php echo $reply["reply_message_html"] ? ( wp_kses_post( strlen( strip_tags( $reply["reply_message_html"] ) ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message_html"] ), 75 ) , 'tourfic' ) : esc_html__( strip_tags( $reply["reply_message_html"] ) ), 'tourfic' )) : esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message"] ), 75 ), "tourfic"); ?>
-													<?php elseif( $email_body_setting == 'text'): ?>
-														<?php echo $reply["reply_message_text"] ? ( wp_kses_post( strlen( $reply["reply_message_text"] ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( $reply["reply_message_text"], 75 ) , 'tourfic' ) : esc_html__( $reply["reply_message_text"] ) , 'tourfic' )) :  esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message"] ), 75 ), "tourfic"); ?>
+					<?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
+						<?php if( count($reply_data) == 0 ): ?>
+							<div class="tf-single-enquiry-reply-mail-button">
+								<span> <?php esc_html_e( "Reply to Email", 'tourfic') ?> </span>
+								<i class="ri-mail-line"></i>
+							</div>
+						<?php endif; ?>
+						<?php $display = count($reply_data) > 0 ? '' : 'display:none;' ?>
+						<div class="tf-enquiry-details tf-single-enquiry-reply-wrapper" style="<?php echo esc_attr($display); ?>"> <!-- Enquiry mail Reply Wrapper - Start -->
+							<div class="tf-enquiry-details-single-heading">
+								<h2><?php esc_html_e('To:', 'tourfic') ; ?> <span class="tf-single-enquiry-reply-mail"> <?php esc_html_e( $data["uemail"]); ?> </span></h2>
+							</div>
+							<div class="tf-single-enquiry-accordion">
+								<?php if( !empty($reply_data) && is_array($reply_data)): ?>
+									<?php foreach($reply_data as $key => $reply): ?>
+										<div class="tf-single-enquiry-accordion-item">
+											<input type="hidden" class="tf-single-enquiry-accordion-id" value="<?php echo esc_attr($key) ?>">
+											<div class="tf-single-enquiry-accordion-head">
+												<div class="tf-single-enquiry-accordion-head-left">
+													<?php if( !empty( $reply["type"]) && "response" == $reply["type"]) : ?>
+														<i class="ri-reply-all-line tf-enquiry-response-user"></i>
+														<?php echo !empty( $reply["reply_user"]) ? $reply["reply_user"] : esc_html__("User", "tourfic"); ?>
+													<?php else: ?>
+														<i class="ri-reply-all-line"></i>
+														<?php esc_html_e("You", 'tourfic') ?>
 													<?php endif; ?>
-												</span>
+													<span class="tf-single-accordion-dash"><?php esc_html_e('―', 'tourfic') ?></span>
+													<span class="tf-single-accordion-subject">
+														<?php if( $email_body_setting == 'html'): ?>
+															<?php echo $reply["reply_message_html"] ? ( wp_kses_post( strlen( strip_tags( $reply["reply_message_html"] ) ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message_html"] ), 75 ) , 'tourfic' ) : esc_html__( strip_tags( $reply["reply_message_html"] ) ), 'tourfic' )) : esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message"] ), 75 ), "tourfic"); ?>
+														<?php elseif( $email_body_setting == 'text'): ?>
+															<?php echo $reply["reply_message_text"] ? ( wp_kses_post( strlen( $reply["reply_message_text"] ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( $reply["reply_message_text"], 75 ) , 'tourfic' ) : esc_html__( $reply["reply_message_text"] ) , 'tourfic' )) :  esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message"] ), 75 ), "tourfic"); ?>
+														<?php endif; ?>
+													</span>
+												</div>
+												<div class="tf-single-enquiry-accordion-head-right">
+													<?php esc_html_e( date( "M d, Y h:i:s A", strtotime($reply["submit_time"])) ); ?>
+												</div>
 											</div>
-											<div class="tf-single-enquiry-accordion-head-right">
-												<?php esc_html_e( date( "M d, Y h:i:s A", strtotime($reply["submit_time"])) ); ?>
+											<div id="tf-single-enquiry-accordion-<?php echo esc_attr($key) ?>" class="tf-single-enquiry-collapse">
+												<div class="tf-single-accordion-body">
+													<?php
+														if( $email_body_setting == 'html' ) {
+															echo !empty($reply["reply_message_html"]) ? wp_kses_post($reply["reply_message_html"]) : $reply["reply_message"];
+														} else if( $email_body_setting == 'text' ) {
+															echo !empty($reply["reply_message_text"]) ? wp_kses_post(wpautop($reply["reply_message_text"])) : $reply["reply_message"];
+														}
+													?>
+												</div>
 											</div>
+											<hr>
 										</div>
-										<div id="tf-single-enquiry-accordion-<?php echo esc_attr($key) ?>" class="tf-single-enquiry-collapse">
-											<div class="tf-single-accordion-body">
-												<?php
-													if( $email_body_setting == 'html' ) {
-														echo !empty($reply["reply_message_html"]) ? wp_kses_post($reply["reply_message_html"]) : $reply["reply_message"];
-													} else if( $email_body_setting == 'text' ) {
-														echo !empty($reply["reply_message_text"]) ? wp_kses_post(wpautop($reply["reply_message_text"])) : $reply["reply_message"];
-													}
-												?>
-											</div>
-										</div>
-										<hr>
+									<?php endforeach; ?>
+								<?php endif; ?>
+							</div>
+							<div class="tf-single-enquiry-details-content">
+								<?php if( count($reply_data) > 0 ): ?>
+									<div class="tf-single-enquiry-reply-another-mail-button">
+										<span> <?php esc_html_e( "Send Another Mail", 'tourfic') ?> </span>
+										<i class="ri-mail-line"></i>
 									</div>
-								<?php endforeach; ?>
-							<?php endif; ?>
-						</div>
-						<div class="tf-single-enquiry-details-content">
-							<?php if( count($reply_data) > 0 ): ?>
-								<div class="tf-single-enquiry-reply-another-mail-button">
-									<span> <?php esc_html_e( "Send Another Mail", 'tourfic') ?> </span>
-									<i class="ri-mail-line"></i>
-								</div>
-							<?php endif; ?>
-							<form id="tf-single-enquiry-reply-form" method="post" style="<?php echo count($reply_data) > 0 ? 'display:none;' : '' ?>" action>
-								<?php 
-									$editor_id = 'tf-enquiry-reply-editor';
-									$settings = array(
-										'textarea_name' => 'my_custom_textarea_name',
-										'textarea_rows' => 20,
-										'media_buttons' => false,
-										'wpautop' => true,
-										'teeny' => true,  
-									);
+								<?php endif; ?>
+								<form id="tf-single-enquiry-reply-form" method="post" style="<?php echo count($reply_data) > 0 ? 'display:none;' : '' ?>" action>
+									<?php 
+										$editor_id = 'tf-enquiry-reply-editor';
+										$settings = array(
+											'textarea_name' => 'my_custom_textarea_name',
+											'textarea_rows' => 20,
+											'media_buttons' => false,
+											'wpautop' => true,
+											'teeny' => true,  
+										);
 
-									wp_editor('', $editor_id, $settings);
-								?>
+										wp_editor('', $editor_id, $settings);
+									?>
 
-								<input type="hidden" class="tf-enquiry-reply-email" value="<?php echo esc_html($data["uemail"]); ?>">
-								<input type="hidden" class="tf-enquiry-reply-name" value="<?php echo esc_html($data["uname"]); ?>">
-								<input type="hidden" class="tf-enquiry-reply-id" value="<?php echo esc_html($data["id"]); ?>">
-								<input type="hidden" class="tf-enquiry-reply-post-id" value="<?php echo esc_html($data["post_id"]); ?>">
-								<input type="hidden" name="tf-enquiry-reply-post-userID" value="<?php echo $_SESSION['WP']['userId']; ?>" />
+									<input type="hidden" class="tf-enquiry-reply-email" value="<?php echo esc_html($data["uemail"]); ?>">
+									<input type="hidden" class="tf-enquiry-reply-name" value="<?php echo esc_html($data["uname"]); ?>">
+									<input type="hidden" class="tf-enquiry-reply-id" value="<?php echo esc_html($data["id"]); ?>">
+									<input type="hidden" class="tf-enquiry-reply-post-id" value="<?php echo esc_html($data["post_id"]); ?>">
+									<input type="hidden" name="tf-enquiry-reply-post-userID" value="<?php echo $_SESSION['WP']['userId']; ?>" />
 
-								<button class="tf-enquiry-reply-button" type="submit"> 
-									<?php esc_html_e('Send', 'tourfic') ?>
-									<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<g clip-path="url(#clip0_2455_191)">
-											<path d="M18.3333 1.66667L12.5 18.3333L9.16662 10.8333L1.66663 7.5L18.3333 1.66667Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-											<path d="M18.3333 1.66667L9.16663 10.8333" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-										</g>
-										<defs>
-											<clipPath id="clip0_2455_191">
-												<rect width="20" height="20" fill="white"></rect>
-											</clipPath>
-										</defs>
-									</svg>
-								</button>
-							</form>
-						</div>
-					</div> <!-- Enquiry mail Reply Wrapper - End -->
+									<button class="tf-enquiry-reply-button" type="submit"> 
+										<?php esc_html_e('Send', 'tourfic') ?>
+										<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<g clip-path="url(#clip0_2455_191)">
+												<path d="M18.3333 1.66667L12.5 18.3333L9.16662 10.8333L1.66663 7.5L18.3333 1.66667Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+												<path d="M18.3333 1.66667L9.16663 10.8333" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+											</g>
+											<defs>
+												<clipPath id="clip0_2455_191">
+													<rect width="20" height="20" fill="white"></rect>
+												</clipPath>
+											</defs>
+										</svg>
+									</button>
+								</form>
+							</div>
+						</div> <!-- Enquiry mail Reply Wrapper - End -->
+					<?php else: ?>
+						<div class="tf-field tf-field-notice tf-pro-notice " style="width:100%;">
+							<div class="tf-fieldset">
+				            	<div class="tf-field-notice-inner tf-notice-info">
+									<div class="tf-field-notice-icon">
+										<i class="ri-information-fill"></i>
+									</div>
+                					<div class="tf-field-notice-content has-content">
+									<?php echo wp_kses_post(sprintf(__("We're offering some exiting features like %1s sending reply from enquiry details page %2s and %1s get replies using email piping %2s in our pro plan.", 'tourfic'), '<b>', '</b>', '<b>', '</b>')) ?> <a href="https://themefic.com/tourfic/pricing" target="_blank"> <?php echo esc_html__("Upgrade to our pro package today to take advantage of these fantastic options!", 'tourfic') ?></a>                
+									</div>
+            					</div>
+			            	</div>
+			        	</div>
+					<?php endif; ?>
 				</div> <!-- Enquiry Details Left - End -->
 				<div class="tf-single-enquiry-right"> <!-- Enquiry Details Right - Start -->
 					<div class="tf-enquiry-single-log-details">
@@ -959,6 +992,7 @@ abstract class Enquiry {
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			$response['status'] = 'error';
+			$response['msg']    = esc_html__( 'You do not have permission to perform this action.', 'tourfic' );
 			$response['msg']    = esc_html__( 'You do not have permission to perform this action.', 'tourfic' );
 		}
 
