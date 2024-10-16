@@ -6,6 +6,7 @@ namespace Tourfic\App\Widgets;
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\App\Widgets\Elementor\Register;
+use Tourfic\App\Widgets\Bricks\Init;
 use Tourfic\App\Widgets\TF_Widgets;
 
 class TF_Widget_Base {
@@ -15,6 +16,9 @@ class TF_Widget_Base {
     public function __construct() {
         add_action( 'init', array( $this, 'tf_add_elelmentor_addon' ) );
         add_action( 'widgets_init', array($this,  'tourfic_sidebar_widgets_init' ), 100 );
+
+        // Include Widget files
+        Init::instance();
     }
 
     function tf_add_elelmentor_addon() {
