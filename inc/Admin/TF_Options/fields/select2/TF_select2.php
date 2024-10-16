@@ -151,6 +151,16 @@ if ( ! class_exists( 'TF_select2' ) ) {
 							</div>
 
 							<button class="tf-admin-btn tf-btn-secondary tf-add-new-post-button"><?php echo esc_html__('Add New', 'tourfic'); ?></button>
+						
+							<?php if($this->field['id'] == 'tf_rooms'): ?>
+							<div class="tf-single-category-box" style="margin-top: 16px;">
+								<div class="tf-field-notice-inner tf-notice-info" style="padding: 12px 24px;border-radius:4px;">
+									<div class="tf-field-notice-content has-content">
+										<?php echo esc_html__('A new room will be created, After creation save the hotel and click the room edit icon to set the room’s details', 'tourfic'); ?>
+									</div>
+								</div>
+							</div>
+							<?php endif; ?>
 						</div>
 					</div>
 				</div>

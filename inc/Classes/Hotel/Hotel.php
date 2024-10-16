@@ -3697,7 +3697,7 @@ class Hotel {
 		//insert in hotel tf_rooms field
 		if(!empty($hotel_id)){
 			$hotel_meta = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
-
+			$hotel_meta = is_array($hotel_meta) ? $hotel_meta : [];
 			if(! empty( $hotel_meta['tf_rooms'] ) && is_array($hotel_meta['tf_rooms'])){
 				array_push($hotel_meta['tf_rooms'], $post_id);
 			} else {

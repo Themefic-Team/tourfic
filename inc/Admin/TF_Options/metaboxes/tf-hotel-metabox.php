@@ -353,6 +353,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'id'          => 'tf_rooms',
 					'type'        => 'select2',
 					'label'        => __( 'Manage your hotel rooms', 'tourfic' ),
+					'subtitle'     => esc_html__('Select an existing hotel room, if available. Note: Rooms already assigned to a hotel cannot be selected.', 'tourfic'),
 					'placeholder' => __( 'Select Rooms', 'tourfic' ),
 					'options'     => 'posts',
 					'multiple'   => true,
