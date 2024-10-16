@@ -1,13 +1,14 @@
 <?php
 namespace Tourfic\Traits;
 
-use Tourfic\Classes\Hotel\Hotel;
 
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Tour\Tour;
+use Tourfic\Classes\Hotel\Hotel;
 use \Tourfic\Classes\Apartment\Apartment;
 use \Tourfic\Classes\Car_Rental\Availability;
+use \Tourfic\Admin\Emails\TF_Handle_Emails;
 
 trait Action_Helper {
 	
