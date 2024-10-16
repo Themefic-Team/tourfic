@@ -141,6 +141,7 @@ if ( ! class_exists( 'TF_select2' ) ) {
 
 						<input type="hidden" class="post_type" value="<?php echo esc_attr($args['query_args']['post_type']); ?>">
 						<input type="hidden" class="post_select_field_name" value="<?php echo esc_attr($tf_select2_unique_id) ?>">
+						<input type="hidden" class="field_id" value="<?php echo esc_attr($this->field['id']) ?>">
 
 
 						<div class="tf-add-category-box-content">

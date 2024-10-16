@@ -920,7 +920,7 @@ class TF_Options {
 	}
 
 	/**
-	 * Insert Category Data
+	 * Insert Post Data
 	 *
 	 * @author Foysal
 	 */
@@ -943,6 +943,7 @@ class TF_Options {
 			$insert_Data = array(
 				'id' => $post_id,
 				'title' => get_the_title($post_id),
+				'edit_url' => esc_url( get_edit_post_link( $post_id ) ),
 			);
 
 			$response ['insert_post'] = $insert_Data;
@@ -952,7 +953,7 @@ class TF_Options {
 	}
 
 	/**
-	 * Delete Category Data
+	 * Delete Post Data
 	 *
 	 * @author Foysal
 	 */

@@ -35,6 +35,24 @@ class Room {
 
 	}
 
+	static function get_hotel_id_for_assigned_room( $room_id ) {
+		$args = array(
+			'post_type'      => 'tf_hotel',
+			'posts_per_page' => - 1,
+		);
+
+		$hotels = get_posts( $args );
+
+		foreach ( $hotels as $hotel ) {
+			$hotel_meta = get_post_meta( $hotel->ID, 'tf_hotels_opt', true );
+			if ( ! empty( $hotel_meta['tf_rooms'] ) && is_array($hotel_meta['tf_rooms']) ) {
+				if(in_array($room_id, $hotel_meta['tf_rooms'])){
+					return $hotel->ID;
+				}
+			}
+		}
+	}
+
 	static function get_room_options_count( $rooms ) {
 		$total_room_option_count = 0;
 		if ( ! empty( $rooms ) ) {

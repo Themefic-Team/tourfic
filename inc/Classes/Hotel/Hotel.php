@@ -35,6 +35,7 @@ class Hotel {
 		add_action( 'wp_ajax_nopriv_tf_hotel_search', array( $this, 'tf_hotel_search_ajax_callback' ) );
 		add_action( 'tf_hotel_features_filter', array( $this, 'tf_hotel_filter_by_features' ), 10, 1 );
 		add_action( 'wp_after_insert_post', array( $this, 'tf_hotel_features_assign_taxonomies' ), 100, 3 );
+		add_action( 'wp_after_insert_post', array( $this, 'tf_hotel_rooms_assign' ), 100, 3 );
 		add_action( 'wp_after_insert_post', array( $this, 'tf_room_assign_to_hotel' ), 100, 3 );
 	}
 
@@ -3644,12 +3645,12 @@ class Hotel {
 	}
 
 	/**
-	 * Assign room to a hotel when updated or published
+	 * Assign hotel rooms when a hotel updated or published
 	 * @return array();
 	 * @author Foysal
 	 * @since 2.11.25
 	 */
-	function tf_room_assign_to_hotel( $post_id, $post, $old_status ) {
+	function tf_hotel_rooms_assign( $post_id, $post, $old_status ) {
 		if ( 'tf_hotel' !== $post->post_type ) {
 			return;
 		}
@@ -3676,6 +3677,48 @@ class Hotel {
 
 				update_post_meta($room_id, 'tf_room_opt', $room_meta);
 			}
+		}
+	}
+
+	/**
+	 * Assign room to a hotel when updated or published
+	 * @return array();
+	 * @author Foysal
+	 * @since 2.11.25
+	 */
+	function tf_room_assign_to_hotel( $post_id, $post, $old_status ) {
+		if ( 'tf_room' !== $post->post_type ) {
+			return;
+		}
+
+		$room_meta = get_post_meta( $post_id, 'tf_room_opt', true );
+		$hotel_id  = ! empty( $room_meta['tf_hotel'] ) ? intval($room_meta['tf_hotel']) : '';
+		
+		//insert in hotel tf_rooms field
+		if(!empty($hotel_id)){
+			$hotel_meta = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
+
+			if(! empty( $hotel_meta['tf_rooms'] ) && is_array($hotel_meta['tf_rooms'])){
+				array_push($hotel_meta['tf_rooms'], $post_id);
+			} else {
+				$hotel_meta['tf_rooms'] = array($post_id);
+			}
+			
+			update_post_meta($hotel_id, 'tf_hotels_opt', $hotel_meta);
+		}
+
+		//remove from tf_rooms fields if exists
+		if(empty($hotel_id)){
+			$assign_hotel_id = Room::get_hotel_id_for_assigned_room($post_id);
+			$hotel_meta = get_post_meta( $assign_hotel_id, 'tf_hotels_opt', true );
+
+			if(! empty( $hotel_meta['tf_rooms'] ) && is_array($hotel_meta['tf_rooms'])){
+				$hotel_meta['tf_rooms'] = array_diff($hotel_meta['tf_rooms'], [$post_id]);
+			} else {
+				$hotel_meta['tf_rooms'] = '';
+			}
+			
+			update_post_meta($assign_hotel_id, 'tf_hotels_opt', $hotel_meta);
 		}
 	}
 
