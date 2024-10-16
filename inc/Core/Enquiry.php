@@ -28,81 +28,6 @@ abstract class Enquiry {
 
 	abstract public function add_submenu();
 
-	function tf_enquiry_response_schedule( $schedules ) {
-		$interval = 60;
-
-		$schedules['tf_enquiry_response_schedule'] = array(
-            'interval' => $interval,
-            'display' => esc_attr__( 'Tourfic Response Scheduler', 'tourfic' )
-        );
-
-		return $schedules;
-
-	}
-
-	function tf_enquiry_response_schedule_event() {
-		if ( ! wp_next_scheduled( 'tf_enquiry_response_schedule' ) ) {
-            wp_schedule_event( time(), 'tf_enquiry_response_schedule', 'tf_enquiry_response_schedule' );
-        }
-	}
-
-	function tf_enquiry_response_schedule_callback() {
-
-		if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-		} else {
-			self::tfep_enquiry_update_response_unschedule();
-		}
-
-
-		if( empty( get_option("tfep_enquiry_update_response") )) {
-			return;
-		}
-
-		global $wpdb;
-
-		$response_data = get_option("tfep_enquiry_update_response");
-
-		$enquiry_id = $response_data["enquiry_id"];
-		$enquiry_details = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data where id= $enquiry_id", ARRAY_A );
-		$enquiry_details = !empty($enquiry_details) ? $enquiry_details[0] : array();
-
-		if( $enquiry_details["author_roles"] != "tf_vendor" ) {
-			return;
-		}
-
-		if( $enquiry_details["enquiry_status"] == "unread" && $enquiry_details["enquiry_status"] == "read" ) {
-			return;
-		}
-
-		if( empty( $enquiry_details["reply_data"] ) ) {
-			return;
-		}
-
-		$reply_data = json_decode( $enquiry_details["reply_data"], true );
-
-		$last_reply = end($reply_data);
-
-		$vendor_mail = get_the_author_meta("user_email", $enquiry_details["author_id"]);
-		$post_id = $enquiry_details["post_id"];
-		$name = !empty( $last_reply["name"] ) ? $last_reply["name"] : '';
-		$body = !empty( $last_reply["reply_message_html"] ) ? $last_reply["reply_message_html"] : '';
-
-		if( $response_data["notified"] == "false") {
-			$reply_to_vendor = self::tf_vendor_default_enquiry_mail($vendor_mail, $post_id, $name, $body, $enquiry_id, 'reply');
-			if( $reply_to_vendor ) {
-				update_option("tfep_enquiry_update_response", '');
-			}
-		}
-	}
-
-	public static function tfep_enquiry_update_response_unschedule() {
-        $timestamp = wp_next_scheduled( 'tf_enquiry_response_schedule' );
-        if( $timestamp ) {
-            wp_unschedule_event( $timestamp, 'tf_enquiry_response_schedule' );
-        }
-    }
-
-
 	public function enquiry_header_filter_options( array $args) {
 		?>
 			<div class="tf-booking-header-filter">
@@ -238,6 +163,7 @@ abstract class Enquiry {
 					foreach ( $data as $enquiry ) { ?>
 						<?php 
 							$tr_unread_class = $enquiry["status"] == 'unread' ? 'tf-enquiry-unread' : ( $enquiry["status"] == 'responded' ? 'tf-enquiry-responded' : '' );
+							$submit_time = self::convert_to_wp_timezone($enquiry["submit_time"]);
 						
 						?>
 						<tr class="<?php echo esc_attr($tr_unread_class); ?> tf-enquiry-single-row">
@@ -262,7 +188,7 @@ abstract class Enquiry {
 							<td class="time-n-date">
 								<?php 
 								$date_format = !empty(Helper::tfopt("tf-date-format-for-users")) ? Helper::tfopt("tf-date-format-for-users") : get_option('date_format');
-								list($date, $time) = explode(" ", $enquiry["submit_time"]);
+								list($date, $time) = explode(" ", $submit_time);
 								$formateed_time = date( get_option('time_format'), strtotime($time));
 								$formateed_date = date( $date_format, strtotime($date));
 								?>
@@ -384,7 +310,9 @@ abstract class Enquiry {
 
 		$server_data = !empty( $data["server_data"] ) ? json_decode($data["server_data"], true) : array();
 
-		list($date, $time) = explode(" ", $data["created_at"]);
+		$date_time_format = self::convert_to_wp_timezone( $data["created_at"] );
+
+		list($date, $time) = explode(" ", $date_time_format);
 		$formateed_date = date( "M d, Y", strtotime($date));
 		$formateed_time = date( "h:i:s A", strtotime($time));
 		$reply_data = !empty( $data["reply_data"] ) ? json_decode($data["reply_data"], true) : array();
@@ -471,7 +399,8 @@ abstract class Enquiry {
 													</span>
 												</div>
 												<div class="tf-single-enquiry-accordion-head-right">
-													<?php esc_html_e( date( "M d, Y h:i:s A", strtotime($reply["submit_time"])) ); ?>
+													<?php // esc_html_e( date( "M d, Y h:i:s A", strtotime($reply["submit_time"])) ); ?>
+													<?php  esc_html_e( $this->time_elapsed_string( $reply["submit_time"]) ); ?>
 												</div>
 											</div>
 											<div id="tf-single-enquiry-accordion-<?php echo esc_attr($key) ?>" class="tf-single-enquiry-collapse">
@@ -641,34 +570,100 @@ abstract class Enquiry {
 		<?php
 	}
 
-	function time_elapsed_string($datetime, $full = false) {
-		$now = new \DateTime;
-		$ago = new \DateTime($datetime);
+	// function time_elapsed_string($datetime, $full = false) {
+	// 	// Get the WordPress time zone
+	// 	$timezone = wp_timezone();
+		
+	// 	// Set current time according to WordPress timezone
+	// 	$now = new \DateTime('now', $timezone);
+		
+	// 	// Create a DateTime object for the given datetime according to WordPress timezone
+	// 	$ago = new \DateTime($datetime, $timezone);
+		
+	// 	// Calculate the difference between now and the given datetime
+	// 	$diff = $now->diff($ago);
+	
+	// 	// Calculate the weeks manually
+	// 	$diff->w = floor($diff->d / 7);
+	// 	$diff->d -= $diff->w * 7;
+	
+	// 	// Define the time units
+	// 	$string = array(
+	// 		'y' => 'year',
+	// 		'm' => 'month',
+	// 		'w' => 'week',
+	// 		'd' => 'day',
+	// 		'h' => 'hour',
+	// 		'i' => 'minute',
+	// 		's' => 'second',
+	// 	);
+	
+	// 	// Build the human-readable string
+	// 	foreach ($string as $k => &$v) {
+	// 		if ($diff->$k) {
+	// 			$v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+	// 		} else {
+	// 			unset($string[$k]);
+	// 		}
+	// 	}
+	
+	// 	// Return the result in a shortened or full form
+	// 	if (!$full) {
+	// 		$string = array_slice($string, 0, 1);
+	// 	}
+	
+	// 	return $string ? implode(', ', $string) . ' ago' : 'just now';
+	// }
+
+	function time_elapsed_string($datetime) {
+
+		$timezone = wp_timezone();
+		
+		$now = new \DateTime('now', $timezone);
+		
+		$ago = new \DateTime($datetime, $timezone);
+		
 		$diff = $now->diff($ago);
 	
-		$diff->w = floor($diff->d / 7);
-		$diff->d -= $diff->w * 7;
-	
-		$string = array(
-			'y' => 'year',
-			'm' => 'month',
-			'w' => 'week',
-			'd' => 'day',
-			'h' => 'hour',
-			'i' => 'minute',
-			's' => 'second',
-		);
-		foreach ($string as $k => &$v) {
-			if ($diff->$k) {
-				$v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+		if ($diff->h == 0 && $diff->d == 0) {
+			$minutes = $diff->i;
+			if ($minutes == 0) {
+				return esc_html__('Just now', 'tourfic');
+			} elseif ($minutes == 1) {
+				return '1 minute ago';
 			} else {
-				unset($string[$k]);
+				return sprintf(esc_html__('%s minutes ago', 'tourfic'), $minutes);
 			}
 		}
 	
-		if (!$full) $string = array_slice($string, 0, 1);
-		return $string ? implode(', ', $string) . ' ago' : 'just now';
+		if ($diff->d == 0) {
+			return 'Today ' . $ago->format('h:i A');
+		}
+	
+		if ($diff->d == 1) {
+			return 'Yesterday ' . $ago->format('h:i A');
+		}
+
+		if ($diff->d > 1) {
+			return $ago->format('M d, Y h:i A');
+		}
 	}
+
+	static function convert_to_wp_timezone($date_string, $format = 'Y-m-d H:i:s') {
+		$timezone = wp_timezone();
+		
+		try {
+			$date = new \DateTime($date_string, new \DateTimeZone('UTC'));
+	
+			$date->setTimezone($timezone);
+			
+			return $date->format($format);
+		} catch (\Exception $e) {
+			return 'Invalid date';
+		}
+	}
+	
+	
 	
 	public function enquiry_table_data( $post_type = '', $post_id = '', $status = '', $offset = 0, $per_page = 0 ) {
 
@@ -1208,5 +1203,79 @@ abstract class Enquiry {
 		}
 		return 'Unknown';
 	}
+
+	function tf_enquiry_response_schedule( $schedules ) {
+		$interval = 60;
+
+		$schedules['tf_enquiry_response_schedule'] = array(
+            'interval' => $interval,
+            'display' => esc_attr__( 'Tourfic Response Scheduler', 'tourfic' )
+        );
+
+		return $schedules;
+
+	}
+
+	function tf_enquiry_response_schedule_event() {
+		if ( ! wp_next_scheduled( 'tf_enquiry_response_schedule' ) ) {
+            wp_schedule_event( time(), 'tf_enquiry_response_schedule', 'tf_enquiry_response_schedule' );
+        }
+	}
+
+	function tf_enquiry_response_schedule_callback() {
+
+		if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		} else {
+			self::tfep_enquiry_update_response_unschedule();
+		}
+
+
+		if( empty( get_option("tfep_enquiry_update_response") )) {
+			return;
+		}
+
+		global $wpdb;
+
+		$response_data = get_option("tfep_enquiry_update_response");
+
+		$enquiry_id = $response_data["enquiry_id"];
+		$enquiry_details = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data where id= $enquiry_id", ARRAY_A );
+		$enquiry_details = !empty($enquiry_details) ? $enquiry_details[0] : array();
+
+		if( $enquiry_details["author_roles"] != "tf_vendor" ) {
+			return;
+		}
+
+		if( $enquiry_details["enquiry_status"] == "unread" && $enquiry_details["enquiry_status"] == "read" ) {
+			return;
+		}
+
+		if( empty( $enquiry_details["reply_data"] ) ) {
+			return;
+		}
+
+		$reply_data = json_decode( $enquiry_details["reply_data"], true );
+
+		$last_reply = end($reply_data);
+
+		$vendor_mail = get_the_author_meta("user_email", $enquiry_details["author_id"]);
+		$post_id = $enquiry_details["post_id"];
+		$name = !empty( $last_reply["name"] ) ? $last_reply["name"] : '';
+		$body = !empty( $last_reply["reply_message_html"] ) ? $last_reply["reply_message_html"] : '';
+
+		if( $response_data["notified"] == "false") {
+			$reply_to_vendor = self::tf_vendor_default_enquiry_mail($vendor_mail, $post_id, $name, $body, $enquiry_id, 'reply');
+			if( $reply_to_vendor ) {
+				update_option("tfep_enquiry_update_response", '');
+			}
+		}
+	}
+
+	public static function tfep_enquiry_update_response_unschedule() {
+        $timestamp = wp_next_scheduled( 'tf_enquiry_response_schedule' );
+        if( $timestamp ) {
+            wp_unschedule_event( $timestamp, 'tf_enquiry_response_schedule' );
+        }
+    }
 
 }
