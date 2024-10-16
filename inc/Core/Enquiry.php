@@ -84,8 +84,8 @@ abstract class Enquiry {
 
 		$vendor_mail = get_the_author_meta("user_email", $enquiry_details["author_id"]);
 		$post_id = $enquiry_details["post_id"];
-		$name = $last_reply["name"];
-		$body = $last_reply["reply_message"];
+		$name = !empty( $last_reply["name"] ) ? $last_reply["name"] : '';
+		$body = !empty( $last_reply["reply_message_html"] ) ? $last_reply["reply_message_html"] : '';
 
 		if( $response_data["notified"] == "false") {
 			$reply_to_vendor = self::tf_vendor_default_enquiry_mail($vendor_mail, $post_id, $name, $body, $enquiry_id, 'reply');
@@ -464,7 +464,7 @@ abstract class Enquiry {
 													<span class="tf-single-accordion-dash"><?php esc_html_e('―', 'tourfic') ?></span>
 													<span class="tf-single-accordion-subject">
 														<?php if( $email_body_setting == 'html'): ?>
-															<?php echo $reply["reply_message_html"] ? ( wp_kses_post( strlen( strip_tags( $reply["reply_message_html"] ) ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message_html"] ), 75 ) , 'tourfic' ) : esc_html__( strip_tags( $reply["reply_message_html"] ) ), 'tourfic' )) : esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message"] ), 75 ), "tourfic"); ?>
+															<?php echo !empty($reply["reply_message_html"]) ? ( wp_kses_post( strlen( strip_tags( $reply["reply_message_html"] ) ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message_html"] ), 75 ) , 'tourfic' ) : esc_html__( strip_tags( $reply["reply_message_html"] ) ), 'tourfic' )) : esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message"] ), 75 ), "tourfic"); ?>
 														<?php elseif( $email_body_setting == 'text'): ?>
 															<?php echo $reply["reply_message_text"] ? ( wp_kses_post( strlen( $reply["reply_message_text"] ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( $reply["reply_message_text"], 75 ) , 'tourfic' ) : esc_html__( $reply["reply_message_text"] ) , 'tourfic' )) :  esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message"] ), 75 ), "tourfic"); ?>
 														<?php endif; ?>
