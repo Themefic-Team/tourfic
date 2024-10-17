@@ -344,23 +344,50 @@ class TF_Setup_Wizard {
                 </div>
                 <p class="tf-setup-step-desc"><?php esc_html_e( "Travelfic is a WordPress theme created by us to improve your site’s frontend. While Tourfic manages your backend and booking, Travelfic ensures your travel site looks great and operates smoothly. ", "tourfic" ) ?>
                     <a href="https://wordpress.org/themes/travelfic/" target="_blank"><?php esc_html_e( "Know more about Travelfic", "tourfic" ); ?></a></p>
+                <h4 class="tf-select-title"><?php esc_html_e("Select theme from our library", "tourfic"); ?></h4>    
 
-                <div class="setup-theme-style">
-                    <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL ) . 'images/themes.png' ?>" alt="<?php esc_attr_e( 'Travelfic Theme', 'tourfic' ) ?>">
+                <div class="tf-template-selection">
+                    <div class="tf-single-theme">
+                        <label>
+                            <input type="radio" value="<?php echo esc_attr('travelfic'); ?>" name="tf_theme_select" checked>
+                            <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL ) . 'images/travelfic-theme.png' ?>" alt="<?php esc_attr_e( 'Travelfic Theme', 'tourfic' ) ?>">
+                            <div class="checked-svg">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="#E6FAEE" stroke="#21A159" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 12L11 14L15 10" stroke="#21A159" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h4><?php esc_html_e("Travelfic", "tourfic"); ?></h4>
+                        </label>
+                    </div>
+                    <div class="tf-single-theme">
+                        <label>
+                            <input type="radio" value="<?php echo esc_attr('ultimate-hotel-booking'); ?>" name="tf_theme_select">
+                            <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL ) . 'images/ultimate-hotel-theme.png' ?>" alt="<?php esc_attr_e( 'Travelfic Theme', 'tourfic' ) ?>">
+                            <div class="checked-svg">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="#E6FAEE" stroke="#21A159" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 12L11 14L15 10" stroke="#21A159" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h4><?php esc_html_e("Ultimate Hotel Booking ", "tourfic"); ?></h4>
+                        </label>
+                    </div>
                 </div>
+
                 <div class="tf-setup-action-btn-wrapper">
 
                     <div class="tf-setup-action-btn-next">
                         <button type="button" class="tf-setup-skip-btn tf-link-skip-btn tf-theme-activation-btn"><?php esc_html_e( 'Keep Existing Theme', 'tourfic' ) ?></button>
-                        <button type="button" class="tf-setup-travelfic-theme-btn tf-quick-setup-btn tf-theme-activation-btn" data-install="travelfic">
-                            <span><?php esc_html_e( 'Continue With Travelfic', 'tourfic' ) ?></span>
+                        <button type="button" class="tf-setup-travelfic-theme-btn tf-quick-setup-btn tf-theme-activation-btn">
+                            <span><?php esc_html_e( 'Next', 'tourfic' ) ?></span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path d="M5 12H19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M12 5L19 12L12 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
 
-                        <button type="button" class="tf-setup-travelfic-theme-active" data-install="travelfic" style="display: none;">
+                        <button type="button" class="tf-setup-travelfic-theme-active" style="display: none;">
                             <span><?php esc_html_e( 'Travelfic Active', 'tourfic' ) ?></span>
                         </button>
 
