@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.6
-Stable tag: 2.13.10
+Stable tag: 2.13.11
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -322,6 +322,18 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.13.11 - 17 October 2024 =
+
+- Fixed: Location display on the frontend
+- Fixed: Hotel room inventory management issue
+- Fixed: Same-day booking disabled
+- Fixed: Itinerary repeater functionality
+- Fixed: Logged-in user review submission
+- Fixed: Blocked booking dates
+- Fixed: Option to disable children in booking
+- Fixed: Room price settings from vendors
+- Improvements: Hotel room management system
+
 = 2.13.10 - 08 October 2024 =
 
 - Improvement: Quick Setup 
@@ -534,49 +546,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Improvement: Internal code enhancement
 - Improvement: Overall performance improved
 - Improvement: System stability improved
-
-= 2.11.20 - 15 March 2024 =
-
-- Added: Disclaimer for Patchstack VDP
-- Updated: readme.txt
-
-= 2.11.19 - 13 March 2024 =
-
-- Updated: Import Export Secured by Role Check
-- Updated: Import Export Secured by Nonce Verification
-- Updated: Imported Data Converted into JSON
-
-= 2.11.18 - 12 March 2024 =
-
-- Fixed: PHP Object Injection vulnerability issue
-
-= 2.11.17 - 11 March 2024 =
-
-- Fixed: PHP Object Injection vulnerability issue
-
-= 2.11.16 - 07 March 2024 =
-
-- Fixed: Arbitrary File Upload vulnerability issue
-- Fixed: PHP Object Injection vulnerability issue
-
-= 2.11.15 - 06 March 2024 =
-
-- Improvement: Tour location optional on search
-- Improvement: Updated Design
-- Fixed: Minor Bug Fixing
-
-= 2.11.14 - 03 March 2024 =
-
-- Updated: Reorganized readme.txt for WP ORG
-
-= 2.11.13 - 03 March 2024 =
-
-- Updated: Updated: readme.txt
-
-= 2.11.12 - 27 February 2024 =
-
-- Fixed: Archive Pagination issue
-- Fixed: Archive Tour Search issue
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
