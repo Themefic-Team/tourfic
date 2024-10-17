@@ -59,10 +59,10 @@
     height: 48px;
   }
   .tf-select-box-option {
-    display: flex;
-    gap: 8px;
+    
     .tf-add-category{
-      i{
+      margin-top: 16px;
+      &>i{
         height: 25px;
         width: 25px;
         border-radius: 50%;

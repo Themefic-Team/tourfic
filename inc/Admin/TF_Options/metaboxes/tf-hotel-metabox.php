@@ -362,7 +362,8 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 						'posts_per_page' => - 1,
 					),
 					'inline_add_new' => true,
-					'inline_delete' => true
+					'inline_delete' => true,
+					'add_button_text' => esc_html__('Add New Room', 'tourfic')
 				),
 				array(
 					'id'    => 'tf-pro-notice',

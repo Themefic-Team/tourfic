@@ -78,7 +78,8 @@ if ( ! class_exists( 'TF_select2' ) ) {
 			}
 			echo '</select>';
 			if(!empty($args['query_args']) && isset($args['inline_add_new']) && $args['inline_add_new']){
-				echo '<span class="tf-add-category" data-value=""><i class="fa-solid fa-plus"></i></span>';
+				$add_new_button_text = !empty($args['add_button_text']) ? esc_html($args['add_button_text']) : esc_html__('Add New', 'tourfic');
+				echo '<div class="tf-add-category" data-value=""><span class="tf-admin-btn"><i class="ri-add-fill"></i> '. $add_new_button_text .'</span></div>';
 			}
 			echo '</div>';
 			

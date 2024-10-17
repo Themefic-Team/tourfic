@@ -1698,7 +1698,7 @@
         });
 
         // Select 2 add new category
-        $(document).on('click', '.tf-add-category i', function (event) { 
+        $(document).on('click', '.tf-add-category span', function (event) { 
             event.preventDefault();
             var $this = $(this);
             var parentDiv = $this.closest('.tf-fieldset');

@@ -3528,12 +3528,11 @@ Steps
   height: 48px;
 }
 
-.tf-field-select2 .tf-select-box-option {
-  display: flex;
-  gap: 8px;
+.tf-field-select2 .tf-select-box-option .tf-add-category {
+  margin-top: 16px;
 }
 
-.tf-field-select2 .tf-select-box-option .tf-add-category i {
+.tf-field-select2 .tf-select-box-option .tf-add-category > i {
   height: 25px;
   width: 25px;
   border-radius: 50%;
