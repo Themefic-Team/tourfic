@@ -35,6 +35,24 @@ class Room {
 
 	}
 
+	static function get_hotel_id_for_assigned_room( $room_id ) {
+		$args = array(
+			'post_type'      => 'tf_hotel',
+			'posts_per_page' => - 1,
+		);
+
+		$hotels = get_posts( $args );
+
+		foreach ( $hotels as $hotel ) {
+			$hotel_meta = get_post_meta( $hotel->ID, 'tf_hotels_opt', true );
+			if ( ! empty( $hotel_meta['tf_rooms'] ) && is_array($hotel_meta['tf_rooms']) ) {
+				if(in_array($room_id, $hotel_meta['tf_rooms'])){
+					return $hotel->ID;
+				}
+			}
+		}
+	}
+
 	static function get_room_options_count( $rooms ) {
 		$total_room_option_count = 0;
 		if ( ! empty( $rooms ) ) {
@@ -59,24 +77,15 @@ class Room {
 		if ( ! isset( $_POST['_ajax_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_ajax_nonce'] ) ), 'updates' ) ) {
 			return;
 		}
-
-		# Get order id field's name
-		$meta_field = isset( $_POST['meta_field'] ) ? sanitize_text_field( $_POST['meta_field'] ) : '';
-		# Trim room id from order id name
-		$room_id = trim( $meta_field, "tf_hotels_opt[room][][order_id]" );
 		# Get post id
-		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
+		$room_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
 		# Get hotel meta
-		$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
-
-		$order_id_retrive = Helper::tf_data_types( $meta['room'] );
+		$meta = get_post_meta( $room_id, 'tf_room_opt', true );
 
 		# Set order id field's value to blank
-		$order_id_retrive[ $room_id ]['order_id'] = '';
-
-		$meta['room'] = $order_id_retrive;
+		$meta['order_id'] = '';
 		# Update whole hotel meta
-		update_post_meta( $post_id, 'tf_hotels_opt', $meta );
+		update_post_meta( $room_id, 'tf_room_opt', $meta );
 
 		# Send success message
 		wp_send_json_success( array(

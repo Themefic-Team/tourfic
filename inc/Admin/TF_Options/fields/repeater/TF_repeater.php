@@ -1,6 +1,9 @@
 <?php if ( ! defined( 'ABSPATH' ) ) {
 	die;
 } // Cannot access directly.
+
+use Tourfic\Classes\Helper;
+
 /**
  *
  * Field: repeater
@@ -15,24 +18,31 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 			parent::__construct( $field, $value, $settings_id, $parent_field);
 		}
 		public function render() {
+			$max_index = 0;
             $label = ( ! empty( $this->field['label'] ) ) ? $this->field['label'] : '';
             $field_title = ( ! empty( $this->field['field_title'] ) ) ? $this->field['field_title'] : $label;
+
+			if ( ! empty( $this->value ) ){
+				
+				if(!is_array($this->value)){
+					$tf_rep_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+						return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+					}, $this->value );
+
+					$data = unserialize( $tf_rep_value );
+				}else{
+					$data = $this->value;
+				}
+				
+				$max_index = ! empty($data) && is_array($data) ? max(array_keys($data)) : 0;
+			}
 			?>
-            <div id="tf-repeater-1" class="tf-repeater <?php echo esc_attr($this->field['id']);?>">
+            <div id="tf-repeater-1" class="tf-repeater <?php echo esc_attr($this->field['id']);?>" data-max-index="<?php echo esc_attr($max_index); ?>">
                 <div class="tf-repeater-wrap tf-repeater-wrap-<?php echo esc_attr($this->field['id']);?>">
 					<?php if ( ! empty( $this->value ) ):
 						$num = 0;
-
-						if(!is_array($this->value)){
-							$tf_rep_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
-								return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
-							  }, $this->value );
-
-							$data = unserialize( $tf_rep_value );
-						}else{
-							$data = $this->value;
-						}
 					 	if(is_array($data)):
+							
 							foreach ( $data as $key => $value ) :
 								if( "cont_custom_date" == $this->field['id'] ){
 									$value[$field_title] = esc_html__('Custom Dates', 'tourfic');
