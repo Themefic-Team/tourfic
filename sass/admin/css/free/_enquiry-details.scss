@@ -135,6 +135,13 @@
         line-height: 1.33;
     }
 }
+
+hr.enqury-single-title-line {
+    border-color: #F0EEF6;
+    margin: 0px;
+    border-width: 0.5px;
+}
+
 .tf-enquiry-single-back-button{
     padding: 8px 20px 8px 16px;
     background-color: #fff;
@@ -172,7 +179,7 @@
         width: 60%;
         .tf-enquiry-details {
             background-color: #fff;
-            padding: 16px 24px 24px 24px;
+            padding: 16px 0px 24px 0px;
             border-radius: 8px;
     
             h2 {
@@ -186,12 +193,16 @@
     
             .tf-enquiry-details-single-heading {
                 padding-bottom: 16px;
+                padding-left: 24px;
+                padding-right: 24px;
             }
     
             .tf-single-enquiry-details-content {
                 display: flex;
                 gap: 24px;
                 padding-top: 24px;
+                padding-left: 24px;
+                padding-right: 24px;
                 flex-direction: column;
     
                 .tf-single-enquiry-details-name, .tf-single-enquiry-details-email, .tf-single-enquiry-details-message {
@@ -298,6 +309,8 @@
 
             .tf-single-enquiry-accordion {
                 margin-top: 24px;
+                padding-left: 24px;
+                padding-right: 24px;
 
                 .tf-single-enquiry-accordion-item {
                     .tf-single-enquiry-accordion-head {
@@ -358,6 +371,7 @@
                 hr {
                     margin-top: 24px;
                     margin-bottom: 24px;
+                    border-color: #F0EEF6;
                 }
             }
         }
@@ -415,7 +429,7 @@
         width: 40%;
         .tf-enquiry-single-log-details {
             background-color: #fff;
-            padding: 16px 24px 24px 24px;
+            padding: 16px 0px 24px 0px;
             border-radius: 8px;
 
             .tf-singe-enquiry-log-details-heading {
@@ -423,6 +437,8 @@
                 justify-content: space-between;
                 align-items: center;
                 padding-bottom: 16px;
+                padding-right: 24px;
+                padding-left: 24px;
 
                 h2 {
                     font-family: inherit;
@@ -451,6 +467,9 @@
                 display: flex;
                 flex-direction: column;
                 gap: 24px;
+                padding-left: 24px;
+                padding-right: 24px;
+                padding-top: 24px;
 
                 .tf-single-enquiry-log-details-single {
                     display: flex;

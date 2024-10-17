@@ -6498,6 +6498,12 @@ a.tf-import-btn, a.tf-export-btn {
   line-height: 1.33;
 }
 
+hr.enqury-single-title-line {
+  border-color: #F0EEF6;
+  margin: 0px;
+  border-width: 0.5px;
+}
+
 .tf-enquiry-single-back-button {
   padding: 8px 20px 8px 16px;
   background-color: #fff;
@@ -6539,7 +6545,7 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details {
   background-color: #fff;
-  padding: 16px 24px 24px 24px;
+  padding: 16px 0px 24px 0px;
   border-radius: 8px;
 }
 
@@ -6554,12 +6560,16 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-enquiry-details-single-heading {
   padding-bottom: 16px;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content {
   display: flex;
   gap: 24px;
   padding-top: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
   flex-direction: column;
 }
 
@@ -6661,6 +6671,8 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion {
   margin-top: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item .tf-single-enquiry-accordion-head {
@@ -6721,6 +6733,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion hr {
   margin-top: 24px;
   margin-bottom: 24px;
+  border-color: #F0EEF6;
 }
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left #tf-single-enquiry-reply-form {
@@ -6777,7 +6790,7 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-right .tf-enquiry-single-log-details {
   background-color: #fff;
-  padding: 16px 24px 24px 24px;
+  padding: 16px 0px 24px 0px;
   border-radius: 8px;
 }
 
@@ -6786,6 +6799,8 @@ a.tf-import-btn, a.tf-export-btn {
   justify-content: space-between;
   align-items: center;
   padding-bottom: 16px;
+  padding-right: 24px;
+  padding-left: 24px;
 }
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-right .tf-enquiry-single-log-details .tf-singe-enquiry-log-details-heading h2 {
@@ -6815,6 +6830,9 @@ a.tf-import-btn, a.tf-export-btn {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 24px;
 }
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-right .tf-enquiry-single-log-details .tf-single-enquiry-log-details-content .tf-single-enquiry-log-details-single {

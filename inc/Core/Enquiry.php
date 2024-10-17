@@ -348,6 +348,7 @@ abstract class Enquiry {
 						<div class="tf-enquiry-details-single-heading">
 							<h2><?php esc_html_e('Details', 'tourfic'); ?></h2>
 						</div>
+						<hr class="enqury-single-title-line">
 						<div class="tf-single-enquiry-details-content">
 							<div class="tf-single-enquiry-details-name">
 								<span class="tf-single-enquiry-details-label"> <?php esc_html_e("Name", 'tourfic') ?></span>
@@ -375,6 +376,7 @@ abstract class Enquiry {
 							<div class="tf-enquiry-details-single-heading">
 								<h2><?php esc_html_e('To:', 'tourfic') ; ?> <span class="tf-single-enquiry-reply-mail"> <?php esc_html_e( $data["uemail"]); ?> </span></h2>
 							</div>
+							<hr class="enqury-single-title-line">
 							<div class="tf-single-enquiry-accordion">
 								<?php if( !empty($reply_data) && is_array($reply_data)): ?>
 									<?php foreach($reply_data as $key => $reply): ?>
@@ -394,7 +396,7 @@ abstract class Enquiry {
 														<?php if( $email_body_setting == 'html'): ?>
 															<?php echo !empty($reply["reply_message_html"]) ? ( wp_kses_post( strlen( strip_tags( $reply["reply_message_html"] ) ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message_html"] ), 75 ) , 'tourfic' ) : esc_html__( strip_tags( $reply["reply_message_html"] ) ), 'tourfic' )) : esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message"] ), 75 ), "tourfic"); ?>
 														<?php elseif( $email_body_setting == 'text'): ?>
-															<?php echo $reply["reply_message_text"] ? ( wp_kses_post( strlen( $reply["reply_message_text"] ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( $reply["reply_message_text"], 75 ) , 'tourfic' ) : esc_html__( $reply["reply_message_text"] ) , 'tourfic' )) :  esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message"] ), 75 ), "tourfic"); ?>
+															<?php echo !empty($reply["reply_message_text"]) ? ( wp_kses_post( strlen( $reply["reply_message_text"] ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( $reply["reply_message_text"], 75 ) , 'tourfic' ) : esc_html__( $reply["reply_message_text"] ) , 'tourfic' )) :  esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message"] ), 75 ), "tourfic"); ?>
 														<?php endif; ?>
 													</span>
 												</div>
@@ -490,6 +492,7 @@ abstract class Enquiry {
 								<div class="enquiry-status-value"> <?php !empty( $data["enquiry_status"] ) ? esc_html_e(ucfirst( $data["enquiry_status"] ), 'tourfic') : '' ?> </div>
 							</div>
 						</div>
+						<hr class="enqury-single-title-line">
 						<div class="tf-single-enquiry-log-details-content">
 							<?php if( !empty( $server_data )): ?>
 								<div class="tf-single-enquiry-log-details-single"> <!-- Single Log Details IP - Start -->
