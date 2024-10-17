@@ -166,9 +166,34 @@ trait Action_Helper {
 	 * Go to Documentaion Metabox
 	 */
 	function tf_hotel_tour_docs() {
-		add_meta_box( 'tfhotel_docs', esc_html__( 'Tourfic Documentation', 'tourfic' ), array( $this, 'tf_hotel_docs_callback' ), 'tf_hotel', 'side', 'high' );
-		add_meta_box( 'tfapartment_docs', esc_html__( 'Tourfic Documantation', 'tourfic' ), array( $this, 'tf_apartment_docs_callback' ), 'tf_apartment', 'side', 'high' );
-		add_meta_box( 'tftour_docs', esc_html__( 'Tourfic Documentation', 'tourfic' ), array( $this, 'tf_tour_docs_callback' ), 'tf_tours', 'side', 'high' );
+		$tf_promo_option = get_option( 'tf_promo__schudle_option' );
+		$tf_hotel_promo_sidebar_notice = get_option( 'tf_hotel_promo_sidebar_notice' );  
+		$tf_apartment_promo_sidebar_notice = get_option( 'tf_apartment_promo_sidebar_notice' );  
+		$tf_tour_promo_sidebar_notice = get_option( 'tf_tour_promo_sidebar_notice' );  
+		$service_banner = isset($tf_promo_option['service_banner']) ? $tf_promo_option['service_banner'] : array();
+        $promo_banner = isset($tf_promo_option['promo_banner']) ? $tf_promo_option['promo_banner'] : array();
+		$tf_promo__schudle_start_from = !empty(get_option( 'tf_promo__schudle_start_from' )) ? get_option( 'tf_promo__schudle_start_from' ) : 0;
+
+		if((!empty($service_banner) && $service_banner['enable_status']  == true) || ( !empty($promo_banner) && $promo_banner['enable_status'] == true ) ) {
+			$side_banaer_status = true;
+		}else{
+			$side_banaer_status = false;
+		}
+
+		if ( ($tf_hotel_promo_sidebar_notice != 1  && time() <  $tf_hotel_promo_sidebar_notice) || $side_banaer_status == false || ($tf_promo__schudle_start_from  != 0 && $tf_promo__schudle_start_from > time()) ) {  // Check if the notice is not dismissed or promo is not exicuted
+			add_meta_box( 'tfhotel_docs', esc_html__( 'Tourfic Documentation', 'tourfic' ), array( $this, 'tf_hotel_docs_callback' ), 'tf_hotel', 'side', 'high' );
+		}
+
+		if ( ($tf_apartment_promo_sidebar_notice != 1  && time() <  $tf_apartment_promo_sidebar_notice) || $side_banaer_status == false || ($tf_promo__schudle_start_from  != 0 && $tf_promo__schudle_start_from > time())) {  // Check if the notice is not dismissed or promo is not exicuted
+			add_meta_box( 'tfapartment_docs', esc_html__( 'Tourfic Documantation', 'tourfic' ), array( $this, 'tf_apartment_docs_callback' ), 'tf_apartment', 'side', 'high' );
+		}
+
+
+		if ( ($tf_tour_promo_sidebar_notice != 1  && time() <  $tf_tour_promo_sidebar_notice) || $side_banaer_status == false || ($tf_promo__schudle_start_from  != 0 && $tf_promo__schudle_start_from > time())) { // Check if the notice is not dismissed or promo is not exicuted
+			add_meta_box( 'tftour_docs', esc_html__( 'Tourfic Documentation', 'tourfic' ), array( $this, 'tf_tour_docs_callback' ), 'tf_tours', 'side', 'high' ); 
+		}
+		
+		
 
 		add_filter( 'get_user_option_meta-box-order_tf_tours', array( $this, 'tour_metabox_order' ) );
 		add_filter( 'get_user_option_meta-box-order_tf_apartment', array( $this, 'apartment_metabox_order' ) );
@@ -446,7 +471,7 @@ trait Action_Helper {
 	 */
 	function tf_admin_role_caps() {
 
-		if ( get_option( 'tf_admin_caps' ) < 4 ) {
+		if ( get_option( 'tf_admin_caps' ) < 6 ) {
 			$admin_role  = get_role( 'administrator' );
 			$editor_role = get_role( 'editor' );
 
@@ -519,7 +544,7 @@ trait Action_Helper {
 				$editor_role->add_cap( $cap );
 			}
 
-			update_option( 'tf_admin_caps', 4 );
+			update_option( 'tf_admin_caps', 6 );
 		}
 	}
 

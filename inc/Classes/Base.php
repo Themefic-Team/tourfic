@@ -61,14 +61,14 @@ class Base {
 			Hotel_Booking_Details::instance();
 			Apartment_Booking_Details::instance();
 
-			// Promo Notice
-			TF_Promo_Notice::instance();
+			
 			\Tourfic\Admin\TF_Duplicator::instance();
 
 			// Admin Notices
 			\Tourfic\Admin\Notice_Update::instance();
 		}
-
+		// Promo Notice
+		TF_Promo_Notice::instance();
 		if ( Helper::tf_is_woo_active() ) {
 			TF_Widget_Base::instance();
 		}

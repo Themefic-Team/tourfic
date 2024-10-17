@@ -420,22 +420,24 @@ class TF_Options {
 				'status'      => $status
 			];
 
-			if ( $options_count != 0 ) {
-				$options_data = [
-					'options_count' => $options_count,
-				];
-				for ( $j = 0; $j <= $options_count - 1; $j ++ ) {
-					$options_data[ 'tf_room_option_' . $j ]         = isset( $_POST[ 'tf_room_option_' . $j ] ) && ! empty( $_POST[ 'tf_room_option_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_room_option_' . $j ] ) : '';
-					$options_data[ 'tf_option_title_' . $j ]        = isset( $_POST[ 'tf_option_title_' . $j ] ) && ! empty( $_POST[ 'tf_option_title_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_title_' . $j ] ) : '';
-					$options_data[ 'tf_option_pricing_type_' . $j ] = isset( $_POST[ 'tf_option_pricing_type_' . $j ] ) && ! empty( $_POST[ 'tf_option_pricing_type_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_pricing_type_' . $j ] ) : '';
-					$options_data[ 'tf_option_room_price_' . $j ]   = isset( $_POST[ 'tf_option_room_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_room_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_room_price_' . $j ] ) : '';
-					$options_data[ 'tf_option_adult_price_' . $j ]  = isset( $_POST[ 'tf_option_adult_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_adult_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_adult_price_' . $j ] ) : '';
-					$options_data[ 'tf_option_child_price_' . $j ]  = isset( $_POST[ 'tf_option_child_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_child_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_child_price_' . $j ] ) : '';
-				}
-			}
-			if ( ! empty( $options_data ) ) {
-				$tf_room_data = array_merge( $tf_room_data, $options_data );
-			}
+            if($price_by == '3') {
+	            if ( $options_count != 0 ) {
+		            $options_data = [
+			            'options_count' => $options_count,
+		            ];
+		            for ( $j = 0; $j <= $options_count - 1; $j ++ ) {
+			            $options_data[ 'tf_room_option_' . $j ]         = isset( $_POST[ 'tf_room_option_' . $j ] ) && ! empty( $_POST[ 'tf_room_option_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_room_option_' . $j ] ) : '';
+			            $options_data[ 'tf_option_title_' . $j ]        = isset( $_POST[ 'tf_option_title_' . $j ] ) && ! empty( $_POST[ 'tf_option_title_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_title_' . $j ] ) : '';
+			            $options_data[ 'tf_option_pricing_type_' . $j ] = isset( $_POST[ 'tf_option_pricing_type_' . $j ] ) && ! empty( $_POST[ 'tf_option_pricing_type_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_pricing_type_' . $j ] ) : '';
+			            $options_data[ 'tf_option_room_price_' . $j ]   = isset( $_POST[ 'tf_option_room_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_room_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_room_price_' . $j ] ) : '';
+			            $options_data[ 'tf_option_adult_price_' . $j ]  = isset( $_POST[ 'tf_option_adult_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_adult_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_adult_price_' . $j ] ) : '';
+			            $options_data[ 'tf_option_child_price_' . $j ]  = isset( $_POST[ 'tf_option_child_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_child_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_child_price_' . $j ] ) : '';
+		            }
+	            }
+	            if ( ! empty( $options_data ) ) {
+		            $tf_room_data = array_merge( $tf_room_data, $options_data );
+	            }
+            }
 
 			$room_avail_data[ $tf_room_date ] = $tf_room_data;
 		}
@@ -482,9 +484,9 @@ class TF_Options {
 		$room_id    = isset( $_POST['room_id'] ) && ! empty( $_POST['room_id'] ) ? sanitize_text_field( $_POST['room_id'] ) : '';
 		$avail_date = isset( $_POST['avail_date'] ) && ! empty( $_POST['avail_date'] ) ? sanitize_text_field( $_POST['avail_date'] ) : '';
 		$option_arr = isset( $_POST['option_arr'] ) && ! empty( $_POST['option_arr'] ) ? $_POST['option_arr'] : [];
-
+		$room_meta  = get_post_meta( $room_id, 'tf_room_opt', true );
+        $pricing_by = ! empty( $room_meta['pricing-by'] ) ? $room_meta['pricing-by'] : '1';
 		if ( $new_post != 'true' ) {
-			$room_meta       = get_post_meta( $room_id, 'tf_room_opt', true );
 			$room_avail_data = isset( $room_meta['avail_date'] ) && ! empty( $room_meta['avail_date'] ) ? json_decode( $room_meta['avail_date'], true ) : [];
 		} else {
 			$room_avail_data = json_decode( stripslashes( $avail_date ), true );
@@ -498,7 +500,7 @@ class TF_Options {
 					$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] );
 				} elseif ( $item['price_by'] == '2' ) {
 					$item['title'] = __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
-				} else {
+				} elseif ( $item['price_by'] == '3' ) {
 					$item['title'] = '';
 					if ( ! empty( $item['options_count'] ) ) {
 						for ( $i = 0; $i <= $item['options_count'] - 1; $i ++ ) {
@@ -527,47 +529,49 @@ class TF_Options {
 
 		$options_html = '';
 
-		foreach ( $option_arr as $key => $item ) {
-			ob_start();
-			?>
-            <div class="tf-single-option">
-                <div class="tf-field-switch">
-                    <label for="tf_room_option_<?php echo esc_attr( $item['index'] ); ?>" class="tf-field-label"><?php echo esc_html( $item['title'] ); ?></label>
-                    <div class="tf-fieldset">
-                        <label for="tf_room_option_<?php echo esc_attr( $item['index'] ); ?>" class="tf-switch-label" style="width: 80px">
-                            <input type="checkbox" id="tf_room_option_<?php echo esc_attr( $item['index'] ); ?>" name="tf_room_option_<?php echo esc_attr( $item['index'] ); ?>" value="1" class="tf-switch"
-                                   checked="checked">
-                            <span class="tf-switch-slider">
-                                <span class="tf-switch-on"><?php echo esc_html__( 'Enable', 'tourfic' ) ?></span>
-                                <span class="tf-switch-off"><?php echo esc_html__( 'Disable', 'tourfic' ) ?></span>
-                            </span>
-                        </label>
+        if($pricing_by == '3'){
+            foreach ( $option_arr as $key => $item ) {
+                ob_start();
+                ?>
+                <div class="tf-single-option">
+                    <div class="tf-field-switch">
+                        <label for="tf_room_option_<?php echo esc_attr( $item['index'] ); ?>" class="tf-field-label"><?php echo esc_html( $item['title'] ); ?></label>
+                        <div class="tf-fieldset">
+                            <label for="tf_room_option_<?php echo esc_attr( $item['index'] ); ?>" class="tf-switch-label" style="width: 80px">
+                                <input type="checkbox" id="tf_room_option_<?php echo esc_attr( $item['index'] ); ?>" name="tf_room_option_<?php echo esc_attr( $item['index'] ); ?>" value="1" class="tf-switch"
+                                       checked="checked">
+                                <span class="tf-switch-slider">
+                                    <span class="tf-switch-on"><?php echo esc_html__( 'Enable', 'tourfic' ) ?></span>
+                                    <span class="tf-switch-off"><?php echo esc_html__( 'Disable', 'tourfic' ) ?></span>
+                                </span>
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div class="tf-field-text tf_option_pricing_type_room" style="display: <?php echo $item['type'] == 'per_room' ? 'block' : 'none' ?>; width: calc(100% - 90px)">
-                    <label class="tf-field-label"><?php echo esc_html__( 'Room Price', 'tourfic' ); ?></label>
-                    <div class="tf-fieldset">
-                        <input type="number" min="0" name="tf_option_room_price_<?php echo esc_attr( $item['index'] ); ?>" placeholder="<?php echo esc_attr__( 'Room Price', 'tourfic' ); ?>">
+                    <div class="tf-field-text tf_option_pricing_type_room" style="display: <?php echo $item['type'] == 'per_room' ? 'block' : 'none' ?>; width: calc(100% - 90px)">
+                        <label class="tf-field-label"><?php echo esc_html__( 'Room Price', 'tourfic' ); ?></label>
+                        <div class="tf-fieldset">
+                            <input type="number" min="0" name="tf_option_room_price_<?php echo esc_attr( $item['index'] ); ?>" placeholder="<?php echo esc_attr__( 'Room Price', 'tourfic' ); ?>">
+                        </div>
                     </div>
-                </div>
-                <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $item['type'] == 'per_person' ? 'block' : 'none' ?>; width: calc((100% - 80px)/2 - -5px)">
-                    <label class="tf-field-label"><?php echo esc_html__( 'Adult Price', 'tourfic' ); ?></label>
-                    <div class="tf-fieldset">
-                        <input type="number" min="0" name="tf_option_adult_price_<?php echo esc_attr( $item['index'] ); ?>" placeholder="<?php echo esc_attr__( 'Adult Price', 'tourfic' ); ?>">
+                    <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $item['type'] == 'per_person' ? 'block' : 'none' ?>; width: calc((100% - 80px)/2 - -5px)">
+                        <label class="tf-field-label"><?php echo esc_html__( 'Adult Price', 'tourfic' ); ?></label>
+                        <div class="tf-fieldset">
+                            <input type="number" min="0" name="tf_option_adult_price_<?php echo esc_attr( $item['index'] ); ?>" placeholder="<?php echo esc_attr__( 'Adult Price', 'tourfic' ); ?>">
+                        </div>
                     </div>
-                </div>
-                <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $item['type'] == 'per_person' ? 'block' : 'none' ?>; width: calc((100% - 80px)/2 - -5px)">
-                    <label class="tf-field-label"><?php echo esc_html__( 'Child Price', 'tourfic' ); ?></label>
-                    <div class="tf-fieldset">
-                        <input type="number" min="0" name="tf_option_child_price_<?php echo esc_attr( $item['index'] ); ?>" placeholder="<?php echo esc_attr__( 'Child Price', 'tourfic' ); ?>">
+                    <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $item['type'] == 'per_person' ? 'block' : 'none' ?>; width: calc((100% - 80px)/2 - -5px)">
+                        <label class="tf-field-label"><?php echo esc_html__( 'Child Price', 'tourfic' ); ?></label>
+                        <div class="tf-fieldset">
+                            <input type="number" min="0" name="tf_option_child_price_<?php echo esc_attr( $item['index'] ); ?>" placeholder="<?php echo esc_attr__( 'Child Price', 'tourfic' ); ?>">
+                        </div>
                     </div>
+                    <input type="hidden" name="tf_option_title_<?php echo esc_attr( $item['index'] ); ?>" value="<?php echo esc_attr( $item['title'] ); ?>"/>
+                    <input type="hidden" name="tf_option_pricing_type_<?php echo esc_attr( $item['index'] ); ?>" value="<?php echo esc_attr( $item['type'] ); ?>"/>
                 </div>
-                <input type="hidden" name="tf_option_title_<?php echo esc_attr( $item['index'] ); ?>" value="<?php echo esc_attr( $item['title'] ); ?>"/>
-                <input type="hidden" name="tf_option_pricing_type_<?php echo esc_attr( $item['index'] ); ?>" value="<?php echo esc_attr( $item['type'] ); ?>"/>
-            </div>
-			<?php
-			$options_html .= ob_get_clean();
-		}
+                <?php
+                $options_html .= ob_get_clean();
+            }
+        }
 
 		echo wp_json_encode( array(
 			'avail_data'   => $room_avail_data,

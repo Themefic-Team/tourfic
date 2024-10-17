@@ -165,9 +165,15 @@
 
         $(document).on('click', '.tf-setup-travelfic-theme-btn', function (e) {
             e.preventDefault();
-            if(tf_admin_params.current_active_theme && "travelfic"!=tf_admin_params.current_active_theme){
-                let theme_slug = $(this).attr('data-install');
-                $('.tf-setup-travelfic-theme-btn').text("Travelfic Installing...");
+            
+            if(tf_admin_params.current_active_theme && "travelfic"!=tf_admin_params.current_active_theme && "ultimate-hotel-booking"!=tf_admin_params.current_active_theme){
+                let theme_slug = $('.tf-template-selection input[name="tf_theme_select"]:checked').val();
+                if("travelfic"==theme_slug){
+                    $('.tf-setup-travelfic-theme-btn').text("Travelfic Installing...");
+                }
+                if("ultimate-hotel-booking"==theme_slug){
+                    $('.tf-setup-travelfic-theme-btn').text("Hotel Booking Installing...");
+                }
                 $('.tf-setup-travelfic-theme-btn').addClass('tf-btn-loading');
                 var data = {
                     action: "tf_theme_installing",
@@ -192,8 +198,14 @@
         $(document).on('click', '.tf-setup-travelfic-theme-active', function (e) {
 
             e.preventDefault();
-            let theme_slug = $(this).attr('data-install');
-            $('.tf-setup-travelfic-theme-btn').text("Travelfic Activate...");
+            let theme_slug = $('.tf-template-selection input[name="tf_theme_select"]:checked').val();
+
+            if("travelfic"==theme_slug){
+                $('.tf-setup-travelfic-theme-btn').text("Travelfic Activate...");
+            }
+            if("ultimate-hotel-booking"==theme_slug){
+                $('.tf-setup-travelfic-theme-btn').text("Hotel Booking Activate...");
+            }
 
             $.ajax({
                 type: 'post',
@@ -224,9 +236,11 @@
        
         $(document).on('click', '.tf-setup-travelfic-toolkit-btn', function (e) {
             e.preventDefault();
+            var $this = $(this);
             if ($.inArray("travelfic-toolkit", travelfic_toolkit_active_plugins) !== -1) {
                 let plugin_slug = $(this).attr('data-install');
-                $('.tf-setup-travelfic-theme-btn').text("Toolkit Installing...");
+                $this.text("Toolkit Activate...");
+                $this.addClass('tf-btn-loading');
 
                 var data = {
                     action: "tf_travelfic_toolkit_installing",

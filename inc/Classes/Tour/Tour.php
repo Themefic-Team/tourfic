@@ -2432,12 +2432,9 @@ class Tour {
 							<?php }
 							if ( ! empty( $tour_duration ) ) { ?>
 								<?php
-								$tour_duration_time = $tour_duration > 1 ? $tour_duration_time . 's' : $tour_duration_time;
+									$tour_duration_time = $tour_duration > 1 ? $tour_duration_time . 's' : $tour_duration_time;
 								?>
                                 <li>
-									<?php
-									$tour_duration_time = $tour_duration > 1 ? $tour_duration_time . 's' : $tour_duration_time;
-									?>
                                     <i class="ri-history-fill"></i> <?php echo esc_html( $tour_duration ); ?> <?php echo esc_html( $tour_duration_time ); ?>
                                 </li>
 							<?php } ?>
@@ -4019,25 +4016,8 @@ class Tour {
 				$response['traveller_info'] .= '</div>
             </div>';
 				$tour_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
-				if ( ! function_exists( 'tf_date_format_user' ) ) {
-					function tf_date_format_user( $date, $format ) {
-						if ( ! empty( $date ) && ! empty( $format ) ) {
-							if ( str_contains( $date, " - " ) == true ) {
-								list( $first_date, $last_date ) = explode( " - ", $date );
-								$first_date = gmdate( $format, strtotime( $first_date ) );
-								$last_date  = gmdate( $format, strtotime( $last_date ) );
-
-								return "{$first_date} - {$last_date}";
-							} else {
-								return gmdate( $format, strtotime( $date ) );
-							}
-						} else {
-							return;
-						}
-					}
-				}
 			}
-			$response['traveller_summery'] .= '<h6>On ' . tf_date_format_user( $tour_date, $tour_date_format_for_users ) . '</h6>
+			$response['traveller_summery'] .= '<h6>On ' . self::tf_date_format_user( $tour_date, $tour_date_format_for_users ) . '</h6>
         <table class="table" style="width: 100%">
             <thead>
                 <tr>
@@ -4108,4 +4088,20 @@ class Tour {
 		echo wp_json_encode( $response );
 		die();
 	}
+
+    static function tf_date_format_user( $date, $format ) {
+	    if ( ! empty( $date ) && ! empty( $format ) ) {
+		    if ( str_contains( $date, " - " ) == true ) {
+			    list( $first_date, $last_date ) = explode( " - ", $date );
+			    $first_date = gmdate( $format, strtotime( $first_date ) );
+			    $last_date  = gmdate( $format, strtotime( $last_date ) );
+
+			    return "{$first_date} - {$last_date}";
+		    } else {
+			    return gmdate( $format, strtotime( $date ) );
+		    }
+	    } else {
+		    return;
+	    }
+    }
 }

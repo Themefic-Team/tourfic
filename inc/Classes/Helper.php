@@ -2050,4 +2050,10 @@ class Helper {
 			}
 		}
 	}
+
+	static function tf_var_dump( $var ) {
+		echo '<pre>';
+		var_dump( $var );
+		echo '</pre>';
+	}
 }
