@@ -756,22 +756,24 @@
             }
         });
 
-        // Booking Bar Show
-        $(window).scroll(function() {
-            // Check the position of the target div
-            var targetOffset = $('.tf-date-select-box').offset().top;
-            var targetHeight = $('.tf-date-select-box').outerHeight(); // Get the full height of the div including padding
-            var targetBottom = targetOffset + targetHeight;
+        if($('.tf-date-select-box').length){
+            // Booking Bar Show
+            $(window).scroll(function() {
+                // Check the position of the target div
+                var targetOffset = $('.tf-date-select-box').offset().top;
+                var targetHeight = $('.tf-date-select-box').outerHeight(); // Get the full height of the div including padding
+                var targetBottom = targetOffset + targetHeight;
 
-            var scrollPosition = $(window).scrollTop();
-    
-            // If the user has scrolled past the target div, show the other div
-            if (scrollPosition > targetBottom) {
-                $('.tf-single-booking-bar').fadeIn(); // You can change this to show() or add animations
-            } else {
-                $('.tf-single-booking-bar').fadeOut();
-            }
-        });
+                var scrollPosition = $(window).scrollTop();
+        
+                // If the user has scrolled past the target div, show the other div
+                if (scrollPosition > targetBottom) {
+                    $('.tf-single-booking-bar').fadeIn(); // You can change this to show() or add animations
+                } else {
+                    $('.tf-single-booking-bar').fadeOut();
+                }
+            });
+        }
 
         // Back to Booking Form
         $(document).on('click', '.tf-back-to-booking', function (e) {
