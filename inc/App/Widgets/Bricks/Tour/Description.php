@@ -28,6 +28,7 @@ class TF_Description extends \Bricks\Element {
 
 	// Set builder controls
 	public function set_controls() {
+		global $post;
 		$this->controls['tourDescription'] = [
 			'tab' => 'content',
 			'label' => esc_html__( 'Description', 'tourfic' ),
@@ -36,7 +37,7 @@ class TF_Description extends \Bricks\Element {
 			  'selector' => '.text-editor',
 			  'toolbar' => true,
 			],
-			'default' => esc_html__( 'Here goes the content ..', 'tourfic' ),
+			'default' => get_the_content($post->ID),
 		];
 	}
 
