@@ -930,6 +930,8 @@ class TF_Options {
 
 		$postType = !empty($_POST['postType']) ? sanitize_title( $_POST['postType'] ) : '';
 		$postTitle = !empty($_POST['postTitle']) ? sanitize_text_field( $_POST['postTitle'] ) : '';
+		$fieldId = !empty($_POST['fieldId']) ? sanitize_text_field( $_POST['fieldId'] ) : '';
+		$postId = !empty($_POST['postId']) ? sanitize_text_field( $_POST['postId'] ) : '';
 
 		$response = [];
 		if ( !empty($postType) && !empty($postTitle) ) {
@@ -939,6 +941,11 @@ class TF_Options {
 				'post_title'   => $postTitle,
 				'post_status'  => 'publish'
 			));
+
+			if($fieldId == 'tf_rooms'){
+				$room_meta['tf_hotel'] = $postId;
+				update_post_meta($post_id, 'tf_room_opt', $room_meta);
+			}
 
 			$insert_Data = array(
 				'id' => $post_id,

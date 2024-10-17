@@ -1759,6 +1759,7 @@
             let postTitle = parentDiv.find('.post_title').val();
             let postSelect = parentDiv.find('.post_select_field_name').val();
             let fieldId = parentDiv.find('.field_id').val();
+            let postId = parentDiv.find('.post_id').val();
 
             if(postTitle){
                 $.ajax({
@@ -1768,7 +1769,9 @@
                         action: 'tf_insert_post_data',
                         _nonce: tf_admin_params.tf_nonce,
                         postType: postType,
-                        postTitle: postTitle
+                        postTitle: postTitle,
+                        fieldId: fieldId,
+                        postId: postId
                     },
                     beforeSend: function(){
                         $this.addClass('tf-btn-loading');
