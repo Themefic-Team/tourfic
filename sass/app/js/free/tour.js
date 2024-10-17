@@ -656,9 +656,26 @@
             tour_date_options.disableMobile = "true";
 
             if (custom_avail == true) {
-                tour_date_options.enable = tf_params.tour_form_data.cont_custom_date.map((v) => {
+                tour_date_options.enable = Object.values(tf_params.tour_form_data.cont_custom_date).map((v) => {
+
+                    let today = new Date();
+                    let from_date = '';
+                    let formattedDate = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
+
+                    if( tf_params.tour_form_data.disable_same_day ) {
+                        if (v.date.from == formattedDate) {
+                            let date = new Date( v.date.from );
+                            let nextDay = new Date(date.setDate(date.getDate() + 1));
+                            from_date = nextDay.getFullYear() + '/' + (nextDay.getMonth() + 1) + '/' + nextDay.getDate();
+                        }  else {
+                            from_date = v.date.from;
+                        }
+                    } else {
+                        from_date = v.date.from;
+                    }
+
                     return {
-                        from: v.date.from,
+                        from: from_date,
                         to: v.date.to
                     }
                 });

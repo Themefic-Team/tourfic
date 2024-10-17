@@ -4,6 +4,7 @@ namespace Tourfic\Classes;
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\Room\Room;
 
 class Migrator {
 	use \Tourfic\Traits\Singleton;
@@ -17,6 +18,7 @@ class Migrator {
 			add_action( 'admin_init', array( $this, 'tf_admin_order_data_migration' ) );
 		}
 		add_action( 'admin_init', array( $this, 'tf_hotel_room_migrate' ) );
+		add_action( 'init', array( $this, 'tf_rooms_data_add_in_hotel' ) );
 //		add_action( 'admin_init', array( $this, 'tf_search_keys_migrate' ) );
 	}
 
@@ -888,6 +890,38 @@ class Migrator {
 				}
 
 			}
+		}
+	}
+
+	/* 
+	 * Rooms data add in hotel tf_rooms field
+	 * @author Foysal
+	 */
+	function tf_rooms_data_add_in_hotel(){
+		if ( empty( get_option( 'tf_room_data_add_in_hotel' ) ) ) {
+			$args  = array(
+				'post_type'      => 'tf_hotel',
+				'post_status'    => 'publish',
+				'posts_per_page' => - 1
+			);
+			$posts = new \WP_Query( $args );
+			if ( $posts->have_posts() ) {
+				while ( $posts->have_posts() ) {
+					$posts->the_post();
+					$post_id = get_the_ID();
+					$meta    = get_post_meta( $post_id, 'tf_hotels_opt', true );
+	
+					$rooms = Room::get_hotel_rooms( $post_id );
+					if(!empty($rooms)){
+						$room_ids = array_column($rooms, 'ID');
+						$meta['tf_rooms'] = $room_ids;
+
+						update_post_meta($post_id, 'tf_hotels_opt', $meta);
+					}
+				}
+			}
+
+			update_option( 'tf_room_data_add_in_hotel', 1 );
 		}
 	}
 

@@ -622,6 +622,13 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'default' => '1',
 				),
 				array(
+					'id'       => 'single_tour_booking_form_button_text',
+					'type'     => 'text',
+					'label'    => __( 'Change Booking Form Button Text', 'tourfic' ),
+					'subtitle'  => __( 'With this option, you can change the text of the booking form button for this tour', 'tourfic' ),
+					'default'    => __('Book Now', 'tourfic'),
+				),
+				array(
 					'id'    => 'tf-pro-notice',
 					'type'  => 'notice',
 					'class' => 'tf-pro-notice',
