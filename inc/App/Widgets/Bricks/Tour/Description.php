@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class TF_Description extends \Bricks\Element {
 
-    public $category     = 'tf-addons-elements';
+    public $category     = 'tourfic-elements';
 	public $name         = 'tf-tour-desc';
 	public $icon         = 'ti-loop tf-element';
 	public $css_selector = '';
@@ -13,12 +13,12 @@ class TF_Description extends \Bricks\Element {
 
 	// Return localized element label
 	public function get_label() {
-		return esc_html__( 'TF Tour Description', 'tourfic' );
+		return esc_html__( 'Tour Description', 'tourfic' );
 	}
 
 	// Enqueue element styles and scripts
 	public function enqueue_scripts() {
-		wp_enqueue_style( 'tf-flip-box' );
+		// wp_enqueue_style( 'tf-flip-box' );
 	}
 
 	// Set builder control groups
@@ -28,14 +28,24 @@ class TF_Description extends \Bricks\Element {
 
 	// Set builder controls
 	public function set_controls() {
-
-		
+		$this->controls['tourDescription'] = [
+			'tab' => 'content',
+			'label' => esc_html__( 'Description', 'tourfic' ),
+			'type' => 'editor',
+			'inlineEditing' => [
+			  'selector' => '.text-editor',
+			  'toolbar' => true,
+			],
+			'default' => esc_html__( 'Here goes the content ..', 'tourfic' ),
+		];
 	}
 
 
 	// Render element HTML
 	public function render() {
-		
+		if ( isset( $this->settings['tourDescription'] ) ) {
+			echo '<div class="text-editor">' . $this->settings['tourDescription'] . '</div>';
+		}
 	}
     
 }

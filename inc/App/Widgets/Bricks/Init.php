@@ -17,9 +17,10 @@ class Init {
         $element_files = [
             __DIR__ . '/Tour/Description.php',
         ];
-    
-        foreach ( $element_files as $file_class ) {
-            \Bricks\Elements::register_element( $file_class );
+        if(!empty($element_files)){
+            foreach ( $element_files as $file_class ) {
+                \Bricks\Elements::register_element( $file_class );
+            }
         }
     }
     
