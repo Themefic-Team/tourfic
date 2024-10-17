@@ -39,6 +39,18 @@ class TF_Description extends \Bricks\Element {
 			],
 			'default' => get_the_content($post->ID),
 		];
+
+		$this->controls['tourDescriptionDesign'] = [
+			'tab'     => 'content',
+			'label'   => esc_html__( 'Design', 'tourfic' ),
+			'type'    => 'select',
+			'options' => [
+				'design-1'  => esc_html__( 'Design 1', 'tourfic' ),
+				'design-2' => esc_html__( 'Design 2', 'tourfic' ),
+			],
+			'inline'  => true,
+			'default' => 'design-1',
+		];
 	}
 
 
