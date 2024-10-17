@@ -548,6 +548,24 @@ trait Action_Helper {
 		}
 	}
 
+	function tf_customer_role_caps(){
+		if ( get_option( 'tf_customer_caps' ) < 1 ) {
+			$customer_role  = get_role( 'customer' );
+
+			// Add a new capability.
+			$caps = array(
+				// for comment submit
+				'unfiltered_html',
+			);
+
+			foreach ( $caps as $cap ) {
+				$customer_role->add_cap( $cap );
+			}
+
+			update_option( 'tf_customer_caps', 1 );
+		}
+	}
+
 	/**
 	 * Search Result Sidebar check availability
 	 *

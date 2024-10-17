@@ -45,6 +45,10 @@ class TF_Options {
 		add_action( 'wp_ajax_tf_add_apartment_availability', array( $this, 'tf_add_apartment_availability' ) );
 		add_action( 'wp_ajax_tf_get_apartment_availability', array( $this, 'tf_get_apartment_availability' ) );
 		add_action( 'save_post', array( $this, 'tf_update_apt_availability_price' ), 99, 2 );
+		add_action( 'wp_ajax_tf_insert_category_data', array( $this, 'tf_insert_category_data_callback' ) );
+		add_action( 'wp_ajax_tf_delete_category_data', array( $this, 'tf_delete_category_data_callback' ) );
+		add_action( 'wp_ajax_tf_insert_post_data', array( $this, 'tf_insert_post_data_callback' ) );
+		add_action( 'wp_ajax_tf_delete_post_data', array( $this, 'tf_delete_post_data_callback' ) );
 	}
 
 	public function tf_options_file_path( $file_path = '' ) {
@@ -848,5 +852,140 @@ class TF_Options {
 		}
 
 		return $dateTime->format( 'Y/m/d' );
+	}
+
+	/**
+	 * Insert Category Data
+	 *
+	 * @author Jahid
+	 */
+	function tf_insert_category_data_callback() {
+		//Verify Nonce
+		check_ajax_referer( 'updates', '_nonce' );
+
+		$categoryName = sanitize_title( $_POST['categoryName'] );
+		$categoryTitle = sanitize_text_field( $_POST['categoryTitle'] );
+		$parentCategory = sanitize_key( $_POST['parentCategory'] );
+
+		$response = [];
+		if ( !empty($categoryName) && !empty($categoryTitle) ) {
+			// Insert the term
+			$term = wp_insert_term(
+				$categoryTitle,   // The term
+				$categoryName, // The taxonomy
+				array(
+					'slug'   => sanitize_title($categoryTitle),
+					'parent' => !empty($parentCategory) ? intval($parentCategory) : ''
+				)
+			);
+			$insert_Date = array(
+				'id' => $term['term_id'],
+				'title' => get_term_field('name', $term['term_id'], $categoryName)
+			);
+
+			$response ['insert_category'] = $insert_Date;
+		}
+		echo wp_json_encode( $response );
+		wp_die();
+	}
+
+	/**
+	 * Delete Category Data
+	 *
+	 * @author Jahid
+	 */
+	function tf_delete_category_data_callback() {
+		//Verify Nonce
+		check_ajax_referer( 'updates', '_nonce' );
+
+		$categoryName = sanitize_title( $_POST['categoryName'] );
+		$term_id = intval($_POST['term_id']);
+
+		$response = [];
+
+		if (!empty($term_id)) {
+			$result = wp_delete_term($term_id, $categoryName); // Replace 'category' with your taxonomy if it's different
+
+			if (!is_wp_error($result)) {
+				$response['success'] = true;
+			} else {
+				$response['error'] = $result->get_error_message();
+			}
+		} else {
+			$response['error'] = 'Invalid term ID.';
+		}
+
+		echo wp_json_encode($response);
+		wp_die();
+	}
+
+	/**
+	 * Insert Post Data
+	 *
+	 * @author Foysal
+	 */
+	function tf_insert_post_data_callback() {
+		//Verify Nonce
+		check_ajax_referer( 'updates', '_nonce' );
+
+		$postType = !empty($_POST['postType']) ? sanitize_title( $_POST['postType'] ) : '';
+		$postTitle = !empty($_POST['postTitle']) ? sanitize_text_field( $_POST['postTitle'] ) : '';
+		$fieldId = !empty($_POST['fieldId']) ? sanitize_text_field( $_POST['fieldId'] ) : '';
+		$postId = !empty($_POST['postId']) ? sanitize_text_field( $_POST['postId'] ) : '';
+
+		$response = [];
+		if ( !empty($postType) && !empty($postTitle) ) {
+			// Insert the post
+			$post_id = wp_insert_post(array(
+				'post_type'    => $postType,
+				'post_title'   => $postTitle,
+				'post_status'  => 'publish'
+			));
+
+			if($fieldId == 'tf_rooms'){
+				$room_meta['tf_hotel'] = $postId;
+				update_post_meta($post_id, 'tf_room_opt', $room_meta);
+			}
+
+			$insert_Data = array(
+				'id' => $post_id,
+				'title' => get_the_title($post_id),
+				'edit_url' => esc_url( get_edit_post_link( $post_id ) ),
+			);
+
+			$response ['insert_post'] = $insert_Data;
+		}
+		echo wp_json_encode( $response );
+		wp_die();
+	}
+
+	/**
+	 * Delete Post Data
+	 *
+	 * @author Foysal
+	 */
+	function tf_delete_post_data_callback() {
+		//Verify Nonce
+		check_ajax_referer( 'updates', '_nonce' );
+
+		$categoryName = sanitize_title( $_POST['categoryName'] );
+		$term_id = intval($_POST['term_id']);
+
+		$response = [];
+
+		if (!empty($term_id)) {
+			$result = wp_delete_term($term_id, $categoryName); // Replace 'category' with your taxonomy if it's different
+
+			if (!is_wp_error($result)) {
+				$response['success'] = true;
+			} else {
+				$response['error'] = $result->get_error_message();
+			}
+		} else {
+			$response['error'] = 'Invalid term ID.';
+		}
+
+		echo wp_json_encode($response);
+		wp_die();
 	}
 }
