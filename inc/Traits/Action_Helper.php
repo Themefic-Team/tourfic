@@ -345,58 +345,72 @@ trait Action_Helper {
 
 		global $post;
 
-		/**
-		 * Hotel Single
-		 *
-		 * single-hotel.php
-		 */
-		if ( 'tf_hotel' === $post->post_type ) {
-
-			$theme_files     = array( 'tourfic/hotel/single-hotel.php' );
+		$bricks_active = get_post_meta( $post->ID, '_bricks_editor_mode', true );
+		$current_active_theme = !empty(get_option('stylesheet')) ? get_option('stylesheet') : 'No';
+		if('bricks'==$current_active_theme && !empty($bricks_active)){
+			$theme_files     = array( 'tourfic/common/bricks.php' );
 			$exists_in_theme = locate_template( $theme_files, false );
 
 			if ( $exists_in_theme ) {
 				return $exists_in_theme;
 			} else {
-				return TF_TEMPLATE_PATH . "hotel/single-hotel.php";
+				return TF_TEMPLATE_PATH . "common/bricks.php";
 			}
-		}
+			
+		}else{
+			/**
+			 * Hotel Single
+			 *
+			 * single-hotel.php
+			 */
+			if ( 'tf_hotel' === $post->post_type ) {
 
-		/**
-		 * Apartment Single
-		 *
-		 * single-apartment.php
-		 */
-		if ( 'tf_apartment' === $post->post_type ) {
+				$theme_files     = array( 'tourfic/hotel/single-hotel.php' );
+				$exists_in_theme = locate_template( $theme_files, false );
 
-			$theme_files     = array( 'tourfic/apartment/single-apartment.php' );
-			$exists_in_theme = locate_template( $theme_files, false );
-
-			if ( $exists_in_theme ) {
-				return $exists_in_theme;
-			} else {
-				return TF_TEMPLATE_PATH . "apartment/single-apartment.php";
+				if ( $exists_in_theme ) {
+					return $exists_in_theme;
+				} else {
+					return TF_TEMPLATE_PATH . "hotel/single-hotel.php";
+				}
 			}
-		}
 
-		/**
-		 * Tour Single
-		 *
-		 * single-tour.php
-		 */
-		if ( $post->post_type == 'tf_tours' ) {
+			/**
+			 * Apartment Single
+			 *
+			 * single-apartment.php
+			 */
+			if ( 'tf_apartment' === $post->post_type ) {
 
-			$theme_files     = array( 'tourfic/tour/single-tour.php' );
-			$exists_in_theme = locate_template( $theme_files, false );
+				$theme_files     = array( 'tourfic/apartment/single-apartment.php' );
+				$exists_in_theme = locate_template( $theme_files, false );
 
-			if ( $exists_in_theme ) {
-				return $exists_in_theme;
-			} else {
-				return TF_TEMPLATE_PATH . "tour/single-tour.php";
+				if ( $exists_in_theme ) {
+					return $exists_in_theme;
+				} else {
+					return TF_TEMPLATE_PATH . "apartment/single-apartment.php";
+				}
 			}
-		}
 
-		return $single_template;
+			/**
+			 * Tour Single
+			 *
+			 * single-tour.php
+			 */
+			if ( $post->post_type == 'tf_tours' ) {
+
+				$theme_files     = array( 'tourfic/tour/single-tour.php' );
+				$exists_in_theme = locate_template( $theme_files, false );
+
+				if ( $exists_in_theme ) {
+					return $exists_in_theme;
+				} else {
+					return TF_TEMPLATE_PATH . "tour/single-tour.php";
+				}
+			}
+
+			return $single_template;
+		}
 	}
 
 	/**
