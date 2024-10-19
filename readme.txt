@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.6
-Stable tag: 2.13.11
+Stable tag: 2.13.12
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -321,6 +321,10 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.13.12 - 19 October 2024 =
+
+- Fixed: Woocommerce plugin check for customer role capabilities
 
 = 2.13.11 - 17 October 2024 =
 
