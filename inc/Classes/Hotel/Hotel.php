@@ -35,12 +35,9 @@ class Hotel {
 		add_action( 'wp_ajax_nopriv_tf_hotel_search', array( $this, 'tf_hotel_search_ajax_callback' ) );
 		add_action( 'tf_hotel_features_filter', array( $this, 'tf_hotel_filter_by_features' ), 10, 1 );
 		add_action( 'wp_after_insert_post', array( $this, 'tf_hotel_features_assign_taxonomies' ), 100, 3 );
-<<<<<<< HEAD
 		//add_filter( 'comment_form_fields', array($this, 'tf_move_comment_field') );
-=======
 		add_action( 'wp_after_insert_post', array( $this, 'tf_hotel_rooms_assign' ), 100, 3 );
 		add_action( 'wp_after_insert_post', array( $this, 'tf_room_assign_to_hotel' ), 100, 3 );
->>>>>>> 524c2e9f1752405d316c5616fea382c168ebb582
 	}
 
 	/**
