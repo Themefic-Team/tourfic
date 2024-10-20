@@ -113,6 +113,13 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'style'   => 'success',
 					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/booking-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
+				array(
+					'id'          => 'car_info_sec_title',
+					'type'        => 'text',
+					'label'       => __( 'Section Title', 'tourfic' ),
+					'subtitle'       => __( 'This will be displayed in the Car info Section.', 'tourfic' ),
+					'default'    => 'Car info',
+				),
                 array(
 					'id'       => 'car_as_featured',
 					'type'     => 'switch',
@@ -255,6 +262,16 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					],
 				),
 				array(
+					'id'          => 'driver_sec_title',
+					'type'        => 'text',
+					'label'       => __( 'Section Title', 'tourfic' ),
+					'subtitle'       => __( 'This will be displayed in the Driver details Box.', 'tourfic' ),
+					'default'    => 'Driver details',
+					'dependency'  => [
+						array( 'driver_included', '==', 'true' )
+					],
+				),
+				array(
 					'id'          => 'driver_name',
 					'type'        => 'text',
 					'label'       => __( 'Name', 'tourfic' ),
@@ -367,6 +384,16 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'subtitle' => esc_html__( 'Do you want to show Benefits in the frontend?', 'tourfic' )
 				),
 				array(
+					'id'          => 'benefits_sec_title',
+					'type'        => 'text',
+					'label'       => __( 'Section Title', 'tourfic' ),
+					'subtitle'       => __( 'This will be displayed in the Benefits Section.', 'tourfic' ),
+					'default'    => 'Benefits',
+					'dependency'  => [
+						array( 'benefits_section', '==', 'true' )
+					],
+				),
+				array(
 					'id'           => 'benefits',
 					'type'         => 'repeater',
 					'button_title' => __( 'Add New Benefits', 'tourfic' ),
@@ -403,6 +430,13 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'subtitle' => esc_html__( 'Do you want to show Include and Exclude in the frontend?', 'tourfic' )
 				),
 				array(
+					'id'          => 'inc_sec_title',
+					'type'        => 'text',
+					'label'       => __( 'Section Title', 'tourfic' ),
+					'subtitle'       => __( 'This will be displayed in the Include Section.', 'tourfic' ),
+					'default'    => 'Include',
+				),
+				array(
 					'id'           => 'inc',
 					'type'         => 'repeater',
 					'label'        => __( 'Items Included', 'tourfic' ),
@@ -428,6 +462,13 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'dependency'  => [
 						array( 'inc_exc_section', '==', 'true' )
 					],
+				),
+				array(
+					'id'          => 'exc_sec_title',
+					'type'        => 'text',
+					'label'       => __( 'Section Title', 'tourfic' ),
+					'subtitle'       => __( 'This will be displayed in the Exclude Section.', 'tourfic' ),
+					'default'    => 'Exclude',
 				),
 				array(
 					'id'           => 'exc',
@@ -527,6 +568,16 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'type'     => 'switch',
 					'label'    => esc_html__( 'Do you want to show Contact information in the frontend?', 'tourfic' ),
 					'subtitle' => esc_html__( 'Do you want to show Contact information in the frontend?', 'tourfic' )
+				),
+				array(
+					'id'          => 'owner_sec_title',
+					'type'        => 'text',
+					'label'       => __( 'Section Title', 'tourfic' ),
+					'subtitle'       => __( 'This will be displayed in the Owner Information Box.', 'tourfic' ),
+					'default'    => 'Owner Information',
+					'dependency'  => [
+						array( 'information_section', '==', 'true' )
+					],
 				),
 				array(
 					'id'          => 'owner_name',
@@ -873,6 +924,13 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/faq-terms/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
+					'id'          => 'faq_sec_title',
+					'type'        => 'text',
+					'label'       => __( 'Section Title', 'tourfic' ),
+					'subtitle'       => __( 'This will be displayed in the FAQ Section.', 'tourfic' ),
+					'default'    => 'FAQ’s',
+				),
+				array(
 					'id'           => 'faq',
 					'type'         => 'repeater',
 					'button_title' => __( 'Add New Faq', 'tourfic' ),
@@ -958,6 +1016,13 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'type'    => 'notice',
 					'style'   => 'success',
 					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'          => 'review_sec_title',
+					'type'        => 'text',
+					'label'       => __( 'Review Section Title', 'tourfic' ),
+					'subtitle'       => __( 'This will be displayed in the Review Section.', 'tourfic' ),
+					'default'    => 'Review Scores',
 				),
 				array(
 					'id'        => 'c-share',
