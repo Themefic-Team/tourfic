@@ -2,6 +2,7 @@
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Hotel\Pricing;
+use \Tourfic\Classes\Hotel\Hotel;
 
 $total_dis_dates = [];
 if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $room['avail_date'] ) ) {
@@ -418,7 +419,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 							<?php } ?>
                         </div>
                         <div class="tf_desc"></div>
-						<?php //tf_hotel_without_booking_popup( $hotel_id, $room_id, $form_adult, $form_child );
+						<?php Hotel::hotel_booking_popup( $hotel_id, $room_id, $form_adult, $form_child );
 						?>
                     </form>
                 </td>
@@ -599,7 +600,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						<?php } ?>
                     </div>
                     <div class="tf_desc"></div>
-					<?php //tf_hotel_without_booking_popup( $hotel_id, $room_id, $form_adult, $form_child );
+					<?php Hotel::hotel_booking_popup( $hotel_id, $room_id, $form_adult, $form_child );
 					?>
                 </form>
             </td>

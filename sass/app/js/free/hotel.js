@@ -528,6 +528,16 @@
                 $("#hotel_room_depo").val(hotel_deposit);
             }
 
+            /*if ($(this).closest('.room-submit-wrap').find('input[name=room_id]').val()) {
+                var room_id = $(this).closest('.room-submit-wrap').find('input[name=room_id]').val();
+            } else {
+                var room_id = $("#hotel_roomid").val();
+            }
+            if ($(this).closest('.room-submit-wrap').find('input[name=unique_id]').val()) {
+                var unique_id = $(this).closest('.room-submit-wrap').find('input[name=unique_id]').val();
+            } else {
+                var unique_id = $("#hotel_room_uniqueid").val();
+            }*/
             var location = $('input[name=place]').val();
             var adult = $('input[name=adult]').val();
             var child = $('input[name=child]').val();
@@ -541,7 +551,7 @@
                 var room = $("#hotel_room_number").val();
                 var deposit = $("#hotel_room_depo").val();
             }
-            var airport_service = $('[name="tf_airport_service"]:checked').val();
+            var airport_service = $('[name="airport_service"]:checked').val();
 
             var data = {
                 action: 'tf_hotel_booking_popup',
@@ -568,6 +578,7 @@
                     $('#tour_room_details_loader').show();
                 },
                 complete: function (data) {
+                    $this.closest(".room-submit-wrap").siblings(".tf-withoutpayment-booking").find('.tf-hotel-booking-content').show()
                     $this.unblock();
                 },
                 success: function (data) {
@@ -597,7 +608,10 @@
                         if ($('.tf-booking-traveller-info').length > 0) {
                             $('.tf-booking-traveller-info').html(response.hotel_booking_summery);
                         }
-                        $this.closest('form.tf-room').find('.tf-withoutpayment-booking').addClass('show');
+                        if( ! $this.closest('form.tf-room').find('.tf-withoutpayment-booking').hasClass('show') ){
+                            $this.closest('form.tf-room').find('.tf-withoutpayment-booking').addClass('show');
+                        }
+                        $this.closest(".room-submit-wrap").siblings(".tf-withoutpayment-booking").find('.tf-control-pagination:first-child').show()
                     }
                 },
                 error: function (data) {
@@ -610,13 +624,11 @@
             e.preventDefault();
             var $this = $(this);
 
-            console.log("Hello World")
-
             hotelPopupBooking($this);
         });
 
 
-        $(document).on("change", "[name='tf_airport_service']", function (e) {
+        $(document).on("change", "[name='airport_service']", function (e) {
             var $this = $(this);
 
             hotelPopupBooking($this);
