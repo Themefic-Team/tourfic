@@ -33,9 +33,11 @@ class TF_Description extends \Bricks\Element {
 			'tab' => 'content',
 			'label' => esc_html__( 'Description', 'tourfic' ),
 			'type' => 'editor',
-			'inlineEditing' => [
-			  'selector' => '.text-editor',
-			  'toolbar' => true,
+			'css' => [
+				[
+					'property' => 'text-transform',
+					'selector' => '.text-editor p',
+				],
 			],
 			'default' => get_the_content($post->ID),
 		];
@@ -56,9 +58,9 @@ class TF_Description extends \Bricks\Element {
 
 	// Render element HTML
 	public function render() {
-		if ( isset( $this->settings['tourDescription'] ) ) {
-			echo '<div class="text-editor">' . $this->settings['tourDescription'] . '</div>';
-		}
+		if ( isset( $this->settings['tourDescription'] ) ) { ?>
+			<div <?php echo wp_kses_post( $this->render_attributes( '_root' ) ); ?>><?php echo $this->settings['tourDescription']; ?></div>
+		<?php }
 	}
     
 }
