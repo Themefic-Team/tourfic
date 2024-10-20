@@ -538,12 +538,18 @@
                         margin: 0 0 20px 0;
                     }
                 }
+                .tf-clients-reviews ~ .tf-review-form-wrapper{
+                    margin-top: 20px;
+                }
                 .tf-review-submit{
                     margin-top: 16px;
                 }
                 .tf-review-form-container{
                     min-width: auto;
                     background:  transparent !important;
+                    .tf-visitor-info{
+                        margin: 20px 0px !important;
+                    }
                     .tf-rating-wrapper{
                         margin-bottom: 20px;
                     }
@@ -651,6 +657,7 @@
                             }
                         }
                         .tf-reviews-text{
+                            width: calc(100% - 62px);
                             .tf-review-rating{
                                 font-size: 0;
                                 color: #FFBF0F;

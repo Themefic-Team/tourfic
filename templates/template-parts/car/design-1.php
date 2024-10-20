@@ -223,16 +223,20 @@ $tf_cars_slug = get_option('car_slug');
                                     <?php esc_html_e("Car info", "tourfic"); ?>
                                 </a>
                             </li>
+                            <?php if(!empty($benefits)){ ?>
                             <li data-menu="<?php echo esc_attr('tf-benefits'); ?>">
                                 <a class="tf-hashlink" href="#tf-benefits">
                                     <?php esc_html_e("Benefits", "tourfic"); ?>
                                 </a>
                             </li>
+                            <?php } ?>
+                            <?php if(!empty($includes) || !empty($excludes)){ ?>
                             <li data-menu="<?php echo esc_attr('tf-inc-exc'); ?>">
                                 <a class="tf-hashlink" href="#tf-inc-exc">
                                     <?php esc_html_e("Include/Excluce", "tourfic"); ?>
                                 </a>
                             </li>
+                            <?php } ?>
                             <li data-menu="<?php echo esc_attr('tf-location'); ?>">
                                 <a class="tf-hashlink" href="#tf-location">
                                     <?php esc_html_e("Location", "tourfic"); ?>
@@ -243,11 +247,13 @@ $tf_cars_slug = get_option('car_slug');
                                     <?php esc_html_e("Reviews", "tourfic"); ?>
                                 </a>
                             </li>
+                            <?php if(!empty($faqs)){ ?>
                             <li data-menu="<?php echo esc_attr('tf-faq'); ?>">
                                 <a class="tf-hashlink" href="#tf-faq">
                                     <?php esc_html_e("FAQ's", "tourfic"); ?>
                                 </a>
                             </li>
+                            <?php } ?>
                         </ul>
                     </div>
                     <div class="tf-template-part tf-flex tf-flex-gap-32 tf-flex-direction-column">
@@ -430,6 +436,7 @@ $tf_cars_slug = get_option('car_slug');
                                 <?php } ?>
                             <?php } ?>
                         </div>
+                        <?php if(!empty($car_instructions_content)){ ?>
                         <div class="tf-instraction-btn tf-mt-16">
                             <span class="tf-instraction-showing"><?php esc_html_e("Pick-up and Drop-off instructions", "tourfic"); ?></span>
                             
@@ -452,6 +459,7 @@ $tf_cars_slug = get_option('car_slug');
                                 </div>
                             </div>
                         </div>
+                        <?php } ?>
 
                         <script>
                         (function ($) {
