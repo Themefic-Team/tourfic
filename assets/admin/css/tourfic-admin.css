@@ -6415,6 +6415,10 @@ a.tf-import-btn, a.tf-export-btn {
   margin: 12px 24px;
 }
 
+.tf-enquiry-table tbody .tf-enquiry-single-row {
+  cursor: pointer;
+}
+
 .tf-enquiry-table tbody .tf-enquiry-single-row .check-column .table-name-column {
   display: inline-flex;
   align-items: center;
@@ -6873,10 +6877,6 @@ hr.enqury-single-title-line {
 
 #tf-enquiry-reply-editor_ifr, #tf-enquiry-reply-editor {
   height: 200px !important;
-}
-
-.tf-enquiry-single-row {
-  cursor: pointer;
 }
 
 @media only screen and (max-width: 991.98px) {

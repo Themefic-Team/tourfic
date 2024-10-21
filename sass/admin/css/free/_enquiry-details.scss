@@ -49,6 +49,8 @@
     }
 
     tbody .tf-enquiry-single-row {
+        cursor: pointer;
+        
         .check-column {
             .table-name-column {
                 display: inline-flex;
@@ -516,10 +518,6 @@ hr.enqury-single-title-line {
 
 #tf-enquiry-reply-editor_ifr, #tf-enquiry-reply-editor {
     height: 200px !important;
-}
-
-.tf-enquiry-single-row {
-    cursor: pointer;
 }
 
 @media #{$max991}{
