@@ -16217,6 +16217,9 @@ html {
   line-height: 150%; /* 24px */
   padding: 0 0 16px 0px;
 }
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select {
+  height: 15px;
+}
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label {
   color: #566676;
   font-size: 16px;
@@ -16227,6 +16230,7 @@ html {
   margin-bottom: 0px;
   margin-right: 23px;
   cursor: pointer;
+  display: block;
 }
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input {
   position: absolute;
@@ -16243,10 +16247,9 @@ html {
 }
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .checkmark {
   position: absolute;
-  top: 2px;
-  left: 0;
   height: 15px;
   width: 15px;
+  top: 0;
   border: 2px solid #566676;
   background-color: transparent;
   border-radius: 5px;

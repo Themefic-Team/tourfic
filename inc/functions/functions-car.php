@@ -562,7 +562,7 @@ function tf_car_booking_pupup_callback() {
 					foreach($car_protections as $pkey => $protection){ ?>
 					<tr>
 						<th>
-							<div class="tf-flex">
+							<div class="tf-flex tf-flex-align-center">
 								<div class="tf-protection-select">
 									<label>
 										<input type="checkbox" name="protections[]" value="<?php echo esc_attr($pkey); ?>">
