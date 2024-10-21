@@ -435,6 +435,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'label'       => __( 'Section Title', 'tourfic' ),
 					'subtitle'       => __( 'This will be displayed in the Include Section.', 'tourfic' ),
 					'default'    => esc_html__( 'Include', 'tourfic' ),
+					'dependency'  => [
+						array( 'inc_exc_section', '==', 'true' )
+					],
 				),
 				array(
 					'id'           => 'inc',
@@ -469,6 +472,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'label'       => __( 'Section Title', 'tourfic' ),
 					'subtitle'       => __( 'This will be displayed in the Exclude Section.', 'tourfic' ),
 					'default'    => esc_html__( 'Exclude', 'tourfic' ),
+					'dependency'  => [
+						array( 'inc_exc_section', '==', 'true' )
+					],
 				),
 				array(
 					'id'           => 'exc',
