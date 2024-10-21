@@ -125,7 +125,7 @@ abstract Class TF_Booking_Details {
                     <div class="tf_header_wrap_button">
                         <?php if ( function_exists('is_tf_pro') && is_tf_pro() ){ ?>
                         <div class="tf-google-sync-button">
-                            <button class="tf-google-calendar-sync" data-bookingtype="<?php echo esc_attr($this->booking_args["booking_type"]); ?>"><?php esc_html_e("Google Sync", "tourfic"); ?></button>
+                            <button class="tf-google-calendar-sync" data-bookingtype="<?php echo esc_attr($this->booking_args["booking_type"]); ?>"><?php esc_html_e("Refresh", "tourfic"); ?></button>
                         </div>
                         <?php } ?>
                         <div class="tf_booking_views_button">
@@ -182,6 +182,9 @@ abstract Class TF_Booking_Details {
 
             <?php }
         }
+        
+        do_action( 'tf_google_calendar_notice_box' );
+        
     }
 
     function tf_booking_details_list( $booking_type, $tf_order_details_result ) {
