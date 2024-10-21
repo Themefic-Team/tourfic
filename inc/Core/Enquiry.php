@@ -1049,7 +1049,11 @@ abstract class Enquiry {
 				$headers[] = 'References: ' . $reply_data[$replay_data_last_index]["references"];
 			}
 
-			$reply_footer = "<br><p>" . esc_html__("Please reply to this email to update your enquiry.",'tourfic') . "</p>";
+			$reply_footer = '';
+
+			if( is_plugin_active( 'tourfic-email-piping/tourfic-email-piping.php' ) ) {
+				$reply_footer = "<br><p>" . esc_html__("Please reply to this email to update your enquiry.",'tourfic') . "</p>";
+			}
 
 			$send_mail = wp_mail( $to, $subject, $reply_message . $reply_footer, $headers );
 			
