@@ -96,7 +96,7 @@ class Pricing {
 
             // Convert the difference to total hours
             $total_hours = ($interval->days * 24) + $interval->h + ($interval->i / 60);
-            
+
             $all_prices = [];
             $result = array();
             foreach ($day_pricing as $entry) {
@@ -107,10 +107,7 @@ class Pricing {
 
                 $price_type = $day_type;
 
-                if('hour'==$day_type){
-                    $total_multiply = $total_hours;
-                }
-                if('day'==$day_type){
+                if('day'==$day_type && $interval->days > 0){
                     // Get total days
                     $total_days = $interval->days;
                     
@@ -119,14 +116,16 @@ class Pricing {
                         $total_days += 1;  // Add an extra day for any remaining hours
                     }
                     $total_multiply = $total_days;
+                }else{
+                    $total_multiply = $total_hours;
                 }
+
                 if( $startDay <= $total_multiply  && $endDay >= $total_multiply ){
                     $result['price'] = $price;
                     $result['total_multiply'] = $total_multiply;
                     break;
                 }
             }
-            
             if(!empty($result)){
                 $totalPrice = $result['price'] ? $result['price'] : 0;
                 $total_multiply = $result['total_multiply'] ? $result['total_multiply'] : 1;

@@ -756,12 +756,12 @@
             }
         });
 
-        if($('.tf-date-select-box').length){
+        if($('.tf-single-car-details-warper .tf-details-menu').length){
             // Booking Bar Show
             $(window).scroll(function() {
                 // Check the position of the target div
-                var targetOffset = $('.tf-date-select-box').offset().top;
-                var targetHeight = $('.tf-date-select-box').outerHeight(); // Get the full height of the div including padding
+                var targetOffset = $('.tf-single-car-details-warper .tf-details-menu').offset().top;
+                var targetHeight = $('.tf-single-car-details-warper .tf-details-menu').outerHeight(); // Get the full height of the div including padding
                 var targetBottom = targetOffset + targetHeight;
 
                 var scrollPosition = $(window).scrollTop();
@@ -779,9 +779,9 @@
         $(document).on('click', '.tf-back-to-booking', function (e) {
             e.preventDefault(); // Prevent any default action (optional if button is a link)
             $('.tf-single-booking-bar').fadeOut();
-            // Scroll to the .tf-date-select-box div
+            // Scroll to the .tf-single-car-details-warper .tf-details-menu div
             $('html, body').animate({
-                scrollTop: $('.tf-date-select-box').offset().top
+                scrollTop: $('.tf-single-car-details-warper .tf-details-menu').offset().top
             }); // 800 is the duration of the scroll animation in milliseconds (adjust as needed)
         });        
 
