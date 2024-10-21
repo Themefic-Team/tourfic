@@ -1285,6 +1285,7 @@ abstract Class TF_Booking_Details {
         <div class="tf-popup-header">
             <h3>
             <?php echo esc_html( get_the_title( $tf_order_details->post_id ) ); ?>
+            <a href="<?php echo esc_url(admin_url() . 'edit.php?post_type=' . $_POST['type'] . '&amp;page=' . $_POST['page'] . '&amp;order_id=' . $tf_order_details->order_id . '&amp;book_id=' . $tf_order_details->id . '&amp;action=preview'); ?>" target="_blank"><i class="fa-solid fa-up-right-from-square"></i></a>
             </h3>
             <div class="tf-close">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

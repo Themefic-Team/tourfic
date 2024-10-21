@@ -467,6 +467,8 @@
                 data: {
                     action: 'tf_booking_details_popup',
                     id: $this.attr('data-id'),
+                    type: $this.attr('data-type'),
+                    page: $this.attr('data-page'),
                     _ajax_nonce: tf_admin_params.tf_nonce
                 },
                 beforeSend: function (data) {
@@ -558,6 +560,8 @@ function initializeCalendar(eventsSource) {
             var customEl = document.createElement('div');
             customEl.classList.add('tf-booking-single-popup');
             customEl.setAttribute('data-id', info.event.id);
+            customEl.setAttribute('data-type', info.event.extendedProps.post_type);
+            customEl.setAttribute('data-page', info.event.extendedProps.page);
             customEl.innerHTML = `<span>${info.event.title}</span>`;
             return { domNodes: [customEl] };
         }

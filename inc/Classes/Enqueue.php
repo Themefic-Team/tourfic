@@ -1012,7 +1012,9 @@ class Enqueue {
 					'start' => $order['check_in'],
 					'end' => $order['check_out'],
 					'id' => $order['id'],
-					'status' => $order['ostatus']
+					'status' => $order['ostatus'],
+					'post_type' => 'tf_tours',
+					'page' => 'tf_tours_booking'
 				);
 			}
 		}
@@ -1032,7 +1034,9 @@ class Enqueue {
 					'start' => $order['check_in'],
 					'end' => $order['check_out'],
 					'id' => $order['id'],
-					'status' => $order['ostatus']
+					'status' => $order['ostatus'],
+					'post_type' => 'tf_hotel',
+					'page' => 'tf_hotel_booking'
 				);
 			}
 		}
@@ -1052,7 +1056,9 @@ class Enqueue {
 					'start' => $order['check_in'],
 					'end' => $order['check_out'],
 					'id' => $order['id'],
-					'status' => $order['ostatus']
+					'status' => $order['ostatus'],
+					'post_type' => 'tf_apartment',
+					'page' => 'tf_apartment_booking'
 				);
 			}
 		}
