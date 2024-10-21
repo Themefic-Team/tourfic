@@ -181,6 +181,7 @@ hr.enqury-single-title-line {
             background-color: #fff;
             padding: 16px 0px 24px 0px;
             border-radius: 8px;
+            min-height: 286px;
     
             h2 {
                 font-family: inherit;
@@ -515,6 +516,10 @@ hr.enqury-single-title-line {
 
 #tf-enquiry-reply-editor_ifr, #tf-enquiry-reply-editor {
     height: 200px !important;
+}
+
+.tf-enquiry-single-row {
+    cursor: pointer;
 }
 
 @media #{$max991}{

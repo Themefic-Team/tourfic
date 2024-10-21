@@ -21,9 +21,13 @@ abstract class Enquiry {
 		add_action( 'wp_ajax_tf_enquiry_reply_email', array($this, 'tf_enquiry_reply_email_callback') );
 		add_action( 'wp_ajax_tf_enquiry_filter_mail', array($this, 'tf_enquiry_filter_mail_callback') );
 
-		add_filter( 'cron_schedules', array($this, 'tf_enquiry_response_schedule') );
-		add_action( 'init', array($this, 'tf_enquiry_response_schedule_event') );
-		add_action( 'tf_enquiry_response_schedule', array($this, 'tf_enquiry_response_schedule_callback') );
+		if( is_plugin_active( 'tourfic-email-piping/tourfic-email-piping.php' ) ) {
+			add_filter( 'cron_schedules', array($this, 'tf_enquiry_response_schedule') );
+			add_action( 'init', array($this, 'tf_enquiry_response_schedule_event') );
+			add_action( 'tf_enquiry_response_schedule', array($this, 'tf_enquiry_response_schedule_callback') );
+		} else {
+			self::tf_enquiry_update_response_unschedule();
+		}
 }
 
 	abstract public function add_submenu();
@@ -162,7 +166,7 @@ abstract class Enquiry {
 				if( !empty( $data )) :
 					foreach ( $data as $enquiry ) { ?>
 						<?php 
-							$tr_unread_class = $enquiry["status"] == 'unread' ? 'tf-enquiry-unread' : ( $enquiry["status"] == 'responded' ? 'tf-enquiry-responded' : '' );
+							$tr_unread_class = $enquiry["status"] == 'unread' ? 'tf-enquiry-unread' : ( $enquiry["status"] == 'responded' && function_exists( 'is_tf_pro' ) && is_tf_pro() ? 'tf-enquiry-responded' : '' );
 							$submit_time = self::convert_to_wp_timezone($enquiry["submit_time"]);
 						
 						?>
@@ -889,7 +893,7 @@ abstract class Enquiry {
 		$headers[]   = 'Content-Type: text/html; charset=UTF-8';
 		$headers[]   = $from;
 
-		$user_permission = Helper::tf_data_types( tfopt( 'tf_user_permission' ) );
+		$user_permission = Helper::tf_data_types( Helper::tfopt( 'tf_user_permission' ) );
 		$vendor_access = isset( $user_permission['vendor_can_manage'] ) ? $user_permission['vendor_can_manage'] : array();
 		$manager_access = isset( $user_permission['manager_can_manage'] ) ? $user_permission['manager_can_manage'] : array();
 
@@ -1229,7 +1233,7 @@ abstract class Enquiry {
 
 		if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 		} else {
-			self::tfep_enquiry_update_response_unschedule();
+			self::tf_enquiry_update_response_unschedule();
 		}
 
 
@@ -1274,7 +1278,7 @@ abstract class Enquiry {
 		}
 	}
 
-	public static function tfep_enquiry_update_response_unschedule() {
+	public static function tf_enquiry_update_response_unschedule() {
         $timestamp = wp_next_scheduled( 'tf_enquiry_response_schedule' );
         if( $timestamp ) {
             wp_unschedule_event( $timestamp, 'tf_enquiry_response_schedule' );

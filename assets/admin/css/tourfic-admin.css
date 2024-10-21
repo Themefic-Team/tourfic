@@ -6547,6 +6547,7 @@ hr.enqury-single-title-line {
   background-color: #fff;
   padding: 16px 0px 24px 0px;
   border-radius: 8px;
+  min-height: 286px;
 }
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details h2 {
@@ -6872,6 +6873,10 @@ hr.enqury-single-title-line {
 
 #tf-enquiry-reply-editor_ifr, #tf-enquiry-reply-editor {
   height: 200px !important;
+}
+
+.tf-enquiry-single-row {
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 991.98px) {
