@@ -1,6 +1,8 @@
 <?php if(!empty($benefits_status)){ ?>
 <div class="tf-car-benefits" id="tf-benefits">
-    <h3><?php esc_html_e("Benefits", "tourfic"); ?></h3>
+    <?php if(!empty($benefits_sec_title)){ ?>   
+    <h3><?php echo esc_html($benefits_sec_title); ?></h3>
+    <?php } ?>
 
     <?php if(!empty($benefits)){ ?>
     <ul>

@@ -118,7 +118,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'type'        => 'text',
 					'label'       => __( 'Section Title', 'tourfic' ),
 					'subtitle'       => __( 'This will be displayed in the Car info Section.', 'tourfic' ),
-					'default'    => 'Car info',
+					'default'    => esc_html__('Car info', 'tourfic' ),
 				),
                 array(
 					'id'       => 'car_as_featured',
@@ -266,7 +266,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'type'        => 'text',
 					'label'       => __( 'Section Title', 'tourfic' ),
 					'subtitle'       => __( 'This will be displayed in the Driver details Box.', 'tourfic' ),
-					'default'    => 'Driver details',
+					'default'    => esc_html__( 'Driver details', 'tourfic' ),
 					'dependency'  => [
 						array( 'driver_included', '==', 'true' )
 					],
@@ -388,7 +388,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'type'        => 'text',
 					'label'       => __( 'Section Title', 'tourfic' ),
 					'subtitle'       => __( 'This will be displayed in the Benefits Section.', 'tourfic' ),
-					'default'    => 'Benefits',
+					'default'    => esc_html__( 'Benefits', 'tourfic' ),
 					'dependency'  => [
 						array( 'benefits_section', '==', 'true' )
 					],
@@ -434,7 +434,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'type'        => 'text',
 					'label'       => __( 'Section Title', 'tourfic' ),
 					'subtitle'       => __( 'This will be displayed in the Include Section.', 'tourfic' ),
-					'default'    => 'Include',
+					'default'    => esc_html__( 'Include', 'tourfic' ),
 				),
 				array(
 					'id'           => 'inc',
@@ -468,7 +468,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'type'        => 'text',
 					'label'       => __( 'Section Title', 'tourfic' ),
 					'subtitle'       => __( 'This will be displayed in the Exclude Section.', 'tourfic' ),
-					'default'    => 'Exclude',
+					'default'    => esc_html__( 'Exclude', 'tourfic' ),
 				),
 				array(
 					'id'           => 'exc',
@@ -574,7 +574,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'type'        => 'text',
 					'label'       => __( 'Section Title', 'tourfic' ),
 					'subtitle'       => __( 'This will be displayed in the Owner Information Box.', 'tourfic' ),
-					'default'    => 'Owner Information',
+					'default'    => esc_html__( 'Owner Information', 'tourfic' ),
 					'dependency'  => [
 						array( 'information_section', '==', 'true' )
 					],
@@ -928,7 +928,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'type'        => 'text',
 					'label'       => __( 'Section Title', 'tourfic' ),
 					'subtitle'       => __( 'This will be displayed in the FAQ Section.', 'tourfic' ),
-					'default'    => 'FAQ’s',
+					'default'    => esc_html__( 'FAQ’s', 'tourfic' ),
 				),
 				array(
 					'id'           => 'faq',
@@ -1022,7 +1022,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'type'        => 'text',
 					'label'       => __( 'Review Section Title', 'tourfic' ),
 					'subtitle'       => __( 'This will be displayed in the Review Section.', 'tourfic' ),
-					'default'    => 'Review Scores',
+					'default'    => esc_html__( 'Review Scores', 'tourfic' ),
 				),
 				array(
 					'id'        => 'c-share',

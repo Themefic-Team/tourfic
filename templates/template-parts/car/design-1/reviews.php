@@ -22,7 +22,9 @@ $tf_overall_rate = [];
 TF_Review::tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rating );
 TF_Review::tf_get_review_fields( $fields );
 ?>
-<h3 class="tf-section-title"><?php esc_html_e( "Review Scores", "tourfic" ); ?></h3>
+<?php if(!empty($review_sec_title)){ ?>   
+    <h3><?php echo esc_html($review_sec_title); ?></h3>
+<?php } ?>
 <div class="tf-review-data-inner">
 
     <div class="tf-review-data">

@@ -1,5 +1,7 @@
 <div class="tf-car-location" id="tf-location">
-    <h3><?php esc_html_e("Location", "tourfic"); ?></h3>
+    <?php if(!empty($location_title)){ ?>   
+    <h3><?php echo esc_html($location_title); ?></h3>
+    <?php } ?>
 
     <div class="tf-car-location-map">
         <?php if ( $tf_openstreet_map=="default" && !empty($address_latitude) && !empty($address_longitude) ) {  ?>

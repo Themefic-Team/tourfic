@@ -28,31 +28,39 @@ $tf_cars_slug = get_option('car_slug');
                                 <?php esc_html_e("Car info", "tourfic"); ?>
                             </a>
                         </li>
+                        <?php if(!empty($benefits)){ ?>
                         <li data-menu="<?php echo esc_attr('tf-benefits'); ?>">
                             <a class="tf-hashlink" href="#tf-benefits">
                                 <?php esc_html_e("Benefits", "tourfic"); ?>
                             </a>
                         </li>
+                        <?php } ?>
+                        <?php if(!empty($includes) || !empty($excludes)){ ?>
                         <li data-menu="<?php echo esc_attr('tf-inc-exc'); ?>">
                             <a class="tf-hashlink" href="#tf-inc-exc">
                                 <?php esc_html_e("Include/Excluce", "tourfic"); ?>
                             </a>
                         </li>
+                        <?php } ?>
+                        <?php if(!empty($address)){ ?>
                         <li data-menu="<?php echo esc_attr('tf-location'); ?>">
                             <a class="tf-hashlink" href="#tf-location">
                                 <?php esc_html_e("Location", "tourfic"); ?>
                             </a>
                         </li>
+                        <?php } ?>
                         <li data-menu="<?php echo esc_attr('tf-reviews'); ?>">
                             <a class="tf-hashlink" href="#tf-reviews">
                                 <?php esc_html_e("Reviews", "tourfic"); ?>
                             </a>
                         </li>
+                        <?php if(!empty($faqs)){ ?>
                         <li data-menu="<?php echo esc_attr('tf-faq'); ?>">
                             <a class="tf-hashlink" href="#tf-faq">
                                 <?php esc_html_e("FAQ's", "tourfic"); ?>
                             </a>
                         </li>
+                        <?php } ?>
                     </ul>
                 </div>
                 <div class="tf-top-bar-booking tf-flex tf-flex-gap-32">
@@ -237,11 +245,13 @@ $tf_cars_slug = get_option('car_slug');
                                 </a>
                             </li>
                             <?php } ?>
+                            <?php if(!empty($address)){ ?>
                             <li data-menu="<?php echo esc_attr('tf-location'); ?>">
                                 <a class="tf-hashlink" href="#tf-location">
                                     <?php esc_html_e("Location", "tourfic"); ?>
                                 </a>
                             </li>
+                            <?php } ?>
                             <li data-menu="<?php echo esc_attr('tf-reviews'); ?>">
                                 <a class="tf-hashlink" href="#tf-reviews">
                                     <?php esc_html_e("Reviews", "tourfic"); ?>
@@ -566,12 +576,14 @@ $tf_cars_slug = get_option('car_slug');
                         </div>
                     </div>
 
-                    <?php do_action( 'tf_car_extras', $car_extras, $post_id ); ?>
+                    <?php do_action( 'tf_car_extras', $car_extras, $post_id, $car_extra_sec_title ); ?>
 
                     <?php if(!empty($car_driverinfo_status)){ ?>
                     <div class="tf-driver-details tf-flex tf-flex-direction-column tf-flex-gap-16 tf-mb-30">
                         <div class="tf-driver-details-header tf-flex tf-flex-space-bttn tf-flex-align-center">
-                            <h3><?php esc_html_e("Driver details", "tourfic"); ?></h3>
+                            <?php if(!empty($driver_sec_title)){ ?>   
+                                <h3><?php echo esc_html($driver_sec_title); ?></h3>
+                            <?php } ?>
                             <span>
                             <i class="ri-shield-check-line"></i> <?php esc_html_e("Verified", "tourfic"); ?>
                             </span>
@@ -632,7 +644,9 @@ $tf_cars_slug = get_option('car_slug');
                     <?php if(!empty($car_information_section_status)){ ?>
                     <div class="tf-driver-details tf-flex tf-flex-direction-column tf-flex-gap-16">
                         <div class="tf-driver-details-header tf-flex tf-flex-space-bttn tf-flex-align-center">
-                            <h3><?php esc_html_e("Owner Information", "tourfic"); ?></h3>
+                            <?php if(!empty($owner_sec_title)){ ?>   
+                                <h3><?php echo esc_html($owner_sec_title); ?></h3>
+                            <?php } ?>
                         </div>
                         <div class="tf-driver-photo tf-flex tf-flex-gap-16">
                             <?php if(!empty($car_owner_owner_image)){ ?>

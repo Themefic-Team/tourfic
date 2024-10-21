@@ -3,7 +3,9 @@
     <div class="tf-inc-exe tf-flex tf-flex-gap-16">
         <?php if(!empty($includes)){ ?>
         <div class="tf-inc-list">
-            <h3><?php esc_html_e("Include", "tourfic"); ?></h3>
+            <?php if(!empty($inc_sec_title)){ ?>   
+                <h3><?php echo esc_html($inc_sec_title); ?></h3>
+            <?php } ?>
             <ul class="tf-flex tf-flex-gap-16 tf-flex-direction-column">
             <?php foreach($includes as $inc){ ?>
                 <li class="tf-flex tf-flex-align-center tf-flex-gap-8">
@@ -16,7 +18,9 @@
         <?php } ?>
         <?php if(!empty($excludes)){ ?>
         <div class="tf-exc-list">
-            <h3><?php esc_html_e("Exclude", "tourfic"); ?></h3>
+            <?php if(!empty($exc_sec_title)){ ?>   
+                <h3><?php echo esc_html($exc_sec_title); ?></h3>
+            <?php } ?>
             <ul class="tf-flex tf-flex-gap-16 tf-flex-direction-column">
                 <?php foreach($excludes as $exc){ ?>
                 <li class="tf-flex tf-flex-align-center tf-flex-gap-8">

@@ -1,6 +1,7 @@
 <div class="tf-car-info" id="tf-car-info">
-    <h3><?php esc_html_e("Car info", "tourfic"); ?></h3>
-
+    <?php if(!empty($car_info_title)){ ?>
+    <h3><?php echo esc_html($car_info_title); ?></h3>
+    <?php } ?>
     <ul>
         <?php if(!empty($passengers)){ ?>
         <li class="tf-flex tf-flex-align-center tf-flex-gap-6"><i class="fa-solid fa-wheelchair"></i><?php echo esc_attr($passengers); ?> <?php esc_html_e("Persons", "tourfic"); ?></li>
