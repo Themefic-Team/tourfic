@@ -577,51 +577,6 @@ abstract class Enquiry {
 		<?php
 	}
 
-	// function time_elapsed_string($datetime, $full = false) {
-	// 	// Get the WordPress time zone
-	// 	$timezone = wp_timezone();
-		
-	// 	// Set current time according to WordPress timezone
-	// 	$now = new \DateTime('now', $timezone);
-		
-	// 	// Create a DateTime object for the given datetime according to WordPress timezone
-	// 	$ago = new \DateTime($datetime, $timezone);
-		
-	// 	// Calculate the difference between now and the given datetime
-	// 	$diff = $now->diff($ago);
-	
-	// 	// Calculate the weeks manually
-	// 	$diff->w = floor($diff->d / 7);
-	// 	$diff->d -= $diff->w * 7;
-	
-	// 	// Define the time units
-	// 	$string = array(
-	// 		'y' => 'year',
-	// 		'm' => 'month',
-	// 		'w' => 'week',
-	// 		'd' => 'day',
-	// 		'h' => 'hour',
-	// 		'i' => 'minute',
-	// 		's' => 'second',
-	// 	);
-	
-	// 	// Build the human-readable string
-	// 	foreach ($string as $k => &$v) {
-	// 		if ($diff->$k) {
-	// 			$v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
-	// 		} else {
-	// 			unset($string[$k]);
-	// 		}
-	// 	}
-	
-	// 	// Return the result in a shortened or full form
-	// 	if (!$full) {
-	// 		$string = array_slice($string, 0, 1);
-	// 	}
-	
-	// 	return $string ? implode(', ', $string) . ' ago' : 'just now';
-	// }
-
 	function time_elapsed_string($datetime) {
 
 		$timezone = wp_timezone();
@@ -1094,7 +1049,9 @@ abstract class Enquiry {
 				$headers[] = 'References: ' . $reply_data[$replay_data_last_index]["references"];
 			}
 
-			$send_mail = wp_mail( $to, $subject, $reply_message, $headers );
+			$reply_footer = "<br><p>" . esc_html__("Please reply to this email to update your enquiry.",'tourfic') . "</p>";
+
+			$send_mail = wp_mail( $to, $subject, $reply_message . $reply_footer, $headers );
 			
 			$submit_time = date_i18n( 'Y-m-d H:i:s', current_time( 'timestamp' ) );
 
