@@ -350,9 +350,20 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'default' => __( "Available Rooms", 'tourfic' ),
 				),
 				array(
-					'id'           => 'room',
-					'type'         => 'hotel_room',
+					'id'          => 'tf_rooms',
+					'type'        => 'select2',
 					'label'        => __( 'Manage your hotel rooms', 'tourfic' ),
+					'subtitle'     => esc_html__('Select an existing hotel room, if available. Note: Rooms already assigned to a hotel cannot be selected.', 'tourfic'),
+					'placeholder' => __( 'Select Rooms', 'tourfic' ),
+					'options'     => 'posts',
+					'multiple'   => true,
+					'query_args'  => array(
+						'post_type'      => 'tf_room',
+						'posts_per_page' => - 1,
+					),
+					'inline_add_new' => true,
+					'inline_delete' => true,
+					'add_button_text' => esc_html__('Add New Room', 'tourfic')
 				),
 				array(
 					'id'    => 'tf-pro-notice',

@@ -241,7 +241,7 @@ class TF_Promo_Notice {
         $tf_hotel_promo_sidebar_notice = get_option( 'tf_hotel_promo_sidebar_notice' );  
          
 		if ( $tf_hotel_promo_sidebar_notice == 1  || time() >  $tf_hotel_promo_sidebar_notice ) { 
-			add_meta_box( 'tfhotel_promo_notice_docs', ' ', array($this, 'tf_promo_notice_callback_hotel'), 'tf_hotel', 'side', priority: 'high' );
+			add_meta_box( 'tfhotel_promo_notice_docs', ' ', array($this, 'tf_promo_notice_callback_hotel'), 'tf_hotel', 'side',  'high' );
 		}
 
         $tf_tour_promo_sidebar_notice = get_option( 'tf_tour_promo_sidebar_notice' );  

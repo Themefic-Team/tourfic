@@ -687,6 +687,7 @@ body.tourfic-settings_page_tf-setup-wizard {
 
 .tf-theme-activation-btn {
   min-width: 267px;
+  justify-content: center;
 }
 
 .tf-settings-finish-btn {
@@ -1026,6 +1027,44 @@ Steps
   font-weight: 600;
   line-height: 24px;
 }
+.tf-setup-step-container .tf-template-selection {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+}
+.tf-setup-step-container .tf-template-selection .tf-single-theme label {
+  position: relative;
+  display: block;
+}
+.tf-setup-step-container .tf-template-selection .tf-single-theme label .checked-svg {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  display: none;
+}
+.tf-setup-step-container .tf-template-selection .tf-single-theme label input {
+  display: none;
+}
+.tf-setup-step-container .tf-template-selection .tf-single-theme label input:checked + img {
+  border: 1px solid #003C79;
+}
+.tf-setup-step-container .tf-template-selection .tf-single-theme label input:checked ~ .checked-svg {
+  display: block;
+}
+.tf-setup-step-container .tf-template-selection .tf-single-theme label h4 {
+  color: #27333F;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 153.846% */
+  margin: 0;
+  margin-top: 8px;
+}
+.tf-setup-step-container .tf-template-selection .tf-single-theme label img {
+  box-shadow: 0px 10px 20px 0px rgba(0, 36, 72, 0.04), 0px 10px 16px 0px rgba(0, 36, 72, 0.04);
+  border-radius: 12px;
+  border: 1px solid transparent;
+}
 .tf-setup-step-container .tf-setup-step-layout {
   padding: 56px 96px;
   border-radius: 16px;
@@ -1063,6 +1102,15 @@ Steps
   font-weight: 400;
   line-height: 24px;
   margin: 0 0 2px 0px;
+}
+.tf-setup-step-container .tf-select-title {
+  color: #27333f;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
+  margin: 0px 0px 24px 0px;
 }
 .tf-setup-step-container .tf-setup-step-desc {
   color: #566676;
@@ -3127,11 +3175,10 @@ Steps
 .tf-field-select2 .select2-container--default .select2-selection--single .select2-selection__arrow {
   height: 48px;
 }
-.tf-field-select2 .tf-select-box-option {
-  display: flex;
-  gap: 8px;
+.tf-field-select2 .tf-select-box-option .tf-add-category {
+  margin-top: 16px;
 }
-.tf-field-select2 .tf-select-box-option .tf-add-category i {
+.tf-field-select2 .tf-select-box-option .tf-add-category > i {
   height: 25px;
   width: 25px;
   border-radius: 50%;
@@ -3142,7 +3189,7 @@ Steps
   margin-top: 11px;
   cursor: pointer;
 }
-.tf-field-select2 #tf-popup-box {
+.tf-field-select2 .tf-popup-box {
   position: fixed;
   z-index: 900000;
   top: 0;
@@ -3155,7 +3202,7 @@ Steps
   justify-content: center;
   display: none;
 }
-.tf-field-select2 #tf-popup-box::before {
+.tf-field-select2 .tf-popup-box::before {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -3164,10 +3211,10 @@ Steps
   content: "";
   background-color: rgba(0, 0, 0, 0.2);
 }
-.tf-field-select2 #tf-popup-box .tf-add-category-box {
+.tf-field-select2 .tf-popup-box .tf-add-category-box {
   display: inline-block;
   z-index: 1;
-  min-width: 300px;
+  min-width: 400px;
   min-height: 160px;
   border-color: #aaaaaa;
   box-shadow: 0 5px 30px -5px rgba(0, 0, 0, 0.25);
@@ -3175,7 +3222,7 @@ Steps
   background: #ffffff;
   position: relative;
 }
-.tf-field-select2 #tf-popup-box .tf-add-category-box .tf-add-category-box-header {
+.tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -3183,13 +3230,13 @@ Steps
   margin: 0;
   padding: 15px;
 }
-.tf-field-select2 #tf-popup-box .tf-add-category-box .tf-add-category-box-header h3 {
+.tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-header h3 {
   font-size: 14px;
   line-height: 1em;
   margin: 0;
   padding: 0;
 }
-.tf-field-select2 #tf-popup-box .tf-add-category-box .tf-add-category-box-header .tf-add-category-box-close {
+.tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-header .tf-add-category-box-close {
   background: #b4b9be;
   height: 25px;
   width: 25px;
@@ -3199,39 +3246,35 @@ Steps
   justify-content: center;
   cursor: pointer;
 }
-.tf-field-select2 #tf-popup-box .tf-add-category-box .tf-add-category-box-header .tf-add-category-box-close i {
+.tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-header .tf-add-category-box-close i {
   color: #fff;
 }
-.tf-field-select2 #tf-popup-box .tf-add-category-box .tf-add-category-box-content {
+.tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-content {
   padding: 15px;
 }
-.tf-field-select2 #tf-popup-box .tf-add-category-box .tf-add-category-box-content .tf-single-category-box {
+.tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-content .tf-single-category-box {
   margin-bottom: 15px;
 }
-.tf-field-select2 #tf-popup-box .tf-add-category-box .tf-add-category-box-content .tf-single-category-box label {
+.tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-content .tf-single-category-box label {
   display: block;
   margin-bottom: 10px;
 }
-.tf-field-select2 #tf-popup-box .tf-add-category-box .tf-add-category-box-content .tf-single-category-box input {
+.tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-content .tf-single-category-box input {
   width: 100%;
   height: 35px;
   border: 1px solid #ddd;
   border-radius: 5px;
 }
-.tf-field-select2 #tf-popup-box .tf-add-category-box .tf-add-category-box-content .tf-single-category-box select {
+.tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-content .tf-single-category-box select {
   width: 100%;
   height: 35px;
   border: 1px solid #ddd;
   border-radius: 5px;
 }
-.tf-field-select2 #tf-popup-box .tf-add-category-box .tf-add-category-box-content .tf-category-button {
-  text-transform: capitalize;
-  background-color: #003c79;
-  border-color: #003c79;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: #fff;
-  cursor: pointer;
+.tf-field-select2 .tf-popup-box .tf-add-category-box .tf-admin-btn.tf-btn-secondary {
+  padding: 7px 25px;
+  font-size: 14px !important;
+  font-weight: 500 !important;
 }
 
 .tf-field.tf-field-select2 .tf-fieldset span.select2:nth-child(3) {
