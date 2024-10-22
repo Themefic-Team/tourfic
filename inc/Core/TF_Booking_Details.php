@@ -123,7 +123,9 @@ abstract Class TF_Booking_Details {
                 <div class="tf_booking_wrap_header">
                     <h1 class="wp-heading-inline"><?php echo esc_html( $this->booking_args['booking_title'] ); ?> <?php esc_html_e( "Booking Details", "tourfic" ); ?></h1>
                     <div class="tf_header_wrap_button">
-                        <?php if ( function_exists('is_tf_pro') && is_tf_pro() ){ ?>
+                        <?php 
+                        $_tf_integration_settings = get_option( '_tf_integration_settings' ) ? get_option( '_tf_integration_settings' ) : array();
+                        if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($_tf_integration_settings['google_calendar']['tf_google_calendar']['refresh_token'])){ ?>
                         <div class="tf-google-sync-button">
                             <button class="tf-google-calendar-sync" data-bookingtype="<?php echo esc_attr($this->booking_args["booking_type"]); ?>"><?php esc_html_e("Refresh", "tourfic"); ?></button>
                         </div>
