@@ -557,15 +557,15 @@ function tf_car_booking_pupup_callback() {
 				</tr>
 
 				<?php 
-				$total_protection_amount = 0;
 				if(!empty($car_protections)){
 					foreach($car_protections as $pkey => $protection){ ?>
 					<tr>
 						<th>
 							<div class="tf-flex tf-flex-align-center">
 								<div class="tf-protection-select">
+									<input id="tf_single_protection_price" type="hidden" value="<?php echo !empty($protection['price']) ? esc_attr($protection['price']) : 0; ?> ">
 									<label>
-										<input type="checkbox" name="protections[]" value="<?php echo esc_attr($pkey); ?>">
+										<input type="checkbox" class="protection-checkbox" name="protections[]" value="<?php echo esc_attr($pkey); ?>">
 										<span class="checkmark"></span>
 									</label>
 								</div>
@@ -586,7 +586,6 @@ function tf_car_booking_pupup_callback() {
 						<td align="center">
 							<?php 
 							if(!empty($protection['price'])){
-								$total_protection_amount += $protection['price'];
 								echo wc_price($protection['price']);
 							}else{
 								echo wc_price(0.0);
@@ -601,8 +600,13 @@ function tf_car_booking_pupup_callback() {
 				<tfoot>
 					<tr>
 						<th width="50%" align="right"></th>
-						<th align="center"><?php esc_html_e("Total", "tourfic"); ?>:</th>
-						<th align="center"><?php echo wc_price($total_protection_amount); ?></th>
+						<th align="center">
+							<?php esc_html_e("Total", "tourfic"); ?>:
+							<input type="hidden" id="tf_total_proteciton_price" value="0">
+						</th>
+						<th align="center" id="tf_proteciton_subtotal">
+							<?php echo wc_price(0.0); ?>
+						</th>
 					</tr>
 				</tfoot>
 

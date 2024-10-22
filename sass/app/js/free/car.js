@@ -802,6 +802,24 @@
             $('.tf-car-instraction-popup').hide();
         });
 
+        // Showing Total into a protections
+        $(document).on('change', '.protection-checkbox', function (e) {
+            let total_price = 0;
+            let prev_total = parseFloat($("#tf_total_proteciton_price").val()) || 0; // Parse as float, default to 0 if empty
+            let single_price = parseFloat($(this).parent().parent().find('#tf_single_protection_price').val()) || 0; // Parse as float
+        
+            if ($(this).is(':checked')) {
+                total_price = prev_total + single_price;
+            } else {
+                total_price = prev_total - single_price;
+            }
+        
+            // Update total and display it
+            $('#tf_total_proteciton_price').val(total_price.toFixed(2)); // Format as float with 2 decimal places
+            $('#tf_proteciton_subtotal').text(total_price.toFixed(2)); // Display formatted total
+        });
+                
+
     });
 
 })(jQuery, window);
