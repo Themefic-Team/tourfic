@@ -226,7 +226,7 @@ class Pricing {
     }
 
     // Return Tour Extras Price
-    static function set_extra_price($meta, $extra_ids="", $extra_qty=""){
+    static function set_extra_price($meta, $extra_ids="", $extra_qty="", $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time){
 
         $car_extra = !empty($meta['extras']) ? $meta['extras'] : '';
         $prices = 0;
@@ -235,8 +235,30 @@ class Pricing {
             if(!empty($singleqty)){
                 $single_extra_info = !empty($car_extra[$key]) ? $car_extra[$key] : '';
                 if(!empty($single_extra_info)){ 
-                    $prices += $single_extra_info['price']*$singleqty;
-                    $extra_title[] = $single_extra_info['title']. ' × ' . wc_price($single_extra_info['price']*$singleqty);
+                    $price_type = $single_extra_info['price_type'];
+                    if('day'==$price_type){
+                        // Combine date and time
+                        $pickup_datetime = new \DateTime("$tf_pickup_date $tf_pickup_time");
+                        $dropoff_datetime = new \DateTime("$tf_dropoff_date $tf_dropoff_time");
+
+                        // Calculate the difference
+                        $interval = $pickup_datetime->diff($dropoff_datetime);
+
+                        // Get total days
+                        $total_days = $interval->days;
+                        
+                        // If there are leftover hours that count as a partial day
+                        if ($interval->h > 0 || $interval->i > 0) {
+                            $total_days += 1;  // Add an extra day for any remaining hours
+                        }
+
+                        $price = $single_extra_info['price'] * $total_days;
+
+                    }else{
+                        $price = $single_extra_info['price'];
+                    }
+                    $prices += $price * $singleqty;
+                    $extra_title[] = $single_extra_info['title']. ' × ' . wc_price($price * $singleqty);
                 }
             }
         }
