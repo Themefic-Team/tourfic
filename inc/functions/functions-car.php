@@ -520,7 +520,7 @@ function tf_car_booking_pupup_callback() {
 	$beforeTime = $pickupDateTime->format('H:i');
 
  	?>
-	<?php if(function_exists( 'is_tf_pro' ) && is_tf_pro() && !$less_current_day){ ?>
+	<?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() && !$less_current_day && !empty($bestRefundPolicy) ){ ?>
 	<div class="tf-cancellation-notice">
 		<span class="tf-flex tf-flex-align-center tf-flex-gap-16">
 			<i class="ri-information-line"></i>
