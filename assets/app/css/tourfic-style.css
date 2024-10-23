@@ -16168,6 +16168,9 @@ html {
   padding: 16px 24px;
   width: 850px;
 }
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-popup-header {
+  margin-bottom: 24px;
+}
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-popup-header h3 {
   color: #27333F;
   font-size: 21px !important;
@@ -16175,10 +16178,10 @@ html {
   font-weight: 700 !important;
   line-height: 150%; /* 31.5px */
   margin: 0;
-  margin-bottom: 24px;
 }
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-popup-header .tf-close-popup {
   cursor: pointer;
+  display: flex;
 }
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-cancellation-notice {
   border-radius: 8px;

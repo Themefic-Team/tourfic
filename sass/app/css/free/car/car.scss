@@ -21,6 +21,7 @@
             padding: 16px 24px;
             width: 850px;
             .tf-booking-popup-header{
+                margin-bottom: 24px;
                 h3{
                     color: #27333F;
                     font-size: 21px !important;
@@ -28,10 +29,10 @@
                     font-weight: 700 !important;
                     line-height: 150%; /* 31.5px */
                     margin: 0;
-                    margin-bottom: 24px;
                 }
                 .tf-close-popup{
                     cursor: pointer;
+                    display: flex;
                 }
             }
 
