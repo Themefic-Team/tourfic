@@ -258,7 +258,7 @@ class Pricing {
                         $price = $single_extra_info['price'];
                     }
                     $prices += $price * $singleqty;
-                    $extra_title[] = $single_extra_info['title']. ' × ' . wc_price($price * $singleqty);
+                    $extra_title[] = $single_extra_info['title'].'('.$price_type.') × '. $singleqty. ' = ' . wc_price($price * $singleqty);
                 }
             }
         }
