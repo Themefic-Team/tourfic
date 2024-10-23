@@ -690,6 +690,7 @@
                 .tf-clients-reviews{
                     margin-top: 32px;
                     .tf-reviews-item{
+                        flex-wrap: nowrap;
                         .tf-reviews-avater{
                             img{
                                 width: 56px;
@@ -884,6 +885,9 @@
                     }
                     .tf-select-date{
                         width: calc(50% - 8px);
+                        .tf-flex{
+                            flex-wrap: nowrap;
+                        }
                         &:first-child{
                             border-right: 1px solid #DFE6ED;
                         }

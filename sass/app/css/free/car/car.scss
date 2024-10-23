@@ -9,7 +9,7 @@
         top: 0;
         right: 0;
         bottom: 0;
-        z-index: 999;
+        z-index: 9999;
         background-color: rgba(0,0,0,.2);
         display: flex;
         align-items: center;
@@ -80,7 +80,13 @@
                 }
 
                 .tf-protection-content{
-                    max-height: 260px;
+                    max-height: 360px;
+                    @media #{$max1024}{
+                        max-height: 260px;
+                    }
+                    @media #{$max991}{
+                        flex-direction: inherit;
+                    }
                     overflow: auto;
                     padding-right: 8px;
                     scrollbar-width: thin;
@@ -111,7 +117,9 @@
                         border-radius: 16px;
                         border: 1px solid #C0CCD8;
                         padding: 24px;
-
+                        @media #{$max991}{
+                            width: 100%;
+                        }
                         table{
                             border: 0px solid;
                             margin: 0;
@@ -137,6 +145,13 @@
                                     font-weight: 700;
                                     line-height: 150%; /* 24px */
                                     padding: 0 0 16px 0px;
+                                    .tf-flex.tf-flex-align-center{
+                                        flex-wrap: nowrap;
+                                    }
+                                    .tf-single-protection-title{
+                                        text-align: left;
+                                        flex-wrap: nowrap;
+                                    }
                                     .tf-protection-select{
                                         height: 15px;
                                         label{
@@ -260,6 +275,9 @@
                         flex-wrap: wrap;
                         .tf-single-field{
                             width: calc(33% - 24px);
+                            @media #{$max767}{
+                                width: calc(50% - 24px);
+                            }
                             label{
                                 color: #566676;
                                 font-size: 12px !important;
@@ -367,7 +385,7 @@
         top: 0;
         right: 0;
         bottom: 0;
-        z-index: 999;
+        z-index: 9999;
         background-color: rgba(0,0,0,.2);
         display: flex;
         align-items: center;
@@ -380,6 +398,7 @@
             width: 850px;
             .tf-instraction-popup-header{
                 margin-bottom: 24px;
+                flex-wrap: nowrap;
                 h3{
                     color: #27333F;
                     font-size: 21px !important;
@@ -387,6 +406,7 @@
                     font-weight: 700 !important;
                     line-height: 150% !important;
                     margin: 0;
+                    text-align: left;
                 }
                 .tf-close-popup{
                     cursor: pointer;

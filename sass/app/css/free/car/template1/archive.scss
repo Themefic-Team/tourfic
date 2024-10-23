@@ -39,11 +39,18 @@
 
                 .tf-date-select-box{
                     padding: 8px;
+                    flex-wrap: nowrap;
+                    @media #{$max767}{
+                        flex-wrap: wrap;
+                    }
                     .tf-date-single-select{
                         border-radius: 8px;
                         background: #FFF;
                         padding: 16px;
                         width: 33.33%;
+                        @media #{$max767}{
+                            width: 100%;
+                        }
                         .tf-select-date{
                             width: calc(50% - 8px);
                             &:first-child{

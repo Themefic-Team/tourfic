@@ -569,6 +569,7 @@ function tf_car_booking_pupup_callback() {
 										<span class="checkmark"></span>
 									</label>
 								</div>
+								<div class="tf-single-protection-title tf-flex">
 								<?php echo !empty($protection['title']) ? esc_html($protection['title']) : ''; ?>
 								<?php if(!empty($protection['content'])){ ?>
 								<div class="tf-info-tooltip">
@@ -578,6 +579,7 @@ function tf_car_booking_pupup_callback() {
 									</div>
 								</div>
 								<?php } ?>
+								</div>
 							</div>
 						</th>
 						<td align="center">

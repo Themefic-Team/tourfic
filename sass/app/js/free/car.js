@@ -781,7 +781,7 @@
             $('.tf-single-booking-bar').fadeOut();
             // Scroll to the .tf-single-car-details-warper .tf-details-menu div
             $('html, body').animate({
-                scrollTop: $('.tf-single-car-details-warper .tf-details-menu').offset().top
+                scrollTop: $('.tf-date-select-box').offset().top
             }); // 800 is the duration of the scroll animation in milliseconds (adjust as needed)
         });        
 
