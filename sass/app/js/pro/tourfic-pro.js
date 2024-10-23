@@ -890,24 +890,17 @@
             }
         });
 
-        // tf customer refund from profile
-        $(document).on('click', '.tf_refund_request', function (e) {
+        // Customer refund from customer profile
+        $(document).on('click', '.tf-refund-processed', function (e) {
             e.preventDefault();
             let $this = $(this);
-            let href = $this.attr('href');  // Get the URL from the href attribute
-
-            // Create a URL object to easily extract query parameters
-            let url = new URL(href);
-            let order = url.searchParams.get("order");         // Get the 'order' parameter
-            let orderType = url.searchParams.get("order-type");
-
+            
             var data = {
                 action: 'tf_customer_refund_request',
                 _nonce: tf_params.nonce,
-                order: order,
-                orderType: orderType
+                order: $this.closest('.tf-refund-box-content').find('#tf_order_id').val()
             };
-
+            
             $.ajax({
                 url: tf_params.ajax_url,
                 type: 'POST',
@@ -931,6 +924,46 @@
 
         });
 
+        // Refund Confirmation Popup
+        $(document).on('click', '.tf_refund_request', function (e) {
+            e.preventDefault();
+            let $this = $(this);
+            let href = $this.attr('href');  // Get the URL from the href attribute
+
+            // Create a URL object to easily extract query parameters
+            let url = new URL(href);
+            let order = url.searchParams.get("order");         // Get the 'order' parameter
+            let orderType = url.searchParams.get("order-type");
+
+            var data = {
+                action: 'tf_customer_refund_message',
+                _nonce: tf_params.nonce,
+                order: order,
+                orderType: orderType
+            };
+
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    $this.addClass('tf-btn-loading');
+                },
+                success: function (data) {
+                    $(".tf-refund-message").html(data);
+                    $(".tf-refund-confirmation-box").css('display', 'flex');
+                    $this.removeClass('tf-btn-loading');
+                }
+            });
+
+        });
+
+        // Refund Confirmation Popup close
+        $(document).on('click', '.tf-refund-cancel', function (e) {
+            e.preventDefault();
+            $(".tf-refund-confirmation-box").hide();
+            $(".tf-refund-message").html('');
+        });
     });
 
 })(jQuery);

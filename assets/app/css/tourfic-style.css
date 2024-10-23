@@ -265,6 +265,69 @@ Notice
   color: #f44336;
 }
 
+.tf-refund-confirmation-box {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+.tf-refund-confirmation-box .tf-refund-box-content {
+  width: 450px;
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  text-align: center;
+}
+.tf-refund-confirmation-box .tf-refund-box-content i {
+  font-size: 32px;
+}
+.tf-refund-confirmation-box .tf-refund-box-content h3 {
+  margin: 10px 0;
+  color: rgb(39, 51, 63);
+  font-size: 20px;
+}
+.tf-refund-confirmation-box .tf-refund-box-content p {
+  color: rgb(86, 102, 118);
+  font-size: 16px;
+  margin: 0 0 20px 0;
+}
+.tf-refund-confirmation-box .tf-refund-box-content .tf-refund-confirmation-button {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+}
+.tf-refund-confirmation-box .tf-refund-box-content .tf-refund-confirmation-button button {
+  border-radius: 8px;
+  background: #0274be;
+  padding: 8px 30px;
+  border: 0px solid;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  cursor: pointer;
+  color: #fff;
+  transition: 0.3s all ease;
+}
+.tf-refund-confirmation-box .tf-refund-box-content .tf-refund-confirmation-button button:hover {
+  background: #094C90;
+}
+.tf-refund-confirmation-box .tf-refund-box-content .tf-refund-confirmation-button button.tf-refund-cancel {
+  background: #E6F2FE;
+  color: #566676;
+}
+.tf-refund-confirmation-box .tf-refund-box-content .tf-refund-confirmation-button button.tf-refund-cancel:hover {
+  background: #0274be;
+  color: #fff;
+}
+
 .tf-main-wrapper {
   width: 100%;
   padding: 30px 0;
