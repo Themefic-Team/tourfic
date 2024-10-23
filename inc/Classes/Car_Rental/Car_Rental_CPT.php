@@ -37,8 +37,8 @@ class Car_Rental_CPT extends \Tourfic\Core\Post_Type {
 				),
 			),
 			array(
-				'name'          => esc_html__('Brand', 'tourfic' ),
-				'singular_name' => esc_html__('Brand', 'tourfic' ),
+				'name'          => esc_html__('Brand / Make', 'tourfic' ),
+				'singular_name' => esc_html__('Brand / Make', 'tourfic' ),
 				'taxonomy'      => 'carrental_brand',
 				'rewrite_slug'  => apply_filters( 'tf_carrental_brand_slug', 'carrental-brand' ),
 				'capability'  => array(
@@ -67,8 +67,8 @@ class Car_Rental_CPT extends \Tourfic\Core\Post_Type {
 				),
 			),
 			array(
-				'name'          => esc_html__('Make Year', 'tourfic' ),
-				'singular_name' => esc_html__('Make Year', 'tourfic' ),
+				'name'          => esc_html__('Year', 'tourfic' ),
+				'singular_name' => esc_html__('Year', 'tourfic' ),
 				'taxonomy'      => 'carrental_engine_year',
 				'rewrite_slug'  => apply_filters( 'tf_carrental_engine_year_slug', 'carrental-category' ),
 				'capability'  => array(

@@ -16965,11 +16965,11 @@ html {
   border-radius: 8px;
   background: var(--UI-800, linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), #27333F);
   padding: 8px 12px;
-  width: 218px;
+  width: 100%;
   z-index: 1;
   bottom: 40px;
   left: 50%;
-  margin-left: -109px;
+  margin-left: -50%;
   transition: 0.3s all ease;
   text-align: center;
 }
@@ -16983,7 +16983,7 @@ html {
   transform: rotate(45deg);
   left: 50%;
   margin-left: -8px;
-  bottom: -6px;
+  bottom: -3px;
   z-index: -1;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul li .tf-car-info-tooltip span {

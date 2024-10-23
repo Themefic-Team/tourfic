@@ -437,11 +437,11 @@
                             border-radius: 8px;
                             background: var(--UI-800, linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #27333F);
                             padding: 8px 12px;
-                            width: 218px;
+                            width: 100%;
                             z-index: 1;
                             bottom: 40px;
                             left: 50%;
-                            margin-left: -109px;
+                            margin-left: -50%;
                             transition: .3s all ease;
                             text-align: center;
                             &::after{
@@ -454,7 +454,7 @@
                                 transform: rotate(45deg);
                                 left: 50%;
                                 margin-left: -8px;
-                                bottom: -6px;
+                                bottom: -3px;
                                 z-index: -1;
                             }
                             span{

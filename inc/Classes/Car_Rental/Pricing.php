@@ -236,7 +236,7 @@ class Pricing {
                 $single_extra_info = !empty($car_extra[$key]) ? $car_extra[$key] : '';
                 if(!empty($single_extra_info)){ 
                     $prices += $single_extra_info['price']*$singleqty;
-                    $extra_title[] = $single_extra_info['title'];
+                    $extra_title[] = $single_extra_info['title']. ' × ' . wc_price($single_extra_info['price']*$singleqty);
                 }
             }
         }
@@ -255,9 +255,13 @@ class Pricing {
         foreach($tf_protection as $protection){
             $tf_single_protection = $car_protections[$protection];
 
-            if($tf_single_protection['title']){
+            if( !empty($tf_single_protection['title']) && !empty($tf_single_protection['price']) ){
+                $selected_protection_title[] = $tf_single_protection['title']. ' × ' . wc_price($tf_single_protection['price']);
+            }
+            if( !empty($tf_single_protection['title']) && empty($tf_single_protection['price']) ){
                 $selected_protection_title[] = $tf_single_protection['title'];
             }
+
             if(!empty($tf_single_protection['price'])){ 
                 $prices += $tf_single_protection['price'];
             }

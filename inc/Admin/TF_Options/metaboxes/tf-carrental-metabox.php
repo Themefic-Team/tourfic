@@ -182,7 +182,6 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'         => 'brands',
 					'type'       => 'select2',
-					'multiple'   => true,
 					'label'      => __( 'Select Brands', 'tourfic' ),
 					'options'    => 'terms',
 					'query_args' => array(

@@ -38,7 +38,16 @@
         <?php } ?>
 
         <?php if(!empty($engine_years)){ ?>
-            <li class="tf-flex tf-flex-align-center tf-flex-gap-6"><i class="ri-car-line"></i><?php echo esc_html($engine_years); ?></li>
+            <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 8V14" stroke="#566676" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M13 2L7 2" stroke="#566676" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M2 11H5" stroke="#566676" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M10 2L10 5" stroke="#566676" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M5 7V11V13C5 13.6295 5.29639 14.2223 5.8 14.6L8.46667 16.6C8.81286 16.8596 9.23393 17 9.66667 17H12.9296C13.5983 17 14.2228 16.6658 14.5937 16.1094L15.6132 14.5801C15.8549 14.2177 16.2616 14 16.6972 14C17.4167 14 18 13.4167 18 12.6972V10.2361C18 9.55341 17.4466 9 16.7639 9C16.2957 9 15.8677 8.73548 15.6584 8.31672L14.5528 6.10557C14.214 5.428 13.5215 5 12.7639 5H7C5.89543 5 5 5.89543 5 7Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round"/>
+                </svg> 
+                <?php echo esc_html($engine_years); ?>
+            </li>
         <?php } ?>
         
         <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
