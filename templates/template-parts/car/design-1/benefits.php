@@ -1,10 +1,9 @@
-<?php if(!empty($benefits_status)){ ?>
+<?php if(!empty($benefits_status) && !empty($benefits)){ ?>
 <div class="tf-car-benefits" id="tf-benefits">
     <?php if(!empty($benefits_sec_title)){ ?>   
     <h3><?php echo esc_html($benefits_sec_title); ?></h3>
     <?php } ?>
 
-    <?php if(!empty($benefits)){ ?>
     <ul>
         <?php foreach($benefits as $singlebenefit){ ?>
         <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
@@ -13,6 +12,5 @@
         </li>
         <?php } ?>
     </ul>
-    <?php } ?>
 </div>
 <?php } ?>
