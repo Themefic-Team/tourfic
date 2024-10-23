@@ -745,3 +745,83 @@ if(!function_exists('tf_filter_hotel_by_date')) {
 
 	}
 }
+
+//review temp functions
+if(!function_exists('tf_calculate_comments_rating')){
+	function tf_calculate_comments_rating( $comments, &$tf_overall_rate, &$total_rating ) {
+
+        $tf_overall_rate = [];
+        foreach ( $comments as $comment ) {
+            tf_calculate_user_ratings( $comment, $tf_overall_rate, $total_rating );
+    
+        }
+        $total_rating = tf_average_ratings( $total_rating );
+    
+    }
+}
+
+if(!function_exists('tf_calculate_user_ratings')){
+	function tf_calculate_user_ratings( $comment, &$overall_rating, &$total_rate ) {
+        if ( ! is_array( $total_rate ) ) {
+            $total_rate = array();
+        }
+        $tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+        $tf_base_rate    = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+    
+        if ( $tf_comment_meta ) {
+            $total_rate[] = tf_average_rating_change_on_base( tf_average_ratings( $tf_comment_meta ), $tf_base_rate );
+    
+            foreach ( $tf_comment_meta as $key => $ratings ) {
+                // calculate rate
+                $ratings = tf_average_rating_change_on_base( $ratings, $tf_base_rate );
+    
+                if ( is_array( $ratings ) ) {
+                    $overall_rating[ $key ][] = tf_average_ratings( $ratings );
+                } else {
+                    $overall_rating[ $key ][] = $ratings;
+                }
+    
+            }
+        }
+    }
+}
+
+if(!function_exists('tf_average_ratings')){
+	function tf_average_ratings( $ratings = [] ) {
+
+        if ( ! $ratings ) {
+            return 0;
+        }
+    
+        // No sub collection of ratings
+        if ( count( $ratings ) == count( $ratings, COUNT_RECURSIVE ) ) {
+            $average = array_sum( $ratings ) / count( $ratings );
+        } else {
+            $average = 0;
+            foreach ( $ratings as $rating ) {
+                $average += array_sum( $rating ) / count( $rating );
+            }
+            $average = $average / count( $ratings );
+        }
+    
+        return sprintf( '%.1f', $average );
+    }
+}
+
+if(!function_exists('tf_average_rating_change_on_base')){
+	function tf_average_rating_change_on_base( $rating, $base_rate = 5 ) {
+
+        $settings_base = ! empty ( tfopt( 'r-base' ) ) ? tfopt( 'r-base' ) : 5;
+        $base_rate     = ! empty ( $base_rate ) ? $base_rate : 5;
+    
+        if ( $settings_base != $base_rate ) {
+            if ( $settings_base > 5 ) {
+                $rating = $rating * 2;
+            } else {
+                $rating = $rating / 2;
+            }
+        }
+    
+        return $rating;
+    }
+}
