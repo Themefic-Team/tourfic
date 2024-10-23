@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.6
-Stable tag: 2.13.12
+Stable tag: 2.13.13
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -322,6 +322,11 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.13.13 - 23 October 2024 =
+
+- Fixed: REST API issue for the frontend dashboard.
+- Fixed: QR code issue on vouchers.
+
 = 2.13.12 - 19 October 2024 =
 
 - Fixed: Woocommerce plugin check for customer role capabilities
@@ -537,19 +542,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Improved: Woocommerce Required Notice Added In Setup Wizard
 - Improved: Woocommerce Condition Added( Pro )
 - Improved: Woocommerce Require Notice Message Added( Pro )
-
-= 2.11.22 - 21 March 2024 =
-
-- Updated: Nonce Validation and escaping patches
-- Updated: Security and Minor Bugs
-
-= 2.11.21 - 19 March 2024 =
-
-- Fixed: Nonce Validation and escaping issues
-- Improvement: Security patches resolved
-- Improvement: Internal code enhancement
-- Improvement: Overall performance improved
-- Improvement: System stability improved
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
