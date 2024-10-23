@@ -845,8 +845,22 @@ function tf_tours_booking_function() {
 					'{adult}'    => $adults,
 					'{child}'    => $children,
 					'{booking_date}' => $tour_date,
-					'{infant}'     => $infant
+					'{infant}'     => $infant,
+					'{id}' => $post_id,
+					'{title}' => urlencode(get_the_title($post_id)),
+					'{extras}' => sanitize_text_field($_POST["tour_extra"]),
 				);
+
+				if( $pricing_rule == 'group' ) {
+					$external_search_info['{amount}'] = $group_price;
+				} else {
+					$external_search_info['{amount}'] = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
+				}
+
+				if( !empty($tours_extra)) {
+					$external_search_info['{amount}'] += $tour_extra_total;
+				}
+
 				if(!empty($tf_booking_attribute)){
 					$tf_booking_query_url = str_replace(array_keys($external_search_info), array_values($external_search_info), $tf_booking_query_url);
 					if( !empty($tf_booking_query_url) ){
