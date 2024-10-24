@@ -1211,7 +1211,7 @@ class TF_Setup_Wizard {
 		}
 
 		$tf_settings            = !empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
-		$tf_services            = array( 'hotel', 'tour', 'apartment' );
+		$tf_services            = array( 'hotel', 'tour', 'apartment', 'carrentals' );
 		$services               = isset( $_POST['tf-services'] ) ? $_POST['tf-services'] : [];
 		$search_page            = isset( $_POST['tf-search-result-page'] ) ? $_POST['tf-search-result-page'] : '';
 		$search_result_per_page = isset( $_POST['tf-search-result-posts-per-page'] ) ? $_POST['tf-search-result-posts-per-page'] : '';
