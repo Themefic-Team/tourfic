@@ -352,11 +352,6 @@ class Migrator {
 						"car-section-status" => "1"
 					),
 					array(
-						"car-section"        => "Reviews",
-						"car-section-slug"   => "reviews",
-						"car-section-status" => "1"
-					),
-					array(
 						"car-section"        => "FAQs",
 						"car-section-slug"   => "faq",
 						"car-section-status" => "1"

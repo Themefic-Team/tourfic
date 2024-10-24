@@ -1056,11 +1056,6 @@ TF_Settings::option( 'tf_settings', array(
 											'car-section-status' => true,
 										),
 										array(
-											'car-section'        => __( 'Reviews', 'tourfic' ),
-											'car-section-slug'   => __( 'reviews', 'tourfic' ),
-											'car-section-status' => true,
-										),
-										array(
 											'car-section'        => __( 'FAQs', 'tourfic' ),
 											'car-section-slug'   => __( 'faq', 'tourfic' ),
 											'car-section-status' => true,
