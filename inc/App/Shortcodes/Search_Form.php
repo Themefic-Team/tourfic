@@ -20,6 +20,9 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 				array(
 					'style'     => 'default',
 					'type'      => 'all',
+					'hotel_tab_title' => esc_html__("Hotel", 'tourfic'),
+					'tour_tab_title' => esc_html__("Tour", 'tourfic'),
+					'apartment_tab_title' => esc_html__("Apartment", 'tourfic'),
 					'title'     => '',
 					'subtitle'  => '',
 					'classes'   => '',
@@ -69,15 +72,15 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 				<?php do_action( 'tf_before_booking_form_tab', $type ) ?>
 
 				<?php if ( ! in_array( 'hotel', $disable_services ) && Helper::tf_is_search_form_tab_type( 'hotel', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
-					<button class="tf-tablinks btn-styled active" data-form-id="tf-hotel-booking-form"><?php esc_html_e( apply_filters("tf_hotel_search_form_tab_button_text", 'Hotel') , 'tourfic' ); ?></button>
+					<button class="tf-tablinks btn-styled active" data-form-id="tf-hotel-booking-form"><?php esc_html_e( apply_filters("tf_hotel_search_form_tab_button_text", $hotel_tab_title) , 'tourfic' ); ?></button>
 				<?php endif; ?>
 
 				<?php if ( ! in_array( 'tour', $disable_services ) && Helper::tf_is_search_form_tab_type( 'tour', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
-					<button class="tf-tablinks btn-styled" data-form-id="tf-tour-booking-form"><?php esc_html_e( apply_filters("tf_tour_search_form_tab_button_text",'Tour') , 'tourfic' ); ?></button>
+					<button class="tf-tablinks btn-styled" data-form-id="tf-tour-booking-form"><?php esc_html_e( apply_filters("tf_tour_search_form_tab_button_text",$tour_tab_title ) , 'tourfic' ); ?></button>
 				<?php endif ?>
 
 				<?php if ( ! in_array( 'apartment', $disable_services ) && Helper::tf_is_search_form_tab_type( 'apartment', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
-					<button class="tf-tablinks btn-styled" data-form-id="tf-apartment-booking-form"><?php esc_html_e( apply_filters("tf_apartment_search_form_tab_button_text", 'Apartment') , 'tourfic' ); ?></button>
+					<button class="tf-tablinks btn-styled" data-form-id="tf-apartment-booking-form"><?php esc_html_e( apply_filters("tf_apartment_search_form_tab_button_text", $apartment_tab_title ) , 'tourfic' ); ?></button>
 				<?php endif ?>
 
 				<?php do_action( 'tf_after_booking_form_tab', $type ) ?>
@@ -90,13 +93,13 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 						<?php do_action( 'tf_before_booking_form_mobile_tab', $type ) ?>
 
 						<?php if ( ! in_array( 'hotel', $disable_services ) && Helper::tf_is_search_form_tab_type( 'hotel', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
-							<option value="tf-hotel-booking-form"><?php esc_html_e( apply_filters("tf_hotel_search_form_tab_button_text", 'Hotel') , 'tourfic' ); ?></option>
+							<option value="tf-hotel-booking-form"><?php esc_html_e( apply_filters("tf_hotel_search_form_tab_button_text", $hotel_tab_title) , 'tourfic' ); ?></option>
 						<?php endif; ?>
 						<?php if ( ! in_array( 'tour', $disable_services ) && Helper::tf_is_search_form_tab_type( 'tour', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
-							<option value="tf-tour-booking-form"><?php esc_html_e( apply_filters("tf_tour_search_form_tab_button_text",'Tour') , 'tourfic' ); ?></option>
+							<option value="tf-tour-booking-form"><?php esc_html_e( apply_filters("tf_tour_search_form_tab_button_text",$tour_tab_title) , 'tourfic' ); ?></option>
 						<?php endif ?>
 						<?php if ( ! in_array( 'apartment', $disable_services ) && Helper::tf_is_search_form_tab_type( 'apartment', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
-							<option value="tf-apartment-booking-form"><?php esc_html_e( apply_filters("tf_apartment_search_form_tab_button_text", 'Apartment') , 'tourfic' ); ?></option>
+							<option value="tf-apartment-booking-form"><?php esc_html_e( apply_filters("tf_apartment_search_form_tab_button_text", $apartment_tab_title) , 'tourfic' ); ?></option>
 						<?php endif ?>
 
 						<?php do_action( 'tf_after_booking_form_mobile_tab', $type ) ?>
