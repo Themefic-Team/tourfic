@@ -736,6 +736,60 @@
 
         });
 
+
+        /*
+        * Car Single Price Calculation
+        * @author Jahid
+        */
+
+        $(document).on('change', '.tf-car-booking-form .tf_pickup_date, .tf-car-booking-form .tf_pickup_time, .tf-car-booking-form .tf_dropoff_date, .tf-car-booking-form .tf_dropoff_time', function (e) {
+            
+            let extra_ids = $("input[name='selected_extra[]']").map(function() {
+                return $(this).val();
+            }).get();
+
+            let extra_qty = $("input[name='selected_qty[]']").map(function() {
+                return $(this).val();
+            }).get();
+
+            let pickup_date = $('.tf_pickup_date').val();
+            let dropoff_date = $('.tf_dropoff_date').val();
+            let pickup_time = $('.tf_pickup_time').val();
+            let dropoff_time = $('.tf_dropoff_time').val();
+            let post_id = $('#post_id').val();
+
+            if( !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
+                return;
+            }
+            var data = {
+                action: 'tf_car_price_calculation',
+                _nonce: tf_params.nonce,
+                post_id: post_id,
+                pickup_date: pickup_date,
+                dropoff_date: dropoff_date,
+                pickup_time: pickup_time,
+                dropoff_time: dropoff_time,
+                extra_ids: extra_ids,
+                extra_qty: extra_qty,
+            };
+
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    $('.tf-date-select-box').addClass('tf-box-loading');
+                },
+                success: function (data) {
+                    if(data){
+                        $('.tf-price-header h2').html(data);
+                        $('.tf-date-select-box').removeClass('tf-box-loading');
+                    }
+                }
+            });
+        });
+
+
         /*
         * Car Archive View
         * @author Jahid

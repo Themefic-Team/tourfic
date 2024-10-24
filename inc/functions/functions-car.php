@@ -744,3 +744,38 @@ add_action("admin_init", "tf_remove_sidebar_category_meta_box");
 function tf_remove_sidebar_category_meta_box() {
 	remove_meta_box( 'carrental_branddiv', array( 'tf_carrental' ), 'normal' );
 }
+
+add_action( 'wp_ajax_nopriv_tf_car_price_calculation', 'tf_car_price_calculation_callback' );
+add_action( 'wp_ajax_tf_car_price_calculation', 'tf_car_price_calculation_callback' );
+function tf_car_price_calculation_callback() {
+	// Check nonce security
+	if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
+		return;
+	}
+
+	/**
+	 * Get car meta values
+	 */
+	$post_id   = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : null;
+	$tf_pickup_date  = isset( $_POST['pickup_date'] ) ? sanitize_text_field( $_POST['pickup_date'] ) : '';
+	$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? sanitize_text_field( $_POST['dropoff_date'] ) : '';
+	$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( $_POST['pickup_time'] ) : '';
+	$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( $_POST['dropoff_time'] ) : '';
+	$extra_ids  = isset( $_POST['extra_ids'] ) ? $_POST['extra_ids'] : '';
+	$extra_qty  = isset( $_POST['extra_qty'] ) ? $_POST['extra_qty'] : '';
+
+	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
+	$get_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+	$total_prices = $get_prices['sale_price'] ? $get_prices['sale_price'] : 0;
+
+	if(!empty($extra_ids)){
+		$total_extra = Pricing::set_extra_price($meta, $extra_ids, $extra_qty, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+		$total_prices = $total_prices + $total_extra['price'];
+	}
+
+	if(!empty($total_prices)){
+		echo sprintf( esc_html__( 'Total: %1$s', 'tourfic' ), wc_price($total_prices) );
+	}
+
+	wp_die();
+}

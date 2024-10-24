@@ -17467,6 +17467,20 @@ html {
   padding: 8px 8px 16px 8px;
   margin-bottom: 32px;
 }
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box.tf-box-loading {
+  position: relative;
+}
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box.tf-box-loading::before {
+  position: absolute;
+  content: "";
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 99;
+  border-radius: 16px;
+}
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select {
   border-radius: 8px;
   background: #FFF;

@@ -869,7 +869,7 @@
                     submitBtn.removeClass('tf-btn-loading');
                     $('.tf-added-extra').html(response);
                     if(response){
-                        $('.tf-extra-added-info').show();
+                        $('.tf-extra-added-info').fadeIn();
                     }
                 }
             });

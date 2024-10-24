@@ -875,6 +875,20 @@
                 background:#EEF2F6;
                 padding: 8px 8px 16px 8px;
                 margin-bottom: 32px;
+                &.tf-box-loading{
+                    position: relative;
+                    &::before{
+                        position: absolute;
+                        content: "";
+                        right: 0;
+                        top: 0;
+                        left: 0;
+                        bottom: 0;
+                        background-color: rgba(255,255,255,.5);
+                        z-index: 99;
+                        border-radius: 16px;
+                    }
+                }
                 .tf-date-single-select{
                     border-radius: 8px;
                     background: #FFF;
