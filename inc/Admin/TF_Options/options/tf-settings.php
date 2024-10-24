@@ -979,11 +979,11 @@ TF_Settings::option( 'tf_settings', array(
 									'options'  => array(
 										'design-1' => array(
 											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design1-apartment.jpg",
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design-1-car.jpg",
 										),
 										'design-2' => array(
 											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design1-apartment.jpg",
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design-1-car.jpg",
 										),
 									),
 									'default'  => 'design-1',
@@ -1078,11 +1078,11 @@ TF_Settings::option( 'tf_settings', array(
 									'options'  => array(
 										'design-1' => array(
 											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/tour-archive-design-2.jpg",
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/car-archive-design-1.jpg",
 										),
 										'design-2' => array(
 											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/tour-archive-design-2.jpg",
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/car-archive-design-1.jpg",
 										),
 									),
 									'default'  => 'design-1',
