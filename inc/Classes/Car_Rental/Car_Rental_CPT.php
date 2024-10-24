@@ -17,8 +17,8 @@ class Car_Rental_CPT extends \Tourfic\Core\Post_Type {
 		parent::__construct();
 
 		$this->set_post_args( array(
-			'name'          => esc_html__('Rentals', 'tourfic' ),
-			'singular_name' => esc_html__('Rentals', 'tourfic' ),
+			'name'          => esc_html__('Car Rentals', 'tourfic' ),
+			'singular_name' => esc_html__('Car Rental', 'tourfic' ),
 			'slug'          => 'tf_carrental',
 			'menu_icon'     => 'dashicons-car',
 			'menu_position' => 26.5,

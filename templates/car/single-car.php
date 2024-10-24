@@ -70,9 +70,9 @@ while ( have_posts() ) : the_post();
 	/**
 	 * Get locations
 	 *
-	 * hotel_location
+	 * carrental_location
 	 */
-	$locations = ! empty( get_the_terms( $post_id, 'hotel_location' ) ) ? get_the_terms( $post_id, 'hotel_location' ) : '';
+	$locations = ! empty( get_the_terms( $post_id, 'carrental_location' ) ) ? get_the_terms( $post_id, 'carrental_location' ) : '';
 	if ( $locations ) {
 		$first_location_id   = $locations[0]->term_id;
 		$first_location_term = get_term( $first_location_id );

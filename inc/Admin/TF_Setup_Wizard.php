@@ -333,7 +333,7 @@ class TF_Setup_Wizard {
             <section class="tf-setup-step-layout">
 				<?php $this->tf_setup_wizard_steps_header( 2 ) ?>
                 <div class="tf-theme-setting-heading">
-                    <h1 class="tf-setup-step-title"><?php esc_html_e( 'Travelfic has some Ready to Use Templates for you', 'tourfic' ) ?></h1>
+                    <h1 class="tf-setup-step-title"><?php esc_html_e( 'Tourfic has some Ready to Use Themes for you', 'tourfic' ) ?></h1>
                     <div class="tf-setup-title-shape">
                         <svg xmlns="http://www.w3.org/2000/svg" width="225" height="70" viewBox="0 0 225 70" fill="none">
                             <g filter="url(#filter0_d_92_10373)">
@@ -355,8 +355,9 @@ class TF_Setup_Wizard {
                         </svg>
                     </div>
                 </div>
-                <p class="tf-setup-step-desc"><?php esc_html_e( "Travelfic is a WordPress theme created by us to improve your site’s frontend. While Tourfic manages your backend and booking, Travelfic ensures your travel site looks great and operates smoothly. ", "tourfic" ) ?>
-                    <a href="https://wordpress.org/themes/travelfic/" target="_blank"><?php esc_html_e( "Know more about Travelfic", "tourfic" ); ?></a></p>
+                <p class="tf-setup-step-desc"><?php esc_html_e( "While Tourfic manages your backend and booking, our WordPress themes ensure your travel/hotel/rental site looks great and operates smoothly. ", "tourfic" ) ?>
+                    <!-- <a href="https://wordpress.org/themes/travelfic/" target="_blank"><?php //esc_html_e( "Know more about Travelfic", "tourfic" ); ?></a> -->
+                </p>
                 <h4 class="tf-select-title"><?php esc_html_e("Select theme from our library", "tourfic"); ?></h4>    
 
                 <div class="tf-template-selection">
