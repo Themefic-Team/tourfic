@@ -2,6 +2,7 @@
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Room\Room;
+use \Tourfic\Classes\Helper;
 
 /**
  * Hotel booking ajax function
