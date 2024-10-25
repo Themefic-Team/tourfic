@@ -125,7 +125,7 @@ abstract Class TF_Booking_Details {
                     <div class="tf_header_wrap_button">
                         <?php 
                         $_tf_integration_settings = get_option( '_tf_integration_settings' ) ? get_option( '_tf_integration_settings' ) : array();
-                        if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($_tf_integration_settings['google_calendar']['tf_google_calendar']['refresh_token'])){ ?>
+                        if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($_tf_integration_settings['google_calendar']['tf_google_calendar']['refresh_token']) && !empty( Helper::tf_data_types(tfopt( 'tf-integration' ))['tf-new-order-google-calendar'] ) && Helper::tf_data_types(tfopt( 'tf-integration' ))['tf-new-order-google-calendar']=="1" ){ ?>
                         <div class="tf-google-sync-button">
                             <button class="tf-google-calendar-sync" data-bookingtype="<?php echo esc_attr($this->booking_args["booking_type"]); ?>"><?php esc_html_e("Refresh", "tourfic"); ?></button>
                         </div>
