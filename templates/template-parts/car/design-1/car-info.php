@@ -10,7 +10,7 @@
             </svg>
             <?php echo esc_attr($passengers); ?> <?php esc_html_e("Persons", "tourfic"); ?>
             <div class="tf-car-info-tooltip">
-                <span><?php echo esc_attr($passengers); ?> <?php esc_html_e("Seats", "tourfic"); ?></span>
+                <span><?php esc_html_e("This car has", "tourfic"); ?> <?php echo esc_attr($passengers); ?> <?php esc_html_e("seats available for passengers.", "tourfic"); ?></span>
             </div>
         </li>
         <?php } ?>
@@ -78,13 +78,14 @@
             </div>
         </li>
         
+        <?php if(!empty($fuel_included)){ ?>
         <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
-            <i class="ri-gas-station-line"></i><?php echo $fuel_included ? esc_html_e('Included') : esc_html_e('not Include'); ?>
+            <i class="ri-gas-station-line"></i><?php echo esc_html($fuel_included); ?>
             <div class="tf-car-info-tooltip">
-                <span><?php esc_html_e("Fuel:", "tourfic"); ?> <?php echo $fuel_included ? esc_html_e('Included') : esc_html_e('not Include'); ?></span>
+                <span><?php esc_html_e("Fuel:", "tourfic"); ?> <?php echo esc_html($fuel_included); ?></span>
             </div>
         </li>
-        
+        <?php } ?>
         <?php if(!empty($shuttle_car)){ ?>
         <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -560,7 +560,7 @@ function tf_car_booking_pupup_callback() {
 		<span class="tf-flex tf-flex-align-center tf-flex-gap-16">
 			<i class="ri-information-line"></i>
 			<?php if('free'==$bestRefundPolicy['cancellation_type']){ ?> <b><?php esc_html_e("Free cancellation", "tourfic"); ?></b> <?php }else{ ?>
-			<?php echo 'paid'==$bestRefundPolicy['cancellation_type'] && 'percent'==$bestRefundPolicy['refund_amount_type'] ? '<b>'.$bestRefundPolicy['refund_amount'].' % deduction</b>' : '<b>'.wc_price($bestRefundPolicy['refund_amount']).' deduction</b>'; ?>
+			<?php echo 'paid'==$bestRefundPolicy['cancellation_type'] && 'percent'==$bestRefundPolicy['refund_amount_type'] ? '<b>'.$bestRefundPolicy['refund_amount'].'% Cancellation fee</b>' : '<b>'.wc_price($bestRefundPolicy['refund_amount']).' Cancellation fee</b>'; ?>
 			<?php } ?>
 			<?php esc_html_e("before", "tourfic"); ?> <?php echo $beforeDate.' '.$beforeTime; ?>
 		</span>
