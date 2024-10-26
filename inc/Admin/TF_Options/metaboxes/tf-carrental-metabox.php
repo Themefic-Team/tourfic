@@ -800,6 +800,16 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 							'label' => __( 'Plan Description', 'tourfic' ),
 						),
 						array(
+							'id'       => 'price_by',
+							'type'     => 'select',
+							'label'    => __( 'Plan Pricing Rule', 'tourfic' ),
+							'options'  => array(
+								'day' => __( 'Per Day', 'tourfic' ),
+								'rental'   => __( 'Per Rental', 'tourfic' ),
+							),
+							'default'  => 'day',
+						),
+						array(
 							'id'    => 'price',
 							'type'  => 'number',
 							'label' => __( 'Plan Price', 'tourfic' ),
