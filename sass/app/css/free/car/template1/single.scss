@@ -639,6 +639,14 @@
                         text-decoration-line: strikethrough;
                         font-weight: 400 !important;
                     }
+                    small.pricing-type{
+                        color: #566676;
+                        font-size: 16px !important;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 150%;
+                        text-transform: capitalize;
+                    }
                 }
                 p{
                     color: #566676;
