@@ -21,7 +21,7 @@
             </svg>
             <?php echo esc_attr($baggage); ?> <?php esc_html_e("Bag", "tourfic"); ?>
             <div class="tf-car-info-tooltip">
-                <span><?php echo esc_attr($baggage); ?> <?php esc_html_e("Bags", "tourfic"); ?></span>
+                <span><?php esc_html_e("The car can accommodate up to ", "tourfic"); ?><?php echo esc_attr($baggage); ?> <?php esc_html_e("bags in the luggage compartment.", "tourfic"); ?></span>
             </div>
         </li>
         <?php } ?>
@@ -32,7 +32,7 @@
                 </svg>
                 <?php echo esc_html($fuel_types); ?>
                 <div class="tf-car-info-tooltip">
-                    <span><?php esc_html_e("Fuel Type:", "tourfic"); ?> <?php echo esc_attr($fuel_types); ?></span>
+                    <span><?php esc_html_e("The vehicle runs on ", "tourfic"); ?> <?php echo esc_attr($fuel_types); ?> <?php esc_html_e("fuel.", "tourfic"); ?></span>
                 </div>
             </li>
         <?php } ?>
@@ -47,6 +47,9 @@
                 <path d="M5 7V11V13C5 13.6295 5.29639 14.2223 5.8 14.6L8.46667 16.6C8.81286 16.8596 9.23393 17 9.66667 17H12.9296C13.5983 17 14.2228 16.6658 14.5937 16.1094L15.6132 14.5801C15.8549 14.2177 16.2616 14 16.6972 14C17.4167 14 18 13.4167 18 12.6972V10.2361C18 9.55341 17.4466 9 16.7639 9C16.2957 9 15.8677 8.73548 15.6584 8.31672L14.5528 6.10557C14.214 5.428 13.5215 5 12.7639 5H7C5.89543 5 5 5.89543 5 7Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round"/>
                 </svg> 
                 <?php echo esc_html($engine_years); ?>
+                <div class="tf-car-info-tooltip">
+                <span><?php esc_html_e("This is the vehicle's model year.", "tourfic"); ?></span>
+            </div>
             </li>
         <?php } ?>
         
@@ -64,7 +67,7 @@
             <?php echo $unlimited_mileage ? esc_html_e("Unlimited", "tourfic") : $total_mileage.' '.$mileage_type; ?>
 
             <div class="tf-car-info-tooltip">
-                <span><?php esc_html_e("Mileage:", "tourfic"); ?> <?php echo $unlimited_mileage ? esc_html_e("Unlimited", "tourfic") : $total_mileage.' '.$mileage_type; ?></span>
+                <span><?php echo $unlimited_mileage ? esc_html_e("unlimited mileage", "tourfic") : $total_mileage.' '.$mileage_type; ?> <?php esc_html_e("is included in this rental.", "tourfic"); ?></span>
             </div>
         </li>
         <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
@@ -74,7 +77,7 @@
             </svg>
             <?php echo $auto_transmission ? esc_html_e("Auto", "tourfic") : esc_html_e("Manual", "tourfic"); ?>
             <div class="tf-car-info-tooltip">
-                <span><?php esc_html_e("Transmission:", "tourfic"); ?> <?php echo $auto_transmission ? esc_html_e("Auto", "tourfic") : esc_html_e("Manual", "tourfic"); ?></span>
+                <span><?php esc_html_e("This car has", "tourfic"); ?> <?php echo $auto_transmission ? esc_html_e("an automatic", "tourfic") : esc_html_e("manual", "tourfic"); ?> <?php esc_html_e("transmission", "tourfic"); ?></span>
             </div>
         </li>
         
@@ -98,14 +101,21 @@
         </li>
         <?php } ?>
 
-        <?php if(!empty($car_custom_info)){
-            foreach($car_custom_info as $info){ ?>
+        <?php if(function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($car_custom_info)){
+            foreach($car_custom_info as $info){ 
+            if(!empty($info['title'])){
+            ?>
             <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
                 <?php if(!empty($info['info_icon'])){ ?>
                     <i class="<?php echo esc_attr($info['info_icon']); ?>"></i>
                 <?php } ?>
                 <?php echo !empty($info['title']) ? esc_html($info['title']) : ''; ?>
+
+                <?php if(!empty($info['content'])){ ?>
+                <div class="tf-car-info-tooltip">
+                <span><?php echo esc_html($info['content']); ?></span> </div>
+                <?php } ?>
             </li>
-        <?php }} ?>
+        <?php }}} ?>
     </ul>
 </div>
