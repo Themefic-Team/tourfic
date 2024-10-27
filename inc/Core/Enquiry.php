@@ -98,9 +98,13 @@ abstract class Enquiry {
 									<option value="unread"><?php esc_html_e( "Unread", "tourfic" ); ?></option>
 									<?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
 										<option value="replied"><?php esc_html_e( "Replied", "tourfic" ); ?></option>
-										<option value="responded"><?php esc_html_e( "Responded", "tourfic" ); ?></option>
 										<option value="not-replied"><?php esc_html_e( "Not Replied", "tourfic" ); ?></option>
-										<option value="not-responded"><?php esc_html_e( "Not Responded", "tourfic" ); ?></option>
+										
+										<?php if( is_plugin_active( 'tourfic-email-piping/tourfic-email-piping.php' ) ) : ?>
+											<option value="responded"><?php esc_html_e( "Responded", "tourfic" ); ?></option>
+											<option value="not-responded"><?php esc_html_e( "Not Responded", "tourfic" ); ?></option>
+										<?php endif; ?>
+
 									<?php endif; ?>
 								</select>
 							</div>
@@ -1134,20 +1138,20 @@ abstract class Enquiry {
 		ob_start();
 		?>
 			<div style="width:100%">
-				<p>Hello <b><?php echo esc_html__( $author_name, 'tourfic' ) ?></b></p>
+				<p> <?php echo esc_html__("Hello", 'tourfic') ?> <b><?php echo esc_html( $author_name ) ?></b></p>
 				<?php if( $type = 'new'): ?>
-					<p>A new enquiry has been added to your dashboard <?php echo !empty($name) ? 'by ' . $name : '' ?></p>
+					<p> <?php echo esc_html__("A new enquiry has been added to your dashboard", 'tourfic') ?> <?php echo !empty($name) ? esc_html__('by ', 'tourfic') . $name : '' ?></p>
 				<?php elseif( $type == "reply"): ?>
-					<p>A new response has been added to #<?php echo esc_html($last_id) ?> <?php echo !empty($name) ? ' by ' . $name : '' ?></p>
+					<p> <?php echo esc_html__("A new response has been added to", 'tourfic'); ?> #<?php echo esc_html($last_id) ?> <?php echo !empty($name) ? esc_html__('by ', 'tourfic') . $name : '' ?></p>
 				<?php endif; ?>
 				<?php if( !empty( $body )): ?>
 					<h4>Enquiry Body</h4>
 					<p><?php echo wp_kses_post( $body ) ?></p>
 				<?php endif; ?>
-				<p>Click here to go to the enquiry page: <b><a href="<?php echo esc_url( $dashboard_link . "#/" . strtolower($post_type) . '-' . 'enquiries' . '/' . $last_id)  ?>">View Enquiry</a></b></p>
+				<p><?php esc_html__("Click here to go to the enquiry page:", 'tourfic') ?> <b><a href="<?php echo esc_url( $dashboard_link . "#/" . strtolower($post_type) . '-' . 'enquiries' . '/' . $last_id)  ?>"><?php echo esc_html__("View Enquiry", 'tourfic'); ?></a></b></p>
 			</div>
 			<div style="width:100%">
-				<p>Reply the enquiry using dashboard reply form</p>
+				<p><?php esc_html__("Reply the enquiry using dashboard reply form", 'tourfic') ?></p>
 			</div>
 		<?php
 		$email_content = ob_get_clean();

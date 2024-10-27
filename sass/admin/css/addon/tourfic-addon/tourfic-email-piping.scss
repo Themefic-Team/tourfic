@@ -5,42 +5,58 @@
 
 
 .tfep-connection-setting-footer {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 8px;
-    margin: 12px 0px 12px 0px;
+    .tfep-test-connection-status {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 8px;
+        margin: 12px 0px 12px 0px;
 
-    #tfep-test-connection {
-        background-color: #003c79;
-        border-color: #003c79;
-        border: 1px solid #003c79;
-        color: #fff;
-        font-weight: 600;
-        font-family: inherit;
-        padding: 5px 12px;
-        border-radius: 4px;
-        text-decoration: none;
-        cursor: pointer;
-        transition: all .3s ease-in-out;
-
-        &:hover {
-            background-color: #001f3e;
-            border-color: #001f3e;
+        #tfep-test-connection {
+            background-color: #003c79;
+            border-color: #003c79;
+            border: 1px solid #003c79;
             color: #fff;
+            font-weight: 600;
+            font-family: inherit;
+            padding: 5px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all .3s ease-in-out;
+    
+            &:hover {
+                background-color: #001f3e;
+                border-color: #001f3e;
+                color: #fff;
+            }
+        }
+    
+        .tfep-connection-result {
+            font-size: 14px;
+            font-weight: 500;
+        }
+    
+        .tfep-connection-result.connection-success {
+            color: #00a000;
+        }
+        
+        .tfep-connection-result.connection-failed {
+            color: #f44336;
         }
     }
 
-    .tfep-connection-result {
+    .tfep-notice-for-test-connection {
         font-size: 14px;
-        font-weight: 500;
-    }
+        font-weight: 400;
+        margin-top: 14px;
+        line-height: 1.5;
+        color: #87888B;
 
-    .tfep-connection-result.connection-success {
-        color: #00a000;
+        span {
+            font-weight: 600;
+            color: #68686a;
+        }
     }
     
-    .tfep-connection-result.connection-failed {
-        color: #f44336;
-    }
 }
