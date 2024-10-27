@@ -81,7 +81,7 @@ function tf_car_booking_callback() {
 	}
 
 	if(!empty($tf_protection)){
-		$total_protection_prices = Pricing::set_protection_price($meta, $tf_protection);
+		$total_protection_prices = Pricing::set_protection_price($meta, $tf_protection, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
 		if(!empty($total_protection_prices['price'])){
 			$total_prices = $total_prices + $total_protection_prices['price'];
 		}

@@ -605,7 +605,7 @@ function tf_car_booking_pupup_callback() {
 									</label>
 								</div>
 								<div class="tf-single-protection-title tf-flex">
-								<?php echo !empty($protection['title']) ? esc_html($protection['title']) : ''; ?>
+								<?php echo !empty($protection['title']) ? esc_html($protection['title']) : ''; ?> (<?php esc_html_e("Per "); ?><?php echo esc_html($protection['price_by']); ?>)
 								<?php if(!empty($protection['content'])){ ?>
 								<div class="tf-info-tooltip">
 									<i class="ri-information-line"></i>

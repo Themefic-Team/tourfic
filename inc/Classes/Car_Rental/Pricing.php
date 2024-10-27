@@ -270,22 +270,41 @@ class Pricing {
         return $extras;
     }
 
-    static function set_protection_price($meta, $tf_protection){
+    static function set_protection_price($meta, $tf_protection, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time){
         $car_protections = ! empty( $meta['protections'] ) ? $meta['protections'] : '';
         $selected_protection_title = [];
         $prices = 0;
         foreach($tf_protection as $protection){
             $tf_single_protection = $car_protections[$protection];
 
+            if( 'day' == $tf_single_protection['price_by'] ){
+                // Combine date and time
+                $pickup_datetime = new \DateTime("$tf_pickup_date $tf_pickup_time");
+                $dropoff_datetime = new \DateTime("$tf_dropoff_date $tf_dropoff_time");
+
+                // Calculate the difference
+                $interval = $pickup_datetime->diff($dropoff_datetime);
+
+                // Get total days
+                $total_days = $interval->days;
+                            
+                // If there are leftover hours that count as a partial day
+                if ($interval->h > 0 || $interval->i > 0) {
+                    $total_days += 1;  // Add an extra day for any remaining hours
+                }
+            }else{
+                $total_days = 1;
+            }
+
             if( !empty($tf_single_protection['title']) && !empty($tf_single_protection['price']) ){
-                $selected_protection_title[] = $tf_single_protection['title']. ' × ' . wc_price($tf_single_protection['price']);
+                $selected_protection_title[] = $tf_single_protection['title']. '('. $tf_single_protection['price_by'] .') × ' . wc_price($tf_single_protection['price'] * $total_days);
             }
             if( !empty($tf_single_protection['title']) && empty($tf_single_protection['price']) ){
-                $selected_protection_title[] = $tf_single_protection['title'];
+                $selected_protection_title[] = $tf_single_protection['title']. '('. $tf_single_protection['price_by'] .')';
             }
 
             if(!empty($tf_single_protection['price'])){ 
-                $prices += $tf_single_protection['price'];
+                $prices += $tf_single_protection['price'] * $total_days;
             }
         }
         return $protections = array(
