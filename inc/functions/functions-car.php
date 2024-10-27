@@ -536,6 +536,7 @@ function tf_car_booking_pupup_callback() {
 	$car_protection_section_status = ! empty( $meta['protection_section'] ) ? $meta['protection_section'] : '';
 	$car_protection_content = ! empty( $meta['protection_content'] ) ? $meta['protection_content'] : '';
 	$car_protections = ! empty( $meta['protections'] ) ? $meta['protections'] : '';
+	$car_protection_tab_title = ! empty( $meta['protection_tab_title'] ) ? esc_html($meta['protection_tab_title']) : esc_html('Protection');
 	$car_calcellation_policy = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['calcellation_policy'] ) ? $meta['calcellation_policy'] : '';
 
 	$pickup_date = ! empty( $_POST['pickup_date'] ) ? $_POST['pickup_date'] : '';
@@ -591,7 +592,7 @@ function tf_car_booking_pupup_callback() {
 	<div class="tf-booking-tabs">
 		<ul>
 			<?php if(!empty($car_protection_section_status) && !empty($car_protections)){ ?>
-				<li class="protection active"><?php esc_html_e("Protections", "tourfic"); ?></li>
+				<li class="protection active"><?php echo $car_protection_tab_title; ?></li>
 			<?php } ?>
 			<?php if(function_exists( 'is_tf_pro' ) && is_tf_pro() && $car_booking_by=='3'){ ?>
 			<li class="booking <?php echo empty($car_protection_section_status) ? esc_attr('active') : ''; ?>"><?php esc_html_e("Booking", "tourfic"); ?></li>
