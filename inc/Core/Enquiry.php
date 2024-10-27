@@ -406,7 +406,7 @@ abstract class Enquiry {
 												</div>
 												<div class="tf-single-enquiry-accordion-head-right">
 													<?php // esc_html_e( date( "M d, Y h:i:s A", strtotime($reply["submit_time"])) ); ?>
-													<?php  esc_html_e( $this->time_elapsed_string( $reply["submit_time"]) ); ?>
+													<?php  esc_html_e( self::time_elapsed_string( $reply["submit_time"]) ); ?>
 												</div>
 											</div>
 											<div id="tf-single-enquiry-accordion-<?php echo esc_attr($key) ?>" class="tf-single-enquiry-collapse">
@@ -577,7 +577,7 @@ abstract class Enquiry {
 		<?php
 	}
 
-	function time_elapsed_string($datetime) {
+	static function time_elapsed_string($datetime) {
 
 		$timezone = wp_timezone();
 		
