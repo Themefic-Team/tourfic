@@ -469,17 +469,37 @@ if ( ! function_exists( 'tf_car_search_ajax_callback' ) ) {
  * @author Jahid
  */
 
-function tf_getBestRefundPolicy($cancellations) {
+function tf_getBestRefundPolicy($cancellations, $pickup_date, $pickup_time) {
     $bestPolicy = null;
-    
+    $timezone = new DateTimeZone('Asia/Dhaka');
+	$today = new DateTime('now', $timezone);
+	$pickupDateTime = DateTime::createFromFormat('Y/m/d H:i', $pickup_date . ' ' . $pickup_time, $timezone);
+
+	$interval = $today->diff($pickupDateTime);
+
+    // Get days and hours separately
+    $days = $interval->days;
+    $hours = $interval->h;
+
     foreach ($cancellations as $cancellation) {
-        // Check if it's a free cancellation
-        if ($cancellation['cancellation_type'] === 'free') {
-            // If we don't have a policy yet, or if this free cancellation has a longer time before cancellation
-            if (!$bestPolicy || $cancellation['before_cancel_time'] > $bestPolicy['before_cancel_time']) {
-                $bestPolicy = $cancellation;
-            }
-        }
+		if('day'==$cancellation['cancellation-times']){
+			// Check if it's a free cancellation
+			if ($cancellation['cancellation_type'] === 'free' && $days==$cancellation['before_cancel_time']) {
+				// If we don't have a policy yet, or if this free cancellation has a longer time before cancellation
+				if (!$bestPolicy || $cancellation['before_cancel_time'] > $bestPolicy['before_cancel_time']) {
+					$bestPolicy = $cancellation;
+				}
+			}
+		}
+		if('hour'==$cancellation['cancellation-times']){
+			// Check if it's a free cancellation
+			if ($cancellation['cancellation_type'] === 'free' && $hours==$cancellation['before_cancel_time']) {
+				// If we don't have a policy yet, or if this free cancellation has a longer time before cancellation
+				if (!$bestPolicy || $cancellation['before_cancel_time'] > $bestPolicy['before_cancel_time']) {
+					$bestPolicy = $cancellation;
+				}
+			}
+		}
     }
 
     // If no free cancellation was found, choose the best paid one
@@ -520,13 +540,15 @@ function tf_car_booking_pupup_callback() {
 	$pickup_date = ! empty( $_POST['pickup_date'] ) ? $_POST['pickup_date'] : '';
 	$pickup_time = ! empty( $_POST['pickup_time'] ) ? $_POST['pickup_time'] : '';
 
-	$bestRefundPolicy = tf_getBestRefundPolicy($car_calcellation_policy);
+	$bestRefundPolicy = tf_getBestRefundPolicy($car_calcellation_policy, $pickup_date, $pickup_time);
 
-	$today = new DateTime(); // Current date and time
+	$timezone = new DateTimeZone('Asia/Dhaka');
+	$today = new DateTime('now', $timezone);
+
 	$less_current_day = false;
 
 	// Combine pickup date and time into a single string and convert it to a DateTime object
-	$pickupDateTime = DateTime::createFromFormat('Y/m/d H:i', $pickup_date . ' ' . $pickup_time);
+	$pickupDateTime = DateTime::createFromFormat('Y/m/d H:i', $pickup_date . ' ' . $pickup_time, $timezone);
 
 	// Extract the "before_cancel_time" and "cancellation-times" (hours, days, etc.)
 	$beforeCancelTime = (int) $bestRefundPolicy['before_cancel_time'];
@@ -545,8 +567,6 @@ function tf_car_booking_pupup_callback() {
 
 	// Compare calculated before date with the current day
 	if ($pickupDateTime < $today) {
-		// If the calculated cancellation time is before today, adjust it to the current date and time
-		// $pickupDateTime = $today;
 		$less_current_day = true;
 	}
 
