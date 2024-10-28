@@ -189,9 +189,10 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'field_width' => 50,
                 ),
                 array(
-					'id'    => 'rom-cancellation-heading',
+					'id'    => 'room-cancellation-heading',
 					'type'  => 'heading',
-					'label' => 'Booking Cancellation Section',
+					'label' => 'Cancellation Condition',
+					'subtitle' => __( 'Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds.', 'tourfic' ),
 				),
 				array(
 					'id'    => 'tf-pro-notice',

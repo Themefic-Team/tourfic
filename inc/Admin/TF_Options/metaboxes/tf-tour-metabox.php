@@ -641,7 +641,8 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'    => 'tour-cancellation-heading',
 					'type'  => 'heading',
-					'label' => 'Booking Cancellation Section',
+					'label' => 'Cancellation Condition',
+					'subtitle' => __( 'Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds.', 'tourfic' ),
 				),
 				array(
 					'id'    => 'tf-pro-notice',
