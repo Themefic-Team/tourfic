@@ -121,6 +121,8 @@ class Base {
 		\Tourfic\App\Shortcodes\Search_Form::instance();
 		\Tourfic\App\Shortcodes\Search_Result::instance();
 		\Tourfic\App\Shortcodes\Vendor_Post::instance();
+
+		\Tourfic\App\Shortcodes\Cars::instance();
 	}
 }
 
