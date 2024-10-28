@@ -47,6 +47,12 @@ class Cars extends \Tourfic\Core\Shortcodes {
 		<?php if ( $car_loop->have_posts() ) : ?>
 
             <div class="tf-car-archive-result tf-car-lists-widgets">
+				<div class="tf-heading">
+					<?php
+					echo ! empty( $title ) ? '<h2>' . esc_html( $title ) . '</h2>' : '';
+					echo ! empty( $subtitle ) ? '<p>' . esc_html( $subtitle ) . '</p>' : '';
+					?>
+				</div>
                 <?php do_action("tf_car_archive_card_items_before"); ?>
                 <div class="tf-car-result archive_ajax_result tf-flex tf-flex-gap-32 <?php echo esc_attr($views_activate); ?>">
                     
