@@ -5,6 +5,7 @@ namespace Tourfic\App\Shortcodes;
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\App\TF_Review;
+use \Tourfic\Classes\Apartment\Pricing;
 
 class Recent_Apartment extends \Tourfic\Core\Shortcodes {
 
@@ -56,6 +57,8 @@ class Recent_Apartment extends \Tourfic\Core\Shortcodes {
 						$post_id                    = get_the_ID();
 						$related_comments_apartment = get_comments( array( 'post_id' => $post_id ) );
 						$meta                       = get_post_meta( $post_id, 'tf_apartment_opt', true );
+						$min_price = Pricing::instance( $post_id )->get_min_max_price();
+						$discounted_price = Pricing::instance( $post_id )->calculate_discount( $min_price["min"] );
 
 						?>
 						<div class="tf-slider-item" style="background-image: url(<?php echo esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ); ?>);">
@@ -70,6 +73,10 @@ class Recent_Apartment extends \Tourfic\Core\Shortcodes {
 										</div>
 									<?php } ?>
 									<p><?php echo wp_kses_post( wp_trim_words( get_the_content(), 10 ) ); ?></p>
+									<div class="tf-recent-room-price">
+                                        <?php echo esc_html("From "); ?>
+										<?php echo $min_price["min"] == $discounted_price ? wp_kses_post( wc_price($min_price["min"]) ) : '<del>' . wp_kses_post( wc_price($min_price["min"]) ) . '</del>' . ' ' . wp_kses_post( wc_price( $discounted_price ) ); ?>
+                                    </div>
 								</div>
 							</div>
 						</div>

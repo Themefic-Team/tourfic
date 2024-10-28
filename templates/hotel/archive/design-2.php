@@ -2,6 +2,7 @@
 
     <?php 
     use \Tourfic\Classes\Helper;
+    use \Tourfic\Classes\Hotel\Hotel;
     
     $tf_hotel_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] : '';
     ?>
@@ -35,7 +36,7 @@
                     </span>
                     <!-- Booking form Start -->
                     <div class="tf-archive-search-form tf-booking-form-wrapper">
-                        <form action="<?php echo esc_url( tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
+                        <form action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
                             <?php Helper::tf_archive_sidebar_search_form('tf_hotel'); ?>
                         </form>
                     </div>
@@ -66,14 +67,14 @@
                                     the_post();
                                     $hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
                                     if ( !empty( $hotel_meta[ "featured" ] ) && $hotel_meta[ "featured" ] == 1 ) {
-                                        tf_hotel_archive_single_item();
+                                        Hotel::tf_hotel_archive_single_item();
                                     }
                                 }
                                 while ( have_posts() ) {
                                     the_post();
                                     $hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
                                     if ( empty($hotel_meta[ "featured" ]) ) {
-                                        tf_hotel_archive_single_item();
+	                                    Hotel::tf_hotel_archive_single_item();
                                     }
                                 }
                             } else {
@@ -81,9 +82,9 @@
                             }
                             ?>
                             <?php 
-                            if(tourfic_posts_navigation()){ ?>
+                            if(Helper::tourfic_posts_navigation()){ ?>
                             <div class="tf-pagination-bar">
-                                <?php tourfic_posts_navigation(); ?>
+                                <?php Helper::tourfic_posts_navigation(); ?>
                             </div>
                             <?php } ?>
                         </div>

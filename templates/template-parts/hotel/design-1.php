@@ -2,6 +2,7 @@
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
+use \Tourfic\Classes\Hotel\Hotel;
 
 $tf_booking_type = '1';
 $tf_hide_booking_form = '';
@@ -26,7 +27,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                             <?php if( !empty($locations )) : ?>
                                 <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
                                 <?php if ( $locations ) { ?>
-                                    <?php if ( $address ) {
+                                    <?php if ( !empty( $address ) ) {
                                         echo '<i class="fa-solid fa-location-dot"></i> ' . wp_kses_post($address) . ' –';
                                     } ?>
                                     <a href="<?php echo esc_url($first_location_url); ?>" class="more-hotel tf-d-ib">
@@ -209,7 +210,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                         <div class="tf-column tf-tour-details-right">
 	                        <?php if(($tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1) || $tf_booking_type == 1) :?>
                                 <div class="tf-tour-booking-box tf-box">
-                                    <?php tf_hotel_sidebar_booking_form(); ?>
+                                    <?php Hotel::tf_hotel_sidebar_booking_form(); ?>
                                 </div>
                             <?php endif; ?>
                             <?php if( !empty($tf_ext_booking_code) && $tf_ext_booking_type == 2 ) : ?>

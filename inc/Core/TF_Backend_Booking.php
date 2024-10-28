@@ -23,9 +23,6 @@ abstract class TF_Backend_Booking {
 		add_action( 'admin_menu', array( $this, 'tf_backend_booking_menu' ) );
 		add_action( 'tf_before_' . $this->args["name"] . '_booking_details', array( $this, 'tf_backend_booking_button' ) );
 
-		// foreach( $this->actions as $action ) {
-		//     add_action( $action, [ $this, $action . '_callback' ] );
-		// }
 	}
 
 	final function set_customers_fields() {
@@ -120,6 +117,7 @@ abstract class TF_Backend_Booking {
 
 	protected function set_settings( array $settings ) {
 		$this->set_customers_fields();
+		// $this->booking_customers_fields
 		$this->settings = array_merge( $this->booking_customers_fields, $settings );
 	}
 
@@ -166,11 +164,12 @@ abstract class TF_Backend_Booking {
 
 		?>
 		
-        <form method="post" action="" class=<?php echo esc_attr( $booking_form_class ); ?> enctype="multipart/form-data">
+        <form method="post" action="" class="<?php echo esc_attr( $booking_form_class ); ?>" enctype="multipart/form-data">
             <h1><?php echo esc_html( $booking_form_title ); ?></h1>
 			<?php
-			$tf_backend_booking_form_fields = $this->settings;
+			$tf_backend_booking_form_fields = apply_filters( 'tf_' . $this->args["name"] . '_backend_booking_form_card', $this->settings);
 			foreach ( $tf_backend_booking_form_fields as $id => $tf_backend_booking_form_field ) : ?>
+				<?php do_action( 'tf_before_' . $this->args["name"] . '_each_backend_booking_form_card'); ?>
                 <div class="tf-backend-booking-card-wrap">
                     <h3 class="tf-backend-booking-card-title"><?php echo esc_html( $tf_backend_booking_form_field['title'] ); ?></h3>
 

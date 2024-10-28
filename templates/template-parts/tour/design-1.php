@@ -1,6 +1,7 @@
 <?php
 
 use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\Tour\Tour;
 use \Tourfic\Classes\Tour\Tour_Price;
 
 $tf_booking_type = '1';
@@ -373,7 +374,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         <h3><?php echo ! empty( $meta['booking-section-title'] ) ? esc_html( $meta['booking-section-title'] ) : ''; ?></h3>
 	                                    <?php
                                         if( ($tf_booking_type == 2 && $tf_hide_booking_form !== '1') || $tf_booking_type == 1 || $tf_booking_type == 3) {
-		                                    echo wp_kses(tf_single_tour_booking_form( $post->ID ), Helper::tf_custom_wp_kses_allow_tags());
+		                                    echo wp_kses(Tour::tf_single_tour_booking_form( $post->ID ), Helper::tf_custom_wp_kses_allow_tags());
                                         }
                                         ?>
 	                                    <?php if ($tf_booking_type == 2 && $tf_hide_booking_form == 1):?>
@@ -589,7 +590,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                             <div class="tf-booking-form">
                                                 <div class="tf-booking-form-inner tf-mt-24">
                                                     <h3><?php echo ! empty( $meta['booking-section-title'] ) ? esc_html( $meta['booking-section-title'] ) : ''; ?></h3>
-													<?php echo wp_kses(tf_single_tour_booking_form( $post->ID ), Helper::tf_custom_wp_kses_allow_tags()); ?>
+													<?php echo wp_kses(Tour::tf_single_tour_booking_form( $post->ID ), Helper::tf_custom_wp_kses_allow_tags()); ?>
 
                                                 </div>
                                             </div>
@@ -679,11 +680,6 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                             $disable_adult          = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
                                             $disable_child          = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
                                             $tour_price             = new Tour_Price( $meta );
-
-                                            // echo "<pre>";
-                                            // print_r($tour_price);
-                                            // echo "</pre>";
-                                            // die(); // added by - Sunvi
                                             ?>
                                             <div class="tf-slider-item tf-post-box-lists">
                                                 <div class="tf-post-single-box">

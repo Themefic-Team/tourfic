@@ -611,8 +611,8 @@ function tf_tours_booking_function() {
 		} 
 
 		if ( $adult_required_chield && $children > 0 && !empty( $children_price ) && empty( $adults ) ) {
-    $response['errors'][] = esc_html__( 'An adult is required for children booking!', 'tourfic' );
-}
+		    $response['errors'][] = esc_html__( 'An adult is required for children booking!', 'tourfic' );
+		}
 
 	} else if ( ( ! empty( $custom_avail ) && $custom_avail == true ) || $pricing_rule == 'group' ) {
 
@@ -834,7 +834,7 @@ function tf_tours_booking_function() {
 			}
 
 			# Deposit information
-			tf_get_deposit_amount( $meta, $tf_tours_data['tf_tours_data']['price'], $deposit_amount, $has_deposit );
+			Helper::tf_get_deposit_amount( $meta, $tf_tours_data['tf_tours_data']['price'], $deposit_amount, $has_deposit );
 			if ( function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true && $make_deposit == true ) {
 				$tf_tours_data['tf_tours_data']['due']   = $tf_tours_data['tf_tours_data']['price'] - $deposit_amount;
 				$tf_tours_data['tf_tours_data']['price'] = $deposit_amount;
@@ -1249,7 +1249,7 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 		}
 	}
 
-	if( !empty( Helper::tf_data_types(tfopt( 'tf-integration' ))['tf-new-order-google-calendar'] ) && Helper::tf_data_types(tfopt( 'tf-integration' ))['tf-new-order-google-calendar']=="1"){
+	if( !empty( Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar'] ) && Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar']=="1"){
 		apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, array(), $order->get_items() );
 	}
 
@@ -1445,7 +1445,7 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 		}
 	}
 
-	if( !empty( Helper::tf_data_types(tfopt( 'tf-integration' ))['tf-new-order-google-calendar'] ) && Helper::tf_data_types(tfopt( 'tf-integration' ))['tf-new-order-google-calendar']=="1"){
+	if( !empty( Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar'] ) && Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar']=="1"){
 		apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, array(), $order->get_items() );
 	}
 

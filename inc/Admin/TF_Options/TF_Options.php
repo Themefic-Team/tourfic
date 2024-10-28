@@ -45,6 +45,10 @@ class TF_Options {
 		add_action( 'wp_ajax_tf_add_apartment_availability', array( $this, 'tf_add_apartment_availability' ) );
 		add_action( 'wp_ajax_tf_get_apartment_availability', array( $this, 'tf_get_apartment_availability' ) );
 		add_action( 'save_post', array( $this, 'tf_update_apt_availability_price' ), 99, 2 );
+		add_action( 'wp_ajax_tf_insert_category_data', array( $this, 'tf_insert_category_data_callback' ) );
+		add_action( 'wp_ajax_tf_delete_category_data', array( $this, 'tf_delete_category_data_callback' ) );
+		add_action( 'wp_ajax_tf_insert_post_data', array( $this, 'tf_insert_post_data_callback' ) );
+		add_action( 'wp_ajax_tf_delete_post_data', array( $this, 'tf_delete_post_data_callback' ) );
 	}
 
 	public function tf_options_file_path( $file_path = '' ) {
@@ -388,6 +392,7 @@ class TF_Options {
 		$tf_room_adult_price = isset( $_POST['tf_room_adult_price'] ) && ! empty( $_POST['tf_room_adult_price'] ) ? sanitize_text_field( $_POST['tf_room_adult_price'] ) : '';
 		$tf_room_child_price = isset( $_POST['tf_room_child_price'] ) && ! empty( $_POST['tf_room_child_price'] ) ? sanitize_text_field( $_POST['tf_room_child_price'] ) : '';
 		$avail_date          = isset( $_POST['avail_date'] ) && ! empty( $_POST['avail_date'] ) ? sanitize_text_field( $_POST['avail_date'] ) : '';
+		$options_count       = isset( $_POST['options_count'] ) && ! empty( $_POST['options_count'] ) ? sanitize_text_field( $_POST['options_count'] ) : '';
 
 		if ( empty( $check_in ) || empty( $check_out ) ) {
 			wp_send_json_error( [
@@ -405,10 +410,11 @@ class TF_Options {
 			] );
 		}
 
+
 		$room_avail_data = [];
 		for ( $i = $check_in; $i <= $check_out; $i = strtotime( '+1 day', $i ) ) {
-			$tf_room_date                     = gmdate( 'Y/m/d', $i );
-			$tf_room_data                     = [
+			$tf_room_date = gmdate( 'Y/m/d', $i );
+			$tf_room_data = [
 				'check_in'    => $tf_room_date,
 				'check_out'   => $tf_room_date,
 				'price_by'    => $price_by,
@@ -417,6 +423,26 @@ class TF_Options {
 				'child_price' => $tf_room_child_price,
 				'status'      => $status
 			];
+
+            if($price_by == '3') {
+	            if ( $options_count != 0 ) {
+		            $options_data = [
+			            'options_count' => $options_count,
+		            ];
+		            for ( $j = 0; $j <= $options_count - 1; $j ++ ) {
+			            $options_data[ 'tf_room_option_' . $j ]         = isset( $_POST[ 'tf_room_option_' . $j ] ) && ! empty( $_POST[ 'tf_room_option_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_room_option_' . $j ] ) : '';
+			            $options_data[ 'tf_option_title_' . $j ]        = isset( $_POST[ 'tf_option_title_' . $j ] ) && ! empty( $_POST[ 'tf_option_title_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_title_' . $j ] ) : '';
+			            $options_data[ 'tf_option_pricing_type_' . $j ] = isset( $_POST[ 'tf_option_pricing_type_' . $j ] ) && ! empty( $_POST[ 'tf_option_pricing_type_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_pricing_type_' . $j ] ) : '';
+			            $options_data[ 'tf_option_room_price_' . $j ]   = isset( $_POST[ 'tf_option_room_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_room_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_room_price_' . $j ] ) : '';
+			            $options_data[ 'tf_option_adult_price_' . $j ]  = isset( $_POST[ 'tf_option_adult_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_adult_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_adult_price_' . $j ] ) : '';
+			            $options_data[ 'tf_option_child_price_' . $j ]  = isset( $_POST[ 'tf_option_child_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_child_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_child_price_' . $j ] ) : '';
+		            }
+	            }
+	            if ( ! empty( $options_data ) ) {
+		            $tf_room_data = array_merge( $tf_room_data, $options_data );
+	            }
+            }
+
 			$room_avail_data[ $tf_room_date ] = $tf_room_data;
 		}
 
@@ -461,9 +487,10 @@ class TF_Options {
 		$new_post   = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
 		$room_id    = isset( $_POST['room_id'] ) && ! empty( $_POST['room_id'] ) ? sanitize_text_field( $_POST['room_id'] ) : '';
 		$avail_date = isset( $_POST['avail_date'] ) && ! empty( $_POST['avail_date'] ) ? sanitize_text_field( $_POST['avail_date'] ) : '';
-
+		$option_arr = isset( $_POST['option_arr'] ) && ! empty( $_POST['option_arr'] ) ? $_POST['option_arr'] : [];
+		$room_meta  = get_post_meta( $room_id, 'tf_room_opt', true );
+        $pricing_by = ! empty( $room_meta['pricing-by'] ) ? $room_meta['pricing-by'] : '1';
 		if ( $new_post != 'true' ) {
-			$room_meta       = get_post_meta( $room_id, 'tf_room_opt', true );
 			$room_avail_data = isset( $room_meta['avail_date'] ) && ! empty( $room_meta['avail_date'] ) ? json_decode( $room_meta['avail_date'], true ) : [];
 		} else {
 			$room_avail_data = json_decode( stripslashes( $avail_date ), true );
@@ -473,7 +500,25 @@ class TF_Options {
 			$room_avail_data = array_values( $room_avail_data );
 			$room_avail_data = array_map( function ( $item ) {
 				$item['start'] = gmdate( 'Y-m-d', strtotime( $item['check_in'] ) );
-				$item['title'] = $item['price_by'] == '1' ? __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
+				if ( $item['price_by'] == '1' ) {
+					$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] );
+				} elseif ( $item['price_by'] == '2' ) {
+					$item['title'] = __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
+				} elseif ( $item['price_by'] == '3' ) {
+					$item['title'] = '';
+					if ( ! empty( $item['options_count'] ) ) {
+						for ( $i = 0; $i <= $item['options_count'] - 1; $i ++ ) {
+							if ( $item[ 'tf_room_option_' . $i ] == '1' && $item['tf_option_pricing_type_'.$i] == 'per_room') {
+								$item['title'] .= __( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
+								$item['title'] .= __( 'Price: ', 'tourfic' ) . wc_price($item['tf_option_room_price_'.$i]). '<br><br>';
+							} else if($item[ 'tf_room_option_' . $i ] == '1' && $item['tf_option_pricing_type_'.$i] == 'per_person'){
+								$item['title'] .= __( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
+								$item['title'] .= __( 'Adult: ', 'tourfic' ) . wc_price($item['tf_option_adult_price_'.$i]). '<br>';
+								$item['title'] .= __( 'Child: ', 'tourfic' ) . wc_price($item['tf_option_child_price_'.$i]). '<br><br>';
+                            }
+						}
+					}
+				}
 
 				if ( $item['status'] == 'unavailable' ) {
 					$item['display'] = 'background';
@@ -486,7 +531,56 @@ class TF_Options {
 			$room_avail_data = [];
 		}
 
-		echo wp_json_encode( $room_avail_data );
+		$options_html = '';
+
+        if($pricing_by == '3'){
+            foreach ( $option_arr as $key => $item ) {
+                ob_start();
+                ?>
+                <div class="tf-single-option">
+                    <div class="tf-field-switch">
+                        <label for="tf_room_option_<?php echo esc_attr( $item['index'] ); ?>" class="tf-field-label"><?php echo esc_html( $item['title'] ); ?></label>
+                        <div class="tf-fieldset">
+                            <label for="tf_room_option_<?php echo esc_attr( $item['index'] ); ?>" class="tf-switch-label" style="width: 80px">
+                                <input type="checkbox" id="tf_room_option_<?php echo esc_attr( $item['index'] ); ?>" name="tf_room_option_<?php echo esc_attr( $item['index'] ); ?>" value="1" class="tf-switch"
+                                       checked="checked">
+                                <span class="tf-switch-slider">
+                                    <span class="tf-switch-on"><?php echo esc_html__( 'Enable', 'tourfic' ) ?></span>
+                                    <span class="tf-switch-off"><?php echo esc_html__( 'Disable', 'tourfic' ) ?></span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="tf-field-text tf_option_pricing_type_room" style="display: <?php echo $item['type'] == 'per_room' ? 'block' : 'none' ?>; width: calc(100% - 90px)">
+                        <label class="tf-field-label"><?php echo esc_html__( 'Room Price', 'tourfic' ); ?></label>
+                        <div class="tf-fieldset">
+                            <input type="number" min="0" name="tf_option_room_price_<?php echo esc_attr( $item['index'] ); ?>" placeholder="<?php echo esc_attr__( 'Room Price', 'tourfic' ); ?>">
+                        </div>
+                    </div>
+                    <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $item['type'] == 'per_person' ? 'block' : 'none' ?>; width: calc((100% - 80px)/2 - -5px)">
+                        <label class="tf-field-label"><?php echo esc_html__( 'Adult Price', 'tourfic' ); ?></label>
+                        <div class="tf-fieldset">
+                            <input type="number" min="0" name="tf_option_adult_price_<?php echo esc_attr( $item['index'] ); ?>" placeholder="<?php echo esc_attr__( 'Adult Price', 'tourfic' ); ?>">
+                        </div>
+                    </div>
+                    <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $item['type'] == 'per_person' ? 'block' : 'none' ?>; width: calc((100% - 80px)/2 - -5px)">
+                        <label class="tf-field-label"><?php echo esc_html__( 'Child Price', 'tourfic' ); ?></label>
+                        <div class="tf-fieldset">
+                            <input type="number" min="0" name="tf_option_child_price_<?php echo esc_attr( $item['index'] ); ?>" placeholder="<?php echo esc_attr__( 'Child Price', 'tourfic' ); ?>">
+                        </div>
+                    </div>
+                    <input type="hidden" name="tf_option_title_<?php echo esc_attr( $item['index'] ); ?>" value="<?php echo esc_attr( $item['title'] ); ?>"/>
+                    <input type="hidden" name="tf_option_pricing_type_<?php echo esc_attr( $item['index'] ); ?>" value="<?php echo esc_attr( $item['type'] ); ?>"/>
+                </div>
+                <?php
+                $options_html .= ob_get_clean();
+            }
+        }
+
+		echo wp_json_encode( array(
+			'avail_data'   => $room_avail_data,
+			'options_html' => $options_html,
+		) );
 		die();
 	}
 
@@ -513,7 +607,7 @@ class TF_Options {
 
 						if ( $pricing_by == '1' ) {
 							$item['price'] = ! isset( $item['price'] ) ? $price : $item['price'];
-						} else {
+						} else if($pricing_by == '2'){
 							$item['adult_price'] = ! isset( $item['adult_price'] ) ? $adult_price : $item['adult_price'];
 							$item['child_price'] = ! isset( $item['child_price'] ) ? $child_price : $item['child_price'];
 						}
@@ -525,11 +619,11 @@ class TF_Options {
 
 				$room['avail_date'] = wp_json_encode( $room_avail_data );
 			} elseif ( $avil_by_date === '1' && empty( $room['avail_date'] ) ) {
-				//add next 5 years availability
+				//add next 500 days availability
 				$room_avail_data = [];
-				for ( $i = 0; $i <= 1825; $i ++ ) {
-					$tf_room_date                      = gmdate( 'Y/m/d', strtotime( "+$i day" ) );
-					$tf_room_data                      = [
+				for ( $i = 0; $i <= 500; $i ++ ) {
+					$tf_room_date                     = gmdate( 'Y/m/d', strtotime( "+$i day" ) );
+					$tf_room_data                     = [
 						'check_in'    => $tf_room_date,
 						'check_out'   => $tf_room_date,
 						'price_by'    => $pricing_by,
@@ -758,5 +852,140 @@ class TF_Options {
 		}
 
 		return $dateTime->format( 'Y/m/d' );
+	}
+
+	/**
+	 * Insert Category Data
+	 *
+	 * @author Jahid
+	 */
+	function tf_insert_category_data_callback() {
+		//Verify Nonce
+		check_ajax_referer( 'updates', '_nonce' );
+
+		$categoryName = sanitize_title( $_POST['categoryName'] );
+		$categoryTitle = sanitize_text_field( $_POST['categoryTitle'] );
+		$parentCategory = sanitize_key( $_POST['parentCategory'] );
+
+		$response = [];
+		if ( !empty($categoryName) && !empty($categoryTitle) ) {
+			// Insert the term
+			$term = wp_insert_term(
+				$categoryTitle,   // The term
+				$categoryName, // The taxonomy
+				array(
+					'slug'   => sanitize_title($categoryTitle),
+					'parent' => !empty($parentCategory) ? intval($parentCategory) : ''
+				)
+			);
+			$insert_Date = array(
+				'id' => $term['term_id'],
+				'title' => get_term_field('name', $term['term_id'], $categoryName)
+			);
+
+			$response ['insert_category'] = $insert_Date;
+		}
+		echo wp_json_encode( $response );
+		wp_die();
+	}
+
+	/**
+	 * Delete Category Data
+	 *
+	 * @author Jahid
+	 */
+	function tf_delete_category_data_callback() {
+		//Verify Nonce
+		check_ajax_referer( 'updates', '_nonce' );
+
+		$categoryName = sanitize_title( $_POST['categoryName'] );
+		$term_id = intval($_POST['term_id']);
+
+		$response = [];
+
+		if (!empty($term_id)) {
+			$result = wp_delete_term($term_id, $categoryName); // Replace 'category' with your taxonomy if it's different
+
+			if (!is_wp_error($result)) {
+				$response['success'] = true;
+			} else {
+				$response['error'] = $result->get_error_message();
+			}
+		} else {
+			$response['error'] = 'Invalid term ID.';
+		}
+
+		echo wp_json_encode($response);
+		wp_die();
+	}
+
+	/**
+	 * Insert Post Data
+	 *
+	 * @author Foysal
+	 */
+	function tf_insert_post_data_callback() {
+		//Verify Nonce
+		check_ajax_referer( 'updates', '_nonce' );
+
+		$postType = !empty($_POST['postType']) ? sanitize_title( $_POST['postType'] ) : '';
+		$postTitle = !empty($_POST['postTitle']) ? sanitize_text_field( $_POST['postTitle'] ) : '';
+		$fieldId = !empty($_POST['fieldId']) ? sanitize_text_field( $_POST['fieldId'] ) : '';
+		$postId = !empty($_POST['postId']) ? sanitize_text_field( $_POST['postId'] ) : '';
+
+		$response = [];
+		if ( !empty($postType) && !empty($postTitle) ) {
+			// Insert the post
+			$post_id = wp_insert_post(array(
+				'post_type'    => $postType,
+				'post_title'   => $postTitle,
+				'post_status'  => 'publish'
+			));
+
+			if($fieldId == 'tf_rooms'){
+				$room_meta['tf_hotel'] = $postId;
+				update_post_meta($post_id, 'tf_room_opt', $room_meta);
+			}
+
+			$insert_Data = array(
+				'id' => $post_id,
+				'title' => get_the_title($post_id),
+				'edit_url' => esc_url( get_edit_post_link( $post_id ) ),
+			);
+
+			$response ['insert_post'] = $insert_Data;
+		}
+		echo wp_json_encode( $response );
+		wp_die();
+	}
+
+	/**
+	 * Delete Post Data
+	 *
+	 * @author Foysal
+	 */
+	function tf_delete_post_data_callback() {
+		//Verify Nonce
+		check_ajax_referer( 'updates', '_nonce' );
+
+		$categoryName = sanitize_title( $_POST['categoryName'] );
+		$term_id = intval($_POST['term_id']);
+
+		$response = [];
+
+		if (!empty($term_id)) {
+			$result = wp_delete_term($term_id, $categoryName); // Replace 'category' with your taxonomy if it's different
+
+			if (!is_wp_error($result)) {
+				$response['success'] = true;
+			} else {
+				$response['error'] = $result->get_error_message();
+			}
+		} else {
+			$response['error'] = 'Invalid term ID.';
+		}
+
+		echo wp_json_encode($response);
+		wp_die();
 	}
 }

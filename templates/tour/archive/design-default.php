@@ -1,5 +1,6 @@
 <?php
 use \Tourfic\Classes\Helper;
+use Tourfic\Classes\Tour\Tour;
 ?>
 
 
@@ -37,7 +38,7 @@ use \Tourfic\Classes\Helper;
                             $tour_meta = get_post_meta( get_the_ID() , 'tf_tours_opt', true );
                             
                             if(!empty($tour_meta["tour_as_featured"])) {
-                                tf_tour_archive_single_item();
+                                Tour::tf_tour_archive_single_item();
                                 $featured_post_id[] = get_the_ID(); 
                             }
 
@@ -51,7 +52,7 @@ use \Tourfic\Classes\Helper;
                             $tour_meta = get_post_meta( get_the_ID() , 'tf_tours_opt', true );
                             
                             if( empty($tour_meta["tour_as_featured"]) ) {
-                                tf_tour_archive_single_item();
+                                Tour::tf_tour_archive_single_item();
                             }
                         }
 					} else {
@@ -62,7 +63,7 @@ use \Tourfic\Classes\Helper;
 					<?php echo esc_html($tf_total_results); ?>
 					</span>
 					<div class="tf_posts_navigation">
-						<?php tourfic_posts_navigation(); ?>
+						<?php Helper::tourfic_posts_navigation(); ?>
 					</div>
 				</div>
 				

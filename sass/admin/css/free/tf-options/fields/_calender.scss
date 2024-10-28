@@ -31,7 +31,12 @@
     background-color: #003c79;
     border-color: #003c79;
 }
-
+.tf-single-options{
+    width: 100%;
+    @include flexbox();
+    gap: 10px;
+    flex-wrap: wrap;
+}
 .tf-single-option{
     @include flexbox();
     gap: 10px;

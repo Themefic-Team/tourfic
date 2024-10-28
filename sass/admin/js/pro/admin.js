@@ -119,7 +119,7 @@
                     link.download      = 'Tours_' + generated_date + '.csv';
                     link.style.display = 'none';
                 document.body.appendChild(link);
-                link.trigger("click");
+                link.click();
                 //clean up
                 document.body.removeChild(link);
                 $('.tf-export-tours-btn').html('Export');

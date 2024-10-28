@@ -36,9 +36,9 @@ if(!empty($tf_expired_tour_showing )){
 
 $paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 $args = array(
-    'post_type' => "tf_tours",
-    'orderby'   => 'date',
-    'order'     => 'DESC',
+    'post_type' 	 => "tf_tours",
+    'orderby'   	 => apply_filters( 'tf_archive_post_orderby', 'date' ),
+    'order'     	 => apply_filters( 'tf_archive_post_order', 'DESC' ),
     'post_status'    => $tf_tour_posts_status,
 	'paged'          => $paged,
 );

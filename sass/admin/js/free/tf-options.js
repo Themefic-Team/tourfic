@@ -79,6 +79,8 @@
                 let slug = e.hash.replace('#tab=', '');
                 return tabId === slug || parentTabId === slug;
             }).parent().addClass("current").siblings().removeClass("current")
+
+            roomOptionsArr();
         });
 
         /*
@@ -460,6 +462,156 @@
         * Options ajax save
         * @author: Foysal
         */
+
+        $(document).on("click", '.tf-setting-save-btn .tf-submit-btn', function (e) {
+            e.preventDefault();
+            $('.tf-option-form.tf-ajax-save').submit();
+
+        })
+
+        $(document).on('click', '.tf-setting-save-btn .tf-reset-btn', function (e) {
+
+            Swal.fire({
+                title: tf_options.swal_reset_title_text,
+                text: tf_options.swal_reset_other_text,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: tf_options.swal_reset_btn_text,
+                customClass: "tf-swal-settings-reset-alert",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: tf_options.ajax_url,
+                        type: 'POST',
+                        data: {
+                            action: 'tf_options_reset',
+                            tf_option_nonce: tf_admin_params.tf_nonce,
+                        },
+                        beforeSend: function () {
+                            $('.tf-setting-save-btn .tf-reset-btn').addClass('tf-btn-loading');
+                        },
+                        success: function (response) {
+
+                            let data = JSON.parse(response)
+                            
+                            if (data.status === 'success') {
+                                notyf.success(data.message);
+                                window.location.reload();
+                            } else {
+                                notyf.error(data.message);
+                            }
+                            
+                            $('.tf-setting-save-btn .tf-reset-btn').removeClass('tf-btn-loading');
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    }).done(function () {
+                        // window.location.reload();
+                    });
+                }
+              });
+
+        });
+
+        $(document).find("#tf-settings-header-search-filed").on("keyup", debounce(
+            function () {
+                var value = $(this).val().toLowerCase();
+                let div = document.createElement('div');
+                div.classList.add('tf-search-results');
+                if( value.length >= 3 ) {
+                    $.ajax({
+                        url: tf_options.ajax_url,
+                        type: 'POST',
+                        data: {
+                            action: 'tf_search_settings_autocomplete',
+                            tf_option_nonce: tf_admin_params.tf_nonce,
+                            search: value,
+                        },
+                        success: function (response) {
+                            let data = JSON.parse(response)
+                            let notfound = 0;
+                            let resultDiv = document.createElement('ul');
+                            if (data.status === 'success') {
+                                $.each( data.message, function( key, obj ) {
+                                    if( obj.field_title.toLowerCase().indexOf(value) != -1 ) {
+                                        let textDiv = document.createElement('li');
+                                        let titleDiv = document.createElement('div');
+                                        titleDiv.classList.add('tf-search-result-title');
+                                        let link = document.createElement('a');
+                                        link.href = `#tab=${obj.parent_id}`;
+                                        let icon = document.createElement('i');
+                                        let title = document.createElement('p');
+                                        let path = document.createElement('span');
+                                        title.innerHTML = obj.field_title;
+                                        path.innerHTML = obj.path;
+                                        icon.classList.add(...obj.icon.split(' '));
+                                        resultDiv.classList.add('tf-search-result');
+                                        textDiv.setAttribute('data-id', obj.id);
+                                        textDiv.setAttribute('data-tab-id', obj.tab_id);
+                                        link.append(icon);
+                                        titleDiv.append(title);
+                                        titleDiv.append(path);
+                                        link.append(titleDiv);
+                                        textDiv.append(link);
+                                        resultDiv.append(textDiv);
+                                    } else {
+                                        notfound = 1;
+                                    }
+                                    if( $('.tf-search-results').length || value < 3 ) {
+                                        $('.tf-search-results').remove();
+                                    } else {
+                                        div.append(resultDiv);
+                                    }
+                                });
+
+                                if( notfound == 1 ) {
+                                    let not_found = document.createElement("p");
+                                    not_found.classList.add('tf-search-not-found');
+                                    not_found.innerHTML = tf_admin_params.setting_search_no_result;
+                                    resultDiv.append(not_found);
+                                }
+                                $(".tf-setting-search").append(div);
+                            } else {
+                                console.log("Something went wrong!");
+                            }
+                        }
+                    })
+                    
+                } else {
+                    $(".tf-search-results").hide();
+                }
+            }, 700 
+        ));
+
+        $(document).on('click', function (e) {
+            if( e.target.id !== 'tf-settings-header-search-filed' && $('.tf-search-results').length ) {
+                $('.tf-search-results').hide();
+            }
+        });
+
+
+        $("#tf-settings-header-search-filed").on('focus', function (e) {
+            if( $('.tf-search-results').length ) {
+                $('.tf-search-results').show();
+            }
+        });
+
+        $(document).on('click', '.tf-search-result li', function (e) {
+            let id = $(this).data('id');
+            let selector = `label[for='tf_settings\\[${id}\\]']`;
+            let tabId = $(this).closest('li').data('tab-id');
+            if( tabId ) {
+                $('.tf-tab-item[data-tab-id="'+tabId+'"]').trigger('click');
+            }
+            $('html, body').animate({
+                scrollTop: $(document).find(selector).closest('.tf-field').offset().top
+            }, 100);
+        
+        });
+
         $(document).on('submit', '.tf-option-form.tf-ajax-save', function (e) {
             e.preventDefault();
             let $this = $(this),
@@ -495,6 +647,7 @@
                         $this.find('.tf-import-btn').addClass('tf-btn-loading');
                     }
                     submitBtn.addClass('tf-btn-loading');
+                    $('.tf-setting-save-btn .tf-submit-btn').addClass('tf-btn-loading');
                 },
                 success: function (response) {
                     let obj = JSON.parse(response);
@@ -509,6 +662,7 @@
                         notyf.error(obj.message);
                     }
                     submitBtn.removeClass('tf-btn-loading');
+                    $(".tf-setting-save-btn .tf-submit-btn").removeClass('tf-btn-loading');
                     if(tf_import_option == true ){
                         $this.find('.tf-import-btn').removeClass('tf-btn-loading');
                     }
@@ -545,6 +699,22 @@
             $('#' + id + '').select2({
                 placeholder: placeholder,
                 allowClear: true,
+                templateSelection: function (state) {
+                    if (!state.id) {
+                        return state.text;
+                    }
+            
+                    // Get the edit URL from the option's data attribute
+                    var editUrl = $(state.element).data('edit-url');
+                    if(editUrl){
+                        var $state = $(
+                            '<span>' + state.text + ' <a target="_blank" href="'+editUrl+'" class="tf-edit-room"><i class="fa-regular fa-pen-to-square"></i></a></span>'
+                        );
+                        return $state;
+                    }
+            
+                    return state.text;
+                }
             });
         }
 
@@ -565,6 +735,29 @@
                 }
             });
         })
+
+        /*
+        * Room options count
+        */
+        function roomOptionsArr(){
+            var optionsArr = [];
+            $('.tf-repeater-wrap-room-options .tf-single-repeater-room-options').each(function(index){
+                let optionType = $('[name="tf_room_opt[room-options]['+index+'][option_pricing_type]"]').val();
+                let optionTitle = $('[name="tf_room_opt[room-options]['+index+'][option_title]"]').val();
+
+                // Add the option title, option type, and index to the options array
+                optionsArr[index] = {
+                    index: index,
+                    title: optionTitle,
+                    type: optionType
+                };
+            })
+            return optionsArr;
+        }
+
+        $(window).on('load', function () {
+            roomOptionsArr();
+        });
 
         /*
         * Room Availability Calendar
@@ -612,6 +805,7 @@
                             new_post: $(self.container).find('[name="new_post"]').val(),
                             room_id: $(self.container).find('[name="room_id"]').val(),
                             avail_date: $(self.container).find('.avail_date').val(),
+                            option_arr: roomOptionsArr(),
                         },
                         beforeSend: function () {
                             $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
@@ -619,8 +813,10 @@
                         },
                         success: function (doc) {
                             if (typeof doc == "object") {
-                                successCallback(doc);
+                                successCallback(doc?.avail_data);
                             }
+
+                            $('.tf-single-options').html(doc?.options_html);
 
                             $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
                             $(self.calendar).removeClass('tf-content-loading');
@@ -653,12 +849,22 @@
                         if (typeof event.extendedProps.price != 'undefined') {
                             $("[name='tf_room_price']", self.roomCalData).val(event.extendedProps.price);
                         }
-                    } else {
+                    } else if(priceBy === '2'){
                         if (typeof event.extendedProps.adult_price != 'undefined') {
                             $("[name='tf_room_adult_price']", self.roomCalData).val(event.extendedProps.adult_price);
                         }
                         if (typeof event.extendedProps.child_price != 'undefined') {
                             $("[name='tf_room_child_price']", self.roomCalData).val(event.extendedProps.child_price);
+                        }
+                    } else {
+                        if(event.extendedProps.options_count != 0) {
+                            for (var i = 0; i <= event.extendedProps.options_count - 1; i++) {
+                                $("[name='tf_room_option_" + i + "']", self.roomCalData).prop('checked', event.extendedProps["tf_room_option_" + i] == 1);
+
+                                $("[name='tf_option_room_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_room_price_" + i]);
+                                $("[name='tf_option_adult_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_adult_price_" + i]);
+                                $("[name='tf_option_child_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_child_price_" + i]);
+                            }
                         }
                     }
                     if (event.extendedProps.status) {
@@ -738,6 +944,7 @@
             data.push({name: '_nonce', value: tf_admin_params.tf_nonce});
             data.push({name: 'price_by', value: priceBy});
             data.push({name: 'avail_date', value: avail_date.val()});
+            data.push({name: 'options_count', value: roomOptionsArr().length});
 
             $.ajax({
                 url: tf_options.ajax_url,
@@ -1122,6 +1329,8 @@
             var count = $this_parent.find('.tf-repeater-wrap-' + id + ' .tf-single-repeater-' + id + '').length;
             var parent_field = add_value.find(':input[name="tf_parent_field"]').val();
             var current_field = add_value.find(':input[name="tf_current_field"]').val();
+            var maxIndex = parseInt($(this).closest('.tf-repeater').attr("data-max-index")) + 1;
+            $(this).closest('.tf-repeater').attr("data-max-index", maxIndex);
 
             $this_parent.find('.tf-repeater-wrap .tf-field-notice-inner').remove();
             // Chacked maximum repeater
@@ -1131,7 +1340,7 @@
             }
 
             // Repeater Count Add Value
-            add_value.find(':input[name="tf_repeater_count"]').val(count);
+            add_value.find(':input[name="tf_repeater_count"]').val(maxIndex);
 
             let repeatDateField = add_value.find('.tf-field-date');
             if (repeatDateField.length > 0) {
@@ -1166,12 +1375,12 @@
             if (parent_field == '') {
                 // Update  repeater name And id
                 add_value.find(':input').each(function () {
-                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
-                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
+                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
+                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
                 });
                 var update_paren = add_value.find('.tf-repeater input[name="tf_parent_field"]').val();
                 if (typeof update_paren !== "undefined") {
-                    var update_paren = update_paren.replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
+                    var update_paren = update_paren.replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
                 }
                 add_value.find('.tf-repeater input[name="tf_parent_field"]').val(update_paren);
 
@@ -1179,15 +1388,15 @@
                 // Update  repeater name And id
                 var update_paren = add_value.find(':input[name="tf_parent_field"]').val();
                 add_value.find(':input').each(function () {
-                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
-                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
+                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
+                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
                 });
             }
             // Update Repeaterr label
             add_value.find('label').each(function () {
                 var for_value = $(this).attr("for");
                 if (typeof for_value !== "undefined") {
-                    for_value = for_value.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
+                    for_value = for_value.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
                     $(this).attr("for", for_value);
                 }
             });
@@ -1195,7 +1404,7 @@
             add_value.find('.tf-icon-select').each(function (index) {
                 var icon_id = $(this).attr("id");
                 if (typeof icon_id !== "undefined") {
-                    icon_id = icon_id + index + count;
+                    icon_id = icon_id + index + maxIndex;
                     $(this).attr("id", icon_id)
 
                 }
@@ -1204,7 +1413,7 @@
             add_value.find('[data-depend-id]').each(function () {
                 var data_depend_id = $(this).attr("data-depend-id");
                 if (typeof data_depend_id !== "undefined") {
-                    data_depend_id = data_depend_id.replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
+                    data_depend_id = data_depend_id.replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
                     $(this).attr("data-depend-id", data_depend_id);
                 }
             });
@@ -1212,7 +1421,7 @@
             add_value.find('[data-controller]').each(function () {
                 var data_controller = $(this).attr("data-controller");
                 if (typeof data_controller !== "undefined") {
-                    data_controller = data_controller.replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
+                    data_controller = data_controller.replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
                     $(this).attr("data-controller", data_controller);
                 }
             });
@@ -1249,7 +1458,7 @@
 
             // replace new Select 2
             add_value.find('select.tf-select2-parent').each(function () {
-                this.id = this.id.replace('' + current_field + '__00', '' + current_field + '__' + count + '');
+                this.id = this.id.replace('' + current_field + '__00', '' + current_field + '__' + maxIndex + '');
                 var parent_repeater_id = $(this).attr('id');
                 var $this = $(this);
                 tfSelect2Int($this);
@@ -1288,6 +1497,8 @@
             var current_field = clone_value.find('input[name="tf_current_field"]').val();
             var repeater_count = clone_value.find('input[name="tf_repeater_count"]').val();
             var count = $this_parent.find('.tf-single-repeater-' + current_field + '').length;
+            var maxIndex = parseInt($(this).closest('.tf-repeater').attr("data-max-index")) + 1;
+            $(this).closest('.tf-repeater').attr("data-max-index", maxIndex);
 
             $this_parent.find('.tf-field-notice-inner').remove();
             // Chacked maximum repeater
@@ -1330,13 +1541,13 @@
                 // Replace input id and name
                 clone_value.find(':input').each(function () {
                     if ($(this).closest('.tf-single-repeater-clone').length == 0) {
-                        this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
-                        this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                        this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
+                        this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
                     }
                 });
                 var update_paren = clone_value.find('.tf-repeater input[name="tf_parent_field"]').val();
                 if (typeof update_paren !== "undefined") {
-                    var update_paren = update_paren.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                    var update_paren = update_paren.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
                 }
                 clone_value.find('.tf-repeater input[name="tf_parent_field"]').val(update_paren);
 
@@ -1344,15 +1555,15 @@
                 // Replace input id and name
                 clone_value.find(':input').each(function () {
                     if ($(this).closest('.tf-single-repeater-clone').length == 0) {
-                        this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
-                        this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                        this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
+                        this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
                     }
                 });
             }
             clone_value.find('label').each(function () {
                 var for_value = $(this).attr("for");
                 if (typeof for_value !== "undefined") {
-                    for_value = for_value.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                    for_value = for_value.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
                     var for_value = $(this).attr("for", for_value);
                 }
             });
@@ -1360,7 +1571,7 @@
             clone_value.find('.tf-icon-select').each(function (index) {
                 var icon_id = $(this).attr("id");
                 if (typeof icon_id !== "undefined") {
-                    icon_id = icon_id + index + count;
+                    icon_id = icon_id + index + maxIndex;
                     $(this).attr("id", icon_id)
 
                 }
@@ -1369,7 +1580,7 @@
             clone_value.find('[data-depend-id]').each(function () {
                 var data_depend_id = $(this).attr("data-depend-id");
                 if (typeof data_depend_id !== "undefined") {
-                    data_depend_id = data_depend_id.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                    data_depend_id = data_depend_id.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
                     $(this).attr("data-depend-id", data_depend_id);
                 }
             });
@@ -1377,12 +1588,12 @@
             clone_value.find('[data-controller]').each(function () {
                 var data_controller = $(this).attr("data-controller");
                 if (typeof data_controller !== "undefined") {
-                    data_controller = data_controller.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                    data_controller = data_controller.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
                     $(this).attr("data-controller", data_controller);
                 }
             });
             // Replace Data repeter Count id ID
-            clone_value.find('input[name="tf_repeater_count"]').val(count)
+            clone_value.find('input[name="tf_repeater_count"]').val(maxIndex)
 
             // Replace Old editor
             clone_value.find('.wp-editor-wrap').each(function () {
@@ -1429,7 +1640,7 @@
 
             // Clone Select 2
             clone_value.find('select.tf-select2-parent, select.tf-select2').each(function () {
-                this.id = this.id.replace('' + current_field + '__' + repeater_count, '' + current_field + '__' + count + '');
+                this.id = this.id.replace('' + current_field + '__' + repeater_count, '' + current_field + '__' + maxIndex + '');
                 var $this = $(this);
                 tfSelect2Int($this);
             });
@@ -1484,6 +1695,108 @@
 
             tfHotelCalendar();
             tfApartmentCalendar();
+        });
+
+        // Select 2 add new category
+        $(document).on('click', '.tf-add-category span', function (event) { 
+            event.preventDefault();
+            var $this = $(this);
+            var parentDiv = $this.closest('.tf-fieldset');
+            parentDiv.children('.tf-popup-box').css('display', 'flex');
+        });
+
+        // Close Popup
+        $(document).on('click', '.tf-add-category-box-close', function (event) { 
+            event.preventDefault();
+            $('.tf-popup-box').hide();
+        });
+
+        // Create Category
+        $(document).on('click', '.tf-category-button', function (event) { 
+            event.preventDefault();
+            var $this = $(this);
+            var parentDiv = $this.closest('.tf-add-category-box');
+            let categoryName = parentDiv.find('#category_name').val();
+            let categoryTitle = parentDiv.find('#category_title').val();
+            let parentCategory = parentDiv.find('#parent_category').val();
+            let categorySelect = parentDiv.find('#category_select_field_name').val();
+
+            $.ajax({
+                url: tf_options.ajax_url,
+                method: 'POST',
+                data: {
+                    action: 'tf_insert_category_data',
+                    _nonce: tf_admin_params.tf_nonce,
+                    categoryName: categoryName,
+                    categoryTitle: categoryTitle,
+                    parentCategory: parentCategory
+                },
+                success: function (response) {
+                    var data = JSON.parse(response);
+                    if (data.insert_category) {
+                        // Store to List and Selected
+                        var newOption = new Option(data.insert_category.title, data.insert_category.id, true, true);
+                        $('#'+categorySelect).append(newOption).trigger('change');
+
+                        // Store to Popup List
+                        var newPopuOption = new Option(data.insert_category.title, data.insert_category.id, false, false);
+                        parentDiv.find('#parent_category').append(newPopuOption).trigger('change');
+                    }
+                    $('.tf-popup-box').hide();
+                    parentDiv.find('#category_title').val('');
+                    parentDiv.find('#parent_category').val('');
+                }
+            });
+
+        });
+
+        // Create Post
+        $(document).on('click', '.tf-add-new-post-button', function (event) { 
+            event.preventDefault();
+            var $this = $(this);
+            var parentDiv = $this.closest('.tf-add-category-box');
+            let postType = parentDiv.find('.post_type').val();
+            let postTitle = parentDiv.find('.post_title').val();
+            let postSelect = parentDiv.find('.post_select_field_name').val();
+            let fieldId = parentDiv.find('.field_id').val();
+            let postId = parentDiv.find('.post_id').val();
+
+            if(postTitle){
+                $.ajax({
+                    url: tf_options.ajax_url,
+                    method: 'POST',
+                    data: {
+                        action: 'tf_insert_post_data',
+                        _nonce: tf_admin_params.tf_nonce,
+                        postType: postType,
+                        postTitle: postTitle,
+                        fieldId: fieldId,
+                        postId: postId
+                    },
+                    beforeSend: function(){
+                        $this.addClass('tf-btn-loading');
+                    },
+                    success: function (response) {
+                        var data = JSON.parse(response);
+                        if (data.insert_post) {
+                            // Store to List and Selected
+                            var newOption = new Option(data.insert_post.title, data.insert_post.id, true, true);
+                            
+                            if(fieldId == 'tf_rooms'){
+                                $(newOption).attr('data-edit-url', data.insert_post.edit_url);
+                            }
+                            
+                            $('#'+postSelect).append(newOption).trigger('change');
+                        }
+                        $this.removeClass('tf-btn-loading');
+                        $('.tf-popup-box').hide();
+                        parentDiv.find('.post_title').val('');
+                    }
+                });
+            } else {
+                notyf.error('Please enter title');
+            }
+
         });
 
     });
