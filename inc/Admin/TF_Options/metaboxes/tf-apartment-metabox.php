@@ -687,7 +687,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label'    => __( 'Apartment Enquiry icon', 'tourfic' ),
 					'subtitle' => __( 'Choose icon', 'tourfic' ),
 					'default'  => 'fa fa-question-circle-o',
-					'dependency' => array( 'h-enquiry-section', '==', '1' ),
+					'dependency' => array( 'enquiry-section', '==', '1' ),
 				),
 				array(
 					'id'    => 'enquiry-title',
