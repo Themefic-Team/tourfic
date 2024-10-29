@@ -67,6 +67,7 @@ class Helper {
 
 		// redirect non admin user
 		add_action( 'admin_init', array( $this, 'redirect_non_admin_users' ), 9 );
+		add_action( 'admin_init', array( $this, 'tourfic_check_instantio_active' ), 9 );
         add_action( 'tf_before_container', array( $this, 'tourfic_notice_wrapper' ), 10 );
 	}
 

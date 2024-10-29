@@ -526,6 +526,11 @@ function tf_tours_booking_function() {
 	$day_difference            = $today_stt->diff( $tour_date_stt )->days;
 	$adult_required_chield = !empty( $meta["require_adult_child_booking"] ) ? $meta["require_adult_child_booking"] : 0;
 	$quick_checkout = !empty(Helper::tfopt( 'tf-quick-checkout' )) ? Helper::tfopt( 'tf-quick-checkout' ) : 0;
+	$instantio_is_active = 0;
+
+	if( is_plugin_active('instantio/instantio.php') ){
+		$instantio_is_active = 1;
+	}
 
 
 	if ( $day_difference < $min_days_before_book ) {
@@ -864,7 +869,7 @@ function tf_tours_booking_function() {
 
 				$response['product_id']  = $product_id;
 				$response['add_to_cart'] = 'true';
-				$response['redirect_to'] = ( $quick_checkout == 0 ) ? wc_get_checkout_url() : '';
+				$response['redirect_to'] = $instantio_is_active == 1 ? ($quick_checkout == 0 ? wc_get_checkout_url() : '') : wc_get_checkout_url();
 			}
 
 		} else {

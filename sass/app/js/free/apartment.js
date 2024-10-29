@@ -216,6 +216,11 @@
                             window.location.replace(response.redirect_to);
                         } else {
                             jQuery(document.body).trigger('added_to_cart');
+                            if( $(".ins-toggle-btn").length > 0 ) {
+                                setTimeout(function() {
+                                    document.querySelector(".ins-toggle-btn").click();
+                                }, 700);
+                            }
                         }
 
                     }

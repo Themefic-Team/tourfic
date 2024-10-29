@@ -157,6 +157,11 @@
                                 jQuery(document.body).trigger('added_to_cart');
                                 $('#tour_room_details_loader').hide();
                                 $('.tf-withoutpayment-booking').removeClass('show');
+                                if( $(".ins-toggle-btn").length > 0 ) {
+                                    setTimeout(function() {
+                                        document.querySelector(".ins-toggle-btn").click();
+                                    }, 700);
+                                }
                             }
 
                         }
