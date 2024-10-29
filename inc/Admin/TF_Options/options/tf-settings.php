@@ -118,6 +118,12 @@ TF_Settings::option( 'tf_settings', array(
 					'default'    => '0',
 				),
 				array(
+					'id'       => 'tf-quick-checkout',
+					'type'     => 'switch',
+					'label'    => __( 'Enable Quick Checkout', 'tourfic' ),
+					'subtitle' => __( 'This option will enable quick checkout directly from the post page without the need to visit the checkout page, you will need to install the Instantio plugin', 'tourfic' ),
+				),
+				array(
 					'id'       => 'template_heading',
 					'type'     => 'heading',
 					'label'    => __( 'Template Settings', 'tourfic' ),
