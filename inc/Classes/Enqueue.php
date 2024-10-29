@@ -3,8 +3,10 @@
 namespace Tourfic\Classes;
 defined( 'ABSPATH' ) || exit;
 
+use Tourfic\Classes\Apartment\Apartment;
 use Tourfic\Classes\Apartment\Pricing as ApartmentPricing;
 use Tourfic\Classes\Helper;
+use Tourfic\Classes\Hotel\Hotel;
 use Tourfic\Classes\Hotel\Pricing as HotelPricing;
 use Tourfic\Classes\Tour\Pricing as TourPricing;
 use Tourfic\Classes\Tour\Tour;
@@ -65,6 +67,31 @@ class Enqueue {
 		$fa_cdn           = ! empty( Helper::tfopt( 'fa_cdn' ) ) ? Helper::tfopt( 'fa_cdn' ) : false;
 		$min_css          = ! empty( Helper::tfopt( 'css_min' ) ) ? '.min' : '';
 		$min_js           = ! empty( Helper::tfopt( 'js_min' ) ) ? '.min' : '';
+
+		/*
+		 * Ubuntu font load for hotel, tour, apartment template 3
+		 */
+		global $post;
+		$post_id   = ! empty( $post->ID ) ? $post->ID : '';
+		$post_type = ! empty( $post->post_type ) ? $post->post_type : '';
+		if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
+			if ( $post_type == 'tf_hotel' && ! empty( $post_id ) || is_post_type_archive( 'tf_hotel' ) ||
+			     $post_type == 'tf_tours' && ! empty( $post_id ) || is_post_type_archive( 'tf_tours' ) ||
+			     $post_type == 'tf_apartment' && ! empty( $post_id ) || is_post_type_archive( 'tf_apartment' )) {
+				$hotel_archive  = Hotel::template('archive');
+				$hotel_single  = Hotel::template('single');
+				$tour_archive  = Tour::template('archive');
+				$tour_single  = Tour::template('single');
+				$apartment_archive  = Apartment::template('archive');
+				$apartment_single  = Apartment::template('single');
+
+				if($hotel_archive == 'design-3' || $hotel_single == 'design-3' ||
+				   $tour_archive == 'design-3' || $tour_single == 'design-3' ||
+				   $apartment_archive == 'design-2' || $apartment_single == 'design-2') {
+					wp_enqueue_style( 'tf-template-4-font', '//fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap', null, TF_VERSION );
+				}
+			}
+		}
 
 		//Updated CSS
 		wp_enqueue_style( 'tf-app-style', TF_ASSETS_URL . 'app/css/tourfic-style' . $min_css . '.css', null, TF_VERSION );
@@ -178,6 +205,15 @@ class Enqueue {
 			wp_enqueue_script( 'tf-leaflet', esc_url( '//cdn.jsdelivr.net/npm/leaflet@' . '1.9' . '/dist/leaflet.js' ), array(), '1.9' );
 			wp_enqueue_style( 'tf-leaflet', esc_url( '//cdn.jsdelivr.net/npm/leaflet@' . '1.9' . '/dist/leaflet.css' ), array(), '1.9' );
 		}
+
+		/**
+		 * Google Map
+		 */
+		$tf_map_api_key = ! empty( Helper::tfopt( 'tf-googlemapapi' ) ) ? Helper::tfopt( 'tf-googlemapapi' ) : '';
+		wp_enqueue_script( 'googleapis', 'https://maps.googleapis.com/maps/api/js?key=' . $tf_map_api_key . '&sensor=false&amp;libraries=places', array(), TOURFIC, true );
+		wp_enqueue_script( 'markerclusterer', TF_ASSETS_URL . 'app/libs/markerclusterer.min.js', array(), TOURFIC, true );
+		wp_enqueue_script('map-marker-label', TF_ASSETS_URL . 'app/libs/markerwithlabel.js', array(), TOURFIC, true);
+
 
 		/**
 		 * Hotel Min and Max Price
@@ -459,6 +495,14 @@ class Enqueue {
 				'tf_apartment_max_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['max'] : 0,
 				'tf_apartment_min_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['min'] : 0,
 				'tour_form_data'         => isset( $single_tour_form_data ) ? $single_tour_form_data : array(),
+				'hotel_archive_template' => Hotel::template(),
+				'hotel_single_template' => $post_type == 'tf_hotel' ? Hotel::template('single', $post_id) : '',
+				'tour_archive_template' => Tour::template(),
+				'tour_single_template' => $post_type == 'tf_tours' ? Tour::template('single', $post_id) : '',
+				'apartment_archive_template' => Apartment::template(),
+				'apartment_single_template' => $post_type == 'tf_apartment' ? Apartment::template('single', $post_id) : '',
+				'tf_hotel_date_required_msg' => esc_html__('Please select check in and check out date', 'tourfic'),
+				'tf_tour_date_required_msg' => esc_html__('Please select a date', 'tourfic'),
 			)
 		);
 
@@ -916,7 +960,7 @@ class Enqueue {
 			}
 
 
-			$tf_google_map = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "false";
+			$tf_google_map = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : "false";
 			if ( $tf_google_map != "googlemap" ) {
 
 				if( $leaflet_cdn ) {

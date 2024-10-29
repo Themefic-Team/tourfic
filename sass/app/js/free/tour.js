@@ -693,7 +693,7 @@
                         );
                     }
                     if (tf_params.tour_form_data.disable_range) {
-                        tf_params.tour_form_data.disable_range.forEach((d_item) => {
+                        Object.values(tf_params.tour_form_data.disable_range).forEach((d_item) => {
                             tour_date_options.disable.push({
                                 from: d_item.date.from,
                                 to: d_item.date.to

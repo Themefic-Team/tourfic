@@ -53,6 +53,16 @@ class TF_Widget_Base {
             'after_title'   => '</span><i class="fa fa-angle-up"></i></div>',
         ) );
 
+        register_sidebar( array(
+            'name'          => esc_html__( 'Tourfic: Map Popup Sidebar', 'tourfic' ),
+            'id'            => 'tf_map_popup_sidebar',
+            'description'   => esc_html__( 'Widgets in this area will be shown on tourfic map popup', 'tourfic' ),
+            'before_widget' => '<div id="%1$s" class="tf_widget widget %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<div class="tf-widget-title"><span>',
+            'after_title'   => '</span><i class="fa fa-angle-up"></i></div>',
+        ) );
+
         // Register Custom Widgets
         $custom_widgets = array(
             TF_Widgets\Ask_Question::instance(),
@@ -65,7 +75,8 @@ class TF_Widget_Base {
             TF_Widgets\Tour_Type_Filter::instance(),
             TF_Widgets\Apartment_Features_Filter::instance(),
             TF_Widgets\Apartment_Type_Filter::instance(),
-            TF_Widgets\Price_Filter::instance()
+            TF_Widgets\Price_Filter::instance(),
+            TF_Widgets\Map_Filter::instance(),
         );
         foreach ( $custom_widgets as $key => $widget ) {
             register_widget( $widget );

@@ -260,9 +260,11 @@
             $('body').removeClass('tf-modal-open');
         });
         $(document).on('click', function (event) {
-            if (!$(event.target).closest(".tf-modal-content,.tf-modal-btn").length) {
-                $("body").removeClass("tf-modal-open");
-                $(".tf-modal").removeClass("tf-modal-show");
+            if(!$('.tf-map-modal').length) {
+                if (!$(event.target).closest(".tf-modal-content,.tf-modal-btn").length) {
+                    $("body").removeClass("tf-modal-open");
+                    $(".tf-modal").removeClass("tf-modal-show");
+                }
             }
         });
 
