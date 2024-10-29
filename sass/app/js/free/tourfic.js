@@ -2550,34 +2550,6 @@
                     }
                 }
             });
-
-
-
-            /*$("#tour_room_details_loader").show();
-            var post_id = $(this).attr("data-hotel");
-            var uniqid_id = $(this).attr("data-uniqid");
-            var data = {
-                action: 'tf_tour_details_qv',
-                _nonce: tf_params.nonce,
-                post_id: post_id,
-                uniqid_id: uniqid_id
-            };
-
-            $.ajax({
-                type: 'post',
-                url: tf_params.ajax_url,
-                data: data,
-                success: function (response) {
-                    $("#tour_room_details_qv").html(response);
-
-                    $("#tour_room_details_loader").hide();
-                    $.fancybox.open({
-                        src: '#tour_room_details_qv',
-                        type: 'inline',
-                    });
-                }
-
-            });*/
         });
 
         var zoomLvl = 5;
@@ -2663,50 +2635,45 @@
                 centerLvl = hotelMap.getCenter();
                 mapChanged = true;
 
-                //console.log('dragend', zoomLvl, 'centerLvl', centerLvl.lat(), centerLvl.lng())
-                filterVisibleHotels(hotelMap, markers, locations);
+                filterVisibleHotels(hotelMap);
             });
 
-
-            zoomChangeEnabled = false;
             google.maps.event.addListener(hotelMap, "zoom_changed", function () {
-                if (zoomChangeEnabled) {
-                    zoomLvl = hotelMap.getZoom();
-                    centerLvl = hotelMap.getCenter();
-                    mapChanged = true;
+                if (zoomChangeEnabled) return;
+                
+                zoomLvl = hotelMap.getZoom();
+                centerLvl = hotelMap.getCenter();
+                mapChanged = true;
 
-                    //console.log('zoom_changed', zoomLvl, 'centerLvl', centerLvl.lat(), centerLvl.lng())
-                    filterVisibleHotels(hotelMap, markers, locations);
-                }
+                filterVisibleHotels(hotelMap);
+                
             });
 
             var listener = google.maps.event.addListener(hotelMap, "idle", function() {
+                zoomChangeEnabled = true;
                 if (!mapChanged) {
                     hotelMap.fitBounds(bounds);
                     centerLvl = bounds.getCenter();
                     hotelMap.setCenter(centerLvl);
+
                 } else {
                     hotelMap.setZoom(zoomLvl);
                     hotelMap.setCenter({lat: centerLvl.lat(), lng: centerLvl.lng()});
                     google.maps.event.removeListener(listener);
                 }
-                zoomChangeEnabled = true;
-                //console.log('bounds', zoomLvl, 'centerLvl', centerLvl.lat(), centerLvl.lng())
+                zoomChangeEnabled = false;
             });
         }
 
-        function filterVisibleHotels(map, markers, locations) {
-            setTimeout(function () {
-                var bounds = map.getBounds();
+        function filterVisibleHotels(map) {
+            var bounds = map.getBounds();
 
-                if (bounds) {
-                    var sw = bounds.getSouthWest();
-                    var ne = bounds.getNorthEast();
-                }
+            if (bounds) {
+                var sw = bounds.getSouthWest();
+                var ne = bounds.getNorthEast();
+            }
 
-                makeFilter([sw.lat(), sw.lng(), ne.lat(), ne.lng()]);
-
-            }, 500);
+            makeFilter([sw.lat(), sw.lng(), ne.lat(), ne.lng()]);
         }
     });
 
