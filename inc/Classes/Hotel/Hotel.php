@@ -3103,7 +3103,7 @@ class Hotel {
                                 <div class="location-icon">
                                     <i class="ri-map-pin-fill"></i>
                                 </div>
-                                <span><?php echo Helper::tourfic_character_limit_callback( esc_html( $address ), 25 ); ?></span>
+                                <span><?php echo Helper::tourfic_character_limit_callback( esc_html( $address ), 20 ); ?></span>
                             </div>
 						<?php endif; ?>
                         <h4 class="tf-section-title">

@@ -2543,7 +2543,7 @@ class Tour {
                                 <div class="location-icon">
                                     <i class="ri-map-pin-fill"></i>
                                 </div>
-                                <span><?php echo Helper::tourfic_character_limit_callback( esc_html( $location ), 40 ); ?></span>
+                                <span><?php echo Helper::tourfic_character_limit_callback( esc_html( $location ), 20 ); ?></span>
                             </div>
 						<?php endif; ?>
                         <h4 class="tf-section-title">
