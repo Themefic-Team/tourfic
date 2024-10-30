@@ -828,6 +828,60 @@ div#tf-destinationautocomplete-list {
                 }
             }
         }
+        &#tf_car_booking{
+            .tf_form_innerbody{
+                .tf_form_fields{
+                    width: calc(100% - 172px);
+                    padding: 24px 32px;
+                    .tf_destination_fields{
+                        padding: 0 16px;
+                        &:first-child{
+                            padding-left: 0px;
+                        }
+                        .tf_form_inners{
+                            position: relative;
+                        }
+                    }
+                    .tf_checkin_date{
+                        width: 25%;
+                        padding: 0 16px;
+                        &:last-child{
+                            padding-right: 0px;
+                            border-right: 0px solid;
+                        }
+                        .tf_form_inners{
+                            display: flex;
+                            gap: 16px;
+                            justify-content: space-between;
+                            .tf_checkin_dates{
+                                align-items: center;
+                                cursor: pointer;
+                                span.date{
+                                    margin-right: 8px;
+                                }
+                                span.month{
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 8px;
+                                    .tf_check_arrow{
+                                        display: flex;
+                                    }
+                                }
+                                input{
+                                    height: 0;
+                                    width: 0;
+                                    padding: 0;
+                                    border: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+                .tf_availability_checker_box{
+                    width: 172px;
+                }
+            }
+        }
     }
 }
 .tf_tf_booking-widget-wrap {
