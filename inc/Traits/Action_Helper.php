@@ -1820,12 +1820,12 @@ trait Action_Helper {
 		if( !is_plugin_active( 'instantio/instantio.php' ) && ! file_exists( WP_PLUGIN_DIR . '/instantio/instantio.php' ) ) {
 			?>
 			<div id="message" class="notice notice-error">
-				<p><?php echo  wp_kses_post(sprintf(__( 'Instantio plugin is required for the %s"QUICK CHECKOUT"%s feature of Tourfic. Please install and activate the plugin otherwise this feature will not work.', 'tourfic' ), '<strong>', '</strong>')); ?></p>
+				<p><?php echo  wp_kses_post(sprintf(__( 'Instantio plugin is required for the %s"QUICK CHECKOUT"%s feature of Tourfic. Please install and activate Instantio to ensure this feature works seamlessly.', 'tourfic' ), '<strong>', '</strong>')); ?></p>
 				<p><a class="install-now button inc-install" href=<?php echo esc_url( admin_url( '/plugin-install.php?s=slug:instantio&tab=search&type=term' ) ); ?> data-plugin-slug="tourfic"><?php esc_attr_e( 'Install Now', 'tourfic' ); ?></a></p>
 			</div>
 		<?php
 		} else {
-			$notice = sprintf( __( 'The %s Instantio%s plugin is currently not active. Please activate the plugin to enable the %s "QUICK CHECKOUT" %s feature of Tourfic.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/instantio/" target="_blank">', '</a></strong>', '<b>', '</b>');
+			$notice = sprintf( __( 'The %s Instantio%s plugin is inactive. Please activate it to enable the %s "QUICK CHECKOUT" %s for Tourfic.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/instantio/" target="_blank">', '</a></strong>', '<b>', '</b>');
 			?>
 				<div id="message" class="notice notice-error">
 					<p><?php echo wp_kses_post( $notice ); ?></p>
