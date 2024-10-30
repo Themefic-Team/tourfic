@@ -3210,6 +3210,30 @@ Steps
   }
 }
 
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-col-lg-4 {
+  flex: 0 0 33%;
+  max-width: 50%;
+  position: relative;
+  width: 100%;
+  padding-right: 4px;
+  padding-left: 4px;
+  box-sizing: border-box;
+}
+
+@media only screen and (max-width: 640px) {
+  .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-col-lg-4 {
+    max-width: 100%;
+  }
+}
+
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-col-lg-4:first-child {
+  padding-left: 15px;
+}
+
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-col-lg-4:last-child {
+  padding-right: 15px;
+}
+
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form select.tf-select-field[multiple] {
   height: auto;
 }
