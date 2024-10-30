@@ -164,16 +164,6 @@
                             opacity: .5
                         }
                     });
-                    //map template
-                    if($('.tf-archive-details-wrap').length) {
-                        $('.tf-archive-details-wrap').block({
-                            message: null,
-                            overlayCSS: {
-                                background: "#fff",
-                                opacity: .5
-                            }
-                        });
-                    }
                     $('#tf_ajax_searchresult_loader').show();
                     if ($.trim(checkin) !== '') {
                         $('.tf_booking-dates .tf_label-row').find('#tf-required').remove();
@@ -182,10 +172,6 @@
                 complete: function (data) {
                     $('.archive_ajax_result').unblock();
                     $('#tf_ajax_searchresult_loader').hide();
-                    //map template
-                    if($('.tf-archive-details-wrap').length) {
-                        $('.tf-archive-details-wrap').unblock();
-                    }
 
                     // total posts 0 if not found by @hena
                     if ($('.tf-nothing-found')[0]) {
@@ -208,10 +194,6 @@
                     if ($('.tf-details-right').length > 0) {
                         $('.tf-details-right').removeClass('tf-filter-show');
                     }
-                    //map template
-                    if($('.tf-archive-details-wrap').length) {
-                        $('.tf-archive-details-wrap').unblock();
-                    }
                     if($('#tf-hotel-archive-map').length) {
 
                         // GOOGLE MAP INITIALIZE
@@ -224,7 +206,9 @@
                     }
 
                     // @KK show notice in every success request
-                    notyf.success(tf_params.ajax_result_success);
+                    if(!mapCoordinates.length) {
+                        notyf.success(tf_params.ajax_result_success);
+                    }
                 },
                 error: function (data) {
                     console.log(data);
@@ -2478,6 +2462,133 @@
         });
 
 
+        
+
+        var zoomLvl = 5;
+        var zoomChangeEnabled = false;
+        var centerLvl = new google.maps.LatLng(23.8697847, 90.4219536);
+        var markersById = {};
+        var mapChanged = false;
+
+        const googleMapInit = (mapLocations, mapLat = 23.8697847, mapLng = 90.4219536) => {
+            var hotelMap;
+
+            if (!mapLocations || mapLocations === "[]") {
+                hotelMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
+                    zoom: zoomLvl,
+                    minZoom: 3,
+                    maxZoom: 18,
+                    center: centerLvl,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    styles: [
+                        {elementType: 'labels.text.fill', stylers: [{color: '#44348F'}]},
+                    ],
+                    fullscreenControl: false
+                });
+            }
+
+            var locations = JSON.parse(mapLocations);
+
+            hotelMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
+                zoom: zoomLvl,
+                minZoom: 3,
+                maxZoom: 18,
+                center: new google.maps.LatLng(mapLat, mapLng),
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                styles: [
+                    {elementType: 'labels.text.fill', stylers: [{color: '#44348F'}]},
+                ],
+                fullscreenControl: false
+            });
+
+            var infowindow = new google.maps.InfoWindow({
+                maxWidth: 262
+            });
+
+            var markers = [];
+            var bounds = new google.maps.LatLngBounds();
+            locations.map(function (location, i) {
+                var marker = new MarkerWithLabel({
+                    position: new google.maps.LatLng(location['lat'], location['lng']),
+                    map: hotelMap,
+                    icon: document.getElementById('map-marker').dataset.marker,
+                    labelContent: '<div class="tf_price_inner" data-post-id="' + location['id'] + '">' + window.atob(location['price']) + '</div>',
+                    labelAnchor: new google.maps.Point(0, 0),
+                    labelClass: "tf_map_price",
+                });
+
+                markersById[location['id']] = marker;
+                markers.push(marker);
+                bounds.extend(marker.position);
+
+                // Show the infowindow on hover
+                google.maps.event.addListener(marker, 'mouseover', function () {
+                    infowindow.setContent(window.atob(location['content']));
+                    infowindow.open(hotelMap, marker);
+                });
+
+                // Hide the infowindow on mouse leave
+                google.maps.event.addListener(marker, 'mouseout', function () {
+                    infowindow.close();
+                });
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    window.open(location?.url, '_blank')
+                });
+            });
+
+            // Add a marker clusterer to manage the markers.
+            // var markerCluster = new MarkerClusterer(hotelMap, markers, {
+            //     imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+            // });
+
+            // Trigger filter on map drag
+            google.maps.event.addListener(hotelMap, "dragend", function () {
+                zoomLvl = hotelMap.getZoom();
+                centerLvl = hotelMap.getCenter();
+                mapChanged = true;
+
+                filterVisibleHotels(hotelMap);
+            });
+
+            google.maps.event.addListener(hotelMap, "zoom_changed", function () {
+                if (zoomChangeEnabled) return;
+                
+                zoomLvl = hotelMap.getZoom();
+                centerLvl = hotelMap.getCenter();
+                mapChanged = true;
+
+                filterVisibleHotels(hotelMap);
+                
+            });
+
+            var listener = google.maps.event.addListener(hotelMap, "idle", function() {
+                zoomChangeEnabled = true;
+                if (!mapChanged) {
+                    hotelMap.fitBounds(bounds);
+                    centerLvl = bounds.getCenter();
+                    hotelMap.setCenter(centerLvl);
+
+                } else {
+                    hotelMap.setZoom(zoomLvl);
+                    hotelMap.setCenter({lat: centerLvl.lat(), lng: centerLvl.lng()});
+                    google.maps.event.removeListener(listener);
+                }
+                zoomChangeEnabled = false;
+            });
+        }
+
+        function filterVisibleHotels(map) {
+            var bounds = map.getBounds();
+
+            if (bounds) {
+                var sw = bounds.getSouthWest();
+                var ne = bounds.getNorthEast();
+            }
+
+            makeFilter([sw.lat(), sw.lng(), ne.lat(), ne.lng()]);
+        }
+
         // GOOGLE MAP INITIALIZE
         var mapLocations = $('#map-datas').html();
         if ($('#map-datas').length && mapLocations.length) {
@@ -2490,18 +2601,17 @@
         $(document).on('mouseover', '.tf-hotel-template-4 .tf-archive-hotel', function () {
             let id = $(this).data('id');
             $('.tf_map_price .tf_price_inner[data-post-id="' + id + '"]').addClass('active');
+
+            if (markersById[id]) {
+                markersById[id].setAnimation(google.maps.Animation.BOUNCE);
+            }
         });
         $(document).on('mouseleave', '.tf-hotel-template-4 .tf-archive-hotel', function () {
             let id = $(this).data('id');
             $('.tf_map_price .tf_price_inner[data-post-id="' + id + '"]').removeClass('active');
-        });
 
-        $('.search-move-map .fcheckbox').on('click', function () {
-            if ($('#st-move-map').length) {
-                if ($('#st-move-map').is(':checked')) {
-                    $('#st-map-coordinate').val("");
-                    makeFilter();
-                }
+            if (markersById[id]) {
+                markersById[id].setAnimation(null);
             }
         });
 
@@ -2551,130 +2661,6 @@
                 }
             });
         });
-
-        var zoomLvl = 5;
-        var zoomChangeEnabled = false;
-        var centerLvl = new google.maps.LatLng(23.8697847, 90.4219536);
-        var mapChanged = false;
-
-        function googleMapInit(mapLocations, mapLat = 23.8697847, mapLng = 90.4219536) {
-            var hotelMap;
-
-            if (!mapLocations || mapLocations === "[]") {
-                hotelMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
-                    zoom: zoomLvl,
-                    minZoom: 3,
-                    maxZoom: 18,
-                    center: centerLvl,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP,
-                    styles: [
-                        {elementType: 'labels.text.fill', stylers: [{color: '#44348F'}]},
-                    ],
-                    fullscreenControl: false
-                });
-            }
-
-            var locations = JSON.parse(mapLocations);
-
-            hotelMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
-                zoom: zoomLvl,
-                minZoom: 3,
-                maxZoom: 18,
-                center: new google.maps.LatLng(mapLat, mapLng),
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                styles: [
-                    {elementType: 'labels.text.fill', stylers: [{color: '#44348F'}]},
-                ],
-                fullscreenControl: false
-            });
-
-            var infowindow = new google.maps.InfoWindow({
-                maxWidth: 262
-            });
-
-            var markers = [];
-            var bounds = new google.maps.LatLngBounds();
-            locations.map(function (location, i) {
-                var marker = new MarkerWithLabel({
-                    position: new google.maps.LatLng(location['lat'], location['lng']),
-                    map: hotelMap,
-                    icon: document.getElementById('map-marker').dataset.marker,
-                    labelContent: '<div class="tf_price_inner" data-post-id="' + location['id'] + '">' + window.atob(location['price']) + '</div>',
-                    labelAnchor: new google.maps.Point(0, 0),
-                    labelClass: "tf_map_price",
-                    animation: google.maps.Animation.DROP,
-                });
-
-                markers.push(marker);
-                bounds.extend(marker.position);
-
-                // Show the infowindow on hover
-                google.maps.event.addListener(marker, 'mouseover', function () {
-                    infowindow.setContent(window.atob(location['content']));
-                    infowindow.open(hotelMap, marker);
-                });
-
-                google.maps.event.addListener(marker, 'click', function () {
-                    window.open(location?.url, '_blank')
-                });
-
-                // Hide the infowindow on mouse leave
-                google.maps.event.addListener(marker, 'mouseout', function () {
-                    infowindow.close();
-                });
-            });
-
-            // Add a marker clusterer to manage the markers.
-            var markerCluster = new MarkerClusterer(hotelMap, markers, {
-                imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
-            });
-
-            // Trigger filter on map drag
-            google.maps.event.addListener(hotelMap, "dragend", function () {
-                zoomLvl = hotelMap.getZoom();
-                centerLvl = hotelMap.getCenter();
-                mapChanged = true;
-
-                filterVisibleHotels(hotelMap);
-            });
-
-            google.maps.event.addListener(hotelMap, "zoom_changed", function () {
-                if (zoomChangeEnabled) return;
-                
-                zoomLvl = hotelMap.getZoom();
-                centerLvl = hotelMap.getCenter();
-                mapChanged = true;
-
-                filterVisibleHotels(hotelMap);
-                
-            });
-
-            var listener = google.maps.event.addListener(hotelMap, "idle", function() {
-                zoomChangeEnabled = true;
-                if (!mapChanged) {
-                    hotelMap.fitBounds(bounds);
-                    centerLvl = bounds.getCenter();
-                    hotelMap.setCenter(centerLvl);
-
-                } else {
-                    hotelMap.setZoom(zoomLvl);
-                    hotelMap.setCenter({lat: centerLvl.lat(), lng: centerLvl.lng()});
-                    google.maps.event.removeListener(listener);
-                }
-                zoomChangeEnabled = false;
-            });
-        }
-
-        function filterVisibleHotels(map) {
-            var bounds = map.getBounds();
-
-            if (bounds) {
-                var sw = bounds.getSouthWest();
-                var ne = bounds.getNorthEast();
-            }
-
-            makeFilter([sw.lat(), sw.lng(), ne.lat(), ne.lng()]);
-        }
     });
 
 })(jQuery, window);

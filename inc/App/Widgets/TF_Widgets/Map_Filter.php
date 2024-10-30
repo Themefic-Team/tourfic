@@ -180,13 +180,13 @@ class Map_Filter extends \WP_Widget {
                         ($post_type == 'tf_apartment' && Apartment::template( 'archive' ) !== 'design-2') ) : ?>
                         <div class="tf-archive-details-wrap tf-map-popup-wrap">
                             <div class="tf-archive-details ">
-                                <!-- Loader Image -->
-                                <div id="tf_ajax_searchresult_loader">
-                                    <div id="tf-searchresult-loader-img">
-                                        <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
-                                    </div>
-                                </div>
                                 <div class="tf-details-left">
+                                    <!-- Loader Image -->
+                                    <div id="tf_ajax_searchresult_loader">
+                                        <div id="tf-searchresult-loader-img">
+                                            <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
+                                        </div>
+                                    </div>
                                     <div class="tf-archive-hotels-wrapper">
                                         <div class="tf-archive-filter">
                                             <div class="tf-archive-filter-sidebar">

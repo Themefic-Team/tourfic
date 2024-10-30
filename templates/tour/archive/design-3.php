@@ -312,7 +312,11 @@ $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googl
             </div>
         <?php else: ?>
             <div id="map-datas" style="display: none"><?php echo json_encode([]); ?></div>
-            <div class="tf-nothing-found" data-post-count="0"><?php echo esc_html__("No Tours Found!", "tourfic"); ?></div>
+            <div class="tf-container">
+                <div class="tf-notice tf-mt-24 tf-mb-30">
+                    <div class="tf-nothing-found" data-post-count="0"><?php echo esc_html__("No Tours Found!", "tourfic"); ?></div>
+                </div>
+            </div>
         <?php endif; ?>
     </div>
 </div>

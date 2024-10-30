@@ -2018,7 +2018,7 @@ class Helper {
                             </defs>
                         </svg>
                     </div>
-                    <label for="tf-search-location" class="tf-search-field-content">
+                    <label for="tf-location" class="tf-search-field-content">
                         <span class="tf-search-field-label"><?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Location', 'tourfic' ) : esc_html__( 'Destination', 'tourfic' ); ?></span>
 
                         <input type="text" required="" id="<?php echo $place; ?>" class="tf-search-input" placeholder="<?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Where are you going?', 'tourfic' ); ?>" value="<?php echo ! empty( $taxonomy_name ) ? $taxonomy_name : ''; ?>">
@@ -2035,11 +2035,11 @@ class Helper {
                                           fill="#6E655E"/>
                                 </svg>
                             </div>
-                            <div class="tf-search-field-content">
+                            <label class="tf-search-field-content" for='tf-check-out'>
                                 <span class="tf-search-field-label"><?php _e( "Check in", "tourfic" ); ?></span>
                                 <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" value="" readonly>
                                 <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" value="">
-                            </div>
+                            </label>
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
                             <path d="M11.2824 7.83327L7.70637 4.25726L8.64917 3.31445L13.8346 8.49993L8.64917 13.6853L7.70637 12.7425L11.2824 9.1666H3.16797V7.83327H11.2824Z" fill="#6E655E"/>
@@ -2051,10 +2051,10 @@ class Helper {
                                           fill="#6E655E"/>
                                 </svg>
                             </div>
-                            <div class="tf-search-field-content">
+                            <label class="tf-search-field-content" for='tf-check-out'>
                                 <span class="tf-search-field-label"><?php _e( "Check out", "tourfic" ); ?></span>
-                                <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" value="">
-                            </div>
+                                <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" value="" readonly>
+                            </label>
                         </div>
                     </div>
 				<?php } ?>

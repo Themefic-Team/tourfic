@@ -95,6 +95,7 @@ $t4-main-color: #060D1C;
                 color: $t4-orange-1000;
                 font-size: 16px;
                 line-height: 12px;
+                cursor: pointer;
             }
 
             .tf-search-input {
@@ -316,6 +317,7 @@ $t4-main-color: #060D1C;
             width: 787px;
             padding: 24px 16px 24px 32px;
             gap: 24px;
+            position: relative;
 
             @media #{$max1440} {
                 width: 50%;
@@ -1150,6 +1152,22 @@ $t4-main-color: #060D1C;
             color: #fff !important;
         }
     }
+}
+.tf-archive-hotels-wrapper,
+.tf-archive-hotels{
+    height: 100%;
+    position: relative;
+}
+.tf-nothing-found.tf-template-4-nothing-found {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .admin-bar .tf-hotel-template-4 .tf-archive-filter .tf-archive-filter-sidebar,

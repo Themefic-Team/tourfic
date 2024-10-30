@@ -20562,6 +20562,7 @@ html {
   color: #1A0B00;
   font-size: 16px;
   line-height: 12px;
+  cursor: pointer;
 }
 
 .tf-hotel-template-4 .tf-search-fields .tf-search-field .tf-search-input,
@@ -20973,6 +20974,7 @@ html {
   width: 787px;
   padding: 24px 16px 24px 32px;
   gap: 24px;
+  position: relative;
 }
 
 @media only screen and (max-width: 1440px) {
@@ -22372,6 +22374,24 @@ html {
   color: #fff !important;
 }
 
+.tf-archive-hotels-wrapper,
+.tf-archive-hotels {
+  height: 100%;
+  position: relative;
+}
+
+.tf-nothing-found.tf-template-4-nothing-found {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .admin-bar .tf-hotel-template-4 .tf-archive-filter .tf-archive-filter-sidebar,
 .admin-bar.tf_template_4_hotel_archive .tf-archive-filter .tf-archive-filter-sidebar,
 .admin-bar.tf_template_4_tour_archive .tf-archive-filter .tf-archive-filter-sidebar,
@@ -22503,6 +22523,7 @@ html {
   padding: 24px 16px 24px 32px;
   gap: 24px;
   height: 100vh;
+  position: relative;
 }
 
 @media only screen and (max-width: 1024px) {

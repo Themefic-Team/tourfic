@@ -24,12 +24,6 @@
         <?php if (have_posts()) : ?>
             <div class="tf-archive-details-wrap">
                 <div class="tf-archive-details">
-                    <!-- Loader Image -->
-                    <div id="tf_ajax_searchresult_loader">
-                        <div id="tf-searchresult-loader-img">
-                            <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
-                        </div>
-                    </div>
 
                     <?php if ($tf_map_settings == "googlemap") :
                         if (empty($tf_map_api)):
@@ -50,6 +44,13 @@
                             </div>
                         <?php else: ?>
                             <div class="tf-details-left">
+                                
+                                <!-- Loader Image -->
+                                <div id="tf_ajax_searchresult_loader">
+                                    <div id="tf-searchresult-loader-img">
+                                        <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
+                                    </div>
+                                </div>
                                 <!--Available rooms start -->
                                 <div class="tf-archive-hotels-wrapper">
                                     <div class="tf-archive-filter">
@@ -311,11 +312,11 @@
                                 <?php
                                 if (current_user_can('administrator')) {
                                     echo '<p>' . sprintf(
-                                            __('Google Maps is not selected. Please configure it <a href="%s" target="_blank">Map Settings</a>.', 'tourfic'),
-                                            admin_url('admin.php?page=tf_settings#tab=map_settings')
+                                            esc_html__('Google Maps is not selected. Please configure it <a href="%s" target="_blank">Map Settings</a>.', 'tourfic'),
+                                            esc_url(admin_url('admin.php?page=tf_settings#tab=map_settings'))
                                         ) . '</p>';
                                 } else {
-                                    echo '<p>' . __('Access is restricted as Google Maps is not enabled. Please contact the site administrator', 'tourfic') . '</p>';
+                                    echo '<p>' . esc_html__('Access is restricted as Google Maps is not enabled. Please contact the site administrator', 'tourfic') . '</p>';
                                 }
                                 ?>
                             </div>
@@ -325,7 +326,11 @@
             </div>
         <?php else: ?>
             <div id="map-datas" style="display: none"><?php echo json_encode([]); ?></div>
-            <div class="tf-nothing-found" data-post-count="0"><?php echo esc_html__("No Hotels Found!", "tourfic"); ?></div>
+            <div class="tf-container">
+                <div class="tf-notice tf-mt-24 tf-mb-30">
+                    <div class="tf-nothing-found" data-post-count="0"><?php echo esc_html__("No Hotels Found!", "tourfic"); ?></div>
+                </div>
+            </div>
         <?php endif; ?>
     </div>
     <!--Content section end -->

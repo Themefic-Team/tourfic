@@ -107,6 +107,7 @@ $t4-main-color: #060D1C;
             padding: 24px 16px 24px 32px;
             gap: 24px;
             height: 100vh;
+            position: relative;
 
             @media #{$max1024} {
                 display: none;

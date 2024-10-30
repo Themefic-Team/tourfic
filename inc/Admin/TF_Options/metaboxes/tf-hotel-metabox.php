@@ -90,10 +90,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'title'			=> 'Design 2',
 							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design2-hotel.jpg",
 						),
-//						'design-3' 				=> array(
-//							'title'			=> 'Design 3',
-//							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design3-hotel.jpg",
-//						),
 						'default' 			=> array(
 							'title'			=> 'Defult',
 							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-hotel.jpg",
