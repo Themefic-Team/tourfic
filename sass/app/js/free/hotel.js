@@ -75,13 +75,18 @@
                     $("#tf-single-hotel-avail .btn-primary.tf-submit").addClass('tf-btn-booking-loading');
                 },
                 success: function (data) {
-                    $('html, body').animate({
-                        scrollTop: $("#rooms").offset().top
-                    }, 500);
-                    $("#rooms").html(data);
-                    $('.tf-room-filter').show();
-                    $("#tf-single-hotel-avail .btn-primary.tf-submit").removeClass('tf-btn-booking-loading');
-                },
+                    if( $("#rooms").length > 0){
+                        $('html, body').animate({
+                            scrollTop: $("#rooms").offset().top
+                        }, 500);
+                        $("#rooms").html(data);
+                        $('.tf-room-filter').show();
+                        $("#tf-single-hotel-avail .btn-primary.tf-submit").removeClass('tf-btn-booking-loading');
+                     } else {
+                         notyf.error(tf_params.no_room_found);
+                         $("#tf-single-hotel-avail .btn-primary.tf-submit").removeClass('tf-btn-booking-loading');
+                     }
+                 },
                 error: function (data) {
                     console.log(data);
                 }

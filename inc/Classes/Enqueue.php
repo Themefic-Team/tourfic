@@ -441,6 +441,7 @@ class Enqueue {
 				'room'                   => esc_html__( 'Room', 'tourfic' ),
 				'sending_ques'           => esc_html__( 'Sending your question...', 'tourfic' ),
 				'no_found'               => esc_html__( 'Not Found', 'tourfic' ),
+				'no_room_found'  		 => esc_html__("No Room is selected from the backend, for this Hotel!", "tourfic"),
 				'tf_hotel_max_price'     => isset( $hotel_min_max_price ) ? $hotel_min_max_price['max'] : 0,
 				'tf_hotel_min_price'     => isset( $hotel_min_max_price ) ? $hotel_min_max_price['min'] : 0,
 				'tf_tour_max_price'      => isset( $tour_min_max_price ) ? $tour_min_max_price['max'] : '',
