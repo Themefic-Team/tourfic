@@ -25,13 +25,7 @@
         <?php if (have_posts()) : ?>
             <div class="tf-archive-details-wrap">
                 <div class="tf-archive-details">
-                    <!-- Loader Image -->
-                    <div id="tf_ajax_searchresult_loader">
-                        <div id="tf-searchresult-loader-img">
-                            <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
-                        </div>
-                    </div>
-
+                    
                     <?php if ($tf_map_settings == "googlemap") :
                         if (empty($tf_map_api)):
                             ?>
@@ -51,6 +45,12 @@
                             </div>
                         <?php else: ?>
                             <div class="tf-details-left">
+                                <!-- Loader Image -->
+                                <div id="tf_ajax_searchresult_loader">
+                                    <div id="tf-searchresult-loader-img">
+                                        <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
+                                    </div>
+                                </div>
                                 <!--Available rooms start -->
                                 <div class="tf-archive-hotels-wrapper">
                                     <div class="tf-archive-filter">
