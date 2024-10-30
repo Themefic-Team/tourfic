@@ -18064,6 +18064,7 @@ html {
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 24px */
+  display: inline-block;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info .tf-driver-contact-info ul li a i {
   font-size: 20px;

@@ -1122,6 +1122,7 @@
                                         font-style: normal;
                                         font-weight: 400;
                                         line-height: 150%; /* 24px */
+                                        display: inline-block;
                                         &:hover{
                                             .tf-tooltip-info{
                                                 visibility: visible;
