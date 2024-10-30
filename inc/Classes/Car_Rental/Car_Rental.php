@@ -71,59 +71,72 @@ class Car_Rental {
                             <div class="tf_label_checkin">
                                 <span class="tf-label"><?php esc_html_e( 'Pick-up date & Time', 'tourfic' ); ?></span>
                                 <div class="tf_form_inners">
-                                    <div class="tf_checkin_dates tf-car-search-pickup-date">
+                                    <div class="tf_checkin_dates">
+                                        <div class="tf-select-date tf-car-search-pickup-date">
+                                            <span class="date"><?php echo esc_html( gmdate( 'd' ) ); ?></span>
+                                            <span class="month">
+                                            <span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+                                            <div class="tf_check_arrow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
+                                                </svg>
+                                            </div>
+                                            </span>
+                                        </div>
                                         <input type="text" name="pickup-date" class="tf_search_pickup_date" placeholder="<?php esc_html_e( 'Enter Pickup date', 'tourfic' ); ?>" value="">
-                                        <span class="date"><?php echo esc_html( gmdate( 'd' ) ); ?></span>
-                                        <span class="month">
-                                        <span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
-                                        <div class="tf_check_arrow">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                            <path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
-                                            </svg>
-                                        </div>
-                                        </span>
                                     </div>
-                                    <div class="tf_checkin_dates tf-car-pickup-time">
+
+                                    <div class="tf_checkin_dates">
+                                        <div class="tf-select-date tf-car-pickup-time">
+                                            <span class="date"><?php echo esc_html( gmdate( 'h:m' ) ); ?></span>
+                                            <span class="month">
+                                            <div class="tf_check_arrow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
+                                                </svg>
+                                            </div>
+                                            </span>
+                                        </div>
                                         <input type="text" name="pickup-time" class="tf_search_pickup_time" placeholder="<?php esc_html_e( 'Enter Pickup Time', 'tourfic' ); ?>" value="">
-                                        <span class="date"><?php echo esc_html( gmdate( 'h:m' ) ); ?></span>
-                                        <span class="month">
-                                        <div class="tf_check_arrow">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                            <path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
-                                            </svg>
-                                        </div>
-                                        </span>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
+
                         <div class="tf_checkin_date">
                             <div class="tf_label_checkin">
                                 <span class="tf-label"><?php esc_html_e( 'Drop-off date & Time', 'tourfic' ); ?></span>
                                 <div class="tf_form_inners">
-                                    <div class="tf_checkin_dates tf-car-search-pickup-date">
-                                        <input type="text" name="pickup-date" class="tf_search_pickup_date" placeholder="<?php esc_html_e( 'Enter Pickup date', 'tourfic' ); ?>" value="">
-                                        <span class="date"><?php echo esc_html( gmdate( 'd' ) ); ?></span>
-                                        <span class="month">
-                                        <span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
-                                        <div class="tf_check_arrow">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                            <path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
-                                            </svg>
+                                    <div class="tf_checkin_dates">
+                                        <div class="tf-select-date tf-car-search-dropoff-date">
+                                            <span class="date"><?php echo esc_html( gmdate( 'd' ) ); ?></span>
+                                            <span class="month">
+                                            <span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+                                            <div class="tf_check_arrow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
+                                                </svg>
+                                            </div>
+                                            </span>
                                         </div>
-                                        </span>
+                                        <input type="text" name="dropoff-date" class="tf_search_dropoff_date" placeholder="<?php esc_html_e( 'Enter Drop-off date', 'tourfic' ); ?>" value="">
                                     </div>
-                                    <div class="tf_checkin_dates tf-car-pickup-time">
-                                        <input type="text" name="pickup-time" class="tf_search_pickup_time" placeholder="<?php esc_html_e( 'Enter Pickup Time', 'tourfic' ); ?>" value="">
-                                        <span class="date"><?php echo esc_html( gmdate( 'h:m' ) ); ?></span>
-                                        <span class="month">
-                                        <div class="tf_check_arrow">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                            <path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
-                                            </svg>
+
+                                    <div class="tf_checkin_dates">
+                                        <div class="tf-select-date tf-car-dropoff-time">
+                                            <span class="date"><?php echo esc_html( gmdate( 'h:m' ) ); ?></span>
+                                            <span class="month">
+                                            <div class="tf_check_arrow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
+                                                </svg>
+                                            </div>
+                                            </span>
                                         </div>
-                                        </span>
+                                        <input type="text" name="dropoff-time" class="tf_search_dropoff_time" placeholder="<?php esc_html_e( 'Enter Drop-off Time', 'tourfic' ); ?>" value="">
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -157,15 +170,16 @@ class Car_Rental {
 
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                            dateSetToFields(selectedDates, instance);
+                            dateSetToPickupFields(selectedDates, instance);
                         },
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                            dateSetToFields(selectedDates, instance);
+                            dateSetToPickupFields(selectedDates, instance);
+                            dropoffFlatpickr.set("minDate", dateStr);
                         },
                     });
 
-                    function dateSetToFields(selectedDates, instance) {
+                    function dateSetToPickupFields(selectedDates, instance) {
                         const monthNames = [
                             "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -174,6 +188,39 @@ class Car_Rental {
                             const startDate = selectedDates[0];
                             $(".tf-car-search-pickup-date span.date").html(startDate.getDate());
                             $(".tf-car-search-pickup-date span.month span").html(monthNames[startDate.getMonth()]);
+                        }
+                    }
+
+                    $(".tf-car-search-dropoff-date").on("click", function () {
+                        $(".tf_search_dropoff_date").trigger("click");
+                    });
+                    const dropoffFlatpickr = $(".tf_search_dropoff_date").flatpickr({
+                        enableTime: false,
+                        dateFormat: "Y/m/d",
+                        minDate: "today",
+
+                        // flatpickr locale
+                        <?php Helper::tf_flatpickr_locale(); ?>
+
+                        onReady: function (selectedDates, dateStr, instance) {
+                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                            dateSetToDropoffFields(selectedDates, instance);
+                        },
+                        onChange: function (selectedDates, dateStr, instance) {
+                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                            dateSetToDropoffFields(selectedDates, instance);
+                        },
+                    });
+
+                    function dateSetToDropoffFields(selectedDates, instance) {
+                        const monthNames = [
+                            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+                        ];
+                        if (selectedDates[0]) {
+                            const startDate = selectedDates[0];
+                            $(".tf-car-search-dropoff-date span.date").html(startDate.getDate());
+                            $(".tf-car-search-dropoff-date span.month span").html(monthNames[startDate.getMonth()]);
                         }
                     }
 
@@ -194,8 +241,28 @@ class Car_Rental {
                         },
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                            // Update minDate for the dropoff date picker
-                            // dropoffTimeFlatpickr.set("minTime", dateStr);
+                            $(".tf-car-pickup-time span.date").html(dateStr);
+                        }
+                    });
+
+                    $(".tf-car-dropoff-time").on("click", function () {
+                        $(".tf_search_dropoff_time").trigger("click");
+                    });
+                    // Initialize the dropoff time picker
+                    $(".tf_search_dropoff_time").flatpickr({
+                        enableTime: true,
+                        noCalendar: true,
+                        dateFormat: "H:i",
+
+                        // flatpickr locale
+                        <?php Helper::tf_flatpickr_locale(); ?>
+
+                        onReady: function (selectedDates, dateStr, instance) {
+                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                        },
+                        onChange: function (selectedDates, dateStr, instance) {
+                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                            $(".tf-car-dropoff-time span.date").html(dateStr);
                         }
                     });
 

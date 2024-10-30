@@ -3261,9 +3261,19 @@ div#tf-destinationautocomplete-list div:before {
   gap: 16px;
   justify-content: space-between;
 }
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf_form_inners input {
+  height: 0;
+  width: 0;
+  padding: 0;
+  border: 0;
+}
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf_form_inners .tf_checkin_dates {
+  display: flow-root;
+}
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf_form_inners .tf_checkin_dates .tf-select-date {
   align-items: center;
   cursor: pointer;
+  display: flex;
 }
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf_form_inners .tf_checkin_dates span.date {
   margin-right: 8px;
@@ -3275,12 +3285,6 @@ div#tf-destinationautocomplete-list div:before {
 }
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf_form_inners .tf_checkin_dates span.month .tf_check_arrow {
   display: flex;
-}
-.tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf_form_inners .tf_checkin_dates input {
-  height: 0;
-  width: 0;
-  padding: 0;
-  border: 0;
 }
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_availability_checker_box {
   width: 172px;

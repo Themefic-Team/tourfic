@@ -853,9 +853,19 @@ div#tf-destinationautocomplete-list {
                             display: flex;
                             gap: 16px;
                             justify-content: space-between;
+                            input{
+                                height: 0;
+                                width: 0;
+                                padding: 0;
+                                border: 0;
+                            }
                             .tf_checkin_dates{
-                                align-items: center;
-                                cursor: pointer;
+                                display: flow-root;
+                                .tf-select-date{
+                                    align-items: center;
+                                    cursor: pointer;
+                                    display: flex;
+                                }
                                 span.date{
                                     margin-right: 8px;
                                 }
@@ -866,12 +876,6 @@ div#tf-destinationautocomplete-list {
                                     .tf_check_arrow{
                                         display: flex;
                                     }
-                                }
-                                input{
-                                    height: 0;
-                                    width: 0;
-                                    padding: 0;
-                                    border: 0;
                                 }
                             }
                         }
