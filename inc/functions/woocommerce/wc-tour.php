@@ -525,6 +525,12 @@ function tf_tours_booking_function() {
 	$tour_date_stt             = new DateTime( gmdate( 'Y-m-d', strtotime( $start_date ) ) );
 	$day_difference            = $today_stt->diff( $tour_date_stt )->days;
 	$adult_required_chield = !empty( $meta["require_adult_child_booking"] ) ? $meta["require_adult_child_booking"] : 0;
+	$quick_checkout = !empty(Helper::tfopt( 'tf-quick-checkout' )) ? Helper::tfopt( 'tf-quick-checkout' ) : 0;
+	$instantio_is_active = 0;
+
+	if( is_plugin_active('instantio/instantio.php') ){
+		$instantio_is_active = 1;
+	}
 
 
 	if ( $day_difference < $min_days_before_book ) {
@@ -845,8 +851,22 @@ function tf_tours_booking_function() {
 					'{adult}'    => $adults,
 					'{child}'    => $children,
 					'{booking_date}' => $tour_date,
-					'{infant}'     => $infant
+					'{infant}'     => $infant,
+					'{id}' => $post_id,
+					'{title}' => urlencode(get_the_title($post_id)),
+					'{extras}' => sanitize_text_field($_POST["tour_extra"]),
 				);
+
+				if( $pricing_rule == 'group' ) {
+					$external_search_info['{amount}'] = $group_price;
+				} else {
+					$external_search_info['{amount}'] = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
+				}
+
+				if( !empty($tours_extra)) {
+					$external_search_info['{amount}'] += $tour_extra_total;
+				}
+
 				if(!empty($tf_booking_attribute)){
 					$tf_booking_query_url = str_replace(array_keys($external_search_info), array_values($external_search_info), $tf_booking_query_url);
 					if( !empty($tf_booking_query_url) ){
@@ -856,14 +876,14 @@ function tf_tours_booking_function() {
 
 				$response['product_id']  = $product_id;
 				$response['add_to_cart'] = 'true';
-				$response['redirect_to'] = $tf_booking_url;
+				$response['redirect_to'] = html_entity_decode($tf_booking_url);
 			}else{
 				// Add product to cart with the custom cart item data
 				WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_tours_data );
 
 				$response['product_id']  = $product_id;
 				$response['add_to_cart'] = 'true';
-				$response['redirect_to'] = wc_get_checkout_url();
+				$response['redirect_to'] = $instantio_is_active == 1 ? ($quick_checkout == 0 ? wc_get_checkout_url() : '') : wc_get_checkout_url();
 			}
 
 		} else {

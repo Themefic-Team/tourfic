@@ -118,6 +118,12 @@ TF_Settings::option( 'tf_settings', array(
 					'default'    => '0',
 				),
 				array(
+					'id'       => 'tf-quick-checkout',
+					'type'     => 'switch',
+					'label'    => __( 'Enable Quick Checkout', 'tourfic' ),
+					'subtitle' => __( 'This option allows you to complete the checkout process directly from the single service page, without navigating to the checkout page. Note: The Instantio plugin is required, and this option is only for woocommerce payment system.', 'tourfic' ),
+				),
+				array(
 					'id'       => 'template_heading',
 					'type'     => 'heading',
 					'label'    => __( 'Template Settings', 'tourfic' ),

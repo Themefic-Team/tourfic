@@ -1,12 +1,12 @@
 <?php
 namespace Tourfic\Traits;
 
-use Tourfic\Classes\Hotel\Hotel;
-
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Tour\Tour;
 use \Tourfic\Classes\Apartment\Apartment;
+use Tourfic\Classes\Hotel\Hotel;
+// use \Tourfic\Classes\Helper;
 
 trait Action_Helper {
 	
@@ -1800,5 +1800,42 @@ trait Action_Helper {
 				<div class="tf-notice-wrapper"></div>
 			</div>
 		<?php
+	}
+
+	function tourfic_check_instantio_active() {
+		$quick_checkout = !empty(self::tfopt( 'tf-quick-checkout' )) ? self::tfopt( 'tf-quick-checkout' ) : 0;
+
+		if ( $quick_checkout == 0 ) {
+			return;
+		}else {
+			if( is_plugin_active( 'instantio/instantio.php' ) ) {
+				return;
+			}
+			
+			add_action( 'admin_notices', array( $this, 'tourfic_instantio_notice' ) );
+		}
+	}
+
+	function tourfic_instantio_notice() {
+		if( !is_plugin_active( 'instantio/instantio.php' ) && ! file_exists( WP_PLUGIN_DIR . '/instantio/instantio.php' ) ) {
+			?>
+			<div id="message" class="notice notice-error">
+				<p><?php echo  wp_kses_post(sprintf(__( 'Instantio plugin is required for the %s"QUICK CHECKOUT"%s feature of Tourfic. Please install and activate Instantio to ensure this feature works seamlessly.', 'tourfic' ), '<strong>', '</strong>')); ?></p>
+				<p><a class="install-now button inc-install" href=<?php echo esc_url( admin_url( '/plugin-install.php?s=slug:instantio&tab=search&type=term' ) ); ?> data-plugin-slug="tourfic"><?php esc_attr_e( 'Install Now', 'tourfic' ); ?></a></p>
+			</div>
+		<?php
+		} else {
+			$notice = sprintf( __( 'The %s Instantio%s plugin is inactive. Please activate it to enable the %s "QUICK CHECKOUT" %s for Tourfic.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/instantio/" target="_blank">', '</a></strong>', '<b>', '</b>');
+			?>
+				<div id="message" class="notice notice-error">
+					<p><?php echo wp_kses_post( $notice ); ?></p>
+					<p><a href="<?php echo esc_html( get_admin_url() ); ?>plugins.php?_wpnonce=<?php echo esc_html( wp_create_nonce( 'activate-plugin_instantio/instantio.php' ) ); ?>&action=activate&plugin=instantio/instantio.php"
+							class="button activate-now button-primary">
+							<?php esc_attr_e( 'Activate', 'tourfic' ); ?>
+						</a>
+					</p>
+				</div>
+			<?php
+		}
 	}
 }
