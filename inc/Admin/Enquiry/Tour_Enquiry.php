@@ -46,6 +46,7 @@ class Tour_Enquiry extends \Tourfic\Core\Enquiry {
                     <div id="tf-enquiry-status-loader">
                         <img src="<?php echo esc_url(TF_ASSETS_URL); ?>app/images/loader.gif" alt="Loader">
                     </div>
+                    <hr class="wp-header-end">
                     <div class="tf_booking_wrap_header">
 						<h1 class="wp-heading-inline"><?php echo esc_html( apply_filters( 'tf_tour_enquiry_page_heading', __( 'Tour Enquiry Details', 'tourfic' ) ) ); ?></h1>
                         <div class="tf_header_wrap_button">
@@ -73,7 +74,6 @@ class Tour_Enquiry extends \Tourfic\Core\Enquiry {
                     $this->enquiry_details_list($enquiry_data, $total_pages);
                     ?>
                 </div>
-                <hr class="wp-header-end">
             <?php
         }
 	}

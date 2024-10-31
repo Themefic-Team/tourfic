@@ -335,12 +335,13 @@ abstract class Enquiry {
 			<img src="<?php echo esc_url(TF_ASSETS_URL); ?>app/images/loader.gif" alt="Loader">
 		</div>
 			<!-- Header Wrap - Start -->
+			<hr class="wp-header-end">
 			<div class="tf_booking_wrap_header">
 				<div class="tf-enquiry-single-header-details">
 					<div class="tf-single-enquiry-header-logo">
 						<img src="<?php echo esc_url( esc_url(TF_ASSETS_APP_URL.'images/tourfic-logo-icon-blue.png') ); ?>" alt="<?php esc_html_e( get_the_title($data["post_id"])) ?>">
 					</div>
-					<h1> <?php esc_html_e( get_the_title($data["post_id"])) . esc_html_e(" / ID #") . esc_html_e($data["id"]) ?></h1>
+					<h1 class="wp-heading-inline"> <?php esc_html_e( get_the_title($data["post_id"])) . esc_html_e(" / ID #") . esc_html_e($data["id"]) ?></h1>
 				</div>
 			</div>
 			<!-- Header Wrap - End -->
