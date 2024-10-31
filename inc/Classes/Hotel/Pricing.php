@@ -1288,9 +1288,9 @@ class Pricing {
 			<?php
 		} else {
 			if ( ! empty( $discount_price ) && $hotel_discount_type != "none" && ! empty( $hotel_discount_type ) ) {
-				echo '<span class="tf-price"><del>' . $price . '</del> ' . $discount_price . '</span>';
+				echo '<span class="tf-price"><del>' . wp_kses_post($price) . '</del> ' . wp_kses_post($discount_price) . '</span>';
 			} else if ( $hotel_discount_type == "none" ) {
-				echo '<span class="tf-price">' . $price . '</span>';
+				echo '<span class="tf-price">' . wp_kses_post($price) . '</span>';
 			}
 			?>
             <div class="price-per-night">

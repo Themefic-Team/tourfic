@@ -93,8 +93,8 @@ class TF_Setup_Wizard {
                         <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL ) . 'images/welcome.png' ?>" alt="<?php esc_attr_e( 'Welcome to Tourfic!', 'tourfic' ) ?>">
                     </div>
                     <div class="tf-setup-header-right">
-                        <span class="get-help-link"><?php esc_html_e( 'Having troubles?', 'tourfic' ) ?> <a class="" target="_blank"
-                                                                                                            href="https://portal.themefic.com/support/"><?php esc_html_e( 'Get help', 'torufic' ) ?></a></span>
+                        <span class="get-help-link"><?php esc_html_e( 'Having troubles?', 'tourfic' ) ?> 
+                        <a class="" target="_blank" href="https://portal.themefic.com/support/"><?php esc_html_e( 'Get help', 'tourfic' ) ?></a></span>
                     </div>
                 </div>
                 <form method="post" id="tf-setup-wizard-form" data-skip-steps="">

@@ -1071,9 +1071,9 @@ class Helper {
                                 </svg>
                             </div>
                             <div class="tf-search-field-content">
-                                <span class="tf-search-field-label"><?php _e( "Check in", "tourfic" ); ?></span>
-                                <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" value="" readonly>
-                                <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" value="<?php echo esc_attr( $date ) ?>">
+                                <span class="tf-search-field-label"><?php esc_html_e( "Check in", "tourfic" ); ?></span>
+                                <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="" readonly>
+                                <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo esc_attr( $date ) ?>">
                             </div>
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
@@ -1087,8 +1087,8 @@ class Helper {
                                 </svg>
                             </div>
                             <div class="tf-search-field-content">
-                                <span class="tf-search-field-label"><?php _e( "Check out", "tourfic" ); ?></span>
-                                <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" value="">
+                                <span class="tf-search-field-label"><?php esc_html_e( "Check out", "tourfic" ); ?></span>
+                                <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="">
                             </div>
                         </div>
                     </div>
@@ -1104,8 +1104,8 @@ class Helper {
                                 </svg>
                             </div>
                             <div class="tf-search-field-content">
-                                <span class="tf-search-field-label"><?php _e( "Select Date", "tourfic" ); ?></span>
-                                <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?>>
+                                <span class="tf-search-field-label"><?php esc_html_e( "Select Date", "tourfic" ); ?></span>
+                                <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr($check_in_out) . '"' : '' ?>>
                             </div>
                         </div>
                     </div>
@@ -1121,7 +1121,7 @@ class Helper {
                                 </svg>
                             </div>
                             <div class="tf-search-field-content">
-                                <span class="tf-search-field-label"><?php _e( "Guests & rooms", "tourfic" ); ?></span>
+                                <span class="tf-search-field-label"><?php esc_html_e( "Guests & rooms", "tourfic" ); ?></span>
                                 <div class="tf-archive-guest-info">
                                     <span class="tf-guest"><?php echo esc_html( $adult + $children ) ?> </span> <?php esc_html_e( "guest", "tourfic" ); ?>
                                     <span class="tf-room"><?php echo esc_html( $room ); ?></span> <?php esc_html_e( "Rooms", "tourfic" ); ?>
@@ -1138,13 +1138,13 @@ class Helper {
                             </div>
 
                             <div class="tf-search-field-content">
-                                <span class="tf-search-field-label"><?php _e( "Persons", "tourfic" ); ?></span>
+                                <span class="tf-search-field-label"><?php esc_html_e( "Persons", "tourfic" ); ?></span>
                                 <div class="tf-archive-guest-info">
-                                    <span class="tf-adult"><?php echo esc_html( $adult ) ?></span> <?php _e( "adult", "tourfic" ); ?>
+                                    <span class="tf-adult"><?php echo esc_html( $adult ) ?></span> <?php esc_html_e( "adult", "tourfic" ); ?>
 	                                <?php if ( ($post_type == 'tf_tours' && empty( $disable_child_search )) ||
 	                                           ( $post_type == 'tf_apartment' && empty( $disable_apartment_child_search ) )
 	                                ) { ?>
-                                        , <span class="tf-children"><?php echo esc_html( $children ) ?></span> <?php _e( "children", "tourfic" ); ?>
+                                        , <span class="tf-children"><?php echo esc_html( $children ) ?></span> <?php esc_html_e( "children", "tourfic" ); ?>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -1154,7 +1154,7 @@ class Helper {
                     <div class="tf_acrselection-wrap">
                         <div class="tf_acrselection-inner">
                             <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e( "Adults", "tourfic" ); ?></div>
+                                <div class="acr-label"><?php esc_html_e( "Adults", "tourfic" ); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -1188,7 +1188,7 @@ class Helper {
 	                                   ( $post_type == 'tf_apartment' && empty( $disable_apartment_child_search ) )
 	                        ) { ?>
                             <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e( "Children", "tourfic" ); ?></div>
+                                <div class="acr-label"><?php esc_html_e( "Children", "tourfic" ); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -1220,7 +1220,7 @@ class Helper {
 	                        <?php } ?>
 	                        <?php if ( $post_type == 'tf_hotel' ) { ?>
                                 <div class="tf_acrselection">
-                                    <div class="acr-label"><?php _e( "Rooms", "tourfic" ); ?></div>
+                                    <div class="acr-label"><?php esc_html_e( "Rooms", "tourfic" ); ?></div>
                                     <div class="acr-select">
                                         <div class="acr-dec">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -1256,7 +1256,7 @@ class Helper {
             </div>
             <div class="tf-booking-form-submit">
 	            <?php $ptype = esc_attr( $_GET['type'] ) ?? get_post_type(); ?>
-                <input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type"/>
+                <input type="hidden" name="type" value="<?php echo esc_attr($ptype); ?>" class="tf-post-type"/>
                 <button class="tf-btn-normal btn-primary tf-submit"><?php esc_html_e( 'Search Now', 'tourfic' ); ?></button>
             </div>
 
@@ -2021,8 +2021,8 @@ class Helper {
                     <label for="tf-location" class="tf-search-field-content">
                         <span class="tf-search-field-label"><?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Location', 'tourfic' ) : esc_html__( 'Destination', 'tourfic' ); ?></span>
 
-                        <input type="text" required="" id="<?php echo $place; ?>" class="tf-search-input" placeholder="<?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Where are you going?', 'tourfic' ); ?>" value="<?php echo ! empty( $taxonomy_name ) ? $taxonomy_name : ''; ?>">
-                        <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? $taxonomy_slug : ''; ?>"/>
+                        <input type="text" required="" id="<?php echo esc_attr($place); ?>" class="tf-search-input" placeholder="<?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Where are you going?', 'tourfic' ); ?>" value="<?php echo ! empty( $taxonomy_name ) ? esc_attr($taxonomy_name) : ''; ?>">
+                        <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? esc_attr($taxonomy_slug) : ''; ?>"/>
                     </label>
                 </div>
                 <div class="tf-search-field-divider"></div>
@@ -2036,9 +2036,9 @@ class Helper {
                                 </svg>
                             </div>
                             <label class="tf-search-field-content" for='tf-check-out'>
-                                <span class="tf-search-field-label"><?php _e( "Check in", "tourfic" ); ?></span>
-                                <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" value="" readonly>
-                                <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" value="">
+                                <span class="tf-search-field-label"><?php esc_html_e( "Check in", "tourfic" ); ?></span>
+                                <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="" readonly>
+                                <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="">
                             </label>
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
@@ -2052,8 +2052,8 @@ class Helper {
                                 </svg>
                             </div>
                             <label class="tf-search-field-content" for='tf-check-out'>
-                                <span class="tf-search-field-label"><?php _e( "Check out", "tourfic" ); ?></span>
-                                <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" value="" readonly>
+                                <span class="tf-search-field-label"><?php esc_html_e( "Check out", "tourfic" ); ?></span>
+                                <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="" readonly>
                             </label>
                         </div>
                     </div>
@@ -2069,8 +2069,8 @@ class Helper {
                                 </svg>
                             </div>
                             <div class="tf-search-field-content">
-                                <span class="tf-search-field-label"><?php _e( "Select Date", "tourfic" ); ?></span>
-                                <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?>>
+                                <span class="tf-search-field-label"><?php esc_html_e( "Select Date", "tourfic" ); ?></span>
+                                <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr($check_in_out) . '"' : '' ?>>
                             </div>
                         </div>
                     </div>
@@ -2086,10 +2086,10 @@ class Helper {
                                 </svg>
                             </div>
                             <div class="tf-search-field-content">
-                                <span class="tf-search-field-label"><?php _e( "Guests & rooms", "tourfic" ); ?></span>
+                                <span class="tf-search-field-label"><?php esc_html_e( "Guests & rooms", "tourfic" ); ?></span>
                                 <div class="tf-archive-guest-info">
-                                    <span class="tf-guest"><?php _e( "01", "tourfic" ); ?></span> <?php _e( "guest", "tourfic" ); ?>
-                                    <span class="tf-room"><?php _e( "01", "tourfic" ); ?></span> <?php _e( "rooms", "tourfic" ); ?>
+                                    <span class="tf-guest"><?php esc_html_e( "01", "tourfic" ); ?></span> <?php esc_html_e( "guest", "tourfic" ); ?>
+                                    <span class="tf-room"><?php esc_html_e( "01", "tourfic" ); ?></span> <?php esc_html_e( "rooms", "tourfic" ); ?>
                                 </div>
                             </div>
                         </div>
@@ -2103,13 +2103,13 @@ class Helper {
                             </div>
 
                             <div class="tf-search-field-content">
-                                <span class="tf-search-field-label"><?php _e( "Persons", "tourfic" ); ?></span>
+                                <span class="tf-search-field-label"><?php esc_html_e( "Persons", "tourfic" ); ?></span>
                                 <div class="tf-archive-guest-info">
-                                    <span class="tf-adult"><?php _e( "1", "tourfic" ); ?></span> <?php _e( "adult", "tourfic" ); ?>
+                                    <span class="tf-adult"><?php esc_html_e( "1", "tourfic" ); ?></span> <?php esc_html_e( "adult", "tourfic" ); ?>
 	                                <?php if ( ($post_type == 'tf_tours' && empty( $disable_child_search )) ||
 	                                           ( $post_type == 'tf_apartment' && empty( $disable_apartment_child_search ) )
 	                                ) { ?>
-                                    , <span class="tf-children"><?php _e( "0", "tourfic" ); ?></span> <?php _e( "children", "tourfic" ); ?>
+                                    , <span class="tf-children"><?php esc_html_e( "0", "tourfic" ); ?></span> <?php esc_html_e( "children", "tourfic" ); ?>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -2119,7 +2119,7 @@ class Helper {
                     <div class="tf_acrselection-wrap">
                         <div class="tf_acrselection-inner">
                             <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e( "Adults", "tourfic" ); ?></div>
+                                <div class="acr-label"><?php esc_html_e( "Adults", "tourfic" ); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -2153,7 +2153,7 @@ class Helper {
 	                                   ( $post_type == 'tf_apartment' && empty( $disable_apartment_child_search ) )
 	                        ) { ?>
                             <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e( "Children", "tourfic" ); ?></div>
+                                <div class="acr-label"><?php esc_html_e( "Children", "tourfic" ); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -2185,7 +2185,7 @@ class Helper {
                             <?php } ?>
 							<?php if ( $post_type == 'tf_hotel' ) { ?>
                                 <div class="tf_acrselection">
-                                    <div class="acr-label"><?php _e( "Rooms", "tourfic" ); ?></div>
+                                    <div class="acr-label"><?php esc_html_e( "Rooms", "tourfic" ); ?></div>
                                     <div class="acr-select">
                                         <div class="acr-dec">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -2220,7 +2220,7 @@ class Helper {
                 </div>
             </div>
             <div class="tf-booking-form-submit">
-                <input type="hidden" name="type" value="<?php echo $post_type; ?>" class="tf-post-type"/>
+                <input type="hidden" name="type" value="<?php echo esc_attr($post_type); ?>" class="tf-post-type"/>
                 <button class="tf-btn-normal btn-primary tf-submit"><?php esc_html_e( 'Search Now', 'tourfic' ); ?></button>
             </div>
 

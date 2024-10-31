@@ -467,7 +467,7 @@ class Tour {
 						if ( $author ) { ?>
                             <input type="hidden" name="tf-author" value="<?php echo esc_attr( $author ); ?>" class="tf-post-type"/>
 						<?php } ?>
-                        <button class="tf_button tf-submit btn-styled" type="submit"><?php echo esc_html__( apply_filters("tf_tour_search_form_submit_button_text", 'Search' ), 'tourfic' ); ?></button>
+                        <button class="tf_button tf-submit btn-styled" type="submit"><?php echo esc_html(apply_filters("tf_tour_search_form_submit_button_text", esc_html__('Search', 'tourfic' ))); ?></button>
                     </div>
 
                 </div>
@@ -2518,14 +2518,14 @@ class Tour {
 		} elseif ( $tf_tour_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) {
 			$first_gallery_image = explode( ',', $gallery );
 			?>
-            <div class="tf-archive-hotel" data-id="<?php echo get_the_ID(); ?>">
+            <div class="tf-archive-hotel" data-id="<?php echo esc_attr(get_the_ID()); ?>">
                 <div class="tf-archive-hotel-thumb">
                     <a href="<?php echo esc_url( $url ); ?>">
 						<?php
 						if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
 							the_post_thumbnail( 'full' );
 						} else {
-							echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+							echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
 						}
 						?>
                     </a>
@@ -2543,12 +2543,12 @@ class Tour {
                                 <div class="location-icon">
                                     <i class="ri-map-pin-fill"></i>
                                 </div>
-                                <span><?php echo Helper::tourfic_character_limit_callback( esc_html( $location ), 20 ); ?></span>
+                                <span><?php echo wp_kses_post(Helper::tourfic_character_limit_callback( esc_html( $location ), 20 )); ?></span>
                             </div>
 						<?php endif; ?>
                         <h4 class="tf-section-title">
                             <a href="<?php echo esc_url( $url ); ?>">
-								<?php echo Helper::tourfic_character_limit_callback( get_the_title(), 55 ); ?>
+								<?php echo wp_kses_post(Helper::tourfic_character_limit_callback( get_the_title(), 55 )); ?>
                             </a>
 							<?php echo wp_kses_post(Helper::edit_link(get_the_ID())) ?>
                         </h4>
@@ -2595,9 +2595,9 @@ class Tour {
                     </div>
                     <div class="tf-archive-hotel-content-right">
                         <div class="tf-archive-hotel-price">
-							<?php echo Pricing::instance( $post_id )->get_min_price_html(); ?>
+							<?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html()); ?>
                         </div>
-                        <a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php _e( "View Details", "tourfic" ); ?></a>
+                        <a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
                     </div>
                 </div>
             </div>
@@ -3380,9 +3380,9 @@ class Tour {
     */
 	function tf_tours_custom_status_creation() {
 		register_post_status( 'expired', array(
-			'label'                     => _x( 'Expired', 'post' ),
+			'label'                     => _x( 'Expired', 'post', 'tourfic'),
 			/* translators: %s: number of posts */
-			'label_count'               => _n_noop( 'Expired <span class="count">(%s)</span>', 'Expired <span class="count">(%s)</span>' ),
+			'label_count'               => _n_noop( 'Expired <span class="count">(%s)</span>', 'Expired <span class="count">(%s)</span>', 'tourfic'),
 			'public'                    => true,
 			'exclude_from_search'       => false,
 			'show_in_admin_all_list'    => true,

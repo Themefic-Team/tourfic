@@ -682,8 +682,8 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 			}
             ?>
             <div class="tf-archive-top">
-                <h5 class="tf-total-results"><?php _e( "Found", "tourfic" ); ?>
-                    <span class="tf-map-item-count"><?php echo $total_posts; ?></span>
+                <h5 class="tf-total-results"><?php esc_html_e( "Found", "tourfic" ); ?>
+                    <span class="tf-map-item-count"><?php echo esc_html($total_posts); ?></span>
                     <?php echo esc_html($found_post_label)?>
                 </h5>
                 <a href="" class="tf-mobile-map-btn">
@@ -699,7 +699,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
                 <ul class="tf-archive-view">
                     <li class="tf-archive-filter-btn">
                         <i class="ri-equalizer-line"></i>
-                        <span><?php _e( "All Filter", "tourfic" ); ?></span>
+                        <span><?php esc_html_e( "All Filter", "tourfic" ); ?></span>
                     </li>
                     <li class="tf-archive-view-item tf-archive-list-view <?php echo $tf_defult_views == "list" ? esc_attr( 'active' ) : ''; ?>" data-id="list-view">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -844,14 +844,14 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										$lng = $map['longitude'];
 										ob_start();
 										?>
-                                        <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                        <div class="tf-map-item">
                                             <div class="tf-map-item-thumb">
-                                                <a href="<?php echo get_the_permalink(); ?>">
+                                                <a href="<?php echo esc_url(get_the_permalink()); ?>">
 													<?php
 													if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
 														the_post_thumbnail( 'full' );
 													} else {
-														echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+														echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
 													}
 													?>
                                                 </a>
@@ -859,14 +859,15 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 												<?php
 												if ( ! empty( $min_discount_amount ) ) : ?>
                                                     <div class="tf-map-item-discount">
-														<?php echo $min_discount_type == "percent" ? $min_discount_amount . '%' : wc_price( $min_discount_amount ) ?><?php _e( " Off", "tourfic" ); ?>
+														<?php echo $min_discount_type == "percent" ? wp_kses_post($min_discount_amount) . '%' : wp_kses_post(wc_price( $min_discount_amount )) ?>
+														<?php esc_html_e( " Off", "tourfic" ); ?>
                                                     </div>
 												<?php endif; ?>
                                             </div>
                                             <div class="tf-map-item-content">
-                                                <h4><a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></h4>
+                                                <h4><a href="<?php echo esc_url(get_the_permalink()); ?>"><?php echo esc_html(get_the_title()); ?></a></h4>
                                                 <div class="tf-map-item-price">
-													<?php echo hotelPricing::instance(get_the_ID())->get_min_price_html(); ?>
+													<?php echo wp_kses_post(hotelPricing::instance(get_the_ID())->get_min_price_html()); ?>
                                                 </div>
 												<?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
                                             </div>
@@ -923,28 +924,29 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										$lng = $map['longitude'];
 										ob_start();
 										?>
-                                        <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                        <div class="tf-map-item">
                                             <div class="tf-map-item-thumb">
-                                                <a href="<?php echo get_the_permalink(); ?>">
+                                                <a href="<?php echo esc_url(get_the_permalink()); ?>">
 													<?php
 													if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
 														the_post_thumbnail( 'full' );
 													} else {
-														echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+														echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
 													}
 													?>
                                                 </a>
 
 												<?php if ( $discount_type !== 'none' && ! empty( $discount_price ) ) : ?>
                                                     <div class="tf-map-item-discount">
-														<?php echo $discount_type == "percent" ? $discount_price . '%' : wc_price( $discount_price ) ?><?php _e( " Off", "tourfic" ); ?>
+														<?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(wc_price( $discount_price )) ?>
+														<?php esc_html_e( " Off", "tourfic" ); ?>
                                                     </div>
 												<?php endif; ?>
                                             </div>
                                             <div class="tf-map-item-content">
-                                                <h4><a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></h4>
+                                                <h4><a href="<?php echo esc_url(get_the_permalink()); ?>"><?php echo esc_html(get_the_title()); ?></a></h4>
                                                 <div class="tf-map-item-price">
-													<?php echo tourPricing::instance( get_the_ID() )->get_min_price_html(); ?>
+													<?php echo wp_kses_post(tourPricing::instance( get_the_ID() )->get_min_price_html()); ?>
                                                 </div>
 												<?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
                                             </div>
@@ -999,14 +1001,14 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										$lng = $map['longitude'];
 										ob_start();
 										?>
-                                        <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                        <div class="tf-map-item">
                                             <div class="tf-map-item-thumb">
-                                                <a href="<?php echo get_the_permalink(); ?>">
+                                                <a href="<?php echo esc_url(get_the_permalink()); ?>">
 													<?php
 													if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
 														the_post_thumbnail( 'full' );
 													} else {
-														echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+														echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
 													}
 													?>
                                                 </a>
@@ -1014,14 +1016,15 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 												<?php
 												if ( ! empty( $discount_price ) ) : ?>
                                                     <div class="tf-map-item-discount">
-														<?php echo $discount_type == "percent" ? $discount_price . '%' : wc_price( $discount_price ) ?><?php _e( " Off", "tourfic" ); ?>
+														<?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(wc_price( $discount_price )) ?>
+														<?php esc_html_e( " Off", "tourfic" ); ?>
                                                     </div>
 												<?php endif; ?>
                                             </div>
                                             <div class="tf-map-item-content">
-                                                <h4><a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></h4>
+                                                <h4><a href="<?php echo esc_url(get_the_permalink()); ?>"><?php echo esc_html(get_the_title()); ?></a></h4>
                                                 <div class="tf-map-item-price">
-													<?php echo apartmentPricing::instance(get_the_ID())->get_min_price_html(); ?>
+													<?php echo wp_kses_post(apartmentPricing::instance(get_the_ID())->get_min_price_html()); ?>
                                                 </div>
 												<?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
                                             </div>
@@ -1080,14 +1083,14 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										$lng = $map['longitude'];
 										ob_start();
 										?>
-                                        <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                        <div class="tf-map-item">
                                             <div class="tf-map-item-thumb">
-                                                <a href="<?php echo get_the_permalink(); ?>">
+                                                <a href="<?php echo esc_url(get_the_permalink()); ?>">
 													<?php
 													if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
 														the_post_thumbnail( 'full' );
 													} else {
-														echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+														echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
 													}
 													?>
                                                 </a>
@@ -1095,14 +1098,15 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 												<?php
 												if ( ! empty( $min_discount_amount ) ) : ?>
                                                     <div class="tf-map-item-discount">
-														<?php echo $min_discount_type == "percent" ? $min_discount_amount . '%' : wc_price( $min_discount_amount ) ?><?php _e( " Off", "tourfic" ); ?>
+														<?php echo $min_discount_type == "percent" ? wp_kses_post($min_discount_amount . '%') : wp_kses_post(wc_price( $min_discount_amount )) ?>
+														<?php esc_html_e( " Off", "tourfic" ); ?>
                                                     </div>
 												<?php endif; ?>
                                             </div>
                                             <div class="tf-map-item-content">
-                                                <h4><a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></h4>
+                                                <h4><a href="<?php echo esc_url(get_the_permalink()); ?>"><?php echo esc_html(get_the_title()); ?></a></h4>
                                                 <div class="tf-map-item-price">
-													<?php echo hotelPricing::instance(get_the_ID())->get_min_price_html(); ?>
+													<?php echo wp_kses_post(hotelPricing::instance(get_the_ID())->get_min_price_html()); ?>
                                                 </div>
 												<?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
                                             </div>
@@ -1159,28 +1163,29 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										$lng = $map['longitude'];
 										ob_start();
 										?>
-                                        <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                        <div class="tf-map-item">
                                             <div class="tf-map-item-thumb">
-                                                <a href="<?php echo get_the_permalink(); ?>">
+                                                <a href="<?php echo esc_url(get_the_permalink()); ?>">
 													<?php
 													if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
 														the_post_thumbnail( 'full' );
 													} else {
-														echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+														echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
 													}
 													?>
                                                 </a>
 
 												<?php if ( $discount_type !== 'none' && ! empty( $discount_price ) ) : ?>
                                                     <div class="tf-map-item-discount">
-														<?php echo $discount_type == "percent" ? $discount_price . '%' : wc_price( $discount_price ) ?><?php _e( " Off", "tourfic" ); ?>
+														<?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(wc_price( $discount_price )) ?>
+														<?php esc_html_e( " Off", "tourfic" ); ?>
                                                     </div>
 												<?php endif; ?>
                                             </div>
                                             <div class="tf-map-item-content">
-                                                <h4><a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></h4>
+                                                <h4><a href="<?php echo esc_url(get_the_permalink()); ?>"><?php echo esc_html(get_the_title()); ?></a></h4>
                                                 <div class="tf-map-item-price">
-													<?php echo tourPricing::instance( get_the_ID() )->get_min_price_html(); ?>
+													<?php echo wp_kses_post(tourPricing::instance( get_the_ID() )->get_min_price_html()); ?>
                                                 </div>
 												<?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
                                             </div>
@@ -1236,14 +1241,14 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										$lng = $map['longitude'];
 										ob_start();
 										?>
-                                        <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                        <div class="tf-map-item">
                                             <div class="tf-map-item-thumb">
-                                                <a href="<?php echo get_the_permalink(); ?>">
+                                                <a href="<?php echo esc_url(get_the_permalink()); ?>">
 													<?php
 													if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
 														the_post_thumbnail( 'full' );
 													} else {
-														echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+														echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
 													}
 													?>
                                                 </a>
@@ -1251,14 +1256,15 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 												<?php
 												if ( ! empty( $discount_price ) ) : ?>
                                                     <div class="tf-map-item-discount">
-														<?php echo $discount_type == "percent" ? $discount_price . '%' : wc_price( $discount_price ) ?><?php _e( " Off", "tourfic" ); ?>
+														<?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(wc_price( $discount_price )) ?>
+														<?php esc_html_e( " Off", "tourfic" ); ?>
                                                     </div>
 												<?php endif; ?>
                                             </div>
                                             <div class="tf-map-item-content">
-                                                <h4><a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></h4>
+                                                <h4><a href="<?php echo esc_url(get_the_permalink()); ?>"><?php echo esc_html(get_the_title()); ?></a></h4>
                                                 <div class="tf-map-item-price">
-													<?php echo apartmentPricing::instance(get_the_ID())->get_min_price_html(); ?>
+													<?php echo wp_kses_post(apartmentPricing::instance(get_the_ID())->get_min_price_html()); ?>
                                                 </div>
 												<?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
                                             </div>

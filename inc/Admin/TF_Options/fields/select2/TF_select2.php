@@ -79,7 +79,7 @@ if ( ! class_exists( 'TF_select2' ) ) {
 			echo '</select>';
 			if(!empty($args['query_args']) && isset($args['inline_add_new']) && $args['inline_add_new']){
 				$add_new_button_text = !empty($args['add_button_text']) ? esc_html($args['add_button_text']) : esc_html__('Add New', 'tourfic');
-				echo '<div class="tf-add-category" data-value=""><span class="tf-admin-btn"><i class="ri-add-fill"></i> '. $add_new_button_text .'</span></div>';
+				echo '<div class="tf-add-category" data-value=""><span class="tf-admin-btn"><i class="ri-add-fill"></i> '. esc_html($add_new_button_text) .'</span></div>';
 			}
 			echo '</div>';
 			
@@ -94,7 +94,7 @@ if ( ! class_exists( 'TF_select2' ) ) {
 						</span>
 					</div>
 
-					<input type="hidden" id="category_name" value="'.$args['query_args']['taxonomy'].'">
+					<input type="hidden" id="category_name" value="'.esc_attr($args['query_args']['taxonomy']).'">
 					<input type="hidden" id="category_select_field_name" value="'. esc_attr($tf_select2_unique_id) .'">
 
 
@@ -111,7 +111,7 @@ if ( ! class_exists( 'TF_select2' ) ) {
 								
 							// Loop through the query_args to populate the select options
 							foreach($args['options'] as $value => $label){
-								echo '<option value="'. htmlspecialchars($value) .'">'. htmlspecialchars($label) .'</option>';
+								echo '<option value="'. esc_attr(htmlspecialchars($value)) .'">'. esc_html(htmlspecialchars($label)) .'</option>';
 							}
 
 						echo '</select>
@@ -134,7 +134,8 @@ if ( ! class_exists( 'TF_select2' ) ) {
 				<div class="tf-popup-box">
 					<div class="tf-add-category-box">
 						<div class="tf-add-category-box-header">
-							<h3><?php echo sprintf(esc_html__('Add New %s', 'tourfic'), $post_type_label) ?></h3>
+							<?php /* translators: %s: Post type label */ ?>
+							<h3><?php echo sprintf(esc_html__('Add New %s', 'tourfic'), esc_html($post_type_label)) ?></h3>
 							<span class="tf-add-category-box-close">
 								<i class="fa-solid fa-xmark"></i>
 							</span>

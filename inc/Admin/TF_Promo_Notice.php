@@ -143,7 +143,7 @@ class TF_Promo_Notice {
         $schedules['every_day'] = array(
             'interval' => 86400, // Every 24 hours
             // 'interval' => 5, // Every 24 hours
-            'display' => esc_html__('Every 24 hours')
+            'display' => esc_html__('Every 24 hours', 'tourfic')
         );
         return $schedules;
     }
@@ -195,7 +195,7 @@ class TF_Promo_Notice {
                     <img  style="width: 100%;" src="<?php echo esc_attr($image_url) ?>" alt="">
                 </a> 
                 <?php if( isset($dashboard_banner['dismiss_status']) && $dashboard_banner['dismiss_status'] == true): ?>
-                <button type="button" class="notice-dismiss tf_black_friday_notice_dismiss"><span class="screen-reader-text"><?php echo esc_html__('Dismiss this notice.', 'ultimate-addons-cf7' ) ?></span></button>
+                <button type="button" class="notice-dismiss tf_black_friday_notice_dismiss"><span class="screen-reader-text"><?php echo esc_html__('Dismiss this notice.', 'tourfic' ) ?></span></button>
                 <?php  endif; ?>
             </div>
             <script>

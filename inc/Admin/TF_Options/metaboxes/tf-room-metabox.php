@@ -48,7 +48,6 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 					'attributes'  => array(
 						'readonly' => 'readonly',
 					),
-					'placeholder' => __( '', 'tourfic' ),
 					'default'     => uniqid(),
 				),
                 array(
@@ -59,7 +58,6 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'attributes'  => array(
                         'readonly' => 'readonly',
                     ),
-                    'placeholder' => __( '', 'tourfic' ),
                     'is_search_able' => true
                 ),
                 array(

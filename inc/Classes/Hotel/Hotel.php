@@ -2137,7 +2137,7 @@ class Hotel {
 						if ( $author ) { ?>
                             <input type="hidden" name="tf-author" value="<?php echo esc_attr( $author ); ?>" class="tf-post-type"/>
 						<?php } ?>
-                        <button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e( apply_filters("tf_hotel_search_form_submit_button_text", 'Search' ), 'tourfic' ); ?></button>
+                        <button class="tf_button tf-submit btn-styled" type="submit"><?php echo esc_html(apply_filters("tf_hotel_search_form_submit_button_text", esc_html__('Search', 'tourfic' ))); ?></button>
                     </div>
 
                 </div>
@@ -2927,7 +2927,7 @@ class Hotel {
                     </div>
                     <div class="tf-post-footer tf-flex tf-flex-align-center tf-flex-space-bttn tf-mt-16">
                         <div class="tf-pricing">
-							<?php echo Pricing::instance( $post_id )->get_min_price_html($period); ?>
+							<?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html($period)); ?>
                         </div>
                         <div class="tf-booking-bttns">
                             <a class="tf-btn-normal btn-secondary" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
@@ -3021,7 +3021,7 @@ class Hotel {
 								<?php } ?>
                                 <div class="tf-available-room-price">
                                 <span class="tf-price-from">
-                                <?php echo Pricing::instance( $post_id )->get_min_price_html($period); ?>
+                                <?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html($period)); ?>
                                 </span>
                                 </div>
                             </div>
@@ -3068,7 +3068,7 @@ class Hotel {
 							<?php } ?>
                             <div class="tf-available-room-price">
                             <span class="tf-price-from">
-                            <?php echo Pricing::instance( $post_id )->get_min_price_html($period); ?>
+                            <?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html($period)); ?>
                             </span>
                             </div>
                         </div>
@@ -3077,14 +3077,14 @@ class Hotel {
                 </div>
             </div>
         <?php } elseif ( $tf_hotel_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) { ?>
-            <div class="tf-archive-hotel" data-id="<?php echo get_the_ID(); ?>">
+            <div class="tf-archive-hotel" data-id="<?php echo esc_attr(get_the_ID()); ?>">
                 <div class="tf-archive-hotel-thumb">
                     <a href="<?php echo esc_url( $url ); ?>">
 						<?php
 						if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
 							the_post_thumbnail( 'full' );
 						} else {
-							echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+							echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
 						}
 						?>
                     </a>
@@ -3092,7 +3092,8 @@ class Hotel {
 					<?php
 					if ( ! empty( $min_discount_amount ) ) : ?>
                         <div class="tf-archive-hotel-discount">
-							<?php echo $min_discount_type == "percent" ? $min_discount_amount . '%' : wc_price( $min_discount_amount ) ?><?php _e( " Off", "tourfic" ); ?>
+							<?php echo $min_discount_type == "percent" ? wp_kses_post($min_discount_amount . '%') : wp_kses_post(wc_price( $min_discount_amount )) ?>
+							<?php esc_html_e( " Off", "tourfic" ); ?>
                         </div>
 					<?php endif; ?>
                 </div>
@@ -3103,12 +3104,12 @@ class Hotel {
                                 <div class="location-icon">
                                     <i class="ri-map-pin-fill"></i>
                                 </div>
-                                <span><?php echo Helper::tourfic_character_limit_callback( esc_html( $address ), 20 ); ?></span>
+                                <span><?php echo wp_kses_post(Helper::tourfic_character_limit_callback( esc_html( $address ), 20 )); ?></span>
                             </div>
 						<?php endif; ?>
                         <h4 class="tf-section-title">
                             <a href="<?php echo esc_url( $url ); ?>">
-                                <?php echo Helper::tourfic_character_limit_callback( get_the_title(), 55 ); ?>
+                                <?php echo wp_kses_post(Helper::tourfic_character_limit_callback( get_the_title(), 55 )); ?>
                             </a>
                             <?php echo wp_kses_post(Helper::edit_link(get_the_ID())) ?>
                         </h4>
@@ -3144,9 +3145,9 @@ class Hotel {
                     </div>
                     <div class="tf-archive-hotel-content-right">
                         <div class="tf-archive-hotel-price">
-							<?php echo Pricing::instance( $post_id )->get_min_price_html(); ?>
+							<?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html()); ?>
                         </div>
-                        <a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php _e( "View Details", "tourfic" ); ?></a>
+                        <a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
                     </div>
                 </div>
             </div>
@@ -3257,7 +3258,7 @@ class Hotel {
                                                     <!-- Show minimum price @author - Hena -->
                                                     <div class="tf-room-price-area">
                                                         <div class="tf-room-price">
-															<?php echo Pricing::instance( $post_id )->get_min_price_html($period); ?>
+															<?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html($period)); ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -3696,7 +3697,7 @@ class Hotel {
 				                    if ( ! empty( $tf_room_gallery_ids ) ) {
 					                    foreach ( $tf_room_gallery_ids as $gallery_item_id ) {
 						                    $image_url = wp_get_attachment_url( $gallery_item_id, 'thumbnail' );
-						                    echo '<img src="' . $image_url . '" class="tf-room-modal-gallery-nav" alt="room-gallery-nav">';
+						                    echo '<img src="' . esc_url($image_url) . '" class="tf-room-modal-gallery-nav" alt="room-gallery-nav">';
 					                    }
 				                    } ?>
                                 </div>

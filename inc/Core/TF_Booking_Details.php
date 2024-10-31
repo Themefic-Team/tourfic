@@ -266,7 +266,7 @@ abstract Class TF_Booking_Details {
 
         <?php do_action( $this->booking_args["post_type"] . '_before_booking_order_table'); ?>
 
-        <div class="<?php echo apply_filters( $this->booking_args["post_type"] . '_booking_oder_table_class', "tf-order-table-responsive") ?>">
+        <div class="<?php echo esc_attr(apply_filters( $this->booking_args["post_type"] . '_booking_oder_table_class', "tf-order-table-responsive")) ?>">
             <table class="wp-list-table table" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>
@@ -554,7 +554,7 @@ abstract Class TF_Booking_Details {
 
 	                                    <?php if ( !empty($tf_tour_details->option) ) { ?>
                                             <tr>
-                                                <th><?php _e("Option", "tourfic"); ?></th>
+                                                <th><?php esc_html_e("Option", "tourfic"); ?></th>
                                                 <td>:</td>
                                                 <td><?php echo esc_html($tf_tour_details->option); ?></td>
                                             </tr>
@@ -747,7 +747,7 @@ abstract Class TF_Booking_Details {
                             ?>
                             <div class="tf-grid-single">
                                 <?php /* translators: %s Visitor. */ ?>
-                                <h3><?php echo sprintf( esc_html__("Visitor %s", "tourfic"), $visitor_count ); ?></h3>
+                                <h3><?php echo sprintf( esc_html__("Visitor %s", "tourfic"), esc_attr($visitor_count) ); ?></h3>
                                 <div class="tf-single-box">
                                     <table class="table" cellpadding="0" callspacing="0">
                                         <?php 
