@@ -1065,7 +1065,7 @@ abstract class Enquiry {
 			$submit_time = date_i18n( 'Y-m-d H:i:s', current_time( 'timestamp' ) );
 
 			$reply_data[] = array(
-				'reply_user' => $reply_user,
+				'reply_user' => !empty( $current_user->display_name ) ? $current_user->display_name : '',
 				'reply_mail' => $reply_mail,
 				'reply_message' => $reply_message,
 				'reply_subject' => $subject,
