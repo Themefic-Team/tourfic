@@ -799,7 +799,9 @@ abstract Class TF_Booking_Details {
                     
                     <!-- Voucher details -->
                     <?php 
-                    $this->voucher_details( $tf_tour_details, $tf_order_details, $tf_billing_details );
+                    if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+                        $this->voucher_details( $tf_tour_details, $tf_order_details, $tf_billing_details );
+                    }
                     ?>
 
                 </div>
