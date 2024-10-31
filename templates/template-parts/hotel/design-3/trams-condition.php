@@ -6,7 +6,7 @@
         <i class="ri-arrow-up-s-line tf-toggle-icon-up"></i>
     </div>
     <div class="tf-hotel-toc tf-section-toggle">
-        <?php echo wpautop( $tc ); ?>
+        <?php echo wp_kses_post(wpautop( $tc )); ?>
     </div>
 </div>
 <?php } ?>

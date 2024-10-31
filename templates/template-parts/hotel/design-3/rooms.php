@@ -116,12 +116,12 @@ $feature_filter = ! empty( Helper::tfopt( 'feature-filter' ) ) ? Helper::tfopt( 
 									$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
 									if ( $key <= 3 ) { ?>
                                         <div class="tf-room-gallery">
-                                            <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php _e( "Room Image", "tourfic" ); ?>">
+                                            <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php esc_attr_e( "Room Image", "tourfic" ); ?>">
 
 											<?php if ( $key == 3 ) { ?>
                                                 <div class="tf-room-gallery-overlay">
-                                                    <a href="#" class="tf-room-modal-btn" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] . $room_id : '' ?>"
-                                                       data-hotel="<?php echo $post_id; ?>">
+                                                    <a href="#" class="tf-room-modal-btn" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr($room['unique_id'] . $room_id) : '' ?>"
+                                                       data-hotel="<?php echo esc_attr($post_id); ?>">
                                                         <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <g id="content">
                                                                 <path id="Rectangle 2111"

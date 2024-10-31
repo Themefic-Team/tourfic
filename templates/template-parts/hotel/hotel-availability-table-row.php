@@ -354,7 +354,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                             <input type="hidden" name="post_id" value="<?php echo esc_attr( $hotel_id ); ?>">
                             <input type="hidden" name="room_id" value="<?php echo esc_attr( $room_id ); ?>">
                             <input type="hidden" name="unique_id" value="<?php echo esc_attr( $unique_id ); ?>">
-                            <input type="hidden" name="option_id" value="<?php echo $unique_id . '_' . $room_option_key; ?>">
+                            <input type="hidden" name="option_id" value="<?php echo esc_attr($unique_id . '_' . $room_option_key); ?>">
                             <input type="hidden" name="location" value="<?php echo esc_attr( $first_location_name ); ?>">
                             <input type="hidden" name="adult" value="<?php echo esc_attr( $form_adult ); ?>">
                             <input type="hidden" name="child" value="<?php echo esc_attr( $form_child ); ?>">
@@ -402,7 +402,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                             </select>
                                             <input type="hidden" name="room_id" value="<?php echo esc_attr( $room_id ); ?>">
                                             <input type="hidden" name="unique_id" value="<?php echo esc_attr( $unique_id ); ?>">
-                                            <input type="hidden" name="option_id" value="<?php echo $unique_id . '_' . $room_option_key; ?>">
+                                            <input type="hidden" name="option_id" value="<?php echo esc_attr($unique_id . '_' . $room_option_key); ?>">
                                             <input type="hidden" id="hotel-post-id" value="<?php echo esc_attr( $hotel_id ); ?>">
                                         </div>
                                         <div class="tf-airport-pickup-response"></div>
@@ -854,7 +854,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                 <input type="hidden" name="post_id" value="<?php echo esc_attr( $hotel_id ); ?>">
                                 <input type="hidden" name="room_id" value="<?php echo esc_attr( $room_id ); ?>">
                                 <input type="hidden" name="unique_id" value="<?php echo esc_attr( $unique_id ); ?>">
-                                <input type="hidden" name="option_id" value="<?php echo $unique_id . '_' . $room_option_key; ?>">
+                                <input type="hidden" name="option_id" value="<?php echo esc_attr($unique_id . '_' . $room_option_key); ?>">
                                 <input type="hidden" name="location" value="<?php echo esc_attr( $first_location_name ); ?>">
                                 <input type="hidden" name="adult" value="<?php echo esc_attr( $form_adult ); ?>">
                                 <input type="hidden" name="child" value="<?php echo esc_attr( $form_child ); ?>">
@@ -963,7 +963,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                                 </select>
                                                 <input type="hidden" name="room_id" value="<?php echo esc_attr( $room_id ); ?>">
                                                 <input type="hidden" name="unique_id" value="<?php echo esc_attr( $unique_id ); ?>">
-                                                <input type="hidden" name="option_id" value="<?php echo $unique_id . '_' . $room_option_key; ?>">
+                                                <input type="hidden" name="option_id" value="<?php echo esc_attr($unique_id . '_' . $room_option_key); ?>">
                                                 <input type="hidden" id="hotel-post-id" value="<?php echo esc_attr( $hotel_id ); ?>">
                                             </div>
                                             <div class="tf-airport-pickup-response"></div>
@@ -1561,12 +1561,12 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
 						if ( $key <= 3 ) { ?>
                             <div class="tf-room-gallery">
-                                <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php _e( "Room Image", "tourfic" ); ?>">
+                                <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php esc_html_e( "Room Image", "tourfic" ); ?>">
 
 								<?php if ( $key == 3 ) { ?>
                                     <div class="tf-room-gallery-overlay">
-                                        <a href="#" class="tf-room-modal-btn" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] . $room_id : '' ?>"
-                                           data-hotel="<?php echo $post_id; ?>">
+                                        <a href="#" class="tf-room-modal-btn" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr($room['unique_id'] . $room_id) : '' ?>"
+                                           data-hotel="<?php echo esc_attr($post_id); ?>">
                                             <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <g id="content">
                                                     <path id="Rectangle 2111"
@@ -1740,7 +1740,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                     <input type="hidden" name="post_id" value="<?php echo esc_attr( $hotel_id ); ?>">
                                     <input type="hidden" name="room_id" value="<?php echo esc_attr( $room_id ); ?>">
                                     <input type="hidden" name="unique_id" value="<?php echo esc_attr( $unique_id ); ?>">
-                                    <input type="hidden" name="option_id" value="<?php echo $unique_id . '_' . $room_option_key; ?>">
+                                    <input type="hidden" name="option_id" value="<?php echo esc_attr($unique_id . '_' . $room_option_key); ?>">
                                     <input type="hidden" name="location" value="<?php echo esc_attr( $first_location_name ); ?>">
                                     <input type="hidden" name="adult" value="<?php echo esc_attr( $form_adult ); ?>">
                                     <input type="hidden" name="child" value="<?php echo esc_attr( $form_child ); ?>">
@@ -1847,7 +1847,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                                     </select>
                                                     <input type="hidden" name="room_id" value="<?php echo esc_attr( $room_id ); ?>">
                                                     <input type="hidden" name="unique_id" value="<?php echo esc_attr( $unique_id ); ?>">
-                                                    <input type="hidden" name="option_id" value="<?php echo $unique_id . '_' . $room_option_key; ?>">
+                                                    <input type="hidden" name="option_id" value="<?php echo esc_attr($unique_id . '_' . $room_option_key); ?>">
                                                     <input type="hidden" id="hotel-post-id" value="<?php echo esc_attr( $hotel_id ); ?>">
                                                 </div>
                                                 <div class="tf-airport-pickup-response"></div>
@@ -2451,7 +2451,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                             <input type="hidden" name="post_id" value="<?php echo esc_attr( $hotel_id ); ?>">
                             <input type="hidden" name="room_id" value="<?php echo esc_attr( $room_id ); ?>">
                             <input type="hidden" name="unique_id" value="<?php echo esc_attr( $unique_id ); ?>">
-                            <input type="hidden" name="option_id" value="<?php echo $unique_id . '_' . $room_option_key; ?>">
+                            <input type="hidden" name="option_id" value="<?php echo esc_attr($unique_id . '_' . $room_option_key); ?>">
                             <input type="hidden" name="location" value="<?php echo esc_attr( $first_location_name ); ?>">
                             <input type="hidden" name="adult" value="<?php echo esc_attr( $form_adult ); ?>">
                             <input type="hidden" name="child" value="<?php echo esc_attr( $form_child ); ?>">
@@ -2499,7 +2499,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                             </select>
                                             <input type="hidden" name="room_id" value="<?php echo esc_attr( $room_id ); ?>">
                                             <input type="hidden" name="unique_id" value="<?php echo esc_attr( $unique_id ); ?>">
-                                            <input type="hidden" name="option_id" value="<?php echo $unique_id . '_' . $room_option_key; ?>">
+                                            <input type="hidden" name="option_id" value="<?php echo esc_attr($unique_id . '_' . $room_option_key); ?>">
                                             <input type="hidden" id="hotel-post-id" value="<?php echo esc_attr( $hotel_id ); ?>">
                                         </div>
                                         <div class="tf-airport-pickup-response"></div>

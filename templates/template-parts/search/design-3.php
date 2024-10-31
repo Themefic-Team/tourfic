@@ -35,11 +35,12 @@
                                 <?php
                                 if (current_user_can('administrator')) {
                                     echo '<p>' . sprintf(
-                                            __('Google Maps is selected but the API key is missing. Please configure the API key <a href="%s" target="_blank">Map Settings</a>.', 'tourfic'),
-                                            admin_url('admin.php?page=tf_settings#tab=map_settings')
+                                            /* translators: Map settings url */
+                                            esc_html__('Google Maps is selected but the API key is missing. Please configure the API key <a href="%s" target="_blank">Map Settings</a>.', 'tourfic'),
+                                            esc_url(admin_url('admin.php?page=tf_settings#tab=map_settings'))
                                         ) . '</p>';
                                 } else {
-                                    echo '<p>' . __('Access is restricted as Google Maps API key is not configured. Please contact the site administrator.', 'tourfic') . '</p>';
+                                    echo '<p>' . esc_html__('Access is restricted as Google Maps API key is not configured. Please contact the site administrator.', 'tourfic') . '</p>';
                                 }
                                 ?>
                             </div>
@@ -92,7 +93,7 @@
                                 </svg>
                                 <span><?php echo esc_html__('List view', 'tourfic') ?></span>
                             </a>
-                            <div id="map-marker" data-marker="<?php echo TF_ASSETS_URL . 'app/images/cluster-marker.png'; ?>"></div>
+                            <div id="map-marker" data-marker="<?php echo esc_url(TF_ASSETS_URL . 'app/images/cluster-marker.png'); ?>"></div>
                             <div class="tf-hotel-archive-map-wrap">
                                 <div id="tf-hotel-archive-map"></div>
                             </div>
@@ -104,11 +105,12 @@
                             <?php
                             if (current_user_can('administrator')) {
                                 echo '<p>' . sprintf(
-                                        __('Google Maps is not selected. Please configure it <a href="%s" target="_blank">Map Settings</a>.', 'tourfic'),
-                                        admin_url('admin.php?page=tf_settings#tab=map_settings')
+                                        /* translators: Map settings url */
+                                        esc_html__('Google Maps is not selected. Please configure it <a href="%s" target="_blank">Map Settings</a>.', 'tourfic'),
+                                        esc_url(admin_url('admin.php?page=tf_settings#tab=map_settings'))
                                     ) . '</p>';
                             } else {
-                                echo '<p>' . __('Access is restricted as Google Maps is not enabled. Please contact the site administrator', 'tourfic') . '</p>';
+                                echo '<p>' . esc_html__('Access is restricted as Google Maps is not enabled. Please contact the site administrator', 'tourfic') . '</p>';
                             }
                             ?>
                         </div>

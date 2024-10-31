@@ -33,11 +33,12 @@
                                     <?php
                                     if (current_user_can('administrator')) {
                                         echo '<p>' . sprintf(
-                                                __('Google Maps is selected but the API key is missing. Please configure the API key <a href="%s" target="_blank">Map Settings</a>.', 'tourfic'),
-                                                admin_url('admin.php?page=tf_settings#tab=map_settings')
+                                                /* translators: Map settings url */
+                                                esc_html__('Google Maps is selected but the API key is missing. Please configure the API key <a href="%s" target="_blank">Map Settings</a>.', 'tourfic'),
+                                                esc_url(admin_url('admin.php?page=tf_settings#tab=map_settings'))
                                             ) . '</p>';
                                     } else {
-                                        echo '<p>' . __('Access is restricted as Google Maps API key is not configured. Please contact the site administrator.', 'tourfic') . '</p>';
+                                        echo '<p>' . esc_html__('Access is restricted as Google Maps API key is not configured. Please contact the site administrator.', 'tourfic') . '</p>';
                                     }
                                     ?>
                                 </div>
@@ -74,8 +75,8 @@
                                         </div>
                                     </div>
                                     <div class="tf-archive-top">
-                                        <h5 class="tf-total-results"><?php _e("Found", "tourfic"); ?>
-                                            <span class="tf-map-item-count"><?php echo $post_count; ?></span> <?php _e("of", "tourfic"); ?> <?php echo $GLOBALS['wp_query']->found_posts; ?> <?php _e("Hotels", "tourfic"); ?></h5>
+                                        <h5 class="tf-total-results"><?php esc_html_e("Found", "tourfic"); ?>
+                                            <span class="tf-map-item-count"><?php echo esc_html($post_count); ?></span> <?php esc_html_e("of", "tourfic"); ?> <?php echo esc_html($GLOBALS['wp_query']->found_posts); ?> <?php esc_html_e("Hotels", "tourfic"); ?></h5>
                                         <a href="" class="tf-mobile-map-btn">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                                                 <path d="M17.3327 7.33366V6.68156C17.3327 5.06522 17.3327 4.25705 16.8445 3.75491C16.3564 3.25278 15.5707 3.25278 13.9993 3.25278H12.2671C11.5027 3.25278 11.4964 3.25129 10.8089 2.90728L8.03258 1.51794C6.87338 0.93786 6.29378 0.647818 5.67633 0.667975C5.05888 0.688132 4.49833 1.01539 3.37722 1.66992L2.354 2.2673C1.5305 2.74807 1.11876 2.98846 0.892386 3.38836C0.666016 3.78827 0.666016 4.27527 0.666016 5.24927V12.0968C0.666016 13.3765 0.666016 14.0164 0.951234 14.3725C1.14102 14.6095 1.40698 14.7688 1.70102 14.8216C2.1429 14.901 2.68392 14.5851 3.76591 13.9534C4.50065 13.5245 5.20777 13.079 6.08674 13.1998C6.82326 13.301 7.50768 13.7657 8.16602 14.0952"
@@ -93,7 +94,7 @@
                                         <ul class="tf-archive-view">
                                             <li class="tf-archive-filter-btn">
                                                 <i class="ri-equalizer-line"></i>
-                                                <span><?php _e("All Filter", "tourfic"); ?></span>
+                                                <span><?php esc_html_e("All Filter", "tourfic"); ?></span>
                                             </li>
                                             <li class="tf-archive-view-item tf-archive-list-view <?php echo $tf_defult_views == "list" ? esc_attr('active') : ''; ?>" data-id="list-view">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -154,14 +155,14 @@
                                                 $lng = $map['longitude'];
                                                 ob_start();
                                                 ?>
-                                                <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                                <div class="tf-map-item">
                                                     <div class="tf-map-item-thumb">
-                                                        <a href="<?php echo get_the_permalink(); ?>">
+                                                        <a href="<?php the_permalink(); ?>">
                                                             <?php
                                                             if (!empty(wp_get_attachment_url(get_post_thumbnail_id(), 'tf_gallery_thumb'))) {
                                                                 the_post_thumbnail('full');
                                                             } else {
-                                                                echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+                                                                echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
                                                             }
                                                             ?>
                                                         </a>
@@ -169,14 +170,14 @@
                                                         <?php
                                                         if (!empty($min_discount_amount)) : ?>
                                                             <div class="tf-map-item-discount">
-                                                                <?php echo $min_discount_type == "percent" ? $min_discount_amount . '%' : wc_price($min_discount_amount) ?><?php _e(" Off", "tourfic"); ?>
+                                                                <?php echo $min_discount_type == "percent" ? wp_kses_post($min_discount_amount . '%') : wp_kses_post(wc_price($min_discount_amount)) ?><?php esc_html_e(" Off", "tourfic"); ?>
                                                             </div>
                                                         <?php endif; ?>
                                                     </div>
                                                     <div class="tf-map-item-content">
-                                                        <h4><a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></h4>
+                                                        <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
                                                         <div class="tf-map-item-price">
-                                                            <?php echo Pricing::instance(get_the_ID())->get_min_price_html(); ?>
+                                                            <?php echo wp_kses_post(Pricing::instance(get_the_ID())->get_min_price_html()); ?>
                                                         </div>
                                                         <?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
                                                     </div>
@@ -223,14 +224,14 @@
                                                 $lng = $map['longitude'];
                                                 ob_start();
                                                 ?>
-                                                <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                                <div class="tf-map-item">
                                                     <div class="tf-map-item-thumb">
-                                                        <a href="<?php echo get_the_permalink(); ?>">
+                                                        <a href="<?php the_permalink(); ?>">
                                                             <?php
                                                             if (!empty(wp_get_attachment_url(get_post_thumbnail_id(), 'tf_gallery_thumb'))) {
                                                                 the_post_thumbnail('full');
                                                             } else {
-                                                                echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+                                                                echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
                                                             }
                                                             ?>
                                                         </a>
@@ -238,14 +239,15 @@
                                                         <?php
                                                         if (!empty($min_discount_amount)) : ?>
                                                             <div class="tf-map-item-discount">
-                                                                <?php echo $min_discount_type == "percent" ? $min_discount_amount . '%' : wc_price($min_discount_amount) ?><?php _e(" Off", "tourfic"); ?>
+                                                                <?php echo $min_discount_type == "percent" ? wp_kses_post($min_discount_amount . '%') : wp_kses_post(wc_price($min_discount_amount)) ?>
+                                                                <?php esc_html_e(" Off", "tourfic"); ?>
                                                             </div>
                                                         <?php endif; ?>
                                                     </div>
                                                     <div class="tf-map-item-content">
-                                                        <h4><a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></h4>
+                                                        <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
                                                         <div class="tf-map-item-price">
-                                                            <?php echo Pricing::instance(get_the_ID())->get_min_price_html(); ?>
+                                                            <?php echo wp_kses_post(Pricing::instance(get_the_ID())->get_min_price_html()); ?>
                                                         </div>
                                                         <?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
                                                     </div>
@@ -288,20 +290,8 @@
                                     </svg>
                                     <span><?php echo esc_html__('List view', 'tourfic') ?></span>
                                 </a>
-                                <div id="map-marker" data-marker="<?php echo TF_ASSETS_URL . 'app/images/cluster-marker.png'; ?>"></div>
+                                <div id="map-marker" data-marker="<?php echo esc_url(TF_ASSETS_URL . 'app/images/cluster-marker.png'); ?>"></div>
                                 <div class="tf-hotel-archive-map-wrap">
-                                    <!--<div class="toggle-map" id="st-toggle-map"><span class="stt-icon stt-icon-arrow-left"></span></div>
-                                    <div class="close-map-new" id="st-close-map"><span class="stt-icon stt-icon-close"></span></div>
-                                    <div class="search-move-map">
-                                        <div class="st-icheck-item">
-                                            <label for="st-move-map" class="c-grey">
-                                                <input type="checkbox" name="movemap" id="st-move-map" value="1">
-                                                <?php /*echo esc_html__('Search as I move the map', 'traveler'); */ ?>
-                                                <span class="checkmark fcheckbox"></span>
-                                            </label>
-                                        </div>
-                                        <input type="hidden" name="st-map-coordinate" value="" id="st-map-coordinate"/>
-                                    </div>-->
                                     <div id="tf-hotel-archive-map"></div>
                                 </div>
                             </div>
@@ -312,6 +302,7 @@
                                 <?php
                                 if (current_user_can('administrator')) {
                                     echo '<p>' . sprintf(
+                                            /* translators: Map settings url */
                                             esc_html__('Google Maps is not selected. Please configure it <a href="%s" target="_blank">Map Settings</a>.', 'tourfic'),
                                             esc_url(admin_url('admin.php?page=tf_settings#tab=map_settings'))
                                         ) . '</p>';
