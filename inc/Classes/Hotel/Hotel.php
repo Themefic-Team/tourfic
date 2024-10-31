@@ -4041,7 +4041,7 @@ class Hotel {
 				update_post_meta($room_id, 'tf_room_opt', $room_meta);
 			}
 			foreach($removed_rooms as $room_id){
-				$room_meta   = get_post_meta( $room_id, 'tf_room_opt', true );
+				$room_meta   = get_post_meta( intval($room_id), 'tf_room_opt', true );
 				if($post_id == $room_meta['tf_hotel']){
 					$room_meta['tf_hotel'] = '';
 				}
