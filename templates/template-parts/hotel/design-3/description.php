@@ -4,7 +4,7 @@
         <div class="tf-short-description">
 			<?php
 			if ( strlen( get_the_content() ) > 300 ) {
-				echo wp_kses_post( strip_tags( \Tourfic\Classes\Helper::tourfic_character_limit_callback( get_the_content(), 300 ) ) ) . '<span class="tf-see-description">'. esc_html__('See more', 'tourfic') .'</span>';
+				echo wp_kses_post( wp_strip_all_tags( \Tourfic\Classes\Helper::tourfic_character_limit_callback( get_the_content(), 300 ) ) ) . '<span class="tf-see-description">'. esc_html__('See more', 'tourfic') .'</span>';
 			} else {
 				the_content();
 			}

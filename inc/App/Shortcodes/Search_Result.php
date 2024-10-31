@@ -784,7 +784,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 						}
 					}
 					if ( empty( $tf_total_filters ) ) {
-                        echo '<div id="map-datas" style="display: none">'. json_encode([]) .'</div>';
+                        echo '<div id="map-datas" style="display: none">'. wp_json_encode([]) .'</div>';
 						echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 					}
 					$post_per_page = Helper::tfopt( 'posts_per_page' ) ? Helper::tfopt( 'posts_per_page' ) : 10;
@@ -1295,7 +1295,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 
 							}
                             ?>
-                            <div id="map-datas" style="display: none"><?php echo array_filter( $locations ) ? json_encode( array_values( $locations ) ) : []; ?></div>
+                            <div id="map-datas" style="display: none"><?php echo array_filter( $locations ) ? wp_json_encode( array_values( $locations ) ) : []; ?></div>
                             <?php
 						}
 						$total_pages = ceil( $total_filtered_results / $post_per_page );
@@ -1312,7 +1312,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 					}
 
 				} else {
-                    echo '<div id="map-datas" style="display: none">'. json_encode([]) .'</div>';
+                    echo '<div id="map-datas" style="display: none">'. wp_json_encode([]) .'</div>';
 					echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 				}
 				echo "<span hidden=hidden class='tf-posts-count'>";

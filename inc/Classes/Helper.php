@@ -1294,7 +1294,7 @@ class Helper {
                                     dateSetToFields(selectedDates, instance);
                                 },
 								<?php if(! empty( $date )){ ?>
-                                defaultDate: <?php echo json_encode( explode( '-', $date ) ) ?>,
+                                defaultDate: <?php echo wp_json_encode( explode( '-', $date ) ) ?>,
 								<?php } ?>
                             });
 
@@ -2257,7 +2257,7 @@ class Helper {
                                     dateSetToFields(selectedDates, instance);
                                 },
                                 <?php if(! empty( $check_in_out )){ ?>
-                                defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
+                                defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
                                 <?php } ?>
                             });
 

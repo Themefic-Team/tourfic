@@ -74,7 +74,7 @@ class TF_Promo_Notice {
             $service_banner = isset($this->tf_promo_option['service_banner']) ? $this->tf_promo_option['service_banner'] : array();
             $promo_banner = isset($this->tf_promo_option['promo_banner']) ? $this->tf_promo_option['promo_banner'] : array();
 
-            $current_day = date('l'); 
+            $current_day = gmdate('l'); 
             if(isset($service_banner['enable_status']) && $service_banner['enable_status'] == true && in_array($current_day, $service_banner['display_days'])){ 
              
                 $start_date = isset($service_banner['start_date']) ? $service_banner['start_date'] : '';
@@ -264,7 +264,7 @@ class TF_Promo_Notice {
         $service_banner = isset($this->tf_promo_option['service_banner']) ? $this->tf_promo_option['service_banner'] : array();
         $promo_banner = isset($this->tf_promo_option['promo_banner']) ? $this->tf_promo_option['promo_banner'] : array();
 
-        $current_day = date('l'); 
+        $current_day = gmdate('l'); 
         if($service_banner['enable_status'] == true && in_array($current_day, $service_banner['display_days'])){ 
            
             $this->promo_side_data['image_url'] = esc_url($service_banner['banner_url']);

@@ -120,9 +120,9 @@ abstract Class TF_Booking_Details {
                 </div>
                 <div class="tf_booking_wrap_header">
                     <?php 
-                    $heading_title = sprintf(" %s %s", $this->booking_args['booking_title'], "Booking Details" );
+                    $heading_title = sprintf(" %s %s", $this->booking_args['booking_title'], esc_html__('Booking Details', 'tourfic') );
                     ?>
-                    <h1 class="wp-heading-inline"><?php esc_html_e(apply_filters( $this->booking_args["post_type"] . '_booking_details_main_title', $heading_title), 'tourfic'); ?></h1>
+                    <h1 class="wp-heading-inline"><?php echo esc_html(apply_filters( $this->booking_args["post_type"] . '_booking_details_main_title', $heading_title)); ?></h1>
                     <div class="tf_header_wrap_button">
                         <?php
                         /**

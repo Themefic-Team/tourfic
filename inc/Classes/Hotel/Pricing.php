@@ -151,7 +151,7 @@ class Pricing {
 						foreach ( $avail_date as $singleavailroom ) {
 							if ( ! empty( $this->period ) ) {
 								foreach ( $this->period as $date ) {
-									$singleavailroom_date = date( 'Y-m-d', $date->getTimestamp() );
+									$singleavailroom_date = gmdate( 'Y-m-d', $date->getTimestamp() );
 									if ( $singleavailroom['date'] == $singleavailroom_date ) {
 										if ( $pricing_by == 1 ) {
 											$room_meta_price = $singleavailroom['price'] ?? 0;
@@ -367,7 +367,7 @@ class Pricing {
 		);
 	}
 
-    function get_min_price($period = ''){
+    function get_min_price($period = []){
 	    $room_price = [];
 	    $tf_lowestAmount = 0;
 	    $tf_lowestAmount_items = null;
@@ -404,7 +404,7 @@ class Pricing {
 					    foreach ( $avail_date as $repval ) {
 						    if ( ! empty( $period ) ) {
 							    foreach ( $period as $date ) {
-								    $singleavailroom_date = date( 'Y-m-d', $date->getTimestamp() );
+								    $singleavailroom_date = gmdate( 'Y-m-d', $date->getTimestamp() );
 								    if ( strtotime( $repval['check_in'] ) == strtotime( $singleavailroom_date ) ) {
 									    if ( $pricing_by == 1 ) {
 										    if ( ! empty( $repval['price'] ) ) {

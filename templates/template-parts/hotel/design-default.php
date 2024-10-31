@@ -680,6 +680,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                                                         <div class="tf-top">
 															<?php
 															if ( ! empty( $child_age_limit ) ) {
+                                                                /* translators: Children age limit */
 																printf( esc_html__( 'Children Age Limit %s Years', 'tourfic' ), esc_html($child_age_limit) );
 															} else {
 																esc_html_e( 'Number of Children', 'tourfic' );
@@ -743,6 +744,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                                                     <div class="tf-top">
 														<?php
 														if ( ! empty( $child_age_limit ) ) {
+                                                            /* translators: Children age limit */
 															printf( esc_html__( 'Children Age Limit %s Years', 'tourfic' ), esc_html($child_age_limit) );
 														} else {
 															esc_html_e( 'Number of Children', 'tourfic' );

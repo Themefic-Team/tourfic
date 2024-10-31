@@ -268,7 +268,7 @@
                                         }
                                         wp_reset_query();
                                         ?>
-                                        <div id="map-datas" style="display: none"><?php echo array_filter($locations) ? json_encode(array_values($locations)) : json_encode([]); ?></div>
+                                        <div id="map-datas" style="display: none"><?php echo array_filter($locations) ? wp_json_encode(array_values($locations)) : wp_json_encode([]); ?></div>
                                         <div class="tf-pagination-bar">
                                             <?php Helper::tourfic_posts_navigation(); ?>
                                         </div>
@@ -316,7 +316,7 @@
                 </div>
             </div>
         <?php else: ?>
-            <div id="map-datas" style="display: none"><?php echo json_encode([]); ?></div>
+            <div id="map-datas" style="display: none"><?php echo wp_json_encode([]); ?></div>
             <div class="tf-container">
                 <div class="tf-notice tf-mt-24 tf-mb-30">
                     <div class="tf-nothing-found" data-post-count="0"><?php echo esc_html__("No Hotels Found!", "tourfic"); ?></div>
