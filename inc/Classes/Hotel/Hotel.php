@@ -1941,6 +1941,8 @@ class Hotel {
             </script>
 		<?php }elseif( !empty($design) && 3==$design ){ ?>
 			<form class="tf-archive-search-box-wrapper <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
+
+				<div class="tf-date-selection-form">
 				<div class="tf-date-select-box tf-flex tf-flex-gap-8">
 					<div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn tf-pick-drop-location full-width">
 						<div class="tf-select-date">
@@ -2062,15 +2064,14 @@ class Hotel {
 					</div>
 				</div>
 
-				<div class="tf-driver-location-box tf-flex tf-flex-space-bttn tf-flex-align-center">
-					<div class="tf-driver-location">
-						
-					</div>
+				<div class="tf-driver-location-box">
 					<div class="tf-submit-button">
 						<input type="hidden" name="type" value="tf_hotel" class="tf-post-type"/>
                         <button type="submit"><?php esc_html_e( apply_filters("tf_hotel_search_form_submit_button_text", 'Search' ), 'tourfic' ); ?> <i class="ri-search-line"></i></button>
 					</div>
 				</div>
+				</div>
+
             </form>
 
             <script>

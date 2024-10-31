@@ -66,7 +66,7 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 				<div class="tf_widget-subtitle"><p><?php echo esc_html( $subtitle ); ?></p></div>
 			<?php endif; ?>
 			<!-- Booking Form Tabs -->
-			<div class="tf-booking-form-tab">
+			<div class="tf-booking-form-tab <?php echo esc_attr('design-'.$design); ?>">
 				<?php do_action( 'tf_before_booking_form_tab', $type ) ?>
 
 				<?php if ( ! in_array( 'hotel', $disable_services ) && Helper::tf_is_search_form_tab_type( 'hotel', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
