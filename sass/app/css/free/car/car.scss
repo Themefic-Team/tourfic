@@ -886,6 +886,22 @@
                             }
                         }
                     }
+                    .tf_selectperson-wrap{
+                        padding: 7px 0px;
+                        border: 0px solid;
+                        input{
+                            width: 50px !important;
+                            padding: 0 !important;
+                            text-align: center;
+                        }
+                        .tf_acrselection-wrap{
+                            left: 0;
+                            .acr-dec,
+                            .acr-inc{
+                                padding: 0;
+                            }
+                        }
+                    }
                 }
             }
             &.tf-pick-drop-location.active{
@@ -896,6 +912,14 @@
                     }
                     &:last-child{
                         display: none;
+                    }
+                }
+            }
+            &.tf-date-single-select.full-width{
+                .tf-select-date{
+                    width: 100%;
+                    &:first-child{
+                        border-right: 0px solid #DFE6ED;
                     }
                 }
             }
