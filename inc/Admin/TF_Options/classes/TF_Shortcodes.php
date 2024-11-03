@@ -1448,7 +1448,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Apartment style', 'tourfic' ) ?></h3>
+                                            <h3><?php echo esc_html__( 'Car style', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
                                                 <option value="style='grid'"><?php esc_html_e( 'Grid', 'tourfic' ); ?></option>
                                                 <option value="style='list'"><?php esc_html_e( 'List', 'tourfic' ); ?></option>

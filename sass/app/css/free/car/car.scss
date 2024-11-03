@@ -922,12 +922,19 @@
                         }
                     }
                     .tf_selectperson-wrap{
-                        padding: 7px 0px !important;
+                        padding: 3px 0px !important;
                         border: 0px solid;
                         input{
                             width: 50px !important;
                             padding: 0 !important;
                             text-align: center;
+                        }
+                        .tf_input-inner > div{
+                            color: #27333f;
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 150%;
                         }
                         .tf_acrselection-wrap{
                             left: 0;
