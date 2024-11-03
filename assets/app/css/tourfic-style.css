@@ -3261,15 +3261,37 @@ div#tf-destinationautocomplete-list div:before {
     padding: 15px 32px;
   }
 }
+@media only screen and (max-width: 991.98px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody {
+    flex-wrap: wrap;
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .autocomplete-items {
+    top: 47px !important;
+  }
+}
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields {
   width: calc(100% - 172px);
   padding: 24px 32px;
+}
+@media only screen and (max-width: 991.98px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields {
+    width: 100%;
+    padding: 24px;
+  }
 }
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_destination_fields {
   padding: 0 16px;
 }
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_destination_fields:first-child {
   padding-left: 0px;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_destination_fields {
+    margin-bottom: 10px;
+    padding: 0;
+  }
 }
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_destination_fields .tf_form_inners {
   position: relative;
@@ -3281,6 +3303,13 @@ div#tf-destinationautocomplete-list div:before {
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_checkin_date:last-child {
   padding-right: 0px;
   border-right: 0px solid;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_checkin_date {
+    padding: 0;
+    width: 100%;
+    border-right: 0px solid;
+  }
 }
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf_form_inners {
   display: flex;
@@ -3314,6 +3343,16 @@ div#tf-destinationautocomplete-list div:before {
 }
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_availability_checker_box {
   width: 172px;
+}
+@media only screen and (max-width: 991.98px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_availability_checker_box {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 991.98px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_availability_checker_box button {
+    padding: 15px 32px;
+  }
 }
 
 .tf_tf_booking-widget-wrap {

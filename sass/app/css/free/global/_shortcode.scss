@@ -854,13 +854,29 @@ div#tf-destinationautocomplete-list {
         }
         &#tf_car_booking{
             .tf_form_innerbody{
+                @media #{$max991}{
+                    flex-wrap: wrap;
+                }
+                .autocomplete-items {
+                    @media #{$max767}{
+                        top: 47px !important;
+                    }
+                }
                 .tf_form_fields{
                     width: calc(100% - 172px);
                     padding: 24px 32px;
+                    @media #{$max991}{
+                        width: 100%;
+                        padding: 24px;
+                    }
                     .tf_destination_fields{
                         padding: 0 16px;
                         &:first-child{
                             padding-left: 0px;
+                        }
+                        @media #{$max767}{
+                            margin-bottom: 10px;
+                            padding: 0;
                         }
                         .tf_form_inners{
                             position: relative;
@@ -871,6 +887,11 @@ div#tf-destinationautocomplete-list {
                         padding: 0 16px;
                         &:last-child{
                             padding-right: 0px;
+                            border-right: 0px solid;
+                        }
+                        @media #{$max767}{
+                            padding: 0;
+                            width: 100%;
                             border-right: 0px solid;
                         }
                         .tf_form_inners{
@@ -907,6 +928,14 @@ div#tf-destinationautocomplete-list {
                 }
                 .tf_availability_checker_box{
                     width: 172px;
+                    @media #{$max991}{
+                        width: 100%;
+                    }
+                    button{
+                        @media #{$max991}{
+                            padding: 15px 32px;
+                        }
+                    }
                 }
             }
         }
