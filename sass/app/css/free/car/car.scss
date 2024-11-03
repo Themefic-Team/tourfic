@@ -829,7 +829,9 @@
                 i{
                     color: #566676;
                 }
-                
+                .tf-flex{
+                    flex-wrap: nowrap;
+                }
                 .info-select{
                     width: 100%;
                     position: relative;
@@ -920,7 +922,7 @@
                         }
                     }
                     .tf_selectperson-wrap{
-                        padding: 7px 0px;
+                        padding: 7px 0px !important;
                         border: 0px solid;
                         input{
                             width: 50px !important;

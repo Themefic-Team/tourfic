@@ -2401,6 +2401,11 @@ a.page-numbers {
   gap: 8px;
   justify-content: center;
 }
+@media only screen and (max-width: 767.98px) {
+  .tf-booking-form-tab.design-3 {
+    display: none;
+  }
+}
 .tf-booking-form-tab.design-3 .btn-styled {
   border-radius: 6px !important;
   background: #FFF !important;
@@ -17062,6 +17067,9 @@ html {
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date i {
   color: #566676;
 }
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .tf-flex {
+  flex-wrap: nowrap;
+}
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select {
   width: 100%;
   position: relative;
@@ -17150,7 +17158,7 @@ html {
   background-color: #F8FAFC;
 }
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap {
-  padding: 7px 0px;
+  padding: 7px 0px !important;
   border: 0px solid;
 }
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap input {
