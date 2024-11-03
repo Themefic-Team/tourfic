@@ -510,7 +510,10 @@ if ( ! function_exists( 'tf_car_search_ajax_callback' ) ) {
 
 function tf_getBestRefundPolicy($cancellations, $pickup_date, $pickup_time) {
     $bestPolicy = null;
-    $timezone = new DateTimeZone('Asia/Dhaka');
+
+	$tf_default_time_zone = ! empty( Helper::tfopt( 'cancellation_time_zone' ) ) ? Helper::tfopt( 'cancellation_time_zone' ) : 'America/New_York';
+	$timezone = new DateTimeZone($tf_default_time_zone);
+
 	$today = new DateTime('now', $timezone);
 	$pickupDateTime = DateTime::createFromFormat('Y/m/d H:i', $pickup_date . ' ' . $pickup_time, $timezone);
 
@@ -583,7 +586,9 @@ function tf_car_booking_pupup_callback() {
 
 	$bestRefundPolicy = tf_getBestRefundPolicy($car_calcellation_policy, $pickup_date, $pickup_time);
 
-	$timezone = new DateTimeZone('Asia/Dhaka');
+	$tf_default_time_zone = ! empty( Helper::tfopt( 'cancellation_time_zone' ) ) ? Helper::tfopt( 'cancellation_time_zone' ) : 'America/New_York';
+	$timezone = new DateTimeZone($tf_default_time_zone);
+
 	$today = new DateTime('now', $timezone);
 
 	$less_current_day = false;
