@@ -346,8 +346,15 @@ abstract class Enquiry {
 			</div>
 			<!-- Header Wrap - End -->
 			 <!-- Back Button - Start -->
-			<div class="tf-enquiry-single-back-button">
-				<a href="<?php echo esc_url(admin_url('edit.php?post_type=' . $data["post_type"] . '&page=' . $data["post_type"] . '_enquiry')); ?>" class="tf-enquiry-back-btn"><i class="ri-arrow-left-line"></i><?php esc_html_e('Back', 'tourfic'); ?></a>
+			<div class="tf-single-enquiry-header-buttons">
+				<div class="tf-enquiry-single-back-button">
+					<a href="<?php echo esc_url(admin_url('edit.php?post_type=' . $data["post_type"] . '&page=' . $data["post_type"] . '_enquiry')); ?>" class="tf-enquiry-back-btn"><i class="ri-arrow-left-line"></i><?php esc_html_e('Back', 'tourfic'); ?></a>
+				</div>
+				<?php if( is_plugin_active( 'tourfic-email-piping/tourfic-email-piping.php' ) ) : ?>
+					<div class="tf-enquiry-single-back-button tf-enquiry-single-sync">
+						<div class="tf-enquiry-single-sync-button" data-button-name="tf-enquiry-single-sysnc-button"><?php echo esc_html__("Sync Mail", 'tourfic'); ?></div>
+					</div>
+				<?php endif; ?>
 			</div>
 			<!-- Back Button - End -->
 			<!-- Enquiry Details - Start -->

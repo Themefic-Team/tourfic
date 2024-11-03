@@ -2,6 +2,7 @@
     "use strict",
 
     $(document).ready(function() {
+
         $("input[id='tf_settings[tf-email-piping][gmail_auth_origin]']").val(tfep_vars.site_url)
         $("input[id='tf_settings[tf-email-piping][gmail_redirect_url]']").val(tfep_vars.redirect_url)
 
@@ -34,7 +35,8 @@
                         password: password,
                         server: server,
                         connection_type: connection_type,
-                        connection_port: connection_port
+                        connection_port: connection_port,
+                        _nonce: tfep_vars.tfep_nonce
                     },
                     beforeSend: function() {
                         $("#tfep-test-connection").addClass("tf-btn-loading");
@@ -63,7 +65,8 @@
                         action: "tfep_test_gmail_connection",
                         email: gmail_address,
                         client_id: gmail_client_id,
-                        client_secret: gmail_secret
+                        client_secret: gmail_secret,
+                        _nonce: tfep_vars.tfep_nonce
                     },
                     beforeSend: function() {
                         $("#tfep-test-connection").addClass("tf-btn-loading");
@@ -76,6 +79,54 @@
 
                         } else if( response.status == "error") {
                             $(".tfep-connection-result").addClass("connection-failed").html(response.message);
+                        }
+                    }
+                });
+            }
+        });
+
+        $(".tf-enquiry-single-sync").on("click", function(e) {
+            let $this = $(this);
+            let type = tfep_vars.tfep_connection_type
+
+            if (type == "imap") {
+
+                $.ajax({
+                    url: tfep_vars.ajax_url,
+                    type: "POST",
+                    data: {
+                        action: "tfep_single_imap_sync",
+                        _nonce: tfep_vars.tfep_nonce,
+                    },
+                    beforeSend: function() {
+                        $this.addClass("tf-btn-loading");
+                    },
+                    success: function(response) {
+                        $this.removeClass("tf-btn-loading");
+                        if(response.status == "success") {
+                            window.location.reload();
+                        } else if( response.status == "error") {
+                            alert(response.message);
+                        }
+                    }
+                });
+            } else if (type == "gmail") {
+                $.ajax({
+                    url: tfep_vars.ajax_url,
+                    type: "POST",
+                    data: {
+                        action: "tfep_single_gmail_sync",
+                        _nonce: tfep_vars.tfep_nonce,
+                    },
+                    beforeSend: function() {
+                        $this.addClass("tf-btn-loading");
+                    },
+                    success: function(response) {
+                        $this.removeClass("tf-btn-loading");
+                        if(response.status == "success") {
+                            window.location.reload();
+                        } else if( response.status == "error") {
+                            alert(response.message);
                         }
                     }
                 });
