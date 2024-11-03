@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.6
-Stable tag: 2.13.13
+Stable tag: 2.13.14
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -321,6 +321,15 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.13.14 - 30 October 2024 =
+
+- Improvement: Added new search queries for external booking
+- Improvement: Option to change the search tab title on Elementor widgets
+- Improvement: Added new arguments for the search form in the Shortcode Generator
+- Improvement: New arguments for the search form Shortcode hotel_tab_title, tour_tab_title, apartment_tab_title
+- Compatibility: Tourfic Direct Checkout now compatible with Instantio Plugin
+- Fix: Resolved calendar issue in Design 2 of the apartment search form
 
 = 2.13.13 - 23 October 2024 =
 
