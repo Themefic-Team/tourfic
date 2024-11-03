@@ -7,6 +7,7 @@ use Tourfic\Classes\Tour\Tour;
 use \Tourfic\Classes\Apartment\Apartment;
 use \Tourfic\Classes\Hotel\Hotel;
 use \Tourfic\App\TF_Review;
+use \Tourfic\Admin\Emails\TF_Handle_Emails;
 use Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
 use Tourfic\Classes\Tour\Pricing as Tour_Pricing;
 use Tourfic\Classes\Hotel\Pricing as Hotel_Pricing;
