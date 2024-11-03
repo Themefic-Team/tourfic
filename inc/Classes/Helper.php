@@ -24,12 +24,11 @@ class Helper {
 		add_action( 'wp_ajax_nopriv_tf_checkout_cart_item_remove', array( $this, 'tf_checkout_cart_item_remove' ) );
 		add_filter( 'woocommerce_cart_item_subtotal', array( $this, 'tf_remove_icon_add_to_order_item' ), 10, 3 );
 		add_action( 'wp_ajax_tf_month_reports', array( $this, 'tf_month_chart_filter_callback' ) );
-		add_action( 'wp_ajax_nopriv_tf_trigger_tax_filter', array( $this, 'tf_trigger_tax_filter_callback' ) );
-		add_action( 'wp_ajax_tf_trigger_tax_filter', array( $this, 'tf_trigger_tax_filter_callback' ) );
 
 		// tax filter
 		add_action( 'wp_ajax_nopriv_tf_trigger_filter', array( $this, 'tf_search_result_ajax_sidebar' ) );
 		add_action( 'wp_ajax_tf_trigger_filter', array( $this, 'tf_search_result_ajax_sidebar' ) );
+    
 
 		add_action( 'admin_init', array( $this, 'tf_admin_role_caps' ), 999 );
         if ( Helper::tf_is_woo_active() ) {
@@ -66,11 +65,11 @@ class Helper {
 		add_action( 'admin_bar_menu', array( $this, 'tf_admin_bar_dashboard_link' ), 999 );
 
 		// redirect non admin user
-		add_action( 'admin_init', array( $this, 'redirect_non_admin_users' ), 9 );
+		// add_action( 'admin_init', array( $this, 'redirect_non_admin_users' ), 9 );
 		add_action( 'admin_init', array( $this, 'tourfic_check_instantio_active' ), 9 );
         add_action( 'tf_before_container', array( $this, 'tourfic_notice_wrapper' ), 10 );
 	}
-
+    
 	static function tfopt( $option = '', $default = null ) {
 		$options = get_option( 'tf_settings' );
 
@@ -2053,11 +2052,5 @@ class Helper {
 				return;
 			}
 		}
-	}
-
-	static function tf_var_dump( $var ) {
-		echo '<pre>';
-		var_dump( $var );
-		echo '</pre>';
 	}
 }

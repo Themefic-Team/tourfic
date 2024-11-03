@@ -29,6 +29,19 @@
 					<div class="tf-list-grid">
 		                <a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
 		                <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
+						<div class="tf-sorting-selection-warper">
+                            <form class="tf-archive-ordering" method="get">
+                                <select class="tf-orderby" name="tf-orderby" id="tf-orderby">
+                                    <option value="default"><?php echo esc_html__( 'Default Sorting', 'tourfic' ); ?></option>
+                                    <option value="enquiry"><?php echo esc_html__( 'Sort By Recommended', 'tourfic' ); ?></option>
+                                    <option value="order"><?php echo esc_html__( 'Sort By Popularity', 'tourfic' ); ?></option>
+                                    <option value="rating"><?php echo esc_html__( 'Sort By Average Rating', 'tourfic' ); ?></option>
+                                    <option value="latest"><?php echo esc_html__( 'Sort By Latest', 'tourfic' ); ?></option>
+                                    <option value="price-high"><?php echo esc_html__( 'Sort By Price: High to Low', 'tourfic' ); ?></option>
+                                    <option value="price-low"><?php echo esc_html__( 'Sort By Price: Low to High', 'tourfic' ); ?></option>
+                                </select>
+                            </form>
+                        </div>
 		            </div>
 		        </div>
 				<?php do_action("tf_apartment_archive_card_items_before"); ?>

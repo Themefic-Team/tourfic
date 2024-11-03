@@ -647,11 +647,14 @@ class Enqueue {
 			'tourfic-vendor_page_tf_vendor_commissions',
 			'tourfic-vendor_page_tf_vendor_withdraw',
 			'tf_hotel_page_tf-hotel-backend-booking',
+			'tf_hotel_page_tf_hotel_enquiry',
 			'tf_tours_page_tf-tour-backend-booking',
+			'tf_tours_page_tf_tours_enquiry',
 			'tf_tours_page_tf_tours_booking',
 			'tf_hotel_page_tf_hotel_booking',
 			'tf_apartment_page_tf_apartment_booking',
 			'tf_apartment_page_tf-apartment-backend-booking',
+			'tf_apartment_page_tf_apartment_enquiry',
 			'tourfic-settings_page_tf-setup-wizard'
 		);
 		$tf_options_post_type        = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_email_templates', 'tf_room' );
@@ -892,11 +895,12 @@ class Enqueue {
 					'installed'                        => esc_html__( 'Installed', 'tourfic' ),
 					'activated'                        => esc_html__( 'Activated', 'tourfic' ),
 					'install_failed'                   => esc_html__( 'Install failed', 'tourfic' ),
-					'setting_search_no_result'                   => esc_html__( 'No result found!', 'tourfic' ),
+					'setting_search_no_result'         => esc_html__( 'No result found!', 'tourfic' ),
 					/* translators: %s: strong tag */
 					'max_input_vars_notice'            => sprintf( esc_html__( 'WARNING: If you are having trouble saving your settings, please increase the %1$s "PHP Max Input Vars" %2$s value to save all settings.', 'tourfic' ), '<strong>', '</strong>' ),
 					'is_woo_not_active'                => ( ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) || ! is_plugin_active( 'woocommerce/woocommerce.php' ) ),
 					'date_format_change_backend'       => $date_format_change,
+					'no_data_found_with_id'            => esc_html__( 'No results found, with this ID', 'tourfic' ),
 					'i18n'                             => array(
 						'no_services_selected' => esc_html__( 'Please select at least one service.', 'tourfic' ),
 					),

@@ -31,6 +31,7 @@ if ( ! class_exists( 'TF_text' ) ) {
 						<?php foreach ( $this->field['tabs'] as $key => $value ): ?>
                             <div class="tf-tab-item-content <?php echo $key == 0 ? "show" : '' ?>" data-tab-id="<?php echo isset( $value['id'] ) ? esc_attr( $value['id'] ) : '' ?>">
 								<?php
+								$parent_id = !empty( $value['id'] ) ? $value['id'] : '';
 								
 								foreach ( $value['fields'] as $key => $field ) {
 									
@@ -60,6 +61,7 @@ if ( ! class_exists( 'TF_text' ) ) {
 									$tf_option->field( $field, $value, $this->settings_id, $parent );
 								}
 								?>
+								<?php do_action("tf-" . $parent_id . '-after-tab-content') ?>
                             </div>
 						<?php endforeach; ?>
 					<?php endif; ?>

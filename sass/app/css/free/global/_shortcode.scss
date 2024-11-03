@@ -898,6 +898,7 @@ div.tf-aq-inner {
             font-size: 24px;
             font-style: normal;
             font-weight: 500;
+            margin: 0px !important;
             line-height: 120%;
         }
     }
@@ -942,9 +943,23 @@ div.tf-aq-inner {
     }
 
     input, textarea {
-        max-width: 100%;
-        border-radius: 4px !important;
-        border: 1px solid #C0CCD8;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 12px 16px;
+        background-color: #fff;
+        color: $slate60;
+        font-size: 16px;
+        font-weight: 400;
+        transition: all 0.3s ease-in-out;
+
+        &:focus{
+            outline: none;
+            border-color: $blue60;
+        }
+    }
+
+    textarea{
+        height: 120px;
     }
 
     input::placeholder, textarea::placeholder {
