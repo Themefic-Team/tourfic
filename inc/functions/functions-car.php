@@ -584,6 +584,9 @@ function tf_car_booking_pupup_callback() {
 	$pickup_date = ! empty( $_POST['pickup_date'] ) ? $_POST['pickup_date'] : '';
 	$pickup_time = ! empty( $_POST['pickup_time'] ) ? $_POST['pickup_time'] : '';
 
+	$dropoff_date = ! empty( $_POST['dropoff_date'] ) ? $_POST['dropoff_date'] : '';
+	$dropoff_time = ! empty( $_POST['dropoff_time'] ) ? $_POST['dropoff_time'] : '';
+
 	$bestRefundPolicy = tf_getBestRefundPolicy($car_calcellation_policy, $pickup_date, $pickup_time);
 
 	$tf_default_time_zone = ! empty( Helper::tfopt( 'cancellation_time_zone' ) ) ? Helper::tfopt( 'cancellation_time_zone' ) : 'America/New_York';
@@ -662,9 +665,29 @@ function tf_car_booking_pupup_callback() {
 					foreach($car_protections as $pkey => $protection){ ?>
 					<tr>
 						<th>
+							<?php
+							if( 'day' == $protection['price_by'] ){
+								// Combine date and time
+								$pickup_datetime = new \DateTime("$pickup_date $pickup_time");
+								$dropoff_datetime = new \DateTime("$dropoff_date $dropoff_time");
+				
+								// Calculate the difference
+								$interval = $pickup_datetime->diff($dropoff_datetime);
+				
+								// Get total days
+								$total_days = $interval->days;
+											
+								// If there are leftover hours that count as a partial day
+								if ($interval->h > 0 || $interval->i > 0) {
+									$total_days += 1;  // Add an extra day for any remaining hours
+								}
+							}else{
+								$total_days = 1;
+							}
+							?>
 							<div class="tf-flex tf-flex-align-center">
 								<div class="tf-protection-select">
-									<input id="tf_single_protection_price" type="hidden" value="<?php echo !empty($protection['price']) ? esc_attr($protection['price']) : 0; ?> ">
+									<input id="tf_single_protection_price" type="hidden" value="<?php echo !empty($protection['price']) ? esc_attr($protection['price'] * $total_days) : 0; ?> ">
 									<label>
 										<input type="checkbox" class="protection-checkbox" name="protections[]" value="<?php echo esc_attr($pkey); ?>">
 										<span class="checkmark"></span>
