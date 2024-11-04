@@ -352,6 +352,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'dependency'  => [
 						array( 'driver_included', '==', 'true' )
 					],
+					'is_search_able' => true,
 				),
 				array(
 					'id'          => 'driver_address',

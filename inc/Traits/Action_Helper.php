@@ -672,6 +672,7 @@ trait Action_Helper {
 		if(!empty($tf_dropoff_same_location)){
 			$dropoff = $pickup;
 		}
+		$tf_driver_age  = isset( $_POST['driver_age'] ) ? sanitize_text_field( $_POST['driver_age'] ) : '';
 		
 		$category = ( $_POST['category'] ) ? explode( ',', sanitize_text_field( $_POST['category'] ) ) : null;
 		$fuel_type = ( $_POST['fuel_type'] ) ? explode( ',', sanitize_text_field( $_POST['fuel_type'] ) ) : null;
@@ -985,6 +986,17 @@ trait Action_Helper {
 				array(
 					'key' => 'tf_search_car_rent',
 					'value'    => [$tf_startprice, $tf_endprice],
+					'compare'    => 'BETWEEN',
+					'type' => 'DECIMAL(10,3)'
+				),
+			);
+		}
+
+		if(!empty($tf_driver_age) && 'on'==$tf_driver_age && $posttype == 'tf_carrental'){
+			$args['meta_query'] = array(
+				array(
+					'key' => 'tf_search_driver_age',
+					'value'    => [18, 40],
 					'compare'    => 'BETWEEN',
 					'type' => 'DECIMAL(10,3)'
 				),
