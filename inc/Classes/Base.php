@@ -90,7 +90,7 @@ class Base {
 		}
 		if ( Helper::tfopt( 'disable-services' ) && in_array( 'carrentals', Helper::tfopt( 'disable-services' ) ) ) {
 		} else {
-			 \Tourfic\Classes\Car_Rental\Car_Rental_CPT::instance();
+			 \Tourfic\Classes\Car_Rental\Car_Rental::instance();
 		}
 
 		\Tourfic\Admin\Emails\TF_Handle_Emails::instance();

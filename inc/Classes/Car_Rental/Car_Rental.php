@@ -11,9 +11,34 @@ class Car_Rental {
 	use \Tourfic\Traits\Singleton;
 
 	public function __construct() {
+        add_action( 'wp_after_insert_post', array( $this, 'tf_car_assign_inline_taxonomies' ), 100, 3 );
 
+        // Car CPT
+        Car_Rental_CPT::instance();
     }
 
+
+    function tf_car_assign_inline_taxonomies( $post_id, $post, $old_status ) {
+		if ( 'tf_carrental' !== $post->post_type ) {
+			return;
+		}
+		$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
+		if ( isset( $meta['brands'] ) && ! empty( $meta['brands'] ) ) {
+            $car_brands = array();
+            $car_brands[] = intval( $meta['brands'] );
+			wp_set_object_terms( $post_id, $car_brands, 'carrental_brand' );
+		}
+        if ( isset( $meta['fuel_types'] ) && ! empty( $meta['fuel_types'] ) ) {
+            $car_fuel_types = array();
+            $car_fuel_types[] = intval( $meta['fuel_types'] );
+			wp_set_object_terms( $post_id, $car_fuel_types, 'carrental_fuel_type' );
+		}
+        if ( isset( $meta['engine_year'] ) && ! empty( $meta['engine_year'] ) ) {
+            $car_engine_year = array();
+            $car_engine_year[] = intval( $meta['engine_year'] );
+			wp_set_object_terms( $post_id, $car_engine_year, 'carrental_engine_year' );
+		}
+	}
 
     /**
      * Car Search form

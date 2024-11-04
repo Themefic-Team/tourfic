@@ -157,7 +157,7 @@ abstract class Post_Type {
 				'publicly_queryable'    => true,
 				'hierarchical'          => true,
 				'show_ui'               => true,
-				'show_in_menu'          => true,
+				'show_in_menu'          => $tax_args['show_in_menu'],
 				'show_in_nav_menus'     => true,
 				'query_var'             => true,
 				'rewrite'               => array( 'slug' => $tax_args['rewrite_slug'], 'with_front' => false ),

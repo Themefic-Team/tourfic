@@ -38,6 +38,7 @@ class Tour_CPT extends \Tourfic\Core\Post_Type {
 					'assign_terms' => 'edit_tf_tours',
 					'edit_terms'   => 'edit_tf_tours',
 				),
+				'show_in_menu' => true
 			),
 			array(
 				'name'          => esc_html__( 'Attractions', 'tourfic' ),
@@ -48,6 +49,7 @@ class Tour_CPT extends \Tourfic\Core\Post_Type {
 					'assign_terms' => 'edit_tf_tours',
 					'edit_terms'   => 'edit_tf_tours',
 				),
+				'show_in_menu' => true
 			),
 			array(
 				'name'          => esc_html__( 'Activities', 'tourfic' ),
@@ -58,6 +60,7 @@ class Tour_CPT extends \Tourfic\Core\Post_Type {
 					'assign_terms' => 'edit_tf_tours',
 					'edit_terms'   => 'edit_tf_tours',
 				),
+				'show_in_menu' => true
 			),
 			array(
 				'name'          => esc_html__( 'Features', 'tourfic' ),
@@ -68,6 +71,7 @@ class Tour_CPT extends \Tourfic\Core\Post_Type {
 					'assign_terms' => 'edit_tf_tours',
 					'edit_terms'   => 'edit_tf_tours',
 				),
+				'show_in_menu' => true
 			),
 			array(
 				'name'          => esc_html__( 'Types', 'tourfic' ),
@@ -78,6 +82,7 @@ class Tour_CPT extends \Tourfic\Core\Post_Type {
 					'assign_terms' => 'edit_tf_tours',
 					'edit_terms'   => 'edit_tf_tours',
 				),
+				'show_in_menu' => true
 			)
 		) );
 

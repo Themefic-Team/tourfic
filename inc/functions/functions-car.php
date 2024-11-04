@@ -809,6 +809,8 @@ function tf_car_booking_pupup_callback() {
 add_action("admin_init", "tf_remove_sidebar_category_meta_box");
 function tf_remove_sidebar_category_meta_box() {
 	remove_meta_box( 'carrental_branddiv', array( 'tf_carrental' ), 'normal' );
+	remove_meta_box( 'carrental_fuel_typediv', array( 'tf_carrental' ), 'normal' );
+	remove_meta_box( 'carrental_engine_yeardiv', array( 'tf_carrental' ), 'normal' );
 }
 
 add_action( 'wp_ajax_nopriv_tf_car_price_calculation', 'tf_car_price_calculation_callback' );
