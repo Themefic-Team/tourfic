@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.6
-Stable tag: 2.13.15
+Stable tag: 2.14.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -326,9 +326,11 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 = 2.14.0 - 05 November 2024 =
 
-- New Addon: Tourfic Email Piping – Manage customer inquiries with this new addon.
-- Improvement: Improved sorting on the Archive Page.
-- Improvement: Updated design for the Tourfic Ask Question Popup.
+New Addon: Tourfic Email Piping – Easily manage customer inquiries (Pro).
+Improvement: Enhanced sorting functionality on the Archive Page.
+Improvement: Redesigned Tourfic Ask Question popup.
+Improvement: Streamlined Enquiry Details design.
+Improvement: Direct reply option for inquiries (Pro).
 
 = 2.13.14 - 30 October 2024 =
 
