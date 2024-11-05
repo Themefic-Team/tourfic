@@ -326,11 +326,11 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 = 2.14.0 - 05 November 2024 =
 
-New Addon: Tourfic Email Piping – Easily manage customer inquiries (Pro).
-Improvement: Enhanced sorting functionality on the Archive Page.
-Improvement: Redesigned Tourfic Ask Question popup.
-Improvement: Streamlined Enquiry Details design.
-Improvement: Direct reply option for inquiries (Pro).
+- New Addon: Tourfic Email Piping – Easily manage customer Enquiry (Pro).
+- Improvement: Enhanced sorting functionality on the Archive Page.
+- Improvement: Redesigned Tourfic Ask Question popup.
+- Improvement: Streamlined Enquiry Details design.
+- Improvement: Direct reply option for Enquiry (Pro).
 
 = 2.13.14 - 30 October 2024 =
 
