@@ -17469,6 +17469,7 @@ html {
   font-style: normal;
   font-weight: 600 !important;
   line-height: 120%; /* 33.6px */
+  margin-bottom: 10px;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-title .breadcrumb ul {
   margin: 0;
