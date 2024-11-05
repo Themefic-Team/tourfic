@@ -230,6 +230,19 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 								</svg>
 							</div>
 						</div>
+						<div class="tf-sorting-selection-warper">
+                            <form class="tf-archive-ordering" method="get">
+                                <select class="tf-orderby" name="tf-orderby" id="tf-orderby">
+                                    <option value="default">Default Sorting</option>
+                                    <option value="enquiry">Sort By Recommended</option>
+                                    <option value="order">Sort By Popularity</option>
+                                    <option value="rating">Sort By Average Rating</option>
+                                    <option value="latest">Sort By Latest</option>
+                                    <option value="price-high">Sort By Price: High to Low</option>
+                                    <option value="price-low">Sort By Price: Low to High</option>
+                                </select>
+                            </form>
+                        </div>
 					</div>
 				</div>
 				<!-- Loader Image -->
@@ -438,19 +451,31 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 
 			<div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
 				<div class="tf-archive-available-rooms-head tf-available-rooms-head">
-					<?php if($post_type == "tf_hotel"){ ?>
-						<span class="tf-total-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html( $total_posts ); ?></span>
-				<?php if($post_type == "tf_hotel"){
-					esc_html_e("hotels available", "tourfic");
-				}elseif($post_type == "tf_apartment"){
-					esc_html_e("apartments available", "tourfic");
-				}else{
-					esc_html_e("tours available", "tourfic");
-				} ?>
-				</span>
-					<?php } ?>
+					<span class="tf-total-results">
+							<?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html( $total_posts ); ?></span>
+						<?php if($post_type == "tf_hotel"){
+							esc_html_e("hotels available", "tourfic");
+						}elseif($post_type == "tf_apartment"){
+							esc_html_e("apartments available", "tourfic");
+						}else{
+							esc_html_e("tours available", "tourfic");
+						} ?>
+					</span>
 					<div class="tf-archive-filter-showing">
 						<i class="ri-equalizer-line"></i>
+					</div>
+					<div class="tf-sorting-selection-warper">
+						<form class="tf-archive-ordering" method="get">
+							<select class="tf-orderby" name="tf-orderby" id="tf-orderby">
+								<option value="default"><?php echo esc_html__( 'Default Sorting', 'tourfic' ); ?></option>
+								<option value="enquiry"><?php echo esc_html__( 'Sort By Recommended', 'tourfic' ); ?></option>
+								<option value="order"><?php echo esc_html__( 'Sort By Popularity', 'tourfic' ); ?></option>
+								<option value="rating"><?php echo esc_html__( 'Sort By Average Rating', 'tourfic' ); ?></option>
+								<option value="latest"><?php echo esc_html__( 'Sort By Latest', 'tourfic' ); ?></option>
+								<option value="price-high"><?php echo esc_html__( 'Sort By Price: High to Low', 'tourfic' ); ?></option>
+								<option value="price-low"><?php echo esc_html__( 'Sort By Price: Low to High', 'tourfic' ); ?></option>
+							</select>
+						</form>
 					</div>
 				</div>
 
@@ -673,6 +698,19 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 					<div class="tf-list-grid">
 						<a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e( 'List View', 'tourfic' ); ?>"><i class="fas fa-list"></i></a>
 						<a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e( 'Grid View', 'tourfic' ); ?>"><i class="fas fa-border-all"></i></a>
+						<div class="tf-sorting-selection-warper">
+                            <form class="tf-archive-ordering" method="get">
+                                <select class="tf-orderby" name="tf-orderby" id="tf-orderby">
+                                    <option value="default"><?php echo esc_html__( 'Default Sorting', 'tourfic' ); ?></option>
+                                    <option value="enquiry"><?php echo esc_html__( 'Sort By Recommended', 'tourfic' ); ?></option>
+                                    <option value="order"><?php echo esc_html__( 'Sort By Popularity', 'tourfic' ); ?></option>
+                                    <option value="rating"><?php echo esc_html__( 'Sort By Average Rating', 'tourfic' ); ?></option>
+                                    <option value="latest"><?php echo esc_html__( 'Sort By Latest', 'tourfic' ); ?></option>
+                                    <option value="price-high"><?php echo esc_html__( 'Sort By Price: High to Low', 'tourfic' ); ?></option>
+                                    <option value="price-low"><?php echo esc_html__( 'Sort By Price: Low to High', 'tourfic' ); ?></option>
+                                </select>
+                            </form>
+                        </div>
 					</div>
 				</div>
 				<div class="archive_ajax_result <?php echo $tf_defult_views=="grid" ? esc_attr('tours-grid') : '' ?>">

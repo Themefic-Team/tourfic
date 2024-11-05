@@ -2164,9 +2164,20 @@ a.page-numbers {
   margin-right: 5px;
 }
 
+@media (max-width: 544px) {
+  .tf-action-top {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .tf-action-top .tf-result-counter-info {
+    margin-top: 10px;
+  }
+}
+
 .tf-list-grid {
   display: flex;
   align-items: center;
+  gap: 12px;
 }
 
 .tf-list-grid a {
@@ -2174,6 +2185,14 @@ a.page-numbers {
   margin-left: 10px;
   font-size: 20px;
   text-decoration: none;
+}
+
+.tf-list-grid .tf-archive-ordering #tf-orderby {
+  height: 100%;
+  padding: 10px 30px 10px 10px;
+  background-position: calc(100% - 8px) 54%;
+  border-radius: 4px;
+  background-color: #F5F8FF;
 }
 
 .tf-archive-rating {
@@ -3569,6 +3588,7 @@ div.tf-aq-inner .tf-ask-question-head-content h3 {
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
+  margin: 0px !important;
   line-height: 120%;
 }
 
@@ -3612,9 +3632,23 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-aq-field input, .tf-aq-field textarea {
-  max-width: 100%;
-  border-radius: 4px !important;
-  border: 1px solid #C0CCD8;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 12px 16px;
+  background-color: #fff;
+  color: #607085;
+  font-size: 16px;
+  font-weight: 400;
+  transition: all 0.3s ease-in-out;
+}
+
+.tf-aq-field input:focus, .tf-aq-field textarea:focus {
+  outline: none;
+  border-color: #2979ff;
+}
+
+.tf-aq-field textarea {
+  height: 120px;
 }
 
 .tf-aq-field input::placeholder, .tf-aq-field textarea::placeholder {
@@ -9400,6 +9434,10 @@ div#tf-contact-info {
   margin-bottom: 0;
 }
 
+div.tf-aq-inner .tf-ask-question-head-content h3 {
+  margin: 0px;
+}
+
 .tf-template-global {
   background-color: inherit;
   padding: 60px 0px;
@@ -11191,13 +11229,37 @@ div#tf-contact-info {
   }
 }
 
+@media only screen and (max-width: 480px) {
+  .tf-archive-head {
+    gap: 12px;
+  }
+}
+
 .tf-archive-head .tf-search-result {
   color: #060D1C;
+}
+
+.tf-archive-head .tf-search-layout .tf-sorting-selection-warper select {
+  height: 100%;
+  border-radius: 5px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 14px 36px 14px 14px;
+  background-position: calc(100% - 12px) 50%;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  box-sizing: border-box;
+  border: 1px solid #e0e8ee;
+  background-color: #fff;
 }
 
 .tf-archive-head .tf-icon {
   background-color: #fff;
   border-radius: 5px;
+  border: 1px solid #e0e8ee;
 }
 
 .tf-archive-head .tf-icon:hover {
@@ -13839,6 +13901,8 @@ html {
 @media only screen and (max-width: 991.98px) {
   .tf-template-3 .tf-available-rooms-wrapper .tf-available-rooms-head {
     margin-bottom: 16px;
+    flex-direction: column;
+    gap: 16px;
   }
 }
 
@@ -14528,6 +14592,31 @@ html {
   gap: 10px;
   color: #fff;
   padding: 12px 16px;
+}
+
+.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering #tf-orderby {
+  background-color: #FDF9F3;
+  color: #595349;
+  padding: 15px 36px 15px 15px;
+  height: 100%;
+  background-position: calc(100% - 12px) 50%;
+  border: none;
+  border-radius: 0px;
+  font-size: 16px;
+  background-size: 16px;
+  appearance: auto;
+}
+
+.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering #tf-orderby:focus-visible {
+  outline: none;
+}
+
+@media only screen and (max-width: 991.98px) {
+  .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering #tf-orderby {
+    font-size: 14px;
+    padding: 10px 36px 10px 10px;
+    background-size: 14px;
+  }
 }
 
 .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room {

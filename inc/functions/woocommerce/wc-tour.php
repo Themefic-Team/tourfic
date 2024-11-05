@@ -855,6 +855,7 @@ function tf_tours_booking_function() {
 					'{id}' => $post_id,
 					'{title}' => urlencode(get_the_title($post_id)),
 					'{extras}' => sanitize_text_field($_POST["tour_extra"]),
+					'{extras_title}' => urlencode(html_entity_decode(strip_tags($tour_extra_title))),
 				);
 
 				if( $pricing_rule == 'group' ) {

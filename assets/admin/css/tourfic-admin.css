@@ -367,7 +367,7 @@ Fontawesome
   transform: translateX(26px);
 }
 
-#tf-booking-status-loader {
+#tf-booking-status-loader, #tf-enquiry-status-loader {
   position: fixed;
   height: 100%;
   width: 100%;
@@ -381,11 +381,15 @@ Fontawesome
   visibility: hidden;
 }
 
-#tf-booking-status-loader img {
+#tf-booking-status-loader img, #tf-enquiry-status-loader img {
   width: 120px;
 }
 
-#tf-booking-status-loader.show {
+#tf-enquiry-status-loader {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+#tf-booking-status-loader.show, #tf-enquiry-status-loader.show {
   visibility: visible;
   opacity: 1;
 }
@@ -3442,7 +3446,7 @@ Steps
 
 .tf-field-ical input,
 .tf-field-ical_export input,
-.tf-field-text input {
+.tf-field-text input, .tf-field-password input {
   width: 100%;
   padding: 12px 8px 12px 12px;
   border: 1px solid #c4cbd4;
@@ -3455,7 +3459,7 @@ Steps
 
 .tf-field-ical input:focus,
 .tf-field-ical_export input:focus,
-.tf-field-text input:focus {
+.tf-field-text input:focus, .tf-field-password input:focus {
   background: #FFFFFF;
   box-shadow: 0 0 0 2px #2979ff;
   border-radius: 4px;
@@ -3463,52 +3467,52 @@ Steps
 
 .tf-field-ical input::-webkit-input-placeholder,
 .tf-field-ical_export input::-webkit-input-placeholder,
-.tf-field-text input::-webkit-input-placeholder {
+.tf-field-text input::-webkit-input-placeholder, .tf-field-password input::-webkit-input-placeholder {
   color: #a6b1bf;
 }
 
 .tf-field-ical input::-ms-input-placeholder,
 .tf-field-ical_export input::-ms-input-placeholder,
-.tf-field-text input::-ms-input-placeholder {
+.tf-field-text input::-ms-input-placeholder, .tf-field-password input::-ms-input-placeholder {
   color: #a6b1bf;
 }
 
 .tf-field-ical input input:-ms-input-placeholder,
 .tf-field-ical_export input input:-ms-input-placeholder,
-.tf-field-text input input:-ms-input-placeholder {
+.tf-field-text input input:-ms-input-placeholder, .tf-field-password input input:-ms-input-placeholder {
   color: #a6b1bf;
 }
 
 .tf-field-ical input::-moz-placeholder,
 .tf-field-ical_export input::-moz-placeholder,
-.tf-field-text input::-moz-placeholder {
+.tf-field-text input::-moz-placeholder, .tf-field-password input::-moz-placeholder {
   opacity: 1;
   color: #a6b1bf;
 }
 
 .tf-field-ical input:-moz-placeholder,
 .tf-field-ical_export input:-moz-placeholder,
-.tf-field-text input:-moz-placeholder {
+.tf-field-text input:-moz-placeholder, .tf-field-password input:-moz-placeholder {
   opacity: 1;
   color: #a6b1bf;
 }
 
 .tf-field-ical input::placeholder,
 .tf-field-ical_export input::placeholder,
-.tf-field-text input::placeholder {
+.tf-field-text input::placeholder, .tf-field-password input::placeholder {
   color: #a6b1bf;
 }
 
 .tf-field-ical input:read-only,
 .tf-field-ical_export input:read-only,
-.tf-field-text input:read-only {
+.tf-field-text input:read-only, .tf-field-password input:read-only {
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
   background-color: #ebf2ff;
 }
 
 .tf-field-ical input:read-only:focus,
 .tf-field-ical_export input:read-only:focus,
-.tf-field-text input:read-only:focus {
+.tf-field-text input:read-only:focus, .tf-field-password input:read-only:focus {
   box-shadow: none;
   border: 1px solid #c4cbd4;
 }
@@ -5234,7 +5238,7 @@ a.tf-import-btn, a.tf-export-btn {
   padding: 0;
 }
 
-.tf_booking_details_wrap .tf_booking_wrap_header .tf_header_wrap_button a.tf-booking-export-btn {
+.tf_booking_details_wrap .tf_booking_wrap_header .tf_header_wrap_button a.tf-booking-export-btn, .tf_booking_details_wrap .tf_booking_wrap_header .tf_header_wrap_button a.tf-enquiry-export-btn {
   padding: 10px 32px;
   border-radius: 8px;
   border: 1px solid #003C79;
@@ -5250,7 +5254,7 @@ a.tf-import-btn, a.tf-export-btn {
   transition: .3s all ease;
 }
 
-.tf_booking_details_wrap .tf_booking_wrap_header .tf_header_wrap_button a.tf-booking-export-btn:hover {
+.tf_booking_details_wrap .tf_booking_wrap_header .tf_header_wrap_button a.tf-booking-export-btn:hover, .tf_booking_details_wrap .tf_booking_wrap_header .tf_header_wrap_button a.tf-enquiry-export-btn:hover {
   color: #f0f0f1;
   background-color: #003C79;
 }
@@ -5412,7 +5416,29 @@ a.tf-import-btn, a.tf-export-btn {
   padding: 10px 20px;
 }
 
-.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter {
+.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-order-status-filter-reset-btn-wrapper {
+  margin-right: 16px;
+}
+
+.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-order-status-filter-reset-btn-wrapper .tf-order-status-filter-reset-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-enquiry-reset-button-text {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.25;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter, .tf_booking_details_wrap .tf-booking-header-filter .tf-enquiry-right-search-filter {
   border-radius: 8px;
   border: 1px solid #87888B;
   background: #FFF;
@@ -5423,19 +5449,19 @@ a.tf-import-btn, a.tf-export-btn {
 }
 
 @media only screen and (max-width: 1199.98px) {
-  .tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter {
+  .tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter, .tf_booking_details_wrap .tf-booking-header-filter .tf-enquiry-right-search-filter {
     display: inline-flex;
     margin-top: 16px;
   }
 }
 
 @media only screen and (max-width: 991.98px) {
-  .tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter {
+  .tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter, .tf_booking_details_wrap .tf-booking-header-filter .tf-enquiry-right-search-filter {
     display: flex;
   }
 }
 
-.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter input {
+.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter input, .tf_booking_details_wrap .tf-booking-header-filter .tf-enquiry-right-search-filter input {
   width: 100%;
   border: 0px solid;
   color: #87888B;
@@ -5449,17 +5475,17 @@ a.tf-import-btn, a.tf-export-btn {
   -moz-appearance: textfield;
 }
 
-.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter input:focus {
+.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter input:focus, .tf_booking_details_wrap .tf-booking-header-filter .tf-enquiry-right-search-filter input:focus {
   outline: none;
   box-shadow: none;
 }
 
-.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter input::-webkit-outer-spin-button, .tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter input::-webkit-inner-spin-button {
+.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter input::-webkit-outer-spin-button, .tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter input::-webkit-inner-spin-button, .tf_booking_details_wrap .tf-booking-header-filter .tf-enquiry-right-search-filter input::-webkit-outer-spin-button, .tf_booking_details_wrap .tf-booking-header-filter .tf-enquiry-right-search-filter input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter button {
+.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter button, .tf_booking_details_wrap .tf-booking-header-filter .tf-enquiry-right-search-filter button {
   cursor: pointer;
   background-color: transparent;
   border: 0px solid;
@@ -6475,6 +6501,553 @@ a.tf-import-btn, a.tf-export-btn {
   padding: 0;
   vertical-align: middle;
   max-width: 100%;
+}
+
+.tf-enquiry-table .tf-enquiry-unread th, .tf-enquiry-table .tf-enquiry-unread td {
+  background-color: #EDF2F7 !important;
+  border-bottom: 1px solid #F0F2F4 !important;
+  color: #1D2327 !important;
+  font-family: inherit !important;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+}
+
+.tf-enquiry-table .tf-enquiry-unread th .tf-checkbox-listing, .tf-enquiry-table .tf-enquiry-unread td .tf-checkbox-listing {
+  background-color: #EDF2F7 !important;
+}
+
+.tf-enquiry-table .tf-enquiry-responded th, .tf-enquiry-table .tf-enquiry-responded td {
+  color: #1D2327 !important;
+  font-family: inherit !important;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+}
+
+.tf-enquiry-table #cb {
+  width: 15%;
+  padding: 12px 24px;
+}
+
+.tf-enquiry-table #uemail {
+  width: 20%;
+  padding: 12px 24px;
+}
+
+.tf-enquiry-table #post_name {
+  width: 20%;
+  padding: 12px 24px;
+}
+
+.tf-enquiry-table #description {
+  width: 30%;
+  padding: 12px 24px;
+}
+
+.tf-enquiry-table #massage-date-time {
+  width: 15%;
+  padding: 12px 24px;
+}
+
+.tf-enquiry-table thead tr .tf-checkbox-listing {
+  gap: 12px;
+  margin: 12px 24px;
+}
+
+.tf-enquiry-table tbody .tf-enquiry-single-row {
+  cursor: pointer;
+}
+
+.tf-enquiry-table tbody .tf-enquiry-single-row .check-column .table-name-column {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tf-enquiry-table tbody .tf-enquiry-single-row .check-column .table-name-column .tf-checkbox-listing {
+  width: 18px !important;
+  justify-content: unset !important;
+  justify-self: flex-start !important;
+}
+
+.tf-enquiry-table tbody .tf-enquiry-single-row .time-n-date .email-time-date {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.tf-enquiry-table tbody .tf-enquiry-single-row .time-n-date .email-time-date .email-date {
+  color: #1D2327;
+  font-family: inherit;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.12;
+}
+
+.tf-enquiry-table tbody .tf-enquiry-single-row .time-n-date .email-time-date .email-time {
+  color: #666D74;
+  font-family: inherit;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.12;
+}
+
+.tf-enquiry-table .pro-notice-row {
+  border-top: none;
+}
+
+.tf-enquiry-table .pro-notice-row .tf-pro-notice {
+  padding: 0px 0px;
+}
+
+.tf-enquiry-table .pro-notice-row .tf-pro-notice .tf-fieldset {
+  margin-top: 0px;
+}
+
+.tf-enquiry-table .pro-notice-row .tf-pro-notice .tf-field-notice-inner {
+  justify-content: center;
+}
+
+.tf-enquiry-table .pro-notice-row .tf-pro-notice .tf-field-notice-inner a {
+  text-decoration: underline;
+  color: #295BFF;
+}
+
+.tf-enquiry-single-header-details {
+  padding: 16px 24px;
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  margin: -10px -20px 24px -20px;
+}
+
+.tf-enquiry-single-header-details img {
+  height: 100%;
+  width: 32px;
+  object-fit: contain;
+  padding: 3.2px;
+}
+
+.tf-enquiry-single-header-details h1 {
+  font-family: inherit;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.33;
+}
+
+hr.enqury-single-title-line {
+  border-color: #F0EEF6;
+  margin: 0px;
+  border-width: 0.5px;
+}
+
+.tf-single-enquiry-header-buttons {
+  margin-bottom: 24px;
+  display: flex;
+  gap: 12px;
+}
+
+.tf-single-enquiry-header-buttons .tf-enquiry-single-back-button {
+  padding: 8px 20px 8px 16px;
+  background-color: #fff;
+  max-width: 60px;
+  font-size: 15px;
+  color: #2C273F;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  border-radius: 8px;
+}
+
+.tf-single-enquiry-header-buttons .tf-enquiry-single-back-button a {
+  color: #2C273F;
+  text-decoration: none;
+}
+
+.tf-single-enquiry-header-buttons .tf-enquiry-single-back-button a i {
+  margin-right: 8px;
+}
+
+.tf-single-enquiry-header-buttons .tf-enquiry-single-back-button a:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.tf-single-enquiry-header-buttons .tf-enquiry-single-sync {
+  max-width: 120px;
+  cursor: pointer;
+  background-color: #003c79;
+  border-color: #003c79;
+  color: #fff;
+  transition: all .3s ease-in-out;
+  user-select: none;
+}
+
+.tf-single-enquiry-header-buttons .tf-enquiry-single-sync:hover {
+  background-color: #001f3e;
+  border-color: #001f3e;
+  color: #fff;
+}
+
+.tf-enquiry-single-details-wrapper {
+  display: flex;
+  gap: 24px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 60%;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details {
+  background-color: #fff;
+  padding: 16px 0px 24px 0px;
+  border-radius: 8px;
+  min-height: 286px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details h2 {
+  font-family: inherit;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  margin: 0px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-enquiry-details-single-heading {
+  padding-bottom: 16px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content {
+  display: flex;
+  gap: 24px;
+  padding-top: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
+  flex-direction: column;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-name, .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-email, .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-message {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-name .tf-single-enquiry-details-label, .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-email .tf-single-enquiry-details-label, .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-message .tf-single-enquiry-details-label {
+  color: #5D5676;
+  font-family: inherit;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-name .tf-single-enquiry-details-value, .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-email .tf-single-enquiry-details-value, .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-message .tf-single-enquiry-details-value {
+  font-family: inherit;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-name .tf-single-enquiry-details-value i, .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-email .tf-single-enquiry-details-value i, .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-message .tf-single-enquiry-details-value i {
+  margin-left: 16px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-reply-another-mail-button {
+  padding: 8px 20px;
+  background-color: #003c79;
+  border-color: #003c79;
+  border-radius: 8px;
+  align-self: self-end;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-reply-another-mail-button:hover {
+  background-color: #001f3e;
+  border-color: #001f3e;
+  color: #fff;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-reply-another-mail-button span {
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.6;
+  margin-right: 8px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-reply-another-mail-button i {
+  font-size: 16px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-mail-button {
+  padding: 8px 20px;
+  background-color: #003c79;
+  border-color: #003c79;
+  border-radius: 8px;
+  align-self: self-end;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-mail-button:hover {
+  background-color: #001f3e;
+  border-color: #001f3e;
+  color: #fff;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-mail-button span {
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.6;
+  margin-right: 8px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-mail-button i {
+  font-size: 16px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-enquiry-details-single-heading .tf-single-enquiry-reply-mail {
+  color: #2C273F;
+  font-family: inherit;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion {
+  margin-top: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item .tf-single-enquiry-accordion-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item .tf-single-enquiry-accordion-head .tf-single-enquiry-accordion-head-left {
+  font-family: inherit;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #2C273F;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item .tf-single-enquiry-accordion-head .tf-single-enquiry-accordion-head-left i {
+  margin-right: 8px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item .tf-single-enquiry-accordion-head .tf-single-enquiry-accordion-head-left .tf-enquiry-response-user {
+  display: inline-block;
+  transform: scale(-1, -1);
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item .tf-single-enquiry-accordion-head .tf-single-enquiry-accordion-head-left .tf-single-accordion-dash {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item .tf-single-enquiry-accordion-head .tf-single-enquiry-accordion-head-left .tf-single-accordion-subject {
+  color: #5D5676;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item .tf-single-enquiry-accordion-head .tf-single-enquiry-accordion-head-right {
+  color: #9089A9;
+  font-family: inherit;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item .tf-single-accordion-body {
+  margin-top: 16px;
+  color: #5D5676;
+  font-family: inherit;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.6;
+  display: none;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion hr {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  border-color: #F0EEF6;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left #tf-single-enquiry-reply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left #tf-single-enquiry-reply-form textarea {
+  height: 100px;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #E2DFED;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left #tf-single-enquiry-reply-form textarea::placeholder {
+  color: #77708F;
+  font-family: inherit;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left #tf-single-enquiry-reply-form .tf-enquiry-reply-button {
+  align-self: flex-end;
+  padding: 8px 20px;
+  background-color: #003c79;
+  border-color: #003c79;
+  color: #fff;
+  font-family: inherit;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-color: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-left #tf-single-enquiry-reply-form .tf-enquiry-reply-button:hover {
+  background-color: #001f3e;
+  border-color: #001f3e;
+  color: #fff;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-right {
+  width: 40%;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-right .tf-enquiry-single-log-details {
+  background-color: #fff;
+  padding: 16px 0px 24px 0px;
+  border-radius: 8px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-right .tf-enquiry-single-log-details .tf-singe-enquiry-log-details-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  padding-right: 24px;
+  padding-left: 24px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-right .tf-enquiry-single-log-details .tf-singe-enquiry-log-details-heading h2 {
+  font-family: inherit;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  margin: 0px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-right .tf-enquiry-single-log-details .tf-singe-enquiry-log-details-heading .enquiry-details-status {
+  padding: 4px 12px;
+  background-color: #D0F5E1;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #21A159;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-right .tf-enquiry-single-log-details .tf-single-enquiry-log-details-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 24px;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-right .tf-enquiry-single-log-details .tf-single-enquiry-log-details-content .tf-single-enquiry-log-details-single {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--UI-800, #2C273F);
+  font-family: inherit;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.tf-enquiry-single-details-wrapper .tf-single-enquiry-right .tf-enquiry-single-log-details .tf-single-enquiry-log-details-content .tf-single-enquiry-log-details-single i {
+  margin-left: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.tf-enquiry-details-wrap .tf-booking-header-filter .tf-right-search-filter, .tf-enquiry-details-wrap .tf-booking-header-filter .tf-enquiry-right-search-filter {
+  width: 24%;
+  flex-direction: row-reverse;
+}
+
+.tf-enquiry-details-wrap .tf-booking-header-filter .tf-right-search-filter button, .tf-enquiry-details-wrap .tf-booking-header-filter .tf-enquiry-right-search-filter button {
+  padding: 0px;
+}
+
+.tf-enquiry-details-wrap p:first-child {
+  margin-top: 0px;
+}
+
+.tf-enquiry-details-wrap .tf-single-accordion-body p:last-child {
+  margin-bottom: 0px;
+}
+
+#tf-enquiry-reply-editor_ifr, #tf-enquiry-reply-editor {
+  height: 200px !important;
+}
+
+@media only screen and (max-width: 991.98px) {
+  .tf-enquiry-details-wrap .tf-booking-header-filter .tf-bulk-action-form {
+    width: 100%;
+    gap: 12px;
+  }
+  .tf-enquiry-details-wrap .tf-booking-header-filter .tf-right-search-filter {
+    width: 200px;
+  }
 }
 
 

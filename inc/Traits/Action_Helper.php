@@ -5,8 +5,12 @@ defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Tour\Tour;
 use \Tourfic\Classes\Apartment\Apartment;
-use Tourfic\Classes\Hotel\Hotel;
-// use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\Hotel\Hotel;
+use \Tourfic\App\TF_Review;
+use \Tourfic\Admin\Emails\TF_Handle_Emails;
+use Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
+use Tourfic\Classes\Tour\Pricing as Tour_Pricing;
+use Tourfic\Classes\Hotel\Pricing as Hotel_Pricing;
 
 trait Action_Helper {
 	
@@ -581,6 +585,7 @@ trait Action_Helper {
 		/**
 		 * Get form data
 		 */
+		global $wpdb;
 		$adults = ! empty( $_POST['adults'] ) ? sanitize_text_field( $_POST['adults'] ) : '';
 		$child  = ! empty( $_POST['children'] ) ? sanitize_text_field( $_POST['children'] ) : '';
 		$infant = ! empty( $_POST['infant'] ) && $_POST['infant'] != "undefined" ? sanitize_text_field( $_POST['infant'] ) : '';
@@ -591,17 +596,18 @@ trait Action_Helper {
 		$relation        = self::tfopt( 'search_relation', 'AND' );
 		$filter_relation = self::tfopt( 'filter_relation', 'OR' );
 
-		$search                = ( $_POST['dest'] ) ? sanitize_text_field( $_POST['dest'] ) : null;
-		$filters               = ( $_POST['filters'] ) ? explode( ',', sanitize_text_field( $_POST['filters'] ) ) : null;
-		$features              = ( $_POST['features'] ) ? explode( ',', sanitize_text_field( $_POST['features'] ) ) : null;
-		$tf_hotel_types        = ( $_POST['tf_hotel_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_hotel_types'] ) ) : null;
-		$tour_features         = ( $_POST['tour_features'] ) ? explode( ',', sanitize_text_field( $_POST['tour_features'] ) ) : null;
-		$attractions           = ( $_POST['attractions'] ) ? explode( ',', sanitize_text_field( $_POST['attractions'] ) ) : null;
-		$activities            = ( $_POST['activities'] ) ? explode( ',', sanitize_text_field( $_POST['activities'] ) ) : null;
-		$tf_tour_types         = ( $_POST['tf_tour_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_tour_types'] ) ) : null;
-		$tf_apartment_features = ( $_POST['tf_apartment_features'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_features'] ) ) : null;
-		$tf_apartment_types    = ( $_POST['tf_apartment_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_types'] ) ) : null;
-		$posttype              = $_POST['type'] ? sanitize_text_field( $_POST['type'] ) : 'tf_hotel';
+		$search                = !empty( $_POST['dest'] ) ? sanitize_text_field( $_POST['dest'] ) : null;
+		$filters               = !empty( $_POST['filters'] ) ? explode( ',', sanitize_text_field( $_POST['filters'] ) ) : null;
+		$features              = !empty( $_POST['features'] ) ? explode( ',', sanitize_text_field( $_POST['features'] ) ) : null;
+		$tf_hotel_types        = !empty( $_POST['tf_hotel_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_hotel_types'] ) ) : null;
+		$tour_features         = !empty( $_POST['tour_features'] ) ? explode( ',', sanitize_text_field( $_POST['tour_features'] ) ) : null;
+		$attractions           = !empty( $_POST['attractions'] ) ? explode( ',', sanitize_text_field( $_POST['attractions'] ) ) : null;
+		$activities            = !empty( $_POST['activities'] ) ? explode( ',', sanitize_text_field( $_POST['activities'] ) ) : null;
+		$tf_tour_types         = !empty( $_POST['tf_tour_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_tour_types'] ) ) : null;
+		$tf_apartment_features = !empty( $_POST['tf_apartment_features'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_features'] ) ) : null;
+		$tf_apartment_types    = !empty( $_POST['tf_apartment_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_types'] ) ) : null;
+		$posttype              = !empty( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : 'tf_hotel';
+		$ordering_type 		   = !empty( $_POST["tf_ordering"] ) ? $_POST["tf_ordering"] : 'default';
 		# Separate taxonomy input for filter query
 		$place_taxonomy  = $posttype == 'tf_tours' ? 'tour_destination' : ( $posttype == 'tf_apartment' ? 'apartment_location' : 'hotel_location' );
 		$filter_taxonomy = $posttype == 'tf_tours' ? 'null' : 'hotel_feature';
@@ -950,13 +956,27 @@ trait Action_Helper {
 			$total_filtered_results = count( $tf_total_filters );
 			$current_page           = ! empty( $_POST['page'] ) ? absint( $_POST['page'] ) : 1;
 			$offset                 = ( $current_page - 1 ) * $post_per_page;
-			$displayed_results      = array_slice( $tf_total_filters, $offset, $post_per_page );
+			$displayed_results      =  array_slice( $tf_total_filters, $offset, $post_per_page );
+			$sorting_data = $this->tf_get_sorting_data( $ordering_type, $displayed_results, $posttype );
+
+			$displayed_results = !empty( $sorting_data ) ? $sorting_data : $displayed_results;
+
 			if ( ! empty( $displayed_results ) ) {
 				$filter_args = array(
 					'post_type'      => $posttype,
 					'posts_per_page' => $post_per_page,
+					'orderby' 		 => array( 'post__in' => 'ASC' ),
 					'post__in'       => $displayed_results,
 				);
+
+				if ( $ordering_type == "default" ) {
+					unset( $filter_args['orderby'] );
+				} else if ( $ordering_type == 'latest') {
+					$filter_args['orderby'] = 'ID';
+					$filter_args['order'] = 'DESC';
+				}else if ( $ordering_type == 'price-low') {
+					$filter_args['orderby'] = array( 'post__in' => 'DESC' );
+				}
 
 				$result_query  = new \WP_Query( $filter_args );
 				$result_query2 = $result_query;
@@ -1116,265 +1136,66 @@ trait Action_Helper {
 		die();
 	}
 
-	function tf_trigger_tax_filter_callback() {
-
-		// Check nonce security
-		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tf_ajax_nonce' ) ) {
-			return;
-		}
-
-		$tax_name = !empty( $_POST['tax_name'] ) ? sanitize_text_field( $_POST['tax_name'] ) : '';
-		$term_ids = !empty( $_POST['term_ids'] ) ? explode( ',', sanitize_text_field( $_POST['term_ids'] ) ) : '';
-		$post_type = !empty( $_POST['post_type'] ) ? sanitize_text_field( $_POST['post_type'] ) : 'tf_hotel';
-		$post_per_page = self::tfopt( 'posts_per_page' ) ? self::tfopt( 'posts_per_page' ) : 10;
-		$relation        = self::tfopt( 'search_relation', 'AND' );
-		$filter_relation = self::tfopt( 'filter_relation', 'OR' );
-		$current_page = !empty( $_POST["page"] ) ? sanitize_text_field( $_POST["page"] ) : 1;
-		$filters               = !empty( $_POST['filters'] ) ? explode( ',', sanitize_text_field( $_POST['filters'] ) ) : null;
-		$features              = !empty( $_POST['features'] ) ? explode( ',', sanitize_text_field( $_POST['features'] ) ) : null;
-		$tf_hotel_types        = !empty( $_POST['tf_hotel_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_hotel_types'] ) ) : null;
-		$tour_features         = !empty( $_POST['tour_features'] ) ? explode( ',', sanitize_text_field( $_POST['tour_features'] ) ) : null;
-		$attractions           = !empty( $_POST['attractions'] ) ? explode( ',', sanitize_text_field( $_POST['attractions'] ) ) : null;
-		$activities            = !empty( $_POST['activities'] ) ? explode( ',', sanitize_text_field( $_POST['activities'] ) ) : null;
-		$tf_tour_types         = !empty( $_POST['tf_tour_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_tour_types'] ) ) : null;
-		$tf_apartment_features = !empty( $_POST['tf_apartment_features'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_features'] ) ) : null;
-		$tf_apartment_types    = !empty( $_POST['tf_apartment_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_types'] ) ) : null;
-		$place_taxonomy  = $post_type == 'tf_tours' ? 'tour_destination' : ( $post_type == 'tf_apartment' ? 'apartment_location' : 'hotel_location' );
-		$filter_taxonomy = $post_type == 'tf_tours' ? 'null' : 'hotel_feature';
-
-		
-		$args = array(
-			'post_type'      => $post_type,
-			'post_status'    => 'publish',
-			'posts_per_page' => -1
-		);
-
-		if ( $filters ) {
-			$args['tax_query']['relation'] = $relation;
-
-			if ( $filter_relation == "OR" ) {
-				$args['tax_query'][] = array(
-					'taxonomy' => $filter_taxonomy,
-					'terms'    => $filters,
-				);
-			} else {
-				$args['tax_query']['tf_filters']['relation'] = 'AND';
-
-				foreach ( $filters as $key => $term_id ) {
-					$args['tax_query']['tf_filters'][] = array(
-						'taxonomy' => $filter_taxonomy,
-						'terms'    => array( $term_id ),
-					);
-				}
-			}
-		}
-
-		//Query for the features filter of hotel
-		if ( $features ) {
-			$args['tax_query']['relation'] = $relation;
-
-			if ( $filter_relation == "OR" ) {
-				$args['tax_query'][] = array(
-					'taxonomy' => 'tf_feature',
-					'terms'    => $features,
-				);
-			} else {
-				$args['tax_query']['tf_feature']['relation'] = 'AND';
-
-				foreach ( $filters as $key => $term_id ) {
-					$args['tax_query']['tf_feature'][] = array(
-						'taxonomy' => 'tf_feature',
-						'terms'    => array( $term_id ),
-					);
-				}
-			}
-		}
-
-		//Query for the types filter of hotel
-		if ( $tf_hotel_types ) {
-
-			$args['tax_query']['relation'] = $relation;
-
-			if ( $filter_relation == "OR" ) {
-				$args['tax_query'][] = array(
-					'taxonomy' => 'hotel_type',
-					'terms'    => $tf_hotel_types,
-				);
-			} else {
-				$args['tax_query']['hotel_type']['relation'] = 'AND';
-
-				foreach ( $tf_hotel_types as $key => $term_id ) {
-					$args['tax_query']['hotel_type'][] = array(
-						'taxonomy' => 'hotel_type',
-						'terms'    => array( $term_id ),
-					);
-				}
-			}
-		}
-
-		//Query for the features filter of Tour
-		if ( $tour_features ) {
-			$args['tax_query']['relation'] = $relation;
-
-			if ( $filter_relation == "OR" ) {
-				$args['tax_query'][] = array(
-					'taxonomy' => 'tour_features',
-					'terms'    => $tour_features,
-				);
-			} else {
-				$args['tax_query']['tour_features']['relation'] = 'AND';
-
-				foreach ( $tour_features as $key => $term_id ) {
-					$args['tax_query']['tour_features'][] = array(
-						'taxonomy' => 'tour_features',
-						'terms'    => array( $term_id ),
-					);
+	/**
+	 * TODO: Tour Template 1, 2, 3 and Search Result Check
+	 * TODO: Hotel Template 1, 2, 3 and Search Result Check
+	 * TODO: Hotel Sorting Without Date
+	 */
+	private function tf_get_sorting_data($ordering_type, $results, $post_type) {
+        global $wpdb;
+        $sort_results = [];
+        foreach ( $results as $post_id ) {
+			$comments = $ratings = '';
+            if( $ordering_type == 'order') {
+                $order_count = $wpdb->get_var($wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}tf_order_data WHERE post_id = %s AND ostatus != %s", $post_id, 'cancelled' ));
+                $sort_results[$post_id] = $order_count;
+            }else if( $ordering_type == 'enquiry') {
+                $enquiry_count = $wpdb->get_var($wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}tf_enquiry_data WHERE post_id = %s ", $post_id ));
+                $sort_results[$post_id] = $enquiry_count;
+            } else if( $ordering_type == 'rating') {
+                $comments        = get_comments( [ 'post_id' => $post_id, 'status' => 'approve' ] );
+                $ratings = TF_Review::tf_total_avg_rating( $comments );
+                $sort_results[$post_id] = $ratings;
+            }else if ($ordering_type == 'price-high') {
+                if($post_type == 'tf_apartment') {
+					$min_max_price = Apt_Pricing::instance($post_id)->get_min_max_price();
+					$sort_results[$post_id] = $min_max_price['max'];
 				}
 
-			}
+				if( $post_type == 'tf_tours' ) {
+					$min_max_price = Tour_Pricing::instance($post_id)->get_min_max_price();
+					$sort_results[$post_id] = $min_max_price['max'];
+				}
+				
+				if( $post_type == 'tf_hotel' ) {
+					$min_max_price = Hotel_Pricing::instance($post_id)->get_min_max_price();
+					$sort_results[$post_id] = $min_max_price['max']["regular_price"];
+				}
+                
+            }else if ($ordering_type == 'price-low') {
 
-		}
-
-		//Query for the attractions filter of tours
-		if ( $attractions ) {
-			$args['tax_query']['relation'] = $relation;
-
-			if ( $filter_relation == "OR" ) {
-				$args['tax_query'][] = array(
-					'taxonomy' => 'tour_attraction',
-					'terms'    => $attractions,
-				);
-			} else {
-				$args['tax_query']['tour_attraction']['relation'] = 'AND';
-
-				foreach ( $attractions as $key => $term_id ) {
-					$args['tax_query']['tour_attraction'][] = array(
-						'taxonomy' => 'tour_attraction',
-						'terms'    => array( $term_id ),
-					);
+                if($post_type == 'tf_apartment') {
+					$min_max_price = Apt_Pricing::instance($post_id)->get_min_max_price();
+					$sort_results[$post_id] = $min_max_price['min'];
+				}
+				
+				if( $post_type == 'tf_tours' ) {
+					$min_max_price = Tour_Pricing::instance($post_id)->get_min_max_price();
+					$sort_results[$post_id] = $min_max_price['min'];
 				}
 
-			}
-
-		}
-
-		//Query for the activities filter of tours
-		if ( $activities ) {
-			$args['tax_query']['relation'] = $relation;
-
-			if ( $filter_relation == "OR" ) {
-				$args['tax_query'][] = array(
-					'taxonomy' => 'tour_activities',
-					'terms'    => $activities,
-				);
-			} else {
-				$args['tax_query']['tour_activities']['relation'] = 'AND';
-
-				foreach ( $activities as $key => $term_id ) {
-					$args['tax_query']['tour_activities'][] = array(
-						'taxonomy' => 'tour_activities',
-						'terms'    => array( $term_id ),
-					);
+				if( $post_type == 'tf_hotel' ) {
+					$min_max_price = Hotel_Pricing::instance($post_id)->get_min_max_price();
+					$sort_results[$post_id] = $min_max_price['min']["regular_price"];
 				}
+                
+            }
+        }
 
-			}
+        arsort($sort_results);
 
-		}
-
-		//Query for the types filter of tours
-		if ( $tf_tour_types ) {
-			$args['tax_query']['relation'] = $relation;
-
-			if ( $filter_relation == "OR" ) {
-				$args['tax_query'][] = array(
-					'taxonomy' => 'tour_type',
-					'terms'    => $tf_tour_types,
-				);
-			} else {
-				$args['tax_query']['tour_type']['relation'] = 'AND';
-
-				foreach ( $tf_tour_types as $key => $term_id ) {
-					$args['tax_query']['tour_type'][] = array(
-						'taxonomy' => 'tour_type',
-						'terms'    => array( $term_id ),
-					);
-				}
-			}
-		}
-
-		//Query for the features filter of apartments
-		if ( $tf_apartment_features ) {
-			$args['tax_query']['relation'] = $relation;
-
-			if ( $filter_relation == "OR" ) {
-				$args['tax_query'][] = array(
-					'taxonomy' => 'apartment_feature',
-					'terms'    => $tf_apartment_features,
-				);
-			} else {
-				$args['tax_query']['apartment_feature']['relation'] = 'AND';
-
-				foreach ( $tf_apartment_features as $key => $term_id ) {
-					$args['tax_query']['apartment_feature'][] = array(
-						'taxonomy' => 'apartment_feature',
-						'terms'    => array( $term_id ),
-					);
-				}
-			}
-		}
-
-		//Query for the types filter of apartments
-		if ( $tf_apartment_types ) {
-			$args['tax_query']['relation'] = $relation;
-
-			if ( $filter_relation == "OR" ) {
-				$args['tax_query'][] = array(
-					'taxonomy' => 'apartment_type',
-					'terms'    => $tf_apartment_types,
-				);
-			} else {
-				$args['tax_query']['apartment_type']['relation'] = 'AND';
-
-				foreach ( $tf_apartment_types as $key => $term_id ) {
-					$args['tax_query']['apartment_type'][] = array(
-						'taxonomy' => 'apartment_type',
-						'terms'    => array( $term_id ),
-					);
-				}
-			}
-		}
-
-		$loop = new \WP_Query( $args );
-
-		$total_posts = $loop->found_posts;
-		if ( $loop->have_posts() ) {
-			while ( $loop->have_posts() ) {
-
-				$loop->the_post();
-
-				if ( $post_type == 'tf_hotel' ) {
-					Hotel::tf_hotel_archive_single_item();
-				} else if ( $post_type == 'tf_tours' ) {
-					Tour::tf_tour_archive_single_item();
-				} else {
-					Apartment::tf_apartment_archive_single_item();
-				}
-			}
-		}
-
-		global $wp_rewrite;
-
-		if($total_posts == 0){
-			echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
-		}
-
-		echo "<span hidden=hidden class='tf-posts-count'>";
-		echo ! empty( $total_posts ) ? esc_html( $total_posts ) : 0;
-		echo "</span>";
-		wp_reset_postdata();
-
-		die();
-	}
+        return $ordering_type !== "default" ? array_keys($sort_results) : $results;
+    }
 
 	/**
 	 * Monthwise Chart Ajax function
