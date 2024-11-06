@@ -7,7 +7,7 @@
                 <div class="tf-column tf-flex tf-flex-gap-8">
                     <div class="tf-feature-block tf-flex tf-flex-gap-8 tf-first">
                         <div class="tf-feature-block-icon">
-                            <i class="fa-regular fa-clock"></i>
+                            <i class="ri-history-line"></i>
                         </div>
                         <div class="tf-feature-block-details">
                             <h5><?php echo esc_html__( 'Duration', 'tourfic' ); ?></h5>
@@ -57,7 +57,7 @@
                 <div class="tf-column tf-flex tf-flex-gap-8">
                     <div class="tf-feature-block tf-flex tf-flex-gap-8  tf-second">
                         <div class="tf-feature-block-icon">
-                            <i class="fa-regular fa-clock"></i>
+                            <i class="ri-menu-unfold-line"></i>
                         </div>
                         <div class="tf-feature-block-details">
                             <h5><?php echo esc_html__( 'Tour Type', 'tourfic' ); ?></h5>
@@ -70,7 +70,7 @@
                 <div class="tf-column tf-flex tf-flex-gap-8">
                     <div class="tf-feature-block tf-flex tf-flex-gap-8  tf-third">
                         <div class="tf-feature-block-icon">
-                            <i class="fa-regular fa-clock"></i>
+                            <i class="ri-team-line"></i>
                         </div>
                         <div class="tf-feature-block-details">
                             <h5><?php echo esc_html__( 'Group Size', 'tourfic' ); ?></h5>
@@ -83,7 +83,7 @@
                 <div class="tf-column tf-flex tf-flex-gap-8">
                     <div class="tf-feature-block tf-flex tf-flex-gap-8  tf-tourth">
                         <div class="tf-feature-block-icon">
-                            <i class="fa-regular fa-clock"></i>
+                            <i class="ri-global-line"></i>
                         </div>
                         <div class="tf-feature-block-details">
                             <h5><?php echo esc_html__( 'Language', 'tourfic' ); ?></h5>
