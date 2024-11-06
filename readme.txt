@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.6
-Stable tag: 2.13.14
+Stable tag: 2.14.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -165,6 +165,7 @@ Furthermore, an array of indispensable features solidifies Tourfic's position as
 * TravelPayouts Affiliate Program (Pro)
 
 = 🎉  MISCELLANEOUS =
+* Email piping for customer enquery 
 * Compatible with Woocommerce Tax settings
 * Complete Style Panel
 * Easy to use Option Panel
@@ -319,8 +320,17 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 18. Dashboard Booking Data
 19. Enquiry Form Data
 20. Our Support Channels
+21. Email Piping (Pro)
 
 == Changelog ==
+
+= 2.14.0 - 05 November 2024 =
+
+- New Addon: Tourfic Email Piping – Easily manage customer Enquiry (Pro).
+- Improvement: Enhanced sorting functionality on the Archive Page.
+- Improvement: Redesigned Tourfic Ask Question popup.
+- Improvement: Streamlined Enquiry Details design.
+- Improvement: Direct reply option for Enquiry (Pro).
 
 = 2.13.14 - 30 October 2024 =
 
@@ -412,145 +422,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Improvement: Archive page filters
 - Improvement: Google map translation
 - Improvement: Changed login URL
-
-= 2.13.0 - 13 August 2024 =
-
-- Improvement: Revamped hotel room feature.
-- Improvement: Hotel room post type.
-- System stability improved.
-
-= 2.12.11 - 08 August 2024 =
-
-- Update Notice: We are preparing to release version 2.13.0 soon, with Improved hotel room features and several enhancements. As a precautionary measure, we recommend taking a backup before proceeding with the update.
-
-= 2.12.10 - 02 August 2024 =
-
-- Improvement: Tourfic menu icons updated
-- Improvement: Availability pricing issue
-- Compatible with UACF7 plugin
-- Compatible with Elementor 3.23.3
-- Compatible with WooCommerce 9.1.4
-
-= 2.12.9 - 17 July 2024 =
-
-- Compatible with WordPress 6.6
-- System stability improved
-
-= 2.12.8 - 11 July 2024 =
-
-- Improvement: Review system improved
-- Improvement: Wishlist system improved
-- Improvement: Design panel and templates
-- Improvement: Optimized code and file structure
-- Improvement: Tour, Hotel, Apartment Enquiry feature
-- Improvement: Shortcode Generator improved
-- Improvement: External Booking feature improved
-
-= 2.12.7 - 08 July 2024 =
-
-- Improvement: System stability improved
-- Fixed: escaping and text-domain issue
-- Fixed: Minor Bugs fixed
-
-= 2.12.6 - 26 June 2024 =
-
-- Updated readme.txt
-
-= 2.12.5 - 26 June 2024 =
-
-- Improvement: System stability improved
-- Fixed: Minor Bugs fixed
-
-= 2.12.5 - 26 June 2024 =
-
-- Improvement: System stability improved
-- Fixed: Minor Bugs fixed
-
-= 2.12.4 - 22 June 2024 =
-
-- Fixed: Classic editor metabox bug
-- Fixed: Hotel per person fixed discount bug
-
-= 2.12.3 - 20 June 2024 =
-
-- Fixed: Settings Saving issue fixed
-- Fixed: Hotel/Apartment Feature Sidebar issue 
-- Fixed: The iCal Sync issue fixed
-- Fixed: Minor Bugs fixed
-- Fixed: Vendor commission calculation issue
-- Fixed: Tour, hotel, and apartment feature update issue
-- Improvement: Optimized code and file structure 
-- Improvement: System stability improved
-- Compatible with WordPress 6.5.4
-
-= 2.12.2 - 29 May 2024 =
-
-- Improved: Author selection in the Gutenberg editor
-- Improved: Featured post limit for vendors
-- Improved: Disable Post Types for vendor dashboard
-- Improved: Dashboard link updated for customers upon login
-- Fixed minor bugs and improved stability
-
-= 2.12.1 - 16 May 2024 =
-
-- Improved: Apartment Inventory Management
-- Improved: Titles and Subtitles of Option Panel
-- Fixed: Apartment Mobile Responsiveness of Design 1
-
-= 2.12.0 - 13 May 2024 =
-
-- Added: Apartments room management added to free
-- Added: TF search form page
-- Added: Sample data added on install
-- Added: Pro feature notice optimized
-- Improved: Search form design improved
-- Improved: Apartment design improved
-- Improved: Ask question popup design improved
-- Improvement: System stability improved
-- Fixed: Escaping issue fixed
-- Fixed: Tour, and hotel pricing issue fixed(Pro)
-- Fixed: Default booking type issue fixed on apartment
-- Fixed: Apartment default featured image issue fixed
-- Fixed: Tour, Hotel External Booking issue fixed(Pro)
-- Fixed: Tour booking sticky form design fixed
-- Fixed: Hotel room inventory issue fixed
-- Fixed: Settings page saving issue
-
-= 2.11.26 - 08 May 2024 =
-
-- Fixed: Tour archive page duration issue
-- Fixed: Tour bottom booking bar guest sync issue
-- Fixed: Tour booking popup not showing template 3
-- Fixed: Hotel single-page date picker issue
-- Fixed: Hotel room price fixed discount issue
-- Fixed: Specific location shortcode issue
-- Fixed: PHP Warning issues
-- Improved: Hotel partial payment price always showing (pro)
-- Improved: Voucher QR code image issue (API changed) (pro)
-- Improved: Tour extra quantity issue (pro)
-- Improved: Scan QR code and Update Booking Status (Pro)
-- Improved: QR Code Tracking (Pro)
-
-= 2.11.25 - 28 April 2024 =
-
-- Improvement: System stability improved
-- Compatibility: Compatible with the Divi theme
-
-= 2.11.24 - 3 April 2024 =
-
-- Improved: Permalink Settings Migration
-- Compatibility: Compatible with WordPress 6.5
-
-= 2.11.23 - 31 March 2024 =
-
-- Fixed: Tour Mobile Booking Popup Accessibility
-- Fixed: Apartment Location Archive Description Duplicate
-- Fixed: Archive Filter Issue 
-- Fixed: Shortcode Generator Dropdown Issue
-- Fixed: Setup Wizard Step Header Issue
-- Improved: Woocommerce Required Notice Added In Setup Wizard
-- Improved: Woocommerce Condition Added( Pro )
-- Improved: Woocommerce Require Notice Message Added( Pro )
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
