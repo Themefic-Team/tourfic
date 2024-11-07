@@ -827,7 +827,8 @@ class Enqueue {
 					'id' => $order['id'],
 					'status' => $order['ostatus'],
 					'post_type' => 'tf_tours',
-					'page' => 'tf_tours_booking'
+					'page' => 'tf_tours_booking',
+					'classNames' => ['tf-order-'.$order['ostatus']]
 				);
 			}
 		}
@@ -849,7 +850,8 @@ class Enqueue {
 					'id' => $order['id'],
 					'status' => $order['ostatus'],
 					'post_type' => 'tf_hotel',
-					'page' => 'tf_hotel_booking'
+					'page' => 'tf_hotel_booking',
+					'classNames' => ['tf-order-'.$order['ostatus']]
 				);
 			}
 		}
@@ -871,7 +873,8 @@ class Enqueue {
 					'id' => $order['id'],
 					'status' => $order['ostatus'],
 					'post_type' => 'tf_apartment',
-					'page' => 'tf_apartment_booking'
+					'page' => 'tf_apartment_booking',
+					'classNames' => ['tf-order-'.$order['ostatus']]
 				);
 			}
 		}

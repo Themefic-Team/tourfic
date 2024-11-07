@@ -1455,7 +1455,8 @@ abstract Class TF_Booking_Details {
 					'start' => $order['check_in'],
 					'end' => $order['check_out'],
 					'id' => $order['id'],
-					'status' => $order['ostatus']
+					'status' => $order['ostatus'],
+                    'classNames' => ['tf-order-'.$order['ostatus']]
 				);
 			}
 		}

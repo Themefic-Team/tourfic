@@ -354,15 +354,68 @@
                                         cursor: pointer;
                                         .tf-booking-single-popup{
                                             padding: 6px 8px;
-                                            border-left: 1px solid #002AB3;
-                                            background: #EBEFFF;
+                                            // border-left: 1px solid #002AB3;
+                                            // background: #EBEFFF;
                                             border-radius: 8px;
-                                            span{
-                                                color: #002AB3;
-                                            }
+                                            // span{
+                                            //     color: #002AB3;
+                                            // }
                                         }
                                     }
             
+                                    .tf-order-completed {
+                                        background: #c8d7e1 !important;
+                                        border-color: #c8d7e1 !important;
+                                
+                                        .fc-event-main{
+                                            color: #003d66 !important
+                                        }
+                                    }
+                                    
+                                    .tf-order-on-hold {
+                                        background: #f8dda7 !important;
+                                        border-color: #f8dda7 !important;
+                                
+                                        .fc-event-main{
+                                            color: #573b00 !important
+                                        }
+                                    }
+                                    
+                                    .tf-order-cancelled {
+                                        background: #e5e5e5 !important;
+                                        border-color: #e5e5e5 !important;
+                                
+                                        .fc-event-main{
+                                            color: #454545 !important
+                                        }
+                                    }
+                                    
+                                    .tf-order-failed {
+                                        background: #eba3a3 !important;
+                                        border-color: #eba3a3 !important;
+                                
+                                        .fc-event-main{
+                                            color: #570000 !important
+                                        }
+                                    }
+                                    
+                                    .tf-order-processing {
+                                        background: #c6e1c6 !important;
+                                        border-color: #c6e1c6 !important;
+                                
+                                        .fc-event-main{
+                                            color: #2c4700 !important
+                                        }
+                                    }
+                                    
+                                    .tf-order-trash {
+                                        background: #eba3a3 !important;
+                                        border-color: #eba3a3 !important;
+                                
+                                        .fc-event-main{
+                                            color: #550202 !important
+                                        }
+                                    }
                                 }
                             }
 
@@ -476,6 +529,60 @@
                             color: #17723F;
                             border-left: 1px solid #17723F;
                             background: #E6FAEE;
+                        }
+
+                        &.tf-order-completed {
+                            background: #c8d7e1 !important;
+                            border-color: #c8d7e1 !important;
+                    
+                            .fc-event-main{
+                                color: #003d66 !important
+                            }
+                        }
+                        
+                        &.tf-order-on-hold {
+                            background: #f8dda7 !important;
+                            border-color: #f8dda7 !important;
+                    
+                            .fc-event-main{
+                                color: #573b00 !important
+                            }
+                        }
+                        
+                        &.tf-order-cancelled {
+                            background: #e5e5e5 !important;
+                            border-color: #e5e5e5 !important;
+                    
+                            .fc-event-main{
+                                color: #454545 !important
+                            }
+                        }
+                        
+                        &.tf-order-failed {
+                            background: #eba3a3 !important;
+                            border-color: #eba3a3 !important;
+                    
+                            .fc-event-main{
+                                color: #570000 !important
+                            }
+                        }
+                        
+                        &.tf-order-processing {
+                            background: #c6e1c6 !important;
+                            border-color: #c6e1c6 !important;
+                    
+                            .fc-event-main{
+                                color: #2c4700 !important
+                            }
+                        }
+                        
+                        &.tf-order-trash {
+                            background: #eba3a3 !important;
+                            border-color: #eba3a3 !important;
+                    
+                            .fc-event-main{
+                                color: #550202 !important
+                            }
                         }
                     }
                 }
