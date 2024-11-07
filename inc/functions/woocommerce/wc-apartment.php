@@ -2,6 +2,7 @@
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
+use Tourfic\Classes\Helper;
 
 /**
  * Apartment booking ajax function
@@ -38,6 +39,12 @@ function tf_apartment_booking_callback() {
 	$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
 	$discount_type       = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
 	$discount            = ! empty( $meta['discount'] ) ? $meta['discount'] : 0;
+	$quick_checkout = !empty(Helper::tfopt( 'tf-quick-checkout' )) ? Helper::tfopt( 'tf-quick-checkout' ) : 0;
+	$instantio_is_active = 0;
+
+	if( is_plugin_active('instantio/instantio.php') ){
+		$instantio_is_active = 1;
+	}
 
 	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 		$additional_fees = ! empty( $meta['additional_fees'] ) ? $meta['additional_fees'] : array();
@@ -143,7 +150,7 @@ function tf_apartment_booking_callback() {
 
 			$response['product_id']  = $product_id;
 			$response['add_to_cart'] = 'true';
-			$response['redirect_to'] = wc_get_checkout_url();
+			$response['redirect_to'] = $instantio_is_active == 1 ? ($quick_checkout == 0 ? wc_get_checkout_url() : '') : wc_get_checkout_url();;
 		}
 	} else {
 		$response['status'] = 'error';

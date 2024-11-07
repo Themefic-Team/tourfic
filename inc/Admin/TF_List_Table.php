@@ -6,6 +6,8 @@ if ( ! class_exists( "WP_List_Table" ) ) {
 	require_once( ABSPATH . "wp-admin/includes/class-wp-list-table.php" );
 }
 
+use \Tourfic\Classes\Helper;
+
 class TF_List_Table extends \WP_List_Table {
 
 	private $_items;
@@ -16,13 +18,26 @@ class TF_List_Table extends \WP_List_Table {
 	}
 
 	function get_columns() {
-		return [
+		$columns =  array(
 			'cb'           => '<input type="checkbox">',
 			'uname'        => esc_html__( 'Name', 'tourfic' ),
 			'uemail'       => esc_html__( 'Email', 'tourfic' ),
 			'udescription' => esc_html__( 'Message', 'tourfic' ),
 			'created_at'   => esc_html__( 'Date', 'tourfic' ),
-		];
+		);
+
+		$user = wp_get_current_user();
+		$user_permission = Helper::tf_data_types( tfopt( 'tf_user_permission' ) );
+		$vendor_access = isset( $user_permission['vendor_can_manage'] ) ? $user_permission['vendor_can_manage'] : array();
+		$manager_access = isset( $user_permission['manager_can_manage'] ) ? $user_permission['manager_can_manage'] : array();
+
+
+		if ( ( !empty( $vendor_access ) && ! in_array( 'enquiry_email', $vendor_access ) && $user->roles[0] == 'tf_vendor' ) || ( !empty( $manager_access ) && ! in_array( 'enquiry_email', $manager_access ) && $user->roles[0] == 'tf_manager' ) ) {
+			unset( $columns['uemail'] );
+		}
+
+		return $columns;
+
 	}
 
 	function column_cb( $item ) {

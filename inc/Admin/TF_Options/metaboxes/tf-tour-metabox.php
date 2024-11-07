@@ -517,6 +517,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'dependency'  => array(
 						array( 'type', '==', 'continuous' ),
 					),
+					'default'     => 1,
 					'field_width' => '50',
 				),
 				array(

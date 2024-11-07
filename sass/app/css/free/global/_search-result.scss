@@ -264,17 +264,34 @@ a.page-numbers {
             margin-right: 5px;
         }
     }
+    @media(max-width: 544px) {
+        flex-direction: column;
+        .tf-result-counter-info{
+            margin-top: 10px;
+        }
+        gap: 8px;
+        
+    }
 }
 
 .tf-list-grid {
     display: flex;
     align-items: center;
+    gap: 12px;
 
     a {
         display: inline-flex;
         margin-left: 10px;
         font-size: 20px;
         text-decoration: none;
+    }
+
+    .tf-archive-ordering #tf-orderby{
+        height: 100%;
+        padding: 10px 30px 10px 10px;
+        background-position: calc(100% - 8px) 54%;
+        border-radius: 4px;
+        background-color: #F5F8FF;
     }
 }
 

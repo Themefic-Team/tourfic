@@ -322,7 +322,7 @@ Fontawesome
   transform: translateX(26px);
 }
 
-#tf-booking-status-loader {
+#tf-booking-status-loader, #tf-enquiry-status-loader {
   position: fixed;
   height: 100%;
   width: 100%;
@@ -338,7 +338,11 @@ Fontawesome
     width: 120px;
   }
 }
-#tf-booking-status-loader.show{
+#tf-enquiry-status-loader {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+#tf-booking-status-loader.show, #tf-enquiry-status-loader.show{
   visibility: visible;
   opacity: 1;
 }
