@@ -10055,6 +10055,7 @@ div.tf-aq-inner .tf-ask-question-head-content h3 {
   border-radius: 5px;
   padding: 20px;
   width: 100%;
+  align-items: baseline;
 }
 
 @media only screen and (min-width: 767.99px) and (max-width: 991px) {
@@ -10065,6 +10066,7 @@ div.tf-aq-inner .tf-ask-question-head-content h3 {
 
 .tf-trip-feature-blocks .tf-feature-block i {
   color: #0E3DD8;
+  font-size: 20px;
 }
 
 .tf-trip-feature-blocks .tf-feature-block h3 {
