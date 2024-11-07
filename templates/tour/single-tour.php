@@ -249,6 +249,11 @@ while ( have_posts() ) : the_post();
 
 	$tf_tour_selected_template = $tf_tour_selected_check;
 
+	$tour_duration_icon = ! empty( $meta['tf-tour-duration-icon'] ) ? $meta['tf-tour-duration-icon'] : 'ri-history-line';    
+	$tour_type_icon = ! empty( $meta['tf-tour-type-icon'] ) ? $meta['tf-tour-type-icon'] : 'ri-menu-unfold-line';    
+	$tour_group_icon = ! empty( $meta['tf-tour-group-icon'] ) ? $meta['tf-tour-group-icon'] : 'ri-team-line';    
+	$tour_lang_icon = ! empty( $meta['tf-tour-lang-icon'] ) ? $meta['tf-tour-lang-icon'] : 'ri-global-line';
+
 	if( $tf_tour_selected_template == "design-1" ){
 		include TF_TEMPLATE_PART_PATH . 'tour/design-1.php';
 	}elseif( $tf_tour_selected_template == "design-2" ){

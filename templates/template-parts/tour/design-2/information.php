@@ -4,7 +4,7 @@
     <div class="tf-features-block-wrapper tf-informations-secations">
         <?php if ( $tour_duration ) { ?>
         <div class="tf-feature-block">
-            <i class="ri-history-line"></i>
+            <i class="<?php echo esc_attr($tour_duration_icon); ?>"></i>
             <div class="tf-feature-block-details">
                 <h5><?php echo esc_html__( 'Duration', 'tourfic' ); ?></h5>
                 <p><?php echo esc_html( $tour_duration ); ?>
@@ -37,7 +37,7 @@
         <?php } ?>
         <?php if ( $group_size ) { ?>
         <div class="tf-feature-block">
-            <i class="ri-team-line"></i>
+            <i class="<?php echo esc_attr($tour_group_icon); ?>"></i>
             <div class="tf-feature-block-details">
                 <h5><?php echo esc_html__( 'Group Size', 'tourfic' ); ?></h5>
                 <p><?php echo esc_html( $group_size ) ?></p>
@@ -59,7 +59,7 @@
         }
         ?>
         <div class="tf-feature-block">
-            <i class="ri-menu-unfold-line"></i>
+            <i class="<?php echo esc_attr($tour_type_icon); ?>"></i>
             <div class="tf-feature-block-details">
                 <h5><?php echo esc_html__( 'Tour Type', 'tourfic' ); ?></h5>
                 <p><?php echo esc_html( $info_tour_type ) ?></p>
@@ -68,7 +68,7 @@
         <?php } ?>
         <?php if ( $language ) { ?>
         <div class="tf-feature-block">
-            <i class="ri-global-line"></i>
+            <i class="<?php echo esc_attr($tour_lang_icon); ?>"></i>
             <div class="tf-feature-block-details">
                 <h5><?php echo esc_html__( 'Language', 'tourfic' ); ?></h5>
                 <p><?php echo esc_html( $language ) ?></p>
