@@ -373,6 +373,9 @@ $t4-main-color: #060D1C;
                 height: 100%;
             }
 
+            .gm-style-iw-tc::after {
+                display: none !important;
+            }
             .gm-style {
                 .gm-style-iw-c {
                     border-radius: 4px !important;
@@ -494,7 +497,9 @@ $t4-main-color: #060D1C;
                     font-weight: 700;
                     @include transition();
                     box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
+                    cursor: pointer;
 
+                    &:hover,
                     &.active {
                         background: #0E3DD8;
                         color: #fff;

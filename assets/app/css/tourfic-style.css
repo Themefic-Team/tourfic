@@ -17669,6 +17669,7 @@ html {
   color: #607085;
   font-size: 16px;
   text-align: left;
+  height: auto;
 }
 
 .tf-template-3 #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-aprtment-check-in-out-date .tf_label_rows input:focus {
@@ -21082,6 +21083,13 @@ html {
   height: 100%;
 }
 
+.tf-hotel-template-4 .tf-archive-details .tf-details-right .gm-style-iw-tc::after,
+.tf_template_4_hotel_archive .tf-archive-details .tf-details-right .gm-style-iw-tc::after,
+.tf_template_4_tour_archive .tf-archive-details .tf-details-right .gm-style-iw-tc::after,
+.tf_template_4_apartment_archive .tf-archive-details .tf-details-right .gm-style-iw-tc::after {
+  display: none !important;
+}
+
 .tf-hotel-template-4 .tf-archive-details .tf-details-right .gm-style .gm-style-iw-c,
 .tf_template_4_hotel_archive .tf-archive-details .tf-details-right .gm-style .gm-style-iw-c,
 .tf_template_4_tour_archive .tf-archive-details .tf-details-right .gm-style .gm-style-iw-c,
@@ -21271,11 +21279,15 @@ html {
   -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
   box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.4);
+  cursor: pointer;
 }
 
-.tf-hotel-template-4 .tf-archive-details .tf-details-right .tf_map_price .tf_price_inner.active,
+.tf-hotel-template-4 .tf-archive-details .tf-details-right .tf_map_price .tf_price_inner:hover, .tf-hotel-template-4 .tf-archive-details .tf-details-right .tf_map_price .tf_price_inner.active,
+.tf_template_4_hotel_archive .tf-archive-details .tf-details-right .tf_map_price .tf_price_inner:hover,
 .tf_template_4_hotel_archive .tf-archive-details .tf-details-right .tf_map_price .tf_price_inner.active,
+.tf_template_4_tour_archive .tf-archive-details .tf-details-right .tf_map_price .tf_price_inner:hover,
 .tf_template_4_tour_archive .tf-archive-details .tf-details-right .tf_map_price .tf_price_inner.active,
+.tf_template_4_apartment_archive .tf-archive-details .tf-details-right .tf_map_price .tf_price_inner:hover,
 .tf_template_4_apartment_archive .tf-archive-details .tf-details-right .tf_map_price .tf_price_inner.active {
   background: #0E3DD8;
   color: #fff;
@@ -22676,6 +22688,10 @@ html {
   height: 100%;
 }
 
+.fancybox-container .tf-archive-details .tf-details-right .gm-style-iw-tc::after {
+  display: none !important;
+}
+
 .fancybox-container .tf-archive-details .tf-details-right .gm-style .gm-style-iw-c {
   border-radius: 4px !important;
   padding: 0;
@@ -22804,9 +22820,10 @@ html {
   -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
   box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.4);
+  cursor: pointer;
 }
 
-.fancybox-container .tf-archive-details .tf-details-right .tf_map_price .tf_price_inner.active {
+.fancybox-container .tf-archive-details .tf-details-right .tf_map_price .tf_price_inner:hover, .fancybox-container .tf-archive-details .tf-details-right .tf_map_price .tf_price_inner.active {
   background: #0E3DD8;
   color: #fff;
 }

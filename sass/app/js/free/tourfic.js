@@ -2461,24 +2461,26 @@
             onePageNav('.tf-details-menu-item');
         });
 
-
-        
-
         var zoomLvl = 5;
         var zoomChangeEnabled = false;
         var centerLvl = new google.maps.LatLng(23.8697847, 90.4219536);
         var markersById = {};
+        var markers = [];
         var mapChanged = false;
+        var hotelMap;
 
         const googleMapInit = (mapLocations, mapLat = 23.8697847, mapLng = 90.4219536) => {
-            var hotelMap;
+            // Clear existing markers
+            clearMarkers();
 
-            if (!mapLocations || mapLocations === "[]") {
+            var locations = mapLocations ? JSON.parse(mapLocations) : [];
+
+            if(!hotelMap){
                 hotelMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
                     zoom: zoomLvl,
                     minZoom: 3,
                     maxZoom: 18,
-                    center: centerLvl,
+                    center: new google.maps.LatLng(mapLat, mapLng),
                     mapTypeId: google.maps.MapTypeId.ROADMAP,
                     styles: [
                         {elementType: 'labels.text.fill', stylers: [{color: '#44348F'}]},
@@ -2487,25 +2489,11 @@
                 });
             }
 
-            var locations = JSON.parse(mapLocations);
-
-            hotelMap = new google.maps.Map(document.getElementById("tf-hotel-archive-map"), {
-                zoom: zoomLvl,
-                minZoom: 3,
-                maxZoom: 18,
-                center: new google.maps.LatLng(mapLat, mapLng),
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                styles: [
-                    {elementType: 'labels.text.fill', stylers: [{color: '#44348F'}]},
-                ],
-                fullscreenControl: false
-            });
-
             var infowindow = new google.maps.InfoWindow({
-                maxWidth: 262
+                maxWidth: 262,
+                disableAutoPan: true,
             });
 
-            var markers = [];
             var bounds = new google.maps.LatLngBounds();
             locations.map(function (location, i) {
                 var marker = new MarkerWithLabel({
@@ -2526,21 +2514,26 @@
                     infowindow.setContent(window.atob(location['content']));
                     infowindow.open(hotelMap, marker);
                 });
-
+                
                 // Hide the infowindow on mouse leave
                 google.maps.event.addListener(marker, 'mouseout', function () {
                     infowindow.close();
+                });
+                let infowindowTimeout;
+                // Detect mouseleave on `.tf_price_inner` with a small delay
+                $(document).on('mouseenter', '.tf_price_inner', function () {
+                    $(this).addClass('active');
+                }).on('mouseleave', '.tf_price_inner', function () {
+                    infowindowTimeout = setTimeout(() => {
+                        infowindow.close();
+                    }, 100); // Adjust delay as needed
+                    $(this).removeClass('active');
                 });
 
                 google.maps.event.addListener(marker, 'click', function () {
                     window.open(location?.url, '_blank')
                 });
             });
-
-            // Add a marker clusterer to manage the markers.
-            // var markerCluster = new MarkerClusterer(hotelMap, markers, {
-            //     imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
-            // });
 
             // Trigger filter on map drag
             google.maps.event.addListener(hotelMap, "dragend", function () {
@@ -2587,6 +2580,11 @@
             }
 
             makeFilter([sw.lat(), sw.lng(), ne.lat(), ne.lng()]);
+        }
+
+        function clearMarkers() {
+            markers.forEach(marker => marker.setMap(null)); // Remove each marker from the map
+            markers = []; // Clear the array to prevent duplication
         }
 
         // GOOGLE MAP INITIALIZE
