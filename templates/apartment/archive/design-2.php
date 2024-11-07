@@ -172,7 +172,11 @@
                                                         <?php endif; ?>
                                                     </div>
                                                     <div class="tf-map-item-content">
-                                                        <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+                                                        <h4>
+                                                            <a href="<?php the_permalink(); ?>">
+                                                                <?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title(), 30 ) ) ?>
+                                                            </a>
+                                                        </h4>
                                                         <div class="tf-map-item-price">
                                                             <?php echo wp_kses_post(Pricing::instance(get_the_ID())->get_min_price_html()); ?>
                                                         </div>
@@ -242,7 +246,11 @@
                                                         <?php endif; ?>
                                                     </div>
                                                     <div class="tf-map-item-content">
-                                                        <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+                                                        <h4>
+                                                            <a href="<?php the_permalink(); ?>">
+                                                                <?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title(), 30 ) ) ?>
+                                                            </a>
+                                                        </h4>
                                                         <div class="tf-map-item-price">
                                                             <?php echo wp_kses_post(Pricing::instance(get_the_ID())->get_min_price_html()); ?>
                                                         </div>

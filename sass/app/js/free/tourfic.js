@@ -2509,25 +2509,51 @@
                 markers.push(marker);
                 bounds.extend(marker.position);
 
-                // Show the infowindow on hover
+                // Define an OverlayView to use the projection for pixel calculation
+                const overlay = new google.maps.OverlayView();
+                overlay.draw = function () {};
+                overlay.setMap(hotelMap);
+
                 google.maps.event.addListener(marker, 'mouseover', function () {
                     infowindow.setContent(window.atob(location['content']));
+                    
+                    // Convert LatLng to pixel coordinates
+                    const markerPosition = marker.getPosition();
+                    const markerProjection = overlay.getProjection();
+                    const markerPixel = markerProjection.fromLatLngToDivPixel(markerPosition);
+
+                    // Infowindow dimensions
+                    const infoWindowHeight = 265;
+                    const infoWindowWidth = 262;
+
+                    // Check each edge
+                    const isNearLeftEdge = markerPixel.x <= -120;
+                    const isNearRightEdge = markerPixel.x >= 120;
+                    const isNearTopEdge = (markerPixel.y - (infoWindowHeight+40)) <= -infoWindowHeight;
+
+                    let anchorX = 0.5;
+                    let anchorY = 0;
+
+                    if (isNearLeftEdge) {
+                        anchorX = 0.9;
+                    } else if (isNearRightEdge) {
+                        anchorX = 0.1;
+                    }
+
+                    if (isNearTopEdge) {
+                        anchorY = infoWindowHeight+90
+                    }
+
+                    infowindow.setOptions({
+                        pixelOffset: new google.maps.Size((anchorX - 0.5) * infoWindowWidth, anchorY)
+                    });
+
                     infowindow.open(hotelMap, marker);
                 });
-                
+
                 // Hide the infowindow on mouse leave
                 google.maps.event.addListener(marker, 'mouseout', function () {
                     infowindow.close();
-                });
-                let infowindowTimeout;
-                // Detect mouseleave on `.tf_price_inner` with a small delay
-                $(document).on('mouseenter', '.tf_price_inner', function () {
-                    $(this).addClass('active');
-                }).on('mouseleave', '.tf_price_inner', function () {
-                    infowindowTimeout = setTimeout(() => {
-                        infowindow.close();
-                    }, 100); // Adjust delay as needed
-                    $(this).removeClass('active');
                 });
 
                 google.maps.event.addListener(marker, 'click', function () {
