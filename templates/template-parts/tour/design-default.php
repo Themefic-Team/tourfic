@@ -272,7 +272,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                     <div class="tf-square-block-content">
                         <?php if ( $tour_duration ) { ?>
                             <div class="tf-single-square-block first">
-                                <i class="fas fa-clock"></i>
+                                <i class="<?php echo esc_attr($tour_duration_icon); ?>"></i>
                                 <h4><?php echo esc_html__( 'Duration', 'tourfic' ); ?></h4>
                                 <p><?php echo esc_html( $tour_duration ); ?>
                                 <span> 
@@ -319,21 +319,21 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 	                        }
                             ?>
                             <div class="tf-single-square-block second">
-                                <i class="fas fa-map"></i>
+                                <i class="<?php echo esc_attr($tour_type_icon); ?>"></i>
                                 <h4><?php echo esc_html__( 'Tour Type', 'tourfic' ); ?></h4>
                                 <p><?php echo esc_html( $info_tour_type ); ?></p>
                             </div>
                         <?php } ?>
                         <?php if ( $group_size ) { ?>
                             <div class="tf-single-square-block third">
-                                <i class="fas fa-users"></i>
+                                <i class="<?php echo esc_attr($tour_group_icon); ?>"></i>
                                 <h4><?php echo esc_html__( 'Group Size', 'tourfic' ); ?></h4>
                                 <p><?php echo esc_html( $group_size ) ?></p>
                             </div>
                         <?php } ?>
                         <?php if ( $language ) { ?>
                             <div class="tf-single-square-block fourth">
-                                <i class="fas fa-language"></i>
+                                <i class="<?php echo esc_attr($tour_lang_icon); ?>"></i>
                                 <h4><?php echo esc_html__( 'Language', 'tourfic' ); ?></h4>
                                 <p><?php echo esc_html( $language ) ?></p>
                             </div>

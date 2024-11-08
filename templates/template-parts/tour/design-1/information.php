@@ -1,13 +1,14 @@
 
 <!-- Trip Features -->
-<?php if ( $tour_duration || $info_tour_type || $group_size || $language ) { ?>
+<?php if ( $tour_duration || $info_tour_type || $group_size || $language ) {  
+    ?>
     <div class="tf-trip-feature-blocks tf-mb-40 tf-template-section">
         <div class="tf-features-block-inner tf-column-4 tf-flex tf-flex-space-bttn tf-flex-gap-16">
 			<?php if ( $tour_duration ) { ?>
                 <div class="tf-column tf-flex tf-flex-gap-8">
                     <div class="tf-feature-block tf-flex tf-flex-gap-8 tf-first">
                         <div class="tf-feature-block-icon">
-                            <i class="fa-regular fa-clock"></i>
+                            <i class="<?php echo esc_attr($tour_duration_icon); ?>"></i>
                         </div>
                         <div class="tf-feature-block-details">
                             <h5><?php echo esc_html__( 'Duration', 'tourfic' ); ?></h5>
@@ -57,7 +58,7 @@
                 <div class="tf-column tf-flex tf-flex-gap-8">
                     <div class="tf-feature-block tf-flex tf-flex-gap-8  tf-second">
                         <div class="tf-feature-block-icon">
-                            <i class="fa-regular fa-clock"></i>
+                        <i class="<?php echo esc_attr($tour_type_icon); ?>"></i>
                         </div>
                         <div class="tf-feature-block-details">
                             <h5><?php echo esc_html__( 'Tour Type', 'tourfic' ); ?></h5>
@@ -70,7 +71,7 @@
                 <div class="tf-column tf-flex tf-flex-gap-8">
                     <div class="tf-feature-block tf-flex tf-flex-gap-8  tf-third">
                         <div class="tf-feature-block-icon">
-                            <i class="fa-regular fa-clock"></i>
+                        <i class="<?php echo esc_attr($tour_group_icon); ?>"></i>
                         </div>
                         <div class="tf-feature-block-details">
                             <h5><?php echo esc_html__( 'Group Size', 'tourfic' ); ?></h5>
@@ -83,7 +84,7 @@
                 <div class="tf-column tf-flex tf-flex-gap-8">
                     <div class="tf-feature-block tf-flex tf-flex-gap-8  tf-tourth">
                         <div class="tf-feature-block-icon">
-                            <i class="fa-regular fa-clock"></i>
+                        <i class="<?php echo esc_attr($tour_lang_icon); ?>"></i>
                         </div>
                         <div class="tf-feature-block-details">
                             <h5><?php echo esc_html__( 'Language', 'tourfic' ); ?></h5>

@@ -1,14 +1,20 @@
 <?php
 namespace Tourfic\Traits;
+
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
+use \Tourfic\App\TF_Review;
 use Tourfic\Classes\Hotel\Hotel;
 use Tourfic\Classes\Tour\Tour;
 use \Tourfic\Classes\Apartment\Apartment;
 use \Tourfic\Classes\Hotel\Pricing as hotelPricing;
 use \Tourfic\Classes\Tour\Pricing as tourPricing;
 use \Tourfic\Classes\Apartment\Pricing as apartmentPricing;
+use Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
+use Tourfic\Classes\Tour\Pricing as Tour_Pricing;
+use Tourfic\Classes\Hotel\Pricing as Hotel_Pricing;
+use \Tourfic\Admin\Emails\TF_Handle_Emails;
 
 trait Action_Helper {
 	
@@ -583,6 +589,7 @@ trait Action_Helper {
 		/**
 		 * Get form data
 		 */
+		global $wpdb;
 		$adults = ! empty( $_POST['adults'] ) ? sanitize_text_field( $_POST['adults'] ) : '';
 		$child  = ! empty( $_POST['children'] ) ? sanitize_text_field( $_POST['children'] ) : '';
 		$infant = ! empty( $_POST['infant'] ) && $_POST['infant'] != "undefined" ? sanitize_text_field( $_POST['infant'] ) : '';
@@ -593,17 +600,18 @@ trait Action_Helper {
 		$relation        = self::tfopt( 'search_relation', 'AND' );
 		$filter_relation = self::tfopt( 'filter_relation', 'OR' );
 
-		$search                = ( $_POST['dest'] ) ? sanitize_text_field( $_POST['dest'] ) : null;
-		$filters               = ( $_POST['filters'] ) ? explode( ',', sanitize_text_field( $_POST['filters'] ) ) : null;
-		$features              = ( $_POST['features'] ) ? explode( ',', sanitize_text_field( $_POST['features'] ) ) : null;
-		$tf_hotel_types        = ( $_POST['tf_hotel_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_hotel_types'] ) ) : null;
-		$tour_features         = ( $_POST['tour_features'] ) ? explode( ',', sanitize_text_field( $_POST['tour_features'] ) ) : null;
-		$attractions           = ( $_POST['attractions'] ) ? explode( ',', sanitize_text_field( $_POST['attractions'] ) ) : null;
-		$activities            = ( $_POST['activities'] ) ? explode( ',', sanitize_text_field( $_POST['activities'] ) ) : null;
-		$tf_tour_types         = ( $_POST['tf_tour_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_tour_types'] ) ) : null;
-		$tf_apartment_features = ( $_POST['tf_apartment_features'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_features'] ) ) : null;
-		$tf_apartment_types    = ( $_POST['tf_apartment_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_types'] ) ) : null;
-		$posttype              = $_POST['type'] ? sanitize_text_field( $_POST['type'] ) : 'tf_hotel';
+		$search                = !empty( $_POST['dest'] ) ? sanitize_text_field( $_POST['dest'] ) : null;
+		$filters               = !empty( $_POST['filters'] ) ? explode( ',', sanitize_text_field( $_POST['filters'] ) ) : null;
+		$features              = !empty( $_POST['features'] ) ? explode( ',', sanitize_text_field( $_POST['features'] ) ) : null;
+		$tf_hotel_types        = !empty( $_POST['tf_hotel_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_hotel_types'] ) ) : null;
+		$tour_features         = !empty( $_POST['tour_features'] ) ? explode( ',', sanitize_text_field( $_POST['tour_features'] ) ) : null;
+		$attractions           = !empty( $_POST['attractions'] ) ? explode( ',', sanitize_text_field( $_POST['attractions'] ) ) : null;
+		$activities            = !empty( $_POST['activities'] ) ? explode( ',', sanitize_text_field( $_POST['activities'] ) ) : null;
+		$tf_tour_types         = !empty( $_POST['tf_tour_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_tour_types'] ) ) : null;
+		$tf_apartment_features = !empty( $_POST['tf_apartment_features'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_features'] ) ) : null;
+		$tf_apartment_types    = !empty( $_POST['tf_apartment_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_types'] ) ) : null;
+		$posttype              = !empty( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : 'tf_hotel';
+		$ordering_type 		   = !empty( $_POST["tf_ordering"] ) ? $_POST["tf_ordering"] : 'default';
 		# Separate taxonomy input for filter query
 		$place_taxonomy  = $posttype == 'tf_tours' ? 'tour_destination' : ( $posttype == 'tf_apartment' ? 'apartment_location' : 'hotel_location' );
 		$filter_taxonomy = $posttype == 'tf_tours' ? 'null' : 'hotel_feature';
@@ -967,13 +975,27 @@ trait Action_Helper {
 			$total_filtered_results = count( $tf_total_filters );
 			$current_page           = ! empty( $_POST['page'] ) ? absint( $_POST['page'] ) : 1;
 			$offset                 = ( $current_page - 1 ) * $post_per_page;
-			$displayed_results      = array_slice( $tf_total_filters, $offset, $post_per_page );
+			$displayed_results      =  array_slice( $tf_total_filters, $offset, $post_per_page );
+			$sorting_data = $this->tf_get_sorting_data( $ordering_type, $displayed_results, $posttype );
+
+			$displayed_results = !empty( $sorting_data ) ? $sorting_data : $displayed_results;
+
 			if ( ! empty( $displayed_results ) ) {
 				$filter_args = array(
 					'post_type'      => $posttype,
 					'posts_per_page' => $post_per_page,
+					'orderby' 		 => array( 'post__in' => 'ASC' ),
 					'post__in'       => $displayed_results,
 				);
+
+				if ( $ordering_type == "default" ) {
+					unset( $filter_args['orderby'] );
+				} else if ( $ordering_type == 'latest') {
+					$filter_args['orderby'] = 'ID';
+					$filter_args['order'] = 'DESC';
+				}else if ( $ordering_type == 'price-low') {
+					$filter_args['orderby'] = array( 'post__in' => 'DESC' );
+				}
 
 				$result_query  = new \WP_Query( $filter_args );
 				$result_query2 = $result_query;
@@ -1583,7 +1605,7 @@ trait Action_Helper {
 						<div class="tf-nothing-found tf-template-4-nothing-found" data-post-count="0">
 							<svg xmlns="http://www.w3.org/2000/svg" width="57" height="56" viewBox="0 0 57 56" fill="none">
 							<path d="M28.5 5.25C24.0005 5.25 19.602 6.58426 15.8608 9.08407C12.1196 11.5839 9.20364 15.1369 7.48175 19.294C5.75986 23.451 5.30933 28.0252 6.18715 32.4383C7.06496 36.8514 9.23169 40.905 12.4133 44.0867C15.595 47.2683 19.6486 49.435 24.0617 50.3129C28.4748 51.1907 33.049 50.7402 37.2061 49.0183C41.3631 47.2964 44.9161 44.3804 47.4159 40.6392C49.9157 36.898 51.25 32.4995 51.25 28C51.2436 21.9683 48.8447 16.1854 44.5797 11.9204C40.3146 7.65528 34.5317 5.25637 28.5 5.25ZM28.5 47.25C24.6927 47.25 20.9709 46.121 17.8053 44.0058C14.6396 41.8906 12.1723 38.8841 10.7153 35.3667C9.25834 31.8492 8.87713 27.9786 9.61989 24.2445C10.3627 20.5104 12.196 17.0804 14.8882 14.3882C17.5804 11.696 21.0104 9.86265 24.7445 9.11988C28.4787 8.37712 32.3492 8.75833 35.8667 10.2153C39.3841 11.6723 42.3906 14.1396 44.5058 17.3053C46.621 20.4709 47.75 24.1927 47.75 28C47.7442 33.1036 45.7142 37.9966 42.1054 41.6054C38.4966 45.2142 33.6036 47.2442 28.5 47.25ZM18 23.625C18 23.1058 18.154 22.5983 18.4424 22.1666C18.7308 21.7349 19.1408 21.3985 19.6205 21.1998C20.1001 21.0011 20.6279 20.9492 21.1371 21.0504C21.6463 21.1517 22.1141 21.4017 22.4812 21.7688C22.8483 22.136 23.0983 22.6037 23.1996 23.1129C23.3009 23.6221 23.2489 24.1499 23.0502 24.6295C22.8515 25.1092 22.5151 25.5192 22.0834 25.8076C21.6517 26.096 21.1442 26.25 20.625 26.25C19.9288 26.25 19.2611 25.9734 18.7689 25.4812C18.2766 24.9889 18 24.3212 18 23.625ZM39 23.625C39 24.1442 38.8461 24.6517 38.5576 25.0834C38.2692 25.515 37.8592 25.8515 37.3796 26.0502C36.8999 26.2489 36.3721 26.3008 35.8629 26.1996C35.3537 26.0983 34.886 25.8483 34.5189 25.4812C34.1517 25.114 33.9017 24.6463 33.8004 24.1371C33.6992 23.6279 33.7511 23.1001 33.9498 22.6205C34.1485 22.1408 34.485 21.7308 34.9166 21.4424C35.3483 21.154 35.8558 21 36.375 21C37.0712 21 37.7389 21.2766 38.2312 21.7688C38.7234 22.2611 39 22.9288 39 23.625ZM38.7638 37.625C38.8904 37.8242 38.9754 38.0469 39.0137 38.2798C39.052 38.5127 39.0428 38.7509 38.9867 38.9802C38.9305 39.2094 38.8286 39.4249 38.687 39.6138C38.5454 39.8026 38.367 39.9608 38.1627 40.0789C37.9583 40.197 37.7322 40.2726 37.4979 40.3011C37.2636 40.3295 37.026 40.3103 36.7993 40.2445C36.5726 40.1788 36.3616 40.0678 36.1789 39.9184C35.9962 39.769 35.8457 39.5841 35.7363 39.375C34.1022 36.5509 31.5341 35 28.5 35C25.4659 35 22.8978 36.5531 21.2638 39.375C21.1544 39.5841 21.0038 39.769 20.8211 39.9184C20.6384 40.0678 20.4274 40.1788 20.2007 40.2445C19.974 40.3103 19.7364 40.3295 19.5021 40.3011C19.2678 40.2726 19.0417 40.197 18.8373 40.0789C18.633 39.9608 18.4547 39.8026 18.3131 39.6138C18.1715 39.4249 18.0695 39.2094 18.0134 38.9802C17.9572 38.7509 17.948 38.5127 17.9863 38.2798C18.0246 38.0469 18.1096 37.8242 18.2363 37.625C20.4872 33.7334 24.2278 31.5 28.5 31.5C32.7722 31.5 36.5128 33.7312 38.7638 37.625Z" fill="#6E655E"/>
-							</svg>	
+							</svg>
 							<span><?php echo esc_html__( 'No results found!', 'tourfic' ); ?></span>
 						</div>
 						<?php
@@ -1612,7 +1634,7 @@ trait Action_Helper {
 				<div class="tf-nothing-found tf-template-4-nothing-found" data-post-count="0">
 					<svg xmlns="http://www.w3.org/2000/svg" width="57" height="56" viewBox="0 0 57 56" fill="none">
 					<path d="M28.5 5.25C24.0005 5.25 19.602 6.58426 15.8608 9.08407C12.1196 11.5839 9.20364 15.1369 7.48175 19.294C5.75986 23.451 5.30933 28.0252 6.18715 32.4383C7.06496 36.8514 9.23169 40.905 12.4133 44.0867C15.595 47.2683 19.6486 49.435 24.0617 50.3129C28.4748 51.1907 33.049 50.7402 37.2061 49.0183C41.3631 47.2964 44.9161 44.3804 47.4159 40.6392C49.9157 36.898 51.25 32.4995 51.25 28C51.2436 21.9683 48.8447 16.1854 44.5797 11.9204C40.3146 7.65528 34.5317 5.25637 28.5 5.25ZM28.5 47.25C24.6927 47.25 20.9709 46.121 17.8053 44.0058C14.6396 41.8906 12.1723 38.8841 10.7153 35.3667C9.25834 31.8492 8.87713 27.9786 9.61989 24.2445C10.3627 20.5104 12.196 17.0804 14.8882 14.3882C17.5804 11.696 21.0104 9.86265 24.7445 9.11988C28.4787 8.37712 32.3492 8.75833 35.8667 10.2153C39.3841 11.6723 42.3906 14.1396 44.5058 17.3053C46.621 20.4709 47.75 24.1927 47.75 28C47.7442 33.1036 45.7142 37.9966 42.1054 41.6054C38.4966 45.2142 33.6036 47.2442 28.5 47.25ZM18 23.625C18 23.1058 18.154 22.5983 18.4424 22.1666C18.7308 21.7349 19.1408 21.3985 19.6205 21.1998C20.1001 21.0011 20.6279 20.9492 21.1371 21.0504C21.6463 21.1517 22.1141 21.4017 22.4812 21.7688C22.8483 22.136 23.0983 22.6037 23.1996 23.1129C23.3009 23.6221 23.2489 24.1499 23.0502 24.6295C22.8515 25.1092 22.5151 25.5192 22.0834 25.8076C21.6517 26.096 21.1442 26.25 20.625 26.25C19.9288 26.25 19.2611 25.9734 18.7689 25.4812C18.2766 24.9889 18 24.3212 18 23.625ZM39 23.625C39 24.1442 38.8461 24.6517 38.5576 25.0834C38.2692 25.515 37.8592 25.8515 37.3796 26.0502C36.8999 26.2489 36.3721 26.3008 35.8629 26.1996C35.3537 26.0983 34.886 25.8483 34.5189 25.4812C34.1517 25.114 33.9017 24.6463 33.8004 24.1371C33.6992 23.6279 33.7511 23.1001 33.9498 22.6205C34.1485 22.1408 34.485 21.7308 34.9166 21.4424C35.3483 21.154 35.8558 21 36.375 21C37.0712 21 37.7389 21.2766 38.2312 21.7688C38.7234 22.2611 39 22.9288 39 23.625ZM38.7638 37.625C38.8904 37.8242 38.9754 38.0469 39.0137 38.2798C39.052 38.5127 39.0428 38.7509 38.9867 38.9802C38.9305 39.2094 38.8286 39.4249 38.687 39.6138C38.5454 39.8026 38.367 39.9608 38.1627 40.0789C37.9583 40.197 37.7322 40.2726 37.4979 40.3011C37.2636 40.3295 37.026 40.3103 36.7993 40.2445C36.5726 40.1788 36.3616 40.0678 36.1789 39.9184C35.9962 39.769 35.8457 39.5841 35.7363 39.375C34.1022 36.5509 31.5341 35 28.5 35C25.4659 35 22.8978 36.5531 21.2638 39.375C21.1544 39.5841 21.0038 39.769 20.8211 39.9184C20.6384 40.0678 20.4274 40.1788 20.2007 40.2445C19.974 40.3103 19.7364 40.3295 19.5021 40.3011C19.2678 40.2726 19.0417 40.197 18.8373 40.0789C18.633 39.9608 18.4547 39.8026 18.3131 39.6138C18.1715 39.4249 18.0695 39.2094 18.0134 38.9802C17.9572 38.7509 17.948 38.5127 17.9863 38.2798C18.0246 38.0469 18.1096 37.8242 18.2363 37.625C20.4872 33.7334 24.2278 31.5 28.5 31.5C32.7722 31.5 36.5128 33.7312 38.7638 37.625Z" fill="#6E655E"/>
-					</svg>	
+					</svg>
 					<span><?php echo esc_html__( 'No results found!', 'tourfic' ); ?></span>
 				</div>
 				<?php
@@ -1633,265 +1655,66 @@ trait Action_Helper {
 		die();
 	}
 
-	function tf_trigger_tax_filter_callback() {
-
-		// Check nonce security
-		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tf_ajax_nonce' ) ) {
-			return;
-		}
-
-		$tax_name = !empty( $_POST['tax_name'] ) ? sanitize_text_field( $_POST['tax_name'] ) : '';
-		$term_ids = !empty( $_POST['term_ids'] ) ? explode( ',', sanitize_text_field( $_POST['term_ids'] ) ) : '';
-		$post_type = !empty( $_POST['post_type'] ) ? sanitize_text_field( $_POST['post_type'] ) : 'tf_hotel';
-		$post_per_page = self::tfopt( 'posts_per_page' ) ? self::tfopt( 'posts_per_page' ) : 10;
-		$relation        = self::tfopt( 'search_relation', 'AND' );
-		$filter_relation = self::tfopt( 'filter_relation', 'OR' );
-		$current_page = !empty( $_POST["page"] ) ? sanitize_text_field( $_POST["page"] ) : 1;
-		$filters               = !empty( $_POST['filters'] ) ? explode( ',', sanitize_text_field( $_POST['filters'] ) ) : null;
-		$features              = !empty( $_POST['features'] ) ? explode( ',', sanitize_text_field( $_POST['features'] ) ) : null;
-		$tf_hotel_types        = !empty( $_POST['tf_hotel_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_hotel_types'] ) ) : null;
-		$tour_features         = !empty( $_POST['tour_features'] ) ? explode( ',', sanitize_text_field( $_POST['tour_features'] ) ) : null;
-		$attractions           = !empty( $_POST['attractions'] ) ? explode( ',', sanitize_text_field( $_POST['attractions'] ) ) : null;
-		$activities            = !empty( $_POST['activities'] ) ? explode( ',', sanitize_text_field( $_POST['activities'] ) ) : null;
-		$tf_tour_types         = !empty( $_POST['tf_tour_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_tour_types'] ) ) : null;
-		$tf_apartment_features = !empty( $_POST['tf_apartment_features'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_features'] ) ) : null;
-		$tf_apartment_types    = !empty( $_POST['tf_apartment_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_types'] ) ) : null;
-		$place_taxonomy  = $post_type == 'tf_tours' ? 'tour_destination' : ( $post_type == 'tf_apartment' ? 'apartment_location' : 'hotel_location' );
-		$filter_taxonomy = $post_type == 'tf_tours' ? 'null' : 'hotel_feature';
-
-		
-		$args = array(
-			'post_type'      => $post_type,
-			'post_status'    => 'publish',
-			'posts_per_page' => -1
-		);
-
-		if ( $filters ) {
-			$args['tax_query']['relation'] = $relation;
-
-			if ( $filter_relation == "OR" ) {
-				$args['tax_query'][] = array(
-					'taxonomy' => $filter_taxonomy,
-					'terms'    => $filters,
-				);
-			} else {
-				$args['tax_query']['tf_filters']['relation'] = 'AND';
-
-				foreach ( $filters as $key => $term_id ) {
-					$args['tax_query']['tf_filters'][] = array(
-						'taxonomy' => $filter_taxonomy,
-						'terms'    => array( $term_id ),
-					);
-				}
-			}
-		}
-
-		//Query for the features filter of hotel
-		if ( $features ) {
-			$args['tax_query']['relation'] = $relation;
-
-			if ( $filter_relation == "OR" ) {
-				$args['tax_query'][] = array(
-					'taxonomy' => 'tf_feature',
-					'terms'    => $features,
-				);
-			} else {
-				$args['tax_query']['tf_feature']['relation'] = 'AND';
-
-				foreach ( $filters as $key => $term_id ) {
-					$args['tax_query']['tf_feature'][] = array(
-						'taxonomy' => 'tf_feature',
-						'terms'    => array( $term_id ),
-					);
-				}
-			}
-		}
-
-		//Query for the types filter of hotel
-		if ( $tf_hotel_types ) {
-
-			$args['tax_query']['relation'] = $relation;
-
-			if ( $filter_relation == "OR" ) {
-				$args['tax_query'][] = array(
-					'taxonomy' => 'hotel_type',
-					'terms'    => $tf_hotel_types,
-				);
-			} else {
-				$args['tax_query']['hotel_type']['relation'] = 'AND';
-
-				foreach ( $tf_hotel_types as $key => $term_id ) {
-					$args['tax_query']['hotel_type'][] = array(
-						'taxonomy' => 'hotel_type',
-						'terms'    => array( $term_id ),
-					);
-				}
-			}
-		}
-
-		//Query for the features filter of Tour
-		if ( $tour_features ) {
-			$args['tax_query']['relation'] = $relation;
-
-			if ( $filter_relation == "OR" ) {
-				$args['tax_query'][] = array(
-					'taxonomy' => 'tour_features',
-					'terms'    => $tour_features,
-				);
-			} else {
-				$args['tax_query']['tour_features']['relation'] = 'AND';
-
-				foreach ( $tour_features as $key => $term_id ) {
-					$args['tax_query']['tour_features'][] = array(
-						'taxonomy' => 'tour_features',
-						'terms'    => array( $term_id ),
-					);
+	/**
+	 * TODO: Tour Template 1, 2, 3 and Search Result Check
+	 * TODO: Hotel Template 1, 2, 3 and Search Result Check
+	 * TODO: Hotel Sorting Without Date
+	 */
+	private function tf_get_sorting_data($ordering_type, $results, $post_type) {
+        global $wpdb;
+        $sort_results = [];
+        foreach ( $results as $post_id ) {
+			$comments = $ratings = '';
+            if( $ordering_type == 'order') {
+                $order_count = $wpdb->get_var($wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}tf_order_data WHERE post_id = %s AND ostatus != %s", $post_id, 'cancelled' ));
+                $sort_results[$post_id] = $order_count;
+            }else if( $ordering_type == 'enquiry') {
+                $enquiry_count = $wpdb->get_var($wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}tf_enquiry_data WHERE post_id = %s ", $post_id ));
+                $sort_results[$post_id] = $enquiry_count;
+            } else if( $ordering_type == 'rating') {
+                $comments        = get_comments( [ 'post_id' => $post_id, 'status' => 'approve' ] );
+                $ratings = TF_Review::tf_total_avg_rating( $comments );
+                $sort_results[$post_id] = $ratings;
+            }else if ($ordering_type == 'price-high') {
+                if($post_type == 'tf_apartment') {
+					$min_max_price = Apt_Pricing::instance($post_id)->get_min_max_price();
+					$sort_results[$post_id] = $min_max_price['max'];
 				}
 
-			}
-
-		}
-
-		//Query for the attractions filter of tours
-		if ( $attractions ) {
-			$args['tax_query']['relation'] = $relation;
-
-			if ( $filter_relation == "OR" ) {
-				$args['tax_query'][] = array(
-					'taxonomy' => 'tour_attraction',
-					'terms'    => $attractions,
-				);
-			} else {
-				$args['tax_query']['tour_attraction']['relation'] = 'AND';
-
-				foreach ( $attractions as $key => $term_id ) {
-					$args['tax_query']['tour_attraction'][] = array(
-						'taxonomy' => 'tour_attraction',
-						'terms'    => array( $term_id ),
-					);
+				if( $post_type == 'tf_tours' ) {
+					$min_max_price = Tour_Pricing::instance($post_id)->get_min_max_price();
+					$sort_results[$post_id] = $min_max_price['max'];
 				}
 
-			}
-
-		}
-
-		//Query for the activities filter of tours
-		if ( $activities ) {
-			$args['tax_query']['relation'] = $relation;
-
-			if ( $filter_relation == "OR" ) {
-				$args['tax_query'][] = array(
-					'taxonomy' => 'tour_activities',
-					'terms'    => $activities,
-				);
-			} else {
-				$args['tax_query']['tour_activities']['relation'] = 'AND';
-
-				foreach ( $activities as $key => $term_id ) {
-					$args['tax_query']['tour_activities'][] = array(
-						'taxonomy' => 'tour_activities',
-						'terms'    => array( $term_id ),
-					);
+				if( $post_type == 'tf_hotel' ) {
+					$min_max_price = Hotel_Pricing::instance($post_id)->get_min_max_price();
+					$sort_results[$post_id] = $min_max_price['max']["regular_price"];
 				}
 
-			}
+            }else if ($ordering_type == 'price-low') {
 
-		}
-
-		//Query for the types filter of tours
-		if ( $tf_tour_types ) {
-			$args['tax_query']['relation'] = $relation;
-
-			if ( $filter_relation == "OR" ) {
-				$args['tax_query'][] = array(
-					'taxonomy' => 'tour_type',
-					'terms'    => $tf_tour_types,
-				);
-			} else {
-				$args['tax_query']['tour_type']['relation'] = 'AND';
-
-				foreach ( $tf_tour_types as $key => $term_id ) {
-					$args['tax_query']['tour_type'][] = array(
-						'taxonomy' => 'tour_type',
-						'terms'    => array( $term_id ),
-					);
+                if($post_type == 'tf_apartment') {
+					$min_max_price = Apt_Pricing::instance($post_id)->get_min_max_price();
+					$sort_results[$post_id] = $min_max_price['min'];
 				}
-			}
-		}
 
-		//Query for the features filter of apartments
-		if ( $tf_apartment_features ) {
-			$args['tax_query']['relation'] = $relation;
-
-			if ( $filter_relation == "OR" ) {
-				$args['tax_query'][] = array(
-					'taxonomy' => 'apartment_feature',
-					'terms'    => $tf_apartment_features,
-				);
-			} else {
-				$args['tax_query']['apartment_feature']['relation'] = 'AND';
-
-				foreach ( $tf_apartment_features as $key => $term_id ) {
-					$args['tax_query']['apartment_feature'][] = array(
-						'taxonomy' => 'apartment_feature',
-						'terms'    => array( $term_id ),
-					);
+				if( $post_type == 'tf_tours' ) {
+					$min_max_price = Tour_Pricing::instance($post_id)->get_min_max_price();
+					$sort_results[$post_id] = $min_max_price['min'];
 				}
-			}
-		}
 
-		//Query for the types filter of apartments
-		if ( $tf_apartment_types ) {
-			$args['tax_query']['relation'] = $relation;
-
-			if ( $filter_relation == "OR" ) {
-				$args['tax_query'][] = array(
-					'taxonomy' => 'apartment_type',
-					'terms'    => $tf_apartment_types,
-				);
-			} else {
-				$args['tax_query']['apartment_type']['relation'] = 'AND';
-
-				foreach ( $tf_apartment_types as $key => $term_id ) {
-					$args['tax_query']['apartment_type'][] = array(
-						'taxonomy' => 'apartment_type',
-						'terms'    => array( $term_id ),
-					);
+				if( $post_type == 'tf_hotel' ) {
+					$min_max_price = Hotel_Pricing::instance($post_id)->get_min_max_price();
+					$sort_results[$post_id] = $min_max_price['min']["regular_price"];
 				}
-			}
-		}
 
-		$loop = new \WP_Query( $args );
+            }
+        }
 
-		$total_posts = $loop->found_posts;
-		if ( $loop->have_posts() ) {
-			while ( $loop->have_posts() ) {
+        arsort($sort_results);
 
-				$loop->the_post();
-
-				if ( $post_type == 'tf_hotel' ) {
-					Hotel::tf_hotel_archive_single_item();
-				} else if ( $post_type == 'tf_tours' ) {
-					Tour::tf_tour_archive_single_item();
-				} else {
-					Apartment::tf_apartment_archive_single_item();
-				}
-			}
-		}
-
-		global $wp_rewrite;
-
-		if($total_posts == 0){
-			echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
-		}
-
-		echo "<span hidden=hidden class='tf-posts-count'>";
-		echo ! empty( $total_posts ) ? esc_html( $total_posts ) : 0;
-		echo "</span>";
-		wp_reset_postdata();
-
-		die();
-	}
+        return $ordering_type !== "default" ? array_keys($sort_results) : $results;
+    }
 
 	/**
 	 * Monthwise Chart Ajax function
@@ -2335,5 +2158,42 @@ trait Action_Helper {
 				<div class="tf-notice-wrapper"></div>
 			</div>
 		<?php
+	}
+
+	function tourfic_check_instantio_active() {
+		$quick_checkout = !empty(self::tfopt( 'tf-quick-checkout' )) ? self::tfopt( 'tf-quick-checkout' ) : 0;
+
+		if ( $quick_checkout == 0 ) {
+			return;
+		}else {
+			if( is_plugin_active( 'instantio/instantio.php' ) ) {
+				return;
+			}
+
+			add_action( 'admin_notices', array( $this, 'tourfic_instantio_notice' ) );
+		}
+	}
+
+	function tourfic_instantio_notice() {
+		if( !is_plugin_active( 'instantio/instantio.php' ) && ! file_exists( WP_PLUGIN_DIR . '/instantio/instantio.php' ) ) {
+			?>
+			<div id="message" class="notice notice-error">
+				<p><?php echo  wp_kses_post(sprintf(__( 'Instantio plugin is required for the %s"QUICK CHECKOUT"%s feature of Tourfic. Please install and activate Instantio to ensure this feature works seamlessly.', 'tourfic' ), '<strong>', '</strong>')); ?></p>
+				<p><a class="install-now button inc-install" href=<?php echo esc_url( admin_url( '/plugin-install.php?s=slug:instantio&tab=search&type=term' ) ); ?> data-plugin-slug="tourfic"><?php esc_attr_e( 'Install Now', 'tourfic' ); ?></a></p>
+			</div>
+		<?php
+		} else {
+			$notice = sprintf( __( 'The %s Instantio%s plugin is inactive. Please activate it to enable the %s "QUICK CHECKOUT" %s for Tourfic.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/instantio/" target="_blank">', '</a></strong>', '<b>', '</b>');
+			?>
+				<div id="message" class="notice notice-error">
+					<p><?php echo wp_kses_post( $notice ); ?></p>
+					<p><a href="<?php echo esc_html( get_admin_url() ); ?>plugins.php?_wpnonce=<?php echo esc_html( wp_create_nonce( 'activate-plugin_instantio/instantio.php' ) ); ?>&action=activate&plugin=instantio/instantio.php"
+							class="button activate-now button-primary">
+							<?php esc_attr_e( 'Activate', 'tourfic' ); ?>
+						</a>
+					</p>
+				</div>
+			<?php
+		}
 	}
 }

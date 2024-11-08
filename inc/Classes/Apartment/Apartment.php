@@ -544,7 +544,7 @@ class Apartment {
 					<?php Helper::tf_flatpickr_locale("root"); ?>
 
 					$(".tf_apartment_check_in_out_date").on("click", function(){
-						$(".tf-apartment-check-in-out-date").ctrigger("click");
+						$(".tf-apartment-check-in-out-date").trigger("click");
 					});
 					$(".tf-apartment-check-in-out-date").flatpickr({
 						enableTime: false,
