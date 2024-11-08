@@ -12,6 +12,8 @@
         }
         @media #{$max991}{
             margin-bottom: 16px;
+            flex-direction: column;
+            gap: 16px;
         }
         &>span{
             color: #595349;
@@ -569,6 +571,28 @@
             color: #fff;
             padding: 12px 16px;
         }
+       .tf-archive-ordering #tf-orderby {
+            background-color: #FDF9F3;
+            color: #595349;
+            padding: 15px 36px 15px 15px;
+            height: 100%;
+            background-position: calc(100% - 12px) 50%;
+            border: none;
+            border-radius: 0px;
+            font-size: 16px;
+            background-size: 16px;
+            appearance: auto;
+
+            &:focus-visible {
+                outline: none;
+            }
+
+            @media #{$max991}{
+                font-size: 14px;
+                padding: 10px 36px 10px 10px;
+                background-size: 14px;
+            }
+       }
     }
     .tf-archive-available-rooms {
         .tf-available-room {

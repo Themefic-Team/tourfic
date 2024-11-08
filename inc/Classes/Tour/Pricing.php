@@ -7,7 +7,6 @@ defined( 'ABSPATH' ) || exit;
 use Tourfic\Classes\Helper;
 
 class Pricing {
-	use \Tourfic\Traits\Singleton;
 
 	protected $post_id;
 	protected $meta;
@@ -302,6 +301,42 @@ class Pricing {
 		return array(
 			'min' => $tour_min_price,
 			'max' => $tour_max_price,
+		);
+	}
+
+	public function get_min_max_price() {
+		$meta = $this->meta;
+		$min_max_prices = array();
+
+		$pricing_type = !empty( $meta['pricing'] ) ? $meta['pricing'] : 'person';
+		$adult_price = !empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
+		$child_price = !empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
+		$group_price = !empty( $meta['group_price'] ) ? $meta['group_price'] : 0;
+		$custom_avail = !empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : 0;
+		$custom_availability = !empty( $meta['cont_custom_date'] ) && $custom_avail ? $meta['cont_custom_date'] : array();
+		$availability_pricing_type = !empty( $meta["custom_pricing_by"] ) ? $meta["custom_pricing_by"] : 'person';
+
+		if ( $pricing_type == 'group' ) {
+			$min_max_prices[] = $group_price;
+		} else {
+			$min_max_prices[] = $adult_price;
+			$min_max_prices[] = $child_price;
+		}
+
+		if ( !empty( $custom_availability ) ) {
+			foreach ( $custom_availability as $custom_price ) {
+				if ( $availability_pricing_type == 'group' ) {
+					$min_max_prices[] = !empty( $custom_price['group_price'] ) ? $custom_price['group_price'] : 0;
+				} else {
+					$min_max_prices[] = !empty( $custom_price['adult_price'] ) ? $custom_price['adult_price'] : 0;
+					$min_max_prices[] = !empty( $custom_price['child_price'] ) ? $custom_price['child_price'] : 0;
+				}
+			}
+		}
+
+		return array(
+			'min' => min( $min_max_prices ),
+			'max' => max( $min_max_prices ),
 		);
 	}
 }

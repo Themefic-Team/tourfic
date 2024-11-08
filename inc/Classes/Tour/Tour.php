@@ -4019,7 +4019,9 @@ class Tour {
             </div>';
 				$tour_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 			}
-			$response['traveller_summery'] .= '<h6>On ' . self::tf_date_format_user( $tour_date, $tour_date_format_for_users ) . '</h6>
+			$response['traveller_summery'] .= '<h6>' . esc_html__("On ", 'tourfic') . self::tf_date_format_user( $tour_date, $tour_date_format_for_users ) . '</h6>';
+			$response['traveller_summery'] .= !empty( $tour_time_title ) ? '<h6>' . esc_html__("At ", 'tourfic') . $tour_time_title . '</h6>' : '';
+			$response['traveller_summery'] .= '
         <table class="table" style="width: 100%">
             <thead>
                 <tr>

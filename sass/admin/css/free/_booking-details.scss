@@ -282,7 +282,7 @@
                     }
                 }
             }
-            
+
         }
 
         table{
@@ -311,7 +311,7 @@
                         }
                     }
                 }
-                
+
             }
             .fc-scrollgrid-section-body{
                 > td{
@@ -362,56 +362,56 @@
                                             // }
                                         }
                                     }
-            
+
                                     .tf-order-completed {
                                         background: #c8d7e1 !important;
                                         border-color: #c8d7e1 !important;
-                                
+
                                         .fc-event-main{
                                             color: #003d66 !important
                                         }
                                     }
-                                    
+
                                     .tf-order-on-hold {
                                         background: #f8dda7 !important;
                                         border-color: #f8dda7 !important;
-                                
+
                                         .fc-event-main{
                                             color: #573b00 !important
                                         }
                                     }
-                                    
+
                                     .tf-order-cancelled {
                                         background: #e5e5e5 !important;
                                         border-color: #e5e5e5 !important;
-                                
+
                                         .fc-event-main{
                                             color: #454545 !important
                                         }
                                     }
-                                    
+
                                     .tf-order-failed {
                                         background: #eba3a3 !important;
                                         border-color: #eba3a3 !important;
-                                
+
                                         .fc-event-main{
                                             color: #570000 !important
                                         }
                                     }
-                                    
+
                                     .tf-order-processing {
                                         background: #c6e1c6 !important;
                                         border-color: #c6e1c6 !important;
-                                
+
                                         .fc-event-main{
                                             color: #2c4700 !important
                                         }
                                     }
-                                    
+
                                     .tf-order-trash {
                                         background: #eba3a3 !important;
                                         border-color: #eba3a3 !important;
-                                
+
                                         .fc-event-main{
                                             color: #550202 !important
                                         }
@@ -490,7 +490,7 @@
                                 }
                             }
                         }
-                       } 
+                       }
                     }
                 }
             }
@@ -534,52 +534,52 @@
                         &.tf-order-completed {
                             background: #c8d7e1 !important;
                             border-color: #c8d7e1 !important;
-                    
+
                             .fc-event-main{
                                 color: #003d66 !important
                             }
                         }
-                        
+
                         &.tf-order-on-hold {
                             background: #f8dda7 !important;
                             border-color: #f8dda7 !important;
-                    
+
                             .fc-event-main{
                                 color: #573b00 !important
                             }
                         }
-                        
+
                         &.tf-order-cancelled {
                             background: #e5e5e5 !important;
                             border-color: #e5e5e5 !important;
-                    
+
                             .fc-event-main{
                                 color: #454545 !important
                             }
                         }
-                        
+
                         &.tf-order-failed {
                             background: #eba3a3 !important;
                             border-color: #eba3a3 !important;
-                    
+
                             .fc-event-main{
                                 color: #570000 !important
                             }
                         }
-                        
+
                         &.tf-order-processing {
                             background: #c6e1c6 !important;
                             border-color: #c6e1c6 !important;
-                    
+
                             .fc-event-main{
                                 color: #2c4700 !important
                             }
                         }
-                        
+
                         &.tf-order-trash {
                             background: #eba3a3 !important;
                             border-color: #eba3a3 !important;
-                    
+
                             .fc-event-main{
                                 color: #550202 !important
                             }
@@ -713,8 +713,28 @@
                     padding: 10px 20px;
                 }
             }
+            .tf-order-status-filter-reset-btn-wrapper {
+                margin-right: 16px;
+
+                .tf-order-status-filter-reset-btn {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                    cursor: pointer;
+                    user-select: none;
+                }
+            }
+            .tf-enquiry-reset-button-text {
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 1.25;
+                font-family: inherit;
+                text-decoration: none;
+            }
         }
-        .tf-right-search-filter{
+        .tf-right-search-filter, .tf-enquiry-right-search-filter{
             border-radius: 8px;
             border: 1px solid #87888B;
             background: #FFF;
