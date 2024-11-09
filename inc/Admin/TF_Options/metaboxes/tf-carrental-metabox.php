@@ -162,8 +162,40 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					),
 					'default'    => 'none',
 					'inline_add_new' => true,
-					'inline_delete' => true
+					'inline_delete' => true,
+					'add_button_text' => esc_html__('Add Brand', 'tourfic')
 				),
+
+				array(
+					'id'         => 'fuel_types',
+					'type'       => 'select2',
+					'label'      => __( 'Select Fuel Type', 'tourfic' ),
+					'options'    => 'terms',
+					'query_args' => array(
+						'taxonomy'   => 'carrental_fuel_type',
+						'hide_empty' => false,
+					),
+					'default'    => 'none',
+					'inline_add_new' => true,
+					'inline_delete' => true,
+					'add_button_text' => esc_html__('Add Fuel Type', 'tourfic')
+				),
+
+				array(
+					'id'         => 'engine_year',
+					'type'       => 'select2',
+					'label'      => __( 'Select Year', 'tourfic' ),
+					'options'    => 'terms',
+					'query_args' => array(
+						'taxonomy'   => 'carrental_engine_year',
+						'hide_empty' => false,
+					),
+					'default'    => 'none',
+					'inline_add_new' => true,
+					'inline_delete' => true,
+					'add_button_text' => esc_html__('Add Year', 'tourfic')
+				),
+				
                 array(
 					'id'       => 'pay_pickup',
 					'type'     => 'switch',
@@ -320,6 +352,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'dependency'  => [
 						array( 'driver_included', '==', 'true' )
 					],
+					'is_search_able' => true,
 				),
 				array(
 					'id'          => 'driver_address',

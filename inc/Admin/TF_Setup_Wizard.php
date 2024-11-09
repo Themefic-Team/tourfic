@@ -1039,6 +1039,15 @@ class TF_Setup_Wizard {
                                             </div>
                                         </label>
                                     </li>
+                                    <li>
+                                        <label class="tf-image-checkbox">
+                                            <input type="radio" name="tf_single_car"
+                                                   value="design-1" disabled="" >
+                                            <div class="select-image-box">
+                                            <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL ); ?>images/template/more-template.jpg" alt="Design 1">
+                                            </div>
+                                        </label>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -1054,6 +1063,15 @@ class TF_Setup_Wizard {
                                                    value="design-1" <?php echo ! empty( $tf_car_archive_template ) && $tf_car_archive_template == "design-1" ? esc_attr( 'checked' ) : ''; ?> >
                                             <div class="select-image-box">
                                                 <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL ); ?>images/template/car-archive-design-1.jpg" alt="Design 1">
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="tf-image-checkbox">
+                                            <input type="radio" name="tf_car_archive"
+                                                   value="design-1" disabled="">
+                                            <div class="select-image-box">
+                                                <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL ); ?>images/template/more-template.jpg" alt="Design 1">
                                             </div>
                                         </label>
                                     </li>

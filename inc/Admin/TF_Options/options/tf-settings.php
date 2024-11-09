@@ -119,6 +119,12 @@ TF_Settings::option( 'tf_settings', array(
 					'default'    => '0',
 				),
 				array(
+					'id'       => 'tf-quick-checkout',
+					'type'     => 'switch',
+					'label'    => __( 'Enable Quick Checkout', 'tourfic' ),
+					'subtitle' => __( 'This option allows you to complete the checkout process directly from the single service page, without navigating to the checkout page. Note: The Instantio plugin is required, and this option is only for woocommerce payment system.', 'tourfic' ),
+				),
+				array(
 					'id'       => 'template_heading',
 					'type'     => 'heading',
 					'label'    => __( 'Template Settings', 'tourfic' ),
@@ -981,10 +987,6 @@ TF_Settings::option( 'tf_settings', array(
 											'title' => 'Design 1',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design-1-car.jpg",
 										),
-										'design-2' => array(
-											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design-1-car.jpg",
-										),
 									),
 									'default'  => 'design-1',
 								),
@@ -1077,10 +1079,6 @@ TF_Settings::option( 'tf_settings', array(
 									'inline'   => true,
 									'options'  => array(
 										'design-1' => array(
-											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/car-archive-design-1.jpg",
-										),
-										'design-2' => array(
 											'title' => 'Design 1',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/car-archive-design-1.jpg",
 										),
@@ -4061,10 +4059,18 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 
-		//email template settings
-		'email_templates' => array(
+		// Email Settings
+		'email-settings'          => array(
 			'title'  => __( 'Email Settings', 'tourfic' ),
 			'icon'   => 'fa fa-envelope',
+			'fields' => array(),
+		),
+
+		//email template settings
+		'email_templates' => array(
+			'title'  => __( 'Email Templates', 'tourfic' ),
+			'parent' => 'email-settings',
+			'icon'   => 'fas fa-cogs',
 			'fields' => array(
 				array(
 					'id'   => 'email-settings',
@@ -4722,6 +4728,95 @@ TF_Settings::option( 'tf_settings', array(
 						),
 					),
 				)
+			),
+		),
+
+		/**
+		 * Cancellation
+		 *
+		 * Main menu
+		 */
+
+		 'cancellation' => array(
+			'title'  => esc_html__( 'Cancellation', 'tourfic' ),
+			'icon'   => 'fa-solid fa-arrow-rotate-left',
+			'parent' => 'pro_options',
+			'fields' => array(
+				array(
+					'id'       => 'integration_heading',
+					'type'     => 'heading',
+					'label'    => esc_html__( 'Cancellation Settings', 'tourfic' ),
+				),
+				array(
+					'id'      => 'cancellation-official-docs',
+					'type'    => 'cancellation-official-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => esc_html__( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/pabbly-vs-zapier-integrations/pabbly-integration/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'      => 'timezone-title',
+					'type'    => 'heading',
+					'content' => esc_html__( 'Time Zone', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'       => 'cancellation_time_zone',
+					'type'     => 'select2',
+					'label'    => esc_html__( 'Select Time Zone', 'tourfic' ),
+					'subtitle' => esc_html__( 'Choose your time-zone', 'tourfic' ),
+					'options' => [
+						'America/New_York' => __( '(UTC-05:00) New York', 'tourfic' ),
+						'Asia/Dhaka'  => __( '(UTC+06:00) Dhaka', 'tourfic' ),
+					],
+					'default' => 'America/New_York',
+					'is_pro'  => true,
+				),
+				array(
+					'id'      => 'hotel-title',
+					'type'    => 'heading',
+					'content' => esc_html__( 'Hotel', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'       => 'cancellation_hotel_checkin_time',
+					'type'     => 'time',
+					'label'    => esc_html__( 'Hotel Check-in Time', 'tourfic' ),
+					'subtitle' => esc_html__( 'Choose the hotel check-in time.', 'tourfic' ),
+					'format'   => 'H:i',
+					'default'  => '11:00',
+					'is_pro'  => true,
+				),
+				array(
+					'id'      => 'tour-title',
+					'type'    => 'heading',
+					'content' => esc_html__( 'Tour', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'       => 'cancellation_tour_checkin_time',
+					'type'     => 'time',
+					'label'    => esc_html__( 'Tour Check-in Time', 'tourfic' ),
+					'subtitle' => esc_html__( 'Choose the tour check-in time.', 'tourfic' ),
+					'format'   => 'H:i',
+					'default'  => '10:00',
+					'is_pro'  => true,
+				),
+				array(
+					'id'      => 'apartment-title',
+					'type'    => 'heading',
+					'content' => esc_html__( 'Apartment', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'       => 'cancellation_apartment_checkin_time',
+					'type'     => 'time',
+					'label'    => esc_html__( 'Apartment Check-in Time', 'tourfic' ),
+					'subtitle' => esc_html__( 'Choose the apartment check-in time.', 'tourfic' ),
+					'format'   => 'H:i',
+					'default'  => '11:00',
+					'is_pro'  => true,
+				),
 			),
 		),
 

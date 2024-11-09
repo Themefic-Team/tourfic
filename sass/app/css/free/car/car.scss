@@ -773,6 +773,39 @@
     background: #E6F2FE;
     box-shadow: 0px 24px 60px 0px rgba(0, 15, 63, 0.16);
 
+    .tf-date-selection-form{
+        display: flex;
+        margin-top: 8px;
+        @media #{$max1024}{
+            flex-wrap: wrap;
+            justify-content: end;
+        }
+        .tf-date-select-box{
+            width: calc(100% - 155px);
+            @media #{$max1024}{
+                width: 100%;
+            }
+        }
+        .tf-driver-location-box{
+            padding-left: 0;
+            padding-right: 0;
+            width: 147px;
+            @media #{$max1024}{
+                margin-right: 8px;
+            }
+            .tf-submit-button{
+                height: 100%;
+                width: 100%;
+                button{
+                    width: 100%;
+                    height: 100%;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
+            }
+        }
+    }
+
     .tf-date-select-box{
         padding: 8px;
         flex-wrap: nowrap;
@@ -796,7 +829,9 @@
                 i{
                     color: #566676;
                 }
-                
+                .tf-flex{
+                    flex-wrap: nowrap;
+                }
                 .info-select{
                     width: 100%;
                     position: relative;
@@ -886,6 +921,29 @@
                             }
                         }
                     }
+                    .tf_selectperson-wrap{
+                        padding: 3px 0px !important;
+                        border: 0px solid;
+                        input{
+                            width: 50px !important;
+                            padding: 0 !important;
+                            text-align: center;
+                        }
+                        .tf_input-inner > div{
+                            color: #27333f;
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 150%;
+                        }
+                        .tf_acrselection-wrap{
+                            left: 0;
+                            .acr-dec,
+                            .acr-inc{
+                                padding: 0;
+                            }
+                        }
+                    }
                 }
             }
             &.tf-pick-drop-location.active{
@@ -896,6 +954,14 @@
                     }
                     &:last-child{
                         display: none;
+                    }
+                }
+            }
+            &.tf-date-single-select.full-width{
+                .tf-select-date{
+                    width: 100%;
+                    &:first-child{
+                        border-right: 0px solid #DFE6ED;
                     }
                 }
             }

@@ -35,6 +35,7 @@ class Car_Rental_CPT extends \Tourfic\Core\Post_Type {
 					'assign_terms' => 'edit_tf_carrental',
 					'edit_terms'   => 'edit_tf_carrental',
 				),
+				'show_in_menu' => true
 			),
 			array(
 				'name'          => esc_html__('Brand / Make', 'tourfic' ),
@@ -45,6 +46,7 @@ class Car_Rental_CPT extends \Tourfic\Core\Post_Type {
 					'assign_terms' => 'edit_tf_carrental',
 					'edit_terms'   => 'edit_tf_carrental',
 				),
+				'show_in_menu' => false
 			),
 			array(
 				'name'          => esc_html__('Fuel Type', 'tourfic' ),
@@ -55,6 +57,7 @@ class Car_Rental_CPT extends \Tourfic\Core\Post_Type {
 					'assign_terms' => 'edit_tf_carrental',
 					'edit_terms'   => 'edit_tf_carrental',
 				),
+				'show_in_menu' => false
 			),
 			array(
 				'name'          => esc_html__('Category', 'tourfic' ),
@@ -65,6 +68,7 @@ class Car_Rental_CPT extends \Tourfic\Core\Post_Type {
 					'assign_terms' => 'edit_tf_carrental',
 					'edit_terms'   => 'edit_tf_carrental',
 				),
+				'show_in_menu' => true
 			),
 			array(
 				'name'          => esc_html__('Year', 'tourfic' ),
@@ -75,6 +79,7 @@ class Car_Rental_CPT extends \Tourfic\Core\Post_Type {
 					'assign_terms' => 'edit_tf_carrental',
 					'edit_terms'   => 'edit_tf_carrental',
 				),
+				'show_in_menu' => false
 			)
 		));
 		

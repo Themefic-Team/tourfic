@@ -129,6 +129,26 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     </div>
                                 </div>
                                 <div class="tf-sg-row">
+                                    <div class="tf-col-lg-4">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Tour Tab Title', 'tourfic' ) ?></h3>
+                                            <input type="text" value="" data-tour-tab-title="tour_tab_title" placeholder="Input the title here." class="tf-shortcode-tour-tab-title-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-4">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Hotel Tab Title', 'tourfic' ) ?></h3>
+                                            <input type="text" value="" data-hotel-tab-title="hotel_tab_title" placeholder="Input the title here." class="tf-shortcode-hotel-tab-title-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-4">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Apartment Tab Title', 'tourfic' ) ?></h3>
+                                            <input type="text" value="" data-apartment-tab-title="apartment_tab_title" placeholder="Input the title here." class="tf-shortcode-apartment-tab-title-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-generate-tour">
                                             <button class="tf-btn"><?php echo esc_html__( 'Generate', 'tourfic' ); ?></button>
@@ -1448,7 +1468,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Apartment style', 'tourfic' ) ?></h3>
+                                            <h3><?php echo esc_html__( 'Car style', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
                                                 <option value="style='grid'"><?php esc_html_e( 'Grid', 'tourfic' ); ?></option>
                                                 <option value="style='list'"><?php esc_html_e( 'List', 'tourfic' ); ?></option>

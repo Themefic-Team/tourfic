@@ -17,7 +17,7 @@
         }
 
         .tf_header_wrap_button{
-            a.tf-booking-export-btn{
+            a.tf-booking-export-btn, a.tf-enquiry-export-btn{
                 padding: 10px 32px;
                 border-radius: 8px;
                 border: 1px solid #003C79;
@@ -164,8 +164,28 @@
                     padding: 10px 20px;
                 }
             }
+            .tf-order-status-filter-reset-btn-wrapper {
+                margin-right: 16px;
+
+                .tf-order-status-filter-reset-btn {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                    cursor: pointer;
+                    user-select: none;
+                }
+            }
+            .tf-enquiry-reset-button-text {
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 1.25;
+                font-family: inherit;
+                text-decoration: none;
+            }
         }
-        .tf-right-search-filter{
+        .tf-right-search-filter, .tf-enquiry-right-search-filter{
             border-radius: 8px;
             border: 1px solid #87888B;
             background: #FFF;

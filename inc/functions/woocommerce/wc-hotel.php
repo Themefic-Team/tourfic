@@ -42,6 +42,12 @@ function tf_hotel_booking_callback() {
 	$check_out       = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
 	$deposit         = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
 	$airport_service = isset( $_POST['airport_service'] ) ? sanitize_text_field( $_POST['airport_service'] ) : '';
+	$quick_checkout = !empty(Helper::tfopt( 'tf-quick-checkout' )) ? Helper::tfopt( 'tf-quick-checkout' ) : 0;
+	$instantio_is_active = 0;
+
+	if( is_plugin_active('instantio/instantio.php') ){
+		$instantio_is_active = 1;
+	}
 
 	// Check errors
 	if ( ! $check_in ) {
@@ -501,7 +507,7 @@ function tf_hotel_booking_callback() {
 
 			$response['product_id']  = $product_id;
 			$response['add_to_cart'] = 'true';
-			$response['redirect_to'] = wc_get_checkout_url();
+			$response['redirect_to'] = $instantio_is_active == 1 ? ($quick_checkout == 0 ? wc_get_checkout_url() : '') : wc_get_checkout_url();
 		}
 	} else {
 		$response['status'] = 'error';
