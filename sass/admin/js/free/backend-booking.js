@@ -131,6 +131,8 @@
 
             let hotel_id = $('[name="tf_available_hotels"]').val();
             let room_id = $('[name="tf_available_rooms"]').val();
+            var from = $('[name="tf_hotel_date[from]"]').val();
+            var to = $('[name="tf_hotel_date[to]"]').val();
 
             if (room_id.length > 0) {
                 jQuery.ajax({
@@ -141,6 +143,8 @@
                         _nonce: tf_admin_params.tf_nonce,
                         hotel_id: hotel_id,
                         room_id: room_id,
+                        from: from,
+                        to: to,
                     },
                     beforeSend: function () {
                         $('#tf-backend-hotel-book-btn').attr('disabled', 'disabled');
@@ -244,13 +248,13 @@
                             obj.message,
                             'success'
                         )
-                        form[0].reset();
-                        form.find('input').removeClass('error-input');
-                        form.find('select').removeClass('error-input');
-                        form.find('textarea').removeClass('error-input');
-                        form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();
-                        form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();
-                        form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();
+                        // form[0].reset();
+                        // form.find('input').removeClass('error-input');
+                        // form.find('select').removeClass('error-input');
+                        // form.find('textarea').removeClass('error-input');
+                        // form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();
+                        // form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();
+                        // form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();
                     }
                     btn.removeClass('tf-btn-loading');
                 },

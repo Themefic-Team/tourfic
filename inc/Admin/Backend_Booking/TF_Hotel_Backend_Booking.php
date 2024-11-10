@@ -302,6 +302,8 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 
 		$hotel_id = isset( $_POST['hotel_id'] ) ? $_POST['hotel_id'] : '';
 		$room_id  = isset( $_POST['room_id'] ) ? $_POST['room_id'] : '';
+		$from  = isset( $_POST['from'] ) ? $_POST['from'] : '';
+		$to  = isset( $_POST['to'] ) ? $_POST['to'] : '';
 
 		if ( ! empty( $hotel_id ) && ! empty( $room_id ) ) {
 			$rooms = Room::get_hotel_rooms( $hotel_id);
@@ -318,64 +320,93 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 						$order_ids          = ! empty( $room['order_id'] ) ? $room['order_id'] : '';
 						$num_room_available = ! empty( $room['num-room'] ) ? $room['num-room'] : '1';
 						$reduce_num_room    = ! empty( $room['reduce_num_room'] ) ? $room['reduce_num_room'] : false;
+						$multi_by_date_ck   = ! empty( $room['price_multi_day'] ) ? ! empty( $room['price_multi_day'] ) : false;
 						$number_orders      = '0';
+
+						// Check availability by date option
+						$tfperiod = new \DatePeriod(
+							new \DateTime( $from . ' 00:00' ),
+							new \DateInterval( 'P1D' ),
+							(new \DateTime( $to . ' 23:59' ))
+						);
+	
+						$avail_durationdate = [];
+						$is_first = true;
+						foreach ( $tfperiod as $date ) {
+							if($multi_by_date_ck){
+								if ($is_first) {
+									$is_first = false;
+									continue;
+								}
+							}
+							$avail_durationdate[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
+						}
 
 						if ( ! empty( $order_ids ) && $reduce_num_room == true ) {
 
-							//Get backend available date range as an array
-							if ( $avil_by_date ) {
-								$order_date_ranges   = array();
+							# Get backend available date range as an array
+							if ( !empty( $avil_by_date ) ) {
+	
+								$order_date_ranges = array();
+	
 								$backend_date_ranges = array();
 								foreach ( $avail_date as $single_date_range ) {
-									array_push( $backend_date_ranges, array( strtotime( $single_date_range["check_in"] ), strtotime( $single_date_range["check_out"] ) ) );
-								}
-							}
-
-							$order_ids = explode( ',', $order_ids );
-
-							foreach ( $order_ids as $order_id ) {
-								# Get Only the completed orders
-								$tf_orders_select     = array(
-									'select' => "post_id,order_details",
-									'post_type' => 'hotel',
-									'query'  => " AND ostatus = 'completed' AND order_id = " . $order_id
-								);
-								$tf_hotel_book_orders = Helper::tourfic_order_table_data( $tf_orders_select );
-
-								# Get and Loop Over Order Items
-								foreach ( $tf_hotel_book_orders as $item ) {
-									$order_details = json_decode( $item['order_details'] );
-									/**
-									 * Order item data
-									 */
-									$ordered_number_of_room = ! empty( $order_details->room ) ? $order_details->room : 0;
-
-									if ( $avil_by_date ) {
-
-										$order_check_in_date  = strtotime( $order_details->check_in );
-										$order_check_out_date = strtotime( $order_details->check_out );
-
-										$tf_order_check_in_date  = $order_details->check_in;
-										$tf_order_check_out_date = $order_details->check_out;
-										if ( ! empty( $avail_durationdate ) && ( in_array( $tf_order_check_out_date, $avail_durationdate ) || in_array( $tf_order_check_in_date, $avail_durationdate ) ) ) {
-											# Total number of room booked
-											$number_orders = $number_orders + $ordered_number_of_room;
-										}
-										array_push( $order_date_ranges, array( $order_check_in_date, $order_check_out_date ) );
-
-									} else {
-										$order_check_in_date  = $order_details->check_in;
-										$order_check_out_date = $order_details->check_out;
-										if ( ! empty( $avail_durationdate ) && ( in_array( $order_check_out_date, $avail_durationdate ) || in_array( $order_check_in_date, $avail_durationdate ) ) ) {
-											# Total number of room booked
-											$number_orders = $number_orders + $ordered_number_of_room;
-										}
+	
+									if(is_array($single_date_range) && !empty( $single_date_range["availability"] )){
+										array_push( $backend_date_ranges, array( strtotime( $single_date_range["availability"]["from"] ), strtotime( $single_date_range["availability"]["to"] ) ) );
 									}
 								}
 							}
-							//Calculate available room number after order
-							$num_room_available = $num_room_available - $number_orders; // Calculate
-							$num_room_available = max( $num_room_available, 0 ); // If negetive value make that 0
+	
+							# Convert order ids to array
+							$order_ids = explode( ',', $order_ids );
+	
+							$room_bookings_per_day = array();
+	
+							foreach ($avail_durationdate as $available_date) {
+								$available_timestamp = strtotime($available_date);
+	
+								$room_booked_today = 0;
+	
+								foreach ($order_ids as $order_id) {
+	
+									# Get completed orders
+									$tf_orders_select = array(
+										'select' => "post_id,order_details",
+										'post_type' => 'hotel',
+										'query' => " AND ostatus = 'completed' AND order_id = ".$order_id
+									);
+									$tf_hotel_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
+	
+									foreach ($tf_hotel_book_orders as $item) {
+										$order_details = json_decode($item['order_details']);
+										$order_check_in_date  = strtotime($order_details->check_in);
+										$order_check_out_date = strtotime($order_details->check_out);
+										$ordered_number_of_room = !empty($order_details->room) ? $order_details->room : 0;
+	
+										# Check if the order's date range overlaps with the current available date
+										if($multi_by_date_ck){
+											if ($order_check_in_date < $available_timestamp && $order_check_out_date >= $available_timestamp) {
+												$room_booked_today += $ordered_number_of_room;
+											}
+										} else {
+											if ($order_check_in_date <= $available_timestamp && $order_check_out_date >= $available_timestamp) {
+												$room_booked_today += $ordered_number_of_room;
+											}
+										}
+									}
+								}
+	
+								# Track room availability for this specific date
+								$room_bookings_per_day[$available_date] = $room_booked_today;
+							}
+	
+							# Find the maximum number of rooms booked on any day within the date range
+							$number_orders = max($room_bookings_per_day);
+	
+							# Calculate available rooms
+							$num_room_available = $num_room_available - $number_orders;
+							$num_room_available = max($num_room_available, 0);
 						}
 
 						$response['adults']   = $room['adult'];
@@ -514,7 +545,26 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 				'order_date'       => gmdate( 'Y-m-d H:i:s' ),
 			);
 
-			Helper::tf_set_order( $order_data );
+			$order_id = Helper::tf_set_order( $order_data );
+
+			$rooms     = Room::get_hotel_rooms( intval( $field['tf_available_hotels'] ) );
+			if ( ! empty( $rooms ) ) {
+				foreach ( $rooms as $_room ) {
+					$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
+					# Check if order is for this room
+					if ( $room['unique_id'] == $field['tf_available_rooms'] ) {
+
+						$old_order_id = $room['order_id'];
+
+						$old_order_id != "" && $old_order_id .= ",";
+						$old_order_id .= $order_id;
+
+						# set old + new data to the oder_id meta
+						$room['order_id'] = $old_order_id;
+						update_post_meta( $_room->ID, 'tf_room_opt', $room );
+					}
+				}
+			}
 
 			$response['success'] = true;
 			$response['message'] = esc_html__( 'Your booking has been successfully submitted.', 'tourfic' );
