@@ -84,15 +84,6 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 						'scrollWheelZoom' => true,
 					)
 				),
-				//Property Surroundings
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'We\'re offering an additional feature called <b>property surroundings</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of this fantastic option!</a>', 'tourfic' ) ),
-				),
 			),
 		),
 

@@ -123,6 +123,8 @@ class Base {
 		\Tourfic\App\Shortcodes\Vendor_Post::instance();
 
 		\Tourfic\App\Shortcodes\Cars::instance();
+		\Tourfic\App\Shortcodes\Recent_Cars::instance();
+		\Tourfic\App\Shortcodes\Carrental_Brand::instance();
 	}
 }
 

@@ -46,7 +46,7 @@ class Car_Rental_CPT extends \Tourfic\Core\Post_Type {
 					'assign_terms' => 'edit_tf_carrental',
 					'edit_terms'   => 'edit_tf_carrental',
 				),
-				'show_in_menu' => false
+				'show_in_menu' => true
 			),
 			array(
 				'name'          => esc_html__('Fuel Type', 'tourfic' ),
