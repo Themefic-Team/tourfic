@@ -21199,6 +21199,13 @@ html {
   overflow: visible !important;
 }
 
+.tf-hotel-template-4 .tf-archive-details .tf-details-right .gm-style .gm-style-iw-d:focus-visible,
+.tf_template_4_hotel_archive .tf-archive-details .tf-details-right .gm-style .gm-style-iw-d:focus-visible,
+.tf_template_4_tour_archive .tf-archive-details .tf-details-right .gm-style .gm-style-iw-d:focus-visible,
+.tf_template_4_apartment_archive .tf-archive-details .tf-details-right .gm-style .gm-style-iw-d:focus-visible {
+  outline: none !important;
+}
+
 .tf-hotel-template-4 .tf-archive-details .tf-details-right .gm-style .gm-style-iw-chr,
 .tf-hotel-template-4 .tf-archive-details .tf-details-right .gm-style .gm-style-iw-ch,
 .tf_template_4_hotel_archive .tf-archive-details .tf-details-right .gm-style .gm-style-iw-chr,
@@ -21208,6 +21215,13 @@ html {
 .tf_template_4_apartment_archive .tf-archive-details .tf-details-right .gm-style .gm-style-iw-chr,
 .tf_template_4_apartment_archive .tf-archive-details .tf-details-right .gm-style .gm-style-iw-ch {
   display: none !important;
+}
+
+.tf-hotel-template-4 .tf-archive-details .tf-details-right .tf-map-item:focus-visible,
+.tf_template_4_hotel_archive .tf-archive-details .tf-details-right .tf-map-item:focus-visible,
+.tf_template_4_tour_archive .tf-archive-details .tf-details-right .tf-map-item:focus-visible,
+.tf_template_4_apartment_archive .tf-archive-details .tf-details-right .tf-map-item:focus-visible {
+  outline: none !important;
 }
 
 .tf-hotel-template-4 .tf-archive-details .tf-details-right .tf-map-item .tf-map-item-thumb,
@@ -22795,9 +22809,17 @@ html {
   overflow: visible !important;
 }
 
+.fancybox-container .tf-archive-details .tf-details-right .gm-style .gm-style-iw-d:focus-visible {
+  outline: none !important;
+}
+
 .fancybox-container .tf-archive-details .tf-details-right .gm-style .gm-style-iw-chr,
 .fancybox-container .tf-archive-details .tf-details-right .gm-style .gm-style-iw-ch {
   display: none !important;
+}
+
+.fancybox-container .tf-archive-details .tf-details-right .tf-map-item:focus-visible {
+  outline: none !important;
 }
 
 .fancybox-container .tf-archive-details .tf-details-right .tf-map-item .tf-map-item-thumb {

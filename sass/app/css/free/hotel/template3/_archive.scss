@@ -387,6 +387,9 @@ $t4-main-color: #060D1C;
 
                 .gm-style-iw-d {
                     overflow: visible !important;
+                    &:focus-visible{
+                        outline: none !important;
+                    }
                 }
                 .gm-style-iw-chr,
                 .gm-style-iw-ch{
@@ -395,6 +398,9 @@ $t4-main-color: #060D1C;
             }
 
             .tf-map-item {
+                &:focus-visible{
+                    outline: none !important;
+                }
                 .tf-map-item-thumb {
                     height: 142px;
                     width: 262px;
