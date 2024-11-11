@@ -24,6 +24,7 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 					'hotel_tab_title' => esc_html__("Hotel", 'tourfic'),
 					'tour_tab_title' => esc_html__("Tour", 'tourfic'),
 					'apartment_tab_title' => esc_html__("Apartment", 'tourfic'),
+					'car_tab_title' => esc_html__("Car", 'tourfic'),
 					'title'     => '',
 					'subtitle'  => '',
 					'classes'   => '',
@@ -85,7 +86,7 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 				<?php endif ?>
 
 				<?php if ( ! in_array( 'carrentals', $disable_services ) && Helper::tf_is_search_form_tab_type( 'carrentals', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
-					<button class="tf-tablinks btn-styled" data-form-id="tf-car-booking-form"><?php esc_html_e( 'Car', 'tourfic' ); ?></button>
+					<button class="tf-tablinks btn-styled" data-form-id="tf-car-booking-form"><?php esc_html_e( apply_filters("tf_car_search_form_tab_button_text", $car_tab_title ) , 'tourfic' ); ?></button>
 				<?php endif ?>
 
 				<?php do_action( 'tf_after_booking_form_tab', $type ) ?>

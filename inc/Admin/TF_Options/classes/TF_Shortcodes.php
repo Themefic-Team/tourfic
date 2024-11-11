@@ -1639,20 +1639,6 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Title', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
-                                        </div>
-                                    </div>
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Subtitle', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-sg-row">
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Order', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
                                                 <option value="order='ASC'"><?php esc_html_e( 'ASC', 'tourfic' ); ?></option>
@@ -1670,8 +1656,25 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Slides to show', 'tourfic' ) ?></h3>
-                                            <input type="number" value="5" data-count="slidestoshow" class="post-count tf-setting-field">
+                                            <h3><?php echo esc_html__( 'Car style', 'tourfic' ) ?></h3>
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="style='grid'"><?php esc_html_e( 'Grid', 'tourfic' ); ?></option>
+                                                <option value="style='list'"><?php esc_html_e( 'List', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Title', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Subtitle', 'tourfic' ) ?></h3>
+                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
                                         </div>
                                     </div>
                                 </div>

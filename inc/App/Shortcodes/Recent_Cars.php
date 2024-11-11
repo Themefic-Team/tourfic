@@ -20,7 +20,7 @@ class Recent_Cars extends \Tourfic\Core\Shortcodes {
 					'title'        => '',
 					'subtitle'     => '',
 					'count'        => 10,
-					'slidestoshow' => 5,
+					'style'        => 'grid',
 				),
 				$atts
 			)
@@ -36,55 +36,35 @@ class Recent_Cars extends \Tourfic\Core\Shortcodes {
 
 		ob_start();
 
-		$apartment_loop = new \WP_Query( $args );
-
-		// Generate an Unique ID
-		$thisid = uniqid( 'tfpopular_' );
-
+        if ( $style == 'list' ) {
+			$views_activate = 'list-view';
+		} else {
+			$views_activate = 'grid-view';
+		}
+		$car_loop = new \WP_Query( $args );
 		?>
-		<?php if ( $apartment_loop->have_posts() ) : ?>
-			<div class="tf-widget-slider recent-apartment-slider">
+		<?php if ( $car_loop->have_posts() ) : ?>
+			<div class="tf-car-archive-result tf-car-lists-widgets">
 				<div class="tf-heading">
 					<?php
 					echo ! empty( $title ) ? '<h2>' . esc_html( $title ) . '</h2>' : '';
 					echo ! empty( $subtitle ) ? '<p>' . esc_html( $subtitle ) . '</p>' : '';
 					?>
 				</div>
+                <?php do_action("tf_car_archive_card_items_before"); ?>
+                <div class="tf-car-result archive_ajax_result tf-flex tf-flex-gap-32 <?php echo esc_attr($views_activate); ?>">
+                    
+                    <?php
+                        while ( $car_loop->have_posts() ) {
+                            $car_loop->the_post();
+                            tf_car_archive_single_item();
+                        }
+                    ?>
 
-				<div class="tf-slider-items-wrapper">
-					<?php while ( $apartment_loop->have_posts() ) {
-						$apartment_loop->the_post();
-						$post_id                    = get_the_ID();
-						$related_comments_apartment = get_comments( array( 'post_id' => $post_id ) );
-						$meta                       = get_post_meta( $post_id, 'tf_carrental_opt', true );
-						// $min_price = Pricing::instance( $post_id )->get_min_max_price();
-						// $discounted_price = Pricing::instance( $post_id )->calculate_discount( $min_price["min"] );
+                </div>
+                <?php do_action("tf_car_archive_card_items_after"); ?>
 
-						?>
-						<div class="tf-slider-item" style="background-image: url(<?php echo esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ); ?>);">
-							<div class="tf-slider-content">
-								<div class="tf-slider-desc">
-									<h3>
-										<a href="<?php the_permalink() ?>"><?php the_title() ?></a>
-									</h3>
-									<?php if ( $related_comments_apartment ) { ?>
-										<div class="tf-slider-rating-star">
-											<i class="fas fa-star"></i> <span style="color:#fff;"><?php echo esc_html( TF_Review::tf_total_avg_rating( $related_comments_apartment ) ); ?></span>
-										</div>
-									<?php } ?>
-									<p><?php echo wp_kses_post( wp_trim_words( get_the_content(), 10 ) ); ?></p>
-									<div class="tf-recent-room-price">
-                                        <?php $total_prices = Pricing::set_total_price($meta, '', '', '', ''); ?>
-                                        <?php if(!empty($total_prices['sale_price'])): ?>
-                                        <span><?php echo $total_prices['sale_price'] ? wc_price($total_prices['sale_price']) : '' ?> <small>/ <?php echo esc_html($total_prices['type']); ?></small></span>
-                                        <?php endif; ?>
-                                    </div>
-								</div>
-							</div>
-						</div>
-					<?php } ?>
-				</div>
-			</div>
+            </div>
 		<?php endif;
 		wp_reset_postdata(); ?>
 
