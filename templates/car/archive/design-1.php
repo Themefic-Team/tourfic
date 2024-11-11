@@ -1,6 +1,6 @@
 <?php 
 use \Tourfic\Classes\Helper;
-$tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['_archive_view'] : 'grid';
+$tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_view'] : 'grid';
 
 $tf_car_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_design_1_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_design_1_bannar'] : '';
 

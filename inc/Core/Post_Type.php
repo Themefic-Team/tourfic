@@ -145,10 +145,14 @@ abstract class Post_Type {
 			if( !empty( $this->post_args['name'] ) && $this->post_args['name'] == 'Apartments' ) {
 				$hidden_taxonomies = array( 'Features' );
 			}
-			else if( !empty( $this->post_args['name'] ) && $this->post_args['name'] == 'Tours' ) {
+			if( !empty( $this->post_args['name'] ) && $this->post_args['name'] == 'Tours' ) {
 				$hidden_taxonomies = array( 'Features', "Types" );
-			} else {
+			}
+			if( !empty( $this->post_args['name'] ) && $this->post_args['name'] == 'Hotels' ) {
 				$hidden_taxonomies = array( 'Features' );
+			}
+			if( !empty( $this->post_args['name'] ) && $this->post_args['name'] == 'Car Rentals' ) {
+				$hidden_taxonomies = array( 'Brand / Make', "Fuel Type", 'Year' );
 			}
 
 			$tf_tax_args = array(

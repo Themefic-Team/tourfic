@@ -1091,24 +1091,24 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => __( 'Archive & Search Result Banner Image', 'tourfic' ),
 									'subtitle' => __( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
 									'library' => 'image',
-									'dependency' => array( 'car-archive', '==', 'design-1' ),
+									// 'dependency' => array( 'car-archive', '==', 'design-1' ),
 								),
 								array(
 									'id'         => 'car_archive_view',
 									'type'       => 'select',
 									'label'      => __( 'Archive Layout', 'tourfic' ),
 									'options'    => array(
-										'list' => __( 'List', 'tourfic' ),
 										'grid' => __( 'Grid', 'tourfic' ),
+										'list' => __( 'List', 'tourfic' ),
 									),
 									'default'    => 'grid',
-									'dependency' => array( 'car-archive', '==', 'design-1' ),
+									// 'dependency' => array( 'car-archive', '==', 'design-1' ),
 								),
 								array(
 									'id'      => 'car_design_1_fonts_notice',
 									'type'    => 'notice',
 									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Inter Sans" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'car-archive', '==', 'design-1' ),
+									// 'dependency' => array( 'car-archive', '==', 'design-1' ),
 								),
 								array(
 									'id'      => 'car_archive_notice',
