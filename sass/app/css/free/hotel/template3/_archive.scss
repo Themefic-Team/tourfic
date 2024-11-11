@@ -377,6 +377,10 @@ $t4-main-color: #060D1C;
                 display: none !important;
             }
             .gm-style {
+                
+                :focus-visible{
+                    outline: none !important;
+                }
                 .gm-style-iw-c {
                     border-radius: 4px !important;
                     padding: 0;

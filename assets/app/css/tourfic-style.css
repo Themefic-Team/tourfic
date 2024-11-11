@@ -21181,6 +21181,13 @@ html {
   display: none !important;
 }
 
+.tf-hotel-template-4 .tf-archive-details .tf-details-right .gm-style :focus-visible,
+.tf_template_4_hotel_archive .tf-archive-details .tf-details-right .gm-style :focus-visible,
+.tf_template_4_tour_archive .tf-archive-details .tf-details-right .gm-style :focus-visible,
+.tf_template_4_apartment_archive .tf-archive-details .tf-details-right .gm-style :focus-visible {
+  outline: none !important;
+}
+
 .tf-hotel-template-4 .tf-archive-details .tf-details-right .gm-style .gm-style-iw-c,
 .tf_template_4_hotel_archive .tf-archive-details .tf-details-right .gm-style .gm-style-iw-c,
 .tf_template_4_tour_archive .tf-archive-details .tf-details-right .gm-style .gm-style-iw-c,
@@ -22795,6 +22802,10 @@ html {
 
 .fancybox-container .tf-archive-details .tf-details-right .gm-style-iw-tc::after {
   display: none !important;
+}
+
+.fancybox-container .tf-archive-details .tf-details-right .gm-style :focus-visible {
+  outline: none !important;
 }
 
 .fancybox-container .tf-archive-details .tf-details-right .gm-style .gm-style-iw-c {
