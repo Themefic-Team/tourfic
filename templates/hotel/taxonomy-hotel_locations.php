@@ -5,7 +5,12 @@
 
  use \Tourfic\Classes\Helper;
 
-get_header();
+ if(wp_is_block_theme()){
+    wp_head();
+    block_header_area();
+}else{
+    get_header();
+}
 
 if ( !Helper::tf_is_woo_active() ) {
 	?>
@@ -135,4 +140,9 @@ if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
 </div>
 <?php
 }
-get_footer();
+if(wp_is_block_theme()){
+    wp_footer();
+    block_footer_area();
+ }else{
+	get_footer();
+ }

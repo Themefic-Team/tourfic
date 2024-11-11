@@ -4,7 +4,12 @@
  * @author Foysal
  */
 
-get_header();
+ if(wp_is_block_theme()){
+    wp_head();
+    block_header_area();
+}else{
+    get_header();
+}
 
 use \Tourfic\Classes\Helper;
 
@@ -122,4 +127,9 @@ if( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template=="design
 </div>
 <?php
 }
-get_footer();
+if(wp_is_block_theme()){
+    wp_footer();
+    block_footer_area();
+ }else{
+	get_footer();
+ }

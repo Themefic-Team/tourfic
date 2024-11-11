@@ -8,7 +8,12 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Tour\Tour_Price;
 use \Tourfic\App\Wishlist;
 
-get_header();
+if(wp_is_block_theme()){
+    wp_head();
+    block_header_area();
+}else{
+    get_header();
+}
 
 if ( !Helper::tf_is_woo_active() ) {
 	?>
@@ -266,4 +271,9 @@ while ( have_posts() ) : the_post();
 endwhile;
 ?>
 <?php
-get_footer();
+if(wp_is_block_theme()){
+    wp_footer();
+    block_footer_area();
+ }else{
+	get_footer();
+ }
