@@ -72,10 +72,10 @@
             formData.append('_nonce', tf_params.nonce);
             formData.append('type', posttype);
             formData.append('dest', dest);
-            formData.append('adults', adults);
+            formData.append('adults', adults );
             formData.append('room', room);
-            formData.append('children', children);
-            formData.append('infant', infant);
+            formData.append('children', children ? children : 0);
+            formData.append('infant', infant ? infant : 0);
             formData.append('checkin', checkin);
             formData.append('checkout', checkout);
             formData.append('filters', filters);
