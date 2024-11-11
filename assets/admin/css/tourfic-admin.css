@@ -7091,6 +7091,120 @@ a.tf-import-btn, a.tf-export-btn {
   max-width: 100%;
 }
 
+.tf_enquiry_details_wrap_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf_enquiry_details_wrap_header {
+    display: flow-root;
+  }
+}
+
+.tf_enquiry_details_wrap_header h1 {
+  color: #1D2327;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  padding: 0;
+}
+
+.tf_enquiry_details_wrap_header .tf_header_wrap_button {
+  display: flex;
+  gap: 16px;
+}
+
+.tf_enquiry_details_wrap_header .tf_header_wrap_button .tf_booking_views_button {
+  border-radius: 8px;
+  border: 1px solid #EEF6F0;
+  background: #FFF;
+  padding: 4px 8px;
+  float: left;
+  height: 46px;
+  box-sizing: border-box;
+}
+
+.tf_enquiry_details_wrap_header .tf_header_wrap_button .tf_booking_views_button ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+}
+
+.tf_enquiry_details_wrap_header .tf_header_wrap_button .tf_booking_views_button ul li {
+  height: 36px;
+  width: 36px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.tf_enquiry_details_wrap_header .tf_header_wrap_button .tf_booking_views_button ul li i {
+  font-size: 15px;
+}
+
+.tf_enquiry_details_wrap_header .tf_header_wrap_button .tf_booking_views_button ul li.active {
+  color: #f0f0f1;
+  background-color: #004e9d;
+  border-radius: 4px;
+}
+
+.tf_enquiry_details_wrap_header .tf_header_wrap_button a.tf-enquiry-export-btn {
+  padding: 10px 32px;
+  border-radius: 8px;
+  border: 1px solid #003C79;
+  background: #FFF;
+  margin: 0 !important;
+  color: #003C79;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  /* 150% */
+  transition: .3s all ease;
+}
+
+.tf_enquiry_details_wrap_header .tf_header_wrap_button a.tf-enquiry-export-btn:hover {
+  color: #f0f0f1;
+  background-color: #003C79;
+}
+
+.tf_enquiry_details_wrap_header .tf_header_wrap_button a.tf-booking-btn,
+.tf_enquiry_details_wrap_header .tf_header_wrap_button .tf-google-sync-button button {
+  padding: 10px 32px;
+  border-radius: 8px;
+  border: 1px solid #003C79;
+  background: #003C79;
+  margin: 0;
+  box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  /* 150% */
+  color: #F0F0F1;
+  transition: .3s all ease;
+  cursor: pointer;
+}
+
+.tf_enquiry_details_wrap_header .tf_header_wrap_button a.tf-booking-btn:hover,
+.tf_enquiry_details_wrap_header .tf_header_wrap_button .tf-google-sync-button button:hover {
+  color: #f0f0f1;
+  background-color: #004E9D;
+}
+
+.tf-enquiry-table {
+  display: block !important;
+}
+
 .tf-enquiry-table .tf-enquiry-unread th, .tf-enquiry-table .tf-enquiry-unread td {
   background-color: #EDF2F7 !important;
   border-bottom: 1px solid #F0F2F4 !important;
@@ -7204,6 +7318,10 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-enquiry-table .pro-notice-row .tf-pro-notice .tf-field-notice-inner a {
   text-decoration: underline;
   color: #295BFF;
+}
+
+.tf-enquiry-details-header-filter {
+  display: flex !important;
 }
 
 .tf-enquiry-single-header-details {
