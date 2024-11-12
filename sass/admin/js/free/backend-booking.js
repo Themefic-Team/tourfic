@@ -49,6 +49,7 @@
                             //select the first option
                             select2.val(select2.find('option:eq(1)').val()).trigger('change');
                             $('#tf-backend-hotel-book-btn').removeAttr('disabled');
+                            $('[name="tf_hotel_rooms_number"]').removeAttr('disabled');
                         }
                     },
                     error: function (response) {
@@ -155,26 +156,30 @@
                         } else {
                             var select = $('[name="tf_hotel_rooms_number"]');
                             select.empty();
-                            for (var i = 1; i <= response.data.rooms; i++) {
-                                if (i === 1) {
-                                    select.append('<option value="' + i + '" selected>' + i + ' Room</option>');
-                                } else {
-                                    select.append('<option value="' + i + '">' + i + ' Rooms</option>');
+                            
+                            if(response.data.rooms > 0 ){
+                                for (var i = 1; i <= response.data.rooms; i++) {
+                                    if (i === 1) {
+                                        select.append('<option value="' + i + '" selected>' + i + ' Room</option>');
+                                    } else {
+                                        select.append('<option value="' + i + '">' + i + ' Rooms</option>');
+                                    }
                                 }
+                                
+                                $('#tf-backend-hotel-book-btn').removeAttr('disabled');
+                            } else {
+                                select.append('<option value="" selected>No Room Available</option>');
+                                select.attr('disabled', 'disabled');
                             }
 
                             $('[name="tf_hotel_adults_number"]').val(response.data.adults).attr('max', response.data.adults * response.data.rooms);
                             $('[name="tf_hotel_children_number"]').val(response.data.children).attr('max', response.data.children * response.data.rooms);
-
-                            $('#tf-backend-hotel-book-btn').removeAttr('disabled');
                         }
                     },
                     error: function (response) {
                         console.log(response);
-                    },
-                    complete: function (response) {
                         $('#tf-backend-hotel-book-btn').removeAttr('disabled');
-                    }
+                    },
                 });
             }
         });
@@ -248,13 +253,13 @@
                             obj.message,
                             'success'
                         )
-                        // form[0].reset();
-                        // form.find('input').removeClass('error-input');
-                        // form.find('select').removeClass('error-input');
-                        // form.find('textarea').removeClass('error-input');
-                        // form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();
-                        // form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();
-                        // form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();
+                        form[0].reset();
+                        form.find('input').removeClass('error-input');
+                        form.find('select').removeClass('error-input');
+                        form.find('textarea').removeClass('error-input');
+                        form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();
+                        form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();
+                        form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();
                     }
                     btn.removeClass('tf-btn-loading');
                 },
