@@ -2150,6 +2150,19 @@ class Hotel {
                         // flatpickr First Day of Week
 						<?php Helper::tf_flatpickr_locale( 'root' ); ?>
 
+						const regexMap = {
+                            'Y/m/d': /(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/,
+                            'd/m/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
+                            'm/d/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
+                            'Y-m-d': /(\d{4}-\d{2}-\d{2}).*(\d{4}-\d{2}-\d{2})/,
+                            'd-m-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
+                            'm-d-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
+                            'Y.m.d': /(\d{4}\.\d{2}\.\d{2}).*(\d{4}\.\d{2}\.\d{2})/,
+                            'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
+                            'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
+                        };
+                        const dateRegex = regexMap['<?php echo $hotel_date_format_for_users; ?>'];
+
                         $("#tf_hotel_aval_check #check-in-out-date").flatpickr({
                             enableTime: false,
                             mode: "range",
@@ -2162,11 +2175,17 @@ class Hotel {
 							<?php Helper::tf_flatpickr_locale(); ?>
 
                             onReady: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+                                    return `${date1} - ${date2}`;
+                                });
                             },
                             onChange: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+									return `${date1} - ${date2}`;
+								});
+								instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
+									return `${d1} - ${d2}`;
+								});
                             }
                         });
 
@@ -2481,6 +2500,18 @@ class Hotel {
                     $(document).ready(function () {
                         var selectedTemplate = '<?php echo esc_html( $tf_hotel_selected_template ); ?>';
                         var month = 1;
+						const regexMap = {
+                            'Y/m/d': /(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/,
+                            'd/m/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
+                            'm/d/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
+                            'Y-m-d': /(\d{4}-\d{2}-\d{2}).*(\d{4}-\d{2}-\d{2})/,
+                            'd-m-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
+                            'm-d-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
+                            'Y.m.d': /(\d{4}\.\d{2}\.\d{2}).*(\d{4}\.\d{2}\.\d{2})/,
+                            'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
+                            'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
+                        };
+                        const dateRegex = regexMap['<?php echo $hotel_date_format_for_users; ?>'];
 
                         if ($(window).width() >= 1240) {
                             month = 2;
@@ -2503,11 +2534,14 @@ class Hotel {
 							<?php Helper::tf_flatpickr_locale(); ?>
 
                             onReady: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                dateSetToFields(selectedDates, instance);
+                                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+									return `${date1} - ${date2}`;
+								});
                             },
                             onChange: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+									return `${date1} - ${date2}`;
+								});
                                 dateSetToFields(selectedDates, instance);
                             },
                             defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
@@ -2618,6 +2652,19 @@ class Hotel {
                     // First Day of Week
 					<?php Helper::tf_flatpickr_locale( "root" ); ?>
 
+					const regexMap = {
+						'Y/m/d': /(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/,
+						'd/m/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
+						'm/d/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
+						'Y-m-d': /(\d{4}-\d{2}-\d{2}).*(\d{4}-\d{2}-\d{2})/,
+						'd-m-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
+						'm-d-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
+						'Y.m.d': /(\d{4}\.\d{2}\.\d{2}).*(\d{4}\.\d{2}\.\d{2})/,
+						'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
+						'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
+					};
+					const dateRegex = regexMap['<?php echo $hotel_date_format_for_users; ?>'];
+
                     const checkinoutdateange = flatpickr(".tf-hotel-booking-sidebar #check-in-out-date", {
                         enableTime: false,
                         mode: "range",
@@ -2626,12 +2673,20 @@ class Hotel {
                         altFormat: '<?php echo esc_html( $hotel_date_format_for_users ); ?>',
                         dateFormat: "Y/m/d",
                         onReady: function (selectedDates, dateStr, instance) {
-                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                            instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+								return `${date1} - ${date2}`;
+							});
+                            instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
+								return `${d1} - ${d2}`;
+							});
                         },
                         onChange: function (selectedDates, dateStr, instance) {
-                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                            instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+								return `${date1} - ${date2}`;
+							});
+                            instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
+								return `${d1} - ${d2}`;
+							});
                         },
                         defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
 						<?php
