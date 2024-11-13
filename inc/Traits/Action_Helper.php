@@ -1670,6 +1670,5 @@ trait Action_Helper {
 			$robots['max-image-preview'] = false;
 			return $robots;
 		}
- 		
 	}
 }

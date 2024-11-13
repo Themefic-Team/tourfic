@@ -69,7 +69,7 @@ class Helper {
 		add_action( 'admin_init', array( $this, 'tourfic_check_instantio_active' ), 9 );
         add_action( 'tf_before_container', array( $this, 'tourfic_notice_wrapper' ), 10 );
         // add_action('wp_head', array( $this, 'tf_no_idex_search_page'), 1);
-        add_filter( 'wp_robots', array( $this, 'tf_no_idex_search_page') );
+        // add_filter( 'wp_robots', array( $this, 'tf_no_idex_search_page') );
 	}
     
 	static function tfopt( $option = '', $default = null ) {
