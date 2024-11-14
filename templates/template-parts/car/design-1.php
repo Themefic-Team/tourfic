@@ -510,6 +510,7 @@ $tf_cars_slug = get_option('car_slug');
                                 enableTime: false,
                                 dateFormat: "Y/m/d",
                                 minDate: "today",
+                                disableMobile: "true",
 
                                 // flatpickr locale
                                 <?php Helper::tf_flatpickr_locale(); ?>
@@ -529,6 +530,7 @@ $tf_cars_slug = get_option('car_slug');
                                 enableTime: false,
                                 dateFormat: "Y/m/d",
                                 minDate: "today",
+                                disableMobile: "true",
 
                                 // flatpickr locale
                                 <?php Helper::tf_flatpickr_locale(); ?>
@@ -546,6 +548,7 @@ $tf_cars_slug = get_option('car_slug');
                                 enableTime: true,
                                 noCalendar: true,
                                 dateFormat: "H:i",
+                                disableMobile: "true",
 
                                 // flatpickr locale
                                 <?php Helper::tf_flatpickr_locale(); ?>
@@ -564,6 +567,7 @@ $tf_cars_slug = get_option('car_slug');
                                 enableTime: true,
                                 noCalendar: true,
                                 dateFormat: "H:i",
+                                disableMobile: "true",
                                 // flatpickr locale
                                 <?php Helper::tf_flatpickr_locale(); ?>
 

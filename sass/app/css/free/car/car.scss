@@ -970,8 +970,14 @@
     }
     .tf-driver-location-box{
         padding: 8px;
+        @media #{$max767}{
+            display: flow-root;
+        }
         .tf-driver-location{
             padding-left: 16px;
+            @media #{$max767}{
+                padding-left: 0px;
+            }
             ul{
                 margin: 0;
                 padding: 0;
@@ -1041,6 +1047,9 @@
             }
         }
         .tf-submit-button{
+            @media #{$max767}{
+                margin-top: 16px;
+            }
             button{
                 border-radius: 8px;
                 background: #0866C4;

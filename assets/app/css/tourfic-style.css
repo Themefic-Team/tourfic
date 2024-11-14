@@ -17317,8 +17317,18 @@ html {
 .tf-archive-search-box-wrapper .tf-driver-location-box {
   padding: 8px;
 }
+@media only screen and (max-width: 767.98px) {
+  .tf-archive-search-box-wrapper .tf-driver-location-box {
+    display: flow-root;
+  }
+}
 .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location {
   padding-left: 16px;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location {
+    padding-left: 0px;
+  }
 }
 .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul {
   margin: 0;
@@ -17383,6 +17393,11 @@ html {
 }
 .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location span#tf-required {
   color: red;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-archive-search-box-wrapper .tf-driver-location-box .tf-submit-button {
+    margin-top: 16px;
+  }
 }
 .tf-archive-search-box-wrapper .tf-driver-location-box .tf-submit-button button {
   border-radius: 8px;
