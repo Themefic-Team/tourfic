@@ -655,8 +655,7 @@ function tf_car_booking_pupup_callback() {
 		<div class="tf-protection-featured">
 			<table>
 				<tr>
-					<td width="50%"><?php esc_html_e("What is covered", "tourfic"); ?></td>
-					<td align="center"></td>
+					<td><?php esc_html_e("What is covered", "tourfic"); ?></td>
 					<td align="center"><?php esc_html_e("With protection", "tourfic"); ?></td>
 				</tr>
 
@@ -706,9 +705,7 @@ function tf_car_booking_pupup_callback() {
 								</div>
 							</div>
 						</th>
-						<td align="center">
-							
-						</td>
+
 						<td align="center">
 							<?php 
 							if(!empty($protection['price'])){
@@ -725,7 +722,6 @@ function tf_car_booking_pupup_callback() {
 
 				<tfoot>
 					<tr>
-						<th width="50%" align="right"></th>
 						<th align="center">
 							<?php esc_html_e("Total", "tourfic"); ?>:
 							<input type="hidden" id="tf_total_proteciton_price" value="0">

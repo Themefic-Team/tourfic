@@ -20,6 +20,9 @@
             background: #FFF;
             padding: 16px 24px;
             width: 850px;
+            @media #{$max767}{
+                padding: 24px 15px;
+            }
             .tf-booking-popup-header{
                 margin-bottom: 24px;
                 h3{
@@ -121,6 +124,9 @@
                         @media #{$max991}{
                             width: 100%;
                         }
+                        @media #{$max767}{
+                            padding: 20px 12px;
+                        }
                         table{
                             border: 0px solid;
                             margin: 0;
@@ -134,22 +140,21 @@
                                     font-weight: 400;
                                     line-height: 150%; /* 24px */
                                     padding: 0 0 16px 0px;
+                                    @media #{$max767}{
+                                        font-size: 12px;
+                                        vertical-align: top;
+                                    }
                                     span{
                                         font-weight: 600;
                                     }
                                     &:nth-child(1){
                                         @media #{$max767}{
-                                            width: 100%;
+                                            // width: 100%;
                                         }
                                     }
                                     &:nth-child(2){
                                         @media #{$max767}{
-                                            padding: 0px !important;
-                                        }
-                                    }
-                                    &:nth-child(3){
-                                        @media #{$max767}{
-                                            width: 100px;
+                                            width: 90px;
                                         }
                                     }
                                 }
@@ -161,8 +166,14 @@
                                     font-weight: 700;
                                     line-height: 150%; /* 24px */
                                     padding: 0 0 16px 0px;
+                                    @media #{$max767}{
+                                        font-size: 14px;
+                                    }
                                     .tf-flex.tf-flex-align-center{
                                         flex-wrap: nowrap;
+                                        @media #{$max767}{
+                                            align-items: flex-start;
+                                        }
                                     }
                                     .tf-single-protection-title{
                                         text-align: left;
@@ -170,6 +181,9 @@
                                     }
                                     .tf-protection-select{
                                         height: 15px;
+                                        @media #{$max767}{
+                                            margin-top: 6px;
+                                        }
                                         label{
                                             color: #566676;
                                             font-size: 16px;

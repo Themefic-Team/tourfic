@@ -16367,6 +16367,11 @@ html {
   padding: 16px 24px;
   width: 850px;
 }
+@media only screen and (max-width: 767.98px) {
+  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp {
+    padding: 24px 15px;
+  }
+}
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-popup-header {
   margin-bottom: 24px;
 }
@@ -16471,6 +16476,11 @@ html {
     width: 100%;
   }
 }
+@media only screen and (max-width: 767.98px) {
+  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured {
+    padding: 20px 12px;
+  }
+}
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table {
   border: 0px solid;
   margin: 0;
@@ -16485,22 +16495,18 @@ html {
   line-height: 150%; /* 24px */
   padding: 0 0 16px 0px;
 }
+@media only screen and (max-width: 767.98px) {
+  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td {
+    font-size: 12px;
+    vertical-align: top;
+  }
+}
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td span {
   font-weight: 600;
 }
 @media only screen and (max-width: 767.98px) {
-  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td:nth-child(1) {
-    width: 100%;
-  }
-}
-@media only screen and (max-width: 767.98px) {
   .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td:nth-child(2) {
-    padding: 0px !important;
-  }
-}
-@media only screen and (max-width: 767.98px) {
-  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td:nth-child(3) {
-    width: 100px;
+    width: 90px;
   }
 }
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th {
@@ -16512,8 +16518,18 @@ html {
   line-height: 150%; /* 24px */
   padding: 0 0 16px 0px;
 }
+@media only screen and (max-width: 767.98px) {
+  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th {
+    font-size: 14px;
+  }
+}
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-flex.tf-flex-align-center {
   flex-wrap: nowrap;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-flex.tf-flex-align-center {
+    align-items: flex-start;
+  }
 }
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-single-protection-title {
   text-align: left;
@@ -16521,6 +16537,11 @@ html {
 }
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select {
   height: 15px;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select {
+    margin-top: 6px;
+  }
 }
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label {
   color: #566676;
@@ -18442,6 +18463,7 @@ html {
   display: inline-flex;
   gap: 10px;
   height: 32px;
+  margin-top: 5px;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select .acr-dec,
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select .acr-inc {
