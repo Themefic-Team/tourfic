@@ -18770,6 +18770,12 @@ html {
   text-align: left;
   width: 210px;
 }
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-car-conditions-section table tr th {
+    padding: 8px;
+    width: 33%;
+  }
+}
 .tf-single-car-section .tf-car-conditions-section table tr td {
   color: #566676;
   font-size: 16px;
@@ -18779,6 +18785,11 @@ html {
   border-right: 1px solid #DFE6ED;
   border-bottom: 1px solid #DFE6ED;
   padding: 16px 40px;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-car-conditions-section table tr td {
+    padding: 8px;
+  }
 }
 .tf-single-car-section .tf-car-conditions-section table tr:first-child td {
   border-radius: 0 16px 0 0;

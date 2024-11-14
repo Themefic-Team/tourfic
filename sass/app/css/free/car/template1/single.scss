@@ -1406,6 +1406,10 @@
                     vertical-align: baseline;
                     text-align: left;
                     width: 210px;
+                    @media #{$max767}{
+                        padding: 8px; 
+                        width: 33%;
+                    }
                 }
                 td{
                     color: #566676;
@@ -1416,6 +1420,9 @@
                     border-right: 1px solid #DFE6ED;
                     border-bottom: 1px solid #DFE6ED;
                     padding: 16px 40px;
+                    @media #{$max767}{
+                        padding: 8px; 
+                    }
                 }
                 &:first-child{
                     td{
