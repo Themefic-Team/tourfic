@@ -137,6 +137,21 @@
                                     span{
                                         font-weight: 600;
                                     }
+                                    &:nth-child(1){
+                                        @media #{$max767}{
+                                            width: 100%;
+                                        }
+                                    }
+                                    &:nth-child(2){
+                                        @media #{$max767}{
+                                            padding: 0px !important;
+                                        }
+                                    }
+                                    &:nth-child(3){
+                                        @media #{$max767}{
+                                            width: 100px;
+                                        }
+                                    }
                                 }
                                 th{
                                     color: #27333F;
@@ -397,6 +412,9 @@
             background: #FFF;
             padding: 16px 24px;
             width: 850px;
+            @media #{$max640}{
+                width: 100%;
+            }
             .tf-instraction-popup-header{
                 margin-bottom: 24px;
                 flex-wrap: nowrap;

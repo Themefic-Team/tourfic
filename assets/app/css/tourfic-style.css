@@ -16488,6 +16488,21 @@ html {
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td span {
   font-weight: 600;
 }
+@media only screen and (max-width: 767.98px) {
+  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td:nth-child(1) {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td:nth-child(2) {
+    padding: 0px !important;
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td:nth-child(3) {
+    width: 100px;
+  }
+}
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th {
   color: #27333F;
   border: 0px solid;
@@ -16734,6 +16749,11 @@ html {
   background: #FFF;
   padding: 16px 24px;
   width: 850px;
+}
+@media only screen and (max-width: 640px) {
+  .tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp {
+    width: 100%;
+  }
 }
 .tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header {
   margin-bottom: 24px;
