@@ -60,6 +60,9 @@
 
     .tf-details-menu{
         position: relative;
+        @media #{$max640}{
+            width: 100%;
+        }
         &::before{
             background: linear-gradient(90deg, rgba(217, 217, 217, 0.00) 0%, #F8FAFC 100%);
             position: absolute;
@@ -76,6 +79,12 @@
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
+            @media #{$max640}{
+                overflow-y: auto;
+                width: 100%;
+                display: block ruby;
+
+            }
             li{
                 display: inline-block;
                 a{

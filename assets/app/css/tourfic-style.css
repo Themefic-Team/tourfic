@@ -17481,6 +17481,11 @@ html {
 .tf-single-car-section .tf-details-menu {
   position: relative;
 }
+@media only screen and (max-width: 640px) {
+  .tf-single-car-section .tf-details-menu {
+    width: 100%;
+  }
+}
 .tf-single-car-section .tf-details-menu::before {
   background: linear-gradient(90deg, rgba(217, 217, 217, 0) 0%, #F8FAFC 100%);
   position: absolute;
@@ -17497,6 +17502,13 @@ html {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+}
+@media only screen and (max-width: 640px) {
+  .tf-single-car-section .tf-details-menu ul {
+    overflow-y: auto;
+    width: 100%;
+    display: block ruby;
+  }
 }
 .tf-single-car-section .tf-details-menu ul li {
   display: inline-block;
