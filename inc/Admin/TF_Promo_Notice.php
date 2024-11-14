@@ -521,8 +521,17 @@ class TF_Promo_Notice {
     public  function tf_promo_notice_custom_post_meta_callback() {   
          
         $tf_promo_option = get_option( 'tf_promo__schudle_option' );
-        $start_date = isset($tf_promo_option['start_date']) ? strtotime($tf_promo_option['start_date']) : time();
-        $restart = isset($tf_promo_option['side_restart']) && $tf_promo_option['side_restart'] != false ? $tf_promo_option['side_restart'] : 5;
+        $service_banner = isset($tf_promo_option['service_banner']) ? $tf_promo_option['service_banner'] : array();
+        $promo_banner = isset($tf_promo_option['promo_banner']) ? $tf_promo_option['promo_banner'] : '';
+
+        $current_day = date('l'); 
+        if($service_banner['enable_status'] == true && in_array($current_day, $service_banner['display_days'])){ 
+            $start_date = $service_banner['start_date'];
+            $restart = isset($service_banner['restart']) && $service_banner['restart'] != false ? $service_banner['restart'] : 5;
+        }else{
+            $start_date = $promo_banner['start_date']; 
+            $restart = isset($promo_banner['restart']) && $promo_banner['restart'] != false ? $promo_banner['restart'] : 5;
+        }   
         if(isset($_REQUEST['post_type']) && $_REQUEST['post_type'] == 'tf_hotel'){ 
             update_option( 'tf_hotel_promo_sidebar_notice', time() + (86400 * $restart) );  
         }
