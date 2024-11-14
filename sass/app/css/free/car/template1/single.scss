@@ -325,8 +325,11 @@
                         width: calc(25% - 12px);
                         display: none;
                         height: 122px;
-                        @media #{$max480}{
+                        @media #{$max575}{
                             height: 90px;
+                        }
+                        @media #{$max480}{
+                            height: 60px;
                         }
 
                         img{
@@ -421,6 +424,9 @@
                         i{
                             font-size: 20px;
                         }
+                        @media #{$max767}{
+                            width: calc(33% - 4px);
+                        }
                         @media #{$max575}{
                             width: calc(50% - 8px);
                         }
@@ -445,6 +451,10 @@
                             margin-left: -130px;
                             transition: .3s all ease;
                             text-align: center;
+                            @media #{$max767}{
+                                width: 100%;
+                                margin-left: -50%;
+                            }
                             &::after{
                                 position: absolute;
                                 content: "";
@@ -1180,6 +1190,10 @@
 
     .tf-review-section{
         margin-bottom: 32px;
+        @media #{$max767}{
+            padding-left: 15px;
+            padding-right: 15px;
+        }
         h3{
             color: #27333F;
             font-size: 21px !important;

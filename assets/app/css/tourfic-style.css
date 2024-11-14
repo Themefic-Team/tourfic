@@ -17739,9 +17739,14 @@ html {
   display: none;
   height: 122px;
 }
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 575.98px) {
   .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a {
     height: 90px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a {
+    height: 60px;
   }
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a img {
@@ -17835,6 +17840,11 @@ html {
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul li i {
   font-size: 20px;
 }
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul li {
+    width: calc(33% - 4px);
+  }
+}
 @media only screen and (max-width: 575.98px) {
   .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul li {
     width: calc(50% - 8px);
@@ -17859,6 +17869,12 @@ html {
   margin-left: -130px;
   transition: 0.3s all ease;
   text-align: center;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul li .tf-car-info-tooltip {
+    width: 100%;
+    margin-left: -50%;
+  }
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul li .tf-car-info-tooltip::after {
   position: absolute;
@@ -18547,6 +18563,12 @@ html {
 }
 .tf-single-car-section .tf-review-section {
   margin-bottom: 32px;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-review-section {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 }
 .tf-single-car-section .tf-review-section h3 {
   color: #27333F;
