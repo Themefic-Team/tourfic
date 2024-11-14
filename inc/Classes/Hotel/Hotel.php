@@ -2862,7 +2862,9 @@ class Hotel {
                     <div class="tf-title tf-mt-16">
                         <h2><a href="<?php echo esc_url( $url ); ?>"><?php the_title(); ?></a></h2>
                     </div>
-					<?php TF_Review::tf_archive_single_rating(); ?>
+					<?php if( empty($meta["h-review"]) || $meta["h-review"] != 1 ): ?>
+						<?php TF_Review::tf_archive_single_rating(); ?>
+					<?php endif; ?>
 					<?php if ( $features ) { ?>
                         <div class="tf-archive-features tf-mt-16">
                             <ul>
@@ -2967,10 +2969,12 @@ class Hotel {
 						}
 						?>
                     </div>
-                    <div class="tf-available-ratings">
-						<?php TF_Review::tf_archive_single_rating(); ?>
-                        <i class="fa-solid fa-star"></i>
-                    </div>
+                    <?php if( empty($meta["h-review"]) || $meta["h-review"] != 1 ): ?>
+						<div class="tf-available-ratings">
+							<?php TF_Review::tf_archive_single_rating(); ?>
+							<i class="fa-solid fa-star"></i>
+						</div>
+					<?php endif; ?>
                 </div>
                 <div class="tf-available-room-content">
                     <div class="tf-available-room-content-left">
@@ -3105,7 +3109,9 @@ class Hotel {
 								}
 								?>
                             </div>
-							<?php TF_Review::tf_archive_single_rating(); ?>
+							<?php if( empty($meta["h-review"]) || $meta["h-review"] != 1 ): ?>
+								<?php TF_Review::tf_archive_single_rating(); ?>
+							<?php endif; ?>
                         </div>
 
                         <div class="sr_rooms_table_block">

@@ -2294,7 +2294,9 @@ class Tour {
                         <h2><a href="<?php echo esc_url( $url ); ?>"><?php the_title(); ?></a></h2>
                     </div>
 
-					<?php TF_Review::tf_archive_single_rating(); ?>
+					<?php if( empty($meta["t-review"]) || $meta["t-review"] != 1 ): ?>
+						<?php TF_Review::tf_archive_single_rating(); ?>
+					<?php endif; ?>
 
                     <div class="tf-details tf-mt-16">
                         <p><?php echo wp_kses_post( substr( wp_strip_all_tags( get_the_content() ), 0, 100 ) . '...' ); ?></p>
@@ -2386,10 +2388,12 @@ class Tour {
 						?>
 
                     </div>
-                    <div class="tf-available-ratings">
-						<?php TF_Review::tf_archive_single_rating(); ?>
-                        <i class="fa-solid fa-star"></i>
-                    </div>
+                    <?php if( $meta["t-review"] != 1 || empty( $meta["t-review"] )): ?>
+						<div class="tf-available-ratings">
+							<?php TF_Review::tf_archive_single_rating(); ?>
+							<i class="fa-solid fa-star"></i>
+						</div>
+                    <?php endif; ?>
                 </div>
                 <div class="tf-available-room-content">
                     <div class="tf-available-room-content-left">
@@ -2586,7 +2590,9 @@ class Tour {
 								}
 								?>
                             </div>
-							<?php TF_Review::tf_archive_single_rating(); ?>
+							<?php if( empty($meta["t-review"]) || $meta["t-review"] != 1 ): ?>
+								<?php TF_Review::tf_archive_single_rating(); ?>
+							<?php endif; ?>
                         </div>
                         <div class="tf-tour-desc">
                             <p><?php echo wp_kses_post( substr( wp_strip_all_tags( get_the_content() ), 0, 160 ) . '...' ); ?></p>

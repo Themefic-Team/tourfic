@@ -1660,10 +1660,12 @@ class Apartment {
 						}
 					?>
 				</div>  
-				<div class="tf-available-ratings">
-					<?php TF_Review::tf_archive_single_rating($post_id); ?>
-					<i class="fa-solid fa-star"></i>
-				</div>
+				<?php if( empty($meta["disable-apartment-review"]) || $meta["disable-apartment-review"] != 1 ): ?>
+					<div class="tf-available-ratings">
+						<?php TF_Review::tf_archive_single_rating($post_id); ?>
+						<i class="fa-solid fa-star"></i>
+					</div>
+				<?php endif; ?>
 			</div>
 			<div class="tf-available-room-content">
 				<div class="tf-available-room-content-left">
@@ -1803,7 +1805,9 @@ class Apartment {
 							}
 							?>
                         </div>
-						<?php TF_Review::tf_archive_single_rating($post_id); ?>
+						<?php if( empty($meta["disable-apartment-review"]) || $meta["disable-apartment-review"] != 1 ): ?>
+							<?php TF_Review::tf_archive_single_rating($post_id); ?>
+						<?php endif; ?>
                     </div>
 
                     <div class="sr_rooms_table_block">
