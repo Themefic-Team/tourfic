@@ -34,10 +34,13 @@ if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_un
 
 $meta = get_post_meta( $_POST['post_id'], 'tf_carrental_opt', true );
 $car_extra = !empty($meta['extras']) ? $meta['extras'] : '';
+$car_extra_pass = !empty($_POST['extra_key']) ? $_POST['extra_key'] : '';
 
 foreach($_POST['qty'] as $key => $singleqty){
 	if(!empty($singleqty)){
-		$single_extra_info = !empty($car_extra[$key]) ? $car_extra[$key] : '';
+
+		$extra_key = $car_extra_pass[$key];
+		$single_extra_info = !empty($car_extra[$extra_key]) ? $car_extra[$extra_key] : '';
 		if(!empty($single_extra_info)){ ?>
 			<div class="tf-single-added-extra tf-flex tf-flex-align-center tf-flex-space-bttn">
 				<h4><?php echo !empty($single_extra_info['title']) ? esc_html($single_extra_info['title']) : ''; ?></h4>

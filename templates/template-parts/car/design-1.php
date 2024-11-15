@@ -61,6 +61,13 @@ $tf_cars_slug = get_option('car_slug');
                             </a>
                         </li>
                         <?php } ?>
+                        <?php if(!empty($tc)){ ?>
+                            <li data-menu="<?php echo esc_attr('tf-tc'); ?>">
+                                <a class="tf-hashlink" href="#tf-tc">
+                                    <?php esc_html_e("Terms & Conditions", "tourfic"); ?>
+                                </a>
+                            </li>
+                        <?php } ?>
                     </ul>
                 </div>
                 <div class="tf-top-bar-booking tf-flex tf-flex-gap-32">
@@ -261,6 +268,13 @@ $tf_cars_slug = get_option('car_slug');
                             <li data-menu="<?php echo esc_attr('tf-faq'); ?>">
                                 <a class="tf-hashlink" href="#tf-faq">
                                     <?php esc_html_e("FAQ's", "tourfic"); ?>
+                                </a>
+                            </li>
+                            <?php } ?>
+                            <?php if(!empty($tc)){ ?>
+                            <li data-menu="<?php echo esc_attr('tf-tc'); ?>">
+                                <a class="tf-hashlink" href="#tf-tc">
+                                    <?php esc_html_e("Terms & Conditions", "tourfic"); ?>
                                 </a>
                             </li>
                             <?php } ?>
@@ -762,7 +776,7 @@ $tf_cars_slug = get_option('car_slug');
             </div>
             <?php 
             if(!empty($tc)){ ?>
-            <div class="tf-car-conditions-section">
+            <div class="tf-car-conditions-section" id="tf-tc">
                 <?php if(!empty($tc_title)){ ?>
                 <h3><?php echo esc_html($tc_title); ?></h3>
                 <?php } ?>
