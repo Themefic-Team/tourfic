@@ -18,7 +18,7 @@
             </svg>
             <?php echo esc_attr($passengers); ?> <?php esc_html_e("Persons", "tourfic"); ?>
             <div class="tf-car-info-tooltip">
-                <span><?php esc_html_e("This car has", "tourfic"); ?> <?php echo esc_attr($passengers); ?> <?php esc_html_e("seats available for passengers.", "tourfic"); ?></span>
+                <span><?php esc_html_e("This car has", "tourfic"); ?> <?php echo esc_attr($passengers); ?> <?php esc_html_e("Seats available for passengers.", "tourfic"); ?></span>
             </div>
         </li>
         <?php } ?>
@@ -93,7 +93,7 @@
             <?php echo $unlimited_mileage ? esc_html_e("Unlimited", "tourfic") : $total_mileage.' '.$mileage_type; ?>
 
             <div class="tf-car-info-tooltip">
-                <span><?php echo $unlimited_mileage ? esc_html_e("unlimited mileage", "tourfic") : $total_mileage.' '.$mileage_type; ?> <?php esc_html_e("is included in this rental.", "tourfic"); ?></span>
+                <span><?php echo $unlimited_mileage ? esc_html_e("Unlimited mileage", "tourfic") : $total_mileage.' '.$mileage_type; ?> <?php esc_html_e("is included in this rental.", "tourfic"); ?></span>
             </div>
         </li>
         <li class="tf-flex tf-flex-align-center tf-flex-gap-6">

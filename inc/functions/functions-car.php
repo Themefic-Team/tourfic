@@ -859,10 +859,8 @@ function tf_car_price_calculation_callback() {
 		$total_extra = Pricing::set_extra_price($meta, $extra_ids, $extra_qty, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
 		$total_prices = $total_prices + $total_extra['price'];
 	}
-
-	if(!empty($total_prices)){
-		echo sprintf( esc_html__( 'Total: %1$s', 'tourfic' ), wc_price($total_prices) );
-	}
+	
+	echo sprintf( esc_html__( 'Total: %1$s', 'tourfic' ), wc_price($total_prices) );
 
 	wp_die();
 }

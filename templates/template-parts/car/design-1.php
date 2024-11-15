@@ -609,7 +609,7 @@ $tf_cars_slug = get_option('car_slug');
 
                     <?php do_action( 'tf_car_extras', $car_extras, $post_id, $car_extra_sec_title ); ?>
 
-                    <?php if(!empty($car_driverinfo_status)){ ?>
+                    <?php if(!empty($car_driver_incude) && !empty($car_driverinfo_status)){ ?>
                     <div class="tf-driver-details tf-flex tf-flex-direction-column tf-flex-gap-16 tf-mb-30">
                         <div class="tf-driver-details-header tf-flex tf-flex-space-bttn tf-flex-align-center">
                             <?php if(!empty($driver_sec_title)){ ?>   

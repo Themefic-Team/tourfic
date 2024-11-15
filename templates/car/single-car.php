@@ -150,6 +150,7 @@ while ( have_posts() ) : the_post();
 
 	// Driver Info 
 	$driver_sec_title = ! empty( $meta['driver_sec_title'] ) ? $meta['driver_sec_title'] : '';
+	$car_driver_incude = ! empty( $meta['driver_included'] ) ? $meta['driver_included'] : '';
 	$car_driverinfo_status = ! empty( $meta['car_driverinfo_section'] ) ? $meta['car_driverinfo_section'] : '';
 	$driver_name = ! empty( $meta['driver_name'] ) ? $meta['driver_name'] : '';
 	$driver_email = ! empty( $meta['driver_email'] ) ? $meta['driver_email'] : '';

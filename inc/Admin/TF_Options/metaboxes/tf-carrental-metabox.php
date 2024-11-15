@@ -45,7 +45,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'options'   	=> array( 
 						'design-1' 				=> array(
 							'title'			=> 'Design 1',
-							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design1-tour.jpg",
+							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design-1-car.jpg",
 						)
 					),
 					'default'   	=> 'design-1',
@@ -293,7 +293,8 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'       => 'car_driverinfo_section',
 					'type'     => 'switch',
-					'label'    => esc_html__( 'Do you want to show driver information in the frontend?', 'tourfic' ),
+					'label'    => esc_html__( 'Display Driver Information on Website', 'tourfic' ),
+					'subtitle' => esc_html__( 'This setting allows you to show driver information on the frontend for customers to view.', 'tourfic' ),
 					'dependency'  => [
 						array( 'driver_included', '==', 'true' )
 					],
@@ -387,7 +388,8 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'       => 'benefits_section',
 					'type'     => 'switch',
-					'label'    => esc_html__( 'Do you want to show Benefits in the frontend?', 'tourfic' )
+					'label'    => esc_html__( 'Display Benefits on Website', 'tourfic' ),
+					'subtitle'       => __( 'This setting allows you to show the benefits of the rental package on the frontend for customers to view.', 'tourfic' ),
 				),
 				array(
 					'id'          => 'benefits_sec_title',
@@ -432,7 +434,8 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'       => 'inc_exc_section',
 					'type'     => 'switch',
-					'label'    => esc_html__( 'Do you want to show Include and Exclude section in the frontend?', 'tourfic' ),
+					'label'    => esc_html__( 'Display Inclusions and Exclusions on Website', 'tourfic' ),
+					'subtitle'       => __( 'This setting allows you to show the included and excluded features of the rental on the frontend for customers to view.', 'tourfic' ),
 				),
 				array(
 					'id'          => 'inc_sec_title',
@@ -577,7 +580,8 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'       => 'information_section',
 					'type'     => 'switch',
-					'label'    => esc_html__( 'Do you want to show Contact information in the frontend?', 'tourfic' )
+					'label'    => esc_html__( 'Display Contact Information on Website', 'tourfic' ),
+					'subtitle'       => __( 'This setting allows you to show contact details on the frontend for customers to view.', 'tourfic' ),
 				),
 				array(
 					'id'          => 'owner_sec_title',
