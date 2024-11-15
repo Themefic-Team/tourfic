@@ -267,11 +267,19 @@
             $this = $(this);
             $('.tf-booking-content-wraper').html("");
             let post_id = $this.closest('.tf-booking-btn').find('#post_id').val();
+            let pickup_date = $this.closest('.tf-booking-btn').find('#pickup_date').val();
+            let dropoff_date = $this.closest('.tf-booking-btn').find('#dropoff_date').val();
+            let pickup_time = $this.closest('.tf-booking-btn').find('#pickup_time').val();
+            let dropoff_time = $this.closest('.tf-booking-btn').find('#dropoff_time').val();
 
             var data = {
                 action: 'tf_car_booking_pupup',
                 _nonce: tf_params.nonce,
-                post_id: post_id
+                post_id: post_id,
+                pickup_date: pickup_date,
+                pickup_time: pickup_time,
+                dropoff_date: dropoff_date,
+                dropoff_time: dropoff_time
             };
 
             $.ajax({
