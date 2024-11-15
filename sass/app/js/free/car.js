@@ -833,12 +833,12 @@
 
         // Back to Booking Form
         $(document).on('click', '.tf-back-to-booking', function (e) {
-            e.preventDefault(); // Prevent any default action (optional if button is a link)
+            e.preventDefault(); 
             $('.tf-single-booking-bar').fadeOut();
-            // Scroll to the .tf-single-car-details-warper .tf-details-menu div
+            var bookingBarHeight = $('.tf-single-booking-bar').outerHeight() || 0;
             $('html, body').animate({
-                scrollTop: $('.tf-date-select-box').offset().top
-            }); // 800 is the duration of the scroll animation in milliseconds (adjust as needed)
+                scrollTop: $('.tf-date-select-box').offset().top - bookingBarHeight
+            }); 
         });        
 
         // Social Share

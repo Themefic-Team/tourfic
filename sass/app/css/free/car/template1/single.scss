@@ -56,6 +56,12 @@
                 }
             }
         }
+        .tf-details-menu{
+            width: 668px;
+            @media #{$max991}{
+                width: 100%;
+            }
+        }
     }
 
     .tf-details-menu{
@@ -76,17 +82,29 @@
         ul{
             margin: 0;
             padding: 0;
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            @media #{$max640}{
-                overflow-y: auto;
-                width: 100%;
-                display: block ruby;
+            overflow-y: auto;
+            width: 100%;
+            display: block ruby;
+            scrollbar-width: thin;
+            scrollbar-color: #888 #f1f1f1;
+            &::-webkit-scrollbar {
+                width: 4px;
+            }
 
+            &::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: #888;
+                border-radius: 4px;
+
+                &:hover {
+                    background-color: #555;
+                }
             }
             li{
                 display: inline-block;
+                margin-right: 8px;
                 a{
                     text-decoration: none;
                     color: #27333F;
@@ -111,14 +129,12 @@
         padding: 32px 0;
         display: flex;
         gap: 32px;
-        @media #{$tfmax991}{
+        @media #{$max1199}{
             padding-left: 15px;
             padding-right: 15px;
         }
         @media #{$max767}{
             flex-wrap: wrap;
-            padding-left: 15px;
-            padding-right: 15px;
         }
         .tf-car-details-column{
             width: calc(100% - 472px);
@@ -1200,7 +1216,7 @@
 
     .tf-review-section{
         margin-bottom: 32px;
-        @media #{$max767}{
+        @media #{$max1199}{
             padding-left: 15px;
             padding-right: 15px;
         }
@@ -1382,11 +1398,7 @@
 
     .tf-car-conditions-section{
         padding-bottom: 32px;
-        @media #{$tfmax991}{
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-        @media #{$max767}{
+        @media #{$max1199}{
             padding-left: 15px;
             padding-right: 15px;
         }
