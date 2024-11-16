@@ -1115,6 +1115,20 @@ TF_Settings::option( 'tf_settings', array(
 									// 'dependency' => array( 'car-archive', '==', 'design-1' ),
 								),
 								array(
+									'id'         => 'car_archive_driver_min_age',
+									'type'       => 'number',
+									'label'      => __( 'Archive Filter: Driver Minimum Age', 'tourfic' ),
+									'subtitle'      => __( "This setting allows you to display the driver's minimum age on the archive and search results pages.", 'tourfic' ),
+									'default'    => 18,
+								),
+								array(
+									'id'         => 'car_archive_driver_max_age',
+									'type'       => 'number',
+									'label'      => __( 'Archive Filter: Driver Maximum Age', 'tourfic' ),
+									'subtitle'      => __( "This setting allows you to display the driver's maximum age on the archive and search results pages.", 'tourfic' ),
+									'default'    => 40,
+								),
+								array(
 									'id'      => 'car_design_1_fonts_notice',
 									'type'    => 'notice',
 									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Inter Sans" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),

@@ -362,7 +362,12 @@ class Migrator {
 			if(empty($options["tf-template"]["car-archive"])){
 				$options["tf-template"]["car-archive"] = 'design-1';
 			}
-
+			if(empty($options["tf-template"]["car_archive_driver_min_age"])){
+				$options["tf-template"]["car_archive_driver_min_age"] = 18;
+			}
+			if(empty($options["tf-template"]["car_archive_driver_max_age"])){
+				$options["tf-template"]["car_archive_driver_max_age"] = 40;
+			}
 			update_option( 'tf_settings', $options );
 			wp_cache_flush();
 			flush_rewrite_rules( true );

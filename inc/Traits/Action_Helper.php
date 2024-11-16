@@ -687,6 +687,10 @@ trait Action_Helper {
 		$tf_endprice  = isset( $_POST['endprice'] ) ? sanitize_text_field( $_POST['endprice'] ) : '';
 		$tf_min_seat  = isset( $_POST['min_seat'] ) ? sanitize_text_field( $_POST['min_seat'] ) : '';
 		$tf_max_seat  = isset( $_POST['max_seat'] ) ? sanitize_text_field( $_POST['max_seat'] ) : '';
+
+		$car_driver_min_age = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['car_archive_driver_min_age'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['car_archive_driver_min_age'] : 18;
+        $car_driver_max_age = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] : 40;
+
 		// Cars Data End
 
 		// Author Id if any
@@ -1001,7 +1005,7 @@ trait Action_Helper {
 			$args['meta_query'] = array(
 				array(
 					'key' => 'tf_search_driver_age',
-					'value'    => [18, 40],
+					'value'    => [$car_driver_min_age, $car_driver_max_age],
 					'compare'    => 'BETWEEN',
 					'type' => 'DECIMAL(10,3)'
 				),
