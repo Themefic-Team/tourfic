@@ -1,7 +1,12 @@
 <?php 
 use \Tourfic\Classes\Helper;
 
-get_header('tourfic'); 
+if(wp_is_block_theme()){
+    wp_head();
+    block_header_area();
+}else{
+    get_header('tourfic');
+}
 
 $tf_tour_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
 $tf_hotel_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
@@ -35,4 +40,9 @@ while ( have_posts() ) :
 
 	the_content();
 endwhile;
-get_footer('tourfic');
+if(wp_is_block_theme()){
+    wp_footer();
+    block_footer_area();
+ }else{
+	get_footer('tourfic');
+ }

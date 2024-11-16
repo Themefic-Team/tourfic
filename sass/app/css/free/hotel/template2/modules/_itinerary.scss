@@ -234,4 +234,15 @@
 .tf-itinerary-map{
     margin-top: 32px;
     margin-bottom: 48px;
+
+    @media #{$tfmax767}{
+        margin-top: 12px;
+        margin-bottom: 20px;
+    }
+
+    #tour-location {
+        @media #{$tfmax767}{
+            height: 220px !important;
+        }
+    }
 }

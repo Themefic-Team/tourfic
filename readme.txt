@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.6
-Stable tag: 2.14.2
+Stable tag: 2.14.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -323,6 +323,17 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 21. Email Piping (Pro)
 
 == Changelog ==
+
+= 2.14.3 - 16 November 2024 =
+
+- Fix: Resolved issue with block theme header and footer not displaying.
+- Fix: Fixed child search functionality issue.
+- Fix: Addressed inventory issue for backend hotel bookings.
+- Fix: Corrected map sizing problem on mobile versions across all templates.
+- Fix: Fixed calendar localization issue.
+- Fix: Resolved itinerary warning in Pro version.
+- Fix: Fixed button text issue for external bookings in Pro version.
+- Improvement: Enhanced frontend dashboard translation support for Pro version.
 
 = 2.14.2 - 14 November 2024 =
 

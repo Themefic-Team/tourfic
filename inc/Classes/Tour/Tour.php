@@ -477,6 +477,19 @@ class Tour {
                 (function ($) {
                     $(document).ready(function () {
 
+						const regexMap = {
+                            'Y/m/d': /(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/,
+                            'd/m/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
+                            'm/d/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
+                            'Y-m-d': /(\d{4}-\d{2}-\d{2}).*(\d{4}-\d{2}-\d{2})/,
+                            'd-m-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
+                            'm-d-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
+                            'Y.m.d': /(\d{4}\.\d{2}\.\d{2}).*(\d{4}\.\d{2}\.\d{2})/,
+                            'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
+                            'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
+                        };
+                        const dateRegex = regexMap['<?php echo $tour_date_format_for_users; ?>'];
+
                         // flatpickr first day of Week
 						<?php Helper::tf_flatpickr_locale( 'root' ); ?>
 
@@ -492,12 +505,20 @@ class Tour {
 							<?php Helper::tf_flatpickr_locale(); ?>
 
                             onReady: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+								return `${date1} - ${date2}`;
+								});
+								instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
+									return `${d1} - ${d2}`;
+								});
                             },
                             onChange: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+									return `${date1} - ${date2}`;
+								});
+								instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
+									return `${d1} - ${d2}`;
+								});
                             },
                         });
 
@@ -534,6 +555,7 @@ class Tour {
 		$tour_price = new Tour_Price( $meta );
 		// Date format for Users Oputput
 		$tour_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+		$tf_tour_single_book_now_text = isset($meta['single_tour_booking_form_button_text']) && ! empty( $meta['single_tour_booking_form_button_text'] ) ? stripslashes( sanitize_text_field( $meta['single_tour_booking_form_button_text'] ) ) : esc_html__( "Book Now", 'tourfic' );
 
 		// Same Day Booking
 		$disable_same_day = ! empty( $meta['disable_same_day'] ) ? $meta['disable_same_day'] : '';
@@ -1340,13 +1362,13 @@ class Tour {
 			endif; ?>
 			<?php if ( $tf_booking_type == 2 && $tf_hide_booking_form == 1 ): ?>
                 <div class="tf-btn">
-                    <a href="<?php echo esc_url( $tf_booking_url ) ?>" target="_blank" class="tf-btn-normal tf-tour-external-booking-button" style="margin-top: 10px;"><?php esc_html_e( 'Book now', 'tourfic' ); ?></a>
+                    <a href="<?php echo esc_url( $tf_booking_url ) ?>" target="_blank" class="tf-btn-normal tf-tour-external-booking-button" style="margin-top: 10px;"><?php esc_html_e( $tf_tour_single_book_now_text, 'tourfic' ); ?></a>
                 </div>
 				<?php if ( ! empty( $tf_tour_book_now_text ) ) : ?>
                     <div class="tf-mobile-booking-btn">
 						<span>
 							<a href="<?php echo esc_url( $tf_booking_url ) ?>" target="_blank" class="tf-btn-normal btn-primary tf-tour-external-booking-button"
-                               style="margin-top: 10px;"><?php esc_html_e( 'Book now', 'tourfic' ); ?></a>
+                               style="margin-top: 10px;"><?php esc_html_e( $tf_tour_single_book_now_text, 'tourfic' ); ?></a>
 						</span>
                     </div>
 				<?php endif; ?>
@@ -2272,7 +2294,9 @@ class Tour {
                         <h2><a href="<?php echo esc_url( $url ); ?>"><?php the_title(); ?></a></h2>
                     </div>
 
-					<?php TF_Review::tf_archive_single_rating(); ?>
+					<?php if( empty($meta["t-review"]) || $meta["t-review"] != 1 ): ?>
+						<?php TF_Review::tf_archive_single_rating(); ?>
+					<?php endif; ?>
 
                     <div class="tf-details tf-mt-16">
                         <p><?php echo wp_kses_post( substr( wp_strip_all_tags( get_the_content() ), 0, 100 ) . '...' ); ?></p>
@@ -2364,10 +2388,12 @@ class Tour {
 						?>
 
                     </div>
-                    <div class="tf-available-ratings">
-						<?php TF_Review::tf_archive_single_rating(); ?>
-                        <i class="fa-solid fa-star"></i>
-                    </div>
+                    <?php if( $meta["t-review"] != 1 || empty( $meta["t-review"] )): ?>
+						<div class="tf-available-ratings">
+							<?php TF_Review::tf_archive_single_rating(); ?>
+							<i class="fa-solid fa-star"></i>
+						</div>
+                    <?php endif; ?>
                 </div>
                 <div class="tf-available-room-content">
                     <div class="tf-available-room-content-left">
@@ -2564,7 +2590,9 @@ class Tour {
 								}
 								?>
                             </div>
-							<?php TF_Review::tf_archive_single_rating(); ?>
+							<?php if( empty($meta["t-review"]) || $meta["t-review"] != 1 ): ?>
+								<?php TF_Review::tf_archive_single_rating(); ?>
+							<?php endif; ?>
                         </div>
                         <div class="tf-tour-desc">
                             <p><?php echo wp_kses_post( substr( wp_strip_all_tags( get_the_content() ), 0, 160 ) . '...' ); ?></p>

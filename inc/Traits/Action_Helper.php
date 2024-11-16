@@ -1659,4 +1659,16 @@ trait Action_Helper {
 			<?php
 		}
 	}
+
+	function tf_no_idex_search_page($robots) {
+		global $post;
+		$tf_search_page_id = get_option("tf_search_page_id");
+
+		if( !empty($tf_search_page_id) && $tf_search_page_id == $post->ID ) {
+			$robots['noindex'] = true;
+			$robots['nofollow'] = true;
+			$robots['max-image-preview'] = false;
+			return $robots;
+		}
+	}
 }

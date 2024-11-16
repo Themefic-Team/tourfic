@@ -8,7 +8,12 @@
 
  use Tourfic\Classes\Helper;
 
-get_header('tourfic');
+ if(wp_is_block_theme()){
+    wp_head();
+    block_header_area();
+}else{
+    get_header('tourfic');
+}
 
 $meta = get_post_meta( get_the_ID(),'tf_tours_opt',true );
 $pricing_rule = !empty($meta['pricing']) ? $meta['pricing'] : null;
@@ -69,4 +74,9 @@ if ( Helper::tf_is_woo_active() ) {
 ?>
 
 <?php
-get_footer('tourfic');
+if(wp_is_block_theme()){
+    wp_footer();
+    block_footer_area();
+ }else{
+	get_footer('tourfic');
+ }

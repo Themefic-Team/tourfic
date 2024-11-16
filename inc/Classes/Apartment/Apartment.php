@@ -743,6 +743,19 @@ class Apartment {
             (function ($) {
                 $(document).ready(function () {
 
+					const regexMap = {
+						'Y/m/d': /(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/,
+						'd/m/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
+						'm/d/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
+						'Y-m-d': /(\d{4}-\d{2}-\d{2}).*(\d{4}-\d{2}-\d{2})/,
+						'd-m-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
+						'm-d-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
+						'Y.m.d': /(\d{4}\.\d{2}\.\d{2}).*(\d{4}\.\d{2}\.\d{2})/,
+						'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
+						'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
+					};
+					const dateRegex = regexMap['<?php echo $date_format_change_apartments; ?>'];
+
                     $("#tf_apartment_booking #check-in-out-date").flatpickr({
                         enableTime: false,
                         mode: "range",
@@ -751,12 +764,20 @@ class Apartment {
                         altFormat: '<?php echo esc_html( $date_format_change_apartments ); ?>',
                         minDate: "today",
                         onReady: function (selectedDates, dateStr, instance) {
-                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                            instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+								return `${date1} - ${date2}`;
+							});
+							instance.altInput.value = instance.altInput.value.replace(dateRegex, function (match, date1, date2) {
+								return `${date1} - ${date2}`;
+							});
                         },
                         onChange: function (selectedDates, dateStr, instance) {
-                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                            instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+								return `${date1} - ${date2}`;
+							});
+                            instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
+								return `${d1} - ${d2}`;
+							});
                         }
                     });
 
@@ -1453,6 +1474,19 @@ class Apartment {
                         $(".tf-check-out-date .form-control").trigger( "click" );
                     });
 
+					const regexMap = {
+						'Y/m/d': /(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/,
+						'd/m/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
+						'm/d/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
+						'Y-m-d': /(\d{4}-\d{2}-\d{2}).*(\d{4}-\d{2}-\d{2})/,
+						'd-m-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
+						'm-d-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
+						'Y.m.d': /(\d{4}\.\d{2}\.\d{2}).*(\d{4}\.\d{2}\.\d{2})/,
+						'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
+						'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
+					};
+					const dateRegex = regexMap['<?php echo $date_format_change_appartments; ?>'];
+
                     const checkinoutdateange = flatpickr("#tf-apartment-booking #check-in-out-date", {
                         enableTime: false,
                         mode: "range",
@@ -1462,14 +1496,22 @@ class Apartment {
                         dateFormat: "Y/m/d",
                         defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
                         onReady: function (selectedDates, dateStr, instance) {
-                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                            instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+								return `${date1} - ${date2}`;
+							});
+                            instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
+								return `${d1} - ${d2}`;
+							});
                             bookingCalculation(selectedDates);
                             dateSetToFields(selectedDates, instance);
                         },
                         onChange: function (selectedDates, dateStr, instance) {
-                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                            instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+								return `${date1} - ${date2}`;
+							});
+                            instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
+								return `${d1} - ${d2}`;
+							});
                             bookingCalculation(selectedDates);
                             dateSetToFields(selectedDates, instance);
                         }, 
@@ -1618,10 +1660,12 @@ class Apartment {
 						}
 					?>
 				</div>  
-				<div class="tf-available-ratings">
-					<?php TF_Review::tf_archive_single_rating($post_id); ?>
-					<i class="fa-solid fa-star"></i>
-				</div>
+				<?php if( empty($meta["disable-apartment-review"]) || $meta["disable-apartment-review"] != 1 ): ?>
+					<div class="tf-available-ratings">
+						<?php TF_Review::tf_archive_single_rating($post_id); ?>
+						<i class="fa-solid fa-star"></i>
+					</div>
+				<?php endif; ?>
 			</div>
 			<div class="tf-available-room-content">
 				<div class="tf-available-room-content-left">
@@ -1761,7 +1805,9 @@ class Apartment {
 							}
 							?>
                         </div>
-						<?php TF_Review::tf_archive_single_rating($post_id); ?>
+						<?php if( empty($meta["disable-apartment-review"]) || $meta["disable-apartment-review"] != 1 ): ?>
+							<?php TF_Review::tf_archive_single_rating($post_id); ?>
+						<?php endif; ?>
                     </div>
 
                     <div class="sr_rooms_table_block">
@@ -2371,10 +2417,10 @@ class Apartment {
 											$booked_from = $booked_date['check_in'];
 											$booked_to   = $booked_date['check_out'];
 
-											$tfbookedperiod = new DatePeriod(
-												new DateTime( $booked_from . ' 00:00' ),
-												new DateInterval( 'P1D' ),
-												new DateTime( $booked_to . ' 23:59' )
+											$tfbookedperiod = new \DatePeriod(
+												new \DateTime( $booked_from . ' 00:00' ),
+												new \DateInterval( 'P1D' ),
+												new \DateTime( $booked_to . ' 23:59' )
 											);
 
 											foreach ( $tfbookedperiod as $date ) {
