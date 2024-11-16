@@ -19963,6 +19963,7 @@ html {
 
 .tf-single-car-section {
   margin: 0 auto;
+  width: 100%;
 }
 
 .tf-single-car-section .tf-single-booking-bar {
@@ -20391,6 +20392,12 @@ html {
   height: 122px;
 }
 
+@media only screen and (min-width: 767.99px) and (max-width: 991px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a {
+    height: 90px;
+  }
+}
+
 @media only screen and (max-width: 575.98px) {
   .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a {
     height: 90px;
@@ -20509,6 +20516,12 @@ html {
 
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul li i {
   font-size: 20px;
+}
+
+@media only screen and (min-width: 767.99px) and (max-width: 991px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul li {
+    width: calc(33% - 8px);
+  }
 }
 
 @media only screen and (max-width: 767.98px) {

@@ -1,6 +1,6 @@
 .tf-single-car-section{
     margin: 0 auto;
-
+    width: 100%;
     .tf-single-booking-bar{
         background: #FFF;
         box-shadow: 0px 48px 64px 0px rgba(2, 12, 21, 0.05);
@@ -350,6 +350,9 @@
                         width: calc(25% - 12px);
                         display: none;
                         height: 122px;
+                        @media #{$tfmax991}{
+                            height: 90px;
+                        }
                         @media #{$max575}{
                             height: 90px;
                         }
@@ -448,6 +451,9 @@
                         position: relative;
                         i{
                             font-size: 20px;
+                        }
+                        @media #{$tfmax991}{
+                            width: calc(33% - 8px);
                         }
                         @media #{$max767}{
                             width: calc(33% - 4px);
