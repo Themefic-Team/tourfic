@@ -324,7 +324,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.14.2 - 16 November 2024 =
+= 2.14.3 - 16 November 2024 =
 
 - Fix: Resolved issue with block theme header and footer not displaying.
 - Fix: Fixed child search functionality issue.
@@ -334,6 +334,11 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Fix: Resolved itinerary warning in Pro version.
 - Fix: Fixed button text issue for external bookings in Pro version.
 - Improvement: Enhanced frontend dashboard translation support for Pro version.
+
+= 2.14.2 - 14 November 2024 =
+
+- Minor bug fixes & improvements
+- System stability improved
 
 = 2.14.1 - 07 November 2024 =
 
