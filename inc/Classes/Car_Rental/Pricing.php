@@ -70,14 +70,6 @@ class Pricing {
                 $pickupDate = strtotime("+1 day", $pickupDate);
             }
 
-            if('fixed'==$discount_type && !empty($discount_price)){
-                $all_prices['sale_price'] = $totalPrice - $discount_price;
-            }
-            if('percent'==$discount_type && !empty($discount_price)){
-                $discount_price = ($totalPrice * $discount_price)/100;
-                $all_prices['sale_price'] = $totalPrice - $discount_price;
-            }
-
             if(empty($all_prices['sale_price'])){
                 $all_prices['sale_price'] = $totalPrice;
             }else{
@@ -148,14 +140,6 @@ class Pricing {
                 }
             }
 
-            if('fixed'==$discount_type && !empty($discount_price)){
-                $all_prices['sale_price'] = ($totalPrice * $total_multiply) - ($discount_price * $total_multiply);
-            }
-            if('percent'==$discount_type && !empty($discount_price)){
-                $discount_price = ($totalPrice * $discount_price)/100;
-                $all_prices['sale_price'] = ($totalPrice * $total_multiply) - ($discount_price * $total_multiply);
-            }
-
             if(empty($all_prices['sale_price'])){
                 $all_prices['sale_price'] = $totalPrice * $total_multiply;
             }else{
@@ -194,19 +178,19 @@ class Pricing {
                 $total_multiply = 1;
             }
 
-            if('fixed'==$discount_type && !empty($discount_price)){
-                $all_prices['sale_price'] = ($initial_pricing * $total_multiply) - ($discount_price * $total_multiply);
-            }
-            if('percent'==$discount_type && !empty($discount_price)){
-                $discount_price = ($initial_pricing * $discount_price)/100;
-                $all_prices['sale_price'] = ($initial_pricing * $total_multiply) - ($discount_price * $total_multiply);
-            }
-
             if(empty($all_prices['sale_price'])){
                 $all_prices['sale_price'] = $initial_pricing * $total_multiply;
             }else{
                 $all_prices['regular_price'] = $initial_pricing * $total_multiply;
             }
+        }
+
+        if('fixed'==$discount_type && !empty($discount_price)){
+            $all_prices['sale_price'] = $all_prices['sale_price'] - $discount_price;
+        }
+        if('percent'==$discount_type && !empty($discount_price)){
+            $discount_price = ($all_prices['sale_price'] * $discount_price)/100;
+            $all_prices['sale_price'] = $all_prices['sale_price'] - $discount_price;
         }
 
         $all_prices['type'] = $price_type;
@@ -233,7 +217,8 @@ class Pricing {
         $extra_title = [];
         foreach($extra_qty as $key => $singleqty){
             if(!empty($singleqty)){
-                $single_extra_info = !empty($car_extra[$key]) ? $car_extra[$key] : '';
+                $extra_key = $extra_ids[$key];
+                $single_extra_info = !empty($car_extra[$extra_key]) ? $car_extra[$extra_key] : '';
                 if(!empty($single_extra_info)){ 
                     $price_type = $single_extra_info['price_type'];
                     if('day'==$price_type){

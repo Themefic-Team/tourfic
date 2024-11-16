@@ -853,7 +853,16 @@
             formData.append('action', 'tf_extra_add_to_booking');
             formData.append('_nonce', tf_params.nonce);
 
-        
+            let pickup_date = $('.tf_pickup_date').val();
+            let dropoff_date = $('.tf_dropoff_date').val();
+            let pickup_time = $('.tf_pickup_time').val();
+            let dropoff_time = $('.tf_dropoff_time').val();
+
+            formData.append('pickup_date', pickup_date);
+            formData.append('dropoff_date', dropoff_date);
+            formData.append('pickup_time', pickup_time);
+            formData.append('dropoff_time', dropoff_time);
+
             $.ajax({
                 url: tf_params.ajax_url,
                 type: 'POST',
@@ -867,8 +876,11 @@
                 success: function (response) {
                     form.css({'opacity': '1', 'pointer-events': 'all'});
                     submitBtn.removeClass('tf-btn-loading');
-                    $('.tf-added-extra').html(response);
-                    if(response){
+                    if(response.total_price){
+                        $('.tf-price-header h2').html(response.total_price);
+                    }
+                    $('.tf-added-extra').html(response.extra);
+                    if(response.extra){
                         $('.tf-extra-added-info').fadeIn();
                     }
                 }

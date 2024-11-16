@@ -31,27 +31,67 @@ function tf_extra_add_to_booking_callback() {
 if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
 	return;
 }
-
+$response = [];
 $meta = get_post_meta( $_POST['post_id'], 'tf_carrental_opt', true );
 $car_extra = !empty($meta['extras']) ? $meta['extras'] : '';
 $car_extra_pass = !empty($_POST['extra_key']) ? $_POST['extra_key'] : '';
+$extra_qty = !empty($_POST['qty']) ? $_POST['qty'] : '';
+$pickup_date = !empty($_POST['pickup_date']) ? sanitize_text_field($_POST['pickup_date']) : '';
+$dropoff_date = !empty($_POST['dropoff_date']) ? sanitize_text_field($_POST['dropoff_date']) : '';
+$pickup_time = !empty($_POST['pickup_time']) ? sanitize_text_field($_POST['pickup_time']) : '';
+$dropoff_time = !empty($_POST['dropoff_time']) ? sanitize_text_field($_POST['dropoff_time']) : '';
 
-foreach($_POST['qty'] as $key => $singleqty){
+$get_prices = Pricing::set_total_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time);
+$total_prices = $get_prices['sale_price'] ? $get_prices['sale_price'] : 0;
+
+if(!empty($car_extra_pass)){
+	$total_extra = Pricing::set_extra_price($meta, $car_extra_pass, $extra_qty, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time);
+	$total_prices = $total_prices + $total_extra['price'];
+}
+
+$response['total_price'] = sprintf( esc_html__( 'Total: %1$s', 'tourfic' ), wc_price($total_prices) );
+
+$total_days = 1;
+if( !empty($pickup_date) && !empty($dropoff_date) && !empty($pickup_time) && !empty($dropoff_time) ){
+	// Combine date and time
+	$pickup_datetime = new \DateTime("$pickup_date $pickup_time");
+	$dropoff_datetime = new \DateTime("$dropoff_date $dropoff_time");
+
+	// Calculate the difference
+	$interval = $pickup_datetime->diff($dropoff_datetime);
+
+	// Get total days
+	$total_days = $interval->days;
+	
+	// If there are leftover hours that count as a partial day
+	if ($interval->h > 0 || $interval->i > 0) {
+		$total_days += 1;  // Add an extra day for any remaining hours
+	}
+}
+ob_start();
+foreach($extra_qty as $key => $singleqty){
 	if(!empty($singleqty)){
 
 		$extra_key = $car_extra_pass[$key];
 		$single_extra_info = !empty($car_extra[$extra_key]) ? $car_extra[$extra_key] : '';
 		if(!empty($single_extra_info)){ ?>
 			<div class="tf-single-added-extra tf-flex tf-flex-align-center tf-flex-space-bttn">
+				<?php 
+					if( 'day'==$single_extra_info['price_type'] && !empty($pickup_date) && !empty($dropoff_date) && !empty($pickup_time) && !empty($dropoff_time) ){
+						$calday = $total_days;
+					}else{
+						$calday = 1;
+					}
+				?>
 				<h4><?php echo !empty($single_extra_info['title']) ? esc_html($single_extra_info['title']) : ''; ?></h4>
 				<div class="qty-price tf-flex tf-flex-space-bttn">
 					<div class="line-sum tf-flex">
 						<i class="ri-close-line"></i> 
 						<span class="qty"><?php echo $singleqty; ?></span> 
-						<span class="price"><?php echo !empty($single_extra_info['price']) ? wc_price($single_extra_info['price']*$singleqty) : ''; ?></span>
+						<span class="price"><?php echo !empty($single_extra_info['price']) ? wc_price( ($single_extra_info['price'] * $calday) * $singleqty) : ''; ?></span>
 						</div>
 					<span class="delete">
-						<input type="hidden" value="<?php echo esc_attr($key); ?>" name="selected_extra[]" />
+						<input type="hidden" value="<?php echo esc_attr($extra_key); ?>" name="selected_extra[]" />
 						<input type="hidden" value="<?php echo esc_attr($singleqty); ?>" name="selected_qty[]" />
 						<i class="ri-delete-bin-line"></i>
 					</span>
@@ -62,6 +102,8 @@ foreach($_POST['qty'] as $key => $singleqty){
 	}
 }
 
+$response['extra'] = ob_get_clean();
+wp_send_json( $response );
 wp_die();
 }
 
