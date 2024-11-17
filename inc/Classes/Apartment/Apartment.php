@@ -2371,10 +2371,10 @@ class Apartment {
 											$booked_from = $booked_date['check_in'];
 											$booked_to   = $booked_date['check_out'];
 
-											$tfbookedperiod = new DatePeriod(
-												new DateTime( $booked_from . ' 00:00' ),
-												new DateInterval( 'P1D' ),
-												new DateTime( $booked_to . ' 23:59' )
+											$tfbookedperiod = new \DatePeriod(
+												new \DateTime( $booked_from . ' 00:00' ),
+												new \DateInterval( 'P1D' ),
+												new \DateTime( $booked_to . ' 23:59' )
 											);
 
 											foreach ( $tfbookedperiod as $date ) {
