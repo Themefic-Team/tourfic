@@ -895,9 +895,9 @@
             $('.tf-date-select-box').slideToggle( function () {
                 // Check visibility after the toggle animation completes
                 if ($(this).is(':visible')) {
-                    $button.text('Hide Booking');
+                    $button.text('Hide');
                 } else {
-                    $button.text('Show Booking');
+                    $button.text('Book Now');
                 }
             });
         });

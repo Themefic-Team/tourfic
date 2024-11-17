@@ -602,7 +602,7 @@ $tf_cars_slug = get_option('car_slug');
             
                     </div>
                     <div class="tf-mobile-booking-btn">
-                        <button><?php esc_html_e("Show Booking", "tourfic"); ?></button>
+                        <button><?php esc_html_e("Book Now", "tourfic"); ?></button>
                     </div>
                     <div class="tf-car-booking-popup">
                         <div class="tf-booking-popup-warp">
