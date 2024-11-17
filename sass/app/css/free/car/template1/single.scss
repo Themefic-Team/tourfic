@@ -25,6 +25,9 @@
                 justify-content: space-between;
                 width: 100%;
             }
+            @media #{$max767}{
+                display: none;
+            }
             .tf-price-header{
                 h2{
                     color: #27333F;
@@ -759,8 +762,20 @@
                 background:#EEF2F6;
                 padding: 8px 8px 16px 8px;
                 margin-bottom: 32px;
+                @media #{$max767}{
+                    position: fixed;
+                    left: 0;
+                    bottom: 72px;
+                    right: 0;
+                    z-index: 99999;
+                    margin-bottom: 0px;
+                    display: none;
+                }
                 &.tf-box-loading{
                     position: relative;
+                    @media #{$max767}{
+                        position: fixed;
+                    }
                     &::before{
                         position: absolute;
                         content: "";
@@ -934,6 +949,9 @@
                     }
                 }
                 .tf-instraction-btn{
+                    @media #{$max767}{
+                        display: none;
+                    }
                     text-align: center;
                     span{
                         color: #0866C4;
@@ -943,6 +961,37 @@
                         line-height: 150%; /* 24px */
                         margin: 0;
                         cursor: pointer;
+                    }
+                }
+            }
+
+            .tf-mobile-booking-btn{
+                display: none;
+                background:#EEF2F6;
+                padding: 8px;
+                @media #{$max767}{
+                    display: block;
+                    position: fixed;
+                    left: 0;
+                    bottom: 0;
+                    right: 0;
+                    z-index: 9999;
+                }
+                button{
+                    padding: 16px 32px;
+                    border-radius: 8px;
+                    background: #0866C4;
+                    color: #FFF;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 150%; /* 24px */
+                    cursor: pointer;
+                    width: 100%;
+                    border: 0px solid;
+                    transition: .3s all ease;
+                    &:hover{
+                        background: #094C90;
                     }
                 }
             }

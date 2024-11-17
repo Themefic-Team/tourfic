@@ -882,6 +882,26 @@
             $('#tf_total_proteciton_price').val(total_price.toFixed(2)); // Format as float with 2 decimal places
             $('#tf_proteciton_subtotal').text(total_price.toFixed(2)); // Display formatted total
         });
+
+        /*
+        * Mobile Booking button
+        * @author Jahid
+        */
+        $(document).on('click', '.tf-mobile-booking-btn button', function (e) {
+            e.preventDefault();
+            var $button = $(this);
+
+            // Toggle the visibility of .tf-date-select-box
+            $('.tf-date-select-box').slideToggle( function () {
+                // Check visibility after the toggle animation completes
+                if ($(this).is(':visible')) {
+                    $button.text('Hide Booking');
+                } else {
+                    $button.text('Show Booking');
+                }
+            });
+        });
+
                 
 
     });

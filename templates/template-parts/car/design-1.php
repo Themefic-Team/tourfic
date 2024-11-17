@@ -599,9 +599,11 @@ $tf_cars_slug = get_option('car_slug');
                     })(jQuery);
 
                     </script>
-                        
+            
                     </div>
-
+                    <div class="tf-mobile-booking-btn">
+                        <button><?php esc_html_e("Show Booking", "tourfic"); ?></button>
+                    </div>
                     <div class="tf-car-booking-popup">
                         <div class="tf-booking-popup-warp">
 
