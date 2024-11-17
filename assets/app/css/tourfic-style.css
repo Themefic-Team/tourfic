@@ -17658,6 +17658,9 @@ html {
   font-size: 16px;
   font-weight: 400;
 }
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-template-part {
+  width: 100%;
+}
 .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery {
   width: 100%;
 }
