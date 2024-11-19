@@ -1061,6 +1061,15 @@ abstract Class TF_Booking_Details {
 
         // Add nonce for security and authentication.
         check_ajax_referer('updates', '_ajax_nonce');
+
+        // Check if the current user has the required capability.
+        $user = wp_get_current_user();
+		if ((in_array( 'administrator', (array) $user->roles ) && !current_user_can('manage_options')) || 
+            (in_array( 'tf_vendor', (array) $user->roles ) && !current_user_can('tf_vendor_options')) || 
+            (in_array( 'tf_manager', (array) $user->roles ) && !current_user_can('tf_manager_options'))) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
         
         // Order Id
         $tf_order_id = !empty($_POST['order_id']) ? $_POST['order_id'] : "";
@@ -1090,6 +1099,12 @@ abstract Class TF_Booking_Details {
 
         // Add nonce for security and authentication.
         check_ajax_referer('updates', '_ajax_nonce');
+
+        // Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
     
         // Order Id
         $tf_order_id = !empty($_POST['order_id']) ? $_POST['order_id'] : "";
@@ -1114,6 +1129,15 @@ abstract Class TF_Booking_Details {
 
         // Add nonce for security and authentication.
         check_ajax_referer('updates', '_ajax_nonce');
+
+        // Check if the current user has the required capability.
+        $user = wp_get_current_user();
+		if ((in_array( 'administrator', (array) $user->roles ) && !current_user_can('manage_options')) || 
+            (in_array( 'tf_vendor', (array) $user->roles ) && !current_user_can('tf_vendor_options')) || 
+            (in_array( 'tf_manager', (array) $user->roles ) && !current_user_can('tf_manager_options'))) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
     
         // Order Id
         $tf_order_id = !empty($_POST['order_id']) ? $_POST['order_id'] : "";
@@ -1158,6 +1182,15 @@ abstract Class TF_Booking_Details {
 
         // Add nonce for security and authentication.
         check_ajax_referer('updates', '_ajax_nonce');
+
+        // Check if the current user has the required capability.
+        $user = wp_get_current_user();
+		if ((in_array( 'administrator', (array) $user->roles ) && !current_user_can('manage_options')) || 
+            (in_array( 'tf_vendor', (array) $user->roles ) && !current_user_can('tf_vendor_options')) || 
+            (in_array( 'tf_manager', (array) $user->roles ) && !current_user_can('tf_manager_options'))) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
         
         // Order Id
         $tf_orders = !empty($_POST['orders']) ? $_POST['orders'] : "";
