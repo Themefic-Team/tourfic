@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.7
-Stable tag: 2.14.4
+Stable tag: 2.14.5
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -238,6 +238,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * [Ultimate Before After Image Slider & Gallery - BEAF](https://wordpress.org/plugins/beaf-before-and-after-gallery)
 * [Ultimate Addons For Contact Form 7](https://wordpress.org/plugins/ultimate-addons-for-contact-form-7/)
 * [Onepage / Direct Checkout for WooCommerce - Instantio](https://wordpress.org/plugins/instantio)
+* [Hydra Booking – All in One Appointment Scheduling and Booking Calendar Solution](https://wordpress.org/plugins/hydra-booking)
 
 == Installation ==
 
@@ -323,6 +324,10 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 21. Email Piping (Pro)
 
 == Changelog ==
+
+= 2.14.5 - 21 November 2024 =
+
+- Update: Revised and updated the plugin's Readme.txt file information.
 
 = 2.14.4 - 19 November 2024 =
 
