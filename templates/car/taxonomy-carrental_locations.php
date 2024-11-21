@@ -23,9 +23,10 @@ $taxonomy_name = $term->name;
 $taxonomy_slug = $term->slug;
 $max = '2';
 
-$tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_view'] : 'grid';
+$tf_car_location_meta      = get_term_meta( $term->term_id, 'tf_carrental_location', true );
+$tf_car_arc_banner = ! empty( $tf_car_location_meta['image'] ) ? $tf_car_location_meta['image'] : '';
 
-$tf_car_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_design_1_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_design_1_bannar'] : '';
+$tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_view'] : 'grid';
 
 ?>
 <div class="tf-archive-car-section">
