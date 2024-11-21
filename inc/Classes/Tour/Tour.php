@@ -2025,6 +2025,10 @@ class Tour {
 		$child_price                      = ! empty( $meta['child_price'] ) ? $meta['child_price'] : false;
 		$infant_price                     = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : false;
 		$tour_archive_page_price_settings = ! empty( Helper::tfopt( 'tour_archive_price_minimum_settings' ) ) ? Helper::tfopt( 'tour_archive_price_minimum_settings' ) : 'all';
+		$meta_disable_review 			  = !empty($meta["t-review"]) ? $meta["t-review"] : 0;
+		$tfopt_disable_review 			  = !empty(Helper::tfopt("t-review")) ? Helper::tfopt("t-review") : 0;
+		$disable_review 				  = $tfopt_disable_review == 1 || $meta_disable_review == 1 ? true : $tfopt_disable_review;
+
 
 		if ( ! empty( $check_in_out ) ) {
 			list( $tf_form_start, $tf_form_end ) = explode( ' - ', $check_in_out );
@@ -2294,7 +2298,7 @@ class Tour {
                         <h2><a href="<?php echo esc_url( $url ); ?>"><?php the_title(); ?></a></h2>
                     </div>
 
-					<?php if( empty($meta["t-review"]) || $meta["t-review"] != 1 ): ?>
+					<?php if( $disable_review != true ): ?>
 						<?php TF_Review::tf_archive_single_rating(); ?>
 					<?php endif; ?>
 
@@ -2388,7 +2392,7 @@ class Tour {
 						?>
 
                     </div>
-                    <?php if( $meta["t-review"] != 1 || empty( $meta["t-review"] )): ?>
+                    <?php if( $disable_review != true ): ?>
 						<div class="tf-available-ratings">
 							<?php TF_Review::tf_archive_single_rating(); ?>
 							<i class="fa-solid fa-star"></i>
@@ -2590,9 +2594,9 @@ class Tour {
 								}
 								?>
                             </div>
-							<?php if( empty($meta["t-review"]) || $meta["t-review"] != 1 ): ?>
-								<?php TF_Review::tf_archive_single_rating(); ?>
-							<?php endif; ?>
+							<?php if( $disable_review != true ): ?>
+									<?php TF_Review::tf_archive_single_rating(); ?>
+								<?php endif; ?>
                         </div>
                         <div class="tf-tour-desc">
                             <p><?php echo wp_kses_post( substr( wp_strip_all_tags( get_the_content() ), 0, 160 ) . '...' ); ?></p>
