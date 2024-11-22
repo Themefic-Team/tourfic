@@ -157,9 +157,7 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 				if ( ! in_array( 'carrentals', $disable_services ) && Helper::tf_is_search_form_tab_type( 'carrentals', $type ) ) {
 					?>
 					<div id="tf-car-booking-form" class="tf-tabcontent" <?php echo Helper::tf_is_search_form_single_tab( $type ) ? 'style="display:block"' : '' ?>>
-						<?php
-							Car_Rental::tf_car_search_form_horizontal( $classes, $title, $subtitle, $advanced_opt, $design );
-						?>
+						<?php Car_Rental::tf_car_search_form_horizontal( $classes, $title, $subtitle, $advanced_opt, $design ); ?>
 					</div>
 					<?php
 				}

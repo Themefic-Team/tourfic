@@ -81,6 +81,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                                 <option value="type='hotel'"><?php esc_html_e( 'Hotel', 'tourfic' ); ?></option>
                                                 <option value="type='tour'"><?php esc_html_e( 'Tour', 'tourfic' ); ?></option>
                                                 <option value="type='apartment'"><?php esc_html_e( 'Apartment', 'tourfic' ); ?></option>
+                                                <option value="type='carrentals'"><?php esc_html_e( 'Car', 'tourfic' ); ?></option>
                                                 <option value="type='booking'"><?php esc_html_e( 'Booking', 'tourfic' ); ?></option>
                                                 <option value="type='tp-hotel'"><?php esc_html_e( 'Travel Payout Hotels', 'tourfic' ); ?></option>
                                                 <option value="type='tp-flight'"><?php esc_html_e( 'Travel Payout Flights', 'tourfic' ); ?></option>
@@ -129,22 +130,28 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     </div>
                                 </div>
                                 <div class="tf-sg-row">
-                                    <div class="tf-col-lg-4">
+                                    <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Tour Tab Title', 'tourfic' ) ?></h3>
                                             <input type="text" value="" data-tour-tab-title="tour_tab_title" placeholder="Input the title here." class="tf-shortcode-tour-tab-title-field tf-setting-field">
                                         </div>
                                     </div>
-                                    <div class="tf-col-lg-4">
+                                    <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Hotel Tab Title', 'tourfic' ) ?></h3>
                                             <input type="text" value="" data-hotel-tab-title="hotel_tab_title" placeholder="Input the title here." class="tf-shortcode-hotel-tab-title-field tf-setting-field">
                                         </div>
                                     </div>
-                                    <div class="tf-col-lg-4">
+                                    <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Apartment Tab Title', 'tourfic' ) ?></h3>
                                             <input type="text" value="" data-apartment-tab-title="apartment_tab_title" placeholder="Input the title here." class="tf-shortcode-apartment-tab-title-field tf-setting-field">
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo esc_html__( 'Car Tab Title', 'tourfic' ) ?></h3>
+                                            <input type="text" value="" data-car-tab-title="car_tab_title" placeholder="Input the title here." class="tf-shortcode-car-tab-title-field tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
@@ -197,6 +204,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                                 <option value="type=tf_hotel"><?php esc_html_e( 'Hotel', 'tourfic' ); ?></option>
                                                 <option value="type=tf_tours"><?php esc_html_e( 'Tours', 'tourfic' ); ?></option>
                                                 <option value="type=tf_apartment"><?php esc_html_e( 'Apartment', 'tourfic' ); ?></option>
+                                                <option value="type=tf_carrental"><?php esc_html_e( 'Car', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -1509,12 +1517,12 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                         </div>
                     </div>
 
-                    <!--Car Brand Shortcodes section-->
+                    <!--Car locations Shortcodes section-->
                     <div class="tf-shortcode-generator-single">
                         <div class="tf-shortcode-generator-label">
                             <div class="tf-labels">
-                                <label><?php echo esc_html__( 'Car Brand', 'tourfic' ); ?></label>
-                                <p><?php echo esc_html__( 'Display car brand', 'tourfic' ); ?></p>
+                                <label><?php echo esc_html__( 'Car Location', 'tourfic' ); ?></label>
+                                <p><?php echo esc_html__( 'Display car locations', 'tourfic' ); ?></p>
                             </div>
                             <div class="tf-shortcode-btn tf-generate-tour">
                                 <button><?php echo esc_html__( 'Generate Shortcode', 'tourfic' ); ?></button>
@@ -1526,9 +1534,9 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Car Brands', 'tourfic' ) ?></h3>
+                                            <h3><?php echo esc_html__( 'Car Locations', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_carrental_brand"><?php esc_html_e( 'Car Brands', 'tourfic' ); ?></option>
+                                                <option value="tf_carrental_locations"><?php esc_html_e( 'Car Locations', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -1556,18 +1564,18 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     </div>
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Brand limit', 'tourfic' ) ?></h3>
-                                            <input type="number" value="-1" data-count="limit" class="post-count tf-setting-field" min='-1'>
+                                            <h3><?php echo esc_html__( 'Location limit', 'tourfic' ) ?></h3>
+                                            <input type="number" value="-1" data-count="limit" class="post-count tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
-                                            <h3><?php echo esc_html__( 'Choose Brands', 'tourfic' ) ?></h3>
+                                            <h3><?php echo esc_html__( 'Choose Locations', 'tourfic' ) ?></h3>
 											<?php
 											//Dynamic Taxonomy dropdown list
-											Helper::tf_terms_dropdown( 'carrental_brand', 'ids', 'tf_carrental_brand_shortcode', 'tf-setting-field tf-select-field', true );
+											Helper::tf_terms_dropdown( 'carrental_location', 'ids', 'tf_carrental_location_shortcode', 'tf-setting-field tf-select-field', true );
 											?>
                                         </div>
                                     </div>
@@ -1590,7 +1598,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_carrental_brand]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-category"></span>
                                         </button>
@@ -1708,8 +1716,8 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                     <div class="tf-shortcode-generator-single">
                         <div class="tf-shortcode-generator-label">
                             <div class="tf-labels">
-                                <label><?php echo esc_html__( 'Vendor Hotels, Tours & Apartments', 'tourfic' ); ?></label>
-                                <p><?php echo esc_html__( 'Display Hotels, Tours & Apartments in specific Vendor', 'tourfic' ); ?></p>
+                                <label><?php echo esc_html__( 'Vendor Hotels, Tours, Apartments, & Cars', 'tourfic' ); ?></label>
+                                <p><?php echo esc_html__( 'Display Hotels, Tours, Apartments, & Cars in specific Vendor', 'tourfic' ); ?></p>
                             </div>
                             <div class="tf-shortcode-btn tf-generate-tour">
                                 <button><?php echo esc_html__( 'Generate Shortcode', 'tourfic' ); ?></button>
@@ -1734,6 +1742,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                                 <option value="type='tf_hotel'"><?php esc_html_e( 'Hotel', 'tourfic' ); ?></option>
                                                 <option value="type='tf_tours'"><?php esc_html_e( 'Tour', 'tourfic' ); ?></option>
                                                 <option value="type='tf_apartment'"><?php esc_html_e( 'Apartment', 'tourfic' ); ?></option>
+                                                <option value="type='tf_carrental'"><?php esc_html_e( 'Car', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
