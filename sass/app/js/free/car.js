@@ -501,6 +501,7 @@
                             }
                         }else{
                             $('.tf-car-booking-popup').hide();
+                            $('.tf-withoutpayment-booking-confirm').addClass('show');
                             $this.removeClass('tf-btn-loading');
                             $('#tf_pickup_location').val('');
                             $('#tf_dropoff_location').val('');
@@ -738,6 +739,7 @@
                             }
                         }else{
                             $('.tf-car-booking-popup').hide();
+                            $('.tf-withoutpayment-booking-confirm').addClass('show');
                             $this.removeClass('tf-btn-loading');
                         }
                     }

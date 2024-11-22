@@ -793,22 +793,23 @@ function tf_car_booking_pupup_callback() {
 	<div class="tf-booking-form-fields" style="<?php echo function_exists( 'is_tf_pro' ) && is_tf_pro() && $car_booking_by=='3' && empty($car_protection_section_status) ? esc_attr('display: block') : ''; ?>">
 		<div class="tf-form-fields tf-flex tf-flex-gap-24 tf-flex-w">
 			<?php 
-			$traveller_info_fields = ! empty( Helper::tfopt( 'book-confirm-field' ) ) ? Helper::tf_data_types( Helper::tfopt( 'book-confirm-field' ) ) : '';
+			$traveller_info_fields = ! empty( Helper::tf_data_types( Helper::tfopt( 'book-confirm-field' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'book-confirm-field' ) ) : '';
+
 			if(empty($traveller_info_fields)){
 			?>
 			<div class="tf-single-field">
 				<label for="tf_first_name"><?php esc_html_e("First Name", "tourfic"); ?></label>
-				<input type="text" placeholder="First Name" id="tf_first_name" name="traveller['tf_first_name]" data-required="1">
+				<input type="text" placeholder="First Name" id="tf_first_name" name="traveller[tf_first_name]" data-required="1">
 				<div class="error-text" data-error-for="tf_first_name"></div>
 			</div>
 			<div class="tf-single-field">
 				<label for="tf_last_name"><?php esc_html_e("Last Name", "tourfic"); ?></label>
-				<input type="text" placeholder="Name" id="tf_last_name" name="traveller['tf_last_name]" data-required="1">
+				<input type="text" placeholder="Name" id="tf_last_name" name="traveller[tf_last_name]" data-required="1">
 				<div class="error-text" data-error-for="tf_last_name"></div>
 			</div>
 			<div class="tf-single-field">
 				<label for="tf_email"><?php esc_html_e("Email", "tourfic"); ?></label>
-				<input type="text" placeholder="Email" id="tf_email" name="traveller['tf_email]" data-required="1">
+				<input type="text" placeholder="Email" id="tf_email" name="traveller[tf_email]" data-required="1">
 				<div class="error-text" data-error-for="tf_email"></div>
 			</div>
 			<?php }else{ 
