@@ -2618,9 +2618,9 @@ var frame, gframe;
             var section_subtitle = $this.find('.tf-shortcode-subtitle-field ').attr('data-subtitle');
 
             var tour_tab_title = $this.find('.tf-shortcode-tour-tab-title-field ').attr('data-tour-tab-title');
-            console.log(tour_tab_title);
             var hotel_tab_title = $this.find('.tf-shortcode-hotel-tab-title-field ').attr('data-hotel-tab-title');
             var apartment_tab_title = $this.find('.tf-shortcode-apartment-tab-title-field ').attr('data-apartment-tab-title');
+            var car_tab_title = $this.find('.tf-shortcode-car-tab-title-field ').attr('data-car-tab-title');
 
             if (option_name != undefined && option_name != '') {
                 data = option_name + '=' + (data.length ? data : '""');
@@ -2642,6 +2642,9 @@ var frame, gframe;
             }
             if (apartment_tab_title != undefined && apartment_tab_title != '' && data.length ) {
                 data = apartment_tab_title + '=' + (data.length ? `"${data}"` : '""');
+            }
+            if (car_tab_title != undefined && car_tab_title != '' && data.length ) {
+                data = car_tab_title + '=' + (data.length ? `"${data}"` : '""');
             }
             arr.push(data);
         });
