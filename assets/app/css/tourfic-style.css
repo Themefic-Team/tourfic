@@ -293,6 +293,78 @@ Notice
   color: #f44336;
 }
 
+.tf-refund-confirmation-box {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
+.tf-refund-confirmation-box .tf-refund-box-content {
+  width: 450px;
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.tf-refund-confirmation-box .tf-refund-box-content i {
+  font-size: 32px;
+}
+
+.tf-refund-confirmation-box .tf-refund-box-content h3 {
+  margin: 10px 0;
+  color: #27333f;
+  font-size: 20px;
+}
+
+.tf-refund-confirmation-box .tf-refund-box-content p {
+  color: #566676;
+  font-size: 16px;
+  margin: 0 0 20px 0;
+}
+
+.tf-refund-confirmation-box .tf-refund-box-content .tf-refund-confirmation-button {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+}
+
+.tf-refund-confirmation-box .tf-refund-box-content .tf-refund-confirmation-button button {
+  border-radius: 8px;
+  background: #0274be;
+  padding: 8px 30px;
+  border: 0px solid;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  cursor: pointer;
+  color: #fff;
+  transition: .3s all ease;
+}
+
+.tf-refund-confirmation-box .tf-refund-box-content .tf-refund-confirmation-button button:hover {
+  background: #094C90;
+}
+
+.tf-refund-confirmation-box .tf-refund-box-content .tf-refund-confirmation-button button.tf-refund-cancel {
+  background: #E6F2FE;
+  color: #566676;
+}
+
+.tf-refund-confirmation-box .tf-refund-box-content .tf-refund-confirmation-button button.tf-refund-cancel:hover {
+  background: #0274be;
+  color: #fff;
+}
+
 .tf-main-wrapper {
   width: 100%;
   padding: 30px 0;
@@ -2542,15 +2614,46 @@ a.page-numbers {
 }
 
 .tf-booking-form-tab .btn-styled {
-  background-color: #e6e6e6;
-  border-color: #e6e6e6;
-  color: #333;
+  background-color: #e6e6e6 !important;
+  border-color: #e6e6e6 !important;
+  color: #333 !important;
 }
 
 .tf-booking-form-tab .btn-styled.active {
-  background-color: #003162;
-  border-color: #003162;
-  color: #fff;
+  background-color: #003162 !important;
+  border-color: #003162 !important;
+  color: #fff !important;
+}
+
+.tf-booking-form-tab.design-3 {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-booking-form-tab.design-3 {
+    display: none;
+  }
+}
+
+.tf-booking-form-tab.design-3 .btn-styled {
+  border-radius: 6px !important;
+  background: #FFF !important;
+  border: 4px solid #CDE5FE !important;
+  overflow: auto;
+  color: #27333f !important;
+  padding: 8px 16px !important;
+  position: static;
+}
+
+.tf-booking-form-tab.design-3 .btn-styled::after {
+  position: static;
+  display: none;
+}
+
+.tf-booking-form-tab.design-3 .btn-styled.active {
+  color: #0866C4 !important;
 }
 
 .tf_form-inner .autocomplete-items {
@@ -2860,6 +2963,10 @@ button.tf-tablinks:focus {
   font-size: 15px;
   line-height: 25px;
   margin-right: 5px;
+}
+
+#tf_car_booking .tf_destination-wrap {
+  width: auto;
 }
 
 div#tf-locationautocomplete-list div:before {
@@ -3506,6 +3613,120 @@ div#tf-destinationautocomplete-list div:before {
   }
 }
 
+@media only screen and (max-width: 991.98px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody {
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .autocomplete-items {
+    top: 47px !important;
+  }
+}
+
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields {
+  width: calc(100% - 172px);
+  padding: 24px 32px;
+}
+
+@media only screen and (max-width: 991.98px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields {
+    width: 100%;
+    padding: 24px;
+  }
+}
+
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_destination_fields {
+  padding: 0 16px;
+}
+
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_destination_fields:first-child {
+  padding-left: 0px;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_destination_fields {
+    margin-bottom: 10px;
+    padding: 0;
+  }
+}
+
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_destination_fields .tf_form_inners {
+  position: relative;
+}
+
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_checkin_date {
+  width: 25%;
+  padding: 0 16px;
+}
+
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_checkin_date:last-child {
+  padding-right: 0px;
+  border-right: 0px solid;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_checkin_date {
+    padding: 0;
+    width: 100%;
+    border-right: 0px solid;
+  }
+}
+
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf_form_inners {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf_form_inners input {
+  height: 0;
+  width: 0;
+  padding: 0;
+  border: 0;
+}
+
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf_form_inners .tf_checkin_dates {
+  display: flow-root;
+}
+
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf_form_inners .tf_checkin_dates .tf-select-date {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+}
+
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf_form_inners .tf_checkin_dates span.date {
+  margin-right: 8px;
+}
+
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf_form_inners .tf_checkin_dates span.month {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf_form_inners .tf_checkin_dates span.month .tf_check_arrow {
+  display: flex;
+}
+
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_availability_checker_box {
+  width: 172px;
+}
+
+@media only screen and (max-width: 991.98px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_availability_checker_box {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 991.98px) {
+  .tf-shortcode-design-2-tab .tf_booking-widget-design-2#tf_car_booking .tf_form_innerbody .tf_availability_checker_box button {
+    padding: 15px 32px;
+  }
+}
+
 .tf_tf_booking-widget-wrap {
   z-index: 999;
 }
@@ -4089,12 +4310,32 @@ table.tf-table tr:last-child {
   justify-content: space-between;
 }
 
+.tf-flex-justify-center {
+  justify-content: center;
+}
+
 .tf-flex-align-center {
   align-items: center;
 }
 
+.tf-flex-align-baseline {
+  align-items: baseline;
+}
+
+.tf-flex-direction-column {
+  flex-direction: column;
+}
+
 .tf-flex-align-top {
   align-items: flex-start;
+}
+
+.tf-flex-gap-4 {
+  gap: 4px;
+}
+
+.tf-flex-gap-6 {
+  gap: 6px;
 }
 
 .tf-flex-gap-8 {
@@ -4113,6 +4354,14 @@ table.tf-table tr:last-child {
   gap: 24px;
 }
 
+.tf-flex-gap-32 {
+  gap: 32px;
+}
+
+.tf-flex-gap-64 {
+  gap: 64px;
+}
+
 .tf-mt-8 {
   margin-top: 8px;
 }
@@ -4123,6 +4372,10 @@ table.tf-table tr:last-child {
 
 .tf-mt-24 {
   margin-top: 24px;
+}
+
+.tf-mb-24 {
+  margin-bottom: 24px;
 }
 
 .tf-mt-30 {
@@ -18392,6 +18645,3462 @@ html {
   .tf-template-3 .tf-archive-search-form.tf-booking-form-wrapper .tf_archive_search_result .tf-booking-form-submit {
     width: 100% !important;
   }
+}
+
+.tf-car-template-container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.tf-car-template-container .tf-car-booking-popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp {
+  border-radius: 16px;
+  background: #FFF;
+  padding: 16px 24px;
+  width: 850px;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp {
+    padding: 24px 15px;
+  }
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-popup-header {
+  margin-bottom: 24px;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-popup-header h3 {
+  color: #27333F;
+  font-size: 21px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: 150%;
+  /* 31.5px */
+  margin: 0;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-popup-header .tf-close-popup {
+  cursor: pointer;
+  display: flex;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-cancellation-notice {
+  border-radius: 8px;
+  background: #FFF8E5;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-cancellation-notice span {
+  color: #6B4F00;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-cancellation-notice span i {
+  color: #6B4F00;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-cancellation-notice span b {
+  font-weight: 700;
+  line-height: 150%;
+  /* 24px */
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-tabs {
+  margin-bottom: 24px;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-tabs ul {
+  margin: 0;
+  padding: 0;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-tabs ul li {
+  color: #27333f !important;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 150% !important;
+  padding: 0 8px 8px 8px;
+  display: inline-block;
+  cursor: pointer;
+  width: auto !important;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-tabs ul li.active {
+  color: #0866C4;
+  border-bottom: 2px solid #0866C4;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content {
+  max-height: 360px;
+  overflow: auto;
+  padding-right: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #9c9c9c #ffffff;
+  /* Chrome, Edge, and Safari */
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content {
+    max-height: 260px;
+  }
+}
+
+@media only screen and (max-width: 991.98px) {
+  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content {
+    flex-direction: inherit;
+  }
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content *::-webkit-scrollbar {
+  width: 5px;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content *::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content::-webkit-scrollbar-thumb {
+  background-color: #9c9c9c;
+  border-radius: 5px;
+  border: 3px solid #ffffff;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content p {
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  margin: 0;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured {
+  border-radius: 16px;
+  border: 1px solid #C0CCD8;
+  padding: 24px;
+}
+
+@media only screen and (max-width: 991.98px) {
+  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured {
+    padding: 20px 12px;
+  }
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table {
+  border: 0px solid;
+  margin: 0;
+  width: 100%;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td {
+  border: 0px solid;
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  padding: 0 0 16px 0px;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td {
+    font-size: 12px;
+    vertical-align: top;
+  }
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td span {
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td:nth-child(2) {
+    width: 90px;
+  }
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th {
+  color: #27333F;
+  border: 0px solid;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  /* 24px */
+  padding: 0 0 16px 0px;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th {
+    font-size: 14px;
+  }
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-flex.tf-flex-align-center {
+  flex-wrap: nowrap;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-flex.tf-flex-align-center {
+    align-items: flex-start;
+  }
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-single-protection-title {
+  text-align: left;
+  flex-wrap: nowrap;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select {
+  height: 15px;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select {
+    margin-top: 6px;
+  }
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label {
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  position: relative;
+  margin-bottom: 0px;
+  margin-right: 23px;
+  cursor: pointer;
+  display: block;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .checkmark {
+  background-color: #F8FAFC;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .checkmark {
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  top: 0;
+  border: 2px solid #566676;
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 3px;
+  top: 1px;
+  width: 5px;
+  height: 8px;
+  border: solid #566676;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-info-tooltip {
+  position: relative;
+  margin-left: 5px;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-info-tooltip i {
+  font-weight: 400;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-info-tooltip:hover .tf-info-tooltip-content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-info-tooltip .tf-info-tooltip-content {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  box-shadow: 0px 15px 30px 0px rgba(40, 16, 26, 0.1);
+  border-radius: 8px;
+  background: var(--UI-800, linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), #27333F);
+  padding: 8px 12px;
+  width: 218px;
+  z-index: 0;
+  bottom: 30px;
+  left: 50%;
+  margin-left: -109px;
+  transition: .3s all ease;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-info-tooltip .tf-info-tooltip-content::after {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  background: var(--UI-800, linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), #27333F);
+  border-radius: 5px;
+  transform: rotate(45deg);
+  left: 50%;
+  margin-left: -8px;
+  bottom: -6px;
+  z-index: -1;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-info-tooltip .tf-info-tooltip-content p {
+  color: #FFF;
+  text-align: center;
+  font-size: 13px !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  line-height: 20px;
+  /* 153.846% */
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tfoot {
+  margin-top: 16px;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tfoot tr th {
+  border-top: 1px solid #C0CCD8;
+  padding: 16px 0 0 0;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields {
+  display: none;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields {
+  flex-wrap: wrap;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field {
+  width: calc(33% - 24px);
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field {
+    width: calc(50% - 24px);
+  }
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field label {
+  color: #566676;
+  font-size: 12px !important;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+  /* 14.4px */
+  margin-bottom: 8px;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field input[type="text"],
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field input[type="email"] {
+  border-radius: 8px;
+  border: 1px solid #C0CCD8;
+  padding: 8px 16px;
+  height: 40px;
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  width: 100%;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field input[type="date"] {
+  border-radius: 8px;
+  border: 1px solid #C0CCD8;
+  padding: 0px 16px;
+  height: 40px;
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  width: 100%;
+  text-transform: uppercase;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field select {
+  border-radius: 8px;
+  border: 1px solid #C0CCD8;
+  padding: 0px 16px;
+  height: 40px;
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  width: 100%;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field .error-text.error-visible {
+  color: red;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-booking-submission {
+  margin-top: 24px;
+  text-align: right;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-booking-submission button {
+  border-radius: 8px;
+  background-color: #0866C4;
+  color: #FFF;
+  padding: 16px 32px;
+  border: 0px solid;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  /* 24px */
+  cursor: pointer;
+  transition: .3s all ease;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-booking-submission button:hover {
+  background: #094c90 !important;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-bar {
+  margin-top: 24px;
+  justify-content: end;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-bar button {
+  border-radius: 8px;
+  background: #E6F2FE;
+  padding: 16px 32px;
+  border: 0px solid;
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  /* 24px */
+  cursor: pointer;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-bar button.with-charge {
+  background-color: #0866C4 !important;
+  color: #FFF !important;
+  transition: .3s all ease;
+}
+
+.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-bar button.with-charge:hover {
+  background: #094c90 !important;
+}
+
+.tf-car-template-container .tf-car-instraction-popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp {
+  border-radius: 16px;
+  background: #FFF;
+  padding: 16px 24px;
+  width: 850px;
+}
+
+@media only screen and (max-width: 640px) {
+  .tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp {
+    width: 100%;
+  }
+}
+
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header {
+  margin-bottom: 24px;
+  flex-wrap: nowrap;
+}
+
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header h3 {
+  color: #27333F;
+  font-size: 21px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: 150% !important;
+  margin: 0;
+  text-align: left;
+}
+
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header .tf-close-popup {
+  cursor: pointer;
+}
+
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper {
+  text-align: left;
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  max-height: 260px;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #9c9c9c #ffffff;
+  /* Chrome, Edge, and Safari */
+}
+
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar {
+  width: 5px;
+}
+
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper::-webkit-scrollbar-thumb {
+  background-color: #9c9c9c;
+  border-radius: 5px;
+  border: 3px solid #ffffff;
+}
+
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper p {
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+}
+
+.tf-single-car-section .tf-single-car-banner {
+  background: #B8C5D2;
+  height: 350px;
+}
+
+.tf-single-car-section .tf-single-car-banner .tf-banner-content {
+  height: 100%;
+}
+
+.tf-single-car-section .tf-single-car-banner .tf-banner-content h1 {
+  color: #FFF;
+  text-align: center;
+  font-size: 38px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+  /* 45.6px */
+}
+
+.tf-single-car-section .tf-single-car-banner .tf-banner-content .breadcrumb ul li {
+  color: #FFF;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  display: inline-block;
+}
+
+.tf-single-car-section .tf-single-car-banner .tf-banner-content .breadcrumb ul li a {
+  text-decoration: none;
+  color: #FFF;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.tf-car-archive-result {
+  width: calc(100% - 390px);
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-car-archive-result {
+    width: calc(100% - 322px);
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-car-archive-result {
+    width: 100%;
+  }
+}
+
+.tf-car-archive-result.tf-car-lists-widgets {
+  width: 100%;
+}
+
+.tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view {
+  width: calc(33% - 18px) !important;
+}
+
+@media only screen and (max-width: 1199.98px) {
+  .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view {
+    width: calc(50% - 16px) !important;
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view {
+    width: 100% !important;
+  }
+}
+
+.tf-car-archive-result .tf-heading {
+  text-align: center;
+}
+
+.tf-car-archive-result .tf-heading h2 {
+  color: #27333F;
+  font-size: 38px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  /* 45.6px */
+  margin-bottom: 16px;
+}
+
+.tf-car-archive-result .tf-heading p {
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  margin-bottom: 16px;
+}
+
+.tf-car-archive-result .tf-car-result {
+  flex-wrap: wrap;
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view {
+  border-radius: 16px;
+  background: #F8FAFC;
+  width: calc(50% - 16px);
+}
+
+@media only screen and (max-width: 991.98px) {
+  .tf-car-archive-result .tf-car-result .tf-single-car-view {
+    width: 100%;
+  }
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image {
+  position: relative;
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image img {
+  border-radius: 16px;
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 16px;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span {
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(32px);
+  display: inline-block;
+  padding: 0 8px;
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span i {
+  color: #FFBF0F;
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box {
+  max-width: 155px;
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li {
+  border-radius: 8px;
+  background: #FFBF0F;
+  backdrop-filter: blur(32px);
+  padding: 4px 8px;
+  color: #382900;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  margin-bottom: 8px;
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li:last-child {
+  margin-bottom: 0px;
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details {
+  padding: 24px 16px 16px 16px;
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a {
+  text-decoration: none;
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a h3 {
+  color: #27333F;
+  font-size: 21px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: 150% !important;
+  /* 31.5px */
+  margin-top: 0px;
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul {
+  list-style: none;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li {
+  color: #566676;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  width: calc(33% - 16px);
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li {
+    width: calc(50% - 16px);
+  }
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn {
+  align-items: center;
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 {
+  color: #27333F;
+  font-size: 28px !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  line-height: 120%;
+  /* 33.6px */
+  margin: 0;
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small {
+  color: #566676;
+  font-size: 16px !important;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  text-transform: capitalize;
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more {
+  border-radius: 8px;
+  border: 1px solid #0866C4;
+  padding: 12px 32px;
+  color: #0866C4;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  /* 24px */
+  background-color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  transition: .3s all ease;
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button:hover,
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more:hover {
+  border: 1px solid #0866C4;
+  background: #0866C4;
+  color: #fff;
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-car-booking-popup {
+  display: none;
+}
+
+.tf-car-archive-result .tf-car-result.list-view .tf-single-car-view {
+  width: 100% !important;
+  display: flex;
+}
+
+@media only screen and (max-width: 885px) {
+  .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view {
+    display: flow-root;
+  }
+}
+
+.tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image {
+  width: 280px;
+  height: 200px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image {
+    width: 200px;
+  }
+}
+
+@media only screen and (max-width: 885px) {
+  .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image {
+    width: 100%;
+  }
+}
+
+.tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image img {
+  width: 100%;
+  height: 200px;
+}
+
+.tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos {
+  display: flow-root;
+}
+
+.tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box {
+  margin-top: 8px;
+  max-width: none;
+}
+
+.tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li {
+  display: inline-block;
+}
+
+.tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details {
+  width: calc(100% - 280px);
+  display: flex;
+  padding: 24px;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details {
+    width: calc(100% - 200px);
+  }
+}
+
+@media only screen and (max-width: 885px) {
+  .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details {
+    display: flow-root;
+    width: 100%;
+  }
+}
+
+.tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content {
+  width: calc(100% - 196px);
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content {
+    width: calc(100% - 140px);
+  }
+}
+
+@media only screen and (max-width: 885px) {
+  .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content {
+    width: 100%;
+  }
+}
+
+.tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content h3 {
+  margin-bottom: 16px;
+}
+
+.tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul {
+  margin: 0;
+}
+
+@media only screen and (max-width: 885px) {
+  .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul {
+    margin-bottom: 24px;
+  }
+}
+
+.tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul li {
+  width: calc(50% - 16px);
+}
+
+.tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn {
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 885px) {
+  .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn {
+    flex-direction: row;
+  }
+}
+
+.tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn button {
+  margin-top: auto;
+}
+
+.tf-car-archive-result .tf-car-result .tf_posts_navigation {
+  width: 100%;
+}
+
+.tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers {
+  background: #0866c4;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current {
+  background: #e6f2fe;
+  color: #566676;
+}
+
+.tf-archive-search-box-wrapper {
+  border-radius: 16px;
+  background: #E6F2FE;
+  box-shadow: 0px 24px 60px 0px rgba(0, 15, 63, 0.16);
+}
+
+.tf-archive-search-box-wrapper .tf-date-selection-form {
+  display: flex;
+  margin-top: 8px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-archive-search-box-wrapper .tf-date-selection-form {
+    flex-wrap: wrap;
+    justify-content: end;
+  }
+}
+
+.tf-archive-search-box-wrapper .tf-date-selection-form .tf-date-select-box {
+  width: calc(100% - 155px);
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-archive-search-box-wrapper .tf-date-selection-form .tf-date-select-box {
+    width: 100%;
+  }
+}
+
+.tf-archive-search-box-wrapper .tf-date-selection-form .tf-driver-location-box {
+  padding-left: 0;
+  padding-right: 0;
+  width: 147px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-archive-search-box-wrapper .tf-date-selection-form .tf-driver-location-box {
+    margin-right: 8px;
+  }
+}
+
+.tf-archive-search-box-wrapper .tf-date-selection-form .tf-driver-location-box .tf-submit-button {
+  height: 100%;
+  width: 100%;
+}
+
+.tf-archive-search-box-wrapper .tf-date-selection-form .tf-driver-location-box .tf-submit-button button {
+  width: 100%;
+  height: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box {
+  padding: 8px;
+  flex-wrap: nowrap;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-archive-search-box-wrapper .tf-date-select-box {
+    flex-wrap: wrap;
+  }
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select {
+  border-radius: 8px;
+  background: #FFF;
+  padding: 16px;
+  width: 33.33%;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select {
+    width: 100%;
+  }
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date {
+  width: calc(50% - 8px);
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date:first-child {
+  border-right: 1px solid #DFE6ED;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date i {
+  color: #566676;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .tf-flex {
+  flex-wrap: nowrap;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select {
+  width: 100%;
+  position: relative;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select h5 {
+  color: #27333F;
+  font-size: 12px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 120% !important;
+  /* 14.4px */
+  margin-bottom: 8px;
+  margin-top: 0px;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input {
+  min-width: auto;
+  width: 100% !important;
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  border: 0px solid !important;
+  padding-left: 0px;
+  box-shadow: none;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input::placeholder {
+  color: #27333F;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select select {
+  min-width: auto;
+  width: 100% !important;
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  border: 0px solid !important;
+  background-color: transparent;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items {
+  position: absolute;
+  z-index: 99;
+  top: 100%;
+  left: 0;
+  width: 190px;
+  max-height: 200px;
+  overflow: auto;
+  border-radius: 4px;
+  background: #EEF2F6;
+  padding: 2px;
+  box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.2);
+  scrollbar-width: thin;
+  scrollbar-color: #9c9c9c #ffffff;
+  /* Chrome, Edge, and Safari */
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items *::-webkit-scrollbar {
+  width: 5px;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items *::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items::-webkit-scrollbar-thumb {
+  background-color: #9c9c9c;
+  border-radius: 5px;
+  border: 3px solid #ffffff;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items > div {
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  background: #FFF;
+  text-transform: capitalize;
+  color: #27333F;
+  font-size: 16px;
+  margin-bottom: 2px;
+  transition: .3s all ease;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items > div:last-child {
+  margin-bottom: 0px;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items > div:hover {
+  background-color: #F8FAFC;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap {
+  padding: 3px 0px !important;
+  border: 0px solid;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap input {
+  width: 50px !important;
+  padding: 0 !important;
+  text-align: center;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_input-inner > div {
+  color: #27333f;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap {
+  left: 0;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap .acr-dec,
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap .acr-inc {
+  padding: 0;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select.tf-pick-drop-location.active .tf-select-date {
+  width: 100%;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select.tf-pick-drop-location.active .tf-select-date:first-child {
+  border-right: 0px solid #DFE6ED;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select.tf-pick-drop-location.active .tf-select-date:last-child {
+  display: none;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select.tf-date-single-select.full-width .tf-select-date {
+  width: 100%;
+}
+
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select.tf-date-single-select.full-width .tf-select-date:first-child {
+  border-right: 0px solid #DFE6ED;
+}
+
+.tf-archive-search-box-wrapper .tf-driver-location-box {
+  padding: 8px;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-archive-search-box-wrapper .tf-driver-location-box {
+    display: flow-root;
+  }
+}
+
+.tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location {
+  padding-left: 16px;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location {
+    padding-left: 0px;
+  }
+}
+
+.tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0px 32px;
+}
+
+.tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label {
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 0px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .checkmark {
+  background-color: #F8FAFC;
+}
+
+.tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label .checkmark {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  border: 2px solid #566676;
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+.tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label .checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 2px;
+  width: 7px;
+  height: 10px;
+  border: solid #566676;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location span#tf-required {
+  color: red;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-archive-search-box-wrapper .tf-driver-location-box .tf-submit-button {
+    margin-top: 16px;
+  }
+}
+
+.tf-archive-search-box-wrapper .tf-driver-location-box .tf-submit-button button {
+  border-radius: 8px;
+  background: #0866C4;
+  padding: 16px 50px;
+  color: #FFF;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  /* 24px */
+  border: 0px solid;
+  cursor: pointer;
+  transition: .3s all ease;
+}
+
+.tf-archive-search-box-wrapper .tf-driver-location-box .tf-submit-button button:hover {
+  background: #094C90;
+}
+
+.tf-archive-search-box-wrapper .tf-driver-location-box .tf-submit-button button i {
+  margin-left: 8px;
+}
+
+.tf-single-car-section {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.tf-single-car-section .tf-single-booking-bar {
+  background: #FFF;
+  box-shadow: 0px 48px 64px 0px rgba(2, 12, 21, 0.05);
+  padding: 16px 0px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+  display: none;
+}
+
+@media only screen and (max-width: 991.98px) {
+  .tf-single-car-section .tf-single-booking-bar {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media only screen and (max-width: 991.98px) {
+  .tf-single-car-section .tf-single-booking-bar .tf-top-booking-bar {
+    gap: 16px;
+  }
+}
+
+@media only screen and (max-width: 991.98px) {
+  .tf-single-car-section .tf-single-booking-bar .tf-top-bar-booking {
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-single-booking-bar .tf-top-bar-booking {
+    display: none;
+  }
+}
+
+.tf-single-car-section .tf-single-booking-bar .tf-top-bar-booking .tf-price-header h2 {
+  color: #27333F;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  /* 31.5px */
+  margin: 0;
+}
+
+.tf-single-car-section .tf-single-booking-bar .tf-top-bar-booking .tf-price-header p {
+  color: #566676;
+  margin: 0;
+}
+
+.tf-single-car-section .tf-single-booking-bar .tf-top-bar-booking button {
+  padding: 16px 32px;
+  border-radius: 8px;
+  background: #0866c4;
+  color: #fff;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  cursor: pointer;
+  border: 0px solid;
+  transition: .3s all ease;
+}
+
+.tf-single-car-section .tf-single-booking-bar .tf-top-bar-booking button:hover {
+  background: #094c90;
+}
+
+.tf-single-car-section .tf-single-booking-bar .tf-details-menu {
+  width: 668px;
+}
+
+@media only screen and (max-width: 991.98px) {
+  .tf-single-car-section .tf-single-booking-bar .tf-details-menu {
+    width: 100%;
+  }
+}
+
+.tf-single-car-section .tf-details-menu {
+  position: relative;
+}
+
+@media only screen and (max-width: 640px) {
+  .tf-single-car-section .tf-details-menu {
+    width: 100%;
+  }
+}
+
+.tf-single-car-section .tf-details-menu::before {
+  background: linear-gradient(90deg, rgba(217, 217, 217, 0) 0%, #F8FAFC 100%);
+  position: absolute;
+  content: "";
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 92px;
+  z-index: -1;
+}
+
+.tf-single-car-section .tf-details-menu ul {
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  width: 100%;
+  display: block ruby;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+.tf-single-car-section .tf-details-menu ul::-webkit-scrollbar {
+  width: 4px;
+}
+
+.tf-single-car-section .tf-details-menu ul::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.tf-single-car-section .tf-details-menu ul::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
+.tf-single-car-section .tf-details-menu ul::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.tf-single-car-section .tf-details-menu ul li {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.tf-single-car-section .tf-details-menu ul li a {
+  text-decoration: none;
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  padding: 0 8px 8px 8px;
+  display: inline-block;
+}
+
+.tf-single-car-section .tf-details-menu ul li.active a {
+  color: #0866C4;
+  border-bottom: 2px solid #0866C4;
+}
+
+.tf-single-car-section .tf-single-car-details-warper {
+  padding: 32px 0;
+  display: flex;
+  gap: 32px;
+}
+
+@media only screen and (max-width: 1199.98px) {
+  .tf-single-car-section .tf-single-car-details-warper {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-single-car-details-warper {
+    flex-wrap: wrap;
+  }
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column {
+  width: calc(100% - 472px);
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+@media only screen and (min-width: 767.99px) and (max-width: 991px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column {
+    width: calc(100% - 360px);
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column {
+    width: 100%;
+  }
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column h3 {
+  color: #27333F;
+  font-size: 21px !important;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 31.5px */
+  margin-bottom: 16px;
+  margin-top: 0px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-title h1 {
+  color: #27333F;
+  font-size: 28px !important;
+  font-style: normal;
+  font-weight: 600 !important;
+  line-height: 120%;
+  /* 33.6px */
+  margin-bottom: 10px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-title .breadcrumb ul {
+  margin: 0;
+  padding: 0;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-title .breadcrumb ul li {
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  display: inline-block;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-title .breadcrumb ul li a {
+  text-decoration: none;
+  color: #27333F;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-template-part {
+  width: 100%;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery {
+  width: 100%;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car {
+  position: relative;
+  border-radius: 16px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car img {
+  border-radius: 16px;
+  height: 338px;
+  width: 100%;
+  object-fit: cover;
+}
+
+@media only screen and (max-width: 480px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car img {
+    height: 240px;
+  }
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews a {
+  text-decoration: none;
+  border-radius: 8px;
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  background: rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(32px);
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews a span {
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews a span i {
+  color: #FFBF0F;
+  font-size: 18px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share a.tf-share-toggle,
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share a.tf-wishlist {
+  margin: 0;
+  padding: 0;
+  height: 32px;
+  width: 32px;
+  border-radius: 100px;
+  text-align: center;
+  line-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #27333F;
+  cursor: pointer;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box {
+  display: inline-flex;
+  align-items: center;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content {
+  display: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  list-style: none;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content.show {
+  display: block;
+}
+
+@media only screen and (max-width: 640px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content {
+    left: auto !important;
+    right: 0px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content {
+    left: 0 !important;
+    right: auto !important;
+  }
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content {
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 16px 10px;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0px 13px 30px 0px #e0e8ee;
+  position: absolute;
+  min-width: 100%;
+  top: 100%;
+  transform: translateY(8px);
+  z-index: 9999;
+  left: auto;
+  right: 0;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content h4 {
+  font-size: 14px !important;
+  color: #0E3DD8;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li {
+  display: inline-block;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li a {
+  display: inline-block;
+  padding: 10px 9px;
+  margin: 0;
+  color: #0866c4;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li a i {
+  font-size: 22px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li a:hover {
+  background: transparent !important;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li button {
+  padding: 10px 8px !important;
+  background-color: transparent !important;
+  border: 0px solid;
+  font-size: 22px !important;
+  cursor: pointer;
+  color: #0866c4;
+  box-shadow: none;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li button span {
+  color: #0866c4;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li button .share-center-copied-message {
+  display: none;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li input {
+  padding: 0;
+  width: 0;
+}
+
+@media only screen and (max-width: 640px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li input {
+    display: contents !important;
+  }
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery {
+  margin-top: 15px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a {
+  width: calc(25% - 12px);
+  display: none;
+  height: 122px;
+}
+
+@media only screen and (min-width: 767.99px) and (max-width: 991px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a {
+    height: 90px;
+  }
+}
+
+@media only screen and (max-width: 575.98px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a {
+    height: 90px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a {
+    height: 60px;
+  }
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a img {
+  border-radius: 8px;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a.tf-gallery-more {
+  position: relative;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a.tf-gallery-more::before {
+  border-radius: 8px;
+  content: "View More → ";
+  position: absolute;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1;
+  background: #0000009c;
+  font-size: 16px;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a.tf-gallery-more::before {
+    text-align: center;
+    font-size: 12px;
+  }
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a:nth-child(1), .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a:nth-child(2), .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a:nth-child(3), .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-hero-gallery .tf-gallery a:nth-child(4) {
+  display: block;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-details-menu {
+  width: 100%;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-short-description,
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-full-description {
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-short-description p,
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-full-description p {
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150% !important;
+  /* 24px */
+  margin: 0;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-short-description span.tf-see-description,
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-short-description span.tf-see-less-description,
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-full-description span.tf-see-description,
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-full-description span.tf-see-less-description {
+  color: #27333F;
+  cursor: pointer;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-full-description {
+  display: none;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info {
+  width: 100%;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  gap: 16px 8px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul li {
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  width: calc(25% - 8px);
+  border-radius: 8px;
+  border: 1px solid #DFE6ED;
+  padding: 8px;
+  position: relative;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul li i {
+  font-size: 20px;
+}
+
+@media only screen and (min-width: 767.99px) and (max-width: 991px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul li {
+    width: calc(33% - 8px);
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul li {
+    width: calc(33% - 4px);
+  }
+}
+
+@media only screen and (max-width: 575.98px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul li {
+    width: calc(50% - 8px);
+  }
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul li:hover .tf-car-info-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul li .tf-car-info-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  background-color: #fff;
+  border-radius: .5rem;
+  box-shadow: 0 2px 0.75rem rgba(15, 15, 15, 0.08);
+  padding: 8px 12px;
+  width: 260px;
+  z-index: 1;
+  bottom: 40px;
+  left: 50%;
+  margin-left: -130px;
+  transition: .3s all ease;
+  text-align: center;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul li .tf-car-info-tooltip {
+    width: 100%;
+    margin-left: -50%;
+  }
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul li .tf-car-info-tooltip::after {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  background-color: #fff;
+  border-radius: 5px;
+  transform: rotate(45deg);
+  left: 50%;
+  margin-left: -8px;
+  bottom: -3px;
+  z-index: -1;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-info ul li .tf-car-info-tooltip span {
+  color: #212121;
+  font-size: .875rem;
+  line-height: 1.125rem;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-benefits {
+  width: 100%;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-benefits ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  gap: 16px 8px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-benefits ul li {
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  width: calc(50% - 8px);
+}
+
+@media only screen and (max-width: 575.98px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-benefits ul li {
+    width: 100%;
+  }
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-inc-exc-section {
+  width: 100%;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-inc-exc-section .tf-inc-exe .tf-inc-list,
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-inc-exc-section .tf-inc-exe .tf-exc-list {
+  width: 50%;
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-inc-exc-section .tf-inc-exe .tf-inc-list,
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-inc-exc-section .tf-inc-exe .tf-exc-list {
+    width: 100%;
+  }
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-inc-exc-section .tf-inc-exe .tf-inc-list h3,
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-inc-exc-section .tf-inc-exe .tf-exc-list h3 {
+  margin-bottom: 16px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-inc-exc-section .tf-inc-exe .tf-inc-list ul,
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-inc-exc-section .tf-inc-exe .tf-exc-list ul {
+  margin: 0;
+  padding: 0;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-inc-exc-section .tf-inc-exe .tf-inc-list ul li,
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-inc-exc-section .tf-inc-exe .tf-exc-list ul li {
+  border-radius: 6px;
+  background: #EEF2F6;
+  padding: 8px 16px 8px 12px;
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-inc-exc-section .tf-inc-exe .tf-inc-list ul li i,
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-inc-exc-section .tf-inc-exe .tf-exc-list ul li i {
+  color: #27BE69;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-inc-exc-section .tf-inc-exe .tf-exc-list ul li i {
+  color: #E51030;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-specification {
+  width: 100%;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-specification ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  gap: 16px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-specification ul li {
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  width: calc(50% - 8px);
+  border-bottom: 1px solid #DFE6ED;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-specification ul li span.label {
+  color: #27333F;
+  padding: 8px 16px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-specification ul li span.value {
+  padding: 8px 16px;
+}
+
+@media only screen and (max-width: 575.98px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-specification ul li {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-location {
+  width: 100%;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-location .tf-car-location-map {
+  border-radius: 8px;
+  background: #EEF2F6;
+  height: 260px;
+  width: 100%;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-faq-section {
+  width: 100%;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-faq-section .tf-faq-col {
+  margin-bottom: 16px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-faq-section .tf-faq-col:last-child {
+  margin-bottom: 0px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-faq-section .tf-faq-col.active .tf-faq-head span i {
+  transform: rotate(180deg);
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-faq-section .tf-faq-col .tf-faq-head {
+  border-radius: 8px;
+  background: #F8FAFC;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-faq-section .tf-faq-col .tf-faq-head span {
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-faq-section .tf-faq-col .tf-faq-head span i {
+  color: #566676;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-details-column .tf-car-faq-section .tf-faq-col .tf-question-desc {
+  color: #27333F;
+  font-size: 15px;
+  padding: 8px 16px;
+  display: none;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form {
+  width: 440px;
+}
+
+@media only screen and (min-width: 767.99px) and (max-width: 991px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form {
+    width: 400px;
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form {
+    width: 100%;
+  }
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-price-header {
+  margin-bottom: 38px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-price-header h2 {
+  color: #27333F;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
+  /* 33.6px */
+  margin-bottom: 8px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-price-header h2 del {
+  color: #566676;
+  text-decoration-line: strikethrough;
+  font-weight: 400 !important;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-price-header h2 small.pricing-type {
+  color: #566676;
+  font-size: 16px !important;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  text-transform: capitalize;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-price-header p {
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  margin: 0;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-extra-added-info {
+  border-radius: 16px;
+  background: #EEF2F6;
+  padding: 16px 24px 24px 24px;
+  margin-bottom: 32px;
+  display: none;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-extra-added-info .tf-extra-added-box h3 {
+  color: #27333F;
+  font-size: 21px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 150%;
+  /* 31.5px */
+  margin: 0;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-extra-added-info .tf-extra-added-box .tf-single-added-extra {
+  border-radius: 8px;
+  background: #FFF;
+  padding: 16px;
+  gap: 8px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-extra-added-info .tf-extra-added-box .tf-single-added-extra h4 {
+  color: #27333F;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 150% !important;
+  /* 24px */
+  margin: 0;
+  width: calc(100% - 148px);
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-extra-added-info .tf-extra-added-box .tf-single-added-extra .qty-price {
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  width: 140px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-extra-added-info .tf-extra-added-box .tf-single-added-extra .qty-price span.price {
+  margin-left: 10px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-extra-added-info .tf-extra-added-box .tf-single-added-extra .qty-price i {
+  color: #566676;
+  font-size: 20px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-extra-added-info .tf-extra-added-box .tf-single-added-extra .qty-price span.delete {
+  cursor: pointer;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box {
+  border-radius: 16px;
+  background: #EEF2F6;
+  padding: 8px 8px 16px 8px;
+  margin-bottom: 32px;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box {
+    position: fixed;
+    left: 0;
+    bottom: 72px;
+    right: 0;
+    z-index: 99999;
+    margin-bottom: 0px;
+    display: none;
+  }
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box.tf-box-loading {
+  position: relative;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box.tf-box-loading {
+    position: fixed;
+  }
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box.tf-box-loading::before {
+  position: absolute;
+  content: "";
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 99;
+  border-radius: 16px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select {
+  border-radius: 8px;
+  background: #FFF;
+  padding: 16px;
+  margin-bottom: 8px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select:last-child {
+  margin-bottom: 0px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date {
+  width: calc(50% - 8px);
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .tf-flex {
+  flex-wrap: nowrap;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date:first-child {
+  border-right: 1px solid #DFE6ED;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select {
+  width: 100%;
+  position: relative;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select h5 {
+  color: #27333F;
+  font-size: 12px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 120% !important;
+  /* 14.4px */
+  margin-top: 0px;
+  margin-bottom: 8px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input {
+  min-width: auto;
+  width: 100% !important;
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  border: 0px solid !important;
+  padding: 0;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input::placeholder {
+  color: #27333F;
+  opacity: 1;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select select {
+  min-width: auto;
+  width: 100% !important;
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  border: 0px solid !important;
+  background-color: transparent;
+  padding: 0;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items {
+  position: absolute;
+  z-index: 99;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 190px;
+  max-height: 200px;
+  overflow: auto;
+  border-radius: 4px;
+  background: #EEF2F6;
+  box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.2);
+  padding: 2px;
+  scrollbar-width: thin;
+  scrollbar-color: #9c9c9c #ffffff;
+  /* Chrome, Edge, and Safari */
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items *::-webkit-scrollbar {
+  width: 5px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items *::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items::-webkit-scrollbar-thumb {
+  background-color: #9c9c9c;
+  border-radius: 5px;
+  border: 3px solid #ffffff;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items > div {
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  background: #FFF;
+  text-transform: capitalize;
+  color: #27333F;
+  font-size: 16px;
+  margin-bottom: 2px;
+  transition: .3s all ease;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items > div:last-child {
+  margin-bottom: 0px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items > div:hover {
+  background-color: #F8FAFC;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-form-submit-btn {
+  padding-top: 8px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-form-submit-btn .error-notice {
+  text-align: center;
+  color: red;
+  margin-bottom: 10px;
+  display: none;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-form-submit-btn button {
+  padding: 16px 32px;
+  border-radius: 8px;
+  background: #0866C4;
+  color: #FFF;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  /* 24px */
+  cursor: pointer;
+  width: 100%;
+  border: 0px solid;
+  transition: .3s all ease;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-form-submit-btn button:hover {
+  background: #094C90;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-form-submit-btn button.tf-partial-button {
+  border: 1px solid #0866C4;
+  background: transparent;
+  color: #0866C4;
+  transition: .3s all ease;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-form-submit-btn button.tf-partial-button:hover {
+  border: 1px solid #0866C4;
+  background: #0866C4;
+  color: #fff;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-form-submit-btn button.tf-partial-button:hover svg path {
+  stroke: #fff;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-instraction-btn {
+  text-align: center;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-instraction-btn {
+    display: none;
+  }
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-instraction-btn span {
+  color: #0866C4;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  margin: 0;
+  cursor: pointer;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-mobile-booking-btn {
+  display: none;
+  background: #EEF2F6;
+  padding: 8px;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-mobile-booking-btn {
+    display: block;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 9999;
+  }
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-mobile-booking-btn button {
+  padding: 16px 32px;
+  border-radius: 8px;
+  background: #0866C4;
+  color: #FFF;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  /* 24px */
+  cursor: pointer;
+  width: 100%;
+  border: 0px solid;
+  transition: .3s all ease;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-mobile-booking-btn button:hover {
+  background: #094C90;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section {
+  border-radius: 16px;
+  background: #EEF2F6;
+  padding: 16px 24px 24px 24px;
+  margin-bottom: 32px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section h3 {
+  color: #27333F;
+  font-size: 21px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 150% !important;
+  /* 31.5px */
+  margin-bottom: 16px;
+  margin-top: 0px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra {
+  padding: 12px 16px 16px 16px;
+  border-radius: 8px;
+  background: #F8FAFC;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title {
+  width: calc(100% - 95px);
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title h4 {
+  color: #27333F;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 150% !important;
+  /* 24px */
+  margin-bottom: 8px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title h4 .tf-info-tooltip {
+  position: relative;
+  margin-left: 5px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title h4 .tf-info-tooltip i {
+  font-weight: 400;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title h4 .tf-info-tooltip:hover .tf-info-tooltip-content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title h4 .tf-info-tooltip .tf-info-tooltip-content {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  box-shadow: 0px 15px 30px 0px rgba(40, 16, 26, 0.1);
+  border-radius: 8px;
+  background: var(--UI-800, linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), #27333F);
+  padding: 8px 12px;
+  width: 218px;
+  z-index: 0;
+  bottom: 30px;
+  left: 50%;
+  margin-left: -109px;
+  transition: .3s all ease;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title h4 .tf-info-tooltip .tf-info-tooltip-content::after {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  background: var(--UI-800, linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), #27333F);
+  border-radius: 5px;
+  transform: rotate(45deg);
+  left: 50%;
+  margin-left: -8px;
+  bottom: -6px;
+  z-index: -1;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title h4 .tf-info-tooltip .tf-info-tooltip-content p {
+  color: #FFF;
+  text-align: center;
+  font-size: 13px !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  line-height: 20px;
+  /* 153.846% */
+  margin: 0;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select {
+  border-radius: 8px;
+  background: #E6F2FE;
+  padding: 4px 8px;
+  width: auto;
+  display: inline-flex;
+  gap: 10px;
+  height: 32px;
+  margin-top: 5px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select .acr-dec,
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select .acr-inc {
+  color: #0866C4;
+  border: 0px solid;
+  background-color: transparent;
+  width: auto;
+  height: auto;
+  padding: 0;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select input {
+  color: #566676;
+  font-size: 16px;
+  width: 18px !important;
+  cursor: not-allowed;
+  background: transparent;
+  border: 0px solid;
+  padding: 0;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-price {
+  text-align: right;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-price h4 {
+  color: #27333F;
+  font-size: 21px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 150%;
+  /* 24px */
+  margin-bottom: 8px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-price h4 small {
+  display: block;
+  font-size: 16px !important;
+  color: #566676;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-extra-apply-btn {
+  text-align: right;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-extra-apply-btn button {
+  padding: 12px 32px;
+  border-radius: 8px;
+  background: #EEF2F6;
+  color: #0866C4;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  /* 24px */
+  cursor: pointer;
+  border: 1px solid #0866C4;
+  transition: .3s all ease;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-extra-apply-btn button:hover {
+  background: #0866C4;
+  color: #fff;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details {
+  border-radius: 16px;
+  background: #EEF2F6;
+  padding: 24px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details .tf-driver-details-header h3 {
+  color: #27333F;
+  font-size: 21px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 150% !important;
+  /* 31.5px */
+  margin: 0;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details .tf-driver-details-header span {
+  color: #288FF6;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 150% !important;
+  /* 24px */
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details .tf-driver-details-header span i {
+  color: #288FF6;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details .tf-driver-photo img {
+  height: 56px;
+  width: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info {
+  width: calc(100% - 72px);
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info h4 {
+  color: #27333F;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: 150% !important;
+  margin: 0;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info p {
+  color: #27333F;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 150% !important;
+  /* 24px */
+  margin: 0;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info .tf-driver-contact-info {
+  border-top: 1px solid #C0CCD8;
+  margin-top: 16px;
+  padding-top: 16px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info .tf-driver-contact-info ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info .tf-driver-contact-info ul li a {
+  position: relative;
+  text-decoration: none;
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  display: inline-block;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info .tf-driver-contact-info ul li a i {
+  font-size: 20px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info .tf-driver-contact-info ul li a:hover .tf-tooltip-info {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info .tf-driver-contact-info ul li a .tf-tooltip-info {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  box-shadow: 0px 15px 30px 0px rgba(40, 16, 26, 0.1);
+  border-radius: 8px;
+  background: var(--UI-800, linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), #27333F);
+  padding: 8px 12px;
+  width: 218px;
+  z-index: 0;
+  bottom: 30px;
+  left: 50%;
+  margin-left: -109px;
+  transition: .3s all ease;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info .tf-driver-contact-info ul li a .tf-tooltip-info::after {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  background: var(--UI-800, linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), #27333F);
+  border-radius: 5px;
+  transform: rotate(45deg);
+  left: 50%;
+  margin-left: -8px;
+  bottom: -6px;
+  z-index: -1;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info .tf-driver-contact-info ul li a .tf-tooltip-info p {
+  color: #FFF;
+  text-align: center;
+  font-size: 12px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 20px;
+  /* 153.846% */
+}
+
+.tf-single-car-section .tf-review-section {
+  margin-bottom: 32px;
+}
+
+@media only screen and (max-width: 1199.98px) {
+  .tf-single-car-section .tf-review-section {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.tf-single-car-section .tf-review-section h3 {
+  color: #27333F;
+  font-size: 21px !important;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 31.5px */
+  margin-bottom: 16px;
+  margin-top: 0px;
+}
+
+.tf-single-car-section .tf-review-section .tf-review-form-wrapper p {
+  margin: 0 0 20px 0;
+}
+
+.tf-single-car-section .tf-review-section .tf-clients-reviews ~ .tf-review-form-wrapper {
+  margin-top: 20px;
+}
+
+.tf-single-car-section .tf-review-section .tf-review-submit {
+  margin-top: 16px;
+}
+
+.tf-single-car-section .tf-review-section .tf-review-form-container {
+  min-width: auto;
+  background: transparent !important;
+}
+
+.tf-single-car-section .tf-review-section .tf-review-form-container .tf-visitor-info {
+  margin: 20px 0px !important;
+}
+
+.tf-single-car-section .tf-review-section .tf-review-form-container .tf-rating-wrapper {
+  margin-bottom: 20px;
+}
+
+.tf-single-car-section .tf-review-section .tf-review-form-container .tf-review-submit input[type="submit"] {
+  padding: 16px 32px !important;
+  border-radius: 8px !important;
+  background: #0866c4 !important;
+  color: #fff !important;
+  font-size: 16px !important;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  cursor: pointer;
+  border: 0px solid !important;
+}
+
+.tf-single-car-section .tf-review-section .tf-review-data {
+  margin-bottom: 32px;
+}
+
+.tf-single-car-section .tf-review-section .tf-review-data .tf-review-data-average .avg-review {
+  color: #27333F;
+  font-size: 38px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+  /* 45.6px */
+}
+
+.tf-single-car-section .tf-review-section .tf-review-data .tf-review-data-average .avg-review i {
+  font-size: 20px;
+  color: #FFBF0F;
+}
+
+.tf-single-car-section .tf-review-section .tf-review-data .tf-review-data-average .tf-review-all-info p {
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  margin: 0;
+}
+
+.tf-single-car-section .tf-review-section .tf-review-data-features .tf-percent-progress {
+  display: flex;
+  gap: 16px 32px;
+  flex-wrap: wrap;
+}
+
+.tf-single-car-section .tf-review-section .tf-review-data-features .tf-progress-bar {
+  height: 5px;
+  background: #C0CCD8;
+  border-radius: 32px;
+}
+
+.tf-single-car-section .tf-review-section .tf-review-data-features .tf-progress-item {
+  width: calc(50% - 16px);
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-review-section .tf-review-data-features .tf-progress-item {
+    width: 100%;
+  }
+}
+
+.tf-single-car-section .tf-review-section .tf-review-data-features .tf-progress-bar {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.tf-single-car-section .tf-review-section .tf-review-data-features .tf-progress-bar .percent-progress {
+  position: absolute;
+  background: #0866C4;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  border-radius: 7px;
+}
+
+.tf-single-car-section .tf-review-section .tf-review-data-features .tf-review-feature-label {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.tf-single-car-section .tf-review-section .tf-review-data-features .tf-review-feature-label p {
+  margin: 0;
+  color: #27333F;
+  font-size: 12px !important;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  /* 14.4px */
+  text-transform: capitalize;
+}
+
+.tf-single-car-section .tf-review-section .tf-review-data-features .tf-review-feature-label p.feature-rating {
+  font-weight: 700;
+}
+
+.tf-single-car-section .tf-review-section .tf-clients-reviews {
+  margin-top: 32px;
+}
+
+.tf-single-car-section .tf-review-section .tf-clients-reviews .tf-reviews-item {
+  flex-wrap: nowrap;
+}
+
+.tf-single-car-section .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-avater img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+}
+
+.tf-single-car-section .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text {
+  width: calc(100% - 62px);
+}
+
+.tf-single-car-section .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text .tf-review-rating {
+  font-size: 0;
+  color: #FFBF0F;
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.tf-single-car-section .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text .tf-review-rating > div {
+  display: flex;
+  gap: 8px;
+}
+
+.tf-single-car-section .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text .tf-review-rating > div i {
+  font-size: initial;
+}
+
+.tf-single-car-section .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text .tf-reviews-meta {
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700 !important;
+  line-height: 150%;
+  /* 24px */
+}
+
+.tf-single-car-section .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text .tf-reviews-meta span {
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400 !important;
+  line-height: 150%;
+  /* 24px */
+}
+
+.tf-single-car-section .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text p {
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  margin: 15px 0 0 0;
+}
+
+.tf-single-car-section .tf-car-conditions-section {
+  padding-bottom: 32px;
+}
+
+@media only screen and (max-width: 1199.98px) {
+  .tf-single-car-section .tf-car-conditions-section {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.tf-single-car-section .tf-car-conditions-section h3 {
+  color: #27333F;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 31.5px */
+  margin-bottom: 16px;
+}
+
+.tf-single-car-section .tf-car-conditions-section table {
+  border-left: 1px solid #DFE6ED;
+  border-top: 1px solid #DFE6ED;
+  margin: 0px;
+  border-radius: 16px;
+}
+
+.tf-single-car-section .tf-car-conditions-section table tr th {
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  border-right: 1px solid #DFE6ED;
+  border-bottom: 1px solid #DFE6ED;
+  padding: 16px;
+  vertical-align: baseline;
+  text-align: left;
+  width: 210px;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-car-conditions-section table tr th {
+    padding: 8px;
+    width: 33%;
+  }
+}
+
+.tf-single-car-section .tf-car-conditions-section table tr td {
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  border-right: 1px solid #DFE6ED;
+  border-bottom: 1px solid #DFE6ED;
+  padding: 16px 40px;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-car-conditions-section table tr td {
+    padding: 8px;
+  }
+}
+
+.tf-single-car-section .tf-car-conditions-section table tr:first-child td {
+  border-radius: 0 16px 0 0;
+}
+
+.tf-single-car-section .tf-car-conditions-section table tr:last-child th {
+  border-radius: 0 0 0 16px;
+}
+
+.tf-single-car-section .tf-car-conditions-section table tr:last-child td {
+  border-radius: 0 0 16px 0;
+}
+
+.tf-archive-car-section {
+  margin: 0 auto;
+}
+
+.tf-archive-car-section .tf-archive-car-banner {
+  background: #B8C5D2;
+  height: 350px;
+  margin: 24px 24px 0 24px;
+  border-radius: 16px;
+  background-size: cover;
+  background-position: center;
+}
+
+.tf-archive-car-section .tf-archive-car-banner .tf-banner-content {
+  height: 100%;
+}
+
+.tf-archive-car-section .tf-archive-car-banner .tf-banner-content h1 {
+  color: #FFF;
+  text-align: center;
+  font-size: 38px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+  /* 45.6px */
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper {
+  padding: 0px 0px 56px 0px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-archive-car-section .tf-archive-car-details-warper {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box {
+  border-radius: 24px;
+  background: #EEF2F6;
+  padding: 8px;
+  position: relative;
+  top: -60px;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-archive-header .tf-archive-view ul {
+  margin: 0px;
+  padding: 0;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-archive-header .tf-archive-view ul li {
+  height: 52px;
+  width: 52px;
+  line-height: 52px;
+  display: flex;
+  border-radius: 8px;
+  background: #F5FAFF;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-archive-header .tf-archive-view ul li i {
+  color: #27333F;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-archive-header .tf-archive-view ul li.active {
+  background-color: #0866C4;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-archive-header .tf-archive-view ul li.active i {
+  color: #FFFFFF;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-archive-header .tf-total-result-bar {
+  text-align: right;
+  display: flex;
+  gap: 2px;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-archive-header .tf-total-result-bar span {
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar {
+  width: 358px;
+  border-radius: 16px;
+  background: #F5FAFF;
+  padding: 32px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar {
+    width: 280px;
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar {
+    width: 100%;
+  }
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header {
+  margin-bottom: 32px;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header h4 {
+  color: #27333F;
+  font-size: 16px !important;
+  font-style: normal;
+  font-weight: 400 !important;
+  line-height: 150%;
+  /* 24px */
+  margin: 0;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header button {
+  color: #27333F;
+  font-size: 16px !important;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  background-color: transparent;
+  padding: 0px;
+  border: 0px solid;
+  cursor: pointer;
+  display: none;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget {
+  margin-bottom: 32px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget:last-child {
+  margin-bottom: 0px;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-widget-title {
+  background: transparent;
+  padding: 0;
+  height: auto;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0px;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-widget-title span {
+  color: #27333F;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 150%;
+  /* 24px */
+  margin-bottom: 16px;
+  cursor: auto;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-widget-title i {
+  display: none;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li {
+  width: 100%;
+  background: transparent;
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+  display: flow-root;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li.hidden {
+  display: none;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label {
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 0px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label input:checked ~ .checkmark {
+  background-color: #F8FAFC;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  border: 2px solid #566676;
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label .checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 2px;
+  width: 7px;
+  height: 10px;
+  border: solid #566676;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists a {
+  text-decoration: none;
+  color: #27333F;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  text-align: left;
+  margin-top: 8px;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__track {
+  border-radius: 4px;
+  background: #C0CCD8;
+  margin: 0 0 28px 0;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__tooltip {
+  bottom: -30px !important;
+  background: transparent !important;
+  color: #27333F !important;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider_dark .al-range-slider__bar {
+  background-color: #288FF6 !important;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__knob {
+  border-radius: 12px;
+  border: 1.5px solid #C0CCD8 !important;
+  background: #FFF !important;
+  width: 24px;
+  height: 24px;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_seat_filters .al-range-slider__knob::before {
+  content: "\f6c0";
+  position: absolute;
+  font-family: "FontAwesome";
+  color: #0866C4;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul {
+  gap: 8px;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li {
+  width: calc(33% - 5px);
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li label {
+  background: #FFF;
+  border-radius: 8px;
+  margin: 0;
+  padding: 0;
+  color: #566676;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  padding: 4px 8px;
+  text-align: center;
+  z-index: 0;
+}
+
+.tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li.active label {
+  background: #0866C4;
+  color: #fff;
 }
 
 

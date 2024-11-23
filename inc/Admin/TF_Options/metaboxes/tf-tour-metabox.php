@@ -287,6 +287,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						'hide_empty' => false,
 					),
 					'default'    => 'none',
+					'inline_add_new' => true
 				),
 				array(
 					'id'    => 'tf-pro-notice',
@@ -666,6 +667,21 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'notice' => 'info',
 					'icon' => 'ri-information-fill',
 					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>minimum days for booking</b>, <b>enable traveler info</b>, <b>external booking</b>, <b>booking without payment</b>, <b>taxable tour</b>, <b>tax class for Woocommerce</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' ) ),
+				),
+
+				array(
+					'id'    => 'tour-cancellation-heading',
+					'type'  => 'heading',
+					'label' => 'Cancellation Condition',
+					'subtitle' => __( 'Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds.', 'tourfic' ),
+				),
+				array(
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-information-fill',
+					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>booking cancellation</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
 				),
 			),
 		),

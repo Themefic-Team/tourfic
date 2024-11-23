@@ -9,6 +9,7 @@ use Tourfic\Admin\Backend_Booking\TF_Tour_Backend_Booking;
 use Tourfic\Admin\Booking_Details\Apartment_Booking_Details;
 use Tourfic\Admin\Booking_Details\Hotel_Booking_Details;
 use Tourfic\Admin\Booking_Details\Tour_Booking_Details;
+use Tourfic\Admin\Booking_Details\Car_Booking_Details;
 use Tourfic\Admin\TF_Promo_Notice;
 use Tourfic\App\Widgets\TF_Widget_Base;
 
@@ -60,6 +61,7 @@ class Base {
 			Tour_Booking_Details::instance();
 			Hotel_Booking_Details::instance();
 			Apartment_Booking_Details::instance();
+			Car_Booking_Details::instance();
 
 			
 			\Tourfic\Admin\TF_Duplicator::instance();
@@ -85,6 +87,10 @@ class Base {
 		if ( Helper::tfopt( 'disable-services' ) && in_array( 'apartment', Helper::tfopt( 'disable-services' ) ) ) {
 		} else {
 			 \Tourfic\Classes\Apartment\Apartment::instance();
+		}
+		if ( Helper::tfopt( 'disable-services' ) && in_array( 'carrentals', Helper::tfopt( 'disable-services' ) ) ) {
+		} else {
+			 \Tourfic\Classes\Car_Rental\Car_Rental::instance();
 		}
 
 		\Tourfic\Admin\Emails\TF_Handle_Emails::instance();
@@ -115,6 +121,11 @@ class Base {
 		\Tourfic\App\Shortcodes\Search_Form::instance();
 		\Tourfic\App\Shortcodes\Search_Result::instance();
 		\Tourfic\App\Shortcodes\Vendor_Post::instance();
+
+		\Tourfic\App\Shortcodes\Cars::instance();
+		\Tourfic\App\Shortcodes\Recent_Cars::instance();
+		\Tourfic\App\Shortcodes\Carrental_Locations::instance();
+		\Tourfic\App\Shortcodes\Carrental_Brand::instance();
 	}
 }
 

@@ -81,6 +81,7 @@ TF_Settings::option( 'tf_settings', array(
 						'hotel'     => __( 'Hotel', 'tourfic' ),
 						'tour'      => __( 'Tour', 'tourfic' ),
 						'apartment' => __( 'Apartment', 'tourfic' ),
+						'carrentals' => __( 'Car', 'tourfic' ),
 					),
 				),
 				array(
@@ -132,7 +133,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'    => 'tf-template',
 					'type'  => 'tab',
-					'label' => 'Hotel, Tour & Apartment Template',
+					'label' => 'Hotel, Tour, Apartment & Car Template',
 					'tabs'  => array(
 						array(
 							'id'     => 'hotel_template',
@@ -963,6 +964,183 @@ TF_Settings::option( 'tf_settings', array(
 								),
 							),
 						),
+						array(
+							'id'     => 'car_template',
+							'title'  => __( 'Car', 'tourfic' ),
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'      => 'car-title',
+									'type'    => 'heading',
+									'content' => __( 'Car Single Page', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'       => 'single-car',
+									'type'     => 'imageselect',
+									'label'    => __( 'Select Single Car Template', 'tourfic' ),
+									'subtitle'   => __( 'You have the option to override this from the settings specific to each individual apartment page.', 'tourfic' ),
+									'multiple' => true,
+									'inline'   => true,
+									'options'  => array(
+										'design-1' => array(
+											'title' => 'Design 1',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design-1-car.jpg",
+										),
+										'design-2' => array(
+											'title' => 'Design 2',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/more-template.jpg",
+											'disabled' => true
+										),
+									),
+									'default'  => 'design-1',
+								),
+								array(
+									'id'      => 'car_single_design_1_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Inter Sans" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									'dependency' => array( 'single-car', '==', 'design-1' ),
+								),
+								array(
+									'id'         => 'single-car-layout',
+									'class'      => 'disable-sortable',
+									'type'       => 'repeater',
+									'drag_only'  => true,
+									'label'      => __( 'Single Car Template Sections', 'tourfic' ),
+									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'dependency' => array( 'single-car', '==', 'design-1' ),
+									'field_title'=> 'car-section',
+									'fields'     => array(
+										array(
+											'id'         => 'car-section',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Name', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'         => 'car-section-slug',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Slug', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'       => 'car-section-status',
+											'type'     => 'switch',
+											'label'    => __( 'Section Status', 'tourfic' ),
+											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
+										),
+									),
+									'default'    => array(
+										array(
+											'car-section'        => __( 'Description', 'tourfic' ),
+											'car-section-slug'   => __( 'description', 'tourfic' ),
+											'car-section-status' => true,
+										),
+										array(
+											'car-section'        => __( 'Car info', 'tourfic' ),
+											'car-section-slug'   => __( 'car-info', 'tourfic' ),
+											'car-section-status' => true,
+										),
+										array(
+											'car-section'        => __( 'Benefits', 'tourfic' ),
+											'car-section-slug'   => __( 'benefits', 'tourfic' ),
+											'car-section-status' => true,
+										),
+										array(
+											'car-section'        => __( 'Include/Exclude', 'tourfic' ),
+											'car-section-slug'   => __( 'inc-exc', 'tourfic' ),
+											'car-section-status' => true,
+										),
+										array(
+											'car-section'        => __( 'Location', 'tourfic' ),
+											'car-section-slug'   => __( 'location', 'tourfic' ),
+											'car-section-status' => true,
+										),
+										array(
+											'car-section'        => __( 'FAQs', 'tourfic' ),
+											'car-section-slug'   => __( 'faq', 'tourfic' ),
+											'car-section-status' => true,
+										)
+									)
+								),
+								
+								array(
+									'id'      => 'car-title',
+									'type'    => 'heading',
+									'content' => __( 'Car Archive & Search Result Page', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'       => 'car-archive',
+									'type'     => 'imageselect',
+									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
+									'multiple' => true,
+									'inline'   => true,
+									'options'  => array(
+										'design-1' => array(
+											'title' => 'Design 1',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/car-archive-design-1.jpg",
+										),
+										'design-2' => array(
+											'title' => 'Design 2',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/more-template.jpg",
+											'disabled' => true
+										),
+									),
+									'default'  => 'design-1',
+								),
+								array(
+									'id'      => 'car_archive_design_1_bannar',
+									'type'    => 'image',
+									'label'    => __( 'Archive & Search Result Banner Image', 'tourfic' ),
+									'subtitle' => __( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
+									'library' => 'image',
+									// 'dependency' => array( 'car-archive', '==', 'design-1' ),
+								),
+								array(
+									'id'         => 'car_archive_view',
+									'type'       => 'select',
+									'label'      => __( 'Archive Layout', 'tourfic' ),
+									'options'    => array(
+										'grid' => __( 'Grid', 'tourfic' ),
+										'list' => __( 'List', 'tourfic' ),
+									),
+									'default'    => 'grid',
+									// 'dependency' => array( 'car-archive', '==', 'design-1' ),
+								),
+								array(
+									'id'         => 'car_archive_driver_min_age',
+									'type'       => 'number',
+									'label'      => __( 'Archive Filter: Driver Minimum Age', 'tourfic' ),
+									'subtitle'      => __( "This setting allows you to display the driver's minimum age on the archive and search results pages.", 'tourfic' ),
+									'default'    => 18,
+								),
+								array(
+									'id'         => 'car_archive_driver_max_age',
+									'type'       => 'number',
+									'label'      => __( 'Archive Filter: Driver Maximum Age', 'tourfic' ),
+									'subtitle'      => __( "This setting allows you to display the driver's maximum age on the archive and search results pages.", 'tourfic' ),
+									'default'    => 40,
+								),
+								array(
+									'id'      => 'car_design_1_fonts_notice',
+									'type'    => 'notice',
+									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Inter Sans" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
+									// 'dependency' => array( 'car-archive', '==', 'design-1' ),
+								),
+								array(
+									'id'      => 'car_archive_notice',
+									'type'    => 'notice',
+									'content' => __( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
+								),
+							),
+						),
 					),
 				)
 			),
@@ -1376,6 +1554,49 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
+
+		//Car Options
+		'car_option'      => array(
+			'title'  => __( 'Car Options', 'tourfic' ),
+			'icon'   => 'fa-solid fa-car',
+			'fields' => array(),
+		),
+		'car_single_page' => array(
+			'title'  => __( 'Single Page', 'tourfic' ),
+			'parent' => 'car_option',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'    => 'label_off_heading',
+					'type'  => 'heading',
+					'label' => __( 'Single Car Settings', 'tourfic' ),
+					'subtitle'   => __( 'These options can be overridden from Single Car Settings.', 'tourfic' ),
+				),
+
+				array(
+					'id'      => 'apartment-option-notice',
+					'type'    => 'notice',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/settings/car-options/#Single_Page_Settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+				),
+
+				array(
+					'id'        => 'disable-car-share',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Share Option', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
+				array(
+					'id'       => 'car_booking_form_button_text',
+					'type'     => 'text',
+					'label'    => __( 'Change Booking Form Button Text', 'tourfic' ),
+					'subtitle'  => __( 'With this option, you can change the text of the booking form button on the single car pages.', 'tourfic' ),
+					'default'    => __('Reserve', 'tourfic'),
+				),
+			),
+		),
+
 		//Frontend Dashboard
 		'frontend_dashboard'    => array(
 			'title'  => __( 'Frontend Dashboard', 'tourfic' ),
@@ -1951,7 +2172,30 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'  => __( 'Turn on this setting to hide the infant option from the search form.', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-				)
+				),
+				array(
+					'id'       => 'car_search_heading',
+					'type'     => 'heading',
+					'label'    => __( 'Car Search', 'tourfic' ),
+				),
+				array(
+					'id'        => 'pick_drop_car_search',
+					'type'      => 'switch',
+					'label'     => __( 'Pickup & Dropoff Location Required in Car Search', 'tourfic' ),
+					'subtitle'  => __( 'Activate this feature to enable users to pick their pickup and dropoff Location for searching.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => true
+				),
+				array(
+					'id'        => 'pick_drop_date_car_search',
+					'type'      => 'switch',
+					'label'     => __( 'Pickup & Dropoff Date Required in Car Search', 'tourfic' ),
+					'subtitle'  => __( 'Activate this feature to enable users to pick their pickup and dropoff Date for searching.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => true
+				),
 			),
 		),
 		// Design Options
@@ -3255,6 +3499,14 @@ TF_Settings::option( 'tf_settings', array(
 					'default' => "apartments",
 					'placeholder' => ! empty(get_option("apartment_slug")) ? get_option("apartment_slug") : "apartments",
 				),
+				array(
+					'id'       => 'car-permalink-setting',
+					'type'     => 'text',
+					'label'    => __( 'Car Permalink', 'tourfic' ),
+					'subtitle' => __( 'Enter a permalink for your car archive page.', 'tourfic' ),
+					'default' => "cars",
+					'placeholder' => ! empty(get_option("car_slug")) ? get_option("car_slug") : "cars",
+				),
 			),
 		),
 		/**
@@ -3391,6 +3643,46 @@ TF_Settings::option( 'tf_settings', array(
 					'button_title' => __( 'Add New', 'tourfic' ),
 					'label'    => __( 'Review Fields for Apartments', 'tourfic' ),
 					'subtitle' => __( 'Design customer review fields for apartments. Custom fields are permitted.', 'tourfic' ),
+					'max'      => '6',
+					'drag_only'   => true,
+					'field_title'  => 'r-field-type',
+					'fields'   => array(
+						array(
+							'id'    => 'r-field-type',
+							'type'  => 'text',
+							'label' => __( 'Review for', 'tourfic' ),
+						),
+
+					),
+					'default'  => array(
+						array(
+							'r-field-type' => __( 'Staff', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Facilities', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Cleanliness', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Comfort', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Value for money', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Location', 'tourfic' ),
+						),
+					)
+				),
+
+				array(
+					'id'       => 'r-car',
+					'class'    => 'disable-sortable',
+					'type'     => 'repeater',
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'label'        => __( 'Review Fields for Cars', 'tourfic' ),
+					'subtitle'     => __( 'Design customer review fields for cars. Custom fields are permitted.', 'tourfic' ),
 					'max'      => '6',
 					'drag_only'   => true,
 					'field_title'  => 'r-field-type',
@@ -4274,6 +4566,95 @@ TF_Settings::option( 'tf_settings', array(
 		),
 
 		/**
+		 * Cancellation
+		 *
+		 * Main menu
+		 */
+
+		 'cancellation' => array(
+			'title'  => esc_html__( 'Cancellation', 'tourfic' ),
+			'icon'   => 'fa-solid fa-arrow-rotate-left',
+			'parent' => 'pro_options',
+			'fields' => array(
+				array(
+					'id'       => 'integration_heading',
+					'type'     => 'heading',
+					'label'    => esc_html__( 'Cancellation Settings', 'tourfic' ),
+				),
+				array(
+					'id'      => 'cancellation-official-docs',
+					'type'    => 'cancellation-official-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => esc_html__( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/pabbly-vs-zapier-integrations/pabbly-integration/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'      => 'timezone-title',
+					'type'    => 'heading',
+					'content' => esc_html__( 'Time Zone', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'       => 'cancellation_time_zone',
+					'type'     => 'select2',
+					'label'    => esc_html__( 'Select Time Zone', 'tourfic' ),
+					'subtitle' => esc_html__( 'Choose your time-zone', 'tourfic' ),
+					'options' => [
+						'America/New_York' => __( '(UTC-05:00) New York', 'tourfic' ),
+						'Asia/Dhaka'  => __( '(UTC+06:00) Dhaka', 'tourfic' ),
+					],
+					'default' => 'America/New_York',
+					'is_pro'  => true,
+				),
+				array(
+					'id'      => 'hotel-title',
+					'type'    => 'heading',
+					'content' => esc_html__( 'Hotel', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'       => 'cancellation_hotel_checkin_time',
+					'type'     => 'time',
+					'label'    => esc_html__( 'Hotel Check-in Time', 'tourfic' ),
+					'subtitle' => esc_html__( 'Choose the hotel check-in time.', 'tourfic' ),
+					'format'   => 'H:i',
+					'default'  => '11:00',
+					'is_pro'  => true,
+				),
+				array(
+					'id'      => 'tour-title',
+					'type'    => 'heading',
+					'content' => esc_html__( 'Tour', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'       => 'cancellation_tour_checkin_time',
+					'type'     => 'time',
+					'label'    => esc_html__( 'Tour Check-in Time', 'tourfic' ),
+					'subtitle' => esc_html__( 'Choose the tour check-in time.', 'tourfic' ),
+					'format'   => 'H:i',
+					'default'  => '10:00',
+					'is_pro'  => true,
+				),
+				array(
+					'id'      => 'apartment-title',
+					'type'    => 'heading',
+					'content' => esc_html__( 'Apartment', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'       => 'cancellation_apartment_checkin_time',
+					'type'     => 'time',
+					'label'    => esc_html__( 'Apartment Check-in Time', 'tourfic' ),
+					'subtitle' => esc_html__( 'Choose the apartment check-in time.', 'tourfic' ),
+					'format'   => 'H:i',
+					'default'  => '11:00',
+					'is_pro'  => true,
+				),
+			),
+		),
+
+		/**
 		 * Import/Export
 		 *
 		 * Main menu
@@ -4913,6 +5294,198 @@ TF_Settings::option( 'tf_settings', array(
 					'default' => __( 'Continue to booking', 'tourfic' ),
 					'is_pro'  => true,
 				)
+			),
+		),
+		// Without Payment Popup
+		'car_without_payment_book'  => array(
+			'title'  => esc_html__( 'Car Without Payment', 'tourfic' ),
+			'parent' => 'pro_options',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+
+				array(
+					'id'       => 'confirmation_fields_heading',
+					'type'     => 'heading',
+					'label'    => __( 'Settings for Without Payment Option', 'tourfic' ),
+					'subtitle' => __( 'Activating the "Without Payment" booking option will enable the use of this section.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'tour-option-notice-four',
+					'type'    => 'notice',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/settings/car-options/#Without_Payment_Settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'           => 'book-confirm-field',
+					'class'        => 'disable-sortable',
+					'type'         => 'repeater',
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'label'        => __( 'Fields for Booking Confirmation', 'tourfic' ),
+					'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
+					'field_title'  => 'reg-field-label',
+					'is_pro' => true,
+					'fields'       => array(
+						array(
+							'id'    => 'reg-field-label',
+							'type'  => 'text',
+							'label' => __( 'Label', 'tourfic' ),
+						),
+						array(
+							'id'       => 'reg-field-name',
+							'type'     => 'text',
+							'label'    => __( 'Name', 'tourfic' ),
+							'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
+							'validate' => 'no_space_no_special',
+							'class'    => 'tf_hidden_fields',
+						),
+						array(
+							'id'      => 'reg-fields-type',
+							'type'    => 'select',
+							'label'   => __( 'Field Type', 'tourfic' ),
+							'options' => array(
+								'text'     => __( 'Text', 'tourfic' ),
+								'email'    => __( 'Email', 'tourfic' ),
+								'date'     => __( 'Date', 'tourfic' ),
+								'radio'    => __( 'Radio', 'tourfic' ),
+								'checkbox' => __( 'Checkbox', 'tourfic' ),
+								'select'   => __( 'Select', 'tourfic' ),
+							),
+							'class'   => 'tf_hidden_fields'
+						),
+						array(
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
+								array( 'reg-fields-type', '==', 'radio' ),
+							),
+							'fields'       => array(
+								array(
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
+								),
+								array(
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
+								),
+							),
+						),
+						array(
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
+								array( 'reg-fields-type', '==', 'select' ),
+							),
+							'fields'       => array(
+								array(
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
+								),
+								array(
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
+								),
+							),
+						),
+						array(
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
+								array( 'reg-fields-type', '==', 'checkbox' ),
+							),
+							'fields'       => array(
+								array(
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
+								),
+								array(
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
+								),
+							),
+						),
+						array(
+							'id'    => 'reg-field-required',
+							'type'  => 'switch',
+							'label' => __( 'Required Field ?', 'tourfic' ),
+							'class' => 'tf_hidden_fields'
+						),
+
+					),
+					'default'      => array(
+						array(
+							'reg-field-label'    => __( 'First Name', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_first_name', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Last Name', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_last_name', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Email', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_email', 'tourfic' ),
+							'reg-fields-type'    => 'email',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Phone', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_phone', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Country', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_country', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Street Address', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_street_address', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Town/City', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_town_city', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'State/Country', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_state_country', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+						array(
+							'reg-field-label'    => __( 'Postcode/ZIP', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_postcode', 'tourfic' ),
+							'reg-fields-type'    => 'text',
+							'reg-field-required' => true,
+						),
+					),
+				),
+				array(
+					'id'          => 'car-booking-confirmation-msg',
+					'type'        => 'editor',
+					'label'       => __( 'Booking Confirmation Message', 'tourfic' ),
+					'default' 	  => 'Booked Successfully',
+					'is_pro' => true
+				),
 			),
 		),
 	),
