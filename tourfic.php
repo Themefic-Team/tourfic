@@ -113,10 +113,10 @@ final class Tourfic {
 	 * Hook into actions and filters.
 	 */
 	private function init_hooks() {
-		// plugin loaded action hook.
-		add_action( 'plugins_loaded', array( $this, 'init_plugin' ) );
 		// Load the text domain for translation.
-		add_action( 'plugins_loaded', array( $this, 'tf_load_textdomain' ) );
+		add_action( 'init', array( $this, 'tf_load_textdomain' ) );
+		// plugin loaded action hook.
+		add_action( 'init', array( $this, 'init_plugin' ) );
 		//Compatibility with custom order tables for the WooCommerce plugin
 		add_action( 'before_woocommerce_init', array( $this, 'tf_woocommerce_compatibility' ) );
 	}
@@ -161,7 +161,6 @@ final class Tourfic {
 		load_textdomain( 'tourfic', WP_LANG_DIR . '/tourfic/tourfic-' . $locale . '.mo' );
 		// Then check for a language file in /wp-content/plugins/tourfic/lang/ (this will be overriden by any file already loaded)
 		load_plugin_textdomain( 'tourfic', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
-
 	}
 
 	/**
