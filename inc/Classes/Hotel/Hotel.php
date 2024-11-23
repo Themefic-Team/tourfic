@@ -2961,6 +2961,10 @@ class Hotel {
 		$min_discount_type = !empty($min_price_arr['min_discount_type']) ? $min_price_arr['min_discount_type'] : 'none';
 		$min_discount_amount = !empty($min_price_arr['min_discount_amount']) ? $min_price_arr['min_discount_amount'] : 0;
 
+		$meta_disable_review 			  = !empty($meta["h-review"]) ? $meta["h-review"] : 0;
+		$tfopt_disable_review 			  = !empty(Helper::tfopt("h-review")) ? Helper::tfopt("h-review") : 0;
+		$disable_review 				  = $tfopt_disable_review == 1 || $meta_disable_review == 1 ? true : $tfopt_disable_review;
+
 		if ( $tf_hotel_arc_selected_template == "design-1" ) {
 			?>
             <div class="tf-item-card tf-flex tf-item-hotel">
@@ -3025,7 +3029,7 @@ class Hotel {
                     <div class="tf-title tf-mt-16">
                         <h2><a href="<?php echo esc_url( $url ); ?>"><?php the_title(); ?></a></h2>
                     </div>
-					<?php if( empty($meta["h-review"]) || $meta["h-review"] != 1 ): ?>
+					<?php if( $disable_review != true ): ?>
 						<?php TF_Review::tf_archive_single_rating(); ?>
 					<?php endif; ?>
 					<?php if ( $features ) { ?>
@@ -3132,7 +3136,7 @@ class Hotel {
 						}
 						?>
                     </div>
-                    <?php if( empty($meta["h-review"]) || $meta["h-review"] != 1 ): ?>
+                    <?php if( $disable_review != true ): ?>
 						<div class="tf-available-ratings">
 							<?php TF_Review::tf_archive_single_rating(); ?>
 							<i class="fa-solid fa-star"></i>
@@ -3272,7 +3276,7 @@ class Hotel {
 								}
 								?>
                             </div>
-							<?php if( empty($meta["h-review"]) || $meta["h-review"] != 1 ): ?>
+							<?php if( $disable_review != true ): ?>
 								<?php TF_Review::tf_archive_single_rating(); ?>
 							<?php endif; ?>
                         </div>

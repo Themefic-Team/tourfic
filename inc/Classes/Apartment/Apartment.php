@@ -1750,6 +1750,10 @@ class Apartment {
 		$apartment_discount_type = !empty($meta["discount_type"]) ? $meta["discount_type"] : "none";
 		$apartment_discount_amount = !empty($meta["discount"]) ? $meta["discount"] : 0;
 
+		$meta_disable_review 			  = !empty($meta["disable-apartment-review"]) ? $meta["disable-apartment-review"] : 0;
+		$tfopt_disable_review 			  = !empty(Helper::tfopt("disable-apartment-review")) ? Helper::tfopt("disable-apartment-review") : 0;
+		$disable_review 				  = $tfopt_disable_review == 1 || $meta_disable_review == 1 ? true : $tfopt_disable_review;
+
 		// Gallery Image
 		$gallery = ! empty( $meta['apartment_gallery'] ) ? $meta['apartment_gallery'] : '';
 		if ( $gallery ) {
@@ -1812,7 +1816,7 @@ class Apartment {
 						}
 					?>
 				</div>  
-				<?php if( empty($meta["disable-apartment-review"]) || $meta["disable-apartment-review"] != 1 ): ?>
+				<?php if( $disable_review != true ): ?>
 					<div class="tf-available-ratings">
 						<?php TF_Review::tf_archive_single_rating($post_id); ?>
 						<i class="fa-solid fa-star"></i>
@@ -1957,7 +1961,7 @@ class Apartment {
 							}
 							?>
                         </div>
-						<?php if( empty($meta["disable-apartment-review"]) || $meta["disable-apartment-review"] != 1 ): ?>
+						<?php if( $disable_review != true ): ?>
 							<?php TF_Review::tf_archive_single_rating($post_id); ?>
 						<?php endif; ?>
                     </div>

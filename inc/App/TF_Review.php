@@ -171,6 +171,12 @@ class TF_Review {
 
         // Add nonce for security and authentication.
         check_ajax_referer('updates', '_ajax_nonce');
+
+        // Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
     
         global $wpdb;
     
