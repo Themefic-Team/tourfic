@@ -67,6 +67,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 			'hotel'     => esc_html__( 'Hotel', 'tourfic' ),
 			'tour'      => esc_html__( 'Tour', 'tourfic' ),
 			'apartment' => esc_html__( 'Apartment', 'tourfic' ),
+			'carrentals' => esc_html__( 'Car', 'tourfic' ),
 		);
 
 		if ( function_exists('is_tf_pro') && is_tf_pro() ) {
@@ -130,9 +131,9 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
             'tour_tab_title',
             [
                 'type'     => \Elementor\Controls_Manager::TEXT,
-                'label'    => __( 'Tour Tab Title', 'travelfic-toolkit' ),
+                'label'    => __( 'Tour Tab Title', 'tourfic' ),
                 'multiple' => true,
-                'default'  => __( 'Tour', 'travelfic-toolkit' ),
+                'default'  => __( 'Tour', 'tourfic' ),
                 'conditions' => [
                     'relation' => 'or',
                     'terms' => [
@@ -165,9 +166,9 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
             'hotel_tab_title',
             [
                 'type'     => \Elementor\Controls_Manager::TEXT,
-                'label'    => __( 'Hotel Tab Title', 'travelfic-toolkit' ),
+                'label'    => __( 'Hotel Tab Title', 'tourfic' ),
                 'multiple' => true,
-                'default'  => __( 'Hotel', 'travelfic-toolkit' ),
+                'default'  => __( 'Hotel', 'tourfic' ),
                 'conditions' => [
                     'relation' => 'or',
                     'terms' => [
@@ -200,9 +201,9 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
             'apt_tab_title',
             [
                 'type'     => \Elementor\Controls_Manager::TEXT,
-                'label'    => __( 'Apartment Tab Title', 'travelfic-toolkit' ),
+                'label'    => __( 'Apartment Tab Title', 'tourfic' ),
                 'multiple' => true,
-                'default'  => __( 'Apartment', 'travelfic-toolkit' ),
+                'default'  => __( 'Apartment', 'tourfic' ),
                 'conditions' => [
                     'relation' => 'or',
                     'terms' => [
@@ -215,6 +216,41 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
                             'name' => 'type',
                             'operator' => 'contains',
                             'value' => 'apartment',
+                        ],
+                        [
+                            'name' => 'type',
+                            'operator' => '==',
+                            'value' => [],
+                        ],
+                        [
+                            'name' => 'type',
+                            'operator' => '==',
+                            'value' => '',
+                        ],
+                    ],
+                ],
+                'label_block' => true,
+            ]
+        );
+        $this->add_control(
+            'car_tab_title',
+            [
+                'type'     => \Elementor\Controls_Manager::TEXT,
+                'label'    => __( 'Car Tab Title', 'tourfic' ),
+                'multiple' => true,
+                'default'  => __( 'Car', 'tourfic' ),
+                'conditions' => [
+                    'relation' => 'or',
+                    'terms' => [
+                        [
+                            'name' => 'type',
+                            'operator' => 'contains',
+                            'value' => 'all',
+                        ],
+                        [
+                            'name' => 'type',
+                            'operator' => 'contains',
+                            'value' => 'carrentals',
                         ],
                         [
                             'name' => 'type',
@@ -328,7 +364,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 		$type               = $settings['type'] ? implode( ',', $type_arr ) : implode( ',', [ 'all' ] );
 		$full_width         = $settings['full-width'];
 
-		$tour_tab_title = $hotel_tab_title = $apt_tab_title = '';
+		$tour_tab_title = $hotel_tab_title = $apt_tab_title = $car_tab_title = '';
 		if( !empty( $settings['tour_tab_title'] )){
 			$tour_tab_title = 'tour_tab_title="' . $settings['tour_tab_title'] . '" ' ;
 		}
@@ -338,8 +374,11 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 		if( !empty( $settings['apt_tab_title'] )){
 			$apt_tab_title = 'apartment_tab_title="' . $settings['apt_tab_title'] . '" ';
 		}
+		if( !empty( $settings['car_tab_title'] )){
+			$car_tab_title = 'car_tab_title="' . $settings['car_tab_title'] . '" ';
+		}
 
-		echo do_shortcode( '[tf_search_form title="' . $tf_search_title . '" subtitle="' . $tf_search_subtitle . '" type="' . $type . '" fullwidth="' . $full_width . '" ' . $tour_tab_title . $hotel_tab_title . $apt_tab_title .  ']' );
+		echo do_shortcode( '[tf_search_form title="' . $tf_search_title . '" subtitle="' . $tf_search_subtitle . '" type="' . $type . '" fullwidth="' . $full_width . '" ' . $tour_tab_title . $hotel_tab_title . $apt_tab_title . $car_tab_title .  ']' );
 
 	}
 

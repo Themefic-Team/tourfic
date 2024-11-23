@@ -502,11 +502,15 @@
                 font-style: normal;
                 font-weight: 600;
                 line-height: 24px;
-                display: flex;
+                display: inline-flex;
                 align-items: center;
                 text-decoration: none;
                 svg{
                     margin-right: 8px;
+                }
+                &:focus{
+                    box-shadow: none;
+                    outline: none;
                 }
             }
         }

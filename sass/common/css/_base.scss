@@ -203,11 +203,26 @@ table.tf-table {
 .tf-flex-space-bttn{
     justify-content: space-between;
 }
+.tf-flex-justify-center{
+    justify-content: center;
+}
 .tf-flex-align-center{
     align-items: center;
 }
+.tf-flex-align-baseline{
+    align-items: baseline;
+}
+.tf-flex-direction-column{
+    flex-direction: column;
+}
 .tf-flex-align-top{
     align-items: flex-start;
+}
+.tf-flex-gap-4{
+    gap: 4px;
+}
+.tf-flex-gap-6{
+    gap: 6px;
 }
 .tf-flex-gap-8{
     gap: 8px;
@@ -221,6 +236,12 @@ table.tf-table {
 .tf-flex-gap-24{
     gap: 24px;
 }
+.tf-flex-gap-32{
+    gap: 32px;
+}
+.tf-flex-gap-64{
+    gap: 64px;
+}
 
 .tf-mt-8{
     margin-top: 8px;
@@ -230,6 +251,9 @@ table.tf-table {
 }
 .tf-mt-24{
     margin-top: 24px;
+}
+.tf-mb-24{
+    margin-bottom: 24px;
 }
 .tf-mt-30{
     margin-top: 30px;

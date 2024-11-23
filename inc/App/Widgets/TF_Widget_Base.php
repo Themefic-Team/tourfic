@@ -65,7 +65,11 @@ class TF_Widget_Base {
             TF_Widgets\Tour_Type_Filter::instance(),
             TF_Widgets\Apartment_Features_Filter::instance(),
             TF_Widgets\Apartment_Type_Filter::instance(),
-            TF_Widgets\Price_Filter::instance()
+            TF_Widgets\Price_Filter::instance(),
+            TF_Widgets\Car_Category_Filter::instance(),
+            TF_Widgets\Car_Fueltype_Filter::instance(),
+            TF_Widgets\Car_Seat_Range_Filter::instance(),
+            TF_Widgets\Car_Engine_Filter::instance()
         );
         foreach ( $custom_widgets as $key => $widget ) {
             register_widget( $widget );
