@@ -2,8 +2,8 @@
 Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi, hasanet
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
-Tested up to: 6.6
-Stable tag: 2.14.0
+Tested up to: 6.7
+Stable tag: 2.14.5
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -238,6 +238,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * [Ultimate Before After Image Slider & Gallery - BEAF](https://wordpress.org/plugins/beaf-before-and-after-gallery)
 * [Ultimate Addons For Contact Form 7](https://wordpress.org/plugins/ultimate-addons-for-contact-form-7/)
 * [Onepage / Direct Checkout for WooCommerce - Instantio](https://wordpress.org/plugins/instantio)
+* [Hydra Booking – All in One Appointment Scheduling and Booking Calendar Solution](https://wordpress.org/plugins/hydra-booking)
 
 == Installation ==
 
@@ -323,6 +324,36 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 21. Email Piping (Pro)
 
 == Changelog ==
+
+= 2.14.5 - 21 November 2024 =
+
+- Update: Revised and updated the plugin's Readme.txt file information.
+
+= 2.14.4 - 19 November 2024 =
+
+- Compatibility: Fully compatible with WordPress 6.7
+
+= 2.14.3 - 16 November 2024 =
+
+- Fix: Resolved issue with block theme header and footer not displaying.
+- Fix: Fixed child search functionality issue.
+- Fix: Addressed inventory issue for backend hotel bookings.
+- Fix: Corrected map sizing problem on mobile versions across all templates.
+- Fix: Fixed calendar localization issue.
+- Fix: Resolved itinerary warning in Pro version.
+- Fix: Fixed button text issue for external bookings in Pro version.
+- Improvement: Enhanced frontend dashboard translation support for Pro version.
+
+= 2.14.2 - 14 November 2024 =
+
+- Minor bug fixes & improvements
+- System stability improved
+
+= 2.14.1 - 07 November 2024 =
+
+- Added: Option to change the icon for tour descriptions.
+- Fixed: Issue with tour allowed time not working properly.
+- Fixed: Hotel data export issue resolved. 
 
 = 2.14.0 - 05 November 2024 =
 

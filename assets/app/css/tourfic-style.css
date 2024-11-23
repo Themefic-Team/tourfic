@@ -8734,6 +8734,12 @@ div#tf-contact-info {
   border-radius: 8px;
 }
 
+@media only screen and (max-width: 767.98px) {
+  .tf-map-content-wrapper .tf-apartment-map #apartment-location {
+    height: 250px !important;
+  }
+}
+
 .tf-map-content-wrapper .tf-apartment-map iframe {
   border-radius: 8px;
 }
@@ -10308,6 +10314,7 @@ div.tf-aq-inner .tf-ask-question-head-content h3 {
   border-radius: 5px;
   padding: 20px;
   width: 100%;
+  align-items: baseline;
 }
 
 @media only screen and (min-width: 767.99px) and (max-width: 991px) {
@@ -10318,6 +10325,7 @@ div.tf-aq-inner .tf-ask-question-head-content h3 {
 
 .tf-trip-feature-blocks .tf-feature-block i {
   color: #0E3DD8;
+  font-size: 20px;
 }
 
 .tf-trip-feature-blocks .tf-feature-block h3 {
@@ -10725,6 +10733,12 @@ div.tf-aq-inner .tf-ask-question-head-content h3 {
   width: 100%;
   max-width: 100%;
   max-height: 100%;
+}
+
+@media only screen and (max-width: 767.98px) {
+  #tf-tour-map .tf-map-area #tour-location {
+    height: 220px;
+  }
 }
 
 .tf-review-wrapper .tf-review-data.tf-box {
@@ -17130,6 +17144,19 @@ html {
 .tf-template-3 .tf-itinerary-map {
   margin-top: 32px;
   margin-bottom: 48px;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-template-3 .tf-itinerary-map {
+    margin-top: 12px;
+    margin-bottom: 20px;
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-template-3 .tf-itinerary-map #tour-location {
+    height: 220px !important;
+  }
 }
 
 .tf-template-3 .cld-main {
