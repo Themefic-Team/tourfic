@@ -3,12 +3,12 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.7
-Stable tag: 2.15.0
+Stable tag: 2.15.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Ultimate Tour, Travel, Car, Accommodation & Hotel Booking WordPress plugin. Build your own travel website like Agoda, Booking.com, Airbnb with WooCommerce.
+Ultimate Tour, Travel, Car, Accommodation & Hotel Booking WordPress plugin. Build your travel website like Agoda, Booking.com, Airbnb with WooCommerce
 
 == Description ==
 
@@ -347,6 +347,11 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 22. Car Rental
 
 == Changelog ==
+
+= 2.15.1 - 24 November 2024 =
+
+- Compatibility: Fixed translation notice issue for compatibility with WordPress 6.7.1.
+- Fix: Resolved the tour time selection notice issue.
 
 = 2.15.0 - 23 November 2024 =
 
