@@ -69,6 +69,15 @@
                     $('.tf-apartment-setup-wizard').show();
                     $('.tf-add-new-apartment').show();
                 }
+
+                //if car service not checked, hide car settings
+                if (!$('input[name="tf-services[]"][value="carrentals"]').is(':checked')) {
+                    $('.tf-car-setup-wizard').hide();
+                    $('.tf-add-new-car').hide();
+                } else {
+                    $('.tf-car-setup-wizard').show();
+                    $('.tf-add-new-car').show();
+                }
             }
 
             //skip steps add to input[name="tf-skip-steps"]

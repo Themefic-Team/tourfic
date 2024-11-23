@@ -1648,13 +1648,15 @@ Steps
 
 .tf-setup-step-container .tf-hotel-setup-wizard,
 .tf-setup-step-container .tf-tour-setup-wizard,
-.tf-setup-step-container .tf-apartment-setup-wizard {
+.tf-setup-step-container .tf-apartment-setup-wizard,
+.tf-setup-step-container .tf-car-setup-wizard {
   margin-top: 48px;
 }
 
 .tf-setup-step-container .tf-hotel-setup-wizard .tf-setup-step-desc,
 .tf-setup-step-container .tf-tour-setup-wizard .tf-setup-step-desc,
-.tf-setup-step-container .tf-apartment-setup-wizard .tf-setup-step-desc {
+.tf-setup-step-container .tf-apartment-setup-wizard .tf-setup-step-desc,
+.tf-setup-step-container .tf-car-setup-wizard .tf-setup-step-desc {
   text-align: left;
   margin: 0 0 16px 0;
   color: #566676;
@@ -1667,7 +1669,8 @@ Steps
 
 .tf-setup-step-container .tf-hotel-setup-wizard .tf-setup-step-desc span,
 .tf-setup-step-container .tf-tour-setup-wizard .tf-setup-step-desc span,
-.tf-setup-step-container .tf-apartment-setup-wizard .tf-setup-step-desc span {
+.tf-setup-step-container .tf-apartment-setup-wizard .tf-setup-step-desc span,
+.tf-setup-step-container .tf-car-setup-wizard .tf-setup-step-desc span {
   color: #27333F;
 }
 
@@ -5783,13 +5786,18 @@ a.tf-import-btn, a.tf-export-btn {
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   text-decoration: none;
 }
 
 .tf-booking-details-preview .tf-details-preview-header .tf-back a svg {
   margin-right: 8px;
+}
+
+.tf-booking-details-preview .tf-details-preview-header .tf-back a:focus {
+  box-shadow: none;
+  outline: none;
 }
 
 .tf-booking-details-preview .tf-details-preview-header .tf-title h2 {
