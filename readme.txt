@@ -2,13 +2,13 @@
 Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi, hasanet
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
-Tested up to: 6.6
-Stable tag: 2.14.1
+Tested up to: 6.7
+Stable tag: 2.15.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Ultimate Tour, Travel, Accommodation & Hotel Booking WordPress plugin. Build your own travel website like Agoda, Booking.com, Airbnb with WooCommerce.
+Ultimate Tour, Travel, Car, Accommodation & Hotel Booking WordPress plugin. Build your travel website like Agoda, Booking.com, Airbnb with WooCommerce
 
 == Description ==
 
@@ -22,11 +22,11 @@ Ultimate Tour, Travel, Accommodation & Hotel Booking WordPress plugin. Build you
 👉 Our [Documentation](https://themefic.com/docs/tourfic/).
 👉 Join Our [Facebook Group](https://www.facebook.com/groups/tourfic).
 
-Tourfic stands as the premier choice for building an Advanced Travel, Apartment, and Hotel booking website on WordPress. Designed to integrate effortlessly with WooCommerce, this plugin offers a user-intuitive interface and sophisticated pricing function, enabling effective management of your online booking and payment systems.
+Tourfic stands as the premier choice for building an Advanced Travel, Apartment, car Rental, and Hotel booking website on WordPress. Designed to integrate effortlessly with WooCommerce, this plugin offers a user-intuitive interface and sophisticated pricing function, enabling effective management of your online booking and payment systems.
 
 This Hotel / Tour booking WordPress plugin empowers your customers to create accounts and secure bookings for hotels, apartments, and tour packages directly through your website. With Tourfic, launching a website similar to Booking.com, Agoda, Hotels.com, and Airbnb is not only possible but straightforward.
 
-As a comprehensive solution for travel booking on WordPress, Tourfic encompasses a broad range of functionalities, from basic to advanced, to meet all the requirements for your next project in the hotel, apartment, and travel sector. Here are some of the noteworthy features of Tourfic:
+As a comprehensive solution for travel booking on WordPress, Tourfic encompasses a broad range of functionalities, from basic to advanced, to meet all the requirements for your next project in the hotel, apartment, car rental, and travel sector. Here are some of the noteworthy features of Tourfic:
 
 = 🎉  A DEDICATED HOTEL & TRAVEL BOOKING WORDPRESS THEME =
 Our team has released a dedicated WordPress theme, [Travelfic](https://tourfic.site/travelfic/), exclusively for Tourfic users. It offers multiple demo versions for free. Check it [here](https://wordpress.org/themes/travelfic/).
@@ -108,11 +108,30 @@ Plus, a range of key features which makes Tourfic as the Ultimate Travel Booking
 * Specific Room Type (Pro)
 * Property Surroundings (Pro)
 
+= 🎉  WORDPRESS CAR RENTAL & VEHICLE BOOKING SYSTEM =
+* Unlimited Cars with Photo Gallery
+* Featured Cars for Better Visibility
+* Car Wishlist for Preferences
+* Detailed Car Information
+* Flexible Pricing and Booking Management
+* Inventory Management for Availability
+* Deposit Options for Secure Rentals
+* Multiple Booking Methods (WooCommerce, External, Without Payment)
+* Taxable Rental Packages
+* Add Rental Extras (Baby Seats, Navigation, etc.)
+* Protection Plans (Damage, Theft, Accidents)
+* Clear Pickup and Drop-off Instructions
+* Promotional Badges (Hot Deals, Discounts)
+* Driver and Renter Management
+* Wishlist for Easy Planning
+* Advanced Search Options
+* Mobile-Friendly Responsive Design
+
 Furthermore, an array of indispensable features solidifies Tourfic's position as the premier WooCommerce Accommodation Bookings Plugin.
 
 = 🎉  SEARCH FUNCTION =
 * Separate or combined search box for hotels and tours
-* Ajax-based search box for hotels and tours
+* Ajax-based search box for hotel, tour, apartment, and car
 * Ajax-based filter system
 
 = 🎉  WISHLIST =
@@ -121,7 +140,7 @@ Furthermore, an array of indispensable features solidifies Tourfic's position as
 * Wishlist for logged-in and log-out users (Pro)
 
 = 🎉  CUSTOMER REVIEW SYSTEM =
-* Review System for Hotels, Tours and Apartments
+* Review System for Hotels, Tours, Car and Apartments
 * Enable/disable Review Section
 * Change Existing or Create New Review fields
 * Review for logged-in and log-out users
@@ -151,9 +170,10 @@ Furthermore, an array of indispensable features solidifies Tourfic's position as
 * External Booking for Tour
 * External Booking for Hotel
 * External Booking for Apartment
+* External Booking for Car Rental
 
 = 🎉  MULTI-VENDOR FUNCTIONS (PRO) =
-* Vendors can add unlimited hotels, tours, and apartments with all the fields (Pro)
+* Vendors can add unlimited hotels, tours, Cars and apartments with all the fields (Pro)
 * Vendors have dedicated order details pages (Pro)
 * Dedicated login and registration system for vendors (Pro)
 * Enable/disable specific vendors (Pro)
@@ -216,6 +236,8 @@ With shortcodes, you can embed important functions and features into pages or po
 * User Reviews
 * Recent Blog
 * External Listing
+* Car Listing
+* Car Location
 
 You can find all our available shortcodes [here](https://themefic.com/docs/tourfic/shortcodes/).
 
@@ -238,6 +260,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * [Ultimate Before After Image Slider & Gallery - BEAF](https://wordpress.org/plugins/beaf-before-and-after-gallery)
 * [Ultimate Addons For Contact Form 7](https://wordpress.org/plugins/ultimate-addons-for-contact-form-7/)
 * [Onepage / Direct Checkout for WooCommerce - Instantio](https://wordpress.org/plugins/instantio)
+* [Hydra Booking – All in One Appointment Scheduling and Booking Calendar Solution](https://wordpress.org/plugins/hydra-booking)
 
 == Installation ==
 
@@ -321,8 +344,44 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 19. Enquiry Form Data
 20. Our Support Channels
 21. Email Piping (Pro)
+22. Car Rental
 
 == Changelog ==
+
+= 2.15.1 - 24 November 2024 =
+
+- Compatibility: Fixed translation notice issue for compatibility with WordPress 6.7.1.
+- Fix: Resolved the tour time selection notice issue.
+
+= 2.15.0 - 23 November 2024 =
+
+- Introduced: Car Rental Service with advanced car rental features.
+- Fix: Resolved PDF-related issues.
+- Fix: Addressed and resolved a vulnerability issue.
+
+= 2.14.5 - 21 November 2024 =
+
+- Update: Revised and updated the plugin's Readme.txt file information.
+
+= 2.14.4 - 19 November 2024 =
+
+- Compatibility: Fully compatible with WordPress 6.7
+
+= 2.14.3 - 16 November 2024 =
+
+- Fix: Resolved issue with block theme header and footer not displaying.
+- Fix: Fixed child search functionality issue.
+- Fix: Addressed inventory issue for backend hotel bookings.
+- Fix: Corrected map sizing problem on mobile versions across all templates.
+- Fix: Fixed calendar localization issue.
+- Fix: Resolved itinerary warning in Pro version.
+- Fix: Fixed button text issue for external bookings in Pro version.
+- Improvement: Enhanced frontend dashboard translation support for Pro version.
+
+= 2.14.2 - 14 November 2024 =
+
+- Minor bug fixes & improvements
+- System stability improved
 
 = 2.14.1 - 07 November 2024 =
 
@@ -367,67 +426,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Fixed: Option to disable children in booking
 - Fixed: Room price settings from vendors
 - Improvements: Hotel room management system
-
-= 2.13.10 - 08 October 2024 =
-
-- Improvement: Quick Setup 
-- Fixed: Minor Bugs Fixed
-
-= 2.13.9 - 03 October 2024 =
-
-- Added: Ultimate hotel booking theme
-- System stability improved
-
-= 2.13.8 - 02 October 2024 =
-
-- Fixed: Promo notice issue
-- System stability improved
-
-= 2.13.7 - 30 September 2024 =
-
-- Added: Banner info updated
-- Fixed: Hotel inventory issue
-- Fixed: leaflet map marker issue
-
-= 2.13.6 - 25 September 2024 =
-
-- Added: Tour's info updated
-- System stability improved
-
-= 2.13.5 - 17 September 2024 =
-
-- Added: Tourfic settings search and reset option added
-- Improvement: Hotel, Tour, Apartment pricing and availability revamp
-- Fixed: Hotel disabled date booking issue fixed
-- Fixed: Discount label issue fixed on hotel archive
-- Fixed: Room selection issue fixed on hotel service
-
-= 2.13.4 - 01 September 2024 =
-
-- Improvement: Search improved for hotel
-- Improvement: Hotel archive title issue 
-- Improvement: Apartment review
-
-= 2.13.3 - 29 August 2024 =
-
-- Improvement: Nonce Validation and security 
-- Improvement: QR Code page added to the dashboard
-- Improvement: Search issue for price range
-- Improvement: System stability improved
-- Improvement: Email template link verification(Pro)
-
-= 2.13.2 - 27 August 2024 =
-
-- Improvement: QR Code Verification
-- Improvement: QR Code Permission for Manager
-- Improvement: QR Code Permission for Vendor
-
-= 2.13.1 - 24 August 2024 =
-
-- Improvement: Improved hotel search feature
-- Improvement: Archive page filters
-- Improvement: Google map translation
-- Improvement: Changed login URL
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 

@@ -39,6 +39,7 @@ class Hotel_CPT extends \Tourfic\Core\Post_Type {
 					'assign_terms' => 'edit_tf_hotel',
 					'edit_terms'   => 'edit_tf_hotel',
 				),
+				'show_in_menu' => true
 			),
 			array(
 				'name'          => esc_html__( 'Features', 'tourfic' ),
@@ -49,6 +50,7 @@ class Hotel_CPT extends \Tourfic\Core\Post_Type {
 					'assign_terms' => 'edit_tf_hotel',
 					'edit_terms'   => 'edit_tf_hotel',
 				),
+				'show_in_menu' => true
 			),
 			array(
 				'name'          => esc_html__( 'Types', 'tourfic' ),
@@ -59,6 +61,7 @@ class Hotel_CPT extends \Tourfic\Core\Post_Type {
 					'assign_terms' => 'edit_tf_hotel',
 					'edit_terms'   => 'edit_tf_hotel',
 				),
+				'show_in_menu' => true
 			)
 		) );
 

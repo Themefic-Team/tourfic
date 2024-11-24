@@ -47,6 +47,8 @@ class TF_Vat {
 				$item['data']->set_tax_class('zero-rate');
 			}elseif(!empty($item['tf_apartment_data'])){
 				$item['data']->set_tax_class('zero-rate');
+			}elseif(!empty($item['tf_car_data'])){
+				$item['data']->set_tax_class('zero-rate');
 			}else{
 
 			}

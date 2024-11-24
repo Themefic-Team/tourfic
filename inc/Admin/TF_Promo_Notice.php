@@ -228,7 +228,7 @@ class TF_Promo_Notice {
     public function tf_promo_dashboard_admin_notice_dismiss_callback() {  
 
         $tf_promo_option = get_option( 'tf_promo__schudle_option' );
-        $restart = isset($tf_promo_option['dasboard_restart']) && $tf_promo_option['dasboard_restart'] != false ? $tf_promo_option['dasboard_restart'] : false; 
+        $restart = isset($tf_promo_option['dashboard_banner']['restart']) && $tf_promo_option['dashboard_banner']['restart'] != false ? $tf_promo_option['dashboard_banner']['restart'] : false; 
         if($restart == false){
             update_option( 'tf_dismiss_admin_notice', strtotime($tf_promo_option['end_date']) ); 
         }else{

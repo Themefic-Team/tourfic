@@ -5,6 +5,7 @@ namespace Tourfic\App;
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
+use \Tourfic\Classes\Car_Rental\Pricing;
 
 class TF_Review {
 
@@ -170,6 +171,12 @@ class TF_Review {
 
         // Add nonce for security and authentication.
         check_ajax_referer('updates', '_ajax_nonce');
+
+        // Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
     
         global $wpdb;
     
@@ -320,6 +327,28 @@ class TF_Review {
                 'r-field-type' => esc_html__( 'Location', 'tourfic' ),
             ),
         ];
+
+        $default_cars_field = [
+            array(
+                'r-field-type' => esc_html__( 'Staff', 'tourfic' ),
+            ),
+            array(
+                'r-field-type' => esc_html__( 'Facilities', 'tourfic' ),
+            ),
+            array(
+                'r-field-type' => esc_html__( 'Cleanliness', 'tourfic' ),
+            ),
+            array(
+                'r-field-type' => esc_html__( 'Comfort', 'tourfic' ),
+            ),
+            array(
+                'r-field-type' => esc_html__( 'Value for money', 'tourfic' ),
+            ),
+            array(
+                'r-field-type' => esc_html__( 'Location', 'tourfic' ),
+            ),
+        ];
+
         $default_tours_field      = [
             array(
                 'r-field-type' => esc_html__( 'Guide', 'tourfic' ),
@@ -339,8 +368,12 @@ class TF_Review {
         $tfopt_hotels     = ! empty( Helper::tf_data_types( Helper::tfopt( 'r-hotel' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'r-hotel' ) ) : $default_hotels_field;
         $tfopt_apartments = ! empty( Helper::tf_data_types( Helper::tfopt( 'r-apartment' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'r-apartment' ) ) : $default_apartments_field;
         $tfopt_tours      = ! empty( Helper::tf_data_types( Helper::tfopt( 'r-tour' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'r-tour' ) ) : $default_tours_field;
+        $tfopt_cars      = ! empty( Helper::tf_data_types( Helper::tfopt( 'r-car' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'r-car' ) ) : $default_cars_field;
     
         $fields = 'tf_tours' === $type ? $tfopt_tours : ( 'tf_apartment' === $type ? $tfopt_apartments : $tfopt_hotels );
+        if('tf_carrental' === $type){
+            $fields = $tfopt_cars;
+        }
         if ( ! empty( $fields ) && gettype( $fields ) == "string" ) {
             $tf_hotel_fields_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
                 return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
@@ -523,6 +556,7 @@ class TF_Review {
             $tf_tour_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
             $tf_hotel_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
             $tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
+            $tf_car_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car-archive'] : 'design-1';
             
             if( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-1" ) || ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-1" ) ){
             ?>
@@ -576,6 +610,11 @@ class TF_Review {
                 <span class="tf-available-rating-number">
                     <?php echo wp_kses_post( self::tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
                 </span>
+            <?php } elseif( ( "tf_carrental"==$tf_current_post && $tf_car_arc_selected_template=="design-1" ) ){ ?>
+                <div class="tf-reviews-box">
+                    <span>
+                        <?php echo wp_kses_post( self::tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?> <i class="fa-solid fa-star"></i> (<?php echo Pricing::get_total_trips(get_the_ID()); ?> <?php esc_html_e( "Trips", "tourfic" ) ?>)</span>
+                </div>
             <?php }else{ ?>
                 <div class="tf-archive-rating-wrapper">
                     <div class="tf-archive-rating">
@@ -593,6 +632,7 @@ class TF_Review {
             $tf_tour_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
             $tf_hotel_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
             $tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
+            $tf_car_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car-archive'] : 'design-1';
             
             if( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-1" ) || ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-1" ) ){
             ?>
@@ -609,6 +649,10 @@ class TF_Review {
                 <span class="tf-available-rating-number">
                     <?php esc_html_e('0.0','tourfic'); ?>
                 </span>
+            <?php } elseif( ( "tf_carrental"==$tf_current_post && $tf_car_arc_selected_template=="design-1" ) ){ ?>
+                <div class="tf-reviews-box">
+                    <span>0.0 <i class="fa-solid fa-star"></i> (<?php echo Pricing::get_total_trips(get_the_ID()); ?> <?php esc_html_e( "Trips", "tourfic" ) ?>)</span>
+                </div>
             <?php }
         }
     }

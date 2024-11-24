@@ -36,6 +36,7 @@ class Apartment_CPT extends \Tourfic\Core\Post_Type {
 					'assign_terms' => 'edit_tf_apartment',
 					'edit_terms'   => 'edit_tf_apartment',
 				),
+				'show_in_menu' => true
 			),
 			array(
 				'name'          => esc_html__('Features', 'tourfic' ),
@@ -46,6 +47,7 @@ class Apartment_CPT extends \Tourfic\Core\Post_Type {
 					'assign_terms' => 'edit_tf_apartment',
 					'edit_terms'   => 'edit_tf_apartment',
 				),
+				'show_in_menu' => true
 			),
 			array(
 				'name'          => esc_html__('Types', 'tourfic' ),
@@ -56,6 +58,7 @@ class Apartment_CPT extends \Tourfic\Core\Post_Type {
 					'assign_terms' => 'edit_tf_apartment',
 					'edit_terms'   => 'edit_tf_apartment',
 				),
+				'show_in_menu' => true
 			)
 		));
 		

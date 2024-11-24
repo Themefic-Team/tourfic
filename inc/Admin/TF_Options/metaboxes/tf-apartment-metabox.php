@@ -283,18 +283,21 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'icon' => 'ri-information-fill',
 					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>per person pricing</b>, <b>external booking</b>, <b>taxable apartment</b>, <b>tax class for Woocommerce</b> in our pro plan, also you can add unlimited additional fees for apartment. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic option!</a>', 'tourfic')),
 				),
-				/*array(
-					'id'       => 'weekly_discount',
-					'type'     => 'number',
-					'label'    => __( 'Weekly Discount Per Night', 'tourfic' ),
-					'subtitle' => __( 'Weekly discounts for stays longer than 7 days (per night)', 'tourfic' ),
+
+				array(
+					'id'    => 'apartment-cancellation-heading',
+					'type'  => 'heading',
+					'label' => 'Cancellation Condition',
+					'subtitle' => __( 'Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds.', 'tourfic' ),
 				),
 				array(
-					'id'       => 'monthly_discount',
-					'type'     => 'number',
-					'label'    => __( 'Monthly Discount Per Night', 'tourfic' ),
-					'subtitle' => __( 'Monthly discounts for stays longer than 30 days (per night)', 'tourfic' ),
-				),*/
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-information-fill',
+					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>booking cancellation</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
+				),
 			),
 		),
 		'availability'    => array(

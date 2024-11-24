@@ -11,7 +11,12 @@
  use \Tourfic\Classes\Helper;
 
 
-get_header();
+ if(wp_is_block_theme()){
+    wp_head();
+    block_header_area();
+}else{
+    get_header();
+}
 
 $tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 
@@ -31,4 +36,9 @@ if ( Helper::tf_is_woo_active() ) {
 	<?php
 }
 
-get_footer('tourfic');
+if(wp_is_block_theme()){
+    wp_footer();
+    block_footer_area();
+ }else{
+	get_footer('tourfic');
+ }

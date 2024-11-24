@@ -8,7 +8,12 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Tour\Tour_Price;
 use \Tourfic\App\Wishlist;
 
-get_header();
+if(wp_is_block_theme()){
+    wp_head();
+    block_header_area();
+}else{
+    get_header();
+}
 
 if ( !Helper::tf_is_woo_active() ) {
 	?>
@@ -112,6 +117,7 @@ while ( have_posts() ) : the_post();
 	$disable_share_opt  = ! empty( $meta['t-share'] ) ? $meta['t-share'] : '';
 	$t_share  = ! empty( Helper::tfopt( 't-share' ) ) ? Helper::tfopt( 't-share' ) : 0;
 	$disable_share_opt = ! empty( $disable_share_opt ) ? $disable_share_opt : $t_share;
+	$tf_tour_single_book_now_text = isset($meta['single_tour_booking_form_button_text']) && ! empty( $meta['single_tour_booking_form_button_text'] ) ? stripslashes( sanitize_text_field( $meta['single_tour_booking_form_button_text'] ) ) : esc_html__( "Book Now", 'tourfic' );
 	
 	// Location
 	if( !empty($meta['location']) && Helper::tf_data_types($meta['location'])){
@@ -266,4 +272,9 @@ while ( have_posts() ) : the_post();
 endwhile;
 ?>
 <?php
-get_footer();
+if(wp_is_block_theme()){
+    wp_footer();
+    block_footer_area();
+ }else{
+	get_footer();
+ }

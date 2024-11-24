@@ -24,6 +24,14 @@ function tf_file_missing( $files = '' ) {
 add_action( 'admin_notices', 'tf_file_missing' );
 add_action( 'plugins_loaded', 'tf_add_elelmentor_addon' );
 
+/**
+ * Car Functions
+ */
+if ( file_exists( TF_INC_PATH . 'functions/functions-car.php' ) ) {
+	require_once TF_INC_PATH . 'functions/functions-car.php';
+} else {
+	tf_file_missing( TF_INC_PATH . 'functions/functions-car.php' );
+}
 
 /*
  * Temporary functions
