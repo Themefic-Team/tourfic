@@ -512,6 +512,39 @@ $tf_cars_slug = get_option('car_slug');
                         </div>
                         <?php } ?>
 
+                        <div class="tf-cancellation-box">
+                            <span class="tf-flex tf-flex-align-center tf-flex-gap-4">
+                                <i class="ri-information-line"></i>
+                                <b><?php esc_html_e("Free cancellation", "tourfic"); ?></b>
+                                <?php esc_html_e("up to 48 hours before pick-up", "tourfic"); ?>
+                            </span>
+
+                            <div class="tf-cancellation-timeline">
+                                <div class="tf-timeline">
+                                    <ul>
+                                        <li>
+                                            <span class="free"><?php esc_html_e("Fully refundable", "tourfic"); ?></span>
+                                        </li>
+                                        <li>
+                                            <span class="charged"><?php esc_html_e("Charged", "tourfic"); ?></span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="tf-timeline-text">
+                                    <ul>
+                                        <li><?php esc_html_e("Booking time", "tourfic"); ?></li>
+                                        <li><?php esc_html_e("Nov 8, 10:00 AM", "tourfic"); ?></li>
+                                        <li><?php esc_html_e("Trip started", "tourfic"); ?></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="tf-cancelltion-popup-btn">
+                                <a href="#"><?php esc_html_e("See Cancelation Policy", "tourfic"); ?></a>
+                            </div>
+                        </div>
+
                         <script>
                         (function ($) {
                         $(document).ready(function () {
@@ -624,25 +657,25 @@ $tf_cars_slug = get_option('car_slug');
                     </div>
 
                     <div class="tf-withoutpayment-booking-confirm">
-                    <div class="tf-confirm-popup">
-                        <div class="tf-booking-times">
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="#FCFDFF"/>
-                                    <path d="M12 11.1111L15.1111 8L16 8.88889L12.8889 12L16 15.1111L15.1111 16L12 12.8889L8.88889 16L8 15.1111L11.1111 12L8 8.88889L8.88889 8L12 11.1111Z" fill="#666D74"/>
-                                    <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" stroke="#FCFDFF"/>
-                                    </svg>
-                                </span>
+                        <div class="tf-confirm-popup">
+                            <div class="tf-booking-times">
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="#FCFDFF"/>
+                                        <path d="M12 11.1111L15.1111 8L16 8.88889L12.8889 12L16 15.1111L15.1111 16L12 12.8889L8.88889 16L8 15.1111L11.1111 12L8 8.88889L8.88889 8L12 11.1111Z" fill="#666D74"/>
+                                        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" stroke="#FCFDFF"/>
+                                        </svg>
+                                    </span>
+                            </div>
+                            <img src="<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/thank-you.gif" alt="Thank You">
+                            <h2>
+                                <?php
+                                $booking_confirmation_msg = ! empty( Helper::tfopt( 'car-booking-confirmation-msg' ) ) ? Helper::tfopt( 'car-booking-confirmation-msg' ) : 'Booked Successfully';
+                                echo esc_html( $booking_confirmation_msg );
+                                ?>
+                            </h2>
                         </div>
-                        <img src="<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/thank-you.gif" alt="Thank You">
-                        <h2>
-                            <?php
-                            $booking_confirmation_msg = ! empty( Helper::tfopt( 'car-booking-confirmation-msg' ) ) ? Helper::tfopt( 'car-booking-confirmation-msg' ) : 'Booked Successfully';
-                            echo esc_html( $booking_confirmation_msg );
-                            ?>
-                        </h2>
                     </div>
-                </div>
 
                     <?php do_action( 'tf_car_extras', $car_extras, $post_id, $car_extra_sec_title ); ?>
 
