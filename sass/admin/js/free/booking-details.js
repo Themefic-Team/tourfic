@@ -588,6 +588,8 @@ function initializeCalendar(eventsSource) {
             eventsSource = tf_options.tf_hotels_orders;
         } else if (currentPageUrl.includes('post_type=tf_apartment&page=tf_apartment_booking')) {
             eventsSource = tf_options.tf_apartments_orders;
+        } else if (currentPageUrl.includes('post_type=tf_carrental&page=tf_carrental_booking')) {
+            eventsSource = tf_options.tf_cars_orders;
         } else {
             eventsSource = []; // Fallback option if none of the conditions match
         }

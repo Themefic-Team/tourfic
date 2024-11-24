@@ -896,6 +896,29 @@ class Enqueue {
 			}
 		}
 
+		// Car Booking Data retrive
+		$tf_car_orders_select = array(
+			'select'    => "id, order_id, post_id, check_in, check_out, ostatus",
+			'post_type' => 'car',
+			'query'     => " ORDER BY id DESC"
+		);
+		$tf_car_order_result = Helper::tourfic_order_table_data( $tf_car_orders_select );
+		$tf_cars_orders = [];
+		if(!empty($tf_car_order_result)){
+			foreach($tf_car_order_result as $order){
+				$tf_cars_orders[] = array(
+					'title' => '#'.$order['order_id'].' '.html_entity_decode(get_the_title($order['post_id'])),
+					'start' => $order['check_in'],
+					'end' => $order['check_out'],
+					'id' => $order['id'],
+					'status' => $order['ostatus'],
+					'post_type' => 'tf_carrental',
+					'page' => 'tf_carrental_booking',
+					'classNames' => ['tf-order-'.$order['ostatus']]
+				);
+			}
+		}
+
 		$travelfic_toolkit_active_plugins = [];
 		if ( ! is_plugin_active( 'travelfic-toolkit/travelfic-toolkit.php' ) ) {
 			$travelfic_toolkit_active_plugins[] = "travelfic-toolkit";
@@ -1044,7 +1067,8 @@ class Enqueue {
 			),
 			'tf_tours_orders' => $tf_tours_orders,
 			'tf_hotels_orders' => $tf_hotels_orders,
-			'tf_apartments_orders' => $tf_apartments_orders
+			'tf_apartments_orders' => $tf_apartments_orders,
+			'tf_cars_orders' => $tf_cars_orders
 		) );
 	}
 
