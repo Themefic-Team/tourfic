@@ -1271,7 +1271,7 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 	}
 
 	if( !empty( Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar'] ) && Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar']=="1"){
-		apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, array(), $order->get_items() );
+		apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $order->get_items(), array() );
 	}
 
 	/**
@@ -1467,7 +1467,7 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 	}
 
 	if( !empty( Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar'] ) && Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar']=="1"){
-		apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, array(), $order->get_items() );
+		apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $order->get_items(), array() );
 	}
 
 	/**
