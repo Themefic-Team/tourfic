@@ -124,6 +124,11 @@
                     font-weight: 600;
                     line-height: 150%; /* 25.5px */
                     margin: 0;
+                    a{
+                        i{
+                            color: #151615;
+                        }
+                    }
                 }
                 .tf-close{
                     cursor: pointer;

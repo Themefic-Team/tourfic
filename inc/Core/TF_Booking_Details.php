@@ -237,6 +237,8 @@ abstract Class TF_Booking_Details {
 							$tf_postwise_filter_class = 'tf-booking-post-id-filter-options';
 						} elseif ( "tf_apartment" == $this->booking_args['post_type'] ) {
 							$tf_postwise_filter_class = 'tf-booking-apartment-id-filter-options';
+						} elseif ( "tf_carrental" == $this->booking_args['post_type'] ) {
+							$tf_postwise_filter_class = 'tf-car-id-filter-options';
 						} else {
 							$tf_postwise_filter_class = '';
 						}
@@ -1524,6 +1526,66 @@ abstract Class TF_Booking_Details {
                         <h5><?php esc_html_e("Infant", "tourfic"); ?></h5>
                         <p><?php echo esc_html($tf_total_infants[0]); ?></p>
                     </div>
+                    <?php } ?>
+
+                    <?php 
+                    $pickup_location  = !empty( $tf_tour_details->pickup_location ) ? $tf_tour_details->pickup_location : '';
+                    if(!empty($pickup_location)){
+                        ?>
+                        <div class="tf-single-content">
+                            <h5><?php esc_html_e("Pickup Location", "tourfic"); ?></h5>
+                            <p><?php echo esc_html($pickup_location); ?></p>
+                        </div>
+                    <?php } ?>
+
+                    <?php 
+                    $pickup_date  = !empty( $tf_tour_details->pickup_date ) ? $tf_tour_details->pickup_date : '';
+                    if(!empty($pickup_date)){
+                        ?>
+                        <div class="tf-single-content">
+                            <h5><?php esc_html_e("Pickup Date", "tourfic"); ?></h5>
+                            <p><?php echo esc_html($pickup_date); ?></p>
+                        </div>
+                    <?php } ?>
+
+                    <?php 
+                    $pickup_time  = !empty( $tf_tour_details->pickup_time ) ? $tf_tour_details->pickup_time : '';
+                    if(!empty($pickup_time)){
+                        ?>
+                        <div class="tf-single-content">
+                            <h5><?php esc_html_e("Pickup Time", "tourfic"); ?></h5>
+                            <p><?php echo esc_html($pickup_time); ?></p>
+                        </div>
+                    <?php } ?>
+
+                    <?php 
+                    $dropoff_location  = !empty( $tf_tour_details->dropoff_location ) ? $tf_tour_details->dropoff_location : '';
+                    if(!empty($dropoff_location)){
+                        ?>
+                        <div class="tf-single-content">
+                            <h5><?php esc_html_e("Dropoff Location", "tourfic"); ?></h5>
+                            <p><?php echo esc_html($dropoff_location); ?></p>
+                        </div>
+                    <?php } ?>
+
+                    <?php 
+                    $dropoff_date  = !empty( $tf_tour_details->dropoff_date ) ? $tf_tour_details->dropoff_date : '';
+                    if(!empty($dropoff_date)){
+                        ?>
+                        <div class="tf-single-content">
+                            <h5><?php esc_html_e("Dropoff Date", "tourfic"); ?></h5>
+                            <p><?php echo esc_html($dropoff_date); ?></p>
+                        </div>
+                    <?php } ?>
+
+                    <?php 
+                    $dropoff_time  = !empty( $tf_tour_details->dropoff_time ) ? $tf_tour_details->dropoff_time : '';
+                    if(!empty($dropoff_time)){
+                        ?>
+                        <div class="tf-single-content">
+                            <h5><?php esc_html_e("Dropoff Time", "tourfic"); ?></h5>
+                            <p><?php echo esc_html($dropoff_time); ?></p>
+                        </div>
                     <?php } ?>
                     
                 </div>
