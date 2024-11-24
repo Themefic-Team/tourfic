@@ -116,7 +116,7 @@ final class Tourfic {
 		// Load the text domain for translation.
 		add_action( 'init', array( $this, 'tf_load_textdomain' ) );
 		// plugin loaded action hook.
-		add_action( 'plugins_loaded', array( $this, 'init_plugin' ) );
+		add_action( 'init', array( $this, 'init_plugin' ), 9 );
 		//Compatibility with custom order tables for the WooCommerce plugin
 		add_action( 'before_woocommerce_init', array( $this, 'tf_woocommerce_compatibility' ) );
 	}
