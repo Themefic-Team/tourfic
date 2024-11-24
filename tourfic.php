@@ -7,7 +7,7 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.15.0
+ * Version:         2.14.5
  * Tested up to:    6.7
  * WC tested up to: 9.4
  * Requires PHP:    7.4
@@ -25,14 +25,14 @@ final class Tourfic {
 	 * @var string
 	 */
 
-	const VERSION = '2.15.0';
+	const VERSION = '2.14.5';
 
 	/**
 	 * Minimum PHP version required.
 	 *
 	 * @var string
 	 */
-	const MINIMUM_PHP_VERSION = '7.4';
+	const MINIMUM_PHP_VERSION = '7.2';
 
 	/**
 	 * Minimum WooCommerce version required.
@@ -116,7 +116,7 @@ final class Tourfic {
 		// Load the text domain for translation.
 		add_action( 'init', array( $this, 'tf_load_textdomain' ) );
 		// plugin loaded action hook.
-		add_action( 'init', array( $this, 'init_plugin' ) );
+		add_action( 'plugins_loaded', array( $this, 'init_plugin' ) );
 		//Compatibility with custom order tables for the WooCommerce plugin
 		add_action( 'before_woocommerce_init', array( $this, 'tf_woocommerce_compatibility' ) );
 	}
@@ -161,6 +161,7 @@ final class Tourfic {
 		load_textdomain( 'tourfic', WP_LANG_DIR . '/tourfic/tourfic-' . $locale . '.mo' );
 		// Then check for a language file in /wp-content/plugins/tourfic/lang/ (this will be overriden by any file already loaded)
 		load_plugin_textdomain( 'tourfic', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+
 	}
 
 	/**
