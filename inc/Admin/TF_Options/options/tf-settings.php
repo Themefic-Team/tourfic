@@ -4586,7 +4586,7 @@ TF_Settings::option( 'tf_settings', array(
 					'type'    => 'cancellation-official-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
-					'content' => esc_html__( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/pabbly-vs-zapier-integrations/pabbly-integration/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => esc_html__( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/settings/cancellation-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'      => 'timezone-title',
