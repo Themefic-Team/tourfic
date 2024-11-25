@@ -25,7 +25,7 @@ final class Tourfic {
 	 * @var string
 	 */
 
-	const VERSION = '2.15.2';
+	const VERSION = '2.15.1';
 
 	/**
 	 * Minimum PHP version required.

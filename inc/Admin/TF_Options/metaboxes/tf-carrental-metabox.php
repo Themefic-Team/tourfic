@@ -810,7 +810,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'id'           => 'protections',
 					'type'         => 'repeater',
 					'label'        => __( 'Add Protection Plans', 'tourfic' ),
-					'subtitle'        => __( 'Feel free to add as many as needed. Additionally, you can duplicate or rearrange each Badge using the icons on the right side.', 'tourfic' ),
+					'subtitle'        => __( 'Feel free to add as many as needed. Additionally, you can duplicate or rearrange each Protection Plan using the icons on the right side.', 'tourfic' ),
 					'button_title' => __( 'Add Protection Plan', 'tourfic' ),
 					'field_title'  => 'title',
 					'dependency'  => [
@@ -1003,9 +1003,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'           => 'terms_conditions',
 					'type'         => 'repeater',
-					'button_title' => __( 'Add New Terms Condition', 'tourfic' ),
-					'label'        => __( 'Add Your Terms Conditions', 'tourfic' ),
-					'subtitle'        => __( 'Feel free to add as many as needed. Additionally, you can duplicate or rearrange each Badge using the icons on the right side.', 'tourfic' ),
+					'button_title' => __( 'Add New Terms & Condition', 'tourfic' ),
+					'label'        => __( 'Add Your Terms & Conditions', 'tourfic' ),
+					'subtitle'        => __( 'Click the button below to add Terms Conditions for your Car. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each Terms & Condition using the icons on the right side.', 'tourfic' ),
 					'field_title'  => 'title',
 					'fields'       => array(
 						array(
