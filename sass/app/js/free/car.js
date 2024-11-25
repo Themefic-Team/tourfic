@@ -792,9 +792,14 @@
                 beforeSend: function () {
                     $('.tf-date-select-box').addClass('tf-box-loading');
                 },
-                success: function (data) {
-                    if(data){
-                        $('.tf-price-header h2').html(data);
+                success: function (response) {
+                    if(response){
+                        if(response.data.total_price){
+                            $('.tf-price-header h2').html(response.data.total_price);
+                        }
+                        if(response.data.cancellation){
+                            $('.tf-cancellation-box').html(response.data.cancellation);
+                        }
                         $('.tf-date-select-box').removeClass('tf-box-loading');
                     }
                 }

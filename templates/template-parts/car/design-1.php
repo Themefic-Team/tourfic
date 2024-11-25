@@ -513,36 +513,7 @@ $tf_cars_slug = get_option('car_slug');
                         <?php } ?>
 
                         <div class="tf-cancellation-box">
-                            <span class="tf-flex tf-flex-align-center tf-flex-gap-4">
-                                <i class="ri-information-line"></i>
-                                <b><?php esc_html_e("Free cancellation", "tourfic"); ?></b>
-                                <?php esc_html_e("up to 48 hours before pick-up", "tourfic"); ?>
-                            </span>
-
-                            <div class="tf-cancellation-timeline">
-                                <div class="tf-timeline">
-                                    <ul>
-                                        <li>
-                                            <span class="free"><?php esc_html_e("Fully refundable", "tourfic"); ?></span>
-                                        </li>
-                                        <li>
-                                            <span class="charged"><?php esc_html_e("Charged", "tourfic"); ?></span>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="tf-timeline-text">
-                                    <ul>
-                                        <li><?php esc_html_e("Booking time", "tourfic"); ?></li>
-                                        <li><?php esc_html_e("Nov 8, 10:00 AM", "tourfic"); ?></li>
-                                        <li><?php esc_html_e("Trip started", "tourfic"); ?></li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="tf-cancelltion-popup-btn">
-                                <a href="#"><?php esc_html_e("See Cancelation Policy", "tourfic"); ?></a>
-                            </div>
+                            
                         </div>
 
                         <script>

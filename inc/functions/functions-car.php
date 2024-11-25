@@ -906,7 +906,42 @@ function tf_car_price_calculation_callback() {
 		$total_prices = $total_prices + $total_extra['price'];
 	}
 	
-	echo sprintf( esc_html__( 'Total: %1$s', 'tourfic' ), wc_price($total_prices) );
+
+	// HTML for cancellation details
+    $cancellation = '
+    <span class="tf-flex tf-flex-align-center tf-flex-gap-4">
+        <i class="ri-information-line"></i>
+        <b>' . esc_html__( "Free cancellation", "tourfic" ) . '</b>
+        ' . esc_html__( "up to 48 hours before pick-up", "tourfic" ) . '
+    </span>
+    <div class="tf-cancellation-timeline">
+        <div class="tf-timeline">
+            <ul>
+                <li>
+                    <span class="free">' . esc_html__( "Fully refundable", "tourfic" ) . '</span>
+                </li>
+                <li>
+                    <span class="charged">' . esc_html__( "Charged", "tourfic" ) . '</span>
+                </li>
+            </ul>
+        </div>
+        <div class="tf-timeline-text">
+            <ul>
+                <li>' . esc_html__( "Booking time", "tourfic" ) . '</li>
+                <li>' . esc_html__( "Nov 8, 10:00 AM", "tourfic" ) . '</li>
+                <li>' . esc_html__( "Trip started", "tourfic" ) . '</li>
+            </ul>
+        </div>
+    </div>
+	<div class="tf-cancelltion-popup-btn">
+		<a href="#">'. esc_html__("See Cancelation Policy", "tourfic"). '</a>
+	</div>';
+
+    // Send response
+    wp_send_json_success( [
+        'total_price' => sprintf( esc_html__( 'Total: %1$s', 'tourfic' ), wc_price( $total_prices ) ),
+        'cancellation' => $cancellation,
+    ] );
 
 	wp_die();
 }
