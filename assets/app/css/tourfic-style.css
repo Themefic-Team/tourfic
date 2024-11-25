@@ -18459,6 +18459,7 @@ html {
   background: #FFF8E5;
   padding: 16px;
   margin-top: 16px;
+  display: none;
 }
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-cancellation-box .tf-cancellation-timeline {
   margin-top: 12px;
@@ -18487,7 +18488,7 @@ html {
   display: block;
   text-align: center;
 }
-.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-cancellation-box .tf-cancellation-timeline .tf-timeline ul li span.charged {
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-cancellation-box .tf-cancellation-timeline .tf-timeline ul li span.paid {
   border-radius: 2px;
   background: #D69D00;
   color: #E5FAEE;

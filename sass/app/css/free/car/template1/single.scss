@@ -971,6 +971,7 @@
                     background: #FFF8E5;
                     padding: 16px;
                     margin-top: 16px;
+                    display: none;
                     .tf-cancellation-timeline{
                         margin-top: 12px;
                         border-bottom: 1px solid #C0CCD8;
@@ -996,7 +997,7 @@
                                         display: block;
                                         text-align: center;
                                     }
-                                    span.charged{
+                                    span.paid{
                                         border-radius: 2px;
                                         background: #D69D00;
                                         color: #E5FAEE;

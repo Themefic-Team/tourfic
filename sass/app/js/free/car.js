@@ -799,6 +799,7 @@
                         }
                         if(response.data.cancellation){
                             $('.tf-cancellation-box').html(response.data.cancellation);
+                            $('.tf-cancellation-box').show();
                         }
                         $('.tf-date-select-box').removeClass('tf-box-loading');
                     }
