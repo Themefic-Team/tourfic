@@ -17010,12 +17010,14 @@ html {
 }
 .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul {
   list-style: none;
-  flex-wrap: wrap;
-  gap: 16px;
   margin-top: 0;
   margin-left: 0;
   margin-right: 0;
   padding: 0;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px 8px;
 }
 .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li {
   color: #566676;
@@ -17023,12 +17025,22 @@ html {
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 24px */
-  width: calc(33% - 16px);
+  display: flex;
+  width: calc(33.3333% - 8px);
 }
 @media only screen and (max-width: 1024px) {
   .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li {
     width: calc(50% - 16px);
   }
+}
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg {
+  height: 20px;
+  width: 20px;
+}
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li p {
+  width: 100%;
+  margin: 0;
+  padding-left: 4px;
 }
 .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn {
   align-items: center;
