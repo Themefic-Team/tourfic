@@ -512,9 +512,7 @@ $tf_cars_slug = get_option('car_slug');
                         </div>
                         <?php } ?>
 
-                        <div class="tf-cancellation-box">
-                            
-                        </div>
+                        <?php do_action( 'tf_car_cancellation', $post_id ); ?>
 
                         <script>
                         (function ($) {

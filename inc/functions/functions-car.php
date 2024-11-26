@@ -624,7 +624,6 @@ function tf_car_booking_pupup_callback() {
 	$car_protection_content = ! empty( $meta['protection_content'] ) ? $meta['protection_content'] : '';
 	$car_protections = ! empty( $meta['protections'] ) ? $meta['protections'] : '';
 	$car_protection_tab_title = ! empty( $meta['protection_tab_title'] ) ? esc_html($meta['protection_tab_title']) : esc_html('Protection');
-	$car_calcellation_policy = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['calcellation_policy'] ) ? $meta['calcellation_policy'] : '';
 
 	$pickup_date = ! empty( $_POST['pickup_date'] ) ? $_POST['pickup_date'] : '';
 	$pickup_time = ! empty( $_POST['pickup_time'] ) ? $_POST['pickup_time'] : '';
@@ -632,54 +631,7 @@ function tf_car_booking_pupup_callback() {
 	$dropoff_date = ! empty( $_POST['dropoff_date'] ) ? $_POST['dropoff_date'] : '';
 	$dropoff_time = ! empty( $_POST['dropoff_time'] ) ? $_POST['dropoff_time'] : '';
 
-	$bestRefundPolicy = tf_getBestRefundPolicy($car_calcellation_policy, $pickup_date, $pickup_time);
-
-	$tf_default_time_zone = ! empty( Helper::tfopt( 'cancellation_time_zone' ) ) ? Helper::tfopt( 'cancellation_time_zone' ) : 'America/New_York';
-	$timezone = new DateTimeZone($tf_default_time_zone);
-
-	$today = new DateTime('now', $timezone);
-
-	$less_current_day = false;
-
-	// Combine pickup date and time into a single string and convert it to a DateTime object
-	$pickupDateTime = DateTime::createFromFormat('Y/m/d H:i', $pickup_date . ' ' . $pickup_time, $timezone);
-
-	// Extract the "before_cancel_time" and "cancellation-times" (hours, days, etc.)
-	$beforeCancelTime = (int) $bestRefundPolicy['before_cancel_time'];
-	$cancelTimeUnit = $bestRefundPolicy['cancellation-times']; // Could be 'hour', 'day', etc.
-
-	// Adjust the pickup date and time based on the policy
-	switch ($cancelTimeUnit) {
-		case 'hour':
-			$pickupDateTime->modify("-{$beforeCancelTime} hours");
-			break;
-		case 'day':
-			$pickupDateTime->modify("-{$beforeCancelTime} days");
-			break;
-		// Add other cases as necessary (e.g., weeks, minutes, etc.)
-	}
-
-	// Compare calculated before date with the current day
-	if ($pickupDateTime < $today) {
-		$less_current_day = true;
-	}
-
-	// Get the final "before" date and time (ensured to not be before today)
-	$beforeDate = $pickupDateTime->format('Y/m/d');
-	$beforeTime = $pickupDateTime->format('H:i');
-
  	?>
-	<?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() && !$less_current_day && !empty($bestRefundPolicy) ){ ?>
-	<div class="tf-cancellation-notice">
-		<span class="tf-flex tf-flex-align-center tf-flex-gap-16">
-			<i class="ri-information-line"></i>
-			<?php if('free'==$bestRefundPolicy['cancellation_type']){ ?> <b><?php esc_html_e("Free cancellation", "tourfic"); ?></b> <?php }else{ ?>
-			<?php echo 'paid'==$bestRefundPolicy['cancellation_type'] && 'percent'==$bestRefundPolicy['refund_amount_type'] ? '<b>'.$bestRefundPolicy['refund_amount'].'% Cancellation fee</b>' : '<b>'.wc_price($bestRefundPolicy['refund_amount']).' Cancellation fee</b>'; ?>
-			<?php } ?>
-			<?php esc_html_e("before", "tourfic"); ?> <?php echo $beforeDate.' '.$beforeTime; ?>
-		</span>
-	</div>
-	<?php } ?>
 
 	<div class="tf-booking-tabs">
 		<ul>

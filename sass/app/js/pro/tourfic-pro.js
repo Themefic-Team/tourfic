@@ -976,6 +976,17 @@
             $(".tf-refund-confirmation-box").hide();
             $(".tf-refund-message").html('');
         });
+
+        // Cancellation showing
+        $(document).on('click', '.tf-cancelltion-popup-btn a', function (e) {
+            e.preventDefault();
+            $('.tf-car-cancellation-popup').css('display', 'flex');
+        });  
+
+        $(document).on('click', '.tf-cancellation-popup-header .tf-close-popup', function (e) {
+            e.preventDefault();
+            $('.tf-car-cancellation-popup').hide();
+        });
     });
 
 })(jQuery);
