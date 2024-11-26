@@ -17289,6 +17289,7 @@ html {
   border: 0px solid !important;
   padding-left: 0px;
   box-shadow: none;
+  background: transparent !important;
 }
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input:focus {
   outline: none;

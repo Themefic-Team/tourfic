@@ -530,6 +530,11 @@ if ( ! function_exists( 'tf_car_search_ajax_callback' ) ) {
 			'message' => '',
 		];
 
+		if('on'==$_POST['same_location']){
+			$_POST['dropoff-name'] = !empty($_POST['pickup-name']) ? $_POST['pickup-name'] : '';
+			$_POST['dropoff'] = !empty($_POST['pickup']) ? $_POST['pickup'] : '';
+		}
+
 		if ( Helper::tfopt( 'pick_drop_car_search' ) && (empty( $_POST['pickup-name'] ) || empty( $_POST['dropoff-name'] )) ) {
 			$response['message'] = esc_html__( 'Please enter Pickup & Dropoff location', 'tourfic' );
 			echo wp_json_encode( $response );
