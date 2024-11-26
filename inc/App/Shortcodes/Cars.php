@@ -59,7 +59,7 @@ class Cars extends \Tourfic\Core\Shortcodes {
 					while ( $car_loop->have_posts() ) {
 						$car_loop->the_post();
 						$car_meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
-						if ( ! $car_meta["car_as_featured"] ) {
+						if ( $car_meta["car_as_featured"] ) {
 							tf_car_archive_single_item();
 						}
 					}
