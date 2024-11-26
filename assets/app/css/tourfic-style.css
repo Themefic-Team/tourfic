@@ -14871,7 +14871,7 @@ html {
   border-radius: 0px;
   font-size: 16px;
   background-size: 16px;
-  appearance: auto;
+  appearance: none;
 }
 
 .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering #tf-orderby:focus-visible {
