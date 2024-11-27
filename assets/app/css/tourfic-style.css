@@ -14871,7 +14871,7 @@ html {
   border-radius: 0px;
   font-size: 16px;
   background-size: 16px;
-  appearance: auto;
+  appearance: none;
 }
 
 .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering #tf-orderby:focus-visible {
@@ -19311,7 +19311,7 @@ html {
   font-weight: 400;
   line-height: 150%;
   /* 24px */
-  margin-bottom: 16px;
+  margin-bottom: 56px;
 }
 
 .tf-car-archive-result .tf-car-result {
@@ -19418,12 +19418,14 @@ html {
 
 .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul {
   list-style: none;
-  flex-wrap: wrap;
-  gap: 16px;
   margin-top: 0;
   margin-left: 0;
   margin-right: 0;
   padding: 0;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px 8px;
 }
 
 .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li {
@@ -19433,13 +19435,25 @@ html {
   font-weight: 400;
   line-height: 150%;
   /* 24px */
-  width: calc(33% - 16px);
+  display: flex;
+  width: calc(33.3333% - 8px);
 }
 
 @media only screen and (max-width: 1024px) {
   .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li {
     width: calc(50% - 16px);
   }
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg {
+  height: 20px;
+  width: 20px;
+}
+
+.tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li p {
+  width: 100%;
+  margin: 0;
+  padding-left: 4px;
 }
 
 .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn {
@@ -19743,6 +19757,7 @@ html {
   border: 0px solid !important;
   padding-left: 0px;
   box-shadow: none;
+  background: transparent !important;
 }
 
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input:focus {

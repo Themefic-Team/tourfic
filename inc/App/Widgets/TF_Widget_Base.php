@@ -14,7 +14,7 @@ class TF_Widget_Base {
 
     public function __construct() {
         add_action( 'init', array( $this, 'tf_add_elelmentor_addon' ) );
-        add_action( 'widgets_init', array($this,  'tourfic_sidebar_widgets_init' ), 100 );
+        add_action( 'widgets_init', array($this,  'tourfic_sidebar_widgets_init' ) );
     }
 
     function tf_add_elelmentor_addon() {

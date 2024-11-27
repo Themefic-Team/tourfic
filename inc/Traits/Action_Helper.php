@@ -508,6 +508,17 @@ trait Action_Helper {
 			}
 		}
 
+		if ( is_tax( 'carrental_brand' ) ) {
+			$theme_files     = array( 'tourfic/car/taxonomy-carrental_brands.php' );
+			$exists_in_theme = locate_template( $theme_files, false );
+
+			if ( $exists_in_theme ) {
+				$template = $exists_in_theme;
+			} else {
+				$template = TF_TEMPLATE_PATH . 'car/taxonomy-carrental_brands.php';
+			}
+		}
+
 		return $template;
 
 	}

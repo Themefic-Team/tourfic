@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.7
-Stable tag: 2.15.1
+Stable tag: 2.15.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -348,6 +348,19 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.15.2 - 27 November 2024 =
+
+- Added: Option to hide external booking for vendors.
+- Added: Rooms displayed in the hotel list on the frontend dashboard.
+- Added: Hotels displayed in the room list on the frontend dashboard.
+- Fixed: Resolved repeater field label issue.
+- Fixed: Addressed template issues in the Itinerary Builder.
+- Fixed: Widget loading issue resolved.
+- Improvement: Enhanced car rental Elementor widgets.
+- Improvement: Improved user experience for the car rental feature.
+- Improvement: System stability is further enhanced.
+- Improvement: Updated label and logo on the frontend dashboard.
+
 = 2.15.1 - 24 November 2024 =
 
 - Compatibility: Fixed translation notice issue for compatibility with WordPress 6.7.1.
@@ -405,27 +418,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Improvement: New arguments for the search form Shortcode hotel_tab_title, tour_tab_title, apartment_tab_title
 - Compatibility: Tourfic Direct Checkout now compatible with Instantio Plugin
 - Fix: Resolved calendar issue in Design 2 of the apartment search form
-
-= 2.13.13 - 23 October 2024 =
-
-- Fixed: REST API issue for the frontend dashboard.
-- Fixed: QR code issue on vouchers.
-
-= 2.13.12 - 19 October 2024 =
-
-- Fixed: Woocommerce plugin check for customer role capabilities
-
-= 2.13.11 - 17 October 2024 =
-
-- Fixed: Location display on the frontend
-- Fixed: Hotel room inventory management issue
-- Fixed: Same-day booking disabled
-- Fixed: Itinerary repeater functionality
-- Fixed: Logged-in user review submission
-- Fixed: Blocked booking dates
-- Fixed: Option to disable children in booking
-- Fixed: Room price settings from vendors
-- Improvements: Hotel room management system
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 

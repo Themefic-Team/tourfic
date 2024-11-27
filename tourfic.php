@@ -7,7 +7,7 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.15.1
+ * Version:         2.15.2
  * Tested up to:    6.7
  * WC tested up to: 9.4
  * Requires PHP:    7.4
@@ -25,7 +25,7 @@ final class Tourfic {
 	 * @var string
 	 */
 
-	const VERSION = '2.15.1';
+	const VERSION = '2.15.2';
 
 	/**
 	 * Minimum PHP version required.
@@ -116,7 +116,7 @@ final class Tourfic {
 		// Load the text domain for translation.
 		add_action( 'init', array( $this, 'tf_load_textdomain' ) );
 		// plugin loaded action hook.
-		add_action( 'init', array( $this, 'init_plugin' ), 9 );
+		add_action( 'init', array( $this, 'init_plugin' ), 0 );
 		//Compatibility with custom order tables for the WooCommerce plugin
 		add_action( 'before_woocommerce_init', array( $this, 'tf_woocommerce_compatibility' ) );
 	}
