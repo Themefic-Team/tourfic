@@ -353,14 +353,13 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Added: Option to hide external booking for vendors.
 - Added: Rooms displayed in the hotel list on the frontend dashboard.
 - Added: Hotels displayed in the room list on the frontend dashboard.
-- Fixed: Removed "WooCommerce" keyword from the frontend dashboard.
-- Fixed: Default Tourfic logo removed from the frontend dashboard.
 - Fixed: Resolved repeater field label issue.
 - Fixed: Addressed template issues in the Itinerary Builder.
 - Fixed: Widget loading issue resolved.
 - Improvement: Enhanced car rental Elementor widgets.
 - Improvement: Improved user experience for the car rental feature.
 - Improvement: System stability is further enhanced.
+- Improvement: Updated label and logo on the frontend dashboard.
 
 = 2.15.1 - 24 November 2024 =
 
