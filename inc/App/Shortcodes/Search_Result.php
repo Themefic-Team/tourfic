@@ -192,7 +192,19 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 				),
 			);
 		}
-
+		$car_driver_min_age = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_min_age'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_min_age'] : 18;
+        $car_driver_max_age = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] : 40;
+		if(!empty($_GET['driver_age']) && 'on'==$_GET['driver_age'] && $post_type == 'tf_carrental'){
+			$args['meta_query'] = array(
+				array(
+					'key' => 'tf_search_driver_age',
+					'value'    => [$car_driver_min_age, $car_driver_max_age],
+					'compare'    => 'BETWEEN',
+					'type' => 'DECIMAL(10,3)'
+				),
+			);
+		}
+		
 		if (!empty($args['meta_query']) && count($args['meta_query']) > 1) {
 			$args['meta_query']['relation'] = 'AND';
 		}

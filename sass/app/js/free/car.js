@@ -869,6 +869,7 @@
             $('.tf-car-instraction-popup').css('display', 'flex');
         });   
 
+        // Instructions Popup Close
         $(document).on('click', '.tf-instraction-popup-header .tf-close-popup', function (e) {
             e.preventDefault();
             $('.tf-car-instraction-popup').hide();

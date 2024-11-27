@@ -421,7 +421,27 @@ class Car_Rental {
 
 				<div class="tf-driver-location-box tf-flex tf-flex-space-bttn tf-flex-align-center">
 					<div class="tf-driver-location">
-						
+                        <?php
+                        $car_driver_min_age      = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_min_age'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_min_age'] : 18;
+
+                        $car_driver_max_age      = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] : 40;
+
+                        ?>
+						<ul>
+							<li>
+								<label><?php esc_html_e("Return in the same location", "tourfic"); ?>
+									<input type="checkbox" name="same_location">
+									<span class="checkmark"></span>
+								</label>
+							</li>
+							<li>
+								<label><?php esc_html_e("Age of driver ", "tourfic"); ?>
+                                <?php echo esc_attr($car_driver_min_age); ?>-<?php echo esc_attr($car_driver_max_age); ?>?
+									<input type="checkbox" name="driver_age">
+									<span class="checkmark"></span>
+								</label>
+							</li>
+						</ul>
 					</div>
 					<div class="tf-submit-button">
                         <input type="hidden" name="type" value="tf_carrental" class="tf-post-type"/>

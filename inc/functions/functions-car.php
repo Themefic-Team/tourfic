@@ -189,9 +189,9 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 	<div class="tf-car-details">
 		<div class="tf-car-content">
 			<a href="<?php echo esc_url( $url ); ?>"><h3 class="tf-mb-24"><?php the_title(); ?></h3></a>
-			<ul class="tf-flex tf-mb-24">
+			<ul class="list-items tf-mb-24">
 			
-				<li class="tf-flex tf-flex-gap-8 tf-flex-align-center">
+				<li class="list">
 					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g clip-path="url(#clip0_1049_4385)">
 						<path d="M9.375 12.5L16.875 5" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -204,11 +204,11 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 						</clipPath>
 					</defs>
 					</svg>
-					<?php echo $unlimited_mileage ? esc_html_e("Unlimited", "tourfic") : $total_mileage.' '.$mileage_type; ?>
+					<p><?php echo $unlimited_mileage ? esc_html_e("Unlimited", "tourfic") : $total_mileage.' '.$mileage_type; ?></p>
 				</li>
 
 				<?php if(!empty($fuel_types)){ ?>
-					<li class="tf-flex tf-flex-gap-8 tf-flex-align-center">
+					<li class="list">
 					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g clip-path="url(#clip0_1055_4099)">
 						<path d="M11.6667 9.16667H12.5001C12.9421 9.16667 13.366 9.34226 13.6786 9.65482C13.9912 9.96738 14.1667 10.3913 14.1667 10.8333V13.3333C14.1667 13.6649 14.2984 13.9828 14.5329 14.2172C14.7673 14.4516 15.0852 14.5833 15.4167 14.5833C15.7483 14.5833 16.0662 14.4516 16.3006 14.2172C16.5351 13.9828 16.6667 13.6649 16.6667 13.3333V7.5L14.1667 5" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -223,12 +223,12 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 						</clipPath>
 					</defs>
 					</svg>
-					<?php echo esc_html($fuel_types); ?>
+					<p><?php echo esc_html($fuel_types); ?></p>
 					</li>
 				<?php } ?>
 
 				<?php if(!empty($engine_years)){ ?>
-					<li class="tf-flex tf-flex-gap-8 tf-flex-align-center">
+					<li class="list">
 					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M12 16.5C12 16.697 12.0388 16.8921 12.1142 17.074C12.1895 17.256 12.3001 17.4214 12.4393 17.5607C12.5786 17.6999 12.744 17.8105 12.926 17.8858C13.1079 17.9612 13.303 18 13.5 18C13.697 18 13.8921 17.9612 14.074 17.8858C14.256 17.8105 14.4214 17.6999 14.5607 17.5607C14.6999 17.4214 14.8105 17.256 14.8858 17.074C14.9612 16.8921 15 16.697 15 16.5C15 16.303 14.9612 16.1079 14.8858 15.926C14.8105 15.744 14.6999 15.5786 14.5607 15.4393C14.4214 15.3001 14.256 15.1895 14.074 15.1142C13.8921 15.0388 13.697 15 13.5 15C13.303 15 13.1079 15.0388 12.926 15.1142C12.744 15.1895 12.5786 15.3001 12.4393 15.4393C12.3001 15.5786 12.1895 15.744 12.1142 15.926C12.0388 16.1079 12 16.303 12 16.5Z" stroke="#566676" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
 					<path d="M4 16.5C4 16.8978 4.15803 17.2793 4.43934 17.5607C4.72065 17.8419 5.10217 18 5.5 18C5.89783 18 6.27935 17.8419 6.56066 17.5607C6.84197 17.2793 7 16.8978 7 16.5C7 16.1022 6.84197 15.7207 6.56066 15.4393C6.27935 15.1581 5.89783 15 5.5 15C5.10217 15 4.72065 15.1581 4.43934 15.4393C4.15803 15.7207 4 16.1022 4 16.5Z" stroke="#566676" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -239,11 +239,11 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 					<path d="M18.5 6C18.3357 5.82421 18.2063 5.61201 18.1204 5.3771C18.0344 5.1422 17.9936 4.88982 18.0008 4.6363C18.0008 3.72741 18.9992 3.27259 18.9992 2.3637C19.0063 2.11018 18.9657 1.8578 18.8797 1.6229C18.7937 1.38799 18.6643 1.17578 18.5 1" stroke="#566676" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
 					<path d="M14.5 7C14.3357 6.82421 14.2063 6.61201 14.1204 6.3771C14.0344 6.1422 13.9936 5.88982 14.0008 5.6363C14.0008 4.72741 14.9992 4.27259 14.9992 3.3637C15.0063 3.11018 14.9657 2.8578 14.8797 2.6229C14.7937 2.38799 14.6643 2.17579 14.5 2" stroke="#566676" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
 					</svg>
-					<?php echo esc_html($engine_years); ?>
+					<p><?php echo esc_html($engine_years); ?></p>
 					</li>
 				<?php } ?>
 
-				<li class="tf-flex tf-flex-gap-8 tf-flex-align-center">
+				<li class="list">
 				<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g clip-path="url(#clip0_1049_4515)">
 					<path d="M2.5 5.00004C2.5 5.44207 2.67559 5.86599 2.98816 6.17855C3.30072 6.49111 3.72464 6.66671 4.16667 6.66671C4.60869 6.66671 5.03262 6.49111 5.34518 6.17855C5.65774 5.86599 5.83333 5.44207 5.83333 5.00004C5.83333 4.55801 5.65774 4.13409 5.34518 3.82153C5.03262 3.50897 4.60869 3.33337 4.16667 3.33337C3.72464 3.33337 3.30072 3.50897 2.98816 3.82153C2.67559 4.13409 2.5 4.55801 2.5 5.00004Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -261,11 +261,11 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 					</clipPath>
 				</defs>
 				</svg>
-				<?php echo $auto_transmission ? esc_html_e("Auto", "tourfic") : esc_html_e("Manual", "tourfic"); ?>
+				<p><?php echo $auto_transmission ? esc_html_e("Auto", "tourfic") : esc_html_e("Manual", "tourfic"); ?></p>
 				</li>
 
 				<?php if(!empty($passengers)){ ?>
-				<li class="tf-flex tf-flex-gap-8 tf-flex-align-center">
+				<li class="list">
 				<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g clip-path="url(#clip0_1050_4532)">
 					<path d="M6.66675 5.83333C6.66675 6.71739 7.01794 7.56523 7.64306 8.19036C8.26818 8.81548 9.11603 9.16667 10.0001 9.16667C10.8841 9.16667 11.732 8.81548 12.3571 8.19036C12.9822 7.56523 13.3334 6.71739 13.3334 5.83333C13.3334 4.94928 12.9822 4.10143 12.3571 3.47631C11.732 2.85119 10.8841 2.5 10.0001 2.5C9.11603 2.5 8.26818 2.85119 7.64306 3.47631C7.01794 4.10143 6.66675 4.94928 6.66675 5.83333Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -277,17 +277,19 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 					</clipPath>
 				</defs>
 				</svg>
-				<?php echo esc_attr($passengers); ?> <?php esc_html_e("Person", "tourfic"); ?></li>
+				<p><?php echo esc_attr($passengers); ?> <?php esc_html_e("Person", "tourfic"); ?></p>
+				</li>
 				<?php } ?>
 
         		<?php if(!empty($baggage)){ ?>
-				<li class="tf-flex tf-flex-gap-8 tf-flex-align-center">
+				<li class="list">
 				<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path d="M10.0003 5.19983C7.893 5.19983 5.69021 5.19983 3.84363 5.52986C2.9585 5.68804 2.26121 6.36397 2.07119 7.24281C1.77173 8.62763 1.77173 9.91936 1.77173 11.8855C1.77173 13.8517 1.77173 15.1434 2.07119 16.5283C2.26121 17.4071 2.9585 18.083 3.84363 18.2413C5.69021 18.5713 7.893 18.5713 10.0003 18.5713C12.1076 18.5713 14.3104 18.5713 16.157 18.2413C17.0421 18.083 17.7394 17.4071 17.9294 16.5283C18.2288 15.1434 18.2288 13.8517 18.2288 11.8855C18.2288 9.91936 18.2288 8.62763 17.9294 7.24281C17.7394 6.36397 17.0421 5.68804 16.157 5.52986C14.3104 5.19983 12.1076 5.19983 10.0003 5.19983Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 				<path d="M6.5708 5.20002V4.28573C6.5708 2.70777 7.84999 1.42859 9.42794 1.42859H10.5708C12.1488 1.42859 13.4279 2.70777 13.4279 4.28573V5.20002" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 				<path d="M1.78149 10L9.10039 12.4432C9.68761 12.6393 10.3226 12.6393 10.9098 12.4432L18.2287 10" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>
-				<?php echo esc_attr($baggage); ?> <?php esc_html_e("Bags", "tourfic"); ?></li>
+				<p><?php echo esc_attr($baggage); ?> <?php esc_html_e("Bags", "tourfic"); ?></p>
+				</li>
 				<?php } ?>
 
 			</ul>
@@ -527,6 +529,11 @@ if ( ! function_exists( 'tf_car_search_ajax_callback' ) ) {
 			'status'  => 'error',
 			'message' => '',
 		];
+
+		if('on'==$_POST['same_location']){
+			$_POST['dropoff-name'] = !empty($_POST['pickup-name']) ? $_POST['pickup-name'] : '';
+			$_POST['dropoff'] = !empty($_POST['pickup']) ? $_POST['pickup'] : '';
+		}
 
 		if ( Helper::tfopt( 'pick_drop_car_search' ) && (empty( $_POST['pickup-name'] ) || empty( $_POST['dropoff-name'] )) ) {
 			$response['message'] = esc_html__( 'Please enter Pickup & Dropoff location', 'tourfic' );

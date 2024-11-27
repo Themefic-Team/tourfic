@@ -1447,7 +1447,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                     <div class="tf-shortcode-generator-single">
                         <div class="tf-shortcode-generator-label">
                             <div class="tf-labels">
-                                <label><?php echo esc_html__( 'Cars', 'tourfic' ); ?></label>
+                                <label><?php echo esc_html__( 'Featured Cars', 'tourfic' ); ?></label>
                                 <p><?php echo esc_html__( 'Display Cars', 'tourfic' ); ?></p>
                             </div>
                             <div class="tf-shortcode-btn tf-generate-tour">
