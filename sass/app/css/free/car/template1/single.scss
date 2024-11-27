@@ -972,6 +972,9 @@
                     padding: 16px;
                     margin-top: 16px;
                     display: none;
+                    @media #{$max767}{
+                        display: none !important;
+                    }
                     .tf-cancellation-timeline{
                         margin-top: 12px;
                         border-bottom: 1px solid #C0CCD8;

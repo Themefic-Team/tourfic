@@ -576,37 +576,41 @@ function tf_getBestRefundPolicy($cancellations, $pickup_date, $pickup_time) {
 		$hours = $interval->h;
 	}
 
-    foreach ($cancellations as $cancellation) {
-		if('day'==$cancellation['cancellation-times']){
-			// Check if it's a free cancellation
-			if ($cancellation['cancellation_type'] === 'free' && !empty($days) && $days > $cancellation['before_cancel_time']) {
-				// If we don't have a policy yet, or if this free cancellation has a longer time before cancellation
-				if (!$bestPolicy || $cancellation['before_cancel_time'] > $bestPolicy['before_cancel_time']) {
-					$bestPolicy = $cancellation;
+	if(!empty($cancellations)){
+		foreach ($cancellations as $cancellation) {
+			if('day'==$cancellation['cancellation-times']){
+				// Check if it's a free cancellation
+				if ($cancellation['cancellation_type'] === 'free' && !empty($days) && $days > $cancellation['before_cancel_time']) {
+					// If we don't have a policy yet, or if this free cancellation has a longer time before cancellation
+					if (!$bestPolicy || $cancellation['before_cancel_time'] > $bestPolicy['before_cancel_time']) {
+						$bestPolicy = $cancellation;
+					}
+				}
+			}
+			if('hour'==$cancellation['cancellation-times']){
+				// Check if it's a free cancellation
+				if ($cancellation['cancellation_type'] === 'free' && !empty($hours) && $hours > $cancellation['before_cancel_time']) {
+					// If we don't have a policy yet, or if this free cancellation has a longer time before cancellation
+					if (!$bestPolicy || $cancellation['before_cancel_time'] > $bestPolicy['before_cancel_time']) {
+						$bestPolicy = $cancellation;
+					}
 				}
 			}
 		}
-		if('hour'==$cancellation['cancellation-times']){
-			// Check if it's a free cancellation
-			if ($cancellation['cancellation_type'] === 'free' && !empty($hours) && $hours > $cancellation['before_cancel_time']) {
-				// If we don't have a policy yet, or if this free cancellation has a longer time before cancellation
-				if (!$bestPolicy || $cancellation['before_cancel_time'] > $bestPolicy['before_cancel_time']) {
-					$bestPolicy = $cancellation;
-				}
-			}
-		}
-    }
+	}
 
     // If no free cancellation was found, choose the best paid one
     if (!$bestPolicy) {
-        foreach ($cancellations as $cancellation) {
-            if ($cancellation['cancellation_type'] === 'paid') {
-                // If we don't have a policy yet, or if this one has a higher refund amount
-                if (!$bestPolicy || $cancellation['refund_amount'] > $bestPolicy['refund_amount']) {
-                    $bestPolicy = $cancellation;
-                }
-            }
-        }
+		if(!empty($cancellations)){
+			foreach ($cancellations as $cancellation) {
+				if ($cancellation['cancellation_type'] === 'paid') {
+					// If we don't have a policy yet, or if this one has a higher refund amount
+					if (!$bestPolicy || $cancellation['refund_amount'] > $bestPolicy['refund_amount']) {
+						$bestPolicy = $cancellation;
+					}
+				}
+			}
+		}
     }
 
     return $bestPolicy;
@@ -855,35 +859,37 @@ function tf_getRefundPolicy($cancellations, $pickup_date, $pickup_time) {
         $hours = $interval->h;
     }
 
-    foreach ($cancellations as $cancellation) {
-        $timeType = $cancellation['cancellation-times'];
-        $cancelTime = (int)$cancellation['before_cancel_time'];
+	if(!empty($cancellations)){
+		foreach ($cancellations as $cancellation) {
+			$timeType = $cancellation['cancellation-times'];
+			$cancelTime = (int)$cancellation['before_cancel_time'];
 
-        // Normalize time for comparison
-        $timeAvailable = 0;
-        if ($timeType === 'day') {
-            $timeAvailable = $days ?? 0;
-        } elseif ($timeType === 'hour') {
-            $timeAvailable = ($days ?? 0) * 24 + ($hours ?? 0); // Convert days to hours and add
-        }
+			// Normalize time for comparison
+			$timeAvailable = 0;
+			if ($timeType === 'day') {
+				$timeAvailable = $days ?? 0;
+			} elseif ($timeType === 'hour') {
+				$timeAvailable = ($days ?? 0) * 24 + ($hours ?? 0); // Convert days to hours and add
+			}
 
-        // Check if it's a free cancellation
-        if ($cancellation['cancellation_type'] === 'free' && $timeAvailable > $cancelTime) {
-            $freePolicies[] = $cancellation;
-        }
+			// Check if it's a free cancellation
+			if ($cancellation['cancellation_type'] === 'free' && $timeAvailable > $cancelTime) {
+				$freePolicies[] = $cancellation;
+			}
 
-        // Check if it's a paid cancellation
-        if ($cancellation['cancellation_type'] === 'paid' && $timeAvailable > $cancelTime) {
-            // Select the best paid policy based on the lowest refund amount or longest time
-            if (
-                !$bestPaidPolicy ||
-                $cancelTime > $bestPaidPolicy['before_cancel_time'] ||
-                ($cancelTime === $bestPaidPolicy['before_cancel_time'] && $cancellation['refund_amount'] < $bestPaidPolicy['refund_amount'])
-            ) {
-                $bestPaidPolicy = $cancellation;
-            }
-        }
-    }
+			// Check if it's a paid cancellation
+			if ($cancellation['cancellation_type'] === 'paid' && $timeAvailable > $cancelTime) {
+				// Select the best paid policy based on the lowest refund amount or longest time
+				if (
+					!$bestPaidPolicy ||
+					$cancelTime > $bestPaidPolicy['before_cancel_time'] ||
+					($cancelTime === $bestPaidPolicy['before_cancel_time'] && $cancellation['refund_amount'] < $bestPaidPolicy['refund_amount'])
+				) {
+					$bestPaidPolicy = $cancellation;
+				}
+			}
+		}
+	}
 
     // Sort free policies by cancellation time (descending)
     usort($freePolicies, function ($a, $b) {
@@ -943,8 +949,8 @@ function tf_car_price_calculation_callback() {
 	$pickupDateTime = DateTime::createFromFormat('Y/m/d H:i', $tf_pickup_date . ' ' . $tf_pickup_time, $timezone);
 
 	// Extract the "before_cancel_time" and "cancellation-times" (hours, days, etc.)
-	$beforeCancelTime = (int) $bestRefundPolicy['before_cancel_time'];
-	$cancelTimeUnit = $bestRefundPolicy['cancellation-times']; // Could be 'hour', 'day', etc.
+	$beforeCancelTime = !empty($bestRefundPolicy['before_cancel_time']) ? (int) $bestRefundPolicy['before_cancel_time'] : 0;
+	$cancelTimeUnit = !empty($bestRefundPolicy['cancellation-times']) ? $bestRefundPolicy['cancellation-times'] : '';// Could be 'hour', 'day', etc.
 
 	// Adjust the pickup date and time based on the policy
 	switch ($cancelTimeUnit) {
