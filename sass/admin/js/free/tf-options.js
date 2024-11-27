@@ -701,7 +701,23 @@
                 $('#' + id + '').select2({
                     placeholder: placeholder,
                     allowClear: true,
-                    templateResult: TfFormatOption
+                    templateResult: TfFormatOption,
+                    templateSelection: function (state) {
+                        if (!state.id) {
+                            return state.text;
+                        }
+                
+                        // Get the edit URL from the option's data attribute
+                        var editUrl = $(state.element).data('edit-url');
+                        if(editUrl){
+                            var $state = $(
+                                '<span>' + state.text + ' <a target="_blank" href="'+editUrl+'" class="tf-edit-room"><i class="fa-regular fa-pen-to-square"></i></a></span>'
+                            );
+                            return $state;
+                        }
+                
+                        return state.text;
+                    }
                 });
             }else{
                 $('#' + id + '').select2({
