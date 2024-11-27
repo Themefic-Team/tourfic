@@ -792,9 +792,17 @@
                 beforeSend: function () {
                     $('.tf-date-select-box').addClass('tf-box-loading');
                 },
-                success: function (data) {
-                    if(data){
-                        $('.tf-price-header h2').html(data);
+                success: function (response) {
+                    $('.tf-cancellation-box').html('');
+                    $('.tf-cancellation-box').hide();
+                    if(response){
+                        if(response.data.total_price){
+                            $('.tf-price-header h2').html(response.data.total_price);
+                        }
+                        if(response.data.cancellation){
+                            $('.tf-cancellation-box').html(response.data.cancellation);
+                            $('.tf-cancellation-box').show();
+                        }
                         $('.tf-date-select-box').removeClass('tf-box-loading');
                     }
                 }
@@ -863,6 +871,7 @@
             $('.tf-car-instraction-popup').css('display', 'flex');
         });   
 
+        // Instructions Popup Close
         $(document).on('click', '.tf-instraction-popup-header .tf-close-popup', function (e) {
             e.preventDefault();
             $('.tf-car-instraction-popup').hide();
