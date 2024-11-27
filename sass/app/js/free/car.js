@@ -793,6 +793,8 @@
                     $('.tf-date-select-box').addClass('tf-box-loading');
                 },
                 success: function (response) {
+                    $('.tf-cancellation-box').html('');
+                    $('.tf-cancellation-box').hide();
                     if(response){
                         if(response.data.total_price){
                             $('.tf-price-header h2').html(response.data.total_price);
