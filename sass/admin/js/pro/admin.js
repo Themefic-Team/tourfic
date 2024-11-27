@@ -195,6 +195,39 @@
         });
     });
 
+    //export cars ajax
+    $(document).on('click', '.tf-export-cars-btn', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url: tf_pro_params.ajax_url,
+            data: {
+                action: "tf_export_cars",
+                nonce: tf_pro_params.nonce,
+            },
+            beforeSend: function(){
+                $('.tf-export-cars-btn').html('Exporting...');
+            },
+            success: function(response){
+                var date           = new Date();
+                var generated_date = date.getMonth() + '-' + date.getDate() + '-' + date.getFullYear();
+
+                var link               = document.createElement('a');
+                    link.href          = 'data:text/csv;charset=utf-8,' + encodeURI(response);
+                    link.download      = 'cars_' + generated_date + '.csv';
+                    link.style.display = 'none';
+                document.body.appendChild(link);
+                link.trigger("click");
+                //clean up
+                document.body.removeChild(link);
+                $('.tf-export-cars-btn').html('Export');
+            },
+            complete: function(){
+                $('.tf-export-cars-btn').html('Export');
+            }
+        });
+    });
+
     /**
      * Import Tours ajax
      * 
