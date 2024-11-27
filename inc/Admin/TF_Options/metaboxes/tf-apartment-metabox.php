@@ -4,20 +4,22 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 
-function tf_apt_amenities_cats() {
-	$amenities_cats = ! empty( Helper::tf_data_types( Helper::tfopt( 'amenities_cats' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'amenities_cats' ) ) : '';
-	$all_cats       = [];
-	if ( ! empty( $amenities_cats ) && is_array( $amenities_cats ) ) {
-		foreach ( $amenities_cats as $key => $cat ) {
-			$all_cats[ (string) $key ] = $cat['amenities_cat_name'];
+if(!function_exists('tf_apt_amenities_cats')){
+	function tf_apt_amenities_cats() {
+		$amenities_cats = ! empty( Helper::tf_data_types( Helper::tfopt( 'amenities_cats' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'amenities_cats' ) ) : '';
+		$all_cats       = [];
+		if ( ! empty( $amenities_cats ) && is_array( $amenities_cats ) ) {
+			foreach ( $amenities_cats as $key => $cat ) {
+				$all_cats[ (string) $key ] = $cat['amenities_cat_name'];
+			}
 		}
-	}
 
-	if ( empty( $all_cats ) ) {
-		$all_cats[''] = esc_html__( 'Select Category', 'tourfic' );
-	}
+		if ( empty( $all_cats ) ) {
+			$all_cats[''] = esc_html__( 'Select Category', 'tourfic' );
+		}
 
-	return $all_cats;
+		return $all_cats;
+	}
 }
 
 TF_Metabox::metabox( 'tf_apartment_opt', array(

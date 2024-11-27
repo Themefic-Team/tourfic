@@ -56,7 +56,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 									<span class="tf-repeater-icon tf-repeater-icon-collapse">
 										<i class="fa-solid fa-angle-down"></i>
 									</span>
-									<span class="tf-repeater-title"><?php echo !empty($value[$field_title]) ? esc_html($value[$field_title]) : esc_html($label) ?>  </span>
+									<span class="tf-repeater-title"><?php echo !empty($value[$field_title]) && is_string($value[$field_title]) ? esc_html($value[$field_title]) : esc_html($label) ?>  </span>
 									<div class="tf-repeater-icon-absulate">
 										<span class="tf-repeater-icon tf-repeater-icon-move">
 											<i class="fa-solid fa-up-down-left-right"></i>

@@ -1707,6 +1707,9 @@ TF_Settings::option( 'tf_settings', array(
 										'view_apartment_booking' => __( 'View Apartment Booking', 'tourfic' ),
 										'view_commission'        => __( 'View Commission', 'tourfic' ),
 										'view_payout'            => __( 'View Payout', 'tourfic' ),
+										'qr_code'                => esc_html__( 'QR Code Verification', 'tourfic' ),
+										'enquiry_email'          => esc_html__( 'Access Enquiry Email', 'tourfic' ),
+										'external_booking'       => esc_html__( 'External Booking', 'tourfic' ),
 									),
 								),
 							)

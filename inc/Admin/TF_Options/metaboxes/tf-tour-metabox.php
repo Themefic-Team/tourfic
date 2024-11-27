@@ -9,17 +9,19 @@ use Tourfic\Classes\Helper;
  * @author AbuHena
  * @since 1.7.0
  */
-function tf_tour_meals() {
-	$itinerary_options = ! empty( Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) ) : '';
-	$all_meals         = [];
-	if ( ! empty( $itinerary_options['meals'] ) && is_array( $itinerary_options['meals'] ) ) {
-		$meals = $itinerary_options['meals'];
-		foreach ( $meals as $key => $meal ) {
-			$all_meals[ $meal['meal'] . $key ] = $meal['meal'];
+if(!function_exists('tf_tour_meals')){
+	function tf_tour_meals() {
+		$itinerary_options = ! empty( Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) ) : '';
+		$all_meals         = [];
+		if ( ! empty( $itinerary_options['meals'] ) && is_array( $itinerary_options['meals'] ) ) {
+			$meals = $itinerary_options['meals'];
+			foreach ( $meals as $key => $meal ) {
+				$all_meals[ $meal['meal'] . $key ] = $meal['meal'];
+			}
 		}
-	}
 
-	return $all_meals;
+		return $all_meals;
+	}
 }
 
 TF_Metabox::metabox( 'tf_tours_opt', array(
