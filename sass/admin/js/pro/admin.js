@@ -184,7 +184,7 @@
                     link.download      = 'Apartments_' + generated_date + '.csv';
                     link.style.display = 'none';
                 document.body.appendChild(link);
-                link.trigger("click");
+                link.click();
                 //clean up
                 document.body.removeChild(link);
                 $('.tf-export-apartments-btn').html('Export');
@@ -217,7 +217,7 @@
                     link.download      = 'cars_' + generated_date + '.csv';
                     link.style.display = 'none';
                 document.body.appendChild(link);
-                link.trigger("click");
+                link.click();
                 //clean up
                 document.body.removeChild(link);
                 $('.tf-export-cars-btn').html('Export');
