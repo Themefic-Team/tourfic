@@ -209,7 +209,7 @@ abstract Class TF_Booking_Details {
                             <option value=""><?php esc_html_e( "Order status", "tourfic" ); ?></option>
                             <option value="processing"><?php esc_html_e( "Processing", "tourfic" ); ?></option>
                             <option value="on-hold"><?php esc_html_e( "On Hold", "tourfic" ); ?></option>
-                            <option value="completed"><?php esc_html_e( "Complete", "tourfic" ); ?></option>
+                            <option value="completed"><?php esc_html_e( "Completed", "tourfic" ); ?></option>
                             <option value="cancelled"><?php esc_html_e( "Cancelled", "tourfic" ); ?></option>
                             <option value="refunded"><?php esc_html_e( "Refund", "tourfic" ); ?></option>
                         </select>
@@ -279,7 +279,7 @@ abstract Class TF_Booking_Details {
                                 <option value="trash"><?php esc_html_e( "Trash", "tourfic" ); ?></option>
                                 <option value="processing"><?php esc_html_e( "Processing", "tourfic" ); ?></option>
                                 <option value="on-hold"><?php esc_html_e( "On Hold", "tourfic" ); ?></option>
-                                <option value="completed"><?php esc_html_e( "Complete", "tourfic" ); ?></option>
+                                <option value="completed"><?php esc_html_e( "Completed", "tourfic" ); ?></option>
                                 <option value="cancelled"><?php esc_html_e( "Cancelled", "tourfic" ); ?></option>
                             </select>
                         </div>
@@ -295,7 +295,7 @@ abstract Class TF_Booking_Details {
                             <option value=""><?php esc_html_e( "Order status", "tourfic" ); ?></option>
                             <option value="processing" <?php echo ! empty( $_GET['payment'] ) && "processing" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "Processing", "tourfic" ); ?></option>
                             <option value="on-hold" <?php echo ! empty( $_GET['payment'] ) && "on-hold" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "On Hold", "tourfic" ); ?></option>
-                            <option value="completed" <?php echo ! empty( $_GET['payment'] ) && "completed" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "Complete", "tourfic" ); ?></option>
+                            <option value="completed" <?php echo ! empty( $_GET['payment'] ) && "completed" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "Completed", "tourfic" ); ?></option>
                             <option value="cancelled" <?php echo ! empty( $_GET['payment'] ) && "cancelled" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "Cancelled", "tourfic" ); ?></option>
                             <option value="refunded" <?php echo ! empty( $_GET['payment'] ) && "refunded" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "Refund", "tourfic" ); ?></option>
                         </select>
@@ -999,7 +999,7 @@ abstract Class TF_Booking_Details {
                                             }elseif( "on-hold"==$tf_order_details->ostatus ){
                                                 esc_html_e("On Hold", "tourfic");
                                             }elseif( "completed"==$tf_order_details->ostatus ){
-                                                esc_html_e("Complete", "tourfic");
+                                                esc_html_e("Completed", "tourfic");
                                             }elseif( "cancelled"==$tf_order_details->ostatus ){
                                                 esc_html_e("Cancelled", "tourfic");
                                             }elseif( "refunded"==$tf_order_details->ostatus ){
@@ -1018,7 +1018,7 @@ abstract Class TF_Booking_Details {
                                 <li data-value="trash"><?php esc_html_e("Trash", "tourfic"); ?></li>
                                 <li data-value="processing"><?php esc_html_e("Processing", "tourfic"); ?></li>
                                 <li data-value="on-hold"><?php esc_html_e("On Hold", "tourfic"); ?></li>
-                                <li data-value="completed"><?php esc_html_e("Complete", "tourfic"); ?></li>
+                                <li data-value="completed"><?php esc_html_e("Completed", "tourfic"); ?></li>
                                 <li data-value="cancelled"><?php esc_html_e("Cancelled", "tourfic"); ?></li>
                                 <li data-value="refunded"><?php esc_html_e("Refund", "tourfic"); ?></li>
                             </ul>
