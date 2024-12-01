@@ -778,6 +778,18 @@ function tf_tours_booking_function() {
 		$order_id = Helper::tf_set_order( $order_data );
 		if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($order_id) ) {
 			do_action( 'tf_offline_payment_booking_confirmation', $order_id, $order_data );
+
+			if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
+
+				/**
+				 * Filters the data passed to the Google Calendar integration.
+				 *
+				 * @param int    $order_id   The order ID.
+				 * @param array  $order_data The items in the order.
+				 * @param string $type Order type
+				 */
+				apply_filters( 'tf_after_without_payment_calendar_data', $order_id, $order_data, 'tour' );
+			}
 		}
 
 	}else{
@@ -1300,18 +1312,20 @@ add_action( 'woocommerce_order_status_changed', 'tf_add_google_calendar_on_statu
 function tf_add_google_calendar_on_status_change( $order_id, $old_status, $new_status, $order ) {
 	$order_items = $order->get_items();
 
-	if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
+	if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) &&
+			Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
 
 		/**
 		 * Filters the data passed to the Google Calendar integration.
 		 *
 		 * @param int    $order_id   The order ID.
 		 * @param array  $order_items The items in the order.
-		 * @param string $additional_data Additional data (empty by default).
+		 * @param string $type Order type
 		 */
-		apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $order_items, array() );
+		apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $order_items, '' );
 	}
 }
+
 
 /**
  * Add order id to the tour meta field
@@ -1493,7 +1507,7 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 	}
 
 	if( !empty( Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar'] ) && Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar']=="1"){
-		apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $order->get_items(), array() );
+		apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $order->get_items(), '' );
 	}
 
 	/**
