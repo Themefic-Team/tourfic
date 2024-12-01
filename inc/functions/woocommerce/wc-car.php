@@ -223,7 +223,7 @@ function tf_car_booking_callback() {
 				'order_details'    => $order_details,
 				'payment_method'   => 'offline',
 				'customer_id'	   => $tf_offline_user_id,
-				'status'           => 'completed',
+				'status'           => 'processing',
 				'order_date'       => gmdate( 'Y-m-d H:i:s' ),
 			);
 			$response['without_payment'] = 'true';
