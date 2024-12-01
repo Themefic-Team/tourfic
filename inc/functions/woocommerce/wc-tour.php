@@ -1270,9 +1270,9 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 		}
 	}
 
-	if( !empty( Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar'] ) && Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar']=="1"){
-		apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $order->get_items(), array() );
-	}
+	// if( !empty( Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar'] ) && Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar']=="1"){
+	// 	apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $order->get_items(), array() );
+	// }
 
 	/**
 	 * New Order Pabbly Integration
@@ -1286,6 +1286,32 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 }
 
 add_action( 'woocommerce_checkout_order_processed', 'tf_add_order_tour_details_checkout_order_processed', 10, 4 );
+
+/**
+ * Add order details to Google Calendar when the order status changes.
+ *
+ * @param int      $order_id   The order ID.
+ * @param string   $old_status The old order status.
+ * @param string   $new_status The new order status.
+ * @param WC_Order $order      The WooCommerce order object.
+ */
+add_action( 'woocommerce_order_status_changed', 'tf_add_google_calendar_on_status_change', 10, 4 );
+
+function tf_add_google_calendar_on_status_change( $order_id, $old_status, $new_status, $order ) {
+	$order_items = $order->get_items();
+
+	if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
+
+		/**
+		 * Filters the data passed to the Google Calendar integration.
+		 *
+		 * @param int    $order_id   The order ID.
+		 * @param array  $order_items The items in the order.
+		 * @param string $additional_data Additional data (empty by default).
+		 */
+		apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $order_items, array() );
+	}
+}
 
 /**
  * Add order id to the tour meta field
