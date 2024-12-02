@@ -534,6 +534,9 @@
                 $("#hotel_room_depo").val(hotel_deposit);
             }
 
+
+            console.log(room_id);
+
             /*if ($(this).closest('.room-submit-wrap').find('input[name=room_id]').val()) {
                 var room_id = $(this).closest('.room-submit-wrap').find('input[name=room_id]').val();
             } else {
@@ -557,7 +560,7 @@
                 var room = $("#hotel_room_number").val();
                 var deposit = $("#hotel_room_depo").val();
             }
-            var airport_service = $('[name="airport_service"]:checked').val();
+            var airport_service = $this.closest('[name="airport_service"]:checked').val();
 
             var data = {
                 action: 'tf_hotel_booking_popup',

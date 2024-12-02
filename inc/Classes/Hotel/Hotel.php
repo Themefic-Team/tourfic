@@ -2958,9 +2958,9 @@ class Hotel {
 										$airport_service = self::tf_hotel_airport_service_title_price( $post_id, $adult, $child, $single_service_type );
 										?>
                                         <div class="tf-single-hotel-service tour-extra-single">
-                                            <label for="service-<?php echo esc_attr( $key ); ?>">
+                                            <label for="service-<?php echo esc_attr( $key ) . '_' . $room_id; ?>">
                                                 <div class="tf-service-radio">
-                                                    <input type="radio" value="<?php echo esc_attr( $single_service_type ); ?>" id="service-<?php echo esc_attr( $key ); ?>" name="airport_service">
+                                                    <input type="radio" value="<?php echo esc_attr( $single_service_type ); ?>" id="service-<?php echo esc_attr( $key) . '_' . $room_id; ?>" name="airport_service">
                                                 </div>
                                                 <div class="tf-service-content">
                                                     <h5>
@@ -2976,7 +2976,7 @@ class Hotel {
 														}
 														?>
                                                     </h5>
-                                                    <p><?php echo $airport_service['title']; ?> = <?php echo wc_price( $airport_service['price'] ); ?></p>
+													<p><?php echo $airport_service['title']; ?> = <?php echo wc_price( $airport_service['price'] ); ?></p>
                                                 </div>
                                             </label>
                                         </div>
