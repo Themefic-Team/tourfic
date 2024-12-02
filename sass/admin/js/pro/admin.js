@@ -353,6 +353,47 @@
 
     });
 
+    /**
+     * Import Cars ajax
+     * @author Jahid
+     */
+    $(document).on('click', '.tf_import_cars_btn', function(e){
+        e.preventDefault();
+        let formData                         = $('#tf-import-cars').serializeArray();
+        let car_csv_file_url               = $('#tf-import-cars').find('input[name="car_csv_file_url"]').val();
+        let import_csv_nonce                 = $('#tf-import-cars').find('input[name="import_csv_nonce"]').val();
+        let tf_import_cars_update_existing = $('#tf-import-cars').find('input[name="tf_import_cars_update_existing"]').val();
+        $('.tf-column-mapping-form').hide();
+        
+        $.ajax({
+            type: 'post',
+            url: ajaxurl,
+            data:{
+                action: 'tf_import_cars',
+                form_data: formData,
+                car_csv_file_url: car_csv_file_url,
+                import_csv_nonce: import_csv_nonce,
+                tf_import_cars_update_existing: tf_import_cars_update_existing,
+            },
+            beforeSend: function(){
+                $('.tf-step-1').addClass('done');
+                $('.tf-step-2').addClass('done');
+                $('.tf-step-3').addClass('done');
+                $('.tf-importing-progressbar-container').show();
+            },
+            success: function(response){
+                
+            },
+            complete: function(){
+                $('.tf_import_apartments_btn').html('Import');
+                $('.tf-step-4').addClass('done');
+                $('.tf-importing-progressbar-container').hide();
+                $('.tf-import-complete-wrap').show();
+            },
+        });
+
+    });
+
     let urlParams = new URLSearchParams(window.location.search);
     let mapping   = urlParams.get('step');
     if( mapping == 'tour_mapping' ){
