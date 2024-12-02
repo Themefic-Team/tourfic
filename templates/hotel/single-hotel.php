@@ -6,7 +6,12 @@
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\Wishlist;
 
-get_header();
+if(wp_is_block_theme()){
+    wp_head();
+    block_header_area();
+}else{
+    get_header();
+}
 
 if ( !Helper::tf_is_woo_active() ) {
 	?>
@@ -116,6 +121,7 @@ while ( have_posts() ) : the_post();
 	// Hotel facilitiles
 	$hotel_facilities = ! empty( $meta['hotel-facilities'] ) ? $meta['hotel-facilities'] : '';
 	$hotel_facilities_categories = ! empty( Helper::tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) : '';
+	$tf_hotel_reserve_button_text   = ! empty( Helper::tfopt( 'hotel_booking_form_button_text' ) ) ? stripslashes( sanitize_text_field( Helper::tfopt( 'hotel_booking_form_button_text' ) ) ) : esc_html__( "Reserve Now", 'tourfic' );
 
 	// FAQ
 	$faqs = ! empty( $meta['faq'] ) ? $meta['faq'] : '';
@@ -152,4 +158,10 @@ while ( have_posts() ) : the_post();
 		include TF_TEMPLATE_PART_PATH . 'hotel/design-default.php';
 	}
 endwhile;
-get_footer();
+
+if(wp_is_block_theme()){
+    wp_footer();
+    block_footer_area();
+ }else{
+	get_footer();
+ }

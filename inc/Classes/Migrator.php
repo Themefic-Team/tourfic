@@ -20,6 +20,7 @@ class Migrator {
 		add_action( 'admin_init', array( $this, 'tf_hotel_room_migrate' ) );
 		add_action( 'init', array( $this, 'tf_rooms_data_add_in_hotel' ) );
 //		add_action( 'admin_init', array( $this, 'tf_search_keys_migrate' ) );
+		add_action( 'admin_init', array( $this, 'tf_migrate_tf_enquiry_data' ) );
 	}
 
 	function tf_permalink_settings_migration() {
@@ -315,6 +316,64 @@ class Migrator {
 			update_option( 'tf_template_2_apartment_migrate_data', 1 );
 
 		}
+
+		// Car
+		if ( empty( get_option( 'tf_template_1_car_migrate_data' ) ) ) {
+
+			$options = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
+
+			if(empty($options["tf-template"]["single-car"])){
+				$options["tf-template"]["single-car"] = 'design-1';
+			}
+			if(empty($options["tf-template"]["single-car-layout"])){
+				$options["tf-template"]["single-car-layout"] = array(
+					array(
+						"car-section"        => "Description",
+						"car-section-slug"   => "description",
+						"car-section-status" => "1"
+					),
+					array(
+						"car-section"        => "Car info",
+						"car-section-slug"   => "car-info",
+						"car-section-status" => "1"
+					),
+					array(
+						"car-section"        => "Benefits",
+						"car-section-slug"   => "benefits",
+						"car-section-status" => "1"
+					),
+					array(
+						"car-section"        => "Include/Exclude",
+						"car-section-slug"   => "inc-exc",
+						"car-section-status" => "1"
+					),
+					array(
+						"car-section"        => "Location",
+						"car-section-slug"   => "location",
+						"car-section-status" => "1"
+					),
+					array(
+						"car-section"        => "FAQs",
+						"car-section-slug"   => "faq",
+						"car-section-status" => "1"
+					)
+				);
+			}
+			if(empty($options["tf-template"]["car-archive"])){
+				$options["tf-template"]["car-archive"] = 'design-1';
+			}
+			if(empty($options["tf-template"]["car_archive_driver_min_age"])){
+				$options["tf-template"]["car_archive_driver_min_age"] = 18;
+			}
+			if(empty($options["tf-template"]["car_archive_driver_max_age"])){
+				$options["tf-template"]["car_archive_driver_max_age"] = 40;
+			}
+			update_option( 'tf_settings', $options );
+			wp_cache_flush();
+			flush_rewrite_rules( true );
+			update_option( 'tf_template_1_car_migrate_data', 1 );
+		}
+
 	}
 
 	/**
@@ -1090,6 +1149,34 @@ class Migrator {
 				}
 			}
 			wp_reset_query();
+		}
+	}
+
+	/**
+	 * Migrate enquiry data
+	 */
+
+	public function tf_migrate_tf_enquiry_data() {
+		if ( empty( get_option( 'tf_enquiry_data_migration' ) ) ) {
+			$this->add_enquiry_new_columns();
+			update_option( 'tf_enquiry_data_migration', 1 );
+		}
+	}
+
+	private function add_enquiry_new_columns() {
+		global $wpdb;
+		$enquiry_table = $wpdb->prefix . 'tf_enquiry_data';
+
+		$data = $wpdb->get_row( "SELECT * FROM $enquiry_table" );
+
+		if ( ! isset( $data->enquiry_status ) ) {
+			$wpdb->query( "ALTER TABLE $enquiry_table ADD COLUMN `enquiry_status` VARCHAR(255) NOT NULL DEFAULT 'read' AFTER `author_roles`" );
+		}
+		if ( ! isset( $data->server_data ) ) {
+			$wpdb->query( "ALTER TABLE $enquiry_table ADD COLUMN `server_data` VARCHAR(255) NOT NULL DEFAULT '' AFTER `enquiry_status`" );
+		}
+		if ( ! isset( $data->reply_data ) ) {
+			$wpdb->query( "ALTER TABLE $enquiry_table ADD COLUMN `reply_data` LONGTEXT NOT NULL DEFAULT '' AFTER `server_data`" );
 		}
 	}
 }

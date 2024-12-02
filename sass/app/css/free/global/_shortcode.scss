@@ -1,13 +1,37 @@
 .tf-booking-form-tab{
     .btn-styled{
-        background-color: #e6e6e6;
-        border-color: #e6e6e6;
-        color: #333;
+        background-color: #e6e6e6 !important;
+        border-color: #e6e6e6 !important;
+        color: #333 !important;
 
         &.active{
-            background-color: #003162;
-            border-color: #003162;
-            color: #fff;
+            background-color: #003162 !important;
+            border-color: #003162 !important;
+            color: #fff !important;
+        }
+    }
+    &.design-3{
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        @media #{$max767}{
+            display: none;
+        }
+        .btn-styled{
+            border-radius: 6px !important;
+            background: #FFF !important;
+            border: 4px solid #CDE5FE !important;
+            overflow: auto;
+            color: #27333f !important;
+            padding: 8px 16px !important;
+            position: static;
+            &::after{
+                position: static;
+                display: none;
+            }
+            &.active{
+                color: #0866C4 !important;
+            }
         }
     }
 }
@@ -299,6 +323,11 @@ button.tf-tablinks {
             line-height: 25px;
             margin-right: 5px;
         }
+    }
+}
+#tf_car_booking{
+    .tf_destination-wrap {
+        width: auto;
     }
 }
 div#tf-locationautocomplete-list {
@@ -823,6 +852,93 @@ div#tf-destinationautocomplete-list {
                 }
             }
         }
+        &#tf_car_booking{
+            .tf_form_innerbody{
+                @media #{$max991}{
+                    flex-wrap: wrap;
+                }
+                .autocomplete-items {
+                    @media #{$max767}{
+                        top: 47px !important;
+                    }
+                }
+                .tf_form_fields{
+                    width: calc(100% - 172px);
+                    padding: 24px 32px;
+                    @media #{$max991}{
+                        width: 100%;
+                        padding: 24px;
+                    }
+                    .tf_destination_fields{
+                        padding: 0 16px;
+                        &:first-child{
+                            padding-left: 0px;
+                        }
+                        @media #{$max767}{
+                            margin-bottom: 10px;
+                            padding: 0;
+                        }
+                        .tf_form_inners{
+                            position: relative;
+                        }
+                    }
+                    .tf_checkin_date{
+                        width: 25%;
+                        padding: 0 16px;
+                        &:last-child{
+                            padding-right: 0px;
+                            border-right: 0px solid;
+                        }
+                        @media #{$max767}{
+                            padding: 0;
+                            width: 100%;
+                            border-right: 0px solid;
+                        }
+                        .tf_form_inners{
+                            display: flex;
+                            gap: 16px;
+                            justify-content: space-between;
+                            input{
+                                height: 0;
+                                width: 0;
+                                padding: 0;
+                                border: 0;
+                            }
+                            .tf_checkin_dates{
+                                display: flow-root;
+                                .tf-select-date{
+                                    align-items: center;
+                                    cursor: pointer;
+                                    display: flex;
+                                }
+                                span.date{
+                                    margin-right: 8px;
+                                }
+                                span.month{
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 8px;
+                                    .tf_check_arrow{
+                                        display: flex;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .tf_availability_checker_box{
+                    width: 172px;
+                    @media #{$max991}{
+                        width: 100%;
+                    }
+                    button{
+                        @media #{$max991}{
+                            padding: 15px 32px;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 .tf_tf_booking-widget-wrap {
@@ -898,6 +1014,7 @@ div.tf-aq-inner {
             font-size: 24px;
             font-style: normal;
             font-weight: 500;
+            margin: 0px !important;
             line-height: 120%;
         }
     }
@@ -942,9 +1059,23 @@ div.tf-aq-inner {
     }
 
     input, textarea {
-        max-width: 100%;
-        border-radius: 4px !important;
-        border: 1px solid #C0CCD8;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 12px 16px;
+        background-color: #fff;
+        color: $slate60;
+        font-size: 16px;
+        font-weight: 400;
+        transition: all 0.3s ease-in-out;
+
+        &:focus{
+            outline: none;
+            border-color: $blue60;
+        }
+    }
+
+    textarea{
+        height: 120px;
     }
 
     input::placeholder, textarea::placeholder {

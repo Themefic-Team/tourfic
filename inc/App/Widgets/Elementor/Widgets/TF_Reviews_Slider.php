@@ -89,6 +89,8 @@ class TF_Reviews_Slider extends \Elementor\Widget_Base {
 				'options' => [
 					'tf_hotel' => 'Hotel',
 					'tf_tours' => 'Tour',
+					'tf_apartment' => 'Apartment',
+					'tf_carrental' => 'Car',
 				],
 				'default' => 'tf_hotel'
 			]

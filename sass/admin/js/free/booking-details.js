@@ -41,6 +41,44 @@
             });
         }
         
+        if ( $('.tf-filter-bulk-option-enquiry').length > 0 ) {
+            $('.tf-filter-bulk-option-enquiry').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Bulk Action",
+                minimumResultsForSearch: -1,
+            });
+        }
+        if ( $('.tf-enquiry-filter-hotel-name').length > 0 ) {
+            $('.tf-enquiry-filter-hotel-name').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Hotel Name",
+                allowClear: true
+            });
+        }
+        
+        if ( $('.tf-enquiry-filter-apartment-name').length > 0 ) {
+            $('.tf-enquiry-filter-apartment-name').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Apartment Name",
+                allowClear: true
+            });
+        }
+        if ( $('.tf-enquiry-filter-tour-name ').length > 0 ) {
+            $('.tf-enquiry-filter-tour-name').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Tours Name",
+                allowClear: true
+            });
+        }
+        if ( $('.tf-filter-mail-option-enquiry').length > 0 ) {
+            $('.tf-filter-mail-option-enquiry').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Filters",
+                allowClear: true,
+                minimumResultsForSearch: -1,
+            });
+        }
+        
         // Tour Post Section
         if( $('.tf-post-id-filter-options').length > 0 ) {
             $('.tf-post-id-filter-options').select2({
@@ -64,6 +102,15 @@
             $('.tf-apartment-id-filter-options').select2({
                 dropdownCssClass: 'tf-booking-filter-modal',
                 placeholder: "Apartment Name",
+                allowClear: true
+            });
+        }
+
+        // Car Post Section
+        if ( $('.tf-car-id-filter-options').length > 0 ) {
+            $('.tf-car-id-filter-options').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Car Name",
                 allowClear: true
             });
         }

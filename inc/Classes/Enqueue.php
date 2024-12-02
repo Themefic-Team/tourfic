@@ -195,6 +195,11 @@ class Enqueue {
 		$tf_apartment_min_max_price = ApartmentPricing::get_min_max_price_from_all_apartment();
 
 		/**
+		 * Cars Min and Max Price
+		 */
+		$tf_car_min_max_price = get_cars_min_max_price();
+
+		/**
 		 * Tour booking form
 		 */
 		global $post;
@@ -428,6 +433,7 @@ class Enqueue {
 				'locations'              => Helper::get_terms_dropdown('hotel_location'),
 				'apartment_locations'    => Helper::get_terms_dropdown('apartment_location'),
 				'tour_destinations'      => Helper::get_terms_dropdown('tour_destination'),
+				'car_locations'      	 => Helper::get_terms_dropdown('carrental_location'),
 				'ajax_result_success'    => esc_html__( 'Refreshed Successfully!', 'tourfic' ),
 				'wishlist_add'           => esc_html__( 'Adding to wishlist...', 'tourfic' ),
 				'wishlist_added'         => esc_html__( 'Item added to wishlist.', 'tourfic' ),
@@ -441,6 +447,7 @@ class Enqueue {
 				'room'                   => esc_html__( 'Room', 'tourfic' ),
 				'sending_ques'           => esc_html__( 'Sending your question...', 'tourfic' ),
 				'no_found'               => esc_html__( 'Not Found', 'tourfic' ),
+				'no_room_found'  		 => esc_html__("No Room is selected from the backend, for this Hotel!", "tourfic"),
 				'tf_hotel_max_price'     => isset( $hotel_min_max_price ) ? $hotel_min_max_price['max'] : 0,
 				'tf_hotel_min_price'     => isset( $hotel_min_max_price ) ? $hotel_min_max_price['min'] : 0,
 				'tf_tour_max_price'      => isset( $tour_min_max_price ) ? $tour_min_max_price['max'] : '',
@@ -456,9 +463,15 @@ class Enqueue {
 				'date_hotel_search'      => Helper::tfopt( 'date_hotel_search' ),
 				'date_tour_search'       => Helper::tfopt( 'date_tour_search' ),
 				'date_apartment_search'  => Helper::tfopt( 'date_apartment_search' ),
+				'location_car_search'  => Helper::tfopt( 'pick_drop_car_search' ),
+				'date_car_search'  => Helper::tfopt( 'pick_drop_date_car_search' ),
 				'tf_apartment_max_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['max'] : 0,
 				'tf_apartment_min_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['min'] : 0,
 				'tour_form_data'         => isset( $single_tour_form_data ) ? $single_tour_form_data : array(),
+				'tf_car_max_price' => isset( $tf_car_min_max_price['max'] ) ? $tf_car_min_max_price['max'] : 0,
+				'tf_car_min_price' => isset( $tf_car_min_max_price['min'] ) ? $tf_car_min_max_price['min'] : 0,
+				'tf_car_min_seat' =>  isset( $tf_car_min_max_price['min_seat'] ) ? $tf_car_min_max_price['min_seat'] : 0,
+				'tf_car_max_seat' =>  isset( $tf_car_min_max_price['max_seat'] ) ? $tf_car_min_max_price['max_seat'] : 0,
 			)
 		);
 
@@ -646,14 +659,18 @@ class Enqueue {
 			'tourfic-vendor_page_tf_vendor_commissions',
 			'tourfic-vendor_page_tf_vendor_withdraw',
 			'tf_hotel_page_tf-hotel-backend-booking',
+			'tf_hotel_page_tf_hotel_enquiry',
 			'tf_tours_page_tf-tour-backend-booking',
+			'tf_tours_page_tf_tours_enquiry',
 			'tf_tours_page_tf_tours_booking',
 			'tf_hotel_page_tf_hotel_booking',
 			'tf_apartment_page_tf_apartment_booking',
+			'tf_carrental_page_tf_carrental_booking',
 			'tf_apartment_page_tf-apartment-backend-booking',
+			'tf_apartment_page_tf_apartment_enquiry',
 			'tourfic-settings_page_tf-setup-wizard'
 		);
-		$tf_options_post_type        = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_email_templates', 'tf_room' );
+		$tf_options_post_type        = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_email_templates', 'tf_carrental', 'tf_room' );
 		$admin_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 		// cdn options
@@ -891,11 +908,12 @@ class Enqueue {
 					'installed'                        => esc_html__( 'Installed', 'tourfic' ),
 					'activated'                        => esc_html__( 'Activated', 'tourfic' ),
 					'install_failed'                   => esc_html__( 'Install failed', 'tourfic' ),
-					'setting_search_no_result'                   => esc_html__( 'No result found!', 'tourfic' ),
+					'setting_search_no_result'         => esc_html__( 'No result found!', 'tourfic' ),
 					/* translators: %s: strong tag */
 					'max_input_vars_notice'            => sprintf( esc_html__( 'WARNING: If you are having trouble saving your settings, please increase the %1$s "PHP Max Input Vars" %2$s value to save all settings.', 'tourfic' ), '<strong>', '</strong>' ),
 					'is_woo_not_active'                => ( ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) || ! is_plugin_active( 'woocommerce/woocommerce.php' ) ),
 					'date_format_change_backend'       => $date_format_change,
+					'no_data_found_with_id'            => esc_html__( 'No results found, with this ID', 'tourfic' ),
 					'i18n'                             => array(
 						'no_services_selected' => esc_html__( 'Please select at least one service.', 'tourfic' ),
 					),

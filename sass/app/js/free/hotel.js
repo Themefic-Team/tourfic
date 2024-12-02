@@ -26,7 +26,7 @@
                     if($('.tf_booking-dates .tf_label-row').length === 1){
                         $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required"><b>' + tf_params.field_required + '</b></span>');
                     }else{
-                        $(".tf-check-in-out-date").ctrigger("click");
+                        $(".tf-check-in-out-date").trigger("click");
                     }
                 }
                 return;
@@ -75,13 +75,18 @@
                     $("#tf-single-hotel-avail .btn-primary.tf-submit").addClass('tf-btn-booking-loading');
                 },
                 success: function (data) {
-                    $('html, body').animate({
-                        scrollTop: $("#rooms").offset().top
-                    }, 500);
-                    $("#rooms").html(data);
-                    $('.tf-room-filter').show();
-                    $("#tf-single-hotel-avail .btn-primary.tf-submit").removeClass('tf-btn-booking-loading');
-                },
+                    if( $("#rooms").length > 0){
+                        $('html, body').animate({
+                            scrollTop: $("#rooms").offset().top
+                        }, 500);
+                        $("#rooms").html(data);
+                        $('.tf-room-filter').show();
+                        $("#tf-single-hotel-avail .btn-primary.tf-submit").removeClass('tf-btn-booking-loading');
+                     } else {
+                         notyf.error(tf_params.no_room_found);
+                         $("#tf-single-hotel-avail .btn-primary.tf-submit").removeClass('tf-btn-booking-loading');
+                     }
+                 },
                 error: function (data) {
                     console.log(data);
                 }
@@ -194,6 +199,7 @@
                             window.location.replace(response.redirect_to);
                         } else {
                             jQuery(document.body).trigger('added_to_cart');
+                            $.fancybox.close();
                         }
 
                     }

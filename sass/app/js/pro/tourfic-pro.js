@@ -838,9 +838,144 @@
             }
         }) 
         $(document).on("mouseleave", '#itn-infowindow', function(e) {
-            
             $(".itinerary-map-popup-img-icons").addClass("popup-arrow-active")
-        })
+        });
+
+        /*
+        * Car Add Extra
+        * @author Jahid
+        */
+        $(document).on('submit', '.tf-car-extra-infos', function (e) {
+            e.preventDefault();
+            let form = $(this);
+            const formData = new FormData(e.target);
+            submitBtn = form.find('.tf-extra-submit'),
+            formData.append('action', 'tf_extra_add_to_booking');
+            formData.append('_nonce', tf_params.nonce);
+
+            let pickup_date = $('.tf_pickup_date').val();
+            let dropoff_date = $('.tf_dropoff_date').val();
+            let pickup_time = $('.tf_pickup_time').val();
+            let dropoff_time = $('.tf_dropoff_time').val();
+
+            formData.append('pickup_date', pickup_date);
+            formData.append('dropoff_date', dropoff_date);
+            formData.append('pickup_time', pickup_time);
+            formData.append('dropoff_time', dropoff_time);
+
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                beforeSend: function () {
+                    form.css({'opacity': '0.5', 'pointer-events': 'none'});
+                    submitBtn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    form.css({'opacity': '1', 'pointer-events': 'all'});
+                    submitBtn.removeClass('tf-btn-loading');
+                    if(response.total_price){
+                        $('.tf-price-header h2').html(response.total_price);
+                    }
+                    $('.tf-added-extra').html(response.extra);
+                    if(response.extra){
+                        $('.tf-extra-added-info').fadeIn();
+                    }
+                }
+            });
+
+        });
+
+        /*
+        * Car Delete Extra
+        * @author Jahid
+        */
+        $(document).on('click', '.tf-single-added-extra .delete', function (e) {
+            e.preventDefault();
+            let $this = $(this);
+            $this.closest('.tf-single-added-extra').remove();
+            var count = $('.tf-added-extra .tf-single-added-extra').length;
+            if(count==0){
+                $('.tf-extra-added-info').hide();
+            }
+        });
+
+        // Customer refund from customer profile
+        $(document).on('click', '.tf-refund-processed', function (e) {
+            e.preventDefault();
+            let $this = $(this);
+            
+            var data = {
+                action: 'tf_customer_refund_request',
+                _nonce: tf_params.nonce,
+                order: $this.closest('.tf-refund-box-content').find('#tf_order_id').val()
+            };
+            
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    $this.addClass('tf-btn-loading');
+                },
+                success: function (data) {
+                    $this.unblock();
+
+                    var response = JSON.parse(data);
+                    if (response.status == 'error') {
+
+                    } else {
+                        if (response.redirect_to) {
+                            window.location.replace(response.redirect_to);
+                        }
+                    }
+                }
+            });
+
+        });
+
+        // Refund Confirmation Popup
+        $(document).on('click', '.tf_refund_request', function (e) {
+            e.preventDefault();
+            let $this = $(this);
+            let href = $this.attr('href');  // Get the URL from the href attribute
+
+            // Create a URL object to easily extract query parameters
+            let url = new URL(href);
+            let order = url.searchParams.get("order");         // Get the 'order' parameter
+            let orderType = url.searchParams.get("order-type");
+
+            var data = {
+                action: 'tf_customer_refund_message',
+                _nonce: tf_params.nonce,
+                order: order,
+                orderType: orderType
+            };
+
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    $this.addClass('tf-btn-loading');
+                },
+                success: function (data) {
+                    $(".tf-refund-message").html(data);
+                    $(".tf-refund-confirmation-box").css('display', 'flex');
+                    $this.removeClass('tf-btn-loading');
+                }
+            });
+
+        });
+
+        // Refund Confirmation Popup close
+        $(document).on('click', '.tf-refund-cancel', function (e) {
+            e.preventDefault();
+            $(".tf-refund-confirmation-box").hide();
+            $(".tf-refund-message").html('');
+        });
     });
 
 })(jQuery);

@@ -701,7 +701,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                                                 <div class="tf-btn">
 													<?php if ( $tf_booking_type == 2 && ! empty( $tf_booking_url ) ): ?>
                                                         <a href="<?php echo esc_url( $tf_booking_url ); ?>" class="btn-styled tf-sml-btn" target="_blank">
-															<?php esc_html_e( 'Book Now', 'tourfic' ); ?>
+															<?php esc_html_e( $tf_hotel_reserve_button_text, 'tourfic' ); ?>
                                                         </a>
 													<?php else: ?>
                                                         <button class="btn-styled hotel-room-availability tf-sml-btn" type="submit">
@@ -764,11 +764,11 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                                             <div class="tf-btn">
 												<?php if ( $tf_booking_type == 2 && ! empty( $tf_booking_url ) && $tf_ext_booking_type == 1 ): ?>
                                                     <a href="<?php echo esc_url( $tf_booking_url ); ?>" class="btn-styled tf-sml-btn" target="_blank">
-														<?php esc_html_e( 'Book Now', 'tourfic' ); ?>
+														<?php esc_html_e( $tf_hotel_reserve_button_text, 'tourfic' ); ?>
                                                     </a>
 												<?php elseif( $tf_booking_type == 2 && $tf_ext_booking_type == 2 && !empty( $tf_ext_booking_code ) ): ?>
                                                     <a href="<?php echo esc_url( "#tf-external-booking-embaded-form" ); ?>" class="btn-styled tf-sml-btn" target="_blank">
-														<?php esc_html_e( 'Book Now', 'tourfic' ); ?>
+														<?php esc_html_e( $tf_hotel_reserve_button_text, 'tourfic' ); ?>
                                                     </a>
 												<?php else: ?>
                                                     <button class="btn-styled hotel-room-availability tf-sml-btn" type="submit">

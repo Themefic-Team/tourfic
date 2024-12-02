@@ -165,6 +165,10 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 								if ( class_exists( $fieldClass ) ) {
 									$_field                            = new $fieldClass( $field, $data, $this->metabox_id );
 									$tf_meta_box_value[ $field['id'] ] = $_field->sanitize();
+
+									if( !empty($field['is_search_able']) ){
+										update_post_meta( $post_id, 'tf_search_'.$field['id'], $_field->sanitize() );
+									}
 								}
 
 							}
@@ -174,8 +178,6 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			}
 
 			if ( ! empty( $tf_meta_box_value ) ) {
-//                tf_var_dump($tf_meta_box_value);
-//                die();
 				update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );
 			} else {
 				delete_post_meta( $post_id, $this->metabox_id );
@@ -193,6 +195,9 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			}
 			if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_apartment" ){
 				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_apartment_opt' ] ) ) ? $_POST[ 'tf_apartment_opt' ] : array();
+			}
+			if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_carrental" ){
+				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_carrental_opt' ] ) ) ? $_POST[ 'tf_carrental_opt' ] : array();
 			}
 			$post_basic_info = array(
 				'post_id' => sanitize_key( $post_id ),

@@ -3,7 +3,12 @@
  * Template: Single Apartment (Full Width)
  */
 
-get_header();
+ if(wp_is_block_theme()){
+    wp_head();
+    block_header_area();
+}else{
+    get_header();
+}
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\Wishlist;
@@ -124,4 +129,9 @@ while ( have_posts() ) : the_post();
 
 endwhile;
 
-get_footer();
+if(wp_is_block_theme()){
+    wp_footer();
+    block_footer_area();
+ }else{
+	get_footer();
+ }

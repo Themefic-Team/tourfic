@@ -1585,7 +1585,7 @@ class Pricing {
 		wp_reset_query();
 
 		return array(
-			'min' => ! empty( $min_max_price ) ? min( $min_max_price ) : 0,
+			'min' => ! empty( $min_max_price ) && min( $min_max_price ) != max( $min_max_price ) ? min( $min_max_price ) : 0,
 			'max' => ! empty( $min_max_price ) ? max( $min_max_price ) : 0,
 		);
 	}

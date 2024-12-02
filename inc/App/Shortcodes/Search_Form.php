@@ -7,6 +7,7 @@ defined( 'ABSPATH' ) || exit;
 use Tourfic\Classes\Helper;
 use Tourfic\Classes\Hotel\Hotel;
 use Tourfic\Classes\Apartment\Apartment;
+use Tourfic\Classes\Car_Rental\Car_Rental;
 
 class Search_Form extends \Tourfic\Core\Shortcodes {
 
@@ -20,6 +21,10 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 				array(
 					'style'     => 'default',
 					'type'      => 'all',
+					'hotel_tab_title' => esc_html__("Hotel", 'tourfic'),
+					'tour_tab_title' => esc_html__("Tour", 'tourfic'),
+					'apartment_tab_title' => esc_html__("Apartment", 'tourfic'),
+					'car_tab_title' => esc_html__("Car", 'tourfic'),
 					'title'     => '',
 					'subtitle'  => '',
 					'classes'   => '',
@@ -65,19 +70,23 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 				<div class="tf_widget-subtitle"><p><?php echo esc_html( $subtitle ); ?></p></div>
 			<?php endif; ?>
 			<!-- Booking Form Tabs -->
-			<div class="tf-booking-form-tab">
+			<div class="tf-booking-form-tab <?php echo esc_attr('design-'.$design); ?>">
 				<?php do_action( 'tf_before_booking_form_tab', $type ) ?>
 
 				<?php if ( ! in_array( 'hotel', $disable_services ) && Helper::tf_is_search_form_tab_type( 'hotel', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
-					<button class="tf-tablinks btn-styled active" data-form-id="tf-hotel-booking-form"><?php esc_html_e( apply_filters("tf_hotel_search_form_tab_button_text", 'Hotel') , 'tourfic' ); ?></button>
+					<button class="tf-tablinks btn-styled active" data-form-id="tf-hotel-booking-form"><?php esc_html_e( apply_filters("tf_hotel_search_form_tab_button_text", $hotel_tab_title) , 'tourfic' ); ?></button>
 				<?php endif; ?>
 
 				<?php if ( ! in_array( 'tour', $disable_services ) && Helper::tf_is_search_form_tab_type( 'tour', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
-					<button class="tf-tablinks btn-styled" data-form-id="tf-tour-booking-form"><?php esc_html_e( apply_filters("tf_tour_search_form_tab_button_text",'Tour') , 'tourfic' ); ?></button>
+					<button class="tf-tablinks btn-styled" data-form-id="tf-tour-booking-form"><?php esc_html_e( apply_filters("tf_tour_search_form_tab_button_text",$tour_tab_title ) , 'tourfic' ); ?></button>
 				<?php endif ?>
 
 				<?php if ( ! in_array( 'apartment', $disable_services ) && Helper::tf_is_search_form_tab_type( 'apartment', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
-					<button class="tf-tablinks btn-styled" data-form-id="tf-apartment-booking-form"><?php esc_html_e( apply_filters("tf_apartment_search_form_tab_button_text", 'Apartment') , 'tourfic' ); ?></button>
+					<button class="tf-tablinks btn-styled" data-form-id="tf-apartment-booking-form"><?php esc_html_e( apply_filters("tf_apartment_search_form_tab_button_text", $apartment_tab_title ) , 'tourfic' ); ?></button>
+				<?php endif ?>
+
+				<?php if ( ! in_array( 'carrentals', $disable_services ) && Helper::tf_is_search_form_tab_type( 'carrentals', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
+					<button class="tf-tablinks btn-styled" data-form-id="tf-car-booking-form"><?php esc_html_e( apply_filters("tf_car_search_form_tab_button_text", $car_tab_title ) , 'tourfic' ); ?></button>
 				<?php endif ?>
 
 				<?php do_action( 'tf_after_booking_form_tab', $type ) ?>
@@ -90,13 +99,17 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 						<?php do_action( 'tf_before_booking_form_mobile_tab', $type ) ?>
 
 						<?php if ( ! in_array( 'hotel', $disable_services ) && Helper::tf_is_search_form_tab_type( 'hotel', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
-							<option value="tf-hotel-booking-form"><?php esc_html_e( apply_filters("tf_hotel_search_form_tab_button_text", 'Hotel') , 'tourfic' ); ?></option>
+							<option value="tf-hotel-booking-form"><?php esc_html_e( apply_filters("tf_hotel_search_form_tab_button_text", $hotel_tab_title) , 'tourfic' ); ?></option>
 						<?php endif; ?>
 						<?php if ( ! in_array( 'tour', $disable_services ) && Helper::tf_is_search_form_tab_type( 'tour', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
-							<option value="tf-tour-booking-form"><?php esc_html_e( apply_filters("tf_tour_search_form_tab_button_text",'Tour') , 'tourfic' ); ?></option>
+							<option value="tf-tour-booking-form"><?php esc_html_e( apply_filters("tf_tour_search_form_tab_button_text",$tour_tab_title) , 'tourfic' ); ?></option>
 						<?php endif ?>
 						<?php if ( ! in_array( 'apartment', $disable_services ) && Helper::tf_is_search_form_tab_type( 'apartment', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
-							<option value="tf-apartment-booking-form"><?php esc_html_e( apply_filters("tf_apartment_search_form_tab_button_text", 'Apartment') , 'tourfic' ); ?></option>
+							<option value="tf-apartment-booking-form"><?php esc_html_e( apply_filters("tf_apartment_search_form_tab_button_text", $apartment_tab_title) , 'tourfic' ); ?></option>
+						<?php endif ?>
+
+						<?php if ( ! in_array( 'carrentals', $disable_services ) && Helper::tf_is_search_form_tab_type( 'carrentals', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
+							<option value="tf-car-booking-form"><?php esc_html_e( apply_filters("tf_car_search_form_tab_button_text", 'Car') , 'tourfic' ); ?></option>
 						<?php endif ?>
 
 						<?php do_action( 'tf_after_booking_form_mobile_tab', $type ) ?>
@@ -137,6 +150,15 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 							Apartment::tf_apartment_search_form_horizontal( $classes, $title, $subtitle, $advanced_opt, $design );
 						}
 						?>
+					</div>
+					<?php
+				}
+
+				if ( ! in_array( 'carrentals', $disable_services ) && Helper::tf_is_search_form_tab_type( 'carrentals', $type ) ) {
+					$advanced_opt = false;
+					?>
+					<div id="tf-car-booking-form" class="tf-tabcontent" <?php echo Helper::tf_is_search_form_single_tab( $type ) ? 'style="display:block"' : '' ?>>
+						<?php Car_Rental::tf_car_search_form_horizontal( $classes, $title, $subtitle, $advanced_opt, $design ); ?>
 					</div>
 					<?php
 				}

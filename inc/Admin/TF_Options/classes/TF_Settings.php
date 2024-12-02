@@ -957,6 +957,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			}
 
+			do_action("tourfic_settings_save_hook");
+
 			echo wp_json_encode( $response );
 			wp_die();
 		}

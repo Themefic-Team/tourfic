@@ -9,17 +9,19 @@ use Tourfic\Classes\Helper;
  * @author AbuHena
  * @since 1.7.0
  */
-function tf_tour_meals() {
-	$itinerary_options = ! empty( Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) ) : '';
-	$all_meals         = [];
-	if ( ! empty( $itinerary_options['meals'] ) && is_array( $itinerary_options['meals'] ) ) {
-		$meals = $itinerary_options['meals'];
-		foreach ( $meals as $key => $meal ) {
-			$all_meals[ $meal['meal'] . $key ] = $meal['meal'];
+if(!function_exists('tf_tour_meals')){
+	function tf_tour_meals() {
+		$itinerary_options = ! empty( Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) ) : '';
+		$all_meals         = [];
+		if ( ! empty( $itinerary_options['meals'] ) && is_array( $itinerary_options['meals'] ) ) {
+			$meals = $itinerary_options['meals'];
+			foreach ( $meals as $key => $meal ) {
+				$all_meals[ $meal['meal'] . $key ] = $meal['meal'];
+			}
 		}
-	}
 
-	return $all_meals;
+		return $all_meals;
+	}
 }
 
 TF_Metabox::metabox( 'tf_tours_opt', array(
@@ -220,6 +222,36 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'field_width' => 100,
 				),
 				array(
+					'id'      => 'description-icon-sections',
+					'type'    => 'heading',
+					'content' => __( 'Description Icons', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'       => 'tf-tour-duration-icon',
+					'type'     => 'icon',
+					'label'    => __( 'Tour Duration icon', 'tourfic' ),
+					'subtitle' => __( 'Choose icon', 'tourfic' ),
+					'default'  => 'ri-history-line',
+					'field_width' => '33',
+				),
+				array(
+					'id'       => 'tf-tour-group-icon',
+					'type'     => 'icon',
+					'label'    => __( 'Tour Group Size icon', 'tourfic' ),
+					'subtitle' => __( 'Choose icon', 'tourfic' ),
+					'default'  => 'ri-team-line',
+					'field_width' => '33',
+				),
+				array(
+					'id'       => 'tf-tour-lang-icon',
+					'type'     => 'icon',
+					'label'    => __( 'Tour Language icon', 'tourfic' ),
+					'subtitle' => __( 'Choose icon', 'tourfic' ),
+					'default'  => 'ri-global-line',
+					'field_width' => '33',
+				),
+				array(
 					'id'      => 'highlights-sections',
 					'type'    => 'heading',
 					'content' => __( 'Tour Highlights', 'tourfic' ),
@@ -257,6 +289,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						'hide_empty' => false,
 					),
 					'default'    => 'none',
+					'inline_add_new' => true
 				),
 				array(
 					'id'    => 'tf-pro-notice',
@@ -516,6 +549,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'dependency'  => array(
 						array( 'type', '==', 'continuous' ),
 					),
+					'default'     => 1,
 					'field_width' => '50',
 				),
 				array(
@@ -635,6 +669,21 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'notice' => 'info',
 					'icon' => 'ri-information-fill',
 					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>minimum days for booking</b>, <b>enable traveler info</b>, <b>external booking</b>, <b>booking without payment</b>, <b>taxable tour</b>, <b>tax class for Woocommerce</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' ) ),
+				),
+
+				array(
+					'id'    => 'tour-cancellation-heading',
+					'type'  => 'heading',
+					'label' => 'Cancellation Condition',
+					'subtitle' => __( 'Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds.', 'tourfic' ),
+				),
+				array(
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-information-fill',
+					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>booking cancellation</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
 				),
 			),
 		),

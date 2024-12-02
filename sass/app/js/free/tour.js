@@ -155,6 +155,8 @@
                                 window.location.replace(response.redirect_to);
                             } else {
                                 jQuery(document.body).trigger('added_to_cart');
+                                $('#tour_room_details_loader').hide();
+                                $('.tf-withoutpayment-booking').removeClass('show');
                             }
 
                         }
@@ -592,8 +594,8 @@
          */
         const allowed_times = tf_params.tour_form_data.allowed_times ? JSON.parse(tf_params.tour_form_data.allowed_times) : [];
         const custom_avail = tf_params.tour_form_data.custom_avail;
-        if (custom_avail == false && allowed_times.length > 0) {
-            populateTimeSelect(allowed_times)
+        if (custom_avail == false && Object.keys(allowed_times).length > 0) {
+            populateTimeSelect(allowed_times); // Pass the entire object, not just the values
         }
 
         // First Day of Week
@@ -603,10 +605,12 @@
             let timeSelect = $('select[name="check-in-time"]');
             let timeSelectDiv = $(".check-in-time-div");
             timeSelect.empty();
-            if (times.length > 0) {
+
+            if (Object.keys(times).length > 0) {
                 timeSelect.append(`<option value="" selected hidden>${tf_params.tour_form_data.select_time_text}</option>`);
-                $.each(times, function (i, v) {
-                    timeSelect.append(`<option value="${i}">${v}</option>`);
+                // Use the keys and values from the object to populate the options
+                $.each(times, function (key, value) {
+                    timeSelect.append(`<option value="${key}">${value}</option>`);
                 });
                 timeSelectDiv.css('display', 'flex');
             } else timeSelectDiv.hide();
@@ -630,7 +634,7 @@
                 $(".tours-check-in-out").val(instance.altInput.value);
                 $('.tours-check-in-out[type="hidden"]').val(dateStr.replace(/[a-z]+/g, '-'));
                 if (custom_avail == true) {
-                    let times = allowed_times.filter((v) => {
+                    let times = Object.values(allowed_times).filter((v) => {
                         let date_str = Date.parse(dateStr);
                         let start_date = Date.parse(v.date.from);
                         let end_date = Date.parse(v.date.to);
@@ -639,6 +643,7 @@
                     times = times.length > 0 && times[0].times ? times[0].times : null;
                     populateTimeSelect(times);
                 }
+                
                 if(tf_params.tour_form_data.tf_tour_selected_template === 'design-2') {
                     dateSetToFields(selectedDates, instance);
                 }

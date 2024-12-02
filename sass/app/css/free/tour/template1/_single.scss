@@ -552,11 +552,13 @@
         border-radius: $tf-brds-default;
         padding: 20px;
         width: 100%;
+        align-items: baseline;
         @media #{$tfmax991}{
             padding: 24px;
         }
         i{
             color: $color-theme;
+            font-size: 20px;
         }
         h3{
             font-size: $font-size-small;
@@ -947,6 +949,10 @@
             width: 100%;
             max-width: 100%;
             max-height: 100%;
+
+            @media #{$tfmax767}{
+                height: 220px;
+            }
         }
     }
 }

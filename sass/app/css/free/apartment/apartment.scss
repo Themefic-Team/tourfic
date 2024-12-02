@@ -904,6 +904,10 @@
 
         #apartment-location{
             border-radius: 8px;
+
+            @media #{$tfmax767}{
+                height: 250px !important;
+            }
         }
 
         iframe {
@@ -1771,4 +1775,8 @@
     h6 {
         margin-bottom: 0;
     }
+}
+
+div.tf-aq-inner .tf-ask-question-head-content h3 {
+    margin: 0px;
 }
