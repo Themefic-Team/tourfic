@@ -534,9 +534,6 @@
                 $("#hotel_room_depo").val(hotel_deposit);
             }
 
-
-            console.log(room_id);
-
             /*if ($(this).closest('.room-submit-wrap').find('input[name=room_id]').val()) {
                 var room_id = $(this).closest('.room-submit-wrap').find('input[name=room_id]').val();
             } else {
@@ -634,6 +631,45 @@
             var $this = $(this);
 
             hotelPopupBooking($this);
+        });
+
+        $(document).on('submit', 'form.tf-room', function (e) {
+            e.preventDefault();
+
+            var $this = $(this);
+            var formData = new FormData(this);
+
+            formData.append('action', 'tf_hotel_booking');
+            formData.append('_ajax_nonce', tf_params.nonce);
+
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (data) {
+                    $this.block({
+                        message: null,
+                        overlayCSS: {
+                            background: "#fff",
+                            opacity: .5
+                        }
+                    });
+                    $('#tour_room_details_loader').show();
+                    $('.tf-notice-wrapper').html("").hide();
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+                complete: function (data) {
+                    $this.unblock()
+                    $('#tour_room_details_loader').hide();
+                    $('.tf-withoutpayment-booking').removeClass('show');
+                    $this.find('.tf-withoutpayment-booking-confirm').addClass('show');
+                },
+            })
         });
 
 

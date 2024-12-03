@@ -3020,6 +3020,7 @@ class Hotel {
                                     <div class="traveller-info billing-details">
 										<?php
 										$confirm_book_fields = ! empty( tfopt( 'hotel-book-confirm-field' ) ) ? tf_data_types( tfopt( 'hotel-book-confirm-field' ) ) : '';
+
 										if ( empty( $confirm_book_fields ) ) {
 											?>
                                             <div class="traveller-single-info tf-confirm-fields">
@@ -3183,7 +3184,7 @@ class Hotel {
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( $airport_service_type || $enable_guest_info ) ) { ?>
                                 <a href="#" class="tf-back-control tf-step-back" data-step="2"><i class="fa fa-angle-left"></i><?php echo __( "Back", "tourfic" ); ?></a>
 							<?php } ?>
-                            <button type="submit" class="tf-hotel-book-confirm-error"><?php echo __( "Continue", "tourfic" ); ?></button>
+                            <button type="submit" class="tf-hotel-book-confirm-error"><?php echo __( "Continueeeeee", "tourfic" ); ?></button>
                         </div>
 					<?php } ?>
                 </div>
@@ -4493,4 +4494,40 @@ class Hotel {
 
 		wp_reset_postdata();
 	}
+
+	static function tf_hotel_without_payment_inventory_data($order_id) {
+
+        # Get completed orders
+        $tf_orders_select = array(
+            'select' => "post_id,order_details,room_id,post_type",
+            'post_type' => 'hotel',
+            'query' => " AND ostatus = 'completed' AND order_id = ".$order_id,
+        );
+        $order_data = Helper::tourfic_order_table_data($tf_orders_select);
+
+        if ( !empty($order_data[0]["post_type"]) && "hotel" == $order_data[0]["post_type"] ) {
+			$post_id   = $order_data[0]["post_id"];
+			$unique_id = $order_data[0]["room_id"];
+			$meta      = get_post_meta( $post_id, 'tf_hotels_opt', true );
+			$rooms     = Room::get_hotel_rooms( $post_id );
+
+			if ( ! empty( $rooms ) ) {
+				foreach ( $rooms as $_room ) {
+					$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
+					# Check if order is for this room
+					if ( $room['unique_id'] == $unique_id ) {
+
+						$old_order_id = $room['order_id'];
+
+						$old_order_id != "" && $old_order_id .= ",";
+						$old_order_id .= $order_id;
+
+						# set old + new data to the oder_id meta
+						$room['order_id'] = $old_order_id;
+						update_post_meta( $_room->ID, 'tf_room_opt', $room );
+					}
+				}
+			}
+		}
+    }
 }
