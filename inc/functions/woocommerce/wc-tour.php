@@ -788,7 +788,7 @@ function tf_tours_booking_function() {
 				 * @param array  $order_data The items in the order.
 				 * @param string $type Order type
 				 */
-				apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $order_data, 'tour' );
+				apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $order_data, '' );
 			}
 		}
 

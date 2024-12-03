@@ -473,7 +473,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 					 * @param array  $order_data The items in the order.
 					 * @param string $type Order type
 					 */
-					apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $order_data, 'tour' );
+					apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $order_data, '' );
 				}
 				$response['success'] = true;
 				$response['message'] = esc_html__( 'Your booking has been successfully submitted.', 'tourfic' );
