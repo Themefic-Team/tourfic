@@ -1256,13 +1256,25 @@ abstract Class TF_Booking_Details {
         $tf_status = !empty($_POST['status']) ? $_POST['status'] : "";
     
         global $wpdb;
-        $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, order_id FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
+        $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, order_id, payment_method FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
     
         // Order Status Update into Database
         if(!empty($tf_order)){
             $wpdb->query(
             $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET ostatus=%s WHERE id=%s", sanitize_title( $tf_status ), sanitize_key($tf_order_id))
             );
+
+            if ( 'offline'== $tf_order->payment_method && ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
+
+				/**
+				 * Filters the data passed to the Google Calendar integration.
+				 *
+				 * @param int    $order_id   The order ID.
+				 * @param array  $order_data The items in the order.
+				 * @param string $type Order type
+				 */
+				apply_filters( 'tf_after_booking_completed_calendar_data', $tf_order->order_id, $order_data='', '' );
+			}
     
             // Woocommerce status
             $order = wc_get_order($tf_order->order_id);
@@ -1383,7 +1395,7 @@ abstract Class TF_Booking_Details {
                     $wpdb->prepare( "DELETE FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $order ) )
                 );
             }else{
-                $tf_single_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, order_id FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $order ) ) );
+                $tf_single_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, order_id, payment_method FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $order ) ) );
     
                 // Order Status Update into Database
                 if(!empty($tf_single_order)){
@@ -1391,6 +1403,18 @@ abstract Class TF_Booking_Details {
                     $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET ostatus=%s WHERE id=%s", sanitize_title( $tf_status ), sanitize_key($order))
                     );
     
+                    if ( 'offline'== $tf_single_order->payment_method && ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
+
+                        /**
+                         * Filters the data passed to the Google Calendar integration.
+                         *
+                         * @param int    $order_id   The order ID.
+                         * @param array  $order_data The items in the order.
+                         * @param string $type Order type
+                         */
+                        apply_filters( 'tf_after_booking_completed_calendar_data', $tf_single_order->order_id, $order_data='', '' );
+                    }
+
                     // Woocommerce status
                     $order = wc_get_order($tf_single_order->order_id);
                     if (!empty($order)) {
