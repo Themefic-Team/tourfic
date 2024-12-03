@@ -805,7 +805,7 @@ abstract Class TF_Booking_Details {
                         </div>
                     </div>
 
-                    <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tf_order_details->post_type == 'tour' ) { ?>
+                    <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tf_order_details->post_type == 'tour' ||  $tf_order_details->post_type == 'hotel' ) { ?>
                     <!-- Visitor Details -->
                     <div class="customers-order-date details-box">
                         <h4>
@@ -996,7 +996,7 @@ abstract Class TF_Booking_Details {
             </div>
         </div>
 
-		<?php if ( "tf_tours" == $this->booking_args['post_type'] ) { ?>
+		<?php if ( "tf_tours" == $this->booking_args['post_type'] || "tf_hotel" == $this->booking_args['post_type'] ) { ?>
             <div class="visitor-details-edit-form">
                 <form class="visitor-details-edit-popup">
                     <div class="tf-visitor-details-edit-header">
