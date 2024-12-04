@@ -4,6 +4,7 @@ namespace Tourfic\App\Without_Payment;
 
 use Tourfic\Core\Without_Payment_Booking;
 use Tourfic\Classes\Hotel\Hotel;
+use Tourfic\Classes\Helper;
 
 // don't call the file directly
 defined( 'ABSPATH' ) || exit;
@@ -223,13 +224,13 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 			# check for deposit
 			if ( $deposit == "true" ) {
 
-				tf_get_deposit_amount( $room_meta, $price_total, $deposit_amount, $has_deposit );
+				Helper::tf_get_deposit_amount( $room_meta, $price_total, $deposit_amount, $has_deposit );
 				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) {
-						// if ( ! empty( $airport_service ) ) {
-						// 	$tf_due_amount = ( $price_total + $airport_service_arr['price'] ) - $deposit_amount;
-						// } else {
-						// 	$tf_due_amount = $price_total - $deposit_amount;
-						// }
+						if ( ! empty( $airport_service ) ) {
+							$tf_due_amount = ( $price_total + $airport_service_arr['price'] ) - $deposit_amount;
+						} else {
+							$tf_due_amount = $price_total - $deposit_amount;
+						}
 					$tf_due_amount = $price_total - $deposit_amount;
 				}
 			}

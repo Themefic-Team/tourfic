@@ -796,7 +796,7 @@ abstract Class TF_Booking_Details {
                                         <tr>
                                             <th><?php esc_html_e("Due Price", "tourfic"); ?></th>
                                             <td>:</td>
-                                            <td><?php echo wp_kses_post($tf_tour_details->due_price); ?></td>
+                                            <td><?php echo wp_kses_post(wc_price($tf_tour_details->due_price)); ?></td>
                                         </tr>
                                         <?php } ?>
                                     </table>
@@ -829,7 +829,7 @@ abstract Class TF_Booking_Details {
                             ?>
                             <div class="tf-grid-single">
                                 <?php /* translators: %s Visitor. */ ?>
-                                <h3><?php echo sprintf( esc_html__("Visitor %s", "tourfic"), $visitor_count ); ?></h3>
+                                <h3><?php echo $tf_order_details->post_type == 'tour' ? sprintf( esc_html__("Visitor %s", "tourfic"), $visitor_count ) : ( $tf_order_details->post_type == 'hotel' ? sprintf( esc_html__("Guest %s", "tourfic"), $visitor_count ) : '' ) ?></h3>
                                 <div class="tf-single-box">
                                     <table class="table" cellpadding="0" callspacing="0">
                                         <?php 
@@ -1001,7 +1001,7 @@ abstract Class TF_Booking_Details {
                 <form class="visitor-details-edit-popup">
                     <div class="tf-visitor-details-edit-header">
                         <h2>
-                            <?php esc_html_e("Edit visitor details", "tourfic"); ?>
+                            <?php $tf_order_details->post_type == 'tour' ? esc_html_e("Edit visitor details", "tourfic") : ( $tf_order_details->post_type == 'hotel' ? esc_html_e("Edit guest details", "tourfic") : '' ); ?>
                         </h2>
                         <div class="tf-booking-times">
                             <span>
@@ -1019,7 +1019,7 @@ abstract Class TF_Booking_Details {
                     <?php 
                     for($traveller_in = 1; $traveller_in <= $tf_total_visitor; $traveller_in++){ ?>
                         <div class="tf-single-tour-traveller tf-single-travel">
-                            <h4><?php echo esc_html__( 'Traveler ', 'tourfic' ) . esc_html($traveller_in) ?></h4>
+                            <h4><?php echo $tf_order_details->post_type == 'tour' ? esc_html__( 'Traveler ', 'tourfic' ) . esc_html($traveller_in) : ( $tf_order_details->post_type == 'hotel' ? esc_html__( 'Guest ', 'tourfic' ) . esc_html($traveller_in) : '' ) ?></h4>
                             <div class="traveller-info">
                             <?php
                             if(empty($traveler_fields)){ ?>

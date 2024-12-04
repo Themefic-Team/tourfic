@@ -2982,9 +2982,9 @@ class Hotel {
                                         </div>
 									<?php } ?>
 									<div class="tf-single-hotel-service tour-extra-single">
-										<label for="service-no">
+										<label for="service-no_<?php echo esc_attr($room_id); ?>">
 											<div class="tf-service-radio">
-												<input type="radio" value="" id="service-no" name="airport_service">
+												<input type="radio" value="" id="service-no_<?php echo esc_attr($room_id); ?>" name="airport_service">
 											</div>
 											<div class="tf-service-content">
 												<h5>

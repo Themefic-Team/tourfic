@@ -601,9 +601,9 @@ function tf_hotel_booking_callback() {
 				'child'                => $child,
 				'children_ages'        => $children_ages,
 				'airport_service_type' => $airport_service,
-				'airport_service_fee'  => wc_price( $airport_service_price_total ),
+				'airport_service_fee'  => isset($airport_service_price_total) ? wc_price( $airport_service_price_total ) : '',
 				'total_price'          => !empty($tf_room_data['tf_hotel_data']['price_total']) ? $tf_room_data['tf_hotel_data']['price_total'] : 0,
-				'due_price'            => '',
+				'due_price'            => !empty($tf_room_data['tf_hotel_data']['due']) ? $tf_room_data['tf_hotel_data']['due'] : '',
 				'visitor_details' => json_encode($tf_without_payment_guest_info),
 			];
 	

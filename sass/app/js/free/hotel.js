@@ -639,8 +639,17 @@
             var $this = $(this);
             var formData = new FormData(this);
 
+            // if ($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()) {
+            //     var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
+            //     var deposit = $(this).closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked');
+            // } else {
+            //     var room = $("#hotel_room_number").val();
+            // }
+            var deposit = $("#hotel_room_depo").val();
+
             formData.append('action', 'tf_hotel_booking');
             formData.append('_ajax_nonce', tf_params.nonce);
+            formData.append('deposit', deposit);
 
 
             $.ajax({
