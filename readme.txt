@@ -351,7 +351,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 = 2.15.3 - 05 December 2024 =
 
-- Added: Integration of Tourfic with Google Calendar.
+- Added: Integration of Tourfic with Google Calendar(Pro).
 - Added: Hotel booking details now sync with Google Calendar.
 - Added: Apartment booking details now sync with Google Calendar.
 - Added: Tour booking details now sync with Google Calendar.
