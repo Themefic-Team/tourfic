@@ -4573,7 +4573,7 @@ TF_Settings::option( 'tf_settings', array(
 									'type'    => 'google-calendar-official-docs',
 									'type'    => 'notice',
 									'style'   => 'success',
-									'content' => __( 'Anything confusing? ', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/pabbly-vs-zapier-integrations/zapier-integration/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+									'content' => __( 'Anything confusing? ', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/settings/integration/#Google_Calendar_Setup" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 								),
 								array(
 									'id'      => 'woocommerce-title',
