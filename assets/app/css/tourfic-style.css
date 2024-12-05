@@ -19136,7 +19136,8 @@ html {
   background: #094c90 !important;
 }
 
-.tf-car-template-container .tf-car-instraction-popup {
+.tf-car-template-container .tf-car-instraction-popup,
+.tf-car-template-container .tf-car-cancellation-popup {
   position: fixed;
   left: 0;
   top: 0;
@@ -19150,7 +19151,10 @@ html {
   display: none;
 }
 
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp {
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp,
+.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp,
+.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp,
+.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp {
   border-radius: 16px;
   background: #FFF;
   padding: 16px 24px;
@@ -19158,17 +19162,34 @@ html {
 }
 
 @media only screen and (max-width: 640px) {
-  .tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp {
+  .tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp,
+  .tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp,
+  .tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp,
+  .tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp {
     width: 100%;
   }
 }
 
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header {
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header,
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-popup-header,
+.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-popup-header,
+.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header,
+.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-popup-header,
+.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-popup-header,
+.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-popup-header,
+.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header {
   margin-bottom: 24px;
   flex-wrap: nowrap;
 }
 
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header h3 {
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header h3,
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-popup-header h3,
+.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-popup-header h3,
+.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header h3,
+.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-popup-header h3,
+.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-popup-header h3,
+.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-popup-header h3,
+.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header h3 {
   color: #27333F;
   font-size: 21px !important;
   font-style: normal !important;
@@ -19178,11 +19199,25 @@ html {
   text-align: left;
 }
 
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header .tf-close-popup {
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header .tf-close-popup,
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-popup-header .tf-close-popup,
+.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-popup-header .tf-close-popup,
+.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header .tf-close-popup,
+.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-popup-header .tf-close-popup,
+.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-popup-header .tf-close-popup,
+.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-popup-header .tf-close-popup,
+.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header .tf-close-popup {
   cursor: pointer;
 }
 
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper {
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper,
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper,
+.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper,
+.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper,
+.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper,
+.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper,
+.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper,
+.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper {
   text-align: left;
   color: #27333F;
   font-size: 16px;
@@ -19195,27 +19230,66 @@ html {
   /* Chrome, Edge, and Safari */
 }
 
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar {
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar,
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar,
+.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar,
+.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar,
+.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar,
+.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar,
+.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar,
+.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar {
   width: 5px;
 }
 
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar-track {
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar-track,
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar-track,
+.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar-track,
+.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar-track,
+.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar-track,
+.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar-track,
+.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar-track,
+.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar-track {
   background: #ffffff;
 }
 
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper::-webkit-scrollbar-thumb {
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper::-webkit-scrollbar-thumb,
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper::-webkit-scrollbar-thumb,
+.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper::-webkit-scrollbar-thumb,
+.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper::-webkit-scrollbar-thumb,
+.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper::-webkit-scrollbar-thumb,
+.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper::-webkit-scrollbar-thumb,
+.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper::-webkit-scrollbar-thumb,
+.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper::-webkit-scrollbar-thumb {
   background-color: #9c9c9c;
   border-radius: 5px;
   border: 3px solid #ffffff;
 }
 
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper p {
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper p,
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper p,
+.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper p,
+.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper p,
+.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper p,
+.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper p,
+.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper p,
+.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper p {
   color: #27333F;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 150%;
   /* 24px */
+}
+
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper table,
+.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper table,
+.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper table,
+.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper table,
+.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper table,
+.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper table,
+.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper table,
+.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper table {
+  margin-bottom: 0px;
 }
 
 .tf-single-car-section .tf-single-car-banner {
@@ -21161,6 +21235,104 @@ html {
   /* 24px */
   margin: 0;
   cursor: pointer;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-cancellation-box {
+  border-radius: 8px;
+  background: #FFF8E5;
+  padding: 16px;
+  margin-top: 16px;
+  display: none;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-cancellation-box {
+    display: none !important;
+  }
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-cancellation-box .tf-cancellation-timeline {
+  margin-top: 12px;
+  border-bottom: 1px solid #C0CCD8;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-cancellation-box .tf-cancellation-timeline .tf-timeline ul {
+  display: flex;
+  margin: 0;
+  list-style: none;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-cancellation-box .tf-cancellation-timeline .tf-timeline ul li {
+  border-left: 1px dotted #27333F;
+  border-right: 1px dotted #27333F;
+  width: 50%;
+  padding: 4px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-cancellation-box .tf-cancellation-timeline .tf-timeline ul li span.free {
+  border-radius: 2px;
+  background: #21A159;
+  color: #E5FAEE;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  /* 14.4px */
+  padding: 4px 8px;
+  display: block;
+  text-align: center;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-cancellation-box .tf-cancellation-timeline .tf-timeline ul li span.paid {
+  border-radius: 2px;
+  background: #D69D00;
+  color: #E5FAEE;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  /* 14.4px */
+  padding: 4px 8px;
+  display: block;
+  text-align: center;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-cancellation-box .tf-cancellation-timeline .tf-timeline-text {
+  padding: 4px 0 16px 0;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-cancellation-box .tf-cancellation-timeline .tf-timeline-text ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-cancellation-box .tf-cancellation-timeline .tf-timeline-text ul li {
+  color: #27333F;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  /* 14.4px */
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-cancellation-box .tf-cancelltion-popup-btn {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-date-select-box .tf-cancellation-box .tf-cancelltion-popup-btn a {
+  color: #0866C4;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 24px */
+  text-decoration: none;
+  display: inline-block;
 }
 
 .tf-single-car-section .tf-single-car-details-warper .tf-car-booking-form .tf-mobile-booking-btn {

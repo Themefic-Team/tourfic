@@ -20,6 +20,8 @@ abstract Class TF_Booking_Details {
         add_action( 'wp_ajax_tf_visitor_details_edit', array( $this, 'tf_visitor_details_edit_function') );
         add_action( 'wp_ajax_tf_checkinout_details_edit', array( $this, 'tf_checkinout_details_edit_function' ) );
         add_action( 'wp_ajax_tf_order_bulk_action_edit', array( $this, 'tf_order_bulk_action_edit_function' ) );
+        add_action( 'wp_ajax_tf_booking_details_popup', array( $this, 'tf_booking_details_popup_function' ) );
+        add_action( 'wp_ajax_tf_booking_calendar_filter', array( $this, 'tf_booking_calendar_filter_function' ) );
     }
 
     public function tf_add_booking_details_submenu() {
@@ -124,6 +126,23 @@ abstract Class TF_Booking_Details {
                     ?>
                     <h1 class="wp-heading-inline"><?php esc_html_e(apply_filters( $this->booking_args["post_type"] . '_booking_details_main_title', $heading_title), 'tourfic'); ?></h1>
                     <div class="tf_header_wrap_button">
+                        <?php 
+                        $_tf_integration_settings = get_option( '_tf_integration_settings' ) ? get_option( '_tf_integration_settings' ) : array();
+                        if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($_tf_integration_settings['google_calendar']['tf_google_calendar']['refresh_token']) && !empty( Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar'] ) && Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar']=="1" ){ ?>
+                        <div class="tf-google-sync-button">
+                            <button class="tf-google-calendar-sync" data-bookingtype="<?php echo esc_attr($this->booking_args["booking_type"]); ?>"><?php esc_html_e("Sync Booking", "tourfic"); ?></button>
+                        </div>
+                        <?php } ?>
+                        <div class="tf_booking_views_button">
+                            <ul>
+                                <li class="<?php echo empty($_GET['nonce']) ? esc_attr('active') : '' ?>" data-view="<?php echo esc_attr("calendar"); ?>">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </li>
+                                <li class="<?php echo !empty($_GET['nonce']) ? esc_attr('active') : '' ?>" data-view="<?php echo esc_attr("list"); ?>">
+                                    <i class="fa-solid fa-list"></i>
+                                </li>
+                            </ul>
+                        </div>
                         <?php
                         /**
                          * Before Hotel booking details table hook
@@ -168,11 +187,89 @@ abstract Class TF_Booking_Details {
 
             <?php }
         }
+        
+        do_action( 'tf_google_calendar_notice_box' );
+        
     }
 
     function tf_booking_details_list( $booking_type, $tf_order_details_result ) {
 		?>
-        <div class="tf-booking-header-filter">
+        <div class="tf-booking-calendar-popup-box">
+            <div class="tf-calendar-popup-box">
+                
+            </div>
+        </div>
+
+        <div class="tf-calendar-booking-header-filter" style="<?php echo !empty($_GET['nonce']) ? esc_attr('display: none') : '' ?>">
+            <div class="tf-left-search-filter">
+                <input type="hidden" id="tf_booking_post_type" value="<?php echo esc_attr($this->booking_args['booking_type']); ?>">
+                <div class="tf-filter-options">
+                    <div class="tf-order-status-filter">
+                        <select class="tf-tour-filter-options tf-calendar-order-payment-status">
+                            <option value=""><?php esc_html_e( "Order status", "tourfic" ); ?></option>
+                            <option value="processing"><?php esc_html_e( "Processing", "tourfic" ); ?></option>
+                            <option value="on-hold"><?php esc_html_e( "On Hold", "tourfic" ); ?></option>
+                            <option value="completed"><?php esc_html_e( "Completed", "tourfic" ); ?></option>
+                            <option value="cancelled"><?php esc_html_e( "Cancelled", "tourfic" ); ?></option>
+                            <option value="refunded"><?php esc_html_e( "Refund", "tourfic" ); ?></option>
+                        </select>
+                    </div>
+                </div>
+
+				<?php if ( "tf_hotel" == $this->booking_args['post_type'] || "tf_tours" == $this->booking_args['post_type'] ) { ?>
+                    <div class="tf-filter-options">
+                        <div class="tf-order-status-filter">
+                            <select class="tf-booking-checkinout-options">
+                                <option value=""><?php esc_html_e( "Checked in status", "tourfic" ); ?></option>
+                                <option value="in"><?php esc_html_e( "Checked in", "tourfic" ); ?></option>
+                                <option value="out"><?php esc_html_e( "Checked out", "tourfic" ); ?></option>
+                            </select>
+                        </div>
+                    </div>
+				<?php } ?>
+
+                <div class="tf-filter-options">
+                    <div class="tf-order-status-filter">
+						<?php
+						if ( "tf_hotel" == $this->booking_args['post_type'] ) {
+							$tf_postwise_filter_class = 'tf-booking-hotel-id-filter-options';
+						} elseif ( "tf_tours" == $this->booking_args['post_type'] ) {
+							$tf_postwise_filter_class = 'tf-booking-post-id-filter-options';
+						} elseif ( "tf_apartment" == $this->booking_args['post_type'] ) {
+							$tf_postwise_filter_class = 'tf-booking-apartment-id-filter-options';
+						} elseif ( "tf_carrental" == $this->booking_args['post_type'] ) {
+							$tf_postwise_filter_class = 'tf-car-id-filter-options';
+						} else {
+							$tf_postwise_filter_class = '';
+						}
+						?>
+                        <select class="tf-tour-filter-options tf-filter-by-post <?php echo esc_attr( $tf_postwise_filter_class ); ?>">
+                            <option value=""><?php echo esc_html( $this->booking_args['booking_title'] ); ?> <?php esc_html_e( "name", "tourfic" ); ?></option>
+							<?php
+							$tf_posts_list       = array(
+								'posts_per_page' => - 1,
+								'post_type'      => $this->booking_args['post_type'],
+								'post_status'    => 'publish'
+							);
+							$tf_posts_list_query = new \WP_Query( $tf_posts_list );
+							if ( $tf_posts_list_query->have_posts() ):
+								while ( $tf_posts_list_query->have_posts() ) : $tf_posts_list_query->the_post();
+									?>
+                                    <option value="<?php echo esc_attr(get_the_ID()); ?>" <?php echo ! empty( $_GET['post'] ) && get_the_ID() == $_GET['post'] ? esc_attr( 'selected' ) : ''; ?>><?php echo esc_html(get_the_title()); ?></option>
+								<?php
+								endwhile;
+							endif;
+							wp_reset_query();
+							?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tf-booking-calendar" data-set="<?php echo !empty($_GET['nonce']) ? esc_attr('yes') : '' ?>" style="<?php echo !empty($_GET['nonce']) ? esc_attr('padding: 0;') : '' ?>"></div>
+
+        <div class="tf-booking-header-filter" style="<?php echo !empty($_GET['nonce']) ? esc_attr('display: flex') : '' ?>">
             <div class="tf-left-search-filter">
                 <div class="tf-bulk-action-form">
                     <div class="tf-filter-options">
@@ -182,7 +279,7 @@ abstract Class TF_Booking_Details {
                                 <option value="trash"><?php esc_html_e( "Trash", "tourfic" ); ?></option>
                                 <option value="processing"><?php esc_html_e( "Processing", "tourfic" ); ?></option>
                                 <option value="on-hold"><?php esc_html_e( "On Hold", "tourfic" ); ?></option>
-                                <option value="completed"><?php esc_html_e( "Complete", "tourfic" ); ?></option>
+                                <option value="completed"><?php esc_html_e( "Completed", "tourfic" ); ?></option>
                                 <option value="cancelled"><?php esc_html_e( "Cancelled", "tourfic" ); ?></option>
                             </select>
                         </div>
@@ -198,7 +295,7 @@ abstract Class TF_Booking_Details {
                             <option value=""><?php esc_html_e( "Order status", "tourfic" ); ?></option>
                             <option value="processing" <?php echo ! empty( $_GET['payment'] ) && "processing" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "Processing", "tourfic" ); ?></option>
                             <option value="on-hold" <?php echo ! empty( $_GET['payment'] ) && "on-hold" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "On Hold", "tourfic" ); ?></option>
-                            <option value="completed" <?php echo ! empty( $_GET['payment'] ) && "completed" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "Complete", "tourfic" ); ?></option>
+                            <option value="completed" <?php echo ! empty( $_GET['payment'] ) && "completed" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "Completed", "tourfic" ); ?></option>
                             <option value="cancelled" <?php echo ! empty( $_GET['payment'] ) && "cancelled" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "Cancelled", "tourfic" ); ?></option>
                             <option value="refunded" <?php echo ! empty( $_GET['payment'] ) && "refunded" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "Refund", "tourfic" ); ?></option>
                         </select>
@@ -268,7 +365,7 @@ abstract Class TF_Booking_Details {
 
         <?php do_action( $this->booking_args["post_type"] . '_before_booking_order_table'); ?>
 
-        <div class="<?php echo apply_filters( $this->booking_args["post_type"] . '_booking_oder_table_class', "tf-order-table-responsive") ?>">
+        <div class="<?php echo apply_filters( $this->booking_args["post_type"] . '_booking_oder_table_class', "tf-order-table-responsive") ?>" style="<?php echo !empty($_GET['nonce']) ? esc_attr('display: block') : '' ?>">
             <table class="wp-list-table table" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>
@@ -902,7 +999,7 @@ abstract Class TF_Booking_Details {
                                             }elseif( "on-hold"==$tf_order_details->ostatus ){
                                                 esc_html_e("On Hold", "tourfic");
                                             }elseif( "completed"==$tf_order_details->ostatus ){
-                                                esc_html_e("Complete", "tourfic");
+                                                esc_html_e("Completed", "tourfic");
                                             }elseif( "cancelled"==$tf_order_details->ostatus ){
                                                 esc_html_e("Cancelled", "tourfic");
                                             }elseif( "refunded"==$tf_order_details->ostatus ){
@@ -921,7 +1018,7 @@ abstract Class TF_Booking_Details {
                                 <li data-value="trash"><?php esc_html_e("Trash", "tourfic"); ?></li>
                                 <li data-value="processing"><?php esc_html_e("Processing", "tourfic"); ?></li>
                                 <li data-value="on-hold"><?php esc_html_e("On Hold", "tourfic"); ?></li>
-                                <li data-value="completed"><?php esc_html_e("Complete", "tourfic"); ?></li>
+                                <li data-value="completed"><?php esc_html_e("Completed", "tourfic"); ?></li>
                                 <li data-value="cancelled"><?php esc_html_e("Cancelled", "tourfic"); ?></li>
                                 <li data-value="refunded"><?php esc_html_e("Refund", "tourfic"); ?></li>
                             </ul>
@@ -1159,13 +1256,25 @@ abstract Class TF_Booking_Details {
         $tf_status = !empty($_POST['status']) ? $_POST['status'] : "";
     
         global $wpdb;
-        $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, order_id FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
+        $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, order_id, payment_method FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
     
         // Order Status Update into Database
         if(!empty($tf_order)){
             $wpdb->query(
             $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET ostatus=%s WHERE id=%s", sanitize_title( $tf_status ), sanitize_key($tf_order_id))
             );
+
+            if ( 'offline'== $tf_order->payment_method && ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
+
+				/**
+				 * Filters the data passed to the Google Calendar integration.
+				 *
+				 * @param int    $order_id   The order ID.
+				 * @param array  $order_data The items in the order.
+				 * @param string $type Order type
+				 */
+				apply_filters( 'tf_after_booking_completed_calendar_data', $tf_order->order_id, $order_data='', '' );
+			}
     
             // Woocommerce status
             $order = wc_get_order($tf_order->order_id);
@@ -1286,7 +1395,7 @@ abstract Class TF_Booking_Details {
                     $wpdb->prepare( "DELETE FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $order ) )
                 );
             }else{
-                $tf_single_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, order_id FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $order ) ) );
+                $tf_single_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, order_id, payment_method FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $order ) ) );
     
                 // Order Status Update into Database
                 if(!empty($tf_single_order)){
@@ -1294,6 +1403,18 @@ abstract Class TF_Booking_Details {
                     $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET ostatus=%s WHERE id=%s", sanitize_title( $tf_status ), sanitize_key($order))
                     );
     
+                    if ( 'offline'== $tf_single_order->payment_method && ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
+
+                        /**
+                         * Filters the data passed to the Google Calendar integration.
+                         *
+                         * @param int    $order_id   The order ID.
+                         * @param array  $order_data The items in the order.
+                         * @param string $type Order type
+                         */
+                        apply_filters( 'tf_after_booking_completed_calendar_data', $tf_single_order->order_id, $order_data='', '' );
+                    }
+
                     // Woocommerce status
                     $order = wc_get_order($tf_single_order->order_id);
                     if (!empty($order)) {
@@ -1304,5 +1425,247 @@ abstract Class TF_Booking_Details {
         }
         die();
     }
-}
 
+    // Booking Details Popup
+    function tf_booking_details_popup_function(){
+
+        // Add nonce for security and authentication.
+        check_ajax_referer('updates', '_ajax_nonce');
+
+        global $wpdb;
+        $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $_POST['id'] ) ) );$tf_billing_details = json_decode($tf_order_details->billing_details);
+        $tf_tour_details = json_decode($tf_order_details->order_details);
+        ?>
+
+        <div class="tf-popup-header">
+            <h3>
+            <?php echo esc_html( get_the_title( $tf_order_details->post_id ) ); ?>
+            <a href="<?php echo esc_url(admin_url() . 'edit.php?post_type=' . $_POST['type'] . '&amp;page=' . $_POST['page'] . '&amp;order_id=' . $tf_order_details->order_id . '&amp;book_id=' . $tf_order_details->id . '&amp;action=preview'); ?>" target="_blank"><i class="fa-solid fa-up-right-from-square"></i></a>
+            </h3>
+            <div class="tf-close">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 5L5 15" stroke="#273F2B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M5 5L15 15" stroke="#273F2B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="tf-popup-content">
+            <?php if(!empty($tf_billing_details)){ ?>
+            <div class="tf-content-single-box">
+                <h4><?php esc_html_e("Customer details", "tourfic"); ?></h4>
+                <div class="tf-content-box">
+                    <?php 
+                    foreach($tf_billing_details as $key=>$customer_info){ ?>
+                        <?php if(!empty($customer_info)){ ?>
+                        <div class="tf-single-content">
+                            <h5><?php echo esc_html(str_replace("_"," ", $key )); ?></h5>
+                            <p><?php echo esc_html( $customer_info ); ?></p>
+                        </div>
+                        <?php } ?>
+                    <?php } ?>
+                </div>
+            </div>
+            <?php } ?>
+
+            <div class="tf-content-single-box">
+                <h4><?php esc_html_e("Other details", "tourfic"); ?></h4>
+                <div class="tf-content-box">
+                    <?php if ( !empty($tf_tour_details->tour_date) ) { ?>
+                    <div class="tf-single-content">
+                        <h5><?php esc_html_e("Tour Date", "tourfic"); ?></h5>
+                        <p><?php echo esc_html($tf_tour_details->tour_date); ?></p>
+                    </div>
+                    <?php } ?>
+                    <?php if(!empty($tf_tour_details->check_in)) { ?>
+                    <div class="tf-single-content">
+                        <h5><?php esc_html_e("Checkin", "tourfic"); ?></h5>
+                        <p><?php echo esc_html($tf_tour_details->check_in); ?></p>
+                    </div>
+                    <?php } ?>
+                    <?php if(!empty($tf_tour_details->check_out)) { ?>
+                    <div class="tf-single-content">
+                        <h5><?php esc_html_e("Checkout", "tourfic"); ?></h5>
+                        <p><?php echo esc_html($tf_tour_details->check_out); ?></p>
+                    </div>
+                    <?php } ?>
+                    <?php if(!empty($tf_tour_details->room_name)) { ?>
+                    <div class="tf-single-content">
+                        <h5><?php esc_html_e("Room Name", "tourfic"); ?></h5>
+                        <p><?php echo esc_html($tf_tour_details->room_name); ?></p>
+                    </div>
+                    <?php } ?>
+                    <?php if ( !empty($tf_tour_details->option) ) { ?>
+                    <div class="tf-single-content">
+                        <h5><?php esc_html_e("Option", "tourfic"); ?></h5>
+                        <p><?php echo esc_html($tf_tour_details->option); ?></p>
+                    </div>
+                    <?php } ?>
+                    <?php if(!empty($tf_tour_details->room)) { ?>
+                    <div class="tf-single-content">
+                        <h5><?php esc_html_e("Room", "tourfic"); ?></h5>
+                        <p><?php echo esc_html($tf_tour_details->room); ?></p>
+                    </div>
+                    <?php } ?>
+                    <?php if ( !empty($tf_tour_details->tour_time) ) { ?>
+                    <div class="tf-single-content">
+                        <h5><?php esc_html_e("Time", "tourfic"); ?></h5>
+                        <p><?php echo esc_html($tf_tour_details->tour_time); ?></p>
+                    </div>
+                    <?php } ?>
+                    <?php 
+                    $book_adult  = !empty( $tf_tour_details->adult ) ? $tf_tour_details->adult : '';
+                    if(!empty($book_adult)){
+                        $tf_total_adult = explode( " × ", $book_adult );
+                    } 
+                    if(!empty($tf_total_adult[0])) {
+                    ?>
+                    <div class="tf-single-content">
+                        <h5><?php esc_html_e("Adult", "tourfic"); ?></h5>
+                        <p><?php echo esc_html($tf_total_adult[0]); ?></p>
+                    </div>
+                    <?php } ?>
+
+                    <?php 
+                    $book_children  = !empty( $tf_tour_details->child ) ? $tf_tour_details->child : '';
+                    if(!empty($book_children)){
+                        $tf_total_children = explode( " × ", $book_children );
+                    }
+                    if(!empty($tf_total_children[0])) {
+                    ?>
+                    <div class="tf-single-content">
+                        <h5><?php esc_html_e("Child", "tourfic"); ?></h5>
+                        <p><?php echo esc_html($tf_total_children[0]); ?></p>
+                    </div>
+                    <?php } ?>
+
+                    <?php 
+                    $book_infants  = !empty( $tf_tour_details->infants ) ? $tf_tour_details->infants : '';
+                    if(!empty($book_infants)){
+                        $tf_total_infants = explode( " × ", $book_infants );
+                    }
+                    if(!empty($tf_total_infants[0])) {
+                    ?>
+                    <div class="tf-single-content">
+                        <h5><?php esc_html_e("Infant", "tourfic"); ?></h5>
+                        <p><?php echo esc_html($tf_total_infants[0]); ?></p>
+                    </div>
+                    <?php } ?>
+
+                    <?php 
+                    $pickup_location  = !empty( $tf_tour_details->pickup_location ) ? $tf_tour_details->pickup_location : '';
+                    if(!empty($pickup_location)){
+                        ?>
+                        <div class="tf-single-content">
+                            <h5><?php esc_html_e("Pickup Location", "tourfic"); ?></h5>
+                            <p><?php echo esc_html($pickup_location); ?></p>
+                        </div>
+                    <?php } ?>
+
+                    <?php 
+                    $pickup_date  = !empty( $tf_tour_details->pickup_date ) ? $tf_tour_details->pickup_date : '';
+                    if(!empty($pickup_date)){
+                        ?>
+                        <div class="tf-single-content">
+                            <h5><?php esc_html_e("Pickup Date", "tourfic"); ?></h5>
+                            <p><?php echo esc_html($pickup_date); ?></p>
+                        </div>
+                    <?php } ?>
+
+                    <?php 
+                    $pickup_time  = !empty( $tf_tour_details->pickup_time ) ? $tf_tour_details->pickup_time : '';
+                    if(!empty($pickup_time)){
+                        ?>
+                        <div class="tf-single-content">
+                            <h5><?php esc_html_e("Pickup Time", "tourfic"); ?></h5>
+                            <p><?php echo esc_html($pickup_time); ?></p>
+                        </div>
+                    <?php } ?>
+
+                    <?php 
+                    $dropoff_location  = !empty( $tf_tour_details->dropoff_location ) ? $tf_tour_details->dropoff_location : '';
+                    if(!empty($dropoff_location)){
+                        ?>
+                        <div class="tf-single-content">
+                            <h5><?php esc_html_e("Dropoff Location", "tourfic"); ?></h5>
+                            <p><?php echo esc_html($dropoff_location); ?></p>
+                        </div>
+                    <?php } ?>
+
+                    <?php 
+                    $dropoff_date  = !empty( $tf_tour_details->dropoff_date ) ? $tf_tour_details->dropoff_date : '';
+                    if(!empty($dropoff_date)){
+                        ?>
+                        <div class="tf-single-content">
+                            <h5><?php esc_html_e("Dropoff Date", "tourfic"); ?></h5>
+                            <p><?php echo esc_html($dropoff_date); ?></p>
+                        </div>
+                    <?php } ?>
+
+                    <?php 
+                    $dropoff_time  = !empty( $tf_tour_details->dropoff_time ) ? $tf_tour_details->dropoff_time : '';
+                    if(!empty($dropoff_time)){
+                        ?>
+                        <div class="tf-single-content">
+                            <h5><?php esc_html_e("Dropoff Time", "tourfic"); ?></h5>
+                            <p><?php echo esc_html($dropoff_time); ?></p>
+                        </div>
+                    <?php } ?>
+                    
+                </div>
+            </div>
+
+        </div>
+       <?php 
+        wp_die();
+    }
+
+    // Booking Filter 
+    function tf_booking_calendar_filter_function(){
+        $response = [];
+        // Add nonce for security and authentication.
+        check_ajax_referer('updates', '_ajax_nonce');
+
+        $tf_payment_perms = ! empty( $_POST['ostatus'] ) ? $_POST['ostatus'] : '';
+        $checkinout_perms = ! empty( $_POST['checkinout'] ) ? $_POST['checkinout'] : '';
+        $tf_post_perms = ! empty( $_POST['post_id'] ) ? $_POST['post_id'] : '';
+        $booking_type = ! empty( $_POST['post_type'] ) ? $_POST['post_type'] : '';
+
+        $tf_filter_query = "";
+        if ( $checkinout_perms ) {
+            $tf_filter_query .= " AND checkinout = '$checkinout_perms'";
+        }
+        if ( $tf_post_perms ) {
+            $tf_filter_query .= " AND post_id = '$tf_post_perms'";
+        }
+        if ( $tf_payment_perms ) {
+            $tf_filter_query .= " AND ostatus = '$tf_payment_perms'";
+        }
+
+        $tf_booking_details_select = array(
+            'select'    => "id, order_id, post_id, check_in, check_out, ostatus",
+            'post_type' => $booking_type,
+            'query'     => " $tf_filter_query ORDER BY id DESC"
+        );
+
+        $tf_booking_filter_result = Helper::tourfic_order_table_data( $tf_booking_details_select );
+
+        $tf_filters_orders = [];
+		if(!empty($tf_booking_filter_result)){
+			foreach($tf_booking_filter_result as $order){
+				$tf_filters_orders[] = array(
+					'title' => '#'.$order['order_id'].' '.html_entity_decode(get_the_title($order['post_id'])),
+					'start' => $order['check_in'],
+					'end' => $order['check_out'],
+					'id' => $order['id'],
+					'status' => $order['ostatus'],
+                    'classNames' => ['tf-order-'.$order['ostatus']]
+				);
+			}
+		}
+        
+        $response['events'] = $tf_filters_orders;
+        echo wp_json_encode( $response );
+        wp_die();
+    }
+}

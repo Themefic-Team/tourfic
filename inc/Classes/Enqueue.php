@@ -827,6 +827,98 @@ class Enqueue {
 			}
 		}
 
+		// Tour Booking Data retrive
+		$tf_tour_orders_select = array(
+			'select'    => "id, order_id, post_id, check_in, check_out, ostatus",
+			'post_type' => 'tour',
+			'query'     => " ORDER BY id DESC"
+		);
+		$tf_tour_order_result = Helper::tourfic_order_table_data( $tf_tour_orders_select );
+		$tf_tours_orders = [];
+		if(!empty($tf_tour_order_result)){
+			foreach($tf_tour_order_result as $order){
+				$tf_tours_orders[] = array(
+					'title' => '#'.$order['order_id'].' '.html_entity_decode(get_the_title($order['post_id'])),
+					'start' => $order['check_in'],
+					'end' => $order['check_out'],
+					'id' => $order['id'],
+					'status' => $order['ostatus'],
+					'post_type' => 'tf_tours',
+					'page' => 'tf_tours_booking',
+					'classNames' => ['tf-order-'.$order['ostatus']]
+				);
+			}
+		}
+		
+		// Hotel Booking Data retrive
+		$tf_hotel_orders_select = array(
+			'select'    => "id, order_id, post_id, check_in, check_out, ostatus",
+			'post_type' => 'hotel',
+			'query'     => " ORDER BY id DESC"
+		);
+		$tf_hotel_order_result = Helper::tourfic_order_table_data( $tf_hotel_orders_select );
+		$tf_hotels_orders = [];
+		if(!empty($tf_hotel_order_result)){
+			foreach($tf_hotel_order_result as $order){
+				$tf_hotels_orders[] = array(
+					'title' => '#'.$order['order_id'].' '.html_entity_decode(get_the_title($order['post_id'])),
+					'start' => $order['check_in'],
+					'end' => $order['check_out'],
+					'id' => $order['id'],
+					'status' => $order['ostatus'],
+					'post_type' => 'tf_hotel',
+					'page' => 'tf_hotel_booking',
+					'classNames' => ['tf-order-'.$order['ostatus']]
+				);
+			}
+		}
+
+		// Apartment Booking Data retrive
+		$tf_apartment_orders_select = array(
+			'select'    => "id, order_id, post_id, check_in, check_out, ostatus",
+			'post_type' => 'apartment',
+			'query'     => " ORDER BY id DESC"
+		);
+		$tf_apartment_order_result = Helper::tourfic_order_table_data( $tf_apartment_orders_select );
+		$tf_apartments_orders = [];
+		if(!empty($tf_apartment_order_result)){
+			foreach($tf_apartment_order_result as $order){
+				$tf_apartments_orders[] = array(
+					'title' => '#'.$order['order_id'].' '.html_entity_decode(get_the_title($order['post_id'])),
+					'start' => $order['check_in'],
+					'end' => $order['check_out'],
+					'id' => $order['id'],
+					'status' => $order['ostatus'],
+					'post_type' => 'tf_apartment',
+					'page' => 'tf_apartment_booking',
+					'classNames' => ['tf-order-'.$order['ostatus']]
+				);
+			}
+		}
+
+		// Car Booking Data retrive
+		$tf_car_orders_select = array(
+			'select'    => "id, order_id, post_id, check_in, check_out, ostatus",
+			'post_type' => 'car',
+			'query'     => " ORDER BY id DESC"
+		);
+		$tf_car_order_result = Helper::tourfic_order_table_data( $tf_car_orders_select );
+		$tf_cars_orders = [];
+		if(!empty($tf_car_order_result)){
+			foreach($tf_car_order_result as $order){
+				$tf_cars_orders[] = array(
+					'title' => '#'.$order['order_id'].' '.html_entity_decode(get_the_title($order['post_id'])),
+					'start' => $order['check_in'],
+					'end' => $order['check_out'],
+					'id' => $order['id'],
+					'status' => $order['ostatus'],
+					'post_type' => 'tf_carrental',
+					'page' => 'tf_carrental_booking',
+					'classNames' => ['tf-order-'.$order['ostatus']]
+				);
+			}
+		}
+
 		$travelfic_toolkit_active_plugins = [];
 		if ( ! is_plugin_active( 'travelfic-toolkit/travelfic-toolkit.php' ) ) {
 			$travelfic_toolkit_active_plugins[] = "travelfic-toolkit";
@@ -834,7 +926,6 @@ class Enqueue {
 
 		$current_active_theme = ! empty( get_option( 'stylesheet' ) ) ? get_option( 'stylesheet' ) : '';
 
-		//Css
 
 		//Color-Picker Css
 		if ( in_array( $screen, $tf_options_screens ) || in_array( $post_type, $tf_options_post_type ) ) {
@@ -973,7 +1064,11 @@ class Enqueue {
 				'imported'       => esc_html__( 'Imported successfully!', 'tourfic' ),
 				'import_confirm' => esc_html__( 'Are you sure you want to import this data?', 'tourfic' ),
 				'import_empty'   => esc_html__( 'Import Data cannot be empty!', 'tourfic' ),
-			)
+			),
+			'tf_tours_orders' => $tf_tours_orders,
+			'tf_hotels_orders' => $tf_hotels_orders,
+			'tf_apartments_orders' => $tf_apartments_orders,
+			'tf_cars_orders' => $tf_cars_orders
 		) );
 	}
 
