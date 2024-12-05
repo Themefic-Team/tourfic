@@ -4166,13 +4166,13 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'integration_heading',
 					'type'     => 'heading',
-					'label'    => __( 'Pabbly & Zapier Settings', 'tourfic' ),
-					'subtitle' => __( 'For integration with other systems, we currently support connections via Pabbly and Zapier only.', 'tourfic' ),
+					'label'    => __( 'Tourfic Integration Settings', 'tourfic' ),
+					'subtitle' => __( 'For integration with other systems, we currently support connections via Pabbly, Zapier and Google Calendar only.', 'tourfic' ),
 				),
 				array(
 					'id'     => 'tf-integration',
 					'type'   => 'tab',
-					'label'  => 'Pabbly & Zapier Settings',
+					'label'  => 'Pabbly, Zapier & Google Calendar Settings',
 					'is_pro' => true,
 					'tabs'   => array(
 						array(
@@ -4578,7 +4578,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'woocommerce-title',
 									'type'    => 'heading',
-									'content' => __( 'WooCommerce Integration', 'tourfic' ),
+									'content' => __( 'Google Calendar Integration', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
