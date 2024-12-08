@@ -4181,6 +4181,11 @@ table.tf-table tr:last-child {
   width: 24px;
 }
 
+.tf-reserve-button {
+  width: 100%;
+  margin-top: 15px;
+}
+
 .tf-field-group.tf_form-inner,
 .tf-field-group {
   position: relative;
