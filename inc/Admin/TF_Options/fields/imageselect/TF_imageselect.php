@@ -15,13 +15,14 @@ if ( ! class_exists( 'TF_imageselect' ) ) {
 				echo '<ul class="tf-image-radio-group ' . esc_attr( $inline ) . '">';
 				foreach ( $this->field['options'] as $key => $value ) {
 					$checked = $key == $this->value ? ' checked' : '';
+                    $disable_checked = !empty($value['disabled']) ? ' disabled' : '';
 					?>
                     <li class="<?php echo isset( $value['is_pro'] ) && $value['is_pro'] ? 'tf-pro-item' : '' ?>">
                         <label class="tf-image-checkbox">
 							<?php if ( isset( $value['is_pro'] ) && $value['is_pro'] ): ?>
                                 <span><?php echo esc_html__('Pro', 'tourfic') ?></span>
                             <?php else : ?>
-								<?php echo '<input type="radio" id="' . esc_attr( $this->field_name() ) . '[' . esc_attr( $key ) . ']" name="' . esc_attr( $this->field_name() ) . '" data-depend-id="' . esc_attr( $this->field['id'] ) . '' . esc_attr( $this->parent_field ) . '" value="' . esc_attr( $key ) . '" ' . esc_attr( $checked ) . ' ' . wp_kses_post( $this->field_attributes() ) . '/>'; ?>
+								<?php echo '<input type="radio" id="' . esc_attr( $this->field_name() ) . '[' . esc_attr( $key ) . ']" name="' . esc_attr( $this->field_name() ) . '" data-depend-id="' . esc_attr( $this->field['id'] ) . '' . esc_attr( $this->parent_field ) . '" value="' . esc_attr( $key ) . '" ' . esc_attr( $checked ) . ' ' . esc_attr($disable_checked). ' '. wp_kses_post( $this->field_attributes() ) . '/>'; ?>
 							<?php endif; ?>
                             <img src="<?php echo esc_url( $value['url'] ); ?>" alt="<?php echo esc_attr( $value['title'] ); ?>">
                         </label>

@@ -153,7 +153,14 @@ class TF_Handle_Emails {
             $booking_details .= '<td style="padding: 15px 0;text-align: left;padding-top: 15px;padding-bottom: 15px;line-height: 1.7;">' . $item['item_name'];
             //item meta data except _order_type,_post_author,_tour_id php loop
             foreach ( $item['item_meta_data'] as $meta_data ) {
-                if ( $meta_data['key'] != '_order_type' && $meta_data['key'] != '_post_author' && $meta_data['key'] != '_tour_id' && $meta_data['key'] != '_post_id' && $meta_data['key'] != '_unique_id' && $meta_data['key'] != '_tour_unique_id' && $meta_data['key'] != '_visitor_details' ) {
+                if ( $meta_data['key'] != '_order_type' && 
+                $meta_data['key'] != '_post_author' && 
+                $meta_data['key'] != '_tour_id' && 
+                $meta_data['key'] != '_post_id' && 
+                $meta_data['key'] != '_unique_id' && 
+                $meta_data['key'] != '_tour_unique_id' && 
+                $meta_data['key'] != '_visitor_details' && 
+                $meta_data['key'] != '_google_calendar' ) {
                     if("room_name"==$meta_data['key']){
                         $tf_email_key = "Room Name";
                     }elseif("number_room_booked"==$meta_data['key']){
@@ -1135,7 +1142,15 @@ class TF_Handle_Emails {
 
         // Add nonce for security and authentication.
 	    check_ajax_referer('updates', '_ajax_nonce');
-        
+
+        // Check if the current user has the required capability.
+        $user = wp_get_current_user();
+		if ((in_array( 'administrator', (array) $user->roles ) && !current_user_can('manage_options')) || 
+            (in_array( 'tf_vendor', (array) $user->roles ) && !current_user_can('tf_vendor_options')) || 
+            (in_array( 'tf_manager', (array) $user->roles ) && !current_user_can('tf_manager_options'))) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
         
         $tf_mail_type = !empty($_POST['status']) ? esc_attr( $_POST['status'] ) : '';
         $order_id = !empty($_POST['order_id']) ? esc_attr( $_POST['order_id'] ) : '';

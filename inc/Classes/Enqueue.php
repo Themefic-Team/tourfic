@@ -231,6 +231,11 @@ class Enqueue {
 		$tf_apartment_min_max_price = ApartmentPricing::get_min_max_price_from_all_apartment();
 
 		/**
+		 * Cars Min and Max Price
+		 */
+		$tf_car_min_max_price = get_cars_min_max_price();
+
+		/**
 		 * Tour booking form
 		 */
 		global $post;
@@ -464,6 +469,7 @@ class Enqueue {
 				'locations'              => Helper::get_terms_dropdown('hotel_location'),
 				'apartment_locations'    => Helper::get_terms_dropdown('apartment_location'),
 				'tour_destinations'      => Helper::get_terms_dropdown('tour_destination'),
+				'car_locations'      	 => Helper::get_terms_dropdown('carrental_location'),
 				'ajax_result_success'    => esc_html__( 'Refreshed Successfully!', 'tourfic' ),
 				'wishlist_add'           => esc_html__( 'Adding to wishlist...', 'tourfic' ),
 				'wishlist_added'         => esc_html__( 'Item added to wishlist.', 'tourfic' ),
@@ -493,6 +499,8 @@ class Enqueue {
 				'date_hotel_search'      => Helper::tfopt( 'date_hotel_search' ),
 				'date_tour_search'       => Helper::tfopt( 'date_tour_search' ),
 				'date_apartment_search'  => Helper::tfopt( 'date_apartment_search' ),
+				'location_car_search'  => Helper::tfopt( 'pick_drop_car_search' ),
+				'date_car_search'  => Helper::tfopt( 'pick_drop_date_car_search' ),
 				'tf_apartment_max_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['max'] : 0,
 				'tf_apartment_min_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['min'] : 0,
 				'tour_form_data'         => isset( $single_tour_form_data ) ? $single_tour_form_data : array(),
@@ -504,6 +512,10 @@ class Enqueue {
 				'apartment_single_template' => $post_type == 'tf_apartment' ? Apartment::template('single', $post_id) : '',
 				'tf_hotel_date_required_msg' => esc_html__('Please select check in and check out date', 'tourfic'),
 				'tf_tour_date_required_msg' => esc_html__('Please select a date', 'tourfic'),
+				'tf_car_max_price' => isset( $tf_car_min_max_price['max'] ) ? $tf_car_min_max_price['max'] : 0,
+				'tf_car_min_price' => isset( $tf_car_min_max_price['min'] ) ? $tf_car_min_max_price['min'] : 0,
+				'tf_car_min_seat' =>  isset( $tf_car_min_max_price['min_seat'] ) ? $tf_car_min_max_price['min_seat'] : 0,
+				'tf_car_max_seat' =>  isset( $tf_car_min_max_price['max_seat'] ) ? $tf_car_min_max_price['max_seat'] : 0,
 			)
 		);
 
@@ -697,11 +709,12 @@ class Enqueue {
 			'tf_tours_page_tf_tours_booking',
 			'tf_hotel_page_tf_hotel_booking',
 			'tf_apartment_page_tf_apartment_booking',
+			'tf_carrental_page_tf_carrental_booking',
 			'tf_apartment_page_tf-apartment-backend-booking',
 			'tf_apartment_page_tf_apartment_enquiry',
 			'tourfic-settings_page_tf-setup-wizard'
 		);
-		$tf_options_post_type        = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_email_templates', 'tf_room' );
+		$tf_options_post_type        = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_email_templates', 'tf_carrental', 'tf_room' );
 		$admin_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 		// cdn options
@@ -858,6 +871,98 @@ class Enqueue {
 			}
 		}
 
+		// Tour Booking Data retrive
+		$tf_tour_orders_select = array(
+			'select'    => "id, order_id, post_id, check_in, check_out, ostatus",
+			'post_type' => 'tour',
+			'query'     => " ORDER BY id DESC"
+		);
+		$tf_tour_order_result = Helper::tourfic_order_table_data( $tf_tour_orders_select );
+		$tf_tours_orders = [];
+		if(!empty($tf_tour_order_result)){
+			foreach($tf_tour_order_result as $order){
+				$tf_tours_orders[] = array(
+					'title' => '#'.$order['order_id'].' '.html_entity_decode(get_the_title($order['post_id'])),
+					'start' => $order['check_in'],
+					'end' => $order['check_out'],
+					'id' => $order['id'],
+					'status' => $order['ostatus'],
+					'post_type' => 'tf_tours',
+					'page' => 'tf_tours_booking',
+					'classNames' => ['tf-order-'.$order['ostatus']]
+				);
+			}
+		}
+
+		// Hotel Booking Data retrive
+		$tf_hotel_orders_select = array(
+			'select'    => "id, order_id, post_id, check_in, check_out, ostatus",
+			'post_type' => 'hotel',
+			'query'     => " ORDER BY id DESC"
+		);
+		$tf_hotel_order_result = Helper::tourfic_order_table_data( $tf_hotel_orders_select );
+		$tf_hotels_orders = [];
+		if(!empty($tf_hotel_order_result)){
+			foreach($tf_hotel_order_result as $order){
+				$tf_hotels_orders[] = array(
+					'title' => '#'.$order['order_id'].' '.html_entity_decode(get_the_title($order['post_id'])),
+					'start' => $order['check_in'],
+					'end' => $order['check_out'],
+					'id' => $order['id'],
+					'status' => $order['ostatus'],
+					'post_type' => 'tf_hotel',
+					'page' => 'tf_hotel_booking',
+					'classNames' => ['tf-order-'.$order['ostatus']]
+				);
+			}
+		}
+
+		// Apartment Booking Data retrive
+		$tf_apartment_orders_select = array(
+			'select'    => "id, order_id, post_id, check_in, check_out, ostatus",
+			'post_type' => 'apartment',
+			'query'     => " ORDER BY id DESC"
+		);
+		$tf_apartment_order_result = Helper::tourfic_order_table_data( $tf_apartment_orders_select );
+		$tf_apartments_orders = [];
+		if(!empty($tf_apartment_order_result)){
+			foreach($tf_apartment_order_result as $order){
+				$tf_apartments_orders[] = array(
+					'title' => '#'.$order['order_id'].' '.html_entity_decode(get_the_title($order['post_id'])),
+					'start' => $order['check_in'],
+					'end' => $order['check_out'],
+					'id' => $order['id'],
+					'status' => $order['ostatus'],
+					'post_type' => 'tf_apartment',
+					'page' => 'tf_apartment_booking',
+					'classNames' => ['tf-order-'.$order['ostatus']]
+				);
+			}
+		}
+
+		// Car Booking Data retrive
+		$tf_car_orders_select = array(
+			'select'    => "id, order_id, post_id, check_in, check_out, ostatus",
+			'post_type' => 'car',
+			'query'     => " ORDER BY id DESC"
+		);
+		$tf_car_order_result = Helper::tourfic_order_table_data( $tf_car_orders_select );
+		$tf_cars_orders = [];
+		if(!empty($tf_car_order_result)){
+			foreach($tf_car_order_result as $order){
+				$tf_cars_orders[] = array(
+					'title' => '#'.$order['order_id'].' '.html_entity_decode(get_the_title($order['post_id'])),
+					'start' => $order['check_in'],
+					'end' => $order['check_out'],
+					'id' => $order['id'],
+					'status' => $order['ostatus'],
+					'post_type' => 'tf_carrental',
+					'page' => 'tf_carrental_booking',
+					'classNames' => ['tf-order-'.$order['ostatus']]
+				);
+			}
+		}
+
 		$travelfic_toolkit_active_plugins = [];
 		if ( ! is_plugin_active( 'travelfic-toolkit/travelfic-toolkit.php' ) ) {
 			$travelfic_toolkit_active_plugins[] = "travelfic-toolkit";
@@ -865,7 +970,6 @@ class Enqueue {
 
 		$current_active_theme = ! empty( get_option( 'stylesheet' ) ) ? get_option( 'stylesheet' ) : '';
 
-		//Css
 
 		//Color-Picker Css
 		if ( in_array( $screen, $tf_options_screens ) || in_array( $post_type, $tf_options_post_type ) ) {
@@ -1003,7 +1107,11 @@ class Enqueue {
 				'imported'       => esc_html__( 'Imported successfully!', 'tourfic' ),
 				'import_confirm' => esc_html__( 'Are you sure you want to import this data?', 'tourfic' ),
 				'import_empty'   => esc_html__( 'Import Data cannot be empty!', 'tourfic' ),
-			)
+			),
+			'tf_tours_orders' => $tf_tours_orders,
+			'tf_hotels_orders' => $tf_hotels_orders,
+			'tf_apartments_orders' => $tf_apartments_orders,
+			'tf_cars_orders' => $tf_cars_orders
 		) );
 	}
 

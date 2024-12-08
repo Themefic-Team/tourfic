@@ -696,34 +696,97 @@
         const tfSelect2Int = select2Selector => {
             let $this = select2Selector,
                 id = $this.attr('id'),
-                placeholder = $this.data('placeholder');
+                placeholder = $this.data('placeholder'),
+                deleteData = $this.data('delete');
 
-            $('#' + id + '').select2({
-                placeholder: placeholder,
-                allowClear: true,
-                templateSelection: function (state) {
-                    if (!state.id) {
+            if(deleteData === 'yes'){
+                $('#' + id + '').select2({
+                    placeholder: placeholder,
+                    allowClear: true,
+                    templateResult: TfFormatOption
+                });
+            }else{
+                $('#' + id + '').select2({
+                    placeholder: placeholder,
+                    allowClear: true,
+                    templateSelection: function (state) {
+                        if (!state.id) {
+                            return state.text;
+                        }
+                
+                        // Get the edit URL from the option's data attribute
+                        var editUrl = $(state.element).data('edit-url');
+                        if(editUrl){
+                            var $state = $(
+                                '<span>' + state.text + ' <a target="_blank" href="'+editUrl+'" class="tf-edit-room"><i class="fa-regular fa-pen-to-square"></i></a></span>'
+                            );
+                            return $state;
+                        }
+                
                         return state.text;
                     }
-            
-                    // Get the edit URL from the option's data attribute
-                    var editUrl = $(state.element).data('edit-url');
-                    if(editUrl){
-                        var $state = $(
-                            '<span>' + state.text + ' <a target="_blank" href="'+editUrl+'" class="tf-edit-room"><i class="fa-regular fa-pen-to-square"></i></a></span>'
-                        );
-                        return $state;
-                    }
-            
-                    return state.text;
-                }
-            });
+                });
+            }
+        
         }
 
         $('select.tf-select2').each(function () {
             var $this = $(this);
             tfSelect2Int($this);
         });
+
+        function TfFormatOption(option) {
+            if (!option.id) {
+              return option.text;
+            }
+
+           var $option = $(
+              '<span style="display: flex; justify-content: space-between;">' + option.text + '<span class="tf-remove-button" data-id="' + option.id + '">Remove</span></span>'
+            );
+    
+            return $option;
+        }
+        $(document).on('select2:selecting', '.tf-select2', function (e) {
+
+            if (e.params.args.originalEvent.target.className === 'tf-remove-button') {
+                e.stopPropagation();
+                e.preventDefault();
+
+                let $this = $(this);
+                let parentDiv = $this.closest('.tf-fieldset');
+                let categoryName = parentDiv.find('#category_name').val();
+                let categorySelect = parentDiv.find('#category_select_field_name').val();
+                var termId=$(e.params.args.originalEvent.target).data("id");
+
+                $.ajax({
+                    url: tf_options.ajax_url,
+                    method: 'POST',
+                    data: {
+                        action: 'tf_delete_category_data',
+                        _nonce: tf_admin_params.tf_nonce,
+                        term_id: termId,
+                        categoryName: categoryName
+                    },
+                    success: function (response) {
+                        var data = JSON.parse(response);
+                        if (data.success) {
+                            // Remove the option and trigger the change event
+                            let $selectField = $('#' + categorySelect);
+
+                            // Remove the option from Select2
+                            $selectField.find('option[value="' + termId + '"]').remove();
+
+                            // Close the Select2 dropdown
+                            $selectField.select2('close');
+
+                        } else {
+                            
+                        }
+                    }
+                });
+            }
+        });
+
 
         $('select.tf-shortcode-select2').each(function(e) {
             let $this = $(this);
@@ -2557,9 +2620,9 @@ var frame, gframe;
             var section_subtitle = $this.find('.tf-shortcode-subtitle-field ').attr('data-subtitle');
 
             var tour_tab_title = $this.find('.tf-shortcode-tour-tab-title-field ').attr('data-tour-tab-title');
-            console.log(tour_tab_title);
             var hotel_tab_title = $this.find('.tf-shortcode-hotel-tab-title-field ').attr('data-hotel-tab-title');
             var apartment_tab_title = $this.find('.tf-shortcode-apartment-tab-title-field ').attr('data-apartment-tab-title');
+            var car_tab_title = $this.find('.tf-shortcode-car-tab-title-field ').attr('data-car-tab-title');
 
             if (option_name != undefined && option_name != '') {
                 data = option_name + '=' + (data.length ? data : '""');
@@ -2581,6 +2644,9 @@ var frame, gframe;
             }
             if (apartment_tab_title != undefined && apartment_tab_title != '' && data.length ) {
                 data = apartment_tab_title + '=' + (data.length ? `"${data}"` : '""');
+            }
+            if (car_tab_title != undefined && car_tab_title != '' && data.length ) {
+                data = car_tab_title + '=' + (data.length ? `"${data}"` : '""');
             }
             arr.push(data);
         });
@@ -2782,6 +2848,21 @@ var frame, gframe;
 
 
         });
+
+        // Select 2 add new category
+        $(document).on('click', '.tf-add-category i', function (event) { 
+            event.preventDefault();
+            $this = $(this);
+            parentDiv = $this.closest('.tf-fieldset');
+            parentDiv.children('#tf-popup-box').css('display', 'flex');
+        });
+
+        // Close Popup
+        $(document).on('click', '.tf-add-category-box-close', function (event) { 
+            event.preventDefault();
+            $('#tf-popup-box').hide();
+        });
+
     });
 
 })(jQuery);

@@ -108,7 +108,7 @@ class Tour_Activities_Filter extends \WP_Widget {
                     'id'           => $this->get_field_id( 'terms' ),
                     'selected'     => $terms, // e.x 86,110,786
                     'multiple'     => true,
-                    'class'        => 'widefat tf-select2',
+                    'class'        => 'widefat',
                     'show_count'   => true
                 ) );
             ?>

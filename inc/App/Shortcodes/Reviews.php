@@ -32,6 +32,7 @@ class Reviews extends \Tourfic\Core\Shortcodes {
 		$type == "hotel" ? $type = "tf_hotel" : $type == '';
 		$type == "tour" ? $type = "tf_tours" : $type == '';
 		$type == "apartment" ? $type = "tf_apartment" : $type == '';
+		$type == "car" ? $type = "tf_carrental" : $type == '';
 		ob_start();
 		?>
 		<div class="tf-single-review tf-reviews-slider">

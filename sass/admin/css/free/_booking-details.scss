@@ -17,7 +17,41 @@
         }
 
         .tf_header_wrap_button{
-            a.tf-booking-export-btn, a.tf-enquiry-export-btn{
+            display: flex;
+            gap: 16px;
+            .tf_booking_views_button{
+                border-radius: 8px;
+                border: 1px solid #EEF6F0;
+                background: #FFF;
+                padding: 4px 8px;
+                float: left;
+                height: 46px;
+                box-sizing: border-box;
+                ul{
+                    margin: 0;
+                    padding: 0;
+                    display: flex;
+                    gap: 8px;
+                    li{
+                        height: 36px;
+                        width: 36px;
+                        margin: 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        i{
+                            font-size: 15px;
+                        }
+                        &.active{
+                            color: #f0f0f1;
+                            background-color: #004e9d;
+                            border-radius: 4px;
+                        }
+                    }
+                }
+            }
+            a.tf-booking-export-btn{
                 padding: 10px 32px;
                 border-radius: 8px;
                 border: 1px solid #003C79;
@@ -35,7 +69,8 @@
                     background-color: #003C79;
                 }
             }            
-            a.tf-booking-btn{
+            a.tf-booking-btn,
+            .tf-google-sync-button button{
                 padding: 10px 32px;
                 border-radius: 8px;
                 border: 1px solid #003C79;
@@ -48,8 +83,8 @@
                 font-weight: 600;
                 line-height: 24px; /* 150% */
                 color: #F0F0F1;
-                margin-left: 15px;
                 transition: .3s all ease;
+                cursor: pointer;
                 &:hover{
                     color: #f0f0f1;
                     background-color: #004E9D;
@@ -58,8 +93,527 @@
         }
     }
 
-    .tf-booking-header-filter{
+    // Booking Details Popup
+    .tf-booking-calendar-popup-box{
+        position: fixed;
+        background-color: rgba(0, 0 ,0 , .3);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 99999;
         display: flex;
+        align-items: center;
+        justify-content: center;
+        display: none;
+        .tf-calendar-popup-box{
+            border-radius: 8px;
+            background: #FFF;
+            box-shadow: 0px 8px 30px 0px rgba(16, 40, 20, 0.10);
+            padding: 16px 24px;
+            width: 750px;
+            .tf-popup-header{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 24px;
+                h3{
+                    color: #151615;
+                    font-size: 17px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 150%; /* 25.5px */
+                    margin: 0;
+                    a{
+                        i{
+                            color: #151615;
+                        }
+                    }
+                }
+                .tf-close{
+                    cursor: pointer;
+                }
+            }
+            .tf-popup-content{
+                display: flex;
+                gap: 24px;
+                flex-direction: column;
+                .tf-content-single-box{
+                    border-radius: 8px;
+                    background: #F3F6F4;
+                    padding: 16px 24px 24px 24px;
+                    h4{
+                        color: #141915;
+                        font-size: 15px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 24px; /* 160% */
+                        margin: 0 0 8px 0;
+                    }
+                    .tf-content-box{
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 8px;
+                        .tf-single-content{
+                            width: calc(33% - 3px);
+                            h5{
+                                margin: 0 0 5px 0;
+                                font-size: 14px;
+                                text-transform: capitalize;
+                            }
+                            p{
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Booking Calendar
+    #tf-booking-calendar{
+        border-radius: 16px;
+        background: #FFF;
+        padding: 24px;
+        padding-top: 30px;
+        position: relative;
+
+        .fc-header-toolbar{
+            .fc-toolbar-chunk{
+                &:nth-child(1){
+                    >div{
+                        display: flex;
+                        align-items: center;
+                        gap: 28px;
+                        justify-content: center;
+                        button{
+                            height: 40px;
+                            width: 40px;
+                            border-radius: 8px;
+                            border: 0.2px solid #003c7929;
+                            background: #FFF;
+                            padding: 0;
+                            transition: .3s all ease;
+                            &:focus{
+                                box-shadow: none;
+                                outline: none;
+                            }
+                            &:hover{
+                                background-color: #003c79;
+                                border-color: #003c79;
+                                span{
+                                    &::before{
+                                        color: #fff;
+                                    }
+                                }
+                            }
+                            span{
+                                margin: 0px !important;
+                                height: 100%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                width: 100%;
+                                &::before{
+                                    color: #003c79;
+                                    border-color: #003c79;
+                                    border-radius: 8px;
+                                    font-size: 20px;
+                                    transition: .3s all ease;
+                                }
+                            }
+                        }
+                    }
+                }
+                &:nth-child(2){
+                    text-align: center;
+                    >div{
+                        display: flex;
+                        align-items: center;
+                        gap: 28px;
+                        justify-content: center;
+                        h2{
+                            color: #1d2327 !important;
+                            font-size: 22px;
+                            font-style: normal;
+                            font-weight: 400 !important;
+                            line-height: 112%;
+                            margin: 0 !important;
+                        }
+                    }
+                }
+                &:nth-child(3){
+                    .fc-button-group{
+                        border-radius: 24px;
+                        border: 1px solid #003c7929;
+                        background: #FFF;
+                        padding: 4px;
+                        display: flex;
+                        gap: 8px;
+                        button{
+                            background: #FFF;
+                            color: #131c25;
+                            font-size: 15px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 24px; /* 160% */
+                            border: 0px solid;
+                            padding: 8px 12px;
+                            border-radius: 24px;
+                            text-transform: capitalize;
+                            &:focus{
+                                box-shadow: none;
+                                outline: none;
+                            }
+                            &.fc-button-active{
+                                background: #003c7929;
+                                color: #003c79;
+                                position: relative;
+                                padding-left: 27px;
+                                &::before{
+                                    position: absolute;
+                                    content: "";
+                                    left: 12px;
+                                    height: 7px;
+                                    width: 7px;
+                                    background: #003c79;
+                                    border-radius: 50%;
+                                    top: 50%;
+                                    margin-top: -3.5px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+        table{
+            border: 0px solid;
+            .fc-scrollgrid-section-header{
+                .fc-scroller-harness{
+                    .fc-scroller{
+                        overflow: hidden !important;
+                    }
+                }
+                th{
+                    border: 0px solid;
+                    .fc-col-header{
+                        tr{
+                            th{
+                                border: 0px solid;
+                                a{
+                                    color: #131c25;
+                                    font-size: 15px;
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    line-height: 24px; /* 160% */
+                                    padding: 8px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            .fc-scrollgrid-section-body{
+                > td{
+                    border: 0px solid;
+                }
+                table{
+                    tr{
+                        td{
+                            border: 1px solid #003c7929;
+                            padding: 8px;
+                            background-color: transparent;
+                            .fc-daygrid-day-top{
+                                a{
+                                    color: #211319;
+                                    font-size: 15px;
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    line-height: 24px; /* 160% */
+                                }
+                            }
+                            .fc-daygrid-day-events{
+                                .fc-daygrid-event-harness{
+                                    margin-bottom: 8px;
+                                    &:last-child{
+                                        margin-bottom: 0px;
+                                    }
+                                    a{
+                                        border: 0px solid;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        font-size: 13px;
+                                        font-style: normal;
+                                        font-weight: 600;
+                                        line-height: 20px; /* 153.846% */
+                                        color: #002AB3;
+                                        width: 100%;
+                                        display: block;
+                                        line-height: 15px;
+                                        background: transparent;
+                                        cursor: pointer;
+                                        .tf-booking-single-popup{
+                                            padding: 6px 8px;
+                                            // border-left: 1px solid #002AB3;
+                                            // background: #EBEFFF;
+                                            border-radius: 8px;
+                                            // span{
+                                            //     color: #002AB3;
+                                            // }
+                                        }
+                                    }
+
+                                    .tf-order-completed {
+                                        background: #c8d7e1 !important;
+                                        border-color: #c8d7e1 !important;
+
+                                        .fc-event-main{
+                                            color: #003d66 !important
+                                        }
+                                    }
+
+                                    .tf-order-on-hold {
+                                        background: #f8dda7 !important;
+                                        border-color: #f8dda7 !important;
+
+                                        .fc-event-main{
+                                            color: #573b00 !important
+                                        }
+                                    }
+
+                                    .tf-order-cancelled {
+                                        background: #e5e5e5 !important;
+                                        border-color: #e5e5e5 !important;
+
+                                        .fc-event-main{
+                                            color: #454545 !important
+                                        }
+                                    }
+
+                                    .tf-order-failed {
+                                        background: #eba3a3 !important;
+                                        border-color: #eba3a3 !important;
+
+                                        .fc-event-main{
+                                            color: #570000 !important
+                                        }
+                                    }
+
+                                    .tf-order-processing {
+                                        background: #c6e1c6 !important;
+                                        border-color: #c6e1c6 !important;
+
+                                        .fc-event-main{
+                                            color: #2c4700 !important
+                                        }
+                                    }
+
+                                    .tf-order-trash {
+                                        background: #eba3a3 !important;
+                                        border-color: #eba3a3 !important;
+
+                                        .fc-event-main{
+                                            color: #550202 !important
+                                        }
+                                    }
+                                }
+                            }
+
+                            .fc-daygrid-day-bottom{
+                                a.fc-more-link{
+                                    border-radius: 16px;
+                                    border: 1px solid #004e9d;
+                                    background: #003c791a;
+                                    overflow: hidden;
+                                    color: #004e9d;
+                                    text-overflow: ellipsis;
+                                    font-size: 13px;
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    line-height: 20px; /* 153.846% */
+                                    padding: 6px 8px;
+                                }
+                            }
+                        }
+                        td.fc-day-other{
+                            .fc-daygrid-day-top{
+                                opacity: 1;
+                                a{
+                                    color: #131c2559;
+                                }
+                            }
+                        }
+                    }
+                }
+                .fc-timegrid-body{
+                    .fc-timegrid-cols{
+                       table{
+                        tbody{
+                            tr{
+                                td{
+                                    .fc-timegrid-col-events{
+                                        .fc-timegrid-event-harness{
+                                            width: 100% !important;
+
+                                            &:last-child{
+                                                margin-bottom: 0px;
+                                            }
+                                            a{
+                                                border: 0px solid;
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;
+                                                font-size: 13px;
+                                                font-style: normal;
+                                                font-weight: 600;
+                                                line-height: 20px; /* 153.846% */
+                                                padding: 0;
+                                                background: transparent;
+                                                b{
+                                                    padding: 6px 8px;
+                                                    color: #002AB3;
+                                                    width: 100%;
+                                                    border-left: 1px solid #002AB3;
+                                                    background: #EBEFFF;
+                                                    border-radius: 8px;
+                                                    display: block;
+                                                    line-height: 15px;
+                                                    cursor: pointer;
+                                                }
+                                                b.confirmed{
+                                                    color: #17723F;
+                                                    border-left: 1px solid #17723F;
+                                                    background: #E6FAEE;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                       }
+                    }
+                }
+            }
+        }
+
+        .fc-theme-standard .fc-popover{
+
+            .fc-popover-body {
+                .fc-daygrid-event-harness{
+                    margin-bottom: 8px;
+                    &:last-child{
+                        margin-bottom: 0px;
+                    }
+                    a{
+                        border: 0px solid;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        font-size: 13px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 20px; /* 153.846% */
+                        padding: 0;
+                        background: transparent;
+                        b{
+                            padding: 6px 8px;
+                            color: #002AB3;
+                            width: 100%;
+                            border-left: 1px solid #002AB3;
+                            background: #EBEFFF;
+                            border-radius: 8px;
+                            display: block;
+                            line-height: 15px;
+                            cursor: pointer;
+                        }
+                        b.confirmed{
+                            color: #17723F;
+                            border-left: 1px solid #17723F;
+                            background: #E6FAEE;
+                        }
+
+                        &.tf-order-completed {
+                            background: #c8d7e1 !important;
+                            border-color: #c8d7e1 !important;
+
+                            .fc-event-main{
+                                color: #003d66 !important
+                            }
+                        }
+
+                        &.tf-order-on-hold {
+                            background: #f8dda7 !important;
+                            border-color: #f8dda7 !important;
+
+                            .fc-event-main{
+                                color: #573b00 !important
+                            }
+                        }
+
+                        &.tf-order-cancelled {
+                            background: #e5e5e5 !important;
+                            border-color: #e5e5e5 !important;
+
+                            .fc-event-main{
+                                color: #454545 !important
+                            }
+                        }
+
+                        &.tf-order-failed {
+                            background: #eba3a3 !important;
+                            border-color: #eba3a3 !important;
+
+                            .fc-event-main{
+                                color: #570000 !important
+                            }
+                        }
+
+                        &.tf-order-processing {
+                            background: #c6e1c6 !important;
+                            border-color: #c6e1c6 !important;
+
+                            .fc-event-main{
+                                color: #2c4700 !important
+                            }
+                        }
+
+                        &.tf-order-trash {
+                            background: #eba3a3 !important;
+                            border-color: #eba3a3 !important;
+
+                            .fc-event-main{
+                                color: #550202 !important
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        .fc-dayGridMonth-view{
+            .fc-scrollgrid-section-body{
+                table{
+                    tr{
+                        td{
+                            height: 150px;
+                            .fc-daygrid-day-events{
+                                left: 8px;
+                                right: 8px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .tf-booking-header-filter,
+    .tf-calendar-booking-header-filter{
+        display: none;
         justify-content: space-between;
         margin: 32px 0px;
         @media #{$max1199}{
@@ -228,9 +782,13 @@
             }
         }
     }
+    .tf-calendar-booking-header-filter{
+        display: flex;
+    }
     .tf-order-table-responsive{
         width: 100%;
         overflow: auto;
+        display: none;
         .wp-list-table{
             border-radius: 12px;
             background: #EDEDF8;
@@ -502,11 +1060,15 @@
                 font-style: normal;
                 font-weight: 600;
                 line-height: 24px;
-                display: flex;
+                display: inline-flex;
                 align-items: center;
                 text-decoration: none;
                 svg{
                     margin-right: 8px;
+                }
+                &:focus{
+                    box-shadow: none;
+                    outline: none;
                 }
             }
         }

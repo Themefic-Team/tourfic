@@ -106,7 +106,7 @@ class Tour_Attraction_Filter extends \WP_Widget {
                 'name'         => $this->get_field_name( 'terms' ),
                 'id'           => $this->get_field_id( 'terms' ),
                 'selected'     => $terms,  // e.x 86,110,786
-                'class'        => 'widefat tf-select2',
+                'class'        => 'widefat',
                 'show_count'   => true,
                 'multiple' => true
             ) );

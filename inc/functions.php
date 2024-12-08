@@ -24,6 +24,14 @@ function tf_file_missing( $files = '' ) {
 add_action( 'admin_notices', 'tf_file_missing' );
 add_action( 'plugins_loaded', 'tf_add_elelmentor_addon' );
 
+/**
+ * Car Functions
+ */
+if ( file_exists( TF_INC_PATH . 'functions/functions-car.php' ) ) {
+	require_once TF_INC_PATH . 'functions/functions-car.php';
+} else {
+	tf_file_missing( TF_INC_PATH . 'functions/functions-car.php' );
+}
 
 /*
  * Temporary functions
@@ -811,7 +819,7 @@ if(!function_exists('tf_average_ratings')){
 if(!function_exists('tf_average_rating_change_on_base')){
 	function tf_average_rating_change_on_base( $rating, $base_rate = 5 ) {
 
-        $settings_base = ! empty ( tfopt( 'r-base' ) ) ? tfopt( 'r-base' ) : 5;
+        $settings_base = ! empty ( Helper::tfopt( 'r-base' ) ) ? Helper::tfopt( 'r-base' ) : 5;
         $base_rate     = ! empty ( $base_rate ) ? $base_rate : 5;
     
         if ( $settings_base != $base_rate ) {

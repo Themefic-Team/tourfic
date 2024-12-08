@@ -145,10 +145,14 @@ abstract class Post_Type {
 			if( !empty( $this->post_args['name'] ) && $this->post_args['name'] == 'Apartments' ) {
 				$hidden_taxonomies = array( 'Features' );
 			}
-			else if( !empty( $this->post_args['name'] ) && $this->post_args['name'] == 'Tours' ) {
+			if( !empty( $this->post_args['name'] ) && $this->post_args['name'] == 'Tours' ) {
 				$hidden_taxonomies = array( 'Features', "Types" );
-			} else {
+			}
+			if( !empty( $this->post_args['name'] ) && $this->post_args['name'] == 'Hotels' ) {
 				$hidden_taxonomies = array( 'Features' );
+			}
+			if( !empty( $this->post_args['name'] ) && $this->post_args['name'] == 'Car Rentals' ) {
+				$hidden_taxonomies = array( 'Brand / Make', "Fuel Type", 'Year' );
 			}
 
 			$tf_tax_args = array(
@@ -157,7 +161,7 @@ abstract class Post_Type {
 				'publicly_queryable'    => true,
 				'hierarchical'          => true,
 				'show_ui'               => true,
-				'show_in_menu'          => true,
+				'show_in_menu'          => $tax_args['show_in_menu'],
 				'show_in_nav_menus'     => true,
 				'query_var'             => true,
 				'rewrite'               => array( 'slug' => $tax_args['rewrite_slug'], 'with_front' => false ),
