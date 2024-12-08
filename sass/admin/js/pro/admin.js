@@ -394,6 +394,55 @@
 
     });
 
+    /**
+     * Reset Google Calendar Access Token
+     */
+    $(document).on('click', '.tf-reset-calendar-token', function (e) {
+        e.preventDefault();
+        let btn = $(this);
+
+        $.ajax({
+            url: tf_pro_params.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'tf_google_calendar_reset_token',
+                _nonce: tf_pro_params.tf_pro_nonce,
+            },
+            beforeSend: function (response) {
+                btn.addClass('tf-btn-loading');
+            },
+            success: function (response) {
+                location.reload();
+            },
+        });
+
+    });
+
+    /**
+     * Woocommerce Order Sync to Google Calendar
+     */
+    $(document).on('click', '.tf-google-calendar-sync', function (e) {
+        e.preventDefault();
+        let btn = $(this);
+
+        $.ajax({
+            url: tf_pro_params.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'tf_google_calendar_sync',
+                type: $(this).attr('data-bookingtype'),
+                _nonce: tf_pro_params.tf_pro_nonce,
+            },
+            beforeSend: function (response) {
+                btn.addClass('tf-btn-loading');
+            },
+            success: function (response) {
+                btn.removeClass('tf-btn-loading');
+            },
+        });
+
+    });
+
     let urlParams = new URLSearchParams(window.location.search);
     let mapping   = urlParams.get('step');
     if( mapping == 'tour_mapping' ){

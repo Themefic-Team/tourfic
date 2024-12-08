@@ -4166,13 +4166,13 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'integration_heading',
 					'type'     => 'heading',
-					'label'    => __( 'Pabbly & Zapier Settings', 'tourfic' ),
-					'subtitle' => __( 'For integration with other systems, we currently support connections via Pabbly and Zapier only.', 'tourfic' ),
+					'label'    => __( 'Tourfic Integration Settings', 'tourfic' ),
+					'subtitle' => __( 'For integration with other systems, we currently support connections via Pabbly, Zapier and Google Calendar only.', 'tourfic' ),
 				),
 				array(
 					'id'     => 'tf-integration',
 					'type'   => 'tab',
-					'label'  => 'Pabbly & Zapier Settings',
+					'label'  => 'Pabbly, Zapier & Google Calendar Settings',
 					'is_pro' => true,
 					'tabs'   => array(
 						array(
@@ -4558,6 +4558,66 @@ TF_Settings::option( 'tf_settings', array(
 									'subtitle'   => __( 'Enter Your Zapier Webhook for New Customer.', 'tourfic' ),
 									'dependency' => array(
 										array( 'tf-new-customer-zapier', '==', 'true' ),
+									),
+									'is_pro'     => true,
+								),
+							),
+						),
+						array(
+							'id'     => 'google_calendar_integration',
+							'title'  => __( 'Google Calendar Setup', 'tourfic' ),
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'      => 'google-calendar-official-docs',
+									'type'    => 'google-calendar-official-docs',
+									'type'    => 'notice',
+									'style'   => 'success',
+									'content' => __( 'Anything confusing? ', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/settings/integration/#Google_Calendar_Setup" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+								),
+								array(
+									'id'      => 'woocommerce-title',
+									'type'    => 'heading',
+									'content' => __( 'Google Calendar Integration', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'        => 'tf-new-order-google-calendar',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Google Calendar for Booking?', 'tourfic' ),
+									'subtitle'  => __( 'Connect Google Calendar with WooCommerce Booking.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true,
+								),
+								array(
+									'id'         => 'tf-google-calendar-client_id',
+									'type'       => 'text',
+									'label'      => __( 'Client Id', 'tourfic' ),
+									'subtitle'   => __( 'Enter Your Google Calendar Client Id for Booking.', 'tourfic' ),
+									'dependency' => array(
+										array( 'tf-new-order-google-calendar', '==', 'true' ),
+									),
+									'is_pro'     => true,
+								),
+								array(
+									'id'         => 'tf-google-calendar-secret_key',
+									'type'       => 'text',
+									'label'      => __( 'Secret Key', 'tourfic' ),
+									'subtitle'   => __( 'Enter Your Google Calendar Secret Key for Booking.', 'tourfic' ),
+									'dependency' => array(
+										array( 'tf-new-order-google-calendar', '==', 'true' ),
+									),
+									'is_pro'     => true,
+								),
+								array(
+									'id'         => 'tf-google-calendar-redirect_url',
+									'type'       => 'text',
+									'label'      => __( 'Redirect Url', 'tourfic' ),
+									'subtitle'   => __( 'Enter Your Google Calendar Redirect Url for Booking.', 'tourfic' ),
+									'dependency' => array(
+										array( 'tf-new-order-google-calendar', '==', 'true' ),
 									),
 									'is_pro'     => true,
 								),

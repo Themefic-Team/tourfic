@@ -223,7 +223,7 @@ function tf_car_booking_callback() {
 				'order_details'    => $order_details,
 				'payment_method'   => 'offline',
 				'customer_id'	   => $tf_offline_user_id,
-				'status'           => 'completed',
+				'status'           => 'processing',
 				'order_date'       => gmdate( 'Y-m-d H:i:s' ),
 			);
 			$response['without_payment'] = 'true';
@@ -231,6 +231,18 @@ function tf_car_booking_callback() {
 			
 			if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($order_id) ) {
 				do_action( 'tf_offline_payment_booking_confirmation', $order_id, $order_data );
+
+				if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
+					
+					/**
+					 * Filters the data passed to the Google Calendar integration.
+					 *
+					 * @param int    $order_id   The order ID.
+					 * @param array  $order_data The items in the order.
+					 * @param string $type Order type
+					 */
+					apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $order_data, '' );
+				}
 			}
 
 		}else{

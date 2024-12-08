@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.7
-Stable tag: 2.15.2
+Stable tag: 2.15.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -344,9 +344,20 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 19. Enquiry Form Data
 20. Our Support Channels
 21. Email Piping (Pro)
-22. Car Rental
+22. Car Rental Service
+23. Sync Booking with Google Calendar(Pro)
 
 == Changelog ==
+
+= 2.15.3 - 05 December 2024 =
+
+- Added: Integration of Tourfic with Google Calendar(Pro).
+- Added: Hotel booking details now sync with Google Calendar.
+- Added: Apartment booking details now sync with Google Calendar.
+- Added: Tour booking details now sync with Google Calendar.
+- Added: Car booking details now sync with Google Calendar.
+- Improvement: Backend calendar view for booking details.
+- Improvement: System stability is further optimized.
 
 = 2.15.2 - 27 November 2024 =
 
@@ -409,15 +420,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Improvement: Redesigned Tourfic Ask Question popup.
 - Improvement: Streamlined Enquiry Details design.
 - Improvement: Direct reply option for Enquiry (Pro).
-
-= 2.13.14 - 30 October 2024 =
-
-- Improvement: Added new search queries for external booking
-- Improvement: Option to change the search tab title on Elementor widgets
-- Improvement: Added new arguments for the search form in the Shortcode Generator
-- Improvement: New arguments for the search form Shortcode hotel_tab_title, tour_tab_title, apartment_tab_title
-- Compatibility: Tourfic Direct Checkout now compatible with Instantio Plugin
-- Fix: Resolved calendar issue in Design 2 of the apartment search form
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 

@@ -45,7 +45,7 @@ class Hotel_Enquiry extends \Tourfic\Core\Enquiry {
                         <img src="<?php echo esc_url(TF_ASSETS_URL); ?>app/images/loader.gif" alt="Loader">
                     </div>
                     <hr class="wp-header-end">
-                    <div class="tf_booking_wrap_header">
+                    <div class="tf_enquiry_details_wrap_header">
                         <h1 class="wp-heading-inline"><?php echo esc_html( apply_filters( 'tf_hotel_enquiry_page_heading', __( 'Hotel Enquiry Details', 'tourfic' ) ) ); ?></h1>
                         <div class="tf_header_wrap_button">
                             <?php

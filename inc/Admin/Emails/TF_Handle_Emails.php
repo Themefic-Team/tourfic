@@ -153,7 +153,14 @@ class TF_Handle_Emails {
             $booking_details .= '<td style="padding: 15px 0;text-align: left;padding-top: 15px;padding-bottom: 15px;line-height: 1.7;">' . $item['item_name'];
             //item meta data except _order_type,_post_author,_tour_id php loop
             foreach ( $item['item_meta_data'] as $meta_data ) {
-                if ( $meta_data['key'] != '_order_type' && $meta_data['key'] != '_post_author' && $meta_data['key'] != '_tour_id' && $meta_data['key'] != '_post_id' && $meta_data['key'] != '_unique_id' && $meta_data['key'] != '_tour_unique_id' && $meta_data['key'] != '_visitor_details' ) {
+                if ( $meta_data['key'] != '_order_type' && 
+                $meta_data['key'] != '_post_author' && 
+                $meta_data['key'] != '_tour_id' && 
+                $meta_data['key'] != '_post_id' && 
+                $meta_data['key'] != '_unique_id' && 
+                $meta_data['key'] != '_tour_unique_id' && 
+                $meta_data['key'] != '_visitor_details' && 
+                $meta_data['key'] != '_google_calendar' ) {
                     if("room_name"==$meta_data['key']){
                         $tf_email_key = "Room Name";
                     }elseif("number_room_booked"==$meta_data['key']){
