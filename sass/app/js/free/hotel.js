@@ -141,7 +141,7 @@
                 var room = $("#hotel_room_number").val();
                 var deposit = $("#hotel_room_depo").val();
             }
-            var airport_service = $('.fancybox-slide #airport-service').val();
+            var airport_service = $this.closest('.tf-withoutpayment-popup').find('[name="airport_service"]:checked').val();
 
             var data = {
                 action: 'tf_hotel_booking',
@@ -646,10 +646,12 @@
             //     var room = $("#hotel_room_number").val();
             // }
             var deposit = $("#hotel_room_depo").val();
+            var airport_service = $(this).find('[name="airport_service"]:checked').val();
 
             formData.append('action', 'tf_hotel_booking');
             formData.append('_ajax_nonce', tf_params.nonce);
             formData.append('deposit', deposit);
+            formData.append('airport_service', airport_service);
 
 
             $.ajax({

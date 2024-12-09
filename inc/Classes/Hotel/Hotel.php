@@ -3144,7 +3144,7 @@ class Hotel {
                 <div class="tf-booking-pagination tf-hotel-booking-pagination">
 					<?php if ( empty( $airport_service_type ) && 3 != $room_book_by && empty( $enable_guest_info ) ) { ?>
                         <div class="tf-control-pagination show">
-                            <button type="submit"><?php echo __( "Continue", "tourfic" ); ?></button>
+                            <button class="hotel-room-book" type="submit"><?php echo __( "Continue", "tourfic" ); ?></button>
                         </div>
 						<?php
 					}
@@ -3184,7 +3184,7 @@ class Hotel {
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( $airport_service_type || $enable_guest_info ) ) { ?>
                                 <a href="#" class="tf-back-control tf-step-back" data-step="2"><i class="fa fa-angle-left"></i><?php echo __( "Back", "tourfic" ); ?></a>
 							<?php } ?>
-                            <button type="submit" class="tf-hotel-book-confirm-error"><?php echo __( "Continueeeeee", "tourfic" ); ?></button>
+                            <button type="submit" class="tf-hotel-book-confirm-error"><?php echo __( "Continue", "tourfic" ); ?></button>
                         </div>
 					<?php } ?>
                 </div>

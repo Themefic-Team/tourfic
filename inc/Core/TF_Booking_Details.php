@@ -723,7 +723,7 @@ abstract Class TF_Booking_Details {
                                        
                                        <?php 
                                         $airport_type  = !empty( $tf_tour_details->airport_service_type ) ? $tf_tour_details->airport_service_type : '';
-                                        if(!empty($airport_type)){
+                                        if(!empty($airport_type) && $airport_type != 'undefined' && $airport_type != 'null'){
                                             ?>
                                             <tr>
                                                 <th><?php esc_html_e("Airport Service Type", "tourfic"); ?></th>
