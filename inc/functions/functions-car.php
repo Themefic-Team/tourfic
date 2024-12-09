@@ -576,37 +576,41 @@ function tf_getBestRefundPolicy($cancellations, $pickup_date, $pickup_time) {
 		$hours = $interval->h;
 	}
 
-    foreach ($cancellations as $cancellation) {
-		if('day'==$cancellation['cancellation-times']){
-			// Check if it's a free cancellation
-			if ($cancellation['cancellation_type'] === 'free' && !empty($days) && $days > $cancellation['before_cancel_time']) {
-				// If we don't have a policy yet, or if this free cancellation has a longer time before cancellation
-				if (!$bestPolicy || $cancellation['before_cancel_time'] > $bestPolicy['before_cancel_time']) {
-					$bestPolicy = $cancellation;
+	if(!empty($cancellations)){
+		foreach ($cancellations as $cancellation) {
+			if('day'==$cancellation['cancellation-times']){
+				// Check if it's a free cancellation
+				if ($cancellation['cancellation_type'] === 'free' && !empty($days) && $days > $cancellation['before_cancel_time']) {
+					// If we don't have a policy yet, or if this free cancellation has a longer time before cancellation
+					if (!$bestPolicy || $cancellation['before_cancel_time'] > $bestPolicy['before_cancel_time']) {
+						$bestPolicy = $cancellation;
+					}
+				}
+			}
+			if('hour'==$cancellation['cancellation-times']){
+				// Check if it's a free cancellation
+				if ($cancellation['cancellation_type'] === 'free' && !empty($hours) && $hours > $cancellation['before_cancel_time']) {
+					// If we don't have a policy yet, or if this free cancellation has a longer time before cancellation
+					if (!$bestPolicy || $cancellation['before_cancel_time'] > $bestPolicy['before_cancel_time']) {
+						$bestPolicy = $cancellation;
+					}
 				}
 			}
 		}
-		if('hour'==$cancellation['cancellation-times']){
-			// Check if it's a free cancellation
-			if ($cancellation['cancellation_type'] === 'free' && !empty($hours) && $hours > $cancellation['before_cancel_time']) {
-				// If we don't have a policy yet, or if this free cancellation has a longer time before cancellation
-				if (!$bestPolicy || $cancellation['before_cancel_time'] > $bestPolicy['before_cancel_time']) {
-					$bestPolicy = $cancellation;
-				}
-			}
-		}
-    }
+	}
 
     // If no free cancellation was found, choose the best paid one
     if (!$bestPolicy) {
-        foreach ($cancellations as $cancellation) {
-            if ($cancellation['cancellation_type'] === 'paid') {
-                // If we don't have a policy yet, or if this one has a higher refund amount
-                if (!$bestPolicy || $cancellation['refund_amount'] > $bestPolicy['refund_amount']) {
-                    $bestPolicy = $cancellation;
-                }
-            }
-        }
+		if(!empty($cancellations)){
+			foreach ($cancellations as $cancellation) {
+				if ($cancellation['cancellation_type'] === 'paid') {
+					// If we don't have a policy yet, or if this one has a higher refund amount
+					if (!$bestPolicy || $cancellation['refund_amount'] > $bestPolicy['refund_amount']) {
+						$bestPolicy = $cancellation;
+					}
+				}
+			}
+		}
     }
 
     return $bestPolicy;
@@ -631,7 +635,6 @@ function tf_car_booking_pupup_callback() {
 	$car_protection_content = ! empty( $meta['protection_content'] ) ? $meta['protection_content'] : '';
 	$car_protections = ! empty( $meta['protections'] ) ? $meta['protections'] : '';
 	$car_protection_tab_title = ! empty( $meta['protection_tab_title'] ) ? esc_html($meta['protection_tab_title']) : esc_html('Protection');
-	$car_calcellation_policy = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['calcellation_policy'] ) ? $meta['calcellation_policy'] : '';
 
 	$pickup_date = ! empty( $_POST['pickup_date'] ) ? $_POST['pickup_date'] : '';
 	$pickup_time = ! empty( $_POST['pickup_time'] ) ? $_POST['pickup_time'] : '';
@@ -639,54 +642,7 @@ function tf_car_booking_pupup_callback() {
 	$dropoff_date = ! empty( $_POST['dropoff_date'] ) ? $_POST['dropoff_date'] : '';
 	$dropoff_time = ! empty( $_POST['dropoff_time'] ) ? $_POST['dropoff_time'] : '';
 
-	$bestRefundPolicy = tf_getBestRefundPolicy($car_calcellation_policy, $pickup_date, $pickup_time);
-
-	$tf_default_time_zone = ! empty( Helper::tfopt( 'cancellation_time_zone' ) ) ? Helper::tfopt( 'cancellation_time_zone' ) : 'America/New_York';
-	$timezone = new DateTimeZone($tf_default_time_zone);
-
-	$today = new DateTime('now', $timezone);
-
-	$less_current_day = false;
-
-	// Combine pickup date and time into a single string and convert it to a DateTime object
-	$pickupDateTime = DateTime::createFromFormat('Y/m/d H:i', $pickup_date . ' ' . $pickup_time, $timezone);
-
-	// Extract the "before_cancel_time" and "cancellation-times" (hours, days, etc.)
-	$beforeCancelTime = (int) $bestRefundPolicy['before_cancel_time'];
-	$cancelTimeUnit = $bestRefundPolicy['cancellation-times']; // Could be 'hour', 'day', etc.
-
-	// Adjust the pickup date and time based on the policy
-	switch ($cancelTimeUnit) {
-		case 'hour':
-			$pickupDateTime->modify("-{$beforeCancelTime} hours");
-			break;
-		case 'day':
-			$pickupDateTime->modify("-{$beforeCancelTime} days");
-			break;
-		// Add other cases as necessary (e.g., weeks, minutes, etc.)
-	}
-
-	// Compare calculated before date with the current day
-	if ($pickupDateTime < $today) {
-		$less_current_day = true;
-	}
-
-	// Get the final "before" date and time (ensured to not be before today)
-	$beforeDate = $pickupDateTime->format('Y/m/d');
-	$beforeTime = $pickupDateTime->format('H:i');
-
  	?>
-	<?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() && !$less_current_day && !empty($bestRefundPolicy) ){ ?>
-	<div class="tf-cancellation-notice">
-		<span class="tf-flex tf-flex-align-center tf-flex-gap-16">
-			<i class="ri-information-line"></i>
-			<?php if('free'==$bestRefundPolicy['cancellation_type']){ ?> <b><?php esc_html_e("Free cancellation", "tourfic"); ?></b> <?php }else{ ?>
-			<?php echo 'paid'==$bestRefundPolicy['cancellation_type'] && 'percent'==$bestRefundPolicy['refund_amount_type'] ? '<b>'.$bestRefundPolicy['refund_amount'].'% Cancellation fee</b>' : '<b>'.wc_price($bestRefundPolicy['refund_amount']).' Cancellation fee</b>'; ?>
-			<?php } ?>
-			<?php esc_html_e("before", "tourfic"); ?> <?php echo $beforeDate.' '.$beforeTime; ?>
-		</span>
-	</div>
-	<?php } ?>
 
 	<div class="tf-booking-tabs">
 		<ul>
@@ -885,6 +841,72 @@ function tf_remove_sidebar_category_meta_box() {
 	remove_meta_box( 'carrental_engine_yeardiv', array( 'tf_carrental' ), 'normal' );
 }
 
+// tf refund Policy
+function tf_getRefundPolicy($cancellations, $pickup_date, $pickup_time) {
+    $freePolicies = [];
+    $bestPaidPolicy = null;
+
+    $tf_default_time_zone = !empty(Helper::tfopt('cancellation_time_zone')) ? Helper::tfopt('cancellation_time_zone') : 'America/New_York';
+    $timezone = new DateTimeZone($tf_default_time_zone);
+
+    $today = new DateTime('now', $timezone);
+    $pickupDateTime = DateTime::createFromFormat('Y/m/d H:i', $pickup_date . ' ' . $pickup_time, $timezone);
+
+    if ($today < $pickupDateTime) {
+        $interval = $today->diff($pickupDateTime);
+        // Get days and hours separately
+        $days = $interval->days;
+        $hours = $interval->h;
+    }
+
+	if(!empty($cancellations)){
+		foreach ($cancellations as $cancellation) {
+			$timeType = $cancellation['cancellation-times'];
+			$cancelTime = (int)$cancellation['before_cancel_time'];
+
+			// Normalize time for comparison
+			$timeAvailable = 0;
+			if ($timeType === 'day') {
+				$timeAvailable = $days ?? 0;
+			} elseif ($timeType === 'hour') {
+				$timeAvailable = ($days ?? 0) * 24 + ($hours ?? 0); // Convert days to hours and add
+			}
+
+			// Check if it's a free cancellation
+			if ($cancellation['cancellation_type'] === 'free' && $timeAvailable > $cancelTime) {
+				$freePolicies[] = $cancellation;
+			}
+
+			// Check if it's a paid cancellation
+			if ($cancellation['cancellation_type'] === 'paid' && $timeAvailable > $cancelTime) {
+				// Select the best paid policy based on the lowest refund amount or longest time
+				if (
+					!$bestPaidPolicy ||
+					$cancelTime > $bestPaidPolicy['before_cancel_time'] ||
+					($cancelTime === $bestPaidPolicy['before_cancel_time'] && $cancellation['refund_amount'] < $bestPaidPolicy['refund_amount'])
+				) {
+					$bestPaidPolicy = $cancellation;
+				}
+			}
+		}
+	}
+
+    // Sort free policies by cancellation time (descending)
+    usort($freePolicies, function ($a, $b) {
+        return $b['before_cancel_time'] - $a['before_cancel_time'];
+    });
+
+    // Prepare the final result
+    $bestPolicies = array_slice($freePolicies, 0, 2); // Take up to 2 free policies
+
+    // If less than 2 policies and there's a paid policy, add it
+    if (count($bestPolicies) < 2 && $bestPaidPolicy) {
+        $bestPolicies[] = $bestPaidPolicy;
+    }
+
+    return $bestPolicies;
+}
+
 add_action( 'wp_ajax_nopriv_tf_car_price_calculation', 'tf_car_price_calculation_callback' );
 add_action( 'wp_ajax_tf_car_price_calculation', 'tf_car_price_calculation_callback' );
 function tf_car_price_calculation_callback() {
@@ -913,7 +935,118 @@ function tf_car_price_calculation_callback() {
 		$total_prices = $total_prices + $total_extra['price'];
 	}
 	
-	echo sprintf( esc_html__( 'Total: %1$s', 'tourfic' ), wc_price($total_prices) );
+	$car_calcellation_policy = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['calcellation_policy'] ) ? $meta['calcellation_policy'] : '';
+	$bestRefundPolicy = tf_getBestRefundPolicy($car_calcellation_policy, $tf_pickup_date, $tf_pickup_time);
+	$twobestRefundPolicy = tf_getRefundPolicy($car_calcellation_policy, $tf_pickup_date, $tf_pickup_time);
+	
+	$tf_default_time_zone = ! empty( Helper::tfopt( 'cancellation_time_zone' ) ) ? Helper::tfopt( 'cancellation_time_zone' ) : 'America/New_York';
+	$timezone = new DateTimeZone($tf_default_time_zone);
+
+	$today = new DateTime('now', $timezone);
+	$less_current_day = false;
+
+	// Combine pickup date and time into a single string and convert it to a DateTime object
+	$pickupDateTime = DateTime::createFromFormat('Y/m/d H:i', $tf_pickup_date . ' ' . $tf_pickup_time, $timezone);
+
+	// Extract the "before_cancel_time" and "cancellation-times" (hours, days, etc.)
+	$beforeCancelTime = !empty($bestRefundPolicy['before_cancel_time']) ? (int) $bestRefundPolicy['before_cancel_time'] : 0;
+	$cancelTimeUnit = !empty($bestRefundPolicy['cancellation-times']) ? $bestRefundPolicy['cancellation-times'] : '';// Could be 'hour', 'day', etc.
+
+	// Adjust the pickup date and time based on the policy
+	switch ($cancelTimeUnit) {
+		case 'hour':
+			$pickupDateTime->modify("-{$beforeCancelTime} hours");
+			break;
+		case 'day':
+			$pickupDateTime->modify("-{$beforeCancelTime} days");
+			break;
+		// Add other cases as necessary (e.g., weeks, minutes, etc.)
+	}
+
+	// Compare calculated before date with the current day
+	if ($pickupDateTime < $today) {
+		$less_current_day = true;
+	}
+
+	// Get the final "before" date and time (ensured to not be before today)
+	$beforeDate = $pickupDateTime->format('Y/m/d');
+	$beforeTime = $pickupDateTime->format('H:i');
+
+	$cancellation = '';
+	
+	if( function_exists( 'is_tf_pro' ) && is_tf_pro() && !$less_current_day && !empty($bestRefundPolicy) ){
+		if ( isset( $bestRefundPolicy['cancellation_type'] ) ) {
+			// Determine cancellation message
+			if ( $bestRefundPolicy['cancellation_type'] === 'free' ) {
+				$cancellation_message = esc_html__( "Free cancellation", "tourfic" );
+			} elseif ( $bestRefundPolicy['cancellation_type'] === 'paid' ) {
+				if ( $bestRefundPolicy['refund_amount_type'] === 'percent' ) {
+					$cancellation_message = esc_html( $bestRefundPolicy['refund_amount'] ) . '% ' . esc_html__( "Cancellation fee", "tourfic" );
+				} else {
+					$cancellation_message = wc_price( $bestRefundPolicy['refund_amount'] ) . ' ' . esc_html__( "Cancellation fee", "tourfic" );
+				}
+			} else {
+				$cancellation_message = esc_html__( "Cancellation policy not specified", "tourfic" );
+			}
+		
+			// Construct the HTML dynamically
+			$cancellation .= '
+			<span class="tf-flex tf-flex-align-center tf-flex-gap-4">
+				<i class="ri-information-line"></i>
+				<b>' . $cancellation_message . '</b>
+				' . esc_html__( "before ", "tourfic" ) . esc_html( $beforeDate ) . ' ' . esc_html( $beforeTime ) . '
+			</span>';
+		}		
+	}
+
+	if( function_exists( 'is_tf_pro' ) && is_tf_pro() && !$less_current_day && !empty($bestRefundPolicy) ){
+    $cancellation .= '
+    <div class="tf-cancellation-timeline">
+        <div class="tf-timeline">
+            <ul>';
+            
+			// Add timeline items dynamically based on the best refund policies
+			$twobestRefundPolicy = tf_getRefundPolicy($car_calcellation_policy, $tf_pickup_date, $tf_pickup_time);
+			if (!empty($twobestRefundPolicy)) {
+				foreach ($twobestRefundPolicy as $policy) {
+					$policyType = $policy['cancellation_type'] === 'free' ? esc_html__('Fully refundable', 'tourfic') : esc_html__('Charged', 'tourfic');
+					$policyTime = $policy['before_cancel_time'] . ' ' . esc_html__($policy['cancellation-times'] === 'day' ? 'days' : 'hours', 'tourfic');
+					$refundAmount = !empty($policy['refund_amount']) ? $policy['refund_amount'] . ' ' . esc_html__('% refund', 'tourfic') : '';
+
+
+					$inlineCSS = '';
+					if (count($twobestRefundPolicy) === 1) {
+						$inlineCSS = 'style="width: 100%;"';
+					}
+
+					$cancellation .= '
+						<li ' . $inlineCSS . '>
+							<span class="' . esc_attr($policy['cancellation_type']) . '">' . esc_html($policyType) . '</span>
+						</li>';
+				}
+			}
+
+		$cancellation .= '
+				</ul>
+			</div>
+			<div class="tf-timeline-text">
+				<ul>
+					<li>' . esc_html__("Booking time", "tourfic") . '</li>
+					<li>' . esc_html($beforeDate) . ' ' . esc_html($beforeTime) . '</li>
+					<li>' . esc_html__("Trip started", "tourfic") . '</li>
+				</ul>
+			</div>
+		</div>
+		<div class="tf-cancelltion-popup-btn">
+			<a href="#">' . esc_html__("See Cancellation Policy", "tourfic") . '</a>
+		</div>';
+	}
+
+    // Send response
+    wp_send_json_success( [
+        'total_price' => sprintf( esc_html__( 'Total: %1$s', 'tourfic' ), wc_price( $total_prices ) ),
+        'cancellation' => $cancellation,
+    ] );
 
 	wp_die();
 }

@@ -34,7 +34,7 @@ abstract class Enquiry {
 
 	public function enquiry_header_filter_options( array $args) {
 		?>
-			<div class="tf-booking-header-filter">
+			<div class="tf-booking-header-filter tf-enquiry-details-header-filter">
 				<input class="enquiry-post-type" type="hidden" value="<?php echo esc_attr( $args["post_type"]) ?>">
 				<div class="tf-left-search-filter">
 					<div class="tf-bulk-action-form">
