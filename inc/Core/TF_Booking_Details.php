@@ -720,6 +720,19 @@ abstract Class TF_Booking_Details {
                                                 </td>
                                             </tr>
                                        <?php } ?>
+                                       
+                                       <?php 
+                                        $airport_type  = !empty( $tf_tour_details->airport_service_type ) ? $tf_tour_details->airport_service_type : '';
+                                        if(!empty($airport_type)){
+                                            ?>
+                                            <tr>
+                                                <th><?php esc_html_e("Airport Service Type", "tourfic"); ?></th>
+                                                <td>:</td>
+                                                <td>
+                                                    <?php echo esc_html($airport_type); ?>    
+                                                </td>
+                                            </tr>
+                                       <?php } ?>
 
                                     </table>
                                 </div>
@@ -763,12 +776,20 @@ abstract Class TF_Booking_Details {
                                         <?php 
                                         if(!empty($tf_tour_details->tour_extra)){
                                         ?>
-                                        <tr>
-                                            <th><?php esc_html_e("Extra", "tourfic"); ?></th>
-                                            <td>:</td>
-                                            <td><?php echo wp_kses_post($tf_tour_details->tour_extra); ?></td>
-                                        </tr>
+                                            <tr>
+                                                <th><?php esc_html_e("Extra", "tourfic"); ?></th>
+                                                <td>:</td>
+                                                <td><?php echo wp_kses_post($tf_tour_details->tour_extra); ?></td>
+                                            </tr>
                                         <?php } ?>
+                                        <?php if(!empty($tf_tour_details->airport_service_fee)){ ?>
+                                            <tr>
+                                                <th><?php esc_html_e("Airport Service Fee", "tourfic"); ?></th>
+                                                <td>:</td>
+                                                <td><?php echo wp_kses_post($tf_tour_details->airport_service_fee); ?></td>
+                                            </tr>
+                                        <?php } ?>
+
                                         <?php 
                                         if(!empty($tf_tour_details->total_price)){ ?>
                                         <tr>
