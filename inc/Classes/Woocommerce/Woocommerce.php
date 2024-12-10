@@ -118,7 +118,7 @@ class Woocommerce {
 	 */
 	function tf_hide_order_meta( $hidden_meta ) {
 
-		$hidden_meta = array('_order_type', '_post_author', '_post_id', '_unique_id', '_tour_unique_id', '_visitor_details');
+		$hidden_meta = array('_order_type', '_post_author', '_post_id', '_unique_id', '_tour_unique_id', '_visitor_details', '_google_calendar');
 
 		return $hidden_meta;
 	}

@@ -819,7 +819,7 @@ if(!function_exists('tf_average_ratings')){
 if(!function_exists('tf_average_rating_change_on_base')){
 	function tf_average_rating_change_on_base( $rating, $base_rate = 5 ) {
 
-        $settings_base = ! empty ( tfopt( 'r-base' ) ) ? tfopt( 'r-base' ) : 5;
+        $settings_base = ! empty ( Helper::tfopt( 'r-base' ) ) ? Helper::tfopt( 'r-base' ) : 5;
         $base_rate     = ! empty ( $base_rate ) ? $base_rate : 5;
     
         if ( $settings_base != $base_rate ) {

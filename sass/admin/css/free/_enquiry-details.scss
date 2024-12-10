@@ -1,4 +1,100 @@
+.tf_enquiry_details_wrap_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @media #{$max767}{
+        display: flow-root;
+    }
+    h1{
+        color: #1D2327;
+        font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        padding: 0;
+    }
+
+    .tf_header_wrap_button{
+        display: flex;
+        gap: 16px;
+        .tf_booking_views_button{
+            border-radius: 8px;
+            border: 1px solid #EEF6F0;
+            background: #FFF;
+            padding: 4px 8px;
+            float: left;
+            height: 46px;
+            box-sizing: border-box;
+            ul{
+                margin: 0;
+                padding: 0;
+                display: flex;
+                gap: 8px;
+                li{
+                    height: 36px;
+                    width: 36px;
+                    margin: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    i{
+                        font-size: 15px;
+                    }
+                    &.active{
+                        color: #f0f0f1;
+                        background-color: #004e9d;
+                        border-radius: 4px;
+                    }
+                }
+            }
+        }
+        a.tf-enquiry-export-btn{
+            padding: 10px 32px;
+            border-radius: 8px;
+            border: 1px solid #003C79;
+            background: #FFF;
+            margin: 0 !important;
+            color: #003C79;
+            font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 24px; /* 150% */
+            transition: .3s all ease;
+            &:hover{
+                color: #f0f0f1;
+                background-color: #003C79;
+            }
+        }            
+        a.tf-booking-btn,
+        .tf-google-sync-button button{
+            padding: 10px 32px;
+            border-radius: 8px;
+            border: 1px solid #003C79;
+            background: #003C79;
+            margin: 0;
+            box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
+            font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 24px; /* 150% */
+            color: #F0F0F1;
+            transition: .3s all ease;
+            cursor: pointer;
+            &:hover{
+                color: #f0f0f1;
+                background-color: #004E9D;
+            }
+        }
+    }
+}
+
+
 .tf-enquiry-table {
+    display: block !important;
     .tf-enquiry-unread th, .tf-enquiry-unread td {
         background-color: #EDF2F7 !important;
         border-bottom: 1px solid #F0F2F4 !important;
@@ -112,6 +208,10 @@
             }
         }
     }
+}
+
+.tf-enquiry-details-header-filter {
+    display: flex !important;
 }
 
 .tf-enquiry-single-header-details {

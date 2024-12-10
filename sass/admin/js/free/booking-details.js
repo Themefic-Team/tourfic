@@ -26,8 +26,8 @@
         });
 
         // Pyment Status Section
-        if ($('.tf-order-payment-status').length > 0 ) {
-            $('.tf-order-payment-status').select2({
+        if ($('.tf-order-payment-status, .tf-calendar-order-payment-status').length > 0 ) {
+            $('.tf-order-payment-status, .tf-calendar-order-payment-status').select2({
                 dropdownCssClass: 'tf-booking-filter-modal',
                 placeholder: "Order Status",
                 allowClear: true
@@ -80,8 +80,8 @@
         }
         
         // Tour Post Section
-        if( $('.tf-post-id-filter-options').length > 0 ) {
-            $('.tf-post-id-filter-options').select2({
+        if( $('.tf-post-id-filter-options, .tf-booking-post-id-filter-options').length > 0 ) {
+            $('.tf-post-id-filter-options, .tf-booking-post-id-filter-options').select2({
                 dropdownCssClass: 'tf-booking-filter-modal',
                 placeholder: "Tour Name",
                 allowClear: true
@@ -89,8 +89,8 @@
         }
         
         // Hotel Post Section
-        if ( $('.tf-hotel-id-filter-options').length > 0 ) {
-            $('.tf-hotel-id-filter-options').select2({
+        if ( $('.tf-hotel-id-filter-options, .tf-booking-hotel-id-filter-options').length > 0 ) {
+            $('.tf-hotel-id-filter-options, .tf-booking-hotel-id-filter-options').select2({
                 dropdownCssClass: 'tf-booking-filter-modal',
                 placeholder: "Hotel Name",
                 allowClear: true
@@ -98,8 +98,8 @@
         }
         
         // Apartment Post Section
-        if ( $('.tf-apartment-id-filter-options').length > 0 ) {
-            $('.tf-apartment-id-filter-options').select2({
+        if ( $('.tf-apartment-id-filter-options, .tf-booking-apartment-id-filter-options').length > 0 ) {
+            $('.tf-apartment-id-filter-options, .tf-booking-apartment-id-filter-options').select2({
                 dropdownCssClass: 'tf-booking-filter-modal',
                 placeholder: "Apartment Name",
                 allowClear: true
@@ -117,8 +117,8 @@
         
 
         // Checked Section
-        if ( $('.tf-tour-checkinout-options').length > 0 ) {
-            $('.tf-tour-checkinout-options').select2({
+        if ( $('.tf-tour-checkinout-options, .tf-booking-checkinout-options').length > 0 ) {
+            $('.tf-tour-checkinout-options, .tf-booking-checkinout-options').select2({
                 dropdownCssClass: 'tf-booking-checkinout-filter-modal',
                 placeholder: "Checked in status",
                 allowClear: true
@@ -471,7 +471,162 @@
                 window.location.href = updatedUrl;
             }
         });
-        
+
+        // Booking View Change
+
+        $(".tf_booking_views_button ul li").on("click", function() {
+            $(".tf_booking_views_button ul li").removeClass('active');
+            let $this =  $(this);
+            let view = $this.attr('data-view');
+            $this.addClass('active');
+            if('calendar'==view){
+                $('.tf-booking-header-filter').hide();
+                $('.tf-order-table-responsive').hide();
+                $('#tf-booking-calendar').css('padding', '24px');
+                $('.tf-calendar-booking-header-filter').css('display', 'flex');
+                $('#tf-booking-calendar').show();
+                
+                // Re-render the calendar
+                initializeCalendar();
+                
+            }
+            if('list'==view){
+                $('#tf-booking-calendar').hide();
+                $('.tf-calendar-booking-header-filter').hide();
+                $('.tf-booking-header-filter').css('display','flex');
+                $('.tf-order-table-responsive').show();
+            }
+        });
+
+        // Booking Details Popup close
+        $(document).on('click', '.tf-booking-calendar-popup-box .tf-popup-header .tf-close', function (e) {
+            $(".tf-booking-calendar-popup-box").hide();
+        });
+
+        // Booking Details Popup
+        $(document).on('click', '.tf-booking-single-popup', function (e) {
+            e.preventDefault();
+            let $this = $(this);
+            $('.tf-calendar-popup-box').html('');
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: 'tf_booking_details_popup',
+                    id: $this.attr('data-id'),
+                    type: $this.attr('data-type'),
+                    page: $this.attr('data-page'),
+                    _ajax_nonce: tf_admin_params.tf_nonce
+                },
+                beforeSend: function (data) {
+                    $('.tf-preloader-box').show();
+                },
+                complete: function (data) {
+                    
+                },
+                success: function (data) {
+                    $('.tf-calendar-popup-box').html(data);
+                    $('.tf-preloader-box').hide();
+                    $('.tf-booking-calendar-popup-box').css('display', 'flex');
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+        });
+
+        // Booking Calendar Filter
+        $(document).on('change', '.tf-calendar-order-payment-status, .tf-booking-checkinout-options, .tf-filter-by-post', function (e) {
+            e.preventDefault();
+            let ostatus = $('.tf-calendar-order-payment-status').val();
+            let checkinout = $('.tf-booking-checkinout-options').val();
+            let post_id = $('.tf-filter-by-post').val();
+            
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: 'tf_booking_calendar_filter',
+                    ostatus: ostatus,
+                    checkinout: checkinout,
+                    post_id: post_id,
+                    post_type: $('#tf_booking_post_type').val(),
+                    _ajax_nonce: tf_admin_params.tf_nonce
+                },
+                beforeSend: function (data) {
+                    $('.tf-preloader-box').show();
+                },
+                complete: function (data) {
+                    
+                },
+                success: function (response) {
+                    let data = JSON.parse(response);
+                    $('.tf-preloader-box').hide();
+                    initializeCalendar(data.events);
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+            });
+        });
+
     });
 
 })(jQuery);
+
+// Booking Calendar
+function initializeCalendar(eventsSource) {
+    var calendarEl = document.getElementById('tf-booking-calendar');
+    var currentPageUrl = window.location.href;
+
+    // Set the events based on the page URL
+    if (!eventsSource) {
+        if (currentPageUrl.includes('post_type=tf_tours&page=tf_tours_booking')) {
+            eventsSource = tf_options.tf_tours_orders;
+        } else if (currentPageUrl.includes('post_type=tf_hotel&page=tf_hotel_booking')) {
+            eventsSource = tf_options.tf_hotels_orders;
+        } else if (currentPageUrl.includes('post_type=tf_apartment&page=tf_apartment_booking')) {
+            eventsSource = tf_options.tf_apartments_orders;
+        } else if (currentPageUrl.includes('post_type=tf_carrental&page=tf_carrental_booking')) {
+            eventsSource = tf_options.tf_cars_orders;
+        } else {
+            eventsSource = []; // Fallback option if none of the conditions match
+        }
+    }
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        editable: false,
+        selectable: true,
+        dayMaxEvents: 3,
+        headerToolbar: {
+            left: 'prev,next',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        events: eventsSource,
+        eventContent: function(info) {
+            var customEl = document.createElement('div');
+            customEl.classList.add('tf-booking-single-popup');
+            customEl.setAttribute('data-id', info.event.id);
+            customEl.setAttribute('data-type', info.event.extendedProps.post_type);
+            customEl.setAttribute('data-page', info.event.extendedProps.page);
+            customEl.innerHTML = `<span>${info.event.title}</span>`;
+            return { domNodes: [customEl] };
+        }
+    });
+
+    calendar.render();
+}
+
+// Initialize the calendar when the DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    var tfcalendarEl = document.getElementById('tf-booking-calendar');
+    var eventsSource;
+    if (tfcalendarEl.dataset.set) {
+        initializeCalendar(eventsSource);
+        tfcalendarEl.style.display = 'none';
+    }else{
+        initializeCalendar(eventsSource);
+    }
+});

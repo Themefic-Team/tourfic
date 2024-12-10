@@ -409,7 +409,8 @@
         }
     }
 
-    .tf-car-instraction-popup{
+    .tf-car-instraction-popup,
+    .tf-car-cancellation-popup{
         position: fixed;
         left: 0;
         top: 0;
@@ -421,7 +422,8 @@
         align-items: center;
         justify-content: center;
         display: none;
-        .tf-instraction-popup-warp{
+        .tf-instraction-popup-warp,
+        .tf-cancellation-popup-warp{
             border-radius: 16px;
             background: #FFF;
             padding: 16px 24px;
@@ -429,7 +431,8 @@
             @media #{$max640}{
                 width: 100%;
             }
-            .tf-instraction-popup-header{
+            .tf-instraction-popup-header,
+            .tf-cancellation-popup-header{
                 margin-bottom: 24px;
                 flex-wrap: nowrap;
                 h3{
@@ -445,7 +448,8 @@
                     cursor: pointer;
                 }
             }
-            .tf-instraction-content-wraper{
+            .tf-instraction-content-wraper,
+            .tf-cancellation-content-wraper{
                 text-align: left;
                 color: #27333F;
                 font-size: 16px;
@@ -475,6 +479,9 @@
                     font-style: normal;
                     font-weight: 400;
                     line-height: 150%; /* 24px */
+                }
+                table{
+                    margin-bottom: 0px;
                 }
             }
         }
