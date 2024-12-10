@@ -310,6 +310,8 @@ class TF_Handle_Emails {
             $order_url = esc_url(admin_url() . 'edit.php?post_type=tf_tours&page=tf_tours_booking&order_id=' . $order_id . '&book_id=' . $tf_order_details->id . '&action=preview');
         }elseif('car'==$order_data['post_type']){
             $order_url = esc_url(admin_url() . 'edit.php?post_type=tf_carrental&page=tf_carrental_booking&order_id=' . $order_id . '&book_id=' . $tf_order_details->id . '&action=preview');
+        }elseif('hotel'==$order_data['post_type']){
+            $order_url = esc_url(admin_url() . 'edit.php?post_type=tf_hotel&page=tf_hotel_booking&order_id=' . $order_id . '&book_id=' . $tf_order_details->id . '&action=preview');
         }else{
             $order_url = '#';
         }
@@ -317,7 +319,15 @@ class TF_Handle_Emails {
         $booking_details = '<table width="100%" style="max-width: 600px;border-collapse: collapse; color: #5A5A5A; font-family: Inter,sans-serif;"><thead><tr><th align="left" style="color:#0209AF;">Item Name</th><th align="center" style="color:#0209AF;">Quantity</th><th align="right" style="color:#0209AF;">Price</th></tr></thead><tbody style="border-bottom: 1px solid #D9D9D9">';
         $booking_details .= '<tr>';
         $booking_details .= '<td style="padding: 15px 0;text-align: left;padding-top: 15px;padding-bottom: 15px;line-height: 1.7;">' . get_the_title( $order_data['post_id'] );
-        
+
+        if ( !empty($order_items['room_name']) ) {
+            $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Room Name:</strong> ' . $order_items['room_name'];
+        }
+
+        if ( !empty($order_items['room']) ) {
+            $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Room Count:</strong> ' . $order_items['room'];
+        }
+
         if ( !empty($order_items['tour_date']) ) {
             $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Tour Date:</strong> ' . $order_items['tour_date'];
         }
@@ -355,6 +365,30 @@ class TF_Handle_Emails {
         if ( !empty($order_items['dropoff_time']) ) {
             $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Dropoff Time:</strong> ' . $order_items['dropoff_time'];
         }
+        
+        if ( !empty($order_items['check_in']) ) {
+            $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Check In:</strong> ' . $order_items['check_in'];
+        }
+        
+        if ( !empty($order_items['check_out']) ) {
+            $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Check Out:</strong> ' . $order_items['check_out'];
+        }
+        
+        if ( !empty($order_items['children_ages']) ) {
+            $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Children Ages:</strong> ' . $order_items['children_ages'];
+        }
+        
+        if ( !empty($order_items['airport_service_type']) && $order_items['airport_service_type'] != 'undefined' ) {
+            $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Airport Service Type:</strong> ' . $order_items['airport_service_type'];
+        }
+        
+        if ( !empty($order_items['airport_service_fee']) ) {
+            $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Airport Service Fee:</strong> ' . $order_items['airport_service_fee'];
+        }
+        
+        if ( !empty($order_items['due_price']) ) {
+            $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Due Amount:</strong> ' . wc_price($order_items['due_price']);
+        }
 
         $booking_details .= '</td>';
         $booking_details .= '<td align="center">1</td>';
@@ -377,7 +411,14 @@ class TF_Handle_Emails {
         //booking details end
 
         //customer details Start
-        $tf_booking_fields = !empty(Helper::tfopt( 'book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'book-confirm-field' )) : '';
+        $tf_booking_fields = '';
+        if('tour'==$order_data['post_type']){
+            $tf_booking_fields = !empty(Helper::tfopt( 'book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'book-confirm-field' )) : '';
+        } else if( 'car'==$order_data['post_type'] ){
+            $tf_booking_fields = !empty(Helper::tfopt( 'book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'book-confirm-field' )) : '';
+        } else if( 'hotel'==$order_data['post_type'] ){
+            $tf_booking_fields = !empty(Helper::tfopt( 'hotel-book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'hotel-book-confirm-field' )) : '';
+        }
             
         $customer_details = '<table style="max-width: 600px;border-collapse: collapse; color: #5A5A5A; font-family: Inter,sans-serif;"><tbody><tr><td style="padding: 15px 0;text-align: left;">';
         if(!empty($tf_booking_fields)){
