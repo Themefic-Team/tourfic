@@ -756,7 +756,7 @@ function tf_car_booking_pupup_callback() {
 	<div class="tf-booking-form-fields" style="<?php echo function_exists( 'is_tf_pro' ) && is_tf_pro() && $car_booking_by=='3' && empty($car_protection_section_status) ? esc_attr('display: block') : ''; ?>">
 		<div class="tf-form-fields tf-flex tf-flex-gap-24 tf-flex-w">
 			<?php 
-			$traveller_info_fields = ! empty( Helper::tf_data_types( Helper::tfopt( 'book-confirm-field' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'book-confirm-field' ) ) : '';
+			$traveller_info_fields = ! empty( Helper::tf_data_types( Helper::tfopt( 'car-book-confirm-field' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'car-book-confirm-field' ) ) : '';
 
 			if(empty($traveller_info_fields)){
 			?>

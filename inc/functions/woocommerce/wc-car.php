@@ -122,7 +122,7 @@ function tf_car_booking_callback() {
 		
 		if( function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($car_booking_by) && '3'==$car_booking_by ){
 
-			$tf_booking_fields = !empty(Helper::tfopt( 'book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'book-confirm-field' )) : '';
+			$tf_booking_fields = !empty(Helper::tfopt( 'car-book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'car-book-confirm-field' )) : '';
 			if(empty($tf_booking_fields)){
 				$billing_details  = array(
 					'billing_first_name' => sanitize_text_field($tf_confirmation_details['tf_first_name']),
