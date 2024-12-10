@@ -160,6 +160,10 @@
                 deposit: deposit,
                 airport_service: airport_service
             };
+            $this.closest(".tf-booking-pagination").siblings(".tf-booking-content-summery").find( '.traveller-single-info input' ).each(function (index, element) {
+                var element_name = $(element).attr("name");
+                data[ element_name ] = $(element).val();
+           })
 
             $.ajax({
                 type: 'post',
