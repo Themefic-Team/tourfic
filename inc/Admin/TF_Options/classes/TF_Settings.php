@@ -157,6 +157,19 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				array( 'TF_Shortcodes','tf_shortcode_callback'),
 			);
 
+			// Library submenu
+			if ( is_plugin_active( 'travelfic-toolkit/travelfic-toolkit.php' ) ) {
+				$library_url = admin_url( 'admin.php?page=travelfic-template-list' );
+				add_submenu_page(
+					$this->option_id,
+					esc_html__('Template Library', 'tourfic'),
+					esc_html__('Template Library', 'tourfic'),
+					'manage_options',
+					$library_url,
+					''
+				);
+			}
+
 			if ( function_exists('is_tf_pro') ) {
 				//License Info submenu
 				add_submenu_page(
