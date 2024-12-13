@@ -14,7 +14,7 @@
  * Elementor tested up to: 3.25
  */
 
-// don't load directly
+// Don't load directly
 defined( 'ABSPATH' ) || exit;
 
 final class Tourfic {
