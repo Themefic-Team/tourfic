@@ -349,7 +349,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.15.4 - 11 December 2024 =
+= 2.15.4 - 13 December 2024 =
 
 - Added: Option to edit rooms directly from the hotel edit page.
 - Added: Duplicator feature for car rentals and rooms.
@@ -358,6 +358,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Added: Option for hotel bookings without payment (Pro).
 - Added: Booking calendar integration for vendors (Pro).
 - Fixed: Issue with backend tour bookings has been resolved.
+- Fixed: The security patch has been resolved.
 
 = 2.15.3 - 05 December 2024 =
 
