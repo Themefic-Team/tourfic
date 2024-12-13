@@ -97,6 +97,10 @@ class Base {
 		\Tourfic\App\Wishlist::instance();
 		\Tourfic\App\TF_Review::instance();
 
+		// Without Payment Booking
+		// \Tourfic\Classes\Without_Payment_Booking\Hotel_WP_Booking::instance();
+
+
 	}
 
 	function load_shortcodes() {

@@ -11,11 +11,15 @@ class TF_Duplicator {
 	}
 
 	function tf_add_duplicate_post_button($actions, $post) {
-		if (current_user_can('edit_posts') && ( "tf_tours"==$post->post_type || "tf_hotel"==$post->post_type || "tf_apartment"==$post->post_type )) {
+		if (current_user_can('edit_posts') && ( "tf_tours"==$post->post_type || "tf_hotel"==$post->post_type || "tf_apartment"==$post->post_type || "tf_carrental"==$post->post_type || "tf_room"==$post->post_type )) {
 			if("tf_tours"==$post->post_type){
 				$tf_duplicate_label = esc_html__("Duplicate Tour", "tourfic");
 			}elseif("tf_hotel"==$post->post_type){
 				$tf_duplicate_label = esc_html__("Duplicate Hotel", "tourfic");
+			}elseif("tf_carrental"==$post->post_type){
+				$tf_duplicate_label = esc_html__("Duplicate Car", "tourfic");
+			}elseif("tf_room"==$post->post_type){
+				$tf_duplicate_label = esc_html__("Duplicate Room", "tourfic");
 			}else{
 				$tf_duplicate_label = esc_html__("Duplicate Apartment", "tourfic");
 			}
@@ -41,6 +45,12 @@ class TF_Duplicator {
 		if( "tf_apartment"==$postType ){
 			$meta = get_post_meta( $postID, 'tf_apartment_opt', true );
 		}
+		if( "tf_carrental"==$postType ){
+			$meta = get_post_meta( $postID, 'tf_carrental_opt', true );
+		}
+		if( "tf_room"==$postType ){
+			$meta = get_post_meta( $postID, 'tf_room_opt', true );
+		}
 
 		$tf_duplicate_post = wp_insert_post(wp_slash([
 			'post_type' => $postType,
@@ -58,6 +68,12 @@ class TF_Duplicator {
 		}
 		if( "tf_apartment"==$postType ){
 			update_post_meta($tf_duplicate_post, 'tf_apartment_opt', $meta);
+		}
+		if( "tf_carrental"==$postType ){
+			update_post_meta($tf_duplicate_post, 'tf_carrental_opt', $meta);
+		}
+		if( "tf_room"==$postType ){
+			update_post_meta($tf_duplicate_post, 'tf_room_opt', $meta);
 		}
 
 		// Duplicate featured image

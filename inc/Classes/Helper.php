@@ -5,6 +5,7 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Admin\Emails\TF_Handle_Emails;
 use \Tourfic\Classes\Car_Rental\Availability;
+use \Tourfic\Classes\Hotel\Hotel;
 
 class Helper {
 	use \Tourfic\Traits\Singleton;
@@ -70,6 +71,9 @@ class Helper {
         add_action( 'tf_before_container', array( $this, 'tourfic_notice_wrapper' ), 10 );
         // add_action('wp_head', array( $this, 'tf_no_idex_search_page'), 1);
         // add_filter( 'wp_robots', array( $this, 'tf_no_idex_search_page') );
+
+        add_filter('upload_mimes', array($this, 'tf_upload_mimes_support'));
+        add_filter( 'wp_check_filetype_and_ext', array($this, 'tf_filetype_and_ext_check_support'), 10, 5 );
 	}
     
 	static function tfopt( $option = '', $default = null ) {
@@ -2244,6 +2248,7 @@ class Helper {
 			'post_id'          => 0,
 			'post_type'        => '',
 			'room_number'      => 0,
+            'room_id'          => null,
 			'check_in'         => '',
 			'check_out'        => '',
 			'billing_details'  => '',
@@ -2260,13 +2265,14 @@ class Helper {
 		$wpdb->query(
 			$wpdb->prepare(
 				"INSERT INTO {$wpdb->prefix}tf_order_data
-				( order_id, post_id, post_type, room_number, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
-				VALUES ( %d, %d, %s, %d, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
+				( order_id, post_id, post_type, room_number, room_id, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
+				VALUES ( %d, %d, %s, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
 				array(
 					$order_data['order_id'],
 					sanitize_key( $order_data['post_id'] ),
 					$order_data['post_type'],
 					$order_data['room_number'],
+                    $order_data['room_id'] ? $order_data['room_id'] : null,
 					$order_data['check_in'],
 					$order_data['check_out'],
 					wp_json_encode( $order_data['billing_details'] ),
@@ -2279,6 +2285,12 @@ class Helper {
 				)
 			)
 		);
+
+        $lastid = $wpdb->insert_id;
+
+        if($lastid > 0) { 
+            Hotel::tf_hotel_without_payment_inventory_data($order_id);
+        } 
 
 		return $order_id;
 	}
@@ -2417,4 +2429,49 @@ class Helper {
 			}
 		}
 	}
+
+    function tf_filetype_and_ext_check_support($data, $file, $filename, $mimes, $real_mime) {
+        if (!empty($data['ext']) && !empty($data['type'])) {
+            return $data;
+        }
+    
+        $wp_file_type = wp_check_filetype($filename, $mimes);
+    
+        // Add support for specific font file types
+        if ('ttf' === $wp_file_type['ext']) {
+            $data['ext'] = 'ttf';
+            $data['type'] = 'font/ttf';
+        }
+    
+        if ('otf' === $wp_file_type['ext']) {
+            $data['ext'] = 'otf';
+            $data['type'] = 'font/otf';
+        }
+    
+        if ('woff' === $wp_file_type['ext']) {
+            $data['ext'] = 'woff';
+            $data['type'] = 'font/woff';
+        }
+    
+        if ('woff2' === $wp_file_type['ext']) {
+            $data['ext'] = 'woff2';
+            $data['type'] = 'font/woff2';
+        }
+    
+        if ('eot' === $wp_file_type['ext']) {
+            $data['ext'] = 'eot';
+            $data['type'] = 'application/vnd.ms-fontobject';
+        }
+    
+        return $data;
+    }
+
+    function tf_upload_mimes_support($mimes) {
+        $mimes['ttf'] = 'font/ttf';
+        $mimes['otf'] = 'font/otf';
+        $mimes['woff'] = 'font/woff';
+        $mimes['woff2'] = 'font/woff2';
+        $mimes['eot'] = 'application/vnd.ms-fontobject';
+        return $mimes;
+    }
 }

@@ -817,6 +817,19 @@ abstract Class TF_Booking_Details {
                                                 </td>
                                             </tr>
                                        <?php } ?>
+                                       
+                                       <?php 
+                                        $airport_type  = !empty( $tf_tour_details->airport_service_type ) ? $tf_tour_details->airport_service_type : '';
+                                        if(!empty($airport_type) && $airport_type != 'undefined' && $airport_type != 'null'){
+                                            ?>
+                                            <tr>
+                                                <th><?php esc_html_e("Airport Service Type", "tourfic"); ?></th>
+                                                <td>:</td>
+                                                <td>
+                                                    <?php echo esc_html($airport_type); ?>    
+                                                </td>
+                                            </tr>
+                                       <?php } ?>
 
                                     </table>
                                 </div>
@@ -860,12 +873,20 @@ abstract Class TF_Booking_Details {
                                         <?php 
                                         if(!empty($tf_tour_details->tour_extra)){
                                         ?>
-                                        <tr>
-                                            <th><?php esc_html_e("Extra", "tourfic"); ?></th>
-                                            <td>:</td>
-                                            <td><?php echo wp_kses_post($tf_tour_details->tour_extra); ?></td>
-                                        </tr>
+                                            <tr>
+                                                <th><?php esc_html_e("Extra", "tourfic"); ?></th>
+                                                <td>:</td>
+                                                <td><?php echo wp_kses_post($tf_tour_details->tour_extra); ?></td>
+                                            </tr>
                                         <?php } ?>
+                                        <?php if(!empty($tf_tour_details->airport_service_fee)){ ?>
+                                            <tr>
+                                                <th><?php esc_html_e("Airport Service Fee", "tourfic"); ?></th>
+                                                <td>:</td>
+                                                <td><?php echo wp_kses_post($tf_tour_details->airport_service_fee); ?></td>
+                                            </tr>
+                                        <?php } ?>
+
                                         <?php 
                                         if(!empty($tf_tour_details->total_price)){ ?>
                                         <tr>
@@ -893,7 +914,7 @@ abstract Class TF_Booking_Details {
                                         <tr>
                                             <th><?php esc_html_e("Due Price", "tourfic"); ?></th>
                                             <td>:</td>
-                                            <td><?php echo wp_kses_post($tf_tour_details->due_price); ?></td>
+                                            <td><?php echo wp_kses_post(wc_price($tf_tour_details->due_price)); ?></td>
                                         </tr>
                                         <?php } ?>
                                     </table>
@@ -902,7 +923,7 @@ abstract Class TF_Booking_Details {
                         </div>
                     </div>
 
-                    <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tf_order_details->post_type == 'tour' ) { ?>
+                    <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tf_order_details->post_type == 'tour' ||  $tf_order_details->post_type == 'hotel' ) { ?>
                     <!-- Visitor Details -->
                     <div class="customers-order-date details-box">
                         <h4>
@@ -926,7 +947,7 @@ abstract Class TF_Booking_Details {
                             ?>
                             <div class="tf-grid-single">
                                 <?php /* translators: %s Visitor. */ ?>
-                                <h3><?php echo sprintf( esc_html__("Visitor %s", "tourfic"), $visitor_count ); ?></h3>
+                                <h3><?php echo $tf_order_details->post_type == 'tour' ? sprintf( esc_html__("Visitor %s", "tourfic"), $visitor_count ) : ( $tf_order_details->post_type == 'hotel' ? sprintf( esc_html__("Guest %s", "tourfic"), $visitor_count ) : '' ) ?></h3>
                                 <div class="tf-single-box">
                                     <table class="table" cellpadding="0" callspacing="0">
                                         <?php 
@@ -1093,12 +1114,12 @@ abstract Class TF_Booking_Details {
             </div>
         </div>
 
-		<?php if ( "tf_tours" == $this->booking_args['post_type'] ) { ?>
+		<?php if ( "tf_tours" == $this->booking_args['post_type'] || "tf_hotel" == $this->booking_args['post_type'] ) { ?>
             <div class="visitor-details-edit-form">
                 <form class="visitor-details-edit-popup">
                     <div class="tf-visitor-details-edit-header">
                         <h2>
-                            <?php esc_html_e("Edit visitor details", "tourfic"); ?>
+                            <?php $tf_order_details->post_type == 'tour' ? esc_html_e("Edit visitor details", "tourfic") : ( $tf_order_details->post_type == 'hotel' ? esc_html_e("Edit guest details", "tourfic") : '' ); ?>
                         </h2>
                         <div class="tf-booking-times">
                             <span>
@@ -1116,7 +1137,7 @@ abstract Class TF_Booking_Details {
                     <?php 
                     for($traveller_in = 1; $traveller_in <= $tf_total_visitor; $traveller_in++){ ?>
                         <div class="tf-single-tour-traveller tf-single-travel">
-                            <h4><?php echo esc_html__( 'Traveler ', 'tourfic' ) . esc_html($traveller_in) ?></h4>
+                            <h4><?php echo $tf_order_details->post_type == 'tour' ? esc_html__( 'Traveler ', 'tourfic' ) . esc_html($traveller_in) : ( $tf_order_details->post_type == 'hotel' ? esc_html__( 'Guest ', 'tourfic' ) . esc_html($traveller_in) : '' ) ?></h4>
                             <div class="traveller-info">
                             <?php
                             if(empty($traveler_fields)){ ?>

@@ -1021,7 +1021,7 @@ div#tf-contact-info {
             align-self: stretch;
             flex-wrap: wrap;
             justify-content: space-between;
-            .tf-booking-content{
+            .tf-booking-content {
                 display: none;
                 width: calc(62% - 24px);
                 @media #{$max767}{

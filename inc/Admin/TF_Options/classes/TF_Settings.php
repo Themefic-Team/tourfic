@@ -157,6 +157,19 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				array( 'TF_Shortcodes','tf_shortcode_callback'),
 			);
 
+			// Library submenu
+			if ( is_plugin_active( 'travelfic-toolkit/travelfic-toolkit.php' ) ) {
+				$library_url = admin_url( 'admin.php?page=travelfic-template-list' );
+				add_submenu_page(
+					$this->option_id,
+					esc_html__('Template Library', 'tourfic'),
+					esc_html__('Template Library', 'tourfic'),
+					'manage_options',
+					$library_url,
+					''
+				);
+			}
+
 			if ( function_exists('is_tf_pro') ) {
 				//License Info submenu
 				add_submenu_page(
@@ -885,17 +898,29 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 										if ( ! file_exists( $tf_itinerary_fonts ) ) {
 											wp_mkdir_p( $tf_itinerary_fonts );
 										}
-										$tf_fonts_extantions = array('application/octet-stream');
+										// extension want to allow
+										$allowed_ext = array('ttf', 'otf', 'woff', 'woff2', 'eot');
+										$allowed_mime_types = array('application/octet-stream', 'font/ttf', 'font/otf', 'font/woff', 'font/woff2', 'application/vnd.ms-fontobject');
 										for($i = 0; $i < count($_FILES['file']['name']); $i++) {
-											if (in_array($_FILES['file']['type'][$i], $tf_fonts_extantions)) {
-												$tf_font_filename = $_FILES['file']['name'][$i];
-												$uploaded_file_tmp = $_FILES['file']['tmp_name'][$i];
+											
+											$tf_font_filename = $_FILES['file']['name'][$i];
+											$uploaded_file_tmp = $_FILES['file']['tmp_name'][$i];
+											$checked = wp_check_filetype_and_ext( $uploaded_file_tmp, $tf_font_filename);
+											if (isset($checked['ext']) && in_array($checked["ext"], $allowed_ext) && in_array($checked['type'], $allowed_mime_types)) {
 												$destination_path = $tf_itinerary_fonts .'/'. $tf_font_filename;
 												if (copy($uploaded_file_tmp, $destination_path)) {
 													// File copied successfully, you can perform further actions if needed
 												} else {
 													// Handle error if copy operation failed
 												}
+											} else {
+												// Invalid file type or extension
+												$response    = [
+													'status'  => 'error',
+													'message' => __( 'Invalid file type or extension', 'tourfic' ),
+												];
+												echo wp_json_encode($response);
+												wp_die();
 											}
 										}
 									}

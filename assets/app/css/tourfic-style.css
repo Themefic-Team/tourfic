@@ -4181,6 +4181,11 @@ table.tf-table tr:last-child {
   width: 24px;
 }
 
+.tf-reserve-button {
+  width: 100%;
+  margin-top: 15px;
+}
+
 .tf-field-group.tf_form-inner,
 .tf-field-group {
   position: relative;
@@ -5199,6 +5204,13 @@ span.tf-price .amount {
   .tf-main-wrapper .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-content-area .hotel-facility-item ul li span {
     min-width: 16px;
   }
+}
+
+.tf-single-hotel-service label {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 8px;
 }
 
 /********************** HOTEL FACILITIES - END  **********************/
