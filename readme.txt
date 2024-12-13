@@ -160,6 +160,7 @@ Furthermore, an array of indispensable features solidifies Tourfic's position as
 * Hotel Data import export (Pro)
 * Tour Data import export (Pro)
 * Apartment Data import export (Pro)
+* Car Data import export (Pro)
 
 = 🎉 BACKEND/ADMIN BOOKING (PRO) =
 * Backend/Admin booking for Hotel
