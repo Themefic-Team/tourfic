@@ -358,7 +358,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Added: Export and import options for car rentals (Pro).
 - Added: Option for hotel bookings without payment (Pro).
 - Added: Booking calendar integration for vendors (Pro).
-- Fixed: Issue with backend tour bookings has been resolved.
+- Fixed: The issue with backend tour bookings has been resolved.
 - Fixed: The security patch has been resolved.
 
 = 2.15.3 - 05 December 2024 =
