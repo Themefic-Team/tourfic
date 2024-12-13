@@ -140,7 +140,7 @@ Furthermore, an array of indispensable features solidifies Tourfic's position as
 * Wishlist for logged-in and log-out users (Pro)
 
 = 🎉  CUSTOMER REVIEW SYSTEM =
-* Review System for Hotels, Tours, Car and Apartments
+* Review System for Hotels, Tours, Cars, and Apartments
 * Enable/disable Review Section
 * Change Existing or Create New Review fields
 * Review for logged-in and log-out users
