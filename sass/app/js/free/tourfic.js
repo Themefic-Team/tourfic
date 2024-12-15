@@ -1724,7 +1724,7 @@
             $('.error-text').text("");
             $this.find('.tf-single-travel').each(function () {
                 $(this).find('input, select').each(function () {
-                    if ($(this).attr('data-required')) {
+                    if ($(this).attr('data-required') && $(this).attr('data-required') == 1) {
                         if ($(this).val() == "") {
                             hasErrors.push(true);
                             const errorContainer = $(this).siblings('.error-text');
@@ -1764,13 +1764,13 @@
         });
 
         // Booking Confirmation Form Validation
-        $(document).on('click', '.tf-book-confirm-error', function (e) {
+        $(document).on('click', '.tf-book-confirm-error, .tf-hotel-book-confirm-error', function (e) {
             let hasErrors = [];
             let $this = $(this).closest('.tf-withoutpayment-booking');
             $('.error-text').text("");
             $this.find('.tf-confirm-fields').each(function () {
                 $(this).find('input, select').each(function () {
-                    if ($(this).attr('data-required')) {
+                    if ($(this).attr('data-required') && $(this).attr('data-required') == 1 ) {
                         if ($(this).val() == "") {
                             hasErrors.push(true);
                             const errorContainer = $(this).siblings('.error-text');

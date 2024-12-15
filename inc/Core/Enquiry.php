@@ -992,7 +992,12 @@ abstract class Enquiry {
 		$response = array();
 		global $wpdb;
 		global $current_user;
-		$reply_data = $wpdb->get_results( "SELECT reply_data FROM {$wpdb->prefix}tf_enquiry_data WHERE id= " . $_POST['enquiry_id'] );
+		$reply_data = $wpdb->get_results( 
+			$wpdb->prepare(
+				"SELECT reply_data FROM {$wpdb->prefix}tf_enquiry_data WHERE id= %s",
+				$_POST['enquiry_id']
+			)
+		);
 		$reply_data = json_decode( $reply_data[0]->reply_data, true );
 
 		check_ajax_referer('updates', '_ajax_nonce');
@@ -1219,7 +1224,10 @@ abstract class Enquiry {
 		$response_data = get_option("tfep_enquiry_update_response");
 
 		$enquiry_id = $response_data["enquiry_id"];
-		$enquiry_details = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data where id= $enquiry_id", ARRAY_A );
+		$enquiry_details = $wpdb->get_results( 
+			$wpdb->prepare("SELECT * FROM {$wpdb->prefix}tf_enquiry_data where id= %s", $enquiry_id), 
+			ARRAY_A 
+		);
 		$enquiry_details = !empty($enquiry_details) ? $enquiry_details[0] : array();
 
 		if( $enquiry_details["author_roles"] != "tf_vendor" ) {

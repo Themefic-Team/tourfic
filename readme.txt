@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.7
-Stable tag: 2.15.3
+Stable tag: 2.15.4
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -140,7 +140,7 @@ Furthermore, an array of indispensable features solidifies Tourfic's position as
 * Wishlist for logged-in and log-out users (Pro)
 
 = 🎉  CUSTOMER REVIEW SYSTEM =
-* Review System for Hotels, Tours, Car and Apartments
+* Review System for Hotels, Tours, Cars, and Apartments
 * Enable/disable Review Section
 * Change Existing or Create New Review fields
 * Review for logged-in and log-out users
@@ -160,6 +160,7 @@ Furthermore, an array of indispensable features solidifies Tourfic's position as
 * Hotel Data import export (Pro)
 * Tour Data import export (Pro)
 * Apartment Data import export (Pro)
+* Car Data import export (Pro)
 
 = 🎉 BACKEND/ADMIN BOOKING (PRO) =
 * Backend/Admin booking for Hotel
@@ -348,6 +349,17 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 23. Sync Booking with Google Calendar(Pro)
 
 == Changelog ==
+
+= 2.15.4 - 13 December 2024 =
+
+- Added: Option to edit rooms directly from the hotel edit page.
+- Added: Duplicator feature for car rentals and rooms.
+- Added: Offline booking email template settings (Pro).
+- Added: Export and import options for car rentals (Pro).
+- Added: Option for hotel bookings without payment (Pro).
+- Added: Booking calendar integration for vendors (Pro).
+- Fixed: The issue with backend tour bookings has been resolved.
+- Fixed: The security patch has been resolved.
 
 = 2.15.3 - 05 December 2024 =
 

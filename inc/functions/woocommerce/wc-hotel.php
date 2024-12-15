@@ -37,7 +37,7 @@ function tf_hotel_booking_callback() {
 	$adult           = isset( $_POST['adult'] ) ? intval( sanitize_text_field( $_POST['adult'] ) ) : '0';
 	$child           = isset( $_POST['child'] ) ? intval( sanitize_text_field( $_POST['child'] ) ) : '0';
 	$children_ages   = isset( $_POST['children_ages'] ) ? sanitize_text_field( $_POST['children_ages'] ) : '0';
-	$room_selected   = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : '0';
+	$room_selected   = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : ( (isset($_POST["hotel_room_selected"]) && !empty($_POST["hotel_room_selected"])) ? intval( sanitize_text_field( $_POST['hotel_room_selected'] ) ) : 1 );
 	$check_in        = isset( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
 	$check_out       = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
 	$deposit         = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
@@ -48,6 +48,12 @@ function tf_hotel_booking_callback() {
 	if( is_plugin_active('instantio/instantio.php') ){
 		$instantio_is_active = 1;
 	}
+
+
+	// Without Payment Booking Data
+	$tf_without_payment_guest_info = !empty( $_POST['guest'] ) ? $_POST['guest'] : '';
+	$tf_without_payment_confirmation_details = !empty( $_POST['booking_confirm'] ) ? $_POST['booking_confirm'] : array();
+	$tf_without_payment_booking_fields = !empty( tfopt( 'hotel-book-confirm-field' ) ) ? tf_data_types( tfopt( 'hotel-book-confirm-field' ) ) : '';
 
 	// Check errors
 	if ( ! $check_in ) {
@@ -74,6 +80,9 @@ function tf_hotel_booking_callback() {
 	$product_id    = get_post_meta( $post_id, 'product_id', true );
 	$post_author   = get_post_field( 'post_author', $post_id );
 	$meta          = get_post_meta( $post_id, 'tf_hotels_opt', true );
+	$tf_booking_type = !empty($meta['booking-by']) ? $meta['booking-by'] : '1';
+
+
 	$room_meta     = get_post_meta( $room_id, 'tf_room_opt', true );
 	$avail_by_date = ! empty( $room_meta['avil_by_date'] ) && $room_meta['avil_by_date'];
 	if ( $avail_by_date ) {
@@ -125,6 +134,78 @@ function tf_hotel_booking_callback() {
 	 * If no errors then process
 	 */
 	if ( ! array_key_exists( 'errors', $response ) || count( $response['errors'] ) == 0 ) {
+
+		if (3 == $tf_booking_type) {
+			$tf_hotel_booking_fields = !empty(Helper::tfopt( 'hotel-book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'hotel-book-confirm-field' )) : '';
+
+			if(empty($tf_booking_fields)){
+				$billing_details  = array(
+					'billing_first_name' => isset( $tf_without_payment_confirmation_details['tf_first_name'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_first_name']) : '',
+					'billing_last_name'  => isset( $tf_without_payment_confirmation_details['tf_last_name'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_last_name']) : '',
+					'billing_company'    => '',
+					'billing_address_1'  => isset( $tf_without_payment_confirmation_details['tf_street_address'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_street_address']) : '',
+					'billing_address_2'  => "",
+					'billing_city'       => isset( $tf_without_payment_confirmation_details['tf_town_city'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_town_city']) : '',
+					'billing_state'      => isset( $tf_without_payment_confirmation_details['tf_state_country'] ) ? sanitize_text_field( $tf_without_payment_confirmation_details['tf_state_country'] ) : '',
+					'billing_postcode'   => isset( $tf_without_payment_confirmation_details['tf_postcode'] ) ? sanitize_text_field( $tf_without_payment_confirmation_details['tf_postcode'] ) : '',
+					'billing_country'    => isset( $tf_without_payment_confirmation_details['tf_country'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_country']) : '',
+					'billing_email'      => isset( $tf_without_payment_confirmation_details['tf_email'] ) ? sanitize_email($tf_without_payment_confirmation_details['tf_email']) : '',
+					'billing_phone'      => isset( $tf_without_payment_confirmation_details['tf_phone'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_phone']) : '',
+				);
+				$shipping_details  = array(
+					'tf_first_name' 		=> isset( $tf_without_payment_confirmation_details['tf_first_name'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_first_name']) : '',
+					'tf_last_name'  		=> isset( $tf_without_payment_confirmation_details['tf_last_name'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_last_name']) : '',
+					'shipping_company'    	=> '',
+					'tf_street_address'  	=> isset( $tf_without_payment_confirmation_details['tf_street_address'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_street_address']) : '',
+					'shipping_address_2'  	=> "",
+					'tf_town_city'       	=> isset( $tf_without_payment_confirmation_details['tf_town_city'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_town_city']) : '',
+					'tf_state_country'      => isset( $tf_without_payment_confirmation_details['tf_state_country'] ) ? sanitize_text_field( $tf_without_payment_confirmation_details['tf_state_country'] ) : '',
+					'tf_postcode'   		=> isset( $tf_without_payment_confirmation_details['tf_postcode'] ) ? sanitize_text_field( $tf_without_payment_confirmation_details['tf_postcode'] ) : '',
+					'tf_country'    		=> isset( $tf_without_payment_confirmation_details['tf_country'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_country']) : '',
+					'tf_email'      		=> isset( $tf_without_payment_confirmation_details['tf_email'] ) ? sanitize_email($tf_without_payment_confirmation_details['tf_email']) : '',
+					'tf_phone'      		=> isset( $tf_without_payment_confirmation_details['tf_phone'] ) ? sanitize_text_field($tf_without_payment_confirmation_details['tf_phone']) : '',
+				);
+			} else {
+				$billing_details = [];
+				$shipping_details = [];
+
+				if(!empty($tf_without_payment_confirmation_details)) {
+					foreach( $tf_without_payment_confirmation_details as $key => $details ){
+						if("tf_first_name"==$key){
+							$billing_details['billing_first_name'] = sanitize_text_field($details);
+							$shipping_details[$key] = sanitize_text_field($details);
+						}else if("tf_last_name"==$key){
+							$billing_details['billing_last_name'] = sanitize_text_field($details);
+							$shipping_details[$key] = sanitize_text_field($details);
+						}else if("tf_street_address"==$key){
+							$billing_details['billing_address_1'] = sanitize_text_field($details);
+							$shipping_details[$key] = sanitize_text_field($details);
+						}else if("tf_town_city"==$key){
+							$billing_details['billing_city'] = sanitize_text_field($details);
+							$shipping_details[$key] = sanitize_text_field($details);
+						}else if("tf_state_country"==$key){
+							$billing_details['billing_state'] = sanitize_text_field($details);
+							$shipping_details[$key] = sanitize_text_field($details);
+						}else if("tf_postcode"==$key){
+							$billing_details['billing_postcode'] = sanitize_text_field($details);
+							$shipping_details[$key] = sanitize_text_field($details);
+						}else if("tf_country"==$key){
+							$billing_details['billing_country'] = sanitize_text_field($details);
+							$shipping_details[$key] = sanitize_text_field($details);
+						}else if("tf_email"==$key){
+							$billing_details['billing_email'] = sanitize_email($details);
+							$shipping_details[$key] = sanitize_email($details);
+						}else if("tf_phone"==$key){
+							$billing_details['billing_phone'] = sanitize_text_field($details);
+							$shipping_details[$key] = sanitize_text_field($details);
+						}else{
+							$billing_details[$key] = $details;
+							$shipping_details[$key] = $details;
+						}
+					}
+				}
+			}
+		}
 
 		$tf_room_data['tf_hotel_data']['order_type']         = 'hotel';
 		$tf_room_data['tf_hotel_data']['post_id']            = $post_id;
@@ -303,6 +384,14 @@ function tf_hotel_booking_callback() {
 		# Set pricing
 		$tf_room_data['tf_hotel_data']['price_total'] = $price_total;
 
+		if ( is_user_logged_in() ) {
+			$current_user = wp_get_current_user();
+			// get user id
+			$tf_offline_user_id = $current_user->ID;
+		} else {
+			$tf_offline_user_id = 1;
+		}
+
 		# Airport Service Fee
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tf_room_data['tf_hotel_data']['air_serivice_avail'] ) && 1 == $tf_room_data['tf_hotel_data']['air_serivice_avail'] ) {
 			if ( "pickup" == $airport_service ) {
@@ -475,6 +564,10 @@ function tf_hotel_booking_callback() {
 
 			}
 		}
+
+		if (!empty( $tf_without_payment_guest_info )) {
+			$tf_room_data['tf_hotel_data']['visitor_details']	=	json_encode($tf_without_payment_guest_info);
+		}
 		// Booking Type
 		$tf_booking_type = $tf_booking_url = $tf_booking_query_url = $tf_booking_attribute = '';
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
@@ -501,6 +594,57 @@ function tf_hotel_booking_callback() {
 			$response['product_id']  = $product_id;
 			$response['add_to_cart'] = 'true';
 			$response['redirect_to'] = $tf_booking_url;
+		} else if( $tf_booking_type == 3 ) {
+			$without_payment_order_details    = [
+				'order_by'             => '',
+				'room'                 => !empty( $tf_room_data['tf_hotel_data']['room'] ) ? $tf_room_data['tf_hotel_data']['room'] : 1,
+				'check_in'             => !empty($tf_room_data['tf_hotel_data']['check_in']) ? $tf_room_data['tf_hotel_data']['check_in'] : '',
+				'check_out'            => !empty($tf_room_data['tf_hotel_data']['check_out']) ? $tf_room_data['tf_hotel_data']['check_out'] : '',
+				'room_name'            => !empty($tf_room_data['tf_hotel_data']['room_name']) ? $tf_room_data['tf_hotel_data']['room_name'] : '',
+				'adult'                => $adult,
+				'child'                => $child,
+				'children_ages'        => $children_ages,
+				'airport_service_type' => $airport_service,
+				'airport_service_fee'  => isset($airport_service_price_total) ? wc_price( $airport_service_price_total ) : '',
+				'total_price'          => !empty($tf_room_data['tf_hotel_data']['price_total']) ? $tf_room_data['tf_hotel_data']['price_total'] : 0,
+				'due_price'            => !empty($tf_room_data['tf_hotel_data']['due']) ? $tf_room_data['tf_hotel_data']['due'] : '',
+				'visitor_details' => json_encode($tf_without_payment_guest_info),
+			];
+	
+	
+			$without_payment_order_data = array(
+				'post_id'          => !empty( $tf_room_data['tf_hotel_data']['post_id'] ) ? $tf_room_data['tf_hotel_data']['post_id'] : '',
+				'post_type'        => 'hotel',
+				'room_number'      => !empty( $tf_room_data['tf_hotel_data']['room'] ) ? $tf_room_data['tf_hotel_data']['room'] : 1,
+				'room_id'          => !empty( $tf_room_data['tf_hotel_data']['unique_id'] ) ? $tf_room_data['tf_hotel_data']['unique_id'] : null,
+				'check_in'         => !empty( $tf_room_data['tf_hotel_data']['check_in'] ) ? $tf_room_data['tf_hotel_data']['check_in'] : '',
+				'check_out'        => !empty( $tf_room_data['tf_hotel_data']['check_out'] ) ? $tf_room_data['tf_hotel_data']['check_out'] : '',
+				'billing_details'  => $billing_details,
+				'shipping_details' => $shipping_details,
+				'order_details'    => $without_payment_order_details,
+				'payment_method'   => "offline",
+				'customer_id'	   => $tf_offline_user_id,
+				'status'           => 'processing',
+				'order_date'       => date( 'Y-m-d H:i:s' ),
+			);
+
+			$response['without_payment'] = 'true';
+			$order_id = Helper::tf_set_order( $without_payment_order_data );
+			if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($order_id) ) {
+				do_action( 'tf_offline_payment_booking_confirmation', $order_id, $without_payment_order_data );
+
+				if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
+					
+					/**
+					 * Filters the data passed to the Google Calendar integration.
+					 *
+					 * @param int    $order_id   The order ID.
+					 * @param array  $order_data The items in the order.
+					 * @param string $type Order type
+					 */
+					apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $without_payment_order_data, '' );
+				}
+			}
 		} else {
 			# Add product to cart with the custom cart item data
 			WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_room_data );
@@ -681,6 +825,7 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	$due                  = ! empty( $values['tf_hotel_data']['due'] ) ? $values['tf_hotel_data']['due'] : '';
 	$airport_service_type = ! empty( $values['tf_hotel_data']['air_serivicetype'] ) ? $values['tf_hotel_data']['air_serivicetype'] : null;
 	$airport_fees         = ! empty( $values['tf_hotel_data']['air_service_info'] ) ? $values['tf_hotel_data']['air_service_info'] : null;
+	$guest_details = !empty($values['tf_hotel_data']['visitor_details']) ? $values['tf_hotel_data']['visitor_details'] : null;
 
 	/**
 	 * Show data in order meta & email
@@ -749,6 +894,10 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
 
 	if ( ! empty( $due ) ) {
 		$item->update_meta_data( 'due', wp_strip_all_tags( wc_price( $due ) ) );
+	}
+
+	if ( ! empty( $guest_details ) ) {
+		$item->update_meta_data( '_visitor_details', $guest_details );
 	}
 
 
@@ -879,6 +1028,7 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 			$children_ages        = $item->get_meta( 'Children Ages', true );
 			$airport_service_type = $item->get_meta( 'Airport Service', true );
 			$airport_service_fee  = $item->get_meta( 'Airport Service Fee', true );
+			$guest_details = $item->get_meta( '_visitor_details', true );
 
 			$iteminfo = [
 				'room'                 => $room_selected,
@@ -894,7 +1044,8 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				'airport_service_fee'  => $airport_service_fee,
 				'total_price'          => $price,
 				'due_price'            => $due,
-				'tax_info'             => wp_json_encode( $fee_sums )
+				'tax_info'             => wp_json_encode( $fee_sums ),
+				'visitor_details' => $guest_details
 			];
 
 			$tf_integration_order_data[] = [
@@ -1099,6 +1250,7 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 			$children_ages        = $item->get_meta( 'Children Ages', true );
 			$airport_service_type = $item->get_meta( 'Airport Service', true );
 			$airport_service_fee  = $item->get_meta( 'Airport Service Fee', true );
+			$guest_details = $item->get_meta( '_visitor_details', true );
 
 			$iteminfo = [
 				'room'                 => $room_selected,
@@ -1114,7 +1266,8 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 				'airport_service_fee'  => $airport_service_fee,
 				'total_price'          => $price,
 				'due_price'            => $due,
-				'tax_info'             => wp_json_encode( $fee_sums )
+				'tax_info'             => wp_json_encode( $fee_sums ),
+				'visitor_details' => $guest_details
 			];
 
 			$tf_integration_order_data[] = [

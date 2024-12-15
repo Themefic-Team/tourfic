@@ -685,6 +685,15 @@ span.tf-price .amount {
         }
     }
 }
+
+// Booking Popup
+.tf-single-hotel-service label {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
 /********************** HOTEL FACILITIES - END  **********************/
 /********************** RESPONSIVE **********************/
 @media only screen and (min-width: 951px) {

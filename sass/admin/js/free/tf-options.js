@@ -703,7 +703,23 @@
                 $('#' + id + '').select2({
                     placeholder: placeholder,
                     allowClear: true,
-                    templateResult: TfFormatOption
+                    templateResult: TfFormatOption,
+                    templateSelection: function (state) {
+                        if (!state.id) {
+                            return state.text;
+                        }
+                
+                        // Get the edit URL from the option's data attribute
+                        var editUrl = $(state.element).data('edit-url');
+                        if(editUrl){
+                            var $state = $(
+                                '<span>' + state.text + ' <a target="_blank" href="'+editUrl+'" class="tf-edit-room"><i class="fa-regular fa-pen-to-square"></i></a></span>'
+                            );
+                            return $state;
+                        }
+                
+                        return state.text;
+                    }
                 });
             }else{
                 $('#' + id + '').select2({
@@ -1370,6 +1386,17 @@
             }
             if ($('.tf-repeater-wrap .tf-single-repeater-hotel-book-confirm-field').length > 0) {
                 $('.tf-repeater-wrap .tf-single-repeater-hotel-book-confirm-field').each(function () {
+                    let $this = $(this);
+                    let repeaterCount = $this.find('input[name="tf_repeater_count"]').val();
+                    if (0 == repeaterCount || 1 == repeaterCount || 2 == repeaterCount) {
+                        $this.find('.tf_hidden_fields').hide();
+                        $this.find('.tf-repeater-icon-clone').hide();
+                        $this.find('.tf-repeater-icon-delete').hide();
+                    }
+                });
+            }
+            if ($('.tf-repeater-wrap .tf-single-repeater-car-book-confirm-field').length > 0) {
+                $('.tf-repeater-wrap .tf-single-repeater-car-book-confirm-field').each(function () {
                     let $this = $(this);
                     let repeaterCount = $this.find('input[name="tf_repeater_count"]').val();
                     if (0 == repeaterCount || 1 == repeaterCount || 2 == repeaterCount) {
