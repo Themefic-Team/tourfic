@@ -7,8 +7,6 @@
     <div class="tf-questions">
         
         <?php 
-        $faqs_itemsPerColumn = ceil(count($faqs) / 2);
-        
         if (count($faqs) >= 2) {
             $faqchunks = array_chunk($faqs, ceil(count($faqs) / 2), true);
             $faqfirstArray = $faqchunks[0];
