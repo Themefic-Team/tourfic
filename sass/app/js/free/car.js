@@ -14,7 +14,7 @@
 
         
         // FAQ Accordion
-        $('.tf-faq-head').on("click", function () {
+        $('.tf-car-faq-section .tf-faq-head').on("click", function () {
             var $this = $(this);
             if (!$this.hasClass("active")) {
                 $(".tf-question-desc").slideUp(400);
