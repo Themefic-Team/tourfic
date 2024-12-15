@@ -1227,7 +1227,7 @@ trait Action_Helper {
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) {
 								$count ++;
 								$map                 = ! empty( $hotel_meta['map'] ) ? Helper::tf_data_types( $hotel_meta['map'] ) : '';
-								$min_price_arr       = hotelPricing::instance( get_the_ID() )->get_min_price();
+								$min_price_arr       = Hotel_Pricing::instance( get_the_ID() )->get_min_price();
 								$min_sale_price      = ! empty( $min_price_arr['min_sale_price'] ) ? $min_price_arr['min_sale_price'] : 0;
 								$min_regular_price   = ! empty( $min_price_arr['min_regular_price'] ) ? $min_price_arr['min_regular_price'] : 0;
 								$min_discount_type   = ! empty( $min_price_arr['min_discount_type'] ) ? $min_price_arr['min_discount_type'] : 'none';
@@ -1277,7 +1277,7 @@ trait Action_Helper {
 												</a>
 											</h4>
                                             <div class="tf-map-item-price">
-												<?php echo wp_kses_post(hotelPricing::instance( get_the_ID() )->get_min_price_html()); ?>
+												<?php echo wp_kses_post(Hotel_Pricing::instance( get_the_ID() )->get_min_price_html()); ?>
                                             </div>
 											<?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
                                         </div>
@@ -1325,7 +1325,7 @@ trait Action_Helper {
                                 $discount_type  = ! empty( $tour_meta['discount_type'] ) ? $tour_meta['discount_type'] : '';
                                 $discount_price = ! empty( $tour_meta['discount_price'] ) ? $tour_meta['discount_price'] : '';
 
-                                $min_price_arr     = tourPricing::instance( get_the_ID() )->get_min_price();
+                                $min_price_arr     = Tour_Pricing::instance( get_the_ID() )->get_min_price();
                                 $min_sale_price    = ! empty( $min_price_arr['min_sale_price'] ) ? $min_price_arr['min_sale_price'] : 0;
                                 $min_regular_price = ! empty( $min_price_arr['min_regular_price'] ) ? $min_price_arr['min_regular_price'] : 0;
                                 $min_discount      = ! empty( $min_price_arr['min_discount'] ) ? $min_price_arr['min_discount'] : 0;
@@ -1373,7 +1373,7 @@ trait Action_Helper {
 												</a>
 											</h4>
                                             <div class="tf-map-item-price">
-                                                <?php echo wp_kses_post(tourPricing::instance( get_the_ID() )->get_min_price_html()); ?>
+                                                <?php echo wp_kses_post(Tour_Pricing::instance( get_the_ID() )->get_min_price_html()); ?>
                                             </div>
                                             <?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
                                         </div>
@@ -1422,7 +1422,7 @@ trait Action_Helper {
 								$discount_type  = ! empty( $apartment_meta['discount_type'] ) ? $apartment_meta['discount_type'] : '';
 								$discount_price = ! empty( $apartment_meta['discount'] ) ? $apartment_meta['discount'] : '';
 
-								$min_price_arr = apartmentPricing::instance(get_the_ID())->get_min_price();
+								$min_price_arr = Apt_Pricing::instance(get_the_ID())->get_min_price();
 								$min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;
 								$min_regular_price = !empty($min_price_arr['min_regular_price']) ? $min_price_arr['min_regular_price'] : 0;
 
@@ -1470,7 +1470,7 @@ trait Action_Helper {
 												</a>
 											</h4>
                                             <div class="tf-map-item-price">
-												<?php echo wp_kses_post(apartmentPricing::instance(get_the_ID())->get_min_price_html()); ?>
+												<?php echo wp_kses_post(Apt_Pricing::instance(get_the_ID())->get_min_price_html()); ?>
                                             </div>
 											<?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
                                         </div>
@@ -1525,7 +1525,7 @@ trait Action_Helper {
 							if (function_exists( 'is_tf_pro' ) && is_tf_pro()) {
 								$count ++;
 								$map                 = ! empty( $hotel_meta['map'] ) ? Helper::tf_data_types( $hotel_meta['map'] ) : '';
-								$min_price_arr       = hotelPricing::instance( get_the_ID() )->get_min_price();
+								$min_price_arr       = Hotel_Pricing::instance( get_the_ID() )->get_min_price();
 								$min_sale_price      = ! empty( $min_price_arr['min_sale_price'] ) ? $min_price_arr['min_sale_price'] : 0;
 								$min_regular_price   = ! empty( $min_price_arr['min_regular_price'] ) ? $min_price_arr['min_regular_price'] : 0;
 								$min_discount_type   = ! empty( $min_price_arr['min_discount_type'] ) ? $min_price_arr['min_discount_type'] : 'none';
@@ -1576,7 +1576,7 @@ trait Action_Helper {
 												</a>
 											</h4>
                                             <div class="tf-map-item-price">
-												<?php echo wp_kses_post(hotelPricing::instance( get_the_ID() )->get_min_price_html()); ?>
+												<?php echo wp_kses_post(Hotel_Pricing::instance( get_the_ID() )->get_min_price_html()); ?>
                                             </div>
 											<?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
                                         </div>
@@ -1626,7 +1626,7 @@ trait Action_Helper {
 								$discount_type  = ! empty( $tour_meta['discount_type'] ) ? $tour_meta['discount_type'] : '';
 								$discount_price = ! empty( $tour_meta['discount_price'] ) ? $tour_meta['discount_price'] : '';
 
-								$min_price_arr     = tourPricing::instance( get_the_ID() )->get_min_price();
+								$min_price_arr     = Tour_Pricing::instance( get_the_ID() )->get_min_price();
 								$min_sale_price    = ! empty( $min_price_arr['min_sale_price'] ) ? $min_price_arr['min_sale_price'] : 0;
 								$min_regular_price = ! empty( $min_price_arr['min_regular_price'] ) ? $min_price_arr['min_regular_price'] : 0;
 								$min_discount      = ! empty( $min_price_arr['min_discount'] ) ? $min_price_arr['min_discount'] : 0;
@@ -1674,7 +1674,7 @@ trait Action_Helper {
 												</a>
 											</h4>
                                             <div class="tf-map-item-price">
-												<?php echo wp_kses_post(tourPricing::instance( get_the_ID() )->get_min_price_html()); ?>
+												<?php echo wp_kses_post(Tour_Pricing::instance( get_the_ID() )->get_min_price_html()); ?>
                                             </div>
 											<?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
                                         </div>
@@ -1721,7 +1721,7 @@ trait Action_Helper {
 								$discount_type  = ! empty( $apartment_meta['discount_type'] ) ? $apartment_meta['discount_type'] : '';
 								$discount_price = ! empty( $apartment_meta['discount'] ) ? $apartment_meta['discount'] : '';
 
-								$min_price_arr = apartmentPricing::instance(get_the_ID())->get_min_price();
+								$min_price_arr = Apt_Pricing::instance(get_the_ID())->get_min_price();
 								$min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;
 								$min_regular_price = !empty($min_price_arr['min_regular_price']) ? $min_price_arr['min_regular_price'] : 0;
 
@@ -1769,7 +1769,7 @@ trait Action_Helper {
 												</a>
 											</h4>
                                             <div class="tf-map-item-price">
-												<?php echo wp_kses_post(apartmentPricing::instance(get_the_ID())->get_min_price_html()); ?>
+												<?php echo wp_kses_post(Apt_Pricing::instance(get_the_ID())->get_min_price_html()); ?>
                                             </div>
 											<?php \Tourfic\App\TF_Review::tf_archive_single_rating(); ?>
                                         </div>
