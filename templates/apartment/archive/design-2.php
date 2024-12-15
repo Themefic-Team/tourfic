@@ -10,11 +10,12 @@
 
         do_action('tf_before_container');
         $post_count = $GLOBALS['wp_query']->post_count;
+        $tf_apartment_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_2_bannar'] : '';
         $tf_map_settings = !empty(Helper::tfopt('google-page-option')) ? Helper::tfopt('google-page-option') : "default";
         $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googlemapapi') : '';
         ?>
 
-        <div class="tf-archive-search-form tf-booking-form-wrapper">
+        <div class="tf-archive-search-form tf-booking-form-wrapper" style="<?php echo !empty($tf_apartment_arc_banner) ? 'background-image: url('.esc_url($tf_apartment_arc_banner).')' : ''; ?>">
             <div class="tf-container">
                 <form action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
                     <?php Helper::tf_archive_sidebar_search_form('tf_apartment'); ?>

@@ -2981,6 +2981,22 @@ TF_Settings::option( 'tf_settings', array(
 						'template3-icon-color' => __( 'Template 3 Icon Color', 'tourfic' ),
 					)
 				),
+				array(
+					'id'       => 'tourfic-template4-bg',
+					'type'     => 'color',
+					'label'    => __( 'Colors Settings for Template 4', 'tourfic' ),
+					'subtitle' => __( 'Set the colors for the template 4.', 'tourfic' ),
+					'multiple' => true,
+					'inline'   => true,
+					'colors'   => array(
+						'template4-bg' => __( 'Body Background Color', 'tourfic' ),
+						'template4-search-form-bg' => __( 'Search Form Background Color', 'tourfic' ),
+						'template4-card-bg' => __( 'Card Background Color', 'tourfic' ),
+						'template4-card-hover-bg-color' => __( 'Card Hover Background Color', 'tourfic' ),
+						'template4-btn-bg-color' => __( 'Button Background Color', 'tourfic' ),
+						'template4-btn-hover-bg-color' => __( 'Button Hover Background Color', 'tourfic' ),
+					)
+				),
 			),
 		),
 		'hotel_design'          => array(

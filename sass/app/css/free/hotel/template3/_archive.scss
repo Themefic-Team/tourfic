@@ -31,6 +31,7 @@ $t4-main-color: #060D1C;
         background-image: url(../images/hotel-form-bg.png);
         background-repeat: no-repeat;
         background-position: center center;
+        background-size: cover;
         border-bottom: 0.5px solid $t4-orange-200;
 
         @media #{$max1024} {

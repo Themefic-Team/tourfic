@@ -7,6 +7,14 @@
     if (!isset($_GET['_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_nonce'])), 'tf_ajax_nonce')) {
         return;
     }
+
+    if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
+        $tf_search_result_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_3_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_3_bannar'] : '';
+    }elseif( !empty($_GET['type']) && $_GET['type']=="tf_hotel" ){
+        $tf_search_result_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_3_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_3_bannar'] : '';
+    }else{
+        $tf_search_result_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_2_bannar'] : '';
+    }
     ?>
     <div class="tf-content-wrapper">
         <?php
@@ -16,7 +24,7 @@
         $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googlemapapi') : '';
         ?>
 
-        <div class="tf-archive-search-form tf-booking-form-wrapper">
+        <div class="tf-archive-search-form tf-booking-form-wrapper" style="<?php echo !empty($tf_search_result_banner) ? 'background-image: url('.esc_url($tf_search_result_banner).')' : ''; ?>">
             <div class="tf-container">
                 <form action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
                     <?php Helper::tf_search_result_sidebar_form('archive'); ?>

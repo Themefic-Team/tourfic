@@ -20807,6 +20807,7 @@ html {
   background-image: url(../images/hotel-form-bg.png);
   background-repeat: no-repeat;
   background-position: center center;
+  background-size: cover;
   border-bottom: 0.5px solid #F5E9E0;
 }
 
