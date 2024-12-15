@@ -486,7 +486,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                     <div class="tf-container">
                         <div class="tf-container-inner">
                             <div class="section-title">
-                                <h2 class="tf-title"><?php echo apply_filters( 'wpml_translate_single_string', Helper::tfopt( 'rt-title' ), 'tourfic-settings', 'rt-title' ); ?></h2>
+                                <h2 class="tf-title"><?php echo ! empty( Helper::tfopt( 'rt-title' ) ) ? esc_html( Helper::tfopt( 'rt-title' ), "tourfic" ) : esc_html_e( "You may also like", "tourfic" ); ?></h2>
                             </div>
                             <div class="tf-design-3-slider-items-wrapper tf-upcomming-tours-list-outter tf-flex tf-flex-gap-24">
 								<?php

@@ -927,9 +927,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								}
 
 								if ( class_exists( $fieldClass ) ) {
-									if ( is_string( $data ) ) {
-										do_action( 'wpml_register_single_string', 'tourfic-settings', $field['id'], $data );
-									}
 									$_field                          = new $fieldClass( $field, $data, $this->option_id );
 									$tf_option_value[ $field['id'] ] = $_field->sanitize();
 								}

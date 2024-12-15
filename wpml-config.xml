@@ -1,0 +1,11 @@
+<wpml-config>
+    <admin-texts>
+        <key name="tf_settings">
+            <key name="rt-title"/>
+            <key name="rt-description"/>
+            <key name="tour_booking_form_button_text"/>
+            <key name="deposit-title"/>
+            <key name="deposit-subtitle"/>
+        </key>
+    </admin-texts>
+</wpml-config>
