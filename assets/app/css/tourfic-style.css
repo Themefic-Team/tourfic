@@ -20780,6 +20780,7 @@ html {
 .tf_template_4_tour_archive,
 .tf_template_4_apartment_archive {
   font-family: Ubuntu, sans-serif;
+  width: 100%;
   /* Search form */
   /* Hotel details */
 }
