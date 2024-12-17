@@ -204,6 +204,8 @@ $purple80: #590ca6;
 $purple90: #400977;
 $purple100: #260547;
 
+$color-blue: #07245f;
+
 $box_shadow : 0px 2px 12px 0px rgba(20, 20, 28, 0.1);
 $button_black_shadow : 0 5px 15px 0 rgba(0, 0, 0, 0.5);
 
@@ -225,6 +227,7 @@ $max640: "only screen and (max-width: 640px)";
 $max575: "only screen and (max-width: 575.98px)";
 $max480: "only screen and (max-width: 480px)";
 $max375: "only screen and (max-width: 375px)";
+$max340: "only screen and (max-width: 340px)";
 $max320: "only screen and (max-width: 320px)";
 
 
@@ -250,6 +253,7 @@ $font-size-xs: 12px;
 
 //colors
 $color-primary: #686E7A;
+$color-secondary: #0e3dd8;
 $color-theme: #0E3DD8;
 $color-theme-light: #E3E7F2;
 $color-gray-light: #F3F7FA;

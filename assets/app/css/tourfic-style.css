@@ -1,3 +1,6 @@
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass/app/css/free/tourfic.scss ***!
+  \*********************************************************************************************************************************************************************************/
 @charset "UTF-8";
 /*
 Button
@@ -22300,6 +22303,423 @@ html {
 .tf-archive-car-section .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li.active label {
   background: #0866C4;
   color: #fff;
+}
+
+.tf-search__form {
+  padding: 72px 0;
+  background-color: #0e3dd8;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media only screen and (max-width: 1199.98px) {
+  .tf-search__form {
+    padding: 60px 0;
+  }
+}
+
+@media only screen and (max-width: 991.98px) {
+  .tf-search__form {
+    padding: 50px 0;
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-search__form {
+    padding: 40px 0;
+  }
+}
+
+.tf-search__form__fieldset {
+  max-width: 1678px;
+  margin: 0 auto;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  display: flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  gap: 70px;
+}
+
+@media only screen and (max-width: 1366px) {
+  .tf-search__form__fieldset {
+    gap: 40px;
+  }
+}
+
+@media only screen and (max-width: 1199.98px) {
+  .tf-search__form__fieldset {
+    max-width: 800px;
+    margin: auto;
+    flex-direction: column;
+    -webkit-align-items: start;
+    -ms-flex-align: start;
+    align-items: start;
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-search__form__fieldset {
+    max-width: 450px;
+    margin: auto;
+    gap: 30px;
+  }
+}
+
+.tf-search__form__fieldset__left {
+  max-width: 310px;
+  flex: 1;
+}
+
+@media only screen and (max-width: 1366px) {
+  .tf-search__form__fieldset__left {
+    max-width: 300px;
+  }
+}
+
+@media only screen and (max-width: 1199.98px) {
+  .tf-search__form__fieldset__left {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+.tf-search__form__fieldset__left .autocomplete-items {
+  position: absolute;
+  z-index: 99;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow: auto;
+  padding: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #9c9c9c #ffffff;
+  border-radius: 4px;
+  background: #fef9f6;
+  box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.2);
+}
+
+.tf-search__form__fieldset__left .autocomplete-items div {
+  color: #686e7a;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.tf-search__form__fieldset__left .autocomplete-items div::before {
+  font-size: 14px;
+  line-height: 26px;
+  margin-right: 8px;
+}
+
+.tf-search__form__fieldset__left .autocomplete-items div:hover {
+  background: #ffede1;
+  color: #060d1c;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.tf-search__form__fieldset__middle {
+  flex: 1;
+  display: flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 1199.98px) {
+  .tf-search__form__fieldset__middle {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-search__form__fieldset__middle {
+    display: grid;
+    gap: 40px;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 575.98px) {
+  .tf-search__form__fieldset__middle {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 340px) {
+  .tf-search__form__fieldset__middle {
+    gap: 25px;
+  }
+}
+
+.tf-search__form__fieldset__middle .tf-search__form__field.tf-mx-width {
+  max-width: 132px;
+}
+
+.tf-search__form__fieldset__right {
+  max-width: 180px;
+  flex: 1;
+}
+
+.tf-search__form__divider {
+  background: #ffffff2e;
+  width: 1px;
+  height: 100px;
+}
+
+.tf-search__form__divider:last-child {
+  width: a;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-search__form__divider {
+    display: none;
+  }
+}
+
+.tf-search__form__field {
+  display: flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 0;
+  color: white;
+  position: relative;
+}
+
+.tf-search__form__field input[type="number"]::-webkit-inner-spin-button,
+.tf-search__form__field input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.tf-search__form__field .field--title {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-size: 60px;
+  font-weight: 500;
+  line-height: 70.2px;
+  border: 0;
+  background: transparent;
+  color: white;
+  padding: 0;
+  margin-left: 16px;
+  margin-right: 8px;
+}
+
+.tf-search__form__field .field--title:focus {
+  color: white;
+}
+
+@media only screen and (max-width: 1366px) {
+  .tf-search__form__field .field--title {
+    font-size: 50px;
+    line-height: 60.2px;
+  }
+}
+
+@media only screen and (max-width: 991.98px) {
+  .tf-search__form__field .field--title {
+    font-size: 40px;
+    line-height: 1;
+  }
+}
+
+@media only screen and (max-width: 340px) {
+  .tf-search__form__field .field--title {
+    font-size: 35px;
+  }
+}
+
+.tf-search__form__field__incdec {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.tf-search__form__field__incdec span.form--span {
+  width: auto;
+  height: auto;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  min-height: auto;
+  position: absolute;
+  right: 0;
+  top: 5px;
+}
+
+.tf-search__form__field__incdec span.form--span:last-child {
+  top: 38px;
+}
+
+.tf-search__form__field__incdec span.form--span svg:hover {
+  fill: #3E64E0;
+}
+
+.tf-search__form__field__icon {
+  min-width: 40px;
+  max-width: 40px;
+  line-height: 0;
+}
+
+@media only screen and (max-width: 1366px) {
+  .tf-search__form__field__icon svg {
+    width: 38px;
+    height: auto;
+  }
+}
+
+@media only screen and (max-width: 991.98px) {
+  .tf-search__form__field__icon svg {
+    width: 35px;
+    height: auto;
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-search__form__field__icon svg {
+    width: 30px;
+    height: auto;
+  }
+}
+
+.tf-search__form__field .icon--location {
+  position: absolute;
+  top: 17px;
+  right: 22px;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-search__form__field .icon--location {
+    top: 12px;
+    right: 16px;
+  }
+}
+
+@media only screen and (max-width: 1366px) {
+  .tf-search__form__field .icon--location svg {
+    width: 12px;
+  }
+}
+
+.tf-search__form__field__mthyr {
+  display: flex;
+  flex-direction: column;
+}
+
+.tf-search__form .tf-check-in-out-date {
+  visibility: hidden;
+  position: absolute;
+  height: 0;
+  padding: 0;
+}
+
+.tf-search__form__group {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.tf-search__form__label {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 22.98px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 28px;
+  display: block;
+}
+
+@media only screen and (max-width: 991.98px) {
+  .tf-search__form__label {
+    font-size: 18px;
+    margin-bottom: 18px;
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-search__form__label {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+}
+
+.tf-search__form__input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  background: #2051f5;
+  color: white !important;
+  border: 0 !important;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal !important;
+  padding: 16px 24px !important;
+  border-radius: 5px !important;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-search__form__input {
+    font-size: 14px;
+    padding: 12px 16px 16px !important;
+  }
+}
+
+.tf-search__form__input::placeholder {
+  color: white;
+}
+
+.tf-search__form__submit {
+  background: #fa6400;
+  border-color: #fa6400;
+  color: white;
+  border-radius: 5px;
+  gap: 15px;
+  min-height: 58px;
+  min-width: 184px;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18.38px;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-search__form__submit {
+    min-height: 45px;
+    font-size: 15px;
+    min-width: 160px;
+  }
+}
+
+.tf-search__form__submit:hover {
+  background: #07245f;
+  border-color: #07245f;
+  color: white;
 }
 
 
