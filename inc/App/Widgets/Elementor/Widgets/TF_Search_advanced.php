@@ -161,10 +161,6 @@ class TF_Search_advanced extends \Elementor\Widget_Base {
 			[
 				'label'     => esc_html__( 'Title Color', 'tourfic' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
-				'scheme'    => [
-					'type'  => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .tf_widget-title h2' => 'color: {{VALUE}}',
 				],
@@ -192,10 +188,6 @@ class TF_Search_advanced extends \Elementor\Widget_Base {
 			[
 				'label'     => esc_html__( 'Subtitle Color', 'tourfic' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
-				'scheme'    => [
-					'type'  => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .tf_widget-subtitle' => 'color: {{VALUE}}',
 				],

@@ -170,10 +170,6 @@ class TF_Tour_Destinations extends \Elementor\Widget_Base {
 			[
 				'label'     => esc_html__( 'Destination Title Color', 'tourfic' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
-				'scheme'    => [
-					'type'  => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
 				'default'   => '#FFFFFF',
 				'selectors' => [
 					'{{WRAPPER}} .recomended_place_info_header h3' => 'color: {{VALUE}}',
@@ -186,10 +182,6 @@ class TF_Tour_Destinations extends \Elementor\Widget_Base {
 			[
 				'label'     => esc_html__( 'Destination Title Hover Color', 'tourfic' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
-				'scheme'    => [
-					'type'  => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_2,
-				],
 				'default'   => '#FFFFFF',
 				'selectors' => [
 					'{{WRAPPER}} .single_recomended_item:hover .recomended_place_info_header h3' => 'color: {{VALUE}}',
@@ -212,10 +204,6 @@ class TF_Tour_Destinations extends \Elementor\Widget_Base {
 			[
 				'label'     => esc_html__( 'Destination Subtitle Color', 'tourfic' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
-				'scheme'    => [
-					'type'  => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_3,
-				],
 				'default'   => '#FFFFFF',
 				'selectors' => [
 					'{{WRAPPER}} .recomended_place_info_header p' => 'color: {{VALUE}}',
@@ -228,10 +216,6 @@ class TF_Tour_Destinations extends \Elementor\Widget_Base {
 			[
 				'label'     => esc_html__( 'Destination Subtitle Hover Color', 'tourfic' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
-				'scheme'    => [
-					'type'  => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_4,
-				],
 				'default'   => '#FFFFFF',
 				'selectors' => [
 					'{{WRAPPER}} .single_recomended_item:hover .recomended_place_info_header p' => 'color: {{VALUE}}',

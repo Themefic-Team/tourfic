@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.7
-Stable tag: 2.15.4
+Stable tag: 2.15.5
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -350,6 +350,10 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.15.5 - 17 December 2024 =
+
+- Compatibility: Now fully compatible with Elementor 3.26.
+
 = 2.15.4 - 13 December 2024 =
 
 - Added: Option to edit rooms directly from the hotel edit page.
@@ -394,44 +398,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Introduced: Car Rental Service with advanced car rental features.
 - Fix: Resolved PDF-related issues.
 - Fix: Addressed and resolved a vulnerability issue.
-
-= 2.14.5 - 21 November 2024 =
-
-- Update: Revised and updated the plugin's Readme.txt file information.
-
-= 2.14.4 - 19 November 2024 =
-
-- Compatibility: Fully compatible with WordPress 6.7
-
-= 2.14.3 - 16 November 2024 =
-
-- Fix: Resolved issue with block theme header and footer not displaying.
-- Fix: Fixed child search functionality issue.
-- Fix: Addressed inventory issue for backend hotel bookings.
-- Fix: Corrected map sizing problem on mobile versions across all templates.
-- Fix: Fixed calendar localization issue.
-- Fix: Resolved itinerary warning in Pro version.
-- Fix: Fixed button text issue for external bookings in Pro version.
-- Improvement: Enhanced frontend dashboard translation support for Pro version.
-
-= 2.14.2 - 14 November 2024 =
-
-- Minor bug fixes & improvements
-- System stability improved
-
-= 2.14.1 - 07 November 2024 =
-
-- Added: Option to change the icon for tour descriptions.
-- Fixed: Issue with tour allowed time not working properly.
-- Fixed: Hotel data export issue resolved. 
-
-= 2.14.0 - 05 November 2024 =
-
-- New Addon: Tourfic Email Piping – Easily manage customer Enquiry (Pro).
-- Improvement: Enhanced sorting functionality on the Archive Page.
-- Improvement: Redesigned Tourfic Ask Question popup.
-- Improvement: Streamlined Enquiry Details design.
-- Improvement: Direct reply option for Enquiry (Pro).
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
