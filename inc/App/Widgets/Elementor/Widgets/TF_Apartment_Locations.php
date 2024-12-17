@@ -171,10 +171,6 @@ class TF_Apartment_Locations extends \Elementor\Widget_Base {
 			[
 				'label'     => esc_html__( 'Location Title Color', 'tourfic' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
-				'scheme'    => [
-					'type'  => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
 				'default'   => '#FFFFFF',
 				'selectors' => [
 					'{{WRAPPER}} .recomended_place_info_header h3' => 'color: {{VALUE}}',
@@ -187,10 +183,6 @@ class TF_Apartment_Locations extends \Elementor\Widget_Base {
 			[
 				'label'     => esc_html__( 'Location Title Hover Color', 'tourfic' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
-				'scheme'    => [
-					'type'  => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_2,
-				],
 				'default'   => '#FFFFFF',
 				'selectors' => [
 					'{{WRAPPER}} .single_recomended_item:hover .recomended_place_info_header h3' => 'color: {{VALUE}}',
@@ -213,10 +205,6 @@ class TF_Apartment_Locations extends \Elementor\Widget_Base {
 			[
 				'label'     => esc_html__( 'Location Subtitle Color', 'tourfic' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
-				'scheme'    => [
-					'type'  => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_3,
-				],
 				'default'   => '#FFFFFF',
 				'selectors' => [
 					'{{WRAPPER}} .recomended_place_info_header p' => 'color: {{VALUE}}',
@@ -229,10 +217,6 @@ class TF_Apartment_Locations extends \Elementor\Widget_Base {
 			[
 				'label'     => esc_html__( 'Location Subtitle Hover Color', 'tourfic' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
-				'scheme'    => [
-					'type'  => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_4,
-				],
 				'default'   => '#FFFFFF',
 				'selectors' => [
 					'{{WRAPPER}} .single_recomended_item:hover .recomended_place_info_header p' => 'color: {{VALUE}}',
