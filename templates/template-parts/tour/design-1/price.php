@@ -91,7 +91,9 @@
             </ul>
         </div>
 
-		<?php if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
+		<?php 
+		if(  isset( $hide_price ) && $hide_price !== '1' ) :
+			if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
             <!-- Single Tour Person details -->
             <div class="tf-trip-person-info tf-flex tf-flex-gap-12">
                 <ul class="tf-flex tf-flex-gap-12">
@@ -146,6 +148,7 @@
                     </div>
 				<?php } ?>
 			<?php } ?>
+			<?php endif; ?>
 		<?php endif; ?>
     </div>
 </div>

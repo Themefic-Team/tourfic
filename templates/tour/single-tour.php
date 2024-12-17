@@ -118,6 +118,7 @@ while ( have_posts() ) : the_post();
 	$t_share  = ! empty( Helper::tfopt( 't-share' ) ) ? Helper::tfopt( 't-share' ) : 0;
 	$disable_share_opt = ! empty( $disable_share_opt ) ? $disable_share_opt : $t_share;
 	$tf_tour_single_book_now_text = isset($meta['single_tour_booking_form_button_text']) && ! empty( $meta['single_tour_booking_form_button_text'] ) ? stripslashes( sanitize_text_field( $meta['single_tour_booking_form_button_text'] ) ) : esc_html__( "Book Now", 'tourfic' );
+	$hide_price = Helper::tfopt( 't-hide-start-price' );
 	
 	// Location
 	if( !empty($meta['location']) && Helper::tf_data_types($meta['location'])){

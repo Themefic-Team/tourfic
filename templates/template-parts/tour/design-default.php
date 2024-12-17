@@ -177,7 +177,9 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                 </div>
 
                 <div class="tf-title-right" style="align-items: flex-end">
-                    <?php if(($tf_booking_type == 2 && $tf_hide_price !== '1') || $tf_booking_type == 1 || $tf_booking_type == 3) : ?>
+                <?php
+                if( isset( $hide_price ) && $hide_price !== '1'):
+                    if(($tf_booking_type == 2 && $tf_hide_price !== '1') || $tf_booking_type == 1 || $tf_booking_type == 3) : ?>
                         <div class="tf-single-tour-pricing">
                             <?php if ( $pricing_rule == 'group' ) { ?>
 
@@ -246,6 +248,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                             </ul>
                         </div>
                     <?php endif; ?>
+                <?php endif; ?>
                     <?php if ($tf_booking_type == 2 && $tf_hide_booking_form == 1):?>
                         <a href="<?php echo esc_url($tf_booking_url) ?>" target="_blank" class="tf_button btn-styled" style="margin-left: 16px;"><?php esc_html_e($tf_tour_single_book_now_text, 'tourfic'); ?></a>
                     <?php endif; ?>

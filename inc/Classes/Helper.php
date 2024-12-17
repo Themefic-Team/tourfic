@@ -2183,9 +2183,10 @@ class Helper {
             <script>
                 (function ($) {
                     $(document).ready(function () {
-						<?php self::tf_flatpickr_locale( 'root' ); ?>
+						
 
                         $(document).on("focus", ".tf-hotel-side-booking #check-in-out-date", function (e) {
+                            <?php self::tf_flatpickr_locale( 'root' ); ?>
                             const regexMap = {
                                 'Y/m/d': /(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/,
                                 'd/m/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
@@ -2218,6 +2219,8 @@ class Helper {
                                     })
                                 },
                             });
+
+                            calander.open();
                         });
                     });
                 })(jQuery);

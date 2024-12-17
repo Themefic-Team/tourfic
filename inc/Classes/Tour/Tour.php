@@ -870,6 +870,7 @@ class Tour {
 			$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
 			$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
 			$tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
+			$hide_price = Helper::tfopt( 't-hide-start-price' );
 		}
 
 		ob_start();
@@ -1209,7 +1210,7 @@ class Tour {
 										<?php
 										$tf_hide_external_price = ! empty( $meta["booking-by"] ) && $meta["booking-by"] == 2 ? ! $meta["hide_price"] : true;
 
-										if ( $tf_hide_external_price ) : ?>
+										if ( $tf_hide_external_price && isset( $hide_price ) && $hide_price !== '1' ) : ?>
                                             <div class="acr-adult-price">
 												<?php if ( $pricing_rule == 'person' && ( ! empty( $tour_price->wc_sale_adult ) || ! empty( $tour_price->wc_adult ) ) ) {
 													echo ! empty( $tour_price->wc_sale_adult ) ? '<del>' . esc_html( wp_strip_all_tags( $tour_price->wc_adult ) ) . '</del>' . " " . wp_kses_post( $tour_price->wc_sale_adult ) : wp_kses_post( $tour_price->wc_adult );
@@ -1253,7 +1254,7 @@ class Tour {
                                 <div class="tf-field tf-flex">
                                     <div class="acr-label tf-flex">
 										<?php esc_html_e( 'Children', 'tourfic' ); ?>
-										<?php if ( $tf_hide_external_price ) : ?>
+										<?php if ( $tf_hide_external_price && isset( $hide_price ) && $hide_price !== '1' ) : ?>
                                             <div class="acr-child-price">
 												<?php if ( $pricing_rule == 'person' && ( ! empty( $tour_price->wc_sale_child ) || ! empty( $tour_price->wc_child ) ) ) {
 													echo ! empty( $tour_price->wc_sale_child ) ? '<del>' . esc_html( wp_strip_all_tags( $tour_price->wc_child ) ) . '</del>' . " " . wp_kses_post( $tour_price->wc_sale_child ) : wp_kses_post( $tour_price->wc_child );
@@ -1291,12 +1292,12 @@ class Tour {
                                 </div>
                             </div>
 						<?php } ?>
-						<?php if ( $custom_avail == true || ( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+						<?php if ( $custom_avail == true || ( ! $disable_adult_price && ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
                             <div class="tf-field-group tf-mt-16 tf_acrselection">
                                 <div class="tf-field tf-flex">
                                     <div class="acr-label tf-flex">
 										<?php esc_html_e( 'Infant', 'tourfic' ); ?>
-										<?php if ( $tf_hide_external_price ) : ?>
+										<?php if ( $tf_hide_external_price && isset( $hide_price ) && $hide_price !== '1' ) : ?>
                                             <div class="acr-infant-price">
 												<?php if ( $pricing_rule == 'person' && ( ! empty( $tour_price->wc_sale_infant ) || ! empty( $tour_price->wc_infant ) ) ) {
 													echo ! empty( $tour_price->wc_sale_infant ) ? '<del>' . esc_html( wp_strip_all_tags( $tour_price->wc_infant ) ) . '</del>' . " " . wp_kses_post( $tour_price->wc_sale_infant ) : wp_kses_post( $tour_price->wc_infant );
@@ -1463,7 +1464,7 @@ class Tour {
                                                 </div>
                                             </div>
 										<?php } ?>
-										<?php if ( $custom_avail == true || ( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+										<?php if ( $custom_avail == true || ( ! $disable_adult_price && ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
                                             <div class="tf_acrselection">
                                                 <div class="acr-label"><?php esc_html_e( 'Infant', 'tourfic' ); ?></div>
                                                 <div class="acr-select">
@@ -2184,6 +2185,7 @@ class Tour {
 		$meta_disable_review 			  = !empty($meta["t-review"]) ? $meta["t-review"] : 0;
 		$tfopt_disable_review 			  = !empty(Helper::tfopt("t-review")) ? Helper::tfopt("t-review") : 0;
 		$disable_review 				  = $tfopt_disable_review == 1 || $meta_disable_review == 1 ? true : $tfopt_disable_review;
+		$hide_price 					  = Helper::tfopt( 't-hide-start-price' );
 
 
 		if ( ! empty( $check_in_out ) ) {
@@ -2481,10 +2483,12 @@ class Tour {
 									$tf_tour_min_price    = $tf_tour_min_price - $tf_tour_discount_price;
 								}
 							}
-							$lowest_price = wc_price( $tf_tour_min_price );
-							echo esc_html__( "From ", "tourfic" ) . wp_kses_post( $lowest_price ) . " ";
-							if ( ! empty( $tf_tour_min_discount ) ) {
-								echo "<del>" . wp_kses_post( wc_price( $tf_tour_full_price ) ) . "</del>";
+							if ( isset( $hide_price ) && $hide_price !== '1' && ! empty( $tour_price ) ) {
+								$lowest_price = wc_price( $tf_tour_min_price );
+								echo esc_html__( "From ", "tourfic" ) . wp_kses_post( $lowest_price ) . " ";
+								if ( ! empty( $tf_tour_min_discount ) ) {
+									echo "<del>" . wp_kses_post( wc_price( $tf_tour_full_price ) ) . "</del>";
+								}
 							}
 							?>
 
@@ -2657,44 +2661,46 @@ class Tour {
                     </div>
                     <div class="tf-available-room-content-right">
                         <div class="tf-card-pricing-heading">
-							<?php
-							if ( ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) {
-								?>
-                                <div class="tf-available-room-off">
-							<span>
-								<?php echo $tf_discount_type == "percent" ? esc_attr( $tf_discount_amount ) . "%" : wp_kses_post( wc_price( $tf_discount_amount ) ); ?><?php esc_html_e( "Off", "tourfic" ); ?>
-							</span>
-                                </div>
-							<?php } ?>
-                            <div class="tf-available-room-price">
-						<span class="tf-price-from">
-						<?php
-						//get the lowest price from all available room price
-						$tf_tour_min_price      = ! empty( $tour_price ) ? min( $tour_price ) : 0;
-						$tf_tour_full_price     = ! empty( $tour_price ) ? min( $tour_price ) : 0;
-						$tf_tour_discount_type  = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
-						$tf_tour_discount_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : 0;
-						if ( ! empty( $tf_tour_discount_type ) && ! empty( $tf_tour_min_price ) && ! empty( $tf_tour_discount_price ) ) {
+							<?php if ( isset( $hide_price ) && $hide_price !== '1' && ! empty( $tour_price ) ) :
+								
+								if ( ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) {
+									?>
+									<div class="tf-available-room-off">
+										<span>
+											<?php echo $tf_discount_type == "percent" ? esc_attr( $tf_discount_amount ) . "%" : wp_kses_post( wc_price( $tf_discount_amount ) ); ?><?php esc_html_e( "Off", "tourfic" ); ?>
+										</span>
+									</div>
+								<?php } ?>
+								<div class="tf-available-room-price">
+									<span class="tf-price-from">
+										<?php
+										//get the lowest price from all available room price
+										$tf_tour_min_price      = ! empty( $tour_price ) ? min( $tour_price ) : 0;
+										$tf_tour_full_price     = ! empty( $tour_price ) ? min( $tour_price ) : 0;
+										$tf_tour_discount_type  = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
+										$tf_tour_discount_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : 0;
+										if ( ! empty( $tf_tour_discount_type ) && ! empty( $tf_tour_min_price ) && ! empty( $tf_tour_discount_price ) ) {
 
-							if ( $tf_tour_discount_type == "percent" ) {
-								$tf_tour_min_discount = ( $tf_tour_min_price * $tf_tour_discount_price ) / 100;
-								$tf_tour_min_price    = (int) $tf_tour_min_price - $tf_tour_min_discount;
-							}
-							if ( $tf_tour_discount_type == "fixed" ) {
-								$tf_tour_min_discount = $tf_tour_discount_price;
-								$tf_tour_min_price    = $tf_tour_min_price - $tf_tour_discount_price;
-							}
-						}
-						$lowest_price = wc_price( $tf_tour_min_price );
+											if ( $tf_tour_discount_type == "percent" ) {
+												$tf_tour_min_discount = ( $tf_tour_min_price * $tf_tour_discount_price ) / 100;
+												$tf_tour_min_price    = (int) $tf_tour_min_price - $tf_tour_min_discount;
+											}
+											if ( $tf_tour_discount_type == "fixed" ) {
+												$tf_tour_min_discount = $tf_tour_discount_price;
+												$tf_tour_min_price    = $tf_tour_min_price - $tf_tour_discount_price;
+											}
+										}
+										$lowest_price = wc_price( $tf_tour_min_price );
 
-						if ( ! empty( $tf_tour_min_discount ) ) {
-							echo esc_html__( "From ", "tourfic" ) . " " . "<del>" . wp_kses_post( wp_strip_all_tags( wc_price( $tf_tour_full_price ) ) ) . "</del>" . " " . wp_kses_post( $lowest_price );
-						} else {
-							echo esc_html__( "From ", "tourfic" ) . wp_kses_post( $lowest_price ) . " ";
-						}
-						?>
-						</span>
-                            </div>
+										if ( ! empty( $tf_tour_min_discount ) ) {
+											echo esc_html__( "From ", "tourfic" ) . " " . "<del>" . wp_kses_post( wp_strip_all_tags( wc_price( $tf_tour_full_price ) ) ) . "</del>" . " " . wp_kses_post( $lowest_price );
+										} else {
+											echo esc_html__( "From ", "tourfic" ) . wp_kses_post( $lowest_price ) . " ";
+										}
+										?>
+									</span>
+								</div>
+							<?php endif; ?>
                         </div>
                         <a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php esc_html_e( "See Details", "tourfic" ); ?></a>
                     </div>
@@ -2934,10 +2940,7 @@ class Tour {
 							}
 						}
 						?>
-						<?php
-						$hide_price = Helper::tfopt( 't-hide-start-price' );
-						if ( isset( $hide_price ) && $hide_price !== '1' && ! empty( $tour_price ) ) :
-							?>
+						<?php if ( isset( $hide_price ) && $hide_price !== '1' && ! empty( $tour_price ) ) : ?>
                             <div class="tf-tour-price">
 								<?php
 

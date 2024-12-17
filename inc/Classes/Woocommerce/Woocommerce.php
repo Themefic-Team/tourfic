@@ -262,7 +262,7 @@ class Woocommerce {
 			// Apartment Item Data Insert
 			if ( "apartment" == $order_type ) {
 				$price             = $item->get_subtotal();
-				$check_in_out_date = $item->get_meta( 'check_in_out_date', true );
+				$check_in_out_date = $item->get_meta( 'Check-in & Check-out Date', true );
 				$adult             = $item->get_meta( 'adults', true );
 				$child             = $item->get_meta( 'children', true );
 				$infants           = $item->get_meta( 'infant', true );

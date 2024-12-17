@@ -216,7 +216,7 @@ function tf_apartment_cart_item_custom_meta_data( $item_data, $cart_item ) {
 
 	if ( isset( $cart_item['tf_apartment_data']['check_in_out_date'] ) ) {
 		$item_data[] = array(
-			'key'   => esc_html__( 'Check-in-out', 'tourfic' ),
+			'key'   => esc_html__( 'Check-in & Check-out Date', 'tourfic' ),
 			'value' => $cart_item['tf_apartment_data']['check_in_out_date'],
 		);
 	}
@@ -287,7 +287,7 @@ function tf_apartment_custom_order_data( $item, $cart_item_key, $values, $order 
 	}
 
 	if ( $check_in_out_date ) {
-		$item->update_meta_data( 'check_in_out_date', $check_in_out_date );
+		$item->update_meta_data( 'Check-in & Check-out Date', $check_in_out_date );
 	}
 }
 
@@ -385,7 +385,7 @@ function tf_add_apartment_data_checkout_order_processed( $order_id, $posted_data
 		// Apartment Item Data Insert 
 		if ( "apartment" == $order_type ) {
 			$price             = $item->get_subtotal();
-			$check_in_out_date = $item->get_meta( 'check_in_out_date', true );
+			$check_in_out_date = $item->get_meta( 'Check-in & Check-out Date', true );
 			$adult             = $item->get_meta( 'adults', true );
 			$child             = $item->get_meta( 'children', true );
 			$infants           = $item->get_meta( 'infant', true );
@@ -567,7 +567,7 @@ function tf_add_apartment_data_checkout_order_processed_block_checkout( $order )
 		// Apartment Item Data Insert
 		if ( "apartment" == $order_type ) {
 			$price             = $item->get_subtotal();
-			$check_in_out_date = $item->get_meta( 'check_in_out_date', true );
+			$check_in_out_date = $item->get_meta( 'Check-in & Check-out Date', true );
 			$adult             = $item->get_meta( 'adults', true );
 			$child             = $item->get_meta( 'children', true );
 			$infants           = $item->get_meta( 'infant', true );
