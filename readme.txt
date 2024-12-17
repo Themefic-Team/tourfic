@@ -352,7 +352,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 = 2.15.5 - 17 December 2024 =
 
-- Compatibility: Now fully compatible with Elementor 3.26.
+- Compatibility: Now fully compatible with Elementor 3.26.0.
 
 = 2.15.4 - 13 December 2024 =
 
