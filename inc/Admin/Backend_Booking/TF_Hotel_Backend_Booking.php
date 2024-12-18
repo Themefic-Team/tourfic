@@ -489,7 +489,7 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 		}
 
 		if ( ! array_key_exists("fieldErrors", $response) || ! $response['fieldErrors'] ) {
-			$room_price       = $this->tf_get_room_total_price( intval( $field['tf_available_hotels'] ), $room_data, $field['tf_hotel_date']['from'], $field['tf_hotel_date']['to'], intval( $field['tf_hotel_rooms_number'] ), intval( $field['tf_hotel_adults_number'] ), intval( $field['tf_hotel_children_number'] ), $field['tf_hotel_service_type'] );
+			$room_price       = $this->tf_get_room_total_price( intval( $field['tf_available_hotels'] ), $room_data, $field['tf_hotel_date']['from'], $field['tf_hotel_date']['to'], intval( $field['tf_hotel_rooms_number'] ), intval( $field['tf_hotel_adults_number'] ), intval( $field['tf_hotel_children_number'] ), !empty($field['tf_hotel_service_type']) ? $field['tf_hotel_service_type'] : '' );
 			$billing_details  = array(
 				'billing_first_name' => $field['tf_customer_first_name'],
 				'billing_last_name'  => $field['tf_customer_last_name'],
@@ -525,7 +525,7 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 				'adult'                => $field['tf_hotel_adults_number'],
 				'child'                => $field['tf_hotel_children_number'],
 				'children_ages'        => '',
-				'airport_service_type' => $field['tf_hotel_service_type'],
+				'airport_service_type' => !empty($field['tf_hotel_service_type']) ? $field['tf_hotel_service_type'] : '',
 				'airport_service_fee'  => $room_price['air_service_info'],
 				'total_price'          => $room_price['price_total'],
 				'due_price'            => '',
@@ -554,7 +554,7 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 					# Check if order is for this room
 					if ( $room['unique_id'] == $field['tf_available_rooms'] ) {
 
-						$old_order_id = $room['order_id'];
+						$old_order_id = !empty($room['order_id']) ? $room['order_id'] : '';
 
 						$old_order_id != "" && $old_order_id .= ",";
 						$old_order_id .= $order_id;
@@ -844,8 +844,8 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 
 		return array(
 			'price_total'       => $price_total,
-			'air_service_price' => $air_service_price,
-			'air_service_info'  => $air_service_info,
+			'air_service_price' => !empty( $air_service_price) ? $$air_service_price : "",
+			'air_service_info'  => !empty( $air_service_info) ? $air_service_info : "",
 		);
 	}
 
